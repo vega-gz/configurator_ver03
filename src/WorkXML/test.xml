@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Program Name="Algorithm" Period="100" PutDataAtEndOfCycle="false" UUID="40000000000000000000000000000000">
+    <Variables>
+        <Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB71D0" Usage="internal"/>
+        <Variable Name="variable0" Type="T_DIinPLC" TypeUUID="FAEF87934C31C085BD921C8902C7643E" UUID="E93C0EB943E5C4344B8EDCB0C1669C83" Usage="internal"/>
+        <Variable Name="variable1" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="37F3B7E140CC341155AF12BB789C18D7" Usage="internal"/>
+    <Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+</Variables>
+    <ST/>
+    <DataTypes>
+        <Struct Name="8sd76fgjhg" UUID="9B5AAD234ADC4E7CB33A25999DB61EBE">
+            <Field Comment="Перепад давления на конфузоре нагнетателя (PDT101)" Name="dP_konfN" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="5FE7736F06034FB891B4ACC0589F5ADC"/>
+            <Field Comment="Резерв " Name="Reserv1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="EBA5A9C4FDBA45ACADD3A0060F07ABD6"/>
+            <Field Comment="Давление топливного газа перед диафрагмой (РТ1.140)" Name="Ptg_in_diafr" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="5F28ED4CDF9646C496782054FB37701B"/>
+            <Field Comment="Перепад давлений топливного газа на диафрагме (DР=0…63 кПа) (FТ1.140)" Name="dPtg_diafr" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="00A8A27ADD3944E5A1D4728EA509F8FF"/>
+            <Field Comment="Давление газа на входе нагнетателя (PT101)" Name="Pg_in_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="255922DC13D54299908E765CBBF34695"/>
+            <Field Comment="Давление газа на выходе нагнетателя (PT102)" Name="Pg_out_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="E9896DA6BB254AFBBE7034B279D7AD1E"/>
+            <Field Comment="Перепад давления между буферной и балансировочной линиями (PDT1114)" Name="dP_buf_bal" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="0DED0DC9D37A479AB0AA5BE492781C55"/>
+            <Field Comment="Температура воды на выходе УТО (ТТ410)" Name="Tv_out_UTO" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="56BBEE7088044A30944F860B3831F2FD"/>
+            <Field Comment="Давление атмосферного воздуха " Name="Pv_atm" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="39D2E272384B4B6099AC9976BC202FB4"/>
+            <Field Comment="Давление воздуха вентиляции (96АТ-1)" Name="Pv_vent" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="898203D0A88E4C759EA1304108DAAAB5"/>
+            <Field Comment="Давление воздуха на входе осевого компрессора (96CS-1)" Name="Pv_in_OK" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="CDA10EA514BF4054ABE188EB4603FF11"/>
+            <Field Comment="Резерв" Name="Reserv_Tv_atm" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="54236768E4BF4BBE9497984645F7E8CA"/>
+            <Field Comment="Резерв" Name="Reserv_Vlaga_atm" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="885311C7C04041D2865EE96A4B69CB9C"/>
+            <Field Comment="Давление воздуха на выходе из осевого компрессора (96CD-1)" Name="Pv_out_OK" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="E27576940604463FAA7F7495D0E95014"/>
+            <Field Comment="Давление топливного газа в межклапаннном пространстве (96FG-2А)" Name="Ptg_in_kl1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="4C6CCF71841D4DB999BA8D7478BF099F"/>
+            <Field Comment="Давление топливного газа в межклапаннном пространстве (96FG-2В)" Name="Ptg_in_kl2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="E7E7E0AAEB314A8F93A040DB6942A49D"/>
+            <Field Comment="Давление топливного газа в межклапаннном пространстве (96FG-2С)" Name="Ptg_in_kl3" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="3800F0D410E44B54AAE28CFADAEB4A28"/>
+            <Field Comment="Резерв " Name="Reserv2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="6455D049D4DD421FB242E0339C0B227D"/>
+            <Field Comment="Вибрация 1-го подшипника турбины, канал 1 (39V-1A)" Name="V_1p_D_ch1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="C4E2C6EECF4241A19EB456D80824BAA5"/>
+            <Field Comment="Вибрация 1-го подшипника турбины, канал 2 (39V-1В)" Name="V_1p_D_ch2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="F8FF9781A88B4F399C58BC0BBF66F7FC"/>
+            <Field Comment="Вибрация 4-го подшипника турбины, канал 1 (39V-2A)" Name="V_4p_D_ch1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="1CC9E8DB3C1540B2A438C8F881540A86"/>
+            <Field Comment="Вибрация 4-го подшипника турбины, канал 2 (39V-2В)" Name="V_4p_D_ch2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="41339070060C4133BB75FA22A0C7F5BD"/>
+            <Field Comment="Вибрация 1-го подшипника нагнетателя (ХЕ1309Х)" Name="V_1p_N1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="E8ECD116A62C4677A283DF188C89DF5C"/>
+            <Field Comment="Вибрация 1-го подшипника нагнетателя (ХЕ1309Y)" Name="V_1p_N2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="7829CF21716843AD8F1104D9C5C52409"/>
+            <Field Comment="Вибрация 2-го подшипника нагнетателя (ХЕ1310Х)" Name="V_2p_N1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="70341CC137AE4C3196C510EC3541F305"/>
+            <Field Comment="Вибрация 2-го подшипника нагнетателя (ХЕ1310Y)" Name="V_2p_N2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="CA97797DC40E4A0E930583E09357B422"/>
+            <Field Comment="Осевой сдвиг ротора нагнетателя (ZE1304A)" Name="OS_N1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="3478A63DB0A445BD9A4C59CB7B3F1DDF"/>
+            <Field Comment="Осевой сдвиг ротора нагнетателя (ZE1304В)" Name="OS_N2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="588436C462874380BC1D35C811F46A9B"/>
+            <Field Comment="Степень открытия заслонки УТО (резерв) (96ВВ)" Name="Pos_UTO" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="845C9988DC1B4092A1035A01A9D39FB3"/>
+            <Field Comment="Резерв  " Name="Reserv3" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="2E241BFB0A37492FB19E5997DB6CF94C"/>
+            <Field Comment="Резерв  " Name="Reserv4" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="A4348347EF4F4E6E904EEC960274B9B2"/>
+            <Field Comment="Резерв " Name="Reserv5" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="6BA3DDB535874C0B90B6563C5B7EA6CF"/>
+            <Field Comment="Давление масла гидравлики (96HQ-1)" Name="Pmg" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="088CAA188EA04B7E9368C9C3B1E87182"/>
+            <Field Comment="Давление масла в коллекторе смазки турбины  (96QN-1)" Name="Pms" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="5759B865EEA14F11BCB841F279AFE7CC"/>
+            <Field Comment="Давление масла предельной защиты  (96HG-1)" Name="Pmz" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="00D8B5938305427890E8A3DEEB80B66B"/>
+            <Field Comment="Резерв " Name="Reserv9" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="C5297F97713D4A5D838C537FF6B86692"/>
+            <Field Comment="Резерв " Name="Reserv10" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="7EA2C18589A74D7A8284D9A340B4A16F"/>
+            <Field Comment="Резерв " Name="Reserv11" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="27CB695229D14DA98D1BAA13EE3A34E2"/>
+            <Field Comment="Резерв " Name="Reserv12" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="02CF7E3A7000421AAB4F2EA87D3E46BF"/>
+            <Field Comment="Степень открытия ПНА, канал № 1 (96NC-1)" Name="Pos_PNA_ch1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="ABB005ED3AC74FB997CEE0133375CC09"/>
+            <Field Comment="Степень открытия ПНА, канал № 2 (96NC-2)" Name="Pos_PNA_ch2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="32C900CCBD6E427696E7BD9686383F86"/>
+            <Field Comment="Степень открытия ВНА, канал № 1 (96TV-1)" Name="Pos_VNA_ch1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="7AAD5C3AF303448D8EA117900205718D"/>
+            <Field Comment="Степень открытия ВНА, канал № 2 (96TV-2)" Name="Pos_VNA_ch2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="30AAC736AA704F3EB09476623DC8B6AA"/>
+            <Field Comment="Степень открытия регулирующего клапана топливного газа, канал № 1 (96GC-1)" Name="Pos_Kl_reg_tg_ch1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="5766062B2FF4426B95DDCC571DA8FA3E"/>
+            <Field Comment="Степень открытия регулирующего клапана топливного газа, канал № 2 (96GC-2)" Name="Pos_Kl_reg_tg_ch2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="0A17B59491D849B1A3C4E9DF630191F7"/>
+            <Field Comment="Степень открытия стопорного клапана топливного газа, канал № 1 (96SR-1)" Name="Pos_Kl_stop_tg_ch1" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="784F22925D7D47A9BC2ADAEF3642BAC0"/>
+            <Field Comment="Степень открытия стопорного клапана топливного газа, канал № 2 (96SR-2)" Name="Pos_Kl_stop_tg_ch2" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="BF6FBC447F804D8199610E606019C4C3"/>
+            <Field Comment="Резерв " Name="Reserv13" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="FA7BF067115749B9BA8BA1CE51EB7EAB"/>
+            <Field Comment="Температура 1-го подшипника нагнетателя (ТЕ1345)" Name="T_1p_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="EA58589333644230AEE5531325BD3DA8"/>
+            <Field Comment="Температура № 1 2-го подшипника нагнетателя (ТЕ1346)" Name="T1_2p_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="6FE79B1CA1CA45F084275ACA07DCA64C"/>
+            <Field Comment="Температура № 2 2-го подшипника нагнетателя (ТЕ1347)" Name="T2_2p_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="B6342591B516409BAE2C68CCB19BBFF0"/>
+            <Field Comment="Температура № 3 2-го подшипника нагнетателя (ТЕ1348)" Name="T3_2p_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="E0559079EF6B496C99352B085278604E"/>
+            <Field Comment="Температура № 4 2-го подшипника нагнетателя (ТЕ1349)" Name="T4_2p_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="55369D9D27004283B31C105727F0855A"/>
+            <Field Comment="Резерв " Name="Reserv15" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="CD0619A7A2C74955BA744D4962FD01EF"/>
+            <Field Comment="Температура масла на сливе 1-го подшипника нагнетателя (ТЕ1390)" Name="Tm_sl_1p_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="D4DCC5E776B74E63BDF1FB59443D9A42"/>
+            <Field Comment="Температура масла на сливе 2-го подшипника нагнетателя (ТЕ1391)" Name="Tm_sl_2p_N" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="2B7AD398A1CB4202B8843E63C9C95DE2"/>
+            <Field Comment="Резерв (ТХА) " Name="Reserv14" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="8BA3B15E08714A4FB12AEF60694F610F"/>
+            <Field Comment="Температура № 1 перед ТВД (TT-WS1FI-1)" Name="T1_in_TVD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="45FB260FC8DA48A782D8290C71F713D2"/>
+            <Field Comment="Температура № 2 перед ТВД (TT-WS1FI-2)" Name="T2_in_TVD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="4E780E5FFD0B43FA81FD0BC82672E4B3"/>
+            <Field Comment="Температура № 1 за ТВД (TT-WS1AO-1)" Name="T1_out_TVD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="FD1723C19A7341458D150B286CB74C2E"/>
+            <Field Comment="Температура № 2 за ТВД (TT-WS1AO-2)" Name="T2_out_TVD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="DBEB27564BC24BB8825BE1AEED10AFF5"/>
+            <Field Comment="Температура № 1 перед ТНД (TT-WS2FO-1)" Name="T1_in_TND" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="844B8C504AA94821A8B40D5F900FA8AA"/>
+            <Field Comment="Температура № 2 перед ТНД (TT-WS2FO-2)" Name="T2_in_TND" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="82AC86FDDAFB4A71BECFF1DAC1034594"/>
+            <Field Comment="Температура № 1 за ТНД (TT-WS2AO-1)" Name="T1_out_TND" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="C822E1814CF14FCB94EAE1B361E53B39"/>
+            <Field Comment="Температура № 2 за ТНД (TT-WS2AO-2)" Name="T2_out_TND" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="5C970DFBC47A46A286008D2D9E0A9562"/>
+            <Field Comment="Температура № 1 на выхлопе турбины (TT-XD1)" Name="T1_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="AAE9B39DD518449D97A9BFEB2E180765"/>
+            <Field Comment="Температура № 2 на выхлопе турбины (TT-XD2)" Name="T2_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="8907C353431643B1B91AD0C6EB7C1E69"/>
+            <Field Comment="Температура № 3 на выхлопе турбины (TT-XD3)" Name="T3_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="698EBC8959C0400DA243E3E453B5AA0A"/>
+            <Field Comment="Температура № 4 на выхлопе турбины (TT-XD4)" Name="T4_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="C89511EE520D4705AD750B0B4FD197CA"/>
+            <Field Comment="Температура № 5 на выхлопе турбины (TT-XD5)" Name="T5_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="5C7C70D5C02E447E8910E645CB7F7691"/>
+            <Field Comment="Температура № 6 на выхлопе турбины (TT-XD6)" Name="T6_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="CEDED8F4D1534EF8BC18B98A6D3E5591"/>
+            <Field Comment="Температура № 7 на выхлопе турбины (TT-XD7)" Name="T7_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="4E4C31E4FAC0448AA50EFBC9630965A0"/>
+            <Field Comment="Температура № 8 на выхлопе турбины (TT-XD8)" Name="T8_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="BA223586F411469FB2754CF38ED2A92F"/>
+            <Field Comment="Температура № 9 на выхлопе турбины (TT-XD9)" Name="T9_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="96326D50A35F4066B30552AD45A5F684"/>
+            <Field Comment="Температура № 10 на выхлопе турбины (TT-XD10)" Name="T10_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="2364407BC58E4169AFAC367443F9B4D8"/>
+            <Field Comment="Температура № 11 на выхлопе турбины (TT-XD11)" Name="T11_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="3CA4FB6F7B084CB6978E166F140517B8"/>
+            <Field Comment="Температура № 12 на выхлопе турбины (TT-XD12)" Name="T12_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="57AAF6AF88C34019BA8D749CA854D353"/>
+            <Field Comment="Температура № 13 на выхлопе турбины (TT-XD13)" Name="T13_out_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="12AA70CAE8D1411DA73322C3301A2DD1"/>
+            <Field Comment="Резерв (ТХА) " Name="Reserv16" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="35B1EBD239DB49909EEF4C217335BD92"/>
+            <Field Comment="Резерв (ТХА) " Name="Reserv17" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="CB106C9F94644D53A27C332FBA315F08"/>
+            <Field Comment="Температура № 1 воздуха на входе осевого компрессора (CT-IF-1)" Name="Tv1_in_OK" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="24341210BE71444DB86D9FB68C2211F8"/>
+            <Field Comment="Температура № 2 воздуха на входе осевого компрессора (CT-IF-2)" Name="Tv2_in_OK" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="421DE4EF65FA4AA3A0D2849F97DB1826"/>
+            <Field Comment="Температура № 1 воздуха на выходе осевого компрессора (CT-DA-1)" Name="Tv1_out_OK" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="CD95A4128E484F4E956688C402356B07"/>
+            <Field Comment="Температура № 2 воздуха на выходе осевого компрессора (CT-DA-2)" Name="Tv2_out_OK" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="2A371D35907848498ECD9FED0FFFE3F7"/>
+            <Field Comment="Температура масла в коллекторе смазки турбины (LT-TH)" Name="Tmsm_D" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="79698B31F4254267BBD026454A1760AE"/>
+            <Field Comment="Температура масла на сливе из подшипника № 1 ТВД (LT-B1D)" Name="Tm_sl_p1_TVD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="0B994892B8984E5797D6380BDAF3E0EE"/>
+            <Field Comment="Температура масла на сливе из подшипника № 2 ТВД (LT-B2D)" Name="Tm_sl_p2_TVD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="942FCDB1E7304D5099752168FE78CF22"/>
+            <Field Comment="Температура масла на сливе из подшипника № 3 ТНД (LT-B3D)" Name="Tm_sl_p3_TND" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="5CBE34ECA8E54530921A05EFDDB825CF"/>
+            <Field Comment="Температура масла на сливе из подшипника № 4 ТНД (LT-B4D)" Name="Tm_sl_p4_TND" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="B4E18B96A75A4BF8BE9563F84228A1F9"/>
+            <Field Comment="Температура масла на сливе из упорного подшипника № 1 ТВД (LT-BT1D)" Name="Tm_sl_up1_TVD" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="B7CA767F445C4BE7804B2A0441ADCEB8"/>
+            <Field Comment="Резерв (ТХА) " Name="Reserv18" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="A999329DE07D495582DBE3D6CD524C22"/>
+            <Field Comment="Резерв (ТХА) " Name="Reserv19" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="59F0CDCB2A734F91A7AE7159D5CE3A2F"/>
+            <Field Comment="Резерв (ТХА) " Name="Reserv20" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="D8732165BEAC49F899030F413E950309"/>
+            <Field Comment="Резерв (ТХА) " Name="Reserv21" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="2D7946CB78004B99A2B4E606BF44B58F"/>
+            <Field Comment="Резерв " Name="Reserv22" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="3CDBEA630F4A41EAB11FA85A53916AC1"/>
+            <Field Comment="Резерв " Name="Reserv23" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="C2FB3B5A69954A02BBAAA747680BE9AF"/>
+            <Field Comment="Сервопривод управления ПНА, обмотка 1. КЦУ " Name="KM04_4_20mA" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="E46E42836B10488E862062E64E988740"/>
+        </Struct>
+        <Struct Name="List_8sd76fgjhg" UUID="B8BA6F879DB74E9A83602023932E519E">
+            <Field Comment="тут должен быть коментарий" Name="var_0" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="4EB20B54605248BB89A8D138EBDE1AED"/>
+            <Field Comment="тут должен быть коментарий" Name="var_1" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="D0C9A3126F7249E88F35779687C4DDEF"/>
+            <Field Comment="тут должен быть коментарий" Name="var_2" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="F1AAEE0E900549A6BD0E4708A298412E"/>
+            <Field Comment="тут должен быть коментарий" Name="var_3" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="F504FD84480D40BCBAE85D606E339DF2"/>
+            <Field Comment="тут должен быть коментарий" Name="var_4" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="657198CB10094EC7A4A77F1972B0B440"/>
+            <Field Comment="тут должен быть коментарий" Name="var_5" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="0EF46CBA7E5044068903AED4DA203AEF"/>
+            <Field Comment="тут должен быть коментарий" Name="var_6" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="C8A0CFF71D194BA58A5AB89DEBE91B07"/>
+            <Field Comment="тут должен быть коментарий" Name="var_7" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="77E0D51EA5BC4209BE91316052856638"/>
+            <Field Comment="тут должен быть коментарий" Name="var_8" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="3734CDF1EDF5446B8CDC4EF182AC1103"/>
+            <Field Comment="тут должен быть коментарий" Name="var_9" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="729CF69CAB014FC393A18473C18A0178"/>
+            <Field Comment="тут должен быть коментарий" Name="var_10" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="740D70F7670542288C8F89C0E46DB73D"/>
+            <Field Comment="тут должен быть коментарий" Name="var_11" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="7F16C41A02F9445780426F6FA3012C57"/>
+            <Field Comment="тут должен быть коментарий" Name="var_12" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="AEDF2C1FF6C34E89BE43BFE542A890D3"/>
+            <Field Comment="тут должен быть коментарий" Name="var_13" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="E9E42BEC82C24A0FA842A0D5F7BA59A1"/>
+            <Field Comment="тут должен быть коментарий" Name="var_14" Type="8sd76fgjhg" TypeUUID="9B5AAD234ADC4E7CB33A25999DB61EBE" UUID="CDD268DCF0774A0A99F9A049EDB1F9E3"/>
+        </Struct>
+        <Struct Name="T_DIfromHMI" UUID="C0C2BA6C40333970EE537898551B2DCC">
+            <Field Comment="дистанционное задание при дистанционном управлении" Name="diDU" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="DE1E12274EC5293F2E259BB03357ACD6"/>
+            <Field Comment="кнопка «Ремонт включить»" Name="btnRepOn" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="2525B93A4F6D2059757E3797E9FB56C8"/>
+            <Field Comment="кнопка «ДУ включить»" Name="btnDuOn" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="B45877E44445A599C6E8598A9D6B0927"/>
+            <Field Comment="кнопка «Ремонт отключить»" Name="btnRepOf" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="37B7E1F14B5B8AB2A22276ADCA2B256F"/>
+            <Field Comment="кнопка «ДУ отключить»" Name="btnDuOf" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="9D03A8B944E93113DF40E397DDF05870"/>
+        </Struct>
+        <Struct Name="T_DIinPLC" UUID="FAEF87934C31C085BD921C8902C7643E">
+            <Field Comment="уставка задержки на переход в &quot;1&quot;" Name="delSetOn" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="7E7B565B4FF72C8F9300CD8CA5696206"/>
+            <Field Comment="уставка задержки на переход в &quot;0&quot;" Name="delSetOf" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="FB14E4F94A9C9C41CDF1F59488622EE6"/>
+            <Field Comment="таймер задержки на переход в &quot;1&quot;" Name="delOn" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="1473066142AD650216431B985A0B739F"/>
+            <Field Comment="таймер задержки на переход в &quot;0&quot;" Name="delOf" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" UUID="37BE32C64CB1783C01425B85D1F09600"/>
+        </Struct>
+        <Struct Name="T_ListDIfromHMI" UUID="8E8ACBAA4EC043601AF08A8611B98322">
+            <Field Name="var_15" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="5136F35F4068D7955BC7C988523E2581"/>
+            <Field Comment="/lfkghd;ls" Name="var_14" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="6F93B9694E2AFECEA74C0EAB5862AE6B"/>
+            <Field Comment="rrrryh" Name="var_13" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="BB7978204A337F16C2E7BCB839355F95"/>
+            <Field Name="var_12" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="D106D25D4DB1C2E043089A9719125BEE"/>
+            <Field Comment="tghjygukltyol" Name="var_11" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="8C7144754F7C28252CB8AF90D8F19B8D"/>
+            <Field Name="var_10" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="77676AEC43AF026ACE877BA4BA2B71BC"/>
+            <Field Name="var_9" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="0455196B4CF716C1D85889B6DC9F2D49"/>
+            <Field Name="var_8" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="CCD10A4B4C29C3F55BBA70A40AFAD7C3"/>
+            <Field Name="var_7" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="F3E8AFF649332BE496703B91D9A68ECD"/>
+            <Field Name="var_6" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="1D3BC2854F1B8C53B5E496946CEEDDE2"/>
+            <Field Name="var_5" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="3CDD053A452F37B45540DABC0A157101"/>
+            <Field Name="var_4" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="998661A148F85E5CA22522B904EE275D"/>
+            <Field Name="var_3" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="3305564C430551AD9EC11288ECB1BDFD"/>
+            <Field Name="var_2" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="297EF00E45816B1E986BF5BD83EA783C"/>
+            <Field Name="var" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="2371A8C24F34B39825463D936D24570C"/>
+            <Field Name="var_1" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="868BE0C24CCBD1FA32C4BE914B0EFEE4"/>
+        </Struct>
+<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
+<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
+</Struct>
+</DataTypes>
+    <FBLibrary>
+        <FunctionBlock Name="FB_AI" UUID="718EB19A4E8BA46A8A97C094F46314F0">
+            <Variables>
+                <Variable Name="Proc_dP_konfN" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="AA8649554D2E838487ECBB9B73957F71" Usage="internal"/>
+                <Variable Name="Proc_Ptg_in_diafr" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="BF6159E34D4A6D1DD88C30865C84B71B" Usage="internal"/>
+                <Variable Name="Proc_dPtg_diafr" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="6DF59E454ED51354DC3516A85EECD9A8" Usage="internal"/>
+                <Variable Name="Proc_Pg_in_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="C660BA684CF8CA8922D76A979316695A" Usage="internal"/>
+                <Variable Name="Proc_Pg_out_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="3589AAD641E7DEF84CAC738DA32E1B06" Usage="internal"/>
+                <Variable Name="Proc_dP_buf_bal" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="14C1550C4154BC36AA5FA4B7DDFF9C25" Usage="internal"/>
+                <Variable Name="Proc_Tv_out_UTO" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="8C07FF694E625B2C11CBA88A9FC8D03E" Usage="internal"/>
+                <Variable Name="Proc_Pv_atm" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="DE1B934F40CE050B4D7EA0A241F9AB7E" Usage="internal"/>
+                <Variable Name="Proc_Pv_vent" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="A38784DA40B52B7F01D54986124CF9A4" Usage="internal"/>
+                <Variable Name="Proc_Pv_in_OK" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="D68FB8C0475BBE331228508FF9A17252" Usage="internal"/>
+                <Variable Name="Proc_Pv_out_OK" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="6BAE58E543DA0CD43D4647B72D2A2CD3" Usage="internal"/>
+                <Variable Name="Proc_Ptg_in_kl1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="8ACCFA3A4FC2EBEEA270E2B6939D194F" Usage="internal"/>
+                <Variable Name="Proc_Ptg_in_kl2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="35BBD8A740613DD2F7EFC293645D4009" Usage="internal"/>
+                <Variable Name="Proc_Ptg_in_kl3" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="BBA1CF04437DEFC31193EEBBA855B4E0" Usage="internal"/>
+                <Variable Name="Proc_V_1p_D_ch1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="7694AA7540BC23D552342992C5E63A97" Usage="internal"/>
+                <Variable Name="Proc_V_1p_D_ch2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="70556F7147BEB2C2F5B27EA6AA6E62B4" Usage="internal"/>
+                <Variable Name="Proc_V_4p_D_ch1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="092950DD4C8767D578EEDBB9CBD39C0E" Usage="internal"/>
+                <Variable Name="Proc_V_4p_D_ch2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="57E15F51437B21776FFF98AF406C9F5E" Usage="internal"/>
+                <Variable Name="Proc_V_1p_N1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="9F2481A9418357BFE260B6B7F0957D32" Usage="internal"/>
+                <Variable Name="Proc_V_1p_N2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="09C30CA24FFB4B06CB8FDAAC25F9D145" Usage="internal"/>
+                <Variable Name="Proc_V_2p_N1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="E8E4CA1343CB8534B6CDC6AA96C5AF1E" Usage="internal"/>
+                <Variable Name="Proc_V_2p_N2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="67B2181E4B84966C239FE19D4A577A01" Usage="internal"/>
+                <Variable Name="Proc_OS_N1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="50D169424C0D6EC9F91707A164EA5FA1" Usage="internal"/>
+                <Variable Name="Proc_OS_N2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="F1E626B74869B9DA7221308C919AEED7" Usage="internal"/>
+                <Variable Name="Proc_Pos_UTO" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="0DF3090E4B1A4D9529ECF19C667ED714" Usage="internal"/>
+                <Variable Name="Proc_Pmg" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="2ABF4F094DE34559CE408897FFD2FA7A" Usage="internal"/>
+                <Variable Name="Proc_Pms" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="00D55A594A27019BCC03E5B67C6535FF" Usage="internal"/>
+                <Variable Name="Proc_Pmz" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="239DF0E54CF24036CEAF1BBB642C2FB8" Usage="internal"/>
+                <Variable Name="Proc_Pos_PNA_ch1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="093841EE430B2BCC4CBEB2B6DFD447CD" Usage="internal"/>
+                <Variable Name="Proc_Pos_PNA_ch2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="23B09EB94D3969A7C5A3B0A1C96CAD17" Usage="internal"/>
+                <Variable Name="Proc_Pos_VNA_ch1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="18E4017F41E50210A23380BA083A5CF6" Usage="internal"/>
+                <Variable Name="Proc_Pos_VNA_ch2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="2FF9FFD746E0C7245404529C29BF070F" Usage="internal"/>
+                <Variable Name="Proc_Pos_Kl_reg_tg_ch1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="31C4B86F451ED3D14D9DF993EE9D5F84" Usage="internal"/>
+                <Variable Name="Proc_Pos_Kl_reg_tg_ch2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="B72A07EF44216E801B2590B91687F452" Usage="internal"/>
+                <Variable Name="Proc_Pos_Kl_stop_tg_ch1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="CCDF9EA64F4768E194CF668EC63258F1" Usage="internal"/>
+                <Variable Name="Proc_Pos_Kl_stop_tg_ch2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="2F7E0F594157281520ABC58288BC319B" Usage="internal"/>
+                <Variable Name="Proc_T_1p_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="4A00DF8C403212E686CA80B595FB132B" Usage="internal"/>
+                <Variable Name="Proc_T1_2p_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="B914B99C4D0B313578C30D8DF74C55DD" Usage="internal"/>
+                <Variable Name="Proc_T2_2p_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="3161535E443CD7932B4CB194A39D0C92" Usage="internal"/>
+                <Variable Name="Proc_T3_2p_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="3453D36B41107F8101D2188A120B544C" Usage="internal"/>
+                <Variable Name="Proc_T4_2p_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="170CB03F420209A51F925F954D515366" Usage="internal"/>
+                <Variable Name="Proc_Tm_sl_1p_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="6A89EAE642B7E49ACEC7AD8E501814A6" Usage="internal"/>
+                <Variable Name="Proc_Tm_sl_2p_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="D20CF0384EF9FD8EAE6737AD0997EB2A" Usage="internal"/>
+                <Variable Name="Proc_T1_in_TVD" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="EC31201A425FCF7A977AB49C93D40D79" Usage="internal"/>
+                <Variable Name="Proc_T2_in_TVD" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="EE14F0E54E777AED861D51A2BF65E03E" Usage="internal"/>
+                <Variable Name="Proc_T1_out_TVD" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="1899995B40AB6DAC95FC588565DB846C" Usage="internal"/>
+                <Variable Name="Proc_T2_out_TVD" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="AA3AB31047D829B1538DC5805B900E61" Usage="internal"/>
+                <Variable Name="Proc_T1_in_TND" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="9CB3E703442EBB5B09F217825B6105E9" Usage="internal"/>
+                <Variable Name="Proc_T2_in_TND" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="D1B0A62C4B5835E5F4B61D83795F6F8F" Usage="internal"/>
+                <Variable Name="Proc_T1_out_TND" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="27F430F5450DE9BA8D4749B4E68184FA" Usage="internal"/>
+                <Variable Name="Proc_T2_out_TND" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="7A8CC0AB470785DC944942BB28068164" Usage="internal"/>
+                <Variable Name="Proc_T1_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="AB57226548012D77BBC743B0F24048B7" Usage="internal"/>
+                <Variable Name="Proc_T2_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="3E77E2A14F12785FEA996BBFCC14D888" Usage="internal"/>
+                <Variable Name="Proc_T3_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="00FB1645472C765E834E259D37EE2480" Usage="internal"/>
+                <Variable Name="Proc_T4_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="C1EE340F4BF3384E164DA19BC7EAB009" Usage="internal"/>
+                <Variable Name="Proc_T5_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="5CBF07DA402B685F230DE1B5E46EBFF2" Usage="internal"/>
+                <Variable Name="Proc_T6_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="93B32C2249FD14CFC2C36081F15F74C9" Usage="internal"/>
+                <Variable Name="Proc_T7_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="43C7601D49F01A017C0D33A9521EBA9A" Usage="internal"/>
+                <Variable Name="Proc_T8_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="0C7C6640458E73C239CC1CBD1F8D5C25" Usage="internal"/>
+                <Variable Name="Proc_T9_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="E0AE6A1A4ECF561F6B369D8FA8B8CFFF" Usage="internal"/>
+                <Variable Name="Proc_T10_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="C574A62A4644B188BE643E801F5CE9C0" Usage="internal"/>
+                <Variable Name="Proc_T11_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="E88AD9EC49B5093E37C3A4A1FEB8BC76" Usage="internal"/>
+                <Variable Name="Proc_T12_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="44A30EDE4233A61E7655918BA41B9988" Usage="internal"/>
+                <Variable Name="Proc_T13_out_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="E8718ED648F2EF46841DD1B70EBD1B42" Usage="internal"/>
+                <Variable Name="Proc_Tv1_in_OK" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="7F5DBB8143C5C348BFC2C3A5342092C2" Usage="internal"/>
+                <Variable Name="Proc_Tv2_in_OK" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="01AC43D6433411D34BA64DA826DAE7F7" Usage="internal"/>
+                <Variable Name="Proc_Tv1_out_OK" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="28BAFB5B489161A081F9C98FFA1E4771" Usage="internal"/>
+                <Variable Name="Proc_Tv2_out_OK" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="423EBA7C48C3A31BC854F3A7CB1BA8AD" Usage="internal"/>
+                <Variable Name="Proc_Tmsm_D" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="01025C174B6A8C74F2B1639A1D6AB5CF" Usage="internal"/>
+                <Variable Name="Proc_Tm_sl_p1_TVD" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="5C79994745B6090CD3BC6F80005C6EF0" Usage="internal"/>
+                <Variable Name="Proc_Tm_sl_p2_TVD" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="0A6739574B09E81244D71A8C12A7B27E" Usage="internal"/>
+                <Variable Name="Proc_Tm_sl_p3_TND" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="538E27754C473FED20A364934087F82F" Usage="internal"/>
+                <Variable Name="Proc_Tm_sl_p4_TND" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="9F0DE7424BD8DF78DE624AB441EF9ACE" Usage="internal"/>
+                <Variable Name="Proc_Tm_sl_up1_TVD" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="37DEF5244EE5796B7F8C359FCC42760F" Usage="internal"/>
+                <Variable Name="Proc_KCU_PNA_obm1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="FE2861C24F83B7ACA7D2EC986ABA8FDA" Usage="internal"/>
+                <Variable Name="Proc_KCU_PNA_obm2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="7353F24E4F2FE56178AC4C990A27B037" Usage="internal"/>
+                <Variable Name="Proc_KCU_PNA_obm3" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="F454F5B64AC17FD3F8D5E793639A57A2" Usage="internal"/>
+                <Variable Name="Proc_KCU_VNA_obm1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="077F68DA40684385FB6E5EBA076D2E6D" Usage="internal"/>
+                <Variable Name="Proc_KCU_VNA_obm2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="0A3DB8C54A9E594AD23133BA0F4EB492" Usage="internal"/>
+                <Variable Name="Proc_KCU_VNA_obm3" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="64CA2A20402E216B942AAE805AB5651D" Usage="internal"/>
+                <Variable Name="Proc_KCU_kl_reg_tg_1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="A4BD3DD6450D8DFC23AED5B6177E0E08" Usage="internal"/>
+                <Variable Name="Proc_KCU_kl_reg_tg_2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="5EBB6D864816BFB5164323A51C0AD3B5" Usage="internal"/>
+                <Variable Name="Proc_KCU_kl_reg_tg_3" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="9C4A940D4EC9C517B4851EB8D7CAD786" Usage="internal"/>
+                <Variable Name="Proc_KCU_kl_stop_tg_1" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="7A8A337741EC8B75D147758B28D5E3F2" Usage="internal"/>
+                <Variable Name="Proc_KCU_kl_stop_tg_2" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="392D313D4F9A2303BA27ABA108D92CF3" Usage="internal"/>
+                <Variable Name="Proc_KCU_kl_stop_tg_3" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="8E72F48D4D4C7049FA1613B08133AA5D" Usage="internal"/>
+                <Variable Name="Proc_KCU_zasl_UTO" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="1FC6F2EE4C0827D66594B0AEA7BA8372" Usage="internal"/>
+                <Variable Name="Proc_KCU_APK" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="3EB761974AA998C06D93AC80D3D5FD2E" Usage="internal"/>
+                <Variable Name="Proc_KCU_kl_BG" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="2D1BEEBF45558AD1C884A2A3E01C3807" Usage="internal"/>
+                <Variable Name="Proc_N_TVD_ch3_BZA" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="B9221C3D457A86EBCE30158F2C2F9F5D" Usage="internal"/>
+                <Variable Name="Proc_N_TND_ch3_BZA" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="0E77CEEB40E29D7754586DB557A6FBAD" Usage="internal"/>
+                <Variable Name="Proc_Uosn_SAU" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="14DF22294333B8DE37814B91BDD02D95" Usage="internal"/>
+                <Variable Name="Proc_Ures_SAU" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="74EEE2284BDF18A9688661BE4D040CCF" Usage="internal"/>
+                <Variable Name="Proc_Tg_out_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="69FA72D942007D3CF3A5FB8257499232" Usage="internal"/>
+                <Variable Name="Proc_Tg_in_N" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="D204F46249A85EF35CF83886D4045F7C" Usage="internal"/>
+                <Variable Name="Proc_Ttg" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="06E979E946BBF8DA689DEEAA871C4BCA" Usage="internal"/>
+                <Variable Name="Proc_Tm_out_AVOM" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="E868D6554ABE650BCD31679347BD7C4A" Usage="internal"/>
+                <Variable Name="Proc_T_p1_G" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="036577F840DA37BE520C168877CA4425" Usage="internal"/>
+                <Variable Name="Proc_T_p2_G" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="C0FABE744C30580BB0545EB76379064F" Usage="internal"/>
+                <Variable Name="Proc_Tv_ots_dop" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="B6B1D40142A736D2E4F82BA3E30B5AB2" Usage="internal"/>
+                <Variable Name="Proc_Tv_ots_prval" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="56D3AC124088DB18597D4E9DDC9124C7" Usage="internal"/>
+                <Variable Name="Proc_T_PLC" Type="c_AI_Proc_auto" TypeUUID="BB5B49364C82250BD6D575A2467D8491" UUID="25AAB22D4D294F68D08434839EDA6E18" Usage="internal"/>
+            </Variables>
+            <ST><![CDATA[(*
+*)
+
+//Инициализация
+//AI_Init(AI_PLC, AI_HMI, Span, Offset, Tf, Min_ADC, Max_ADC, min_fault, max_fault, recovery_time, repeir_time, ROC_time, nAI, ROC_enabled)
+
+IF APP_FST_SCN THEN
+//KM04_4_20mA:Перепад давления на конфузоре нагнетателя (PDT101) A1.1:1
+AI_Init_Auto(AI.dP_konfN, PLC_AI.dP_konfN, 500.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 1, FALSE);
+//KM04_4_20mA:Давление топливного газа перед диафрагмой (РТ1.140) A1.1:3
+AI_Init_Auto(AI.Ptg_in_diafr, PLC_AI.Ptg_in_diafr, 4.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 2, FALSE);
+//KM04_4_20mA:Перепад давлений топливного газа на диафрагме (DР=0…63 кПа) (FТ1.140) A1.1:4
+AI_Init_Auto(AI.dPtg_diafr, PLC_AI.dPtg_diafr, 10000.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 3, FALSE);
+//KM04_4_20mA:Давление газа на входе нагнетателя (PT101) A1.1:5
+AI_Init_Auto(AI.Pg_in_N, PLC_AI.Pg_in_N, 10.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 4, FALSE);
+//KM04_4_20mA:Давление газа на выходе нагнетателя (PT102) A1.1:6
+AI_Init_Auto(AI.Pg_out_N, PLC_AI.Pg_out_N, 10.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 5, FALSE);
+//KM04_4_20mA:Перепад давления между буферной и балансировочной линиями (PDT1114) A1.1:7
+AI_Init_Auto(AI.dP_buf_bal, PLC_AI.dP_buf_bal, 60.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 6, FALSE);
+//KM04_4_20mA:Температура воды на выходе УТО (ТТ410) A1.1:8
+AI_Init_Auto(AI.Tv_out_UTO, PLC_AI.Tv_out_UTO, 150.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 7, FALSE);
+//KM04_4_20mA:Давление атмосферного воздуха  A1.1:9
+AI_Init_Auto(AI.Pv_atm, PLC_AI.Pv_atm, 1865.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 8, FALSE);
+//KM04_4_20mA:Давление воздуха вентиляции (96АТ-1) A1.1:10
+AI_Init_Auto(AI.Pv_vent, PLC_AI.Pv_vent, 0.5, -0.25, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 9, FALSE);
+//KM04_4_20mA:Давление воздуха на входе осевого компрессора (96CS-1) A1.1:11
+AI_Init_Auto(AI.Pv_in_OK, PLC_AI.Pv_in_OK, 1865.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 10, FALSE);
+//KM04_4_20mA:Давление воздуха на выходе из осевого компрессора (96CD-1) A1.1:14
+AI_Init_Auto(AI.Pv_out_OK, PLC_AI.Pv_out_OK, 1.72, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 11, FALSE);
+//KM04_4_20mA:Давление топливного газа в межклапаннном пространстве (96FG-2А) A1.1:15
+AI_Init_Auto(AI.Ptg_in_kl1, PLC_AI.Ptg_in_kl1, 1.72, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 12, FALSE);
+//KM04_4_20mA:Давление топливного газа в межклапаннном пространстве (96FG-2В) A1.1:16
+AI_Init_Auto(AI.Ptg_in_kl2, PLC_AI.Ptg_in_kl2, 1.72, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 13, FALSE);
+//KM04_4_20mA:Давление топливного газа в межклапаннном пространстве (96FG-2С) A1.1:17
+AI_Init_Auto(AI.Ptg_in_kl3, PLC_AI.Ptg_in_kl3, 1.72, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 14, FALSE);
+//KM04_4_20mA:Вибрация 1-го подшипника турбины, канал 1 (39V-1A) A1.1:19
+AI_Init_Auto(AI.V_1p_D_ch1, PLC_AI.V_1p_D_ch1, 40.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 15, FALSE);
+//KM04_4_20mA:Вибрация 1-го подшипника турбины, канал 2 (39V-1В) A1.1:20
+AI_Init_Auto(AI.V_1p_D_ch2, PLC_AI.V_1p_D_ch2, 40.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 16, FALSE);
+//KM04_4_20mA:Вибрация 4-го подшипника турбины, канал 1 (39V-2A) A1.1:21
+AI_Init_Auto(AI.V_4p_D_ch1, PLC_AI.V_4p_D_ch1, 40.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 17, FALSE);
+//KM04_4_20mA:Вибрация 4-го подшипника турбины, канал 2 (39V-2В) A1.1:22
+AI_Init_Auto(AI.V_4p_D_ch2, PLC_AI.V_4p_D_ch2, 40.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 18, FALSE);
+//KM04_4_20mA:Вибрация 1-го подшипника нагнетателя (ХЕ1309Х) A1.1:23
+AI_Init_Auto(AI.V_1p_N1, PLC_AI.V_1p_N1, 200.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 19, FALSE);
+//KM04_4_20mA:Вибрация 1-го подшипника нагнетателя (ХЕ1309Y) A1.1:24
+AI_Init_Auto(AI.V_1p_N2, PLC_AI.V_1p_N2, 200.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 20, FALSE);
+//KM04_4_20mA:Вибрация 2-го подшипника нагнетателя (ХЕ1310Х) A1.1:25
+AI_Init_Auto(AI.V_2p_N1, PLC_AI.V_2p_N1, 200.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 21, FALSE);
+//KM04_4_20mA:Вибрация 2-го подшипника нагнетателя (ХЕ1310Y) A1.1:26
+AI_Init_Auto(AI.V_2p_N2, PLC_AI.V_2p_N2, 200.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 22, FALSE);
+//KM04_4_20mA:Осевой сдвиг ротора нагнетателя (ZE1304A) A1.1:27
+AI_Init_Auto(AI.OS_N1, PLC_AI.OS_N1, 2.0, -1.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 23, FALSE);
+//KM04_4_20mA:Осевой сдвиг ротора нагнетателя (ZE1304В) A1.1:28
+AI_Init_Auto(AI.OS_N2, PLC_AI.OS_N2, 2.0, -1.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 24, FALSE);
+//KM04_4_20mA:Степень открытия заслонки УТО (резерв) (96ВВ) A1.1:29
+AI_Init_Auto(AI.Pos_UTO, PLC_AI.Pos_UTO, 100.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 25, FALSE);
+//KM04_4_20mA:Давление масла гидравлики (96HQ-1) A1.1:33
+AI_Init_Auto(AI.Pmg, PLC_AI.Pmg, 100.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 26, FALSE);
+//KM04_4_20mA:Давление масла в коллекторе смазки турбины  (96QN-1) A1.1:34
+AI_Init_Auto(AI.Pms, PLC_AI.Pms, 10.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 27, FALSE);
+//KM04_4_20mA:Давление масла предельной защиты  (96HG-1) A1.1:35
+AI_Init_Auto(AI.Pmz, PLC_AI.Pmz, 10.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 28, FALSE);
+//KM04_4_20mA:Степень открытия ПНА, канал № 1 (96NC-1) A1.1:40
+AI_Init_Auto(AI.Pos_PNA_ch1, PLC_AI.Pos_PNA_ch1, 20.0, -5.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 29, FALSE);
+//KM04_4_20mA:Степень открытия ПНА, канал № 2 (96NC-2) A1.1:41
+AI_Init_Auto(AI.Pos_PNA_ch2, PLC_AI.Pos_PNA_ch2, 20.0, -5.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 30, FALSE);
+//KM04_4_20mA:Степень открытия ВНА, канал № 1 (96TV-1) A1.1:42
+AI_Init_Auto(AI.Pos_VNA_ch1, PLC_AI.Pos_VNA_ch1, 35.0, 42.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 31, FALSE);
+//KM04_4_20mA:Степень открытия ВНА, канал № 2 (96TV-2) A1.1:43
+AI_Init_Auto(AI.Pos_VNA_ch2, PLC_AI.Pos_VNA_ch2, 35.0, 42.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 32, FALSE);
+//KM04_4_20mA:Степень открытия регулирующего клапана топливного газа, канал № 1 (96GC-1) A1.1:44
+AI_Init_Auto(AI.Pos_Kl_reg_tg_ch1, PLC_AI.Pos_Kl_reg_tg_ch1, 100.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 33, FALSE);
+//KM04_4_20mA:Степень открытия регулирующего клапана топливного газа, канал № 2 (96GC-2) A1.1:45
+AI_Init_Auto(AI.Pos_Kl_reg_tg_ch2, PLC_AI.Pos_Kl_reg_tg_ch2, 100.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 34, FALSE);
+//KM04_4_20mA:Степень открытия стопорного клапана топливного газа, канал № 1 (96SR-1) A1.1:46
+AI_Init_Auto(AI.Pos_Kl_stop_tg_ch1, PLC_AI.Pos_Kl_stop_tg_ch1, 100.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 35, FALSE);
+//KM04_4_20mA:Степень открытия стопорного клапана топливного газа, канал № 2 (96SR-2) A1.1:47
+AI_Init_Auto(AI.Pos_Kl_stop_tg_ch2, PLC_AI.Pos_Kl_stop_tg_ch2, 100.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 36, FALSE);
+//KM04_4_20mA:Температура 1-го подшипника нагнетателя (ТЕ1345) A1.1:49
+AI_Init_Auto(AI.T_1p_N, PLC_AI.T_1p_N, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 37, FALSE);
+//KM04_4_20mA:Температура № 1 2-го подшипника нагнетателя (ТЕ1346) A1.1:50
+AI_Init_Auto(AI.T1_2p_N, PLC_AI.T1_2p_N, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 38, FALSE);
+//KM04_4_20mA:Температура № 2 2-го подшипника нагнетателя (ТЕ1347) A1.1:51
+AI_Init_Auto(AI.T2_2p_N, PLC_AI.T2_2p_N, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 39, FALSE);
+//KM04_4_20mA:Температура № 3 2-го подшипника нагнетателя (ТЕ1348) A1.1:52
+AI_Init_Auto(AI.T3_2p_N, PLC_AI.T3_2p_N, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 40, FALSE);
+//KM04_4_20mA:Температура № 4 2-го подшипника нагнетателя (ТЕ1349) A1.1:53
+AI_Init_Auto(AI.T4_2p_N, PLC_AI.T4_2p_N, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 41, FALSE);
+//KM04_4_20mA:Температура масла на сливе 1-го подшипника нагнетателя (ТЕ1390) A1.1:54
+AI_Init_Auto(AI.Tm_sl_1p_N, PLC_AI.Tm_sl_1p_N, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 42, FALSE);
+//KM04_4_20mA:Температура масла на сливе 2-го подшипника нагнетателя (ТЕ1391) A1.1:55
+AI_Init_Auto(AI.Tm_sl_2p_N, PLC_AI.Tm_sl_2p_N, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 43, FALSE);
+//KM04_4_20mA:Температура № 1 перед ТВД (TT-WS1FI-1) A1.1:57
+AI_Init_Auto(AI.T1_in_TVD, PLC_AI.T1_in_TVD, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 44, FALSE);
+//KM04_4_20mA:Температура № 2 перед ТВД (TT-WS1FI-2) A1.1:58
+AI_Init_Auto(AI.T2_in_TVD, PLC_AI.T2_in_TVD, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 45, FALSE);
+//KM04_4_20mA:Температура № 1 за ТВД (TT-WS1AO-1) A1.1:59
+AI_Init_Auto(AI.T1_out_TVD, PLC_AI.T1_out_TVD, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 46, FALSE);
+//KM04_4_20mA:Температура № 2 за ТВД (TT-WS1AO-2) A1.1:60
+AI_Init_Auto(AI.T2_out_TVD, PLC_AI.T2_out_TVD, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 47, FALSE);
+//KM04_4_20mA:Температура № 1 перед ТНД (TT-WS2FO-1) A1.1:61
+AI_Init_Auto(AI.T1_in_TND, PLC_AI.T1_in_TND, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 48, FALSE);
+//KM04_4_20mA:Температура № 2 перед ТНД (TT-WS2FO-2) A1.1:62
+AI_Init_Auto(AI.T2_in_TND, PLC_AI.T2_in_TND, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 49, FALSE);
+//KM04_4_20mA:Температура № 1 за ТНД (TT-WS2AO-1) A1.1:63
+AI_Init_Auto(AI.T1_out_TND, PLC_AI.T1_out_TND, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 50, FALSE);
+//KM04_4_20mA:Температура № 2 за ТНД (TT-WS2AO-2) A1.1:64
+AI_Init_Auto(AI.T2_out_TND, PLC_AI.T2_out_TND, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 51, FALSE);
+//KM04_4_20mA:Температура № 1 на выхлопе турбины (TT-XD1) A1.2:1
+AI_Init_Auto(AI.T1_out_D, PLC_AI.T1_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 52, FALSE);
+//KM04_4_20mA:Температура № 2 на выхлопе турбины (TT-XD2) A1.2:2
+AI_Init_Auto(AI.T2_out_D, PLC_AI.T2_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 53, FALSE);
+//KM04_4_20mA:Температура № 3 на выхлопе турбины (TT-XD3) A1.2:3
+AI_Init_Auto(AI.T3_out_D, PLC_AI.T3_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 54, FALSE);
+//KM04_4_20mA:Температура № 4 на выхлопе турбины (TT-XD4) A1.2:4
+AI_Init_Auto(AI.T4_out_D, PLC_AI.T4_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 55, FALSE);
+//KM04_4_20mA:Температура № 5 на выхлопе турбины (TT-XD5) A1.2:5
+AI_Init_Auto(AI.T5_out_D, PLC_AI.T5_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 56, FALSE);
+//KM04_4_20mA:Температура № 6 на выхлопе турбины (TT-XD6) A1.2:6
+AI_Init_Auto(AI.T6_out_D, PLC_AI.T6_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 57, FALSE);
+//KM04_4_20mA:Температура № 7 на выхлопе турбины (TT-XD7) A1.2:7
+AI_Init_Auto(AI.T7_out_D, PLC_AI.T7_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 58, FALSE);
+//KM04_4_20mA:Температура № 8 на выхлопе турбины (TT-XD8) A1.2:8
+AI_Init_Auto(AI.T8_out_D, PLC_AI.T8_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 59, FALSE);
+//KM04_4_20mA:Температура № 9 на выхлопе турбины (TT-XD9) A1.2:10
+AI_Init_Auto(AI.T9_out_D, PLC_AI.T9_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 60, FALSE);
+//KM04_4_20mA:Температура № 10 на выхлопе турбины (TT-XD10) A1.2:11
+AI_Init_Auto(AI.T10_out_D, PLC_AI.T10_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 61, FALSE);
+//KM04_4_20mA:Температура № 11 на выхлопе турбины (TT-XD11) A1.2:12
+AI_Init_Auto(AI.T11_out_D, PLC_AI.T11_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 62, FALSE);
+//KM04_4_20mA:Температура № 12 на выхлопе турбины (TT-XD12) A1.2:13
+AI_Init_Auto(AI.T12_out_D, PLC_AI.T12_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 63, FALSE);
+//KM04_4_20mA:Температура № 13 на выхлопе турбины (TT-XD13) A1.2:14
+AI_Init_Auto(AI.T13_out_D, PLC_AI.T13_out_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 64, FALSE);
+//KM04_4_20mA:Температура № 1 воздуха на входе осевого компрессора (CT-IF-1) A1.2:17
+AI_Init_Auto(AI.Tv1_in_OK, PLC_AI.Tv1_in_OK, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 65, FALSE);
+//KM04_4_20mA:Температура № 2 воздуха на входе осевого компрессора (CT-IF-2) A1.2:18
+AI_Init_Auto(AI.Tv2_in_OK, PLC_AI.Tv2_in_OK, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 66, FALSE);
+//KM04_4_20mA:Температура № 1 воздуха на выходе осевого компрессора (CT-DA-1) A1.2:19
+AI_Init_Auto(AI.Tv1_out_OK, PLC_AI.Tv1_out_OK, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 67, FALSE);
+//KM04_4_20mA:Температура № 2 воздуха на выходе осевого компрессора (CT-DA-2) A1.2:20
+AI_Init_Auto(AI.Tv2_out_OK, PLC_AI.Tv2_out_OK, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 68, FALSE);
+//KM04_4_20mA:Температура масла в коллекторе смазки турбины (LT-TH) A1.2:21
+AI_Init_Auto(AI.Tmsm_D, PLC_AI.Tmsm_D, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 69, FALSE);
+//KM04_4_20mA:Температура масла на сливе из подшипника № 1 ТВД (LT-B1D) A1.2:22
+AI_Init_Auto(AI.Tm_sl_p1_TVD, PLC_AI.Tm_sl_p1_TVD, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 70, FALSE);
+//KM04_4_20mA:Температура масла на сливе из подшипника № 2 ТВД (LT-B2D) A1.2:23
+AI_Init_Auto(AI.Tm_sl_p2_TVD, PLC_AI.Tm_sl_p2_TVD, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 71, FALSE);
+//KM04_4_20mA:Температура масла на сливе из подшипника № 3 ТНД (LT-B3D) A1.2:24
+AI_Init_Auto(AI.Tm_sl_p3_TND, PLC_AI.Tm_sl_p3_TND, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 72, FALSE);
+//KM04_4_20mA:Температура масла на сливе из подшипника № 4 ТНД (LT-B4D) A1.2:25
+AI_Init_Auto(AI.Tm_sl_p4_TND, PLC_AI.Tm_sl_p4_TND, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 73, FALSE);
+//KM04_4_20mA:Температура масла на сливе из упорного подшипника № 1 ТВД (LT-BT1D) A1.2:26
+AI_Init_Auto(AI.Tm_sl_up1_TVD, PLC_AI.Tm_sl_up1_TVD, 650.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 74, FALSE);
+//KM04_4_20mA:Сервопривод управления ПНА, обмотка 1. КЦУ  A1.2:33
+AI_Init_Auto(AI.KCU_PNA_obm1, PLC_AI.KCU_PNA_obm1, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 75, FALSE);
+//KM04_4_20mA:Сервопривод управления ПНА, обмотка 2. КЦУ  A1.2:34
+AI_Init_Auto(AI.KCU_PNA_obm2, PLC_AI.KCU_PNA_obm2, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 76, FALSE);
+//KM04_4_20mA:Сервопривод управления ПНА, обмотка 3. КЦУ  A1.2:35
+AI_Init_Auto(AI.KCU_PNA_obm3, PLC_AI.KCU_PNA_obm3, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 77, FALSE);
+//KM04_4_20mA:Сервопривод управления ВНА, обмотка 1. КЦУ  A1.2:36
+AI_Init_Auto(AI.KCU_VNA_obm1, PLC_AI.KCU_VNA_obm1, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 78, FALSE);
+//KM04_4_20mA:Сервопривод управления ВНА, обмотка 2. КЦУ  A1.2:37
+AI_Init_Auto(AI.KCU_VNA_obm2, PLC_AI.KCU_VNA_obm2, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 79, FALSE);
+//KM04_4_20mA:Сервопривод управления ВНА, обмотка 3. КЦУ  A1.2:38
+AI_Init_Auto(AI.KCU_VNA_obm3, PLC_AI.KCU_VNA_obm3, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 80, FALSE);
+//KM04_4_20mA:Сервопривод управления регулирующим клапаном топливного газа, обмотка 1. КЦУ  A1.2:39
+AI_Init_Auto(AI.KCU_kl_reg_tg_1, PLC_AI.KCU_kl_reg_tg_1, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 81, FALSE);
+//KM04_4_20mA:Сервопривод управления регулирующим клапаном топливного газа, обмотка 2. КЦУ  A1.2:40
+AI_Init_Auto(AI.KCU_kl_reg_tg_2, PLC_AI.KCU_kl_reg_tg_2, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 82, FALSE);
+//KM04_4_20mA:Сервопривод управления регулирующим клапаном топливного газа, обмотка 3. КЦУ  A1.2:41
+AI_Init_Auto(AI.KCU_kl_reg_tg_3, PLC_AI.KCU_kl_reg_tg_3, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 83, FALSE);
+//KM04_4_20mA:Сервопривод управления стопорным клапаном топливного газа, обмотка 1. КЦУ  A1.2:42
+AI_Init_Auto(AI.KCU_kl_stop_tg_1, PLC_AI.KCU_kl_stop_tg_1, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 84, FALSE);
+//KM04_4_20mA:Сервопривод управления стопорным клапаном топливного газа, обмотка 2. КЦУ  A1.2:43
+AI_Init_Auto(AI.KCU_kl_stop_tg_2, PLC_AI.KCU_kl_stop_tg_2, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 85, FALSE);
+//KM04_4_20mA:Сервопривод управления стопорным клапаном топливного газа, обмотка 3. КЦУ  A1.2:44
+AI_Init_Auto(AI.KCU_kl_stop_tg_3, PLC_AI.KCU_kl_stop_tg_3, 20.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 86, FALSE);
+//KM04_4_20mA:Привод заслонки УТО. КЦУ  A1.2:45
+AI_Init_Auto(AI.KCU_zasl_UTO, PLC_AI.KCU_zasl_UTO, 16.0, 4.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 87, FALSE);
+//KM04_4_20mA:Сервопривод управления антипомпажным клапаном. КЦУ  A1.2:48
+AI_Init_Auto(AI.KCU_APK, PLC_AI.KCU_APK, 16.0, 4.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 88, FALSE);
+//KM04_4_20mA:Сервопривод управления клапаном буферного газа. КЦУ  A1.2:49
+AI_Init_Auto(AI.KCU_kl_BG, PLC_AI.KCU_kl_BG, 16.0, 4.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 89, FALSE);
+//KM04_4_20mA:Скорость вращения ТВД, канал 3 от БЗА  A1.2:51
+AI_Init_Auto(AI.N_TVD_ch3_BZA, PLC_AI.N_TVD_ch3_BZA, 6000.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 90, FALSE);
+//KM04_4_20mA:Скорость вращения ТНД, канал 3 от БЗА  A1.2:52
+AI_Init_Auto(AI.N_TND_ch3_BZA, PLC_AI.N_TND_ch3_BZA, 6000.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 91, FALSE);
+//KM04_4_20mA:Измерение основного напряжения питания САУ  A1.2:53
+AI_Init_Auto(AI.Uosn_SAU, PLC_AI.Uosn_SAU, 370.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 92, FALSE);
+//KM04_4_20mA:Измерение резервного напряжения питания САУ  A1.2:54
+AI_Init_Auto(AI.Ures_SAU, PLC_AI.Ures_SAU, 170.0, 0.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 93, FALSE);
+//KM04_4_20mA:Температура газа на выходе нагнетателя (ТЕ102) A2.1:1
+AI_Init_Auto(AI.Tg_out_N, PLC_AI.Tg_out_N, 250.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 94, FALSE);
+//KM04_4_20mA:Температура газа на входе в нагнетатель (ТЕ101) A2.1:2
+AI_Init_Auto(AI.Tg_in_N, PLC_AI.Tg_in_N, 250.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 95, FALSE);
+//KM04_4_20mA:Температура топливного газа (ТЕ1.141) A2.2:2
+AI_Init_Auto(AI.Ttg, PLC_AI.Ttg, 250.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 96, FALSE);
+//KM04_4_20mA:Температура масла после АВОМ (ТЕ1301) A2.3:1
+AI_Init_Auto(AI.Tm_out_AVOM, PLC_AI.Tm_out_AVOM, 310.0, -60.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 97, FALSE);
+//KM04_4_20mA:Температура подшипника № 1 генератора (ТЕ301) A2.3:2
+AI_Init_Auto(AI.T_p1_G, PLC_AI.T_p1_G, 250.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 98, FALSE);
+//KM04_4_20mA:Температура подшипника № 2 генератора (ТЕ302) A2.4:1
+AI_Init_Auto(AI.T_p2_G, PLC_AI.T_p2_G, 310.0, -60.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 99, FALSE);
+//KM04_4_20mA:Температура воздщуха в отсеке вспомогательного оборудования (ТЕ-ВА-1) A2.4:2
+AI_Init_Auto(AI.Tv_ots_dop, PLC_AI.Tv_ots_dop, 310.0, -60.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 100, FALSE);
+//KM04_4_20mA:Температура воздуха в отсеке промвала (ТЕ-ВТ-1) A2.5:1
+AI_Init_Auto(AI.Tv_ots_prval, PLC_AI.Tv_ots_prval, 250.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 101, FALSE);
+//KM04_4_20mA:Температура контроллера  A2.7:2
+AI_Init_Auto(AI.T_PLC, PLC_AI.T_PLC, 100.0, -50.0, 10000.0, 2.0, 9.9, 1.9, 9.96, 100.0, 5.0, 600.0, 0.1, 102, FALSE);
+END_IF;
+
+(*
+Вызов блока:
+AI_Proc(AI_HMI, AI_PLC, del_T, AI_drv, Firstscan);
+где:
+AI_Proc  - имя ФБ типа c_AI_Proc_auto;
+AI_HMI -  структура данного аналогового параметра передаваемая заполняемая через dll и осуществляющая обмен с HMI;
+AI_PLC -  структура данного аналогового параметра для PLC;
+del_T - текущее время цикла ПЛК;
+AI_drv  - Значение входа данного аналогового параметра, полученное из драйвера входных сигналов
+Firstscan - флаг первого цикла контроллера для инициализации.
+*)
+
+IF NOT LG.IMIT_ON THEN
+//Перепад давления на конфузоре нагнетателя (PDT101) A1.1:1
+Proc_dP_konfN(AI.dP_konfN, PLC_AI.dP_konfN, del_T, DRV_AI.dP_konfN, APP_FST_SCN);
+//Давление топливного газа перед диафрагмой (РТ1.140) A1.1:3
+Proc_Ptg_in_diafr(AI.Ptg_in_diafr, PLC_AI.Ptg_in_diafr, del_T, DRV_AI.Ptg_in_diafr, APP_FST_SCN);
+//Перепад давлений топливного газа на диафрагме (DР=0…63 кПа) (FТ1.140) A1.1:4
+Proc_dPtg_diafr(AI.dPtg_diafr, PLC_AI.dPtg_diafr, del_T, DRV_AI.dPtg_diafr, APP_FST_SCN);
+//Давление газа на входе нагнетателя (PT101) A1.1:5
+Proc_Pg_in_N(AI.Pg_in_N, PLC_AI.Pg_in_N, del_T, DRV_AI.Pg_in_N, APP_FST_SCN);
+//Давление газа на выходе нагнетателя (PT102) A1.1:6
+Proc_Pg_out_N(AI.Pg_out_N, PLC_AI.Pg_out_N, del_T, DRV_AI.Pg_out_N, APP_FST_SCN);
+//Перепад давления между буферной и балансировочной линиями (PDT1114) A1.1:7
+Proc_dP_buf_bal(AI.dP_buf_bal, PLC_AI.dP_buf_bal, del_T, DRV_AI.dP_buf_bal, APP_FST_SCN);
+//Температура воды на выходе УТО (ТТ410) A1.1:8
+Proc_Tv_out_UTO(AI.Tv_out_UTO, PLC_AI.Tv_out_UTO, del_T, DRV_AI.Tv_out_UTO, APP_FST_SCN);
+//Давление атмосферного воздуха  A1.1:9
+Proc_Pv_atm(AI.Pv_atm, PLC_AI.Pv_atm, del_T, DRV_AI.Pv_atm, APP_FST_SCN);
+//Давление воздуха вентиляции (96АТ-1) A1.1:10
+Proc_Pv_vent(AI.Pv_vent, PLC_AI.Pv_vent, del_T, DRV_AI.Pv_vent, APP_FST_SCN);
+//Давление воздуха на входе осевого компрессора (96CS-1) A1.1:11
+Proc_Pv_in_OK(AI.Pv_in_OK, PLC_AI.Pv_in_OK, del_T, DRV_AI.Pv_in_OK, APP_FST_SCN);
+//Давление воздуха на выходе из осевого компрессора (96CD-1) A1.1:14
+Proc_Pv_out_OK(AI.Pv_out_OK, PLC_AI.Pv_out_OK, del_T, DRV_AI.Pv_out_OK, APP_FST_SCN);
+//Давление топливного газа в межклапаннном пространстве (96FG-2А) A1.1:15
+Proc_Ptg_in_kl1(AI.Ptg_in_kl1, PLC_AI.Ptg_in_kl1, del_T, DRV_AI.Ptg_in_kl1, APP_FST_SCN);
+//Давление топливного газа в межклапаннном пространстве (96FG-2В) A1.1:16
+Proc_Ptg_in_kl2(AI.Ptg_in_kl2, PLC_AI.Ptg_in_kl2, del_T, DRV_AI.Ptg_in_kl2, APP_FST_SCN);
+//Давление топливного газа в межклапаннном пространстве (96FG-2С) A1.1:17
+Proc_Ptg_in_kl3(AI.Ptg_in_kl3, PLC_AI.Ptg_in_kl3, del_T, DRV_AI.Ptg_in_kl3, APP_FST_SCN);
+//Вибрация 1-го подшипника турбины, канал 1 (39V-1A) A1.1:19
+Proc_V_1p_D_ch1(AI.V_1p_D_ch1, PLC_AI.V_1p_D_ch1, del_T, DRV_AI.V_1p_D_ch1, APP_FST_SCN);
+//Вибрация 1-го подшипника турбины, канал 2 (39V-1В) A1.1:20
+Proc_V_1p_D_ch2(AI.V_1p_D_ch2, PLC_AI.V_1p_D_ch2, del_T, DRV_AI.V_1p_D_ch2, APP_FST_SCN);
+//Вибрация 4-го подшипника турбины, канал 1 (39V-2A) A1.1:21
+Proc_V_4p_D_ch1(AI.V_4p_D_ch1, PLC_AI.V_4p_D_ch1, del_T, DRV_AI.V_4p_D_ch1, APP_FST_SCN);
+//Вибрация 4-го подшипника турбины, канал 2 (39V-2В) A1.1:22
+Proc_V_4p_D_ch2(AI.V_4p_D_ch2, PLC_AI.V_4p_D_ch2, del_T, DRV_AI.V_4p_D_ch2, APP_FST_SCN);
+//Вибрация 1-го подшипника нагнетателя (ХЕ1309Х) A1.1:23
+Proc_V_1p_N1(AI.V_1p_N1, PLC_AI.V_1p_N1, del_T, DRV_AI.V_1p_N1, APP_FST_SCN);
+//Вибрация 1-го подшипника нагнетателя (ХЕ1309Y) A1.1:24
+Proc_V_1p_N2(AI.V_1p_N2, PLC_AI.V_1p_N2, del_T, DRV_AI.V_1p_N2, APP_FST_SCN);
+//Вибрация 2-го подшипника нагнетателя (ХЕ1310Х) A1.1:25
+Proc_V_2p_N1(AI.V_2p_N1, PLC_AI.V_2p_N1, del_T, DRV_AI.V_2p_N1, APP_FST_SCN);
+//Вибрация 2-го подшипника нагнетателя (ХЕ1310Y) A1.1:26
+Proc_V_2p_N2(AI.V_2p_N2, PLC_AI.V_2p_N2, del_T, DRV_AI.V_2p_N2, APP_FST_SCN);
+//Осевой сдвиг ротора нагнетателя (ZE1304A) A1.1:27
+Proc_OS_N1(AI.OS_N1, PLC_AI.OS_N1, del_T, DRV_AI.OS_N1, APP_FST_SCN);
+//Осевой сдвиг ротора нагнетателя (ZE1304В) A1.1:28
+Proc_OS_N2(AI.OS_N2, PLC_AI.OS_N2, del_T, DRV_AI.OS_N2, APP_FST_SCN);
+//Степень открытия заслонки УТО (резерв) (96ВВ) A1.1:29
+Proc_Pos_UTO(AI.Pos_UTO, PLC_AI.Pos_UTO, del_T, DRV_AI.Pos_UTO, APP_FST_SCN);
+//Давление масла гидравлики (96HQ-1) A1.1:33
+Proc_Pmg(AI.Pmg, PLC_AI.Pmg, del_T, DRV_AI.Pmg, APP_FST_SCN);
+//Давление масла в коллекторе смазки турбины  (96QN-1) A1.1:34
+Proc_Pms(AI.Pms, PLC_AI.Pms, del_T, DRV_AI.Pms, APP_FST_SCN);
+//Давление масла предельной защиты  (96HG-1) A1.1:35
+Proc_Pmz(AI.Pmz, PLC_AI.Pmz, del_T, DRV_AI.Pmz, APP_FST_SCN);
+//Степень открытия ПНА, канал № 1 (96NC-1) A1.1:40
+Proc_Pos_PNA_ch1(AI.Pos_PNA_ch1, PLC_AI.Pos_PNA_ch1, del_T, DRV_AI.Pos_PNA_ch1, APP_FST_SCN);
+//Степень открытия ПНА, канал № 2 (96NC-2) A1.1:41
+Proc_Pos_PNA_ch2(AI.Pos_PNA_ch2, PLC_AI.Pos_PNA_ch2, del_T, DRV_AI.Pos_PNA_ch2, APP_FST_SCN);
+//Степень открытия ВНА, канал № 1 (96TV-1) A1.1:42
+Proc_Pos_VNA_ch1(AI.Pos_VNA_ch1, PLC_AI.Pos_VNA_ch1, del_T, DRV_AI.Pos_VNA_ch1, APP_FST_SCN);
+//Степень открытия ВНА, канал № 2 (96TV-2) A1.1:43
+Proc_Pos_VNA_ch2(AI.Pos_VNA_ch2, PLC_AI.Pos_VNA_ch2, del_T, DRV_AI.Pos_VNA_ch2, APP_FST_SCN);
+//Степень открытия регулирующего клапана топливного газа, канал № 1 (96GC-1) A1.1:44
+Proc_Pos_Kl_reg_tg_ch1(AI.Pos_Kl_reg_tg_ch1, PLC_AI.Pos_Kl_reg_tg_ch1, del_T, DRV_AI.Pos_Kl_reg_tg_ch1, APP_FST_SCN);
+//Степень открытия регулирующего клапана топливного газа, канал № 2 (96GC-2) A1.1:45
+Proc_Pos_Kl_reg_tg_ch2(AI.Pos_Kl_reg_tg_ch2, PLC_AI.Pos_Kl_reg_tg_ch2, del_T, DRV_AI.Pos_Kl_reg_tg_ch2, APP_FST_SCN);
+//Степень открытия стопорного клапана топливного газа, канал № 1 (96SR-1) A1.1:46
+Proc_Pos_Kl_stop_tg_ch1(AI.Pos_Kl_stop_tg_ch1, PLC_AI.Pos_Kl_stop_tg_ch1, del_T, DRV_AI.Pos_Kl_stop_tg_ch1, APP_FST_SCN);
+//Степень открытия стопорного клапана топливного газа, канал № 2 (96SR-2) A1.1:47
+Proc_Pos_Kl_stop_tg_ch2(AI.Pos_Kl_stop_tg_ch2, PLC_AI.Pos_Kl_stop_tg_ch2, del_T, DRV_AI.Pos_Kl_stop_tg_ch2, APP_FST_SCN);
+//Температура 1-го подшипника нагнетателя (ТЕ1345) A1.1:49
+Proc_T_1p_N(AI.T_1p_N, PLC_AI.T_1p_N, del_T, DRV_AI.T_1p_N, APP_FST_SCN);
+//Температура № 1 2-го подшипника нагнетателя (ТЕ1346) A1.1:50
+Proc_T1_2p_N(AI.T1_2p_N, PLC_AI.T1_2p_N, del_T, DRV_AI.T1_2p_N, APP_FST_SCN);
+//Температура № 2 2-го подшипника нагнетателя (ТЕ1347) A1.1:51
+Proc_T2_2p_N(AI.T2_2p_N, PLC_AI.T2_2p_N, del_T, DRV_AI.T2_2p_N, APP_FST_SCN);
+//Температура № 3 2-го подшипника нагнетателя (ТЕ1348) A1.1:52
+Proc_T3_2p_N(AI.T3_2p_N, PLC_AI.T3_2p_N, del_T, DRV_AI.T3_2p_N, APP_FST_SCN);
+//Температура № 4 2-го подшипника нагнетателя (ТЕ1349) A1.1:53
+Proc_T4_2p_N(AI.T4_2p_N, PLC_AI.T4_2p_N, del_T, DRV_AI.T4_2p_N, APP_FST_SCN);
+//Температура масла на сливе 1-го подшипника нагнетателя (ТЕ1390) A1.1:54
+Proc_Tm_sl_1p_N(AI.Tm_sl_1p_N, PLC_AI.Tm_sl_1p_N, del_T, DRV_AI.Tm_sl_1p_N, APP_FST_SCN);
+//Температура масла на сливе 2-го подшипника нагнетателя (ТЕ1391) A1.1:55
+Proc_Tm_sl_2p_N(AI.Tm_sl_2p_N, PLC_AI.Tm_sl_2p_N, del_T, DRV_AI.Tm_sl_2p_N, APP_FST_SCN);
+//Температура № 1 перед ТВД (TT-WS1FI-1) A1.1:57
+Proc_T1_in_TVD(AI.T1_in_TVD, PLC_AI.T1_in_TVD, del_T, DRV_AI.T1_in_TVD, APP_FST_SCN);
+//Температура № 2 перед ТВД (TT-WS1FI-2) A1.1:58
+Proc_T2_in_TVD(AI.T2_in_TVD, PLC_AI.T2_in_TVD, del_T, DRV_AI.T2_in_TVD, APP_FST_SCN);
+//Температура № 1 за ТВД (TT-WS1AO-1) A1.1:59
+Proc_T1_out_TVD(AI.T1_out_TVD, PLC_AI.T1_out_TVD, del_T, DRV_AI.T1_out_TVD, APP_FST_SCN);
+//Температура № 2 за ТВД (TT-WS1AO-2) A1.1:60
+Proc_T2_out_TVD(AI.T2_out_TVD, PLC_AI.T2_out_TVD, del_T, DRV_AI.T2_out_TVD, APP_FST_SCN);
+//Температура № 1 перед ТНД (TT-WS2FO-1) A1.1:61
+Proc_T1_in_TND(AI.T1_in_TND, PLC_AI.T1_in_TND, del_T, DRV_AI.T1_in_TND, APP_FST_SCN);
+//Температура № 2 перед ТНД (TT-WS2FO-2) A1.1:62
+Proc_T2_in_TND(AI.T2_in_TND, PLC_AI.T2_in_TND, del_T, DRV_AI.T2_in_TND, APP_FST_SCN);
+//Температура № 1 за ТНД (TT-WS2AO-1) A1.1:63
+Proc_T1_out_TND(AI.T1_out_TND, PLC_AI.T1_out_TND, del_T, DRV_AI.T1_out_TND, APP_FST_SCN);
+//Температура № 2 за ТНД (TT-WS2AO-2) A1.1:64
+Proc_T2_out_TND(AI.T2_out_TND, PLC_AI.T2_out_TND, del_T, DRV_AI.T2_out_TND, APP_FST_SCN);
+//Температура № 1 на выхлопе турбины (TT-XD1) A1.2:1
+Proc_T1_out_D(AI.T1_out_D, PLC_AI.T1_out_D, del_T, DRV_AI.T1_out_D, APP_FST_SCN);
+//Температура № 2 на выхлопе турбины (TT-XD2) A1.2:2
+Proc_T2_out_D(AI.T2_out_D, PLC_AI.T2_out_D, del_T, DRV_AI.T2_out_D, APP_FST_SCN);
+//Температура № 3 на выхлопе турбины (TT-XD3) A1.2:3
+Proc_T3_out_D(AI.T3_out_D, PLC_AI.T3_out_D, del_T, DRV_AI.T3_out_D, APP_FST_SCN);
+//Температура № 4 на выхлопе турбины (TT-XD4) A1.2:4
+Proc_T4_out_D(AI.T4_out_D, PLC_AI.T4_out_D, del_T, DRV_AI.T4_out_D, APP_FST_SCN);
+//Температура № 5 на выхлопе турбины (TT-XD5) A1.2:5
+Proc_T5_out_D(AI.T5_out_D, PLC_AI.T5_out_D, del_T, DRV_AI.T5_out_D, APP_FST_SCN);
+//Температура № 6 на выхлопе турбины (TT-XD6) A1.2:6
+Proc_T6_out_D(AI.T6_out_D, PLC_AI.T6_out_D, del_T, DRV_AI.T6_out_D, APP_FST_SCN);
+//Температура № 7 на выхлопе турбины (TT-XD7) A1.2:7
+Proc_T7_out_D(AI.T7_out_D, PLC_AI.T7_out_D, del_T, DRV_AI.T7_out_D, APP_FST_SCN);
+//Температура № 8 на выхлопе турбины (TT-XD8) A1.2:8
+Proc_T8_out_D(AI.T8_out_D, PLC_AI.T8_out_D, del_T, DRV_AI.T8_out_D, APP_FST_SCN);
+//Температура № 9 на выхлопе турбины (TT-XD9) A1.2:10
+Proc_T9_out_D(AI.T9_out_D, PLC_AI.T9_out_D, del_T, DRV_AI.T9_out_D, APP_FST_SCN);
+//Температура № 10 на выхлопе турбины (TT-XD10) A1.2:11
+Proc_T10_out_D(AI.T10_out_D, PLC_AI.T10_out_D, del_T, DRV_AI.T10_out_D, APP_FST_SCN);
+//Температура № 11 на выхлопе турбины (TT-XD11) A1.2:12
+Proc_T11_out_D(AI.T11_out_D, PLC_AI.T11_out_D, del_T, DRV_AI.T11_out_D, APP_FST_SCN);
+//Температура № 12 на выхлопе турбины (TT-XD12) A1.2:13
+Proc_T12_out_D(AI.T12_out_D, PLC_AI.T12_out_D, del_T, DRV_AI.T12_out_D, APP_FST_SCN);
+//Температура № 13 на выхлопе турбины (TT-XD13) A1.2:14
+Proc_T13_out_D(AI.T13_out_D, PLC_AI.T13_out_D, del_T, DRV_AI.T13_out_D, APP_FST_SCN);
+//Температура № 1 воздуха на входе осевого компрессора (CT-IF-1) A1.2:17
+Proc_Tv1_in_OK(AI.Tv1_in_OK, PLC_AI.Tv1_in_OK, del_T, DRV_AI.Tv1_in_OK, APP_FST_SCN);
+//Температура № 2 воздуха на входе осевого компрессора (CT-IF-2) A1.2:18
+Proc_Tv2_in_OK(AI.Tv2_in_OK, PLC_AI.Tv2_in_OK, del_T, DRV_AI.Tv2_in_OK, APP_FST_SCN);
+//Температура № 1 воздуха на выходе осевого компрессора (CT-DA-1) A1.2:19
+Proc_Tv1_out_OK(AI.Tv1_out_OK, PLC_AI.Tv1_out_OK, del_T, DRV_AI.Tv1_out_OK, APP_FST_SCN);
+//Температура № 2 воздуха на выходе осевого компрессора (CT-DA-2) A1.2:20
+Proc_Tv2_out_OK(AI.Tv2_out_OK, PLC_AI.Tv2_out_OK, del_T, DRV_AI.Tv2_out_OK, APP_FST_SCN);
+//Температура масла в коллекторе смазки турбины (LT-TH) A1.2:21
+Proc_Tmsm_D(AI.Tmsm_D, PLC_AI.Tmsm_D, del_T, DRV_AI.Tmsm_D, APP_FST_SCN);
+//Температура масла на сливе из подшипника № 1 ТВД (LT-B1D) A1.2:22
+Proc_Tm_sl_p1_TVD(AI.Tm_sl_p1_TVD, PLC_AI.Tm_sl_p1_TVD, del_T, DRV_AI.Tm_sl_p1_TVD, APP_FST_SCN);
+//Температура масла на сливе из подшипника № 2 ТВД (LT-B2D) A1.2:23
+Proc_Tm_sl_p2_TVD(AI.Tm_sl_p2_TVD, PLC_AI.Tm_sl_p2_TVD, del_T, DRV_AI.Tm_sl_p2_TVD, APP_FST_SCN);
+//Температура масла на сливе из подшипника № 3 ТНД (LT-B3D) A1.2:24
+Proc_Tm_sl_p3_TND(AI.Tm_sl_p3_TND, PLC_AI.Tm_sl_p3_TND, del_T, DRV_AI.Tm_sl_p3_TND, APP_FST_SCN);
+//Температура масла на сливе из подшипника № 4 ТНД (LT-B4D) A1.2:25
+Proc_Tm_sl_p4_TND(AI.Tm_sl_p4_TND, PLC_AI.Tm_sl_p4_TND, del_T, DRV_AI.Tm_sl_p4_TND, APP_FST_SCN);
+//Температура масла на сливе из упорного подшипника № 1 ТВД (LT-BT1D) A1.2:26
+Proc_Tm_sl_up1_TVD(AI.Tm_sl_up1_TVD, PLC_AI.Tm_sl_up1_TVD, del_T, DRV_AI.Tm_sl_up1_TVD, APP_FST_SCN);
+//Сервопривод управления ПНА, обмотка 1. КЦУ  A1.2:33
+Proc_KCU_PNA_obm1(AI.KCU_PNA_obm1, PLC_AI.KCU_PNA_obm1, del_T, DRV_AI.KCU_PNA_obm1, APP_FST_SCN);
+//Сервопривод управления ПНА, обмотка 2. КЦУ  A1.2:34
+Proc_KCU_PNA_obm2(AI.KCU_PNA_obm2, PLC_AI.KCU_PNA_obm2, del_T, DRV_AI.KCU_PNA_obm2, APP_FST_SCN);
+//Сервопривод управления ПНА, обмотка 3. КЦУ  A1.2:35
+Proc_KCU_PNA_obm3(AI.KCU_PNA_obm3, PLC_AI.KCU_PNA_obm3, del_T, DRV_AI.KCU_PNA_obm3, APP_FST_SCN);
+//Сервопривод управления ВНА, обмотка 1. КЦУ  A1.2:36
+Proc_KCU_VNA_obm1(AI.KCU_VNA_obm1, PLC_AI.KCU_VNA_obm1, del_T, DRV_AI.KCU_VNA_obm1, APP_FST_SCN);
+//Сервопривод управления ВНА, обмотка 2. КЦУ  A1.2:37
+Proc_KCU_VNA_obm2(AI.KCU_VNA_obm2, PLC_AI.KCU_VNA_obm2, del_T, DRV_AI.KCU_VNA_obm2, APP_FST_SCN);
+//Сервопривод управления ВНА, обмотка 3. КЦУ  A1.2:38
+Proc_KCU_VNA_obm3(AI.KCU_VNA_obm3, PLC_AI.KCU_VNA_obm3, del_T, DRV_AI.KCU_VNA_obm3, APP_FST_SCN);
+//Сервопривод управления регулирующим клапаном топливного газа, обмотка 1. КЦУ  A1.2:39
+Proc_KCU_kl_reg_tg_1(AI.KCU_kl_reg_tg_1, PLC_AI.KCU_kl_reg_tg_1, del_T, DRV_AI.KCU_kl_reg_tg_1, APP_FST_SCN);
+//Сервопривод управления регулирующим клапаном топливного газа, обмотка 2. КЦУ  A1.2:40
+Proc_KCU_kl_reg_tg_2(AI.KCU_kl_reg_tg_2, PLC_AI.KCU_kl_reg_tg_2, del_T, DRV_AI.KCU_kl_reg_tg_2, APP_FST_SCN);
+//Сервопривод управления регулирующим клапаном топливного газа, обмотка 3. КЦУ  A1.2:41
+Proc_KCU_kl_reg_tg_3(AI.KCU_kl_reg_tg_3, PLC_AI.KCU_kl_reg_tg_3, del_T, DRV_AI.KCU_kl_reg_tg_3, APP_FST_SCN);
+//Сервопривод управления стопорным клапаном топливного газа, обмотка 1. КЦУ  A1.2:42
+Proc_KCU_kl_stop_tg_1(AI.KCU_kl_stop_tg_1, PLC_AI.KCU_kl_stop_tg_1, del_T, DRV_AI.KCU_kl_stop_tg_1, APP_FST_SCN);
+//Сервопривод управления стопорным клапаном топливного газа, обмотка 2. КЦУ  A1.2:43
+Proc_KCU_kl_stop_tg_2(AI.KCU_kl_stop_tg_2, PLC_AI.KCU_kl_stop_tg_2, del_T, DRV_AI.KCU_kl_stop_tg_2, APP_FST_SCN);
+//Сервопривод управления стопорным клапаном топливного газа, обмотка 3. КЦУ  A1.2:44
+Proc_KCU_kl_stop_tg_3(AI.KCU_kl_stop_tg_3, PLC_AI.KCU_kl_stop_tg_3, del_T, DRV_AI.KCU_kl_stop_tg_3, APP_FST_SCN);
+//Привод заслонки УТО. КЦУ  A1.2:45
+Proc_KCU_zasl_UTO(AI.KCU_zasl_UTO, PLC_AI.KCU_zasl_UTO, del_T, DRV_AI.KCU_zasl_UTO, APP_FST_SCN);
+//Сервопривод управления антипомпажным клапаном. КЦУ  A1.2:48
+Proc_KCU_APK(AI.KCU_APK, PLC_AI.KCU_APK, del_T, DRV_AI.KCU_APK, APP_FST_SCN);
+//Сервопривод управления клапаном буферного газа. КЦУ  A1.2:49
+Proc_KCU_kl_BG(AI.KCU_kl_BG, PLC_AI.KCU_kl_BG, del_T, DRV_AI.KCU_kl_BG, APP_FST_SCN);
+//Скорость вращения ТВД, канал 3 от БЗА  A1.2:51
+Proc_N_TVD_ch3_BZA(AI.N_TVD_ch3_BZA, PLC_AI.N_TVD_ch3_BZA, del_T, DRV_AI.N_TVD_ch3_BZA, APP_FST_SCN);
+//Скорость вращения ТНД, канал 3 от БЗА  A1.2:52
+Proc_N_TND_ch3_BZA(AI.N_TND_ch3_BZA, PLC_AI.N_TND_ch3_BZA, del_T, DRV_AI.N_TND_ch3_BZA, APP_FST_SCN);
+//Измерение основного напряжения питания САУ  A1.2:53
+Proc_Uosn_SAU(AI.Uosn_SAU, PLC_AI.Uosn_SAU, del_T, DRV_AI.Uosn_SAU, APP_FST_SCN);
+//Измерение резервного напряжения питания САУ  A1.2:54
+Proc_Ures_SAU(AI.Ures_SAU, PLC_AI.Ures_SAU, del_T, DRV_AI.Ures_SAU, APP_FST_SCN);
+//Температура газа на выходе нагнетателя (ТЕ102) A2.1:1
+Proc_Tg_out_N(AI.Tg_out_N, PLC_AI.Tg_out_N, del_T, DRV_AI.Tg_out_N, APP_FST_SCN);
+//Температура газа на входе в нагнетатель (ТЕ101) A2.1:2
+Proc_Tg_in_N(AI.Tg_in_N, PLC_AI.Tg_in_N, del_T, DRV_AI.Tg_in_N, APP_FST_SCN);
+//Температура топливного газа (ТЕ1.141) A2.2:2
+Proc_Ttg(AI.Ttg, PLC_AI.Ttg, del_T, DRV_AI.Ttg, APP_FST_SCN);
+//Температура масла после АВОМ (ТЕ1301) A2.3:1
+Proc_Tm_out_AVOM(AI.Tm_out_AVOM, PLC_AI.Tm_out_AVOM, del_T, DRV_AI.Tm_out_AVOM, APP_FST_SCN);
+//Температура подшипника № 1 генератора (ТЕ301) A2.3:2
+Proc_T_p1_G(AI.T_p1_G, PLC_AI.T_p1_G, del_T, DRV_AI.T_p1_G, APP_FST_SCN);
+//Температура подшипника № 2 генератора (ТЕ302) A2.4:1
+Proc_T_p2_G(AI.T_p2_G, PLC_AI.T_p2_G, del_T, DRV_AI.T_p2_G, APP_FST_SCN);
+//Температура воздщуха в отсеке вспомогательного оборудования (ТЕ-ВА-1) A2.4:2
+Proc_Tv_ots_dop(AI.Tv_ots_dop, PLC_AI.Tv_ots_dop, del_T, DRV_AI.Tv_ots_dop, APP_FST_SCN);
+//Температура воздуха в отсеке промвала (ТЕ-ВТ-1) A2.5:1
+Proc_Tv_ots_prval(AI.Tv_ots_prval, PLC_AI.Tv_ots_prval, del_T, DRV_AI.Tv_ots_prval, APP_FST_SCN);
+//Температура контроллера  A2.7:2
+Proc_T_PLC(AI.T_PLC, PLC_AI.T_PLC, del_T, DRV_AI.T_PLC, APP_FST_SCN);
+END_IF;
+
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock Name="FB_Test" UUID="5E5391D24DF15E177D876B8328D38ADF">
+            <Variables>
+                <Variable Name="variable" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="28A178E54FCEA212C653A8BB425F555D" Usage="internal"/>
+                <Variable Name="variable0" Type="TON" TypeUUID="EAA43B6B4DCDCEA72AB748B4554FD2AD" UUID="EA8C907F4390F070BAFA78A38E63A3DD" Usage="internal"/>
+            </Variables>
+            <ST><![CDATA[//anmmnbmk
+a:=b;
+
+//;kllj;k;kl;lklgnbf
+w:=a+b;]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+    
+
+</Program>
