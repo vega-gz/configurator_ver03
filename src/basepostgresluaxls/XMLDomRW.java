@@ -126,13 +126,17 @@ public class XMLDomRW {
         XPath xpath = pathFactory.newXPath();
         XPathExpression expr = xpath.compile("Program/Variables");
         NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-        for (int i = 0; i < nodes.getLength(); i++) {
+        for (int i = 0; i < nodes.getLength(); i++) { // Переборка не нужна по сути
             Node n = nodes.item(i);
             createBook(document, n); //Создаем элементы в ноде которую передали
             //stepThroughAll(n);// вызываем метод по перебору всего что в Variables
             
         }
-        System.out.println();
+        // а вот тут надо посчитать сколько переменных
+        expr = xpath.compile("Program/Variables/Variable");
+        nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+        System.out.println(nodes.getLength()); // сколько Variable 
+        
     }
     // еще один метод но добавление Struct
     static void xpatchDataTypes(Document document) throws DOMException, XPathExpressionException {
@@ -144,7 +148,6 @@ public class XMLDomRW {
         NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
-            System.out.print("Tewst");
             createStruct(document, n); //Создаем элементы в ноде которую передали
             //stepThroughAll(n);// вызываем метод по перебору всего что в DataTypes
             
