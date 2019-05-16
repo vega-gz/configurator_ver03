@@ -48,7 +48,7 @@ public class XMLDomRW {
             
             xpatchfind(document);
             xpatchDataTypes(document);        
-            writeDocument(document);
+            writeDocument(document); // это запись в сам файл
             //viewAllXML(document);
             
         } catch (ParserConfigurationException ex) {
@@ -126,11 +126,10 @@ public class XMLDomRW {
         XPath xpath = pathFactory.newXPath();
         XPathExpression expr = xpath.compile("Program/Variables");
         NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-        for (int i = 0; i < nodes.getLength(); i++) { // Переборка не нужна по сути
+        for (int i = 0; i < nodes.getLength(); i++) { // Переборка не нужна по сути она у нас одна по похер
             Node n = nodes.item(i);
             createBook(document, n); //Создаем элементы в ноде которую передали
-            //stepThroughAll(n);// вызываем метод по перебору всего что в Variables
-            
+            //stepThroughAll(n);// вызываем метод по перебору всего что в Variables   
         }
         // а вот тут надо посчитать сколько переменных
         expr = xpath.compile("Program/Variables/Variable");
