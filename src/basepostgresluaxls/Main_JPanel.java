@@ -6,15 +6,21 @@
 
 package basepostgresluaxls;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  *
@@ -53,12 +59,13 @@ public class Main_JPanel extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setAutoscrolls(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton1.setText("out_dataDB");
-        jButton1.setToolTipText("Выгрузка данных из базы");
+        jButton1.setToolTipText("Выгрузка данных из базы для файла LUA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -110,10 +117,17 @@ public class Main_JPanel extends javax.swing.JPanel {
         });
 
         jButton7.setText("Global_Var_in XML_file");
-        jButton7.setToolTipText("вносим данные в Algorithm файла ControlProgram.int и ControlProgram.iec_st \\n доступоно после создание кнопки Create_type_AI");
+        jButton7.setToolTipText("(не реализованно)вносим данные в Algorithm файла ControlProgram.int и ControlProgram.iec_st \\n доступоно после создание кнопки Create_type_AI");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(getComboBoxModel());
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -128,22 +142,23 @@ public class Main_JPanel extends javax.swing.JPanel {
                         .addComponent(jTextField2)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(188, 188, 188)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(48, 48, 48))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(188, 188, 188)
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton6))
                             .addComponent(jButton3)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 591, Short.MAX_VALUE))))
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +173,8 @@ public class Main_JPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
-                    .addComponent(jButton7))
+                    .addComponent(jButton7)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -256,9 +272,14 @@ public class Main_JPanel extends javax.swing.JPanel {
         listDropT = workbase.getviewTable(db);
         Iterator<String> iter_list_table = listDropT.iterator();
         String listTable = "";
+       
         while (iter_list_table.hasNext()) {
+         
          listTable += iter_list_table.next() + " \n";
         }
+         
+         
+               
         jTextField2.setText( listTable);
         
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -293,8 +314,56 @@ public class Main_JPanel extends javax.swing.JPanel {
             System.out.println(e);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        jTextField2.setText((String)jComboBox1.getSelectedItem());// выводим что выбрали
+        ArrayList<String[]> dataFromDb = new ArrayList<>();
+        String[] columns = {"uuid_plc","colum_18"};
+        workbase.connectionToBase();
+        workbase.selectData((String)jComboBox1.getSelectedItem(), columns); //внесли данные в сущность 
+        dataFromDb = workbase.getcurrentSelectTable();
+        //javax.swing.JOptionPane.showMessageDialog(null,"Выборка по базе " + columns + " загружены"); //диалоговое окно
+        
+        // тут при выборе открываем новое Диалоговое окно с таблицой выборки
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
+        int sizeWidth = 800;
+        int sizeHeight = 600;
+        int locationX = (screenSize.width - sizeWidth) / 2;
+        int locationY = (screenSize.height - sizeHeight) / 2;
+        FrameTable frameTable = new FrameTable();
+        JFrame frame = new JFrame();
+        frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+        frame.setContentPane(frameTable); // Передаем нашу форму
+        frame.setVisible(true);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
     
 
+private ComboBoxModel getComboBoxModel()  // функция для создания списка из таблиц базы
+{ 
+        String db = "test08_DB";
+        workbase.connectionToBase();
+        listDropT = workbase.getviewTable(db);
+        Iterator<String> iter_list_table = listDropT.iterator();
+        
+         String listTable = "";
+       int l =0;
+        while (iter_list_table.hasNext()) {
+         iter_list_table.next();
+         //System.out.print(l);
+         ++l;
+        }
+        String[] listarrayTable = new String[l];
+        l=0;
+        
+        iter_list_table = listDropT.iterator();
+        while (iter_list_table.hasNext()) {
+         String res =iter_list_table.next();
+         listarrayTable[l] = res;
+         ++l;
+        }
+        return new DefaultComboBoxModel(listarrayTable); 
+} 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -303,6 +372,7 @@ public class Main_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

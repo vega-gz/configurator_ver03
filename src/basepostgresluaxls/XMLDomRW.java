@@ -49,7 +49,7 @@ public class XMLDomRW {
             xpatchfind(document);
             xpatchDataTypes(document);        
             writeDocument(document); // это запись в сам файл
-            //viewAllXML(document);
+            //viewAllXML(document);  // просмотр всех записей
             
         } catch (ParserConfigurationException ex) {
             ex.printStackTrace(System.out);
@@ -80,7 +80,8 @@ public class XMLDomRW {
             +" = "+attr.getNodeValue());
       }
     }
-    for (Node child = start.getFirstChild();
+    
+        for (Node child = start.getFirstChild();
         child != null;
         child = child.getNextSibling())
     {
@@ -122,21 +123,26 @@ public class XMLDomRW {
     static void xpatchfind(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать Variables");
         
+        
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();
-        XPathExpression expr = xpath.compile("Program/Variables");
+        // а вот тут надо посчитать сколько переменных
+        XPathExpression expr = xpath.compile("Program/Variables/Variable");
         NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+        int sumVar = nodes.getLength(); // сколько Variable         
+        System.out.println(sumVar);
+        
+        expr = xpath.compile("Program/Variables");
+        nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
         for (int i = 0; i < nodes.getLength(); i++) { // Переборка не нужна по сути она у нас одна по похер
             Node n = nodes.item(i);
-            createBook(document, n); //Создаем элементы в ноде которую передали
+            createBook(document, n, sumVar); //Создаем элементы в ноде которую передали
             //stepThroughAll(n);// вызываем метод по перебору всего что в Variables   
         }
-        // а вот тут надо посчитать сколько переменных
-        expr = xpath.compile("Program/Variables/Variable");
-        nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-        System.out.println(nodes.getLength()); // сколько Variable 
+       
         
     }
+    
     // еще один метод но добавление Struct
     static void xpatchDataTypes(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать DataTypes");
@@ -153,10 +159,11 @@ public class XMLDomRW {
         }
         System.out.println();
     }
-     static void createBook(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
+     static void createBook(Document document, Node p_node, int sumVar)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
         // Получаем корневой элемент
         //Node root = document.getDocumentElement();
          Node root = p_node; // это что бы не переписывать
+         String addsumVar = Integer.toString(sumVar+1); // строка номер следующей Variable
  
     /*
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -170,7 +177,7 @@ public class XMLDomRW {
                 
         Element Variable = document.createElement("Variable");
         Variable.setAttribute("UUID", "81EA86514D465A09124C7DA6B2EB7144");
-        Variable.setAttribute("Name", "variable");
+        Variable.setAttribute("Name", "variable"+addsumVar);
         Variable.setAttribute("Type", "T_ListDIfromHMI");
         Variable.setAttribute("TypeUUID", "8E8ACBAA4EC043601AF08A8611B98322");
         Variable.setAttribute("Usage", "internal");

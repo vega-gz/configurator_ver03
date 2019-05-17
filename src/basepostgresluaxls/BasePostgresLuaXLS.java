@@ -24,6 +24,8 @@ public class BasePostgresLuaXLS {
     
         Statement stmt;
        Connection connection = null;
+       private ArrayList<String[]>  currentSelectTable;
+       private String[] columns;
 
     /**
      * @param args the command line arguments
@@ -284,7 +286,7 @@ public class BasePostgresLuaXLS {
 		return;	
         }
          }
-                       //--------------- SELECT DATA --------------
+          //--------------- SELECT DATA --------------
           ArrayList<String[]> selectData(String table){
              ArrayList<String[]> selectData = new ArrayList<>();
              try {        
@@ -323,6 +325,42 @@ public class BasePostgresLuaXLS {
              return selectData;
           }
           
+          //--------------- SELECT DATA sum columns --------------
+          void selectData(String table, String[] columns){
+             //this.columns = columns;
+             ArrayList<String[]> selectData = new ArrayList<>();
+             String s_columns = "";
+             String[] strfromtb = new String[columns.length]; // массив под данные
+             for(int i=0; i<columns.length; ++i){ //формирование строки запроса
+                 if (i < columns.length-1){
+                s_columns +=columns[i]+", "; }
+                 else s_columns +=columns[i];
+             }
+             try {        
+        stmt = connection.createStatement();
+        
+       // System.out.println("SELECT " +s_columns+ " FROM " + table +";" );
+        
+        ResultSet rs = stmt.executeQuery( "SELECT " +s_columns+ " FROM " + table +";" );
+        
+        while ( rs.next() ) {
+            for (int i=0; i<columns.length; ++i){
+            strfromtb[i] = rs.getString(columns[i]);
+                    }
+            currentSelectTable.add(strfromtb);
+            //System.out.println(strfromtb[0]); // это просто для тестов
+        }
+        rs.close();
+        stmt.close();
+        //connection.commit();
+        //System.out.println("-- Operation SELECT done successfully");
+             }
+              catch (SQLException e) {
+		System.out.println("Failed ADD data");
+		e.printStackTrace();                	
+        }
+             //return currentSelectTable;
+          }
                                  //--------------- SELECT DATA to CreateTGPAAI--------------
           ArrayList<String[]> selectDataGPAAI(String table){
              ArrayList<String[]> selectData = new ArrayList<>();
@@ -407,4 +445,12 @@ public class BasePostgresLuaXLS {
         Main startProgramm = new Main();
 
   }
+    
+    String[] getColumns(){
+    return columns;
+    }
+    
+    ArrayList<String[]> getcurrentSelectTable(){
+    return currentSelectTable;
+    }
 }
