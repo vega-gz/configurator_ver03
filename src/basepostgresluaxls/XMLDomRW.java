@@ -9,6 +9,9 @@ package basepostgresluaxls;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -36,19 +39,38 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
  
 public class XMLDomRW {
- 
-    public static void main(String[] args) throws DOMException, XPathExpressionException {
-        try {
-            // Создается построитель документа
+String nameStruct = "";
+String newUUIDelem = "";
+String typeStruct = "";
+Struct structData;
+static Document document;
+
+    public XMLDomRW()throws ParserConfigurationException, SAXException, IOException{
+     // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             // Создается дерево DOM документа из файла
-            Document document = documentBuilder.parse("src\\WorkXML\\test.xml");
- 
-          
-            
-            xpatchfind(document);
-            xpatchDataTypes(document);        
-            writeDocument(document); // это запись в сам файл
+            document = documentBuilder.parse("src\\WorkXML\\test.xml");}
+
+    public XMLDomRW(Struct struct) throws ParserConfigurationException, SAXException, IOException{
+        this.structData = struct;
+        this.newUUIDelem = structData.getUUD();
+        this.nameStruct = structData.getName();
+        this.typeStruct = structData.getType();
+         // Создается построитель документа
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            // Создается дерево DOM документа из файла
+            document = documentBuilder.parse("src\\WorkXML\\test.xml");
+    }
+    
+
+    public static void main(String[] args) throws DOMException, XPathExpressionException {
+        try {
+           
+            // Тут весь вызов без параметров
+            XMLDomRW realise = new XMLDomRW();
+            realise.xpatchfind(document); // Variables данные добавления
+            realise.xpatchDataTypes(document);        
+            realise.writeDocument(document); // это запись в сам файл
             //viewAllXML(document);  // просмотр всех записей
             
         } catch (ParserConfigurationException ex) {
@@ -66,7 +88,7 @@ public class XMLDomRW {
     }
   
     //переборка всего что есть в ноде
-  private static void stepThroughAll (Node start)
+  private  void stepThroughAll (Node start)
   {
     System.out.println(start.getNodeName()+" = "+start.getNodeValue());
     if (start.getNodeType() == start.ELEMENT_NODE)
@@ -89,7 +111,7 @@ public class XMLDomRW {
     }
   }
     
-    static void viewAllXML (Document document){
+     void viewAllXML (Document document){
       // Получаем корневой элемент
             Node root = document.getDocumentElement();
             
@@ -120,7 +142,8 @@ public class XMLDomRW {
             }
     }
     
-    static void xpatchfind(Document document) throws DOMException, XPathExpressionException {
+    // Метод добавления Variable
+     void xpatchfind(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать Variables");
         
         
@@ -144,7 +167,7 @@ public class XMLDomRW {
     }
     
     // еще один метод но добавление Struct
-    static void xpatchDataTypes(Document document) throws DOMException, XPathExpressionException {
+     void xpatchDataTypes(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать DataTypes");
         
         XPathFactory pathFactory = XPathFactory.newInstance();
@@ -159,7 +182,7 @@ public class XMLDomRW {
         }
         System.out.println();
     }
-     static void createBook(Document document, Node p_node, int sumVar)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
+      void createBook(Document document, Node p_node, int sumVar)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
         // Получаем корневой элемент
         //Node root = document.getDocumentElement();
          Node root = p_node; // это что бы не переписывать
@@ -176,10 +199,10 @@ public class XMLDomRW {
         XPathExpression expr = xpath.compile("Variables");
                 
         Element Variable = document.createElement("Variable");
-        Variable.setAttribute("UUID", "81EA86514D465A09124C7DA6B2EB7144");
+        Variable.setAttribute("UUID", UUID.getUIID()); // рандомный уид так по логике сонаты
         Variable.setAttribute("Name", "variable"+addsumVar);
-        Variable.setAttribute("Type", "T_ListDIfromHMI");
-        Variable.setAttribute("TypeUUID", "8E8ACBAA4EC043601AF08A8611B98322");
+        Variable.setAttribute("Type", nameStruct );
+        Variable.setAttribute("TypeUUID", newUUIDelem);
         Variable.setAttribute("Usage", "internal");
         
         // Добавляем книгу в корневой элемент который передали в фукцию
@@ -188,30 +211,49 @@ public class XMLDomRW {
         //expr.
         
     }
-          static void createStruct(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
+           void createStruct(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
 
          Node root = p_node; // это что бы не переписывать
 
         Element Struct = document.createElement("Struct");
-        Struct.setAttribute("UUID", "81EA86514D465A09124C7DA6B2EB7144");
-        Struct.setAttribute("Name", "variable");
+        Struct.setAttribute("UUID", newUUIDelem);
+        Struct.setAttribute("Name", nameStruct);
 
-        Element Field = document.createElement("Field");
-        Field.setAttribute("UUID", "81EA86514D465A09124C7DA6B2EB7144");
-        Field.setAttribute("Name", "variable");
-        Field.setAttribute("Comment", "commentariy !");
-        Field.setAttribute("Type", "AI_PLC");
-        Field.setAttribute("TypeUUID", "8E8ACBAA4EC043601AF08A8611B98322");
+        // перебираем все элементы в добавление поля
+        Iterator<Map> iter_arg = structData.getlistData().iterator();
+        while (iter_arg.hasNext()) {  //перебираем наш лист с Мапом
+          Map<String, String> hashMap = iter_arg.next(); // Новый мап с нашими данными
+          
+          Element Field = document.createElement("Field");
+          for(Map.Entry<String, String> item : hashMap.entrySet()){        
+            System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue());
+           switch (item.getKey()){ 
+           case "Name" : Field.setAttribute("Name", item.getValue());
+           case "Type": Field.setAttribute("Type", typeStruct); // вот тут вопрос на каждый элемент он ли будет всегда
+           case "UUID": Field.setAttribute("UUID", item.getValue());
+           case "Comment":Field.setAttribute("Comment", item.getValue());
+           case "TypeUUID":Field.setAttribute("TypeUUID", item.getValue()); // вот это как то надо тоже достать УИД начального файла
+           default: break;
+           }
+        
+        
+        
+        
+        
         
         //добавляем вложения в структуру
-        Struct.appendChild(Field); 
+        Struct.appendChild(Field);
+          }
+        }
+          
+ 
         // Добавляем книгу в корневой элемент который передали в фукцию
         root.appendChild(Struct); 
         
         
     }
      
-        static void addSignalAlgorithm(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
+         void addSignalAlgorithm(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
 
          Node root = p_node; // это что бы не переписывать
 
@@ -227,7 +269,7 @@ public class XMLDomRW {
         
     }
             
-     private static void writeDocument(Document document) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
+     private  void writeDocument(Document document) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
             //тут в одну строку работает тоже
             /*
