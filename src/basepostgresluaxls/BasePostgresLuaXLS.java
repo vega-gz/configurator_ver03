@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class BasePostgresLuaXLS {
@@ -115,8 +116,8 @@ public class BasePostgresLuaXLS {
                     nc_stringing += " ," + "colum_" + Integer.toString(i) +  "      TEXT    NOT NULL";
                 }
                 nc_stringing += ")";
-             break;
             }
+            break; //до этого до скобки
              default:
          if (!listNameColum.isEmpty()){
              int tmp_cell = 0;
@@ -232,9 +233,9 @@ public class BasePostgresLuaXLS {
             }
             sql += ");";
             
-                break;
+                
             }
-            
+            break;
             default: 
             {
            sql = "INSERT INTO " +name_table+ " (ID"; 
@@ -327,7 +328,7 @@ public class BasePostgresLuaXLS {
           
           //--------------- SELECT DATA sum columns --------------
           void selectData(String table, String[] columns){
-             //this.columns = columns;
+             StructSelectData.setColumns(columns);
              ArrayList<String[]> selectData = new ArrayList<>();
              String s_columns = "";
              String[] strfromtb = new String[columns.length]; // массив под данные
@@ -347,11 +348,14 @@ public class BasePostgresLuaXLS {
             for (int i=0; i<columns.length; ++i){
             strfromtb[i] = rs.getString(columns[i]);
                     }
-            currentSelectTable.add(strfromtb);
+            String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
+
+            selectData.add(tmp1);
             //System.out.println(strfromtb[0]); // это просто для тестов
         }
         rs.close();
         stmt.close();
+        StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру
         //connection.commit();
         //System.out.println("-- Operation SELECT done successfully");
              }
@@ -442,7 +446,7 @@ public class BasePostgresLuaXLS {
         return list_table_base;
            }
     public static void main(String[] args) {
-        Main startProgramm = new Main();
+//        Main startProgramm = new Main();
 
   }
     
