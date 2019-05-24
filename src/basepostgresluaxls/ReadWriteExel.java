@@ -221,7 +221,7 @@ public class ReadWriteExel {
             switch (cellType){
                     case STRING :{
                         if (cell.getStringCellValue().contains("'")){
-                            System.out.print("Find ' ->  " + cell.getStringCellValue());
+                            //System.out.print("Find ' ->  " + cell.getStringCellValue());
                             array_cell_len[tmp] = cell.getStringCellValue().replaceAll("'", "");
                         }
                         array_cell_len[tmp]= cell.getStringCellValue();  // // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
@@ -274,7 +274,7 @@ public class ReadWriteExel {
                 
                 boolean empty = true;
              // if(tmp_array_cell_len.length != 0){    //массив может быть пустой
-                for (int i=startm; i<tmp_array_cell_len.length; i++) {
+                /*for (int i=startm; i<tmp_array_cell_len.length; i++) {
                  //if (!tmp_array_cell_len[i].equals("NULL") |  tmp_array_cell_len[i] != null) {
                  if (tmp_array_cell_len[i] == null || tmp_array_cell_len[i].equals("NULL") || tmp_array_cell_len[i].equals("")) { 
                  empty = true;  
@@ -285,7 +285,8 @@ public class ReadWriteExel {
                        empty = false;
                        break;
                  }
-                     }
+                     } */
+                
               //}
                  if (!empty){array_cell.add(tmp_array_cell_len);} // не пусто тогда заносим.
                 
