@@ -28,6 +28,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellAddress;
 
 public class ReadWriteExel {
     private String patch_file = "C:/Users/Nazarov/Desktop/Info_script_file_work/"
@@ -68,6 +69,7 @@ public class ReadWriteExel {
             String name_sheet = iter_list_sheet.next();
              System.out.println(name_sheet);
         Sheet sheet = wb.getSheet(name_sheet);
+              
         //Sheet sheet = wb.getSheetAt(0);
         Iterator<Row> it = sheet.iterator(); // итератор Строк
         int len_row = 0;
@@ -82,6 +84,7 @@ public class ReadWriteExel {
             Iterator<Cell> cells = row.iterator(); // итератор Ячеек
             while (cells.hasNext()) {
                 Cell cell = cells.next();
+                  
                 CellType cellType = cell.getCellType();
                 
                 switch (cellType){
@@ -164,6 +167,7 @@ public class ReadWriteExel {
      FileInputStream inputStream = new FileInputStream(new File(patch_file));
      HSSFWorkbook wb = new HSSFWorkbook(inputStream);
      Sheet sheet = wb.getSheet(name_sheet);
+     
       
         int first_len =0;
         int tmpFirstLenght =0;
@@ -198,6 +202,7 @@ public class ReadWriteExel {
             }
             //++sum_sheet;
             Row row = it.next();
+           // System.out.println(row.getFirstCellNum() + " " + row.getLastCellNum()); //в строку что бы посмотреть что за нах
             int tmp =0;
             //заносим Кол UUID
             int tmp_UUID =0;
@@ -212,11 +217,22 @@ public class ReadWriteExel {
             
             // System.out.println(array_cell_len[tmp]);
            // tmp++;
+            //System.out.println(row.getLastCellNum());
+            System.out.println(row.getCell(16));
             
-            Iterator<Cell> cells = row.iterator(); // итератор Ячеек
-            //boolean void_cell = cells.hasNext();
+            Iterator<Cell> cells = row.cellIterator(); // итератор Ячеек вот не работает должным образом пропускает ячейки
+            //boolean void_cell = cells.hasNext(); 
             while (cells.hasNext()) {
                 Cell cell = cells.next();
+                
+                //System.out.println(cell.getAddress());
+               /* CellAddress cellReference = new CellAddress("Q110");
+                if (cell.getAddress().equals(cellReference)){
+                    System.out.println(cell.getAddress());
+                    System.out.println(cell.getCellType());
+                }*/
+                //System.out.println(cell.getAddress()); // Для проверки сдвига
+                
                 CellType cellType = cell.getCellType();                
             switch (cellType){
                     case STRING :{
@@ -250,6 +266,7 @@ public class ReadWriteExel {
                 
                 tmp++;
             }
+            
              for (int i=0; i < array_cell_len.length; i++ )
             {
            // System.out.print(array_cell_len[i] + " " );
@@ -273,8 +290,8 @@ public class ReadWriteExel {
                 // Проверяем пустой ли массив который мы заносим, так как Exel думает что есть данные
                 
                 boolean empty = true;
-             // if(tmp_array_cell_len.length != 0){    //массив может быть пустой
-                /*for (int i=startm; i<tmp_array_cell_len.length; i++) {
+              if(tmp_array_cell_len.length != 0){    //массив может быть пустой
+                for (int i=startm; i<tmp_array_cell_len.length; i++) {
                  //if (!tmp_array_cell_len[i].equals("NULL") |  tmp_array_cell_len[i] != null) {
                  if (tmp_array_cell_len[i] == null || tmp_array_cell_len[i].equals("NULL") || tmp_array_cell_len[i].equals("")) { 
                  empty = true;  
@@ -285,11 +302,10 @@ public class ReadWriteExel {
                        empty = false;
                        break;
                  }
-                     } */
-                
-              //}
+                     }   
+              }
                  if (!empty){array_cell.add(tmp_array_cell_len);} // не пусто тогда заносим.
-                
+                 //array_cell.add(tmp_array_cell_len);
                 not_null_dat = 0;
             }
            //обнуляем массив для проверки выше если строки программа видит но они пустые.
