@@ -234,10 +234,10 @@ public class ReadWriteExel {
                     //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
                         case FORMULA : 
                                        // System.out.println("Formula");
-                        switch(cell.getCachedFormulaResultType()) {
-                         case NUMERIC:
+                         switch(cell.getCachedFormulaResultType()) {
+                          case NUMERIC:
                           array_cell_len[tmp]=(Double.toString(cell.getNumericCellValue()));
-                         break;
+                          break;
                          case STRING:
                             array_cell_len[tmp]=cell.getRichStringCellValue().toString();
                             array_cell_len[tmp]=array_cell_len[tmp].replaceAll("'", ""); // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
@@ -245,7 +245,7 @@ public class ReadWriteExel {
                          break;
                      }
                         break;
-                    default:  array_cell_len[tmp]= "|";
+                    default:  array_cell_len[tmp]= "|"; break;
                 }
                 
                 tmp++;
@@ -278,10 +278,10 @@ public class ReadWriteExel {
                  //if (!tmp_array_cell_len[i].equals("NULL") |  tmp_array_cell_len[i] != null) {
                  if (tmp_array_cell_len[i] == null || tmp_array_cell_len[i].equals("NULL") || tmp_array_cell_len[i].equals("")) { 
                  empty = true;  
-                 System.out.println("This find => " + tmp_array_cell_len[i]);
+                 //System.out.println("This find => " + tmp_array_cell_len[i]);
                  } 
                  else{
-                     System.out.println("This Else => " + tmp_array_cell_len[i]);
+                    // System.out.println("This Else => " + tmp_array_cell_len[i]);
                        empty = false;
                        break;
                  }
@@ -312,7 +312,11 @@ public class ReadWriteExel {
      Sheet sheet = wb.getSheet(name_sheet);
               
      switch (name_sheet){
-                    case "AI1" : {
+            case "AI1": 
+           // case "AO1":
+           // case "DO1" :
+            //case "DI1" : 
+            {
                     //Надо делать вот такие таблицы
                         for ( int i=0; i < MASSCELLID.length; i++) {
                         
@@ -351,10 +355,7 @@ public class ReadWriteExel {
             break;
             default:  ; //System.out.println("No name Sheet");
                                 
-     }
-
-            
-              
+     }          
    return array_cell;
 }
 }
