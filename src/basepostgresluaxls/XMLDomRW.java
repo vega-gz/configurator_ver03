@@ -49,7 +49,9 @@ static Document document;
      // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             // Создается дерево DOM документа из файла
-            document = documentBuilder.parse("src\\WorkXML\\test.xml");}
+           // document = documentBuilder.parse("src\\WorkXML\\test.xml");}
+            document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");}
+            
 
     public XMLDomRW(Struct struct) throws ParserConfigurationException, SAXException, IOException{
         this.structData = struct;
@@ -59,9 +61,11 @@ static Document document;
          // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             // Создается дерево DOM документа из файла
-            document = documentBuilder.parse("src\\WorkXML\\test.xml");
+           document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");
     }
     
+    Document getDocument(){
+    return document;}
 
     public static void main(String[] args) throws DOMException, XPathExpressionException {
         try {
@@ -143,7 +147,7 @@ static Document document;
     }
     
     // Метод добавления Variable
-     void xpatchfind(Document document) throws DOMException, XPathExpressionException {
+    void xpatchfind(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать Variables");
         
         
@@ -226,31 +230,21 @@ static Document document;
           
           Element Field = document.createElement("Field");
           for(Map.Entry<String, String> item : hashMap.entrySet()){        
-            System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue());
+           //System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue());
            switch (item.getKey()){ 
-           case "Name" : Field.setAttribute("Name", item.getValue());
-           case "Type": Field.setAttribute("Type", typeStruct); // вот тут вопрос на каждый элемент он ли будет всегда
-           case "UUID": Field.setAttribute("UUID", item.getValue());
-           case "Comment":Field.setAttribute("Comment", item.getValue());
-           case "TypeUUID":Field.setAttribute("TypeUUID", item.getValue()); // вот это как то надо тоже достать УИД начального файла
+           case "Name" : Field.setAttribute("Name", item.getValue());break;
+           case "Type": Field.setAttribute("Type", typeStruct); break;// вот тут вопрос на каждый элемент он ли будет всегда
+           case "UUID": Field.setAttribute("UUID", item.getValue());break;
+           case "Comment":Field.setAttribute("Comment", item.getValue());break;
+           case "TypeUUID":Field.setAttribute("TypeUUID", item.getValue());break; // вот это как то надо тоже достать УИД начального файла
            default: break;
            }
-        
-        
-        
-        
-        
-        
         //добавляем вложения в структуру
         Struct.appendChild(Field);
           }
         }
-          
- 
         // Добавляем книгу в корневой элемент который передали в фукцию
         root.appendChild(Struct); 
-        
-        
     }
      
          void addSignalAlgorithm(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
@@ -269,7 +263,7 @@ static Document document;
         
     }
             
-     private  void writeDocument(Document document) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
+     void writeDocument(Document document) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
             //тут в одну строку работает тоже
             /*
