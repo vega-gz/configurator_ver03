@@ -28,10 +28,10 @@ public class Main{
         Main(){ // Для работы с окнами
             
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
-              int sizeWidth = 800;
-              int sizeHeight = 600;
-              int locationX = (screenSize.width - sizeWidth) / 2;
-              int locationY = (screenSize.height - sizeHeight) / 2;
+            int sizeWidth = 800;
+            int sizeHeight = 600;
+            int locationX = (screenSize.width - sizeWidth) / 2;
+            int locationY = (screenSize.height - sizeHeight) / 2;
             Main_JPanel Windo_main = new Main_JPanel();
             JFrame frame = new JFrame();
             frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
@@ -43,7 +43,7 @@ public class Main{
 
         public static void main(String[] args) throws IOException {
        
-            Main start = new Main();
+            new Main();
             /*
             BasePostgresLuaXLS workbase = new BasePostgresLuaXLS();
             ReadWriteExel rwexel = new ReadWriteExel();
@@ -174,6 +174,7 @@ while (iter_sheet.hasNext()) {
      } 
 }
            }
+        
 }
        
 

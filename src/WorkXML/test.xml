@@ -4,8 +4,7 @@
         <Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB71D0" Usage="internal"/>
         <Variable Name="variable0" Type="T_DIinPLC" TypeUUID="FAEF87934C31C085BD921C8902C7643E" UUID="E93C0EB943E5C4344B8EDCB0C1669C83" Usage="internal"/>
         <Variable Name="variable1" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="37F3B7E140CC341155AF12BB789C18D7" Usage="internal"/>
-<Variable Name="variable" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
-<Variable Name="variable5" Type="T_ListDIfromHMI" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144" Usage="internal"/>
+    <Variable Name="variable4" Type="T_GPA_AI_HMI" TypeUUID="5f5cc996ff4448d29a3b3ed0e5c3bd14" UUID="8e88d65ada6f480ba7220b91fb67201c" Usage="internal"/>
 </Variables>
     <ST/>
     <DataTypes>
@@ -156,41 +155,149 @@
             <Field Name="var" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="2371A8C24F34B39825463D936D24570C"/>
             <Field Name="var_1" Type="T_DIfromHMI" TypeUUID="C0C2BA6C40333970EE537898551B2DCC" UUID="868BE0C24CCBD1FA32C4BE914B0EFEE4"/>
         </Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
-</Struct>
-<Struct Name="variable" UUID="81EA86514D465A09124C7DA6B2EB7144">
-<Field Comment="commentariy !" Name="variable" Type="AI_PLC" TypeUUID="8E8ACBAA4EC043601AF08A8611B98322" UUID="81EA86514D465A09124C7DA6B2EB7144"/>
+    <Struct Name="T_GPA_AI_HMI" UUID="5f5cc996ff4448d29a3b3ed0e5c3bd14">
+<Field Comment="Перепад давления на конфузоре нагнетателя (PDT101)" Name="dP_konfN" Type="AI_HMI" TypeUUID="AI_HMI" UUID="c3b9b9b1f34b45f38f483bfeb8ed561f"/>
+<Field Comment="Резерв " Name="Reserv1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="38f1d80cfb6c4b319c91e8700d73da72"/>
+<Field Comment="Давление топливного газа перед диафрагмой (РТ1.140)" Name="Ptg_in_diafr" Type="AI_HMI" TypeUUID="AI_HMI" UUID="7bae273de20f42cb93f027031f69438b"/>
+<Field Comment="Перепад давлений топливного газа на диафрагме (DР=0…63 кПа) (FТ1.140)" Name="dPtg_diafr" Type="AI_HMI" TypeUUID="AI_HMI" UUID="52daf5c63e914b7e896262c5ba18e8b9"/>
+<Field Comment="Давление газа на входе нагнетателя (PT101)" Name="Pg_in_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="f1ed803f2afe4fc29b11f7f1e2d34a34"/>
+<Field Comment="Давление газа на выходе нагнетателя (PT102)" Name="Pg_out_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="e522f920e34840b4aca52bab7a7d042b"/>
+<Field Comment="Перепад давления между буферной и балансировочной линиями (PDT1114)" Name="dP_buf_bal" Type="AI_HMI" TypeUUID="AI_HMI" UUID="e16ecedc2b424d129a230f5fb246f0e0"/>
+<Field Comment="Температура воды на выходе УТО (ТТ410)" Name="Tv_out_UTO" Type="AI_HMI" TypeUUID="AI_HMI" UUID="6b8b4d526fe94256bdc25f78f0b16baa"/>
+<Field Comment="Давление атмосферного воздуха " Name="Pv_atm" Type="AI_HMI" TypeUUID="AI_HMI" UUID="fc5fb4327fa24c2cae3093d512dd425d"/>
+<Field Comment="Давление воздуха вентиляции (96АТ-1)" Name="Pv_vent" Type="AI_HMI" TypeUUID="AI_HMI" UUID="1c525eea811d4ea2b553e93755c9f0f3"/>
+<Field Comment="Давление воздуха на входе осевого компрессора (96CS-1)" Name="Pv_in_OK" Type="AI_HMI" TypeUUID="AI_HMI" UUID="1440c3e713ec4286b821c48ca13c7660"/>
+<Field Comment="Резерв" Name="Reserv_Tv_atm" Type="AI_HMI" TypeUUID="AI_HMI" UUID="eba313f4f64f41ef89013850b5588899"/>
+<Field Comment="Резерв" Name="Reserv_Vlaga_atm" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a64f5e4f121e4c25b4dfaf9fcdda0680"/>
+<Field Comment="Давление воздуха на выходе из осевого компрессора (96CD-1)" Name="Pv_out_OK" Type="AI_HMI" TypeUUID="AI_HMI" UUID="450e374d28f84ed2977e4fcd2b29ad67"/>
+<Field Comment="Давление топливного газа в межклапаннном пространстве (96FG-2А)" Name="Ptg_in_kl1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="0ff89f06f53a4631aeefbb675a7ef861"/>
+<Field Comment="Давление топливного газа в межклапаннном пространстве (96FG-2В)" Name="Ptg_in_kl2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="3aeb4e8251824da182b0af29ab42a78c"/>
+<Field Comment="Давление топливного газа в межклапаннном пространстве (96FG-2С)" Name="Ptg_in_kl3" Type="AI_HMI" TypeUUID="AI_HMI" UUID="1f37967443cb4dbf80776eadd2f19ae5"/>
+<Field Comment="Резерв " Name="Reserv2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="1f7a11b93eee42f0b5c091b32cea4538"/>
+<Field Comment="Вибрация 1-го подшипника турбины, канал 1 (39V-1A)" Name="V_1p_D_ch1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="d5023aea0a7a4b40a5eac766845aa1bf"/>
+<Field Comment="Вибрация 1-го подшипника турбины, канал 2 (39V-1В)" Name="V_1p_D_ch2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="5e779298a40c4e39ace5874eba13a9bd"/>
+<Field Comment="Вибрация 4-го подшипника турбины, канал 1 (39V-2A)" Name="V_4p_D_ch1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="26cc06f5d9994112999b609f1d2592ad"/>
+<Field Comment="Вибрация 4-го подшипника турбины, канал 2 (39V-2В)" Name="V_4p_D_ch2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="c275e844bde2449a9348c7dacc0436af"/>
+<Field Comment="Вибрация 1-го подшипника нагнетателя (ХЕ1309Х)" Name="V_1p_N1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="deb6a84fb5e34b4594c9c75c83e8e0fd"/>
+<Field Comment="Вибрация 1-го подшипника нагнетателя (ХЕ1309Y)" Name="V_1p_N2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="fa0e2973654845f39ceb4cb9602c89a4"/>
+<Field Comment="Вибрация 2-го подшипника нагнетателя (ХЕ1310Х)" Name="V_2p_N1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="101febb747344e21adb22ce2d39722cc"/>
+<Field Comment="Вибрация 2-го подшипника нагнетателя (ХЕ1310Y)" Name="V_2p_N2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="721bcb923c624f19bd658475626ff4ad"/>
+<Field Comment="Осевой сдвиг ротора нагнетателя (ZE1304A)" Name="OS_N1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="85a898235eda49f081a4cbe4a0829305"/>
+<Field Comment="Осевой сдвиг ротора нагнетателя (ZE1304В)" Name="OS_N2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="cba874d9e4ea4e9b95c1e74520e52319"/>
+<Field Comment="Степень открытия заслонки УТО (резерв) (96ВВ)" Name="Pos_UTO" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2bc5bb31ac594a7c84de2b0b70ed822c"/>
+<Field Comment="Резерв  " Name="Reserv3" Type="AI_HMI" TypeUUID="AI_HMI" UUID="550d5444b2f544868f3262c8ec582ad6"/>
+<Field Comment="Резерв  " Name="Reserv4" Type="AI_HMI" TypeUUID="AI_HMI" UUID="3d6dbd2bc32a4623a52bd8f96a9b4e58"/>
+<Field Comment="Резерв " Name="Reserv5" Type="AI_HMI" TypeUUID="AI_HMI" UUID="7e4774eb4a4b4f709f6677b51ea4d5a7"/>
+<Field Comment="Давление масла гидравлики (96HQ-1)" Name="Pmg" Type="AI_HMI" TypeUUID="AI_HMI" UUID="7b63a44d90dd4593a629312cb5973379"/>
+<Field Comment="Давление масла в коллекторе смазки турбины  (96QN-1)" Name="Pms" Type="AI_HMI" TypeUUID="AI_HMI" UUID="84876a5c662847e39a82ecf410960916"/>
+<Field Comment="Давление масла предельной защиты  (96HG-1)" Name="Pmz" Type="AI_HMI" TypeUUID="AI_HMI" UUID="23d53536c57543738866999f255bae14"/>
+<Field Comment="Резерв " Name="Reserv9" Type="AI_HMI" TypeUUID="AI_HMI" UUID="0333fd44a4b04bffb83012561391d0ff"/>
+<Field Comment="Резерв " Name="Reserv10" Type="AI_HMI" TypeUUID="AI_HMI" UUID="0fbfaa8967564556b2477053740fee99"/>
+<Field Comment="Резерв " Name="Reserv11" Type="AI_HMI" TypeUUID="AI_HMI" UUID="63a44387f3fa4bcca3e90444ed200021"/>
+<Field Comment="Резерв " Name="Reserv12" Type="AI_HMI" TypeUUID="AI_HMI" UUID="15710dbcf77448e59d956c398ab64756"/>
+<Field Comment="Степень открытия ПНА, канал № 1 (96NC-1)" Name="Pos_PNA_ch1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="ef986722065947f0bd1c8dc0daa174d7"/>
+<Field Comment="Степень открытия ПНА, канал № 2 (96NC-2)" Name="Pos_PNA_ch2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="c53706cd4f7f47d491183773ccae46da"/>
+<Field Comment="Степень открытия ВНА, канал № 1 (96TV-1)" Name="Pos_VNA_ch1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="89be91d4d8d74641ad63ffb3de1fa69d"/>
+<Field Comment="Степень открытия ВНА, канал № 2 (96TV-2)" Name="Pos_VNA_ch2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="ffba2d074eb541bc9d759c1c9641cc49"/>
+<Field Comment="Степень открытия регулирующего клапана топливного газа, канал № 1 (96GC-1)" Name="Pos_Kl_reg_tg_ch1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="da73e546ebee47d2a4933448c6d22ba8"/>
+<Field Comment="Степень открытия регулирующего клапана топливного газа, канал № 2 (96GC-2)" Name="Pos_Kl_reg_tg_ch2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2b40ec086386413b9e8d827df1963406"/>
+<Field Comment="Степень открытия стопорного клапана топливного газа, канал № 1 (96SR-1)" Name="Pos_Kl_stop_tg_ch1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="c43466da07b94d3c899d86127c280beb"/>
+<Field Comment="Степень открытия стопорного клапана топливного газа, канал № 2 (96SR-2)" Name="Pos_Kl_stop_tg_ch2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="e9779cfebdcd4867bbda7d7bced84e0c"/>
+<Field Comment="Резерв " Name="Reserv13" Type="AI_HMI" TypeUUID="AI_HMI" UUID="ebf6192dd3a143ff9f6a4fd5d70da73c"/>
+<Field Comment="Температура 1-го подшипника нагнетателя (ТЕ1345)" Name="T_1p_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="4bc855d4e4ca40babe05152616a43e64"/>
+<Field Comment="Температура № 1 2-го подшипника нагнетателя (ТЕ1346)" Name="T1_2p_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="32353f3c081647eeb01242628ad80ac1"/>
+<Field Comment="Температура № 2 2-го подшипника нагнетателя (ТЕ1347)" Name="T2_2p_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="83ee6d2dbefd4015a22b1ea4df3214d7"/>
+<Field Comment="Температура № 3 2-го подшипника нагнетателя (ТЕ1348)" Name="T3_2p_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="04516992b795492c9f95720bab65805a"/>
+<Field Comment="Температура № 4 2-го подшипника нагнетателя (ТЕ1349)" Name="T4_2p_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="837c3780bb8a4d3db34a9d7e551f1881"/>
+<Field Comment="Температура масла на сливе 1-го подшипника нагнетателя (ТЕ1390)" Name="Tm_sl_1p_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="08f58248be764542957c7316d7149148"/>
+<Field Comment="Температура масла на сливе 2-го подшипника нагнетателя (ТЕ1391)" Name="Tm_sl_2p_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="44cd54f8824a4b2995eb83801e8fab4f"/>
+<Field Comment="Резерв (ТХА) " Name="Reserv14" Type="AI_HMI" TypeUUID="AI_HMI" UUID="04b489bed268446e9136de7b166cd758"/>
+<Field Comment="Температура № 1 перед ТВД (TT-WS1FI-1)" Name="T1_in_TVD" Type="AI_HMI" TypeUUID="AI_HMI" UUID="8c578c7851204e709a338f3a5713420d"/>
+<Field Comment="Температура № 2 перед ТВД (TT-WS1FI-2)" Name="T2_in_TVD" Type="AI_HMI" TypeUUID="AI_HMI" UUID="255456bb143c4900b0cd23a5c0d53d4c"/>
+<Field Comment="Температура № 1 за ТВД (TT-WS1AO-1)" Name="T1_out_TVD" Type="AI_HMI" TypeUUID="AI_HMI" UUID="acf90006e4664b54afdec0d8e2ce6eb7"/>
+<Field Comment="Температура № 2 за ТВД (TT-WS1AO-2)" Name="T2_out_TVD" Type="AI_HMI" TypeUUID="AI_HMI" UUID="f3c42cfee16544c29d9900a36db882e5"/>
+<Field Comment="Температура № 1 перед ТНД (TT-WS2FO-1)" Name="T1_in_TND" Type="AI_HMI" TypeUUID="AI_HMI" UUID="26e23c654785426bbd904684e737da09"/>
+<Field Comment="Температура № 2 перед ТНД (TT-WS2FO-2)" Name="T2_in_TND" Type="AI_HMI" TypeUUID="AI_HMI" UUID="d952c81c71294a748586c2d5e6b91b39"/>
+<Field Comment="Температура № 1 за ТНД (TT-WS2AO-1)" Name="T1_out_TND" Type="AI_HMI" TypeUUID="AI_HMI" UUID="3579e19822b44ca1a5481b91ecaa79d9"/>
+<Field Comment="Температура № 2 за ТНД (TT-WS2AO-2)" Name="T2_out_TND" Type="AI_HMI" TypeUUID="AI_HMI" UUID="b06b8d04236945f29ca25d8132ece7ff"/>
+<Field Comment="Температура № 1 на выхлопе турбины (TT-XD1)" Name="T1_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="e55ee2dc4ac54a05a6ebe1b6d3aa5272"/>
+<Field Comment="Температура № 2 на выхлопе турбины (TT-XD2)" Name="T2_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="8694ade52af54cd98f29d2997aa7adc8"/>
+<Field Comment="Температура № 3 на выхлопе турбины (TT-XD3)" Name="T3_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="07813eec045d4df3b6f10c68eb88715a"/>
+<Field Comment="Температура № 4 на выхлопе турбины (TT-XD4)" Name="T4_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="25dca0ebe36d48b494faea7ac0e587e5"/>
+<Field Comment="Температура № 5 на выхлопе турбины (TT-XD5)" Name="T5_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="ce7a098a9bf747f0ba71f45c4a97af0a"/>
+<Field Comment="Температура № 6 на выхлопе турбины (TT-XD6)" Name="T6_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="85e3e673b33c44298af13e22f7169df6"/>
+<Field Comment="Температура № 7 на выхлопе турбины (TT-XD7)" Name="T7_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="14a1072602364cb49a70078de1c50355"/>
+<Field Comment="Температура № 8 на выхлопе турбины (TT-XD8)" Name="T8_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="48c787006fc44b348b2d9e7fccac8655"/>
+<Field Comment="Резерв " Name="Reserv15" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2712d1a52c6a4be38061e7f0e036176a"/>
+<Field Comment="Температура № 9 на выхлопе турбины (TT-XD9)" Name="T9_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="f3b020f244d74f47b9bc2ebaf71ac108"/>
+<Field Comment="Температура № 10 на выхлопе турбины (TT-XD10)" Name="T10_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="df820757311149a6b305a32861cddd2f"/>
+<Field Comment="Температура № 11 на выхлопе турбины (TT-XD11)" Name="T11_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="7198b997c087433b8a592af83e99bf25"/>
+<Field Comment="Температура № 12 на выхлопе турбины (TT-XD12)" Name="T12_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="ec3ce1ea210144a2852924f5ae82b9e6"/>
+<Field Comment="Температура № 13 на выхлопе турбины (TT-XD13)" Name="T13_out_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="6c531c4f64274d059fa4fa59df74b055"/>
+<Field Comment="Резерв (ТХА) " Name="Reserv16" Type="AI_HMI" TypeUUID="AI_HMI" UUID="fc379b74675741a995e690bceca466b6"/>
+<Field Comment="Резерв (ТХА) " Name="Reserv17" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a385a8472f294d08ac27b8dd90450dd0"/>
+<Field Comment="Температура № 1 воздуха на входе осевого компрессора (CT-IF-1)" Name="Tv1_in_OK" Type="AI_HMI" TypeUUID="AI_HMI" UUID="75ff7ab8017943e9a1030a3631f2db04"/>
+<Field Comment="Температура № 2 воздуха на входе осевого компрессора (CT-IF-2)" Name="Tv2_in_OK" Type="AI_HMI" TypeUUID="AI_HMI" UUID="baedd51f342d4c1a932fbac91072963f"/>
+<Field Comment="Температура № 1 воздуха на выходе осевого компрессора (CT-DA-1)" Name="Tv1_out_OK" Type="AI_HMI" TypeUUID="AI_HMI" UUID="7f8497644eab46dabef1131640eff2a7"/>
+<Field Comment="Температура № 2 воздуха на выходе осевого компрессора (CT-DA-2)" Name="Tv2_out_OK" Type="AI_HMI" TypeUUID="AI_HMI" UUID="dbe3cbc1532c4f7b8f227820c5936477"/>
+<Field Comment="Температура масла в коллекторе смазки турбины (LT-TH)" Name="Tmsm_D" Type="AI_HMI" TypeUUID="AI_HMI" UUID="d63857e515f94ea99cffbdab550a1c3c"/>
+<Field Comment="Температура масла на сливе из подшипника № 1 ТВД (LT-B1D)" Name="Tm_sl_p1_TVD" Type="AI_HMI" TypeUUID="AI_HMI" UUID="654c21300b274a6caf140716dfe6f6e9"/>
+<Field Comment="Температура масла на сливе из подшипника № 2 ТВД (LT-B2D)" Name="Tm_sl_p2_TVD" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a3ff55ddadb94d10b3367d51d3cad5bc"/>
+<Field Comment="Температура масла на сливе из подшипника № 3 ТНД (LT-B3D)" Name="Tm_sl_p3_TND" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a06001c33e0f41c4a9b566a63c80da28"/>
+<Field Comment="Температура масла на сливе из подшипника № 4 ТНД (LT-B4D)" Name="Tm_sl_p4_TND" Type="AI_HMI" TypeUUID="AI_HMI" UUID="70db691d63fe4ec6836c076944ceba5c"/>
+<Field Comment="Температура масла на сливе из упорного подшипника № 1 ТВД (LT-BT1D)" Name="Tm_sl_up1_TVD" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a6207680ed6e44caa4991fb15ef07712"/>
+<Field Comment="Резерв (ТХА) " Name="Reserv18" Type="AI_HMI" TypeUUID="AI_HMI" UUID="7882e67892d546bc9ce28ccef35ce182"/>
+<Field Comment="Резерв (ТХА) " Name="Reserv19" Type="AI_HMI" TypeUUID="AI_HMI" UUID="bb51b5bb193c4b33812d5004d43b719e"/>
+<Field Comment="Резерв (ТХА) " Name="Reserv20" Type="AI_HMI" TypeUUID="AI_HMI" UUID="33f0d6399d4549848226098a7e40832e"/>
+<Field Comment="Резерв (ТХА) " Name="Reserv21" Type="AI_HMI" TypeUUID="AI_HMI" UUID="6518a4cdd86f45ad836a7821b0d62350"/>
+<Field Comment="Резерв " Name="Reserv22" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2bfca3cb6ad741159f20e65706e3b6d4"/>
+<Field Comment="Резерв " Name="Reserv23" Type="AI_HMI" TypeUUID="AI_HMI" UUID="8aabc1bbff44456ca3824c5cb9b44a3b"/>
+<Field Comment="Сервопривод управления ПНА, обмотка 1. КЦУ " Name="KCU_PNA_obm1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="6a7186ffefc74721855eecda81ef3779"/>
+<Field Comment="Сервопривод управления ПНА, обмотка 2. КЦУ " Name="KCU_PNA_obm2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="bdbcc9e24c06423187f5fb89ec5ca955"/>
+<Field Comment="Сервопривод управления ПНА, обмотка 3. КЦУ " Name="KCU_PNA_obm3" Type="AI_HMI" TypeUUID="AI_HMI" UUID="9f253122350241e09269d44ac00a5fe2"/>
+<Field Comment="Сервопривод управления ВНА, обмотка 1. КЦУ " Name="KCU_VNA_obm1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="90456da64cb04494bf110e17cf417d32"/>
+<Field Comment="Сервопривод управления ВНА, обмотка 2. КЦУ " Name="KCU_VNA_obm2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="470e842a2a734528947cf2f4bc7f6f54"/>
+<Field Comment="Сервопривод управления ВНА, обмотка 3. КЦУ " Name="KCU_VNA_obm3" Type="AI_HMI" TypeUUID="AI_HMI" UUID="7decab21422d472ab1c6ad0644ea253a"/>
+<Field Comment="Сервопривод управления регулирующим клапаном топливного газа, обмотка 1. КЦУ " Name="KCU_kl_reg_tg_1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="785f53fbcee3471cbd39ebf3e66d6248"/>
+<Field Comment="Сервопривод управления регулирующим клапаном топливного газа, обмотка 2. КЦУ " Name="KCU_kl_reg_tg_2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="8dfa59b5964743ffaac6d76114cb56b8"/>
+<Field Comment="Сервопривод управления регулирующим клапаном топливного газа, обмотка 3. КЦУ " Name="KCU_kl_reg_tg_3" Type="AI_HMI" TypeUUID="AI_HMI" UUID="6f006bc7494449e29c83610415b42fb4"/>
+<Field Comment="Сервопривод управления стопорным клапаном топливного газа, обмотка 1. КЦУ " Name="KCU_kl_stop_tg_1" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2387c3c3d2214d4889fffc6d961f3396"/>
+<Field Comment="Сервопривод управления стопорным клапаном топливного газа, обмотка 2. КЦУ " Name="KCU_kl_stop_tg_2" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a2955b70ed624705a8ccb1c7dd549556"/>
+<Field Comment="Сервопривод управления стопорным клапаном топливного газа, обмотка 3. КЦУ " Name="KCU_kl_stop_tg_3" Type="AI_HMI" TypeUUID="AI_HMI" UUID="eb10618707f246b9b46e7069f18caa87"/>
+<Field Comment="Привод заслонки УТО. КЦУ " Name="KCU_zasl_UTO" Type="AI_HMI" TypeUUID="AI_HMI" UUID="11541c195ea64699832bae8c5f76ca9e"/>
+<Field Comment="Резерв. КЦУ " Name="KCU_Reserv100" Type="AI_HMI" TypeUUID="AI_HMI" UUID="bb29d0243243445d93669063171b760f"/>
+<Field Comment="Резерв. КЦУ " Name="KCU_Reserv101" Type="AI_HMI" TypeUUID="AI_HMI" UUID="52831c00d6284d95b88906485df1b285"/>
+<Field Comment="Сервопривод управления антипомпажным клапаном. КЦУ " Name="KCU_APK" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2a81d9c6460a4317aa8a2dfc19194c91"/>
+<Field Comment="Сервопривод управления клапаном буферного газа. КЦУ " Name="KCU_kl_BG" Type="AI_HMI" TypeUUID="AI_HMI" UUID="5c72bd8d6214471aa840b771489ac017"/>
+<Field Comment="Резерв. КЦУ " Name="Reserv24" Type="AI_HMI" TypeUUID="AI_HMI" UUID="d0759aa67d2d4f1c81080f4d82020659"/>
+<Field Comment="Скорость вращения ТВД, канал 3 от БЗА " Name="N_TVD_ch3_BZA" Type="AI_HMI" TypeUUID="AI_HMI" UUID="88712dd5247a424fb2466d7550a5bd3a"/>
+<Field Comment="Скорость вращения ТНД, канал 3 от БЗА " Name="N_TND_ch3_BZA" Type="AI_HMI" TypeUUID="AI_HMI" UUID="c1df901a10c445dc998e1f86401acf35"/>
+<Field Comment="Измерение основного напряжения питания САУ " Name="Uosn_SAU" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2f31d665ad874ea7bbce5ca9af697b44"/>
+<Field Comment="Измерение резервного напряжения питания САУ " Name="Ures_SAU" Type="AI_HMI" TypeUUID="AI_HMI" UUID="b1ca48e4b95a4afe8039434b5ebbadeb"/>
+<Field Comment="Резерв " Name="Reserv25" Type="AI_HMI" TypeUUID="AI_HMI" UUID="806e122f6c8a4137bdb1e92e9217ecb5"/>
+<Field Comment="Резерв " Name="Reserv26" Type="AI_HMI" TypeUUID="AI_HMI" UUID="b06a06d2ee224321bfd621d538c447ec"/>
+<Field Comment="Резерв " Name="Reserv27" Type="AI_HMI" TypeUUID="AI_HMI" UUID="0de610e509a24ae5960d5ad6141f3b54"/>
+<Field Comment="Резерв " Name="Reserv28" Type="AI_HMI" TypeUUID="AI_HMI" UUID="2000dc60c0934bc8960405c16f3da17b"/>
+<Field Comment="Резерв " Name="Reserv29" Type="AI_HMI" TypeUUID="AI_HMI" UUID="6076f8f0ba85455288756891c9569edd"/>
+<Field Comment="Резерв " Name="Reserv30" Type="AI_HMI" TypeUUID="AI_HMI" UUID="e068e3b23e5d437ea570904b75100ac2"/>
+<Field Comment="Резерв " Name="Reserv31" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a2fd7de46cdd4dca80f29619f66e3d60"/>
+<Field Comment="Резерв " Name="Reserv32" Type="AI_HMI" TypeUUID="AI_HMI" UUID="5c78a261a8bd477c99cb1499a05adcf1"/>
+<Field Comment="Резерв " Name="Reserv33" Type="AI_HMI" TypeUUID="AI_HMI" UUID="6a79eb25671f4bf78dbeca9adb7e1b4e"/>
+<Field Comment="Резерв " Name="Reserv34" Type="AI_HMI" TypeUUID="AI_HMI" UUID="5db08b9580a7423787388c5a8b286621"/>
+<Field Comment="Температура газа на выходе нагнетателя (ТЕ102)" Name="Tg_out_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="4d6e7c49deb14f55baea14e0f61ecb9d"/>
+<Field Comment="Температура газа на входе в нагнетатель (ТЕ101)" Name="Tg_in_N" Type="AI_HMI" TypeUUID="AI_HMI" UUID="f8e35eca69244a28ac01f2f82833faa9"/>
+<Field Comment="Резерв" Name="Reserv_Ttg_out_filtr" Type="AI_HMI" TypeUUID="AI_HMI" UUID="1accc1b0adf747f9b69bc35d32b5b208"/>
+<Field Comment="Температура топливного газа (ТЕ1.141)" Name="Ttg" Type="AI_HMI" TypeUUID="AI_HMI" UUID="de5773d7c56745daa09536e22bdd1f57"/>
+<Field Comment="Температура масла после АВОМ (ТЕ1301)" Name="Tm_out_AVOM" Type="AI_HMI" TypeUUID="AI_HMI" UUID="4debd8f034a349a99dadf4b78faa29ad"/>
+<Field Comment="Температура подшипника № 1 генератора (ТЕ301)" Name="T_p1_G" Type="AI_HMI" TypeUUID="AI_HMI" UUID="80ba9dd91bce466cab662c60d582509a"/>
+<Field Comment="Температура подшипника № 2 генератора (ТЕ302)" Name="T_p2_G" Type="AI_HMI" TypeUUID="AI_HMI" UUID="ffedb998c8fe4def81986be90134aeb6"/>
+<Field Comment="Температура воздщуха в отсеке вспомогательного оборудования (ТЕ-ВА-1)" Name="Tv_ots_dop" Type="AI_HMI" TypeUUID="AI_HMI" UUID="1a9284d9e1e541edb55e13a9fd9e9a22"/>
+<Field Comment="Температура воздуха в отсеке промвала (ТЕ-ВТ-1)" Name="Tv_ots_prval" Type="AI_HMI" TypeUUID="AI_HMI" UUID="64fca09d88a4457c9cd15a4f6929bc32"/>
+<Field Comment="Резерв " Name="Reserv35" Type="AI_HMI" TypeUUID="AI_HMI" UUID="a3e0edef13f54cf991e30d6ecd76507b"/>
+<Field Comment="Резерв " Name="Reserv36" Type="AI_HMI" TypeUUID="AI_HMI" UUID="d52366de602b445fbb478a9eda14a114"/>
+<Field Comment="Резерв " Name="Reserv37" Type="AI_HMI" TypeUUID="AI_HMI" UUID="21093747130d4dc28c36a8fe7f3a0c73"/>
+<Field Comment="Резерв " Name="Reserv38" Type="AI_HMI" TypeUUID="AI_HMI" UUID="471186b847de4e24a91d68cd220b175d"/>
+<Field Comment="Температура контроллера " Name="T_PLC" Type="AI_HMI" TypeUUID="AI_HMI" UUID="baef4b33c95d4d81ac36d8bbb766e2ef"/>
 </Struct>
 </DataTypes>
     <FBLibrary>
@@ -745,6 +852,4 @@ a:=b;
 w:=a+b;]]></ST>
         </FunctionBlock>
     </FBLibrary>
-    
-
 </Program>

@@ -6,6 +6,15 @@
 
 package basepostgresluaxls;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -14,6 +23,8 @@ import javax.swing.table.TableModel;
  * @author nazarov
  */
 public class FrameTable extends javax.swing.JPanel {
+
+        BasePostgresLuaXLS workbase = new BasePostgresLuaXLS(); // подключаем нашу базу
 
     /**
      * Creates new form Panel
@@ -32,36 +43,114 @@ public class FrameTable extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(getTableData());
-        jTabbedPane1.addTab("Table", jTable1);
-        jTabbedPane1.addTab("tab1", jTabbedPane2);
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setText("To_Lua_DRV");
+        jButton1.setToolTipText("Формируем файл луа для драйверов");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(881, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(468, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(40, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        JFileChooser fileopen = new JFileChooser("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\_actual_config\\Config\\Design\\IO_XLS\\GPA");
+        int ret = fileopen.showDialog(null, "Открыть файл(DRV_from_base_LUA)");                
+        if (ret == JFileChooser.APPROVE_OPTION) {
+        File file = fileopen.getSelectedFile();
+        //System.out.print(file.getPath());
+        String currentT = StructSelectData.getnTable();
+        
+        ArrayList<String[]> dataFromDb = new ArrayList<>();
+        workbase.connectionToBase();
+        //dataFromDb = workbase.selectData("ai1");
+        dataFromDb = workbase.selectData(currentT);
+        System.out.println("This Table  -->" + currentT);
+        //Сформировать файл луа новый файл
+        CreateFileIO_AILUA maks_file = new CreateFileIO_AILUA();
+               try {
+                   maks_file.writeDataMaksFile(dataFromDb, file.getPath()); // такое себе но требуют результат
+               } catch (IOException ex) {
+                   Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+               }
+            
+        javax.swing.JOptionPane.showMessageDialog(null,"Данные из базы в файл Максима" + file.getPath() + " загружены"); //диалоговое окно
+
+        
+        }  
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
  TableModel getTableData()  // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
 { 
-     String[] columnNames = {
+   /*  String[] columnNames = {
                     "Name",
                     "Last modified",
                     "Type",
                     "Size"
           };
-              String[][] data = {
+    
+    */
+    String[] columnDop = {"Boolean"};// до поля для галок или еще чего
+    String[] columnNames = StructSelectData.getColumns(); // Получаем столбцы из статических методов
+    String[] resultColumn = Stream.concat( Arrays.stream(columnDop), Arrays.stream(columnNames))
+                   .toArray(String[]::new); // соединяем два массива
+    resultColumn = Stream.concat(Arrays.stream(resultColumn), Arrays.stream(columnDop))
+            .toArray(String[]::new); // соединяем два массива
+    //System.out.println(columnNames[0] + columnNames[1]);
+    
+   /* String[][] data = {
                     {"addins", "02.11.2006 19:15", "Folder", ""},
                     {"AppPatch", "03.10.2006 14:10", "Folder", ""},
                     {"assembly", "02.11.2006 14:20", "Folder", ""},
@@ -76,14 +165,53 @@ public class FrameTable extends javax.swing.JPanel {
                     {"twunk.exe", "19.08.2007 10:37", "File", "1,08MB"},
                     {"nsreg.exe", "07.08.2007 11:14", "File", "2,10MB"},
                     {"avisp.exe", "17.12.2007 16:58", "File", "12,67MB"},
-          };
-    return new DefaultTableModel(data, columnNames);
+          };*/
+    String[][] data = StructSelectData.getcurrentSelectTable();
+     
+    return new DefaultTableModel(data, resultColumn){  // как то надо поменять местами колонки с помощью TableColumnModel
+    @Override           
+    public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
+      Class clazz = String.class;
+      switch (columnIndex) {
+     //   case 0:
+     //     clazz = Integer.class;
+     //     break;
+     /*   case 1:
+          clazz = Integer.class;
+          break; */
+        case 3:
+          clazz = Boolean.class;
+          break;
+         //           case 4:
+         // clazz = Boolean.class;
+         // break;
+      }
+      return clazz; 
+    }
+            
+     @Override
+    public boolean isCellEditable(int row, int column) {
+      return column == 3;
+    }
+    
+     @Override
+    public void setValueAt(Object aValue, int row, int column) {
+      if (aValue instanceof Boolean && column == 3) {
+        System.out.println(aValue);
+        Vector rowData = (Vector)getDataVector().get(row);
+        rowData.set(3, (boolean)aValue);
+        fireTableCellUpdated(row, column);
+      }
+    }
+    };
 
 }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
