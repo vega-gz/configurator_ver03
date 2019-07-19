@@ -73,5 +73,45 @@ public class CreateFileIO_AILUA {
         out.close();
        
      }
+     //метод для формирования файла для обрабтки LUA от Максима
+      void writeDataMaksFile(ArrayList<String[]> arg, String patchfile) throws IOException {
+       Iterator<String[]> iter_arg = arg.iterator();
+       String data  = "TableDrvAI = { \n";
+       int firstS = 0;
+       String zapatai = "";
+        while (iter_arg.hasNext()) {
+           /* if (firstS == 0){
+            zapatai += "";
+            firstS =1;}
+            else zapatai = ",";
+            */
+            String[] tmpS = iter_arg.next();
+            // разделяем строку на две части
+            String Address = "";
+            String ChanelModule = "";
+            String[] splitAddress = tmpS[1].split(":") ;
+            if (splitAddress[0] != null && splitAddress[1] != null) {
+              Address = splitAddress[0];
+              ChanelModule = splitAddress[1];
+            }
+            else {
+                Address = "SameErrData";
+              ChanelModule = "SameErrData";
+            }
+        data += zapatai + "{Name = '" +tmpS[0] +"', Address = '" +Address +"', ChanelModule = '" +ChanelModule 
+                                                       +"', TypeADC = '" +tmpS[7] + "', uuid_drv = '" + tmpS[12] + "'"
+                                                       + ", uuid_hmi = '" + tmpS[11] + "'"
+                                                       + ", uuid_plc = '" + tmpS[10] + "'"
+                                                       + ", uuid_trend = '" + tmpS[13] + "'"
+                + "},";
+         data += "\n";
+        }
+        data += "}";
+        System.out.println(patchfile);
+        FileOutputStream out = new FileOutputStream(patchfile);
+        out.write(data.getBytes("Cp1251"));
+        out.close();
+       
+     }
 }
 

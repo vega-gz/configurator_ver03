@@ -334,13 +334,13 @@ public class BasePostgresLuaXLS {
              String[] strfromtb = new String[columns.length]; // массив под данные
              for(int i=0; i<columns.length; ++i){ //формирование строки запроса
                  if (i < columns.length-1){
-                s_columns +=columns[i]+", "; }
-                 else s_columns +=columns[i];
+                s_columns +="\"" +columns[i]+ "\"" + ", "; }  // Кавычки для руских имен и пробелов
+                 else s_columns +="\"" + columns[i] + "\"";
              }
              try {        
         stmt = connection.createStatement();
         
-       // System.out.println("SELECT " +s_columns+ " FROM " + table +";" );
+       System.out.println("SELECT " +s_columns+ " FROM " + table +";" );
         
         ResultSet rs = stmt.executeQuery( "SELECT " +s_columns+ " FROM " + table +";" );
         

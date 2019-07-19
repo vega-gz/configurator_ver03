@@ -218,12 +218,14 @@ public class ReadWriteExel {
             // System.out.println(array_cell_len[tmp]);
            // tmp++;
             //System.out.println(row.getLastCellNum());
-            System.out.println(row.getCell(16));
             
             Iterator<Cell> cells = row.cellIterator(); // итератор Ячеек вот не работает должным образом пропускает ячейки
-            //boolean void_cell = cells.hasNext(); 
-            while (cells.hasNext()) {
-                Cell cell = cells.next();
+            int i_tmp=0;
+            
+          //  while (cells.hasNext()) {
+          //      Cell cell = cells.next();
+            while (i_tmp <= row.getLastCellNum()-startm) {
+                  Cell cell = row.getCell(i_tmp);
                 
                 //System.out.println(cell.getAddress());
                /* CellAddress cellReference = new CellAddress("Q110");
@@ -233,8 +235,13 @@ public class ReadWriteExel {
                 }*/
                 //System.out.println(cell.getAddress()); // Для проверки сдвига
                 
-                CellType cellType = cell.getCellType();                
-            switch (cellType){
+               /* System.out.println(cell.getAddress());
+                System.out.println(i_tmp);
+                System.out.println(row.getLastCellNum());*/
+                
+                if (cell != null){  // обходим таким дебильным способом
+                CellType cellType = cell.getCellType();   
+                switch (cellType){
                     case STRING :{
                         if (cell.getStringCellValue().contains("'")){
                             //System.out.print("Find ' ->  " + cell.getStringCellValue());
@@ -263,8 +270,10 @@ public class ReadWriteExel {
                         break;
                     default:  array_cell_len[tmp]= "|"; break;
                 }
+                }else{array_cell_len[tmp]="NULL";}
                 
                 tmp++;
+                i_tmp++;
             }
             
              for (int i=0; i < array_cell_len.length; i++ )
@@ -290,7 +299,7 @@ public class ReadWriteExel {
                 // Проверяем пустой ли массив который мы заносим, так как Exel думает что есть данные
                 
                 boolean empty = true;
-              if(tmp_array_cell_len.length != 0){    //массив может быть пустой
+            //  if(tmp_array_cell_len.length != 0){    //массив может быть пустой
                 for (int i=startm; i<tmp_array_cell_len.length; i++) {
                  //if (!tmp_array_cell_len[i].equals("NULL") |  tmp_array_cell_len[i] != null) {
                  if (tmp_array_cell_len[i] == null || tmp_array_cell_len[i].equals("NULL") || tmp_array_cell_len[i].equals("")) { 
@@ -303,7 +312,7 @@ public class ReadWriteExel {
                        break;
                  }
                      }   
-              }
+           //   }
                  if (!empty){array_cell.add(tmp_array_cell_len);} // не пусто тогда заносим.
                  //array_cell.add(tmp_array_cell_len);
                 not_null_dat = 0;

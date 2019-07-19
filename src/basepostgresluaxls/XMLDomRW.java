@@ -6,14 +6,18 @@
 
 package basepostgresluaxls;
 
+import static com.sun.org.apache.xerces.internal.jaxp.JAXPConstants.JAXP_SCHEMA_LANGUAGE;
+import static com.sun.org.apache.xerces.internal.jaxp.JAXPConstants.W3C_XML_SCHEMA;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,27 +34,36 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import javax.xml.xpath.XPathFactoryConfigurationException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
  
 public class XMLDomRW {
-String nameStruct = "";
-String newUUIDelem = "";
-String typeStruct = "";
-Struct structData;
-static Document document;
+private String nameStruct = "";
+private String newUUIDelem = "";
+private String typeStruct = "";
+private String patchF = "";
+private Struct structData;
+private Document document;
+// Создается построитель документа
+DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
 
     public XMLDomRW()throws ParserConfigurationException, SAXException, IOException{
-     // Создается построитель документа
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+     
+     
             // Создается дерево DOM документа из файла
            // document = documentBuilder.parse("src\\WorkXML\\test.xml");}
-            document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");}
+            document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");
+            
+    }
             
 
     public XMLDomRW(Struct struct) throws ParserConfigurationException, SAXException, IOException{
@@ -58,17 +71,26 @@ static Document document;
         this.newUUIDelem = structData.getUUD();
         this.nameStruct = structData.getName();
         this.typeStruct = structData.getType();
-         // Создается построитель документа
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            // Создается дерево DOM документа из файла
-           document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");
+        
+        // Создается дерево DOM документа из файла
+        patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st";
+        document = documentBuilder.parse(patchF);
     }
     
     Document getDocument(){
     return document;}
 
+    // запуск обрабтки файлов что бы не из статического main . Переписать что бы не было document в входном параметре
+    void runMethods() throws DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, SAXException, IOException, ParserConfigurationException, XPathFactoryConfigurationException{
+            xpatchfind(document); // Variables данные добавления
+            xpatchDataTypes(document);        
+            writeDocument(document); // это запись в сам файл
+            addSignalGlobal();
+            //viewAllXML(document);  // просмотр всех записей
+            }
+
     public static void main(String[] args) throws DOMException, XPathExpressionException {
-        try {
+       /* try {
            
             // Тут весь вызов без параметров
             XMLDomRW realise = new XMLDomRW();
@@ -88,7 +110,7 @@ static Document document;
            Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
            Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
   
     //переборка всего что есть в ноде
@@ -149,8 +171,6 @@ static Document document;
     // Метод добавления Variable
     void xpatchfind(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать Variables");
-        
-        
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();
         // а вот тут надо посчитать сколько переменных
@@ -262,6 +282,58 @@ static Document document;
         
         
     }
+     // Запись в файл глобальной переменой этой структуры
+     void addSignalGlobal() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException{
+        patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\Project.prj";
+        
+        //DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        //document = documentBuilder.parse(patchF);
+        DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
+        document.setValidating(false);
+        document.setNamespaceAware(true);
+        document.setFeature("http://xml.org/sax/features/namespaces", false);
+        document.setFeature("http://xml.org/sax/features/validation", false);
+        document.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+        document.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        DocumentBuilder doc = document.newDocumentBuilder();
+
+       /* doc.setEntityResolver(new EntityResolver() // вот это должны были переопределить но не работает
+        {
+            public InputSource resolveEntity(String publicId, String systemId)
+                throws SAXException, IOException
+            {    
+                if (systemId.contains("Project")) {
+                return new InputSource(new StringReader(""));
+            } else {
+                return null;
+            }
+        }
+    });
+        */
+        Document document_final = doc.parse(patchF);
+        //System.out.println(document.getDoctype());
+        
+        XPathFactory pathFactory = XPathFactory.newInstance();
+        XPath xpath = pathFactory.newXPath();
+        
+        // а вот тут надо посчитать сколько переменных
+        XPathExpression expr = xpath.compile("Project/Globals");
+       
+        NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Node n = nodes.item(i);
+        Element signal = document_final.createElement("Signal");
+        signal.setAttribute("Name", nameStruct);
+        signal.setAttribute("UUID", UUID.getUIID());
+        signal.setAttribute("Type", newUUIDelem);
+        signal.setAttribute("Global", "TRUE");
+        n.appendChild(signal);
+        }
+        // Тут запустим запись в файл
+        writeDocument(document_final);
+        
+
+     }
             
      void writeDocument(Document document) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
@@ -273,7 +345,7 @@ static Document document;
             StreamResult result = new StreamResult(fos);
             tr.transform(source, result);
             */
-            File file = new File("src\\WorkXML\\test.xml");
+            File file = new File(patchF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(new DOMSource(document), new StreamResult(file));

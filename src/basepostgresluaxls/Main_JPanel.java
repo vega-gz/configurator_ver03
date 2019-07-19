@@ -21,6 +21,13 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactoryConfigurationException;
+import org.w3c.dom.DOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -52,7 +59,6 @@ public class Main_JPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -60,22 +66,17 @@ public class Main_JPanel extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setAutoscrolls(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton1.setText("out_dataDB");
+        jButton1.setText("out_dataDB_to_Lua");
         jButton1.setToolTipText("Выгрузка данных из базы для файла LUA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.setText("jTextField2");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -131,6 +132,10 @@ public class Main_JPanel extends javax.swing.JPanel {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,7 +144,7 @@ public class Main_JPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField2)
+                        .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +161,7 @@ public class Main_JPanel extends javax.swing.JPanel {
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(48, 48, 48))))
         );
@@ -175,8 +180,8 @@ public class Main_JPanel extends javax.swing.JPanel {
                     .addComponent(jButton4)
                     .addComponent(jButton7)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -189,7 +194,7 @@ public class Main_JPanel extends javax.swing.JPanel {
         if (ret == JFileChooser.APPROVE_OPTION) {
         File file = fileopen.getSelectedFile();
         //System.out.print(file.getPath());
-        jTextField2.setText(file.getPath()); //вносим данные в поле путь до файла
+        jTextArea1.setText(file.getPath()); //вносим данные в поле путь до файла
         // select Database test and write to file from Lua
         
         ArrayList<String[]> dataFromDb = new ArrayList<>();
@@ -208,10 +213,6 @@ public class Main_JPanel extends javax.swing.JPanel {
 }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         JFileChooser fileopen = new JFileChooser("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\_actual_config\\Config\\Design\\LUA_FILE\\Template\\AI");
@@ -219,7 +220,7 @@ public class Main_JPanel extends javax.swing.JPanel {
         if (ret == JFileChooser.APPROVE_OPTION) {
         File file = fileopen.getSelectedFile();
         //System.out.print(file.getPath());
-        jTextField2.setText(file.getPath()); //вносим данные в поле путь до файла
+        jTextArea1.setText(file.getPath()); //вносим данные в поле путь до файла
         // select Database test and write to file from Lua
         
         startScript.runLua(file.getPath());
@@ -253,7 +254,24 @@ public class Main_JPanel extends javax.swing.JPanel {
             gpaai.writeAI_PLC();
             gpaai.writeAI_HMI();
             gpaai.T_GPA_AI_PLC(dataFromDbGPAI, "T_GPA_AI_PLC"); // должны быть после создания выше
-            gpaai.T_GPA_AI_HMI(dataFromDbGPAI, "T_GPA_AI_HMI");
+            try { // Так все из за XML похоже
+                gpaai.T_GPA_AI_HMI(dataFromDbGPAI, "T_GPA_AI_HMI");
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DOMException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerFactoryConfigurationError ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathFactoryConfigurationException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
             gpaai.T_GPA_AI_DRV(dataFromDbGPAI, "T_GPA_AI_DRV");
             
         }
@@ -280,7 +298,7 @@ public class Main_JPanel extends javax.swing.JPanel {
          
          
                
-        jTextField2.setText( listTable);
+        jTextArea1.setText( listTable);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -300,29 +318,22 @@ public class Main_JPanel extends javax.swing.JPanel {
         workbase.connectionToBase();
         ArrayList<String[]> dataFromDbGPAI = new ArrayList<>();
         dataFromDbGPAI = workbase.selectDataGPAAI("ai1");
-        try {
-            gpaai.writeAI_();
-            //gpaai.writeListData(15); // Это было первое нужно или удалить или забыть
-            gpaai.writeAI_PLC();
-            gpaai.writeAI_HMI();
-            gpaai.T_GPA_AI_PLC(dataFromDbGPAI, "T_GPA_AI_PLC"); // должны быть после создания выше
-            gpaai.T_GPA_AI_HMI(dataFromDbGPAI, "T_GPA_AI_HMI");
-            gpaai.T_GPA_AI_DRV(dataFromDbGPAI, "T_GPA_AI_DRV");
+        //тут надо реализовать работу XMLDomRW
             
-        }
-        catch(IOException e){
-            System.out.println(e);
-        }
+       
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        jTextField2.setText((String)jComboBox1.getSelectedItem());// выводим что выбрали
+        jTextArea1.setText((String)jComboBox1.getSelectedItem());// выводим что выбрали
         ArrayList<String[]> dataFromDb = new ArrayList<>();
-        String[] columns = {"uuid_plc","colum_18"};
+        String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
+        String selectElem = (String)jComboBox1.getSelectedItem();
         workbase.connectionToBase();
-        workbase.selectData((String)jComboBox1.getSelectedItem(), columns); //внесли данные в сущность 
+        workbase.selectData(selectElem, columns); //внесли данные в сущность 
+        StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
         dataFromDb = workbase.getcurrentSelectTable();
+        workbase.getColumns();
         //javax.swing.JOptionPane.showMessageDialog(null,"Выборка по базе " + columns + " загружены"); //диалоговое окно
         
         // тут при выборе открываем новое Диалоговое окно с таблицой выборки
@@ -373,6 +384,7 @@ private ComboBoxModel getComboBoxModel()  // функция для создан�
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

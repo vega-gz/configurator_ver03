@@ -9,7 +9,17 @@ package basepostgresluaxls;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactoryConfigurationException;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -22,8 +32,10 @@ public class CreateTGPAAI {
   private  String uuidAI_ =""; //0-11 коды отказов канала, 12-15 команды с мнемосхемы
   private  String uuidAI_PLC ="";
   private  String uuidAI_HMI ="";
+  private  final String AI_HMI = "AI_HMI";
   private  ReadWriteExel crivoiUID = new ReadWriteExel();// временнно для формирования UUID
   
+  // методы возврата  UUID сформированных листов
   String getType_UUIDstr(){return Type_UUIDstr;}
   String getuuidAI_(){return uuidAI_;}
   String getuuidAI_PLC(){return uuidAI_PLC;}
@@ -53,10 +65,13 @@ public class CreateTGPAAI {
         out.close();
        
      }
-          void T_GPA_AI_HMI(ArrayList<String[]> arg, String name_str) throws IOException {
+          void T_GPA_AI_HMI(ArrayList<String[]> arg, String name_str) throws IOException, ParserConfigurationException, SAXException, DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, XPathFactoryConfigurationException {
              this.name_str = name_str;
            // ReadWriteExel crivoiUID = new ReadWriteExel();// временнно для формирования UUID
             Type_UUIDstr = crivoiUID.getUIID();
+            
+            Struct structT_GPA_AI_HMI = new Struct(name_str, Type_UUIDstr , AI_HMI); // это новое класс для структуры
+            
        Iterator<String[]> iter_arg = arg.iterator();
        String data  = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n"
                       + "<!DOCTYPE Type v. 1.0 >\n";
@@ -66,14 +81,30 @@ public class CreateTGPAAI {
         while (iter_arg.hasNext()) {  
           String[] tmpS = iter_arg.next();
           data += "<Field Name=\"" +tmpS[0] +"\" Type=\"" +uuidAI_HMI+ "\" UUID=\"" +tmpS[1] +"\" Comment=\"" +tmpS[2] +"\" />\n";
+          
+          // тоже новое добавление данный в структуру
+          structT_GPA_AI_HMI.addData(tmpS[0], uuidAI_HMI, tmpS[1], tmpS[2]);
         }
+        
+        // Тут вызовем все что записали в структуру - для теста, смотрим что записалось а так же наш новый класс
+         //structT_GPA_AI_HMI.getAllData();
+        // записываем в XML но тут лажа какая то
+         XMLDomRW realise = new XMLDomRW(structT_GPA_AI_HMI); // пересылаем структуру для добавления  ее в глобальные переменные
+         realise.runMethods();
+         
+         //ниже что не особо правильно но тоже работает
+        // Document document = realise.getDocument();
+        // realise.xpatchfind(document); // Variables данные добавления
+        // realise.xpatchDataTypes(document);        
+        // realise.writeDocument(document); // это запись в сам файл
+
+         
         data += "</Fields>\n"
                 + "</Type>";
         FileOutputStream out = new FileOutputStream(patchPrg + "Type_GPA_AI_HMI_from_java.type");
         //out.write(data.getBytes("Cp1251"));
         out.write(data.getBytes("UTF8"));
-        out.close();
-       
+        out.close(); 
      }
           void T_GPA_AI_DRV(ArrayList<String[]> arg, String name_str) throws IOException {
              this.name_str = name_str;
@@ -185,12 +216,13 @@ public class CreateTGPAAI {
             out.close();
             }
        
-              void writeAI_HMI() throws IOException {
-            uuidAI_PLC = crivoiUID.getUIID();
+            //Начальный файл
+            void writeAI_HMI() throws IOException {
+            uuidAI_HMI = crivoiUID.getUIID();
             String namefield = "var_";
             String data  = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n"
                       + "<!DOCTYPE Type v. 1.0 >\n";
-              data += "<Type Name=\"AI_HMI\" Kind=\"Struct\" UUID=\"" + uuidAI_PLC + "\"> \n"
+              data += "<Type Name=\""+AI_HMI+"\" Kind=\"Struct\" UUID=\"" + uuidAI_HMI + "\"> \n"
                    + "\t<Fields>\n";
               data += "\t\t<Field Name=\"PV\" Type=\"REAL\" UUID=\""+crivoiUID.getUIID()+"\" Comment=\"сигнал с датчика, преобразованный к физическим единицам\" />" + "\n";
               data += "\t\t<Field Name=\"Condition\" Type=\"" +uuidAI_+ "\" UUID=\""+crivoiUID.getUIID()+"\" Comment=\"0-11 коды отказов канала, 12-15 команды с мнемосхемы\" />" + "\n"; 
@@ -205,3 +237,4 @@ public class CreateTGPAAI {
             }
     
 }
+
