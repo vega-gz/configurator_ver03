@@ -14,6 +14,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
@@ -43,9 +46,11 @@ import org.xml.sax.SAXException;
  *
  * @author nazarov
  */
+
+// удаляем не верный <!DOCTYPE SubAppType v. 1.3 >
 public  class TestRemoveDTD {
     static String doctype = "";
-    static int position;
+    static int positionDTD;
     public static Document removeDTDFromXML(String payload) throws Exception {
 
     System.out.println("### Payload received in XMlDTDRemover: " + payload);
@@ -99,7 +104,8 @@ public  class TestRemoveDTD {
     
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, Exception{
     //String patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\Project.prj";
-    String patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.int";
+    String patchD = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\";
+    String patchF = patchD + "ControlProgram.int";
    
     String DTD = " <!DOCTYPE properties SYSTEM \"http://java.sun.com/dtd/properties.dtd\">" +"\n" +
     "<MYACCSERVICE>\n" +
@@ -171,15 +177,16 @@ public  class TestRemoveDTD {
             }
     }
     
-    // Метод Парсера строк
+    // Метод Парсера строк поиск Доктипа
     static String paternDOCTYPE(String st1, int pos){
      Pattern pattern2 = Pattern.compile("^(<!DOCTYPE.*)$"); // Патерн нашего ДокТипа
      Matcher matcher2 = pattern2.matcher(st1);
      if (matcher2.matches()){ 
-         String strDoc = matcher2.group(1);
-         System.out.println(pos);
-         doctype = strDoc;
-        return ""; 
+         positionDTD = pos; // Так же вносим позицию от куда это взяли
+         doctype = matcher2.group(1); // в глобальные переменную что собираемся затереть
+         //badDatatype findDatatype = new badDatatype(doctype, pos); // покане понятно нужно ли использовать отдельный класс для храннения этого
+         System.out.println(doctype);
+         return "";  // Возвращаем пустую строку если нашли DOCTYPE 
      }else return st1;
 
     }
@@ -193,6 +200,7 @@ public  class TestRemoveDTD {
         int pos_str = 0;
         while ((str = in.readLine()) != null){
             result_data += paternDOCTYPE(str, pos_str) + "\n"; // Передаем строки в парсер обработчик
+            // тут уже doctype пустая
             ++pos_str;
         }
         in.close();
@@ -201,7 +209,7 @@ public  class TestRemoveDTD {
     methodWrite(path, result_data);
     }
    
-   //метод записи файла
+   //метод записи файла и дублирующие предыдущии
     static public void  methodWrite(String path, String data)throws InterruptedException{   
         try {
                
@@ -211,14 +219,53 @@ public  class TestRemoveDTD {
         //File resultName = new File(path + "_newfile"); //Файл с новой записью
         
         BufferedWriter writer = new BufferedWriter(new FileWriter(resultName, true));
-        writer.write(data); // это походу переписать
+        int tmpPos =0;
+        String resultTofile = "";
+        for (String tmpStr : data.split("\n")){ // бъем строку что бы записать в нужное место что вырезали выше
+          //writer.append(tmpStr);
+          
+          if (tmpPos == positionDTD){ // если позиция верная то внсим обратно доктипДТД
+              //writer.append(doctype);
+              resultTofile += doctype + "\n";
+            } else resultTofile += tmpStr + "\n"; // таким способоб убираем пустую и вставляем нужную
+          //writer.append("\n");
+          ++tmpPos;
+        }        
+        //writer.write(data); // это походу переписать
+        writer.write(resultTofile); // Добавляем вновь сформированную строку в файл
+        //for (int st=0; st<10; ++st){
+        //   if(st==3) writer.append("\n A am your Fathet LOOK!" );
+        //}
        // writer.append('\n' );        // это добавить
        // writer.append(str.toString());
         writer.close();
-                 
+        
+        // Тут создадим временную папку для файлов бекапов
+        // максимальное вхождение вложений папок вышло 85 на W7
+        /*
+        String SubDirectory2 = "C:\\Directory" ;
+        // но сначала все удалим
+        //recursiveDelete(new File(SubDirectory2)); // jxtym медленно удаляло
+        //deleteDirectory(new File(SubDirectory2)); // Такое же
+        new File(SubDirectory2).mkdir(); 
+        int pa = 1000000;
+        for (int it=0; it<pa; ++it){ 
+            SubDirectory2  += "\\" + Integer.toString(it);
+            new File(SubDirectory2).mkdir(); 
+            File testF = new File(SubDirectory2 + "\\newfile_test.txt"); //Файл с новой записью
+            BufferedWriter writertest = new BufferedWriter(new FileWriter(testF, true));
+            for (int j=0; j<pa; ++j){ //тут просто мучаем диск 
+               writertest.write(SubDirectory2); // вносим строк с путем до него
+            writertest.close();
+            }
+        }
+        System.out.println(SubDirectory2);
+        //new File(SubDirectory2).mkdirs();  // так зоздавать полный путь
+        */
+
          // Удаляем  и переименовываем в удаленный файл
-         if (tmpName.exists()){ // проверяем на существование файла
-             if(tmpName.delete()){
+         if (tmpName.exists()){ // проверяем на существование бекапного файла
+             if(tmpName.delete()){ // если он есть удаляем его
                 System.out.println(tmpName.getName() + " is deleted!");
                 realName.renameTo(tmpName); 
             }else{
@@ -233,14 +280,57 @@ public  class TestRemoveDTD {
     } catch (IOException e) {
     }
      }
+    
+   
+    // Рекурсивное удаление фалов и каталогов очень медленно
+    public static void recursiveDelete(File file) {
+        // до конца рекурсивного цикла
+        if (!file.exists())
+            return;
+         
+        //если это папка, то идем внутрь этой папки и вызываем рекурсивное удаление всего, что там есть
+        if (file.isDirectory()) {
+            for (File f : file.listFiles()) {
+                // рекурсивный вызов
+                recursiveDelete(f);
+            }
+        }
+        // вызываем метод delete() для удаления файлов и пустых(!) папок
+        file.delete();
+        System.out.println("Удаленный файл или папка: " + file.getAbsolutePath());
+    }
+    
+    // -- Еще одно удаление---
+    public static void deleteDirectory(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                File f = new File(dir, children[i]);
+                deleteDirectory(f);
+                System.out.println("Удалено : " + f);
+            }
+            dir.delete();
+        } else dir.delete();
+    }
+ 
 }
 
+// Класс для хранения расположение и что должно быть Дататипе 
 class badDatatype{
+    Map<Integer, String> mapDataType = new HashMap<>();
     String doctype = "";
     int position;
 public badDatatype(String doctype, int position){
      this.doctype = doctype;
      this.position = position;
+     // Вносим значения в наш Мап  номера строк в файле уникальные по этому этот метод
+     mapDataType.put(position, doctype);
+}
+public void getVale(){
+    Set<Map.Entry<Integer, String>> set = mapDataType.entrySet(); // Какой то метод Set мне ене известно почитать
+    for (Map.Entry<Integer, String> me : set) {
+    System.out.print(me.getKey() + ": " + me.getValue());
+}
 }
 
 }
