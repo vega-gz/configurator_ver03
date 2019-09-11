@@ -47,8 +47,8 @@ public class CreateTGPAAI {
              this.name_str = name_str;
            // ReadWriteExel crivoiUID = new ReadWriteExel();// временнно для формирования UUID
             Type_UUIDstr = crivoiUID.getUIID();
-       Iterator<String[]> iter_arg = arg.iterator();
-       String data  = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n"
+            Iterator<String[]> iter_arg = arg.iterator();
+            String data  = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n"
                       + "<!DOCTYPE Type v. 1.0 >\n";
               data += "<Type Name=\"" + name_str + "\" Kind=\"Struct\" UUID=\"" + Type_UUIDstr + "\"> \n"
                    + "<Fields>\n";
@@ -65,15 +65,15 @@ public class CreateTGPAAI {
         out.close();
        
      }
-          void T_GPA_AI_HMI(ArrayList<String[]> arg, String name_str) throws IOException, ParserConfigurationException, SAXException, DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, XPathFactoryConfigurationException {
+          void T_GPA_AI_HMI(ArrayList<String[]> arg, String name_str) throws IOException, ParserConfigurationException, SAXException, DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, XPathFactoryConfigurationException, InterruptedException {
              this.name_str = name_str;
            // ReadWriteExel crivoiUID = new ReadWriteExel();// временнно для формирования UUID
             Type_UUIDstr = crivoiUID.getUIID();
             
             Struct structT_GPA_AI_HMI = new Struct(name_str, Type_UUIDstr , AI_HMI); // это новое класс для структуры
             
-       Iterator<String[]> iter_arg = arg.iterator();
-       String data  = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n"
+            Iterator<String[]> iter_arg = arg.iterator();
+            String data  = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> \n"
                       + "<!DOCTYPE Type v. 1.0 >\n";
               data += "<Type Name=\"" + name_str + "\" Kind=\"Struct\" UUID=\"" + Type_UUIDstr + "\"> \n"
                    + "<Fields>\n";

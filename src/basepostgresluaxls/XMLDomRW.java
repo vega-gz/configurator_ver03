@@ -8,10 +8,13 @@ package basepostgresluaxls;
 
 import static com.sun.org.apache.xerces.internal.jaxp.JAXPConstants.JAXP_SCHEMA_LANGUAGE;
 import static com.sun.org.apache.xerces.internal.jaxp.JAXPConstants.W3C_XML_SCHEMA;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,10 +55,11 @@ private String typeStruct = "";
 private String patchF = "";
 private Struct structData;
 private Document document;
+private String uuidProject;
 // Создается построитель документа
 DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
-
+    // Написано Дом но мы используем SAX
     public XMLDomRW()throws ParserConfigurationException, SAXException, IOException{
      
      
@@ -65,12 +69,13 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
             
     }
             
-
+    // --- Такой коструктор когда передаем структуру для добавления
     public XMLDomRW(Struct struct) throws ParserConfigurationException, SAXException, IOException{
         this.structData = struct;
         this.newUUIDelem = structData.getUUD();
         this.nameStruct = structData.getName();
         this.typeStruct = structData.getType();
+        
         
         // Создается дерево DOM документа из файла
         patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st";
@@ -81,11 +86,12 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
     return document;}
 
     // запуск обрабтки файлов что бы не из статического main . Переписать что бы не было document в входном параметре
-    void runMethods() throws DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, SAXException, IOException, ParserConfigurationException, XPathFactoryConfigurationException{
+    void runMethods() throws DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, SAXException, IOException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
             xpatchfind(document); // Variables данные добавления
             xpatchDataTypes(document);        
             writeDocument(document); // это запись в сам файл
             addSignalGlobal();
+            addSignalHMI();
             //viewAllXML(document);  // просмотр всех записей
             }
 
@@ -185,9 +191,7 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
             Node n = nodes.item(i);
             createBook(document, n, sumVar); //Создаем элементы в ноде которую передали
             //stepThroughAll(n);// вызываем метод по перебору всего что в Variables   
-        }
-       
-        
+        }    
     }
     
     // еще один метод но добавление Struct
@@ -235,34 +239,33 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
         //expr.
         
     }
-           void createStruct(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
+        void createStruct(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
 
-         Node root = p_node; // это что бы не переписывать
+          Node root = p_node; // это что бы не переписывать
 
-        Element Struct = document.createElement("Struct");
-        Struct.setAttribute("UUID", newUUIDelem);
-        Struct.setAttribute("Name", nameStruct);
+          Element Struct = document.createElement("Struct");
+          Struct.setAttribute("UUID", newUUIDelem);
+          Struct.setAttribute("Name", nameStruct);
 
-        // перебираем все элементы в добавление поля
-        Iterator<Map> iter_arg = structData.getlistData().iterator();
-        while (iter_arg.hasNext()) {  //перебираем наш лист с Мапом
-          Map<String, String> hashMap = iter_arg.next(); // Новый мап с нашими данными
-          
-          Element Field = document.createElement("Field");
-          for(Map.Entry<String, String> item : hashMap.entrySet()){        
-           //System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue());
-           switch (item.getKey()){ 
-           case "Name" : Field.setAttribute("Name", item.getValue());break;
-           case "Type": Field.setAttribute("Type", typeStruct); break;// вот тут вопрос на каждый элемент он ли будет всегда
-           case "UUID": Field.setAttribute("UUID", item.getValue());break;
-           case "Comment":Field.setAttribute("Comment", item.getValue());break;
-           case "TypeUUID":Field.setAttribute("TypeUUID", item.getValue());break; // вот это как то надо тоже достать УИД начального файла
-           default: break;
+          // перебираем все элементы в добавление поля
+          Iterator<Map> iter_arg = structData.getlistData().iterator();
+          while (iter_arg.hasNext()) {  //перебираем наш лист с Мапом
+            Map<String, String> hashMap = iter_arg.next(); // Новый мап с нашими данными
+            Element Field = document.createElement("Field");
+             for(Map.Entry<String, String> item : hashMap.entrySet()){        
+               //System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue());
+              switch (item.getKey()){ 
+              case "Name" : Field.setAttribute("Name", item.getValue());break;
+              case "Type": Field.setAttribute("Type", typeStruct); break;// вот тут вопрос на каждый элемент он ли будет всегда
+              case "UUID": Field.setAttribute("UUID", item.getValue());break;
+              case "Comment":Field.setAttribute("Comment", item.getValue());break;
+              case "TypeUUID":Field.setAttribute("TypeUUID", item.getValue());break; // вот это как то надо тоже достать УИД начального файла
+              default: break;
+              }
+              //добавляем вложения в структуру
+              Struct.appendChild(Field);
+             }
            }
-        //добавляем вложения в структуру
-        Struct.appendChild(Field);
-          }
-        }
         // Добавляем книгу в корневой элемент который передали в фукцию
         root.appendChild(Struct); 
     }
@@ -283,35 +286,21 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
         
     }
      // Запись в файл глобальной переменой этой структуры
-     void addSignalGlobal() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException{
+     void addSignalGlobal() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
         patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\Project.prj";
-        
-        //DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        //document = documentBuilder.parse(patchF);
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
-        document.setValidating(false);
-        document.setNamespaceAware(true);
-        document.setFeature("http://xml.org/sax/features/namespaces", false);
-        document.setFeature("http://xml.org/sax/features/validation", false);
-        document.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
-        document.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         DocumentBuilder doc = document.newDocumentBuilder();
 
-       /* doc.setEntityResolver(new EntityResolver() // вот это должны были переопределить но не работает
-        {
-            public InputSource resolveEntity(String publicId, String systemId)
-                throws SAXException, IOException
-            {    
-                if (systemId.contains("Project")) {
-                return new InputSource(new StringReader(""));
-            } else {
-                return null;
-            }
-        }
-    });
-        */
-        Document document_final = doc.parse(patchF);
-        //System.out.println(document.getDoctype());
+        // это из тестового метода преобразовываем файл для чтения XML
+        Test.RemoveDTDFromSonataFile testStart = new Test.RemoveDTDFromSonataFile(patchF);   
+        String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        // так преобразовываем строку в поток и скармливаем билдеру XML
+        InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
+        Document document_final = factory.newDocumentBuilder().parse(stream);
+        
+        //Document document_final = doc.parse(patchF); // А вот тут у нас сложность с нашим документом <!DOCTYPE Project v. 1.0 >  нужно использовать TestRemoveDTD
         
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();
@@ -322,17 +311,57 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
         NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
-        Element signal = document_final.createElement("Signal");
-        signal.setAttribute("Name", nameStruct);
-        signal.setAttribute("UUID", UUID.getUIID());
-        signal.setAttribute("Type", newUUIDelem);
-        signal.setAttribute("Global", "TRUE");
-        n.appendChild(signal);
+            Element signal = document_final.createElement("Signal");
+            signal.setAttribute("Name", nameStruct);
+            this.uuidProject = UUID.getUIID();
+            signal.setAttribute("UUID", uuidProject);
+            signal.setAttribute("Type", newUUIDelem);
+            signal.setAttribute("Global", "TRUE");
+            n.appendChild(signal);
         }
         // Тут запустим запись в файл
         writeDocument(document_final);
-        
+        //и возвращаем ему удаленный DOCTYPE
+        testStart.returnToFileDtd(patchF);
+     }
+     
+     // Запись в файл мнемосхем что бы увидела схема этот сигнал
+     void addSignalHMI() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
+        patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\HMI.int";
+        DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
+        DocumentBuilder doc = document.newDocumentBuilder();
 
+        // это из тестового метода преобразовываем файл для чтения XML
+        Test.RemoveDTDFromSonataFile testStart = new Test.RemoveDTDFromSonataFile(patchF);   
+        String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        // так преобразовываем строку в поток и скармливаем билдеру XML
+        InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
+        Document document_final = factory.newDocumentBuilder().parse(stream);
+        
+        //Document document_final = doc.parse(patchF); // А вот тут у нас сложность с нашим документом <!DOCTYPE Project v. 1.0 >  нужно использовать TestRemoveDTD
+        
+        XPathFactory pathFactory = XPathFactory.newInstance();
+        XPath xpath = pathFactory.newXPath();
+        
+        // а вот тут надо посчитать сколько переменных
+        XPathExpression expr = xpath.compile("SubAppType/InterfaceList");    
+        NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Node n = nodes.item(i);
+            Element signal = document_final.createElement("Signal");
+            signal.setAttribute("Name", nameStruct);
+            signal.setAttribute("UUID", uuidProject);
+            signal.setAttribute("Type", newUUIDelem);
+            signal.setAttribute("Usage", "");
+            signal.setAttribute("Global", "TRUE");
+            n.appendChild(signal);
+        }
+        // Тут запустим запись в файл
+        writeDocument(document_final);
+        //и возвращаем ему удаленный DOCTYPE
+        testStart.returnToFileDtd(patchF);
      }
             
      void writeDocument(Document document) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
