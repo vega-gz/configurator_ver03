@@ -88,9 +88,10 @@ public class CreateTGPAAI {
         
         // Тут вызовем все что записали в структуру - для теста, смотрим что записалось а так же наш новый класс
          //structT_GPA_AI_HMI.getAllData();
+        
         // записываем в XML но тут лажа какая то
          XMLDomRW realise = new XMLDomRW(structT_GPA_AI_HMI); // пересылаем структуру для добавления  ее в глобальные переменные
-         realise.runMethods();
+         realise.runMethods(); // это надо вытащить в Главную панель
          
          //ниже что не особо правильно но тоже работает
         // Document document = realise.getDocument();
