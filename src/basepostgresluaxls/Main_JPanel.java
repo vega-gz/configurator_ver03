@@ -21,6 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -40,6 +41,8 @@ public class Main_JPanel extends javax.swing.JPanel {
     LuaRun startScript = new LuaRun(); // Тут Луа 
     CreateTGPAAI gpaai = new CreateTGPAAI(); // создание файла и тут есть переменные с UUID
     ArrayList<String> listDropT = new ArrayList();
+    XMLSAX createXMLSax = new XMLSAX(); // Класс созданния Базовых объектов
+
 
 
     /**
@@ -68,6 +71,7 @@ public class Main_JPanel extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jButton8 = new javax.swing.JButton();
 
         setAutoscrolls(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -95,7 +99,7 @@ public class Main_JPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText("Create_type_AI");
+        jButton4.setText("Create_type_AI_without_xml");
         jButton4.setToolTipText(" create file Type_GPA_AI_from_java  Type_List_GPA_AI_from_java");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +140,14 @@ public class Main_JPanel extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jButton8.setText("create AI_  AI_HMI");
+        jButton8.setToolTipText("Создает базовый класс AI_");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,14 +165,16 @@ public class Main_JPanel extends javax.swing.JPanel {
                                 .addComponent(jButton6))
                             .addComponent(jButton3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addGap(163, 163, 163)
+                                .addComponent(jButton8)
+                                .addGap(201, 201, 201)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1)
                         .addContainerGap())))
@@ -177,12 +191,15 @@ public class Main_JPanel extends javax.swing.JPanel {
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -339,6 +356,23 @@ public class Main_JPanel extends javax.swing.JPanel {
         frame.setContentPane(frameTable); // Передаем нашу форму
         frame.setVisible(true);
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       // Кнопка создания файла TypeAI_.type
+         try {
+             try {
+                 createXMLSax.createTypeAI_();
+                 createXMLSax.createTypeAI_HMI();
+             } catch (ParserConfigurationException ex) {
+                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         } catch (TransformerFactoryConfigurationError ex) {
+        Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(null, "Файл не создан!"); 
+         }
+        JOptionPane.showMessageDialog(null, "Файл "
+                + "записан в "); // Это сообщение
+    }//GEN-LAST:event_jButton8ActionPerformed
     
 
 private ComboBoxModel getComboBoxModel()  // функция для создания списка из таблиц базы
@@ -374,6 +408,7 @@ private ComboBoxModel getComboBoxModel()  // функция для создан�
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

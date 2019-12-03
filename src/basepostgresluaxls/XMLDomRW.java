@@ -89,7 +89,7 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
     void runMethods() throws DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, SAXException, IOException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
             xpatchfind(document); // Variables данные добавления
             xpatchDataTypes(document);        
-            writeDocument(document); // это запись в сам файл
+            writeDocument(document, patchF); // это запись в сам файл
             addSignalGlobal();
             addSignalHMI();
             //viewAllXML(document);  // просмотр всех записей
@@ -285,7 +285,7 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
         
         
     }
-     // Запись в файл глобальной переменой этой структуры
+     // Запись в файл глобальной переменой этой структуры с использованием XML
      void addSignalGlobal() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
         patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\Project.prj";
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
@@ -320,12 +320,12 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
             n.appendChild(signal);
         }
         // Тут запустим запись в файл
-        writeDocument(document_final);
+        writeDocument(document_final, patchF);
         //и возвращаем ему удаленный DOCTYPE
         testStart.returnToFileDtd(patchF);
      }
      
-     // Запись в файл мнемосхем что бы увидела схема этот сигнал
+     // Запись в файл, что мнемосхемы увидела этот сигнал
      void addSignalHMI() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
         patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\HMI.int";
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
@@ -359,12 +359,51 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
             n.appendChild(signal);
         }
         // Тут запустим запись в файл
-        writeDocument(document_final);
+        writeDocument(document_final, patchF);
         //и возвращаем ему удаленный DOCTYPE
         testStart.returnToFileDtd(patchF);
      }
+     
+    // -- Тут созданике файла  Type_AI_.type (Будет без DOCTYPE) ---
+    void createTypeAI_() throws ParserConfigurationException{
+        patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\Type_AI_.type";
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        
+        Element root = doc.createElement("Type");
+        root.setAttribute("Name", "AI_");
+        root.setAttribute("Kind", "Struct");
+        root.setAttribute("UUID", UUID.getUIID());
+        doc.appendChild(root);
+        
+        Element item1 = doc.createElement("item");
+        item1.setAttribute("val", "1");
+        root.appendChild(item1);
             
-     void writeDocument(Document document) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
+        Element item2 = doc.createElement("item");
+        item2.setAttribute("val", "2");
+        root.appendChild(item2);
+            
+        Element item3 = doc.createElement("item3");
+        item3.setAttribute("val", "3");
+        root.appendChild(item3);  
+
+        Element item4 = doc.createElement("item");
+        item4.setAttribute("val", "4");
+        item3.appendChild(item4);
+        
+    try {
+        writeDocument(doc, patchF);
+    } catch (TransformerFactoryConfigurationError ex) {
+        Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (TransformerException ex) {
+        Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
+    }
+      
+    }
+            
+     void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
             //тут в одну строку работает тоже
             /*
@@ -374,7 +413,7 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
             StreamResult result = new StreamResult(fos);
             tr.transform(source, result);
             */
-            File file = new File(patchF);
+            File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(new DOMSource(document), new StreamResult(file));
