@@ -140,7 +140,7 @@ public class Main_JPanel extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton8.setText("create AI_  AI_HMI");
+        jButton8.setText("create AI_, AI_HMI, AI_PLC");
         jButton8.setToolTipText("Создает базовый класс AI_");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +168,7 @@ public class Main_JPanel extends javax.swing.JPanel {
                                 .addComponent(jButton8)
                                 .addGap(201, 201, 201)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -275,7 +275,7 @@ public class Main_JPanel extends javax.swing.JPanel {
             gpaai.writeAI_PLC();
             gpaai.writeAI_HMI();
             gpaai.T_GPA_AI_PLC(dataFromDbGPAI, "T_GPA_AI_PLC"); // должны быть после создания выше
-            try { // Так все из за XML похоже
+            try { // Так все из за XML (Запись в файл)
                 gpaai.T_GPA_AI_HMI(dataFromDbGPAI, "T_GPA_AI_HMI");
             } catch (ParserConfigurationException | SAXException | DOMException | XPathExpressionException | TransformerFactoryConfigurationError | TransformerException | XPathFactoryConfigurationException | InterruptedException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -327,8 +327,6 @@ public class Main_JPanel extends javax.swing.JPanel {
         ArrayList<String[]> dataFromDbGPAI = new ArrayList<>();
         dataFromDbGPAI = workbase.selectDataGPAAI("ai1");
         //тут надо реализовать работу XMLDomRW
-            
-       
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -363,6 +361,8 @@ public class Main_JPanel extends javax.swing.JPanel {
              try {
                  createXMLSax.createTypeAI_();
                  createXMLSax.createTypeAI_HMI();
+                 createXMLSax.createTypeAI_PLC();
+                 createXMLSax.runBaseRuncreateTypeT();
              } catch (ParserConfigurationException ex) {
                  Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
              }

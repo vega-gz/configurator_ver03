@@ -49,34 +49,30 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
  
 public class XMLDomRW {
-private String nameStruct = "";
-private String newUUIDelem = "";
-private String typeStruct = "";
-private String patchF = "";
-private Struct structData;
-private Document document;
-private String uuidProject;
-// Создается построитель документа
-DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    private String nameStruct = "";
+    private String newUUIDelem = "";
+    private String typeStruct = "";
+    private String patchF = "";
+    private Struct structData;
+    private Document document;
+    private String uuidProject;
+    private String GpatchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\";
+    // Создается построитель документа
+    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
-    // Написано Дом но мы используем SAX
+    // Написано Дом но мы используем SAX (Глобальные и хитрые переменные)
     public XMLDomRW()throws ParserConfigurationException, SAXException, IOException{
-     
-     
-            // Создается дерево DOM документа из файла
-           // document = documentBuilder.parse("src\\WorkXML\\test.xml");}
-            document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");
-            
+        // Создается дерево DOM документа из файла
+        // document = documentBuilder.parse("src\\WorkXML\\test.xml");}
+        document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");    
     }
             
-    // --- Такой коструктор когда передаем структуру для добавления
+    // --- Такой коструктор когда передаем структуру для добавления для файла Programm
     public XMLDomRW(Struct struct) throws ParserConfigurationException, SAXException, IOException{
         this.structData = struct;
         this.newUUIDelem = structData.getUUD();
         this.nameStruct = structData.getName();
         this.typeStruct = structData.getType();
-        
-        
         // Создается дерево DOM документа из файла
         patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st";
         document = documentBuilder.parse(patchF);
@@ -144,34 +140,31 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
   }
     
      void viewAllXML (Document document){
-      // Получаем корневой элемент
-            Node root = document.getDocumentElement();
-            
-            System.out.println("List of books:");
-            System.out.println();
-            // Просматриваем все подэлементы корневого - т.е. книги
-            NodeList books = root.getChildNodes();
-            for (int i = 0; i < books.getLength(); i++) {
-                Node book = books.item(i);
-                // Если нода не текст, то это книга - заходим внутрь
-                if (book.getNodeType() != Node.TEXT_NODE) {
-                    NodeList bookProps = book.getChildNodes();
-                                System.out.println(books.getLength());
-                    for(int j = 0; j < bookProps.getLength(); j++) {
-                        Node bookProp = bookProps.item(j);
-                        // Если нода не текст, то это один из параметров книги - печатаем
-                        if (bookProp.getNodeType() != Node.TEXT_NODE) {
-                           // System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
-                           
-                            for(int i1=0; i1 < bookProp.getChildNodes().getLength(); i1++){
+        // Получаем корневой элемент
+        Node root = document.getDocumentElement();
+        System.out.println("List of books:");
+        System.out.println();
+        // Просматриваем все подэлементы корневого - т.е. книги
+        NodeList books = root.getChildNodes();
+        for (int i = 0; i < books.getLength(); i++) {
+            Node book = books.item(i);
+            // Если нода не текст, то это книга - заходим внутрь
+            if (book.getNodeType() != Node.TEXT_NODE) {
+                NodeList bookProps = book.getChildNodes();
+                System.out.println(books.getLength());
+                for(int j = 0; j < bookProps.getLength(); j++) {
+                    Node bookProp = bookProps.item(j);
+                    // Если нода не текст, то это один из параметров книги - печатаем
+                    if (bookProp.getNodeType() != Node.TEXT_NODE) {
+                        // System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
+                        for(int i1=0; i1 < bookProp.getChildNodes().getLength(); i1++){
                             System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(i1).getTextContent());
-                            }
-                            
                         }
                     }
-                    System.out.println("===========>>>>");
                 }
+                System.out.println("===========>>>>");
             }
+        }
     }
     
     // Метод добавления Variable
@@ -270,27 +263,20 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
         root.appendChild(Struct); 
     }
      
-         void addSignalAlgorithm(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
-
-         Node root = p_node; // это что бы не переписывать
-
+    void addSignalAlgorithm(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
+        Node root = p_node; // это что бы не переписывать
         Element Signal = document.createElement("Signal");
         Signal.setAttribute("Name", "AI_PLC"); // нужно генерить будет имя по названию структуры
         Signal.setAttribute("UUID", "81EA86514D465A09124C7DA6B2EB7144");// это должна быть генерация
-        Signal.setAttribute("Type", "81EA86514D465A09124C7DA6B2EB7146");//это UUID структуры
-
-               
+        Signal.setAttribute("Type", "81EA86514D465A09124C7DA6B2EB7146");//это UUID структуры               
         // Добавляем книгу в корневой элемент который передали в фукцию
         root.appendChild(Signal); 
-        
-        
     }
      // Запись в файл глобальной переменой этой структуры с использованием XML
      void addSignalGlobal() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
-        patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\Project.prj";
+        patchF = GpatchF + "Project.prj";
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
         DocumentBuilder doc = document.newDocumentBuilder();
-
         // это из тестового метода преобразовываем файл для чтения XML
         Test.RemoveDTDFromSonataFile testStart = new Test.RemoveDTDFromSonataFile(patchF);   
         String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
@@ -299,15 +285,12 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
         // так преобразовываем строку в поток и скармливаем билдеру XML
         InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
         Document document_final = factory.newDocumentBuilder().parse(stream);
-        
         //Document document_final = doc.parse(patchF); // А вот тут у нас сложность с нашим документом <!DOCTYPE Project v. 1.0 >  нужно использовать TestRemoveDTD
         
         XPathFactory pathFactory = XPathFactory.newInstance();
-        XPath xpath = pathFactory.newXPath();
-        
+        XPath xpath = pathFactory.newXPath();        
         // а вот тут надо посчитать сколько переменных
         XPathExpression expr = xpath.compile("Project/Globals");
-       
         NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
@@ -327,10 +310,9 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
      
      // Запись в файл, что мнемосхемы увидела этот сигнал
      void addSignalHMI() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
-        patchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\HMI.int";
+        patchF = GpatchF + "HMI.int";
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
         DocumentBuilder doc = document.newDocumentBuilder();
-
         // это из тестового метода преобразовываем файл для чтения XML
         Test.RemoveDTDFromSonataFile testStart = new Test.RemoveDTDFromSonataFile(patchF);   
         String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
@@ -339,12 +321,9 @@ DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocume
         // так преобразовываем строку в поток и скармливаем билдеру XML
         InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
         Document document_final = factory.newDocumentBuilder().parse(stream);
-        
         //Document document_final = doc.parse(patchF); // А вот тут у нас сложность с нашим документом <!DOCTYPE Project v. 1.0 >  нужно использовать TestRemoveDTD
-        
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();
-        
         // а вот тут надо посчитать сколько переменных
         XPathExpression expr = xpath.compile("SubAppType/InterfaceList");    
         NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
