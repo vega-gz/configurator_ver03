@@ -25,6 +25,7 @@ import org.xml.sax.SAXException;
  *
  * @author nazarov
  */
+// --- Реализация файлами а не структорой 
 public class CreateTGPAAI {
   private  String name_str = "";
   private  String Type_UUIDstr = "";
@@ -43,7 +44,7 @@ public class CreateTGPAAI {
 
     
     
-         void T_GPA_AI_PLC(ArrayList<String[]> arg, String name_str) throws IOException {
+        void T_GPA_AI_PLC(ArrayList<String[]> arg, String name_str) throws IOException {
              this.name_str = name_str;
            // ReadWriteExel crivoiUID = new ReadWriteExel();// временнно для формирования UUID
             Type_UUIDstr = crivoiUID.getUIID();
@@ -53,19 +54,19 @@ public class CreateTGPAAI {
               data += "<Type Name=\"" + name_str + "\" Kind=\"Struct\" UUID=\"" + Type_UUIDstr + "\"> \n"
                    + "<Fields>\n";
 
-        while (iter_arg.hasNext()) {  
-          String[] tmpS = iter_arg.next();
-          data += "<Field Name=\"" +tmpS[0] +"\" Type=\"" +uuidAI_PLC+ "\" UUID=\"" +tmpS[1] +"\" Comment=\"" +tmpS[2] +"\" />\n";
+            while (iter_arg.hasNext()) {  
+                String[] tmpS = iter_arg.next();
+                data += "<Field Name=\"" +tmpS[0] +"\" Type=\"" +uuidAI_PLC+ "\" UUID=\"" +tmpS[1] +"\" Comment=\"" +tmpS[2] +"\" />\n";
+            }
+            data += "</Fields>\n"
+                   + "</Type>";
+            FileOutputStream out = new FileOutputStream(patchPrg + "Type_GPA_AI_PLC_from_java.type");
+            //out.write(data.getBytes("Cp1251"));
+            out.write(data.getBytes("UTF8"));
+            out.close();  
         }
-        data += "</Fields>\n"
-                + "</Type>";
-        FileOutputStream out = new FileOutputStream(patchPrg + "Type_GPA_AI_PLC_from_java.type");
-        //out.write(data.getBytes("Cp1251"));
-        out.write(data.getBytes("UTF8"));
-        out.close();
-       
-     }
-          void T_GPA_AI_HMI(ArrayList<String[]> arg, String name_str) throws IOException, ParserConfigurationException, SAXException, DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, XPathFactoryConfigurationException, InterruptedException {
+         
+        void T_GPA_AI_HMI(ArrayList<String[]> arg, String name_str) throws IOException, ParserConfigurationException, SAXException, DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, XPathFactoryConfigurationException, InterruptedException {
              this.name_str = name_str;
            // ReadWriteExel crivoiUID = new ReadWriteExel();// временнно для формирования UUID
             Type_UUIDstr = crivoiUID.getUIID();
@@ -81,15 +82,13 @@ public class CreateTGPAAI {
         while (iter_arg.hasNext()) {  
           String[] tmpS = iter_arg.next();
           data += "<Field Name=\"" +tmpS[0] +"\" Type=\"" +uuidAI_HMI+ "\" UUID=\"" +tmpS[1] +"\" Comment=\"" +tmpS[2] +"\" />\n";
-          
           // тоже новое добавление данный в структуру
           structT_GPA_AI_HMI.addData(tmpS[0], uuidAI_HMI, tmpS[1], tmpS[2]);
-        }
-        
+        }        
         // Тут вызовем все что записали в структуру - для теста, смотрим что записалось а так же наш новый класс
-         //structT_GPA_AI_HMI.getAllData();
+        //structT_GPA_AI_HMI.getAllData();
+        // записываем XML методом
         
-        // записываем в XML но тут лажа какая то
          XMLDomRW realise = new XMLDomRW(structT_GPA_AI_HMI); // пересылаем структуру для добавления  ее в глобальные переменные
          realise.runMethods(); // это надо вытащить в Главную панель
          
@@ -98,8 +97,6 @@ public class CreateTGPAAI {
         // realise.xpatchfind(document); // Variables данные добавления
         // realise.xpatchDataTypes(document);        
         // realise.writeDocument(document); // это запись в сам файл
-
-         
         data += "</Fields>\n"
                 + "</Type>";
         FileOutputStream out = new FileOutputStream(patchPrg + "Type_GPA_AI_HMI_from_java.type");

@@ -41,7 +41,7 @@
                               <Component id="jComboBox1" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="210" max="32767" attributes="0"/>
+                      <EmptySpace pref="208" max="32767" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
@@ -178,7 +178,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="create AI_  AI_HMI"/>
+        <Property name="text" type="java.lang.String" value="create AI_, AI_HMI, AI_PLC"/>
         <Property name="toolTipText" type="java.lang.String" value="&#x421;&#x43e;&#x437;&#x434;&#x430;&#x435;&#x442; &#x431;&#x430;&#x437;&#x43e;&#x432;&#x44b;&#x439; &#x43a;&#x43b;&#x430;&#x441;&#x441; AI_"/>
       </Properties>
       <Events>

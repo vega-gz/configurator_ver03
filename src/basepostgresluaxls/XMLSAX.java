@@ -7,6 +7,8 @@
 package basepostgresluaxls;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,8 +31,11 @@ import org.w3c.dom.Element;
 // --- Доп файл для базовых типов
 // может станет базовым вообще
 public class XMLSAX {
-    String AI_UUID = UUID.getUIID();
-    String AI_HMI_UUID = UUID.getUIID();
+    final String AI_UUID = UUID.getUIID();
+    final String AI_HMI_UUID = UUID.getUIID();
+    final String AI_DRV_UUID = UUID.getUIID();
+    final String AI_PLC_UUID = UUID.getUIID();
+    final String T_GPA_AI_HMI_UUID = UUID.getUIID();
 
 
     String massParametrsAI_ [][] = {		 
@@ -56,12 +61,27 @@ public class XMLSAX {
          {"res5", "BOOL", "853846974520C1BE4165B6A0B38344FF", "резерв" },
          {"res6", "BOOL", "7D2AE31D4C0C92D9095DD7B58E1B61A9", "резерв" }
     };
-    
     String massParametrsAI_HMI [][] = {		 
          {"PV", "REAL", UUID.getUIID(), "сигнал с датчика, преобразованный к физическим единицам" },
          {"Condition", AI_UUID, UUID.getUIID(), "0-11 коды отказов канала, 12-15 команды с мнемосхемы" },
          {"CurrentTimeOfRepair", "REAL", UUID.getUIID(), "текущее время ремонта канала" },
-         {"Manual_Target", "REAL", UUID.getUIID(), "задание для выхода блока в ручном режиме" },
+         {"Manual_Target", "REAL", UUID.getUIID(), "задание для выхода блока в ручном режиме" }
+    };
+    String massParametrsAI_PLC [][] = {		 
+         {"Span", "REAL", UUID.getUIID(), "диапазон датчика в EU" },
+         {"Offset", "REAL", UUID.getUIID(), "смещение датчика в EU" },
+         {"Tf", "REAL", UUID.getUIID(), "постоянная фильтра &gt; 0.001" },
+         {"min_ADC", "REAL", UUID.getUIID(), "минимальное значение в единицах АЦП для обрабатываемого канала" },
+         {"max_ADC", "REAL", UUID.getUIID(), "максимальное значение в единицах АЦП для обрабатываемого канала" },
+         {"min_fault_sensor_Eu", "REAL", UUID.getUIID(), "если сигнал с датчика Status.Input_sensor_eu меньше этого значения, то отказ канала" },
+         {"max_fault_sensor_Eu", "REAL", UUID.getUIID(), "если сигнал с датчика Status.Input_sensor_eu больше этого значения, то отказ канала" },
+         {"ROC", "REAL", UUID.getUIID(), "скорость изменения сигнала" },
+         {"recovery_time", "REAL", UUID.getUIID(), "время восстановления канала после исчезновения неисправности" },
+         {"repair_time", "REAL", UUID.getUIID(), "время через которое канал будет автоматически выведен из ручного режима" },
+         {"ROC_max", "REAL", UUID.getUIID(), "максимальное значение ROC, если ROC_enable = 1" },
+         {"ROC_min", "REAL", UUID.getUIID(), "минимальное значение ROC, если ROC_enable = 1" },
+         {"ROC_time", "REAL", UUID.getUIID(), "Время определения скорости изменения сигнала  (сек)" },
+         {"nAi", "INT", UUID.getUIID(), "Номер канала" }         
     };
     String globalpatchF = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\";
      // -- Тут созданике файла  Type_AI_.type (Будет без DOCTYPE) ---
@@ -92,8 +112,6 @@ public class XMLSAX {
         
     try {
         writeDocument(doc, patchF);
-    } catch (TransformerFactoryConfigurationError ex) {
-        Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
     } catch (TransformerException ex) {
         Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
     }  
@@ -105,17 +123,14 @@ public class XMLSAX {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         Document doc = factory.newDocumentBuilder().newDocument();
-        
         Element root = doc.createElement("Type");
         root.setAttribute("Name", "AI_HMI");
         root.setAttribute("Kind", "Struct");
         root.setAttribute("UUID", AI_HMI_UUID);
         doc.appendChild(root);
-            
         Element Fields = doc.createElement("Fields");
         //Fields.setAttribute("val", "3");
         root.appendChild(Fields);  
-        
         for (String field[] : massParametrsAI_HMI){
             Element Field = doc.createElement("Field");
             Field.setAttribute("Name", field[0]);
@@ -124,18 +139,87 @@ public class XMLSAX {
             Field.setAttribute("Comment", field[3]);
             Fields.appendChild(Field);
         }
-        
     try {
         writeDocument(doc, patchF);
-    } catch (TransformerFactoryConfigurationError ex) {
-        Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
     } catch (TransformerException ex) {
         Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
     }
-      
     }
     
-    // --- Внесение структуры в iec_hmi ---
+    // --- Создание файла AI_PLC ---
+    void createTypeAI_PLC() throws ParserConfigurationException{
+        String patchF = globalpatchF + "Type_AI_PLC.type";
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElement("Type");
+        root.setAttribute("Name", "AI_PLC");
+        root.setAttribute("Kind", "Struct");
+        root.setAttribute("UUID", AI_PLC_UUID);
+        doc.appendChild(root);
+        Element Fields = doc.createElement("Fields");
+        //Fields.setAttribute("val", "3");
+        root.appendChild(Fields);  
+        for (String field[] : massParametrsAI_PLC){
+            Element Field = doc.createElement("Field");
+            Field.setAttribute("Name", field[0]);
+            Field.setAttribute("Type", field[1]);
+            Field.setAttribute("UUID", field[2]);
+            Field.setAttribute("Comment", field[3]);
+            Fields.appendChild(Field);
+        }
+        try {
+            writeDocument(doc, patchF);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // --- Создание файла Списка структур  T_GPA_---
+    // Список из базы, имя структуры, уиды или типы, и новый uud этой структуры
+    void createTypeT_GPA_AI_HMI(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc) throws ParserConfigurationException{
+        // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
+        Struct structT_GPA_AI_HMI = new Struct(name, T_GPA_AI_HMI_UUID , AI_HMI_UUID); // это новое класс для структуры
+        //String patchF = globalpatchF + "T_GPA_AI_HMI.type";
+        String patchF = globalpatchF + name + ".type";
+        Iterator<String[]> iter_arg = arg.iterator();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElement("Type");
+        root.setAttribute("Name", name);
+        root.setAttribute("Kind", "Struct");
+        root.setAttribute("UUID", UUDstruc);
+        doc.appendChild(root);
+        Element Fields = doc.createElement("Fields");
+        root.appendChild(Fields);          
+        while (iter_arg.hasNext()) {  
+          String[] field = iter_arg.next();
+          Element Field = doc.createElement("Field");
+          Field.setAttribute("Name", field[0]);
+          Field.setAttribute("Type", UUDparent);
+          Field.setAttribute("UUID", field[1]); // уид из базы
+          Field.setAttribute("Comment", field[2]);
+          Fields.appendChild(Field);          
+          // тоже новое добавление данный в структуру
+          structT_GPA_AI_HMI.addData(field[0], UUDparent, field[1], field[2]);
+        }  
+        try {
+            writeDocument(doc, patchF);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    // получаем данные из базы и засовыем их в метод создания списка 
+    void runBaseRuncreateTypeT() throws ParserConfigurationException{
+        BasePostgresLuaXLS workbase = new BasePostgresLuaXLS();
+        workbase.connectionToBase();
+        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAI("ai1");
+        // Тут передаем данные тестовый вызов
+        createTypeT_GPA_AI_HMI(dataFromDbGPA, "T_GPA_AI_HMI", AI_HMI_UUID, T_GPA_AI_HMI_UUID);
+    }
+    
+    // --- Внесение структуры AI_ в Мнемосхемы iec_hmi ---
     void createTSensor_Aux_AI_Repair() throws ParserConfigurationException{
         String patchF = globalpatchF + "HMI.iec_hmi";
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
