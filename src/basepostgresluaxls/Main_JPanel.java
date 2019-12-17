@@ -72,6 +72,7 @@ public class Main_JPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setAutoscrolls(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -141,10 +142,17 @@ public class Main_JPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton8.setText("create AI_, AI_HMI, AI_PLC");
-        jButton8.setToolTipText("Создает базовый класс AI_");
+        jButton8.setToolTipText("Создает базовый класс AI_ так же AI_HMI, AI_PLC , PGA и заносит в глобальную переменную.");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("add_in_mnemo");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
             }
         });
 
@@ -166,9 +174,11 @@ public class Main_JPanel extends javax.swing.JPanel {
                             .addComponent(jButton3)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton8)
-                                .addGap(201, 201, 201)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton9)
+                                .addGap(110, 110, 110)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -192,7 +202,8 @@ public class Main_JPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
@@ -359,6 +370,7 @@ public class Main_JPanel extends javax.swing.JPanel {
        // Кнопка создания файла TypeAI_.type
          try {
              try {
+                 // Новая реализация файла XMLSAX
                  createXMLSax.createTypeAI_();
                  createXMLSax.createTypeAI_HMI();
                  createXMLSax.createTypeAI_PLC();
@@ -373,6 +385,32 @@ public class Main_JPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Файл "
                 + "записан в "); // Это сообщение
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        BasePostgresLuaXLS workbase = new BasePostgresLuaXLS();
+        workbase.connectionToBase();
+        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAI("ai1");
+        try {
+            try {
+                // Тут передаем данные тестовый вызов
+                createXMLSax.addSignalesMnemo(dataFromDbGPA, "T_GPA_AI_HMI");
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerFactoryConfigurationError ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathFactoryConfigurationException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }catch (SAXException  ex){}
+    }//GEN-LAST:event_jButton9ActionPerformed
     
 
 private ComboBoxModel getComboBoxModel()  // функция для создания списка из таблиц базы
@@ -409,6 +447,7 @@ private ComboBoxModel getComboBoxModel()  // функция для создан�
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
