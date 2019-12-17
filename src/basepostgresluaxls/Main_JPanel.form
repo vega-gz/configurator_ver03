@@ -37,11 +37,13 @@
                           <Component id="jButton3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                               <Component id="jComboBox1" min="-2" pref="123" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="208" max="32767" attributes="0"/>
+                      <EmptySpace pref="176" max="32767" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
@@ -73,6 +75,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -179,10 +182,18 @@
     <Component class="javax.swing.JButton" name="jButton8">
       <Properties>
         <Property name="text" type="java.lang.String" value="create AI_, AI_HMI, AI_PLC"/>
-        <Property name="toolTipText" type="java.lang.String" value="&#x421;&#x43e;&#x437;&#x434;&#x430;&#x435;&#x442; &#x431;&#x430;&#x437;&#x43e;&#x432;&#x44b;&#x439; &#x43a;&#x43b;&#x430;&#x441;&#x441; AI_"/>
+        <Property name="toolTipText" type="java.lang.String" value="&#x421;&#x43e;&#x437;&#x434;&#x430;&#x435;&#x442; &#x431;&#x430;&#x437;&#x43e;&#x432;&#x44b;&#x439; &#x43a;&#x43b;&#x430;&#x441;&#x441; AI_ &#x442;&#x430;&#x43a; &#x436;&#x435; AI_HMI, AI_PLC , PGA &#x438; &#x437;&#x430;&#x43d;&#x43e;&#x441;&#x438;&#x442; &#x432; &#x433;&#x43b;&#x43e;&#x431;&#x430;&#x43b;&#x44c;&#x43d;&#x443;&#x44e; &#x43f;&#x435;&#x440;&#x435;&#x43c;&#x435;&#x43d;&#x43d;&#x443;&#x44e;."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="add_in_mnemo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

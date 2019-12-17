@@ -17,6 +17,7 @@ import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,18 +90,16 @@ public class XMLDomRW {
             addSignalGlobal();
             addSignalHMI();
             //viewAllXML(document);  // просмотр всех записей
-            }
+    }
 
     public static void main(String[] args) throws DOMException, XPathExpressionException {
        /* try {
-           
-            // Тут весь вызов без параметров
-            XMLDomRW realise = new XMLDomRW();
-            realise.xpatchfind(document); // Variables данные добавления
-            realise.xpatchDataTypes(document);        
-            realise.writeDocument(document); // это запись в сам файл
-            //viewAllXML(document);  // просмотр всех записей
-            
+        // Тут весь вызов без параметров
+        MLDomRW realise = new XMLDomRW();
+        realise.xpatchfind(document); // Variables данные добавления
+        realise.xpatchDataTypes(document);        
+        realise.writeDocument(document); // это запись в сам файл
+        //viewAllXML(document);  // просмотр всех записей    
         } catch (ParserConfigurationException ex) {
             ex.printStackTrace(System.out);
         } catch (SAXException ex) {
@@ -190,7 +189,6 @@ public class XMLDomRW {
     // еще один метод но добавление Struct
      void xpatchDataTypes(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать DataTypes");
-        
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();
         XPathExpression expr = xpath.compile("Program/DataTypes");
@@ -199,7 +197,6 @@ public class XMLDomRW {
             Node n = nodes.item(i);
             createStruct(document, n); //Создаем элементы в ноде которую передали
             //stepThroughAll(n);// вызываем метод по перебору всего что в DataTypes
-            
         }
         System.out.println();
     }
@@ -208,7 +205,6 @@ public class XMLDomRW {
         //Node root = document.getDocumentElement();
          Node root = p_node; // это что бы не переписывать
          String addsumVar = Integer.toString(sumVar+1); // строка номер следующей Variable
- 
     /*
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     factory.setValidating(true);
@@ -217,29 +213,22 @@ public class XMLDomRW {
     */
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();
-        XPathExpression expr = xpath.compile("Variables");
-                
+        XPathExpression expr = xpath.compile("Variables");   
         Element Variable = document.createElement("Variable");
         Variable.setAttribute("UUID", UUID.getUIID()); // рандомный уид так по логике сонаты
         Variable.setAttribute("Name", "variable"+addsumVar);
         Variable.setAttribute("Type", nameStruct );
         Variable.setAttribute("TypeUUID", newUUIDelem);
         Variable.setAttribute("Usage", "internal");
-        
         // Добавляем книгу в корневой элемент который передали в фукцию
         root.appendChild(Variable); 
-        
         //expr.
-        
     }
         void createStruct(Document document, Node p_node)throws TransformerFactoryConfigurationError, DOMException, XPathExpressionException {
-
           Node root = p_node; // это что бы не переписывать
-
           Element Struct = document.createElement("Struct");
           Struct.setAttribute("UUID", newUUIDelem);
           Struct.setAttribute("Name", nameStruct);
-
           // перебираем все элементы в добавление поля
           Iterator<Map> iter_arg = structData.getlistData().iterator();
           while (iter_arg.hasNext()) {  //перебираем наш лист с Мапом
@@ -272,7 +261,9 @@ public class XMLDomRW {
         // Добавляем книгу в корневой элемент который передали в фукцию
         root.appendChild(Signal); 
     }
+    
      // Запись в файл глобальной переменой этой структуры с использованием XML
+     //  С игнорированием DOCTYPE
      void addSignalGlobal() throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
         patchF = GpatchF + "Project.prj";
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
@@ -286,7 +277,6 @@ public class XMLDomRW {
         InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
         Document document_final = factory.newDocumentBuilder().parse(stream);
         //Document document_final = doc.parse(patchF); // А вот тут у нас сложность с нашим документом <!DOCTYPE Project v. 1.0 >  нужно использовать TestRemoveDTD
-        
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();        
         // а вот тут надо посчитать сколько переменных
@@ -394,7 +384,11 @@ public class XMLDomRW {
             */
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // это разделители смотреть что бы не в одну строку
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            //transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            
             transformer.transform(new DOMSource(document), new StreamResult(file));
             
         } catch (TransformerException e) {

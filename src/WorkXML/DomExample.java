@@ -121,16 +121,14 @@ public class DomExample {
     
     static void xpatchfind(Document document) throws DOMException, XPathExpressionException {
         System.out.println("Печать Variables");
-        
         XPathFactory pathFactory = XPathFactory.newInstance();
         XPath xpath = pathFactory.newXPath();
         XPathExpression expr = xpath.compile("Program/Variables");
         NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
-            createBook(document, n); //Создаем олементы в ноде которую передали
+            createBook(document, n); //Создаем элементы в ноде которую передали
             //stepThroughAll(n);// вызываем метод по перебору всего что в Variables
-            
         }
         System.out.println();
     }
