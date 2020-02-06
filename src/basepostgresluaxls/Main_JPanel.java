@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
@@ -237,10 +238,6 @@ public class Main_JPanel extends javax.swing.JPanel {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         javax.swing.JOptionPane.showMessageDialog(null,"Данные из базы в файл " + file.getPath() + " загружены"); //диалоговое окно
-
-
-          
-   
 }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -253,7 +250,6 @@ public class Main_JPanel extends javax.swing.JPanel {
         //System.out.print(file.getPath());
         jTextArea1.setText(file.getPath()); //вносим данные в поле путь до файла
         // select Database test and write to file from Lua
-        
         startScript.runLua(file.getPath());
     }//GEN-LAST:event_jButton2ActionPerformed
     }
@@ -262,17 +258,17 @@ public class Main_JPanel extends javax.swing.JPanel {
               + "Desktop\\Info_script_file_work\\_actual_config\\Config\\Design\\IO_XLS\\GPA");
         int ret = fileopen.showDialog(null, "Загрузка Exel в базу");                
         if (ret == JFileChooser.APPROVE_OPTION) {
-        File file = fileopen.getSelectedFile();
-        
-        try {
-            // TODO add your handling code here:
-            //загрузка в базу изх файла
-            Main.fillDB(file.getPath());
+            File file = fileopen.getSelectedFile();
+            try {
+                // TODO add your handling code here:
+                //загрузка в базу изх файла
+                Main.fillDB(file.getPath());
+            }
+            catch(IOException e){
+                System.out.println(e);
+            }
         }
-       catch(IOException e){
-            System.out.println(e);
-        }
-        }
+        jComboBox1.setModel(getComboBoxModel()); // обовить список
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -305,9 +301,9 @@ public class Main_JPanel extends javax.swing.JPanel {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         // выводим список таблиц из базы test08_DB
-        String db = "test08_DB";
+        //String db = "test08_DB";
         workbase.connectionToBase();
-        listDropT = workbase.getviewTable(db);
+        listDropT = workbase.getviewTable();
         Iterator<String> iter_list_table = listDropT.iterator();
         String listTable = "";
        
@@ -341,18 +337,30 @@ public class Main_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        String selectT = (String)jComboBox1.getSelectedItem();
+        workbase.connectionToBase();
+        List <String> listColumn = workbase.selectColumns(selectT);
+        String[] columns = new String[listColumn.size()];
+        String tmpStr = "";
+        int j=0;
+        for(String s : listColumn){
+            //tmpStr = tmpStr + "\n" + s ;
+            columns[j] = s;
+            ++j;
+        }
+        System.out.println(tmpStr);
+        jTextArea1.setText(tmpStr);
+        
         jTextArea1.setText((String)jComboBox1.getSelectedItem());// выводим что выбрали
         ArrayList<String[]> dataFromDb = new ArrayList<>();
-        String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
+        //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
         String selectElem = (String)jComboBox1.getSelectedItem();
         workbase.connectionToBase();
         workbase.selectData(selectElem, columns); //внесли данные в сущность 
         StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
         dataFromDb = workbase.getcurrentSelectTable();
-        workbase.getColumns();
+        //System.out.println(workbase.getColumns());
         //javax.swing.JOptionPane.showMessageDialog(null,"Выборка по базе " + columns + " загружены"); //диалоговое окно
-        
         // тут при выборе открываем новое Диалоговое окно с таблицой выборки
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
@@ -363,7 +371,7 @@ public class Main_JPanel extends javax.swing.JPanel {
         JFrame frame = new JFrame();
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
-        frame.setVisible(true);
+        frame.setVisible(true);  
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -415,9 +423,9 @@ public class Main_JPanel extends javax.swing.JPanel {
 
 private ComboBoxModel getComboBoxModel()  // функция для создания списка из таблиц базы
 { 
-        String db = "test08_DB";
+        //String db = "test08_DB";
         workbase.connectionToBase();
-        listDropT = workbase.getviewTable(db);
+        listDropT = workbase.getviewTable();
         Iterator<String> iter_list_table = listDropT.iterator();
         
          String listTable = "";

@@ -19,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class BasePostgresLuaXLS {
 
@@ -34,7 +35,8 @@ public class BasePostgresLuaXLS {
       
         void connectionToBase(){
                //  Database credentials
-       final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/test08_DB";
+       //final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/test08_DB";
+       final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/03_01_2020_DB";
        //final String USER = "postgres";
        //final String PASS = "232345#";
        final String USER = "test08_DB";
@@ -42,7 +44,7 @@ public class BasePostgresLuaXLS {
 
 
               
-       System.out.println("Testing connection to PostgreSQL JDBC");
+       //System.out.println("Testing connection to PostgreSQL JDBC");
  
 	try {
 		Class.forName("org.postgresql.Driver");
@@ -274,7 +276,7 @@ public class BasePostgresLuaXLS {
                     break;
             }
              }
-            //System.out.println(sql); // Если надо смотрим что за sql запрос
+            System.out.println(sql); // Если надо смотрим что за sql запрос
         stmt = connection.createStatement();
         stmt.executeUpdate(sql); 
         stmt.close();
@@ -327,6 +329,7 @@ public class BasePostgresLuaXLS {
           }
           
           //--------------- SELECT DATA sum columns --------------
+          // какие именно столбцы дергать
           void selectData(String table, String[] columns){
              StructSelectData.setColumns(columns);
              ArrayList<String[]> selectData = new ArrayList<>();
@@ -338,34 +341,53 @@ public class BasePostgresLuaXLS {
                  else s_columns +="\"" + columns[i] + "\"";
              }
              try {        
-        stmt = connection.createStatement();
-        
-       System.out.println("SELECT " +s_columns+ " FROM " + table +";" );
-        
-        ResultSet rs = stmt.executeQuery( "SELECT " +s_columns+ " FROM " + table +";" );
-        
-        while ( rs.next() ) {
-            for (int i=0; i<columns.length; ++i){
-            strfromtb[i] = rs.getString(columns[i]);
+                stmt = connection.createStatement();
+                System.out.println("SELECT " +s_columns+ " FROM " + table +";" );
+                ResultSet rs = stmt.executeQuery( "SELECT " +s_columns+ " FROM " + table +";" );
+                while ( rs.next() ) {
+                    for (int i=0; i<columns.length; ++i){
+                        strfromtb[i] = rs.getString(columns[i]);
                     }
-            String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
-
-            selectData.add(tmp1);
-            //System.out.println(strfromtb[0]); // это просто для тестов
-        }
-        rs.close();
-        stmt.close();
-        StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру
-        //connection.commit();
-        //System.out.println("-- Operation SELECT done successfully");
+                    String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
+                    selectData.add(tmp1);
+                    //System.out.println(strfromtb[0]); // это просто для тестов
+                }
+                rs.close();
+                stmt.close();
+                StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру
+                //connection.commit();
+                //System.out.println("-- Operation SELECT done successfully");
              }
-              catch (SQLException e) {
-		System.out.println("Failed ADD data");
+             catch (SQLException e) {
+                System.out.println("Failed select data");
 		e.printStackTrace();                	
-        }
+            }
              //return currentSelectTable;
           }
-                                 //--------------- SELECT DATA to CreateTGPAAI--------------
+          
+          
+          // --- Select columns Table  ---
+          List <String> selectColumns(String table){
+              List <String> listColumn = new ArrayList();
+              String ColumnN = "column_name"; // Если захоим выборку пеще чего то
+                try {        
+                stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery( "SELECT " + ColumnN +
+                    " FROM information_schema.columns WHERE table_name = \'" + table +"\';" );
+                while ( rs.next() ) {
+                    listColumn.add(rs.getString(ColumnN));
+                }
+                stmt.close();
+                rs.close();
+             }
+             catch (SQLException e) {
+                System.out.println("Failed select data");
+		e.printStackTrace();                	
+            }
+            return listColumn;
+          }
+         
+            //--------------- SELECT DATA to CreateTGPAAI--------------
           ArrayList<String[]> selectDataGPAAI(String table){
              ArrayList<String[]> selectData = new ArrayList<>();
              try {        
@@ -419,7 +441,7 @@ public class BasePostgresLuaXLS {
         }
            }
            
-            ArrayList<String>  getviewTable(String ndbase){
+       ArrayList<String>  getviewTable(){
                   //-------------- DROPE TABLE ---------------
              ArrayList<String> list_table_base = new ArrayList();
        
@@ -444,7 +466,8 @@ public class BasePostgresLuaXLS {
 		                	
         }
         return list_table_base;
-           }
+        }
+       
     public static void main(String[] args) {
 //        Main startProgramm = new Main();
 
