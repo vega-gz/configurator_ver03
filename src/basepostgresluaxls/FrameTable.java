@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -132,79 +133,62 @@ public class FrameTable extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
- TableModel getTableData()  // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
-{ 
-   /*  String[] columnNames = {
-                    "Name",
-                    "Last modified",
-                    "Type",
-                    "Size"
-          };
-    
-    */
-    String[] columnDop = {"Boolean"};// до поля для галок или еще чего
-    String[] columnNames = StructSelectData.getColumns(); // Получаем столбцы из статических методов
+ TableModel getTableData(){ // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
+    // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
+    String[] columnDop = {"Выбор"};// до поля для галок или еще чего
+    String[] columnNames = StructSelectData.getColumns();
     String[] resultColumn = Stream.concat( Arrays.stream(columnDop), Arrays.stream(columnNames))
-                   .toArray(String[]::new); // соединяем два массива
-    resultColumn = Stream.concat(Arrays.stream(resultColumn), Arrays.stream(columnDop))
             .toArray(String[]::new); // соединяем два массива
-    //System.out.println(columnNames[0] + columnNames[1]);
-    
-   /* String[][] data = {
-                    {"addins", "02.11.2006 19:15", "Folder", ""},
-                    {"AppPatch", "03.10.2006 14:10", "Folder", ""},
-                    {"assembly", "02.11.2006 14:20", "Folder", ""},
-                    {"Boot", "13.10.2007 10:46", "Folder", ""},
-                    {"Branding", "13.10.2007 12:10", "Folder", ""},
-                    {"Cursors", "23.09.2006 16:34", "Folder", ""},
-                    {"Debug", "07.12.2006 17:45", "Folder", ""},
-                    {"Fonts", "03.10.2006 14:08", "Folder", ""},
-                    {"Help", "08.11.2006 18:23", "Folder", ""},
-                    {"explorer.exe", "18.10.2006 14:13", "File", "2,93MB"},
-                    {"helppane.exe", "22.08.2006 11:39", "File", "4,58MB"},
-                    {"twunk.exe", "19.08.2007 10:37", "File", "1,08MB"},
-                    {"nsreg.exe", "07.08.2007 11:14", "File", "2,10MB"},
-                    {"avisp.exe", "17.12.2007 16:58", "File", "12,67MB"},
-          };*/
-    String[][] data = StructSelectData.getcurrentSelectTable();
-     
-    return new DefaultTableModel(data, resultColumn){  // как то надо поменять местами колонки с помощью TableColumnModel
+    Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
+    Object[] streamArray ;
+    Object[] streamNull = new Object[1];
+    streamNull[0] = null;
+    Object[][] tmp2 = new Object[data.length][];
+    for(int i=0; i< data.length; i++){
+        streamArray = new Object[data[i].length+1];
+        // преобразовываем массив
+        Object[] testStream = Stream.concat( Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new); 
+        tmp2[i] = testStream;
+    }
+    return new DefaultTableModel(tmp2, resultColumn){  
     @Override           
     public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
       Class clazz = String.class;
       switch (columnIndex) {
-     //   case 0:
-     //     clazz = Integer.class;
-     //     break;
-     /*   case 1:
-          clazz = Integer.class;
-          break; */
-        case 3:
+        case 0:
           clazz = Boolean.class;
           break;
-         //           case 4:
-         // clazz = Boolean.class;
-         // break;
       }
       return clazz; 
-    }
-            
-     @Override
+    }       
+    @Override
     public boolean isCellEditable(int row, int column) {
-      return column == 3;
-    }
-    
+      return column == column;
+    } 
      @Override
     public void setValueAt(Object aValue, int row, int column) {
-      if (aValue instanceof Boolean && column == 3) {
-        System.out.println(aValue);
-        Vector rowData = (Vector)getDataVector().get(row);
-        rowData.set(3, (boolean)aValue);
+      // Условие проверки галочки скрывать легенду
+      if (aValue instanceof Boolean && column == 0) {
+        System.out.println("Posution - > " + row + " " + aValue);        
+        Vector rowData = (Vector)getDataVector().get(row); // не помню для чего но без этого только скрывает =(
+        rowData.set(0, (boolean)aValue);
         fireTableCellUpdated(row, column);
+        
+        try {
+            // Само действие не реализованно
+        if((boolean) aValue == true){
+          System.out.println("true");
+        }
+        if((boolean) aValue == false){
+          System.out.println("false");
+        }
+        }catch (NullPointerException e) {
+        JOptionPane.showMessageDialog(null, "Трудности с добавлением");
+        }
       }
+
     }
     };
-
 }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

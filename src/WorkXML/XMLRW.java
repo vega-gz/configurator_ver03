@@ -35,49 +35,46 @@ public class XMLRW {
     }
   }
     
-    // вот тут мы все и получаем данные
+    // вот тут мы все и получаем данные рекурсией
     private static void stepThroughAll (Node start)
-  {
-    System.out.println(start.getNodeName()+" = "+start.getNodeValue());
-    if (start.getNodeType() == start.ELEMENT_NODE)
     {
-      NamedNodeMap startAttr = start.getAttributes();
-      for (int i = 0;
-          i < startAttr.getLength();
-          i++) {
-        Node attr = startAttr.item(i);
-        System.out.println(" Attribute: "+ attr.getNodeName()
-            +" = "+attr.getNodeValue());
-      }
-    }
-    for (Node child = start.getFirstChild();
-        child != null;
-        child = child.getNextSibling())
-    {
-      stepThroughAll(child);
-    }
+        System.out.println(start.getNodeName()+" = "+start.getNodeValue());
+        if (start.getNodeType() == start.ELEMENT_NODE){
+            NamedNodeMap startAttr = start.getAttributes();
+            for (int i = 0; i < startAttr.getLength(); i++) {
+                Node attr = startAttr.item(i);
+                System.out.println(" Attribute: "+ attr.getNodeName()
+                +" = "+attr.getNodeValue());
+            }
+        }
+        for (Node child = start.getFirstChild();
+            child != null;
+            child = child.getNextSibling())
+        {
+        stepThroughAll(child);
+        }
   }
     //изменение данных не работает
     private static void changeOrder (Node start,
             String elemName,
             String elemValue)
-  {
-    if (start.getNodeName().equals(elemName)) {
-      start.getFirstChild().setNodeValue(elemValue);
-    }
-    for (Node child = start.getFirstChild();
-        child != null;
-        child = child.getNextSibling())
     {
-      changeOrder(child, elemName, elemValue);
-    }
+        if (start.getNodeName().equals(elemName)) {
+        start.getFirstChild().setNodeValue(elemValue);
+        }
+        for (Node child = start.getFirstChild();
+            child != null;
+            child = child.getNextSibling())
+        {
+            changeOrder(child, elemName, elemValue);
+        }
   }
     public static void main(String[] args) {
         try {
             // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             // Создается дерево DOM документа из файла
-            Document document = documentBuilder.parse("src\\WorkXML\\test.xml");
+            Document document = documentBuilder.parse("E:\\Sonata\\r9709\\project_switcher\\KVANT2R_Ekaterinovka_20191204_1\\Design\\AT_HMI.iec_hmi");
             //Document document = documentBuilder.parse("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.iec_st");
             
             // Получаем корневой элемент
@@ -87,12 +84,13 @@ public class XMLRW {
             System.out.println(root.getFirstChild()); // не видит
             System.out.println(root.getNodeValue());
             System.out.println(root.getNodeType());
-           */ System.out.println(root.getParentNode());
+           */ 
+            System.out.println(root.getParentNode());
             // Просматриваем все подэлементы корневого - т.е. книги
             
             //тут нработает ноды перебирает
            XMLRW testXMLRW =  new XMLRW();
-           testXMLRW.stepThrough(root); 
+           testXMLRW.stepThroughAll(root); 
 
             
       /*

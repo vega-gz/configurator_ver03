@@ -35,6 +35,7 @@ import javax.xml.xpath.XPathFactoryConfigurationException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -303,27 +304,50 @@ public class XMLSAX {
         String myVarU_0 = UUID.getUIID();
         String myVarU_0_0 = UUID.getUIID(); // УИД переменной для связки .но не уверен
         String myVarU_1 = UUID.getUIID();
+        String uuIdTBaSence = "6BF99E384F16CE39204C00877BBA46AE"; // перебрать файлы в его поиска  // Это уид TBaSence
+        
+        String TypeuuIdString = "38FDDE3B442D86554C56C884065F87B7";
+        String TypeuuIdTpos = "17C82815436383728D79DA8F2EF7CAF2";
+        String TypeuuIdLREAL = "65F1DDD44EDA9C0776BB16BBDFE36B1F";
+        String TypeuuIdBOOL = "EC797BDD4541F500AD80A78F1F991834";
+        String TypeuuIdTSize = "B33EE7B84825BBBA7F975BB735D4EB22"; 
+        
+        String uuIdpos = "599604C246641AA6BA0E508C9ABF7EA4";
+        String uuIdangle = "00FC1D804A2DE5A83DE85390D640AC3D";
+        String uuIdenabled = "15B097034B9BBE7CCD78E0A466A64239";
+        String uuIdmoveable = "6D62810D46DF8C4B27E62DBEBA63194B";
+        String uuIdvisible = "EAC5288F431A370F7493EF98A2C613D5";
+        String uuIdzValue = "29E9E6AD475BD9B49E6F40B0328374A7";
+        String uuIdhint = "9001F21244C66932FB81B7B021B085BA";
+        String uuIdsize = "1555B4384D69683C33FCB4A79B1A0932";
+        
+        String uuIdMouseLBPress = "299295AF47A6CCAC26009C964C5B47C5";
+        String uuIdmouseLBRelease = "8DE6001343803CF639F332B16CC30079";
+        String uuIdmouseRBPress = "5DE993F543E00267EF077D89D3D01B5B";
+        String uuIdmouseRBRelease = "0AB0718D41E90B02F75425B41E39C1F0";
+        String uuIdmouseEnter = "AA1D53154C9D3E9C25B0ADA056F82B5D";
+        String uuIdmouseLeave = "C21BC0A24A8E157AF50BC59A1635CD7B";
+        String uuIdmouseLBDblClick = "1BD263D2412FA33DA367C5B3480C9F0A";
+        
         String EventOutputsEvent [][] = {		 
           // тут вопрос с UUID
-         {"mouseLBPress", "событие нажатия левой кнопки мыши на объекте", "299295AF47A6CCAC26009C964C5B47C5"},
-         {"mouseLBRelease","событие отпускания левой кнопки мыши на объекте", "8DE6001343803CF639F332B16CC30079"},
-         {"mouseRBPress","событие нажатия правой кнопки мыши на объекте", "5DE993F543E00267EF077D89D3D01B5B"},
-         {"mouseRBRelease","событие отпускания правой кнопки мыши на объекте", "0AB0718D41E90B02F75425B41E39C1F0"},
-         {"mouseEnter","событие входа указателя мыши в пределы объекта", "AA1D53154C9D3E9C25B0ADA056F82B5D"},
-         {"mouseLeave","событие выхода указателя мыши за пределы объекта", "C21BC0A24A8E157AF50BC59A1635CD7B"},
-         {"mouseLBDblClick","событие двойного щелчка левой кнопки мыши на объекте", "1BD263D2412FA33DA367C5B3480C9F0A"}       
+         {"mouseLBPress", "событие нажатия левой кнопки мыши на объекте", uuIdMouseLBPress},
+         {"mouseLBRelease","событие отпускания левой кнопки мыши на объекте", uuIdmouseLBRelease},
+         {"mouseRBPress","событие нажатия правой кнопки мыши на объекте", uuIdmouseRBPress},
+         {"mouseRBRelease","событие отпускания правой кнопки мыши на объекте", uuIdmouseRBRelease},
+         {"mouseEnter","событие входа указателя мыши в пределы объекта", uuIdmouseEnter},
+         {"mouseLeave","событие выхода указателя мыши за пределы объекта", uuIdmouseLeave},
+         {"mouseLBDblClick","событие двойного щелчка левой кнопки мыши на объекте", uuIdmouseLBDblClick}       
         };
         String InputVarsDeclare [][] = {		 
-         {"pos", "TPos", "17C82815436383728D79DA8F2EF7CAF2", "позиция объекта", "(x:=0,y:=0)", "599604C246641AA6BA0E508C9ABF7EA4"},
-         {"angle", "LREAL", "65F1DDD44EDA9C0776BB16BBDFE36B1F", "угол поворота объекта", "0", "00FC1D804A2DE5A83DE85390D640AC3D"},
-         {"enabled", "BOOL", "EC797BDD4541F500AD80A78F1F991834", "доступность объекта", "TRUE", "15B097034B9BBE7CCD78E0A466A64239"},
-         {"moveable", "BOOL", "EC797BDD4541F500AD80A78F1F991834", "подвижность объекта", "FALSE", "6D62810D46DF8C4B27E62DBEBA63194B"},
-         {"visible", "BOOL", "EC797BDD4541F500AD80A78F1F991834", "видимость объекта", "TRUE", "EAC5288F431A370F7493EF98A2C613D5"},
-         {"zValue", "LREAL", "65F1DDD44EDA9C0776BB16BBDFE36B1F", "z-индекс объекта", "0", "29E9E6AD475BD9B49E6F40B0328374A7"},
-         {"hint", "STRING", "38FDDE3B442D86554C56C884065F87B7", "всплывающая подсказка", "&apos;&apos;", "9001F21244C66932FB81B7B021B085BA"},
-         {"size", "TSize", "B33EE7B84825BBBA7F975BB735D4EB22", "размер прямоугольника", "(width:=50,height:=50)", "1555B4384D69683C33FCB4A79B1A0932"},
-         {"Agregat1_test", "STRING", "38FDDE3B442D86554C56C884065F87B7", "комментарий1", "&apos;OwnAgregat&apos;", myVarU_0}, // произвольная переменная не было комментарием по этому так посмотрим
-         {"Agregat1_testRU", "STRING", "38FDDE3B442D86554C56C884065F87B7", "комментарий2", "&apos;НашАгрегат&apos;", myVarU_1} // произвольная переменная
+         {"pos", "TPos", TypeuuIdTpos, "позиция объекта", "(x:=0,y:=0)", uuIdpos},
+         {"angle", "LREAL", TypeuuIdLREAL, "угол поворота объекта", "0", uuIdangle},
+         {"enabled", "BOOL", TypeuuIdBOOL, "доступность объекта", "TRUE", uuIdenabled},
+         {"moveable", "BOOL", TypeuuIdBOOL, "подвижность объекта", "FALSE", uuIdmoveable},
+         {"visible", "BOOL", TypeuuIdBOOL, "видимость объекта", "TRUE", uuIdvisible},
+         {"zValue", "LREAL", TypeuuIdLREAL, "z-индекс объекта", "0", uuIdzValue},
+         {"hint", "STRING", TypeuuIdString, "всплывающая подсказка", "&apos;&apos;", uuIdhint},
+         {"size", "TSize", TypeuuIdTSize, "размер прямоугольника", "(width:=50,height:=50)", uuIdsize}
         };
         Iterator<String[]> iter_arg = lisSig.iterator();
         String patchF = globalpatchF + "HMI.iec_hmi";
@@ -345,7 +369,7 @@ public class XMLSAX {
         //  так как нода у нас одна то пишем только в 1 по этому for так работает
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
-            System.out.println(n.getNodeName());;
+            System.out.println(n.getNodeName());
             // Создаем элемент Графический компонент GraphicsCompositeFBType
             // и его структуру не в папке а просто в корне
             Element GCFBtype = document_final.createElement("GraphicsCompositeFBType");
@@ -384,60 +408,116 @@ public class XMLSAX {
             InterfaceList.appendChild(InputVars);
             int Ycord = -704;
             int NumberSign = 0;
-            while (iter_arg.hasNext()) { 
-            String uuidFB = UUID.getUIID();
-            String[] field = iter_arg.next();
-            Element FB = document_final.createElement("FB");
-            //nameListSign
-            String nameBAnpartClone = "BaseAnPar_Test_" + Integer.toString(NumberSign);
-            FB.setAttribute("Name", nameBAnpartClone);
-            FB.setAttribute("Type", "TBaseAnPar");
-            FB.setAttribute("UUID", uuidFB);
-            FB.setAttribute("TypeUUID", "C06031C04C13BB17463EB1B889813E68"); // Это уид TBaseAnPar
-            FB.setAttribute("X", "-704.75"); 
-            FB.setAttribute("Y", Integer.toString(Ycord)); // Меняем только Y
-            Ycord = Ycord + 400;
-            // Таких элементов 3
-            Element VarValue0 = document_final.createElement("VarValue");
-            VarValue0.setAttribute("Variable", "PrefStr");
-            String VPrefStr = "'" + nameListSign +"." + "'"; // Только таким видом добился
-            System.out.println(VPrefStr);
-            VarValue0.setAttribute("Value", VPrefStr);
-            VarValue0.setAttribute("Type", "STRING"); 
-            VarValue0.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7"); 
-            FB.appendChild(VarValue0);            
-            Element VarValue1 = document_final.createElement("VarValue");
-            VarValue1.setAttribute("Variable", "pos");
-            VarValue1.setAttribute("Value", "(x:=0,y:=0)");
-            VarValue1.setAttribute("Type", "TPos"); 
-            VarValue1.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2"); 
-            FB.appendChild(VarValue1);
-            Element VarValue2 = document_final.createElement("VarValue");
-            VarValue2.setAttribute("Variable", "NameAlg");
-            String VNameAlg = "\u0027" + field[0] + "\u0027";// Только так работает как добиться методом кода не понятно
-            VarValue2.setAttribute("Value", VNameAlg); // Название сигнала
+            int xPos = 2;
+            int yPos = 0;
+             while (iter_arg.hasNext()) { 
+                String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")" ; //"(x:=0,y:=0)"
+                String uuidFB = UUID.getUIID();
+                String[] field = iter_arg.next();
+                Element FB = document_final.createElement("FB");
+                //nameListSign
+                String nameBAnpartClone = "BaseAnPar_Test_" + Integer.toString(NumberSign);
+                FB.setAttribute("Name", nameBAnpartClone);
+                //FB.setAttribute("Type", "TBaseAnPar");
+                FB.setAttribute("Type", "TBaseSen");
+                FB.setAttribute("UUID", uuidFB);
+                FB.setAttribute("TypeUUID", uuIdTBaSence); // уид TBaSence
+                FB.setAttribute("X", "-704.75"); 
+                FB.setAttribute("Y", Integer.toString(Ycord)); // Меняем только Y
+                Ycord = Ycord + 400;
+                // Таких элементов 3
+                Element VarValue0 = document_final.createElement("VarValue");
+                VarValue0.setAttribute("Variable", "PrefStr");
+                String VPrefStr = "'" + nameListSign +"." + "'"; // Только таким видом добился
+                System.out.println(VPrefStr);
+                VarValue0.setAttribute("Value", VPrefStr);
+                VarValue0.setAttribute("Type", "STRING"); 
+                VarValue0.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7"); 
+                FB.appendChild(VarValue0);            
+                Element VarValue1 = document_final.createElement("VarValue");
+                VarValue1.setAttribute("Variable", "pos");
+                VarValue1.setAttribute("Value", XYposition);
+                VarValue1.setAttribute("Type", "TPos"); 
+                VarValue1.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2"); 
+                FB.appendChild(VarValue1);
+                Element VarValue2 = document_final.createElement("VarValue");
+                VarValue2.setAttribute("Variable", "NameAlg");
+                String VNameAlg = "\u0027" + field[0] + "\u0027";// Только так работает как добиться методом кода не понятно
+                VarValue2.setAttribute("Value", VNameAlg); // Название сигнала
             
-            VarValue2.setAttribute("Type", "TPos"); 
-            VarValue2.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2"); 
-            FB.appendChild(VarValue2);
-            FBNetwork.appendChild(FB);  
-            // Так же переменные наши в Дату конектионс
-            Element Connection = document_final.createElement("Connection");
-            Connection.setAttribute("Source", "Agregat1_test");
-            Connection.setAttribute("Destination", nameBAnpartClone +"."+"PrefAb");
-            Connection.setAttribute("SourceUUID", myVarU_0);
-            Connection.setAttribute("DestinationUUID", uuidFB +"." + "7DF53A3B47B1075B9D3AE78253FC271B");// АЙДИ  TBaseAnPar может поменяться
-            DataConnections.appendChild(Connection);
-            ++NumberSign;
+                VarValue2.setAttribute("Type", "TPos"); 
+                VarValue2.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2"); 
+                FB.appendChild(VarValue2);
+                FBNetwork.appendChild(FB);  
+                // Так же переменные наши в Дату конектионс
+                Element Connection = document_final.createElement("Connection");
+                Connection.setAttribute("Source", "Agregat1_test");
+                Connection.setAttribute("Destination", nameBAnpartClone +"."+"PrefAb");
+                Connection.setAttribute("SourceUUID", myVarU_0);
+                Connection.setAttribute("DestinationUUID", uuidFB +"." + "7DF53A3B47B1075B9D3AE78253FC271B");// АЙДИ  TBaseAnPar может поменяться
+                DataConnections.appendChild(Connection);
+                ++NumberSign;
+                yPos = yPos + 20;
+            }
+            FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
         }
-        FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
-    }
     // Тут запустим запись в файл
     writeDocument(document_final, patchF);
     //и возвращаем ему удаленный DOCTYPE
     testStart.returnToFileDtd(patchF);
     }
     
+    public void enumerationData(String patchF) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        try {
+            Test.RemoveDTDFromSonataFile testStart = new Test.RemoveDTDFromSonataFile(patchF);   
+            String documenWithoutDoctype;
+            documenWithoutDoctype = testStart.methodRead(patchF); // Так читаем и получаем преобразованные данные,
+            InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
+            Document document_final = factory.newDocumentBuilder().parse(stream);
+            // Получаем корневой элемент
+            Node root = document_final.getDocumentElement();
+            //передаем ноду на переборку
+            stepThroughAll(root);
+            // Тут запустим запись в файл
+            writeDocument(document_final, patchF);
+            //и возвращаем ему удаленный DOCTYPE
+            //testStart.returnToFileDtd(patchF);
+        } catch (SAXException ex) {
+            System.out.println("Not file XML !!!");
+        }    
+        catch (InterruptedException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerFactoryConfigurationError ex) {
+            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // --- вот тут мы все и получаем данные c ноды рекурсией ---
+    private static void stepThroughAll (Node start){
+        System.out.println(start.getNodeName()+" = "+start.getNodeValue());
+        if (start.getNodeType() == start.ELEMENT_NODE){
+            NamedNodeMap startAttr = start.getAttributes();
+            for (int i = 0; i < startAttr.getLength(); i++) {
+                Node attr = startAttr.item(i);
+                System.out.println(" Attribute: "+ attr.getNodeName()
+                +" = "+attr.getNodeValue());
+            }
+        }
+        for (Node child = start.getFirstChild();
+            child != null;
+            child = child.getNextSibling())
+        {
+        stepThroughAll(child);
+        }
+  }
     // --- Запипись в файл структурой XML ---
      void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
