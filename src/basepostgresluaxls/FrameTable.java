@@ -70,9 +70,9 @@ public class FrameTable extends javax.swing.JPanel {
                 .addContainerGap(881, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,9 +82,9 @@ public class FrameTable extends javax.swing.JPanel {
                 .addContainerGap(468, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(40, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(40, 40, 40)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jTabbedPane1.addTab("tab1", jPanel1);
@@ -107,7 +107,7 @@ public class FrameTable extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         JFileChooser fileopen = new JFileChooser("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\_actual_config\\Config\\Design\\IO_XLS\\GPA");
-        int ret = fileopen.showDialog(null, "Открыть файл(DRV_from_base_LUA)");                
+        int ret = fileopen.showDialog(null, "Сохранить файл(DRV_from_base_LUA)");                
         if (ret == JFileChooser.APPROVE_OPTION) {
         File file = fileopen.getSelectedFile();
         //System.out.print(file.getPath());

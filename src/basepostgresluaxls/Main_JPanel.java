@@ -268,7 +268,7 @@ public class Main_JPanel extends javax.swing.JPanel {
                 System.out.println(e);
             }
         }
-        jComboBox1.setModel(getComboBoxModel()); // обовить список
+        jComboBox1.setModel(getComboBoxModel()); // обовить список с занесенными таблицами
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -387,10 +387,10 @@ public class Main_JPanel extends javax.swing.JPanel {
                  Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
              }
          } catch (TransformerFactoryConfigurationError ex) {
-        Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
-        JOptionPane.showMessageDialog(null, "Файл не создан!"); 
+            Logger.getLogger(XMLDomRW.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Файл не создан!"); 
          }
-        JOptionPane.showMessageDialog(null, "Файл "
+         JOptionPane.showMessageDialog(null, "Файл "
                 + "записан в "); // Это сообщение
     }//GEN-LAST:event_jButton8ActionPerformed
 

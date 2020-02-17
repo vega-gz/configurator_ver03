@@ -11,8 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -467,13 +470,35 @@ public class XMLSAX {
     testStart.returnToFileDtd(patchF);
     }
     
+    // сюда передаем полный адрес файла для его дальнейшей переработки
     public void enumerationData(String patchF) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
+        List<String> lines; // Лист с прочитанным файлом
+        boolean findErr = false; // если попали в ексепшен и дробим нашим парсером
+        try {
+            Document document_final = factory.newDocumentBuilder().parse(patchF);
+        } catch (IOException ex) {
+           System.out.println("Error read file" +Paths.get(patchF)); // выброс ошибок по файлу
+        }catch (SAXException ex) {
+                   // вот тут уже вызываем метод удаления DOCTYPE и тд если будет
+            System.out.println("Over error all ride step to two!!!!");
+             findErr = true;
+        }
+         catch (ParserConfigurationException ex) {
+                System.out.println("Standart parser down :(");
+         }
+        /*// Так правильней читать файл используем потом
+         try {
+            lines = Files.readAllLines(Paths.get(patchF), StandardCharsets.UTF_8); 
+         } catch (IOException ex) {
+            System.out.println("Error read file" +Paths.get(patchF)); // Ну тут понятно выброс ошибок по файлу
+        }
+         */
+        if(findErr){ // Запускаем режим преобразования файлов только после Exception
         try {
             Test.RemoveDTDFromSonataFile testStart = new Test.RemoveDTDFromSonataFile(patchF);   
-            String documenWithoutDoctype;
-            documenWithoutDoctype = testStart.methodRead(patchF); // Так читаем и получаем преобразованные данные,
+            String documenWithoutDoctype = testStart.methodRead(patchF); // Так читаем и получаем преобразованные данные,
             InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
             Document document_final = factory.newDocumentBuilder().parse(stream);
             // Получаем корневой элемент
@@ -483,33 +508,45 @@ public class XMLSAX {
             // Тут запустим запись в файл
             writeDocument(document_final, patchF);
             //и возвращаем ему удаленный DOCTYPE
-            //testStart.returnToFileDtd(patchF);
+            testStart.returnToFileDtd(patchF);
         } catch (SAXException ex) {
             System.out.println("Not file XML !!!");
         }    
-        catch (InterruptedException ex) {
+        catch (InterruptedException | TransformerFactoryConfigurationError | TransformerException | IOException | ParserConfigurationException ex) {
                 Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    // --- вот тут мы все и получаем данные c ноды рекурсией ---
-    private static void stepThroughAll (Node start){
-        System.out.println(start.getNodeName()+" = "+start.getNodeValue());
-        if (start.getNodeType() == start.ELEMENT_NODE){
-            NamedNodeMap startAttr = start.getAttributes();
-            for (int i = 0; i < startAttr.getLength(); i++) {
+    // --- получаем данные c ноды, рекурсией ---
+    private static boolean stepThroughAll (Node start){
+        boolean find = false;
+        String Kind = "Kind";
+        String Name = "Name";
+        //String AI_HMI = "AI_HMI";
+        String AI_HMI = "@MESSAGE_FRAMEWORK";
+        String UUID = "";
+        boolean finK = false;
+        boolean finAIHMI = false;
+       // System.out.println(start.getNodeName()+" = "+start.getNodeValue()); // получаем имя ноды и значение узла
+        if (start.getNodeType() == start.ELEMENT_NODE){ //  проверка хз чего The node is an Element.
+            NamedNodeMap startAttr = start.getAttributes(); // Получение атрибутов каждого элемента
+            for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
                 Node attr = startAttr.item(i);
-                System.out.println(" Attribute: "+ attr.getNodeName()
-                +" = "+attr.getNodeValue());
+                String Attribute = attr.getNodeName(); // Название атрибута
+                String Value = attr.getNodeValue(); // значение атрибута
+                //System.out.println(" Attribute: "+ Attribute +" = "+Value);
+                if(Attribute.equals("Type") & Value.equals("STRING")){finK = true;}
+                if(Attribute.equals("Name") & Value.equals(AI_HMI)){finAIHMI = true;} // название самой структуры которую ищем
+                if(Attribute.equals("UUID")) {UUID = Value;}
             }
+            if(finK & finAIHMI){ // Проверяем нашли мы что искали
+              System.out.println("Find UUID AI_HMI " + UUID);
+              return find;
+            }
+            // и обнуляем хотя можно и брейк в коде сделать
+            finK = false;
+            finAIHMI = false;
         }
         for (Node child = start.getFirstChild();
             child != null;
@@ -517,6 +554,7 @@ public class XMLSAX {
         {
         stepThroughAll(child);
         }
+        return false;
   }
     // --- Запипись в файл структурой XML ---
      void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {

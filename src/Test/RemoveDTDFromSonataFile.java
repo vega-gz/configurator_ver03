@@ -21,6 +21,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
@@ -54,40 +56,35 @@ import org.xml.sax.SAXException;
 
 // удаляем не верный <!DOCTYPE SubAppType v. 1.3 >
 public  class RemoveDTDFromSonataFile {
-    
     static String patchD = "";
-
-    private  RemoveDTDFromSonataFile() {
-        this.patchD = "C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\";
-    }
+    
     public RemoveDTDFromSonataFile(String patchD) {
         this.patchD = patchD;
     }
     
     static String doctype = "";
     static int positionDTD;
+    static boolean positionDTDFind = false; // триггер для поиска DTD что бы не гонять цикл
     
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, Exception{
-    
-    // --- Ниже реализация этого функционала ----
-        
-    RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.int");
-    String patchF = patchD ;
-    String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
-      // так парсим что получили
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    factory.setNamespaceAware(true);
-      // так преобразовываем строку в поток и скармливаем билдеру XML
-    InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
-      // или так
-      //InputStream in = org.apache.commons.io.IOUtils.toInputStream(source, "UTF-8");
-    Document doc = factory.newDocumentBuilder().parse(stream);
-    // Так передаем на переработку
-    viewAllXML(doc);
-    writeDocument(doc, patchF);
-    testStart.returnToFileDtd(patchF);
-    //System.out.println(testStart.methodRead(patchF)); 
-    //testStart.writeWithoutDTD(patchF, methodRead(patchF)); // Так записываем без DTD
+        // --- Ниже реализация этого функционала ----    
+        RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.int");
+        String patchF = patchD ;
+        String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
+        // так парсим что получили
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        // так преобразовываем строку в поток и скармливаем билдеру XML
+        InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8)); 
+        // или так
+        //InputStream in = org.apache.commons.io.IOUtils.toInputStream(source, "UTF-8");
+        Document doc = factory.newDocumentBuilder().parse(stream);
+        // Так передаем на переработку
+        viewAllXML(doc);
+        writeDocument(doc, patchF);
+        testStart.returnToFileDtd(patchF);
+        //System.out.println(testStart.methodRead(patchF)); 
+        //testStart.writeWithoutDTD(patchF, methodRead(patchF)); // Так записываем без DTD
     }
     
     // --- Запись книги в файл ----
@@ -103,7 +100,7 @@ public  class RemoveDTDFromSonataFile {
         }
     }
     
-    static void viewAllXML (Document document){
+    static void viewAllXML(Document document){
       // Получаем корневой элемент
             Node root = document.getDocumentElement();            
             System.out.println("List of books:");
@@ -138,7 +135,8 @@ public  class RemoveDTDFromSonataFile {
      if (matcher2.matches()){ 
          positionDTD = pos; // Так же вносим позицию от куда это взяли
          doctype = matcher2.group(1); // в глобальные переменную что собираемся затереть
-         System.out.println(doctype);
+         //System.out.println(doctype);
+         positionDTDFind = true; // Тригер сработал
          return "";  // Возвращаем пустую строку если нашли DOCTYPE 
      }else return st1;
 
@@ -147,18 +145,32 @@ public  class RemoveDTDFromSonataFile {
      //метод чтения файла
    static  public String methodRead(String path) throws InterruptedException{    
         String result_data = "";
+        StringBuffer sb = new StringBuffer();
+        long start_time = 0;
         try {
-        BufferedReader in = new BufferedReader(new FileReader(path));
-        String str;
-        int pos_str = 0;
-        while ((str = in.readLine()) != null){
-            result_data += paternDOCTYPE(str, pos_str) + "\n"; // Передаем строки в парсер обработчик
-            ++pos_str;
-        }
-        in.close();
+            BufferedReader in = new BufferedReader(new FileReader(path));
+            String str;
+            int pos_str = 0;
+            start_time = System.nanoTime();
+            while ((str = in.readLine()) != null){
+                //System.out.println(str);
+                if(positionDTDFind == false){
+                    sb.append(paternDOCTYPE(str, pos_str) + "\n"); // Передаем строки в парсер обработчик
+                    //result_data += paternDOCTYPE(str, pos_str) + "\n";
+                }else{
+                sb.append(str).append("\n");
+                //result_data += str + "\n";
+                }
+            // sb.append(tmpStr1);
+                ++pos_str;
+            }
+            in.close();
     } catch (IOException e) {
     }
+    result_data = sb.toString();
     // тут сразу и записываем для тестов видимо было
+    long end_time = System.nanoTime();
+    System.out.println("time " + (end_time - start_time));
     return result_data; // возвращаем преобразованную строку 
     }
    
