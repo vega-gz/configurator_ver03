@@ -12,6 +12,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -19,9 +39,10 @@ import javax.swing.plaf.basic.BasicSliderUI;
  */
 public class Main_JPanel extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main_JPanel
-     */
+    String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
+    String url, nameProject, user, pass;
+    private static final String FILENAME = "Config.xml";
+
     public Main_JPanel() {
         initComponents();
     }
@@ -36,6 +57,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,29 +68,41 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("ConnectionToBase");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGap(118, 118, 118)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(63, 63, 63)
                 .addComponent(jButton1)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addComponent(jButton2)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-        FrameCreate fc=new FrameCreate();
+
+        FrameCreate fc = new FrameCreate(url, nameProject, user, pass);//вызываем второре окно для записи конф файла
 //        JFrame.setDefaultLookAndFeelDecorated(true);
 //        JFrame frame = new JFrame();
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,11 +135,53 @@ public class Main_JPanel extends javax.swing.JFrame {
 //        frame.setVisible(true);
 //        
 //        
-       
-        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        try {
+            final File xmlFile = new File(System.getProperty("user.dir") //user.dir-это путь до домашнего каталога(каталог где хранится прога)
+                    + File.separator + FILENAME);//separator это разделитель =="\"
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            org.w3c.dom.Document doc = db.parse(xmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Наш файл:" + doc.getDocumentElement().getNodeName());
+            System.out.println("=================");
+
+            NodeList nodeList = doc.getElementsByTagName("config");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                //выводим инфу по каждому их элементов
+                Node node = nodeList.item(i);
+                System.out.println();
+                System.out.println("Текущий элемент: " + node.getNodeName());
+                if (Node.ELEMENT_NODE == node.getNodeType()) {
+                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
+//                    System.out.println("Пользователь:"+element.getElementsByTagName("USER").item(0).getTextContent());
+//                    System.out.println("Пароль:"+element.getElementsByTagName("PASS").item(0).getTextContent());
+//                    System.out.println("URL адрес:"+element.getElementsByTagName("DB_URL").item(0).getTextContent());
+                    pass = element.getElementsByTagName("PASS").item(0).getTextContent();
+                    user = element.getElementsByTagName("USER").item(0).getTextContent();
+                    url = element.getElementsByTagName("URL").item(0).getTextContent();
+                }
+
+            }
+            System.out.println(pass+" "+url+" "+ user);
+           
+        }catch(ParserConfigurationException | IOException | SAXException e){
+            e.printStackTrace();
+        }
+
+        DataBase db = new DataBase();
+        db.connectionToBase(url, user, pass);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
 
@@ -118,5 +194,6 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

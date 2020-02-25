@@ -7,44 +7,39 @@ package configurator;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DataBase {
 
     Statement stmt;
     Connection connection = null;
     private ArrayList<String[]> currentSelectTable;
-    private String[] colums;
+    private String[] columns;
 
-    void connectionToBase(String url, String user,String pass) {
-
+    void connectionToBase(String url, String pass, String user) {
         String DB_URL = url;
         String USER = user;
-        String PASS=pass;
-        try{
-            Class.forName("org.postgresql.Drivar");
-        }catch(ClassNotFoundException e){
+        String PASS = pass;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
             return;
         }
         System.out.println("");
         System.out.println("PostgreSQL JDBC Driver successfully connected");
-        try{
-            connection=DriverManager.getConnection(url, user, pass);
-        }catch(SQLException e){
+        try {
+            connection = DriverManager
+                    .getConnection(DB_URL, USER, PASS);
+
+        } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
             return;
         }
-
     }
 }
