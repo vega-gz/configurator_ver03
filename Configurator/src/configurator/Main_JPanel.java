@@ -19,6 +19,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -41,7 +46,15 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
     String url, nameProject, user, pass;
-    private static final String FILENAME = "Config.xml";
+    String FILENAME = "Config.xml";
+    RWExcel excel = new RWExcel();
+    String path;
+    DataBase DB = new DataBase();
+    String signal=null;
+    ArrayList<String> listDropT = new ArrayList();
+    XMLSAX createXMLSax =new XMLSAX();
+    int filepath;
+    String filepatch;
 
     public Main_JPanel() {
         initComponents();
@@ -58,42 +71,123 @@ public class Main_JPanel extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("NewProject");
+        jButton1.setText("Создать новый проект");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("ConnectionToBase");
+        jButton2.setText("Подключиться к базе");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+        jButton3.setText("Загрузить Excel файл");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ao1", "ai1", "do1", "di1" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButton4.setText("Отобразить список");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Сгенерировать сигнал");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Очистить ");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(164, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jButton1)
-                .addGap(71, 71, 71)
-                .addComponent(jButton2)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton6)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,39 +196,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        FrameCreate fc = new FrameCreate(url, nameProject, user, pass);//вызываем второре окно для записи конф файла
-//        JFrame.setDefaultLookAndFeelDecorated(true);
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        JTextField text1, text2, text3;
-//        JLabel label;
-//        JButton button;
-//
-//        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
-//
-//        Toolkit kit = Toolkit.getDefaultToolkit();//поработать над расположением экрана
-//        Dimension screen = kit.getScreenSize();
-//        int screenHeight = screen.height;
-//        int screenWidght = screen.width;
-//        frame.setLocation(screenHeight / 2, screenWidght / 2);
-//
-//        label = new JLabel("Test label");
-//        text1 = new JTextField("User", 25);
-//        text2 = new JTextField("Pass", 25);
-//        text3 = new JTextField("Path to project", 25);
-//
-//        frame.add(label);
-//        frame.add(text1);
-//        frame.add(text2);
-//        frame.add(text3);
-//        frame.add(button = new JButton("Action"));
-//
-//        frame.setPreferredSize(new Dimension(500, 150));
-//
-//        frame.pack();
-//        frame.setVisible(true);
-//        
-//        
+        CreateFrame frame = new CreateFrame(url, nameProject, user, pass);//вызываем второре окно для записи конф файла
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -163,37 +225,211 @@ public class Main_JPanel extends javax.swing.JFrame {
                 System.out.println("Текущий элемент: " + node.getNodeName());
                 if (Node.ELEMENT_NODE == node.getNodeType()) {
                     org.w3c.dom.Element element = (org.w3c.dom.Element) node;
-//                    System.out.println("Пользователь:"+element.getElementsByTagName("USER").item(0).getTextContent());
-//                    System.out.println("Пароль:"+element.getElementsByTagName("PASS").item(0).getTextContent());
-//                    System.out.println("URL адрес:"+element.getElementsByTagName("DB_URL").item(0).getTextContent());
+//                    
                     pass = element.getElementsByTagName("PASS").item(0).getTextContent();
                     user = element.getElementsByTagName("USER").item(0).getTextContent();
                     url = element.getElementsByTagName("URL").item(0).getTextContent();
                 }
 
             }
-            System.out.println(pass+" "+url+" "+ user);
-           
-        }catch(ParserConfigurationException | IOException | SAXException e){
+            System.out.println(pass + " " + url + " " + user);
+
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
 
         DataBase db = new DataBase();
-        db.connectionToBase(url, user, pass);
+        db.connectionToBase(url, pass, user);
+        
+        JOptionPane.showMessageDialog(null, "Соединение установлено!");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public static void main(String args[]) {
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main_JPanel().setVisible(true);
+        JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
+        int ren = fileopen.showDialog(null, "DownloadToBase");
+        if (ren == JFileChooser.APPROVE_OPTION) {
+            File file = fileopen.getSelectedFile();// выбираем файл из каталога
+
+            path = file.toString();
+            excel.setPatchF(path);
+            try {
+                 excel.readAllfile();//это всего лишь читает файл но не записыыает его
+                 Main m=new Main();
+                m.fillDB(file.getPath());
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        }
+         jComboBox1.setModel(getComboBoxModel());
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+      //вот в этом дерьме мы формируем колонки ,метод selectColums
+        
+        String selectT = (String) jComboBox1.getSelectedItem();
+     //   DB.connectionToBase(url, pass, user);
+        List<String> listColumn = DB.selectColumns(selectT);
+        String[] columns = new String[listColumn.size()];
+        String tmpStr = "трутуту";
+        int j = 0;
+        for (String s : listColumn) {
+           
+            columns[j] = s;
+            ++j;
+        }
+        System.out.println(tmpStr);
+        jTextArea1.setText(tmpStr);
+
+        if (selectT.equals("ai1")) {
+            signal = "ai1";
+        } else if (selectT.equals("ao1")) {
+            signal = "ao1";
+        } else if (selectT.equals("do1")) {
+            signal = "do1";
+        } else if (selectT.equals("di1")) {
+            signal = "di1";
+        }
+
+        jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали
+        ArrayList<String[]> dataFromDb = new ArrayList<>();
+        //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
+        String selectElem = (String) jComboBox1.getSelectedItem();
+      //  DB.connectionToBase(url,pass,user);
+        DB.selectData(selectElem, columns); //внесли данные в сущность 
+        StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
+        dataFromDb = DB.getcurrentSelectTable();
+        //System.out.println(workbase.getColumns());
+        //javax.swing.JOptionPane.showMessageDialog(null,"Выборка по базе " + columns + " загружены"); //диалоговое окно
+        // тут при выборе открываем новое Диалоговое окно с таблицой выборки
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
+        int sizeWidth = 800;
+        int sizeHeight = 600;
+        int locationX = (screenSize.width - sizeWidth) / 2;
+        int locationY = (screenSize.height - sizeHeight) / 2;
+        FrameTabel frameTable = new FrameTabel();
+        JFrame frame = new JFrame();
+        frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+        frame.setContentPane(frameTable); // Передаем нашу форму
+        frame.setVisible(true);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+   //  DB.connectionToBase(url,pass,user);
+        listDropT = DB.getviewTable();
+        Iterator<String> iter_list_table = listDropT.iterator();
+        String listTable = "";
+
+        while (iter_list_table.hasNext()) {
+
+            listTable += iter_list_table.next() + " \n";
+        }
+
+        jTextArea1.setText(listTable);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       JFileChooser fileload = new JFileChooser();
+//        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        fileload.setAcceptAllFileFilterUsed(false);
+//        fileload.setFileFilter(null);
+//        fileload.setAcceptAllFileFilterUsed(false);
+//        fileload.setMultiSelectionEnabled(true);
+        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
+         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
+        if (filepath == JFileChooser.APPROVE_OPTION) {
+           String filename=fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать 
+            try {
+                 filepatch=fileload.getSelectedFile().getCanonicalPath();
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }
+           
+            switch (signal) {
+                case "ai1":
+                    try {
+                       
+                        createXMLSax.runBaseRuncreateTypeT(filepatch);
+                    } catch (ParserConfigurationException ex) {
+                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case "ao1":
+                    try {
+                        System.out.println("12345657это ПРОВЕРКА ПРОВЕРКА");
+                        
+                        createXMLSax.runBaseRuncreateType(filepatch);
+                    } catch (ParserConfigurationException ex) {
+                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case "do1":
+                    try {
+                        createXMLSax.runBaseRuncreateTypeDSig(filepatch);
+                    } catch (ParserConfigurationException ex) {
+                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case "di1":
+                    try {
+                        createXMLSax.runBaseRuncreateTypeDSign(filepatch);
+                    } catch (ParserConfigurationException ex) {
+                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+        }
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // workbase.connectionToBase();
+        if (!listDropT.isEmpty()){  // если есть что удалять передаем лист в обработчик баз
+        DB.dropTable(listDropT);
+        }
+        else ;
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+     private ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
+    {
+        //String db = "test08_DB";
+        DB.connectionToBase(url,pass,user);
+        listDropT = DB.getviewTable();
+        Iterator<String> iter_list_table = listDropT.iterator();
+
+        String listTable = "";
+        int l = 0;
+        while (iter_list_table.hasNext()) {
+            iter_list_table.next();
+            //System.out.print(l);
+            ++l;
+        }
+        String[] listarrayTable = new String[l];
+        l = 0;
+
+        iter_list_table = listDropT.iterator();
+        while (iter_list_table.hasNext()) {
+            String res = iter_list_table.next();
+            listarrayTable[l] = res;
+            ++l;
+        }
+        return new DefaultComboBoxModel(listarrayTable);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

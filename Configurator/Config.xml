@@ -1,1 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><config><Settings><USER>User</USER><URL>Path to project</URL><PASS>Password</PASS><nameProject>NameProject</nameProject></Settings></config>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+<Settings>
+<USER>test08_DB</USER>
+<URL>jdbc:postgresql://172.16.35.25:5432/test08_DB</URL>
+<nameProject>Configurator</nameProject>
+<PASS>test08_DB</PASS>
+</Settings>
+</config>
