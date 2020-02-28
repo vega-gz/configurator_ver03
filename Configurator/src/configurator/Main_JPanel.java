@@ -239,7 +239,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         }
 
         DataBase db = new DataBase();
-        db.connectionToBase(url, pass, user);
+        db.connectionToBase();
         
         JOptionPane.showMessageDialog(null, "Соединение установлено!");
 
@@ -296,7 +296,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали
         ArrayList<String[]> dataFromDb = new ArrayList<>();
         //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
-        String selectElem = (String) jComboBox1.getSelectedItem();
+        String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
       //  DB.connectionToBase(url,pass,user);
         DB.selectData(selectElem, columns); //внесли данные в сущность 
         StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
@@ -395,7 +395,7 @@ public class Main_JPanel extends javax.swing.JFrame {
      private ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
         //String db = "test08_DB";
-        DB.connectionToBase(url,pass,user);
+        DB.connectionToBase();
         listDropT = DB.getviewTable();
         Iterator<String> iter_list_table = listDropT.iterator();
 

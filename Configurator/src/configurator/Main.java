@@ -31,7 +31,7 @@ public class Main {
         //  workbase.connectionToBase();
         // workbase.connectionToBase(url, pass, user);//по сути я уже подключен к базе данных
         Iterator<String> it_list_sheet = rwexcel.get_list_sheet().iterator(); //забираем список листов в файле и строим итератор из них
-        while (it_list_sheet.hasNext()) {
+        while (it_list_sheet.hasNext()) {//
             String name_table = it_list_sheet.next(); // название таблицы как имя листа из файла
             int maxlencol;
             if (name_table.equals("DO1")) {
@@ -50,7 +50,10 @@ public class Main {
             while (iter_sheet.hasNext()) {
                 String[] dataFromFile = iter_sheet.next();
 
-                workbase.insertRows(name_table, dataFromFile, name_collums);//вносим данные в базу
+              if (name_table.equals("DO1")) {
+                    workbase.insertRows(name_table, dataFromFile, name_collums); //Вносим данные в базу
+                }
+                workbase.insertRows(name_table, dataFromFile, name_collums); //
 
             }
 

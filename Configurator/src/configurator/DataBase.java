@@ -26,13 +26,13 @@ public class DataBase {
     UUID uuid = new UUID();
     String url, pass, user;
 
-    void connectionToBase(String url, String pass, String user) {
+    void connectionToBase() {
         this.user = user;
         this.pass = pass;
         this.url = url;
-        String DB_URL = url;
-        String PASS = pass;
-        String USER = user;
+        String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
+        String PASS = "test08_DB";
+        String USER = "test08_DB";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -56,7 +56,7 @@ public class DataBase {
 
     void createBase(String name) {
       //  connectionToBase(url, pass, user);
-        
+
 // вызов Фукция подключения к базе
         try {
             //name = name.replace("-", "_").replace(".", "_").replace(" ", "_"); // может понадобиться как в сосздании таблицы
@@ -187,6 +187,7 @@ public class DataBase {
 
         }
     }
+
     void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         String nameTbanalise = new String(name_table);
         String sql = "";
@@ -227,7 +228,6 @@ public class DataBase {
                 }
                 break;
                 default: { // а вот тут трудности у нас
-                    
 
                     if (!listNameColum.isEmpty()) {
                         int tmp_cell = 0;
@@ -585,9 +585,10 @@ public class DataBase {
 
         }
     }
+
     List<String> listBase() {
         ArrayList<String> listBase = new ArrayList();
-      //  connectionToBase(); // вызов Фукция подключения к базе
+        //  connectionToBase(); // вызов Фукция подключения к базе
         try {
             stmt = connection.createStatement();
             String sql = "SELECT datname FROM pg_database;";
@@ -629,10 +630,11 @@ public class DataBase {
         }
         return list_table_base;
     }
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         //new BasePostgresLuaXLS().createBase("test6671"); // Так создаем 
         List<String> tmp = new DataBase().listBase(); // Так смотрим
-        for(String s : tmp){
+        for (String s : tmp) {
             System.out.println(s);
         }
     }
