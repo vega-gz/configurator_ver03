@@ -33,6 +33,9 @@ public class DataBase {
         String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
         String PASS = "test08_DB";
         String USER = "test08_DB";
+        //String DB_URL=url;
+        //String PASS=pass;
+        //String USER=user;
 
         try {
             Class.forName("org.postgresql.Driver");
