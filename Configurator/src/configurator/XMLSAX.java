@@ -42,9 +42,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
 public class XMLSAX {
-     private final String AI_UUID = UUID.getUUID();
+
+    private final String AI_UUID = UUID.getUUID();
     private final String AI_HMI_UUID = UUID.getUUID();
     private final String AI_DRV_UUID = UUID.getUUID();
     private final String AI_PLC_UUID = UUID.getUUID();
@@ -54,7 +54,7 @@ public class XMLSAX {
     private final String AO_PLC_UUID = UUID.getUUID();
     private final String AO_DRV_UUID = UUID.getUUID();
     private final String T_AO_UUID = UUID.getUUID();
-    String globalpatchF ;//сюда записываем путь,куда писать наши сигналы
+    String globalpatchF;//сюда записываем путь,куда писать наши сигналы
 
     // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
     private Struct struct; // это новое класс для структуры
@@ -88,6 +88,8 @@ public class XMLSAX {
 //        {"CurrentTimeOfRepair", "REAL", UUID.getUIID(), "текущее время ремонта канала"},
 //        {"Manual_Target", "REAL", UUID.getUIID(), "задание для выхода блока в ручном режиме"}
 //    };
+    String massParametrsAI_[][] = {};
+
 //    String massParametrsAI_PLC[][] = {
 //        {"Span", "REAL", UUID.getUIID(), "диапазон датчика в EU"},
 //        {"Offset", "REAL", UUID.getUIID(), "смещение датчика в EU"},
@@ -111,6 +113,37 @@ public class XMLSAX {
 //        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 //        factory.setNamespaceAware(false);
 //        Document doc = factory.newDocumentBuilder().newDocument();
+    void createTypeAI_() throws ParserConfigurationException, TransformerFactoryConfigurationError, TransformerException {
+        String patchF = globalpatchF;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        Document doc = factory.newDocumentBuilder().newDocument();
+
+        Element root = doc.createElement("Type");
+        root.setAttribute("Name", "AI_");
+        root.setAttribute("Kind", "Struct");
+        root.setAttribute("UUID", AI_UUID);
+        doc.appendChild(root);
+        
+        Element Fields=doc.createElement("FIelds");
+        root.appendChild(Fields);
+        
+        for(String field[]:massParametrsAI_){
+            Element Field=doc.createElement("Field");
+            Field.setAttribute("Name", field[0]);
+            Field.setAttribute("Type", field[1]);
+            Field.setAttribute("UUID", field[2]);
+            Field.setAttribute("Comment", field[3]);
+            Fields.appendChild(Field);
+            
+        }
+        try{
+            writeDocument(doc, patchF);
+        }catch(TransformerException ex){
+            
+        }
+
+    }
 //
 //        Element root = doc.createElement("Type");
 //        root.setAttribute("Name", "AI_");
@@ -200,13 +233,13 @@ public class XMLSAX {
 
     // --- Создание файла Списка структур  T_GPA_---
     // Список из базы, имя структуры, уиды или типы, и новый uud этой структуры
-    void createTypeT_GPA(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc,String file) throws ParserConfigurationException {
+    void createTypeT_GPA(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
         // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
         struct = new Struct(name, T_GPA_AI_HMI_UUID, AI_HMI_UUID); // это новое класс для структуры
 
         //String patchF = globalpatchF + "T_GPA_AI_HMI.type";
-        globalpatchF=file;
-        String patchF = globalpatchF +"\\"+ name + ".type";
+        globalpatchF = file;
+        String patchF = globalpatchF + "\\" + name + ".type";
         Iterator<String[]> iter_arg = arg.iterator();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
@@ -232,7 +265,7 @@ public class XMLSAX {
         try {
             writeDocument(doc, patchF);
         } catch (TransformerException ex) {
-           
+
         }
     }
 
@@ -345,10 +378,10 @@ public class XMLSAX {
         }
     }
 
-    void createTypeT_GPA_AO(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc,String file) throws ParserConfigurationException {//основной метод,записывает AO_GPA
+    void createTypeT_GPA_AO(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {//основной метод,записывает AO_GPA
         struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-        globalpatchF=file;
-        String patchF =globalpatchF +"\\"+ name + ".type";
+        globalpatchF = file;
+        String patchF = globalpatchF + "\\" + name + ".type";
         Iterator<String[]> iter_arg = arg.iterator();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
@@ -383,10 +416,10 @@ public class XMLSAX {
 
     }
 
-    void createType_GPA_DO(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc,String file) throws ParserConfigurationException {//добавил параметр String file (в нем путь необходимой папки)
+    void createType_GPA_DO(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {//добавил параметр String file (в нем путь необходимой папки)
         struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-        globalpatchF=file;//присваиваю глобалу путь до файла.Не знаю,зачем я так сложно сделал
-        String patchF = globalpatchF +"\\"+ name + ".type";//формируется окончательный путь с именем файла
+        globalpatchF = file;//присваиваю глобалу путь до файла.Не знаю,зачем я так сложно сделал
+        String patchF = globalpatchF + "\\" + name + ".type";//формируется окончательный путь с именем файла
         Iterator<String[]> iter_arg = arg.iterator();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
@@ -419,10 +452,10 @@ public class XMLSAX {
 
     }
 
-    void createType_GPA_DI(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc,String file) throws ParserConfigurationException {
+    void createType_GPA_DI(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
         struct = new Struct(name, T_AO_UUID, T_AO_UUID);//не понимаю как работают и зачем работают эти два уида,видимо где то косякнул,но работает правильно =))
-        globalpatchF=file;
-        String patchF = globalpatchF +"\\"+ name + ".type";
+        globalpatchF = file;
+        String patchF = globalpatchF + "\\" + name + ".type";
         Iterator<String[]> iter_arg = arg.iterator();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
@@ -458,12 +491,12 @@ public class XMLSAX {
     // получаем данные из базы и засовыем их в метод создания списка 
     void runBaseRuncreateTypeT(String file) throws ParserConfigurationException {
         DataBase workbase = new DataBase();
-      //  workbase.connectionToBase();
+        //  workbase.connectionToBase();
         ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAI("ai1");
 
         // Тут передаем данные тестовый вызов
         createTypeT_GPA(dataFromDbGPA, "T_GPA_AI", AI_HMI_UUID//(точно не могу предположить но походу это тип данных и в AO он рандомный у меня,это неправилно)
-                , T_GPA_AI_HMI_UUID,file);
+                , T_GPA_AI_HMI_UUID, file);
         try {
             // Заносим нашу структуру выше созданную в глобалку переменную
             sendStructToGlobV(struct);
@@ -488,13 +521,13 @@ public class XMLSAX {
 
     void runBaseRuncreateType(String file) throws ParserConfigurationException {//это еще одна лютая хрень
         DataBase workbase = new DataBase();
-       // workbase.connectionToBase();
+        // workbase.connectionToBase();
 
         ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAO("ao1");
         ArrayList<String[]> dataFromDbAO = workbase.selectDataAO("ao1");//создаю еще 
         ArrayList<String[]> dataFromDbAO_HMI = workbase.selectDataAO_HMI("ao1");
 
-        createTypeT_GPA_AO(dataFromDbGPA, "T_GPA_AO", AO_HMI_UUID, T_AO_UUID,file);
+        createTypeT_GPA_AO(dataFromDbGPA, "T_GPA_AO", AO_HMI_UUID, T_AO_UUID, file);
 
         //---закоментировал структурирование PLC DRV HMI ,вдруг понадобятся
 //        createTypeAO_PLC(dataFromDbAO, "Type_AO_PLC", AO_HMI_UUID, AO_PLC_UUID);//пересылаем данные для чтения AO_PLC
@@ -523,19 +556,19 @@ public class XMLSAX {
 
     void runBaseRuncreateTypeDSig(String file) throws ParserConfigurationException {
         DataBase workbase = new DataBase();
-       // workbase.connectionToBase();
+        // workbase.connectionToBase();
 
         ArrayList<String[]> dataFromGPA_DO = workbase.selectDataGPA_DO("do1");
-        createType_GPA_DO(dataFromGPA_DO, "T_GPA_DO", AI_UUID, AI_UUID,file);
+        createType_GPA_DO(dataFromGPA_DO, "T_GPA_DO", AI_UUID, AI_UUID, file);
 
     }
 
     void runBaseRuncreateTypeDSign(String file) throws ParserConfigurationException {
         DataBase workbase = new DataBase();
-      //  workbase.connectionToBase();
+        //  workbase.connectionToBase();
 
         ArrayList<String[]> dataFromGPA_DI = workbase.selectDataGPA_DI("di1");
-        createType_GPA_DI(dataFromGPA_DI, "T_GPA_DI", AI_UUID, AI_UUID,file);
+        createType_GPA_DI(dataFromGPA_DI, "T_GPA_DI", AI_UUID, AI_UUID, file);
     }
 
     // --- Передача собственной структуры в глобальные переменные Сонаты --- 
@@ -580,7 +613,6 @@ public class XMLSAX {
 //        }
 //
 //    }
-
     // Добавляем сигналы в Мнемосхемы  не реализованно =(
     void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
         String myVarU_0 = UUID.getUUID();

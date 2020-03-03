@@ -48,12 +48,12 @@ public class CreateFrame extends JFrame {
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
 
-        GridLayout layout = new GridLayout(5, 5, 0, 5);
-        label1 = new JLabel("User");
-        label2 = new JLabel("nameProject");
-        label3 = new JLabel("Password");
-        label4 = new JLabel("Path to project");
-        label5 = new JLabel("Chosse path");
+        GridLayout layout = new GridLayout(5, 5, 0, 5);//менеджер компоновки который располагает в виде таблицы 
+        label1 = new JLabel("Пользователь");
+        label2 = new JLabel("Имя проекта");
+        label3 = new JLabel("Пароль");
+        label4 = new JLabel("Адрес базы данных");
+        label5 = new JLabel("Выбор базы из списка");
 
         text1 = new JTextField(25);
         text2 = new JTextField(25);
@@ -61,9 +61,9 @@ public class CreateFrame extends JFrame {
         text4 = new JTextField(25);
 
         urlbox = new JComboBox(items);
-        button = new JButton("Action");
+        button = new JButton("Создать файл");
 
-        panel1.setLayout(layout);
+        panel1.setLayout(layout);//добавляем в панель менеджер компоновки
         panel1.add(label1);
         panel1.add(text1);
         panel1.add(label2);
@@ -89,7 +89,7 @@ public class CreateFrame extends JFrame {
 
     }
 
-    public class TestActionListener implements ActionListener {
+    public class TestActionListener implements ActionListener {//слушатель кнопки
 
         public void actionPerformed(ActionEvent e) {
             user = text1.getText();//берем значения из текстового поля и помещаем в переменную
@@ -97,7 +97,7 @@ public class CreateFrame extends JFrame {
             url = text4.getText();
             pass = text3.getText();
 
-            if (url.isEmpty()) {
+            if (url.isEmpty()) {//проверяем,если строка пустая то берем значение из Chosse
                 url = (String) urlbox.getSelectedItem();
 
             }

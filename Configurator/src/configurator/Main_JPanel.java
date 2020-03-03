@@ -69,6 +69,8 @@ public class Main_JPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -105,7 +107,6 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ao1", "ai1", "do1", "di1" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -151,22 +152,18 @@ public class Main_JPanel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton4)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -259,10 +256,10 @@ public class Main_JPanel extends javax.swing.JFrame {
                  Main m=new Main();
                 m.fillDB(file.getPath());
             } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);//
             }
         }
-         jComboBox1.setModel(getComboBoxModel());
+         jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -294,7 +291,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         }
 
         jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали
-        ArrayList<String[]> dataFromDb = new ArrayList<>();
+        ArrayList<String[]> dataFromDb = new ArrayList<>();//создание списка 
         //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
         String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
       //  DB.connectionToBase(url,pass,user);
@@ -308,7 +305,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         int sizeWidth = 800;
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
-        int locationY = (screenSize.height - sizeHeight) / 2;
+        int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
         FrameTabel frameTable = new FrameTabel();
         JFrame frame = new JFrame();
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
@@ -359,7 +356,7 @@ public class Main_JPanel extends javax.swing.JFrame {
                     break;
                 case "ao1":
                     try {
-                        System.out.println("12345657это ПРОВЕРКА ПРОВЕРКА");
+                       // System.out.println("12345657это ПРОВЕРКА ПРОВЕРКА");
                         
                         createXMLSax.runBaseRuncreateType(filepatch);
                     } catch (ParserConfigurationException ex) {
@@ -370,7 +367,7 @@ public class Main_JPanel extends javax.swing.JFrame {
                     try {
                         createXMLSax.runBaseRuncreateTypeDSig(filepatch);
                     } catch (ParserConfigurationException ex) {
-                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);//доволен не дововлен 
                     }
                     break;
                 case "di1":
@@ -397,7 +394,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         //String db = "test08_DB";
         DB.connectionToBase();
         listDropT = DB.getviewTable();
-        Iterator<String> iter_list_table = listDropT.iterator();
+        Iterator<String> iter_list_table = listDropT.iterator();//запускаем наш итератор
 
         String listTable = "";
         int l = 0;
@@ -429,6 +426,8 @@ public class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
