@@ -36,9 +36,9 @@ import org.xml.sax.SAXException;
 public class WriteConfigFile {
 
     String FILENAME = "Config.xml";
-    File file = new File(System.getProperty("user.dir") + File.separator + FILENAME);
+    File file = new File(System.getProperty("user.dir") + File.separator + FILENAME);//путь к файлу указали в корневую папку
 
-    void writeTXT(String user, String url, String nameProject) throws IOException {
+    void writeTXT(String user, String url, String nameProject) throws IOException {//читаем txt файл 
 
         String USER, URL, namePro;
         USER = user;
@@ -65,7 +65,7 @@ public class WriteConfigFile {
     }
 
     void writeXML(String user, String url, String nameProject, String pass) throws ParserConfigurationException{//сделать файл красиво,с переносом строки чтобы записывал
-
+//--------этот метод для того чтобы добавлять в конфиг файл доп записи
 //        if (file.isFile()) {//если файл уже существует ,добавить в него данные
 //            try{
 //                //это пока не актуально,нужно сделать динамически изменяющиеся 
@@ -122,17 +122,17 @@ public class WriteConfigFile {
 //        } else {
 
             try {
-                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();//создание дом парсера
                 DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
-                Document doc = docBuilder.newDocument();
+                Document doc = docBuilder.newDocument();//создание верхнего элемента
                 Element rootElement = doc.createElement("config");
                 doc.appendChild(rootElement);
 
-                Element settings = doc.createElement("Settings");
+                Element settings = doc.createElement("Settings");//ниже идет создание внутренних элементов
                 rootElement.appendChild(settings);
 
-                Element USER = doc.createElement("USER");
+                Element USER = doc.createElement("USER");//
                 USER.appendChild(doc.createTextNode(user));
                 settings.appendChild(USER);
 
@@ -152,7 +152,7 @@ public class WriteConfigFile {
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");//запись xml в виде структуры
                 DOMSource sourse = new DOMSource(doc);
                 StreamResult result = new StreamResult(new File(System.getProperty("user.dir") + File.separator + FILENAME));
 

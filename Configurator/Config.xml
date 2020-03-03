@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
 <Settings>
-<USER>213761234</USER>
+<USER>grigory</USER>
 <URL>jdbc:postgresql://172.16.35.25:5432/test08_DB</URL>
 <nameProject>123123</nameProject>
-<PASS>123123</PASS>
+<PASS>123321321</PASS>
 </Settings>
 </config>

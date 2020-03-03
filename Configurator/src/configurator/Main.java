@@ -28,7 +28,7 @@ public class Main {
 
     static void fillDB(String patch_file) throws IOException {
         rwexcel.setPatchF(patch_file); // изменяем путь файла
-        //  workbase.connectionToBase();
+          workbase.connectionToBase();
         // workbase.connectionToBase(url, pass, user);//по сути я уже подключен к базе данных
         Iterator<String> it_list_sheet = rwexcel.get_list_sheet().iterator(); //забираем список листов в файле и строим итератор из них
         while (it_list_sheet.hasNext()) {//
@@ -52,8 +52,8 @@ public class Main {
 
               if (name_table.equals("DO1")) {
                     workbase.insertRows(name_table, dataFromFile, name_collums); //Вносим данные в базу
-                }
-                workbase.insertRows(name_table, dataFromFile, name_collums); //
+                }//по моему это два оджиновыхметода
+                workbase.insertRows(name_table, dataFromFile, name_collums); //здесь я подключаюсь
 
             }
 

@@ -190,7 +190,7 @@ public class RWExcel {
         Iterator<Row> it = sheet.iterator(); // итератор Строк
         int sum_sheet = 0;
         int len_row = 0;
-        int max_len_row = 0;
+        int max_len_row = 0;//
 
         while (it.hasNext()) {
             while (tmpFirstLenght < first_len) {
