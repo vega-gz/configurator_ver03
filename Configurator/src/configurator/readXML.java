@@ -38,7 +38,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class readXML {
+public class readXML {//это вообще тестовый класс,не обращай внимания 
 
     public void RXML() {
          try {
