@@ -38,7 +38,9 @@ public class CreateFrame extends JFrame {
 //        frame=new JFrame();
         String[] items = {
             "  ",
-            test08_DB
+            test08_DB,
+            "jdbc:postgresql://172.16.35.25:5432/test665"
+                
         };
         setSize(600, 600);
         setLocation(100, 100);

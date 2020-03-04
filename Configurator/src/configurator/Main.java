@@ -5,10 +5,13 @@
  */
 package configurator;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JFrame;
 
 /**
  *
@@ -25,6 +28,19 @@ public class Main {
                 new Main_JPanel().setVisible(true);
             }
         });
+    }
+    Main(){
+         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
+        int sizeWidth = 800;
+        int sizeHeight = 600;
+        int locationX = (screenSize.width - sizeWidth) / 2;
+        int locationY = (screenSize.height - sizeHeight) / 2;
+        Main_JPanel Windo_main = new Main_JPanel();
+        JFrame frame = new JFrame();
+        frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+        frame.setContentPane(Windo_main); // Передаем нашу форму
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE); // Закрытие приложения но можно более хитро с диалоговыми
     }
 
     static void fillDB(String patch_file) throws IOException, SQLException {

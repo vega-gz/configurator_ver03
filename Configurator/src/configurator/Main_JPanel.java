@@ -274,7 +274,7 @@ public class Main_JPanel extends javax.swing.JFrame {
      //   DB.connectionToBase(url, pass, user);
         List<String> listColumn = DB.selectColumns(selectT);
         String[] columns = new String[listColumn.size()];
-        String tmpStr = "трутуту";
+        String tmpStr = " " ;
         int j = 0;
         for (String s : listColumn) {
            
@@ -395,28 +395,29 @@ public class Main_JPanel extends javax.swing.JFrame {
 
      private ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
+       
         //String db = "test08_DB";
-        DB.connectionToBase();
+        //workbase.connectionToBase();
         listDropT = DB.getviewTable();
-        Iterator<String> iter_list_table = listDropT.iterator();//запускаем наш итератор
-
-        String listTable = "";
-        int l = 0;
+        Iterator<String> iter_list_table = listDropT.iterator();
+        
+         String listTable = "";
+       int l =0;
         while (iter_list_table.hasNext()) {
-            iter_list_table.next();
-            //System.out.print(l);
-            ++l;
+         iter_list_table.next();
+         //System.out.print(l);
+         ++l;
         }
         String[] listarrayTable = new String[l];
-        l = 0;
-
+        l=0;
+        
         iter_list_table = listDropT.iterator();
         while (iter_list_table.hasNext()) {
-            String res = iter_list_table.next();
-            listarrayTable[l] = res;
-            ++l;
+         String res =iter_list_table.next();
+         listarrayTable[l] = res;
+         ++l;
         }
-        return new DefaultComboBoxModel(listarrayTable);
+        return new DefaultComboBoxModel(listarrayTable); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
