@@ -25,26 +25,46 @@ public class DataBase {
     private String[] columns;
     UUID uuid = new UUID();
     String url, pass, user;
+    
+    // Делаем синглтон
+    private static DataBase instance;
+    DataBase(){
+        connectionToBase();
+    }
+    public static DataBase getInstance(){ // #3
+        
+      if(instance == null){		//если объект еще не создан
+        instance = new DataBase();	//создать новый объект
+      }
+      return instance;		// вернуть ранее созданный объект
+    }
+    
+    public void setConnection(String str){
+    //inFile += str + "\n";
+    }
 
     void connectionToBase() {
         this.user = user;
         this.pass = pass;
         this.url = url;
-        String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
-        String PASS = "test08_DB";
-        String USER = "test08_DB";
+      //  String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
+        //  String PASS = "test08_DB";
+        //  String USER = "test08_DB";
         //String DB_URL=url;
         //String PASS=pass;
         //String USER=user;
 
-        try {
+        final String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test665";
+        final String USER = "postgres";
+        final String PASS = "postgres";
+
+         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
             return;
         }
-        System.out.println("");
         System.out.println("PostgreSQL JDBC Driver successfully connected");
         try {
             connection = DriverManager
@@ -58,10 +78,10 @@ public class DataBase {
     }
 
     void createBase(String name) {
-      //  connectionToBase(url, pass, user);
+        //  connectionToBase(url, pass, user);
 
 // вызов Фукция подключения к базе
-        try {
+         try {
             //name = name.replace("-", "_").replace(".", "_").replace(" ", "_"); // может понадобиться как в сосздании таблицы
             connection.getAutoCommit();
             connection.setAutoCommit(true);
@@ -86,6 +106,7 @@ public class DataBase {
     }
 
     void createTable(String name_table, int number_colum, ArrayList<String> listNameColum) {
+        //connectionToBase(); // вызов Фукция подключения к базе
         //переменная для анализа
         String nameTbanalise = new String(name_table);
         String nc_stringing = "";
@@ -147,7 +168,6 @@ public class DataBase {
             String sql;
             stmt = connection.createStatement();
             sql = "CREATE TABLE " + name_table + nc_stringing;
-
             stmt.executeUpdate(sql);
             stmt.close();
             connection.commit();
@@ -161,37 +181,11 @@ public class DataBase {
         }
     }
 
-    void insertRows() {
-        try {
-            //--------------- INSERT ROWS ---------------
-            String sql;
-            stmt = connection.createStatement();
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (1, 'Paul', 32, 'California', 20000.00 );";
-            stmt.executeUpdate(sql);
+   
 
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (2, 'Allen', 25, 'Mazafaker' , 15000.00 );";
-            stmt.executeUpdate(sql);
-
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );";
-            stmt.executeUpdate(sql);
-
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );";
-            stmt.executeUpdate(sql);
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS) VALUES (5, 'Mark', 25, 'Rich-Mond ');";
-            stmt.executeUpdate(sql);
-
-            stmt.close();
-            connection.commit();
-            System.out.println("-- Records created successfully");
-        } catch (SQLException e) {
-            System.out.println("Failed ADD data");
-            e.printStackTrace();
-            return;
-
-        }
-    }
-
-    void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
+    void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) throws SQLException {
+       //connectionToBase(); // вызов Фукция подключения к базе
+        connection.setAutoCommit(true);
         String nameTbanalise = new String(name_table);
         String sql = "";
         try {
@@ -233,14 +227,20 @@ public class DataBase {
                 default: { // а вот тут трудности у нас
 
                     if (!listNameColum.isEmpty()) {
-                        int tmp_cell = 0;
-
-                        Iterator<String> iter_list_table = listNameColum.iterator();
-                        while (iter_list_table.hasNext()) {
-                            tmp_cell++;
-                            String bufer_named = iter_list_table.next().replace("/", "_");
-                            sql += " ," + "\"" + bufer_named + "\"";
-                        }
+                        /*
+                         int tmp_cell = 0;
+                         Iterator<String> iter_list_table = listNameColum.iterator();
+                         while (iter_list_table.hasNext()) {
+                         if (tmp_cell <= 0) {
+                         sql = "INSERT INTO " + name_table + " (ID"; // при первом проходе иначе будет отличаться данные и столбцы
+                         iter_list_table.next(); // Обязательное иначе тришер не сработает
+                         } else {
+                         String bufer_named = iter_list_table.next().replace("/", "_");
+                         sql += " ," + "\"" + bufer_named + "\""; 
+                         }
+                         tmp_cell++;
+                         }
+                         */
                         sql = "INSERT INTO " + name_table + " (ID, "; // при первом проходе иначе будет отличаться данные и столбцы
                         for (int i = 0; i < listNameColum.size(); i++) { // формирую данные для этого запроса - 1 так как добавили ID
                             if (i + 1 >= listNameColum.size()) {
@@ -251,25 +251,26 @@ public class DataBase {
                                 sql += "\"" + bufer_named + "\"" + " ,";
                             }
                         }
+
                         /* for (int i = tmp_cell; i < rows.length+1; i++) { // Вот это не понятно
                          sql += ",colum_" + Integer.toString(i + 1);
                          }// +1 что бы соответствовать нумерации из файла Exel
                          */
                         sql += ") VALUES (";
-
-                        for (int i = 0; i < listNameColum.size() + 1; i++) { // формирую данные для этого запроса
-                            if (i + 1 > listNameColum.size()) { // Вот тут косяк
+                        // row и listNameColum должны быть одинаковы но косяк
+                        for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
+                            if (i + 1 >= rows.length) {
                                 sql += "'" + rows[i] + "'";
                             } // не нравится точка похоже в данных как то надо обходить(похоже)
                             else {
                                 sql += "'" + rows[i] + "'" + ", ";
                             }
-                            System.out.println(sql);
+                            //System.out.println(sql);
                         }
                         sql += ");";
 
                     } else {
-                        for (int i = 0; i < rows.length - 1; i++) {
+                        for (int i = 0; i < rows.length; i++) {
                             sql += ",colum_" + Integer.toString(i + 1);
                         }// +1 что бы соответствовать нумерации из файла Exel
                         sql += ") VALUES (";
@@ -290,7 +291,7 @@ public class DataBase {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();
-            connection.commit();
+            //connection.commit();
             //System.out.println("-- Records created successfully");
         } catch (SQLException e) {
             System.out.println("Failed ADD data");
@@ -298,8 +299,9 @@ public class DataBase {
             return;
         }
     }
-
-    ArrayList<String[]> selectData(String table) {
+    
+     ArrayList<String[]> selectData(String table) {
+        //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String[]> selectData = new ArrayList<>();
         try {
             stmt = connection.createStatement();
@@ -374,8 +376,9 @@ public class DataBase {
     }
 
     List<String> selectColumns(String table) {
+         //connectionToBase(); // вызов Фукция подключения к базе
         List<String> listColumn = new ArrayList();
-        String ColumnN = "column_name"; // Если захоим выборку еще чего то
+        String ColumnN = "column_name"; // Если захоим выборку пеще чего то
         try {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT " + ColumnN
@@ -392,7 +395,8 @@ public class DataBase {
         return listColumn;
     }
 
-    ArrayList<String[]> selectDataGPAAI(String table) {//
+    ArrayList<String[]> selectDataGPAAI(String table) {
+        //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String[]> selectData = new ArrayList<>();
         try {
             stmt = connection.createStatement();
@@ -401,20 +405,18 @@ public class DataBase {
                 String TypeADC = rs.getString("Colum_18");
                 String id = rs.getString("uuid_plc");
                 String nsign = rs.getString("Наименование сигнала");
-
                 String[] strfromtb = {TypeADC, id, nsign};
                 selectData.add(strfromtb);
                 //System.out.println(String.format("ID=%s NAME=%s AGE=%s ADDRESS=%s SALARY=%s UM=%s TYPEADC=%s A1=%s A2=%s" ,id,name,age,address,salary,UM,TypeCh,TypeADC,addres1,addres2));
             }
             rs.close();
             stmt.close();
-            //connection.commit();  `
+            //connection.commit();
             System.out.println("-- Operation SELECT done successfully");
         } catch (SQLException e) {
             System.out.println("Failed ADD data");
             e.printStackTrace();
             //return;
-
         }
         return selectData;
     }
@@ -565,14 +567,12 @@ public class DataBase {
     }
 
     void dropTable(ArrayList<String> listT) {
-        //-------------- DROPE TABLE ---------------
+        //connectionToBase(); // вызов Фукция подключения к базе
         Iterator<String> iter_list_table = listT.iterator();
         try {
-
             connection.setAutoCommit(false);
             String sql;
             stmt = connection.createStatement();
-
             while (iter_list_table.hasNext()) {
                 sql = "DROP TABLE " + iter_list_table.next() + ";";
                 stmt.executeUpdate(sql);
@@ -591,7 +591,7 @@ public class DataBase {
 
     List<String> listBase() {
         ArrayList<String> listBase = new ArrayList();
-        //  connectionToBase(); // вызов Фукция подключения к базе
+        //connectionToBase(); // вызов Фукция подключения к базе
         try {
             stmt = connection.createStatement();
             String sql = "SELECT datname FROM pg_database;";
@@ -610,9 +610,8 @@ public class DataBase {
     }
 
     ArrayList<String> getviewTable() {
-        //-------------- DROPE TABLE ---------------
+        //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String> list_table_base = new ArrayList();
-
         try {
             stmt = connection.createStatement();
             // Показывает все таблицы =( и из основной и из тестовой
@@ -629,7 +628,6 @@ public class DataBase {
         } catch (SQLException e) {
             System.out.println("Failed SELECT TABLE BASE");
             e.printStackTrace();
-
         }
         return list_table_base;
     }
