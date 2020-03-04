@@ -389,7 +389,7 @@ public class XMLSAX {
         Element root = doc.createElement("Type");
         root.setAttribute("Name", name);
         root.setAttribute("Kind", "Struct");
-        root.setAttribute("UUID", UUDstruc);//MySQL субд
+        root.setAttribute("UUID", UUDstruc);
         doc.appendChild(root);
         Element Fileds = doc.createElement("Fields");//
         root.appendChild(Fileds);
@@ -524,8 +524,8 @@ public class XMLSAX {
         // workbase.connectionToBase();
 
         ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAO("ao1");
-        ArrayList<String[]> dataFromDbAO = workbase.selectDataAO("ao1");//создаю еще 
-        ArrayList<String[]> dataFromDbAO_HMI = workbase.selectDataAO_HMI("ao1");
+     //   ArrayList<String[]> dataFromDbAO = workbase.selectDataAO("ao1");//создаю еще 
+       // ArrayList<String[]> dataFromDbAO_HMI = workbase.selectDataAO_HMI("ao1");
 
         createTypeT_GPA_AO(dataFromDbGPA, "T_GPA_AO", AO_HMI_UUID, T_AO_UUID, file);
 

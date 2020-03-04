@@ -360,7 +360,7 @@ public class Main_JPanel extends javax.swing.JFrame {
                     break;
                 case "ao1":
                     try {
-                       // System.out.println("12345657это ПРОВЕРКА ПРОВЕРКА");
+                      
                         
                         createXMLSax.runBaseRuncreateType(filepatch);
                     } catch (ParserConfigurationException ex) {
