@@ -116,21 +116,7 @@ public class RWExcel {
         return uiid_str;
     }
 
-    ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
-        // Read XSL file
-        FileInputStream inputStream = new FileInputStream(new File(patch_file));
-        HSSFWorkbook wb = new HSSFWorkbook(inputStream);
-
-        ArrayList<String> list_sheet = new ArrayList<String>();
-
-        // проганаяем список Листов в файле 
-        Iterator<Sheet> it_sheet = wb.iterator();
-        while (it_sheet.hasNext()) {
-            Sheet sheet = it_sheet.next();
-            list_sheet.add(sheet.getSheetName());
-        }
-        return list_sheet;
-    }
+   
 
     int getMaxcColumn(String name_sheet) throws FileNotFoundException, IOException {
 
@@ -151,6 +137,22 @@ public class RWExcel {
         }
 
         return max_len_row;
+    }
+    
+     ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
+        // Read XSL file
+        FileInputStream inputStream = new FileInputStream(new File(patch_file));
+        HSSFWorkbook wb = new HSSFWorkbook(inputStream);
+
+        ArrayList<String> list_sheet = new ArrayList<String>();
+
+        // проганаяем список Листов в файле 
+        Iterator<Sheet> it_sheet = wb.iterator();
+        while (it_sheet.hasNext()) {
+            Sheet sheet = it_sheet.next();
+            list_sheet.add(sheet.getSheetName());
+        }
+        return list_sheet;
     }
 
     // --- Geting data from file Exel ----
@@ -184,6 +186,8 @@ public class RWExcel {
             default: { // если нечего не найдено из одходящего
                 first_len = 0;
                 startm = 1; // данные с первого так как один UUID 
+                 col_UUID = 1;
+                array_cell_len = new String[lenmass + col_UUID]; 
             }
         }
 
@@ -345,87 +349,92 @@ public class RWExcel {
             if (r.getLastCellNum() > maxLengtString) {
                 maxLengtString = r.getLastCellNum(); // простовычисляем максимальную длинну строки
             }
+        }// можно как то с делать в одном проходе но не до этого
+
+        iterRow = sheet.iterator(); // Итератор строк(еще раз инициализация а иначяе не работает)
+        boolean findColumnSig = false; // сигнал для остановки перебора
+        int maxRowNum = 0; // Переменная для определения от куда данные начинаются
+
+        while (iterRow.hasNext()) {
+            Row r = iterRow.next(); // строка
             Iterator<Cell> icell = r.cellIterator();
             int tmpI = 0;
             String[] nameRow = {"Наименование сигнала", "Tag name", "Наименование"}; // нужно сделать с помощью файлов конфигов
+
             while (icell.hasNext()) {
 
                 Cell c = icell.next();
-                // проверка на максимальную длинну
-                if (maxLnotNullString < c.getColumnIndex()) {
-                    maxLnotNullString = c.getColumnIndex(); // заносим индекс ячейки соответственно узнаем последнюю не нулевую
-                }
-                CellType cellType = c.getCellType();
-                if (cellType != BLANK) {  // Если не пустая клетка
+                if (!findColumnSig) { // пока не нашли перебираем ячейки для ускорения
+                    CellType cellType = c.getCellType();
 
-                    //System.out.println(c); // Что в клетки
-                    if (cellType == STRING) {
-                        String cellData = c.getStringCellValue();// Получаем данные с ячейки стринговой
-                        for (int i = 0; i < nameRow.length; ++i) { // прогоняем по списку  искомых столбцов 
-                            int maxRowNum = 0; // Переменная для определения от куда данные начинаются
-                            if (cellData.equals(nameRow[i]))// ПРоверяем на совпадения обозначений столбоц если есть совпадения то со следующей строки данные
-                            {
-                                System.out.println("Addres f cell " + c.getAddress()); // адрес ячейки
-                                if (maxRowNum < r.getRowNum()) {
-                                    maxRowNum = r.getRowNum(); // адрес строки с найденным столбцом они мугут быть разные по этому максимальное берем
-                                    startReadData = maxRowNum + 1;
-                                    System.out.println("Addres first data " + startReadData);
-                                    // и заносим эту найденную строку в массив
-                                    String[] tmpMassN = new String[r.getLastCellNum()]; // размер массива = размер длины строки Exel
-                                    if (tmpMassN.length > MaxLenNameMass) {
-                                        MaxLenNameMass = tmpMassN.length; // финальный массив по максимальной длине строки из файла
-                                    }
-                                    Iterator<Cell> cellNameColumn = r.cellIterator();
-                                    int j = 0;
-                                    while (cellNameColumn.hasNext()) { // прогоняемся по строке для формирования массива
-                                        Cell cName = cellNameColumn.next();
-                                        j = cName.getColumnIndex(); // Индекс ячейки , так как не работает через ++, перескакивает
-                                        CellType cellTypecName = cName.getCellType();
-                                        switch (cellTypecName) { // Вычисляем тип ячейки
-                                            case STRING: {
-                                                tmpMassN[j] = cName.getStringCellValue();
-                                            }
-                                            break;
-                                            case BLANK:
-                                                tmpMassN[j] = null;
-                                                break;
-                                            case NUMERIC:
-                                                tmpMassN[j] = Double.toString(cName.getNumericCellValue()); // Double
-                                                break;
-                                            //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
-                                            case FORMULA:
-                                                switch (cName.getCachedFormulaResultType()) {
-                                                    case NUMERIC:
-                                                        tmpMassN[j] = Double.toString(cName.getNumericCellValue());
-                                                        break;
-                                                    case STRING:
-                                                        tmpMassN[j] = cName.getRichStringCellValue().toString();
-                                                        //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
-                                                        break;
+                    switch (cellType) { // Вычисляем тип ячейки
+                        case STRING: { // только если строка
+                            String dataC = c.getStringCellValue(); // получим строку из ячейки
+                            for (int i = 0; i < nameRow.length; ++i) { // прогоняем по списку  искомых  
+                                if (dataC.equals(nameRow[i]))// ПРоверяем на совпадения обозначений столбоц если есть совпадения то со следующей строки данные
+                                {
+                                    String[] tmpMassN = new String[maxLengtString]; // размер массива = размер длины строки Exel
+                                    findColumnSig = true; // выставили флаг в то что нашли
+                                    //System.out.println("Addres f cell " + c.getAddress()); // адрес ячейки
+                                    if (maxRowNum < r.getRowNum()) {
+                                        maxRowNum = r.getRowNum(); // адрес строки с найденным столбцом они мугут быть разные по этому максимальное берем
+                                        startReadData = maxRowNum + 1; // +1 так как данные начинаются со следующей строки
+                                        //System.out.println("Addres first data " + startReadData);
+                                        Iterator<Cell> cellNameColumn = r.cellIterator();
+                                        int j = 0;
+                                        while (cellNameColumn.hasNext()) { // прогоняемся по строке для формирования массива
+                                            Cell cName = cellNameColumn.next();
+                                            CellType cellTypecName = cName.getCellType();
+                                            j = cName.getColumnIndex(); // Индекс ячейки , так как не работает через ++, перескакивает
+                                            switch (cellTypecName) { // Вычисляем тип ячейки
+                                                case STRING: {
+                                                    tmpMassN[j] = cName.getStringCellValue(); // получим строку из ячейки
+                                                    //System.out.println("j= " + j + " Index Column " + cName.getColumnIndex() + " DataCell -  " + cName.getStringCellValue());
                                                 }
                                                 break;
-                                            default:
-                                                array_cell.add("|");
+                                                case BLANK:
+                                                    tmpMassN[j] = null;
+                                                    break;
+                                                case NUMERIC:
+                                                    tmpMassN[j] = Double.toString(cName.getNumericCellValue()); // Double
+                                                    break;
+                                                //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
+                                                case FORMULA:
+                                                    switch (cName.getCachedFormulaResultType()) {
+                                                        case NUMERIC:
+                                                            tmpMassN[j] = Double.toString(cName.getNumericCellValue());
+                                                            break;
+                                                        case STRING:
+                                                            tmpMassN[j] = cName.getRichStringCellValue().toString();
+                                                            //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
+                                                            break;
+                                                    }
+                                                    break;
+                                                default:
+                                                    array_cell.add("|");
+                                            }
+
                                         }
-                                        
+                                        massColumnName.add(tmpMassN);
                                     }
-                                    massColumnName.add(tmpMassN);
+                                  break; // прерываем массив поиска так как нашли исходное
                                 }
-                                break;
                             }
+
                         }
                         break;
 
                     }
                     ++tmpI;
                 }
+                
             }
-            System.out.println("last not null " + maxLnotNullString + " -> " + r.getCell(maxLnotNullString));
-            //System.out.println("existD " + tmpI);
+            findColumnSig = false;
         }
-        // так мы перебираем и анализируем что мы насобирали и делаем один массив 
+
+            // так мы перебираем и анализируем что мы насобирали и делаем один массив 
         // String[] tmpMassN = new String[MaxLenNameMass];
-        String[] tmpMassN = new String[maxLnotNullString];// заменим на это пока по тупому длинну массива
+        String[] tmpMassN = new String[maxLengtString];// заменим на это пока по тупому длинну массива
         for (String[] mass : massColumnName) {
             for (int i = 0; i < mass.length; ++i) {
                 if (tmpMassN[i] == null) { // как то надо на оборот к нижнему прикручивать верхнее

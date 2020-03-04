@@ -124,23 +124,23 @@ public class XMLSAX {
         root.setAttribute("Kind", "Struct");
         root.setAttribute("UUID", AI_UUID);
         doc.appendChild(root);
-        
-        Element Fields=doc.createElement("FIelds");
+
+        Element Fields = doc.createElement("FIelds");
         root.appendChild(Fields);
-        
-        for(String field[]:massParametrsAI_){
-            Element Field=doc.createElement("Field");
+
+        for (String field[] : massParametrsAI_) {
+            Element Field = doc.createElement("Field");
             Field.setAttribute("Name", field[0]);
             Field.setAttribute("Type", field[1]);
             Field.setAttribute("UUID", field[2]);
             Field.setAttribute("Comment", field[3]);
             Fields.appendChild(Field);
-            
+
         }
-        try{
+        try {
             writeDocument(doc, patchF);
-        }catch(TransformerException ex){
-            
+        } catch (TransformerException ex) {
+
         }
 
     }
@@ -829,6 +829,19 @@ public class XMLSAX {
                 child = child.getNextSibling()) {
             stepThroughAll(child);
         }
+    }
+
+    boolean insertNode(Node addNode, String parentNode, String targetFile) {
+        boolean request = false;
+        return request;
+
+    }
+
+    // --- копирование или внедрени ноды в новый файл  --- 
+    boolean insertNode(Node addNode, String targetFile) {
+        boolean request = false;
+        return request;
+
     }
 
     // --- Запипись в файл структурой XML ---

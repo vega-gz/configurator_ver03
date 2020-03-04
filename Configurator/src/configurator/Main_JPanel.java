@@ -19,6 +19,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -107,6 +108,7 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "item1", "item2", "item3", "item4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -252,11 +254,13 @@ public class Main_JPanel extends javax.swing.JFrame {
             path = file.toString();
             excel.setPatchF(path);
             try {
-                 excel.readAllfile();//это всего лишь читает файл но не записыыает его
-                 Main m=new Main();
-                m.fillDB(file.getPath());
+               //  excel.readAllfile();//это всего лишь читает файл но не записыыает его
+                 
+                Main.fillDB(file.getPath());
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);//
+            } catch (SQLException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
          jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
