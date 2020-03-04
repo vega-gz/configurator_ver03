@@ -402,7 +402,7 @@ public class DataBase {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + table + ";");
             while (rs.next()) {
-                String TypeADC = rs.getString("Colum_18");
+                String TypeADC = rs.getString("Tag name");
                 String id = rs.getString("uuid_plc");
                 String nsign = rs.getString("Наименование сигнала");
                 String[] strfromtb = {TypeADC, id, nsign};
@@ -430,7 +430,7 @@ public class DataBase {
             while (rs.next()) {//цикл от одной строки к следующей
                 String TypeADC = rs.getString("Tag name");//ищу колонну по названию
                 String id = rs.getString("uuid_plc");//и это в базе
-                String namesign = rs.getString("colum_6");//и это тоже
+                String namesign = rs.getString("Наименование сигнала");//и это тоже
 
                 String[] str = {TypeADC, id, namesign};//по циклу вообще все правильно,не знаю почему не работает
                 selectData.add(str);
@@ -451,7 +451,7 @@ public class DataBase {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
             while (rs.next()) {
-                String TypeADC = rs.getString("colum_18");
+                String TypeADC = rs.getString("Tag name");
                 String id = uuid.getUIID();//здесь необходимо решить как менять рандом UUID ибо получается на каждый сигнал одна генерация 
                 String namesign = rs.getString("colum_6");//надо подумать ибо я пока не знаю как это сделать
 
@@ -524,7 +524,7 @@ public class DataBase {
             while (rs.next()) {
                 String TypeADC = rs.getString("Tag name");
                 String id = uuid.getUIID();
-                String namesign = rs.getString("colum_3");
+                String namesign = rs.getString("Наименование сигнала");
 
                 String[] str = {TypeADC, id, namesign};
                 selectData.add(str);
@@ -550,7 +550,7 @@ public class DataBase {
             while (rs.next()) {
                 String TypeADC = rs.getString("Tag name");
                 String id = uuid.getUIID();
-                String namesign = rs.getString("colum_6");
+                String namesign = rs.getString("Наименование сигнала");
 
                 String[] str = {TypeADC, id, namesign};
                 selectData.add(str);
