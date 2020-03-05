@@ -5,6 +5,8 @@
  */
 package configurator;
 
+import configurator.StructSelectData;
+import configurator.UUID;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,40 +27,42 @@ public class DataBase {
     private String[] columns;
     UUID uuid = new UUID();
     String url, pass, user;
-    
+
     // Делаем синглтон
     private static DataBase instance;
-    DataBase(){
+
+    DataBase() {
         connectionToBase();
     }
-    public static DataBase getInstance(){ // #3
-        
-      if(instance == null){		//если объект еще не создан
-        instance = new DataBase();	//создать новый объект
-      }
-      return instance;		// вернуть ранее созданный объект
+
+    public static DataBase getInstance() { // #3
+
+        if (instance == null) {		//если объект еще не создан
+            instance = new DataBase();	//создать новый объект
+        }
+        return instance;		// вернуть ранее созданный объект
     }
-    
-    public void setConnection(String str){
-    //inFile += str + "\n";
+
+    public void setConnection(String str) {
+        //inFile += str + "\n";
     }
 
     void connectionToBase() {
         this.user = user;
         this.pass = pass;
         this.url = url;
-      //  String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
+        //  String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
         //  String PASS = "test08_DB";
         //  String USER = "test08_DB";
-        //String DB_URL=url;
-        //String PASS=pass;
-        //String USER=user;
+//        String DB_URL=url;
+//        String PASS=pass;
+//        String USER=user;
 
-        final String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test665";
+        final String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test665";//
         final String USER = "postgres";
-        final String PASS = "postgres";
+        final String PASS = "postgres";//
 
-         try {
+        try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
@@ -81,7 +85,7 @@ public class DataBase {
         //  connectionToBase(url, pass, user);
 
 // вызов Фукция подключения к базе
-         try {
+        try {
             //name = name.replace("-", "_").replace(".", "_").replace(" ", "_"); // может понадобиться как в сосздании таблицы
             connection.getAutoCommit();
             connection.setAutoCommit(true);
@@ -164,8 +168,8 @@ public class DataBase {
 
         try {
 
-            connection.setAutoCommit(false);
-            String sql;
+            connection.setAutoCommit(false);//вот тут я еще не понимаю setAouto это дял чекго7
+            String sql;//фотегечитисмо
             stmt = connection.createStatement();
             sql = "CREATE TABLE " + name_table + nc_stringing;
             stmt.executeUpdate(sql);
@@ -181,10 +185,8 @@ public class DataBase {
         }
     }
 
-   
-
     void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) throws SQLException {
-       //connectionToBase(); // вызов Фукция подключения к базе
+        //connectionToBase(); // вызов Фукция подключения к базе
         connection.setAutoCommit(true);
         String nameTbanalise = new String(name_table);
         String sql = "";
@@ -299,8 +301,8 @@ public class DataBase {
             return;
         }
     }
-    
-     ArrayList<String[]> selectData(String table) {
+
+    ArrayList<String[]> selectData(String table) {
         //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String[]> selectData = new ArrayList<>();
         try {
@@ -376,7 +378,7 @@ public class DataBase {
     }
 
     List<String> selectColumns(String table) {
-         //connectionToBase(); // вызов Фукция подключения к базе
+        //connectionToBase(); // вызов Фукция подключения к базе
         List<String> listColumn = new ArrayList();
         String ColumnN = "column_name"; // Если захоим выборку пеще чего то
         try {
@@ -403,7 +405,7 @@ public class DataBase {
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + table + ";");
             while (rs.next()) {
                 String TypeADC = rs.getString("Tag name");
-                String id = rs.getString("uuid_plc");
+                String id =uuid.getUIID();
                 String nsign = rs.getString("Наименование сигнала");
                 String[] strfromtb = {TypeADC, id, nsign};
                 selectData.add(strfromtb);
@@ -429,7 +431,7 @@ public class DataBase {
             ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
             while (rs.next()) {//цикл от одной строки к следующей
                 String TypeADC = rs.getString("Tag name");//ищу колонну по названию
-                String id = rs.getString("uuid_plc");//и это в базе
+                String id = uuid.getUIID();//и это в базе
                 String namesign = rs.getString("Наименование сигнала");//и это тоже
 
                 String[] str = {TypeADC, id, namesign};//по циклу вообще все правильно,не знаю почему не работает
