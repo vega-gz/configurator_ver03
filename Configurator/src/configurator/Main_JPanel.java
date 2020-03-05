@@ -5,15 +5,23 @@
  */
 package configurator;
 
+import configurator.CreateFrame;
+import configurator.CreateFrame;
+import configurator.FrameTabel;
+import configurator.FrameTabel;
+import configurator.RWExcel;
+import configurator.RWExcel;
+import configurator.StructSelectData;
+import configurator.StructSelectData;
+import configurator.XMLSAX;
+import configurator.XMLSAX;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicSliderUI;
-import javax.swing.text.Document;
-import javax.swing.text.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -38,6 +46,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import configurator.*;
 
 /**
  *
@@ -51,11 +60,11 @@ public class Main_JPanel extends javax.swing.JFrame {
     RWExcel excel = new RWExcel();
     String path;
     DataBase DB = new DataBase();
-    String signal=null;
+    String signal;
     ArrayList<String> listDropT = new ArrayList();
-    XMLSAX createXMLSax =new XMLSAX();
+    XMLSAX createXMLSax = new XMLSAX();
     int filepath;
-    String filepatch;
+    String filepatch, type;
 
     public Main_JPanel() {
         initComponents();
@@ -109,6 +118,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "item1", "item2", "item3", "item4" }));
+        jComboBox1.setToolTipText("");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -192,7 +202,13 @@ public class Main_JPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+//    public String get_signal() {
+//        return signal;
+//    }
+//
+//    public void set_signal(String signal) {
+//        this.signal = signal;
+//    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         CreateFrame frame = new CreateFrame(url, nameProject, user, pass);//вызываем второре окно для записи конф файла
@@ -239,7 +255,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
         DataBase db = new DataBase();
         db.connectionToBase();
-        
+
         JOptionPane.showMessageDialog(null, "Соединение установлено!");
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -254,8 +270,8 @@ public class Main_JPanel extends javax.swing.JFrame {
             path = file.toString();
             excel.setPatchF(path);
             try {
-               //  excel.readAllfile();//это всего лишь читает файл но не записыыает его
-                 
+                excel.readAllfile();//это всего лишь читает файл но не записыыает его
+
                 Main.fillDB(file.getPath());
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);//
@@ -263,21 +279,26 @@ public class Main_JPanel extends javax.swing.JFrame {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-         jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
+        jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
+
+        JOptionPane.showMessageDialog(null, "Загрузка в базу завершена!");
+
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-      //вот в этом дерьме мы формируем колонки ,метод selectColums
-        
+        //вот в этом дерьме мы формируем колонки ,метод selectColums
+
         String selectT = (String) jComboBox1.getSelectedItem();
-     //   DB.connectionToBase(url, pass, user);
+        //   DB.connectionToBase(url, pass, user);
         List<String> listColumn = DB.selectColumns(selectT);
         String[] columns = new String[listColumn.size()];
-        String tmpStr = " " ;
+        String tmpStr = " ";
         int j = 0;
+
         for (String s : listColumn) {
-           
+
             columns[j] = s;
             ++j;
         }
@@ -298,13 +319,11 @@ public class Main_JPanel extends javax.swing.JFrame {
         ArrayList<String[]> dataFromDb = new ArrayList<>();//создание списка 
         //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
         String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
-      //  DB.connectionToBase(url,pass,user);
+        //  DB.connectionToBase(url,pass,user);
         DB.selectData(selectElem, columns); //внесли данные в сущность 
         StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
         dataFromDb = DB.getcurrentSelectTable();
-        //System.out.println(workbase.getColumns());
-        //javax.swing.JOptionPane.showMessageDialog(null,"Выборка по базе " + columns + " загружены"); //диалоговое окно
-        // тут при выборе открываем новое Диалоговое окно с таблицой выборки
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
@@ -315,10 +334,13 @@ public class Main_JPanel extends javax.swing.JFrame {
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
         frame.setVisible(true);
+
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-   //  DB.connectionToBase(url,pass,user);
+        //  DB.connectionToBase(url,pass,user);
         listDropT = DB.getviewTable();
         Iterator<String> iter_list_table = listDropT.iterator();
         String listTable = "";
@@ -332,27 +354,23 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       JFileChooser fileload = new JFileChooser();
-//        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//        fileload.setAcceptAllFileFilterUsed(false);
-//        fileload.setFileFilter(null);
-//        fileload.setAcceptAllFileFilterUsed(false);
-//        fileload.setMultiSelectionEnabled(true);
+
+        JFileChooser fileload = new JFileChooser();
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
-         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
+        filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
-           String filename=fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать 
+            String filename = fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать 
             try {
-                 filepatch=fileload.getSelectedFile().getCanonicalPath();
+                filepatch = fileload.getSelectedFile().getCanonicalPath();
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-                
+
             }
-           
+
             switch (signal) {
                 case "ai1":
                     try {
-                       
+
                         createXMLSax.runBaseRuncreateTypeT(filepatch);
                     } catch (ParserConfigurationException ex) {
                         Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -360,8 +378,7 @@ public class Main_JPanel extends javax.swing.JFrame {
                     break;
                 case "ao1":
                     try {
-                      
-                        
+
                         createXMLSax.runBaseRuncreateType(filepatch);
                     } catch (ParserConfigurationException ex) {
                         Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -382,43 +399,43 @@ public class Main_JPanel extends javax.swing.JFrame {
                     }
             }
         }
-
+//
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // workbase.connectionToBase();
-        if (!listDropT.isEmpty()){  // если есть что удалять передаем лист в обработчик баз
-        DB.dropTable(listDropT);
-        }
-        else ;
+        if (!listDropT.isEmpty()) {  // если есть что удалять передаем лист в обработчик баз
+            DB.dropTable(listDropT);
+        } else ;
     }//GEN-LAST:event_jButton6ActionPerformed
 
-     private ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
+    private ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
-       
+
         //String db = "test08_DB";
         //workbase.connectionToBase();
         listDropT = DB.getviewTable();
         Iterator<String> iter_list_table = listDropT.iterator();
-        
-         String listTable = "";
-       int l =0;
+
+        String listTable = "";
+        int l = 0;
         while (iter_list_table.hasNext()) {
-         iter_list_table.next();
-         //System.out.print(l);
-         ++l;
+            iter_list_table.next();
+            //System.out.print(l);
+            ++l;
         }
         String[] listarrayTable = new String[l];
-        l=0;
-        
+        l = 0;
+
         iter_list_table = listDropT.iterator();
         while (iter_list_table.hasNext()) {
-         String res =iter_list_table.next();
-         listarrayTable[l] = res;
-         ++l;
+            String res = iter_list_table.next();
+            listarrayTable[l] = res;
+            ++l;
         }
-        return new DefaultComboBoxModel(listarrayTable); 
+        return new DefaultComboBoxModel(listarrayTable);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
