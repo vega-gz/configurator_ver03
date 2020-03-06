@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package configurator;
+package XMLTools;
 
+import DataBaseConnect.DataBase;
+import configurator.RemoveDTDFromSonataFile;
+import configurator.Struct;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,6 +39,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import DataBaseConnect.DataBase;
 
 public class XMLSAX {
 
@@ -55,7 +54,9 @@ public class XMLSAX {
     private final String AO_DRV_UUID = UUID.getUUID();
     private final String T_AO_UUID = UUID.getUUID();
 
-    private final String UUIDType_AI = "5bac053cff7f4ef8a74048f428228aee";
+    private final String All_Random_UUID = UUID.getUUID();
+
+    private final String UUIDType_AI = "5bac053cff7f4ef8a74048f428228aee";//уиды типов
     private final String UUIDType_DO = "94C521C642227325371AE7BCC36E527";
     private final String UUIDType_DI = "A1F5648246D48275D6786689DC1498B9";
     private final String UUIDType_AO = "E02C7B0E4F1236B149113594A642B5FB";
@@ -67,279 +68,314 @@ public class XMLSAX {
 
     String massParametrsAI_[][] = {};
 
-    void createTypeAI_() throws ParserConfigurationException, TransformerFactoryConfigurationError, TransformerException {
-        String patchF = globalpatchF;
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        Document doc = factory.newDocumentBuilder().newDocument();
+//    void createTypeAI_() throws ParserConfigurationException, TransformerFactoryConfigurationError, TransformerException {//формирование структуры
+//        String patchF = globalpatchF;
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();
+//
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", "AI_");
+//        root.setAttribute("Kind", "Struct");
+//        root.setAttribute("UUID", AI_UUID);
+//        doc.appendChild(root);
+//
+//        Element Fields = doc.createElement("FIelds");
+//        root.appendChild(Fields);
+//
+//        for (String field[] : massParametrsAI_) {
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", field[1]);
+//            Field.setAttribute("UUID", field[2]);
+//            Field.setAttribute("Comment", field[3]);
+//            Fields.appendChild(Field);
+//
+//        }
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerException ex) {
+//
+//        }
+//
+//    }
+//
+//    // --- Создание файла Списка структур  T_GPA_---
+//    // Список из базы, имя структуры, уиды или типы, и новый uud этой структуры
+//    void createTypeT_GPA(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
+//        // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
+//        struct = new Struct(name, T_GPA_AI_HMI_UUID, AI_HMI_UUID); // это новое класс для структуры
+//
+//        //String patchF = globalpatchF + "T_GPA_AI_HMI.type";
+//        globalpatchF = file;
+//        String patchF = globalpatchF + "\\" + name + ".type";
+//        Iterator<String[]> iter_arg = arg.iterator();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();//создание документа
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", name);
+//        root.setAttribute("Kind", "Struct");//
+//        root.setAttribute("UUID", UUDstruc);
+//        doc.appendChild(root);
+//        Element Fields = doc.createElement("Fields");
+//        root.appendChild(Fields);
+//        while (iter_arg.hasNext()) {
+//            String[] field = iter_arg.next();
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", UUIDType);
+//            Field.setAttribute("UUID", field[1]); // уид из базы
+//            Field.setAttribute("Comment", field[2]);//тоже уид из базы
+//            Fields.appendChild(Field);
+//            // тоже новое добавление данных в структуру
+//            struct.addData(field[0], UUIDType, field[1], field[2]);
+//        }
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerException ex) {
+//
+//        }
+//    }
+//
+//    void createTypeAO_PLC(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
+//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
+//        globalpatchF = file;
+//
+//        String patchF = globalpatchF + "\\" + name + ".type";
+//        Iterator<String[]> iter_arg = arg.iterator();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", name);
+//        root.setAttribute("Kind", "Struct");
+//        root.setAttribute("UUID", UUDstruc);
+//        doc.appendChild(root);
+//        Element Fields = doc.createElement("Fields");
+//        root.appendChild(Fields);
+//
+//        while (iter_arg.hasNext()) {
+//            String[] field = iter_arg.next();
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", UUDparent);
+//            Field.setAttribute("UUID", field[1]);
+//            Field.setAttribute("Comment", field[2]);
+//            Fields.appendChild(Field);
+//            struct.addData(field[0], UUDparent, field[1], field[2]);
+//
+//        }
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerFactoryConfigurationError ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
+//
+//    void createTypeAO_DRV(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
+//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
+//        globalpatchF = file;
+//
+//        String patchF = globalpatchF + "\\" + name + ".type";
+//        Iterator<String[]> iter_arg = arg.iterator();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", name);
+//        root.setAttribute("Kind", "Struct");
+//        root.setAttribute("UUID", UUDstruc);
+//        doc.appendChild(root);
+//        Element Fields = doc.createElement("Fields");
+//        root.appendChild(Fields);
+//
+//        while (iter_arg.hasNext()) {
+//            String[] field = iter_arg.next();
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", UUDparent);
+//            Field.setAttribute("UUID", field[1]);
+//            Field.setAttribute("Comment", field[2]);
+//            Fields.appendChild(Field);
+//
+//            struct.addData(field[0], UUDparent, field[1], field[2]);
+//
+//        }
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerFactoryConfigurationError ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    void createTypeAO_HMI(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
+//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
+//        globalpatchF = file;
+//
+//        String patchF = globalpatchF + "\\" + name + ".type";
+//        Iterator<String[]> iter_arg = arg.iterator();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", name);
+//        root.setAttribute("Kind", "Struct");//и чтот вы хотите от меня услышать
+//        root.setAttribute("UUID", UUDstruc);
+//        doc.appendChild(root);
+//        Element Fields = doc.createElement("Fields");
+//        root.appendChild(Fields);
+//
+//        while (iter_arg.hasNext()) {
+//            String[] field = iter_arg.next();
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", UUDparent);
+//            Field.setAttribute("UUID", field[1]);
+//            Field.setAttribute("Comment", field[2]);
+//            Fields.appendChild(Field);
+//            struct.addData(field[0], UUDparent, field[1], field[2]);
+//
+//        }
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerFactoryConfigurationError ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    void createType_GPA_AO(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String path) throws ParserConfigurationException {//основной метод,записывает AO_GPA
+//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
+//        globalpatchF = path;
+//        String patchF = globalpatchF + "\\" + name + ".type";
+//        Iterator<String[]> iter_arg = arg.iterator();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", name);
+//        root.setAttribute("Kind", "Struct");
+//        root.setAttribute("UUID", UUDstruc);//UUID структ у него свой
+//        doc.appendChild(root);
+//        Element Fileds = doc.createElement("Fields");//
+//        root.appendChild(Fileds);
+//
+//        while (iter_arg.hasNext()) { //and not care what this shit,because this shit is us
+//            String[] field = iter_arg.next();
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", UUIDType);//parent должен быть свое подтипа
+//            Field.setAttribute("UUID", field[1]);
+//            Field.setAttribute("Comment", field[2]);
+//            Fileds.appendChild(Field);
+//            // struct.addData(field[0], UUDparent, field[1], field[2]);
+//
+//        }
+//
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerFactoryConfigurationError ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
+//
+//    void createType_GPA_DO(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {//добавил параметр String file (в нем путь необходимой папки)
+//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
+//        globalpatchF = file;//присваиваю глобалу путь до файла.Не знаю,зачем я так сложно сделал
+//        String patchF = globalpatchF + "\\" + name + ".type";//формируется окончательный путь с именем файла
+//        Iterator<String[]> iter_arg = arg.iterator();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", name);
+//        root.setAttribute("Kind", "Struct");
+//        root.setAttribute("UUID", UUDstruc);
+//        doc.appendChild(root);
+//        Element Fields = doc.createElement("Fields");
+//        root.appendChild(Fields);
+////---формирование структуры сигнала---
+//        while (iter_arg.hasNext()) {
+//            String[] field = iter_arg.next();
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", UUIDType);
+//            Field.setAttribute("UUID", field[1]);
+//            Field.setAttribute("Comment", field[2]);
+//            Fields.appendChild(Field);
+//            struct.addData(field[0], "BOOL", field[1], field[2]);
+//        }
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerFactoryConfigurationError ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
+//
+//    void createType_GPA_DI(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
+//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);//не понимаю как работают и зачем работают эти два уида,видимо где то косякнул,но работает правильно =))
+//        globalpatchF = file;
+//        String patchF = globalpatchF + "\\" + name + ".type";
+//        Iterator<String[]> iter_arg = arg.iterator();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        Document doc = factory.newDocumentBuilder().newDocument();
+//        Element root = doc.createElement("Type");
+//        root.setAttribute("Name", name);
+//        root.setAttribute("Kind", "Struct");
+//        root.setAttribute("UUID", UUDstruc);
+//        doc.appendChild(root);
+//        Element Fields = doc.createElement("Fields");
+//        root.appendChild(Fields);
+//
+//        while (iter_arg.hasNext()) {
+//            String[] field = iter_arg.next();
+//            Element Field = doc.createElement("Field");
+//            Field.setAttribute("Name", field[0]);
+//            Field.setAttribute("Type", UUIDType);//задали тип данных рукописно.Кстати не знаю верно это или нет Но вроде пишет что то
+//            Field.setAttribute("UUID", field[1]);
+//            Field.setAttribute("Comment", field[2]);
+//            Fields.appendChild(Field);
+//            struct.addData(field[0], "BOOL", field[1], field[2]);
+//        }
+//        try {
+//            writeDocument(doc, patchF);
+//        } catch (TransformerFactoryConfigurationError ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
-        Element root = doc.createElement("Type");
-        root.setAttribute("Name", "AI_");
-        root.setAttribute("Kind", "Struct");
-        root.setAttribute("UUID", AI_UUID);
-        doc.appendChild(root);
-
-        Element Fields = doc.createElement("FIelds");
-        root.appendChild(Fields);
-
-        for (String field[] : massParametrsAI_) {
-            Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
-            Field.setAttribute("Type", field[1]);
-            Field.setAttribute("UUID", field[2]);
-            Field.setAttribute("Comment", field[3]);
-            Fields.appendChild(Field);
-
-        }
-        try {
-            writeDocument(doc, patchF);
-        } catch (TransformerException ex) {
-
-        }
-
-    }
-
-    // --- Создание файла Списка структур  T_GPA_---
-    // Список из базы, имя структуры, уиды или типы, и новый uud этой структуры
-    void createTypeT_GPA(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
-        // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
-        struct = new Struct(name, T_GPA_AI_HMI_UUID, AI_HMI_UUID); // это новое класс для структуры
-
-        //String patchF = globalpatchF + "T_GPA_AI_HMI.type";
+    void createTypeAllSignal(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
+        struct = new Struct(name, All_Random_UUID, All_Random_UUID);//разобраться со вторым рандомом в параметрах(он не должен быть рандомным)
         globalpatchF = file;
         String patchF = globalpatchF + "\\" + name + ".type";
         Iterator<String[]> iter_arg = arg.iterator();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
-        Document doc = factory.newDocumentBuilder().newDocument();//создание документа
-        Element root = doc.createElement("Type");
-        root.setAttribute("Name", name);
-        root.setAttribute("Kind", "Struct");//
-        root.setAttribute("UUID", UUDstruc);
-        doc.appendChild(root);
-        Element Fields = doc.createElement("Fields");
-        root.appendChild(Fields);
-        while (iter_arg.hasNext()) {
-            String[] field = iter_arg.next();
-            Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
-            Field.setAttribute("Type", UUIDType);
-            Field.setAttribute("UUID", field[1]); // уид из базы
-            Field.setAttribute("Comment", field[2]);//тоже уид из базы
-            Fields.appendChild(Field);
-            // тоже новое добавление данных в структуру
-            struct.addData(field[0], UUIDType, field[1], field[2]);
-        }
-        try {
-            writeDocument(doc, patchF);
-        } catch (TransformerException ex) {
-
-        }
-    }
-
-    void createTypeAO_PLC(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
-        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-        globalpatchF = file;
-
-        String patchF = globalpatchF + "\\" + name + ".type";
-        Iterator<String[]> iter_arg = arg.iterator();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
         Document doc = factory.newDocumentBuilder().newDocument();
         Element root = doc.createElement("Type");
         root.setAttribute("Name", name);
         root.setAttribute("Kind", "Struct");
-        root.setAttribute("UUID", UUDstruc);
+        root.setAttribute("UUID", UUDstruc);//вот это UUDSTRUC должен совпадать с дочерними уидами,то естьв нем должны быть сигналы с типом его уида
         doc.appendChild(root);
         Element Fields = doc.createElement("Fields");
         root.appendChild(Fields);
-
-        while (iter_arg.hasNext()) {
-            String[] field = iter_arg.next();
-            Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
-            Field.setAttribute("Type", UUDparent);
-            Field.setAttribute("UUID", field[1]);
-            Field.setAttribute("Comment", field[2]);
-            Fields.appendChild(Field);
-            struct.addData(field[0], UUDparent, field[1], field[2]);
-
-        }
-        try {
-            writeDocument(doc, patchF);
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    void createTypeAO_DRV(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
-        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-        globalpatchF = file;
-
-        String patchF = globalpatchF + "\\" + name + ".type";
-        Iterator<String[]> iter_arg = arg.iterator();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        Document doc = factory.newDocumentBuilder().newDocument();
-        Element root = doc.createElement("Type");
-        root.setAttribute("Name", name);
-        root.setAttribute("Kind", "Struct");
-        root.setAttribute("UUID", UUDstruc);
-        doc.appendChild(root);
-        Element Fields = doc.createElement("Fields");
-        root.appendChild(Fields);
-
-        while (iter_arg.hasNext()) {
-            String[] field = iter_arg.next();
-            Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
-            Field.setAttribute("Type", UUDparent);
-            Field.setAttribute("UUID", field[1]);
-            Field.setAttribute("Comment", field[2]);
-            Fields.appendChild(Field);
-
-            struct.addData(field[0], UUDparent, field[1], field[2]);
-
-        }
-        try {
-            writeDocument(doc, patchF);
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    void createTypeAO_HMI(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
-        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-        globalpatchF = file;
-
-        String patchF = globalpatchF + "\\" + name + ".type";
-        Iterator<String[]> iter_arg = arg.iterator();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        Document doc = factory.newDocumentBuilder().newDocument();
-        Element root = doc.createElement("Type");
-        root.setAttribute("Name", name);
-        root.setAttribute("Kind", "Struct");//и чтот вы хотите от меня услышать
-        root.setAttribute("UUID", UUDstruc);
-        doc.appendChild(root);
-        Element Fields = doc.createElement("Fields");
-        root.appendChild(Fields);
-
-        while (iter_arg.hasNext()) {
-            String[] field = iter_arg.next();
-            Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
-            Field.setAttribute("Type", UUDparent);
-            Field.setAttribute("UUID", field[1]);
-            Field.setAttribute("Comment", field[2]);
-            Fields.appendChild(Field);
-            struct.addData(field[0], UUDparent, field[1], field[2]);
-
-        }
-        try {
-            writeDocument(doc, patchF);
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    void createType_GPA_AO(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String path) throws ParserConfigurationException {//основной метод,записывает AO_GPA
-        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-        globalpatchF = path;
-        String patchF = globalpatchF + "\\" + name + ".type";
-        Iterator<String[]> iter_arg = arg.iterator();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        Document doc = factory.newDocumentBuilder().newDocument();
-        Element root = doc.createElement("Type");
-        root.setAttribute("Name", name);
-        root.setAttribute("Kind", "Struct");
-        root.setAttribute("UUID", UUDstruc);//UUID структ у него свой
-        doc.appendChild(root);
-        Element Fileds = doc.createElement("Fields");//
-        root.appendChild(Fileds);
-
-        while (iter_arg.hasNext()) { //and not care what this shit,because this shit is us
-            String[] field = iter_arg.next();
-            Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
-            Field.setAttribute("Type", UUIDType);//parent должен быть свое подтипа
-            Field.setAttribute("UUID", field[1]);
-            Field.setAttribute("Comment", field[2]);
-            Fileds.appendChild(Field);
-            // struct.addData(field[0], UUDparent, field[1], field[2]);
-
-        }
-
-        try {
-            writeDocument(doc, patchF);
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    void createType_GPA_DO(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {//добавил параметр String file (в нем путь необходимой папки)
-        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-        globalpatchF = file;//присваиваю глобалу путь до файла.Не знаю,зачем я так сложно сделал
-        String patchF = globalpatchF + "\\" + name + ".type";//формируется окончательный путь с именем файла
-        Iterator<String[]> iter_arg = arg.iterator();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        Document doc = factory.newDocumentBuilder().newDocument();
-        Element root = doc.createElement("Type");
-        root.setAttribute("Name", name);
-        root.setAttribute("Kind", "Struct");
-        root.setAttribute("UUID", UUDstruc);
-        doc.appendChild(root);
-        Element Fields = doc.createElement("Fields");
-        root.appendChild(Fields);
-//---формирование структуры сигнала---
-        while (iter_arg.hasNext()) {
-            String[] field = iter_arg.next();
-            Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
-            Field.setAttribute("Type", UUIDType);
-            Field.setAttribute("UUID", field[1]);
-            Field.setAttribute("Comment", field[2]);
-            Fields.appendChild(Field);
-            struct.addData(field[0], "BOOL", field[1], field[2]);
-        }
-        try {
-            writeDocument(doc, patchF);
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    void createType_GPA_DI(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
-        struct = new Struct(name, T_AO_UUID, T_AO_UUID);//не понимаю как работают и зачем работают эти два уида,видимо где то косякнул,но работает правильно =))
-        globalpatchF = file;
-        String patchF = globalpatchF + "\\" + name + ".type";
-        Iterator<String[]> iter_arg = arg.iterator();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        Document doc = factory.newDocumentBuilder().newDocument();
-        Element root = doc.createElement("Type");
-        root.setAttribute("Name", name);
-        root.setAttribute("Kind", "Struct");
-        root.setAttribute("UUID", UUDstruc);
-        doc.appendChild(root);
-        Element Fields = doc.createElement("Fields");
-        root.appendChild(Fields);
-
         while (iter_arg.hasNext()) {
             String[] field = iter_arg.next();
             Element Field = doc.createElement("Field");
@@ -357,62 +393,70 @@ public class XMLSAX {
         } catch (TransformerException ex) {
             Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     // получаем данные из базы и засовыем их в метод создания списка 
-    void runBaseRuncreateTypeT(String file) throws ParserConfigurationException {
+//    public void runBaseRuncreateTypeT(String file) throws ParserConfigurationException {
+//        DataBase workbase = new DataBase();
+//
+//        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAI("ai1");
+//
+//        // Тут передаем данные тестовый вызов
+//        createTypeT_GPA(dataFromDbGPA, "T_GPA_AI", UUIDType_AI//(точно не могу предположить но походу это тип данных и в AO он рандомный у меня,это неправилно)
+//                , T_GPA_AI_HMI_UUID, file);
+//
+//    }
+//
+//    public void runBaseRuncreateType(String file) throws ParserConfigurationException {//это еще одна лютая хрень
+//        DataBase workbase = new DataBase();
+//        // workbase.connectionToBase();
+//
+//        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAO("ao1");
+//        //  ArrayList<String[]> dataFromDbAO = workbase.selectDataAO("ao1");//создаю еще 
+//        //  ArrayList<String[]> dataFromDbAO_HMI = workbase.selectDataAO_HMI("ao1");
+//
+//        createType_GPA_AO(dataFromDbGPA, "T_GPA_AO", UUIDType_AO, T_AO_UUID, file);//вызывается несколько раз
+//
+//        // createTypeAO_PLC(dataFromDbAO, "T_AO_PLC", AO_HMI_UUID, AO_PLC_UUID, file);//пересылаем данные для чтения AO_PLC
+//        //  createTypeAO_HMI(dataFromDbAO_HMI, "T_AO_HMI", AO_HMI_UUID, AO_HMI_UUID, file);//такие же данные для чтения HMI 
+//        //  createTypeAO_DRV(dataFromDbAO, "T_AO_DRV", AO_HMI_UUID, AO_DRV_UUID, file);//чтение ДРВ
+//    }
+//
+//    public void runBaseRuncreateTypeDSig(String file) throws ParserConfigurationException {
+//        DataBase workbase = new DataBase();
+//        // workbase.connectionToBase();
+//
+//        ArrayList<String[]> dataFromGPA_DO = workbase.selectDataGPA_DO("do1");
+//        createType_GPA_DO(dataFromGPA_DO, "T_GPA_DO", UUIDType_DO, AI_UUID, file);
+//
+//    }
+//
+//    public void runBaseRuncreateTypeDSign(String file) throws ParserConfigurationException {
+//        DataBase workbase = new DataBase();
+//        //  workbase.connectionToBase();
+//
+//        ArrayList<String[]> dataFromGPA_DI = workbase.selectDataGPA_DI("di1");
+//        createType_GPA_DI(dataFromGPA_DI, "T_GPA_DI", UUIDType_DI, AI_UUID, file);
+//    }
+
+    public void runBasecreateTypeAll(String file, String nameTable,String nameSignal) throws ParserConfigurationException {
         DataBase workbase = new DataBase();
 
-        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAI("ai1");
+        ArrayList<String[]> dataFromGPA_Sig = workbase.getSelectData(nameTable);
+        createTypeAllSignal(dataFromGPA_Sig, nameSignal, UUIDType_AI, AI_UUID//AI_UUID нужно изучить,мне кажется это дерьмо не должно быть рандомным
+                , file);
 
-        // Тут передаем данные тестовый вызов
-        createTypeT_GPA(dataFromDbGPA, "T_GPA_AI", UUIDType_AI//(точно не могу предположить но походу это тип данных и в AO он рандомный у меня,это неправилно)
-                , T_GPA_AI_HMI_UUID, file);
-
-    }
-
-    void runBaseRuncreateType(String file) throws ParserConfigurationException {//это еще одна лютая хрень
-        DataBase workbase = new DataBase();
-        // workbase.connectionToBase();
-
-        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAO("ao1");
-        //  ArrayList<String[]> dataFromDbAO = workbase.selectDataAO("ao1");//создаю еще 
-        //  ArrayList<String[]> dataFromDbAO_HMI = workbase.selectDataAO_HMI("ao1");
-
-        createType_GPA_AO(dataFromDbGPA, "T_GPA_AO", UUIDType_AO, T_AO_UUID, file);//вызывается несколько раз
-
-        // createTypeAO_PLC(dataFromDbAO, "T_AO_PLC", AO_HMI_UUID, AO_PLC_UUID, file);//пересылаем данные для чтения AO_PLC
-        //  createTypeAO_HMI(dataFromDbAO_HMI, "T_AO_HMI", AO_HMI_UUID, AO_HMI_UUID, file);//такие же данные для чтения HMI 
-        //  createTypeAO_DRV(dataFromDbAO, "T_AO_DRV", AO_HMI_UUID, AO_DRV_UUID, file);//чтение ДРВ
-    }
-
-    void runBaseRuncreateTypeDSig(String file) throws ParserConfigurationException {
-        DataBase workbase = new DataBase();
-        // workbase.connectionToBase();
-
-        ArrayList<String[]> dataFromGPA_DO = workbase.selectDataGPA_DO("do1");
-        createType_GPA_DO(dataFromGPA_DO, "T_GPA_DO", UUIDType_DO, AI_UUID, file);
-
-    }
-
-    void runBaseRuncreateTypeDSign(String file) throws ParserConfigurationException {
-        DataBase workbase = new DataBase();
-        //  workbase.connectionToBase();
-
-        ArrayList<String[]> dataFromGPA_DI = workbase.selectDataGPA_DI("di1");
-        createType_GPA_DI(dataFromGPA_DI, "T_GPA_DI", UUIDType_DI, AI_UUID, file);
     }
 
     // --- Передача собственной структуры в глобальные переменные Сонаты --- 
-    void sendStructToGlobV(Struct structInt) throws ParserConfigurationException, SAXException, IOException, DOMException, XPathExpressionException,
+    public void sendStructToGlobV(Struct structInt) throws ParserConfigurationException, SAXException, IOException, DOMException, XPathExpressionException,
             TransformerFactoryConfigurationError, TransformerException, XPathFactoryConfigurationException, InterruptedException {
         DomRW realise = new DomRW(structInt); // пересылаем структуру для добавления  ее в глобальные переменные
         realise.runMethods(); // это надо вытащить в Главную панель
     }
 
     // Добавляем сигналы в Мнемосхемы  не реализованно =(
-    void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
+    public void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign, String file) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
         String myVarU_0 = UUID.getUUID();
         String myVarU_0_0 = UUID.getUUID(); // УИД переменной для связки .но не уверен
         String myVarU_1 = UUID.getUUID();
@@ -462,7 +506,8 @@ public class XMLSAX {
             {"size", "TSize", TypeuuIdTSize, "размер прямоугольника", "(width:=50,height:=50)", uuIdsize}
         };
         Iterator<String[]> iter_arg = lisSig.iterator();
-        String patchF = globalpatchF + "HMI.iec_hmi";
+        globalpatchF = file;
+        String patchF = globalpatchF + "\\" + "HMI.iec_hmi";
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
         DocumentBuilder doc = document.newDocumentBuilder();
         // это из тестового метода преобразовываем файл для чтения XML
@@ -474,6 +519,7 @@ public class XMLSAX {
         InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
         Document document_final = factory.newDocumentBuilder().parse(stream);
         XPathFactory pathFactory = XPathFactory.newInstance();
+
         XPath xpath = pathFactory.newXPath();
         // а вот тут надо посчитать сколько переменных
         XPathExpression expr = xpath.compile("SubAppType/FBLibrary");

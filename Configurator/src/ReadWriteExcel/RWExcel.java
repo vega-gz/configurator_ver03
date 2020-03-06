@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package configurator;
+package ReadWriteExcel;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +32,7 @@ public class RWExcel {
     int startReadData = 0;
     private String patch_file;
 
-    void setPatchF(String patch_file) {
+    public void setPatchF(String patch_file) {
         this.patch_file = patch_file;
     }
 
@@ -118,7 +118,7 @@ public class RWExcel {
 
    
 
-    int getMaxcColumn(String name_sheet) throws FileNotFoundException, IOException {
+    public int getMaxcColumn(String name_sheet) throws FileNotFoundException, IOException {
 
         // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(patch_file));
@@ -139,7 +139,7 @@ public class RWExcel {
         return max_len_row;
     }
     
-     ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
+     public ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
         // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(patch_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
@@ -156,7 +156,7 @@ public class RWExcel {
     }
 
     // --- Geting data from file Exel ----
-    ArrayList<String[]> getDataCell(String name_sheet, int lenmass) throws FileNotFoundException, IOException {
+    public ArrayList<String[]> getDataCell(String name_sheet, int lenmass) throws FileNotFoundException, IOException {
         String[] array_cell_len;
         ArrayList<String[]> array_cell = new ArrayList<>();
 
@@ -330,7 +330,7 @@ public class RWExcel {
         return array_cell;
     }
 
-    ArrayList<String> getDataNameTable(String name_sheet) throws FileNotFoundException, IOException {
+    public ArrayList<String> getDataNameTable(String name_sheet) throws FileNotFoundException, IOException {
         ArrayList<String> array_cell = new ArrayList<>();
         // Номера ячеек беру в ручную от куда брать названия для таблиц
         FileInputStream inputStream = new FileInputStream(new File(patch_file));

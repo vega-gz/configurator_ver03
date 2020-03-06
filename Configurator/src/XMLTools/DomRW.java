@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package configurator;
+package XMLTools;
 
+import XMLTools.UUID;
+import configurator.Struct;
 import static com.sun.org.apache.xerces.internal.jaxp.JAXPConstants.JAXP_SCHEMA_LANGUAGE;
 import static com.sun.org.apache.xerces.internal.jaxp.JAXPConstants.W3C_XML_SCHEMA;
 import java.io.ByteArrayInputStream;
@@ -47,6 +49,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import DataBaseConnect.*;
 
 
 public class DomRW {
@@ -83,7 +86,7 @@ public class DomRW {
     return document;}
 
     // запуск обрабтки файлов что бы не из статического main . Переписать что бы не было document в входном параметре
-    void runMethods() throws DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, SAXException, IOException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
+    public void runMethods() throws DOMException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, SAXException, IOException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException{
             xpatchfind(document); // Variables данные добавления
             xpatchDataTypes(document);        
             writeDocument(document, patchF); // это запись в сам файл

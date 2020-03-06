@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package configurator;
 
-import configurator.Main_JPanel;
-import configurator.RWExcel;
-import configurator.RWExcel;
+package Main;
+
+import ReadWriteExcel.RWExcel;
+import ReadWriteExcel.RWExcel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -16,11 +11,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JFrame;
 import configurator.*;
+import DataBaseConnect.DataBase;
+import ReadWriteExcel.RWExcel;
+import DataBaseConnect.DataBase;
+import ReadWriteExcel.RWExcel;
 
-/**
- *
- * @author cherepanov
- */
+
 public class Main {
 
     static DataBase workbase = new DataBase();
