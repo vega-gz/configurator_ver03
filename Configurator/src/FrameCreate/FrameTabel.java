@@ -1,10 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package configurator;
+package FrameCreate;
 
+import DataBaseConnect.DataBase;
+import XMLTools.XMLSAX;
+import Main.Main_JPanel;
+import DataBaseConnect.StructSelectData;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,17 +17,26 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.xml.parsers.ParserConfigurationException;
+import DataBaseConnect.StructSelectData;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactoryConfigurationException;
+import org.xml.sax.SAXException;
+import DataBaseConnect.DataBase;
+import Main.Main_JPanel;
 
 /**
  *
  * @author cherepanov
  */
 public class FrameTabel extends javax.swing.JPanel {
-    Main_JPanel mj=new Main_JPanel();
-    
+
+    Main_JPanel mj = new Main_JPanel();
+
     int filepath;
     String filepatch;
-   // String signal=mj.signal;
+    // String signal=mj.signal;
     //Main_JPanel signals;
 
     XMLSAX createXMLSax = new XMLSAX();
@@ -60,7 +68,7 @@ public class FrameTabel extends javax.swing.JPanel {
         jTable1.setModel(getTableData());
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Добавить в мнемосхему");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -127,56 +135,48 @@ public class FrameTabel extends javax.swing.JPanel {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
 
-////        JFileChooser fileload = new JFileChooser();
-////
-////        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
-////        filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
-////        if (filepath == JFileChooser.APPROVE_OPTION) {
-////            String filename = fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать 
-////            try {
-////                filepatch = fileload.getSelectedFile().getCanonicalPath();
-////            } catch (IOException ex) {
-////                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-////
-////            }
-////           
-////
-////            switch (signal) {
-////                case "ai1":
-////                    try {
-////
-////                        createXMLSax.runBaseRuncreateTypeT(filepatch);
-////                    } catch (ParserConfigurationException ex) {
-////                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-////                    }
-////                    break;
-////                case "ao1":
-////                    try {
-////
-////                        createXMLSax.runBaseRuncreateType(filepatch);
-////                    } catch (ParserConfigurationException ex) {
-////                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-////                    }
-////                    break;
-////                case "do1":
-////                    try {
-////                        createXMLSax.runBaseRuncreateTypeDSig(filepatch);
-////                    } catch (ParserConfigurationException ex) {
-////                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);//доволен не дововлен 
-////                    }
-////                    break;
-////                case "di1":
-////                    try {
-////                        createXMLSax.runBaseRuncreateTypeDSign(filepatch);
-////                    } catch (ParserConfigurationException ex) {
-////                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-////                    }
-////            }
-////        }
+        JFileChooser fileload = new JFileChooser();
+        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        filepath = fileload.showOpenDialog(this);
+        if (filepath == JFileChooser.APPROVE_OPTION) {
+            try {
+                String filename = fileload.getSelectedFile().getName();
+
+                filepatch = fileload.getSelectedFile().getCanonicalPath();
+            } catch (IOException ex) {
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        DataBase workbase = DataBase.getInstance();
+        //workbase.connectionToBase();
+        ArrayList<String[]> dataFromDbGPA = workbase.getSelectData("ai1");
+        try {
+            try {
+                // Тут передаем данные тестовый вызов
+                createXMLSax.addSignalesMnemo(dataFromDbGPA, "T_GPA_AI_HMI", filepatch);
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerFactoryConfigurationError ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathFactoryConfigurationException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SAXException ex) {
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
-    TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
+    public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
         // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
         String[] columnDop = {"Выбор"};// до поля для галок или еще чего
         String[] columnNames = StructSelectData.getColumns();

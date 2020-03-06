@@ -26,7 +26,7 @@ public class Struct {
         this.Type = Type;
     }
 
-    void addData(String Name, String Type, String UUID, String Comment) {
+    public void addData(String Name, String Type, String UUID, String Comment) {
         Map<String, String> hashMap = new HashMap<>();
         hashMap.put("Name", Name);
         hashMap.put("Type", Type);
@@ -36,19 +36,19 @@ public class Struct {
         listData.add(hashMap);
     }
 
-    String getUUD() {
+    public String getUUD() {
         return UUID;
     }
 
-    String getName() {
+    public String getName() {
         return Name;
     }
 
-    String getType() {
+   public String getType() {
         return Type;
     }
 
-    ArrayList<Map> getlistData() {
+    public ArrayList<Map> getlistData() {
         return listData;
     }
 

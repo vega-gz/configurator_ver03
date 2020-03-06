@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package configurator;
+package ReadWriteExcel;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -64,7 +64,7 @@ public class WriteConfigFile {
 
     }
 
-    void writeXML(String user, String url, String nameProject, String pass) throws ParserConfigurationException{//сделать файл красиво,с переносом строки чтобы записывал
+    public void writeXML(String user, String url, String nameProject, String pass) throws ParserConfigurationException{//сделать файл красиво,с переносом строки чтобы записывал
 //--------этот метод для того чтобы добавлять в конфиг файл доп записи
 //        if (file.isFile()) {//если файл уже существует ,добавить в него данные
 //            try{
