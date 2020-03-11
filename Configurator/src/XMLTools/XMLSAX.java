@@ -56,11 +56,6 @@ public class XMLSAX {
 
     private final String All_Random_UUID = UUID.getUUID();
 
-    private final String UUIDType_AI = "5bac053cff7f4ef8a74048f428228aee";//уиды типов
-    private final String UUIDType_DO = "94C521C642227325371AE7BCC36E527";
-    private final String UUIDType_DI = "A1F5648246D48275D6786689DC1498B9";
-    private final String UUIDType_AO = "E02C7B0E4F1236B149113594A642B5FB";
-
     String globalpatchF;//сюда записываем путь,куда писать наши сигналы
 
     // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
@@ -360,7 +355,6 @@ public class XMLSAX {
 //        }
 //
 //    }
-
     void createTypeAllSignal(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
         struct = new Struct(name, All_Random_UUID, All_Random_UUID);//разобраться со вторым рандомом в параметрах(он не должен быть рандомным)
         globalpatchF = file;
@@ -438,12 +432,11 @@ public class XMLSAX {
 //        ArrayList<String[]> dataFromGPA_DI = workbase.selectDataGPA_DI("di1");
 //        createType_GPA_DI(dataFromGPA_DI, "T_GPA_DI", UUIDType_DI, AI_UUID, file);
 //    }
-
-    public void runBasecreateTypeAll(String file, String nameTable,String nameSignal) throws ParserConfigurationException {
+    public void runBasecreateTypeAll(String file, String nameTable, String nameSignal, String UUID_Type) throws ParserConfigurationException {
         DataBase workbase = new DataBase();
 
         ArrayList<String[]> dataFromGPA_Sig = workbase.getSelectData(nameTable);
-        createTypeAllSignal(dataFromGPA_Sig, nameSignal, UUIDType_AI, AI_UUID//AI_UUID нужно изучить,мне кажется это дерьмо не должно быть рандомным
+        createTypeAllSignal(dataFromGPA_Sig, nameSignal, UUID_Type, AI_UUID//AI_UUID нужно изучить,мне кажется это дерьмо не должно быть рандомным
                 , file);
 
     }
@@ -505,19 +498,23 @@ public class XMLSAX {
             {"hint", "STRING", TypeuuIdString, "всплывающая подсказка", "&apos;&apos;", uuIdhint},
             {"size", "TSize", TypeuuIdTSize, "размер прямоугольника", "(width:=50,height:=50)", uuIdsize}
         };
+
         Iterator<String[]> iter_arg = lisSig.iterator();
         globalpatchF = file;
-        String patchF = globalpatchF + "\\" + "HMI.iec_hmi";
+        String patchF = globalpatchF  + "AT_HMI.iec_hmi";// то есть здесь мы указываем в файл ,который надо записать,бля а сразу не сказать было,я то ебусь с тем,чтобы создать новый
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
         DocumentBuilder doc = document.newDocumentBuilder();
         // это из тестового метода преобразовываем файл для чтения XML
         RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile(patchF);
         String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
+        factory.setNamespaceAware(false);
         // так преобразовываем строку в поток и скармливаем билдеру XML
+
         InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
         Document document_final = factory.newDocumentBuilder().parse(stream);
+
+        // Document document_final = factory.newDocumentBuilder().newDocument();
         XPathFactory pathFactory = XPathFactory.newInstance();
 
         XPath xpath = pathFactory.newXPath();
@@ -526,7 +523,9 @@ public class XMLSAX {
         NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
         //  так как нода у нас одна то пишем только в 1 по этому for так работает
         for (int i = 0; i < nodes.getLength(); i++) {
-            Node n = nodes.item(i);
+
+            Node n = nodes.item(i);//вот на этом месте отпрыгивает во writedocument
+
             System.out.println(n.getNodeName());
             // Создаем элемент Графический компонент GraphicsCompositeFBType
             // и его структуру не в папке а просто в корне

@@ -36,7 +36,7 @@ public class CreateFrame extends JFrame {
         this.pass = pass;
         this.user = user;
 
-//        frame=new JFrame();
+        
         String[] items = {
             "  ",
             test08_DB,

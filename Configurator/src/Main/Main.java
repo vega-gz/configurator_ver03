@@ -20,13 +20,13 @@ import ReadWriteExcel.RWExcel;
 public class Main {
 
     static DataBase workbase = new DataBase();
-    static RWExcel rwexcel = new RWExcel();
+    static RWExcel rwexcel = new RWExcel();// 
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_JPanel().setVisible(true);
-               // workbase.connectionToBase();
+                workbase.connectionToBase();
             }
         });
     }
@@ -43,10 +43,12 @@ public class Main {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE); // Закрытие приложения но можно более хитро с диалоговыми
     }
+    
+    
 
     static void fillDB(String patch_file) throws IOException, SQLException {//загрузка непосредственно в базу
         rwexcel.setPatchF(patch_file); // изменяем путь файла
-        //workbase.connectionToBase();
+        workbase.connectionToBase();
         Iterator<String> it_list_sheet = rwexcel.get_list_sheet().iterator(); //забираем список листов в файле и строим итератор из них
         while (it_list_sheet.hasNext()) {
             String name_table = it_list_sheet.next(); // название таблицы как имя листа из файла
