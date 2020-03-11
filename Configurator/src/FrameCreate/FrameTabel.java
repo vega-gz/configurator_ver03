@@ -1,10 +1,7 @@
 package FrameCreate;
 
-import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
-import Main.Main_JPanel;
-import DataBaseConnect.StructSelectData;
-import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +33,7 @@ public class FrameTabel extends javax.swing.JPanel {
 
     int filepath;
     String filepatch;
-    // String signal=mj.signal;
-    //Main_JPanel signals;
+    String signal;
 
     XMLSAX createXMLSax = new XMLSAX();
 
@@ -136,6 +132,8 @@ public class FrameTabel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        getSignal();
+
         JFileChooser fileload = new JFileChooser();
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         filepath = fileload.showOpenDialog(this);
@@ -145,13 +143,13 @@ public class FrameTabel extends javax.swing.JPanel {
 
                 filepatch = fileload.getSelectedFile().getCanonicalPath();
             } catch (IOException ex) {
-                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);//
             }
         }
 
         DataBase workbase = DataBase.getInstance();
         //workbase.connectionToBase();
-        ArrayList<String[]> dataFromDbGPA = workbase.getSelectData("ai1");
+        ArrayList<String[]> dataFromDbGPA = workbase.getSelectData("dies_ai");//пока передаю через AI но необходимо это исправить,чтобы принимал все параметры
         try {
             try {
                 // Тут передаем данные тестовый вызов
@@ -234,6 +232,14 @@ public class FrameTabel extends javax.swing.JPanel {
 
             }
         };
+    }
+
+    public void setSignal(String signal) {
+        this.signal = signal;
+    }
+
+    public String getSignal() {
+        return signal;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

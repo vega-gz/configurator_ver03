@@ -1,24 +1,10 @@
 package Main;
 
 import FrameCreate.FrameTabel;
-import Main.Main;
-import FrameCreate.CreateFrame;
-import FrameCreate.CreateFrame;
-import ReadWriteExcel.RWExcel;
-import ReadWriteExcel.RWExcel;
-import DataBaseConnect.StructSelectData;
-import DataBaseConnect.StructSelectData;
-import XMLTools.XMLSAX;
-import XMLTools.XMLSAX;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,23 +17,17 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import configurator.*;
 import FrameCreate.CreateFrame;
-import DataBaseConnect.DataBase;
+
 import ReadWriteExcel.RWExcel;
 import DataBaseConnect.StructSelectData;
 import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
+import java.awt.Dimension;
 
 /**
  *
@@ -61,12 +41,17 @@ public class Main_JPanel extends javax.swing.JFrame {
     RWExcel excel = new RWExcel();
     String path;
     DataBase DB = new DataBase();
-    String signal;
+    public String signal;
     ArrayList<String> listDropT = new ArrayList();
     XMLSAX createXMLSax = new XMLSAX();
     int filepath;
     String filepatch, type;
-    String nameSignal;
+    String nameSignal, UUID_Type;
+
+    private final String UUIDType_AI = "5bac053cff7f4ef8a74048f428228aee";//уиды типов
+    private final String UUIDType_DO = "94C521C642227325371AE7BCC36E527";
+    private final String UUIDType_DI = "A1F5648246D48275D6786689DC1498B9";
+    private final String UUIDType_AO = "E02C7B0E4F1236B149113594A642B5FB";
 
     public Main_JPanel() {
         initComponents();
@@ -278,10 +263,9 @@ public class Main_JPanel extends javax.swing.JFrame {
 
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        //вот в этом дерьме мы формируем колонки ,метод selectColums
 
         String selectT = (String) jComboBox1.getSelectedItem();
-        //   DB.connectionToBase(url, pass, user);
+        DB.connectionToBase();
         List<String> listColumn = DB.selectColumns(selectT);
         String[] columns = new String[listColumn.size()];
         String tmpStr = " ";
@@ -295,14 +279,14 @@ public class Main_JPanel extends javax.swing.JFrame {
         System.out.println(tmpStr);
         jTextArea1.setText(tmpStr);
 
-        if (selectT.equals("ai1")) {
-            signal = "ai1";
-        } else if (selectT.equals("ao1")) {
-            signal = "ao1";
-        } else if (selectT.equals("do1")) {
-            signal = "do1";
-        } else if (selectT.equals("di1")) {
-            signal = "di1";
+        if (selectT.equals("dies_ai")) {
+            signal = "dies_ai";
+        } else if (selectT.equals("dies_ao")) {
+            signal = "dies_ao";
+        } else if (selectT.equals("dies_do")) {
+            signal = "dies_do";
+        } else if (selectT.equals("dies_di")) {
+            signal = "dies_di";
         }
 
         jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали
@@ -358,21 +342,27 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
 
             switch (signal) {
-                case "ai1":
+                case "dies_ai":
                     nameSignal = "T_GPA_AI";
+                    UUID_Type = UUIDType_AI;
                     break;
-                case "ao1":
+                case "dies_ao":
                     nameSignal = "T_GPA_AO";
+                    UUID_Type = UUIDType_AO;
                     break;
-                case "do1":
+                case "dies_do":
                     nameSignal = "T_GPA_DO";
+                    UUID_Type = UUIDType_DO;
                     break;
-                case "di1":
+                case "dies_di":
                     nameSignal = "T_GPA_DI";
+                    UUID_Type = UUIDType_DI;
             }
+            FrameTabel ft = new FrameTabel();
+            ft.setSignal(signal);
 
             try {
-                createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal);
+                createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal, UUID_Type);
             } catch (ParserConfigurationException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }

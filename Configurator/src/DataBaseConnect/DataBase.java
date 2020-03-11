@@ -115,7 +115,8 @@ public class DataBase {
         String nameTbanalise = new String(name_table);
         String nc_stringing = "";
         //Заменяем символы так как ограничения в Postgrese
-        name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_");
+        //  name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_");
+        name_table = replacedNt(name_table);
 
         switch (name_table) {
             case "AI1":
@@ -130,7 +131,8 @@ public class DataBase {
                 while (iter_list_table.hasNext()) {
                     tmp_cell++;
                     String bufer_named = iter_list_table.next().replace("/", "_");
-                    nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT    NOT NULL";
+                    // nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT    NOT NULL";
+                    nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT";
                 }
                 /* for (int i=tmp_cell+1; i < number_colum; i++){ // это было для добавления когда нечего нет и авто заполнение
                  nc_stringing += " ," + "colum_" + Integer.toString(i) +  "      TEXT    NOT NULL";
@@ -147,10 +149,12 @@ public class DataBase {
                     while (iter_list_table.hasNext()) {
                         tmp_cell++;
                         String bufer_named = iter_list_table.next().replace("/", "_");
-                        nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT    NOT NULL";
+                        // nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT    NOT NULL";
+                        nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT";
                     }
                     for (int i = tmp_cell + 1; i < number_colum; i++) {
-                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT    NOT NULL";
+                        // nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT    NOT NULL";
+                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
                     }
                     nc_stringing += ")";
                     //System.out.print(nc_stringing);
@@ -159,7 +163,8 @@ public class DataBase {
                     // -- create table max lengt row in sheet
                     nc_stringing = " (ID TEXT NOT NULL";
                     for (int i = 1; i < number_colum; i++) {
-                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT    NOT NULL";
+                        //  nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT    NOT NULL";
+                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
                     }
                     nc_stringing += ")";
                 }
@@ -191,7 +196,8 @@ public class DataBase {
         String nameTbanalise = new String(name_table);
         String sql = "";
         try {
-            name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_");
+           // name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_");
+            name_table=replacedNt(name_table);
             //--------------- INSERT ROWS ---------------
             switch (name_table) {
                 case "AI1":
@@ -338,6 +344,11 @@ public class DataBase {
 
         }
         return selectData;
+    }
+
+    String replacedNt(String s) {
+        s = s.replace("-", "_").replace(".", "_").replace(" ", "_").replace("#", "Dies_").replace("$", "Dollar_"); // тут и при создании нужно сделать единый модуль
+        return s;
     }
 
     public void selectData(String table, String[] columns) {
@@ -569,23 +580,23 @@ public class DataBase {
 //    }
 //----Строим все сигналы которые сюда ссылаются
     public ArrayList<String[]> getSelectData(String table) {
-        
+
         ArrayList<String[]> selectData = new ArrayList<>();
-        try{
-            stmt=connection.createStatement();
-            ResultSet rs=stmt.executeQuery(" SELECT * FROM " + table + ";");
-            while(rs.next()){
-                String TypeADC=rs.getString("Tag name");
-                String id =uuid.getUIID();
-                String namesig=rs.getString("Наименование сигнала");
-                
-                String [] str={TypeADC,id,namesig};
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+            while (rs.next()) {
+                String TypeADC = rs.getString("Num_40");
+                String id = uuid.getUIID();
+                String namesig = rs.getString("Num_5");
+
+                String[] str = {TypeADC, id, namesig};
                 selectData.add(str);
             }
             rs.close();
             stmt.close();
             System.out.println("--Operation SELECT done sucessfully");
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
