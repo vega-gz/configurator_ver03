@@ -448,12 +448,108 @@ public class XMLSAX {
         realise.runMethods(); // это надо вытащить в Главную панель
     }
 
-    // Добавляем сигналы в Мнемосхемы  не реализованно =(
-    public void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign, String file) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
+    // Добавляем сигналы в Мнемосхемы  в ручную сделано, надо автоматом
+    public void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign, String filepatch) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
         String myVarU_0 = UUID.getUUID();
-        String myVarU_0_0 = UUID.getUUID(); // УИД переменной для связки .но не уверен
+        String myVarU_0_0 = UUID.getUUID(); // УИД переменной для связки с переменно входа объекта
         String myVarU_1 = UUID.getUUID();
         String uuIdTBaSence = "6BF99E384F16CE39204C00877BBA46AE"; // перебрать файлы в его поиска  // Это уид TBaSence
+
+        Iterator<String[]> iter_arg = lisSig.iterator();
+        //String patchF = globalpatchF + "HMI.iec_hmi"; // сюда будем вносиь структуру
+        String patchF = filepatch; // сюда будем вносиь структуру
+        DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
+        DocumentBuilder doc = document.newDocumentBuilder();
+        // это из тестового метода преобразовываем файл для чтения XML
+        RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile(patchF);
+        String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        // так преобразовываем строку в поток и скармливаем билдеру XML
+        InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
+        Document document_final = factory.newDocumentBuilder().parse(stream);
+        XPathFactory pathFactory = XPathFactory.newInstance();
+        XPath xpath = pathFactory.newXPath();
+        // а вот тут надо посчитать сколько переменных
+        XPathExpression expr = xpath.compile("SubAppType/FBLibrary");
+        NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
+        //  так как нода у нас одна то пишем только в 1 по этому for так работает либо пишем в первую.
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Node n = nodes.item(i);
+            //System.out.println(n.getNodeName());
+            Document GraphicsCompositeType = createTGraphicsCompositeType(); // так забрали документ из метода
+            Element FBNetwork = (Element) GraphicsCompositeType.getElementsByTagName("FBNetwork").item(0); // вытягиваем ноду элемента FBNetwork из Документа который получили выше
+            Node rootGP = GraphicsCompositeType.getFirstChild(); // Начальная нода файла (что будем импортировать)
+            Element DataConnections = GraphicsCompositeType.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
+          
+            // настройка сигналов помещаемых в Графический компонент
+            int Ycord = -710; // Переменная смещения по Y в виде компонентов
+            int NumberSign = 0;
+            int xPos = 2;
+            int yPos = 0;
+            int sumColumn = 3; // Количество столбцов
+            int offset = 150; // Переменная на смещение по иксам в нарисованном элементе
+            while (iter_arg.hasNext()) {
+                String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")"; //"(x:=0,y:=0)" это позиция графики первой вкладки
+                String uuidFB = UUID.getUUID();
+                String[] field = iter_arg.next();
+                Element FB = GraphicsCompositeType.createElement("FB"); // Создаем FB в вытянутом элементе из фукции создания графического компонента
+                String nameBAnpartClone = "BaseAnPar_Test_" + Integer.toString(NumberSign); // так связь делается переменных ее основа
+                FB.setAttribute("Name", nameBAnpartClone);
+                FB.setAttribute("Type", "TBaseSen");
+                FB.setAttribute("UUID", uuidFB);
+                FB.setAttribute("TypeUUID", uuIdTBaSence); // уид TBaSence
+                FB.setAttribute("X", "-704.75");
+                FB.setAttribute("Y", Integer.toString(Ycord)); // Меняем только Y
+                Ycord = Ycord + 400;
+                Element VarValue0 = GraphicsCompositeType.createElement("VarValue");
+                VarValue0.setAttribute("Variable", "PrefStr");
+                String VPrefStr = "'" + nameListSign + "." + "'"; // Только таким видом добился
+                System.out.println(VPrefStr);
+                VarValue0.setAttribute("Value", VPrefStr);
+                VarValue0.setAttribute("Type", "STRING");
+                VarValue0.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
+                FB.appendChild(VarValue0);
+                Element VarValue1 = GraphicsCompositeType.createElement("VarValue");
+                VarValue1.setAttribute("Variable", "pos");
+                VarValue1.setAttribute("Value", XYposition);
+                VarValue1.setAttribute("Type", "TPos");
+                VarValue1.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2");
+                FB.appendChild(VarValue1);
+                Element VarValue2 = GraphicsCompositeType.createElement("VarValue");
+                VarValue2.setAttribute("Variable", "NameAlg");
+                String VNameAlg = "\u0027" + field[0] + "\u0027";// Только так работает как добиться методом кода не понятно
+                VarValue2.setAttribute("Value", VNameAlg); // Название сигнала
+
+                VarValue2.setAttribute("Type", "TPos");
+                VarValue2.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2");
+                FB.appendChild(VarValue2);
+                FBNetwork.appendChild(FB);
+                if (sumColumn > 0) {
+                    xPos = xPos + offset; // так меняем смещение графики по иксам
+                } else {
+                    xPos = 2;
+                    sumColumn = 3;
+                    yPos = yPos + 20;
+                }
+                ++NumberSign;
+                --sumColumn;
+            }
+            Node importNode = document_final.importNode(rootGP, true); // Вытягиваем элемент и импортируем Импорт обязателен
+            n.appendChild(importNode); // Добавляем коренную ноду в Мнемосхему уже после всех преобразований
+            //FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
+        }
+        // Тут запустим запись в файл
+        writeDocument(document_final, patchF);
+        //и возвращаем ему удаленный DOCTYPE
+        testStart.returnToFileDtd(patchF);
+    }
+
+    // --- Метод создания элементов TGraphicsCompositeType ---
+    Document createTGraphicsCompositeType() throws ParserConfigurationException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        Document doc = factory.newDocumentBuilder().newDocument();
 
         String TypeuuIdString = "38FDDE3B442D86554C56C884065F87B7";
         String TypeuuIdTpos = "17C82815436383728D79DA8F2EF7CAF2";
@@ -477,7 +573,7 @@ public class XMLSAX {
         String uuIdmouseEnter = "AA1D53154C9D3E9C25B0ADA056F82B5D";
         String uuIdmouseLeave = "C21BC0A24A8E157AF50BC59A1635CD7B";
         String uuIdmouseLBDblClick = "1BD263D2412FA33DA367C5B3480C9F0A";
-
+        // Это постоянные переменные  для Графического компонентного типа (вроде как неизменяемые) лучше из фала брать
         String EventOutputsEvent[][] = {
             // тут вопрос с UUID
             {"mouseLBPress", "событие нажатия левой кнопки мыши на объекте", uuIdMouseLBPress},
@@ -498,61 +594,30 @@ public class XMLSAX {
             {"hint", "STRING", TypeuuIdString, "всплывающая подсказка", "&apos;&apos;", uuIdhint},
             {"size", "TSize", TypeuuIdTSize, "размер прямоугольника", "(width:=50,height:=50)", uuIdsize}
         };
-
-        Iterator<String[]> iter_arg = lisSig.iterator();
-        globalpatchF = file;
-        String patchF = globalpatchF  + "AT_HMI.iec_hmi";// то есть здесь мы указываем в файл ,который надо записать,бля а сразу не сказать было,я то ебусь с тем,чтобы создать новый
-        DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
-        DocumentBuilder doc = document.newDocumentBuilder();
-        // это из тестового метода преобразовываем файл для чтения XML
-        RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile(patchF);
-        String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        // так преобразовываем строку в поток и скармливаем билдеру XML
-
-        InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
-        Document document_final = factory.newDocumentBuilder().parse(stream);
-
-        // Document document_final = factory.newDocumentBuilder().newDocument();
-        XPathFactory pathFactory = XPathFactory.newInstance();
-
-        XPath xpath = pathFactory.newXPath();
-        // а вот тут надо посчитать сколько переменных
-        XPathExpression expr = xpath.compile("SubAppType/FBLibrary");
-        NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
-        //  так как нода у нас одна то пишем только в 1 по этому for так работает
-        for (int i = 0; i < nodes.getLength(); i++) {
-
-            Node n = nodes.item(i);//вот на этом месте отпрыгивает во writedocument
-
-            System.out.println(n.getNodeName());
-            // Создаем элемент Графический компонент GraphicsCompositeFBType
-            // и его структуру не в папке а просто в корне
-            Element GCFBtype = document_final.createElement("GraphicsCompositeFBType");
-            GCFBtype.setAttribute("Name", "TGraphicsCompositeTypeTest1"); // тоже цикл с изменения доолжен быть так как по 64 элемента
+ 
+            Element GCFBtype = doc.createElement("GraphicsCompositeFBType"); // Наша основа графического элемента
+            GCFBtype.setAttribute("Name", "TGraphicsCompositeTypeTest1"); // тоже цикл с изменения доолжен быть так как по 64 элемента для аналогов
             GCFBtype.setAttribute("UUID", UUID.getUUID());
-            n.appendChild(GCFBtype); // Так прикручаваем сам компонент
-            Element InterfaceList = document_final.createElement("InterfaceList");
+            Element InterfaceList = doc.createElement("InterfaceList");
             GCFBtype.appendChild(InterfaceList);
-            Element EventOutputs = document_final.createElement("EventOutputs");
+            Element EventOutputs = doc.createElement("EventOutputs");
             InterfaceList.appendChild(EventOutputs);
-            Element InputVars = document_final.createElement("InputVars");
+            Element InputVars = doc.createElement("InputVars");
             InterfaceList.appendChild(InputVars);
-            Element FBNetwork = document_final.createElement("FBNetwork");
+            Element FBNetwork = doc.createElement("FBNetwork");
             GCFBtype.appendChild(FBNetwork);
-            Element DataConnections = document_final.createElement("DataConnections");
 
+            Element DataConnections = doc.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
             // элемент событий
             for (String field[] : EventOutputsEvent) {
-                Element Event = document_final.createElement("Event");
+                Element Event = doc.createElement("Event");
                 Event.setAttribute("Name", field[0]);
                 Event.setAttribute("Comment", field[1]);
                 Event.setAttribute("UUID", field[2]);
                 EventOutputs.appendChild(Event); // заносим в родителя
             }
             for (String field[] : InputVarsDeclare) {
-                Element VarDeclaration = document_final.createElement("VarDeclaration");
+                Element VarDeclaration = doc.createElement("VarDeclaration");
                 VarDeclaration.setAttribute("Name", field[0]);
                 VarDeclaration.setAttribute("Type", field[1]);
                 VarDeclaration.setAttribute("TypeUUID", field[2]);
@@ -563,66 +628,11 @@ public class XMLSAX {
             }
             InterfaceList.appendChild(EventOutputs); // так же но заносим уже в родителя их
             InterfaceList.appendChild(InputVars);
-            int Ycord = -704;
-            int NumberSign = 0;
-            int xPos = 2;
-            int yPos = 0;
-            while (iter_arg.hasNext()) {
-                String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")"; //"(x:=0,y:=0)"
-                String uuidFB = UUID.getUUID();
-                String[] field = iter_arg.next();
-                Element FB = document_final.createElement("FB");
-                //nameListSign
-                String nameBAnpartClone = "BaseAnPar_Test_" + Integer.toString(NumberSign);
-                FB.setAttribute("Name", nameBAnpartClone);
-                //FB.setAttribute("Type", "TBaseAnPar");
-                FB.setAttribute("Type", "TBaseSen");
-                FB.setAttribute("UUID", uuidFB);
-                FB.setAttribute("TypeUUID", uuIdTBaSence); // уид TBaSence
-                FB.setAttribute("X", "-704.75");
-                FB.setAttribute("Y", Integer.toString(Ycord)); // Меняем только Y
-                Ycord = Ycord + 400;
-                // Таких элементов 3
-                Element VarValue0 = document_final.createElement("VarValue");
-                VarValue0.setAttribute("Variable", "PrefStr");
-                String VPrefStr = "'" + nameListSign + "." + "'"; // Только таким видом добился
-                System.out.println(VPrefStr);
-                VarValue0.setAttribute("Value", VPrefStr);
-                VarValue0.setAttribute("Type", "STRING");
-                VarValue0.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");//varvalue0.setAttribute
-                FB.appendChild(VarValue0);
-                Element VarValue1 = document_final.createElement("VarValue");
-                VarValue1.setAttribute("Variable", "pos");
-                VarValue1.setAttribute("Value", XYposition);
-                VarValue1.setAttribute("Type", "TPos");
-                VarValue1.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2");
-                FB.appendChild(VarValue1);
-                Element VarValue2 = document_final.createElement("VarValue");
-                VarValue2.setAttribute("Variable", "NameAlg");
-                String VNameAlg = "\u0027" + field[0] + "\u0027";// Только так работает как добиться методом кода не понятно
-                VarValue2.setAttribute("Value", VNameAlg); // Название сигнала
-
-                VarValue2.setAttribute("Type", "TPos");
-                VarValue2.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2");
-                FB.appendChild(VarValue2);
-                FBNetwork.appendChild(FB);
-                // Так же переменные наши в Дату конектионс
-                Element Connection = document_final.createElement("Connection");
-                Connection.setAttribute("Source", "Agregat1_test");
-                Connection.setAttribute("Destination", nameBAnpartClone + "." + "PrefAb");
-                Connection.setAttribute("SourceUUID", myVarU_0);
-                Connection.setAttribute("DestinationUUID", uuidFB + "." + "7DF53A3B47B1075B9D3AE78253FC271B");// АЙДИ  TBaseAnPar может поменяться
-                DataConnections.appendChild(Connection);
-                ++NumberSign;
-                yPos = yPos + 20;
-            }
-            FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
-        }
-        // Тут запустим запись в файл
-        writeDocument(document_final, patchF);
-        //и возвращаем ему удаленный DOCTYPE
-        testStart.returnToFileDtd(patchF);
+            doc.appendChild(GCFBtype);
+            Node test = doc.getElementsByTagName("FBNetwork").item(0);
+        return doc;
     }
+
 
     public void enumerationData(String patchF) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
