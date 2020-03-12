@@ -150,28 +150,32 @@ public class FrameTabel extends javax.swing.JPanel {
         DataBase workbase = DataBase.getInstance();
         //workbase.connectionToBase();
         ArrayList<String[]> dataFromDbGPA = workbase.getSelectData("dies_ai");//пока передаю через AI но необходимо это исправить,чтобы принимал все параметры
-        try {
+        
+            try {
             try {
                 // Тут передаем данные тестовый вызов
                 createXMLSax.addSignalesMnemo(dataFromDbGPA, "T_GPA_AI_HMI", filepatch);
             } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (XPathExpressionException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (TransformerFactoryConfigurationError ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (TransformerException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParserConfigurationException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (XPathFactoryConfigurationException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SAXException ex) {
-        }
-
+            } catch (SAXException ex) {
+                Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+      
+    
 
     }//GEN-LAST:event_jButton1ActionPerformed
     public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
