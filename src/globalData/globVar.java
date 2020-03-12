@@ -26,6 +26,7 @@ public class globVar {
         public static int simbolHeight = 600;
         public static int vertGap = 200;
         public static int skale = 400; //масштаб в %
+        public static int skale10 = 4000; //масштаб в %
         
         public static int logicBlockWidth = 10; //ширина логических блоков
 	
