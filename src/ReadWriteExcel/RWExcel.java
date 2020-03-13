@@ -184,7 +184,7 @@ public class RWExcel {
             }
             break;
             default: { // если нечего не найдено из одходящего
-                first_len = 0;
+                first_len = startReadData;
                 startm = 1; // данные с первого так как один UUID 
                  col_UUID = 1;
                 array_cell_len = new String[lenmass + col_UUID]; 
@@ -376,7 +376,7 @@ public class RWExcel {
                                     String[] tmpMassN = new String[maxLengtString]; // размер массива = размер длины строки Exel
                                     findColumnSig = true; // выставили флаг в то что нашли
                                     //System.out.println("Addres f cell " + c.getAddress()); // адрес ячейки
-                                    if (maxRowNum < r.getRowNum()) {
+                                    if (maxRowNum <= r.getRowNum()) {
                                         maxRowNum = r.getRowNum(); // адрес строки с найденным столбцом они мугут быть разные по этому максимальное берем
                                         startReadData = maxRowNum + 1; // +1 так как данные начинаются со следующей строки
                                         //System.out.println("Addres first data " + startReadData);
