@@ -157,7 +157,7 @@ public class RWExcel {
 
     // --- Geting data from file Exel ----
     public ArrayList<String[]> getDataCell(String name_sheet, int lenmass) throws FileNotFoundException, IOException {
-        String[] array_cell_len;
+           String[] array_cell_len;
         ArrayList<String[]> array_cell = new ArrayList<>();
 
         FileInputStream inputStream = new FileInputStream(new File(patch_file));
@@ -165,11 +165,11 @@ public class RWExcel {
         Sheet sheet = wb.getSheet(name_sheet);
 
         // начальные значения наверное просто для инициализации
-        int first_len = 0;
+        int first_len = 0; // получили переменую строки с именами столбцов;
         int tmpFirstLenght = 0;
         int col_UUID = 0;
         int startm = 1;
-        array_cell_len = new String[lenmass + col_UUID]; // Почему +1
+        //array_cell_len = new String[lenmass + col_UUID]; // Почему +1
 
         switch (name_sheet) { // Высчитываем с какой строки заполнять таблицу и 4 UUID - 3 доп
             case "AI1":
@@ -186,142 +186,144 @@ public class RWExcel {
             default: { // если нечего не найдено из одходящего
                 first_len = startReadData;
                 startm = 1; // данные с первого так как один UUID 
-                 col_UUID = 1;
-                array_cell_len = new String[lenmass + col_UUID]; 
+                col_UUID = 1;
+                array_cell_len = new String[lenmass + col_UUID]; // Почему +1 Так как одни данные под UUID
             }
         }
 
         Iterator<Row> it = sheet.iterator(); // итератор Строк
         int sum_sheet = 0;
         int len_row = 0;
-        int max_len_row = 0;//
+        int max_len_row = 0;
 
         while (it.hasNext()) {
-            while (tmpFirstLenght < first_len) {
+            while (tmpFirstLenght < first_len) { // а вот есть ли там данные
                 it.next();
                 ++tmpFirstLenght;
             }
             //++sum_sheet;
-            Row row = it.next();
-            // System.out.println(row.getFirstCellNum() + " " + row.getLastCellNum()); //в строку что бы посмотреть что за нах
-            int tmp = 0;
-            //заносим Кол UUID
-            int tmp_UUID = 1;
-            do {
-                array_cell_len[tmp] = getUIID();
-                tmp_UUID++;
-                tmp++;
-            } while (tmp_UUID <= col_UUID);
+            if (it.hasNext()) { // проверка есть ли вообще данные после пропуска строк
+                Row row = it.next();
+                // System.out.println(row.getFirstCellNum() + " " + row.getLastCellNum()); //в строку что бы посмотреть что за нах
+                int tmp = 0;
+                //заносим Кол UUID
+                int tmp_UUID = 1;
+                do {
+                    array_cell_len[tmp] = getUIID();
+                    tmp_UUID++;
+                    tmp++;
+                } while (tmp_UUID <= col_UUID);
 
             //array_cell_len[tmp]= getUIID(); // так было до For
-            // System.out.println(array_cell_len[tmp]);
-            // tmp++;
-            //System.out.println(row.getLastCellNum());
-            Iterator<Cell> cells = row.cellIterator(); // итератор Ячеек вот не работает должным образом пропускает ячейки
-            int i_tmp = 0;
+                // System.out.println(array_cell_len[tmp]);
+                // tmp++;
+                //System.out.println(row.getLastCellNum());
+                Iterator<Cell> cells = row.cellIterator(); // итератор Ячеек вот не работает должным образом пропускает ячейки
+                int i_tmp = 0;
 
             //  while (cells.hasNext()) {
-            //      Cell cell = cells.next();
-            while (i_tmp < array_cell_len.length - startm) {
-                Cell cell = row.getCell(i_tmp);
+                //      Cell cell = cells.next();
+                while (i_tmp < array_cell_len.length - startm) {
+                    Cell cell = row.getCell(i_tmp);
 
                 //System.out.println(cell.getAddress());
                /* CellAddress cellReference = new CellAddress("Q110");
-                 if (cell.getAddress().equals(cellReference)){
-                 System.out.println(cell.getAddress());
-                 System.out.println(cell.getCellType());
-                 }*/
+                     if (cell.getAddress().equals(cellReference)){
+                     System.out.println(cell.getAddress());
+                     System.out.println(cell.getCellType());
+                     }*/
                 //System.out.println(cell.getAddress()); // Для проверки сдвига
                 /* System.out.println(cell.getAddress());
-                 System.out.println(i_tmp);
-                 System.out.println(row.getLastCellNum());*/
-                if (cell != null) {  // обходим таким дебильным способом
-                    CellType cellType = cell.getCellType();
-                    switch (cellType) {
-                        case STRING: {
-                            if (cell.getStringCellValue().contains("'")) {
-                                //System.out.print("Find ' ->  " + cell.getStringCellValue());
-                                array_cell_len[tmp] = cell.getStringCellValue().replaceAll("'", "");
+                     System.out.println(i_tmp);
+                     System.out.println(row.getLastCellNum());*/
+                    if (cell != null) {  // обходим таким дебильным способом
+                        CellType cellType = cell.getCellType();
+                        switch (cellType) {
+                            case STRING: {
+                                if (cell.getStringCellValue().contains("'")) {
+                                    //System.out.print("Find ' ->  " + cell.getStringCellValue());
+                                    array_cell_len[tmp] = cell.getStringCellValue().replaceAll("'", "");
+                                }
+                                array_cell_len[tmp] = cell.getStringCellValue();  // // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
                             }
-                            array_cell_len[tmp] = cell.getStringCellValue();  // // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
+                            break;
+                            case BLANK:
+                                array_cell_len[tmp] = "NULL";
+                                break;
+                            case NUMERIC:
+                                array_cell_len[tmp] = Double.toString(cell.getNumericCellValue()); // Double
+                                break;
+                            //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
+                            case FORMULA:
+                                // System.out.println("Formula");
+                                switch (cell.getCachedFormulaResultType()) {
+                                    case NUMERIC:
+                                        array_cell_len[tmp] = (Double.toString(cell.getNumericCellValue()));
+                                        break;
+                                    case STRING:
+                                        array_cell_len[tmp] = cell.getRichStringCellValue().toString();
+                                        array_cell_len[tmp] = array_cell_len[tmp].replaceAll("'", ""); // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
+                                        //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
+                                        break;
+                                }
+                                break;
+                            default:
+                                array_cell_len[tmp] = "|";
+                                break;
                         }
-                        break;
-                        case BLANK:
-                            array_cell_len[tmp] = "NULL";
-                            break;
-                        case NUMERIC:
-                            array_cell_len[tmp] = Double.toString(cell.getNumericCellValue()); // Double
-                            break;
-                        //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
-                        case FORMULA:
-                            // System.out.println("Formula");
-                            switch (cell.getCachedFormulaResultType()) {
-                                case NUMERIC:
-                                    array_cell_len[tmp] = (Double.toString(cell.getNumericCellValue()));
-                                    break;
-                                case STRING:
-                                    array_cell_len[tmp] = cell.getRichStringCellValue().toString();
-                                    array_cell_len[tmp] = array_cell_len[tmp].replaceAll("'", ""); // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
-                                    //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
-                                    break;
-                            }
-                            break;
-                        default:
-                            array_cell_len[tmp] = "|";
-                            break;
+                    } else {
+                        array_cell_len[tmp] = "NULL"; // Вот тут чего такое то?
                     }
-                } else {
-                    array_cell_len[tmp] = "NULL"; // Вот тут чего такое то?
+
+                    tmp++;
+                    i_tmp++;
                 }
 
-                tmp++;
-                i_tmp++;
-            }
-
-            for (int i = 0; i < array_cell_len.length; i++) {
-                // System.out.print(array_cell_len[i] + " " );
-            }
+                for (int i = 0; i < array_cell_len.length; i++) {
+                    // System.out.print(array_cell_len[i] + " " );
+                }
            //System.out.println();
 
             // ПРоверяемс считались какие то данные из ячеек строки (1 так как первый элемент занят ID) 
-            //Желательно переписать
-            int not_null_dat = 0;
-            for (int i = 1; i < array_cell_len.length; i++) {
-                if (array_cell_len[i].isEmpty()) {
-                    continue;
-                } else {
-                    not_null_dat = 1;
-                    break;
-                }
-            }
-            if (not_null_dat != 0) {
-                String[] tmp_array_cell_len = Arrays.copyOf(array_cell_len, array_cell_len.length);
-
-                // Проверяем пустой ли массив который мы заносим, так как Exel думает что есть данные
-                boolean empty = true;
-                //  if(tmp_array_cell_len.length != 0){    //массив может быть пустой
-                for (int i = startm; i < tmp_array_cell_len.length; i++) {
-                    //if (!tmp_array_cell_len[i].equals("NULL") |  tmp_array_cell_len[i] != null) {
-                    if (tmp_array_cell_len[i] == null || tmp_array_cell_len[i].equals("NULL") || tmp_array_cell_len[i].equals("")) {
-                        empty = true;
-                        //System.out.println("This find => " + tmp_array_cell_len[i]);
+                //Желательно переписать
+                int not_null_dat = 0;
+                for (int i = 1; i < array_cell_len.length; i++) {
+                    if (array_cell_len[i].isEmpty()) {
+                        continue;
                     } else {
-                        // System.out.println("This Else => " + tmp_array_cell_len[i]);
-                        empty = false;
+                        not_null_dat = 1;
                         break;
                     }
                 }
-                //   }
-                if (!empty) {
-                    array_cell.add(tmp_array_cell_len);
-                } // не пусто тогда заносим.
-                //array_cell.add(tmp_array_cell_len);
-                not_null_dat = 0;
-            }
+                if (not_null_dat != 0) {
+                    String[] tmp_array_cell_len = Arrays.copyOf(array_cell_len, array_cell_len.length);
+
+                    // Проверяем пустой ли массив который мы заносим, так как Exel думает что есть данные
+                    boolean empty = true;
+                    //  if(tmp_array_cell_len.length != 0){    //массив может быть пустой
+                    for (int i = startm; i < tmp_array_cell_len.length; i++) {
+                        //if (!tmp_array_cell_len[i].equals("NULL") |  tmp_array_cell_len[i] != null) {
+                        if (tmp_array_cell_len[i] == null || tmp_array_cell_len[i].equals("NULL") || tmp_array_cell_len[i].equals("")) {
+                            empty = true;
+                            //System.out.println("This find => " + tmp_array_cell_len[i]);
+                        } else {
+                            // System.out.println("This Else => " + tmp_array_cell_len[i]);
+                            empty = false;
+                            break;
+                        }
+                    }
+                    //   }
+                    if (!empty) {
+                        array_cell.add(tmp_array_cell_len);
+                    } // не пусто тогда заносим.
+                    //array_cell.add(tmp_array_cell_len);
+                    not_null_dat = 0;
+                }
             //обнуляем массив для проверки выше если строки программа видит но они пустые.
-            // array_cell_len = null;
-            for (int i = 0; i < array_cell_len.length; i++) {
-                array_cell_len[i] = "";
+                // array_cell_len = null;
+                for (int i = 0; i < array_cell_len.length; i++) {
+                    array_cell_len[i] = "";
+                }
             }
         }
 
