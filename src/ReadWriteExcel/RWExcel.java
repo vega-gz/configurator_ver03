@@ -157,7 +157,7 @@ public class RWExcel {
 
     // --- Geting data from file Exel ----
     public ArrayList<String[]> getDataCell(String name_sheet, int lenmass) throws FileNotFoundException, IOException {
-           String[] array_cell_len;
+        String[] array_cell_len;
         ArrayList<String[]> array_cell = new ArrayList<>();
 
         FileInputStream inputStream = new FileInputStream(new File(patch_file));
