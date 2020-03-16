@@ -18,7 +18,7 @@ public class StructSelectData {
         return columns;
     }
 
-    static String getnTable() {
+    public static String getnTable() {
         return nTable;
     }
 

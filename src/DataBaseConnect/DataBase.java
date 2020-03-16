@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import XMLTools.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DataBase {
 
@@ -308,7 +310,7 @@ public class DataBase {
         }
     }
 
-    ArrayList<String[]> selectData(String table) {
+    public ArrayList<String[]> selectData(String table) {
         //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String[]> selectData = new ArrayList<>();
         try {
@@ -677,6 +679,33 @@ public class DataBase {
         }
     }
 
+      // ---  Обновиьт данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
+    public int Update(String table, String column, String newData, HashMap< String, String> mapDataRow) {
+        int requestr = 0;
+        try {
+            connection.setAutoCommit(true);
+            String sql = "UPDATE " + table + " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
+                    + " = \'" + newData + "\' WHERE " ;
+            // Формируем условие запроса из столбцов и данных
+            int lastValue = 1; // с первого так как размер не с нуля
+             for(Map.Entry<String, String> entry : mapDataRow.entrySet()) {               
+                String key = entry.getKey();
+                String value = entry.getValue();
+                if(lastValue >= mapDataRow.size()){
+                    sql += "\"" + key + "\" = " + "\'" + value + "\'";
+                }else sql += "\"" + key + "\" = " + "\'" + value + "\'" + " and ";
+                ++lastValue;
+              }
+            sql += ";";
+            System.out.println(sql);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return requestr;
+    }
     String[] getColumns() {
         return columns;
     }
