@@ -1,6 +1,6 @@
 package Main;
 
-import FrameCreate.FrameTabel;
+import FrameCreate.FrameTable;
 
 import java.awt.Toolkit;
 
@@ -264,7 +264,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
-        String selectT = (String) jComboBox1.getSelectedItem();
+        String selectT = (String) jComboBox1.getSelectedItem();  // Переменная с именем таблицы
         DB.connectionToBase();
         List<String> listColumn = DB.selectColumns(selectT);
         String[] columns = new String[listColumn.size()];
@@ -303,7 +303,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
-        FrameTabel frameTable = new FrameTabel();
+        FrameTable frameTable = new FrameTable(selectT);
         JFrame frame = new JFrame();
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
@@ -328,7 +328,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        String selectT = (String)jComboBox1.getSelectedItem(); // Отдаем имя в списке
         JFileChooser fileload = new JFileChooser();
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
@@ -358,8 +358,8 @@ public class Main_JPanel extends javax.swing.JFrame {
                     nameSignal = "T_GPA_DI";
                     UUID_Type = UUIDType_DI;
             }
-            FrameTabel ft = new FrameTabel();
-            ft.setSignal(signal);
+            FrameTable ft = new FrameTable();
+            //ft.setSignal(signal);
 
             try {
                 createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal, UUID_Type);
