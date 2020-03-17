@@ -630,6 +630,7 @@ public class XMLSAX {
             InterfaceList.appendChild(InputVars);
             doc.appendChild(GCFBtype);
             Node test = doc.getElementsByTagName("FBNetwork").item(0);
+            FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
         return doc;
     }
 
