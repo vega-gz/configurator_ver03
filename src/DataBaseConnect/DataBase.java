@@ -310,6 +310,7 @@ public class DataBase {
         }
     }
 
+    // --- Вытянуть все из таблицы  ---
     public ArrayList<String[]> selectData(String table) {
         //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String[]> selectData = new ArrayList<>();
@@ -353,7 +354,10 @@ public class DataBase {
         return s;
     }
 
-    public void selectData(String table, String[] columns) {
+    //--------------- SELECT DATA sum columns --------------
+    // какие именно столбцы дергать
+    public ArrayList<String[]> getData(String table, String[] columns) {
+        //connectionToBase(); // вызов Фукция подключения к базе
         StructSelectData.setColumns(columns);
         ArrayList<String[]> selectData = new ArrayList<>();
         String s_columns = "";
@@ -380,14 +384,14 @@ public class DataBase {
             }
             rs.close();
             stmt.close();
-            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру
+            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
             //connection.commit();
             //System.out.println("-- Operation SELECT done successfully");
         } catch (SQLException e) {
             System.out.println("Failed select data");
             e.printStackTrace();
         }
-        //return currentSelectTable;
+        return selectData;
     }
 
     public List<String> selectColumns(String table) {

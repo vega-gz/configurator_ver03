@@ -232,7 +232,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         db.connectionToBase();
 
         JOptionPane.showMessageDialog(null, "Соединение установлено!");
-
+        jComboBox1.setModel(getComboBoxModel());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -294,7 +294,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
         String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
         //  DB.connectionToBase(url,pass,user);
-        DB.selectData(selectElem, columns); //внесли данные в сущность 
+        DB.getData(selectElem, columns); //внесли данные в сущность 
         StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
         dataFromDb = DB.getcurrentSelectTable();
 
