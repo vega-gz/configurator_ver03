@@ -1,6 +1,6 @@
 package Main;
 
-import FrameCreate.FrameTabel;
+import FrameCreate.FrameTable;
 
 import java.awt.Toolkit;
 
@@ -49,10 +49,9 @@ public class Main_JPanel extends javax.swing.JFrame {
     XMLSAX createXMLSax = new XMLSAX();
     int filepath;
     String filepatch, type;
-    String 
-            nameSignal1, nameSignal2, nameSignal3, nameSignal4,
-            UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4,
-            UUID_Parent1,UUID_Parent2,UUID_Parent3,UUID_Parent4;
+    String nameSignal1, nameSignal2, nameSignal3, nameSignal4, nameSignal5,
+            UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4, UUID_Type5,
+            UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4, UUIDParent5;
 
     private final String UUIDType_AI_ToProcessing = "187F76AE49C59E950138DDA3067101D0";//уиды типов
     private final String UUIDType_AI_Settings = "668FE9B94A603427C8EDBBB8917A7594";
@@ -65,19 +64,18 @@ public class Main_JPanel extends javax.swing.JFrame {
     private final String UUID_AO_ToHMI = "D225A65348D2770B341BAC9762DA1766";
     private final String UUID_DO_FromHMI = "032CB0403C4B8FB66F9B68B2E5D50373";
     private final String UUID_DO_ToHMI = "7474D14B284DB0A574420580A1FFD7C0";
-    
-    private final String UUID_Parent_AI_FromProcessing="D48C3F1549ACD994A366A1A51FE00772";
-    private final String UUID_Parent_AI_OnlyToHMI="ABDF10D048FB61AB90F474996CF9B3B2";
-    private final String UUID_Parent_AI_Settings="E10A238347B7C26C7C1FDFA77F91B1F5";
-    private final String UUID_Parent_AI_ToProcessing="2BDAC6F849D13DED3A2A5B9190720FD7";
-    private final String UUID_Parent_AO_FromHMI="136536604B0AD5911BA545A82E7DF913";
-    private final String UUID_Parent_AO_ToHMI="00B934F5461BB0C8938D42A9118D2143";
-    private final String UUID_Parent_DI_FromProcessing="2694959C4B5180695BAA0E9209463FE3";
-    private final String UUID_Parent_DI_Setting="9D3CCA014F76318C4B750981ED2CEA67";
-    private final String UUID_Parent_DI_ToProcessing="2A86C1F64D326C195FE5CB898889601B";
-    private final String UUID_Parent_DO_FromHMI="E151BCB02540B85F326AF1B1DD593EE6";
-    private final String UUID_Parent_DO_ToHMI="150F53385749F03C0BB1E29A7ED64D95";
-    
+
+    private final String UUID_Parent_AI_FromProcessing = "D48C3F1549ACD994A366A1A51FE00772";
+    private final String UUID_Parent_AI_OnlyToHMI = "ABDF10D048FB61AB90F474996CF9B3B2";
+    private final String UUID_Parent_AI_Settings = "E10A238347B7C26C7C1FDFA77F91B1F5";
+    private final String UUID_Parent_AI_ToProcessing = "2BDAC6F849D13DED3A2A5B9190720FD7";
+    private final String UUID_Parent_AO_FromHMI = "136536604B0AD5911BA545A82E7DF913";
+    private final String UUID_Parent_AO_ToHMI = "00B934F5461BB0C8938D42A9118D2143";
+    private final String UUID_Parent_DI_FromProcessing = "2694959C4B5180695BAA0E9209463FE3";
+    private final String UUID_Parent_DI_Setting = "9D3CCA014F76318C4B750981ED2CEA67";
+    private final String UUID_Parent_DI_ToProcessing = "2A86C1F64D326C195FE5CB898889601B";
+    private final String UUID_Parent_DO_FromHMI = "E151BCB02540B85F326AF1B1DD593EE6";
+    private final String UUID_Parent_DO_ToHMI = "150F53385749F03C0BB1E29A7ED64D95";
 
     public Main_JPanel() {
         initComponents();
@@ -276,7 +274,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
         String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
         //  DB.connectionToBase(url,pass,user);
-        DB.selectData(selectElem, columns); //внесли данные в сущность 
+        DB.getData(selectElem, columns); //внесли данные в сущность 
         StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
         dataFromDb = DB.getcurrentSelectTable();
 
@@ -285,7 +283,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
-        FrameTabel frameTable = new FrameTabel(selectT);
+        FrameTable frameTable = new FrameTable(selectT);
         JFrame frame = new JFrame();
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
@@ -331,21 +329,25 @@ public class Main_JPanel extends javax.swing.JFrame {
                         nameSignal2 = "T_GPA_AI_ToProcessing";
                         nameSignal3 = "T_GPA_AI_Settings";
                         nameSignal4 = "T_GPA_AI_OnlyToHMI";
+                        nameSignal5 = "T_GPA_AI_Internal";
 
                         UUID_Type1 = UUID_AI_FromProcessing;
                         UUID_Type2 = UUIDType_AI_ToProcessing;
                         UUID_Type3 = UUIDType_AI_Settings;
                         UUID_Type4 = UUID_AI_OnlyToHMI;
-                        
-                        UUID_Parent1=UUID_Parent_AI_FromProcessing;
-                        UUID_Parent2=UUID_Parent_AI_ToProcessing;
-                        UUID_Parent3=UUID_Parent_AI_Settings;
-                        UUID_Parent4=UUID_Parent_AI_OnlyToHMI;
+                        UUID_Type5 = "744A7D367B498F7EF3E4B8BC15643AB2";
 
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1,UUID_Parent1);//
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2,UUID_Parent2);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3,UUID_Parent3);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal4, UUID_Type4,UUID_Parent4);
+                        UUID_Parent1 = UUID_Parent_AI_FromProcessing;
+                        UUID_Parent2 = UUID_Parent_AI_ToProcessing;
+                        UUID_Parent3 = UUID_Parent_AI_Settings;
+                        UUID_Parent4 = UUID_Parent_AI_OnlyToHMI;
+                        UUIDParent5 = "006A03A8C74962DC3E0724A92DA854AF";
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);//
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3, UUID_Parent3);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal4, UUID_Type4, UUID_Parent4);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal5, UUID_Type5, UUIDParent5);
 
                         break;
                     case "dies_ao":
@@ -355,12 +357,12 @@ public class Main_JPanel extends javax.swing.JFrame {
 
                         UUID_Type1 = UUID_AO_FromHMI;
                         UUID_Type2 = UUID_AO_ToHMI;
-                        
-                        UUID_Parent1=UUID_Parent_AO_FromHMI;
-                        UUID_Parent2=UUID_Parent_AO_ToHMI;
 
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1,UUID_Parent1);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2,UUID_Parent2);
+                        UUID_Parent1 = UUID_Parent_AO_FromHMI;
+                        UUID_Parent2 = UUID_Parent_AO_ToHMI;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
 
                         break;
                     case "dies_do":
@@ -370,12 +372,12 @@ public class Main_JPanel extends javax.swing.JFrame {
 
                         UUID_Type1 = UUID_DO_FromHMI;
                         UUID_Type2 = UUID_DO_ToHMI;
-                        
-                        UUID_Parent1=UUID_Parent_DO_FromHMI;
-                        UUID_Parent2=UUID_Parent_DO_ToHMI;
 
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1,UUID_Parent1);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2,UUID_Parent2);
+                        UUID_Parent1 = UUID_Parent_DO_FromHMI;
+                        UUID_Parent2 = UUID_Parent_DO_ToHMI;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
 
                         break;
                     case "dies_di":
@@ -383,18 +385,18 @@ public class Main_JPanel extends javax.swing.JFrame {
                         nameSignal1 = "T_GPA_DI_FromProcessing";
                         nameSignal2 = "T_GPA_DI_Settings";
                         nameSignal3 = "T_GPA_DI_ToProcessing";
-                        
-                        UUID_Type1=UUID_DI_FromProcessing;
-                        UUID_Type2=UUID_DI_Settings;
-                        UUID_Type3=UUID_DI_ToProcessing;
-                        
-                        UUID_Parent1=UUID_Parent_DI_FromProcessing;
-                        UUID_Parent2=UUID_Parent_DI_Setting;
-                        UUID_Parent3=UUID_Parent_DI_ToProcessing;
-                        
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1,UUID_Parent1);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2,UUID_Parent2);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3,UUID_Parent3);
+
+                        UUID_Type1 = UUID_DI_FromProcessing;
+                        UUID_Type2 = UUID_DI_Settings;
+                        UUID_Type3 = UUID_DI_ToProcessing;
+
+                        UUID_Parent1 = UUID_Parent_DI_FromProcessing;
+                        UUID_Parent2 = UUID_Parent_DI_Setting;
+                        UUID_Parent3 = UUID_Parent_DI_ToProcessing;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3, UUID_Parent3);
 
                 }
 
@@ -415,7 +417,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         try {
+        try {
             final File xmlFile = new File(System.getProperty("user.dir") //user.dir-это путь до домашнего каталога(каталог где хранится прога)
                     + File.separator + FILENAME);//separator это разделитель =="\"
 
@@ -456,8 +458,6 @@ public class Main_JPanel extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
-   
 
     public ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {

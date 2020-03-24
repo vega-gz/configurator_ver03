@@ -14,8 +14,8 @@ import java.util.Locale;
  * @author cherepanov
  */
 public class UUID {
-   // public static String getUUID;
 
+    // public static String getUUID;
     String upperUUID;
 
     public String getUIID() {
@@ -23,8 +23,7 @@ public class UUID {
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyyMMddhhmmsss"); //формируем дату как нам вздумается
         String uiid_str = uniqueKey.toString().replace("-", "");
-        upperUUID=uiid_str.toUpperCase(Locale.ENGLISH);
-
+        upperUUID = uiid_str.toUpperCase(Locale.ENGLISH);
         return uiid_str;
     }
 
@@ -33,9 +32,6 @@ public class UUID {
         Date dateNow = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddhhmmssss");
         String uuid_str = unUuid.toString().replace("-", "");
-        
-        
-
         return uuid_str;
     }
 
@@ -44,7 +40,6 @@ public class UUID {
         Date dateNow = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddhhmmssss");
         String uuid_strr = uidKey.toString().replace("-", "");
-        
         return uuid_strr;
 
     }
