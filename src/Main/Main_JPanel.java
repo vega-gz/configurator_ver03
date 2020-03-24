@@ -28,6 +28,7 @@ import DataBaseConnect.StructSelectData;
 import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
 import java.awt.Dimension;
+import DataBaseConnect.*;
 
 /**
  *
@@ -43,15 +44,38 @@ public class Main_JPanel extends javax.swing.JFrame {
     DataBase DB = new DataBase();
     public String signal;
     ArrayList<String> listDropT = new ArrayList();
+    ReadConfigFile readConfig = new ReadConfigFile();
+
     XMLSAX createXMLSax = new XMLSAX();
     int filepath;
     String filepatch, type;
-    String nameSignal, UUID_Type;
+    String nameSignal1, nameSignal2, nameSignal3, nameSignal4, nameSignal5,
+            UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4, UUID_Type5,
+            UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4, UUIDParent5;
 
-    private final String UUIDType_AI = "5bac053cff7f4ef8a74048f428228aee";//уиды типов
-    private final String UUIDType_DO = "94C521C642227325371AE7BCC36E527";
-    private final String UUIDType_DI = "A1F5648246D48275D6786689DC1498B9";
-    private final String UUIDType_AO = "E02C7B0E4F1236B149113594A642B5FB";
+    private final String UUIDType_AI_ToProcessing = "187F76AE49C59E950138DDA3067101D0";//уиды типов
+    private final String UUIDType_AI_Settings = "668FE9B94A603427C8EDBBB8917A7594";
+    private final String UUID_AI_OnlyToHMI = "3F156B284DE592D62F031C9791BF07EF";
+    private final String UUID_AI_FromProcessing = "2318F94F4C3CEA2681DE4C8C432A66E9";
+    private final String UUID_DI_FromProcessing = "9F0EDD3143DC10ACF03CBA8C4A870F2D";
+    private final String UUID_DI_Settings = "94C521C642227325371AE7BCC363E527";
+    private final String UUID_DI_ToProcessing = "55B37D104E6E69A8BD7466B4968651A1";
+    private final String UUID_AO_FromHMI = "28BBA2F94E53F5E7D050CBA8820F76E4";
+    private final String UUID_AO_ToHMI = "D225A65348D2770B341BAC9762DA1766";
+    private final String UUID_DO_FromHMI = "032CB0403C4B8FB66F9B68B2E5D50373";
+    private final String UUID_DO_ToHMI = "7474D14B284DB0A574420580A1FFD7C0";
+
+    private final String UUID_Parent_AI_FromProcessing = "D48C3F1549ACD994A366A1A51FE00772";
+    private final String UUID_Parent_AI_OnlyToHMI = "ABDF10D048FB61AB90F474996CF9B3B2";
+    private final String UUID_Parent_AI_Settings = "E10A238347B7C26C7C1FDFA77F91B1F5";
+    private final String UUID_Parent_AI_ToProcessing = "2BDAC6F849D13DED3A2A5B9190720FD7";
+    private final String UUID_Parent_AO_FromHMI = "136536604B0AD5911BA545A82E7DF913";
+    private final String UUID_Parent_AO_ToHMI = "00B934F5461BB0C8938D42A9118D2143";
+    private final String UUID_Parent_DI_FromProcessing = "2694959C4B5180695BAA0E9209463FE3";
+    private final String UUID_Parent_DI_Setting = "9D3CCA014F76318C4B750981ED2CEA67";
+    private final String UUID_Parent_DI_ToProcessing = "2A86C1F64D326C195FE5CB898889601B";
+    private final String UUID_Parent_DO_FromHMI = "E151BCB02540B85F326AF1B1DD593EE6";
+    private final String UUID_Parent_DO_ToHMI = "150F53385749F03C0BB1E29A7ED64D95";
 
     public Main_JPanel() {
         initComponents();
@@ -64,7 +88,6 @@ public class Main_JPanel extends javax.swing.JFrame {
         jOptionPane1 = new javax.swing.JOptionPane();
         jProgressBar1 = new javax.swing.JProgressBar();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -72,6 +95,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -82,13 +106,6 @@ public class Main_JPanel extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Подключиться к базе");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -132,6 +149,13 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Подключение к базе");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -148,8 +172,8 @@ public class Main_JPanel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(jButton2))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -169,8 +193,8 @@ public class Main_JPanel extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
@@ -191,50 +215,6 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        try {
-            final File xmlFile = new File(System.getProperty("user.dir") //user.dir-это путь до домашнего каталога(каталог где хранится прога)
-                    + File.separator + FILENAME);//separator это разделитель =="\"
-
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            org.w3c.dom.Document doc = db.parse(xmlFile);
-
-            doc.getDocumentElement().normalize();
-
-            System.out.println("Наш файл:" + doc.getDocumentElement().getNodeName());
-            System.out.println("=================");
-
-            NodeList nodeList = doc.getElementsByTagName("config");
-
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                //выводим инфу по каждому их элементов
-                Node node = nodeList.item(i);
-                System.out.println();
-                System.out.println("Текущий элемент: " + node.getNodeName());
-                if (Node.ELEMENT_NODE == node.getNodeType()) {
-                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
-//                    
-                    pass = element.getElementsByTagName("PASS").item(0).getTextContent();
-                    user = element.getElementsByTagName("USER").item(0).getTextContent();
-                    url = element.getElementsByTagName("URL").item(0).getTextContent();
-                }
-
-            }
-            System.out.println(pass + " " + url + " " + user);
-
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
-        }
-
-        DataBase db = new DataBase();
-        db.connectionToBase();
-
-        JOptionPane.showMessageDialog(null, "Соединение установлено!");
-        jComboBox1.setModel(getComboBoxModel());
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
@@ -245,7 +225,7 @@ public class Main_JPanel extends javax.swing.JFrame {
             path = file.toString();
             excel.setPatchF(path);
             try {
-                excel.readAllfile();//это всего лишь читает файл но не записыыает его
+                //  excel.readAllfile();//это всего лишь читает файл но не записыыает его
 
                 Main.fillDB(file.getPath());
             } catch (IOException ex) {
@@ -264,7 +244,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
-        String selectT = (String) jComboBox1.getSelectedItem();  // Переменная с именем таблицы
+        String selectT = (String) jComboBox1.getSelectedItem();
         DB.connectionToBase();
         List<String> listColumn = DB.selectColumns(selectT);
         String[] columns = new String[listColumn.size()];
@@ -328,57 +308,158 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String selectT = (String)jComboBox1.getSelectedItem(); // Отдаем имя в списке
+
         JFileChooser fileload = new JFileChooser();
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
-            String filename = fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать 
             try {
-                filepatch = fileload.getSelectedFile().getCanonicalPath();
-            } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                String filename = fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать
+                try {
+                    filepatch = fileload.getSelectedFile().getCanonicalPath();
+                } catch (IOException ex) {
+                    Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
 
-            }
+                }
 
-            switch (signal) {
-                case "dies_ai":
-                    nameSignal = "T_GPA_AI";
-                    UUID_Type = UUIDType_AI;
-                    break;
-                case "dies_ao":
-                    nameSignal = "T_GPA_AO";
-                    UUID_Type = UUIDType_AO;
-                    break;
-                case "dies_do":
-                    nameSignal = "T_GPA_DO";
-                    UUID_Type = UUIDType_DO;
-                    break;
-                case "dies_di":
-                    nameSignal = "T_GPA_DI";
-                    UUID_Type = UUIDType_DI;
-            }
-            FrameTable ft = new FrameTable();
-            //ft.setSignal(signal);
+                switch (signal) {
+                    case "dies_ai":
 
-            try {
-                createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal, UUID_Type);
+                        nameSignal1 = "T_GPA_AI_FromProcessing";
+                        nameSignal2 = "T_GPA_AI_ToProcessing";
+                        nameSignal3 = "T_GPA_AI_Settings";
+                        nameSignal4 = "T_GPA_AI_OnlyToHMI";
+                        nameSignal5 = "T_GPA_AI_Internal";
+
+                        UUID_Type1 = UUID_AI_FromProcessing;
+                        UUID_Type2 = UUIDType_AI_ToProcessing;
+                        UUID_Type3 = UUIDType_AI_Settings;
+                        UUID_Type4 = UUID_AI_OnlyToHMI;
+                        UUID_Type5 = "744A7D367B498F7EF3E4B8BC15643AB2";
+
+                        UUID_Parent1 = UUID_Parent_AI_FromProcessing;
+                        UUID_Parent2 = UUID_Parent_AI_ToProcessing;
+                        UUID_Parent3 = UUID_Parent_AI_Settings;
+                        UUID_Parent4 = UUID_Parent_AI_OnlyToHMI;
+                        UUIDParent5 = "006A03A8C74962DC3E0724A92DA854AF";
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);//
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3, UUID_Parent3);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal4, UUID_Type4, UUID_Parent4);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal5, UUID_Type5, UUIDParent5);
+
+                        break;
+                    case "dies_ao":
+
+                        nameSignal1 = "T_GPA_AO_FromHMI";
+                        nameSignal2 = "T_GPA_AO_ToHMI";
+
+                        UUID_Type1 = UUID_AO_FromHMI;
+                        UUID_Type2 = UUID_AO_ToHMI;
+
+                        UUID_Parent1 = UUID_Parent_AO_FromHMI;
+                        UUID_Parent2 = UUID_Parent_AO_ToHMI;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
+
+                        break;
+                    case "dies_do":
+
+                        nameSignal1 = "T_GPA_DO_FromHMI";
+                        nameSignal2 = "T_GPA_DO_ToHMI";
+
+                        UUID_Type1 = UUID_DO_FromHMI;
+                        UUID_Type2 = UUID_DO_ToHMI;
+
+                        UUID_Parent1 = UUID_Parent_DO_FromHMI;
+                        UUID_Parent2 = UUID_Parent_DO_ToHMI;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
+
+                        break;
+                    case "dies_di":
+
+                        nameSignal1 = "T_GPA_DI_FromProcessing";
+                        nameSignal2 = "T_GPA_DI_Settings";
+                        nameSignal3 = "T_GPA_DI_ToProcessing";
+
+                        UUID_Type1 = UUID_DI_FromProcessing;
+                        UUID_Type2 = UUID_DI_Settings;
+                        UUID_Type3 = UUID_DI_ToProcessing;
+
+                        UUID_Parent1 = UUID_Parent_DI_FromProcessing;
+                        UUID_Parent2 = UUID_Parent_DI_Setting;
+                        UUID_Parent3 = UUID_Parent_DI_ToProcessing;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
+                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3, UUID_Parent3);
+
+                }
+
             } catch (ParserConfigurationException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+
             }
 
         }
-//
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // workbase.connectionToBase();
         if (!listDropT.isEmpty()) {  // если есть что удалять передаем лист в обработчик баз
             DB.dropTable(listDropT);
-        } else ;
+        } else;
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            final File xmlFile = new File(System.getProperty("user.dir") //user.dir-это путь до домашнего каталога(каталог где хранится прога)
+                    + File.separator + FILENAME);//separator это разделитель =="\"
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            org.w3c.dom.Document doc = db.parse(xmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Наш файл:" + doc.getDocumentElement().getNodeName());
+            System.out.println("=================");
+
+            NodeList nodeList = doc.getElementsByTagName("config");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                //выводим инфу по каждому их элементов
+                Node node = nodeList.item(i);
+                System.out.println();
+                System.out.println("Текущий элемент: " + node.getNodeName());
+                if (Node.ELEMENT_NODE == node.getNodeType()) {
+                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
+//                    
+                    pass = element.getElementsByTagName("PASS").item(0).getTextContent();
+                    user = element.getElementsByTagName("USER").item(0).getTextContent();
+                    url = element.getElementsByTagName("URL").item(0).getTextContent();
+                }
+
+            }
+            System.out.println(pass + " " + url + " " + user);
+
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+
+        DataBase db = new DataBase();
+        db.connectionToBase();
+        jComboBox1.setModel(getComboBoxModel());
+        JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
 
         //String db = "test08_DB";

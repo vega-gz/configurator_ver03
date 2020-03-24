@@ -1,54 +1,78 @@
 package FrameCreate;
 
-import DataBaseConnect.DataBase;
-import DataBaseConnect.StructSelectData;
-import Main.Main_JPanel;
 import XMLTools.XMLSAX;
 
-import java.awt.Component;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-import javax.swing.AbstractCellEditor;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
-import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 import javax.xml.parsers.ParserConfigurationException;
+import DataBaseConnect.StructSelectData;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 import org.xml.sax.SAXException;
+import DataBaseConnect.DataBase;
+import Main.Main_JPanel;
+import XMLTools.UUID;
+
 /**
  *
- * @author nazarov
+ * @author cherepanov
  */
-
-// --- Клас отоброжения таблицы ---
 public class FrameTable extends javax.swing.JPanel {
+
+    Main_JPanel mj = new Main_JPanel();
+
+    int filepath;
+    String filepatch;
     String nameTable = "";
+    String UUIDHigth = "";
+    String Graphname, TypeName, ElemName;
+    String UUIDBlockPref, UUIDBlockName;
+    String TypeAI_DRV = "REAL", TypeDI_DRV = "BOOL";
+    String nameSignal1, nameSignal2, nameSignal3, nameSignal4, nameSignal5, nameSignal6,
+            UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4,
+            UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4;
 
-        DataBase workbase = DataBase.getInstance(); // подключаем нашу базу
+    private final String UUIDType_AI_ToProcessing = "187F76AE49C59E950138DDA3067101D0";//уиды типов
+    private final String UUIDType_AI_Settings = "668FE9B94A603427C8EDBBB8917A7594";
+    private final String UUID_AI_OnlyToHMI = "3F156B284DE592D62F031C9791BF07EF";
+    private final String UUID_AI_FromProcessing = "2318F94F4C3CEA2681DE4C8C432A66E9";
+    private final String UUID_DI_FromProcessing = "9F0EDD3143DC10ACF03CBA8C4A870F2D";
+    private final String UUID_DI_Settings = "94C521C642227325371AE7BCC363E527";
+    private final String UUID_DI_ToProcessing = "55B37D104E6E69A8BD7466B4968651A1";
+    private final String UUID_AO_FromHMI = "28BBA2F94E53F5E7D050CBA8820F76E4";
+    private final String UUID_AO_ToHMI = "D225A65348D2770B341BAC9762DA1766";
+    private final String UUID_DO_FromHMI = "032CB0403C4B8FB66F9B68B2E5D50373";
+    private final String UUID_DO_ToHMI = "7474D14B284DB0A574420580A1FFD7C0";
 
-    /**
-     * Creates new form Panel
-     */
-    public FrameTable() {
-        initComponents();
-    }
+    private final String UUID_Parent_AI_FromProcessing = "D48C3F1549ACD994A366A1A51FE00772";
+    private final String UUID_Parent_AI_OnlyToHMI = "ABDF10D048FB61AB90F474996CF9B3B2";
+    private final String UUID_Parent_AI_Settings = "E10A238347B7C26C7C1FDFA77F91B1F5";
+    private final String UUID_Parent_AI_ToProcessing = "2BDAC6F849D13DED3A2A5B9190720FD7";
+    private final String UUID_Parent_AO_FromHMI = "136536604B0AD5911BA545A82E7DF913";
+    private final String UUID_Parent_AO_ToHMI = "00B934F5461BB0C8938D42A9118D2143";
+    private final String UUID_Parent_DI_FromProcessing = "2694959C4B5180695BAA0E9209463FE3";
+    private final String UUID_Parent_DI_Setting = "9D3CCA014F76318C4B750981ED2CEA67";
+    private final String UUID_Parent_DI_ToProcessing = "2A86C1F64D326C195FE5CB898889601B";
+    private final String UUID_Parent_DO_FromHMI = "E151BCB02540B85F326AF1B1DD593EE6";
+    private final String UUID_Parent_DO_ToHMI = "150F53385749F03C0BB1E29A7ED64D95";
+
+    private final String UUIDSourcePref = "8F544E934F31327C4EBC88930CB7AD32";
+    private final String UUIDSourceNameRU = "E543C4CD4FF3878196D61C86A31A4CE0";
+
+    XMLSAX createXMLSax = new XMLSAX();
+
+    DataBase workbase = DataBase.getInstance();
 
     public FrameTable(String nameTable) {
         this.nameTable = nameTable;
@@ -64,201 +88,345 @@ public class FrameTable extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-        jTable1.setDefaultEditor(Date.class, (TableCellEditor) new DateCellEditor());// Определение редактора ячеек
+        setPreferredSize(new java.awt.Dimension(999, 530));
+
         jTable1.setModel(getTableData());
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("To_Lua_DRV");
-        jButton1.setToolTipText("Формируем файл луа для драйверов");
+        jButton1.setText("Добавить в мнемосхему");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setText("Сигнал нижнего уровня");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel2);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(881, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(468, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addComponent(jTabbedPane1)
         );
-
-        jTabbedPane1.addTab("tab1", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGap(0, 530, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>                        
 
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
 
-        JFileChooser fileopen = new JFileChooser("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\_actual_config\\Config\\Design\\IO_XLS\\GPA");
-        int ret = fileopen.showDialog(null, "Сохранить файл(DRV_from_base_LUA)");                
-        if (ret == JFileChooser.APPROVE_OPTION) {
-        File file = fileopen.getSelectedFile();
-        //System.out.print(file.getPath());
-        String currentT = StructSelectData.getnTable();
-        
-        ArrayList<String[]> dataFromDb = new ArrayList<>();
+        JFileChooser fileload = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\ArchNew\\Design");
+        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        filepath = fileload.showOpenDialog(this);
+        if (filepath == JFileChooser.APPROVE_OPTION) {
+            try {
+                String filename = fileload.getSelectedFile().getName();
+
+                filepatch = fileload.getSelectedFile().getCanonicalPath();
+            } catch (IOException ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);//
+            }
+        }
+
+        DataBase workbase = DataBase.getInstance();
         //workbase.connectionToBase();
-        //dataFromDb = workbase.selectData("ai1");
-        dataFromDb = workbase.selectData(currentT);
-        //System.out.println("This Table  -->" + currentT);
-        //Сформировать файл луа новый файл
+        ArrayList<String[]> dataFromDbGPA = workbase.getSelectData(nameTable);//пока передаю через AI но необходимо это исправить,чтобы принимал все параметры
+        int number = 0;
+        UUID uuid = new UUID();
 
-            
-        javax.swing.JOptionPane.showMessageDialog(null,"Данные из базы в файл Максима" + file.getPath() + " загружены"); //диалоговое окно
+        if (nameTable.equals("ai")) {
+            UUIDHigth = "C06031C04C13BB17463EB1B889813E68";//уид верхенего уровня
+            Graphname = "TGraphicsCompositeTypeAI";
+            TypeName = "T_BaseAnIn";
+            UUIDBlockPref = "7DF53A3B47B1075B9D3AE78253FC271B";
+            UUIDBlockName = "31E704A94C1D0BCA16C48C8F563CAB4B";
+            ElemName = "T_BaseAnIn";
 
-        
-        }  
-        
+        } else if (nameTable.equals("ao")) {
+            UUIDHigth = "CDB0D9974B89FB4417F2139064F22857";
+            Graphname = "TGraphicsCompositeTypeAO";
+            TypeName = "T_BaseAnOut";
+            UUIDBlockPref = "7DF53A3B47B1075B9D3AE78253FC271B";
+            UUIDBlockName = "31E704A94C1D0BCA16C48C8F563CAB4B";
+            ElemName = "T_BaseAnOut";
+
+        } else if (nameTable.equals("dgo")) {
+            UUIDHigth = "DD87E9C742BB69689219F08BAD99F4B8";
+            Graphname = "TGraphicsCompositeTypeDO";
+            TypeName = "T_BaseDO";
+            UUIDBlockPref = "FB48BEA74A28EB85591DC0B68AA08A74";//поменять местами DO и DI
+            UUIDBlockName = "524F2EBB4524C97C16682CAD9668D4CC";
+            ElemName = "T_Base_DO";
+
+        } else if (nameTable.equals("di")) {
+            UUIDHigth = "5298F3F94A79E35B818384B694BB561B";
+            Graphname = "TGraphicsCompositeTypeDI";
+            TypeName = "T_BaseDI";
+            UUIDBlockPref = "FB48BEA74A28EB85591DC0B68AA08A74";
+            UUIDBlockName = "524F2EBB4524C97C16682CAD9668D4CC";
+            ElemName = "T_Base_DI";
+        }
+
+        try {
+            try {
+                // Тут передаем данные тестовый вызов
+                createXMLSax.addSignalesMnemo(dataFromDbGPA, "GPA", filepatch, UUIDHigth, Graphname, UUIDSourcePref, UUIDBlockPref, TypeName, UUIDSourceNameRU, UUIDBlockName, ElemName);
+            } catch (IOException ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerFactoryConfigurationError ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (TransformerException ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XPathFactoryConfigurationException ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SAXException ex) {
+            Logger.getLogger(FrameTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }                                        
 
-  // --- Собственоручная модель таблицы ---
- TableModel getTableData(){ // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
-    // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
-    String[] columnDop = {"Выбор"};// до поля для галок или еще чего
-    String[] columnNames = StructSelectData.getColumns();
-    String[] resultColumn = Stream.concat( Arrays.stream(columnDop), Arrays.stream(columnNames))
-            .toArray(String[]::new); // соединяем два массива
-    Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
-    Object[] streamArray ;
-    Object[] streamNull = new Object[1];
-    streamNull[0] = null;
-    Object[][] tmp2 = new Object[data.length][];
-    for(int i=0; i< data.length; i++){
-        streamArray = new Object[data[i].length+1];
-        // преобразовываем массив
-        Object[] testStream = Stream.concat( Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new); 
-        tmp2[i] = testStream;
-    }
-    return new DefaultTableModel(tmp2, resultColumn){  
-    @Override           
-    public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
-      Class clazz = String.class;
-      switch (columnIndex) {
-        case 0:
-          clazz = Boolean.class;
-          break;
-      }
-      return clazz; 
-    }       
-    @Override
-    public boolean isCellEditable(int row, int column) {
-      return column == column;
-    } 
-     @Override
-    public void setValueAt(Object aValue, int row, int column) {
-      // Условие проверки галочки скрывать легенду
-      if (aValue instanceof Boolean && column == 0) {
-        //System.out.println("Posution - > " + row + " " + aValue);        
-        Vector rowData = (Vector)getDataVector().get(row); // не помню для чего но без этого только скрывает =(
-        rowData.set(0, (boolean)aValue);
-        fireTableCellUpdated(row, column);
-        
-        try {
-            // Само действие не реализованно
-        if((boolean) aValue == true){
-          System.out.println("true");
-        }
-        if((boolean) aValue == false){
-          System.out.println("false");
-        }
-        }catch (NullPointerException e) {
-        JOptionPane.showMessageDialog(null, "Трудности с добавлением");
-        }
-      }
-      else{  // если нет Галки просто обновляем данные
-           Vector rowData = (Vector)getDataVector().get(row); // не помню для чего но без этого только скрывает =(
-           //String curentCell = (String) rowData.get(column); // получить предыдущие данные
-           
-            String ColumnName = jTable1.getColumnName(column); // Имя выделенного столбца
-            int rowTM = jTable1.getRowCount(); // количество строк
-            int ColumnTM =  jTable1.getColumnCount();  //Количество столбцов
-            HashMap< String, String> mapDataRow = new HashMap<>(); // элементы для отображения в этих полях
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        JFileChooser fileload = new JFileChooser();
+        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
+        filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
+        if (filepath == JFileChooser.APPROVE_OPTION) {
+            try {
+                String filename = fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать
+                try {
+                    filepatch = fileload.getSelectedFile().getCanonicalPath();
+                } catch (IOException ex) {
+                    Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
 
-            for(int i=1; i<ColumnTM; ++i){ // Пробежать по строке где изменяются данные и сформировать список для обновления данных в базе c 1 так как там галки
-                mapDataRow.put(jTable1.getColumnName(i), (String) rowData.get(i)); // Формируем список данных принудительно в String
+                }
+
+                switch (nameTable) {
+                    case "ai":
+
+                        nameSignal1 = "T_GPA_AI_FromProcessing";
+                        nameSignal2 = "T_GPA_AI_ToProcessing";
+                        nameSignal3 = "T_GPA_AI_Settings";
+                        nameSignal4 = "T_GPA_AI_OnlyToHMI";
+                        nameSignal5 = "T_AI_DRV";
+                        nameSignal6 = "T_DI_DRV";
+
+                        UUID_Type1 = UUID_AI_FromProcessing;
+                        UUID_Type2 = UUIDType_AI_ToProcessing;
+                        UUID_Type3 = UUIDType_AI_Settings;
+                        UUID_Type4 = UUID_AI_OnlyToHMI;
+
+                        UUID_Parent1 = UUID_Parent_AI_FromProcessing;
+                        UUID_Parent2 = UUID_Parent_AI_ToProcessing;
+                        UUID_Parent3 = UUID_Parent_AI_Settings;
+                        UUID_Parent4 = UUID_Parent_AI_OnlyToHMI;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal1, UUID_Type1, UUID_Parent1);//
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal2, UUID_Type2, UUID_Parent2);
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal3, UUID_Type3, UUID_Parent3);
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal4, UUID_Type4, UUID_Parent4);
+
+                        createXMLSax.runBasecreateTypeAll(nameTable, nameSignal5, filepatch, TypeAI_DRV);
+                        createXMLSax.runBasecreateTypeAll(nameTable, nameSignal6, filepatch, TypeDI_DRV);
+
+                        break;
+                    case "ao":
+
+                        nameSignal1 = "T_GPA_AO_FromHMI";
+                        nameSignal2 = "T_GPA_AO_ToHMI";
+
+                        UUID_Type1 = UUID_AO_FromHMI;
+                        UUID_Type2 = UUID_AO_ToHMI;
+
+                        UUID_Parent1 = UUID_Parent_AO_FromHMI;
+                        UUID_Parent2 = UUID_Parent_AO_ToHMI;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal2, UUID_Type2, UUID_Parent2);
+
+                        break;
+                    case "dgo":
+
+                        nameSignal1 = "T_GPA_DO_FromHMI";
+                        nameSignal2 = "T_GPA_DO_ToHMI";
+
+                        UUID_Type1 = UUID_DO_FromHMI;
+                        UUID_Type2 = UUID_DO_ToHMI;
+
+                        UUID_Parent1 = UUID_Parent_DO_FromHMI;
+                        UUID_Parent2 = UUID_Parent_DO_ToHMI;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal2, UUID_Type2, UUID_Parent2);
+
+                        break;
+                    case "di":
+
+                        nameSignal1 = "T_GPA_DI_FromProcessing";
+                        nameSignal2 = "T_GPA_DI_Settings";
+                        nameSignal3 = "T_GPA_DI_ToProcessing";
+
+                        UUID_Type1 = UUID_DI_FromProcessing;
+                        UUID_Type2 = UUID_DI_Settings;
+                        UUID_Type3 = UUID_DI_ToProcessing;
+
+                        UUID_Parent1 = UUID_Parent_DI_FromProcessing;
+                        UUID_Parent2 = UUID_Parent_DI_Setting;
+                        UUID_Parent3 = UUID_Parent_DI_ToProcessing;
+
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal1, UUID_Type1, UUID_Parent1);
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal2, UUID_Type2, UUID_Parent2);
+                        createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal3, UUID_Type3, UUID_Parent3);
+
+                }
+
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-                    
-            workbase.Update(nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
-            rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)
-          //System.out.println("columnTM " + columnTM + " yT " + yT  );
-      }
-      
 
+        }
+
+    }                                        
+    public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
+        // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
+        String[] columnDop = {"Выбор"};// до поля для галок или еще чего
+        String[] columnNames = StructSelectData.getColumns();
+        String[] resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames))
+                .toArray(String[]::new); // соединяем два массива
+        Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
+        Object[] streamArray;
+        Object[] streamNull = new Object[1];
+        streamNull[0] = null;
+        Object[][] tmp2 = new Object[data.length][];
+        for (int i = 0; i < data.length; i++) {
+            streamArray = new Object[data[i].length + 1];
+            // преобразовываем массив
+            Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);
+            tmp2[i] = testStream;
+        }
+        return new DefaultTableModel(tmp2, resultColumn) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
+                Class clazz = String.class;
+                switch (columnIndex) {
+                    case 0:
+                        clazz = Boolean.class;
+                        break;
+                }
+                return clazz;
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == column;
+            }
+
+            @Override
+            public void setValueAt(Object aValue, int row, int column) {
+                // Условие проверки галочки скрывать легенду
+                if (aValue instanceof Boolean && column == 0) {
+                    System.out.println("Posution - > " + row + " " + aValue);
+                    Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
+                    rowData.set(0, (boolean) aValue);
+                    fireTableCellUpdated(row, column);
+
+                    try {
+                        // Само действие не реализованно
+                        if ((boolean) aValue == true) {
+                            System.out.println("true");
+                        }
+                        if ((boolean) aValue == false) {
+                            System.out.println("false");
+                        }
+                    } catch (NullPointerException e) {
+                        JOptionPane.showMessageDialog(null, "Трудности с добавлением");
+                    }
+                }
+
+            }
+        };
     }
-    };
-}
-    
+
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration                   
-}
-
-// Редактор даты с использованием прокручивающегося списка JSpinner
-class DateCellEditor extends AbstractCellEditor implements TableCellEditor
-{
-    // Редактор
-    private JSpinner editor;
-    // Конструктор
-    public DateCellEditor() {
-        // Настройка прокручивающегося списка
-        SpinnerDateModel model = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
-        editor = new JSpinner(model);
-    }
-     @Override
-    // Метод получения компонента для прорисовки (обязательный реализации )
-    public Component getTableCellEditorComponent(JTable table, Object value, 
-                                                boolean isSelected, int row, int column) {
-        // Изменение значения
-        editor.setValue(value);
-        return editor;
-    }
-    // Функция текущего значения в редакторе
-    public Object getCellEditorValue() {
-        return editor.getValue();
-    }
-
-   
 }
