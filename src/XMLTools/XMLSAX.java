@@ -40,6 +40,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import DataBaseConnect.DataBase;
+import XMLTools.UUID;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 public class XMLSAX {
 
@@ -53,6 +58,7 @@ public class XMLSAX {
     private final String AO_PLC_UUID = UUID.getUUID();
     private final String AO_DRV_UUID = UUID.getUUID();
     private final String T_AO_UUID = UUID.getUUID();
+    String upperUUID;
 
     private final String All_Random_UUID = UUID.getUUID();
 
@@ -63,303 +69,12 @@ public class XMLSAX {
 
     String massParametrsAI_[][] = {};
 
-//    void createTypeAI_() throws ParserConfigurationException, TransformerFactoryConfigurationError, TransformerException {//формирование структуры
-//        String patchF = globalpatchF;
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();
-//
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", "AI_");
-//        root.setAttribute("Kind", "Struct");
-//        root.setAttribute("UUID", AI_UUID);
-//        doc.appendChild(root);
-//
-//        Element Fields = doc.createElement("FIelds");
-//        root.appendChild(Fields);
-//
-//        for (String field[] : massParametrsAI_) {
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", field[1]);
-//            Field.setAttribute("UUID", field[2]);
-//            Field.setAttribute("Comment", field[3]);
-//            Fields.appendChild(Field);
-//
-//        }
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerException ex) {
-//
-//        }
-//
-//    }
-//
-//    // --- Создание файла Списка структур  T_GPA_---
-//    // Список из базы, имя структуры, уиды или типы, и новый uud этой структуры
-//    void createTypeT_GPA(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
-//        // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
-//        struct = new Struct(name, T_GPA_AI_HMI_UUID, AI_HMI_UUID); // это новое класс для структуры
-//
-//        //String patchF = globalpatchF + "T_GPA_AI_HMI.type";
-//        globalpatchF = file;
-//        String patchF = globalpatchF + "\\" + name + ".type";
-//        Iterator<String[]> iter_arg = arg.iterator();
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();//создание документа
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", name);
-//        root.setAttribute("Kind", "Struct");//
-//        root.setAttribute("UUID", UUDstruc);
-//        doc.appendChild(root);
-//        Element Fields = doc.createElement("Fields");
-//        root.appendChild(Fields);
-//        while (iter_arg.hasNext()) {
-//            String[] field = iter_arg.next();
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", UUIDType);
-//            Field.setAttribute("UUID", field[1]); // уид из базы
-//            Field.setAttribute("Comment", field[2]);//тоже уид из базы
-//            Fields.appendChild(Field);
-//            // тоже новое добавление данных в структуру
-//            struct.addData(field[0], UUIDType, field[1], field[2]);
-//        }
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerException ex) {
-//
-//        }
-//    }
-//
-//    void createTypeAO_PLC(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
-//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-//        globalpatchF = file;
-//
-//        String patchF = globalpatchF + "\\" + name + ".type";
-//        Iterator<String[]> iter_arg = arg.iterator();
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", name);
-//        root.setAttribute("Kind", "Struct");
-//        root.setAttribute("UUID", UUDstruc);
-//        doc.appendChild(root);
-//        Element Fields = doc.createElement("Fields");
-//        root.appendChild(Fields);
-//
-//        while (iter_arg.hasNext()) {
-//            String[] field = iter_arg.next();
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", UUDparent);
-//            Field.setAttribute("UUID", field[1]);
-//            Field.setAttribute("Comment", field[2]);
-//            Fields.appendChild(Field);
-//            struct.addData(field[0], UUDparent, field[1], field[2]);
-//
-//        }
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerFactoryConfigurationError ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-//        } catch (TransformerException ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
-//
-//    void createTypeAO_DRV(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
-//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-//        globalpatchF = file;
-//
-//        String patchF = globalpatchF + "\\" + name + ".type";
-//        Iterator<String[]> iter_arg = arg.iterator();
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", name);
-//        root.setAttribute("Kind", "Struct");
-//        root.setAttribute("UUID", UUDstruc);
-//        doc.appendChild(root);
-//        Element Fields = doc.createElement("Fields");
-//        root.appendChild(Fields);
-//
-//        while (iter_arg.hasNext()) {
-//            String[] field = iter_arg.next();
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", UUDparent);
-//            Field.setAttribute("UUID", field[1]);
-//            Field.setAttribute("Comment", field[2]);
-//            Fields.appendChild(Field);
-//
-//            struct.addData(field[0], UUDparent, field[1], field[2]);
-//
-//        }
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerFactoryConfigurationError ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (TransformerException ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    void createTypeAO_HMI(ArrayList<String[]> arg, String name, String UUDparent, String UUDstruc, String file) throws ParserConfigurationException {
-//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-//        globalpatchF = file;
-//
-//        String patchF = globalpatchF + "\\" + name + ".type";
-//        Iterator<String[]> iter_arg = arg.iterator();
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", name);
-//        root.setAttribute("Kind", "Struct");//и чтот вы хотите от меня услышать
-//        root.setAttribute("UUID", UUDstruc);
-//        doc.appendChild(root);
-//        Element Fields = doc.createElement("Fields");
-//        root.appendChild(Fields);
-//
-//        while (iter_arg.hasNext()) {
-//            String[] field = iter_arg.next();
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", UUDparent);
-//            Field.setAttribute("UUID", field[1]);
-//            Field.setAttribute("Comment", field[2]);
-//            Fields.appendChild(Field);
-//            struct.addData(field[0], UUDparent, field[1], field[2]);
-//
-//        }
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerFactoryConfigurationError ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-//        } catch (TransformerException ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    void createType_GPA_AO(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String path) throws ParserConfigurationException {//основной метод,записывает AO_GPA
-//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-//        globalpatchF = path;
-//        String patchF = globalpatchF + "\\" + name + ".type";
-//        Iterator<String[]> iter_arg = arg.iterator();
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", name);
-//        root.setAttribute("Kind", "Struct");
-//        root.setAttribute("UUID", UUDstruc);//UUID структ у него свой
-//        doc.appendChild(root);
-//        Element Fileds = doc.createElement("Fields");//
-//        root.appendChild(Fileds);
-//
-//        while (iter_arg.hasNext()) { //and not care what this shit,because this shit is us
-//            String[] field = iter_arg.next();
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", UUIDType);//parent должен быть свое подтипа
-//            Field.setAttribute("UUID", field[1]);
-//            Field.setAttribute("Comment", field[2]);
-//            Fileds.appendChild(Field);
-//            // struct.addData(field[0], UUDparent, field[1], field[2]);
-//
-//        }
-//
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerFactoryConfigurationError ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-//        } catch (TransformerException ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
-//
-//    void createType_GPA_DO(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {//добавил параметр String file (в нем путь необходимой папки)
-//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);
-//        globalpatchF = file;//присваиваю глобалу путь до файла.Не знаю,зачем я так сложно сделал
-//        String patchF = globalpatchF + "\\" + name + ".type";//формируется окончательный путь с именем файла
-//        Iterator<String[]> iter_arg = arg.iterator();
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", name);
-//        root.setAttribute("Kind", "Struct");
-//        root.setAttribute("UUID", UUDstruc);
-//        doc.appendChild(root);
-//        Element Fields = doc.createElement("Fields");
-//        root.appendChild(Fields);
-////---формирование структуры сигнала---
-//        while (iter_arg.hasNext()) {
-//            String[] field = iter_arg.next();
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", UUIDType);
-//            Field.setAttribute("UUID", field[1]);
-//            Field.setAttribute("Comment", field[2]);
-//            Fields.appendChild(Field);
-//            struct.addData(field[0], "BOOL", field[1], field[2]);
-//        }
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerFactoryConfigurationError ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-//        } catch (TransformerException ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
-//
-//    void createType_GPA_DI(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
-//        struct = new Struct(name, T_AO_UUID, T_AO_UUID);//не понимаю как работают и зачем работают эти два уида,видимо где то косякнул,но работает правильно =))
-//        globalpatchF = file;
-//        String patchF = globalpatchF + "\\" + name + ".type";
-//        Iterator<String[]> iter_arg = arg.iterator();
-//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//        factory.setNamespaceAware(false);
-//        Document doc = factory.newDocumentBuilder().newDocument();
-//        Element root = doc.createElement("Type");
-//        root.setAttribute("Name", name);
-//        root.setAttribute("Kind", "Struct");
-//        root.setAttribute("UUID", UUDstruc);
-//        doc.appendChild(root);
-//        Element Fields = doc.createElement("Fields");
-//        root.appendChild(Fields);
-//
-//        while (iter_arg.hasNext()) {
-//            String[] field = iter_arg.next();
-//            Element Field = doc.createElement("Field");
-//            Field.setAttribute("Name", field[0]);
-//            Field.setAttribute("Type", UUIDType);//задали тип данных рукописно.Кстати не знаю верно это или нет Но вроде пишет что то
-//            Field.setAttribute("UUID", field[1]);
-//            Field.setAttribute("Comment", field[2]);
-//            Fields.appendChild(Field);
-//            struct.addData(field[0], "BOOL", field[1], field[2]);
-//        }
-//        try {
-//            writeDocument(doc, patchF);
-//        } catch (TransformerFactoryConfigurationError ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-//        } catch (TransformerException ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//    }
+//    
     void createTypeAllSignal(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
-        struct = new Struct(name, All_Random_UUID, All_Random_UUID);//разобраться со вторым рандомом в параметрах(он не должен быть рандомным)
+        // struct = new Struct(name, All_Random_UUID, All_Random_UUID);//разобраться со вторым рандомом в параметрах(он не должен быть рандомным)
         globalpatchF = file;
         String patchF = globalpatchF + "\\" + name + ".type";
-        Iterator<String[]> iter_arg = arg.iterator();
+        //Iterator<String[]> iter_arg = arg.iterator();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         Document doc = factory.newDocumentBuilder().newDocument();
@@ -370,16 +85,21 @@ public class XMLSAX {
         doc.appendChild(root);
         Element Fields = doc.createElement("Fields");
         root.appendChild(Fields);
-        while (iter_arg.hasNext()) {
-            String[] field = iter_arg.next();
+        for (int i = 0; i < arg.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if ((arg.get(i)[0].equals(arg.get(j)[0])) || arg.get(i)[1].equals(arg.get(j)[1])) {
+                    System.out.println("Одинаковые имена " + arg.get(j)[0] + " в строках" + i + " и " + j);
+                }
+            }
             Element Field = doc.createElement("Field");
-            Field.setAttribute("Name", field[0]);
+            Field.setAttribute("Name", arg.get(i)[0]);
             Field.setAttribute("Type", UUIDType);//задали тип данных рукописно.Кстати не знаю верно это или нет Но вроде пишет что то
-            Field.setAttribute("UUID", field[1]);
-            Field.setAttribute("Comment", field[2]);
+            Field.setAttribute("UUID", arg.get(i)[1]);
+            Field.setAttribute("Comment", arg.get(i)[2]);
             Fields.appendChild(Field);
-            struct.addData(field[0], "BOOL", field[1], field[2]);
+
         }
+
         try {
             writeDocument(doc, patchF);
         } catch (TransformerFactoryConfigurationError ex) {
@@ -389,56 +109,49 @@ public class XMLSAX {
         }
     }
 
-    // получаем данные из базы и засовыем их в метод создания списка 
-//    public void runBaseRuncreateTypeT(String file) throws ParserConfigurationException {
-//        DataBase workbase = new DataBase();
-//
-//        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAI("ai1");
-//
-//        // Тут передаем данные тестовый вызов
-//        createTypeT_GPA(dataFromDbGPA, "T_GPA_AI", UUIDType_AI//(точно не могу предположить но походу это тип данных и в AO он рандомный у меня,это неправилно)
-//                , T_GPA_AI_HMI_UUID, file);
-//
-//    }
-//
-//    public void runBaseRuncreateType(String file) throws ParserConfigurationException {//это еще одна лютая хрень
-//        DataBase workbase = new DataBase();
-//        // workbase.connectionToBase();
-//
-//        ArrayList<String[]> dataFromDbGPA = workbase.selectDataGPAAO("ao1");
-//        //  ArrayList<String[]> dataFromDbAO = workbase.selectDataAO("ao1");//создаю еще 
-//        //  ArrayList<String[]> dataFromDbAO_HMI = workbase.selectDataAO_HMI("ao1");
-//
-//        createType_GPA_AO(dataFromDbGPA, "T_GPA_AO", UUIDType_AO, T_AO_UUID, file);//вызывается несколько раз
-//
-//        // createTypeAO_PLC(dataFromDbAO, "T_AO_PLC", AO_HMI_UUID, AO_PLC_UUID, file);//пересылаем данные для чтения AO_PLC
-//        //  createTypeAO_HMI(dataFromDbAO_HMI, "T_AO_HMI", AO_HMI_UUID, AO_HMI_UUID, file);//такие же данные для чтения HMI 
-//        //  createTypeAO_DRV(dataFromDbAO, "T_AO_DRV", AO_HMI_UUID, AO_DRV_UUID, file);//чтение ДРВ
-//    }
-//
-//    public void runBaseRuncreateTypeDSig(String file) throws ParserConfigurationException {
-//        DataBase workbase = new DataBase();
-//        // workbase.connectionToBase();
-//
-//        ArrayList<String[]> dataFromGPA_DO = workbase.selectDataGPA_DO("do1");
-//        createType_GPA_DO(dataFromGPA_DO, "T_GPA_DO", UUIDType_DO, AI_UUID, file);
-//
-//    }
-//
-//    public void runBaseRuncreateTypeDSign(String file) throws ParserConfigurationException {
-//        DataBase workbase = new DataBase();
-//        //  workbase.connectionToBase();
-//
-//        ArrayList<String[]> dataFromGPA_DI = workbase.selectDataGPA_DI("di1");
-//        createType_GPA_DI(dataFromGPA_DI, "T_GPA_DI", UUIDType_DI, AI_UUID, file);
-//    }
-    public void runBasecreateTypeAll(String file, String nameTable, String nameSignal, String UUID_Type) throws ParserConfigurationException {
+    void createTypeDRV(ArrayList<String[]> arg, String name, String file, String Type) throws ParserConfigurationException {
+        // struct = new Struct(name, All_Random_UUID, All_Random_UUID);//разобраться со вторым рандомом в параметрах(он не должен быть рандомным)
+        globalpatchF = file;
+        String patchF = globalpatchF + "\\" + name + ".type";
+        Iterator<String[]> iter_arg = arg.iterator();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElement("Type");
+        root.setAttribute("Name", name);
+        root.setAttribute("Kind", "Struct");
+        root.setAttribute("UUID", AI_UUID);//
+        doc.appendChild(root);
+        Element Fields = doc.createElement("Fields");
+        root.appendChild(Fields);
+
+        while (iter_arg.hasNext()) {
+            String[] field = iter_arg.next();
+            Element Field = doc.createElement("Field");
+            Field.setAttribute("Name", field[0]);
+            Field.setAttribute("Type", Type);//задали тип данных рукописно.Кстати не знаю верно это или нет Но вроде пишет что то
+            Field.setAttribute("UUID", field[1]);
+            Field.setAttribute("Comment", field[2]);
+            Fields.appendChild(Field);
+            //  struct.addData(field[0], "BOOL", field[1], field[2]);
+        }
+
+    }
+
+    public void runBasecreateTypeAll(String file, String nameTable, String nameSignal, String UUID_Type, String UUID_Parent) throws ParserConfigurationException {
+        DataBase workbase = new DataBase();
+
+        ArrayList<String[]> dataFromGPA_Sig = workbase.getSelectData(nameTable);//
+        createTypeAllSignal(dataFromGPA_Sig, nameSignal, UUID_Type, UUID_Parent//AI_UUID нужно изучить,мне кажется это дерьмо не должно быть рандомным
+                , file);
+
+    }
+
+    public void runBasecreateTypeAll(String nameTable, String nameSignal, String file, String Type) throws ParserConfigurationException {
         DataBase workbase = new DataBase();
 
         ArrayList<String[]> dataFromGPA_Sig = workbase.getSelectData(nameTable);
-        createTypeAllSignal(dataFromGPA_Sig, nameSignal, UUID_Type, AI_UUID//AI_UUID нужно изучить,мне кажется это дерьмо не должно быть рандомным
-                , file);
-
+        createTypeDRV(dataFromGPA_Sig, nameSignal, file, Type);
     }
 
     // --- Передача собственной структуры в глобальные переменные Сонаты --- 
@@ -449,15 +162,18 @@ public class XMLSAX {
     }
 
     // Добавляем сигналы в Мнемосхемы  в ручную сделано, надо автоматом
-    public void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign, String filepatch) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
+    public void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign, String filepatch, String UUIDHigth, String GName,
+            String UUIDSourse, String UUIDBlock, String TypeName, String UUIDSourceName, String UUIDBlockName, String ElemName) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError,
+            TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
         String myVarU_0 = UUID.getUUID();
         String myVarU_0_0 = UUID.getUUID(); // УИД переменной для связки с переменно входа объекта
         String myVarU_1 = UUID.getUUID();
-        String uuIdTBaSence = "6BF99E384F16CE39204C00877BBA46AE"; // перебрать файлы в его поиска  // Это уид TBaSence
+																																					
 
+        //  String uuIdTBaSence = UUIDHigth; // перебрать файлы в его поиска  // Это уид TBaseAnIn
         Iterator<String[]> iter_arg = lisSig.iterator();
-        //String patchF = globalpatchF + "HMI.iec_hmi"; // сюда будем вносиь структуру
-        String patchF = filepatch; // сюда будем вносиь структуру
+        //  globalpatchF="C:\\Users\\cherepanov\\Desktop\\ArchNew\\Design";
+        String patchF = filepatch + "\\" + "AT_HMI.iec_hmi"; // сюда будем вносиь структуру
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
         DocumentBuilder doc = document.newDocumentBuilder();
         // это из тестового метода преобразовываем файл для чтения XML
@@ -468,76 +184,215 @@ public class XMLSAX {
         // так преобразовываем строку в поток и скармливаем билдеру XML
         InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
         Document document_final = factory.newDocumentBuilder().parse(stream);
-        XPathFactory pathFactory = XPathFactory.newInstance();
+        XPathFactory pathFactory = XPathFactory.newInstance();//создали объект для чтения XML
         XPath xpath = pathFactory.newXPath();
+
         // а вот тут надо посчитать сколько переменных
         XPathExpression expr = xpath.compile("SubAppType/FBLibrary");
         NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
+        int Number = 0, Num = 0, Counter = 1,NumElem=0;
+
         //  так как нода у нас одна то пишем только в 1 по этому for так работает либо пишем в первую.
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
-            //System.out.println(n.getNodeName());
-            Document GraphicsCompositeType = createTGraphicsCompositeType(); // так забрали документ из метода
+
+            Document GraphicsCompositeType = createTGraphicsCompositeType(GName); // так забрали документ из метода
             Element FBNetwork = (Element) GraphicsCompositeType.getElementsByTagName("FBNetwork").item(0); // вытягиваем ноду элемента FBNetwork из Документа который получили выше
+
             Node rootGP = GraphicsCompositeType.getFirstChild(); // Начальная нода файла (что будем импортировать)
-            Element DataConnections = GraphicsCompositeType.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
-          
+
+		  
             // настройка сигналов помещаемых в Графический компонент
-            int Ycord = -710; // Переменная смещения по Y в виде компонентов
-            int NumberSign = 0;
+            int Ycord = 0; // Переменная смещения по Y в виде компонентов
+            int NumberSign = -1;
+
             int xPos = 2;
             int yPos = 0;
-            int sumColumn = 3; // Количество столбцов
-            int offset = 150; // Переменная на смещение по иксам в нарисованном элементе
-            while (iter_arg.hasNext()) {
+            int sumColumn = 1; // Количество столбцов
+            int offset = 747;
+            String visibleAI = "", disableVisible = "";// Переменная на смещение по иксам в нарисованном элементе
+
+            Element DataConnections = GraphicsCompositeType.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
+            
+            //-----ЭТО СОЗДАНИЕ T_BASE_------И CONNECT//
+            
+            while (iter_arg.hasNext()) {//это цикл создания одного блока 
                 String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")"; //"(x:=0,y:=0)" это позиция графики первой вкладки
-                String uuidFB = UUID.getUUID();
+                String uuidFB = getUIID();
                 String[] field = iter_arg.next();
                 Element FB = GraphicsCompositeType.createElement("FB"); // Создаем FB в вытянутом элементе из фукции создания графического компонента
-                String nameBAnpartClone = "BaseAnPar_Test_" + Integer.toString(NumberSign); // так связь делается переменных ее основа
+                String nameBAnpartClone = ElemName + "_" + (Num++); // так связь делается переменных ее основа
                 FB.setAttribute("Name", nameBAnpartClone);
-                FB.setAttribute("Type", "TBaseSen");
+                FB.setAttribute("Type", TypeName);//исправить почему ANOut
                 FB.setAttribute("UUID", uuidFB);
-                FB.setAttribute("TypeUUID", uuIdTBaSence); // уид TBaSence
+                FB.setAttribute("TypeUUID", UUIDHigth); // уид TBaSence
                 FB.setAttribute("X", "-704.75");
                 FB.setAttribute("Y", Integer.toString(Ycord)); // Меняем только Y
-                Ycord = Ycord + 400;
+                Ycord = Ycord + 450;
+
                 Element VarValue0 = GraphicsCompositeType.createElement("VarValue");
                 VarValue0.setAttribute("Variable", "PrefStr");
-                String VPrefStr = "'" + nameListSign + "." + "'"; // Только таким видом добился
+                String VPrefStr = "'" + nameListSign + "'"; // Только таким видом добился
                 System.out.println(VPrefStr);
                 VarValue0.setAttribute("Value", VPrefStr);
                 VarValue0.setAttribute("Type", "STRING");
                 VarValue0.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
                 FB.appendChild(VarValue0);
+
                 Element VarValue1 = GraphicsCompositeType.createElement("VarValue");
                 VarValue1.setAttribute("Variable", "pos");
                 VarValue1.setAttribute("Value", XYposition);
                 VarValue1.setAttribute("Type", "TPos");
                 VarValue1.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2");
                 FB.appendChild(VarValue1);
+
                 Element VarValue2 = GraphicsCompositeType.createElement("VarValue");
                 VarValue2.setAttribute("Variable", "NameAlg");
                 String VNameAlg = "\u0027" + field[0] + "\u0027";// Только так работает как добиться методом кода не понятно
                 VarValue2.setAttribute("Value", VNameAlg); // Название сигнала
 
-                VarValue2.setAttribute("Type", "TPos");
-                VarValue2.setAttribute("TypeUUID", "17C82815436383728D79DA8F2EF7CAF2");
+                VarValue2.setAttribute("Type", "STRING");
+                VarValue2.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
                 FB.appendChild(VarValue2);
                 FBNetwork.appendChild(FB);
+
+                Element VarValue3 = GraphicsCompositeType.createElement("VarValue");
+                VarValue3.setAttribute("Variable", "Name");
+                String NameComm = "\u0027" + field[2] + "\u0027";
+                VarValue3.setAttribute("Value", NameComm);
+                VarValue3.setAttribute("Type", "String");
+                VarValue3.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");//этот уид в типе TBaseSen
+                FB.appendChild(VarValue3);
+
+                int result = field[0].indexOf("Res");
+                if (result >= 0) {
+                    visibleAI = "FALSE";
+                    disableVisible = "TRUE";
+                } else {
+                    visibleAI = "TRUE";
+                    disableVisible = "FALSE";
+                }
+                Element VarValue4 = GraphicsCompositeType.createElement("VarValue");
+                VarValue4.setAttribute("Variable", "visiblePar");
+                VarValue4.setAttribute("Value", visibleAI);
+                VarValue4.setAttribute("Type", "BOOL");
+                VarValue4.setAttribute("TypeUUID", "EC797BDD4541F500AD80A78F1F991834");
+                FB.appendChild(VarValue4);
+
+                Element VarValue5 = GraphicsCompositeType.createElement("VarValue");
+                VarValue5.setAttribute("Variable", "disableAlarm");
+                VarValue5.setAttribute("Value", disableVisible);
+                VarValue5.setAttribute("Type", "BOOL");
+                VarValue5.setAttribute("TypeUUID", "EC797BDD4541F500AD80A78F1F991834");
+                FB.appendChild(VarValue5);
+
+                Element VarValue6 = GraphicsCompositeType.createElement("VarValue");
+                VarValue6.setAttribute("Variable", "TagID");
+                VarValue6.setAttribute("Value", "\u0027" + field[0] + field[2] + "\u0027");
+                VarValue6.setAttribute("Type", "STRING");
+                VarValue6.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
+                FB.appendChild(VarValue6);
+                
+                Element VarValue8=GraphicsCompositeType.createElement("VarValue");
+                VarValue8.setAttribute("Variable","Num");
+                VarValue8.setAttribute("Value","\u0027"+(NumElem++)+"\u0027");
+                VarValue8.setAttribute("Type", "STRING");
+                VarValue8.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
+                FB.appendChild(VarValue8);
+
+                if (TypeName == "T_BaseAnIn") {
+                    Element VarValue7 = GraphicsCompositeType.createElement("VarValue");
+                    VarValue7.setAttribute("Variable", "hint");
+                    VarValue7.setAttribute("Value", "\u0027" + field[0] + "," + field[2] + "," + field[3] + "," + field[4] + "," + field[5] + "," + field[6] + "," + field[7] + "," + field[8] + ","
+                            + field[9] + "," + field[10] + "," + field[11] + "," + field[12] + "," + field[13] + "," + field[14] + "," + field[15] + "," + "\u0027");
+                    VarValue7.setAttribute("Type", "STRING");
+                    VarValue7.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
+                    FB.appendChild(VarValue7);
+
+                } else if (TypeName == "T_BaseAnOut") {
+                    Element VarValue7 = GraphicsCompositeType.createElement("VarValue");
+                    VarValue7.setAttribute("Variable", "hint");
+                    VarValue7.setAttribute("Value", "\u0027" + field[0] + "," + field[2] + "," + field[3] + "," + field[4] + "," + field[5] + "," + field[6] + "," + field[7] + "," + field[8] + ","
+                            + field[9] + "," + field[10] + "\u0027");
+                    VarValue7.setAttribute("Type", "STRING");
+                    VarValue7.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
+                    FB.appendChild(VarValue7);
+
+                } else if (TypeName == "T_BaseDO") {
+                    Element VarValue7 = GraphicsCompositeType.createElement("VarValue");
+                    VarValue7.setAttribute("Variable", "hint");
+                    VarValue7.setAttribute("Value", "\u0027" + field[0] + "," + field[2] + "," + field[3] + "," + field[4] + "," + field[5] + ","
+                            + field[6] + "," + field[7] + "," + field[8] + "," + "\u0027");
+                    VarValue7.setAttribute("Type", "STRING");
+                    VarValue7.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
+                    FB.appendChild(VarValue7);
+
+                } else if (TypeName == "T_BaseDI") {
+                    Element VarValue7 = GraphicsCompositeType.createElement("VarValue");
+                    VarValue7.setAttribute("Variable", "hint");
+                    VarValue7.setAttribute("Value", "\u0027" + field[0] + "," + field[2] + "," + field[3] + "," + field[4] + "," + field[5] + ","
+                            + field[6] + "," + field[7] + "," + field[8] + "," + "\u0027");
+                    VarValue7.setAttribute("Type", "STRING");
+                    VarValue7.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
+                    FB.appendChild(VarValue7);
+
+                }
+                
+
+                {
+                    Element Connection = GraphicsCompositeType.createElement("Connection");
+                    Connection.setAttribute("Source", "PrefAb");
+                    Connection.setAttribute("Destination", "BaseAnPar_Test_" + (Number++) + ".PrefAb");
+                    Connection.setAttribute("SourseUUID", UUIDSourse);
+                    Connection.setAttribute("DestinationUUID", uuidFB + "." + UUIDBlock);
+                    DataConnections.appendChild(Connection);
+                    FBNetwork.appendChild(DataConnections);
+                }
+                {
+                    Element Connection = GraphicsCompositeType.createElement("Connection");
+                    Connection.setAttribute("Source", "NameRU");
+                    Connection.setAttribute("Destination", "BaseAnPar_Test_" + (Number++) + ".NameRU");
+                    Connection.setAttribute("SourseUUID", UUIDSourceName);
+                    Connection.setAttribute("DestinationUUID", uuidFB + "." + UUIDBlockName);
+                    DataConnections.appendChild(Connection);
+                    FBNetwork.appendChild(DataConnections);
+                }
                 if (sumColumn > 0) {
                     xPos = xPos + offset; // так меняем смещение графики по иксам
                 } else {
                     xPos = 2;
-                    sumColumn = 3;
-                    yPos = yPos + 20;
+                    sumColumn = 2;
+                    yPos = yPos + 24;
                 }
+                if (NumberSign >63) {
+                    NumElem=0;
+                    Num = 0;
+                    NumberSign = -1;
+                    FBNetwork.appendChild(DataConnections);
+                    Node importNode = document_final.importNode(rootGP, true); // Вытягиваем элемент и импортируем Импорт обязателен
+                    n.appendChild(importNode); // Добавляем коренную ноду в Мнемосхему уже после всех преобразований
+
+                    Ycord = 0; // Переменная смещения по Y в виде компонентов
+                    xPos = 2;
+                    yPos = 0;
+                    offset = 747; // Переменная на смещение по иксам в нарисованном элементе
+
+                    GraphicsCompositeType = createTGraphicsCompositeType(GName + (Counter++)); // так забрали документ из метода
+                    FBNetwork = (Element) GraphicsCompositeType.getElementsByTagName("FBNetwork").item(0); // вытягиваем ноду элемента FBNetwork из Документа который получили выше
+                    rootGP = GraphicsCompositeType.getFirstChild(); // Начальная нода файла (что будем импортировать)
+                    DataConnections = GraphicsCompositeType.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
+
+                }
+
                 ++NumberSign;
                 --sumColumn;
+
             }
+
+            FBNetwork.appendChild(DataConnections);
             Node importNode = document_final.importNode(rootGP, true); // Вытягиваем элемент и импортируем Импорт обязателен
             n.appendChild(importNode); // Добавляем коренную ноду в Мнемосхему уже после всех преобразований
-            //FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
+
         }
         // Тут запустим запись в файл
         writeDocument(document_final, patchF);
@@ -545,8 +400,19 @@ public class XMLSAX {
         testStart.returnToFileDtd(patchF);
     }
 
+    public String getUIID() {
+        java.util.UUID uniqueKey = java.util.UUID.randomUUID();
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyyMMddhhmmsss"); //формируем дату как нам вздумается
+        String uiid_str = uniqueKey.toString().replace("-", "");
+        upperUUID = uiid_str.toUpperCase(Locale.ENGLISH);
+
+        return upperUUID;
+    }
+
     // --- Метод создания элементов TGraphicsCompositeType ---
-    Document createTGraphicsCompositeType() throws ParserConfigurationException {
+    Document createTGraphicsCompositeType(String GraphName) throws ParserConfigurationException {
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         Document doc = factory.newDocumentBuilder().newDocument();
@@ -556,6 +422,8 @@ public class XMLSAX {
         String TypeuuIdLREAL = "65F1DDD44EDA9C0776BB16BBDFE36B1F";
         String TypeuuIdBOOL = "EC797BDD4541F500AD80A78F1F991834";
         String TypeuuIdTSize = "B33EE7B84825BBBA7F975BB735D4EB22";
+        String TypeuuidPref = "8F544E934F31327C4EBC88930CB7AD32";
+        String TypeNameRU = "E543C4CD4FF3878196D61C86A31A4CE0";
 
         String uuIdpos = "599604C246641AA6BA0E508C9ABF7EA4";
         String uuIdangle = "00FC1D804A2DE5A83DE85390D640AC3D";
@@ -592,50 +460,64 @@ public class XMLSAX {
             {"visible", "BOOL", TypeuuIdBOOL, "видимость объекта", "TRUE", uuIdvisible},
             {"zValue", "LREAL", TypeuuIdLREAL, "z-индекс объекта", "0", uuIdzValue},
             {"hint", "STRING", TypeuuIdString, "всплывающая подсказка", "&apos;&apos;", uuIdhint},
-            {"size", "TSize", TypeuuIdTSize, "размер прямоугольника", "(width:=50,height:=50)", uuIdsize}
+            {"size", "TSize", TypeuuIdTSize, "размер прямоугольника", "(width:=50,height:=50)", uuIdsize},
+            {"PrefAb", "STRING", TypeuuIdString, "префикс абонента", "&apos;&apos;", TypeuuidPref},
+            {"NameRU", "STRING", TypeuuIdString, "имя абонента", "&apos;&apos;", TypeNameRU}
         };
  
-            Element GCFBtype = doc.createElement("GraphicsCompositeFBType"); // Наша основа графического элемента
-            GCFBtype.setAttribute("Name", "TGraphicsCompositeTypeTest1"); // тоже цикл с изменения доолжен быть так как по 64 элемента для аналогов
-            GCFBtype.setAttribute("UUID", UUID.getUUID());
-            Element InterfaceList = doc.createElement("InterfaceList");
-            GCFBtype.appendChild(InterfaceList);
-            Element EventOutputs = doc.createElement("EventOutputs");
-            InterfaceList.appendChild(EventOutputs);
-            Element InputVars = doc.createElement("InputVars");
-            InterfaceList.appendChild(InputVars);
-            Element FBNetwork = doc.createElement("FBNetwork");
-            GCFBtype.appendChild(FBNetwork);
+																																			   
+																																																		   
+														  
+																	   
+												
+																	 
+													
+															   
+												 
+															   
+											
 
-            Element DataConnections = doc.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
-            // элемент событий
-            for (String field[] : EventOutputsEvent) {
-                Element Event = doc.createElement("Event");
-                Event.setAttribute("Name", field[0]);
-                Event.setAttribute("Comment", field[1]);
-                Event.setAttribute("UUID", field[2]);
-                EventOutputs.appendChild(Event); // заносим в родителя
-            }
-            for (String field[] : InputVarsDeclare) {
-                Element VarDeclaration = doc.createElement("VarDeclaration");
-                VarDeclaration.setAttribute("Name", field[0]);
-                VarDeclaration.setAttribute("Type", field[1]);
-                VarDeclaration.setAttribute("TypeUUID", field[2]);
-                VarDeclaration.setAttribute("Comment", field[3]);
-                VarDeclaration.setAttribute("InitialValue", field[4]);
-                VarDeclaration.setAttribute("UUID", field[5]);
-                InputVars.appendChild(VarDeclaration); // заносим в родителя
-            }
-            InterfaceList.appendChild(EventOutputs); // так же но заносим уже в родителя их
-            InterfaceList.appendChild(InputVars);
-            doc.appendChild(GCFBtype);
-            Node test = doc.getElementsByTagName("FBNetwork").item(0);
-            FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
+        Element GCFBtype = doc.createElement("GraphicsCompositeFBType"); // Наша основа графического элемента
+        GCFBtype.setAttribute("Name", GraphName); // тоже цикл с изменения доолжен быть так как по 64 элемента для аналогов
+        GCFBtype.setAttribute("UUID", UUID.getUUID());
+        Element InterfaceList = doc.createElement("InterfaceList");
+        GCFBtype.appendChild(InterfaceList);
+        Element EventOutputs = doc.createElement("EventOutputs");
+        InterfaceList.appendChild(EventOutputs);
+        Element InputVars = doc.createElement("InputVars");
+        InterfaceList.appendChild(InputVars);
+        Element FBNetwork = doc.createElement("FBNetwork");
+        GCFBtype.appendChild(FBNetwork);
+
+        //Element DataConnections = doc.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
+        // элемент событий
+        for (String field[] : EventOutputsEvent) {
+            Element Event = doc.createElement("Event");
+            Event.setAttribute("Name", field[0]);
+            Event.setAttribute("Comment", field[1]);
+            Event.setAttribute("UUID", field[2]);
+            EventOutputs.appendChild(Event); // заносим в родителя
+        }
+        for (String field[] : InputVarsDeclare) {
+            Element VarDeclaration = doc.createElement("VarDeclaration");
+            VarDeclaration.setAttribute("Name", field[0]);
+            VarDeclaration.setAttribute("Type", field[1]);
+            VarDeclaration.setAttribute("TypeUUID", field[2]);
+            VarDeclaration.setAttribute("Comment", field[3]);
+            VarDeclaration.setAttribute("InitialValue", field[4]);
+            VarDeclaration.setAttribute("UUID", field[5]);
+            InputVars.appendChild(VarDeclaration); // заносим в родителя
+        }
+        InterfaceList.appendChild(EventOutputs); // так же но заносим уже в родителя их
+        InterfaceList.appendChild(InputVars);
+        doc.appendChild(GCFBtype);
+        Node test = doc.getElementsByTagName("FBNetwork").item(0);
+        //FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
         return doc;
     }
 
 
-    public void enumerationData(String patchF) {
+    public void enumerationData(String patchF) {//значит вот это я вытолкнул
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         try {
@@ -701,19 +583,10 @@ public class XMLSAX {
     // --- Запипись в файл структурой XML ---
     void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
-            //тут в одну строку работает тоже
-            /*
-             Transformer tr = TransformerFactory.newInstance().newTransformer();
-             DOMSource source = new DOMSource(document);
-             FileOutputStream fos = new FileOutputStream("src\\WorkXML\\test.xml");
-             StreamResult result = new StreamResult(fos);//tututnfy
-             tr.transform(source, result);
-             */
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(new DOMSource(document), new StreamResult(file));
-
             //вот это то что я написал это чушь,можно удалить
         } catch (TransformerException e) {
             e.printStackTrace(System.out);

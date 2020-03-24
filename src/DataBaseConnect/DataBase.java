@@ -50,20 +50,9 @@ public class DataBase {
     }
 
     public void connectionToBase() {
-        this.user = user;
-        this.pass = pass;
-        this.url = url;
-        //  String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
-        //  String PASS = "test08_DB";
-        //  String USER = "test08_DB";
-//        String DB_URL=url;
-//        String PASS=pass;
-//        String USER=user;
-
         final String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test665";//
         final String USER = "postgres";
         final String PASS = "postgres";//
-
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -81,6 +70,28 @@ public class DataBase {
             e.printStackTrace();
             return;
         }
+    }
+
+    public void connectionToBase(String user, String url, String pass) {
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
+            e.printStackTrace();
+            return;
+        }
+        System.out.println("PostgreSQL JDBC Driver successfully connected");
+        try {
+            connection = DriverManager
+                    .getConnection(url, user, pass);
+
+        } catch (SQLException e) {
+            System.out.println("Connection Failed");
+            e.printStackTrace();
+            return;
+        }
+
     }
 
     void createBase(String name) {
@@ -198,8 +209,8 @@ public class DataBase {
         String nameTbanalise = new String(name_table);
         String sql = "";
         try {
-           // name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_");
-            name_table=replacedNt(name_table);
+            // name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_");
+            name_table = replacedNt(name_table);
             //--------------- INSERT ROWS ---------------
             switch (name_table) {
                 case "AI1":
@@ -393,6 +404,46 @@ public class DataBase {
         }
         return selectData;
     }
+    
+      //--------------- SELECT DATA sum columns --------------
+    // какие именно столбцы дергать с запросом ArrayList
+    ArrayList<String[]> getData(String table, ArrayList<String> columns) {
+        //  connectionToBase(); // вызов Фукция подключения к базе
+        StructSelectData.setColumns(columns); // вот это жопа надо что то с этим делать мешает в Main_Jpanel
+        ArrayList<String[]> selectData = new ArrayList<>();
+        String s_columns = "";
+        String[] strfromtb = new String[columns.size()]; // массив под данные
+        for (int i = 0; i < columns.size(); ++i) { //формирование строки запроса
+            if (i < columns.size() - 1) {
+                s_columns += "\"" + columns.get(i) + "\"" + ", ";
+            } // Кавычки для руских имен и пробелов
+            else {
+                s_columns += "\"" + columns.get(i) + "\"";
+            }
+        }
+        try {
+            stmt = connection.createStatement();
+            System.out.println("SELECT " + s_columns + " FROM " + table + ";");
+            ResultSet rs = stmt.executeQuery("SELECT " + s_columns + " FROM " + table + ";");
+            while (rs.next()) {
+                for (int i = 0; i < columns.size(); ++i) {
+                    strfromtb[i] = rs.getString(columns.get(i));
+                }
+                String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
+                selectData.add(tmp1);
+                //System.out.println(strfromtb[0]); // это просто для тестов
+            }
+            rs.close();
+            stmt.close();
+            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
+            //connection.commit();
+            //System.out.println("-- Operation SELECT done successfully");
+        } catch (SQLException e) {
+            System.out.println("Failed select data");
+            e.printStackTrace();
+        }
+        return selectData;
+    }
 
     public List<String> selectColumns(String table) {
         //connectionToBase(); // вызов Фукция подключения к базе
@@ -414,200 +465,132 @@ public class DataBase {
         return listColumn;
     }
 
-//    public ArrayList<String[]> selectDataGPAAI(String table) {
-//        //connectionToBase(); // вызов Фукция подключения к базе
-//        ArrayList<String[]> selectData = new ArrayList<>();
-//        try {
-//            stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM " + table + ";");
-//            while (rs.next()) {
-//                String TypeADC = rs.getString("Tag name");
-//                String id = uuid.getUIID();
-//                String nsign = rs.getString("Наименование сигнала");
-//                String[] strfromtb = {TypeADC, id, nsign};
-//                selectData.add(strfromtb);
-//                //System.out.println(String.format("ID=%s NAME=%s AGE=%s ADDRESS=%s SALARY=%s UM=%s TYPEADC=%s A1=%s A2=%s" ,id,name,age,address,salary,UM,TypeCh,TypeADC,addres1,addres2));
-//            }
-//            rs.close();
-//            stmt.close();
-//            //connection.commit();
-//            System.out.println("-- Operation SELECT done successfully");
-//        } catch (SQLException e) {
-//            System.out.println("Failed ADD data");
-//            e.printStackTrace();
-//            //return;
-//        }
-//        return selectData;
-//    }
-//
-//    public ArrayList<String[]> selectDataGPAAO(String table) {//посик данных для выходныъ аналоговых
-//        // column всегда три
-//        ArrayList<String[]> selectData = new ArrayList<>();//не знаю добавлять три или нет
-//        try {
-//            stmt = connection.createStatement();//подключаемся
-//            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
-//            while (rs.next()) {//цикл от одной строки к следующей
-//                String TypeADC = rs.getString("Tag name");//ищу колонну по названию
-//                String id = uuid.getUIID();//и это в базе
-//                String namesign = rs.getString("Наименование сигнала");//и это тоже
-//
-//                String[] str = {TypeADC, id, namesign};//по циклу вообще все правильно,не знаю почему не работает
-//                selectData.add(str);
-//            }
-//            rs.close();
-//            stmt.close();
-//            System.out.println("-- Operation SELECT done successfully");
-//        } catch (SQLException e) {
-//            System.out.println("Failed ADD data");
-//            e.printStackTrace();
-//        }
-//        return selectData;
-//    }
-//
-//    public ArrayList<String[]> selectDataAO(String table) {
-//        ArrayList<String[]> selectData = new ArrayList<>();
-//        try {
-//            stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
-//            while (rs.next()) {
-//                String TypeADC = rs.getString("Tag name");
-//                String id = uuid.getUIID();//здесь необходимо решить как менять рандом UUID ибо получается на каждый сигнал одна генерация 
-//                String namesign = rs.getString("colum_6");//надо подумать ибо я пока не знаю как это сделать
-//
-//                String[] str = {TypeADC, id, namesign};
-//                selectData.add(str);
-//            }
-//            rs.close();
-//            stmt.close();
-//            System.out.println("--Operation SELECT done sucessfully");
-//        } catch (SQLException ex) {
-//            System.out.println("Failed ADD data");
-//            ex.printStackTrace();
-//        }
-//        return selectData;
-//    }
-//
-//    public ArrayList<String[]> selectDataAO_HMI(String table) {//здесь мы вызываем из базы для AO PLC ,пиздц муть
-//        ArrayList<String[]> selectData = new ArrayList<>();
-//        try {
-//            stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
-//            while (rs.next()) {
-//                String TypeADC = rs.getString("colum_20");
-//                String id = uuid.getUIID();
-//                String namesign = rs.getString("colum_6");
-//
-//                String[] str = {TypeADC, id, namesign};
-//                selectData.add(str);
-//            }
-//            rs.close();
-//            stmt.close();
-//            System.out.println("--Operation SELECT done sucessfully");
-//        } catch (SQLException ex) {
-//            System.out.println("Failed ADD data");
-//            ex.printStackTrace();
-//        }
-//        return selectData;
-//    }
-//
-//    public ArrayList<String[]> selectDataAO_DRV(String table) {//AO DRV вот т ут не знаюстоило ли этоделать 
-//        ArrayList<String[]> selectData = new ArrayList<>();
-//        try {
-//            stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
-//            while (rs.next()) {
-//                String TypeADC = rs.getString("colum_18");
-//                String id = uuid.getUIID();
-//                String namesign = rs.getString("colum_6");
-//
-//                String[] str = {TypeADC, id, namesign};
-//                selectData.add(str);
-//            }
-//            rs.close();
-//            stmt.close();
-//            System.out.println("--Operation SELECT done sucessfully");
-//
-//        } catch (SQLException ex) {
-//            System.out.println("Failed ADD data");
-//            ex.printStackTrace();
-//        }
-//        return selectData;
-//    }
-//
-//    public ArrayList<String[]> selectDataGPA_DO(String table) {
-//
-//        ArrayList<String[]> selectData = new ArrayList<>();
-//        try {
-//            stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
-//            while (rs.next()) {
-//                String TypeADC = rs.getString("Tag name");
-//                String id = uuid.getUIID();
-//                String namesign = rs.getString("Наименование сигнала");
-//
-//                String[] str = {TypeADC, id, namesign};
-//                selectData.add(str);
-//
-//            }
-//            rs.close();
-//            stmt.close();
-//            System.out.println("--Operation SELECT done sucessfully");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-//            ex.printStackTrace();
-//        }
-//        return selectData;
-//
-//    }
-//
-//    public ArrayList<String[]> selectDataGPA_DI(String table) {
-//
-//        ArrayList<String[]> selectData = new ArrayList<>();
-//        try {
-//            stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
-//            while (rs.next()) {
-//                String TypeADC = rs.getString("Tag name");
-//                String id = uuid.getUIID();
-//                String namesign = rs.getString("Наименование сигнала");
-//
-//                String[] str = {TypeADC, id, namesign};
-//                selectData.add(str);
-//            }
-//            rs.close();
-//            stmt.close();
-//            System.out.println("--Operation SELECT done sucessfully");
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-//            ex.printStackTrace();
-//        }
-//        return selectData;
-//    }
-//----Строим все сигналы которые сюда ссылаются
-    public ArrayList<String[]> getSelectData(String table) {
+    //----Строим все сигналы которые сюда ссылаются
+    public ArrayList<String[]> getSelectData(String table) {//в перспективе задавать в параметрах листи через if else указывать,ибо разный набор столбцов мы вытягиваем для ai ao di do
 
         ArrayList<String[]> selectData = new ArrayList<>();
-        try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
-            while (rs.next()) {
-                String TypeADC = rs.getString("Num_40");
-                String id = uuid.getUIID();
-                String namesig = rs.getString("Num_5");
+        String TableNumber;
 
-                String[] str = {TypeADC, id, namesig};
-                selectData.add(str);
-            }
-            rs.close();
-            stmt.close();
-            System.out.println("--Operation SELECT done sucessfully");
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+        switch (table) {
+            case "ai":
+                try {
+                    stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    while (rs.next()) {
+                        String TypeADC = rs.getString("TAG_NAME_PLC");
+                        String id = uuid.getUIID();//генерит рандомный уид который никому не интересен
+                        String namesig = rs.getString("Наименование сигнала");
+                        String RangeMin = rs.getString("Диапазон мин.");
+                        String RangeMax = rs.getString("Диапазон макс.");//field[4]
+                        String Unit = rs.getString("Единица измерения");
+                        String sigType = rs.getString("Тип сигнала");
+                        String Adres_1 = rs.getString("Адрес_1");
+                        String Adres_2 = rs.getString("Адрес_2");
+                        String Device = rs.getString("Уст");//field[9]
+                        String Slot = rs.getString("Слот");
+                        String Channel = rs.getString("Канал");
+                        String An = rs.getString("УСТ_НИЖН_АВАР");
+                        String Pn = rs.getString("УСТ_НИЖН_ПРЕД");
+                        String Pv = rs.getString("УСТ_ВЕРХ_ПРЕД");
+                        String Av = rs.getString("УСТ_ВЕРХ_АВАР");
+
+                        String[] str = {TypeADC, id, namesig, RangeMax, RangeMin, Unit, sigType, Adres_1, Adres_2, Device, Slot, Channel, An, Pn, Pv, Av};
+                        selectData.add(str);
+                    }
+                    rs.close();
+                    stmt.close();
+                    System.out.println("--Operation SELECT done sucessfully");
+                } catch (SQLException ex) {
+                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
+                }
+                break;
+            case "ao":
+                try {
+                    stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    while (rs.next()) {
+                        String TypeADC = rs.getString("TAG_NAME_PLC");
+                        String id = uuid.getUIID();//генерит рандомный уид который никому не интересен
+                        String namesig = rs.getString("Наименование сигнала");
+                        String RangeMin = rs.getString("Диапазон мин.");
+                        String RangeMax = rs.getString("Диапазон макс.");//field[4]
+                        String Unit = rs.getString("Единица измерения");
+                        String Adres_1 = rs.getString("Адрес_1");
+                        String Adres_2 = rs.getString("Адрес_2");
+                        String Device = rs.getString("Уст");//field[9]
+                        String Slot = rs.getString("Слот");
+                        String Channel = rs.getString("Канал");
+
+                        String[] str = {TypeADC, id, namesig, RangeMax, RangeMin, Unit, Adres_1, Adres_2, Device, Slot, Channel};
+                        selectData.add(str);
+                    }
+                    rs.close();
+                    stmt.close();
+                    System.out.println("--Operation SELECT done sucessfully");
+                } catch (SQLException ex) {
+                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
+                }
+                break;
+            case "dgo":
+                try {
+                    stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    while (rs.next()) {
+                        String TypeADC = rs.getString("TAG_NAME_PLC");
+                        String id = uuid.getUIID();//генерит рандомный уид который никому не интересен
+                        String namesig = rs.getString("Наименование сигнала");
+                        String RangeMin = rs.getString("Диапазон мин.");
+                        String RangeMax = rs.getString("Диапазон макс.");//field[4]
+                        String sigType = rs.getString("Тип сигнала");
+                        String Device = rs.getString("Уст");//field[9]
+                        String Slot = rs.getString("Слот");
+                        String Channel = rs.getString("Канал");
+
+                        String[] str = {TypeADC, id, namesig, RangeMax, sigType, RangeMin, Device, Slot, Channel};
+                        selectData.add(str);
+                    }
+                    rs.close();
+                    stmt.close();
+                    System.out.println("--Operation SELECT done sucessfully");
+                } catch (SQLException ex) {
+                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
+                }
+                break;
+            case "di":
+                try {
+                    stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    while (rs.next()) {
+                        String TypeADC = rs.getString("TAG_NAME_PLC");
+                        String id = uuid.getUIID();//генерит рандомный уид который никому не интересен
+                        String namesig = rs.getString("Наименование сигнала");
+                        String sigType = rs.getString("Тип сигнала");
+                        String Adres_1 = rs.getString("Адрес_1");
+                        String Adres_2 = rs.getString("Адрес_2");
+                        String Device = rs.getString("Уст");//field[9]
+                        String Slot = rs.getString("Слот");
+                        String Channel = rs.getString("Канал");
+
+                        String[] str = {TypeADC, id, namesig, sigType, Adres_1, Adres_2, Device, Slot, Channel};
+                        selectData.add(str);
+                    }
+                    rs.close();
+                    stmt.close();
+                    System.out.println("--Operation SELECT done sucessfully");
+                } catch (SQLException ex) {
+                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
+                }
+                break;
+
         }
+
         return selectData;
     }
+
 
     public void dropTable(ArrayList<String> listT) {
         //connectionToBase(); // вызов Фукция подключения к базе
@@ -683,23 +666,25 @@ public class DataBase {
         }
     }
 
-      // ---  Обновиьт данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
+    // ---  Обновиьт данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
     public int Update(String table, String column, String newData, HashMap< String, String> mapDataRow) {
         int requestr = 0;
         try {
             connection.setAutoCommit(true);
-            String sql = "UPDATE " + table + " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
-                    + " = \'" + newData + "\' WHERE " ;
+            String sql = "UPDATE " + table + " SET " + "\"" + column + "\"" // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
+                    + " = \'" + newData + "\' WHERE ";
             // Формируем условие запроса из столбцов и данных
             int lastValue = 1; // с первого так как размер не с нуля
-             for(Map.Entry<String, String> entry : mapDataRow.entrySet()) {               
+            for (Map.Entry<String, String> entry : mapDataRow.entrySet()) {
                 String key = entry.getKey();
                 String value = entry.getValue();
-                if(lastValue >= mapDataRow.size()){
+                if (lastValue >= mapDataRow.size()) {
                     sql += "\"" + key + "\" = " + "\'" + value + "\'";
-                }else sql += "\"" + key + "\" = " + "\'" + value + "\'" + " and ";
+                } else {
+                    sql += "\"" + key + "\" = " + "\'" + value + "\'" + " and ";
+                }
                 ++lastValue;
-              }
+            }
             sql += ";";
             System.out.println(sql);
             stmt = connection.createStatement();
@@ -710,6 +695,7 @@ public class DataBase {
         }
         return requestr;
     }
+
     String[] getColumns() {
         return columns;
     }

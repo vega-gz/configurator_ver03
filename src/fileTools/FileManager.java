@@ -56,6 +56,12 @@ public class FileManager {
         String currentDat = dateFormat.format(cal.getTime());
         copyFile(source, source + "_" + currentDat);
     }
+    public void backupFile(String source, String destDir) throws IOException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
+        Calendar cal = Calendar.getInstance();
+        String currentDat = dateFormat.format(cal.getTime());
+        copyFile(source, source + "_" + currentDat);
+    }
 
     // -- Поиск файла в конкретной папке ( можно по маске) Возращаем лист с путями ---
     public ArrayList<String> findFile(String path, String s) {
