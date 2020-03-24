@@ -5,6 +5,7 @@
  */
 package DataBaseConnect;
 
+import XMLTools.UUID;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,6 +18,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import XMLTools.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DataBase {
 
@@ -47,17 +50,9 @@ public class DataBase {
     }
 
     public void connectionToBase() {
-
-        //  String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
-        //  String PASS = "test08_DB";
-        //  String USER = "test08_DB";
-//        String DB_URL=url;
-//        String PASS=pass;
-//        String USER=user;
         final String DB_URL = "jdbc:postgresql://172.16.35.25:5432/test665";//
         final String USER = "postgres";
         final String PASS = "postgres";//
-
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -326,7 +321,8 @@ public class DataBase {
         }
     }
 
-    ArrayList<String[]> selectData(String table) {
+    // --- Вытянуть все из таблицы  ---
+    public ArrayList<String[]> selectData(String table) {
         //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String[]> selectData = new ArrayList<>();
         try {
@@ -369,7 +365,10 @@ public class DataBase {
         return s;
     }
 
-    public void selectData(String table, String[] columns) {
+    //--------------- SELECT DATA sum columns --------------
+    // какие именно столбцы дергать
+    public ArrayList<String[]> getData(String table, String[] columns) {
+        //connectionToBase(); // вызов Фукция подключения к базе
         StructSelectData.setColumns(columns);
         ArrayList<String[]> selectData = new ArrayList<>();
         String s_columns = "";
@@ -396,14 +395,54 @@ public class DataBase {
             }
             rs.close();
             stmt.close();
-            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру
+            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
             //connection.commit();
             //System.out.println("-- Operation SELECT done successfully");
         } catch (SQLException e) {
             System.out.println("Failed select data");
             e.printStackTrace();
         }
-        //return currentSelectTable;
+        return selectData;
+    }
+    
+      //--------------- SELECT DATA sum columns --------------
+    // какие именно столбцы дергать с запросом ArrayList
+    ArrayList<String[]> getData(String table, ArrayList<String> columns) {
+        //  connectionToBase(); // вызов Фукция подключения к базе
+        StructSelectData.setColumns(columns); // вот это жопа надо что то с этим делать мешает в Main_Jpanel
+        ArrayList<String[]> selectData = new ArrayList<>();
+        String s_columns = "";
+        String[] strfromtb = new String[columns.size()]; // массив под данные
+        for (int i = 0; i < columns.size(); ++i) { //формирование строки запроса
+            if (i < columns.size() - 1) {
+                s_columns += "\"" + columns.get(i) + "\"" + ", ";
+            } // Кавычки для руских имен и пробелов
+            else {
+                s_columns += "\"" + columns.get(i) + "\"";
+            }
+        }
+        try {
+            stmt = connection.createStatement();
+            System.out.println("SELECT " + s_columns + " FROM " + table + ";");
+            ResultSet rs = stmt.executeQuery("SELECT " + s_columns + " FROM " + table + ";");
+            while (rs.next()) {
+                for (int i = 0; i < columns.size(); ++i) {
+                    strfromtb[i] = rs.getString(columns.get(i));
+                }
+                String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
+                selectData.add(tmp1);
+                //System.out.println(strfromtb[0]); // это просто для тестов
+            }
+            rs.close();
+            stmt.close();
+            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
+            //connection.commit();
+            //System.out.println("-- Operation SELECT done successfully");
+        } catch (SQLException e) {
+            System.out.println("Failed select data");
+            e.printStackTrace();
+        }
+        return selectData;
     }
 
     public List<String> selectColumns(String table) {
@@ -426,8 +465,7 @@ public class DataBase {
         return listColumn;
     }
 
-//    }
-//----Строим все сигналы которые сюда ссылаются
+    //----Строим все сигналы которые сюда ссылаются
     public ArrayList<String[]> getSelectData(String table) {//в перспективе задавать в параметрах листи через if else указывать,ибо разный набор столбцов мы вытягиваем для ai ao di do
 
         ArrayList<String[]> selectData = new ArrayList<>();
@@ -536,7 +574,7 @@ public class DataBase {
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
 
-                        String[] str = {TypeADC, id, namesig, sigType, Adres_1, Adres_2, Device, Slot, Channel};    
+                        String[] str = {TypeADC, id, namesig, sigType, Adres_1, Adres_2, Device, Slot, Channel};
                         selectData.add(str);
                     }
                     rs.close();
@@ -553,43 +591,6 @@ public class DataBase {
         return selectData;
     }
 
-    ArrayList<String[]> getData(String table, String[] columns) {
-        //connectionToBase(); // вызов Фукция подключения к базе
-        StructSelectData.setColumns(columns);
-        ArrayList<String[]> selectData = new ArrayList<>();
-        String s_columns = "";
-        String[] strfromtb = new String[columns.length]; // массив под данные
-        for (int i = 0; i < columns.length; ++i) { //формирование строки запроса
-            if (i < columns.length - 1) {
-                s_columns += "\"" + columns[i] + "\"" + ", ";
-            } // Кавычки для руских имен и пробелов
-            else {
-                s_columns += "\"" + columns[i] + "\"";
-            }
-        }
-        try {
-            stmt = connection.createStatement();
-            System.out.println("SELECT " + s_columns + " FROM " + table + ";");
-            ResultSet rs = stmt.executeQuery("SELECT " + s_columns + " FROM " + table + ";");
-            while (rs.next()) {
-                for (int i = 0; i < columns.length; ++i) {
-                    strfromtb[i] = rs.getString(columns[i]);
-                }
-                String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
-                selectData.add(tmp1);
-                //System.out.println(strfromtb[0]); // это просто для тестов
-            }
-            rs.close();
-            stmt.close();
-            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
-            //connection.commit();
-            //System.out.println("-- Operation SELECT done successfully");
-        } catch (SQLException e) {
-            System.out.println("Failed select data");
-            e.printStackTrace();
-        }
-        return selectData;
-    }
 
     public void dropTable(ArrayList<String> listT) {
         //connectionToBase(); // вызов Фукция подключения к базе
@@ -663,6 +664,36 @@ public class DataBase {
         for (String s : tmp) {
             System.out.println(s);
         }
+    }
+
+    // ---  Обновиьт данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
+    public int Update(String table, String column, String newData, HashMap< String, String> mapDataRow) {
+        int requestr = 0;
+        try {
+            connection.setAutoCommit(true);
+            String sql = "UPDATE " + table + " SET " + "\"" + column + "\"" // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
+                    + " = \'" + newData + "\' WHERE ";
+            // Формируем условие запроса из столбцов и данных
+            int lastValue = 1; // с первого так как размер не с нуля
+            for (Map.Entry<String, String> entry : mapDataRow.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                if (lastValue >= mapDataRow.size()) {
+                    sql += "\"" + key + "\" = " + "\'" + value + "\'";
+                } else {
+                    sql += "\"" + key + "\" = " + "\'" + value + "\'" + " and ";
+                }
+                ++lastValue;
+            }
+            sql += ";";
+            System.out.println(sql);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return requestr;
     }
 
     String[] getColumns() {

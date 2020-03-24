@@ -168,6 +168,7 @@ public class XMLSAX {
         String myVarU_0 = UUID.getUUID();
         String myVarU_0_0 = UUID.getUUID(); // УИД переменной для связки с переменно входа объекта
         String myVarU_1 = UUID.getUUID();
+																																					
 
         //  String uuIdTBaSence = UUIDHigth; // перебрать файлы в его поиска  // Это уид TBaseAnIn
         Iterator<String[]> iter_arg = lisSig.iterator();
@@ -189,7 +190,7 @@ public class XMLSAX {
         // а вот тут надо посчитать сколько переменных
         XPathExpression expr = xpath.compile("SubAppType/FBLibrary");
         NodeList nodes = (NodeList) expr.evaluate(document_final, XPathConstants.NODESET);
-        int Number = 0, Num = 0, Counter = 1, NumElem=0;;
+        int Number = 0, Num = 0, Counter = 1,NumElem=0;
 
         //  так как нода у нас одна то пишем только в 1 по этому for так работает либо пишем в первую.
         for (int i = 0; i < nodes.getLength(); i++) {
@@ -200,6 +201,7 @@ public class XMLSAX {
 
             Node rootGP = GraphicsCompositeType.getFirstChild(); // Начальная нода файла (что будем импортировать)
 
+		  
             // настройка сигналов помещаемых в Графический компонент
             int Ycord = 0; // Переменная смещения по Y в виде компонентов
             int NumberSign = -1;
@@ -207,11 +209,13 @@ public class XMLSAX {
             int xPos = 2;
             int yPos = 0;
             int sumColumn = 1; // Количество столбцов
-            int offset = 722;
+            int offset = 747;
             String visibleAI = "", disableVisible = "";// Переменная на смещение по иксам в нарисованном элементе
 
             Element DataConnections = GraphicsCompositeType.createElement("DataConnections"); // это для связи переменных с входными сигналами(чуть позже реализовать)
-
+            
+            //-----ЭТО СОЗДАНИЕ T_BASE_------И CONNECT//
+            
             while (iter_arg.hasNext()) {//это цикл создания одного блока 
                 String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")"; //"(x:=0,y:=0)" это позиция графики первой вкладки
                 String uuidFB = getUIID();
@@ -246,6 +250,7 @@ public class XMLSAX {
                 VarValue2.setAttribute("Variable", "NameAlg");
                 String VNameAlg = "\u0027" + field[0] + "\u0027";// Только так работает как добиться методом кода не понятно
                 VarValue2.setAttribute("Value", VNameAlg); // Название сигнала
+
                 VarValue2.setAttribute("Type", "STRING");
                 VarValue2.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
                 FB.appendChild(VarValue2);
@@ -288,7 +293,7 @@ public class XMLSAX {
                 VarValue6.setAttribute("TypeUUID", "38FDDE3B442D86554C56C884065F87B7");
                 FB.appendChild(VarValue6);
                 
-                 Element VarValue8=GraphicsCompositeType.createElement("VarValue");
+                Element VarValue8=GraphicsCompositeType.createElement("VarValue");
                 VarValue8.setAttribute("Variable","Num");
                 VarValue8.setAttribute("Value","\u0027"+(NumElem++)+"\u0027");
                 VarValue8.setAttribute("Type", "STRING");
@@ -332,6 +337,7 @@ public class XMLSAX {
                     FB.appendChild(VarValue7);
 
                 }
+                
 
                 {
                     Element Connection = GraphicsCompositeType.createElement("Connection");
@@ -358,7 +364,8 @@ public class XMLSAX {
                     sumColumn = 2;
                     yPos = yPos + 24;
                 }
-                if (NumberSign >= 64) {
+                if (NumberSign >63) {
+                    NumElem=0;
                     Num = 0;
                     NumberSign = -1;
                     FBNetwork.appendChild(DataConnections);
@@ -368,7 +375,7 @@ public class XMLSAX {
                     Ycord = 0; // Переменная смещения по Y в виде компонентов
                     xPos = 2;
                     yPos = 0;
-                    offset = 750; // Переменная на смещение по иксам в нарисованном элементе
+                    offset = 747; // Переменная на смещение по иксам в нарисованном элементе
 
                     GraphicsCompositeType = createTGraphicsCompositeType(GName + (Counter++)); // так забрали документ из метода
                     FBNetwork = (Element) GraphicsCompositeType.getElementsByTagName("FBNetwork").item(0); // вытягиваем ноду элемента FBNetwork из Документа который получили выше
@@ -457,6 +464,18 @@ public class XMLSAX {
             {"PrefAb", "STRING", TypeuuIdString, "префикс абонента", "&apos;&apos;", TypeuuidPref},
             {"NameRU", "STRING", TypeuuIdString, "имя абонента", "&apos;&apos;", TypeNameRU}
         };
+ 
+																																			   
+																																																		   
+														  
+																	   
+												
+																	 
+													
+															   
+												 
+															   
+											
 
         Element GCFBtype = doc.createElement("GraphicsCompositeFBType"); // Наша основа графического элемента
         GCFBtype.setAttribute("Name", GraphName); // тоже цикл с изменения доолжен быть так как по 64 элемента для аналогов
@@ -496,6 +515,7 @@ public class XMLSAX {
         //FBNetwork.appendChild(DataConnections); // переменные обязательно должно быть после
         return doc;
     }
+
 
     public void enumerationData(String patchF) {//значит вот это я вытолкнул
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -563,12 +583,10 @@ public class XMLSAX {
     // --- Запипись в файл структурой XML ---
     void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
-
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(new DOMSource(document), new StreamResult(file));
-
             //вот это то что я написал это чушь,можно удалить
         } catch (TransformerException e) {
             e.printStackTrace(System.out);

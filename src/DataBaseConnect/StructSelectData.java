@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package DataBaseConnect;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class StructSelectData {
 
@@ -14,11 +15,11 @@ public class StructSelectData {
     static private String[] columns;
     static private String nTable;
 
-    public static String[] getColumns() {
+   public  static String[] getColumns() {
         return columns;
     }
 
-    static String getnTable() {
+    public static String getnTable() {
         return nTable;
     }
 
@@ -40,7 +41,7 @@ public class StructSelectData {
 
             for (int i2 = 0; i2 < mas_int_i.length; ++i2) {
                 data[i1][i2] = mas_int_i[i2];
-                System.out.print(mas_int_i[i2]);
+                // System.out.print(mas_int_i[i2]);
             }
             ++i1;
         }
@@ -52,7 +53,16 @@ public class StructSelectData {
         StructSelectData.columns = columns;
     }
 
-    public static void setnTable(String nTable) {
+    public static void setColumns(ArrayList<String> col) {
+        // Костыли =(
+        columns = new String[col.size()]; 
+        for (int i = 0; i < col.size(); ++i) {
+            StructSelectData.columns[i] = col.get(i);
+        }
+
+    }
+
+   public static void setnTable(String nTable) {
         StructSelectData.nTable = nTable;
     }
 
