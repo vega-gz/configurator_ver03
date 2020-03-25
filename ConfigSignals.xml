@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConfigSignals>
+
+<ai excelSheetName="AI">
+	<GenData>
+		<T_GPA_AI_Setting Type="T_AI_Setting"/>
+		<T_GPA_AI_FromHMI Type="T_AI_FromHMI"/>
+		<T_GPA_AI_ToHMI Type="T_AI_ToHMI"/>
+		<T_GPA_AI_OnlyToHMI Type="T_AI_OnlyToHMI"/>
+	</GenData>
+</ai>
+<ao excelSheetName="AO">
+
+</ao>
+
+</ConfigSignals>

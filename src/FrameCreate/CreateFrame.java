@@ -6,6 +6,7 @@
 package FrameCreate;
 
 import ReadWriteExcel.WriteConfigFile;
+import ReadWriteExcel.WriteXMLsignals;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ public class CreateFrame extends JFrame {
     JFrame frame;
     String nameProject, user, url, pass;
     String test08_DB = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
+    WriteXMLsignals signalswrite=new WriteXMLsignals();
 
     public CreateFrame(String nameProject, String user, String url, String pass) {
         super();
@@ -107,6 +109,7 @@ public class CreateFrame extends JFrame {
             WriteConfigFile write = new WriteConfigFile();//вызываем класс записи файла конф
 //                
             try {
+              //  signalswrite.writeSignal();
                 write.writeXML(user, url, nameProject, pass);
 
             } catch (ParserConfigurationException ex) {

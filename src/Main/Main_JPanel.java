@@ -1,6 +1,6 @@
 package Main;
 
-import FrameCreate.FrameTable;
+import FrameCreate.FrameTabel;
 
 import java.awt.Toolkit;
 
@@ -29,6 +29,7 @@ import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
 import java.awt.Dimension;
 import DataBaseConnect.*;
+import ReadWriteExcel.WriteXMLsignals;
 
 /**
  *
@@ -211,6 +212,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         CreateFrame frame = new CreateFrame(url, nameProject, user, pass);//вызываем второре окно для записи конф файла
+        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -283,7 +285,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
-        FrameTable frameTable = new FrameTable(selectT);
+        FrameTabel frameTable = new FrameTabel(selectT);
         JFrame frame = new JFrame();
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
