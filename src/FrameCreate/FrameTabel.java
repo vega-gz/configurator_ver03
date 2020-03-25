@@ -219,7 +219,7 @@ public class FrameTabel extends javax.swing.JPanel {
             UUIDHigth = "DD87E9C742BB69689219F08BAD99F4B8";
             Graphname = "TGraphicsCompositeTypeDO";
             TypeName = "T_BaseDO";
-            UUIDBlockPref = "FB48BEA74A28EB85591DC0B68AA08A74";//поменять местами DO и DI
+            UUIDBlockPref = "FB48BEA74A28EB85591DC0B68AA08A74";
             UUIDBlockName = "524F2EBB4524C97C16682CAD9668D4CC";
             ElemName = "T_Base_DO";
 
@@ -274,7 +274,6 @@ public class FrameTabel extends javax.swing.JPanel {
 
                 switch (nameTable) {
                     case "ai":
-
                         nameSignal1 = "T_GPA_AI_FromProcessing";
                         nameSignal2 = "T_GPA_AI_ToProcessing";
                         nameSignal3 = "T_GPA_AI_Settings";

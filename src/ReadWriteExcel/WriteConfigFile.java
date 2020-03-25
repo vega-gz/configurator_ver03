@@ -64,7 +64,7 @@ public class WriteConfigFile {
 
     }
 
-    public void writeXML(String user, String url, String nameProject, String pass) throws ParserConfigurationException{//сделать файл красиво,с переносом строки чтобы записывал
+    public void writeXML(String user, String url, String nameProject, String pass) throws ParserConfigurationException {//сделать файл красиво,с переносом строки чтобы записывал
 //--------этот метод для того чтобы добавлять в конфиг файл доп записи
 //        if (file.isFile()) {//если файл уже существует ,добавить в него данные
 //            try{
@@ -121,50 +121,49 @@ public class WriteConfigFile {
 //            
 //        } else {
 
-            try {
-                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();//создание дом парсера
-                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        try {
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();//создание дом парсера
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
-                Document doc = docBuilder.newDocument();//создание верхнего элемента
-                Element rootElement = doc.createElement("config");
-                doc.appendChild(rootElement);
+            Document doc = docBuilder.newDocument();//создание верхнего элемента
+            Element rootElement = doc.createElement("config");
+            doc.appendChild(rootElement);
 
-                Element settings = doc.createElement("Settings");//ниже идет создание внутренних элементов
-                rootElement.appendChild(settings);
+            Element settings = doc.createElement("Settings");//ниже идет создание внутренних элементов
+            rootElement.appendChild(settings);
+            Element USER = doc.createElement("USER");//
 
-                Element USER = doc.createElement("USER");//
-                USER.appendChild(doc.createTextNode(user));
-                settings.appendChild(USER);
+            USER.appendChild(doc.createTextNode(user));
+            settings.appendChild(USER);
 
-                Element urlPath = doc.createElement("URL");
-                urlPath.appendChild(doc.createTextNode(url));
-                settings.appendChild(urlPath);
+            Element urlPath = doc.createElement("URL");
+            urlPath.appendChild(doc.createTextNode(url));
+            settings.appendChild(urlPath);
 
-                Element nameproject = doc.createElement("nameProject");
-                nameproject.appendChild(doc.createTextNode(nameProject));
-                settings.appendChild(nameproject);
+            Element nameproject = doc.createElement("nameProject");
+            nameproject.appendChild(doc.createTextNode(nameProject));
+            settings.appendChild(nameproject);
 
-                Element PASS = doc.createElement("PASS");
-                PASS.appendChild(doc.createTextNode(pass));
-                settings.appendChild(PASS);
-                
-                //позволяет задать диапазон
+            Element PASS = doc.createElement("PASS");
+            PASS.appendChild(doc.createTextNode(pass));
+            settings.appendChild(PASS);
 
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");//запись xml в виде структуры
-                DOMSource sourse = new DOMSource(doc);
-                StreamResult result = new StreamResult(new File(System.getProperty("user.dir") + File.separator + FILENAME));
+            //позволяет задать диапазон
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");//запись xml в виде структуры
+            DOMSource sourse = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(System.getProperty("user.dir") + File.separator + FILENAME));
 
-                //  StreamResult result1 =new StreamResult(System.out);
-                transformer.transform(sourse, result);
+            //  StreamResult result1 =new StreamResult(System.out);
+            transformer.transform(sourse, result);
 
-                System.out.println("File saved!");
-            } catch (TransformerException ex) {
-                Logger.getLogger(WriteConfigFile.class.getName()).log(Level.SEVERE, null, ex);
-            }
-     //   }
+            System.out.println("File saved!");
+        } catch (TransformerException ex) {
+            Logger.getLogger(WriteConfigFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //   }
 
     }
-   
+
 }
