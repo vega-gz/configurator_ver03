@@ -427,7 +427,7 @@ public class Main_JPanel extends javax.swing.JFrame {
             DocumentBuilder db = dbf.newDocumentBuilder();
             org.w3c.dom.Document doc = db.parse(xmlFile);
 
-            doc.getDocumentElement().normalize();
+            doc.getDocumentElement().normalize();//
 
             System.out.println("Наш файл:" + doc.getDocumentElement().getNodeName());
             System.out.println("=================");

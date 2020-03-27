@@ -7,11 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JFrame;
-import configurator.*;
 import DataBaseConnect.DataBase;
 import DataBaseConnect.*;
 import ReadWriteExcel.RWExcel;
-import Main.Main_JPanel;
+
 
 public class Main {
 
