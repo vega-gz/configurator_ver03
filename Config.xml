@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
 <Settings>
-<USER>Grigory</USER>
-<URL>jdbc:postgresql://172.16.35.25:5432/test08_DB</URL>
-<nameProject>Configurator</nameProject>
+<USER>postgres</USER>
+<URL>jdbc:postgresql://172.16.35.25:5432/test665</URL>
+<nameProject>postgres</nameProject>
 <PASS>postgres</PASS>
 </Settings>
 </config>
