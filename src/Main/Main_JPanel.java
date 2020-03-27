@@ -455,7 +455,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         }
 
         DataBase db = new DataBase();
-        db.connectionToBase();
+        db.connectionToBase(user,url,pass);
         jComboBox1.setModel(getComboBoxModel());
         JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
 
