@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigSignals>
-
-<ai excelSheetName="AI">
-	<GenData>
-		<T_GPA_AI_Setting Type="T_AI_Setting"/>
-		<T_GPA_AI_FromHMI Type="T_AI_FromHMI"/>
-		<T_GPA_AI_ToHMI Type="T_AI_ToHMI"/>
-		<T_GPA_AI_OnlyToHMI Type="T_AI_OnlyToHMI"/>
-	</GenData>
-</ai>
-<ao excelSheetName="AO">
-
-</ao>
-
+	<ai excelSheetName="AI">
+		<GenData>
+			<T_GPA_AI_Setting Type="T_AI_Setting " UUID="E10A238347B7C26C7C1FDFA77F91B1F5"/>
+			<T_GPA_AI_FromHMI Type="T_AI_FromHMI" UUID="2BDAC6F849D13DED3A2A5B9190720FD7"/>
+			<T_GPA_AI_ToHMI Type="T_AI_ToHMI" UUID="D48C3F1549ACD994A366A1A51FE00772"/>
+			<T_GPA_AI_OnlyToHMI Type="T_AI_OnlyToHMI" UUID="ABDF10D048FB61AB90F474996CF9B3B2"/>
+		</GenData>
+	</ai>
+	<ao excelSheetName="AO">
+		<GenData>
+			<T_GPA_AO_FromHMI Type="T_AO_FromHMI" UUID="136536604B0AD5911BA545A82E7DF913"/>
+			<T_GPA_AO_ToHMI Type="T_AO_ToHMI" UUID="00B934F5461BB0C8938D42A9118D2143"/>
+			<T_GPA_AO_Settings Type="T_AO_Setting" UUID="48CE35A6624E3AC0A0AA7CAF9D0A7752"/>
+		</GenData>
+	</ao>
+	<di excelSheetName="DI">
+		<GenData>
+			<T_GPA_DI_Setting Type="T_DI_Setting" UUID="9D3CCA014F76318C4B750981ED2CEA67"/>
+			<T_GPA_DI_FromHMI Type="T_DI_FromHMI"UUID="2A86C1F64D326C195FE5CB898889601B"/>
+			<T_GPA_DI_ToHMI Type="T_DI_ToHMI" UUID="2694959C4B5180695BAA0E9209463FE3"/>
+			<T_GPA_DI_DRV Type="T_DI_DRV" UUID="75AE55A30F406ADD5FAB3DA31BBA2C1F"/>
+			<T_GPA_DI_Internal Type="T_DI_Internal" UUID="FCA918B43E41B4207B07CFAFBC323BEB"/>
+		</GenData>
+	</di>
+	<do excelSheetName="DO">
+			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
+			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+	</do>
 </ConfigSignals>

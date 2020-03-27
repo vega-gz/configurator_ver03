@@ -274,6 +274,9 @@ public class FrameTabel extends javax.swing.JPanel {
 
                 switch (nameTable) {
                     case "ai":
+                       String[][] getTypeForGenList = {};
+                                for(int i=0;i<getTypeForGenList.length;i++){
+                                }
                         nameSignal1 = "T_GPA_AI_FromProcessing";
                         nameSignal2 = "T_GPA_AI_ToProcessing";
                         nameSignal3 = "T_GPA_AI_Settings";
