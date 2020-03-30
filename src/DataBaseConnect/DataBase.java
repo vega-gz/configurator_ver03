@@ -60,7 +60,7 @@ public class DataBase {
             e.printStackTrace();
             return;
         }
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
+        System.out.println("connect PostgreSQL JDBC Driver" + DB_URL + " " +USER );
         try {
             connection = DriverManager
                     .getConnection(DB_URL, USER, PASS);
