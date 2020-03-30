@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
 <Settings>
-<USER>postgres</USER>
-<URL>jdbc:postgresql://172.16.35.25:5432/test665</URL>
-<nameProject>postgres</nameProject>
-<PASS>postgres</PASS>
+<USER>mutonar</USER>
+<URL>jdbc:postgresql://192.168.10.41:5432/test</URL>
+<nameProject>5</nameProject>
+<PASS>Solovin2</PASS>
 </Settings>
 </config>
