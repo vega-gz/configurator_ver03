@@ -2,7 +2,7 @@
 <config>
 <Settings>
 <USER>mutonar</USER>
-<URL>jdbc:postgresql://192.168.10.41:5432/test</URL>
+<URL>jdbc:postgresql://minoro.ru:5432/test</URL>
 <nameProject>5</nameProject>
 <PASS>Solovin2</PASS>
 </Settings>
