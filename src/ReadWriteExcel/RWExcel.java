@@ -15,7 +15,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import static org.apache.poi.ss.usermodel.CellType.BLANK;
@@ -30,16 +33,16 @@ import org.apache.poi.ss.usermodel.Sheet;
 public class RWExcel {
 
     int startReadData = 0;
-    private String patch_file;
+    private String path_file;
 
     public void setPatchF(String patch_file) {
-        this.patch_file = patch_file;
+        this.path_file = patch_file;
     }
 
     public void readAllfile() throws IOException {
 
         // Read XSL file
-        FileInputStream inputStream = new FileInputStream(new File(patch_file));
+        FileInputStream inputStream = new FileInputStream(new File(path_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
 
         ArrayList<String> list_sheet = new ArrayList<String>();
@@ -121,7 +124,7 @@ public class RWExcel {
     public int getMaxcColumn(String name_sheet) throws FileNotFoundException, IOException {
 
         // Read XSL file
-        FileInputStream inputStream = new FileInputStream(new File(patch_file));
+        FileInputStream inputStream = new FileInputStream(new File(path_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
 
         System.out.println(name_sheet);
@@ -141,7 +144,7 @@ public class RWExcel {
     
      public ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
         // Read XSL file
-        FileInputStream inputStream = new FileInputStream(new File(patch_file));
+        FileInputStream inputStream = new FileInputStream(new File(path_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
 
         ArrayList<String> list_sheet = new ArrayList<String>();
@@ -154,13 +157,33 @@ public class RWExcel {
         }
         return list_sheet;
     }
+     
+     // --- Получить листы файла указав на него строкой  ---
+    public ArrayList<String> get_list_sheet(String path) {
+        ArrayList<String> list_sheet = new ArrayList<String>();
+        try {
+            FileInputStream inputStream = null;
+            inputStream = new FileInputStream(new File(path));
+            HSSFWorkbook wb = new HSSFWorkbook(inputStream);
+            // проганаяем список Листов в файле
+            Iterator<Sheet> it_sheet = wb.iterator();
+            while (it_sheet.hasNext()) {
+                Sheet sheet = it_sheet.next();
+                list_sheet.add(sheet.getSheetName());
+            }
+            inputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_sheet;
+    }
 
     // --- Geting data from file Exel ----
     public ArrayList<String[]> getDataCell(String name_sheet, int lenmass) throws FileNotFoundException, IOException {
         String[] array_cell_len;
         ArrayList<String[]> array_cell = new ArrayList<>();
 
-        FileInputStream inputStream = new FileInputStream(new File(patch_file));
+        FileInputStream inputStream = new FileInputStream(new File(path_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
         Sheet sheet = wb.getSheet(name_sheet);
 
@@ -332,13 +355,172 @@ public class RWExcel {
         return array_cell;
     }
 
+    
+// --- это второй метод Geting data from file Exel (Вытянуть данные из Exel  но по конкретным столбцам)----
+    public ArrayList<String[]> getDataCell(String name_sheet, ArrayList<String> column) {
+        FileInputStream inputStream = null;
+        String[] array_cell_len;
+        ArrayList<String[]> array_cell = new ArrayList<>();
+        try {
+            inputStream = new FileInputStream(new File(path_file));
+            HSSFWorkbook wb = new HSSFWorkbook(inputStream);
+            Sheet sheet = wb.getSheet(name_sheet);
+            // начальные значения наверное просто для инициализации
+            int first_len = 0; // получили переменую строки с именами столбцов;
+            int tmpFirstLenght = 0;
+            int col_UUID = 0;
+            int startm = 1;
+            switch (name_sheet) { // Высчитываем с какой строки заполнять таблицу и 4 UUID - 3 доп
+                case "AI1":
+                case "AO1":
+                case "DI1":
+                case "DO1": {
+                    first_len = startReadData; // получили переменую строки от куда читаем данные
+                    col_UUID = 4; // 4 UUID
+                    startm = 4; // это моя идиотия тут из за того что я решил тут вносить UUID в базу
+                    array_cell_len = new String[column.size() + col_UUID]; // Почему +1
+                }
+                break;
+                default: { // если нечего не найдено из подходящего
+                    first_len = startReadData;
+                    startm = 1; // данные с первого так как один UUID
+                    col_UUID = 1;
+                    array_cell_len = new String[column.size() + col_UUID]; // Почему +1 Так как одни данные под UUID
+                }
+            }
+            Iterator<Row> rowIter = sheet.iterator(); // итератор Строк
+            int sum_sheet = 0;
+            int len_row = 0;
+            int max_len_row = 0;
+            while (rowIter.hasNext()) {
+                while (tmpFirstLenght < first_len) { // а вот есть ли там данные
+                    rowIter.next();
+                    ++tmpFirstLenght;
+                }
+                if (rowIter.hasNext()) { // проверка есть ли вообще данные после пропуска строк
+                    Row row = rowIter.next();
+                    // System.out.println(row.getFirstCellNum() + " " + row.getLastCellNum()); //в строку что бы посмотреть что за нах
+                    int tmp = 0;
+                    //заносим Кол UUID
+                    int tmp_UUID = 1;
+                    do {
+                        array_cell_len[tmp] = getUIID();
+                        tmp_UUID++;
+                        tmp++;
+                    } while (tmp_UUID <= col_UUID);
+                    //Iterator<Cell> cells = row.cellIterator(); // Итератор ячеек (Почему не применяю его ?)
+                    //int i_tmp = 0;
+                    for (int i_tmp = 0; i_tmp < column.size(); ++i_tmp) { // пробегаемся по входному массиву
+                        String nameCompareColumn = column.get(i_tmp);
+                        int numberCol = CellReference.convertColStringToIndex(nameCompareColumn); // Переводим имя в индекс
+                        //System.out.println(CellReference.convertNumToColString(i_tmp)); // выявляем Имена стобцы в которых ячейка
+                        Cell cell = row.getCell(numberCol); // адрес индекс
+                        //cell.getRichStringCellValue().toString();
+                        if (cell != null) {  // обходим таким дебильным способом
+                            CellType cellType = cell.getCellType();
+                            switch (cellType) {
+                                case STRING: {
+                                    if (cell.getStringCellValue().contains("'")) {
+                                        //System.out.print("Find ' ->  " + cell.getStringCellValue());
+                                        array_cell_len[tmp] = cell.getStringCellValue().replaceAll("'", "");
+                                    }
+                                    array_cell_len[tmp] = cell.getStringCellValue();  // // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
+                                }
+                                break;
+                                case BLANK:
+                                    array_cell_len[tmp] = "";
+                                    break;
+                                case NUMERIC:
+                                    array_cell_len[tmp] = Double.toString(cell.getNumericCellValue()); // Double
+                                    break;
+                                //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
+                                case FORMULA:
+                                    // System.out.println("Formula");
+                                    switch (cell.getCachedFormulaResultType()) {
+                                        case NUMERIC:
+                                            array_cell_len[tmp] = (Double.toString(cell.getNumericCellValue()));
+                                            break;
+                                        case STRING:
+                                            array_cell_len[tmp] = cell.getRichStringCellValue().toString();
+                                            array_cell_len[tmp] = array_cell_len[tmp].replaceAll("'", ""); // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
+                                            //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    array_cell_len[tmp] = "|";
+                                    break;
+                            }
+                        } else {
+                            array_cell_len[tmp] = ""; // Вот тут чего такое то?
+                        }
+                        tmp++;
+                        //i_tmp++;
+                    }
+                    // ПРоверяемс считались какие то данные из ячеек строки (1 так как первый элемент занят ID)
+                    //Желательно переписать
+                    int not_null_dat = 0;
+                    for (int i = 1; i < array_cell_len.length; i++) {
+                        if (array_cell_len[i].isEmpty()) {
+                            continue;
+                        } else {
+                            not_null_dat = 1;
+                            break;
+                        }
+                    }
+                    if (not_null_dat != 0) {
+                        String[] tmp_array_cell_len = Arrays.copyOf(array_cell_len, array_cell_len.length);
+                        // Проверяем пустой ли массив который мы заносим, так как Exel думает что есть данные
+                        boolean empty = true;
+                        //  if(tmp_array_cell_len.length != 0){    //массив может быть пустой
+                        for (int i = startm; i < tmp_array_cell_len.length; i++) {
+                            //if (!tmp_array_cell_len[i].equals("NULL") |  tmp_array_cell_len[i] != null) {
+                            if (tmp_array_cell_len[i] == null || tmp_array_cell_len[i].equals("NULL") || tmp_array_cell_len[i].equals("")) {
+                                empty = true;
+                                //System.out.println("This find => " + tmp_array_cell_len[i]);
+                            } else {
+                                // System.out.println("This Else => " + tmp_array_cell_len[i]);
+                                empty = false;
+                                break;
+                            }
+                        }
+                        //   }
+                        if (!empty) {
+                            array_cell.add(tmp_array_cell_len);
+                        } // не пусто тогда заносим.
+                        //array_cell.add(tmp_array_cell_len);
+                        not_null_dat = 0;
+                    }
+                    //обнуляем массив для проверки выше если строки программа видит но они пустые.
+                    // array_cell_len = null;
+                    for (int i = 0; i < array_cell_len.length; i++) {
+                        array_cell_len[i] = "";
+                    }
+                }
+            }   //System.out.println( sum_sheet);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println(array_cell.size() + " -number string in mass");
+        return array_cell;
+    }
+    
+    
     public ArrayList<String> getDataNameTable(String name_sheet) throws FileNotFoundException, IOException {
         ArrayList<String> array_cell = new ArrayList<>();
         // Номера ячеек беру в ручную от куда брать названия для таблиц
-        FileInputStream inputStream = new FileInputStream(new File(patch_file));
+        FileInputStream inputStream = new FileInputStream(new File(path_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
         Sheet sheet = wb.getSheet(name_sheet); // получаем по имени страницу из Exel
-
         //  --- запросы для формирования названия таблиц и строки начала данных---
         Iterator<Row> iterRow = sheet.iterator(); // Итератор строк
         List<String[]> massColumnName = new ArrayList(); // для данных  формирования имен столбцов

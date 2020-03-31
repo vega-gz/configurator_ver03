@@ -10,16 +10,20 @@ import javax.swing.JFrame;
 import DataBaseConnect.DataBase;
 import DataBaseConnect.*;
 import ReadWriteExcel.RWExcel;
+import org.w3c.dom.Node;
+import XMLTools.XMLSAX;
 
 
 public class Main {
 
-    static DataBase workbase = new DataBase();
+    static DataBase workbase =  DataBase.getInstance();
     static RWExcel rwexcel = new RWExcel();
-    ReadConfigFile read = new ReadConfigFile();
+    static XMLSAX sax = new XMLSAX(); // Класс работы с XML  static что бы не парится
+
+    //ReadConfigFile read = new ReadConfigFile();
 
     public static void main(String[] args) {
-        workbase.connectionToBase();
+        //workbase.connectionToBase();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_JPanel().setVisible(true);
@@ -31,7 +35,7 @@ public class Main {
     }
 
     Main() {
-        workbase.connectionToBase();
+        //workbase.connectionToBase();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
@@ -45,9 +49,10 @@ public class Main {
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE); // Закрытие приложения но можно более хитро с диалоговыми
     }
 
-    static void fillDB(String patch_file) throws IOException, SQLException {//загрузка непосредственно в базу
+    static void fillBaseAlldata(String patch_file)  {//загрузка непосредственно в базу
+            try {
         rwexcel.setPatchF(patch_file); // изменяем путь файла
-        workbase.connectionToBase();
+        //workbase.connectionToBase();
         Iterator<String> it_list_sheet = rwexcel.get_list_sheet().iterator(); //забираем список листов в файле и строим итератор из них
         while (it_list_sheet.hasNext()) {
             String name_table = it_list_sheet.next(); // название таблицы как имя листа из файла
@@ -59,8 +64,8 @@ public class Main {
             }
             ArrayList<String> name_collums = new ArrayList<>(rwexcel.getDataNameTable(name_table)); // получаем массив столбцов и формируем от куда начинать считывать данные
             // так переопределим длину от куда тащим названия
-            maxlencol = name_collums.size();
-            workbase.createTable(name_table, maxlencol, name_collums); // передаем название таблицы и максимальное  - создание таблиц
+            //maxlencol = name_collums.size();
+            workbase.createTable(name_table, name_collums); // передаем название таблицы и максимальное  - создание таблиц
             // берем данные с файла
             ArrayList<String[]> sheet_fromsheet_from;
             sheet_fromsheet_from = new ArrayList<>(rwexcel.getDataCell(name_table, maxlencol)); // maxlencol не верное вычисление похоже на 3 меньше в DO1 чем должно быть
@@ -69,9 +74,19 @@ public class Main {
 
                 String[] dataFromFile = iter_sheet.next();
                 workbase.insertRows(name_table, dataFromFile, name_collums); //Вносим данные в базу
-
             }
 
         }
+        } catch (IOException | SQLException ex) {
+                System.out.println("Error read file or connect to base " +ex);
+        }
+    }
+    
+            // --- формирования баз используя конфиг ---
+    static void fillBaseConfig(String patch_file)  {
+            String pathConfigSignal = "ConfigSignals.xml";
+            Node rootN = sax.readDocument(pathConfigSignal); // Берем корневую ноду
+            Node finderN = sax.returnFirstFinedNode(rootN, "ConfigSignals"); // реализовал метод поиска
+            sax.ReadConfig(finderN, patch_file); // пересыламе ноду на обработку там же и формирование базы
     }
 }
