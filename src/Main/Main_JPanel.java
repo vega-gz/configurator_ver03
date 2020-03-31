@@ -39,13 +39,13 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
     String url, nameProject, user, pass;
-    String FILENAME = "Config.xml";
+    String FILECONFIG = "Config.xml";
     RWExcel excel = new RWExcel();
     String path;
-    DataBase DB = new DataBase();
+    DataBase DB = DataBase.getInstance();
     public String signal;
     ArrayList<String> listDropT = new ArrayList();
-    ReadConfigFile readConfig = new ReadConfigFile();
+    //ReadConfigFile readConfig = new ReadConfigFile();
 
     XMLSAX createXMLSax = new XMLSAX();
     int filepath;
@@ -172,9 +172,10 @@ public class Main_JPanel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -226,14 +227,20 @@ public class Main_JPanel extends javax.swing.JFrame {
 
             path = file.toString();
             excel.setPatchF(path);
-            try {
-                //  excel.readAllfile();//это всего лишь читает файл но не записыыает его
-
-                Main.fillDB(file.getPath());
-            } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);//
-            } catch (SQLException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+          int casedial = JOptionPane.showConfirmDialog(null, "Загрузить в базу используя конфигурационный файл?\n Выбрав No файл загрузиться полностью."); // сообщение с выбором
+            switch (casedial) {
+                case 0: 
+                    Main.fillBaseConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
+                    break;
+                case 1:
+                    Main.fillBaseAlldata(file.getPath()); // Заполнение базы полностью из файла
+                    break;
+                case 2:
+                    System.out.println(casedial);
+                    break;
+                default:
+                    System.out.println(casedial);
+                    break;
             }
         }
         jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
@@ -247,15 +254,15 @@ public class Main_JPanel extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
 
         String selectT = (String) jComboBox1.getSelectedItem();
-        DB.connectionToBase();
+        //DB.connectionToBase();
         List<String> listColumn = DB.selectColumns(selectT);
-        String[] columns = new String[listColumn.size()];
+        ArrayList<String> columns = new ArrayList<>();
         String tmpStr = " ";
         int j = 0;
 
         for (String s : listColumn) {
 
-            columns[j] = s;
+            columns.add(s);
             ++j;
         }
         System.out.println(tmpStr);
@@ -419,43 +426,46 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
+//        try {
+        new XMLSAX().setConnectBaseConfig(FILECONFIG); // так читаем файл и подключаемся к базе
+
             final File xmlFile = new File(System.getProperty("user.dir") //user.dir-это путь до домашнего каталога(каталог где хранится прога)
-                    + File.separator + FILENAME);//separator это разделитель =="\"
+                    + File.separator + FILECONFIG);//separator это разделитель =="\"
+//
+//            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder db = dbf.newDocumentBuilder();
+//            org.w3c.dom.Document doc = db.parse(xmlFile);
+//
+//            doc.getDocumentElement().normalize();//
+//
+//            System.out.println("Наш файл:" + doc.getDocumentElement().getNodeName());
+//            System.out.println("=================");
+//
+//            NodeList nodeList = doc.getElementsByTagName("config");
+//
+//            for (int i = 0; i < nodeList.getLength(); i++) {
+//                //выводим инфу по каждому их элементов
+//                Node node = nodeList.item(i);
+//                System.out.println();
+//                System.out.println("Текущий элемент: " + node.getNodeName());
+//                if (Node.ELEMENT_NODE == node.getNodeType()) {
+//                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
+////                    
+//                    pass = element.getElementsByTagName("PASS").item(0).getTextContent();
+//                    user = element.getElementsByTagName("USER").item(0).getTextContent();
+//                    url = element.getElementsByTagName("URL").item(0).getTextContent();
+//                }
+//
+//            }
+//            System.out.println(pass + " " + url + " " + user);
+//
+//        } catch (ParserConfigurationException | IOException | SAXException e) {
+//            e.printStackTrace();
+//        }
 
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            org.w3c.dom.Document doc = db.parse(xmlFile);
-
-            doc.getDocumentElement().normalize();//
-
-            System.out.println("Наш файл:" + doc.getDocumentElement().getNodeName());
-            System.out.println("=================");
-
-            NodeList nodeList = doc.getElementsByTagName("config");
-
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                //выводим инфу по каждому их элементов
-                Node node = nodeList.item(i);
-                System.out.println();
-                System.out.println("Текущий элемент: " + node.getNodeName());
-                if (Node.ELEMENT_NODE == node.getNodeType()) {
-                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
-//                    
-                    pass = element.getElementsByTagName("PASS").item(0).getTextContent();
-                    user = element.getElementsByTagName("USER").item(0).getTextContent();
-                    url = element.getElementsByTagName("URL").item(0).getTextContent();
-                }
-
-            }
-            System.out.println(pass + " " + url + " " + user);
-
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
-        }
-
-        DataBase db = new DataBase();
-        db.connectionToBase(user,url,pass);
+        DataBase db = DataBase.getInstance();
+        //db.connectionToBase(user,url,pass);
+        // новый метод подключения к базе из конфига в 1 строку 
         jComboBox1.setModel(getComboBoxModel());
         JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
 
