@@ -756,6 +756,7 @@ public class XMLSAX {
     // --- сформировать даные из конфигугации XML ---
     public void ReadConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.
         RWExcel readExel = new RWExcel();
+        readExel.setPatchF(pathExel); // изменяем путь файла (В моем конфигураторе по другому надо править, лишнее действие)
         ArrayList<String> it_list_sheet = readExel.get_list_sheet(pathExel); //забираем список листов в файле и строим итератор из них
         //ArrayList<ArrayList> returnData = new ArrayList<>(); // что возвернем(если возвернем)
         XPathFactory xpathFactory = XPathFactory.newInstance();
