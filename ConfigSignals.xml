@@ -7,13 +7,35 @@
 			<T_GPA_AI_ToHMI Type="T_AI_ToHMI" UUID="D48C3F1549ACD994A366A1A51FE00772"/>
 			<T_GPA_AI_OnlyToHMI Type="T_AI_OnlyToHMI" UUID="ABDF10D048FB61AB90F474996CF9B3B2"/>
 		</GenData>
-	</ai>
+	
+        <EXEL>
+            <V nameColumnPos="TAG_NAME_PLC" />
+            <F nameColumnPos="Наименование сигнала" />
+            <D nameColumnPos="Диапазон мин." />
+            <A nameColumnPos="Диапазон макс." />
+            <D nameColumnPos="Единица измерения" />
+            <T nameColumnPos="Тип сигнала" />
+            <H nameColumnPos="Адрес_1" />
+            <Q nameColumnPos="Адрес_2" />
+            <BC nameColumnPos="Уст" />
+            <BA nameColumnPos="Слот" />
+            <CA nameColumnPos="Канал" />
+            <G nameColumnPos="УСТ_НИЖН_АВАР" />
+            <H nameColumnPos="УСТ_НИЖН_ПРЕД" />
+            <F nameColumnPos="УСТ_ВЕРХ_ПРЕД" />
+            <F nameColumnPos="УСТ_ВЕРХ_АВАР" />
+        </EXEL>
+        </ai>
 	<ao excelSheetName="AO">
 		<GenData>
 			<T_GPA_AO_FromHMI Type="T_AO_FromHMI" UUID="136536604B0AD5911BA545A82E7DF913"/>
 			<T_GPA_AO_ToHMI Type="T_AO_ToHMI" UUID="00B934F5461BB0C8938D42A9118D2143"/>
 			<T_GPA_AO_Settings Type="T_AO_Setting" UUID="48CE35A6624E3AC0A0AA7CAF9D0A7752"/>
 		</GenData>
+                
+        <EXEL>
+            
+        </EXEL>
 	</ao>
 	<di excelSheetName="DI">
 		<GenData>
