@@ -754,10 +754,10 @@ public class XMLSAX {
     }
     
     // --- сформировать даные из конфигугации XML ---
-    public void ReadConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.
-        RWExcel readExel = new RWExcel();
-        readExel.setPatchF(pathExel); // изменяем путь файла (В моем конфигураторе по другому надо править, лишнее действие)
+    public void ReadConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.                
+        RWExcel readExel = new RWExcel(pathExel);
         ArrayList<String> it_list_sheet = readExel.get_list_sheet(pathExel); //забираем список листов в файле и строим итератор из них
+
         //ArrayList<ArrayList> returnData = new ArrayList<>(); // что возвернем(если возвернем)
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
@@ -817,10 +817,14 @@ public class XMLSAX {
                     } else {
                         // тут реализация сигнала в базе данных
                         try {
-                            workbase.createTable(nameTB, columnBase); // Создание таблицы
-                            ArrayList<String[]> sheet_fromsheet_from = new ArrayList<>(readExel.getDataCell(nameSheetExel, columnExcel));
-                            for (String[] massS : sheet_fromsheet_from) {
-                                workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
+                            for (String s : it_list_sheet) { // пробегаем по Листам файла и сравниваем есть ли такое в конфиг-файле
+                                if (nameSheetExel.equals(s)) {
+                                    workbase.createTable(nameTB, columnBase); // Создание таблицы
+                                    ArrayList<String[]> sheet_fromsheet_from = new ArrayList<>(readExel.getDataCell(nameSheetExel, columnExcel));
+                                    for (String[] massS : sheet_fromsheet_from) {
+                                        workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
+                                    }
+                                }
                             }
                             // все обнуляем для следующего сигнала
                             nameTB = "";
