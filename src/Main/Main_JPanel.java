@@ -39,7 +39,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
     String url, nameProject, user, pass;
-    String FILECONFIG = "Config.xml";
+    //String FILECONFIG = "Config.xml";
     RWExcel excel = new RWExcel();
     String path;
     DataBase DB = DataBase.getInstance();
@@ -426,46 +426,8 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        try {
-        new XMLSAX().setConnectBaseConfig(FILECONFIG); // так читаем файл и подключаемся к базе
 
-            final File xmlFile = new File(System.getProperty("user.dir") //user.dir-это путь до домашнего каталога(каталог где хранится прога)
-                    + File.separator + FILECONFIG);//separator это разделитель =="\"
-//
-//            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder db = dbf.newDocumentBuilder();
-//            org.w3c.dom.Document doc = db.parse(xmlFile);
-//
-//            doc.getDocumentElement().normalize();//
-//
-//            System.out.println("Наш файл:" + doc.getDocumentElement().getNodeName());
-//            System.out.println("=================");
-//
-//            NodeList nodeList = doc.getElementsByTagName("config");
-//
-//            for (int i = 0; i < nodeList.getLength(); i++) {
-//                //выводим инфу по каждому их элементов
-//                Node node = nodeList.item(i);
-//                System.out.println();
-//                System.out.println("Текущий элемент: " + node.getNodeName());
-//                if (Node.ELEMENT_NODE == node.getNodeType()) {
-//                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
-////                    
-//                    pass = element.getElementsByTagName("PASS").item(0).getTextContent();
-//                    user = element.getElementsByTagName("USER").item(0).getTextContent();
-//                    url = element.getElementsByTagName("URL").item(0).getTextContent();
-//                }
-//
-//            }
-//            System.out.println(pass + " " + url + " " + user);
-//
-//        } catch (ParserConfigurationException | IOException | SAXException e) {
-//            e.printStackTrace();
-//        }
-
-        DataBase db = DataBase.getInstance();
-        //db.connectionToBase(user,url,pass);
-        // новый метод подключения к базе из конфига в 1 строку 
+        DataBase.getInstance();// подключится к базе конфигом другого не дано
         jComboBox1.setModel(getComboBoxModel());
         JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
 

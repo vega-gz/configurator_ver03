@@ -15,12 +15,9 @@ import XMLTools.XMLSAX;
 
 
 public class Main {
-
     static DataBase workbase =  DataBase.getInstance();
     static RWExcel rwexcel = new RWExcel();
     static XMLSAX sax = new XMLSAX(); // Класс работы с XML  static что бы не парится
-
-    //ReadConfigFile read = new ReadConfigFile();
 
     public static void main(String[] args) {
         //workbase.connectionToBase();
