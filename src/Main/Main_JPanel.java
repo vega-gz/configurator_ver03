@@ -80,6 +80,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     public Main_JPanel() {
         initComponents();
+        jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
     }
 
     @SuppressWarnings("unchecked")
