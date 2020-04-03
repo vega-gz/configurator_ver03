@@ -32,8 +32,15 @@ import org.apache.poi.ss.usermodel.Sheet;
  */
 public class RWExcel {
 
+    public RWExcel(String s) { // коструктор сразу с определяющим имя именем
+        setPatchF(s);
+    }
+    public RWExcel() { // по умолчанию(можно не использовать)
+    }
     int startReadData = 0;
     private String path_file;
+
+    
 
     public void setPatchF(String patch_file) {
         this.path_file = patch_file;
