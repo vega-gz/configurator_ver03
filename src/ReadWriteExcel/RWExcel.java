@@ -372,6 +372,7 @@ public class RWExcel {
             inputStream = new FileInputStream(new File(path_file));
             HSSFWorkbook wb = new HSSFWorkbook(inputStream);
             Sheet sheet = wb.getSheet(name_sheet);
+            getRowReadData(sheet); // вызов фукции определения начала данных в на Листе
             // начальные значения наверное просто для инициализации
             int first_len = 0; // получили переменую строки с именами столбцов;
             int tmpFirstLenght = 0;
@@ -656,4 +657,43 @@ public class RWExcel {
         return array_cell;
     }
 
+    // --- Определяем от куда начинаются данные на Листе ---
+    int getRowReadData(Sheet sheet) {
+        String[] nameRow = {"Наименование сигнала", "Tag name", "Наименование"}; // нужно сделать с помощью файлов конфигов(определение данных) 
+        Iterator<Row> iterRow = sheet.iterator(); // Итератор строк
+        boolean findColumnSig = false; // сигнал для остановки перебора
+        int maxRowNum = 0; // Переменная для определения от куда данные начинаются
+        while (iterRow.hasNext()) {
+            Row r = iterRow.next(); // строка
+            Iterator<Cell> icell = r.cellIterator();
+            int tmpI = 0;
+            while (icell.hasNext()) {
+                Cell c = icell.next();
+                System.out.println(c.getAddress());  // дебаг адрес ячейки
+                if (!findColumnSig) { // пока не нашли перебираем ячейки для ускорения
+                    CellType cellType = c.getCellType();
+                    switch (cellType) { // Вычисляем тип ячейки
+                        case STRING: { // только если строка
+                            String dataC = c.getStringCellValue(); // получим строку из ячейки
+                            for (int i = 0; i < nameRow.length; ++i) { // прогоняем по списку  искомых  
+                                if (dataC.equals(nameRow[i])) { // ПРоверяем на совпадения обозначений столбоц если есть совпадения то со следующей строки данные
+                                    findColumnSig = true; // выставили флаг в то что нашли
+                                    System.out.println("Addres f cell " + c.getAddress()); // адрес ячейки
+                                    if (maxRowNum <= r.getRowNum()) {
+                                        maxRowNum = r.getRowNum(); // адрес строки с найденным столбцом они мугут быть разные по этому максимальное берем
+                                        startReadData = maxRowNum + 1; // +1 так как данные начинаются со следующей строки
+                                    }
+                                    break; // прерываем массив поиска так как нашли исходное
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    ++tmpI;
+                }
+            }
+            findColumnSig = false;
+        }
+        return maxRowNum;
+    }
 }
