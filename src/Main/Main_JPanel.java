@@ -259,13 +259,23 @@ public class Main_JPanel extends javax.swing.JFrame {
         List<String> listColumn = DB.selectColumns(selectT);
         ArrayList<String> columns = new ArrayList<>();
         String tmpStr = " ";
-        int j = 0;
-
-        for (String s : listColumn) {
-
-            columns.add(s);
-            ++j;
+        for (String s : listColumn) { // ограничение что не выводим из столбцов
+            String[] remCol = {"UUID", "uuid"}; // список исключений
+            boolean find = false;
+            for (String rC : remCol) {
+                if (rC.equals(s)) {
+                    find = true;
+                    break;
+                }
+            }
+            if (find) {
+                find = false;
+                continue;
+            } else {
+                columns.add(s);
+            }
         }
+                
         System.out.println(tmpStr);
         jTextArea1.setText(tmpStr);
 
