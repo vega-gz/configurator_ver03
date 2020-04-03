@@ -9,21 +9,27 @@
 		</GenData>
 	
         <EXEL>
-            <V nameColumnPos="TAG_NAME_PLC" />
-            <F nameColumnPos="Наименование сигнала" />
-            <D nameColumnPos="Диапазон мин." />
-            <A nameColumnPos="Диапазон макс." />
-            <D nameColumnPos="Единица измерения" />
-            <T nameColumnPos="Тип сигнала" />
-            <H nameColumnPos="Адрес_1" />
-            <Q nameColumnPos="Адрес_2" />
-            <BC nameColumnPos="Уст" />
-            <BA nameColumnPos="Слот" />
-            <CA nameColumnPos="Канал" />
-            <G nameColumnPos="УСТ_НИЖН_АВАР" />
-            <H nameColumnPos="УСТ_НИЖН_ПРЕД" />
-            <F nameColumnPos="УСТ_ВЕРХ_ПРЕД" />
-            <F nameColumnPos="УСТ_ВЕРХ_АВАР" />
+            <F nameColumnPos="Наименование" />
+            <W nameColumnPos="Сокр_Наименование" />
+            <U nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Диапазон_мин" type="Number"/>
+            <H nameColumnPos="Диапазон_макс" type="Number" />
+            <AA nameColumnPos="АЦПмин" type="Number"/>
+            <AB nameColumnPos="АЦПмакс" type="Number" />
+            <I nameColumnPos="Единица_измерения" />
+            <J nameColumnPos="Тип_датчика" />
+            <K nameColumnPos="Акт_пас_НО_НЗ" />
+            <L nameColumnPos="Адрес_1"/>
+            <M nameColumnPos="Адрес_2" />
+            <N nameColumnPos="Адрес_3" />
+            <Q nameColumnPos="Устройство" type="Int"/>
+            <R nameColumnPos="Слот"  type="Int"/>
+            <S nameColumnPos="Канал"  type="Int"/>
+            <Y nameColumnPos="Точность"  type="Int"/>
+            <AE nameColumnPos="УСТНИЖНАВАР" type="Number"/>
+            <AF nameColumnPos="УСТНИЖНПРЕД" type="Number"/>
+            <AG nameColumnPos="УСТВЕРХПРЕД" type="Number"/>
+            <AH nameColumnPos="УСТВЕРХАВАР" type="Number"/>
         </EXEL>
         </ai>
 	<ao excelSheetName="AO">

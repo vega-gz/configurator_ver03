@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import XMLTools.UUID;
+import XMLTools.XMLSAX;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,12 +36,13 @@ public class DataBase {
     String USER = "postgres";
     //String PASS = "postgres";
     String PASS = "Solovin2";
+    String FILECONFIG = "Config.xml";
     
     // Делаем синглтон
     private static DataBase instance;
 
     private  DataBase() { // для синглтона в однопоточном варианте
-        connectionToBase();
+        //connectionToBase();
     }
 
     //  синглтон не нужен а вот нужен
@@ -48,7 +50,7 @@ public class DataBase {
 
         if (instance == null) {		//если объект еще не создан
             instance = new DataBase();	//создать новый объект
-            instance.connectionToBase(); // И сразу подключаемся к базе
+            instance.connectionToBaseconfig(); // И сразу подключаемся к базе
         }
         return instance;		// вернуть ранее созданный объект
     }
@@ -63,9 +65,8 @@ public class DataBase {
     }
     
     // --- Читает конфигурацию для подключения к базе ---
-    String[] getConfig(){
-        
-        return null;
+    private void connectionToBaseconfig(){
+        new XMLSAX().setConnectBaseConfig(FILECONFIG); // так читаем файл и подключаемся к базе
     }
     // не правильно (так данные передавать это боль)
     private String[] getInfoCurrentConnect(){
@@ -95,7 +96,7 @@ public class DataBase {
             e.printStackTrace();
             return;
         }
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
+        System.out.println("PostgreSQL JDBC Driver successfully connected" + "Base:" + BASE);
         try {
             connection = DriverManager
                     .getConnection(DB_URL, USER, PASS);
