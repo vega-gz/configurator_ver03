@@ -29,13 +29,13 @@ public class DataBase {
     Connection connection = null;
     private ArrayList<String[]> currentSelectTable;
     private String[] columns;
-    String URL = "jdbc:postgresql://192.168.10.41:5432/";
-    String BASE = "test";
+    String URL = ""; //jdbc:postgresql://192.168.10.41:5432/";
+    String BASE = ""; //test";
     String DB_URL = URL + BASE;
     //String USER = "mutonar";
-    String USER = "postgres";
+    String USER = ""; //postgres";
     //String PASS = "postgres";
-    String PASS = "Solovin2";
+    String PASS = ""; //Solovin2";
     String FILECONFIG = "Config.xml";
     
     // Делаем синглтон
@@ -96,10 +96,10 @@ public class DataBase {
             e.printStackTrace();
             return;
         }
-        System.out.println("PostgreSQL JDBC Driver successfully connected" + "Base:" + BASE);
+        System.out.println("PostgreSQL JDBC Driver successfully connected" + "Base:" + URL + BASE);
         try {
             connection = DriverManager
-                    .getConnection(DB_URL, USER, PASS);
+                    .getConnection(URL + BASE, USER, PASS);
 
         } catch (SQLException e) {
             System.out.println("Connection Failed");
