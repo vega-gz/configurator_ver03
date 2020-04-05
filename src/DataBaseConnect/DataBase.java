@@ -138,6 +138,19 @@ public class DataBase {
     //-------------- CREATE TABLE ---------------
     public void createTable(String name_table,  ArrayList<String> listNameColum) {
         int number_colum = listNameColum.size();
+        //проверка если есть такая таблица удаляем ее
+        {
+        for(String s: getviewTable()){ // Получаем список таблиц и пробежимся сравнивая их
+            if(name_table.equalsIgnoreCase(s)){
+                System.out.println("Finding exist table and droping: " + name_table);
+                ArrayList<String> dropingTable = new ArrayList();
+                //new ArrayList<String>().add(name_table); // так передать нельзя, разобраться 
+                dropingTable.add(name_table);
+                dropTable(dropingTable); // так удаляем по тому что изначально был список очищения(можно сделать отдельно)
+                break;
+            }
+        }
+        }
         String sql = null;
         connectionToBase(); // вызов Фукция подключения к базе
         //переменная для анализа
@@ -169,9 +182,9 @@ public class DataBase {
                  }*/
                 nc_stringing += ")";
             }
-            break; //до этого до скобки
+            break;
             default:
-                if (!listNameColum.isEmpty()) { // если не передели ни каких значений в таком варианте оно не зайдет сюда
+                if (!listNameColum.isEmpty()) { // это теперь основное.
                     int tmp_cell = 0;
                     // -- create table max lengt + name table from file cells
                     nc_stringing = " (UUID TEXT NOT NULL";
@@ -217,7 +230,6 @@ public class DataBase {
             System.out.println(sql); // смотрим какой запрос на соз
             e.printStackTrace();
             return;
-
         }
     }
     // --- Вставка данных (название таблицы, список столбцов, данные)---

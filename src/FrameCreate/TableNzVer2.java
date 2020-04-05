@@ -40,7 +40,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
      * Creates new form Ефи
      */
 
-    public TableNzVer2(ArrayList<ArrayList> listData) {
+    public TableNzVer2(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
         this.listData = listData;
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
         initComponents();
@@ -63,11 +63,9 @@ public class TableNzVer2 extends javax.swing.JPanel {
     }
 
     // --- таблица с Подключение к базе и какой таблице --- 
-    TableModel getModelTable(DataBase workbase, String nameTable, ArrayList<ArrayList> listData) {
-        // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
+    TableModel getModelTable(DataBase workbase, String nameTable, ArrayList<ArrayList> listData) { // Надо передавать сюда и названи столбцов
         String[] columnDop = {"Выбор"};// до поля для галок или еще чего
         String[] columnNames = StructSelectData.getColumns();
-        // чет без анонимного класса ни как =(
         //String[] getResultColumn (){};
         final String[] resultColumn;// = null;
         Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
