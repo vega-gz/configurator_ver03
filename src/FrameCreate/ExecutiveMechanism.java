@@ -333,7 +333,8 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             case (10): {  // если нажали Enter
                 String[] dataToParser = new String[]{"ON", "OF", "upp", "bp"}; // Список окончания сигналов
                 String[] egnoredList = new String[]{"NULL", "Res_", "Res"}; // Список окончания сигналов
-                String[] nameColumnList = new String[]{"tag_name", "Наименование сигнала"}; // наименование колонок для выборки из базы
+                //String[] nameColumnList = new String[]{"tag_name", "Наименование сигнала"}; // наименование колонок для выборки из базы
+                String[] nameColumnList = new String[]{"tag_name_PLC", "Наименование"}; // наименование колонок для выборки из базы
                 ArrayList<ArrayList> listTagName = new ArrayList();
                 ArrayList<String> listColumnSelect = new ArrayList();
                 for (String nameTable : addElementTable1) { // пробегаем так по списку справа
@@ -356,7 +357,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                     }
                 }
                 if (listTagName != null && listTagName.size() > 1) { // если из выбранного что то есть то
-                    // пробегаем по листам и ищем совпадения(рабочий вариант но не равнивает элементы в списках а только в самом себе)
+                    // пробегаем по листам и ищем совпадения(рабочий вариант но не сравнивает элементы в списках а только в самом себе)
                     ArrayList<String[]> listDO = listTagName.get(0);
                     ArrayList<String[]> listDI = listTagName.get(1);
                     ArrayList<ArrayList> findingTagname = new ArrayList();// Еще листы для хранения найденного
