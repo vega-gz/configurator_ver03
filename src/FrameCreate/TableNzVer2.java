@@ -36,10 +36,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
     DataBase workbase = null; // создаем пустой запрос к базе
     ArrayList<ArrayList> listData = null; // Массив для  перебора в запросе
 
-    /**
-     * Creates new form Ефи
-     */
-
+    
     public TableNzVer2(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
         this.listData = listData;
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
@@ -65,19 +62,26 @@ public class TableNzVer2 extends javax.swing.JPanel {
     // --- таблица с Подключение к базе и какой таблице --- 
     TableModel getModelTable(DataBase workbase, String nameTable, ArrayList<ArrayList> listData) { // Надо передавать сюда и названи столбцов
         String[] columnDop = {"Выбор"};// до поля для галок или еще чего
-        String[] columnNames = StructSelectData.getColumns();
-        //String[] getResultColumn (){};
-        final String[] resultColumn;// = null;
-        Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
+         final String[] resultColumn;// = null;
+        // вынужденная мера пока что
+        String[] columnNames;
+        if (StructSelectData.getColumns() != null){
+            columnNames = StructSelectData.getColumns();
+        } else columnNames = null;
+        Object[][] data;
+        if (StructSelectData.getColumns() != null){
+            data = StructSelectData.getcurrentSelectTable(); // От куда беру данные( а вот тут вопрос)
+        } else data = null;
+        
         Object[] streamArray;
         Object[] streamNull = new Object[1];
         streamNull[0] = null; // нулевая первая ячейки
-        Object[][] tmp2 = null;
+        Object[][] tmp2 = null; // Это данные в самой таблице
 
-        if (listData != null) { // так преаразуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
+        if (listData != null) { // так преабазуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
             tmp2 = new Object[listData.size()][]; // Сколько строк
             String[] nameFromList = null;
-            int colColumn = 0;
+            int colColumn = 0; // количество столбцов которое будет в таблице
             for (ArrayList list : listData) {// пробежать узнать максивальное что бы построить кол столбцов
                 if (list.size() > colColumn) {
                     colColumn = list.size();
@@ -87,11 +91,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
             for (int i = 0; i < massColumnList.length; ++i) {
                 massColumnList[i] = "data" + Integer.toString(i); // Название столбцов
             }
-
             for (int i = 0; i < listData.size(); ++i) {
-//                for (Iterator it = list.iterator(); it.hasNext();) {
-//                    String s = (String) it.next();
-//                }
                 ArrayList<String> list = listData.get(i);
                 String[] sList = new String[list.size()];
                 for (int j = 0; j < list.size(); ++j) {
@@ -99,7 +99,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
                 }
                 //sList = (String[]) list.toArray(); // принудительно преобразуем
                 // прикручиваем к данным
-                streamArray = new Object[data[i].length + 1];
+                streamArray = new Object[colColumn + 1];
                 Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
                 tmp2[i] = testStream;
             }
@@ -113,8 +113,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
                 tmp2[i] = testStream;
             }
         }
-        // название столбцов resultColumn
-        return new DefaultTableModel(tmp2, resultColumn) {
+        return new DefaultTableModel(tmp2, resultColumn) { // название столбцов resultColumn
             @Override
             public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
                 Class clazz = String.class;
