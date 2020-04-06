@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
 import XMLTools.UUID;
-
+import DataBaseConnect.*;
 /**
  *
  * @author cherepanov
@@ -278,8 +278,8 @@ public class FrameTabel extends javax.swing.JPanel {
                         createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal3, UUID_Type3, UUID_Parent3);
                         createXMLSax.runBasecreateTypeAll(filepatch, nameTable, nameSignal4, UUID_Type4, UUID_Parent4);
 
-//                        createXMLSax.runBasecreateTypeAll(nameTable, nameSignal5, filepatch, TypeAI_DRV);
-//                        createXMLSax.runBasecreateTypeAll(nameTable, nameSignal6, filepatch, TypeDI_DRV);
+                        createXMLSax.runBasecreateTypeAll(nameTable, nameSignal5, filepatch, TypeAI_DRV);
+                        createXMLSax.runBasecreateTypeAll(nameTable, nameSignal6, filepatch, TypeDI_DRV);
 
                         break;
                     case "ao":
