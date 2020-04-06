@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
 import XMLTools.UUID;
-
+import DataBaseConnect.*;
 /**
  *
  * @author cherepanov
