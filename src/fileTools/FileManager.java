@@ -8,6 +8,7 @@ package fileTools;
 import globalData.globVar;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,19 +16,24 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //import main.globVar;
 public class FileManager {
+
 
     static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
@@ -56,6 +62,7 @@ public class FileManager {
         String currentDat = dateFormat.format(cal.getTime());
         copyFile(source, source + "_" + currentDat);
     }
+
     public void backupFile(String source, String destDir) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
         Calendar cal = Calendar.getInstance();
@@ -137,6 +144,25 @@ public class FileManager {
         listAllPath.clear();
         pathAllDir(dir);
         return listAllPath;
+    }
+
+    // --- Логирование ошибок и другая информация ---
+    public static void logger(String s) {
+        String nameF = globVar.logFile;
+        File logF = new File(nameF); 
+        if(!logF.exists()){ // нет файла то создаем
+            try {
+            logF.createNewFile();
+            } catch (IOException ex) {
+                System.out.println("Error create log file " + nameF);
+            }
+        }
+        s = s + "\n";
+        try {
+            Files.write(Paths.get(nameF), s.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            System.out.println("Error write log file " + nameF);
+        }
     }
 
     //public File dir;

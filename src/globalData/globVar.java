@@ -14,6 +14,7 @@ import java.util.Date;
  * @author lev
  */
 public class globVar {
+        public static String logFile = "configurer.log";
 	public static String linSep;
 	public static String myDir;
 	public static String desDir;
