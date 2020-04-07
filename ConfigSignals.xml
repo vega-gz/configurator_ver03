@@ -2,30 +2,22 @@
 <ConfigSignals>
 	<SetPoints excelSheetName="ANB">
 		<GenData>
-			<T_ANB Type="BOOL" UUID="2DDB683E4D45F9B508499F80602D0FCA"/>
-			<T_GPA_SP_Settings Type="F35CE5474F9ED831D3CDE984BA397134" UUID="850078F34C5F187E4983CC9A12AEDAD8"/>
+			<T_ANB Type="BOOL"/>
+			<T_GPA_SP_Settings Type="T_SP_Settings"/>
 		</GenData>
         <EXEL>
-			<B nameColumnPos="Параметр"/>
-            <C nameColumnPos="Сокр_Наименование" />
-            <E nameColumnPos="DB" type="VarName"/>
             <F nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <C nameColumnPos="RuNamePostfix" />
+            <E nameColumnPos="DB" type="VarName"/>
             <G nameColumnPos="TNpostfix"/>
             <D nameColumnPos="limit" type="Number"/>
             <H nameColumnPos="direct" type="boolean"/>
             <I nameColumnPos="delay" type="Number"/>
             <J nameColumnPos="postfix" type="VarName"/>
-            <J nameColumnPos="defVal" type="Int"/>
+            <K nameColumnPos="defVal" type="Int"/>
         </EXEL>
 	</SetPoints>
 	<ai excelSheetName="AI">
-		<GenData>
-			<T_GPA_AI_DRV Type="REAL" UUID="F5AC236A1D4D9D837E0797ADA7697A06"/>
-			<T_GPA_AI_Internal Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="006A03A8C74962DC3E0724A92DA854AF"/>
-			<T_GPA_AI_Setting Type="668FE9B94A603427C8EDBBB8917A7594" UUID="E10A238347B7C26C7C1FDFA77F91B1F5"/>
-			<T_GPA_AI_FromHMI Type="187F76AE49C59E950138DDA3067101D0" UUID="2BDAC6F849D13DED3A2A5B9190720FD7"/>
-			<T_GPA_AI_ToHMI Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D48C3F1549ACD994A366A1A51FE00772"/>
-		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
             <W nameColumnPos="Сокр_Наименование" />
@@ -48,13 +40,58 @@
             <AF nameColumnPos="УСТНИЖНПРЕД" type="Number"/>
             <AG nameColumnPos="УСТВЕРХПРЕД" type="Number"/>
             <AH nameColumnPos="УСТВЕРХАВАР" type="Number"/>
+            <AI nameColumnPos="loLim" type="Number"/>
+            <AJ nameColumnPos="hiLim" type="Number"/>
+            <AK nameColumnPos="loBrk" type="Number"/>
+            <AL nameColumnPos="hiBrk" type="Number"/>
+            <AM nameColumnPos="ROC" type="Number"/>
+            <AN nameColumnPos="recoveryTime" type="Number"/>
+            <AO nameColumnPos="tau" type="Number"/>
         </EXEL>
 		<APS>
-            <aiSP nameSP="_Av" lim="AE" db="GPA_AI_ToHMI." postfix=".PV" direct="true" delay="1.0"/>
-            <aiSP nameSP="_Pv" lim="AF" db="GPA_AI_ToHMI." postfix=".PV" direct="true" delay="1.0"/>
-            <aiSP nameSP="_Pn" lim="AG" db="GPA_AI_ToHMI." postfix=".PV" direct="false" delay="1.0"/>
-            <aiSP nameSP="_An" lim="AE" db="GPA_AI_ToHMI." postfix=".PV" direct="false" delay="1.0"/>
+            <aiSP nameSP="_Av" lim="AE" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="true" delay="1.0"/>
+            <aiSP nameSP="_Pv" lim="AF" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="true" delay="1.0"/>
+            <aiSP nameSP="_Pn" lim="AG" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="false" delay="1.0"/>
+            <aiSP nameSP="_An" lim="AE" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="false" delay="1.0"/>
 		</APS>
+		<GenData>
+			<T_GPA_AI_DRV Type="REAL" UUID="F5AC236A1D4D9D837E0797ADA7697A06"/>
+			<T_GPA_AI_Internal Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="006A03A8C74962DC3E0724A92DA854AF"/>
+			<T_GPA_AI_Setting Type="668FE9B94A603427C8EDBBB8917A7594" UUID="E10A238347B7C26C7C1FDFA77F91B1F5"/>
+			<T_GPA_AI_FromHMI Type="187F76AE49C59E950138DDA3067101D0" UUID="2BDAC6F849D13DED3A2A5B9190720FD7"/>
+			<T_GPA_AI_ToHMI Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D48C3F1549ACD994A366A1A51FE00772"/>
+		</GenData>
+		<GenCode>
+			<Function fileName="A_Algorithm.iec_st" name="AI_init">
+				<arguments>
+					<arg><text t="GPA_AI_Settings."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><dbd col="Диапазон_мин"/></arg>
+					<arg><dbd col="Диапазон_макс"/></arg>
+					<arg><dbd col="АЦПмин"/></arg>
+					<arg><dbd col="АЦПмакс"/></arg>
+					<arg><dbd col="loLim"/></arg>
+					<arg><dbd col="hiLim"/></arg>
+					<arg><dbd col="loBrk"/></arg>
+					<arg><dbd col="hiBrk"/></arg>
+					<arg><dbd col="ROC"/></arg>
+					<arg><dbd col="recoveryTime"/></arg>
+					<arg><text t="repTime"/></arg>
+					<arg><dbd col="tau"/></arg>
+					<arg><npp/></arg>
+				</arguments>
+				<comment><dbd col="Наименование"/></comment>
+			</Function>
+			<Function fileName="A_Algorithm.iec_st" name="AI_Processing">
+				<arguments>
+					<arg><text t="GPA_AI_DRV."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_Settings."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_FromHMI."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_ToHMI."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_Internal."/><dbd col="TAG_NAME_PLC"/></arg>
+				</arguments>
+				<comment><dbd col="Наименование"/></comment>
+			</Function>
+		</GenCode>
 	</ai>
 	<ao excelSheetName="AO">
 		<GenData>
