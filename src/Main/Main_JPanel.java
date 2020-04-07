@@ -266,7 +266,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-
+    // --- Метод реагирования на выбор поля из списка таблиц ---
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String selectT = (String) jComboBox1.getSelectedItem();
         //DB.connectionToBase();
@@ -286,7 +286,7 @@ public class Main_JPanel extends javax.swing.JFrame {
                 find = false;
                 continue;
             } else {
-                columns.add(s);
+                columns.add(s); // конечный список столбцов к запросу базы
             }
         }
                 
@@ -303,21 +303,16 @@ public class Main_JPanel extends javax.swing.JFrame {
             signal = "dies_di";
         }
 
-        jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали
-        ArrayList<String[]> dataFromDb = new ArrayList<>();//создание списка 
-        //String[] columns = {"uuid_plc","colum_18","Наименование сигнала"}; // тут у нас что отоброжать 
+        jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали 
         String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
-        //  DB.connectionToBase(url,pass,user);
-        DB.getData(selectElem, columns); //внесли данные в сущность 
         StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
-        dataFromDb = DB.getcurrentSelectTable();
-
+        
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
-        FrameTabel frameTable = new FrameTabel(selectT);
+        FrameTabel frameTable = new FrameTabel(selectT, columns); // Вызов класса Название таблицы и данные для нее
         JFrame frame = new JFrame();
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
