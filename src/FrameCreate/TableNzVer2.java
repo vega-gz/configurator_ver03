@@ -102,6 +102,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
         } else {
             if (listData != null) { // так преабазуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
                 String[] nameFromList = null;
+                tmp2 = new Object[listData.size()][]; // Сколько строк
                 int colColumn = 0; // количество столбцов которое будет в таблице
                 for (ArrayList list : listData) {// пробежать узнать максивальное что бы построить кол столбцов
                     if (list.size() > colColumn) {
