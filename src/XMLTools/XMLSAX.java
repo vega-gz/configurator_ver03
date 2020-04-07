@@ -649,7 +649,7 @@ public class XMLSAX {
         } catch (IOException ex) {
             Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Ошибка парсинга файлов");
         }
     }
 
