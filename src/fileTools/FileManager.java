@@ -34,9 +34,6 @@ import java.util.logging.Logger;
 //import main.globVar;
 public class FileManager {
 
-    public static void main(String[] arg) {
-        FileManager.logger("test");
-    }
 
     static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
