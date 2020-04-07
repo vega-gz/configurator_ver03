@@ -615,20 +615,20 @@ public class DataBase {
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                         String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование сигнала");
-                        String RangeMin = rs.getString("Диапазон мин.");
-                        String RangeMax = rs.getString("Диапазон макс.");//field[4]
-                        String Unit = rs.getString("Единица измерения");
-                        String sigType = rs.getString("Тип сигнала");
+                        String namesig = rs.getString("Наименование");
+                        String RangeMin = rs.getString("Диапазон_мин");
+                        String RangeMax = rs.getString("Диапазон_макс");//field[4]
+                        String Unit = rs.getString("Единица_измерения");
+                        String sigType = rs.getString("Тип_датчика");
                         String Adres_1 = rs.getString("Адрес_1");
                         String Adres_2 = rs.getString("Адрес_2");
-                        String Device = rs.getString("Уст");//field[9]
+                        String Device = rs.getString("Устройство");//field[9]
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
-                        String An = rs.getString("УСТ_НИЖН_АВАР");
-                        String Pn = rs.getString("УСТ_НИЖН_ПРЕД");
-                        String Pv = rs.getString("УСТ_ВЕРХ_ПРЕД");
-                        String Av = rs.getString("УСТ_ВЕРХ_АВАР");
+                        String An = rs.getString("УСТНИЖНАВАР");
+                        String Pn = rs.getString("УСТНИЖНПРЕД");
+                        String Pv = rs.getString("УСТВЕРХПРЕД");
+                        String Av = rs.getString("УСТВЕРХАВАР");
 
                         String[] str = {TypeADC, id, namesig, RangeMax, RangeMin, Unit, sigType, Adres_1, Adres_2, Device, Slot, Channel, An, Pn, Pv, Av};
                         selectData.add(str);
@@ -648,13 +648,13 @@ public class DataBase {
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                         String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование сигнала");
-                        String RangeMin = rs.getString("Диапазон мин.");
-                        String RangeMax = rs.getString("Диапазон макс.");//field[4]
-                        String Unit = rs.getString("Единица измерения");
+                        String namesig = rs.getString("Наименование");
+                        String RangeMin = rs.getString("Диапазон_мин");
+                        String RangeMax = rs.getString("Диапазон_макс");//field[4]
+                        String Unit = rs.getString("Единица_измерения");
                         String Adres_1 = rs.getString("Адрес_1");
                         String Adres_2 = rs.getString("Адрес_2");
-                        String Device = rs.getString("Уст");//field[9]
+                        String Device = rs.getString("Устройство");//field[9]
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
 
@@ -676,15 +676,14 @@ public class DataBase {
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                         String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование сигнала");
-                        String RangeMin = rs.getString("Диапазон мин.");
-                        String RangeMax = rs.getString("Диапазон макс.");//field[4]
-                        String sigType = rs.getString("Тип сигнала");
-                        String Device = rs.getString("Уст");//field[9]
+                        String namesig = rs.getString("Наименование");
+                        
+                        String sigType = rs.getString("Тип_сигнала");
+                        String Device = rs.getString("Устройство");//field[9]
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
 
-                        String[] str = {TypeADC, id, namesig, RangeMax, sigType, RangeMin, Device, Slot, Channel};
+                        String[] str = {TypeADC, id, namesig, sigType,  Device, Slot, Channel};
                         selectData.add(str);
                     }
                     rs.close();
@@ -702,11 +701,11 @@ public class DataBase {
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                         String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование сигнала");
-                        String sigType = rs.getString("Тип сигнала");
+                        String namesig = rs.getString("Наименование");
+                        String sigType = rs.getString("Тип_сигнала");
                         String Adres_1 = rs.getString("Адрес_1");
                         String Adres_2 = rs.getString("Адрес_2");
-                        String Device = rs.getString("Уст");//field[9]
+                        String Device = rs.getString("Устройство");//field[9]
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
 

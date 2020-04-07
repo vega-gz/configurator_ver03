@@ -1,4 +1,4 @@
-package XMLTools;
+  package XMLTools;
 
 import XMLTools.RemoveDTDFromSonataFile;
 import configurator.StructSelectData;
