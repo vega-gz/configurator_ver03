@@ -31,7 +31,11 @@ import DataBaseConnect.*;
 public class FrameTabel extends javax.swing.JPanel {
 
     Main_JPanel mj = new Main_JPanel();
-
+        String nameTable = "";
+    private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
+    private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
+    TableModel tableFrameModel = null;
+/*
     int filepath;
     String filepatch;
     String nameTable = "";
@@ -71,11 +75,31 @@ public class FrameTabel extends javax.swing.JPanel {
     private final String UUIDSourceNameRU = "E543C4CD4FF3878196D61C86A31A4CE0";
 
     XMLSAX createXMLSax = new XMLSAX();
-
     DataBase workbase = DataBase.getInstance();
-
+*/
     public FrameTabel(String nameTable) {
         this.nameTable = nameTable;
+        this.tableFrameModel = getTableData();
+        initComponents();
+    }
+
+   
+
+    public FrameTabel(String selectT, ArrayList<String> columns) {
+        this.nameTable = selectT;
+        this.columns = columns;
+        String[] columnstoMass = columns.toArray(new String[columns.size()]); // Преобразование в массив
+        this.dataFromDb = DataBase.getInstance().getData(selectT, columns); // получили данные с базы 
+        //преобразоватьданные для переваривания таблицей
+        ArrayList<ArrayList> listToTable = new ArrayList<>();
+        for (String[] mass :dataFromDb){
+            ArrayList<String> tmpList = new ArrayList<>();
+            for(String s: mass){
+                tmpList.add(s);
+            }
+            listToTable.add(tmpList);
+        }
+        this.tableFrameModel = new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
         initComponents();
     }
 
@@ -96,7 +120,7 @@ public class FrameTabel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(999, 530));
 
-        jTable1.setModel(getTableData());
+        jTable1.setModel(tableFrameModel);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Добавить в мнемосхему");
@@ -158,7 +182,7 @@ public class FrameTabel extends javax.swing.JPanel {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        /*
         JFileChooser fileload = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\ArchNew\\Design");
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         filepath = fileload.showOpenDialog(this);
@@ -234,11 +258,11 @@ public class FrameTabel extends javax.swing.JPanel {
             Logger.getLogger(FrameTabel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
+*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFileChooser fileload = new JFileChooser();
+       /* JFileChooser fileload = new JFileChooser();
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
@@ -338,8 +362,9 @@ public class FrameTabel extends javax.swing.JPanel {
             }
 
         }
-
+*/
     }//GEN-LAST:event_jButton2ActionPerformed
+    
     public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
         // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
         String[] columnDop = {"Выбор"};// до поля для галок или еще чего

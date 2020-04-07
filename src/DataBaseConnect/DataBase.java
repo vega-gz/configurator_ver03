@@ -596,9 +596,6 @@ public class DataBase {
         return columns;
     }*/
 
-    public ArrayList<String[]> getcurrentSelectTable() {
-        return currentSelectTable;
-    }
 
     
     // Гришин метот а может и не один все заменить.
