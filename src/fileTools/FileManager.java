@@ -28,6 +28,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -148,6 +149,8 @@ public class FileManager {
     // --- Логирование ошибок и другая информация ---
     public static void logger(String s) {
         String nameF = globVar.logFile;
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss_yyyy.MM.dd");
+        String currentTime = formatForDateNow.format(new Date());
         File logF = new File(nameF); 
         if(!logF.exists()){ // нет файла то создаем
             try {
@@ -156,7 +159,7 @@ public class FileManager {
                 System.out.println("Error create log file " + nameF);
             }
         }
-        s = s + "\n";
+        s = currentTime + "\t" + s + "\n";
         try {
             Files.write(Paths.get(nameF), s.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
