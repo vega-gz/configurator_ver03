@@ -49,6 +49,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import ReadWriteExcel.RWExcel;
+import fileTools.FileManager;
 
 public class XMLSAX {
 /*
@@ -113,6 +114,12 @@ public class XMLSAX {
         }
         return n;
     }
+    
+    // --- инициализировать документ с путем для его сохранения ---
+     public void docInstance(Document document, String patchWF) {
+        this.patchWF = patchWF;
+        this.document = document;
+     }
 /*
     void createTypeAllSignal(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
         // struct = new Struct(name, All_Random_UUID, All_Random_UUID);//разобраться со вторым рандомом в параметрах(он не должен быть рандомным)
@@ -455,13 +462,13 @@ public class XMLSAX {
         writeDocument();
         
     }
-/*
+
     public void createModuleBox(int xPos, int yPos, Document GraphicsCompositeType, int NumElem, int Ycord, Element FBNetwork, int size) {//xPos4=yPos4
         int x = 1, y = 0;
 
         for (int i = 0; i <= 1; i++) {
             String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")"; //"(x:=0,y:=0)" это позиция графики первой вкладки
-            String uuidFB = getUIID();
+            String uuidFB = UUID.getUIID();
             Element FB = GraphicsCompositeType.createElement("FB");
             String nameBAnpartClone = "TabSignal_" + (NumElem++);//
             FB.setAttribute("Name", nameBAnpartClone);
@@ -512,7 +519,7 @@ public class XMLSAX {
         }
 
     }
-
+/*
     public String getUIID() {
         java.util.UUID uniqueKey = java.util.UUID.randomUUID();
         Date dateNow = new Date();
@@ -580,7 +587,7 @@ public class XMLSAX {
 
         Element GCFBtype = doc.createElement("GraphicsCompositeFBType"); // Наша основа графического элемента
         GCFBtype.setAttribute("Name", GraphName); // тоже цикл с изменения доолжен быть так как по 64 элемента для аналогов
-        GCFBtype.setAttribute("UUID", UUID.getUUID());
+        GCFBtype.setAttribute("UUID", UUID.getUIID());
         Element InterfaceList = doc.createElement("InterfaceList");
         GCFBtype.appendChild(InterfaceList);
         Element EventOutputs = doc.createElement("EventOutputs");
@@ -638,7 +645,7 @@ public class XMLSAX {
 
     
     // --- Запипись в файл структурой XML ---
-   void writeDocument() {
+   public void writeDocument() {
         try {
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();

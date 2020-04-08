@@ -611,7 +611,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String RangeMin = rs.getString("Диапазон_мин");
                         String RangeMax = rs.getString("Диапазон_макс");//field[4]
@@ -644,7 +644,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String RangeMin = rs.getString("Диапазон_мин");
                         String RangeMax = rs.getString("Диапазон_макс");//field[4]
@@ -672,7 +672,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         
                         String sigType = rs.getString("Тип_сигнала");
@@ -697,7 +697,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String sigType = rs.getString("Тип_сигнала");
                         String Adres_1 = rs.getString("Адрес_1");

@@ -81,10 +81,10 @@ public class TableNzVer2 extends javax.swing.JPanel {
         Object[] streamArray;
         Object[] streamNull = new Object[1];
         streamNull[0] = null; // нулевая первая ячейки
-        Object[][] tmp2 = null; // Это данные в самой таблице
+        Object[][] dataInTable = null; // Это данные в самой таблице
         
         if (columns != null) { // если колонки для столбцов базы не пусты то просто инициализируем
-            tmp2 = new Object[listData.size()][]; // Сколько строк
+            dataInTable = new Object[listData.size()][]; // Сколько строк
             //tmp2 = new Object[columns.length][];
             resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columns)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
             for (int i = 0; i < listData.size(); ++i) {
@@ -97,12 +97,12 @@ public class TableNzVer2 extends javax.swing.JPanel {
                     // прикручиваем к данным
                     streamArray = new Object[columns.length + 1]; // длинна объекта +1 галочка
                     Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                    tmp2[i] = testStream;
+                    dataInTable[i] = testStream;
                 }
         } else {
             if (listData != null) { // так преабазуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
                 String[] nameFromList = null;
-                tmp2 = new Object[listData.size()][]; // Сколько строк
+                dataInTable = new Object[listData.size()][]; // Сколько строк
                 int colColumn = 0; // количество столбцов которое будет в таблице
                 for (ArrayList list : listData) {// пробежать узнать максивальное что бы построить кол столбцов
                     if (list.size() > colColumn) {
@@ -124,20 +124,20 @@ public class TableNzVer2 extends javax.swing.JPanel {
                     // прикручиваем к данным
                     streamArray = new Object[colColumn + 1];
                     Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                    tmp2[i] = testStream;
+                    dataInTable[i] = testStream;
                 }
                 resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(massColumnList)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
             } else {
                 resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames)).toArray(String[]::new); // соединяем два массива
-                tmp2 = new Object[data.length][];
+                dataInTable = new Object[data.length][];
                 for (int i = 0; i < data.length; i++) {
                     streamArray = new Object[data[i].length + 1];
                     Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                    tmp2[i] = testStream;
+                    dataInTable[i] = testStream;
                 }
             }
         }
-        return new DefaultTableModel(tmp2, resultColumn) { // название столбцов resultColumn
+        return new DefaultTableModel(dataInTable, resultColumn) { // название столбцов resultColumn
             @Override
             public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
                 Class clazz = String.class;
@@ -194,6 +194,17 @@ public class TableNzVer2 extends javax.swing.JPanel {
                     }
                 }
 
+            }
+             // --- Собственный метод получить данные из таблицы по имени столбца  ---
+            public Object getDataNameColumn(String nameColumn, int row){
+                Object objTable = null;
+                for(int i=0; i<resultColumn.length; ++i){ // Пробегаем по всем нашим именам столбцов как они стоят 
+                    if(nameColumn.equals(resultColumn[i])){ //  нашли совпадение
+                        objTable = getValueAt(i, row);
+                        System.out.println(getValueAt(i, row));
+                    }
+                }
+                return objTable;
             }
         };
     }
@@ -252,10 +263,8 @@ public class TableNzVer2 extends javax.swing.JPanel {
 
 // -- мини меню по мыши первого столбца таблицы---
     class PopUpDemo extends JPopupMenu {
-
         JMenuItem anItem;
         int i1 = 0;
-
         public PopUpDemo() {
             //anItem = new JMenuItem("Click Me!");
             JSlider slider = new JSlider();
@@ -265,18 +274,16 @@ public class TableNzVer2 extends javax.swing.JPanel {
             JMenuItem anItem2;
             anItem2 = new JMenuItem(Integer.toString(value));
             add(anItem2);
-
             slider.addChangeListener(new javax.swing.event.ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
                     int value = ((JSlider) e.getSource()).getValue();
                     //System.out.println(value);
-
                 }
             });
         }
 
-    }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
