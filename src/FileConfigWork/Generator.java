@@ -23,12 +23,12 @@ import org.w3c.dom.Element;
  */
 public class Generator {
 
-    XMLSAX createXMLSax = new XMLSAX();
+    
 
-    public void GenSigType(String nameTable,TableNzVer2 tnz,String filepath) throws ParserConfigurationException {
-        
-        String patchF = filepath + "\\" + "имя типа которое надо вытянуть" + ".type";
-        //Iterator<String[]> iter_arg = arg.iterator();
+    public static void GenSigType(String nameTable,TableNzVer2 tnz) throws ParserConfigurationException {
+        XMLSAX createXMLSax = new XMLSAX();
+        String patchF = "путь из файла конфигурации" + "\\" + "имя типа которое надо вытянуть" + ".type";
+       
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         Document doc = factory.newDocumentBuilder().newDocument();

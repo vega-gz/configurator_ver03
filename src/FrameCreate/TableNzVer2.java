@@ -282,7 +282,6 @@ public class TableNzVer2 extends javax.swing.JPanel {
                 }
             });
         }
-
     }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
