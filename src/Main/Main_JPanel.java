@@ -449,7 +449,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
         DataBase.getInstance();// подключится к базе конфигом другого не дано
         jComboBox1.setModel(getComboBoxModel());
-        JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
+        //JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
 
     }//GEN-LAST:event_jButton2ActionPerformed
     
