@@ -39,13 +39,14 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
     String url, nameProject, user, pass;
-    //String FILECONFIG = "Config.xml";
+   
     RWExcel excel = new RWExcel();
     String path;
     DataBase DB = DataBase.getInstance();
     public String signal;
     ArrayList<String> listDropT = new ArrayList();
-    //ReadConfigFile readConfig = new ReadConfigFile();
+    
+    
 
     XMLSAX createXMLSax = new XMLSAX();
     int filepath;
@@ -292,6 +293,8 @@ public class Main_JPanel extends javax.swing.JFrame {
                 
         System.out.println(tmpStr);
         jTextArea1.setText(tmpStr);
+        
+        
 
         if (selectT.equals("dies_ai")) {
             signal = "dies_ai";
