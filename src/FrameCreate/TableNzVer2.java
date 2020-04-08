@@ -83,7 +83,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
         streamNull[0] = null; // нулевая первая ячейки
         Object[][] tmp2 = null; // Это данные в самой таблице
         
-        if (columns != null) { // если колонки для столбцов базы не пусты то просто инициаоизируем
+        if (columns != null) { // если колонки для столбцов базы не пусты то просто инициализируем
             tmp2 = new Object[listData.size()][]; // Сколько строк
             //tmp2 = new Object[columns.length][];
             resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columns)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
