@@ -34,7 +34,6 @@ import java.util.logging.Logger;
 //import main.globVar;
 public class FileManager {
 
-
     static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
     // --- копирование файла используя поток ---
