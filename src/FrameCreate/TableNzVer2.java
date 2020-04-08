@@ -35,82 +35,106 @@ public class TableNzVer2 extends javax.swing.JPanel {
     String nameTable = null;
     DataBase workbase = null; // создаем пустой запрос к базе
     ArrayList<ArrayList> listData = null; // Массив для  перебора в запросе
+    String[] columns = null; // Колонки таблицы
 
-    
     public TableNzVer2(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
         this.listData = listData;
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
         initComponents();
     }
 
-    public TableNzVer2() {
+    public TableNzVer2() { // обязательно что то должно быть, так получаем Tableodel
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
-        initComponents();
+        //initComponents();
+         this.workbase = DataBase.getInstance();
     }
 
-    public TableNzVer2(DataBase workbase, String nameTable) {
-        this.workbase = workbase;
+    public TableNzVer2(String nameTable) {
         this.nameTable = nameTable;
+        this.workbase = DataBase.getInstance();
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
         initComponents();
     }
 
     TableModel getModelTable() {
-        return getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
+        return getModelTable(nameTable, columns, listData); // вызываем функцию с пустым запросом к базе
     }
 
     // --- таблица с Подключение к базе и какой таблице --- 
-    TableModel getModelTable(DataBase workbase, String nameTable, ArrayList<ArrayList> listData) { // Надо передавать сюда и названи столбцов
+    TableModel getModelTable(String nameTable, String[] columns, ArrayList<ArrayList> listData) { // Надо передавать сюда и названи столбцов
         String[] columnDop = {"Выбор"};// до поля для галок или еще чего
-         final String[] resultColumn;// = null;
+        final String[] resultColumn;// = null;
         // вынужденная мера пока что
         String[] columnNames;
-        if (StructSelectData.getColumns() != null){
+        if (StructSelectData.getColumns() != null) {
             columnNames = StructSelectData.getColumns();
-        } else columnNames = null;
+        } else {
+            columnNames = null;
+        }
         Object[][] data;
-        if (StructSelectData.getColumns() != null){
+        if (StructSelectData.getColumns() != null) {
             data = StructSelectData.getcurrentSelectTable(); // От куда беру данные( а вот тут вопрос)
-        } else data = null;
-        
+        } else {
+            data = null;
+        }
+
         Object[] streamArray;
         Object[] streamNull = new Object[1];
         streamNull[0] = null; // нулевая первая ячейки
         Object[][] tmp2 = null; // Это данные в самой таблице
-
-        if (listData != null) { // так преабазуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
+        
+        if (columns != null) { // если колонки для столбцов базы не пусты то просто инициаоизируем
             tmp2 = new Object[listData.size()][]; // Сколько строк
-            String[] nameFromList = null;
-            int colColumn = 0; // количество столбцов которое будет в таблице
-            for (ArrayList list : listData) {// пробежать узнать максивальное что бы построить кол столбцов
-                if (list.size() > colColumn) {
-                    colColumn = list.size();
-                }
-            }
-            String[] massColumnList = new String[colColumn]; // Масив длинной колонок из листа
-            for (int i = 0; i < massColumnList.length; ++i) {
-                massColumnList[i] = "data" + Integer.toString(i); // Название столбцов
-            }
+            //tmp2 = new Object[columns.length][];
+            resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columns)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
             for (int i = 0; i < listData.size(); ++i) {
-                ArrayList<String> list = listData.get(i);
-                String[] sList = new String[list.size()];
-                for (int j = 0; j < list.size(); ++j) {
-                    sList[j] = list.get(j);
+                    ArrayList<String> list = listData.get(i);
+                    String[] sList = new String[list.size()];
+                    for (int j = 0; j < list.size(); ++j) {
+                        sList[j] = list.get(j);
+                    }
+                    //sList = (String[]) list.toArray(); // принудительно преобразуем
+                    // прикручиваем к данным
+                    streamArray = new Object[columns.length + 1]; // длинна объекта +1 галочка
+                    Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
+                    tmp2[i] = testStream;
                 }
-                //sList = (String[]) list.toArray(); // принудительно преобразуем
-                // прикручиваем к данным
-                streamArray = new Object[colColumn + 1];
-                Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                tmp2[i] = testStream;
-            }
-            resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(massColumnList)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
         } else {
-            resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames)).toArray(String[]::new); // соединяем два массива
-            tmp2 = new Object[data.length][];
-            for (int i = 0; i < data.length; i++) {
-                streamArray = new Object[data[i].length + 1];
-                Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                tmp2[i] = testStream;
+            if (listData != null) { // так преабазуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
+                String[] nameFromList = null;
+                tmp2 = new Object[listData.size()][]; // Сколько строк
+                int colColumn = 0; // количество столбцов которое будет в таблице
+                for (ArrayList list : listData) {// пробежать узнать максивальное что бы построить кол столбцов
+                    if (list.size() > colColumn) {
+                        colColumn = list.size();
+                    }
+                }
+                String[] massColumnList = new String[colColumn]; // Масив длинной колонок из листа
+                for (int i = 0; i < massColumnList.length; ++i) {
+                    massColumnList[i] = "data" + Integer.toString(i); // Название столбцов
+                }
+                // --- тут повторяю надо поправить ---
+                for (int i = 0; i < listData.size(); ++i) {
+                    ArrayList<String> list = listData.get(i);
+                    String[] sList = new String[list.size()];
+                    for (int j = 0; j < list.size(); ++j) {
+                        sList[j] = list.get(j);
+                    }
+                    //sList = (String[]) list.toArray(); // принудительно преобразуем
+                    // прикручиваем к данным
+                    streamArray = new Object[colColumn + 1];
+                    Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
+                    tmp2[i] = testStream;
+                }
+                resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(massColumnList)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
+            } else {
+                resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames)).toArray(String[]::new); // соединяем два массива
+                tmp2 = new Object[data.length][];
+                for (int i = 0; i < data.length; i++) {
+                    streamArray = new Object[data[i].length + 1];
+                    Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
+                    tmp2[i] = testStream;
+                }
             }
         }
         return new DefaultTableModel(tmp2, resultColumn) { // название столбцов resultColumn
@@ -216,7 +240,7 @@ public class TableNzVer2 extends javax.swing.JPanel {
             String nameGra = (String) jTable1.getValueAt(row, column); // так получим имя графика
             PopUpDemo menu = new PopUpDemo();
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
-        //}
+            //}
             // перерисовываем таблицу из данных новых графиков
 
             //jTable1.getColumnModel().getColumn(0).setCellRenderer(new myTableCellRenderer_ver2(tmpC));       
