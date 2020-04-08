@@ -23,12 +23,12 @@ import org.w3c.dom.Element;
  */
 public class Generator {
 
-    XMLSAX createXMLSax = new XMLSAX();
+    
 
-    public void GenSigType(String nameTable,TableNzVer2 tnz,String filepath) throws ParserConfigurationException {
+    public static void GenSigType(String nameTable,TableNzVer2 tnz) throws ParserConfigurationException {
         
-        String patchF = filepath + "\\" + "имя типа которое надо вытянуть" + ".type";
-        //Iterator<String[]> iter_arg = arg.iterator();
+        String patchF = "путь из файла конфигурации" + "\\" + "имя типа которое надо вытянуть" + ".type";
+       
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         Document doc = factory.newDocumentBuilder().newDocument();
@@ -45,17 +45,17 @@ public class Generator {
             Field.setAttribute("Type", "тип который вытянуть");//задали тип данных рукописно.Кстати не знаю верно это или нет Но вроде пишет что то
             Field.setAttribute("UUID", "УИД вытянуть");
             Field.setAttribute("Comment", "русское имя вытянуть");
-            Fields.appendChild(Field);//if(){}public static void main(String []args){}
+            Fields.appendChild(Field);
 
         
 
-        try  {
-           createXMLSax.writeDocument(doc, patchF);
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try  {
+//           createXMLSax.writeDocument(doc, patchF);
+//        } catch (TransformerFactoryConfigurationError ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
+//        } catch (TransformerException ex) {
+//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 }
