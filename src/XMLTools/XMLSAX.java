@@ -685,7 +685,7 @@ public class XMLSAX {
     }
 
     // --- Запипись в файл структурой XML ---
-    void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
+    public void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();

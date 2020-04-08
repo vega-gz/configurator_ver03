@@ -35,10 +35,11 @@ public class FrameTabel extends javax.swing.JPanel {
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
     TableModel tableFrameModel = null;
-/*
+    XMLSAX sax=new XMLSAX();
+
     int filepath;
     String filepatch;
-    String nameTable = "";
+  //  String nameTable = "";
     String UUIDHigth = "";
     String Graphname, TypeName, ElemName;
     String UUIDBlockPref, UUIDBlockName;
@@ -76,7 +77,7 @@ public class FrameTabel extends javax.swing.JPanel {
 
     XMLSAX createXMLSax = new XMLSAX();
     DataBase workbase = DataBase.getInstance();
-*/
+
     public FrameTabel(String nameTable) {
         this.nameTable = nameTable;
         this.tableFrameModel = getTableData();
@@ -262,7 +263,10 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       /* JFileChooser fileload = new JFileChooser();
+        
+       // sax.ReadConfig(null, nameTable);
+        
+         JFileChooser fileload = new JFileChooser();
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
@@ -362,7 +366,7 @@ public class FrameTabel extends javax.swing.JPanel {
             }
 
         }
-*/
+
     }//GEN-LAST:event_jButton2ActionPerformed
     
     public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
