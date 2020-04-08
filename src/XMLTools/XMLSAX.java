@@ -753,7 +753,7 @@ public class XMLSAX {
         return finding;
     }
     
-    // --- сформировать даные из конфигугации XML ---
+    // --- сформировать даные из конфигугации XML для чтения Exel---
     public void ReadConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.                
         RWExcel readExel = new RWExcel(pathExel);
         ArrayList<String> it_list_sheet = readExel.get_list_sheet(pathExel); //забираем список листов в файле и строим итератор из них
