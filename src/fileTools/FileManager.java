@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 //import main.globVar;
 public class FileManager {
 
-    static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
+public  static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
     // --- копирование файла используя поток ---
     public void copyFile(String source, String dest) throws IOException {
@@ -147,7 +147,7 @@ public class FileManager {
     }
 
     // --- Логирование ошибок и другая информация ---
-    public static void logger(String s) {
+    public static void loggerConstructor(String s) {
         String nameF = globVar.logFile;
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss_yyyy.MM.dd");
         String currentTime = formatForDateNow.format(new Date());

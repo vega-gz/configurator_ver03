@@ -21,6 +21,7 @@ import XMLTools.UUID;
 import XMLTools.XMLSAX;
 import java.util.HashMap;
 import java.util.Map;
+import fileTools.FileManager;
 
 public class DataBase {
 
@@ -111,11 +112,11 @@ public class DataBase {
     // -------------- CREATE DATABASE -----------
     void createBase(String name) {
         //connectionToBase(); // вызов Фукция подключения к базе
+        String sql = null;
         try {
             //name = name.replace("-", "_").replace(".", "_").replace(" ", "_"); // может понадобиться как в сосздании таблицы
             connection.getAutoCommit();
             connection.setAutoCommit(true);
-            String sql;
             stmt = connection.createStatement();
             sql = "CREATE DATABASE  " + name + ";";
             //" WITH OWNER " + name +
@@ -129,6 +130,7 @@ public class DataBase {
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE BASE");
+            FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
             e.printStackTrace();
             return;
 
