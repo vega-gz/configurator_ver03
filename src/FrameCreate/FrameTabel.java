@@ -25,6 +25,7 @@ import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
 import XMLTools.UUID;
 import DataBaseConnect.*;
+import FrameCreate.TableNzVer2;
 
 /**
  *
@@ -35,7 +36,8 @@ import DataBaseConnect.*;
     String nameTable = "";
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
-    TableModel tableFrameModel = null;
+    //TableModel tableFrameModel = null;
+    TableNzVer2.NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
     XMLSAX sax=new XMLSAX();
 
     int filepath;
@@ -54,7 +56,7 @@ import DataBaseConnect.*;
 
     public FrameTabel(String nameTable) {
         this.nameTable = nameTable;
-        this.tableFrameModel = getTableData();
+        //this.tableFrameModel = getTableData();
         initComponents();
     }
 
@@ -74,7 +76,10 @@ import DataBaseConnect.*;
             }
             listToTable.add(tmpList);
         }
-        this.tableFrameModel = new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
+        this.tableFrameModel = (TableNzVer2.NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
+        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
+        System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
+        System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
         initComponents();
     }
 
