@@ -2,6 +2,7 @@ package FrameCreate;
 
 import XMLTools.XMLSAX;
 
+import fileTools.FileManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,14 +25,14 @@ import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
 import XMLTools.UUID;
 import DataBaseConnect.*;
+
 /**
  *
  * @author cherepanov
  */
-public class FrameTabel extends javax.swing.JPanel {
-
+    public class FrameTabel extends javax.swing.JPanel {
     Main_JPanel mj = new Main_JPanel();
-        String nameTable = "";
+    String nameTable = "";
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
     TableModel tableFrameModel = null;

@@ -30,6 +30,7 @@ import XMLTools.XMLSAX;
 import java.awt.Dimension;
 import DataBaseConnect.*;
 import ReadWriteExcel.WriteXMLsignals;
+import fileTools.FileManager;
 
 /**
  *
@@ -349,6 +350,7 @@ public class Main_JPanel extends javax.swing.JFrame {
                     filepatch = fileload.getSelectedFile().getCanonicalPath();
                 } catch (IOException ex) {
                     Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    FileManager.loggerConstructor("error testing 44352");
 
                 }
 
