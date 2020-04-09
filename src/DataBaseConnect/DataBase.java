@@ -21,6 +21,7 @@ import XMLTools.UUID;
 import XMLTools.XMLSAX;
 import java.util.HashMap;
 import java.util.Map;
+import fileTools.FileManager;
 
 public class DataBase {
 
@@ -111,11 +112,11 @@ public class DataBase {
     // -------------- CREATE DATABASE -----------
     void createBase(String name) {
         //connectionToBase(); // вызов Фукция подключения к базе
+        String sql = null;
         try {
             //name = name.replace("-", "_").replace(".", "_").replace(" ", "_"); // может понадобиться как в сосздании таблицы
             connection.getAutoCommit();
             connection.setAutoCommit(true);
-            String sql;
             stmt = connection.createStatement();
             sql = "CREATE DATABASE  " + name + ";";
             //" WITH OWNER " + name +
@@ -129,6 +130,7 @@ public class DataBase {
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE BASE");
+            FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
             e.printStackTrace();
             return;
 
@@ -611,7 +613,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String RangeMin = rs.getString("Диапазон_мин");
                         String RangeMax = rs.getString("Диапазон_макс");//field[4]
@@ -644,7 +646,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String RangeMin = rs.getString("Диапазон_мин");
                         String RangeMax = rs.getString("Диапазон_макс");//field[4]
@@ -672,7 +674,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         
                         String sigType = rs.getString("Тип_сигнала");
@@ -697,7 +699,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUUID();//генерит рандомный уид который никому не интересен
+                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String sigType = rs.getString("Тип_сигнала");
                         String Adres_1 = rs.getString("Адрес_1");

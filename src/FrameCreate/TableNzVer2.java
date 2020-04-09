@@ -81,10 +81,10 @@ public class TableNzVer2 extends javax.swing.JPanel {
         Object[] streamArray;
         Object[] streamNull = new Object[1];
         streamNull[0] = null; // нулевая первая ячейки
-        Object[][] tmp2 = null; // Это данные в самой таблице
+        Object[][] dataInTable = null; // Это данные в самой таблице
         
-        if (columns != null) { // если колонки для столбцов базы не пусты то просто инициаоизируем
-            tmp2 = new Object[listData.size()][]; // Сколько строк
+        if (columns != null) { // если колонки для столбцов базы не пусты то просто инициализируем
+            dataInTable = new Object[listData.size()][]; // Сколько строк
             //tmp2 = new Object[columns.length][];
             resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columns)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
             for (int i = 0; i < listData.size(); ++i) {
@@ -97,12 +97,12 @@ public class TableNzVer2 extends javax.swing.JPanel {
                     // прикручиваем к данным
                     streamArray = new Object[columns.length + 1]; // длинна объекта +1 галочка
                     Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                    tmp2[i] = testStream;
+                    dataInTable[i] = testStream;
                 }
         } else {
             if (listData != null) { // так преабазуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
                 String[] nameFromList = null;
-                tmp2 = new Object[listData.size()][]; // Сколько строк
+                dataInTable = new Object[listData.size()][]; // Сколько строк
                 int colColumn = 0; // количество столбцов которое будет в таблице
                 for (ArrayList list : listData) {// пробежать узнать максивальное что бы построить кол столбцов
                     if (list.size() > colColumn) {
@@ -124,78 +124,20 @@ public class TableNzVer2 extends javax.swing.JPanel {
                     // прикручиваем к данным
                     streamArray = new Object[colColumn + 1];
                     Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                    tmp2[i] = testStream;
+                    dataInTable[i] = testStream;
                 }
                 resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(massColumnList)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
             } else {
                 resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames)).toArray(String[]::new); // соединяем два массива
-                tmp2 = new Object[data.length][];
+                dataInTable = new Object[data.length][];
                 for (int i = 0; i < data.length; i++) {
                     streamArray = new Object[data[i].length + 1];
                     Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                    tmp2[i] = testStream;
+                    dataInTable[i] = testStream;
                 }
             }
         }
-        return new DefaultTableModel(tmp2, resultColumn) { // название столбцов resultColumn
-            @Override
-            public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
-                Class clazz = String.class;
-                switch (columnIndex) {
-                    case 0:
-                        clazz = Boolean.class;
-                        break;
-                }
-                return clazz;
-            }
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return column == column;
-            }
-
-            @Override
-            public void setValueAt(Object aValue, int row, int column) {
-                // Условие проверки галочки скрывать легенду
-                if (aValue instanceof Boolean && column == 0) {
-                    //System.out.println("Posution - > " + row + " " + aValue);        
-                    Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
-                    rowData.set(0, (boolean) aValue);
-                    fireTableCellUpdated(row, column);
-
-                    try {
-                        // Само действие не реализованно
-                        if ((boolean) aValue == true) {
-                            System.out.println("true");
-                        }
-                        if ((boolean) aValue == false) {
-                            System.out.println("false");
-                        }
-                    } catch (NullPointerException e) {
-                        JOptionPane.showMessageDialog(null, "Трудности с добавлением");
-                    }
-                } else {  // если нет Галки просто обновляем данные
-                    if (workbase != null) { // если вызов без редактирования базы
-                        Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
-                        //String curentCell = (String) rowData.get(column); // получить предыдущие данные
-                        //String ColumnName = jTable1.getColumnName(column); // Имя выделенного столбца
-                        String ColumnName = resultColumn[column];
-                        //int rowTM = jTable1.getRowCount(); // количество строк
-                        //int ColumnTM =  jTable1.getColumnCount();  //Количество столбцов
-                        int ColumnTM = resultColumn.length;
-                        HashMap< String, String> mapDataRow = new HashMap<>(); // элементы для отображения в этих полях
-                        for (int i = 1; i < ColumnTM; ++i) { // Пробежать по строке где изменяются данные и сформировать список для обновления данных в базе c 1 так как там галки
-                            //mapDataRow.put(jTable1.getColumnName(i), (String) rowData.get(i)); // Формируем список данных принудительно в String
-                            mapDataRow.put(resultColumn[i], (String) rowData.get(i)); // Формируем список данных принудительно в String
-                        }
-                        workbase.Update(nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
-                        rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)
-                        //System.out.println("columnTM " + columnTM + " yT " + yT  );
-                    }
-                }
-
-            }
-        };
+        return new NZDefaultTableModel(dataInTable, resultColumn, nameTable); 
     }
 
     /**
@@ -247,15 +189,12 @@ public class TableNzVer2 extends javax.swing.JPanel {
             JTableHeader th = jTable1.getTableHeader();
             th.repaint(); // без этого не работает отрисовка , тут с ней тоже
         }
-
     }//GEN-LAST:event_jTable1MousePressed
 
 // -- мини меню по мыши первого столбца таблицы---
     class PopUpDemo extends JPopupMenu {
-
         JMenuItem anItem;
         int i1 = 0;
-
         public PopUpDemo() {
             //anItem = new JMenuItem("Click Me!");
             JSlider slider = new JSlider();
@@ -265,21 +204,110 @@ public class TableNzVer2 extends javax.swing.JPanel {
             JMenuItem anItem2;
             anItem2 = new JMenuItem(Integer.toString(value));
             add(anItem2);
-
             slider.addChangeListener(new javax.swing.event.ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
                     int value = ((JSlider) e.getSource()).getValue();
                     //System.out.println(value);
-
                 }
             });
         }
+    }    
+    
+    // --- Собственный класс таблиц из за своих методов ---
+    class NZDefaultTableModel extends DefaultTableModel { // название столбцов resultColumn   
+      Object[][] dataInTable = null;
+      String[] resultColumn = null;
+      String nameTable = null;
+      
+      // просто построить данные
+      public NZDefaultTableModel (Object[][] dataInTable, String[] resultColumn){
+        super(dataInTable, resultColumn);
+        this.dataInTable = dataInTable;
+        this.resultColumn = resultColumn;
+       }
+      // Строим конструктором таким для редактирования таблицы
+      public NZDefaultTableModel (Object[][] dataInTable, String[] resultColumn, String nameTable){
+        super(dataInTable, resultColumn);
+        this.dataInTable = dataInTable;
+        this.resultColumn = resultColumn;
+        this.nameTable = nameTable;
+       }
+      
+            @Override
+            public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
+                Class clazz = String.class;
+                switch (columnIndex) {
+                    case 0:
+                        clazz = Boolean.class;
+                        break;
+                }
+                return clazz;
+            }
 
-    }
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == column;
+            }
 
+            @Override
+            public void setValueAt(Object aValue, int row, int column) {
+                // Условие проверки галочки скрывать легенду
+                if (aValue instanceof Boolean && column == 0) {
+                    //System.out.println("Posution - > " + row + " " + aValue);        
+                    Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
+                    rowData.set(0, (boolean) aValue);
+                    fireTableCellUpdated(row, column);
+
+                    try {
+                        // Само действие не реализованно
+                        if ((boolean) aValue == true) {
+                            System.out.println("true");
+                        }
+                        if ((boolean) aValue == false) {
+                            System.out.println("false");
+                        }
+                    } catch (NullPointerException e) {
+                        JOptionPane.showMessageDialog(null, "Трудности с добавлением");
+                    }
+                } else {  // если нет Галки просто обновляем данные
+                    if (workbase != null & nameTable != null) { // проверка на редактирования и таблица и экземпляр баз
+                        Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
+                        //String curentCell = (String) rowData.get(column); // получить предыдущие данные
+                        //String ColumnName = jTable1.getColumnName(column); // Имя выделенного столбца
+                        String ColumnName = resultColumn[column];
+                        //int rowTM = jTable1.getRowCount(); // количество строк
+                        //int ColumnTM =  jTable1.getColumnCount();  //Количество столбцов
+                        int ColumnTM = resultColumn.length;
+                        HashMap< String, String> mapDataRow = new HashMap<>(); // элементы для отображения в этих полях
+                        for (int i = 1; i < ColumnTM; ++i) { // Пробежать по строке где изменяются данные и сформировать список для обновления данных в базе c 1 так как там галки
+                            //mapDataRow.put(jTable1.getColumnName(i), (String) rowData.get(i)); // Формируем список данных принудительно в String
+                            mapDataRow.put(resultColumn[i], (String) rowData.get(i)); // Формируем список данных принудительно в String
+                        }
+                        workbase.Update(nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
+                        rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)
+                        //System.out.println("columnTM " + columnTM + " yT " + yT  );
+                    }
+                }
+
+            }
+             // --- Собственный метод получить данные из таблицы по имени столбца  ---
+            public Object getDataNameColumn(String nameColumn, int row){
+                Object objTable = null;
+                for(int i=0; i<resultColumn.length; ++i){ // Пробегаем по всем нашим именам столбцов как они стоят 
+                    if(nameColumn.equals(resultColumn[i])){ //  нашли совпадение
+                        objTable = getValueAt(row, i); // -1 Массив мы видиот от 0 а ячейки он видит от 1
+                    }
+                }
+                return objTable;
+            }
+        }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
