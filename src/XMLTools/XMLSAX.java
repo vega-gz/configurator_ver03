@@ -1,6 +1,5 @@
   package XMLTools;
 
-import XMLTools.RemoveDTDFromSonataFile;
 import configurator.StructSelectData;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -50,9 +49,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import ReadWriteExcel.RWExcel;
+import fileTools.FileManager;
 
 public class XMLSAX {
-
+/*
     private final String AI_UUID = UUID.getUUID();
     private final String AI_HMI_UUID = UUID.getUUID();
     private final String AI_DRV_UUID = UUID.getUUID();
@@ -69,10 +69,11 @@ public class XMLSAX {
     // не понимаю зачем я такую делаю структуру и потом ее сложно передаю в XML для внесения 
     private StructSelectData struct; // это новое класс для структуры
     String massParametrsAI_[][] = {};
+    */
     Document document; // Глобальный документ с которым работаем
     String patchWF = "";
     DataBase workbase = DataBase.getInstance();
-        RemoveDTDFromSonataFile fixXML; // объект реализации обхода неверно сформированного файла
+    ReadBedXML fixXML; // объект реализации обхода неверно сформированного файла
 
     
      // --- Взять корневую ноду  из документа ---
@@ -95,11 +96,10 @@ public class XMLSAX {
             System.out.println("Standart parser down :(");
             findErr = true; // так же как выше пробуем убирать DOCTYPE
         }
-       
         Node n = null; // это для корневой ноды но может и не надо
         if (findErr) { // Запускаем режим преобразования файлов только после Exception
             try {
-                fixXML = new RemoveDTDFromSonataFile(patchF);
+                fixXML = new ReadBedXML(patchF);
                 String documenWithoutDoctype = fixXML.methodRead(patchF); // Так читаем и получаем преобразованные данные,
                 InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
                 document = factory.newDocumentBuilder().parse(stream);
@@ -114,7 +114,13 @@ public class XMLSAX {
         }
         return n;
     }
-
+    
+    // --- инициализировать документ с путем для его сохранения ---
+     public void docInstance(Document document, String patchWF) {
+        this.patchWF = patchWF;
+        this.document = document;
+     }
+/*
     void createTypeAllSignal(ArrayList<String[]> arg, String name, String UUIDType, String UUDstruc, String file) throws ParserConfigurationException {
         // struct = new Struct(name, All_Random_UUID, All_Random_UUID);//разобраться со вторым рандомом в параметрах(он не должен быть рандомным)
         globalpatchF = file;
@@ -205,14 +211,14 @@ public class XMLSAX {
 //        DomRW realise = new DomRW(structInt); // пересылаем структуру для добавления  ее в глобальные переменные
   //      realise.runMethods(); // это надо вытащить в Главную панель
     }
-
+*/
     // Добавляем сигналы в Мнемосхемы  в ручную сделано, надо автоматом
     public void addSignalesMnemo(ArrayList<String[]> lisSig, String nameListSign, String filepatch, String UUIDHigth, String GName,
             String UUIDSourse, String UUIDBlock, String TypeName, String UUIDSourceName, String UUIDBlockName, String ElemName) throws SAXException, IOException, XPathExpressionException, TransformerFactoryConfigurationError,
             TransformerException, ParserConfigurationException, XPathFactoryConfigurationException, InterruptedException {
-        String myVarU_0 = UUID.getUUID();
-        String myVarU_0_0 = UUID.getUUID(); // УИД переменной для связки с переменно входа объекта
-        String myVarU_1 = UUID.getUUID();
+        String myVarU_0 = UUID.getUIID();
+        String myVarU_0_0 = UUID.getUIID(); // УИД переменной для связки с переменно входа объекта
+        String myVarU_1 = UUID.getUIID();
 
         //  String uuIdTBaSence = UUIDHigth; // перебрать файлы в его поиска  // Это уид TBaseAnIn
         Iterator<String[]> iter_arg = lisSig.iterator();
@@ -221,7 +227,7 @@ public class XMLSAX {
         DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();
         DocumentBuilder doc = document.newDocumentBuilder();
         // это из тестового метода преобразовываем файл для чтения XML
-        RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile(patchF);
+        ReadBedXML testStart = new ReadBedXML(patchF);
         String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -241,10 +247,8 @@ public class XMLSAX {
         //  так как нода у нас одна то пишем только в 1 по этому for так работает либо пишем в первую.
         for (int i = 0; i < nodes.getLength(); i++) {
             Node n = nodes.item(i);
-
             Document GraphicsCompositeType = createTGraphicsCompositeType(GName); // так забрали документ из метода
             Element FBNetwork = (Element) GraphicsCompositeType.getElementsByTagName("FBNetwork").item(0); // вытягиваем ноду элемента FBNetwork из Документа который получили выше
-
             Node rootGP = GraphicsCompositeType.getFirstChild(); // Начальная нода файла (что будем импортировать)
 
             // настройка сигналов помещаемых в Графический компонент
@@ -262,7 +266,7 @@ public class XMLSAX {
             //-----ЭТО СОЗДАНИЕ T_BASE_(ОДНОГО БЛОКА)И CONNECT//
             while (iter_arg.hasNext()) {//это цикл создания одного блока 
                 String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")"; //"(x:=0,y:=0)" это позиция графики первой вкладки
-                String uuidFB = getUIID();
+                String uuidFB = UUID.getUIID();
                 String[] field = iter_arg.next();
                 Element FB = GraphicsCompositeType.createElement("FB"); // Создаем FB в вытянутом элементе из фукции создания графического компонента
                 String nameBAnpartClone = ElemName + "_" + (Num++); // так связь делается переменных ее основа
@@ -455,9 +459,8 @@ public class XMLSAX {
 
         }
         // Тут запустим запись в файл
-        writeDocument(document_final, patchF);
-        //и возвращаем ему удаленный DOCTYPE
-        testStart.returnToFileDtd(patchF);
+        writeDocument();
+        
     }
 
     public void createModuleBox(int xPos, int yPos, Document GraphicsCompositeType, int NumElem, int Ycord, Element FBNetwork, int size) {//xPos4=yPos4
@@ -465,7 +468,7 @@ public class XMLSAX {
 
         for (int i = 0; i <= 1; i++) {
             String XYposition = "(x:=" + Integer.toString(xPos) + ",y:=" + Integer.toString(yPos) + ")"; //"(x:=0,y:=0)" это позиция графики первой вкладки
-            String uuidFB = getUIID();
+            String uuidFB = UUID.getUIID();
             Element FB = GraphicsCompositeType.createElement("FB");
             String nameBAnpartClone = "TabSignal_" + (NumElem++);//
             FB.setAttribute("Name", nameBAnpartClone);
@@ -516,7 +519,7 @@ public class XMLSAX {
         }
 
     }
-
+/*
     public String getUIID() {
         java.util.UUID uniqueKey = java.util.UUID.randomUUID();
         Date dateNow = new Date();
@@ -526,7 +529,7 @@ public class XMLSAX {
 
         return upperUUID;
     }
-
+*/
     // --- Метод создания элементов TGraphicsCompositeType ---
     Document createTGraphicsCompositeType(String GraphName) throws ParserConfigurationException {
 
@@ -584,7 +587,7 @@ public class XMLSAX {
 
         Element GCFBtype = doc.createElement("GraphicsCompositeFBType"); // Наша основа графического элемента
         GCFBtype.setAttribute("Name", GraphName); // тоже цикл с изменения доолжен быть так как по 64 элемента для аналогов
-        GCFBtype.setAttribute("UUID", UUID.getUUID());
+        GCFBtype.setAttribute("UUID", UUID.getUIID());
         Element InterfaceList = doc.createElement("InterfaceList");
         GCFBtype.appendChild(InterfaceList);
         Element EventOutputs = doc.createElement("EventOutputs");
@@ -621,39 +624,8 @@ public class XMLSAX {
         return doc;
     }
 
-    public void enumerationData(String patchF) {//значит вот это я вытолкнул
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        try {
-            RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile(patchF);
-            String documenWithoutDoctype;
-            documenWithoutDoctype = testStart.methodRead(patchF); // Так читаем и получаем преобразованные данные,
-            InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
-            Document document_final = factory.newDocumentBuilder().parse(stream);
-            // Получаем корневой элемент
-            Node root = document_final.getDocumentElement();
-            //передаем ноду на переборку
-            stepThroughAll(root);
-            // Тут запустим запись в файл
-            writeDocument(document_final, patchF);
-            //и возвращаем ему удаленный DOCTYPE
-            //testStart.returnToFileDtd(patchF);
-        } catch (SAXException ex) {
-            System.out.println("Not file XML!!!");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            System.out.println("Ошибка парсинга файлов");
-        }
-    }
-
-    // --- вот тут мы все и получаем данные c ноды рекурсией ---
+    
+    // --- получаем данные c ноды рекурсией ---
     private static void stepThroughAll(Node start) {
         System.out.println(start.getNodeName() + " = " + start.getNodeValue());
         if (start.getNodeType() == start.ELEMENT_NODE) {
@@ -671,31 +643,26 @@ public class XMLSAX {
         }
     }
 
-    boolean insertNode(Node addNode, String parentNode, String targetFile) {
-        boolean request = false;
-        return request;
-
-    }
-
-    // --- копирование или внедрени ноды в новый файл  --- 
-    boolean insertNode(Node addNode, String targetFile) {
-        boolean request = false;
-        return request;
-
-    }
-
+    
     // --- Запипись в файл структурой XML ---
-    public void writeDocument(Document document, String patchWF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
+   public void writeDocument() {
         try {
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.transform(new DOMSource(document), new StreamResult(file));
-            //вот это то что я написал это чушь,можно удалить
-        } catch (TransformerException e) {
-            e.printStackTrace(System.out);
+            System.out.println(document.getNodeName());
+            transformer.setOutputProperty(OutputKeys.INDENT,"yes"); // без этого в одну строку все запишет
+            transformer.transform(new DOMSource(document), new StreamResult(file)); // наш документ в начале
+        } catch (TransformerException e) {e.printStackTrace(System.out);}
+        // тут возвращаем данные которые удаляли
+        if (fixXML != null) {
+            try {
+                // если был вызван парсер удаления возвращамем что удалил
+                fixXML.returnToFileDtd(patchWF);//и возвращаем ему удаленный DOCTYPE
+            } catch (InterruptedException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);}
         }
     }
+
     
     // --- Метод чтения и подключение к базе посредством конфига ---
     public void setConnectBaseConfig(String patchFile) {
@@ -728,7 +695,19 @@ public class XMLSAX {
         }
     }
     
-     // --- Найти первую ноду и возвернуть ее ---
+        // --- Удалить ноду ---
+    void removeNode(Node n) {
+        Node parentN = n.getParentNode();
+        System.out.println("What dekete " + n.getNodeName());
+        System.out.println("NameParent " + parentN.getNodeName());
+        parentN.removeChild(n);
+        try {
+            writeDocument(); // НОвый метод записи 
+        } catch (TransformerFactoryConfigurationError ex) {
+            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     // --- Найти первую ноду по имени и возвернуть ее ---
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
@@ -754,7 +733,7 @@ public class XMLSAX {
     }
     
     // --- сформировать даные из конфигугации XML для чтения Exel---
-    public void ReadConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.                
+    public void ReadExelFromConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.                
         RWExcel readExel = new RWExcel(pathExel);
         ArrayList<String> it_list_sheet = readExel.get_list_sheet(pathExel); //забираем список листов в файле и строим итератор из них
 
@@ -844,264 +823,4 @@ public class XMLSAX {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
     
-}
-
-
-// класс удаления неверного <!DOCTYPE SubAppType v. 1.3 >
-class RemoveDTDFromSonataFile {
-
-    static String patchD = "";
-
-    public RemoveDTDFromSonataFile(String patchD) {
-        this.patchD = patchD;
-    }
-
-    static String doctype = "";
-    static int positionDTD;
-    static boolean positionDTDFind = false; // триггер для поиска DTD что бы не гонять цикл
-
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, Exception {
-        // --- Ниже реализация этого функционала ----    
-        RemoveDTDFromSonataFile testStart = new RemoveDTDFromSonataFile("C:\\Users\\Nazarov\\Desktop\\Info_script_file_work\\Project_from_Lev\\FirstGen\\Design\\ControlProgram.int");
-        String patchF = patchD;
-        String documenWithoutDoctype = testStart.methodRead(patchF);// Так читаем и получаем преобразованные данные, 
-        // так парсим что получили
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        // так преобразовываем строку в поток и скармливаем билдеру XML
-        InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
-        // или так
-        //InputStream in = org.apache.commons.io.IOUtils.toInputStream(source, "UTF-8");
-        Document doc = factory.newDocumentBuilder().parse(stream);
-        // Так передаем на переработку
-        viewAllXML(doc);
-        writeDocument(doc, patchF);
-        testStart.returnToFileDtd(patchF);
-        //System.out.println(testStart.methodRead(patchF)); 
-        //testStart.writeWithoutDTD(patchF, methodRead(patchF)); // Так записываем без DTD
-    }
-
-    // --- Запись книги в файл ----
-    static void writeDocument(Document document, String patchF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
-        try {
-            File file = new File(patchF);
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.transform(new DOMSource(document), new StreamResult(file));
-
-        } catch (TransformerException e) {
-            e.printStackTrace(System.out);
-        }
-    }
-
-    static void viewAllXML(Document document) {
-        // Получаем корневой элемент
-        Node root = document.getDocumentElement();
-        System.out.println("List of books:");
-        System.out.println();
-        // Просматриваем все подэлементы корневого - т.е. книги
-        NodeList books = root.getChildNodes();
-        for (int i = 0; i < books.getLength(); i++) {
-            Node book = books.item(i);
-            // Если нода не текст, то это книга - заходим внутрь
-            if (book.getNodeType() != Node.TEXT_NODE) {
-                NodeList bookProps = book.getChildNodes();
-                System.out.println(books.getLength());
-                for (int j = 0; j < bookProps.getLength(); j++) {
-                    Node bookProp = bookProps.item(j);
-                    // Если нода не текст, то это один из параметров книги - печатаем
-                    if (bookProp.getNodeType() != Node.TEXT_NODE) {
-                        // System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
-                        for (int i1 = 0; i1 < bookProp.getChildNodes().getLength(); i1++) {
-                            System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(i1).getTextContent());
-                        }
-                    }
-                }
-                System.out.println("===========>>>>");
-            }
-        }
-    }
-
-    // Метод Парсера строк поиск Доктипа
-    static String paternDOCTYPE(String st1, int pos) {
-        Pattern pattern2 = Pattern.compile("^(<!DOCTYPE.*)$"); // Патерн нашего ДокТипа
-        Matcher matcher2 = pattern2.matcher(st1);
-        if (matcher2.matches()) {
-            positionDTD = pos; // Так же вносим позицию от куда это взяли
-            doctype = matcher2.group(1); // в глобальные переменную что собираемся затереть
-            //System.out.println(doctype);
-            positionDTDFind = true; // Тригер сработал
-            return "";  // Возвращаем пустую строку если нашли DOCTYPE 
-        } else {
-            return st1;
-        }
-
-    }
-
-    //метод чтения файла
-    static public String methodRead(String path) throws InterruptedException {
-        String result_data = "";
-        StringBuffer sb = new StringBuffer();
-        long start_time = 0;
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(path));
-            String str;
-            int pos_str = 0;
-            start_time = System.nanoTime();
-            while ((str = in.readLine()) != null) {
-                //System.out.println(str);
-                if (positionDTDFind == false) {
-                    sb.append(paternDOCTYPE(str, pos_str) + "\n"); // Передаем строки в парсер обработчик
-                    //result_data += paternDOCTYPE(str, pos_str) + "\n";
-                } else {
-                    sb.append(str).append("\n");
-                    //result_data += str + "\n";
-                }
-                // sb.append(tmpStr1);
-                ++pos_str;
-            }
-            in.close();
-        } catch (IOException e) {
-        }
-        result_data = sb.toString();
-        // тут сразу и записываем для тестов видимо было
-        long end_time = System.nanoTime();
-        System.out.println("time " + (end_time - start_time));
-        return result_data; // возвращаем преобразованную строку 
-    }
-
-    //метод записи файла и изначальных данных и DTD
-    static public void methodWrite(String path, String data) throws InterruptedException {
-        try {
-
-            File resultName = new File(path + "_newfile"); //Файл с новой записью
-            File tmpName = new File(path + "_original"); // это просто Имя
-            File realName = new File(path); // Оригинальное имя
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(resultName, true));
-            int tmpPos = 0;
-            String resultTofile = "";
-            for (String tmpStr : data.split("\n")) { // бъем строку что бы записать в нужное место что вырезали выше
-                //writer.append(tmpStr);
-
-                if (tmpPos == positionDTD) { // если позиция верная то внсим обратно доктипДТД
-                    resultTofile += doctype + "\n";
-                } else {
-                    resultTofile += tmpStr + "\n"; // таким способоб убираем пустую и вставляем нужную
-                }
-                ++tmpPos;
-            }
-            //writer.write(data); // это походу переписать
-            writer.write(resultTofile); // Добавляем вновь сформированную строку в файл
-            writer.close();
-            // Удаляем  и переименовываем в удаленный файл
-            if (tmpName.exists()) { // проверяем на существование бекапного файла
-                if (tmpName.delete()) { // если он есть удаляем его
-                    System.out.println(tmpName.getName() + " is deleted!");
-                    realName.renameTo(tmpName);
-                } else {
-                    System.out.println("Delete operation is failed.");
-                }
-            } else {
-                realName.renameTo(tmpName);
-            }
-            resultName.renameTo(realName);
-            //tmpName.renameTo(resultName);
-        } catch (IOException e) {
-        }
-    }
-
-    //метод записи файла без DTD
-    static public void writeWithoutDTD(String path, String data) throws InterruptedException {
-        try {
-
-            File resultName = new File(path + "_newfile"); //Файл с новой записью
-            File tmpName = new File(path + "_original"); // это просто Имя
-            File realName = new File(path); // Оригинальное имя
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(resultName, true));
-            writer.write(data); // это походу переписать
-            writer.close();
-
-            // Удаляем  и переименовываем в удаленный файл
-            if (tmpName.exists()) { // проверяем на существование бекапного файла
-                if (tmpName.delete()) { // если он есть удаляем его
-                    System.out.println(tmpName.getName() + " is deleted!");
-                    realName.renameTo(tmpName);
-                } else {
-                    System.out.println("Delete operation is failed.");
-                }
-            } else {
-                realName.renameTo(tmpName);
-            }
-            resultName.renameTo(realName);
-            //tmpName.renameTo(resultName);
-        } catch (IOException e) {
-        }
-    }
-
-    //метод записи файла и изначальных данных и DTD(не доделал просто чуть подчищен выше метод)
-    static public void writeOnlyDtd(String path, String data) throws InterruptedException {
-        try {
-
-            File resultName = new File(path + "_newfile"); //Файл с новой записью
-            File tmpName = new File(path + "_original"); // это просто Имя
-            File realName = new File(path); // Оригинальное имя
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(resultName, true));
-            int tmpPos = 0;
-            String resultTofile = "";
-            for (String tmpStr : data.split("\n")) { // бъем строку что бы записать в нужное место что вырезали выше
-                if (tmpPos == positionDTD) { // если позиция верная то внсим обратно доктипДТД
-                    resultTofile += doctype + "\n";
-                } else {
-                    resultTofile += tmpStr + "\n"; // таким способоб убираем пустую и вставляем нужную
-                }
-                ++tmpPos;
-            }
-            writer.write(resultTofile); // Добавляем вновь сформированную строку в файл
-            writer.close();
-            // Удаляем  и переименовываем в удаленный файл
-            if (tmpName.exists()) { // проверяем на существование бекапного файла
-                if (tmpName.delete()) { // если он есть удаляем его
-                    System.out.println(tmpName.getName() + " is deleted!");
-                    realName.renameTo(tmpName);
-                } else {
-                    System.out.println("Delete operation is failed.");
-                }
-            } else {
-                realName.renameTo(tmpName);
-            }
-            resultName.renameTo(realName);
-            //tmpName.renameTo(resultName);
-
-        } catch (IOException e) {
-        }
-    }
-
-    //метод записи файла DOCTYPE который мы забрали
-    public void returnToFileDtd(String path) throws InterruptedException {
-        try {
-            BufferedReader read = new BufferedReader(new FileReader(path));
-            String str;
-            int pos_str = 0;
-            String resultTofile = "";
-            while ((str = read.readLine()) != null) {
-                if (pos_str == positionDTD) { // если позиция верная то внсим обратно доктипДТД
-                    resultTofile += doctype + "\n";
-                    resultTofile += str + "\n";
-                } else {
-                    resultTofile += str + "\n"; // таким способоб убираем пустую и вставляем нужную
-                }
-                ++pos_str;
-            }
-            read.close();
-            // прочитали сформировали и теперь его перепишем строкой
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path), false)); // true если надо добавлять в конец файла
-            writer.write(resultTofile); // Добавляем вновь сформированную строку в файл
-            writer.close();
-        } catch (IOException e) {
-        }
-    }
-
 }

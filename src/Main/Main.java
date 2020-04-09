@@ -81,6 +81,6 @@ public class Main {
             String pathConfigSignal = "ConfigSignals.xml";
             Node rootN = sax.readDocument(pathConfigSignal); // Берем корневую ноду
             Node finderN = sax.returnFirstFinedNode(rootN, "ConfigSignals"); // реализовал метод поиска
-            sax.ReadConfig(finderN, patch_file); // пересыламе ноду на обработку там же и формирование базы
+            sax.ReadExelFromConfig(finderN, patch_file); // пересыламе ноду на обработку там же и формирование базы
     }
 }

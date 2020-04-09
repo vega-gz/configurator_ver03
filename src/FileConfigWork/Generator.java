@@ -26,7 +26,7 @@ public class Generator {
     
 
     public static void GenSigType(String nameTable,TableNzVer2 tnz) throws ParserConfigurationException {
-        
+        XMLSAX createXMLSax = new XMLSAX();
         String patchF = "путь из файла конфигурации" + "\\" + "имя типа которое надо вытянуть" + ".type";
        
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -45,17 +45,10 @@ public class Generator {
             Field.setAttribute("Type", "тип который вытянуть");//задали тип данных рукописно.Кстати не знаю верно это или нет Но вроде пишет что то
             Field.setAttribute("UUID", "УИД вытянуть");
             Field.setAttribute("Comment", "русское имя вытянуть");
-            Fields.appendChild(Field);
-
-        
-
-//        try  {
-//           createXMLSax.writeDocument(doc, patchF);
-//        } catch (TransformerFactoryConfigurationError ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);//
-//        } catch (TransformerException ex) {
-//            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            Fields.appendChild(Field);//if(){}public static void main(String []args){}
+            
+       createXMLSax.docInstance(doc, patchF); // зарегистрировать документ в нашем XML парсере
+       createXMLSax.writeDocument(); // без регистрации которая выше не сработает
 
     }
 }

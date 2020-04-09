@@ -28,13 +28,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //import main.globVar;
 public class FileManager {
 
-    static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
+public  static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
     // --- копирование файла используя поток ---
     public void copyFile(String source, String dest) throws IOException {
@@ -146,8 +147,10 @@ public class FileManager {
     }
 
     // --- Логирование ошибок и другая информация ---
-    public static void logger(String s) {
+    public static void loggerConstructor(String s) {
         String nameF = globVar.logFile;
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss_yyyy.MM.dd");
+        String currentTime = formatForDateNow.format(new Date());
         File logF = new File(nameF); 
         if(!logF.exists()){ // нет файла то создаем
             try {
@@ -156,7 +159,7 @@ public class FileManager {
                 System.out.println("Error create log file " + nameF);
             }
         }
-        s = s + "\n";
+        s = currentTime + "\t" + s + "\n";
         try {
             Files.write(Paths.get(nameF), s.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {

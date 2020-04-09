@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConfigAMs>
+	<AM_Classica>
+		<commands tableName="dgo">
+			<on  end="_ON"/>
+			<off end="_OF"/>
+		</commands>
+		<endSensors tableName="di">
+			<on  end="_ON"/>
+			<off end="_OF"/>
+		</endSensors>
+	</AM_Classica>
+	<AM_NKU>
+		<commands tableName="DO_NKU">
+			<on  end="_ON"/>
+			<onUPP  end="_ONupp"/>
+			<off end="_OF"/>
+		</commands>
+		<endSensors tableName="DI_NKU">
+			<on  end="_ON"/>
+			<off end="_OF"/>
+			<ready end="_ready"/>
+			<AOF end="_av_AOF"/>
+		</endSensors>
+	</AM_NKU>
+</ConfigAMs>

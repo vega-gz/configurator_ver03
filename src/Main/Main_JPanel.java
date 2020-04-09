@@ -30,6 +30,7 @@ import XMLTools.XMLSAX;
 import java.awt.Dimension;
 import DataBaseConnect.*;
 import ReadWriteExcel.WriteXMLsignals;
+import fileTools.FileManager;
 
 /**
  *
@@ -345,100 +346,16 @@ public class Main_JPanel extends javax.swing.JFrame {
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
-            try {
-                String filename = fileload.getSelectedFile().getName();//записывает в переменную путь,так что теперь надо обЪяснить методу как его юзать
                 try {
                     filepatch = fileload.getSelectedFile().getCanonicalPath();
                 } catch (IOException ex) {
                     Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    FileManager.loggerConstructor("error testing 44352");
 
                 }
 
-                switch (signal) {
-                    case "dies_ai":
-
-                        nameSignal1 = "T_GPA_AI_FromProcessing";
-                        nameSignal2 = "T_GPA_AI_ToProcessing";
-                        nameSignal3 = "T_GPA_AI_Settings";
-                        nameSignal4 = "T_GPA_AI_OnlyToHMI";
-                        nameSignal5 = "T_GPA_AI_Internal";
-
-                        UUID_Type1 = UUID_AI_FromProcessing;
-                        UUID_Type2 = UUIDType_AI_ToProcessing;
-                        UUID_Type3 = UUIDType_AI_Settings;
-                        UUID_Type4 = UUID_AI_OnlyToHMI;
-                        UUID_Type5 = "744A7D367B498F7EF3E4B8BC15643AB2";
-
-                        UUID_Parent1 = UUID_Parent_AI_FromProcessing;
-                        UUID_Parent2 = UUID_Parent_AI_ToProcessing;
-                        UUID_Parent3 = UUID_Parent_AI_Settings;
-                        UUID_Parent4 = UUID_Parent_AI_OnlyToHMI;
-                        UUIDParent5 = "006A03A8C74962DC3E0724A92DA854AF";
-
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);//
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3, UUID_Parent3);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal4, UUID_Type4, UUID_Parent4);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal5, UUID_Type5, UUIDParent5);
-
-                        break;
-                    case "dies_ao":
-
-                        nameSignal1 = "T_GPA_AO_FromHMI";
-                        nameSignal2 = "T_GPA_AO_ToHMI";
-
-                        UUID_Type1 = UUID_AO_FromHMI;
-                        UUID_Type2 = UUID_AO_ToHMI;
-
-                        UUID_Parent1 = UUID_Parent_AO_FromHMI;
-                        UUID_Parent2 = UUID_Parent_AO_ToHMI;
-
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
-
-                        break;
-                    case "dies_do":
-
-                        nameSignal1 = "T_GPA_DO_FromHMI";
-                        nameSignal2 = "T_GPA_DO_ToHMI";
-
-                        UUID_Type1 = UUID_DO_FromHMI;
-                        UUID_Type2 = UUID_DO_ToHMI;
-
-                        UUID_Parent1 = UUID_Parent_DO_FromHMI;
-                        UUID_Parent2 = UUID_Parent_DO_ToHMI;
-
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
-
-                        break;
-                    case "dies_di":
-
-                        nameSignal1 = "T_GPA_DI_FromProcessing";
-                        nameSignal2 = "T_GPA_DI_Settings";
-                        nameSignal3 = "T_GPA_DI_ToProcessing";
-
-                        UUID_Type1 = UUID_DI_FromProcessing;
-                        UUID_Type2 = UUID_DI_Settings;
-                        UUID_Type3 = UUID_DI_ToProcessing;
-
-                        UUID_Parent1 = UUID_Parent_DI_FromProcessing;
-                        UUID_Parent2 = UUID_Parent_DI_Setting;
-                        UUID_Parent3 = UUID_Parent_DI_ToProcessing;
-
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal1, UUID_Type1, UUID_Parent1);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal2, UUID_Type2, UUID_Parent2);
-                        createXMLSax.runBasecreateTypeAll(filepatch, signal, nameSignal3, UUID_Type3, UUID_Parent3);
-
-                }
-
-            } catch (ParserConfigurationException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
 
         }
-
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -452,7 +369,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
         DataBase.getInstance();// подключится к базе конфигом другого не дано
         jComboBox1.setModel(getComboBoxModel());
-        JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
+        //JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
 
     }//GEN-LAST:event_jButton2ActionPerformed
     
