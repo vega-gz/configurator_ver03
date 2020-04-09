@@ -280,7 +280,7 @@ public class FileManager {
         return 0;
     }
 
-    public String ReadFile(String file,String nameWords) {
+    public String ReadFile(String file, String nameWords) {
         String name = null;
         int i = 0;
         try {
@@ -291,15 +291,19 @@ public class FileManager {
             // считаем сначала первую строку
             String line = reader.readLine();
             while (line != null) {
-                   System.out.println(line);
+                System.out.println(line);
                 // считываем остальные строки в цикле
                 line = reader.readLine();
                 if (line.contains(nameWords) == true) {
-                   name = line.substring(line.indexOf('"')+1,line.lastIndexOf('"') );
-                    
+                    int count = 0;
+                    for(int j=0;j<nameWords.toCharArray().length;j++){
+                        count++;
+                    }
+                    name = line.substring(line.indexOf(nameWords)+count + 2, line.lastIndexOf('"'));
+
                     System.out.println(name);
-                    break;
-                    
+                    break;  
+
                 } else {
                     System.out.println("В строке " + i + " не нашлось данного слова");
                 }
@@ -316,7 +320,7 @@ public class FileManager {
     public static void main(String[] args) throws IOException {
         FileManager fm = new FileManager();
         // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-        fm.ReadFile("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml","Type");
+        fm.ReadFile("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml", "nameColumnPos");
     }
 
 }
