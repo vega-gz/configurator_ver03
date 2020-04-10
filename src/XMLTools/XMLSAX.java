@@ -239,7 +239,7 @@ public class XMLSAX {
         // --- Удалить ноду ---
     void removeNode(Node n) {
         Node parentN = n.getParentNode();
-        System.out.println("What dekete " + n.getNodeName());
+        System.out.println("What delete " + n.getNodeName());
         System.out.println("NameParent " + parentN.getNodeName());
         parentN.removeChild(n);
         try {
@@ -253,10 +253,10 @@ public class XMLSAX {
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
-            System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
+            //System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
                 if (n.getNodeName().equals(s)) {
-                    System.out.println("Find Node " + n.getNodeName());
+                    //System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
                 }
@@ -273,21 +273,22 @@ public class XMLSAX {
         }
         return finding;
     }
-        // --- Найти ноду по имени и ее значениям (не доделанный не трогаем пока)---
-    public Node findNodeValueAtribute(Node n, String[] arg) {
+        // --- Найти ноду по имени и ее значениям ---
+    public Node findNodeValue(Node n, String[] arg) {
         String nameFindN = arg[0];// arg первое значение всегда Название ноды
         Node finding = null;
         if (n != null) {
-            System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
+            //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя
+                boolean access =false; // разрешение на нужную ноду
+                if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя ноды
                     NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
                     boolean compared = false;
                     for (int elemArh =1; elemArh< arg.length; ++elemArh ){ // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
                         String el =arg[elemArh]; // значение элемента которое проверяем
                         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
                             Node attr = startAttr.item(i);
-                            String Attribute = attr.getNodeName(); // Название атрибута
+                            //String Attribute = attr.getNodeName(); // Название атрибута
                             String Value = attr.getNodeValue(); // значение атрибута
                             //System.out.println("Attribute:" + Attribute + " Value:" + Value);
                             if(el.equals(Value)){
@@ -295,21 +296,71 @@ public class XMLSAX {
                                 break; // элемент нашли и не перебираем дальше значения
                             }
                         }
-                        if(!compared){// после прохода элемента нечего не нашли то ломаем цикл
-                            break;
-                        }else{
-                            compared = false; // для сброса триггера и следующего элемента 
-                        }
+                        if(compared == true){// после прохода элемента нечего не нашли то ломаем цикл
+                            //System.out.println("Find_Value " + el);
+                            access = true;
+                            compared = false;
+                        }else access = false;
                     }
-                    
-                    System.out.println("Find Node " + n.getNodeName());
-                    finding = n;
-                    return finding;
+                    if(access){
+                        System.out.println("Find Node " + n.getNodeName());
+                        finding = n;
+                        return finding;
+                    }
                 }
             }
             if (finding == null) { // если не нашли
                 for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
-                    finding = findNodeValueAtribute(child, arg);
+                    finding = findNodeValue(child, arg);
+                    if (finding != null) {
+                        break;
+                    }
+                }
+
+            }
+        }
+        return finding;
+    }
+    
+        // --- Найти ноду по имени и ее атрибутам ---
+    public Node findNodeAtribute(Node n, String[] arg) {
+        String nameFindN = arg[0];// arg первое значение всегда Название ноды
+        Node finding = null;
+        if (n != null) {
+            //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
+            if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
+                boolean access =false; // разрешение на нужную ноду
+                if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя ноды
+                    NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
+                    boolean compared = false;
+                    for (int elemArh =1; elemArh< arg.length; ++elemArh ){ // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
+                        String el =arg[elemArh]; // значение элемента которое проверяем
+                        for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
+                            Node attr = startAttr.item(i);
+                            String Attribute = attr.getNodeName(); // Название атрибута
+                            //String Value = attr.getNodeValue(); // значение атрибута
+                            //System.out.println("Attribute:" + Attribute + " Value:" + Value);
+                            if(el.equals(Attribute)){
+                                compared = true;
+                                break; // элемент нашли и не перебираем дальше значения
+                            }
+                        }
+                        if(compared == true){// после прохода элемента нечего не нашли то ломаем цикл
+                            //System.out.println("Find_Value " + el);
+                            access = true;
+                            compared = false;
+                        }else access = false;
+                    }
+                    if(access){
+                        System.out.println("Find Node " + n.getNodeName());
+                        finding = n;
+                        return finding;
+                    }
+                }
+            }
+            if (finding == null) { // если не нашли
+                for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
+                    finding = findNodeAtribute(child, arg);
                     if (finding != null) {
                         break;
                     }
@@ -413,16 +464,21 @@ public class XMLSAX {
     public static void main(String[] arg){
         HashMap<String, String> map = new HashMap<>();
         XMLSAX test = new XMLSAX();
-        Node newEl = test.createDocument("mazafaker");
-        Node n = test.createNode("mazafaker_child");
-        //newEl.setTextContent("setTextContent"); // так пишем текстовое поле если надо
-        map.put("Name", "имя которое необходимо вытянуть");
-        map.put("Kind", "Struct");
-        map.put("UUID", "уид который надо вытянуть");//вот это UUDSTRUC должен совпадать с дочерними уидами,то естьв нем должны быть сигналы с типом его уида
-        test.insertDataNode(newEl ,map);
-        newEl.appendChild(n);
-        test.insertDataNode(n ,map);
-        test.writeDocument("test666.xml");
+        Node n = test.readDocument("ConfigSignals.xml");
+        String[] value = {"F","TAG_NAME_PLC", "VarName"};// даже если параметром меньше
+        //String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
+        //String[] attr = {"G","nameColumnPos", "type"};
+        String[] attr = {"G","nameColumnPos"};
+        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и атрибутам
+        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
+        Node fNodName = test.returnFirstFinedNode(n, "ai"); // поиск по названию ноды
+        try{
+            System.out.println(fNValue.getNodeName());
+            System.out.println(fNAttr.getNodeName());
+            System.out.println(fNodName.getNodeName());
+        } catch (NullPointerException ex) {
+            test.errorExecuter("Node Null what is not find \n" + ex);
+        }
     }
     
 }
