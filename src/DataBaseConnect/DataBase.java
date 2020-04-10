@@ -25,6 +25,7 @@ import fileTools.FileManager;
 
 public class DataBase {
 
+
   
     Statement stmt;
     Connection connection = null;
@@ -57,8 +58,8 @@ public class DataBase {
     }
     
     // --- Подключение к базе используя параметры ---
-    public void connectionToBase(String URLfile, String DB, String USER, String PASS) {
-        this.URL = URLfile;
+    public void connectionToBase(String URL, String DB, String USER, String PASS) {
+        this.URL = URL;
         this.BASE = DB;
         this.USER = USER;
         this.PASS = PASS;
@@ -78,7 +79,7 @@ public class DataBase {
     // Сменить базу
     public void changeBase(String base){
        String[] infoConnect = getInfoCurrentConnect();
-       connectionToBase(base,infoConnect[0],infoConnect[1],infoConnect[2]);
+       connectionToBase(infoConnect[0],base,infoConnect[1],infoConnect[2]);
     }
     
     // --- Метод подключения к базе ---
@@ -130,7 +131,7 @@ public class DataBase {
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE BASE");
-            FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
+            //FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
             e.printStackTrace();
             return;
 
@@ -139,6 +140,7 @@ public class DataBase {
     
     //-------------- CREATE TABLE ---------------
     public void createTable(String name_table,  ArrayList<String> listNameColum) {
+        String nameSEQ = name_table +"_id_seq"; // имя итератора
         int number_colum = listNameColum.size();
         //проверка если есть такая таблица удаляем ее
         {
@@ -152,6 +154,7 @@ public class DataBase {
                 break;
             }
         }
+        createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
         }
         String sql = null;
         connectionToBase(); // вызов Фукция подключения к базе
@@ -189,7 +192,7 @@ public class DataBase {
                 if (!listNameColum.isEmpty()) { // это теперь основное.
                     int tmp_cell = 0;
                     // -- create table max lengt + name table from file cells
-                    nc_stringing = " (UUID TEXT NOT NULL";
+                    nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\'), UUID TEXT NOT NULL";
                     Iterator<String> iter_list_table = listNameColum.iterator();
                     while (iter_list_table.hasNext()) {
                         tmp_cell++;
@@ -352,50 +355,9 @@ public class DataBase {
             return;
         }
     }
-
-//--------------- SELECT DATA --------------
-    ArrayList<String[]> selectData(String table) {
-        //connectionToBase(); // вызов Фукция подключения к базе
-        ArrayList<String[]> selectData = new ArrayList<>();
-        try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM " + table + ";");
-            while (rs.next()) {
-                String id = rs.getString("Colum_18");
-                String name = rs.getString("Канал");
-                String age = rs.getString("Наименование сигнала");
-                String address = rs.getString("мин");
-                String salary = rs.getString("макс");
-                String UM = rs.getString("ед.изм");
-                String TypeCh = rs.getString("Тип");
-                String TypeADC = rs.getString("Colum_19");
-                String addres1 = rs.getString("2.0");
-                String addres2 = rs.getString("3.0");
-                String uuid_hmi = rs.getString("uuid_hmi");
-                String uuid_plc = rs.getString("uuid_plc");
-                String uuid_drv = rs.getString("uuid_drv");
-                String uuid_trend = rs.getString("uuid_trend");
-                String[] strfromtb = {id, name, age, address, salary, UM, TypeCh, TypeADC, addres1, addres2, uuid_hmi, uuid_plc, uuid_drv, uuid_trend};
-                selectData.add(strfromtb);
-                System.out.println(String.format("ID=%s NAME=%s AGE=%s ADDRESS=%s SALARY=%s UM=%s TYPEADC=%s A1=%s A2=%s", id, name, age, address, salary, UM, TypeCh, TypeADC, addres1, addres2));
-            }
-            rs.close();
-            stmt.close();
-            //connection.commit();
-            System.out.println("-- Operation SELECT done successfully");
-        } catch (SQLException e) {
-            System.out.println("Failed ADD data");
-            e.printStackTrace();
-            //return;
-
-        }
-        return selectData;
-    }
-
-        //--------------- SELECT DATA sum columns --------------
+     
     // какие именно столбцы дергать
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
-        //  connectionToBase(); // вызов Фукция подключения к базе
         StructSelectData.setColumns(columns); // вот это жопа надо что то с этим делать мешает в Main_Jpanel
         ArrayList<String[]> selectData = new ArrayList<>();
         String s_columns = "";
@@ -408,10 +370,18 @@ public class DataBase {
                 s_columns += "\"" + columns.get(i) + "\"";
             }
         }
+        // проверка на столбец по которому упорядочим данные
+        String orderCol = "id";
+        String sql = null;
+        for(String s: getListColumnBase(table)){
+            if(s.equals(orderCol)){ // нашли тогда упорядовать
+              sql = "SELECT " + s_columns + " FROM " + table + " ORDER BY \"" +orderCol +"\";";
+            }else sql = "SELECT " + s_columns + " FROM " + table +";"; 
+        }
         try {
             stmt = connection.createStatement();
-            System.out.println("SELECT " + s_columns + " FROM " + table + ";");
-            ResultSet rs = stmt.executeQuery("SELECT " + s_columns + " FROM " + table + ";");
+            //System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 for (int i = 0; i < columns.size(); ++i) {
                     strfromtb[i] = rs.getString(columns.get(i));
@@ -585,21 +555,6 @@ public class DataBase {
         return s;
     }
 
-    /*
-    public static void main(String[] args) {
-        //new BasePostgresLuaXLS().createBase("test6671"); // Так создаем 
-        List<String> tmp = new BasePostgresLuaXLS().listBase(); // Так смотрим
-        for (String s : tmp) {
-            System.out.println(s);
-        }
-    }
-*/
-   /* String[] getColumns() { // не нужный метод
-        return columns;
-    }*/
-
-
-    
     // Гришин метот а может и не один все заменить.
       //----Строим все сигналы которые сюда ссылаются
     public ArrayList<String[]> getSelectData(String table) {//в перспективе задавать в параметрах листи через if else указывать,ибо разный набор столбцов мы вытягиваем для ai ao di do
@@ -725,4 +680,70 @@ public class DataBase {
     }
     
     // --- Создание  SEQUENCE ---
+    private void createSEQ(String name){
+        String sql = null;
+                
+        try {
+            for(String s: getListSequnce()){ // пробегаем по названиям SEQUENCE 
+                System.out.println(s);
+                if(s.equalsIgnoreCase(name)){ // проверка на соответствие и удаление(создает их в нижнем регистре)
+                    sql = "DROP SEQUENCE " + s +";";
+                    stmt = connection.createStatement();
+                    stmt.executeUpdate(sql);
+                }
+            }
+            sql = "CREATE SEQUENCE " + name+";";
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            e.printStackTrace();
+        }
+    }
+    
+    // --- получить список из базы SEQUENCE ---
+    private ArrayList<String> getListSequnce(){
+        String sql = null;    
+        ArrayList<String> lisrSEQ = new ArrayList<>();
+        try {
+            connection.setAutoCommit(true);
+            stmt = connection.createStatement();
+            sql = "SELECT sequence_schema, sequence_name FROM information_schema.sequences;";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                //System.out.println( rs.getString("sequence_schema"));
+                lisrSEQ.add(rs.getString("sequence_name"));
+            }           
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            //e.printStackTrace();
+        }
+        return lisrSEQ;
+    }
+    
+    // --- получить столбцы из таблицы ---
+    private ArrayList<String> getListColumnBase(String table_name){
+        String sql = null;    
+        ArrayList<String> listColumn = new ArrayList<>();
+        try {
+            //connection.setAutoCommit(true);
+            stmt = connection.createStatement();
+            sql = "SELECT column_name,data_type FROM information_schema.columns where table_name = '" +table_name+ "';";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                //System.out.println( rs.getString("sequence_schema"));
+                listColumn.add(rs.getString("column_name"));
+            }           
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            //e.printStackTrace();
+        }
+        return listColumn;
+    }
+
 }

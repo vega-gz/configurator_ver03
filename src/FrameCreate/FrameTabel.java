@@ -26,7 +26,7 @@ import Main.Main_JPanel;
 import XMLTools.UUID;
 import DataBaseConnect.*;
 import FrameCreate.TableNzVer2;
-
+import FileConfigWork.Generator;
 /**
  *
  * @author cherepanov
@@ -39,17 +39,19 @@ import FrameCreate.TableNzVer2;
     //TableModel tableFrameModel = null;
     TableNzVer2.NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
     XMLSAX sax=new XMLSAX();
-
+    public int tableSize(){//возвращает размер таблицы
+        return tableFrameModel.getRowCount();
+    }
+    public String tableName(){//возвращает имя таблицы
+        return nameTable;
+    }
+    public Object getCell(String colName, int row){//возвращает содержимое ячейки по имени столбца и номеру строки
+        return tableFrameModel.getDataNameColumn(colName, row);
+    }
+    
     int filepath;
     String filepatch;
-  //  String nameTable = "";
-    String UUIDHigth = "";
-    String Graphname, TypeName, ElemName;
-    String UUIDBlockPref, UUIDBlockName;
-    String TypeAI_DRV = "REAL", TypeDI_DRV = "BOOL";
-    String nameSignal1, nameSignal2, nameSignal3, nameSignal4, nameSignal5, nameSignal6,
-            UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4,
-            UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4;
+  
 
     XMLSAX createXMLSax = new XMLSAX();
     DataBase workbase = DataBase.getInstance();
@@ -59,7 +61,6 @@ import FrameCreate.TableNzVer2;
         //this.tableFrameModel = getTableData();
         initComponents();
     }
-
    
     // --- Конструктор с вызовом таблицы TableNzVer2 и преобразованными данными для нее ---
     public FrameTabel(String selectT, ArrayList<String> columns) {
@@ -80,6 +81,7 @@ import FrameCreate.TableNzVer2;
         System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
         System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
         System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
+        System.out.println("countRow " + tableFrameModel.getRowCount());
         initComponents();
     }
 
@@ -172,6 +174,8 @@ import FrameCreate.TableNzVer2;
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
                     filepatch = fileload.getSelectedFile().getCanonicalPath();
+                    Generator.GenSigType(this);
+
                 } catch (IOException ex) {
                     Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
 

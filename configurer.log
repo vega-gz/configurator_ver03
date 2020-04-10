@@ -1,2 +1,13 @@
 test
 мама анархия
+13:46:10_2020.04.10	error PSQL request null
+14:06:14_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf_id_seq;
+14:07:06_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf_id_seq;
+14:07:46_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
+14:08:27_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
+14:09:40_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
+14:10:38_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
+15:16:35_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
+15:19:19_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
+15:21:27_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
+15:21:27_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf6_id_seq;
