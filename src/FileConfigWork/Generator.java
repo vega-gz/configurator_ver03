@@ -5,6 +5,7 @@
  */
 package FileConfigWork;
 
+import FrameCreate.FrameTabel;
 import FrameCreate.TableNzVer2;
 import XMLTools.XMLSAX;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import org.w3c.dom.Node;
  */
 public class Generator {
 
-    public static void GenSigType(String nameTable, TableNzVer2 tnz) throws ParserConfigurationException {
+    public static void GenSigType(FrameTabel ft)  {
         HashMap<String, String> map = new HashMap<>();
         XMLSAX test = new XMLSAX();
         Node newEl = test.createDocument("mazafaker");
