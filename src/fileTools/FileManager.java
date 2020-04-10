@@ -279,7 +279,7 @@ public class FileManager {
         globVar.fm.wrStream.close();
         return 0;
     }
-
+//тот самый метод,еще подправлю
     public String ReadFile(String file, String nameWords) {
         String name,name1 = null;
         int i = 0;
