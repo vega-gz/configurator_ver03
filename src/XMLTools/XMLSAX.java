@@ -187,7 +187,7 @@ public class XMLSAX {
     }
 
        // --- Запипись в файл структурой XML с указанием именем файла ---
-    void writeDocument(String patchWF) {
+    public void writeDocument(String patchWF) {
         try {
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
