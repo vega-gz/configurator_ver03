@@ -6,10 +6,12 @@
 package fileTools;
 
 import globalData.globVar;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,7 +37,7 @@ import java.util.logging.Logger;
 //import main.globVar;
 public class FileManager {
 
-public  static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
+    public static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
     // --- копирование файла используя поток ---
     public void copyFile(String source, String dest) throws IOException {
@@ -151,10 +153,10 @@ public  static ArrayList<String> listAllPath = new ArrayList(); // отдель�
         String nameF = globVar.logFile;
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss_yyyy.MM.dd");
         String currentTime = formatForDateNow.format(new Date());
-        File logF = new File(nameF); 
-        if(!logF.exists()){ // нет файла то создаем
+        File logF = new File(nameF);
+        if (!logF.exists()) { // нет файла то создаем
             try {
-            logF.createNewFile();
+                logF.createNewFile();
             } catch (IOException ex) {
                 System.out.println("Error create log file " + nameF);
             }
@@ -276,6 +278,49 @@ public  static ArrayList<String> listAllPath = new ArrayList(); // отдель�
         globVar.fm.rdStream.close();
         globVar.fm.wrStream.close();
         return 0;
+    }
+//тот самый метод,еще подправлю
+    public String ReadFile(String file, String nameWords) {
+        String name,name1 = null;
+        int i = 0;
+        try {
+            //создаем объект FileReader для объекта File
+            FileReader fr = new FileReader(file);
+            //создаем BufferedReader с существующего FileReader для построчного считывания
+            BufferedReader reader = new BufferedReader(fr);
+            // считаем сначала первую строку
+            String line = reader.readLine();
+            while (line != null) {
+             //   System.out.println(line);
+                // считываем остальные строки в цикле
+                line = reader.readLine();
+                if (line.contains(nameWords) == true) {
+                    int count = 0;
+                    for(int j=0;j<nameWords.toCharArray().length;j++){
+                        count++;
+                    }
+                    name ="."+ line.substring(line.indexOf(nameWords)+count+2);
+                    name1=name.substring(name.indexOf('.')+1,name.indexOf('"'));
+                    System.out.println(name1);
+                    break;  
+
+                } else {
+                    System.out.println("В строке " + i + " не нашлось данного слова");
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return name1;
+    }
+
+    public static void main(String[] args) throws IOException {//для тестирования
+        FileManager fm = new FileManager();
+        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
+        fm.ReadFile("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml", "Type");
     }
 
 }
