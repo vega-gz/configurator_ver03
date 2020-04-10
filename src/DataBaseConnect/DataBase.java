@@ -721,7 +721,8 @@ public class DataBase {
                 break;
 
         }
-
         return selectData;
     }
+    
+    // --- Создание  SEQUENCE ---
 }
