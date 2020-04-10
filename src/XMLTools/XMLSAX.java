@@ -148,7 +148,7 @@ public class XMLSAX {
         this.document = document;
      }
     
-    // --- получаем данные c ноды рекурсией ---
+    // --- пробегаме по ноды рекурсией ---
     private static void stepThroughAll(Node start) {
         System.out.println(start.getNodeName() + " = " + start.getNodeValue());
         if (start.getNodeType() == start.ELEMENT_NODE) {
@@ -165,7 +165,35 @@ public class XMLSAX {
             stepThroughAll(child);
         }
     }
+    
+    // --- получаем данные c ноды в виде ключ значение ---
+    public HashMap getDataNode(Node n){
+        HashMap<String,String> findData = null;
+        if (n != null) {
+            System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
+            if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
+                findData = new HashMap<>();// тут инициализируем Мап
+                NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
+                for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
+                   Node attr = startAttr.item(i);
+                   String attribute = attr.getNodeName(); // Название атрибута
+                   String value = attr.getNodeValue();
+                   findData.put(attribute, value);
+                }
+                return findData;
+            }
+        }
+        if (findData == null) { // если не нашли
+                for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
+                    findData = getDataNode(child);
+                    if (findData != null) {
+                        break;
+                    }
+                }
 
+            }
+        return findData;    
+    }
     
     // --- Запипись в файл структурой XML ---
    public void writeDocument() {
@@ -464,14 +492,15 @@ public class XMLSAX {
     public static void main(String[] arg){
         HashMap<String, String> map = new HashMap<>();
         XMLSAX test = new XMLSAX();
-        Node n = test.readDocument("ConfigSignals.xml");
+        Node n = test.readDocument("test666.xml");
         String[] value = {"F","TAG_NAME_PLC", "VarName"};// даже если параметром меньше
         //String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
         //String[] attr = {"G","nameColumnPos", "type"};
         String[] attr = {"G","nameColumnPos"};
-        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и атрибутам
+        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
         Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-        Node fNodName = test.returnFirstFinedNode(n, "ai"); // поиск по названию ноды
+        Node fNodName = test.returnFirstFinedNode(n, "mazafaker_child"); // поиск по названию ноды
+        HashMap<String,String> mapDataN = test.getDataNode(fNodName); // получаем с этой ноды данные
         try{
             System.out.println(fNValue.getNodeName());
             System.out.println(fNAttr.getNodeName());
