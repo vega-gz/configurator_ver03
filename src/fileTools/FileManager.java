@@ -281,7 +281,7 @@ public class FileManager {
     }
 
     public String ReadFile(String file, String nameWords) {
-        String name = null;
+        String name,name1 = null;
         int i = 0;
         try {
             //создаем объект FileReader для объекта File
@@ -291,7 +291,7 @@ public class FileManager {
             // считаем сначала первую строку
             String line = reader.readLine();
             while (line != null) {
-                System.out.println(line);
+             //   System.out.println(line);
                 // считываем остальные строки в цикле
                 line = reader.readLine();
                 if (line.contains(nameWords) == true) {
@@ -299,9 +299,9 @@ public class FileManager {
                     for(int j=0;j<nameWords.toCharArray().length;j++){
                         count++;
                     }
-                    name = line.substring(line.indexOf(nameWords)+count + 2, line.lastIndexOf('"'));
-
-                    System.out.println(name);
+                    name ="."+ line.substring(line.indexOf(nameWords)+count+2);
+                    name1=name.substring(name.indexOf('.')+1,name.indexOf('"'));
+                    System.out.println(name1);
                     break;  
 
                 } else {
@@ -314,13 +314,13 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return name;
+        return name1;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {//для тестирования
         FileManager fm = new FileManager();
         // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-        fm.ReadFile("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml", "nameColumnPos");
+        fm.ReadFile("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml", "Type");
     }
 
 }
