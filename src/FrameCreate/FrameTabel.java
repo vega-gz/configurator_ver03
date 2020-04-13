@@ -27,6 +27,11 @@ import XMLTools.UUID;
 import DataBaseConnect.*;
 import FrameCreate.TableNzVer2;
 import FileConfigWork.Generator;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author cherepanov
@@ -103,6 +108,7 @@ import FileConfigWork.Generator;
         setPreferredSize(new java.awt.Dimension(999, 530));
 
         jTable1.setModel(tableFrameModel);
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Добавить в мнемосхему");
@@ -126,13 +132,12 @@ import FileConfigWork.Generator;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(301, 301, 301)))
-                .addGap(21, 21, 21))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,8 +147,7 @@ import FileConfigWork.Generator;
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -182,7 +186,8 @@ import FileConfigWork.Generator;
                 }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
+            
     public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
         // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
         String[] columnDop = {"Выбор"};// до поля для галок или еще чего
