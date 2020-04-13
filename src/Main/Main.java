@@ -71,7 +71,7 @@ public class Main {
             }
 
         }
-        } catch (IOException | SQLException ex) {
+        } catch (IOException ex) {
                 System.out.println("Error read file or connect to base " +ex);
         }
     }
