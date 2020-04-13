@@ -131,13 +131,14 @@ public class DataBase {
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE BASE");
-            //FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
+            FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
             e.printStackTrace();
             return;
 
         }
     }
     
+    //-------------- CREATE TABLE ---------------
     //-------------- CREATE TABLE ---------------
     public void createTable(String name_table,  ArrayList<String> listNameColum) {
         String nameSEQ = name_table +"_id_seq"; // имя итератора
@@ -157,39 +158,12 @@ public class DataBase {
         createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
         }
         String sql = null;
-        connectionToBase(); // вызов Фукция подключения к базе
+        //connectionToBase(); // вызов Фукция подключения к базе
         //переменная для анализа
         String nameTbanalise = new String(name_table);
         String nc_stringing = "";
-        //Заменяем символы так как ограничения в Postgrese
-        //name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_").replace("#", "");
-        name_table = replacedNt(name_table);
-
-        switch (name_table) {
-            case "AI1":
-            case "AO1":
-            case "DI1":
-            case "DO1": 
-            case "DO": {
-                int tmp_cell = 0;
-                number_colum = number_colum - 4; // так как добавили Еще UUID
-                // -- create table max lengt + name table from file cells
-                nc_stringing = " (UUID_PLC TEXT NOT NULL, UUID_HMI TEXT NOT NULL, UUID_DRV TEXT NOT NULL, UUID_Trend TEXT NOT NULL";
-                Iterator<String> iter_list_table = listNameColum.iterator();
-                while (iter_list_table.hasNext()) {
-                    tmp_cell++;
-                    String bufer_named = iter_list_table.next().replace("/", "_");
-                    //nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT    NOT NULL";
-                    nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT";
-                }
-                /* for (int i=tmp_cell+1; i < number_colum; i++){ // это было для добавления когда нечего нет и авто заполнение
-                 nc_stringing += " ," + "colum_" + Integer.toString(i) +  "      TEXT    NOT NULL";
-                 }*/
-                nc_stringing += ")";
-            }
-            break;
-            default:
-                if (!listNameColum.isEmpty()) { // это теперь основное.
+        name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
+        if (!listNameColum.isEmpty()) { // это теперь основное.
                     int tmp_cell = 0;
                     // -- create table max lengt + name table from file cells
                     nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\'), UUID TEXT NOT NULL";
@@ -205,30 +179,25 @@ public class DataBase {
                         nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
                     }
                     nc_stringing += ")";
-                    //System.out.print(nc_stringing);
-
                 } else {
                     // -- create table max lengt row in sheet
                     nc_stringing = " (ID TEXT NOT NULL";
                     for (int i = 1; i < number_colum; i++) {
-                        //nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT    NOT NULL";
                         nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
                     }
                     nc_stringing += ")";
                 }
-                break;
-        }
 
         try {
-
-            connection.setAutoCommit(false);
+            connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE TABLE " + name_table + nc_stringing;
             System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
-            connection.commit();
-            System.out.println("-- Table created successfully");
+            //connection.commit();
+            //System.out.println("-- Table created successfully");
+            createCommentTable(name_table, "comment 665 и он на Русском"); // вызом метода добавления комментария
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE TABLE");
@@ -239,7 +208,7 @@ public class DataBase {
     }
     // --- Вставка данных (название таблицы, список столбцов, данные)---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) throws SQLException {
-        connectionToBase(); // вызов Фукция подключения к базе
+        //connectionToBase(); // вызов Фукция подключения к базе
         connection.setAutoCommit(true);
         String nameTbanalise = new String(name_table);
         String sql = "";
@@ -746,4 +715,40 @@ public class DataBase {
         return listColumn;
     }
 
+    // --- добавить комментарий к таблице ---
+    private void createCommentTable(String table, String comment){
+        String sql = null;   
+        try {
+            sql = "COMMENT ON TABLE  " + table+ " IS " +"'" +comment +"'" +";";
+            System.out.println(sql);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            e.printStackTrace();
+        }
+    }
+    
+    // --- получить комментарии таблицы ---
+    public String getCommentTable(String table_name){
+        String sql = null; 
+        String comment = null;
+        ArrayList<String> listColumn = new ArrayList<>();
+        try {
+            stmt = connection.createStatement();
+            sql = "SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid"
+                    + " where relname = '" +table_name+ "';"; // такой запрос нам нечего не возвращает
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                comment = rs.getString("description");
+            }           
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            //e.printStackTrace();
+        }
+        return comment;
+    }
 }
