@@ -139,7 +139,6 @@ public class DataBase {
     }
     
     //-------------- CREATE TABLE ---------------
-    //-------------- CREATE TABLE ---------------
     public void createTable(String name_table,  ArrayList<String> listNameColum) {
         String nameSEQ = name_table +"_id_seq"; // имя итератора
         int number_colum = listNameColum.size();
@@ -197,7 +196,7 @@ public class DataBase {
             stmt.close();
             //connection.commit();
             //System.out.println("-- Table created successfully");
-            createCommentTable(name_table, "comment 665 и он на Русском"); // вызом метода добавления комментария
+            createCommentTable(name_table, "Я комментарий к этой таблице"); // вызом метода добавления комментария
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE TABLE");
@@ -312,7 +311,7 @@ public class DataBase {
                     break;
                 }
             }
-            System.out.println(sql); // Если надо смотрим что за sql запрос
+            //System.out.println(sql); // Если надо смотрим что за sql запрос
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();

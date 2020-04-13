@@ -83,10 +83,10 @@ import javax.swing.table.TableColumn;
             listToTable.add(tmpList);
         }
         this.tableFrameModel = (TableNzVer2.NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
-        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
-        System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
-        System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
-        System.out.println("countRow " + tableFrameModel.getRowCount());
+//        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
+//        System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
+//        System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
+//        System.out.println("countRow " + tableFrameModel.getRowCount());
         initComponents();
     }
 
