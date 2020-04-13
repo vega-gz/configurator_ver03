@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
 <mazafaker Kind="Struct" Name="имя которое необходимо вытянуть" UUID="уид который надо вытянуть">
-<mazafaker_child Kind="Struct" Name="имя которое необходимо вытянуть" UUID="уид который надо вытянуть"/>
+    <Fields>
+        <mazafaker_child Kind="Struct" Name="имя которое необходимо вытянуть" UUID="уид который надо вытянуть"/>
+    </Fields>
 </mazafaker>

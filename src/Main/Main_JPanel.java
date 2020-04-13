@@ -29,6 +29,7 @@ import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
 import java.awt.Dimension;
 import DataBaseConnect.*;
+import FileConfigWork.SignalTypeToBase;
 import ReadWriteExcel.WriteXMLsignals;
 import fileTools.FileManager;
 
@@ -101,6 +102,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -168,6 +170,13 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setText(".type в базу");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -186,20 +195,20 @@ public class Main_JPanel extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(30, 30, 30)
+                            .addComponent(jButton5)
+                            .addComponent(jButton3))
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton4)
                                 .addGap(24, 24, 24)
-                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))))
+                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -220,8 +229,10 @@ public class Main_JPanel extends javax.swing.JFrame {
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton7)
+                    .addComponent(jButton8))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -388,6 +399,19 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
+        int ren = fileopen.showDialog(null, ".type");
+        if (ren == JFileChooser.APPROVE_OPTION) {
+            
+            File file = fileopen.getSelectedFile();// выбираем файл из каталога
+            String pathFileType = file.toString();
+            if (pathFileType.endsWith(".type")){
+                new SignalTypeToBase(pathFileType);
+            }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     public ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
 
@@ -424,6 +448,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
