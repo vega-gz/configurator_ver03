@@ -318,7 +318,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
         FrameTabel frameTable = new FrameTabel(selectT, columns); // Вызов класса Название таблицы и данные для нее
         JFrame frame = new JFrame(selectT); // с заголовком имя таблицы
-        frame.setTitle(selectT + " Тут должно быть русское название"); // установить заголовок
+        frame.setTitle(selectT + " " + DB.getCommentTable(selectT)); // установить заголовок имя таблицы и если есть ее коммент
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
         frame.setVisible(true);
