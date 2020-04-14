@@ -207,18 +207,6 @@ public class XMLSAX {
         return findData;
     }
     
-    // --- получить данные по аттрибуту ноды---
-    public String getDataAttr(Node n, String s){
-        NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
-        for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
-            Node attr = startAttr.item(i);
-            if(attr.getNodeName().equals(s)){ // Название атрибута
-                return attr.getNodeValue();
-            }
-        }
-        return null;
-    }
-    
     // --- получаем всех наследников ноды именно нод список(стандартно возвразает все подряд) ---
     public ArrayList<Node> getHeirNode(Node n){
         ArrayList<Node> kindNode = new ArrayList<>();
@@ -397,25 +385,16 @@ public class XMLSAX {
         return finding;
     }
 
-       // --- получить данные по аттрибуту ноды--- 
-    public String setDataAttr(Node n, String s) {
-
+    // --- получить данные по аттрибуту ноды--- 
+    public String getDataAttr(Node n, String s) {
         NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
-
         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
-
             Node attr = startAttr.item(i);
-
             if (attr.getNodeName().equals(s)) { // Название атрибута 
-
                 return attr.getNodeValue();
-
             }
-
         }
-
         return null;
-
     }
 
     // --- Найти ноду по имени и ее атрибутам ---
@@ -555,6 +534,27 @@ public class XMLSAX {
     void errorExecuter(String s) {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
+    
+    // --- Тестовый вызов метода создания документа нод и прочего ---     
+//    public static void main(String[] arg){
+//        HashMap<String, String> map = new HashMap<>();
+//        XMLSAX test = new XMLSAX();
+//        Node rootN = test.createDocument("root");
+//        HashMap<String,String> dataN = new HashMap<>();
+//        dataN.put("attr1", "value1");
+//        dataN.put("attr2", "value2");
+//        dataN.put("attr3", "value3");
+//        test.insertDataNode(rootN, dataN);
+//        Node childN = test.createNode("child");
+//        dataN.put("child", "value3");
+//        test.insertDataNode(childN, dataN);
+//        rootN.appendChild(childN);
+//        Node child2N = test.createNode("child2");
+//        test.insertDataNode(child2N, dataN);
+//        childN.appendChild(child2N);
+//        test.writeDocument("test666.xml");
+//        
+//        Node n = test.readDocument("test666.xml");
 //        Node n = test.readDocument("/home/ad/NetBeansProjects/Type_Mode.type");
 //        String[] value = {"F","TAG_NAME_PLC", "VarName"};// даже если параметром меньше
 //        String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
@@ -562,8 +562,7 @@ public class XMLSAX {
 //        String[] attr = {"G","nameColumnPos"};
 //        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
 //        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-          Node fNodName = test.returnFirstFinedNode(n, "child"); // поиск по названию ноды
-          System.out.println(test.getDataAttr(fNodName, "attr3"));
+//        Node fNodName = test.returnFirstFinedNode(n, "mazafaker_child"); // поиск по названию ноды
 //        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды
 //        HashMap<String,String> mapDataN = test.getDataNode(fNodName); // получаем с этой ноды данные
 //        try{
@@ -574,4 +573,5 @@ public class XMLSAX {
 //            test.errorExecuter("Node Null what is not find \n" + ex);
 //        }
 //    }
+    
 }
