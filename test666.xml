@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root attr1="value1" attr2="value2" attr3="value3">
+<child attr1="value1" attr2="value2" attr3="value3" child="value3">
+<child2 attr1="value1" attr2="value2" attr3="value3" child="value3"/>
+</child>
+</root>
