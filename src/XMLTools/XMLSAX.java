@@ -121,10 +121,10 @@ public class XMLSAX {
             FileManager.loggerConstructor(nameElement + "not created but XML document null!");
         }
         return root;
-    }
-
-    // --- Внести данные в ноду ---
-    public void insertDataNode(Object o, HashMap<String, String> map) {
+     }
+    
+    // --- Внести данные в ноду списком HashMap---
+    public void insertDataNode(Object o, HashMap<String, String> map){
         System.out.println(o.getClass().getName());
         Element editElem = null;
         if (o instanceof Node) {
@@ -138,7 +138,19 @@ public class XMLSAX {
             String value = item.getValue();
             editElem.setAttribute(key, value);
         }
-
+    
+    }
+    // --- Внести данные в ноду списком ключ-значение ---
+    public void setDataAttr(Object o, String attr, String value){
+        System.out.println(o.getClass().getName());
+        Element editElem = null;
+        if (o instanceof Node){
+            editElem = (Element) o;
+        }
+        if (o instanceof Element){
+            editElem = (Element) o;
+        }
+        editElem.setAttribute(attr, value);
     }
 
     // --- инициализировать документ с путем для его сохранения (если стандартными способами создали)---
@@ -194,9 +206,21 @@ public class XMLSAX {
         }
         return findData;
     }
-
-    // --- получаем всех наследников ноды именно нод список ---
-    public ArrayList<Node> getHeirNode(Node n) {
+    
+    // --- получить данные по аттрибуту ноды---
+    public String getDataAttr(Node n, String s){
+        NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
+        for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
+            Node attr = startAttr.item(i);
+            if(attr.getNodeName().equals(s)){ // Название атрибута
+                return attr.getNodeValue();
+            }
+        }
+        return null;
+    }
+    
+    // --- получаем всех наследников ноды именно нод список(стандартно возвразает все подряд) ---
+    public ArrayList<Node> getHeirNode(Node n){
         ArrayList<Node> kindNode = new ArrayList<>();
 
         NodeList child = n.getChildNodes();
@@ -531,25 +555,20 @@ public class XMLSAX {
     void errorExecuter(String s) {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
-
-//    // --- Тестовый вызов метода создания документа нод и прочего ---     
-//    public static void main(String[] arg){
-//        HashMap<String, String> map = new HashMap<>();
-//        XMLSAX test = new XMLSAX();
-//        //Node n = test.readDocument("test666.xml");
 //        Node n = test.readDocument("/home/ad/NetBeansProjects/Type_Mode.type");
 //        String[] value = {"F","TAG_NAME_PLC", "VarName"};// даже если параметром меньше
-//        //String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
-//        //String[] attr = {"G","nameColumnPos", "type"};
+//        String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
+//        String[] attr = {"G","nameColumnPos", "type"};
 //        String[] attr = {"G","nameColumnPos"};
 //        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
 //        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-//        //Node fNodName = test.returnFirstFinedNode(n, "mazafaker_child"); // поиск по названию ноды
+          Node fNodName = test.returnFirstFinedNode(n, "child"); // поиск по названию ноды
+          System.out.println(test.getDataAttr(fNodName, "attr3"));
 //        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды
 //        HashMap<String,String> mapDataN = test.getDataNode(fNodName); // получаем с этой ноды данные
 //        try{
-//            //System.out.println(fNValue.getNodeName());
-//            //System.out.println(fNAttr.getNodeName());
+//            System.out.println(fNValue.getNodeName());
+//            System.out.println(fNAttr.getNodeName());
 //            System.out.println(fNodName.getNodeName() + " Size_data " + mapDataN.size());
 //        } catch (NullPointerException ex) {
 //            test.errorExecuter("Node Null what is not find \n" + ex);

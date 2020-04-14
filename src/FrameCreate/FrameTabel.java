@@ -36,55 +36,60 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
 /**
  *
  * @author cherepanov
  */
-    public class FrameTabel extends javax.swing.JPanel {
+public class FrameTabel extends javax.swing.JPanel {
+
     Main_JPanel mj = new Main_JPanel();
     String nameTable = "";
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
+    ArrayList<ArrayList> listToTable = new ArrayList<>(); // Лист для передачи в таблицу
+    String[] columnstoMass = null; // Массив столбцов для передачи в таблицу
     //TableModel tableFrameModel = null;
     NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
-    XMLSAX sax=new XMLSAX();
-    public int tableSize(){//возвращает размер таблицы
-        return tableFrameModel.getRowCount();
-    }
-    public String tableName(){//возвращает имя таблицы
-        return nameTable;
-    }
-    public Object getCell(String colName, int row){//возвращает содержимое ячейки по имени столбца и номеру строки
-        return tableFrameModel.getDataNameColumn(colName, row);
-    }
-    
+    XMLSAX sax = new XMLSAX();
     int filepath;
     String filepatch;
-
-    //XMLSAX createXMLSax = new XMLSAX();
     DataBase workbase = DataBase.getInstance();
+
+    public int tableSize() {//возвращает размер таблицы
+        return tableFrameModel.getRowCount();
+    }
+
+    public String tableName() {//возвращает имя таблицы
+        return nameTable;
+    }
+
+    public Object getCell(String colName, int row) {//возвращает содержимое ячейки по имени столбца и номеру строки
+        return tableFrameModel.getDataNameColumn(colName, row);
+    }
 
     public FrameTabel(String nameTable) {
         this.nameTable = nameTable;
         //this.tableFrameModel = getTableData();
         initComponents();
     }
+
     // --- Конструктор с вызовом таблицы TableNzVer2 и преобразованными данными для нее ---
     public FrameTabel(String selectT, ArrayList<String> columns) {
         this.nameTable = selectT;
         this.columns = columns;
-        String[] columnstoMass = columns.toArray(new String[columns.size()]); // Преобразование в массив
+        columns.toArray(new String[columns.size()]); // Преобразование в массив
         this.dataFromDb = DataBase.getInstance().getData(selectT, columns); // получили данные с базы 
         //преобразовать данные для переваривания таблицей
-        ArrayList<ArrayList> listToTable = new ArrayList<>();
-        for (String[] mass :dataFromDb){
+        for (String[] mass : dataFromDb) {
             ArrayList<String> tmpList = new ArrayList<>();
-            for(String s: mass){
+            for (String s : mass) {
                 tmpList.add(s);
             }
             listToTable.add(tmpList);
         }
-        this.tableFrameModel = (NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
+        //jTable1 = new TableNzVer3(nameTable, columnstoMass, listToTable).getJTable();
+        //this.tableFrameModel = (NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
 //        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
 //        System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
 //        System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
@@ -103,15 +108,13 @@ import javax.swing.table.TableColumn;
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new TableNzVer3(nameTable, columns, listToTable).getJTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(999, 530));
 
-        jTable1.setModel(tableFrameModel);
-        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Добавить в мнемосхему");
@@ -181,7 +184,7 @@ import javax.swing.table.TableColumn;
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -190,90 +193,92 @@ import javax.swing.table.TableColumn;
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
-                    filepatch = fileload.getSelectedFile().getCanonicalPath();
-  
-                } catch (IOException ex) {
-                    Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                filepatch = fileload.getSelectedFile().getCanonicalPath();
+                //Generator.GenSigType(this);
 
-                }
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    
-    // --- Временная кнопка для преобразования файлов type ---
+
+        // --- Временная кнопка для преобразования файлов type ---
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-          JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
+        JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
         int ren = fileopen.showDialog(null, ".type");
         if (ren == JFileChooser.APPROVE_OPTION) {
-            
+
             File file = fileopen.getSelectedFile();// выбираем файл из каталога
             String pathFileType = file.toString();
             //System.out.println(file.getName());
-            if (pathFileType.endsWith(".type")){
+            if (pathFileType.endsWith(".type")) {
                 new SignalTypeConvertTagName(pathFileType);
-            }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
+            } else {
+                JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
+            }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-            
-    public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
-        // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
-        String[] columnDop = {"Выбор"};// до поля для галок или еще чего
-        String[] columnNames = StructSelectData.getColumns();
-        String[] resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames))
-                .toArray(String[]::new); // соединяем два массива
-        Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
-        Object[] streamArray;
-        Object[] streamNull = new Object[1];
-        streamNull[0] = null;
-        Object[][] tmp2 = new Object[data.length][];
-        for (int i = 0; i < data.length; i++) {
-            streamArray = new Object[data[i].length + 1];
-            // преобразовываем массив
-            Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);
-            tmp2[i] = testStream;
-        }
-        return new DefaultTableModel(tmp2, resultColumn) {
-            @Override
-            public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
-                Class clazz = String.class;
-                switch (columnIndex) {
-                    case 0:
-                        clazz = Boolean.class;
-                        break;
-                }
-                return clazz;
+        public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
+            // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
+            String[] columnDop = {"Выбор"};// до поля для галок или еще чего
+            String[] columnNames = StructSelectData.getColumns();
+            String[] resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames))
+                    .toArray(String[]::new); // соединяем два массива
+            Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
+            Object[] streamArray;
+            Object[] streamNull = new Object[1];
+            streamNull[0] = null;
+            Object[][] tmp2 = new Object[data.length][];
+            for (int i = 0; i < data.length; i++) {
+                streamArray = new Object[data[i].length + 1];
+                // преобразовываем массив
+                Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);
+                tmp2[i] = testStream;
             }
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return column == column;
-            }
-
-            @Override
-            public void setValueAt(Object aValue, int row, int column) {
-                // Условие проверки галочки скрывать легенду
-                if (aValue instanceof Boolean && column == 0) {
-                    System.out.println("Posution - > " + row + " " + aValue);
-                    Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
-                    rowData.set(0, (boolean) aValue);
-                    fireTableCellUpdated(row, column);
-
-                    try {
-                        // Само действие не реализованно
-                        if ((boolean) aValue == true) {
-                            System.out.println("true");
-                        }
-                        if ((boolean) aValue == false) {
-                            System.out.println("false");
-                        }
-                    } catch (NullPointerException e) {
-                        JOptionPane.showMessageDialog(null, "Трудности с добавлением");
+            return new DefaultTableModel(tmp2, resultColumn) {
+                @Override
+                public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
+                    Class clazz = String.class;
+                    switch (columnIndex) {
+                        case 0:
+                            clazz = Boolean.class;
+                            break;
                     }
+                    return clazz;
                 }
 
-            }
-        };
-    }
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == column;
+                }
+
+                @Override
+                public void setValueAt(Object aValue, int row, int column) {
+                    // Условие проверки галочки скрывать легенду
+                    if (aValue instanceof Boolean && column == 0) {
+                        System.out.println("Posution - > " + row + " " + aValue);
+                        Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
+                        rowData.set(0, (boolean) aValue);
+                        fireTableCellUpdated(row, column);
+
+                        try {
+                            // Само действие не реализованно
+                            if ((boolean) aValue == true) {
+                                System.out.println("true");
+                            }
+                            if ((boolean) aValue == false) {
+                                System.out.println("false");
+                            }
+                        } catch (NullPointerException e) {
+                            JOptionPane.showMessageDialog(null, "Трудности с добавлением");
+                        }
+                    }
+
+                }
+            };
+        }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

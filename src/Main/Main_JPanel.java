@@ -402,7 +402,7 @@ public class Main_JPanel extends javax.swing.JFrame {
             
             File file = fileopen.getSelectedFile();// выбираем файл из каталога
             String pathFileType = file.toString();
-            //System.out.println(file.getName());
+            //System.out.println(file.getNaтяme());
             if (pathFileType.endsWith(".type")){
                 new SignalTypeToBase(pathFileType);
             }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение

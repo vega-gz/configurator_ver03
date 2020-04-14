@@ -13,11 +13,18 @@ import java.util.stream.Stream;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseConnect.DataBase;
+import java.awt.Component;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.AbstractCellEditor;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.SpinnerDateModel;
 import javax.swing.event.ChangeEvent;
+import javax.swing.table.TableCellEditor;
 
 /**
  *
@@ -49,23 +56,48 @@ public class TableNzVer3 {
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
     }
     
-    // --- Конструктор со всеми параметрами  ---
-    public JTable TableNzVer3(String nameTable, String[] columns, ArrayList<ArrayList> listData) {
+    // --- Конструктор со всеми параметрами  с массивом названи столбцов ---
+    TableNzVer3(String nameTable, String[] columns, ArrayList<ArrayList> listData) {
         this.nameTable = nameTable;
+        this.columns = columns; 
+        this.listData = listData;
         this.workbase = DataBase.getInstance();
-        TableModel tableFrameModel = getModelTable(nameTable, columns, listData);
-        jTable1.setModel(tableFrameModel);
-        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        return null;
     }
     
+    // --- Если на вход подали не массив колонок а Лист ---
+    TableNzVer3(String nameTable, ArrayList<String> columns, ArrayList<ArrayList> listData) {
+        this.nameTable = nameTable;
+        //this.columns = columns; 
+        this.listData = listData;
+        this.workbase = DataBase.getInstance();
+        this.columns = new String[columns.size()];
+        for(int i=0; i<columns.size(); ++i){ // Преобразовать лист в массив
+            this.columns[i] = columns.get(i);
+        }
+    }
+    
+    // --- получить сформированную таблицу ---
+    public JTable getJTable(){
+        NZDefaultTableModel tableFrameModel = getModelTable(nameTable, columns, listData);
+        jTable1.setModel(tableFrameModel);
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        //jTable1.getColumnCount();// получить количество столбцов
+        jTable1.setDefaultEditor(Date.class, new DateCellEditor());// Определение редактора ячеек
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+            jTable1MousePressed(evt);
+            }
+        });
+        return jTable1;
+    
+    }
 
     TableModel getModelTable() {
         return getModelTable(nameTable, columns, listData); // вызываем функцию с пустым запросом к базе
     }
 
    // --- таблица с Подключение к базе и какой таблице --- 
-    TableModel getModelTable(String nameTable, String[] columns, ArrayList<ArrayList> listData) { // Надо передавать сюда и названи столбцов
+    NZDefaultTableModel getModelTable(String nameTable, String[] columns, ArrayList<ArrayList> listData) { // Надо передавать сюда и названи столбцов
         //String[] columnDop = {"Выбор"};// до поля для галок или еще чего
         final String[] resultColumn;// = null;
         // вынужденная мера пока что
@@ -197,4 +229,26 @@ public class TableNzVer3 {
 }
 
 
-
+// Редактор даты с использованием прокручивающегося списка JSpinner
+class DateCellEditor extends AbstractCellEditor implements TableCellEditor{
+    // Редактор
+    private JSpinner editor;
+    // Конструктор
+    public DateCellEditor() {
+        // Настройка прокручивающегося списка
+        SpinnerDateModel model = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
+        editor = new JSpinner(model);
+    }
+     @Override
+    // Метод получения компонента для прорисовки (обязательный реализации )
+    public Component getTableCellEditorComponent(JTable table, Object value, 
+                                                boolean isSelected, int row, int column) {
+        // Изменение значения
+        editor.setValue(value);
+        return editor;
+    }
+    // Функция текущего значения в редакторе
+    public Object getCellEditorValue() {
+        return editor.getValue();
+    }
+}
