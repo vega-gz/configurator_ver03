@@ -58,8 +58,7 @@ public class XMLSAX {
     Document document = null; // Глобальный документ с которым работаем
     String patchWF = "";
     DataBase workbase = DataBase.getInstance();
-    ReadBedXML fixXML; // объект реализации обхода неверно сформированного файла
-
+    ReadBedXML fixXML; // объект реализации обхода неверно сформированного файл
     
      // --- прочитать документ и передать корневую ноду ---
     public Node readDocument(String patchF) {
@@ -148,8 +147,8 @@ public class XMLSAX {
         this.document = document;
      }
     
-    // --- получаем данные c ноды рекурсией ---
-    private static void stepThroughAll(Node start) {
+    // --- пробегаме по ноды рекурсией ---
+    public static void stepThroughAll(Node start) {
         System.out.println(start.getNodeName() + " = " + start.getNodeValue());
         if (start.getNodeType() == start.ELEMENT_NODE) {
             NamedNodeMap startAttr = start.getAttributes();
@@ -165,7 +164,51 @@ public class XMLSAX {
             stepThroughAll(child);
         }
     }
+    
+    // --- получаем данные c ноды в виде ключ значение ---
+    public HashMap getDataNode(Node n){
+        HashMap<String,String> findData = null;
+        if (n != null) {
+            //System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
+            if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
+                findData = new HashMap<>();// тут инициализируем Мап
+                NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
+                for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
+                   Node attr = startAttr.item(i);
+                   String attribute = attr.getNodeName(); // Название атрибута
+                   String value = attr.getNodeValue();
+                   findData.put(attribute, value);
+                }
+                return findData;
+            }
+        
+        if (findData == null) { // если не нашли
+                for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
+                    findData = getDataNode(child);
+                    if (findData != null) {
+                        break;
+                    }
+                }
 
+            }
+        }
+        return findData;    
+    }
+    
+    // --- получаем всех наследников ноды именно нод список ---
+    public ArrayList<Node> getHeirNode(Node n){
+        ArrayList<Node> kindNode = new ArrayList<>();
+       
+        NodeList child = n.getChildNodes();
+        for (int i = 0; i < child.getLength(); i++) {
+            Node node = child.item(i);
+            //System.out.println("NodeName " + node.getNodeName() + " NameType" + node.getNodeType());
+            if (node.getNodeType() == 1) { //  Так это сама нода
+                kindNode.add(node);
+            }    
+        }
+        return kindNode;
+    }
     
     // --- Запипись в файл структурой XML ---
    public void writeDocument() {
@@ -253,10 +296,10 @@ public class XMLSAX {
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
-            //System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
+            System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
                 if (n.getNodeName().equals(s)) {
-                    //System.out.println("Find Node " + n.getNodeName());
+                    System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
                 }
@@ -432,24 +475,21 @@ public class XMLSAX {
                         System.out.println("What is way wrong!"); // дебаг
                     } else {
                         // тут реализация сигнала в базе данных
-                        try {
-                            for (String s : it_list_sheet) { // пробегаем по Листам файла и сравниваем есть ли такое в конфиг-файле
-                                if (nameSheetExel.equals(s)) {
-                                    workbase.createTable(nameTB, columnBase); // Создание таблицы
-                                    ArrayList<String[]> sheet_fromsheet_from = new ArrayList<>(readExel.getDataCell(nameSheetExel, columnExcel));
-                                    for (String[] massS : sheet_fromsheet_from) {
-                                        workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
-                                    }
+                        for (String s : it_list_sheet) {
+                            // пробегаем по Листам файла и сравниваем есть ли такое в конфиг-файле
+                            if (nameSheetExel.equals(s)) {
+                                workbase.createTable(nameTB, columnBase); // Создание таблицы
+                                ArrayList<String[]> sheet_fromsheet_from = new ArrayList<>(readExel.getDataCell(nameSheetExel, columnExcel));
+                                for (String[] massS : sheet_fromsheet_from) {
+                                    workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
                                 }
                             }
-                            // все обнуляем для следующего сигнала
-                            nameTB = "";
-                            nameSheetExel = "";
-                            columnExcel.clear();
-                            columnBase.clear();
-                        } catch (SQLException ex) {
-                            errorExecuter("Error read file or connect to base " + ex);
                         }
+                        // все обнуляем для следующего сигнала
+                        nameTB = "";
+                        nameSheetExel = "";
+                        columnExcel.clear();
+                        columnBase.clear();
                     }
                 }
             }
@@ -460,25 +500,28 @@ public class XMLSAX {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
     
-    // --- Тестовый вызов метода создания документа нод и прочего ---     
-    public static void main(String[] arg){
-        HashMap<String, String> map = new HashMap<>();
-        XMLSAX test = new XMLSAX();
-        Node n = test.readDocument("ConfigSignals.xml");
-        String[] value = {"F","TAG_NAME_PLC", "VarName"};// даже если параметром меньше
-        //String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
-        String[] attr = {"G","nameColumnPos", "type"};
-       // String[] attr = {"G","nameColumnPos"};
-        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и атрибутам
-        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-        Node fNodName = test.returnFirstFinedNode(n, "ai"); // поиск по названию ноды
-        try{
-            System.out.println(fNValue.getNodeName());
-            System.out.println(fNAttr.getNodeName());
-            System.out.println(fNodName.getNodeName());
-        } catch (NullPointerException ex) {
-            test.errorExecuter("Node Null what is not find \n" + ex);
-        }
-    }
+//    // --- Тестовый вызов метода создания документа нод и прочего ---     
+//    public static void main(String[] arg){
+//        HashMap<String, String> map = new HashMap<>();
+//        XMLSAX test = new XMLSAX();
+//        //Node n = test.readDocument("test666.xml");
+//        Node n = test.readDocument("/home/ad/NetBeansProjects/Type_Mode.type");
+//        String[] value = {"F","TAG_NAME_PLC", "VarName"};// даже если параметром меньше
+//        //String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
+//        //String[] attr = {"G","nameColumnPos", "type"};
+//        String[] attr = {"G","nameColumnPos"};
+//        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
+//        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
+//        //Node fNodName = test.returnFirstFinedNode(n, "mazafaker_child"); // поиск по названию ноды
+//        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды
+//        HashMap<String,String> mapDataN = test.getDataNode(fNodName); // получаем с этой ноды данные
+//        try{
+//            //System.out.println(fNValue.getNodeName());
+//            //System.out.println(fNAttr.getNodeName());
+//            System.out.println(fNodName.getNodeName() + " Size_data " + mapDataN.size());
+//        } catch (NullPointerException ex) {
+//            test.errorExecuter("Node Null what is not find \n" + ex);
+//        }
+//    }
     
 }

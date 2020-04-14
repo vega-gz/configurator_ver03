@@ -5,7 +5,11 @@
  */
 package FileConfigWork;
 
+
 import FrameCreate.*;
+
+import FrameCreate.FrameTabel;
+
 import FrameCreate.TableNzVer2;
 import XMLTools.XMLSAX;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
@@ -34,6 +38,7 @@ import org.w3c.dom.NodeList;
  * @author Григорий
  */
 public class Generator {
+
 
     
     public static void GenSigtype(FrameTabel ft){
@@ -71,7 +76,6 @@ public class Generator {
             }
 
         }
-
     }
 
 }

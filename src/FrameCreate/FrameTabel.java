@@ -27,15 +27,24 @@ import XMLTools.UUID;
 import DataBaseConnect.*;
 import FileConfigWork.Generator;
 import FrameCreate.TableNzVer2;
-
-/*@author cherepanov */
-public class FrameTabel extends javax.swing.JPanel {
+import FileConfigWork.Generator;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+/**
+ *
+ * @author cherepanov
+ */
+    public class FrameTabel extends javax.swing.JPanel {
     Main_JPanel mj = new Main_JPanel();
     String nameTable = "";
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
     //TableModel tableFrameModel = null;
     TableNzVer2.NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
+    XMLSAX sax=new XMLSAX();
     public int tableSize(){//возвращает размер таблицы
         return tableFrameModel.getRowCount();
     }
@@ -45,18 +54,9 @@ public class FrameTabel extends javax.swing.JPanel {
     public Object getCell(String colName, int row){//возвращает содержимое ячейки по имени столбца и номеру строки
         return tableFrameModel.getDataNameColumn(colName, row);
     }
-    //XMLSAX sax=new XMLSAX();
-
+    
     int filepath;
     String filepatch;
-  //  String nameTable = "";
-    //String UUIDHigth = "";
-    //String Graphname, TypeName, ElemName;
-    //String UUIDBlockPref, UUIDBlockName;
-    //String TypeAI_DRV = "REAL", TypeDI_DRV = "BOOL";
-    //String nameSignal1, nameSignal2, nameSignal3, nameSignal4, nameSignal5, nameSignal6,
-    //        UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4,
-    //        UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4;
 
     //XMLSAX createXMLSax = new XMLSAX();
     DataBase workbase = DataBase.getInstance();
@@ -82,9 +82,10 @@ public class FrameTabel extends javax.swing.JPanel {
             listToTable.add(tmpList);
         }
         this.tableFrameModel = (TableNzVer2.NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
-        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
-        System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
-        System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
+//        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
+//        System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
+//        System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
+//        System.out.println("countRow " + tableFrameModel.getRowCount());
         initComponents();
     }
 
@@ -106,6 +107,7 @@ public class FrameTabel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(999, 530));
 
         jTable1.setModel(tableFrameModel);
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Добавить в мнемосхему");
@@ -129,13 +131,12 @@ public class FrameTabel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(301, 301, 301)))
-                .addGap(21, 21, 21))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,8 +146,7 @@ public class FrameTabel extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -177,14 +177,15 @@ public class FrameTabel extends javax.swing.JPanel {
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
                     filepatch = fileload.getSelectedFile().getCanonicalPath();
-                   Generator.GenSigtype(this); 
+  
                 } catch (IOException ex) {
                     Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
 
                 }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
+            
     public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
         // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
         String[] columnDop = {"Выбор"};// до поля для галок или еще чего
@@ -254,3 +255,8 @@ public class FrameTabel extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+   
+
