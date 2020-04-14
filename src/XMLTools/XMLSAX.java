@@ -141,7 +141,7 @@ public class XMLSAX {
     
     }
     // --- Внести данные в ноду списком ключ-значение ---
-    public void insertDataNode(Object o, String attr, String value){
+    public void setDataAttr(Object o, String attr, String value){
         System.out.println(o.getClass().getName());
         Element editElem = null;
         if (o instanceof Node){
