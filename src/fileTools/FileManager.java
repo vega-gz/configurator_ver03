@@ -29,10 +29,13 @@ import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.w3c.dom.Node;
 
 //import main.globVar;
 public class FileManager {
@@ -280,29 +283,30 @@ public class FileManager {
         return 0;
     }
 //тот самый метод,еще подправлю
-    public String ReadFile(String file, String nameWords) {
-        String name,name1 = null;
+
+    public static String FindFile(String dir, String nameType) {
+        boolean result;
+        String nameWords = "Name=";
+        String name, name1 = null;
         int i = 0;
         try {
             //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(file);
+            FileReader fr = new FileReader(dir);
             //создаем BufferedReader с существующего FileReader для построчного считывания
             BufferedReader reader = new BufferedReader(fr);
             // считаем сначала первую строку
             String line = reader.readLine();
             while (line != null) {
-             //   System.out.println(line);
-                // считываем остальные строки в цикле
+
                 line = reader.readLine();
                 if (line.contains(nameWords) == true) {
                     int count = 0;
-                    for(int j=0;j<nameWords.toCharArray().length;j++){
+                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
                         count++;
                     }
-                    name ="."+ line.substring(line.indexOf(nameWords)+count+2);
-                    name1=name.substring(name.indexOf('.')+1,name.indexOf('"'));
+                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
+                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
                     System.out.println(name1);
-                    break;  
 
                 } else {
                     System.out.println("В строке " + i + " не нашлось данного слова");
@@ -314,13 +318,52 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return name1;
+
+        return name1;//должен возвращать имя файла со схожим типом
+
+    }
+
+    public  String Find(String dir, String nameType) throws FileNotFoundException, IOException {
+        String nameWords = "Name=";
+        String name, name1 = null;
+        String trueName = null;
+        int i=0;
+        //получаем все файлы в папке
+        final File folder = new File(dir);
+        final List<File> fileList = Arrays.asList(folder.listFiles());//массив который хранит количество файлов в папке
+        for (int k= 0; k <= fileList.size(); k++) {
+            FileReader fr = new FileReader(fileList.get(k));
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            while (line != null) {
+                line = reader.readLine();
+                if (line.contains(nameWords) == true) {
+                    int count = 0;
+                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
+                        count++;
+                    }
+                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
+                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
+                  //  System.out.println(name1);
+                    if(nameType.equals(name1)){
+                        trueName=fileList.get(k).getName();
+                        break;
+                    }
+
+                } 
+
+            }
+        }
+        System.out.println(trueName);
+
+        return trueName;
     }
 
     public static void main(String[] args) throws IOException {//для тестирования
         FileManager fm = new FileManager();
         // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-        fm.ReadFile("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml", "Type");
+      //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
+      fm.  Find("C:\\Users\\Григорий\\Desktop\\сиг","T_GPA_AI_FromProcessing");
     }
 
 }
