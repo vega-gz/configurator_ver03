@@ -51,18 +51,21 @@ public class Generator {
         Node findNode = configSig.returnFirstFinedNode(cfs, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         Node nodeGenData = configSig.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData
         NodeList nodesGenData = nodeGenData.getChildNodes();
-        String[] nodeAndAttr = {"Field", "name", "tagName"};
+       
 
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             XMLSAX sax = new XMLSAX();
             Node firstNode = nodesGenData.item(i);
             String typeName = firstNode.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
             String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
-            Node type = sax.readDocument("Указываю путь до этого файла  с новым именем" + "\\" + trueName);//прочитал файл в котором нашли совпадения по имени
+            Node type = sax.readDocument(filePath + "\\" + trueName);//прочитал файл в котором нашли совпадения по имени
             Node oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
             Node firstFields = oldFields.getFirstChild();
+              String typeUUID=firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
+//              HashMap<String, String> dataN = new HashMap<>();
+//              sax.insertDataNode(type, dataN);
 
-          //  Node rootNode = sax.createDocument("Type");//создаем ноды с именем ,которое вытянули из конфиг сигнался
+          /// Node rootNode = sax.createDocument("Type");//создаем ноды с именем ,которое вытянули из конфиг сигнался
              Node rootNode=sax.createNode("Type");
             HashMap<String, String> dataNode = new HashMap<>();
             dataNode.put("Kind", "Struct");
@@ -70,10 +73,12 @@ public class Generator {
             dataNode.put("UUID", "UUID");
             sax.insertDataNode(rootNode, dataNode);
 
-            String typeUUID=firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
+          
 
             for (int j = 0; j < ft.tableSize(); j++) {
+                
                 String tagName = (String) ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
+                 String[] nodeAndAttr = {"Field", "name", tagName};
                 String comment=(String)ft.getCell("Наименование", j);
                 Node fields = sax.findNodeAtribute(firstFields, nodeAndAttr);
                 String key = firstFields.getAttributes().getNamedItem("tagName").getNodeName();//назвал key как в примере из инета
