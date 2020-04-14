@@ -28,7 +28,10 @@ import DataBaseConnect.*;
 import FileConfigWork.Generator;
 import FrameCreate.TableNzVer2;
 import FileConfigWork.Generator;
+import FileConfigWork.SignalTypeToBase;
+import FileConfigWork.SignalTypeConvertTagName;
 import java.awt.Component;
+import java.io.File;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
@@ -43,7 +46,7 @@ import javax.swing.table.TableColumn;
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
     //TableModel tableFrameModel = null;
-    TableNzVer2.NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
+    NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
     XMLSAX sax=new XMLSAX();
     public int tableSize(){//возвращает размер таблицы
         return tableFrameModel.getRowCount();
@@ -81,7 +84,7 @@ import javax.swing.table.TableColumn;
             }
             listToTable.add(tmpList);
         }
-        this.tableFrameModel = (TableNzVer2.NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
+        this.tableFrameModel = (NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
 //        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
 //        System.out.println("FIND_1 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 1));
 //        System.out.println("FIND_2 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 2));
@@ -103,6 +106,7 @@ import javax.swing.table.TableColumn;
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(999, 530));
 
@@ -124,6 +128,13 @@ import javax.swing.table.TableColumn;
             }
         });
 
+        jButton3.setText("просканировать файл type с автозаменой");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -136,6 +147,8 @@ import javax.swing.table.TableColumn;
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,7 +157,8 @@ import javax.swing.table.TableColumn;
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
         );
@@ -184,6 +198,21 @@ import javax.swing.table.TableColumn;
                 }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+    // --- Временная кнопка для преобразования файлов type ---
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+          JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
+        int ren = fileopen.showDialog(null, ".type");
+        if (ren == JFileChooser.APPROVE_OPTION) {
+            
+            File file = fileopen.getSelectedFile();// выбираем файл из каталога
+            String pathFileType = file.toString();
+            //System.out.println(file.getName());
+            if (pathFileType.endsWith(".type")){
+                new SignalTypeConvertTagName(pathFileType);
+            }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
             
     public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
@@ -250,6 +279,7 @@ import javax.swing.table.TableColumn;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

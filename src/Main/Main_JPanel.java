@@ -301,12 +301,9 @@ public class Main_JPanel extends javax.swing.JFrame {
             } else {
                 columns.add(s); // конечный список столбцов к запросу базы
             }
-        }
-                
-        System.out.println(tmpStr);
+        }      
+        //System.out.println(tmpStr);
         jTextArea1.setText(tmpStr);
-        
-        
 
         if (selectT.equals("dies_ai")) {
             signal = "dies_ai";
@@ -333,8 +330,6 @@ public class Main_JPanel extends javax.swing.JFrame {
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(frameTable); // Передаем нашу форму
         frame.setVisible(true);
-
-
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
@@ -399,6 +394,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
         int ren = fileopen.showDialog(null, ".type");
@@ -406,6 +402,7 @@ public class Main_JPanel extends javax.swing.JFrame {
             
             File file = fileopen.getSelectedFile();// выбираем файл из каталога
             String pathFileType = file.toString();
+            //System.out.println(file.getName());
             if (pathFileType.endsWith(".type")){
                 new SignalTypeToBase(pathFileType);
             }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
