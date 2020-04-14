@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseConnect.DataBase;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 
 /**
  *
@@ -197,6 +198,8 @@ public class TableNzVer2 extends javax.swing.JPanel {
             th.repaint(); // без этого не работает отрисовка , тут с ней тоже
         }
     }//GEN-LAST:event_jTable1MousePressed
+
+   
 
 // -- мини меню по мыши первого столбца таблицы---
     class PopUpDemo extends JPopupMenu {

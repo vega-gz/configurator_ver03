@@ -25,6 +25,7 @@ import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
 import XMLTools.UUID;
 import DataBaseConnect.*;
+import FileConfigWork.Generator;
 import FrameCreate.TableNzVer2;
 import FileConfigWork.Generator;
 import FileConfigWork.SignalTypeToBase;
@@ -80,7 +81,6 @@ public class FrameTabel extends javax.swing.JPanel {
         columns.toArray(new String[columns.size()]); // Преобразование в массив
         this.dataFromDb = DataBase.getInstance().getData(selectT, columns); // получили данные с базы 
         //преобразовать данные для переваривания таблицей
-    
         for (String[] mass : dataFromDb) {
             ArrayList<String> tmpList = new ArrayList<>();
             for (String s : mass) {
@@ -108,7 +108,7 @@ public class FrameTabel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new TableNzVer3(nameTable, columnstoMass, listToTable).getJTable();
+        jTable1 = new TableNzVer3(nameTable, columns, listToTable).getJTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -194,7 +194,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
                 filepatch = fileload.getSelectedFile().getCanonicalPath();
-                Generator.GenSigType(this);
+                //Generator.GenSigType(this);
 
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -290,3 +290,8 @@ public class FrameTabel extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+   
+

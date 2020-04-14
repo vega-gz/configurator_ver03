@@ -56,7 +56,7 @@ public class TableNzVer3 {
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
     }
     
-    // --- Конструктор со всеми параметрами  ---
+    // --- Конструктор со всеми параметрами  с массивом названи столбцов ---
     TableNzVer3(String nameTable, String[] columns, ArrayList<ArrayList> listData) {
         this.nameTable = nameTable;
         this.columns = columns; 
@@ -64,6 +64,19 @@ public class TableNzVer3 {
         this.workbase = DataBase.getInstance();
     }
     
+    // --- Если на вход подали не массив колонок а Лист ---
+    TableNzVer3(String nameTable, ArrayList<String> columns, ArrayList<ArrayList> listData) {
+        this.nameTable = nameTable;
+        //this.columns = columns; 
+        this.listData = listData;
+        this.workbase = DataBase.getInstance();
+        this.columns = new String[columns.size()];
+        for(int i=0; i<columns.size(); ++i){ // Преобразовать лист в массив
+            this.columns[i] = columns.get(i);
+        }
+    }
+    
+    // --- получить сформированную таблицу ---
     public JTable getJTable(){
         NZDefaultTableModel tableFrameModel = getModelTable(nameTable, columns, listData);
         jTable1.setModel(tableFrameModel);
