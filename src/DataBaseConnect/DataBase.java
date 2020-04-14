@@ -493,7 +493,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
+                      //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String RangeMin = rs.getString("Диапазон_мин");
                         String RangeMax = rs.getString("Диапазон_макс");//field[4]
@@ -509,7 +509,7 @@ public class DataBase {
                         String Pv = rs.getString("УСТВЕРХПРЕД");
                         String Av = rs.getString("УСТВЕРХАВАР");
 
-                        String[] str = {TypeADC, id, namesig, RangeMax, RangeMin, Unit, sigType, Adres_1, Adres_2, Device, Slot, Channel, An, Pn, Pv, Av};
+                        String[] str = {TypeADC,  namesig, RangeMax, RangeMin, Unit, sigType, Adres_1, Adres_2, Device, Slot, Channel, An, Pn, Pv, Av};
                         selectData.add(str);
                     }
                     rs.close();
@@ -526,7 +526,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
+                       // String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String RangeMin = rs.getString("Диапазон_мин");
                         String RangeMax = rs.getString("Диапазон_макс");//field[4]
@@ -537,7 +537,7 @@ public class DataBase {
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
 
-                        String[] str = {TypeADC, id, namesig, RangeMax, RangeMin, Unit, Adres_1, Adres_2, Device, Slot, Channel};
+                        String[] str = {TypeADC,  namesig, RangeMax, RangeMin, Unit, Adres_1, Adres_2, Device, Slot, Channel};
                         selectData.add(str);
                     }
                     rs.close();
@@ -554,7 +554,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
+                      //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         
                         String sigType = rs.getString("Тип_сигнала");
@@ -562,7 +562,7 @@ public class DataBase {
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
 
-                        String[] str = {TypeADC, id, namesig, sigType,  Device, Slot, Channel};
+                        String[] str = {TypeADC,  namesig, sigType,  Device, Slot, Channel};
                         selectData.add(str);
                     }
                     rs.close();
@@ -579,7 +579,7 @@ public class DataBase {
                     ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
-                        String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
+                      //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
                         String namesig = rs.getString("Наименование");
                         String sigType = rs.getString("Тип_сигнала");
                         String Adres_1 = rs.getString("Адрес_1");
@@ -588,7 +588,7 @@ public class DataBase {
                         String Slot = rs.getString("Слот");
                         String Channel = rs.getString("Канал");
 
-                        String[] str = {TypeADC, id, namesig, sigType, Adres_1, Adres_2, Device, Slot, Channel};
+                        String[] str = {TypeADC,  namesig, sigType, Adres_1, Adres_2, Device, Slot, Channel};
                         selectData.add(str);
                     }
                     rs.close();

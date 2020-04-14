@@ -1,4 +1,4 @@
-  package XMLTools;
+package XMLTools;
 
 import configurator.StructSelectData;
 import java.io.ByteArrayInputStream;
@@ -59,8 +59,8 @@ public class XMLSAX {
     String patchWF = "";
     DataBase workbase = DataBase.getInstance();
     ReadBedXML fixXML; // объект реализации обхода неверно сформированного файл
-    
-     // --- прочитать документ и передать корневую ноду ---
+
+    // --- прочитать документ и передать корневую ноду ---
     public Node readDocument(String patchF) {
         patchWF = patchF;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -97,20 +97,20 @@ public class XMLSAX {
         }
         return n;
     }
-    
+
     // --- Создание элемента  ---
     public Node createNode(String nameElement) {
-        if(document != null){// если документ зарегистрирован или внесен то
-           return  document.createElement(nameElement);
-        }else{
+        if (document != null) {// если документ зарегистрирован или внесен то
+            return document.createElement(nameElement);
+        } else {
             FileManager.loggerConstructor(nameElement + "not created but XML document null!");
             return null;
         }
-     }    
-    
+    }
+
     // --- Создание Документа  с root нодой---
     public Node createDocument(String nameElement) {
-        Node root =null;
+        Node root = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(false);
@@ -118,35 +118,35 @@ public class XMLSAX {
             root = document.createElement(nameElement);
             document.appendChild(root);
         } catch (ParserConfigurationException ex) {
-           FileManager.loggerConstructor(nameElement + "not created but XML document null!");
+            FileManager.loggerConstructor(nameElement + "not created but XML document null!");
         }
         return root;
-     }
-    
+    }
+
     // --- Внести данные в ноду ---
-    public void insertDataNode(Object o, HashMap<String, String> map){
+    public void insertDataNode(Object o, HashMap<String, String> map) {
         System.out.println(o.getClass().getName());
         Element editElem = null;
-        if (o instanceof Node){
+        if (o instanceof Node) {
             editElem = (Element) o;
         }
-        if (o instanceof Element){
+        if (o instanceof Element) {
             editElem = (Element) o;
         }
-        for (Map.Entry<String, String> item : map.entrySet()) {            
-                String key = item.getKey();
-                String value = item.getValue();
-                editElem.setAttribute(key, value);
+        for (Map.Entry<String, String> item : map.entrySet()) {
+            String key = item.getKey();
+            String value = item.getValue();
+            editElem.setAttribute(key, value);
         }
-    
+
     }
-    
+
     // --- инициализировать документ с путем для его сохранения (если стандартными способами создали)---
-     public void docInstance(Document document, String patchWF) {
+    public void docInstance(Document document, String patchWF) {
         this.patchWF = patchWF;
         this.document = document;
-     }
-    
+    }
+
     // --- пробегаме по ноды рекурсией ---
     public static void stepThroughAll(Node start) {
         System.out.println(start.getNodeName() + " = " + start.getNodeValue());
@@ -164,25 +164,25 @@ public class XMLSAX {
             stepThroughAll(child);
         }
     }
-    
+
     // --- получаем данные c ноды в виде ключ значение ---
-    public HashMap getDataNode(Node n){
-        HashMap<String,String> findData = null;
+    public HashMap getDataNode(Node n) {
+        HashMap<String, String> findData = null;
         if (n != null) {
             //System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
                 findData = new HashMap<>();// тут инициализируем Мап
                 NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
                 for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
-                   Node attr = startAttr.item(i);
-                   String attribute = attr.getNodeName(); // Название атрибута
-                   String value = attr.getNodeValue();
-                   findData.put(attribute, value);
+                    Node attr = startAttr.item(i);
+                    String attribute = attr.getNodeName(); // Название атрибута
+                    String value = attr.getNodeValue();
+                    findData.put(attribute, value);
                 }
                 return findData;
             }
-        
-        if (findData == null) { // если не нашли
+
+            if (findData == null) { // если не нашли
                 for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
                     findData = getDataNode(child);
                     if (findData != null) {
@@ -192,53 +192,37 @@ public class XMLSAX {
 
             }
         }
-        return findData;    
+        return findData;
     }
-    
+
     // --- получаем всех наследников ноды именно нод список ---
-    public ArrayList<Node> getHeirNode(Node n){
+    public ArrayList<Node> getHeirNode(Node n) {
         ArrayList<Node> kindNode = new ArrayList<>();
-       
+
         NodeList child = n.getChildNodes();
         for (int i = 0; i < child.getLength(); i++) {
             Node node = child.item(i);
             //System.out.println("NodeName " + node.getNodeName() + " NameType" + node.getNodeType());
             if (node.getNodeType() == 1) { //  Так это сама нода
                 kindNode.add(node);
-            }    
+            }
         }
         return kindNode;
     }
-    
+
     // --- Запипись в файл структурой XML ---
-   public void writeDocument() {
+    public void writeDocument() {
         try {
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             System.out.println(document.getNodeName());
-            transformer.setOutputProperty(OutputKeys.INDENT,"yes"); // без этого в одну строку все запишет
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
             transformer.transform(new DOMSource(document), new StreamResult(file)); // наш документ в начале
-        } catch (TransformerException e) {e.printStackTrace(System.out);}
+        } catch (TransformerException e) {
+            e.printStackTrace(System.out);
+        }
         // тут возвращаем данные которые удаляли
         if (fixXML != null) {
-            try {
-                // если был вызван парсер удаления возвращамем что удалил
-                fixXML.returnToFileDtd(patchWF);//и возвращаем ему удаленный DOCTYPE
-            } catch (InterruptedException ex) {
-                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);}
-        }
-    }
-
-       // --- Запипись в файл структурой XML с указанием именем файла ---
-    public void writeDocument(String patchWF) {
-        try {
-            File file = new File(patchWF);
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT,"yes"); // без этого в одну строку все запишет
-            transformer.transform(new DOMSource(document), new StreamResult(file));
-        } catch (TransformerException e) {e.printStackTrace(System.out);}
-        // тут возвращаем данные которые удаляли
-        if (fixXML!= null) {
             try {
                 // если был вызван парсер удаления возвращамем что удалил
                 fixXML.returnToFileDtd(patchWF);//и возвращаем ему удаленный DOCTYPE
@@ -247,7 +231,28 @@ public class XMLSAX {
             }
         }
     }
-    
+
+    // --- Запипись в файл структурой XML с указанием именем файла ---
+    public void writeDocument(String patchWF) {
+        try {
+            File file = new File(patchWF);
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
+            transformer.transform(new DOMSource(document), new StreamResult(file));
+        } catch (TransformerException e) {
+            e.printStackTrace(System.out);
+        }
+        // тут возвращаем данные которые удаляли
+        if (fixXML != null) {
+            try {
+                // если был вызван парсер удаления возвращамем что удалил
+                fixXML.returnToFileDtd(patchWF);//и возвращаем ему удаленный DOCTYPE
+            } catch (InterruptedException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     // --- Метод чтения и подключение к базе посредством конфига ---
     public void setConnectBaseConfig(String patchFile) {
         File f = new File(patchFile);
@@ -278,9 +283,9 @@ public class XMLSAX {
             }
         }
     }
-    
-        // --- Удалить ноду ---
-    void removeNode(Node n) {
+
+    // --- Удалить ноду ---
+    public void removeNode(Node n) {
         Node parentN = n.getParentNode();
         System.out.println("What delete " + n.getNodeName());
         System.out.println("NameParent " + parentN.getNodeName());
@@ -291,8 +296,8 @@ public class XMLSAX {
             Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-     // --- Найти первую ноду по имени и вернуть ее ---
+
+    // --- Найти первую ноду по имени и вернуть ее ---
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
@@ -316,36 +321,39 @@ public class XMLSAX {
         }
         return finding;
     }
-        // --- Найти ноду по имени и ее значениям ---
+
+    // --- Найти ноду по имени и ее значениям ---
     public Node findNodeValue(Node n, String[] arg) {
         String nameFindN = arg[0];// arg первое значение всегда Название ноды
         Node finding = null;
         if (n != null) {
             //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                boolean access =false; // разрешение на нужную ноду
+                boolean access = false; // разрешение на нужную ноду
                 if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя ноды
                     NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
                     boolean compared = false;
-                    for (int elemArh =1; elemArh< arg.length; ++elemArh ){ // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
-                        String el =arg[elemArh]; // значение элемента которое проверяем
+                    for (int elemArh = 1; elemArh < arg.length; ++elemArh) { // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
+                        String el = arg[elemArh]; // значение элемента которое проверяем
                         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
                             Node attr = startAttr.item(i);
                             //String Attribute = attr.getNodeName(); // Название атрибута
                             String Value = attr.getNodeValue(); // значение атрибута
                             //System.out.println("Attribute:" + Attribute + " Value:" + Value);
-                            if(el.equals(Value)){
+                            if (el.equals(Value)) {
                                 compared = true;
                                 break; // элемент нашли и не перебираем дальше значения
                             }
                         }
-                        if(compared == true){// после прохода элемента нечего не нашли то ломаем цикл
+                        if (compared == true) {// после прохода элемента нечего не нашли то ломаем цикл
                             //System.out.println("Find_Value " + el);
                             access = true;
                             compared = false;
-                        }else access = false;
+                        } else {
+                            access = false;
+                        }
                     }
-                    if(access){
+                    if (access) {
                         System.out.println("Find Node " + n.getNodeName());
                         finding = n;
                         return finding;
@@ -364,37 +372,60 @@ public class XMLSAX {
         }
         return finding;
     }
-    
-        // --- Найти ноду по имени и ее атрибутам ---
+
+       // --- получить данные по аттрибуту ноды--- 
+    public String setDataAttr(Node n, String s) {
+
+        NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
+
+        for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
+
+            Node attr = startAttr.item(i);
+
+            if (attr.getNodeName().equals(s)) { // Название атрибута 
+
+                return attr.getNodeValue();
+
+            }
+
+        }
+
+        return null;
+
+    }
+
+    // --- Найти ноду по имени и ее атрибутам ---
     public Node findNodeAtribute(Node n, String[] arg) {
         String nameFindN = arg[0];// arg первое значение всегда Название ноды
         Node finding = null;
         if (n != null) {
             //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                boolean access =false; // разрешение на нужную ноду
+                boolean access = false; // разрешение на нужную ноду
                 if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя ноды
                     NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
                     boolean compared = false;
-                    for (int elemArh =1; elemArh< arg.length; ++elemArh ){ // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
-                        String el =arg[elemArh]; // значение элемента которое проверяем
+                    for (int elemArh = 1; elemArh < arg.length; ++elemArh) { // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
+                        String el = arg[elemArh]; // значение элемента которое проверяем
                         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
                             Node attr = startAttr.item(i);
                             String Attribute = attr.getNodeName(); // Название атрибута
                             //String Value = attr.getNodeValue(); // значение атрибута
                             //System.out.println("Attribute:" + Attribute + " Value:" + Value);
-                            if(el.equals(Attribute)){
+                            if (el.equals(Attribute)) {
                                 compared = true;
                                 break; // элемент нашли и не перебираем дальше значения
                             }
                         }
-                        if(compared == true){// после прохода элемента нечего не нашли то ломаем цикл
+                        if (compared == true) {// после прохода элемента нечего не нашли то ломаем цикл
                             //System.out.println("Find_Value " + el);
                             access = true;
                             compared = false;
-                        }else access = false;
+                        } else {
+                            access = false;
+                        }
                     }
-                    if(access){
+                    if (access) {
                         System.out.println("Find Node " + n.getNodeName());
                         finding = n;
                         return finding;
@@ -413,7 +444,7 @@ public class XMLSAX {
         }
         return finding;
     }
-    
+
     // --- сформировать даные из конфигугации XML для чтения Exel---
     public void ReadExelFromConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.                
         RWExcel readExel = new RWExcel(pathExel);
@@ -495,11 +526,12 @@ public class XMLSAX {
             }
         }
     }
-         // --- обработчик ошибок показывает что было не так сделанно(можно выводить логи в фал) --
+
+    // --- обработчик ошибок показывает что было не так сделанно(можно выводить логи в фал) --
     void errorExecuter(String s) {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
-    
+
 //    // --- Тестовый вызов метода создания документа нод и прочего ---     
 //    public static void main(String[] arg){
 //        HashMap<String, String> map = new HashMap<>();
@@ -523,5 +555,4 @@ public class XMLSAX {
 //            test.errorExecuter("Node Null what is not find \n" + ex);
 //        }
 //    }
-    
 }

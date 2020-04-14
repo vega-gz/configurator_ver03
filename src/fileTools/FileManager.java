@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.w3c.dom.Node;
 
 //import main.globVar;
@@ -284,86 +286,156 @@ public class FileManager {
     }
 //тот самый метод,еще подправлю
 
+//    public static String FindFile(String dir, String nameType) {
+//        boolean result;
+//        String nameWords = "Name=";
+//        String name, name1 = null;
+//        int i = 0;
+//        try {
+//         //   создаем объект FileReader для объекта File
+//            FileReader fr = new FileReader(dir);
+//          //  создаем BufferedReader с существующего FileReader для построчного считывания
+//            BufferedReader reader = new BufferedReader(fr);
+//             считаем сначала первую строку
+//            String line = reader.readLine();
+//            while (line != null) {
+//
+//                line = reader.readLine();
+//                if (line.contains(nameWords) == true) {
+//                    int count = 0;
+//                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
+//                        count++;
+//                    }
+//                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
+//                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
+//                    System.out.println(name1);
+//
+//                } else {
+//                    System.out.println("В строке " + i + " не нашлось данного слова");
+//                }
+//                i++;
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return name1;//должен возвращать имя файла со схожим типом
+//
+//    }
+//
+//    public String Find(String dir, String nameType) throws FileNotFoundException, IOException {
+//        String nameWords = "Name=";
+//        String name, name1 = null;
+//        String trueName = null;
+//        int i = 0;
+//
+//        получаем все файлы в папке
+//        final File folder = new File(dir);
+//
+//        final List<File> fileList = Arrays.asList(folder.listFiles());//массив который хранит количество файлов в папке
+//        for (int k = 0; k <= fileList.size(); k++) {
+//            FileReader fr = new FileReader(fileList.get(k));
+//            BufferedReader reader = new BufferedReader(fr);
+//            String line = reader.readLine();
+//            while (line != null) {
+//
+//                line = reader.readLine();
+//                if (line.contains(nameWords) == true) {
+//                    int count = 0;
+//                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
+//                        count++;
+//                    }
+//                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
+//                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
+//                      System.out.println(name1);
+//                    if (nameType.equals(name1)) {
+//                        trueName = fileList.get(k).getName();
+//
+//                    }
+//
+//                }
+//
+//            }
+//            break;
+//        }
+//        System.out.println(trueName);
+//
+//        return trueName;
+//    }
+
     public static String FindFile(String dir, String nameType) {
-        boolean result;
         String nameWords = "Name=";
-        String name, name1 = null;
-        int i = 0;
-        try {
-            //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(dir);
-            //создаем BufferedReader с существующего FileReader для построчного считывания
-            BufferedReader reader = new BufferedReader(fr);
-            // считаем сначала первую строку
-            String line = reader.readLine();
-            while (line != null) {
+        String ext = ".TYPE";
+        String firstName, secondName ,fileName= null;
 
-                line = reader.readLine();
-                if (line.contains(nameWords) == true) {
-                    int count = 0;
-                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
-                        count++;
-                    }
-                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
-                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
-                    System.out.println(name1);
-
-                } else {
-                    System.out.println("В строке " + i + " не нашлось данного слова");
-                }
-                i++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        final File folder = new File(dir);
+        String[] fileList = folder.list();
+        int count = 0;
+        for (int j = 0; j < nameWords.toCharArray().length; j++) {
+            count++;
         }
 
-        return name1;//должен возвращать имя файла со схожим типом
+        //создание fileList - списка всех файлов с расширением .type в каталоге dir
+        for (String file : fileList) {
+            try {
+                //создаем объект FileReader для объекта File
+                FileReader fr = new FileReader(dir + "\\" + file);
+                //создаем BufferedReader с существующего FileReader для построчного считывания
+                BufferedReader reader = new BufferedReader(fr);
+                // считаем сначала первую строку
+                String line = reader.readLine();
+                while (line != null) {
+
+                    int start = line.indexOf(nameWords);
+                    if (start >= 0) {
+
+                        firstName = "." + line.substring(line.indexOf(nameWords) + count + 1);
+                        secondName = firstName.substring(firstName.indexOf('.') + 1, firstName.indexOf('"'));
+                        // start = line.indexOf("\"", start);
+                        //  int end = line.indexOf("\"", start + 1);
+                        if (nameType.equals(secondName)) {
+                            System.out.println(file);
+                            
+                            return file;
+
+                        }
+                    }
+
+                    line = reader.readLine();
+
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;//должен возвращать имя файла со схожим типом
 
     }
 
-    public  String Find(String dir, String nameType) throws FileNotFoundException, IOException {
-        String nameWords = "Name=";
-        String name, name1 = null;
-        String trueName = null;
-        int i=0;
-        //получаем все файлы в папке
-        final File folder = new File(dir);
-        final List<File> fileList = Arrays.asList(folder.listFiles());//массив который хранит количество файлов в папке
-        for (int k= 0; k <= fileList.size(); k++) {
-            FileReader fr = new FileReader(fileList.get(k));
-            BufferedReader reader = new BufferedReader(fr);
-            String line = reader.readLine();
-            while (line != null) {
-                line = reader.readLine();
-                if (line.contains(nameWords) == true) {
-                    int count = 0;
-                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
-                        count++;
-                    }
-                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
-                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
-                  //  System.out.println(name1);
-                    if(nameType.equals(name1)){
-                        trueName=fileList.get(k).getName();
-                        break;
-                    }
+    public static class MyFileNameFilter implements FilenameFilter {
 
-                } 
+        private String ext;
 
-            }
+        public MyFileNameFilter(String ext) {
+            this.ext = ext;
         }
-        System.out.println(trueName);
 
-        return trueName;
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(ext);
+        }
     }
 
     public static void main(String[] args) throws IOException {//для тестирования
         FileManager fm = new FileManager();
         // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-      //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
-      fm.  Find("C:\\Users\\Григорий\\Desktop\\сиг","T_GPA_AI_FromProcessing");
+        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
+        fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
     }
 
 }
