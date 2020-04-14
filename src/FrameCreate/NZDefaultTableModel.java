@@ -54,24 +54,10 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
 
             @Override
             public void setValueAt(Object aValue, int row, int column) {
-                // Условие проверки галочки скрывать легенду
-                if (aValue instanceof Boolean && column == 0) {
-                    //System.out.println("Posution - > " + row + " " + aValue);        
-                    Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
-                    rowData.set(0, (boolean) aValue);
-                    fireTableCellUpdated(row, column);
-
-                    try {
-                        // Само действие не реализованно
-                        if ((boolean) aValue == true) {
-                            System.out.println("true");
-                        }
-                        if ((boolean) aValue == false) {
-                            System.out.println("false");
-                        }
-                    } catch (NullPointerException e) {
-                        JOptionPane.showMessageDialog(null, "Трудности с добавлением");
-                    }
+                // Условие проверки не трогать 1 столбец
+                if (column == 0) {
+                      JOptionPane.showMessageDialog(null, "поле не редактируется");
+                    
                 } else {  // если нет Галки просто обновляем данные
                     if (workbase != null & nameTable != null) { // проверка на редактирования и таблица и экземпляр баз
                         Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
