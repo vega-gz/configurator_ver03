@@ -562,8 +562,8 @@ public class XMLSAX {
 //        String[] attr = {"G","nameColumnPos"};
 //        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
 //        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-          Node fNodName = test.returnFirstFinedNode(n, "child"); // поиск по названию ноды
-          System.out.println(test.getDataAttr(fNodName, "attr3"));
+       //   Node fNodName = test.returnFirstFinedNode(n, "child"); // поиск по названию ноды
+      //    System.out.println(test.getDataAttr(fNodName, "attr3"));
 //        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды
 //        HashMap<String,String> mapDataN = test.getDataNode(fNodName); // получаем с этой ноды данные
 //        try{
