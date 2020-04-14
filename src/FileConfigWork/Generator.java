@@ -5,11 +5,10 @@
  */
 package FileConfigWork;
 
-
 import FrameCreate.*;
 
 import FrameCreate.FrameTabel;
-
+import XMLTools.*;
 import FrameCreate.TableNzVer2;
 import XMLTools.XMLSAX;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
@@ -39,11 +38,12 @@ import org.w3c.dom.NodeList;
  */
 public class Generator {
 
-
-    
-    public static void GenSigtype(FrameTabel ft){
-        String filePath="C:\\Users\\Григорий\\Desktop\\сиг";
+    public static void GenSigtype(FrameTabel ft) {
+        String filePath = "C:\\Users\\Григорий\\Desktop\\сиг";
         FileManager manager = new FileManager();
+        UUID uuid=new UUID();
+        
+        
         XMLSAX configSig = new XMLSAX();
         String FILENAME = "ConfigSignals.xml";
         Node cfs = configSig.readDocument(System.getProperty("user.dir") + File.separator + FILENAME);// Открыть configCignals из рабочего каталога программы
@@ -52,26 +52,50 @@ public class Generator {
         Node nodeGenData = configSig.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData
         NodeList nodesGenData = nodeGenData.getChildNodes();
         String[] nodeAndAttr = {"Field", "name", "tagName"};
+
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             XMLSAX sax = new XMLSAX();
             Node firstNode = nodesGenData.item(i);
             String typeName = firstNode.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
             String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
             Node type = sax.readDocument("Указываю путь до этого файла  с новым именем" + "\\" + trueName);//прочитал файл в котором нашли совпадения по имени
-            NodeList Fields = (NodeList) sax.returnFirstFinedNode(type, "Fields").getChildNodes();//нашел ноду Fields 
+            Node oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
+            Node firstFields = oldFields.getFirstChild();
 
-            Node field = Fields.item(0);//вот с этим надо подумать(Дима что то пишет еще)
-            String typeUUID = field.getAttributes().getNamedItem("Type").getNodeValue();
+          //  Node rootNode = sax.createDocument("Type");//создаем ноды с именем ,которое вытянули из конфиг сигнался
+             Node rootNode=sax.createNode("Type");
+            HashMap<String, String> dataNode = new HashMap<>();
+            dataNode.put("Kind", "Struct");
+            dataNode.put("Name", typeName);
+            dataNode.put("UUID", "UUID");
+            sax.insertDataNode(rootNode, dataNode);
+
+            String typeUUID=firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
 
             for (int j = 0; j < ft.tableSize(); j++) {
                 String tagName = (String) ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
-                Node fields = sax.findNodeAtribute(field, nodeAndAttr);
-                String key = field.getAttributes().getNamedItem("tagName").getNodeName();//назвал key как в примере из инета
+                String comment=(String)ft.getCell("Наименование", j);
+                Node fields = sax.findNodeAtribute(firstFields, nodeAndAttr);
+                String key = firstFields.getAttributes().getNamedItem("tagName").getNodeName();//назвал key как в примере из инета
                 if (key != null) {
-
+                    
                 } else {
-
+                    Node fieldsNode=sax.createNode("Fields");
+                sax.insertDataNode(fieldsNode, dataNode);
+                rootNode.appendChild(fieldsNode);
+                Node fieldNode=sax.createNode("Field");
+                HashMap<String, String> childNode = new HashMap<>();
+                childNode.put("Comment", comment);
+                childNode.put("Name",tagName);
+                childNode.put("Type", typeUUID);
+                childNode.put("UUID", uuid.getUIID());
+                fieldsNode.appendChild(fieldNode);
+                sax.writeDocument(typeName);
+               
+                
                 }
+                
+                
 
             }
 
