@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseConnect.DataBase;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 
 /**
  *
@@ -191,6 +192,8 @@ public class TableNzVer2 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable1MousePressed
 
+   
+
 // -- мини меню по мыши первого столбца таблицы---
     class PopUpDemo extends JPopupMenu {
         JMenuItem anItem;
@@ -292,14 +295,14 @@ public class TableNzVer2 extends javax.swing.JPanel {
 
             }
              // --- Собственный метод получить данные из таблицы по имени столбца  ---
-            public Object getDataNameColumn(String nameColumn, int row){
+            public String getDataNameColumn(String nameColumn, int row){
                 Object objTable = null;
                 for(int i=0; i<resultColumn.length; ++i){ // Пробегаем по всем нашим именам столбцов как они стоят 
                     if(nameColumn.equals(resultColumn[i])){ //  нашли совпадение
                         objTable = getValueAt(row, i); // -1 Массив мы видиот от 0 а ячейки он видит от 1
                     }
                 }
-                return objTable;
+                return (String) objTable;
             }
         }
    

@@ -25,33 +25,40 @@ import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
 import XMLTools.UUID;
 import DataBaseConnect.*;
+import FileConfigWork.Generator;
 import FrameCreate.TableNzVer2;
 
-/**
- *
- * @author cherepanov
- */
-    public class FrameTabel extends javax.swing.JPanel {
+/*@author cherepanov */
+public class FrameTabel extends javax.swing.JPanel {
     Main_JPanel mj = new Main_JPanel();
     String nameTable = "";
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
     //TableModel tableFrameModel = null;
     TableNzVer2.NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
-    XMLSAX sax=new XMLSAX();
+    public int tableSize(){//возвращает размер таблицы
+        return tableFrameModel.getRowCount();
+    }
+    public String tableName(){//возвращает имя таблицы
+        return nameTable;
+    }
+    public Object getCell(String colName, int row){//возвращает содержимое ячейки по имени столбца и номеру строки
+        return tableFrameModel.getDataNameColumn(colName, row);
+    }
+    //XMLSAX sax=new XMLSAX();
 
     int filepath;
     String filepatch;
   //  String nameTable = "";
-    String UUIDHigth = "";
-    String Graphname, TypeName, ElemName;
-    String UUIDBlockPref, UUIDBlockName;
-    String TypeAI_DRV = "REAL", TypeDI_DRV = "BOOL";
-    String nameSignal1, nameSignal2, nameSignal3, nameSignal4, nameSignal5, nameSignal6,
-            UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4,
-            UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4;
+    //String UUIDHigth = "";
+    //String Graphname, TypeName, ElemName;
+    //String UUIDBlockPref, UUIDBlockName;
+    //String TypeAI_DRV = "REAL", TypeDI_DRV = "BOOL";
+    //String nameSignal1, nameSignal2, nameSignal3, nameSignal4, nameSignal5, nameSignal6,
+    //        UUID_Type1, UUID_Type2, UUID_Type3, UUID_Type4,
+    //        UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4;
 
-    XMLSAX createXMLSax = new XMLSAX();
+    //XMLSAX createXMLSax = new XMLSAX();
     DataBase workbase = DataBase.getInstance();
 
     public FrameTabel(String nameTable) {
@@ -59,8 +66,6 @@ import FrameCreate.TableNzVer2;
         //this.tableFrameModel = getTableData();
         initComponents();
     }
-
-   
     // --- Конструктор с вызовом таблицы TableNzVer2 и преобразованными данными для нее ---
     public FrameTabel(String selectT, ArrayList<String> columns) {
         this.nameTable = selectT;
@@ -172,6 +177,7 @@ import FrameCreate.TableNzVer2;
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
                     filepatch = fileload.getSelectedFile().getCanonicalPath();
+                   Generator.GenSigtype(this); 
                 } catch (IOException ex) {
                     Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
 

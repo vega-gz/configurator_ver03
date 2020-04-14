@@ -467,8 +467,8 @@ public class XMLSAX {
         Node n = test.readDocument("ConfigSignals.xml");
         String[] value = {"F","TAG_NAME_PLC", "VarName"};// даже если параметром меньше
         //String[] value = {"F", "VarName1"}; // расскоментируй меня и запусти
-        //String[] attr = {"G","nameColumnPos", "type"};
-        String[] attr = {"G","nameColumnPos"};
+        String[] attr = {"G","nameColumnPos", "type"};
+       // String[] attr = {"G","nameColumnPos"};
         Node fNValue = test.findNodeValue(n, value); // поиск по ноде и атрибутам
         Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
         Node fNodName = test.returnFirstFinedNode(n, "ai"); // поиск по названию ноды
