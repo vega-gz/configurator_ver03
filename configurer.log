@@ -11,3 +11,6 @@ test
 15:19:19_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
 15:21:27_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf5_id_seq;
 15:21:27_2020.04.10	error PSQL request CREATE SEQUENCE sdfsdf6_id_seq;
+18:08:48_2020.04.15	Typenot created but XML document null!
+18:16:43_2020.04.15	Typenot created but XML document null!
+18:32:06_2020.04.15	Typenot created but XML document null!

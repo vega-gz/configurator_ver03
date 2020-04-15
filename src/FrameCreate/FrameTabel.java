@@ -194,7 +194,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
                 filepatch = fileload.getSelectedFile().getCanonicalPath();
-                //Generator.GenSigType(this);
+                Generator.GenSigType(this);
 
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
