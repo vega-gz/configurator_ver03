@@ -101,7 +101,7 @@ public class PopMenuDialog extends javax.swing.JFrame {
         }
         contents.add(new JButton("кнопка добавления сигнала"));
         super.setContentPane(contents);
-        super.setPreferredSize(new Dimension(800, 600));
+        super.setPreferredSize(new Dimension(300, 100));
         super.pack();
         //super.setLocationRelativeTo(null);
         super.setVisible(true);
