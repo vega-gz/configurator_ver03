@@ -534,7 +534,7 @@ public class XMLSAX {
                                     column = null; // на всякий
                                     defAttrF = false; // обнуляем триггер    
                                 } else{ // не нашли нужно не строим столбец -- ? 
-                                
+                                    FileManager.loggerConstructor("XML default value not find " + column);
                                 }
                             }
                         }
