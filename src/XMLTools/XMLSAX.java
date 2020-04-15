@@ -288,6 +288,7 @@ public class XMLSAX {
         String user = null;
         String url = null;
         String base = null;
+        String PathToProject = null;
         if (f.exists()) {
             try {
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -303,6 +304,7 @@ public class XMLSAX {
                         user = element.getElementsByTagName("USER").item(0).getTextContent();
                         url = element.getElementsByTagName("URL").item(0).getTextContent();
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
+                        PathToProject = element.getElementsByTagName("PathToProject").item(0).getTextContent();
                     }
                     DataBase.getInstance().connectionToBase(url, base, user, pass); // Вызов запроса к базе подключения
                 }
