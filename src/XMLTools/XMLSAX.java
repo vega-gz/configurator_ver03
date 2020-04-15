@@ -479,7 +479,10 @@ public class XMLSAX {
         String nameSheetExel = ""; // название листа Exel
         ArrayList<String> columnExcel = new ArrayList<>(); // Колонки из Excell
         ArrayList<String> columnBase = new ArrayList<>(); //названия таблиц для Базы
-
+        String defautStr = "default"; //  элемент аттрибут ноды по которому срабатывает триггер построения
+        boolean defAttrF = false; // триггер добавить сигнал или нет
+        boolean createT = false; // триггер строить таблицу или нет
+        
         NodeList signalList = n.getChildNodes();
         if (n != null) { // если не пустая нода
             for (int i = 0; i < signalList.getLength(); i++) {
@@ -509,7 +512,8 @@ public class XMLSAX {
                             Node start = listNodeEl.item(j1);
                             if (start.getNodeType() == start.ELEMENT_NODE) { //  проверка хз чего The node is an Element.
                                 System.out.println("ColumnExel " + start.getNodeName());
-                                columnExcel.add(start.getNodeName()); // Имя забора колонки из Excel
+                                
+                                String column = null; // Имя таблицы, будет ли оно дабавленно в список
                                 NamedNodeMap startAttr = start.getAttributes(); // Получение имена и атрибутов каждого элемента
                                 for (int i1 = 0; i1 < startAttr.getLength(); i1++) { // Переборка значений ноды
                                     Node attr = startAttr.item(i1);
@@ -517,8 +521,20 @@ public class XMLSAX {
                                     String Value = attr.getNodeValue(); // значение атрибута
                                     if (Attribute.equals("nameColumnPos")) {//проверка что этот атрибут nameColumnPos
                                         System.out.println("NameColumnToBase: " + Value);
-                                        columnBase.add(Value);
+                                        //columnBase.add(Value);
+                                        column = Value;
                                     }
+                                    if (Attribute.equals(defautStr)) {// если нет этого аттрибута то сигнал не заносим
+                                        defAttrF = true;
+                                    }
+                                }
+                                if (defAttrF){ // если нашли аттрибут default
+                                    columnBase.add(column); // будем строить по таким таблицам что нашли
+                                    columnExcel.add(start.getNodeName()); // Имя забора колонки из Excel
+                                    column = null; // на всякий
+                                    defAttrF = false; // обнуляем триггер    
+                                } else{ // не нашли нужно не строим столбец -- ? 
+                                
                                 }
                             }
                         }
@@ -542,6 +558,8 @@ public class XMLSAX {
                         nameSheetExel = "";
                         columnExcel.clear();
                         columnBase.clear();
+                        defAttrF = false;
+                        createT =  false;
                     }
                 }
             }
