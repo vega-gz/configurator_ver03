@@ -327,13 +327,13 @@ public class XMLSAX {
         }
     }
 
-    // --- Найти первую ноду по имени и вернуть ее ---
+    // --- Найти первую ноду по имени и вернуть ее нижний.верхний регистр игнорирую ---
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
             System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                if (n.getNodeName().equals(s)) {
+                if (n.getNodeName().equalsIgnoreCase(s)) { 
                     System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
