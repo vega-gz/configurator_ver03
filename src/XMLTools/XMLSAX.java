@@ -98,7 +98,7 @@ public class XMLSAX {
         return n;
     }
 
-    // --- Создание элемента  ---
+    // --- Создание элемента Node  ---
     public Node createNode(String nameElement) {
         if (document != null) {// если документ зарегистрирован или внесен то
             return document.createElement(nameElement);
@@ -106,6 +106,22 @@ public class XMLSAX {
             FileManager.loggerConstructor(nameElement + "not created but XML document null!");
             return null;
         }
+    }
+    
+    // --- Вставка и сождании новой ноды с параметрами ---
+    public Node insertChildNode(Node parent, String[] arg) {
+        // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
+        Node createN = createNode(arg[0]);
+        String attr = null;
+        String value = null;
+        for(int i=1; i<arg.length; ++i){            
+            if(i%2 ==0){
+                value = arg[i];
+                setDataAttr(createN, attr, value);
+            } else attr = arg[i];
+        }
+        parent.appendChild(createN);
+        return createN;
     }
 
     // --- Создание Документа  с root нодой---
@@ -140,7 +156,7 @@ public class XMLSAX {
         }
     
     }
-    // --- Внести данные в ноду списком ключ-значение ---
+    // --- Внести данные в ноду ключ-значение ---
     public void setDataAttr(Object o, String attr, String value){
         System.out.println(o.getClass().getName());
         Element editElem = null;
@@ -535,11 +551,14 @@ public class XMLSAX {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
     
-    // --- Тестовый вызов метода создания документа нод и прочего ---     
-//    public static void main(String[] arg){
-//        HashMap<String, String> map = new HashMap<>();
-//        XMLSAX test = new XMLSAX();
-//        Node rootN = test.createDocument("root");
+//     --- Тестовый вызов метода создания документа нод и прочего ---     
+    public static void main(String[] arg){
+        HashMap<String, String> map = new HashMap<>();
+        XMLSAX test = new XMLSAX();
+        Node n = test.readDocument("test666.xml");
+        String[] massD = {"NameN", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
+        test.insertChildNode(n, massD);
+        test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");
 //        dataN.put("attr2", "value2");
@@ -572,6 +591,6 @@ public class XMLSAX {
 //        } catch (NullPointerException ex) {
 //            test.errorExecuter("Node Null what is not find \n" + ex);
 //        }
-//    }
+    }
     
 }
