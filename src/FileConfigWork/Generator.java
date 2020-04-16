@@ -53,7 +53,6 @@ public class Generator {
 
         String[] oldArray = {"ver", "old"};//массив для добваления атрибута ОЛД
 
-        System.out.println("эта длина блядь не работат " + nodesGenData.getLength());
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 XMLSAX sax = new XMLSAX();
@@ -66,12 +65,12 @@ public class Generator {
                 Node oldFields = null;
                 if (trueName == null) {//помещаем сюда создание файла
 
-                    Node rootNode = sax.createNode("Type");//создали шапку 
-                    dataNode.put("Kind", "Struct");//записали атрибуты
-                    dataNode.put("Name", typeName);
-                    dataNode.put("UUID", "UUID");
-                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
-                    fieldsNode = sax.createNode("Fields");//создали ноду
+//                    Node rootNode = sax.createNode("Type");//создали шапку 
+//                    dataNode.put("Kind", "Struct");//записали атрибуты
+//                    dataNode.put("Name", typeName);
+//                    dataNode.put("UUID", "UUID");
+//                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
+//                    fieldsNode = sax.createNode("Fields");//создали ноду
 
                 } else {//сюда помещаем добавление
                     type = sax.readDocument(filePath + trueName);//прочитал файл в котором нашли совпадения по имени
@@ -89,15 +88,15 @@ public class Generator {
 
                     if (oldFields == null) {//если нода пустая,то создаю элементы
 
-                        oldFields.appendChild(fieldsNode);//поместили ноду без атрибутов 
-                        Node fieldNode = sax.createNode("Field");//создали ноду filed
-                        HashMap<String, String> childNode = new HashMap<>();
-                        childNode.put("Comment", comment);
-                        childNode.put("Name", tagName);
-                        childNode.put("Type", typeUUID);
-                        childNode.put("UUID", uuid.getUIID());
-                        sax.insertDataNode(fieldNode, childNode);
-                        fieldsNode.appendChild(fieldNode);//добавили Field в Fileds
+//                        oldFields.appendChild(fieldsNode);//поместили ноду без атрибутов 
+//                        Node fieldNode = sax.createNode("Field");//создали ноду filed
+//                        HashMap<String, String> childNode = new HashMap<>();
+//                        childNode.put("Comment", comment);
+//                        childNode.put("Name", tagName);
+//                        childNode.put("Type", typeUUID);
+//                        childNode.put("UUID", uuid.getUIID());
+//                        sax.insertDataNode(fieldNode, childNode);
+//                        fieldsNode.appendChild(fieldNode);//добавили Field в Fileds
 
                     } else {
                         String[] nodeAndAttr = {"Field", "name", tagName};

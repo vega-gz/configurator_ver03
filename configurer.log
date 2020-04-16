@@ -80,3 +80,7 @@ test
 01:51:28_2020.04.16	XML default value not find Наименование
 01:51:28_2020.04.16	XML default value not find Сокр_Наименование
 01:51:28_2020.04.16	XML default value not find TAG_NAME_PLC
+14:50:44_2020.04.16	Typenot created but XML document null!
+14:52:31_2020.04.16	Typenot created but XML document null!
+14:55:32_2020.04.16	Typenot created but XML document null!
+14:56:59_2020.04.16	Typenot created but XML document null!
