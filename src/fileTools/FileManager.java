@@ -381,8 +381,9 @@ public class FileManager {
         //создание fileList - списка всех файлов с расширением .type в каталоге dir
         for (String file : fileList) {
             try {
+                String s = file.toString();
                 //создаем объект FileReader для объекта File
-                FileReader fr = new FileReader(dir + "\\" + file);
+                FileReader fr = new FileReader(dir + "/" + file);
                 //создаем BufferedReader с существующего FileReader для построчного считывания
                 BufferedReader reader = new BufferedReader(fr);
                 // считаем сначала первую строку

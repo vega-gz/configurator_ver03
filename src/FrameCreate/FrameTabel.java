@@ -50,14 +50,15 @@ public class FrameTabel extends javax.swing.JPanel {
     ArrayList<ArrayList> listToTable = new ArrayList<>(); // Лист для передачи в таблицу
     String[] columnstoMass = null; // Массив столбцов для передачи в таблицу
     //TableModel tableFrameModel = null;
-    NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
+    //NZDefaultTableModel tableFrameModel = null; // Моя таблица полностью извращенная
+    TableNzVer3 tableFrameModel = null;
     XMLSAX sax = new XMLSAX();
     int filepath;
     String filepatch;
     DataBase workbase = DataBase.getInstance();
 
     public int tableSize() {//возвращает размер таблицы
-        return tableFrameModel.getRowCount();
+        return jTable1.getRowCount();
     }
 
     public String tableName() {//возвращает имя таблицы
@@ -88,6 +89,7 @@ public class FrameTabel extends javax.swing.JPanel {
             }
             listToTable.add(tmpList);
         }
+        tableFrameModel = new TableNzVer3(nameTable, columns, listToTable);
         //jTable1 = new TableNzVer3(nameTable, columnstoMass, listToTable).getJTable();
         //this.tableFrameModel = (NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
 //        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
@@ -108,7 +110,7 @@ public class FrameTabel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new TableNzVer3(nameTable, columns, listToTable).getJTable();
+        jTable1 = tableFrameModel.getJTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -232,7 +234,7 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-  
+         Generator.Generator(this);
     }//GEN-LAST:event_jButton4ActionPerformed
 
         public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
