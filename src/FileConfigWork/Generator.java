@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -50,7 +52,8 @@ public class Generator {
         Node fieldsNode = null;
 
         String[] oldArray = {"ver", "old"};//массив для добваления атрибута ОЛД
-
+        
+        System.out.println("эта длина блядь не работат " + nodesGenData.getLength());
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             XMLSAX sax = new XMLSAX();
             Node currNodeCfgXML = nodesGenData.item(i);
@@ -112,6 +115,22 @@ public class Generator {
             sax.writeDocument(typeName);//записали файл
 
         }
+    }
+    String fileChosserLocal(){
+        String pathFileType = null;
+       JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
+        int ren = fileopen.showDialog(null, ".type");
+        if (ren == JFileChooser.APPROVE_OPTION) {
+            
+            File file = fileopen.getSelectedFile();// выбираем файл из каталога
+            pathFileType = file.toString();
+            //System.out.println(file.getNaтяme());
+            if (pathFileType.endsWith(".type")){
+                new SignalTypeToBase(pathFileType);
+            }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
+        }
+        return pathFileType;
+        
     }
     
 //    public static void main(String[] arg){
