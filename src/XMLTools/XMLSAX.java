@@ -70,7 +70,7 @@ public class XMLSAX {
         try {
             document = factory.newDocumentBuilder().parse(patchF);
         } catch (IOException ex) {
-            System.out.println("Error read XML file" + Paths.get(patchF)); // выброс ошибок по файлу
+            System.out.println("Error read standart method XML, reding custom method " + Paths.get(patchF)); // выброс ошибок по файлу
             findErr = true;
         } catch (SAXException ex) {
             System.out.println("Over error, all ride step to two !!!!"); // вот тут уже вызываем метод удаления DOCTYPE и тд если будет

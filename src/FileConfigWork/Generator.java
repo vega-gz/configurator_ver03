@@ -37,7 +37,7 @@ public class Generator {
 
     @SuppressWarnings("empty-statement")
     public static void Generator(FrameTabel ft) {
-        String filePath = "C:\\Users\\Григорий\\Desktop\\сиг";
+        String filePath = "/home/ad/Документы по работе/сиг/";
         FileManager manager = new FileManager();
         UUID uuid = new UUID();
 
@@ -74,12 +74,12 @@ public class Generator {
                     fieldsNode = sax.createNode("Fields");//создали ноду
 
                 } else {//сюда помещаем добавление
-                    type = sax.readDocument(filePath + "\\" + trueName);//прочитал файл в котором нашли совпадения по имени
+                    type = sax.readDocument(filePath + trueName);//прочитал файл в котором нашли совпадения по имени
                     oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
                     sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
                     String[] newArray = {"Fields", "ver", "new"};
                     newFields = sax.insertChildNode(type, newArray);
-                    Node firstFields = oldFields.getFirstChild();
+                    Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
                     typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
                 }
 

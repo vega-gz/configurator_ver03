@@ -43,6 +43,7 @@ public class TableNzVer3 {
     DataBase workbase = null; // создаем пустой запрос к базе
     ArrayList<ArrayList> listData = null; // Массив для  перебора в запросе
     String[] columns = null; // Колонки таблицы
+    NZDefaultTableModel tableFrameModel = null; // Доработанная модель таблицы
 
     public TableNzVer3(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
         this.listData = listData;
@@ -83,7 +84,7 @@ public class TableNzVer3 {
 
     // --- получить сформированную таблицу ---
     public JTable getJTable() {
-        NZDefaultTableModel tableFrameModel = getModelTable(nameTable, columns, listData);
+        tableFrameModel = getModelTable(nameTable, columns, listData);
         jTable1.setModel(tableFrameModel);
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //jTable1.getColumnCount();// получить количество столбцов
@@ -94,7 +95,12 @@ public class TableNzVer3 {
             }
         });
         return jTable1;
-
+    }
+    
+    // --- повтор метода из NZDefaultTableModel и забираем из него данные ---
+    public Object getDataNameColumn(String nameColumn, int row){
+        Object objTable = tableFrameModel.getDataNameColumn(nameColumn, row);
+        return objTable;
     }
 
     TableModel getModelTable() {

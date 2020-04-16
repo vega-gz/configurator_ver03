@@ -83,7 +83,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jTable1">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new TableNzVer3(nameTable, columns, listToTable).getJTable()"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="tableFrameModel.getJTable()"/>
               </AuxValues>
             </Component>
           </SubComponents>
