@@ -107,20 +107,18 @@ public class XMLSAX {
             return null;
         }
     }
-
+    
     // --- Вставка и сождании новой ноды с параметрами ---
     public Node insertChildNode(Node parent, String[] arg) {
         // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
         Node createN = createNode(arg[0]);
         String attr = null;
         String value = null;
-        for (int i = 1; i < arg.length; ++i) {
-            if (i % 2 == 0) {
+        for(int i=1; i<arg.length; ++i){            
+            if(i%2 ==0){
                 value = arg[i];
                 setDataAttr(createN, attr, value);
-            } else {
-                attr = arg[i];
-            }
+            } else attr = arg[i];
         }
         parent.appendChild(createN);
         return createN;
@@ -158,12 +156,8 @@ public class XMLSAX {
         }
 
     }
-
-    
-  
-
-    // --- Внести данные в ноду списком ключ-значение ---
-    public void setDataAttr(Object o, String attr, String value) {
+    // --- Внести данные в ноду ключ-значение ---
+    public void setDataAttr(Object o, String attr, String value){
         System.out.println(o.getClass().getName());
         Element editElem = null;
         if (o instanceof Node) {
@@ -228,7 +222,7 @@ public class XMLSAX {
         }
         return findData;
     }
-
+    
     // --- получаем всех наследников ноды именно нод список(стандартно возвразает все подряд) ---
     public ArrayList<Node> getHeirNode(Node n) {
         ArrayList<Node> kindNode = new ArrayList<>();
@@ -339,7 +333,7 @@ public class XMLSAX {
         if (n != null) {
             System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                if (n.getNodeName().equalsIgnoreCase(s)) {
+                if (n.getNodeName().equalsIgnoreCase(s)) { 
                     System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
@@ -485,7 +479,10 @@ public class XMLSAX {
         String nameSheetExel = ""; // название листа Exel
         ArrayList<String> columnExcel = new ArrayList<>(); // Колонки из Excell
         ArrayList<String> columnBase = new ArrayList<>(); //названия таблиц для Базы
-
+        String defautStr = "default"; //  элемент аттрибут ноды по которому срабатывает триггер построения
+        boolean defAttrF = false; // триггер добавить сигнал или нет
+        boolean createT = false; // триггер строить таблицу или нет
+        
         NodeList signalList = n.getChildNodes();
         if (n != null) { // если не пустая нода
             for (int i = 0; i < signalList.getLength(); i++) {
@@ -515,7 +512,8 @@ public class XMLSAX {
                             Node start = listNodeEl.item(j1);
                             if (start.getNodeType() == start.ELEMENT_NODE) { //  проверка хз чего The node is an Element.
                                 System.out.println("ColumnExel " + start.getNodeName());
-                                columnExcel.add(start.getNodeName()); // Имя забора колонки из Excel
+                                
+                                String column = null; // Имя таблицы, будет ли оно дабавленно в список
                                 NamedNodeMap startAttr = start.getAttributes(); // Получение имена и атрибутов каждого элемента
                                 for (int i1 = 0; i1 < startAttr.getLength(); i1++) { // Переборка значений ноды
                                     Node attr = startAttr.item(i1);
@@ -523,8 +521,20 @@ public class XMLSAX {
                                     String Value = attr.getNodeValue(); // значение атрибута
                                     if (Attribute.equals("nameColumnPos")) {//проверка что этот атрибут nameColumnPos
                                         System.out.println("NameColumnToBase: " + Value);
-                                        columnBase.add(Value);
+                                        //columnBase.add(Value);
+                                        column = Value;
                                     }
+                                    if (Attribute.equals(defautStr)) {// если нет этого аттрибута то сигнал не заносим
+                                        defAttrF = true;
+                                    }
+                                }
+                                if (defAttrF){ // если нашли аттрибут default
+                                    columnBase.add(column); // будем строить по таким таблицам что нашли
+                                    columnExcel.add(start.getNodeName()); // Имя забора колонки из Excel
+                                    column = null; // на всякий
+                                    defAttrF = false; // обнуляем триггер    
+                                } else{ // не нашли нужно не строим столбец -- ? 
+                                    FileManager.loggerConstructor("XML default value not find " + column);
                                 }
                             }
                         }
@@ -548,6 +558,8 @@ public class XMLSAX {
                         nameSheetExel = "";
                         columnExcel.clear();
                         columnBase.clear();
+                        defAttrF = false;
+                        createT =  false;
                     }
                 }
             }
@@ -558,12 +570,15 @@ public class XMLSAX {
     void errorExecuter(String s) {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
-
-    // --- Тестовый вызов метода создания документа нод и прочего ---     
-//    public static void main(String[] arg){
-//        HashMap<String, String> map = new HashMap<>();
-//        XMLSAX test = new XMLSAX();
-//        Node rootN = test.createDocument("root");
+    
+//     --- Тестовый вызов метода создания документа нод и прочего ---     
+    public static void main(String[] arg){
+        HashMap<String, String> map = new HashMap<>();
+        XMLSAX test = new XMLSAX();
+        Node n = test.readDocument("test666.xml");
+        String[] massD = {"NameN", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
+        test.insertChildNode(n, massD);
+        test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");
 //        dataN.put("attr2", "value2");
@@ -586,8 +601,6 @@ public class XMLSAX {
 //        String[] attr = {"G","nameColumnPos"};
 //        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
 //        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-    //   Node fNodName = test.returnFirstFinedNode(n, "child"); // поиск по названию ноды
-    //    System.out.println(test.getDataAttr(fNodName, "attr3"));
 //        Node fNodName = test.returnFirstFinedNode(n, "mazafaker_child"); // поиск по названию ноды
 //        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды
 //        HashMap<String,String> mapDataN = test.getDataNode(fNodName); // получаем с этой ноды данные
@@ -598,5 +611,7 @@ public class XMLSAX {
 //        } catch (NullPointerException ex) {
 //            test.errorExecuter("Node Null what is not find \n" + ex);
 //        }
+    }
+    
 }
 
