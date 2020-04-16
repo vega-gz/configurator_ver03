@@ -15,6 +15,7 @@ import java.util.Date;
  */
 public class globVar {
         public static String logFile = "configurer.log";
+        public static String PathToProject = "";
 	public static String linSep;
 	public static String myDir;
 	public static String desDir;

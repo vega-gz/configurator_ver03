@@ -14,10 +14,15 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseConnect.DataBase;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.AbstractCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
@@ -30,9 +35,9 @@ import javax.swing.table.TableCellEditor;
  *
  * @author nazarov
  */
-
 // --- строиться таблица внутри  JPanel -- 
 public class TableNzVer3 {
+
     JTable jTable1 = new JTable(); // Сама наша таблица
     String nameTable = null;
     DataBase workbase = null; // создаем пустой запрос к базе
@@ -47,7 +52,7 @@ public class TableNzVer3 {
     public TableNzVer3() { // обязательно что то должно быть, так получаем Tableodel
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
         //initComponents();
-         this.workbase = DataBase.getInstance();
+        this.workbase = DataBase.getInstance();
     }
 
     public TableNzVer3(String nameTable) {
@@ -55,15 +60,15 @@ public class TableNzVer3 {
         this.workbase = DataBase.getInstance();
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
     }
-    
+
     // --- Конструктор со всеми параметрами  с массивом названи столбцов ---
     TableNzVer3(String nameTable, String[] columns, ArrayList<ArrayList> listData) {
         this.nameTable = nameTable;
-        this.columns = columns; 
+        this.columns = columns;
         this.listData = listData;
         this.workbase = DataBase.getInstance();
     }
-    
+
     // --- Если на вход подали не массив колонок а Лист ---
     TableNzVer3(String nameTable, ArrayList<String> columns, ArrayList<ArrayList> listData) {
         this.nameTable = nameTable;
@@ -71,13 +76,13 @@ public class TableNzVer3 {
         this.listData = listData;
         this.workbase = DataBase.getInstance();
         this.columns = new String[columns.size()];
-        for(int i=0; i<columns.size(); ++i){ // Преобразовать лист в массив
+        for (int i = 0; i < columns.size(); ++i) { // Преобразовать лист в массив
             this.columns[i] = columns.get(i);
         }
     }
-    
+
     // --- получить сформированную таблицу ---
-    public JTable getJTable(){
+    public JTable getJTable() {
         NZDefaultTableModel tableFrameModel = getModelTable(nameTable, columns, listData);
         jTable1.setModel(tableFrameModel);
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -85,18 +90,18 @@ public class TableNzVer3 {
         jTable1.setDefaultEditor(Date.class, new DateCellEditor());// Определение редактора ячеек
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-            jTable1MousePressed(evt);
+                jTable1MousePressed(evt);
             }
         });
         return jTable1;
-    
+
     }
 
     TableModel getModelTable() {
         return getModelTable(nameTable, columns, listData); // вызываем функцию с пустым запросом к базе
     }
 
-   // --- таблица с Подключение к базе и какой таблице --- 
+    // --- таблица с Подключение к базе и какой таблице --- 
     NZDefaultTableModel getModelTable(String nameTable, String[] columns, ArrayList<ArrayList> listData) { // Надо передавать сюда и названи столбцов
         //String[] columnDop = {"Выбор"};// до поля для галок или еще чего
         final String[] resultColumn;// = null;
@@ -118,24 +123,24 @@ public class TableNzVer3 {
         //Object[] streamNull = new Object[1];
         //streamNull[0] = null; // нулевая первая ячейки
         Object[][] dataInTable = null; // Это данные в самой таблице
-        
+
         if (columns != null) { // если колонки для столбцов базы не пусты то просто инициализируем
             dataInTable = new Object[listData.size()][]; // Сколько строк
             //resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columns)).toArray(String[]::new); // сформированный массив присоединяем к массиву Выбор
             resultColumn = columns;
             for (int i = 0; i < listData.size(); ++i) {
-                    ArrayList<String> list = listData.get(i);
-                    String[] sList = new String[list.size()];
-                    for (int j = 0; j < list.size(); ++j) {
-                        sList[j] = list.get(j);
-                    }
-                    //sList = (String[]) list.toArray(); // принудительно преобразуем
-                    // прикручиваем к данным
-                    streamArray = new Object[columns.length]; // длинна объекта +1 галочка
-                    //Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
-                    Object[] testStream = sList;
-                    dataInTable[i] = testStream;
+                ArrayList<String> list = listData.get(i);
+                String[] sList = new String[list.size()];
+                for (int j = 0; j < list.size(); ++j) {
+                    sList[j] = list.get(j);
                 }
+                //sList = (String[]) list.toArray(); // принудительно преобразуем
+                // прикручиваем к данным
+                streamArray = new Object[columns.length]; // длинна объекта +1 галочка
+                //Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(sList)).toArray(Object[]::new);// преобразовываем массив в 1 первая булевая
+                Object[] testStream = sList;
+                dataInTable[i] = testStream;
+            }
         } else {
             if (listData != null) { // так преабазуем Массив листов в двойной массив что бы код ниже не ковырять(при условие что сюда подставили ArrayList)
                 String[] nameFromList = null;
@@ -178,7 +183,7 @@ public class TableNzVer3 {
                 }
             }
         }
-        return new NZDefaultTableModel(dataInTable, resultColumn, nameTable); 
+        return new NZDefaultTableModel(dataInTable, resultColumn, nameTable);
     }
 
     // --- Обработка нажатия клавиш ---
@@ -188,7 +193,7 @@ public class TableNzVer3 {
             int column = jTable1.columnAtPoint(evt.getPoint());
             // if (column == 0){        
             ++column;
-            String nameGra = (String) jTable1.getValueAt(row, column); // так получим имя графика
+            //String nameGra = (String) jTable1.getValueAt(row, column); // так получим имя графика
             PopUpDemo menu = new PopUpDemo();
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
             //}
@@ -202,16 +207,16 @@ public class TableNzVer3 {
 
 // -- мини меню по мыши первого столбца таблицы---
     class PopUpDemo extends JPopupMenu {
+
         JMenuItem anItem;
         int i1 = 0;
+
         public PopUpDemo() {
             //anItem = new JMenuItem("Click Me!");
             JSlider slider = new JSlider();
-            //add(anItem);
             add(slider);
             int value = slider.getValue();
-            JMenuItem anItem2;
-            anItem2 = new JMenuItem(Integer.toString(value));
+            JMenuItem anItem2 = new JMenuItem(Integer.toString(value));
             add(anItem2);
             slider.addChangeListener(new javax.swing.event.ChangeListener() {
                 @Override
@@ -220,33 +225,54 @@ public class TableNzVer3 {
                     //System.out.println(value);
                 }
             });
+            // еще один пукт меню
+            JMenuItem menuItem = new JMenuItem("Add_Signal...",
+                    new ImageIcon("images/newproject.png"));  
+            menuItem.setMnemonic(KeyEvent.VK_P);
+            menuItem.getAccessibleContext().setAccessibleDescription(
+                    "New Project");
+            menuItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    //int sumColumn = jTable1.getColumnCount();// список столюцов
+                    ArrayList<String> listColumn = new ArrayList<>();
+                    for(int i=0; i<jTable1.getColumnCount(); ++i){ // собираем лист из имен таблицы
+                        listColumn.add(jTable1.getColumnName(i));
+                    }
+                    new PopMenuDialog(listColumn);
+                    JOptionPane.showMessageDialog(null, "New Project clicked!"); // а почему null ?
+                }
+            });
+            add(menuItem);
         }
-    }    
-    
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
 
-
 // Редактор даты с использованием прокручивающегося списка JSpinner
-class DateCellEditor extends AbstractCellEditor implements TableCellEditor{
+class DateCellEditor extends AbstractCellEditor implements TableCellEditor {
+
     // Редактор
     private JSpinner editor;
+
     // Конструктор
     public DateCellEditor() {
         // Настройка прокручивающегося списка
         SpinnerDateModel model = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
         editor = new JSpinner(model);
     }
-     @Override
+
+    @Override
     // Метод получения компонента для прорисовки (обязательный реализации )
-    public Component getTableCellEditorComponent(JTable table, Object value, 
-                                                boolean isSelected, int row, int column) {
+    public Component getTableCellEditorComponent(JTable table, Object value,
+            boolean isSelected, int row, int column) {
         // Изменение значения
         editor.setValue(value);
         return editor;
     }
+
     // Функция текущего значения в редакторе
     public Object getCellEditorValue() {
         return editor.getValue();

@@ -629,7 +629,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         return enterSig;
     }
 
-    // метод обновления JScrollPane перерерисовка 
+    // метод обновления JScrollPane перерерисовка а перерисовываем Frame
     private void getPanelTable(ArrayList<ArrayList> listDataToTable) {
         JTable jTableMech = new JTable();
         JScrollPane jScrollPaneTable = new javax.swing.JScrollPane(jTableMech);

@@ -369,6 +369,7 @@ public class FileManager {
         String nameWords = "Name=";
         String ext = ".TYPE";
         String firstName, secondName ,fileName= null;
+        
 
         final File folder = new File(dir);
         String[] fileList = folder.list();
@@ -400,6 +401,8 @@ public class FileManager {
                             
                             return file;
 
+                        }else{
+                            break;
                         }
                     }
 
@@ -412,8 +415,9 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
+        return null;
 
-        return null;//должен возвращать имя файла со схожим типом
+       
 
     }
 
@@ -431,11 +435,11 @@ public class FileManager {
         }
     }
 
-    public static void main(String[] args) throws IOException {//для тестирования
-        FileManager fm = new FileManager();
-        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
-        fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
-    }
+//    public static void main(String[] args) throws IOException {//для тестирования
+//        FileManager fm = new FileManager();
+//        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
+//        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
+//     //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
+//    }
 
 }
