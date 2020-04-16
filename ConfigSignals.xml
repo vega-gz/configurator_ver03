@@ -20,33 +20,28 @@
 	<ai excelSheetName="AI">
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <W nameColumnPos="Сокр_Наименование" />
             <U nameColumnPos="TAG_NAME_PLC" type="VarName"/>
             <G nameColumnPos="Диапазон_мин" type="Number"/>
             <H nameColumnPos="Диапазон_макс" type="Number" />
-            <AA nameColumnPos="АЦПмин" type="Number"/>
-            <AB nameColumnPos="АЦПмакс" type="Number" />
-            <I nameColumnPos="Единица_измерения" />
+            <AA nameColumnPos="АЦПмин" type="Number" default="2"/>
+            <AB nameColumnPos="АЦПмакс" type="Number" default="10"/>
+            <I nameColumnPos="Единица_измерения" default=""/>
             <J nameColumnPos="Тип_датчика" />
             <K nameColumnPos="Акт_пас_НО_НЗ" />
-            <L nameColumnPos="Адрес_1"/>
+            <L nameColumnPos="Адрес_1" />
             <M nameColumnPos="Адрес_2" />
             <N nameColumnPos="Адрес_3" />
-            <Q nameColumnPos="Устройство" type="Int"/>
+            <Q nameColumnPos="Устройство" type="Int" />
             <R nameColumnPos="Слот"  type="Int"/>
             <S nameColumnPos="Канал"  type="Int"/>
-            <Y nameColumnPos="Точность"  type="Int"/>
-            <AE nameColumnPos="УСТНИЖНАВАР" type="Number"/>
-            <AF nameColumnPos="УСТНИЖНПРЕД" type="Number"/>
-            <AG nameColumnPos="УСТВЕРХПРЕД" type="Number"/>
-            <AH nameColumnPos="УСТВЕРХАВАР" type="Number"/>
-            <AI nameColumnPos="loLim" type="Number"/>
-            <AJ nameColumnPos="hiLim" type="Number"/>
-            <AK nameColumnPos="loBrk" type="Number"/>
-            <AL nameColumnPos="hiBrk" type="Number"/>
-            <AM nameColumnPos="ROC" type="Number"/>
-            <AN nameColumnPos="recoveryTime" type="Number"/>
-            <AO nameColumnPos="tau" type="Number"/>
+            <Y nameColumnPos="Точность"  type="Int" default="2"/>
+            <AI nameColumnPos="loLim" type="Number" default="-3%"/>
+            <AJ nameColumnPos="hiLim" type="Number" default="+3%"/>
+            <AK nameColumnPos="loBrk" type="Number" default="-6%"/>
+            <AL nameColumnPos="hiBrk" type="Number" default="+6%"/>
+            <AM nameColumnPos="ROC" type="Number"  default="100%"/>
+            <AN nameColumnPos="recoveryTime" type="Number" default="1"/>
+            <AO nameColumnPos="tau" type="Number"  default="1"/>
         </EXEL>
 		<APS>
             <aiSP nameSP="_Av" lim="AE" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="true" delay="1.0"/>
@@ -55,9 +50,7 @@
             <aiSP nameSP="_An" lim="AE" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="false" delay="1.0"/>
 		</APS>
 		<GenData>
-			<T_GPA_AI_DRV Type="REAL" UUID="F5AC236A1D4D9D837E0797ADA7697A06"/>
-			<T_GPA_AI_Internal Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="006A03A8C74962DC3E0724A92DA854AF"/>
-			<T_GPA_AI_Setting Type="668FE9B94A603427C8EDBBB8917A7594" UUID="E10A238347B7C26C7C1FDFA77F91B1F5"/>
+			<T_GPA_AI_Settings Type="668FE9B94A603427C8EDBBB8917A7594" UUID="E10A238347B7C26C7C1FDFA77F91B1F5"/>
 			<T_GPA_AI_FromHMI Type="187F76AE49C59E950138DDA3067101D0" UUID="2BDAC6F849D13DED3A2A5B9190720FD7"/>
 			<T_GPA_AI_ToHMI Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D48C3F1549ACD994A366A1A51FE00772"/>
 		</GenData>

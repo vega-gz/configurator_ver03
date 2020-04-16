@@ -98,7 +98,7 @@ public class XMLSAX {
         return n;
     }
 
-    // --- Создание элемента  ---
+    // --- Создание элемента Node  ---
     public Node createNode(String nameElement) {
         if (document != null) {// если документ зарегистрирован или внесен то
             return document.createElement(nameElement);
@@ -106,6 +106,24 @@ public class XMLSAX {
             FileManager.loggerConstructor(nameElement + "not created but XML document null!");
             return null;
         }
+    }
+
+    // --- Вставка и сождании новой ноды с параметрами ---
+    public Node insertChildNode(Node parent, String[] arg) {
+        // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
+        Node createN = createNode(arg[0]);
+        String attr = null;
+        String value = null;
+        for (int i = 1; i < arg.length; ++i) {
+            if (i % 2 == 0) {
+                value = arg[i];
+                setDataAttr(createN, attr, value);
+            } else {
+                attr = arg[i];
+            }
+        }
+        parent.appendChild(createN);
+        return createN;
     }
 
     // --- Создание Документа  с root нодой---
@@ -141,35 +159,8 @@ public class XMLSAX {
 
     }
 
-    // --- Вставка и сождании новой ноды с параметрами --- 
-    public Node insertChildNode(Node parent, String[] arg) {
-
-        // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее   
-        Node createN = createNode(arg[0]);
-
-        String attr = null;
-
-        String value = null;
-
-        for (int i = 1; i < arg.length; ++i) {
-
-            if (i % 2 == 0) {
-
-                value = arg[i];
-
-                setDataAttr(createN, attr, value);
-
-            } else {
-                attr = arg[i];
-            }
-
-        }
-
-        parent.appendChild(createN);
-
-        return createN;
-
-    }
+    
+  
 
     // --- Внести данные в ноду списком ключ-значение ---
     public void setDataAttr(Object o, String attr, String value) {
@@ -303,6 +294,7 @@ public class XMLSAX {
         String user = null;
         String url = null;
         String base = null;
+        String PathToProject = null;
         if (f.exists()) {
             try {
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -318,6 +310,7 @@ public class XMLSAX {
                         user = element.getElementsByTagName("USER").item(0).getTextContent();
                         url = element.getElementsByTagName("URL").item(0).getTextContent();
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
+                        PathToProject = element.getElementsByTagName("PathToProject").item(0).getTextContent();
                     }
                     DataBase.getInstance().connectionToBase(url, base, user, pass); // Вызов запроса к базе подключения
                 }
@@ -340,13 +333,13 @@ public class XMLSAX {
         }
     }
 
-    // --- Найти первую ноду по имени и вернуть ее ---
+    // --- Найти первую ноду по имени и вернуть ее нижний.верхний регистр игнорирую ---
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
             System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                if (n.getNodeName().equals(s)) {
+                if (n.getNodeName().equalsIgnoreCase(s)) {
                     System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
@@ -605,5 +598,5 @@ public class XMLSAX {
 //        } catch (NullPointerException ex) {
 //            test.errorExecuter("Node Null what is not find \n" + ex);
 //        }
-//    }
 }
+
