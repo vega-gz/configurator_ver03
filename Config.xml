@@ -3,7 +3,8 @@
 <Settings>
 <USER>mutonar</USER>
 <URL>jdbc:postgresql://minoro.ru:5432/</URL>
-<BASE>pravoslav</BASE>
+<BASE>test665</BASE>
+<BASE1>pravoslav</BASE1>
 <nameProject>5</nameProject>
 <PASS>Solovin2</PASS>
 <PathToProject>D:\Projects\Калининград_нов</PathToProject>

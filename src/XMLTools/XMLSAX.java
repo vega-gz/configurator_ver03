@@ -141,7 +141,7 @@ public class XMLSAX {
 
     // --- Внести данные в ноду списком HashMap---
     public void insertDataNode(Object o, HashMap<String, String> map) {
-        System.out.println(o.getClass().getName());
+        //System.out.println(o.getClass().getName());
         Element editElem = null;
         if (o instanceof Node) {
             editElem = (Element) o;
@@ -158,7 +158,7 @@ public class XMLSAX {
     }
     // --- Внести данные в ноду ключ-значение ---
     public void setDataAttr(Object o, String attr, String value){
-        System.out.println(o.getClass().getName());
+        //System.out.println(o.getClass().getName());
         Element editElem = null;
         if (o instanceof Node) {
             editElem = (Element) o;
