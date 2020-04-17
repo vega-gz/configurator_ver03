@@ -35,12 +35,11 @@ public class RWExcel {
     public RWExcel(String s) { // коструктор сразу с определяющим имя именем
         setPatchF(s);
     }
+
     public RWExcel() { // по умолчанию(можно не использовать)
     }
     int startReadData = 0;
     private String path_file;
-
-    
 
     public void setPatchF(String patch_file) {
         this.path_file = patch_file;
@@ -119,14 +118,12 @@ public class RWExcel {
     String getUIID() {
         java.util.UUID uniqueKey = java.util.UUID.randomUUID();
         Date dateNow = new Date();
-      //  SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyyMMddhhmmsss"); //формируем дату как нам вздумается
+        //  SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyyMMddhhmmsss"); //формируем дату как нам вздумается
 
         //String uiid_str = uniqueKey.toString().replace("-", "") + formatForDateNow.format(dateNow).toString();
         String uiid_str = uniqueKey.toString().replace("-", "");
         return uiid_str;
     }
-
-   
 
     public int getMaxcColumn(String name_sheet) throws FileNotFoundException, IOException {
 
@@ -148,8 +145,8 @@ public class RWExcel {
 
         return max_len_row;
     }
-    
-     public ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
+
+    public ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
         // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(path_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
@@ -164,8 +161,8 @@ public class RWExcel {
         }
         return list_sheet;
     }
-     
-     // --- Получить листы файла указав на него строкой  ---
+
+    // --- Получить листы файла указав на него строкой  ---
     public ArrayList<String> get_list_sheet(String path) {
         ArrayList<String> list_sheet = new ArrayList<String>();
         try {
@@ -244,26 +241,26 @@ public class RWExcel {
                     tmp++;
                 } while (tmp_UUID <= col_UUID);
 
-            //array_cell_len[tmp]= getUIID(); // так было до For
+                //array_cell_len[tmp]= getUIID(); // так было до For
                 // System.out.println(array_cell_len[tmp]);
                 // tmp++;
                 //System.out.println(row.getLastCellNum());
                 Iterator<Cell> cells = row.cellIterator(); // итератор Ячеек вот не работает должным образом пропускает ячейки
                 int i_tmp = 0;
 
-            //  while (cells.hasNext()) {
+                //  while (cells.hasNext()) {
                 //      Cell cell = cells.next();
                 while (i_tmp < array_cell_len.length - startm) {
                     Cell cell = row.getCell(i_tmp);
 
-                //System.out.println(cell.getAddress());
-               /* CellAddress cellReference = new CellAddress("Q110");
+                    //System.out.println(cell.getAddress());
+                    /* CellAddress cellReference = new CellAddress("Q110");
                      if (cell.getAddress().equals(cellReference)){
                      System.out.println(cell.getAddress());
                      System.out.println(cell.getCellType());
                      }*/
-                //System.out.println(cell.getAddress()); // Для проверки сдвига
-                /* System.out.println(cell.getAddress());
+                    //System.out.println(cell.getAddress()); // Для проверки сдвига
+                    /* System.out.println(cell.getAddress());
                      System.out.println(i_tmp);
                      System.out.println(row.getLastCellNum());*/
                     if (cell != null) {  // обходим таким дебильным способом
@@ -312,9 +309,9 @@ public class RWExcel {
                 for (int i = 0; i < array_cell_len.length; i++) {
                     // System.out.print(array_cell_len[i] + " " );
                 }
-           //System.out.println();
+                //System.out.println();
 
-            // ПРоверяемс считались какие то данные из ячеек строки (1 так как первый элемент занят ID) 
+                // ПРоверяемс считались какие то данные из ячеек строки (1 так как первый элемент занят ID) 
                 //Желательно переписать
                 int not_null_dat = 0;
                 for (int i = 1; i < array_cell_len.length; i++) {
@@ -349,7 +346,7 @@ public class RWExcel {
                     //array_cell.add(tmp_array_cell_len);
                     not_null_dat = 0;
                 }
-            //обнуляем массив для проверки выше если строки программа видит но они пустые.
+                //обнуляем массив для проверки выше если строки программа видит но они пустые.
                 // array_cell_len = null;
                 for (int i = 0; i < array_cell_len.length; i++) {
                     array_cell_len[i] = "";
@@ -362,7 +359,6 @@ public class RWExcel {
         return array_cell;
     }
 
-    
 // --- это второй метод Geting data from file Exel (Вытянуть данные из Exel  но по конкретным столбцам)----
     public ArrayList<String[]> getDataCell(String name_sheet, ArrayList<String> column) {
         FileInputStream inputStream = null;
@@ -420,48 +416,48 @@ public class RWExcel {
                     //int i_tmp = 0;
                     for (int i_tmp = 0; i_tmp < column.size(); ++i_tmp) { // пробегаемся по входному массиву
                         String nameCompareColumn = column.get(i_tmp);
-                        int numberCol = CellReference.convertColStringToIndex(nameCompareColumn); // Переводим имя в индекс
-                        //System.out.println(CellReference.convertNumToColString(i_tmp)); // выявляем Имена стобцы в которых ячейка
-                        Cell cell = row.getCell(numberCol); // адрес индекс
-                        //cell.getRichStringCellValue().toString();
-                        if (cell != null) {  // обходим таким дебильным способом
-                            CellType cellType = cell.getCellType();
-                            switch (cellType) {
-                                case STRING: {
-                                    if (cell.getStringCellValue().contains("'")) {
-                                        //System.out.print("Find ' ->  " + cell.getStringCellValue());
-                                        array_cell_len[tmp] = cell.getStringCellValue().replaceAll("'", "");
+                            int numberCol = CellReference.convertColStringToIndex(nameCompareColumn); // Переводим имя в индекс
+                            //System.out.println(CellReference.convertNumToColString(i_tmp)); // выявляем Имена стобцы в которых ячейка
+                            Cell cell = row.getCell(numberCol); // адрес индекс
+                            //cell.getRichStringCellValue().toString();
+                            if (cell != null) {  // обходим таким дебильным способом
+                                CellType cellType = cell.getCellType();
+                                switch (cellType) {
+                                    case STRING: {
+                                        if (cell.getStringCellValue().contains("'")) {
+                                            //System.out.print("Find ' ->  " + cell.getStringCellValue());
+                                            array_cell_len[tmp] = cell.getStringCellValue().replaceAll("'", "");
+                                        }
+                                        array_cell_len[tmp] = cell.getStringCellValue();  // // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
                                     }
-                                    array_cell_len[tmp] = cell.getStringCellValue();  // // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
+                                    break;
+                                    case BLANK:
+                                        array_cell_len[tmp] = "";
+                                        break;
+                                    case NUMERIC:
+                                        array_cell_len[tmp] = Double.toString(cell.getNumericCellValue()); // Double
+                                        break;
+                                    //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
+                                    case FORMULA:
+                                        // System.out.println("Formula");
+                                        switch (cell.getCachedFormulaResultType()) {
+                                            case NUMERIC:
+                                                array_cell_len[tmp] = (Double.toString(cell.getNumericCellValue()));
+                                                break;
+                                            case STRING:
+                                                array_cell_len[tmp] = cell.getRichStringCellValue().toString();
+                                                array_cell_len[tmp] = array_cell_len[tmp].replaceAll("'", ""); // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
+                                                //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
+                                                break;
+                                        }
+                                        break;
+                                    default:
+                                        array_cell_len[tmp] = "|";
+                                        break;
                                 }
-                                break;
-                                case BLANK:
-                                    array_cell_len[tmp] = "";
-                                    break;
-                                case NUMERIC:
-                                    array_cell_len[tmp] = Double.toString(cell.getNumericCellValue()); // Double
-                                    break;
-                                //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
-                                case FORMULA:
-                                    // System.out.println("Formula");
-                                    switch (cell.getCachedFormulaResultType()) {
-                                        case NUMERIC:
-                                            array_cell_len[tmp] = (Double.toString(cell.getNumericCellValue()));
-                                            break;
-                                        case STRING:
-                                            array_cell_len[tmp] = cell.getRichStringCellValue().toString();
-                                            array_cell_len[tmp] = array_cell_len[tmp].replaceAll("'", ""); // убираю что бы не было трудностей с загрузкой в постгрес при этом ушли пустые строки
-                                            //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
-                                            break;
-                                    }
-                                    break;
-                                default:
-                                    array_cell_len[tmp] = "|";
-                                    break;
+                            } else {
+                                array_cell_len[tmp] = ""; // Вот тут чего такое то?
                             }
-                        } else {
-                            array_cell_len[tmp] = ""; // Вот тут чего такое то?
-                        }
                         tmp++;
                         //i_tmp++;
                     }
@@ -521,8 +517,7 @@ public class RWExcel {
         System.out.println(array_cell.size() + " -number string in mass");
         return array_cell;
     }
-    
-    
+
     public ArrayList<String> getDataNameTable(String name_sheet) throws FileNotFoundException, IOException {
         ArrayList<String> array_cell = new ArrayList<>();
         // Номера ячеек беру в ручную от куда брать названия для таблиц
@@ -609,7 +604,7 @@ public class RWExcel {
                                         }
                                         massColumnName.add(tmpMassN);
                                     }
-                                  break; // прерываем массив поиска так как нашли исходное
+                                    break; // прерываем массив поиска так как нашли исходное
                                 }
                             }
 
@@ -619,12 +614,12 @@ public class RWExcel {
                     }
                     ++tmpI;
                 }
-                
+
             }
             findColumnSig = false;
         }
 
-            // так мы перебираем и анализируем что мы насобирали и делаем один массив 
+        // так мы перебираем и анализируем что мы насобирали и делаем один массив 
         // String[] tmpMassN = new String[MaxLenNameMass];
         String[] tmpMassN = new String[maxLengtString];// заменим на это пока по тупому длинну массива
         for (String[] mass : massColumnName) {
