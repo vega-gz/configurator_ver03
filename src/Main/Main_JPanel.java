@@ -156,7 +156,7 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Подключение к базе");
+        jButton2.setText("Переподключение к базе");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -373,10 +373,15 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        DataBase.getInstance();// подключится к базе конфигом другого не дано
-        jComboBox1.setModel(getComboBoxModel());
-        //JOptionPane.showMessageDialog(null, "Подключение к базе прошло успешно!");
+        DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
+        String nameBD = DB.getCurrentNameBase();
+        String userBD = DB.getCurrentUser();
+        jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
+        String message = null; 
+        if(nameBD != null){
+            JOptionPane.showMessageDialog(null, "Подключено к базе "+ nameBD +" пользователем " +userBD);
+        }
+        
 
     }//GEN-LAST:event_jButton2ActionPerformed
     

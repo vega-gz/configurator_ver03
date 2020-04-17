@@ -32,10 +32,10 @@ public class DataBase {
     private ArrayList<String[]> currentSelectTable;
     private String[] columns;
     String URL = ""; //jdbc:postgresql://192.168.10.41:5432/";
-    String BASE = ""; //test";
+    String BASE = null; //test";
     String DB_URL = URL + BASE;
     //String USER = "mutonar";
-    String USER = ""; //postgres";
+    String USER = null; //postgres";
     //String PASS = "postgres";
     String PASS = ""; //Solovin2";
     String FILECONFIG = "Config.xml";
@@ -64,6 +64,15 @@ public class DataBase {
         this.USER = USER;
         this.PASS = PASS;
         connectionToBase();
+    }
+    
+    // --- получить имя текущей базы ---
+    public String getCurrentNameBase(){
+        return this.BASE;
+    }
+    // --- получить имя текущего пользователя ---
+     public String getCurrentUser(){
+        return this.USER;
     }
     
     // --- Читает конфигурацию для подключения к базе ---
