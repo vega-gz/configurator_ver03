@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConfigSignals>
+	<SetPoints excelSheetName="ANB">
+		<GenData>
+			<T_ANB Type="BOOL"/>
+			<T_GPA_SP_Settings Type="T_SP_Settings"/>
+		</GenData>
+        <EXEL>
+            <C nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <D nameColumnPos="direct" registr="down" replace="true" repFrom1=">" repTo1="больше" repFrom2="true" repTo2="больше" repFrom3="<" repTo3="меньше" repFrom4="false" repTo4="меньше"/>
+            <E nameColumnPos="limit" type="Number"/>
+            <F nameColumnPos="delay" type="Number" default="3"/>
+            <G nameColumnPos="тип" registr="up" default="У"  replace="true" repFrom1="U" repTo1="У" repFrom2="A" repTo2="А" repFrom3="P" repTo3="П" repFrom4="O" repTo4="О"/>
+            <H nameColumnPos="defVal" type="Int" default="0"/>
+            <I nameColumnPos="типПостфикс" swith="тип" var1="У" default1="упр." var2="А" default2="авар." var3="П" default3="предупр." var4="О" default4="огр."/>
+            <J nameColumnPos="директПостфикс" type="VarName" swith="direct" var1="больше" default1="верхняя" var2="меньше" default2="нижняя"/>
+            <K nameColumnPos="typePostfix" swith="тип" var1="У" default1="_U"   var2="А" default2="_A"    var3="П" default3="_P"       var4="О" default4="_O"  />
+            <L nameColumnPos="directPostfix"  type="VarName" swith="direct" var1="больше" default1="v"       var2="меньше" default2="n"     />
+        </EXEL>
+	</SetPoints>
+	<ai excelSheetName="AI">
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <U nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Диапазон_мин" type="Number"/>
+            <H nameColumnPos="Диапазон_макс" type="Number" />
+            <AA nameColumnPos="АЦП" default="adc2_10"/>
+            <AA nameColumnPos="АЦП" default="adc2_10"/>
+            <I nameColumnPos="Единица_измерения" default=""/>
+            <J nameColumnPos="Тип_датчика" default=""/>
+            <K nameColumnPos="Акт_пас" default=""/>
+            <L nameColumnPos="Адрес_1" default=""/>
+            <M nameColumnPos="Адрес_2" default=""/>
+            <N nameColumnPos="Адрес_3" default=""/>
+            <Y nameColumnPos="Точность"  type="Int" default="2"/>
+            <AI nameColumnPos="loLim" type="Number" default="-3%"/>
+            <AJ nameColumnPos="hiLim" type="Number" default="+3%"/>
+            <AK nameColumnPos="loBrk" type="Number" default="-6%"/>
+            <AL nameColumnPos="hiBrk" type="Number" default="+6%"/>
+            <AM nameColumnPos="ROC" type="Number"  default="100%"/>
+            <AN nameColumnPos="recoveryTime" type="Number" default="1"/>
+            <AO nameColumnPos="tau" type="Number"  default="1"/>
+        </EXEL>
+		<GenData>
+			<T_GPA_AI_DRV Type="REAL"/>
+			<T_GPA_AI_Internal Type="T_AI_Internal"/>
+			<T_GPA_AI_Setting Type="T_AI_Setting"/>
+			<T_GPA_AI_FromHMI Type="T_AI_FromHMI"/>
+			<T_GPA_AI_ToHMI Type="T_AI_ToHMI"/>
+		</GenData>
+		<GenCode>
+			<Function fileName="A_Algorithm.iec_st" name="AI_init">
+				<arguments>
+					<arg><text t="GPA_AI_Settings."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><dbd col="Диапазон_мин"/></arg>
+					<arg><dbd col="Диапазон_макс"/></arg>
+					<arg><dbd col="АЦПмин"/></arg>
+					<arg><dbd col="АЦПмакс"/></arg>
+					<arg><dbd col="loLim"/></arg>
+					<arg><dbd col="hiLim"/></arg>
+					<arg><dbd col="loBrk"/></arg>
+					<arg><dbd col="hiBrk"/></arg>
+					<arg><dbd col="ROC"/></arg>
+					<arg><dbd col="recoveryTime"/></arg>
+					<arg><text t="repTime"/></arg>
+					<arg><dbd col="tau"/></arg>
+					<arg><npp/></arg>
+				</arguments>
+				<comment><dbd col="Наименование"/></comment>
+			</Function>
+			<Function fileName="A_Algorithm.iec_st" name="AI_Processing">
+				<arguments>
+					<arg><text t="GPA_AI_DRV."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_Settings."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_FromHMI."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_ToHMI."/><dbd col="TAG_NAME_PLC"/></arg>
+					<arg><text t="GPA_AI_Internal."/><dbd col="TAG_NAME_PLC"/></arg>
+				</arguments>
+				<comment><dbd col="Наименование"/></comment>
+			</Function>
+		</GenCode>
+	</ai>
+	<ao excelSheetName="AO">
+		<GenData>
+			<T_GPA_AO_FromHMI Type="28BBA2F94E53F5E7D050CBA8820F76E4" UUID="136536604B0AD5911BA545A82E7DF913"/>
+			<T_GPA_AO_ToHMI Type="D225A65348D2770B341BAC9762DA1766" UUID="00B934F5461BB0C8938D42A9118D2143"/>
+			<T_GPA_AO_Settings Type="4185BC3CA74E87CB5BCE3B9A33F614DF" UUID="48CE35A6624E3AC0A0AA7CAF9D0A7752"/>
+		</GenData>
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <X nameColumnPos="Сокр_Наименование" />
+            <V nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Диапазон_мин" type="Number"/>
+            <H nameColumnPos="Диапазон_макс" type="Number" />
+            <I nameColumnPos="Единица_измерения" />
+            <J nameColumnPos="АЦПмин" />
+            <K nameColumnPos="АЦПмакс" />
+            <M nameColumnPos="Адрес_1"/>
+            <N nameColumnPos="Адрес_2" />
+            <O nameColumnPos="Адрес_3" />
+            <R nameColumnPos="Устройство" type="Int"/>
+            <S nameColumnPos="Слот"  type="Int"/>
+            <T nameColumnPos="Канал"  type="Int"/>
+            <Z nameColumnPos="Точность"  type="Int"/>
+        </EXEL>
+	</ao>
+	<di excelSheetName="DI">
+		<GenData>
+			<T_GPA_DI_Setting Type="T_DI_Setting" UUID="9D3CCA014F76318C4B750981ED2CEA67"/>
+			<T_GPA_DI_FromHMI Type="T_DI_FromHMI" UUID="2A86C1F64D326C195FE5CB898889601B"/>
+			<T_GPA_DI_ToHMI Type="T_DI_ToHMI" UUID="2694959C4B5180695BAA0E9209463FE3"/>
+			<T_GPA_DI_DRV Type="T_DI_DRV" UUID="75AE55A30F406ADD5FAB3DA31BBA2C1F"/>
+			<T_GPA_DI_Internal Type="T_DI_Internal" UUID="FCA918B43E41B4207B07CFAFBC323BEB"/>
+		</GenData>
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <T nameColumnPos="Сокр_Наименование" />
+            <Q nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Тип_сигнала" />
+            <K nameColumnPos="Инверсия" />
+            <H nameColumnPos="Адрес_1"/>
+            <I nameColumnPos="Адрес_2" />
+            <M nameColumnPos="Устройство" type="Int"/>
+            <N nameColumnPos="Слот"  type="Int"/>
+            <O nameColumnPos="Канал"  type="Int"/>
+        </EXEL>
+	</di>
+	<dgo excelSheetName="DO">
+		<GenData>
+			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
+			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+		</GenData>	
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <T nameColumnPos="Сокр_Наименование" />
+            <Q nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Тип_сигнала" />
+            <H nameColumnPos="Адрес_1"/>
+            <I nameColumnPos="Адрес_2" />
+            <M nameColumnPos="Устройство" type="Int"/>
+            <N nameColumnPos="Слот"  type="Int"/>
+            <O nameColumnPos="Канал"  type="Int"/>
+        </EXEL>
+	</dgo>
+	<AI_NKU excelSheetName="AI_NKU">
+		<GenData>
+			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
+			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+		</GenData>	
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <P nameColumnPos="Сокр_Наименование" />
+            <T nameColumnPos="TAG_NAME_PLC" type="VarName"/> <!-- Вот тут я может ошибаюсь в столбце Ехел. Надо посмотреть что в актуальном файле. он у Гриши-->
+            <G nameColumnPos="Диапазон_мин" type="Number"/>
+            <H nameColumnPos="Диапазон_макс" type="Number" />
+            <I nameColumnPos="Единица_измерения" />
+            <K nameColumnPos="Кратность" />
+            <J nameColumnPos="Адрес_modbus"/>
+        </EXEL>
+	</AI_NKU>
+	<DI_NKU excelSheetName="DI_NKU">
+		<GenData>
+			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
+			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+		</GenData>	
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <G nameColumnPos="Сокр_Наименование" />
+            <I nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+        </EXEL>
+	</DI_NKU>
+	<DO_NKU excelSheetName="DO_NKU">
+		<GenData>
+			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
+			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+		</GenData>	
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <G nameColumnPos="Сокр_Наименование" />
+            <I nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+        </EXEL>
+	</DO_NKU>
+</ConfigSignals>
