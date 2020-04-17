@@ -6,15 +6,16 @@
 			<T_GPA_SP_Settings Type="T_SP_Settings"/>
 		</GenData>
         <EXEL>
-            <F nameColumnPos="TAG_NAME_PLC" type="VarName"/>
-            <C nameColumnPos="RuNamePostfix" />
-            <E nameColumnPos="DB" type="VarName"/>
-            <G nameColumnPos="TNpostfix"/>
-            <D nameColumnPos="limit" type="Number"/>
-            <H nameColumnPos="direct" type="boolean"/>
-            <I nameColumnPos="delay" type="Number"/>
-            <J nameColumnPos="postfix" type="VarName"/>
-            <K nameColumnPos="defVal" type="Int"/>
+            <C nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <D nameColumnPos="direct" registr="down" replace="true" repFrom1=">" repTo1="больше" repFrom2="true" repTo2="больше" repFrom3="<" repTo3="меньше" repFrom4="false" repTo4="меньше"/>
+            <E nameColumnPos="limit" type="Number"/>
+            <F nameColumnPos="delay" type="Number" default="3"/>
+            <G nameColumnPos="тип" registr="up" default="У"  replace="true" repFrom1="U" repTo1="У" repFrom2="A" repTo2="А" repFrom3="P" repTo3="П" repFrom4="O" repTo4="О"/>
+            <H nameColumnPos="defVal" type="Int" default="0"/>
+            <I nameColumnPos="типПостфикс" swith="тип" var1="У" default1="упр." var2="А" default2="авар." var3="П" default3="предупр." var4="О" default4="огр."/>
+            <J nameColumnPos="директПостфикс" type="VarName" swith="direct" var1="больше" default1="верхняя" var2="меньше" default2="нижняя"/>
+            <K nameColumnPos="typePostfix" swith="тип" var1="У" default1="_U"   var2="А" default2="_A"    var3="П" default3="_P"       var4="О" default4="_O"  />
+            <L nameColumnPos="directPostfix"  type="VarName" swith="direct" var1="больше" default1="v"       var2="меньше" default2="n"     />
         </EXEL>
 	</SetPoints>
 	<ai excelSheetName="AI">
@@ -23,17 +24,14 @@
             <U nameColumnPos="TAG_NAME_PLC" type="VarName"/>
             <G nameColumnPos="Диапазон_мин" type="Number"/>
             <H nameColumnPos="Диапазон_макс" type="Number" />
-            <AA nameColumnPos="АЦПмин" type="Number" default="2"/>
-            <AB nameColumnPos="АЦПмакс" type="Number" default="10"/>
+            <AA nameColumnPos="АЦП" default="adc2_10"/>
+            <AA nameColumnPos="АЦП" default="adc2_10"/>
             <I nameColumnPos="Единица_измерения" default=""/>
-            <J nameColumnPos="Тип_датчика" />
-            <K nameColumnPos="Акт_пас_НО_НЗ" />
-            <L nameColumnPos="Адрес_1" />
-            <M nameColumnPos="Адрес_2" />
-            <N nameColumnPos="Адрес_3" />
-            <Q nameColumnPos="Устройство" type="Int" />
-            <R nameColumnPos="Слот"  type="Int"/>
-            <S nameColumnPos="Канал"  type="Int"/>
+            <J nameColumnPos="Тип_датчика" default=""/>
+            <K nameColumnPos="Акт_пас" default=""/>
+            <L nameColumnPos="Адрес_1" default=""/>
+            <M nameColumnPos="Адрес_2" default=""/>
+            <N nameColumnPos="Адрес_3" default=""/>
             <Y nameColumnPos="Точность"  type="Int" default="2"/>
             <AI nameColumnPos="loLim" type="Number" default="-3%"/>
             <AJ nameColumnPos="hiLim" type="Number" default="+3%"/>
@@ -43,16 +41,12 @@
             <AN nameColumnPos="recoveryTime" type="Number" default="1"/>
             <AO nameColumnPos="tau" type="Number"  default="1"/>
         </EXEL>
-		<APS>
-            <aiSP nameSP="_Av" lim="AE" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="true" delay="1.0"/>
-            <aiSP nameSP="_Pv" lim="AF" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="true" delay="1.0"/>
-            <aiSP nameSP="_Pn" lim="AG" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="false" delay="1.0"/>
-            <aiSP nameSP="_An" lim="AE" db="GPA_AI_ToHMI." TNpostfix=".PV" RuNamePostfix=".PV" direct="false" delay="1.0"/>
-		</APS>
 		<GenData>
-			<T_GPA_AI_Settings Type="668FE9B94A603427C8EDBBB8917A7594" UUID="E10A238347B7C26C7C1FDFA77F91B1F5"/>
-			<T_GPA_AI_FromHMI Type="187F76AE49C59E950138DDA3067101D0" UUID="2BDAC6F849D13DED3A2A5B9190720FD7"/>
-			<T_GPA_AI_ToHMI Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D48C3F1549ACD994A366A1A51FE00772"/>
+			<T_GPA_AI_DRV Type="REAL"/>
+			<T_GPA_AI_Internal Type="T_AI_Internal"/>
+			<T_GPA_AI_Setting Type="T_AI_Setting"/>
+			<T_GPA_AI_FromHMI Type="T_AI_FromHMI"/>
+			<T_GPA_AI_ToHMI Type="T_AI_ToHMI"/>
 		</GenData>
 		<GenCode>
 			<Function fileName="A_Algorithm.iec_st" name="AI_init">
@@ -115,6 +109,8 @@
 			<T_GPA_DI_Setting Type="T_DI_Setting" UUID="9D3CCA014F76318C4B750981ED2CEA67"/>
 			<T_GPA_DI_FromHMI Type="T_DI_FromHMI" UUID="2A86C1F64D326C195FE5CB898889601B"/>
 			<T_GPA_DI_ToHMI Type="T_DI_ToHMI" UUID="2694959C4B5180695BAA0E9209463FE3"/>
+			<T_GPA_DI_DRV Type="T_DI_DRV" UUID="75AE55A30F406ADD5FAB3DA31BBA2C1F"/>
+			<T_GPA_DI_Internal Type="T_DI_Internal" UUID="FCA918B43E41B4207B07CFAFBC323BEB"/>
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />

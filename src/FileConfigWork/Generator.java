@@ -40,7 +40,6 @@ public class Generator {
         String filePath = "/home/ad/Документы по работе/сиг/";
         FileManager manager = new FileManager();
         UUID uuid = new UUID();
-
         XMLSAX configSig = new XMLSAX();
         String FILENAME = "ConfigSignals.xml";
         Node cfs = configSig.readDocument(FILENAME);// Открыть configCignals из рабочего каталога программы
@@ -50,9 +49,7 @@ public class Generator {
         NodeList nodesGenData = nodeGenData.getChildNodes();
         HashMap<String, String> dataNode = new HashMap<>();
         Node fieldsNode = null;
-
         String[] oldArray = {"ver", "old"};//массив для добваления атрибута ОЛД
-
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 XMLSAX sax = new XMLSAX();
@@ -64,14 +61,12 @@ public class Generator {
                 Node type;
                 Node oldFields = null;
                 if (trueName == null) {//помещаем сюда создание файла
-
 //                    Node rootNode = sax.createNode("Type");//создали шапку 
 //                    dataNode.put("Kind", "Struct");//записали атрибуты
 //                    dataNode.put("Name", typeName);
 //                    dataNode.put("UUID", "UUID");
 //                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
 //                    fieldsNode = sax.createNode("Fields");//создали ноду
-
                 } else {//сюда помещаем добавление
                     type = sax.readDocument(filePath + trueName);//прочитал файл в котором нашли совпадения по имени
                     oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
@@ -81,7 +76,6 @@ public class Generator {
                     Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
                     typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
                 }
-
                 for (int j = 0; j < ft.tableSize(); j++) {
                     String tagName = (String) ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
                     String comment = (String) ft.getCell("Наименование", j);//получаем НАИМЕНОВАНИЕ из таблицы
@@ -109,8 +103,6 @@ public class Generator {
                             newFields.appendChild(oldTag);
                         }
                     }
-
-//               
                 }
                 sax.writeDocument(typeName);//записали файл
             }
