@@ -7,7 +7,7 @@
 		</GenData>
         <EXEL>
             <C nameColumnPos="TAG_NAME_PLC" type="VarName"/>
-            <D nameColumnPos="direct" registr="down" replace="true" repFrom1=">" repTo1="больше" repFrom2="true" repTo2="больше" repFrom3="<" repTo3="меньше" repFrom4="false" repTo4="меньше"/>
+            <D nameColumnPos="direct" registr="down" replace="true" repFrom1=">" repTo1="больше" repFrom2="true" repTo2="больше" repFrom3="minus" repTo3="меньше" repFrom4="false" repTo4="меньше"/>
             <E nameColumnPos="limit" type="Number"/>
             <F nameColumnPos="delay" type="Number" default="3"/>
             <G nameColumnPos="тип" registr="up" default="У"  replace="true" repFrom1="U" repTo1="У" repFrom2="A" repTo2="А" repFrom3="P" repTo3="П" repFrom4="O" repTo4="О"/>
@@ -25,7 +25,7 @@
             <G nameColumnPos="Диапазон_мин" type="Number"/>
             <H nameColumnPos="Диапазон_макс" type="Number" />
             <AA nameColumnPos="АЦП" default="adc2_10"/>
-            <AA nameColumnPos="АЦП" default="adc2_10"/>
+            <AB nameColumnPos="АЦПmax" default="adc2_10"/>
             <I nameColumnPos="Единица_измерения" default=""/>
             <J nameColumnPos="Тип_датчика" default=""/>
             <K nameColumnPos="Акт_пас" default=""/>

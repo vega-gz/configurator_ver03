@@ -205,7 +205,7 @@ public class DataBase {
             connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE TABLE " + name_table + nc_stringing;
-            //System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
+            System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
             //connection.commit();

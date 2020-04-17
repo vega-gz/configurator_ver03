@@ -50,6 +50,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import ReadWriteExcel.RWExcel;
 import fileTools.FileManager;
+import globalData.globVar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -288,7 +289,7 @@ public class XMLSAX {
         String user = null;
         String url = null;
         String base = null;
-        String PathToProject = null;
+        String DesignDir = null;
         if (f.exists()) {
             try {
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -304,8 +305,9 @@ public class XMLSAX {
                         user = element.getElementsByTagName("USER").item(0).getTextContent();
                         url = element.getElementsByTagName("URL").item(0).getTextContent();
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
-                        PathToProject = element.getElementsByTagName("PathToProject").item(0).getTextContent();
+                        DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
                     }
+                    globVar.desDir = DesignDir; // добавить переменную пути проекта
                     DataBase.getInstance().connectionToBase(url, base, user, pass); // Вызов запроса к базе подключения
                 }
             } catch (ParserConfigurationException | SAXException | IOException ex) {
@@ -479,6 +481,7 @@ public class XMLSAX {
         String nameSheetExel = ""; // название листа Exel
         ArrayList<String> columnExcel = new ArrayList<>(); // Колонки из Excell
         ArrayList<String> columnBase = new ArrayList<>(); //названия таблиц для Базы
+        ArrayList<String> columnExcelIgnore = new ArrayList<>(); // Колонки из Excell которые пропускаем данные где нет default
         String defautStr = "default"; //  элемент аттрибут ноды по которому срабатывает триггер построения
         boolean defAttrF = false; // триггер добавить сигнал или нет
         boolean createT = false; // триггер строить таблицу или нет
@@ -521,21 +524,24 @@ public class XMLSAX {
                                     String Value = attr.getNodeValue(); // значение атрибута
                                     if (Attribute.equals("nameColumnPos")) {//проверка что этот атрибут nameColumnPos
                                         System.out.println("NameColumnToBase: " + Value);
-                                        //columnBase.add(Value);
+                                        //columnBase.add(Value); // колонки для базы
                                         column = Value;
                                     }
-                                    if (Attribute.equals(defautStr)) {// если нет этого аттрибута то сигнал не заносим
+                                    if (Attribute.equals(defautStr)) {// если нет этого аттрибута то сигнал не заносим - это было раньше
                                         defAttrF = true;
                                     }
                                 }
-                                if (defAttrF){ // если нашли аттрибут default
+                                if (defAttrF){ // если нашли аттрибут default (было без постройки столбцов а сказали не так) 
                                     columnBase.add(column); // будем строить по таким таблицам что нашли
                                     columnExcel.add(start.getNodeName()); // Имя забора колонки из Excel
-                                    column = null; // на всякий
                                     defAttrF = false; // обнуляем триггер    
-                                } else{ // не нашли нужно не строим столбец -- ? 
-                                    FileManager.loggerConstructor("XML default value not find " + column);
+                                } else{ // не нашли нужно не строим столбец -- ?
+                                    columnBase.add(column); // будем строить по таким таблицам что нашли
+                                    columnExcelIgnore.add(start.getNodeName()); // Имя Excel игнорируемые
+                                    columnExcel.add(start.getNodeName()); // Имя забора колонки из Excel
+                                    FileManager.loggerConstructor("XML 'default' value not find " + column);
                                 }
+                                column = null; // на всякий
                             }
                         }
                     }
@@ -548,6 +554,20 @@ public class XMLSAX {
                             if (nameSheetExel.equals(s)) {
                                 workbase.createTable(nameTB, columnBase); // Создание таблицы
                                 ArrayList<String[]> sheet_fromsheet_from = new ArrayList<>(readExel.getDataCell(nameSheetExel, columnExcel));
+                                // проверка на вхождения данных default
+                                for(int idexcX=0; idexcX < columnExcel.size(); ++idexcX){ // Пробегаем по списку столбцов Excel
+                                    String colExc = columnExcel.get(idexcX);
+                                    for(String ignoreS: columnExcelIgnore){ // Пробегаем по тем столбцам которые генерируют ошибку
+                                        if(colExc.equals(ignoreS)){ // совпало и проверяем данные из этой ячейки
+                                            for(String[] dataExcel: sheet_fromsheet_from){
+                                                if (dataExcel[idexcX + 1].equals("")){ // +1 так как uuid пустое значение в полученном default то?
+                                                    FileManager.loggerConstructor("not find default " + nameSheetExel + " " + colExc
+                                                            + " index "+idexcX);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 for (String[] massS : sheet_fromsheet_from) {
                                     workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
                                 }

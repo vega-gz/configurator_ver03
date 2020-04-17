@@ -240,15 +240,11 @@ public class Main_JPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        CreateFrame frame = new CreateFrame(url, nameProject, user, pass);//вызываем второре окно для записи конф файла
-        
-
-
+        CreateFrame frame = new CreateFrame(url, nameProject, user, pass);//вызываем второре окно для записи конф файла      
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
         JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
         int ren = fileopen.showDialog(null, "DownloadToBase");
         if (ren == JFileChooser.APPROVE_OPTION) {
