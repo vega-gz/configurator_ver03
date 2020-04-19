@@ -369,46 +369,37 @@ public class FileManager {
         String nameWords = "Name=";
         String ext = ".TYPE";
         String firstName, secondName ,fileName= null;
-        
-
         final File folder = new File(dir);
         String[] fileList = folder.list();
         int count = 0;
         for (int j = 0; j < nameWords.toCharArray().length; j++) {
             count++;
         }
-
         //создание fileList - списка всех файлов с расширением .type в каталоге dir
         for (String file : fileList) {
             try {
                 String s = file.toString();
                 //создаем объект FileReader для объекта File
-                FileReader fr = new FileReader(dir + "/" + file);
+                FileReader fr = new FileReader(dir + file);
                 //создаем BufferedReader с существующего FileReader для построчного считывания
                 BufferedReader reader = new BufferedReader(fr);
                 // считаем сначала первую строку
                 String line = reader.readLine();
                 while (line != null) {
-
                     int start = line.indexOf(nameWords);
                     if (start >= 0) {
-
                         firstName = "." + line.substring(line.indexOf(nameWords) + count + 1);
                         secondName = firstName.substring(firstName.indexOf('.') + 1, firstName.indexOf('"'));
                         // start = line.indexOf("\"", start);
                         //  int end = line.indexOf("\"", start + 1);
                         if (nameType.equals(secondName)) {
-                            System.out.println(file);
-                            
+                            System.out.println(file);    
                             return file;
-
                         }else{
                             break;
                         }
                     }
-
                     line = reader.readLine();
-
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
