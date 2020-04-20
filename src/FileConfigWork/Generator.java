@@ -36,7 +36,7 @@ import org.w3c.dom.NodeList;
 public class Generator {
 
     @SuppressWarnings("empty-statement")
-    public static void Generator(FrameTabel ft) {
+    public static void GenTypeFile(FrameTabel ft) {
         String filePath = "/home/ad/Документы по работе/сиг/";
         FileManager manager = new FileManager();
         UUID uuid = new UUID();
