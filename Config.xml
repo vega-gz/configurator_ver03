@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+<Settings>
+<USER>mutonar</USER>
+<URL>jdbc:postgresql://minoro.ru:5432/</URL>
+<BASE>test665</BASE>
+<BASE1>pravoslav</BASE1>
+<DesignDir>C:/tmp/</DesignDir>
+<nameProject>5</nameProject>
+<PASS>Solovin2</PASS>
+</Settings>
+</config>
