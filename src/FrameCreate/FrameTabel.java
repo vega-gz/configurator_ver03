@@ -235,7 +235,7 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         Generator.GenTypeFile(this);
+            Generator.GenTypeFile(this);
     }//GEN-LAST:event_jButton4ActionPerformed
 
         public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске

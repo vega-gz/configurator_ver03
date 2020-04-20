@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.w3c.dom.Node;
 
@@ -43,7 +44,7 @@ import org.w3c.dom.Node;
 public class FileManager {
 
     public static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
-    
+
     public File wrFile;
     public File rdFile;
     public FileOutputStream fos;
@@ -220,6 +221,7 @@ public class FileManager {
     public int openFile4read(String dirName, String fileName) throws IOException {
         return openFile4read(dirName, fileName, "UTF-8");
     }
+
     public int openFile4read(String dirName, String fileName, String charSer) throws IOException {
         File dir = new File(dirName);
         // если объект представляет каталог
@@ -294,25 +296,29 @@ public class FileManager {
         FileManager fm = new FileManager();
         final File folder = new File(dir);
         String[] fileList = folder.list();
-        for(String fn : fileList){
-            if(fn.toUpperCase().contains(ext)){
-                fm.openFile4read(dir, fn);
-                String s = fm.rd();
-                while(!s.contains(nameWords) && !fm.EOF) s = fm.rd();//
-                if(!fm.EOF){
-                    int start = s.indexOf(nameWords) + nameWords.length() + 1;
-                    int end = s.indexOf("\"", start);
-                    if(end > start){
-                        String foundType = s.substring(start, end);
-                        if(foundType.equals(nameType)){
-                            fm.rdStream.close();
-                            return fn;
+        if (fileList != null) {
+            for (String fn : fileList) {
+                if (fn.toUpperCase().contains(ext)) {
+                    fm.openFile4read(dir, fn);
+                    String s = fm.rd();
+                    while (!s.contains(nameWords) && !fm.EOF) {
+                        s = fm.rd();//
+                    }
+                    if (!fm.EOF) {
+                        int start = s.indexOf(nameWords) + nameWords.length() + 1;
+                        int end = s.indexOf("\"", start);
+                        if (end > start) {
+                            String foundType = s.substring(start, end);
+                            if (foundType.equals(nameType)) {
+                                fm.rdStream.close();
+                                return fn;
+                            }
                         }
                     }
+                    fm.rdStream.close();
                 }
-                fm.rdStream.close();
             }
-        }
+        } else JOptionPane.showMessageDialog(null, "Путь к генерации не найден" + dir);
         return null;
     }
 
@@ -336,5 +342,4 @@ public class FileManager {
 //        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
 //     //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
 //    }
-
 }
