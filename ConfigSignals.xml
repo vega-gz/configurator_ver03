@@ -55,7 +55,7 @@
 			<hiBrkF operation="+" operand1="Диапазон_макс" operand2="range6proc"/>
 		</Formulas>
 		<GenData>
-			<T_GPA_AI_DRV Type="REAL"/>
+			<!--T_GPA_AI_DRV Type="REAL"/-->
 			<T_GPA_AI_Internal Type="T_AI_Internal"/>
 			<T_GPA_AI_Settings Type="T_AI_Settings"/>
 			<T_GPA_AI_FromHMI Type="T_AI_FromHMI"/>
