@@ -30,6 +30,7 @@ import FrameCreate.TableNzVer2;
 import FileConfigWork.Generator;
 import FileConfigWork.SignalTypeToBase;
 import FileConfigWork.SignalTypeConvertTagName;
+import globalData.globVar;
 import java.awt.Component;
 import java.io.File;
 import javax.swing.JTable;
@@ -201,12 +202,12 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFileChooser fileload = new JFileChooser();
+        JFileChooser fileload = new JFileChooser(new File(globVar.desDir));
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
-                filepatch = fileload.getSelectedFile().getCanonicalPath();
+                globVar.desDir = fileload.getSelectedFile().getCanonicalPath();
                 Generator.GenTypeFile(this);
 
             } catch (IOException ex) {

@@ -10,8 +10,12 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import fileTools.*;
 import fileTools.*;
 import static fileTools.FileManager.FindFile;
+import globalData.globVar;
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -36,18 +40,87 @@ import org.w3c.dom.NodeList;
 public class Generator {
 
     @SuppressWarnings("empty-statement")
-    public static void GenTypeFile(FrameTabel ft) {
-        String filePath = "/home/ad/Документы по работе/сиг/";
+        public static void genSTcode(FrameTabel ft) throws IOException{
+        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
+        String backUpPath = globVar.desDir + File.separator + "backUpST" + currentDat;   //установили путь для бэкапа
+        new File(backUpPath).mkdir();                                       //создали папку для бэкапа
+        //------------------------------------------------------------------------------------------------------------
+        FileManager fm = new FileManager();                                 //создали менеджер файлов
+        XMLSAX configSig = new XMLSAX();                                    //создали менеджер для ХМЛ
+        Node cfs = configSig.readDocument("ConfigSignals.xml");// Открыть configCignals из рабочего каталога программы
+        Node nodeGenCode = configSig.returnFirstFinedNode(configSig.returnFirstFinedNode(cfs, ft.tableName()), "GenCode");//Ищем в этой ноде ноду GenData
+        ArrayList<Node> stFiles = configSig.getHeirNode(nodeGenCode);      //Создали список файлов для генерации.
+        for(Node stFile : stFiles){                                         //Перебираем файлы
+            String stFileName = (String) configSig.getDataNode(stFile).get("name"); //Для каждого файла
+            fm.copyFile(globVar.desDir + File.separator + stFileName, backUpPath + File.separator + stFileName);                    //создаём резервную копию
+            int ret = fm.openFile4read(globVar.desDir, stFileName);         //открываем её на чтенье
+            if(ret!=0) break;
+            ret = fm.createFile2write(globVar.desDir, stFileName + "_tmp"); //открываем файл на запись
+            if(ret!=0) break;
+            ArrayList<Node> funclist = configSig.getHeirNode(stFile);      //Создали список функций для генерации. Каждую функцию надо сгенерить по числу строк в таблице
+            for(Node genSTnode : funclist){                                 //перебираем функции
+                String stFunc = (String) configSig.getDataNode(genSTnode).get("name");  //вычитываем её имя
+                Node args = configSig.returnFirstFinedNode(genSTnode, "arguments");     //Находим ноду с аргументами
+                ArrayList<Node> arglist = configSig.getHeirNode(args);                  //создаём список аргументов
+                String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
+                while(!fm.EOF && !s.contains(stFunc)){
+                    fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
+                    s = fm.rd();
+                }
+                String funcCall = stFunc + "(";                                 //Начинаем генерацию вызова функции
+                for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
+                    for(Node arg : arglist){                                        //Цикл по всем аргументам функции
+                        ArrayList<Node> argParts = configSig.getHeirNode(arg);
+                        for(Node argPart : argParts){                                   //Цикл по всем частям аргументов - текстовым и табличным
+                            if("text".equals(argPart.getNodeName())) funcCall += (String) configSig.getDataNode(argPart).get("t");
+                            else if("dbd".equals(argPart.getNodeName())) funcCall += (String) ft.getCell((String) configSig.getDataNode(argPart).get("t"),j);
+                            else if("npp".equals(argPart.getNodeName())) funcCall += j;
+                        }
+                        funcCall += ",";                                                //аргумент записан и отделён от следующего запятой
+                    }                                                   //Убираем лишнюю запятую в конце
+                    funcCall = funcCall.substring(0, funcCall.length()-1) + ");//" + (String) ft.getCell("Наименование", j);
+                    fm.wr(funcCall + "\n");                             //записываем вызов функции в файл
+                    funcCall = stFunc + "(";                            // подготавливаем следующую строку
+                }
+                //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
+                while(!fm.EOF  && (s.contains(stFunc) || s.trim().isEmpty())&& !s.contains("]]></ST>")) s = fm.rd(); 
+                if(!fm.EOF && s.contains("]]></ST>") && s.contains(stFunc)){    //если оказалось, что мы пропустили конец всей функции
+                    fm.wr("]]></ST>\n");                                        //восстанавливаем его
+                    s = fm.rd();
+                }
+                while(!fm.EOF){                                                 //дописываем хвост файла
+                    fm.wr(s + "\n");                          
+                    s = fm.rd();
+                }
+                fm.rdStream.close();                                                            //закрываем поток чтения
+                fm.wrStream.close();                                                            //закрываем поток записи
+                File file = new File(globVar.desDir + File.separator + stFileName);             //создаём ссылку на исходный файл
+                file.delete();                                                                  //удаляем его
+                File tmpFile = new File(globVar.desDir + File.separator + stFileName + "_tmp"); //создаём ссылку на сгенерированный файл
+                tmpFile.renameTo(file);                                                         //делаем его исходным
+                fm.openFile4read(globVar.desDir, stFileName);                                   //открываем его на чтенье
+                fm.createFile2write(globVar.desDir, stFileName + "_tmp");                       //открываем временный файл для генерации
+
+            }
+            fm.rdStream.close();
+            fm.wrStream.close();
+        }
+    }
+
+    public static void GenTypeFile(FrameTabel ft) throws IOException {
+        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
+        String backUpPath = globVar.desDir + File.separator + "backUpST" + currentDat;   //установили путь для бэкапа
+        new File(backUpPath).mkdir();                                       //создали папку для бэкапа
+        //------------------------------------------------------------------------------------------------------------
+        String filePath = globVar.desDir;
         FileManager manager = new FileManager();
         UUID uuid = new UUID();
         XMLSAX configSig = new XMLSAX();
-        String FILENAME = "ConfigSignals.xml";
-        Node cfs = configSig.readDocument(FILENAME);// Открыть configCignals из рабочего каталога программы
+        Node cfs = configSig.readDocument("ConfigSignals.xml");// Открыть configCignals из рабочего каталога программы
         String nodeTable = ft.tableName();
         Node findNode = configSig.returnFirstFinedNode(cfs, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         Node nodeGenData = configSig.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData
         NodeList nodesGenData = nodeGenData.getChildNodes();
-        HashMap<String, String> dataNode = new HashMap<>();
         Node fieldsNode = null;
         String[] oldArray = {"ver", "old"};//массив для добваления атрибута ОЛД
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
@@ -68,7 +141,7 @@ public class Generator {
 //                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
 //                    fieldsNode = sax.createNode("Fields");//создали ноду
                 } else {//сюда помещаем добавление
-                    type = sax.readDocument(filePath + trueName);//прочитал файл в котором нашли совпадения по имени
+                    type = sax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
                     oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
                     sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
                     String[] newArray = {"Fields", "ver", "new"};
@@ -104,7 +177,7 @@ public class Generator {
                         }
                     }
                 }
-                sax.writeDocument(typeName);//записали файл
+                sax.writeDocument(backUpPath + File.separator + trueName);//записали файл
             }
 
         }
