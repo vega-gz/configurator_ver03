@@ -360,7 +360,7 @@ public class RWExcel {
     }
 
 // --- это второй метод Geting data from file Exel (Вытянуть данные из Exel  но по конкретным столбцам)----
-    public ArrayList<String[]> getDataCell(String name_sheet, ArrayList<String> columns) {
+    public ArrayList<String[]> getDataCell(String name_sheet, ArrayList<String> column) {
         FileInputStream inputStream = null;
         String[] array_cell_len;
         ArrayList<String[]> array_cell = new ArrayList<>();
@@ -374,10 +374,24 @@ public class RWExcel {
             int tmpFirstLenght = 0;
             int col_UUID = 0;
             int startm = 1;
-            first_len = startReadData;
-            startm = 1; // данные с первого так как один UUID
-            col_UUID = 1;
-            array_cell_len = new String[columns.size() + col_UUID]; // Почему +1 Так как одни данные под UUID
+            switch (name_sheet) { // Высчитываем с какой строки заполнять таблицу и 4 UUID - 3 доп
+                case "AI1":
+                case "AO1":
+                case "DI1":
+                case "DO1": {
+                    first_len = startReadData; // получили переменую строки от куда читаем данные
+                    col_UUID = 4; // 4 UUID
+                    startm = 4; // это моя идиотия тут из за того что я решил тут вносить UUID в базу
+                    array_cell_len = new String[column.size() + col_UUID]; // Почему +1
+                }
+                break;
+                default: { // если нечего не найдено из подходящего
+                    first_len = startReadData;
+                    startm = 1; // данные с первого так как один UUID
+                    col_UUID = 1;
+                    array_cell_len = new String[column.size() + col_UUID]; // Почему +1 Так как одни данные под UUID
+                }
+            }
             Iterator<Row> rowIter = sheet.iterator(); // итератор Строк
             int sum_sheet = 0;
             int len_row = 0;
@@ -400,8 +414,8 @@ public class RWExcel {
                     } while (tmp_UUID <= col_UUID);
                     //Iterator<Cell> cells = row.cellIterator(); // Итератор ячеек (Почему не применяю его ?)
                     //int i_tmp = 0;
-                    for (int i_tmp = 0; i_tmp < columns.size(); ++i_tmp) { // пробегаемся по входному массиву
-                        String nameCompareColumn = columns.get(i_tmp);
+                    for (int i_tmp = 0; i_tmp < column.size(); ++i_tmp) { // пробегаемся по входному массиву
+                        String nameCompareColumn = column.get(i_tmp);
                             int numberCol = CellReference.convertColStringToIndex(nameCompareColumn); // Переводим имя в индекс
                             //System.out.println(CellReference.convertNumToColString(i_tmp)); // выявляем Имена стобцы в которых ячейка
                             Cell cell = row.getCell(numberCol); // адрес индекс
@@ -501,100 +515,6 @@ public class RWExcel {
             }
         }
         System.out.println(array_cell.size() + " -number string in mass");
-        return array_cell;
-    }
-    
-    // --- Получение только данных столбца без UUid и структур. Только данные----
-    public ArrayList<String> getDataColumn(String name_sheet, String column) {
-        FileInputStream inputStream = null;
-        String datCell = null;
-        ArrayList<String> array_cell = new ArrayList<>();
-        try {
-            inputStream = new FileInputStream(new File(path_file));
-            HSSFWorkbook wb = new HSSFWorkbook(inputStream);
-            Sheet sheet = wb.getSheet(name_sheet);
-            getRowReadData(sheet); // вызов фукции определения начала данных в на Листе
-            // начальные значения наверное просто для инициализации
-            int first_len = 0; // получили переменую строки с именами столбцов;
-            int tmpFirstLenght = 0;
-            int col_UUID = 0;
-            first_len = startReadData;
-            col_UUID = 1;
-            Iterator<Row> rowIter = sheet.iterator(); // итератор Строк
-            int sum_sheet = 0;
-            int len_row = 0;
-            int max_len_row = 0;
-            while (rowIter.hasNext()) {
-                while (tmpFirstLenght < first_len) { // а вот есть ли там данные
-                    rowIter.next();
-                    ++tmpFirstLenght;
-                }
-                if (rowIter.hasNext()) { // проверка есть ли вообще данные после пропуска строк
-                    Row row = rowIter.next();
-                    // System.out.println(row.getFirstCellNum() + " " + row.getLastCellNum()); //в строку что бы посмотреть что за нах
-                    int tmp = 0;
-                            int numberCol = CellReference.convertColStringToIndex(column); // Переводим имя в индекс
-                            //System.out.println(CellReference.convertNumToColString(i_tmp)); // выявляем Имена стобцы в которых ячейка
-                            Cell cell = row.getCell(numberCol); // адрес индекс
-                            //cell.getRichStringCellValue().toString();
-                            if (cell != null) {  // обходим таким дебильным способом
-                                CellType cellType = cell.getCellType();
-                                switch (cellType) {
-                                    case STRING: {
-                                        if (cell.getStringCellValue().contains("'")) {
-                                            datCell = cell.getStringCellValue().replaceAll("'", "");
-                                        }else datCell = cell.getStringCellValue();
-                                    }
-                                    break;
-                                    case BLANK:
-                                        datCell = "";
-                                        break;
-                                    case NUMERIC:
-                                        datCell = Double.toString(cell.getNumericCellValue()); // Double
-                                        break;
-                                    //case FORMULA : array_cell_len[tmp]=cell.getCellFormula(); // String
-                                    case FORMULA:
-                                        // System.out.println("Formula");
-                                        switch (cell.getCachedFormulaResultType()) {
-                                            case NUMERIC:
-                                                datCell = (Double.toString(cell.getNumericCellValue()));
-                                                break;
-                                            case STRING:
-                                                datCell = cell.getRichStringCellValue().toString().replaceAll("'", "");
-                                                //System.out.println("Last evaluated as \"" + cell.getRichStringCellValue() + "\"");
-                                                break;
-                                        }
-                                        break;
-                                    default:
-                                        datCell = "|";
-                                        break;
-                                }
-                            } else {
-                                datCell = ""; // Вот тут чего такое то?
-                            }
-                    // ПРоверяемс считались какие то данные из ячеек строки (1 так как первый элемент занят ID)
-                    //Желательно переписать
-                    int not_null_dat = 0;
-                    if(datCell != null) {
-                      array_cell.add(datCell);
-                    }
-                    datCell = null;
-
-                }
-            }   //System.out.println( sum_sheet);
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        System.out.println(array_cell.size() + " -number string in mass" + " List " + name_sheet + " column "+ column  );
         return array_cell;
     }
 
@@ -744,7 +664,7 @@ public class RWExcel {
             int tmpI = 0;
             while (icell.hasNext()) {
                 Cell c = icell.next();
-                //System.out.println(c.getAddress());  // дебаг адрес ячейки
+                System.out.println(c.getAddress());  // дебаг адрес ячейки
                 if (!findColumnSig) { // пока не нашли перебираем ячейки для ускорения
                     CellType cellType = c.getCellType();
                     switch (cellType) { // Вычисляем тип ячейки
@@ -753,7 +673,7 @@ public class RWExcel {
                             for (int i = 0; i < nameRow.length; ++i) { // прогоняем по списку  искомых  
                                 if (dataC.equals(nameRow[i])) { // ПРоверяем на совпадения обозначений столбоц если есть совпадения то со следующей строки данные
                                     findColumnSig = true; // выставили флаг в то что нашли
-                                    //System.out.println("Addres f cell " + c.getAddress()); // адрес ячейки
+                                    System.out.println("Addres f cell " + c.getAddress()); // адрес ячейки
                                     if (maxRowNum <= r.getRowNum()) {
                                         maxRowNum = r.getRowNum(); // адрес строки с найденным столбцом они мугут быть разные по этому максимальное берем
                                         startReadData = maxRowNum + 1; // +1 так как данные начинаются со следующей строки
