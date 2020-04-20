@@ -3,14 +3,13 @@ package FileConfigWork;
 import FrameCreate.*;
 
 import FrameCreate.FrameTabel;
-import FrameCreate.TableNzVer2;
 import XMLTools.*;
+import FrameCreate.TableNzVer2;
 import XMLTools.XMLSAX;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import fileTools.*;
 import fileTools.*;
 import static fileTools.FileManager.FindFile;
-import static globalData.globVar.desDir;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,8 +36,8 @@ import org.w3c.dom.NodeList;
 public class Generator {
 
     @SuppressWarnings("empty-statement")
-    public static void GenSigType(FrameTabel ft) {
-        String filePath = desDir;
+    public static void Generator(FrameTabel ft) {
+        String filePath = "/home/ad/Документы по работе/сиг/";
         FileManager manager = new FileManager();
         UUID uuid = new UUID();
         XMLSAX configSig = new XMLSAX();
@@ -69,10 +68,10 @@ public class Generator {
 //                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
 //                    fieldsNode = sax.createNode("Fields");//создали ноду
                 } else {//сюда помещаем добавление
-                    type = sax.readDocument(filePath + "\\" + trueName);//прочитал файл в котором нашли совпадения по имени
+                    type = sax.readDocument(filePath + trueName);//прочитал файл в котором нашли совпадения по имени
                     oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
                     sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
-                    String[] newArray = {"Fields"};
+                    String[] newArray = {"Fields", "ver", "new"};
                     newFields = sax.insertChildNode(type, newArray);
                     Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
                     typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
@@ -105,9 +104,7 @@ public class Generator {
                         }
                     }
                 }
-               sax.removeNode(oldFields);
-                sax.writeDocument(filePath + "\\" + "test" + "\\" + trueName);//записали файл
-             
+                sax.writeDocument(typeName);//записали файл
             }
 
         }

@@ -6,7 +6,6 @@
 package fileTools;
 
 import globalData.globVar;
-import static globalData.globVar.desDir;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -285,50 +284,122 @@ public class FileManager {
         globVar.fm.wrStream.close();
         return 0;
     }
+//тот самый метод,еще подправлю
+
+//    public static String FindFile(String dir, String nameType) {
+//        boolean result;
+//        String nameWords = "Name=";
+//        String name, name1 = null;
+//        int i = 0;
+//        try {
+//         //   создаем объект FileReader для объекта File
+//            FileReader fr = new FileReader(dir);
+//          //  создаем BufferedReader с существующего FileReader для построчного считывания
+//            BufferedReader reader = new BufferedReader(fr);
+//             считаем сначала первую строку
+//            String line = reader.readLine();
+//            while (line != null) {
+//
+//                line = reader.readLine();
+//                if (line.contains(nameWords) == true) {
+//                    int count = 0;
+//                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
+//                        count++;
+//                    }
+//                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
+//                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
+//                    System.out.println(name1);
+//
+//                } else {
+//                    System.out.println("В строке " + i + " не нашлось данного слова");
+//                }
+//                i++;
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return name1;//должен возвращать имя файла со схожим типом
+//
+//    }
+//
+//    public String Find(String dir, String nameType) throws FileNotFoundException, IOException {
+//        String nameWords = "Name=";
+//        String name, name1 = null;
+//        String trueName = null;
+//        int i = 0;
+//
+//        получаем все файлы в папке
+//        final File folder = new File(dir);
+//
+//        final List<File> fileList = Arrays.asList(folder.listFiles());//массив который хранит количество файлов в папке
+//        for (int k = 0; k <= fileList.size(); k++) {
+//            FileReader fr = new FileReader(fileList.get(k));
+//            BufferedReader reader = new BufferedReader(fr);
+//            String line = reader.readLine();
+//            while (line != null) {
+//
+//                line = reader.readLine();
+//                if (line.contains(nameWords) == true) {
+//                    int count = 0;
+//                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
+//                        count++;
+//                    }
+//                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
+//                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
+//                      System.out.println(name1);
+//                    if (nameType.equals(name1)) {
+//                        trueName = fileList.get(k).getName();
+//
+//                    }
+//
+//                }
+//
+//            }
+//            break;
+//        }
+//        System.out.println(trueName);
+//
+//        return trueName;
+//    }
 
     public static String FindFile(String dir, String nameType) {
         String nameWords = "Name=";
         String ext = ".TYPE";
-        String firstName, secondName, fileName = null;
-
+        String firstName, secondName ,fileName= null;
         final File folder = new File(dir);
         String[] fileList = folder.list();
         int count = 0;
         for (int j = 0; j < nameWords.toCharArray().length; j++) {
             count++;
         }
-
         //создание fileList - списка всех файлов с расширением .type в каталоге dir
         for (String file : fileList) {
             try {
                 String s = file.toString();
                 //создаем объект FileReader для объекта File
-                FileReader fr = new FileReader(dir + "\\" + file);
+                FileReader fr = new FileReader(dir + file);
                 //создаем BufferedReader с существующего FileReader для построчного считывания
                 BufferedReader reader = new BufferedReader(fr);
                 // считаем сначала первую строку
                 String line = reader.readLine();
                 while (line != null) {
-
                     int start = line.indexOf(nameWords);
                     if (start >= 0) {
-
                         firstName = "." + line.substring(line.indexOf(nameWords) + count + 1);
                         secondName = firstName.substring(firstName.indexOf('.') + 1, firstName.indexOf('"'));
                         // start = line.indexOf("\"", start);
                         //  int end = line.indexOf("\"", start + 1);
                         if (nameType.equals(secondName)) {
-                            System.out.println(file);
-
+                            System.out.println(file);    
                             return file;
-
-                        } else {
+                        }else{
                             break;
                         }
                     }
-
                     line = reader.readLine();
-
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -337,6 +408,8 @@ public class FileManager {
             }
         }
         return null;
+
+       
 
     }
 
@@ -354,32 +427,11 @@ public class FileManager {
         }
     }
 
-    public void BackupCreateFile() {
-        File theDir = new File(desDir);
-        if (!theDir.exists()) {
-          
-            boolean result = false;
-            
+//    public static void main(String[] args) throws IOException {//для тестирования
+//        FileManager fm = new FileManager();
+//        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
+//        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
+//     //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
+//    }
 
-            try {
-                theDir.mkdir();
-                result = true;
-            } catch (SecurityException se) {
-
-            }
-            if (result) {
-                System.out.println("Папка создана");
-            }
-        }else{
-            System.out.println("не существует");
-        }
-        
-        
-    }
-
-    public static void main(String[] args) throws IOException {//для тестирования
-        FileManager fm = new FileManager();
-        fm.BackupCreateFile();
-
-    }
 }

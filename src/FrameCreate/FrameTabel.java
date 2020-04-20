@@ -1,19 +1,8 @@
 package FrameCreate;
 
-import DataBaseConnect.*;
-import DataBaseConnect.DataBase;
-import DataBaseConnect.StructSelectData;
-import FileConfigWork.Generator;
-import FileConfigWork.SignalTypeConvertTagName;
-import FileConfigWork.SignalTypeToBase;
-import FrameCreate.TableNzVer2;
-import Main.Main_JPanel;
-import XMLTools.UUID;
 import XMLTools.XMLSAX;
+
 import fileTools.FileManager;
-import globalData.globVar;
-import java.awt.Component;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,18 +12,30 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.xml.parsers.ParserConfigurationException;
+import DataBaseConnect.StructSelectData;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 import org.xml.sax.SAXException;
+import DataBaseConnect.DataBase;
+import Main.Main_JPanel;
+import XMLTools.UUID;
+import DataBaseConnect.*;
+import FileConfigWork.Generator;
+import FrameCreate.TableNzVer2;
+import FileConfigWork.Generator;
+import FileConfigWork.SignalTypeToBase;
+import FileConfigWork.SignalTypeConvertTagName;
+import java.awt.Component;
+import java.io.File;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -200,13 +201,13 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFileChooser fileload = new JFileChooser("C:\\Users\\Григорий\\Desktop\\сиг");
+        JFileChooser fileload = new JFileChooser();
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
             try {
-                globVar.desDir= fileload.getSelectedFile().getCanonicalPath();
-                Generator.GenSigType(this);
+                filepatch = fileload.getSelectedFile().getCanonicalPath();
+                Generator.Generator(this);
 
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -233,7 +234,7 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         Generator.GenSigType(this);
+         Generator.Generator(this);
     }//GEN-LAST:event_jButton4ActionPerformed
 
         public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
