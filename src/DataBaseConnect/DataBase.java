@@ -22,6 +22,7 @@ import XMLTools.XMLSAX;
 import java.util.HashMap;
 import java.util.Map;
 import fileTools.FileManager;
+import globalData.globVar;
 
 public class DataBase {
 
@@ -78,6 +79,7 @@ public class DataBase {
     // --- Читает конфигурацию для подключения к базе ---
     private void connectionToBaseconfig(){
         new XMLSAX().setConnectBaseConfig(FILECONFIG); // так читаем файл и подключаемся к базе
+        globVar.currentBase = BASE; // присваием глобальным паметрам значение после инициализации
     }
     // не правильно (так данные передавать это боль)
     private String[] getInfoCurrentConnect(){

@@ -52,7 +52,8 @@ public class Generator {
         String[] oldArray = {"ver", "old"};//массив для добваления атрибута ОЛД
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                XMLSAX sax = new XMLSAX();
+                XMLSAX sax = null;
+                boolean triggerelsetrueName = false;
                 Node currNodeCfgXML = nodesGenData.item(i);
                 String typeName = currNodeCfgXML.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
                 String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
@@ -68,6 +69,9 @@ public class Generator {
 //                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
 //                    fieldsNode = sax.createNode("Fields");//создали ноду
                 } else {//сюда помещаем добавление
+                    triggerelsetrueName = true;
+                    sax = null;
+                    sax = new XMLSAX();
                     type = sax.readDocument(filePath + trueName);//прочитал файл в котором нашли совпадения по имени
                     oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
                     sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
@@ -104,7 +108,10 @@ public class Generator {
                         }
                     }
                 }
-                sax.writeDocument(typeName);//записали файл
+                if (triggerelsetrueName){
+                    sax.writeDocument(typeName);//записали файл
+                    triggerelsetrueName = false;
+                }
             }
 
         }
