@@ -43,6 +43,14 @@ import org.w3c.dom.Node;
 public class FileManager {
 
     public static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
+    
+    public File wrFile;
+    public File rdFile;
+    public FileOutputStream fos;
+    public FileInputStream fis;
+    public Writer wrStream;
+    public Reader rdStream;
+    public boolean EOF;
 
     // --- копирование файла используя поток ---
     public void copyFile(String source, String dest) throws IOException {
@@ -174,15 +182,6 @@ public class FileManager {
         }
     }
 
-    //public File dir;
-    public File wrFile;
-    public File rdFile;
-    public FileOutputStream fos;
-    public FileInputStream fis;
-    public Writer wrStream;
-    public Reader rdStream;
-    //String buf;
-
     public int MoveFile(String fileName, String srcDir, String dstDir) {
         File originalFile = new File(srcDir, fileName);
         File newFile = new File(dstDir, fileName);
@@ -218,6 +217,9 @@ public class FileManager {
         return 0;
     }
 
+    public int openFile4read(String dirName, String fileName) throws IOException {
+        return openFile4read(dirName, fileName, "UTF-8");
+    }
     public int openFile4read(String dirName, String fileName, String charSer) throws IOException {
         File dir = new File(dirName);
         // если объект представляет каталог
@@ -234,7 +236,7 @@ public class FileManager {
         }
         fis = new FileInputStream(rdFile);
         rdStream = new InputStreamReader(fis, charSer); //cs);
-        globVar.EOF = false;
+        EOF = false;
         return 0;
     }
 
@@ -250,20 +252,20 @@ public class FileManager {
             try {
                 ch = rdStream.read();
                 if (!(s.isEmpty() && (ch == 10))) {//ch == 13 || 
-                    if (((char) ch) == '\n' || ch < 0 || ch == 13 || ch == 10) {
+                    if (((char) ch) == '\n' || ch < 0 || ch == 13 || ch == 10 || ch == -1) {
                         break;
                     }
                     s += (char) ch;
                 }
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
-                globVar.EOF = true;
+                EOF = true;
                 break;
             }
 
         }
         if (ch == -1) {
-            globVar.EOF = true;
+            EOF = true;
         }
         return s;
     }
@@ -284,133 +286,34 @@ public class FileManager {
         globVar.fm.wrStream.close();
         return 0;
     }
-//тот самый метод,еще подправлю
 
-//    public static String FindFile(String dir, String nameType) {
-//        boolean result;
-//        String nameWords = "Name=";
-//        String name, name1 = null;
-//        int i = 0;
-//        try {
-//         //   создаем объект FileReader для объекта File
-//            FileReader fr = new FileReader(dir);
-//          //  создаем BufferedReader с существующего FileReader для построчного считывания
-//            BufferedReader reader = new BufferedReader(fr);
-//             считаем сначала первую строку
-//            String line = reader.readLine();
-//            while (line != null) {
-//
-//                line = reader.readLine();
-//                if (line.contains(nameWords) == true) {
-//                    int count = 0;
-//                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
-//                        count++;
-//                    }
-//                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
-//                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
-//                    System.out.println(name1);
-//
-//                } else {
-//                    System.out.println("В строке " + i + " не нашлось данного слова");
-//                }
-//                i++;
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return name1;//должен возвращать имя файла со схожим типом
-//
-//    }
-//
-//    public String Find(String dir, String nameType) throws FileNotFoundException, IOException {
-//        String nameWords = "Name=";
-//        String name, name1 = null;
-//        String trueName = null;
-//        int i = 0;
-//
-//        получаем все файлы в папке
-//        final File folder = new File(dir);
-//
-//        final List<File> fileList = Arrays.asList(folder.listFiles());//массив который хранит количество файлов в папке
-//        for (int k = 0; k <= fileList.size(); k++) {
-//            FileReader fr = new FileReader(fileList.get(k));
-//            BufferedReader reader = new BufferedReader(fr);
-//            String line = reader.readLine();
-//            while (line != null) {
-//
-//                line = reader.readLine();
-//                if (line.contains(nameWords) == true) {
-//                    int count = 0;
-//                    for (int j = 0; j < nameWords.toCharArray().length; j++) {
-//                        count++;
-//                    }
-//                    name = "." + line.substring(line.indexOf(nameWords) + count + 1);
-//                    name1 = name.substring(name.indexOf('.') + 1, name.indexOf('"'));
-//                      System.out.println(name1);
-//                    if (nameType.equals(name1)) {
-//                        trueName = fileList.get(k).getName();
-//
-//                    }
-//
-//                }
-//
-//            }
-//            break;
-//        }
-//        System.out.println(trueName);
-//
-//        return trueName;
-//    }
-
-    public static String FindFile(String dir, String nameType) {
+    public static String FindFile(String dir, String nameType) throws IOException {
         String nameWords = "Name=";
         String ext = ".TYPE";
-        String firstName, secondName ,fileName= null;
+        String firstName, secondName, fileName = null;
+        FileManager fm = new FileManager();
         final File folder = new File(dir);
         String[] fileList = folder.list();
-        int count = 0;
-        for (int j = 0; j < nameWords.toCharArray().length; j++) {
-            count++;
-        }
-        //создание fileList - списка всех файлов с расширением .type в каталоге dir
-        for (String file : fileList) {
-            try {
-                String s = file.toString();
-                //создаем объект FileReader для объекта File
-                FileReader fr = new FileReader(dir + file);
-                //создаем BufferedReader с существующего FileReader для построчного считывания
-                BufferedReader reader = new BufferedReader(fr);
-                // считаем сначала первую строку
-                String line = reader.readLine();
-                while (line != null) {
-                    int start = line.indexOf(nameWords);
-                    if (start >= 0) {
-                        firstName = "." + line.substring(line.indexOf(nameWords) + count + 1);
-                        secondName = firstName.substring(firstName.indexOf('.') + 1, firstName.indexOf('"'));
-                        // start = line.indexOf("\"", start);
-                        //  int end = line.indexOf("\"", start + 1);
-                        if (nameType.equals(secondName)) {
-                            System.out.println(file);    
-                            return file;
-                        }else{
-                            break;
+        for(String fn : fileList){
+            if(fn.toUpperCase().contains(ext)){
+                fm.openFile4read(dir, fn);
+                String s = fm.rd();
+                while(!s.contains(nameWords) && !fm.EOF) s = fm.rd();//
+                if(!fm.EOF){
+                    int start = s.indexOf(nameWords) + nameWords.length() + 1;
+                    int end = s.indexOf("\"", start);
+                    if(end > start){
+                        String foundType = s.substring(start, end);
+                        if(foundType.equals(nameType)){
+                            fm.rdStream.close();
+                            return fn;
                         }
                     }
-                    line = reader.readLine();
                 }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                fm.rdStream.close();
             }
         }
         return null;
-
-       
-
     }
 
     public static class MyFileNameFilter implements FilenameFilter {

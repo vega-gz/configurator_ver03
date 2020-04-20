@@ -3,9 +3,9 @@
 <Settings>
 <USER>mutonar</USER>
 <URL>jdbc:postgresql://minoro.ru:5432/</URL>
-<BASE>test665</BASE>
+<BASE>lev</BASE>
 <BASE1>pravoslav</BASE1>
-<DesignDir>C:/tmp/</DesignDir>
+<DesignDir>D:\Projects\Калининград_нов\Design</DesignDir>
 <nameProject>5</nameProject>
 <PASS>Solovin2</PASS>
 </Settings>
