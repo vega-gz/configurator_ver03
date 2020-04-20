@@ -39,18 +39,18 @@ import org.xml.sax.SAXException;
 // класс удаления неверного <!DOCTYPE SubAppType v. 1.3 >
 class ReadBedXML {
 
-    static String patchD = "";
+    String patchD = "";
 
-    public ReadBedXML(String patchD) {
+    ReadBedXML(String patchD) {
         this.patchD = patchD;
     }
 
-    static String doctype = "";
-    static int positionDTD;
-    static boolean positionDTDFind = false; // триггер для поиска DTD что бы не гонять цикл
+    String doctype = "";
+    int positionDTD;
+    boolean positionDTDFind = false; // триггер для поиска DTD что бы не гонять цикл
 
     // --- Запись книги в файл ----
-    static void writeDocument(Document document, String patchF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
+    void writeDocument(Document document, String patchF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
         try {
             File file = new File(patchF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -62,7 +62,7 @@ class ReadBedXML {
         }
     }
 
-    static void viewAllXML(Document document) {
+    void viewAllXML(Document document) {
         // Получаем корневой элемент
         Node root = document.getDocumentElement();
         System.out.println("List of books:");
@@ -91,7 +91,7 @@ class ReadBedXML {
     }
 
     // Метод Парсера строк поиск Доктипа
-    static String paternDOCTYPE(String st1, int pos) {
+    String paternDOCTYPE(String st1, int pos) {
         Pattern pattern2 = Pattern.compile("^(<!DOCTYPE.*)$"); // Патерн нашего ДокТипа
         Matcher matcher2 = pattern2.matcher(st1);
         if (matcher2.matches()) {
@@ -107,7 +107,7 @@ class ReadBedXML {
     }
 
     //метод чтения файла
-    static public String methodRead(String path) throws InterruptedException {
+    public String methodRead(String path) throws InterruptedException {
         String result_data = "";
         StringBuffer sb = new StringBuffer();
         long start_time = 0;
@@ -117,8 +117,8 @@ class ReadBedXML {
             int pos_str = 0;
             start_time = System.nanoTime();
             while ((str = in.readLine()) != null) {
-                //System.out.println(str);
-                if (positionDTDFind == false) {
+                System.out.println(str); // дебаг 
+                if (positionDTDFind == false) { // вот тут при втором вызове не работает почему то True
                     sb.append(paternDOCTYPE(str, pos_str) + "\n"); // Передаем строки в парсер обработчик
                     //result_data += paternDOCTYPE(str, pos_str) + "\n";
                 } else {
@@ -139,7 +139,7 @@ class ReadBedXML {
     }
 
     //метод записи файла и изначальных данных и DTD
-    static public void methodWrite(String path, String data) throws InterruptedException {
+    public void methodWrite(String path, String data) throws InterruptedException {
         try {
 
             File resultName = new File(path + "_newfile"); //Файл с новой записью
@@ -180,9 +180,8 @@ class ReadBedXML {
     }
 
     //метод записи файла без DTD
-    static public void writeWithoutDTD(String path, String data) throws InterruptedException {
+    public void writeWithoutDTD(String path, String data) throws InterruptedException {
         try {
-
             File resultName = new File(path + "_newfile"); //Файл с новой записью
             File tmpName = new File(path + "_original"); // это просто Имя
             File realName = new File(path); // Оригинальное имя
@@ -209,7 +208,7 @@ class ReadBedXML {
     }
 
     //метод записи файла и изначальных данных и DTD(не доделал просто чуть подчищен выше метод)
-    static public void writeOnlyDtd(String path, String data) throws InterruptedException {
+    public void writeOnlyDtd(String path, String data) throws InterruptedException {
         try {
 
             File resultName = new File(path + "_newfile"); //Файл с новой записью
