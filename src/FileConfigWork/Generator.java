@@ -107,7 +107,7 @@ public class Generator {
         }
     }
 
-    public static void GenTypeFile(FrameTabel ft) throws IOException {
+    public static void GenTypeFile(FrameTabel ft) {
         String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
         String backUpPath = globVar.desDir + File.separator + "backUpST" + currentDat;   //установили путь для бэкапа
         new File(backUpPath).mkdir();                                       //создали папку для бэкапа
@@ -125,37 +125,38 @@ public class Generator {
         String[] oldArray = {"ver", "old"};//массив для добваления атрибута ОЛД
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                XMLSAX sax = null;
-                boolean triggerelsetrueName = false;
-                Node currNodeCfgXML = nodesGenData.item(i);
-                String typeName = currNodeCfgXML.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
-                String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
-                String typeUUID = uuid.getUIID();
-                Node newFields = null;
-                Node type;
-                Node oldFields = null;
-                if (trueName == null) {//помещаем сюда создание файла
-//                    Node rootNode = sax.createNode("Type");//создали шапку 
+                try {
+                    XMLSAX sax = null;
+                    boolean triggerelsetrueName = false;
+                    Node currNodeCfgXML = nodesGenData.item(i);
+                    String typeName = currNodeCfgXML.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
+                    String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
+                    String typeUUID = uuid.getUIID();
+                    Node newFields = null;
+                    Node type;
+                    Node oldFields = null;
+                    if (trueName == null) {//помещаем сюда создание файла
+//                    Node rootNode = sax.createNode("Type");//создали шапку
 //                    dataNode.put("Kind", "Struct");//записали атрибуты
 //                    dataNode.put("Name", typeName);
 //                    dataNode.put("UUID", "UUID");
 //                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
 //                    fieldsNode = sax.createNode("Fields");//создали ноду
-                } else {//сюда помещаем добавление
-                    type = sax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
-                    oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
-                    sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
-                    String[] newArray = {"Fields", "ver", "new"};
-                    newFields = sax.insertChildNode(type, newArray);
-                    Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
-                    typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
-                }
-                for (int j = 0; j < ft.tableSize(); j++) {
-                    String tagName = (String) ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
-                    String comment = (String) ft.getCell("Наименование", j);//получаем НАИМЕНОВАНИЕ из таблицы
-
-                    if (oldFields == null) {//если нода пустая,то создаю элементы
-
+                    } else {//сюда помещаем добавление
+                        type = sax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
+                        oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields
+                        sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
+                        String[] newArray = {"Fields", "ver", "new"};
+                        newFields = sax.insertChildNode(type, newArray);
+                        Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
+                        typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
+                    }
+                    for (int j = 0; j < ft.tableSize(); j++) {
+                        String tagName = (String) ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
+                        String comment = (String) ft.getCell("Наименование", j);//получаем НАИМЕНОВАНИЕ из таблицы
+                        
+                        if (oldFields == null) {//если нода пустая,то создаю элементы
+                            
 //                        oldFields.appendChild(fieldsNode);//поместили ноду без атрибутов 
 //                        Node fieldNode = sax.createNode("Field");//создали ноду filed
 //                        HashMap<String, String> childNode = new HashMap<>();
@@ -166,19 +167,22 @@ public class Generator {
 //                        sax.insertDataNode(fieldNode, childNode);
 //                        fieldsNode.appendChild(fieldNode);//добавили Field в Fileds
 
-                    } else {
-                        String[] nodeAndAttr = {"Field", "name", tagName};
-                        Node oldTag = sax.findNodeAtribute(oldFields, nodeAndAttr);
-                        if (oldTag == null) {
-                            String nAndA[] = {"Field", "name", tagName, "Comment", comment, "Type", typeUUID, "UUID", uuid.getUIID()};
-                            sax.insertChildNode(newFields, nAndA);
                         } else {
-                            sax.setDataAttr(oldTag, "Comment", comment);
-                            newFields.appendChild(oldTag);
+                            String[] nodeAndAttr = {"Field", "name", tagName};
+                            Node oldTag = sax.findNodeAtribute(oldFields, nodeAndAttr);
+                            if (oldTag == null) {
+                                String nAndA[] = {"Field", "name", tagName, "Comment", comment, "Type", typeUUID, "UUID", uuid.getUIID()};
+                                sax.insertChildNode(newFields, nAndA);
+                            } else {
+                                sax.setDataAttr(oldTag, "Comment", comment);
+                                newFields.appendChild(oldTag);
+                            }
                         }
                     }
+                    sax.writeDocument(backUpPath + File.separator + trueName);//записали файл
+                } catch (IOException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                sax.writeDocument(backUpPath + File.separator + trueName);//записали файл
             }
 
         }
