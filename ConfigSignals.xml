@@ -43,7 +43,7 @@
             <AO default="1" nameColumnPos="tau" type="Number"/>
         </EXEL>
 		<Formulas>
-			<Диапазон_макс/>
+			<Диапазон_макс result=""/>
 			<Диапазон_мин/>
 			<range operand1="Диапазон_макс" operand2="Диапазон_мин" operation="-"/>
 			<range1proc operand1="range" operand2="100" operation="/"/>
