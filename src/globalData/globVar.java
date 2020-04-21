@@ -6,8 +6,10 @@
 package globalData;
 
 import StringTools.StrTools;
+import XMLTools.XMLSAX;
 import fileTools.FileManager;
 import java.util.Date;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -35,6 +37,9 @@ public class globVar {
 	
 	static String stUuid;
 	static long dinUuid = 0;
+        
+        public static XMLSAX sax = null;
+        public static Node cfgRoot = null;
 	
 	public static void SetStatUUID() {
 		Date date = new Date();

@@ -12,15 +12,18 @@ import DataBaseConnect.*;
 import ReadWriteExcel.RWExcel;
 import org.w3c.dom.Node;
 import XMLTools.XMLSAX;
+import globalData.globVar;
 
 
 public class Main {
     static DataBase workbase =  DataBase.getInstance();
     static RWExcel rwexcel = new RWExcel();
-    static XMLSAX sax = new XMLSAX(); // Класс работы с XML  static что бы не парится
+    //static XMLSAX sax = new XMLSAX(); // убрано в globVar -Lev-
 
     public static void main(String[] args) {
         //workbase.connectionToBase();
+        globVar.sax = new XMLSAX(); // Класс работы с XML  static что бы не парится
+        globVar.cfgRoot = globVar.sax.readDocument("ConfigSignals.xml");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_JPanel().setVisible(true);
@@ -78,9 +81,9 @@ public class Main {
     
             // --- формирования баз используя конфиг ---
     static void fillBaseConfig(String patch_file)  {
-            String pathConfigSignal = "ConfigSignals.xml";
-            Node rootN = sax.readDocument(pathConfigSignal); // Берем корневую ноду
-            Node finderN = sax.returnFirstFinedNode(rootN, "ConfigSignals"); // реализовал метод поиска
-            sax.ReadExelFromConfig(finderN, patch_file); // пересыламе ноду на обработку там же и формирование базы
+            //String pathConfigSignal = "ConfigSignals.xml";
+            //Node rootN = sax.readDocument(pathConfigSignal); // Берем корневую ноду
+            //Node finderN = sax.returnFirstFinedNode(rootN, "ConfigSignals"); // реализовал метод поиска
+            globVar.sax.ReadExelFromConfig(globVar.cfgRoot, patch_file); // пересыламе ноду на обработку там же и формирование базы
     }
 }
