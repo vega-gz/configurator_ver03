@@ -145,7 +145,7 @@ public class Generator {
                     type = sax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
                     oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
                     sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
-                    String[] newArray = {"Fields", "ver", "new"};
+                    String[] newArray = {"Fields"};//, "ver", "new"};
                     newFields = sax.insertChildNode(type, newArray);
                     Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
                     typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
@@ -170,7 +170,7 @@ public class Generator {
                         String[] nodeAndAttr = {"Field", "name", tagName};
                         Node oldTag = sax.findNodeAtribute(oldFields, nodeAndAttr);
                         if (oldTag == null) {
-                            String nAndA[] = {"Field", "name", tagName, "Comment", comment, "Type", typeUUID, "UUID", uuid.getUIID()};
+                            String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", typeUUID, "UUID", uuid.getUIID()};
                             sax.insertChildNode(newFields, nAndA);
                         } else {
                             sax.setDataAttr(oldTag, "Comment", comment);
@@ -178,6 +178,7 @@ public class Generator {
                         }
                     }
                 }
+                if(oldFields != null) sax.removeNode(oldFields);
                 sax.writeDocument(backUpPath + File.separator + trueName);//записали файл
             }
 

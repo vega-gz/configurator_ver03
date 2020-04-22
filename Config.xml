@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
-<Settings>
-<USER>mutonar</USER>
-<URL>jdbc:postgresql://minoro.ru:5432/</URL>
-<BASE>lev</BASE>
-<BASE1>pravoslav</BASE1>
-<DesignDir>D:\Projects\Калининград_нов\Design</DesignDir>
-<nameProject>5</nameProject>
-<PASS>Solovin2</PASS>
-</Settings>
+        
+    
+    <Settings>
+                
+        
+        <USER>mutonar</USER>
+                
+        
+        <URL>jdbc:postgresql://minoro.ru:5432/</URL>
+                
+        
+        <BASE>lev</BASE>
+                
+        
+        <BASE1>pravoslav</BASE1>
+                
+        
+        <DesignDir>D:\Projects\Калининград_нов</DesignDir>
+                
+        
+        <nameProject>5</nameProject>
+                
+        
+        <PASS>Solovin2</PASS>
+                
+    
+    </Settings>
+        
+
 </config>
