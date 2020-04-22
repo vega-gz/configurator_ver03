@@ -12,17 +12,17 @@
             <F nameColumnPos="delay" type="Number" default="3"/>
             <G nameColumnPos="тип" registr="up" default="У"  replace="true" repFrom1="U" repTo1="У" repFrom2="A" repTo2="А" repFrom3="P" repTo3="П" repFrom4="O" repTo4="О"/>
             <H nameColumnPos="defVal" type="Int" default="0"/>
-            <I nameColumnPos="типПостфикс" switch="тип" var1="О" default1="огр." var2="А" default2="авар." var3="П" default3="предупр." default="упр." />
+            <I nameColumnPos="типПостфикс" swith="тип" var1="У" default1="упр." var2="А" default2="авар." var3="П" default3="предупр." var4="О" default4="огр."/>
             <J nameColumnPos="директПостфикс" type="VarName" swith="direct" var1="больше" default1="верхняя" var2="меньше" default2="нижняя"/>
-            <K nameColumnPos="typePostfix" switch="тип" var1="У" default1="_U"   var2="А" default2="_A"    var3="П" default3="_P"       var4="О" default4="_O"  />
-            <L nameColumnPos="directPostfix"  type="VarName" switch="direct" var1="больше" default1="v"       var2="меньше" default2="n"     />
+            <K nameColumnPos="typePostfix" swith="тип" var1="У" default1="_U"   var2="А" default2="_A"    var3="П" default3="_P"       var4="О" default4="_O"  />
+            <L nameColumnPos="directPostfix"  type="VarName" swith="direct" var1="больше" default1="v"       var2="меньше" default2="n"     />
             <B nameColumnPos="Наименование" add1="типПостфикс" add2="директПостфикс"/>
         </EXEL>
 	</SetPoints>
 	<AI excelSheetName="AI">
         <EXEL>
-            <F nameColumnPos="Наименование" unical="true"/><!--Обязательный нода-->
-            <U nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
+            <F nameColumnPos="Наименование" />
+            <U nameColumnPos="TAG_NAME_PLC" type="VarName"/>
             <G nameColumnPos="Диапазон_мин" type="Number" fRez=""/>
             <H nameColumnPos="Диапазон_макс" type="Number" fRez=""/>
             <AA nameColumnPos="АЦП" default="adc2_10"/>
@@ -39,8 +39,8 @@
             <AK nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
             <AL nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
             <AM nameColumnPos="ROC" type="Number"   formula="range"/>
-            <AN nameColumnPos="recoveryTime" type="Number" default="1.0"/>
-            <AO nameColumnPos="tau" type="Number"  default="1.0"/>
+            <AN nameColumnPos="recoveryTime" type="Number" default="1"/>
+            <AO nameColumnPos="tau" type="Number"  default="1"/>
         </EXEL>
 		<Formulas>
 			<Диапазон_макс/>
@@ -57,7 +57,7 @@
 		<GenData>
 			<T_GPA_AI_DRV Type="REAL"/>
 			<T_GPA_AI_Internal Type="T_AI_Internal"/>
-			<T_GPA_AI_Settings Type="T_AI_Settings"/>
+			<T_GPA_AI_Setting Type="T_AI_Setting"/>
 			<T_GPA_AI_FromHMI Type="T_AI_FromHMI"/>
 			<T_GPA_AI_ToHMI Type="T_AI_ToHMI"/>
 		</GenData>
@@ -68,8 +68,8 @@
 						<arg><text t="GPA_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
-						<arg><dbd t="АЦП"/></arg>
-						<arg><dbd t="АЦПmax"/></arg>
+						<arg><dbd t="АЦПмин"/></arg>
+						<arg><dbd t="АЦПмакс"/></arg>
 						<arg><dbd t="loLim"/></arg>
 						<arg><dbd t="hiLim"/></arg>
 						<arg><dbd t="loBrk"/></arg>
@@ -95,23 +95,21 @@
 			</File>
 		</GenCode>
 		<GenHMI>
-			<File name="AT_HMI.iec_hmi">
-				<Folder Name="05.Signals" Comment="" Data=""/>
-				<GraphicsCompositeFBType Name="S_AI_" UUID="8234699D4C70958ACEA2269A0000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
-				<FB Name="BaseAnIn_" Type="T_BaseAnIn" TypeUUID="C06031C04C13BB17463EB1B889813E68"/>
-				<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
-				<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="21"/>
-				<additionalVar>
-					<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-				</additionalVar>
-			</File>
+			<Folder Name="05.Signals" Comment="" Data="" UUID="B55E301C498F8E5FCE314287C193E99E"/>
+			<GraphicsCompositeFBType Name="S_AI_" UUID="8234699D4C70958ACEA2269A0000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
+			<FB Name="BaseAnIn_" Type="T_BaseAnIn" TypeUUID="C06031C04C13BB17463EB1B889813E68"/>
+			<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
+			<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incX="400"/>
+			<additionalVar>
+				<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			<additionalVar>
 		</GenHMI>
 	</AI>
 	<AO excelSheetName="AO">
 		<GenData>
-			<T_GPA_AO_FromHMI Type="T_AO_FromHMI"/>
-			<T_GPA_AO_ToHMI Type="T_AO_ToHMI"/>
-			<T_GPA_AO_Settings Type="T_AO_Settings"/>
+			<T_GPA_AO_FromHMI Type="28BBA2F94E53F5E7D050CBA8820F76E4" UUID="136536604B0AD5911BA545A82E7DF913"/>
+			<T_GPA_AO_ToHMI Type="D225A65348D2770B341BAC9762DA1766" UUID="00B934F5461BB0C8938D42A9118D2143"/>
+			<T_GPA_AO_Settings Type="4185BC3CA74E87CB5BCE3B9A33F614DF" UUID="48CE35A6624E3AC0A0AA7CAF9D0A7752"/>
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
@@ -133,7 +131,7 @@
 	</AO>
 	<DI excelSheetName="DI">
 		<GenData>
-			<T_GPA_DI_Settings Type="T_DI_Settings" UUID="9D3CCA014F76318C4B750981ED2CEA67"/>
+			<T_GPA_DI_Setting Type="T_DI_Setting" UUID="9D3CCA014F76318C4B750981ED2CEA67"/>
 			<T_GPA_DI_FromHMI Type="T_DI_FromHMI" UUID="2A86C1F64D326C195FE5CB898889601B"/>
 			<T_GPA_DI_ToHMI Type="T_DI_ToHMI" UUID="2694959C4B5180695BAA0E9209463FE3"/>
 			<T_GPA_DI_DRV Type="T_DI_DRV" UUID="75AE55A30F406ADD5FAB3DA31BBA2C1F"/>
