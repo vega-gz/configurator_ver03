@@ -647,7 +647,7 @@ public class XMLSAX {
                             ++tmp;
                         }
                         
-                        writeDocument(); // запишем документ так как были преобразования
+                        //writeDocument(); // запишем документ так как были преобразования
                         for (String[] massS : sheet_fromsheet_from) {
                             workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
                         }

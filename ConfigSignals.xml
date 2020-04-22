@@ -21,8 +21,8 @@
 	</SetPoints>
 	<AI excelSheetName="AI">
         <EXEL>
-            <F nameColumnPos="Наименование" />
-            <U nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <F nameColumnPos="Наименование" unical="true"/><!--Обязательный нода-->
+            <U nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
             <G nameColumnPos="Диапазон_мин" type="Number" fRez=""/>
             <H nameColumnPos="Диапазон_макс" type="Number" fRez=""/>
             <AA nameColumnPos="АЦП" default="adc2_10"/>
@@ -39,8 +39,8 @@
             <AK nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
             <AL nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
             <AM nameColumnPos="ROC" type="Number"   formula="range"/>
-            <AN nameColumnPos="recoveryTime" type="Number" default="1"/>
-            <AO nameColumnPos="tau" type="Number"  default="1"/>
+            <AN nameColumnPos="recoveryTime" type="Number" default="1.0"/>
+            <AO nameColumnPos="tau" type="Number"  default="1.0"/>
         </EXEL>
 		<Formulas>
 			<Диапазон_макс/>
@@ -95,14 +95,16 @@
 			</File>
 		</GenCode>
 		<GenHMI>
-			<Folder Name="05.Signals" Comment="" Data=""/>
-			<GraphicsCompositeFBType Name="S_AI_" UUID="8234699D4C70958ACEA2269A0000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
-			<FB Name="BaseAnIn_" Type="T_BaseAnIn" TypeUUID="C06031C04C13BB17463EB1B889813E68"/>
-			<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
-			<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="21"/>
-			<additionalVar>
-				<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-			</additionalVar>
+			<File name="AT_HMI.iec_hmi">
+				<Folder Name="05.Signals" Comment="" Data=""/>
+				<GraphicsCompositeFBType Name="S_AI_" UUID="8234699D4C70958ACEA2269A0000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
+				<FB Name="BaseAnIn_" Type="T_BaseAnIn" TypeUUID="C06031C04C13BB17463EB1B889813E68"/>
+				<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
+				<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="21"/>
+				<additionalVar>
+					<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+				</additionalVar>
+			</File>
 		</GenHMI>
 	</AI>
 	<AO excelSheetName="AO">
