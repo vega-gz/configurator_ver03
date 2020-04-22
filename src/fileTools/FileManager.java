@@ -54,6 +54,30 @@ public class FileManager {
     public boolean EOF;
 
     // --- копирование файла используя поток ---
+    public void copyFileWoReplace(String source, String dest, boolean notCopyFile) throws IOException {
+        File copy = new File(dest);
+        if(copy.isFile()){
+            if(notCopyFile) return;
+            for(int i = 1; copy.isFile(); i++){
+                dest = dest + "(" + i + ")";
+                copy = new File(dest);
+            }
+        }
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source); // Можно и файл подставлять
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
+        }
+    }
     public void copyFile(String source, String dest) throws IOException {
         InputStream is = null;
         OutputStream os = null;

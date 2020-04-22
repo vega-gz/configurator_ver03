@@ -62,7 +62,7 @@
 			<T_GPA_AI_ToHMI Type="T_AI_ToHMI"/>
 		</GenData>
 		<GenCode>
-			<File name="A_Algorithm.iec_st">
+			<File name="AI_CallAll.txt">
 				<Function name="AI_init">
 					<arguments>
 						<arg><text t="GPA_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -115,7 +115,6 @@
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <X nameColumnPos="Сокр_Наименование" />
             <V nameColumnPos="TAG_NAME_PLC" type="VarName"/>
             <G nameColumnPos="Диапазон_мин" type="Number"/>
             <H nameColumnPos="Диапазон_макс" type="Number" />
@@ -133,33 +132,56 @@
 	</AO>
 	<DI excelSheetName="DI">
 		<GenData>
-			<T_GPA_DI_Settings Type="T_DI_Settings" UUID="9D3CCA014F76318C4B750981ED2CEA67"/>
-			<T_GPA_DI_FromHMI Type="T_DI_FromHMI" UUID="2A86C1F64D326C195FE5CB898889601B"/>
-			<T_GPA_DI_ToHMI Type="T_DI_ToHMI" UUID="2694959C4B5180695BAA0E9209463FE3"/>
-			<T_GPA_DI_DRV Type="T_DI_DRV" UUID="75AE55A30F406ADD5FAB3DA31BBA2C1F"/>
-			<T_GPA_DI_Internal Type="T_DI_Internal" UUID="FCA918B43E41B4207B07CFAFBC323BEB"/>
+			<T_GPA_DI_Settings Type="T_DI_Settings"/>
+			<T_GPA_DI_FromHMI Type="T_DI_FromHMI"/>
+			<T_GPA_DI_ToHMI Type="T_DI_ToHMI"/>
+			<T_GPA_DI_DRV Type="T_DI_DRV"/>
+			<T_GPA_DI_Internal Type="T_DI_Internal"/>
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <T nameColumnPos="Сокр_Наименование" />
             <Q nameColumnPos="TAG_NAME_PLC" type="VarName"/>
             <G nameColumnPos="Тип_сигнала" />
-            <K nameColumnPos="Инверсия" />
+            <K nameColumnPos="Инверсия" type="bool" default="false"/>
+            <L nameColumnPos="Задержка"  type="Number" default="1.0"/>
             <H nameColumnPos="Адрес_1"/>
             <I nameColumnPos="Адрес_2" />
             <M nameColumnPos="Устройство" type="Int"/>
             <N nameColumnPos="Слот"  type="Int"/>
             <O nameColumnPos="Канал"  type="Int"/>
         </EXEL>
+		<GenCode>
+			<File name="DI_CallAll.txt">
+				<Function name="DI_init">
+					<arguments>
+						<arg><text t="GPA_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="repTime"/></arg>
+						<arg><dbd t="Задержка"/></arg>
+						<arg><dbd t="Инверсия"/></arg>
+						<arg><npp/></arg>
+					</arguments>
+					<comment><dbd t="Наименование"/></comment>
+				</Function>
+				<Function name="DI_Processing">
+					<arguments>
+						<arg><text t="GPA_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="GPA_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="GPA_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="GPA_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="GPA_DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+					</arguments>
+					<comment><dbd t="Наименование"/></comment>
+				</Function>
+			</File>
+		</GenCode>
 	</DI>
 	<DGO excelSheetName="DO">
 		<GenData>
-			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
-			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+			<T_GPA_DO_FromHMI Type="T_DO_FromHMI"/>
+			<T_GPA_DO_ToHMI Type="T_DO_ToHMI"/>
 		</GenData>	
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <T nameColumnPos="Сокр_Наименование" />
             <Q nameColumnPos="TAG_NAME_PLC" type="VarName"/>
             <G nameColumnPos="Тип_сигнала" />
             <H nameColumnPos="Адрес_1"/>
@@ -171,12 +193,10 @@
 	</DGO>
 	<AI_NKU excelSheetName="AI_NKU">
 		<GenData>
-			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
-			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+			<T_NKU_AI_DRV Type="REAL"/>
 		</GenData>	
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <P nameColumnPos="Сокр_Наименование" />
             <T nameColumnPos="TAG_NAME_PLC" type="VarName"/> <!-- Вот тут я может ошибаюсь в столбце Ехел. Надо посмотреть что в актуальном файле. он у Гриши-->
             <G nameColumnPos="Диапазон_мин" type="Number"/>
             <H nameColumnPos="Диапазон_макс" type="Number" />
@@ -187,23 +207,19 @@
 	</AI_NKU>
 	<DI_NKU excelSheetName="DI_NKU">
 		<GenData>
-			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
-			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+			<T_NKU_DI_DRV Type="BOOL"/>
 		</GenData>	
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <G nameColumnPos="Сокр_Наименование" />
             <I nameColumnPos="TAG_NAME_PLC" type="VarName"/>
         </EXEL>
 	</DI_NKU>
 	<DO_NKU excelSheetName="DO_NKU">
 		<GenData>
-			<T_GPA_DO_FromHMI Type="T_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6"/>
-			<T_GPA_DO_ToHMI Type="T_DO_ToHMI" UUID="150F53385749F03C0BB1E29A7ED64D95"/>
+			<T_NKU_DO_DRV Type="BOOL"/>
 		</GenData>	
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <G nameColumnPos="Сокр_Наименование" />
             <I nameColumnPos="TAG_NAME_PLC" type="VarName"/>
         </EXEL>
 	</DO_NKU>
