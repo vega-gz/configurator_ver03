@@ -487,8 +487,8 @@ public class Main_JPanel extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int ren = jFileChooser1.showDialog(null, "папка с проектом");
         if (ren == JFileChooser.APPROVE_OPTION) {
-                globVar.desDir = jFileChooser1.getSelectedFile().toString(); // установить новый путь 
-                this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.desDir); // установить заголовок
+                globVar.PathToProject = jFileChooser1.getSelectedFile().toString(); // установить новый путь 
+                this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.PathToProject); // установить заголовок
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

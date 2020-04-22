@@ -128,7 +128,6 @@ public class Generator {
                 XMLSAX sax = new XMLSAX();
                 Node currNodeCfgXML = nodesGenData.item(i);
                 String typeName = currNodeCfgXML.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
-                filePath = "/home/ad/Документы по работе/сиг/"; // тестовое
                 String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
                 String typeUUID = uuid.getUIID();
                 Node newFields = null;
