@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Comment="Дискретные для драйвера" Kind="Struct" Name="T_GPA_DI_DRV" UUID="75AE55A30F406ADD5FAB3DA31BBA2C1F">
+                
+
+    
+
+    
+
+    <Fields>
+        <Field Comment="Байпасный клапан закрыт" Name="BK_OF" Type="BOOL" UUID="470d702847264cc6b1d866f26f6a4f98"/>
+        <Field Comment="Дверь 1 КВОУ закрыта" Name="Dver1_VOU_Close" Type="BOOL" UUID="2f01247df7304c4ea89a5dad7df1cc15"/>
+        <Field Comment="Дверь 2 КВОУ закрыта" Name="Dver2_VOU_Close" Type="BOOL" UUID="8042c026501b4cac8a140daf4f575b6e"/>
+        <Field Comment="Дверь воздухозаборной камеры закрыта" Name="Dver_VZK_Close" Type="BOOL" UUID="2912c452fcbf43a5ac887ba0835f521a"/>
+        <Field Comment="Перепад давления газа на фильтре-сетке, установленном на входе компрессора" Name="dP_setka_N" Type="BOOL" UUID="d34f00a7cde5410c8f5964cf9e1386c2"/>
+        <Field Comment="Перепад давления газа на кране К1" Name="dPg_Kr1" Type="BOOL" UUID="0f80c20544ab4814bc36b1f5eeddf0b6"/>
+        <Field Comment="Кран Кр1 открыт" Name="Kr1_ON" Type="BOOL" UUID="34b8f893fbbe468ebd0f534201537df0"/>
+        <Field Comment="Кран Кр1 закрыт" Name="Kr1_OF" Type="BOOL" UUID="186f4ed2ea514a45bff296121a96b742"/>
+        <Field Comment="Кран Кр2 открыт" Name="Kr2_ON" Type="BOOL" UUID="33b0bfbb59254a6891e9ddabee871a2e"/>
+        <Field Comment="Кран Кр2 закрыт" Name="Kr2_OF" Type="BOOL" UUID="b5ee5482464b409091de4d1a85067999"/>
+        <Field Comment="Кран Кр3 открыт (резерв)" Name="Res_0" Type="BOOL" UUID="31b82e694ef5432f833cd40d5025303f"/>
+        <Field Comment="Кран Кр3 закрыт (резерв)" Name="Res_1" Type="BOOL" UUID="0d02470c65004275a1d2d5dbfb36cc34"/>
+        <Field Comment="Кран Кр4 открыт" Name="Kr4_ON" Type="BOOL" UUID="6355e240d4ea4d48b1c750ed9848e642"/>
+        <Field Comment="Кран Кр4 закрыт" Name="Kr4_OF" Type="BOOL" UUID="713f8dfcb0d04aee84d8a9587b30db86"/>
+        <Field Comment="Кран Кр5 открыт" Name="Kr5_ON" Type="BOOL" UUID="39c1a178b2f24495890552fc084b7987"/>
+        <Field Comment="Кран Кр5 закрыт" Name="Kr5_OF" Type="BOOL" UUID="d280c96f8fae4d53a57c53d292b9fa02"/>
+        <Field Comment="Резерв" Name="Res_2" Type="BOOL" UUID="fd8ad4721f5d40778ad1c488a5452052"/>
+        <Field Comment="Резерв" Name="Res_3" Type="BOOL" UUID="461a3e1f587f4044a84c72e75946c479"/>
+        <Field Comment="Перепад давления масла на фильтрах маслосистемы компрессора" Name="dPm_F_N" Type="BOOL" UUID="541b9fa5c6554e0bb83621e04d101690"/>
+        <Field Comment="Перепад давления на фильтре лубрикаторной системы (резерв)" Name="dPm_F_Lub" Type="BOOL" UUID="1d0a8f2b930943baa5a52511db492e1b"/>
+        <Field Comment="Аварийно-низкий уровень масла в картере компрессора " Name="Lm_Nkar_an" Type="BOOL" UUID="904232062d434fa5925040c1f3b929f1"/>
+        <Field Comment="Аварийно-низкий уровень масла в картере компрессора КЦД" Name="Lm_Nkar_an_KCD" Type="BOOL" UUID="a59b622eaab14bea9dfff74418da26e8"/>
+        <Field Comment="Предупредительный уровень масла в картере компрессора" Name="Lm_Nkar_pn" Type="BOOL" UUID="33fc37062cfc4ccbbe0cfe8586d5a352"/>
+        <Field Comment="Предупредительный уровень масла в картере компрессора КЦД" Name="Lm_Nkar_pn_KCD" Type="BOOL" UUID="f5249a49c3e04cf6bb303b8a64bf009f"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 1" Name="Qm_Lub1" Type="BOOL" UUID="412ade47d93c43519f22d8025d9a03d5"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 1 КЦД" Name="Qm_Lub1_KCD" Type="BOOL" UUID="41400cf366f14ea887e897cb3ad2eb9c"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 2" Name="Qm_Lub2" Type="BOOL" UUID="d23d34bf3db5419fbc3059cd779de2a0"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 2 КЦД" Name="Qm_Lub2_KCD" Type="BOOL" UUID="d1cb1fd9c0664274a874513646c9daf0"/>
+        <Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="f75f7a1893a04048a57d4ff6c35545f7"/>
+        <Field Comment=" Резерв КЦД" Name="Res_KCD_6" Type="BOOL" UUID="128a35c2563045cca4e9d20b7f655fcf"/>
+        <Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="7646638bde1e4f198f3e261b1f79180d"/>
+        <Field Comment="Резерв КЦД" Name="Res_KCD_8" Type="BOOL" UUID="1caa550090f848bc8f7a9aa6e76401d7"/>
+        <Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="0ca8480f689b441c9e894bc0b140113e"/>
+        <Field Comment="Резерв КЦД" Name="Res_KCD_10" Type="BOOL" UUID="6b8df2b4860a46b28ec24032655274b7"/>
+        <Field Comment="Резерв" Name="Res_11" Type="BOOL" UUID="d0dfc5b7baf041198ddba65a178a6417"/>
+        <Field Comment="Резерв КЦД" Name="Res_KCD_12" Type="BOOL" UUID="fb3b3d832df04511bed9a25afd0bafc2"/>
+        <Field Comment="Опасная корпусная вибрация компрессора" Name="Vs_N_av" Type="BOOL" UUID="24f290aa441b43429ee5a6ffe3768b1e"/>
+        <Field Comment="Опасная корпусная вибрация компрессора КЦД" Name="Vs_N_av_KCD" Type="BOOL" UUID="166c888d08084deaa5524dd13fa8080e"/>
+        <Field Comment="Опасное виброперемещение тихоходного вала редуктора" Name="Vp_SlowVal_av" Type="BOOL" UUID="9f5e98c165394a3cb003e316db4def88"/>
+        <Field Comment="Опасное виброперемещение тихоходного вала редуктора КЦД" Name="Vp_SlowVal_av_KCD" Type="BOOL" UUID="2113bfb6d70f46e1a16b019ca32e7f7f"/>
+        <Field Comment="Опасное виброперемещение быстроходного вала редуктора" Name="Vp_FastVal_av" Type="BOOL" UUID="2f092849baa44374a010a222da449635"/>
+        <Field Comment="Опасное виброперемещение быстроходного вала редуктора КЦД" Name="Vp_FastVal_av_KCD" Type="BOOL" UUID="6d9e16a3a4374a569e30da3797048594"/>
+        <Field Comment="Питание соленоидов крановой обвязки ГПА неисправно" Name="No_U_Kr" Type="BOOL" UUID="84ddb4a06def45e9892cb977904dd727"/>
+        <Field Comment="Клапан Кл1 открыт" Name="Kl1_ON" Type="BOOL" UUID="8f9d09ecae204c0bb27648bf6765754b"/>
+        <Field Comment="Клапан Кл1 закрыт" Name="Kl1_OF" Type="BOOL" UUID="639702b584084831b3f7911c70d40de0"/>
+        <Field Comment="Клапан Кл2 открыт" Name="Kl2_ON" Type="BOOL" UUID="fe4ead024a24456facb853502381d777"/>
+        <Field Comment="Клапан Кл2 закрыт" Name="Kl2_OF" Type="BOOL" UUID="ac40ea0679e345189420ff097f9ea44d"/>
+        <Field Comment="Клапан Кл3 открыт" Name="Kl3_ON" Type="BOOL" UUID="f8ae316c4f8940fc90e0e212bb758078"/>
+        <Field Comment="Клапан Кл3 закрыт" Name="Kl3_OF" Type="BOOL" UUID="f79a2d8d895c493385f6646ca88e7005"/>
+        <Field Comment="Клапан Кл4 открыт" Name="Kl4_ON" Type="BOOL" UUID="1e4bd01ab2fc4ef2829c6b8c99db8ad0"/>
+        <Field Comment="Клапан Кл4 закрыт" Name="Kl4_OF" Type="BOOL" UUID="d3457d7f9931412295bbf1427ab59b9f"/>
+        <Field Comment="Клапан Кл5 открыт" Name="Kl5_ON" Type="BOOL" UUID="70e9fb359fde4a1281885e185c25543a"/>
+        <Field Comment="Клапан Кл5 закрыт" Name="Kl5_OF" Type="BOOL" UUID="f510776c8b7b4df9be4e72a238a58f88"/>
+        <Field Comment="Клапан КлР7 открыт" Name="KlR7_ON" Type="BOOL" UUID="468897cdae8940308ec6128733b71912"/>
+        <Field Comment="Клапан КлР7 закрыт" Name="KlR7_OF" Type="BOOL" UUID="ad95725bee474d4da8a88d78b8cb1063"/>
+        <Field Comment="Питание сливных клапанов 1-3 неиспр" Name="No_U_Kl_13" Type="BOOL" UUID="22441b1a0f8147d28c91e996f15ab8f9"/>
+        <Field Comment="Питание сливных клапанов 4-5 неиспр" Name="No_U_Kl_45" Type="BOOL" UUID="96976ff163e249e58b93a1a059143b93"/>
+        <Field Comment="Верхний уровень жидкости в первой ступени ФС1" Name="Lk_FS1_S1_v" Type="BOOL" UUID="c6d3270122d844f8b6e71fd67d61cffb"/>
+        <Field Comment="Нижний уровень жидкости  в первой ступени ФС1" Name="Lk_FS1_S1_n" Type="BOOL" UUID="80f88a67f429403795c0c1080fc364a2"/>
+        <Field Comment="Верхний уровень жидкости во второй ступени ФС1" Name="Lk_FS1_S2_v" Type="BOOL" UUID="c56beb3a845a45b78057088fdc7110f2"/>
+        <Field Comment="Нижний уровень жидкости  во второй ступени ФС1" Name="Lk_FS1_S2_n" Type="BOOL" UUID="43132124621f4bdc9363eded4f15e7d9"/>
+        <Field Comment="Верхний уровень жидкости в первой ступени ФС2" Name="Lk_FS2_S1_v" Type="BOOL" UUID="3bee4bea66c04f098a0fdc7b76e46b5b"/>
+        <Field Comment="Нижний уровень жидкости  в первой ступени ФС2" Name="Lk_FS2_S1_n" Type="BOOL" UUID="1ed5e02805df40e6af65687a7ee75143"/>
+        <Field Comment="Резерв" Name="Res_13" Type="BOOL" UUID="0c095283b6634c6d99887ec8bdfe613c"/>
+        <Field Comment="Резерв" Name="Res_14" Type="BOOL" UUID="bdab081e541b47c99a5c0352764c19cf"/>
+        <Field Comment="Верхний уровень жидкости в первой ступени ФС3" Name="Lk_FS3_S1_v" Type="BOOL" UUID="1d4ea17c2d3b4b95b7f834fe200c0eef"/>
+        <Field Comment="Нижний уровень жидкости  в первой ступени ФС3" Name="Lk_FS3_S1_n" Type="BOOL" UUID="87ea59fb859d462a9c93a9f98b634cce"/>
+        <Field Comment="Верхний уровень жидкости во второй ступени ФС3" Name="Lk_FS3_S2_v" Type="BOOL" UUID="6780fc8479d1456189e1bdec651d6d5e"/>
+        <Field Comment="Нижний уровень жидкости  во второй ступени ФС3" Name="Lk_FS3_S2_n" Type="BOOL" UUID="8025adc205964675b1b47274a4c6f8a5"/>
+        <Field Comment="Верхний уровень жидкости в Е-1" Name="Lk_E1_v" Type="BOOL" UUID="eea5f8753d1b486980e4c6189b60d2b2"/>
+        <Field Comment="Неисправность датчика уровня в Е-1" Name="Lk_E1_bad" Type="BOOL" UUID="715f26d393714290a48f00dc52308e51"/>
+        <Field Comment="Резерв" Name="Res_15" Type="BOOL" UUID="81501098de4045d9a20020b0ed7e9abe"/>
+        <Field Comment="Опасный осевой сдвиг редуктора" Name="Os_Rdk_av" Type="BOOL" UUID="ddc4f634816d4d2eb1cef8fc193106ea"/>
+        <Field Comment="Опасный осевой сдвиг редуктора КЦД" Name="Os_Rdk_av_KCD" Type="BOOL" UUID="04b012e61f61462b92a9c7983b4fe6a5"/>
+        <Field Comment="Аварийно-низкий уровень масла в маслобаке Б1 компрессора" Name="Lm_MBK_an" Type="BOOL" UUID="9fd4152fb7054b678bca04570064ef12"/>
+        <Field Comment="Аварийно-низкий уровень масла в маслобаке Б1 компрессора. КЦД" Name="Lm_MBK_an_KCD" Type="BOOL" UUID="9b412fd7f33640568c637b39225b4f59"/>
+        <Field Comment="Аварийно-низкий уровень охлаждающей жидкости в баке компрессора" Name="L_freeze_Bak_an" Type="BOOL" UUID="389f9716f6164172849fc344d459dd7b"/>
+        <Field Comment=" Аварийно-низкий уровень охлаждающей жидкости в баке компрессора. КЦД" Name="L_freeze_Bak_an_KCD" Type="BOOL" UUID="8af9905177b443f0ba2c23bfa3f90aef"/>
+        <Field Comment="Резерв" Name="Res_16" Type="BOOL" UUID="88e5e46a11db4c018a128953a51e2a18"/>
+        <Field Comment="Перепад давления масла на фильтре очистки масла редуктора" Name="dPm_F_Rdk_v" Type="BOOL" UUID="1c00e1022fc448a8ad33d24b278a1f7d"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора" Name="Lm_MBL_an" Type="BOOL" UUID="148615c5826047d89a60d02e0609c20c"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора КЦД" Name="Lm_MBL_an_KCD" Type="BOOL" UUID="d2807cd5643c486cae2cd64ad14f526d"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора" Name="Lm_MBL_av" Type="BOOL" UUID="c0090efea39a4953bb8c7cd467246f66"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора КЦД" Name="Lm_MBL_av_KCD" Type="BOOL" UUID="e5dd2b3b34e04cc4809df07507a49cdd"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке Б1 компрессора" Name="Lm_MBN_av" Type="BOOL" UUID="ddfee3c7312c48b7b4c994f2afef4c23"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке Б1 компрессора КЦД" Name="Lm_MBN_av_KCD" Type="BOOL" UUID="b8cd330c2d294dbd82947b42d90df561"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке редуктора" Name="Lm_MBR_av" Type="BOOL" UUID="d739d099ccf3440e9875165e35da1781"/>
+        <Field Comment="Аварийный уровень масла в маслобаке редуктора КЦД" Name="Lm_MBR_av_KCD" Type="BOOL" UUID="0c55582d257a4133bfc8eb4cfe74ab34"/>
+        <Field Comment="Предельная вибрация агрегата (любой из 7 каналов)" Name="Vs_GPA_pv" Type="BOOL" UUID="3ff6dadc357f46a48134c10629a39cfa"/>
+        <Field Comment="Предельная вибрация агрегата (любой из 7 каналов) КЦД" Name="Vs_GPA_pv_KCD" Type="BOOL" UUID="18b6511562524dcab47432086207aada"/>
+        <Field Comment="Предупредительный уровень масла в маслобаке редуктора" Name="Lm_MBR_pn" Type="BOOL" UUID="1961acfc95a644b282a52874d4f7eedc"/>
+        <Field Comment="Опасная вибрация агрегата (любой из 7 каналов)" Name="Vs_GPA_av" Type="BOOL" UUID="947b21f44c394beb8931759806453d9a"/>
+        <Field Comment="РЧТиН электростартера включен" Name="Reg_Starter_ON" Type="BOOL" UUID="f19c56702a1e44a294e21a405fd27d2b"/>
+        <Field Comment="РЧТиН электростартера работает" Name="Reg_Starter_Work" Type="BOOL" UUID="41e640e40b6a4a70ba53c2f8023d107c"/>
+        <Field Comment="Отсечной газовый кран перед дозатором закрыт" Name="SK_OF" Type="BOOL" UUID="e3c28e9330a44757ac97bcc6a3446f59"/>
+        <Field Comment="Кран 9 сброса топливного газа на свечу открыт" Name="Kr9_ON" Type="BOOL" UUID="4f49cf11d62148a29e51058e35e6c12f"/>
+        <Field Comment="Кран 9 сброса топливного газа на свечу закрыт" Name="Kr9_OF" Type="BOOL" UUID="9c1f9c50d3894aaab1d25c4337f0f6de"/>
+        <Field Comment="Исправность основного ИП =24В ПЛК" Name="DC24osn_PLC_ok" Type="BOOL" UUID="126ea8133d32458e91dead9d1469ea3f"/>
+        <Field Comment="Кран 12 подвода топливного газа к ГТД открыт" Name="Kr12_ON" Type="BOOL" UUID="41557bca7dc44350abccd660ee60b5fe"/>
+        <Field Comment="Кран 12 подвода топливного газа к ГТД закрыт" Name="Kr12_OF" Type="BOOL" UUID="4f4a7d14170a41ad84a01b55462823b7"/>
+        <Field Comment="Нормальная работа БУШД" Name="BUSD_ok" Type="BOOL" UUID="3002f6ca240047afbc4ea0f7f2f5e932"/>
+        <Field Comment="Повышенный перепад давления масла на маслофильтре тонкой очистки (резерв)" Name="dPm_FTO_v" Type="BOOL" UUID="f934c550260f4a0ebd0db6236e68f7f1"/>
+        <Field Comment="Повышенный перепад давления масла на маслофильтре грубой очистки (резерв)" Name="dPm_FGO_v" Type="BOOL" UUID="d4a83e9f894243fc8528dff8aa8cdab4"/>
+        <Field Comment="Давление масла на входе в ГТД выше 40 кПа" Name="Pm_inD_40v" Type="BOOL" UUID="21566ab5f5934be5a175b90949f3ee34"/>
+        <Field Comment="Давление масла на входе в ГТД выше 40 кПа КЦД" Name="Pm_inD_40v_KCD" Type="BOOL" UUID="f0870cbd779e43fd8f7f4e3e10f7384e"/>
+        <Field Comment="Кнопка АО от ПУ" Name="Kn_AO_PU" Type="BOOL" UUID="8f5f771092ca46b4b82460ce481ee237"/>
+        <Field Comment="Кнопка АО от ПУ КЦД" Name="Kn_AO_PU_KCD" Type="BOOL" UUID="d748d8c05c504eaab44e6f254504f2de"/>
+        <Field Comment="Кнопка ЭО от ПУ" Name="Kn_EO_PU" Type="BOOL" UUID="2bf3b560d84f48cdae1749b5ed35e39a"/>
+        <Field Comment="Кнопка ЭО от ПУ КЦД" Name="Kn_EO_PU_KCD" Type="BOOL" UUID="1c1b05d7cea0412e9e5855eb4676f034"/>
+        <Field Comment="Резерв " Name="Res_19" Type="BOOL" UUID="fa7ad0bded234b15b46da3c80f58fde2"/>
+        <Field Comment="Готовность БЗА 1" Name="BZA1_Rdy" Type="BOOL" UUID="ab0152fb3d744ef4b5eb7ae3e4284baf"/>
+        <Field Comment="Готовность БЗА 2" Name="BZA2_Rdy" Type="BOOL" UUID="415094a87b5a4992ba3eee3e49755203"/>
+        <Field Comment="Питание 220 В системы плазменного воспламенения включено" Name="U_SPV_ON" Type="BOOL" UUID="d4d29f2e8cb1443a94f80e01b785b40e"/>
+        <Field Comment="Нет управляющего сигнала на ВНА" Name="No_upr_VNA" Type="BOOL" UUID="038222e4c61c41918ac5db38239b3497"/>
+        <Field Comment="Управление приводом ВНА неисправно" Name="VNA_FLT" Type="BOOL" UUID="170165fa58a0437494b312cafb1f2311"/>
+        <Field Comment="Резерв" Name="Res_20" Type="BOOL" UUID="768f99fae2c64cb08777be06d7bea063"/>
+        <Field Comment="Резерв" Name="Res_21" Type="BOOL" UUID="81224ae2e0924582bbd640ccc8b51f71"/>
+        <Field Comment="Резерв" Name="Res_22" Type="BOOL" UUID="af16210f867043ed86c6c789a3e11af1"/>
+        <Field Comment="Резерв" Name="Res_23" Type="BOOL" UUID="3b775727438a42eda4e570f2db37c66f"/>
+        <Field Comment="Резерв" Name="Res_24" Type="BOOL" UUID="c4bcef17398b4fd0b81b48eacbaf04d3"/>
+        <Field Comment="Резерв" Name="Res_25" Type="BOOL" UUID="2416f88d73ba4fa4a6651aac7a43da88"/>
+        <Field Comment="Аварийно-низкий уровень масла в маслобаке ГТД" Name="Lm_MBD_an" Type="BOOL" UUID="a065bb8f63244687813766d951f84699"/>
+        <Field Comment="Аварийный уровень масла в маслобаке ГТД КЦД" Name="Lm_MBD_an_KCD" Type="BOOL" UUID="66a268d89be84d8da0e815236140c6ce"/>
+        <Field Comment="АО из КЦ" Name="AO_Shop" Type="BOOL" UUID="d9e6545956274ba89c511625216b5eb1"/>
+        <Field Comment="АО из КЦ КЦД" Name="AO_Shop_KCD" Type="BOOL" UUID="c9e40f245147448f93549b132c06a2e1"/>
+        <Field Comment="Пожар в отсеке ГТД" Name="Fire_inOD" Type="BOOL" UUID="97bc7c2b5e9d49af809bebb0812a7d64"/>
+        <Field Comment="Пожар в отсеке ГТД КЦД" Name="Fire_inOD_KCD" Type="BOOL" UUID="e3cbc168ace0494699951a263c32d28d"/>
+        <Field Comment="Двери отсека нагнетателя открыты" Name="Dver_ON_Open" Type="BOOL" UUID="b77afafa84ed44318f87db5186bd7024"/>
+        <Field Comment="Двери отсека ГТД открыты" Name="Dver_OD_Open" Type="BOOL" UUID="08629105d4374137baec1affce2fea51"/>
+        <Field Comment="Пожар в укрытии компрессора" Name="Fire_inUkr" Type="BOOL" UUID="a2bb10e501674d0a86dbb8956890d6a3"/>
+        <Field Comment="Пожар в укрытии компрессора КЦД" Name="Fire_inUkr_KCD" Type="BOOL" UUID="02fbc6f4c2534084bc021a8266c377e9"/>
+        <Field Comment="Пожар в блоке электротехническом" Name="Fire_inETO" Type="BOOL" UUID="81f4ad9b60a44ab4914d167282e0734e"/>
+        <Field Comment="Пожар в блоке электротехническом КЦД" Name="Fire_inETO_KCD" Type="BOOL" UUID="02b1ef04f1304411bf98d2978299a044"/>
+        <Field Comment="Двери электротехнического отсека открыты" Name="Dver_ETO_Open" Type="BOOL" UUID="38baa1e8b8874a9c83a434ad12b9b881"/>
+        <Field Comment="Загазованность 10 % НКПВ в отсеке компрессора" Name="Gas10_ON" Type="BOOL" UUID="dd30d26b58694a90a3becba9d516ad66"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке компрессора" Name="Gas20_ON" Type="BOOL" UUID="7dbd1e602d524418aab0d109a376ac79"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке компрессора КЦД" Name="Gas20_ON_KCD" Type="BOOL" UUID="c3eac013b43e40d5ac5c33f8fa67ab3c"/>
+        <Field Comment="Загазованность 10 % НКПВ в отсеке ГТД" Name="Gas10_OD" Type="BOOL" UUID="3aa17069b1d441c0b6c51264ccff168e"/>
+        <Field Comment="АСПС норма" Name="ASPS_ok" Type="BOOL" UUID="6966ec300b204c5197b3f02da903c73b"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке ГТД" Name="Gas20_OD" Type="BOOL" UUID="75df3a4e64fa408c876169c6b1497fbb"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке ГТД КЦД" Name="Gas20_OD_KCD" Type="BOOL" UUID="b5fef9c5b1d040edae6d4bf560e39412"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г1 (LA1-1)" Name="Lk_FS1_G1_max" Type="BOOL" UUID="fc9b92cfec70401fb887196fdc2d1e5d"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г1 (LA1-2)" Name="Lk_FS1_G1_min" Type="BOOL" UUID="e88aae5464d44ac4a36d05492fa3f7ea"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г2 (LA1-3)" Name="Lk_FS1_G2_max" Type="BOOL" UUID="dd4c1a85daa44355a2949e36a3e4208c"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г2 (LA1-4)" Name="Lk_FS1_G2_min" Type="BOOL" UUID="87d514246f7c4daebbe717d56cad2d9b"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г1 (LA2-1)" Name="Lk_FS2_G1_max" Type="BOOL" UUID="28b5416f893c416bb55409f0714d6eee"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г1 (LA2-2)" Name="Lk_FS2_G1_min" Type="BOOL" UUID="5bfbe4f4437148e1aa20b373650f60ec"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г1 (LA3-1)" Name="Lk_FS3_G1_max" Type="BOOL" UUID="41220cab70b845d8b79ae37ad6fe6ea9"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г1 (LA3-2)" Name="Lk_FS3_G1_min" Type="BOOL" UUID="07c78552f09a49b2a9064d5b2396c13c"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г2 (LA3-3)" Name="Lk_FS3_G2_max" Type="BOOL" UUID="530c67625b5e474b93e4754183d3a4be"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г2 (LA3-4)" Name="Lk_FS3_G2_min" Type="BOOL" UUID="a64adbdd15ad4d9498c78c8d095b480f"/>
+        <Field Comment="Клапан электромагнитный КЛЭ3 (КЛЭ3-1) открыт" Name="KE3_1_ON" Type="BOOL" UUID="cce99197399947d79fa4a56541dfaa03"/>
+        <Field Comment="Клапан электромагнитный КЛЭ3 (КЛЭ3-2) открыт" Name="KE3_2_ON" Type="BOOL" UUID="99bddd0eac2b4478876aef2788e6a0e1"/>
+        <Field Comment="Клапан электромагнитный КЛЭ3 (КЛЭ3-3) открыт" Name="KE3_3_ON" Type="BOOL" UUID="e567b72c5caf49e4b72ab58382f59354"/>
+        <Field Comment="Клапан шаровой с электроприводом КШЭ5 открыт" Name="KE5_ON" Type="BOOL" UUID="115d1e04717148d59009ebefca411edb"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке редуктора" Name="Lm_MBR_an" Type="BOOL" UUID="e9f4d880ac0146cdbbd84485fab81d07"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке редуктора КЦД" Name="Lm_MBR_an_KCD" Type="BOOL" UUID="a13d48e7467b4ceead7503d2cdf8974a"/>
+        <Field Comment="Аварийно-высокий уровень масла в маслобаке ГТД" Name="Lm_MBD_av" Type="BOOL" UUID="6b94f3ac90e1469b9744f4d116de1511"/>
+        <Field Comment="Аварийно-высокий уровень масла в маслобаке ГТД КЦД" Name="Lm_MBD_av_KCD" Type="BOOL" UUID="bdd24e636fca4ae89ed20d346bfbdda7"/>
+        <Field Comment="Резерв" Name="Res_26" Type="BOOL" UUID="63644cb3e2714043b3b82797cbfc4a5c"/>
+        <Field Comment="Резерв" Name="Res_27" Type="BOOL" UUID="620d3424e9b64b6fba1f9be1fc482dbe"/>
+        <Field Comment="Резерв" Name="Res_28" Type="BOOL" UUID="2b421d5cc71f418aa8b9e8f40c91cbdd"/>
+        <Field Comment="Резерв" Name="Res_29" Type="BOOL" UUID="37a098520c2042aab0c1713c98bbb51b"/>
+        <Field Comment="Кран Кр6 закрыт" Name="Kr6_OF" Type="BOOL" UUID="eced1b1d776742c5a188d60378068f23"/>
+        <Field Comment="Кран Кр6 открыт" Name="Kr6_ON" Type="BOOL" UUID="df4425471fd74fe3b4a9afd7ebf49e6a"/>
+        <Field Comment="Клапан КЭ1 БФТГ подачи газа в ГТД открыт" Name="KE1_BFTG_ON" Type="BOOL" UUID="f132665c7e8945378322b8acdad92b78"/>
+        <Field Comment="Клапан КЭ2 БФТГ сброса давления в атмосферу закрыт" Name="KE2_BFTG_OF" Type="BOOL" UUID="260453bbb08a4d79b1eb660457f687d3"/>
+        <Field Comment="Система контроля загазованности неисправна" Name="AKZ_FLT" Type="BOOL" UUID="027b2a0673ea488bade1a10317cb3223"/>
+        <Field Comment="Кнопка АО на блоке ЭТ и САУ" Name="Kn_AO_ETO" Type="BOOL" UUID="d3d1decad366428f93c1e8365f5c786b"/>
+        <Field Comment="Клапан КлР6 открыт" Name="KLR6_ON" Type="BOOL" UUID="a8420c8b6a02462295d741527bf93b25"/>
+        <Field Comment="Клапан КлР6 закрыт" Name="KLR6_OF" Type="BOOL" UUID="f1e51226863a4a90adf3a2eef249adb8"/>
+        <Field Comment="Клапан КлР1 закрыт" Name="KLR1_OF" Type="BOOL" UUID="1c977a10fb3f47d29d4eb07c5e09a87b"/>
+        <Field Comment="Клапан КлР1 открыт" Name="KLR1_ON" Type="BOOL" UUID="f49e79fbb86946149e28599e961cd58f"/>
+        <Field Comment="Клапан КлР2 закрыт" Name="KLR2_OF" Type="BOOL" UUID="6e2b76c4fc944ef6a9a4b7f617d134f4"/>
+        <Field Comment="Клапан КлР2 открыт" Name="KLR2_ON" Type="BOOL" UUID="83b1ba8b08ab4cde8b72c833a32d833c"/>
+        <Field Comment="Перегрев калорифера МОК" Name="TEN_MON_OverT" Type="BOOL" UUID="66a288102b8247f8b55b350faeb792bd"/>
+        <Field Comment="Перегрев калорифера МОР" Name="TEN_MOR_OverT" Type="BOOL" UUID="e34f4e0d39034ae0a98a7e4f8db5559c"/>
+        <Field Comment="Перегрев калорифера МОД" Name="TEN_MOD_OverT" Type="BOOL" UUID="a623a692af3648149d0b8494886689a3"/>
+        <Field Comment="Батарея разряжена" Name="AB_Bad" Type="BOOL" UUID="387afd8cc29444d099e53531da591394"/>
+        <Field Comment="Работа от байпаса" Name="El_Bypass_ON" Type="BOOL" UUID="79c90fbfd3cd40b985210efc51fad886"/>
+        <Field Comment="Работа от сети" Name="El_Network_ON" Type="BOOL" UUID="c4bca0ade9ec4cda81f628138320b536"/>
+        <Field Comment="Серв. байпас включен " Name="BypassServ_ON" Type="BOOL" UUID="23f9f1a197f24960ac4eb460eb99795a"/>
+        <Field Comment="Нет сети" Name="No_El_Network" Type="BOOL" UUID="13510bd8697c440688c7abc8291c9bec"/>
+        <Field Comment="Неисправность ЗУ" Name="ZU_FLT" Type="BOOL" UUID="914b145e597d490aa4e109ececfef893"/>
+        <Field Comment="Общая неисправность" Name="ALL_FLT" Type="BOOL" UUID="1ed26148fa3f4fbdab23d676853e1e57"/>
+        <Field Comment="Авария вентиляторов МО компрессора" Name="Vn_MON_FLT" Type="BOOL" UUID="264ec8b321ca4932ba0d4a0f13358030"/>
+        <Field Comment="Авария вентиляторов МО редуктора" Name="Vn_MOR_FLT" Type="BOOL" UUID="3dcafb2021a146bb934a891fad10536e"/>
+        <Field Comment="Авария вентиляторов МО ГТД" Name="Vn_MOD_FLT" Type="BOOL" UUID="2b296d32e23741b780b59436fa801b11"/>
+        <Field Comment="Включение аварийной вентиляции турбоблока" Name="VA_OD_ON" Type="BOOL" UUID="ca823592137e47de8a503c158d979c5b"/>
+        <Field Comment="Контроль положения валоповоротного устройства" Name="Check_VPU" Type="BOOL" UUID="07d3c4f2538b43d4b63adeaa9fa9aa76"/>
+        <Field Comment="Контроль агрегата зажигания. Канал 1" Name="Check_AZ1" Type="BOOL" UUID="16414ddbd700409385fe0be0972531fb"/>
+        <Field Comment="Контроль агрегата зажигания. Канал 2" Name="Check_AZ2" Type="BOOL" UUID="55cbecd90fee4ab8b56a62c69ac5ff7c"/>
+        <Field Comment="Клапан противопожарный ПЕ3 закрыт" Name="Kl_PE3_OF" Type="BOOL" UUID="bc00ea4d8f3d47ebb5d0f371e710183f"/>
+        <Field Comment="Клапан противопожарный ПЕ3 открыт" Name="Kl_PE3_ON" Type="BOOL" UUID="63cab2b3a8ad4994af7b4f7523e0cf2c"/>
+        <Field Comment="Клапан противопожарный ПЕ2 закрыт" Name="Kl_PE2_OF" Type="BOOL" UUID="b8e99f940355469e8860897507f107d8"/>
+        <Field Comment="Клапан противопожарный ПЕ2 открыт" Name="Kl_PE2_ON" Type="BOOL" UUID="1c0b557eb8764948b8557df6001a8f9f"/>
+        <Field Comment="Клапан противопожарный ПЕ1 закрыт" Name="Kl_PE1_OF" Type="BOOL" UUID="c9f64af550e3412aa2052957cacc2c40"/>
+        <Field Comment="Клапан противопожарный ПЕ1 открыт" Name="Kl_PE1_ON" Type="BOOL" UUID="d13b03be2a8b44b3818c0980d73c60c4"/>
+        <Field Comment="Повышенная корпусная вибрация компрессора" Name="Vs_N_v" Type="BOOL" UUID="f7aaba44efc44e22a6c36627f01d559b"/>
+        <Field Comment="Резерв" Name="Res_30" Type="BOOL" UUID="ba6fea87b8bc4e56b22c5bc94aeb4079"/>
+        <Field Comment="Повышенное виброперемещение тихоходного вала редуктора" Name="Vp_SlowVal_v" Type="BOOL" UUID="044b08e1a54b4d45bcf77fd01db7adcd"/>
+        <Field Comment="Резерв" Name="Res_31" Type="BOOL" UUID="bb2d7957f2284ec1be006d5605e5a52f"/>
+        <Field Comment="Исправность резервного ИП =24В ПЛК" Name="DC24rez_PLC_ok" Type="BOOL" UUID="b0e6f3e8e5f14b2a9eb73be6c0a68418"/>
+        <Field Comment="Повышенное виброперемещение быстроходного вала редуктора" Name="Vp_FastVal_v" Type="BOOL" UUID="db32bc947e184007ac0b677961a5048a"/>
+        <Field Comment="Резерв" Name="Res_32" Type="BOOL" UUID="2dcddf1235b248c9a2a8d64665bc05e7"/>
+        <Field Comment="Повышенный осевой сдвиг редуктора" Name="Os_Rdk_v" Type="BOOL" UUID="cfd56b480f54408cb7cfbe80c0776857"/>
+        <Field Comment="Резерв" Name="Res_33" Type="BOOL" UUID="d1b02c45c5fd48b785043feb4c10a8c7"/>
+        <Field Comment="Отказ аппаратуры контроля вибрации" Name="SKV_FLT" Type="BOOL" UUID="4340825aa08c43e09e56cb46d355c89d"/>
+        <Field Comment="Контроль исправности виброаппаратуры компрессора и редуктора" Name="Check_SKV" Type="BOOL" UUID="d902eb9d1f83437590dba6b0d04d4058"/>
+        <Field Comment="Резерв" Name="Res_34" Type="BOOL" UUID="b0aad7431c094c38a690a3d961084057"/>
+        <Field Comment="Открыть кран К3 (резерв) КЦУ" Name="Res_35" Type="BOOL" UUID="18bb29b43a6b41f49f88a84c430703dc"/>
+        <Field Comment="Закрыть кран К3 (резерв) КЦУ" Name="Res_45" Type="BOOL" UUID="284bab46b017448ca0ea95a8fad8bff9"/>
+        <Field Comment="Блокировка ВНА КЦУ" Name="Lock_VNA_KCU" Type="BOOL" UUID="c2166a1845e947038ee8e9552fb2cc65"/>
+        <Field Comment="ГПА в работе КЦУ" Name="GPA_Work_KCU" Type="BOOL" UUID="2315f1a82e6940048e4813d8ba347f38"/>
+        <Field Comment="Включить термостат влагомера КЦУ" Name="TEN_Vlagomer_ON_KCU" Type="BOOL" UUID="26057cb0b9ad441bae89f17882c98b82"/>
+        <Field Comment="Открыть кран Кр1 КЦУ" Name="Kr1_ON_KCU" Type="BOOL" UUID="541b6cb02f8d401bab22d715c0c4bbc1"/>
+        <Field Comment="Закрыть кран Кр1 КЦУ" Name="Kr1_OF_KCU" Type="BOOL" UUID="ff59055386d340fda214299a0ab7a33b"/>
+        <Field Comment="Открыть кран Кр2 КЦУ" Name="Kr2_ON_KCU" Type="BOOL" UUID="12fd80b62a4c4b8eb400ff8b7e7dddeb"/>
+        <Field Comment="Закрыть кран Кр2 КЦУ" Name="Kr2_OF_KCU" Type="BOOL" UUID="b1c1795415e94e75978a3f2880ffa56e"/>
+        <Field Comment="Открыть кран Кр4 КЦУ" Name="Kr4_ON_KCU" Type="BOOL" UUID="25acef5ac4b3490ebb5584ebc43711bf"/>
+        <Field Comment="Закрыть кран Кр4 КЦУ" Name="Kr4_OF_KCU" Type="BOOL" UUID="5d6fc1426fda4e0db6be57b935801f1c"/>
+        <Field Comment="Открыть кран Кр5 КЦУ" Name="Kr5_ON_KCU" Type="BOOL" UUID="48c5d04998034562afe0a1351c89f913"/>
+        <Field Comment="Закрыть кран Кр5 КЦУ" Name="Kr5_OF_KCU" Type="BOOL" UUID="3a0a7fd869c24ac98c1b0600af19ac1d"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №1 компрессора КЦУ" Name="Reg_C1_N_OF_KCU" Type="BOOL" UUID="f4b43c5797c54680a0e525ae3173159e"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №2 компрессора КЦУ" Name="Reg_C2_N_OF_KCU" Type="BOOL" UUID="4c4c240b325844c88486960e1c00a639"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №3 компрессора КЦУ" Name="Reg_C3_N_OF_KCU" Type="BOOL" UUID="1f3095fa89db4a28b6112a6daf23a804"/>
+        <Field Comment="Контроль основного питания САУ ГПА ~220 В" Name="Chk_AC220_SAU" Type="BOOL" UUID="f6b2174b3db5485583be234ae13c9836"/>
+        <Field Comment="Контроль резервного питания САУ ГПА =220 В" Name="Chk_DC220_SAU" Type="BOOL" UUID="4e068a0474454f058f7804867d178f03"/>
+        <Field Comment="Контроль питания БУШД-М1 ~220 В" Name="Chk_AC220_BUSD" Type="BOOL" UUID="a1d8d126f43749dc9f1e40ea0bc40f65"/>
+        <Field Comment="Контроль питания кранов =220В" Name="Chk_DC220_Kr" Type="BOOL" UUID="b29a44f454dd405099412e29c20d4470"/>
+        <Field Comment="Контроль основного питания БЭАО ~220 В" Name="Chk_AC220_BEO" Type="BOOL" UUID="122779b03932400abdae01d89aa5eb07"/>
+        <Field Comment="Контроль резервного питания БЭАО =220 В" Name="Chk_DC220_BEO" Type="BOOL" UUID="8cd2d7ebc58b4b8a9360fafc59872b5e"/>
+        <Field Comment="Контроль исправности разрядников" Name="Chk_razr" Type="BOOL" UUID="79da1594d3e445d99b494191e1fbd5a2"/>
+        <Field Comment="Контроль питания кранов №1,2,4 =24В" Name="Chk_DC24_Kr124" Type="BOOL" UUID="433a09e829054608af0d8f922bd10a37"/>
+        <Field Comment="Контроль питания кранов №5,6,9 =24В" Name="Chk_DC24_Kr569" Type="BOOL" UUID="20426db7b6a54f51a7d1bc6da4f7d996"/>
+        <Field Comment="Контроль питания крана №12" Name="Chk_DC24_Kr12" Type="BOOL" UUID="c7a7782ffac44198b66dbb267e1f2758"/>
+        <Field Comment="Контроль питания терминальных панелей АI" Name="Chk_U_TPAI" Type="BOOL" UUID="54bc0ab306e548bd81d78c823c644b0c"/>
+        <Field Comment="Диагностика питания ADI" Name="Chk_U_TPDI" Type="BOOL" UUID="fe97e4e365df4cb9b1b8e4c1e06a5105"/>
+        <Field Comment="Исправность основного ИП =24В БЭАО, РПКУ" Name="DC24osn_PRU_ok" Type="BOOL" UUID="5060f042542d401a935733b24ab2ae8c"/>
+        <Field Comment="Исправность резервного ИП =24В БЭАО, РПКУ" Name="DC24rez_PRU_ok" Type="BOOL" UUID="1e093f01ff8f4a50a634565bbcfd949d"/>
+        <Field Comment="Исправность основного ИП =24В внутренних устройств" Name="DC24osn_Int_ok" Type="BOOL" UUID="465c355007c14a908cdbade6ecd05940"/>
+        <Field Comment="Исправность резервного ИП =24В внутренних устройств" Name="DC24rez_Int_ok" Type="BOOL" UUID="e3e30875f7d747d5adc0a305aa12e243"/>
+        <Field Comment="Исправность основного ИП =24В аналоговых входов" Name="DC24osn_AI_ok" Type="BOOL" UUID="5e3cfc9d410645aabe9b3ef5c6494c9c"/>
+        <Field Comment="Исправность резервного ИП =24В аналоговых входов" Name="DC24rez_AI_ok" Type="BOOL" UUID="6b8843f34cff41ac9363dbcafbf14f92"/>
+        <Field Comment="Исправность основного ИП =24В дискретных входов" Name="DC24osn_DI_ok" Type="BOOL" UUID="a580edb3d5434a9eafa31779e31575b8"/>
+        <Field Comment="Исправность резервного ИП =24В дискретных входов" Name="DC24rez_DI_ok" Type="BOOL" UUID="155f6a6577414f24a4f65fbf179bb878"/>
+        <Field Comment="Исправность основного ИП =24В внешних устройств" Name="DC24osn_Ext_ok" Type="BOOL" UUID="1f2b465e1fe343ad908ae68a6f3a6c70"/>
+        <Field Comment="Исправность резервного ИП =24В внешних устройств" Name="DC24rez_Ext_ok" Type="BOOL" UUID="6e975c7e8b8c431fbfd446ddbe8d07c8"/>
+        <Field Comment="Исправность основного ИП =24В дискретных выходов" Name="DC24osn_DO_ok" Type="BOOL" UUID="a5cfb9b1073c44d4b8fb9cc41a6e7a72"/>
+        <Field Comment="Исправность резервного ИП =24В дискретных выходов" Name="DC24rez_DO_ok" Type="BOOL" UUID="5ef00eb1de3b44f2b3c2b80d1b26ce25"/>
+        <Field Comment="Резерв (не подкл)" Name="Res_36" Type="BOOL" UUID="57cb1d2058fc416abc59588bf9d4db52"/>
+        <Field Comment="Резерв (не подкл)" Name="Res_37" Type="BOOL" UUID="8abac3f7322a4b97b24e75b0649e6836"/>
+        <Field Comment="Автоматы питания включены" Name="QF_ON" Type="BOOL" UUID="515bc5cff89e48e2a5886cd7022463be"/>
+        <Field Comment="Двери шкафа закрыты" Name="Dver_PLC_close" Type="BOOL" UUID="a2ee889d784943539bb097590ae744e7"/>
+        <Field Comment="Диагностика питания ADO" Name="Chk_U_TPDO" Type="BOOL" UUID="79b149075f0e4339869af5c458cb3f34"/>
+        <Field Comment="Контроль исправности ФУС" Name="Chk_FUS" Type="BOOL" UUID="ed5d3216d6ae4dac85e322556efe76d5"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №4 компрессора КЦУ" Name="Reg_C4_N_OF_KCU" Type="BOOL" UUID="e69dba6137f34b9b97b971fdb1ad5008"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №5 компрессора КЦУ" Name="Reg_C5_N_OF_KCU" Type="BOOL" UUID="891408901c734e7dbdcd2dbff4feb671"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №6 компрессора КЦУ" Name="Reg_C6_N_OF_KCU" Type="BOOL" UUID="156ffd5a73da44ccb4e59654c21c4462"/>
+        <Field Comment="Разблокировать ЭС КЦУ" Name="Unlock_ES_KCU" Type="BOOL" UUID="005e95dd9972438d8b243ac0bbe9e8aa"/>
+        <Field Comment="Включить ЭС КЦУ" Name="ES_ON_KCU" Type="BOOL" UUID="d3f0bd5490b940d9a2e85a245f1dcc33"/>
+        <Field Comment="Включить ЭМ открытия клапана ОГК1 КЦУ" Name="SK_ON_KCU" Type="BOOL" UUID="900e97ad6b214f7d8e8c24ea2ad6c580"/>
+        <Field Comment="Открыть клапан  подвода газа к воспламенителям КЦУ" Name="POK_ON_KCU" Type="BOOL" UUID="d4758f51147744c484f6631b931c37ee"/>
+        <Field Comment="Включить СПВ КЦУ" Name="SPV_ON_KCU" Type="BOOL" UUID="d5ea5c05d05a462a896b753e3c7f6f53"/>
+        <Field Comment="Открыть ЗПВ1 КЦУ" Name="ZsPV_ON_KCU" Type="BOOL" UUID="15c0498741404ceebd422cbcecf0bd99"/>
+        <Field Comment="Резерв" Name="Res_48" Type="BOOL" UUID="713c162ac6b54e4e987530d01b4fb4e0"/>
+        <Field Comment="Резерв" Name="Res_49" Type="BOOL" UUID="b8fc682196c749b4ba99522b832ec3b4"/>
+        <Field Comment="Резерв" Name="Res_50" Type="BOOL" UUID="d11e5c422a0446b797cc1965eced10a4"/>
+        <Field Comment="Резерв" Name="Res_51" Type="BOOL" UUID="6a9a0251795142089574cf6738eb2df1"/>
+        <Field Comment="Резерв" Name="Res_52" Type="BOOL" UUID="df2d19a93c3e4f83949c86fb521abf99"/>
+        <Field Comment="Резерв" Name="Res_53" Type="BOOL" UUID="d850cd528654403083914ac7082b64b8"/>
+        <Field Comment="Резерв" Name="Res_54" Type="BOOL" UUID="932748dbbe2e4f5096d69deaba7c0970"/>
+        <Field Comment="Резерв" Name="Res_55" Type="BOOL" UUID="a8b0b4dd35404e9e8d7687cdc7df4b73"/>
+        <Field Comment="Закрыть кран Кр6 КЦУ" Name="Kr6_OF_KCU" Type="BOOL" UUID="43cbecc9258045649e31f214f21fe634"/>
+        <Field Comment="Открыть кран Кр6 КЦУ" Name="Kr6_ON_KCU" Type="BOOL" UUID="36e6ab11ed1b483f91f9d5d417a997b6"/>
+        <Field Comment="Закрыть кран Кр9 КЦУ" Name="Kr9_OF_KCU" Type="BOOL" UUID="1b622eaf86d442b0bf389fdb04e39933"/>
+        <Field Comment="Открыть кран Кр9 КЦУ" Name="Kr9_ON_KCU" Type="BOOL" UUID="0e151e507f1a4a13879aaba16604dfb1"/>
+        <Field Comment="Закрыть кран Кр12 КЦУ" Name="Kr12_OF_KCU" Type="BOOL" UUID="1f66c2eb58d04470b487d952a5b76ef6"/>
+        <Field Comment="Открыть кран Кр12 КЦУ" Name="Kr12_ON_KCU" Type="BOOL" UUID="465ecc10dec2465ab1db0757cfb7302e"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_56" Type="BOOL" UUID="dd72f8089bb0481f97d3b28c8c9e7456"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_57" Type="BOOL" UUID="af6e298cbfd544c18e2ae1c74ed1ff73"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_58" Type="BOOL" UUID="0903825a1d4c4e869937c67263074c3a"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_59" Type="BOOL" UUID="c5a5469513cf4caba07de1b3094db9a0"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_60" Type="BOOL" UUID="d7d7ef8fdff0493a978a96615b16b1aa"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_61" Type="BOOL" UUID="90fa38e83ad94fe289127d6bc692a3d4"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_62" Type="BOOL" UUID="bcb94aeaa1e942e9842e5b3fcc296278"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_63" Type="BOOL" UUID="7fe313472fae4797a19c7829d35a1646"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_64" Type="BOOL" UUID="4d87f48f4f28485dbd3d220962fe617f"/>
+        <Field Comment="Подать питание СПВ КЦУ" Name="SPV_U_En_KCU" Type="BOOL" UUID="50f18e21c07447d78a01089e173247b2"/>
+        <Field Comment="Включить насос смазки пусковой ГТД КЦУ" Name="PNSD_ON_KCU" Type="BOOL" UUID="695cd2019c9f46c9bfb4a3309b62f91a"/>
+        <Field Comment="Включить эл. насос предпусковой прокачки масла (НПМ) редуктора КЦУ" Name="PNSR_ON_KCU" Type="BOOL" UUID="87763686caa248128d74c0be24dbedb7"/>
+        <Field Comment="Включить пусковой насос НППМК компрессора КЦУ" Name="PNSN_ON_KCU" Type="BOOL" UUID="df77c735fae6417898f838bef5118843"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-1) КЦУ" Name="KE3_1_ON_KCU" Type="BOOL" UUID="4302a3c532b14a69a6a598c9e24d4617"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-2) КЦУ" Name="KE3_2_ON_KCU" Type="BOOL" UUID="cc4e56d59b1f49279ca38c8216b0b782"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-3) КЦУ" Name="KE3_3_ON_KCU" Type="BOOL" UUID="13e5eaa4f49d46509fca471b4314cac7"/>
+        <Field Comment="Открыть клапан шаровой с электроприводом КШЭ5 КЦУ" Name="KE5_ON_KCU" Type="BOOL" UUID="da06e3bd198c49a98496c365069135f2"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_65" Type="BOOL" UUID="bd37891823c24be9b6d974c58802617f"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_66" Type="BOOL" UUID="4a399b09704f44b386cede76a8a534a4"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_67" Type="BOOL" UUID="e47d3266d15d4094a25b20a1f82f969b"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_68" Type="BOOL" UUID="7c397fcfbb744bb7b5a2c2865f99b681"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_69" Type="BOOL" UUID="4450b21f08cc4bf9aa3882b5bdaebb5f"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_70" Type="BOOL" UUID="21258a760f2e46bea037b2595f9476e2"/>
+        <Field Comment="Резерв КЦУ" Name="Res_38" Type="BOOL" UUID="3723e84dee1d4cae8ccdbc0a6bfd802f"/>
+        <Field Comment="Резерв КЦУ" Name="Res_39" Type="BOOL" UUID="4ca14ecf816541fea4738c76720badcc"/>
+        <Field Comment="Кнопка НО на ПРУ" Name="Kn_NO_PRU" Type="BOOL" UUID="76ac7e1502474e81a91062e378bdbf46"/>
+        <Field Comment="Кнопка ЭО на ПРУ" Name="Kn_EO_PRU" Type="BOOL" UUID="89ac49a4cbe341bf81b9812eb767fe8a"/>
+        <Field Comment="Кнопка ЭО на ПРУ КЦД" Name="Kn_EO_PRU_KCD" Type="BOOL" UUID="9af86b4549f247d8af0f41a6983ba677"/>
+        <Field Comment="Кнопка АО на ПРУ" Name="Kn_AO_PRU" Type="BOOL" UUID="11af042c1f834f43b9041e6a3f1b2a49"/>
+        <Field Comment="Кнопка АО на ПРУ КЦД" Name="Kn_AO_PRU_KCD" Type="BOOL" UUID="7135bac10a894a61a59ecc89867aa524"/>
+        <Field Comment="Кнопка Квитирование на ПРУ" Name="Kn_Quit" Type="BOOL" UUID="ce3ca77be6904015ad087eb697cdf8db"/>
+        <Field Comment="БЭО работает" Name="BEO_Work" Type="BOOL" UUID="52b5f20fe4f14277848e28b0822477b4"/>
+        <Field Comment="Готовность БЭО" Name="BEO_Rdy" Type="BOOL" UUID="f77dc8dcf56d46efa64efcc5cdb7ce36"/>
+        <Field Comment="Аварийная частота вращения ротора КВД (канал 3) от БЗРТ" Name="N_TK_BZRT_av" Type="BOOL" UUID="31ddc14b2a424b8981205e27e40f5c1b"/>
+        <Field Comment="Аварийная частота вращения ротора КНД (канал 2) от БЗРТ" Name="N_ST_BZRT_av" Type="BOOL" UUID="b18416e38acd49319bdbf04e47f28cd1"/>
+        <Field Comment="Температура 3 газа за турбиной компрессора" Name="T_outGG_av" Type="BOOL" UUID="60830169b776403fa5bc79059a8a3ba0"/>
+        <Field Comment="Резерв КЦУ" Name="Res_40" Type="BOOL" UUID="f808ce78a9af47f0b924b3145f92b9a7"/>
+        <Field Comment="Резерв КЦУ" Name="Res_41" Type="BOOL" UUID="919daf45e9894a9c8116767938473ddf"/>
+        <Field Comment="Резерв КЦУ" Name="Res_42" Type="BOOL" UUID="db8ef2b8176240dab25a7c9cdbbd39ec"/>
+        <Field Comment="Резерв КЦУ" Name="Res_43" Type="BOOL" UUID="2d463cc195974ca2a2d3b52934d755d5"/>
+        <Field Comment="Резерв КЦУ" Name="Res_44" Type="BOOL" UUID="885373050fa7435f9e0be0e7ea9dc749"/>
+    </Fields>
+</Type>

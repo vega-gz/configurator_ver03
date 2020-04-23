@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AM_ToHMI_NKU" Kind="Struct" Comment="Сигналы, идущие из обработчика ИМ" UUID="F582C9A7F34B3863BB546DA1A8FD580E">
+    <Fields>
+        <Field Name="qOn" Type="BOOL" UUID="201C2A324E5B70F4DA1F5B8E2010211F" Comment="Выход - &quot;включить напрямую&quot; (открыть)" />
+        <Field Name="qOnUPP" Type="BOOL" UUID="11C1E90E4B60E9E2AC0164A8CD7688E7" Comment="Выход - &quot;включить через УПП&quot;" />
+        <Field Name="qOff" Type="BOOL" UUID="C6E6A7EB1748FBB1F62FD1940D6A341A" Comment="Выход - &quot;закрыть&quot;" />
+        <Field Name="modeManual" Type="BOOL" UUID="0AFBD4A64FF8C309BDF4D9BBAF1A6E4E" Comment="Режим ручного управления" />
+        <Field Name="prmBtnOn" Type="BOOL" UUID="024ACD7654417BA719E6EE8C30DF41B1" Comment="Разрешение ручного включения в авто-режиме (для повтора команды)" />
+        <Field Name="prmBtnOff" Type="BOOL" UUID="41C74D645647D2C8EFDDA1841A754AED" Comment="Разрешение ручного отключения в авто-режиме (для повтора команды)" />
+        <Field Name="fNotOn" Type="BOOL" UUID="E0E79D9F4E8E2BDD77AF57B3E4827898" Comment="Не включен" />
+        <Field Name="fNotOff" Type="BOOL" UUID="8BD39D29468096AD67F9498E5368625F" Comment="Не отключен" />
+        <Field Name="fNotStart" Type="BOOL" UUID="A2DC02BD6842F705DD7AA289783C8BED" Comment="Не стронулся" />
+        <Field Name="fNotOn_UPP" Type="BOOL" UUID="55901A9549CB558C6C22C0950F7C98C1" Comment="Не включился УПП" />
+        <Field Name="fNotOff_UPP" Type="BOOL" UUID="F19790CDA748AE0B2F35E5B6953102D3" Comment="Не отключился УПП" />
+        <Field Name="fSelfOn" Type="BOOL" UUID="33D97971EE44990900D34BBD9020523B" Comment="Самопроизвольное включение" />
+        <Field Name="fSelfOff" Type="BOOL" UUID="42BE4A0E71444519298C5695CB62D4E8" Comment="Самопроизвольное отключение" />
+        <Field Name="blockCommand" Type="BOOL" UUID="96BB25B6E543788709A7569129484558" Comment="Команда заблокирована таймером макс. длительности" />
+        <Field Name="blockCommandNotReady" Type="BOOL" UUID="525B3D94D1441DCB7D5697B06C12C951" Comment="Команда заблокирована из-за неготовности выходов или АС" />
+        <Field Name="blockUPPnotReady" Type="BOOL" UUID="05C273378449219E96D6898391525A5A" Comment="Команда на УПП заблокирована из-за неготовности УПП" />
+        <Field Name="blockRecommand" Type="BOOL" UUID="FAA26466B847466454D75B9935BDD8E6" Comment="Команда заблокирована счётчиком поджимов" />
+        <Field Name="fCommon" Type="BOOL" UUID="11B902DC4884FB92CCAEEDAA6BEFCBFA" Comment="Обобщенная неисправность" />
+    </Fields>
+</Type>

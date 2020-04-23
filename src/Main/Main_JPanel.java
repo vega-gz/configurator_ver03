@@ -98,6 +98,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
+        jFrameTable = new javax.swing.JFrame();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -133,6 +134,23 @@ public class Main_JPanel extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jFrameTable.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                jFrameTableWindowClosed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFrameTableLayout = new javax.swing.GroupLayout(jFrameTable.getContentPane());
+        jFrameTable.getContentPane().setLayout(jFrameTableLayout);
+        jFrameTableLayout.setHorizontalGroup(
+            jFrameTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrameTableLayout.setVerticalGroup(
+            jFrameTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -394,11 +412,12 @@ public class Main_JPanel extends javax.swing.JFrame {
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
         FrameTabel frameTable = new FrameTabel(selectT, columns); // Вызов класса Название таблицы и данные для нее
-        JFrame frame = new JFrame(selectT); // с заголовком имя таблицы
-        frame.setTitle(selectT + " " + DB.getCommentTable(selectT)); // установить заголовок имя таблицы и если есть ее коммент
-        frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
-        frame.setContentPane(frameTable); // Передаем нашу форму
-        frame.setVisible(true);
+        jFrameTable.add(frameTable); // с заголовком имя таблицы
+        jFrameTable.setTitle(selectT + " " + DB.getCommentTable(selectT)); // установить заголовок имя таблицы и если есть ее коммент
+        jFrameTable.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+        jFrameTable.setContentPane(frameTable); // Передаем нашу форму
+        jFrameTable.setVisible(true);
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
@@ -481,14 +500,15 @@ public class Main_JPanel extends javax.swing.JFrame {
                 new SignalTypeToBase(pathFileType);
             }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
         }
+        jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
     }//GEN-LAST:event_jButton8ActionPerformed
     
     // --- реакция на события меню ---
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int ren = jFileChooser1.showDialog(null, "папка с проектом");
         if (ren == JFileChooser.APPROVE_OPTION) {
-                globVar.PathToProject = jFileChooser1.getSelectedFile().toString(); // установить новый путь 
-                this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.PathToProject); // установить заголовок
+                globVar.desDir = jFileChooser1.getSelectedFile().toString(); // установить новый путь 
+                this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.desDir); // установить заголовок
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -514,6 +534,11 @@ public class Main_JPanel extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    // --- событие на закрытие окна ---
+    private void jFrameTableWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jFrameTableWindowClosed
+        jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
+    }//GEN-LAST:event_jFrameTableWindowClosed
 
     public ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
@@ -556,6 +581,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;

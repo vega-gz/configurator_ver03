@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ReportEngine >
+<Configuration>
+    <ReportList>
+        <Report Equation="" Printer="lp" Template="" Print="FALSE" ShowPreview="TRUE" Archive="" FileNameTemplate="D:\REPORTS\SUT\%Y-%m-%d_%H.%M.%S_PPZ.htm" Comment="PPZ" Landscape="FALSE" MarginTop="6" MarginLeft="10" MarginRight="6" MarginBottom="6" PageSize="A4" FullPage="FALSE" EventCategory="3" />
+    </ReportList>
+</Configuration>

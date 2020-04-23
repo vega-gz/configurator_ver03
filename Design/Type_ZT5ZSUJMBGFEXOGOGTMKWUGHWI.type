@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_FR_AnAM_FromALG" Kind="Struct" UUID="840EE06E4ED35C936A0793B4AA65CBE1">
+    <Fields>
+        <Field Name="TRK" Type="BB9385E64EB006274A5DDD9E2959A1CF" UUID="A93C3339407B6B80CEBE1EAD2B4E35F9" />
+    </Fields>
+</Type>

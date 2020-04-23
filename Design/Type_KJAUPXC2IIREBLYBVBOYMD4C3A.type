@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_AnAM_Btn" Kind="Struct" UUID="2B630E1343BB8E741192E99C5C6EF03A">
+    <Fields>
+        <Field Name="Vn1_MOR" Type="EB824DBB45D409040889D7B96D33A9CA" UUID="51068F0E47EA131973C068A13DC14743" />
+    </Fields>
+</Type>

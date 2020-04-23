@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_AO_ToHMI" UUID="00B934F5461BB0C8938D42A9118D2143">
+                    
+
+    
+
+    
+
+    
+
+    
+<Fields>
+<Field Comment="Управление ВНА" Name="Set_VNA" Type="D225A65348D2770B341BAC9762DA1766" UUID="e688a63a93464fa8aecba64894908cc6"/>
+<Field Comment="Установка скорости по току ЭС" Name="Set_N_ES" Type="D225A65348D2770B341BAC9762DA1766" UUID="532fee2ecad24439b9ff035b31f00504"/>
+<Field Comment="Управление дозатором газа ДУС" Name="Set_TRK" Type="D225A65348D2770B341BAC9762DA1766" UUID="616793cac4374daeb2213a99327823c8"/>
+<Field Comment="Управление клапаном КлР6" Name="Set_Kr6r" Type="D225A65348D2770B341BAC9762DA1766" UUID="b983e639235949e2b99588d114a4c947"/>
+<Field Comment="Вентилятор 1 МОК: управление" Name="Set_Vn1_MON" Type="D225A65348D2770B341BAC9762DA1766" UUID="8cab85f6ca8442cf9c36e2860b13a504"/>
+<Field Comment="Вентилятор 2 МОК: управление" Name="Set_Vn2_MON" Type="D225A65348D2770B341BAC9762DA1766" UUID="c45b11fe0e7d46af910eac935d11c320"/>
+<Field Comment="Вентилятор 1 МОД: управление" Name="Set_Vn1_MOD" Type="D225A65348D2770B341BAC9762DA1766" UUID="2150ae1c59a84b719f311c414b126f28"/>
+<Field Comment="Вентилятор 2 МОД: управление" Name="Set_Vn2_MOD" Type="D225A65348D2770B341BAC9762DA1766" UUID="763dfbac1a9041bfb081c1ee12b0fdc0"/>
+<Field Comment="Частота вращения ротора СТ" Name="N_ST_ext" Type="D225A65348D2770B341BAC9762DA1766" UUID="6683dc7f1c8144a484b9019dba7d0736"/>
+<Field Comment="Резерв" Name="Res_0" Type="D225A65348D2770B341BAC9762DA1766" UUID="3903c257871b46ceaa7c6c39d2ae1b98"/>
+<Field Comment="Резерв" Name="Res_1" Type="D225A65348D2770B341BAC9762DA1766" UUID="426b0b35f6bc4f1386a912b5e1b61cf5"/>
+<Field Comment="Вентилятор 1 МОР: управление" Name="Set_Vn1_MOR" Type="D225A65348D2770B341BAC9762DA1766" UUID="712268695e7f497084eac1101ccc6c8a"/>
+<Field Comment="Вентилятор 2 МОР: управление" Name="Set_Vn2_MOR" Type="D225A65348D2770B341BAC9762DA1766" UUID="0ee572f0a8ee4bbb83103e39cc51f422"/>
+<Field Comment="Вентилятор 3 МОР: управление" Name="Set_Vn3_MOR" Type="D225A65348D2770B341BAC9762DA1766" UUID="68ed244376ab4824b138879591e642bb"/>
+<Field Comment="Вентилятор 4 МОР: управление" Name="Set_Vn4_MOR" Type="D225A65348D2770B341BAC9762DA1766" UUID="5178ab9f2ede4be6871658f774c71218"/>
+<Field Comment="Резерв" Name="Res_2" Type="D225A65348D2770B341BAC9762DA1766" UUID="b452b575515948a8bbc283c7a7d86196"/>
+</Fields>
+</Type>

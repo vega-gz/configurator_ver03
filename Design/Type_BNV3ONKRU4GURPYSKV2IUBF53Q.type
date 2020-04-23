@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_AnAM_ToHMI" Kind="Struct" UUID="563C3FB34C0DB31CF19D25BE34522387">
+    <Fields>
+        <Field Name="Vn1_MOR" Type="7F71797349DE56E6D8A3BB81C22F938F" UUID="E5FCD7424F57D6CEAA8ED7AFF3103C05" />
+    </Fields>
+</Type>

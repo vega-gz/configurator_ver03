@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Directories" Kind="Struct" UUID="B213948A4FEDCC83B4EE6DB6F949A4A6">
+    <Fields>
+        <Field Name="Lib" Type="STRING" UUID="BFAF39CE4D128D71DD4490B5A611E469" Comment="Библиотеки" />
+    </Fields>
+</Type>

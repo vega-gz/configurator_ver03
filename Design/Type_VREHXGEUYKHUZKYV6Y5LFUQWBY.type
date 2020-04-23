@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_init" Kind="Struct" UUID="8A40DC82489353F2F5C0B3AE1BC5FEC7">
+    <Fields>
+        <Field Name="AI" Type="BOOL" UUID="4C532B9845439ED8471D0BA719977C20" Comment="Флаг инициализвции параметров аналоговых входов" />
+        <Field Name="DI" Type="BOOL" UUID="29D88A1D4C0E3BA89F5FD599B234EDB7" Comment="Флаг инициализвции параметров дискретных входов" />
+        <Field Name="AO" Type="BOOL" UUID="597A2B2B41B8BED5492974BCEC35139F" Comment="Флаг инициализвции параметров аналоговых выходов" />
+        <Field Name="DRM" Type="BOOL" UUID="824B0A8E4571E49A6EF5DAAEA1EC0DF1" Comment="Флаг инициализвции параметров барабанов" />
+        <Field Name="AM" Type="BOOL" UUID="9927A1DC48218A4153BCAFB869FD6CEE" Comment="Флаг инициализвции параметров ИМ" />
+        <Field Name="APS" Type="BOOL" UUID="0070E2774D2A2EBD2AFE4382D38429D1" Comment="Флаг инициализвции параметров аварийно-предупредительной сигнализации" />
+        <Field Name="ANB" Type="BOOL" UUID="978F8B7C47DAC453CF55B39621B890DC" Comment="Флаг инициализвции параметров аналоговых уставок" />
+    </Fields>
+</Type>

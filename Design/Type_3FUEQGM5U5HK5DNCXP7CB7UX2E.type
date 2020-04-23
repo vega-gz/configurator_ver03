@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_DO_FromHMI" UUID="E151BCB02540B85F326AF1B1DD593EE6">
+                
+
+    
+
+    
+
+    <Fields>
+        <Field Comment="Клапан КлР6 открыть" Name="KLR6_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="c9868e7d96274848aaa801d772bb96d6"/>
+        <Field Comment="Клапан КлР6 закрыть" Name="KLR6_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="1c339e6653514c25b85e8dc5defe2a75"/>
+        <Field Comment="Блокировка ВНА" Name="Lock_VNA" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="198891c89b00494abe1b39e1685a597b"/>
+        <Field Comment="ГПА в работе" Name="GPA_Work" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="b23dfda8cd8d4fd5b4ef4d23cb23b1c3"/>
+        <Field Comment="Включить термостат влагомера" Name="TEN_Vlagomer_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="41c9990b28484e75b976dc9785cd9f00"/>
+        <Field Comment="Открыть кран 1" Name="Kr1_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="1fde691f6be943fdbc5548362bf35741"/>
+        <Field Comment="Закрыть кран 1" Name="Kr1_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="4bbe610e002349228195a2afd544b96f"/>
+        <Field Comment="Открыть кран 2" Name="Kr2_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="9bfbaee93ed342af8b506862eb1c5a38"/>
+        <Field Comment="Закрыть кран 2" Name="Kr2_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="648fda4bf1f842f9bdcd83a84fb69364"/>
+        <Field Comment="Открыть кран 4" Name="Kr4_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="15cf13370c824cbcbe2ebdd5b2ca5d38"/>
+        <Field Comment="Закрыть кран 4" Name="Kr4_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="fa0272efb16a4641bf4b66ee1d20ff39"/>
+        <Field Comment="Открыть кран 5" Name="Kr5_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="4f6a5716072c432f93a03e79315b7c86"/>
+        <Field Comment="Закрыть кран 5" Name="Kr5_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="60d35199942d4ee29ea1d3d4ff72cfff"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра 1 компрессора" Name="Reg_C1_N_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="ebad1ba246a74a81ae5ab8172bb4fa2f"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра 2 компрессора" Name="Reg_C2_N_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="df811f108a43423e9e2e61d481cd82af"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра 3 компрессора" Name="Reg_C3_N_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="7dfa2b7bc92b4b239ed5fc41fee237f2"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра 4 компрессора" Name="Reg_C4_N_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="e943b44f9849468c8b0252947a0a7a7d"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра 5 компрессора" Name="Reg_C5_N_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="c4614527205b49ebace44f6dcd63a0a6"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра 6 компрессора" Name="Reg_C6_N_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="b9880a46c0b14f459b5dee43e027dbb6"/>
+        <Field Comment="Разблокировать ЭС" Name="Unlock_ES" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="19723076543449f19db2676a389d7bf9"/>
+        <Field Comment="Включить ЭС" Name="ES_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="8a2915e57742485d9053e8eaed8588ff"/>
+        <Field Comment="Включить ЭМ открытия клапана ОГК1" Name="SK_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="5e60ea6560414b2aa204569ee36ab857"/>
+        <Field Comment="Открыть клапан  подвода газа к воспламенителям" Name="POK_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="63030f5907e443bb8ad7cc4a60344db8"/>
+        <Field Comment="Включить СПВ" Name="SPV_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="f937b517769e4202bf1e3d3c21935a0a"/>
+        <Field Comment="Открыть ЗПВ1" Name="ZsPV_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="bfbdcc1e98f3476089b354e82e612b86"/>
+        <Field Comment="Клапан КлР1 открыть" Name="KLR1_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="360471601c7c42c8979809b59fd6887a"/>
+        <Field Comment="Клапан КлР1 закрыть" Name="KLR1_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="0ffd112413504cc1ac9f3ff606c3939c"/>
+        <Field Comment="Клапан КлР2 открыть" Name="KLR2_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="da806b6113c2404a91c7c3a6bc146e24"/>
+        <Field Comment="Клапан КлР2 закрыть" Name="KLR2_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="e03493844a4c47e4965994caa846abba"/>
+        <Field Comment="Открыть клапаны противопожарные ПЕ1,ПЕ2,ПЕ3" Name="Kl_PE_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="5e45a238d4dc44229b7a81c5e5b9c6b0"/>
+        <Field Comment="Клапан БФТГ подачи газа в ГТД открыть" Name="KE1_BFTG_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="24e4f78d47c042308f9b73d58fbf684c"/>
+        <Field Comment="Клапан БФТГ сброса давления в атмосферу закрыть" Name="KE2_BFTG_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="ab72bd67c60b408fb97e401bc79e139f"/>
+        <Field Comment="Резерв" Name="Res_0" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="78ec429c7a354784ae958225a1ddffe7"/>
+        <Field Comment="Закрыть кран 6" Name="Kr6_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="9bb87fb584a0431986e77f5cb69ec94b"/>
+        <Field Comment="Открыть кран 6" Name="Kr6_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="f24adb6771e749a6b44b022829c4a061"/>
+        <Field Comment="Закрыть кран 9" Name="Kr9_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="afa7eaccea2d40d39d187fa445b13835"/>
+        <Field Comment="Открыть кран 9" Name="Kr9_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="7f64b29c82144a57a060a689e034c732"/>
+        <Field Comment="Закрыть кран 12" Name="Kr12_OF" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="b0713db9fbc04460b06b3d835c99adec"/>
+        <Field Comment="Открыть кран 12" Name="Kr12_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="8c79c6ede50146acb46091829337aea1"/>
+        <Field Comment="Резерв" Name="Res_1" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="683a3263c6e44d14a3bec52ad07451da"/>
+        <Field Comment="Резерв" Name="Res_2" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="f276918b668448189dab30d464aee02f"/>
+        <Field Comment="Резерв" Name="Res_3" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="1a3ff7bc452a433ab751f6a423c6302e"/>
+        <Field Comment="Резерв" Name="Res_4" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="df4bd9fea87d4236bf32a5f916bd09f0"/>
+        <Field Comment="Резерв" Name="Res_5" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="1e6191ca9948428f989414440fff3f9e"/>
+        <Field Comment="Резерв" Name="Res_6" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="bef76198b1394210b1a0dae05389ebd7"/>
+        <Field Comment="Резерв" Name="Res_7" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="e811e3d3c3534aaa9eb5536a4fef8f04"/>
+        <Field Comment="Резерв" Name="Res_8" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="7319498efb754204b4564e141e60dd67"/>
+        <Field Comment="Резерв" Name="Res_9" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="498be333a94448f6adc1cda9f63754c0"/>
+        <Field Comment="Подать питание СПВ" Name="U_SPV_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="2a53eb4b20a64a86ab3c0446017cbf29"/>
+        <Field Comment="Включить насос смазки пусковой ГТД" Name="PNSD_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="621187ad51ed466da7e0b2fb1e38ae09"/>
+        <Field Comment="Включить эл. насос предпусковой прокачки масла (НПМ) редуктора" Name="PNSR_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="12c444fbe9ae4765b29b630fdcac506d"/>
+        <Field Comment="Включить пусковой насос НППМК компрессора" Name="PNSN_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="4ebe2cb871cc4116bc256830e1b73993"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-1)" Name="KE3_1_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="0d89a42503534bc1b9582e3b21317e74"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-2)" Name="KE3_2_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="e05fd1496aa34d51952ccd9e147f4f71"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-3)" Name="KE3_3_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="e39c313d252c4db69243be53bf3691af"/>
+        <Field Comment="Открыть клапан шаровой с электроприводом КШЭ5" Name="KE5_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="fe8293046357482dbd094357c11df8b6"/>
+        <Field Comment="Резерв" Name="Res_10" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="db2fdc6c0034406d84aabb74ad429db7"/>
+        <Field Comment="Резерв" Name="Res_11" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="fb38ed28b03c43a4bde5d7a7f39232c1"/>
+        <Field Comment="Резерв" Name="Res_12" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="28ffe0db6030418b8cb1d569ab9d58c3"/>
+        <Field Comment="Резерв" Name="Res_13" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="0a54bd1ae51345e3bd29060ec6705585"/>
+        <Field Comment="Резерв" Name="Res_14" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="c7a72219d0c54ccaaafd5f951426244e"/>
+        <Field Comment="Резерв" Name="Res_15" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="5b1e5d417aaa4f4da6a134f500a336f8"/>
+        <Field Comment="Разрешение на управление ВНА" Name="VNA_Permit" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="5da2779b2ab6450faf8bf35149460477"/>
+        <Field Comment="Исправность ПЛК" Name="PLC_ok" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="37ca45f84b4740f5853c10af72495d6e"/>
+        <Field Comment="АС звуковая" Name="AS_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="68cfc1cecc134599a0d6ecae13988688"/>
+        <Field Comment="ПС звуковая" Name="PS_ON" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="a209a6ebfa0141c591b9f8304ceecba6"/>
+        <Field Comment="Резерв" Name="Res_16" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="7212cc97d21e41b1939b44b8a8dd488a"/>
+        <Field Comment="Резерв" Name="Res_17" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="57d42b2a161b49009770c87bba9a222f"/>
+        <Field Comment="Резерв" Name="Res_18" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="74847bce190b463a825b6959ef4114cc"/>
+        <Field Comment="Резерв" Name="Res_19" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="a8bc7366755c4ac999fd3b1c26c13c6c"/>
+        <Field Comment="Резерв" Name="Res_20" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="e10b8d027eb94b70b525c8ec94d7039e"/>
+        <Field Comment="Резерв" Name="Res_21" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="5af07b71d37e4d60accefd4d351245b8"/>
+    </Fields>
+</Type>

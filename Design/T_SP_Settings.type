@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ANB_Settings" Kind="Struct" Comment="Настройки уставки" UUID="F35CE5474F9ED831D3CDE984BA397134">
+    <Fields>
+        <Field Name="spVal" Type="REAL" UUID="D9A556B9445296B748433EAA27F4A759" Comment="значения уставки" />
+        <Field Name="setForFault" Type="INT" UUID="BA40E4A546B01AE842584584C851B70C" Comment="значение, записываемое в ANB при неисправности канала: 0 - FALSE, 1 - TRUE, 2 - оставить то что было" />
+        <Field Name="direct" Type="BOOL" UUID="2691ED434FBDB2B1FBFB67A514B27416" Comment="направление срабатывания. TRUE - верхняя, FALSE - нижняя" />
+        <Field Name="delay" Type="REAL" UUID="76A8EE304E30A2D29985BB985B4F10DB" Comment="задержка на срабатывание" />
+    </Fields>
+</Type>

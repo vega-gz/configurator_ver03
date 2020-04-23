@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_NKU_DI_DRV" UUID="159081137B4D8CD5231A3BB51D3615BA">
+        
+
+    <Fields>
+        <Field Comment="Электронагреватель Е1-3 воздуха укрытия поршневого компрессора. Готовность" Name="EN13_Ukr_Rdy" Type="BOOL" UUID="6923bb3c91d5414c9fff2a111ae33c5d"/>
+        <Field Comment="Электронагреватель Е1-3 воздуха укрытия поршневого компрессора. Включено" Name="EN13_Ukr_ON" Type="BOOL" UUID="cf675e48a0ca4e0087b3b8b6bfe52f7c"/>
+        <Field Comment="Электронагреватель Е1-3 воздуха укрытия поршневого компрессора. АВ аварийно отключен" Name="EN13_Ukr_AOF" Type="BOOL" UUID="afae5def485b4aafb308a39bf462c53e"/>
+        <Field Comment="Электронагреватель Е1-3 воздуха укрытия поршневого компрессора. Нет управления с ПМУ" Name="EN13_Ukr_nMU" Type="BOOL" UUID="839759413a49421384cc85d891d42a66"/>
+        <Field Comment="Электронагреватель Е4-6 воздуха укрытия поршневого компрессора. Готовность" Name="EN46_Ukr_Rdy" Type="BOOL" UUID="2b0693d01e41423590d2bc00d69c4d23"/>
+        <Field Comment="Электронагреватель Е4-6 воздуха укрытия поршневого компрессора. Включено" Name="EN46_Ukr_ON" Type="BOOL" UUID="f79a565790d54effb3c7e31398c0bfa9"/>
+        <Field Comment="Электронагреватель Е4-6 воздуха укрытия поршневого компрессора. АВ аварийно отключен" Name="EN46_Ukr_AOF" Type="BOOL" UUID="7e4b2ea6b3de4bf79d365cdd43681261"/>
+        <Field Comment="Электронагреватель Е4-6 воздуха укрытия поршневого компрессора. Нет управления с ПМУ" Name="EN46_Ukr_nMU" Type="BOOL" UUID="721829da4d9c4aca8af4391da12c83d9"/>
+        <Field Comment="Электронагреватель Е7-9 воздуха укрытия поршневого компрессора. Готовность" Name="EN79_Ukr_Rdy" Type="BOOL" UUID="44ce8d8eb960438e8cd82edd28af8bf7"/>
+        <Field Comment="Электронагреватель Е7-9 воздуха укрытия поршневого компрессора. Включено" Name="EN79_Ukr_ON" Type="BOOL" UUID="4951cb7b19404ff38d85d875e35b1873"/>
+        <Field Comment="Электронагреватель Е7-9 воздуха укрытия поршневого компрессора. АВ аварийно отключен" Name="EN79_Ukr_AOF" Type="BOOL" UUID="e923b774ce0c4983b3d394c6183a838d"/>
+        <Field Comment="Электронагреватель Е7-9 воздуха укрытия поршневого компрессора. Нет управления с ПМУ" Name="EN79_Ukr_nMU" Type="BOOL" UUID="a1399df4e84c4fe0be6ec28c4db302ae"/>
+        <Field Comment="Резерв (нагреватель). Готовность" Name="Res_0" Type="BOOL" UUID="b3da5506ef654e7fa2670195e24abf3e"/>
+        <Field Comment="Резерв (нагреватель). Включено" Name="Res_1" Type="BOOL" UUID="d50319a4ce67468e991806cba10dbf08"/>
+        <Field Comment="Резерв (нагреватель). АВ аварийно отключен" Name="Res_2" Type="BOOL" UUID="e61e421c1d2c4744af1ce44ad7a5a6c2"/>
+        <Field Comment="Резерв (нагреватель). Нет управления с ПМУ" Name="Res_3" Type="BOOL" UUID="53915bf20c52469ebc6ff09d9c7fd5f2"/>
+        <Field Comment="Резерв (нагреватель). Готовность" Name="Res_4" Type="BOOL" UUID="47c92d87cbdc461889c96786a8fd1978"/>
+        <Field Comment="Резерв (нагреватель). Включено" Name="Res_5" Type="BOOL" UUID="a18b6c1f038a46c2a1262e1fc365e37e"/>
+        <Field Comment="Резерв (нагреватель). АВ аварийно отключен" Name="Res_6" Type="BOOL" UUID="cc0391221c0a410f843669d8f9d9ece0"/>
+        <Field Comment="Резерв (нагреватель). Нет управления с ПМУ" Name="Res_7" Type="BOOL" UUID="3653243b12fa442cba9bb93cfbd72d40"/>
+        <Field Comment="Электронагреватель МО ГТД. Готовность" Name="TEN_MOD_Rdy" Type="BOOL" UUID="2a712f9c0b6b4d3da9dccdb3b705ef66"/>
+        <Field Comment="Электронагреватель МО ГТД. Включено" Name="TEN_MOD_ON" Type="BOOL" UUID="4ac1ac694dcd4188b3bdba36355c0d7c"/>
+        <Field Comment="Электронагреватель МО ГТД. АВ аварийно отключен" Name="TEN_MOD_AOF" Type="BOOL" UUID="6950904322954f13a016018ced0cbe0f"/>
+        <Field Comment="Электронагреватель МО ГТД. Нет управления с ПМУ" Name="TEN_MOD_nMU" Type="BOOL" UUID="580331b6616a49b3b2d854440c375203"/>
+        <Field Comment="Резерв (нагреватель). Готовность" Name="Res_8" Type="BOOL" UUID="29993a99cd584c8ca73bb423c8333323"/>
+        <Field Comment="Резерв (нагреватель). Включено" Name="Res_9" Type="BOOL" UUID="ca60e2bfbff64e4db7df8bb4cc2ba1be"/>
+        <Field Comment="Резерв (нагреватель). АВ аварийно отключен" Name="Res_10" Type="BOOL" UUID="2a0a4d3600eb4026914865b87f978ce2"/>
+        <Field Comment="Резерв (нагреватель). Нет управления с ПМУ" Name="Res_11" Type="BOOL" UUID="add32a50b66d49fca593264a8ef229c8"/>
+        <Field Comment="Обогрев блока электротехнического EK1. Готовность" Name="EK1_ETO_Rdy" Type="BOOL" UUID="1c84ad198263486cba5f25049bb52c6d"/>
+        <Field Comment="Обогрев блока электротехнического EK1. Включено" Name="EK1_ETO_ON" Type="BOOL" UUID="696f336e70f942e6b4059f65dcdc6711"/>
+        <Field Comment="Обогрев блока электротехнического EK1. АВ аварийно отключен" Name="EK1_ETO_AOF" Type="BOOL" UUID="b345e8d2c3ed4935b057b2a16980a6b5"/>
+        <Field Comment="Обогрев блока электротехнического EK1. Резерв" Name="EK1_ETO_nMU" Type="BOOL" UUID="281015667e724aa8b55298e43e7daaf2"/>
+        <Field Comment="Обогрев блока электротехнического EK2. Готовность" Name="EK2_ETO_Rdy" Type="BOOL" UUID="fb75920382674ad2b6bb214bb76ca935"/>
+        <Field Comment="Обогрев блока электротехнического EK2. Включено" Name="EK2_ETO_ON" Type="BOOL" UUID="f34e0a8eb5714812a9a38d5a34dcf65f"/>
+        <Field Comment="Обогрев блока электротехнического EK2. АВ аварийно отключен" Name="EK2_ETO_AOF" Type="BOOL" UUID="2dfe305211154bb8b6a60381124d4d8d"/>
+        <Field Comment="Обогрев блока электротехнического EK2. Резерв" Name="EK2_ETO_nMU" Type="BOOL" UUID="7d365bcfc92b4392aed664cd84f1a276"/>
+        <Field Comment="Обогрев блока электротехнического EK3. Готовность" Name="EK3_ETO_Rdy" Type="BOOL" UUID="997d1e68b7f7471a8b42899c71ac5193"/>
+        <Field Comment="Обогрев блока электротехнического EK3. Включено" Name="EK3_ETO_ON" Type="BOOL" UUID="76b7e79198dc45958e3e84c211b9447b"/>
+        <Field Comment="Обогрев блока электротехнического EK3. АВ аварийно отключен" Name="EK3_ETO_AOF" Type="BOOL" UUID="0d079127163647bb80ca41e5d03b00c8"/>
+        <Field Comment="Обогрев блока электротехнического EK3. Резерв" Name="EK3_ETO_nMU" Type="BOOL" UUID="6386b1a2a31e4264bc9ed1f83ac1d082"/>
+        <Field Comment="Нагреватель воздуха блока ГТД. Готовность" Name="EN_OD_Rdy" Type="BOOL" UUID="4510e9c92ead45c2b894df808b52bead"/>
+        <Field Comment="Нагреватель воздуха блока ГТД. Включено" Name="EN_OD_ON" Type="BOOL" UUID="ad8a09e0e4644ad7afca46137729a2ac"/>
+        <Field Comment="Нагреватель воздуха блока ГТД. АВ аварийно отключен" Name="EN_OD_AOF" Type="BOOL" UUID="ba2196b2ff674752a003d549c34bc2ca"/>
+        <Field Comment="Нагреватель воздуха блока ГТД. Резерв" Name="EN_OD_nMU" Type="BOOL" UUID="2796e689e8c447af831c1b91f6216e6a"/>
+        <Field Comment="Резерв (нагреватель). Готовность" Name="Res_12" Type="BOOL" UUID="692c875bfff54f4f9af5f2e6e4404b6f"/>
+        <Field Comment="Резерв (нагреватель). Включено" Name="Res_13" Type="BOOL" UUID="2e9d437f16234923a762d621ebd949dd"/>
+        <Field Comment="Резерв (нагреватель). АВ аварийно отключен" Name="Res_14" Type="BOOL" UUID="ccf4cff12d4a4d468fc55a5addaa0983"/>
+        <Field Comment="Резерв (нагреватель). Резерв" Name="Res_15" Type="BOOL" UUID="23d87c2db9864511837431cf5a091683"/>
+        <Field Comment="Валоповоротное устройство редуктора. Готовность" Name="VPU_Rdy" Type="BOOL" UUID="455fb4fb62fe40f68b88d10d2bc8de69"/>
+        <Field Comment="Валоповоротное устройство редуктора. Включено" Name="VPU_ON" Type="BOOL" UUID="226c6b06b91841fda2ed5535e24d2d5c"/>
+        <Field Comment="Валоповоротное устройство редуктора. АВ аварийно отключен" Name="VPU_AOF" Type="BOOL" UUID="7ef1d6f698b8484b8cbec0b48a38a161"/>
+        <Field Comment="Валоповоротное устройство редуктора. Нет управления с ПМУ" Name="VPU_nMU" Type="BOOL" UUID="46684b6755aa4dfba021d8d289014f0a"/>
+        <Field Comment="Вентилятор калорифера МО ГТД. Готовность" Name="Vk_MOD_Rdy" Type="BOOL" UUID="ccafade7bdeb4d929aaba24bd37ca51e"/>
+        <Field Comment="Вентилятор калорифера МО ГТД. Включено" Name="Vk_MOD_ON" Type="BOOL" UUID="72d059842a2f4c11a88b51ce4f9c7286"/>
+        <Field Comment="Вентилятор калорифера МО ГТД. АВ аварийно отключен" Name="Vk_MOD_AOF" Type="BOOL" UUID="39b807e26b6a4dddb247e14cdbb3a3e8"/>
+        <Field Comment="Вентилятор калорифера МО ГТД. Нет управления с ПМУ" Name="Vk_MOD_nMU" Type="BOOL" UUID="2d6f31e5ac9c44efbc845e938c79e07a"/>
+        <Field Comment="Вентилятор 1 калорифера МО редуктора. Готовность" Name="Vk1_MOR_Rdy" Type="BOOL" UUID="1462428909df4fe7bbbf990d700852a4"/>
+        <Field Comment="Вентилятор 1 калорифера МО редуктора. Включено" Name="Vk1_MOR_ON" Type="BOOL" UUID="e04b7c8394ab4b9babc79c599a8f1e0a"/>
+        <Field Comment="Вентилятор 1 калорифера МО редуктора. АВ аварийно отключен" Name="Vk1_MOR_AOF" Type="BOOL" UUID="f7b74ef31ffc4e2f847be9cc16ab96f5"/>
+        <Field Comment="Вентилятор 1 калорифера МО редуктора. Нет управления с ПМУ" Name="Vk1_MOR_nMU" Type="BOOL" UUID="dd7bb61944c64228bafcfdcbdbc46934"/>
+        <Field Comment="Вентилятор калорифера МО компрессора. Готовность" Name="Vk_MON_Rdy" Type="BOOL" UUID="fed789e03dc7432ab6caf13d61a605ab"/>
+        <Field Comment="Вентилятор калорифера МО компрессора. Включено" Name="Vk_MON_ON" Type="BOOL" UUID="d3581557289c4323aa87e160e76a6981"/>
+        <Field Comment="Вентилятор калорифера МО компрессора. АВ аварийно отключен" Name="Vk_MON_AOF" Type="BOOL" UUID="10ec49a448fd42ada2689e4220b1e94e"/>
+        <Field Comment="Вентилятор калорифера МО компрессора. Нет управления с ПМУ" Name="Vk_MON_nMU" Type="BOOL" UUID="e73f0169a6734ac696dd048d3bdb8db5"/>
+        <Field Comment="Вентилятор охлаждения ангара. Готовность" Name="Vn_ang_Rdy" Type="BOOL" UUID="af87c90beee04ca0ab7ebf60739fdee8"/>
+        <Field Comment="Вентилятор охлаждения ангара. Включено" Name="Vn_ang_ON" Type="BOOL" UUID="29b446e4a3f04466a73ddf872e301005"/>
+        <Field Comment="Вентилятор охлаждения ангара. АВ аварийно отключен" Name="Vn_ang_AOF" Type="BOOL" UUID="70694c74870a4170ab65f04086e0d287"/>
+        <Field Comment="Вентилятор охлаждения ангара. Нет управления с ПМУ" Name="Vn_ang_nMU" Type="BOOL" UUID="7b9735dc466145a2809c897facba8693"/>
+        <Field Comment="Насос прокачки маслосистемы ГТД. Готовность" Name="CNSD_Rdy" Type="BOOL" UUID="a730851b451f4976a99ce757cba60e47"/>
+        <Field Comment="Насос прокачки маслосистемы ГТД. Включено" Name="CNSD_ON" Type="BOOL" UUID="b997fb007ff54ed3812bf60f90b07ef2"/>
+        <Field Comment="Насос прокачки маслосистемы ГТД. АВ аварийно отключен" Name="CNSD_AOF" Type="BOOL" UUID="72ec415c23674517961f448a47aa8114"/>
+        <Field Comment="Насос прокачки маслосистемы ГТД. Нет управления с ПМУ" Name="CNSD_nMU" Type="BOOL" UUID="fac8f01173eb493893942a69cb559a13"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. Готовность" Name="KPMD_Rdy" Type="BOOL" UUID="46749a4bd25f42789384205cf64a5ca4"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. Открыто" Name="KPMD_ON" Type="BOOL" UUID="15fa4c3c011e42b1b465f7266d573ad3"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. Закрыто" Name="KPMD_OF" Type="BOOL" UUID="2b6725b2920248d8b15570f740eb7ac4"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. АВ аварийно отключен" Name="KPMD_AOF" Type="BOOL" UUID="f0a80b0b92234fb89d80c5264d76cf4f"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. Сработал моментный выключатель" Name="KPMD_Mom" Type="BOOL" UUID="baf92321cea1416b9d3934fdded80fca"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. Открывается" Name="KPMD_isOn" Type="BOOL" UUID="9c4a13bd93cd4297a5f550e154b66ea3"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. Закрывается" Name="KPMD_isOF" Type="BOOL" UUID="572c9adde0054ce18d5842ece02bb71d"/>
+        <Field Comment="Кран прокачки маслосистемы ГТД. Нет управления с ПМУ" Name="KPMD_nMU" Type="BOOL" UUID="3234716d691c43e398accfb79cb7682e"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. Готовность" Name="ZsZO_Rdy" Type="BOOL" UUID="22eb9aee345c45bb8ff8e1990960e0c3"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. Открыто" Name="ZsZO_ON" Type="BOOL" UUID="0f96db0264804721a48cb6c5a1bbc09d"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. Закрыто" Name="ZsZO_OF" Type="BOOL" UUID="545f2c3ea2b245f6991f90027b4bd150"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. АВ аварийно отключен" Name="ZsZO_AOF" Type="BOOL" UUID="01e6c58d0f9b47fb975362ef8979be3d"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. Сработал моментальный выключатель" Name="ZsZO_Mom" Type="BOOL" UUID="d56cc2f652734ad08c587878f36a5171"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. Открывается" Name="ZsZO_isOn" Type="BOOL" UUID="4fb75a8c4ed54adc838d245e6febfabe"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. Закрывается" Name="ZsZO_isOF" Type="BOOL" UUID="19bfde1c4d724ffb87ffba8123c33f49"/>
+        <Field Comment="Заслонка защиты ГТД от обледенения. Резерв" Name="ZsZO_nMU" Type="BOOL" UUID="2a9d97be07444bfab77fd4a234643388"/>
+        <Field Comment="Резерв (Кран). Готовность" Name="Res_16" Type="BOOL" UUID="a1897c956fe74cc799e54e9367615dc8"/>
+        <Field Comment="Резерв (Кран).Открыто" Name="Res_17" Type="BOOL" UUID="1211082c07974f888b0b49a8d671e012"/>
+        <Field Comment="Резерв (Кран). Закрыто" Name="Res_18" Type="BOOL" UUID="a9deeedbef9c4feeaa21df54195b8f2c"/>
+        <Field Comment="Резерв (Кран). АВ аварийно отключен" Name="Res_19" Type="BOOL" UUID="a8948c4e6fb54f6b8209b11483938088"/>
+        <Field Comment="Резерв (Кран). Сработал моментальный выключатель" Name="Res_20" Type="BOOL" UUID="89f3626a6d5849a79cb51dbdbd50bc21"/>
+        <Field Comment="Резерв (Кран). Открывается" Name="Res_21" Type="BOOL" UUID="089785fee3554523a774ffef0c7d7627"/>
+        <Field Comment="Резерв (Кран). Закрывается" Name="Res_22" Type="BOOL" UUID="255552d92ae74da5963b7896ac5f4f5a"/>
+        <Field Comment="Резерв (Кран). Резерв" Name="Res_23" Type="BOOL" UUID="0cc6bd78cc58495c93c3ed411e69cf2d"/>
+        <Field Comment="Вентилятор 2 калорифера МО редуктора. Готовность" Name="Vk2_MOR_Rdy" Type="BOOL" UUID="f12fdbab650944b7926950cf12c4006e"/>
+        <Field Comment="Вентилятор 2 калорифера МО редуктора. Включено" Name="Vk2_MOR_ON" Type="BOOL" UUID="a061b08852184c9780aa84ceafbaf84a"/>
+        <Field Comment="Вентилятор 2 калорифера МО редуктора. АВ аварийно отключен" Name="Vk2_MOR_AOF" Type="BOOL" UUID="9ec677392e834d5ba7b35a362123cf87"/>
+        <Field Comment="Вентилятор 2 калорифера МО редуктора. Нет управления с ПМУ" Name="Vk2_MOR_nMU" Type="BOOL" UUID="da052b3ff8aa4b0398caee2c9abab028"/>
+        <Field Comment="Насос масла циркуляционный редуктора (М16). Готовность" Name="CNR_Rdy" Type="BOOL" UUID="f37e9b0f719c4b6abf7f9dc6d4655697"/>
+        <Field Comment="Насос масла циркуляционный редуктора (М16). Включено" Name="CNR_ON" Type="BOOL" UUID="a008575a31024b34b124a736726b854f"/>
+        <Field Comment="Насос масла циркуляционный редуктора (М16). АВ аварийно отключен" Name="CNR_AOF" Type="BOOL" UUID="3d27ad28806f447ab3cc1accde943131"/>
+        <Field Comment="Насос масла циркуляционный редуктора (М16). Нет управления с ПМУ" Name="CNR_nMU" Type="BOOL" UUID="aa34e2c7b12549e097a609a5d5f8bd06"/>
+        <Field Comment="Вентилятор 3 МО редуктора. Готовность" Name="Vn3_MOR_Rdy" Type="BOOL" UUID="92530c06cf6f49c9860f4df79cbc58dc"/>
+        <Field Comment="Вентилятор 3 МО редуктора. Включено" Name="Vn3_MOR_ON" Type="BOOL" UUID="8c6b72890fa04197a27364f16e380651"/>
+        <Field Comment="Вентилятор 3 МО редуктора. АВ аварийно отключен" Name="Vn3_MOR_AOF" Type="BOOL" UUID="b5802198cce0474a9d4fd3742b9b273c"/>
+        <Field Comment="Вентилятор 3 МО редуктора. Нет управления с ПМУ" Name="Vn3_MOR_nMU" Type="BOOL" UUID="9a1e47179be440ceba8d9fae67be9dab"/>
+        <Field Comment="Вентилятор 4 МО редуктора. Готовность" Name="Vn4_MOR_Rdy" Type="BOOL" UUID="4da795b9ef9346d0baf27deac6d00b17"/>
+        <Field Comment="Вентилятор 4 МО редуктора. Включено" Name="Vn4_MOR_ON" Type="BOOL" UUID="7ae9ae1d3b984d5facc2986bd56ec6ef"/>
+        <Field Comment="Вентилятор 4 МО редуктора. АВ аварийно отключен" Name="Vn4_MOR_AOF" Type="BOOL" UUID="b1ee8afa02c64921be065785d399188b"/>
+        <Field Comment="Вентилятор 4 МО редуктора. Нет управления с ПМУ" Name="Vn4_MOR_nMU" Type="BOOL" UUID="02bb7308f5cb437dbfd5524266e163c2"/>
+        <Field Comment="Резерв (аппарат) . Готовность" Name="Res_24" Type="BOOL" UUID="96fadb7d29dc40e68b999ef0cd144bd0"/>
+        <Field Comment="Резерв (аппарат). Включено" Name="Res_25" Type="BOOL" UUID="a688ae4ad0a54f118fb28170d9e7109c"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_26" Type="BOOL" UUID="80d01bb9e9474136b40ecf7d9377c9f6"/>
+        <Field Comment="Резерв (аппарат). Нет управления с ПМУ" Name="Res_27" Type="BOOL" UUID="27cf93572c6942b291531f1c41f8c226"/>
+        <Field Comment="Резерв (аппарат) . Готовность" Name="Res_28" Type="BOOL" UUID="fd7d432df1b64855a60244d1a6c807a8"/>
+        <Field Comment="Резерв (аппарат). Включено" Name="Res_29" Type="BOOL" UUID="691eaa413d9d4f50a7d540462a95e1dd"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_30" Type="BOOL" UUID="bc0cc9cdaa4f498b878acfb742142d46"/>
+        <Field Comment="Резерв (аппарат). Нет управления с ПМУ" Name="Res_31" Type="BOOL" UUID="22a31e41fd3445099846eccd80ba8ed5"/>
+        <Field Comment="Резерв (аппарат) . Готовность" Name="Res_32" Type="BOOL" UUID="da732acb5ef6434da6fa50c1c41518e4"/>
+        <Field Comment="Резерв (аппарат). Включено" Name="Res_33" Type="BOOL" UUID="f645b3a71e6b4ea5ab0417c76f79f11b"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_34" Type="BOOL" UUID="1018ab461b9b4c9199b1e28d72bcf14d"/>
+        <Field Comment="Резерв (аппарат). Нет управления с ПМУ" Name="Res_35" Type="BOOL" UUID="1637fbf54986491ba0b1e7a35b7c3204"/>
+        <Field Comment="Резерв (аппарат) . Готовность" Name="Res_36" Type="BOOL" UUID="93581b2d3d7141fa86e2e5667b6436bb"/>
+        <Field Comment="Резерв (аппарат). Включено" Name="Res_37" Type="BOOL" UUID="86f03794974f4983ac86bd82442d8dd3"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_38" Type="BOOL" UUID="94d07c3ebc6d4d05955a120fe146ab4f"/>
+        <Field Comment="Резерв (аппарат). Нет управления с ПМУ" Name="Res_39" Type="BOOL" UUID="aa3c6cf389504071806d96800b9690d3"/>
+        <Field Comment="Клапан подогрева масла компрессора. Готовность" Name="KPMN_Rdy" Type="BOOL" UUID="c018494795a5402a968173bba1b61e50"/>
+        <Field Comment="Клапан подогрева масла компрессора. Включено" Name="KPMN_ON" Type="BOOL" UUID="f973e3cca46f46e990adce6386c8f8df"/>
+        <Field Comment="Клапан подогрева масла компрессора. АВ аварийно отключен" Name="KPMN_AOF" Type="BOOL" UUID="e11775362b884ea6a13574fb6366247c"/>
+        <Field Comment="Клапан подогрева масла компрессора. Резерв" Name="KPMN_nMU" Type="BOOL" UUID="fd046e1b50d4419ba4b4abb45996dfb6"/>
+        <Field Comment="Клапан долива масла в маслобак компрессора. Готовность" Name="KDMN_Rdy" Type="BOOL" UUID="b388b4fc47314b469b724f158569e8b1"/>
+        <Field Comment="Клапан долива масла в маслобак компрессора. Включено" Name="KDMN_ON" Type="BOOL" UUID="6febe30cc2ee4a0286cd0763d149d4d6"/>
+        <Field Comment="Клапан долива масла в маслобак компрессора. АВ аварийно отключен" Name="KDMN_AOF" Type="BOOL" UUID="33c48eafab1540db8c4a0c43bb5db5b3"/>
+        <Field Comment="Клапан долива масла в маслобак компрессора. Резерв" Name="KDMN_nMU" Type="BOOL" UUID="b3eff63c3c1d4968b37660f2bc57242c"/>
+        <Field Comment="Клапан предпусковой прокачки масла компрессора. Готовность" Name="KPPMN_Rdy" Type="BOOL" UUID="f96ba0c845d540b7b4f7fc02ab5d4dd7"/>
+        <Field Comment="Клапан предпусковой прокачки масла компрессора. Включено" Name="KPPMN_ON" Type="BOOL" UUID="7dd101336fec4ba0ac1ea67cf230be29"/>
+        <Field Comment="Клапан предпусковой прокачки масла компрессора. АВ аварийно отключен" Name="KPPMN_AOF" Type="BOOL" UUID="70a18b65770d4b1cb162e275b5323e40"/>
+        <Field Comment="Клапан предпусковой прокачки масла компрессора. Резерв" Name="KPPMN_nMU" Type="BOOL" UUID="fce6ea600fba4bcc8fca457e1885653b"/>
+        <Field Comment="Клапан байпасса аппарата воздушного охлаждения масла компрессора. Готовность" Name="KBMN_Rdy" Type="BOOL" UUID="ae895dec5682408ca34c71f610eaa7c5"/>
+        <Field Comment="Клапан байпасса аппарата воздушного охлаждения масла компрессора. Включено" Name="KBMN_ON" Type="BOOL" UUID="dd432a725fbb4787a294999e5bd6bab9"/>
+        <Field Comment="Клапан байпасса аппарата воздушного охлаждения масла компрессора. АВ аварийно отключен" Name="KBMN_AOF" Type="BOOL" UUID="bf8a6902f0ae4db18c005aa96d488e70"/>
+        <Field Comment="Клапан байпасса аппарата воздушного охлаждения масла компрессора. Резерв" Name="KBMN_nMU" Type="BOOL" UUID="1d439a71db514db8b6abb2759e57aaa3"/>
+        <Field Comment="Клапан подачи воздуха с ресивера для нужд компрессора. Готовность" Name="KVRN_Rdy" Type="BOOL" UUID="f46c14e88f2e452ca347dfed5d145be3"/>
+        <Field Comment="Клапан подачи воздуха с ресивера для нужд компрессора. Включено" Name="KVRN_ON" Type="BOOL" UUID="4e290f4e5efb4c5c8533136834729c3a"/>
+        <Field Comment="Клапан подачи воздуха с ресивера для нужд компрессора. АВ аварийно отключен" Name="KVRN_AOF" Type="BOOL" UUID="e3a7f25590134960904b2f53164a9184"/>
+        <Field Comment="Клапан подачи воздуха с ресивера для нужд компрессора. Резерв" Name="KVRN_nMU" Type="BOOL" UUID="11b04a7c1fc24eb9a861b0d2a79f4039"/>
+        <Field Comment="Питание клапана КлР 1.1 Э5. Готовность" Name="U_KLR1_Rdy" Type="BOOL" UUID="1b49fdf1c41a4d0ab77e34f5a22f4c41"/>
+        <Field Comment="Питание клапана КлР 1.1 Э5. Включено" Name="U_KLR1_ON" Type="BOOL" UUID="383c09f965fb438aa83c284f0954de13"/>
+        <Field Comment="Питание клапана КлР 1.1 Э5. АВ аварийно отключен" Name="U_KLR1_AOF" Type="BOOL" UUID="f8d2a12169bc47dd96945bc41e423aa9"/>
+        <Field Comment="Питание клапана КлР 1.1 Э5. Резерв" Name="U_KLR1_nMU" Type="BOOL" UUID="ee4a17e87d134257ab58cdbe87eb2a5e"/>
+        <Field Comment="Питание клапана КлР 2.1 Э5. Готовность" Name="U_KLR2_Rdy" Type="BOOL" UUID="34c38b8f08f340e0b397ee918c3277e0"/>
+        <Field Comment="Питание клапана КлР 2.1 Э5. Включено" Name="U_KLR2_ON" Type="BOOL" UUID="6881732b0bfa4c71b710d15a4a8d167b"/>
+        <Field Comment="Питание клапана КлР 2.1 Э5. АВ аварийно отключен" Name="U_KLR2_AOF" Type="BOOL" UUID="0a6d1ba7714249a0b0f791b116e93a6a"/>
+        <Field Comment="Питание клапана КлР 2.1 Э5. Резерв" Name="U_KLR2_nMU" Type="BOOL" UUID="e9ab5927660c4c30a81f3cfbe0e96837"/>
+        <Field Comment="Питание клапана КШЭ5.1.1 Э5. Готовность" Name="U_KE5_Rdy" Type="BOOL" UUID="7b0804fa503e469387eccf066bc03a93"/>
+        <Field Comment="Питание клапана КШЭ5.1.1 Э5. Включено" Name="U_KE5_ON" Type="BOOL" UUID="931bc9dc7a0e4b09837425f8ca0fcf07"/>
+        <Field Comment="Питание клапана КШЭ5.1.1 Э5. АВ аварийно отключен" Name="U_KE5_AOF" Type="BOOL" UUID="a1608edf142b4bc48e27d84fa4830786"/>
+        <Field Comment="Питание клапана КШЭ5.1.1 Э5. Резерв" Name="U_KE5_nMU" Type="BOOL" UUID="688d81ac8e37409f986db3434a625d80"/>
+        <Field Comment="Клапан долива масла в маслобаке лубрикаторной системы. Готовность" Name="KDML_Rdy" Type="BOOL" UUID="31cc672213ff473c87e14a274aed131b"/>
+        <Field Comment="Клапан долива масла в маслобаке лубрикаторной системы. Включено" Name="KDML_ON" Type="BOOL" UUID="ffe2161dbad643fd84a4f30257f99771"/>
+        <Field Comment="Клапан долива масла в маслобаке лубрикаторной системы. АВ аварийно отключен" Name="KDML_AOF" Type="BOOL" UUID="edc543751c3741f1ba55c17d54113175"/>
+        <Field Comment="Клапан долива масла в маслобаке лубрикаторной системы. Резерв" Name="KDML_nMU" Type="BOOL" UUID="ce613e3b13b24372b517180bdbdc2e69"/>
+        <Field Comment="Резерв" Name="Res_54" Type="BOOL" UUID="2dc7cdc7b94c43d990f9070d35e46307"/>
+        <Field Comment="Резерв" Name="Res_55" Type="BOOL" UUID="f8b5eebe48444c89abc0046c3950e706"/>
+        <Field Comment="Резерв" Name="Res_56" Type="BOOL" UUID="74878863fd0f46068a6e775375c71e17"/>
+        <Field Comment="Резерв" Name="Res_57" Type="BOOL" UUID="6c458b722a674e849eff54dc21c2785c"/>
+        <Field Comment="Резерв" Name="Res_58" Type="BOOL" UUID="2aa7a62407934a8dbd6d7fbcebe3d147"/>
+        <Field Comment="Резерв" Name="Res_59" Type="BOOL" UUID="f67f4d1630884153985047b0094d337c"/>
+        <Field Comment="Резерв" Name="Res_60" Type="BOOL" UUID="c4dd074fa3b146ab942b08a22d7056bb"/>
+        <Field Comment="Резерв" Name="Res_61" Type="BOOL" UUID="77a49de5b78649c29346f0474009ca6c"/>
+        <Field Comment="Резерв" Name="Res_62" Type="BOOL" UUID="dd243dcd4b0f4e6e8fbe84e730c138d6"/>
+        <Field Comment="Резерв" Name="Res_63" Type="BOOL" UUID="4af81259a0ba428787c4f4a961c72757"/>
+        <Field Comment="Резерв" Name="Res_64" Type="BOOL" UUID="f3a038c631464a06910ee030ab130aea"/>
+        <Field Comment="Резерв" Name="Res_65" Type="BOOL" UUID="e010730cbaac4f6e970110afeb5690fb"/>
+        <Field Comment="САУ. Основное питание. АВ включен" Name="Uosn_SAU_En" Type="BOOL" UUID="d63f758a6d674d98b3c6ee161dba0c4c"/>
+        <Field Comment="САУ. Основное питание. АВ аварийно отключен" Name="Uosn_SAU_AOF" Type="BOOL" UUID="2e4d78ec317343b29abac7eda3b1bf77"/>
+        <Field Comment="АСПС. Основное питание. АВ включен" Name="Uosn_ASPS_En" Type="BOOL" UUID="af179c14e4b34775b36b7d6e7ce5e564"/>
+        <Field Comment="АСПС. Основное питание. АВ аварийно отключен" Name="Uosn_ASPS_AOF" Type="BOOL" UUID="e01959cd6a5d4b4a864de43991f878e5"/>
+        <Field Comment="Стенд очистки жидкостей. АВ включен" Name="Stend_OZH_En" Type="BOOL" UUID="dfa9edb0bdf14eaf9950c075331c4715"/>
+        <Field Comment="Стенд очистки жидкостей. АВ аварийно отключен" Name="Stend_OZH_AOF" Type="BOOL" UUID="0112ff2b148a4283aeacfc43652e61fc"/>
+        <Field Comment="Кондиционер блока  электротехнического 1 (АЕМ1.1). Питание включено" Name="Cool1_ETO_En" Type="BOOL" UUID="1b83268b861a408eab575729fb14a211"/>
+        <Field Comment="Кондиционер блока  электротехнического 1 (АЕМ1.1). АВ аварийно отключен" Name="Cool1_ETO_AOF" Type="BOOL" UUID="f742ac113ffc43f9a428d52394e45368"/>
+        <Field Comment="Кондиционер блока  электротехнического 2 (АЕМ2.1). Питание включено" Name="Cool2_ETO_En" Type="BOOL" UUID="2c9b620f48964d44b08d7d139b608307"/>
+        <Field Comment="Кондиционер блока  электротехнического 2 (АЕМ2.1). АВ аварийно отключен" Name="Cool2_ETO_AOF" Type="BOOL" UUID="82c7f03aa8114d40825735cd65e59d4c"/>
+        <Field Comment="Система плазменного воспламенения  СПВ 4РВ 03. АВ включен" Name="SPV_En" Type="BOOL" UUID="1f511a4ed5324845b3e0725e59e93357"/>
+        <Field Comment="Система плазменного воспламенения  СПВ 4РВ 03. АВ аварийно отключен" Name="SPV_AOF" Type="BOOL" UUID="0c7ca841fb6144b387bd21f99025f408"/>
+        <Field Comment="Розетка технологическая ~400 В, 32 А  (XS5, XS6). Питание включено" Name="Jack_XS56_En" Type="BOOL" UUID="3a20b669191e4f5eb1bddd4d96f447fa"/>
+        <Field Comment="Розетка технологическая ~400 В, 32 А  (XS5, XS6). АВ аварийно отключен" Name="Jack_XS56_En_AOF" Type="BOOL" UUID="3cacbc0df98245f6bdadaac21e80e166"/>
+        <Field Comment="Розетки ~230 В, 16 А блока  электротехнического (XS3, XS4). Питание включено" Name="Jack_XS34_En" Type="BOOL" UUID="54dd19bf7acb4396b4f7b0670feb1de0"/>
+        <Field Comment="Розетки ~230 В, 16 А блока  электротехнического (XS3, XS4). АВ аварийно отключен" Name="Jack_XS56_AOF" Type="BOOL" UUID="81a4907e7ef24d6db09b5c36ffa086bf"/>
+        <Field Comment="Розетка для промывки АВО газа. Питание включено" Name="Jack_AVOG_En" Type="BOOL" UUID="36e060cfb33546e0a68a89868f777ee3"/>
+        <Field Comment="Розетка для промывки АВО газа. АВ аварийно отключен" Name="Jack_AVOG_AOF" Type="BOOL" UUID="397daa9bc1984e699f63568ba58f0806"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_66" Type="BOOL" UUID="ea1fde69e9764d8aab119a5aacf4ecc9"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_67" Type="BOOL" UUID="f0e90988fbec4a2686bdf804a118497e"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_68" Type="BOOL" UUID="f7023088aa6f44858e29ba2f05d1cee0"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_69" Type="BOOL" UUID="90bffb043151479bb5cae8a996ad7b69"/>
+        <Field Comment="Блок экстренного останова (основное питание). АВ включен" Name="Uosn_BEO_En" Type="BOOL" UUID="074303a41c604a81bd869028a2c4ff98"/>
+        <Field Comment="Блок экстренного останова (основное питание). АВ аварийно отключен" Name="Uosn_BEO_AOF" Type="BOOL" UUID="74075dfe28d1435e81dae5cc59092436"/>
+        <Field Comment="Технологические розетки ~12 В (XS1, XS2). АВ 220 В включен" Name="Jack_XS12_En" Type="BOOL" UUID="1d85d8b2e4334c04a28b98f29430ed37"/>
+        <Field Comment="Технологические розетки ~12 В (XS1, XS2). АВ 220 В аварийно отключен" Name="Jack_XS12_AOF" Type="BOOL" UUID="f3b5892b065942cf92b298f786757102"/>
+        <Field Comment="Кондиционер блока  электротехнического 3 (АЕМ3.1). АВ 12 В включен" Name="Cool3_ETO_12V_En" Type="BOOL" UUID="ca19a3f1139c46009c2946e1ae7067d7"/>
+        <Field Comment="Кондиционер блока  электротехнического 3 (АЕМ3.1). АВ 12 В аварийно отключен" Name="Cool3_ETO_12V_AOF" Type="BOOL" UUID="d9b464d6ef0e4d55bfa48b7fa4eabbb8"/>
+        <Field Comment="Кондиционер блока  электротехнического 3 (АЕМ3.1). Питание включено" Name="Cool3_ETO_En" Type="BOOL" UUID="ba5fb1cdc81a42cdabfd0b5606604af9"/>
+        <Field Comment="Кондиционер блока  электротехнического 3 (АЕМ3.1). АВ аварийно отключен" Name="Cool3_ETO_AOF" Type="BOOL" UUID="63b00b0d06724448ae01b4c27a6d973c"/>
+        <Field Comment="Резерв" Name="Res_70" Type="BOOL" UUID="ef2fa1653fcc49279c682d4a620e7887"/>
+        <Field Comment="Резерв" Name="Res_71" Type="BOOL" UUID="6b6f1ada85174a8ab884dceee96e0cce"/>
+        <Field Comment="Шкаф АВР. Ввод 1 ~400 В.АВ включен" Name="NKU_GPA_Q1_En" Type="BOOL" UUID="dc66aa523fbe4f2382a55841b0074cdd"/>
+        <Field Comment="Шкаф АВР. Ввод 1 ~400 В.АВ аварийно отключен" Name="NKU_GPA_Q1_AOF" Type="BOOL" UUID="2699d10b770b40099014f5795dcfa825"/>
+        <Field Comment="Шкаф АВР. Ввод 1 ~400 В.УЗИП исправно" Name="NKU_GPA_Q1_UZIP_ok" Type="BOOL" UUID="676b4f709d1e4c6e9a28fd5d90fcb96d"/>
+        <Field Comment="Резерв" Name="Res_72" Type="BOOL" UUID="380332d539734bd1bee1b7564e56ab48"/>
+        <Field Comment="Шкаф АВР. Ввод 2 ~400 В.АВ включен" Name="NKU_GPA_Q2_En" Type="BOOL" UUID="0ffada78b6e74ebbbbafa199ec42ae58"/>
+        <Field Comment="Шкаф АВР. Ввод 2 ~400 В.АВ аварийно отключен" Name="NKU_GPA_Q2_AOF" Type="BOOL" UUID="2235304618eb4b8c9f1e38e3f220a383"/>
+        <Field Comment="Шкаф АВР. Ввод 2 ~400 В.УЗИП исправно" Name="NKU_GPA_Q2_UZIP_ok" Type="BOOL" UUID="a9274473c7364cca99dabc80d055494e"/>
+        <Field Comment="Резерв" Name="Res_73" Type="BOOL" UUID="80a47032cb384094aace24c42dc95ec1"/>
+        <Field Comment="Шкаф АВР. Ввод 3 ~400 В.АВ включен" Name="NKU_GPA_Q3_En" Type="BOOL" UUID="765aed43e5e249d797bfa3614e045f5b"/>
+        <Field Comment="Шкаф АВР. Ввод 3 ~400 В.АВ аварийно отключен" Name="NKU_GPA_Q3_AOF" Type="BOOL" UUID="9eaf07050c0040e5a82c5cd6488e788e"/>
+        <Field Comment="Шкаф АВР. Ввод 3 ~400 В.УЗИП исправно" Name="NKU_GPA_Q3_UZIP_ok" Type="BOOL" UUID="e117dc023be94fe5ad1913714f75e060"/>
+        <Field Comment="Резерв" Name="Res_74" Type="BOOL" UUID="f86e14c492a4404486ed961d540245db"/>
+        <Field Comment="Шкаф АВР. Секционный. АВ включен" Name="NKU_GPA_QS_En" Type="BOOL" UUID="89f7676e83d34bd38d119b29457963a7"/>
+        <Field Comment="Шкаф АВР. Секционный. АВ аварийно отключен" Name="NKU_GPA_QS_AOF" Type="BOOL" UUID="186738b682e94492899d4bfb8c09593b"/>
+        <Field Comment="Ввод для питания стартера. Готовность" Name="NKU_GPA_Q_ES_Rdy" Type="BOOL" UUID="c06655dd16eb4ece8a5b10779ed75abc"/>
+        <Field Comment="Резерв" Name="Res_75" Type="BOOL" UUID="d923c5da7e064b8e9fff1c14ba912763"/>
+        <Field Comment="Освещение дверей (уличное). Готовность" Name="Lamp_Dver_out_Rdy" Type="BOOL" UUID="4fb44a0bdbe74570a6cb8d9a0ea99bda"/>
+        <Field Comment="Освещение дверей (уличное). Включено" Name="Lamp_Dver_out_ON" Type="BOOL" UUID="c0d7b839da114de6aa9249a78a43e3ef"/>
+        <Field Comment="Освещение дверей (уличное). АВ аварийно отключен" Name="Lamp_Dver_out_AOF" Type="BOOL" UUID="b63a35ddb5f946d0ad97e795def82c81"/>
+        <Field Comment="Освещение дверей (уличное). Нет управления с ПМУ" Name="Lamp_Dver_out_nMU" Type="BOOL" UUID="38115bbfaba04aecbcea67ebc338b913"/>
+        <Field Comment="Освещение ангара. Готовность" Name="Lamp_ang_Rdy" Type="BOOL" UUID="c24f5ce3d74d464b900e78b4fd602ea1"/>
+        <Field Comment="Освещение ангара. Включено" Name="Lamp_ang_ON" Type="BOOL" UUID="0725cb59bae743e9904acb1ffb640ad3"/>
+        <Field Comment="Освещение ангара. АВ аварийно отключен" Name="Lamp_ang_AOF" Type="BOOL" UUID="4e015e0ef1684d63b65601fa258e4c84"/>
+        <Field Comment="Освещение ангара. Нет управления с ПМУ" Name="Lamp_ang_nMU" Type="BOOL" UUID="161d55fd10814394946a57f0e34da5ee"/>
+        <Field Comment="Освещение блока ГТД. Готовность" Name="Lamp_OD_Rdy" Type="BOOL" UUID="31a73eb4132e42d98f87f483db8d53ef"/>
+        <Field Comment="Освещение блока ГТД. Включено" Name="Lamp_OD_ON" Type="BOOL" UUID="9baa3de58ccd44eaa44603678e215664"/>
+        <Field Comment="Освещение блока ГТД. АВ аварийно отключен" Name="Lamp_OD_AOF" Type="BOOL" UUID="1f2dcfefb6ad41f49265106fa7a7a30a"/>
+        <Field Comment="Освещение блока ГТД. Нет управления с ПМУ" Name="Lamp_OD_nMU" Type="BOOL" UUID="6bf319adc9eb45deb9e9a543a26df9e3"/>
+        <Field Comment="Освещение ВОУ. Готовность" Name="Lamp_VOU_Rdy" Type="BOOL" UUID="e5f7bd2a59dc41b9aab526622b64e318"/>
+        <Field Comment="Освещение ВОУ. Включено" Name="Lamp_VOU_ON" Type="BOOL" UUID="2a42a979a99148a4918efb55dbd7cd86"/>
+        <Field Comment="Освещение ВОУ. АВ аварийно отключен" Name="Lamp_VOU_AOF" Type="BOOL" UUID="62f6f9b159514f0f9976230708a20bf5"/>
+        <Field Comment="Освещение ВОУ. Нет управления с ПМУ" Name="Lamp_VOU_nMU" Type="BOOL" UUID="650ea9d5fde04fc4a7dfa172abf67efb"/>
+        <Field Comment="Освещение дверей уличное (блока электротехнического) EL5, EL6. Готовность" Name="Lamp_Dver_ETO_Rdy" Type="BOOL" UUID="ff40976a9025488bac4272b3e8e194a7"/>
+        <Field Comment="Освещение дверей уличное (блока электротехнического) EL5, EL6. Включено" Name="Lamp_Dver_ETO_ON" Type="BOOL" UUID="e91090bb83e042439173185e95c235a1"/>
+        <Field Comment="Освещение дверей уличное (блока электротехнического) EL5, EL6. АВ аварийно отключен" Name="Lamp_Dver_ETO_AOF" Type="BOOL" UUID="8dedf6585a1c460e8586459aca3063e3"/>
+        <Field Comment="Освещение дверей уличное (блока электротехнического) EL5, EL6. Нет управления с ПМУ" Name="Lamp_Dver_ETO_nMU" Type="BOOL" UUID="fba844e921234e0290c5c150b5d271f5"/>
+        <Field Comment="Освещение блока электротехнического (рабочее) EL1...EL4. Готовность" Name="Lamp_ETO_Rdy" Type="BOOL" UUID="9e2de26550f84559bf7dcb0e51b4cedc"/>
+        <Field Comment="Освещение блока электротехнического (рабочее) EL1...EL4. Включено" Name="Lamp_ETO_ON" Type="BOOL" UUID="f34fdc9e6fe749f4bb36cf093717a0c9"/>
+        <Field Comment="Освещение блока электротехнического (рабочее) EL1...EL4. АВ аварийно отключен" Name="Lamp_ETO_AOF" Type="BOOL" UUID="46070f54b6264faf850e2fe5041fce3f"/>
+        <Field Comment="Освещение блока электротехнического (рабочее) EL1...EL4. Нет управления с ПМУ" Name="Lamp_ETO_nMU" Type="BOOL" UUID="2fd0ca3818d3485898291dcc3cd8059d"/>
+        <Field Comment="Ремонтное освещение (~12 В). АВ 220 В включен" Name="Lamp_Rem_Rdy" Type="BOOL" UUID="d01150c50cc14cf8baf0ab52ffe21fb4"/>
+        <Field Comment="Ремонтное освещение (~12 В). АВ 220 В аварийно отключен" Name="Lamp_Rem_ON" Type="BOOL" UUID="39183efeb5454ad4a0560aa6e2bcbba3"/>
+        <Field Comment="Ремонтное освещение (~12 В). АВ 12 В включен" Name="Lamp_Rem_AOF" Type="BOOL" UUID="b24df9ad779b4fdaaf6053bbabc0e89a"/>
+        <Field Comment="Ремонтное освещение (~12 В). АВ 12 В аварийно отключен" Name="Lamp_Rem_nMU" Type="BOOL" UUID="19b7e0cab87d4758be627811bcdec403"/>
+        <Field Comment="ИБП. Для шкафа гарантированного питания. АВ включен" Name="UPS_NKU_En" Type="BOOL" UUID="0759e11c88474e08a796d635a36677d5"/>
+        <Field Comment="ИБП. Для шкафа гарантированного питания. АВ аварийно отключен" Name="UPS_NKU_AOF" Type="BOOL" UUID="3b2ca01087df4d75967d9682edb6f9a6"/>
+        <Field Comment="Резерв" Name="Res_76" Type="BOOL" UUID="282e03e3b61145a285cf58bb14511b1a"/>
+        <Field Comment="Резерв" Name="Res_77" Type="BOOL" UUID="28ccff7ae75b47af9d3b95e35f8875fd"/>
+        <Field Comment="Резерв (освещение). Готовность" Name="Res_78" Type="BOOL" UUID="4b8c9765d5b5487b8a32dd194ce1ff69"/>
+        <Field Comment="Резерв (освещение). Включено" Name="Res_79" Type="BOOL" UUID="4cf9d27eef23401bb018c153a52fd156"/>
+        <Field Comment="Резерв (освещение). АВ аварийно отключен" Name="Res_80" Type="BOOL" UUID="2a283455ae6344309ade49f9d29eecee"/>
+        <Field Comment="Резерв (освещение). Резерв" Name="Res_81" Type="BOOL" UUID="fa42b603173c470085660a4ab86db231"/>
+        <Field Comment="Электронагреватели шкафов КИПиА. Готовность" Name="EN_SHK_KIP_Rdy" Type="BOOL" UUID="7ed7e2e4958948e7946de893d0d9021f"/>
+        <Field Comment="Электронагреватели шкафов КИПиА. Включено" Name="EN_SHK_KIP_ON" Type="BOOL" UUID="0badff2d6464497eb63615679c87a998"/>
+        <Field Comment="Электронагреватели шкафов КИПиА. АВ аварийно отключен" Name="EN_SHK_KIP_AOF" Type="BOOL" UUID="285bd7315b5b434181db23474f1553f6"/>
+        <Field Comment="Электронагреватели шкафов КИПиА. Резерв" Name="EN_SHK_KIP_nMU" Type="BOOL" UUID="16206aaac60042018f340fb7a5b35013"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС1. Готовность" Name="EN_Pipe_FS1_Rdy" Type="BOOL" UUID="0515b02fd18942488b7171d99e512b75"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС1. Включено" Name="EN_Pipe_FS1_ON" Type="BOOL" UUID="a82ba1a24d884436a0bfefba65b1a2f0"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС1. АВ аварийно отключен" Name="EN_Pipe_FS1_AOF" Type="BOOL" UUID="c01398cb8a374050ae516d1da069b602"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС1. Резерв" Name="EN_Pipe_FS1_nMU" Type="BOOL" UUID="77906d96815644a3852d6c0e00141581"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС2. Готовность" Name="EN_Pipe_FS2_Rdy" Type="BOOL" UUID="0cf731a5502e45e6a5cfefd8848fa528"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС2. Включено" Name="EN_Pipe_FS2_ON" Type="BOOL" UUID="5ad93f9cfab4483eab594e52c6df5ebf"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС2. АВ аварийно отключен" Name="EN_Pipe_FS2_AOF" Type="BOOL" UUID="35dd8fce1a7947d9807fce1b9b2dce46"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС2. Резерв" Name="EN_Pipe_FS2_nMU" Type="BOOL" UUID="1a9e3029efa14424b5cadff89919169a"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС3. Готовность" Name="EN_Pipe_FS3_Rdy" Type="BOOL" UUID="c76c124b48274816bd9ac6c82ccab63e"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС3. Включено" Name="EN_Pipe_FS3_ON" Type="BOOL" UUID="ab730a96b2c141348fbe408f850c142b"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС3. АВ аварийно отключен" Name="EN_Pipe_FS3_AOF" Type="BOOL" UUID="4e546c7a8eab46a09c3518d80f9f5d5a"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод ФС3. Резерв" Name="EN_Pipe_FS3_nMU" Type="BOOL" UUID="0657be1b0dfa4bafbaa1a8b85a7c4dcb"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод №9, №10. Готовность" Name="EN_Pipe9_10_Rdy" Type="BOOL" UUID="848a0d8886f0499c9404274f0194f8d0"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод №9, №10. Включено" Name="EN_Pipe9_10_ON" Type="BOOL" UUID="9d773f1767034fcf95ffb8543a988a1b"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод №9, №10. АВ аварийно отключен" Name="EN_Pipe9_10_AOF" Type="BOOL" UUID="5d226e31c60548bcb03663398d341e16"/>
+        <Field Comment="Электрообогрев воздухопроводов трубопровод №9, №10. Резерв" Name="EN_Pipe9_10_nMU" Type="BOOL" UUID="61a879450ef0429a827c6279d9ba9b7b"/>
+        <Field Comment="Электронагреватель трубопроводов маслосистемы ГТД (вне помещений). Готовность" Name="EN_Pipe_GTD_Rdy" Type="BOOL" UUID="9262f90b4d2a49eeb230afa75dd9d97d"/>
+        <Field Comment="Электронагреватель трубопроводов маслосистемы ГТД (вне помещений). Включено" Name="EN_Pipe_GTD_ON" Type="BOOL" UUID="414ea62f95a246be89002e3d110eca3c"/>
+        <Field Comment="Электронагреватель трубопроводов маслосистемы ГТД (вне помещений). АВ аварийно отключен" Name="EN_Pipe_GTD_AOF" Type="BOOL" UUID="35aa7e82ca3b4a4f8bd32983d392676b"/>
+        <Field Comment="Электронагреватель трубопроводов маслосистемы ГТД (вне помещений). Нет управления с ПМУ" Name="EN_Pipe_GTD_nMU" Type="BOOL" UUID="acef27989cd843bbbf3823fd44cf3437"/>
+        <Field Comment="Электронагреватели клапанов вентиляции турбоблока. Нагреватели клапанов байпасных ВОУ. Нагреватель расходомера воздуха. Нагреватели клапанов ангара. Готовность" Name="EN_Kl_Vn_Rdy" Type="BOOL" UUID="9a728ceb30d2416c8c4a4d62a5a6107f"/>
+        <Field Comment="Электронагреватели клапанов вентиляции турбоблока. Нагреватели клапанов байпасных ВОУ. Нагреватель расходомера воздуха. Нагреватели клапанов ангара. Включено" Name="EN_Kl_Vn_ON" Type="BOOL" UUID="304088cbd2c74400ba33194525f110cc"/>
+        <Field Comment="Электронагреватели клапанов вентиляции турбоблока. Нагреватели клапанов байпасных ВОУ. Нагреватель расходомера воздуха. Нагреватели клапанов ангара. АВ аварийно отключе" Name="EN_Kl_Vn_AOF" Type="BOOL" UUID="a6e5834f36b84237b4fdd464a2a6e45c"/>
+        <Field Comment="Электронагреватели клапанов вентиляции турбоблока. Нагреватели клапанов байпасных ВОУ. Нагреватель расходомера воздуха. Нагреватели клапанов ангара. Нет управления с ПМУ" Name="EN_Kl_Vn_nMU" Type="BOOL" UUID="cc4cc729f2054c689fd8e509529329e5"/>
+        <Field Comment="Электронагреватель 1 МО редуктора. Готовность" Name="TEN1_MOR_Rdy" Type="BOOL" UUID="6fff9d96e5a54994ac64b5d4414b656b"/>
+        <Field Comment="Электронагреватель 1 МО редуктора. Включено" Name="TEN1_MOR_ON" Type="BOOL" UUID="5693f0b0289e4a2f81c926d0ebbd86e4"/>
+        <Field Comment="Электронагреватель 1 МО редуктора. АВ аварийно отключен" Name="TEN1_MOR_AOF" Type="BOOL" UUID="7da7c5dedc21471e97f63ba4e0cbdf1b"/>
+        <Field Comment="Электронагреватель 1 МО редуктора. Нет управления с ПМУ" Name="TEN1_MOR_nMU" Type="BOOL" UUID="b99a84f28f2a4927aff21a83e3d01e74"/>
+        <Field Comment="Электронагреватель МО компрессора. Готовность" Name="TEN_MON_Rdy" Type="BOOL" UUID="7518417e29d14a468fa36b9540e39052"/>
+        <Field Comment="Электронагреватель МО компрессора. Включено" Name="TEN_MON_ON" Type="BOOL" UUID="909bc2c4b0c34744a79fb1cd0805da94"/>
+        <Field Comment="Электронагреватель МО компрессора. АВ аварийно отключен" Name="TEN_MON_AOF" Type="BOOL" UUID="3d8a441e6ae840fc92aa70782122b3c9"/>
+        <Field Comment="Электронагреватель МО компрессора. Нет управления с ПМУ" Name="TEN_MON_nMU" Type="BOOL" UUID="9ad863d0e2e74accbf89e9a7d7f8755d"/>
+        <Field Comment="Электронагреватель МО ГТД. Готовность" Name="TEN_MOD_Rdy" Type="BOOL" UUID="b73de73db8784268811758008aa9e4f7"/>
+        <Field Comment="Электронагреватель МО ГТД. Включено" Name="TEN_MOD_ON" Type="BOOL" UUID="21efef8bdd9f4f6899495250e5f70952"/>
+        <Field Comment="Электронагреватель МО ГТД. АВ аварийно отключен" Name="TEN_MOD_AOF" Type="BOOL" UUID="65c4dfcd10784d4c8517fda349c33d9b"/>
+        <Field Comment="Электронагреватель МО ГТД. Нет управления с ПМУ" Name="TEN_MOD_nMU" Type="BOOL" UUID="275a8f8ecfb24010a4dcd1f7ada1ef9f"/>
+        <Field Comment="Электронагреватель № 1 маслобака компрессора. Готовность" Name="TEN1_MBN_Rdy" Type="BOOL" UUID="d07c20402556412c8c6804c0ceac92d3"/>
+        <Field Comment="Электронагреватель № 1 маслобака компрессора. Включено" Name="TEN1_MBN_ON" Type="BOOL" UUID="2da08c0b6f4e403bb091c076c0723747"/>
+        <Field Comment="Электронагреватель № 1 маслобака компрессора. АВ аварийно отключен" Name="TEN1_MBN_AOF" Type="BOOL" UUID="182cd0676b564acba2edb09d114a1510"/>
+        <Field Comment="Электронагреватель № 1 маслобака компрессора. Нет управления с ПМУ" Name="TEN1_MBN_nMU" Type="BOOL" UUID="66c501b502594f00b59d269c92d5a531"/>
+        <Field Comment="Электронагреватель № 2 маслобака компрессора. Готовность" Name="TEN2_MBN_Rdy" Type="BOOL" UUID="6504c08100164e1fbed30422239035b9"/>
+        <Field Comment="Электронагреватель № 2 маслобака компрессора. Включено" Name="TEN2_MBN_ON" Type="BOOL" UUID="066add51e83d451bb5c24bc500610990"/>
+        <Field Comment="Электронагреватель № 2 маслобака компрессора. АВ аварийно отключен" Name="TEN2_MBN_AOF" Type="BOOL" UUID="2f415b0d05954d0ebc68319f73a49fe0"/>
+        <Field Comment="Электронагреватель № 2 маслобака компрессора. Нет управления с ПМУ" Name="TEN2_MBN_nMU" Type="BOOL" UUID="d0a4b0e596404fe58c5a18060c74bc43"/>
+        <Field Comment="Электронагреватель № 3 маслобака компрессора. Готовность" Name="TEN3_MBN_Rdy" Type="BOOL" UUID="92ac650675ef4787897bd18197812fe5"/>
+        <Field Comment="Электронагреватель № 3 маслобака компрессора. Включено" Name="TEN3_MBN_ON" Type="BOOL" UUID="ee9509acc42744d5aac0641410613616"/>
+        <Field Comment="Электронагреватель № 3 маслобака компрессора. АВ аварийно отключен" Name="TEN3_MBN_AOF" Type="BOOL" UUID="28c32ebe8d214fc69417734b0a97eb30"/>
+        <Field Comment="Электронагреватель № 3 маслобака компрессора. Нет управления с ПМУ" Name="TEN3_MBN_nMU" Type="BOOL" UUID="df07b14e1d2747709132ec16ce977f30"/>
+        <Field Comment="Резерв. Готовность" Name="Res_87" Type="BOOL" UUID="e743639d05974817bd4088a6b9b9c0cf"/>
+        <Field Comment="Резерв. Включено" Name="Res_88" Type="BOOL" UUID="4d21450371ed4230b4607652208d0211"/>
+        <Field Comment="Резерв. АВ аварийно отключен" Name="Res_89" Type="BOOL" UUID="0f806947c9bd4fa99f0397f7778fd900"/>
+        <Field Comment="Резерв. Нет управления с ПМУ" Name="Res_90" Type="BOOL" UUID="01214776d01c448595013d6be4ea6bca"/>
+        <Field Comment="Электрокалорифер отсека пожаротушения ГТД. Готовность" Name="EK_OPT_Rdy" Type="BOOL" UUID="9f5533a211b041478deca9f8ab9be161"/>
+        <Field Comment="Электрокалорифер отсека пожаротушения ГТД. Включено" Name="EK_OPT_ON" Type="BOOL" UUID="43a28a2017b24e6ca665eab5cd7b14a7"/>
+        <Field Comment="Электрокалорифер отсека пожаротушения ГТД. АВ аварийно отключен" Name="EK_OPT_AOF" Type="BOOL" UUID="493de41d941341af8c8e49d4af7075e6"/>
+        <Field Comment="Электрокалорифер отсека пожаротушения ГТД. Нет управления с ПМУ" Name="EK_OPT_nMU" Type="BOOL" UUID="70a2d90f490440de8692368a6717579d"/>
+        <Field Comment="Электронагреватель 1 масла в маслобаке редуктора. Готовность" Name="TEN1_MBR_Rdy" Type="BOOL" UUID="978eb2b3b8a54d3b8137d83591a5c683"/>
+        <Field Comment="Электронагреватель 1 масла в маслобаке редуктора. Включено" Name="TEN1_MBR_ON" Type="BOOL" UUID="61216bcd98ca4a7e834045d782443619"/>
+        <Field Comment="Электронагреватель 1 масла в маслобаке редуктора. АВ аварийно отключен" Name="TEN1_MBR_AOF" Type="BOOL" UUID="490f6540ee784067ab266c55076dbd97"/>
+        <Field Comment="Электронагреватель 1 масла в маслобаке редуктора. Нет управления с ПМУ" Name="TEN1_MBR_nMU" Type="BOOL" UUID="d17764d7e47b4daba2d0e223f9a8e3ea"/>
+        <Field Comment="Электронагреватель 2 масла в маслобаке редуктора. Готовность" Name="TEN2_MBR_Rdy" Type="BOOL" UUID="16f31050501941068ddb265d0c0f85b5"/>
+        <Field Comment="Электронагреватель 2 масла в маслобаке редуктора. Включено" Name="TEN2_MBR_ON" Type="BOOL" UUID="16bea5b631d9437f9c87c67c308b45df"/>
+        <Field Comment="Электронагреватель 2 масла в маслобаке редуктора. АВ аварийно отключен" Name="TEN2_MBR_AOF" Type="BOOL" UUID="868fcab64c9f4a64b2e256969f27bbc4"/>
+        <Field Comment="Электронагреватель 2 масла в маслобаке редуктора. Нет управления с ПМУ" Name="TEN2_MBR_nMU" Type="BOOL" UUID="0b2593b9e66145d09929d7a44e3f4403"/>
+        <Field Comment="Электронагреватель 3 масла в маслобаке редуктора. Готовность" Name="TEN3_MBR_Rdy" Type="BOOL" UUID="723cd67c91cd487db5dc2451b3bd3cc0"/>
+        <Field Comment="Электронагреватель 3 масла в маслобаке редуктора. Включено" Name="TEN3_MBR_ON" Type="BOOL" UUID="0f38d83baf0c4181af654ecdbd2d7e9a"/>
+        <Field Comment="Электронагреватель 3 масла в маслобаке редуктора. АВ аварийно отключен" Name="TEN3_MBR_AOF" Type="BOOL" UUID="d68911cce43b4e00a087933a7696ef22"/>
+        <Field Comment="Электронагреватель 3 масла в маслобаке редуктора. Нет управления с ПМУ" Name="TEN3_MBR_nMU" Type="BOOL" UUID="15ef85a7693e428fa6a1d603a7746ceb"/>
+        <Field Comment="Резерв" Name="Res_157" Type="BOOL" UUID="2f702b4e1a29429ea45c839969098511"/>
+        <Field Comment="Электронагреватель 4 масла в маслобаке редуктора. Готовность" Name="TEN4_MBR_Rdy" Type="BOOL" UUID="3259c4e1c30041969a11e4da8a894f24"/>
+        <Field Comment="Электронагреватель 4 масла в маслобаке редуктора. Включено" Name="TEN4_MBR_ON" Type="BOOL" UUID="e33c2cb99b064f42bf2b7b428e88b50b"/>
+        <Field Comment="Электронагреватель 4 масла в маслобаке редуктора. АВ аварийно отключен" Name="TEN4_MBR_AOF" Type="BOOL" UUID="0763a98f3c8d4d63a98f26d6e5fb159a"/>
+        <Field Comment="Электронагреватель 4 масла в маслобаке редуктора. Нет управления с ПМУ" Name="TEN4_MBR_nMU" Type="BOOL" UUID="5e2f8ed2cbb648568bd0811338b147a9"/>
+        <Field Comment="Электронагреватель 2 МО редуктора. Готовность" Name="TEN2_MOR_Rdy" Type="BOOL" UUID="466bb356d49e485da44e60959f05338f"/>
+        <Field Comment="Электронагреватель 2 МО редуктора. Включено" Name="TEN2_MOR_ON" Type="BOOL" UUID="60f676627a494a6eb0821f929d1f0c2b"/>
+        <Field Comment="Электронагреватель 2 МО редуктора. АВ аварийно отключен" Name="TEN2_MOR_AOF" Type="BOOL" UUID="7fda49e2428e4adfb41ff09fcd681046"/>
+        <Field Comment="Электронагреватель 2 МО редуктора. Нет управления с ПМУ" Name="TEN2_MOR_nMU" Type="BOOL" UUID="58b69e1378dd42aab0ff1b373bd420a7"/>
+        <Field Comment="Резерв (нагреватель). Готовность" Name="Res_91" Type="BOOL" UUID="3b99d2d910ed4ae1b1b347287ad9be2d"/>
+        <Field Comment="Резерв (нагреватель). Включено" Name="Res_92" Type="BOOL" UUID="6001886ef75746e2a4cb578cc8eb7d6f"/>
+        <Field Comment="Резерв (нагреватель). АВ аварийно отключен" Name="Res_93" Type="BOOL" UUID="c23e75461d2548cf917b0693f89fae43"/>
+        <Field Comment="Резерв (нагреватель). Нет управления с ПМУ" Name="Res_94" Type="BOOL" UUID="332b509695b4479f943dcc4db2096cb5"/>
+        <Field Comment="Резерв (нагреватель). Готовность" Name="Res_95" Type="BOOL" UUID="2ffadeb2108245caa1cb1a9cf7d02a15"/>
+        <Field Comment="Резерв (нагреватель). Включено" Name="Res_96" Type="BOOL" UUID="b4efc91d1b754ce69d8a0c84abc730a9"/>
+        <Field Comment="Резерв (нагреватель). АВ аварийно отключен" Name="Res_97" Type="BOOL" UUID="cc1b6a3a0b36428ca4671619c92831dc"/>
+        <Field Comment="Резерв (нагреватель). Нет управления с ПМУ" Name="Res_98" Type="BOOL" UUID="bedb2c34a398409089472404511d0a96"/>
+        <Field Comment="Резерв (нагреватель). Готовность" Name="Res_99" Type="BOOL" UUID="5eeb953227f9484aa7e430993565030d"/>
+        <Field Comment="Резерв (нагреватель). Включено" Name="Res_100" Type="BOOL" UUID="76549601c4954723ad8da3cf4102fa1d"/>
+        <Field Comment="Резерв (нагреватель). АВ аварийно отключен" Name="Res_101" Type="BOOL" UUID="62285f0be30943f78e7b03ecc2152fb4"/>
+        <Field Comment="Резерв (нагреватель). Нет управления с ПМУ" Name="Res_102" Type="BOOL" UUID="3508f81ada3746e398ece1ce372490f8"/>
+        <Field Comment="Электронагреватель кровли ангара. Готовность" Name="EN_ang_krovl_Rdy" Type="BOOL" UUID="6ef05a425781449b923da3aa9c5fa577"/>
+        <Field Comment="Электронагреватель кровли ангара. Включено" Name="EN_ang_krovl_ON" Type="BOOL" UUID="24d2c62dfef946d88bcf15b08435a467"/>
+        <Field Comment="Электронагреватель кровли ангара. АВ аварийно отключен" Name="EN_ang_krovl_AOF" Type="BOOL" UUID="956a748d4d1d457994e31148cd0618cc"/>
+        <Field Comment="Электронагреватель кровли ангара. Нет управления с ПМУ" Name="EN_ang_krovl_nMU" Type="BOOL" UUID="57411b4b096f433ba6fb69020a98624d"/>
+        <Field Comment="Резерв" Name="Res_103" Type="BOOL" UUID="360b15f4bfd54e98816e570aaa76ab9c"/>
+        <Field Comment="Резерв" Name="Res_104" Type="BOOL" UUID="d7b2f9d8ea5d436e9e78993b5355a471"/>
+        <Field Comment="Резерв" Name="Res_105" Type="BOOL" UUID="7fe70f5e51aa49f38ce713832ec3fd2b"/>
+        <Field Comment="Резерв" Name="Res_106" Type="BOOL" UUID="c127ed78059341a2ad507242470463ea"/>
+        <Field Comment="Резерв" Name="Res_107" Type="BOOL" UUID="ba9a22827d0742ccad4aece60ed2e0ed"/>
+        <Field Comment="Резерв" Name="Res_108" Type="BOOL" UUID="308ae85f03ad4b789a228c5c5b8526c8"/>
+        <Field Comment="Резерв" Name="Res_109" Type="BOOL" UUID="07e326b840e44084820b875f004371f4"/>
+        <Field Comment="Резерв" Name="Res_110" Type="BOOL" UUID="73cf32803a74476dbde6346cd3fe48ac"/>
+        <Field Comment="Резерв" Name="Res_111" Type="BOOL" UUID="09c56a57cc7e4b10a14ea0f5a931c34f"/>
+        <Field Comment="Резерв" Name="Res_112" Type="BOOL" UUID="54abd604baf947c48cf26c65f52142d7"/>
+        <Field Comment="Резерв" Name="Res_113" Type="BOOL" UUID="40ccefc7028040de83dbf235645a79fb"/>
+        <Field Comment="Резерв" Name="Res_114" Type="BOOL" UUID="93233dc92c9b4eec9f151ae5e04b2d28"/>
+        <Field Comment="Насос предпусковой прокачки масла компрессора. Готовность" Name="PNSN_Rdy" Type="BOOL" UUID="1a42dc984382416fb63e5cef46ee523b"/>
+        <Field Comment="Насос предпусковой прокачки масла компрессора. Включено" Name="PNSN_ON" Type="BOOL" UUID="e5bf785a3a7b416e96246b10548ae4f9"/>
+        <Field Comment="Насос предпусковой прокачки масла компрессора. АВ аварийно отключен" Name="PNSN_AOF" Type="BOOL" UUID="6d35315891f146d1b93bfc0afee49300"/>
+        <Field Comment="Насос предпусковой прокачки масла компрессора. Нет управления с ПМУ" Name="PNSN_nMU" Type="BOOL" UUID="ba20f1caa77a4505ae462c61ecab1fcb"/>
+        <Field Comment="Резерв" Name="Res_115" Type="BOOL" UUID="e05fbfa4605346be87ded181e4f2940e"/>
+        <Field Comment="Резерв" Name="Res_116" Type="BOOL" UUID="1ccf226465cb4a1e8a117c35a37ad61f"/>
+        <Field Comment="Резерв" Name="Res_117" Type="BOOL" UUID="eb56b84d1474484db88e72a4bfa3f2d6"/>
+        <Field Comment="Резерв" Name="Res_118" Type="BOOL" UUID="9b46230949704ac1b0a087eb267befbd"/>
+        <Field Comment="Вентилятор 1 МО ГТД. Готовность" Name="Vn1_MOD_Rdy" Type="BOOL" UUID="757d0b79635f4dc8be96517c9fd4a055"/>
+        <Field Comment="Вентилятор 1 МО ГТД. Включено" Name="Vn1_MOD_ON" Type="BOOL" UUID="bdd352aa81a84c88a7d2f86b8f26bc77"/>
+        <Field Comment="Вентилятор 1 МО ГТД. АВ аварийно отключен" Name="Vn1_MOD_AOF" Type="BOOL" UUID="2d4c7499120848e584c289770dbdca66"/>
+        <Field Comment="Вентилятор 1 МО ГТД. Нет управления с ПМУ" Name="Vn1_MOD_nMU" Type="BOOL" UUID="392e9a4fac85480280364d7f4aaeb2ed"/>
+        <Field Comment="Вентилятор 2 МО ГТД. Готовность" Name="Vn2_MOD_Rdy" Type="BOOL" UUID="65bccb2547b34166a796e84b734bcedb"/>
+        <Field Comment="Вентилятор 2 МО ГТД. Включено" Name="Vn2_MOD_ON" Type="BOOL" UUID="2ee4c1fc72a54cb2b34f1fce56691840"/>
+        <Field Comment="Вентилятор 2 МО ГТД. АВ аварийно отключен" Name="Vn2_MOD_AOF" Type="BOOL" UUID="3f34b2f1b7bb4c9e994ee95c56827db8"/>
+        <Field Comment="Вентилятор 2 МО ГТД. Нет управления с ПМУ" Name="Vn2_MOD_nMU" Type="BOOL" UUID="20b23ec81d014e27bc1100aa7420e51b"/>
+        <Field Comment="Вентилятор 1 МО редуктора. Готовность" Name="Vn1_MOR_Rdy" Type="BOOL" UUID="4fe26632560b4043a7b7e5bb58a7ef6e"/>
+        <Field Comment="Вентилятор 1 МО редуктора. Включено" Name="Vn1_MOR_ON" Type="BOOL" UUID="ede12217ec41443996d13caa5ef41aba"/>
+        <Field Comment="Вентилятор 1 МО редуктора. АВ аварийно отключен" Name="Vn1_MOR_AOF" Type="BOOL" UUID="cc42399ab25440249627f6bbdd17d522"/>
+        <Field Comment="Вентилятор 1 МО редуктора. Нет управления с ПМУ" Name="Vn1_MOR_nMU" Type="BOOL" UUID="23a504328ce84c4b97e51a156f456d05"/>
+        <Field Comment="Вентилятор 2 МО редуктора. Готовность" Name="Vn2_MOR_Rdy" Type="BOOL" UUID="b671bcb1513f45a8b28b36f398c7cbbf"/>
+        <Field Comment="Вентилятор 2 МО редуктора. Включено" Name="Vn2_MOR_ON" Type="BOOL" UUID="a5ddcf209662465aa2481c5691681d1c"/>
+        <Field Comment="Вентилятор 2 МО редуктора. АВ аварийно отключен" Name="Vn2_MOR_AOF" Type="BOOL" UUID="450632e4c3cd49cebf9e6d9a90bfab5b"/>
+        <Field Comment="Вентилятор 2 МО редуктора. Нет управления с ПМУ" Name="Vn2_MOR_nMU" Type="BOOL" UUID="edfd044b55aa497dbd357db4d5736d85"/>
+        <Field Comment="Вентилятор 1 МО компрессора. Готовность" Name="Vn1_MON_Rdy" Type="BOOL" UUID="d24f57bf22724232a2f8ba06765c4ec2"/>
+        <Field Comment="Вентилятор 1 МО компрессора. Включено" Name="Vn1_MON_ON" Type="BOOL" UUID="1e519bcea6954338863cb0572b4c1e64"/>
+        <Field Comment="Вентилятор 1 МО компрессора. АВ аварийно отключен" Name="Vn1_MON_AOF" Type="BOOL" UUID="be67091442b34f7db498ab3b4d2970be"/>
+        <Field Comment="Вентилятор 1 МО компрессора. Нет управления с ПМУ" Name="Vn1_MON_nMU" Type="BOOL" UUID="96a096a39d0b4de48583e79523014598"/>
+        <Field Comment="Вентилятор 2 МО компрессора. Готовность" Name="Vn2_MON_Rdy" Type="BOOL" UUID="60ca3252ce8d427ebf555bf9aa62aaca"/>
+        <Field Comment="Вентилятор 2 МО компрессора. Включено" Name="Vn2_MON_ON" Type="BOOL" UUID="e5682df79a9b4d1d95cc4c72fafcee5a"/>
+        <Field Comment="Вентилятор 2 МО компрессора. АВ аварийно отключен" Name="Vn2_MON_AOF" Type="BOOL" UUID="718d6be4743f453c80e87fee8d48e4c1"/>
+        <Field Comment="Вентилятор 2 МО компрессора. Нет управления с ПМУ" Name="Vn2_MON_nMU" Type="BOOL" UUID="226aed6438c84198861ea9f75bf6f387"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. Готовность" Name="KOMD_Rdy" Type="BOOL" UUID="7c19ca289c104bf5ac55ebc508bc9383"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. Открыто" Name="KOMD_ON" Type="BOOL" UUID="af5e760c3379479191c16e40d919ef5c"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. Закрыто" Name="KOMD_OF" Type="BOOL" UUID="5478082511e841ea8b83c2d99772d430"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. АВ аварийно отключен" Name="KOMD_AOF" Type="BOOL" UUID="f44196b0d87542829b91d1dc9bd306b9"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. Сработал моментный выключатель" Name="KOMD_Mom" Type="BOOL" UUID="98cbc1dc1e8842d296a150e1a545fe06"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. Открывается" Name="KOMD_isOn" Type="BOOL" UUID="0c88632983a64f90806943a39a27ff02"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. Закрывается" Name="KOMD_isOF" Type="BOOL" UUID="62f714d48bc8411bac1cc477b6f290fc"/>
+        <Field Comment="Кран подачи/отсечки масла в ГТД. Нет управления с ПМУ" Name="KOMD_nMU" Type="BOOL" UUID="43ecd447c0b7499e8f3b333f95fb6c38"/>
+        <Field Comment="Насос пусковой масла редуктора М17. Готовность" Name="PNSR_Rdy" Type="BOOL" UUID="9080d05faf5f4fbcbda486bba3bace99"/>
+        <Field Comment="Насос пусковой масла редуктора М17. Включено" Name="PNSR_ON" Type="BOOL" UUID="9aad59bc75564c74b78a30ecf2b741b9"/>
+        <Field Comment="Насос пусковой масла редуктора М17. АВ аварийно отключен" Name="PNSR_AOF" Type="BOOL" UUID="f872483ff54e433cb0df88cccc21d9b5"/>
+        <Field Comment="Насос пусковой масла редуктора М17. Нет управления с ПМУ" Name="PNSR_nMU" Type="BOOL" UUID="1042726fe26140a881043f93f8645f70"/>
+        <Field Comment="Резерв" Name="Res_119" Type="BOOL" UUID="fa370071908848bdb24664407cc9d554"/>
+        <Field Comment="Резерв" Name="Res_120" Type="BOOL" UUID="9811d6db16e04c7d8f361b4f867c2d96"/>
+        <Field Comment="Резерв" Name="Res_121" Type="BOOL" UUID="85cec4b7eb464231887a70828a541655"/>
+        <Field Comment="Резерв" Name="Res_122" Type="BOOL" UUID="d813700228b94be1a010ad38c6190966"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Готовность" Name="CNVO_Rdy" Type="BOOL" UUID="a8b5cf8559d043e79ad5cee82484d237"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Питание от БП" Name="CNVO_ON" Type="BOOL" UUID="defb02eeda12439db088011ef71fd590"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Питание от УПП" Name="CNVO_uppON" Type="BOOL" UUID="06d9137ed3d04c2989272c6920339eb2"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. АВ аварийно отключен" Name="CNVO_AOF" Type="BOOL" UUID="61eb9ca07b374416a54adeda90b77d78"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Резерв" Name="Res_123" Type="BOOL" UUID="727bfca6a3cb4d878b65103853aa4068"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Авария УПП" Name="CNVO_UPP_FLT" Type="BOOL" UUID="9f2885bb41034297a1379d6f6afe87ab"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Нет управления с ПМУ" Name="CNVO_nMU" Type="BOOL" UUID="c0ef121a7e4b4976a0dbf226e27f254a"/>
+        <Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Резерв" Name="Res_124" Type="BOOL" UUID="4299c8446cb7432a978be8dba5261dd4"/>
+        <Field Comment="Вентилятор 1 трансмиссии ГТД. Готовность" Name="VOT1_Rdy" Type="BOOL" UUID="95dd20bd028843a2a3153942b077200f"/>
+        <Field Comment="Вентилятор 1 трансмиссии ГТД. Включено" Name="VOT1_ON" Type="BOOL" UUID="a2d620ea55c94841b5955cbecc5a8955"/>
+        <Field Comment="Вентилятор 1 трансмиссии ГТД. АВ аварийно отключен" Name="VOT1_AOF" Type="BOOL" UUID="6f0bbebd6b4c4e3c9489aa68ff1e978d"/>
+        <Field Comment="Вентилятор 1 трансмиссии ГТД. Нет управления с ПМУ" Name="VOT1_nMU" Type="BOOL" UUID="7c3a87ac10014121a16a1016208577b8"/>
+        <Field Comment="Вентилятор 2 трансмиссии ГТД. Готовность" Name="VOT2_Rdy" Type="BOOL" UUID="7515671ef75f47be9411029e6c644410"/>
+        <Field Comment="Вентилятор 2 трансмиссии ГТД. Включено" Name="VOT2_ON" Type="BOOL" UUID="0769109150c6438b91c3c0f6affd34b6"/>
+        <Field Comment="Вентилятор 2 трансмиссии ГТД. АВ аварийно отключен" Name="VOT2_AOF" Type="BOOL" UUID="fcd19fd299804ba9a3d1e7313e24d72e"/>
+        <Field Comment="Вентилятор 2 трансмиссии ГТД. Нет управления с ПМУ" Name="VOT2_nMU" Type="BOOL" UUID="02cf00387fb1419c9cf92867b8d71deb"/>
+        <Field Comment="Вентилятор аварийный блока ГТД. Готовность" Name="VA_OD_Rdy" Type="BOOL" UUID="622c5f66cb0d406dbe5d443fc767b132"/>
+        <Field Comment="Вентилятор аварийный блока ГТД. Включено" Name="VA_OD_ON" Type="BOOL" UUID="3b307643e19d4e54b38eef8c698356a3"/>
+        <Field Comment="Вентилятор аварийный блока ГТД. АВ аварийно отключен" Name="VA_OD_AOF" Type="BOOL" UUID="d7ffc01b66404185847419a4b9f7dfb5"/>
+        <Field Comment="Вентилятор аварийный блока ГТД. Нет управления с ПМУ" Name="VA_OD_nMU" Type="BOOL" UUID="d1333caab99641dfa1c29f722a3f9ae6"/>
+        <Field Comment="Вентилятор 1 блока ГТД. Готовность" Name="VOD1_Rdy" Type="BOOL" UUID="8d6b8668d9f145e4b5cd520a30c443e7"/>
+        <Field Comment="Вентилятор 1 блока ГТД. Включено" Name="VOD1_ON" Type="BOOL" UUID="34545d4eb2504c509cf645c62716c79d"/>
+        <Field Comment="Вентилятор 1 блока ГТД. АВ аварийно отключен" Name="VOD1_AOF" Type="BOOL" UUID="9d068b773194463d81c56f42ca2747af"/>
+        <Field Comment="Вентилятор 1 блока ГТД. Нет управления с ПМУ" Name="VOD1_nMU" Type="BOOL" UUID="b0efc614279f4b54beea47d7b9f4d982"/>
+        <Field Comment="Вентилятор 2 блока ГТД. Готовность" Name="VOD2_Rdy" Type="BOOL" UUID="bee5a8a331fd41e78fb925f62b5a68cb"/>
+        <Field Comment="Вентилятор 2 блока ГТД. Включено" Name="VOD2_ON" Type="BOOL" UUID="075076c89e3e489094fe9f12fd2967f5"/>
+        <Field Comment="Вентилятор 2 блока ГТД. АВ аварийно отключен" Name="VOD2_AOF" Type="BOOL" UUID="8e32457b7ddf477db6227bb1fa041b2c"/>
+        <Field Comment="Вентилятор 2 блока ГТД. Нет управления с ПМУ" Name="VOD2_nMU" Type="BOOL" UUID="ab03bf8a352e4795aa43fbe4a4fc5be5"/>
+        <Field Comment="Насос пусковой масла ГТД. Готовность" Name="PNSD_Rdy" Type="BOOL" UUID="198739a221734857951c27c4088ede8f"/>
+        <Field Comment="Насос пусковой масла ГТД. Включено" Name="PNSD_ON" Type="BOOL" UUID="69f6f81d5ca74f2291ca80b65420404f"/>
+        <Field Comment="Насос пусковой масла ГТД. АВ аварийно отключен" Name="PNSD_AOF" Type="BOOL" UUID="f279bc7203cd4dcf85599e7700747c2b"/>
+        <Field Comment="Насос пусковой масла ГТД. Нет управления с ПМУ" Name="PNSD_nMU" Type="BOOL" UUID="83a96b73d45b4e5f93dd5b510b5d1ef5"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. Готовность" Name="Cooler_VON_Rdy" Type="BOOL" UUID="75f44ae6cfdb422bb3fd9fde84a84f60"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. Быстро" Name="Cooler_VON_Fast" Type="BOOL" UUID="540f539b937445e98ee702b1612f73c7"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. Медленно" Name="Cooler_VON_Slow" Type="BOOL" UUID="2eb84b91289746e090e471d1cdc20bda"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. АВ аварийно отключен" Name="Cooler_VON_AOF" Type="BOOL" UUID="afa4c32a7c9146b6a1722191369f9fc0"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. Резерв" Name="Res_125" Type="BOOL" UUID="39354f161bc14d4eb35cc1c6e958970a"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. Резерв" Name="Res_126" Type="BOOL" UUID="49072a3fb8094920a60e5a990006d0a4"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. Резерв" Name="Res_127" Type="BOOL" UUID="ec50395a4a434bedbe9aac829be5ee52"/>
+        <Field Comment="Драйкулер системы водяного охлаждения компрессора. Резерв" Name="Res_128" Type="BOOL" UUID="2b6072825ae04171b16b05c373a9358a"/>
+        <Field Comment="Резерв" Name="Res_129" Type="BOOL" UUID="e29c90112a9d4a749ed839fc4cfaa926"/>
+        <Field Comment="Резерв" Name="Res_130" Type="BOOL" UUID="87e82d0403f64064a2a13550197f3d01"/>
+        <Field Comment="Резерв" Name="Res_131" Type="BOOL" UUID="70c71fb8b0f645908a3a48ce99a67455"/>
+        <Field Comment="Резерв" Name="Res_132" Type="BOOL" UUID="de9baf1e910e459c99f141f6cd58167b"/>
+        <Field Comment="Резерв" Name="Res_133" Type="BOOL" UUID="43d23796a46a42fb9934c93c8b8db840"/>
+        <Field Comment="Резерв" Name="Res_134" Type="BOOL" UUID="b948d87931234e13914f972a5248c129"/>
+        <Field Comment="Резерв" Name="Res_135" Type="BOOL" UUID="65b628d87148466d8b3214f365b92270"/>
+        <Field Comment="Резерв" Name="Res_136" Type="BOOL" UUID="8abfec4b0df24170b5e6a48e50f1ee3a"/>
+        <Field Comment="Вентилятор системы загазованности ангара Готовность" Name="VVA_ang_Rdy" Type="BOOL" UUID="ff171fa3a94249f981658e0f47f23a94"/>
+        <Field Comment="Вентилятор системы загазованности ангара. Включено" Name="VVA_ang_ON" Type="BOOL" UUID="c99c01a59b454b2b839d4b546c9ebf2a"/>
+        <Field Comment="Вентилятор системы загазованности ангара. АВ аварийно отключен" Name="VVA_ang_AOF" Type="BOOL" UUID="0332989a695241ada8d5e1f475149633"/>
+        <Field Comment="Вентилятор системы загазованности ангара. Нет управления с ПМУ" Name="VVA_ang_nMU" Type="BOOL" UUID="4deb1e0c97104ba2a1f855a5a6de5f65"/>
+        <Field Comment="Резерв (эл. двигатель). Готовность" Name="Res_137" Type="BOOL" UUID="911c438158744cefbed73865fe3fc466"/>
+        <Field Comment="Резерв (эл. двигатель). Включено" Name="Res_138" Type="BOOL" UUID="07dfe82973f34e6eb9afc85e296d074f"/>
+        <Field Comment="Резерв (эл. двигатель). АВ аварийно отключен" Name="Res_139" Type="BOOL" UUID="8117d4d7876a4f9ab367b1122e9bacec"/>
+        <Field Comment="Резерв (эл. двигатель). Резерв" Name="Res_140" Type="BOOL" UUID="8374466038ce428c9a3c0622924f068d"/>
+        <Field Comment="Резерв (эл. двигатель). Готовность" Name="Res_141" Type="BOOL" UUID="9f5bccd4d86041a1b5de4dc57e14c4b8"/>
+        <Field Comment="Резерв (эл. двигатель). Включено" Name="Res_142" Type="BOOL" UUID="3e0c2bba51f84e5f8abaa1df89ed029f"/>
+        <Field Comment="Резерв (эл. двигатель). АВ аварийно отключен" Name="Res_143" Type="BOOL" UUID="e7131179dd074d1c8cac4e9299d4fd27"/>
+        <Field Comment="Резерв (эл. двигатель). Резерв" Name="Res_144" Type="BOOL" UUID="d0701bad8c0440959bf9c0f2ac1534ef"/>
+        <Field Comment="Резерв (эл. двигатель). Готовность" Name="Res_145" Type="BOOL" UUID="b2a340c71c714f07800c5c491bba558e"/>
+        <Field Comment="Резерв (эл. двигатель). Включено" Name="Res_146" Type="BOOL" UUID="fb4ea755d88444e2a8f13b91981609c7"/>
+        <Field Comment="Резерв (эл. двигатель). АВ аварийно отключен" Name="Res_147" Type="BOOL" UUID="79be7914f4c442f097e408771d646a37"/>
+        <Field Comment="Резерв (эл. двигатель). Резерв" Name="Res_148" Type="BOOL" UUID="d936513d1d0a4d8e9efc9666f15de95b"/>
+        <Field Comment="Ввод питания от ИБП. АВ включен" Name="NKU_GPA_UPS_Q_En" Type="BOOL" UUID="2ae19ceee3254feb82bd52cdac627277"/>
+        <Field Comment="Ввод питания от ИБП. АВ аварийно отключен" Name="NKU_GPA_UPS_Q_AOF" Type="BOOL" UUID="71f0597c5b9d4e52b3f454e05d6b03f7"/>
+        <Field Comment="Шины ГП. Напряжение в норме" Name="NKU_GPA_U_GarPit_ok" Type="BOOL" UUID="ea8aa9ec54534e3bbf6fd36f867a8a7c"/>
+        <Field Comment="Резерв" Name="Res_149" Type="BOOL" UUID="dbacc87e30d54d7589f9101afd7e500f"/>
+        <Field Comment="Вентиляция шкафа. Перегрев" Name="NKU_GPA_Vn_SHK_OverT" Type="BOOL" UUID="27850dd642a04f72bb885adef8fce2bb"/>
+        <Field Comment="Вентиляция шкафа. АВ включен" Name="NKU_GPA_Vn_SHK_En" Type="BOOL" UUID="f8764ba1e6294bd48235cdc2b420e987"/>
+        <Field Comment="Питание ШПТ. АВ включен" Name="NKU_GPA_DC_En" Type="BOOL" UUID="3c385648522549bc8fd00ec78341441f"/>
+        <Field Comment="Питание ШПТ. АВ аварийно отключен" Name="NKU_GPA_DC_AOF" Type="BOOL" UUID="e81070901b044945af649d8e065cdc2c"/>
+        <Field Comment="Резерв" Name="Res_150" Type="BOOL" UUID="b9d5be8a076c48aab53caffdc870dae6"/>
+        <Field Comment="Резерв" Name="Res_151" Type="BOOL" UUID="801c05c230bf4132ba4cd883a1b5511e"/>
+        <Field Comment="Резерв" Name="Res_152" Type="BOOL" UUID="38e69820ebcf4406aa4e4ac585cfd820"/>
+        <Field Comment="Резерв" Name="Res_153" Type="BOOL" UUID="5aab7e45279e445d99f1a8aaa185dca3"/>
+        <Field Comment="Резерв" Name="Res_154" Type="BOOL" UUID="4692297a050b4b23af439c6ea1f0b183"/>
+        <Field Comment="Резерв" Name="Res_155" Type="BOOL" UUID="9f605502c9a84815af481985be70b990"/>
+        <Field Comment="Резерв" Name="Res_156" Type="BOOL" UUID="b2c36f4aa9e545aaa54627e7fe50d895"/>
+        <Field Comment="Ввод 4 =220 В. АВ включен" Name="NKU_GPA_Q4_En" Type="BOOL" UUID="b2cf4956f1bf4f12bcedfde6efbd5245"/>
+        <Field Comment="Ввод 4 =220 В. АВ аварийно отключен" Name="NKU_GPA_Q4_AOF" Type="BOOL" UUID="d9a7ef0e6aad48cf98b5cc5f9f7b7755"/>
+        <Field Comment="Шины ПТ =220 В. Напряжение в норме" Name="NKU_GPA_U_DC220_ok" Type="BOOL" UUID="d467f286ba5c4eb196cb87bd085f589d"/>
+        <Field Comment="Шины ПТ =220 В. Сопротивление изоляции ниже нормы" Name="NKU_GPA_DC220_Rbad" Type="BOOL" UUID="628bc80ace6c4c0a9039a38e58788e94"/>
+        <Field Comment="Ввод 4 =220 В. УЗИП исправны" Name="NKU_GPA_Q4_UZIP_ok" Type="BOOL" UUID="aa12444e19c842b0a8a67c8b119f96b9"/>
+        <Field Comment="Шины ПТ =220 В. Резерв" Name="Res_158" Type="BOOL" UUID="cf5d47d805304003acf78405ba4a0c11"/>
+        <Field Comment="Шины ПТ =220 В. Резерв" Name="Res_159" Type="BOOL" UUID="1833dcd0db8643bab0834d60bd2d8351"/>
+        <Field Comment="Шины ПТ =220 В. Резерв" Name="Res_160" Type="BOOL" UUID="26c428e9bb414304bb3901d6f7d7ef9b"/>
+        <Field Comment="Освещение аварийное ангара. АВ включен" Name="Lamp_A_ang_En" Type="BOOL" UUID="0d0ea76a8733439ab4bea30fcef4687a"/>
+        <Field Comment="Освещение аварийное ангара.  Включено" Name="Lamp_A_ang_ON" Type="BOOL" UUID="d0acd362842e4eb884d9d583349fa588"/>
+        <Field Comment="Освещение аварийное турбоблока. АВ включен" Name="Lamp_A_OD_En" Type="BOOL" UUID="b297acdddff8436f9bd6c3c59a76bf39"/>
+        <Field Comment="Освещение аварийное турбоблока. Включено" Name="Lamp_A_OD_ON" Type="BOOL" UUID="db320b1182fb4b70b3646e1bde4f2552"/>
+        <Field Comment="Освещение аварийное БЭТ ГПА. АВ включен" Name="Lamp_A_ETO_En" Type="BOOL" UUID="df41882125214dec8ff054705122d099"/>
+        <Field Comment="Освещение аварийное БЭТ ГПА. Включено" Name="Lamp_A_ETO_ON" Type="BOOL" UUID="a39da0fc434b44acb6839dbb3a4782df"/>
+        <Field Comment="Резерв" Name="Res_161" Type="BOOL" UUID="aca6eaa8f9754f09b013e4bb66b64f44"/>
+        <Field Comment="Резерв" Name="Res_162" Type="BOOL" UUID="c78bc59b866341cabde5839229f7d205"/>
+        <Field Comment="Освещение аварийное эвакуационное. АВ включен" Name="Lamp_A_Ev_En" Type="BOOL" UUID="dcaac44d54e741af89f34f24d59b52d6"/>
+        <Field Comment="Электроосвещение крановых площадок ГПА (аварийное питание). АВ включен" Name="Lamp_A_Kr_En" Type="BOOL" UUID="6b155cce1e2a42029cd57eccce6dfb4c"/>
+        <Field Comment="Система агрегатной автоматики (аварийное питание). АВ включен" Name="Urez_SAU_En" Type="BOOL" UUID="1a3aa80b43be4cda8879790be852a257"/>
+        <Field Comment="Блок экстренного останова (аварийное питание). АВ включен" Name="Urez_BEO_En" Type="BOOL" UUID="7162fc7cadc444b28890b09bdf4f9d40"/>
+        <Field Comment="Шкафы управления кранов газовой обвязки (резерв). АВ включен" Name="Res_163" Type="BOOL" UUID="a3b085706ba1424190ee94ff9369a6ea"/>
+        <Field Comment="Система противопожарной автоматики (аварийное питание). АВ включен" Name="Urez_ASPS_En" Type="BOOL" UUID="28448eb1d82140ac933a47cfbefd88b0"/>
+        <Field Comment="СУВД НКУ ГПА (аварийное питание). АВ включен" Name="SUVD_A_En" Type="BOOL" UUID="c8af684d07434118b440a7633e4b3e9d"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_164" Type="BOOL" UUID="f38620f116784c8294da59f48ad8aaea"/>
+        <Field Comment="Шины ПТ =48 В. АВ БП включены" Name="NKU_GPA_DC48_En" Type="BOOL" UUID="2fa2c6be42394a44acec78fd0b9b92ee"/>
+        <Field Comment="Шины ПТ =48 В. Напряжение в норме" Name="NKU_GPA_U_DC48_ok" Type="BOOL" UUID="4ec3a23a6167490182e433476d356fc0"/>
+        <Field Comment="Шины ПТ =48 В. БП исправны" Name="NKU_GPA_BP_DC48_ok" Type="BOOL" UUID="582d740039f54295a3aecc0c3e311577"/>
+        <Field Comment="Резерв" Name="Res_165" Type="BOOL" UUID="0073d5deddde4da28a1ea62aed87c6af"/>
+        <Field Comment="Аппарат входной направляющий ГТД. АВ включен" Name="VNA_En" Type="BOOL" UUID="bd6c0356831042dca30104ee9a844d59"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_166" Type="BOOL" UUID="5d0be2d455114d12905386367c002bdc"/>
+        <Field Comment="Резерв" Name="Res_167" Type="BOOL" UUID="85180d9b40664513819cf98e7254943d"/>
+        <Field Comment="Резерв" Name="Res_168" Type="BOOL" UUID="ee0b2c101ae342f19ceb306a2640ef27"/>
+        <Field Comment="Шины ПТ =24 В. АВ БП включены" Name="NKU_GPA_DC24_En" Type="BOOL" UUID="dcdc3b1d2ab044ba9f2c505879a9e437"/>
+        <Field Comment="Шины ПТ =24 В. Напряжение в норме" Name="NKU_GPA_U_DC24_ok" Type="BOOL" UUID="e8be0f88851842c1b003d4bbdae540e8"/>
+        <Field Comment="Шины ПТ =24 В. БП исправны" Name="NKU_GPA_BP_DC24_ok" Type="BOOL" UUID="9f30dbb93d3c44399a4217e8f527a6d0"/>
+        <Field Comment="Резерв" Name="Res_169" Type="BOOL" UUID="c1f972782f814a9583e26776cfada855"/>
+        <Field Comment="Питание модулей УСО.  АВ включен" Name="U_USO_En" Type="BOOL" UUID="e2c1aea3528c4977b2d648ad066c7d4d"/>
+        <Field Comment="Питание исполнительных механизмов (аварийное питание).  АВ включен" Name="U_IM_A_En" Type="BOOL" UUID="1412fb29f4be4d09b785638fff24b356"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_170" Type="BOOL" UUID="144ef10b8f114d8e8b51b566d2524022"/>
+        <Field Comment="Резерв" Name="Res_171" Type="BOOL" UUID="2f5d9ba7e11f461c89bbaf85c16ca767"/>
+        <Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. АВ включен" Name="NKU_GPA_PLC_AC220_En" Type="BOOL" UUID="21b4e9c196ea4e8682cbc2f22f931e87"/>
+        <Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. АВ аварийно отключен" Name="NKU_GPA_PLC_AC220_AOF" Type="BOOL" UUID="7380fcf505844c24978f50ac4df14318"/>
+        <Field Comment="Питание ПЛК, линия =220 В. АВ включен" Name="NKU_GPA_PLC_DC220_En" Type="BOOL" UUID="8cbad6f1d58942158580064a7d20ef0b"/>
+        <Field Comment="Резерв" Name="Res_172" Type="BOOL" UUID="f49478f7ea2e43668fdb24afd95ab0fd"/>
+        <Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. УЗИП исправно" Name="NKU_GPA_PLC_AC220_UZIP_ok" Type="BOOL" UUID="ed67fdef4b46447ba42c66067da8a21b"/>
+        <Field Comment="Питание ПЛК, линия =220 В. УЗИП исправно" Name="NKU_GPA_PLC_DC220_UZIP_ok" Type="BOOL" UUID="4552ba8e24124047bda52ed1571582f8"/>
+        <Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. БП исправен" Name="NKU_GPA_PLC_AC220_BP_ok" Type="BOOL" UUID="e150bfb9ee57433088b102b586d319b8"/>
+        <Field Comment="Питание ПЛК, линия =220 В. БП исправен" Name="NKU_GPA_PLC_DC220_BP_ok" Type="BOOL" UUID="17e6188630be4c6dbbfde400074e95f3"/>
+        <Field Comment="Вентилятор 1 АВО1. Готовность БП" Name="AVOG1_Vn1_Rdy" Type="BOOL" UUID="58366339dc144dbcb01f01d7c73f5af5"/>
+        <Field Comment="Вентилятор 1 АВО1. Готовность УПП" Name="AVOG1_Vn1_uppRdy" Type="BOOL" UUID="cb8f4b96a8c14cd7ac8037f90bc0c710"/>
+        <Field Comment="Вентилятор 1 АВО1. Питание от БП" Name="AVOG1_Vn1_ON" Type="BOOL" UUID="777b44431ac94670babcb41087756ee6"/>
+        <Field Comment="Вентилятор 1 АВО1. Питание от УПП" Name="AVOG1_Vn1_uppON" Type="BOOL" UUID="b7e7a5c65c3d4059bd29bb575e302560"/>
+        <Field Comment="Вентилятор 1 АВО1. АВ аварийно отключен" Name="AVOG1_Vn1_AOF" Type="BOOL" UUID="3eaee22efaa64f11a0ab6a57b90d6525"/>
+        <Field Comment="Вентилятор 1 АВО1. Авария УПП" Name="AVOG1_Vn1_FLT" Type="BOOL" UUID="5b4788299f4c4bb198cae412a62fbf8d"/>
+        <Field Comment="Вентилятор 1 АВО1. Нет управления с ПМУ" Name="AVOG1_Vn1_nMU" Type="BOOL" UUID="00cfe3643ed84ba690612422be155d3e"/>
+        <Field Comment="Вентилятор 1 АВО1. Резерв" Name="Res_173" Type="BOOL" UUID="6989909c7a314dec9d5ae59e13da2374"/>
+        <Field Comment="Вентилятор 2 АВО1. Готовность БП" Name="AVOG1_Vn2_Rdy" Type="BOOL" UUID="ee755656000f4a188360452774bfeaa5"/>
+        <Field Comment="Вентилятор 2 АВО1. Готовность УПП" Name="AVOG1_Vn2_uppRdy" Type="BOOL" UUID="4cfe344352114c6db41776e750a8db7d"/>
+        <Field Comment="Вентилятор 2 АВО1. Питание от БП" Name="AVOG1_Vn2_ON" Type="BOOL" UUID="9972f77813e84919b593b3b30f797f7c"/>
+        <Field Comment="Вентилятор 2 АВО1. Питание от УПП" Name="AVOG1_Vn2_uppON" Type="BOOL" UUID="67f957ed0d3041c380e8e3afff217649"/>
+        <Field Comment="Вентилятор 2 АВО1. АВ аварийно отключен" Name="AVOG1_Vn2_AOF" Type="BOOL" UUID="0ce683d571384d758a868e91cb2c96da"/>
+        <Field Comment="Вентилятор 2 АВО1. Авария УПП" Name="AVOG1_Vn2_FLT" Type="BOOL" UUID="47608bb94f144378a18cf37e0b66b705"/>
+        <Field Comment="Вентилятор 2 АВО1. Нет управления с ПМУ" Name="AVOG1_Vn2_nMU" Type="BOOL" UUID="f247214e7e594973977bf207623d2d7b"/>
+        <Field Comment="Вентилятор 2 АВО1. Резерв" Name="Res_174" Type="BOOL" UUID="79309568a87c4a13a538b4254daffe07"/>
+        <Field Comment="Вентилятор 3 АВО1. Готовность БП" Name="AVOG1_Vn3_Rdy" Type="BOOL" UUID="16acc2e6adbc40ca8790c1ddeb1dcec5"/>
+        <Field Comment="Вентилятор 3 АВО1. Готовность УПП" Name="AVOG1_Vn3_uppRdy" Type="BOOL" UUID="b60d07f6f7f34209890f82ec5c53b21d"/>
+        <Field Comment="Вентилятор 3 АВО1. Питание от БП" Name="AVOG1_Vn3_ON" Type="BOOL" UUID="763b63ee242246b7afce7e7cd36c4bf6"/>
+        <Field Comment="Вентилятор 3 АВО1. Питание от УПП" Name="AVOG1_Vn3_uppON" Type="BOOL" UUID="476e318a65f34bbdb6aec91e2f411330"/>
+        <Field Comment="Вентилятор 3 АВО1. АВ аварийно отключен" Name="AVOG1_Vn3_AOF" Type="BOOL" UUID="3791d84200dd4dc8a3c71dfa86548cc6"/>
+        <Field Comment="Вентилятор 3 АВО1. Авария УПП" Name="AVOG1_Vn3_FLT" Type="BOOL" UUID="da4128fbdd4c49be9c97aaf283f69d3c"/>
+        <Field Comment="Вентилятор 3 АВО1. Нет управления с ПМУ" Name="AVOG1_Vn3_nMU" Type="BOOL" UUID="91363f0d6cd54ddfbc17e2609471efb9"/>
+        <Field Comment="Вентилятор 3 АВО1. Резерв" Name="Res_175" Type="BOOL" UUID="6fa3957438814fba9767ce6bc7ed242d"/>
+        <Field Comment="Резерв (эл. двигатель). Готовность" Name="Res_176" Type="BOOL" UUID="594945bc2b634450aa1f6c1832865c58"/>
+        <Field Comment="Резерв (эл. двигатель). Включено" Name="Res_177" Type="BOOL" UUID="24a0aae012d74c688fd8da5f1331a206"/>
+        <Field Comment="Резерв (эл. двигатель). АВ аварийно отключен" Name="Res_178" Type="BOOL" UUID="951249ae8c7e4f91b2b2462e2f1107d6"/>
+        <Field Comment="Резерв (эл. двигатель). Нет управления с ПМУ" Name="Res_179" Type="BOOL" UUID="6a72f1b7bf6048b8b4509a12959c5d27"/>
+        <Field Comment="Резерв" Name="Res_180" Type="BOOL" UUID="9f4098e6780f4c229f1036e53b534f5d"/>
+        <Field Comment="Резерв" Name="Res_181" Type="BOOL" UUID="a8cbce97cd3b40098748602446c11ea6"/>
+        <Field Comment="Резерв" Name="Res_182" Type="BOOL" UUID="9e5df6c4c34a4ea9a03365ce1196f7b6"/>
+        <Field Comment="Резерв" Name="Res_183" Type="BOOL" UUID="1ccfe86fa3084b23a540d18892a2078a"/>
+        <Field Comment="Питание ПЛК, ввод 1. АВ включен" Name="NKU_AVOG_PLC_Q1_En" Type="BOOL" UUID="10024ca38c2447e294e681f4056ab244"/>
+        <Field Comment="Питание ПЛК, ввод 1. АВ аварийно отключен" Name="NKU_AVOG_PLC_Q1_AOF" Type="BOOL" UUID="bb0e63bbbb8a4ab5a51994c229101b10"/>
+        <Field Comment="Питание ПЛК, ввод 1. УЗИП исправно" Name="NKU_AVOG_PLC_Q1_UZIP_ok" Type="BOOL" UUID="1dfe5076cb684383addccf1531eb4c4e"/>
+        <Field Comment="Питание ПЛК, ввод 1. БП исправен" Name="NKU_AVOG_PLC_Q1_BP_ok" Type="BOOL" UUID="37fd43c39408483f8a9adab1b9992234"/>
+        <Field Comment="Питание ПЛК, ввод 2. АВ включен" Name="NKU_AVOG_PLC_Q2_En" Type="BOOL" UUID="968da5578d1a46399d09af3c5629f658"/>
+        <Field Comment="Питание ПЛК, ввод 2. АВ аварийно отключен" Name="NKU_AVOG_PLC_Q2_AOF" Type="BOOL" UUID="335740be40d841d2aff07f2c9c0e3990"/>
+        <Field Comment="Питание ПЛК, ввод 2. УЗИП исправно" Name="NKU_AVOG_PLC_Q2_UZIP_ok" Type="BOOL" UUID="a4459b1f3d3245e98ed403454dccfe00"/>
+        <Field Comment="Питание ПЛК, ввод 2. БП исправен" Name="NKU_AVOG_PLC_Q2_BP_ok" Type="BOOL" UUID="b693f737006c4c7ea02ddbf73bd28a81"/>
+        <Field Comment="Вентиляция шкафа. Перегрев" Name="NKU_AVOG1_Vn_SHK_OverT" Type="BOOL" UUID="558ead8b8a8d4b6a82029127217cfeec"/>
+        <Field Comment="Вентиляция шкафа. АВ включен" Name="NKU_AVOG1_Vn_SHK_En" Type="BOOL" UUID="43da36111e534bc7b24044548846a32a"/>
+        <Field Comment="Резерв" Name="Res_184" Type="BOOL" UUID="0171b9cf88d84806aa7d0a27fee387e9"/>
+        <Field Comment="Резерв" Name="Res_185" Type="BOOL" UUID="f463c053bd2b4dee956c2a4424997e62"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_186" Type="BOOL" UUID="d88cb7f3d2164f4f841ce18b84ee617d"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_187" Type="BOOL" UUID="ca61ca76748644e1bb6f0bbb4f3607ae"/>
+        <Field Comment="Резерв" Name="Res_188" Type="BOOL" UUID="febda2f0e91c449fb79330de8ec12edd"/>
+        <Field Comment="Резерв" Name="Res_189" Type="BOOL" UUID="cb885e913b5347b68d05f7700eda8a70"/>
+        <Field Comment="Вентилятор 1 АВО2. Готовность БП" Name="AVOG2_Vn1_Rdy" Type="BOOL" UUID="8afc845dc5574f80bfba56ddebcf5038"/>
+        <Field Comment="Вентилятор 1 АВО2. Готовность УПП" Name="AVOG2_Vn1_uppRdy" Type="BOOL" UUID="981cb9bc3c5446f3a475baf261bfc33e"/>
+        <Field Comment="Вентилятор 1 АВО2. Питание от БП" Name="AVOG2_Vn1_ON" Type="BOOL" UUID="78b8b0c7904241729abcff4ee644e7f5"/>
+        <Field Comment="Вентилятор 1 АВО2. Питание от УПП" Name="AVOG2_Vn1_uppON" Type="BOOL" UUID="8565e3ce59d14d7c87a6efb69565ac0b"/>
+        <Field Comment="Вентилятор 1 АВО2. АВ аварийно отключен" Name="AVOG2_Vn1_AOF" Type="BOOL" UUID="19413546600442319f1f5270db394725"/>
+        <Field Comment="Вентилятор 1 АВО2. Авария УПП" Name="AVOG2_Vn1_FLT" Type="BOOL" UUID="974e1b7e17ce4b2e9e26ad38f0e471c9"/>
+        <Field Comment="Вентилятор 1 АВО2. Нет управления с ПМУ" Name="AVOG2_Vn1_nMU" Type="BOOL" UUID="76bfb1bf65b242e183c5105c31778aac"/>
+        <Field Comment="Вентилятор 1 АВО2. Резерв" Name="Res_190" Type="BOOL" UUID="e136eea599df48b58e150df4565b2848"/>
+        <Field Comment="Вентилятор 2 АВО2. Готовность БП" Name="AVOG2_Vn2_Rdy" Type="BOOL" UUID="8d1be645db364a1f94a15b65d2762c23"/>
+        <Field Comment="Вентилятор 2 АВО2. Готовность УПП" Name="AVOG2_Vn2_uppRdy" Type="BOOL" UUID="11b4882cbbaf400383aa27b8f13f41c1"/>
+        <Field Comment="Вентилятор 2 АВО2. Питание от БП" Name="AVOG2_Vn2_ON" Type="BOOL" UUID="5a47be094d9748328c3c5a5d7cfa0bb1"/>
+        <Field Comment="Вентилятор 2 АВО2. Питание от УПП" Name="AVOG2_Vn2_uppON" Type="BOOL" UUID="4c90d94657114d8e9cf4bb8f6c5f3022"/>
+        <Field Comment="Вентилятор 2 АВО2. АВ аварийно отключен" Name="AVOG2_Vn2_AOF" Type="BOOL" UUID="d0724b6e47ca4c7bb48c656847d23b42"/>
+        <Field Comment="Вентилятор 2 АВО2. Авария УПП" Name="AVOG2_Vn2_FLT" Type="BOOL" UUID="b81215e46d6f4755bff354b0564c4212"/>
+        <Field Comment="Вентилятор 2 АВО2. Нет управления с ПМУ" Name="AVOG2_Vn2_nMU" Type="BOOL" UUID="d06c7d3d50c34f29972cf875350fc179"/>
+        <Field Comment="Вентилятор 2 АВО2. Резерв" Name="Res_191" Type="BOOL" UUID="db9440ddc86048f78b82c93a4defd921"/>
+        <Field Comment="Вентилятор 3 АВО2. Готовность БП" Name="AVOG2_Vn3_Rdy" Type="BOOL" UUID="1b1fc267f6b04c72a7f1ec7edda5d7b7"/>
+        <Field Comment="Вентилятор 3 АВО2. Готовность УПП" Name="AVOG2_Vn3_uppRdy" Type="BOOL" UUID="2b15fb2de7ab44f28586e7c02ecac86d"/>
+        <Field Comment="Вентилятор 3 АВО2. Питание от БП" Name="AVOG2_Vn3_ON" Type="BOOL" UUID="f07e9296eecf4947a53fa65d8a7c05a2"/>
+        <Field Comment="Вентилятор 3 АВО2. Питание от УПП" Name="AVOG2_Vn3_uppON" Type="BOOL" UUID="2b0af4cfd96644a1b67bf6d1923830e6"/>
+        <Field Comment="Вентилятор 3 АВО2. АВ аварийно отключен" Name="AVOG2_Vn3_AOF" Type="BOOL" UUID="3b262b5cde31472580d3fdb0714bb8d9"/>
+        <Field Comment="Вентилятор 3 АВО2. Авария УПП" Name="AVOG2_Vn3_FLT" Type="BOOL" UUID="24d15ae656d34af2add9b8b48ee41426"/>
+        <Field Comment="Вентилятор 3 АВО2. Нет управления с ПМУ" Name="AVOG2_Vn3_nMU" Type="BOOL" UUID="627b424283d9495d9453efbff9a6a807"/>
+        <Field Comment="Вентилятор 3 АВО2. Резерв" Name="Res_192" Type="BOOL" UUID="14c9fd920d4d4f87b06f6568777d45f3"/>
+        <Field Comment="Резерв (эл. двигатель). Готовность" Name="Res_193" Type="BOOL" UUID="d432683e67e440069580870079ea7b3a"/>
+        <Field Comment="Резерв (эл. двигатель). Включено" Name="Res_194" Type="BOOL" UUID="dc4e719e412649bdbd719848aa26e555"/>
+        <Field Comment="Резерв (эл. двигатель). АВ аварийно отключен" Name="Res_195" Type="BOOL" UUID="957882b0ce204ef49e44d53686c9ee72"/>
+        <Field Comment="Резерв (эл. двигатель). Нет управления с ПМ" Name="Res_196" Type="BOOL" UUID="d35760091b264f52a441017116be85da"/>
+        <Field Comment="Резерв" Name="Res_197" Type="BOOL" UUID="75f03a4936194921a9c91f63fd37e3ef"/>
+        <Field Comment="Резерв" Name="Res_198" Type="BOOL" UUID="ef90572e18044789963aa1b1fd89f730"/>
+        <Field Comment="Резерв" Name="Res_199" Type="BOOL" UUID="d0be9f0f8df84664b16a724db7968279"/>
+        <Field Comment="Резерв" Name="Res_200" Type="BOOL" UUID="fed20cc78b974b7b94c744580a60fb2d"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_201" Type="BOOL" UUID="2256abb4cd3741d793f0581832b6d774"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_202" Type="BOOL" UUID="f4174698e59545dcbb81f18c1a07f4f4"/>
+        <Field Comment="Резерв (аппарат). АВ включен" Name="Res_203" Type="BOOL" UUID="71ea842fc98b4b7eba135dc071b33ea1"/>
+        <Field Comment="Резерв (аппарат). АВ аварийно отключен" Name="Res_204" Type="BOOL" UUID="02a4079e39ac476db793dec6205a1a58"/>
+        <Field Comment="Шкаф ШЛ1. Блоки питания =24 В. АВ включен" Name="NKU_AVOG_SHL1_DC24_En" Type="BOOL" UUID="9e62a2d2497c4829b1842598a6cf24b9"/>
+        <Field Comment="Шкаф ШЛ1. Блоки питания =24 В. АВ аварийно отключен" Name="NKU_AVOG_SHL1_DC24_AOF" Type="BOOL" UUID="65569dd7f0b04516a9f7e878b13ef099"/>
+        <Field Comment="Резерв" Name="Res_205" Type="BOOL" UUID="a6dd2c814fe44915b38e23c1c52c05c7"/>
+        <Field Comment="Резерв" Name="Res_206" Type="BOOL" UUID="16af9da0185b4ec2bd29ea970ef8eca4"/>
+        <Field Comment="Вентиляция шкафа. Перегрев" Name="NKU_AVOG2_Vn_SHK_OverT" Type="BOOL" UUID="87fe31955f264c8ba81f5f1c3699a4ed"/>
+        <Field Comment="Вентиляция шкафа. АВ включен" Name="NKU_AVOG2_Vn_SHK_En" Type="BOOL" UUID="1efd58167db34d46bea29f1ff171352f"/>
+        <Field Comment="Резерв" Name="Res_207" Type="BOOL" UUID="f8fdb13807b748419fe2f2e6a2d47a8c"/>
+        <Field Comment="Резерв" Name="Res_208" Type="BOOL" UUID="fe4d2b9b81504d35924b64cae181c237"/>
+        <Field Comment="Резерв" Name="Res_209" Type="BOOL" UUID="b1b742d79842478abbb51307068b61fb"/>
+        <Field Comment="Резерв" Name="Res_210" Type="BOOL" UUID="7795e80596584e3b8f004b86bf0fabc9"/>
+        <Field Comment="Резерв" Name="Res_211" Type="BOOL" UUID="af5edf772cba45f4bb68e452e819d14e"/>
+        <Field Comment="Резерв" Name="Res_212" Type="BOOL" UUID="c8202e9b57c64ac7b87670ab7c507ac9"/>
+        <Field Comment="АВР НКУ АВОг. Ввод 1.АВ включен" Name="NKU_AVOG_Q1_En" Type="BOOL" UUID="02af2c7ab2904f0a81c42e75db617311"/>
+        <Field Comment="АВР НКУ АВОг. Ввод 1.АВ аварийно отключен" Name="NKU_AVOG_Q1_AOF" Type="BOOL" UUID="d2098a856c1940099f91e55d30cfecc6"/>
+        <Field Comment="АВР НКУ АВОг. Ввод 1.УЗИП исправно" Name="NKU_AVOG_Q1_UZIP_ok" Type="BOOL" UUID="1aabea4e262f4500b6044ce633d85c1e"/>
+        <Field Comment="Резерв" Name="Res_213" Type="BOOL" UUID="a790a5b85b5e4b5987a4a7400ede78db"/>
+        <Field Comment="АВР НКУ АВОг. Ввод 2.АВ включен" Name="NKU_AVOG_Q2_En" Type="BOOL" UUID="8d7dff5ba8894f3487848ac013648a72"/>
+        <Field Comment="АВР НКУ АВОг. Ввод 2.АВ аварийно отключен" Name="NKU_AVOG_Q2_AOF" Type="BOOL" UUID="a2bf466fe9d64dda80737b229e8433e7"/>
+        <Field Comment="АВР НКУ АВОг. Ввод 2.УЗИП исправно" Name="NKU_AVOG_Q2_UZIP_ok" Type="BOOL" UUID="ba0158512a6b4964bc9c4c6ccc8e69cf"/>
+        <Field Comment="Резерв" Name="Res_214" Type="BOOL" UUID="4f7a7101af2840d8acc3713351c41a93"/>
+        <Field Comment="АВР НКУ АВОг. Секционный. АВ включен" Name="NKU_AVOG_QS_En" Type="BOOL" UUID="26b43e4ab94f4bc7814b5ce78fa1da22"/>
+        <Field Comment="АВР НКУ АВОг. Секционный. АВ аварийно отключен" Name="NKU_AVOG_QS_AOF" Type="BOOL" UUID="9ccb0f59c3f94519be38fd923fcea45e"/>
+        <Field Comment="Резерв" Name="Res_215" Type="BOOL" UUID="342eeefae6884af88a3e6dca50d8f02b"/>
+        <Field Comment="Резерв" Name="Res_216" Type="BOOL" UUID="23aa22a5e18c4d729e3200e533ac5c6b"/>
+        <Field Comment="Резерв" Name="Res_217" Type="BOOL" UUID="f8c04c98d2e24817ac2e6eb3898c7874"/>
+        <Field Comment="Резерв" Name="Res_218" Type="BOOL" UUID="82581e40e2654f3eb70fc0acaa58adbf"/>
+        <Field Comment="Резерв" Name="Res_219" Type="BOOL" UUID="5a31070b175a4661b409cb3dd8b3b275"/>
+        <Field Comment="Резерв" Name="Res_220" Type="BOOL" UUID="0d3f4b2be7424660b047c1a5cbb3ceb9"/>
+    </Fields>
+</Type>
