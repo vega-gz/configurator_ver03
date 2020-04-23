@@ -58,6 +58,10 @@ public class Generator {
                         fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
                         s = fm.rd();
                     }
+                    if(s.contains("<![CDATA[")){
+                        int end = s.indexOf("<![CDATA[") + 9;
+                        fm.wr(s.substring(0,end) + "\n");
+                    }
                     String funcCall = stFunc + "(";                                 //Начинаем генерацию вызова функции
                     for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
                         for(Node arg : arglist){                                        //Цикл по всем аргументам функции

@@ -107,7 +107,7 @@
 			</File>
 		</GenHMI>
 	</AI>
-	<AO excelSheetName="AO">
+	<ao excelSheetName="AO">
 		<GenData>
 			<T_GPA_AO_FromHMI Type="T_AO_FromHMI"/>
 			<T_GPA_AO_ToHMI Type="T_AO_ToHMI"/>
@@ -152,7 +152,7 @@
 				</Function>
 			</File>
 		</GenCode>
-	</AO>
+	</ao>
 	<DI excelSheetName="DI">
 		<GenData>
 			<T_GPA_DI_Settings Type="T_DI_Settings"/>
