@@ -129,6 +129,29 @@
             <T nameColumnPos="Канал"  type="Int"/>
             <Z nameColumnPos="Точность"  type="Int"/>
         </EXEL>
+		<GenCode>
+			<File name="A_Algorithm.iec_st">
+				<Function name="AO_init">
+					<arguments>
+						<arg><text t="GPA_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><dbd t="Диапазон_мин"/></arg>
+						<arg><dbd t="Диапазон_макс"/></arg>
+						<arg><dbd t="АЦПмин"/></arg>
+						<arg><dbd t="АЦПмакс"/></arg>
+						<arg><npp/></arg>
+					</arguments>
+					<comment><dbd t="Наименование"/></comment>
+				</Function>
+				<Function name="AO_Processing">
+					<arguments>
+						<arg><text t="GPA_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="GPA_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="GPA_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					</arguments>
+					<comment><dbd t="Наименование"/></comment>
+				</Function>
+			</File>
+		</GenCode>
 	</AO>
 	<DI excelSheetName="DI">
 		<GenData>
@@ -190,6 +213,17 @@
             <N nameColumnPos="Слот"  type="Int"/>
             <O nameColumnPos="Канал"  type="Int"/>
         </EXEL>
+		<GenCode>
+			<File name="A_Algorithm.iec_st">
+				<Function name="DO_Processing">
+					<arguments>
+						<arg><text t="GPA_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="GPA_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					</arguments>
+					<comment><dbd t="Наименование"/></comment>
+				</Function>
+			</File>
+		</GenCode>
 	</DGO>
 	<AI_NKU excelSheetName="AI_NKU">
 		<GenData>

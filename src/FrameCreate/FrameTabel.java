@@ -208,13 +208,14 @@ public class FrameTabel extends javax.swing.JPanel {
         globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
         new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
         int retST = 1;
+        int retTy = 1;
         try {
-            //Generator.GenTypeFile(this);
+            retTy = Generator.GenTypeFile(this);
             retST = Generator.genSTcode(this);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(retST == 0) JOptionPane.showMessageDialog(null, "Генерация завершена"); // Это сообщение
+        if(retST == 0 && retTy ==0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
     }//GEN-LAST:event_jButton2ActionPerformed
 
         // --- Временная кнопка для преобразования файлов type ---

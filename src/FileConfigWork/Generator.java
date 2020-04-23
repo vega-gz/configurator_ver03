@@ -1,43 +1,22 @@
 package FileConfigWork;
 
-import FrameCreate.*;
+//import FrameCreate.*;
 
 import FrameCreate.FrameTabel;
 import XMLTools.*;
-import FrameCreate.TableNzVer2;
-import Main.Main;
 import XMLTools.XMLSAX;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
-import fileTools.*;
 import fileTools.*;
 import static fileTools.FileManager.FindFile;
 import globalData.globVar;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import org.apache.poi.ss.usermodel.Table;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/**
- *
- * @author Григорий
- */
+/*@author Григорий*/
 public class Generator {
 
     @SuppressWarnings("empty-statement")
@@ -120,7 +99,9 @@ public class Generator {
         return 0;
     }
 
-    public static void GenTypeFile(FrameTabel ft) throws IOException {
+    public static int GenTypeFile(FrameTabel ft) throws IOException {
+        int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
+        if(casedial != 0) return -1; //0 - yes, 1 - no, 2 - cancel
         String backUpPath = globVar.backupDir;   //установили путь для бэкапа
         FileManager fm = new FileManager();                     //создали менеджера для резеовного копирования
         String filePath = globVar.desDir + File.separator + "Design";
@@ -193,6 +174,7 @@ public class Generator {
             }
 
         }
+        return 0;
     }
 
     String fileChosserLocal() {
