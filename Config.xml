@@ -11,10 +11,10 @@
         <URL>jdbc:postgresql://minoro.ru:5432/</URL>
                 
         
-        <BASE>lev</BASE>
+        <BASE2>lev</BASE2>
                 
         
-        <BASE1>pravoslav</BASE1>
+        <BASE>pravoslav</BASE>
                 
         
         <DesignDir>D:\Projects\Калининград_нов</DesignDir>
