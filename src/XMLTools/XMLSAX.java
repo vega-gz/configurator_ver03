@@ -498,7 +498,7 @@ public class XMLSAX {
                     nameTB = firsNode.getNodeName(); // Корневая нода это название таблицы
                     System.out.println("NameTableBase " + nameTB);
                     NamedNodeMap atrsig = firsNode.getAttributes();
-                    for (int atr = 0; atr < atrsig.getLength(); atr++) { // пробегаем по атребутам
+                    for (int atr = 0; atr < atrsig.getLength(); atr++) { // пробегаем по атрибутам
                         Node sigSheet = atrsig.item(atr);
                         if (sigSheet.getNodeName().equalsIgnoreCase("excelSheetName")) { // проверка что идентификатор атрибута excelSheetName
                             System.out.println("NameExelSheet " + sigSheet.getNodeValue());

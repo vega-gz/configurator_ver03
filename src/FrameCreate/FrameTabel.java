@@ -33,6 +33,8 @@ import FileConfigWork.SignalTypeConvertTagName;
 import globalData.globVar;
 import java.awt.Component;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
@@ -202,19 +204,18 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFileChooser fileload = new JFileChooser(new File(globVar.desDir));
-        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
-        filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
-        if (filepath == JFileChooser.APPROVE_OPTION) {
-            try {
-                globVar.desDir = fileload.getSelectedFile().getCanonicalPath();
-                Generator.GenTypeFile(this);
-
-            } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-
-            }
+        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
+        globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
+        new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
+        int retST = 1;
+        int retTy = 1;
+        try {
+            retTy = Generator.GenTypeFile(this);
+            retST = Generator.genSTcode(this);
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if(retST == 0 && retTy ==0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
     }//GEN-LAST:event_jButton2ActionPerformed
 
         // --- Временная кнопка для преобразования файлов type ---

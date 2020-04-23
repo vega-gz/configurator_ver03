@@ -176,7 +176,7 @@ public class DataBase {
           
         String sql = null;
         //переменная для анализа
-        String nameTbanalise = new String(name_table);
+        //String nameTbanalise = new String(name_table);
         String nc_stringing = "";
         name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
         if (!listNameColum.isEmpty()) { // 
@@ -212,7 +212,7 @@ public class DataBase {
             stmt.close();
             //connection.commit();
             //System.out.println("-- Table created successfully");
-            createCommentTable(name_table, "Я комментарий к этой таблице"); // вызом метода добавления комментария
+            createCommentTable(name_table, "комментарий к этой таблице"); // вызом метода добавления комментария
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE TABLE");

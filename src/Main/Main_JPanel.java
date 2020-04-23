@@ -318,7 +318,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
+        JFileChooser fileopen = new JFileChooser(globVar.desDir);
         int ren = fileopen.showDialog(null, "DownloadToBase");
         if (ren == JFileChooser.APPROVE_OPTION) {
             File file = fileopen.getSelectedFile();// выбираем файл из каталога
