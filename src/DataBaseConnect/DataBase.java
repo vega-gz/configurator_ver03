@@ -415,7 +415,7 @@ public class DataBase {
         return selectData;
     }
 
-    //-------------- DROPE TABLE ---------------
+    //-------------- Удаление списка таблиц ---------------
     public void dropTable(ArrayList<String> listT) {
         //connectionToBase(); // вызов Фукция подключения к базе
         Iterator<String> iter_list_table = listT.iterator();
@@ -439,6 +439,27 @@ public class DataBase {
         }
     }
 
+    //-------------- Удаление конкретной таблицы  ---------------
+    public void dropTable(String nameT) {
+        //connectionToBase(); // вызов Фукция подключения к базе
+        try {
+            connection.setAutoCommit(false);
+            String sql;
+            stmt = connection.createStatement();
+            sql = "DROP TABLE " + nameT + ";";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            connection.commit();
+            System.out.println("-- Table DROPE successfully");
+
+        } catch (SQLException e) {
+            System.out.println("Failed DROPE TABLE");
+            e.printStackTrace();
+            return;
+
+        }
+    }
+    
     // ---   List base on server   ---
     ArrayList<String> listBase() {
         ArrayList<String> listBase = new ArrayList();

@@ -35,7 +35,9 @@ import java.awt.Component;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -144,7 +146,12 @@ public class FrameTabel extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setText("jButton4");
+        jButton5.setText("удалить таблицу");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -231,6 +238,14 @@ public class FrameTabel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    // --- Кнопка удаления таблицы ---
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         workbase.dropTable(nameTable);
+        // преобразование с закрытием
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
         public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
             // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
