@@ -5,7 +5,7 @@
         <URL>jdbc:postgresql://minoro.ru:5432/</URL>
         <BASE>lev</BASE>
         <BASE1>pravoslav</BASE1>
-        <DesignDir>D:\Projects\Калининград_нов</DesignDir>
+        <DesignDir>/home/ad/Документы по работе</DesignDir>
         <nameProject>5</nameProject>
         <PASS>Solovin2</PASS>
 	</Settings>
