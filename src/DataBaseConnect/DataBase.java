@@ -155,7 +155,7 @@ public class DataBase {
         int number_colum = listNameColum.size();
         //проверка если есть такая таблица удаляем ее
         {
-        for(String s: getviewTable()){ // Получаем список таблиц и пробежимся сравнивая их
+        for(String s: getListTable()){ // Получаем список таблиц и пробежимся сравнивая их
             if(name_table.equalsIgnoreCase(s)){
                 System.out.println("Finding exist table and droping: " + name_table);
                 ArrayList<String> dropingTable = new ArrayList();
@@ -221,7 +221,7 @@ public class DataBase {
             return;
         }
     }
-    // --- Вставка данных (название таблицы, список столбцов, данные)---
+    // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         
         String addUUID = "UUID, "; // блок определения нужно ли генерировать UUID
@@ -309,7 +309,7 @@ public class DataBase {
         // проверка на столбец по которому упорядочим данные
         String orderCol = "id";
         String sql = null;
-        for(String s: getListColumnBase(table)){
+        for(String s: getListColumnTable(table)){
             if(s.equals(orderCol)){ // нашли тогда упорядовать
               sql = "SELECT " + s_columns + " FROM " + table + " ORDER BY \"" +orderCol +"\";";
             }else sql = "SELECT " + s_columns + " FROM " + table +";"; 
@@ -482,8 +482,8 @@ public class DataBase {
         return listBase;
     }
 
-    //-------------- TABLE похоже тестовая ?---------------
-    public ArrayList<String> getviewTable() {
+    //-------------- Получить список таблиц базы ---------------
+    public ArrayList<String> getListTable() {
         //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String> list_table_base = new ArrayList();
         try {
@@ -682,7 +682,7 @@ public class DataBase {
     }
     
     // --- получить столбцы из таблицы ---
-    private ArrayList<String> getListColumnBase(String table_name){
+    private ArrayList<String> getListColumnTable(String table_name){
         String sql = null;    
         ArrayList<String> listColumn = new ArrayList<>();
         try {
@@ -738,5 +738,15 @@ public class DataBase {
             //e.printStackTrace();
         }
         return comment;
+    }
+    
+    public static void main(String[] arg){
+       DataBase db = getInstance();
+       System.out.println(db.getListTable());
+       //db.getListColumnTable();
+       String[] rows;
+       ArrayList<String> listNameColum;
+       //db.insertRows(name_table, rows, listNameColum);
+    
     }
 }

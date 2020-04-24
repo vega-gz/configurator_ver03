@@ -305,7 +305,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         addElementTable0.clear();
         addElementTable1.clear();
         List list = sortMap(listNamedGraphMap); // Новый отсортированный массив
-        ArrayList<String> listTable = workbase.getviewTable();
+        ArrayList<String> listTable = workbase.getListTable();
         for (int i = 0; i < listTable.size(); ++i) {
             boolean findDOI = false;
             String nameT = listTable.get(i);

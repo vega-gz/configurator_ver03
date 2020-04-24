@@ -423,7 +423,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         //  DB.connectionToBase(url,pass,user);
-        listDropT = DB.getviewTable();
+        listDropT = DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
         String listTable = "";
 
@@ -545,7 +545,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
         //String db = "test08_DB";
         //workbase.connectionToBase();
-        listDropT = DB.getviewTable();
+        listDropT = DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
 
         String listTable = "";
