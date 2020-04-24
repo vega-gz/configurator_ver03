@@ -276,7 +276,7 @@ public class DataBase {
                             sql += ");";
                      
                 }
-                //System.out.println(sql); // Если надо смотрим что за sql запрос
+                System.out.println(sql); // Если надо смотрим что за sql запрос
                 stmt = connection.createStatement();
                 stmt.executeUpdate(sql);
                 stmt.close();
@@ -312,11 +312,12 @@ public class DataBase {
         for(String s: getListColumnTable(table)){
             if(s.equals(orderCol)){ // нашли тогда упорядовать
               sql = "SELECT " + s_columns + " FROM " + table + " ORDER BY \"" +orderCol +"\";";
+              break;
             }else sql = "SELECT " + s_columns + " FROM " + table +";"; 
         }
         try {
             stmt = connection.createStatement();
-            //System.out.println(sql);
+            System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 for (int i = 0; i < columns.size(); ++i) {
@@ -741,12 +742,18 @@ public class DataBase {
     }
     
     public static void main(String[] arg){
-       DataBase db = getInstance();
-       System.out.println(db.getListTable());
-       //db.getListColumnTable();
-       String[] rows;
-       ArrayList<String> listNameColum;
-       //db.insertRows(name_table, rows, listNameColum);
+       DataBase db = DataBase.getInstance();
+       String nameBD = db.getCurrentNameBase();
+       //System.out.println(db.getListTable().toString());
+       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
+       String[] rows = {"325", "Commen-665", "NZ", "0987654321", "name-struct"};
+       ArrayList<String> listNameColum = new ArrayList<>();
+       listNameColum.add("id");
+       listNameColum.add("Comment");
+       listNameColum.add("Type");
+       listNameColum.add("UUID");
+       listNameColum.add("Name");
+       db.insertRows("t_gpa_di_settings", rows, listNameColum);
     
     }
 }
