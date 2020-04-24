@@ -221,12 +221,17 @@ public class DataBase {
             return;
         }
     }
-    // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
+    
+// --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         
         String addUUID = "UUID, "; // блок определения нужно ли генерировать UUID
+        String dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
         for(String s:listNameColum){
-            if(s.equalsIgnoreCase("UUID")) addUUID =""; // если нашли что создаем с нужными UUID обнуляем
+            if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
+            addUUID ="";
+            dataUUID = "";
+            }
         }
         try {
             connection.setAutoCommit(true);
@@ -247,7 +252,7 @@ public class DataBase {
                                     sql += "\"" + bufer_named + "\"" + " ,";
                                 }
                             }
-                            sql += ") VALUES (";
+                            sql += ") VALUES ("+dataUUID;
                             // row и listNameColum должны быть одинаковы но косяк
                             for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
                                 if (i + 1 >= rows.length) {

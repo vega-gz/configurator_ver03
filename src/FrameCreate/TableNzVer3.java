@@ -231,7 +231,7 @@ public class TableNzVer3 {
                     //System.out.println(value);
                 }
             });
-            // еще один пукт меню
+            // еще один пункт меню
             JMenuItem menuItem = new JMenuItem("Add_Signal...",
                     new ImageIcon("images/newproject.png"));  
             menuItem.setMnemonic(KeyEvent.VK_P);
@@ -244,8 +244,8 @@ public class TableNzVer3 {
                     for(int i=0; i<jTable1.getColumnCount(); ++i){ // собираем лист из имен таблицы
                         listColumn.add(jTable1.getColumnName(i));
                     }
-                    new PopMenuDialog(listColumn);
-                    JOptionPane.showMessageDialog(null, "New Project clicked!"); // а почему null ?
+                    new PopMenuDialog(listColumn, workbase, nameTable); // вызов диалога с полями для заполнения и указателем на базу
+//                    JOptionPane.showMessageDialog(null, "New Project clicked!"); // а почему null ?
                 }
             });
             add(menuItem);
