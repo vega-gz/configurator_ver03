@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_NKU_AI_DRV" UUID="6B4FC8B64578B8D7D360BA9DB6EA8820">
+            
+
+    
+
+    <Fields>
+        <Field Comment="Температура BT1" Name="T_VT1" Type="REAL" UUID="b528bca8dec64400a76e72d99fac0723"/>
+        <Field Comment="Температура BT2" Name="T_VT2" Type="REAL" UUID="b954cb8c9f4648209993a5b9790d19bb"/>
+        <Field Comment="резерв" Name="Res_0" Type="REAL" UUID="bb3e101678f449f5944d9804a720f5dd"/>
+        <Field Comment="резерв" Name="Res_1" Type="REAL" UUID="538e948a71ad4cb697d9d76772e15d75"/>
+        <Field Comment="резерв" Name="Res_2" Type="REAL" UUID="34e8ca0cd8d94c0bacf360122765f440"/>
+        <Field Comment="резерв" Name="Res_3" Type="REAL" UUID="a773866d9e594b40b2536e228a0e447d"/>
+        <Field Comment="резерв" Name="Res_4" Type="REAL" UUID="866ffc07e19147558af94f487e536324"/>
+        <Field Comment="резерв" Name="Res_5" Type="REAL" UUID="6430465f9888420c8717b038ada541be"/>
+        <Field Comment="Напряжение на шинах ПТ =220В" Name="U_DC220" Type="REAL" UUID="e09b0d576af444e5ba60ea578a28f34d"/>
+        <Field Comment="резерв" Name="Res_6" Type="REAL" UUID="03f2ff8e47b04914ad23c032bb50dcad"/>
+        <Field Comment="резерв" Name="Res_7" Type="REAL" UUID="8111de40037646a6aea171e69fa5eea9"/>
+        <Field Comment="резерв" Name="Res_8" Type="REAL" UUID="f972191b3ef44dd5a167513873367e1b"/>
+        <Field Comment="резерв" Name="Res_9" Type="REAL" UUID="d96892a815764971a036ae43b3e1dbab"/>
+        <Field Comment="резерв" Name="Res_10" Type="REAL" UUID="67acad6d88bd4ab9befbb61b64e24b2a"/>
+        <Field Comment="резерв" Name="Res_11" Type="REAL" UUID="70ac5eff9d684ff3a1bbb43e72ea4640"/>
+        <Field Comment="резерв" Name="Res_12" Type="REAL" UUID="f8b41124936744768d0c5b0c0832962a"/>
+        <Field Comment="НКУ ГПА Ввод 1:Напряжение фазы A" Name="NKU_GPA_U1a" Type="REAL" UUID="9ff867f444734aa99434c44611671e61"/>
+        <Field Comment="НКУ ГПА Ввод 1:Напряжение фазы B" Name="NKU_GPA_U1b" Type="REAL" UUID="89f3561c244c44909437a5709364a184"/>
+        <Field Comment="НКУ ГПА Ввод 1:Напряжение фазы C " Name="NKU_GPA_U1c" Type="REAL" UUID="d1c66ca7cf0649ef879f6146db09199c"/>
+        <Field Comment="НКУ ГПА Ввод 1:Напряжение фазы AB " Name="NKU_GPA_U1ab" Type="REAL" UUID="cbca41a31f8145e8a1554006b1a423ae"/>
+        <Field Comment="НКУ ГПА Ввод 1:Напряжение фазы BC " Name="NKU_GPA_U1bc" Type="REAL" UUID="db1b71df0c1642b3a220f51c3e65c38f"/>
+        <Field Comment="НКУ ГПА Ввод 1:Напряжение фазы CA " Name="NKU_GPA_U1ca" Type="REAL" UUID="1bf7ce19400a40b5a2180a01c4735d81"/>
+        <Field Comment="НКУ ГПА Ввод 1:Ток фазы A " Name="NKU_GPA_I1a" Type="REAL" UUID="69faccd1f68a4bed8bafb3230128a5c6"/>
+        <Field Comment="НКУ ГПА Ввод 1:Ток фазы B " Name="NKU_GPA_I1b" Type="REAL" UUID="b5600024f7f54aa98afd152b3d3bfd25"/>
+        <Field Comment="НКУ ГПА Ввод 1:Ток фазы C " Name="NKU_GPA_I1c" Type="REAL" UUID="6f2987554fba4934888cdf37b18a7d1a"/>
+        <Field Comment="НКУ ГПА Ввод 1:Активная мощность " Name="NKU_GPA_P1" Type="REAL" UUID="88f528f72a2e4be4a90775408a9c6963"/>
+        <Field Comment="НКУ ГПА Ввод 1:Реактивная мощность " Name="NKU_GPA_Q1" Type="REAL" UUID="cf8abd2fa1394211b82944283099bea3"/>
+        <Field Comment="НКУ ГПА Ввод 1:Полная мощность " Name="NKU_GPA_S1" Type="REAL" UUID="59c07bb016064be69bc081243f7325e9"/>
+        <Field Comment="НКУ ГПА Ввод 1:Частота сети " Name="NKU_GPA_F1" Type="REAL" UUID="df099b5a8eda42499b1d75c93f5016c1"/>
+        <Field Comment="НКУ ГПА Ввод 2:Напряжение фазы A" Name="NKU_GPA_U2a" Type="REAL" UUID="2b2a454b40c44c009a36949bdcd700fd"/>
+        <Field Comment="НКУ ГПА Ввод 2:Напряжение фазы B" Name="NKU_GPA_U2b" Type="REAL" UUID="05f8033a0c4748179740ab4f7328d020"/>
+        <Field Comment="НКУ ГПА Ввод 2:Напряжение фазы C " Name="NKU_GPA_U2c" Type="REAL" UUID="0eb4824bee9d4e38ba16f60c8652b17d"/>
+        <Field Comment="НКУ ГПА Ввод 2:Напряжение фазы AB " Name="NKU_GPA_U2ab" Type="REAL" UUID="e94d0977088f4f65bb4d640421a3c26f"/>
+        <Field Comment="НКУ ГПА Ввод 2:Напряжение фазы BC " Name="NKU_GPA_U2bc" Type="REAL" UUID="c1e378f1f17d45fdad46dfb0566160b7"/>
+        <Field Comment="НКУ ГПА Ввод 2:Напряжение фазы CA " Name="NKU_GPA_U2ca" Type="REAL" UUID="4f21d12462e4400aab8fa2c85d207205"/>
+        <Field Comment="НКУ ГПА Ввод 2:Ток фазы A " Name="NKU_GPA_I2a" Type="REAL" UUID="64acddfaf6af4865ae71e1848bf51ca3"/>
+        <Field Comment="НКУ ГПА Ввод 2:Ток фазы B " Name="NKU_GPA_I2b" Type="REAL" UUID="09262e2f09db4a0e8cd27471fa73d72f"/>
+        <Field Comment="НКУ ГПА Ввод 2:Ток фазы C " Name="NKU_GPA_I2c" Type="REAL" UUID="33f88f0e3018456f80d9209d26df7bd6"/>
+        <Field Comment="НКУ ГПА Ввод 2:Активная мощность " Name="NKU_GPA_P2" Type="REAL" UUID="7c18da75987f473497a6b9c3b49a54b1"/>
+        <Field Comment="НКУ ГПА Ввод 2:Реактивная мощность " Name="NKU_GPA_Q2" Type="REAL" UUID="32f621ef161f4c519cfb5aac1054ee64"/>
+        <Field Comment="НКУ ГПА Ввод 2:Полная мощность " Name="NKU_GPA_S2" Type="REAL" UUID="3b9d68e123cf4ef1b69cb81ac0996774"/>
+        <Field Comment="НКУ ГПА Ввод 2:Частота сети " Name="NKU_GPA_F2" Type="REAL" UUID="e0035688f6fd4749a9e89fc442807778"/>
+        <Field Comment="НКУ ГПА Ввод 3:Напряжение фазы A" Name="NKU_GPA_U3a" Type="REAL" UUID="752eb68dde344fa4a9053e2f72cb4efb"/>
+        <Field Comment="НКУ ГПА Ввод 3:Напряжение фазы B" Name="NKU_GPA_U3b" Type="REAL" UUID="4585fdb0538446388e9d0885f3e80ab3"/>
+        <Field Comment="НКУ ГПА Ввод 3:Напряжение фазы C " Name="NKU_GPA_U3c" Type="REAL" UUID="794d90b8935348969b89c3ceb2850373"/>
+        <Field Comment="НКУ ГПА Ввод 3:Напряжение фазы AB " Name="NKU_GPA_U3ab" Type="REAL" UUID="dc7901cf9818465f9ba1e026bbe8a214"/>
+        <Field Comment="НКУ ГПА Ввод 3:Напряжение фазы BC " Name="NKU_GPA_U3bc" Type="REAL" UUID="5f496a10ac9a46128faba85618e7afbc"/>
+        <Field Comment="НКУ ГПА Ввод 3:Напряжение фазы CA " Name="NKU_GPA_U3ca" Type="REAL" UUID="480ced8cded24e22bbc7feab39fc6385"/>
+        <Field Comment="НКУ ГПА Ввод 3:Ток фазы A " Name="NKU_GPA_I3a" Type="REAL" UUID="8f8383df37624bf384f1ae8ef1ac8497"/>
+        <Field Comment="НКУ ГПА Ввод 3:Ток фазы B " Name="NKU_GPA_I3b" Type="REAL" UUID="13f942f7cf9e46249aadff8e4131a145"/>
+        <Field Comment="НКУ ГПА Ввод 3:Ток фазы C " Name="NKU_GPA_I3c" Type="REAL" UUID="f4f962b11b5245b3b8a00ec2ff930511"/>
+        <Field Comment="НКУ ГПА Ввод 3:Активная мощность " Name="NKU_GPA_P3" Type="REAL" UUID="20a7c363e9324404b5e8ef0a408b9574"/>
+        <Field Comment="НКУ ГПА Ввод 3:Реактивная мощность " Name="NKU_GPA_Q3" Type="REAL" UUID="e4a2477f8b4a4967b2d40dafec50db8f"/>
+        <Field Comment="НКУ ГПА Ввод 3:Полная мощность " Name="NKU_GPA_S3" Type="REAL" UUID="c6790864db1c41a696d302c56aee28d2"/>
+        <Field Comment="НКУ ГПА Ввод 3:Частота сети " Name="NKU_GPA_F3" Type="REAL" UUID="294c8479d811485cba99a5b0e5223649"/>
+        <Field Comment="НКУ АВО Ввод 1:Напряжение фазы A" Name="NKU_AVO_U1a" Type="REAL" UUID="323738d9388a48a981743fb246ce685a"/>
+        <Field Comment="НКУ АВО Ввод 1:Напряжение фазы B" Name="NKU_AVO_U1b" Type="REAL" UUID="be6ac491a4294e62bc6725d2847986d2"/>
+        <Field Comment="НКУ АВО Ввод 1:Напряжение фазы C " Name="NKU_AVO_U1c" Type="REAL" UUID="8f3c659cb9bb430198a9d3f6800233ab"/>
+        <Field Comment="НКУ АВО Ввод 1:Напряжение фазы AB " Name="NKU_AVO_U1ab" Type="REAL" UUID="5b52e6ca330d4e8faf6e17222860eeb3"/>
+        <Field Comment="НКУ АВО Ввод 1:Напряжение фазы BC " Name="NKU_AVO_U1bc" Type="REAL" UUID="5842d57c16034af981a95bfc950cfa78"/>
+        <Field Comment="НКУ АВО Ввод 1:Напряжение фазы CA " Name="NKU_AVO_U1ca" Type="REAL" UUID="9b4e12f987a9414cae55ff19c75d8c2c"/>
+        <Field Comment="НКУ АВО Ввод 1:Ток фазы A " Name="NKU_AVO_I1a" Type="REAL" UUID="5ae9e1db10e249f4b2bd8613177c9249"/>
+        <Field Comment="НКУ АВО Ввод 1:Ток фазы B " Name="NKU_AVO_I1b" Type="REAL" UUID="e41369bc6b8f49728324b70cacca7922"/>
+        <Field Comment="НКУ АВО Ввод 1:Ток фазы C " Name="NKU_AVO_I1c" Type="REAL" UUID="f701968bc5ec431cbcccb49668fb20d8"/>
+        <Field Comment="НКУ АВО Ввод 1:Активная мощность " Name="NKU_AVO_P1" Type="REAL" UUID="11c4f3b5d034453d86930e6b9969b2ad"/>
+        <Field Comment="НКУ АВО Ввод 1:Реактивная мощность " Name="NKU_AVO_Q1" Type="REAL" UUID="24eedcee8eb64da1a077e0722550d5b7"/>
+        <Field Comment="НКУ АВО Ввод 1:Полная мощность " Name="NKU_AVO_S1" Type="REAL" UUID="ad6648d06d564bddb3db7a6a1280bb02"/>
+        <Field Comment="НКУ АВО Ввод 1:Частота сети " Name="NKU_AVO_F1" Type="REAL" UUID="03ffcf8904c74c95b2106675001d00c2"/>
+        <Field Comment="НКУ АВО Ввод 2:Напряжение фазы A" Name="NKU_AVO_U2a" Type="REAL" UUID="f8436d40c42645e2a700ae775f9266df"/>
+        <Field Comment="НКУ АВО Ввод 2:Напряжение фазы B" Name="NKU_AVO_U2b" Type="REAL" UUID="e0fd9e6c3753422f868197cb78a3ceb9"/>
+        <Field Comment="НКУ АВО Ввод 2:Напряжение фазы C " Name="NKU_AVO_U2c" Type="REAL" UUID="cc20755e48514b6e8a9c7f7af7b2d0af"/>
+        <Field Comment="НКУ АВО Ввод 2:Напряжение фазы AB " Name="NKU_AVO_U2ab" Type="REAL" UUID="a56bd80dc33f4d2b8f888a5bbfec1cc9"/>
+        <Field Comment="НКУ АВО Ввод 2:Напряжение фазы BC " Name="NKU_AVO_U2bc" Type="REAL" UUID="968730822c6645cd98c0f850317982f0"/>
+        <Field Comment="НКУ АВО Ввод 2:Напряжение фазы CA " Name="NKU_AVO_U2ca" Type="REAL" UUID="e1fede65bda24b8681eda85f56fc91ba"/>
+        <Field Comment="НКУ АВО Ввод 2:Ток фазы A " Name="NKU_AVO_I2a" Type="REAL" UUID="dbe8789785384393a5c02557472e9765"/>
+        <Field Comment="НКУ АВО Ввод 2:Ток фазы B " Name="NKU_AVO_I2b" Type="REAL" UUID="668fd2aafeab450f9a4a3ae292c4cbc2"/>
+        <Field Comment="НКУ АВО Ввод 2:Ток фазы C " Name="NKU_AVO_I2c" Type="REAL" UUID="4413a883b83745e79646d2907cc3ebc0"/>
+        <Field Comment="НКУ АВО Ввод 2:Активная мощность " Name="NKU_AVO_P2" Type="REAL" UUID="73385debdd0b4a6dbf8980e163818d8d"/>
+        <Field Comment="НКУ АВО Ввод 2:Реактивная мощность " Name="NKU_AVO_Q2" Type="REAL" UUID="dbb77e127f63432bbc42b43f391f6dd4"/>
+        <Field Comment="НКУ АВО Ввод 2:Полная мощность " Name="NKU_AVO_S2" Type="REAL" UUID="825f7dfdba7b463590cbb5d340aef750"/>
+        <Field Comment="НКУ АВО Ввод 2:Частота сети " Name="NKU_AVO_F2" Type="REAL" UUID="903e9d3639cf4089ac9ce2340019b86f"/>
+    </Fields>
+</Type>

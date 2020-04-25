@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_PPZ" Kind="Struct" UUID="EB09FF2D451BB817832020BD696A938A">
+    <Fields>
+        <Field Name="AnParAn" Type="9F3E2B734FC378B92772F99763FBF9E5" UUID="423A5EF94FCC371537571782C65AB961" Comment="Тестовая защита" />
+    </Fields>
+</Type>

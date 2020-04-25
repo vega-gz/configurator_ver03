@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Statistic" Kind="Struct" UUID="5C256F404590F8E9241DC39E4DF5C23C">
+    <Fields>
+        <Field Name="yyy" Type="UINT" UUID="8796B5EF4EDFDD437DDF738AC108326D" Comment="Текущий год" />
+        <Field Name="mmm" Type="UINT" UUID="E7D2DC3C45F3B016A4CCC7B1E6199786" Comment="Текущий месяц" />
+        <Field Name="ddd" Type="UINT" UUID="D51E8B234F5221A840FEA99BC7A99A3D" Comment="Текущий день" />
+        <Field Name="hh" Type="UINT" UUID="60B1DF8242437A7F122A19BCF9863A2A" Comment="Текущий час" />
+        <Field Name="mm" Type="UINT" UUID="C985EEA14CD0F36FFE62FA9F8A5B75BE" Comment="Текущий минута" />
+        <Field Name="ss" Type="UINT" UUID="CB56D06B4EBFF2DB00A318BC3C16490F" Comment="Текущий секунда" />
+        <Field Name="GPA_work" Type="BOOL" UUID="FFAF211446DA6AC2ACD469908B92A99D" Comment="ГПА в работе" />
+        <Field Name="Counters" Type="39C93759447B805BBC469C830D320488" UUID="2D427E8449E5059F379C368029D08D4E" Comment="Счетчики и наработки" />
+        <Field Name="RP_GTU_IN" Type="3E1F29354EDB58BF4EAF3E9C6D26DC92" UUID="7AE373994DD6476E79D8FDAF577B5B66" Comment="Входные параметры расчета параметров ГТУ" />
+        <Field Name="RP_GTU_OUT" Type="FC805247400C593EFC257FA477CF7DDA" UUID="5B9B40C442B3270E4DB9FB85F5AA82EA" Comment="Выходные параметры расчета параметров ГТУ" />
+        <Field Name="RTG_IN" Type="3B10374246314A7BDE1270B820B0E23D" UUID="9F1A471D4C9281910F7CBF8610D77D7D" Comment="Входные параметры расчета расхода топливного газа" />
+        <Field Name="RTG_OUT" Type="6D60ABAC471237FF8313EF89CEEF55F1" UUID="3C9F0FA244ACBD57D0488198BD344EB7" Comment="Выходные параметры расчета расхода топливного газа" />
+        <Field Name="GDH" Type="7EFF6C69448C6E1544C864A47C5D5C8D" UUID="C367359C4B7CE392C22920B0171FB73C" />
+    </Fields>
+</Type>

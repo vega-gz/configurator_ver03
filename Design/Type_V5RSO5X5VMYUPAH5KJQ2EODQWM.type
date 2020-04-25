@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_CalcPar" Kind="Struct" UUID="F884F07547F55321CEF196A477F770EB">
+    <Fields>
+        <Field Name="CalcPar" Type="FA0047664275CF9B0C76139B78188A33" UUID="D5D0A71D4134B43DDCD5178FE1A8CE7E" Comment="Тестовый расчетный параметр" />
+    </Fields>
+</Type>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ALG" Kind="Struct" UUID="03C1A6E0A8487FCEDE9804BB4239518F">
+    <Fields>
+        <Field Name="noActivMode" Type="BOOL" UUID="5F5B28846F4F3484B8F7DA91C747DA73" />
+        <Field Name="Unlock" Type="BOOL" UUID="11D3997549753A8F0271858F8E09A4D6" />
+        <Field Name="AOss" Type="BOOL" UUID="5AE2936041C37FC969A721879AAE1AD0" />
+        <Field Name="AObs" Type="BOOL" UUID="911FC582466BFCD6E190F99E255D820E" />
+        <Field Name="VOss" Type="BOOL" UUID="2DDA51424E286AE2F7CAB688C343889A" />
+        <Field Name="VObs" Type="BOOL" UUID="FE36B9B9403C6A694A848AB8AAFA6E24" />
+        <Field Name="Fire" Type="BOOL" UUID="07837FFA4CAE430F0A690CA6E1C56BFB" />
+        <Field Name="condGR" Type="BOOL" UUID="6626ECF54BDC19C16170C080C9B65471" />
+        <Field Name="condHR" Type="BOOL" UUID="66282C16435D86399B882B906A748CBE" />
+        <Field Name="g_inN" Type="BOOL" UUID="BFBC65C549625C0153113DB7946123DD" />
+        <Field Name="not_g_inN" Type="BOOL" UUID="2CD7FBA34890F4D9C0735E8FA62C909B" />
+        <Field Name="var_2" Type="BOOL" UUID="998EEEED486FDD57696BB2AB43364240" />
+        <Field Name="var_1" Type="BOOL" UUID="D83145EC4114E9940F15DBB844F17AB2" />
+    </Fields>
+</Type>

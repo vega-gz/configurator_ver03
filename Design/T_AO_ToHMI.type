@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AO_ToHMI" Kind="Struct" UUID="D225A65348D2770B341BAC9762DA1766">
+    <Fields>
+        <Field Name="PV" Type="REAL" UUID="C1318BA56F490CF566FC46867B9EE253" Comment="Для драйвера" />
+        <Field Name="forsPermit" Type="BOOL" UUID="E189DEDF4744C3CD7E2E1C80CD99232C" Comment="Форсировка разрешена" />
+        <Field Name="forsEnable" Type="BOOL" UUID="AFB3B525044B20A30C33BAB29977EDA8" Comment="Форсировка включена" />
+        <Field Name="algSet" Type="REAL" UUID="F472E24DE249FDC4DC5D669FBA6C3C91" Comment="Команда из алгоритма" />
+    </Fields>
+</Type>

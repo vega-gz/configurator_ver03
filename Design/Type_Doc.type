@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Doc" Kind="Struct" UUID="E36854D14A20C08C15B561923BFC1605">
+    <Fields>
+        <Field Name="Make_PPZ" Type="BOOL" UUID="B0D36F4949F697CEAB832D84932CBA04" Comment="Создать Протокол проверки защит" />
+        <Field Name="Make_SUT" Type="BOOL" UUID="727462854C5506E3614CFD98CA514559" Comment="Создать Суточную ведомость" />
+        <Field Name="Make_SV1" Type="BOOL" UUID="B76348A94729062E3D1390A9A2946779" Comment="Создать Сменную 1 ведомость" />
+        <Field Name="Make_SV2" Type="BOOL" UUID="F3A236094691B9454BAA63A0D78D983E" Comment="Создать Сменную 2 ведомость" />
+        <Field Name="Reset_PPZ" Type="BOOL" UUID="43BBE92A484F7F537B25658D1A0A230A" Comment="Сбросить ППЗ" />
+        <Field Name="Save_PPZ" Type="BOOL" UUID="4CFF75404C85739EA0DF04921230064C" Comment="Сохранить ППЗ" />
+    </Fields>
+</Type>

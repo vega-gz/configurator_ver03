@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ArchiveExport" Kind="Struct" UUID="20994A4B43417D6B23C03ABA94162E8B">
+    <Fields>
+        <Field Name="Set_year" Type="INT" UUID="29592EAA4F4CC221D4B7679E6615D6F7" Comment="Год" />
+        <Field Name="Set_month" Type="INT" UUID="20CE2F254FEED8C583970284F0730025" Comment="Месяц" />
+        <Field Name="Set_day" Type="INT" UUID="F535E1874BF11EC3BEB0BB809E267D57" Comment="День" />
+        <Field Name="Set_hour" Type="INT" UUID="9168AEDA45C871E0558856AA320E434B" Comment="Часы" />
+        <Field Name="Set_min" Type="INT" UUID="B0F6B8EC44A998A8A51A018F20BD3954" Comment="Минуты" />
+        <Field Name="Set_sec" Type="INT" UUID="4ECDF17C47DEFDBDE3EB3EADCB5CEFD8" Comment="Секунды" />
+        <Field Name="Set_usec" Type="INT" UUID="CA2882704B0A52F02128F381896539C0" Comment="Миллисекунды" />
+        <Field Name="Bufer_from_date" Type="LREAL" UUID="7769087E43CCC906A4FE02B7AAD07B25" />
+        <Field Name="Set_interval" Type="LREAL" UUID="B2723CA149BC0E659F926B8584C6C1C2" />
+        <Field Name="Select_Event" Type="BOOL" UUID="CCC600F14D468DE87A46E686A7DDB6C3" Comment="Выбор. События" />
+        <Field Name="Select_Trend" Type="BOOL" UUID="EBFAAF77457032B7D3A263943D14E6D9" Comment="Выбор. Тренды" />
+        <Field Name="BTN_UploadArchive" Type="BOOL" UUID="1C03FA1046CAE3EC5B2AA8BE71E6567D" Comment="Выгрузить данные" />
+    </Fields>
+</Type>

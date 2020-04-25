@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="ИБ">
+    <Items>
+        <Item Name="Type_IB_Event.type" />
+        <Item Name="Type_IB_Event_Teh.type" />
+        <Item Name="Type_IS.type" />
+    </Items>
+</Folder>

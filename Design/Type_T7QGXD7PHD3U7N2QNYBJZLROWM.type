@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_AM_ToHMI" Kind="Struct" UUID="C022CB4E44859063C97E949111EC3604">
+    <Fields>
+        <Field Name="Kr1" Type="A6D7875840F9E702E7824F8046D18141" UUID="1941DA694B3B2F1EA3CA4CA7EEE751A6" Comment="Тестовый ИМ" />
+        <Field Name="PNSD" Type="A6D7875840F9E702E7824F8046D18141" UUID="569215BCCC459B36791ABDB5B81B4F63" Comment="Тестовый ИМ" />
+    </Fields>
+</Type>

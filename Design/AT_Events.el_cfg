@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE EventLogger >
+<Configuration MaxEvents="4000000" EventPollInterval="50000" SyncPollInterval="50000" AppCheckInterval="1000000" />

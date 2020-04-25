@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_MnemoSystSign" Kind="Struct" UUID="9B9980C047608D7E68D6498CE4109CCD">
+    <Fields>
+        <Field Name="no_link_CPU" Type="BOOL" UUID="CB17764642F8AB4B1DF8CEB46E15F7B8" Comment="Нет связи с ЦПУ" />
+        <Field Name="Fault_MainCh" Type="BOOL" UUID="2F2A687C4F93D56728C3C8A10E182819" Comment="Неисправность основного канала связи с ЦПУ" />
+        <Field Name="Fault_ReservCh" Type="BOOL" UUID="7FDE302D42BA8622967623BCE14345EF" Comment="Неисправность резервного канала связи с ЦПУ" />
+        <Field Name="Meandr_1s" Type="BOOL" UUID="E901B00A4C755D4DFDC23DBCBE6C7C78" Comment="Меандр 1с обрыва контроллера и АСПС" />
+        <Field Name="M_TRUE" Type="BOOL" UUID="532827684A8A1768AA26D2895AC924F5" Comment="TRUE в мнемосхему" />
+        <Field Name="Status_String" Type="STRING" UUID="2E136D7840FD5C5A922486A7C110C43F" Comment="Статус." />
+        <Field Name="Mode_String" Type="STRING" UUID="8B0E3B8443D24FCBF7BB08AD77E06883" Comment="Статус." />
+        <Field Name="Status_Name_TMR" Type="STRING" UUID="14EC4F8C4CF77CD6EFAE8DAD34DC9076" Comment="Статус. Таймера" />
+        <Field Name="ModeColor" Type="INT" UUID="50088B96486B18EE699642B251534F1F" Comment="Статус." />
+        <Field Name="UpdateSignal" Type="BOOL" UUID="50DE924D4E7F733E7A3CA9B246C425A4" Comment="Частота обновления сигналов" />
+        <Field Name="UpdateAM" Type="BOOL" UUID="EA7B4E0A47AC1BACE8EEE788B4CF4591" Comment="Частота обновления механизмов" />
+    </Fields>
+</Type>

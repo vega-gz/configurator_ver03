@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_PPZ" Kind="Struct" UUID="9F3E2B734FC378B92772F99763FBF9E5">
+    <Fields>
+        <Field Name="PV_Out" Type="REAL" UUID="EACA89FC1B12488286A455A52DCCF007" Comment="Значение параметра при сработке" />
+        <Field Name="Date" Type="STRING" UUID="F1F51D434EEBBF5D8C50D08798277B7D" Comment="Время сработки защиты" />
+        <Field Name="Sel" Type="BOOL" UUID="CD2FEF064C287FB9C313F3B44ABF012B" Comment="Защита выбрана" />
+        <Field Name="Result" Type="STRING" UUID="6F3FEE184F127ECAE864A49A6CF07437" Comment="Результат проверки" />
+    </Fields>
+</Type>
