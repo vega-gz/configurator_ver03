@@ -53,6 +53,7 @@ import fileTools.FileManager;
 import globalData.globVar;
 import java.util.HashMap;
 import java.util.Map;
+import javax.xml.transform.sax.SAXSource;
 
 public class XMLSAX {
 
@@ -66,6 +67,8 @@ public class XMLSAX {
         patchWF = patchF;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
+        //factory.setValidating(true);
+        factory.setIgnoringElementContentWhitespace(true);
         List<String> lines; // Лист с прочитанным файлом
         boolean findErr = false; // если попали в ексепшен и дробим нашим парсером
         try {
@@ -245,11 +248,32 @@ public class XMLSAX {
     // --- Запипись в файл структурой XML ---
     public void writeDocument() {
         try {
+            // удаление пустых строк
+            XPath xp = XPathFactory.newInstance().newXPath();
+            try {
+                NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
+                for (int i=0; i < nl.getLength(); ++i) {
+                Node node = nl.item(i);
+                node.getParentNode().removeChild(node);
+            }
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            System.out.println(document.getNodeName());
+            //System.out.println(document.getNodeName());
             transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
+            //transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
             transformer.transform(new DOMSource(document), new StreamResult(file)); // наш документ в начале
+            
+//            XMLReader reader = XMLReaderFactory.createXMLReader();
+//            TransformerFactory tf = TransformerFactory.newInstance();
+//            // Load the transformer definition from the file strip.xsl:
+//            Transformer t = tf.newTransformer(new SAXSource(reader, new InputSource(new FileInputStream("strip.xsl"))));
+//            // Transform the file test.xml to stdout:
+//            t.transform(new SAXSource(reader, new InputSource(new FileInputStream("test.xml"))), new StreamResult(System.out));
+            
         } catch (TransformerException e) {
             e.printStackTrace(System.out);
         }
@@ -267,6 +291,17 @@ public class XMLSAX {
     // --- Запипись в файл структурой XML с указанием именем файла ---
     public void writeDocument(String patchWF) {
         try {
+            // удаление пустых строк
+            XPath xp = XPathFactory.newInstance().newXPath();
+            try {
+                NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
+                for (int i=0; i < nl.getLength(); ++i) {
+                Node node = nl.item(i);
+                node.getParentNode().removeChild(node);
+            }
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
             File file = new File(patchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
@@ -324,14 +359,9 @@ public class XMLSAX {
     // --- Удалить ноду ---
     public void removeNode(Node n) {
         Node parentN = n.getParentNode();
-        System.out.println("What delete " + n.getNodeName());
-        System.out.println("NameParent " + parentN.getNodeName());
-        parentN.removeChild(n);
-        try {
-            writeDocument(); // НОвый метод записи 
-        } catch (TransformerFactoryConfigurationError ex) {
-            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //System.out.println("What delete " + n.getNodeName());
+        //System.out.println("NameParent " + parentN.getNodeName());
+       parentN.removeChild(n);
     }
 
     // --- Найти первую ноду по имени и вернуть ее нижний.верхний регистр игнорирую ---
@@ -677,9 +707,9 @@ public class XMLSAX {
         HashMap<String, String> map = new HashMap<>();
         XMLSAX test = new XMLSAX();
         Node n = test.readDocument("test666.xml");
-        String[] massD = {"NameN", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
+        String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
         test.insertChildNode(n, massD);
-        test.writeDocument();
+//        test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");
 //        dataN.put("attr2", "value2");
@@ -701,8 +731,10 @@ public class XMLSAX {
 //        String[] attr = {"G","nameColumnPos", "type"};
 //        String[] attr = {"G","nameColumnPos"};
 //        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
-//        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-//        Node fNodName = test.returnFirstFinedNode(n, "mazafaker_child"); // поиск по названию ноды
+////        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
+//        Node fNodName = test.returnFirstFinedNode(n, "Name665"); // поиск по названию ноды
+//        test.removeNode(fNodName);
+//        test.writeDocument();
 //        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды
 //        HashMap<String,String> mapDataN = test.getDataNode(fNodName); // получаем с этой ноды данные
 //        try{
