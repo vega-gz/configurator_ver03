@@ -228,7 +228,7 @@ public class DataBase {
 // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         
-        String addUUID = "UUID, "; // блок определения нужно ли генерировать UUID
+        String addUUID = "\"UUID\", "; // блок определения нужно ли генерировать UUID
         String dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
         for(String s:listNameColum){
             if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
@@ -749,20 +749,21 @@ public class DataBase {
         return comment;
     }
     
-//    public static void main(String[] arg){
-//       DataBase db = DataBase.getInstance();
-//       String nameBD = db.getCurrentNameBase();
-//       //System.out.println(db.getListTable().toString());
-//       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
-//       //String[] rows = {"325", "Commen-665", "NZ", "0987654321", "name-struct"};
-//       String[] rows = {"Commen-665", "NZ", "0987654321", "name-struct"};
-//       ArrayList<String> listNameColum = new ArrayList<>();
-//       //listNameColum.add("id");
-//       listNameColum.add("Comment");
-//       listNameColum.add("Type");
-//       listNameColum.add("UUID");
-//       listNameColum.add("Name");
-//       db.insertRows("t_gpa_di_settings", rows, listNameColum);
-//    
-//    }
+    public static void main(String[] arg){
+       DataBase db = DataBase.getInstance();
+       String nameBD = db.getCurrentNameBase();
+       //System.out.println(db.getListTable().toString());
+       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
+       //String[] rows = {"325", "Commen-665", "NZ", "0987654321", "name-struct"};
+       String[] rows = {"Commen-665", "NZ", "name-struct"};
+       ArrayList<String> listNameColum = new ArrayList<>();
+       //listNameColum.add("id");
+       // listNameColum.add("UUID");
+       listNameColum.add("Comment");
+       listNameColum.add("Type");
+      
+       listNameColum.add("Name");
+       db.insertRows("t_gpa_di_settings", rows, listNameColum);
+    
+    }
 }
