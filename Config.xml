@@ -5,11 +5,11 @@
                 
         <USER>mutonar</USER>
                 
-        <URL>jdbc:postgresql://127.0.0.1:5432/</URL>
+        <URL>jdbc:postgresql://minoro.ru:5432/</URL>
                 
-        <BASE>LocalDB</BASE>
+        <BASE1>LocalDB</BASE1>
                 
-        <BASE1>pravoslav</BASE1>
+        <BASE>pravoslav</BASE>
                 
         <DesignDir>D:\Projects\Калининград_нов</DesignDir>
                 
