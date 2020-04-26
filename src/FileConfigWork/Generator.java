@@ -13,14 +13,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import jdk.incubator.http.internal.common.Utils;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /*@author Григорий*/
 public class Generator {
-
     @SuppressWarnings("empty-statement")
+    
     public static int genSTcode(FrameTabel ft) throws IOException{
         String backUpPath = globVar.backupDir;   //установили путь для бэкапа
         FileManager fm = new FileManager();                                 //создали менеджер файлов
@@ -39,12 +38,12 @@ public class Generator {
             fm.copyFileWoReplace(srcFile, backUpPath + File.separator + stFileName, true);                    //создаём резервную копию
             int ret = fm.openFile4read(globVar.desDir + File.separator + "Design", stFileName);         //открываем её на чтенье
             if(ret!=0){
-                fm.loggerConstructor("Не удалось прочитать файл \"" + srcFile + "\"");
+                FileManager.loggerConstructor("Не удалось прочитать файл \"" + srcFile + "\"");
                 break;
             }
             ret = fm.createFile2write(globVar.desDir + File.separator + "Design", stFileName + "_tmp"); //открываем файл на запись
             if(ret!=0){
-                fm.loggerConstructor("Не удалось создать файл \"" + tmpFile + "\"");
+                FileManager.loggerConstructor("Не удалось создать файл \"" + tmpFile + "\"");
                 break;
             }
             ArrayList<Node> funclist = globVar.sax.getHeirNode(stFile);      //Создали список функций для генерации. Каждую функцию надо сгенерить по числу строк в таблице
@@ -108,28 +107,28 @@ public class Generator {
         int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
         String backUpPath = globVar.backupDir;   //установили путь для бэкапа
-        FileManager fm = new FileManager();                     //создали менеджера для резеовного копирования
         String filePath = globVar.desDir + File.separator + "Design";
-        UUID uuid = new UUID();
-        XMLSAX configSig = new XMLSAX();
+       XMLSAX configSig = new XMLSAX();
         Node cfs = configSig.readDocument("ConfigSignals.xml");// Открыть configCignals из рабочего каталога программы
         String nodeTable = ft.tableName();
         Node findNode = configSig.returnFirstFinedNode(cfs, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if(findNode == null){
-            fm.loggerConstructor("Не найдена нода \"" + nodeTable + "\"");
+            FileManager.loggerConstructor("Не найдена нода \"" + nodeTable + "\"");
             return -1;
         }
         Node nodeGenData = configSig.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData
+        if(nodeGenData == null){
+            FileManager.loggerConstructor("Не найдена нода \"" + nodeTable+"/GenData"+ "\"");
+            return -1;
+        }
         NodeList nodesGenData = nodeGenData.getChildNodes();
-        Node fieldsNode = null;
-        String[] oldArray = {"ver", "old"};//массив для добваления атрибута ОЛД
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 XMLSAX sax = new XMLSAX();
                 Node currNodeCfgXML = nodesGenData.item(i);
                 String typeName = currNodeCfgXML.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
                 String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
-                String typeUUID = uuid.getUIID();
+                String typeUUID = UUID.getUIID();
                 Node newFields = null;
                 Node type;
                 Node oldFields = null;
@@ -141,11 +140,10 @@ public class Generator {
 //                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
 //                    fieldsNode = sax.createNode("Fields");//создали ноду
                 } else {//сюда помещаем добавление
-                    fm.copyFileWoReplace(filePath + File.separator + trueName, backUpPath + File.separator + trueName, true);
+                    FileManager.copyFileWoReplace(filePath + File.separator + trueName, backUpPath + File.separator + trueName, true);
                     type = sax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
                     oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
-                    //sax.setDataAttr(oldFields, "ver", "old");//добавил атрибут ver old
-                    String[] newArray = {"Fields"};//, "ver", "new"};
+                    String[] newArray = {"Fields"};
                     newFields = sax.insertChildNode(type, newArray);
                     Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
                     typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
@@ -167,15 +165,15 @@ public class Generator {
 //                        fieldsNode.appendChild(fieldNode);//добавили Field в Fileds
 
                     } else {
-                        String[] nodeAndAttr = {"Field", "name", tagName};
+                        String[] nodeAndAttr = {"Field", "Name", tagName};
                         Node oldTag = sax.findNodeAtribute(oldFields, nodeAndAttr);
                          if (oldTag == null) {
                             //String sha128hex = org.apache.commons.codec.digest.DigestUtils.sha128Hex(typeName + tagName);
-                            String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", typeUUID, "UUID", ""};
+                            String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", typeUUID, "UUID", UUID.getUIID()};
                             sax.insertChildNode(newFields, nAndA);
                         } else {
                             sax.setDataAttr(oldTag, "Comment", comment);
-                            newFields.appendChild(oldTag);
+                            Node aC = newFields.appendChild(oldTag);
                         }
                     }
                 }

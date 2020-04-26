@@ -54,7 +54,7 @@ public class FileManager {
     public boolean EOF;
 
     // --- копирование файла используя поток ---
-    public void copyFileWoReplace(String source, String dest, boolean notCopyFile) throws IOException {
+    public static void copyFileWoReplace(String source, String dest, boolean notCopyFile) throws IOException {
         File copy = new File(dest);
         if(copy.isFile()){
             if(notCopyFile) return;

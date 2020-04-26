@@ -286,7 +286,7 @@ public class XMLSAX {
     }
 
     // --- Метод чтения и подключение к базе посредством конфига ---
-    public void setConnectBaseConfig(String patchFile) {
+    public int setConnectBaseConfig(String patchFile) {
         File f = new File(patchFile);
         String pass = null;
         String user = null;
@@ -311,12 +311,14 @@ public class XMLSAX {
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
                     }
                     globVar.desDir = DesignDir; // добавить переменную пути проекта
-                    DataBase.getInstance().connectionToBase(url, base, user, pass); // Вызов запроса к базе подключения
+                    return DataBase.getInstance().connectionToBase(url, base, user, pass); // Вызов запроса к базе подключения
                 }
             } catch (ParserConfigurationException | SAXException | IOException ex) {
                 errorExecuter("Проверьте существование или структуру " + patchFile);
+                return -1;
             }
         }
+        return -1;
     }
 
     // --- Удалить ноду ---
@@ -427,46 +429,42 @@ public class XMLSAX {
         if (n != null) {
             //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                boolean access = false; // разрешение на нужную ноду
+                boolean access = true; // разрешение на нужную ноду
                 if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя ноды
                     NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
+                    if(arg.length == 1) return n;               // если аргумент был один - искали толькор имя ноды и нашли его
                     boolean compared = false;
-                    for (int elemArh = 1; elemArh < arg.length; ++elemArh) { // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
-                        String el = arg[elemArh]; // значение элемента которое проверяем
+                    for (int elemArh = 1; elemArh < arg.length; elemArh++) { // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
+                        String key = arg[elemArh]; // значение элемента которое проверяем
+                        String val = null;
+                        if(elemArh < arg.length- 1) val = arg[++elemArh]; //если есть ещё аргументы, значит это пара "ключ-значение"
+                        compared = false;
                         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
                             Node attr = startAttr.item(i);
                             String Attribute = attr.getNodeName(); // Название атрибута
-                            //String Value = attr.getNodeValue(); // значение атрибута
+                            String Value = attr.getNodeValue(); // значение атрибута
                             //System.out.println("Attribute:" + Attribute + " Value:" + Value);
-                            if (el.equals(Attribute)) {
+                            if (key.equals(Attribute) && (val == null || val.equals(Value))) {
                                 compared = true;
                                 break; // элемент нашли и не перебираем дальше значения
                             }
                         }
-                        if (compared == true) {// после прохода элемента нечего не нашли то ломаем цикл
-                            //System.out.println("Find_Value " + el);
-                            access = true;
-                            compared = false;
-                        } else {
+                        if (!compared) {// после прохода элемента нечего не нашли то ломаем цикл
                             access = false;
+                            break;
                         }
                     }
-                    if (access) {
-                        System.out.println("Find Node " + n.getNodeName());
-                        finding = n;
-                        return finding;
+                    if (access) {   //Если access остался true, значит все пары "ключ-значение" найдены
+                        return n;   // и значит мы нашли искомую ноду
                     }
                 }
             }
-            if (finding == null) { // если не нашли
-                for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
-                    finding = findNodeAtribute(child, arg);
-                    if (finding != null) {
-                        break;
-                    }
-                }
-
+        //if (finding == null) { // если выше не было ретурна, значит нода не найдена. Продолжаем искать среди потомков
+            for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
+                finding = findNodeAtribute(child, arg);
+                if (finding != null) return finding;
             }
+        //}
         }
         return finding;
     }

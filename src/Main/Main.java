@@ -62,8 +62,9 @@ public class Main {
             ArrayList<String> name_collums = new ArrayList<>(rwexcel.getDataNameTable(name_table)); // получаем массив столбцов и формируем от куда начинать считывать данные
             // так переопределим длину от куда тащим названия
             //maxlencol = name_collums.size();
-            workbase.createTable(name_table, name_collums); // передаем название таблицы и максимальное  - создание таблиц
-            // берем данные с файла
+            if(workbase!=null)workbase.createTable(name_table, name_collums); // передаем название таблицы и максимальное  - создание таблиц
+            else return;
+// берем данные с файла
             ArrayList<String[]> sheet_fromsheet_from;
             sheet_fromsheet_from = new ArrayList<>(rwexcel.getDataCell(name_table, maxlencol)); // maxlencol не верное вычисление похоже на 3 меньше в DO1 чем должно быть
             Iterator<String[]> iter_sheet = sheet_fromsheet_from.iterator();

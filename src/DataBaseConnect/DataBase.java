@@ -25,6 +25,9 @@ import fileTools.FileManager;
 import globalData.globVar;
 
 public class DataBase {
+
+
+  
     Statement stmt;
     Connection connection = null;
     private ArrayList<String[]> currentSelectTable;
@@ -47,21 +50,22 @@ public class DataBase {
 
     //  синглтон не нужен а вот нужен
     public static DataBase getInstance() { // #3
-
+        int ret=0;
         if (instance == null) {		//если объект еще не создан
             instance = new DataBase();	//создать новый объект
-            instance.connectionToBaseconfig(); // И сразу подключаемся к базе
+            ret = instance.connectionToBaseconfig(); // И сразу подключаемся к базе
         }
-        return instance;		// вернуть ранее созданный объект
+        if(ret==0)return instance;		// вернуть ранее созданный объект
+        else return null;
     }
     
     // --- Подключение к базе используя параметры ---
-    public void connectionToBase(String URL, String DB, String USER, String PASS) {
+    public int connectionToBase(String URL, String DB, String USER, String PASS) {
         this.URL = URL;
         this.BASE = DB;
         this.USER = USER;
         this.PASS = PASS;
-        connectionToBase();
+        return connectionToBase();
     }
     
     // --- получить имя текущей базы ---
@@ -74,9 +78,10 @@ public class DataBase {
     }
     
     // --- Читает конфигурацию для подключения к базе ---
-    private void connectionToBaseconfig(){
-        new XMLSAX().setConnectBaseConfig(FILECONFIG); // так читаем файл и подключаемся к базе
+    private int connectionToBaseconfig(){
+        int x = new XMLSAX().setConnectBaseConfig(FILECONFIG); // так читаем файл и подключаемся к базе
         globVar.currentBase = BASE; // присваием глобальным паметрам значение после инициализации
+        return x;
     }
     // не правильно (так данные передавать это боль)
     private String[] getInfoCurrentConnect(){
@@ -85,13 +90,13 @@ public class DataBase {
     }
     
     // Сменить базу
-    public void changeBase(String base){
+    public int changeBase(String base){
        String[] infoConnect = getInfoCurrentConnect();
-       connectionToBase(infoConnect[0],base,infoConnect[1],infoConnect[2]);
+       return connectionToBase(infoConnect[0],base,infoConnect[1],infoConnect[2]);
     }
     
     // --- Метод подключения к базе ---
-    private void connectionToBase() {
+    private int connectionToBase() {
         if (connection != null){
         try {
             connection.close(); // обязательно выходим перед вызовом так как к многим базам конектимся
@@ -104,7 +109,7 @@ public class DataBase {
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
-            return;
+            return -1;
         }
         System.out.println("PostgreSQL JDBC Driver successfully connected" + "Base:" + URL + BASE);
         try {
@@ -114,8 +119,9 @@ public class DataBase {
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
-            return;
+            return -1;
         }
+        return 0;
     }
 
     // -------------- CREATE DATABASE -----------
@@ -218,12 +224,17 @@ public class DataBase {
             return;
         }
     }
-    // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
+    
+// --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         
         String addUUID = "UUID, "; // блок определения нужно ли генерировать UUID
+        String dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
         for(String s:listNameColum){
-            if(s.equalsIgnoreCase("UUID")) addUUID =""; // если нашли что создаем с нужными UUID обнуляем
+            if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
+            addUUID ="";
+            dataUUID = "";
+            }
         }
         try {
             connection.setAutoCommit(true);
@@ -244,7 +255,7 @@ public class DataBase {
                                     sql += "\"" + bufer_named + "\"" + " ,";
                                 }
                             }
-                            sql += ") VALUES (";
+                            sql += ") VALUES ("+dataUUID;
                             // row и listNameColum должны быть одинаковы но косяк
                             for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
                                 if (i + 1 >= rows.length) {

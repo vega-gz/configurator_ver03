@@ -370,6 +370,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String selectT = (String) jComboBox1.getSelectedItem();
         //DB.connectionToBase();
+        if(DB==null) return;
         List<String> listColumn = DB.selectColumns(selectT);
         ArrayList<String> columns = new ArrayList<>();
         String tmpStr = " ";
@@ -422,6 +423,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(DB==null) return;
         //  DB.connectionToBase(url,pass,user);
         listDropT = DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
@@ -454,6 +456,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(DB==null) return;
         // workbase.connectionToBase();
         if (!listDropT.isEmpty()) {  // если есть что удалять передаем лист в обработчик баз
             DB.dropTable(listDropT);
@@ -461,7 +464,12 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(DB==null) return;
         DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
+        if(DB==null){
+            JOptionPane.showMessageDialog(null, "Подключение к базе не удалось");
+            return;
+        }
         String nameBD = DB.getCurrentNameBase();
         String userBD = DB.getCurrentUser();
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
@@ -475,6 +483,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     
     // --- Кнопка вызова окна с исполнительным механизмом ---
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if(DB==null) return;
        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
@@ -542,9 +551,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     public ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
-
-        //String db = "test08_DB";
-        //workbase.connectionToBase();
+        if(DB==null) return null;
         listDropT = DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
 
