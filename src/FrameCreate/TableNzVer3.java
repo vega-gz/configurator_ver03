@@ -192,18 +192,26 @@ public class TableNzVer3 {
         return new NZDefaultTableModel(dataInTable, resultColumn, nameTable);
     }
 
-    // --- Обработка нажатия клавиш ---
+    // --- Обработка нажатия клавиш мыши ---
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) { // right mouse
             int row = jTable1.rowAtPoint(evt.getPoint()); // хитрое вычисление где нажато
             int column = jTable1.columnAtPoint(evt.getPoint());
             // if (column == 0){        
-            ++column;
-            //String nameGra = (String) jTable1.getValueAt(row, column); // так получим имя графика
+            //++column;
+                       
             PopUpDemo menu = new PopUpDemo();
+            // На всякий случай проверка
+            for(int i=0; i<jTable1.getColumnCount(); ++i){
+                if(jTable1.getColumnName(i).equalsIgnoreCase("id")){
+                    String idRow = (String) jTable1.getValueAt(row, i); // каким столбцом небыл бы id мы всегда получим данные
+                    System.out.println("idRow " + idRow);
+                    menu.idBase = idRow; // передаем в меню данные от id
+                }
+            }
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
             //}
-            // перерисовываем таблицу из данных новых графиков
+            // перерисовываем таблицу
 
             //jTable1.getColumnModel().getColumn(0).setCellRenderer(new myTableCellRenderer_ver2(tmpC));       
             JTableHeader th = jTable1.getTableHeader();
@@ -213,10 +221,9 @@ public class TableNzVer3 {
 
 // -- мини меню по мыши первого столбца таблицы---
     class PopUpDemo extends JPopupMenu {
-
         JMenuItem anItem;
         int i1 = 0;
-
+        String idBase; // id зы отображенный в таблице
         public PopUpDemo() {
             //anItem = new JMenuItem("Click Me!");
             JSlider slider = new JSlider();
@@ -231,13 +238,13 @@ public class TableNzVer3 {
                     //System.out.println(value);
                 }
             });
-            // еще один пункт меню
-            JMenuItem menuItem = new JMenuItem("Add_Signal...",
+            //пункт меню добавления сигнала
+            JMenuItem menuItemAdd = new JMenuItem("Add_Signal...",
                     new ImageIcon("images/newproject.png"));  
-            menuItem.setMnemonic(KeyEvent.VK_P);
-            menuItem.getAccessibleContext().setAccessibleDescription(
+            menuItemAdd.setMnemonic(KeyEvent.VK_P);
+            menuItemAdd.getAccessibleContext().setAccessibleDescription(
                     "New Project");
-            menuItem.addActionListener(new ActionListener() {
+            menuItemAdd.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent ae) {
                     //int sumColumn = jTable1.getColumnCount();// список столюцов
                     ArrayList<String> listColumn = new ArrayList<>();
@@ -245,11 +252,32 @@ public class TableNzVer3 {
                         listColumn.add(jTable1.getColumnName(i));
                     }
                     new PopMenuDialog(listColumn, workbase, nameTable); // вызов диалога с полями для заполнения и указателем на базу
-//                    JOptionPane.showMessageDialog(null, "New Project clicked!"); // а почему null ?
+//                  JOptionPane.showMessageDialog(null, "New Project clicked!"); // а почему null ?
                 }
             });
-            add(menuItem);
+            add(menuItemAdd);
+            //пункт меню добавления сигнала
+            JMenuItem menuItemDel = new JMenuItem("remove_Signal...",
+                    new ImageIcon("images/newproject.png"));  
+            menuItemDel.setMnemonic(KeyEvent.VK_P);
+            menuItemDel.getAccessibleContext().setAccessibleDescription(
+                    "New Project");
+            menuItemDel.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    //int sumColumn = jTable1.getColumnCount();//список столбцов
+                    ArrayList<String> listColumn = new ArrayList<>();
+                    for(int i=0; i<jTable1.getColumnCount(); ++i){ // собираем лист из имен таблицы для полного соотвтствия
+                        listColumn.add(jTable1.getColumnName(i));
+                    }
+                    if (idBase !=null){
+                        workbase.deleteRowId(nameTable, idBase);
+                        JOptionPane.showMessageDialog(null, "Signal ID " + idBase + "delete" ); // а почему null ?
+                    }
+                }
+            });
+            add(menuItemDel);
         }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
