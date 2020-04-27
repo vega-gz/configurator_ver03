@@ -12,6 +12,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Exchanger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,10 +25,12 @@ import javax.swing.JTextField;
  *
  * @author ad
  */
-public class PopMenuDialog extends javax.swing.JFrame {
+public class PopMenuDialog extends javax.swing.JFrame implements Runnable{
     DataBase workbase = null; // создаем пустой запрос к базе
     String name_table;
-    
+    private ArrayList<String> listColumn;
+    Exchanger<String> exchanger;
+
     public PopMenuDialog() {
         initComponents();
     }
@@ -37,11 +42,13 @@ public class PopMenuDialog extends javax.swing.JFrame {
     }
     
     // --- коструктор с указателем на базу ---
-    PopMenuDialog(ArrayList<String> listColumn, DataBase workbase, String name_table) {
+    PopMenuDialog(ArrayList<String> listColumn, DataBase workbase, String name_table, Exchanger<String> exchanger) {
         this.workbase = workbase;
         this.name_table = name_table;
-        initComponents();
-        getPanelTable(listColumn); // автоматическое располжение элементов для занесения информации
+        this.listColumn = listColumn;
+        this.exchanger = exchanger;
+//        initComponents();
+//        getPanelTable(listColumn); // автоматическое располжение элементов для занесения информации
     }
 
     @SuppressWarnings("unchecked")
@@ -49,7 +56,6 @@ public class PopMenuDialog extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -58,33 +64,15 @@ public class PopMenuDialog extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("рпапр");
-        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField1MouseClicked(evt);
-            }
-        });
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,17 +89,8 @@ public class PopMenuDialog extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
-
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1MouseClicked
 
     
     // --- Метод динамической атрисовки элементов Frame ---
@@ -172,6 +151,11 @@ public class PopMenuDialog extends javax.swing.JFrame {
                 ++column;    
                 }
                 workbase.insertRows(name_table, rows, listNameColum); // Все в базу заносим
+                try {
+                    exchanger.exchange("update_table"); // тригер  для срабатывания отрисовщика
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(PopMenuDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 dispose(); // и закрываем
             } 
                
@@ -187,7 +171,13 @@ public class PopMenuDialog extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        initComponents();
+        getPanelTable(listColumn); // автоматическое располжение элементов для занесения информации
+        
+    }
 
 }
