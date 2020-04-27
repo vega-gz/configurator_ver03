@@ -891,7 +891,7 @@ public class DataBase {
         if(abList != null && !abList.isEmpty()){
             itemList = new String[abList.size()];
             for(int i = 0; i < abList.size(); i++) {
-                itemList[i] = abList.get(i)[1]+" ("+abList.get(i)[2] +")";
+                itemList[i] = abList.get(i)[1];
             }
         }
         ComboBoxModel cbm = new DefaultComboBoxModel(itemList);

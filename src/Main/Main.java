@@ -84,10 +84,11 @@ public class Main {
     }
     
             // --- формирования баз используя конфиг ---
-    static void fillBaseConfig(String patch_file)  {
+    static void fillBaseConfig(String patch_file) throws IOException  {
             //String pathConfigSignal = "ConfigSignals.xml";
             //Node rootN = sax.readDocument(pathConfigSignal); // Берем корневую ноду
             //Node finderN = sax.returnFirstFinedNode(rootN, "ConfigSignals"); // реализовал метод поиска
-            globVar.sax.ReadExelFromConfig(globVar.cfgRoot, patch_file); // пересыламе ноду на обработку там же и формирование базы
+            //globVar.sax.ReadExelFromConfig(globVar.cfgRoot, patch_file); // пересыламе ноду на обработку там же и формирование базы
+            RWExcel.ReadExelFromConfig(patch_file); // пересыламе ноду на обработку там же и формирование базы
     }
 }

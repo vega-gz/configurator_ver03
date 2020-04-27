@@ -46,6 +46,7 @@ public class globVar {
         public static XMLSAX sax = null;
         public static Node cfgRoot = null;
 	public static DataBase DB = null;
+        public static String abonent = "";
                 
 	public static void SetStatUUID() {
 		Date date = new Date();

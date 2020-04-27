@@ -59,7 +59,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
         globVar.DB = DataBase.getInstance();
         jTextField1.setText(globVar.desDir);
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
+        DataBase.createAbonentTable();
         DataBase.updateAbList(jComboBox2);
+        globVar.abonent = jComboBox2.getItemAt(0);
         this.setTitle("Текущая база:" + globVar.currentBase + ", путь: " + globVar.PathToProject); // установить заголовок
     }
     @SuppressWarnings("unchecked")
@@ -353,8 +355,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
           int casedial = JOptionPane.showConfirmDialog(null, "Загрузить в базу используя конфигурационный файл?\n Выбрав No файл загрузиться полностью."); // сообщение с выбором
             switch (casedial) {
                 case 0: 
-                    Main.fillBaseConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
+                {
+                    try {
+                        Main.fillBaseConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
+                    } catch (IOException ex) {
+                        Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
+
                 case 1:
                     Main.fillBaseAlldata(file.getPath()); // Заполнение базы полностью из файла
                     break;
@@ -557,13 +566,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jFrameTableWindowClosed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        String newItem = (String) jComboBox2.getSelectedItem();
-        int i;
-        int lim = jComboBox2.getItemCount();
-        for(i = 0; i < lim; i++) 
-            if(newItem.equals(jComboBox2.getItemAt(i))) 
-                break;
-        if(i == lim) jComboBox2.addItem(newItem);
+        globVar.abonent = (String) jComboBox2.getSelectedItem();
+//        int i;
+//        int lim = jComboBox2.getItemCount();
+//        for(i = 0; i < lim; i++) 
+//            if(newItem.equals(jComboBox2.getItemAt(i))) 
+//                break;
+//        if(i == lim) jComboBox2.addItem(newItem);
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed

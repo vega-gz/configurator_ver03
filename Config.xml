@@ -3,9 +3,9 @@
     <Settings>
         <USER>mutonar</USER>
         <URL>jdbc:postgresql://127.0.0.1:5432/</URL>
-        <BASE>LocalDB</BASE>
+        <BASE>KaliningradKC</BASE>
         <BASE1>pravoslav</BASE1>
-        <DesignDir>D:\Projects\Калининград_нов</DesignDir>
+        <DesignDir>D:\Projects\Калининград_цех</DesignDir>
         <nameProject>5</nameProject>
         <PASS>Solovin2</PASS>
     </Settings>

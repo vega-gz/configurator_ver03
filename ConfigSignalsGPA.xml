@@ -2,27 +2,26 @@
 <ConfigSignals>
 	<AI excelSheetName="AI">
         <EXEL>
-            <F nameColumnPos="Наименование"/><!--Обязательный нода-->
-            <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
+            <F nameColumnPos="Наименование" unical="true"/><!--Обязательный нода-->
+            <U nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
             <G nameColumnPos="Диапазон_мин" type="Number" fRez=""/>
             <H nameColumnPos="Диапазон_макс" type="Number" fRez=""/>
-            <J nameColumnPos="Тип_датчика" default="4-20 мА"/>
-            <AA nameColumnPos="АЦПmax" default="2.0"/>
-            <AB nameColumnPos="АЦПmax" default="10.0"/>
+            <AA nameColumnPos="АЦП" default="adc2_10"/>
+            <AB nameColumnPos="АЦПmax" default="10"/>
             <I nameColumnPos="Единица_измерения" default=""/>
+            <J nameColumnPos="Тип_датчика" default=""/>
             <K nameColumnPos="Акт_пас" default=""/>
             <L nameColumnPos="Адрес_1" default=""/>
             <M nameColumnPos="Адрес_2" default=""/>
             <N nameColumnPos="Адрес_3" default=""/>
-            <T nameColumnPos="Точность"  type="Int" default="2"/>
-            <AC nameColumnPos="loLim" type="Number" formula="loLimF"/>
-            <AD nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
-            <AE nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
-            <AF nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
-            <AG nameColumnPos="ROC" type="Number"   default="0.0"/>
-            <AH nameColumnPos="recoveryTime" type="Number" default="1.0"/>
-            <AI nameColumnPos="tau" type="Number"  default="1.0"/>
-			<O nameColumnPos="Примечание" default=""/>
+            <Y nameColumnPos="Точность"  type="Int" default="2"/>
+            <AI nameColumnPos="loLim" type="Number" formula="loLimF"/>
+            <AJ nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
+            <AK nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
+            <AL nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
+            <AM nameColumnPos="ROC" type="Number"   formula="range"/>
+            <AN nameColumnPos="recoveryTime" type="Number" default="1.0"/>
+            <AO nameColumnPos="tau" type="Number"  default="1.0"/>
         </EXEL>
 		<Formulas>
 			<Диапазон_макс/>
@@ -155,7 +154,7 @@
 			</File>
 		</GenCode>
 	</AnO>
-	<DGI excelSheetName="DGI">
+	<DI excelSheetName="DI">
 		<GenData>
 			<T_GPA_DI_Settings Type="T_DI_Settings"/>
 			<T_GPA_DI_FromHMI Type="T_DI_FromHMI"/>
@@ -165,16 +164,15 @@
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <K nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>
-            <G nameColumnPos="Тип_сигнала" default="НО СК"/>
-            <P nameColumnPos="Инверсия" type="bool" default="false"/>
-            <H nameColumnPos="Адрес_1" default=""/>
-            <I nameColumnPos="Адрес_2" default="" />
-            <L nameColumnPos="Устройство" type="Int" default=""/>
-            <M nameColumnPos="Слот"  type="Int" default=""/>
-            <N nameColumnPos="Канал"  type="Int" default=""/>
-            <O nameColumnPos="Задержка"  type="Number" default="0.0"/>
-			<J nameColumnPos="Примечание" default=""/>
+            <Q nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Тип_сигнала" />
+            <K nameColumnPos="Инверсия" type="bool" default="false"/>
+            <L nameColumnPos="Задержка"  type="Number" default="1.0"/>
+            <H nameColumnPos="Адрес_1"/>
+            <I nameColumnPos="Адрес_2" />
+            <M nameColumnPos="Устройство" type="Int"/>
+            <N nameColumnPos="Слот"  type="Int"/>
+            <O nameColumnPos="Канал"  type="Int"/>
         </EXEL>
 		<GenCode>
 			<File name="DI_CallAll.txt">
@@ -200,22 +198,21 @@
 				</Function>
 			</File>
 		</GenCode>
-	</DGI>
-	<DGO excelSheetName="DGO">
+	</DI>
+	<DGO excelSheetName="DO">
 		<GenData>
 			<T_GPA_DO_FromHMI Type="T_DO_FromHMI"/>
 			<T_GPA_DO_ToHMI Type="T_DO_ToHMI"/>
 		</GenData>	
         <EXEL>
             <F nameColumnPos="Наименование" />
-            <K nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>
-            <G nameColumnPos="Тип_сигнала"  default=""/>
-            <H nameColumnPos="Адрес_1" default=""/>
-            <I nameColumnPos="Адрес_2"  default=""/>
-            <L nameColumnPos="Устройство" type="Int" default=""/>
-            <M nameColumnPos="Слот"  type="Int" default=""/>
-            <N nameColumnPos="Канал"  type="Int" default=""/>
-			<J nameColumnPos="Примечание" default=""/>
+            <Q nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Тип_сигнала" />
+            <H nameColumnPos="Адрес_1"/>
+            <I nameColumnPos="Адрес_2" />
+            <M nameColumnPos="Устройство" type="Int"/>
+            <N nameColumnPos="Слот"  type="Int"/>
+            <O nameColumnPos="Канал"  type="Int"/>
         </EXEL>
 		<GenCode>
 			<File name="A_Algorithm.iec_st">

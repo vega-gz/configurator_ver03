@@ -232,6 +232,8 @@ public class XMLSAX {
 
     // --- получаем всех наследников ноды именно нод список(стандартно возвразает все подряд) ---
     public ArrayList<Node> getHeirNode(Node n) {
+        if(n==null)
+            return null;
         ArrayList<Node> kindNode = new ArrayList<>();
 
         NodeList child = n.getChildNodes();
@@ -523,7 +525,7 @@ public class XMLSAX {
             for (int i = 0; i < signalList.getLength(); i++) {
                 Node firsNode = signalList.item(i);
                 if (firsNode.getNodeType() == firsNode.ELEMENT_NODE) {  // почему не это
-                    nameTB = firsNode.getNodeName(); // Корневая нода это название таблицы
+                    nameTB = globVar.abonent + "_" + firsNode.getNodeName(); // Корневая нода это название таблицы
                     System.out.println("NameTableBase " + nameTB);
                     NamedNodeMap atrsig = firsNode.getAttributes();
                     for (int atr = 0; atr < atrsig.getLength(); atr++) { // пробегаем по атрибутам
