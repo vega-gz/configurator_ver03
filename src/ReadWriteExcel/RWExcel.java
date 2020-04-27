@@ -376,7 +376,7 @@ public class RWExcel {
             int startm = 1;
             first_len = startReadData;
             startm = 1; // данные с первого так как один UUID
-            col_UUID = 1;
+            // col_UUID = 1; // без УУИДОВ скачиваем данные
             array_cell_len = new String[columns.size() + col_UUID]; // Почему +1 Так как одни данные под UUID
             Iterator<Row> rowIter = sheet.iterator(); // итератор Строк
             int sum_sheet = 0;
@@ -391,13 +391,13 @@ public class RWExcel {
                     Row row = rowIter.next();
                     // System.out.println(row.getFirstCellNum() + " " + row.getLastCellNum()); //в строку что бы посмотреть что за нах
                     int tmp = 0;
-                    //заносим Кол UUID
-                    int tmp_UUID = 1;
-                    do {
-                        array_cell_len[tmp] = getUIID();
-                        tmp_UUID++;
-                        tmp++;
-                    } while (tmp_UUID <= col_UUID);
+//                    //заносим Кол UUID
+//                    int tmp_UUID = col_UUID;
+//                    while (tmp_UUID <= col_UUID) {
+//                        array_cell_len[tmp] = getUIID();
+//                        tmp_UUID++;
+//                        tmp++;
+//                    } 
                     //Iterator<Cell> cells = row.cellIterator(); // Итератор ячеек (Почему не применяю его ?)
                     //int i_tmp = 0;
                     for (int i_tmp = 0; i_tmp < columns.size(); ++i_tmp) { // пробегаемся по входному массиву

@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigSignals>
-	<SetPoints excelSheetName="ANB">
-		<GenData>
-			<T_ANB Type="BOOL"/>
-			<T_GPA_SP_Settings Type="T_SP_Settings"/>
-		</GenData>
-        <EXEL>
-            <C nameColumnPos="TAG_NAME_PLC" type="VarName"/>
-            <D nameColumnPos="direct" registr="down" replace="true" repFrom1="&gt;" repTo1="больше" repFrom2="true" repTo2="больше" repFrom3="&lt;" repTo3="меньше" repFrom4="false" repTo4="меньше"/><!---->
-            <E nameColumnPos="limit" type="Number"/>
-            <F nameColumnPos="delay" type="Number" default="3"/>
-            <G nameColumnPos="тип" registr="up" default="У"  replace="true" repFrom1="U" repTo1="У" repFrom2="A" repTo2="А" repFrom3="P" repTo3="П" repFrom4="O" repTo4="О"/>
-            <H nameColumnPos="defVal" type="Int" default="0"/>
-            <I nameColumnPos="типПостфикс" switch="тип" var1="О" default1="огр." var2="А" default2="авар." var3="П" default3="предупр." default="упр." />
-            <J nameColumnPos="директПостфикс" type="VarName" swith="direct" var1="больше" default1="верхняя" var2="меньше" default2="нижняя"/>
-            <K nameColumnPos="typePostfix" switch="тип" var1="У" default1="_U"   var2="А" default2="_A"    var3="П" default3="_P"       var4="О" default4="_O"  />
-            <L nameColumnPos="directPostfix"  type="VarName" switch="direct" var1="больше" default1="v"       var2="меньше" default2="n"     />
-            <B nameColumnPos="Наименование" add1="типПостфикс" add2="директПостфикс"/>
-        </EXEL>
-	</SetPoints>
 	<AI excelSheetName="AI">
         <EXEL>
             <F nameColumnPos="Наименование" unical="true"/><!--Обязательный нода-->
-            <U nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
+            <U nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
             <G nameColumnPos="Диапазон_мин" type="Number" fRez=""/>
             <H nameColumnPos="Диапазон_макс" type="Number" fRez=""/>
             <AA nameColumnPos="АЦП" default="adc2_10"/>
@@ -107,6 +88,26 @@
 			</File>
 		</GenHMI>
 	</AI>
+	<SetPoints excelSheetName="ANB">
+		<GenData>
+			<T_ANB Type="BOOL"/>
+			<T_GPA_SP_Settings Type="T_SP_Settings"/>
+		</GenData>
+        <EXEL>
+            <C nameColumnPos="TAG_NAME_AnPar" type="VarName"/>
+            <D nameColumnPos="direct" registr="down" replace="true" repFrom1="&gt;" repTo1="больше" repFrom2="true" repTo2="больше" repFrom3="&lt;" repTo3="меньше" repFrom4="false" repTo4="меньше"/><!---->
+            <E nameColumnPos="limit" type="Number"/>
+            <F nameColumnPos="delay" type="Number" default="3"/>
+            <G nameColumnPos="тип" registr="up" default="У"  replace="true" repFrom1="U" repTo1="У" repFrom2="A" repTo2="А" repFrom3="P" repTo3="П" repFrom4="O" repTo4="О"/>
+            <H nameColumnPos="defVal" type="Int" default="0"/>
+            <I nameColumnPos="типПостфикс" switch="тип" var1="О" default1="огр." var2="А" default2="авар." var3="П" default3="предупр." default="упр." />
+            <J nameColumnPos="директПостфикс" type="VarName" swith="direct" var1="больше" default1="верхняя" var2="меньше" default2="нижняя"/>
+            <K nameColumnPos="typePostfix" switch="тип" var1="У" default1="_U"   var2="А" default2="_A"    var3="П" default3="_P"       var4="О" default4="_O"  />
+            <L nameColumnPos="directPostfix"  type="VarName" switch="direct" var1="больше" default1="v"       var2="меньше" default2="n"     />
+            <B nameColumnPos="Наименование" add1="типПостфикс" add2="директПостфикс"/>
+            <F nameColumnPos="TAG_NAME_PLC" add1="TAG_NAME_AnPar" add2="typePostfix" add3="directPostfix"/>
+        </EXEL>
+	</SetPoints>
 	<AnO excelSheetName="AO">
 		<GenData>
 			<T_GPA_AO_FromHMI Type="T_AO_FromHMI"/>

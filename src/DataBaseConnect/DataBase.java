@@ -6,6 +6,8 @@
 package DataBaseConnect;
 
 
+import FrameCreate.AddAbonent;
+import StringTools.StrTools;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,6 +25,10 @@ import java.util.HashMap;
 import java.util.Map;
 import fileTools.FileManager;
 import globalData.globVar;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 
 public class DataBase {
 
@@ -262,7 +268,7 @@ public class DataBase {
 // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         
-        String addUUID = "UUID, "; // блок определения нужно ли генерировать UUID
+        String addUUID = "\"UUID\", "; // блок определения нужно ли генерировать UUID
         String dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
         for(String s:listNameColum){
             if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
@@ -342,7 +348,7 @@ public class DataBase {
             String sql = "";
             try {
                 name_table = replacedNt(name_table);
-                sql = "INSERT INTO " + name_table + " ("; // при первом проходе иначе будет отличаться данные и столбцы
+                sql = "INSERT INTO \"" + name_table + "\" ("; // при первом проходе иначе будет отличаться данные и столбцы
                 String tmp = "";
                 for (int i = 0; i < listNameColum.length; i++) { // формирую данные для этого запроса - 1 так как добавили ID
                     tmp += ", \"" + listNameColum[i] + "\"";
@@ -387,9 +393,9 @@ public class DataBase {
         String sql = null;
         for(String s: getListColumnTable(table)){
             if(s.equals(orderCol)){ // нашли тогда упорядовать
-              sql = "SELECT " + s_columns + " FROM " + table + " ORDER BY \"" +orderCol +"\";";
+              sql = "SELECT " + s_columns + " FROM \"" + table + "\" ORDER BY \"" +orderCol +"\";";
               break;
-            }else sql = "SELECT " + s_columns + " FROM " + table +";"; 
+            }else sql = "SELECT " + s_columns + " FROM \"" + table +"\";"; 
         }
         try {
             stmt = connection.createStatement();
@@ -863,18 +869,50 @@ public class DataBase {
         return comment;
     }
     
+    //--------- Методы обслюживающие систему абонентов -Lev-----------------
+    public static void createAbonentTable(){ //Создание таблицы абонентов, если её не было
+        if(globVar.DB==null) return;
+        ArrayList<String> list_table_base = globVar.DB.getListTable();
+        if(StrTools.searchInList("Abonents", list_table_base)< 0){
+            String[] columns = {"Abonent","Наименование","Path_to_Excel"};
+            globVar.DB.createTable("Abonents", columns,"Абоненты");
+        }
+    }
+    public static ArrayList<String[]> getAbonentArray() // функция для создания списка из таблицы абонентов
+    {
+        if(globVar.DB==null) return null;
+        ArrayList<String> list_table_base = globVar.DB.getListTable();
+        if(StrTools.searchInList("Abonents", list_table_base)< 0) return null;
+        return globVar.DB.getData("Abonents");
+    }
+    public static void updateAbList(JComboBox x){ //обновление комбобокса согласно списку абонентов из базы
+        ArrayList<String[]> abList = getAbonentArray();
+        String[] itemList  = {""};
+        if(abList != null && !abList.isEmpty()){
+            itemList = new String[abList.size()];
+            for(int i = 0; i < abList.size(); i++) {
+                itemList[i] = abList.get(i)[1]+" ("+abList.get(i)[2] +")";
+            }
+        }
+        ComboBoxModel cbm = new DefaultComboBoxModel(itemList);
+        x.setModel(cbm);        
+    }
+
+
+//    
 //    public static void main(String[] arg){
 //       DataBase db = DataBase.getInstance();
 //       String nameBD = db.getCurrentNameBase();
 //       //System.out.println(db.getListTable().toString());
 //       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
 //       //String[] rows = {"325", "Commen-665", "NZ", "0987654321", "name-struct"};
-//       String[] rows = {"Commen-665", "NZ", "0987654321", "name-struct"};
+//       String[] rows = {"Commen-665", "NZ", "name-struct"};
 //       ArrayList<String> listNameColum = new ArrayList<>();
 //       //listNameColum.add("id");
+//       // listNameColum.add("UUID");
 //       listNameColum.add("Comment");
 //       listNameColum.add("Type");
-//       listNameColum.add("UUID");
+//      
 //       listNameColum.add("Name");
 //       db.insertRows("t_gpa_di_settings", rows, listNameColum);
 //    

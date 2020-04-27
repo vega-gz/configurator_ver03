@@ -9,7 +9,11 @@ import DataBaseConnect.DataBase;
 import StringTools.StrTools;
 import XMLTools.XMLSAX;
 import fileTools.FileManager;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import org.w3c.dom.Node;
 
 /**
@@ -56,5 +60,4 @@ public class globVar {
 		dinUuid ++;
 		return stUuid + String.format("%012X", dinUuid);
 	}
-
 }
