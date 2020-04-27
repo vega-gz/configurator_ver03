@@ -31,8 +31,10 @@ import java.awt.Dimension;
 import DataBaseConnect.*;
 import FileConfigWork.SignalTypeToBase;
 import ReadWriteExcel.WriteXMLsignals;
+import StringTools.StrTools;
 import fileTools.FileManager;
 import globalData.globVar;
+import java.awt.Component;
 
 /**
  *
@@ -40,12 +42,12 @@ import globalData.globVar;
  */
 public class Main_JPanel extends javax.swing.JFrame {
 
-    String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_DB";
+    String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_globVar.DB";
     String url, nameProject, user, pass;
    
     RWExcel excel = new RWExcel();
     String path;
-    DataBase DB = DataBase.getInstance();
+    //DataBase globVar.DB = DataBase.getInstance();
     public String signal;
     ArrayList<String> listDropT = new ArrayList();
     
@@ -59,7 +61,7 @@ public class Main_JPanel extends javax.swing.JFrame {
             UUID_Parent1, UUID_Parent2, UUID_Parent3, UUID_Parent4, UUIDParent5;
 
     private final String UUIDType_AI_ToProcessing = "187F76AE49C59E950138DDA3067101D0";//уиды типов
-    private final String UUIDType_AI_Settings = "668FE9B94A603427C8EDBBB8917A7594";
+    private final String UUIDType_AI_Settings = "668FE9B94A603427C8EglobVar.DBBB8917A7594";
     private final String UUID_AI_OnlyToHMI = "3F156B284DE592D62F031C9791BF07EF";
     private final String UUID_AI_FromProcessing = "2318F94F4C3CEA2681DE4C8C432A66E9";
     private final String UUID_DI_FromProcessing = "9F0EDD3143DC10ACF03CBA8C4A870F2D";
@@ -68,7 +70,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     private final String UUID_AO_FromHMI = "28BBA2F94E53F5E7D050CBA8820F76E4";
     private final String UUID_AO_ToHMI = "D225A65348D2770B341BAC9762DA1766";
     private final String UUID_DO_FromHMI = "032CB0403C4B8FB66F9B68B2E5D50373";
-    private final String UUID_DO_ToHMI = "7474D14B284DB0A574420580A1FFD7C0";
+    private final String UUID_DO_ToHMI = "7474D14B284globVar.DB0A574420580A1FFD7C0";
 
     private final String UUID_Parent_AI_FromProcessing = "D48C3F1549ACD994A366A1A51FE00772";
     private final String UUID_Parent_AI_OnlyToHMI = "ABDF10D048FB61AB90F474996CF9B3B2";
@@ -84,8 +86,13 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     public Main_JPanel() {
         initComponents();
+        globVar.DB = DataBase.getInstance();
         jTextField1.setText(globVar.desDir);
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
+        getAbonentArray();
+        String[] itemList = {""};
+        ComboBoxModel cbm = new DefaultComboBoxModel(itemList);
+        jComboBox2.setModel(cbm);
         this.setTitle("Текущая база:" + globVar.currentBase + ", путь: " + globVar.PathToProject); // установить заголовок
     }
 
@@ -115,6 +122,8 @@ public class Main_JPanel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jButton10 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -238,6 +247,21 @@ public class Main_JPanel extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jTextField1.setText("jTextField1");
 
+        jComboBox2.setEditable(true);
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("jButton10");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -266,11 +290,14 @@ public class Main_JPanel extends javax.swing.JFrame {
                     .addComponent(jTextField1)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton9)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jButton9))
+                                .addComponent(jButton3)
+                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -303,10 +330,15 @@ public class Main_JPanel extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton9)
-                        .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton9)
+                            .addComponent(jLabel2)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,10 +400,10 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     // --- Метод реагирования на выбор поля из списка таблиц ---
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        if(globVar.DB==null) return;
         String selectT = (String) jComboBox1.getSelectedItem();
-        //DB.connectionToBase();
-        if(DB==null) return;
-        List<String> listColumn = DB.selectColumns(selectT);
+        //globVar.DB.connectionToBase();
+        List<String> listColumn = globVar.DB.selectColumns(selectT);
         ArrayList<String> columns = new ArrayList<>();
         String tmpStr = " ";
         for (String s : listColumn) { // ограничение что не выводим из столбцов
@@ -414,7 +446,7 @@ public class Main_JPanel extends javax.swing.JFrame {
         int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
         FrameTabel frameTable = new FrameTabel(selectT, columns); // Вызов класса Название таблицы и данные для нее
         jFrameTable.add(frameTable); // с заголовком имя таблицы
-        jFrameTable.setTitle(selectT + " " + DB.getCommentTable(selectT)); // установить заголовок имя таблицы и если есть ее коммент
+        jFrameTable.setTitle(selectT + " " + globVar.DB.getCommentTable(selectT)); // установить заголовок имя таблицы и если есть ее коммент
         jFrameTable.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         jFrameTable.setContentPane(frameTable); // Передаем нашу форму
         jFrameTable.setVisible(true);
@@ -423,9 +455,9 @@ public class Main_JPanel extends javax.swing.JFrame {
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(DB==null) return;
-        //  DB.connectionToBase(url,pass,user);
-        listDropT = DB.getListTable();
+        if(globVar.DB==null) return;
+        //  globVar.DB.connectionToBase(url,pass,user);
+        listDropT = globVar.DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
         String listTable = "";
 
@@ -456,22 +488,22 @@ public class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(DB==null) return;
+        if(globVar.DB==null) return;
         // workbase.connectionToBase();
         if (!listDropT.isEmpty()) {  // если есть что удалять передаем лист в обработчик баз
-            DB.dropTable(listDropT);
+            globVar.DB.dropTable(listDropT);
         } else;
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(DB==null) return;
-        DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
-        if(DB==null){
+        if(globVar.DB==null) return;
+        globVar.DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
+        if(globVar.DB==null){
             JOptionPane.showMessageDialog(null, "Подключение к базе не удалось");
             return;
         }
-        String nameBD = DB.getCurrentNameBase();
-        String userBD = DB.getCurrentUser();
+        String nameBD = globVar.DB.getCurrentNameBase();
+        String userBD = globVar.DB.getCurrentUser();
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
         String message = null; 
         if(nameBD != null){
@@ -483,13 +515,13 @@ public class Main_JPanel extends javax.swing.JFrame {
     
     // --- Кнопка вызова окна с исполнительным механизмом ---
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if(DB==null) return;
+        if(globVar.DB==null) return;
        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;
-        ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(DB); // И передаем туда управление базой
+        ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(globVar.DB); // И передаем туда управление базой
         frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
         frameExecutiveMechanism.setVisible(true); 
@@ -549,10 +581,46 @@ public class Main_JPanel extends javax.swing.JFrame {
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
     }//GEN-LAST:event_jFrameTableWindowClosed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        String newItem = (String) jComboBox2.getSelectedItem();
+        int i;
+        int lim = jComboBox2.getItemCount();
+        for(i = 0; i < lim; i++) 
+            if(newItem.equals(jComboBox2.getItemAt(i))) 
+                break;
+        if(i == lim) jComboBox2.addItem(newItem);
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        JFrame addAb = new AddAbonent();
+        addAb.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        addAb.setTitle("Новый абонент");
+        addAb.setVisible(true);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    public ArrayList<String[]> getAbonentArray() // функция для создания списка из таблиц базы
+    {
+        if(globVar.DB==null) return null;
+        ArrayList<String> list_table_base = globVar.DB.getListTable();
+        if(StrTools.searchInList("Abonents", list_table_base)< 0){
+            String[] columns = {"Abonent","Наименование","Path_to_Excel"};
+            globVar.DB.createTable("Abonents", columns,"Абоненты");
+            JFrame addAb = new AddAbonent();
+            addAb.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            addAb.setTitle("Новый абонент");
+            addAb.setVisible(true);
+                
+        }else{
+            ArrayList<String[]> tab = globVar.DB.getData("Abonents");
+            return tab;
+        }
+        return null;
+    }
+
     public ComboBoxModel getComboBoxModel() // функция для создания списка из таблиц базы
     {
-        if(DB==null) return null;
-        listDropT = DB.getListTable();
+        if(globVar.DB==null) return null;
+        listDropT = globVar.DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
 
         String listTable = "";
@@ -577,6 +645,7 @@ public class Main_JPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -587,6 +656,7 @@ public class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;

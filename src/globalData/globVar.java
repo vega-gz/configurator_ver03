@@ -5,6 +5,7 @@
  */
 package globalData;
 
+import DataBaseConnect.DataBase;
 import StringTools.StrTools;
 import XMLTools.XMLSAX;
 import fileTools.FileManager;
@@ -40,7 +41,8 @@ public class globVar {
         
         public static XMLSAX sax = null;
         public static Node cfgRoot = null;
-	
+	public static DataBase DB = null;
+                
 	public static void SetStatUUID() {
 		Date date = new Date();
 		stUuid = String.format("%020X", date.getTime());

@@ -225,6 +225,40 @@ public class DataBase {
         }
     }
     
+    //-------------- Создать таблицу без проверки её наличия в БД ---------------
+    public void createTable(String name_table,  String[] listNameColum, String comment) {
+        if (name_table.isEmpty() || listNameColum.length == 0) return; 
+        String nameSEQ = name_table +"_id_seq"; // имя итератора
+        int number_colum = listNameColum.length;
+        createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
+        String sql = null;
+        //переменная для анализа
+        //String nameTbanalise = new String(name_table);
+        name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
+        int tmp_cell = 0;
+        String nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')";
+        for(int j=0; j<listNameColum.length; j++)
+            nc_stringing += " ," + "\"" + listNameColum[j] + "\"" + "      TEXT";
+        nc_stringing += ")";
+        try {
+            connection.setAutoCommit(true);
+            stmt = connection.createStatement();
+            sql = "CREATE TABLE \"" + name_table + "\"" + nc_stringing;
+            System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
+            stmt.executeUpdate(sql);
+            stmt.close();
+            //connection.commit();
+            //System.out.println("-- Table created successfully");
+            createCommentTable(name_table, comment); // вызом метода добавления комментария
+
+        } catch (SQLException e) {
+            System.out.println("Failed CREATE TABLE");
+            System.out.println(sql); // смотрим какой запрос на соз
+            e.printStackTrace();
+            return;
+        }
+    }
+    
 // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         
@@ -300,6 +334,86 @@ public class DataBase {
         }
     }
      
+// --- Вставка данных (название таблицы, список столбцов, данные) ---
+    public void insertRows(String name_table, String[] rows, String[] listNameColum) {
+        if(name_table.isEmpty() || rows.length == 0 || listNameColum.length == 0 || rows.length != listNameColum.length) return;
+        try {
+            connection.setAutoCommit(true);
+            String sql = "";
+            try {
+                name_table = replacedNt(name_table);
+                sql = "INSERT INTO " + name_table + " ("; // при первом проходе иначе будет отличаться данные и столбцы
+                String tmp = "";
+                for (int i = 0; i < listNameColum.length; i++) { // формирую данные для этого запроса - 1 так как добавили ID
+                    tmp += ", \"" + listNameColum[i] + "\"";
+                }
+                sql += tmp.substring(2)  + ") VALUES (";
+                tmp = "";
+                for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
+                    tmp += ", '" + rows[i] + "'";
+                }
+                sql += tmp.substring(2) + ");";
+                System.out.println(sql); // Если надо смотрим что за sql запрос
+                stmt = connection.createStatement();
+                stmt.executeUpdate(sql);
+                stmt.close();
+            } catch (SQLException e) {
+                System.out.println("Failed ADD data");
+                e.printStackTrace();
+                return;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+    // получение таблицы целиком
+    public ArrayList<String[]> getData(String table) {
+        ArrayList<String[]> selectData = new ArrayList<>();
+        ArrayList<String> columns = getListColumnTable(table);
+
+        String s_columns = "";
+        String[] strfromtb = new String[columns.size()]; // массив под данные
+        for (int i = 0; i < columns.size(); ++i) { //формирование строки запроса
+            if (i < columns.size() - 1) {
+                s_columns += "\"" + columns.get(i) + "\"" + ", ";
+            } // Кавычки для руских имен и пробелов
+            else {
+                s_columns += "\"" + columns.get(i) + "\"";
+            }
+        }
+        // проверка на столбец по которому упорядочим данные
+        String orderCol = "id";
+        String sql = null;
+        for(String s: getListColumnTable(table)){
+            if(s.equals(orderCol)){ // нашли тогда упорядовать
+              sql = "SELECT " + s_columns + " FROM " + table + " ORDER BY \"" +orderCol +"\";";
+              break;
+            }else sql = "SELECT " + s_columns + " FROM " + table +";"; 
+        }
+        try {
+            stmt = connection.createStatement();
+            System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                for (int i = 0; i < columns.size(); ++i) {
+                    strfromtb[i] = rs.getString(columns.get(i));
+                }
+                String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
+                selectData.add(tmp1);
+                //System.out.println(strfromtb[0]); // это просто для тестов
+            }
+            rs.close();
+            stmt.close();
+            //StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
+            //connection.commit();
+            //System.out.println("-- Operation SELECT done successfully");
+        } catch (SQLException e) {
+            System.out.println("Failed select data");
+            e.printStackTrace();
+        }
+        return selectData;
+    }
     // какие именно столбцы дергать
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
         StructSelectData.setColumns(columns); // вот это жопа надо что то с этим делать мешает в Main_Jpanel
@@ -717,7 +831,7 @@ public class DataBase {
         String sql = null;   
         try {
             sql = "COMMENT ON TABLE  " + table+ " IS " +"'" +comment +"'" +";";
-            System.out.println(sql);
+            //System.out.println(sql);
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();

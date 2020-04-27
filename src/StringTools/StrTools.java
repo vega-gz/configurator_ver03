@@ -68,4 +68,9 @@ public class StrTools {
         if(i < qt-qs) return i;
         return -1;
     }
+    public static int searchInList(String s, ArrayList<String> l){
+        int i;
+        for(i=0; i< l.size(); i++) if(s.equals(l.get(i))) return i;
+        return -1;
+    }
 }

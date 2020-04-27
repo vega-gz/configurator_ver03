@@ -11137,3 +11137,7 @@
 14:15:39_2020.04.22	formula error: List excell AI_NKUColumn Kstr= 78
 14:15:39_2020.04.22	formula error: List excell AI_NKUColumn Kstr= 79
 11:15:22_2020.04.24	Name665not created but XML document null!
+22:23:57_2020.04.26	error PSQL request DROP SEQUENCE abonents_id_seq;
+23:34:23_2020.04.26	error PSQL request DROP SEQUENCE abonents_id_seq;
+23:36:18_2020.04.26	error PSQL request DROP SEQUENCE abonents_id_seq;
+23:52:58_2020.04.26	error PSQL request COMMENT ON TABLE  Abonents IS 'Абоненты';

@@ -13,6 +13,8 @@ import ReadWriteExcel.RWExcel;
 import org.w3c.dom.Node;
 import XMLTools.XMLSAX;
 import globalData.globVar;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class Main {
@@ -40,6 +42,7 @@ public class Main {
         int locationY = (screenSize.height - sizeHeight) / 2;
         Main_JPanel Windo_main = new Main_JPanel();
         JFrame frame = new JFrame();
+        
         frame.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frame.setContentPane(Windo_main); // Передаем нашу форму
         frame.setVisible(true);
