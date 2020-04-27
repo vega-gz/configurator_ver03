@@ -143,8 +143,8 @@ public class PopMenuDialog extends javax.swing.JFrame implements Runnable{
                for (Component c : getContentPane().getComponents()){
                     if (c instanceof JTextField) { // // проверяем все компоненты что из них кто
                         JTextField  jTextFieldB = (JTextField) c;
-                        rows[column] = jTextFieldB.getName(); // забор имени и она же колонка 
-                        listNameColum.add(jTextFieldB.getText()); // забор текста
+                        rows[column] = jTextFieldB.getText() ; // забор имени и она же колонка 
+                        listNameColum.add(jTextFieldB.getName()); // забор текста
                         //System.out.println("nameFtext " + keyMapTextfild);
                         //jTextFieldB.setText("Я нашел все текстовые поля");             
                      } 

@@ -51,7 +51,7 @@ public class TableNzVer3 {
     NZDefaultTableModel tableFrameModel = null; // Доработанная модель таблицы
     private ArrayList<String> columnsArray;
     Exchanger<String> ex = new Exchanger<String>(); // переменная для обмена данных между потоками
-    public volatile String  messageThreadVar = "665";
+    // public volatile String  messageThreadVar = "665"; // это почему то не видит поток
 
     public TableNzVer3(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
         this.listData = listData;
@@ -216,7 +216,6 @@ public class TableNzVer3 {
                     String idRow = (String) jTable1.getValueAt(row, i); // каким столбцом небыл бы id мы всегда получим данные
                     //System.out.println("idRow " + idRow);
                     menu.idBase = idRow; // передаем в меню данные от id
-                    menu.messageThreadVar =  this.messageThreadVar; // так же в меню тригер обнавления данных таблицы
                 }
             }
             menu.show(evt.getComponent(), evt.getX(), evt.getY());
@@ -235,7 +234,6 @@ public class TableNzVer3 {
         String messageThreadVar; // переменная для передачи потоку
 
         public PopUpDemo() {
-            //anItem = new JMenuItem("Click Me!");
             JSlider slider = new JSlider();
             add(slider);
             int value = slider.getValue();
@@ -283,7 +281,7 @@ public class TableNzVer3 {
                     if (idBase != null) {
                         workbase.deleteRowId(nameTable, idBase);
                         JOptionPane.showMessageDialog(null, "Signal ID " + idBase + "delete"); // Сообщение
-                        getDatredrawnTable();
+                        getDatredrawnTable(); // можно так перерисовать можно триггером 
                     }
                 }
             });
@@ -367,7 +365,6 @@ class UptadeVisualTable implements Runnable{
                 message=exchanger.exchange(null); // шлем нулл
                 if(message.equalsIgnoreCase("update_table")){ // нашли кто изменил переменную
                     tableThis.getDatredrawnTable(); // перерисовка таблицы  перерисовка в теории
-                    tableThis.messageThreadVar = ""; 
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(UptadeVisualTable.class.getName()).log(Level.SEVERE, null, ex);
