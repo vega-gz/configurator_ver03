@@ -216,7 +216,7 @@ public class DataBase {
         try {
             connection.setAutoCommit(true);
             stmt = connection.createStatement();
-            sql = "CREATE TABLE " + name_table + nc_stringing;
+            sql = "CREATE TABLE " + "\"" + name_table +"\""+ nc_stringing;
             System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
@@ -235,11 +235,18 @@ public class DataBase {
 // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         int colId = getLastId(name_table) + 1; // Получаем последний id и всегда +1 как инкремент
-        String addUUID = "\"UUID\", "; // блок определения нужно ли генерировать UUID
-        String dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
+        String addUUID = "";
+        String dataUUID = "";
+        // проверка есть ли вообще столбей UUID в таблице
+        for(String s:getListColumnTable(name_table)){
+            if(s.equalsIgnoreCase("UUID")){
+                addUUID = "\"UUID\", "; // блок определения нужно ли генерировать UUID
+                dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
+            }
+        }
         String addId = "\"id\", ";
         String dataId = "\'" +colId+"\'" + ", ";
-        // проверка на UUID п id
+        // проверка на UUID и id в входящих данных
         for(String s:listNameColum){
             if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
             addUUID ="";
@@ -260,7 +267,7 @@ public class DataBase {
                 name_table = replacedNt(name_table);
                 //--------------- INSERT ROWS ---------------
                         if (!listNameColum.isEmpty()) {
-                            sql = "INSERT INTO " + name_table + " ("+addId + addUUID; // при первом проходе иначе будет отличаться данные и столбцы
+                            sql = "INSERT INTO " + "\"" +name_table + "\"" + " ("+addId + addUUID; // при первом проходе иначе будет отличаться данные и столбцы
                             for (int i = 0; i < listNameColum.size(); i++) { // формирую данные для этого запроса - 1 так как добавили ID
                                 if (i + 1 >= listNameColum.size()) {
                                     String bufer_named = listNameColum.get(i).replace("/", "_");
@@ -811,7 +818,7 @@ public class DataBase {
         int lastId=0;
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT "+id+" FROM "+table+" ORDER BY "+id+" desc limit 1;" );
+            ResultSet rs = stmt.executeQuery( "SELECT "+id+" FROM "+"\"" +table+"\""+" ORDER BY "+id+" desc limit 1;" );
             while ( rs.next() ) {
               lastId = rs.getInt(id);
             }
