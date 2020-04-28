@@ -7,14 +7,9 @@
             <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
             <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
             <J nameColumnPos="Тип_датчика" default="4-20 мА"/>
+            <T nameColumnPos="Точность"  type="Int" default="2"/>
             <AA nameColumnPos="АЦПmin" default="2.0"/>
             <AB nameColumnPos="АЦПmax" default="10.0"/>
-            <I nameColumnPos="Единица_измерения" default=""/>
-            <K nameColumnPos="Акт_пас" default=""/>
-            <L nameColumnPos="Адрес_1" default=""/>
-            <M nameColumnPos="Адрес_2" default=""/>
-            <N nameColumnPos="Адрес_3" default=""/>
-            <T nameColumnPos="Точность"  type="Int" default="2"/>
             <AC nameColumnPos="loLim" type="Number" formula="loLimF"/>
             <AD nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
             <AE nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
@@ -22,6 +17,11 @@
             <AG nameColumnPos="ROC" type="Number"   default="0.0"/>
             <AH nameColumnPos="recoveryTime" type="Number" default="1.0"/>
             <AI nameColumnPos="tau" type="Number"  default="1.0"/>
+            <I nameColumnPos="Единица_измерения" default=""/>
+            <K nameColumnPos="Акт_пас" default=""/>
+            <L nameColumnPos="Адрес_1" default=""/>
+            <M nameColumnPos="Адрес_2" default=""/>
+            <N nameColumnPos="Адрес_3" default=""/>
 			<O nameColumnPos="Примечание" default=""/>
         </EXEL>
 		<Formulas>
@@ -37,17 +37,17 @@
 			<hiBrkF operation="+" operand1="Диапазон_макс" operand2="range6proc"/>
 		</Formulas>
 		<GenData>
-			<T_GPA_AI_DRV Type="REAL"/>
-			<T_GPA_AI_Internal Type="T_AI_Internal"/>
-			<T_GPA_AI_Settings Type="T_AI_Settings"/>
-			<T_GPA_AI_FromHMI Type="T_AI_FromHMI"/>
-			<T_GPA_AI_ToHMI Type="T_AI_ToHMI"/>
+			<AI_DRV Type="REAL"/>
+			<AI_Settings/>
+			<AI_FromHMI/>
+			<AI_ToHMI/>
+			<AI_Internal/>
 		</GenData>
 		<GenCode>
-			<File name="AI_CallAll.txt">
+			<!--File name="AI_CallAll.txt"-->
 				<Function name="AI_init">
 					<arguments>
-						<arg><text t="GPA_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
 						<arg><dbd t="АЦП"/></arg>
@@ -66,15 +66,15 @@
 				</Function>
 				<Function name="AI_Processing">
 					<arguments>
-						<arg><text t="GPA_AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
-			</File>
+			<!--/File-->
 		</GenCode>
 		<GenHMI>
 			<File name="AT_HMI.iec_hmi">
@@ -111,9 +111,9 @@
 	</SetPoints>
 	<AnO excelSheetName="AO" Comment="Аналоговые выходы">
 		<GenData>
-			<T_GPA_AO_FromHMI Type="T_AO_FromHMI"/>
-			<T_GPA_AO_ToHMI Type="T_AO_ToHMI"/>
-			<T_GPA_AO_Settings Type="T_AO_Settings"/>
+			<AO_FromHMI/>
+			<AO_ToHMI/>
+			<AO_Settings/>
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
@@ -132,10 +132,10 @@
             <Z nameColumnPos="Точность"  type="Int"/>
         </EXEL>
 		<GenCode>
-			<File name="A_Algorithm.iec_st">
+			<!--File name="A_Algorithm.iec_st"-->
 				<Function name="AO_init">
 					<arguments>
-						<arg><text t="GPA_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
 						<arg><dbd t="АЦПмин"/></arg>
@@ -146,22 +146,22 @@
 				</Function>
 				<Function name="AO_Processing">
 					<arguments>
-						<arg><text t="GPA_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
-			</File>
+			<!--/File-->
 		</GenCode>
 	</AnO>
 	<DGI excelSheetName="DGI" Comment="Дискретные входы">
 		<GenData>
-			<T_GPA_DI_Settings Type="T_DI_Settings"/>
-			<T_GPA_DI_FromHMI Type="T_DI_FromHMI"/>
-			<T_GPA_DI_ToHMI Type="T_DI_ToHMI"/>
-			<T_GPA_DI_DRV Type="T_DI_DRV"/>
-			<T_GPA_DI_Internal Type="T_DI_Internal"/>
+			<DI_DRV Type="BOOL"/>
+			<DI_Settings/>
+			<DI_FromHMI/>
+			<DI_ToHMI/>
+			<DI_Internal/>
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
@@ -177,10 +177,10 @@
 			<J nameColumnPos="Примечание" default=""/>
         </EXEL>
 		<GenCode>
-			<File name="DI_CallAll.txt">
+			<!--File name="DI_CallAll.txt"-->
 				<Function name="DI_init">
 					<arguments>
-						<arg><text t="GPA_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t="repTime"/></arg>
 						<arg><dbd t="Задержка"/></arg>
 						<arg><dbd t="Инверсия"/></arg>
@@ -190,21 +190,21 @@
 				</Function>
 				<Function name="DI_Processing">
 					<arguments>
-						<arg><text t="GPA_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
-			</File>
+			<!--/File-->
 		</GenCode>
 	</DGI>
 	<DGO excelSheetName="DGO" Comment="Дискретные выходы">
 		<GenData>
-			<T_GPA_DO_FromHMI Type="T_DO_FromHMI"/>
-			<T_GPA_DO_ToHMI Type="T_DO_ToHMI"/>
+			<DO_FromHMI/>
+			<DO_ToHMI/>
 		</GenData>	
         <EXEL>
             <F nameColumnPos="Наименование" />
@@ -218,47 +218,15 @@
 			<J nameColumnPos="Примечание" default=""/>
         </EXEL>
 		<GenCode>
-			<File name="A_Algorithm.iec_st">
+			<!--File name="A_Algorithm.iec_st"-->
 				<Function name="DO_Processing">
 					<arguments>
-						<arg><text t="GPA_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t="GPA_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
-			</File>
+			<!--/File-->
 		</GenCode>
 	</DGO>
-	<AI_NKU excelSheetName="AI_NKU" Comment="Аналоговые входы от НКУ">
-		<GenData>
-			<T_NKU_AI_DRV Type="REAL"/>
-		</GenData>	
-        <EXEL>
-            <F nameColumnPos="Наименование" />
-            <T nameColumnPos="TAG_NAME_PLC" type="VarName"/> <!-- Вот тут я может ошибаюсь в столбце Ехел. Надо посмотреть что в актуальном файле. он у Гриши-->
-            <G nameColumnPos="Диапазон_мин" type="Number"/>
-            <H nameColumnPos="Диапазон_макс" type="Number" />
-            <I nameColumnPos="Единица_измерения" />
-            <K nameColumnPos="Кратность" />
-            <J nameColumnPos="Адрес_modbus"/>
-        </EXEL>
-	</AI_NKU>
-	<DI_NKU excelSheetName="DI_NKU" Comment="Дискретные входы от НКУ">
-		<GenData>
-			<T_NKU_DI_DRV Type="BOOL"/>
-		</GenData>	
-        <EXEL>
-            <F nameColumnPos="Наименование" />
-            <I nameColumnPos="TAG_NAME_PLC" type="VarName"/>
-        </EXEL>
-	</DI_NKU>
-	<DO_NKU excelSheetName="DO_NKU" Comment="Дискретные выходы от НКУ">
-		<GenData>
-			<T_NKU_DO_DRV Type="BOOL"/>
-		</GenData>	
-        <EXEL>
-            <F nameColumnPos="Наименование" />
-            <I nameColumnPos="TAG_NAME_PLC" type="VarName"/>
-        </EXEL>
-	</DO_NKU>
 </ConfigSignals>

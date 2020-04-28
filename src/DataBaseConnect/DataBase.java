@@ -521,7 +521,7 @@ public class DataBase {
         int requestr = 0;
         try {
             connection.setAutoCommit(true);
-            String sql = "UPDATE " + table + " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
+            String sql = "UPDATE " + "\"" + table + "\""+ " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
                     + " = \'" + newData + "\' WHERE " ;
             // Формируем условие запроса из столбцов и данных
             int lastValue = 1; // с первого так как размер не с нуля
@@ -921,11 +921,11 @@ public class DataBase {
         }
     }
     
-    // --- Удалить строку по id но удалит все строки ---
+    // --- Удалить строку по id но удалит все строки c таким же id---
     public void deleteRowId(String table, String id) { // может будем удалять по id 
         try {
             connection.setAutoCommit(true);
-            String sql = "DELETE FROM " + table + " WHERE id='" + id + "'";
+            String sql = "DELETE FROM " + "\"" +table + "\"" + " WHERE id='" + id + "'";
             sql += ";";
             System.out.println(sql);
             stmt = connection.createStatement();
@@ -953,23 +953,24 @@ public class DataBase {
         return lastId;
      }
     
-    public static void main(String[] arg){
-       DataBase db = DataBase.getInstance();
-       String nameBD = db.getCurrentNameBase();
-       //System.out.println(db.getListTable().toString());
-       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
-       String[] rows = {"325", "0987654321", "Commen-665", "NZ",  "name-struct"};
-       //String[] rows = {"Commen-665", "NZ", "name-struct"};
-       ArrayList<String> listNameColum = new ArrayList<>();
-       listNameColum.add("id");
-        listNameColum.add("UUID");
-       listNameColum.add("Comment");
-       listNameColum.add("Type");
-       listNameColum.add("Name");
-       System.out.println(db.getLastId("t_gpa_di_settings"));
-       db.insertRows("t_gpa_di_settings", rows, listNameColum);
-       System.out.println(db.getLastId("t_gpa_di_settings"));
-       db.deleteRowId("t_gpa_di_settings", "325");
+    // --- инкрементировать или декрементировать id всей таблицы ---
+    public void updateID(String table, int numberId, boolean i_dCriment) {
+        String PorM = "";
+        if (i_dCriment == true) PorM = "+"; else PorM = "-";
+        int requestr = 0;
+        String columnId = "id";
+        try {
+            connection.setAutoCommit(true);
+            String sql = "UPDATE " + "\""+  table + "\"" + " SET " + "\"" + columnId + "\""  
+                    + " = \"" + columnId + "\"" + PorM + 1 + " WHERE " +  // Прибавляем на 1
+                    columnId + ">" +numberId + ";";
+            System.out.println(sql);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     //--------- Методы обслюживающие систему абонентов -Lev-----------------
     public static void createAbonentTable(){ //Создание таблицы абонентов, если её не было

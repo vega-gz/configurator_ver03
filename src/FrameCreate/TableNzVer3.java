@@ -231,14 +231,15 @@ public class TableNzVer3 {
         JMenuItem anItem;
         int i1 = 0;
         String idBase; // id зы отображенный в таблице
-        String messageThreadVar; // переменная для передачи потоку
+        //String messageThreadVar; // переменная для передачи потоку
 
         public PopUpDemo() {
+            
             JSlider slider = new JSlider();
-            add(slider);
+           
             int value = slider.getValue();
             JMenuItem anItem2 = new JMenuItem(Integer.toString(value));
-            add(anItem2);
+            
             slider.addChangeListener(new javax.swing.event.ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
@@ -264,7 +265,6 @@ public class TableNzVer3 {
 
                 }
             });
-            add(menuItemAdd);
             //пункт меню добавления сигнала
             JMenuItem menuItemDel = new JMenuItem("remove_Signal...",
                     new ImageIcon("images/newproject.png"));
@@ -280,12 +280,45 @@ public class TableNzVer3 {
                     }
                     if (idBase != null) {
                         workbase.deleteRowId(nameTable, idBase);
+                        int idTodb =Integer.parseInt(idBase); 
+                        workbase.updateID(nameTable, idTodb, false); // обновляем id минусуя
                         JOptionPane.showMessageDialog(null, "Signal ID " + idBase + "delete"); // Сообщение
                         getDatredrawnTable(); // можно так перерисовать можно триггером 
                     }
                 }
             });
+            //пункт меню добавления строки
+            JMenuItem menuItemAddStr = new JMenuItem("add clear string...",
+                    new ImageIcon("images/newproject.png"));
+            menuItemAddStr.setMnemonic(KeyEvent.VK_P);
+            menuItemAddStr.getAccessibleContext().setAccessibleDescription(
+                    "Новая строка");
+            menuItemAddStr.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    //int sumColumn = jTable1.getColumnCount();//список столбцов
+                    ArrayList<String> listColumn = new ArrayList<>();
+                    for (int i = 0; i < jTable1.getColumnCount(); ++i) { // собираем лист из имен таблицы для полного соотвтствия
+                        listColumn.add(jTable1.getColumnName(i));
+                    }
+                    if (idBase != null) {
+                        //пробуем преобразовать idBase
+                        int idTodb =Integer.parseInt(idBase);
+                        int idicriment = idTodb+ 1; // +1 так как ниже надо а не в этом месте
+                        workbase.updateID(nameTable, idTodb, true); // обновляем id прибавляя
+                        String[] rows = {Integer.toString(idicriment)}; // массив так как восим только номер id
+                        ArrayList<String> listNameColum = new ArrayList<>(); // листы это столбцы
+                        listNameColum.add("id");
+                        workbase.insertRows(nameTable, rows, listNameColum);
+                        getDatredrawnTable(); // можно так перерисовать можно триггером 
+                        //JOptionPane.showMessageDialog(null, "Signal ID " + idBase + "delete"); // Сообщение
+                    }
+                }
+            });
+             //add(slider); // туда же сладер
+            //add(anItem2); // и его значения
+            // add(menuItemAdd); // не нравится форма. должны быть дефаулты из xml
             add(menuItemDel);
+            add(menuItemAddStr);
         }
 
     }
