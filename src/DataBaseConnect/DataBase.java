@@ -797,11 +797,11 @@ public class DataBase {
         }
     }
     
-    // --- Удалить строку по id но удалит все строки ---
+    // --- Удалить строку по id но удалит все строки c таким же id---
     public void deleteRowId(String table, String id) { // может будем удалять по id 
         try {
             connection.setAutoCommit(true);
-            String sql = "DELETE FROM " + table + " WHERE id='" + id + "'";
+            String sql = "DELETE FROM " + "\"" +table + "\"" + " WHERE id='" + id + "'";
             sql += ";";
             System.out.println(sql);
             stmt = connection.createStatement();
@@ -829,14 +829,16 @@ public class DataBase {
         return lastId;
      }
     
-    // --- инкрементировать id и вставить пусту строку---
-    public void updateID(String table, int numberId) {
+    // --- инкрементировать или декрементировать id всей таблицы ---
+    public void updateID(String table, int numberId, boolean i_dCriment) {
+        String PorM = "";
+        if (i_dCriment == true) PorM = "+"; else PorM = "-";
         int requestr = 0;
         String columnId = "id";
         try {
             connection.setAutoCommit(true);
             String sql = "UPDATE " + "\""+  table + "\"" + " SET " + "\"" + columnId + "\""  
-                    + " = \"" + columnId + "\" + " + 1 + " WHERE " +  // Прибавляем на 1
+                    + " = \"" + columnId + "\"" + PorM + 1 + " WHERE " +  // Прибавляем на 1
                     columnId + ">" +numberId + ";";
             System.out.println(sql);
             stmt = connection.createStatement();
@@ -846,25 +848,25 @@ public class DataBase {
             e.printStackTrace();
         }
     }
-    
-    public static void main(String[] arg){
-       DataBase db = DataBase.getInstance();
-       String nameBD = db.getCurrentNameBase();
-       //System.out.println(db.getListTable().toString());
-       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
-       String[] rows = {"325", "0987654321", "Commen-665", "NZ",  "name-struct"};
-       //String[] rows = {"Commen-665", "NZ", "name-struct"};
-       ArrayList<String> listNameColum = new ArrayList<>();
-       listNameColum.add("id");
-//       listNameColum.add("UUID");
-       listNameColum.add("Comment");
-       listNameColum.add("Type");
-       listNameColum.add("Name");
-       System.out.println(db.getLastId("t_gpa_di_settings"));
-       //db.insertRows("t_gpa_di_settings", rows, listNameColum);
-       System.out.println(db.getLastId("t_gpa_di_settings"));
-       //db.deleteRowId("t_gpa_di_settings", "325");
-       db.updateID("t_gpa_di_settings", 637);
-       System.out.println(db.getLastId("t_gpa_di_settings"));
-    }
+//    
+//    public static void main(String[] arg){
+//       DataBase db = DataBase.getInstance();
+//       String nameBD = db.getCurrentNameBase();
+//       //System.out.println(db.getListTable().toString());
+//       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
+//       String[] rows = {"325", "0987654321", "Commen-665", "NZ",  "name-struct"};
+//       //String[] rows = {"Commen-665", "NZ", "name-struct"};
+//       ArrayList<String> listNameColum = new ArrayList<>();
+//       listNameColum.add("id");
+////       listNameColum.add("UUID");
+//       listNameColum.add("Comment");
+//       listNameColum.add("Type");
+//       listNameColum.add("Name");
+//       System.out.println(db.getLastId("t_gpa_di_settings"));
+//       //db.insertRows("t_gpa_di_settings", rows, listNameColum);
+//       System.out.println(db.getLastId("t_gpa_di_settings"));
+//       //db.deleteRowId("t_gpa_di_settings", "325");
+//       db.updateID("t_gpa_di_settings", 637);
+//       System.out.println(db.getLastId("t_gpa_di_settings"));
+//    }
 }
