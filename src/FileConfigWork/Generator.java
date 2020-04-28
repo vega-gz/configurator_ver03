@@ -104,19 +104,20 @@ public class Generator {
     }
 
     public static int GenTypeFile(FrameTabel ft) throws IOException {//0-norm, -1 - not find node
-        int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
-        if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
+        //int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
+        //if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
         String backUpPath = globVar.backupDir;   //установили путь для бэкапа
         String filePath = globVar.desDir + File.separator + "Design";
-       XMLSAX configSig = new XMLSAX();
-        Node cfs = configSig.readDocument("ConfigSignals.xml");// Открыть configCignals из рабочего каталога программы
         String nodeTable = ft.tableName();
-        Node findNode = configSig.returnFirstFinedNode(cfs, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
+        int x = nodeTable.indexOf("_");
+        String abonent = nodeTable.substring(0,x);
+        nodeTable = nodeTable.substring(x+1);
+        Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if(findNode == null){
             FileManager.loggerConstructor("Не найдена нода \"" + nodeTable + "\"");
             return -1;
         }
-        Node nodeGenData = configSig.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData
+        Node nodeGenData = globVar.sax.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData
         if(nodeGenData == null){
             FileManager.loggerConstructor("Не найдена нода \"" + nodeTable+"/GenData"+ "\"");
             return -1;
@@ -124,61 +125,60 @@ public class Generator {
         NodeList nodesGenData = nodeGenData.getChildNodes();
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                XMLSAX sax = new XMLSAX();
+                XMLSAX localSax = new XMLSAX();
                 Node currNodeCfgXML = nodesGenData.item(i);
-                String typeName = currNodeCfgXML.getNodeName();//достаю элементы из ноды(в данный момент T GPA AI DRV)
-                String trueName = FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
-                String typeUUID = UUID.getUIID();
-                Node newFields = null;
+                String nodeName = currNodeCfgXML.getNodeName();
+                String typeName = "T_"+abonent+"_"+nodeName;//достаю элементы из ноды(в данный момент T GPA AI DRV)
+                String trueName = FileManager.FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
+                String fildUUID = globVar.sax.getDataAttr(currNodeCfgXML, "Type");
+                if(fildUUID == null){
+                    fildUUID = FileManager.getUUIDFromFile(filePath,"T_"+nodeName);
+                    if(fildUUID==null){
+                        JOptionPane.showMessageDialog(null, "Не найден файл типа данных "+ ". Генерация прервана.");
+                         return -1;
+                    }
+                }
+                Node newFields;// = null;
                 Node type;
                 Node oldFields = null;
                 if (trueName == null) {//помещаем сюда создание файла
-//                    Node rootNode = sax.createNode("Type");//создали шапку 
-//                    dataNode.put("Kind", "Struct");//записали атрибуты
-//                    dataNode.put("Name", typeName);
-//                    dataNode.put("UUID", "UUID");
-//                    sax.insertDataNode(rootNode, dataNode);//поместили атрибуты в Type
-//                    fieldsNode = sax.createNode("Fields");//создали ноду
+                    trueName = typeName + ".type";
+                    type = localSax.createDocument("Type");
+                    localSax.setDataAttr(type, "UUID", UUID.getUIID());
+                    localSax.setDataAttr(type, "Name", typeName);
+                    localSax.setDataAttr(type, "Kind", "Struct");
+                    String[] newArray = {"Fields"};
+                    newFields = localSax.insertChildNode(type, newArray);
                 } else {//сюда помещаем добавление
                     FileManager.copyFileWoReplace(filePath + File.separator + trueName, backUpPath + File.separator + trueName, true);
-                    type = sax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
-                    oldFields = sax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
+                    type = localSax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
+                    oldFields = localSax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
                     String[] newArray = {"Fields"};
-                    newFields = sax.insertChildNode(type, newArray);
-                    Node firstFields = sax.returnFirstFinedNode(oldFields, "Field");
-                    typeUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
+                    newFields = localSax.insertChildNode(type, newArray);
+                    Node firstFields = localSax.returnFirstFinedNode(oldFields, "Field");
+                    fildUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
                 }
                 for (int j = 0; j < ft.tableSize(); j++) {
                     String tagName = (String) ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
                     String comment = (String) ft.getCell("Наименование", j);//получаем НАИМЕНОВАНИЕ из таблицы
-
                     if (oldFields == null) {//если нода пустая,то создаю элементы
-
-//                        oldFields.appendChild(fieldsNode);//поместили ноду без атрибутов 
-//                        Node fieldNode = sax.createNode("Field");//создали ноду filed
-//                        HashMap<String, String> childNode = new HashMap<>();
-//                        childNode.put("Comment", comment);
-//                        childNode.put("Name", tagName);
-//                        childNode.put("Type", typeUUID);
-//                        childNode.put("UUID", uuid.getUIID());
-//                        sax.insertDataNode(fieldNode, childNode);
-//                        fieldsNode.appendChild(fieldNode);//добавили Field в Fileds
-
+                        String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()};
+                        localSax.insertChildNode(newFields, nAndA);
                     } else {
                         String[] nodeAndAttr = {"Field", "Name", tagName};
-                        Node oldTag = sax.findNodeAtribute(oldFields, nodeAndAttr);
+                        Node oldTag = localSax.findNodeAtribute(oldFields, nodeAndAttr);
                          if (oldTag == null) {
                             //String sha128hex = org.apache.commons.codec.digest.DigestUtils.sha128Hex(typeName + tagName);
-                            String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", typeUUID, "UUID", UUID.getUIID()};
-                            sax.insertChildNode(newFields, nAndA);
+                            String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()};
+                            localSax.insertChildNode(newFields, nAndA);
                         } else {
-                            sax.setDataAttr(oldTag, "Comment", comment);
+                            localSax.setDataAttr(oldTag, "Comment", comment);
                             Node aC = newFields.appendChild(oldTag);
                         }
                     }
                 }
-                if(oldFields != null) sax.removeNode(oldFields);
-                sax.writeDocument(filePath + File.separator + trueName);//записали файл
+                if(oldFields != null) localSax.removeNode(oldFields);
+                localSax.writeDocument(filePath + File.separator + trueName);//записали файл
             }
 
         }

@@ -345,6 +345,43 @@ public class FileManager {
         } else JOptionPane.showMessageDialog(null, "Путь к генерации не найден" + dir);
         return null;
     }
+    public static String getUUIDFromFile(String dir, String nameType) throws IOException {
+        String nameWords = "Name=";
+        String uuidWords = "UUID=";
+        String ext = ".TYPE";
+        String firstName, secondName, fileName = null;
+        FileManager fm = new FileManager();
+        final File folder = new File(dir);
+        String[] fileList = folder.list();
+        if (fileList != null) {
+            for (String fn : fileList) {
+                if (fn.toUpperCase().contains(ext)) {
+                    fm.openFile4read(dir, fn);
+                    String s = fm.rd();
+                    while (!s.contains(nameWords) && !fm.EOF) {
+                        s = fm.rd();//
+                    }
+                    if (!fm.EOF) {
+                        int start = s.indexOf(nameWords) + nameWords.length() + 1;
+                        int end = s.indexOf("\"", start);
+                        if (end > start) {
+                            String foundType = s.substring(start, end);
+                            if (foundType.equals(nameType)) {
+                                start = s.indexOf(uuidWords) + uuidWords.length() + 1;
+                                end = s.indexOf("\"", start);
+                                if (end > start) {
+                                    fm.rdStream.close();
+                                    return s.substring(start, end);
+                                }
+                            }
+                        }
+                    }
+                    fm.rdStream.close();
+                }
+            }
+        } else JOptionPane.showMessageDialog(null, "Путь " + dir + " не найден");
+        return null;
+    }
 
     public static class MyFileNameFilter implements FilenameFilter {
 
