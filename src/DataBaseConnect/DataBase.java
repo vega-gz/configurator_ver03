@@ -460,9 +460,9 @@ public class DataBase {
         String sql = null;
         for(String s: getListColumnTable(table)){
             if(s.equals(orderCol)){ // нашли тогда упорядовать
-              sql = "SELECT " + s_columns + " FROM " + table + " ORDER BY \"" +orderCol +"\";";
+              sql = "SELECT " + s_columns + " FROM " +"\"" + table +"\""+ " ORDER BY \"" +orderCol +"\";";
               break;
-            }else sql = "SELECT " + s_columns + " FROM " + table +";"; 
+            }else sql = "SELECT " + s_columns + " FROM " +"\"" + table +"\""+";"; 
         }
         try {
             stmt = connection.createStatement();
