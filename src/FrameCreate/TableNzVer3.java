@@ -231,9 +231,10 @@ public class TableNzVer3 {
         JMenuItem anItem;
         int i1 = 0;
         String idBase; // id зы отображенный в таблице
-        String messageThreadVar; // переменная для передачи потоку
+        //String messageThreadVar; // переменная для передачи потоку
 
         public PopUpDemo() {
+            
             JSlider slider = new JSlider();
             add(slider);
             int value = slider.getValue();
@@ -264,7 +265,6 @@ public class TableNzVer3 {
 
                 }
             });
-            add(menuItemAdd);
             //пункт меню добавления сигнала
             JMenuItem menuItemDel = new JMenuItem("remove_Signal...",
                     new ImageIcon("images/newproject.png"));
@@ -285,7 +285,35 @@ public class TableNzVer3 {
                     }
                 }
             });
+            //пункт меню добавления строки
+            JMenuItem menuItemAddStr = new JMenuItem("add clear string...",
+                    new ImageIcon("images/newproject.png"));
+            menuItemAddStr.setMnemonic(KeyEvent.VK_P);
+            menuItemAddStr.getAccessibleContext().setAccessibleDescription(
+                    "Новая строка");
+            menuItemAddStr.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    //int sumColumn = jTable1.getColumnCount();//список столбцов
+                    ArrayList<String> listColumn = new ArrayList<>();
+                    for (int i = 0; i < jTable1.getColumnCount(); ++i) { // собираем лист из имен таблицы для полного соотвтствия
+                        listColumn.add(jTable1.getColumnName(i));
+                    }
+                    if (idBase != null) {
+                        //пробуем преобразовать idBase
+                        int idTodb = Integer.parseInt(idBase)+ 1; // +1 так как ниже надо а не в этом месте
+                        workbase.updateID(nameTable, idTodb);
+                        String[] rows = {Integer.toString(idTodb)}; // массив так как восим только номер id
+                        ArrayList<String> listNameColum = new ArrayList<>(); // листы это столбцы
+                        listNameColum.add("id");
+                        workbase.insertRows(nameTable, rows, listNameColum);
+                        getDatredrawnTable(); // можно так перерисовать можно триггером 
+                        //JOptionPane.showMessageDialog(null, "Signal ID " + idBase + "delete"); // Сообщение
+                    }
+                }
+            });
+            add(menuItemAdd);
             add(menuItemDel);
+            add(menuItemAddStr);
         }
 
     }

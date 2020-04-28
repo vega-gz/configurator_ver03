@@ -395,7 +395,7 @@ public class DataBase {
         int requestr = 0;
         try {
             connection.setAutoCommit(true);
-            String sql = "UPDATE " + table + " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
+            String sql = "UPDATE " + "\"" + table + "\""+ " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
                     + " = \'" + newData + "\' WHERE " ;
             // Формируем условие запроса из столбцов и данных
             int lastValue = 1; // с первого так как размер не с нуля
@@ -829,6 +829,24 @@ public class DataBase {
         return lastId;
      }
     
+    // --- инкрементировать id и вставить пусту строку---
+    public void updateID(String table, int numberId) {
+        int requestr = 0;
+        String columnId = "id";
+        try {
+            connection.setAutoCommit(true);
+            String sql = "UPDATE " + "\""+  table + "\"" + " SET " + "\"" + columnId + "\""  
+                    + " = \"" + columnId + "\" + " + 1 + " WHERE " +  // Прибавляем на 1
+                    columnId + ">" +numberId + ";";
+            System.out.println(sql);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static void main(String[] arg){
        DataBase db = DataBase.getInstance();
        String nameBD = db.getCurrentNameBase();
@@ -838,13 +856,15 @@ public class DataBase {
        //String[] rows = {"Commen-665", "NZ", "name-struct"};
        ArrayList<String> listNameColum = new ArrayList<>();
        listNameColum.add("id");
-        listNameColum.add("UUID");
+//       listNameColum.add("UUID");
        listNameColum.add("Comment");
        listNameColum.add("Type");
        listNameColum.add("Name");
        System.out.println(db.getLastId("t_gpa_di_settings"));
-       db.insertRows("t_gpa_di_settings", rows, listNameColum);
+       //db.insertRows("t_gpa_di_settings", rows, listNameColum);
        System.out.println(db.getLastId("t_gpa_di_settings"));
-       db.deleteRowId("t_gpa_di_settings", "325");
+       //db.deleteRowId("t_gpa_di_settings", "325");
+       db.updateID("t_gpa_di_settings", 637);
+       System.out.println(db.getLastId("t_gpa_di_settings"));
     }
 }
