@@ -157,10 +157,16 @@ public class DataBase {
 
         }
     }
-    
+    //-------------- Проверка наличия в БД таблицы с заданным именем -Lev----
+    public boolean isTable(String name){
+        for(String s: getListTable()){ // Получаем список таблиц и пробежимся сравнивая их
+            if(name.equalsIgnoreCase(s)) return true;
+        }
+        return false;
+    }
     //-------------- CREATE TABLE ---------------
     public void createTable(String name_table,  ArrayList<String> listNameColum) {
-        String nameSEQ = name_table +"_id_seq"; // имя итератора
+        //String nameSEQ = name_table +"_id_seq"; // имя итератора(по новому не нужен)
         int number_colum = listNameColum.size();
         //проверка если есть такая таблица удаляем ее
         {
@@ -174,13 +180,19 @@ public class DataBase {
                 break;
             }
         }
-        createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
+        //createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
         }
         
-        // Блок проверки нужен ли нам столбец с UUID 
-        String addUUID = ", UUID TEXT NOT NULL";
+        // Блок проверки нужен ли нам столбец с UUID и id
+        String addUUID = "\"UUID\" TEXT NOT NULL ,";
+        String addID = "\"id\" NUMERIC NOT NULL, ";
         for(String s:listNameColum){
-            if(s.equalsIgnoreCase("UUID")) addUUID =""; // если нашли что создаем с нужными UUID обнуляем
+            if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
+                addUUID ="";
+            } 
+            if(s.equalsIgnoreCase("id")){
+                addID = "";
+            }
         }
           
         String sql = null;
@@ -189,19 +201,20 @@ public class DataBase {
         String nc_stringing = "";
         name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
         if (!listNameColum.isEmpty()) { // 
-                    int tmp_cell = 0;
-                    nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')" + addUUID;
-                    Iterator<String> iter_list_table = listNameColum.iterator();
-                    while (iter_list_table.hasNext()) {
-                        tmp_cell++;
-                        String bufer_named = iter_list_table.next().replace("/", "_");
-                        //nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT    NOT NULL";
-                        nc_stringing += " ," + "\"" + bufer_named + "\"" + "      TEXT";
+                    //nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')" + addUUID;
+                    nc_stringing = " (" + addID + addUUID;
+                    for(int tmp_cell=0; tmp_cell<listNameColum.size(); ++tmp_cell){
+                    String s = listNameColum.get(tmp_cell);
+                        String bufer_named = s.replace("/", "_");
+                        if(tmp_cell == listNameColum.size()-1) { // если последняя строка
+                            nc_stringing += "\"" + bufer_named + "\"" + "      TEXT";
+                        }
+                            else nc_stringing += "\"" + bufer_named + "\"" + "      TEXT" + " ,";
                     }
-                    for (int i = tmp_cell + 1; i < number_colum; i++) {
-                        //nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT    NOT NULL";
-                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
-                    }
+                    // не помню для чего это
+//                    for (int i = tmp_cell + 1; i < number_colum; i++) {
+//                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
+//                    }
                     nc_stringing += ")";
                 } else {
                     // -- create table max lengt row in sheet
@@ -231,10 +244,10 @@ public class DataBase {
         }
     }
     
-    //-------------- Создать таблицу без проверки её наличия в БД ---------------
+    //-------------- Создать таблицу без проверки её наличия в БД -Lev--------------
     public void createTable(String name_table,  String[] listNameColum, String comment) {
         if (name_table.isEmpty() || listNameColum.length == 0) return; 
-        String nameSEQ = name_table +"_id_seq"; // имя итератора
+        String nameSEQ = name_table.toLowerCase() +"_id_seq"; // имя итератора
         int number_colum = listNameColum.length;
         createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
         String sql = null;
@@ -267,15 +280,23 @@ public class DataBase {
     
 // --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
-        
+        int colId = getLastId(name_table) + 1; // Получаем последний id и всегда +1 как инкремент
         String addUUID = "\"UUID\", "; // блок определения нужно ли генерировать UUID
         String dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
+        String addId = "\"id\", ";
+        String dataId = "\'" +colId+"\'" + ", ";
+        // проверка на UUID п id
         for(String s:listNameColum){
             if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
             addUUID ="";
             dataUUID = "";
             }
+            if(s.equalsIgnoreCase("id")){
+                addId = "";
+                dataId = "";
+            }
         }
+        
         try {
             connection.setAutoCommit(true);
             String nameTbanalise = new String(name_table);
@@ -285,7 +306,7 @@ public class DataBase {
                 name_table = replacedNt(name_table);
                 //--------------- INSERT ROWS ---------------
                         if (!listNameColum.isEmpty()) {
-                            sql = "INSERT INTO " + name_table + " ("+addUUID; // при первом проходе иначе будет отличаться данные и столбцы
+                            sql = "INSERT INTO " + name_table + " ("+addId + addUUID; // при первом проходе иначе будет отличаться данные и столбцы
                             for (int i = 0; i < listNameColum.size(); i++) { // формирую данные для этого запроса - 1 так как добавили ID
                                 if (i + 1 >= listNameColum.size()) {
                                     String bufer_named = listNameColum.get(i).replace("/", "_");
@@ -295,7 +316,7 @@ public class DataBase {
                                     sql += "\"" + bufer_named + "\"" + " ,";
                                 }
                             }
-                            sql += ") VALUES ("+dataUUID;
+                            sql += ") VALUES ("+ dataId +dataUUID;
                             // row и listNameColum должны быть одинаковы но косяк
                             for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
                                 if (i + 1 >= rows.length) {
@@ -340,7 +361,7 @@ public class DataBase {
         }
     }
      
-// --- Вставка данных (название таблицы, список столбцов, данные) ---
+// --- Вставка данных (название таблицы, список столбцов, данные) -Lev--
     public void insertRows(String name_table, String[] rows, String[] listNameColum) {
         if(name_table.isEmpty() || rows.length == 0 || listNameColum.length == 0 || rows.length != listNameColum.length) return;
         try {
@@ -575,7 +596,7 @@ public class DataBase {
             connection.setAutoCommit(false);
             String sql;
             stmt = connection.createStatement();
-            sql = "DROP TABLE " + nameT + ";";
+            sql = "DROP TABLE \"" + nameT + "\";";
             stmt.executeUpdate(sql);
             stmt.close();
             connection.commit();
@@ -584,8 +605,6 @@ public class DataBase {
         } catch (SQLException e) {
             System.out.println("Failed DROPE TABLE");
             e.printStackTrace();
-            return;
-
         }
     }
     
@@ -869,6 +888,82 @@ public class DataBase {
         return comment;
     }
     
+    // --- Удалить строку по условию точное удаление ---
+    public void deleteRow(String table, HashMap< String, String> mapDataRow) { // может будем удалять по id 
+        int requestr = 0;
+        try {
+            connection.setAutoCommit(true);
+            String sql = "DELETE FROM " + table + " WHERE " ;
+            // Формируем условие запроса из столбцов и данных
+            int lastValue = 1; // с первого так как размер не с нуля
+             for(Map.Entry<String, String> entry : mapDataRow.entrySet()) {               
+                String key = entry.getKey();
+                String value = entry.getValue();
+                if(lastValue >= mapDataRow.size()){
+                    sql += "\"" + key + "\" = " + "\'" + value + "\'";
+                }else sql += "\"" + key + "\" = " + "\'" + value + "\'" + " and ";
+                ++lastValue;
+              }
+            sql += ";";
+            System.out.println(sql);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // --- Удалить строку по id но удалит все строки ---
+    public void deleteRowId(String table, String id) { // может будем удалять по id 
+        try {
+            connection.setAutoCommit(true);
+            String sql = "DELETE FROM " + table + " WHERE id='" + id + "'";
+            sql += ";";
+            System.out.println(sql);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    //---------------- возратить последний id ---------
+    public int getLastId(String table){
+        String  id = "id";
+        int lastId=0;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT "+id+" FROM "+table+" ORDER BY "+id+" desc limit 1;" );
+            while ( rs.next() ) {
+              lastId = rs.getInt(id);
+            }
+        } catch (SQLException e) {
+		System.out.println("Failed CREATE TABLE");
+		e.printStackTrace();
+        }
+        return lastId;
+     }
+    
+    public static void main(String[] arg){
+       DataBase db = DataBase.getInstance();
+       String nameBD = db.getCurrentNameBase();
+       //System.out.println(db.getListTable().toString());
+       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
+       String[] rows = {"325", "0987654321", "Commen-665", "NZ",  "name-struct"};
+       //String[] rows = {"Commen-665", "NZ", "name-struct"};
+       ArrayList<String> listNameColum = new ArrayList<>();
+       listNameColum.add("id");
+        listNameColum.add("UUID");
+       listNameColum.add("Comment");
+       listNameColum.add("Type");
+       listNameColum.add("Name");
+       System.out.println(db.getLastId("t_gpa_di_settings"));
+       db.insertRows("t_gpa_di_settings", rows, listNameColum);
+       System.out.println(db.getLastId("t_gpa_di_settings"));
+       db.deleteRowId("t_gpa_di_settings", "325");
+    }
     //--------- Методы обслюживающие систему абонентов -Lev-----------------
     public static void createAbonentTable(){ //Создание таблицы абонентов, если её не было
         if(globVar.DB==null) return;

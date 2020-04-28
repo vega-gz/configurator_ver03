@@ -13,12 +13,17 @@ import java.util.stream.Stream;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseConnect.DataBase;
+import Main.Main_JPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import static java.lang.Thread.sleep;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.Exchanger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
@@ -44,6 +49,9 @@ public class TableNzVer3 {
     ArrayList<ArrayList> listData = null; // Массив для  перебора в запросе
     String[] columns = null; // Колонки таблицы
     NZDefaultTableModel tableFrameModel = null; // Доработанная модель таблицы
+    private ArrayList<String> columnsArray;
+    Exchanger<String> ex = new Exchanger<String>(); // переменная для обмена данных между потоками
+    // public volatile String  messageThreadVar = "665"; // это почему то не видит поток
 
     public TableNzVer3(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
         this.listData = listData;
@@ -73,13 +81,14 @@ public class TableNzVer3 {
     // --- Если на вход подали не массив колонок а Лист ---
     TableNzVer3(String nameTable, ArrayList<String> columns, ArrayList<ArrayList> listData) {
         this.nameTable = nameTable;
-        //this.columns = columns; 
+        this.columnsArray = columns;  // это идиотия но пока не знаю как переделать
         this.listData = listData;
         this.workbase = DataBase.getInstance();
         this.columns = new String[columns.size()];
         for (int i = 0; i < columns.size(); ++i) { // Преобразовать лист в массив
             this.columns[i] = columns.get(i);
         }
+        new Thread(new UptadeVisualTable(this, ex)).start(); // Пооком слушателя обновления таблиц
     }
 
     // --- получить сформированную таблицу ---
@@ -96,9 +105,9 @@ public class TableNzVer3 {
         });
         return jTable1;
     }
-    
+
     // --- повтор метода из NZDefaultTableModel и забираем из него данные ---
-    public Object getDataNameColumn(String nameColumn, int row){
+    public Object getDataNameColumn(String nameColumn, int row) {
         Object objTable = tableFrameModel.getDataNameColumn(nameColumn, row);
         return objTable;
     }
@@ -192,33 +201,39 @@ public class TableNzVer3 {
         return new NZDefaultTableModel(dataInTable, resultColumn, nameTable);
     }
 
-    // --- Обработка нажатия клавиш ---
+    // --- Обработка нажатия клавиш мыши ---
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) { // right mouse
             int row = jTable1.rowAtPoint(evt.getPoint()); // хитрое вычисление где нажато
             int column = jTable1.columnAtPoint(evt.getPoint());
             // if (column == 0){        
-            ++column;
-            //String nameGra = (String) jTable1.getValueAt(row, column); // так получим имя графика
-            PopUpDemo menu = new PopUpDemo();
-            menu.show(evt.getComponent(), evt.getX(), evt.getY());
-            //}
-            // перерисовываем таблицу из данных новых графиков
+            //++column;
 
-            //jTable1.getColumnModel().getColumn(0).setCellRenderer(new myTableCellRenderer_ver2(tmpC));       
-            JTableHeader th = jTable1.getTableHeader();
-            th.repaint(); // без этого не работает отрисовка , тут с ней тоже
+            PopUpDemo menu = new PopUpDemo();
+            // На всякий случай проверка
+            for (int i = 0; i < jTable1.getColumnCount(); ++i) {
+                if (jTable1.getColumnName(i).equalsIgnoreCase("id")) {
+                    String idRow = (String) jTable1.getValueAt(row, i); // каким столбцом небыл бы id мы всегда получим данные
+                    //System.out.println("idRow " + idRow);
+                    menu.idBase = idRow; // передаем в меню данные от id
+                }
+            }
+            menu.show(evt.getComponent(), evt.getX(), evt.getY());
+            
+            //}
+            // перерисовываем таблицу
         }
     }//GEN-LAST:event_jTable1MousePressed
 
-// -- мини меню по мыши первого столбца таблицы---
+    // -- мини меню по мыши ---
     class PopUpDemo extends JPopupMenu {
 
         JMenuItem anItem;
         int i1 = 0;
+        String idBase; // id зы отображенный в таблице
+        String messageThreadVar; // переменная для передачи потоку
 
         public PopUpDemo() {
-            //anItem = new JMenuItem("Click Me!");
             JSlider slider = new JSlider();
             add(slider);
             int value = slider.getValue();
@@ -231,30 +246,77 @@ public class TableNzVer3 {
                     //System.out.println(value);
                 }
             });
-            // еще один пункт меню
-            JMenuItem menuItem = new JMenuItem("Add_Signal...",
-                    new ImageIcon("images/newproject.png"));  
-            menuItem.setMnemonic(KeyEvent.VK_P);
-            menuItem.getAccessibleContext().setAccessibleDescription(
+            //пункт меню добавления сигнала
+            JMenuItem menuItemAdd = new JMenuItem("Add_Signal...",
+                    new ImageIcon("images/newproject.png"));
+            menuItemAdd.setMnemonic(KeyEvent.VK_P);
+            menuItemAdd.getAccessibleContext().setAccessibleDescription(
                     "New Project");
-            menuItem.addActionListener(new ActionListener() {
+            menuItemAdd.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent ae) {
                     //int sumColumn = jTable1.getColumnCount();// список столюцов
                     ArrayList<String> listColumn = new ArrayList<>();
-                    for(int i=0; i<jTable1.getColumnCount(); ++i){ // собираем лист из имен таблицы
+                    for (int i = 0; i < jTable1.getColumnCount(); ++i) { // собираем лист из имен таблицы
                         listColumn.add(jTable1.getColumnName(i));
                     }
-                    new PopMenuDialog(listColumn, workbase, nameTable); // вызов диалога с полями для заполнения и указателем на базу
-//                    JOptionPane.showMessageDialog(null, "New Project clicked!"); // а почему null ?
+                    //new PopMenuDialog(listColumn, workbase, nameTable); // вызов диалога с полями для заполнения и указателем на базу
+                    new Thread(new PopMenuDialog(listColumn, workbase, nameTable, ex)).start(); // как свой поток работает
+
                 }
             });
-            add(menuItem);
+            add(menuItemAdd);
+            //пункт меню добавления сигнала
+            JMenuItem menuItemDel = new JMenuItem("remove_Signal...",
+                    new ImageIcon("images/newproject.png"));
+            menuItemDel.setMnemonic(KeyEvent.VK_P);
+            menuItemDel.getAccessibleContext().setAccessibleDescription(
+                    "New Project");
+            menuItemDel.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    //int sumColumn = jTable1.getColumnCount();//список столбцов
+                    ArrayList<String> listColumn = new ArrayList<>();
+                    for (int i = 0; i < jTable1.getColumnCount(); ++i) { // собираем лист из имен таблицы для полного соотвтствия
+                        listColumn.add(jTable1.getColumnName(i));
+                    }
+                    if (idBase != null) {
+                        workbase.deleteRowId(nameTable, idBase);
+                        JOptionPane.showMessageDialog(null, "Signal ID " + idBase + "delete"); // Сообщение
+                        getDatredrawnTable(); // можно так перерисовать можно триггером 
+                    }
+                }
+            });
+            add(menuItemDel);
         }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    // --- Ффукция получени и обработки данных с БД ---
+    public ArrayList<ArrayList> getDatafromBase() {
+        ArrayList<String[]> dataFromDb = workbase.getData(nameTable, columnsArray); // получили данные с базы 
+        ArrayList<ArrayList> listToTable = new ArrayList<>(); // Лист для передачи в таблицу
+        //преобразовать данные для переваривания таблицей
+        for (String[] mass : dataFromDb) {
+            ArrayList<String> tmpList = new ArrayList<>();
+            for (String s : mass) {
+                tmpList.add(s);
+            }
+            listToTable.add(tmpList);
+        }
+        return listToTable;
+    }
+
+    // --- получение новых значений и перерисовка таблицы ---
+    void getDatredrawnTable() {
+        // так делаю перермсовку таблицы(очень плохо тут все)
+        listData = getDatafromBase(); // Обновим список что есть в базе
+        tableFrameModel = getModelTable(nameTable, columns, listData); // 
+        jTable1.setModel(tableFrameModel);
+        jTable1.getTableHeader().repaint();// без этого не работает отрисовка , 
+    }
 }
 
 // Редактор даты с использованием прокручивающегося списка JSpinner
@@ -283,4 +345,30 @@ class DateCellEditor extends AbstractCellEditor implements TableCellEditor {
     public Object getCellEditorValue() {
         return editor.getValue();
     }
+
 }
+
+// --- поток следит за обновлением таблицы ---
+class UptadeVisualTable implements Runnable{    
+    Exchanger<String> exchanger;
+    String message;
+    TableNzVer3 tableThis;
+  
+    UptadeVisualTable(TableNzVer3 tableThis, Exchanger<String> exchanger){ 
+        this.tableThis=tableThis;
+        this.exchanger= exchanger; // попробую через это общаться
+    }
+
+    public void run(){  
+        while(true){
+            try {
+                message=exchanger.exchange(null); // шлем нулл
+                if(message.equalsIgnoreCase("update_table")){ // нашли кто изменил переменную
+                    tableThis.getDatredrawnTable(); // перерисовка таблицы  перерисовка в теории
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(UptadeVisualTable.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+} 

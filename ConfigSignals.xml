@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigSignals>
-	<AI excelSheetName="AI">
+	<AI excelSheetName="AI" Comment="Аналоговые входы">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-            <G nameColumnPos="Диапазон_мин" type="Number" fRez=""/>
-            <H nameColumnPos="Диапазон_макс" type="Number" fRez=""/>
+            <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
+            <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
             <J nameColumnPos="Тип_датчика" default="4-20 мА"/>
-            <AA nameColumnPos="АЦПmax" default="2.0"/>
+            <AA nameColumnPos="АЦПmin" default="2.0"/>
             <AB nameColumnPos="АЦПmax" default="10.0"/>
             <I nameColumnPos="Единица_измерения" default=""/>
             <K nameColumnPos="Акт_пас" default=""/>
@@ -109,7 +109,7 @@
             <F nameColumnPos="TAG_NAME_PLC" add1="TAG_NAME_AnPar" add2="typePostfix" add3="directPostfix"/>
         </EXEL>
 	</SetPoints>
-	<AnO excelSheetName="AO">
+	<AnO excelSheetName="AO" Comment="Аналоговые выходы">
 		<GenData>
 			<T_GPA_AO_FromHMI Type="T_AO_FromHMI"/>
 			<T_GPA_AO_ToHMI Type="T_AO_ToHMI"/>
@@ -155,7 +155,7 @@
 			</File>
 		</GenCode>
 	</AnO>
-	<DGI excelSheetName="DGI">
+	<DGI excelSheetName="DGI" Comment="Дискретные входы">
 		<GenData>
 			<T_GPA_DI_Settings Type="T_DI_Settings"/>
 			<T_GPA_DI_FromHMI Type="T_DI_FromHMI"/>
@@ -201,7 +201,7 @@
 			</File>
 		</GenCode>
 	</DGI>
-	<DGO excelSheetName="DGO">
+	<DGO excelSheetName="DGO" Comment="Дискретные выходы">
 		<GenData>
 			<T_GPA_DO_FromHMI Type="T_DO_FromHMI"/>
 			<T_GPA_DO_ToHMI Type="T_DO_ToHMI"/>
@@ -229,7 +229,7 @@
 			</File>
 		</GenCode>
 	</DGO>
-	<AI_NKU excelSheetName="AI_NKU">
+	<AI_NKU excelSheetName="AI_NKU" Comment="Аналоговые входы от НКУ">
 		<GenData>
 			<T_NKU_AI_DRV Type="REAL"/>
 		</GenData>	
@@ -243,7 +243,7 @@
             <J nameColumnPos="Адрес_modbus"/>
         </EXEL>
 	</AI_NKU>
-	<DI_NKU excelSheetName="DI_NKU">
+	<DI_NKU excelSheetName="DI_NKU" Comment="Дискретные входы от НКУ">
 		<GenData>
 			<T_NKU_DI_DRV Type="BOOL"/>
 		</GenData>	
@@ -252,7 +252,7 @@
             <I nameColumnPos="TAG_NAME_PLC" type="VarName"/>
         </EXEL>
 	</DI_NKU>
-	<DO_NKU excelSheetName="DO_NKU">
+	<DO_NKU excelSheetName="DO_NKU" Comment="Дискретные выходы от НКУ">
 		<GenData>
 			<T_NKU_DO_DRV Type="BOOL"/>
 		</GenData>	

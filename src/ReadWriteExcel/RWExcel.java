@@ -818,6 +818,8 @@ public class RWExcel {
                 return "";
         }
     }
+    
+    //public static cellProcessing()
     // --- сформировать даные из конфигугации XML для чтения Exel---
     public static int ReadExelFromConfig(String pathExel) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
         FileInputStream inputStream = new FileInputStream(new File(pathExel));
@@ -828,6 +830,7 @@ public class RWExcel {
         for(Node n : nList){
             String tableName = n.getNodeName();
             String exSheetName = globVar.sax.getDataAttr(n, "excelSheetName");
+            String tableComment = globVar.sax.getDataAttr(n, "Comment");
             HSSFSheet sheet = wb.getSheet(exSheetName);
             int rowMax = 32767;
             if(sheet != null){
@@ -835,11 +838,12 @@ public class RWExcel {
                 ArrayList<Node> colList = globVar.sax.getHeirNode(excelNode);
                 //ArrayList<String[]> dataFromExcel = new ArrayList<>();
                 String[][] dataFromExcel = null;
+                String[] tabColNames = new String[colList.size()];
                 int colCnt = 0;
                 boolean first = true;
                 for(Node col : colList){
                     String colExName = col.getNodeName();
-                    String colTbName = globVar.sax.getDataAttr(col,"nameColumnPos");
+                    tabColNames[colCnt] = globVar.sax.getDataAttr(col,"nameColumnPos");
                     //String type = globVar.sax.getDataAttr(col,"type");
                     
                     //String childTable = globVar.sax.getDataAttr(col,"childTable");
@@ -890,144 +894,14 @@ public class RWExcel {
                     }
                     colCnt++;
                 }
+                String tableNameAb = globVar.abonent+"_"+tableName;
+                if(globVar.DB.isTable(tableNameAb)) globVar.DB.dropTable(tableNameAb);
+                globVar.DB.createTable(tableNameAb, tabColNames, tableComment);
                 for(int i=0; i<rowMax; i++){
-                    
+                    globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);
                 }
             }
         }
-//                        // проход по данным с анализом диаграммы Льва 
-//                        int tmp = 0; // сюда должна записать переменная начала обработки строк
-//                        for (String[] araySheet : sheet_fromsheet_from) {
-//                            for (int si = 1; si < araySheet.length; ++si) { // 1 так как данные с uuid
-//                                String s = araySheet[si];
-//                                Node nodeExcel = getHeirNode(element).get(si - 1); // -1 так как идентификатор без UIddберем ноду с таким же идентификатором столбца
-//
-//                                HashMap<String, String> valueEtrColumnExcelN = getDataNode(nodeExcel); // Получение имена и атрибутов этой ноды
-//                                if (s.equals("")) { // если данные в ячейки нет(средняя ветка)
-//                                    // *** ищем switch ***
-//                                    String valSwitch = valueEtrColumnExcelN.get("switch");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-//                                    if (valSwitch != null) {//проверка данные valSwitch есть
-//                                        // название столбца от куда мы счтываем данные
-//                                        for (int colB = 0; colB < columnBase.size(); ++colB) {
-//                                            String nameColumnBase = columnBase.get(colB);
-//                                            if (valSwitch.equals(nameColumnBase)) { // совпало какое то имя берем его номер
-//                                                araySheet[si] = araySheet[colB]; // присваиваем это значение но номеру массива   
-//                                            }
-//                                        }
-//                                        boolean findVar = false; // триггер нашли хоть один var
-//                                        for (int rep = 0; rep < valueEtrColumnExcelN.size(); ++rep) { // по всем элементам прохожусь
-//                                            String var = "var" + rep;
-//                                            String valueVar = valueEtrColumnExcelN.get(var);
-//                                            // сравниваем значение
-//                                            if (araySheet[si].equals(valueVar)) {  // если все совпало то вносим с правилами ниже
-//                                                araySheet[si] = valueEtrColumnExcelN.get("default" + rep);
-//                                                findVar = true;
-//                                            }
-//                                        }
-//                                        if (!findVar) { // если не одно значение не совпалос default1- до безконечности
-//                                            String defaultVar = valueEtrColumnExcelN.get("default"); // записываем значения default
-//                                            if (defaultVar != null) {
-//                                                araySheet[si] = defaultVar;
-//                                            } else {
-//                                                araySheet[si] = ""; // записываем пустую строку
-//                                                FileManager.loggerConstructor("switch error: List excell " + nameTB + "Column " + nodeExcel.getNodeName() + "str= " + tmp);
-//
-//                                            }
-//                                        }
-//                                    } else {
-//                                        // ищем default
-//                                        String valDefault = valueEtrColumnExcelN.get("default");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-//                                        if (valDefault != null) {//проверка данные default1 есть
-//                                            araySheet[si] = valDefault; // нашли дефаулт то в него и пешем 
-//                                        } else {
-//                                            // ищем formula
-//                                            String valFormula = valueEtrColumnExcelN.get("valFormula");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-//                                            if (valFormula != null) {//проверка данные valFormula есть
-//                                                araySheet[si] = calcFormula(); // вызываем метод обработки формулы
-//                                            } else {
-//                                                araySheet[si] = ""; // записываем пустую строку
-//                                                FileManager.loggerConstructor("formula error: List excell " + nameTB + "Column " + nodeExcel.getNodeName() + "str= " + tmp);
-//                                            }
-//                                        }
-//                                    }
-//
-//                                } else {
-//                                    // ищем registr
-//                                    String valuRegistr = valueEtrColumnExcelN.get("registr");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-//                                    if (valuRegistr != null) {//проверка что registr данные есть
-//                                        if (valuRegistr.equals("down")) {
-//                                            araySheet[si] = araySheet[si].toLowerCase(); // значение в нижний регистр
-//                                        } else {
-//                                            araySheet[si] = araySheet[si].toUpperCase(); // тогда к верхнему
-//                                        }
-//                                    }
-//                                    // ищем replace
-//                                    String valueReplace = valueEtrColumnExcelN.get("replace");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-//                                    if (valueReplace != null) {
-//                                        for (int rep = 0; rep < valueEtrColumnExcelN.size(); ++rep) { // по всем элементам прохожусь
-//                                            String repFrom = "repFrom" + rep;
-//                                            String valueRepFrom = valueEtrColumnExcelN.get(repFrom);
-//                                            // сравниваем значение
-//                                            if (araySheet[si].equals(valueRepFrom)) {
-//                                                araySheet[si] = valueEtrColumnExcelN.get("repTo" + rep);
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                                // второй этап атрибут add1
-//                                String valueAdd1 = valueEtrColumnExcelN.get("add1");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-//                                if (valueAdd1 != null) { // нашли add1
-//                                    boolean findAdd = false;
-//                                    for (int rep = 0; rep < valueEtrColumnExcelN.size(); ++rep) { // по всем элементам прохожусь
-//                                        String repFrom = "add" + rep;
-//                                        String valueAdd = valueEtrColumnExcelN.get(repFrom);
-//                                        if (valueAdd != null) { // если такой add вообще есть
-//                                            for (int colB = 0; colB < columnBase.size(); ++colB) { // название столбца от куда мы счтываем данные
-//                                                String nameColumnBase = columnBase.get(colB);
-//                                                if (valueAdd.equals(nameColumnBase)) { // совпало какое то имя берем его номер
-//                                                    araySheet[si] = araySheet[si] + araySheet[colB]; // добавляем содежимое найденного
-//                                                    findAdd = true;
-//                                                }
-//                                            }
-//                                            if (!findAdd) { // если не нашли содержимое столбца add 
-//                                                araySheet[si] = araySheet[si] + valueAdd;
-//                                            }
-//                                        }
-//
-//                                    }
-//                                } else {
-//                                    // *** поиск атрибут fRez ***
-//                                    String valueFRez = valueEtrColumnExcelN.get("fRez");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-//                                    if (valueFRez != null) {
-//                                       ArrayList<Node> ListNFormulas = getHeirNode(returnFirstFinedNode(firsNode, "Formulas"));// ищем ноду Formulas
-//                                       String nColumnCurrentT = columnBase.get(si);// Получить название текущего столбца для таблицы
-//                                       for(Node nFormulas: ListNFormulas){
-//                                           if(nColumnCurrentT.equals(nFormulas.getNodeName())){ // Совпадает ли названия нод Formulas с названием текущего столбца
-//                                            System.out.println(nFormulas.getNodeName());
-//                                            setDataAttr(nFormulas, "result", araySheet[si]);// добавить аттрибут этой ноде result
-//                                           }
-//                                       }
-//                                    }
-//                                }
-//                            }
-//                            ++tmp;
-//                        }
-//                        
-//                        //writeDocument(); // запишем документ так как были преобразования
-//                        for (String[] massS : sheet_fromsheet_from) {
-//                            workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
-//                        }
-//                        // все обнуляем для следующего сигнала
-//                        nameTB = "";
-//                        nameSheetExel = "";
-//                        columnExcel.clear();
-//                        columnBase.clear();
-//                        defAttrF = false;
-//                        createT = false;
-//                    }
-//                }
-//            }
     return 0;
     }
-
 }
