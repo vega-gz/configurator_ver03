@@ -862,7 +862,7 @@ public class DataBase {
     public void createCommentTable(String table, String comment){
         String sql = null;   
         try {
-            sql = "COMMENT ON TABLE  " + table+ " IS " +"'" +comment +"'" +";";
+            sql = "COMMENT ON TABLE  " + "\"" +table + "\"" + " IS " +"'" +comment +"'" +";";
             //System.out.println(sql);
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
