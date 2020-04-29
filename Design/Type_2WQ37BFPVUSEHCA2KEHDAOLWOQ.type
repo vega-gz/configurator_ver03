@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_AnAM_Internal" Kind="Struct" UUID="9CE4A1754AD1681EF6A4D691E12007B2">
+    <Fields>
+        <Field Name="Vn1_MOR" Type="362E073F4C91D3F3BF6443B04D1F1ABD" UUID="58D6DF35442E74B88FBC3AA819A68846" />
+    </Fields>
+</Type>

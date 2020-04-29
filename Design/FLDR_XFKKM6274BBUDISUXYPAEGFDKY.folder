@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="NKU">
+    <Items>
+        <Item Name="Type_GBE3MK7AABES7MRRW6X5IJBRNI.type" />
+        <Item Name="Type_P24IK257ZFHDVJWLQNCVEOBWSY.type" />
+        <Item Name="Type_S4WUXZESPRERDG4YUKBQF32KZU.type" />
+        <Item Name="Type_TYJ5FV6DVVGT3HLVVJIOUQVY74.type" />
+        <Item Name="Type_UQO4LEEMYVGGVAAXX4FU5QAI2I.type" />
+        <Item Name="Type_VDM6W4WRKNGIBOY24XU7UC6U5Q.type" />
+    </Items>
+</Folder>

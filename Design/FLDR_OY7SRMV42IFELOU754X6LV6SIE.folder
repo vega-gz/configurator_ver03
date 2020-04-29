@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="AnAM">
+    <Items>
+        <Item Name="Type_2WQ37BFPVUSEHCA2KEHDAOLWOQ.type" />
+        <Item Name="Type_6EKFKH4NKGWUNDAJUHD5GL5UWM.type" />
+        <Item Name="Type_BNV3ONKRU4GURPYSKV2IUBF53Q.type" />
+        <Item Name="Type_KJAUPXC2IIREBLYBVBOYMD4C3A.type" />
+        <Item Name="Type_PAUCQPXCLXOEBKNKM4RXJ7AIXE.type" />
+        <Item Name="Type_UWG6XRQSUDMUVOQEEMVK2BNUE4.type" />
+        <Item Name="Type_ZT5ZSUJMBGFEXOGOGTMKWUGHWI.type" />
+        <Item Name="Type_ZTQILHK2LOEENECHGDWVPMZFZI.type" />
+    </Items>
+</Folder>

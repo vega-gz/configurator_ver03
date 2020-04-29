@@ -1,0 +1,652 @@
+<Data>
+    <Function UUID="D26A29BC4D438C8EF7E5B9A1990EAA24" Name="DI_CallAll" ResultTypeUUID="EC797BDD4541F500AD80A78F1F991834">
+        <Variables>
+            <Variable UUID="5AAC06174D4591F1A490259954C80435" Name="repTime" Comment="Длительность ремонта" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+        </Variables>
+        <ST><![CDATA[repTime := 3600;
+if not init.DI then
+	init.DI := true;
+DI_init(GPA_DI_Settings.BK_OF,repTime,1.0,false,0);//Байпасный клапан закрыт
+DI_init(GPA_DI_Settings.Dver1_VOU_Close,repTime,1.0,false,1);//Дверь 1 КВОУ закрыта
+DI_init(GPA_DI_Settings.Dver2_VOU_Close,repTime,1.0,false,2);//Дверь 2 КВОУ закрыта
+DI_init(GPA_DI_Settings.Dver_VZK_Close,repTime,1.0,false,3);//Дверь воздухозаборной камеры закрыта
+DI_init(GPA_DI_Settings.dP_setka_N,repTime,1.0,false,4);//Перепад давления газа на фильтре-сетке, установленном на входе компрессора
+DI_init(GPA_DI_Settings.dPg_Kr1,repTime,1.0,false,5);//Перепад давления газа на кране К1
+DI_init(GPA_DI_Settings.Kr1_ON,repTime,1.0,false,6);//Кран Кр1 открыт
+DI_init(GPA_DI_Settings.Kr1_OF,repTime,1.0,false,7);//Кран Кр1 закрыт
+DI_init(GPA_DI_Settings.Kr2_ON,repTime,1.0,false,8);//Кран Кр2 открыт
+DI_init(GPA_DI_Settings.Kr2_OF,repTime,1.0,false,9);//Кран Кр2 закрыт
+DI_init(GPA_DI_Settings.Res_0,repTime,1.0,false,10);//Кран Кр3 открыт (резерв)
+DI_init(GPA_DI_Settings.Res_1,repTime,1.0,false,11);//Кран Кр3 закрыт (резерв)
+DI_init(GPA_DI_Settings.Kr4_ON,repTime,1.0,false,12);//Кран Кр4 открыт
+DI_init(GPA_DI_Settings.Kr4_OF,repTime,1.0,false,13);//Кран Кр4 закрыт
+DI_init(GPA_DI_Settings.Kr5_ON,repTime,1.0,false,14);//Кран Кр5 открыт
+DI_init(GPA_DI_Settings.Kr5_OF,repTime,1.0,false,15);//Кран Кр5 закрыт
+DI_init(GPA_DI_Settings.Res_2,repTime,1.0,false,16);//Резерв
+DI_init(GPA_DI_Settings.Res_3,repTime,1.0,false,17);//Резерв
+DI_init(GPA_DI_Settings.dPm_F_N,repTime,1.0,false,18);//Перепад давления масла на фильтрах маслосистемы компрессора
+DI_init(GPA_DI_Settings.dPm_F_Lub,repTime,1.0,false,19);//Перепад давления на фильтре лубрикаторной системы (резерв)
+DI_init(GPA_DI_Settings.Lm_Nkar_an,repTime,1.0,false,20);//Аварийно-низкий уровень масла в картере компрессора 
+DI_init(GPA_DI_Settings.Lm_Nkar_an_KCD,repTime,1.0,false,21);//Аварийно-низкий уровень масла в картере компрессора КЦД
+DI_init(GPA_DI_Settings.Lm_Nkar_pn,repTime,1.0,false,22);//Предупредительный уровень масла в картере компрессора
+DI_init(GPA_DI_Settings.Lm_Nkar_pn_KCD,repTime,1.0,КЦД,23);//Предупредительный уровень масла в картере компрессора КЦД
+DI_init(GPA_DI_Settings.Qm_Lub1,repTime,1.0,false,24);//Поток масла в лубрикаторной системе смазки компрессора 1
+DI_init(GPA_DI_Settings.Qm_Lub1_KCD,repTime,1.0,КЦД,25);//Поток масла в лубрикаторной системе смазки компрессора 1 КЦД
+DI_init(GPA_DI_Settings.Qm_Lub2,repTime,1.0,false,26);//Поток масла в лубрикаторной системе смазки компрессора 2
+DI_init(GPA_DI_Settings.Qm_Lub2_KCD,repTime,1.0,КЦД,27);//Поток масла в лубрикаторной системе смазки компрессора 2 КЦД
+DI_init(GPA_DI_Settings.Res_5,repTime,1.0,false,28);//Резерв
+DI_init(GPA_DI_Settings.Res_KCD_6,repTime,1.0,false,29);// Резерв КЦД
+DI_init(GPA_DI_Settings.Res_7,repTime,1.0,false,30);//Резерв
+DI_init(GPA_DI_Settings.Res_KCD_8,repTime,1.0,false,31);//Резерв КЦД
+DI_init(GPA_DI_Settings.Res_9,repTime,1.0,false,32);//Резерв
+DI_init(GPA_DI_Settings.Res_KCD_10,repTime,1.0,false,33);//Резерв КЦД
+DI_init(GPA_DI_Settings.Res_11,repTime,1.0,false,34);//Резерв
+DI_init(GPA_DI_Settings.Res_KCD_12,repTime,1.0,false,35);//Резерв КЦД
+DI_init(GPA_DI_Settings.Vs_N_av,repTime,1.0,false,36);//Опасная корпусная вибрация компрессора
+DI_init(GPA_DI_Settings.Vs_N_av_KCD,repTime,1.0,false,37);//Опасная корпусная вибрация компрессора КЦД
+DI_init(GPA_DI_Settings.Vp_SlowVal_av,repTime,1.0,false,38);//Опасное виброперемещение тихоходного вала редуктора
+DI_init(GPA_DI_Settings.Vp_SlowVal_av_KCD,repTime,1.0,false,39);//Опасное виброперемещение тихоходного вала редуктора КЦД
+DI_init(GPA_DI_Settings.Vp_FastVal_av,repTime,1.0,false,40);//Опасное виброперемещение быстроходного вала редуктора
+DI_init(GPA_DI_Settings.Vp_FastVal_av_KCD,repTime,1.0,false,41);//Опасное виброперемещение быстроходного вала редуктора КЦД
+DI_init(GPA_DI_Settings.No_U_Kr,repTime,1.0,false,42);//Питание соленоидов крановой обвязки ГПА неисправно
+DI_init(GPA_DI_Settings.Kl1_ON,repTime,1.0,false,43);//Клапан Кл1 открыт
+DI_init(GPA_DI_Settings.Kl1_OF,repTime,1.0,false,44);//Клапан Кл1 закрыт
+DI_init(GPA_DI_Settings.Kl2_ON,repTime,1.0,false,45);//Клапан Кл2 открыт
+DI_init(GPA_DI_Settings.Kl2_OF,repTime,1.0,false,46);//Клапан Кл2 закрыт
+DI_init(GPA_DI_Settings.Kl3_ON,repTime,1.0,false,47);//Клапан Кл3 открыт
+DI_init(GPA_DI_Settings.Kl3_OF,repTime,1.0,false,48);//Клапан Кл3 закрыт
+DI_init(GPA_DI_Settings.Kl4_ON,repTime,1.0,false,49);//Клапан Кл4 открыт
+DI_init(GPA_DI_Settings.Kl4_OF,repTime,1.0,false,50);//Клапан Кл4 закрыт
+DI_init(GPA_DI_Settings.Kl5_ON,repTime,1.0,false,51);//Клапан Кл5 открыт
+DI_init(GPA_DI_Settings.Kl5_OF,repTime,1.0,false,52);//Клапан Кл5 закрыт
+DI_init(GPA_DI_Settings.KlR7_ON,repTime,1.0,false,53);//Клапан КлР7 открыт
+DI_init(GPA_DI_Settings.KlR7_OF,repTime,1.0,false,54);//Клапан КлР7 закрыт
+DI_init(GPA_DI_Settings.No_U_Kl_13,repTime,1.0,false,55);//Питание сливных клапанов 1-3 неиспр
+DI_init(GPA_DI_Settings.No_U_Kl_45,repTime,1.0,false,56);//Питание сливных клапанов 4-5 неиспр
+DI_init(GPA_DI_Settings.Lk_FS1_S1_v,repTime,1.0,false,57);//Верхний уровень жидкости в первой ступени ФС1
+DI_init(GPA_DI_Settings.Lk_FS1_S1_n,repTime,1.0,false,58);//Нижний уровень жидкости  в первой ступени ФС1
+DI_init(GPA_DI_Settings.Lk_FS1_S2_v,repTime,1.0,false,59);//Верхний уровень жидкости во второй ступени ФС1
+DI_init(GPA_DI_Settings.Lk_FS1_S2_n,repTime,1.0,false,60);//Нижний уровень жидкости  во второй ступени ФС1
+DI_init(GPA_DI_Settings.Lk_FS2_S1_v,repTime,1.0,false,61);//Верхний уровень жидкости в первой ступени ФС2
+DI_init(GPA_DI_Settings.Lk_FS2_S1_n,repTime,1.0,false,62);//Нижний уровень жидкости  в первой ступени ФС2
+DI_init(GPA_DI_Settings.Res_13,repTime,1.0,false,63);//Резерв
+DI_init(GPA_DI_Settings.Res_14,repTime,1.0,false,64);//Резерв
+DI_init(GPA_DI_Settings.Lk_FS3_S1_v,repTime,1.0,false,65);//Верхний уровень жидкости в первой ступени ФС3
+DI_init(GPA_DI_Settings.Lk_FS3_S1_n,repTime,1.0,false,66);//Нижний уровень жидкости  в первой ступени ФС3
+DI_init(GPA_DI_Settings.Lk_FS3_S2_v,repTime,1.0,false,67);//Верхний уровень жидкости во второй ступени ФС3
+DI_init(GPA_DI_Settings.Lk_FS3_S2_n,repTime,1.0,false,68);//Нижний уровень жидкости  во второй ступени ФС3
+DI_init(GPA_DI_Settings.Lk_E1_v,repTime,1.0,false,69);//Верхний уровень жидкости в Е-1
+DI_init(GPA_DI_Settings.Lk_E1_bad,repTime,1.0,false,70);//Неисправность датчика уровня в Е-1
+DI_init(GPA_DI_Settings.Res_15,repTime,1.0,false,71);//Резерв
+DI_init(GPA_DI_Settings.Os_Rdk_av,repTime,1.0,false,72);//Опасный осевой сдвиг редуктора
+DI_init(GPA_DI_Settings.Os_Rdk_av_KCD,repTime,1.0,false,73);//Опасный осевой сдвиг редуктора КЦД
+DI_init(GPA_DI_Settings.Lm_MBK_an,repTime,1.0,false,74);//Аварийно-низкий уровень масла в маслобаке Б1 компрессора
+DI_init(GPA_DI_Settings.Lm_MBK_an_KCD,repTime,1.0,false,75);//Аварийно-низкий уровень масла в маслобаке Б1 компрессора. КЦД
+DI_init(GPA_DI_Settings.L_freeze_Bak_an,repTime,1.0,false,76);//Аварийно-низкий уровень охлаждающей жидкости в баке компрессора
+DI_init(GPA_DI_Settings.L_freeze_Bak_an_KCD,repTime,1.0,false,77);// Аварийно-низкий уровень охлаждающей жидкости в баке компрессора. КЦД
+DI_init(GPA_DI_Settings.Res_16,repTime,1.0,false,78);//Резерв
+DI_init(GPA_DI_Settings.dPm_F_Rdk_v,repTime,1.0,false,79);//Перепад давления масла на фильтре очистки масла редуктора
+DI_init(GPA_DI_Settings.Lm_MBL_an,repTime,1.0,false,80);//Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора
+DI_init(GPA_DI_Settings.Lm_MBL_an_KCD,repTime,1.0,false,81);//Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора КЦД
+DI_init(GPA_DI_Settings.Lm_MBL_av,repTime,1.0,false,82);//Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора
+DI_init(GPA_DI_Settings.Lm_MBL_av_KCD,repTime,1.0,false,83);//Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора КЦД
+DI_init(GPA_DI_Settings.Lm_MBN_av,repTime,1.0,false,84);//Аварийно высокий уровень масла в маслобаке Б1 компрессора
+DI_init(GPA_DI_Settings.Lm_MBN_av_KCD,repTime,1.0,false,85);//Аварийно высокий уровень масла в маслобаке Б1 компрессора КЦД
+DI_init(GPA_DI_Settings.Lm_MBR_av,repTime,1.0,false,86);//Аварийно высокий уровень масла в маслобаке редуктора
+DI_init(GPA_DI_Settings.Lm_MBR_av_KCD,repTime,1.0,false,87);//Аварийный уровень масла в маслобаке редуктора КЦД
+DI_init(GPA_DI_Settings.Vs_GPA_pv,repTime,1.0,false,88);//Предельная вибрация агрегата (любой из 7 каналов)
+DI_init(GPA_DI_Settings.Vs_GPA_pv_KCD,repTime,1.0,false,89);//Предельная вибрация агрегата (любой из 7 каналов) КЦД
+DI_init(GPA_DI_Settings.Lm_MBR_pn,repTime,1.0,false,90);//Предупредительный уровень масла в маслобаке редуктора
+DI_init(GPA_DI_Settings.Vs_GPA_av,repTime,1.0,false,91);//Опасная вибрация агрегата (любой из 7 каналов)
+DI_init(GPA_DI_Settings.Reg_Starter_ON,repTime,1.0,false,92);//РЧТиН электростартера включен
+DI_init(GPA_DI_Settings.Reg_Starter_Work,repTime,1.0,false,93);//РЧТиН электростартера работает
+DI_init(GPA_DI_Settings.SK_OF,repTime,1.0,false,94);//Отсечной газовый кран перед дозатором закрыт
+DI_init(GPA_DI_Settings.Kr9_ON,repTime,1.0,false,95);//Кран 9 сброса топливного газа на свечу открыт
+DI_init(GPA_DI_Settings.Kr9_OF,repTime,1.0,false,96);//Кран 9 сброса топливного газа на свечу закрыт
+DI_init(GPA_DI_Settings.Kr12_ON,repTime,1.0,false,97);//Кран 12 подвода топливного газа к ГТД открыт
+DI_init(GPA_DI_Settings.Kr12_OF,repTime,1.0,false,98);//Кран 12 подвода топливного газа к ГТД закрыт
+DI_init(GPA_DI_Settings.BUSD_ok,repTime,1.0,false,99);//Нормальная работа БУШД
+DI_init(GPA_DI_Settings.dPm_FTO_v,repTime,1.0,false,100);//Повышенный перепад давления масла на маслофильтре тонкой очистки (резерв)
+DI_init(GPA_DI_Settings.dPm_FGO_v,repTime,1.0,false,101);//Повышенный перепад давления масла на маслофильтре грубой очистки (резерв)
+DI_init(GPA_DI_Settings.Pm_inD_40v,repTime,1.0,false,102);//Давление масла на входе в ГТД выше 40 кПа
+DI_init(GPA_DI_Settings.Pm_inD_40v_KCD,repTime,1.0,false,103);//Давление масла на входе в ГТД выше 40 кПа КЦД
+DI_init(GPA_DI_Settings.Kn_AO_PU,repTime,1.0,false,104);//Кнопка АО от ПУ
+DI_init(GPA_DI_Settings.Kn_AO_PU_KCD,repTime,1.0,false,105);//Кнопка АО от ПУ КЦД
+DI_init(GPA_DI_Settings.Kn_EO_PU,repTime,1.0,false,106);//Кнопка ЭО от ПУ
+DI_init(GPA_DI_Settings.Kn_EO_PU_KCD,repTime,1.0,false,107);//Кнопка ЭО от ПУ КЦД
+DI_init(GPA_DI_Settings.Res_19,repTime,1.0,false,108);//Резерв 
+DI_init(GPA_DI_Settings.BZA1_Rdy,repTime,1.0,false,109);//Готовность БЗА 1
+DI_init(GPA_DI_Settings.BZA2_Rdy,repTime,1.0,false,110);//Готовность БЗА 2
+DI_init(GPA_DI_Settings.U_SPV_ON,repTime,1.0,false,111);//Питание 220 В системы плазменного воспламенения включено
+DI_init(GPA_DI_Settings.No_upr_VNA,repTime,1.0,false,112);//Нет управляющего сигнала на ВНА
+DI_init(GPA_DI_Settings.VNA_FLT,repTime,1.0,false,113);//Управление приводом ВНА неисправно
+DI_init(GPA_DI_Settings.Res_20,repTime,1.0,false,114);//Резерв
+DI_init(GPA_DI_Settings.Res_21,repTime,1.0,false,115);//Резерв
+DI_init(GPA_DI_Settings.Res_22,repTime,1.0,false,116);//Резерв
+DI_init(GPA_DI_Settings.Res_23,repTime,1.0,false,117);//Резерв
+DI_init(GPA_DI_Settings.Res_24,repTime,1.0,false,118);//Резерв
+DI_init(GPA_DI_Settings.Res_25,repTime,1.0,false,119);//Резерв
+DI_init(GPA_DI_Settings.Lm_MBD_an,repTime,1.0,false,120);//Аварийно-низкий уровень масла в маслобаке ГТД
+DI_init(GPA_DI_Settings.Lm_MBD_an_KCD,repTime,1.0,false,121);//Аварийный уровень масла в маслобаке ГТД КЦД
+DI_init(GPA_DI_Settings.AO_Shop,repTime,1.0,false,122);//АО из КЦ
+DI_init(GPA_DI_Settings.AO_Shop_KCD,repTime,1.0,false,123);//АО из КЦ КЦД
+DI_init(GPA_DI_Settings.Fire_inOD,repTime,1.0,false,124);//Пожар в отсеке ГТД
+DI_init(GPA_DI_Settings.Fire_inOD_KCD,repTime,1.0,false,125);//Пожар в отсеке ГТД КЦД
+DI_init(GPA_DI_Settings.Dver_ON_Open,repTime,1.0,false,126);//Двери отсека нагнетателя открыты
+DI_init(GPA_DI_Settings.Dver_OD_Open,repTime,1.0,false,127);//Двери отсека ГТД открыты
+DI_init(GPA_DI_Settings.Fire_inUkr,repTime,1.0,false,128);//Пожар в укрытии компрессора
+DI_init(GPA_DI_Settings.Fire_inUkr_KCD,repTime,1.0,false,129);//Пожар в укрытии компрессора КЦД
+DI_init(GPA_DI_Settings.KLR1_ON,repTime,1.0,false,130);//Клапан КлР1 открыт
+DI_init(GPA_DI_Settings.Fire_inETO,repTime,1.0,false,131);//Пожар в блоке электротехническом
+DI_init(GPA_DI_Settings.Fire_inETO_KCD,repTime,1.0,false,132);//Пожар в блоке электротехническом КЦД
+DI_init(GPA_DI_Settings.Dver_ETO_Open,repTime,1.0,false,133);//Двери электротехнического отсека открыты
+DI_init(GPA_DI_Settings.Gas10_ON,repTime,1.0,false,134);//Загазованность 10 % НКПВ в отсеке компрессора
+DI_init(GPA_DI_Settings.Gas20_ON,repTime,1.0,false,135);//Загазованность 20 % НКПВ в отсеке компрессора
+DI_init(GPA_DI_Settings.Gas20_ON_KCD,repTime,1.0,false,136);//Загазованность 20 % НКПВ в отсеке компрессора КЦД
+DI_init(GPA_DI_Settings.Gas10_OD,repTime,1.0,false,137);//Загазованность 10 % НКПВ в отсеке ГТД
+DI_init(GPA_DI_Settings.ASPS_ok,repTime,1.0,false,138);//АСПС норма
+DI_init(GPA_DI_Settings.Gas20_OD,repTime,1.0,false,139);//Загазованность 20 % НКПВ в отсеке ГТД
+DI_init(GPA_DI_Settings.Gas20_OD_KCD,repTime,1.0,false,140);//Загазованность 20 % НКПВ в отсеке ГТД КЦД
+DI_init(GPA_DI_Settings.Lk_FS1_G1_max,repTime,1.0,false,141);//Максимальный уровень жидкости в фильтре дренаж Г1 (LA1-1)
+DI_init(GPA_DI_Settings.Lk_FS1_G1_min,repTime,1.0,false,142);//Минимальный уровень жидкости в фильтре дренаж Г1 (LA1-2)
+DI_init(GPA_DI_Settings.Lk_FS1_G2_max,repTime,1.0,false,143);//Максимальный уровень жидкости в фильтре дренаж Г2 (LA1-3)
+DI_init(GPA_DI_Settings.Lk_FS1_G2_min,repTime,1.0,false,144);//Минимальный уровень жидкости в фильтре дренаж Г2 (LA1-4)
+DI_init(GPA_DI_Settings.Lk_FS2_G1_max,repTime,1.0,false,145);//Максимальный уровень жидкости в фильтре дренаж Г1 (LA2-1)
+DI_init(GPA_DI_Settings.Lk_FS2_G1_min,repTime,1.0,false,146);//Минимальный уровень жидкости в фильтре дренаж Г1 (LA2-2)
+DI_init(GPA_DI_Settings.Lk_FS3_G1_max,repTime,1.0,false,147);//Максимальный уровень жидкости в фильтре дренаж Г1 (LA3-1)
+DI_init(GPA_DI_Settings.Lk_FS3_G1_min,repTime,1.0,false,148);//Минимальный уровень жидкости в фильтре дренаж Г1 (LA3-2)
+DI_init(GPA_DI_Settings.Lk_FS3_G2_max,repTime,1.0,false,149);//Максимальный уровень жидкости в фильтре дренаж Г2 (LA3-3)
+DI_init(GPA_DI_Settings.Lk_FS3_G2_min,repTime,1.0,false,150);//Минимальный уровень жидкости в фильтре дренаж Г2 (LA3-4)
+DI_init(GPA_DI_Settings.KE3_1_ON,repTime,1.0,false,151);//Клапан электромагнитный КЛЭ3 (КЛЭ3-1) открыт
+DI_init(GPA_DI_Settings.KE3_2_ON,repTime,1.0,false,152);//Клапан электромагнитный КЛЭ3 (КЛЭ3-2) открыт
+DI_init(GPA_DI_Settings.KE3_3_ON,repTime,1.0,false,153);//Клапан электромагнитный КЛЭ3 (КЛЭ3-3) открыт
+DI_init(GPA_DI_Settings.KE5_ON,repTime,1.0,false,154);//Клапан шаровой с электроприводом КШЭ5 открыт
+DI_init(GPA_DI_Settings.Lm_MBR_an,repTime,1.0,false,155);//Аварийно низкий уровень масла в маслобаке редуктора
+DI_init(GPA_DI_Settings.Lm_MBR_an_KCD,repTime,1.0,false,156);//Аварийно низкий уровень масла в маслобаке редуктора КЦД
+DI_init(GPA_DI_Settings.Lm_MBD_av,repTime,1.0,false,157);//Аварийно-высокий уровень масла в маслобаке ГТД
+DI_init(GPA_DI_Settings.Lm_MBD_av_KCD,repTime,1.0,false,158);//Аварийно-высокий уровень масла в маслобаке ГТД КЦД
+DI_init(GPA_DI_Settings.Res_26,repTime,1.0,false,159);//Резерв
+DI_init(GPA_DI_Settings.Res_27,repTime,1.0,false,160);//Резерв
+DI_init(GPA_DI_Settings.Res_28,repTime,1.0,false,161);//Резерв
+DI_init(GPA_DI_Settings.Res_29,repTime,1.0,false,162);//Резерв
+DI_init(GPA_DI_Settings.Kr6_OF,repTime,1.0,false,163);//Кран Кр6 закрыт
+DI_init(GPA_DI_Settings.Kr6_ON,repTime,1.0,false,164);//Кран Кр6 открыт
+DI_init(GPA_DI_Settings.KE1_BFTG_ON,repTime,1.0,false,165);//Клапан КЭ1 БФТГ подачи газа в ГТД открыт
+DI_init(GPA_DI_Settings.KE2_BFTG_OF,repTime,1.0,false,166);//Клапан КЭ2 БФТГ сброса давления в атмосферу закрыт
+DI_init(GPA_DI_Settings.AKZ_FLT,repTime,1.0,false,167);//Система контроля загазованности неисправна
+DI_init(GPA_DI_Settings.Kn_AO_ETO,repTime,1.0,false,168);//Кнопка АО на блоке ЭТ и САУ
+DI_init(GPA_DI_Settings.KLR6_ON,repTime,1.0,false,169);//Клапан КлР6 открыт
+DI_init(GPA_DI_Settings.KLR6_OF,repTime,1.0,false,170);//Клапан КлР6 закрыт
+DI_init(GPA_DI_Settings.KLR1_OF,repTime,1.0,false,171);//Клапан КлР1 закрыт
+DI_init(GPA_DI_Settings.KLR2_OF,repTime,1.0,false,172);//Клапан КлР2 закрыт
+DI_init(GPA_DI_Settings.KLR2_ON,repTime,1.0,false,173);//Клапан КлР2 открыт
+DI_init(GPA_DI_Settings.TEN_MON_OverT,repTime,1.0,false,174);//Перегрев калорифера МОК
+DI_init(GPA_DI_Settings.TEN_MOR_OverT,repTime,1.0,false,175);//Перегрев калорифера МОР
+DI_init(GPA_DI_Settings.TEN_MOD_OverT,repTime,1.0,false,176);//Перегрев калорифера МОД
+DI_init(GPA_DI_Settings.AB_Bad,repTime,1.0,false,177);//Батарея разряжена
+DI_init(GPA_DI_Settings.El_Bypass_ON,repTime,1.0,false,178);//Работа от байпаса
+DI_init(GPA_DI_Settings.El_Network_ON,repTime,1.0,false,179);//Работа от сети
+DI_init(GPA_DI_Settings.BypassServ_ON,repTime,1.0,false,180);//Серв. байпас включен 
+DI_init(GPA_DI_Settings.No_El_Network,repTime,1.0,false,181);//Нет сети
+DI_init(GPA_DI_Settings.ZU_FLT,repTime,1.0,false,182);//Неисправность ЗУ
+DI_init(GPA_DI_Settings.ALL_FLT,repTime,1.0,false,183);//Общая неисправность
+DI_init(GPA_DI_Settings.Vn_MON_FLT,repTime,1.0,false,184);//Авария вентиляторов МО компрессора
+DI_init(GPA_DI_Settings.Vn_MOR_FLT,repTime,1.0,false,185);//Авария вентиляторов МО редуктора
+DI_init(GPA_DI_Settings.Vn_MOD_FLT,repTime,1.0,false,186);//Авария вентиляторов МО ГТД
+DI_init(GPA_DI_Settings.VA_OD_ON,repTime,1.0,false,187);//Включение аварийной вентиляции турбоблока
+DI_init(GPA_DI_Settings.Check_VPU,repTime,1.0,false,188);//Контроль положения валоповоротного устройства
+DI_init(GPA_DI_Settings.Check_AZ1,repTime,1.0,false,189);//Контроль агрегата зажигания. Канал 1
+DI_init(GPA_DI_Settings.Check_AZ2,repTime,1.0,false,190);//Контроль агрегата зажигания. Канал 2
+DI_init(GPA_DI_Settings.Kl_PE3_OF,repTime,1.0,false,191);//Клапан противопожарный ПЕ3 закрыт
+DI_init(GPA_DI_Settings.Kl_PE3_ON,repTime,1.0,false,192);//Клапан противопожарный ПЕ3 открыт
+DI_init(GPA_DI_Settings.Kl_PE2_OF,repTime,1.0,false,193);//Клапан противопожарный ПЕ2 закрыт
+DI_init(GPA_DI_Settings.Kl_PE2_ON,repTime,1.0,false,194);//Клапан противопожарный ПЕ2 открыт
+DI_init(GPA_DI_Settings.Kl_PE1_OF,repTime,1.0,false,195);//Клапан противопожарный ПЕ1 закрыт
+DI_init(GPA_DI_Settings.Kl_PE1_ON,repTime,1.0,false,196);//Клапан противопожарный ПЕ1 открыт
+DI_init(GPA_DI_Settings.Vs_N_v,repTime,1.0,false,197);//Повышенная корпусная вибрация компрессора
+DI_init(GPA_DI_Settings.Res_30,repTime,1.0,false,198);//Резерв
+DI_init(GPA_DI_Settings.Vp_SlowVal_v,repTime,1.0,false,199);//Повышенное виброперемещение тихоходного вала редуктора
+DI_init(GPA_DI_Settings.Res_31,repTime,1.0,false,200);//Резерв
+DI_init(GPA_DI_Settings.Vp_FastVal_v,repTime,1.0,false,201);//Повышенное виброперемещение быстроходного вала редуктора
+DI_init(GPA_DI_Settings.Res_32,repTime,1.0,false,202);//Резерв
+DI_init(GPA_DI_Settings.Os_Rdk_v,repTime,1.0,false,203);//Повышенный осевой сдвиг редуктора
+DI_init(GPA_DI_Settings.Res_33,repTime,1.0,false,204);//Резерв
+DI_init(GPA_DI_Settings.SKV_FLT,repTime,1.0,false,205);//Отказ аппаратуры контроля вибрации
+DI_init(GPA_DI_Settings.Check_SKV,repTime,1.0,false,206);//Контроль исправности виброаппаратуры компрессора и редуктора
+DI_init(GPA_DI_Settings.Res_34,repTime,1.0,false,207);//Резерв
+DI_init(GPA_DI_Settings.Res_35,repTime,1.0,false,208);//Открыть кран К3 (резерв) КЦУ
+DI_init(GPA_DI_Settings.Res_45,repTime,1.0,false,209);//Закрыть кран К3 (резерв) КЦУ
+DI_init(GPA_DI_Settings.Lock_VNA_KCU,repTime,1.0,false,210);//Блокировка ВНА КЦУ
+DI_init(GPA_DI_Settings.GPA_Work_KCU,repTime,1.0,false,211);//ГПА в работе КЦУ
+DI_init(GPA_DI_Settings.TEN_Vlagomer_ON_KCU,repTime,1.0,false,212);//Включить термостат влагомера КЦУ
+DI_init(GPA_DI_Settings.Kr1_ON_KCU,repTime,1.0,false,213);//Открыть кран Кр1 КЦУ
+DI_init(GPA_DI_Settings.Kr1_OF_KCU,repTime,1.0,false,214);//Закрыть кран Кр1 КЦУ
+DI_init(GPA_DI_Settings.Kr2_ON_KCU,repTime,1.0,false,215);//Открыть кран Кр2 КЦУ
+DI_init(GPA_DI_Settings.Kr2_OF_KCU,repTime,1.0,false,216);//Закрыть кран Кр2 КЦУ
+DI_init(GPA_DI_Settings.Kr4_ON_KCU,repTime,1.0,false,217);//Открыть кран Кр4 КЦУ
+DI_init(GPA_DI_Settings.Kr4_OF_KCU,repTime,1.0,false,218);//Закрыть кран Кр4 КЦУ
+DI_init(GPA_DI_Settings.Kr5_ON_KCU,repTime,1.0,false,219);//Открыть кран Кр5 КЦУ
+DI_init(GPA_DI_Settings.Kr5_OF_KCU,repTime,1.0,false,220);//Закрыть кран Кр5 КЦУ
+DI_init(GPA_DI_Settings.Reg_C1_N_OF_KCU,repTime,1.0,false,221);//Закрыть регулятор производительности цилиндра №1 компрессора КЦУ
+DI_init(GPA_DI_Settings.Reg_C2_N_OF_KCU,repTime,1.0,false,222);//Закрыть регулятор производительности цилиндра №2 компрессора КЦУ
+DI_init(GPA_DI_Settings.Reg_C3_N_OF_KCU,repTime,1.0,false,223);//Закрыть регулятор производительности цилиндра №3 компрессора КЦУ
+DI_init(GPA_DI_Settings.Chk_AC220_SAU,repTime,1.0,false,224);//Контроль основного питания САУ ГПА ~220 В
+DI_init(GPA_DI_Settings.Chk_DC220_SAU,repTime,1.0,false,225);//Контроль резервного питания САУ ГПА =220 В
+DI_init(GPA_DI_Settings.Chk_AC220_BUSD,repTime,1.0,false,226);//Контроль питания БУШД-М1 ~220 В
+DI_init(GPA_DI_Settings.Chk_DC220_Kr,repTime,1.0,false,227);//Контроль питания кранов =220В
+DI_init(GPA_DI_Settings.Chk_AC220_BEO,repTime,1.0,false,228);//Контроль основного питания БЭАО ~220 В
+DI_init(GPA_DI_Settings.Chk_DC220_BEO,repTime,1.0,false,229);//Контроль резервного питания БЭАО =220 В
+DI_init(GPA_DI_Settings.Chk_razr,repTime,1.0,false,230);//Контроль исправности разрядников
+DI_init(GPA_DI_Settings.Chk_DC24_Kr124,repTime,1.0,false,231);//Контроль питания кранов №1,2,4 =24В
+DI_init(GPA_DI_Settings.Chk_DC24_Kr569,repTime,1.0,false,232);//Контроль питания кранов №5,6,9 =24В
+DI_init(GPA_DI_Settings.Chk_DC24_Kr12,repTime,1.0,false,233);//Контроль питания крана №12
+DI_init(GPA_DI_Settings.Chk_U_TPAI,repTime,1.0,false,234);//Контроль питания терминальных панелей АI
+DI_init(GPA_DI_Settings.Chk_U_TPDI,repTime,1.0,false,235);//Диагностика питания ADI
+DI_init(GPA_DI_Settings.DC24osn_PRU_ok,repTime,1.0,false,236);//Исправность основного ИП =24В БЭАО, РПКУ
+DI_init(GPA_DI_Settings.DC24rez_PRU_ok,repTime,1.0,false,237);//Исправность резервного ИП =24В БЭАО, РПКУ
+DI_init(GPA_DI_Settings.DC24osn_PLC_ok,repTime,1.0,false,238);//Исправность основного ИП =24В ПЛК
+DI_init(GPA_DI_Settings.DC24rez_PLC_ok,repTime,1.0,false,239);//Исправность резервного ИП =24В ПЛК
+DI_init(GPA_DI_Settings.DC24osn_Int_ok,repTime,1.0,false,240);//Исправность основного ИП =24В внутренних устройств
+DI_init(GPA_DI_Settings.DC24rez_Int_ok,repTime,1.0,false,241);//Исправность резервного ИП =24В внутренних устройств
+DI_init(GPA_DI_Settings.DC24osn_AI_ok,repTime,1.0,false,242);//Исправность основного ИП =24В аналоговых входов
+DI_init(GPA_DI_Settings.DC24rez_AI_ok,repTime,1.0,false,243);//Исправность резервного ИП =24В аналоговых входов
+DI_init(GPA_DI_Settings.DC24osn_DI_ok,repTime,1.0,false,244);//Исправность основного ИП =24В дискретных входов
+DI_init(GPA_DI_Settings.DC24rez_DI_ok,repTime,1.0,false,245);//Исправность резервного ИП =24В дискретных входов
+DI_init(GPA_DI_Settings.DC24osn_Ext_ok,repTime,1.0,false,246);//Исправность основного ИП =24В внешних устройств
+DI_init(GPA_DI_Settings.DC24rez_Ext_ok,repTime,1.0,false,247);//Исправность резервного ИП =24В внешних устройств
+DI_init(GPA_DI_Settings.DC24osn_DO_ok,repTime,1.0,false,248);//Исправность основного ИП =24В дискретных выходов
+DI_init(GPA_DI_Settings.DC24rez_DO_ok,repTime,1.0,false,249);//Исправность резервного ИП =24В дискретных выходов
+DI_init(GPA_DI_Settings.Res_36,repTime,1.0,false,250);//Резерв (не подкл)
+DI_init(GPA_DI_Settings.Res_37,repTime,1.0,false,251);//Резерв (не подкл)
+DI_init(GPA_DI_Settings.QF_ON,repTime,1.0,false,252);//Автоматы питания включены
+DI_init(GPA_DI_Settings.Dver_PLC_close,repTime,1.0,false,253);//Двери шкафа закрыты
+DI_init(GPA_DI_Settings.Chk_U_TPDO,repTime,1.0,false,254);//Диагностика питания ADO
+DI_init(GPA_DI_Settings.Chk_FUS,repTime,1.0,false,255);//Контроль исправности ФУС
+DI_init(GPA_DI_Settings.Reg_C4_N_OF_KCU,repTime,1.0,false,256);//Закрыть регулятор производительности цилиндра №4 компрессора КЦУ
+DI_init(GPA_DI_Settings.Reg_C5_N_OF_KCU,repTime,1.0,false,257);//Закрыть регулятор производительности цилиндра №5 компрессора КЦУ
+DI_init(GPA_DI_Settings.Reg_C6_N_OF_KCU,repTime,1.0,false,258);//Закрыть регулятор производительности цилиндра №6 компрессора КЦУ
+DI_init(GPA_DI_Settings.Unlock_ES_KCU,repTime,1.0,false,259);//Разблокировать ЭС КЦУ
+DI_init(GPA_DI_Settings.ES_ON_KCU,repTime,1.0,false,260);//Включить ЭС КЦУ
+DI_init(GPA_DI_Settings.SK_ON_KCU,repTime,1.0,false,261);//Включить ЭМ открытия клапана ОГК1 КЦУ
+DI_init(GPA_DI_Settings.POK_ON_KCU,repTime,1.0,false,262);//Открыть клапан  подвода газа к воспламенителям КЦУ
+DI_init(GPA_DI_Settings.SPV_ON_KCU,repTime,1.0,false,263);//Включить СПВ КЦУ
+DI_init(GPA_DI_Settings.ZsPV_ON_KCU,repTime,1.0,false,264);//Открыть ЗПВ1 КЦУ
+DI_init(GPA_DI_Settings.Res_48,repTime,1.0,false,265);//Резерв
+DI_init(GPA_DI_Settings.Res_49,repTime,1.0,false,266);//Резерв
+DI_init(GPA_DI_Settings.Res_50,repTime,1.0,false,267);//Резерв
+DI_init(GPA_DI_Settings.Res_51,repTime,1.0,false,268);//Резерв
+DI_init(GPA_DI_Settings.Res_52,repTime,1.0,false,269);//Резерв
+DI_init(GPA_DI_Settings.Res_53,repTime,1.0,false,270);//Резерв
+DI_init(GPA_DI_Settings.Res_54,repTime,1.0,false,271);//Резерв
+DI_init(GPA_DI_Settings.Res_55,repTime,1.0,false,272);//Резерв
+DI_init(GPA_DI_Settings.Kr6_OF_KCU,repTime,1.0,false,273);//Закрыть кран Кр6 КЦУ
+DI_init(GPA_DI_Settings.Kr6_ON_KCU,repTime,1.0,false,274);//Открыть кран Кр6 КЦУ
+DI_init(GPA_DI_Settings.Kr9_OF_KCU,repTime,1.0,false,275);//Закрыть кран Кр9 КЦУ
+DI_init(GPA_DI_Settings.Kr9_ON_KCU,repTime,1.0,false,276);//Открыть кран Кр9 КЦУ
+DI_init(GPA_DI_Settings.Kr12_OF_KCU,repTime,1.0,false,277);//Закрыть кран Кр12 КЦУ
+DI_init(GPA_DI_Settings.Kr12_ON_KCU,repTime,1.0,false,278);//Открыть кран Кр12 КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_56,repTime,1.0,false,279);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_57,repTime,1.0,false,280);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_58,repTime,1.0,false,281);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_59,repTime,1.0,false,282);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_60,repTime,1.0,false,283);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_61,repTime,1.0,false,284);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_62,repTime,1.0,false,285);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_63,repTime,1.0,false,286);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_64,repTime,1.0,false,287);//Резерв КЦУ
+DI_init(GPA_DI_Settings.SPV_U_En_KCU,repTime,1.0,false,288);//Подать питание СПВ КЦУ
+DI_init(GPA_DI_Settings.PNSD_ON_KCU,repTime,1.0,false,289);//Включить насос смазки пусковой ГТД КЦУ
+DI_init(GPA_DI_Settings.PNSR_ON_KCU,repTime,1.0,false,290);//Включить эл. насос предпусковой прокачки масла (НПМ) редуктора КЦУ
+DI_init(GPA_DI_Settings.PNSN_ON_KCU,repTime,1.0,false,291);//Включить пусковой насос НППМК компрессора КЦУ
+DI_init(GPA_DI_Settings.KE3_1_ON_KCU,repTime,1.0,false,292);//Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-1) КЦУ
+DI_init(GPA_DI_Settings.KE3_2_ON_KCU,repTime,1.0,false,293);//Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-2) КЦУ
+DI_init(GPA_DI_Settings.KE3_3_ON_KCU,repTime,1.0,false,294);//Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-3) КЦУ
+DI_init(GPA_DI_Settings.KE5_ON_KCU,repTime,1.0,false,295);//Открыть клапан шаровой с электроприводом КШЭ5 КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_65,repTime,1.0,false,296);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_66,repTime,1.0,false,297);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_67,repTime,1.0,false,298);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_68,repTime,1.0,false,299);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_69,repTime,1.0,false,300);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_KCU_70,repTime,1.0,false,301);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_38,repTime,1.0,false,302);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_39,repTime,1.0,false,303);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Kn_NO_PRU,repTime,1.0,false,304);//Кнопка НО на ПРУ
+DI_init(GPA_DI_Settings.Kn_EO_PRU,repTime,1.0,false,305);//Кнопка ЭО на ПРУ
+DI_init(GPA_DI_Settings.Kn_EO_PRU_KCD,repTime,1.0,false,306);//Кнопка ЭО на ПРУ КЦД
+DI_init(GPA_DI_Settings.Kn_AO_PRU,repTime,1.0,false,307);//Кнопка АО на ПРУ
+DI_init(GPA_DI_Settings.Kn_AO_PRU_KCD,repTime,1.0,false,308);//Кнопка АО на ПРУ КЦД
+DI_init(GPA_DI_Settings.Kn_Quit,repTime,1.0,false,309);//Кнопка Квитирование на ПРУ
+DI_init(GPA_DI_Settings.BEO_Work,repTime,1.0,false,310);//БЭО работает
+DI_init(GPA_DI_Settings.BEO_Rdy,repTime,1.0,false,311);//Готовность БЭО
+DI_init(GPA_DI_Settings.N_TK_BZRT_av,repTime,1.0,false,312);//Аварийная частота вращения ротора КВД (канал 3) от БЗРТ
+DI_init(GPA_DI_Settings.N_ST_BZRT_av,repTime,1.0,false,313);//Аварийная частота вращения ротора КНД (канал 2) от БЗРТ
+DI_init(GPA_DI_Settings.T_outGG_av,repTime,1.0,false,314);//Температура 3 газа за турбиной компрессора
+DI_init(GPA_DI_Settings.Res_40,repTime,1.0,false,315);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_41,repTime,1.0,false,316);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_42,repTime,1.0,false,317);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_43,repTime,1.0,false,318);//Резерв КЦУ
+DI_init(GPA_DI_Settings.Res_44,repTime,1.0,false,319);//Резерв КЦУ
+end_if;
+DI_Processing(GPA_DI_DRV.BK_OF,GPA_DI_Settings.BK_OF,GPA_DI_FromHMI.BK_OF,GPA_DI_ToHMI.BK_OF,GPA_DI_Internal.BK_OF);//Байпасный клапан закрыт
+DI_Processing(GPA_DI_DRV.Dver1_VOU_Close,GPA_DI_Settings.Dver1_VOU_Close,GPA_DI_FromHMI.Dver1_VOU_Close,GPA_DI_ToHMI.Dver1_VOU_Close,GPA_DI_Internal.Dver1_VOU_Close);//Дверь 1 КВОУ закрыта
+DI_Processing(GPA_DI_DRV.Dver2_VOU_Close,GPA_DI_Settings.Dver2_VOU_Close,GPA_DI_FromHMI.Dver2_VOU_Close,GPA_DI_ToHMI.Dver2_VOU_Close,GPA_DI_Internal.Dver2_VOU_Close);//Дверь 2 КВОУ закрыта
+DI_Processing(GPA_DI_DRV.Dver_VZK_Close,GPA_DI_Settings.Dver_VZK_Close,GPA_DI_FromHMI.Dver_VZK_Close,GPA_DI_ToHMI.Dver_VZK_Close,GPA_DI_Internal.Dver_VZK_Close);//Дверь воздухозаборной камеры закрыта
+DI_Processing(GPA_DI_DRV.dP_setka_N,GPA_DI_Settings.dP_setka_N,GPA_DI_FromHMI.dP_setka_N,GPA_DI_ToHMI.dP_setka_N,GPA_DI_Internal.dP_setka_N);//Перепад давления газа на фильтре-сетке, установленном на входе компрессора
+DI_Processing(GPA_DI_DRV.dPg_Kr1,GPA_DI_Settings.dPg_Kr1,GPA_DI_FromHMI.dPg_Kr1,GPA_DI_ToHMI.dPg_Kr1,GPA_DI_Internal.dPg_Kr1);//Перепад давления газа на кране К1
+DI_Processing(GPA_DI_DRV.Kr1_ON,GPA_DI_Settings.Kr1_ON,GPA_DI_FromHMI.Kr1_ON,GPA_DI_ToHMI.Kr1_ON,GPA_DI_Internal.Kr1_ON);//Кран Кр1 открыт
+DI_Processing(GPA_DI_DRV.Kr1_OF,GPA_DI_Settings.Kr1_OF,GPA_DI_FromHMI.Kr1_OF,GPA_DI_ToHMI.Kr1_OF,GPA_DI_Internal.Kr1_OF);//Кран Кр1 закрыт
+DI_Processing(GPA_DI_DRV.Kr2_ON,GPA_DI_Settings.Kr2_ON,GPA_DI_FromHMI.Kr2_ON,GPA_DI_ToHMI.Kr2_ON,GPA_DI_Internal.Kr2_ON);//Кран Кр2 открыт
+DI_Processing(GPA_DI_DRV.Kr2_OF,GPA_DI_Settings.Kr2_OF,GPA_DI_FromHMI.Kr2_OF,GPA_DI_ToHMI.Kr2_OF,GPA_DI_Internal.Kr2_OF);//Кран Кр2 закрыт
+DI_Processing(GPA_DI_DRV.Res_0,GPA_DI_Settings.Res_0,GPA_DI_FromHMI.Res_0,GPA_DI_ToHMI.Res_0,GPA_DI_Internal.Res_0);//Кран Кр3 открыт (резерв)
+DI_Processing(GPA_DI_DRV.Res_1,GPA_DI_Settings.Res_1,GPA_DI_FromHMI.Res_1,GPA_DI_ToHMI.Res_1,GPA_DI_Internal.Res_1);//Кран Кр3 закрыт (резерв)
+DI_Processing(GPA_DI_DRV.Kr4_ON,GPA_DI_Settings.Kr4_ON,GPA_DI_FromHMI.Kr4_ON,GPA_DI_ToHMI.Kr4_ON,GPA_DI_Internal.Kr4_ON);//Кран Кр4 открыт
+DI_Processing(GPA_DI_DRV.Kr4_OF,GPA_DI_Settings.Kr4_OF,GPA_DI_FromHMI.Kr4_OF,GPA_DI_ToHMI.Kr4_OF,GPA_DI_Internal.Kr4_OF);//Кран Кр4 закрыт
+DI_Processing(GPA_DI_DRV.Kr5_ON,GPA_DI_Settings.Kr5_ON,GPA_DI_FromHMI.Kr5_ON,GPA_DI_ToHMI.Kr5_ON,GPA_DI_Internal.Kr5_ON);//Кран Кр5 открыт
+DI_Processing(GPA_DI_DRV.Kr5_OF,GPA_DI_Settings.Kr5_OF,GPA_DI_FromHMI.Kr5_OF,GPA_DI_ToHMI.Kr5_OF,GPA_DI_Internal.Kr5_OF);//Кран Кр5 закрыт
+DI_Processing(GPA_DI_DRV.Res_2,GPA_DI_Settings.Res_2,GPA_DI_FromHMI.Res_2,GPA_DI_ToHMI.Res_2,GPA_DI_Internal.Res_2);//Резерв
+DI_Processing(GPA_DI_DRV.Res_3,GPA_DI_Settings.Res_3,GPA_DI_FromHMI.Res_3,GPA_DI_ToHMI.Res_3,GPA_DI_Internal.Res_3);//Резерв
+DI_Processing(GPA_DI_DRV.dPm_F_N,GPA_DI_Settings.dPm_F_N,GPA_DI_FromHMI.dPm_F_N,GPA_DI_ToHMI.dPm_F_N,GPA_DI_Internal.dPm_F_N);//Перепад давления масла на фильтрах маслосистемы компрессора
+DI_Processing(GPA_DI_DRV.dPm_F_Lub,GPA_DI_Settings.dPm_F_Lub,GPA_DI_FromHMI.dPm_F_Lub,GPA_DI_ToHMI.dPm_F_Lub,GPA_DI_Internal.dPm_F_Lub);//Перепад давления на фильтре лубрикаторной системы (резерв)
+DI_Processing(GPA_DI_DRV.Lm_Nkar_an,GPA_DI_Settings.Lm_Nkar_an,GPA_DI_FromHMI.Lm_Nkar_an,GPA_DI_ToHMI.Lm_Nkar_an,GPA_DI_Internal.Lm_Nkar_an);//Аварийно-низкий уровень масла в картере компрессора 
+DI_Processing(GPA_DI_DRV.Lm_Nkar_an_KCD,GPA_DI_Settings.Lm_Nkar_an_KCD,GPA_DI_FromHMI.Lm_Nkar_an_KCD,GPA_DI_ToHMI.Lm_Nkar_an_KCD,GPA_DI_Internal.Lm_Nkar_an_KCD);//Аварийно-низкий уровень масла в картере компрессора КЦД
+DI_Processing(GPA_DI_DRV.Lm_Nkar_pn,GPA_DI_Settings.Lm_Nkar_pn,GPA_DI_FromHMI.Lm_Nkar_pn,GPA_DI_ToHMI.Lm_Nkar_pn,GPA_DI_Internal.Lm_Nkar_pn);//Предупредительный уровень масла в картере компрессора
+DI_Processing(GPA_DI_DRV.Lm_Nkar_pn_KCD,GPA_DI_Settings.Lm_Nkar_pn_KCD,GPA_DI_FromHMI.Lm_Nkar_pn_KCD,GPA_DI_ToHMI.Lm_Nkar_pn_KCD,GPA_DI_Internal.Lm_Nkar_pn_KCD);//Предупредительный уровень масла в картере компрессора КЦД
+DI_Processing(GPA_DI_DRV.Qm_Lub1,GPA_DI_Settings.Qm_Lub1,GPA_DI_FromHMI.Qm_Lub1,GPA_DI_ToHMI.Qm_Lub1,GPA_DI_Internal.Qm_Lub1);//Поток масла в лубрикаторной системе смазки компрессора 1
+DI_Processing(GPA_DI_DRV.Qm_Lub1_KCD,GPA_DI_Settings.Qm_Lub1_KCD,GPA_DI_FromHMI.Qm_Lub1_KCD,GPA_DI_ToHMI.Qm_Lub1_KCD,GPA_DI_Internal.Qm_Lub1_KCD);//Поток масла в лубрикаторной системе смазки компрессора 1 КЦД
+DI_Processing(GPA_DI_DRV.Qm_Lub2,GPA_DI_Settings.Qm_Lub2,GPA_DI_FromHMI.Qm_Lub2,GPA_DI_ToHMI.Qm_Lub2,GPA_DI_Internal.Qm_Lub2);//Поток масла в лубрикаторной системе смазки компрессора 2
+DI_Processing(GPA_DI_DRV.Qm_Lub2_KCD,GPA_DI_Settings.Qm_Lub2_KCD,GPA_DI_FromHMI.Qm_Lub2_KCD,GPA_DI_ToHMI.Qm_Lub2_KCD,GPA_DI_Internal.Qm_Lub2_KCD);//Поток масла в лубрикаторной системе смазки компрессора 2 КЦД
+DI_Processing(GPA_DI_DRV.Res_5,GPA_DI_Settings.Res_5,GPA_DI_FromHMI.Res_5,GPA_DI_ToHMI.Res_5,GPA_DI_Internal.Res_5);//Резерв
+DI_Processing(GPA_DI_DRV.Res_KCD_6,GPA_DI_Settings.Res_KCD_6,GPA_DI_FromHMI.Res_KCD_6,GPA_DI_ToHMI.Res_KCD_6,GPA_DI_Internal.Res_KCD_6);// Резерв КЦД
+DI_Processing(GPA_DI_DRV.Res_7,GPA_DI_Settings.Res_7,GPA_DI_FromHMI.Res_7,GPA_DI_ToHMI.Res_7,GPA_DI_Internal.Res_7);//Резерв
+DI_Processing(GPA_DI_DRV.Res_KCD_8,GPA_DI_Settings.Res_KCD_8,GPA_DI_FromHMI.Res_KCD_8,GPA_DI_ToHMI.Res_KCD_8,GPA_DI_Internal.Res_KCD_8);//Резерв КЦД
+DI_Processing(GPA_DI_DRV.Res_9,GPA_DI_Settings.Res_9,GPA_DI_FromHMI.Res_9,GPA_DI_ToHMI.Res_9,GPA_DI_Internal.Res_9);//Резерв
+DI_Processing(GPA_DI_DRV.Res_KCD_10,GPA_DI_Settings.Res_KCD_10,GPA_DI_FromHMI.Res_KCD_10,GPA_DI_ToHMI.Res_KCD_10,GPA_DI_Internal.Res_KCD_10);//Резерв КЦД
+DI_Processing(GPA_DI_DRV.Res_11,GPA_DI_Settings.Res_11,GPA_DI_FromHMI.Res_11,GPA_DI_ToHMI.Res_11,GPA_DI_Internal.Res_11);//Резерв
+DI_Processing(GPA_DI_DRV.Res_KCD_12,GPA_DI_Settings.Res_KCD_12,GPA_DI_FromHMI.Res_KCD_12,GPA_DI_ToHMI.Res_KCD_12,GPA_DI_Internal.Res_KCD_12);//Резерв КЦД
+DI_Processing(GPA_DI_DRV.Vs_N_av,GPA_DI_Settings.Vs_N_av,GPA_DI_FromHMI.Vs_N_av,GPA_DI_ToHMI.Vs_N_av,GPA_DI_Internal.Vs_N_av);//Опасная корпусная вибрация компрессора
+DI_Processing(GPA_DI_DRV.Vs_N_av_KCD,GPA_DI_Settings.Vs_N_av_KCD,GPA_DI_FromHMI.Vs_N_av_KCD,GPA_DI_ToHMI.Vs_N_av_KCD,GPA_DI_Internal.Vs_N_av_KCD);//Опасная корпусная вибрация компрессора КЦД
+DI_Processing(GPA_DI_DRV.Vp_SlowVal_av,GPA_DI_Settings.Vp_SlowVal_av,GPA_DI_FromHMI.Vp_SlowVal_av,GPA_DI_ToHMI.Vp_SlowVal_av,GPA_DI_Internal.Vp_SlowVal_av);//Опасное виброперемещение тихоходного вала редуктора
+DI_Processing(GPA_DI_DRV.Vp_SlowVal_av_KCD,GPA_DI_Settings.Vp_SlowVal_av_KCD,GPA_DI_FromHMI.Vp_SlowVal_av_KCD,GPA_DI_ToHMI.Vp_SlowVal_av_KCD,GPA_DI_Internal.Vp_SlowVal_av_KCD);//Опасное виброперемещение тихоходного вала редуктора КЦД
+DI_Processing(GPA_DI_DRV.Vp_FastVal_av,GPA_DI_Settings.Vp_FastVal_av,GPA_DI_FromHMI.Vp_FastVal_av,GPA_DI_ToHMI.Vp_FastVal_av,GPA_DI_Internal.Vp_FastVal_av);//Опасное виброперемещение быстроходного вала редуктора
+DI_Processing(GPA_DI_DRV.Vp_FastVal_av_KCD,GPA_DI_Settings.Vp_FastVal_av_KCD,GPA_DI_FromHMI.Vp_FastVal_av_KCD,GPA_DI_ToHMI.Vp_FastVal_av_KCD,GPA_DI_Internal.Vp_FastVal_av_KCD);//Опасное виброперемещение быстроходного вала редуктора КЦД
+DI_Processing(GPA_DI_DRV.No_U_Kr,GPA_DI_Settings.No_U_Kr,GPA_DI_FromHMI.No_U_Kr,GPA_DI_ToHMI.No_U_Kr,GPA_DI_Internal.No_U_Kr);//Питание соленоидов крановой обвязки ГПА неисправно
+DI_Processing(GPA_DI_DRV.Kl1_ON,GPA_DI_Settings.Kl1_ON,GPA_DI_FromHMI.Kl1_ON,GPA_DI_ToHMI.Kl1_ON,GPA_DI_Internal.Kl1_ON);//Клапан Кл1 открыт
+DI_Processing(GPA_DI_DRV.Kl1_OF,GPA_DI_Settings.Kl1_OF,GPA_DI_FromHMI.Kl1_OF,GPA_DI_ToHMI.Kl1_OF,GPA_DI_Internal.Kl1_OF);//Клапан Кл1 закрыт
+DI_Processing(GPA_DI_DRV.Kl2_ON,GPA_DI_Settings.Kl2_ON,GPA_DI_FromHMI.Kl2_ON,GPA_DI_ToHMI.Kl2_ON,GPA_DI_Internal.Kl2_ON);//Клапан Кл2 открыт
+DI_Processing(GPA_DI_DRV.Kl2_OF,GPA_DI_Settings.Kl2_OF,GPA_DI_FromHMI.Kl2_OF,GPA_DI_ToHMI.Kl2_OF,GPA_DI_Internal.Kl2_OF);//Клапан Кл2 закрыт
+DI_Processing(GPA_DI_DRV.Kl3_ON,GPA_DI_Settings.Kl3_ON,GPA_DI_FromHMI.Kl3_ON,GPA_DI_ToHMI.Kl3_ON,GPA_DI_Internal.Kl3_ON);//Клапан Кл3 открыт
+DI_Processing(GPA_DI_DRV.Kl3_OF,GPA_DI_Settings.Kl3_OF,GPA_DI_FromHMI.Kl3_OF,GPA_DI_ToHMI.Kl3_OF,GPA_DI_Internal.Kl3_OF);//Клапан Кл3 закрыт
+DI_Processing(GPA_DI_DRV.Kl4_ON,GPA_DI_Settings.Kl4_ON,GPA_DI_FromHMI.Kl4_ON,GPA_DI_ToHMI.Kl4_ON,GPA_DI_Internal.Kl4_ON);//Клапан Кл4 открыт
+DI_Processing(GPA_DI_DRV.Kl4_OF,GPA_DI_Settings.Kl4_OF,GPA_DI_FromHMI.Kl4_OF,GPA_DI_ToHMI.Kl4_OF,GPA_DI_Internal.Kl4_OF);//Клапан Кл4 закрыт
+DI_Processing(GPA_DI_DRV.Kl5_ON,GPA_DI_Settings.Kl5_ON,GPA_DI_FromHMI.Kl5_ON,GPA_DI_ToHMI.Kl5_ON,GPA_DI_Internal.Kl5_ON);//Клапан Кл5 открыт
+DI_Processing(GPA_DI_DRV.Kl5_OF,GPA_DI_Settings.Kl5_OF,GPA_DI_FromHMI.Kl5_OF,GPA_DI_ToHMI.Kl5_OF,GPA_DI_Internal.Kl5_OF);//Клапан Кл5 закрыт
+DI_Processing(GPA_DI_DRV.KlR7_ON,GPA_DI_Settings.KlR7_ON,GPA_DI_FromHMI.KlR7_ON,GPA_DI_ToHMI.KlR7_ON,GPA_DI_Internal.KlR7_ON);//Клапан КлР7 открыт
+DI_Processing(GPA_DI_DRV.KlR7_OF,GPA_DI_Settings.KlR7_OF,GPA_DI_FromHMI.KlR7_OF,GPA_DI_ToHMI.KlR7_OF,GPA_DI_Internal.KlR7_OF);//Клапан КлР7 закрыт
+DI_Processing(GPA_DI_DRV.No_U_Kl_13,GPA_DI_Settings.No_U_Kl_13,GPA_DI_FromHMI.No_U_Kl_13,GPA_DI_ToHMI.No_U_Kl_13,GPA_DI_Internal.No_U_Kl_13);//Питание сливных клапанов 1-3 неиспр
+DI_Processing(GPA_DI_DRV.No_U_Kl_45,GPA_DI_Settings.No_U_Kl_45,GPA_DI_FromHMI.No_U_Kl_45,GPA_DI_ToHMI.No_U_Kl_45,GPA_DI_Internal.No_U_Kl_45);//Питание сливных клапанов 4-5 неиспр
+DI_Processing(GPA_DI_DRV.Lk_FS1_S1_v,GPA_DI_Settings.Lk_FS1_S1_v,GPA_DI_FromHMI.Lk_FS1_S1_v,GPA_DI_ToHMI.Lk_FS1_S1_v,GPA_DI_Internal.Lk_FS1_S1_v);//Верхний уровень жидкости в первой ступени ФС1
+DI_Processing(GPA_DI_DRV.Lk_FS1_S1_n,GPA_DI_Settings.Lk_FS1_S1_n,GPA_DI_FromHMI.Lk_FS1_S1_n,GPA_DI_ToHMI.Lk_FS1_S1_n,GPA_DI_Internal.Lk_FS1_S1_n);//Нижний уровень жидкости  в первой ступени ФС1
+DI_Processing(GPA_DI_DRV.Lk_FS1_S2_v,GPA_DI_Settings.Lk_FS1_S2_v,GPA_DI_FromHMI.Lk_FS1_S2_v,GPA_DI_ToHMI.Lk_FS1_S2_v,GPA_DI_Internal.Lk_FS1_S2_v);//Верхний уровень жидкости во второй ступени ФС1
+DI_Processing(GPA_DI_DRV.Lk_FS1_S2_n,GPA_DI_Settings.Lk_FS1_S2_n,GPA_DI_FromHMI.Lk_FS1_S2_n,GPA_DI_ToHMI.Lk_FS1_S2_n,GPA_DI_Internal.Lk_FS1_S2_n);//Нижний уровень жидкости  во второй ступени ФС1
+DI_Processing(GPA_DI_DRV.Lk_FS2_S1_v,GPA_DI_Settings.Lk_FS2_S1_v,GPA_DI_FromHMI.Lk_FS2_S1_v,GPA_DI_ToHMI.Lk_FS2_S1_v,GPA_DI_Internal.Lk_FS2_S1_v);//Верхний уровень жидкости в первой ступени ФС2
+DI_Processing(GPA_DI_DRV.Lk_FS2_S1_n,GPA_DI_Settings.Lk_FS2_S1_n,GPA_DI_FromHMI.Lk_FS2_S1_n,GPA_DI_ToHMI.Lk_FS2_S1_n,GPA_DI_Internal.Lk_FS2_S1_n);//Нижний уровень жидкости  в первой ступени ФС2
+DI_Processing(GPA_DI_DRV.Res_13,GPA_DI_Settings.Res_13,GPA_DI_FromHMI.Res_13,GPA_DI_ToHMI.Res_13,GPA_DI_Internal.Res_13);//Резерв
+DI_Processing(GPA_DI_DRV.Res_14,GPA_DI_Settings.Res_14,GPA_DI_FromHMI.Res_14,GPA_DI_ToHMI.Res_14,GPA_DI_Internal.Res_14);//Резерв
+DI_Processing(GPA_DI_DRV.Lk_FS3_S1_v,GPA_DI_Settings.Lk_FS3_S1_v,GPA_DI_FromHMI.Lk_FS3_S1_v,GPA_DI_ToHMI.Lk_FS3_S1_v,GPA_DI_Internal.Lk_FS3_S1_v);//Верхний уровень жидкости в первой ступени ФС3
+DI_Processing(GPA_DI_DRV.Lk_FS3_S1_n,GPA_DI_Settings.Lk_FS3_S1_n,GPA_DI_FromHMI.Lk_FS3_S1_n,GPA_DI_ToHMI.Lk_FS3_S1_n,GPA_DI_Internal.Lk_FS3_S1_n);//Нижний уровень жидкости  в первой ступени ФС3
+DI_Processing(GPA_DI_DRV.Lk_FS3_S2_v,GPA_DI_Settings.Lk_FS3_S2_v,GPA_DI_FromHMI.Lk_FS3_S2_v,GPA_DI_ToHMI.Lk_FS3_S2_v,GPA_DI_Internal.Lk_FS3_S2_v);//Верхний уровень жидкости во второй ступени ФС3
+DI_Processing(GPA_DI_DRV.Lk_FS3_S2_n,GPA_DI_Settings.Lk_FS3_S2_n,GPA_DI_FromHMI.Lk_FS3_S2_n,GPA_DI_ToHMI.Lk_FS3_S2_n,GPA_DI_Internal.Lk_FS3_S2_n);//Нижний уровень жидкости  во второй ступени ФС3
+DI_Processing(GPA_DI_DRV.Lk_E1_v,GPA_DI_Settings.Lk_E1_v,GPA_DI_FromHMI.Lk_E1_v,GPA_DI_ToHMI.Lk_E1_v,GPA_DI_Internal.Lk_E1_v);//Верхний уровень жидкости в Е-1
+DI_Processing(GPA_DI_DRV.Lk_E1_bad,GPA_DI_Settings.Lk_E1_bad,GPA_DI_FromHMI.Lk_E1_bad,GPA_DI_ToHMI.Lk_E1_bad,GPA_DI_Internal.Lk_E1_bad);//Неисправность датчика уровня в Е-1
+DI_Processing(GPA_DI_DRV.Res_15,GPA_DI_Settings.Res_15,GPA_DI_FromHMI.Res_15,GPA_DI_ToHMI.Res_15,GPA_DI_Internal.Res_15);//Резерв
+DI_Processing(GPA_DI_DRV.Os_Rdk_av,GPA_DI_Settings.Os_Rdk_av,GPA_DI_FromHMI.Os_Rdk_av,GPA_DI_ToHMI.Os_Rdk_av,GPA_DI_Internal.Os_Rdk_av);//Опасный осевой сдвиг редуктора
+DI_Processing(GPA_DI_DRV.Os_Rdk_av_KCD,GPA_DI_Settings.Os_Rdk_av_KCD,GPA_DI_FromHMI.Os_Rdk_av_KCD,GPA_DI_ToHMI.Os_Rdk_av_KCD,GPA_DI_Internal.Os_Rdk_av_KCD);//Опасный осевой сдвиг редуктора КЦД
+DI_Processing(GPA_DI_DRV.Lm_MBK_an,GPA_DI_Settings.Lm_MBK_an,GPA_DI_FromHMI.Lm_MBK_an,GPA_DI_ToHMI.Lm_MBK_an,GPA_DI_Internal.Lm_MBK_an);//Аварийно-низкий уровень масла в маслобаке Б1 компрессора
+DI_Processing(GPA_DI_DRV.Lm_MBK_an_KCD,GPA_DI_Settings.Lm_MBK_an_KCD,GPA_DI_FromHMI.Lm_MBK_an_KCD,GPA_DI_ToHMI.Lm_MBK_an_KCD,GPA_DI_Internal.Lm_MBK_an_KCD);//Аварийно-низкий уровень масла в маслобаке Б1 компрессора. КЦД
+DI_Processing(GPA_DI_DRV.L_freeze_Bak_an,GPA_DI_Settings.L_freeze_Bak_an,GPA_DI_FromHMI.L_freeze_Bak_an,GPA_DI_ToHMI.L_freeze_Bak_an,GPA_DI_Internal.L_freeze_Bak_an);//Аварийно-низкий уровень охлаждающей жидкости в баке компрессора
+DI_Processing(GPA_DI_DRV.L_freeze_Bak_an_KCD,GPA_DI_Settings.L_freeze_Bak_an_KCD,GPA_DI_FromHMI.L_freeze_Bak_an_KCD,GPA_DI_ToHMI.L_freeze_Bak_an_KCD,GPA_DI_Internal.L_freeze_Bak_an_KCD);// Аварийно-низкий уровень охлаждающей жидкости в баке компрессора. КЦД
+DI_Processing(GPA_DI_DRV.Res_16,GPA_DI_Settings.Res_16,GPA_DI_FromHMI.Res_16,GPA_DI_ToHMI.Res_16,GPA_DI_Internal.Res_16);//Резерв
+DI_Processing(GPA_DI_DRV.dPm_F_Rdk_v,GPA_DI_Settings.dPm_F_Rdk_v,GPA_DI_FromHMI.dPm_F_Rdk_v,GPA_DI_ToHMI.dPm_F_Rdk_v,GPA_DI_Internal.dPm_F_Rdk_v);//Перепад давления масла на фильтре очистки масла редуктора
+DI_Processing(GPA_DI_DRV.Lm_MBL_an,GPA_DI_Settings.Lm_MBL_an,GPA_DI_FromHMI.Lm_MBL_an,GPA_DI_ToHMI.Lm_MBL_an,GPA_DI_Internal.Lm_MBL_an);//Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора
+DI_Processing(GPA_DI_DRV.Lm_MBL_an_KCD,GPA_DI_Settings.Lm_MBL_an_KCD,GPA_DI_FromHMI.Lm_MBL_an_KCD,GPA_DI_ToHMI.Lm_MBL_an_KCD,GPA_DI_Internal.Lm_MBL_an_KCD);//Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора КЦД
+DI_Processing(GPA_DI_DRV.Lm_MBL_av,GPA_DI_Settings.Lm_MBL_av,GPA_DI_FromHMI.Lm_MBL_av,GPA_DI_ToHMI.Lm_MBL_av,GPA_DI_Internal.Lm_MBL_av);//Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора
+DI_Processing(GPA_DI_DRV.Lm_MBL_av_KCD,GPA_DI_Settings.Lm_MBL_av_KCD,GPA_DI_FromHMI.Lm_MBL_av_KCD,GPA_DI_ToHMI.Lm_MBL_av_KCD,GPA_DI_Internal.Lm_MBL_av_KCD);//Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора КЦД
+DI_Processing(GPA_DI_DRV.Lm_MBN_av,GPA_DI_Settings.Lm_MBN_av,GPA_DI_FromHMI.Lm_MBN_av,GPA_DI_ToHMI.Lm_MBN_av,GPA_DI_Internal.Lm_MBN_av);//Аварийно высокий уровень масла в маслобаке Б1 компрессора
+DI_Processing(GPA_DI_DRV.Lm_MBN_av_KCD,GPA_DI_Settings.Lm_MBN_av_KCD,GPA_DI_FromHMI.Lm_MBN_av_KCD,GPA_DI_ToHMI.Lm_MBN_av_KCD,GPA_DI_Internal.Lm_MBN_av_KCD);//Аварийно высокий уровень масла в маслобаке Б1 компрессора КЦД
+DI_Processing(GPA_DI_DRV.Lm_MBR_av,GPA_DI_Settings.Lm_MBR_av,GPA_DI_FromHMI.Lm_MBR_av,GPA_DI_ToHMI.Lm_MBR_av,GPA_DI_Internal.Lm_MBR_av);//Аварийно высокий уровень масла в маслобаке редуктора
+DI_Processing(GPA_DI_DRV.Lm_MBR_av_KCD,GPA_DI_Settings.Lm_MBR_av_KCD,GPA_DI_FromHMI.Lm_MBR_av_KCD,GPA_DI_ToHMI.Lm_MBR_av_KCD,GPA_DI_Internal.Lm_MBR_av_KCD);//Аварийный уровень масла в маслобаке редуктора КЦД
+DI_Processing(GPA_DI_DRV.Vs_GPA_pv,GPA_DI_Settings.Vs_GPA_pv,GPA_DI_FromHMI.Vs_GPA_pv,GPA_DI_ToHMI.Vs_GPA_pv,GPA_DI_Internal.Vs_GPA_pv);//Предельная вибрация агрегата (любой из 7 каналов)
+DI_Processing(GPA_DI_DRV.Vs_GPA_pv_KCD,GPA_DI_Settings.Vs_GPA_pv_KCD,GPA_DI_FromHMI.Vs_GPA_pv_KCD,GPA_DI_ToHMI.Vs_GPA_pv_KCD,GPA_DI_Internal.Vs_GPA_pv_KCD);//Предельная вибрация агрегата (любой из 7 каналов) КЦД
+DI_Processing(GPA_DI_DRV.Lm_MBR_pn,GPA_DI_Settings.Lm_MBR_pn,GPA_DI_FromHMI.Lm_MBR_pn,GPA_DI_ToHMI.Lm_MBR_pn,GPA_DI_Internal.Lm_MBR_pn);//Предупредительный уровень масла в маслобаке редуктора
+DI_Processing(GPA_DI_DRV.Vs_GPA_av,GPA_DI_Settings.Vs_GPA_av,GPA_DI_FromHMI.Vs_GPA_av,GPA_DI_ToHMI.Vs_GPA_av,GPA_DI_Internal.Vs_GPA_av);//Опасная вибрация агрегата (любой из 7 каналов)
+DI_Processing(GPA_DI_DRV.Reg_Starter_ON,GPA_DI_Settings.Reg_Starter_ON,GPA_DI_FromHMI.Reg_Starter_ON,GPA_DI_ToHMI.Reg_Starter_ON,GPA_DI_Internal.Reg_Starter_ON);//РЧТиН электростартера включен
+DI_Processing(GPA_DI_DRV.Reg_Starter_Work,GPA_DI_Settings.Reg_Starter_Work,GPA_DI_FromHMI.Reg_Starter_Work,GPA_DI_ToHMI.Reg_Starter_Work,GPA_DI_Internal.Reg_Starter_Work);//РЧТиН электростартера работает
+DI_Processing(GPA_DI_DRV.SK_OF,GPA_DI_Settings.SK_OF,GPA_DI_FromHMI.SK_OF,GPA_DI_ToHMI.SK_OF,GPA_DI_Internal.SK_OF);//Отсечной газовый кран перед дозатором закрыт
+DI_Processing(GPA_DI_DRV.Kr9_ON,GPA_DI_Settings.Kr9_ON,GPA_DI_FromHMI.Kr9_ON,GPA_DI_ToHMI.Kr9_ON,GPA_DI_Internal.Kr9_ON);//Кран 9 сброса топливного газа на свечу открыт
+DI_Processing(GPA_DI_DRV.Kr9_OF,GPA_DI_Settings.Kr9_OF,GPA_DI_FromHMI.Kr9_OF,GPA_DI_ToHMI.Kr9_OF,GPA_DI_Internal.Kr9_OF);//Кран 9 сброса топливного газа на свечу закрыт
+DI_Processing(GPA_DI_DRV.Kr12_ON,GPA_DI_Settings.Kr12_ON,GPA_DI_FromHMI.Kr12_ON,GPA_DI_ToHMI.Kr12_ON,GPA_DI_Internal.Kr12_ON);//Кран 12 подвода топливного газа к ГТД открыт
+DI_Processing(GPA_DI_DRV.Kr12_OF,GPA_DI_Settings.Kr12_OF,GPA_DI_FromHMI.Kr12_OF,GPA_DI_ToHMI.Kr12_OF,GPA_DI_Internal.Kr12_OF);//Кран 12 подвода топливного газа к ГТД закрыт
+DI_Processing(GPA_DI_DRV.BUSD_ok,GPA_DI_Settings.BUSD_ok,GPA_DI_FromHMI.BUSD_ok,GPA_DI_ToHMI.BUSD_ok,GPA_DI_Internal.BUSD_ok);//Нормальная работа БУШД
+DI_Processing(GPA_DI_DRV.dPm_FTO_v,GPA_DI_Settings.dPm_FTO_v,GPA_DI_FromHMI.dPm_FTO_v,GPA_DI_ToHMI.dPm_FTO_v,GPA_DI_Internal.dPm_FTO_v);//Повышенный перепад давления масла на маслофильтре тонкой очистки (резерв)
+DI_Processing(GPA_DI_DRV.dPm_FGO_v,GPA_DI_Settings.dPm_FGO_v,GPA_DI_FromHMI.dPm_FGO_v,GPA_DI_ToHMI.dPm_FGO_v,GPA_DI_Internal.dPm_FGO_v);//Повышенный перепад давления масла на маслофильтре грубой очистки (резерв)
+DI_Processing(GPA_DI_DRV.Pm_inD_40v,GPA_DI_Settings.Pm_inD_40v,GPA_DI_FromHMI.Pm_inD_40v,GPA_DI_ToHMI.Pm_inD_40v,GPA_DI_Internal.Pm_inD_40v);//Давление масла на входе в ГТД выше 40 кПа
+DI_Processing(GPA_DI_DRV.Pm_inD_40v_KCD,GPA_DI_Settings.Pm_inD_40v_KCD,GPA_DI_FromHMI.Pm_inD_40v_KCD,GPA_DI_ToHMI.Pm_inD_40v_KCD,GPA_DI_Internal.Pm_inD_40v_KCD);//Давление масла на входе в ГТД выше 40 кПа КЦД
+DI_Processing(GPA_DI_DRV.Kn_AO_PU,GPA_DI_Settings.Kn_AO_PU,GPA_DI_FromHMI.Kn_AO_PU,GPA_DI_ToHMI.Kn_AO_PU,GPA_DI_Internal.Kn_AO_PU);//Кнопка АО от ПУ
+DI_Processing(GPA_DI_DRV.Kn_AO_PU_KCD,GPA_DI_Settings.Kn_AO_PU_KCD,GPA_DI_FromHMI.Kn_AO_PU_KCD,GPA_DI_ToHMI.Kn_AO_PU_KCD,GPA_DI_Internal.Kn_AO_PU_KCD);//Кнопка АО от ПУ КЦД
+DI_Processing(GPA_DI_DRV.Kn_EO_PU,GPA_DI_Settings.Kn_EO_PU,GPA_DI_FromHMI.Kn_EO_PU,GPA_DI_ToHMI.Kn_EO_PU,GPA_DI_Internal.Kn_EO_PU);//Кнопка ЭО от ПУ
+DI_Processing(GPA_DI_DRV.Kn_EO_PU_KCD,GPA_DI_Settings.Kn_EO_PU_KCD,GPA_DI_FromHMI.Kn_EO_PU_KCD,GPA_DI_ToHMI.Kn_EO_PU_KCD,GPA_DI_Internal.Kn_EO_PU_KCD);//Кнопка ЭО от ПУ КЦД
+DI_Processing(GPA_DI_DRV.Res_19,GPA_DI_Settings.Res_19,GPA_DI_FromHMI.Res_19,GPA_DI_ToHMI.Res_19,GPA_DI_Internal.Res_19);//Резерв 
+DI_Processing(GPA_DI_DRV.BZA1_Rdy,GPA_DI_Settings.BZA1_Rdy,GPA_DI_FromHMI.BZA1_Rdy,GPA_DI_ToHMI.BZA1_Rdy,GPA_DI_Internal.BZA1_Rdy);//Готовность БЗА 1
+DI_Processing(GPA_DI_DRV.BZA2_Rdy,GPA_DI_Settings.BZA2_Rdy,GPA_DI_FromHMI.BZA2_Rdy,GPA_DI_ToHMI.BZA2_Rdy,GPA_DI_Internal.BZA2_Rdy);//Готовность БЗА 2
+DI_Processing(GPA_DI_DRV.U_SPV_ON,GPA_DI_Settings.U_SPV_ON,GPA_DI_FromHMI.U_SPV_ON,GPA_DI_ToHMI.U_SPV_ON,GPA_DI_Internal.U_SPV_ON);//Питание 220 В системы плазменного воспламенения включено
+DI_Processing(GPA_DI_DRV.No_upr_VNA,GPA_DI_Settings.No_upr_VNA,GPA_DI_FromHMI.No_upr_VNA,GPA_DI_ToHMI.No_upr_VNA,GPA_DI_Internal.No_upr_VNA);//Нет управляющего сигнала на ВНА
+DI_Processing(GPA_DI_DRV.VNA_FLT,GPA_DI_Settings.VNA_FLT,GPA_DI_FromHMI.VNA_FLT,GPA_DI_ToHMI.VNA_FLT,GPA_DI_Internal.VNA_FLT);//Управление приводом ВНА неисправно
+DI_Processing(GPA_DI_DRV.Res_20,GPA_DI_Settings.Res_20,GPA_DI_FromHMI.Res_20,GPA_DI_ToHMI.Res_20,GPA_DI_Internal.Res_20);//Резерв
+DI_Processing(GPA_DI_DRV.Res_21,GPA_DI_Settings.Res_21,GPA_DI_FromHMI.Res_21,GPA_DI_ToHMI.Res_21,GPA_DI_Internal.Res_21);//Резерв
+DI_Processing(GPA_DI_DRV.Res_22,GPA_DI_Settings.Res_22,GPA_DI_FromHMI.Res_22,GPA_DI_ToHMI.Res_22,GPA_DI_Internal.Res_22);//Резерв
+DI_Processing(GPA_DI_DRV.Res_23,GPA_DI_Settings.Res_23,GPA_DI_FromHMI.Res_23,GPA_DI_ToHMI.Res_23,GPA_DI_Internal.Res_23);//Резерв
+DI_Processing(GPA_DI_DRV.Res_24,GPA_DI_Settings.Res_24,GPA_DI_FromHMI.Res_24,GPA_DI_ToHMI.Res_24,GPA_DI_Internal.Res_24);//Резерв
+DI_Processing(GPA_DI_DRV.Res_25,GPA_DI_Settings.Res_25,GPA_DI_FromHMI.Res_25,GPA_DI_ToHMI.Res_25,GPA_DI_Internal.Res_25);//Резерв
+DI_Processing(GPA_DI_DRV.Lm_MBD_an,GPA_DI_Settings.Lm_MBD_an,GPA_DI_FromHMI.Lm_MBD_an,GPA_DI_ToHMI.Lm_MBD_an,GPA_DI_Internal.Lm_MBD_an);//Аварийно-низкий уровень масла в маслобаке ГТД
+DI_Processing(GPA_DI_DRV.Lm_MBD_an_KCD,GPA_DI_Settings.Lm_MBD_an_KCD,GPA_DI_FromHMI.Lm_MBD_an_KCD,GPA_DI_ToHMI.Lm_MBD_an_KCD,GPA_DI_Internal.Lm_MBD_an_KCD);//Аварийный уровень масла в маслобаке ГТД КЦД
+DI_Processing(GPA_DI_DRV.AO_Shop,GPA_DI_Settings.AO_Shop,GPA_DI_FromHMI.AO_Shop,GPA_DI_ToHMI.AO_Shop,GPA_DI_Internal.AO_Shop);//АО из КЦ
+DI_Processing(GPA_DI_DRV.AO_Shop_KCD,GPA_DI_Settings.AO_Shop_KCD,GPA_DI_FromHMI.AO_Shop_KCD,GPA_DI_ToHMI.AO_Shop_KCD,GPA_DI_Internal.AO_Shop_KCD);//АО из КЦ КЦД
+DI_Processing(GPA_DI_DRV.Fire_inOD,GPA_DI_Settings.Fire_inOD,GPA_DI_FromHMI.Fire_inOD,GPA_DI_ToHMI.Fire_inOD,GPA_DI_Internal.Fire_inOD);//Пожар в отсеке ГТД
+DI_Processing(GPA_DI_DRV.Fire_inOD_KCD,GPA_DI_Settings.Fire_inOD_KCD,GPA_DI_FromHMI.Fire_inOD_KCD,GPA_DI_ToHMI.Fire_inOD_KCD,GPA_DI_Internal.Fire_inOD_KCD);//Пожар в отсеке ГТД КЦД
+DI_Processing(GPA_DI_DRV.Dver_ON_Open,GPA_DI_Settings.Dver_ON_Open,GPA_DI_FromHMI.Dver_ON_Open,GPA_DI_ToHMI.Dver_ON_Open,GPA_DI_Internal.Dver_ON_Open);//Двери отсека нагнетателя открыты
+DI_Processing(GPA_DI_DRV.Dver_OD_Open,GPA_DI_Settings.Dver_OD_Open,GPA_DI_FromHMI.Dver_OD_Open,GPA_DI_ToHMI.Dver_OD_Open,GPA_DI_Internal.Dver_OD_Open);//Двери отсека ГТД открыты
+DI_Processing(GPA_DI_DRV.Fire_inUkr,GPA_DI_Settings.Fire_inUkr,GPA_DI_FromHMI.Fire_inUkr,GPA_DI_ToHMI.Fire_inUkr,GPA_DI_Internal.Fire_inUkr);//Пожар в укрытии компрессора
+DI_Processing(GPA_DI_DRV.Fire_inUkr_KCD,GPA_DI_Settings.Fire_inUkr_KCD,GPA_DI_FromHMI.Fire_inUkr_KCD,GPA_DI_ToHMI.Fire_inUkr_KCD,GPA_DI_Internal.Fire_inUkr_KCD);//Пожар в укрытии компрессора КЦД
+DI_Processing(GPA_DI_DRV.KLR1_ON,GPA_DI_Settings.KLR1_ON,GPA_DI_FromHMI.KLR1_ON,GPA_DI_ToHMI.KLR1_ON,GPA_DI_Internal.KLR1_ON);//Клапан КлР1 открыт
+DI_Processing(GPA_DI_DRV.Fire_inETO,GPA_DI_Settings.Fire_inETO,GPA_DI_FromHMI.Fire_inETO,GPA_DI_ToHMI.Fire_inETO,GPA_DI_Internal.Fire_inETO);//Пожар в блоке электротехническом
+DI_Processing(GPA_DI_DRV.Fire_inETO_KCD,GPA_DI_Settings.Fire_inETO_KCD,GPA_DI_FromHMI.Fire_inETO_KCD,GPA_DI_ToHMI.Fire_inETO_KCD,GPA_DI_Internal.Fire_inETO_KCD);//Пожар в блоке электротехническом КЦД
+DI_Processing(GPA_DI_DRV.Dver_ETO_Open,GPA_DI_Settings.Dver_ETO_Open,GPA_DI_FromHMI.Dver_ETO_Open,GPA_DI_ToHMI.Dver_ETO_Open,GPA_DI_Internal.Dver_ETO_Open);//Двери электротехнического отсека открыты
+DI_Processing(GPA_DI_DRV.Gas10_ON,GPA_DI_Settings.Gas10_ON,GPA_DI_FromHMI.Gas10_ON,GPA_DI_ToHMI.Gas10_ON,GPA_DI_Internal.Gas10_ON);//Загазованность 10 % НКПВ в отсеке компрессора
+DI_Processing(GPA_DI_DRV.Gas20_ON,GPA_DI_Settings.Gas20_ON,GPA_DI_FromHMI.Gas20_ON,GPA_DI_ToHMI.Gas20_ON,GPA_DI_Internal.Gas20_ON);//Загазованность 20 % НКПВ в отсеке компрессора
+DI_Processing(GPA_DI_DRV.Gas20_ON_KCD,GPA_DI_Settings.Gas20_ON_KCD,GPA_DI_FromHMI.Gas20_ON_KCD,GPA_DI_ToHMI.Gas20_ON_KCD,GPA_DI_Internal.Gas20_ON_KCD);//Загазованность 20 % НКПВ в отсеке компрессора КЦД
+DI_Processing(GPA_DI_DRV.Gas10_OD,GPA_DI_Settings.Gas10_OD,GPA_DI_FromHMI.Gas10_OD,GPA_DI_ToHMI.Gas10_OD,GPA_DI_Internal.Gas10_OD);//Загазованность 10 % НКПВ в отсеке ГТД
+DI_Processing(GPA_DI_DRV.ASPS_ok,GPA_DI_Settings.ASPS_ok,GPA_DI_FromHMI.ASPS_ok,GPA_DI_ToHMI.ASPS_ok,GPA_DI_Internal.ASPS_ok);//АСПС норма
+DI_Processing(GPA_DI_DRV.Gas20_OD,GPA_DI_Settings.Gas20_OD,GPA_DI_FromHMI.Gas20_OD,GPA_DI_ToHMI.Gas20_OD,GPA_DI_Internal.Gas20_OD);//Загазованность 20 % НКПВ в отсеке ГТД
+DI_Processing(GPA_DI_DRV.Gas20_OD_KCD,GPA_DI_Settings.Gas20_OD_KCD,GPA_DI_FromHMI.Gas20_OD_KCD,GPA_DI_ToHMI.Gas20_OD_KCD,GPA_DI_Internal.Gas20_OD_KCD);//Загазованность 20 % НКПВ в отсеке ГТД КЦД
+DI_Processing(GPA_DI_DRV.Lk_FS1_G1_max,GPA_DI_Settings.Lk_FS1_G1_max,GPA_DI_FromHMI.Lk_FS1_G1_max,GPA_DI_ToHMI.Lk_FS1_G1_max,GPA_DI_Internal.Lk_FS1_G1_max);//Максимальный уровень жидкости в фильтре дренаж Г1 (LA1-1)
+DI_Processing(GPA_DI_DRV.Lk_FS1_G1_min,GPA_DI_Settings.Lk_FS1_G1_min,GPA_DI_FromHMI.Lk_FS1_G1_min,GPA_DI_ToHMI.Lk_FS1_G1_min,GPA_DI_Internal.Lk_FS1_G1_min);//Минимальный уровень жидкости в фильтре дренаж Г1 (LA1-2)
+DI_Processing(GPA_DI_DRV.Lk_FS1_G2_max,GPA_DI_Settings.Lk_FS1_G2_max,GPA_DI_FromHMI.Lk_FS1_G2_max,GPA_DI_ToHMI.Lk_FS1_G2_max,GPA_DI_Internal.Lk_FS1_G2_max);//Максимальный уровень жидкости в фильтре дренаж Г2 (LA1-3)
+DI_Processing(GPA_DI_DRV.Lk_FS1_G2_min,GPA_DI_Settings.Lk_FS1_G2_min,GPA_DI_FromHMI.Lk_FS1_G2_min,GPA_DI_ToHMI.Lk_FS1_G2_min,GPA_DI_Internal.Lk_FS1_G2_min);//Минимальный уровень жидкости в фильтре дренаж Г2 (LA1-4)
+DI_Processing(GPA_DI_DRV.Lk_FS2_G1_max,GPA_DI_Settings.Lk_FS2_G1_max,GPA_DI_FromHMI.Lk_FS2_G1_max,GPA_DI_ToHMI.Lk_FS2_G1_max,GPA_DI_Internal.Lk_FS2_G1_max);//Максимальный уровень жидкости в фильтре дренаж Г1 (LA2-1)
+DI_Processing(GPA_DI_DRV.Lk_FS2_G1_min,GPA_DI_Settings.Lk_FS2_G1_min,GPA_DI_FromHMI.Lk_FS2_G1_min,GPA_DI_ToHMI.Lk_FS2_G1_min,GPA_DI_Internal.Lk_FS2_G1_min);//Минимальный уровень жидкости в фильтре дренаж Г1 (LA2-2)
+DI_Processing(GPA_DI_DRV.Lk_FS3_G1_max,GPA_DI_Settings.Lk_FS3_G1_max,GPA_DI_FromHMI.Lk_FS3_G1_max,GPA_DI_ToHMI.Lk_FS3_G1_max,GPA_DI_Internal.Lk_FS3_G1_max);//Максимальный уровень жидкости в фильтре дренаж Г1 (LA3-1)
+DI_Processing(GPA_DI_DRV.Lk_FS3_G1_min,GPA_DI_Settings.Lk_FS3_G1_min,GPA_DI_FromHMI.Lk_FS3_G1_min,GPA_DI_ToHMI.Lk_FS3_G1_min,GPA_DI_Internal.Lk_FS3_G1_min);//Минимальный уровень жидкости в фильтре дренаж Г1 (LA3-2)
+DI_Processing(GPA_DI_DRV.Lk_FS3_G2_max,GPA_DI_Settings.Lk_FS3_G2_max,GPA_DI_FromHMI.Lk_FS3_G2_max,GPA_DI_ToHMI.Lk_FS3_G2_max,GPA_DI_Internal.Lk_FS3_G2_max);//Максимальный уровень жидкости в фильтре дренаж Г2 (LA3-3)
+DI_Processing(GPA_DI_DRV.Lk_FS3_G2_min,GPA_DI_Settings.Lk_FS3_G2_min,GPA_DI_FromHMI.Lk_FS3_G2_min,GPA_DI_ToHMI.Lk_FS3_G2_min,GPA_DI_Internal.Lk_FS3_G2_min);//Минимальный уровень жидкости в фильтре дренаж Г2 (LA3-4)
+DI_Processing(GPA_DI_DRV.KE3_1_ON,GPA_DI_Settings.KE3_1_ON,GPA_DI_FromHMI.KE3_1_ON,GPA_DI_ToHMI.KE3_1_ON,GPA_DI_Internal.KE3_1_ON);//Клапан электромагнитный КЛЭ3 (КЛЭ3-1) открыт
+DI_Processing(GPA_DI_DRV.KE3_2_ON,GPA_DI_Settings.KE3_2_ON,GPA_DI_FromHMI.KE3_2_ON,GPA_DI_ToHMI.KE3_2_ON,GPA_DI_Internal.KE3_2_ON);//Клапан электромагнитный КЛЭ3 (КЛЭ3-2) открыт
+DI_Processing(GPA_DI_DRV.KE3_3_ON,GPA_DI_Settings.KE3_3_ON,GPA_DI_FromHMI.KE3_3_ON,GPA_DI_ToHMI.KE3_3_ON,GPA_DI_Internal.KE3_3_ON);//Клапан электромагнитный КЛЭ3 (КЛЭ3-3) открыт
+DI_Processing(GPA_DI_DRV.KE5_ON,GPA_DI_Settings.KE5_ON,GPA_DI_FromHMI.KE5_ON,GPA_DI_ToHMI.KE5_ON,GPA_DI_Internal.KE5_ON);//Клапан шаровой с электроприводом КШЭ5 открыт
+DI_Processing(GPA_DI_DRV.Lm_MBR_an,GPA_DI_Settings.Lm_MBR_an,GPA_DI_FromHMI.Lm_MBR_an,GPA_DI_ToHMI.Lm_MBR_an,GPA_DI_Internal.Lm_MBR_an);//Аварийно низкий уровень масла в маслобаке редуктора
+DI_Processing(GPA_DI_DRV.Lm_MBR_an_KCD,GPA_DI_Settings.Lm_MBR_an_KCD,GPA_DI_FromHMI.Lm_MBR_an_KCD,GPA_DI_ToHMI.Lm_MBR_an_KCD,GPA_DI_Internal.Lm_MBR_an_KCD);//Аварийно низкий уровень масла в маслобаке редуктора КЦД
+DI_Processing(GPA_DI_DRV.Lm_MBD_av,GPA_DI_Settings.Lm_MBD_av,GPA_DI_FromHMI.Lm_MBD_av,GPA_DI_ToHMI.Lm_MBD_av,GPA_DI_Internal.Lm_MBD_av);//Аварийно-высокий уровень масла в маслобаке ГТД
+DI_Processing(GPA_DI_DRV.Lm_MBD_av_KCD,GPA_DI_Settings.Lm_MBD_av_KCD,GPA_DI_FromHMI.Lm_MBD_av_KCD,GPA_DI_ToHMI.Lm_MBD_av_KCD,GPA_DI_Internal.Lm_MBD_av_KCD);//Аварийно-высокий уровень масла в маслобаке ГТД КЦД
+DI_Processing(GPA_DI_DRV.Res_26,GPA_DI_Settings.Res_26,GPA_DI_FromHMI.Res_26,GPA_DI_ToHMI.Res_26,GPA_DI_Internal.Res_26);//Резерв
+DI_Processing(GPA_DI_DRV.Res_27,GPA_DI_Settings.Res_27,GPA_DI_FromHMI.Res_27,GPA_DI_ToHMI.Res_27,GPA_DI_Internal.Res_27);//Резерв
+DI_Processing(GPA_DI_DRV.Res_28,GPA_DI_Settings.Res_28,GPA_DI_FromHMI.Res_28,GPA_DI_ToHMI.Res_28,GPA_DI_Internal.Res_28);//Резерв
+DI_Processing(GPA_DI_DRV.Res_29,GPA_DI_Settings.Res_29,GPA_DI_FromHMI.Res_29,GPA_DI_ToHMI.Res_29,GPA_DI_Internal.Res_29);//Резерв
+DI_Processing(GPA_DI_DRV.Kr6_OF,GPA_DI_Settings.Kr6_OF,GPA_DI_FromHMI.Kr6_OF,GPA_DI_ToHMI.Kr6_OF,GPA_DI_Internal.Kr6_OF);//Кран Кр6 закрыт
+DI_Processing(GPA_DI_DRV.Kr6_ON,GPA_DI_Settings.Kr6_ON,GPA_DI_FromHMI.Kr6_ON,GPA_DI_ToHMI.Kr6_ON,GPA_DI_Internal.Kr6_ON);//Кран Кр6 открыт
+DI_Processing(GPA_DI_DRV.KE1_BFTG_ON,GPA_DI_Settings.KE1_BFTG_ON,GPA_DI_FromHMI.KE1_BFTG_ON,GPA_DI_ToHMI.KE1_BFTG_ON,GPA_DI_Internal.KE1_BFTG_ON);//Клапан КЭ1 БФТГ подачи газа в ГТД открыт
+DI_Processing(GPA_DI_DRV.KE2_BFTG_OF,GPA_DI_Settings.KE2_BFTG_OF,GPA_DI_FromHMI.KE2_BFTG_OF,GPA_DI_ToHMI.KE2_BFTG_OF,GPA_DI_Internal.KE2_BFTG_OF);//Клапан КЭ2 БФТГ сброса давления в атмосферу закрыт
+DI_Processing(GPA_DI_DRV.AKZ_FLT,GPA_DI_Settings.AKZ_FLT,GPA_DI_FromHMI.AKZ_FLT,GPA_DI_ToHMI.AKZ_FLT,GPA_DI_Internal.AKZ_FLT);//Система контроля загазованности неисправна
+DI_Processing(GPA_DI_DRV.Kn_AO_ETO,GPA_DI_Settings.Kn_AO_ETO,GPA_DI_FromHMI.Kn_AO_ETO,GPA_DI_ToHMI.Kn_AO_ETO,GPA_DI_Internal.Kn_AO_ETO);//Кнопка АО на блоке ЭТ и САУ
+DI_Processing(GPA_DI_DRV.KLR6_ON,GPA_DI_Settings.KLR6_ON,GPA_DI_FromHMI.KLR6_ON,GPA_DI_ToHMI.KLR6_ON,GPA_DI_Internal.KLR6_ON);//Клапан КлР6 открыт
+DI_Processing(GPA_DI_DRV.KLR6_OF,GPA_DI_Settings.KLR6_OF,GPA_DI_FromHMI.KLR6_OF,GPA_DI_ToHMI.KLR6_OF,GPA_DI_Internal.KLR6_OF);//Клапан КлР6 закрыт
+DI_Processing(GPA_DI_DRV.KLR1_OF,GPA_DI_Settings.KLR1_OF,GPA_DI_FromHMI.KLR1_OF,GPA_DI_ToHMI.KLR1_OF,GPA_DI_Internal.KLR1_OF);//Клапан КлР1 закрыт
+DI_Processing(GPA_DI_DRV.KLR2_OF,GPA_DI_Settings.KLR2_OF,GPA_DI_FromHMI.KLR2_OF,GPA_DI_ToHMI.KLR2_OF,GPA_DI_Internal.KLR2_OF);//Клапан КлР2 закрыт
+DI_Processing(GPA_DI_DRV.KLR2_ON,GPA_DI_Settings.KLR2_ON,GPA_DI_FromHMI.KLR2_ON,GPA_DI_ToHMI.KLR2_ON,GPA_DI_Internal.KLR2_ON);//Клапан КлР2 открыт
+DI_Processing(GPA_DI_DRV.TEN_MON_OverT,GPA_DI_Settings.TEN_MON_OverT,GPA_DI_FromHMI.TEN_MON_OverT,GPA_DI_ToHMI.TEN_MON_OverT,GPA_DI_Internal.TEN_MON_OverT);//Перегрев калорифера МОК
+DI_Processing(GPA_DI_DRV.TEN_MOR_OverT,GPA_DI_Settings.TEN_MOR_OverT,GPA_DI_FromHMI.TEN_MOR_OverT,GPA_DI_ToHMI.TEN_MOR_OverT,GPA_DI_Internal.TEN_MOR_OverT);//Перегрев калорифера МОР
+DI_Processing(GPA_DI_DRV.TEN_MOD_OverT,GPA_DI_Settings.TEN_MOD_OverT,GPA_DI_FromHMI.TEN_MOD_OverT,GPA_DI_ToHMI.TEN_MOD_OverT,GPA_DI_Internal.TEN_MOD_OverT);//Перегрев калорифера МОД
+DI_Processing(GPA_DI_DRV.AB_Bad,GPA_DI_Settings.AB_Bad,GPA_DI_FromHMI.AB_Bad,GPA_DI_ToHMI.AB_Bad,GPA_DI_Internal.AB_Bad);//Батарея разряжена
+DI_Processing(GPA_DI_DRV.El_Bypass_ON,GPA_DI_Settings.El_Bypass_ON,GPA_DI_FromHMI.El_Bypass_ON,GPA_DI_ToHMI.El_Bypass_ON,GPA_DI_Internal.El_Bypass_ON);//Работа от байпаса
+DI_Processing(GPA_DI_DRV.El_Network_ON,GPA_DI_Settings.El_Network_ON,GPA_DI_FromHMI.El_Network_ON,GPA_DI_ToHMI.El_Network_ON,GPA_DI_Internal.El_Network_ON);//Работа от сети
+DI_Processing(GPA_DI_DRV.BypassServ_ON,GPA_DI_Settings.BypassServ_ON,GPA_DI_FromHMI.BypassServ_ON,GPA_DI_ToHMI.BypassServ_ON,GPA_DI_Internal.BypassServ_ON);//Серв. байпас включен 
+DI_Processing(GPA_DI_DRV.No_El_Network,GPA_DI_Settings.No_El_Network,GPA_DI_FromHMI.No_El_Network,GPA_DI_ToHMI.No_El_Network,GPA_DI_Internal.No_El_Network);//Нет сети
+DI_Processing(GPA_DI_DRV.ZU_FLT,GPA_DI_Settings.ZU_FLT,GPA_DI_FromHMI.ZU_FLT,GPA_DI_ToHMI.ZU_FLT,GPA_DI_Internal.ZU_FLT);//Неисправность ЗУ
+DI_Processing(GPA_DI_DRV.ALL_FLT,GPA_DI_Settings.ALL_FLT,GPA_DI_FromHMI.ALL_FLT,GPA_DI_ToHMI.ALL_FLT,GPA_DI_Internal.ALL_FLT);//Общая неисправность
+DI_Processing(GPA_DI_DRV.Vn_MON_FLT,GPA_DI_Settings.Vn_MON_FLT,GPA_DI_FromHMI.Vn_MON_FLT,GPA_DI_ToHMI.Vn_MON_FLT,GPA_DI_Internal.Vn_MON_FLT);//Авария вентиляторов МО компрессора
+DI_Processing(GPA_DI_DRV.Vn_MOR_FLT,GPA_DI_Settings.Vn_MOR_FLT,GPA_DI_FromHMI.Vn_MOR_FLT,GPA_DI_ToHMI.Vn_MOR_FLT,GPA_DI_Internal.Vn_MOR_FLT);//Авария вентиляторов МО редуктора
+DI_Processing(GPA_DI_DRV.Vn_MOD_FLT,GPA_DI_Settings.Vn_MOD_FLT,GPA_DI_FromHMI.Vn_MOD_FLT,GPA_DI_ToHMI.Vn_MOD_FLT,GPA_DI_Internal.Vn_MOD_FLT);//Авария вентиляторов МО ГТД
+DI_Processing(GPA_DI_DRV.VA_OD_ON,GPA_DI_Settings.VA_OD_ON,GPA_DI_FromHMI.VA_OD_ON,GPA_DI_ToHMI.VA_OD_ON,GPA_DI_Internal.VA_OD_ON);//Включение аварийной вентиляции турбоблока
+DI_Processing(GPA_DI_DRV.Check_VPU,GPA_DI_Settings.Check_VPU,GPA_DI_FromHMI.Check_VPU,GPA_DI_ToHMI.Check_VPU,GPA_DI_Internal.Check_VPU);//Контроль положения валоповоротного устройства
+DI_Processing(GPA_DI_DRV.Check_AZ1,GPA_DI_Settings.Check_AZ1,GPA_DI_FromHMI.Check_AZ1,GPA_DI_ToHMI.Check_AZ1,GPA_DI_Internal.Check_AZ1);//Контроль агрегата зажигания. Канал 1
+DI_Processing(GPA_DI_DRV.Check_AZ2,GPA_DI_Settings.Check_AZ2,GPA_DI_FromHMI.Check_AZ2,GPA_DI_ToHMI.Check_AZ2,GPA_DI_Internal.Check_AZ2);//Контроль агрегата зажигания. Канал 2
+DI_Processing(GPA_DI_DRV.Kl_PE3_OF,GPA_DI_Settings.Kl_PE3_OF,GPA_DI_FromHMI.Kl_PE3_OF,GPA_DI_ToHMI.Kl_PE3_OF,GPA_DI_Internal.Kl_PE3_OF);//Клапан противопожарный ПЕ3 закрыт
+DI_Processing(GPA_DI_DRV.Kl_PE3_ON,GPA_DI_Settings.Kl_PE3_ON,GPA_DI_FromHMI.Kl_PE3_ON,GPA_DI_ToHMI.Kl_PE3_ON,GPA_DI_Internal.Kl_PE3_ON);//Клапан противопожарный ПЕ3 открыт
+DI_Processing(GPA_DI_DRV.Kl_PE2_OF,GPA_DI_Settings.Kl_PE2_OF,GPA_DI_FromHMI.Kl_PE2_OF,GPA_DI_ToHMI.Kl_PE2_OF,GPA_DI_Internal.Kl_PE2_OF);//Клапан противопожарный ПЕ2 закрыт
+DI_Processing(GPA_DI_DRV.Kl_PE2_ON,GPA_DI_Settings.Kl_PE2_ON,GPA_DI_FromHMI.Kl_PE2_ON,GPA_DI_ToHMI.Kl_PE2_ON,GPA_DI_Internal.Kl_PE2_ON);//Клапан противопожарный ПЕ2 открыт
+DI_Processing(GPA_DI_DRV.Kl_PE1_OF,GPA_DI_Settings.Kl_PE1_OF,GPA_DI_FromHMI.Kl_PE1_OF,GPA_DI_ToHMI.Kl_PE1_OF,GPA_DI_Internal.Kl_PE1_OF);//Клапан противопожарный ПЕ1 закрыт
+DI_Processing(GPA_DI_DRV.Kl_PE1_ON,GPA_DI_Settings.Kl_PE1_ON,GPA_DI_FromHMI.Kl_PE1_ON,GPA_DI_ToHMI.Kl_PE1_ON,GPA_DI_Internal.Kl_PE1_ON);//Клапан противопожарный ПЕ1 открыт
+DI_Processing(GPA_DI_DRV.Vs_N_v,GPA_DI_Settings.Vs_N_v,GPA_DI_FromHMI.Vs_N_v,GPA_DI_ToHMI.Vs_N_v,GPA_DI_Internal.Vs_N_v);//Повышенная корпусная вибрация компрессора
+DI_Processing(GPA_DI_DRV.Res_30,GPA_DI_Settings.Res_30,GPA_DI_FromHMI.Res_30,GPA_DI_ToHMI.Res_30,GPA_DI_Internal.Res_30);//Резерв
+DI_Processing(GPA_DI_DRV.Vp_SlowVal_v,GPA_DI_Settings.Vp_SlowVal_v,GPA_DI_FromHMI.Vp_SlowVal_v,GPA_DI_ToHMI.Vp_SlowVal_v,GPA_DI_Internal.Vp_SlowVal_v);//Повышенное виброперемещение тихоходного вала редуктора
+DI_Processing(GPA_DI_DRV.Res_31,GPA_DI_Settings.Res_31,GPA_DI_FromHMI.Res_31,GPA_DI_ToHMI.Res_31,GPA_DI_Internal.Res_31);//Резерв
+DI_Processing(GPA_DI_DRV.Vp_FastVal_v,GPA_DI_Settings.Vp_FastVal_v,GPA_DI_FromHMI.Vp_FastVal_v,GPA_DI_ToHMI.Vp_FastVal_v,GPA_DI_Internal.Vp_FastVal_v);//Повышенное виброперемещение быстроходного вала редуктора
+DI_Processing(GPA_DI_DRV.Res_32,GPA_DI_Settings.Res_32,GPA_DI_FromHMI.Res_32,GPA_DI_ToHMI.Res_32,GPA_DI_Internal.Res_32);//Резерв
+DI_Processing(GPA_DI_DRV.Os_Rdk_v,GPA_DI_Settings.Os_Rdk_v,GPA_DI_FromHMI.Os_Rdk_v,GPA_DI_ToHMI.Os_Rdk_v,GPA_DI_Internal.Os_Rdk_v);//Повышенный осевой сдвиг редуктора
+DI_Processing(GPA_DI_DRV.Res_33,GPA_DI_Settings.Res_33,GPA_DI_FromHMI.Res_33,GPA_DI_ToHMI.Res_33,GPA_DI_Internal.Res_33);//Резерв
+DI_Processing(GPA_DI_DRV.SKV_FLT,GPA_DI_Settings.SKV_FLT,GPA_DI_FromHMI.SKV_FLT,GPA_DI_ToHMI.SKV_FLT,GPA_DI_Internal.SKV_FLT);//Отказ аппаратуры контроля вибрации
+DI_Processing(GPA_DI_DRV.Check_SKV,GPA_DI_Settings.Check_SKV,GPA_DI_FromHMI.Check_SKV,GPA_DI_ToHMI.Check_SKV,GPA_DI_Internal.Check_SKV);//Контроль исправности виброаппаратуры компрессора и редуктора
+DI_Processing(GPA_DI_DRV.Res_34,GPA_DI_Settings.Res_34,GPA_DI_FromHMI.Res_34,GPA_DI_ToHMI.Res_34,GPA_DI_Internal.Res_34);//Резерв
+DI_Processing(GPA_DI_DRV.Res_35,GPA_DI_Settings.Res_35,GPA_DI_FromHMI.Res_35,GPA_DI_ToHMI.Res_35,GPA_DI_Internal.Res_35);//Открыть кран К3 (резерв) КЦУ
+DI_Processing(GPA_DI_DRV.Res_45,GPA_DI_Settings.Res_45,GPA_DI_FromHMI.Res_45,GPA_DI_ToHMI.Res_45,GPA_DI_Internal.Res_45);//Закрыть кран К3 (резерв) КЦУ
+DI_Processing(GPA_DI_DRV.Lock_VNA_KCU,GPA_DI_Settings.Lock_VNA_KCU,GPA_DI_FromHMI.Lock_VNA_KCU,GPA_DI_ToHMI.Lock_VNA_KCU,GPA_DI_Internal.Lock_VNA_KCU);//Блокировка ВНА КЦУ
+DI_Processing(GPA_DI_DRV.GPA_Work_KCU,GPA_DI_Settings.GPA_Work_KCU,GPA_DI_FromHMI.GPA_Work_KCU,GPA_DI_ToHMI.GPA_Work_KCU,GPA_DI_Internal.GPA_Work_KCU);//ГПА в работе КЦУ
+DI_Processing(GPA_DI_DRV.TEN_Vlagomer_ON_KCU,GPA_DI_Settings.TEN_Vlagomer_ON_KCU,GPA_DI_FromHMI.TEN_Vlagomer_ON_KCU,GPA_DI_ToHMI.TEN_Vlagomer_ON_KCU,GPA_DI_Internal.TEN_Vlagomer_ON_KCU);//Включить термостат влагомера КЦУ
+DI_Processing(GPA_DI_DRV.Kr1_ON_KCU,GPA_DI_Settings.Kr1_ON_KCU,GPA_DI_FromHMI.Kr1_ON_KCU,GPA_DI_ToHMI.Kr1_ON_KCU,GPA_DI_Internal.Kr1_ON_KCU);//Открыть кран Кр1 КЦУ
+DI_Processing(GPA_DI_DRV.Kr1_OF_KCU,GPA_DI_Settings.Kr1_OF_KCU,GPA_DI_FromHMI.Kr1_OF_KCU,GPA_DI_ToHMI.Kr1_OF_KCU,GPA_DI_Internal.Kr1_OF_KCU);//Закрыть кран Кр1 КЦУ
+DI_Processing(GPA_DI_DRV.Kr2_ON_KCU,GPA_DI_Settings.Kr2_ON_KCU,GPA_DI_FromHMI.Kr2_ON_KCU,GPA_DI_ToHMI.Kr2_ON_KCU,GPA_DI_Internal.Kr2_ON_KCU);//Открыть кран Кр2 КЦУ
+DI_Processing(GPA_DI_DRV.Kr2_OF_KCU,GPA_DI_Settings.Kr2_OF_KCU,GPA_DI_FromHMI.Kr2_OF_KCU,GPA_DI_ToHMI.Kr2_OF_KCU,GPA_DI_Internal.Kr2_OF_KCU);//Закрыть кран Кр2 КЦУ
+DI_Processing(GPA_DI_DRV.Kr4_ON_KCU,GPA_DI_Settings.Kr4_ON_KCU,GPA_DI_FromHMI.Kr4_ON_KCU,GPA_DI_ToHMI.Kr4_ON_KCU,GPA_DI_Internal.Kr4_ON_KCU);//Открыть кран Кр4 КЦУ
+DI_Processing(GPA_DI_DRV.Kr4_OF_KCU,GPA_DI_Settings.Kr4_OF_KCU,GPA_DI_FromHMI.Kr4_OF_KCU,GPA_DI_ToHMI.Kr4_OF_KCU,GPA_DI_Internal.Kr4_OF_KCU);//Закрыть кран Кр4 КЦУ
+DI_Processing(GPA_DI_DRV.Kr5_ON_KCU,GPA_DI_Settings.Kr5_ON_KCU,GPA_DI_FromHMI.Kr5_ON_KCU,GPA_DI_ToHMI.Kr5_ON_KCU,GPA_DI_Internal.Kr5_ON_KCU);//Открыть кран Кр5 КЦУ
+DI_Processing(GPA_DI_DRV.Kr5_OF_KCU,GPA_DI_Settings.Kr5_OF_KCU,GPA_DI_FromHMI.Kr5_OF_KCU,GPA_DI_ToHMI.Kr5_OF_KCU,GPA_DI_Internal.Kr5_OF_KCU);//Закрыть кран Кр5 КЦУ
+DI_Processing(GPA_DI_DRV.Reg_C1_N_OF_KCU,GPA_DI_Settings.Reg_C1_N_OF_KCU,GPA_DI_FromHMI.Reg_C1_N_OF_KCU,GPA_DI_ToHMI.Reg_C1_N_OF_KCU,GPA_DI_Internal.Reg_C1_N_OF_KCU);//Закрыть регулятор производительности цилиндра №1 компрессора КЦУ
+DI_Processing(GPA_DI_DRV.Reg_C2_N_OF_KCU,GPA_DI_Settings.Reg_C2_N_OF_KCU,GPA_DI_FromHMI.Reg_C2_N_OF_KCU,GPA_DI_ToHMI.Reg_C2_N_OF_KCU,GPA_DI_Internal.Reg_C2_N_OF_KCU);//Закрыть регулятор производительности цилиндра №2 компрессора КЦУ
+DI_Processing(GPA_DI_DRV.Reg_C3_N_OF_KCU,GPA_DI_Settings.Reg_C3_N_OF_KCU,GPA_DI_FromHMI.Reg_C3_N_OF_KCU,GPA_DI_ToHMI.Reg_C3_N_OF_KCU,GPA_DI_Internal.Reg_C3_N_OF_KCU);//Закрыть регулятор производительности цилиндра №3 компрессора КЦУ
+DI_Processing(GPA_DI_DRV.Chk_AC220_SAU,GPA_DI_Settings.Chk_AC220_SAU,GPA_DI_FromHMI.Chk_AC220_SAU,GPA_DI_ToHMI.Chk_AC220_SAU,GPA_DI_Internal.Chk_AC220_SAU);//Контроль основного питания САУ ГПА ~220 В
+DI_Processing(GPA_DI_DRV.Chk_DC220_SAU,GPA_DI_Settings.Chk_DC220_SAU,GPA_DI_FromHMI.Chk_DC220_SAU,GPA_DI_ToHMI.Chk_DC220_SAU,GPA_DI_Internal.Chk_DC220_SAU);//Контроль резервного питания САУ ГПА =220 В
+DI_Processing(GPA_DI_DRV.Chk_AC220_BUSD,GPA_DI_Settings.Chk_AC220_BUSD,GPA_DI_FromHMI.Chk_AC220_BUSD,GPA_DI_ToHMI.Chk_AC220_BUSD,GPA_DI_Internal.Chk_AC220_BUSD);//Контроль питания БУШД-М1 ~220 В
+DI_Processing(GPA_DI_DRV.Chk_DC220_Kr,GPA_DI_Settings.Chk_DC220_Kr,GPA_DI_FromHMI.Chk_DC220_Kr,GPA_DI_ToHMI.Chk_DC220_Kr,GPA_DI_Internal.Chk_DC220_Kr);//Контроль питания кранов =220В
+DI_Processing(GPA_DI_DRV.Chk_AC220_BEO,GPA_DI_Settings.Chk_AC220_BEO,GPA_DI_FromHMI.Chk_AC220_BEO,GPA_DI_ToHMI.Chk_AC220_BEO,GPA_DI_Internal.Chk_AC220_BEO);//Контроль основного питания БЭАО ~220 В
+DI_Processing(GPA_DI_DRV.Chk_DC220_BEO,GPA_DI_Settings.Chk_DC220_BEO,GPA_DI_FromHMI.Chk_DC220_BEO,GPA_DI_ToHMI.Chk_DC220_BEO,GPA_DI_Internal.Chk_DC220_BEO);//Контроль резервного питания БЭАО =220 В
+DI_Processing(GPA_DI_DRV.Chk_razr,GPA_DI_Settings.Chk_razr,GPA_DI_FromHMI.Chk_razr,GPA_DI_ToHMI.Chk_razr,GPA_DI_Internal.Chk_razr);//Контроль исправности разрядников
+DI_Processing(GPA_DI_DRV.Chk_DC24_Kr124,GPA_DI_Settings.Chk_DC24_Kr124,GPA_DI_FromHMI.Chk_DC24_Kr124,GPA_DI_ToHMI.Chk_DC24_Kr124,GPA_DI_Internal.Chk_DC24_Kr124);//Контроль питания кранов №1,2,4 =24В
+DI_Processing(GPA_DI_DRV.Chk_DC24_Kr569,GPA_DI_Settings.Chk_DC24_Kr569,GPA_DI_FromHMI.Chk_DC24_Kr569,GPA_DI_ToHMI.Chk_DC24_Kr569,GPA_DI_Internal.Chk_DC24_Kr569);//Контроль питания кранов №5,6,9 =24В
+DI_Processing(GPA_DI_DRV.Chk_DC24_Kr12,GPA_DI_Settings.Chk_DC24_Kr12,GPA_DI_FromHMI.Chk_DC24_Kr12,GPA_DI_ToHMI.Chk_DC24_Kr12,GPA_DI_Internal.Chk_DC24_Kr12);//Контроль питания крана №12
+DI_Processing(GPA_DI_DRV.Chk_U_TPAI,GPA_DI_Settings.Chk_U_TPAI,GPA_DI_FromHMI.Chk_U_TPAI,GPA_DI_ToHMI.Chk_U_TPAI,GPA_DI_Internal.Chk_U_TPAI);//Контроль питания терминальных панелей АI
+DI_Processing(GPA_DI_DRV.Chk_U_TPDI,GPA_DI_Settings.Chk_U_TPDI,GPA_DI_FromHMI.Chk_U_TPDI,GPA_DI_ToHMI.Chk_U_TPDI,GPA_DI_Internal.Chk_U_TPDI);//Диагностика питания ADI
+DI_Processing(GPA_DI_DRV.DC24osn_PRU_ok,GPA_DI_Settings.DC24osn_PRU_ok,GPA_DI_FromHMI.DC24osn_PRU_ok,GPA_DI_ToHMI.DC24osn_PRU_ok,GPA_DI_Internal.DC24osn_PRU_ok);//Исправность основного ИП =24В БЭАО, РПКУ
+DI_Processing(GPA_DI_DRV.DC24rez_PRU_ok,GPA_DI_Settings.DC24rez_PRU_ok,GPA_DI_FromHMI.DC24rez_PRU_ok,GPA_DI_ToHMI.DC24rez_PRU_ok,GPA_DI_Internal.DC24rez_PRU_ok);//Исправность резервного ИП =24В БЭАО, РПКУ
+DI_Processing(GPA_DI_DRV.DC24osn_PLC_ok,GPA_DI_Settings.DC24osn_PLC_ok,GPA_DI_FromHMI.DC24osn_PLC_ok,GPA_DI_ToHMI.DC24osn_PLC_ok,GPA_DI_Internal.DC24osn_PLC_ok);//Исправность основного ИП =24В ПЛК
+DI_Processing(GPA_DI_DRV.DC24rez_PLC_ok,GPA_DI_Settings.DC24rez_PLC_ok,GPA_DI_FromHMI.DC24rez_PLC_ok,GPA_DI_ToHMI.DC24rez_PLC_ok,GPA_DI_Internal.DC24rez_PLC_ok);//Исправность резервного ИП =24В ПЛК
+DI_Processing(GPA_DI_DRV.DC24osn_Int_ok,GPA_DI_Settings.DC24osn_Int_ok,GPA_DI_FromHMI.DC24osn_Int_ok,GPA_DI_ToHMI.DC24osn_Int_ok,GPA_DI_Internal.DC24osn_Int_ok);//Исправность основного ИП =24В внутренних устройств
+DI_Processing(GPA_DI_DRV.DC24rez_Int_ok,GPA_DI_Settings.DC24rez_Int_ok,GPA_DI_FromHMI.DC24rez_Int_ok,GPA_DI_ToHMI.DC24rez_Int_ok,GPA_DI_Internal.DC24rez_Int_ok);//Исправность резервного ИП =24В внутренних устройств
+DI_Processing(GPA_DI_DRV.DC24osn_AI_ok,GPA_DI_Settings.DC24osn_AI_ok,GPA_DI_FromHMI.DC24osn_AI_ok,GPA_DI_ToHMI.DC24osn_AI_ok,GPA_DI_Internal.DC24osn_AI_ok);//Исправность основного ИП =24В аналоговых входов
+DI_Processing(GPA_DI_DRV.DC24rez_AI_ok,GPA_DI_Settings.DC24rez_AI_ok,GPA_DI_FromHMI.DC24rez_AI_ok,GPA_DI_ToHMI.DC24rez_AI_ok,GPA_DI_Internal.DC24rez_AI_ok);//Исправность резервного ИП =24В аналоговых входов
+DI_Processing(GPA_DI_DRV.DC24osn_DI_ok,GPA_DI_Settings.DC24osn_DI_ok,GPA_DI_FromHMI.DC24osn_DI_ok,GPA_DI_ToHMI.DC24osn_DI_ok,GPA_DI_Internal.DC24osn_DI_ok);//Исправность основного ИП =24В дискретных входов
+DI_Processing(GPA_DI_DRV.DC24rez_DI_ok,GPA_DI_Settings.DC24rez_DI_ok,GPA_DI_FromHMI.DC24rez_DI_ok,GPA_DI_ToHMI.DC24rez_DI_ok,GPA_DI_Internal.DC24rez_DI_ok);//Исправность резервного ИП =24В дискретных входов
+DI_Processing(GPA_DI_DRV.DC24osn_Ext_ok,GPA_DI_Settings.DC24osn_Ext_ok,GPA_DI_FromHMI.DC24osn_Ext_ok,GPA_DI_ToHMI.DC24osn_Ext_ok,GPA_DI_Internal.DC24osn_Ext_ok);//Исправность основного ИП =24В внешних устройств
+DI_Processing(GPA_DI_DRV.DC24rez_Ext_ok,GPA_DI_Settings.DC24rez_Ext_ok,GPA_DI_FromHMI.DC24rez_Ext_ok,GPA_DI_ToHMI.DC24rez_Ext_ok,GPA_DI_Internal.DC24rez_Ext_ok);//Исправность резервного ИП =24В внешних устройств
+DI_Processing(GPA_DI_DRV.DC24osn_DO_ok,GPA_DI_Settings.DC24osn_DO_ok,GPA_DI_FromHMI.DC24osn_DO_ok,GPA_DI_ToHMI.DC24osn_DO_ok,GPA_DI_Internal.DC24osn_DO_ok);//Исправность основного ИП =24В дискретных выходов
+DI_Processing(GPA_DI_DRV.DC24rez_DO_ok,GPA_DI_Settings.DC24rez_DO_ok,GPA_DI_FromHMI.DC24rez_DO_ok,GPA_DI_ToHMI.DC24rez_DO_ok,GPA_DI_Internal.DC24rez_DO_ok);//Исправность резервного ИП =24В дискретных выходов
+DI_Processing(GPA_DI_DRV.Res_36,GPA_DI_Settings.Res_36,GPA_DI_FromHMI.Res_36,GPA_DI_ToHMI.Res_36,GPA_DI_Internal.Res_36);//Резерв (не подкл)
+DI_Processing(GPA_DI_DRV.Res_37,GPA_DI_Settings.Res_37,GPA_DI_FromHMI.Res_37,GPA_DI_ToHMI.Res_37,GPA_DI_Internal.Res_37);//Резерв (не подкл)
+DI_Processing(GPA_DI_DRV.QF_ON,GPA_DI_Settings.QF_ON,GPA_DI_FromHMI.QF_ON,GPA_DI_ToHMI.QF_ON,GPA_DI_Internal.QF_ON);//Автоматы питания включены
+DI_Processing(GPA_DI_DRV.Dver_PLC_close,GPA_DI_Settings.Dver_PLC_close,GPA_DI_FromHMI.Dver_PLC_close,GPA_DI_ToHMI.Dver_PLC_close,GPA_DI_Internal.Dver_PLC_close);//Двери шкафа закрыты
+DI_Processing(GPA_DI_DRV.Chk_U_TPDO,GPA_DI_Settings.Chk_U_TPDO,GPA_DI_FromHMI.Chk_U_TPDO,GPA_DI_ToHMI.Chk_U_TPDO,GPA_DI_Internal.Chk_U_TPDO);//Диагностика питания ADO
+DI_Processing(GPA_DI_DRV.Chk_FUS,GPA_DI_Settings.Chk_FUS,GPA_DI_FromHMI.Chk_FUS,GPA_DI_ToHMI.Chk_FUS,GPA_DI_Internal.Chk_FUS);//Контроль исправности ФУС
+DI_Processing(GPA_DI_DRV.Reg_C4_N_OF_KCU,GPA_DI_Settings.Reg_C4_N_OF_KCU,GPA_DI_FromHMI.Reg_C4_N_OF_KCU,GPA_DI_ToHMI.Reg_C4_N_OF_KCU,GPA_DI_Internal.Reg_C4_N_OF_KCU);//Закрыть регулятор производительности цилиндра №4 компрессора КЦУ
+DI_Processing(GPA_DI_DRV.Reg_C5_N_OF_KCU,GPA_DI_Settings.Reg_C5_N_OF_KCU,GPA_DI_FromHMI.Reg_C5_N_OF_KCU,GPA_DI_ToHMI.Reg_C5_N_OF_KCU,GPA_DI_Internal.Reg_C5_N_OF_KCU);//Закрыть регулятор производительности цилиндра №5 компрессора КЦУ
+DI_Processing(GPA_DI_DRV.Reg_C6_N_OF_KCU,GPA_DI_Settings.Reg_C6_N_OF_KCU,GPA_DI_FromHMI.Reg_C6_N_OF_KCU,GPA_DI_ToHMI.Reg_C6_N_OF_KCU,GPA_DI_Internal.Reg_C6_N_OF_KCU);//Закрыть регулятор производительности цилиндра №6 компрессора КЦУ
+DI_Processing(GPA_DI_DRV.Unlock_ES_KCU,GPA_DI_Settings.Unlock_ES_KCU,GPA_DI_FromHMI.Unlock_ES_KCU,GPA_DI_ToHMI.Unlock_ES_KCU,GPA_DI_Internal.Unlock_ES_KCU);//Разблокировать ЭС КЦУ
+DI_Processing(GPA_DI_DRV.ES_ON_KCU,GPA_DI_Settings.ES_ON_KCU,GPA_DI_FromHMI.ES_ON_KCU,GPA_DI_ToHMI.ES_ON_KCU,GPA_DI_Internal.ES_ON_KCU);//Включить ЭС КЦУ
+DI_Processing(GPA_DI_DRV.SK_ON_KCU,GPA_DI_Settings.SK_ON_KCU,GPA_DI_FromHMI.SK_ON_KCU,GPA_DI_ToHMI.SK_ON_KCU,GPA_DI_Internal.SK_ON_KCU);//Включить ЭМ открытия клапана ОГК1 КЦУ
+DI_Processing(GPA_DI_DRV.POK_ON_KCU,GPA_DI_Settings.POK_ON_KCU,GPA_DI_FromHMI.POK_ON_KCU,GPA_DI_ToHMI.POK_ON_KCU,GPA_DI_Internal.POK_ON_KCU);//Открыть клапан  подвода газа к воспламенителям КЦУ
+DI_Processing(GPA_DI_DRV.SPV_ON_KCU,GPA_DI_Settings.SPV_ON_KCU,GPA_DI_FromHMI.SPV_ON_KCU,GPA_DI_ToHMI.SPV_ON_KCU,GPA_DI_Internal.SPV_ON_KCU);//Включить СПВ КЦУ
+DI_Processing(GPA_DI_DRV.ZsPV_ON_KCU,GPA_DI_Settings.ZsPV_ON_KCU,GPA_DI_FromHMI.ZsPV_ON_KCU,GPA_DI_ToHMI.ZsPV_ON_KCU,GPA_DI_Internal.ZsPV_ON_KCU);//Открыть ЗПВ1 КЦУ
+DI_Processing(GPA_DI_DRV.Res_48,GPA_DI_Settings.Res_48,GPA_DI_FromHMI.Res_48,GPA_DI_ToHMI.Res_48,GPA_DI_Internal.Res_48);//Резерв
+DI_Processing(GPA_DI_DRV.Res_49,GPA_DI_Settings.Res_49,GPA_DI_FromHMI.Res_49,GPA_DI_ToHMI.Res_49,GPA_DI_Internal.Res_49);//Резерв
+DI_Processing(GPA_DI_DRV.Res_50,GPA_DI_Settings.Res_50,GPA_DI_FromHMI.Res_50,GPA_DI_ToHMI.Res_50,GPA_DI_Internal.Res_50);//Резерв
+DI_Processing(GPA_DI_DRV.Res_51,GPA_DI_Settings.Res_51,GPA_DI_FromHMI.Res_51,GPA_DI_ToHMI.Res_51,GPA_DI_Internal.Res_51);//Резерв
+DI_Processing(GPA_DI_DRV.Res_52,GPA_DI_Settings.Res_52,GPA_DI_FromHMI.Res_52,GPA_DI_ToHMI.Res_52,GPA_DI_Internal.Res_52);//Резерв
+DI_Processing(GPA_DI_DRV.Res_53,GPA_DI_Settings.Res_53,GPA_DI_FromHMI.Res_53,GPA_DI_ToHMI.Res_53,GPA_DI_Internal.Res_53);//Резерв
+DI_Processing(GPA_DI_DRV.Res_54,GPA_DI_Settings.Res_54,GPA_DI_FromHMI.Res_54,GPA_DI_ToHMI.Res_54,GPA_DI_Internal.Res_54);//Резерв
+DI_Processing(GPA_DI_DRV.Res_55,GPA_DI_Settings.Res_55,GPA_DI_FromHMI.Res_55,GPA_DI_ToHMI.Res_55,GPA_DI_Internal.Res_55);//Резерв
+DI_Processing(GPA_DI_DRV.Kr6_OF_KCU,GPA_DI_Settings.Kr6_OF_KCU,GPA_DI_FromHMI.Kr6_OF_KCU,GPA_DI_ToHMI.Kr6_OF_KCU,GPA_DI_Internal.Kr6_OF_KCU);//Закрыть кран Кр6 КЦУ
+DI_Processing(GPA_DI_DRV.Kr6_ON_KCU,GPA_DI_Settings.Kr6_ON_KCU,GPA_DI_FromHMI.Kr6_ON_KCU,GPA_DI_ToHMI.Kr6_ON_KCU,GPA_DI_Internal.Kr6_ON_KCU);//Открыть кран Кр6 КЦУ
+DI_Processing(GPA_DI_DRV.Kr9_OF_KCU,GPA_DI_Settings.Kr9_OF_KCU,GPA_DI_FromHMI.Kr9_OF_KCU,GPA_DI_ToHMI.Kr9_OF_KCU,GPA_DI_Internal.Kr9_OF_KCU);//Закрыть кран Кр9 КЦУ
+DI_Processing(GPA_DI_DRV.Kr9_ON_KCU,GPA_DI_Settings.Kr9_ON_KCU,GPA_DI_FromHMI.Kr9_ON_KCU,GPA_DI_ToHMI.Kr9_ON_KCU,GPA_DI_Internal.Kr9_ON_KCU);//Открыть кран Кр9 КЦУ
+DI_Processing(GPA_DI_DRV.Kr12_OF_KCU,GPA_DI_Settings.Kr12_OF_KCU,GPA_DI_FromHMI.Kr12_OF_KCU,GPA_DI_ToHMI.Kr12_OF_KCU,GPA_DI_Internal.Kr12_OF_KCU);//Закрыть кран Кр12 КЦУ
+DI_Processing(GPA_DI_DRV.Kr12_ON_KCU,GPA_DI_Settings.Kr12_ON_KCU,GPA_DI_FromHMI.Kr12_ON_KCU,GPA_DI_ToHMI.Kr12_ON_KCU,GPA_DI_Internal.Kr12_ON_KCU);//Открыть кран Кр12 КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_56,GPA_DI_Settings.Res_KCU_56,GPA_DI_FromHMI.Res_KCU_56,GPA_DI_ToHMI.Res_KCU_56,GPA_DI_Internal.Res_KCU_56);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_57,GPA_DI_Settings.Res_KCU_57,GPA_DI_FromHMI.Res_KCU_57,GPA_DI_ToHMI.Res_KCU_57,GPA_DI_Internal.Res_KCU_57);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_58,GPA_DI_Settings.Res_KCU_58,GPA_DI_FromHMI.Res_KCU_58,GPA_DI_ToHMI.Res_KCU_58,GPA_DI_Internal.Res_KCU_58);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_59,GPA_DI_Settings.Res_KCU_59,GPA_DI_FromHMI.Res_KCU_59,GPA_DI_ToHMI.Res_KCU_59,GPA_DI_Internal.Res_KCU_59);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_60,GPA_DI_Settings.Res_KCU_60,GPA_DI_FromHMI.Res_KCU_60,GPA_DI_ToHMI.Res_KCU_60,GPA_DI_Internal.Res_KCU_60);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_61,GPA_DI_Settings.Res_KCU_61,GPA_DI_FromHMI.Res_KCU_61,GPA_DI_ToHMI.Res_KCU_61,GPA_DI_Internal.Res_KCU_61);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_62,GPA_DI_Settings.Res_KCU_62,GPA_DI_FromHMI.Res_KCU_62,GPA_DI_ToHMI.Res_KCU_62,GPA_DI_Internal.Res_KCU_62);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_63,GPA_DI_Settings.Res_KCU_63,GPA_DI_FromHMI.Res_KCU_63,GPA_DI_ToHMI.Res_KCU_63,GPA_DI_Internal.Res_KCU_63);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_64,GPA_DI_Settings.Res_KCU_64,GPA_DI_FromHMI.Res_KCU_64,GPA_DI_ToHMI.Res_KCU_64,GPA_DI_Internal.Res_KCU_64);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.SPV_U_En_KCU,GPA_DI_Settings.SPV_U_En_KCU,GPA_DI_FromHMI.SPV_U_En_KCU,GPA_DI_ToHMI.SPV_U_En_KCU,GPA_DI_Internal.SPV_U_En_KCU);//Подать питание СПВ КЦУ
+DI_Processing(GPA_DI_DRV.PNSD_ON_KCU,GPA_DI_Settings.PNSD_ON_KCU,GPA_DI_FromHMI.PNSD_ON_KCU,GPA_DI_ToHMI.PNSD_ON_KCU,GPA_DI_Internal.PNSD_ON_KCU);//Включить насос смазки пусковой ГТД КЦУ
+DI_Processing(GPA_DI_DRV.PNSR_ON_KCU,GPA_DI_Settings.PNSR_ON_KCU,GPA_DI_FromHMI.PNSR_ON_KCU,GPA_DI_ToHMI.PNSR_ON_KCU,GPA_DI_Internal.PNSR_ON_KCU);//Включить эл. насос предпусковой прокачки масла (НПМ) редуктора КЦУ
+DI_Processing(GPA_DI_DRV.PNSN_ON_KCU,GPA_DI_Settings.PNSN_ON_KCU,GPA_DI_FromHMI.PNSN_ON_KCU,GPA_DI_ToHMI.PNSN_ON_KCU,GPA_DI_Internal.PNSN_ON_KCU);//Включить пусковой насос НППМК компрессора КЦУ
+DI_Processing(GPA_DI_DRV.KE3_1_ON_KCU,GPA_DI_Settings.KE3_1_ON_KCU,GPA_DI_FromHMI.KE3_1_ON_KCU,GPA_DI_ToHMI.KE3_1_ON_KCU,GPA_DI_Internal.KE3_1_ON_KCU);//Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-1) КЦУ
+DI_Processing(GPA_DI_DRV.KE3_2_ON_KCU,GPA_DI_Settings.KE3_2_ON_KCU,GPA_DI_FromHMI.KE3_2_ON_KCU,GPA_DI_ToHMI.KE3_2_ON_KCU,GPA_DI_Internal.KE3_2_ON_KCU);//Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-2) КЦУ
+DI_Processing(GPA_DI_DRV.KE3_3_ON_KCU,GPA_DI_Settings.KE3_3_ON_KCU,GPA_DI_FromHMI.KE3_3_ON_KCU,GPA_DI_ToHMI.KE3_3_ON_KCU,GPA_DI_Internal.KE3_3_ON_KCU);//Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-3) КЦУ
+DI_Processing(GPA_DI_DRV.KE5_ON_KCU,GPA_DI_Settings.KE5_ON_KCU,GPA_DI_FromHMI.KE5_ON_KCU,GPA_DI_ToHMI.KE5_ON_KCU,GPA_DI_Internal.KE5_ON_KCU);//Открыть клапан шаровой с электроприводом КШЭ5 КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_65,GPA_DI_Settings.Res_KCU_65,GPA_DI_FromHMI.Res_KCU_65,GPA_DI_ToHMI.Res_KCU_65,GPA_DI_Internal.Res_KCU_65);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_66,GPA_DI_Settings.Res_KCU_66,GPA_DI_FromHMI.Res_KCU_66,GPA_DI_ToHMI.Res_KCU_66,GPA_DI_Internal.Res_KCU_66);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_67,GPA_DI_Settings.Res_KCU_67,GPA_DI_FromHMI.Res_KCU_67,GPA_DI_ToHMI.Res_KCU_67,GPA_DI_Internal.Res_KCU_67);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_68,GPA_DI_Settings.Res_KCU_68,GPA_DI_FromHMI.Res_KCU_68,GPA_DI_ToHMI.Res_KCU_68,GPA_DI_Internal.Res_KCU_68);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_69,GPA_DI_Settings.Res_KCU_69,GPA_DI_FromHMI.Res_KCU_69,GPA_DI_ToHMI.Res_KCU_69,GPA_DI_Internal.Res_KCU_69);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_KCU_70,GPA_DI_Settings.Res_KCU_70,GPA_DI_FromHMI.Res_KCU_70,GPA_DI_ToHMI.Res_KCU_70,GPA_DI_Internal.Res_KCU_70);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_38,GPA_DI_Settings.Res_38,GPA_DI_FromHMI.Res_38,GPA_DI_ToHMI.Res_38,GPA_DI_Internal.Res_38);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_39,GPA_DI_Settings.Res_39,GPA_DI_FromHMI.Res_39,GPA_DI_ToHMI.Res_39,GPA_DI_Internal.Res_39);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Kn_NO_PRU,GPA_DI_Settings.Kn_NO_PRU,GPA_DI_FromHMI.Kn_NO_PRU,GPA_DI_ToHMI.Kn_NO_PRU,GPA_DI_Internal.Kn_NO_PRU);//Кнопка НО на ПРУ
+DI_Processing(GPA_DI_DRV.Kn_EO_PRU,GPA_DI_Settings.Kn_EO_PRU,GPA_DI_FromHMI.Kn_EO_PRU,GPA_DI_ToHMI.Kn_EO_PRU,GPA_DI_Internal.Kn_EO_PRU);//Кнопка ЭО на ПРУ
+DI_Processing(GPA_DI_DRV.Kn_EO_PRU_KCD,GPA_DI_Settings.Kn_EO_PRU_KCD,GPA_DI_FromHMI.Kn_EO_PRU_KCD,GPA_DI_ToHMI.Kn_EO_PRU_KCD,GPA_DI_Internal.Kn_EO_PRU_KCD);//Кнопка ЭО на ПРУ КЦД
+DI_Processing(GPA_DI_DRV.Kn_AO_PRU,GPA_DI_Settings.Kn_AO_PRU,GPA_DI_FromHMI.Kn_AO_PRU,GPA_DI_ToHMI.Kn_AO_PRU,GPA_DI_Internal.Kn_AO_PRU);//Кнопка АО на ПРУ
+DI_Processing(GPA_DI_DRV.Kn_AO_PRU_KCD,GPA_DI_Settings.Kn_AO_PRU_KCD,GPA_DI_FromHMI.Kn_AO_PRU_KCD,GPA_DI_ToHMI.Kn_AO_PRU_KCD,GPA_DI_Internal.Kn_AO_PRU_KCD);//Кнопка АО на ПРУ КЦД
+DI_Processing(GPA_DI_DRV.Kn_Quit,GPA_DI_Settings.Kn_Quit,GPA_DI_FromHMI.Kn_Quit,GPA_DI_ToHMI.Kn_Quit,GPA_DI_Internal.Kn_Quit);//Кнопка Квитирование на ПРУ
+DI_Processing(GPA_DI_DRV.BEO_Work,GPA_DI_Settings.BEO_Work,GPA_DI_FromHMI.BEO_Work,GPA_DI_ToHMI.BEO_Work,GPA_DI_Internal.BEO_Work);//БЭО работает
+DI_Processing(GPA_DI_DRV.BEO_Rdy,GPA_DI_Settings.BEO_Rdy,GPA_DI_FromHMI.BEO_Rdy,GPA_DI_ToHMI.BEO_Rdy,GPA_DI_Internal.BEO_Rdy);//Готовность БЭО
+DI_Processing(GPA_DI_DRV.N_TK_BZRT_av,GPA_DI_Settings.N_TK_BZRT_av,GPA_DI_FromHMI.N_TK_BZRT_av,GPA_DI_ToHMI.N_TK_BZRT_av,GPA_DI_Internal.N_TK_BZRT_av);//Аварийная частота вращения ротора КВД (канал 3) от БЗРТ
+DI_Processing(GPA_DI_DRV.N_ST_BZRT_av,GPA_DI_Settings.N_ST_BZRT_av,GPA_DI_FromHMI.N_ST_BZRT_av,GPA_DI_ToHMI.N_ST_BZRT_av,GPA_DI_Internal.N_ST_BZRT_av);//Аварийная частота вращения ротора КНД (канал 2) от БЗРТ
+DI_Processing(GPA_DI_DRV.T_outGG_av,GPA_DI_Settings.T_outGG_av,GPA_DI_FromHMI.T_outGG_av,GPA_DI_ToHMI.T_outGG_av,GPA_DI_Internal.T_outGG_av);//Температура 3 газа за турбиной компрессора
+DI_Processing(GPA_DI_DRV.Res_40,GPA_DI_Settings.Res_40,GPA_DI_FromHMI.Res_40,GPA_DI_ToHMI.Res_40,GPA_DI_Internal.Res_40);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_41,GPA_DI_Settings.Res_41,GPA_DI_FromHMI.Res_41,GPA_DI_ToHMI.Res_41,GPA_DI_Internal.Res_41);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_42,GPA_DI_Settings.Res_42,GPA_DI_FromHMI.Res_42,GPA_DI_ToHMI.Res_42,GPA_DI_Internal.Res_42);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_43,GPA_DI_Settings.Res_43,GPA_DI_FromHMI.Res_43,GPA_DI_ToHMI.Res_43,GPA_DI_Internal.Res_43);//Резерв КЦУ
+DI_Processing(GPA_DI_DRV.Res_44,GPA_DI_Settings.Res_44,GPA_DI_FromHMI.Res_44,GPA_DI_ToHMI.Res_44,GPA_DI_Internal.Res_44);//Резерв КЦУ
+]]></ST>
+    </Function>
+</Data>

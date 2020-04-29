@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_SMD" Kind="Struct" UUID="C06B02EF44F5F02250C4C98D893CDD9F">
+    <Fields>
+        <Field Name="checkHR" Type="BOOL" UUID="5601F42F4ADF3BBE276997B736EF6506" />
+        <Field Name="checkGR" Type="BOOL" UUID="C15E9DAE4E58FA43613D3898B1FBAD2F" />
+        <Field Name="readyPZM" Type="BOOL" UUID="757EA8FD4AA0ADCBD1D4E5A787CF3B85" />
+        <Field Name="readyHP" Type="BOOL" UUID="1077D58643B2D1AB5EA1BBBC5894AFA5" />
+        <Field Name="readyTP" Type="BOOL" UUID="0064F98A4E89578DBBA380914083B0F7" />
+        <Field Name="readyTP2" Type="BOOL" UUID="232C85AE4400D99CAD1FE1B845DC6B99" />
+        <Field Name="readyKPK" Type="BOOL" UUID="BBCA05374748FF01C26B4B90904675BF" />
+        <Field Name="readyAPK" Type="BOOL" UUID="507B24F240250EA173C14598F51FA6E5" />
+        <Field Name="readyAPM" Type="BOOL" UUID="B173794249B19147D8EEF7AC489DB264" />
+        <Field Name="K_M" Type="BOOL" UUID="273D64DF477CBBDE6F7D9ABCC5DDEB3A" />
+        <Field Name="M_K" Type="BOOL" UUID="6610D5154E529CF6E4F1AF8298670C62" />
+    </Fields>
+</Type>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_IS" Kind="Struct" Comment="Структура по ИБ" UUID="5F8BE35044E475170D88C5AD88003473">
+    <Fields>
+        <Field Name="CRC" Type="UDINT" UUID="F601A6F44D77DDB70C6F4FA723DB2D25" ArraySize="10" Comment="Контрольные суммы" />
+        <Field Name="UserTime" Type="TIME" UUID="CF50DC014E524D10B37B4C81D0BE5D95" ArraySize="10" Comment="Время работы пользователей" />
+        <Field Name="CurTime" Type="STRING" UUID="F8DA7C424611D708EF83A99B259F1737" Comment="Остаток времени работы текущего пользователя" />
+        <Field Name="CurUserTime" Type="STRING" UUID="74A6C6F64AA6905DA9584492612E1ECD" Comment="Время работы иекущего пользователя" />
+        <Field Name="Right_Ust" Type="STRING" UUID="71919D554D56676B57C580BB3487FEB5" />
+        <Field Name="Right_Repair" Type="STRING" UUID="474AE05D481C561D14CD6F80C08401DD" />
+    </Fields>
+</Type>

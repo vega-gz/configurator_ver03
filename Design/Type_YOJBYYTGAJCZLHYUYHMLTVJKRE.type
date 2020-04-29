@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AlarmTarget" Kind="Struct" UUID="F21665E55B4B743CBFD384ABF43C16E9">
+    <Fields>
+        <Field Name="Fire" Type="BOOL" UUID="84F74F8AB141C91B941A9A89C434FDA1" />
+        <Field Name="AOss" Type="BOOL" UUID="917C98AFC047F7F48260D4AD8CD32E69" />
+        <Field Name="AObs" Type="BOOL" UUID="B5DC4FA3AA45F9E9E0685096AA3B4D3A" />
+        <Field Name="VOss" Type="BOOL" UUID="F17EC40F8E4225F8C8CB3BAA7E5EB894" />
+        <Field Name="VObs" Type="BOOL" UUID="D9D6853879411D19D36D50B1B0E4F826" />
+    </Fields>
+</Type>

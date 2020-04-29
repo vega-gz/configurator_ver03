@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AM_Internal" Kind="Struct" Comment="Внетренние сигналы" UUID="32BA558A424E0C22E51AEAB8F6691BB0">
+    <Fields>
+        <Field Name="on" Type="BOOL" UUID="8BD39D29468096AD67F9498E5368625F" Comment="был algOn или btnOn" />
+        <Field Name="off" Type="BOOL" UUID="55901A9549CB558C6C22C0950F7C98C1" Comment="был algOff или btnOff" />
+        <Field Name="timerOnCom" Type="REAL" UUID="315F560041ABFD91EFAEDF915F0B6D8D" Comment="Таймер включения/открытия" />
+        <Field Name="timerOfCom" Type="REAL" UUID="3B9747C64687596100E87AA15A2B8327" Comment="Таймер выключения/закрытия" />
+        <Field Name="timerExtraOn" Type="REAL" UUID="CA31C77D4FC2844FB5B398B71D67EF2A" Comment="Таймер дожима на открытие" />
+        <Field Name="timerExtraOff" Type="REAL" UUID="9257796D44441394D821E09F2A00FC2D" Comment="Таймер дожима на закрытие" />
+        <Field Name="cntRecommandOn" Type="INT" UUID="A4860242405A552738919AB6C6484378" Comment="Счётчик поджимов" />
+        <Field Name="cntRecommandOff" Type="INT" UUID="2B70ACCE8240F8FFEFDEF498D6B99CC1" Comment="Счётчик поджимов" />
+        <Field Name="prevComOn" Type="BOOL" UUID="8ED888F61F4224B9125CCF96AFB39C7A" Comment="команда на откр/вкл на предыдущем цикле" />
+        <Field Name="prevComOff" Type="BOOL" UUID="CDDDF87C884289F62F90458865600BD3" Comment="команда на закр/откл на предыдущем цикле" />
+        <Field Name="wasOn" Type="BOOL" UUID="673C66F30043F698970F0CBC006E9AAC" Comment="Было нормальное открытие/включение" />
+        <Field Name="wasOff" Type="BOOL" UUID="9A8C1A6F3946C36FF38F44A9E1B2500F" Comment="Было нормальное закрытие/отключение" />
+    </Fields>
+</Type>

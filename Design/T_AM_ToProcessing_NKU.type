@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AM_FromALG_NKU" Kind="Struct" Comment="Сигналы, идущие в обработчик ИМ" UUID="0E47956D904FE0E9F4EF2F922B64B8DB">
+    <Fields>
+        <Field Name="ready" Type="BOOL" UUID="5053360F0746222EF07F2DB3E6D71EC8" Comment="готов к прямому включению (открытию)" />
+        <Field Name="readyUPP" Type="BOOL" UUID="7A9E4F4D9347AFE5A413B9A3528E7A9A" Comment="готов к включению через УПП" />
+        <Field Name="on" Type="BOOL" UUID="19D882B74B65A1AD618E1B9A1FECEACA" Comment="Конечник открыт/включен" />
+        <Field Name="onUPP" Type="BOOL" UUID="53024D8864493C8E8FDAA785D46F6B0B" Comment="УПП выключен" />
+        <Field Name="off" Type="BOOL" UUID="6C02D4CE41FBAD9DDDBCCF8126F850C9" Comment="Конечник закрыт/выключен" />
+        <Field Name="off_A" Type="BOOL" UUID="AFC840659848F96875C89BB208715ABD" Comment="Аварийное отключение" />
+        <Field Name="upp_A" Type="BOOL" UUID="012E00D1FE41D2C3FF1A2E81BE9C416C" Comment="Аварийное отключение УПП" />
+        <Field Name="noPMU" Type="BOOL" UUID="E3ABBA5B4D47B7999FA689830B7913C0" Comment="Нет управления от ПМУ" />
+        <Field Name="maxTorque" Type="BOOL" UUID="221D585CAB44E584EF433CB9851D3E27" Comment="Сработал моментный выключатель" />
+        <Field Name="opening" Type="BOOL" UUID="1B28A9269145CE08B58F8B9FAEEA70BA" Comment="Открывается" />
+        <Field Name="closing" Type="BOOL" UUID="98B1EDF57A496085F8DF308673D39F6D" Comment="Закрывается" />
+        <Field Name="algOn" Type="BOOL" UUID="23B0245C41F0EA13E76F6A9CB0C418B9" Comment="Команда из алгоритма на открыть/включить" />
+        <Field Name="algOff" Type="BOOL" UUID="C6F916EA476A411DBC6A0280D0E1C3BA" Comment="Команда из алгоритма на закрыть/выключить" />
+        <Field Name="prmManual" Type="BOOL" UUID="DFD4ADAC4C179329158E9795D2A10464" Comment="Разрешение ручного управления" />
+        <Field Name="exFault" Type="BOOL" UUID="11B902DC4884FB92CCAEEDAA6BEFCBFA" Comment="Внешняя неисправность" />
+        <Field Name="reset" Type="BOOL" UUID="3B9747C64687596100E87AA15A2B8327" Comment="Сброс счётчиков поджима и таймеров, блокирующих команды" />
+        <Field Name="faultComOn" Type="BOOL" UUID="D1430E3D47020EAAB9583EB8283EC96D" Comment="Неисправность команды открытия/включения" />
+        <Field Name="faultComOff" Type="BOOL" UUID="D586FFF14ABF007E704FF0BA4A22F673" Comment="Неисправность команды закрытия/выключения" />
+    </Fields>
+</Type>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_ANB_Internal" Kind="Struct" UUID="F9079A2F461C05C5F53828B98C3F1E40">
+    <Fields>
+        <Field Name="Pm_sm_in_v_N_Uv" Type="REAL" UUID="0C3D198149AE01175629B9B912E0927D" Comment="Давление масла смазки на входе в компрессор  упр.верхняя" />
+        <Field Name="Pm_na_in_v_reduktor_Uv" Type="REAL" UUID="88921AFF4CDB73E9FA27478923C7714F" Comment="Давление масла на входе в редуктор  упр.верхняя" />
+        <Field Name="Pg_na_in_v_N_Uv" Type="REAL" UUID="F8077ACA461C81413FE56EB0181C4E44" Comment="Давление газа на входе в компрессор  упр.верхняя" />
+        <Field Name="Pg_na_in_v_N_Un" Type="REAL" UUID="A91B32DA45C8D527C9F7348ADBFB5925" Comment="Давление газа на входе в компрессор  упр.нижняя" />
+        <Field Name="L_freeze_Bak_An" Type="REAL" UUID="3EA5D7D847798D06429CC1A604947515" Comment="Уровень охлаждающей жидкости в баке авар.нижняя" />
+        <Field Name="L_freeze_Bak_Av" Type="REAL" UUID="44A38D4B4EA362C8D6D1E0BBBDC1AEC6" Comment="Уровень охлаждающей жидкости в баке авар.верхняя" />
+        <Field Name="Lm_MBD_Av" Type="REAL" UUID="51BC90BE48644AC8FBEA1DA960EBC669" Comment="Уровень масла в МБД авар.верхняя" />
+        <Field Name="Lm_MBD_An" Type="REAL" UUID="9D84A17A4C6D021B15586EB659F33C82" Comment="Уровень масла в МБД авар.нижняя" />
+        <Field Name="Lm_MBL_An" Type="REAL" UUID="58AE4A604D9C8AB5E77809AA2CDA09A5" Comment="Уровень масла в маслобаке лубрикаторной системы авар.нижняя" />
+        <Field Name="Lm_MBR_An" Type="REAL" UUID="96CB91884CB6309E876755B594FB32EC" Comment="Уровень масла в маслобаке редуктора авар.нижняя" />
+        <Field Name="Lm_MBR_Av" Type="REAL" UUID="ACF4818D410AE51AC02F1F921646C454" Comment="Уровень масла в маслобаке редуктора авар.верхняя" />
+        <Field Name="P_utech_RP_Av" Type="REAL" UUID="3525204D4947257C803BC1AF3DDE2494" Comment="Давление утечек из рабочей полости авар.верхняя" />
+        <Field Name="Pg_inN_An" Type="REAL" UUID="F106E09E4A6037996F76B8BB06AB6872" Comment="Давления газа на входе в компрессор авар.нижняя" />
+        <Field Name="Pg_inN_Av" Type="REAL" UUID="CF557A1E494EF75F35923390F5AE5E0C" Comment="Давления газа газа на входе компрессора авар.верхняя" />
+        <Field Name="Pg_outFS3_Av" Type="REAL" UUID="4A3B11B6436590D9E06CDEBF279F17A6" Comment="Давление газа на выходе ГПА авар.верхняя" />
+        <Field Name="Pg_outN_Av" Type="REAL" UUID="059F964B4098C61CE8BC8CB8E61BA48E" Comment="Давления газа на выходе компрессора авар.верхняя" />
+        <Field Name="Pm_inD_An" Type="REAL" UUID="F06DC11E416523765A1DC88A7F189B45" Comment="Давление масла на входе в двигатель на режиме авар.нижняя" />
+        <Field Name="Pm_inD_An_1" Type="REAL" UUID="2DA27FA04DFD89303ABBA2814BF6779B" Comment="Давление масла входе в двигатель на запуске авар.нижняя" />
+        <Field Name="Pm_inR_An" Type="REAL" UUID="7789D3BB4836ED520FA83B94066512C2" Comment="Давление масла на входе в редуктор на запуске авар.нижняя" />
+        <Field Name="Pm_inR_An_1" Type="REAL" UUID="FF00111948166FF97AFE98A39EB1BA8C" Comment="Давление масла на входе в редуктор авар.нижняя" />
+        <Field Name="Pm_lub_An" Type="REAL" UUID="9E7E9F2047E3A9A6E991F2B5BA0CCB6F" Comment="Давление в лубрикаторной системе авар.нижняя" />
+        <Field Name="Pm_lub_Av" Type="REAL" UUID="DB9F2A3145B8DCE06187498EEFBB5220" Comment="Давление в лубрикаторной системе авар.верхняя" />
+        <Field Name="Pmsm_inN_An" Type="REAL" UUID="8ECBCE974744950873CCEDB9586FDCA1" Comment="Давление масла на входе в компрессор авар.нижняя" />
+        <Field Name="Pmsm_inN_Av" Type="REAL" UUID="3E5B734F44ADD75EC432199618859B98" Comment="Давление масла на входе в компрессор авар.верхняя" />
+        <Field Name="Ptg_GPA_An" Type="REAL" UUID="847D024B465EF8C38B8F6AB01CBE263C" Comment="Давление топливного газа авар.нижняя" />
+        <Field Name="Ptg_inTRK_Av" Type="REAL" UUID="8B653FD7424E6DAFA251E392422D7B70" Comment="Утечка топливного газа через ОГК авар.верхняя" />
+        <Field Name="Pv_uprRP_N_An" Type="REAL" UUID="F20D2A8D4CDCB51D1A016EBD744DB4F5" Comment="Давление воздуха управления РП и УОП цилиндров Н авар.нижняя" />
+        <Field Name="Pv_uprRP_N_Av" Type="REAL" UUID="2D32649D4DDF083DF2A199A8B7A2C936" Comment="Давление воздуха управления РП и УОП цилиндров Н авар.верхняя" />
+        <Field Name="Q_freeze_An" Type="REAL" UUID="F39A40F24477DD54E0E1FC8CFD7A603D" Comment="Расход охлаждающей жидкости авар.нижняя" />
+        <Field Name="T_freeze_Bak_Av" Type="REAL" UUID="70D98B2746DD514705DF4686F238CFBE" Comment="Температура охлаждающей жидкости в баке авар.верхняя" />
+        <Field Name="T_freeze_outDC_Av" Type="REAL" UUID="FDCCACCF45079AC753A512AC4E3DA8E6" Comment="Температуры охлаждающей жидкости на выходе драйкуллера авар.верхняя" />
+        <Field Name="T_KP1_N_Av" Type="REAL" UUID="00DDF337401F70A9417014B93DEE1E08" Comment="Температура коренного подшипника 1 авар.верхняя" />
+        <Field Name="T_KP2_N_Av" Type="REAL" UUID="B769E1D748659E70AD5E7DBC9D05601F" Comment="Температура коренного подшипника 2 авар.верхняя" />
+        <Field Name="T_KP3_N_Av" Type="REAL" UUID="6F7A25E845BD7655492A2D85FB71E11F" Comment="Температура коренного подшипника 3 авар.верхняя" />
+        <Field Name="T_KP4_N_Av" Type="REAL" UUID="8162461D458416FCB977CBBFB6C1A8BD" Comment="Температура коренного подшипника 4 авар.верхняя" />
+        <Field Name="T_KP5_N_Av" Type="REAL" UUID="164A0F754785BBCF9F56ECAE939F94EA" Comment="Температура коренного подшипника 5 авар.верхняя" />
+        <Field Name="T_KP6_N_Av" Type="REAL" UUID="DB66BF104E641218F543C686E30A3DEF" Comment="Температура коренного подшипника 6 авар.верхняя" />
+        <Field Name="T_POP_FastVal_Av" Type="REAL" UUID="26116B2641962985710502AE86B91C2C" Comment="Температура опорного подшипника 2 быстроходного вала  авар.верхняя" />
+        <Field Name="T_POP_PromVal_Av" Type="REAL" UUID="582FA4934603FE17188E728F8582005B" Comment="Температура опорного подшипника 2 тихоходного вала авар.верхняя" />
+        <Field Name="T_POP_SlowVal_Av" Type="REAL" UUID="934861EB43389883C9A503B46068546C" Comment="Температура опорного подшипника 4 тихоходного вала авар.верхняя" />
+        <Field Name="T_PUP_SlowVal_Av" Type="REAL" UUID="AAC38E114C6930AFA09B579CF875B7A7" Comment="Температура упорного подшипника точка 2 авар.верхняя" />
+        <Field Name="T_utech_salnik_Av" Type="REAL" UUID="C2EEE33A4881D815F84477BEA8A88F14" Comment="Прорыв сальников штока авар.верхняя" />
+        <Field Name="T_ZOP_FastVal_Av" Type="REAL" UUID="FAB537054F26090CF37C73A20782F3F9" Comment="Температура опорного подшипника 1 быстроходного вала  авар.верхняя" />
+        <Field Name="T_ZOP_PromVal_Av" Type="REAL" UUID="63062E1240D50DBED4B79AA253F6617B" Comment="Температура опорного подшипника 1 тихоходного вала авар.верхняя" />
+        <Field Name="T_ZOP_SlowVal_Av" Type="REAL" UUID="A2F7AB5142B855D629B7A88D5B2F2DB0" Comment="Температура опорного подшипника 3 тихоходного вала авар.верхняя" />
+        <Field Name="T_ZUP_FastVal_Av" Type="REAL" UUID="EE4DC54740B04819E2F3AA8A3D50BDC6" Comment="Температура упорного подшипника точка 1 авар.верхняя" />
+        <Field Name="T1_UP_N_Av" Type="REAL" UUID="331741B544F38DC23628BF816E5D9801" Comment="Температура упорного подшипника 1 авар.верхняя" />
+        <Field Name="T2_UP_N_Av" Type="REAL" UUID="716614D44E5C6FEFC98208BA560AD5A7" Comment="Температура упорного подшипника 2 авар.верхняя" />
+        <Field Name="Tg_outAVOG_1_Av" Type="REAL" UUID="1E698D5147B14C69C4005CB54E93FBB2" Comment="Температура газа на выходе АВОГ 1-й ступени Н авар.верхняя" />
+        <Field Name="Tg_outAVOG_2_Av" Type="REAL" UUID="D61590FE47C033162543888AC4E189A4" Comment="Температура газа на выходе АВОГ 2-й ступени Н авар.верхняя" />
+        <Field Name="Tg_outN_C1_Av" Type="REAL" UUID="4C6A91BB4D27129A090D4E8D31D33635" Comment="Температура газа на выходе цилиндра 1 авар.верхняя" />
+        <Field Name="Tg_outN_C2_Av" Type="REAL" UUID="1185BBEC45AA1480373BC6A090F07232" Comment="Температура газа на выходе цилиндра 2 авар.верхняя" />
+        <Field Name="Tg_outN_C3_Av" Type="REAL" UUID="B80F282D4C5A40955904E8A893210CBB" Comment="Температура газа на выходе цилиндра 3 авар.верхняя" />
+        <Field Name="Tg_outN_C4_Av" Type="REAL" UUID="DF176F8D404EAA0782A536A36881387C" Comment="Температура газа на выходе цилиндра 4 авар.верхняя" />
+        <Field Name="Tg_outN_C5_Av" Type="REAL" UUID="9047C2904672685A35E38DA13E69B727" Comment="Температура газа на выходе цилиндра 5 авар.верхняя" />
+        <Field Name="Tg_outN_C6_Av" Type="REAL" UUID="F9F1160B460DC62DB056F28EDA3F47CB" Comment="Температура газа на выходе цилиндра 6 авар.верхняя" />
+        <Field Name="Tg_outN1_Av" Type="REAL" UUID="56C7CF85498509962A11D89769F33D35" Comment="Температура газа на выходе 1-й ступени Н авар.верхняя" />
+        <Field Name="Tg_outN1_Av_1" Type="REAL" UUID="E088752C41C6C7957741F6A059F29AA6" Comment="Температура газа на выходе Н авар.верхняя" />
+        <Field Name="Tm_inD_Av" Type="REAL" UUID="5CD9C87E4C021BC3BC4963A5224C6ECE" Comment="Температура масла на входе в двигатель авар.верхняя" />
+        <Field Name="Tm_inR_Av" Type="REAL" UUID="63AB5DB340894A076EC8B0AD210BD7B0" Comment="Температура масла на входе в редуктор авар.верхняя" />
+        <Field Name="Tm_MBD_Av" Type="REAL" UUID="EFEE7E2645DAC7E0E8A0D0806D5F9E63" Comment="Температура масла МБД авар.верхняя" />
+        <Field Name="Tm_outPO_TK_Av" Type="REAL" UUID="0CFE62C34D7762E588CB8EB0D1398FD6" Comment="Температура масла слива передней опоры ТК авар.верхняя" />
+        <Field Name="Tm_outR_Av" Type="REAL" UUID="147D05C541E8F6A021DE49A4527F7D4C" Comment="Температура масла на выходе из редуктора авар.верхняя" />
+        <Field Name="Tm_outST_Av" Type="REAL" UUID="09AC7407423670E800C8D68A1B2970F3" Comment="Температура масла на сливе из маслокартера СТ больше допустимой авар.верхняя" />
+        <Field Name="Tm_outZO_TK_Av" Type="REAL" UUID="A315181C49E3F9025C29BAB7FAB24C25" Comment="Температура масла слива задней опоры ТК авар.верхняя" />
+        <Field Name="Tmsm_inN_Av" Type="REAL" UUID="34D92FAB4A8B45BB801AB295B02B0188" Comment="Температура масла на входе в компрессор авар.верхняя" />
+        <Field Name="Tv_OD_Av" Type="REAL" UUID="D64FA88B4645131AC092858BD396F81F" Comment="Температура в отсеке Д авар.верхняя" />
+        <Field Name="Vp_ax_SlowVal_An" Type="REAL" UUID="37C06B88496E2F79C1FDEFA1BB869DDE" Comment="Аксиальное виброперемещение тихоходного вала точка 1 авар.нижняя" />
+        <Field Name="Vp_ax_SlowVal_An_1" Type="REAL" UUID="1AD664CB4283FE374D9A5DA7F6BFB1FE" Comment="Аксиальное виброперемещение тихоходного вала точка 1 авар.нижняя" />
+        <Field Name="Vp_ax_SlowVal_Res_Av" Type="REAL" UUID="A691920042093409C454888C71611F3A" Comment="Аксиальное виброперемещение тихоходного вала точка 2 авар.верхняя" />
+        <Field Name="Vp_ax_SlowVal_Res_Av_1" Type="REAL" UUID="1B742F814DD686B7D4AC0092EFC4F626" Comment="Аксиальное виброперемещение тихоходного вала точка 2 авар.верхняя" />
+        <Field Name="Vp_rd_FastVal_g_Av" Type="REAL" UUID="E161EE504C4164C0207D5FB9AC52A128" Comment="Радиальное виброперемещение быстроходного вала( гор. ) авар.верхняя" />
+        <Field Name="Vp_rd_FastVal_v_Av" Type="REAL" UUID="044F4B0145C6C21B67E2AEA3985A3BF4" Comment="Радиальное виброперемещение быстроходного вала 2( верт. ) авар.верхняя" />
+        <Field Name="Vp_rd_SlowVal_g_Av" Type="REAL" UUID="B369DA8148A0589D4B9B0588D8847931" Comment="Радиальное виброперемещение тихоходного вала( гор. ) авар.верхняя" />
+        <Field Name="Vp_rd_SlowVal_v_Av" Type="REAL" UUID="15CA683542E6B4ECBF76E19D7055FB17" Comment="Радиальное виброперемещение тихоходного вала 1( верт. ) авар.верхняя" />
+        <Field Name="Vs_PO_TK_Av" Type="REAL" UUID="BE44F4A14766AAAA0C6FA1A72B2F159D" Comment="Вибрация по переднему стоечному узлу ТК авар.верхняя" />
+        <Field Name="Vs_PONg_Av" Type="REAL" UUID="491CC9D54F4EF62A0C6D6B8946FF63FF" Comment="Вибрация компрессора со стороны привода( ГС ) авар.верхняя" />
+        <Field Name="Vs_ST_Av" Type="REAL" UUID="2B534A224E577B718CEB1E8444BD2320" Comment="Вибрация по опоре ротора СТ авар.верхняя" />
+        <Field Name="Vs_ZO_TK_Av" Type="REAL" UUID="C4235F66481E993987D006AF8E707F7B" Comment="Вибрация по задней опоре ротора ТК авар.верхняя" />
+        <Field Name="Vs_ZONg_Av" Type="REAL" UUID="885B1EB740993CEFCDB2B9A8B99E501C" Comment="Вибрация компрессора со стороны маслонасоса( ГС ) авар.верхняя" />
+    </Fields>
+</Type>

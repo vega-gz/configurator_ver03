@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Diag" Kind="Struct" UUID="661877A949F6320C7E2CC0AC724AF8D9">
+    <Fields>
+        <Field Name="KM04_status" Type="WORD" UUID="0779BCA44F397603F8913583C4082C1F" ArraySize="14" Comment="Статус плат КМ04 (1-ая плата начинается с status[1])" />
+        <Field Name="A2" Type="WORD" UUID="5EE8C9224F528F9C2022699088D5D4E9" ArraySize="25" Comment="А2 корзина" />
+        <Field Name="A3" Type="WORD" UUID="C843D5D34EABFDCBB08016A9B25AACF9" ArraySize="25" Comment="А3 корзина" />
+    </Fields>
+</Type>

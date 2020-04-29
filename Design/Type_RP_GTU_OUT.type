@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="RP_GTU_OUT" Kind="Struct" UUID="FC805247400C593EFC257FA477CF7DDA">
+    <Fields>
+        <Field Name="Vn" Type="REAL" UUID="129EBF96494E2CCDCE0C0C88766877EE" Comment="Объемная производительность, нм3/час" />
+        <Field Name="Gtehg" Type="REAL" UUID="BC1F594944FA3AE7BF21B0AF098628B9" Comment="Массовый расход технологического газа, кг/час" />
+        <Field Name="Ns" Type="REAL" UUID="F47B10A64B590B55D65F8B960B2D7780" Comment="Мощность сжатия компрессора, МВт" />
+        <Field Name="N" Type="REAL" UUID="74CF9A44415463BFD7803E8F05DB7BFD" Comment="Рассеиваемая мощность ГТУ, МВт" />
+        <Field Name="Gtg" Type="REAL" UUID="7220A4C14E583CF33F8751A612B763C5" Comment="Массовый расход топливного газа, кг/с" />
+        <Field Name="KPD" Type="REAL" UUID="3DA277F747BD54B2179C4E9432484607" Comment="КПД ГТУ" />
+        <Field Name="KPD_p" Type="REAL" UUID="E693860F43D611666EA1FCAEBDA19C0D" Comment="Политропный КПД компрессора" />
+        <Field Name="Hour" Type="REAL" UUID="9B84BE6145CE6C941AF3C8A40FF404DA" Comment="Накопленный расход за текущий час, нм3" />
+        <Field Name="Last_Hour" Type="REAL" UUID="65D2476643387E3D6D117E8B9F903FE7" Comment="Накопленный расход за прошлый час, нм3" />
+        <Field Name="Day" Type="REAL" UUID="9450312647FEE55A098BE1B0184703B9" Comment="Накопленный расход за текущий день, нм3" />
+        <Field Name="Last_Day" Type="REAL" UUID="137F1E2242BFE09F04CD07AE299948AB" Comment="Накопленный расход за прошлый день, нм3" />
+        <Field Name="Month" Type="REAL" UUID="DB182B5F4CD7D092A56BF781E3ABA4CF" Comment="Накопленный расход за текущий месяц, нм3" />
+        <Field Name="Last_Month" Type="REAL" UUID="7992D1044AAE7B5513AAA7B9455338A3" Comment="Накопленный расход за прошлый месяц, нм3" />
+    </Fields>
+</Type>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Статистика">
+    <Items>
+        <Item Name="Type_Counters.type" />
+        <Item Name="Type_GDH.type" />
+        <Item Name="Type_RP_GTU_IN.type" />
+        <Item Name="Type_RP_GTU_OUT.type" />
+        <Item Name="Type_RTG_IN.type" />
+        <Item Name="Type_RTG_OUT.type" />
+        <Item Name="Type_Stat.type" />
+    </Items>
+</Folder>

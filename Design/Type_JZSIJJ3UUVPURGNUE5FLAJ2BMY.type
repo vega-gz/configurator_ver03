@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_DI_Settings" UUID="9D3CCA014F76318C4B750981ED2CEA67">
+                
+
+    
+
+    
+
+    <Fields>
+        <Field Comment="Байпасный клапан закрыт" Name="BK_OF" Type="94C521C642227325371AE7BCC363E527" UUID="6e3e6e2d9e444c458d9783d4213d8568"/>
+        <Field Comment="Дверь 1 КВОУ закрыта" Name="Dver1_VOU_Close" Type="94C521C642227325371AE7BCC363E527" UUID="b5a2bab8fdb243b984b0b3bf141feff5"/>
+        <Field Comment="Дверь 2 КВОУ закрыта" Name="Dver2_VOU_Close" Type="94C521C642227325371AE7BCC363E527" UUID="18295d9af2b64365b9801e1a3756f40a"/>
+        <Field Comment="Дверь воздухозаборной камеры закрыта" Name="Dver_VZK_Close" Type="94C521C642227325371AE7BCC363E527" UUID="2929574c7e594018b19e3ff856675230"/>
+        <Field Comment="Перепад давления газа на фильтре-сетке, установленном на входе компрессора" Name="dP_setka_N" Type="94C521C642227325371AE7BCC363E527" UUID="2da6265a6cf14f688608948d0c1a680d"/>
+        <Field Comment="Перепад давления газа на кране К1" Name="dPg_Kr1" Type="94C521C642227325371AE7BCC363E527" UUID="08c65de14999414da4a8a5ecfaf68392"/>
+        <Field Comment="Кран Кр1 открыт" Name="Kr1_ON" Type="94C521C642227325371AE7BCC363E527" UUID="6216d7ca3df34337be8acfdddf23f467"/>
+        <Field Comment="Кран Кр1 закрыт" Name="Kr1_OF" Type="94C521C642227325371AE7BCC363E527" UUID="9dab05fb433f4cc9af164c807591e171"/>
+        <Field Comment="Кран Кр2 открыт" Name="Kr2_ON" Type="94C521C642227325371AE7BCC363E527" UUID="073c39725aef440e9854526362cde832"/>
+        <Field Comment="Кран Кр2 закрыт" Name="Kr2_OF" Type="94C521C642227325371AE7BCC363E527" UUID="b1f7afe475234edab2b636a078c22a08"/>
+        <Field Comment="Кран Кр3 открыт (резерв)" Name="Res_0" Type="94C521C642227325371AE7BCC363E527" UUID="8aca2f2789874c019a5d72b53685cc17"/>
+        <Field Comment="Кран Кр3 закрыт (резерв)" Name="Res_1" Type="94C521C642227325371AE7BCC363E527" UUID="59439658724141e29eac10c7bc73d4f3"/>
+        <Field Comment="Кран Кр4 открыт" Name="Kr4_ON" Type="94C521C642227325371AE7BCC363E527" UUID="d05fc2dc7f1446da9d4f0e8b123662d3"/>
+        <Field Comment="Кран Кр4 закрыт" Name="Kr4_OF" Type="94C521C642227325371AE7BCC363E527" UUID="e26be1cd34fa49e086120d3f9e701f24"/>
+        <Field Comment="Кран Кр5 открыт" Name="Kr5_ON" Type="94C521C642227325371AE7BCC363E527" UUID="2a0e2eac351440a599cfbb873a46173b"/>
+        <Field Comment="Кран Кр5 закрыт" Name="Kr5_OF" Type="94C521C642227325371AE7BCC363E527" UUID="bc0666f475804d02a7bf6c3602205254"/>
+        <Field Comment="Резерв" Name="Res_2" Type="94C521C642227325371AE7BCC363E527" UUID="9012b832977843b7b5440b4df8f864b8"/>
+        <Field Comment="Резерв" Name="Res_3" Type="94C521C642227325371AE7BCC363E527" UUID="990e9454cf2543ce857030104b457976"/>
+        <Field Comment="Перепад давления масла на фильтрах маслосистемы компрессора" Name="dPm_F_N" Type="94C521C642227325371AE7BCC363E527" UUID="e29ad6c580274710bb21ac1864c0fc32"/>
+        <Field Comment="Перепад давления на фильтре лубрикаторной системы (резерв)" Name="dPm_F_Lub" Type="94C521C642227325371AE7BCC363E527" UUID="cbdcf6d9a92f42b3a77293929bbff157"/>
+        <Field Comment="Аварийно-низкий уровень масла в картере компрессора " Name="Lm_Nkar_an" Type="94C521C642227325371AE7BCC363E527" UUID="dc143905d50f4e9897e043783a624e36"/>
+        <Field Comment="Аварийно-низкий уровень масла в картере компрессора КЦД" Name="Lm_Nkar_an_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="e22a7cc783d64c81a75390e8075ee3be"/>
+        <Field Comment="Предупредительный уровень масла в картере компрессора" Name="Lm_Nkar_pn" Type="94C521C642227325371AE7BCC363E527" UUID="fd86b6c1cc6c4fcba21056ce250d898a"/>
+        <Field Comment="Предупредительный уровень масла в картере компрессора КЦД" Name="Lm_Nkar_pn_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="32c48fe725764c049d1a559015e12179"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 1" Name="Qm_Lub1" Type="94C521C642227325371AE7BCC363E527" UUID="c274ebecc0e34cb1abd39aff182b29e2"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 1 КЦД" Name="Qm_Lub1_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="2fd3b1484ceb417697d0226950ff94b1"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 2" Name="Qm_Lub2" Type="94C521C642227325371AE7BCC363E527" UUID="20e49ad2da22478282fd384a11dee485"/>
+        <Field Comment="Поток масла в лубрикаторной системе смазки компрессора 2 КЦД" Name="Qm_Lub2_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="8b55eca4e2f044aaa86b5fad7af7957b"/>
+        <Field Comment="Резерв" Name="Res_5" Type="94C521C642227325371AE7BCC363E527" UUID="20c5671087ef413eac6fb60cb761e46d"/>
+        <Field Comment=" Резерв КЦД" Name="Res_KCD_6" Type="94C521C642227325371AE7BCC363E527" UUID="5659bd0945d449cca67cf9c22a260ae5"/>
+        <Field Comment="Резерв" Name="Res_7" Type="94C521C642227325371AE7BCC363E527" UUID="7cf9432039ef42828fce0a36917cdf54"/>
+        <Field Comment="Резерв КЦД" Name="Res_KCD_8" Type="94C521C642227325371AE7BCC363E527" UUID="bd976375d085462384e2060ae486f7c6"/>
+        <Field Comment="Резерв" Name="Res_9" Type="94C521C642227325371AE7BCC363E527" UUID="81c8dd48aeca42888f30216b05f9bc4b"/>
+        <Field Comment="Резерв КЦД" Name="Res_KCD_10" Type="94C521C642227325371AE7BCC363E527" UUID="11ae7f190a99499ea1404c0ef07c75b1"/>
+        <Field Comment="Резерв" Name="Res_11" Type="94C521C642227325371AE7BCC363E527" UUID="ba100b003f0446deb71b26dbf297633e"/>
+        <Field Comment="Резерв КЦД" Name="Res_KCD_12" Type="94C521C642227325371AE7BCC363E527" UUID="d66821ce04794d6a9c0320b1e2bce23b"/>
+        <Field Comment="Опасная корпусная вибрация компрессора" Name="Vs_N_av" Type="94C521C642227325371AE7BCC363E527" UUID="59c0d54e2426472c96dfbda7cbda9925"/>
+        <Field Comment="Опасная корпусная вибрация компрессора КЦД" Name="Vs_N_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="14b9c8a59de844c4a3e13243547bf1b3"/>
+        <Field Comment="Опасное виброперемещение тихоходного вала редуктора" Name="Vp_SlowVal_av" Type="94C521C642227325371AE7BCC363E527" UUID="9ae5dd1940e44f29a113fc83dbd7a69c"/>
+        <Field Comment="Опасное виброперемещение тихоходного вала редуктора КЦД" Name="Vp_SlowVal_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="8878262c9ede4eccaf83997e463e9d85"/>
+        <Field Comment="Опасное виброперемещение быстроходного вала редуктора" Name="Vp_FastVal_av" Type="94C521C642227325371AE7BCC363E527" UUID="7366368e313945d684761d1e17f611fb"/>
+        <Field Comment="Опасное виброперемещение быстроходного вала редуктора КЦД" Name="Vp_FastVal_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="9b807e89ae0543ef8136035b8bad04a2"/>
+        <Field Comment="Питание соленоидов крановой обвязки ГПА неисправно" Name="No_U_Kr" Type="94C521C642227325371AE7BCC363E527" UUID="09fdad95ea7042baa05287586a113ce3"/>
+        <Field Comment="Клапан Кл1 открыт" Name="Kl1_ON" Type="94C521C642227325371AE7BCC363E527" UUID="bdd3b18f19b14052b6780a3674c451fc"/>
+        <Field Comment="Клапан Кл1 закрыт" Name="Kl1_OF" Type="94C521C642227325371AE7BCC363E527" UUID="67a7b7ef4d6a43f8bdab7aab7cb07a70"/>
+        <Field Comment="Клапан Кл2 открыт" Name="Kl2_ON" Type="94C521C642227325371AE7BCC363E527" UUID="650d8d92d6e94c8b9425d7679d79b348"/>
+        <Field Comment="Клапан Кл2 закрыт" Name="Kl2_OF" Type="94C521C642227325371AE7BCC363E527" UUID="7b3be60291974a749f4ed61a64928d3e"/>
+        <Field Comment="Клапан Кл3 открыт" Name="Kl3_ON" Type="94C521C642227325371AE7BCC363E527" UUID="6f4888723570445a95de7a10e02d250a"/>
+        <Field Comment="Клапан Кл3 закрыт" Name="Kl3_OF" Type="94C521C642227325371AE7BCC363E527" UUID="728978e509254593a01ab19b4af1a028"/>
+        <Field Comment="Клапан Кл4 открыт" Name="Kl4_ON" Type="94C521C642227325371AE7BCC363E527" UUID="4af52791fad04a0ba5a7808fd5cdc45e"/>
+        <Field Comment="Клапан Кл4 закрыт" Name="Kl4_OF" Type="94C521C642227325371AE7BCC363E527" UUID="54c4d6320eb24e0bba09b275a0fe919c"/>
+        <Field Comment="Клапан Кл5 открыт" Name="Kl5_ON" Type="94C521C642227325371AE7BCC363E527" UUID="02f205f307d948f6a340fd581c785c27"/>
+        <Field Comment="Клапан Кл5 закрыт" Name="Kl5_OF" Type="94C521C642227325371AE7BCC363E527" UUID="498dfbeab8894a7ebe13bcb500179246"/>
+        <Field Comment="Клапан КлР7 открыт" Name="KlR7_ON" Type="94C521C642227325371AE7BCC363E527" UUID="2069f470fede435c83a5b9df93ab5033"/>
+        <Field Comment="Клапан КлР7 закрыт" Name="KlR7_OF" Type="94C521C642227325371AE7BCC363E527" UUID="981f955d3d5c433288c66b3325297e4b"/>
+        <Field Comment="Питание сливных клапанов 1-3 неиспр" Name="No_U_Kl_13" Type="94C521C642227325371AE7BCC363E527" UUID="851e3eb2890040128ef806df641bd3f7"/>
+        <Field Comment="Питание сливных клапанов 4-5 неиспр" Name="No_U_Kl_45" Type="94C521C642227325371AE7BCC363E527" UUID="8a964ea9eb254da087f51ecb932f9ab4"/>
+        <Field Comment="Верхний уровень жидкости в первой ступени ФС1" Name="Lk_FS1_S1_v" Type="94C521C642227325371AE7BCC363E527" UUID="a713451593a548a0a98c5758f43d3659"/>
+        <Field Comment="Нижний уровень жидкости  в первой ступени ФС1" Name="Lk_FS1_S1_n" Type="94C521C642227325371AE7BCC363E527" UUID="054e7397d8bf451a89190b6d53ad8535"/>
+        <Field Comment="Верхний уровень жидкости во второй ступени ФС1" Name="Lk_FS1_S2_v" Type="94C521C642227325371AE7BCC363E527" UUID="4e20e0307a2c49be9ddc101fb346bf8f"/>
+        <Field Comment="Нижний уровень жидкости  во второй ступени ФС1" Name="Lk_FS1_S2_n" Type="94C521C642227325371AE7BCC363E527" UUID="8fafba18a07043df85087c1444ec3b94"/>
+        <Field Comment="Верхний уровень жидкости в первой ступени ФС2" Name="Lk_FS2_S1_v" Type="94C521C642227325371AE7BCC363E527" UUID="23c2f35aab11422c916dbd3c5d95f9c2"/>
+        <Field Comment="Нижний уровень жидкости  в первой ступени ФС2" Name="Lk_FS2_S1_n" Type="94C521C642227325371AE7BCC363E527" UUID="7555d037896b40db9a43bd81ada1ed82"/>
+        <Field Comment="Резерв" Name="Res_13" Type="94C521C642227325371AE7BCC363E527" UUID="de2cc2c7ad544bbc87aa49880cb01b7a"/>
+        <Field Comment="Резерв" Name="Res_14" Type="94C521C642227325371AE7BCC363E527" UUID="905ffee5e8e04f27bd4b1fbc4a45158b"/>
+        <Field Comment="Верхний уровень жидкости в первой ступени ФС3" Name="Lk_FS3_S1_v" Type="94C521C642227325371AE7BCC363E527" UUID="eec2b9052ccf4feb8c66f5a64170d07c"/>
+        <Field Comment="Нижний уровень жидкости  в первой ступени ФС3" Name="Lk_FS3_S1_n" Type="94C521C642227325371AE7BCC363E527" UUID="853575ffffd44fcdac6d3a175db5ce71"/>
+        <Field Comment="Верхний уровень жидкости во второй ступени ФС3" Name="Lk_FS3_S2_v" Type="94C521C642227325371AE7BCC363E527" UUID="b8de03d528a844cd803d7fe2c47e8176"/>
+        <Field Comment="Нижний уровень жидкости  во второй ступени ФС3" Name="Lk_FS3_S2_n" Type="94C521C642227325371AE7BCC363E527" UUID="335711bba54f47ad821022d59c40482f"/>
+        <Field Comment="Верхний уровень жидкости в Е-1" Name="Lk_E1_v" Type="94C521C642227325371AE7BCC363E527" UUID="16110fbdff9f4b83998ca904171dd166"/>
+        <Field Comment="Неисправность датчика уровня в Е-1" Name="Lk_E1_bad" Type="94C521C642227325371AE7BCC363E527" UUID="88729fe681f4469592b511fff27d0cf2"/>
+        <Field Comment="Резерв" Name="Res_15" Type="94C521C642227325371AE7BCC363E527" UUID="79ee0bfa4dfc492fa61a48a3a06a0953"/>
+        <Field Comment="Опасный осевой сдвиг редуктора" Name="Os_Rdk_av" Type="94C521C642227325371AE7BCC363E527" UUID="57c244efda57425e986881f1579122c1"/>
+        <Field Comment="Опасный осевой сдвиг редуктора КЦД" Name="Os_Rdk_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="4bb2eff5f31f42fa933d994001ed3056"/>
+        <Field Comment="Аварийно-низкий уровень масла в маслобаке Б1 компрессора" Name="Lm_MBK_an" Type="94C521C642227325371AE7BCC363E527" UUID="134a2261c2b84050aaa867f453d09fe7"/>
+        <Field Comment="Аварийно-низкий уровень масла в маслобаке Б1 компрессора. КЦД" Name="Lm_MBK_an_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="15d4a45eaddb41fe83b0e4b04b3d0512"/>
+        <Field Comment="Аварийно-низкий уровень охлаждающей жидкости в баке компрессора" Name="L_freeze_Bak_an" Type="94C521C642227325371AE7BCC363E527" UUID="e294e155a4ae4c07ad07a35c9d643731"/>
+        <Field Comment=" Аварийно-низкий уровень охлаждающей жидкости в баке компрессора. КЦД" Name="L_freeze_Bak_an_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="1651a47fd17f45bfaa6ce7bd00476892"/>
+        <Field Comment="Резерв" Name="Res_16" Type="94C521C642227325371AE7BCC363E527" UUID="40aa8b1f146240c18019e0b81703d8a6"/>
+        <Field Comment="Перепад давления масла на фильтре очистки масла редуктора" Name="dPm_F_Rdk_v" Type="94C521C642227325371AE7BCC363E527" UUID="aacf14a16da145fdbbce7b38c1ef0a2d"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора" Name="Lm_MBL_an" Type="94C521C642227325371AE7BCC363E527" UUID="a9faeca014534d93b8b6503c1f5dca4b"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке лубрикаторной системы компрессора КЦД" Name="Lm_MBL_an_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="096f6c2f363b4999ba509b0cd33ed093"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора" Name="Lm_MBL_av" Type="94C521C642227325371AE7BCC363E527" UUID="a9601df8e6b849ae8810772cb9efa94a"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке лубрикаторной системы компрессора КЦД" Name="Lm_MBL_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="91cb207289064db7bc68d8da21e199f6"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке Б1 компрессора" Name="Lm_MBN_av" Type="94C521C642227325371AE7BCC363E527" UUID="e34912c5cc1244f6b95b66dee2e44564"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке Б1 компрессора КЦД" Name="Lm_MBN_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="e1348b7f46d544bc9e2be7880438fee3"/>
+        <Field Comment="Аварийно высокий уровень масла в маслобаке редуктора" Name="Lm_MBR_av" Type="94C521C642227325371AE7BCC363E527" UUID="6ed53f65229e46c18765b9ec57cb2312"/>
+        <Field Comment="Аварийный уровень масла в маслобаке редуктора КЦД" Name="Lm_MBR_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="a8850c07494a439d9dbafd6995dbcf16"/>
+        <Field Comment="Предельная вибрация агрегата (любой из 7 каналов)" Name="Vs_GPA_pv" Type="94C521C642227325371AE7BCC363E527" UUID="893750f5193a4946be9885a6a38e7b8c"/>
+        <Field Comment="Предельная вибрация агрегата (любой из 7 каналов) КЦД" Name="Vs_GPA_pv_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="2a83b7d45e0b42acb6d78dcdf021dc1b"/>
+        <Field Comment="Предупредительный уровень масла в маслобаке редуктора" Name="Lm_MBR_pn" Type="94C521C642227325371AE7BCC363E527" UUID="76abb2fd4b7a4a3197b576ad31684717"/>
+        <Field Comment="Опасная вибрация агрегата (любой из 7 каналов)" Name="Vs_GPA_av" Type="94C521C642227325371AE7BCC363E527" UUID="60b263d9f2674d39bfd56e73acd25277"/>
+        <Field Comment="РЧТиН электростартера включен" Name="Reg_Starter_ON" Type="94C521C642227325371AE7BCC363E527" UUID="7633bfc934274850b767a1c26e609609"/>
+        <Field Comment="РЧТиН электростартера работает" Name="Reg_Starter_Work" Type="94C521C642227325371AE7BCC363E527" UUID="b4491b5fcc974c4c9bd3663c0404e153"/>
+        <Field Comment="Отсечной газовый кран перед дозатором закрыт" Name="SK_OF" Type="94C521C642227325371AE7BCC363E527" UUID="a4b5e98526894b8d941d7f73414b8c22"/>
+        <Field Comment="Кран 9 сброса топливного газа на свечу открыт" Name="Kr9_ON" Type="94C521C642227325371AE7BCC363E527" UUID="1493ae91cf4f489eb9b7ff0e041ec126"/>
+        <Field Comment="Кран 9 сброса топливного газа на свечу закрыт" Name="Kr9_OF" Type="94C521C642227325371AE7BCC363E527" UUID="24f0c35c376a4bdd8b8dbf7b0e4c884b"/>
+        <Field Comment="Исправность основного ИП =24В ПЛК" Name="DC24osn_PLC_ok" Type="94C521C642227325371AE7BCC363E527" UUID="66bcc0a30bb5440884c60cc64cc2f15a"/>
+        <Field Comment="Кран 12 подвода топливного газа к ГТД открыт" Name="Kr12_ON" Type="94C521C642227325371AE7BCC363E527" UUID="c534f6eb2fe045e58e05c1b62f42519b"/>
+        <Field Comment="Кран 12 подвода топливного газа к ГТД закрыт" Name="Kr12_OF" Type="94C521C642227325371AE7BCC363E527" UUID="4c908d9ba2a441feb630147c5b3151b2"/>
+        <Field Comment="Нормальная работа БУШД" Name="BUSD_ok" Type="94C521C642227325371AE7BCC363E527" UUID="d02e5979332d4537b0444d72f82ba7f7"/>
+        <Field Comment="Повышенный перепад давления масла на маслофильтре тонкой очистки (резерв)" Name="dPm_FTO_v" Type="94C521C642227325371AE7BCC363E527" UUID="8bd12cf633e4447cbe3b9c8802ec2450"/>
+        <Field Comment="Повышенный перепад давления масла на маслофильтре грубой очистки (резерв)" Name="dPm_FGO_v" Type="94C521C642227325371AE7BCC363E527" UUID="60b5d987479b431082085c7864f45a3d"/>
+        <Field Comment="Давление масла на входе в ГТД выше 40 кПа" Name="Pm_inD_40v" Type="94C521C642227325371AE7BCC363E527" UUID="82292a4b23f7481489ed7985295585d8"/>
+        <Field Comment="Давление масла на входе в ГТД выше 40 кПа КЦД" Name="Pm_inD_40v_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="b572464f5610489ea499c1a3f09f8159"/>
+        <Field Comment="Кнопка АО от ПУ" Name="Kn_AO_PU" Type="94C521C642227325371AE7BCC363E527" UUID="59bbc624dfab498085c2c24f12da29cf"/>
+        <Field Comment="Кнопка АО от ПУ КЦД" Name="Kn_AO_PU_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="c20f7ccb4b474b139f8b66044b006efa"/>
+        <Field Comment="Кнопка ЭО от ПУ" Name="Kn_EO_PU" Type="94C521C642227325371AE7BCC363E527" UUID="761b4e4cdacc44889e50b7e88975b652"/>
+        <Field Comment="Кнопка ЭО от ПУ КЦД" Name="Kn_EO_PU_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="192ca88fa23b4897af0e664068ab2c6d"/>
+        <Field Comment="Резерв " Name="Res_19" Type="94C521C642227325371AE7BCC363E527" UUID="fc1c558f6e5749fb8ef11bbd03a324d3"/>
+        <Field Comment="Готовность БЗА 1" Name="BZA1_Rdy" Type="94C521C642227325371AE7BCC363E527" UUID="1a6aa2c8ff3945abb01602b6a18ef694"/>
+        <Field Comment="Готовность БЗА 2" Name="BZA2_Rdy" Type="94C521C642227325371AE7BCC363E527" UUID="3fa348e85c694c71b6a252221232bced"/>
+        <Field Comment="Питание 220 В системы плазменного воспламенения включено" Name="U_SPV_ON" Type="94C521C642227325371AE7BCC363E527" UUID="be66409570594de4988e5524e40bb923"/>
+        <Field Comment="Нет управляющего сигнала на ВНА" Name="No_upr_VNA" Type="94C521C642227325371AE7BCC363E527" UUID="088d0832c15640d1b4737fa58e4204ae"/>
+        <Field Comment="Управление приводом ВНА неисправно" Name="VNA_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="2ebfb71d69f14863a645cea1c9b0d7b6"/>
+        <Field Comment="Резерв" Name="Res_20" Type="94C521C642227325371AE7BCC363E527" UUID="de51f3bfe89149b790308ea2db22ec39"/>
+        <Field Comment="Резерв" Name="Res_21" Type="94C521C642227325371AE7BCC363E527" UUID="cbfced9d77114808b59b323ae612cca3"/>
+        <Field Comment="Резерв" Name="Res_22" Type="94C521C642227325371AE7BCC363E527" UUID="ea439c5aedc34c12b177338f98f5817a"/>
+        <Field Comment="Резерв" Name="Res_23" Type="94C521C642227325371AE7BCC363E527" UUID="10c6926da83440a08dff923cdbce38c2"/>
+        <Field Comment="Резерв" Name="Res_24" Type="94C521C642227325371AE7BCC363E527" UUID="6ee4f249b68647989ef0e1f195eb048d"/>
+        <Field Comment="Резерв" Name="Res_25" Type="94C521C642227325371AE7BCC363E527" UUID="15fbcea1f4294614847c55e0ed2672ad"/>
+        <Field Comment="Аварийно-низкий уровень масла в маслобаке ГТД" Name="Lm_MBD_an" Type="94C521C642227325371AE7BCC363E527" UUID="e347c52b58ac435c86f2a37428b100f5"/>
+        <Field Comment="Аварийный уровень масла в маслобаке ГТД КЦД" Name="Lm_MBD_an_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="66231d7799b9491c9e05bc5e055cff21"/>
+        <Field Comment="АО из КЦ" Name="AO_Shop" Type="94C521C642227325371AE7BCC363E527" UUID="3129850115294164835e49b514aabca8"/>
+        <Field Comment="АО из КЦ КЦД" Name="AO_Shop_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="d146bd54eefc4e649728c45222f0976a"/>
+        <Field Comment="Пожар в отсеке ГТД" Name="Fire_inOD" Type="94C521C642227325371AE7BCC363E527" UUID="181ed76ae2b44e24996ff1e553417f73"/>
+        <Field Comment="Пожар в отсеке ГТД КЦД" Name="Fire_inOD_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="b7d88b61ad4b49f4a820bf062bca7361"/>
+        <Field Comment="Двери отсека нагнетателя открыты" Name="Dver_ON_Open" Type="94C521C642227325371AE7BCC363E527" UUID="40904890cb4c459fb92f844bdca57d34"/>
+        <Field Comment="Двери отсека ГТД открыты" Name="Dver_OD_Open" Type="94C521C642227325371AE7BCC363E527" UUID="4667cfc05ada4afea300f9854f0691bd"/>
+        <Field Comment="Пожар в укрытии компрессора" Name="Fire_inUkr" Type="94C521C642227325371AE7BCC363E527" UUID="64babf28f0e7488faa442b644456ca5f"/>
+        <Field Comment="Пожар в укрытии компрессора КЦД" Name="Fire_inUkr_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="fc6d7094a67446f28fd65edea1fdb68d"/>
+        <Field Comment="Пожар в блоке электротехническом" Name="Fire_inETO" Type="94C521C642227325371AE7BCC363E527" UUID="33d8774b8106415a9908f8dc28f66397"/>
+        <Field Comment="Пожар в блоке электротехническом КЦД" Name="Fire_inETO_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="03e41a7c0e9f413bb26dbf154ddc9cbd"/>
+        <Field Comment="Двери электротехнического отсека открыты" Name="Dver_ETO_Open" Type="94C521C642227325371AE7BCC363E527" UUID="a5e07f61a0854f3dbef0547189bd9fad"/>
+        <Field Comment="Загазованность 10 % НКПВ в отсеке компрессора" Name="Gas10_ON" Type="94C521C642227325371AE7BCC363E527" UUID="a1a518e8c07644b0aff1d05fa6084dda"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке компрессора" Name="Gas20_ON" Type="94C521C642227325371AE7BCC363E527" UUID="a2f591b357cb41198ba4101380331184"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке компрессора КЦД" Name="Gas20_ON_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="28c990b4597a487a98bec309e71d208f"/>
+        <Field Comment="Загазованность 10 % НКПВ в отсеке ГТД" Name="Gas10_OD" Type="94C521C642227325371AE7BCC363E527" UUID="6cfe947f9ee54f8cba148f081c3afe9f"/>
+        <Field Comment="АСПС норма" Name="ASPS_ok" Type="94C521C642227325371AE7BCC363E527" UUID="1d16195e697e49abb2e864ecaf6fed6b"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке ГТД" Name="Gas20_OD" Type="94C521C642227325371AE7BCC363E527" UUID="7cf4d26b2f3a4227933bb9bafb1bd192"/>
+        <Field Comment="Загазованность 20 % НКПВ в отсеке ГТД КЦД" Name="Gas20_OD_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="57b9d658a18b4422a19f0cdd0d08aa4f"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г1 (LA1-1)" Name="Lk_FS1_G1_max" Type="94C521C642227325371AE7BCC363E527" UUID="050e0af0825c47708a9dc360210afd3c"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г1 (LA1-2)" Name="Lk_FS1_G1_min" Type="94C521C642227325371AE7BCC363E527" UUID="443859fb3e2a4c12ac15fee48ad6566e"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г2 (LA1-3)" Name="Lk_FS1_G2_max" Type="94C521C642227325371AE7BCC363E527" UUID="7a9f43c9a7c7452bb9a73d687810dbdd"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г2 (LA1-4)" Name="Lk_FS1_G2_min" Type="94C521C642227325371AE7BCC363E527" UUID="6c0e99ec749244db9cf09b4174104311"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г1 (LA2-1)" Name="Lk_FS2_G1_max" Type="94C521C642227325371AE7BCC363E527" UUID="af02d5259a974216a7bfb8fa903b3396"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г1 (LA2-2)" Name="Lk_FS2_G1_min" Type="94C521C642227325371AE7BCC363E527" UUID="b49d1fa2d1784cd5890c7aecf6a67124"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г1 (LA3-1)" Name="Lk_FS3_G1_max" Type="94C521C642227325371AE7BCC363E527" UUID="370bf5fb7f2244a1961146420b3f35d5"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г1 (LA3-2)" Name="Lk_FS3_G1_min" Type="94C521C642227325371AE7BCC363E527" UUID="f65fd578bd2e433d96220823adaf184b"/>
+        <Field Comment="Максимальный уровень жидкости в фильтре дренаж Г2 (LA3-3)" Name="Lk_FS3_G2_max" Type="94C521C642227325371AE7BCC363E527" UUID="c82995ad801a497ca6ccf7b480d6bf2d"/>
+        <Field Comment="Минимальный уровень жидкости в фильтре дренаж Г2 (LA3-4)" Name="Lk_FS3_G2_min" Type="94C521C642227325371AE7BCC363E527" UUID="39f1ef50e60542dfad4db5fad1f25a3c"/>
+        <Field Comment="Клапан электромагнитный КЛЭ3 (КЛЭ3-1) открыт" Name="KE3_1_ON" Type="94C521C642227325371AE7BCC363E527" UUID="1d73f1b154b6468f8e2ca48cfbb59c1f"/>
+        <Field Comment="Клапан электромагнитный КЛЭ3 (КЛЭ3-2) открыт" Name="KE3_2_ON" Type="94C521C642227325371AE7BCC363E527" UUID="50251a48edb04aba8baf8a5215c10ff1"/>
+        <Field Comment="Клапан электромагнитный КЛЭ3 (КЛЭ3-3) открыт" Name="KE3_3_ON" Type="94C521C642227325371AE7BCC363E527" UUID="126efecc3e0249d9b4b02b4b708c7798"/>
+        <Field Comment="Клапан шаровой с электроприводом КШЭ5 открыт" Name="KE5_ON" Type="94C521C642227325371AE7BCC363E527" UUID="0d03326becbc4897bb392c98527ec595"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке редуктора" Name="Lm_MBR_an" Type="94C521C642227325371AE7BCC363E527" UUID="e43df29856234c5c9193bbc86c7abfc6"/>
+        <Field Comment="Аварийно низкий уровень масла в маслобаке редуктора КЦД" Name="Lm_MBR_an_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="e4357cbf17564ba194c1c69ebc74b17e"/>
+        <Field Comment="Аварийно-высокий уровень масла в маслобаке ГТД" Name="Lm_MBD_av" Type="94C521C642227325371AE7BCC363E527" UUID="d28854c668574ccaa5ae457f16d65875"/>
+        <Field Comment="Аварийно-высокий уровень масла в маслобаке ГТД КЦД" Name="Lm_MBD_av_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="4d49d3450904417e8584550feb95bd65"/>
+        <Field Comment="Резерв" Name="Res_26" Type="94C521C642227325371AE7BCC363E527" UUID="c42a40cbe4df4a7bb38c2a7c80e75141"/>
+        <Field Comment="Резерв" Name="Res_27" Type="94C521C642227325371AE7BCC363E527" UUID="0338bd05ce814212b9d487bc27393694"/>
+        <Field Comment="Резерв" Name="Res_28" Type="94C521C642227325371AE7BCC363E527" UUID="f10ec9f7e0004218bd1be30e05ce2a19"/>
+        <Field Comment="Резерв" Name="Res_29" Type="94C521C642227325371AE7BCC363E527" UUID="497cba7ccb1e414591b9f84da6f27207"/>
+        <Field Comment="Кран Кр6 закрыт" Name="Kr6_OF" Type="94C521C642227325371AE7BCC363E527" UUID="6037ce73bc5e41b3bfa7a7afe0cb8a70"/>
+        <Field Comment="Кран Кр6 открыт" Name="Kr6_ON" Type="94C521C642227325371AE7BCC363E527" UUID="8033258e7aa5498d8f7299e90c322b13"/>
+        <Field Comment="Клапан КЭ1 БФТГ подачи газа в ГТД открыт" Name="KE1_BFTG_ON" Type="94C521C642227325371AE7BCC363E527" UUID="f310faa6c0624a3f9258cae8dc7c3972"/>
+        <Field Comment="Клапан КЭ2 БФТГ сброса давления в атмосферу закрыт" Name="KE2_BFTG_OF" Type="94C521C642227325371AE7BCC363E527" UUID="80f73de6f87740f8997a43672091c2d2"/>
+        <Field Comment="Система контроля загазованности неисправна" Name="AKZ_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="db6dc61dcfb34c148c9f500cca329359"/>
+        <Field Comment="Кнопка АО на блоке ЭТ и САУ" Name="Kn_AO_ETO" Type="94C521C642227325371AE7BCC363E527" UUID="4d7931a0a63a4e6bb95c1e7c5fe8c226"/>
+        <Field Comment="Клапан КлР6 открыт" Name="KLR6_ON" Type="94C521C642227325371AE7BCC363E527" UUID="ca8367fb7ff24af7b4123c88017b3147"/>
+        <Field Comment="Клапан КлР6 закрыт" Name="KLR6_OF" Type="94C521C642227325371AE7BCC363E527" UUID="27e30c06326b445283d476d1a48f37e3"/>
+        <Field Comment="Клапан КлР1 закрыт" Name="KLR1_OF" Type="94C521C642227325371AE7BCC363E527" UUID="f28fd45ced8b4e6bb8499545ddd370e3"/>
+        <Field Comment="Клапан КлР1 открыт" Name="KLR1_ON" Type="94C521C642227325371AE7BCC363E527" UUID="149d8a8f87a748ebb62bd4d663286900"/>
+        <Field Comment="Клапан КлР2 закрыт" Name="KLR2_OF" Type="94C521C642227325371AE7BCC363E527" UUID="e60bad04207043f081a120d892ff23e7"/>
+        <Field Comment="Клапан КлР2 открыт" Name="KLR2_ON" Type="94C521C642227325371AE7BCC363E527" UUID="0b9d76eb430445c2874d92d67417347a"/>
+        <Field Comment="Перегрев калорифера МОК" Name="TEN_MON_OverT" Type="94C521C642227325371AE7BCC363E527" UUID="b708d3f165494b83b7168acf78e09372"/>
+        <Field Comment="Перегрев калорифера МОР" Name="TEN_MOR_OverT" Type="94C521C642227325371AE7BCC363E527" UUID="fbad028a010844aa894e9dd99ed781ec"/>
+        <Field Comment="Перегрев калорифера МОД" Name="TEN_MOD_OverT" Type="94C521C642227325371AE7BCC363E527" UUID="1869ac4d3761489fbf379c53403fa6c8"/>
+        <Field Comment="Батарея разряжена" Name="AB_Bad" Type="94C521C642227325371AE7BCC363E527" UUID="70cf6c44decd4664901d8da5016e7eca"/>
+        <Field Comment="Работа от байпаса" Name="El_Bypass_ON" Type="94C521C642227325371AE7BCC363E527" UUID="1983c3fcb98d4a1296a48214b9cf6b9b"/>
+        <Field Comment="Работа от сети" Name="El_Network_ON" Type="94C521C642227325371AE7BCC363E527" UUID="2dd40650d1014906a43e7579791bb696"/>
+        <Field Comment="Серв. байпас включен " Name="BypassServ_ON" Type="94C521C642227325371AE7BCC363E527" UUID="197b1d6f4a044d72b8a19062ec5ee5b0"/>
+        <Field Comment="Нет сети" Name="No_El_Network" Type="94C521C642227325371AE7BCC363E527" UUID="61e2a839e316485085edb8ec524242e7"/>
+        <Field Comment="Неисправность ЗУ" Name="ZU_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="121e4615e5824b71af436d86d4a84ec6"/>
+        <Field Comment="Общая неисправность" Name="ALL_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="d86365d5010f47cc9f312fdd916af9c5"/>
+        <Field Comment="Авария вентиляторов МО компрессора" Name="Vn_MON_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="738c045a87e945d3b930d15286c151ab"/>
+        <Field Comment="Авария вентиляторов МО редуктора" Name="Vn_MOR_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="1d4e99bbcb6045b5bf8a3b9deed0db5c"/>
+        <Field Comment="Авария вентиляторов МО ГТД" Name="Vn_MOD_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="ac14c8a56da84a6aad9a12a18e37acf1"/>
+        <Field Comment="Включение аварийной вентиляции турбоблока" Name="VA_OD_ON" Type="94C521C642227325371AE7BCC363E527" UUID="1faebf19e8d94cfabb37d2813e553945"/>
+        <Field Comment="Контроль положения валоповоротного устройства" Name="Check_VPU" Type="94C521C642227325371AE7BCC363E527" UUID="922148a6f3fa4abb8be9e6b3abb2ec38"/>
+        <Field Comment="Контроль агрегата зажигания. Канал 1" Name="Check_AZ1" Type="94C521C642227325371AE7BCC363E527" UUID="265fa78548ec4879a5e320a3bc9dcff1"/>
+        <Field Comment="Контроль агрегата зажигания. Канал 2" Name="Check_AZ2" Type="94C521C642227325371AE7BCC363E527" UUID="b514c1993f8943b385e6641b6de79d54"/>
+        <Field Comment="Клапан противопожарный ПЕ3 закрыт" Name="Kl_PE3_OF" Type="94C521C642227325371AE7BCC363E527" UUID="cb820e03cf6a4d5c93eb561d8ce9c5b2"/>
+        <Field Comment="Клапан противопожарный ПЕ3 открыт" Name="Kl_PE3_ON" Type="94C521C642227325371AE7BCC363E527" UUID="0e93d779365d4db9bbd6dbf4b28d3e45"/>
+        <Field Comment="Клапан противопожарный ПЕ2 закрыт" Name="Kl_PE2_OF" Type="94C521C642227325371AE7BCC363E527" UUID="cf84106234c44e9ea3358fad20a71c15"/>
+        <Field Comment="Клапан противопожарный ПЕ2 открыт" Name="Kl_PE2_ON" Type="94C521C642227325371AE7BCC363E527" UUID="e6c16a6f44e1453a9656a9365b6be607"/>
+        <Field Comment="Клапан противопожарный ПЕ1 закрыт" Name="Kl_PE1_OF" Type="94C521C642227325371AE7BCC363E527" UUID="7e6edc532a6d45a2873fc91dc3b08936"/>
+        <Field Comment="Клапан противопожарный ПЕ1 открыт" Name="Kl_PE1_ON" Type="94C521C642227325371AE7BCC363E527" UUID="7427d1f9fd504206b287bfa6126d302d"/>
+        <Field Comment="Повышенная корпусная вибрация компрессора" Name="Vs_N_v" Type="94C521C642227325371AE7BCC363E527" UUID="882ca11c523e429bbc71ba5c8576515c"/>
+        <Field Comment="Резерв" Name="Res_30" Type="94C521C642227325371AE7BCC363E527" UUID="f3de02dcc72f4679be32df4e92f3494a"/>
+        <Field Comment="Повышенное виброперемещение тихоходного вала редуктора" Name="Vp_SlowVal_v" Type="94C521C642227325371AE7BCC363E527" UUID="65ef2f91f25b460fa46cd35f2c1681ea"/>
+        <Field Comment="Резерв" Name="Res_31" Type="94C521C642227325371AE7BCC363E527" UUID="9745a4eeaf0d44828f3e43dd005e5673"/>
+        <Field Comment="Исправность резервного ИП =24В ПЛК" Name="DC24rez_PLC_ok" Type="94C521C642227325371AE7BCC363E527" UUID="586f25cd123e4e8084d7d8fc19b578c2"/>
+        <Field Comment="Повышенное виброперемещение быстроходного вала редуктора" Name="Vp_FastVal_v" Type="94C521C642227325371AE7BCC363E527" UUID="f309c0001f1449008a6a14028feb329d"/>
+        <Field Comment="Резерв" Name="Res_32" Type="94C521C642227325371AE7BCC363E527" UUID="11c706be79464ae6841ae2059aba0ce6"/>
+        <Field Comment="Повышенный осевой сдвиг редуктора" Name="Os_Rdk_v" Type="94C521C642227325371AE7BCC363E527" UUID="503aa1fc92054b2a95d99ccc173ed20e"/>
+        <Field Comment="Резерв" Name="Res_33" Type="94C521C642227325371AE7BCC363E527" UUID="83b41817a9ff4c298718e3b1b41dba12"/>
+        <Field Comment="Отказ аппаратуры контроля вибрации" Name="SKV_FLT" Type="94C521C642227325371AE7BCC363E527" UUID="df311935eff941e6ac745fa44ba11f7a"/>
+        <Field Comment="Контроль исправности виброаппаратуры компрессора и редуктора" Name="Check_SKV" Type="94C521C642227325371AE7BCC363E527" UUID="bae79af4e1c249b880669df4f4d6d625"/>
+        <Field Comment="Резерв" Name="Res_34" Type="94C521C642227325371AE7BCC363E527" UUID="9937aac5e9be4accbc1d46390673f9c8"/>
+        <Field Comment="Открыть кран К3 (резерв) КЦУ" Name="Res_35" Type="94C521C642227325371AE7BCC363E527" UUID="54cbd56dcfdb4a4296608cd9ffe99819"/>
+        <Field Comment="Закрыть кран К3 (резерв) КЦУ" Name="Res_45" Type="94C521C642227325371AE7BCC363E527" UUID="719c43f184cc4ba394f74029cf6d1f69"/>
+        <Field Comment="Блокировка ВНА КЦУ" Name="Lock_VNA_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="1d567ad713714144be90e1a8157d4177"/>
+        <Field Comment="ГПА в работе КЦУ" Name="GPA_Work_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="dfaa732286c64157b14523fa6302a11b"/>
+        <Field Comment="Включить термостат влагомера КЦУ" Name="TEN_Vlagomer_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="27fca148b7b644b8aaa2d98512d4bba6"/>
+        <Field Comment="Открыть кран Кр1 КЦУ" Name="Kr1_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="4d86a01062554ac7921f46347662f93a"/>
+        <Field Comment="Закрыть кран Кр1 КЦУ" Name="Kr1_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="a5337fdb0ae14ce3880e0c9b2d0f05ed"/>
+        <Field Comment="Открыть кран Кр2 КЦУ" Name="Kr2_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="9b12029e451f486aae8a2184245eba1a"/>
+        <Field Comment="Закрыть кран Кр2 КЦУ" Name="Kr2_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="5eef8d1f557b4fb9b09507ba21195974"/>
+        <Field Comment="Открыть кран Кр4 КЦУ" Name="Kr4_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="25bf57be7a0e4ee2b3e5f97729cda7e0"/>
+        <Field Comment="Закрыть кран Кр4 КЦУ" Name="Kr4_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="e7a6d721ebde419e8ea2613cf96a4ae0"/>
+        <Field Comment="Открыть кран Кр5 КЦУ" Name="Kr5_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="bb874a85f9e94356bcb518aef488ffd1"/>
+        <Field Comment="Закрыть кран Кр5 КЦУ" Name="Kr5_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="8038b6ba2e7f4a218cab0c862d62854b"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №1 компрессора КЦУ" Name="Reg_C1_N_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="4277e1a356cf4b8c84461a5a091da88c"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №2 компрессора КЦУ" Name="Reg_C2_N_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="df461084d7554c81ad11ff8482c1f133"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №3 компрессора КЦУ" Name="Reg_C3_N_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="4a0d5e5bc4524535be8e9be810f017c2"/>
+        <Field Comment="Контроль основного питания САУ ГПА ~220 В" Name="Chk_AC220_SAU" Type="94C521C642227325371AE7BCC363E527" UUID="baaa8882a6cf40bda87920fcbf0cd625"/>
+        <Field Comment="Контроль резервного питания САУ ГПА =220 В" Name="Chk_DC220_SAU" Type="94C521C642227325371AE7BCC363E527" UUID="eceea6d6be4f4efaa5f72b6ef78a4616"/>
+        <Field Comment="Контроль питания БУШД-М1 ~220 В" Name="Chk_AC220_BUSD" Type="94C521C642227325371AE7BCC363E527" UUID="7b672d13fe4941b0a0d4534e9c4d146f"/>
+        <Field Comment="Контроль питания кранов =220В" Name="Chk_DC220_Kr" Type="94C521C642227325371AE7BCC363E527" UUID="04241bb611d14f1b9d03f4946e265f27"/>
+        <Field Comment="Контроль основного питания БЭАО ~220 В" Name="Chk_AC220_BEO" Type="94C521C642227325371AE7BCC363E527" UUID="e61b13ddd83341258788192d1e714e30"/>
+        <Field Comment="Контроль резервного питания БЭАО =220 В" Name="Chk_DC220_BEO" Type="94C521C642227325371AE7BCC363E527" UUID="4da85675d9174e2db8538448158048f7"/>
+        <Field Comment="Контроль исправности разрядников" Name="Chk_razr" Type="94C521C642227325371AE7BCC363E527" UUID="b1d0549030bd40b58a9d08987ec37d14"/>
+        <Field Comment="Контроль питания кранов №1,2,4 =24В" Name="Chk_DC24_Kr124" Type="94C521C642227325371AE7BCC363E527" UUID="f4135207b2b4449ca6120cf4bc520e5c"/>
+        <Field Comment="Контроль питания кранов №5,6,9 =24В" Name="Chk_DC24_Kr569" Type="94C521C642227325371AE7BCC363E527" UUID="ce2257850a2542efb080f5908e3eeaf4"/>
+        <Field Comment="Контроль питания крана №12" Name="Chk_DC24_Kr12" Type="94C521C642227325371AE7BCC363E527" UUID="d806d0c6e46d436a8bacb29dea7514f2"/>
+        <Field Comment="Контроль питания терминальных панелей АI" Name="Chk_U_TPAI" Type="94C521C642227325371AE7BCC363E527" UUID="1ab53b2b803c424eace8896078b602b0"/>
+        <Field Comment="Диагностика питания ADI" Name="Chk_U_TPDI" Type="94C521C642227325371AE7BCC363E527" UUID="570354e31a1d43c687e353a9273ec93f"/>
+        <Field Comment="Исправность основного ИП =24В БЭАО, РПКУ" Name="DC24osn_PRU_ok" Type="94C521C642227325371AE7BCC363E527" UUID="05bf7ddac4564dd58ef463d30d191990"/>
+        <Field Comment="Исправность резервного ИП =24В БЭАО, РПКУ" Name="DC24rez_PRU_ok" Type="94C521C642227325371AE7BCC363E527" UUID="5144d08eebfa4eef9a73e918841f3367"/>
+        <Field Comment="Исправность основного ИП =24В внутренних устройств" Name="DC24osn_Int_ok" Type="94C521C642227325371AE7BCC363E527" UUID="72abb002265b475290d479b270794501"/>
+        <Field Comment="Исправность резервного ИП =24В внутренних устройств" Name="DC24rez_Int_ok" Type="94C521C642227325371AE7BCC363E527" UUID="a812cbbd2431427385c2e5405b3476e4"/>
+        <Field Comment="Исправность основного ИП =24В аналоговых входов" Name="DC24osn_AI_ok" Type="94C521C642227325371AE7BCC363E527" UUID="c53d036ac7cf454c98c71d8e4f9c27fb"/>
+        <Field Comment="Исправность резервного ИП =24В аналоговых входов" Name="DC24rez_AI_ok" Type="94C521C642227325371AE7BCC363E527" UUID="6393fd603e074c96acff298609813fd0"/>
+        <Field Comment="Исправность основного ИП =24В дискретных входов" Name="DC24osn_DI_ok" Type="94C521C642227325371AE7BCC363E527" UUID="6a49c7907c964a44a4aa4d27903aff8d"/>
+        <Field Comment="Исправность резервного ИП =24В дискретных входов" Name="DC24rez_DI_ok" Type="94C521C642227325371AE7BCC363E527" UUID="55516edbbc1c4abca27bbca47407e946"/>
+        <Field Comment="Исправность основного ИП =24В внешних устройств" Name="DC24osn_Ext_ok" Type="94C521C642227325371AE7BCC363E527" UUID="437f20fc6d364f38b06b8a129bc56ead"/>
+        <Field Comment="Исправность резервного ИП =24В внешних устройств" Name="DC24rez_Ext_ok" Type="94C521C642227325371AE7BCC363E527" UUID="dbeca813094b453b927e76ef9fda3272"/>
+        <Field Comment="Исправность основного ИП =24В дискретных выходов" Name="DC24osn_DO_ok" Type="94C521C642227325371AE7BCC363E527" UUID="1243a8afa1f64c2db67244837a0aaeb3"/>
+        <Field Comment="Исправность резервного ИП =24В дискретных выходов" Name="DC24rez_DO_ok" Type="94C521C642227325371AE7BCC363E527" UUID="9025673f13ee4321afccb61efebabd44"/>
+        <Field Comment="Резерв (не подкл)" Name="Res_36" Type="94C521C642227325371AE7BCC363E527" UUID="48f6c4e393194e699ae5e9d82fba21e5"/>
+        <Field Comment="Резерв (не подкл)" Name="Res_37" Type="94C521C642227325371AE7BCC363E527" UUID="28bfc922c0f44e97b380ba4b0b0f8fd3"/>
+        <Field Comment="Автоматы питания включены" Name="QF_ON" Type="94C521C642227325371AE7BCC363E527" UUID="724cf5e82c814d6d9124fdc147a33bd6"/>
+        <Field Comment="Двери шкафа закрыты" Name="Dver_PLC_close" Type="94C521C642227325371AE7BCC363E527" UUID="6a09c94265a44f0aacf23103f7710ae2"/>
+        <Field Comment="Диагностика питания ADO" Name="Chk_U_TPDO" Type="94C521C642227325371AE7BCC363E527" UUID="268db934c346432e95c3e379c72eb9f3"/>
+        <Field Comment="Контроль исправности ФУС" Name="Chk_FUS" Type="94C521C642227325371AE7BCC363E527" UUID="c198851512bf43f0b0a7cab2f5c08643"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №4 компрессора КЦУ" Name="Reg_C4_N_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="af62ac7c3a6b465f8bfe4a1ceb6d2819"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №5 компрессора КЦУ" Name="Reg_C5_N_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="61c31a7b7f234115b320067f140e48b8"/>
+        <Field Comment="Закрыть регулятор производительности цилиндра №6 компрессора КЦУ" Name="Reg_C6_N_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="79f40c5eabc94d68879f4a778436d981"/>
+        <Field Comment="Разблокировать ЭС КЦУ" Name="Unlock_ES_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="95deb2332fa64e61b2fa9d16e442dd98"/>
+        <Field Comment="Включить ЭС КЦУ" Name="ES_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="2f29b40ef7734fc686a19bf1d9a9b221"/>
+        <Field Comment="Включить ЭМ открытия клапана ОГК1 КЦУ" Name="SK_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="6b9838b887d84184a6b668bef7d8c278"/>
+        <Field Comment="Открыть клапан  подвода газа к воспламенителям КЦУ" Name="POK_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="5216a03d1d344acf9974f0d2ea4c7e75"/>
+        <Field Comment="Включить СПВ КЦУ" Name="SPV_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="6905210fe123492e8b36fac2647b0892"/>
+        <Field Comment="Открыть ЗПВ1 КЦУ" Name="ZsPV_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="f8ef4d45b1574fc2a62182e0778dc824"/>
+        <Field Comment="Резерв" Name="Res_48" Type="94C521C642227325371AE7BCC363E527" UUID="0e9ed9bb1eda41b3b432c6354b9d20ec"/>
+        <Field Comment="Резерв" Name="Res_49" Type="94C521C642227325371AE7BCC363E527" UUID="185d4f536c2d415581fb052b8aa43e0c"/>
+        <Field Comment="Резерв" Name="Res_50" Type="94C521C642227325371AE7BCC363E527" UUID="1925c51542974721a858c7c99298cd96"/>
+        <Field Comment="Резерв" Name="Res_51" Type="94C521C642227325371AE7BCC363E527" UUID="0ffc6cb4a6254c1f8125ccd174c853a1"/>
+        <Field Comment="Резерв" Name="Res_52" Type="94C521C642227325371AE7BCC363E527" UUID="e1e78991b65644e9ae3b04d8261b1585"/>
+        <Field Comment="Резерв" Name="Res_53" Type="94C521C642227325371AE7BCC363E527" UUID="a95c4565eb8d48e7b65efd99db4736c5"/>
+        <Field Comment="Резерв" Name="Res_54" Type="94C521C642227325371AE7BCC363E527" UUID="e533316edaef424b966cf3e1e2465126"/>
+        <Field Comment="Резерв" Name="Res_55" Type="94C521C642227325371AE7BCC363E527" UUID="41cd0e82d3c743c0b61cfcb2fefd296d"/>
+        <Field Comment="Закрыть кран Кр6 КЦУ" Name="Kr6_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="092b2a4419fe4a08addf5ef133b41b50"/>
+        <Field Comment="Открыть кран Кр6 КЦУ" Name="Kr6_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="493561ef83c94e0586472bddefd08a07"/>
+        <Field Comment="Закрыть кран Кр9 КЦУ" Name="Kr9_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="245f9d4363374fe780a919c1945018d7"/>
+        <Field Comment="Открыть кран Кр9 КЦУ" Name="Kr9_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="0cfc32ccf6a74d798d3f819236706e60"/>
+        <Field Comment="Закрыть кран Кр12 КЦУ" Name="Kr12_OF_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="f697c87ed494455c958419fb29acdfab"/>
+        <Field Comment="Открыть кран Кр12 КЦУ" Name="Kr12_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="0d78330da75945e68bb792bbefa6e9cf"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_56" Type="94C521C642227325371AE7BCC363E527" UUID="d42a08973d66441caecc81324d6faa7e"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_57" Type="94C521C642227325371AE7BCC363E527" UUID="8dfe55aab82d4a95b594cfb8436a2695"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_58" Type="94C521C642227325371AE7BCC363E527" UUID="321135bca17c4cf4ba072ee4ff60c48f"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_59" Type="94C521C642227325371AE7BCC363E527" UUID="4061e3ff861245758e1b9dbcc069ae44"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_60" Type="94C521C642227325371AE7BCC363E527" UUID="65c03fb43b9b432ebf82f4f16209fa4b"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_61" Type="94C521C642227325371AE7BCC363E527" UUID="55c1676dd7ff427f8773d912a89b2ff3"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_62" Type="94C521C642227325371AE7BCC363E527" UUID="4817e942630440e2b719d70928de7bb4"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_63" Type="94C521C642227325371AE7BCC363E527" UUID="5efb4978baa54431a6b57fe197065ae4"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_64" Type="94C521C642227325371AE7BCC363E527" UUID="e0924682caf24b448c6cd2c4ac9b927b"/>
+        <Field Comment="Подать питание СПВ КЦУ" Name="SPV_U_En_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="0789a06080f646faa40cb9850d46da69"/>
+        <Field Comment="Включить насос смазки пусковой ГТД КЦУ" Name="PNSD_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="718404f0de084a94934645db64af59d3"/>
+        <Field Comment="Включить эл. насос предпусковой прокачки масла (НПМ) редуктора КЦУ" Name="PNSR_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="dfcf1ee3b96841cdada5d285e66d40ae"/>
+        <Field Comment="Включить пусковой насос НППМК компрессора КЦУ" Name="PNSN_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="d35545e62545465cbe22f956e9dca0ce"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-1) КЦУ" Name="KE3_1_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="c5a4a07d06b745afb44427d09fe72dee"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-2) КЦУ" Name="KE3_2_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="27fa1c55f26b438f97b0dde7e6f74dcc"/>
+        <Field Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-3) КЦУ" Name="KE3_3_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="6491767d721d4e1ab07f1b34676f5ac3"/>
+        <Field Comment="Открыть клапан шаровой с электроприводом КШЭ5 КЦУ" Name="KE5_ON_KCU" Type="94C521C642227325371AE7BCC363E527" UUID="e952dc361fe843afacba3e16ee594c05"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_65" Type="94C521C642227325371AE7BCC363E527" UUID="d4cdf4c90f7b4fcc8f6605f457828eb3"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_66" Type="94C521C642227325371AE7BCC363E527" UUID="ddad5034d87d469d95e58ffed370b4bf"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_67" Type="94C521C642227325371AE7BCC363E527" UUID="52b5e54ad7124b3fb55e48c56c41fab8"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_68" Type="94C521C642227325371AE7BCC363E527" UUID="10a185898b6e403da0ec4c0f966ec4e3"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_69" Type="94C521C642227325371AE7BCC363E527" UUID="8a8bc7b36edb4778b3b87915408c8552"/>
+        <Field Comment="Резерв КЦУ" Name="Res_KCU_70" Type="94C521C642227325371AE7BCC363E527" UUID="67cf95261b264c3a8d5e07becf646dd3"/>
+        <Field Comment="Резерв КЦУ" Name="Res_38" Type="94C521C642227325371AE7BCC363E527" UUID="9c975b994e3441a5a6d712e7492e2c12"/>
+        <Field Comment="Резерв КЦУ" Name="Res_39" Type="94C521C642227325371AE7BCC363E527" UUID="43949ef78e594dd9bcc6420655823814"/>
+        <Field Comment="Кнопка НО на ПРУ" Name="Kn_NO_PRU" Type="94C521C642227325371AE7BCC363E527" UUID="e03878ebe5864a52989b48e020fc1111"/>
+        <Field Comment="Кнопка ЭО на ПРУ" Name="Kn_EO_PRU" Type="94C521C642227325371AE7BCC363E527" UUID="201db69834b84520b91bd2982b240621"/>
+        <Field Comment="Кнопка ЭО на ПРУ КЦД" Name="Kn_EO_PRU_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="50478a536a494615b79453faef297ea6"/>
+        <Field Comment="Кнопка АО на ПРУ" Name="Kn_AO_PRU" Type="94C521C642227325371AE7BCC363E527" UUID="7059271b0cb84771b4f15890bde63973"/>
+        <Field Comment="Кнопка АО на ПРУ КЦД" Name="Kn_AO_PRU_KCD" Type="94C521C642227325371AE7BCC363E527" UUID="1f8377e7fa364b70b744898571105779"/>
+        <Field Comment="Кнопка Квитирование на ПРУ" Name="Kn_Quit" Type="94C521C642227325371AE7BCC363E527" UUID="b796a2137aec41c2a8aee5785e90af63"/>
+        <Field Comment="БЭО работает" Name="BEO_Work" Type="94C521C642227325371AE7BCC363E527" UUID="cca81daa42b7476290bf5f58d9b4b557"/>
+        <Field Comment="Готовность БЭО" Name="BEO_Rdy" Type="94C521C642227325371AE7BCC363E527" UUID="07094989bcd64708948da2d2a5a9d224"/>
+        <Field Comment="Аварийная частота вращения ротора КВД (канал 3) от БЗРТ" Name="N_TK_BZRT_av" Type="94C521C642227325371AE7BCC363E527" UUID="c9f6c7747b734f4d8f40959eba18de49"/>
+        <Field Comment="Аварийная частота вращения ротора КНД (канал 2) от БЗРТ" Name="N_ST_BZRT_av" Type="94C521C642227325371AE7BCC363E527" UUID="ef98f889d3184630ac68ae043ad52c6a"/>
+        <Field Comment="Температура 3 газа за турбиной компрессора" Name="T_outGG_av" Type="94C521C642227325371AE7BCC363E527" UUID="fde0035b0bda488bb0f2e23745174218"/>
+        <Field Comment="Резерв КЦУ" Name="Res_40" Type="94C521C642227325371AE7BCC363E527" UUID="0ff2d4eb9e8843a08f8979389e41d87d"/>
+        <Field Comment="Резерв КЦУ" Name="Res_41" Type="94C521C642227325371AE7BCC363E527" UUID="bfe9b85ed90e4a5e93f130d5e4e4891c"/>
+        <Field Comment="Резерв КЦУ" Name="Res_42" Type="94C521C642227325371AE7BCC363E527" UUID="8d109fa7547a4826a323bd388704df04"/>
+        <Field Comment="Резерв КЦУ" Name="Res_43" Type="94C521C642227325371AE7BCC363E527" UUID="6fd17c5a0e0b4569a7efb7950d111f03"/>
+        <Field Comment="Резерв КЦУ" Name="Res_44" Type="94C521C642227325371AE7BCC363E527" UUID="acbbe7e47a7b4912a9c5b69e935da02f"/>
+    </Fields>
+</Type>
