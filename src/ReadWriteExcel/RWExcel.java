@@ -827,6 +827,7 @@ public class RWExcel {
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
         if(wb == null) return -1;
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
+        boolean isError = false;
         for(Node n : nList){
             String tableName = n.getNodeName();
             String exSheetName = globVar.sax.getDataAttr(n, "excelSheetName");
@@ -876,6 +877,7 @@ public class RWExcel {
                             String def = globVar.sax.getDataAttr(col,"default");
                             if(def == null){
                                 FileManager.loggerConstructor("В ячейке "+colExName+i+" должно быть значение");
+                                isError = true;
                                 dataFromExcel[i][colCnt]="";
                             }else{
                                 dataFromExcel[i][colCnt]=def;
@@ -886,6 +888,7 @@ public class RWExcel {
                                 for(int j=0; j < i; j++){
                                     if(strCell.equals(dataFromExcel[j][colCnt])){
                                         FileManager.loggerConstructor("Одинаковые значения \"" +strCell+ "\" в ячейках " + colExName+(j+1)+" и " + colExName+i);
+                                        isError = true;
                                     }
                                 }
                             }
@@ -902,6 +905,7 @@ public class RWExcel {
                 }
             }
         }
+    if(isError) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
     return 0;
     }
 }

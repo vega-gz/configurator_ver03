@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
-    <Settings>
-        <USER>mutonar</USER>
-        <URL>jdbc:postgresql://minoro.ru:5432/</URL>
-        <!--URL>jdbc:postgresql://127.0.0.1:5432/</URL-->
-        <BASE>kln_kc</BASE>
-        <!--BASE>KaliningradKC</BASE-->
-        <BASE1>pravoslav</BASE1>
-        <DesignDir>D:\Projects\Калининград_цех</DesignDir>
-        <nameProject>Калининград_цех</nameProject>
-        <PASS>Solovin2</PASS>
-    </Settings>
+<Settings>
+<USER>mutonar</USER>
+<URL>jdbc:postgresql://minoro.ru:5432/</URL>
+<!--URL>jdbc:postgresql://127.0.0.1:5432/</URL-->
+<BASE>kln_kc</BASE>
+<!--BASE>KaliningradKC</BASE-->
+<BASE1>pravoslav</BASE1>
+<DesignDir>/home/ad/Документы по работе</DesignDir>
+<nameProject>Калининград_цех</nameProject>
+<PASS>Solovin2</PASS>
+</Settings>
 </config>

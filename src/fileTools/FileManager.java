@@ -54,11 +54,11 @@ public class FileManager {
     public boolean EOF;
 
     // --- копирование файла используя поток ---
-    public static void copyFileWoReplace(String source, String dest, boolean notCopyFile) throws IOException {
+    public static int copyFileWoReplace(String source, String dest, boolean notCopyFile) throws IOException {
         File copy = new File(dest);
-        if(copy.isFile()){
-            if(notCopyFile) return;
-            for(int i = 1; copy.isFile(); i++){
+        if(copy.isFile()){//Проверяем, есть ли такой файл в целевом каталоге
+            if(notCopyFile) return 1; //Если есть и есть признак "не размножать копии" заканчиваем работу
+            for(int i = 1; copy.isFile(); i++){ //Если признака нет - создаём копию с номером версии
                 dest = dest + "(" + i + ")";
                 copy = new File(dest);
             }
@@ -74,9 +74,12 @@ public class FileManager {
                 os.write(buffer, 0, length);
             }
         } finally {
+            if(is == null) return 2;
+            if(os == null) return 3;
             is.close();
             os.close();
         }
+        return 0;
     }
     public void copyFile(String source, String dest) throws IOException {
         InputStream is = null;

@@ -47,7 +47,7 @@
 			<!--File name="AI_CallAll.txt"-->
 				<Function name="AI_init">
 					<arguments>
-						<arg><abonent/><text t="AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
 						<arg><dbd t="АЦП"/></arg>
@@ -66,11 +66,11 @@
 				</Function>
 				<Function name="AI_Processing">
 					<arguments>
-						<arg><abonent/><text t="AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
@@ -135,7 +135,7 @@
 			<!--File name="A_Algorithm.iec_st"-->
 				<Function name="AO_init">
 					<arguments>
-						<arg><abonent/><text t="AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
 						<arg><dbd t="АЦПмин"/></arg>
@@ -146,18 +146,30 @@
 				</Function>
 				<Function name="AO_Processing">
 					<arguments>
-						<arg><abonent/><text t="AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
 			<!--/File-->
 		</GenCode>
+		<GenHMI>
+			<File name="AT_HMI.iec_hmi">
+				<Folder Name="05.Signals" Comment="" Data=""/>
+				<GraphicsCompositeFBType Name="S_AO_" UUID="DB9F84D34D30613F6823FCA380000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
+				<FB Name="BaseAnOut_" Type="BaseAnOut" TypeUUID="CDB0D9974B89FB4417F2139064F22857"/>
+				<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
+				<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="21"/>
+				<additionalVar>
+					<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+				</additionalVar>
+			</File>
+		</GenHMI>
 	</AnO>
 	<DGI excelSheetName="DGI" Comment="Дискретные входы">
 		<GenData>
-			<DI_DRV Type="BOOL"/>
+			<DI Type="BOOL"/>
 			<DI_Settings/>
 			<DI_FromHMI/>
 			<DI_ToHMI/>
@@ -180,7 +192,7 @@
 			<!--File name="DI_CallAll.txt"-->
 				<Function name="DI_init">
 					<arguments>
-						<arg><abonent/><text t="DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t="repTime"/></arg>
 						<arg><dbd t="Задержка"/></arg>
 						<arg><dbd t="Инверсия"/></arg>
@@ -190,11 +202,11 @@
 				</Function>
 				<Function name="DI_Processing">
 					<arguments>
-						<arg><abonent/><text t="DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
@@ -203,6 +215,7 @@
 	</DGI>
 	<DGO excelSheetName="DGO" Comment="Дискретные выходы">
 		<GenData>
+			<DO Type="BOOL"/>
 			<DO_FromHMI/>
 			<DO_ToHMI/>
 		</GenData>	
@@ -221,8 +234,8 @@
 			<!--File name="A_Algorithm.iec_st"-->
 				<Function name="DO_Processing">
 					<arguments>
-						<arg><abonent/><text t="DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>

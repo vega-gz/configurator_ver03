@@ -68,7 +68,7 @@ public class XMLSAX {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         //factory.setValidating(true);
-        factory.setIgnoringElementContentWhitespace(true);
+        //factory.setIgnoringElementContentWhitespace(true);
         List<String> lines; // Лист с прочитанным файлом
         boolean findErr = false; // если попали в ексепшен и дробим нашим парсером
         try {

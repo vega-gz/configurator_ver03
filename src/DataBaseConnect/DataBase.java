@@ -551,7 +551,7 @@ public class DataBase {
         ArrayList<String[]> selectData = new ArrayList<>();
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM " + table + ";");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM " + "\"" + table + "\"" + ";");
             while (rs.next()) {
                 String TypeADC = rs.getString("Tag name"); // должы выбирать
                 String id = rs.getString("uuid_plc");
@@ -677,7 +677,7 @@ public class DataBase {
             case "ai":
                 try {
                     stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                       //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
@@ -710,7 +710,7 @@ public class DataBase {
             case "ao":
                 try {
                     stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                        // String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
@@ -738,7 +738,7 @@ public class DataBase {
             case "dgo":
                 try {
                     stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                       //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
@@ -763,7 +763,7 @@ public class DataBase {
             case "di":
                 try {
                     stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + table + ";");
+                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
                     while (rs.next()) {
                         String TypeADC = rs.getString("TAG_NAME_PLC");
                       //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
@@ -862,7 +862,7 @@ public class DataBase {
     public void createCommentTable(String table, String comment){
         String sql = null;   
         try {
-            sql = "COMMENT ON TABLE  " + "\"" +table + "\"" + " IS " +"'" +comment +"'" +";";
+            sql = "COMMENT ON TABLE  " + "\"" + table + "\"" + " IS " +"'" +comment +"'" +";";
             //System.out.println(sql);
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
@@ -900,7 +900,7 @@ public class DataBase {
         int requestr = 0;
         try {
             connection.setAutoCommit(true);
-            String sql = "DELETE FROM " + table + " WHERE " ;
+            String sql = "DELETE FROM " + "\"" + table + "\"" + " WHERE " ;
             // Формируем условие запроса из столбцов и данных
             int lastValue = 1; // с первого так как размер не с нуля
              for(Map.Entry<String, String> entry : mapDataRow.entrySet()) {               

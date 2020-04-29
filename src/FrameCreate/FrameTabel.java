@@ -211,7 +211,7 @@ public class FrameTabel extends javax.swing.JPanel {
         String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
         globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
         new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
-        int retST = 1;
+        int retST = 0;
         int retTy = 1;
         try {
             retTy = Generator.GenTypeFile(this);
@@ -220,6 +220,7 @@ public class FrameTabel extends javax.swing.JPanel {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(retST == 0 && retTy ==0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+        else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
     }//GEN-LAST:event_jButton2ActionPerformed
 
         // --- Временная кнопка для преобразования файлов type ---

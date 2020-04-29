@@ -20,92 +20,101 @@ import org.w3c.dom.NodeList;
 public class Generator {
     @SuppressWarnings("empty-statement")
     
-    public static int genSTcode(FrameTabel ft) throws IOException{
+    public static int genSTcode(FrameTabel ft) throws IOException{ //0 -ok, 1 - not source file, 2 -impossible create file
         String backUpPath = globVar.backupDir;   //установили путь для бэкапа
         FileManager fm = new FileManager();                                 //создали менеджер файлов
         //XMLSAX configSig = new XMLSAX();                                    //создали менеджер для ХМЛ
-        String tmpFile = "";
         //---------------------------------------------- найти ноду с именем таблицы в файле конфигурации, и в этой ноде ноду GenData
-        Node nodeGenCode = globVar.sax.returnFirstFinedNode(globVar.sax.returnFirstFinedNode(globVar.cfgRoot, ft.tableName()), "GenCode");
+        String nodeTable = ft.tableName();
+        int x = nodeTable.indexOf("_");
+        String abonent = nodeTable.substring(0,x);
+        nodeTable = nodeTable.substring(x+1);
+        
+        Node nodeGenCode = globVar.sax.returnFirstFinedNode(globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable), "GenCode");
         if(nodeGenCode == null )return 0;
-        ArrayList<Node> stFiles = globVar.sax.getHeirNode(nodeGenCode);      //Создали список файлов для генерации.
-        for(Node stFile : stFiles){                                         //Перебираем файлы
-            String stFileName = (String) globVar.sax.getDataNode(stFile).get("name"); //Для каждого файла
-            //Сохраняем бэкапную копию. Если в текущем бэкапном каталоге уже есть такой файл - оставляем его
-            String srcFile = globVar.desDir + File.separator + "Design" + File.separator + stFileName;
-            tmpFile = globVar.desDir + File.separator + "Design" + File.separator + stFileName + "_tmp";
-            
-            fm.copyFileWoReplace(srcFile, backUpPath + File.separator + stFileName, true);                    //создаём резервную копию
-            int ret = fm.openFile4read(globVar.desDir + File.separator + "Design", stFileName);         //открываем её на чтенье
-            if(ret!=0){
-                FileManager.loggerConstructor("Не удалось прочитать файл \"" + srcFile + "\"");
-                break;
-            }
-            ret = fm.createFile2write(globVar.desDir + File.separator + "Design", stFileName + "_tmp"); //открываем файл на запись
-            if(ret!=0){
-                FileManager.loggerConstructor("Не удалось создать файл \"" + tmpFile + "\"");
-                break;
-            }
-            ArrayList<Node> funclist = globVar.sax.getHeirNode(stFile);      //Создали список функций для генерации. Каждую функцию надо сгенерить по числу строк в таблице
-            for(Node genSTnode : funclist){                                 //перебираем функции
-                String stFunc = (String) globVar.sax.getDataNode(genSTnode).get("name");  //вычитываем её имя
-                int casedial = JOptionPane.showConfirmDialog(null, "Функции " + stFunc + " генерировать?"); // сообщение с выбором
-                if(casedial == 0){ //0 - yes, 1 - no, 2 - cancel
-                    Node args = globVar.sax.returnFirstFinedNode(genSTnode, "arguments");     //Находим ноду с аргументами
-                    ArrayList<Node> arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
-                    String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
-                    while(!fm.EOF && !s.contains(stFunc)){
-                        fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
-                        s = fm.rd();
-                    }
-                    if(s.contains("<![CDATA[")){
-                        int end = s.indexOf("<![CDATA[") + 9;
-                        fm.wr(s.substring(0,end) + "\n");
-                    }
-                    String funcCall = stFunc + "(";                                 //Начинаем генерацию вызова функции
-                    for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
-                        for(Node arg : arglist){                                        //Цикл по всем аргументам функции
-                            ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
-                            for(Node argPart : argParts){                                   //Цикл по всем частям аргументов - текстовым и табличным
-                                if("text".equals(argPart.getNodeName())) funcCall += (String) globVar.sax.getDataNode(argPart).get("t");
-                                else if("dbd".equals(argPart.getNodeName())) funcCall += (String) ft.getCell((String) globVar.sax.getDataNode(argPart).get("t"),j);
-                                else if("npp".equals(argPart.getNodeName())) funcCall += j;
-                            }
-                            funcCall += ",";                                                //аргумент записан и отделён от следующего запятой
-                        }                                                   //Убираем лишнюю запятую в конце
-                        funcCall = funcCall.substring(0, funcCall.length()-1) + ");//" + (String) ft.getCell("Наименование", j);
-                        fm.wr(funcCall + "\n");                             //записываем вызов функции в файл
-                        funcCall = stFunc + "(";                            // подготавливаем следующую строку
-                    }
-                    //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
-                    while(!fm.EOF  && (s.contains(stFunc) || s.trim().isEmpty())&& !s.contains("]]></ST>")) s = fm.rd(); 
-                    if(!fm.EOF && s.contains("]]></ST>") && s.contains(stFunc)){    //если оказалось, что мы пропустили конец всей функции
-                        fm.wr("]]></ST>\n");                                        //восстанавливаем его
-                        s = fm.rd();
-                    }
-                    while(!fm.EOF){                                                 //дописываем хвост файла
-                        fm.wr(s + "\n");                          
-                        s = fm.rd();
-                    }
-                    fm.rdStream.close();                                       //закрываем поток чтения
-                    fm.wrStream.close();                                       //закрываем поток записи
-                    File file = new File(srcFile);                             //создаём ссылку на исходный файл
-                    file.delete();                                             //удаляем его
-                    new File(tmpFile).renameTo(file);                          //создаём ссылку на сгенерированный файл и делаем его исходным
-                    fm.openFile4read(globVar.desDir + File.separator + "Design", stFileName);              //открываем его на чтенье
-                    fm.createFile2write(globVar.desDir + File.separator + "Design", stFileName + "_tmp");  //открываем временный файл для генерации
-                }else if(casedial != 1) return -2; //0 - yes, 1 - no, 2 - cancel
-            }
-            fm.rdStream.close();
-            fm.wrStream.close();
+        //ArrayList<Node> stFiles = globVar.sax.getHeirNode(nodeGenCode);      //Создали список файлов для генерации.
+        //for(Node stFile : stFiles){                                         //Перебираем файлы
+        String stFileName = abonent + "_" + nodeTable + "_CallAll.txt";//(String) globVar.sax.getDataNode(stFile).get("name"); //Для каждого файла
+        //Сохраняем бэкапную копию. Если в текущем бэкапном каталоге уже есть такой файл - оставляем его
+        String srcFile = globVar.desDir + File.separator + "Design" + File.separator + stFileName;
+        String tmpFile = globVar.desDir + File.separator + "Design" + File.separator + stFileName + "_tmp";
+
+        int ret = fm.copyFileWoReplace(srcFile, backUpPath + File.separator + stFileName, true);                    //создаём резервную копию
+        if(ret==2){ //Функция копирования не нашла исходного файла
+            FileManager.loggerConstructor("Не удалось прочитать файл \"" + srcFile + "\"");
+            return 1;
         }
+        ret = fm.openFile4read(globVar.desDir + File.separator + "Design", stFileName);         //открываем её на чтенье
+        ret = fm.createFile2write(globVar.desDir + File.separator + "Design", stFileName + "_tmp"); //открываем файл на запись
+        if(ret!=0){
+            FileManager.loggerConstructor("Не удалось создать файл \"" + tmpFile + "\"");
+            return 2;
+        }
+        ArrayList<Node> funclist = globVar.sax.getHeirNode(nodeGenCode);      //Создали список функций для генерации. Каждую функцию надо сгенерить по числу строк в таблице
+        for(Node genSTnode : funclist){                                 //перебираем функции
+            String stFunc = (String) globVar.sax.getDataNode(genSTnode).get("name");  //вычитываем её имя
+            int casedial = JOptionPane.showConfirmDialog(null, "Функции " + stFunc + " генерировать?"); // сообщение с выбором
+            if(casedial == 0){ //0 - yes, 1 - no, 2 - cancel
+                Node args = globVar.sax.returnFirstFinedNode(genSTnode, "arguments");     //Находим ноду с аргументами
+                ArrayList<Node> arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
+                String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
+                while(!fm.EOF && !s.contains(stFunc)){
+                    fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
+                    s = fm.rd();
+                }
+                if(s.contains("<![CDATA[")){
+                    int end = s.indexOf("<![CDATA[") + 9;
+                    fm.wr(s.substring(0,end) + "\n");
+                }
+                String funcCall = stFunc + "(";                                 //Начинаем генерацию вызова функции
+                for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
+                    for(Node arg : arglist){                                        //Цикл по всем аргументам функции
+                        ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
+                        for(Node argPart : argParts){                                   //Цикл по всем частям аргументов - текстовым и табличным
+                            if("text".equals(argPart.getNodeName())) funcCall += (String) globVar.sax.getDataNode(argPart).get("t");
+                            else if("dbd".equals(argPart.getNodeName())) funcCall += (String) ft.getCell((String) globVar.sax.getDataNode(argPart).get("t"),j);
+                            else if("npp".equals(argPart.getNodeName())) funcCall += j;
+                            else if("abonent".equals(argPart.getNodeName())) funcCall += abonent;
+                        }
+                        funcCall = "," + funcCall;                                                //аргумент записан и отделён от следующего запятой
+                    }                                                   //Убираем лишнюю запятую в конце
+                    funcCall = "//" + (String) ft.getCell("Наименование", j)+ "\n" + 
+                                funcCall.substring(1) + ");";
+                    fm.wr(funcCall + "\n");                             //записываем вызов функции в файл
+                    funcCall = stFunc + "(";                            // подготавливаем следующую строку
+                }
+                //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
+                while(!fm.EOF  && 
+                      (s.contains(stFunc) || s.trim().isEmpty() || "//".equals(s.trim().substring(0,2)))&& 
+                      !s.contains("]]></ST>")) 
+                    s = fm.rd(); 
+                if(!fm.EOF && s.contains("]]></ST>") && s.contains(stFunc)){    //если оказалось, что мы пропустили конец всей функции
+                    fm.wr("]]></ST>\n");                                        //восстанавливаем его
+                    s = fm.rd();
+                }
+                while(!fm.EOF){                                                 //дописываем хвост файла
+                    fm.wr(s + "\n");                          
+                    s = fm.rd();
+                }
+                fm.rdStream.close();                                       //закрываем поток чтения
+                fm.wrStream.close();                                       //закрываем поток записи
+                File file = new File(srcFile);                             //создаём ссылку на исходный файл
+                file.delete();                                             //удаляем его
+                new File(tmpFile).renameTo(file);                          //создаём ссылку на сгенерированный файл и делаем его исходным
+                fm.openFile4read(globVar.desDir + File.separator + "Design", stFileName);              //открываем его на чтенье
+                fm.createFile2write(globVar.desDir + File.separator + "Design", stFileName + "_tmp");  //открываем временный файл для генерации
+            }else if(casedial != 1) return -2; //0 - yes, 1 - no, 2 - cancel
+        }
+        fm.rdStream.close();
+        fm.wrStream.close();
+       // }
         new File(tmpFile).delete();                          //создаём ссылку на сгенерированный файл и делаем его исходным
         return 0;
     }
 
     public static int GenTypeFile(FrameTabel ft) throws IOException {//0-norm, -1 - not find node
-        //int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
-        //if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
+        int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
+        if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
         String backUpPath = globVar.backupDir;   //установили путь для бэкапа
         String filePath = globVar.desDir + File.separator + "Design";
         String nodeTable = ft.tableName();
