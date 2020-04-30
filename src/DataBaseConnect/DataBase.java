@@ -988,19 +988,6 @@ public class DataBase {
         if(StrTools.searchInList("Abonents", list_table_base)< 0) return null;
         return globVar.DB.getData("Abonents");
     }
-    public static void updateAbList(JComboBox x){ //обновление комбобокса согласно списку абонентов из базы
-        ArrayList<String[]> abList = getAbonentArray();
-        String[] itemList  = {""};
-        if(abList != null && !abList.isEmpty()){
-            itemList = new String[abList.size()];
-            for(int i = 0; i < abList.size(); i++) {
-                itemList[i] = abList.get(i)[1];
-            }
-        }
-        ComboBoxModel cbm = new DefaultComboBoxModel(itemList);
-        x.setModel(cbm);        
-    }
-
 
 //    
 //    public static void main(String[] arg){

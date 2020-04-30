@@ -24,6 +24,7 @@ public class Main {
 
     public static void main(String[] args) {
         //workbase.connectionToBase();
+        globVar.DB = DataBase.getInstance();
         globVar.sax = new XMLSAX(); // Класс работы с XML  static что бы не парится
         globVar.cfgRoot = globVar.sax.readDocument("ConfigSignals.xml");
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -34,7 +35,6 @@ public class Main {
     }
 
     Main() {
-        //workbase.connectionToBase();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;

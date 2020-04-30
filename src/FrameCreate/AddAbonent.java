@@ -2,6 +2,9 @@ package FrameCreate;
 
 import DataBaseConnect.DataBase;
 import globalData.globVar;
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 //import javax.swing.JOptionPane;
 
@@ -115,7 +118,8 @@ public class AddAbonent extends javax.swing.JFrame {
         String[] colNames = {"Abonent","Наименование","Path_to_Excel"};
         String[] row1 = {jTextField3.getText(),jTextField2.getText(),jTextField5.getText()};
         globVar.DB.insertRows("Abonents", row1, colNames);
-        DataBase.updateAbList(abComboBox);
+        //DataBase.updateAbList(abComboBox);
+        abComboBox.setModel(getComboBoxModelAbonents());
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -161,6 +165,19 @@ public class AddAbonent extends javax.swing.JFrame {
                 new AddAbonent().setVisible(true);
             }
         });
+    }
+    
+    public ComboBoxModel getComboBoxModelAbonents(){ // создания списка абонентов
+        if(globVar.DB==null) return null;
+        ArrayList<String[]> abList = globVar.DB.getAbonentArray();
+        String[] itemList  = {""};
+        if(abList != null && !abList.isEmpty()){
+            itemList = new String[abList.size()];
+            for(int i = 0; i < abList.size(); i++) {
+                itemList[i] = abList.get(i)[1];
+            }
+        }
+        return new DefaultComboBoxModel(itemList);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
