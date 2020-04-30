@@ -62,7 +62,7 @@ public class Generator {
                     fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
                     s = fm.rd();
                 }
-                fm.wr("//Начало сгенерированного кода "+stFunc+"\n");
+                fm.wr("//Начало сгенерированного кода/ "+stFunc+"\n");
                 for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
                    String tmp = "";
                    for(Node arg : arglist){                                        //Цикл по всем аргументам функции
