@@ -37,8 +37,11 @@ import globalData.globVar;
 import java.awt.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -48,7 +51,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     //String APurl = "jdbc:postgresql://172.16.35.25:5432/test08_globVar.DB";
     String url, nameProject, user, pass;
-   
+
     RWExcel excel = new RWExcel();
     String path;
     //DataBase globVar.DB = DataBase.getInstance();
@@ -69,6 +72,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         globVar.abonent = jComboBox2.getItemAt(0);
         this.setTitle("Текущая база:" + globVar.currentBase + ", путь: " + globVar.PathToProject); // установить заголовок
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -240,6 +244,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jLabel3.setText("Текущий абонент");
 
+        // слушатель выделения
+        jTree1.addTreeSelectionListener(new SelectionListener(this));
         jScrollPane2.setViewportView(jTree1);
 
         jMenu1.setText("File");
@@ -362,17 +368,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
             path = file.toString();
             excel.setPatchF(path);
-          int casedial = JOptionPane.showConfirmDialog(null, "Загрузить в базу используя конфигурационный файл?\n Выбрав No файл загрузиться полностью."); // сообщение с выбором
+            int casedial = JOptionPane.showConfirmDialog(null, "Загрузить в базу используя конфигурационный файл?\n Выбрав No файл загрузиться полностью."); // сообщение с выбором
             switch (casedial) {
-                case 0: 
-                {
+                case 0: {
                     try {
                         Main.fillBaseConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
                     } catch (IOException ex) {
                         Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                    break;
+                break;
 
                 case 1:
                     Main.fillBaseAlldata(file.getPath()); // Заполнение базы полностью из файла
@@ -394,62 +399,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- Метод реагирования на выбор поля из списка таблиц ---
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        if(globVar.DB==null) return;
+        //if(globVar.DB==null) return;
         String selectT = (String) jComboBox1.getSelectedItem();
-        //globVar.DB.connectionToBase();
-        List<String> listColumn = globVar.DB.selectColumns(selectT);
-        ArrayList<String> columns = new ArrayList<>();
-        String tmpStr = " ";
-        for (String s : listColumn) { // ограничение что не выводим из столбцов
-            String[] remCol = {"UUID", "uuid"}; // список исключений
-            boolean find = false;
-            for (String rC : remCol) {
-                if (rC.equals(s)) {
-                    find = true;
-                    break;
-                }
-            }
-            if (find) {
-                find = false;
-                continue;
-            } else {
-                columns.add(s); // конечный список столбцов к запросу базы
-            }
-        }      
-        //System.out.println(tmpStr);
-        jTextArea1.setText(tmpStr);
-
-        if (selectT.equals("dies_ai")) {
-            signal = "dies_ai";
-        } else if (selectT.equals("dies_ao")) {
-            signal = "dies_ao";
-        } else if (selectT.equals("dies_do")) {
-            signal = "dies_do";
-        } else if (selectT.equals("dies_di")) {
-            signal = "dies_di";
-        }
-
-        jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали 
-        String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
-        StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
-        
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
-        int sizeWidth = 800;
-        int sizeHeight = 600;
-        int locationX = (screenSize.width - sizeWidth) / 2;
-        int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
-        FrameTabel frameTable = new FrameTabel(selectT, columns); // Вызов класса Название таблицы и данные для нее
-        jFrameTable.add(frameTable); // с заголовком имя таблицы
-        jFrameTable.setTitle(selectT + " " + globVar.DB.getCommentTable(selectT)); // установить заголовок имя таблицы и если есть ее коммент
-        jFrameTable.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
-        jFrameTable.setContentPane(frameTable); // Передаем нашу форму
-        jFrameTable.setVisible(true);
-        
+        showTable(selectT); // вызов метода построения таблицы 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(globVar.DB==null) return;
+        if (globVar.DB == null) {
+            return;
+        }
         //  globVar.DB.connectionToBase(url,pass,user);
         listDropT = globVar.DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
@@ -469,20 +428,21 @@ public final class Main_JPanel extends javax.swing.JFrame {
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
         if (filepath == JFileChooser.APPROVE_OPTION) {
-                try {
-                    filepatch = fileload.getSelectedFile().getCanonicalPath();
-                } catch (IOException ex) {
-                    Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    FileManager.loggerConstructor("error testing 44352");
+            try {
+                filepatch = fileload.getSelectedFile().getCanonicalPath();
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                FileManager.loggerConstructor("error testing 44352");
 
-                }
-
+            }
 
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(globVar.DB==null) return;
+        if (globVar.DB == null) {
+            return;
+        }
         // workbase.connectionToBase();
         if (!listDropT.isEmpty()) {  // если есть что удалять передаем лист в обработчик баз
             globVar.DB.dropTable(listDropT);
@@ -490,27 +450,31 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(globVar.DB==null) return;
+        if (globVar.DB == null) {
+            return;
+        }
         globVar.DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
-        if(globVar.DB==null){
+        if (globVar.DB == null) {
             JOptionPane.showMessageDialog(null, "Подключение к базе не удалось");
             return;
         }
         String nameBD = globVar.DB.getCurrentNameBase();
         String userBD = globVar.DB.getCurrentUser();
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
-        String message = null; 
-        if(nameBD != null){
-            JOptionPane.showMessageDialog(null, "Подключено к базе "+ nameBD +" пользователем " +userBD);
+        String message = null;
+        if (nameBD != null) {
+            JOptionPane.showMessageDialog(null, "Подключено к базе " + nameBD + " пользователем " + userBD);
         }
-        
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
     // --- Кнопка вызова окна с исполнительным механизмом ---
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if(globVar.DB==null) return;
-       Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
+        if (globVar.DB == null) {
+            return;
+        }
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
@@ -518,32 +482,34 @@ public final class Main_JPanel extends javax.swing.JFrame {
         ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(globVar.DB); // И передаем туда управление базой
         frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
-        frameExecutiveMechanism.setVisible(true); 
+        frameExecutiveMechanism.setVisible(true);
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    
+
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         JFileChooser fileopen = new JFileChooser("C:\\Users\\cherepanov\\Desktop\\сигналы");
         int ren = fileopen.showDialog(null, ".type");
         if (ren == JFileChooser.APPROVE_OPTION) {
-            
+
             File file = fileopen.getSelectedFile();// выбираем файл из каталога
             String pathFileType = file.toString();
             //System.out.println(file.getNaтяme());
-            if (pathFileType.endsWith(".type")){
+            if (pathFileType.endsWith(".type")) {
                 new SignalTypeToBase(pathFileType);
-            }else JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
+            } else {
+                JOptionPane.showMessageDialog(null, "Расширение файла не .type"); // Это сообщение
+            }
         }
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
     }//GEN-LAST:event_jButton8ActionPerformed
-    
+
     // --- реакция на события меню ---
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int ren = jFileChooser1.showDialog(null, "папка с проектом");
         if (ren == JFileChooser.APPROVE_OPTION) {
-                globVar.desDir = jFileChooser1.getSelectedFile().toString(); // установить новый путь 
-                this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.desDir); // установить заголовок
+            globVar.desDir = jFileChooser1.getSelectedFile().toString(); // установить новый путь 
+            this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.desDir); // установить заголовок
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -554,7 +520,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (fileload.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
                 String newPath = fileload.getSelectedFile().getCanonicalPath();
-                if(!newPath.equals(globVar.desDir)){
+                if (!newPath.equals(globVar.desDir)) {
                     XMLSAX cfgSax = new XMLSAX();
                     Node cfgSaxRoot = cfgSax.readDocument("Config.xml");
                     Node desDir = cfgSax.returnFirstFinedNode(cfgSaxRoot, "DesignDir");
@@ -592,9 +558,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
         addAb.setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-
-    public ComboBoxModel getComboBoxModel(){ // функция для создания списка из таблиц базы
-        if(globVar.DB==null) return null;
+    public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
+        if (globVar.DB == null) {
+            return null;
+        }
         Iterator<String> iter_list_table = listDropT.iterator();
 
         String listTable = "";
@@ -615,53 +582,113 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
         return new DefaultComboBoxModel(listarrayTable);
     }
-    
-    public ComboBoxModel getComboBoxModelAbonents(){ // создания списка абонентов
-        if(globVar.DB==null) return null;
+
+    public ComboBoxModel getComboBoxModelAbonents() { // создания списка абонентов
+        if (globVar.DB == null) {
+            return null;
+        }
         ArrayList<String[]> abList = globVar.DB.getAbonentArray();
-        String[] itemList  = {""};
-        if(abList != null && !abList.isEmpty()){
+        String[] itemList = {""};
+        if (abList != null && !abList.isEmpty()) {
             itemList = new String[abList.size()];
-            for(int i = 0; i < abList.size(); i++) {
+            for (int i = 0; i < abList.size(); i++) {
                 itemList[i] = abList.get(i)[1];
             }
         }
         return new DefaultComboBoxModel(itemList);
     }
-    
+
     // --- структура построения для дерева ---
-    private DefaultTreeModel getModelTreeNZ(){
+    private DefaultTreeModel getModelTreeNZ() {
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
         ArrayList<String> listTableBd = globVar.DB.getListTable();
-        final   String     ROOT  = "дерево сигналов";
-        
+        final String ROOT = "дерево сигналов";
+
         // Создание древовидной структуры
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT);
         // Ветви первого уровня
-        for(String[] s: listAbonent){
+        for (String[] s : listAbonent) {
             String nameBranch = s[1]; //  1 это префикс
             DefaultMutableTreeNode firstNode = new DefaultMutableTreeNode(nameBranch);
             // Добавление ветвей к корневой записи
             root.add(firstNode);
             // Добавление листьев
-            for(String sheet: listTableBd){
+            for (String sheet : listTableBd) {
                 // Патерн добавления того или иного совпадения по имени абонента
-                Pattern pattern1 = Pattern.compile("^"+nameBranch+"(.*)$"); 
+                Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");
                 Matcher matcher1 = pattern1.matcher(sheet);
-                String sheetPatern =""; // годы месяцы число
-                if (matcher1.matches()){ 
+                String sheetPatern = ""; // годы месяцы число
+                if (matcher1.matches()) {
                     sheetPatern = matcher1.group(1);
                     firstNode.add(new DefaultMutableTreeNode(sheet, false));
                 }
-                
+
             }
 
         }
-        
         // Создание стандартной модели и дерево
         return new DefaultTreeModel(root, true);
     }
 
+    // --- метод отображения фрейма таблицы ---
+    public void showTable(String table) {
+        if (globVar.DB == null) {
+            return;
+        }
+        for (String nT : globVar.DB.getListTable()) { // проверка есть ли такая таблица в базе
+            if (nT.equals(table)) {
+                List<String> listColumn = globVar.DB.selectColumns(table);
+                ArrayList<String> columns = new ArrayList<>();
+                String tmpStr = " ";
+                for (String s : listColumn) { // ограничение что не выводим из столбцов
+                    String[] remCol = {"UUID", "uuid"}; // список исключений
+                    boolean find = false;
+                    for (String rC : remCol) {
+                        if (rC.equals(s)) {
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find) {
+                        find = false;
+                        continue;
+                    } else {
+                        columns.add(s); // конечный список столбцов к запросу базы
+                    }
+                }
+                //System.out.println(tmpStr);
+                jTextArea1.setText(tmpStr);
+
+                if (table.equals("dies_ai")) {
+                    signal = "dies_ai";
+                } else if (table.equals("dies_ao")) {
+                    signal = "dies_ao";
+                } else if (table.equals("dies_do")) {
+                    signal = "dies_do";
+                } else if (table.equals("dies_di")) {
+                    signal = "dies_di";
+                }
+
+                jTextArea1.setText((String) jComboBox1.getSelectedItem());// выводим что выбрали 
+                String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
+                StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
+
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
+                int sizeWidth = 800;
+                int sizeHeight = 600;
+                int locationX = (screenSize.width - sizeWidth) / 2;
+                int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
+                FrameTabel frameTable = new FrameTabel(table, columns); // Вызов класса Название таблицы и данные для нее
+                jFrameTable.add(frameTable); // с заголовком имя таблицы
+                jFrameTable.setTitle(table + " " + globVar.DB.getCommentTable(table)); // установить заголовок имя таблицы и если есть ее коммент
+                jFrameTable.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+                jFrameTable.setContentPane(frameTable); // Передаем нашу форму
+                jFrameTable.setVisible(true);
+
+            }
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -696,4 +723,54 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
+}
+
+// Класс Слушатель выделения узла в дереве
+class SelectionListener implements TreeSelectionListener {
+
+    Main_JPanel mainPanel;
+
+    SelectionListener(Main_JPanel aThis) {
+        mainPanel = aThis;
+    }
+
+    public void valueChanged(TreeSelectionEvent e) {
+        // Источник события - дерево
+        JTree tree = (JTree) e.getSource();
+        tree.addMouseListener(new java.awt.event.MouseAdapter() { // слушатель по двойному клику 
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    String nameT = tree.getSelectionPath().getLastPathComponent().toString();
+                    mainPanel.showTable(nameT); // вызов метода построения таблицы 
+                }
+            }
+        });
+//            // Объекты-пути ко всем выделенным узлам дерева
+//            TreePath[] paths = e.getPaths();
+//            System.out.print(String.format("Изменений в выделении узлов : %d\n", 
+//                                               paths.length));
+//            // Список выделенных элементов в пути
+//            TreePath[] selected = tree.getSelectionPaths();
+//            int[] rows = tree.getSelectionRows();
+//            // Выделенные узлы
+//            for (int i = 0; i < selected.length; i++) {
+//                System.out.print(String.format("Выделен узел : %s (строка %d)\n",
+//                                    selected[i].getLastPathComponent(), rows[i]));
+//            }
+//            // Отображение полных путей в дереве для выделенных узлов
+//            for (int j = 0; j < selected.length; j++) {
+//                TreePath path = selected[j];
+//                Object[] nodes = path.getPath();
+//                String text = "ThreePath : ";
+//                for (int i = 0; i < nodes.length; i++) {
+//                    // Путь к выделенному узлу
+//                    DefaultMutableTreeNode node = (DefaultMutableTreeNode)nodes[i];
+//                    if (i > 0)
+//                        text += " >> ";
+//                    text += String.format("(%d) ", i) + node.getUserObject();
+//                }
+//                text += "\n";
+//                System.out.print(text);
+//            }
+    }
 }
