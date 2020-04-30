@@ -62,39 +62,26 @@ public class Generator {
                     fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
                     s = fm.rd();
                 }
-                if(s.contains("<![CDATA[")){
-                    int end = s.indexOf("<![CDATA[") + 9;
-                    fm.wr(s.substring(0,end) + "\n");
-                }
-                String funcCall = stFunc + "(";                                 //Начинаем генерацию вызова функции
+                fm.wr("//Начало сгенерированного кода "+stFunc+"\n");
                 for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
-                    for(Node arg : arglist){                                        //Цикл по всем аргументам функции
+                   String tmp = "";
+                   for(Node arg : arglist){                                        //Цикл по всем аргументам функции
                         ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
+                        tmp += ",";                                                //аргумент записан и отделён от следующего запятой
                         for(Node argPart : argParts){                                   //Цикл по всем частям аргументов - текстовым и табличным
-                            if("text".equals(argPart.getNodeName())) funcCall += (String) globVar.sax.getDataNode(argPart).get("t");
-                            else if("dbd".equals(argPart.getNodeName())) funcCall += (String) ft.getCell((String) globVar.sax.getDataNode(argPart).get("t"),j);
-                            else if("npp".equals(argPart.getNodeName())) funcCall += j;
-                            else if("abonent".equals(argPart.getNodeName())) funcCall += abonent;
+                            if("text".equals(argPart.getNodeName())) tmp += (String) globVar.sax.getDataNode(argPart).get("t");
+                            else if("dbd".equals(argPart.getNodeName())) tmp += (String) ft.getCell((String) globVar.sax.getDataNode(argPart).get("t"),j);
+                            else if("npp".equals(argPart.getNodeName())) tmp += j;
+                            else if("abonent".equals(argPart.getNodeName())) tmp += abonent;
                         }
-                        funcCall = "," + funcCall;                                                //аргумент записан и отделён от следующего запятой
                     }                                                   //Убираем лишнюю запятую в конце
-                    funcCall = "//" + (String) ft.getCell("Наименование", j)+ "\n" + 
-                                funcCall.substring(1) + ");";
-                    fm.wr(funcCall + "\n");                             //записываем вызов функции в файл
-                    funcCall = stFunc + "(";                            // подготавливаем следующую строку
+                    fm.wr("//"+(String)ft.getCell("Наименование", j)+"\n"+stFunc+"("+tmp.substring(1)+");\n");                             //записываем вызов функции в файл
                 }
                 //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
-                while(!fm.EOF  && 
-                      (s.contains(stFunc) || s.trim().isEmpty() || "//".equals(s.trim().substring(0,2)))&& 
-                      !s.contains("]]></ST>")) 
-                    s = fm.rd(); 
-                if(!fm.EOF && s.contains("]]></ST>") && s.contains(stFunc)){    //если оказалось, что мы пропустили конец всей функции
-                    fm.wr("]]></ST>\n");                                        //восстанавливаем его
-                    s = fm.rd();
-                }
+                while(!fm.EOF  && !s.contains("Конец сгенерированного кода")) s = fm.rd(); 
                 while(!fm.EOF){                                                 //дописываем хвост файла
-                    fm.wr(s + "\n");                          
                     s = fm.rd();
+                    fm.wr(s + "\n");                          
                 }
                 fm.rdStream.close();                                       //закрываем поток чтения
                 fm.wrStream.close();                                       //закрываем поток записи
