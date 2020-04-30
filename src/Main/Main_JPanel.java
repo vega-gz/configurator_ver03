@@ -651,7 +651,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 String sheetPatern =""; // годы месяцы число
                 if (matcher1.matches()){ 
                     sheetPatern = matcher1.group(1);
-                    firstNode.add(new DefaultMutableTreeNode(sheet, true));
+                    firstNode.add(new DefaultMutableTreeNode(sheet, false));
                 }
                 
             }
