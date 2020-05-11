@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
 <ConfigSignals>
 	<AI excelSheetName="AI" Comment="Аналоговые входы">
         <EXEL>
@@ -8,21 +9,25 @@
             <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
             <J nameColumnPos="Тип_датчика" default="4-20 мА"/>
             <T nameColumnPos="Точность"  type="Int" default="2"/>
-            <AA nameColumnPos="АЦПmin" default="2.0"/>
-            <AB nameColumnPos="АЦПmax" default="10.0"/>
-            <AC nameColumnPos="loLim" type="Number" formula="loLimF"/>
-            <AD nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
-            <AE nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
-            <AF nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
-            <AG nameColumnPos="ROC" type="Number"   default="0.0"/>
-            <AH nameColumnPos="recoveryTime" type="Number" default="1.0"/>
-            <AI nameColumnPos="tau" type="Number"  default="1.0"/>
+            <U nameColumnPos="АЦПmin" default="2.0"/>
+            <V nameColumnPos="АЦПmax" default="10.0"/>
+            <W nameColumnPos="loLim" type="Number" formula="loLimF"/>
+            <X nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
+            <Y nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
+            <Z nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
+            <AA nameColumnPos="ROC" type="Number"   default="0.0"/>
+            <AB nameColumnPos="recoveryTime" type="Number" default="1.0"/>
+            <AC nameColumnPos="tau" type="Number"  default="1.0"/>
             <I nameColumnPos="Единица_измерения" default=""/>
             <K nameColumnPos="Акт_пас" default=""/>
             <L nameColumnPos="Адрес_1" default=""/>
             <M nameColumnPos="Адрес_2" default=""/>
             <N nameColumnPos="Адрес_3" default=""/>
+            <Q nameColumnPos="Устройство" type="Int"/>
+            <R nameColumnPos="Слот" type="Int"/>
+            <S nameColumnPos="Канал" type="Int"/>
 			<O nameColumnPos="Примечание" default=""/>
+			<AD nameColumnPos="sonetModbus" default=""/>
         </EXEL>
 		<Formulas>
 			<Диапазон_макс/>
@@ -37,57 +42,52 @@
 			<hiBrkF operation="+" operand1="Диапазон_макс" operand2="range6proc"/>
 		</Formulas>
 		<GenData>
-			<AI_DRV Type="REAL"/>
-			<AI_Settings/>
-			<AI_FromHMI/>
-			<AI_ToHMI/>
-			<AI_Internal/>
+			<AI_DRV Type="REAL" globData1="AI_DRV">
+			</AI_DRV>
+			<AI_FromHMI globData1="AI_FromHMI">
+				<ADD target="_ALG"/>
+				<ADD target="AT_HMI"/>
+			</AI_FromHMI>
+			<AI_ToHMI   globData1="AI_ToHMI"> 
+				<ADD target="Project.prj"/> 
+			</AI_ToHMI>
+			<AI_Settings>
+			</AI_Settings>
+			<AI_Internal>
+			</AI_Internal>
 		</GenData>
-		<GenCode>
-			<!--File name="AI_CallAll.txt"-->
-				<Function name="AI_init">
-					<arguments>
-						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><dbd t="Диапазон_мин"/></arg>
-						<arg><dbd t="Диапазон_макс"/></arg>
-						<arg><dbd t="АЦП"/></arg>
-						<arg><dbd t="АЦПmax"/></arg>
-						<arg><dbd t="loLim"/></arg>
-						<arg><dbd t="hiLim"/></arg>
-						<arg><dbd t="loBrk"/></arg>
-						<arg><dbd t="hiBrk"/></arg>
-						<arg><dbd t="ROC"/></arg>
-						<arg><dbd t="recoveryTime"/></arg>
-						<arg><text t="repTime"/></arg>
-						<arg><dbd t="tau"/></arg>
-						<arg><npp/></arg>
-					</arguments>
-					<comment><dbd t="Наименование"/></comment>
-				</Function>
-				<Function name="AI_Processing">
-					<arguments>
-						<arg><abonent/><text t="_AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
-					</arguments>
-					<comment><dbd t="Наименование"/></comment>
-				</Function>
-			<!--/File-->
+		<GenCode file="AI_CallAll">
+			<Function name="AI_init">
+				<arguments>
+					<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><dbd t="Диапазон_мин"/></arg>
+					<arg><dbd t="Диапазон_макс"/></arg>
+					<arg><dbd t="АЦПmin"/></arg>
+					<arg><dbd t="АЦПmax"/></arg>
+					<arg><dbd t="loLim"/></arg>
+					<arg><dbd t="hiLim"/></arg>
+					<arg><dbd t="loBrk"/></arg>
+					<arg><dbd t="hiBrk"/></arg>
+					<arg><dbd t="ROC"/></arg>
+					<arg><dbd t="recoveryTime"/></arg>
+					<arg><text t="repTime"/></arg>
+					<arg><dbd t="tau"/></arg>
+					<arg><npp/></arg>
+				</arguments>
+				<comment><dbd t="Наименование"/></comment>
+			</Function>
+			<Function name="AI_Processing">
+				<arguments>
+					<arg><abonent/><text t="_AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+				</arguments>
+				<comment><dbd t="Наименование"/></comment>
+			</Function>
 		</GenCode>
-		<GenHMI>
-			<File name="AT_HMI.iec_hmi">
-				<Folder Name="05.Signals" Comment="" Data=""/>
-				<GraphicsCompositeFBType Name="S_AI_" UUID="8234699D4C70958ACEA2269A0000000" maxY="768" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
-				<FB Name="BaseAnIn_" Type="T_BaseAnIn" TypeUUID="C06031C04C13BB17463EB1B889813E68"/>
-				<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
-				<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="23"/>
-				<additionalVar>
-					<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-				</additionalVar>
-			</File>
-		</GenHMI>
+		<GenHW drvFile="_AI_DRV" globData="_AI_DRV"/>
 	</AI>
 	<SetPoints excelSheetName="ANB">
 		<GenData>
@@ -111,9 +111,164 @@
 	</SetPoints>
 	<AnO excelSheetName="AO" Comment="Аналоговые выходы">
 		<GenData>
-			<AO_FromHMI/>
-			<AO_ToHMI/>
+			<AO_FromHMI Global="TRUE"/>
+			<AO_ToHMI Global="TRUE"/>
 			<AO_Settings/>
+		</GenData>
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <V nameColumnPos="TAG_NAME_PLC" type="VarName"/>
+            <G nameColumnPos="Диапазон_мин" type="Number"/>
+            <H nameColumnPos="Диапазон_макс" type="Number" />
+            <I nameColumnPos="Единица_измерения" />
+            <J nameColumnPos="АЦПмин" />
+            <K nameColumnPos="АЦПмакс" />
+            <M nameColumnPos="Адрес_1"/>
+            <N nameColumnPos="Адрес_2" />
+            <O nameColumnPos="Адрес_3" />
+            <R nameColumnPos="Устройство" type="Int"/>
+            <S nameColumnPos="Слот"  type="Int"/>
+            <T nameColumnPos="Канал"  type="Int"/>
+            <Z nameColumnPos="Точность"  type="Int"/>
+			<AA nameColumnPos="sonetModbus" default=""/>
+        </EXEL>
+		<GenCode>
+			<!--File name="A_Algorithm.iec_st"-->
+				<Function name="AO_init">
+					<arguments>
+						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><dbd t="Диапазон_мин"/></arg>
+						<arg><dbd t="Диапазон_макс"/></arg>
+						<arg><dbd t="АЦПмин"/></arg>
+						<arg><dbd t="АЦПмакс"/></arg>
+						<arg><npp/></arg>
+					</arguments>
+					<comment><dbd t="Наименование"/></comment>
+				</Function>
+				<Function name="AO_Processing">
+					<arguments>
+						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					</arguments>
+					<comment><dbd t="Наименование"/></comment>
+				</Function>
+			<!--/File-->
+		</GenCode>
+	</AnO>
+	<DGI excelSheetName="DGI" Comment="Дискретные входы">
+		<GenData>
+			<DI_DRV Type="BOOL" globData1="DI_DRV" globData2="DI"/>
+			<DI_Settings/>
+			<DI_FromHMI globData1="DI_FromHMI"/>
+			<DI_ToHMI globData1="DI_ToHMI"/>
+			<DI_Internal/>
+		</GenData>
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <K nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>
+            <G nameColumnPos="Тип_сигнала" default="НО СК"/>
+            <P nameColumnPos="Инверсия" type="bool" default="false"/>
+            <H nameColumnPos="Адрес_1" default=""/>
+            <I nameColumnPos="Адрес_2" default="" />
+            <L nameColumnPos="Устройство" type="Int"/>
+            <M nameColumnPos="Слот"  type="Int"/>
+            <N nameColumnPos="Канал"  type="Int"/>
+            <O nameColumnPos="Задержка"  type="Number" default="0.0"/>
+			<Q nameColumnPos="КЦД" default="false"/>
+			<J nameColumnPos="Примечание" default=""/>
+			<R nameColumnPos="sonetModbus" default=""/>
+        </EXEL>
+		<GenCode file="DI_CallAll">
+			<Function name="DI_init">
+				<arguments>
+					<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><text t="repTime"/></arg>
+					<arg><dbd t="Задержка"/></arg>
+					<arg><dbd t="Инверсия"/></arg>
+					<arg><npp/></arg>
+				</arguments>
+				<comment><dbd t="Наименование"/></comment>
+			</Function>
+			<Function name="DI_Processing">
+				<arguments>
+					<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><dbd t="КЦД"/></arg>
+					<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/></arg>
+				</arguments>
+				<comment><dbd t="Наименование"/></comment>
+			</Function>
+		</GenCode>
+		<GenHW drvFile="_DI_DRV" globData="_DI_DRV"/>
+	</DGI>
+	<DGO excelSheetName="DGO" Comment="Дискретные выходы">
+		<GenData>
+			<DO_DRV Type="BOOL" globData1="DO" globData2="DO_DRV"/>
+			<DO_FromHMI globData1="DO_FromHMI"/>
+			<DO_ToHMI globData1="DO_ToHMI"/>
+		</GenData>	
+        <EXEL>
+            <F nameColumnPos="Наименование" />
+            <K nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>
+            <G nameColumnPos="Тип_сигнала"  default=""/>
+            <H nameColumnPos="Адрес_1" default=""/>
+            <I nameColumnPos="Адрес_2"  default=""/>
+            <L nameColumnPos="Устройство" type="Int"/>
+            <M nameColumnPos="Слот"  type="Int"/>
+            <N nameColumnPos="Канал"  type="Int"/>
+			<P nameColumnPos="КЦУ" default="false"/>
+			<J nameColumnPos="Примечание" default=""/>
+			<O nameColumnPos="sonetModbus" default=""/>
+        </EXEL>
+		<GenCode file="DO_CallAll">
+			<Function name="DO_Processing">
+				<arguments>
+					<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+				</arguments>
+				<comment><dbd t="Наименование"/></comment>
+			</Function>
+		</GenCode>
+		<GenHW drvFile="_DO_DRV" globData="_DO_DRV"/>
+	</DGO>
+	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы">
+        <EXEL>
+            <F nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+            <G nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
+            <H nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
+            <I nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
+            <J nameColumnPos="Единица_измерения" default=""/>
+            <K nameColumnPos="Точность"  type="Int" default="2"/>
+			<L nameColumnPos="Примечание" default=""/>
+			<O nameColumnPos="sonetModbus" default=""/>
+        </EXEL>
+		<GenData>
+			<AI Type="REAL" globData1="mb_AI_DRV"/>
+			<AI_FromHMI globData1="mb_AI_FromHMI"/>
+			<AI_ToHMI globData1="mb_AI_ToHMI"/>
+		</GenData>
+		<GenCode file="mb_AI_CallAll">
+			<Function name="mb_AI_Processing">
+				<arguments>
+					<arg><abonent/><text t="_mb_AI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_mb_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+					<arg><abonent/><text t="_mb_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+				</arguments>
+			</Function>
+		</GenCode>
+		<GenHW drvFile="mb_AI_DRV" globData="_mb_AI" hwFile="_LOCALBUS.snt_lb" intFile="_LOCALBUS.int"/>
+	</mb_AI>
+	<mb_AO excelSheetName="mb_AO" Comment="Аналоговые выходы">
+		<GenData>
+			<mb_AO_FromHMI/>
+			<mb_AO_ToHMI/>
+			<mb_AO_Settings/>
 		</GenData>
         <EXEL>
             <F nameColumnPos="Наименование" />
@@ -154,25 +309,13 @@
 				</Function>
 			<!--/File-->
 		</GenCode>
-		<GenHMI>
-			<File name="AT_HMI.iec_hmi">
-				<Folder Name="05.Signals" Comment="" Data=""/>
-				<GraphicsCompositeFBType Name="S_AO_" UUID="DB9F84D34D30613F6823FCA380000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
-				<FB Name="BaseAnOut_" Type="BaseAnOut" TypeUUID="CDB0D9974B89FB4417F2139064F22857"/>
-				<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
-				<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="21"/>
-				<additionalVar>
-					<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-				</additionalVar>
-			</File>
-		</GenHMI>
-	</AnO>
-	<DI excelSheetName="DI" Comment="Дискретные входы">
+	</mb_AO>
+	<mb_DI excelSheetName="mb_DGI" Comment="Дискретные входы">
 		<GenData>
-			<DI Type="BOOL"/>
+			<DI_DRV Type="BOOL" globData1="DI_DRV" globData2="DI"/>
 			<DI_Settings/>
-			<DI_FromHMI/>
-			<DI_ToHMI/>
+			<DI_FromHMI globData1="DI_FromHMI"/>
+			<DI_ToHMI globData1="DI_ToHMI"/>
 			<DI_Internal/>
 		</GenData>
         <EXEL>
@@ -182,13 +325,14 @@
             <P nameColumnPos="Инверсия" type="bool" default="false"/>
             <H nameColumnPos="Адрес_1" default=""/>
             <I nameColumnPos="Адрес_2" default="" />
-            <L nameColumnPos="Устройство" type="Int" default=""/>
-            <M nameColumnPos="Слот"  type="Int" default=""/>
-            <N nameColumnPos="Канал"  type="Int" default=""/>
+            <L nameColumnPos="Устройство" type="Int"/>
+            <M nameColumnPos="Слот"  type="Int"/>
+            <N nameColumnPos="Канал"  type="Int"/>
             <O nameColumnPos="Задержка"  type="Number" default="0.0"/>
+			<Q nameColumnPos="КЦД" default="false"/>
 			<J nameColumnPos="Примечание" default=""/>
         </EXEL>
-		<GenCode>
+		<GenCode file="DI_CallAll">
 			<!--File name="DI_CallAll.txt"-->
 				<Function name="DI_init">
 					<arguments>
@@ -203,33 +347,24 @@
 				<Function name="DI_Processing">
 					<arguments>
 						<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><dbd t="КЦД"/></arg>
 						<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><abonent/><text t="_DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
 			<!--/File-->
 		</GenCode>
-		<GenHMI>
-			<File name="AT_HMI.iec_hmi">
-				<Folder Name="05.Signals" Comment="" Data=""/>
-				<GraphicsCompositeFBType Name="S_DI_" UUID="DB9F84D34D30613F6823FCA380000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
-				<FB Name="T_Base_DI_" Type="T_Base_DI" TypeUUID="CDB0D9974B89FB4417F2139064F22857"/>
-				<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
-				<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="21"/>
-				<additionalVar>
-					<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-				</additionalVar>
-			</File>
-		</GenHMI>
-	</DI>
-	<DGO excelSheetName="DGO" Comment="Дискретные выходы">
+		<GenHW drvFile="_DI_DRV" globData="_DI_DRV" hwFile="_LOCALBUS.snt_lb" intFile="_LOCALBUS.int"/>
+	</mb_DI>
+	<mb_DO excelSheetName="mb_DGO" Comment="Дискретные выходы">
 		<GenData>
-			<DO Type="BOOL"/>
-			<DO_FromHMI/>
-			<DO_ToHMI/>
+			<DO_DRV Type="BOOL" globData1="DO" globData2="DO_DRV"/>
+			<DO_FromHMI globData1="DO_FromHMI"/>
+			<DO_ToHMI globData1="DO_ToHMI"/>
 		</GenData>	
         <EXEL>
             <F nameColumnPos="Наименование" />
@@ -237,33 +372,25 @@
             <G nameColumnPos="Тип_сигнала"  default=""/>
             <H nameColumnPos="Адрес_1" default=""/>
             <I nameColumnPos="Адрес_2"  default=""/>
-            <L nameColumnPos="Устройство" type="Int" default=""/>
-            <M nameColumnPos="Слот"  type="Int" default=""/>
-            <N nameColumnPos="Канал"  type="Int" default=""/>
+            <L nameColumnPos="Устройство" type="Int"/>
+            <M nameColumnPos="Слот"  type="Int"/>
+            <N nameColumnPos="Канал"  type="Int"/>
+			<P nameColumnPos="КЦУ" default="false"/>
 			<J nameColumnPos="Примечание" default=""/>
         </EXEL>
-		<GenCode>
+		<GenCode file="DO_CallAll">
 			<!--File name="A_Algorithm.iec_st"-->
 				<Function name="DO_Processing">
 					<arguments>
+						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 					</arguments>
 					<comment><dbd t="Наименование"/></comment>
 				</Function>
 			<!--/File-->
 		</GenCode>
-		<GenHMI>
-			<File name="AT_HMI.iec_hmi">
-				<Folder Name="05.Signals" Comment="" Data=""/>
-				<GraphicsCompositeFBType Name="S_DO_" UUID="DB9F84D34D30613F6823FCA380000000" maxY="60" maxX="2"/><!--К Name="S_AI_" и UUID="8234699D4C70958ACEA2269A0000000" добавлять порядковый номер страницы-->
-				<FB Name="T_Base_DO_" Type="T_Base_DO" TypeUUID="CDB0D9974B89FB4417F2139064F22857"/>
-				<VarValue Variable="Hint" add0="TAG_NAME_PLC" add1="Диапазон_мин" add2="Диапазон_макс"/>
-				<VarValue Variable="pos" startPosX="20" incX="400" startPosY="20" incY="21"/>
-				<additionalVar>
-					<VarValue Variable="Analog_Ph_N" Value="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-				</additionalVar>
-			</File>
-		</GenHMI>
-	</DGO>
+		<GenHW drvFile="_DO_DRV" globData="_DO_DRV" hwFile="_LOCALBUS.snt_lb" intFile="_LOCALBUS.int"/>
+	</mb_DO>
 </ConfigSignals>

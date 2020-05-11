@@ -9,11 +9,7 @@ import DataBaseConnect.DataBase;
 import StringTools.StrTools;
 import XMLTools.XMLSAX;
 import fileTools.FileManager;
-import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import org.w3c.dom.Node;
 
 /**
@@ -47,6 +43,7 @@ public class globVar {
         public static Node cfgRoot = null;
 	public static DataBase DB = null;
         public static String abonent = "";
+        public static String dbURL = "";
                 
 	public static void SetStatUUID() {
 		Date date = new Date();

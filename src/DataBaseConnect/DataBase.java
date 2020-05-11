@@ -31,9 +31,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 public class DataBase {
-
-
-  
     Statement stmt;
     Connection connection = null;
     private ArrayList<String[]> currentSelectTable;
@@ -423,11 +420,12 @@ public class DataBase {
             if(s.equals(orderCol)){ // нашли тогда упорядовать
               sql = "SELECT " + s_columns + " FROM \"" + table + "\" ORDER BY \"" +orderCol +"\";";
               break;
-            }else sql = "SELECT " + s_columns + " FROM \"" + table +"\";"; 
+            } 
         }
+        sql = "SELECT " + s_columns + " FROM \"" + table +"\";";
         try {
             stmt = connection.createStatement();
-            System.out.println(sql);
+            //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 for (int i = 0; i < columns.size(); ++i) {
@@ -448,10 +446,29 @@ public class DataBase {
         }
         return selectData;
     }
+    
+        // найти данные по имени столбца и значению ячейки и имени искомого столбца
+    public String getDataCell(String table, String col1, String val1, String col2) {
+        String sql = "SELECT \"" + col2 + "\" FROM \"" + table +"\" WHERE \""+col1+"\"='"+val1+"';";
+        String val2=null;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            val2 = rs.getString(col2);
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Ошибка при поиске в таблице " + table);
+            e.printStackTrace();
+            return null;
+        }
+        return val2;
+    }
+
     // какие именно столбцы дергать
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
-        StructSelectData.setColumns(columns); // вот это жопа надо что то с этим делать мешает в Main_Jpanel
-        ArrayList<String[]> selectData = new ArrayList<>();
+        //StructSelectData.setColumns(columns); // вот это жопа надо что то с этим делать мешает в Main_Jpanel
         String s_columns = "";
         String[] strfromtb = new String[columns.size()]; // массив под данные
         for (int i = 0; i < columns.size(); ++i) { //формирование строки запроса
@@ -465,6 +482,7 @@ public class DataBase {
         // проверка на столбец по которому упорядочим данные
         String orderCol = "id";
         String sql = null;
+        ArrayList<String[]> selectData = new ArrayList<>();
         for(String s: getListColumnTable(table)){
             if(s.equals(orderCol)){ // нашли тогда упорядовать
               sql = "SELECT " + s_columns + " FROM " +"\"" + table +"\""+ " ORDER BY \"" +orderCol +"\";";
@@ -977,7 +995,7 @@ public class DataBase {
         if(globVar.DB==null) return;
         ArrayList<String> list_table_base = globVar.DB.getListTable();
         if(StrTools.searchInList("Abonents", list_table_base)< 0){
-            String[] columns = {"Abonent","Наименование","Path_to_Excel"};
+            String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type"};
             globVar.DB.createTable("Abonents", columns,"Абоненты");
         }
     }
@@ -988,7 +1006,9 @@ public class DataBase {
         if(StrTools.searchInList("Abonents", list_table_base)< 0) return null;
         return globVar.DB.getData("Abonents");
     }
-
+    public static String getAbonentType(String abonent){
+        return null;
+    }
     
 //    public static void main(String[] arg){
 //       DataBase db = DataBase.getInstance();

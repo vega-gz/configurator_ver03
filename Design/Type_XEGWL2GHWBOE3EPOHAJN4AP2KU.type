@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_AnAM_Internal" Kind="Struct" UUID="362E073F4C91D3F3BF6443B04D1F1ABD">
-    <Fields>
-        <Field Name="mismathTimer" Type="REAL" UUID="B4AFC9FD40ED511EEBBAA582D28F4D69" />
-    </Fields>
-</Type>

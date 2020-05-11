@@ -39,15 +39,15 @@ import org.xml.sax.SAXException;
 // класс удаления неверного <!DOCTYPE SubAppType v. 1.3 >
 class ReadBedXML {
 
-    String patchD = "";
-
-    ReadBedXML(String patchD) {
-        this.patchD = patchD;
-    }
-
+    String pathD = "";
     String doctype = "";
     int positionDTD;
     boolean positionDTDFind = false; // триггер для поиска DTD что бы не гонять цикл
+
+
+    ReadBedXML(String patchD) {
+        this.pathD = patchD;
+    }
 
     // --- Запись книги в файл ----
     void writeDocument(Document document, String patchF) throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
@@ -117,7 +117,7 @@ class ReadBedXML {
             int pos_str = 0;
             start_time = System.nanoTime();
             while ((str = in.readLine()) != null) {
-                System.out.println(str); // дебаг 
+                //System.out.println(str); // дебаг 
                 if (positionDTDFind == false) { // вот тут при втором вызове не работает почему то True
                     sb.append(paternDOCTYPE(str, pos_str) + "\n"); // Передаем строки в парсер обработчик
                     //result_data += paternDOCTYPE(str, pos_str) + "\n";
@@ -155,7 +155,8 @@ class ReadBedXML {
                 if (tmpPos == positionDTD) { // если позиция верная то внсим обратно доктипДТД
                     resultTofile += doctype + "\n";
                 } else {
-                    resultTofile += tmpStr + "\n"; // таким способоб убираем пустую и вставляем нужную
+                    tmpStr = tmpStr.trim();
+                    if(!tmpStr.isEmpty()) resultTofile += tmpStr + "\n"; // таким способоб убираем пустую и вставляем нужную
                 }
                 ++tmpPos;
             }
@@ -254,12 +255,14 @@ class ReadBedXML {
             int pos_str = 0;
             String resultTofile = "";
             while ((str = read.readLine()) != null) {
-                if (pos_str == positionDTD) { // если позиция верная то внсим обратно доктипДТД
-                    resultTofile += doctype + "\n";
-                    resultTofile += str + "\n";
-                } else {
-                    resultTofile += str + "\n"; // таким способоб убираем пустую и вставляем нужную
-                }
+//                if (pos_str == positionDTD) { // если позиция верная то внсим обратно доктипДТД
+//                    resultTofile += doctype + "\n";
+//                    resultTofile += str + "\n";
+//                } else {
+                    str = str.trim();
+                    if(!str.isEmpty()) resultTofile += str + "\n"; // таким способоб убираем пустую
+                    //resultTofile += str + "\n"; // таким способоб убираем пустую и вставляем нужную
+//                }
                 ++pos_str;
             }
             read.close();

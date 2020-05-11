@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_FRS" Kind="Struct" UUID="12C046F5E24B187293E447A1383773E4">
-    <Fields>
-        <Field Name="AOss" Type="BOOL" UUID="D2215AD8664BF60E0F3E98A56B9F07FC" />
-        <Field Name="ST_notTurn" Type="BOOL" UUID="E5D12F184ABD9BF0621447BABA61CE67" />
-        <Field Name="GG_notTurn" Type="BOOL" UUID="4E4FE99D4758FB9F88D8EFBBA79F1627" />
-    </Fields>
-</Type>

@@ -1,13 +1,11 @@
 package XMLTools;
 
-import configurator.StructSelectData;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -15,7 +13,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -26,8 +23,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPathFactoryConfigurationException;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -35,36 +30,53 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import DataBaseConnect.DataBase;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.nio.file.Paths;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import ReadWriteExcel.RWExcel;
 import fileTools.FileManager;
 import globalData.globVar;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.transform.sax.SAXSource;
 
 public class XMLSAX {
 
     Document document = null; // Глобальный документ с которым работаем
-    String patchWF = "";
-    DataBase workbase = DataBase.getInstance();
-    ReadBedXML fixXML; // объект реализации обхода неверно сформированного файл
-
+    String pathWF = "";
+    ReadBedXML fixXML = null; // объект реализации обхода неверно сформированного файл
+    
+    
+    public Node importNode(Node n){
+        return document.importNode(n, true);
+    }
+            
+    public void clear(){
+        document=null;
+        pathWF = "";
+        fixXML = null;
+    }
     // --- прочитать документ и передать корневую ноду ---
     public Node readDocument(String patchF) {
-        patchWF = patchF;
+        pathWF = patchF;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        //factory.setValidating(true);
+        //factory.setIgnoringElementContentWhitespace(true);
+        Node n = null; // это для корневой ноды но может и не надо
+        try {
+            fixXML = new ReadBedXML(patchF);
+            String documenWithoutDoctype = fixXML.methodRead(patchF); // Так читаем и получаем преобразованные данные,
+            InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
+            document = factory.newDocumentBuilder().parse(stream);
+            n = document.getDocumentElement(); // Получаем корневой элемент
+
+        } catch (SAXException | InterruptedException | TransformerFactoryConfigurationError | IOException | ParserConfigurationException ex) {
+            System.out.println(patchF + " - это не XML или ошибки в нём критические");
+        }
+        return n;
+    }
+    public Node readDocument1(String patchF) {
+        pathWF = patchF;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
         //factory.setValidating(true);
@@ -112,6 +124,11 @@ public class XMLSAX {
         }
     }
 
+    // --- Вставка и сождании новой ноды с параметрами ---
+    public Node insertChildNode(Node parent, String arg) {
+        String [] sa = {arg};
+        return insertChildNode(parent, sa);
+    }
     // --- Вставка и сождании новой ноды с параметрами ---
     public Node insertChildNode(Node parent, String[] arg) {
         // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
@@ -178,7 +195,7 @@ public class XMLSAX {
 
     // --- инициализировать документ с путем для его сохранения (если стандартными способами создали)---
     public void docInstance(Document document, String patchWF) {
-        this.patchWF = patchWF;
+        this.pathWF = patchWF;
         this.document = document;
     }
 
@@ -249,62 +266,15 @@ public class XMLSAX {
 
     // --- Запипись в файл структурой XML ---
     public void writeDocument() {
-        try {
-            // удаление пустых строк
-            XPath xp = XPathFactory.newInstance().newXPath();
-            try {
-                NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
-                for (int i=0; i < nl.getLength(); ++i) {
-                Node node = nl.item(i);
-                node.getParentNode().removeChild(node);
-            }
-            } catch (XPathExpressionException ex) {
-                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            File file = new File(patchWF);
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            //System.out.println(document.getNodeName());
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
-            //transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
-            transformer.transform(new DOMSource(document), new StreamResult(file)); // наш документ в начале
-            
-//            XMLReader reader = XMLReaderFactory.createXMLReader();
-//            TransformerFactory tf = TransformerFactory.newInstance();
-//            // Load the transformer definition from the file strip.xsl:
-//            Transformer t = tf.newTransformer(new SAXSource(reader, new InputSource(new FileInputStream("strip.xsl"))));
-//            // Transform the file test.xml to stdout:
-//            t.transform(new SAXSource(reader, new InputSource(new FileInputStream("test.xml"))), new StreamResult(System.out));
-            
-        } catch (TransformerException e) {
-            e.printStackTrace(System.out);
-        }
-        // тут возвращаем данные которые удаляли
-        if (fixXML != null) {
-            try {
-                // если был вызван парсер удаления возвращамем что удалил
-                fixXML.returnToFileDtd(patchWF);//и возвращаем ему удаленный DOCTYPE
-            } catch (InterruptedException ex) {
-                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        if(document == null || "".equals(pathWF)) return;
+        writeDocument(pathWF);
     }
 
-    // --- Запипись в файл структурой XML с указанием именем файла ---
-    public void writeDocument(String patchWF) {
+     // --- Запипись в файл структурой XML с указанием именем файла ---
+    public void writeDocument(String NewPatchWF) {
+        if(document == null) return;
         try {
-            // удаление пустых строк
-            XPath xp = XPathFactory.newInstance().newXPath();
-            try {
-                NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
-                for (int i=0; i < nl.getLength(); ++i) {
-                Node node = nl.item(i);
-                node.getParentNode().removeChild(node);
-            }
-            } catch (XPathExpressionException ex) {
-                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            File file = new File(patchWF);
+            File file = new File(NewPatchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
             transformer.transform(new DOMSource(document), new StreamResult(file));
@@ -315,14 +285,14 @@ public class XMLSAX {
         if (fixXML != null) {
             try {
                 // если был вызван парсер удаления возвращамем что удалил
-                fixXML.returnToFileDtd(patchWF);//и возвращаем ему удаленный DOCTYPE
+                fixXML.returnToFileDtd(NewPatchWF);//и возвращаем ему удаленный DOCTYPE
             } catch (InterruptedException ex) {
                 Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    // --- Метод чтения и подключение к базе посредством конфига ---
+   // --- Метод чтения и подключение к базе посредством конфига ---
     public int setConnectBaseConfig(String patchFile) {
         File f = new File(patchFile);
         String pass = null;
@@ -348,6 +318,7 @@ public class XMLSAX {
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
                     }
                     globVar.desDir = DesignDir; // добавить переменную пути проекта
+                    globVar.dbURL = url; // добавить переменную пути проекта
                     return DataBase.getInstance().connectionToBase(url, base, user, pass); // Вызов запроса к базе подключения
                 }
             } catch (ParserConfigurationException | SAXException | IOException ex) {
@@ -372,7 +343,7 @@ public class XMLSAX {
         if (n != null) {
             System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                if (n.getNodeName().equalsIgnoreCase(s)) {
+                if (n.getNodeName().equals(s)) {
                     System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
@@ -501,199 +472,77 @@ public class XMLSAX {
         return finding;
     }
 
-    // --- сформировать даные из конфигугации XML для чтения Exel---
-    public void ReadExelFromConfig(Node n, String pathExel) {  // pathExel Временно так как мозгов не хватило ночью.                
-        RWExcel readExel = new RWExcel(pathExel);
-        ArrayList<String> it_list_sheet = readExel.get_list_sheet(pathExel); //забираем список листов в файле и строим итератор из них
-        XPathFactory xpathFactory = XPathFactory.newInstance();
-        XPath xpath = xpathFactory.newXPath();
-        ArrayList<ArrayList> dataconfig = new ArrayList<>();
-        NodeList nodesExcel = null;
-
-        String nameTB = ""; // имя таблицы для базы
-        String nameSheetExel = ""; // название листа Exel
-        ArrayList<String> columnExcel = new ArrayList<>(); // Колонки из Excell
-        ArrayList<String> columnBase = new ArrayList<>(); //названия таблиц для Базы
-        ArrayList<String> columnExcelIgnore = new ArrayList<>(); // Колонки из Excell которые пропускаем данные где нет default
-        String defaultValue = null; //  элемент аттрибут ноды по которому срабатывает триггер построения
-        HashMap<String, String> mapDefault = new HashMap<>();
-        boolean defAttrF = false; // триггер добавить сигнал или нет
-        boolean createT = false; // триггер строить таблицу или нет
-
-        NodeList signalList = n.getChildNodes();
-        if (n != null) { // если не пустая нода
-            for (int i = 0; i < signalList.getLength(); i++) {
-                Node firsNode = signalList.item(i);
-                if (firsNode.getNodeType() == firsNode.ELEMENT_NODE) {  // почему не это
-                    nameTB = globVar.abonent + "_" + firsNode.getNodeName(); // Корневая нода это название таблицы
-                    System.out.println("NameTableBase " + nameTB);
-                    NamedNodeMap atrsig = firsNode.getAttributes();
-                    for (int atr = 0; atr < atrsig.getLength(); atr++) { // пробегаем по атрибутам
-                        Node sigSheet = atrsig.item(atr);
-                        if (sigSheet.getNodeName().equalsIgnoreCase("excelSheetName")) { // проверка что идентификатор атрибута excelSheetName
-                            System.out.println("NameExelSheet " + sigSheet.getNodeValue());
-                            nameSheetExel = sigSheet.getNodeValue();
-                        }
-                    }
-                    try {
-                        XPathExpression xPathExpression = xpath.compile("EXEL"); // путь до 
-                        nodesExcel = (NodeList) xPathExpression.evaluate(firsNode, XPathConstants.NODESET);
-                    } catch (XPathExpressionException ex) {
-                        Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    for (int j = 0; j < nodesExcel.getLength(); j++) { // перборка Exel ноды хоть она и одна
-                        Node element = nodesExcel.item(j);
-                        //stepThroughAll(element);
-                        for (Node exelN : getHeirNode(element)) {
-                            //System.out.println("ColumnExel " + exelN.getNodeName()); 
-                            String NameColumnExcel = exelN.getNodeName(); // имя колонки Листа в Excell
-                            columnExcel.add(NameColumnExcel); // добавить колонки листа Excell
-
-                            HashMap<String, String> valueEtrColumnExcelN = getDataNode(exelN); // Получить аттрибуты и значения нод
-                            String valueColumnPos = valueEtrColumnExcelN.get("nameColumnPos");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                            if (valueColumnPos != null) {//проверка что этот атрибут nameColumnPos
-                                //System.out.println("NameColumnToBase: " + Value);
-                                columnBase.add(valueColumnPos); // колонки для базы
-                            }
-                        }
-                        workbase.createTable(nameTB, columnBase); // Создание таблицы
-                        ArrayList<String[]> sheet_fromsheet_from = new ArrayList<>(readExel.getDataCell(nameSheetExel, columnExcel)); // получить данные с страницы
-
-                        // проход по данным с анализом диаграммы Льва 
-                        int tmp = 0; // сюда должна записать переменная начала обработки строк
-                        for (String[] araySheet : sheet_fromsheet_from) {
-                            for (int si = 1; si < araySheet.length; ++si) { // 1 так как данные с uuid
-                                String s = araySheet[si];
-                                Node nodeExcel = getHeirNode(element).get(si - 1); // -1 так как идентификатор без UIddберем ноду с таким же идентификатором столбца
-
-                                HashMap<String, String> valueEtrColumnExcelN = getDataNode(nodeExcel); // Получение имена и атрибутов этой ноды
-                                if (s.equals("")) { // если данные в ячейки нет(средняя ветка)
-                                    // *** ищем switch ***
-                                    String valSwitch = valueEtrColumnExcelN.get("switch");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                                    if (valSwitch != null) {//проверка данные valSwitch есть
-                                        // название столбца от куда мы счтываем данные
-                                        for (int colB = 0; colB < columnBase.size(); ++colB) {
-                                            String nameColumnBase = columnBase.get(colB);
-                                            if (valSwitch.equals(nameColumnBase)) { // совпало какое то имя берем его номер
-                                                araySheet[si] = araySheet[colB]; // присваиваем это значение но номеру массива   
-                                            }
-                                        }
-                                        boolean findVar = false; // триггер нашли хоть один var
-                                        for (int rep = 0; rep < valueEtrColumnExcelN.size(); ++rep) { // по всем элементам прохожусь
-                                            String var = "var" + rep;
-                                            String valueVar = valueEtrColumnExcelN.get(var);
-                                            // сравниваем значение
-                                            if (araySheet[si].equals(valueVar)) {  // если все совпало то вносим с правилами ниже
-                                                araySheet[si] = valueEtrColumnExcelN.get("default" + rep);
-                                                findVar = true;
-                                            }
-                                        }
-                                        if (!findVar) { // если не одно значение не совпалос default1- до безконечности
-                                            String defaultVar = valueEtrColumnExcelN.get("default"); // записываем значения default
-                                            if (defaultVar != null) {
-                                                araySheet[si] = defaultVar;
-                                            } else {
-                                                araySheet[si] = ""; // записываем пустую строку
-                                                FileManager.loggerConstructor("switch error: List excell " + nameTB + "Column " + nodeExcel.getNodeName() + "str= " + tmp);
-
-                                            }
-                                        }
-                                    } else {
-                                        // ищем default
-                                        String valDefault = valueEtrColumnExcelN.get("default");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                                        if (valDefault != null) {//проверка данные default1 есть
-                                            araySheet[si] = valDefault; // нашли дефаулт то в него и пешем 
-                                        } else {
-                                            // ищем formula
-                                            String valFormula = valueEtrColumnExcelN.get("valFormula");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                                            if (valFormula != null) {//проверка данные valFormula есть
-                                                araySheet[si] = calcFormula(); // вызываем метод обработки формулы
-                                            } else {
-                                                araySheet[si] = ""; // записываем пустую строку
-                                                FileManager.loggerConstructor("formula error: List excell " + nameTB + "Column " + nodeExcel.getNodeName() + "str= " + tmp);
-                                            }
-                                        }
-                                    }
-
-                                } else {
-                                    // ищем registr
-                                    String valuRegistr = valueEtrColumnExcelN.get("registr");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                                    if (valuRegistr != null) {//проверка что registr данные есть
-                                        if (valuRegistr.equals("down")) {
-                                            araySheet[si] = araySheet[si].toLowerCase(); // значение в нижний регистр
-                                        } else {
-                                            araySheet[si] = araySheet[si].toUpperCase(); // тогда к верхнему
-                                        }
-                                    }
-                                    // ищем replace
-                                    String valueReplace = valueEtrColumnExcelN.get("replace");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                                    if (valueReplace != null) {
-                                        for (int rep = 0; rep < valueEtrColumnExcelN.size(); ++rep) { // по всем элементам прохожусь
-                                            String repFrom = "repFrom" + rep;
-                                            String valueRepFrom = valueEtrColumnExcelN.get(repFrom);
-                                            // сравниваем значение
-                                            if (araySheet[si].equals(valueRepFrom)) {
-                                                araySheet[si] = valueEtrColumnExcelN.get("repTo" + rep);
-                                            }
-                                        }
-                                    }
-                                }
-                                // второй этап атрибут add1
-                                String valueAdd1 = valueEtrColumnExcelN.get("add1");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                                if (valueAdd1 != null) { // нашли add1
-                                    boolean findAdd = false;
-                                    for (int rep = 0; rep < valueEtrColumnExcelN.size(); ++rep) { // по всем элементам прохожусь
-                                        String repFrom = "add" + rep;
-                                        String valueAdd = valueEtrColumnExcelN.get(repFrom);
-                                        if (valueAdd != null) { // если такой add вообще есть
-                                            for (int colB = 0; colB < columnBase.size(); ++colB) { // название столбца от куда мы счтываем данные
-                                                String nameColumnBase = columnBase.get(colB);
-                                                if (valueAdd.equals(nameColumnBase)) { // совпало какое то имя берем его номер
-                                                    araySheet[si] = araySheet[si] + araySheet[colB]; // добавляем содежимое найденного
-                                                    findAdd = true;
-                                                }
-                                            }
-                                            if (!findAdd) { // если не нашли содержимое столбца add 
-                                                araySheet[si] = araySheet[si] + valueAdd;
-                                            }
-                                        }
-
-                                    }
-                                } else {
-                                    // *** поиск атрибут fRez ***
-                                    String valueFRez = valueEtrColumnExcelN.get("fRez");// можно так не знаю  valueEtrColumnExcelN.containsKey("")
-                                    if (valueFRez != null) {
-                                       ArrayList<Node> ListNFormulas = getHeirNode(returnFirstFinedNode(firsNode, "Formulas"));// ищем ноду Formulas
-                                       String nColumnCurrentT = columnBase.get(si);// Получить название текущего столбца для таблицы
-                                       for(Node nFormulas: ListNFormulas){
-                                           if(nColumnCurrentT.equals(nFormulas.getNodeName())){ // Совпадает ли названия нод Formulas с названием текущего столбца
-                                            System.out.println(nFormulas.getNodeName());
-                                            setDataAttr(nFormulas, "result", araySheet[si]);// добавить аттрибут этой ноде result
-                                           }
-                                       }
-                                    }
-                                }
-                            }
-                            ++tmp;
-                        }
-                        
-                        //writeDocument(); // запишем документ так как были преобразования
-                        for (String[] massS : sheet_fromsheet_from) {
-                            workbase.insertRows(nameTB, massS, columnBase); //Вносим данные в базу
-                        }
-                        // все обнуляем для следующего сигнала
-                        nameTB = "";
-                        nameSheetExel = "";
-                        columnExcel.clear();
-                        columnBase.clear();
-                        defAttrF = false;
-                        createT = false;
-                    }
-                }
+   // --- Запипись в файл структурой XML --- надо бы удалить, но оставлено на свякий случай до 1.09.2020
+    public void writeDocument1() {
+        if(document == null || "".equals(pathWF)) return;
+        try {
+            // удаление пустых строк
+            XPath xp = XPathFactory.newInstance().newXPath();
+            try {
+                NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
+                for (int i=0; i < nl.getLength(); ++i) {
+                Node node = nl.item(i);
+                node.getParentNode().removeChild(node);
+            }
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            File file = new File(pathWF);
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            //System.out.println(document.getNodeName());
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
+            //transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
+            transformer.transform(new DOMSource(document), new StreamResult(file)); // наш документ в начале
+            
+        } catch (TransformerException e) {
+            e.printStackTrace(System.out);
+        }
+        // тут возвращаем данные которые удаляли
+        if (fixXML != null) {
+            try {
+                // если был вызван парсер удаления возвращамем что удалил
+                fixXML.returnToFileDtd(pathWF);//и возвращаем ему удаленный DOCTYPE
+            } catch (InterruptedException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
+    // --- Запипись в файл структурой XML с указанием именем файла --- надо бы удалить, но оставлено на свякий случай до 1.09.2020
+    public void writeDocument1(String NewPatchWF) {
+        if(document == null) return;
+        try {
+            // удаление пустых строк
+            XPath xp = XPathFactory.newInstance().newXPath();
+            try {
+                NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
+                for (int i=0; i < nl.getLength(); ++i) {
+                Node node = nl.item(i);
+                node.getParentNode().removeChild(node);
+            }
+            } catch (XPathExpressionException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            File file = new File(NewPatchWF);
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
+            transformer.transform(new DOMSource(document), new StreamResult(file));
+        } catch (TransformerException e) {
+            e.printStackTrace(System.out);
+        }
+        // тут возвращаем данные которые удаляли
+        if (fixXML != null) {
+            try {
+                // если был вызван парсер удаления возвращамем что удалил
+                fixXML.returnToFileDtd(NewPatchWF);//и возвращаем ему удаленный DOCTYPE
+            } catch (InterruptedException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+ 
     // --- Метод для обработки формул в построение таблицы из XML ---
     String calcFormula() {
         return "i am from Formula!";

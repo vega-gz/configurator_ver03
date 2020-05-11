@@ -14,6 +14,6 @@ public class UUID {
     public static String getUIID() {
         java.util.UUID uniqueKey = java.util.UUID.randomUUID();
         String uiid_str = uniqueKey.toString().replace("-", "");
-        return uiid_str;
+        return uiid_str.toUpperCase();
     }
 }

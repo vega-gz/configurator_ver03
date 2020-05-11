@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_DI_Internal" Kind="Struct" UUID="659357065D424EC1532DD5B5A8EDEF6B">
-    <Fields>
-        <Field Name="timerRepair" Type="REAL" UUID="52C07BC3344E693FD1F8119FEEA15525" Comment="таймер ремонта" />
-        <Field Name="timerAntiTremor" Type="REAL" UUID="4A8139E23443115AC20446B091DD984B" Comment="таймер антидребезга" />
-    </Fields>
-</Type>

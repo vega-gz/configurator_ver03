@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_GPA_AM_Btn" Kind="Struct" UUID="CF13818243384F7179B69DBC852113AB">
-    <Fields>
-        <Field Name="Kr1" Type="EFC2F1704642389525D840801681051A" UUID="111A2724469EE3B9CC00DA88C6E1946E" Comment="Тестовый ИМ" />
-        <Field Name="PNSD" Type="EFC2F1704642389525D840801681051A" UUID="E5F9ECFE014B4F21CD8D4CBC794691E0" Comment="Тестовый ИМ" />
-    </Fields>
-</Type>

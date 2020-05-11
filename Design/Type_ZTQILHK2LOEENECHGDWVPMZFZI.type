@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_FR_AnAM_Btn" Kind="Struct" UUID="866C00E94743A868E81C6AB53629C89D">
-    <Fields>
-        <Field Name="TRK" Type="EB824DBB45D409040889D7B96D33A9CA" UUID="FC6A61B04779593300112C8AF8B2E8E5" />
-    </Fields>
-</Type>

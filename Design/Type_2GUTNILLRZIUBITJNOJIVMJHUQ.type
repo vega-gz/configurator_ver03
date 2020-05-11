@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_AnAM_Settings" Kind="Struct" UUID="ED2E4A714A0F9A51D6443EB905AFDC78">
-    <Fields>
-        <Field Name="mismathLim" Type="REAL" UUID="E71CC72740426C578DE162B4B2CCFD27" Comment="Максимально допустимое рассогласование задания и положения" />
-        <Field Name="mismathTimeLim" Type="REAL" UUID="788CEC3B46E8A24EAFCE02B420FAC2F2" Comment="Максимально допустимое время рассогласования задания и положения" />
-    </Fields>
-</Type>

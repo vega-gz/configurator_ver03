@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_Graph" Kind="Struct" UUID="EE67E15142EC74278378C1A6B2ADA2E4">
-    <Fields>
-        <Field Name="cond" Type="DWORD" UUID="8A01E4EF412BFF1D70C4429E8599B57E" ArraySize="32" Comment="Условия перехода" />
-        <Field Name="state" Type="INT" UUID="6DC441AA4DF72C88C355028EBD2D8A45" Comment="Номер режима" />
-    </Fields>
-</Type>

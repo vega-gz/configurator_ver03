@@ -1,32 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ReadWriteExcel;
 
-import XMLTools.XMLSAX;
 import fileTools.FileManager;
 import globalData.globVar;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-//import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -37,14 +24,8 @@ import static org.apache.poi.ss.usermodel.CellType.BLANK;
 import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-/**
- *
- * @author cherepanov
- */
 public class RWExcel {
     int startReadData = 0;
     private String path_file;
@@ -57,8 +38,8 @@ public class RWExcel {
     public RWExcel() { // по умолчанию(можно не использовать)
     }
     
-    public void setPatchF(String patch_file) {
-        this.path_file = patch_file;
+    public void setPathF(String path_file) {
+        this.path_file = path_file;
     }
 
     public void readAllfile() throws IOException {
@@ -826,6 +807,7 @@ public class RWExcel {
         if(inputStream == null) return -1;
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
         if(wb == null) return -1;
+        FileManager.loggerConstructor("Заливаем в таблицы абонента "+globVar.abonent+" данные из книги "+pathExel);
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
         for(Node n : nList){
@@ -845,7 +827,6 @@ public class RWExcel {
                 for(Node col : colList){
                     String colExName = col.getNodeName();
                     tabColNames[colCnt] = globVar.sax.getDataAttr(col,"nameColumnPos");
-                    //String type = globVar.sax.getDataAttr(col,"type");
                     
                     //String childTable = globVar.sax.getDataAttr(col,"childTable");
                     //String cildCol = globVar.sax.getDataAttr(col,"cildCol");
@@ -876,7 +857,7 @@ public class RWExcel {
                         if("".equals(strCell)){
                             String def = globVar.sax.getDataAttr(col,"default");
                             if(def == null){
-                                FileManager.loggerConstructor("В ячейке "+colExName+i+" должно быть значение");
+                                FileManager.loggerConstructor("В ячейке "+colExName+i+" листа "+ exSheetName +" должно быть значение");
                                 isError = true;
                                 dataFromExcel[i][colCnt]="";
                             }else{
@@ -887,8 +868,26 @@ public class RWExcel {
                             if(unical != null){
                                 for(int j=0; j < i; j++){
                                     if(strCell.equals(dataFromExcel[j][colCnt])){
-                                        FileManager.loggerConstructor("Одинаковые значения \"" +strCell+ "\" в ячейках " + colExName+(j+1)+" и " + colExName+i);
+                                        FileManager.loggerConstructor("Одинаковые значения \"" +strCell+ "\" в ячейках " + colExName+(j+1)+" и " + colExName+(i+1) +" листа "+ exSheetName);
                                         isError = true;
+                                    }
+                                }
+                            }
+                            String type = globVar.sax.getDataAttr(col,"type");
+                            if(type!=null){
+                                if("Int".equals(type)){
+                                    try { 
+                                        strCell = ""+((int)Double.parseDouble(strCell));
+                                    } catch (NumberFormatException e) {
+                                        FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
+                                    }
+                                }
+                                else if("Number".equals(type)){
+                                    try {   
+                                        Double tmp = Double.parseDouble(strCell);
+                                        strCell = ""+(Math.round(tmp*10000.0)/10000.0);
+                                    } catch (NumberFormatException e) {
+                                        FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
                                     }
                                 }
                             }

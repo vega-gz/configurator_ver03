@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_FR_AnAM_ToHMI" Kind="Struct" UUID="49D4AA124B265610E63990BA8D6B3185">
-    <Fields>
-        <Field Name="TRK" Type="7F71797349DE56E6D8A3BB81C22F938F" UUID="DAA987084EEB1A141DC301BEB1BF42E0" />
-    </Fields>
-</Type>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_GPA_APS" Kind="Struct" UUID="D85A3B524F36C1ABAD2404926C4E3D79">
-    <Fields>
-        <Field Name="BtnAOss" Type="CA7DCADA40490B1CD093B68DAB86CE56" UUID="F832607A4AE3B942E7B8269504A46DDD" />
-    </Fields>
-</Type>

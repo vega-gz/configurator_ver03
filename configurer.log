@@ -1,11 +1,5 @@
-19:23:38_2020.04.29	Не удалось прочитать файл "/home/ad/Документы по работе/Design/NMC_AI_CallAll.txt"
-19:25:09_2020.04.29	Fieldsnot created but XML document null!
-19:25:54_2020.04.29	Fieldsnot created but XML document null!
-19:27:49_2020.04.29	Fieldsnot created but XML document null!
-19:39:36_2020.04.29	Fieldsnot created but XML document null!
-19:42:24_2020.04.29	Не удалось прочитать файл "/home/ad/Документы по работе/Design/NMC_AI_CallAll.txt"
-19:43:20_2020.04.29	Не удалось прочитать файл "/home/ad/Документы по работе/Design/NMC_AI_CallAll.txt"
-19:44:37_2020.04.29	Не удалось прочитать файл "/home/ad/Документы по работе/Design/NMC_AI_CallAll.txt"
-19:45:25_2020.04.29	error PSQL request COMMENT ON TABLE  T_Mode IS 'комментарий к этой таблице';
-19:45:26_2020.04.29	error PSQL request COMMENT ON TABLE  T_Mode IS 'nullРежимы Struct 92D90DE349CAC94C56BC41A25AA0F384 T_Mode ';
-22:03:47_2020.04.29	Не удалось прочитать файл "D:\Projects\Калининград_цех\Design\KC_DGO_CallAll.txt"
+11:37:58_2020.05.11	Не удалось прочитать файлы ни "D:\Projects\Калининград_цех\GenST\UVI_AI_CallAll.txt", ни C:\Users\Lev\Google Диск\Проекты\КонфигураторВсего\VegaConfAI_CallAll.txt
+12:21:49_2020.05.11	Не удалось создать файл "D:\Projects\Калининград_цех\GenST\UVI_AI_CallAll.txt_tmp"
+12:22:59_2020.05.11	Не удалось создать файл "D:\Projects\Калининград_цех\GenST\UVI_AI_CallAll.txt_tmp"
+12:29:26_2020.05.11	Не удалось прочитать служебный файл "D:\Projects\Калининград_цех\GenST\TSK_AI_CallAll.txtC:\Users\Lev\Google Диск\Проекты\КонфигураторВсего\VegaConf\AI_CallAll.txt
+12:30:46_2020.05.11	Не удалось создать файл "D:\Projects\Калининград_цех\GenST\TSK_AI_CallAll.txt_tmp"

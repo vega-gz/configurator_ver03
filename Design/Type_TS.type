@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE Type v. 1.0 >
-<Type Name="T_TS" Kind="Struct" UUID="5E8C25D249BBD6E8980F969682BCE8AA">
-    <Fields>
-        <Field Name="testP" Type="BOOL" UUID="B10D4EFE4CA7F34593A9A7983E62D491" Comment="Тестовый проект" />
-    </Fields>
-</Type>

@@ -2,50 +2,21 @@ package FrameCreate;
 
 import XMLTools.XMLSAX;
 
-import fileTools.FileManager;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.xml.parsers.ParserConfigurationException;
-import DataBaseConnect.StructSelectData;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactoryConfigurationException;
-import org.xml.sax.SAXException;
 import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
-import XMLTools.UUID;
-import DataBaseConnect.*;
-import FileConfigWork.Generator;
-import FrameCreate.TableNzVer2;
-import FileConfigWork.Generator;
-import FileConfigWork.SignalTypeToBase;
-import FileConfigWork.SignalTypeConvertTagName;
+import Generators.Generator;
 import globalData.globVar;
-import java.awt.Component;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
-/**
- *
- * @author cherepanov
- */
 public class FrameTabel extends javax.swing.JPanel {
 
     Main_JPanel mj = new Main_JPanel();
@@ -120,6 +91,8 @@ public class FrameTabel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setPreferredSize(new java.awt.Dimension(999, 530));
 
@@ -132,7 +105,7 @@ public class FrameTabel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Сигнал нижнего уровня");
+        jButton2.setText(".type и функции");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -153,6 +126,20 @@ public class FrameTabel extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText("Внести в HW");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox1.setText("без разервов");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -161,13 +148,17 @@ public class FrameTabel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,9 +168,11 @@ public class FrameTabel extends javax.swing.JPanel {
                     .addComponent(jButton5)
                     .addComponent(jButton3)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton4)
+                    .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -192,16 +185,27 @@ public class FrameTabel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 523, Short.MAX_VALUE)
+            .addGap(0, 410, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
+        globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
+        new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
+        int retHMI = 1;
+        try {
+            retHMI = Generator.GenHMI(this);
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(retHMI>0) JOptionPane.showMessageDialog(null, "Создано "+retHMI+" страниц"); // Это сообщение
+        else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -213,7 +217,7 @@ public class FrameTabel extends javax.swing.JPanel {
         int retTy = 1;
         try {
             retTy = Generator.GenTypeFile(this);
-            retST = Generator.genSTcode(this);
+            retST = Generator.genSTcode(this, jCheckBox1.isSelected());
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -246,72 +250,31 @@ public class FrameTabel extends javax.swing.JPanel {
         frame.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-        public TableModel getTableData() { // функция для создания списка из талиц базы так же возращаем объект для конструкции таблицы при запуске
-            // Можно так сложно не соединять, аппендицит от предыдущего что бы не запутаться
-            String[] columnDop = {"Выбор"};// до поля для галок или еще чего
-            String[] columnNames = StructSelectData.getColumns();
-            String[] resultColumn = Stream.concat(Arrays.stream(columnDop), Arrays.stream(columnNames))
-                    .toArray(String[]::new); // соединяем два массива
-            Object[][] data = StructSelectData.getcurrentSelectTable(); // От куда беру данные
-            Object[] streamArray;
-            Object[] streamNull = new Object[1];
-            streamNull[0] = null;
-            Object[][] tmp2 = new Object[data.length][];
-            for (int i = 0; i < data.length; i++) {
-                streamArray = new Object[data[i].length + 1];
-                // преобразовываем массив
-                Object[] testStream = Stream.concat(Arrays.stream(streamNull), Arrays.stream(data[i])).toArray(Object[]::new);
-                tmp2[i] = testStream;
-            }
-            return new DefaultTableModel(tmp2, resultColumn) {
-                @Override
-                public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
-                    Class clazz = String.class;
-                    switch (columnIndex) {
-                        case 0:
-                            clazz = Boolean.class;
-                            break;
-                    }
-                    return clazz;
-                }
-
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return column == column;
-                }
-
-                @Override
-                public void setValueAt(Object aValue, int row, int column) {
-                    // Условие проверки галочки скрывать легенду
-                    if (aValue instanceof Boolean && column == 0) {
-                        System.out.println("Posution - > " + row + " " + aValue);
-                        Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
-                        rowData.set(0, (boolean) aValue);
-                        fireTableCellUpdated(row, column);
-
-                        try {
-                            // Само действие не реализованно
-                            if ((boolean) aValue == true) {
-                                System.out.println("true");
-                            }
-                            if ((boolean) aValue == false) {
-                                System.out.println("false");
-                            }
-                        } catch (NullPointerException e) {
-                            JOptionPane.showMessageDialog(null, "Трудности с добавлением");
-                        }
-                    }
-
-                }
-            };
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
+        globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
+        new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
+        int retHW = 0;
+        try {
+            retHW = Generator.genHW(this);
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if(retHW == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+        else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+    }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

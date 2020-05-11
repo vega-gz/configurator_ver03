@@ -7,19 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StrTools {
-    //static final String operatorChar = "-+*/=<>:";
-    /*
-    static final String spaceChar = " \n\r\t";
-    static final String allowVarChar = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890_.";
-    static final String allowFirstChar = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm_";
-
-    public boolean IsVarName(String s) {
-            if(s.isEmpty()) return false;
-            char[] chArr = s.toCharArray();
-            if(allowFirstChar.indexOf(chArr[0]) < 0) return false;
-            for(int i = 1; i < chArr.length; i++) if(allowVarChar.indexOf(chArr[i]) < 0) return false;
-            return true;
-    }*/
     public static ArrayList<token> strToTokArr(String tail){
         tail = tail.trim();
         tail = tail.replaceAll("\\[\\s+", "[");
@@ -72,5 +59,15 @@ public class StrTools {
         int i;
         for(i=0; i< l.size(); i++) if(s.equals(l.get(i))) return i;
         return -1;
+    }
+    
+    public static String getAttributValue(String s, String a){
+        
+        int start = s.indexOf(a);
+        if(start < 0) return null;
+        start+= a.length();
+        int end = s.indexOf("\"", start); 
+        if (end > start) return s.substring(start, end);        
+        return null;
     }
 }

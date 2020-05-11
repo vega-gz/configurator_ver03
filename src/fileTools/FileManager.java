@@ -6,12 +6,9 @@
 package fileTools;
 
 import globalData.globVar;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +16,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
@@ -30,15 +26,9 @@ import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
-import org.w3c.dom.Node;
 
 //import main.globVar;
 public class FileManager {
@@ -222,6 +212,14 @@ public class FileManager {
         }
         return 0;
     }
+    public void closeWrStream() throws IOException{
+        wrStream.close();
+        fos.close();
+    }
+    public void closeRdStream() throws IOException{
+        rdStream.close();
+        fis.close();
+    }
 
     public int createFile2write(String dirName, String fileName) throws IOException {
 
@@ -239,6 +237,18 @@ public class FileManager {
             if (!created) {
                 return 2; // не удалось создать файл
             }
+        }
+        fos = new FileOutputStream(wrFile, false);
+        wrStream = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+        return 0;
+    }
+    public int createFile2write(String fileName) throws IOException {
+        wrFile = new File(fileName);
+        if (wrFile.isFile()) {
+            wrFile.delete();
+        }
+        if (!wrFile.createNewFile()) {
+            return 2; // не удалось создать файл
         }
         fos = new FileOutputStream(wrFile, false);
         wrStream = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
@@ -268,7 +278,32 @@ public class FileManager {
         EOF = false;
         return 0;
     }
+    public int openFile4read(String fileName) throws IOException {
+        rdFile = new File(fileName);
+        if (!rdFile.isFile()) {
+            return 3; // не удалось найти файл
+        }
+        fis = new FileInputStream(rdFile);
+        rdStream = new InputStreamReader(fis, "UTF-8"); //cs);
+        EOF = false;
+        return 0;
+    }
 
+    public String findStringInFile(String fileName, String f) throws IOException{
+        int ret = openFile4read(fileName);
+        if(ret!=0)return null;
+        String s = rd();
+        int n = 0;
+        while(!EOF && !s.contains(f) && !s.contains("<Resource>")) {
+            s = rd();
+            System.out.println(n);//------------------------------------------ check print ----------------------------
+            n++;
+        }
+        closeRdStream();
+        if(s.contains(f))return s;
+        else return null;
+    }
+    
     public void wr(String s) throws IOException {
         wrStream.write(s);
     }
@@ -300,19 +335,19 @@ public class FileManager {
     }
 
     public int CopyFile(String file1Name, String file2Name, String srcDir, String dstDir, String charSet) throws IOException {
-        if (globVar.fm.openFile4read(srcDir, file1Name, charSet) != 0) {
+        if (openFile4read(srcDir, file1Name, charSet) != 0) {
             return 1;
         }
-        if (globVar.fm.createFile2write(dstDir, file2Name) != 0) {
+        if (createFile2write(dstDir, file2Name) != 0) {
             return 1;
         }
-        while (!globVar.EOF) {
+        while (!EOF) {
             String buf = globVar.fm.rd();
-            globVar.fm.wr(buf);
+            wr(buf);
             //System.out.println("[" + buf +"]" + globVar.EOF);
         }
-        globVar.fm.rdStream.close();
-        globVar.fm.wrStream.close();
+        closeWrStream();
+        closeRdStream();
         return 0;
     }
 
