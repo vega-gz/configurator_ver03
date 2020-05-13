@@ -58,4 +58,5 @@ public class globVar {
 		dinUuid ++;
 		return stUuid + String.format("%012X", dinUuid);
 	}
+                
 }

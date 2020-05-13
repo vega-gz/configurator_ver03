@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Node;
-import DataBaseConnect.StructSelectData;
 import DataBaseConnect.DataBase;
 import ReadWriteExcel.RWExcel;
 import XMLTools.XMLSAX;
@@ -34,7 +33,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     int filepath;
     String filepatch, type;
 
-    public Main_JPanel() {
+    public Main_JPanel(){
         initComponents();
         // globVar.DB = DataBase.getInstance(); // перенес в main
         listDropT = globVar.DB.getListTable(); // получи список таблиц при включении
@@ -332,6 +331,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int ret = 1;
         int casedial = JOptionPane.showConfirmDialog(null, "Загрузка в БД информации для абонента \"" + globVar.abonent+"\"");
         if(casedial==0){
             JFileChooser fileopen = new JFileChooser(globVar.desDir);
@@ -341,21 +341,22 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 //path = file.toString();
                 //excel.setPatchF(file.toString());
                 try {
-                    RWExcel.ReadExelFromConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
+                    ret = RWExcel.ReadExelFromConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
                 } catch (IOException ex) {
                     Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
-        JOptionPane.showMessageDialog(null, "Загрузка в базу завершена!");
+        if(ret==0) JOptionPane.showMessageDialog(null, "Загрузка в базу завершена успешно!");
+        else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // --- Метод реагирования на выбор поля из списка таблиц ---
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         //if(globVar.DB==null) return;
         String selectT = (String) jComboBox1.getSelectedItem();
-        showTable(selectT); // вызов метода построения таблицы 
+            showTable(selectT); // вызов метода построения таблицы 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
@@ -423,10 +424,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;
-//        ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(globVar.DB); // И передаем туда управление базой
-//        frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
-//        frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
-//        frameExecutiveMechanism.setVisible(true);
+        ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(globVar.DB); // И передаем туда управление базой
+        frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+        frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
+        frameExecutiveMechanism.setVisible(true);
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -525,7 +526,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         return new DefaultComboBoxModel(listarrayTable);
     }
 
-    public ComboBoxModel getComboBoxModelAbonents() { // создания списка абонентов
+    public ComboBoxModel getComboBoxModelAbonents(){ // создания списка абонентов
         if (globVar.DB == null) {
             return null;
         }
@@ -541,7 +542,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 
     // --- структура построения для дерева ---
-    private DefaultTreeModel getModelTreeNZ() {
+    private DefaultTreeModel getModelTreeNZ(){
         globVar.DB.createAbonentTable();
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
         ArrayList<String> listTableBd = globVar.DB.getListTable();
@@ -574,7 +575,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 
     // --- метод отображения фрейма таблицы ---
-    public void showTable(String table) {
+    public void showTable(String table){
         if (globVar.DB == null) {
             return;
         }

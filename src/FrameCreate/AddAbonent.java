@@ -1,6 +1,5 @@
 package FrameCreate;
 
-import DataBaseConnect.DataBase;
 import globalData.globVar;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;

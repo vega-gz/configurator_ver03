@@ -93,19 +93,20 @@ public class FrameTabel extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jButton6 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(999, 530));
 
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Добавить в мнемосхему");
+        jButton1.setText("Для HMI");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText(".type и функции");
+        jButton2.setText(".type");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -126,7 +127,7 @@ public class FrameTabel extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText("Внести в HW");
+        jButton4.setText("Для HW");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -140,19 +141,28 @@ public class FrameTabel extends javax.swing.JPanel {
             }
         });
 
+        jButton6.setText("Для ST");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -170,7 +180,8 @@ public class FrameTabel extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton4)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jCheckBox1)
+                    .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE))
         );
@@ -195,33 +206,25 @@ public class FrameTabel extends javax.swing.JPanel {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
-        globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
-        new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
-        int retHMI = 1;
+        String retHMI = null;
         try {
             retHMI = Generator.GenHMI(this);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(retHMI>0) JOptionPane.showMessageDialog(null, "Создано "+retHMI+" страниц"); // Это сообщение
-        else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+        if(retHMI==null) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+        else if(!"".equals(retHMI)) JOptionPane.showMessageDialog(null, "Создано "+retHMI); // Это сообщение 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
-        globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
-        new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
-        int retST = 0;
-        int retTy = 1;
+        int ret = 1;
         try {
-            retTy = Generator.GenTypeFile(this);
-            retST = Generator.genSTcode(this, jCheckBox1.isSelected());
+            ret = Generator.GenTypeFile(this);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(retST == 0 && retTy ==0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+        if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
         else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -251,9 +254,6 @@ public class FrameTabel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
-        globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
-        new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
         int retHW = 0;
         try {
             retHW = Generator.genHW(this);
@@ -268,12 +268,24 @@ public class FrameTabel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int ret = 0;
+        try {
+            ret= Generator.genSTcode(this, jCheckBox1.isSelected());
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+        else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

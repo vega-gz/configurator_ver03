@@ -1,5 +1,6 @@
 package ReadWriteExcel;
 
+import XMLTools.XMLSAX;
 import fileTools.FileManager;
 import globalData.globVar;
 import java.io.File;
@@ -143,7 +144,7 @@ public class RWExcel {
         return max_len_row;
     }
 
-    public ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException {
+    public ArrayList<String> get_list_sheet() throws FileNotFoundException, IOException{
         // Read XSL file
         FileInputStream inputStream = new FileInputStream(new File(path_file));
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
@@ -801,12 +802,38 @@ public class RWExcel {
     }
     
     //public static cellProcessing()
+    public static int getColNumber(String colName, ArrayList<Node> colList){
+        for(int i=0;i<colList.size();i++) 
+            if(colName.equals(globVar.sax.getDataAttr(colList.get(i),"nameColumnPos")))
+                return i;
+        return -1;
+    }
+    public static String getFromDict(String file, String src){
+        XMLSAX dictSax = new XMLSAX();
+        Node dict = dictSax.readDocument(file);
+        ArrayList<Node> wordList = dictSax.getHeirNode(dict);
+        for(Node wordNode :wordList){
+            String word = wordNode.getNodeName();
+            if(word.length() <= src.length() && word.equals(src.substring(0, word.length()))){
+                String end = dictSax.getDataAttr(wordNode,"end");
+                if(end==null || end!=null && end.equals(src.substring(src.length()-end.length())))
+                    return dictSax.getDataAttr(wordNode,"chng");
+            }
+        }
+        return "";
+    }
     // --- сформировать даные из конфигугации XML для чтения Exel---
     public static int ReadExelFromConfig(String pathExel) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
         FileInputStream inputStream = new FileInputStream(new File(pathExel));
-        if(inputStream == null) return -1;
+        if(inputStream == null){
+            FileManager.loggerConstructor("Не удалось открыть файл "+pathExel);
+            return -1;
+        }
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
-        if(wb == null) return -1;
+        if(wb == null){
+            FileManager.loggerConstructor("Aайл "+pathExel + " повреждён или это не XLS");
+            return -1;
+        }
         FileManager.loggerConstructor("Заливаем в таблицы абонента "+globVar.abonent+" данные из книги "+pathExel);
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
@@ -856,12 +883,22 @@ public class RWExcel {
                         if(strCell == null) strCell="";
                         if("".equals(strCell)){
                             String def = globVar.sax.getDataAttr(col,"default");
+                            if(def != null){
+                                dataFromExcel[i][colCnt]=def;
+                            }
+                            if(def == null){
+                                def = globVar.sax.getDataAttr(col,"dictionary");
+                                if(def != null){
+                                    String colName = globVar.sax.getDataAttr(col,"sourceCol");
+                                    int x = getColNumber(colName, colList);
+                                    if(x>=0) dataFromExcel[i][colCnt] = getFromDict(def,dataFromExcel[i][x]);
+                                    else def=null;
+                                }
+                            }
                             if(def == null){
                                 FileManager.loggerConstructor("В ячейке "+colExName+i+" листа "+ exSheetName +" должно быть значение");
                                 isError = true;
                                 dataFromExcel[i][colCnt]="";
-                            }else{
-                                dataFromExcel[i][colCnt]=def;
                             }
                         }else{
                             String unical = globVar.sax.getDataAttr(col,"unical");
@@ -904,7 +941,7 @@ public class RWExcel {
                 }
             }
         }
-    if(isError) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+    if(isError) return -1;
     return 0;
     }
 }

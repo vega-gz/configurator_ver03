@@ -20,7 +20,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
@@ -33,9 +32,9 @@ import DataBaseConnect.DataBase;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.JOptionPane;
-import ReadWriteExcel.RWExcel;
 import fileTools.FileManager;
 import globalData.globVar;
+//import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,7 +129,7 @@ public class XMLSAX {
         return insertChildNode(parent, sa);
     }
     // --- Вставка и сождании новой ноды с параметрами ---
-    public Node insertChildNode(Node parent, String[] arg) {
+    public Node insertChildNode(Node parent, String[] arg){
         // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
         Node createN = createNode(arg[0]);
         String attr = null;
@@ -559,7 +558,7 @@ public class XMLSAX {
         XMLSAX test = new XMLSAX();
         Node n = test.readDocument("test666.xml");
         String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
-        test.insertChildNode(n, massD);
+        //test.insertChildNode(n, massD);
 //        test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");

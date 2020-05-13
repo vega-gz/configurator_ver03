@@ -275,7 +275,7 @@ public class DataBase {
         }
     }
     
-// --- Вставка данных (название таблицы, список столбцов, данные) если нет данных для UUID сам сделает---
+// --- Вставка данных (название таблицы, данные, список столбцов) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
         int colId = getLastId(name_table) + 1; // Получаем последний id и всегда +1 как инкремент
         String addUUID = "";
@@ -599,7 +599,7 @@ public class DataBase {
             String sql;
             stmt = connection.createStatement();
             while (iter_list_table.hasNext()) {
-                sql = "DROP TABLE " + iter_list_table.next() + ";";
+                sql = "DROP TABLE \"" + iter_list_table.next() + "\";";
                 stmt.executeUpdate(sql);
             }
             stmt.close();
@@ -621,7 +621,7 @@ public class DataBase {
             connection.setAutoCommit(false);
             String sql;
             stmt = connection.createStatement();
-            sql = "DROP TABLE \"" + nameT + "\";";
+            sql = "DROP TABLE \'" + nameT + "\';";
             stmt.executeUpdate(sql);
             stmt.close();
             connection.commit();
