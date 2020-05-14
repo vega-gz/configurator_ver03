@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
+import fileTools.FileManager;
 import globalData.globVar;
 import javax.swing.JOptionPane;
 
@@ -26,6 +27,7 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Не удалось прочитать "+globVar.myDir+"\\ConfigSignals.xml");
             return;
         }
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main_JPanel().setVisible(true);

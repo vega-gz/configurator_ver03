@@ -9,11 +9,13 @@ import StringTools.StrTools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -330,7 +332,6 @@ public class FileManager {
         }catch (IOException e) {}
         return null;
     }
-    
     public void wr(String s) throws IOException {
         wrStream.write(s);
     }
@@ -468,6 +469,55 @@ public class FileManager {
         }
     }
     
+    public static int renameUUIDinFile(File fileName){
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(fileName));
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName+"tmp"));
+            String s;
+            String uuid;
+            while ((s = in.readLine()) != null){
+                int start = s.indexOf(" UUID=\"");
+                if(start>=0){
+                    start+= 7;
+                    int end = s.indexOf("\"", start); 
+                    uuid = s.substring(start, end).toUpperCase();
+                    s = s.substring(0,start)+ uuid + s.substring(end);
+                }
+                start = s.indexOf("TypeUUID=\"");
+                if(start>=0){
+                    start+= 10;
+                    int end = s.indexOf("\"", start); 
+                    uuid = s.substring(start, end).toUpperCase();
+                    s = s.substring(0,start)+ uuid + s.substring(end);
+                }
+                start = s.indexOf("Type=\"");
+                if(start>=0){
+                    start+= 6;
+                    int end = s.indexOf("\"", start); 
+                    if(end-start == 32){
+                        uuid = s.substring(start, end).toUpperCase();
+                        s = s.substring(0,start)+ uuid + s.substring(end);
+                    }
+                }
+                out.write(s+"\n");
+            }
+            in.close();
+            out.close();
+            //File file = new File(fileName);                             //создаём ссылку на исходный файл
+            fileName.delete();                                             //удаляем его
+            new File(fileName+"tmp").renameTo(fileName);                          //создаём ссылку на сгенерированный файл и делаем его исходным
+        }catch (IOException e) {}
+        return 0;
+    }
+    
+    public static int renameUUIDinDirectory(String parentDirectory) throws FileNotFoundException, IOException {
+        File[] filesInDirectory = new File(parentDirectory).listFiles();//получаем список элементов по указанному адресу
+        for (File f : filesInDirectory) {//пробегаем по списку элементов по указанному адресу
+            renameUUIDinFile(f);
+        }
+        return 0;
+    }
+
     public void renameTypeFile(String parentDirectory) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(parentDirectory).listFiles();//получаем список элементов по указанному адресу
 
