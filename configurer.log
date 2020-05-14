@@ -6,3 +6,7 @@
 18:56:13_2020.05.12	error PSQL request SELECT column_name,data_type FROM information_schema.columns where table_name = 'KC_AM';
 17:59:38_2020.05.13	error PSQL request DROP SEQUENCE kc_am_id_seq;
 22:01:47_2020.05.13	Яй криветко
+14:25:46_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls
+14:32:35_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls
+14:36:24_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls
+14:57:31_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls

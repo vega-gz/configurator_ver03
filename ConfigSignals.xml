@@ -239,7 +239,7 @@
 		</GenCode>
 		<GenHW drvFile="_DO_DRV" globData="_DO_DRV"/>
 	</DGO>
-	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы">
+	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы модбас-абонента ">
         <EXEL>
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
             <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
@@ -319,7 +319,7 @@
 			<!--/File-->
 		</GenCode>
 	</mb_AO>
-	<mb_DI excelSheetName="mb_DGI" Comment="Дискретные входы">
+	<mb_DI excelSheetName="mb_DI" Comment="Дискретные входы">
 		<GenData>
 			<DI_DRV Type="BOOL" globData1="DI_DRV" globData2="DI"/>
 			<DI_Settings/>
@@ -362,7 +362,7 @@
 		</GenCode>
 		<GenHW drvFile="_DI_DRV" globData="_DI_DRV" hwFile="_LOCALBUS.snt_lb" intFile="_LOCALBUS.int"/>
 	</mb_DI>
-	<mb_DO excelSheetName="mb_DGO" Comment="Дискретные выходы">
+	<mb_DO excelSheetName="mb_DO" Comment="Дискретные выходы">
 		<GenData>
 			<DO_DRV Type="BOOL" globData1="DO" globData2="DO_DRV"/>
 			<DO_FromHMI globData1="DO_FromHMI"/>

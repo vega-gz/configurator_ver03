@@ -833,14 +833,30 @@ public class RWExcel {
             FileManager.loggerConstructor("Aайл "+pathExel + " повреждён или это не XLS");
             return -1;
         }
-        //wb.getAllNames()
+        
+        int qSheets = wb.getNumberOfSheets();
+        String[] listSheets = new String[qSheets];
+        for(int i = 0; i < qSheets; i++) listSheets[i] = wb.getSheetName(i);
+        
         FileManager.loggerConstructor("Заливаем в таблицы абонента "+globVar.abonent+" данные из книги "+pathExel);
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
+        int tCnt = 0;
         for(Node n : nList){
             String tableName = n.getNodeName();
             String exSheetName = globVar.sax.getDataAttr(n, "excelSheetName");
             String tableComment = globVar.sax.getDataAttr(n, "Comment");
+            if("mb".equals(exSheetName.substring(0,2))){
+                for(int i = 0; i < qSheets; i++){
+                    int sl = listSheets[i].length();
+                    int tl = exSheetName.length();
+                    if(sl >= tl && listSheets[i].substring(sl-tl).equals(exSheetName)){
+                        exSheetName = listSheets[i];
+                        tableName = listSheets[i];
+                        break;
+                    }
+                }
+            }
             HSSFSheet sheet = wb.getSheet(exSheetName);
             int rowMax = 32767;
             if(sheet != null){
@@ -939,9 +955,10 @@ public class RWExcel {
                 for(int i=0; i<rowMax; i++){
                     globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);
                 }
+                tCnt++;
             }
         }
     if(isError) return -1;
-    return 0;
+    return tCnt;
     }
 }
