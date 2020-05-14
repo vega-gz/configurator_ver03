@@ -35,6 +35,8 @@ import javax.swing.JTable;
 import javax.swing.SpinnerDateModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -43,7 +45,18 @@ import javax.swing.table.TableCellEditor;
 // --- строиться таблица внутри  JPanel -- 
 public class TableNzVer3 {
 
-    JTable jTable1 = new JTable(); // Сама наша таблица
+    JTable jTable1 = new JTable(){
+       // Так реализация подстройки к ширине данных в ячейке(подсмотрел)
+       public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+           Component component = super.prepareRenderer(renderer, row, column);
+           int rendererWidth = component.getPreferredSize().width;
+           TableColumn tableColumn = getColumnModel().getColumn(column);
+           tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+           return component;
+        }
+
+    };
+    //); // Сама наша таблица
     String nameTable = null;
     DataBase workbase = null; // создаем пустой запрос к базе
     ArrayList<ArrayList> listData = null; // Массив для  перебора в запросе
