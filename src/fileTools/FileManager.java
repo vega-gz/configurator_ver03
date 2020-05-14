@@ -5,10 +5,15 @@
  */
 package fileTools;
 
+import StringTools.StrTools;
+import XMLTools.XMLSAX;
 import globalData.globVar;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,12 +27,13 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 //import main.globVar;
@@ -180,10 +186,8 @@ public class FileManager {
     }
 
     // --- Логирование ошибок и другая информация ---
-    public static void loggerConstructor(String s) {
+    public static void loggerConstructor(String s){// throws FileNotFoundException {
         String nameF = globVar.logFile;
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss_yyyy.MM.dd");
-        String currentTime = formatForDateNow.format(new Date());
         File logF = new File(nameF);
         if (!logF.exists()) { // нет файла то создаем
             try {
@@ -192,12 +196,27 @@ public class FileManager {
                 System.out.println("Error create log file " + nameF);
             }
         }
+        FileOutputStream logOS = null;
+        try {
+            logOS = new FileOutputStream(logF, true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        OutputStreamWriter logStream = new OutputStreamWriter(logOS, StandardCharsets.UTF_8);
+        
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss_yyyy.MM.dd");
+        String currentTime = formatForDateNow.format(new Date());
         s = currentTime + "\t" + s + "\n";
         try {
-            Files.write(Paths.get(nameF), s.getBytes(), StandardOpenOption.APPEND);
+            logStream.write(s);
+            logStream.close();
+            logOS.close();
+            //Files.write(Paths.get(nameF), s.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             System.out.println("Error write log file " + nameF);
         }
+        
     }
 
     public int MoveFile(String fileName, String srcDir, String dstDir) {
@@ -302,6 +321,14 @@ public class FileManager {
         closeRdStream();
         if(s.contains(f))return s;
         else return null;
+    }
+    public static String findStringInFile1(String fileName, String f){
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(fileName));
+            String s;
+            while ((s = in.readLine()) != null) if(s.contains(f))return s;
+        }catch (IOException e) {}
+        return null;
     }
     
     public void wr(String s) throws IOException {
@@ -421,6 +448,12 @@ public class FileManager {
         return null;
     }
 
+    public static void createBackupDir(){
+        String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
+        globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
+        new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
+    }
+    
     public static class MyFileNameFilter implements FilenameFilter {
 
         private String ext;
@@ -432,6 +465,58 @@ public class FileManager {
         @Override
         public boolean accept(File dir, String name) {
             return name.endsWith(ext);
+        }
+    }
+    
+    public void renameTypeFile(String parentDirectory) throws FileNotFoundException, IOException {
+        File[] filesInDirectory = new File(parentDirectory).listFiles();//получаем список элементов по указанному адресу
+
+        String typeAttr,folderAttr=null;//переменная имени типа
+        String expType = "type";
+        String expFolder = "folder";
+        String fileName;//имя самого файла type
+
+        //FileManager fm = new FileManager();
+
+        for (File findType : filesInDirectory) {//пробегаем по списку элементов по указанному адресу
+            String Name = findType.getName();
+            String findexp = Name.substring(Name.lastIndexOf(".") + 1);
+            //System.out.println(findexp);//находим расширение файла
+
+            if (findType.isDirectory()) {//если файл дирректория что то придумать
+
+            } else if (findexp.equals(expType)) {//если расширение type ,то читаем файл
+                String findName = findStringInFile1(Name, "Name=");
+                typeAttr = StrTools.getAttributValue(findName, "Name=\"");//находим этот аттрибут
+                fileName = findType.getName().substring(0, Name.indexOf('.'));//имя файла без расширения(ибо прога читает с расширением)
+                if (!fileName.equals(typeAttr)) {//сравниваем имя файла и имя типа(если не равны ищем фолдер)
+                    for (File findFolder : filesInDirectory) {//пробегаемся по той же дирректории в поисках folder
+                        if (findexp.equals(expFolder)) {//если нашли folder то начинаем его читать(нашли файл с расширение фолдер)
+                            String fold = findFolder.getName();
+                            String foldexp = fold.substring(Name.lastIndexOf(".") + 1);
+                            String path = findFolder.getAbsolutePath();//получили путь до файла
+                            XMLSAX xmlsax = new XMLSAX();
+                            xmlsax.readDocument(path);
+                            String folder = findStringInFile1(findFolder.getName(), fileName);//вроде как ищем строку содержащую имя файла(TYPE)
+                            if(folder!=null) folderAttr = StrTools.getAttributValue(folder,"Name=\"");//нашли значение аттрибута фолдера
+                            if (folderAttr!=null && folderAttr.equals(fileName)) {//находим соответствие в folder если
+                                fileName = findName;//меняем имя типа 
+                                folder.indexOf(fileName.length());
+                                findType.renameTo(new java.io.File(typeAttr+"."+expType));//переименовали файл type
+                              //  Node folderNode=xmlsax.returnFirstFinedNode(globVar.cfgRoot, "Folder");
+                                                     
+                                
+                            }
+
+                        }
+                    }
+
+                    break;
+
+                }
+
+            }
+
         }
     }
 

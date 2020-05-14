@@ -6,26 +6,26 @@
 package FrameCreate;
 
 import configurator.StructSelectData;
-import java.awt.GridBagLayout;
+//import java.awt.GridBagLayout;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Vector;
-import java.util.stream.Stream;
+//import java.util.Arrays;
+//import java.util.HashMap;
+//import java.util.Vector;
+//import java.util.stream.Stream;
 //import javafx.beans.value.ChangeListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+//import javax.swing.JButton;
+//import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
+//import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
-import javax.swing.table.DefaultTableModel;
+//import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseConnect.DataBase;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+//import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 
 /**
  *

@@ -14,6 +14,8 @@ import org.w3c.dom.NodeList;
 public class Generator {
     @SuppressWarnings("empty-statement")
     public static int genHW(FrameTabel ft) throws IOException {
+        int casedial = JOptionPane.showConfirmDialog(null, "Генерировать привязки сигналов к аппаратным каналам?"); // сообщение с выбором
+        if(casedial != 0) return -2; //0 - yes, 1 - no, 2 - cancel
         //---------------------------------------------- найти ноду с именем таблицы в файле конфигурации, и в этой ноде ноду GenData
         String nodeTable = ft.tableName();
         int x = nodeTable.indexOf("_");
@@ -144,9 +146,10 @@ public class Generator {
     }
 
     public static int genSTcode(FrameTabel ft, boolean disableReserve) throws IOException{ //0 -ok, 1 - not source file, 2 -impossible create file
-        String backUpPath = globVar.backupDir;   //установили путь для бэкапа
+        int casedial = JOptionPane.showConfirmDialog(null, "Генерировать Функции обработки и инициализации?"); // сообщение с выбором
+        if(casedial != 0) return -2; //0 - yes, 1 - no, 2 - cancel
+        //String backUpPath = globVar.backupDir;   //установили путь для бэкапа
         FileManager fm = new FileManager();                                 //создали менеджер файлов
-        //XMLSAX configSig = new XMLSAX();                                    //создали менеджер для ХМЛ
         //---------------------------------------------- найти ноду с именем таблицы в файле конфигурации, и в этой ноде ноду GenData
         String nodeTable = ft.tableName();
         int x = nodeTable.indexOf("_");
@@ -157,7 +160,6 @@ public class Generator {
         if(nodeGenCode == null )return 0;
         String commonFileST = (String) globVar.sax.getDataNode(nodeGenCode).get("file");
         String stFileName = abonent + "_" + commonFileST + ".txt"; //Для каждого файла
-        //Сохраняем бэкапную копию. Если в текущем бэкапном каталоге уже есть такой файл - оставляем его
         String srcFile = globVar.desDir + "\\" + "GenST" + "\\" + stFileName;
         String tmpFile = globVar.desDir + "\\" + "GenST" + "\\" + stFileName + "_tmp";
         
@@ -167,8 +169,6 @@ public class Generator {
             return -2;
         }
 
-//        ret = FileManager.copyFileWoReplace(srcFile, backUpPath + "\\" + stFileName, true);                    //создаём резервную копию
-//        if(ret==2){ //Функция копирования не нашла исходного файла
         ret = fm.openFile4read(globVar.myDir, commonFileST + ".txt");
         if(ret!=0){
             FileManager.loggerConstructor("Не удалось прочитать служебный файл \""+srcFile+globVar.myDir+"\\"+commonFileST+".txt");
@@ -176,53 +176,52 @@ public class Generator {
         }
         fm.wr("<Data>\n<Function UUID=\"" + UUID.getUIID() + "\" Name=\"" + abonent + 
                 "_"+ commonFileST +"\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
-//        }else{
-//            fm.openFile4read(globVar.desDir + "\\" + "GenST", stFileName);         //открываем её на чтенье
-//        }
+
         ArrayList<Node> funclist = globVar.sax.getHeirNode(nodeGenCode);      //Создали список функций для генерации. Каждую функцию надо сгенерить по числу строк в таблице
         for(Node genSTnode : funclist){                                 //перебираем функции
             String stFunc = (String) globVar.sax.getDataNode(genSTnode).get("name");  //вычитываем её имя
-            int casedial = JOptionPane.showConfirmDialog(null, "Функции " + stFunc + " генерировать?"); // сообщение с выбором
-            if(casedial == 0){ //0 - yes, 1 - no, 2 - cancel
-                Node args = globVar.sax.returnFirstFinedNode(genSTnode, "arguments");     //Находим ноду с аргументами
-                ArrayList<Node> arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
-                String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
-                while(!fm.EOF && !s.contains(stFunc)){
-                    fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
-                    s = fm.rd();
-                }
-                fm.wr("//Начало сгенерированного кода "+stFunc+"\n");
-                for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
-                   String tmp = "";
-                   for(Node arg : arglist){                                        //Цикл по всем аргументам функции
-                        ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
-                        tmp += ",";                                                //аргумент записан и отделён от следующего запятой
-                        for(Node argPart : argParts){                                   //Цикл по всем частям аргументов - текстовым и табличным
-                            if("text".equals(argPart.getNodeName())) tmp += (String) globVar.sax.getDataNode(argPart).get("t");
-                            else if("dbd".equals(argPart.getNodeName())) tmp += (String) ft.getCell((String) globVar.sax.getDataNode(argPart).get("t"),j);
-                            else if("npp".equals(argPart.getNodeName())) tmp += j;
-                            else if("abonent".equals(argPart.getNodeName())) tmp += abonent;
+            Node args = globVar.sax.returnFirstFinedNode(genSTnode, "arguments");     //Находим ноду с аргументами
+            ArrayList<Node> arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
+            String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
+            while(!fm.EOF && !s.contains(stFunc)){
+                fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
+                s = fm.rd();
+            }
+            fm.wr("//Начало сгенерированного кода "+stFunc+"\n");
+            for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
+               String tmp = "";
+               for(Node arg : arglist){                                        //Цикл по всем аргументам функции
+                    ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
+                    tmp += ",";                                                //аргумент записан и отделён от следующего запятой
+                    for(Node argPart : argParts){                                   //Цикл по всем частям аргументов - текстовым и табличным
+                        if("text".equals(argPart.getNodeName())) tmp += (String) globVar.sax.getDataNode(argPart).get("t");
+                        else if("dbd".equals(argPart.getNodeName())){
+                            //String colName = (String) globVar.sax.getDataNode(argPart).get("t");
+                            //System.out.println(colName);
+                            tmp += (String) ft.getCell((String) globVar.sax.getDataNode(argPart).get("t"),j);
                         }
-                    }            
-                    String disable = "";
-                    if(disableReserve && ((String)ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) disable = "//";
-                                                                                         //Убираем лишнюю запятую в конце
-                    fm.wr("//"+(String)ft.getCell("Наименование", j)+"\n"+disable+stFunc+"("+tmp.substring(1)+");\n");  //записываем вызов функции в файл
-                }
-                //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
-                while(!fm.EOF  && !s.contains("Конец сгенерированного кода")) s = fm.rd(); 
-                while(!fm.EOF){                                                 //дописываем хвост файла
-                    fm.wr(s + "\n");                          
-                    s = fm.rd();
-                }
-                fm.closeRdStream();                                       //закрываем поток чтения
-                fm.closeWrStream();                                       //закрываем поток записи
-                File file = new File(srcFile);                             //создаём ссылку на исходный файл
-                file.delete();                                             //удаляем его
-                new File(tmpFile).renameTo(file);                          //создаём ссылку на сгенерированный файл и делаем его исходным
-                fm.openFile4read(globVar.desDir + "\\" + "GenST", stFileName);              //открываем его на чтенье
-                fm.createFile2write(globVar.desDir + "\\" + "GenST", stFileName + "_tmp");  //открываем временный файл для генерации
-            }else if(casedial != 1) return -2; //0 - yes, 1 - no, 2 - cancel
+                        else if("npp".equals(argPart.getNodeName())) tmp += j;
+                        else if("abonent".equals(argPart.getNodeName())) tmp += abonent;
+                    }
+                }            
+                String disable = "";
+                if(disableReserve && ((String)ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) disable = "//";
+                                                                                     //Убираем лишнюю запятую в конце
+                fm.wr("//"+(String)ft.getCell("Наименование", j)+"\n"+disable+stFunc+"("+tmp.substring(1)+");\n");  //записываем вызов функции в файл
+            }
+            //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
+            while(!fm.EOF  && !s.contains("Конец сгенерированного кода")) s = fm.rd(); 
+            while(!fm.EOF){                                                 //дописываем хвост файла
+                fm.wr(s + "\n");                          
+                s = fm.rd();
+            }
+            fm.closeRdStream();                                       //закрываем поток чтения
+            fm.closeWrStream();                                       //закрываем поток записи
+            File file = new File(srcFile);                             //создаём ссылку на исходный файл
+            file.delete();                                             //удаляем его
+            new File(tmpFile).renameTo(file);                          //создаём ссылку на сгенерированный файл и делаем его исходным
+            fm.openFile4read(globVar.desDir + "\\" + "GenST", stFileName);              //открываем его на чтенье
+            fm.createFile2write(globVar.desDir + "\\" + "GenST", stFileName + "_tmp");  //открываем временный файл для генерации
         }
         fm.closeRdStream();                                       //закрываем поток чтения
         fm.closeWrStream();                                       //закрываем поток записи
@@ -330,9 +329,9 @@ public class Generator {
         return 0;
     }
     
-    public static int GenHMI(FrameTabel ft) throws IOException {
+    public static String GenHMI(FrameTabel ft) throws IOException {
         int casedial = JOptionPane.showConfirmDialog(null, "Листы мнемосхем для " + ft.tableName() + " генерировать?"); // сообщение с выбором
-        if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
+        if(casedial != 0) return ""; //0 - yes, 1 - no, 2 - cancel
         String targetFile;// = null;
         String nameTable = ft.tableName();//нашли ai ao do и тд
         int x = nameTable.indexOf("_");
@@ -344,236 +343,265 @@ public class Generator {
         Node findNode = HMIcfg.returnFirstFinedNode(hmiCfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
             FileManager.loggerConstructor("Тип данных "+nodeTable+" не описан в файле ConfigSignals.xml");
-            return -1;
+            return null;
         }//Если не вылетели - значит будет генерация
-        Node hmiNode = HMIcfg.returnFirstFinedNode(findNode, "GenHMI");//В конфигурации нашли описание для ЧМИ
-        if (hmiNode == null) {
-            FileManager.loggerConstructor("Для типа данных "+nodeTable+" не описана генерация листов ЧМИ");
-            return -1;
-        }//Если не вылетели - значит будет генерация
-        String nameGCTcommon = HMIcfg.getDataAttr(hmiNode, "name");
-        String nameGCT = abonent +"_"+ nameGCTcommon;
-        String typeGCT = HMIcfg.getDataAttr(hmiNode, "type");
-        String uuidGCT = HMIcfg.getDataAttr(hmiNode, "typeUUID");
-        String uuidNameRuGCT = "D11E59B74DBD1F394957C4876E4DCD20";//HMIcfg.getDataAttr(hmiNode, "nameRuUUID");
-        String uuidPrefAbGCT = "7B21228345FE145C1039349D18AF2C71";//HMIcfg.getDataAttr(hmiNode, "prefAbUUID");
-        
-        Integer maxX=null, maxY=null;
-        Double startPosX=null, startPosY=null, incX=null, incY=null;
-        String tmp = HMIcfg.getDataAttr(hmiNode, "maxX");
-        if(tmp!=null) maxX = Integer.parseInt(tmp);
-        tmp = HMIcfg.getDataAttr(hmiNode, "maxY");
-        if(tmp!=null) maxY = Integer.parseInt(tmp);
-        tmp = HMIcfg.getDataAttr(hmiNode, "startPosX");
-        if(tmp!=null) startPosX = Double.parseDouble(tmp);
-        tmp = HMIcfg.getDataAttr(hmiNode, "startPosY");
-        if(tmp!=null) startPosY = Double.parseDouble(tmp);
-        tmp = HMIcfg.getDataAttr(hmiNode, "incX");
-        if(tmp!=null) incX = Double.parseDouble(tmp);
-        tmp = HMIcfg.getDataAttr(hmiNode, "incY");
-        if(tmp!=null) incY = Double.parseDouble(tmp);
-        if(maxX==null || maxY==null || startPosX==null || startPosY==null || incX==null || incY==null){
-            FileManager.loggerConstructor("Для типа данных "+nodeTable+" не полностью описаны координаты элементов ЧМИ");
-            return -1;
-        }
-        
-        Node addVar = HMIcfg.returnFirstFinedNode(hmiNode, "additionalVar");
-        String[][] addVarsData = null;
-        if(addVar!=null){
-            ArrayList<Node> addVars = HMIcfg.getHeirNode(addVar);
-            addVarsData = new String[addVars.size()][4];
-            int i=0;
-            for(Node av: addVars){
-                addVarsData[i][0] = av.getNodeName();
-                addVarsData[i][1] = HMIcfg.getDataAttr(av, "tableCol");
-                addVarsData[i][2] = HMIcfg.getDataAttr(av, "Type");
-                addVarsData[i][3] = HMIcfg.getDataAttr(av, "TypeUUID");
-                i++;
-            }
-         }
-        
-        ArrayList<String> hintAL = new ArrayList<>();
-        Node hintNode = HMIcfg.returnFirstFinedNode(hmiNode, "Hint");
-        if(hintNode!=null){
-            String addCol = HMIcfg.getDataAttr(hintNode, "add0");
-            for(int i=1; i<100 && addCol != null; i++){
-                hintAL.add(addCol);
-                addCol = HMIcfg.getDataAttr(hintNode, "add"+i);
-            }
-        }
-        String backUpPath = globVar.backupDir;   //установили путь для бэкапа
-        String filePath = globVar.desDir + "\\" + "GenHMI"; //Установили путь для файла
-        String hmiProjectFile = globVar.desDir + "\\" + "Design" + "\\" + HMIcfg.getDataAttr(hmiCfgRoot, "project"); // Нужен для поиска УУИДов листов
-        
-        targetFile = HMIcfg.getDataAttr(hmiNode, "file");//получили имя файла в который записываю верхний уровень,который в последствии читаем AI_HMI_inc
-        String folderNodeName=null;
-        String pageName = nameGCT+"1";
-        Node gctNode;
-        String sourceFile;
-        XMLSAX HMIsax = new XMLSAX();
         XMLSAX bigSax = new XMLSAX();
+        String hmiProjectFile = globVar.desDir + "\\" + "Design" + "\\" + HMIcfg.getDataAttr(hmiCfgRoot, "project"); // Нужен для поиска УУИДов листов
         Node bigRoot = bigSax.readDocument(hmiProjectFile);
-        String[] findInBig = {"GraphicsCompositeFBType","Name",pageName};
-        FileManager fm = new FileManager();
-        if(targetFile==null){
-            sourceFile = "root\\HMI_Sheet.txt";
-            targetFile = filePath + "\\" + pageName +".txt";//если имени в ноде нет - конструируем имя
-            Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
-            gctNode = HMIsax.returnFirstFinedNode(hmiRoot, "GraphicsCompositeFBType");
-            HMIsax.setDataAttr(gctNode, "Name", pageName);
-            String sheetUUID = null;
-            Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);
-            System.out.println("Print 2:"+sheetUUID);//------------------------------------------ check print ----------------------------
-            if(myPage!=null) sheetUUID = bigSax.getDataAttr(myPage, "UUID");
-            if(sheetUUID==null) sheetUUID = UUID.getUIID();
-            HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
-        }else{
-            sourceFile = targetFile;
-            gctNode = null;
-        }
-        if(gctNode==null){
-            FileManager.loggerConstructor("Не найдена нода GraphicsCompositeFBType в " + sourceFile);
-            return -1;
-        }
-        //Определяем УУИДы этого блока ---
-        String arrForFindNode[] = {"VarDeclaration", "Name", "NameRu"};
-        Node il = HMIsax.findNodeValue(gctNode, arrForFindNode);
-        String NameRuUUID = "31E704A94C1D0BCA16C48C8F563CAB4B";//il.getAttributes().getNamedItem("UUID").getNodeValue();
-        arrForFindNode[2] = "PrefAb";
-        il = HMIsax.findNodeValue(gctNode, arrForFindNode);
-        String PrefAbUUID = "7DF53A3B47B1075B9D3AE78253FC271B";//il.getAttributes().getNamedItem("UUID").getNodeValue();
+        if (bigRoot == null) {
+            FileManager.loggerConstructor("Не найден файл проекта "+hmiProjectFile);
+            return null;
+        }//Если не вылетели - значит будет генерация
         
-        Node FBNetwork = HMIsax.returnFirstFinedNode(gctNode, "FBNetwork");         //нашел FBNetwork
-        if(FBNetwork!=null) HMIsax.removeNode(FBNetwork);                           //удалили содержимое ноды FBNetwork
-        FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
-        Node DataConnections = HMIsax.createNode("DataConnections");
-        int fbX = 0, fbY = 0, col = 1, row = 1;
-        Double posElemX = startPosX, posElemY = startPosY;
-        int pageCnt = 1;
-        //-------------------- начинаем цикл по строкам таблицы ------------------------------------
-        for (int i = 0; i < ft.tableSize(); i++) {
-            //-- конструируем ФБ
-            String fbUUID = UUID.getUIID().toUpperCase();
-            String[] fbData = {"FB","Name",     abonent + typeGCT + "_"+ i, 
-                                    "Type",     typeGCT, 
-                                    "TypeUUID", uuidGCT,
-                                    "UUID",     fbUUID, 
-                                    "X",        ""+fbX, 
-                                    "Y",        ""+fbY};
-            Node nodeFB = HMIsax.insertChildNode(FBNetwork, fbData);
-            fbX += 350; if(fbX > 1200){fbY+=420; fbX = 0;}//распределение ФБ по листу редактора Сонаты
-            //-- Начинаем заполнять ФБ содержимым
-            String fbChildNode[] = {"VarValue", 
-                                    "Variable", "Name", 
-                                    "Value",    "'" + (String) ft.getCell("Наименование", i) + "'",
-                                    "Type",     "STRING", 
-                                    "TypeUUID", "38FDDE3B442D86554C56C884065F87B7"};//создали массив элемента вариабле ПОС
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            
-            String tagName = (String) ft.getCell("TAG_NAME_PLC", i);
-            fbChildNode[2] = "NameAlg";
-            fbChildNode[4] = "'" + tagName + "'";
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            fbChildNode[2] = "PrefStr";
-            fbChildNode[4] = "'" + subGroup + "'";
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            fbChildNode[2] = "TagID";
-            fbChildNode[4] = "'" + nodeTable + tagName + "'";
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            fbChildNode[2] = "Num";
-            fbChildNode[4] = "'" + (i+1) + "'";
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            //Create Hint
-            String hint = "";
-            for(String hintPart : hintAL){
-                String s = (String) ft.getCell(hintPart, i);
-                if(s==null) s = hintPart;
-                hint += s;
+        String filePath = globVar.desDir + "\\" + "GenHMI"; //Установили путь для файлов
+        
+        ArrayList<Node> hmiNodeList = HMIcfg.getHeirNode(findNode);//Находим все ноды
+        String ret = "";
+        for(Node hmiNode: hmiNodeList){
+            //hmiNode = HMIcfg.returnFirstFinedNode(findNode, "GenHMI");//В конфигурации нашли описание для ЧМИ
+            if (!"GenHMI".equals(hmiNode.getNodeName())) {
+                FileManager.loggerConstructor("Для типа данных "+nodeTable+" не описана генерация листов ЧМИ");
+                return null;
+            }//Если не вылетели - значит будет генерация
+
+            String typeGCT = HMIcfg.getDataAttr(hmiNode, "type");
+
+            String uuidGCT = null;//HMIcfg.getDataAttr(hmiNode, "typeUUID");
+            String[] findInBig = {"GraphicsCompositeFBType","Name",typeGCT};
+            Node myBlock = bigSax.findNodeAtribute(bigRoot, findInBig);
+            if(myBlock!=null) uuidGCT = bigSax.getDataAttr(myBlock, "UUID");
+            else {
+                FileManager.loggerConstructor("В проекте нет блока "+typeGCT);
+                return null;
             }
-            fbChildNode[2] = "hint";
-            fbChildNode[4] = "'" + hint + "'";
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            
-            String disableAlarm = "FALSE";
-            String visiblePar = "TRUE";
-            if(tagName.contains("Res_")){disableAlarm = "TRUE"; visiblePar = "FALSE";}
-            fbChildNode[2] = "visiblePar";
-            fbChildNode[4] = visiblePar;
-            fbChildNode[6] = "BOOL";
-            fbChildNode[8] = "EC797BDD4541F500AD80A78F1F991834";
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            fbChildNode[2] = "disableAlarm";
-            fbChildNode[4] = disableAlarm;
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            
-            fbChildNode[2] = "pos";
-            fbChildNode[4] = "(x:=" + posElemX + ",y:=" + posElemY + ")";
-            fbChildNode[6] = "TPos";
-            fbChildNode[8] = "17C82815436383728D79DA8F2EF7CAF2";
-            HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-            
-            if(addVarsData!=null) for(int j=0; j<addVarsData.length; j++){
-                fbChildNode[2] = addVarsData[j][0];
-                String apos = "";
-                if("STRING".equals(addVarsData[j][2])) apos = "'";
-                fbChildNode[4] = apos + (String) ft.getCell( addVarsData[j][1], i) + apos;
-                fbChildNode[6] =  addVarsData[j][2];
-                fbChildNode[8] =  addVarsData[j][3];
-                HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+
+            String uuidNameRuGCT = "D11E59B74DBD1F394957C4876E4DCD20";//HMIcfg.getDataAttr(hmiNode, "nameRuUUID");
+            String uuidPrefAbGCT = "7B21228345FE145C1039349D18AF2C71";//HMIcfg.getDataAttr(hmiNode, "prefAbUUID");
+
+            Integer maxX=null, maxY=null;
+            Double startPosX=null, startPosY=null, incX=null, incY=null;
+            String tmp = HMIcfg.getDataAttr(hmiNode, "maxX");
+            if(tmp!=null) maxX = Integer.parseInt(tmp);
+            tmp = HMIcfg.getDataAttr(hmiNode, "maxY");
+            if(tmp!=null) maxY = Integer.parseInt(tmp);
+            tmp = HMIcfg.getDataAttr(hmiNode, "startPosX");
+            if(tmp!=null) startPosX = Double.parseDouble(tmp);
+            tmp = HMIcfg.getDataAttr(hmiNode, "startPosY");
+            if(tmp!=null) startPosY = Double.parseDouble(tmp);
+            tmp = HMIcfg.getDataAttr(hmiNode, "incX");
+            if(tmp!=null) incX = Double.parseDouble(tmp);
+            tmp = HMIcfg.getDataAttr(hmiNode, "incY");
+            if(tmp!=null) incY = Double.parseDouble(tmp);
+            if(maxX==null || maxY==null || startPosX==null || startPosY==null || incX==null || incY==null){
+                FileManager.loggerConstructor("Для типа данных "+nodeTable+" не полностью описаны координаты элементов ЧМИ");
+                return null;
             }
-            
-            String[] connects = {"Connection",  "Source" , "NameRU" , 
-                                                "Destination" , nameGCT + i + ".NameRU" , 
-                                                "SourceUUID" , uuidNameRuGCT,
-                                                "DestinationUUID" , fbUUID + "." + NameRuUUID};
-            HMIsax.insertChildNode(DataConnections, connects);//добавили его в ноду
-            connects[2] = "PrefAb";
-            connects[4] = nameGCT + i + ".PrefAb";
-            connects[6] = uuidPrefAbGCT;
-            connects[8] = fbUUID + "." + PrefAbUUID;
-            HMIsax.insertChildNode(DataConnections, connects);//добавили его в ноду
-            
-            posElemY += incY; 
-            row++;
-            if(row > maxY){
-                posElemX += incX; 
-                posElemY = startPosY; 
-                col++;
-                row = 1;
-            } // делим на страницы     
-            if(col > maxX && i < ft.tableSize()-1){
-                if(folderNodeName==null){//Если нет имени фолдера листов сигналов - значит мы делаем файл для импорта
-                    FBNetwork.appendChild(DataConnections);
-                    HMIsax.writeDocument(targetFile);
-                    HMIsax.clear();
-                    targetFile = targetFile.replace("_"+pageCnt+".txt", "_"+(pageCnt+1)+".txt");
-                    pageCnt++;
-                    pageName = nameGCT+pageCnt;
-                    Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
-                    gctNode = HMIsax.returnFirstFinedNode(hmiRoot, "GraphicsCompositeFBType");
-                    HMIsax.setDataAttr(gctNode, "Name", pageName);
-                    String sheetUUID = null;
-                    findInBig[2] = pageName;
-                    Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);
-                    if(myPage!=null) sheetUUID = bigSax.getDataAttr(myPage, "UUID");
-                    if(sheetUUID==null)sheetUUID = UUID.getUIID();
-                    HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
-                    FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
-                    DataConnections = HMIsax.createNode("DataConnections");
-                    fbX = 0;
-                    fbY = 0;
-                    posElemX = startPosX;
-                    posElemY = startPosY;
-                    col = 1;
-                    row = 1;
-                }else{
-                    //Здесь должны быть методы добавления листов непосредственно в сонатовский файл
+
+            Node addVar = HMIcfg.returnFirstFinedNode(hmiNode, "additionalVar");
+            String[][] addVarsData = null;
+            if(addVar!=null){
+                ArrayList<Node> addVars = HMIcfg.getHeirNode(addVar);
+                addVarsData = new String[addVars.size()][4];
+                int i=0;
+                for(Node av: addVars){
+                    addVarsData[i][0] = av.getNodeName();
+                    addVarsData[i][1] = HMIcfg.getDataAttr(av, "tableCol");
+                    addVarsData[i][2] = HMIcfg.getDataAttr(av, "Type");
+                    addVarsData[i][3] = HMIcfg.getDataAttr(av, "TypeUUID");
+                    i++;
+                }
+             }
+
+            ArrayList<String> hintAL = new ArrayList<>();
+            Node hintNode = HMIcfg.returnFirstFinedNode(hmiNode, "Hint");
+            if(hintNode!=null){
+                String addCol = HMIcfg.getDataAttr(hintNode, "add0");
+                for(int i=1; i<100 && addCol != null; i++){
+                    hintAL.add(addCol);
+                    addCol = HMIcfg.getDataAttr(hintNode, "add"+i);
                 }
             }
+            targetFile = HMIcfg.getDataAttr(hmiNode, "file");//получили имя файла в который записываю верхний уровень,который в последствии читаем AI_HMI_inc
+            String folderNodeName=null;
+            String nameGCTcommon = HMIcfg.getDataAttr(hmiNode, "name");
+            String nameGCT = abonent +"_"+ nameGCTcommon;
+            String pageName = nameGCT+"1";
+            Node gctNode;
+            String sourceFile;
+            XMLSAX HMIsax = new XMLSAX();
+            findInBig[2] = pageName;
+            FileManager fm = new FileManager();
+            if(targetFile==null){
+                sourceFile = "root\\HMI_Sheet.txt";
+                targetFile = filePath + "\\" + pageName +".txt";//если имени в ноде нет - конструируем имя
+                Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
+                gctNode = HMIsax.returnFirstFinedNode(hmiRoot, "GraphicsCompositeFBType");
+                HMIsax.setDataAttr(gctNode, "Name", pageName);
+                String sheetUUID = null;
+                Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);
+                //System.out.println("Print 2:"+sheetUUID);//------------------------------------------ check print ----------------------------
+                if(myPage!=null) sheetUUID = bigSax.getDataAttr(myPage, "UUID");
+                if(sheetUUID==null) sheetUUID = UUID.getUIID();
+                HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
+            }else{
+                sourceFile = targetFile;
+                gctNode = null;
+            }
+            if(gctNode==null){
+                FileManager.loggerConstructor("Не найдена нода GraphicsCompositeFBType в " + sourceFile);
+                return null;
+            }
+            //Определяем УУИДы этого блока ---
+            String arrForFindNode[] = {"VarDeclaration", "Name", "NameRu"};
+            //Node il = HMIsax.findNodeValue(gctNode, arrForFindNode);
+            String NameRuUUID = "31E704A94C1D0BCA16C48C8F563CAB4B";//il.getAttributes().getNamedItem("UUID").getNodeValue();
+            arrForFindNode[2] = "PrefAb";
+            //il = HMIsax.findNodeValue(gctNode, arrForFindNode);
+            String PrefAbUUID = "7DF53A3B47B1075B9D3AE78253FC271B";//il.getAttributes().getNamedItem("UUID").getNodeValue();
+
+            Node FBNetwork = HMIsax.returnFirstFinedNode(gctNode, "FBNetwork");         //нашел FBNetwork
+            if(FBNetwork!=null) HMIsax.removeNode(FBNetwork);                           //удалили содержимое ноды FBNetwork
+            FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
+            Node DataConnections = HMIsax.createNode("DataConnections");
+            int fbX = 0, fbY = 0, col = 1, row = 1;
+            Double posElemX = startPosX, posElemY = startPosY;
+            int pageCnt = 1;
+            String nameCol = HMIcfg.getDataAttr(hmiNode, "ruName");
+            boolean isAlarm = HMIcfg.getDataAttr(hmiNode, "isAlarm")!=null;
+            //-------------------- начинаем цикл по строкам таблицы ------------------------------------
+            for (int i = 0; i < ft.tableSize(); i++) {
+                String ruName = (String) ft.getCell(nameCol, i);
+                if(!"".equals(ruName)){
+                    //-- конструируем ФБ
+                    String fbUUID = UUID.getUIID().toUpperCase();
+                    String[] fbData = {"FB","Name",     abonent + typeGCT + "_"+ i, 
+                                            "Type",     typeGCT, 
+                                            "TypeUUID", uuidGCT,
+                                            "UUID",     fbUUID, 
+                                            "X",        ""+fbX, 
+                                            "Y",        ""+fbY};
+                    Node nodeFB = HMIsax.insertChildNode(FBNetwork, fbData);
+                    fbX += 350; if(fbX > 1200){fbY+=420; fbX = 0;}//распределение ФБ по листу редактора Сонаты
+                    //-- Начинаем заполнять ФБ содержимым
+                    String fbChildNode[] = {"VarValue", 
+                                            "Variable", "Name", 
+                                            "Value",    "'" + ruName + "'",
+                                            "Type",     "STRING", 
+                                            "TypeUUID", "38FDDE3B442D86554C56C884065F87B7"};//создали массив элемента вариабле ПОС
+                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+
+                    String tagName = (String) ft.getCell("TAG_NAME_PLC", i);
+                    fbChildNode[2] = "NameAlg";
+                    fbChildNode[4] = "'" + tagName + "'";
+                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    fbChildNode[2] = "PrefStr";
+                    fbChildNode[4] = "'" + subGroup + "'";
+                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    if(isAlarm){
+                        fbChildNode[2] = "TagID";
+                        fbChildNode[4] = "'" + nodeTable + tagName + "'";
+                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    }
+                    fbChildNode[2] = "Num";
+                    fbChildNode[4] = "'" + (i+1) + "'";
+                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    //Create Hint
+                    String hint = "";
+                    for(String hintPart : hintAL){
+                        String s = (String) ft.getCell(hintPart, i);
+                        if(s==null) s = hintPart;
+                        hint += s;
+                    }
+                    fbChildNode[2] = "hint";
+                    fbChildNode[4] = "'" + hint + "'";
+                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+
+                    if(isAlarm){
+                        String disableAlarm = "FALSE";
+                        String visiblePar = "TRUE";
+                        if(tagName.contains("Res_")){disableAlarm = "TRUE"; visiblePar = "FALSE";}
+                        fbChildNode[2] = "visiblePar";
+                        fbChildNode[4] = visiblePar;
+                        fbChildNode[6] = "BOOL";
+                        fbChildNode[8] = "EC797BDD4541F500AD80A78F1F991834";
+                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                        fbChildNode[2] = "disableAlarm";
+                        fbChildNode[4] = disableAlarm;
+                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    }
+                    fbChildNode[2] = "pos";
+                    fbChildNode[4] = "(x:=" + posElemX + ",y:=" + posElemY + ")";
+                    fbChildNode[6] = "TPos";
+                    fbChildNode[8] = "17C82815436383728D79DA8F2EF7CAF2";
+                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+
+                    if(addVarsData!=null) for(int j=0; j<addVarsData.length; j++){
+                        fbChildNode[2] = addVarsData[j][0];
+                        String apos = "";
+                        if("STRING".equals(addVarsData[j][2])) apos = "'";
+                        fbChildNode[4] = apos + (String) ft.getCell( addVarsData[j][1], i) + apos;
+                        fbChildNode[6] =  addVarsData[j][2];
+                        fbChildNode[8] =  addVarsData[j][3];
+                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    }
+
+                    String[] connects = {"Connection",  "Source" , "PrefAb" , 
+                                                        "Destination" , nameGCT + i + ".PrefAb" , 
+                                                        "SourceUUID" , uuidPrefAbGCT,
+                                                        "DestinationUUID" , fbUUID + "." + PrefAbUUID};
+                    HMIsax.insertChildNode(DataConnections, connects);//добавили его в ноду
+                    
+                    if(isAlarm){
+                        connects[2] = "NameRU";
+                        connects[4] = nameGCT + i + ".NameRU";
+                        connects[6] = uuidNameRuGCT;
+                        connects[8] = fbUUID + "." + NameRuUUID;
+                        HMIsax.insertChildNode(DataConnections, connects);//добавили его в ноду
+                    }
+                    posElemY += incY; 
+                    row++;
+                    if(row > maxY){
+                        posElemX += incX; 
+                        posElemY = startPosY; 
+                        col++;
+                        row = 1;
+                    } // делим на страницы     
+                    if(col > maxX && i < ft.tableSize()-1){
+                        if(folderNodeName==null){//Если нет имени фолдера листов сигналов - значит мы делаем файл для импорта
+                            FBNetwork.appendChild(DataConnections);
+                            HMIsax.writeDocument(targetFile);
+                            HMIsax.clear();
+                            targetFile = targetFile.replace("_"+pageCnt+".txt", "_"+(pageCnt+1)+".txt");
+                            pageCnt++;
+                            pageName = nameGCT+pageCnt;
+                            Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
+                            gctNode = HMIsax.returnFirstFinedNode(hmiRoot, "GraphicsCompositeFBType");
+                            HMIsax.setDataAttr(gctNode, "Name", pageName);
+                            String sheetUUID = null;
+                            findInBig[2] = pageName;
+                            Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);
+                            if(myPage!=null) sheetUUID = bigSax.getDataAttr(myPage, "UUID");
+                            if(sheetUUID==null)sheetUUID = UUID.getUIID();
+                            HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
+                            FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
+                            DataConnections = HMIsax.createNode("DataConnections");
+                            fbX = 0;
+                            fbY = 0;
+                            posElemX = startPosX;
+                            posElemY = startPosY;
+                            col = 1;
+                            row = 1;
+                        }else{
+                            //Здесь должны быть методы добавления листов непосредственно в сонатовский файл
+                        }
+                    }
+                }
+            }
+            FBNetwork.appendChild(DataConnections);
+            HMIsax.writeDocument(targetFile);
+            ret += nameGCT + " - " +pageCnt + " страниц. ";
         }
-        FBNetwork.appendChild(DataConnections);
-        HMIsax.writeDocument(targetFile);
-        return pageCnt;
+        return ret;
     }
     
 //Функция занесения переменных в интерфейсные листы приложений Сонаты

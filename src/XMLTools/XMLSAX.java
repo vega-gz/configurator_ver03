@@ -20,7 +20,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
@@ -33,9 +32,9 @@ import DataBaseConnect.DataBase;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.JOptionPane;
-import ReadWriteExcel.RWExcel;
 import fileTools.FileManager;
 import globalData.globVar;
+//import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,7 +129,7 @@ public class XMLSAX {
         return insertChildNode(parent, sa);
     }
     // --- Вставка и сождании новой ноды с параметрами ---
-    public Node insertChildNode(Node parent, String[] arg) {
+    public Node insertChildNode(Node parent, String[] arg){
         // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
         Node createN = createNode(arg[0]);
         String attr = null;
@@ -424,6 +423,22 @@ public class XMLSAX {
         }
         return null;
     }
+    
+    // --- изменить данные аттрибута ноды--- 
+    public boolean editDataAttr(Node n, String nameAtr, String value) {
+        boolean request = false;
+        if(n !=null){
+            NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
+            for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
+                Node attr = startAttr.item(i);
+                if (attr.getNodeName().equals(nameAtr)) { // Название атрибута 
+                    attr.setNodeValue(value);
+                    return request = true;
+                }
+            }
+        }
+        return request;
+    }
 
     // --- Найти ноду по имени и ее атрибутам ---
     public Node findNodeAtribute(Node n, String[] arg) {
@@ -559,8 +574,8 @@ public class XMLSAX {
 //        XMLSAX test = new XMLSAX();
 //        Node n = test.readDocument("test666.xml");
 //        String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
-//        test.insertChildNode(n, massD);
-//        test.writeDocument();
+       // test.insertChildNode(n, massD);
+       // test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");
 //        dataN.put("attr2", "value2");
@@ -583,7 +598,9 @@ public class XMLSAX {
 //        String[] attr = {"G","nameColumnPos"};
 //        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
 ////        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-//        Node fNodName = test.returnFirstFinedNode(n, "Name665"); // поиск по названию ноды
+//        Node fNodName = test.returnFirstFinedNode(n, "Name66"); // поиск по названию ноды
+//        test.editDataAttr(fNodName, "attr1", "new_dats");// изменить значение ноды
+//        test.writeDocument();
 //        test.removeNode(fNodName);
 //        test.writeDocument();
 //        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды

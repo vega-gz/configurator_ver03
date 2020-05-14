@@ -28,18 +28,19 @@
             <S nameColumnPos="Канал" type="Int"/>
 			<O nameColumnPos="Примечание" default=""/>
 			<AD nameColumnPos="sonetModbus" default=""/>
+			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<Formulas>
-			<Диапазон_макс/>
-			<Диапазон_мин/>
-			<range operation="-" operand1="Диапазон_макс" operand2="Диапазон_мин"/>
+			<max column="Диапазон_макс"/>
+			<min column="Диапазон_мин"/>
+			<range operation="-" operand1="max" operand2="min"/>
 			<range1proc operation="/" operand1="range" operand2="100"/>
 			<range3proc operation="*" operand1="range1proc" operand2="3"/>
 			<range6proc operation="*" operand1="range1proc" operand2="6"/>
-			<loLimF operation="-" operand1="Диапазон_мин" operand2="range3proc"/>
-			<hiLimF operation="+" operand1="Диапазон_макс" operand2="range3proc"/>
-			<loBrkF operation="-" operand1="Диапазон_мин" operand2="range6proc" />
-			<hiBrkF operation="+" operand1="Диапазон_макс" operand2="range6proc"/>
+			<loLimF operation="-" operand1="min" operand2="range3proc"/>
+			<hiLimF operation="+" operand1="max" operand2="range3proc"/>
+			<loBrkF operation="-" operand1="min" operand2="range6proc" />
+			<hiBrkF operation="+" operand1="max" operand2="range6proc"/>
 		</Formulas>
 		<GenData>
 			<AI_DRV Type="REAL" globData1="AI_DRV">
@@ -131,6 +132,7 @@
             <T nameColumnPos="Канал"  type="Int"/>
             <Z nameColumnPos="Точность"  type="Int"/>
 			<AA nameColumnPos="sonetModbus" default=""/>
+			<AB nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenCode>
 			<!--File name="A_Algorithm.iec_st"-->
@@ -239,14 +241,23 @@
 	</DGO>
 	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы">
         <EXEL>
-            <F nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
-            <G nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-            <H nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
-            <I nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
-            <J nameColumnPos="Единица_измерения" default=""/>
-            <K nameColumnPos="Точность"  type="Int" default="2"/>
-			<L nameColumnPos="Примечание" default=""/>
-			<O nameColumnPos="sonetModbus" default=""/>
+            <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+            <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
+            <D nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
+            <E nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
+            <F nameColumnPos="Единица_измерения" default=""/>
+            <G nameColumnPos="Точность"  type="Int" default="2"/>
+			<H nameColumnPos="Примечание" default=""/>
+			<I nameColumnPos="tau" default=""/>
+			<J nameColumnPos="доп_инфо" default=""/>
+            <K nameColumnPos="loLim" type="Number" formula="loLimF"/>
+            <L nameColumnPos="hiLim" type="Number" formula="loLimF"/>
+            <M nameColumnPos="loBrk" type="Number" formula="loLimF"/>
+            <N nameColumnPos="hiBrk" type="Number" formula="loLimF"/>
+			<O nameColumnPos="dataType" default="ABCD"/>
+			<P nameColumnPos="Set1" type="Int" default=""/>
+			<Q nameColumnPos="Set2" type="Int" default=""/>
+			<R nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenData>
 			<AI Type="REAL" globData1="mb_AI_DRV"/>
@@ -271,20 +282,18 @@
 			<mb_AO_Settings/>
 		</GenData>
         <EXEL>
-            <F nameColumnPos="Наименование" />
-            <V nameColumnPos="TAG_NAME_PLC" type="VarName"/>
-            <G nameColumnPos="Диапазон_мин" type="Number"/>
-            <H nameColumnPos="Диапазон_макс" type="Number" />
-            <I nameColumnPos="Единица_измерения" />
-            <J nameColumnPos="АЦПмин" />
-            <K nameColumnPos="АЦПмакс" />
-            <M nameColumnPos="Адрес_1"/>
-            <N nameColumnPos="Адрес_2" />
-            <O nameColumnPos="Адрес_3" />
-            <R nameColumnPos="Устройство" type="Int"/>
-            <S nameColumnPos="Слот"  type="Int"/>
-            <T nameColumnPos="Канал"  type="Int"/>
-            <Z nameColumnPos="Точность"  type="Int"/>
+            <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+            <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
+            <D nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
+            <E nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
+            <F nameColumnPos="Единица_измерения" default=""/>
+            <G nameColumnPos="Точность"  type="Int" default="2"/>
+			<H nameColumnPos="Примечание" default=""/>
+			<I nameColumnPos="доп_инфо" default=""/>
+			<J nameColumnPos="dataType" default="ABCD"/>
+			<K nameColumnPos="Set1" type="Int" default=""/>
+			<L nameColumnPos="Set2" type="Int" default=""/>
+			<M nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenCode>
 			<!--File name="A_Algorithm.iec_st"-->
@@ -319,18 +328,11 @@
 			<DI_Internal/>
 		</GenData>
         <EXEL>
-            <F nameColumnPos="Наименование" />
-            <K nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>
-            <G nameColumnPos="Тип_сигнала" default="НО СК"/>
-            <P nameColumnPos="Инверсия" type="bool" default="false"/>
-            <H nameColumnPos="Адрес_1" default=""/>
-            <I nameColumnPos="Адрес_2" default="" />
-            <L nameColumnPos="Устройство" type="Int"/>
-            <M nameColumnPos="Слот"  type="Int"/>
-            <N nameColumnPos="Канал"  type="Int"/>
-            <O nameColumnPos="Задержка"  type="Number" default="0.0"/>
-			<Q nameColumnPos="КЦД" default="false"/>
-			<J nameColumnPos="Примечание" default=""/>
+            <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+            <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
+			<D nameColumnPos="Примечание" default=""/>
+			<E nameColumnPos="доп_инфо" default=""/>
+			<F nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenCode file="DI_CallAll">
 			<!--File name="DI_CallAll.txt"-->
