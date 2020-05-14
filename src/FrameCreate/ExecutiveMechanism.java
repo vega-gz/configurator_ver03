@@ -255,6 +255,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         boolean firstStep = true; // Переменная первого прохода формирования списка
         int sumArraySize = 0; // Переменная для определения длинны формирования массива (не верно)
         int biforeSumArraySize = 0;
+        ArrayList<String> notFindTables = new ArrayList(); // лист не найденных таблиц для запроса из фала
         
         XMLSAX readXML = new XMLSAX();
         Node rootN = readXML.readDocument(globVar.сonfigAMs); // Читаем конфигурационный файл
@@ -264,8 +265,9 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             ArrayList<Node> listNodeMethodExe = readXML.getHeirNode(n);
             
             for (Node nodeConEnd : listNodeMethodExe) { // пробегаем по commands endSensors
-                HashMap<String, String> dataN = readXML.getDataNode(nodeConEnd); // только одно пока данное
-                String nameCaseTable = dataN.get("tableName"); // берем названия из таблицы будет выборка данных
+                //HashMap<String, String> dataN = readXML.getDataNode(nodeConEnd); // только одно пока данное
+                //String nameCaseTable = dataN.get("tableName"); // берем названия из таблицы будет выборка данных
+                String nameCaseTable = nodeConEnd.getNodeName();
                 // пробегаем по on off
                 ArrayList<String> listOnOff = new ArrayList<>();
                 ArrayList<String> listNameOnOff = new ArrayList<>();
@@ -293,7 +295,8 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                     listTagName.add(dataFromBase); // Кладем структуру в Лист
                     columnT.addAll(listNameOnOff); // Сращиваем с значениями нод
                 } else {
-                    JOptionPane.showMessageDialog(null, "Не найдены идентификаторы столбцов " + nameTreq); // Это сообщение
+                    notFindTables.add(nameTreq);
+                    //JOptionPane.showMessageDialog(null, "Не найдены идентификаторы столбцов " + nameTreq); // Это сообщение
                 }
 
                 if (listTagName != null && listTagName.size() > 1) {
@@ -345,6 +348,14 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
 
         }
         columns = columnT.toArray(new String[columnT.size()]); // преобразовываем в массив
+        // и сообщение если есть какие то неполадки
+        if(notFindTables.size() > 0){
+            String message = "";
+            for(String s: notFindTables){
+                message += s + "\n";
+            }
+            JOptionPane.showMessageDialog(null, "Не найдены таблицы \n" + message); // Это сообщение
+        }
         return findingTagname;
     }
 

@@ -6,3 +6,6 @@
 18:56:13_2020.05.12	error PSQL request SELECT column_name,data_type FROM information_schema.columns where table_name = 'KC_AM';
 17:59:38_2020.05.13	error PSQL request DROP SEQUENCE kc_am_id_seq;
 22:01:47_2020.05.13	Яй криветко
+12:18:26_2020.05.14	Name66not created but XML document null!
+12:18:51_2020.05.14	Name66not created but XML document null!
+12:19:47_2020.05.14	Name66not created but XML document null!
