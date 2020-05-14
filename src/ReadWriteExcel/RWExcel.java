@@ -870,20 +870,6 @@ public class RWExcel {
                 for(Node col : colList){
                     String colExName = col.getNodeName();
                     tabColNames[colCnt] = globVar.sax.getDataAttr(col,"nameColumnPos");
-                    
-                    //String childTable = globVar.sax.getDataAttr(col,"childTable");
-                    //String cildCol = globVar.sax.getDataAttr(col,"cildCol");
-                    //String fRez = globVar.sax.getDataAttr(col,"fRez");
-                    
-                    //String sw = globVar.sax.getDataAttr(col,"switch");
-                    //String formula = globVar.sax.getDataAttr(col,"formula");
-                    //String registr = globVar.sax.getDataAttr(col,"registr");
-                    //String replace = globVar.sax.getDataAttr(col,"replace");
-                    //String repFrom1 = globVar.sax.getDataAttr(col,"nameColumnPos");
-                    
-                    //String add1 = globVar.sax.getDataAttr(col,"add1");
-
-                    //ArrayList<String> dataFomColumn = new ArrayList<>();
                     if(first){
                         for(int i=1; i<rowMax; i++ ){
                             String strCell = getDataCell(sheet.getRow(i), colExName);
@@ -950,7 +936,8 @@ public class RWExcel {
                     colCnt++;
                 }
                 String tableNameAb = globVar.abonent+"_"+tableName;
-                if(globVar.DB.isTable(tableNameAb)) globVar.DB.dropTable(tableNameAb);
+                if(globVar.DB.isTable(tableNameAb)) 
+                    globVar.DB.dropTable(tableNameAb);
                 globVar.DB.createTable(tableNameAb, tabColNames, tableComment);
                 for(int i=0; i<rowMax; i++){
                     globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);

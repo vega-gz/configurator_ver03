@@ -1,12 +1,6 @@
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DataBaseConnect;
 
 
-import FrameCreate.AddAbonent;
 import StringTools.StrTools;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,10 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import fileTools.FileManager;
 import globalData.globVar;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
 
 public class DataBase {
     Statement stmt;
@@ -137,9 +127,6 @@ public class DataBase {
             connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE DATABASE  " + name + ";";
-            //" WITH OWNER " + name +
-            //" ENCODING 'UTF8' " +
-            //" TEMPLATE template0 ;";
             System.out.println(sql);
             stmt.executeUpdate(sql);
             stmt.close();
@@ -447,7 +434,7 @@ public class DataBase {
         return selectData;
     }
     
-        // найти данные по имени столбца и значению ячейки и имени искомого столбца
+        // ---найти данные по имени столбца и значению ячейки и имени искомого столбца---Lev---
     public String getDataCell(String table, String col1, String val1, String col2) {
         String sql = "SELECT \"" + col2 + "\" FROM \"" + table +"\" WHERE \""+col1+"\"='"+val1+"';";
         String val2=null;
@@ -616,12 +603,13 @@ public class DataBase {
 
     //-------------- Удаление конкретной таблицы  ---------------
     public void dropTable(String nameT) {
+        if(!globVar.DB.isTable(nameT)) return;
         //connectionToBase(); // вызов Фукция подключения к базе
         try {
             connection.setAutoCommit(false);
             String sql;
             stmt = connection.createStatement();
-            sql = "DROP TABLE \'" + nameT + "\';";
+            sql = "DROP TABLE \"" + nameT + "\";";
             stmt.executeUpdate(sql);
             stmt.close();
             connection.commit();
@@ -683,130 +671,6 @@ public class DataBase {
     String replacedNt(String s) {
         s = s.replace("-", "_").replace(".", "_").replace(" ", "_").replace("#", "Sharp_").replace("$", "Dollar_"); // тут и при создании нужно сделать единый модуль
         return s;
-    }
-
-    // Гришин метот а может и не один все заменить.
-      //----Строим все сигналы которые сюда ссылаются
-    public ArrayList<String[]> getSelectData(String table) {//в перспективе задавать в параметрах листи через if else указывать,ибо разный набор столбцов мы вытягиваем для ai ao di do
-        ArrayList<String[]> selectData = new ArrayList<>();
-        String TableNumber;
-
-        switch (table) {
-            case "ai":
-                try {
-                    stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
-                    while (rs.next()) {
-                        String TypeADC = rs.getString("TAG_NAME_PLC");
-                      //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование");
-                        String RangeMin = rs.getString("Диапазон_мин");
-                        String RangeMax = rs.getString("Диапазон_макс");//field[4]
-                        String Unit = rs.getString("Единица_измерения");
-                        String sigType = rs.getString("Тип_датчика");
-                        String Adres_1 = rs.getString("Адрес_1");
-                        String Adres_2 = rs.getString("Адрес_2");
-                        String Device = rs.getString("Устройство");//field[9]
-                        String Slot = rs.getString("Слот");
-                        String Channel = rs.getString("Канал");
-                        String An = rs.getString("УСТНИЖНАВАР");
-                        String Pn = rs.getString("УСТНИЖНПРЕД");
-                        String Pv = rs.getString("УСТВЕРХПРЕД");
-                        String Av = rs.getString("УСТВЕРХАВАР");
-
-                        String[] str = {TypeADC,  namesig, RangeMax, RangeMin, Unit, sigType, Adres_1, Adres_2, Device, Slot, Channel, An, Pn, Pv, Av};
-                        selectData.add(str);
-                    }
-                    rs.close();
-                    stmt.close();
-                    System.out.println("--Operation SELECT done sucessfully");
-                } catch (SQLException ex) {
-                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-                    ex.printStackTrace();
-                }
-                break;
-            case "ao":
-                try {
-                    stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
-                    while (rs.next()) {
-                        String TypeADC = rs.getString("TAG_NAME_PLC");
-                       // String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование");
-                        String RangeMin = rs.getString("Диапазон_мин");
-                        String RangeMax = rs.getString("Диапазон_макс");//field[4]
-                        String Unit = rs.getString("Единица_измерения");
-                        String Adres_1 = rs.getString("Адрес_1");
-                        String Adres_2 = rs.getString("Адрес_2");
-                        String Device = rs.getString("Устройство");//field[9]
-                        String Slot = rs.getString("Слот");
-                        String Channel = rs.getString("Канал");
-
-                        String[] str = {TypeADC,  namesig, RangeMax, RangeMin, Unit, Adres_1, Adres_2, Device, Slot, Channel};
-                        selectData.add(str);
-                    }
-                    rs.close();
-                    stmt.close();
-                    System.out.println("--Operation SELECT done sucessfully");
-                } catch (SQLException ex) {
-                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-                    ex.printStackTrace();
-                }
-                break;
-            case "dgo":
-                try {
-                    stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
-                    while (rs.next()) {
-                        String TypeADC = rs.getString("TAG_NAME_PLC");
-                      //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование");
-                        
-                        String sigType = rs.getString("Тип_сигнала");
-                        String Device = rs.getString("Устройство");//field[9]
-                        String Slot = rs.getString("Слот");
-                        String Channel = rs.getString("Канал");
-
-                        String[] str = {TypeADC,  namesig, sigType,  Device, Slot, Channel};
-                        selectData.add(str);
-                    }
-                    rs.close();
-                    stmt.close();
-                    System.out.println("--Operation SELECT done sucessfully");
-                } catch (SQLException ex) {
-                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-                    ex.printStackTrace();
-                }
-                break;
-            case "di":
-                try {
-                    stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery(" SELECT * FROM " + "\"" + table + "\"" + ";");
-                    while (rs.next()) {
-                        String TypeADC = rs.getString("TAG_NAME_PLC");
-                      //  String id = UUID.getUIID();//генерит рандомный уид который никому не интересен
-                        String namesig = rs.getString("Наименование");
-                        String sigType = rs.getString("Тип_сигнала");
-                        String Adres_1 = rs.getString("Адрес_1");
-                        String Adres_2 = rs.getString("Адрес_2");
-                        String Device = rs.getString("Устройство");//field[9]
-                        String Slot = rs.getString("Слот");
-                        String Channel = rs.getString("Канал");
-
-                        String[] str = {TypeADC,  namesig, sigType, Adres_1, Adres_2, Device, Slot, Channel};
-                        selectData.add(str);
-                    }
-                    rs.close();
-                    stmt.close();
-                    System.out.println("--Operation SELECT done sucessfully");
-                } catch (SQLException ex) {
-                    Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-                    ex.printStackTrace();
-                }
-                break;
-
-        }
-        return selectData;
     }
     
     // --- Создание  SEQUENCE ---
