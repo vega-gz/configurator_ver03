@@ -624,7 +624,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     }
                 }
                 String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
-                //StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
                 int sizeWidth = 800;

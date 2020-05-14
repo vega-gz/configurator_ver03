@@ -257,7 +257,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         int biforeSumArraySize = 0;
         
         XMLSAX readXML = new XMLSAX();
-        Node rootN = readXML.readDocument("ConfigAMs.xml"); // Читаем конфигурационный файл
+        Node rootN = readXML.readDocument(globVar.сonfigAMs); // Читаем конфигурационный файл
         ArrayList<Node> listNodeRootN = readXML.getHeirNode(rootN); // ноды рута AM_Classica, AM_NKU и тд
         for (Node n : listNodeRootN) {
             String nameN = n.getNodeName(); // имена первых нод названия иструментов

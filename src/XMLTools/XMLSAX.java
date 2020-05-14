@@ -423,6 +423,22 @@ public class XMLSAX {
         }
         return null;
     }
+    
+    // --- изменить данные аттрибута ноды--- 
+    public boolean editDataAttr(Node n, String nameAtr, String value) {
+        boolean request = false;
+        if(n !=null){
+            NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
+            for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
+                Node attr = startAttr.item(i);
+                if (attr.getNodeName().equals(nameAtr)) { // Название атрибута 
+                    attr.setNodeValue(value);
+                    return request = true;
+                }
+            }
+        }
+        return request;
+    }
 
     // --- Найти ноду по имени и ее атрибутам ---
     public Node findNodeAtribute(Node n, String[] arg) {
@@ -554,12 +570,12 @@ public class XMLSAX {
 
 //     --- Тестовый вызов метода создания документа нод и прочего ---     
     public static void main(String[] arg) {
-        HashMap<String, String> map = new HashMap<>();
-        XMLSAX test = new XMLSAX();
-        Node n = test.readDocument("test666.xml");
-        String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
-        //test.insertChildNode(n, massD);
-//        test.writeDocument();
+//        HashMap<String, String> map = new HashMap<>();
+//        XMLSAX test = new XMLSAX();
+//        Node n = test.readDocument("test666.xml");
+//        String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
+       // test.insertChildNode(n, massD);
+       // test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");
 //        dataN.put("attr2", "value2");
@@ -582,7 +598,9 @@ public class XMLSAX {
 //        String[] attr = {"G","nameColumnPos"};
 //        Node fNValue = test.findNodeValue(n, value); // поиск по ноде и значениям
 ////        Node fNAttr = test.findNodeAtribute(n, attr); // поиск по ноде и атрибутам
-//        Node fNodName = test.returnFirstFinedNode(n, "Name665"); // поиск по названию ноды
+//        Node fNodName = test.returnFirstFinedNode(n, "Name66"); // поиск по названию ноды
+//        test.editDataAttr(fNodName, "attr1", "new_dats");// изменить значение ноды
+//        test.writeDocument();
 //        test.removeNode(fNodName);
 //        test.writeDocument();
 //        Node fNodName = test.returnFirstFinedNode(n, "Field"); // поиск по названию ноды

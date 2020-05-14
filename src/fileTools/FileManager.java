@@ -570,10 +570,11 @@ public class FileManager {
         }
     }
 
-//    public static void main(String[] args) throws IOException {//для тестирования
-//        FileManager fm = new FileManager();
-//        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-//        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
-//     //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
-//    }
+    public static void main(String[] args) throws IOException {//для тестирования
+        FileManager fm = new FileManager();
+        loggerConstructor("Яй криветко");
+        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
+        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
+     //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
+    }
 }
