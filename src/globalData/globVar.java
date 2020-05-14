@@ -26,6 +26,7 @@ public class globVar {
 	public static FileManager fm;
 	public static String backupDir;
 	public static boolean EOF;
+        public static String сonfigAMs = "ConfigAMs.xml"; // название файла конфигурации Исполнительных механихмов
 	//public static LineList ll = null;
 	public static StrTools st;
         public static int simbolWidth = 210;
@@ -42,7 +43,7 @@ public class globVar {
         public static XMLSAX sax = null;
         public static Node cfgRoot = null;
 	public static DataBase DB = null;
-        public static String abonent = "";
+        public static String abonent = ""; // текущий абонент работы с данными
         public static String dbURL = "";
                 
 	public static void SetStatUUID() {

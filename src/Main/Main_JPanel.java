@@ -423,10 +423,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;
-//        ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(globVar.DB); // И передаем туда управление базой
-//        frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
-//        frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
-//        frameExecutiveMechanism.setVisible(true);
+        ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(globVar.DB); // И передаем туда управление базой
+        frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+        frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
+        frameExecutiveMechanism.setVisible(true);
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -600,7 +600,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     }
                 }
                 String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
-                //StructSelectData.setnTable(selectElem); // вносим в структуру название таблицы для печати того же файла Максима  LUA
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
                 int sizeWidth = 800;

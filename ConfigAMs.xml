@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigAMs>
 	<AM_Classica>
-		<commands tableName="dgo">
+		<commands tableName="DGO">
 			<on  end="_ON"/>
 			<off end="_OF"/>
 		</commands>
-		<endSensors tableName="di">
+		<endSensors tableName="DGI">
 			<on  end="_ON"/>
 			<off end="_OF"/>
 		</endSensors>

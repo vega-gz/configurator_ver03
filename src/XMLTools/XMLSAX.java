@@ -555,11 +555,11 @@ public class XMLSAX {
 
 //     --- Тестовый вызов метода создания документа нод и прочего ---     
     public static void main(String[] arg) {
-        HashMap<String, String> map = new HashMap<>();
-        XMLSAX test = new XMLSAX();
-        Node n = test.readDocument("test666.xml");
-        String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
-        test.insertChildNode(n, massD);
+//        HashMap<String, String> map = new HashMap<>();
+//        XMLSAX test = new XMLSAX();
+//        Node n = test.readDocument("test666.xml");
+//        String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
+//        test.insertChildNode(n, massD);
 //        test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");
