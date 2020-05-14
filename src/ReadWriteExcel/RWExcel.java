@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -822,7 +821,7 @@ public class RWExcel {
         }
         return "";
     }
-    // --- сформировать даные из конфигугации XML для чтения Exel---
+    // --- сформировать даные из конфигугации XML для чтения Exel---Lev---
     public static int ReadExelFromConfig(String pathExel) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
         FileInputStream inputStream = new FileInputStream(new File(pathExel));
         if(inputStream == null){
@@ -834,6 +833,7 @@ public class RWExcel {
             FileManager.loggerConstructor("Aайл "+pathExel + " повреждён или это не XLS");
             return -1;
         }
+        //wb.getAllNames()
         FileManager.loggerConstructor("Заливаем в таблицы абонента "+globVar.abonent+" данные из книги "+pathExel);
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
