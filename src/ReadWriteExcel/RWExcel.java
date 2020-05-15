@@ -833,14 +833,30 @@ public class RWExcel {
             FileManager.loggerConstructor("Aайл "+pathExel + " повреждён или это не XLS");
             return -1;
         }
-        //wb.getAllNames()
+        
+        int qSheets = wb.getNumberOfSheets();
+        String[] listSheets = new String[qSheets];
+        for(int i = 0; i < qSheets; i++) listSheets[i] = wb.getSheetName(i);
+        
         FileManager.loggerConstructor("Заливаем в таблицы абонента "+globVar.abonent+" данные из книги "+pathExel);
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
+        int tCnt = 0;
         for(Node n : nList){
             String tableName = n.getNodeName();
             String exSheetName = globVar.sax.getDataAttr(n, "excelSheetName");
             String tableComment = globVar.sax.getDataAttr(n, "Comment");
+            if("mb".equals(exSheetName.substring(0,2))){
+                for(int i = 0; i < qSheets; i++){
+                    int sl = listSheets[i].length();
+                    int tl = exSheetName.length();
+                    if(sl >= tl && listSheets[i].substring(sl-tl).equals(exSheetName)){
+                        exSheetName = listSheets[i];
+                        tableName = listSheets[i];
+                        break;
+                    }
+                }
+            }
             HSSFSheet sheet = wb.getSheet(exSheetName);
             int rowMax = 32767;
             if(sheet != null){
@@ -854,20 +870,6 @@ public class RWExcel {
                 for(Node col : colList){
                     String colExName = col.getNodeName();
                     tabColNames[colCnt] = globVar.sax.getDataAttr(col,"nameColumnPos");
-                    
-                    //String childTable = globVar.sax.getDataAttr(col,"childTable");
-                    //String cildCol = globVar.sax.getDataAttr(col,"cildCol");
-                    //String fRez = globVar.sax.getDataAttr(col,"fRez");
-                    
-                    //String sw = globVar.sax.getDataAttr(col,"switch");
-                    //String formula = globVar.sax.getDataAttr(col,"formula");
-                    //String registr = globVar.sax.getDataAttr(col,"registr");
-                    //String replace = globVar.sax.getDataAttr(col,"replace");
-                    //String repFrom1 = globVar.sax.getDataAttr(col,"nameColumnPos");
-                    
-                    //String add1 = globVar.sax.getDataAttr(col,"add1");
-
-                    //ArrayList<String> dataFomColumn = new ArrayList<>();
                     if(first){
                         for(int i=1; i<rowMax; i++ ){
                             String strCell = getDataCell(sheet.getRow(i), colExName);
@@ -934,14 +936,16 @@ public class RWExcel {
                     colCnt++;
                 }
                 String tableNameAb = globVar.abonent+"_"+tableName;
-                if(globVar.DB.isTable(tableNameAb)) globVar.DB.dropTable(tableNameAb);
+                if(globVar.DB.isTable(tableNameAb)) 
+                    globVar.DB.dropTable(tableNameAb);
                 globVar.DB.createTable(tableNameAb, tabColNames, tableComment);
                 for(int i=0; i<rowMax; i++){
                     globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);
                 }
+                tCnt++;
             }
         }
     if(isError) return -1;
-    return 0;
+    return tCnt;
     }
 }

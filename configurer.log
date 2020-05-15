@@ -5,8 +5,12 @@
 12:30:46_2020.05.11	Не удалось создать файл "D:\Projects\Калининград_цех\GenST\TSK_AI_CallAll.txt_tmp"
 18:56:13_2020.05.12	error PSQL request SELECT column_name,data_type FROM information_schema.columns where table_name = 'KC_AM';
 17:59:38_2020.05.13	error PSQL request DROP SEQUENCE kc_am_id_seq;
-22:01:47_2020.05.13	Яй криветко
-12:18:26_2020.05.14	Name66not created but XML document null!
-12:18:51_2020.05.14	Name66not created but XML document null!
-12:19:47_2020.05.14	Name66not created but XML document null!
-11:02:48_2020.05.15	error PSQL request DROP SEQUENCE abonents_id_seq;
+14:25:46_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls
+14:32:35_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls
+14:36:24_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls
+14:57:31_2020.05.14	Заливаем в таблицы абонента UPG данные из книги D:\Projects\Калининград_цех\УПГ_Lev.xls
+20:53:09_2020.05.14	Заливаем в таблицы абонента UPA данные из книги D:\Projects\Калининград_цех\УПА1.xls
+20:56:25_2020.05.14	error PSQL request DROP SEQUENCE upa_ai_id_seq;
+21:08:47_2020.05.14	Заливаем в таблицы абонента UPA данные из книги D:\Projects\Калининград_цех\УПА1.xls
+21:13:16_2020.05.14	Заливаем в таблицы абонента UPA данные из книги D:\Projects\Калининград_цех\УПА1.xls
+21:26:15_2020.05.14	Заливаем в таблицы абонента UPA данные из книги D:\Projects\Калининград_цех\УПА1.xls

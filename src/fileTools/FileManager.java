@@ -37,6 +37,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.w3c.dom.Node;
 
 //import main.globVar;
 public class FileManager {
@@ -310,7 +311,7 @@ public class FileManager {
         return 0;
     }
 
-    public String findStringInFile(String fileName, String f) throws IOException{
+    public String findStringInFile2(String fileName, String f) throws IOException{
         int ret = openFile4read(fileName);
         if(ret!=0)return null;
         String s = rd();
@@ -324,11 +325,13 @@ public class FileManager {
         if(s.contains(f))return s;
         else return null;
     }
-    public static String findStringInFile1(String fileName, String f){
+    public static String findStringInFile(String fileName, String f){
         try {
             BufferedReader in = new BufferedReader(new FileReader(fileName));
             String s;
-            while ((s = in.readLine()) != null) if(s.contains(f))return s;
+            while ((s = in.readLine()) != null) if(s.contains(f))break;
+            in.close();
+            if(s!=null && s.contains(f))return s;
         }catch (IOException e) {}
         return null;
     }
@@ -518,56 +521,62 @@ public class FileManager {
         return 0;
     }
 
-    public void renameTypeFile(String parentDirectory) throws FileNotFoundException, IOException {
-        File[] filesInDirectory = new File(parentDirectory).listFiles();//получаем список элементов по указанному адресу
-
-        String typeAttr,folderAttr=null;//переменная имени типа
+    public static int renameTypeFile(String dir) throws FileNotFoundException, IOException {
+        File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
         String expType = "type";
         String expFolder = "folder";
-        String fileName;//имя самого файла type
-
-        //FileManager fm = new FileManager();
+        int cnt = 0;//счетчик выполненных замен
 
         for (File findType : filesInDirectory) {//пробегаем по списку элементов по указанному адресу
-            String Name = findType.getName();
-            String findexp = Name.substring(Name.lastIndexOf(".") + 1);
-            //System.out.println(findexp);//находим расширение файла
-
-            if (findType.isDirectory()) {//если файл дирректория что то придумать
-
-            } else if (findexp.equals(expType)) {//если расширение type ,то читаем файл
-                String findName = findStringInFile1(Name, "Name=");
-                typeAttr = StrTools.getAttributValue(findName, "Name=\"");//находим этот аттрибут
-                fileName = findType.getName().substring(0, Name.indexOf('.'));//имя файла без расширения(ибо прога читает с расширением)
-                if (!fileName.equals(typeAttr)) {//сравниваем имя файла и имя типа(если не равны ищем фолдер)
+            String nameTypeFile = findType.getName();
+            String findexpType = nameTypeFile.substring(nameTypeFile.lastIndexOf(".") + 1);//ищу расширение type
+            //System.out.println(findexpType);//находим расширение файла
+            if (findType.isDirectory()) {//если это дирректория - ничего не делать
+            } else if (findexpType.equals(expType)) {//если расширение type ,то читаем файл
+                String findName = findStringInFile(dir + "\\" + nameTypeFile, " Name=");//ищем строку
+                String typeAttr = StrTools.getAttributValue(findName, "Name=\"");//находим этот аттрибут
+                String fileName = findType.getName().substring(0, nameTypeFile.indexOf('.'));//имя файла без расширения(ибо прога читает с расширением)
+                if (fileName != null && typeAttr != null && !fileName.equals(typeAttr)) {//сравниваем имя файла и имя типа(если не равны ищем фолдер)
+                    //Если имена типа и файла не совпали - надо менять имя файла
+                    cnt++;
+                    System.out.println(typeAttr);//оставляем вместо прогрессбара
+                    boolean notRename = true;
                     for (File findFolder : filesInDirectory) {//пробегаемся по той же дирректории в поисках folder
-                        if (findexp.equals(expFolder)) {//если нашли folder то начинаем его читать(нашли файл с расширение фолдер)
-                            String fold = findFolder.getName();
-                            String foldexp = fold.substring(Name.lastIndexOf(".") + 1);
-                            String path = findFolder.getAbsolutePath();//получили путь до файла
-                            XMLSAX xmlsax = new XMLSAX();
-                            xmlsax.readDocument(path);
-                            String folder = findStringInFile1(findFolder.getName(), fileName);//вроде как ищем строку содержащую имя файла(TYPE)
-                            if(folder!=null) folderAttr = StrTools.getAttributValue(folder,"Name=\"");//нашли значение аттрибута фолдера
-                            if (folderAttr!=null && folderAttr.equals(fileName)) {//находим соответствие в folder если
-                                fileName = findName;//меняем имя типа 
-                                folder.indexOf(fileName.length());
-                                findType.renameTo(new java.io.File(typeAttr+"."+expType));//переименовали файл type
-                              //  Node folderNode=xmlsax.returnFirstFinedNode(globVar.cfgRoot, "Folder");
-                                                     
+                        String nameFolderFile = findFolder.getName();
+                        String findexpFolder = nameFolderFile.substring(nameFolderFile.lastIndexOf(".") + 1);//ищу расширение folder
+                        if (findexpFolder.equals(expFolder)) {//если нашли folder то начинаем его читать(нашли файл с расширение фолдер)
+                            String pathFolderFile = dir +"\\"+ nameFolderFile;
+                            String myType = findStringInFile(pathFolderFile, fileName);//вроде как ищем строку содержащую имя файла(TYPE)
+                            if (myType != null) {
+                                notRename = false;
+                                System.out.println(myType);
+                                String fullNameAttr = StrTools.getAttributValue(myType, "Name=\"");//нашли значение аттрибута фолдера
+                                //System.out.println("В файле " + findFolder.getName() + " нашлось соответствие.");
+                                XMLSAX xmlsax = new XMLSAX();
+                                Node nodeRead = xmlsax.readDocument(pathFolderFile);//прочитали ноду
+                                String itemArray[] = {"Item", "Name", fullNameAttr};//массив чтобы найти ноду по имени и атрибутам
+                                Node itemFolderNode = xmlsax.findNodeAtribute(nodeRead, itemArray);//нашли конкретный item в котором соответствия
+                                xmlsax.editDataAttr(itemFolderNode, "Name",typeAttr+"."+expType);
+                                File newName = new File(dir+"\\"+typeAttr+"."+expType);
+                                if(!newName.isFile()){
+                                    boolean renameTo = findType.renameTo(newName);
+                                    if(renameTo) //переименовали файл type на значение аттрибута
+                                        xmlsax.writeDocument();
+                                }
                                 
+                                break;
                             }
-
                         }
                     }
-
-                    break;
-
+                    if(notRename){
+                        File newName = new File(dir+"\\"+typeAttr+"."+expType);
+                        if(!newName.isFile()) findType.renameTo(newName);
+                    }
                 }
-
             }
-
         }
+        System.out.println("Выполнено замен " + cnt);
+        return cnt;
     }
 
     public static void main(String[] args) throws IOException {//для тестирования

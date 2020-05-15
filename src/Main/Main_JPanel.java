@@ -363,7 +363,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
         jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
         if(ret==0){
-            JOptionPane.showMessageDialog(null, "Загрузка в базу завершена успешно!");
+	    JOptionPane.showMessageDialog(null, "В базу загружено " + ret +" таблиц");
             jTree1.setModel(getModelTreeNZ());// обновить дерево
         }
         else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
@@ -520,7 +520,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
-            int ret = FileManager.renameUUIDinDirectory(globVar.desDir+"\\Design");
+            int ret = FileManager.renameTypeFile(globVar.desDir+"\\Design");
             JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
