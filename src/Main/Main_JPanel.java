@@ -362,7 +362,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         }
         jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
-        if(ret==0) JOptionPane.showMessageDialog(null, "Загрузка в базу завершена успешно!");
+        if(ret==0){
+            JOptionPane.showMessageDialog(null, "Загрузка в базу завершена успешно!");
+            jTree1.setModel(getModelTreeNZ());// обновить дерево
+        }
         else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
     }//GEN-LAST:event_jButton3ActionPerformed
 

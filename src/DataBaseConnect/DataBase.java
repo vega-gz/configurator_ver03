@@ -413,16 +413,16 @@ public class DataBase {
                 s_columns += "\"" + columns.get(i) + "\"";
             }
         }
-        // проверка на столбец по которому упорядочим данные
+        // проверка на столбец по которому упорядочим данные (сортировка)
         String orderCol = "id";
         String sql = null;
         for(String s: getListColumnTable(table)){
             if(s.equals(orderCol)){ // нашли тогда упорядовать
               sql = "SELECT " + s_columns + " FROM \"" + table + "\" ORDER BY \"" +orderCol +"\";";
               break;
-            } 
+            } else sql = "SELECT " + s_columns + " FROM \"" + table +"\";";
         }
-        sql = "SELECT " + s_columns + " FROM \"" + table +"\";";
+        
         try {
             stmt = connection.createStatement();
             //System.out.println(sql);
@@ -661,8 +661,9 @@ public class DataBase {
         ArrayList<String> list_table_base = new ArrayList();
         try {
             stmt = connection.createStatement();
-            // Показывает все таблицы =( и из основной и из тестовой
-            ResultSet rs = stmt.executeQuery("SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';");
+            // Показывает все таблицы =( и из основной и из тестовой(с сортировкой)
+            ResultSet rs = stmt.executeQuery("SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema' "
+                    + "ORDER BY tablename;");
             while (rs.next()) {
                 String table_schema = rs.getString("tablename");
                 list_table_base.add(table_schema);
