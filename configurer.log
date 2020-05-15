@@ -9,3 +9,4 @@
 12:18:26_2020.05.14	Name66not created but XML document null!
 12:18:51_2020.05.14	Name66not created but XML document null!
 12:19:47_2020.05.14	Name66not created but XML document null!
+11:02:48_2020.05.15	error PSQL request DROP SEQUENCE abonents_id_seq;
