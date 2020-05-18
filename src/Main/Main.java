@@ -1,11 +1,7 @@
 package Main;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.JFrame;
 import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
-import fileTools.FileManager;
 import globalData.globVar;
 import javax.swing.JOptionPane;
 
@@ -14,7 +10,7 @@ public class Main {
     //static DataBase workbase =  DataBase.getInstance();
 
     public static void main(String[] args) {
-        //workbase.connectionToBase();
+        XMLSAX.getConnectBaseConfig("Config.xml");
         globVar.DB = DataBase.getInstance();
         if(globVar.DB == null){
             JOptionPane.showMessageDialog(null, "Не удалось устновить контакт с СУБД");
