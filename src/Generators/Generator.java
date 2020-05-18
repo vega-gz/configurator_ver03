@@ -239,6 +239,14 @@ public class Generator {
         int x = nodeTable.indexOf("_");
         String abonent = nodeTable.substring(0,x);
         nodeTable = nodeTable.substring(x+1);
+        int y = nodeTable.indexOf("_mb_");
+        String subAb = "";
+        String isMb = "";
+        if(y>0){
+            subAb = nodeTable.substring(0,y+1);
+            nodeTable = nodeTable.substring(y+1);
+            isMb = "mb_";
+        }
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if(findNode == null){
             FileManager.loggerConstructor("Не найдена нода \"" + nodeTable + "\"");
@@ -246,33 +254,27 @@ public class Generator {
         }
         Node nodeGenData = globVar.sax.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData
         if(nodeGenData == null){
-            FileManager.loggerConstructor("Не найдена нода \"" + nodeTable+"/GenData"+ "\"");
+            FileManager.loggerConstructor("Не найдена нода \"" + nodeTable+"/GenData\"");
             return -1;
         }
         XMLSAX prjSax = new XMLSAX();
-        Node prjRoot = prjSax.readDocument(filePath + "\\Project.prj");
+        Node prjRoot = prjSax.readDocument(filePath + "\\Project.prj");;
         Node interfaceList = prjSax.returnFirstFinedNode(prjRoot, "Globals");
         NodeList nodesGenData = nodeGenData.getChildNodes();
         for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 XMLSAX localSax = new XMLSAX();
                 Node currNodeCfgXML = nodesGenData.item(i);
-                //---определение списка переменнх, которые надо для данного типа данных завести в глобальных---
-                ArrayList<String> globSig = new ArrayList<>();
-                String globSigName = globVar.sax.getDataAttr(currNodeCfgXML, "globData1");
-                for(int k = 2; globSigName!=null; k++){
-                    globSig.add(globSigName);
-                    globSigName = globVar.sax.getDataAttr(currNodeCfgXML, "globData"+k);
-                }//---------------------------------------------------------------------------------------------
+                ArrayList<Node> globSigList = globVar.sax.getHeirNode(currNodeCfgXML);//Находим все ноды
                 String nodeName = currNodeCfgXML.getNodeName();
-                String typeName = "T_"+abonent+"_"+nodeName;//достаю элементы из ноды(в данный момент T GPA AI DRV)
+                String typeName = "T_"+abonent+"_"+subAb+isMb+nodeName;//достаю элементы из ноды(в данный момент T GPA AI DRV)
                 String trueName = FileManager.FindFile(filePath, typeName);//вызвал метод поиска файлов по имени(надо доработать)
                 String fildUUID = globVar.sax.getDataAttr(currNodeCfgXML, "Type");
                 String typeUUID;
                 if(fildUUID == null){
-                    fildUUID = FileManager.getUUIDFromFile(filePath,"T_"+nodeName);
+                    fildUUID = FileManager.getUUIDFromFile(filePath,"T_"+isMb+nodeName);
                     if(fildUUID==null){
-                        JOptionPane.showMessageDialog(null, "Не найден файл типа данных "+ "T_"+nodeName +". Генерация прервана.");
+                        JOptionPane.showMessageDialog(null, "Не найден файл типа данных "+"T_"+isMb+nodeName +". Генерация прервана.");
                          return -1;
                     }
                 }
@@ -312,16 +314,46 @@ public class Generator {
                             localSax.insertChildNode(newFields, nAndA);
                         } else {
                             localSax.setDataAttr(oldTag, "Comment", comment);
-                            Node aC = newFields.appendChild(oldTag);
+                            newFields.appendChild(oldTag);
                         }
                     }
                 }
                 if(oldFields != null) localSax.removeNode(oldFields);
                 localSax.writeDocument(filePath + "\\" + trueName);//записали файл
                 //fmProject.wr("<Signal Name=\"" + abonent+"_"+nodeName+"\" UUID=\""+ttt+"\" Type=\"" + typeUUID +"\" Global=\"TRUE\" />\n");
-                for(String name: globSig)
-                    insertVarInPrj(prjSax, interfaceList, abonent+"_"+name, typeUUID, "", true, false, null,
-                                   filePath + "\\Project.prj", backUpPath + "Project.prj");
+                for(Node globSig: globSigList){
+                    String name = globVar.sax.getDataAttr(globSig, "name");
+                    String globUUID = null;
+                    if(name!=null)
+                        globUUID = insertVarInPrj(prjSax, interfaceList, abonent+"_"+subAb+isMb+name, typeUUID, "", true, false, null,
+                                       filePath + "\\Project.prj", backUpPath + "Project.prj");
+                    ArrayList<Node> localSigList = globVar.sax.getHeirNode(globSig);//Находим все ноды
+                    boolean glob = true;
+                    for(Node localSig: localSigList){
+                        if(name==null || !glob){
+                            name = globVar.sax.getDataAttr(localSig, "name");
+                            glob = false;
+                            if(name==null){
+                                FileManager.loggerConstructor("Не найдено имя переменной в разделе "+
+                                        nodeName + "/GenData/"+globSig.getNodeName()+"/"+localSig.getNodeName());
+                                return -1;
+                            }
+                        }
+                        //int nf = Integer.parseInt(globVar.sax.getDataAttr(localSig, "int"));
+                        XMLSAX localSigSax = new XMLSAX();
+                        String localDocName = globVar.sax.getDataAttr(localSig, "int");
+                        if(localDocName==null){
+                            FileManager.loggerConstructor("Не найдено имя файла .int в разделе "+
+                                    nodeName + "/GenData/"+globSig.getNodeName()+"/"+localSig.getNodeName());
+                            return -1;
+                        }
+                        if("_".equals(localDocName.substring(0,1))) localDocName = abonent+localDocName;
+                        Node localRoot = localSigSax.readDocument(filePath+"\\"+localDocName);
+                        Node localInterfaceList = localSigSax.returnFirstFinedNode(localRoot, "InterfaceList");
+                        insertVarInPrj(localSigSax, localInterfaceList, abonent+"_"+subAb+isMb+name, typeUUID, "", glob, true,
+                                       globUUID, filePath+"\\"+localDocName, backUpPath + localDocName);
+                    }
+                }
             }
 
         }
@@ -606,11 +638,16 @@ public class Generator {
     
 //Функция занесения переменных в интерфейсные листы приложений Сонаты
 // <Signal Name="GPA_DI_Settings" UUID="6DC2E85F4B6835B2209D6D8076F22EFF" Type="9D3CCA014F76318C4B750981ED2CEA67" Usage="" Global="TRUE" Comment="настройки дискретного канала" />
-    static Node insertVarInPrj(XMLSAX intFile, Node interfaceList, String Name, String Type, String Comment, boolean global, boolean usage, 
+    static String insertVarInPrj(XMLSAX intFile, Node interfaceList, String Name, String Type, String Comment, boolean global, boolean usage, 
             String uuid, String hwFileName, String backUpFile) throws IOException{
         String[] findArr = {"Signal","Name",Name};
         Node sig = intFile.findNodeAtribute(interfaceList, findArr);
-        if(sig!=null) return sig;//intFile.getDataAttr(sig,"UUID");
+        if(sig!=null){
+            if(uuid!=null){
+                intFile.setDataAttr(sig, "UUID", uuid);
+                return uuid;
+            }else return intFile.getDataAttr(sig,"UUID");
+        }
         int  ret = FileManager.copyFileWoReplace(hwFileName, backUpFile, true);                    //создаём резервную копию
         if(ret==2){ //Функция копирования не нашла исходного файла
           FileManager.loggerConstructor("Не удалось прочитать файл \"" + hwFileName + "\"");
@@ -626,6 +663,6 @@ public class Generator {
         if(global) intFile.setDataAttr(sig, "Global", "TRUE");
         if(usage) intFile.setDataAttr(sig, "Usage", "");
         intFile.writeDocument();
-        return sig;
+        return uuid;
     }
 }

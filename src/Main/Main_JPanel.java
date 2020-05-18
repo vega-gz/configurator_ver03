@@ -447,7 +447,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
+//        try {
+//            FileManager.renameUUIDinDirectory(globVar.desDir + "\\Design");
+//        } catch (IOException ex) {
+//            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     // --- реакция на события меню ---
