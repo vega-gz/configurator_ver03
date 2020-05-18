@@ -52,6 +52,7 @@ public class TableNzVer3 {
            int rendererWidth = component.getPreferredSize().width;
            TableColumn tableColumn = getColumnModel().getColumn(column);
            tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+           //tableColumn.setPreferredWidth(Math.max(rendererWidth, tableColumn.getPreferredWidth()));
            return component;
         }
 
