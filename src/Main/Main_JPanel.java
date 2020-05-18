@@ -79,6 +79,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -233,6 +234,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem1);
+
+        jMenuItem3.setText("Сменить БД");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
 
@@ -450,7 +459,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
+//        try {
+//            FileManager.renameUUIDinDirectory(globVar.desDir + "\\Design");
+//        } catch (IOException ex) {
+//            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     // --- реакция на события меню ---
@@ -527,6 +540,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        JFrame changeDB = new ChangeDB(jTree1,this);
+        changeDB.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        changeDB.setTitle("Сменить БД");
+        changeDB.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (globVar.DB == null) {
             return null;
@@ -568,7 +588,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 
     // --- структура построения для дерева ---
-    private DefaultTreeModel getModelTreeNZ(){
+    public static DefaultTreeModel getModelTreeNZ(){
         globVar.DB.createAbonentTable();
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
         ArrayList<String> listTableBd = globVar.DB.getListTable();
@@ -671,6 +691,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;

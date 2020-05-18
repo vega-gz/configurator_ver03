@@ -292,7 +292,7 @@ public class XMLSAX {
     }
 
    // --- Метод чтения и подключение к базе посредством конфига ---
-    public int setConnectBaseConfig(String patchFile) {
+    public static int getConnectBaseConfig(String patchFile) {
         File f = new File(patchFile);
         String pass = null;
         String user = null;
@@ -316,14 +316,53 @@ public class XMLSAX {
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
                     }
-                    globVar.desDir = DesignDir; // добавить переменную пути проекта
-                    globVar.dbURL = url; // добавить переменную пути проекта
-                    return DataBase.getInstance().connectionToBase(url, base, user, pass); // Вызов запроса к базе подключения
                 }
             } catch (ParserConfigurationException | SAXException | IOException ex) {
-                errorExecuter("Проверьте существование или структуру " + patchFile);
+                System.out.println("Проверьте существование или структуру " + patchFile);
                 return -1;
             }
+            if(url != null) globVar.dbURL = url; // добавить переменную пути проекта
+            if(pass != null) globVar.PASS = pass; // добавить переменную пути проекта
+            if(user != null) globVar.USER = user; // добавить переменную пути проекта
+            if(base != null) globVar.currentBase = base; // добавить переменную пути проекта
+            if(DesignDir != null) globVar.desDir = DesignDir; // добавить переменную пути проекта
+            return 0;
+        }else{
+            System.out.println("Проверьте существование или структуру " + patchFile);
+        }
+        return -1;
+    }
+
+    public static int setConnectBaseConfig(String patchFile, String url, String base, String user, String pass) {
+        File f = new File(patchFile);
+        if (f.exists()) {
+            try {
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                org.w3c.dom.Document doc = db.parse(f);
+                doc.getDocumentElement().normalize();
+                NodeList nodeList = doc.getElementsByTagName("config");
+                for (int i = 0; i < nodeList.getLength(); i++) {
+                    Node node = nodeList.item(i);
+                    if (Node.ELEMENT_NODE == node.getNodeType()) {
+                        Element element = (org.w3c.dom.Element) node;
+                        element.getElementsByTagName("PASS").item(0).setTextContent(pass);
+                        element.getElementsByTagName("USER").item(0).setTextContent(user);
+                        element.getElementsByTagName("URL").item(0).setTextContent(url);
+                        element.getElementsByTagName("BASE").item(0).setTextContent(base);
+                    }
+                }
+            } catch (ParserConfigurationException | SAXException | IOException ex) {
+                System.out.println("Проверьте существование или структуру " + patchFile);
+                return -1;
+            }
+            globVar.dbURL = url; // добавить переменную пути проекта
+            globVar.PASS = pass; // добавить переменную пути проекта
+            globVar.USER = user; // добавить переменную пути проекта
+            globVar.currentBase = base; // добавить переменную пути проекта
+            return 0;
+        }else{
+            System.out.println("Проверьте существование или структуру " + patchFile);
         }
         return -1;
     }

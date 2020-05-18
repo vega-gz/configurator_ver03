@@ -19,7 +19,6 @@ import org.w3c.dom.Node;
 public class globVar {
         public static String logFile = "configurer.log";
         public static String PathToProject = "";
-        public static String currentBase = "";
 	public static String linSep;
 	public static String myDir;
 	public static String desDir;
@@ -40,11 +39,15 @@ public class globVar {
 	static String stUuid;
 	static long dinUuid = 0;
         
+        public static String abonent = ""; // текущий абонент работы с данными
         public static XMLSAX sax = null;
         public static Node cfgRoot = null;
+        
+        public static String currentBase = "";
 	public static DataBase DB = null;
-        public static String abonent = ""; // текущий абонент работы с данными
         public static String dbURL = "";
+        public static String USER = "";
+        public static String PASS = "";
                 
 	public static void SetStatUUID() {
 		Date date = new Date();
