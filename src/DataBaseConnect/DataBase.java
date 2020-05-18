@@ -377,6 +377,9 @@ public class DataBase {
      
     // получение таблицы целиком
     public ArrayList<String[]> getData(String table) {
+        return getData(table, "id");
+    }
+    public ArrayList<String[]> getData(String table, String orderCol) {
         ArrayList<String[]> selectData = new ArrayList<>();
         ArrayList<String> columns = getListColumnTable(table);
 
@@ -391,7 +394,6 @@ public class DataBase {
             }
         }
         // проверка на столбец по которому упорядочим данные (сортировка)
-        String orderCol = "id";
         String sql = null;
         for(String s: getListColumnTable(table)){
             if(s.equals(orderCol)){ // нашли тогда упорядовать
@@ -414,12 +416,12 @@ public class DataBase {
             }
             rs.close();
             stmt.close();
-            //StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
             //connection.commit();
             //System.out.println("-- Operation SELECT done successfully");
         } catch (SQLException e) {
             System.out.println("Failed select data");
             e.printStackTrace();
+            return null;
         }
         return selectData;
     }
@@ -640,7 +642,8 @@ public class DataBase {
         try {
             stmt = connection.createStatement();
             // Показывает все таблицы =( и из основной и из тестовой(с сортировкой)
-            ResultSet rs = stmt.executeQuery("SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema' "
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema' "
                     + "ORDER BY tablename;");
             while (rs.next()) {
                 String table_schema = rs.getString("tablename");
@@ -857,12 +860,7 @@ public class DataBase {
     public static ArrayList<String[]> getAbonentArray() // функция для создания списка из таблицы абонентов
     {
         if(globVar.DB==null) return null;
-        ArrayList<String> list_table_base = globVar.DB.getListTable();
-        if(StrTools.searchInList("Abonents", list_table_base)< 0) return null;
-        return globVar.DB.getData("Abonents");
-    }
-    public static String getAbonentType(String abonent){
-        return null;
+        return globVar.DB.getData("Abonents","Abonent"); //Получаем список абонентов отсортированный по алгоритмическому имени 
     }
     
 //    public static void main(String[] arg){
