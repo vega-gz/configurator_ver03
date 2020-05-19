@@ -453,6 +453,7 @@ public class XMLSAX {
 
     // --- получить данные по аттрибуту ноды--- 
     public String getDataAttr(Node n, String s) {
+        if(n==null || s==null) return null;
         NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
             Node attr = startAttr.item(i);

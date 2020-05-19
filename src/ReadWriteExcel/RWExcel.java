@@ -800,13 +800,14 @@ public class RWExcel {
         }
     }
     
-    //public static cellProcessing()
+    //Для Excel - Преобразование буквы столбца в номер столбца ---Lev---
     public static int getColNumber(String colName, ArrayList<Node> colList){
         for(int i=0;i<colList.size();i++) 
             if(colName.equals(globVar.sax.getDataAttr(colList.get(i),"nameColumnPos")))
                 return i;
         return -1;
     }
+    //Замена значений на словарные ---Lev---
     public static String getFromDict(String file, String src){
         XMLSAX dictSax = new XMLSAX();
         Node dict = dictSax.readDocument(file);
@@ -820,6 +821,12 @@ public class RWExcel {
             }
         }
         return "";
+    }
+    
+    public static String getFromSwitch(Node col,String dataFromExcel){
+        String[] caseArr = {"case","val",dataFromExcel};
+        Node cse = globVar.sax.findNodeAtribute(col,caseArr);
+        return globVar.sax.getDataAttr(cse, "def");
     }
     // --- сформировать даные из конфигугации XML для чтения Exel---Lev---
     public static int ReadExelFromConfig(String pathExel) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
@@ -883,10 +890,14 @@ public class RWExcel {
                     for(int i=0; i<rowMax; i++ ){
                         String strCell = getDataCell(sheet.getRow(i+1), colExName);
                         if(strCell == null) strCell="";
+                        //dataFromExcel[i][colCnt]=null;
                         if("".equals(strCell)){
-                            String def = globVar.sax.getDataAttr(col,"default");
+                            String def = globVar.sax.getDataAttr(col,"swt");
                             if(def != null){
-                                dataFromExcel[i][colCnt]=def;
+                                //String colName = globVar.sax.getDataAttr(col,def);
+                                int x = getColNumber(def, colList);
+                                if(x>=0) dataFromExcel[i][colCnt]= getFromSwitch(col,dataFromExcel[i][x]);
+                                if(dataFromExcel[i][colCnt]==null)def=null;
                             }
                             if(def == null){
                                 def = globVar.sax.getDataAttr(col,"dictionary");
@@ -895,6 +906,12 @@ public class RWExcel {
                                     int x = getColNumber(colName, colList);
                                     if(x>=0) dataFromExcel[i][colCnt] = getFromDict(def,dataFromExcel[i][x]);
                                     else def=null;
+                                }
+                            }
+                            if(def == null){
+                                def = globVar.sax.getDataAttr(col,"default");
+                                if(def != null){
+                                    dataFromExcel[i][colCnt]=def;
                                 }
                             }
                             if(def == null){

@@ -542,6 +542,8 @@ public class Generator {
                     for(String hintPart : hintAL){
                         String s = (String) ft.getCell(hintPart, i);
                         if(s==null) s = hintPart;
+                        if("true".equalsIgnoreCase(s)) s = "есть";
+                        else if ("false".equalsIgnoreCase(s)) s = "нет";
                         hint += s;
                     }
                     fbChildNode[2] = "hint";
