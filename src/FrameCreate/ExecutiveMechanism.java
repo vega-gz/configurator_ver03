@@ -259,8 +259,10 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             String nameN = n.getNodeName(); // имена первых нод названия иструментов
             ArrayList<Node> listNodeMethodExe = readXML.getHeirNode(n);
             
+            int sequence = 0; // идентификатор очереди DO или DI
             for (Node nodeConEnd : listNodeMethodExe) { // старт основного алгоритма  по две ноды анализ
-                columnT.add("название"); // первый столбец для таблицы русское имя
+                //columnT.add("название"); // первый столбец для таблицы русское имя
+
                 String nameCaseTable = nodeConEnd.getNodeName();
                 // пробегаем по on off
                 ArrayList<String> listOnOff = new ArrayList<>();
@@ -276,11 +278,19 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                 String nameTreq = globVar.abonent + "_" + nameCaseTable;
                 List<String> columnsB = workbase.selectColumns(nameTreq); // возмем Названия колонок из таблицы
                 
-                for (String s : nameColumnList) { // Формируем список столбцов запросы к базе
+                boolean fNameColumn = false;
+                for (int i=0; i < nameColumnList.length; ++i) { // Формируем список столбцов запросы к базе
+                    String s = nameColumnList[i];
                     String nameAlgColumn = compareData(columnsB, s); // передаем лист и строку на анализ соответствия(есть ли подобные столбцы). первый попавшийся возвращаем.
                     if (nameAlgColumn != null) {
                         listColumnSelect.add(nameAlgColumn); // Добавляем колонки для передачи в базу для запроса SELECT 
-                        columnT.add(nameTreq +"_"+nameAlgColumn);
+                        if(sequence%2 == 0){// если второе значение Колонки DGI пропуск
+//                            columnT.add(nameTreq +"_"+nameAlgColumn);
+                            if(fNameColumn == false){ // так же и только имя русское
+                                columnT.add(s);
+                                fNameColumn = true;
+                            }
+                        }
                     }
                 }
                 
@@ -353,7 +363,26 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                         if (checkSignal(s[numElTagname], egnoredList)) { // если сигнал из листа игнортрования
                             listDO.remove(elMass);
                         } else {
-                            findTmp.add(s[numElRusName]);  // добавить русское имя
+                            if (s.length > 1){ // для подстраховки если не нашли имена столбцов
+                                findTmp.add(s[numElRusName]);  // добавить русское название в столбец
+                            }
+                            
+                            int jLoc = elMass + 1;
+                            while (jLoc < listDO.size()) { // прогоняем по самому себе DO
+                                String[] locSeco = listDO.get(jLoc); // это элемент который 
+                                String retFinStr = comparSignals(s[numElTagname], locSeco[numElTagname], dataToParser); // вызываем функцию сравнения(патерн на основе 1 строки)
+                                if (retFinStr != null) {
+                                    //System.out.println("Совпадения  в локальном " + s + " - " + retFinStr);
+                                    findTmp.add(locSeco[numElTagname]); //если нашлми что там то добавляем
+                                    // перед тем как удалить должны прогнать по DI ?
+                                    listDO.remove(jLoc);// удаляем из списка
+                                } else {
+                                    ++jLoc;
+                                }
+                            }
+                            listDO.remove(elMass); // всегда удаляем
+
+                            
                             int j = 0;
                             while (j < listDI.size()) { // Проходим по DI
                                 String[] sj = listDI.get(j); // это элемент который 
@@ -366,31 +395,13 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                                     ++j;
                                 }
                             }
-                            int jLoc = elMass + 1;
-                            while (jLoc < listDO.size()) { // прогоняем по самому себе DO
-                                String[] locSeco = listDO.get(jLoc); // это элемент который 
-                                String retFinStr = comparSignals(s[numElTagname], locSeco[numElTagname], dataToParser); // вызываем функцию сравнения(патерн на основе 1 строки)
-                                if (retFinStr != null) {
-                                    //System.out.println("Совпадения  в локальном " + s + " - " + retFinStr);
-                                    findTmp.add(locSeco[numElTagname]); //если нашлми что там то добавляем
-                                    listDO.remove(jLoc);// удаляем из списка
-                                } else {
-                                    ++jLoc;
-                                }
-                            }
-                            if (s.length > 2){ // для подстраховки если не нашли имена столбцов
-                                findTmp.add(s[1]); // Русское имя должно быть
-                            }
+                            
                             findTmp.add(s[numElTagname]); // Добавляем искомую переменную.
                             findingTagname.add(findTmp);
-                            if(findingTagname.size() > 49) {
-                                 System.out.println();
-                            } // ищем баг
-                            listDO.remove(elMass); // всегда удаляем
                             //}  
                         }
                     }
-                    /*  // это для записи в файл
+                    /*  // это для записи в файл(проверка что по данным)
                      for (ArrayList list : findingTagname) { 
                      for (Iterator it = list.iterator(); it.hasNext();) {
                      String s = (String) it.next();
@@ -400,6 +411,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                      }
                      */
                 }
+                ++sequence;
             }
 
         }
@@ -413,94 +425,6 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Не найдены таблицы \n" + message); //сообщение
         }
         return findingTagname;
-    }
-
-    // --- Фукция формирования двнных исполнительных механизмов(Из версии remove-v2)
-    ArrayList<ArrayList> getListMechanizm(){
-          // если нажали Enter
-                String[] dataToParser = new String[]{"ON", "OF", "upp", "bp"}; // Список окончания сигналов
-                String[] egnoredList = new String[]{"NULL", "Res_", "Res"}; // Список окончания сигналов
-                String[] nameColumnList = new String[]{"TAG_NAME_PLC", "Наименование сигнала"}; // наименование колонок для выборки из базы
-                ArrayList<ArrayList> listTagName = new ArrayList();
-                ArrayList<String> listColumnSelect = new ArrayList();
-                ArrayList<ArrayList> findingTagname = new ArrayList();//листы для хранения найденного Что передаем
-                for (String nameTable : addElementTable1) { // пробегаем так по списку справа
-                    listColumnSelect.clear(); // так как при следующих прогонах оно добавляет данные
-                    //String nameTable = entry.getKey(); // Имя таблицы 
-                    //Integer value = entry.getValue();
-                    List<String> columnsB = workbase.selectColumns(nameTable); // возмем Названия колонок из таблицы
-                    //String whatF = "tag_name"; // Название столбца который высчитываем
-                    for (String s : nameColumnList) {
-                        String nameAlgColumn = compareData(columnsB, s); // передаем лист и строку на анализ соответствия(есть ли подобные столбцы). первый попавшийся возвращаем.
-                        if (nameAlgColumn != null) {
-                            listColumnSelect.add(nameAlgColumn); // Добавляем колонки для передачи в базу для запроса SELECT 
-                        }
-                    }
-                    if (listColumnSelect.size() > 0) { //если есть что то
-                        ArrayList<String[]> dataFromBase = workbase.getData(nameTable, listColumnSelect); // получили массивы листов из базы 
-                        listTagName.add(dataFromBase); // Кладем структуру в Лист
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Не найдены идентификаторы столбцов!"); // Это сообщение
-                    }
-                }
-                if (listTagName != null && listTagName.size() > 1) { // если из выбранного что то есть то
-                    // пробегаем по листам и ищем совпадения(рабочий вариант но не равнивает элементы в списках а только в самом себе)
-                    ArrayList<String[]> listDO = listTagName.get(0);
-                    ArrayList<String[]> listDI = listTagName.get(1);
-                    
-                    int elMass = 0; // первый элемент Листа
-                    int numElTagname = 0;// номер элемента с tag_name массива для сравнения
-                    while (listDO.size() > 0) {  // пробегаем по листу но тут только 1 так как Tag_name 
-                        ArrayList<String> findTmp = new ArrayList(); // Временный 
-                        String[] s = listDO.get(elMass); // это элемент который 
-                        if (checkSignal(s[numElTagname], egnoredList)) { // если сигнал из листа игнортрования
-                            listDO.remove(elMass);
-                        } else {
-                            int j = 0;
-                            while (j < listDI.size()) { // Проходим по DI
-                                String[] sj = listDI.get(j); // это элемент который 
-                                String retFinStr = comparSignals(s[numElTagname], sj[numElTagname], dataToParser); // вызываем функцию сравнения(патерн на основе 1 строки)
-                                if (retFinStr != null) {
-                                    //System.out.println("Совпадения втором массиве " + s + " - " + retFinStr);
-                                    findTmp.add(sj[numElTagname]); //если нашлми что там то добавляем
-                                    listDI.remove(j);// удаляем из списка
-                                } else {
-                                    ++j;
-                                }
-                            }
-                            int jLoc = elMass + 1;
-                            while (jLoc < listDO.size()) { // прогоняем по самому себе DO
-                                String[] locSeco = listDO.get(jLoc); // это элемент который 
-                                String retFinStr = comparSignals(s[numElTagname], locSeco[numElTagname], dataToParser); // вызываем функцию сравнения(патерн на основе 1 строки)
-                                if (retFinStr != null) {
-                                    //System.out.println("Совпадения  в локальном " + s + " - " + retFinStr);
-                                    findTmp.add(locSeco[numElTagname]); //если нашлми что там то добавляем
-                                    listDO.remove(jLoc);// удаляем из списка
-                                } else {
-                                    ++jLoc;
-                                }
-                            }
-                            if (s.length > 2){ // для подстраховки если не нашли имена столбцов
-                                findTmp.add(s[1]); // Русское имя должно быть
-                            }
-                            findTmp.add(s[numElTagname]); // Добавляем искомую переменную.
-                            findingTagname.add(findTmp);
-                            listDO.remove(elMass); // всегда удаляем
-                            //}  
-                        }
-                    }
-                    /*  // это для записи в файл
-                     for (ArrayList list : findingTagname) { 
-                     for (Iterator it = list.iterator(); it.hasNext();) {
-                     String s = (String) it.next();
-                     //System.out.print(s + " - ");
-                     }
-                     FileManager.writeCSV("665.txt", list);
-                     }
-                     */
-                    
-                }
-         return findingTagname;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
