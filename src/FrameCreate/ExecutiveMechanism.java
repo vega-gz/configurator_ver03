@@ -27,7 +27,13 @@ import javax.swing.JTable;
 import DataBaseConnect.*;
 import XMLTools.XMLSAX;
 import globalData.globVar;
+import java.awt.event.KeyEvent;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JWindow;
 import org.w3c.dom.Node;
+import javax.swing.Timer; //Таймер каждую секунду
 
 /**
  *
@@ -48,6 +54,8 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
     String nameTable; // название таблицы и заголовка
     String[] columns; // названия колонок для таблицы в формате масива
     ArrayList<String> columnT; // названия колонок для таблицы
+    int identNodecase = 0; // по идентификатор выбора какой механизм использовать
+
     /**
      * Creates new form ExecutiveMechanism
      */
@@ -85,6 +93,12 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             }
         });
 
+        // Раскрывающийся список
+        JComboBox<String> comboTrueFalse = new JComboBox<String>(new String[] { "true", "false"});
+        // Редактор ячейки с списком
+        DefaultCellEditor editor = new DefaultCellEditor(comboTrueFalse);
+        // Определение редактора ячеек для колонки
+        jTable1.getColumnModel().getColumn(3).setCellEditor(editor);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -119,11 +133,10 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     // --- Кнопка добавления данных в базу ---
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         workbase.createTable(nameTable, columnT);
-        for(ArrayList<String> array: listDataToTable){
+        for (ArrayList<String> array : listDataToTable) {
             workbase.insertRows(nameTable, array.toArray(new String[array.size()]), columnT); // опять значения на оборот
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -189,12 +202,12 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
     }
 
     // сопоставление имен сигналов, и списком возможных вариантов(в массиве)
-    String comparSignals(String str1, String str2, String[] massEnd) {
+    String comparSignals(String str1, String str2, ArrayList<String> massEnd) {
         String finderS = null;
         String cutString = null;
         boolean fEndStr1 = false; // триггер нахождения окончания по первой входящей строки
-        for (int i = 0; i < massEnd.length; ++i) { // пробегаем по списку окончаний отрезая окончания
-            cutString = "^(.*)" + massEnd[i] + "$";
+        for (int i = 0; i < massEnd.size(); ++i) { // пробегаем по списку окончаний отрезая окончания
+            cutString = "^(.*)" + massEnd.get(i) + "$";
             Pattern pattern0 = Pattern.compile(cutString);
             Matcher matcher0 = pattern0.matcher(str1);  // впихиваем в сравнение 1 строку из входа
             if (matcher0.matches()) { // попали под патерн 
@@ -205,9 +218,9 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             }
         }
 
-        if (fEndStr1){ // нет смысла сравнивать если нет нужного окончания
-            for (int i = 0; i < massEnd.length; ++i) { // пробегаем по списку окончаний
-                String patternS = "^(" + str1 + ")" + massEnd[i] + "$"; // прикручиваем окончание и сравниваем
+        if (fEndStr1) { // нет смысла сравнивать если нет нужного окончания
+            for (int i = 0; i < massEnd.size(); ++i) { // пробегаем по списку окончаний
+                String patternS = "^(" + str1 + ")" + massEnd.get(i) + "$"; // прикручиваем окончание и сравниваем
                 Pattern pattern0 = Pattern.compile(patternS);
                 Matcher matcher0 = pattern0.matcher(str2);  // впихиваем в сравнение 1 строку из входа
                 if (matcher0.matches()) { // попали под патерн 
@@ -217,6 +230,48 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             }
         }
         return finderS;
+    }
+
+    // сопоставление имен сигналов, и списком возможных вариантов(в массиве) но по первому конкретному значению
+    String comparSignalsOnlyOn(String str1, String str2, ArrayList<String> massEnd) {
+        String finderS = null;
+        String cutString = null;
+        boolean fEndStr1 = false; // триггер нахождения окончания по первой входящей строки
+        int idElem = 0;
+        cutString = "^(.*)" + massEnd.get(idElem) + "$";
+        Pattern pattern0 = Pattern.compile(cutString);
+        Matcher matcher0 = pattern0.matcher(str1);  // впихиваем в сравнение 1 строку из входа
+        if (matcher0.matches()) { // Окончание совпало
+            //System.out.println(matcher0.group(0)); // Системный вывод
+            str1 = matcher0.group(1); // названия сигнала без окончания
+            fEndStr1 = true;
+        }
+
+        if (fEndStr1) { // нет смысла сравнивать если нет нужного окончания
+            for (int i = idElem + 1; i < massEnd.size(); ++i) { // пробегаем по списку окончаний со следующего элемента
+                String patternS = "^(" + str1 + ")" + massEnd.get(i) + "$"; // прикручиваем окончание и сравниваем
+                Pattern patternOFF = Pattern.compile(patternS);
+                Matcher matcherOFF = patternOFF.matcher(str2);  // впихиваем в сравнение 1 строку из входа
+                if (matcherOFF.matches()) { // попали под патерн 
+                    finderS = str1; // вернем только общую чать
+                    break; // до первого найденного
+                }
+            }
+        }
+        return finderS;
+    }
+
+    // ---  Верка сигнала по окончанию ---
+    String comparSignalEnd(String str1, String endS) {
+        String sigF = null;
+        String cutString = "^(.*)" + endS + "$";
+        Pattern pattern0 = Pattern.compile(cutString);
+        Matcher matcher0 = pattern0.matcher(str1);  // строка из входа входа на сравнение 
+        if (matcher0.matches()) { // Окончание совпало
+            //System.out.println(matcher0.group(0)); // Системный вывод
+            sigF = matcher0.group(1); // названия сигнала без окончания
+        }
+        return sigF;
     }
 
     // проверка имени сигнала, есть ли совпадения с списком c начала Строки
@@ -238,12 +293,41 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         return enterSig;
     }
 
+    // проверка имени сигнала, общей части окончания
+    String checkSliceSignal(String str, String sig, String end) {
+        String finderS = null;
+        String cutString = null;
+        boolean fEndStr1 = false; // триггер нахождения окончания по первой входящей строки
+        int idElem = 0;
+        cutString = "^(" + str + ")(.*)$";
+        Pattern pattern0 = Pattern.compile(cutString);
+        Matcher matcher0 = pattern0.matcher(sig);  // впихиваем в сравнение 1 строку из входа
+        if (matcher0.matches()) { // Окончание совпало
+            //System.out.println(matcher0.group(0)); // Системный вывод
+            //str1 = matcher0.group(1); // названия сигнала без окончания
+            fEndStr1 = true;
+        }
+        if (fEndStr1) { // общие части совпали
+            String patternS = "^(" + str + ")" + end + "$"; // прикручиваем окончание и сравниваем
+            Pattern patternOFF = Pattern.compile(patternS);
+            Matcher matcherOFF = patternOFF.matcher(sig);  // впихиваем в сравнение 1 строку из входа
+            if (matcherOFF.matches()) { // попали под патерн 
+                finderS = sig; // Нужный нашли
+            }
+        }
+        return finderS;
+    }
+
     // --- чтение xml и формирование  из него каких таблиц читаем и что сапоставлять ---
     public ArrayList<ArrayList> readConfigExeMech() {
         ArrayList<ArrayList> findingTagname = new ArrayList();//листы для хранения найденного Что передаем
         nameTable = globVar.abonent + "_AM";    //  название таблицы строится
         this.setTitle(nameTable); // Установить заголовок
         columnT = new ArrayList<>(); // заготовка названия колонок
+        columnT.add("TAG_NAME");
+        columnT.add("Наименование");
+        columnT.add("совпадения");
+        columnT.add("true/false");
         String[] nameColumnList = new String[]{"TAG_NAME_PLC", "Наименование сигнала", "Наименование"}; // наименование колонок для выборки из базы
         ArrayList<String> listColumnSelect = new ArrayList(); // листы с колонками для запроса к базе
         ArrayList<ArrayList> listTagName = new ArrayList(); // 
@@ -251,108 +335,92 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         int sumArraySize = 0; // Переменная для определения длинны формирования массива (не верно)
         int biforeSumArraySize = 0;
         ArrayList<String> notFindTables = new ArrayList(); // лист не найденных таблиц для запроса из фала
-        
+
         XMLSAX readXML = new XMLSAX();
         Node rootN = readXML.readDocument(globVar.сonfigAMs); // Читаем конфигурационный файл
         ArrayList<Node> listNodeRootN = readXML.getHeirNode(rootN); // ноды рута AM_Classica, AM_NKU и тд
-        for (Node n : listNodeRootN) {
-            String nameN = n.getNodeName(); // имена первых нод названия иструментов
-            ArrayList<Node> listNodeMethodExe = readXML.getHeirNode(n);
-            
-            int sequence = 0; // идентификатор очереди DO или DI
-            for (Node nodeConEnd : listNodeMethodExe) { // старт основного алгоритма  по две ноды анализ
-                //columnT.add("название"); // первый столбец для таблицы русское имя
+        String[] arrNameExecute = new String[listNodeRootN.size()]; // Список имен нод
 
-                String nameCaseTable = nodeConEnd.getNodeName();
-                // пробегаем по on off
-                ArrayList<String> listOnOff = new ArrayList<>();
-                ArrayList<String> listNameOnOff = new ArrayList<>();
+        for (int iN = 0; iN < listNodeRootN.size(); ++iN) {
+            Node n = listNodeRootN.get(iN);
+            String nameN = n.getNodeName(); // имена первых нод названия иструментов
+            arrNameExecute[iN] = nameN;
+        }
+        // вызываем метод выбора по нодам какю хотим обработать(пока две)
+        getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором
+        Node n = listNodeRootN.get(identNodecase);
+        {
+            ArrayList<Node> listNodeMethodExe = readXML.getHeirNode(n);
+            ArrayList<String> nameDGODGI = new ArrayList<>();
+            ArrayList<String> listNameOnOff = new ArrayList<>();
+            ArrayList<String> listOnOffDGO = new ArrayList<>(); // окончания DGO(не нужно)
+            ArrayList<String> listOnOffDGI = new ArrayList<>(); // окончания DGI
+            // пробегаем по on off
+            for (int i = 0; i < listNodeMethodExe.size(); ++i) { // старт основного алгоритма  по две ноды анализ
+                Node nodeConEnd = listNodeMethodExe.get(i);
+                String nameDGOorDGI = nodeConEnd.getNodeName();
+                nameDGODGI.add(nodeConEnd.getNodeName());
+
                 for (Node nodeOnOff : readXML.getHeirNode(nodeConEnd)) {
-                    listNameOnOff.add(nameCaseTable + "_" +nodeOnOff.getNodeName()); // имена первых нод названия иструментов(уникальность названия стобцов для базы)
+                    String nNanmeEnd = nodeOnOff.getNodeName();
+                    listNameOnOff.add("_" + nNanmeEnd); // имена первых нод названия иструментов(уникальность названия стобцов для базы)
                     HashMap<String, String> dataOnOff = readXML.getDataNode(nodeOnOff); // только одно пока данное
                     String strEnd = dataOnOff.get("end"); // забираем окончания
-                    listOnOff.add(strEnd); // сформировали окончания для конкретной таблицы
+                    if (i % 2 == 0) {// Распределение окончаний для поиска
+                        listOnOffDGI.add(strEnd); // сформировали окончания DGI
+                        columnT.add(nameDGOorDGI + nNanmeEnd);
+                    } else {
+                        listOnOffDGO.add(strEnd); // сформировали окончания DGO
+                        columnT.add(nameDGOorDGI + nNanmeEnd);
+                    }
                 }
+            }
 
+            for (int sequence = 0; sequence < nameDGODGI.size(); ++sequence) { // Проходим по именам нод
+                String nameCaseTable = nameDGODGI.get(sequence);
                 listColumnSelect.clear(); // так как при следующих прогонах оно добавляет данные
                 String nameTreq = globVar.abonent + "_" + nameCaseTable;
                 List<String> columnsB = workbase.selectColumns(nameTreq); // возмем Названия колонок из таблицы
-                
+
+                // как то правильно нужно прикрутить столбец совпадений
+                int columnEntry = 2;
+                //  идентификатор столбца comboBoxs 
+                int columnTueFalse = 3;
                 boolean fNameColumn = false;
-                for (int i=0; i < nameColumnList.length; ++i) { // Формируем список столбцов запросы к базе
-                    String s = nameColumnList[i];
+
+                for (int ib = 0; ib < nameColumnList.length; ++ib) { // Формируем список столбцов к базе (мин.2)
+                    String s = nameColumnList[ib];
                     String nameAlgColumn = compareData(columnsB, s); // передаем лист и строку на анализ соответствия(есть ли подобные столбцы). первый попавшийся возвращаем.
                     if (nameAlgColumn != null) {
                         listColumnSelect.add(nameAlgColumn); // Добавляем колонки для передачи в базу для запроса SELECT 
-                        if(sequence%2 == 0){// если второе значение Колонки DGI пропуск
-//                            columnT.add(nameTreq +"_"+nameAlgColumn);
-                            if(fNameColumn == false){ // так же и только имя русское
-                                columnT.add(s);
+                        if (sequence % 2 == 0) {// если второе значение Колонки DGI пропуск
+                            //columnT.add(nameTreq +"_"+nameAlgColumn);
+                            //columnT.add(0,s); // Первым значением
+                            if (fNameColumn == false) { // так же и только имя русское
+                                //columnT.add(0,s); // Первым значением
                                 fNameColumn = true;
+//                                columnT.add(columnEntry,"совпадения"); // Только при одном проходе(ноды только 2)
                             }
                         }
+//                        columnT.add(0,s); // Первым значением
                     }
                 }
-                
+
                 if (listColumnSelect.size() > 0) { //если есть что то для запроса к базе по столбцам
                     ArrayList<String[]> dataFromBase = workbase.getData(nameTreq, listColumnSelect); // получили массивы листов из базы 
                     listTagName.add(dataFromBase); // Кладем структуру в Лист
-                    columnT.addAll(listNameOnOff); // Сращиваем с значениями нод
-                } else {
-                    notFindTables.add(nameTreq);
-                    //JOptionPane.showMessageDialog(null, "Не найдены идентификаторы столбцов " + nameTreq); // Это сообщение
-                }
 
+                } else {
+                    notFindTables.add(nameTreq); // Нечего не нашли добавляем  название таблицы в массив для проблемных
+                }
                 if (listTagName != null && listTagName.size() > 1) {
                     int elMass = 0; // первый элемент Листа
                     int numElTagName = 0;// номер элемента с tag_name массива для сравнения (надо определять автоматом)
                     int numElRusName = 1;//   
-                    /*for (ArrayList<String[]> listDODI : listTagName) {
-                        //columnT.add(nameCaseTable); 
-                        for (int i = 0; i < listDODI.size(); ++i) {  // пробегаем по листу
-                            String[] mass = listDODI.get(i);
-                            ArrayList<String> findTmp = new ArrayList(); // Временный как часть строки
-                            findTmp.add(mass[numElTagName]); // добавляем тэгнэм
-                            findTmp.add(mass[numElRusName]); // Добавляем русское название
-                            for (String ending : listOnOff) { // пробегаем по листу окончаний
-                                String endingStr = "^(.*)" + "(" + ending + ")" + "$";
-                                Pattern pattern0 = Pattern.compile(endingStr);
-                                Matcher matcher0 = pattern0.matcher(mass[numElTagName]);  // tag_name в сравнение регуляркой
-                                if (matcher0.matches()) { // попали под патерн 
-                                    //System.out.println(matcher0.group(0)); // Системный вывод
-                                    findTmp.add(matcher0.group(2));
-                                } else {
-                                    findTmp.add(""); // Пустую строку для матрицы
-                                }
-                            }
-                            // Формирование матрицы данных
-                            if (findingTagname.size() <= i) { // Проверка добавления строки или контекация Листов
-                                if (firstStep) { // если первый проход только формируется лист
-                                    findingTagname.add(findTmp);
-                                    sumArraySize = findTmp.size();
-                                } else{
-                                    ArrayList<String> tmpMatrix = new ArrayList();
-                                    for(int j=0; j<sumArraySize; ++j){
-                                        tmpMatrix.add("");
-                                    }
-                                    tmpMatrix.addAll(findTmp); // сращиваем с пустым
-                                    findingTagname.add(tmpMatrix); // и сформированный добавляем
-                                }
-                            } else {
-                                findingTagname.get(i).addAll(findTmp); // контекация к строки колекции  
-                            }
-                        }
-                        // сброс для следующих данных
-                        firstStep = false;
-                        //sumArraySize=0;
-                        }
-                    listTagName.clear();
-                        */
-                       
-                    //  Предыдущий  алгоритм
                     //String[] egnoredList = new String[]{"NULL", "Res_", "Res"}; // Список окончания сигналов(в этой реализации может и не нужен)
                     String[] egnoredList = new String[]{}; // Список окончания сигналов(в этой реализации может и не нужен)
-                    String[] dataToParser = listOnOff.toArray(new String[listOnOff.size()]); // это из за предыдущего алгоритма (пока для пробы)
+                    //String[] dataToParserDGO = listOnOffDGO.toArray(new String[listOnOffDGO.size()]); // это из за предыдущего алгоритма (пока для пробы)
+                    //String[] dataToParserDGI = listOnOffDGI.toArray(new String[listOnOffDGI.size()]); // это из за предыдущего алгоритма (пока для пробы)
                     ArrayList<String[]> listDO = listTagName.get(numElTagName);
                     ArrayList<String[]> listDI = listTagName.get(numElRusName);
                     int numElTagname = 0;// номер элемента с tag_name массива для сравнения
@@ -363,40 +431,81 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                         if (checkSignal(s[numElTagname], egnoredList)) { // если сигнал из листа игнортрования
                             listDO.remove(elMass);
                         } else {
-                            if (s.length > 1){ // для подстраховки если не нашли имена столбцов
+                            if (s.length > 1) { // для подстраховки если не нашли имена столбцов
                                 findTmp.add(s[numElRusName]);  // добавить русское название в столбец
                             }
-                            
-                            int jLoc = elMass + 1;
-                            while (jLoc < listDO.size()) { // прогоняем по самому себе DO
-                                String[] locSeco = listDO.get(jLoc); // это элемент который 
-                                String retFinStr = comparSignals(s[numElTagname], locSeco[numElTagname], dataToParser); // вызываем функцию сравнения(патерн на основе 1 строки)
-                                if (retFinStr != null) {
-                                    //System.out.println("Совпадения  в локальном " + s + " - " + retFinStr);
-                                    findTmp.add(locSeco[numElTagname]); //если нашлми что там то добавляем
-                                    // перед тем как удалить должны прогнать по DI ?
-                                    listDO.remove(jLoc);// удаляем из списка
-                                } else {
-                                    ++jLoc;
-                                }
-                            }
-                            listDO.remove(elMass); // всегда удаляем
+                            int enterEndDO = 0; // триггер вхождения в поиск окончания DO
 
-                            
-                            int j = 0;
-                            while (j < listDI.size()) { // Проходим по DI
-                                String[] sj = listDI.get(j); // это элемент который 
-                                String retFinStr = comparSignals(s[numElTagname], sj[numElTagname], dataToParser); // вызываем функцию сравнения(патерн на основе 1 строки)
-                                if (retFinStr != null) {
-                                    //System.out.println("Совпадения втором массиве " + s + " - " + retFinStr);
-                                    findTmp.add(sj[numElTagname]); //если нашлми что там то добавляем
-                                    listDI.remove(j);// удаляем из списка
-                                } else {
-                                    ++j;
+                            // сигнал DO но по всем окончаниям on Off
+                            String commonSliceSig = null; // общая часть DO перед окончанием
+                            for (String endDGO : listOnOffDGO) {
+                                commonSliceSig = comparSignalEnd(s[numElTagname], endDGO);
+                                if (commonSliceSig != null) {
+                                    //++enterEndDO;
+                                    //System.out.println(commonSliceSig);
+                                    break;
                                 }
                             }
+
+                            if (commonSliceSig != null) {
+                                findTmp.add(commonSliceSig); // Добавляем переменную без окончания
+                            } else {
+                                findTmp.add(s[numElTagname]); // Добавляем просто переменную если нет для нее патерна
+                            }
+                            findTmp.add("false"); // данные для колонки columnTueFalse
                             
-                            findTmp.add(s[numElTagname]); // Добавляем искомую переменную.
+                            boolean findDOCompare = false; // триггер нахождения окончания DGO
+                            // прежде чем удалить из DO надо прогнать по всем окончаниям
+                            for (String endDGO : listOnOffDGO) { // прогоняем по окончаниям DGO ON всегда первый
+                                int jLoc = elMass;
+                                findDOCompare = false;
+                                while (jLoc < listDO.size()) { // прогоняем по самому себе DO
+                                    String[] locSeco = listDO.get(jLoc); // следующие элементы
+                                    String strSig = null;
+                                    strSig = checkSliceSignal(commonSliceSig, locSeco[numElTagname], endDGO);
+                                    if (strSig != null) {
+                                        findTmp.add(locSeco[numElTagname]); //если нашлми что там то добавляем
+                                        findDOCompare = true;
+                                        listDO.remove(jLoc);// удаляем из списка
+                                        ++enterEndDO; // Соответственно триггер вхождения увеличиваем
+                                    } else {
+                                        ++jLoc;
+                                    }
+                                }
+                                if (findDOCompare == false) {
+                                    findTmp.add(""); // не нашли для этого окончания нечего noneDO
+                                }
+                            }
+                            if (findDOCompare == false) {
+                                listDO.remove(elMass); //удаляем если не один патер не подошел
+                            }
+                            int enterEndDI = 0; // триггер вхождения в поиск окончания DI
+                            for (String endDGI : listOnOffDGI) { // прогоняем по окончаниям DGI
+                                boolean findDICompare = false; // триггер нахождения окончания DGI
+                                int j = 0;
+                                while (j < listDI.size()) { // Проходим по листу DI
+                                    String[] sj = listDI.get(j); // это элемент который 
+                                    String retFinStr = null;
+                                    retFinStr = checkSliceSignal(commonSliceSig, sj[numElTagname], endDGI); // вызываем функцию сравнения(патерн на основе 1 строки)
+                                    //if (retFinStr != null) break;                                 
+                                    if (retFinStr != null) {
+                                        findTmp.add(sj[numElTagname]); //если нашли,добавляем
+                                        listDI.remove(j);// удаляем из списка
+                                        ++enterEndDI;// инкримент вхождения
+                                        findDICompare = true;
+                                    } else {
+                                        ++j;
+                                    }
+                                }
+                                if (findDICompare == false) {// не нашли окон.
+                                    findTmp.add(""); // noneDI
+                                }
+                            }
+                            //System.out.println("Sig "+ commonSliceSig+" in DO_List " 
+                            //        + " " + Integer.toHexString(enterEndDO) +" in DI_List "+ enterEndDI);
+                            String entry = "ИМ: " + Integer.toHexString(enterEndDO) + "x" + Integer.toHexString(enterEndDI);
+                            findTmp.add(columnEntry, entry);  // данные о совпадении
+
                             findingTagname.add(findTmp);
                             //}  
                         }
@@ -411,22 +520,140 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                      }
                      */
                 }
-                ++sequence;
+            }
+            if (notFindTables.size() <= 0) { // Добавляем ли мы колонки для таблицы или нет так как данные могут быть пустыми
+                //columnT.addAll(listOnOffDGO); // Сращиваем с значениями нод столбцов
+                //columnT.addAll(listOnOffDGI); // Сращиваем с значениями нод столбцов
             }
 
         }
         columns = columnT.toArray(new String[columnT.size()]); // преобразовываем в массив
         // и сообщение если есть какие то неполадки
-        if(notFindTables.size() > 0){
+        if (notFindTables.size() > 0) {
             String message = "";
-            for(String s: notFindTables){
+            for (String s : notFindTables) {
                 message += s + "\n";
             }
             JOptionPane.showMessageDialog(null, "Не найдены таблицы \n" + message); //сообщение
         }
+
+        // сортировка
+       for(int iArr=0; iArr < findingTagname.size(); ++iArr){
+           int nextItem = iArr+1;
+           if(nextItem >= findingTagname.size()){
+               System.out.println("Last value");
+               break;
+           }else{
+               for(int iArrSec=nextItem; iArrSec < findingTagname.size(); ++iArrSec){
+                ArrayList<String> arr = findingTagname.get(iArr);
+                int summArr = 0;
+                for(String s: arr){ // вычисляем сколько элементов в листе кроме пустых строк
+                    if(s.equals("")){
+                        continue;
+                    } else ++summArr;
+                }
+                ArrayList<String> arrSecond = findingTagname.get(iArrSec);
+                int summArrSecond = 0;
+                for(String s: arrSecond){ // вычисляем сколько элементов во втором листе
+                    if(s.equals("")){
+                        continue;
+                    } else ++summArrSecond;
+                }
+                if(summArrSecond > summArr){
+                    findingTagname.set(iArr, arrSecond);
+                    findingTagname.set(iArrSec, arr);
+               }
+              }
+           }
+       }
         return findingTagname;
     }
-    
+
+    // ---  метод диалога выбора по какому методу делаем ИМ ---
+    private JDialog getJDialogChoiser(String[] massNameNode) {
+        String time = "Time : ";
+        int counT = 5;
+        JDialog jDialog1 = new JDialog(this, "Выбор метода генерации ИМ", true); // модальное блокирующее окно
+        jDialog1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jDialog1.setSize(400, 120);
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JComboBox jComboBox1 = new javax.swing.JComboBox<>();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+        //jPanel2 = new javax.swing.JPanel();
+        //jButton2 = new javax.swing.JButton();
+        //jScrollPane1 = new javax.swing.JScrollPane();
+
+        // слушатель окна выбора(не работает)
+        jDialog1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPreased(java.awt.event.KeyEvent evt) {
+                //if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+                //System.out.println(jComboBox1.getSelectedItem());
+                System.out.println("key");
+                //identNodecase = jComboBox1.getSelectedIndex();
+                //jDialog1.dispose(); // Закрыть
+                //}
+            }
+        });
+
+        jLabel1.setText("Выбор метода генерации ИМ");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(massNameNode));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //jComboBox1ActionPerformed(evt);
+                System.out.println(jComboBox1.getSelectedItem());
+                identNodecase = jComboBox1.getSelectedIndex();
+                jDialog1.dispose(); // Закрыть
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(82, 82, 82)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(146, 146, 146)
+                                                .addComponent(jLabel2)))
+                                .addContainerGap(92, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel2)
+                                .addGap(0, 151, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+                jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+        jDialog1Layout.setVerticalGroup(
+                jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+
+        return jDialog1;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel2;
