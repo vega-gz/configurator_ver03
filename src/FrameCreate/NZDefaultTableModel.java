@@ -36,6 +36,12 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
         this.nameTable = nameTable;
        }
       
+      // отключить редактирование базы когда это не нужно(нет еще таблица или самой базы)
+      public void disableEditDB(){
+        this.workbase = null;// отключаем редактирование базы
+
+      }
+      
 //            @Override
 //            public Class<?> getColumnClass(int columnIndex) { // структура для отображения таблицы с галками
 //                Class clazz = String.class;
@@ -59,8 +65,8 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
                       JOptionPane.showMessageDialog(null, "поле не редактируется");
                     
                 } else {  // если нет Галки просто обновляем данные
+                    Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений аналог Листа
                     if (workbase != null & nameTable != null) { // проверка на редактирования и таблица и экземпляр баз
-                        Vector rowData = (Vector) getDataVector().get(row); // не помню для чего но без этого только скрывает =(
                         //String curentCell = (String) rowData.get(column); // получить предыдущие данные
                         //String ColumnName = jTable1.getColumnName(column); // Имя выделенного столбца
                         String ColumnName = resultColumn[column];
@@ -75,6 +81,8 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
                         workbase.Update(nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
                         rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)
                         //System.out.println("columnTM " + columnTM + " yT " + yT  );
+                    } else{ // без базы просто обновляем
+                        rowData.set(column, aValue);
                     }
                 }
 

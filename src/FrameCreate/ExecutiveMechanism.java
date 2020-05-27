@@ -55,13 +55,15 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
     String[] columns; // названия колонок для таблицы в формате масива
     ArrayList<String> columnT; // названия колонок для таблицы
     int identNodecase = 0; // по идентификатор выбора какой механизм использовать
-
+    TableNzVer3 boneTable;
+    
     /**
      * Creates new form ExecutiveMechanism
      */
     public ExecutiveMechanism(DataBase workbase) { // С передачей базы
         this.workbase = workbase;
         listDataToTable = readConfigExeMech();
+        boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
         initComponents();
     }
 
@@ -82,7 +84,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new TableNzVer3(nameTable, columns, listDataToTable).getJTable();     // Новая таблица(а есть еще более новей);
+        jTable1 = boneTable.getJTable();     // Новая таблица(а есть еще более новей);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +137,12 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
 
     // --- Кнопка добавления данных в базу ---
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
+        // только потом затереть
+        ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
+        // получим данные с таблицы
+        ArrayList<String[]> updatetedData = boneTable.getAllData();
+        
         workbase.createTable(nameTable, columnT);
         for (ArrayList<String> array : listDataToTable) {
             workbase.insertRows(nameTable, array.toArray(new String[array.size()]), columnT); // опять значения на оборот

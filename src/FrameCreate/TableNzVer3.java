@@ -66,13 +66,14 @@ public class TableNzVer3 {
     private ArrayList<String> columnsArray;
     Exchanger<String> ex = new Exchanger<String>(); // переменная для обмена данных между потоками
     // public volatile String  messageThreadVar = "665"; // это почему то не видит поток
+    boolean OnOffTable = true; // Триггер для редактирования таблицы
 
-    public TableNzVer3(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
-        this.listData = listData;
-        //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
-    }
+//    public TableNzVer3(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
+//        this.listData = listData;
+//        //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
+//    }
 
-    public TableNzVer3() { // обязательно что то должно быть, так получаем Tableodel
+    public TableNzVer3() { // обязательно что то должно быть, так получаем Tablemodel
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
         //initComponents();
         this.workbase = DataBase.getInstance();
@@ -85,30 +86,34 @@ public class TableNzVer3 {
     }
 
     // --- Конструктор со всеми параметрами  с массивом названи столбцов ---
-    TableNzVer3(String nameTable, String[] columns, ArrayList<ArrayList> listData) {
+    TableNzVer3(String nameTable, String[] columns, ArrayList<ArrayList> listData, boolean OnOffTable) {
         this.nameTable = nameTable;
         this.columns = columns;
         this.listData = listData;
         this.workbase = DataBase.getInstance();
+        this.OnOffTable = OnOffTable;
+        new Thread(new UptadeVisualTable(this, ex)).start(); // Потоком слушателя обновления таблиц
     }
 
-    // --- Если на вход подали не массив колонок а Лист ---
-    TableNzVer3(String nameTable, ArrayList<String> columns, ArrayList<ArrayList> listData) {
+    // --- Если на вход подали не массив колонок а Лист с включением и отключение работы с базой---
+    TableNzVer3(String nameTable, ArrayList<String> columns, ArrayList<ArrayList> listData, boolean OnOffTable) {
         this.nameTable = nameTable;
         this.columnsArray = columns;  // это идиотия но пока не знаю как переделать
         this.listData = listData;
-        this.workbase = DataBase.getInstance();
         this.columns = new String[columns.size()];
         for (int i = 0; i < columns.size(); ++i) { // Преобразовать лист в массив
             this.columns[i] = columns.get(i);
         }
-        new Thread(new UptadeVisualTable(this, ex)).start(); // Пооком слушателя обновления таблиц
+        this.workbase = DataBase.getInstance();
+        this.OnOffTable = OnOffTable;
+        new Thread(new UptadeVisualTable(this, ex)).start(); // Потоком слушателя обновления таблиц
     }
 
     // --- получить сформированную таблицу ---
     public JTable getJTable() {
         tableFrameModel = getModelTable(nameTable, columns, listData);
-        jTable1.setModel(tableFrameModel);
+        if (!OnOffTable) tableFrameModel.disableEditDB(); // если триггер выключен ретактор базы отключен
+        jTable1.setModel(tableFrameModel); // установить модель поведения таблицы
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //jTable1.getColumnCount();// получить количество столбцов
         jTable1.setDefaultEditor(Date.class, new DateCellEditor());// Определение редактора ячеек
@@ -120,7 +125,7 @@ public class TableNzVer3 {
         return jTable1;
     }
 
-    // --- повтор метода из NZDefaultTableModel и забираем из него данные ---
+    // --- повтор метода из NZDefaultTableModel и забираем из него данные по имени колонки получить и ячейки данные---
     public Object getDataNameColumn(String nameColumn, int row) {
         Object objTable = tableFrameModel.getDataNameColumn(nameColumn, row);
         return objTable;
@@ -356,7 +361,7 @@ public class TableNzVer3 {
         return listToTable;
     }
 
-    // --- получение новых значений и перерисовка таблицы ---
+    // --- перерисовка таблицы от данных с базы ---
     void getDatredrawnTable() {
         // так делаю перермсовку таблицы(очень плохо тут все)
         listData = getDatafromBase(); // Обновим список что есть в базе
@@ -364,14 +369,26 @@ public class TableNzVer3 {
         jTable1.setModel(tableFrameModel);
         jTable1.getTableHeader().repaint();// без этого не работает отрисовка , 
     }
+    
+    // ---  возвернуть все данные из таблицы ---
+    public ArrayList<String[]> getAllData(){
+        ArrayList<String[]> allData = new ArrayList<>();
+        int columnCount = jTable1.getModel().getColumnCount(); // количество столбцов
+        for(int y=0; y < jTable1.getRowCount(); ++y){ // бежим по строкам
+            String[] arraRow = new String[columnCount];
+            for( int x=0; x<columnCount; ++x){
+                arraRow[x] = (String) jTable1.getModel().getValueAt(y, x);
+            }
+            allData.add(arraRow);
+        }
+        return allData;
+    }
 }
 
 // Редактор даты с использованием прокручивающегося списка JSpinner
 class DateCellEditor extends AbstractCellEditor implements TableCellEditor {
-
     // Редактор
     private JSpinner editor;
-
     // Конструктор
     public DateCellEditor() {
         // Настройка прокручивающегося списка

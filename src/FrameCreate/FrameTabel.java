@@ -65,7 +65,7 @@ public class FrameTabel extends javax.swing.JPanel {
             }
             listToTable.add(tmpList);
         }
-        tableFrameModel = new TableNzVer3(nameTable, columns, listToTable);
+        tableFrameModel = new TableNzVer3(nameTable, columns, listToTable, true);
         //jTable1 = new TableNzVer3(nameTable, columnstoMass, listToTable).getJTable();
         //this.tableFrameModel = (NZDefaultTableModel) new TableNzVer2().getModelTable(nameTable, columnstoMass, listToTable);
 //        System.out.println("FIND_0 " + tableFrameModel.getDataNameColumn("TAG_NAME_PLC", 0));
