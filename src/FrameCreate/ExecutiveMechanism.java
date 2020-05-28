@@ -28,6 +28,7 @@ import DataBaseConnect.*;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -140,12 +141,38 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
         // только потом затереть
         ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
+        ArrayList<String[]> dataFromDBTrue = new ArrayList<>(); // массив с выборкой true
+        for(String[] arr: allDataExecTable){
+            for(String s: arr){
+                if(s.equals("true")){
+                    dataFromDBTrue.add(arr);
+                    break;
+                }
+            }
+        }
         // получим данные с таблицы
         ArrayList<String[]> updatetedData = boneTable.getAllData();
         
+        int elemCompare = 1; // номер элемента в массиве который сравниваем
+        for(int i=0; i<updatetedData.size(); ++i){
+            String[] arr = updatetedData.get(i);
+            String tagNameTable = arr[elemCompare]; // так как из базы еще id и UUID
+            for(String[] arrTrue: dataFromDBTrue){
+                //String[] arr = updatetedData.get(i);
+                String tagNameTrue = arrTrue[elemCompare+2]; // тут совсем другие значения
+                if(tagNameTable.equals(tagNameTrue)){
+                     // вставляем значение где не было true из базы вырезав нужные данные без id и uuid
+                    updatetedData.set(i, Arrays.copyOfRange(arrTrue, 2, arrTrue.length));
+                }
+            }
+        }
+        
         workbase.createTable(nameTable, columnT);
-        for (ArrayList<String> array : listDataToTable) {
-            workbase.insertRows(nameTable, array.toArray(new String[array.size()]), columnT); // опять значения на оборот
+//        for (ArrayList<String> array : listDataToTable) {
+//            workbase.insertRows(nameTable, array.toArray(new String[array.size()]), columnT); // опять значения на оборот
+//        }
+        for (String[] array : updatetedData) {
+            workbase.insertRows(nameTable, array, columnT); // опять значения на оборот
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
