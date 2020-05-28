@@ -44,12 +44,12 @@ public class FileManager {
 
     public static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
-    public File wrFile;
-    public File rdFile;
-    public FileOutputStream fos;
-    public FileInputStream fis;
-    public Writer wrStream;
-    public Reader rdStream;
+    public File wrFile=null;
+    public File rdFile=null;
+    public FileOutputStream fos=null;
+    public FileInputStream fis=null;
+    public Writer wrStream=null;
+    public Reader rdStream=null;
     public boolean EOF;
 
     // --- копирование файла используя поток ---
@@ -235,12 +235,12 @@ public class FileManager {
         return 0;
     }
     public void closeWrStream() throws IOException{
-        wrStream.close();
-        fos.close();
+        if(wrStream!=null) wrStream.close();
+        if(fos!=null) fos.close();
     }
     public void closeRdStream() throws IOException{
-        rdStream.close();
-        fis.close();
+        if(rdStream!=null) rdStream.close();
+        if(fis!=null) fis.close();
     }
 
     public int createFile2write(String dirName, String fileName) throws IOException {
@@ -383,9 +383,13 @@ public class FileManager {
     }
 
     public static String FindFile(String dir, String nameType) throws IOException {
+        if(dir==null || nameType==null) return null;
+        File f = new File(dir +"\\" + nameType + ".type");
+        if(f.isFile()) return nameType + ".type";
+        //-----------------------------------------------------------------------------
         String nameWords = "Name=";
         String ext = ".TYPE";
-        String firstName, secondName, fileName = null;
+        //String firstName, secondName, fileName = null;
         FileManager fm = new FileManager();
         final File folder = new File(dir);
         String[] fileList = folder.list();
@@ -418,7 +422,7 @@ public class FileManager {
         String nameWords = "Name=";
         String uuidWords = "UUID=";
         String ext = ".TYPE";
-        String firstName, secondName, fileName = null;
+        //String firstName, secondName, fileName = null;
         FileManager fm = new FileManager();
         final File folder = new File(dir);
         String[] fileList = folder.list();

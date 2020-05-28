@@ -34,8 +34,8 @@ import org.w3c.dom.NodeList;
 class ReadBedXML {
 
     String pathD = "";
-    String doctype = "";
-    int positionDTD;
+    String doctype = null;
+    int positionDTD = -1;
     boolean positionDTDFind = false; // триггер для поиска DTD что бы не гонять цикл
 
 
@@ -135,7 +135,6 @@ class ReadBedXML {
     //метод записи файла и изначальных данных и DTD
     public void methodWrite(String path, String data) throws InterruptedException {
         try {
-
             File resultName = new File(path + "_newfile"); //Файл с новой записью
             File tmpName = new File(path + "_original"); // это просто Имя
             File realName = new File(path); // Оригинальное имя
@@ -144,9 +143,7 @@ class ReadBedXML {
             int tmpPos = 0;
             String resultTofile = "";
             for (String tmpStr : data.split("\n")) { // бъем строку что бы записать в нужное место что вырезали выше
-                //writer.append(tmpStr);
-
-                if (tmpPos == positionDTD) { // если позиция верная то внсим обратно доктипДТД
+                if (tmpPos == positionDTD && doctype!=null) { // если позиция верная то внсим обратно доктипДТД
                     resultTofile += doctype + "\n";
                 } else {
                     tmpStr = tmpStr.trim();
@@ -154,7 +151,6 @@ class ReadBedXML {
                 }
                 ++tmpPos;
             }
-            //writer.write(data); // это походу переписать
             writer.write(resultTofile); // Добавляем вновь сформированную строку в файл
             writer.close();
             // Удаляем  и переименовываем в удаленный файл
@@ -249,14 +245,14 @@ class ReadBedXML {
             int pos_str = 0;
             String resultTofile = "";
             while ((str = read.readLine()) != null) {
-//                if (pos_str == positionDTD) { // если позиция верная то внсим обратно доктипДТД
-//                    resultTofile += doctype + "\n";
-//                    resultTofile += str + "\n";
-//                } else {
+                if (pos_str == positionDTD) { // если позиция верная то внсим обратно доктипДТД
+                    resultTofile += doctype + "\n";
+                    resultTofile += str + "\n";
+                } else {
                     str = str.trim();
                     if(!str.isEmpty()) resultTofile += str + "\n"; // таким способоб убираем пустую
                     //resultTofile += str + "\n"; // таким способоб убираем пустую и вставляем нужную
-//                }
+                }
                 ++pos_str;
             }
             read.close();

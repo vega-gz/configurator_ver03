@@ -67,24 +67,6 @@ public class DataBase {
         }
         return 0;
     }
-
-
-    // --- Читает конфигурацию для подключения к базе ---
-//    private int connectionToBaseByConfig(){
-//        int x = new XMLSAX().setConnectBaseConfig("Config.xml"); // так читаем файл и подключаемся к базе
-//        //globVar.currentBase = BASE; // присваием глобальным паметрам значение после инициализации
-//        return x;
-//    }
-    
-    // --- Подключение к базе используя параметры ---
-//    public int connectionToBase1(String URL, String DB, String USER, String PASS) {
-////        this.URL = URL;
-////        this.BASE = DB;
-////        this.USER = USER;
-////        this.PASS = PASS;
-////        return connectionToBase();
-//return 0;
-//    }
     
     // --- получить имя текущей базы ---
     public String getCurrentNameBase(){
@@ -222,13 +204,10 @@ public class DataBase {
     public void createTable(String name_table,  String[] listNameColum, String comment) {
         if (name_table.isEmpty() || listNameColum.length == 0) return; 
         String nameSEQ = name_table.toLowerCase() +"_id_seq"; // имя итератора
-        int number_colum = listNameColum.length;
         createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
         String sql = null;
-        //переменная для анализа
-        //String nameTbanalise = new String(name_table);
         name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
-        int tmp_cell = 0;
+        //int tmp_cell = 0;
         String nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')";
         for(int j=0; j<listNameColum.length; j++)
             nc_stringing += " ," + "\"" + listNameColum[j] + "\"" + "      TEXT";
@@ -361,7 +340,7 @@ public class DataBase {
                     tmp += ", '" + rows[i] + "'";
                 }
                 sql += tmp.substring(2) + ");";
-                System.out.println(sql); // Если надо смотрим что за sql запрос
+                //System.out.println(sql); // Если надо смотрим что за sql запрос
                 stmt = connection.createStatement();
                 stmt.executeUpdate(sql);
                 stmt.close();
