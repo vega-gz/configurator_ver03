@@ -53,7 +53,8 @@ public class TableNzVer3 {
     private ArrayList<String> columnsArray;
     Exchanger<String> ex = new Exchanger<String>(); // переменная для обмена данных между потоками
     // public volatile String  messageThreadVar = "665"; // это почему то не видит поток
-    
+    boolean OnOffTable = true; // Триггер для редактирования таблицы
+
     JTable jTable1 = new JTable(){
        // Так реализация подстройки к ширине данных в ячейке(подсмотрел)
        public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -67,16 +68,6 @@ public class TableNzVer3 {
 
     };
     //); // Сама наша таблица
-    String nameTable = null;
-    DataBase workbase = null; // создаем пустой запрос к базе
-    ArrayList<ArrayList> listData = null; // Массив для  перебора в запросе
-    String[] columns = null; // Колонки таблицы
-    NZDefaultTableModel tableFrameModel = null; // Доработанная модель таблицы
-    private ArrayList<String> columnsArray;
-    Exchanger<String> ex = new Exchanger<String>(); // переменная для обмена данных между потоками
-    // public volatile String  messageThreadVar = "665"; // это почему то не видит поток
-    boolean OnOffTable = true; // Триггер для редактирования таблицы
-
 //    public TableNzVer3(ArrayList<ArrayList> listData) { // В реализации Механизмов вызывается это
 //        this.listData = listData;
 //        //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
