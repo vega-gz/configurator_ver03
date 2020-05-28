@@ -45,6 +45,15 @@ import javax.swing.table.TableColumn;
 // --- строиться таблица внутри  JPanel -- 
 public class TableNzVer3 {
 
+    String nameTable = null;
+    DataBase workbase = null; // создаем пустой запрос к базе
+    ArrayList<ArrayList> listData = null; // Массив для  перебора в запросе
+    String[] columns = null; // Колонки таблицы
+    NZDefaultTableModel tableFrameModel = null; // Доработанная модель таблицы
+    private ArrayList<String> columnsArray;
+    Exchanger<String> ex = new Exchanger<String>(); // переменная для обмена данных между потоками
+    // public volatile String  messageThreadVar = "665"; // это почему то не видит поток
+    
     JTable jTable1 = new JTable(){
        // Так реализация подстройки к ширине данных в ячейке(подсмотрел)
        public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {

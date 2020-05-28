@@ -371,7 +371,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         }
         jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
-        if(ret==0){
+        if(ret>=0){
 	    JOptionPane.showMessageDialog(null, "В базу загружено " + ret +" таблиц");
             jTree1.setModel(getModelTreeNZ());// обновить дерево
         }
