@@ -182,7 +182,7 @@
 		<GenCode >
 			<File src="FI_CallAll" target="_Algorithm">
 				<Block start="Начало сгенерированного кода FI_init" end="Конец сгенерированного кода">
-					<Function name="FI_init">
+					<Function name="AI_init">
 						<arg><abonent/><text t="_FI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
@@ -200,7 +200,7 @@
 					</Function>
 				</Block>
 				<Block start="Начало сгенерированного кода FI_Processing" end="Конец сгенерированного кода">
-					<Function name="FI_Processing">
+					<Function name="AI_Processing">
 						<arg><abonent/><text t="_FI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><abonent/><text t="_FI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><abonent/><text t="_FI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
