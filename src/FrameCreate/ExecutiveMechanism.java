@@ -140,17 +140,22 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
         // только потом затереть
-        ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
         ArrayList<String[]> dataFromDBTrue = new ArrayList<>(); // массив с выборкой true
-        for(String[] arr: allDataExecTable){
-            for(String s: arr){
-                if(s.equals("true")){
-                    dataFromDBTrue.add(arr);
-                    break;
+        for(String table: workbase.getListTable()){ // есть ли вообще таблица
+            if (nameTable.equals(table)){
+                ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
+                for(String[] arr: allDataExecTable){
+                    for(String s: arr){
+                        if(s.equals("true")){
+                            dataFromDBTrue.add(arr);
+                            break;
+                        }
+                    }
                 }
+                break;
             }
         }
-        // получим данные с таблицы
+        // получим данные с таблицы Swing
         ArrayList<String[]> updatetedData = boneTable.getAllData();
         
         int elemCompare = 1; // номер элемента в массиве который сравниваем
@@ -463,7 +468,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                     while (listDO.size() > 0) {  // пробегаем по листу но тут только 1 так как Tag_name 
                         ArrayList<String> findTmp = new ArrayList(); // Временный 
                         String[] s = listDO.get(elMass); // Первый элемент DO 
-                        if (checkSignal(s[numElTagname], egnoredList)) { // если сигнал из листа игнортрования
+                        if (checkSignal(s[numElTagname], egnoredList)) { // если сигнал из листа эгнорирования
                             listDO.remove(elMass);
                         } else {
                             if (s.length > 1) { // для подстраховки если не нашли имена столбцов
@@ -489,11 +494,11 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                             }
                             findTmp.add("false"); // данные для колонки columnTueFalse
                             
-                            boolean findDOCompare = false; // триггер нахождения окончания DGO
+                            boolean findDOCompareOnce = false; // триггер нахождения окончания DGO
                             // прежде чем удалить из DO надо прогнать по всем окончаниям
                             for (String endDGO : listOnOffDGO) { // прогоняем по окончаниям DGO ON всегда первый
                                 int jLoc = elMass;
-                                findDOCompare = false;
+                                boolean findDOCompare = false;
                                 while (jLoc < listDO.size()) { // прогоняем по самому себе DO
                                     String[] locSeco = listDO.get(jLoc); // следующие элементы
                                     String strSig = null;
@@ -501,6 +506,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                                     if (strSig != null) {
                                         findTmp.add(locSeco[numElTagname]); //если нашлми что там то добавляем
                                         findDOCompare = true;
+                                        findDOCompareOnce = true;
                                         listDO.remove(jLoc);// удаляем из списка
                                         ++enterEndDO; // Соответственно триггер вхождения увеличиваем
                                     } else {
@@ -511,9 +517,10 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
                                     findTmp.add(""); // не нашли для этого окончания нечего noneDO
                                 }
                             }
-                            if (findDOCompare == false) {
+                            if (findDOCompareOnce == false) {
                                 listDO.remove(elMass); //удаляем если не один патер не подошел
                             }
+                            
                             int enterEndDI = 0; // триггер вхождения в поиск окончания DI
                             for (String endDGI : listOnOffDGI) { // прогоняем по окончаниям DGI
                                 boolean findDICompare = false; // триггер нахождения окончания DGI
@@ -572,7 +579,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Не найдены таблицы \n" + message); //сообщение
         }
 
-        // сортировка
+//         сортировка
        for(int iArr=0; iArr < findingTagname.size(); ++iArr){
            int nextItem = iArr+1;
            if(nextItem >= findingTagname.size()){
