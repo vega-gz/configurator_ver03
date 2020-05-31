@@ -152,7 +152,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Сгенерировать сигнал");
+        jButton5.setText("Архивы");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -301,7 +301,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 44, Short.MAX_VALUE)))
+                        .addGap(0, 107, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -404,20 +404,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        JFrame editArchive = new addArchive();
+        editArchive.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        editArchive.setTitle("Редактирование архивов");
+        editArchive.setVisible(true);
 
-        JFileChooser fileload = new JFileChooser();
-        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
-        filepath = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
-        if (filepath == JFileChooser.APPROVE_OPTION) {
-            try {
-                filepatch = fileload.getSelectedFile().getCanonicalPath();
-            } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-                FileManager.loggerConstructor("error testing 44352");
-
-            }
-
-        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
