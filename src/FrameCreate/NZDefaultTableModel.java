@@ -17,7 +17,7 @@ import DataBaseConnect.DataBase;
  */
     // --- Собственный класс таблиц из за своих методов ---
 public class NZDefaultTableModel extends DefaultTableModel { // название столбцов resultColumn   
-      Object[][] dataInTable = null;
+      //Object[][] dataInTable1 = null;
       String[] resultColumn = null;
       String nameTable = null;
       DataBase workbase = DataBase.getInstance();// создаем запрос к базе
@@ -25,13 +25,13 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
       // просто построить данные
       public NZDefaultTableModel (Object[][] dataInTable, String[] resultColumn){
         super(dataInTable, resultColumn);
-        this.dataInTable = dataInTable;
+        //this.dataInTable1 = dataInTable;
         this.resultColumn = resultColumn;
        }
       // Строим конструктором таким для редактирования таблицы
       public NZDefaultTableModel (Object[][] dataInTable, String[] resultColumn, String nameTable){
         super(dataInTable, resultColumn);
-        this.dataInTable = dataInTable;
+        //this.dataInTable1 = dataInTable;
         this.resultColumn = resultColumn;
         this.nameTable = nameTable;
        }

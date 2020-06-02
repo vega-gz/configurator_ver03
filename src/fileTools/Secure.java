@@ -17,16 +17,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Decoder;
+//import sun.misc.BASE64Encoder;
 /**
  *
  * @author ad
  */
 public class Secure {
 public static void main(String[] args) {
-    BASE64Decoder decoder = new BASE64Decoder();
-    BASE64Encoder encoder = new BASE64Encoder();
+    //BASE64Decoder decoder = new BASE64Decoder();
+    //BASE64Encoder encoder = new BASE64Encoder();
     try {
     String text = "password";
     // Generate new key
@@ -35,9 +35,9 @@ public static void main(String[] args) {
     Key key = keygen.generateKey();
     
     // Преобразовываем ключ в строку
-    String keyString = encoder.encode(key.getEncoded());
-    byte[] encodedKey = decoder.decodeBuffer(keyString);
-    Key key2 = new SecretKeySpec(encodedKey,0,encodedKey.length, "AES");  
+    //String keyString = encoder.encode(key.getEncoded());
+    //byte[] encodedKey = decoder.decodeBuffer(keyString);
+    //Key key2 = new SecretKeySpec(encodedKey,0,encodedKey.length, "AES");  
     
 // Encrypt with key
     String transformation = "AES/ECB/PKCS5Padding";
@@ -47,7 +47,7 @@ public static void main(String[] args) {
     String cryptPass = DatatypeConverter.printHexBinary(encrypted);
     System.out.println(cryptPass);
     // Decrypt with key
-    cipher.init(Cipher.DECRYPT_MODE, key2); // расшифруем с помощью другого ключа
+    //cipher.init(Cipher.DECRYPT_MODE, key2); // расшифруем с помощью другого ключа
     String result = new String(cipher.doFinal(encrypted));
     System.out.println(result);
         
@@ -61,8 +61,8 @@ public static void main(String[] args) {
         Logger.getLogger(Secure.class.getName()).log(Level.SEVERE, null, ex);
     } catch (BadPaddingException ex) {
         Logger.getLogger(Secure.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
-        Logger.getLogger(Secure.class.getName()).log(Level.SEVERE, null, ex);
+//    } catch (IOException ex) {
+//        Logger.getLogger(Secure.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
 }    

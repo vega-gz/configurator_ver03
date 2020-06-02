@@ -230,6 +230,28 @@ public class DataBase {
             return;
         }
     }
+    public void createTableEasy(String name_table,  String[] listNameColum, String comment) {
+        if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
+        String sql = "";
+        try {
+            connection.setAutoCommit(true);
+            stmt = connection.createStatement();
+            sql = "CREATE TABLE \"" + name_table + "\" (id INTEGER";
+            for (String s : listNameColum) sql += ", \"" + s + "\" TEXT";
+            sql += ");";
+            
+            System.out.println("Easy table " + sql); // смотрим какой запрос на соз
+            stmt.executeUpdate(sql);
+            stmt.close();
+            createCommentTable(name_table, comment); // вызом метода добавления комментария
+
+        } catch (SQLException e) {
+            System.out.println("Failed CREATE TABLE");
+            System.out.println(sql); // смотрим какой запрос на соз
+            e.printStackTrace();
+            return;
+        }
+    }
     
 // --- Вставка данных (название таблицы, данные, список столбцов) если нет данных для UUID сам сделает---
     public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
@@ -353,37 +375,54 @@ public class DataBase {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+// --- Вставка данных (название таблицы, список столбцов, данные, index) -Lev--
+    public void insertRow(String name_table, String[] row, String[] listNameColum, int index) {
+        if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length) return;
+        try {
+            connection.setAutoCommit(true);
+            String sql;
+            try {
+                name_table = replacedNt(name_table);
+                sql = "INSERT INTO \"" + name_table + "\" (id"; // при первом проходе иначе будет отличаться данные и столбцы
+                for (String s : listNameColum) sql += ", \"" + s + "\"";
+                sql += ") VALUES ("+index;
+                for (String row1 : row)  sql += ", '" + row1 + "'";
+                sql += ");";
+                stmt = connection.createStatement();
+                stmt.executeUpdate(sql);
+                stmt.close();
+            } catch (SQLException e) {
+                System.out.println("Failed ADD data");
+                e.printStackTrace();
+                //return;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
      
     // получение таблицы целиком
     public ArrayList<String[]> getData(String table) {
         return getData(table, "id");
     }
+    
     public ArrayList<String[]> getData(String table, String orderCol) {
         ArrayList<String[]> selectData = new ArrayList<>();
         ArrayList<String> columns = getListColumnTable(table);
 
         String s_columns = "";
         String[] strfromtb = new String[columns.size()]; // массив под данные
-        for (int i = 0; i < columns.size(); ++i) { //формирование строки запроса
-            if (i < columns.size() - 1) {
-                s_columns += "\"" + columns.get(i) + "\"" + ", ";
-            } // Кавычки для руских имен и пробелов
-            else {
-                s_columns += "\"" + columns.get(i) + "\"";
-            }
-        }
-        // проверка на столбец по которому упорядочим данные (сортировка)
-        String sql = null;
-        for(String s: getListColumnTable(table)){
-            if(s.equals(orderCol)){ // нашли тогда упорядовать
-              sql = "SELECT " + s_columns + " FROM \"" + table + "\" ORDER BY \"" +orderCol +"\";";
-              break;
-            } else sql = "SELECT " + s_columns + " FROM \"" + table +"\";";
-        }
+        for (int i = 0; i < columns.size()-1; ++i) s_columns += "\"" + columns.get(i) + "\", ";
+        s_columns += "\"" + columns.get(columns.size()-1) + "\"";
         
+        String sql;
+        if(columns.indexOf(orderCol)>=0){
+            sql = "SELECT " + s_columns + " FROM \"" + table + "\" ORDER BY \"" +orderCol +"\";";
+        }else{
+            sql = "SELECT " + s_columns + " FROM \"" + table +"\";";
+        }
         try {
             stmt = connection.createStatement();
-            //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 for (int i = 0; i < columns.size(); ++i) {
@@ -391,12 +430,9 @@ public class DataBase {
                 }
                 String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
                 selectData.add(tmp1);
-                //System.out.println(strfromtb[0]); // это просто для тестов
             }
             rs.close();
             stmt.close();
-            //connection.commit();
-            //System.out.println("-- Operation SELECT done successfully");
         } catch (SQLException e) {
             System.out.println("Failed select data");
             e.printStackTrace();

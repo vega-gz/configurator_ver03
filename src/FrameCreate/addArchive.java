@@ -1,27 +1,83 @@
 package FrameCreate;
 
-import java.util.Vector;
+import globalData.globVar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.ListSelectionModel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 
 /*@author Lev*/
 public class addArchive extends javax.swing.JFrame {
     DefaultListModel list1 = new DefaultListModel();
     DefaultListModel list2 = new DefaultListModel();
+    DefaultTableModel tableModel = new DefaultTableModel();
+    JPopupMenu popupMenu = new JPopupMenu();
+    
     // Данные для таблиц
-    private Object[][] array = new Object[][] {{ "1","Сахар" , "кг", "1.5", "44" },
-                                               { "2","Мука"  , "кг", "4.0", "32" },
-                                               { "3","Молоко", "л" , "2.2", "45" }};
+    private final String[] continueArchiv = new String[] {  "Текущий", 
+                                                            "100", 
+                                                            "0", 
+                                                            "82400",
+                                                            "true",
+                                                            "false",
+                                                            "false",
+                                                            "-1"
+    };
+    private final String[] jTableCols = new String[] {  "№","Наименование архива", 
+                                                            "<HTML><BODY>Периодичность<br/>[1/сек]</BODY></HTML>", 
+                                                            "Предыстория[сек]", 
+                                                            "Длительность[сек]",
+                                                            "Сигнал записи",
+                                                            "Останавливать по длительности",
+                                                            "Останавливать по отсутствию сигнала",
+                                                            "Количество"
+    };
     // Заголовки столбцов
-    private String[] columnsHeader = new String[] {"Наименование", "Ед.измерения", "Количество", "артикул"};
+    private final String[] columnsHeader = new String[] {   "Наименование архива", 
+                                                            "<HTML><BODY>Периодичность<br/>[1/сек]</BODY></HTML>", 
+                                                            "Предыстория[сек]", 
+                                                            "Длительность[сек]",
+                                                            "Сигнал записи",
+                                                            "Останавливать по длительности",
+                                                            "Останавливать по отсутствию сигнала",
+                                                            "Количество"
+    };
 
     public addArchive() {
-        //jList1.setModel(model_list);
+        if(globVar.DB==null)return;
+        ArrayList<String[]> archives;
+        if(!globVar.DB.isTable("Archive")){
+            globVar.DB.createTableEasy("Archive",  columnsHeader, "Конфигурации архивов");
+            globVar.DB.insertRow("Archive", continueArchiv, columnsHeader,0);
+            archives = new ArrayList<>();
+            archives.add(continueArchiv);
+        }else{
+            archives = globVar.DB.getData("Archive");
+        }
+        
+        tableModel.setColumnIdentifiers(jTableCols);
+        
+        for (int i = 0; i < archives.size(); i++) 
+            tableModel.addRow(archives.get(i));
         initComponents();
+        
+        int qCol = columnsHeader.length+1;
+        int[] colWidth = new int[qCol];
+        for(int i=1; i<qCol; i++) colWidth[i] = columnsHeader[i-1].length()*7;
+        colWidth[0] = 21;
+        
+        int[] align = new int[qCol];
+        for(int i=1; i<qCol; i++) align[i]=-1;
+        align[0] = 1;
+        
+        TableTools.setTableSetting(jTable1, colWidth, align);
+
+        //jList1.setModel(model_list);
         jList1.setModel(list1);
         jList2.setModel(list2);
         list1.addElement("Papa1");
@@ -31,22 +87,10 @@ public class addArchive extends javax.swing.JFrame {
         list1.addElement("v5");
         list1.addElement("matematike6");
         
-        jTable1.setRowSelectionAllowed(false);
-        TableColumnModel columnModel = jTable1.getColumnModel();
-        // Разрешение выделения столбца
-        columnModel.setColumnSelectionAllowed(true);
-        // Режим одиночного выделения
-        columnModel.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        for(String s: columnsHeader){
-            TableColumn сolumn = new TableColumn(0, s.length()*4);
-            сolumn.setHeaderValue(s);
-            columnModel.addColumn(сolumn);
-        }
-        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-        tableModel.addRow(array[0]);
-        tableModel.addRow(array[1]);
-        tableModel.addRow(array[2]);
-        tableModel.removeRow(0);
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel);
+       // .addActionListener(new ActionListener() {JOptionPane.showMessageDialog(null, "Новая строка!")});
+//{JOptionPane.showMessageDialog(null, "Новая строка!");});
+        
    }
 
     @SuppressWarnings("unchecked")
@@ -66,14 +110,20 @@ public class addArchive extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null}
-            },
-            new String [] {
-                "№"
+        jTable1.setModel(tableModel);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
-        ));
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
+        jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jTable1ComponentResized(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText(">>");
@@ -121,11 +171,8 @@ public class addArchive extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -135,22 +182,19 @@ public class addArchive extends javax.swing.JFrame {
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
@@ -158,7 +202,13 @@ public class addArchive extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
-                        .addContainerGap(228, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3))))
+                .addContainerGap())
         );
 
         pack();
@@ -188,6 +238,17 @@ public class addArchive extends javax.swing.JFrame {
         for(int i=0; i < list2.size();i++) list1.addElement(list2.get(i));
         list2.removeAllElements();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        this.popupMenu.isVisible();
+        //int ans = popupMenu.
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentResized
+    }//GEN-LAST:event_jTable1ComponentResized
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+    }//GEN-LAST:event_jTable1MousePressed
 
     /**
      * @param args the command line arguments
