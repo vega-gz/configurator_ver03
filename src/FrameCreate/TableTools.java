@@ -1,5 +1,6 @@
 package FrameCreate;
 
+import DataBaseConnect.DataBase;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -112,5 +113,15 @@ public class TableTools {//ссылка на таблицу, массив шир
         String[] s = new String[n];
         for(int i=0; i< n; i++) s[i] = jTable1.getValueAt(row, i).toString();
         return s;
+    }
+    
+    static int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String[] listNameColum, String tableComment){
+        if(DB.isTable(tableName)){
+            DB.dropTable(tableName);
+        }
+        DB.createTableEasy(tableName, listNameColum, tableComment);
+        int y = jTable1.getRowCount();
+        for(int i=0; i<y; i++) DB.insertRow(tableName, getRow(jTable1,i), listNameColum, i);
+        return 0;
     }
 }

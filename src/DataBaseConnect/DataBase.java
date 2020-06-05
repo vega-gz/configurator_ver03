@@ -237,7 +237,9 @@ public class DataBase {
             connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE TABLE \"" + name_table + "\" (id INTEGER";
-            for (String s : listNameColum) sql += ", \"" + s + "\" TEXT";
+            int start = 0;
+            if("id".equalsIgnoreCase(listNameColum[0]) || "№".equals(listNameColum[0])) start = 1;
+            for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\" TEXT";
             sql += ");";
             
             System.out.println("Easy table " + sql); // смотрим какой запрос на соз
@@ -249,7 +251,6 @@ public class DataBase {
             System.out.println("Failed CREATE TABLE");
             System.out.println(sql); // смотрим какой запрос на соз
             e.printStackTrace();
-            return;
         }
     }
     
@@ -384,9 +385,17 @@ public class DataBase {
             try {
                 name_table = replacedNt(name_table);
                 sql = "INSERT INTO \"" + name_table + "\" (id"; // при первом проходе иначе будет отличаться данные и столбцы
-                for (String s : listNameColum) sql += ", \"" + s + "\"";
-                sql += ") VALUES ("+index;
-                for (String row1 : row)  sql += ", '" + row1 + "'";
+                
+                int start = 0;
+                if("id".equalsIgnoreCase(listNameColum[0]) || "№".equals(listNameColum[0])) start = 1;
+                for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\"";
+                if(start == 0){
+                    sql += ") VALUES ("+index;
+                    for (String row1 : row)  sql += ", '" + row1 + "'";
+                }else{
+                    sql += ") VALUES ("+row[0];
+                    for(int i = 1; i<row.length; i++)  sql += ", '" + row[i] + "'";
+                }
                 sql += ");";
                 stmt = connection.createStatement();
                 stmt.executeUpdate(sql);
@@ -394,7 +403,6 @@ public class DataBase {
             } catch (SQLException e) {
                 System.out.println("Failed ADD data");
                 e.printStackTrace();
-                //return;
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);

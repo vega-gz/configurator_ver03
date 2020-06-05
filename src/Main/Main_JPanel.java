@@ -35,16 +35,26 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     public Main_JPanel(){
         initComponents();
-        // globVar.DB = DataBase.getInstance(); // перенес в main
-        listDropT = globVar.DB.getListTable(); // получи список таблиц при включении
         jTextField1.setText(globVar.desDir);
+        globVar.DB = DataBase.getInstance();
+        if(globVar.DB == null){
+            this.setTitle("База " + globVar.currentBase + "по пути " + globVar.dbURL + " не найдена");
+        }else{
+            initMyComponent();
+        }
+    }
+    public void initMyComponent(){
+        //initComponents();
+        jTextField1.setText(globVar.desDir);
+        //globVar.DB = DataBase.getInstance();
+        listDropT = globVar.DB.getListTable(); // получи список таблиц при включении
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
         DataBase.createAbonentTable();
         jComboBox2.setModel(getComboBoxModelAbonents()); // абоненты из базы
         globVar.abonent = jComboBox2.getItemAt(0);
         this.setTitle("Текущая база:" + globVar.currentBase + ", путь: " + globVar.dbURL); // установить заголовок
     }
-
+    //public void 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -580,6 +590,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- структура построения для дерева ---
     public static DefaultTreeModel getModelTreeNZ(){
+        if (globVar.DB == null) {
+            return null;
+        }
         globVar.DB.createAbonentTable();
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
         ArrayList<String> listTableBd = globVar.DB.getListTable();

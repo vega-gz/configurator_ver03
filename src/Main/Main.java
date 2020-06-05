@@ -11,11 +11,6 @@ public class Main {
 
     public static void main(String[] args) {
         XMLSAX.getConnectBaseConfig("Config.xml");
-        globVar.DB = DataBase.getInstance();
-        if(globVar.DB == null){
-            JOptionPane.showMessageDialog(null, "Не удалось устновить контакт с СУБД");
-            return;
-        }
         globVar.myDir = System.getProperty("user.dir");
         globVar.sax = new XMLSAX(); // Класс работы с XML  static что бы не парится
         globVar.cfgRoot = globVar.sax.readDocument("ConfigSignals.xml");
