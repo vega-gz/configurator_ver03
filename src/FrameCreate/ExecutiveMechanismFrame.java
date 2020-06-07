@@ -40,7 +40,7 @@ import javax.swing.Timer; //Таймер каждую секунду
  *
  * @author nazarov
  */
-public class ExecutiveMechanism extends javax.swing.JFrame {
+public class ExecutiveMechanismFrame extends javax.swing.JFrame {
 
     //HashMap< String, Integer> addElementTable0 = new HashMap<>(); // элементы для отображения в левом полях
     //HashMap< String, Integer> addElementTable1 = new HashMap<>(); // элементы для отображения в правом поле
@@ -50,7 +50,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
     DefaultListModel listModel = new DefaultListModel(); // модель для динамического добавления данных
     private DefaultListModel<String> listModel_two = new DefaultListModel<String>();
     String[] checkFieldTable = null; // массив выделенных в таблицах
-    DataBase workbase; // подключаемся к базе и берем список
+    DataBase workbase = globVar.DB; // подключаемся к базе и берем список
     ArrayList<ArrayList> listDataToTable; // ПРи старте сразу формируем данные
     String nameTable; // название таблицы и заголовка
     String[] columns; // названия колонок для таблицы в формате масива
@@ -61,15 +61,9 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
     /**
      * Creates new form ExecutiveMechanism
      */
-    public ExecutiveMechanism(DataBase workbase) { // С передачей базы
-        this.workbase = workbase;
+    public ExecutiveMechanismFrame() { // С передачей базы
         listDataToTable = readConfigExeMech();
         boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
-        initComponents();
-    }
-
-    public ExecutiveMechanism() {
-        this.workbase = DataBase.getInstance();
         initComponents();
     }
 
@@ -141,7 +135,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
         // только потом затереть
         ArrayList<String[]> dataFromDBTrue = new ArrayList<>(); // массив с выборкой true
-        for(String table: workbase.getListTable()){ // есть ли вообще таблица
+        for(String table: workbase.getListTable()){ // есть ли вообще таблица в базе
             if (nameTable.equals(table)){
                 ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
                 for(String[] arr: allDataExecTable){
@@ -180,18 +174,6 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             workbase.insertRows(nameTable, array, columnT); // опять значения на оборот
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    // --- Фукция сортировки из HAsgMap
-    List sortMap(HashMap< String, Integer> map) {
-        List list = new ArrayList(map.entrySet()); // Новый отсортированный массив
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-            @Override
-            public int compare(Map.Entry<Integer, Integer> a, Map.Entry<Integer, Integer> b) {
-                return a.getValue() - b.getValue();
-            }
-        });
-        return list;
-    }
 
     // --- регулярка для сравнения столбцов  --
     String compareData(List<String> columnsB, String str2) {
@@ -301,7 +283,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         return finderS;
     }
 
-    // ---  Верка сигнала по окончанию ---
+    // ---  Сверка сигнала по окончанию ---
     String comparSignalEnd(String str1, String endS) {
         String sigF = null;
         String cutString = "^(.*)" + endS + "$";
@@ -314,7 +296,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         return sigF;
     }
 
-    // проверка имени сигнала, есть ли совпадения с списком c начала Строки
+    // --- проверка имени сигнала, есть ли совпадения с списком c начала Строки ---
     boolean checkSignal(String str, String[] massName) {
         boolean enterSig = false;
         String cutString;
@@ -333,7 +315,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         return enterSig;
     }
 
-    // проверка имени сигнала, общей части окончания
+    // --- проверка имени сигнала, общей части окончания ---
     String checkSliceSignal(String str, String sig, String end) {
         String finderS = null;
         String cutString = null;
@@ -386,9 +368,9 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
             String nameN = n.getNodeName(); // имена первых нод названия иструментов
             arrNameExecute[iN] = nameN;
         }
-        // вызываем метод выбора по нодам какю хотим обработать(пока две)
-        getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором
-        Node n = listNodeRootN.get(identNodecase);
+        // вызываем метод выбора по нодам какой хотим обработать(пока две)
+        getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором передаем массив для выбора
+        Node n = listNodeRootN.get(identNodecase);  // предыдущий выбор формирует identNodecase
         {
             ArrayList<Node> listNodeMethodExe = readXML.getHeirNode(n);
             ArrayList<String> nameDGODGI = new ArrayList<>();
@@ -570,6 +552,8 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
 
         }
         columns = columnT.toArray(new String[columnT.size()]); // преобразовываем в массив
+        
+
         // и сообщение если есть какие то неполадки
         if (notFindTables.size() > 0) {
             String message = "";
@@ -643,7 +627,7 @@ public class ExecutiveMechanism extends javax.swing.JFrame {
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jComboBox1ActionPerformed(evt);
-                System.out.println(jComboBox1.getSelectedItem());
+                //System.out.println(jComboBox1.getSelectedItem());
                 identNodecase = jComboBox1.getSelectedIndex();
                 jDialog1.dispose(); // Закрыть
             }

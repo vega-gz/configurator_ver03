@@ -441,7 +441,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         int sizeHeight = 600;
         int locationX = (screenSize.width - sizeWidth) / 2;
         int locationY = (screenSize.height - sizeHeight) / 2;
-        ExecutiveMechanism frameExecutiveMechanism = new ExecutiveMechanism(globVar.DB); // И передаем туда управление базой
+        ExecutiveMechanismFrame frameExecutiveMechanism = new ExecutiveMechanismFrame(); // И передаем туда управление базой
         frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
         frameExecutiveMechanism.setVisible(true);
