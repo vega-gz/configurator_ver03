@@ -6,9 +6,9 @@
 package globalData;
 
 import DataBaseConnect.DataBase;
-import StringTools.StrTools;
+import Tools.StrTools;
 import XMLTools.XMLSAX;
-import fileTools.FileManager;
+import Tools.FileManager;
 import java.util.Date;
 import org.w3c.dom.Node;
 

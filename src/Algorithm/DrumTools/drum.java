@@ -2,7 +2,7 @@ package Algorithm.DrumTools;
 
 import Algorithm.formula;
 import Algorithm.token;
-import StringTools.StrTools;
+import Tools.StrTools;
 //import static StringTools.StrTools.strToTokArr;
 import globalData.globVar;
 import java.io.IOException;

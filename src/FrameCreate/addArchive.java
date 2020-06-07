@@ -1,15 +1,17 @@
 package FrameCreate;
 
 import DataBaseConnect.DataBase;
+import Tools.TableTools;
 import globalData.globVar;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
@@ -18,16 +20,19 @@ public class addArchive extends javax.swing.JFrame {
     DefaultListModel list2 = new DefaultListModel();
     DefaultTableModel tableModel = new DefaultTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
-    
+    String abonent = globVar.abonent;
+    int prevArch = 0;
+    ArrayList<String[]> abList;
+    ArrayList<String[]> archList;
+    String[] archTabCols = {"tagName","archType"};
     // Данные для таблиц
-    private final String[] continueArchiv = new String[] {"0","Текущий","100","0","82400","true","false","false","-1"};
+    private final String[] continueArchiv = new String[] {"0","Текущий","100","0","82400","true","нет","-1"};
     private final String[] jTableCols = new String[] {  "№","Наименование архива", 
-                                                            "<HTML><BODY>Периодичность<br/>[1/сек]</BODY></HTML>", 
-                                                            "Предыстория[сек]", 
-                                                            "Длительность[сек]",
+                                                            "<HTML><BODY>Периодичность<br/>[мсек]</BODY></HTML>", 
+                                                            "<HTML><BODY>Предыстория<br/>[сек]</BODY></HTML>", 
+                                                            "<HTML><BODY>Длительность<br/>[дни]</BODY></HTML>",
                                                             "Сигнал записи",
-                                                            "Останавливать по длительности",
-                                                            "Останавливать по отсутствию сигнала",
+                                                            "Останавливать",
                                                             "Количество"
     };
 
@@ -49,31 +54,30 @@ public class addArchive extends javax.swing.JFrame {
             tableModel.addRow(archives.get(i));
         initComponents();
         
-        int qCol = jTableCols.length;
-        int[] colWidth = new int[qCol];
-        for(int i=1; i<qCol; i++) colWidth[i] = jTableCols[i].length()*7;
-        colWidth[0] = 21;
-        
-        int[] align = new int[qCol];
-        for(int i=1; i<qCol; i++) align[i]=-1;
-        align[0] = 1;
+        //int qCol = jTableCols.length;
+        int[] colWidth = {25,160,100,100,100,100,100,80};//new int[qCol];
+        int[] align = {1,-1,0,0,0,0,0,0};//new int[qCol];
         
         TableTools.setTableSetting(jTable1, colWidth, align);
-
+        
+        JComboBox<String> combo = new JComboBox<>(new String[] { "время", "сигнал", "нет"});// Раскрывающийся список
+        DefaultCellEditor editor = new DefaultCellEditor(combo);// Редактор ячейки с раскрывающимся списком
+        jTable1.getColumnModel().getColumn(6).setCellEditor(editor);    // Определение редактора ячеек для колонки    
+        
+        String[] archiveTyps = new String[jTable1.getRowCount()];
+        for(int i = 0; i < jTable1.getRowCount(); i++){
+            archiveTyps[i]= jTable1.getValueAt(i, 1).toString();
+        }
+        
+        archList = globVar.DB.getData("Archive_"+abonent, archTabCols);
+        
+        jComboBox1.setModel(new DefaultComboBoxModel(archiveTyps));
         //jList1.setModel(model_list);
         jList1.setModel(list1);
         jList2.setModel(list2);
-        list1.addElement("Papa1");
-        list1.addElement("u2");
-        list1.addElement("Vasi3");
-        list1.addElement("silen4");
-        list1.addElement("v5");
-        list1.addElement("matematike6");
-        
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel);
-       // .addActionListener(new ActionListener() {JOptionPane.showMessageDialog(null, "Новая строка!")});
-//{JOptionPane.showMessageDialog(null, "Новая строка!");});
-        
+        abList = DataBase.getAbonentArray();
+        TableTools.setArchiveSignalList(list2, archList, 0);
+        TableTools.setSignalList(list1, abList, abonent, false);
    }
 
     @SuppressWarnings("unchecked")
@@ -92,8 +96,12 @@ public class addArchive extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -152,21 +160,40 @@ public class addArchive extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jList2);
 
+        jButton7.setText("+");
+        jButton7.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("-");
+        jButton8.setToolTipText("");
+        jButton8.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -182,20 +209,42 @@ public class addArchive extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
         jSplitPane1.setRightComponent(jPanel1);
 
-        jButton5.setText("jButton5");
+        jButton5.setText("ОК");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("jButton6");
+        jButton6.setText("Сохранить");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox1.setText("Общие сигналы");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
             }
         });
 
@@ -217,7 +266,11 @@ public class addArchive extends javax.swing.JFrame {
                     .addComponent(jSplitPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
                         .addComponent(jButton5)))
                 .addContainerGap())
         );
@@ -225,11 +278,13 @@ public class addArchive extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jButton6)))
+                    .addComponent(jButton6)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1)))
         );
 
         pack();
@@ -277,7 +332,46 @@ public class addArchive extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов");
+        TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            int[] x = jList1.getSelectedIndices();
+            if(x.length <= 0) return;
+            TableTools.openSigList(list1, x[0]);
+        } catch (IOException ex) {
+            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        int[] x = jList1.getSelectedIndices();
+        if(x.length <= 0) return;
+        TableTools.closeSigList(list1, x[0]);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        int x = jComboBox1.getSelectedIndex();
+        for(int i=0;i<archList.size(); i++){
+            if(archList.get(i)[1].equals(""+prevArch)){
+                archList.remove(i);
+                i--;
+            }
+        }
+        for(int i=0; i<list2.size(); i++) 
+            archList.add(new String[]{(String)list2.get(i),""+prevArch});
+        prevArch = x;
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        list1.removeAllElements();
+        TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected());
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +415,10 @@ public class addArchive extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JMenu jMenu1;

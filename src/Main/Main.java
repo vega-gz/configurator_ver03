@@ -3,6 +3,7 @@ package Main;
 import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
 import globalData.globVar;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 
@@ -25,6 +26,7 @@ public class Main {
             }
         });
     }
+    
 
 //    Main() {
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана

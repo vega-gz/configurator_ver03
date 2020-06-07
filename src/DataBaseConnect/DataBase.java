@@ -1,7 +1,7 @@
 package DataBaseConnect;
 
 
-import StringTools.StrTools;
+import Tools.StrTools;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ import XMLTools.UUID;
 import XMLTools.XMLSAX;
 import java.util.HashMap;
 import java.util.Map;
-import fileTools.FileManager;
+import Tools.FileManager;
 import globalData.globVar;
 
 public class DataBase {
@@ -468,44 +468,35 @@ public class DataBase {
         return val2;
     }
 
-    // какие именно столбцы дергать
+    // --- Получить данные из БД по имени таблицы и массиву столбцов ---Lev---
+    public ArrayList<String[]> getData(String table, String[] columns) {
+        ArrayList<String> al = new ArrayList<>();
+        for(String c:columns) al.add(c);
+        return getData(table, al);
+    }
+    
+    // --- Получить данные из БД по имени таблицы и списку столбцов ---Lev---
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
-        //StructSelectData.setColumns(columns); // вот это жопа надо что то с этим делать мешает в Main_Jpanel
-        String s_columns = "";
-        String[] strfromtb = new String[columns.size()]; // массив под данные
-        for (int i = 0; i < columns.size(); ++i) { //формирование строки запроса
-            if (i < columns.size() - 1) {
-                s_columns += "\"" + columns.get(i) + "\"" + ", ";
-            } // Кавычки для руских имен и пробелов
-            else {
-                s_columns += "\"" + columns.get(i) + "\"";
-            }
-        }
-        // проверка на столбец по которому упорядочим данные
-        String orderCol = "id";
-        String sql = null;
+        int size = columns.size();
+        String sql = "SELECT \"" + columns.get(0) + "\"";
+        for (int i = 1; i < size; ++i) sql +=  ", \"" + columns.get(i) + "\"";
+        sql += " FROM \"" + table +"\";"; 
+        
         ArrayList<String[]> selectData = new ArrayList<>();
-        for(String s: getListColumnTable(table)){
-            if(s.equals(orderCol)){ // нашли тогда упорядовать
-              sql = "SELECT " + s_columns + " FROM " +"\"" + table +"\""+ " ORDER BY \"" +orderCol +"\";";
-              break;
-            }else sql = "SELECT " + s_columns + " FROM " +"\"" + table +"\""+";"; 
-        }
         try {
             stmt = connection.createStatement();
-            System.out.println(sql);
+            //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                for (int i = 0; i < columns.size(); ++i) {
-                    strfromtb[i] = rs.getString(columns.get(i));
+                String[] strFromTb = new String[size]; // массив под данные
+                for (int i = 0; i < size; ++i) {
+                    strFromTb[i] = rs.getString(columns.get(i));
                 }
-                String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
-                selectData.add(tmp1);
+                selectData.add(strFromTb);
                 //System.out.println(strfromtb[0]); // это просто для тестов
             }
             rs.close();
             stmt.close();
-            StructSelectData.setcurrentSelectTable(selectData); // Вносим данные в структуру( зачем)
             //connection.commit();
             //System.out.println("-- Operation SELECT done successfully");
         } catch (SQLException e) {

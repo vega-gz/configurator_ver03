@@ -15,7 +15,8 @@ import DataBaseConnect.DataBase;
 import ReadWriteExcel.RWExcel;
 import XMLTools.XMLSAX;
 import java.awt.Dimension;
-import fileTools.FileManager;
+import Tools.FileManager;
+import Tools.Tools;
 import globalData.globVar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,18 +31,18 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
-    int filepath;
     String filepatch, type;
 
     public Main_JPanel(){
+        globVar.DB = DataBase.getInstance();
         initComponents();
         jTextField1.setText(globVar.desDir);
-        globVar.DB = DataBase.getInstance();
         if(globVar.DB == null){
             this.setTitle("База " + globVar.currentBase + "по пути " + globVar.dbURL + " не найдена");
         }else{
             initMyComponent();
         }
+        Tools.isDesDir();
     }
     public void initMyComponent(){
         //initComponents();
@@ -364,6 +365,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(!Tools.isDB()) return;
         int ret = 1;
         int casedial = JOptionPane.showConfirmDialog(null, "Загрузка в БД информации для абонента \"" + globVar.abonent+"\"");
         if(casedial==0){
@@ -397,9 +399,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (globVar.DB == null) {
-            return;
-        }
+        if(!Tools.isDB()) return;
         //  globVar.DB.connectionToBase(url,pass,user);
         listDropT = globVar.DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
@@ -412,8 +412,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         //jTextArea1.setText(listTable);
     }//GEN-LAST:event_jButton4ActionPerformed
-
+//---------- Редактирование конфигурации архивов ---------------
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(!Tools.isDB()) return;
+        if(!Tools.isDesDir()) return;
         JFrame editArchive = new addArchive();
         editArchive.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         editArchive.setTitle("Редактирование архивов");
@@ -422,9 +424,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (globVar.DB == null) {
-            return;
-        }
+        if(!Tools.isDB()) return;
         globVar.DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
         if (globVar.DB == null) {
             JOptionPane.showMessageDialog(null, "Подключение к базе не удалось");
@@ -443,9 +443,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- Кнопка вызова окна с исполнительным механизмом ---
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (globVar.DB == null) {
-            return;
-        }
+        if(!Tools.isDB()) return;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
@@ -475,7 +473,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.desDir); // установить заголовок
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+//---------- Изменение пути к рабочему каталогу --------------------------
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         JFileChooser fileload = new JFileChooser(new File(globVar.desDir));
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
@@ -503,18 +501,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private void jFrameTableWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jFrameTableWindowClosed
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
     }//GEN-LAST:event_jFrameTableWindowClosed
-
+// ------ Выбор абонента, для которого будет загружаться ексель-файл
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         globVar.abonent = (String) jComboBox2.getSelectedItem();
-//        int i;
-//        int lim = jComboBox2.getItemCount();
-//        for(i = 0; i < lim; i++) 
-//            if(newItem.equals(jComboBox2.getItemAt(i))) 
-//                break;
-//        if(i == lim) jComboBox2.addItem(newItem);
     }//GEN-LAST:event_jComboBox2ActionPerformed
-
+//-------------- Создание нового абонента ---------------------
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if(!Tools.isDB()) return;
         JFrame addAb = new AddAbonent(jComboBox2);
         addAb.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         addAb.setTitle("Новый абонент");
@@ -531,8 +524,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_formFocusLost
-
+//----------- переименование .type файлов ----------------
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if(!Tools.isDesDir()) return;
         try {
             int ret = FileManager.renameTypeFile(globVar.desDir+"\\Design");
             JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
@@ -540,7 +534,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+//------ Смена БД -----
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         JFrame changeDB = new ChangeDB(jTree1,this);
         changeDB.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -611,9 +605,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 // Патерн добавления того или иного совпадения по имени абонента
                 Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");
                 Matcher matcher1 = pattern1.matcher(sheet);
-                String sheetPatern = ""; // годы месяцы число
+                //String sheetPatern = ""; // годы месяцы число
                 if (matcher1.matches()) {
-                    sheetPatern = matcher1.group(1);
+                    //sheetPatern = matcher1.group(1);
                     firstNode.add(new DefaultMutableTreeNode(sheet, false));
                 }
 
@@ -626,9 +620,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- метод отображения фрейма таблицы ---
     public void showTable(String table){
-        if (globVar.DB == null) {
-            return;
-        }
+        if(!Tools.isDB()) return;
         for (String nT : globVar.DB.getListTable()) { // проверка есть ли такая таблица в базе
             if (nT.equals(table)) {
                 List<String> listColumn = globVar.DB.selectColumns(table);

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fileTools;
+package Tools;
 
-import StringTools.StrTools;
+import Tools.StrTools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.BufferedReader;
@@ -325,14 +325,12 @@ public class FileManager {
         if(s.contains(f))return s;
         else return null;
     }
-    public static String findStringInFile(String fileName, String f){
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(fileName));
-            String s;
-            while ((s = in.readLine()) != null) if(s.contains(f))break;
-            in.close();
-            if(s!=null && s.contains(f))return s;
-        }catch (IOException e) {}
+    public static String findStringInFile(String fileName, String f) throws IOException{
+        BufferedReader in = new BufferedReader(new FileReader(fileName));
+        String s;
+        while ((s = in.readLine()) != null) if(s.contains(f))break;
+        in.close();
+        if(s!=null && s.contains(f))return s;
         return null;
     }
     public void wr(String s) throws IOException {
@@ -383,36 +381,24 @@ public class FileManager {
     }
 
     public static String FindFile(String dir, String nameType) throws IOException {
+        return FindFile(dir, nameType, "Name=");
+    }
+    
+    public static String FindFile(String dir, String nameType, String nameWords) throws IOException {
         if(dir==null || nameType==null) return null;
         File f = new File(dir +"\\" + nameType + ".type");
         if(f.isFile()) return nameType + ".type";
         //-----------------------------------------------------------------------------
-        String nameWords = "Name=";
-        String ext = ".TYPE";
+        //String ext = "";
         //String firstName, secondName, fileName = null;
-        FileManager fm = new FileManager();
         final File folder = new File(dir);
         String[] fileList = folder.list();
         if (fileList != null) {
             for (String fn : fileList) {
-                if (fn.toUpperCase().contains(ext)) {
-                    fm.openFile4read(dir, fn);
-                    String s = fm.rd();
-                    while (!s.contains(nameWords) && !fm.EOF) {
-                        s = fm.rd();//
-                    }
-                    if (!fm.EOF) {
-                        int start = s.indexOf(nameWords) + nameWords.length() + 1;
-                        int end = s.indexOf("\"", start);
-                        if (end > start) {
-                            String foundType = s.substring(start, end);
-                            if (foundType.equals(nameType)) {
-                                fm.rdStream.close();
-                                return fn;
-                            }
-                        }
-                    }
-                    fm.rdStream.close();
+                if(".TYPE".equalsIgnoreCase(fn.substring(fn.length()-5))){
+                    String s = findStringInFile(dir + "\\" + fn, nameWords);
+                    String val = StrTools.getAttributValue(s, nameWords);
+                    if(val.equals(nameType)) return fn;
                 }
             }
         } else JOptionPane.showMessageDialog(null, "Путь к генерации не найден" + dir);

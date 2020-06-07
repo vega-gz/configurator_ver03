@@ -1,6 +1,6 @@
 package Algorithm;
 
-import fileTools.svgTools;
+import Tools.svgTools;
 import globalData.globVar;
 import java.io.IOException;
 import java.util.ArrayList;
