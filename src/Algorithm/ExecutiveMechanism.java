@@ -10,6 +10,7 @@ import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -24,7 +25,7 @@ import org.w3c.dom.Node;
  */
 public class ExecutiveMechanism {
     
-    DataBase workbase; // подключаемся к базе и берем список
+    DataBase workbase = globVar.DB; // подключаемся к базе и берем список
     String nameTable; // название таблицы и заголовка
     String[] columns; // названия колонок для таблицы в формате масива
     ArrayList<String> columnT; // названия колонок для таблицы
@@ -63,15 +64,25 @@ public class ExecutiveMechanism {
     
     }
     
-        // --- Получить список столбцов данных--
+    // --- Получить список столбцов данных--
     public String[] getColumns(){
         return columns;
     }
+    // --- Получить список столбцов данных--
+    public ArrayList<String> getColumnsT(){
+        return columnT;
+    }
+    
+    // -- вернуть имя таблицы --
+    public String getNameTable(){
+        return nameTable;
+    }
+    
     
     // --- чтение xml и формирование  из него каких таблиц читаем и что сапоставлять ---
     public ArrayList<ArrayList> getMecha(Node n ) { // На вход документ и выбранная уже нода
         ArrayList<ArrayList> findingTagname = new ArrayList();//листы для хранения найденного Что передаем
-        nameTable = globVar.abonent + "_AM";    //  название таблицы строится
+        nameTable = globVar.abonent + "_AM";    //  формируем название таблицы строится
         //this.setTitle(nameTable); // Установить заголовок
         columnT = new ArrayList<>(); // заготовка названия колонок
         columnT.add("TAG_NAME");
@@ -431,5 +442,44 @@ public class ExecutiveMechanism {
         return enterSig;
     }
     
+    //  --- добавления данных в базу  из таблицы ---
+    public void addDataToBase(ArrayList<String[]> updatetedData){
+        // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
+        // только потом затереть
+        ArrayList<String[]> dataFromDBTrue = new ArrayList<>(); // массив с выборкой true
+        for(String table: workbase.getListTable()){ // есть ли вообще таблица в базе
+            if (nameTable.equals(table)){
+                ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
+                for(String[] arr: allDataExecTable){
+                    for(String s: arr){
+                        if(s.equals("true")){
+                            dataFromDBTrue.add(arr);
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
 
+        int elemCompare = 1; // номер элемента в массиве который сравниваем
+        for(int i=0; i<updatetedData.size(); ++i){
+            String[] arr = updatetedData.get(i);
+            String tagNameTable = arr[elemCompare]; // так как из базы еще id и UUID
+            for(String[] arrTrue: dataFromDBTrue){
+                //String[] arr = updatetedData.get(i);
+                String tagNameTrue = arrTrue[elemCompare+2]; // тут совсем другие значения
+                if(tagNameTable.equals(tagNameTrue)){
+                     // вставляем значение где не было true из базы вырезав нужные данные без id и uuid
+                    updatetedData.set(i, Arrays.copyOfRange(arrTrue, 2, arrTrue.length));
+                }
+            }
+        }
+        
+        workbase.createTable(nameTable, columnT);
+
+        for (String[] array : updatetedData) {
+            workbase.insertRows(nameTable, array, columnT); // опять значения на оборот
+        }
+    }
 }
