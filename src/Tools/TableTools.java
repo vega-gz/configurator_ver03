@@ -1,6 +1,13 @@
-package FrameCreate;
+package Tools;
 
+import DataBaseConnect.DataBase;
+import XMLTools.XMLSAX;
+import globalData.globVar;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -11,11 +18,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
+import org.w3c.dom.Node;
 
 /*@author Lev*/
 // ----- Функция для настройки свойств таблицы --------------Lev---
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
-    static int setTableSetting(JTable jTable1, int[] colWidth, int[] align){
+    static public int setTableSetting(JTable jTable1, int[] colWidth, int[] align){
         if(jTable1==null) return -1;
         jTable1.setRowSelectionAllowed(true);           // Разрешаю выделять по строкам
         TableColumnModel columnModel = jTable1.getColumnModel();
@@ -32,23 +40,27 @@ public class TableTools {//ссылка на таблицу, массив шир
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(JLabel.CENTER);
         DefaultTableCellRenderer left = new DefaultTableCellRenderer();
-        center.setHorizontalAlignment(JLabel.LEFT);
+        left.setHorizontalAlignment(JLabel.LEFT);
         
         if(qCol > align.length) qCol = colWidth.length;
         for(int i=0; i<qCol; i++ ){
-            if(align[i]<0) jTable1.getColumnModel().getColumn(i).setCellRenderer(left);
+            if(align[i]<0)      jTable1.getColumnModel().getColumn(i).setCellRenderer(left);
             else if(align[i]>0) jTable1.getColumnModel().getColumn(i).setCellRenderer(right);
-            else jTable1.getColumnModel().getColumn(i).setCellRenderer(center);
+            else                jTable1.getColumnModel().getColumn(i).setCellRenderer(center);
         }
         //Работа с высотой заголовков столбцов, чтобы туда влезали многострочные заголовки (пока неудачно)
         JTableHeader th = jTable1.getTableHeader();
         int width = th.getSize().width;
-        th.setSize(width, 50);
+        th.setPreferredSize(new Dimension(width, 40));
+        //int height = th.getSize().height;
+        th.setSize(width, 40);
+        //height = th.getSize().height;
+        jTable1.repaint();
         return 0;
     }
     
     // ----- Функция для настройки контекстного меню таблиц--------------Lev---
-    static int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, DefaultTableModel tableModel){
+    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, DefaultTableModel tableModel){
         JMenuItem menuItemAdd = new JMenuItem("Добавить пустую строку");
         JMenuItem menuItemCopy = new JMenuItem("Скопировать строку");
         JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
@@ -102,15 +114,109 @@ public class TableTools {//ссылка на таблицу, массив шир
         return 0;
     }
     // ----- Функция для расстановки номеров строк в первом столбце --------------Lev---
-    static void setId(JTable jTable1){
+    static public void setId(JTable jTable1){
         int n = jTable1.getRowCount();
         for(int i=0; i< n; i++) jTable1.setValueAt(i+1,i,0);
     }
     // ----- Функция для считывания строки таблицы --------------Lev---
-    static String[] getRow(JTable jTable1, int row){
+    static public String[] getRow(JTable jTable1, int row){
         int n = jTable1.getColumnCount();
         String[] s = new String[n];
         for(int i=0; i< n; i++) s[i] = jTable1.getValueAt(row, i).toString();
         return s;
     }
+    // ----- функция для загрузки таблицы в базу со стриранием старой таблицы --------------
+    static public int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String[] listNameColum, String tableComment){
+        if(DB.isTable(tableName)){
+            DB.dropTable(tableName);
+        }
+        DB.createTableEasy(tableName, listNameColum, tableComment);
+        int y = jTable1.getRowCount();
+        for(int i=0; i<y; i++) DB.insertRow(tableName, getRow(jTable1,i), listNameColum, i);
+        return 0;
+    }
+    
+    public static void saveListInDB(ArrayList<String[]> list, DataBase DB, String tableName, String[] listNameColum, String comment) {
+        if(DB.isTable(tableName)){
+            DB.dropTable(tableName);
+        }
+        DB.createTableEasy(tableName, listNameColum, comment);
+        int y = list.size();
+        for(int i=0; i<y; i++) DB.insertRow(tableName, list.get(i), listNameColum, i);
+    }
+
+    public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, int i) {
+        for(String[] al: archList) if(al[1].equals(""+i)) list.addElement(al[0]);
+    }
+
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig) {
+        XMLSAX prj = new XMLSAX();
+        Node root = prj.readDocument(globVar.desDir + "\\Design\\Project.prj");
+        Node signals = prj.returnFirstFinedNode(root, "Globals");
+        ArrayList<Node> sigList = prj.getHeirNode(signals);
+        for(Node n : sigList){
+            String sigName = prj.getDataAttr(n, "Name");
+            int x = sigName.indexOf("_");
+            String sigAb = null;
+            if(x>0) sigAb = sigName.substring(0,x);
+            boolean ins;
+            if(sigAb!=null && sigAb.equals(abonent)) ins = true;
+            else if(commonSig)
+                if(sigAb==null) ins = true;
+                else {
+                    ins = true;
+                    for(String[] s: abList){
+                        if(sigAb.equals(s[1])){
+                            ins = false;
+                            break;
+                        }
+                    }
+                }
+            else ins = false;
+            
+            if(ins) list.addElement(sigName);
+        }
+    }
+
+    public static void openSigList(DefaultListModel list, int i) throws IOException {
+        String glibSigName = (String) list.get(i);
+        XMLSAX prj = new XMLSAX();
+        Node root = prj.readDocument(globVar.desDir + "\\Design\\Project.prj");
+        Node mySig = prj.findNodeAtribute(root, new String[]{"Signal", "Name", glibSigName});
+        String type = prj.getDataAttr(mySig, "Type");
+        if("REAL".equalsIgnoreCase(type) || "INT".equalsIgnoreCase(type) || "BOOL".equalsIgnoreCase(type) || "WORD".equalsIgnoreCase(type)) return;
+        
+        String fileName = FileManager.FindFile(globVar.desDir + "\\Design", type, "UUID=");
+        
+        XMLSAX sigSax = new XMLSAX();
+        Node rootSig = sigSax.readDocument(globVar.desDir + "\\Design\\"+fileName);
+        Node signals = sigSax.returnFirstFinedNode(rootSig, "Fields");
+        ArrayList<Node> sigList = sigSax.getHeirNode(signals);
+        if(sigList == null || sigList.isEmpty()) return;
+        list.remove(i);
+        for(Node n : sigList){
+            String sigName = sigSax.getDataAttr(n, "Name");
+            list.add(i++,"  " + glibSigName + "." + sigName);
+        }
+    }
+
+    public static void closeSigList(DefaultListModel list, int i) {
+        String globSigName = (String) list.get(i);
+        int x = globSigName.indexOf(".");
+        if(x<0) return;
+        String sigName = globSigName.substring(0, x+1);
+        int j;
+        for(j = i; j>0; j--){
+            String s = (String) list.get(j);
+            if(s.length() <= x+1 || !s.substring(0, x+1).equals(sigName)) break;
+            list.remove(j);
+        }
+        for(int k = j+1; k<list.size();){
+            String s = (String) list.get(k);
+            if(s.length() <= x+1 || !s.substring(0, x+1).equals(sigName)) break;
+            list.remove(k);
+        }
+        list.add(j+1, globSigName.substring(2, x));
+    }
+
 }

@@ -32,7 +32,7 @@ import DataBaseConnect.DataBase;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.JOptionPane;
-import fileTools.FileManager;
+import Tools.FileManager;
 import globalData.globVar;
 //import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -249,8 +249,7 @@ public class XMLSAX {
 
     // --- получаем всех наследников ноды именно нод список(стандартно возвразает все подряд) ---
     public ArrayList<Node> getHeirNode(Node n) {
-        if(n==null)
-            return null;
+        if(n==null) return null;
         ArrayList<Node> kindNode = new ArrayList<>();
 
         NodeList child = n.getChildNodes();
@@ -304,7 +303,7 @@ public class XMLSAX {
             try {
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                 DocumentBuilder db = dbf.newDocumentBuilder();
-                org.w3c.dom.Document doc = db.parse(f);
+                Document doc = db.parse(f);
                 doc.getDocumentElement().normalize();
                 NodeList nodeList = doc.getElementsByTagName("config");
                 for (int i = 0; i < nodeList.getLength(); i++) {

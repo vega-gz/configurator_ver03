@@ -172,9 +172,13 @@ public final class ChangeDB extends javax.swing.JFrame {
         }
         XMLSAX.getConnectBaseConfig("Config.xml");
         globVar.DB = DataBase.getInstance();
-        jTree1.setModel(Main_JPanel.getModelTreeNZ());// обновить дерево
-        //tmp.setTextContent(jTextField3.getText());
-        m_jp.setTitle("Текущая база:" + globVar.currentBase + ", путь: " + globVar.dbURL); // установить заголовок
+        if(globVar.DB == null){
+            m_jp.setTitle("База " + globVar.currentBase + "по пути " + globVar.dbURL + " не найдена");
+            jTree1.setModel(null);
+        } else {
+            jTree1.setModel(Main_JPanel.getModelTreeNZ());// обновить дерево
+            m_jp.initMyComponent();
+        }
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

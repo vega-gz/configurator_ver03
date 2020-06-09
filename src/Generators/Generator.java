@@ -1,9 +1,9 @@
 package Generators;
 
+import Tools.FileManager;
 import FrameCreate.FrameTabel;
-import StringTools.StrTools;
+import Tools.StrTools;
 import XMLTools.*;
-import fileTools.*;
 import globalData.globVar;
 import java.io.File;
 import java.io.IOException;

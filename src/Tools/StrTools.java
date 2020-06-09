@@ -1,4 +1,4 @@
-package StringTools;
+package Tools;
 
 import Algorithm.token;
 import java.util.ArrayList;
@@ -62,10 +62,10 @@ public class StrTools {
     }
     
     public static String getAttributValue(String s, String a){
-        
+        if(s == null || a == null) return null;
         int start = s.indexOf(a);
         if(start < 0) return null;
-        start+= a.length();
+        start= s.indexOf("\"", start)+1;//a.length()+1;
         int end = s.indexOf("\"", start); 
         if (end > start) return s.substring(start, end);        
         return null;
