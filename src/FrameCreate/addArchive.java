@@ -363,9 +363,10 @@ public class addArchive extends javax.swing.JFrame {
                 i--;
             }
         }
-        for(int i=0; i<list2.size(); i++) 
-            archList.add(new String[]{(String)list2.get(i),""+prevArch});
+        for(int i=0; i<list2.size(); i++) archList.add(new String[]{(String)list2.get(i),""+prevArch});
         prevArch = x;
+        list2.removeAllElements();
+        TableTools.setArchiveSignalList(list2, archList, x);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed

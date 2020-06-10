@@ -206,7 +206,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         if(x<0) return;
         String sigName = globSigName.substring(0, x+1);
         int j;
-        for(j = i; j>0; j--){
+        for(j = i; j>=0; j--){
             String s = (String) list.get(j);
             if(s.length() <= x+1 || !s.substring(0, x+1).equals(sigName)) break;
             list.remove(j);
