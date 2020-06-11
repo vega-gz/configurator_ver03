@@ -12,6 +12,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
@@ -26,7 +27,7 @@ public class addArchive extends javax.swing.JFrame {
     ArrayList<String[]> archList;
     String[] archTabCols = {"tagName","archType"};
     // Данные для таблиц
-    private final String[] continueArchiv = new String[] {"0","Текущий","100","0","82400","true","нет","-1"};
+    private final String[] continueArchiv = new String[] {"0","x100","100","3600","31","true","нет","-1"};
     private final String[] jTableCols = new String[] {  "№","Наименование архива", 
                                                             "<HTML><BODY>Периодичность<br/>[мсек]</BODY></HTML>", 
                                                             "<HTML><BODY>Предыстория<br/>[сек]</BODY></HTML>", 
@@ -54,11 +55,12 @@ public class addArchive extends javax.swing.JFrame {
             tableModel.addRow(archives.get(i));
         initComponents();
         
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel);
         //int qCol = jTableCols.length;
         int[] colWidth = {25,160,100,100,100,100,100,80};//new int[qCol];
         int[] align = {1,-1,0,0,0,0,0,0};//new int[qCol];
         
-        TableTools.setTableSetting(jTable1, colWidth, align);
+        TableTools.setTableSetting(jTable1, colWidth, align, 40);
         
         JComboBox<String> combo = new JComboBox<>(new String[] { "время", "сигнал", "нет"});// Раскрывающийся список
         DefaultCellEditor editor = new DefaultCellEditor(combo);// Редактор ячейки с раскрывающимся списком
@@ -77,7 +79,7 @@ public class addArchive extends javax.swing.JFrame {
         jList2.setModel(list2);
         abList = DataBase.getAbonentArray();
         TableTools.setArchiveSignalList(list2, archList, 0);
-        TableTools.setSignalList(list1, abList, abonent, false);
+        TableTools.setSignalList(list1, abList, abonent, false, archList);
    }
 
     @SuppressWarnings("unchecked")
@@ -371,7 +373,7 @@ public class addArchive extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         list1.removeAllElements();
-        TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected());
+        TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected(), archList);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**

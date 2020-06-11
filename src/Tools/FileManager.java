@@ -389,19 +389,17 @@ public class FileManager {
         File f = new File(dir +"\\" + nameType + ".type");
         if(f.isFile()) return nameType + ".type";
         //-----------------------------------------------------------------------------
-        //String ext = "";
-        //String firstName, secondName, fileName = null;
         final File folder = new File(dir);
         String[] fileList = folder.list();
-        if (fileList != null) {
+        //if (fileList != null) {
             for (String fn : fileList) {
-                if(".TYPE".equalsIgnoreCase(fn.substring(fn.length()-5))){
+                if(fn.length()> 5 && ".TYPE".equalsIgnoreCase(fn.substring(fn.length()-5))){
                     String s = findStringInFile(dir + "\\" + fn, nameWords);
                     String val = StrTools.getAttributValue(s, nameWords);
-                    if(val.equals(nameType)) return fn;
+                    if(val!=null && val.equals(nameType)) return fn;
                 }
             }
-        } else JOptionPane.showMessageDialog(null, "Путь к генерации не найден" + dir);
+        //} else JOptionPane.showMessageDialog(null, "Путь к генерации не найден" + dir);
         return null;
     }
     public static String getUUIDFromFile(String dir, String nameType) throws IOException {

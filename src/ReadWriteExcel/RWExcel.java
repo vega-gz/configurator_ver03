@@ -19,6 +19,7 @@ import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.w3c.dom.Node;
 
 public class RWExcel {
+
     int startReadData = 0;
     private String path_file;
 
@@ -35,13 +36,13 @@ public class RWExcel {
     }
 
 // --- Данные из ячейки по ссылке на строку и имени столбца---Lev---
-    public static String getDataCell(HSSFRow row, String colName) {
+    private static String getDataCell(HSSFRow row, String colName) {
         if(row==null) return null;
         int numberCol = CellReference.convertColStringToIndex(colName); // Переводим имя в индекс
         return getDataCell(row, numberCol);
     }
 // --- Данные из ячейки по ссылке на строку и номеру столбца---Lev---
-    public static String getDataCell(HSSFRow row, int numberCol) {
+    private static String getDataCell(HSSFRow row, int numberCol) {
         Cell cell = row.getCell(numberCol); // адрес индекс
         if (cell == null) return null;
         CellType cellType = cell.getCellType();
@@ -70,14 +71,14 @@ public class RWExcel {
     }
     
     //Для Excel - Преобразование буквы столбца в номер столбца ---Lev---
-    public static int getColNumber(String colName, ArrayList<Node> colList){
+    private static int getColNumber(String colName, ArrayList<Node> colList){
         for(int i=0;i<colList.size();i++) 
             if(colName.equals(globVar.sax.getDataAttr(colList.get(i),"nameColumnPos")))
                 return i;
         return -1;
     }
     //Замена значений на словарные ---Lev---
-    public static String getFromDict(String file, String src){
+    private static String getFromDict(String file, String src){
         XMLSAX dictSax = new XMLSAX();
         Node dict = dictSax.readDocument(file);
         ArrayList<Node> wordList = dictSax.getHeirNode(dict);
@@ -92,13 +93,13 @@ public class RWExcel {
         return "";
     }
     
-    public static String getFromSwitch(Node col,String dataFromExcel){
+    private static String getFromSwitch(Node col,String dataFromExcel){
         String[] caseArr = {"case","val",dataFromExcel};
         Node cse = globVar.sax.findNodeAtribute(col,caseArr);
         return globVar.sax.getDataAttr(cse, "def");
     }
     
-    public static String getModbusDataBit(int i, int colCnt, String[][] dataFromExcel, String func){
+    private static String getModbusDataBit(int i, int colCnt, String[][] dataFromExcel, String func){
         if(i==0) return "0";
         try{
             int lim = 7;
@@ -124,7 +125,7 @@ public class RWExcel {
             return null;
         }
     }
-    public static String getModbusDataReg(int i, int colCnt, int x, String[][] dataFromExcel){
+    private static String getModbusDataReg(int i, int colCnt, int x, String[][] dataFromExcel){
         if(i==0)return "0";
         String format = dataFromExcel[i-1][x];
         XMLSAX sax = new XMLSAX();
@@ -136,6 +137,63 @@ public class RWExcel {
         }catch(NumberFormatException e){
             return null;
         }
+    }
+
+    private static Double strToDoble(String op, Node f, ArrayList<Node> colList, String[][] dataFromExcel, int i) {
+        try {   
+            return Double.parseDouble(op);
+        } catch (NumberFormatException e) {
+            Node f1 = globVar.sax.returnFirstFinedNode(f, op);
+            String operation = globVar.sax.getDataAttr(f1, "operation");
+            return calcFormula(operation, f1, f, colList, dataFromExcel, i);
+        }
+    }
+    
+    private static Double calcFormula(String operation, Node f1, Node f, ArrayList<Node> colList, String[][] dataFromExcel, int i) {
+        if("get".equals(operation)){
+            String colName = globVar.sax.getDataAttr(f1, "column");
+            int x = getColNumber(colName, colList);
+            if(x>=0){
+                try {   
+                    return Double.parseDouble(dataFromExcel[i][x]);
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            } else return null;
+        }
+        Double op1 = strToDoble(globVar.sax.getDataAttr(f1, "operand1"),f, colList, dataFromExcel, i);
+        Double op2 = strToDoble(globVar.sax.getDataAttr(f1, "operand2"),f, colList, dataFromExcel, i);
+        if(op1==null || op2==null) return null;
+        switch(operation){
+            case "+": return op1 + op2;
+            case "-": return op1 - op2;
+            case "*": return op1 * op2;
+            case "/": 
+                if(op2!=0) return op1 / op2;
+                else return null;
+        }
+        return null;
+    }
+
+    private static Double getFormulaVal(String def, Node f, ArrayList<Node> colList, String[][] dataFromExcel, int i) {
+        Node f1 = globVar.sax.returnFirstFinedNode(f, def);
+        if(f1==null) return null;
+        String operation = globVar.sax.getDataAttr(f1, "operation");
+        return calcFormula(operation, f1, f, colList,dataFromExcel, i);
+//        if("get".equals(operation)){
+//            String colName = globVar.sax.getDataAttr(f1, "column");
+//            int x = getColNumber(colName, colList);
+//            if(x>=0){
+//                try {   
+//                    return Double.parseDouble(dataFromExcel[i][x]);
+//                } catch (NumberFormatException e) {
+//                    return null;
+//                }
+//            } else return null;
+//        }else{
+//            return calcFormula(operation, f1, f, colList,dataFromExcel, i);
+//        }
+        //return null;
     }
 // --- сформировать даные из конфигугации XML для чтения Exel---Lev---
     public static int ReadExelFromConfig(String pathExel) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
@@ -208,7 +266,7 @@ public class RWExcel {
                         }
                         dataFromExcel = new String[rowMax+1][colList.size()];
                     }
-                    for(int i=0; i<rowMax; i++ ){
+                    for(int i=0; i<rowMax; i++ ){//Пробегаем по строкам столбца 
                         String strCell = getDataCell(sheet.getRow(i+1), colExName);
                         if(strCell == null) strCell="";
                         //dataFromExcel[i][colCnt]=null;
@@ -248,6 +306,20 @@ public class RWExcel {
                                         }else def=null;
                                     }
                                     if(dataFromExcel[i][colCnt]==null)def=null;
+                                }
+                            }
+                            if(def == null){
+                                def = globVar.sax.getDataAttr(col,"formula");
+                                if(def != null){
+                                    Node f = globVar.sax.returnFirstFinedNode(n, "Formulas");
+                                    Double x = getFormulaVal(def,f,colList, dataFromExcel, i);
+                                    if(x!=null) dataFromExcel[i][colCnt] = ""+(Math.round(x*10000.0)/10000.0);
+                                    else{
+                                        dataFromExcel[i][colCnt] = "";
+                                        FileManager.loggerConstructor("Для ячейки "+colExName+i+" листа "+ exSheetName +" не удалось посчитать значение");
+                                        isError = true;                                       
+                                    }
+                                    //calcFormula(def,f1,f,colList, dataFromExcel, i);
                                 }
                             }
                             if(def == null){
