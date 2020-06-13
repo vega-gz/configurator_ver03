@@ -3,11 +3,20 @@ package ReadWriteExcel;
 import XMLTools.XMLSAX;
 import Tools.FileManager;
 import globalData.globVar;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -217,163 +226,167 @@ public class RWExcel {
         boolean isError = false;
         int tCnt = 0;
         for(Node n : nList){
-            String tableName = n.getNodeName();
-            String exSheetName = globVar.sax.getDataAttr(n, "excelSheetName");
+            //String tableName = n.getNodeName();
+            String exSheetName1 = globVar.sax.getDataAttr(n, "excelSheetName");
             String tableComment = globVar.sax.getDataAttr(n, "Comment");
-            if("mb".equals(exSheetName.substring(0,2))){
+            ArrayList<String> sheetList = new ArrayList<>();
+            if("mb".equals(exSheetName1.substring(0,2))){
                 for(int i = 0; i < qSheets; i++){
                     int sl = listSheets[i].length();
-                    int tl = exSheetName.length();
-                    if(sl >= tl && listSheets[i].substring(sl-tl).equals(exSheetName)){
-                        exSheetName = listSheets[i];
-                        tableName = listSheets[i];
-                        break;
+                    int tl = exSheetName1.length();
+                    if(sl >= tl && listSheets[i].substring(sl-tl).equals(exSheetName1)){
+                        sheetList.add(listSheets[i]);
+                        //tableName = listSheets[i];
+                        //break;
                     }
                 }
-            }
-            HSSFSheet sheet = wb.getSheet(exSheetName);
-            int rowMax = 32767;
-            if(sheet != null){
-                String func = "";
-                Node excelNode = globVar.sax.returnFirstFinedNode(n,"EXEL");
-                if(excelNode!=null){
-                    String info = globVar.sax.getDataAttr(excelNode,"info");
-                    if(info!=null){
-                        int x = info.indexOf("C");
-                        int row = Integer.parseInt(info.substring(1,x));
-                        int col = Integer.parseInt(info.substring(x+1));
-                        tableComment += getDataCell(sheet.getRow(row-1), col-1);
-                        func = tableComment.substring(tableComment.lastIndexOf(";")+1).trim();
-                    }
-                     
-                }
-                ArrayList<Node> colList = globVar.sax.getHeirNode(excelNode);
-                //ArrayList<String[]> dataFromExcel = new ArrayList<>();
-                String[][] dataFromExcel = null;
-                String[] tabColNames = new String[colList.size()];
-                int colCnt = 0;
-                boolean first = true;
-                for(Node col : colList){
-                    String colExName = col.getNodeName();
-                    tabColNames[colCnt] = globVar.sax.getDataAttr(col,"nameColumnPos");
-                    if(first){
-                        for(int i=1; i<rowMax; i++ ){
-                            String strCell = getDataCell(sheet.getRow(i), colExName);
-                            if(strCell == null || "".equals(strCell)){
-                                first = false;
-                                rowMax = i-1;
-                            }
+            }else sheetList.add(exSheetName1);
+            
+            for(String exSheetName : sheetList){
+                HSSFSheet sheet = wb.getSheet(exSheetName);
+                int rowMax = 32767;
+                if(sheet != null){
+                    String func = "";
+                    Node excelNode = globVar.sax.returnFirstFinedNode(n,"EXEL");
+                    if(excelNode!=null){
+                        String info = globVar.sax.getDataAttr(excelNode,"info");
+                        if(info!=null){
+                            int x = info.indexOf("C");
+                            int row = Integer.parseInt(info.substring(1,x));
+                            int col = Integer.parseInt(info.substring(x+1));
+                            tableComment += getDataCell(sheet.getRow(row-1), col-1);
+                            func = tableComment.substring(tableComment.lastIndexOf(";")+1).trim();
                         }
-                        dataFromExcel = new String[rowMax+1][colList.size()];
+
                     }
-                    for(int i=0; i<rowMax; i++ ){//Пробегаем по строкам столбца 
-                        String strCell = getDataCell(sheet.getRow(i+1), colExName);
-                        if(strCell == null) strCell="";
-                        //dataFromExcel[i][colCnt]=null;
-                        if("".equals(strCell)){
-                            String def = globVar.sax.getDataAttr(col,"swt");
-                            if(def != null){
-                                //String colName = globVar.sax.getDataAttr(col,def);
-                                int x = getColNumber(def, colList);
-                                if(x>=0) dataFromExcel[i][colCnt]= getFromSwitch(col,dataFromExcel[i][x]);
-                                if(dataFromExcel[i][colCnt]==null)def=null;
-                            }
-                            if(def == null){
-                                def = globVar.sax.getDataAttr(col,"dictionary");
-                                if(def != null){
-                                    String colName = globVar.sax.getDataAttr(col,"sourceCol");
-                                    int x = getColNumber(colName, colList);
-                                    if(x>=0) dataFromExcel[i][colCnt] = getFromDict(def,dataFromExcel[i][x]);
-                                    else def=null;
+                    ArrayList<Node> colList = globVar.sax.getHeirNode(excelNode);
+                    //ArrayList<String[]> dataFromExcel = new ArrayList<>();
+                    String[][] dataFromExcel = null;
+                    String[] tabColNames = new String[colList.size()];
+                    int colCnt = 0;
+                    boolean first = true;
+                    for(Node col : colList){
+                        String colExName = col.getNodeName();
+                        tabColNames[colCnt] = globVar.sax.getDataAttr(col,"nameColumnPos");
+                        if(first){
+                            for(int i=1; i<rowMax; i++ ){
+                                String strCell = getDataCell(sheet.getRow(i), colExName);
+                                if(strCell == null || "".equals(strCell)){
+                                    first = false;
+                                    rowMax = i-1;
                                 }
                             }
-                            if(def == null){
-                                def = globVar.sax.getDataAttr(col,"asPrev");
+                            dataFromExcel = new String[rowMax+1][colList.size()];
+                        }
+                        for(int i=0; i<rowMax; i++ ){//Пробегаем по строкам столбца 
+                            String strCell = getDataCell(sheet.getRow(i+1), colExName);
+                            if(strCell == null) strCell="";
+                            //dataFromExcel[i][colCnt]=null;
+                            if("".equals(strCell)){
+                                String def = globVar.sax.getDataAttr(col,"swt");
                                 if(def != null){
-                                    if(i>0) dataFromExcel[i][colCnt] = dataFromExcel[i-1][colCnt];
-                                    else def=null;
-                                }
-                            }
-                            if(def == null){
-                                def = globVar.sax.getDataAttr(col,"modbus");
-                                if(def != null){
-                                    if("bit".equals(def)){
-                                        dataFromExcel[i][colCnt] = getModbusDataBit(i, colCnt, dataFromExcel, func);
-                                    }else{
-                                        int x = getColNumber(def, colList);
-                                        if(x>=0){
-                                            dataFromExcel[i][colCnt] = getModbusDataReg(i, colCnt, x, dataFromExcel);
-                                        }else def=null;
-                                    }
+                                    //String colName = globVar.sax.getDataAttr(col,def);
+                                    int x = getColNumber(def, colList);
+                                    if(x>=0) dataFromExcel[i][colCnt]= getFromSwitch(col,dataFromExcel[i][x]);
                                     if(dataFromExcel[i][colCnt]==null)def=null;
                                 }
-                            }
-                            if(def == null){
-                                def = globVar.sax.getDataAttr(col,"formula");
-                                if(def != null){
-                                    Node f = globVar.sax.returnFirstFinedNode(n, "Formulas");
-                                    Double x = getFormulaVal(def,f,colList, dataFromExcel, i);
-                                    if(x!=null) dataFromExcel[i][colCnt] = ""+(Math.round(x*10000.0)/10000.0);
-                                    else{
-                                        dataFromExcel[i][colCnt] = "";
-                                        FileManager.loggerConstructor("Для ячейки "+colExName+i+" листа "+ exSheetName +" не удалось посчитать значение");
-                                        isError = true;                                       
-                                    }
-                                    //calcFormula(def,f1,f,colList, dataFromExcel, i);
-                                }
-                            }
-                            if(def == null){
-                                def = globVar.sax.getDataAttr(col,"default");
-                                if(def != null){
-                                    dataFromExcel[i][colCnt]=def;
-                                }
-                            }
-                            if(def == null){
-                                FileManager.loggerConstructor("В ячейке "+colExName+i+" листа "+ exSheetName +" должно быть значение");
-                                isError = true;
-                                dataFromExcel[i][colCnt]="";
-                            }
-                        }else{
-                            String unical = globVar.sax.getDataAttr(col,"unical");
-                            if(unical != null){
-                                for(int j=0; j < i; j++){
-                                    if(strCell.equals(dataFromExcel[j][colCnt])){
-                                        FileManager.loggerConstructor("Одинаковые значения \"" +strCell+ "\" в ячейках " + colExName+(j+1)+" и " + colExName+(i+1) +" листа "+ exSheetName);
-                                        isError = true;
+                                if(def == null){
+                                    def = globVar.sax.getDataAttr(col,"dictionary");
+                                    if(def != null){
+                                        String colName = globVar.sax.getDataAttr(col,"sourceCol");
+                                        int x = getColNumber(colName, colList);
+                                        if(x>=0) dataFromExcel[i][colCnt] = getFromDict(def,dataFromExcel[i][x]);
+                                        else def=null;
                                     }
                                 }
-                            }
-                            String type = globVar.sax.getDataAttr(col,"type");
-                            if(type!=null){
-                                if("Int".equals(type)){
-                                    try { 
-                                        strCell = ""+((int)Double.parseDouble(strCell));
-                                    } catch (NumberFormatException e) {
-                                        FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
+                                if(def == null){
+                                    def = globVar.sax.getDataAttr(col,"asPrev");
+                                    if(def != null){
+                                        if(i>0) dataFromExcel[i][colCnt] = dataFromExcel[i-1][colCnt];
+                                        else def=null;
                                     }
                                 }
-                                else if("Number".equals(type)){
-                                    try {   
-                                        Double tmp = Double.parseDouble(strCell);
-                                        strCell = ""+(Math.round(tmp*10000.0)/10000.0);
-                                    } catch (NumberFormatException e) {
-                                        FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
+                                if(def == null){
+                                    def = globVar.sax.getDataAttr(col,"modbus");
+                                    if(def != null){
+                                        if("bit".equals(def)){
+                                            dataFromExcel[i][colCnt] = getModbusDataBit(i, colCnt, dataFromExcel, func);
+                                        }else{
+                                            int x = getColNumber(def, colList);
+                                            if(x>=0){
+                                                dataFromExcel[i][colCnt] = getModbusDataReg(i, colCnt, x, dataFromExcel);
+                                            }else def=null;
+                                        }
+                                        if(dataFromExcel[i][colCnt]==null)def=null;
                                     }
                                 }
+                                if(def == null){
+                                    def = globVar.sax.getDataAttr(col,"formula");
+                                    if(def != null){
+                                        Node f = globVar.sax.returnFirstFinedNode(n, "Formulas");
+                                        Double x = getFormulaVal(def,f,colList, dataFromExcel, i);
+                                        if(x!=null) dataFromExcel[i][colCnt] = ""+(Math.round(x*10000.0)/10000.0);
+                                        else{
+                                            dataFromExcel[i][colCnt] = "";
+                                            FileManager.loggerConstructor("Для ячейки "+colExName+i+" листа "+ exSheetName +" не удалось посчитать значение");
+                                            isError = true;                                       
+                                        }
+                                        //calcFormula(def,f1,f,colList, dataFromExcel, i);
+                                    }
+                                }
+                                if(def == null){
+                                    def = globVar.sax.getDataAttr(col,"default");
+                                    if(def != null){
+                                        dataFromExcel[i][colCnt]=def;
+                                    }
+                                }
+                                if(def == null){
+                                    FileManager.loggerConstructor("В ячейке "+colExName+i+" листа "+ exSheetName +" должно быть значение");
+                                    isError = true;
+                                    dataFromExcel[i][colCnt]="";
+                                }
+                            }else{
+                                String unical = globVar.sax.getDataAttr(col,"unical");
+                                if(unical != null){
+                                    for(int j=0; j < i; j++){
+                                        if(strCell.equals(dataFromExcel[j][colCnt])){
+                                            FileManager.loggerConstructor("Одинаковые значения \"" +strCell+ "\" в ячейках " + colExName+(j+1)+" и " + colExName+(i+1) +" листа "+ exSheetName);
+                                            isError = true;
+                                        }
+                                    }
+                                }
+                                String type = globVar.sax.getDataAttr(col,"type");
+                                if(type!=null){
+                                    if("Int".equals(type)){
+                                        try { 
+                                            strCell = ""+((int)Double.parseDouble(strCell));
+                                        } catch (NumberFormatException e) {
+                                            FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
+                                        }
+                                    }
+                                    else if("Number".equals(type)){
+                                        try {   
+                                            Double tmp = Double.parseDouble(strCell);
+                                            strCell = ""+(Math.round(tmp*10000.0)/10000.0);
+                                        } catch (NumberFormatException e) {
+                                            FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
+                                        }
+                                    }
+                                }
+                                dataFromExcel[i][colCnt]=strCell;
                             }
-                            dataFromExcel[i][colCnt]=strCell;
                         }
+                        colCnt++;
                     }
-                    colCnt++;
+                    String tableNameAb = globVar.abonent+"_"+exSheetName;
+                    if(globVar.DB.isTable(tableNameAb)) 
+                        globVar.DB.dropTable(tableNameAb);
+                    globVar.DB.createTable(tableNameAb, tabColNames, tableComment);
+                    for(int i=0; i<rowMax; i++){
+                        globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);
+                    }
+                    tCnt++;
                 }
-                String tableNameAb = globVar.abonent+"_"+tableName;
-                if(globVar.DB.isTable(tableNameAb)) 
-                    globVar.DB.dropTable(tableNameAb);
-                globVar.DB.createTable(tableNameAb, tabColNames, tableComment);
-                for(int i=0; i<rowMax; i++){
-                    globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);
-                }
-                tCnt++;
             }
         }
     if(isError) return -1;

@@ -147,8 +147,10 @@ public class TableTools {//ссылка на таблицу, массив шир
     public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, int i) {
         for(String[] al: archList) if(al[1].equals(""+i)) list.addElement(al[0]);
     }
-
-    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList) {
+    //Заполнение списка источника данных с учётом уже выбранных структур и раскрытых пользователем списков
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
+            ArrayList<String> plusList) throws IOException {
+        list.removeAllElements();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + "\\Design\\Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
@@ -173,17 +175,28 @@ public class TableTools {//ссылка на таблицу, массив шир
                 }
             else ins = false;
             
-            if(ins) list.addElement(sigName);
+            if(ins){ //если глобальнаяя структура доложна быть включена в список
+                if(plusList.contains(sigName)){ //проверяем, нет ли её в списке раскрытых структур
+                    ArrayList<String> plusSigList = openSig(sigName); //если есть - раскрываем структуру
+                    for(String psl: plusSigList) if(!isInList(psl,archList,0)) list.addElement(psl);
+                }else if(!isInList(sigName,archList,0)) list.addElement(sigName);
+            }
         }
     }
+    
+    public static boolean isInList(String s, ArrayList<String[]> archList, int i){
+        if(s==null || archList==null) return false;
+        for(String[] a: archList) if(a[i].equals(s)) return true;
+        return false;
+    } 
 
-    public static void openSigList(DefaultListModel list, int i) throws IOException {
-        String glibSigName = (String) list.get(i);
+    public static ArrayList<String> openSig(String glibSigName) throws IOException{
+        ArrayList<String> list = new ArrayList<>();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + "\\Design\\Project.prj");
         Node mySig = prj.findNodeAtribute(root, new String[]{"Signal", "Name", glibSigName});
         String type = prj.getDataAttr(mySig, "Type");
-        if("REAL".equalsIgnoreCase(type) || "INT".equalsIgnoreCase(type) || "BOOL".equalsIgnoreCase(type) || "WORD".equalsIgnoreCase(type)) return;
+        if("REAL".equalsIgnoreCase(type) || "INT".equalsIgnoreCase(type) || "BOOL".equalsIgnoreCase(type) || "WORD".equalsIgnoreCase(type)) return list;
         
         String fileName = FileManager.FindFile(globVar.desDir + "\\Design", type, "UUID=");
         
@@ -191,31 +204,8 @@ public class TableTools {//ссылка на таблицу, массив шир
         Node rootSig = sigSax.readDocument(globVar.desDir + "\\Design\\"+fileName);
         Node signals = sigSax.returnFirstFinedNode(rootSig, "Fields");
         ArrayList<Node> sigList = sigSax.getHeirNode(signals);
-        if(sigList == null || sigList.isEmpty()) return;
-        list.remove(i);
-        for(Node n : sigList){
-            String sigName = sigSax.getDataAttr(n, "Name");
-            list.add(i++,"  " + glibSigName + "." + sigName);
-        }
+        if(sigList == null || sigList.isEmpty()) return list;
+        for(Node n : sigList) list.add("– " + glibSigName + "." + sigSax.getDataAttr(n, "Name"));
+        return list;
     }
-
-    public static void closeSigList(DefaultListModel list, int i) {
-        String globSigName = (String) list.get(i);
-        int x = globSigName.indexOf(".");
-        if(x<0) return;
-        String sigName = globSigName.substring(0, x+1);
-        int j;
-        for(j = i; j>=0; j--){
-            String s = (String) list.get(j);
-            if(s.length() <= x+1 || !s.substring(0, x+1).equals(sigName)) break;
-            list.remove(j);
-        }
-        for(int k = j+1; k<list.size();){
-            String s = (String) list.get(k);
-            if(s.length() <= x+1 || !s.substring(0, x+1).equals(sigName)) break;
-            list.remove(k);
-        }
-        list.add(j+1, globSigName.substring(2, x));
-    }
-
 }

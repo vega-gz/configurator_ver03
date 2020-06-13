@@ -417,7 +417,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if(!Tools.isDB()) return;
         if(!Tools.isDesDir()) return;
         JFrame editArchive = new addArchive();
-        editArchive.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        editArchive.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         editArchive.setTitle("Редактирование архивов");
         editArchive.setVisible(true);
 

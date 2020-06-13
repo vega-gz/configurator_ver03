@@ -11,16 +11,22 @@
 		</DGI>
 	</AM_Classica>
 	<AM_NKU>
-		<DO_NKU>
+		<GPA_NKU_mb_DO>
 			<on  end="_ON"/>
-			<onUPP  end="_ONupp"/>
+			<uppON  end="_uppON"/>
 			<off end="_OF"/>
-		</DO_NKU>
-		<DI_NKU>
+		</GPA_NKU_mb_DO>
+		<GPA_NKU_mb_DI alt="NKU2_mb_DI">
 			<on  end="_ON"/>
+			<uppON end="_uppON"/>
 			<off end="_OF"/>
-			<ready end="_ready"/>
-			<AOF end="_av_AOF"/>
-		</DI_NKU>
+			<ready end="_Rdy"/>
+			<AOF end="_AOF"/>
+			<nMU end="_nMU"/>
+			<UPP_FLT end="_UPP_FLT"/>
+			<Mom end="_Mom"/>
+			<isOn end="_isOn"/>
+			<isOF end="_isOF"/>
+		</GPA_NKU_mb_DI>
 	</AM_NKU>
 </ConfigAMs>
