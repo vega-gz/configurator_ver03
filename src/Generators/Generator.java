@@ -479,8 +479,8 @@ public class Generator {
                     oldFields = localSax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
                     String[] newArray = {"Fields"};
                     newFields = localSax.insertChildNode(type, newArray);
-                    Node firstFields = localSax.returnFirstFinedNode(oldFields, "Field");
-                    fildUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
+                    //Node firstFields = localSax.returnFirstFinedNode(oldFields, "Field");
+                    //fildUUID = firstFields.getAttributes().getNamedItem("Type").getNodeValue();//получаю значение ноды type
                 }
                 for (int j = 0; j < ft.tableSize(); j++) {
                     String tagName = (String) ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
@@ -491,18 +491,20 @@ public class Generator {
                         if(fildUUID==null) fildUUID = defType;
                     }
                     if (oldFields == null) {//если нода пустая,то создаю элементы
-                        String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()};
-                        localSax.insertChildNode(newFields, nAndA);
+                        //String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()};
+                        localSax.insertChildNode(newFields, new String[]{"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()});
                     } else {
-                        String[] nodeAndAttr = {"Field", "Name", tagName};
-                        Node oldTag = localSax.findNodeAtribute(oldFields, nodeAndAttr);
+                        //String[] nodeAndAttr = {"Field", "Name", tagName};
+                        Node oldTag = localSax.findNodeAtribute(oldFields, new String[]{"Field", "Name", tagName});
                          if (oldTag == null) {
-                            String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()};
-                            localSax.insertChildNode(newFields, nAndA);
+                            //String nAndA[] = {"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()};
+                            localSax.insertChildNode(newFields, new String[]{"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", UUID.getUIID()});
                         } else {
-                            localSax.setDataAttr(oldTag, "Comment", comment);
-                            localSax.setDataAttr(oldTag, "Type", fildUUID);
-                            newFields.appendChild(oldTag);
+                            String localUUID = oldTag.getAttributes().getNamedItem("UUID").getNodeValue();
+                            localSax.insertChildNode(newFields, new String[]{"Field", "Name", tagName, "Comment", comment, "Type", fildUUID, "UUID", localUUID});
+//                            localSax.setDataAttr(oldTag, "Comment", comment);
+//                            localSax.setDataAttr(oldTag, "Type", fildUUID);
+//                            newFields.appendChild(oldTag);
                         }
                     }
                 }
@@ -880,5 +882,10 @@ public class Generator {
         if(usage) intFile.setDataAttr(sig, "Usage", "");
         intFile.writeDocument();
         return uuid;
+    }
+
+    public static int GenArchive(String[][] archTyps, ArrayList<String[]> archList, String abonent) {
+        String appName = abonent + "_" + "Archive";
+        return 0;
     }
 }

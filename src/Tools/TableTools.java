@@ -5,9 +5,12 @@ import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -135,6 +138,34 @@ public class TableTools {//ссылка на таблицу, массив шир
         return 0;
     }
     
+    static public void setTableListener(JFrame frame, SaveFrameData sfd){
+        frame.addWindowListener(new WindowListener() {
+            public void windowActivated(WindowEvent event) {}
+            public void windowClosed(WindowEvent event) {}
+            public void windowClosing(WindowEvent event) {//выполнение операций сохранения данных из фрейма
+//                    Object[] options = { "Сохранить", "Не сохранять", "Не закрывать" };
+//                    int n = JOptionPane.showOptionDialog(event.getWindow(), "Сохранить изменения перед закрытиемокна?",
+//                                    "Вопрос", JOptionPane.YES_NO_OPTION,
+//                                    JOptionPane.QUESTION_MESSAGE, null, options,
+//                                    options[0]);
+//                    if (n == 0) {
+                if(sfd!=null) sfd.doIt();
+                String title = frame.getTitle();
+                globVar.windReg.remove(title);
+                event.getWindow().setVisible(false);
+                frame.setVisible(false);
+            }
+            public void windowDeactivated(WindowEvent event) {}
+            public void windowDeiconified(WindowEvent event) {}
+            public void windowIconified(WindowEvent event) {}
+            public void windowOpened(WindowEvent event) {// Регистрация фрейма в регистре
+                String title = frame.getTitle();
+                if(globVar.windReg.indexOf(title)<0) globVar.windReg.add(title);
+                else frame.setVisible(false);
+            }
+        });
+    }
+        
     public static void saveListInDB(ArrayList<String[]> list, DataBase DB, String tableName, String[] listNameColum, String comment) {
         if(DB.isTable(tableName)){
             DB.dropTable(tableName);

@@ -1,10 +1,10 @@
 package FrameCreate;
 
 import DataBaseConnect.DataBase;
+import Generators.Generator;
+import Tools.SaveFrameData;
 import Tools.TableTools;
 import globalData.globVar;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -13,7 +13,6 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
@@ -79,7 +78,6 @@ public class addArchive extends javax.swing.JFrame {
         archList = globVar.DB.getData("Archive_"+abonent, archTabCols);
         
         jComboBox1.setModel(new DefaultComboBoxModel(archiveTyps));
-        //jList1.setModel(model_list);
         jList1.setModel(list1);
         jList2.setModel(list2);
         abList = DataBase.getAbonentArray();
@@ -90,49 +88,13 @@ public class addArchive extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JFrame frame = this;
-        //this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new WindowListener() {
-            public void windowActivated(WindowEvent event) {}
-            public void windowClosed(WindowEvent event) {}
-            public void windowClosing(WindowEvent event) {
-                if(!isChange){
-                    String title = frame.getTitle();
-                    globVar.windReg.remove(title);
-                    frame.setVisible(false);
-                }
-                else {    
-                    Object[] options = { "Сохранить", "Не сохранять", "Не закрывать" };
-                    int n = JOptionPane.showOptionDialog(event.getWindow(), "Сохранить изменения перед закрытиемокна?",
-                                    "Вопрос", JOptionPane.YES_NO_OPTION,
-                                    JOptionPane.QUESTION_MESSAGE, null, options,
-                                    options[0]);
-                    if (n == 0) {
-                        TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
-                        resetArchList();        //сохраняем изменения списака предназначенных к архивированию сигналов
-                        TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");//сохранение в БД списка сигналов 
-                        String title = frame.getTitle();
-                        globVar.windReg.remove(title);
-                        event.getWindow().setVisible(false);
-                        frame.setVisible(false);
-                    }else if (n == 1) {
-                        String title = frame.getTitle();
-                        globVar.windReg.remove(title);
-                        event.getWindow().setVisible(false);
-                        frame.setVisible(false);
-                    }
-                }
-            }
-            public void windowDeactivated(WindowEvent event) {}
-            public void windowDeiconified(WindowEvent event) {}
-            public void windowIconified(WindowEvent event) {}
-            public void windowOpened(WindowEvent event) {
-                String title = frame.getTitle();
-                if(globVar.windReg.indexOf(title)<0) globVar.windReg.add(title);
-                else frame.setVisible(false);
-            }
-        });
-
+        //Лямбда для операций при закрытии окна архивов
+        SaveFrameData sfd = ()->{
+            TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
+            resetArchList();        //сохраняем изменения списака предназначенных к архивированию сигналов
+            TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");//сохранение в БД списка сигналов 
+        };
+        TableTools.setTableListener(this, sfd);
    }
     private void setPlusList(){
         for(int i=0; i < archList.size(); i++){
@@ -183,6 +145,7 @@ public class addArchive extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -254,7 +217,7 @@ public class addArchive extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,7 +237,7 @@ public class addArchive extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -311,6 +274,13 @@ public class addArchive extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Приложение");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -335,7 +305,9 @@ public class addArchive extends javax.swing.JFrame {
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(136, 136, 136)))
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton1)
+                        .addGap(133, 133, 133)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -348,7 +320,8 @@ public class addArchive extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jButton6)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)))
+                    .addComponent(jCheckBox1)
+                    .addComponent(jButton1)))
         );
 
         pack();
@@ -456,6 +429,13 @@ public class addArchive extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int x = tableModel.getRowCount();
+        String[][] archTyps = new String[x][3];
+        for(int i=0;i<x;i++) for(int j=0; j<3; j++) archTyps[i][j] = tableModel.getValueAt(i, j).toString();
+        Generator.GenArchive(archTyps, archList, abonent);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void resetArchList(){
         for(int i=0;i<archList.size(); i++){    //пробегаем поо списту предназнгаченных к архивированию сигналов
             if(archList.get(i)[1].equals(""+prevArch)){ // если сигнал имеет номер нужный архива
@@ -501,6 +481,7 @@ public class addArchive extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
