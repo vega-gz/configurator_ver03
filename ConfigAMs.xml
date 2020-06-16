@@ -11,12 +11,12 @@
 		</DGI>
 	</AM_Classica>
 	<AM_NKU>
-		<GPA_NKU_mb_DO>
+		<NKU_mb_DO>
 			<on  end="_ON"/>
 			<uppON  end="_uppON"/>
 			<off end="_OF"/>
-		</GPA_NKU_mb_DO>
-		<GPA_NKU_mb_DI alt="NKU2_mb_DI">
+		</NKU_mb_DO>
+		<NKU_mb_DI alt="NKU2_mb_DI">
 			<on  end="_ON"/>
 			<uppON end="_uppON"/>
 			<off end="_OF"/>
@@ -27,6 +27,6 @@
 			<Mom end="_Mom"/>
 			<isOn end="_isOn"/>
 			<isOF end="_isOF"/>
-		</GPA_NKU_mb_DI>
+		</NKU_mb_DI>
 	</AM_NKU>
 </ConfigAMs>

@@ -1,7 +1,13 @@
 package DataBaseConnect;
 
 
+import Tools.FileManager;
+import Tools.Observed;
+import Tools.Observer;
 import Tools.StrTools;
+import XMLTools.UUID;
+import XMLTools.XMLSAX;
+import globalData.globVar;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,20 +15,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import XMLTools.UUID;
-import XMLTools.XMLSAX;
-import java.util.HashMap;
-import java.util.Map;
-import Tools.FileManager;
-import globalData.globVar;
 
-public class DataBase {
+public class DataBase implements Observed {
     Statement stmt;
     Connection connection = null;
+    
+     // данные для таскбара
+    int min;
+    int max;
+    int value;
+    
+    List<Observer> observers = new ArrayList<>(); // Список наблюдателей
     
     // Делаем синглтон
     private static DataBase instance;
@@ -876,6 +885,33 @@ public class DataBase {
         if(globVar.DB==null) return null;
         return globVar.DB.getData("Abonents","Abonent"); //Получаем список абонентов отсортированный по алгоритмическому имени 
     }
+    
+    // --- Функции наблюдателя ---
+    @Override
+    public void addObserver(Observer o) { // добавить слушателя
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) { // удалить слушателя
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObserver() {
+       for(Observer o: observers){ // Рассылаем слушетелям 
+       o.handleEvent(min, max, value);
+       }
+    }
+    
+     // метод изменения состояни 
+    public void setValueObserver(int min, int max, int value){
+        this.min = min;
+        this.max = max; 
+        this.value = value;
+        notifyObserver(); // вызов оповещения всем слушателям
+    }
+
     
 //    public static void main(String[] arg){
 //       DataBase db = DataBase.getInstance();

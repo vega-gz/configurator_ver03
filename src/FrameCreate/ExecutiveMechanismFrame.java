@@ -5,7 +5,7 @@
  */
 package FrameCreate;
 
-import Algorithm.ExecutiveMechanism;
+import Algorithm.ExecutiveMechanismObject;
 import DataBaseConnect.*;
 import XMLTools.XMLSAX;
 import globalData.globVar;
@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer; //Таймер каждую секунду
 import org.w3c.dom.Node;
 
@@ -57,19 +58,20 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     String[] columns; // названия колонок для таблицы в формате масива
     ArrayList<String> columnT; // названия колонок для таблицы
     int identNodecase = 0; // по идентификатор выбора какой механизм использовать
-    ExecutiveMechanism testW;
+    ExecutiveMechanismObject testW;
     TableNzVer3 boneTable;
+    boolean showAlltable = false; // тригер показать всю таблицу или только
     
     /**
      * Creates new form ExecutiveMechanism
      */
     public ExecutiveMechanismFrame() { // С передачей базы
-        testW = new ExecutiveMechanism();
-        columns = testW.getColumns(); // получить колонки для построки таблицы
+        testW = new ExecutiveMechanismObject();
         String[] arrNameExecute = testW.getNodeMechRun();// Что передаем на выбор
         getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором а вот тут оно не должно быть
-        listDataToTable = testW.getDataCurrentNode(identNodecase);  // реализация конкретного механизма
+        listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
         nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+        columns = testW.getColumns(); // получить колонки для построки таблицы
         columnT = testW.getColumnsT();
         boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
         initComponents();
@@ -88,8 +90,10 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = boneTable.getJTable();     // Новая таблица(а есть еще более новей);
+        jCheckBox1 = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setExtendedState(6);
 
         jButton2.setText("добавить в базу");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +110,13 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(3).setCellEditor(editor);
         jScrollPane1.setViewportView(jTable1);
 
+        jCheckBox1.setText("показать без окончаний");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -114,12 +125,16 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
         );
@@ -141,9 +156,41 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     // --- Кнопка добавления данных в базу ---
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // получим данные с таблицы Swing
-        ArrayList<String[]> updatetedData = boneTable.getAllData();
-        testW.addDataToBase(updatetedData);
+        SwingUtilities.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+                ArrayList<String[]> updatetedData = boneTable.getAllData();
+                testW.addDataToBase(updatetedData);
+            }
+        });
+        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    // -- активен флажок или нет --
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        if (jCheckBox1.isSelected()) {
+            showAlltable = true;
+            listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
+            nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+            columnT = testW.getColumnsT();
+            boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
+            this.getContentPane().removeAll(); // все удаляет работает
+            initComponents();
+            this.repaint();
+            jCheckBox1.setSelected(showAlltable);
+ 
+        } else {
+            showAlltable = false;
+            listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
+            nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+            columnT = testW.getColumnsT();
+            boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
+            this.getContentPane().removeAll();
+            initComponents();
+            this.repaint();;
+            jCheckBox1.setSelected(showAlltable);
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
    
     // ---  метод диалога выбора по какому методу делаем ИМ ---
@@ -233,6 +280,7 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
