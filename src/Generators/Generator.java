@@ -420,20 +420,20 @@ public class Generator {
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Node currNodeCfgXML = nodesGenData.item(i);
                 ArrayList<Node> globSigList = globVar.sax.getHeirNode(currNodeCfgXML);//Находим все ноды внутри ноды типа файла
-                String nodeName = currNodeCfgXML.getNodeName();
-                String fildUUID = globVar.sax.getDataAttr(currNodeCfgXML, "Type");
-                String typeFile = globVar.sax.getDataAttr(currNodeCfgXML, "typeFile");
-                if(typeFile==null) typeFile = "T_"+isMb+nodeName+".type";
+                String nodeName = currNodeCfgXML.getNodeName();//определяем имя ноды
+                String fildUUID = globVar.sax.getDataAttr(currNodeCfgXML, "Type"); //Ищем, нет ли там определённого типа для переменных. Если нет - будем искать другими способами
+                String typeFile = globVar.sax.getDataAttr(currNodeCfgXML, "typeFile"); //Ищем имя файла для случаев, когда имя ноды одно, а имя файла совсем другое
+                if(typeFile==null) typeFile = "T_"+isMb+nodeName+".type";   //если имени файла нет - синтезируем это имя из имени ноды
                 XMLSAX fildUuidSax=null;
                 Node fildUuidRoot = null;
                 String dtCol=null;
                 String defType=null;
-                if(fildUUID == null){
-                    fildUUID = globVar.sax.getDataAttr(currNodeCfgXML, "dictionary");
-                    if(fildUUID!=null){
+                if(fildUUID == null){//Если тип данных для переменных не был укан явно, его надо определить
+                    fildUUID = globVar.sax.getDataAttr(currNodeCfgXML, "dictionary"); //Проверяем, не указан ли в качестве типа данных словарь
+                    if(fildUUID!=null){//если указан - 
                         fildUuidSax = new XMLSAX();
-                        fildUuidRoot = fildUuidSax.readDocument(fildUUID);
-                        if(fildUuidRoot!=null) fildUUID = "dictionary";
+                        fildUuidRoot = fildUuidSax.readDocument(fildUUID); // пытаемся прочитать файл словаря
+                        if(fildUuidRoot!=null) fildUUID = "dictionary"; // если это удалось - выставяем флаг необходимости узнавать тип каждой переменной из словаря
                         dtCol = globVar.sax.getDataAttr(currNodeCfgXML, "col");
                         defType = globVar.sax.getDataAttr(currNodeCfgXML, "ifEmpty");
                     }else{
@@ -449,6 +449,7 @@ public class Generator {
                 XMLSAX uuidSax = new XMLSAX();
                 Node intFile1 = globVar.sax.returnFirstFinedNode(currNodeCfgXML,"localData");
                 String intFile2 = globVar.sax.getDataAttr(intFile1, "int");
+                if("_".equals(intFile2.substring(0, 1))) intFile2 = abonent+intFile2;
                 Node uuidRoot = uuidSax.readDocument(filePath + "\\" + intFile2);
                 String typeUUID = getUUIDfromPrj(uuidSax, uuidRoot, abonent+"_"+subAb+isMb+nodeName, "Type");
                 String globUUID = getUUIDfromPrj(uuidSax, uuidRoot, abonent+"_"+subAb+isMb+nodeName, "UUID");

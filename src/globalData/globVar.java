@@ -9,6 +9,7 @@ import DataBaseConnect.DataBase;
 import Tools.StrTools;
 import XMLTools.XMLSAX;
 import Tools.FileManager;
+import java.util.ArrayList;
 import java.util.Date;
 import org.w3c.dom.Node;
 
@@ -48,6 +49,7 @@ public class globVar {
         public static String dbURL = "";
         public static String USER = "";
         public static String PASS = "";
+        public static ArrayList<String> windReg = new ArrayList<>();
                 
 	public static void SetStatUUID() {
 		Date date = new Date();
