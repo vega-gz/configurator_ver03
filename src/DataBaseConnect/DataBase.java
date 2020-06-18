@@ -42,11 +42,11 @@ public class DataBase implements Observed {
 
     //  синглтон не нужен а вот нужен
     public static DataBase getInstance() { // #3 static
-        int ret=0;
+        //ret=0;
         if (instance == null) {		//если объект еще не создан
             instance = new DataBase();	//создать новый объект
         }
-        ret = instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
+        int ret = instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
         if(ret==0)return instance;		// вернуть ранее созданный объект
         else return null;
     }

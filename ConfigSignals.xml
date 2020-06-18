@@ -41,8 +41,8 @@
 			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<Formulas>
-			<max column="Диапазон_макс"/>
-			<min column="Диапазон_мин"/>
+			<max operation="get" column="Диапазон_макс"/>
+			<min operation="get" column="Диапазон_мин"/>
 			<range operation="-" operand1="max" operand2="min"/>
 			<range1proc operation="/" operand1="range" operand2="100"/>
 			<range3proc operation="*" operand1="range1proc" operand2="3"/>

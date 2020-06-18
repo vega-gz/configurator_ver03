@@ -111,8 +111,10 @@ public class RWExcel {
     private static String getModbusDataBit(int i, int colCnt, String[][] dataFromExcel, String func){
         if(i==0) return "0";
         try{
-            int lim = 7;
-            if("4".equals(func) || "16".equals(func)) lim = 15;
+            if("2".equals(func) || "15".equals(func)){
+                int bit = (int) Double.parseDouble(dataFromExcel[i-1][colCnt]);
+                return ""+(bit+1);
+            }
             String prev = dataFromExcel[i-1][colCnt];
             int dot = prev.indexOf(".");
             int bit = 0;
@@ -124,7 +126,7 @@ public class RWExcel {
                 reg = Integer.parseInt(prev);
                 bit = 1;
             }
-            if(bit > lim){
+            if(bit > 15){
                 bit = 0;
                 reg++;
             }
@@ -228,7 +230,6 @@ public class RWExcel {
         for(Node n : nList){
             //String tableName = n.getNodeName();
             String exSheetName1 = globVar.sax.getDataAttr(n, "excelSheetName");
-            String tableComment = globVar.sax.getDataAttr(n, "Comment");
             ArrayList<String> sheetList = new ArrayList<>();
             if("mb".equals(exSheetName1.substring(0,2))){
                 for(int i = 0; i < qSheets; i++){
@@ -245,6 +246,7 @@ public class RWExcel {
             for(String exSheetName : sheetList){
                 HSSFSheet sheet = wb.getSheet(exSheetName);
                 int rowMax = 32767;
+                String tableComment = globVar.sax.getDataAttr(n, "Comment");
                 if(sheet != null){
                     String func = "";
                     Node excelNode = globVar.sax.returnFirstFinedNode(n,"EXEL");
@@ -281,11 +283,9 @@ public class RWExcel {
                         for(int i=0; i<rowMax; i++ ){//Пробегаем по строкам столбца 
                             String strCell = getDataCell(sheet.getRow(i+1), colExName);
                             if(strCell == null) strCell="";
-                            //dataFromExcel[i][colCnt]=null;
                             if("".equals(strCell)){
                                 String def = globVar.sax.getDataAttr(col,"swt");
                                 if(def != null){
-                                    //String colName = globVar.sax.getDataAttr(col,def);
                                     int x = getColNumber(def, colList);
                                     if(x>=0) dataFromExcel[i][colCnt]= getFromSwitch(col,dataFromExcel[i][x]);
                                     if(dataFromExcel[i][colCnt]==null)def=null;

@@ -34,7 +34,7 @@ public class addArchive extends javax.swing.JFrame {
     private final String[] continueArchiv = new String[] {"0","x100","100","3600","31","true","нет","-1"};
     private final String[] jTableCols = new String[] {  "№","Наименование архива", 
                                                             "<HTML><BODY>Периодичность<br/>[мсек]</BODY></HTML>", 
-                                                            "<HTML><BODY>Предыстория<br/>[сек]</BODY></HTML>", 
+                                                            "<HTML><BODY>Кэш<br/>[сек]</BODY></HTML>", 
                                                             "<HTML><BODY>Длительность<br/>[дни]</BODY></HTML>",
                                                             "Сигнал записи",
                                                             "Останавливать",
@@ -430,10 +430,18 @@ public class addArchive extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int x = tableModel.getRowCount();
-        String[][] archTyps = new String[x][3];
-        for(int i=0;i<x;i++) for(int j=0; j<3; j++) archTyps[i][j] = tableModel.getValueAt(i, j).toString();
-        Generator.GenArchive(archTyps, archList, abonent);
+        int x = tableModel.getRowCount(); // Определяем, сколько у нас видов архивов
+        String[][] archTyps = new String[x][3]; // Создаём прямоугольный массив, что бы не таскать с собой всю структуру таблицы
+        for(int i=0;i<x;i++) {
+            archTyps[i][0] = tableModel.getValueAt(i, 0).toString();
+            archTyps[i][1] = tableModel.getValueAt(i, 2).toString();
+            archTyps[i][2] = tableModel.getValueAt(i, 3).toString();
+        } // переписываем данные из таблицы в массив
+        try {
+            Generator.GenArchive(archTyps, archList, abonent); // вызываем функцию генерации
+        } catch (IOException ex) {
+            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void resetArchList(){

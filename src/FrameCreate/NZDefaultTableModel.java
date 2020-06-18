@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import DataBaseConnect.DataBase;
+import globalData.globVar;
 
 /**
  *
@@ -20,13 +21,14 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
       //Object[][] dataInTable1 = null;
       String[] resultColumn = null;
       String nameTable = null;
-      DataBase workbase = DataBase.getInstance();// создаем запрос к базе
+      DataBase workbase = null;//DataBase.getInstance();// создаем запрос к базе
       
       // просто построить данные
       public NZDefaultTableModel (Object[][] dataInTable, String[] resultColumn){
         super(dataInTable, resultColumn);
         //this.dataInTable1 = dataInTable;
         this.resultColumn = resultColumn;
+        this.workbase = globVar.DB;
        }
       // Строим конструктором таким для редактирования таблицы
       public NZDefaultTableModel (Object[][] dataInTable, String[] resultColumn, String nameTable){
@@ -34,6 +36,7 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
         //this.dataInTable1 = dataInTable;
         this.resultColumn = resultColumn;
         this.nameTable = nameTable;
+        this.workbase = globVar.DB;
        }
       
       // отключить редактирование базы когда это не нужно(нет еще таблица или самой базы)

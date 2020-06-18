@@ -14,6 +14,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseConnect.DataBase;
 import Main.Main_JPanel;
+import globalData.globVar;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,12 +77,12 @@ public class TableNzVer3 {
     public TableNzVer3() { // обязательно что то должно быть, так получаем Tablemodel
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
         //initComponents();
-        this.workbase = DataBase.getInstance();
+        this.workbase = globVar.DB;//DataBase.getInstance();
     }
 
     public TableNzVer3(String nameTable) {
         this.nameTable = nameTable;
-        this.workbase = DataBase.getInstance();
+        this.workbase = globVar.DB;//DataBase.getInstance();
         //getModelTable(workbase, nameTable, listData); // вызываем функцию с пустым запросом к базе
     }
 
@@ -90,7 +91,7 @@ public class TableNzVer3 {
         this.nameTable = nameTable;
         this.columns = columns;
         this.listData = listData;
-        this.workbase = DataBase.getInstance();
+        this.workbase = globVar.DB;//DataBase.getInstance();
         this.OnOffTable = OnOffTable;
         new Thread(new UptadeVisualTable(this, ex)).start(); // Потоком слушателя обновления таблиц
     }
@@ -104,7 +105,8 @@ public class TableNzVer3 {
         for (int i = 0; i < columns.size(); ++i) { // Преобразовать лист в массив
             this.columns[i] = columns.get(i);
         }
-        this.workbase = DataBase.getInstance();
+
+        this.workbase = globVar.DB;//DataBase.getInstance();
         this.OnOffTable = OnOffTable;
         new Thread(new UptadeVisualTable(this, ex)).start(); // Потоком слушателя обновления таблиц
     }

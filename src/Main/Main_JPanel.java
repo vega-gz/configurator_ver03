@@ -433,7 +433,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         String nameBD = globVar.DB.getCurrentNameBase();
         String userBD = globVar.DB.getCurrentUser();
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
-        String message = null;
+        //String message = null;
         if (nameBD != null) {
             JOptionPane.showMessageDialog(null, "Подключено к базе " + nameBD + " пользователем " + userBD);
         }
@@ -621,45 +621,24 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // --- метод отображения фрейма таблицы ---
     public void showTable(String table){
         if(!Tools.isDB()) return;
-        for (String nT : globVar.DB.getListTable()) { // проверка есть ли такая таблица в базе
-            if (nT.equals(table)) {
-                List<String> listColumn = globVar.DB.selectColumns(table);
-                ArrayList<String> columns = new ArrayList<>();
-                String tmpStr = " ";
-                for (String s : listColumn) { // ограничение что не выводим из столбцов
-                    String[] remCol = {"UUID", "uuid"}; // список исключений
-                    boolean find = false;
-                    for (String rC : remCol) {
-                        if (rC.equals(s)) {
-                            find = true;
-                            break;
-                        }
-                    }
-                    if (find) {
-                        find = false;
-                        continue;
-                    } else {
-                        columns.add(s); // конечный список столбцов к запросу базы
-                    }
-                }
-                String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
-
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
-                int sizeWidth = 800;
-                int sizeHeight = 600;
-                int locationX = (screenSize.width - sizeWidth) / 2;
-                int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
-                FrameTabel frameTable = new FrameTabel(table, columns); // Вызов класса Название таблицы и данные для нее
-                jFrameTable = new javax.swing.JFrame();
-                jFrameTable.add(frameTable); // с заголовком имя таблицы
-                jFrameTable.setTitle(table + " " + globVar.DB.getCommentTable(table)); // установить заголовок имя таблицы и если есть ее коммент
-                jFrameTable.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
-                jFrameTable.setContentPane(frameTable); // Передаем нашу форму
-                jFrameTable.setVisible(true);
-
-            }
-        }
-
+        String[] exCol = {"UUID", "uuid"}; // список исключений
+        List<String> listColumn = globVar.DB.selectColumns(table);
+        if(listColumn.isEmpty()) return;
+        ArrayList<String> columns = new ArrayList<>();
+        for (String s : listColumn) // ограничение что не выводим из столбцов
+            if(!exeptCol(s,exCol)) columns.add(s); // конечный список столбцов к запросу базы
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
+        int sizeWidth = 800;
+        int sizeHeight = 600;
+        int locationX = (screenSize.width - sizeWidth) / 2;
+        int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
+        FrameTabel frameTable = new FrameTabel(table, columns); // Вызов класса Название таблицы и данные для нее
+        jFrameTable = new JFrame();
+        jFrameTable.add(frameTable); // с заголовком имя таблицы
+        jFrameTable.setTitle(table + " " + globVar.DB.getCommentTable(table)); // установить заголовок имя таблицы и если есть ее коммент
+        jFrameTable.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
+        jFrameTable.setContentPane(frameTable); // Передаем нашу форму
+        jFrameTable.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -696,6 +675,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
+
+    private boolean exeptCol(String s, String[] exCol) {
+        for(String e: exCol) if(e.equals(s)) return true;
+        return false;
+    }
 }
 
 // Класс Слушатель выделения узла в дереве

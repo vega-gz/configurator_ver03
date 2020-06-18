@@ -11,22 +11,21 @@ import DataBaseConnect.DataBase;
 import Generators.Generator;
 import Main.Main_JPanel;
 import Tools.Tools;
+import globalData.globVar;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class FrameTabel extends javax.swing.JPanel {
 
-    Main_JPanel mj = new Main_JPanel();
-    String nameTable = "";
+    String nameTable;
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
-    private ArrayList<String> columns;  // Колонки базы переданные в конструкторе
     ArrayList<ArrayList> listToTable = new ArrayList<>(); // Лист для передачи в таблицу
     String[] columnstoMass = null; // Массив столбцов для передачи в таблицу
     TableNzVer3 tableFrameModel = null;
-    XMLSAX sax = new XMLSAX();
+    //XMLSAX sax = new XMLSAX();
     int filepath;
     String filepatch;
-    DataBase workbase = DataBase.getInstance();
+    DataBase workbase;// = DataBase.getInstance();
 
     public int tableSize() {//возвращает размер таблицы
         return jTable1.getRowCount();
@@ -49,18 +48,16 @@ public class FrameTabel extends javax.swing.JPanel {
     // --- Конструктор с вызовом таблицы TableNzVer2 и преобразованными данными для нее ---
     public FrameTabel(String selectT, ArrayList<String> columns) {
         this.nameTable = selectT;
-        this.columns = columns;
-        columns.toArray(new String[columns.size()]); // Преобразование в массив
-        this.dataFromDb = DataBase.getInstance().getData(selectT, columns); // получили данные с базы 
-        //преобразовать данные для переваривания таблицей
-        for (String[] mass : dataFromDb) {
+        this.workbase = globVar.DB;
+        this.dataFromDb = globVar.DB.getData(selectT, columns); // получили данные с базы 
+        for (String[] mass : dataFromDb) {//преобразовать данные для переваривания таблицей
             ArrayList<String> tmpList = new ArrayList<>();
             for (String s : mass) {
                 tmpList.add(s);
             }
             listToTable.add(tmpList);
         }
-        tableFrameModel = new TableNzVer3(nameTable, columns, listToTable, true);
+        this.tableFrameModel = new TableNzVer3(nameTable, columns, listToTable, true);
         initComponents();
     }
 
