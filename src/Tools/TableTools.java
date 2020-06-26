@@ -3,13 +3,16 @@ package Tools;
 import DataBaseConnect.DataBase;
 import XMLTools.XMLSAX;
 import globalData.globVar;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -45,12 +48,17 @@ public class TableTools {//ссылка на таблицу, массив шир
         DefaultTableCellRenderer left = new DefaultTableCellRenderer();
         left.setHorizontalAlignment(JLabel.LEFT);
         //чтобы не вылететь за границы таблицы, если переданный массив алигнов неправильный
-        if(qCol > align.length) qCol = colWidth.length; //Определяю количество столбцов
+        if(qCol > align.length) qCol = align.length; //Определяю количество столбцов
         for(int i=0; i<qCol; i++ ){// Задаю алигны всем столбцам
             if(align[i]<0)      jTable1.getColumnModel().getColumn(i).setCellRenderer(left);
             else if(align[i]>0) jTable1.getColumnModel().getColumn(i).setCellRenderer(right);
             else                jTable1.getColumnModel().getColumn(i).setCellRenderer(center);
         }
+        //Первый столбик всегда не редактируемый, потому серый
+        DefaultTableCellRenderer defaultTableCellRenderer = new DefaultTableCellRenderer();
+        System.setProperty("myColor", "0XEEEEEE");
+        defaultTableCellRenderer.setBackground(Color.getColor("myColor")); //задаем цвет столбца
+        columnModel.getColumn(0).setCellRenderer(defaultTableCellRenderer);      
         //Работа с высотой заголовков столбцов, чтобы туда влезали многострочные заголовки
         JTableHeader th = jTable1.getTableHeader();
         int width = th.getSize().width;
@@ -111,7 +119,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             if(casedial != 0) return; //0 - yes, 1 - no, 2 - cancel    
             for(int i=0; i< rows.length; i++) 
                 for(int j=0; j< cols.length; j++)
-                    jTable1.setValueAt("",rows[i], cols[j]);
+                    if(cols[j]>0) jTable1.setValueAt("",rows[i], cols[j]);
         });
         return 0;
     }
@@ -128,8 +136,27 @@ public class TableTools {//ссылка на таблицу, массив шир
         return s;
     }
     // ----- функция для загрузки таблицы в базу со стриранием старой таблицы --------------
+    static public int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String[] listNameColum, String tableComment, ArrayList<String[]> fromDB){
+        if(DB.isTable(tableName)){
+            if(tableComment==null){
+                tableComment = DB.getCommentTable(tableName);
+            }
+            DB.dropTable(tableName);
+        }
+        DB.createTableEasy(tableName, listNameColum, tableComment);
+        fromDB.clear();
+        int y = jTable1.getRowCount();
+        for(int i=0; i<y; i++){
+            DB.insertRow(tableName, getRow(jTable1,i), listNameColum, i);
+            fromDB.add(getRow(jTable1,i));
+        }
+        return 0;
+    }
     static public int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String[] listNameColum, String tableComment){
         if(DB.isTable(tableName)){
+            if(tableComment==null){
+                tableComment = "";
+            }
             DB.dropTable(tableName);
         }
         DB.createTableEasy(tableName, listNameColum, tableComment);
@@ -137,23 +164,28 @@ public class TableTools {//ссылка на таблицу, массив шир
         for(int i=0; i<y; i++) DB.insertRow(tableName, getRow(jTable1,i), listNameColum, i);
         return 0;
     }
-    
-    static public void setTableListener(JFrame frame, SaveFrameData sfd){
+
+    static public void setTableListener(JFrame frame, SaveFrameData sfd, isCange ich){
         frame.addWindowListener(new WindowListener() {
             public void windowActivated(WindowEvent event) {}
             public void windowClosed(WindowEvent event) {}
             public void windowClosing(WindowEvent event) {//выполнение операций сохранения данных из фрейма
-//                    Object[] options = { "Сохранить", "Не сохранять", "Не закрывать" };
-//                    int n = JOptionPane.showOptionDialog(event.getWindow(), "Сохранить изменения перед закрытиемокна?",
-//                                    "Вопрос", JOptionPane.YES_NO_OPTION,
-//                                    JOptionPane.QUESTION_MESSAGE, null, options,
-//                                    options[0]);
-//                    if (n == 0) {
-                if(sfd!=null) sfd.doIt();
+                int n = 1;
+                if(ich.is()){
+                    Object[] options = { "Сохранить", "Не сохранять", "Не закрывать" };
+
+                    n = JOptionPane.showOptionDialog(event.getWindow(), "Сохранить изменения?",
+                                    "Вопрос", JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE, null, options,
+                                    options[0]);
+                }
+                if (n == 2) return;
+                if(sfd!=null && n==0) sfd.doIt();
                 String title = frame.getTitle();
                 globVar.windReg.remove(title);
                 event.getWindow().setVisible(false);
                 frame.setVisible(false);
+                
             }
             public void windowDeactivated(WindowEvent event) {}
             public void windowDeiconified(WindowEvent event) {}
@@ -209,7 +241,9 @@ public class TableTools {//ссылка на таблицу, массив шир
             if(ins){ //если глобальнаяя структура доложна быть включена в список
                 if(plusList.contains(sigName)){ //проверяем, нет ли её в списке раскрытых структур
                     ArrayList<String> plusSigList = openSig(sigName); //если есть - раскрываем структуру
-                    for(String psl: plusSigList) if(!isInList(psl,archList,0)) list.addElement(psl);
+                    for(String psl: plusSigList) 
+                        if(!isInList(psl,archList,0)) 
+                            list.addElement(psl);
                 }else if(!isInList(sigName,archList,0)) list.addElement(sigName);
             }
         }
@@ -217,7 +251,9 @@ public class TableTools {//ссылка на таблицу, массив шир
     
     public static boolean isInList(String s, ArrayList<String[]> archList, int i){
         if(s==null || archList==null) return false;
-        for(String[] a: archList) if(a[i].equals(s)) return true;
+        for(String[] a: archList)
+            if(a[i].equals(s))
+                return true;
         return false;
     } 
 
@@ -238,5 +274,54 @@ public class TableTools {//ссылка на таблицу, массив шир
         if(sigList == null || sigList.isEmpty()) return list;
         for(Node n : sigList) list.add("– " + glibSigName + "." + sigSax.getDataAttr(n, "Name"));
         return list;
+    }
+    //---------Функция для исключения показываемых столбцов -----------------
+    public static boolean exeptCol(String s, String[] exCol) {
+        for(String e: exCol) if(e.equals(s)) return true;
+        return false;
+    }
+
+    public static void setWidthCols(String[] cols, ArrayList<String[]> fromDB, int[] colsWidth, int x) {
+        for(int i=0; i<cols.length; i++){
+            colsWidth[i] = cols[i].length();
+            for(String[] s: fromDB) if(colsWidth[i]<s[i].length()) colsWidth[i]= s[i].length();
+            colsWidth[i] = (colsWidth[i] + 1)*x;
+        }
+    }
+    public static void setAlignCols(String[] fromDB, int[] colsAlign) {
+        for(int i=0; i<colsAlign.length; i++)
+            if(fromDB[i].isEmpty())                                     colsAlign[i] = 0;
+            else if("-0123456789".contains(fromDB[i].substring(0, 1)))  colsAlign[i] = 1;
+            else                                                        colsAlign[i] = -1;
+    }
+    
+    public static void setColsEditor(String table, String[] cols, ArrayList<String[]> fromDB, JTable jTable1){
+        XMLSAX xml = new XMLSAX();
+        Node root = xml.readDocument("TableColumnSettings.xml");
+        ArrayList<Node> nl = xml.getHeirNode(root);
+        for(Node n: nl) if(table.contains(n.getNodeName())){
+            ArrayList<Node> nc = xml.getHeirNode(n);
+            for(Node c: nc){
+                for(int i=0; i < cols.length;i++){
+                    if(cols[i].equals(c.getNodeName())){
+                        String file = xml.getDataAttr(c, "file");
+                        String col = xml.getDataAttr(c, "col");
+                        XMLSAX list = new XMLSAX();
+                        Node listRoot = list.readDocument(file);
+                        ArrayList<Node> listNameNode = list.getHeirNode(listRoot);
+                        int ls = listNameNode.size();
+                        String[] listName = new String[ls];
+                        if(col.isEmpty()) 
+                            for(int j=0; j < ls; j++) 
+                                listName[j] = listNameNode.get(j).getNodeName();
+                        else              for(int j=0; j < ls; j++) listName[j] = list.getDataAttr(listNameNode.get(j),col);
+                        JComboBox<String> combo = new JComboBox<>(listName);// Раскрывающийся список
+                        DefaultCellEditor editor = new DefaultCellEditor(combo);// Редактор ячейки с раскрывающимся списком
+                        jTable1.getColumnModel().getColumn(i).setCellEditor(editor);    // Определение редактора ячеек для колонки    
+                    }
+
+                }
+            }
+        }
     }
 }

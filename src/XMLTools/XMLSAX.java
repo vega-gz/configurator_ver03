@@ -433,6 +433,9 @@ public class XMLSAX {
     }
 
     // --- Найти ноду по имени и ее атрибутам ---Lev---
+    public Node findNodeAtribute(String[] arg) {
+        return findNodeAtribute(root, arg);
+    }
     public Node findNodeAtribute(Node n, String[] arg) {
         if(arg==null || arg.length==0 || n==null) return null;
         String nameFindN = arg[0];// arg первое значение всегда Название ноды

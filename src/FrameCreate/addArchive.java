@@ -4,6 +4,8 @@ import DataBaseConnect.DataBase;
 import Generators.Generator;
 import Tools.SaveFrameData;
 import Tools.TableTools;
+import Tools.isCange;
+import Tools.setCange;
 import globalData.globVar;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class addArchive extends javax.swing.JFrame {
     ArrayList<String[]> archList;
     ArrayList<String> plusList = new ArrayList<>();
     String[] archTabCols = {"tagName","archType"};
-    boolean isChange = false;
+    boolean isChang = false;
     // Данные для таблиц
     private final String[] continueArchiv = new String[] {"0","x100","100","3600","31","true","нет","-1"};
     private final String[] jTableCols = new String[] {  "№","Наименование архива", 
@@ -94,7 +96,8 @@ public class addArchive extends javax.swing.JFrame {
             resetArchList();        //сохраняем изменения списака предназначенных к архивированию сигналов
             TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");//сохранение в БД списка сигналов 
         };
-        TableTools.setTableListener(this, sfd);
+        isCange ich = ()->{return isChang;};
+        TableTools.setTableListener(this, sfd, ich);
    }
     private void setPlusList(){
         for(int i=0; i < archList.size(); i++){
@@ -342,13 +345,13 @@ public class addArchive extends javax.swing.JFrame {
                     list2.addElement(list1.get(i-offset));
                     list1.remove(i-offset);
                     offset++;
-                    isChange = true;
+                    isChang = true;
                 }
             }else{
                 list2.addElement(list1.get(i-offset));
                 list1.remove(i-offset);
                 offset++;
-                isChange = true;
+                isChang = true;
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -361,7 +364,7 @@ public class addArchive extends javax.swing.JFrame {
             list2.remove(i-offset);
             offset++;
         }
-        isChange = true;
+        isChang = true;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -378,9 +381,9 @@ public class addArchive extends javax.swing.JFrame {
         TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
         resetArchList();
         TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");//сохранение в БД списка сигналов 
-        isChange = false;
+        isChang = false;
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    //Кнопка +
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         plusList.add(jList1.getSelectedValue());
         try {
@@ -428,20 +431,26 @@ public class addArchive extends javax.swing.JFrame {
             Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
-
+    //Кнопка "Приложение"
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int x = tableModel.getRowCount(); // Определяем, сколько у нас видов архивов
-        String[][] archTyps = new String[x][3]; // Создаём прямоугольный массив, что бы не таскать с собой всю структуру таблицы
-        for(int i=0;i<x;i++) {
-            archTyps[i][0] = tableModel.getValueAt(i, 0).toString();
-            archTyps[i][1] = tableModel.getValueAt(i, 2).toString();
-            archTyps[i][2] = tableModel.getValueAt(i, 3).toString();
-        } // переписываем данные из таблицы в массив
-        try {
-            Generator.GenArchive(archTyps, archList, abonent); // вызываем функцию генерации
-        } catch (IOException ex) {
-            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int[][] archTyps = new int[x][4]; // Создаём прямоугольный массив, что бы не таскать с собой всю структуру таблицы
+        int i = -1;
+        try{
+            for(i=0;i<x;i++) {
+                archTyps[i][0] = Integer.parseInt(tableModel.getValueAt(i, 0).toString()); //Номер типа архива
+                archTyps[i][1] = Integer.parseInt(tableModel.getValueAt(i, 2).toString()); //Периодичность архива
+                archTyps[i][2] = Integer.parseInt(tableModel.getValueAt(i, 3).toString()); //Кэш в секундах
+                archTyps[i][3] = Integer.parseInt(tableModel.getValueAt(i, 4).toString()); //Глубина в днях
+            } // переписываем данные из таблицы в массив
+            try {
+                Generator.GenArchive(archTyps, archList, abonent); // вызываем функцию генерации
+            } catch (IOException ex) {
+                Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Неправильно сконфигурирован архив № " + (i+1));
+        }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void resetArchList(){
