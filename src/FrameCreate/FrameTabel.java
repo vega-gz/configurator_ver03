@@ -190,7 +190,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         String retHMI = null;
         try {
-            retHMI = Generator.GenHMI(null);
+            retHMI = Generator.GenHMI(null,null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -256,7 +256,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int ret = 0;
         try {
-            ret= Generator.genSTcode(null, jCheckBox1.isSelected());
+            ret= Generator.genSTcode(null, jCheckBox1.isSelected(),null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

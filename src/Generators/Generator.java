@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -234,7 +235,7 @@ public class Generator {
         return hw.returnFirstFinedNode(hwRoot, "Crossconnect");
     }
 
-    public static int genSTcode(TableDB ft, boolean disableReserve) throws IOException{ //0 -ok, 1 - not source file, 2 -impossible create file
+    public static int genSTcode(TableDB ft, boolean disableReserve, JProgressBar jProgressBar1) throws IOException{ //0 -ok, 1 - not source file, 2 -impossible create file
         int casedial = JOptionPane.showConfirmDialog(null, "Генерировать Функции обработки и инициализации?"); // сообщение с выбором
         if(casedial != 0) return -2; //0 - yes, 1 - no, 2 - cancel
         FileManager fm = new FileManager();                                 //создали менеджер файлов
@@ -262,7 +263,7 @@ public class Generator {
         for(Node f: fileList){
             String commonFileST = (String) globVar.sax.getDataNode(f).get("src");
             String stFileName = abonent + subAb + "_" + commonFileST; //Для каждого файла
-            int ret = GenInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve,stFileName, abonent);
+            int ret = GenInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve,stFileName, abonent, jProgressBar1);
             if(ret!=0) return -1;
         }
         return 0;
@@ -276,7 +277,7 @@ public class Generator {
     }
     //================================================================================================================
     static int GenInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
-                  String stFileName, String abonent) throws IOException{
+                  String stFileName, String abonent, JProgressBar jProgressBar) throws IOException{
         String filePath = globVar.desDir + "\\" + "GenST";
         File d = new File(filePath);
         if(!d.isDirectory()){
@@ -326,7 +327,9 @@ public class Generator {
             if(fm.EOF) return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+"\\"+commonFileST+".txt"+" не найдена строка \""+start+"\"");
             fm.wr("//"+start+"\n");
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
+            int tsz = ft.tableSize() - 1;
             for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
+                if(jProgressBar!=null && tsz!=0) jProgressBar.setValue((int)(j*100.0/tsz));//Прогресс генерации
                 for(Node cont: blockCont){
                     String nodeName = cont.getNodeName();
                     if("Function".equals(nodeName)) createFunction(cont, fm, ft, abSubAb, disableReserve, j);
@@ -574,7 +577,7 @@ public class Generator {
         return 0;
     }
     
-    public static String GenHMI(TableDB ft) throws IOException {
+    public static String GenHMI(TableDB ft, JProgressBar jProgressBar) throws IOException {
         int casedial = JOptionPane.showConfirmDialog(null, "Листы мнемосхем для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if(casedial != 0) return ""; //0 - yes, 1 - no, 2 - cancel
         String targetFile;// = null;
@@ -703,6 +706,7 @@ public class Generator {
             boolean isAlarm = HMIcfg.getDataAttr(hmiNode, "isAlarm")!=null;
             //-------------------- начинаем цикл по строкам таблицы ------------------------------------
             for (int i = 0; i < ft.tableSize(); i++) {
+                if(jProgressBar!=null) jProgressBar.setValue((int)(i*100.0/ft.tableSize()));
                 String ruName = ft.getCell(nameCol, i);
                 if("".equals(ruName)) continue;
 //                if(!"".equals(ruName)){

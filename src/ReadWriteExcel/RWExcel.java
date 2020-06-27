@@ -3,19 +3,11 @@ package ReadWriteExcel;
 import XMLTools.XMLSAX;
 import Tools.FileManager;
 import globalData.globVar;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -207,7 +199,7 @@ public class RWExcel {
         //return null;
     }
 // --- сформировать даные из конфигугации XML для чтения Exel---Lev---
-    public static int ReadExelFromConfig(String pathExel) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
+    public static int ReadExelFromConfig(String pathExel, JProgressBar jpb) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
         FileInputStream inputStream = new FileInputStream(new File(pathExel));
         if(inputStream == null){
             FileManager.loggerConstructor("Не удалось открыть файл "+pathExel);
@@ -227,7 +219,10 @@ public class RWExcel {
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
         int tCnt = 0;
+        int maxCnt = nList.size()-1;
+        int nCnt = 0;
         for(Node n : nList){
+            if(jpb!=null) jpb.setValue((int)((nCnt++)*100.0/maxCnt));//Прогресс загрузки данных из екселя в БД
             //String tableName = n.getNodeName();
             String exSheetName1 = globVar.sax.getDataAttr(n, "excelSheetName");
             ArrayList<String> sheetList = new ArrayList<>();

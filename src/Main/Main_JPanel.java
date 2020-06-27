@@ -12,7 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Node;
 import DataBaseConnect.DataBase;
+import Generators.Generator;
 import ReadWriteExcel.RWExcel;
+import Tools.BackgroundThread;
+import Tools.DoIt;
 import XMLTools.XMLSAX;
 import java.awt.Dimension;
 import Tools.FileManager;
@@ -32,6 +35,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
     String filepatch, type;
+    File excel = null;
+    ProgressBar pb = null;
 
     public Main_JPanel(){
         globVar.DB = DataBase.getInstance();
@@ -341,28 +346,34 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(!Tools.isDB()) return;
-        int ret = 1;
         int casedial = JOptionPane.showConfirmDialog(null, "Загрузка в БД информации для абонента \"" + globVar.abonent+"\"");
-        if(casedial==0){
-            JFileChooser fileopen = new JFileChooser(globVar.desDir);
-            int ren = fileopen.showDialog(null, "Загрузка данных для "+globVar.abonent);
-            if (ren == JFileChooser.APPROVE_OPTION) {
-                File file = fileopen.getSelectedFile();// выбираем файл из каталога
-                //path = file.toString();
-                //excel.setPatchF(file.toString());
-                try {
-                    ret = RWExcel.ReadExelFromConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
-                } catch (IOException ex) {
-                    Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if(casedial!=0)return;
+        
+        JFileChooser fileopen = new JFileChooser(globVar.desDir);
+        int ren = fileopen.showDialog(null, "Загрузка данных для "+globVar.abonent);
+        if (ren == JFileChooser.APPROVE_OPTION) {
+            excel = fileopen.getSelectedFile();// выбираем файл из каталога
+        }
+        pb = new ProgressBar();
+        pb.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        pb.setTitle("Процесс загрузки данных из Excel");
+        pb.setVisible(true);
+
+        DoIt di = () -> {
+            int ret = 1;
+            try {
+                ret = RWExcel.ReadExelFromConfig(excel.getPath(),pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
-        if(ret>=0){
-	    JOptionPane.showMessageDialog(null, "В базу загружено " + ret +" таблиц");
-            jTree1.setModel(getModelTreeNZ());// обновить дерево
-        }
-        else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+            if(ret>=0){
+                JOptionPane.showMessageDialog(null, "В базу загружено " + ret +" таблиц");
+                jTree1.setModel(getModelTreeNZ());// обновить дерево
+            }else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+            pb.setVisible(false);
+         };
+        BackgroundThread bt = new BackgroundThread("Генерация HMI", di);
+        bt.start();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // --- Метод реагирования на выбор поля из списка таблиц ---

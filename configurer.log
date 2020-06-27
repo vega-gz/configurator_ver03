@@ -17,3 +17,6 @@
 18:41:52_2020.06.22	error PSQL request SELECT comments FROM user_tab_comments WHERE table_name = 'UPG_UPG_mb_AI';
 19:24:32_2020.06.22	error PSQL request SELECT comments FROM user_tab_comments WHERE table_name = 'UPG_UPG_mb_AI';
 12:56:58_2020.06.23	error PSQL request COMMENT ON COLUMN  "UPG_UPG_mb_AI.id" IS 'Comment for column';
+22:19:41_2020.06.27	Заливаем в таблицы абонента GPA данные из книги D:\Projects\Калининград_цех\CONF_FILE_KLN_PHG_GPA1c.xls
+22:25:00_2020.06.27	Заливаем в таблицы абонента GPA данные из книги D:\Projects\Калининград_цех\CONF_FILE_KLN_PHG_GPA1c.xls
+22:28:41_2020.06.27	Заливаем в таблицы абонента GPA данные из книги D:\Projects\Калининград_цех\CONF_FILE_KLN_PHG_GPA1c.xls

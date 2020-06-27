@@ -40,7 +40,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jProgressBar1" pref="218" max="32767" attributes="0"/>
+                  <Component id="jProgressBar1" pref="542" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -57,6 +57,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
