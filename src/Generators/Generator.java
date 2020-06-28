@@ -16,7 +16,7 @@ import org.w3c.dom.NodeList;
 
 public class Generator {
     @SuppressWarnings("empty-statement")
-    public static int genHW(TableDB ft) throws IOException {
+    public static int genHW(TableDB ft, JProgressBar jProgressBar) throws IOException {
         int casedial = JOptionPane.showConfirmDialog(null, "Генерировать привязки сигналов к аппаратным каналам?"); // сообщение с выбором
         if(casedial != 0) return -2; //0 - yes, 1 - no, 2 - cancel
         //---------------------------------------------- найти ноду с именем таблицы в файле конфигурации, и в этой ноде ноду GenData
@@ -120,7 +120,9 @@ public class Generator {
             }
         }
         //------ Проход по таблице ----------------
-        for (int j = 0; j < ft.tableSize(); j++) {
+        int jpgMax = ft.tableSize();
+        for (int j = 0; j < jpgMax; j++) {
+            if(jProgressBar!=null) jProgressBar.setValue((int)((j+1)*100.0/jpgMax));
             String tagName = ft.getCell("TAG_NAME_PLC", j);
             String comment = ft.getCell("Наименование", j);
             String device = ft.getCell("Устройство", j);
@@ -268,6 +270,7 @@ public class Generator {
         }
         return 0;
     }
+    
     static int CloseByErr(FileManager fm, String tmpFile, String err) throws IOException{
             FileManager.loggerConstructor(err);
             fm.closeRdStream();                                       //закрываем поток чтения
@@ -327,9 +330,9 @@ public class Generator {
             if(fm.EOF) return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+"\\"+commonFileST+".txt"+" не найдена строка \""+start+"\"");
             fm.wr("//"+start+"\n");
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
-            int tsz = ft.tableSize() - 1;
-            for (int j = 0; j < ft.tableSize(); j++) {                      //Цикл по всем строкам таблицы
-                if(jProgressBar!=null && tsz!=0) jProgressBar.setValue((int)(j*100.0/tsz));//Прогресс генерации
+            int tsz = ft.tableSize();
+            for (int j = 0; j < tsz; j++) {                      //Цикл по всем строкам таблицы
+                if(jProgressBar!=null && tsz!=0) jProgressBar.setValue((int)((j+1)*100.0/tsz));//Прогресс генерации
                 for(Node cont: blockCont){
                     String nodeName = cont.getNodeName();
                     if("Function".equals(nodeName)) createFunction(cont, fm, ft, abSubAb, disableReserve, j);
@@ -356,6 +359,7 @@ public class Generator {
         new File(tmpFile).delete();                          //Удаляем временный файл
         return 0;
     }
+    
     static int createString(Node args, FileManager fm, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException{
         ArrayList<Node> arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
         String tmp = "";
@@ -421,7 +425,7 @@ public class Generator {
         return "";
     }
 
-    public static int GenTypeFile(TableDB ft) throws IOException {//0-norm, -1 - not find node
+    public static int GenTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
         int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
         String backUpPath = globVar.backupDir + "\\";   //установили путь для бэкапа
@@ -452,7 +456,9 @@ public class Generator {
         Node prjRoot = prjSax.readDocument(filePath + "\\Project.prj");;
         Node interfaceList = prjSax.returnFirstFinedNode(prjRoot, "Globals");
         NodeList nodesGenData = nodeGenData.getChildNodes(); //получаем список нод внутри ГенДаты
-        for (int i = 0; i < nodesGenData.getLength(); i++) {//получил размерность ноды и начал цикл
+        int jpgMax = nodesGenData.getLength();
+        for (int i = 0; i < jpgMax; i++) {//получил размерность ноды и начал цикл
+            if(jProgressBar!=null) jProgressBar.setValue((int)((i+1)*100.0/jpgMax));
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Node currNodeCfgXML = nodesGenData.item(i);
                 ArrayList<Node> globSigList = globVar.sax.getHeirNode(currNodeCfgXML);//Находим все ноды внутри ноды типа файла
@@ -705,8 +711,9 @@ public class Generator {
             String nameCol = HMIcfg.getDataAttr(hmiNode, "ruName");
             boolean isAlarm = HMIcfg.getDataAttr(hmiNode, "isAlarm")!=null;
             //-------------------- начинаем цикл по строкам таблицы ------------------------------------
-            for (int i = 0; i < ft.tableSize(); i++) {
-                if(jProgressBar!=null) jProgressBar.setValue((int)(i*100.0/ft.tableSize()));
+            int jpgMax = ft.tableSize();
+            for (int i = 0; i < jpgMax; i++) {
+                if(jProgressBar!=null) jProgressBar.setValue((int)((i+1)*100.0/jpgMax));
                 String ruName = ft.getCell(nameCol, i);
                 if("".equals(ruName)) continue;
 //                if(!"".equals(ruName)){
@@ -853,14 +860,13 @@ public class Generator {
         }
         return ret;
     }
-    
-//Функция занесения переменных в интерфейсные листы приложений Сонаты
 // <Signal Name="GPA_DI_Settings" UUID="6DC2E85F4B6835B2209D6D8076F22EFF" Type="9D3CCA014F76318C4B750981ED2CEA67" Usage="" Global="TRUE" Comment="настройки дискретного канала" />
     static String getUUIDfromPrj(XMLSAX intFile, Node interfaceList, String Name, String who){
         String[] findArr = {"Signal","Name",Name};
         Node sig = intFile.findNodeAtribute(interfaceList, findArr);
         return intFile.getDataAttr(sig,who);
     }
+    //Функция занесения переменных в интерфейсные листы приложений Сонаты
     static String insertVarInPrj(XMLSAX intFile, Node interfaceList, String Name, String Type, String Comment, boolean global, boolean usage, 
             String uuid, String hwFileName, String backUpFile) throws IOException{
         String[] findArr = {"Signal","Name",Name};
@@ -1009,6 +1015,7 @@ public class Generator {
             }
         }
     }
+    
     private static void getHintParts(XMLSAX HMIcfg, Node hmiNode, ArrayList<String> hintAL){
         //ArrayList<String> hintAL = new ArrayList<>();
         Node hintNode = HMIcfg.returnFirstFinedNode(hmiNode, "Hint");

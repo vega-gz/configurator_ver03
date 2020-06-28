@@ -49,7 +49,7 @@ public class globVar {
         public static String dbURL = "";
         public static String USER = "";
         public static String PASS = "";
-        public static ArrayList<String> windReg = new ArrayList<>();
+        public static ArrayList<String> processReg = new ArrayList<>();
                 
 	public static void SetStatUUID() {
 		Date date = new Date();

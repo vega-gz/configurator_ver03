@@ -59,8 +59,8 @@ class ReadBedXML {
     void viewAllXML(Document document) {
         // Получаем корневой элемент
         Node root = document.getDocumentElement();
-        System.out.println("List of books:");
-        System.out.println();
+        //System.out.println("List of books:");
+        //System.out.println();
         // Просматриваем все подэлементы корневого - т.е. книги
         NodeList books = root.getChildNodes();
         for (int i = 0; i < books.getLength(); i++) {
@@ -68,7 +68,7 @@ class ReadBedXML {
             // Если нода не текст, то это книга - заходим внутрь
             if (book.getNodeType() != Node.TEXT_NODE) {
                 NodeList bookProps = book.getChildNodes();
-                System.out.println(books.getLength());
+                //System.out.println(books.getLength());
                 for (int j = 0; j < bookProps.getLength(); j++) {
                     Node bookProp = bookProps.item(j);
                     // Если нода не текст, то это один из параметров книги - печатаем
@@ -128,7 +128,7 @@ class ReadBedXML {
         result_data = sb.toString();
         // тут сразу и записываем для тестов видимо было
         long end_time = System.nanoTime();
-        System.out.println("time " + (end_time - start_time));
+        //System.out.println("time " + (end_time - start_time));
         return result_data; // возвращаем преобразованную строку 
     }
 

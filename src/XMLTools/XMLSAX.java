@@ -28,9 +28,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import DataBaseConnect.DataBase;
-import java.nio.file.Paths;
-import java.util.List;
 import javax.swing.JOptionPane;
 import Tools.FileManager;
 import globalData.globVar;
@@ -204,8 +201,7 @@ public class XMLSAX {
             NamedNodeMap startAttr = start.getAttributes();
             for (int i = 0; i < startAttr.getLength(); i++) {
                 Node attr = startAttr.item(i);//node str=strAttr.item(i);
-                System.out.println(" Attribute: " + attr.getNodeName()
-                        + " = " + attr.getNodeValue());
+                //System.out.println(" Attribute: " + attr.getNodeName()+ " = " + attr.getNodeValue());
             }
         }
         for (Node child = start.getFirstChild();
@@ -382,10 +378,10 @@ public class XMLSAX {
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
-            System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
+            //System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
                 if (n.getNodeName().equals(s)) {
-                    System.out.println("Find Node " + n.getNodeName());
+                    //System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
                 }

@@ -203,7 +203,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int ret = 1;
         try {
-            ret = Generator.GenTypeFile(null);
+            ret = Generator.GenTypeFile(null,null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -240,7 +240,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int retHW = 0;
         try {
-            retHW = Generator.genHW(null);
+            retHW = Generator.genHW(null,null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

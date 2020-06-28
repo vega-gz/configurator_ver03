@@ -346,6 +346,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(!Tools.isDB()) return;
+        String processName = "Процесс загрузки данных из Excel";
+        if(globVar.processReg.indexOf(processName)>=0){
+            JOptionPane.showMessageDialog(null, "Запуск нового процесса загрузки в БД данных из файла Excel заблокирован до окончания предыдущей загрузки");
+            return;
+        }
         int casedial = JOptionPane.showConfirmDialog(null, "Загрузка в БД информации для абонента \"" + globVar.abonent+"\"");
         if(casedial!=0)return;
         
@@ -355,8 +360,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
             excel = fileopen.getSelectedFile();// выбираем файл из каталога
         }
         pb = new ProgressBar();
-        pb.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        pb.setTitle("Процесс загрузки данных из Excel");
+        pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pb.setTitle(processName);
         pb.setVisible(true);
 
         DoIt di = () -> {
@@ -371,9 +376,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
             }else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
             pb.setVisible(false);
-         };
-        BackgroundThread bt = new BackgroundThread("Генерация HMI", di);
+            globVar.processReg.remove(processName);
+        };
+        BackgroundThread bt = new BackgroundThread(processName, di);
         bt.start();
+        globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // --- Метод реагирования на выбор поля из списка таблиц ---

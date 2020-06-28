@@ -1,10 +1,19 @@
 
 package Main;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 
 public class ProgressBar extends javax.swing.JFrame {
     public ProgressBar() {
     initComponents();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
+        int sizeWidth = this.getWidth();
+        int sizeHeight = this.getHeight();
+        int locationX = (screenSize.width - sizeWidth) / 2;
+        int locationY = (screenSize.height - sizeHeight) / 2;
+        this.setLocation(locationX, locationY);
     }
     
     @SuppressWarnings("unchecked")

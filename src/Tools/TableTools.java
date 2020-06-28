@@ -182,7 +182,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                 if (n == 2) return;
                 if(sfd!=null && n==0) sfd.doIt();
                 String title = frame.getTitle();
-                globVar.windReg.remove(title);
+                globVar.processReg.remove(title);
                 event.getWindow().setVisible(false);
                 frame.setVisible(false);
                 
@@ -192,7 +192,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             public void windowIconified(WindowEvent event) {}
             public void windowOpened(WindowEvent event) {// Регистрация фрейма в регистре
                 String title = frame.getTitle();
-                if(globVar.windReg.indexOf(title)<0) globVar.windReg.add(title);
+                if(globVar.processReg.indexOf(title)<0) globVar.processReg.add(title);
                 else frame.setVisible(false);
             }
         });
