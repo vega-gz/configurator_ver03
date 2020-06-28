@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Tools;
 
 import globalData.globVar;
 import java.io.File;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Lev
- */
+/*@author Lev*/
 public class Tools {
     public static boolean isDesDir(){
         File f = new File(globVar.desDir + "\\Design");

@@ -28,9 +28,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import DataBaseConnect.DataBase;
-import java.nio.file.Paths;
-import java.util.List;
 import javax.swing.JOptionPane;
 import Tools.FileManager;
 import globalData.globVar;
@@ -43,6 +40,7 @@ public class XMLSAX {
     Document document = null; // Глобальный документ с которым работаем
     String pathWF = "";
     ReadBedXML fixXML = null; // объект реализации обхода неверно сформированного файл
+    Node root = null;
     
     
     public Node importNode(Node n){
@@ -53,65 +51,63 @@ public class XMLSAX {
         document = null;
         pathWF = "";
         fixXML = null;
+        root = null;
     }
     // --- прочитать документ и передать корневую ноду ---
     public Node readDocument(String patchF) {
         pathWF = patchF;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(false);
-        //factory.setValidating(true);
-        //factory.setIgnoringElementContentWhitespace(true);
-        Node n = null; // это для корневой ноды но может и не надо
         try {
             fixXML = new ReadBedXML(patchF);
             String documenWithoutDoctype = fixXML.methodRead(patchF); // Так читаем и получаем преобразованные данные,
             InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
             document = factory.newDocumentBuilder().parse(stream);
-            n = document.getDocumentElement(); // Получаем корневой элемент
+            root = document.getDocumentElement(); // Получаем корневой элемент
 
         } catch (SAXException | InterruptedException | TransformerFactoryConfigurationError | IOException | ParserConfigurationException ex) {
             System.out.println(patchF + " - это не XML или ошибки в нём критические");
         }
-        return n;
+        return root;
     }
-    public Node readDocument1(String patchF) {
-        pathWF = patchF;
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(false);
-        //factory.setValidating(true);
-        //factory.setIgnoringElementContentWhitespace(true);
-        List<String> lines; // Лист с прочитанным файлом
-        boolean findErr = false; // если попали в ексепшен и дробим нашим парсером
-        try {
-            document = factory.newDocumentBuilder().parse(patchF);
-        } catch (IOException ex) {
-            System.out.println("Error read standart method XML, reding custom method " + Paths.get(patchF)); // выброс ошибок по файлу
-            findErr = true;
-        } catch (SAXException ex) {
-            System.out.println("Over error, all ride step to two !!!!"); // вот тут уже вызываем метод удаления DOCTYPE и тд если будет
-            findErr = true;
-        } catch (ParserConfigurationException ex) {
-            System.out.println("Standart parser down :(");
-            findErr = true; // так же как выше пробуем убирать DOCTYPE
-        }
-        Node n = null; // это для корневой ноды но может и не надо
-        if (findErr) { // Запускаем режим преобразования файлов только после Exception
-            try {
-                fixXML = new ReadBedXML(patchF);
-                String documenWithoutDoctype = fixXML.methodRead(patchF); // Так читаем и получаем преобразованные данные,
-                InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
-                document = factory.newDocumentBuilder().parse(stream);
-                n = document.getDocumentElement(); // Получаем корневой элемент
-
-            } catch (SAXException | InterruptedException | TransformerFactoryConfigurationError | IOException | ParserConfigurationException ex) {
-                System.out.println("Not file XML or bed remove data in file" + patchF + " !");
-            }
-
-        } else {
-            n = document.getDocumentElement(); // Получаем корневой элемент
-        }
-        return n;
-    }
+//    public Node readDocument11(String patchF) {
+//        pathWF = patchF;
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        factory.setNamespaceAware(false);
+//        //factory.setValidating(true);
+//        //factory.setIgnoringElementContentWhitespace(true);
+//        List<String> lines; // Лист с прочитанным файлом
+//        boolean findErr = false; // если попали в ексепшен и дробим нашим парсером
+//        try {
+//            document = factory.newDocumentBuilder().parse(patchF);
+//        } catch (IOException ex) {
+//            System.out.println("Error read standart method XML, reding custom method " + Paths.get(patchF)); // выброс ошибок по файлу
+//            findErr = true;
+//        } catch (SAXException ex) {
+//            System.out.println("Over error, all ride step to two !!!!"); // вот тут уже вызываем метод удаления DOCTYPE и тд если будет
+//            findErr = true;
+//        } catch (ParserConfigurationException ex) {
+//            System.out.println("Standart parser down :(");
+//            findErr = true; // так же как выше пробуем убирать DOCTYPE
+//        }
+//        Node n = null; // это для корневой ноды но может и не надо
+//        if (findErr) { // Запускаем режим преобразования файлов только после Exception
+//            try {
+//                fixXML = new ReadBedXML(patchF);
+//                String documenWithoutDoctype = fixXML.methodRead(patchF); // Так читаем и получаем преобразованные данные,
+//                InputStream stream = new ByteArrayInputStream(documenWithoutDoctype.getBytes(StandardCharsets.UTF_8));
+//                document = factory.newDocumentBuilder().parse(stream);
+//                n = document.getDocumentElement(); // Получаем корневой элемент
+//
+//            } catch (SAXException | InterruptedException | TransformerFactoryConfigurationError | IOException | ParserConfigurationException ex) {
+//                System.out.println("Not file XML or bed remove data in file" + patchF + " !");
+//            }
+//
+//        } else {
+//            n = document.getDocumentElement(); // Получаем корневой элемент
+//        }
+//        return n;
+//    }
 
     // --- Создание элемента Node  ---
     public Node createNode(String nameElement) {
@@ -148,7 +144,7 @@ public class XMLSAX {
 
     // --- Создание Документа  с root нодой---
     public Node createDocument(String nameElement) {
-        Node root = null;
+        //Node root = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(false);
@@ -205,8 +201,7 @@ public class XMLSAX {
             NamedNodeMap startAttr = start.getAttributes();
             for (int i = 0; i < startAttr.getLength(); i++) {
                 Node attr = startAttr.item(i);//node str=strAttr.item(i);
-                System.out.println(" Attribute: " + attr.getNodeName()
-                        + " = " + attr.getNodeValue());
+                //System.out.println(" Attribute: " + attr.getNodeName()+ " = " + attr.getNodeValue());
             }
         }
         for (Node child = start.getFirstChild();
@@ -375,14 +370,18 @@ public class XMLSAX {
        parentN.removeChild(n);
     }
 
-    // --- Найти первую ноду по имени и вернуть ее нижний.верхний регистр игнорирую ---
+    // --- Найти первую ноду по имени и вернуть ее ---
+    public Node returnFirstFinedNode(String s) {
+        return returnFirstFinedNode(root,s);
+    }
+    // --- Найти первую ноду по имени и вернуть ее ---
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
-            System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
+            //System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
                 if (n.getNodeName().equals(s)) {
-                    System.out.println("Find Node " + n.getNodeName());
+                    //System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
                 }
@@ -430,6 +429,9 @@ public class XMLSAX {
     }
 
     // --- Найти ноду по имени и ее атрибутам ---Lev---
+    public Node findNodeAtribute(String[] arg) {
+        return findNodeAtribute(root, arg);
+    }
     public Node findNodeAtribute(Node n, String[] arg) {
         if(arg==null || arg.length==0 || n==null) return null;
         String nameFindN = arg[0];// arg первое значение всегда Название ноды

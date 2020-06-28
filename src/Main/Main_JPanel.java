@@ -12,7 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Node;
 import DataBaseConnect.DataBase;
+import Generators.Generator;
 import ReadWriteExcel.RWExcel;
+import Tools.BackgroundThread;
+import Tools.DoIt;
 import XMLTools.XMLSAX;
 import java.awt.Dimension;
 import Tools.FileManager;
@@ -32,6 +35,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
     String filepatch, type;
+    File excel = null;
+    ProgressBar pb = null;
 
     public Main_JPanel(){
         globVar.DB = DataBase.getInstance();
@@ -60,11 +65,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jOptionPane1 = new javax.swing.JOptionPane();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jFileChooser1 = new javax.swing.JFileChooser();
-        jPanel1 = new javax.swing.JPanel();
         jFrameTable = new javax.swing.JFrame();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -87,28 +87,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTree1 = new javax.swing.JTree(getModelTreeNZ());
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
-
-        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         jFrameTable.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -233,10 +216,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/VegaConLogo.png"))); // NOI18N
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
+        jMenu2.setText("Настройки");
 
         jMenuItem1.setText("сменить папку проекта");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -366,28 +346,41 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(!Tools.isDB()) return;
-        int ret = 1;
+        String processName = "Процесс загрузки данных из Excel";
+        if(globVar.processReg.indexOf(processName)>=0){
+            JOptionPane.showMessageDialog(null, "Запуск нового процесса загрузки в БД данных из файла Excel заблокирован до окончания предыдущей загрузки");
+            return;
+        }
         int casedial = JOptionPane.showConfirmDialog(null, "Загрузка в БД информации для абонента \"" + globVar.abonent+"\"");
-        if(casedial==0){
-            JFileChooser fileopen = new JFileChooser(globVar.desDir);
-            int ren = fileopen.showDialog(null, "Загрузка данных для "+globVar.abonent);
-            if (ren == JFileChooser.APPROVE_OPTION) {
-                File file = fileopen.getSelectedFile();// выбираем файл из каталога
-                //path = file.toString();
-                //excel.setPatchF(file.toString());
-                try {
-                    ret = RWExcel.ReadExelFromConfig(file.getPath()); // вызов фукции с формированием базы по файлу конфигурации
-                } catch (IOException ex) {
-                    Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if(casedial!=0)return;
+        
+        JFileChooser fileopen = new JFileChooser(globVar.desDir);
+        int ren = fileopen.showDialog(null, "Загрузка данных для "+globVar.abonent);
+        if (ren == JFileChooser.APPROVE_OPTION) {
+            excel = fileopen.getSelectedFile();// выбираем файл из каталога
+        }
+        pb = new ProgressBar();
+        pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pb.setTitle(processName);
+        pb.setVisible(true);
+
+        DoIt di = () -> {
+            int ret = 1;
+            try {
+                ret = RWExcel.ReadExelFromConfig(excel.getPath(),pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        jComboBox1.setModel(getComboBoxModel());//если мы сделам ваот так чтобыникто не узнал
-        if(ret>=0){
-	    JOptionPane.showMessageDialog(null, "В базу загружено " + ret +" таблиц");
-            jTree1.setModel(getModelTreeNZ());// обновить дерево
-        }
-        else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+            if(ret>=0){
+                JOptionPane.showMessageDialog(null, "В базу загружено " + ret +" таблиц");
+                jTree1.setModel(getModelTreeNZ());// обновить дерево
+            }else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+            pb.setVisible(false);
+            globVar.processReg.remove(processName);
+        };
+        BackgroundThread bt = new BackgroundThread(processName, di);
+        bt.start();
+        globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // --- Метод реагирования на выбор поля из списка таблиц ---
@@ -433,7 +426,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         String nameBD = globVar.DB.getCurrentNameBase();
         String userBD = globVar.DB.getCurrentUser();
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
-        String message = null;
+        //String message = null;
         if (nameBD != null) {
             JOptionPane.showMessageDialog(null, "Подключено к базе " + nameBD + " пользователем " + userBD);
         }
@@ -466,34 +459,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- реакция на события меню ---
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        int ren = jFileChooser1.showDialog(null, "папка с проектом");
-        if (ren == JFileChooser.APPROVE_OPTION) {
-            globVar.desDir = jFileChooser1.getSelectedFile().toString(); // установить новый путь 
-            this.setTitle("Текущая база:" + globVar.currentBase + " путь " + globVar.desDir); // установить заголовок
-        }
+        setDesDirPath();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 //---------- Изменение пути к рабочему каталогу --------------------------
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        JFileChooser fileload = new JFileChooser(new File(globVar.desDir));
-        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
-        //int x = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
-        if (fileload.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            try {
-                String newPath = fileload.getSelectedFile().getCanonicalPath();
-                if (!newPath.equals(globVar.desDir)) {
-                    XMLSAX cfgSax = new XMLSAX();
-                    Node cfgSaxRoot = cfgSax.readDocument("Config.xml");
-                    Node desDir = cfgSax.returnFirstFinedNode(cfgSaxRoot, "DesignDir");
-                    desDir.setTextContent(newPath);
-                    cfgSax.writeDocument("Config.xml");
-                    globVar.desDir = newPath;
-                }
-                jTextField1.setText(globVar.desDir);
-                // TODO add your handling code here:
-            } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        setDesDirPath();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     // --- событие на закрытие окна ---
@@ -620,45 +590,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // --- метод отображения фрейма таблицы ---
     public void showTable(String table){
         if(!Tools.isDB()) return;
-        for (String nT : globVar.DB.getListTable()) { // проверка есть ли такая таблица в базе
-            if (nT.equals(table)) {
-                List<String> listColumn = globVar.DB.selectColumns(table);
-                ArrayList<String> columns = new ArrayList<>();
-                String tmpStr = " ";
-                for (String s : listColumn) { // ограничение что не выводим из столбцов
-                    String[] remCol = {"UUID", "uuid"}; // список исключений
-                    boolean find = false;
-                    for (String rC : remCol) {
-                        if (rC.equals(s)) {
-                            find = true;
-                            break;
-                        }
-                    }
-                    if (find) {
-                        find = false;
-                        continue;
-                    } else {
-                        columns.add(s); // конечный список столбцов к запросу базы
-                    }
-                }
-                String selectElem = (String) jComboBox1.getSelectedItem();//j String комбо бок
-
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
-                int sizeWidth = 800;
-                int sizeHeight = 600;
-                int locationX = (screenSize.width - sizeWidth) / 2;
-                int locationY = (screenSize.height - sizeHeight) / 2;//это размещение 
-                FrameTabel frameTable = new FrameTabel(table, columns); // Вызов класса Название таблицы и данные для нее
-                jFrameTable = new javax.swing.JFrame();
-                jFrameTable.add(frameTable); // с заголовком имя таблицы
-                jFrameTable.setTitle(table + " " + globVar.DB.getCommentTable(table)); // установить заголовок имя таблицы и если есть ее коммент
-                jFrameTable.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
-                jFrameTable.setContentPane(frameTable); // Передаем нашу форму
-                jFrameTable.setVisible(true);
-
-            }
-        }
-
+        if(!globVar.DB.isTable(table)) return;
+        TableDB tdb = new TableDB(table);
+        tdb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        tdb.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -671,30 +606,52 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JOptionPane jOptionPane1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
+
+    private boolean exeptCol(String s, String[] exCol) {
+        for(String e: exCol) if(e.equals(s)) return true;
+        return false;
+    }
+    
+    private void setDesDirPath(){
+        JFileChooser fileload = new JFileChooser(new File(globVar.desDir));
+        fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
+        //int x = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
+        if (fileload.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                String newPath = fileload.getSelectedFile().getCanonicalPath();
+                if (!newPath.equals(globVar.desDir)) {
+                    XMLSAX cfgSax = new XMLSAX();
+                    Node cfgSaxRoot = cfgSax.readDocument("Config.xml");
+                    Node desDir = cfgSax.returnFirstFinedNode(cfgSaxRoot, "DesignDir");
+                    desDir.setTextContent(newPath);
+                    cfgSax.writeDocument("Config.xml");
+                    globVar.desDir = newPath;
+                }
+                jTextField1.setText(globVar.desDir);
+                // TODO add your handling code here:
+            } catch (IOException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
 
 // Класс Слушатель выделения узла в дереве

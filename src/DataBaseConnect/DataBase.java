@@ -6,15 +6,17 @@ import Tools.Observed;
 import Tools.Observer;
 import Tools.StrTools;
 import XMLTools.UUID;
-import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -42,11 +44,11 @@ public class DataBase implements Observed {
 
     //  синглтон не нужен а вот нужен
     public static DataBase getInstance() { // #3 static
-        int ret=0;
+        //ret=0;
         if (instance == null) {		//если объект еще не создан
             instance = new DataBase();	//создать новый объект
         }
-        ret = instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
+        int ret = instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
         if(ret==0)return instance;		// вернуть ранее созданный объект
         else return null;
     }
@@ -124,6 +126,8 @@ public class DataBase implements Observed {
     }
     //-------------- Проверка наличия в БД таблицы с заданным именем -Lev----
     public boolean isTable(String name){
+        ArrayList<String> list = getListTable();
+        if(list==null || list.isEmpty()) return false;
         for(String s: getListTable()){ // Получаем список таблиц и пробежимся сравнивая их
             if(name.equalsIgnoreCase(s)) return true;
         }
@@ -239,7 +243,8 @@ public class DataBase implements Observed {
             return;
         }
     }
-    public void createTableEasy(String name_table,  String[] listNameColum, String comment) {
+    
+    public void createTableEasy(String name_table,  String[] listNameColum,  ArrayList<String>  comment) {
         if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
         String sql = "";
         try {
@@ -254,8 +259,39 @@ public class DataBase implements Observed {
             System.out.println("Easy table " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
-            createCommentTable(name_table, comment); // вызом метода добавления комментария
-
+            if(comment!=null && !comment.isEmpty()) createCommentTable(name_table, comment.get(0)); // вызом метода добавления комментария
+            for(int i = 1; i<comment.size();i++){
+                String s = comment.get(i);
+                int x = s.indexOf("colName:");
+                int y = s.indexOf(", comment:");
+                if(x>=0 && y>=0){
+                    String colName = s.substring(x+8, y).trim();
+                    String comm = s.substring(y+10);
+                    createCommentColumn(name_table, colName, comm);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed CREATE TABLE");
+            System.out.println(sql); // смотрим какой запрос на соз
+            e.printStackTrace();
+        }
+    }
+    public void createTableEasy(String name_table,  String[] listNameColum,  String  comment) {
+        if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
+        String sql = "";
+        try {
+            //connection.setAutoCommit(true);
+            stmt = connection.createStatement();
+            sql = "CREATE TABLE \"" + name_table + "\" (id INTEGER";
+            int start = 0;
+            if("id".equalsIgnoreCase(listNameColum[0]) || "№".equals(listNameColum[0])) start = 1;
+            for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\" TEXT";
+            sql += ");";
+            
+            System.out.println("Easy table " + sql); // смотрим какой запрос на соз
+            stmt.executeUpdate(sql);
+            stmt.close();
+            if(comment!=null && !comment.isEmpty()) createCommentTable(name_table, comment); // вызом метода добавления комментария
         } catch (SQLException e) {
             System.out.println("Failed CREATE TABLE");
             System.out.println(sql); // смотрим какой запрос на соз
@@ -565,33 +601,6 @@ public class DataBase implements Observed {
     }
    
             
-    //--------------- SELECT DATA to CreateTGPAAI тоже тестовое?--------------
-    ArrayList<String[]> selectDataGPAAI(String table) {
-        //connectionToBase(); // вызов Фукция подключения к базе
-        ArrayList<String[]> selectData = new ArrayList<>();
-        try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM " + "\"" + table + "\"" + ";");
-            while (rs.next()) {
-                String TypeADC = rs.getString("Tag name"); // должы выбирать
-                String id = rs.getString("uuid_plc");
-                String nsign = rs.getString("Наименование сигнала");
-                String[] strfromtb = {TypeADC, id, nsign};
-                selectData.add(strfromtb);
-                //System.out.println(String.format("ID=%s NAME=%s AGE=%s ADDRESS=%s SALARY=%s UM=%s TYPEADC=%s A1=%s A2=%s" ,id,name,age,address,salary,UM,TypeCh,TypeADC,addres1,addres2));
-            }
-            rs.close();
-            stmt.close();
-            //connection.commit();
-            System.out.println("-- Operation SELECT done successfully");
-        } catch (SQLException e) {
-            System.out.println("Failed ADD data");
-            e.printStackTrace();
-            //return;
-        }
-        return selectData;
-    }
-
     //-------------- Удаление списка таблиц ---------------
     public void dropTable(ArrayList<String> listT) {
         //connectionToBase(); // вызов Фукция подключения к базе
@@ -616,6 +625,25 @@ public class DataBase implements Observed {
         }
     }
 
+    //-------------- Удаление таблицы c сохранением резервной копии ---------------
+    public int createDelTable(String nameT) {
+        if(!globVar.DB.isTable(nameT)) return -1;
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH_mm_ss_dd_MM_yy");
+        String dt = formatForDateNow.format(new Date());
+        //connectionToBase(); // вызов Фукция подключения к базе ALTER TABLE products RENAME TO items;
+        try {
+            stmt = connection.createStatement();
+            String sql = "ALTER TABLE \""+ nameT +"\" RENAME TO \"Del_"+dt+"_"+nameT+"\";";
+            stmt.executeUpdate(sql);
+            System.out.println("Del_"+dt+"_"+nameT + " RENAME successfully");
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed RENAME TABLE");
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
+    }
     //-------------- Удаление конкретной таблицы  ---------------
     public void dropTable(String nameT) {
         if(!globVar.DB.isTable(nameT)) return;
@@ -680,7 +708,9 @@ public class DataBase implements Observed {
         } catch (SQLException e) {
             System.out.println("Failed WIEW TABLE BASE");
             e.printStackTrace();
+            return null;
         }
+        if(list_table_base.isEmpty()) return null;
         return list_table_base;
     }
     
@@ -761,9 +791,23 @@ public class DataBase implements Observed {
     public void createCommentTable(String table, String comment){
         String sql = null;   
         try {
-            sql = "COMMENT ON TABLE  " + "\"" + table + "\"" + " IS " +"'" +comment +"'" +";";
-            //System.out.println(sql);
             stmt = connection.createStatement();
+            sql = "COMMENT ON TABLE \"" + table + "\" IS '" +comment +"'" +";";
+            //System.out.println(sql);
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            e.printStackTrace();
+        }
+    }
+   // --- добавить комментарий к столюцу ---
+    public void createCommentColumn(String table, String col, String comment){
+        String sql = null;   
+        try {
+            stmt = connection.createStatement();
+            sql = "COMMENT ON COLUMN \""+table+"\".\""+col+"\" IS 'colName:"+col+", comment:"+comment+"'" +";";
+            //System.out.println(sql);
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
@@ -773,23 +817,42 @@ public class DataBase implements Observed {
     }
     
     // --- получить комментарии таблицы ---
-    public String getCommentTable(String table_name){
+    public ArrayList<String>  getCommentList(String table_name){
         String sql = null; 
-        String comment = null;
-        ArrayList<String> listColumn = new ArrayList<>();
+        //String comment = null;
+        ArrayList<String> listComm = new ArrayList<>();
         try {
             stmt = connection.createStatement();
-            sql = "SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid"
-                    + " where relname = '" +table_name+ "';"; // такой запрос нам нечего не возвращает
+            sql = "SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = '" +table_name+ "';";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                comment = rs.getString("description");
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int q = rsmd.getColumnCount();
+                for(int i = 1; i<=q; i++) 
+                    listComm.add(rs.getString(i));
             }           
             stmt.close();
             rs.close();
         } catch (SQLException e) {
             FileManager.loggerConstructor("error PSQL request " + sql);
-            //e.printStackTrace();
+            return null;
+        }
+        return listComm;
+    }
+    // --- получить комментарии таблицы ---
+    public String getCommentTable(String table_name){
+        String sql = null; 
+        String comment = null;
+        try {
+            stmt = connection.createStatement();
+            sql = "SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = '" +table_name+ "';"; 
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            comment = rs.getString("description");
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
         }
         return comment;
     }

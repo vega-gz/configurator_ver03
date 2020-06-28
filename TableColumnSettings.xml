@@ -1,0 +1,5 @@
+<TableColumnSettings>
+	<mb_A>
+		<dataType file="ModbusFormat.xml" col=""/>
+	</mb_A>
+</TableColumnSettings>
