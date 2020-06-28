@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import globalData.globVar;
 
 /**

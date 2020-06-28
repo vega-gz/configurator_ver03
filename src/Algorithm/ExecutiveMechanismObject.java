@@ -5,7 +5,7 @@
  */
 package Algorithm;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import FrameCreate.TaskBarFrame;
 import XMLTools.XMLSAX;
 import globalData.globVar;

@@ -1,6 +1,6 @@
 package Tools;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;

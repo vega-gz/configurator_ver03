@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+<!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых-->
 <ConfigSignals>
 	<AI excelSheetName="AI" Comment="Аналоговые входы">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода-->
-            <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-            <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
-            <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
+            <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/><!--Обязательный нода-->
+            <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/><!--Обязательный нода-->
+            <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/><!--Обязательный нода-->
             <J nameColumnPos="Тип_датчика" default="KM04_4_20mA"/>
             <T nameColumnPos="Точность"  type="Int" default="2"/>
             <U nameColumnPos="АЦПmin" swt="Тип_датчика" default="2.0">
@@ -219,7 +219,7 @@
 		</GenCode>
 		<GenHW hwDriver="KM_04" drvFile="_FI_DRV" globData="_FI_DRV"/>
 	</Fi>
-	<SetPoints excelSheetName="ANB" Comment="Уставки аналоговых параметров">
+	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров">
 		<GenData>
 			<T_ANB Type="BOOL"/>
 			<T_GPA_SP_Settings Type="T_SP_Settings"/>
@@ -238,7 +238,7 @@
             <B nameColumnPos="Наименование" add1="типПостфикс" add2="директПостфикс"/>
             <F nameColumnPos="TAG_NAME_PLC" add1="TAG_NAME_AnPar" add2="typePostfix" add3="directPostfix"/>
         </EXEL>
-	</SetPoints>
+	</ANB>
 	<AO excelSheetName="AO" Comment="Аналоговые выходы">
 		<GenData>
 			<AO_DRV Type="REAL">
@@ -318,7 +318,7 @@
 		</GenCode>
 		<GenHW hwDriver="KM_04" drvFile="_AO_DRV" globData="_AO_DRV"/>
 	</AO>
-	<DGI excelSheetName="DGI" Comment="Дискретные входы">
+	<DI excelSheetName="DI" Comment="Дискретные входы">
 		<GenData>
 			<DI_DRV Type="BOOL">
 				<globData name="DI_DRV">
@@ -400,8 +400,8 @@
 			</File>
 		</GenCode>
 		<GenHW hwDriver="KM_04" drvFile="_DI_DRV" globData="_DI_DRV"/>
-	</DGI>
-	<DGO excelSheetName="DGO" Comment="Дискретные выходы">
+	</DI>
+	<DO excelSheetName="DO" Comment="Дискретные выходы">
 		<GenData>
 			<DO_DRV Type="BOOL">
 				<globData name="DO_DRV">
@@ -459,7 +459,7 @@
 			</File>
 		</GenCode>
 		<GenHW hwDriver="KM_04" drvFile="_DO_DRV" globData="_DO_DRV"/>
-	</DGO>
+	</DO>
 	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Modbus: ">
         <EXEL info="R1C2">
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->

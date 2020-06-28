@@ -1,6 +1,6 @@
 package FrameCreate;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import Main.Main_JPanel;
 import XMLTools.XMLSAX;
 import globalData.globVar;

@@ -5,7 +5,7 @@
  */
 package globalData;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import Tools.StrTools;
 import XMLTools.XMLSAX;
 import Tools.FileManager;

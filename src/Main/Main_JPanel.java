@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Node;
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import Generators.Generator;
 import ReadWriteExcel.RWExcel;
 import Tools.BackgroundThread;

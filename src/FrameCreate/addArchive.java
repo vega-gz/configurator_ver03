@@ -1,11 +1,13 @@
 package FrameCreate;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import Generators.Generator;
+import Tools.BackgroundThread;
+import Tools.DoIt;
+import Tools.MyTableModel;
 import Tools.SaveFrameData;
 import Tools.TableTools;
 import Tools.isCange;
-import Tools.setCange;
 import globalData.globVar;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,13 +19,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class addArchive extends javax.swing.JFrame {
     DefaultListModel list1 = new DefaultListModel();
     DefaultListModel list2 = new DefaultListModel();
-    DefaultTableModel tableModel = new DefaultTableModel();
+    MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
     String abonent = globVar.abonent;
     int prevArch = 0;
@@ -33,14 +34,11 @@ public class addArchive extends javax.swing.JFrame {
     String[] archTabCols = {"tagName","archType"};
     boolean isChang = false;
     // Данные для таблиц
-    private final String[] continueArchiv = new String[] {"0","x100","100","3600","31","true","нет","-1"};
+    private final String[] continueArchiv = new String[] {"0","x100","100","30","31"};
     private final String[] jTableCols = new String[] {  "№","Наименование архива", 
-                                                            "<HTML><BODY>Периодичность<br/>[мсек]</BODY></HTML>", 
-                                                            "<HTML><BODY>Кэш<br/>[сек]</BODY></HTML>", 
-                                                            "<HTML><BODY>Длительность<br/>[дни]</BODY></HTML>",
-                                                            "Сигнал записи",
-                                                            "Останавливать",
-                                                            "Количество"
+                                                            "<HTML><BODY align=\"center\">Периодичность<br/>[мсек]</BODY></HTML>", 
+                                                            "<HTML><BODY align=\"center\">Кэш<br/>[сек]</BODY></HTML>", 
+                                                            "<HTML><BODY align=\"center\">Длительность<br/>[дни]</BODY></HTML>"
     };
 
     public addArchive() {
@@ -63,14 +61,10 @@ public class addArchive extends javax.swing.JFrame {
         
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel);
         //int qCol = jTableCols.length;
-        int[] colWidth = {25,160,100,100,100,100,100,80};//new int[qCol];
-        int[] align = {1,-1,0,0,0,0,0,0};//new int[qCol];
+        int[] colWidth = {25,160,100,50,100};//new int[qCol];
+        int[] align = {1,0,0,0,0};//new int[qCol];
         
         TableTools.setTableSetting(jTable1, colWidth, align, 40);
-        
-        JComboBox<String> combo = new JComboBox<>(new String[] { "время", "сигнал", "нет"});// Раскрывающийся список
-        DefaultCellEditor editor = new DefaultCellEditor(combo);// Редактор ячейки с раскрывающимся списком
-        jTable1.getColumnModel().getColumn(6).setCellEditor(editor);    // Определение редактора ячеек для колонки    
         
         String[] archiveTyps = new String[jTable1.getRowCount()];
         for(int i = 0; i < jTable1.getRowCount(); i++){
@@ -98,6 +92,7 @@ public class addArchive extends javax.swing.JFrame {
         };
         isCange ich = ()->{return isChang;};
         TableTools.setTableListener(this, sfd, ich);
+        jSplitPane1.setDividerLocation(100);
    }
     private void setPlusList(){
         for(int i=0; i < archList.size(); i++){
@@ -149,12 +144,12 @@ public class addArchive extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jSplitPane1.setDividerLocation(150);
+        jSplitPane1.setDividerSize(10);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         jTable1.setModel(tableModel);
@@ -242,7 +237,7 @@ public class addArchive extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -284,13 +279,7 @@ public class addArchive extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        jProgressBar1.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,32 +293,35 @@ public class addArchive extends javax.swing.JFrame {
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton1)
-                        .addGap(133, 133, 133)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1)
-                    .addComponent(jButton1)))
+                    .addComponent(jButton1)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Кнопка ">"
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int[] x = jList1.getSelectedIndices();
         int offset = 0;
@@ -355,7 +347,7 @@ public class addArchive extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    //Кнопка "<"
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int[] x = jList2.getSelectedIndices();
         int offset = 0;
@@ -376,14 +368,14 @@ public class addArchive extends javax.swing.JFrame {
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
     }//GEN-LAST:event_jTable1MousePressed
-
+    //Кнопка "Сохранить"
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
         resetArchList();
         TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");//сохранение в БД списка сигналов 
         isChang = false;
     }//GEN-LAST:event_jButton6ActionPerformed
-    //Кнопка +
+    //Кнопка "+"
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         plusList.add(jList1.getSelectedValue());
         try {
@@ -392,7 +384,7 @@ public class addArchive extends javax.swing.JFrame {
             Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
-
+    //Кнопка "-"
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String s = jList1.getSelectedValue();
         int x = s.indexOf(".");
@@ -405,9 +397,8 @@ public class addArchive extends javax.swing.JFrame {
         x = list1.indexOf(s);
         if(x>=0) jList1.setSelectedIndex(x);
     }//GEN-LAST:event_jButton8ActionPerformed
-
+    //Кнопка ">" для выбора типа архива
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //resetArchList();
         int x = prevArch+1;
         if(x>=jComboBox1.getItemCount()) x = 0;
         jComboBox1.setSelectedIndex(x);//сохранем выбранный пункт типа архива
@@ -443,11 +434,27 @@ public class addArchive extends javax.swing.JFrame {
                 archTyps[i][2] = Integer.parseInt(tableModel.getValueAt(i, 3).toString()); //Кэш в секундах
                 archTyps[i][3] = Integer.parseInt(tableModel.getValueAt(i, 4).toString()); //Глубина в днях
             } // переписываем данные из таблицы в массив
-            try {
-                Generator.GenArchive(archTyps, archList, abonent); // вызываем функцию генерации
-            } catch (IOException ex) {
-                Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+            String processName = "Генерация из таблицы";
+            if(globVar.processReg.indexOf(processName)>=0){
+                JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
+                return;
             }
+            DoIt di = () -> {
+                int ret = -1;
+                try {
+                    ret = Generator.GenArchive(archTyps, archList, abonent, jProgressBar1); // вызываем функцию генерации
+                } catch (IOException ex) {
+                    Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+                else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+                
+                globVar.processReg.remove(processName);
+                jProgressBar1.setValue(0);
+             };
+            BackgroundThread bt = new BackgroundThread("Генерация .type", di);
+            bt.start();
+            globVar.processReg.add(processName);
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Неправильно сконфигурирован архив № " + (i+1));
         }        
@@ -509,10 +516,8 @@ public class addArchive extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

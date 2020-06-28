@@ -9,6 +9,7 @@ import globalData.globVar;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Node;
@@ -900,7 +901,7 @@ public class Generator {
         return uuid;
     }
 
-    public static int GenArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent) throws IOException {
+    public static int GenArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
         String appName = abonent + "_" + "Archive";
         XMLSAX archSax = new XMLSAX();
         Node archRoot = archSax.readDocument(globVar.desDir + "\\Design\\" + appName +".arc_cfg");
@@ -908,21 +909,54 @@ public class Generator {
             FileManager.loggerConstructor("Не удалось прочитать файл \"" + globVar.desDir + "\\Design" + appName +".arc_cfg" + "\"");
             return -1;
         }
-        
         XMLSAX bigSax = new XMLSAX();
         Node bigRoot = bigSax.readDocument(globVar.desDir + "\\Design\\Project.prj");
         if (bigRoot == null) {
             FileManager.loggerConstructor("Не найден файл проекта "+globVar.desDir + "\\Design\\Project.prj");
             return -1;
+        }
+        XMLSAX cfgSax = new XMLSAX();
+        Node cfgRoot = cfgSax.readDocument("ArchiveConfig.xml");
+        if (cfgRoot == null) {
+            FileManager.loggerConstructor("Не найден файл "+globVar.myDir + "\\ArchiveConfig.xml");
+            return -1;
+        }
+        HashMap trendAttr = cfgSax.getDataNode(cfgSax.returnFirstFinedNode("Trend"));
+        ArrayList<Node> colorList = cfgSax.getHeirNode(cfgSax.returnFirstFinedNode("TableColor"));
+        
+        XMLSAX hmiSax = new XMLSAX();
+        Node hmiRoot = hmiSax.readDocument(globVar.desDir + "\\Design\\AT_HMI.iec_hmi");
+        if (hmiRoot == null) {
+            FileManager.loggerConstructor("Не найден файл "+globVar.desDir + "\\Design\\AT_HMI.iec_hmi");
+            return -1;
         }//Если не вылетели - значит будет генерация
+        String trendSheetName = abonent + "_Trend";
+        //trendNode = hmiSax.findNodeAtribute(new String[]{"WindowFBType","Name",trendSheetName});
+        String trendSheetUUID = hmiSax.getDataAttr(hmiSax.findNodeAtribute(new String[]{"WindowFBType","Name",trendSheetName}), "UUID");
+
+        hmiSax.clear();
+        
+        hmiSax.readDocument("Mnemo_Trend.txt");
+        Node trendNode = hmiSax.returnFirstFinedNode("WindowFBType");
+        hmiSax.setDataAttr(trendNode, "Name", trendSheetName);
+        if(trendSheetUUID!=null)hmiSax.setDataAttr(trendNode, "UUID", trendSheetUUID);
+        //trendNode = hmiSax.findNodeAtribute(new String[]{"FB","Name","TREND_WINDOW"});//FB Name="TREND_WINDOW"
+        trendNode = hmiSax.returnFirstFinedNode(hmiSax.findNodeAtribute(new String[]{"FB","Name","TREND_WINDOW"}), "Data");//Аццкие сонатоиды! Корневая нода и нода с трендами называются одинаково
+
+        String[] attr = new String[3];
+        ArrayList<String> tableList = globVar.DB.getListTable();
         int ret = 0;
+        int jpgMax = archList.size();
+        int jpbCnt = 1;
+
         for(String[] sig: archList){
+            if(jProgressBar!=null) jProgressBar.setValue((int)((jpbCnt++)*100.0/jpgMax));
+            int archType = Integer.parseInt(sig[1]);
             int x = sig[0].indexOf(".");
             if(x < 0){
                 Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",sig[0]});
                 String type = bigSax.getDataAttr(n, "Type");
                 String uuid = bigSax.getDataAttr(n, "UUID");
-                int archType = Integer.parseInt(sig[1]);
                 if( isStdType(type)) insertInArcive(sig[0], archTyps[archType],uuid,archSax);
                 else{
                     String sigFileName = FileManager.FindFile(globVar.desDir + "\\Design", type, "UUID=");
@@ -945,20 +979,80 @@ public class Generator {
                                 if(!isStdType(typeSig)){
                                     tmpName += ".PV";
                                     tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
-                                }
+                                }// <Trend ItemName="AO_D.Set_APK" UUID="D81CC7224B1F7C96DAA237A634367986.4C16C6034A798CBFCD04F398721A6E10" Min="0" Max="10" Log="FALSE" Color="#000000" InvColor="#00000000" Title="Управление АПК (выход на драйвер 0-10 В)" AxisTitle="Управление АПК (выход на драйвер 0-10 В)" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" />
+
                                 insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
+                                if(getTrendAttr(tableList, sig[0], nameSig, attr)!=0) ret = -1;
+                                Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend",
+                                "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
+                                for(Object key: trendAttr.keySet()) hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
                             }                            
                         }
-                        
                     }
                 }
-              
+            }else{
+                String groupName = sig[0].substring(2, x);
+                String localName = sig[0].substring(x+1);
+                Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
+                String type = bigSax.getDataAttr(n, "Type");
+                String uuid = bigSax.getDataAttr(n, "UUID");
+                String sigFileName = FileManager.FindFile(globVar.desDir + "\\Design", type, "UUID=");
+                if(sigFileName==null){
+                    FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + "\\Design");
+                    ret = -1;
+                }
+                else {
+                    XMLSAX sigSax = new XMLSAX();
+                    sigSax.readDocument(globVar.desDir + "\\Design\\" + sigFileName);
+                    Node sigNode = sigSax.findNodeAtribute(new String[]{"Field","Name",localName});
+                    if(sigNode==null){
+                        FileManager.loggerConstructor("Не найден сигнал "+localName+" в файле "+ globVar.desDir + "\\Design\\" + sigFileName);
+                        ret = -1;
+                    }else{
+                        String typeSig = bigSax.getDataAttr(sigNode, "Type");
+                        String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
+                        String tmpName = groupName+"."+localName;
+                        String tmpUuid = uuid+"."+uuidSig;
+                        if(!isStdType(typeSig)){
+                            tmpName += ".PV";
+                            tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
+                        }
+                        insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
+                        if(getTrendAttr(tableList, groupName, localName, attr)!=0) ret = -1;
+                        Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend",
+                        "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
+                        for(Object key: trendAttr.keySet()) 
+                            hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
+                    }
+                }
             }
         }
+        hmiSax.writeDocument(globVar.desDir + "\\GenHMI\\"+ trendSheetName + ".txt");
         archSax.writeDocument();
         return ret;
     }
 
+    private static int getTrendAttr(ArrayList<String> tableList, String group, String sig, String[]attr){
+        String tableName = null;
+        for(String s: tableList) if(group.toUpperCase().contains(s.toUpperCase())) {
+            tableName = s;
+            break;
+        }
+        if(tableName!=null){
+            attr[0] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Диапазон_мин");
+            if(attr[0]==null){
+                attr[0]="0";
+                attr[1]="1";
+            }else attr[1] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Диапазон_макс");
+            attr[2] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Наименование");
+            return 0;
+        }
+        FileManager.loggerConstructor("В таблице \""+ tableName + "\" не найден сигнал "+ globVar.desDir + "\\Design");
+        attr[0]="0";
+        attr[1]="1";
+        attr[2] = sig;
+        return -1;
+    }
     private static void insertInArcive(String sigName, int[] archTyp, String uuid, XMLSAX archSax) {
         Node items = archSax.returnFirstFinedNode("Items");
         Node sig = archSax.findNodeAtribute(items,  new String[]{"Item","ItemName",sigName});
