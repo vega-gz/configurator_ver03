@@ -453,7 +453,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         //frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
         frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
         frameExecutiveMechanism.setVisible(true);
-
     }//GEN-LAST:event_jButton7ActionPerformed
 
 

@@ -35,6 +35,7 @@ public class ExecutiveMechanismObject {
     String[] arrNameExecute; // Список имен нод механизмов для передачи выбора пользователю
     ArrayList<Node> listNodeRootN; // ноды рута AM_Classica, AM_NKU и тд
     XMLSAX readXML; // наш конфиг файл
+    ArrayList<Integer> iniySplitList = new ArrayList<>();  // список разделителя таблиц механизмов
 
     // Формируем первоначальные данные для пользователя, выбор механизма обработки
     public ExecutiveMechanismObject() {
@@ -514,6 +515,39 @@ public class ExecutiveMechanismObject {
             workbase.insertRows(nameTable, array, columnT); // опять значения на оборот
             workbase.setValueObserver(min, max, i);
         }
+    }
+    
+    // -- метод сращивания Листов для общей таблицы --
+    public void connectListMechan(ArrayList<ArrayList<String>> first, ArrayList<ArrayList<String>> second){
+        ArrayList<String> emptyData = new ArrayList<>(); // пустые строки будут для выравниявания матрицы
+    // проверка длинны при добавлении недостающих данных
+    // если второго лист длиннее первого()
+        if(second.size() > first.size()){
+            int lenStrList = 0; // длинна строки-листа первого массива
+            for(ArrayList<String> enterList: first){
+                if(enterList.size() > lenStrList){ // перестраховка так как они все должны быть одинаковы
+                    lenStrList = enterList.size();
+                }   
+            }
+            // создаем недостающий отрезак данных для первого Листа 
+            for(int i=0; i<lenStrList; ++i){
+                emptyData.add(""); // просто пустая строка
+            }
+            // сращивание данных двух листов 
+            for(int i=0; i<second.size(); ++i){
+                if(i <= first.size()){ // пока не кончился первый лист соединяем
+                    first.get(i).addAll(second.get(i)); // пристыковать один Лист к другому
+                }else{
+                    ArrayList<String> tmp = new ArrayList<>(); 
+                    tmp.addAll(emptyData); // прикручиваем пустое не достающее
+                    tmp.addAll(second.get(i)); 
+                    first.add(tmp); // и прикручиваем сформированный массимуже к первому Листу(может делать новый?)
+                }
+            }
+        }else{ // если первый больше по длине чем тот который прикручиваем(добавить в конец данные) 
+            
+        }
+        
     }
 }
 
