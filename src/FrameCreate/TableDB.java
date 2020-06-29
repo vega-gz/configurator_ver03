@@ -30,7 +30,7 @@ public class TableDB extends javax.swing.JFrame {
     public TableDB(String table) {
         tableName = table;
         if(globVar.DB==null)return;
-        List<String> listColumn = globVar.DB.selectColumns(table);
+        List<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
         cols = listColumn.toArray( new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);

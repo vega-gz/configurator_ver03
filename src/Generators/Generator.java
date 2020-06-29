@@ -869,7 +869,7 @@ public class Generator {
     }
     //Функция занесения переменных в интерфейсные листы приложений Сонаты
     static String insertVarInPrj(XMLSAX intFile, Node interfaceList, String Name, String Type, String Comment, boolean global, boolean usage, 
-            String uuid, String hwFileName, String backUpFile) throws IOException{
+            String uuid, String hwFileName1, String backUpFile1) throws IOException{
         String[] findArr = {"Signal","Name",Name};
         Node sig = intFile.findNodeAtribute(interfaceList, findArr);
         if(sig!=null){
@@ -883,11 +883,11 @@ public class Generator {
                 return intFile.getDataAttr(sig,"UUID");
             }
         }
-        int  ret = FileManager.copyFileWoReplace(hwFileName, backUpFile, true);                    //создаём резервную копию
-        if(ret==2){ //Функция копирования не нашла исходного файла
-          FileManager.loggerConstructor("Не удалось прочитать файл \"" + hwFileName + "\"");
-          return null;
-        }
+//        int  ret = FileManager.copyFileWoReplace(hwFileName, backUpFile, true);                    //создаём резервную копию
+//        if(ret==2){ //Функция копирования не нашла исходного файла
+//          FileManager.loggerConstructor("Не удалось прочитать файл \"" + hwFileName + "\"");
+//          return null;
+//        }
         if(uuid==null) uuid = UUID.getUIID();
         String[] insArr = {"Signal","Name",Name,
                                     "UUID",uuid,
@@ -902,13 +902,22 @@ public class Generator {
     }
 
     public static int GenArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
-        String appName = abonent + "_" + "Archive";
+        String appPathName = globVar.desDir + "\\Design\\" + abonent + "_" + "Archive";
         XMLSAX archSax = new XMLSAX();
-        Node archRoot = archSax.readDocument(globVar.desDir + "\\Design\\" + appName +".arc_cfg");
+        Node archRoot = archSax.readDocument(appPathName +".arc_cfg");
         if(archRoot==null){ //Функция копирования не нашла исходного файла
-            FileManager.loggerConstructor("Не удалось прочитать файл \"" + globVar.desDir + "\\Design" + appName +".arc_cfg" + "\"");
+            FileManager.loggerConstructor("Не удалось прочитать файл \"" + appPathName +".arc_cfg" + "\"");
             return -1;
         }
+        
+        XMLSAX intSax = new XMLSAX();
+        Node intRoot = intSax.readDocument(appPathName +".int");
+        if(intRoot==null){ //Функция копирования не нашла исходного файла
+            FileManager.loggerConstructor("Не удалось прочитать файл \"" + appPathName +".int" + "\"");
+            return -1;
+        }
+        Node interfaceList = intSax.returnFirstFinedNode("InterfaceList");
+        
         XMLSAX bigSax = new XMLSAX();
         Node bigRoot = bigSax.readDocument(globVar.desDir + "\\Design\\Project.prj");
         if (bigRoot == null) {
@@ -948,7 +957,8 @@ public class Generator {
         int ret = 0;
         int jpgMax = archList.size();
         int jpbCnt = 1;
-
+        int colorInd = 0;
+        int colorMax = colorList.size()-1;
         for(String[] sig: archList){
             if(jProgressBar!=null) jProgressBar.setValue((int)((jpbCnt++)*100.0/jpgMax));
             int archType = Integer.parseInt(sig[1]);
@@ -983,11 +993,15 @@ public class Generator {
 
                                 insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
                                 if(getTrendAttr(tableList, sig[0], nameSig, attr)!=0) ret = -1;
-                                Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend",
+                                Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
                                 "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
-                                for(Object key: trendAttr.keySet()) hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
+                                colorInd++;
+                                if(colorInd > colorMax) colorInd = 0;
+                                for(Object key: trendAttr.keySet()) 
+                                    hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
                             }                            
                         }
+                        if(ret==0) insertVarInPrj(intSax, interfaceList, sig[0], type, "", true, true, uuid, appPathName +".int", "");
                     }
                 }
             }else{
@@ -1019,10 +1033,14 @@ public class Generator {
                         }
                         insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
                         if(getTrendAttr(tableList, groupName, localName, attr)!=0) ret = -1;
-                        Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend",
+                        //Node tmpN = colorList.get(colorInd++);
+                        Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
                         "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
+                        colorInd++;
+                        if(colorInd > colorMax) colorInd = 0;
                         for(Object key: trendAttr.keySet()) 
                             hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
+                        insertVarInPrj(intSax, interfaceList, groupName, type, "", true, true, uuid, appPathName +".int", "");
                     }
                 }
             }
@@ -1039,11 +1057,14 @@ public class Generator {
             break;
         }
         if(tableName!=null){
-            attr[0] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Диапазон_мин");
-            if(attr[0]==null){
+            ArrayList<String> listCol = globVar.DB.getListColumns(tableName);
+            if(listCol.contains("Диапазон_мин")){
+                attr[0] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Диапазон_мин");
+                attr[1] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Диапазон_макс");
+            }else{
                 attr[0]="0";
                 attr[1]="1";
-            }else attr[1] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Диапазон_макс");
+            }
             attr[2] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Наименование");
             return 0;
         }

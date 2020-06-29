@@ -1,8 +1,8 @@
 <Data>
-	<Trend InvColor="#00000000" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE"/>
+	<Trend InvColor="#00000000" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" Log="FALSE"/>
 	<TableColor>
 		<C1 Color ="#000000" />
-		<!--C2 Color="#000080"/>
+		<C2 Color="#000080"/>
 		<C3 Color="#0000c0"/>
 		<C4 Color="#0000ff"/>
 		<C5 Color="#005500"/>
@@ -40,6 +40,6 @@
 		<C37 Color="#ff460e"/>
 		<C38 Color="#ff5500"/>
 		<C39 Color="#ffe57c"/>
-		<C40 Color="#ffff00"/-->
+		<C40 Color="#ffff00"/>
 	</TableColor>
 </Data>
