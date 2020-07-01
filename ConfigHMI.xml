@@ -54,14 +54,14 @@
 		</GenHMI>
 	</DGO>
 	<mb_AI>
-		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="25" ruName="Наименование">
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730" incY="25" ruName="Наименование">
 			<IF cond="dataType" val="ABCDEFGH" type="T_BaseSen_200513">
 				<Hint/>
 				<additionalVar/>
 				<ELSE>
 					<IF  cond="dataType" val="WORD">
 						<ELSE type="T_BaseAnIn_200521" isAlarm="true">
-							<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+							<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".." add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 							<additionalVar>
 								<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 							</additionalVar>

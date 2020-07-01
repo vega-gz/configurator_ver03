@@ -496,22 +496,22 @@
 		<GenData>
 			<AI_DRV dictionary="ModbusFormat.xml" col="dataType" ifEmpty="REAL">
 				<globData name="AI_DRV">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</AI_DRV>
-			<AI_FromHMI typeFile="T_AI_FromHMI.type">
+			<AI_FromHMI typeFile="T_AI_FromHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AI_FromHMI">
 					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_FromHMI>
-			<AI_ToHMI typeFile="T_AI_ToHMI.type">
+			<AI_ToHMI typeFile="T_AI_ToHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AI_ToHMI">
 					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_ToHMI>
-			<AI_Settings>
+			<AI_Settings notGenTyps="WORD, ABCDEFGH">
 				<globData>
 					<localData  name="AI_Settings" int="_Algorithm.int"/>
 				</globData>
@@ -519,7 +519,7 @@
 		</GenData>
 		<GenCode>
 			<File src="mb_AI_CallAll" target="_Algorithm">
-				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода">
+				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
 					<Function name="mb_AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
@@ -533,9 +533,22 @@
 						<arg><dbd t="Set2" ifEmpty="0.0"/></arg>
 						<arg><dbd t="tau" ifEmpty="0.0"/></arg>
 						<arg><npp/></arg>
+						<arg>
+							<switch swt="dataType" default="0">
+								<case val="ABxN" def="1"/>
+								<case val="BAxN" def="1"/>
+								<case val="UABxN" def="1"/>
+								<case val="UBAxN" def="1"/>
+								<case val="ABxR" def="2"/>
+								<case val="BAxR" def="2"/>
+								<case val="UABxR" def="2"/>
+								<case val="UBAxR" def="2"/>
+								<case val="ABCDEFGH" def="3"/>
+							</switch>
+						</arg>
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода AI_Processing" end="Конец сгенерированного кода">
+				<Block start="Начало сгенерированного кода AI_Processing" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
 					<Function name="mb_AI_Processing">
 						<arg>
 							<switch swt="dataType" default="">
@@ -569,9 +582,14 @@
 				</Block>
 			</File>
 			<File src="AI_Permit" target="_Algorithm">
-				<Block start="Начало сгенерированного кода AI_Permit" end="Конец сгенерированного кода">
+				<Block start="Начало сгенерированного кода AI_Permit" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
 					<String>
 						<abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
+					</String>
+				</Block>
+				<Block start="Начало сгенерированного кода AI_Alter" end="Конец сгенерированного кода" isGenTyps="ABCDEFGH">
+					<String>
+						<text t="tmpPermit := "/><abonent/><text t="_AI_DRV."/><dbd t="TAG_NAME_PLC"/><text t="; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
 			</File>
@@ -590,19 +608,19 @@
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_DRV>
-			<AO_FromHMI typeFile="T_AO_FromHMI.type">
+			<AO_FromHMI typeFile="T_AO_FromHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AO_FromHMI">
 					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_FromHMI>
-			<AO_ToHMI typeFile="T_AO_ToHMI.type">
+			<AO_ToHMI typeFile="T_AO_ToHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AO_ToHMI">
 					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_ToHMI>
-			<AO_Settings typeFile="T_AO_Settings.type">
+			<AO_Settings typeFile="T_AO_Settings.type" notGenTyps="WORD, ABCDEFGH">
 				<globData>
 					<localData  name="AO_Settings" int="_Algorithm.int"/>
 				</globData>
