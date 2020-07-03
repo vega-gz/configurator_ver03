@@ -10,4 +10,9 @@ public class MyTableModel  extends DefaultTableModel{
         return super.isCellEditable(row, column);
     }
     
+    @Override
+    public String getValueAt(int row, int column) {
+        return (String)super.getValueAt(row, column);
+    }
+    
 }

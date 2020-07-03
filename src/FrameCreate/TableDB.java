@@ -7,18 +7,21 @@ import Tools.MyTableModel;
 import Tools.SaveFrameData;
 import Tools.TableTools;
 import Tools.Tools;
+import Tools.closeJFrame;
 import Tools.isCange;
+import Tools.regitrationJFrame;
 import globalData.globVar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
-    MyTableModel tableModel = new MyTableModel();
+    public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
     String tableName;
@@ -26,6 +29,10 @@ public class TableDB extends javax.swing.JFrame {
     String[] cols;
     String comment;
     ArrayList<String[]> fromDB;
+    public int[] colsWidth;
+    int[] align;
+    int qCol;
+    ArrayList<JFrame> listJF = new ArrayList();
 
     public TableDB(String table) {
         tableName = table;
@@ -43,12 +50,15 @@ public class TableDB extends javax.swing.JFrame {
  
         initComponents();
         
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel);
-        int qCol = listColumn.size();
-        int[] align = new int[qCol];
-        int[] colsWidth = new int[qCol];
+        regitrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
+        closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
         
-        TableTools.setWidthCols(cols, fromDB, colsWidth, 7);
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf);
+        qCol = listColumn.size();
+        align = new int[qCol];
+        colsWidth = new int[qCol];
+        
+        TableTools.setWidthCols(cols, tableModel, colsWidth, 7);
         if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20);
         
@@ -61,7 +71,7 @@ public class TableDB extends javax.swing.JFrame {
         isCange ich = ()->{
             return compareTable(fromDB,tableModel);
         };
-        TableTools.setTableListener(this, sfd, ich);
+        TableTools.setTableListener(this, sfd, ich, cjf);
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +100,11 @@ public class TableDB extends javax.swing.JFrame {
         });
 
         jTable1.setModel(tableModel);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("Сохранить");
@@ -295,6 +310,16 @@ public class TableDB extends javax.swing.JFrame {
         globVar.processReg.remove(this.getTitle());
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = jTable1.getSelectedRow();
+            SinglStrEdit sse = new SinglStrEdit(tableModel, tableName);
+            sse.setVisible(true);
+            listJF.add(sse);
+            sse.setFields(row);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

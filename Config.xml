@@ -3,8 +3,8 @@
 <Settings>
 <USER>mutonar</USER>
 <PASS>Solovin2</PASS>
-<URL>jdbc:postgresql://127.0.0.1:5432/</URL>
-<URL1>jdbc:postgresql://minoro.ru:5432/</URL1>
+<URL>jdbc:postgresql://minoro.ru:5432/</URL>
+<URL1>jdbc:postgresql://127.0.0.1:5432/</URL1>
 <BASE>kln_kc</BASE>
 <BASE1>pravoslav</BASE1>
 <BASE2>kln_gpa</BASE2>

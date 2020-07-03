@@ -1,10 +1,12 @@
 package Tools;
 
 import DataBaseTools.DataBase;
+import FrameCreate.SinglStrEdit;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -69,22 +71,34 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
     
     // ----- Функция для настройки контекстного меню таблиц--------------Lev---
-    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, DefaultTableModel tableModel){
+    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, regitrationJFrame rgf){
         JMenuItem menuItemAdd = new JMenuItem("Добавить пустую строку");
         JMenuItem menuItemCopy = new JMenuItem("Скопировать строку");
         JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
+        JMenuItem menuItemOpenWindow = new JMenuItem("Открыть в отдельном окне");
 
         popupMenu.add(menuItemAdd);
         popupMenu.add(menuItemCopy);
         popupMenu.add(menuItemRemove);
         popupMenu.add(menuItemClearCells);
+        popupMenu.add(menuItemOpenWindow);
         jTable1.setComponentPopupMenu(popupMenu);
         
+        menuItemOpenWindow.addActionListener((ActionEvent event) -> {
+            int row = jTable1.getSelectedRow();
+            if(row<0) row = 0;
+            SinglStrEdit sse = new SinglStrEdit(tableModel, title);
+            sse.setVisible(true);
+            if(rgf!=null) rgf.reg(sse);
+            sse.setFields(row);
+        });
         menuItemAdd.addActionListener((ActionEvent event) -> {
             int row = jTable1.getSelectedRow();
             if(row<0) row = jTable1.getRowCount()-1;
-            tableModel.insertRow(row+1, new String[1]);
+            row++;
+            tableModel.insertRow(row, new String[1]);
+            for(int i = 1; i < tableModel.getColumnCount(); i++) tableModel.setValueAt("", row, i);
             setId(jTable1);
         });
         menuItemCopy.addActionListener((ActionEvent event) -> {
@@ -165,7 +179,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         return 0;
     }
 
-    static public void setTableListener(JFrame frame, SaveFrameData sfd, isCange ich){
+    static public void setTableListener(JFrame frame, SaveFrameData sfd, isCange ich, closeJFrame cjf){
         frame.addWindowListener(new WindowListener() {
             public void windowActivated(WindowEvent event) {}
             public void windowClosed(WindowEvent event) {}
@@ -185,6 +199,12 @@ public class TableTools {//ссылка на таблицу, массив шир
                 globVar.processReg.remove(title);
                 event.getWindow().setVisible(false);
                 frame.setVisible(false);
+                if(cjf!=null) cjf.close();
+//                Window[] children = frame.getOwnedWindows();
+//                for (Window win : children) {
+//                    //if (win instanceof JDialog)
+//                        win.setVisible(false);
+//                }
                 
             }
             public void windowDeactivated(WindowEvent event) {}
@@ -281,16 +301,25 @@ public class TableTools {//ссылка на таблицу, массив шир
         return false;
     }
 
-    public static void setWidthCols(String[] cols, ArrayList<String[]> fromDB, int[] colsWidth, int x) {
-        for(int i=0; i<cols.length; i++){
-            colsWidth[i] = cols[i].length();
-            for(String[] s: fromDB) if(colsWidth[i]<s[i].length()) colsWidth[i]= s[i].length();
+    public static void setWidthCols(String[] cols, MyTableModel tableModel, int[] colsWidth, int x) {
+        if(colsWidth==null) return;
+        int max = colsWidth.length;
+        if(cols!=null && max > cols.length) max = cols.length;
+        if(cols!=null && max > tableModel.getColumnCount()) max = tableModel.getColumnCount();
+        for(int i=0; i<max; i++){
+            if(cols != null && cols[i] != null) colsWidth[i] = cols[i].length();
+            else colsWidth[i] = 0;
+            for(int j=0; j<tableModel.getRowCount(); j++)
+                if(tableModel.getValueAt(j, i)!=null){
+                    int l = tableModel.getValueAt(j, i).length();
+                    if(colsWidth[i]<l) colsWidth[i]= l;
+                }
             colsWidth[i] = (colsWidth[i] + 1)*x;
         }
     }
     public static void setAlignCols(String[] fromDB, int[] colsAlign) {
         for(int i=0; i<colsAlign.length; i++)
-            if(fromDB[i].isEmpty())                                     colsAlign[i] = 0;
+            if(fromDB[i]==null || fromDB[i].isEmpty())                  colsAlign[i] = 0;
             else if("-0123456789".contains(fromDB[i].substring(0, 1)))  colsAlign[i] = 1;
             else                                                        colsAlign[i] = -1;
     }
@@ -304,17 +333,26 @@ public class TableTools {//ссылка на таблицу, массив шир
             for(Node c: nc){
                 for(int i=0; i < cols.length;i++){
                     if(cols[i].equals(c.getNodeName())){
+                        String[] listName;
                         String file = xml.getDataAttr(c, "file");
-                        String col = xml.getDataAttr(c, "col");
-                        XMLSAX list = new XMLSAX();
-                        Node listRoot = list.readDocument(file);
-                        ArrayList<Node> listNameNode = list.getHeirNode(listRoot);
-                        int ls = listNameNode.size();
-                        String[] listName = new String[ls];
-                        if(col.isEmpty()) 
-                            for(int j=0; j < ls; j++) 
-                                listName[j] = listNameNode.get(j).getNodeName();
-                        else              for(int j=0; j < ls; j++) listName[j] = list.getDataAttr(listNameNode.get(j),col);
+                        if(file!=null){
+                            String col = xml.getDataAttr(c, "col");
+                            XMLSAX list = new XMLSAX();
+                            Node listRoot = list.readDocument(file);
+                            ArrayList<Node> listNameNode = list.getHeirNode(listRoot);
+                            int ls = listNameNode.size();
+                            listName = new String[ls];
+                            if(col.isEmpty()) 
+                                for(int j=0; j < ls; j++) 
+                                    listName[j] = listNameNode.get(j).getNodeName();
+                            else              for(int j=0; j < ls; j++) listName[j] = list.getDataAttr(listNameNode.get(j),col);
+                        }else{
+                            ArrayList<Node> list = xml.getHeirNode(c);
+                            int ls = list.size();
+                            listName = new String[ls];
+                            for(int j=0; j < ls; j++)
+                                listName[j] = xml.getDataAttr(list.get(j),"t");
+                        }
                         JComboBox<String> combo = new JComboBox<>(listName);// Раскрывающийся список
                         DefaultCellEditor editor = new DefaultCellEditor(combo);// Редактор ячейки с раскрывающимся списком
                         jTable1.getColumnModel().getColumn(i).setCellEditor(editor);    // Определение редактора ячеек для колонки    

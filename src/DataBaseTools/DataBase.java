@@ -436,10 +436,11 @@ public class DataBase implements Observed {
                 for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\"";
                 if(start == 0){
                     sql += ") VALUES ("+index;
-                    for (String row1 : row)  sql += ", '" + row1 + "'";
+                    for (String row1 : row) sql += ", '" + row1 + "'";
                 }else{
                     sql += ") VALUES ("+row[0];
-                    for(int i = 1; i<row.length; i++)  sql += ", '" + row[i] + "'";
+                    for(int i = 1; i<row.length; i++)
+                        sql += ", '" + row[i] + "'";
                 }
                 sql += ");";
                 stmt = connection.createStatement();
@@ -458,40 +459,10 @@ public class DataBase implements Observed {
     public ArrayList<String[]> getData(String table) {
         return getData(table, "id");
     }
-    // получение таблицы целиком отсортированной по столбцу orderCol
+    // получение таблицы целиком отсортированной по заданному столбцу ---Lev---
     public ArrayList<String[]> getData(String table, String orderCol) {
-        ArrayList<String[]> selectData = new ArrayList<>();
         ArrayList<String> columns = getListColumns(table);
-
-        String s_columns = "";
-        String[] strfromtb = new String[columns.size()]; // массив под данные
-        for (int i = 0; i < columns.size()-1; ++i) s_columns += "\"" + columns.get(i) + "\", ";
-        s_columns += "\"" + columns.get(columns.size()-1) + "\"";
-        
-        String sql;
-        if(columns.indexOf(orderCol)>=0){
-            sql = "SELECT " + s_columns + " FROM \"" + table + "\" ORDER BY \"" +orderCol +"\";";
-        }else{
-            sql = "SELECT " + s_columns + " FROM \"" + table +"\";";
-        }
-        try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                for (int i = 0; i < columns.size(); ++i) {
-                    strfromtb[i] = rs.getString(columns.get(i));
-                }
-                String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
-                selectData.add(tmp1);
-            }
-            rs.close();
-            stmt.close();
-        } catch (SQLException e) {
-            System.out.println("Failed select data");
-            e.printStackTrace();
-            return null;
-        }
-        return selectData;
+        return getData(table, columns, "ORDER BY \"" +orderCol +"\"");
     }
     // --- Получить данные из БД по имени таблицы и массиву столбцов ---Lev---
     public ArrayList<String[]> getData(String table, String[] columns) {
@@ -501,10 +472,13 @@ public class DataBase implements Observed {
     }
     // --- Получить данные из БД по имени таблицы и списку столбцов ---Lev---
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
+        return getData(table, columns, "");
+    }
+    public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol) {
         int size = columns.size();
         String sql = "SELECT \"" + columns.get(0) + "\"";
         for (int i = 1; i < size; ++i) sql +=  ", \"" + columns.get(i) + "\"";
-        sql += " FROM \"" + table +"\";"; 
+        sql += " FROM \"" + table +"\" "+orderCol+";"; 
         
         ArrayList<String[]> selectData = new ArrayList<>();
         try {
@@ -515,6 +489,7 @@ public class DataBase implements Observed {
                 String[] strFromTb = new String[size]; // массив под данные
                 for (int i = 0; i < size; ++i) {
                     strFromTb[i] = rs.getString(columns.get(i));
+                    if(strFromTb[i] == null) strFromTb[i] = "";
                 }
                 selectData.add(strFromTb);
                 //System.out.println(strfromtb[0]); // это просто для тестов
@@ -907,8 +882,8 @@ public class DataBase implements Observed {
         if(globVar.DB==null) return;
         ArrayList<String> list_table_base = globVar.DB.getListTable();
         if(StrTools.searchInList("Abonents", list_table_base)< 0){
-            String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type"};
-            globVar.DB.createTable("Abonents", columns,"Абоненты");
+            String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type", "Экземпляры"};
+            globVar.DB.createTable("Abonents", columns,"Типовые абоненты");
         }
     }
     public static ArrayList<String[]> getAbonentArray() // функция для создания списка из таблицы абонентов

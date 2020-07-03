@@ -59,7 +59,7 @@ public class addArchive extends javax.swing.JFrame {
             tableModel.addRow(archives.get(i));
         initComponents();
         
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel);
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, "Архивы "+abonent, null);
         //int qCol = jTableCols.length;
         int[] colWidth = {25,160,100,50,100};//new int[qCol];
         int[] align = {1,0,0,0,0};//new int[qCol];
@@ -91,7 +91,7 @@ public class addArchive extends javax.swing.JFrame {
             TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");//сохранение в БД списка сигналов 
         };
         isCange ich = ()->{return isChang;};
-        TableTools.setTableListener(this, sfd, ich);
+        TableTools.setTableListener(this, sfd, ich, null);
         jSplitPane1.setDividerLocation(100);
    }
     private void setPlusList(){

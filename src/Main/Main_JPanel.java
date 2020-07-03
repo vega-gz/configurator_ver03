@@ -180,6 +180,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(0, 102, 204));

@@ -2,4 +2,11 @@
 	<mb_A>
 		<dataType file="ModbusFormat.xml" col=""/>
 	</mb_A>
+	<Abonents>
+		<Abonent_type>
+			<Item t="Sonet"/>
+			<Item t="Modbus"/>
+			<Item t="KM04"/>
+		</Abonent_type>
+	</Abonents>
 </TableColumnSettings>
