@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -229,7 +228,7 @@ public class DataBase implements Observed {
             connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE TABLE \"" + name_table + "\"" + nc_stringing;
-            System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
+            //System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
             //connection.commit();
@@ -462,7 +461,15 @@ public class DataBase implements Observed {
     // получение таблицы целиком отсортированной по заданному столбцу ---Lev---
     public ArrayList<String[]> getData(String table, String orderCol) {
         ArrayList<String> columns = getListColumns(table);
-        return getData(table, columns, "ORDER BY \"" +orderCol +"\"");
+        return getData(table, columns, " ORDER BY \"" +orderCol +"\"");
+    }
+    public ArrayList<String[]> getData(String table, String orderCol, String desiredCol, String disiredVal) {
+        ArrayList<String> columns = getListColumns(table);
+        String where = "";
+        if(desiredCol!=null && disiredVal!=null) where = " WHERE \""+desiredCol+"\"='"+disiredVal+"'";
+        String order = "";
+        if(orderCol!=null) order = " ORDER BY \"" +orderCol +"\"";
+        return getData(table, columns, order, where);
     }
     // --- Получить данные из БД по имени таблицы и массиву столбцов ---Lev---
     public ArrayList<String[]> getData(String table, String[] columns) {
@@ -475,10 +482,14 @@ public class DataBase implements Observed {
         return getData(table, columns, "");
     }
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol) {
+        return getData(table, columns, orderCol, "");
+    }
+    public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String where) {
+        
         int size = columns.size();
         String sql = "SELECT \"" + columns.get(0) + "\"";
         for (int i = 1; i < size; ++i) sql +=  ", \"" + columns.get(i) + "\"";
-        sql += " FROM \"" + table +"\" "+orderCol+";"; 
+        sql += " FROM \"" + table +"\""+where+orderCol+";"; 
         
         ArrayList<String[]> selectData = new ArrayList<>();
         try {

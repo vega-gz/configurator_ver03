@@ -366,14 +366,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
         int ren = fileopen.showDialog(null, "Загрузка данных для "+globVar.abonent);
         if (ren == JFileChooser.APPROVE_OPTION) {
             excel = fileopen.getSelectedFile();// выбираем файл из каталога
-        }
+        } else return;
         pb = new ProgressBar();
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
         pb.setVisible(true);
 
         DoIt di = () -> {
-            int ret = 1;
+            int ret = -1;
             try {
                 ret = RWExcel.ReadExelFromConfig(excel.getPath(),pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
             } catch (IOException ex) {

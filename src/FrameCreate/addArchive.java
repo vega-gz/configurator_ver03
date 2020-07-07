@@ -4,9 +4,9 @@ import DataBaseTools.DataBase;
 import Generators.Generator;
 import Tools.BackgroundThread;
 import Tools.DoIt;
-import Tools.MyTableModel;
+import TableTools.MyTableModel;
 import Tools.SaveFrameData;
-import Tools.TableTools;
+import TableTools.TableTools;
 import Tools.isCange;
 import globalData.globVar;
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class addArchive extends javax.swing.JFrame {
             tableModel.addRow(archives.get(i));
         initComponents();
         
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, "Архивы "+abonent, null);
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, "Архивы "+abonent, null, null);
         //int qCol = jTableCols.length;
         int[] colWidth = {25,160,100,50,100};//new int[qCol];
         int[] align = {1,0,0,0,0};//new int[qCol];

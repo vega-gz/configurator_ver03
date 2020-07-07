@@ -3,9 +3,9 @@ package FrameCreate;
 import Generators.Generator;
 import Tools.BackgroundThread;
 import Tools.DoIt;
-import Tools.MyTableModel;
+import TableTools.MyTableModel;
 import Tools.SaveFrameData;
-import Tools.TableTools;
+import TableTools.TableTools;
 import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;
@@ -45,21 +45,22 @@ public class TableDB extends javax.swing.JFrame {
         fromDB = globVar.DB.getData(table);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));
         comment = globVar.DB.getCommentTable(table);
-        this.setTitle(table + ": "+comment);
         tableSize = fromDB.size();
- 
-        initComponents();
-        
-        regitrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
-        closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
-        
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf);
         qCol = listColumn.size();
         align = new int[qCol];
         colsWidth = new int[qCol];
         
-        TableTools.setWidthCols(cols, tableModel, colsWidth, 7);
+        TableTools.setWidthCols(cols, tableModel, colsWidth, 7.8);
         if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
+ 
+        initComponents();
+        
+        
+        
+        regitrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
+        closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
+        
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20);
         
         TableTools.setColsEditor(table, cols, fromDB, jTable1);
@@ -72,6 +73,8 @@ public class TableDB extends javax.swing.JFrame {
             return compareTable(fromDB,tableModel);
         };
         TableTools.setTableListener(this, sfd, ich, cjf);
+        
+        this.setTitle(table + ": "+comment);
     }
 
     @SuppressWarnings("unchecked")
@@ -103,6 +106,11 @@ public class TableDB extends javax.swing.JFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -314,12 +322,16 @@ public class TableDB extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
-            SinglStrEdit sse = new SinglStrEdit(tableModel, tableName);
+            SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, listJF);
             sse.setVisible(true);
             listJF.add(sse);
             sse.setFields(row);
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        JOptionPane.showMessageDialog(null, "Key: " + evt.getKeyChar() + ", row: " + tableModel.getRowCount());
+    }//GEN-LAST:event_jTable1KeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
