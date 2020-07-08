@@ -1,4 +1,4 @@
-package TableTools;
+package Tools;
 
 import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;

@@ -1,4 +1,4 @@
-package TableTools;
+package Tools;
 
 import javax.swing.table.DefaultTableModel;
 

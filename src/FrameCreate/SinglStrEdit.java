@@ -1,8 +1,8 @@
 package FrameCreate;
 
-import TableTools.MyTableModel;
-import TableTools.SimpleTable;
-import TableTools.TableTools;
+import Tools.MyTableModel;
+import Tools.SimpleTable;
+import Tools.TableTools;
 import globalData.globVar;
 import java.awt.ComponentOrientation;
 import java.awt.Container;

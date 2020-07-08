@@ -1,4 +1,4 @@
-package TableTools;
+package Tools;
 
 import globalData.globVar;
 import java.util.ArrayList;
