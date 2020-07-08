@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigAMs>
 	<AM_Classica>
-		<DGO>
+		<DO>
 			<on  end="_ON"/>
 			<off end="_OF"/>
-		</DGO>
-		<DGI>
+		</DO>
+		<DI>
 			<on  end="_ON"/>
 			<off end="_OF"/>
-		</DGI>
+		</DI>
 	</AM_Classica>
 	<AM_NKU>
 		<NKU_mb_DO>

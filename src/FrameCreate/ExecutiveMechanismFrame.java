@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
@@ -57,10 +58,11 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     String nameTable; // название таблицы и заголовка
     String[] columns; // названия колонок для таблицы в формате масива
     ArrayList<String> columnT; // названия колонок для таблицы
-    int identNodecase = 0; // по идентификатор выбора какой механизм использовать
+    int identNodecase; // по идентификатор выбора какой механизм использовать
     ExecutiveMechanismObject testW;
     TableNzVer3 boneTable;
     boolean showAlltable = false; // тригер показать всю таблицу или только
+    int caseMecha = 0; // значение по которым пойдет обработка механизмов
     
     /**
      * Creates new form ExecutiveMechanism
@@ -68,13 +70,36 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     public ExecutiveMechanismFrame() { // С передачей базы
         testW = new ExecutiveMechanismObject();
         String[] arrNameExecute = testW.getNodeMechRun();// Что передаем на выбор
-        getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором а вот тут оно не должно быть
-        listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
-        nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
-        columns = testW.getColumns(); // получить колонки для построки таблицы
-        columnT = testW.getColumnsT();
-        boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
-        initComponents();
+        getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором какой механизм обрабатываем
+        
+        // если в окне был какой то выбор по кнопке или списку
+        if(caseMecha != 0){ 
+            switch (caseMecha) {
+                case 1: { // если по списку 
+                    listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
+                    nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+                    columns = testW.getColumns(); // получить колонки для построки таблицы
+                     //columnT = testW.getColumnsT();
+                    boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
+                    initComponents();
+                    this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
+                    this.setVisible(true);
+                break;
+                }
+                case 2: { // если по кнопке                    
+                    listDataToTable = testW.getDataAllMechaNode(showAlltable);  // реализация всех механизмов
+                    nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+                    columns = testW.getColumns(); // получить колонки для построки таблицы
+                     //columnT = testW.getColumnsT();
+                    boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
+                    initComponents();
+                    this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
+                    this.setVisible(true);
+                break;
+                }
+            }
+            
+        }
     }
 
     /**
@@ -247,10 +272,10 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     private JDialog getJDialogChoiser(String[] massNameNode) {
         // тут он определяется до инициализации всех компонентов
         String time = "Time : ";
-        int counT = 5;
+        //int counT = 5;
         JDialog jDialog1 = new JDialog(this, "Выбор метода генерации ИМ", true); // модальное блокирующее окно
         jDialog1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        jDialog1.setSize(400, 120);
+        jDialog1.setSize(500, 300);
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         javax.swing.JComboBox jComboBox1 = new javax.swing.JComboBox<>();
@@ -279,6 +304,7 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
                 //jComboBox1ActionPerformed(evt);
                 //System.out.println(jComboBox1.getSelectedItem());
                 identNodecase = jComboBox1.getSelectedIndex(); // присвоить перемнной название из списка
+                caseMecha = 1; // метод выбора какой то одного механизма
                 jDialog1.dispose(); // Закрыть
             }
         });
@@ -287,38 +313,66 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         jButtonAllMech.setText("обработать все механизмы");
         jButtonAllMech.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
+                caseMecha = 2; // метод обработки всех механизма
                 jDialog1.dispose(); // Закрыть диалоговое окно
             }
         });
 
+//        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+//        jPanel1.setLayout(jPanel1Layout);
+//        jPanel1Layout.setHorizontalGroup(
+//                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(jPanel1Layout.createSequentialGroup()
+//                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                                        .addGroup(jPanel1Layout.createSequentialGroup()
+//                                                .addGap(82, 82, 82)
+//                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+//                                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+//                                        .addGroup(jPanel1Layout.createSequentialGroup()
+//                                                .addGap(146, 146, 146)
+//                                                .addComponent(jLabel2)))
+//                                .addContainerGap(92, Short.MAX_VALUE))
+//        );
+//        jPanel1Layout.setVerticalGroup(
+//                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(jPanel1Layout.createSequentialGroup()
+//                                .addComponent(jLabel1)
+//                                .addGap(18, 18, 18)
+//                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                .addGap(53, 53, 53)
+//                                .addComponent(jLabel2)
+//                                .addGap(0, 151, Short.MAX_VALUE))
+//        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(82, 82, 82)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(146, 146, 146)
-                                                .addComponent(jLabel2)))
-                                .addContainerGap(92, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jButtonAllMech)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel2)
-                                .addGap(0, 151, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAllMech))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
-
+        
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
@@ -336,7 +390,6 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
                                 .addContainerGap())
         );
 
-        //return jDialog1;
         return jDialog1;
     }
 
