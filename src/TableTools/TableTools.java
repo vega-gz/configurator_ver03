@@ -8,15 +8,18 @@ import Tools.closeJFrame;
 import Tools.isCange;
 import Tools.regitrationJFrame;
 import XMLTools.XMLSAX;
+import com.sun.tools.javac.jvm.Items;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -325,7 +328,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             else                                                        colsAlign[i] = -1;
     }
     
-    public static void setColsEditor(String table, String[] cols, ArrayList<String[]> fromDB, JTable jTable1){
+    public static void setColsEditor(String table, String[] cols, ArrayList<String[]> fromDB, JTable jTable1, ArrayList<String[]> listItemList){
         XMLSAX xml = new XMLSAX();
         Node root = xml.readDocument("TableColumnSettings.xml");
         ArrayList<Node> nl = xml.getHeirNode(root);
@@ -333,8 +336,8 @@ public class TableTools {//ссылка на таблицу, массив шир
             ArrayList<Node> nc = xml.getHeirNode(n);
             for(Node c: nc){
                 for(int i=0; i < cols.length;i++){
+                    String[] listItems = {};
                     if(cols[i].equals(c.getNodeName())){
-                        String[] listItems = null;
                         String src = xml.getDataAttr(c, "src");
                         String editable = xml.getDataAttr(c, "edit");
                         if(src.equals("file")){
@@ -372,14 +375,27 @@ public class TableTools {//ссылка на таблицу, массив шир
                             listItems = new String[list.size()];
                             for(int j=0; j<list.size(); j++) listItems[j] = list.get(j)[0];
                         }
-                        if(listItems!=null){
+                        if(listItems.length!=0){
                             JComboBox<String> combo = new JComboBox<>(listItems);// Раскрывающийся список
                             if(editable!=null) combo.setEditable(true);
+                            combo.getEditor().getEditorComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+                                public void keyReleased(java.awt.event.KeyEvent e) {
+                                    String filtr = (String)combo.getEditor().getItem();
+                                    int i = jTable1.getSelectedColumn();
+                                    ArrayList<String> al = new  ArrayList<>();
+                                    for(String s: listItemList.get(i))
+                                        if( s.toUpperCase().indexOf(filtr.toUpperCase())==0 ) al.add(s);
+                                    String[] listItems = al.toArray(new String[al.size()]);
+                                    combo.setModel(new DefaultComboBoxModel(listItems));
+                                    combo.getEditor().setItem(filtr);
+                                    combo.showPopup();
+                                }
+                            });
                             DefaultCellEditor editor = new DefaultCellEditor(combo);// Редактор ячейки с раскрывающимся списком
                             jTable1.getColumnModel().getColumn(i).setCellEditor(editor);    // Определение редактора ячеек для колонки    
-                            jTable1.getCellEditor(1, 1).addCellEditorListener(CellEditorListener l);
                         }
                     }
+                    listItemList.add(listItems);
                 }
             }
         }

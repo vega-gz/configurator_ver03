@@ -29,6 +29,7 @@ public class TableDB extends javax.swing.JFrame {
     String[] cols;
     String comment;
     ArrayList<String[]> fromDB;
+    ArrayList<String[]> listItemList = new ArrayList<>();
     public int[] colsWidth;
     int[] align;
     int qCol;
@@ -63,7 +64,7 @@ public class TableDB extends javax.swing.JFrame {
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20);
         
-        TableTools.setColsEditor(table, cols, fromDB, jTable1);
+        TableTools.setColsEditor(table, cols, fromDB, jTable1, listItemList);
         
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = ()->{
@@ -103,6 +104,14 @@ public class TableDB extends javax.swing.JFrame {
         });
 
         jTable1.setModel(tableModel);
+        jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTable1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTable1FocusLost(evt);
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -330,8 +339,35 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        JOptionPane.showMessageDialog(null, "Key: " + evt.getKeyChar() + ", row: " + tableModel.getRowCount());
+        //JOptionPane.showMessageDialog(null, "Key: " + evt.getKeyChar() + ", row: " + tableModel.getRowCount());
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
+//        int i = jTable1.getSelectedRow();
+//        int j = jTable1.getSelectedColumn();
+//        jTable1.getComponentAt(j, i).addKeyListener(new java.awt.event.KeyAdapter() {
+//            public void keyReleased(java.awt.event.KeyEvent e) {
+//                JOptionPane.showMessageDialog(null, "Key: " + e.getKeyChar());
+//            }
+//        });
+        //JOptionPane.showMessageDialog(null, "Component: " + jTable1.getComponentAt(j, i) + ", row: " + i + ", col: " + j);
+    }//GEN-LAST:event_jTable1FocusGained
+
+    private void jTable1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusLost
+//        evt.getComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+//            public void keyReleased(java.awt.event.KeyEvent e) {
+//                System.out.println("Key: " + e.getKeyChar());
+//            }
+//        });
+////        int i = jTable1.getSelectedRow();
+////        int j = jTable1.getSelectedColumn();
+////        jTable1.getComponentAt(j, i).addKeyListener(new java.awt.event.KeyAdapter() {
+////            public void keyReleased(java.awt.event.KeyEvent e) {
+////                System.out.println("Key: " + e.getKeyChar());
+////            }
+////        });
+//        System.out.println("Component: " + evt.getComponent());
+    }//GEN-LAST:event_jTable1FocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

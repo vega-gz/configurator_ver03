@@ -17,6 +17,7 @@ public class SimpleTable {
     String[] cols;
     String comment;
     ArrayList<String[]> fromDB;
+    ArrayList<String[]> listItemList = new ArrayList<>();
     public int[] colsWidth;
     int[] align;
     int qCol;
@@ -46,7 +47,7 @@ public class SimpleTable {
     public void setSimpleTableSettings(JTable jTable1){
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, null, null, null);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20);
-        TableTools.setColsEditor(tableName, cols, fromDB, jTable1);
+        TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
     }
     
     public void resetTableContent(String col,String val){
