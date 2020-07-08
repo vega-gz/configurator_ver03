@@ -5,8 +5,8 @@
  */
 package FrameCreate;
 
+import DataBaseTools.DataBase;
 import Algorithm.ExecutiveMechanismObject;
-import DataBaseConnect.*;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.BorderLayout;

@@ -1,4 +1,4 @@
-package DataBaseConnect;
+package DataBaseTools;
 
 
 import Tools.FileManager;
@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -229,7 +228,7 @@ public class DataBase implements Observed {
             connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE TABLE \"" + name_table + "\"" + nc_stringing;
-            System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
+            //System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
             //connection.commit();
@@ -305,7 +304,7 @@ public class DataBase implements Observed {
         String addUUID = "";
         String dataUUID = "";
         // проверка есть ли вообще столбей UUID в таблице
-        for(String s:getListColumnTable(name_table)){
+        for(String s:getListColumns(name_table)){
             if(s.equalsIgnoreCase("UUID")){
                 addUUID = "\"UUID\", "; // блок определения нужно ли генерировать UUID
                 dataUUID = "\'" +UUID.getUIID()+"\'" + ", ";//  генерим ууид прмо тут если его нет в данных для для добавки
@@ -436,10 +435,11 @@ public class DataBase implements Observed {
                 for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\"";
                 if(start == 0){
                     sql += ") VALUES ("+index;
-                    for (String row1 : row)  sql += ", '" + row1 + "'";
+                    for (String row1 : row) sql += ", '" + row1 + "'";
                 }else{
                     sql += ") VALUES ("+row[0];
-                    for(int i = 1; i<row.length; i++)  sql += ", '" + row[i] + "'";
+                    for(int i = 1; i<row.length; i++)
+                        sql += ", '" + row[i] + "'";
                 }
                 sql += ");";
                 stmt = connection.createStatement();
@@ -454,46 +454,67 @@ public class DataBase implements Observed {
         }
     }
      
-    // получение таблицы целиком
+    // получение таблицы целиком отсортированной по столбцу id
     public ArrayList<String[]> getData(String table) {
         return getData(table, "id");
     }
-    
+    // получение таблицы целиком отсортированной по заданному столбцу ---Lev---
     public ArrayList<String[]> getData(String table, String orderCol) {
-        ArrayList<String[]> selectData = new ArrayList<>();
-        ArrayList<String> columns = getListColumnTable(table);
-
-        String s_columns = "";
-        String[] strfromtb = new String[columns.size()]; // массив под данные
-        for (int i = 0; i < columns.size()-1; ++i) s_columns += "\"" + columns.get(i) + "\", ";
-        s_columns += "\"" + columns.get(columns.size()-1) + "\"";
+        ArrayList<String> columns = getListColumns(table);
+        return getData(table, columns, " ORDER BY \"" +orderCol +"\"");
+    }
+    public ArrayList<String[]> getData(String table, String orderCol, String desiredCol, String disiredVal) {
+        ArrayList<String> columns = getListColumns(table);
+        String where = "";
+        if(desiredCol!=null && disiredVal!=null) where = " WHERE \""+desiredCol+"\"='"+disiredVal+"'";
+        String order = "";
+        if(orderCol!=null) order = " ORDER BY \"" +orderCol +"\"";
+        return getData(table, columns, order, where);
+    }
+    // --- Получить данные из БД по имени таблицы и массиву столбцов ---Lev---
+    public ArrayList<String[]> getData(String table, String[] columns) {
+        ArrayList<String> al = new ArrayList<>();
+        for(String c:columns) al.add(c);
+        return getData(table, al);
+    }
+    // --- Получить данные из БД по имени таблицы и списку столбцов ---Lev---
+    public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
+        return getData(table, columns, "");
+    }
+    public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol) {
+        return getData(table, columns, orderCol, "");
+    }
+    public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String where) {
         
-        String sql;
-        if(columns.indexOf(orderCol)>=0){
-            sql = "SELECT " + s_columns + " FROM \"" + table + "\" ORDER BY \"" +orderCol +"\";";
-        }else{
-            sql = "SELECT " + s_columns + " FROM \"" + table +"\";";
-        }
+        int size = columns.size();
+        String sql = "SELECT \"" + columns.get(0) + "\"";
+        for (int i = 1; i < size; ++i) sql +=  ", \"" + columns.get(i) + "\"";
+        sql += " FROM \"" + table +"\""+where+orderCol+";"; 
+        
+        ArrayList<String[]> selectData = new ArrayList<>();
         try {
             stmt = connection.createStatement();
+            //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                for (int i = 0; i < columns.size(); ++i) {
-                    strfromtb[i] = rs.getString(columns.get(i));
+                String[] strFromTb = new String[size]; // массив под данные
+                for (int i = 0; i < size; ++i) {
+                    strFromTb[i] = rs.getString(columns.get(i));
+                    if(strFromTb[i] == null) strFromTb[i] = "";
                 }
-                String[] tmp1 = Arrays.copyOf(strfromtb, strfromtb.length); // необходимость из за ссылки
-                selectData.add(tmp1);
+                selectData.add(strFromTb);
+                //System.out.println(strfromtb[0]); // это просто для тестов
             }
             rs.close();
             stmt.close();
+            //connection.commit();
+            //System.out.println("-- Operation SELECT done successfully");
         } catch (SQLException e) {
             System.out.println("Failed select data");
             e.printStackTrace();
-            return null;
         }
         return selectData;
     }
-    
         // ---найти данные по имени столбца и значению ячейки и имени искомого столбца---Lev---
     public String getDataCell(String table, String col1, String val1, String col2) {
         String sql = "SELECT \"" + col2 + "\" FROM \"" + table +"\" WHERE \""+col1+"\"='"+val1+"';";
@@ -512,56 +533,14 @@ public class DataBase implements Observed {
         }
         return val2;
     }
-
-    // --- Получить данные из БД по имени таблицы и массиву столбцов ---Lev---
-    public ArrayList<String[]> getData(String table, String[] columns) {
-        ArrayList<String> al = new ArrayList<>();
-        for(String c:columns) al.add(c);
-        return getData(table, al);
-    }
-    
-    // --- Получить данные из БД по имени таблицы и списку столбцов ---Lev---
-    public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
-        int size = columns.size();
-        String sql = "SELECT \"" + columns.get(0) + "\"";
-        for (int i = 1; i < size; ++i) sql +=  ", \"" + columns.get(i) + "\"";
-        sql += " FROM \"" + table +"\";"; 
-        
-        ArrayList<String[]> selectData = new ArrayList<>();
-        try {
-            stmt = connection.createStatement();
-            //System.out.println(sql);
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                String[] strFromTb = new String[size]; // массив под данные
-                for (int i = 0; i < size; ++i) {
-                    strFromTb[i] = rs.getString(columns.get(i));
-                }
-                selectData.add(strFromTb);
-                //System.out.println(strfromtb[0]); // это просто для тестов
-            }
-            rs.close();
-            stmt.close();
-            //connection.commit();
-            //System.out.println("-- Operation SELECT done successfully");
-        } catch (SQLException e) {
-            System.out.println("Failed select data");
-            e.printStackTrace();
-        }
-        return selectData;
-    }
-
     // --- Select columns Table  ---
-    public List<String> selectColumns(String table) {
-        //connectionToBase(); // вызов Фукция подключения к базе
-        List<String> listColumn = new ArrayList();
-        String ColumnN = "column_name"; // Если захоим выборку пеще чего то
+    public ArrayList<String> getListColumns(String table) {
+        ArrayList<String> listColumn = new ArrayList();
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT " + ColumnN
-                    + " FROM information_schema.columns WHERE table_name = \'" + table + "\';");
+            ResultSet rs = stmt.executeQuery("SELECT column_name FROM information_schema.columns WHERE table_name = \'" + table + "\';");
             while (rs.next()) {
-                listColumn.add(rs.getString(ColumnN));
+                listColumn.add(rs.getString("column_name"));
             }
             stmt.close();
             rs.close();
@@ -571,6 +550,77 @@ public class DataBase implements Observed {
         }
         return listColumn;
     }
+    //-------------- Получить список таблиц базы ---------------
+    public ArrayList<String> getListTable() {
+        //connectionToBase(); // вызов Фукция подключения к базе
+        ArrayList<String> list_table_base = new ArrayList();
+        try {
+            stmt = connection.createStatement();
+            // Показывает все таблицы =( и из основной и из тестовой(с сортировкой)
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema' "
+                    + "ORDER BY tablename;");
+            while (rs.next()) {
+                String table_schema = rs.getString("tablename");
+                list_table_base.add(table_schema);
+                //System.out.println(table_schema);
+            }
+            rs.close();
+            stmt.close();
+            // connection.commit();
+            //System.out.println("-- DROPE TABLE BASE");
+        } catch (SQLException e) {
+            System.out.println("Failed WIEW TABLE BASE");
+            e.printStackTrace();
+            return null;
+        }
+        if(list_table_base.isEmpty()) return null;
+        return list_table_base;
+    }
+    // ---   List base on server   ---
+    public ArrayList<String> getListBase() {
+        ArrayList<String> listBase = new ArrayList();
+        //connectionToBase(); // вызов Фукция подключения к базе
+        try {
+            String where = " WHERE NOT datname in ('template0','template1')"; // Исключаем из списка эти базы
+            stmt = connection.createStatement();
+            String sql = "SELECT datname FROM pg_database" + where + ";";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                listBase.add(rs.getString("datname")); // Заносим в лист поочередно названия баз которые есть
+                //System.out.println( rs.getString("datname"));
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("Failed select data");
+            e.printStackTrace();
+        }
+        return listBase;
+    }
+    // --- получить список из базы SEQUENCE ---
+    private ArrayList<String> getListSequnce(){
+        String sql = null;    
+        ArrayList<String> lisrSEQ = new ArrayList<>();
+        try {
+            connection.setAutoCommit(true);
+            stmt = connection.createStatement();
+            sql = "SELECT sequence_schema, sequence_name FROM information_schema.sequences;";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                //System.out.println( rs.getString("sequence_schema"));
+                lisrSEQ.add(rs.getString("sequence_name"));
+            }           
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            //e.printStackTrace();
+        }
+        return lisrSEQ;
+    }
+    
+
 
         // ---  Обновить данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
     public int Update(String table, String column, String newData, HashMap< String, String> mapDataRow) {
@@ -599,8 +649,6 @@ public class DataBase implements Observed {
         }
         return requestr;
     }
-   
-            
     //-------------- Удаление списка таблиц ---------------
     public void dropTable(ArrayList<String> listT) {
         //connectionToBase(); // вызов Фукция подключения к базе
@@ -624,7 +672,6 @@ public class DataBase implements Observed {
 
         }
     }
-
     //-------------- Удаление таблицы c сохранением резервной копии ---------------
     public int createDelTable(String nameT) {
         if(!globVar.DB.isTable(nameT)) return -1;
@@ -664,56 +711,7 @@ public class DataBase implements Observed {
         }
     }
     
-    // ---   List base on server   ---
-    ArrayList<String> listBase() {
-        ArrayList<String> listBase = new ArrayList();
-        //connectionToBase(); // вызов Фукция подключения к базе
-        try {
-            String where = " WHERE NOT datname in ('template0','template1')"; // Исключаем из списка эти базы
-            stmt = connection.createStatement();
-            String sql = "SELECT datname FROM pg_database" + where + ";";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                listBase.add(rs.getString("datname")); // Заносим в лист поочередно названия баз которые есть
-                //System.out.println( rs.getString("datname"));
-            }
-            stmt.close();
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println("Failed select data");
-            e.printStackTrace();
-        }
-        return listBase;
-    }
 
-    //-------------- Получить список таблиц базы ---------------
-    public ArrayList<String> getListTable() {
-        //connectionToBase(); // вызов Фукция подключения к базе
-        ArrayList<String> list_table_base = new ArrayList();
-        try {
-            stmt = connection.createStatement();
-            // Показывает все таблицы =( и из основной и из тестовой(с сортировкой)
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema' "
-                    + "ORDER BY tablename;");
-            while (rs.next()) {
-                String table_schema = rs.getString("tablename");
-                list_table_base.add(table_schema);
-                //System.out.println(table_schema);
-            }
-            rs.close();
-            stmt.close();
-            // connection.commit();
-            //System.out.println("-- DROPE TABLE BASE");
-        } catch (SQLException e) {
-            System.out.println("Failed WIEW TABLE BASE");
-            e.printStackTrace();
-            return null;
-        }
-        if(list_table_base.isEmpty()) return null;
-        return list_table_base;
-    }
-    
     // Функция корректировки названия таблиц для базы данных
     String replacedNt(String s) {
         s = s.replace("-", "_").replace(".", "_").replace(" ", "_").replace("#", "Sharp_").replace("$", "Dollar_"); // тут и при создании нужно сделать единый модуль
@@ -743,50 +741,6 @@ public class DataBase implements Observed {
         }
     }
     
-    // --- получить список из базы SEQUENCE ---
-    private ArrayList<String> getListSequnce(){
-        String sql = null;    
-        ArrayList<String> lisrSEQ = new ArrayList<>();
-        try {
-            connection.setAutoCommit(true);
-            stmt = connection.createStatement();
-            sql = "SELECT sequence_schema, sequence_name FROM information_schema.sequences;";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                //System.out.println( rs.getString("sequence_schema"));
-                lisrSEQ.add(rs.getString("sequence_name"));
-            }           
-            stmt.close();
-            rs.close();
-        } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
-            //e.printStackTrace();
-        }
-        return lisrSEQ;
-    }
-    
-    // --- получить столбцы из таблицы ---
-    private ArrayList<String> getListColumnTable(String table_name){
-        String sql = null;    
-        ArrayList<String> listColumn = new ArrayList<>();
-        try {
-            //connection.setAutoCommit(true);
-            stmt = connection.createStatement();
-            sql = "SELECT column_name,data_type FROM information_schema.columns where table_name = '" +table_name+ "';";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                //System.out.println( rs.getString("sequence_schema"));
-                listColumn.add(rs.getString("column_name"));
-            }           
-            stmt.close();
-            rs.close();
-        } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
-            //e.printStackTrace();
-        }
-        return listColumn;
-    }
-
     // --- добавить комментарий к таблице ---
     public void createCommentTable(String table, String comment){
         String sql = null;   
@@ -939,8 +893,8 @@ public class DataBase implements Observed {
         if(globVar.DB==null) return;
         ArrayList<String> list_table_base = globVar.DB.getListTable();
         if(StrTools.searchInList("Abonents", list_table_base)< 0){
-            String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type"};
-            globVar.DB.createTable("Abonents", columns,"Абоненты");
+            String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type", "Экземпляры"};
+            globVar.DB.createTable("Abonents", columns,"Типовые абоненты");
         }
     }
     public static ArrayList<String[]> getAbonentArray() // функция для создания списка из таблицы абонентов

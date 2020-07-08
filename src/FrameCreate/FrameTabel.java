@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import Generators.Generator;
 import Main.Main_JPanel;
 import Tools.Tools;

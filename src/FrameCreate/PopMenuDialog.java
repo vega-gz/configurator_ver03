@@ -5,7 +5,7 @@
  */
 package FrameCreate;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;

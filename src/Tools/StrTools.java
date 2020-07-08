@@ -22,6 +22,7 @@ public class StrTools {
 
         return toks;
     }
+    //Нарезает строку на токены по терминаторам из регулярки
     public static void strSplit(String inStr, String pattern, ArrayList<token> toks){
         
         Pattern p1 = Pattern.compile(pattern);
@@ -34,6 +35,21 @@ public class StrTools {
             //System.out.println(toks.get(toks.size()-1).start + ") " + toks.get(toks.size()-1).tok);//----------------- контрольный вывод
         }
     }
+    //Делает список из строки "s" с разделителями "t"
+    public static ArrayList<String> getListFromString(String s, String t){
+        if(s==null || t==null) return null;
+        ArrayList<String> l = new ArrayList<>();
+        int x = 0;
+        int y = s.indexOf(t);
+        while(y>=0){
+            l.add(s.substring(x, y).trim());
+            x = y+1;
+            y = s.indexOf(t,x);
+        }
+        l.add(s.substring(x).trim());
+        return l;
+    }
+    
     public static int searchSequence(ArrayList<token> toks, ArrayList<token> srch){
         return searchSequence(toks, srch, 0, -1);
     }

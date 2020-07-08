@@ -1,12 +1,13 @@
 package FrameCreate;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import Main.Main_JPanel;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import org.w3c.dom.Node;
 
 /*@author Lev */
@@ -85,6 +86,11 @@ public final class ChangeDB extends javax.swing.JFrame {
             }
         });
 
+        jTextField6.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField6FocusLost(evt);
+            }
+        });
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
@@ -197,6 +203,10 @@ public final class ChangeDB extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jTextField6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
+        JOptionPane.showMessageDialog(null, "Focus lost " + evt.getComponent().getName());
+    }//GEN-LAST:event_jTextField6FocusLost
 
     /**
      * @param args the command line arguments

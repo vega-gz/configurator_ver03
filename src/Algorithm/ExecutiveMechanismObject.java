@@ -5,7 +5,7 @@
  */
 package Algorithm;
 
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import FrameCreate.TaskBarFrame;
 import XMLTools.XMLSAX;
 import globalData.globVar;
@@ -193,7 +193,7 @@ public class ExecutiveMechanismObject {
         // получаем исходные данные для нод механизмов из базы
         listObjectDGODGI.forEach(mechDODI -> {
             String nameTreq = globVar.abonent + "_" + mechDODI.getName(); // Формируется название таблицы
-            List<String> columnsB = workbase.selectColumns(nameTreq); // возмем Названия колонок из таблицы
+            List<String> columnsB = workbase.getListColumns(nameTreq); // возмем Названия колонок из таблицы
 
             for (int ib = 0; ib < nameColumnList.length; ++ib) { // Формируем список столбцов к базе (мин.2)
                 String s = nameColumnList[ib];

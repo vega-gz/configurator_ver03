@@ -1,0 +1,45 @@
+<Data>
+	<Trend InvColor="#00000000" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" Log="FALSE"/>
+	<TableColor>
+		<C1 Color ="#000000" />
+		<C2 Color="#000080"/>
+		<C3 Color="#0000c0"/>
+		<C4 Color="#0000ff"/>
+		<C5 Color="#005500"/>
+		<C6 Color="#0073ff"/>
+		<C7 Color="#008000"/>
+		<C8 Color="#008080"/>
+		<C9 Color="#00aa7f"/>
+		<C10 Color="#00b900"/>
+		<C11 Color="#00c000"/>
+		<C12 Color="#00c0c0"/>
+		<C13 Color="#00ff00"/>
+		<C14 Color="#00ffff"/>
+		<C15 Color="#55007f"/>
+		<C16 Color="#5500ff"/>
+		<C17 Color="#55aa00"/>
+		<C18 Color="#800000"/>
+		<C19 Color="#800080"/>
+		<C20 Color="#808000"/>
+		<C21 Color="#808080"/>
+		<C22 Color="#930000"/>
+		<C23 Color="#aa00ff"/>
+		<C24 Color="#bfc0c0"/>
+		<C25 Color="#c00000"/>
+		<C26 Color="#c000c0"/>
+		<C27 Color="#c0c000"/>
+		<C28 Color="#c23d00"/>
+		<C29 Color="#c76456"/>
+		<C30 Color="#cb4101"/>
+		<C31 Color="#cc3b3b"/>
+		<C32 Color="#d5ff00"/>
+		<C33 Color="#e7ff7c"/>
+		<C34 Color="#ff0000"/>
+		<C35 Color="#ff007f"/>
+		<C36 Color="#ff00ff"/>
+		<C37 Color="#ff460e"/>
+		<C38 Color="#ff5500"/>
+		<C39 Color="#ffe57c"/>
+		<C40 Color="#ffff00"/>
+	</TableColor>
+</Data>

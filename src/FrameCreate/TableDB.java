@@ -7,18 +7,21 @@ import Tools.MyTableModel;
 import Tools.SaveFrameData;
 import Tools.TableTools;
 import Tools.Tools;
+import Tools.closeJFrame;
 import Tools.isCange;
+import Tools.regitrationJFrame;
 import globalData.globVar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
-    MyTableModel tableModel = new MyTableModel();
+    public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
     String tableName;
@@ -26,11 +29,16 @@ public class TableDB extends javax.swing.JFrame {
     String[] cols;
     String comment;
     ArrayList<String[]> fromDB;
+    ArrayList<String[]> listItemList = new ArrayList<>();
+    public int[] colsWidth;
+    int[] align;
+    int qCol;
+    ArrayList<JFrame> listJF = new ArrayList();
 
     public TableDB(String table) {
         tableName = table;
         if(globVar.DB==null)return;
-        List<String> listColumn = globVar.DB.selectColumns(table);
+        List<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
         cols = listColumn.toArray( new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);
@@ -38,21 +46,25 @@ public class TableDB extends javax.swing.JFrame {
         fromDB = globVar.DB.getData(table);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));
         comment = globVar.DB.getCommentTable(table);
-        this.setTitle(table + ": "+comment);
         tableSize = fromDB.size();
+        qCol = listColumn.size();
+        align = new int[qCol];
+        colsWidth = new int[qCol];
+        
+        TableTools.setWidthCols(cols, tableModel, colsWidth, 7.8);
+        if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
  
         initComponents();
         
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel);
-        int qCol = listColumn.size();
-        int[] align = new int[qCol];
-        int[] colsWidth = new int[qCol];
         
-        TableTools.setWidthCols(cols, fromDB, colsWidth, 7);
-        if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
+        
+        regitrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
+        closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
+        
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20);
         
-        TableTools.setColsEditor(table, cols, fromDB, jTable1);
+        TableTools.setColsEditor(table, cols, fromDB, jTable1, listItemList);
         
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = ()->{
@@ -61,7 +73,9 @@ public class TableDB extends javax.swing.JFrame {
         isCange ich = ()->{
             return compareTable(fromDB,tableModel);
         };
-        TableTools.setTableListener(this, sfd, ich);
+        TableTools.setTableListener(this, sfd, ich, cjf);
+        
+        this.setTitle(table + ": "+comment);
     }
 
     @SuppressWarnings("unchecked")
@@ -90,6 +104,24 @@ public class TableDB extends javax.swing.JFrame {
         });
 
         jTable1.setModel(tableModel);
+        jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTable1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTable1FocusLost(evt);
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("Сохранить");
@@ -295,6 +327,47 @@ public class TableDB extends javax.swing.JFrame {
         globVar.processReg.remove(this.getTitle());
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = jTable1.getSelectedRow();
+            SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, listJF);
+            sse.setVisible(true);
+            listJF.add(sse);
+            sse.setFields(row);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        //JOptionPane.showMessageDialog(null, "Key: " + evt.getKeyChar() + ", row: " + tableModel.getRowCount());
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
+//        int i = jTable1.getSelectedRow();
+//        int j = jTable1.getSelectedColumn();
+//        jTable1.getComponentAt(j, i).addKeyListener(new java.awt.event.KeyAdapter() {
+//            public void keyReleased(java.awt.event.KeyEvent e) {
+//                JOptionPane.showMessageDialog(null, "Key: " + e.getKeyChar());
+//            }
+//        });
+        //JOptionPane.showMessageDialog(null, "Component: " + jTable1.getComponentAt(j, i) + ", row: " + i + ", col: " + j);
+    }//GEN-LAST:event_jTable1FocusGained
+
+    private void jTable1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusLost
+//        evt.getComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+//            public void keyReleased(java.awt.event.KeyEvent e) {
+//                System.out.println("Key: " + e.getKeyChar());
+//            }
+//        });
+////        int i = jTable1.getSelectedRow();
+////        int j = jTable1.getSelectedColumn();
+////        jTable1.getComponentAt(j, i).addKeyListener(new java.awt.event.KeyAdapter() {
+////            public void keyReleased(java.awt.event.KeyEvent e) {
+////                System.out.println("Key: " + e.getKeyChar());
+////            }
+////        });
+//        System.out.println("Component: " + evt.getComponent());
+    }//GEN-LAST:event_jTable1FocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

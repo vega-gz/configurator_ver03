@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
-import DataBaseConnect.DataBase;
+import DataBaseTools.DataBase;
 import Main.Main_JPanel;
 import globalData.globVar;
 import java.awt.Component;

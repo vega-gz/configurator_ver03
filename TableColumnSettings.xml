@@ -1,5 +1,26 @@
 <TableColumnSettings>
 	<mb_A>
-		<dataType file="ModbusFormat.xml" col=""/>
+		<dataType src="file" file="ModbusFormat.xml" col=""/>
 	</mb_A>
+	<Abonents>
+		<Abonent_type src="this">
+			<Item t="Sonet"/>
+			<Item t="Modbus"/>
+			<Item t="KM04"/>
+		</Abonent_type>
+	</Abonents>
+	<ANB>
+		<!--Таблица src="DB"/-->
+		<TAG_NAME_AnPar src="table" table="this" col="Таблица" default="AI" colInTable="TAG_NAME_PLC"  edit="true"/>
+		<direct src="this">
+			<Item t="больше"/>
+			<Item t="меньше"/>
+		</direct>
+		<тип src="this">
+			<Item t="У"/>
+			<Item t="А"/>
+			<Item t="О"/>
+			<Item t="П"/>
+		</тип>
+	</ANB>
 </TableColumnSettings>
