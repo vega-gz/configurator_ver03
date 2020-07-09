@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import javafx.scene.text.Font;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -38,7 +37,7 @@ public final class UnloadExcel {
 
     public void createExcelSheet(String nameTable, HSSFWorkbook workbook) throws ParseException {
         int x = nameTable.indexOf("_");
-        String book_name = nameTable.substring(0, x);
+        String book_name=nameTable.substring(0,x);
         String sheetName = nameTable.substring(x + 1);
         int y = sheetName.indexOf("_mb_");
         String subAb = "";
@@ -60,10 +59,9 @@ public final class UnloadExcel {
         // создаем подписи к столбцам (это будет первая строчка в листе Excel файла)
         Row row = sheet.createRow(rowNum);
         ArrayList<String> colNames = new ArrayList<>();
-        HSSFCellStyle cellStyle = workbook.createCellStyle();
+         HSSFCellStyle cellStyle=workbook.createCellStyle();
         cellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);//это стиль заполнения а не место
-
         //получаем данные из конфиг
         for (Node colExcel : childExcel) {
             String colExelName = colExcel.getNodeName();//получили имя ноды 
@@ -72,9 +70,11 @@ public final class UnloadExcel {
             int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
             row.createCell(numberCol).setCellValue(colName);
             row.getCell(numberCol).setCellStyle(cellStyle);//заполняем ячейки наименования цветом
-
+        
         }
-
+       
+        
+        
         rowNum++;
         ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);
         for (String[] sData : data) {
@@ -94,12 +94,12 @@ public final class UnloadExcel {
         }
         // записываем созданный в памяти Excel документ в файл
         try {
-            BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(new File(globVar.desDir + "\\" + book_name + ".xls")));
+            BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(new File(globVar.desDir+"\\"+book_name+".xls")));
             workbook.write(buf);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+       
     }
 
 }

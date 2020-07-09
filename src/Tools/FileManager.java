@@ -631,7 +631,7 @@ public class FileManager {
             String findexpInt = nameIntFile.substring(nameIntFile.lastIndexOf(".") + 1);//получили расширение
 
             if (findexpInt.equals(expInt)) {//если нашли совпадения по расширению
-                String findTypeName = findStringInFile(dir + "\\" + nameIntFile, "Name=");//находит первое вхождение комда нашел соответствие
+                String findTypeName = findStringInFile(dir + "\\" + nameIntFile, "Name=");//находит первое вхождение кода нашел соответствие
                 attrIntValue = getAttributValue(findTypeName, "Name=" + '"');//находим этот аттрибут
                 fileName = nameIntFile.substring(0, nameIntFile.indexOf('.'));
 

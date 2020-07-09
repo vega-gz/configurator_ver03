@@ -3,12 +3,12 @@
 <Settings>
 <USER>mutonar</USER>
 <PASS>Solovin2</PASS>
-<URL1>jdbc:postgresql://minoro.ru:5432/</URL1>
-<URL>jdbc:postgresql://172.16.35.43:5432/</URL>
+<URL1>jdbc:postgresql://172.16.35.43:5432/</URL1>
+<URL>jdbc:postgresql://minoro.ru:5432/</URL>
 <BASE>kln_kc</BASE>
 <BASE1>pravoslav</BASE1>
 <BASE2>kln_gpa</BASE2>
-<DesignDir>D:\Projects\Калининград_цех</DesignDir>
+<DesignDir>C:\Users\cherepanov\Desktop\ArcNew</DesignDir>
 <nameProject>Калининград_цех</nameProject>
 </Settings>
 </config>
