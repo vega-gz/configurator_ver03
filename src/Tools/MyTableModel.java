@@ -12,7 +12,7 @@ public class MyTableModel  extends DefaultTableModel{
     
     @Override
     public String getValueAt(int row, int column) {
-        return (String)super.getValueAt(row, column);
+        return super.getValueAt(row, column) + "";//(String)
     }
     
 }

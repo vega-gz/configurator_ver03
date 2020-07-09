@@ -95,9 +95,19 @@ public class RWExcel {
     }
     
     private static String getFromSwitch(Node col,String dataFromExcel){
+        if(dataFromExcel==null || col==null) return null;
+        dataFromExcel.replaceAll(">", "&gt;").replaceAll("<", "&lt;");
         String[] caseArr = {"case","val",dataFromExcel};
         Node cse = globVar.sax.findNodeAtribute(col,caseArr);
         return globVar.sax.getDataAttr(cse, "def");
+    }
+    
+    private static String getFromReplace(Node col,String data){//, String dataFromExcel){
+        if(data==null || col==null) return null;
+        String s = data.replaceAll(">", "&gt;").replaceAll("<", "&lt;");
+        Node cse = globVar.sax.findNodeAtribute(col,new String[]{"case","from",s});
+        if(cse==null) return data;
+        return globVar.sax.getDataAttr(cse, "to");
     }
     
     private static String getModbusDataBit(int i, int colCnt, String[][] dataFromExcel, String func){
@@ -341,6 +351,11 @@ public class RWExcel {
                                     dataFromExcel[i][colCnt]="";
                                 }
                             }else{
+                                String registr = globVar.sax.getDataAttr(col,"registr");
+                                if(registr != null){
+                                    if(registr.equalsIgnoreCase("UP")) strCell = strCell.toUpperCase();
+                                    else                               strCell = strCell.toLowerCase();
+                                }
                                 String unical = globVar.sax.getDataAttr(col,"unical");
                                 if(unical != null){
                                     for(int j=0; j < i; j++){
@@ -350,13 +365,17 @@ public class RWExcel {
                                         }
                                     }
                                 }
+                                String replace = globVar.sax.getDataAttr(col,"replace");
+                                if(replace != null){
+                                    strCell=getFromReplace(col,strCell);
+                                }
                                 String type = globVar.sax.getDataAttr(col,"type");
                                 if(type!=null){
                                     if("Int".equals(type)){
                                         try { 
                                             strCell = ""+((int)Double.parseDouble(strCell));
                                         } catch (NumberFormatException e) {
-                                            FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
+                                            FileManager.loggerConstructor("Неправильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
                                         }
                                     }
                                     else if("Number".equals(type)){
@@ -364,7 +383,7 @@ public class RWExcel {
                                             Double tmp = Double.parseDouble(strCell);
                                             strCell = ""+(Math.round(tmp*10000.0)/10000.0);
                                         } catch (NumberFormatException e) {
-                                            FileManager.loggerConstructor("Не правильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
+                                            FileManager.loggerConstructor("Неправильное значение \"" +strCell+ "\" в ячейке " + colExName+(i+1)+" листа "+ exSheetName);
                                         }
                                     }
                                 }

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -35,6 +36,7 @@ public class ExecutiveMechanismObject {
     String[] arrNameExecute; // Список имен нод механизмов для передачи выбора пользователю
     ArrayList<Node> listNodeRootN; // ноды рута AM_Classica, AM_NKU и тд
     XMLSAX readXML; // наш конфиг файл
+    ArrayList<Integer> iniySplitList = new ArrayList<>();  // список разделителя таблиц механизмов
 
     // Формируем первоначальные данные для пользователя, выбор механизма обработки
     public ExecutiveMechanismObject() {
@@ -59,6 +61,39 @@ public class ExecutiveMechanismObject {
             return getMecha(n, missWE); // возратить полные данные
         }
         return null;
+    }
+
+    // Получить все данные механизмов 
+    public ArrayList<ArrayList> getDataAllMechaNode(boolean missWE) {
+        ArrayList<ArrayList> fistConnectList = null;
+        ArrayList<ArrayList> finalList = null;
+        String nameTableFirst;
+        String[] columnsFirst = null;
+        ArrayList<ArrayList> secondConnectList;
+        String nameTableSecond;
+        String[] columnsSecond;
+        
+        for (int i=0; i< listNodeRootN.size(); ++i) { //проходим по всем нодам механизмов
+            Node n = listNodeRootN.get(i);
+            
+        
+        if (i == 0) {
+                fistConnectList = getMecha(n, missWE);
+                nameTableFirst = getNameTable(); // получим название таблицы строга после getDataCurrentNode
+                columnsFirst = getColumns(); // получить колонки для построки таблицы
+                continue;
+            } else if (i > 0) {
+                secondConnectList = getMecha(n, missWE);
+                nameTableSecond = getNameTable(); // получим название таблицы строга после getDataCurrentNode
+                columnsSecond = getColumns(); // получить колонки для построки таблицы
+
+                // Сращиваем данные
+                columnsFirst = Stream.concat(Arrays.stream(columnsFirst), Arrays.stream(columnsSecond)).toArray(String[]::new);  // контекация массивов колонок
+                finalList = connectListMechan(fistConnectList, secondConnectList); // сращиваем Листы Листов            }
+
+        }
+        }
+        return finalList;
     }
 
     // --- Получить ноды механизмов обработки--
@@ -89,17 +124,19 @@ public class ExecutiveMechanismObject {
         nameTable = globVar.abonent + "_AM";    //  формируем название таблицы строится
         //this.setTitle(nameTable); // Установить заголовок
         columnT = new ArrayList<>(); // заготовка названия колонок
-        columnT.add("TAG_NAME");
         columnT.add("Наименование");
+        columnT.add("TAG_PLC");
         columnT.add("совпадения");
         columnT.add("true/false");
         String[] nameColumnList = new String[]{"TAG_NAME_PLC", "Наименование сигнала", "Наименование"}; // наименование колонок для выборки из базы
+        String[] endRusName = new String[]{"Открыть","закрыть", "включить"};
+        String[] simbolRemove = new String[]{"-",","}; // символы которые нужно удалить из конца строки русских названий
         ArrayList<String> listColumnSelect = new ArrayList(); // листы с колонками для запроса к базе
         ArrayList<ArrayList> listTagName = new ArrayList(); // 
         boolean firstStep = true; // Переменная первого прохода формирования списка
         int sumArraySize = 0; // Переменная для определения длинны формирования массива (не верно)
         int biforeSumArraySize = 0;
-        
+
         int columnEntry = 2;// как то правильно нужно прикрутить столбец совпадений
         ArrayList<String> notFindTables = new ArrayList(); // лист не найденных таблиц для запроса из фала
 
@@ -107,11 +144,10 @@ public class ExecutiveMechanismObject {
         ArrayList<String> nameDGODGI = new ArrayList<>();
         ArrayList<String> listNameOnOff = new ArrayList<>();
 
-
         ArrayList<ObjAnalize> listObjectDGODGI = new ArrayList<>(); // список объектов обработки
 
         // старт основного алгоритма  по две ноды анализ(может быть и больше но это не точно)
-        for (int i = 0; i < listNodeMethodExe.size(); ++i) { 
+        for (int i = 0; i < listNodeMethodExe.size(); ++i) {
             Node nodeConEnd = listNodeMethodExe.get(i);
             String nameDGOorDGI = nodeConEnd.getNodeName();
             nameDGODGI.add(nodeConEnd.getNodeName());
@@ -198,12 +234,12 @@ public class ExecutiveMechanismObject {
             int numElRusName = 1;//
             ArrayList<String> listOnOffDGO = objDGO.getEnding(); // получаем окончания
             // формируем  названия колонки DGO окончаний
-            for(String sE: listOnOffDGO){
+            for (String sE : listOnOffDGO) {
                 columnT.add(objDGO.getName() + "_" + sE);
             }
             // дописываем  названия колонки DGi окончаний
-            for (ObjAnalize obgDGI : listObjectDGODGI) {                    
-                for(String sE: obgDGI.getEnding()){
+            for (ObjAnalize obgDGI : listObjectDGODGI) {
+                for (String sE : obgDGI.getEnding()) {
                     columnT.add(obgDGI.getName() + "_" + sE);
                 }
             }
@@ -212,9 +248,50 @@ public class ExecutiveMechanismObject {
                 ArrayList<String> findTmp = new ArrayList(); // Временный 
                 String[] s = listDO.get(elMass); // Первый элемент DO 
 
+                // добавить русское название в столбец с обрезаниеме
                 if (s.length > 1) { // для подстраховки если не нашли имена столбцов
-                    findTmp.add(s[numElRusName]);  // добавить русское название в столбец
+                    String commonSliceRusEnd = null; //
+                    
+                    String regex = "(";
+                    for (int endR=0; endR < endRusName.length; ++endR){ // проходим по ненужным окончаниям и формируем патерн
+                        String endRus = endRusName[endR];
+                        if (endR == endRusName.length - 1){
+                            regex += endRus + ")";
+                        } else regex += endRus + "|";
+                    }
+                    // эта Pattern.CASE_INSENSITIVE не работает с русским языком обязательно Pattern.UNICODE_CASE
+                    commonSliceRusEnd = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(s[numElRusName]).replaceAll(""); // убираем все что есть в строке не нужного
+                    //commonSliceRusEnd = Pattern.compile(regex, Pattern.CASE_INSENSITIVE). s[numElRusName], endRus);
+                    
+                    if (commonSliceRusEnd != null) {
+                        boolean missWord = true;
+                        while(missWord){
+                            boolean cleanEndRus = false;
+                            if(commonSliceRusEnd != null && commonSliceRusEnd.length() > 0){
+                                // обрубаем пробелы с обоих концов
+                                commonSliceRusEnd = commonSliceRusEnd.trim();
+                                for(String sRem: simbolRemove){
+                                    // перебираем ненужные последние символы
+                                    if (commonSliceRusEnd.substring(commonSliceRusEnd.length() - 1).equals(sRem)){
+                                      commonSliceRusEnd =  commonSliceRusEnd.substring(0, commonSliceRusEnd.length() - 1); // без последнего символа
+                                      cleanEndRus = false;
+                                      break;
+                                    } else cleanEndRus = true;
+                                }
+                                // Если на всем переборе не найдено нечего то пропускаем это названия сигнала
+                                if(cleanEndRus){
+                                    missWord = false;
+                                }
+                            
+                            } else commonSliceRusEnd = "errorNamedRusName"; //   но эта проверка может не понадобиться
+                            System.out.println("while work");
+                        }
+                        findTmp.add(commonSliceRusEnd);
+                        
+                    } else findTmp.add(s[numElRusName]);
                 }
+                
+                
                 int enterEndDO = 0; // триггер вхождения в поиск окончания DO
 
                 // сигнал DO но по всем окончаниям on Off
@@ -222,7 +299,7 @@ public class ExecutiveMechanismObject {
                 for (String endDGO : listOnOffDGO) {
                     commonSliceSig = comparSignalEnd(s[numElTagName], endDGO);
                     if (commonSliceSig != null) {
-                                    //++enterEndDO;
+                        //++enterEndDO;
                         //System.out.println(commonSliceSig);
                         break;
                     }
@@ -266,9 +343,9 @@ public class ExecutiveMechanismObject {
                 // тут по списку оставшихся OBJ элементов(максимум пока 2)
                 for (ObjAnalize obgDGI : listObjectDGODGI) {
                     ArrayList<String[]> listDI = obgDGI.getDataSig();
-                    
+
                     ArrayList<String> listOnOffDGI = obgDGI.getEnding();
-                   
+
                     for (String endDGI : listOnOffDGI) { // прогоняем по окончаниям DGI
                         boolean findDICompare = false; // триггер нахождения окончания DGI
                         int j = 0;
@@ -292,7 +369,7 @@ public class ExecutiveMechanismObject {
                         }
                     }
                 }
-                            //System.out.println("Sig "+ commonSliceSig+" in DO_List " 
+                //System.out.println("Sig "+ commonSliceSig+" in DO_List " 
                 //        + " " + Integer.toHexString(enterEndDO) +" in DI_List "+ enterEndDI);
                 String entry = "ИМ: " + Integer.toHexString(enterEndDO) + "x" + Integer.toHexString(enterEndDI);
                 findTmp.add(columnEntry, entry);  // данные о совпадении
@@ -434,9 +511,11 @@ public class ExecutiveMechanismObject {
     String comparSignalEnd(String str1, String endS) {
         String sigF = null;
         String cutString = "^(.*)" + endS + "$";
-        Pattern pattern0 = Pattern.compile(cutString);
+        Pattern pattern0 = Pattern.compile(cutString); // Должен игнорировать регистр
+        //System.out.println(pattern0.pattern() +" flag -> "+pattern0.flags());
+        //Pattern pattern0 = Pattern.compile(Pattern.quote(cutString), Pattern.CASE_INSENSITIVE + Pattern.LITERAL); // Должен игнорировать регистр
         Matcher matcher0 = pattern0.matcher(str1);  // строка из входа входа на сравнение 
-        if (matcher0.matches()) { // Окончание совпало
+        if (matcher0.matches()) { // Окончание совпало(не срабатывает при CASE_INSENSITIVE)
             //System.out.println(matcher0.group(0)); // Системный вывод
             sigF = matcher0.group(1); // названия сигнала без окончания
         }
@@ -515,67 +594,125 @@ public class ExecutiveMechanismObject {
             workbase.setValueObserver(min, max, i);
         }
     }
+
+    // -- метод сращивания Листов для общей таблицы --
+    public ArrayList<ArrayList> connectListMechan(ArrayList<ArrayList> first, ArrayList<ArrayList> second) {
+        ArrayList<String> emptyData = new ArrayList<>(); // пустые строки будут для выравниявания матрицы
+        // проверка длинны при добавлении недостающих данных
+        // если второго лист длиннее первого()
+        if (second.size() > first.size()) {
+            int lenStrList = 0; // длинна строки-листа первого массива
+            for (ArrayList<String> enterList : first) {
+                if (enterList.size() > lenStrList) { // перестраховка так как они все должны быть одинаковы
+                    lenStrList = enterList.size();
+                }
+            }
+            // создаем недостающий отрезак данных для первого Листа 
+            for (int i = 0; i < lenStrList; ++i) {
+                emptyData.add(""); // просто пустая строка
+            }
+            // сращивание данных двух листов 
+            for (int i = 0; i < second.size(); ++i) {
+                int test = first.size();
+                if (i <= first.size()-1) { // пока не достигли окончания первого листа соединяем
+                    first.get(i).addAll(second.get(i)); // пристыковать один Лист к другому
+                } else {
+                    ArrayList<String> tmp = new ArrayList<>();
+                    tmp.addAll(emptyData); // прикручиваем пустое не достающее
+                    tmp.addAll(second.get(i));
+                    first.add(tmp); // и прикручиваем сформированный массимуже к первому Листу(может делать новый?)
+                }
+            }
+            
+        } else if (first.size() > second.size()) { // если первый больше по длине чем тот который прикручиваем(добавить в конец данные) 
+            int lenStrList = 0; // длинна строки-листа уже для второго массива Листов
+            for (ArrayList<String> enterList : second) {
+                if (enterList.size() > lenStrList) { // перестраховка так как они все должны быть одинаковы
+                    lenStrList = enterList.size();
+                }
+            }
+            // создаем недостающий отрезак данных для второго Листа 
+            for (int i = 0; i < lenStrList; ++i) {
+                emptyData.add(""); // просто пустая строка
+            }
+            // сращивание данных двух листов 
+            for (int i = 0; i < first.size(); ++i) {
+                if (i <= second.size()) { // пока не достигли окончания лист соединяем
+                    first.get(i).addAll(second.get(i)); // пристыковать один Лист к другому
+                } else {
+                    first.add(emptyData); //просто добавляем недостающие строки
+                }
+            }
+        }
+        return first; 
+
+    }
 }
 
-
-
 // --- объект анализа ИМ ---
-class ObjAnalize{
+class ObjAnalize {
+
     private String name = null;
     private boolean exitOut; // выходной это параметр или входной
     ArrayList<String> ending = new ArrayList<>(); // лист окончаний
     ArrayList<String[]> listFromBase = new ArrayList<>(); // лист сигналов из базы  русское и PLC имя
-    
-    public ObjAnalize(String name, boolean exitOut){
+
+    public ObjAnalize(String name, boolean exitOut) {
         this.name = name;
         this.exitOut = exitOut;
     }
+
     // -- добавить окончания --
-    public void addEnding(String s){
+    public void addEnding(String s) {
         ending.add(s);
     }
+
     // --  Установить окончания --
-    public void setEnding(ArrayList<String> ending){
+    public void setEnding(ArrayList<String> ending) {
         this.ending = ending;
     }
+
     // --  вернуть список окончаний --
-    public ArrayList<String> getEnding(){
+    public ArrayList<String> getEnding() {
         return ending;
     }
+
     // -- установить данные из таблицы --
-    public void setDataList(ArrayList<String[]> listFromBase){
+    public void setDataList(ArrayList<String[]> listFromBase) {
         this.listFromBase = listFromBase;
     }
-    
+
     // получить что взяли из базы
-     public ArrayList<String[]> getDataSig(){
+    public ArrayList<String[]> getDataSig() {
         return listFromBase;
     }
+
     //получить русские имена
-    public ArrayList<String> getListSigRus(){
+    public ArrayList<String> getListSigRus() {
         ArrayList<String> listRusSig = new ArrayList<>();
-        for(String[] arr: listFromBase){
+        for (String[] arr : listFromBase) {
             listRusSig.add(arr[0]);
         }
         return listRusSig;
     }
+
     // получить имена сигналов
-    public ArrayList<String> getListSig(){
+    public ArrayList<String> getListSig() {
         ArrayList<String> lisSig = new ArrayList<>();
-        for(String[] arr: listFromBase){
+        for (String[] arr : listFromBase) {
             lisSig.add(arr[1]);
         }
         return lisSig;
     }
-    
+
     // получить имя объекта 
-    public String getName(){
+    public String getName() {
         return name;
     }
-    
+
     //вернуть тип объекта DGO или DGI
-    public boolean getThisTypeDGO(){
+    public boolean getThisTypeDGO() {
         return exitOut;
     }
-  
+
 }
