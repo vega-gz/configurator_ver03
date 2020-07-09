@@ -1,0 +1,92 @@
+<Data>
+    <WindowFBType Name="T07_Trend" UUID="114D0D434EA28BA5F6830B8A3B487F84">
+        <InterfaceList>
+            <EventInputs>
+                <Event Name="show" UUID="C7EAA1EB434D26CD0E95FEB5B380ED33" />
+                <Event Name="show_modal" UUID="783A228C4C103C44ACB680BC2632D53C" />
+                <Event Name="hide" UUID="860197FD4B47ACFA4D8E688193971E2F" />
+            </EventInputs>
+            <EventOutputs>
+                <Event Name="showed" UUID="9EA97E954ACBA70E705C4F98412FA701" />
+                <Event Name="hid" UUID="2C97A00C47E7DBDF4E600BA7EB7EC064" />
+            </EventOutputs>
+            <InputVars>
+                <VarDeclaration Name="pos" Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" InitialValue="(x:=0,y:=0)" UUID="B3E2DCE04C63F5A91D55B4B585803AB1" />
+                <VarDeclaration Name="visible" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" InitialValue="FALSE" UUID="E0FDB58B4C0E41BEF99CB99F0F523C83" />
+                <VarDeclaration Name="size" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" InitialValue="(width:=1040,height:=742)" UUID="C6CE29B54853ABD72B3982A71CC39353" />
+                <VarDeclaration Name="bg_color" Type="TColor" TypeUUID="2096F020447B4C22B73436BBC88DA44A" InitialValue="4294967295" UUID="D03F45464B2E21A355B59D837757F003" />
+                <VarDeclaration Name="caption" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" InitialValue="&apos;&apos;" UUID="8C7888E44906B8F86A91D69C32372491" />
+                <VarDeclaration Name="flags" Type="UDINT" TypeUUID="48E8E24D4C69B5FCC5612AA94912BBEA" InitialValue="0" UUID="BA33E0F641DFB93B2F2492A0A68BB0F4" />
+                <VarDeclaration Name="hScrollBarPolicy" Type="SINT" TypeUUID="0FB4748840374EDB8A7469918166E250" InitialValue="0" UUID="B8CE7BA74F8B174D8035B38D5D6770A5" />
+                <VarDeclaration Name="vScrollBarPolicy" Type="SINT" TypeUUID="0FB4748840374EDB8A7469918166E250" InitialValue="0" UUID="0DA0F7F9457C659E549C3AB8AD1EEBAD" />
+                <VarDeclaration Name="DT_new" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" InitialValue="DT#1970-01-01-00:00:00.000" UUID="777988B54D8AE6FEEC0B5791DD01968D" />
+                <VarDeclaration Name="DT_set" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" InitialValue="FALSE" UUID="94C1A5754F51E6A318C369848719896A" />
+            </InputVars>
+        </InterfaceList>
+        <FBNetwork>
+            <FB Name="TREND_WINDOW" Type="ARCHIVE_TREND" TypeUUID="8E7D1F2B4C87981B9E15CFB2D58A0885" UUID="512D41B04596D3C9048CA49C94E6C3EE" X="845.395175558208" Y="826.230736068447">
+                <VarValue Variable="angle" Value="0" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+                <VarValue Variable="size" Value="(width:=1678,height:=772)" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" />
+                <VarValue Variable="pos" Value="(x:=-1,y:=-1)" Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" />
+                <VarValue Variable="enabled" Value="TRUE" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+                <VarValue Variable="visible" Value="TRUE" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
+                <VarValue Variable="zValue" Value="5" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+                <InterfaceList>
+                    <EventOutputs>
+                        <Event Name="mouseLBPress" Comment="событие нажатия левой кнопки мыши на объекте" UUID="299295AF47A6CCAC26009C964C5B47C5" />
+                        <Event Name="mouseLBRelease" Comment="событие отпускания левой кнопки мыши на объекте" UUID="8DE6001343803CF639F332B16CC30079" />
+                        <Event Name="mouseRBPress" Comment="событие нажатия правой кнопки мыши на объекте" UUID="5DE993F543E00267EF077D89D3D01B5B" />
+                        <Event Name="mouseRBRelease" Comment="событие отпускания правой кнопки мыши на объекте" UUID="0AB0718D41E90B02F75425B41E39C1F0" />
+                        <Event Name="mouseEnter" Comment="событие входа указателя мыши в пределы объекта" UUID="AA1D53154C9D3E9C25B0ADA056F82B5D" />
+                        <Event Name="mouseLeave" Comment="событие выхода указателя мыши за пределы объекта" UUID="C21BC0A24A8E157AF50BC59A1635CD7B" />
+                        <Event Name="mouseLBDblClick" Comment="событие двойного щелчка левой кнопки мыши на объекте" UUID="1BD263D2412FA33DA367C5B3480C9F0A" />
+                        <Event Name="SAVED" Comment="данные сохранены" UUID="C7C2A3FD4FC522633BC893985B9A02A6" />
+                        <Event Name="PRINTED" Comment="данные распечатаны" UUID="EA660C124AEA618DD31E908BE6FFA51A" />
+                    </EventOutputs>
+                    <InputVars>
+                        <VarDeclaration Name="pos" Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" Comment="позиция объекта" InitialValue="(x:=0,y:=0)" UUID="599604C246641AA6BA0E508C9ABF7EA4" />
+                        <VarDeclaration Name="angle" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Comment="угол поворота объекта" InitialValue="0" UUID="00FC1D804A2DE5A83DE85390D640AC3D" />
+                        <VarDeclaration Name="enabled" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Comment="доступность объекта" InitialValue="TRUE" UUID="15B097034B9BBE7CCD78E0A466A64239" />
+                        <VarDeclaration Name="moveable" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Comment="подвижность объекта" InitialValue="FALSE" UUID="6D62810D46DF8C4B27E62DBEBA63194B" />
+                        <VarDeclaration Name="visible" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Comment="видимость объекта" InitialValue="TRUE" UUID="EAC5288F431A370F7493EF98A2C613D5" />
+                        <VarDeclaration Name="zValue" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Comment="z-индекс объекта" InitialValue="0" UUID="29E9E6AD475BD9B49E6F40B0328374A7" />
+                        <VarDeclaration Name="hint" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Comment="всплывающая подсказка" InitialValue="&apos;&apos;" UUID="9001F21244C66932FB81B7B021B085BA" />
+                        <VarDeclaration Name="size" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" Comment="размер прямоугольника" InitialValue="(width:=50,height:=50)" UUID="1555B4384D69683C33FCB4A79B1A0932" />
+                        <VarDeclaration Name="font" Type="TFont" TypeUUID="90FD67C547172D027101CAA2975B8031" Comment="Шрифт текста" InitialValue="(family:=&apos;MS Shell Dlg 2&apos;,size:=11,bold:=FALSE,italic:=FALSE,underline:=FALSE,strikeout:=FALSE)" UUID="6506798C4124D61EAF94B7922188432A" />
+                        <VarDeclaration Name="DTV" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Comment="начало временной шкалы" InitialValue="DT#1970-01-01-00:00:00.000" UUID="594DE01743E5096C3EAE629F86B3AA63" />
+                    </InputVars>
+                    <OutputVars>
+                        <VarDeclaration Name="MARKERA_POS" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Comment="позиция маркера A" InitialValue="DT#1970-01-01-00:00:00.000" UUID="3DAED6CA416A9A1B25DE8FAA9D662FD9" />
+                        <VarDeclaration Name="MARKERB_POS" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Comment="позиция маркера B" InitialValue="DT#1970-01-01-00:00:00.000" UUID="B0BB342848E2888CBE21AAA636B1DF19" />
+                    </OutputVars>
+                </InterfaceList>
+                <Data Title="" Period="1000" TextColor="#000000" GridColor="#f0f0f0" BkgColor="#ffffff" FixedBkgColor="#F0F0F0" DiscreteAsAnalog="FALSE" ExtrnalPrint="FALSE" ExtrnalSave="FALSE" ExtrnalYRange="FALSE" ExternalXLength="FALSE">
+                    <Legend Position="3" Size="25">
+                        <Column Id="0" Visible="TRUE" Width="20" />
+                        <Column Id="1" Visible="TRUE" Width="20" />
+                        <Column Id="2" Visible="TRUE" Width="150" />
+                        <Column Id="3" Visible="TRUE" Width="100" />
+                        <Column Id="4" Visible="TRUE" Width="100" />
+                        <Column Id="5" Visible="TRUE" Width="100" />
+                        <Column Id="6" Visible="TRUE" Width="100" />
+                        <Column Id="7" Visible="TRUE" Width="80" />
+                        <Column Id="8" Visible="TRUE" Width="-1" />
+                        <Column Id="9" Visible="FALSE" Width="80" />
+                        <Column Id="10" Visible="FALSE" Width="-1" />
+                    </Legend>
+                    <PrintLegend Position="1" Size="210">
+                        <Column Id="0" Visible="TRUE" Width="40" />
+                        <Column Id="1" Visible="TRUE" Width="40" />
+                        <Column Id="2" Visible="TRUE" Width="320" />
+                        <Column Id="3" Visible="TRUE" Width="1100" />
+                        <Column Id="4" Visible="FALSE" Width="1100" />
+                    </PrintLegend>
+</Data>
+<PrintSettings DefaultPrinter="true" PrinterName="" AutoPrinting="false" PaperSize="0" PageOrientation="1" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" />
+</FB>
+<DataConnections>
+<Connection Source="DT_new" Destination="TREND_WINDOW.DTV" SourceUUID="777988B54D8AE6FEEC0B5791DD01968D" DestinationUUID="1A095ED14CB5CC330F138E8B98D9DC88.594DE01743E5096C3EAE629F86B3AA63" />
+</DataConnections>
+</FBNetwork>
+</WindowFBType>
+</Data>

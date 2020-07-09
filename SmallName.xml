@@ -1,0 +1,69 @@
+<Dictionary>
+	<dPg chng="dPг"/>
+	<dPm chng="dPм"/>
+	<dPtg chng="dPтг"/>
+	<dPv chng="dPв"/>
+	<dP chng="dP"/>
+	<F chng="F"/>
+	<I chng="I"/>
+	<Lk chng="Lк"/>
+	<Lm chng="Lм"/>
+	<L chng="L"/>
+	<Ntk chng="Nтк"/>
+	<Nst chng="Nст"/>
+	<Nvd chng="Nвд"/>
+	<Nnd chng="Nнд"/>
+	<N chng="N"/>
+	<Patm chng="Pатм"/>
+	<Pdr chng="Pдр."/>
+	<Pg chng="Pг"/>
+	<Pmsm chng="Pмсм"/>
+	<Pm chng="Pм"/>
+	<Pos chng="%"/>
+	<Pr chng="Разр."/>
+	<Ptg chng="Pтг"/>
+	<Pv chng="Pв"/>
+	<P chng="P"/>
+	<Qg chng="Qг"/>
+	<Qm chng="Qм"/>
+	<Q chng="Q"/>
+	<Rm chng="Струж"/>
+	<Set chng="Упр"/>
+	<Tatm chng="Татм"/>
+	<Tg chng="Tг"/>
+	<Tmsm chng="Tмсм"/>
+	<Tm chng="Tм"/>
+	<Ttg chng="Tтг"/>
+	<Tv chng="Tв"/>
+	<T chng="T"/>
+	<Uosn chng="U"/>
+	<Ures chng="U"/>
+	<Urez chng="U"/>
+	<U chng="U"/>
+	<Vlaga_atm chng="Влаж"/>
+	<Vlaga chng="Влаж"/>
+	<OS chng="Ос"/>
+	<Vp end="g"  chng="Vп.Х"/>
+	<Vp end="v"  chng="Vп.Y"/>
+	<Vr end="g"  chng="Vр.Х"/>
+	<Vr end="v"  chng="Vр.Y"/>
+	<Vs end="g"  chng="Vсм.Х"/>
+	<Vs end="v"  chng="Vсм.Y"/>
+	<Vp end="x"  chng="Vп.Х"/>
+	<Vp end="y"  chng="Vп.Y"/>
+	<Vr end="x"  chng="Vр.Х"/>
+	<Vr end="y"  chng="Vр.Y"/>
+	<Vs end="x"  chng="Vсм.Х"/>
+	<Vs end="y"  chng="Vсм.Y"/>
+	<Vp chng="Vп"/>
+	<Vr chng="Vр"/>
+	<Vs chng="Vсм"/>
+	<V end="g"  chng="Vх"/>
+	<V end="v"  chng="Vy"/>
+	<V end="x"  chng="Vх"/>
+	<V end="y"  chng="Vy"/>
+	<V chng="V"/>
+	<Gas chng="%"/>
+	<Zag chng="%"/>
+	<Zg chng="%"/>
+</Dictionary>

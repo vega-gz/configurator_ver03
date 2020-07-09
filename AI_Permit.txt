@@ -1,0 +1,14 @@
+        <Variables>
+            <Variable UUID="82129799472FD770F6DFF694CFA2D3AB" Name="tmpPermit" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Usage="internal" />
+        </Variables>
+        <ST><![CDATA[//--- Групповое разрешение ДУ ---
+tmpPermit := true;
+//Начало сгенерированного кода AI_Permit
+//Резерв
+//Конец сгенерированного кода
+//Начало сгенерированного кода AI_Alter
+//Резерв
+//Конец сгенерированного кода
+]]></ST>
+    </Function>
+</Data>

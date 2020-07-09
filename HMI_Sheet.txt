@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Data>
+    <GraphicsCompositeFBType>
+        <InterfaceList>
+            <EventOutputs>
+                <Event Comment="событие нажатия левой кнопки мыши на объекте" Name="mouseLBPress" UUID="299295AF47A6CCAC26009C964C5B47C5"/>
+                <Event Comment="событие отпускания левой кнопки мыши на объекте" Name="mouseLBRelease" UUID="8DE6001343803CF639F332B16CC30079"/>
+                <Event Comment="событие нажатия правой кнопки мыши на объекте" Name="mouseRBPress" UUID="5DE993F543E00267EF077D89D3D01B5B"/>
+                <Event Comment="событие отпускания правой кнопки мыши на объекте" Name="mouseRBRelease" UUID="0AB0718D41E90B02F75425B41E39C1F0"/>
+                <Event Comment="событие входа указателя мыши в пределы объекта" Name="mouseEnter" UUID="AA1D53154C9D3E9C25B0ADA056F82B5D"/>
+                <Event Comment="событие выхода указателя мыши за пределы объекта" Name="mouseLeave" UUID="C21BC0A24A8E157AF50BC59A1635CD7B"/>
+                <Event Comment="событие двойного щелчка левой кнопки мыши на объекте" Name="mouseLBDblClick" UUID="1BD263D2412FA33DA367C5B3480C9F0A"/>
+            </EventOutputs>
+            <InputVars>
+                <VarDeclaration Comment="позиция объекта" InitialValue="(x:=0,y:=0)" Name="pos" Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" UUID="599604C246641AA6BA0E508C9ABF7EA4"/>
+                <VarDeclaration Comment="угол поворота объекта" InitialValue="0" Name="angle" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" UUID="00FC1D804A2DE5A83DE85390D640AC3D"/>
+                <VarDeclaration Comment="доступность объекта" InitialValue="TRUE" Name="enabled" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="15B097034B9BBE7CCD78E0A466A64239"/>
+                <VarDeclaration Comment="подвижность объекта" InitialValue="FALSE" Name="moveable" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="6D62810D46DF8C4B27E62DBEBA63194B"/>
+                <VarDeclaration Comment="видимость объекта" InitialValue="TRUE" Name="visible" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" UUID="EAC5288F431A370F7493EF98A2C613D5"/>
+                <VarDeclaration Comment="z-индекс объекта" InitialValue="0" Name="zValue" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" UUID="29E9E6AD475BD9B49E6F40B0328374A7"/>
+                <VarDeclaration Comment="всплывающая подсказка" InitialValue="''" Name="hint" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="9001F21244C66932FB81B7B021B085BA"/>
+                <VarDeclaration Comment="размер прямоугольника" InitialValue="(width:=50,height:=50)" Name="size" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" UUID="1555B4384D69683C33FCB4A79B1A0932"/>
+                <VarDeclaration InitialValue="''" Name="PrefAb" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="7B21228345FE145C1039349D18AF2C71"/>
+                <VarDeclaration InitialValue="''" Name="NameRu" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="D11E59B74DBD1F394957C4876E4DCD20"/>
+            </InputVars>
+        </InterfaceList>
+        <FBNetwork>
+        </FBNetwork>
+    </GraphicsCompositeFBType>
+</Data>

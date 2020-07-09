@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConfigAMs>
+	<AM_Classica>
+		<DGO>
+			<on  end="_ON"/>
+			<off end="_OF"/>
+		</DGO>
+		<DGI>
+			<on  end="_ON"/>
+			<off end="_OF"/>
+		</DGI>
+	</AM_Classica>
+	<AM_NKU>
+		<NKU_mb_DO>
+			<on  end="_ON"/>
+			<uppON  end="_uppON"/>
+			<off end="_OF"/>
+		</NKU_mb_DO>
+		<NKU_mb_DI alt="NKU2_mb_DI">
+			<on  end="_ON"/>
+			<uppON end="_uppON"/>
+			<off end="_OF"/>
+			<ready end="_Rdy"/>
+			<AOF end="_AOF"/>
+			<nMU end="_nMU"/>
+			<UPP_FLT end="_UPP_FLT"/>
+			<Mom end="_Mom"/>
+			<isOn end="_isOn"/>
+			<isOF end="_isOF"/>
+		</NKU_mb_DI>
+	</AM_NKU>
+</ConfigAMs>

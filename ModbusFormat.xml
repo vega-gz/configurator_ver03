@@ -1,0 +1,16 @@
+<modbusFormat>
+	<ABCD 		name="FLOAT_ABCD" 		step="2" chng="0"  dataType="REAL"/>
+	<BADC 		name="FLOAT_BADC" 		step="2" chng="1"  dataType="REAL"/>
+	<CDAB 		name="FLOAT_CDAB" 		step="2" chng="2"  dataType="REAL"/>
+	<DCBA 		name="FLOAT_DCBA" 		step="2" chng="3"  dataType="REAL"/>
+	<ABxN 		name="SHORT_AB"   		step="1" chng="4"  dataType="INT"/>
+	<BAxN 		name="SHORT_BA"   		step="1" chng="5"  dataType="INT"/>
+	<ABxR 		name="SHORT_AB"   		step="1" chng="6"  dataType="INT"/>
+	<BAxR 		name="SHORT_BA"   		step="1" chng="7"  dataType="INT"/>
+	<UABxN 		name="USHORT_AB" 		step="1" chng="8"  dataType="UINT"/>
+	<UBAxN 		name="USHORT_BA" 		step="1" chng="9"  dataType="UINT"/>
+	<UABxR 		name="USHORT_AB" 		step="1" chng="10" dataType="UINT"/>
+	<UBAxR 		name="USHORT_BA" 		step="1" chng="11" dataType="UINT"/>
+	<ABCDEFGH 	name="DOUBLE_ABCDEFGH" 	step="4" chng="12" dataType="DOUBLE"/>
+	<WORD 		name="USHORT_AB" 		step="1" chng="100" dataType="WORD"/>
+</modbusFormat>
