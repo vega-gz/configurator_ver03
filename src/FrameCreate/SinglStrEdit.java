@@ -46,6 +46,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     SimpleTable st;
     int H_SIZE = 20;
     int H_GAP = 2;
+    String relatedTable;
     
     public SinglStrEdit(MyTableModel tableModel, String title, ArrayList<JFrame> listJF) {
         Container container = this.getContentPane();
@@ -97,8 +98,10 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         String nodeName = title.substring(x+1);
         
         String linkTable =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"linkTable");
+        String trgCol =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"trgCol");
         if(linkTable!=null){
-            st = new SimpleTable(abonent+"_"+linkTable, null,null);
+            relatedTable = abonent+"_"+linkTable;
+            st = new SimpleTable(relatedTable, null, null, trgCol);
             jTable1 = new JTable();
             jScrollPane1 = new JScrollPane();
             jTable1.setModel(st.tableModel);
@@ -255,5 +258,10 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         setFields(curr);
     }                                       
  
+    public void updateRelatedTable(){
+        ArrayList<String[]> fromDB;
+        fromDB = globVar.DB.getData(relatedTable);
+        
+    }
     
 }
