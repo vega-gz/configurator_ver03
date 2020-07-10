@@ -318,31 +318,31 @@ public class TableTools {//ссылка на таблицу, массив шир
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
         for (Node n : sigList) {
-            String sigName = prj.getDataAttr(n, "Name");
-            int x = sigName.indexOf("_");
-            String sigAb = null;
-            if (x > 0) {
-                sigAb = sigName.substring(0, x);
-            }
             boolean ins;
-            if (sigAb != null && sigAb.equals(abonent)) {
-                ins = true;
-            } else if (commonSig) {
-                if (sigAb == null) {
+            String sigName = prj.getDataAttr(n, "Name");
+            if(abList!=null){
+                int x = sigName.indexOf("_");
+                String sigAb = null;
+                if (x > 0) {
+                    sigAb = sigName.substring(0, x);
+                }
+                if (sigAb != null && sigAb.equals(abonent)) {
                     ins = true;
-                } else {
-                    ins = true;
-                    for (String[] s : abList) {
-                        if (sigAb.equals(s[1])) {
-                            ins = false;
-                            break;
+                } else if (commonSig) {
+                    if (sigAb == null) {
+                        ins = true;
+                    } else {
+                        ins = true;
+                        for (String[] s : abList) {
+                            if (sigAb.equals(s[1])) {
+                                ins = false;
+                                break;
+                            }
                         }
                     }
-                }
-            } else {
-                ins = false;
-            }
-
+                } else ins = false;
+            } else ins = true;
+            
             if (ins) { //если глобальнаяя структура доложна быть включена в список
                 if (plusList.contains(sigName)) { //проверяем, нет ли её в списке раскрытых структур
                     ArrayList<String> plusSigList = openSig(sigName); //если есть - раскрываем структуру

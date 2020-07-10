@@ -2,12 +2,15 @@ package Tools;
 
 import globalData.globVar;
 import java.io.File;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /*@author Lev*/
 public class Tools {
     public static boolean isDesDir(){
-        File f = new File(globVar.desDir + "\\Design");
+        File f = new File(globVar.desDir + File.separator +"Design");
+        
         boolean x = false;
         if(f!=null) x = f.isDirectory();
         if(!x) JOptionPane.showMessageDialog(null, "В каталоге \"" + globVar.desDir + "\" нет каталога \"Design\"");
@@ -20,6 +23,43 @@ public class Tools {
             return false;
         }
         return true;
+    }
+    
+    public static int indexOfArray(Object[] a, Object o){
+        for(int i=0; i< a.length; i++)
+            if(o.equals(a[i])) return i;
+        return -1;
+    }
+    
+    public static void setPlusList(ArrayList<String[]> list1, ArrayList<String> list2){
+        for(int i=0; i < list1.size(); i++){
+            String s = list1.get(i)[0];
+            int x = s.indexOf(".");
+            if(x > 0 && !list2.contains(s.substring(2,x))) 
+                list2.add(s.substring(2,x));
+        }
+    }
+    
+    public static boolean isPlusInList2(ArrayList<String[]> list1, String sig){
+        for(int i=0; i < list1.size(); i++){
+            String s = list1.get(i)[0];
+            int x = s.indexOf(".");
+            if(x > 0 && sig.equals(s.substring(2,x))) return true;
+        }
+        return false;
+    }
+    
+    public static void delPlusFromArch(ArrayList<String[]> list1, DefaultListModel list2, String sig){
+        for(int i=0; i < list1.size(); i++){
+            String s = list1.get(i)[0];
+            int x = s.indexOf(".");
+            if(x > 0 && sig.equals(s.substring(2,x))) list1.remove(i--);
+        }
+        for(int i=0; i < list2.size(); i++){
+            String s = list2.get(i).toString();
+            int x = s.indexOf(".");
+            if(x > 0 && sig.equals(s.substring(2,x))) list2.remove(i--);
+        }
     }
     
 }
