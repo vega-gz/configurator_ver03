@@ -219,7 +219,7 @@
 		</GenCode>
 		<GenHW hwDriver="KM_04" drvFile="_FI_DRV" globData="_FI_DRV"/>
 	</Fi>
-	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров">
+	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
 		<GenData>
 			<T_ANB Type="BOOL"/>
 			<T_GPA_SP_Settings Type="T_SP_Settings"/>

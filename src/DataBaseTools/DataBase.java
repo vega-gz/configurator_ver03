@@ -602,6 +602,31 @@ public class DataBase implements Observed {
         if(list_table_base.isEmpty()) return null;
         return list_table_base;
     }
+    //-------------- Получить список таблиц базы ---------------
+    public ArrayList<String> getListTable(String namePart) {
+        //connectionToBase(); // вызов Фукция подключения к базе
+        ArrayList<String> list_table_base = new ArrayList();
+        try {
+            stmt = connection.createStatement();
+            // Показывает все таблицы =( и из основной и из тестовой(с сортировкой)
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog'"+
+                    " AND schemaname != 'information_schema' "+ 
+                    " AND tablename LIKE '"+ namePart + "%'"+ 
+                    " ORDER BY tablename;");
+            while (rs.next()) {
+                list_table_base.add(rs.getString("tablename"));
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed WIEW TABLE BASE");
+            e.printStackTrace();
+            return null;
+        }
+        if(list_table_base.isEmpty()) return null;
+        return list_table_base;
+    }
     // ---   List base on server   ---
     public ArrayList<String> getListBase() {
         ArrayList<String> listBase = new ArrayList();

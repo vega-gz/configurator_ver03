@@ -453,7 +453,7 @@ public class addArchive extends javax.swing.JFrame {
                 globVar.processReg.remove(processName);
                 jProgressBar1.setValue(0);
              };
-            BackgroundThread bt = new BackgroundThread("Генерация .type", di);
+            BackgroundThread bt = new BackgroundThread("Генерация Archive", di);
             bt.start();
             globVar.processReg.add(processName);
         }catch(NumberFormatException e){
