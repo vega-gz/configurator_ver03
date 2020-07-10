@@ -274,8 +274,10 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         String time = "Time : ";
         //int counT = 5;
         JDialog jDialog1 = new JDialog(this, "Выбор метода генерации ИМ", true); // модальное блокирующее окно
+        jDialog1.setResizable(false); // отключить изменение размера окна
         jDialog1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jDialog1.setSize(500, 300);
+        jDialog1.setLocationRelativeTo(null); // по центру экрана
         javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         javax.swing.JComboBox jComboBox1 = new javax.swing.JComboBox<>();

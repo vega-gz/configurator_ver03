@@ -32,6 +32,8 @@ public class DataBase implements Observed {
     int max;
     int value;
     
+    int statusConnectDB = -2; // 0 - connect; -1 - failed; -2 - not attempt to connect
+    
     List<Observer> observers = new ArrayList<>(); // Список наблюдателей
     
     // Делаем синглтон
@@ -39,20 +41,34 @@ public class DataBase implements Observed {
 
     private  DataBase() { // для синглтона в однопоточном варианте
         //connectionToBase();
+        
+    }
+    // подключение к иной базе(для сравнения и слияния)
+    public  DataBase(String dbURL, String currentBase,String USER,String PASS) { // для синглтона в однопоточном варианте
+        dbURL = "jdbc:postgresql://" + dbURL + "/";
+        connectionToBase(dbURL, currentBase, USER, PASS); // И сразу подключаемся к базе
     }
 
-    //  синглтон не нужен а вот нужен
-    public static DataBase getInstance() { // #3 static
-        //ret=0;
-        if (instance == null) {		//если объект еще не создан
+    //  синглтон (убрал его 10.07.2020)
+//    public static DataBase getInstance() { // #3 static
+//        //ret=0;
+//        if (instance == null) {		//если объект еще не создан
+//            instance = new DataBase();	//создать новый объект
+//        }
+//        int ret = instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
+//        if(ret==0)return instance;		// вернуть ранее созданный объект
+//        else return null;
+//    }
+    
+        public static DataBase getInstance() { // Всегда отдаем новый объект
             instance = new DataBase();	//создать новый объект
-        }
-        int ret = instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
-        if(ret==0)return instance;		// вернуть ранее созданный объект
-        else return null;
+            instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
+            return instance;		// вернуть ранее созданный объект
+        
     }
+    
     // --- Метод подключения к базе ---
-    private int connectionToBase(String URL, String DB, String USER, String PASS) {
+    private void connectionToBase(String URL, String DB, String USER, String PASS) {
         if (connection != null){
             try {
                 connection.close(); // обязательно выходим перед вызовом так как к многим базам конектимся
@@ -65,17 +81,25 @@ public class DataBase implements Observed {
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
-            return -1;
+            statusConnectDB = -1;
         }
-        System.out.println("PostgreSQL JDBC Driver successfully connected" + "Base:" + URL + DB);
+        
         try {
             connection = DriverManager.getConnection(URL + DB, USER, PASS);
+            System.out.println("PostgreSQL JDBC Driver successfully connected" + "Base:" + URL + DB);
+            statusConnectDB = 0;
         } catch (SQLException e) {
             System.out.println("Connection Failed");
+            FileManager.loggerConstructor("Connection Failed base " + URL + DB);
             e.printStackTrace();
-            return -1;
+            statusConnectDB = -1;
         }
-        return 0;
+        
+    }
+    
+    // --- Получить статус базы ---
+    public int getStatusConnect(){
+        return statusConnectDB;
     }
     
     // --- получить имя текущей базы ---
@@ -96,7 +120,8 @@ public class DataBase implements Observed {
     // Сменить базу
     public int changeBase(String base){
        String[] infoConnect = getInfoCurrentConnect();
-       return connectionToBase(infoConnect[0],base,infoConnect[1],infoConnect[2]);
+       connectionToBase(infoConnect[0],base,infoConnect[1],infoConnect[2]);
+       return statusConnectDB;
     }
     
     // -------------- CREATE DATABASE -----------
