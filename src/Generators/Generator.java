@@ -908,6 +908,9 @@ public class Generator {
         return uuid;
     }
 
+    public static int GenOPC(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
+        return 0;
+    }
     public static int GenArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
         String appPathName = globVar.desDir + "\\Design\\" + abonent + "_" + "Archive";
         XMLSAX archSax = new XMLSAX();

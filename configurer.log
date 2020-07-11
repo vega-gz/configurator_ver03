@@ -91,3 +91,11 @@
 08:36:33_2020.07.06	Заливаем в таблицы абонента GPA данные из книги D:\Projects\Калининград_цех\CONF_FILE_KLN_PHG_GPA1c.xls
 08:45:56_2020.07.06	Заливаем в таблицы абонента GPA данные из книги D:\Projects\Калининград_цех\CONF_FILE_KLN_PHG_GPA1c.xls
 08:53:03_2020.07.06	Заливаем в таблицы абонента GPA данные из книги D:\Projects\Калининград_цех\CONF_FILE_KLN_PHG_GPA1c.xls
+12:36:34_2020.07.10	Connection Failed basejdbc:postgresql://sdf/sf
+12:38:12_2020.07.10	Connection Failed basejdbc:postgresql://23/213
+12:53:56_2020.07.10	Connection Failed basejdbc:postgresql://asd/ads
+12:55:09_2020.07.10	Connection Failed basejdbc:postgresql://asd/ads
+13:05:16_2020.07.10	Connection Failed base jdbc:postgresql://qad/ads
+13:08:09_2020.07.10	Connection Failed base jdbc:postgresql://ads/sd
+13:09:33_2020.07.10	Connection Failed base jdbc:postgresql:///asd
+13:09:40_2020.07.10	Connection Failed base jdbc:postgresql:///asd

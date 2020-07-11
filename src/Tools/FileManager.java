@@ -6,6 +6,7 @@
 package Tools;
 
 import Tools.StrTools;
+import static Tools.StrTools.getAttributValue;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.BufferedReader;
@@ -44,20 +45,22 @@ public class FileManager {
 
     public static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
 
-    public File wrFile=null;
-    public File rdFile=null;
-    public FileOutputStream fos=null;
-    public FileInputStream fis=null;
-    public Writer wrStream=null;
-    public Reader rdStream=null;
+    public File wrFile = null;
+    public File rdFile = null;
+    public FileOutputStream fos = null;
+    public FileInputStream fis = null;
+    public Writer wrStream = null;
+    public Reader rdStream = null;
     public boolean EOF;
 
     // --- копирование файла используя поток ---
     public static int copyFileWoReplace(String source, String dest, boolean notCopyFile) throws IOException {
         File copy = new File(dest);
-        if(copy.isFile()){//Проверяем, есть ли такой файл в целевом каталоге
-            if(notCopyFile) return 1; //Если есть и есть признак "не размножать копии" заканчиваем работу
-            for(int i = 1; copy.isFile(); i++){ //Если признака нет - создаём копию с номером версии
+        if (copy.isFile()) {//Проверяем, есть ли такой файл в целевом каталоге
+            if (notCopyFile) {
+                return 1; //Если есть и есть признак "не размножать копии" заканчиваем работу
+            }
+            for (int i = 1; copy.isFile(); i++) { //Если признака нет - создаём копию с номером версии
                 dest = dest + "(" + i + ")";
                 copy = new File(dest);
             }
@@ -73,13 +76,18 @@ public class FileManager {
                 os.write(buffer, 0, length);
             }
         } finally {
-            if(is == null) return 2;
-            if(os == null) return 3;
+            if (is == null) {
+                return 2;
+            }
+            if (os == null) {
+                return 3;
+            }
             is.close();
             os.close();
         }
         return 0;
     }
+
     public void copyFile(String source, String dest) throws IOException {
         InputStream is = null;
         OutputStream os = null;
@@ -189,7 +197,7 @@ public class FileManager {
     }
 
     // --- Логирование ошибок и другая информация ---
-    public static void loggerConstructor(String s){// throws FileNotFoundException {
+    public static void loggerConstructor(String s) {// throws FileNotFoundException {
         String nameF = globVar.logFile;
         File logF = new File(nameF);
         if (!logF.exists()) { // нет файла то создаем
@@ -207,7 +215,7 @@ public class FileManager {
             return;
         }
         OutputStreamWriter logStream = new OutputStreamWriter(logOS, StandardCharsets.UTF_8);
-        
+
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss_yyyy.MM.dd");
         String currentTime = formatForDateNow.format(new Date());
         s = currentTime + "\t" + s + "\n";
@@ -219,7 +227,7 @@ public class FileManager {
         } catch (IOException e) {
             System.out.println("Error write log file " + nameF);
         }
-        
+
     }
 
     public int MoveFile(String fileName, String srcDir, String dstDir) {
@@ -234,13 +242,23 @@ public class FileManager {
         }
         return 0;
     }
-    public void closeWrStream() throws IOException{
-        if(wrStream!=null) wrStream.close();
-        if(fos!=null) fos.close();
+
+    public void closeWrStream() throws IOException {
+        if (wrStream != null) {
+            wrStream.close();
+        }
+        if (fos != null) {
+            fos.close();
+        }
     }
-    public void closeRdStream() throws IOException{
-        if(rdStream!=null) rdStream.close();
-        if(fis!=null) fis.close();
+
+    public void closeRdStream() throws IOException {
+        if (rdStream != null) {
+            rdStream.close();
+        }
+        if (fis != null) {
+            fis.close();
+        }
     }
 
     public int createFile2write(String dirName, String fileName) throws IOException {
@@ -264,6 +282,7 @@ public class FileManager {
         wrStream = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
         return 0;
     }
+
     public int createFile2write(String fileName) throws IOException {
         wrFile = new File(fileName);
         if (wrFile.isFile()) {
@@ -300,6 +319,7 @@ public class FileManager {
         EOF = false;
         return 0;
     }
+
     public int openFile4read(String fileName) throws IOException {
         rdFile = new File(fileName);
         if (!rdFile.isFile()) {
@@ -311,28 +331,41 @@ public class FileManager {
         return 0;
     }
 
-    public String findStringInFile2(String fileName, String f) throws IOException{
+    public String findStringInFile2(String fileName, String f) throws IOException {
         int ret = openFile4read(fileName);
-        if(ret!=0)return null;
+        if (ret != 0) {
+            return null;
+        }
         String s = rd();
         int n = 0;
-        while(!EOF && !s.contains(f) && !s.contains("<Resource>")) {
+        while (!EOF && !s.contains(f) && !s.contains("<Resource>")) {
             s = rd();
             System.out.println(n);//------------------------------------------ check print ----------------------------
             n++;
         }
         closeRdStream();
-        if(s.contains(f))return s;
-        else return null;
+        if (s.contains(f)) {
+            return s;
+        } else {
+            return null;
+        }
     }
-    public static String findStringInFile(String fileName, String f) throws IOException{
+
+    public static String findStringInFile(String fileName, String f) throws IOException {
         BufferedReader in = new BufferedReader(new FileReader(fileName));
         String s;
-        while ((s = in.readLine()) != null) if(s.contains(f))break;
+        while ((s = in.readLine()) != null) {
+            if (s.contains(f)) {
+                break;
+            }
+        }
         in.close();
-        if(s!=null && s.contains(f))return s;
+        if (s != null && s.contains(f)) {
+            return s;
+        }
         return null;
     }
+
     public void wr(String s) throws IOException {
         wrStream.write(s);
     }
@@ -383,25 +416,32 @@ public class FileManager {
     public static String FindFile(String dir, String nameType) throws IOException {
         return FindFile(dir, nameType, "Name=");
     }
-    
+
     public static String FindFile(String dir, String nameType, String nameWords) throws IOException {
-        if(dir==null || nameType==null) return null;
-        File f = new File(dir +"\\" + nameType + ".type");
-        if(f.isFile()) return nameType + ".type";
+        if (dir == null || nameType == null) {
+            return null;
+        }
+        File f = new File(dir + "\\" + nameType + ".type");
+        if (f.isFile()) {
+            return nameType + ".type";
+        }
         //-----------------------------------------------------------------------------
         final File folder = new File(dir);
         String[] fileList = folder.list();
         //if (fileList != null) {
-            for (String fn : fileList) {
-                if(fn.length()> 5 && ".TYPE".equalsIgnoreCase(fn.substring(fn.length()-5))){
-                    String s = findStringInFile(dir + "\\" + fn, nameWords);
-                    String val = StrTools.getAttributValue(s, nameWords);
-                    if(val!=null && val.equals(nameType)) return fn;
+        for (String fn : fileList) {
+            if (fn.length() > 5 && ".TYPE".equalsIgnoreCase(fn.substring(fn.length() - 5))) {
+                String s = findStringInFile(dir + "\\" + fn, nameWords);
+                String val = StrTools.getAttributValue(s, nameWords);
+                if (val != null && val.equals(nameType)) {
+                    return fn;
                 }
             }
+        }
         //} else JOptionPane.showMessageDialog(null, "Путь к генерации не найден" + dir);
         return null;
     }
+
     public static String getUUIDFromFile(String dir, String nameType) throws IOException {
         String nameWords = "Name=";
         String uuidWords = "UUID=";
@@ -436,16 +476,18 @@ public class FileManager {
                     fm.rdStream.close();
                 }
             }
-        } else JOptionPane.showMessageDialog(null, "Путь " + dir + " не найден");
+        } else {
+            JOptionPane.showMessageDialog(null, "Путь " + dir + " не найден");
+        }
         return null;
     }
 
-    public static void createBackupDir(){
+    public static void createBackupDir() {
         String currentDat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(Calendar.getInstance().getTime());
         globVar.backupDir = globVar.desDir + File.separator + "backUp" + currentDat;   //установили путь для бэкапа
         new File(globVar.backupDir).mkdir();                                       //создали папку для бэкапа
     }
-    
+
     public static class MyFileNameFilter implements FilenameFilter {
 
         private String ext;
@@ -459,48 +501,49 @@ public class FileManager {
             return name.endsWith(ext);
         }
     }
-    
-    public static int renameUUIDinFile(File fileName){
+
+    public static int renameUUIDinFile(File fileName) {
         try {
             BufferedReader in = new BufferedReader(new FileReader(fileName));
-            BufferedWriter out = new BufferedWriter(new FileWriter(fileName+"tmp"));
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName + "tmp"));
             String s;
             String uuid;
-            while ((s = in.readLine()) != null){
+            while ((s = in.readLine()) != null) {
                 int start = s.indexOf(" UUID=\"");
-                if(start>=0){
-                    start+= 7;
-                    int end = s.indexOf("\"", start); 
+                if (start >= 0) {
+                    start += 7;
+                    int end = s.indexOf("\"", start);
                     uuid = s.substring(start, end).toUpperCase();
-                    s = s.substring(0,start)+ uuid + s.substring(end);
+                    s = s.substring(0, start) + uuid + s.substring(end);
                 }
                 start = s.indexOf("TypeUUID=\"");
-                if(start>=0){
-                    start+= 10;
-                    int end = s.indexOf("\"", start); 
+                if (start >= 0) {
+                    start += 10;
+                    int end = s.indexOf("\"", start);
                     uuid = s.substring(start, end).toUpperCase();
-                    s = s.substring(0,start)+ uuid + s.substring(end);
+                    s = s.substring(0, start) + uuid + s.substring(end);
                 }
                 start = s.indexOf("Type=\"");
-                if(start>=0){
-                    start+= 6;
-                    int end = s.indexOf("\"", start); 
-                    if(end-start == 32){
+                if (start >= 0) {
+                    start += 6;
+                    int end = s.indexOf("\"", start);
+                    if (end - start == 32) {
                         uuid = s.substring(start, end).toUpperCase();
-                        s = s.substring(0,start)+ uuid + s.substring(end);
+                        s = s.substring(0, start) + uuid + s.substring(end);
                     }
                 }
-                out.write(s+"\n");
+                out.write(s + "\n");
             }
             in.close();
             out.close();
             //File file = new File(fileName);                             //создаём ссылку на исходный файл
             fileName.delete();                                             //удаляем его
-            new File(fileName+"tmp").renameTo(fileName);                          //создаём ссылку на сгенерированный файл и делаем его исходным
-        }catch (IOException e) {}
+            new File(fileName + "tmp").renameTo(fileName);                          //создаём ссылку на сгенерированный файл и делаем его исходным
+        } catch (IOException e) {
+        }
         return 0;
     }
-    
+
     public static int renameUUIDinDirectory(String parentDirectory) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(parentDirectory).listFiles();//получаем список элементов по указанному адресу
         for (File f : filesInDirectory) {//пробегаем по списку элементов по указанному адресу
@@ -533,7 +576,7 @@ public class FileManager {
                         String nameFolderFile = findFolder.getName();
                         String findexpFolder = nameFolderFile.substring(nameFolderFile.lastIndexOf(".") + 1);//ищу расширение folder
                         if (findexpFolder.equals(expFolder)) {//если нашли folder то начинаем его читать(нашли файл с расширение фолдер)
-                            String pathFolderFile = dir +"\\"+ nameFolderFile;
+                            String pathFolderFile = dir + "\\" + nameFolderFile;
                             String myType = findStringInFile(pathFolderFile, fileName);//вроде как ищем строку содержащую имя файла(TYPE)
                             if (myType != null) {
                                 notRename = false;
@@ -544,21 +587,25 @@ public class FileManager {
                                 Node nodeRead = xmlsax.readDocument(pathFolderFile);//прочитали ноду
                                 String itemArray[] = {"Item", "Name", fullNameAttr};//массив чтобы найти ноду по имени и атрибутам
                                 Node itemFolderNode = xmlsax.findNodeAtribute(nodeRead, itemArray);//нашли конкретный item в котором соответствия
-                                xmlsax.editDataAttr(itemFolderNode, "Name",typeAttr+"."+expType);
-                                File newName = new File(dir+"\\"+typeAttr+"."+expType);
-                                if(!newName.isFile()){
+                                xmlsax.editDataAttr(itemFolderNode, "Name", typeAttr + "." + expType);
+                                File newName = new File(dir + "\\" + typeAttr + "." + expType);
+                                if (!newName.isFile()) {
                                     boolean renameTo = findType.renameTo(newName);
-                                    if(renameTo) //переименовали файл type на значение аттрибута
+                                    if (renameTo) //переименовали файл type на значение аттрибута
+                                    {
                                         xmlsax.writeDocument();
+                                    }
                                 }
-                                
+
                                 break;
                             }
                         }
                     }
-                    if(notRename){
-                        File newName = new File(dir+"\\"+typeAttr+"."+expType);
-                        if(!newName.isFile()) findType.renameTo(newName);
+                    if (notRename) {
+                        File newName = new File(dir + "\\" + typeAttr + "." + expType);
+                        if (!newName.isFile()) {
+                            findType.renameTo(newName);
+                        }
                     }
                 }
             }
@@ -567,11 +614,82 @@ public class FileManager {
         return cnt;
     }
 
+    public static int renameIntFile(String dir) throws FileNotFoundException,IOException {
+        File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
+        String expInt = "int";
+        String expFolder = "folder";
+        String attrIntValue;
+        String fileName;//имя файла без расширения
+        int cnt = 0;//счетчик выполненных замен
+        String confName = null;
+
+        FileManager fm = new FileManager();
+        XMLSAX xmlsax = new XMLSAX();
+
+        for (File findInt : filesInDirectory) {//запускаю цикл по файлам в поисках int
+            String nameIntFile = findInt.getName();//имя файла с расширением
+            String findexpInt = nameIntFile.substring(nameIntFile.lastIndexOf(".") + 1);//получили расширение
+
+            if (findexpInt.equals(expInt)) {//если нашли совпадения по расширению
+                String findTypeName = findStringInFile(dir + "\\" + nameIntFile, "Name=");//находит первое вхождение кода нашел соответствие
+                attrIntValue = getAttributValue(findTypeName, "Name=" + '"');//находим этот аттрибут
+                fileName = nameIntFile.substring(0, nameIntFile.indexOf('.'));
+
+                if (!fileName.equals(attrIntValue)) {//сравниваем ,если не равны ищем в folder соответствия
+
+                    for (File findFolder : filesInDirectory) {//перебегаем папку второй раз в поисках фолдер и совпадений по имени
+
+                        String nameFolderFile = findFolder.getName();//имя с расширением
+                        System.out.println("этот файл называется " + nameFolderFile + " " + cnt);
+                        if (!findFolder.isDirectory()) {
+                            confName = nameFolderFile.substring(0, nameFolderFile.indexOf('.'));//получили имя без расширения
+                        }
+                        // String confName = nameFolderFile.substring(0, nameFolderFile.indexOf('.'));//получили имя без расширения
+                        String findexpFolder = nameFolderFile.substring(nameFolderFile.lastIndexOf(".") + 1);//ищу расширение folder
+
+                        cnt++;
+
+                        //----МЫ НАШЛИ КОНКРЕТНЫЙ ИНТ.ЕСЛИ ИМЯ И ТИП НЕ СОВПАДАЮТ ТО ПРОБЕГАЕМСЯ СНОВА И ИЩЕМ ФАЙЛЫ С ТЕМ ЖЕ НАЗВАНИЕМ И МЕНЯЕМ ЕГО НА ЗНАЧЕНИЕ АТТРИБУТА---\\     
+                        if (confName.equals(fileName)) {//если нашли совпадения по имени(int не ходят по одному,толпой,собаки)
+                            nameFolderFile = nameFolderFile.substring(nameFolderFile.indexOf('.') + 1);
+                            findFolder.renameTo(new java.io.File(dir + "\\" + attrIntValue + "." + nameFolderFile));//меняем имена у всех файлов со схожими
+                        }
+
+                        //----ЕСЛИ НАШЛИ СОВПАДЕНИЯ ПО ФОЛДЕР.ИЩЕМ СОВПАДЕНИЯ ПО ИМЕНИ ФАЙЛА И МЕНЯЕМ НА АТТРИБУТ---\\
+                        if (findexpFolder.equals(expFolder)) {//если нашли фолдер
+                            String path = findFolder.getAbsolutePath();//получили путь до файла
+                            String folder = findStringInFile(path, fileName);//вроде как ищем строку содержащую имя файла(INT)
+
+                            if (folder != null) {
+                                cnt++;
+                                System.out.println("Соответствие найдено");
+                                String fullNameAttr = getAttributValue(folder, "Name=" + '"');//нашли значение аттрибута фолдера
+
+                                System.out.println("В файле " + findFolder.getName() + " нашлось соответствие.");
+                                String itemArray[] = {"Item", "Name", fullNameAttr};//массив чтобы найти ноду по имени и атрибутам
+
+                                Node nodeRead = xmlsax.readDocument(path);//прочитали ноду
+                                Node folderNode = xmlsax.returnFirstFinedNode(nodeRead, "Folder");//находим folder
+                                Node itemsNode = xmlsax.returnFirstFinedNode(folderNode, "Items");//находим items
+                                Node itemFolderNode = xmlsax.findNodeAtribute(itemsNode, itemArray);//нашли конкретный item в котором соответствия
+
+                                xmlsax.editDataAttr(itemFolderNode, "Name", attrIntValue + "." + expInt);//изменили атрибут
+
+                                xmlsax.writeDocument();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return cnt;
+    }
+
     public static void main(String[] args) throws IOException {//для тестирования
         FileManager fm = new FileManager();
         loggerConstructor("Яй криветко");
         // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
         //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
-     //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
+        //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
     }
 }

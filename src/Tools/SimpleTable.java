@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class SimpleTable {
@@ -22,19 +23,26 @@ public class SimpleTable {
     int[] align;
     int qCol;
     ArrayList<JFrame> listJF = new ArrayList();
+    String trgCol;
     
-    public SimpleTable(String table,String col,String val) {
-        tableName = table;
+    public SimpleTable(String table,String col,String val, String trgCol) {
         if(globVar.DB==null)return;
         List<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
-        cols = listColumn.toArray( new String[listColumn.size()]);
+        tableName = table;
+        this.trgCol = trgCol;
+        int tSize = listColumn.size();
+        if(trgCol!=null && listColumn.contains(trgCol)){
+            cols = new String[tSize-1];
+            int cnt=0;
+            for(int i=0; i<tSize; i++)
+                if(!trgCol.equals(listColumn.get(i))) cols[cnt++]=listColumn.get(i);
+        }else cols = listColumn.toArray( new String[tSize]);
+        
         tableModel.setColumnIdentifiers(cols);
-        //(String table, String orderCol, String desiredCol, String disiredVal)
         fromDB = globVar.DB.getData(table,"id",col,val);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));
         comment = globVar.DB.getCommentTable(table);
-        //this.setTitle(table + ": "+comment);
         tableSize = fromDB.size();
         qCol = listColumn.size();
         align = new int[qCol];
@@ -55,5 +63,25 @@ public class SimpleTable {
             tableModel.removeRow(i);
         fromDB = globVar.DB.getData(tableName,"id",col,val);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));
+        
+        isNew(fromDB, tableModel);
     }
+    
+    private boolean  isNew(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
+        if(fromDB==null || tableModel==null) return false;
+        int fY = fromDB.size();
+        if(fY<=0) return false;
+        int x = tableModel.getColumnCount();
+        int y = tableModel.getRowCount();
+        for(int i=0;i<y;i++){
+            boolean is = false;
+            for(int k=0;k<fY;k++){
+                boolean lokal;
+                for(int j=0;j<x;j++)
+                    if(!fromDB.get(k)[j].equals(tableModel.getValueAt(i, j))) is = true;
+            }
+        }
+        return false;
+    }
+
 }

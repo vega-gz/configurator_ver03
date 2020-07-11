@@ -1,8 +1,17 @@
 package Main;
 
+import DataBaseTools.DataBase;
+import DataBaseTools.MergeBases;
 import FrameCreate.*;
+import ReadWriteExcel.RWExcel;
+import Tools.BackgroundThread;
+import Tools.DoIt;
+import Tools.FileManager;
+import Tools.Tools;
+import XMLTools.XMLSAX;
+import globalData.globVar;
+import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +21,7 @@ import java.util.logging.Logger;
 import org.w3c.dom.Node;
 import DataBaseTools.DataBase;
 import ReadWriteExcel.RWExcel;
+import ReadWriteExcel.UnloadExcel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import XMLTools.XMLSAX;
@@ -19,12 +29,15 @@ import java.awt.Dimension;
 import Tools.FileManager;
 import Tools.Tools;
 import globalData.globVar;
+import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import org.w3c.dom.Node;
 
 public final class Main_JPanel extends javax.swing.JFrame {
 
@@ -36,34 +49,45 @@ public final class Main_JPanel extends javax.swing.JFrame {
     File excel = null;
     ProgressBar pb = null;
 
-    public Main_JPanel(){
+    public Main_JPanel() {
         globVar.DB = DataBase.getInstance();
         initComponents();
         jTextField1.setText(globVar.desDir);
-        if(globVar.DB == null){
+        if (globVar.DB == null) {
             this.setTitle("База " + globVar.dbURL + globVar.currentBase + " не найдена");
-        }else{
+        } else {
             initMyComponent();
         }
         Tools.isDesDir();
     }
-    public void initMyComponent(){
+
+    public void initMyComponent() {
         //initComponents();
-        jTextField1.setText(" "+globVar.desDir);
+        jTextField1.setText(" " + globVar.desDir);
         //globVar.DB = DataBase.getInstance();
         listDropT = globVar.DB.getListTable(); // получи список таблиц при включении
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
-        DataBase.createAbonentTable();
+        DataBase.createAbonentTable();//
         jComboBox2.setModel(getComboBoxModelAbonents()); // абоненты из базы
         globVar.abonent = jComboBox2.getItemAt(0);
         this.setTitle("Текущая база: " + globVar.dbURL + globVar.currentBase); // установить заголовок
     }
-    //public void 
+
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jFrameTable = new javax.swing.JFrame();
+        jDialog1 = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -76,7 +100,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jButton10 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -84,12 +108,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTree1 = new javax.swing.JTree(getModelTreeNZ());
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
 
         jFrameTable.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -107,6 +135,87 @@ public final class Main_JPanel extends javax.swing.JFrame {
             jFrameTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
+
+        jDialog1.setResizable(false);
+        jDialog1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jDialog1KeyPressed(evt);
+            }
+        });
+
+        jLabel4.setText("user:");
+
+        jLabel6.setText("addres_base:");
+
+        jLabel7.setText("pass:");
+
+        jLabel8.setText("base:");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2)
+                            .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_all_ActionPerformed(evt);
+            }
+        });
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_all_ActionPerformed(evt);
+            }
+        });
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_all_ActionPerformed(evt);
+            }
+        });
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_all_ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -191,7 +300,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextField1.setMargin(new java.awt.Insets(4, 8, 4, 4));
         jTextField1.setName(""); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -221,6 +330,20 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Каталог проекта: ");
 
+        jButton6.setText("Выгрузить в Excel");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton11.setText("OPC");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jMenu2.setText("Настройки");
@@ -245,6 +368,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenu3.setText("Утилиты");
 
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Переименовать *.Int файлы");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jCheckBoxMenuItem1);
+
         jMenuItem2.setText("Переименовать *.type файлы");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +384,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem2);
+
+        jMenuItem_AnotherBase.setText("Подключится к другой базе");
+        jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_AnotherBaseActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem_AnotherBase);
 
         jMenuBar1.add(jMenu3);
 
@@ -268,19 +408,24 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jButton10)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton3))))
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton5)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jButton1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,7 +436,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(83, 83, 83)
                                 .addComponent(jButton7)
@@ -315,17 +460,21 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton10)
+                            .addComponent(jButton11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton10)
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jButton3)
+                            .addComponent(jButton6)
+                            .addComponent(jButton5))
+                        .addGap(36, 36, 36))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
@@ -334,9 +483,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
                     .addComponent(jButton7)
-                    .addComponent(jButton9))
+                    .addComponent(jButton9)
+                    .addComponent(jButton8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -353,36 +502,42 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- Реакция кнопки загрузак Excel --
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(!Tools.isDB()) return;
+        if (!Tools.isDB()) {
+            return;
+        }
         String processName = "Процесс загрузки данных из Excel";
-        if(globVar.processReg.indexOf(processName)>=0){
+        if (globVar.processReg.indexOf(processName) >= 0) {
             JOptionPane.showMessageDialog(null, "Запуск нового процесса загрузки в БД данных из файла Excel заблокирован до окончания предыдущей загрузки");
             return;
         }
-        int casedial = JOptionPane.showConfirmDialog(null, "Загрузка в БД информации для абонента \"" + globVar.abonent+"\"");
-        if(casedial!=0)return;
-        
+        int casedial = JOptionPane.showConfirmDialog(null, "Загрузка в БД информации для абонента \"" + globVar.abonent + "\"");
+        if (casedial != 0) {
+            return;
+        }
+
         JFileChooser fileopen = new JFileChooser(globVar.desDir);
-        int ren = fileopen.showDialog(null, "Загрузка данных для "+globVar.abonent);
+        int ren = fileopen.showDialog(null, "Загрузка данных для " + globVar.abonent);
         if (ren == JFileChooser.APPROVE_OPTION) {
             excel = fileopen.getSelectedFile();// выбираем файл из каталога
-        } else return;
+        }
         pb = new ProgressBar();
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
         pb.setVisible(true);
 
         DoIt di = () -> {
-            int ret = -1;
+            int ret = 1;
             try {
-                ret = RWExcel.ReadExelFromConfig(excel.getPath(),pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+                ret = RWExcel.ReadExelFromConfig(excel.getPath(), pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(ret>=0){
-                JOptionPane.showMessageDialog(null, "В базу загружено " + ret +" таблиц");
+            if (ret >= 0) {
+                JOptionPane.showMessageDialog(null, "В базу загружено " + ret + " таблиц");
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
-            }else if(ret<0) JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+            } else if (ret < 0) {
+                JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+            }
             pb.setVisible(false);
             globVar.processReg.remove(processName);
         };
@@ -390,17 +545,19 @@ public final class Main_JPanel extends javax.swing.JFrame {
         bt.start();
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     // --- Метод реагирования на выбор поля из списка таблиц ---
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         //if(globVar.DB==null) return;
         String selectT = (String) jComboBox1.getSelectedItem();
-            showTable(selectT); // вызов метода построения таблицы 
+        showTable(selectT); // вызов метода построения таблицы 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(!Tools.isDB()) return;
+        if (!Tools.isDB()) {
+            return;
+        }
         //  globVar.DB.connectionToBase(url,pass,user);
         listDropT = globVar.DB.getListTable();
         Iterator<String> iter_list_table = listDropT.iterator();
@@ -415,8 +572,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 //---------- Редактирование конфигурации архивов ---------------
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(!Tools.isDB()) return;
-        if(!Tools.isDesDir()) return;
+        if (!Tools.isDB()) {
+            return;
+        }
+        if (!Tools.isDesDir()) {
+            return;
+        }
         JFrame editArchive = new addArchive();
         editArchive.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         editArchive.setTitle("Редактирование архивов");
@@ -425,7 +586,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(!Tools.isDB()) return;
+        if (!Tools.isDB()) {
+            return;
+        }
         globVar.DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
         if (globVar.DB == null) {
             JOptionPane.showMessageDialog(null, "Подключение к базе не удалось");
@@ -434,7 +597,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         String nameBD = globVar.DB.getCurrentNameBase();
         String userBD = globVar.DB.getCurrentUser();
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
-        //String message = null;
+        
         if (nameBD != null) {
             JOptionPane.showMessageDialog(null, "Подключено к базе " + nameBD + " пользователем " + userBD);
         }
@@ -444,7 +607,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- Кнопка вызова окна с исполнительным механизмом ---
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if(!Tools.isDB()) return;
+        if (!Tools.isDB()) {
+            return;
+        }
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  //размеры экрана
         int sizeWidth = 800;
         int sizeHeight = 600;
@@ -452,17 +617,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
         int locationY = (screenSize.height - sizeHeight) / 2;
         ExecutiveMechanismFrame frameExecutiveMechanism = new ExecutiveMechanismFrame(); // И передаем туда управление базой
         //frameExecutiveMechanism.setBounds(locationX, locationY, sizeWidth, sizeHeight); // Размеры и позиция
-       // frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
-       // frameExecutiveMechanism.setVisible(true);
+        frameExecutiveMechanism.setDefaultCloseOperation(frameExecutiveMechanism.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
+        frameExecutiveMechanism.setVisible(true);
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-//        try {
-//            FileManager.renameUUIDinDirectory(globVar.desDir + "\\Design");
-//        } catch (IOException ex) {
-//            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     // --- реакция на события меню ---
@@ -484,7 +646,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 //-------------- Создание нового абонента ---------------------
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if(!Tools.isDB()) return;
+        if (!Tools.isDB()) {
+            return;
+        }
         JFrame addAb = new AddAbonent(jComboBox2);
         addAb.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         addAb.setTitle("Новый абонент");
@@ -492,10 +656,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-	if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             String nameT = jTree1.getSelectionPath().getLastPathComponent().toString();
             showTable(nameT); // вызов метода построения таблицы
-	}
+        }
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
@@ -503,9 +667,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_formFocusLost
 //----------- переименование .type файлов ----------------
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        if(!Tools.isDesDir()) return;
+        if (!Tools.isDesDir()) {
+            return;
+        }
         try {
-            int ret = FileManager.renameTypeFile(globVar.desDir+"\\Design");
+            int ret = FileManager.renameTypeFile(globVar.desDir + "\\Design");
             JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -513,11 +679,90 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 //------ Смена БД -----
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        JFrame changeDB = new ChangeDB(jTree1,this);
+        JFrame changeDB = new ChangeDB(jTree1, this);
         changeDB.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         changeDB.setTitle("Сменить БД");
         changeDB.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    // обработчик пукт меню Утилит подключение в второй базе.
+    private void jMenuItem_AnotherBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseActionPerformed
+        jDialog1.setSize(400, 200);
+        jDialog1.setLocationRelativeTo(null); // по центру экрана
+        jDialog1.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem_AnotherBaseActionPerformed
+
+    // обработчик нажатий клавиш Jdialog подключения к второстепенной базе
+    private void jDialog1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog1KeyPressed
+        System.out.println("Press button");
+    }//GEN-LAST:event_jDialog1KeyPressed
+
+    // обработчик для всех полей
+    private void jTextField_all_ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        String addresSecondDB = jTextField2.getText(); // адрес базы
+        String DB = jTextField5.getText(); // имя базы
+        String userSecondDB = jTextField3.getText(); // имя пользователя
+        String passSecondDB = jTextField4.getText(); // пароль
+        //System.out.println("Press button field all " + addresSecondDB + DB + userSecondDB + passSecondDB);
+        MergeBases mergeDB = new MergeBases(addresSecondDB, DB, userSecondDB, passSecondDB); // вызов класса слияния
+        if (mergeDB.connectAnotherDB() == 0){
+            System.out.println("connect base");
+            jDialog1.dispose(); // закрываем окошко при удачном подключении
+        } else JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
+    }
+  
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if (!Tools.isDB()) {
+            return;
+        }
+        String processName = "Процесс звыгрузки данных в Excel";
+        if (globVar.processReg.indexOf(processName) >= 0) {
+            JOptionPane.showMessageDialog(null, "Запуск нового процесса загрузки в БД данных из файла Excel заблокирован до окончания предыдущей загрузки");
+            return;
+        }
+        int casedial = JOptionPane.showConfirmDialog(null, "Выгрузка из БД информации для абонента в Excel \"" + globVar.abonent + "\"");
+        if (casedial != 0) {
+            return;
+        }
+        pb = new ProgressBar();
+        pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pb.setTitle(processName);
+        pb.setVisible(true);
+        //выдергиваем имя абонента и передаем в конструктор
+        globVar.abonent = (String) jComboBox2.getSelectedItem();
+        try {
+            UnloadExcel loadread=new UnloadExcel(globVar.abonent);
+            JOptionPane.showMessageDialog(null,"Выгрузка в Excel завершена");
+        } catch (ParseException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+         if (!Tools.isDesDir()) {
+            return;
+        }
+        try {
+            int ret = FileManager.renameIntFile(globVar.desDir + "\\Design");
+            JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+    //Редактирование ОРС серверов и клиентов
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if (!Tools.isDB()) {
+            return;
+        }
+        if (!Tools.isDesDir()) {
+            return;
+        }
+        JFrame addOPC = new addOPCserver();
+        addOPC.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addOPC.setTitle("Редактирование архивов");
+        addOPC.setVisible(true);
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (globVar.DB == null) {
@@ -544,7 +789,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         return new DefaultComboBoxModel(listarrayTable);
     }
 
-    public ComboBoxModel getComboBoxModelAbonents(){ // создания списка абонентов
+    public ComboBoxModel getComboBoxModelAbonents() { // создания списка абонентов
         if (globVar.DB == null) {
             return null;
         }
@@ -560,7 +805,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 
     // --- структура построения для дерева ---
-    public static DefaultTreeModel getModelTreeNZ(){
+    public static DefaultTreeModel getModelTreeNZ() {
         if (globVar.DB == null) {
             return null;
         }
@@ -596,9 +841,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 
     // --- метод отображения фрейма таблицы ---
-    public void showTable(String table){
-        if(!Tools.isDB()) return;
-        if(!globVar.DB.isTable(table)) return;
+    public void showTable(String table) {
+        if (!Tools.isDB()) {
+            return;
+        }
+        if (!globVar.DB.isTable(table)) {
+            return;
+        }
         TableDB tdb = new TableDB(table);
         tdb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         tdb.setVisible(true);
@@ -607,38 +856,55 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 
     private boolean exeptCol(String s, String[] exCol) {
-        for(String e: exCol) if(e.equals(s)) return true;
+        for (String e : exCol) {
+            if (e.equals(s)) {
+                return true;
+            }
+        }
         return false;
     }
-    
-    private void setDesDirPath(){
+
+    private void setDesDirPath() {
         JFileChooser fileload = new JFileChooser(new File(globVar.desDir));
         fileload.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);//эта строка отвечает за путь файла
         //int x = fileload.showOpenDialog(this);//эта строка отвечает за само открытие
@@ -653,7 +919,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     cfgSax.writeDocument("Config.xml");
                     globVar.desDir = newPath;
                 }
-                jTextField1.setText(" "+globVar.desDir);
+                jTextField1.setText(" " + globVar.desDir);
                 // TODO add your handling code here:
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -665,12 +931,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
 // Класс Слушатель выделения узла в дереве
 class SelectionListener implements TreeSelectionListener {
 //
+
     Main_JPanel mainPanel;
 //
+
     SelectionListener(Main_JPanel aThis) {
         mainPanel = aThis;
     }
 //
+
     public void valueChanged(TreeSelectionEvent e) {
     }
 }
