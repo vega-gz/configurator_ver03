@@ -2,16 +2,10 @@ package Tools;
 
 import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;
-import Tools.FileManager;
-import Tools.SaveFrameData;
-import Tools.closeJFrame;
-import Tools.isCange;
-import Tools.regitrationJFrame;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -28,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.CellEditorListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
@@ -300,9 +293,9 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
     }
 
-    public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, int i) {
+    public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, String i) {
         for (String[] al : archList) {
-            if (al[1].equals("" + i)) {
+            if (al[1].equals(i)) {
                 list.addElement(al[0]);
             }
         }

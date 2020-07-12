@@ -1,10 +1,8 @@
 package FrameCreate;
 
-import DataBaseTools.DataBase;
 import Generators.Generator;
 import Tools.BackgroundThread;
 import Tools.DoIt;
-import Tools.MyTableModel;
 import Tools.SaveFrameData;
 import Tools.TableTools;
 import Tools.Tools;
@@ -14,40 +12,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-//import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 
 /*@author Lev*/
 public class addOPCserver extends javax.swing.JFrame {
     DefaultListModel list1 = new DefaultListModel();
     DefaultListModel list2 = new DefaultListModel();
     //String abonent = globVar.abonent;
-    int prevArch = 0;
+    //int prevSpaceName = 0;
     final String[] nodeIDitems = {"Number","Name"};
     final String[] nodeIDtypeItems = {"Numeric","String"};
     final String[] opcTabCols = {"tagName","nameSpace"};
     ArrayList<String[]> opcList;
     ArrayList<String> plusList = new ArrayList<>();
-    boolean isChang = false;
+    //boolean isChang = false;
     int opcServName;
-    int nameSpace;
+    String nameSpace;
     int nodeID;
     int nodeIDtype;
     String comment;
 
     private void setServSettings(String s){
         if(s==null) return;
-        int x = s.indexOf("nameSpace:");
-        x += 10;
-        int y = s.indexOf(";",x);
-        nameSpace = Integer.parseInt(s.substring(x,y));
-        x = s.indexOf("nodeID:");
+        int x = s.indexOf("nodeID:");
         x += 7;
-        y = s.indexOf(";",x);
+        int y = s.indexOf(";",x);
         nodeID = Tools.indexOfArray(nodeIDitems, s.substring(x,y));
         x = s.indexOf("nodeIDtype:");
         x += 11;
@@ -62,15 +53,15 @@ public class addOPCserver extends javax.swing.JFrame {
         
         jComboBox1.setModel(new DefaultComboBoxModel(nodeIDitems));//ID
         jComboBox2.setModel(new DefaultComboBoxModel(nodeIDtypeItems));//ID type
+        jComboBox3.setModel(new DefaultComboBoxModel(new String[]{"1","2"}));//namespace
+        nameSpace = "1";
         
         ArrayList<String> tableList = globVar.DB.getListTable("opc");
         if(tableList==null){
-            comment = "nameSpace:1; nodeID:number; nodeIDtype:Numeric";
+            comment = "nodeID:Number; nodeIDtype:Numeric;";
             globVar.DB.createTableEasy("opcServer1", opcTabCols, comment);
             jComboBox4.setModel(new DefaultComboBoxModel(new String[]{"OPC_Server1"}));
-            jComboBox3.setModel(new DefaultComboBoxModel(new String[]{"1","2"}));//namespace
             opcServName = 0;
-            nameSpace = 0;
             nodeID = 0;
             nodeIDtype = 0;
         }else{
@@ -80,10 +71,15 @@ public class addOPCserver extends javax.swing.JFrame {
             setServSettings(comment);
         }
         
-        
-        opcList = globVar.DB.getData(jComboBox4.getItemAt(opcServName));
-        
-        TableTools.setArchiveSignalList(list2, opcList, 0);
+        opcList = globVar.DB.getData(jComboBox4.getItemAt(opcServName), opcTabCols);
+        //-------------  Для правильного списка nameSpace ------------------------------
+        int nameSpaceCnt = 2;
+        for(String[]s:opcList){
+            int x = Tools.getIndexOfComboBox(jComboBox3,s[1]);//Integer.parseInt(s[2]);
+            if(x<0)jComboBox3.addItem(s[1]);
+        }
+        //------------------------------------------------------------------------------
+        TableTools.setArchiveSignalList(list2, opcList, "1");
         Tools.setPlusList(opcList, plusList);
         try {
             TableTools.setSignalList(list1, null, null, false, opcList, plusList);
@@ -94,10 +90,14 @@ public class addOPCserver extends javax.swing.JFrame {
         jList1.setModel(list1);
         jList2.setModel(list2);
         //Лямбда для определения изменений
-        isCange ich = ()->{return isChang;};
+        isCange ich = ()->{//Для того, чтобы сохранение в БД происходило всегда и без переспроса, включаем сохранение в функцию проверки наличия изменений
+            resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
+            TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+            return false;
+        };
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = ()->{
-            resetArchList();        //сохраняем изменения списака предназначенных к архивированию сигналов
+            resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
             TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
         };
         TableTools.setTableListener(this, sfd, ich, null);
@@ -199,7 +199,7 @@ public class addOPCserver extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +207,7 @@ public class addOPCserver extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                 .addGap(3, 3, 3))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,7 +221,7 @@ public class addOPCserver extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 221, Short.MAX_VALUE))
+                .addGap(0, 216, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -236,9 +236,15 @@ public class addOPCserver extends javax.swing.JFrame {
 
         jLabel2.setText("Namespace");
 
+        jComboBox3.setEditable(true);
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
+            }
+        });
+        jComboBox3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jComboBox3KeyReleased(evt);
             }
         });
 
@@ -263,15 +269,15 @@ public class addOPCserver extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(2, 2, 2)
                 .addComponent(jComboBox4, 0, 1, Short.MAX_VALUE)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(3, 3, 3)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(1, 1, 1)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGap(2, 2, 2)
                 .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -293,12 +299,12 @@ public class addOPCserver extends javax.swing.JFrame {
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton6))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -319,13 +325,13 @@ public class addOPCserver extends javax.swing.JFrame {
                     list2.addElement(list1.get(i-offset));
                     list1.remove(i-offset);
                     offset++;
-                    isChang = true;
+                    //isChang = true;
                 }
             }else{
                 list2.addElement(list1.get(i-offset));
                 list1.remove(i-offset);
                 offset++;
-                isChang = true;
+                //isChang = true;
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -338,7 +344,7 @@ public class addOPCserver extends javax.swing.JFrame {
             list2.remove(i-offset);
             offset++;
         }
-        isChang = true;
+        //isChang = true;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentResized
@@ -348,9 +354,9 @@ public class addOPCserver extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MousePressed
     //Кнопка "Сохранить"
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-            resetArchList();        //сохраняем изменения списака предназначенных к архивированию сигналов
-            TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
-        isChang = false;
+        resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
+        TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+        //isChang = false;
     }//GEN-LAST:event_jButton6ActionPerformed
     //Кнопка "+"
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -376,58 +382,76 @@ public class addOPCserver extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        int x = jComboBox1.getSelectedIndex();//сохранем выбранный пункт типа архива
-        resetArchList();
-        prevArch = x;
-        list2.removeAllElements();
-        TableTools.setArchiveSignalList(list2, opcList, x);
+//        int x = jComboBox1.getSelectedIndex();//сохранем выбранный пункт типа архива
+//        resetArchList();
+//        prevArch = x;
+//        list2.removeAllElements();
+//        TableTools.setArchiveSignalList(list2, opcList, x);
     }//GEN-LAST:event_jComboBox1ActionPerformed
     //Кнопка "Приложение"
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int i = -1;
-        //try{
-            String processName = "Генерация из таблицы";
-            if(globVar.processReg.indexOf(processName)>=0){
-                JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
-                return;
+        resetOpcList();
+        String processName = "Генерация из таблицы";
+        if(globVar.processReg.indexOf(processName)>=0){
+            JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
+            return;
+        }
+        DoIt di = () -> {
+            int ret = -1;
+            try {
+                ret = Generator.GenOPC(null, null, null, jProgressBar1); // вызываем функцию генерации
+            } catch (IOException ex) {
+                Logger.getLogger(addOPCserver.class.getName()).log(Level.SEVERE, null, ex);
             }
-            DoIt di = () -> {
-                int ret = -1;
-                try {
-                    ret = Generator.GenOPC(null, null, null, jProgressBar1); // вызываем функцию генерации
-                } catch (IOException ex) {
-                    Logger.getLogger(addOPCserver.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-                else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
-                
-                globVar.processReg.remove(processName);
-                jProgressBar1.setValue(0);
-             };
-            BackgroundThread bt = new BackgroundThread("Генерация OPC", di);
-            bt.start();
-            globVar.processReg.add(processName);
-        //}catch(NumberFormatException e){
-        //    JOptionPane.showMessageDialog(null, "Неправильно сконфигурирован архив № " + (i+1));
-        //}        
+            if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+            else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+
+            globVar.processReg.remove(processName);
+            jProgressBar1.setValue(0);
+         };
+        BackgroundThread bt = new BackgroundThread("Генерация OPC", di);
+        bt.start();
+        globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
-
+    //Выбор пространства имён
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
+        String item = (String) jComboBox3.getSelectedItem();
+        if(!Tools.isInteger(item)){
+            JOptionPane.showMessageDialog(null, "Номер пространства имён - только положительное целое число");
+            return;
+        }
+        resetOpcList();
+        int y = jComboBox3.getSelectedIndex();
+        if(y<0)jComboBox3.addItem(item);
+        nameSpace = item;
+        list2.removeAllElements();
+        TableTools.setArchiveSignalList(list2, opcList, nameSpace);
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
-    private void resetArchList(){
+    private void jComboBox3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox3KeyReleased
+//        String item = (String) jComboBox1.getEditor().getItem();
+//        int y = -1;
+//        try{
+//            y = Integer.parseUnsignedInt(item);
+//        }catch(NumberFormatException e){
+//            JOptionPane.showMessageDialog(null, "Номер пространства имён - тоько положительное целое число");
+//            return;
+//        }
+//
+    }//GEN-LAST:event_jComboBox3KeyReleased
+
+    private void resetOpcList(){
         for(int i=0;i<opcList.size(); i++){    //пробегаем поо списту предназнгаченных к архивированию сигналов
-            if(opcList.get(i)[1].equals(""+prevArch)){ // если сигнал имеет номер нужный архива
+            if(opcList.get(i)[1].equals(nameSpace)){ // если сигнал имеет номер нужный архива
                 opcList.remove(i);                     // удаляем его
                 i--;
             }
         }
-        for(int i=0; i<list2.size(); i++) opcList.add(new String[]{(String)list2.get(i),""+prevArch}); //заносим в списов все сигналы из текужего списка второго листа        
+        for(int i=0; i<list2.size(); i++) opcList.add(new String[]{(String)list2.get(i),nameSpace}); //заносим в списов все сигналы из текужего списка второго листа        
     }
     /**
      * @param args the command line arguments
