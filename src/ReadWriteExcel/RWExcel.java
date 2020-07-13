@@ -395,7 +395,7 @@ public class RWExcel {
                     String tableNameAb = globVar.abonent+"_"+exSheetName;
                     if(globVar.DB.isTable(tableNameAb)) 
                         globVar.DB.dropTable(tableNameAb);
-                    globVar.DB.createTable(tableNameAb, tabColNames, tableComment);
+                    globVar.DB.createTableEasy(tableNameAb, tabColNames, tableComment);
                     for(int i=0; i<rowMax; i++){
                         globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);
                     }

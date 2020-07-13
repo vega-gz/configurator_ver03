@@ -310,6 +310,8 @@ public class XMLSAX {
                         url = element.getElementsByTagName("URL").item(0).getTextContent();
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
+                        int ldd = DesignDir.length();
+                        if("design".equalsIgnoreCase(DesignDir.substring(ldd-6))) DesignDir=DesignDir.substring(0, ldd-7);
                     }
                 }
             } catch (ParserConfigurationException | SAXException | IOException ex) {

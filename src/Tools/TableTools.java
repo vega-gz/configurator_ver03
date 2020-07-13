@@ -12,6 +12,8 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -295,6 +297,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, String i) {
+        if(archList==null) return;
         for (String[] al : archList) {
             if (al[1].equals(i)) {
                 list.addElement(al[0]);
@@ -306,14 +309,20 @@ public class TableTools {//ссылка на таблицу, массив шир
 
     public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
             ArrayList<String> plusList) throws IOException {
+        setSignalList(list, abList, abonent, commonSig, archList, plusList, null);
+    }
+    
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
+            ArrayList<String> plusList, String filter){// throws IOException {
         list.removeAllElements();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
         for (Node n : sigList) {
-            boolean ins;
             String sigName = prj.getDataAttr(n, "Name");
+            if(!StrTools.isFilter(sigName,filter)) continue;
+            boolean ins;
             if(abList!=null){
                 int x = sigName.indexOf("_");
                 String sigAb = null;
@@ -364,7 +373,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         return false;
     }
 
-    public static ArrayList<String> openSig(String glibSigName) throws IOException {
+    public static ArrayList<String> openSig(String glibSigName){// throws IOException {
         ArrayList<String> list = new ArrayList<>();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
@@ -374,7 +383,13 @@ public class TableTools {//ссылка на таблицу, массив шир
             return list;
         }
 
-        String fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
+        String fileName;
+        try {
+            fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
+        } catch (IOException ex) {
+            Logger.getLogger(TableTools.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
 
         XMLSAX sigSax = new XMLSAX();
         Node rootSig = sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + fileName);
@@ -383,9 +398,9 @@ public class TableTools {//ссылка на таблицу, массив шир
         if (sigList == null || sigList.isEmpty()) {
             return list;
         }
-        for (Node n : sigList) {
+        sigList.forEach(n -> {
             list.add("– " + glibSigName + "." + sigSax.getDataAttr(n, "Name"));
-        }
+        });
         return list;
     }
 

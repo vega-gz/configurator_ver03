@@ -21,7 +21,7 @@ public class addOPCserver extends javax.swing.JFrame {
     DefaultListModel list1 = new DefaultListModel();
     DefaultListModel list2 = new DefaultListModel();
     //String abonent = globVar.abonent;
-    //int prevSpaceName = 0;
+    //int prevOpcName = 0;
     final String[] nodeIDitems = {"Number","Name"};
     final String[] nodeIDtypeItems = {"Numeric","String"};
     final String[] opcTabCols = {"tagName","nameSpace"};
@@ -33,19 +33,8 @@ public class addOPCserver extends javax.swing.JFrame {
     int nodeID;
     int nodeIDtype;
     String comment;
+    ArrayList<String> tableList;
 
-    private void setServSettings(String s){
-        if(s==null) return;
-        int x = s.indexOf("nodeID:");
-        x += 7;
-        int y = s.indexOf(";",x);
-        nodeID = Tools.indexOfArray(nodeIDitems, s.substring(x,y));
-        x = s.indexOf("nodeIDtype:");
-        x += 11;
-        y = s.indexOf(";",x);
-        nodeIDtype = Tools.indexOfArray(nodeIDtypeItems, s.substring(x,y));
-    }
-    
     public addOPCserver() {
         if(globVar.DB==null)return;
         
@@ -56,11 +45,11 @@ public class addOPCserver extends javax.swing.JFrame {
         jComboBox3.setModel(new DefaultComboBoxModel(new String[]{"1","2"}));//namespace
         nameSpace = "1";
         
-        ArrayList<String> tableList = globVar.DB.getListTable("opc");
+        tableList = globVar.DB.getListTable("opc");
         if(tableList==null){
             comment = "nodeID:Number; nodeIDtype:Numeric;";
             globVar.DB.createTableEasy("opcServer1", opcTabCols, comment);
-            jComboBox4.setModel(new DefaultComboBoxModel(new String[]{"OPC_Server1"}));
+            jComboBox4.setModel(new DefaultComboBoxModel(new String[]{"opcServer1"}));
             opcServName = 0;
             nodeID = 0;
             nodeIDtype = 0;
@@ -72,6 +61,7 @@ public class addOPCserver extends javax.swing.JFrame {
         }
         
         opcList = globVar.DB.getData(jComboBox4.getItemAt(opcServName), opcTabCols);
+        setLists();
         //-------------  Для правильного списка nameSpace ------------------------------
         int nameSpaceCnt = 2;
         for(String[]s:opcList){
@@ -79,16 +69,6 @@ public class addOPCserver extends javax.swing.JFrame {
             if(x<0)jComboBox3.addItem(s[1]);
         }
         //------------------------------------------------------------------------------
-        TableTools.setArchiveSignalList(list2, opcList, "1");
-        Tools.setPlusList(opcList, plusList);
-        try {
-            TableTools.setSignalList(list1, null, null, false, opcList, plusList);
-        } catch (IOException ex) {
-            Logger.getLogger(addOPCserver.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        jList1.setModel(list1);
-        jList2.setModel(list2);
         //Лямбда для определения изменений
         isCange ich = ()->{//Для того, чтобы сохранение в БД происходило всегда и без переспроса, включаем сохранение в функцию проверки наличия изменений
             resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
@@ -127,6 +107,7 @@ public class addOPCserver extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,7 +180,7 @@ public class addOPCserver extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +188,7 @@ public class addOPCserver extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                 .addGap(3, 3, 3))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,7 +202,7 @@ public class addOPCserver extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 216, Short.MAX_VALUE))
+                .addGap(0, 200, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -253,36 +234,55 @@ public class addOPCserver extends javax.swing.JFrame {
         jLabel4.setText("NodeID type");
 
         jComboBox4.setEditable(true);
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("*");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(jLabel1)
-                .addGap(2, 2, 2)
-                .addComponent(jComboBox4, 0, 1, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(3, 3, 3)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(2, 2, 2)
-                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(2, 2, 2)
+                        .addComponent(jComboBox4, 0, 1, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(1, 1, 1)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(3, 3, 3)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addGap(3, 3, 3)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addGap(3, 3, 3))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,12 +299,14 @@ public class addOPCserver extends javax.swing.JFrame {
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton6))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton6)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addGap(3, 3, 3))
         );
 
         pack();
@@ -355,6 +357,7 @@ public class addOPCserver extends javax.swing.JFrame {
     //Кнопка "Сохранить"
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
+        comment = "nodeID:"+jComboBox1.getSelectedItem()+"; nodeIDtype:"+jComboBox2.getSelectedItem()+";";
         TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
         //isChang = false;
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -382,11 +385,7 @@ public class addOPCserver extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-//        int x = jComboBox1.getSelectedIndex();//сохранем выбранный пункт типа архива
-//        resetArchList();
-//        prevArch = x;
-//        list2.removeAllElements();
-//        TableTools.setArchiveSignalList(list2, opcList, x);
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
     //Кнопка "Приложение"
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -444,15 +443,111 @@ public class addOPCserver extends javax.swing.JFrame {
 //
     }//GEN-LAST:event_jComboBox3KeyReleased
 
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        String item = (String) jComboBox4.getSelectedItem();
+        if(item.length() < 3 || !item.substring(0, 3).equalsIgnoreCase("opc")){
+            JOptionPane.showMessageDialog(null, "Имя opc-сервера должно начинаться с \"opc\"");
+            return;
+        }
+        int y = jComboBox4.getSelectedIndex();
+        int n = -1;
+        if(y<0){
+            Object[] options = {"Создать новый", "Переименовать", "Отмена"};
+
+            n = JOptionPane.showOptionDialog(null, "Выберите действие:",
+                    "Операции над ОРС серверами", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options,
+                    options[2]);
+            switch (n) {
+                case 2://---------Ничего не делать
+                    return;
+                case 1://---------Переименовать
+                    globVar.DB.renameTable(jComboBox4.getItemAt(opcServName), item);
+                    jComboBox4.removeItemAt(opcServName);
+                    jComboBox4.insertItemAt(item, opcServName);
+                    break;
+                default://---------Создать новый
+                    resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
+                    comment = "nodeID:"+jComboBox1.getSelectedItem()+"; nodeIDtype:"+jComboBox2.getSelectedItem()+";";
+                    TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+                    jComboBox4.addItem(item);
+                    opcServName = jComboBox4.getItemCount()-1;
+                    globVar.DB.createTableEasy(item, opcTabCols, comment);
+                    tableList.add(item);
+                    nameSpace = "1";
+                    opcList.clear();
+                    list1.clear();
+                    list2.clear();
+                    setLists();
+                    break;
+            }
+        }else{
+            if(opcServName != y){
+                resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
+                comment = "nodeID:"+jComboBox1.getSelectedItem()+"; nodeIDtype:"+jComboBox2.getSelectedItem()+";";
+                TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+                opcServName = y;
+                opcList.clear();
+                comment = globVar.DB.getCommentTable(item);
+                setServSettings(comment);
+                opcList = globVar.DB.getData(item, opcTabCols);
+                list1.clear();
+                list2.clear();
+                setLists();
+                nameSpace = "1";
+            }
+        }
+        
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        String s = jTextField1.getText();
+        list1.clear();
+        TableTools.setSignalList(list1, null, null, false, opcList, plusList, jTextField1.getText());
+        jList1.setModel(list1);
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void setServSettings(String s){
+        if(s==null) return;
+        int x = s.indexOf("nodeID:");
+        x += 7;
+        int y = s.indexOf(";",x);
+        nodeID = Tools.indexOfArray(nodeIDitems, s.substring(x,y));
+        jComboBox1.setSelectedIndex(nodeID);
+        x = s.indexOf("nodeIDtype:");
+        x += 11;
+        y = s.indexOf(";",x);
+        nodeIDtype = Tools.indexOfArray(nodeIDtypeItems, s.substring(x,y));
+        jComboBox2.setSelectedIndex(nodeIDtype);
+        jComboBox3.setSelectedIndex(0);
+    }
+    
+    private void setLists(){
+        if(opcList==null) return;
+        TableTools.setArchiveSignalList(list2, opcList, "1");
+        Tools.setPlusList(opcList, plusList);
+        TableTools.setSignalList(list1, null, null, false, opcList, plusList, jTextField1.getText());
+        jList1.setModel(list1);
+        jList2.setModel(list2);
+    }
+    
+
     private void resetOpcList(){
+        if(opcList==null) return;
         for(int i=0;i<opcList.size(); i++){    //пробегаем поо списту предназнгаченных к архивированию сигналов
             if(opcList.get(i)[1].equals(nameSpace)){ // если сигнал имеет номер нужный архива
                 opcList.remove(i);                     // удаляем его
                 i--;
             }
         }
+        if(list2==null) return;
         for(int i=0; i<list2.size(); i++) opcList.add(new String[]{(String)list2.get(i),nameSpace}); //заносим в списов все сигналы из текужего списка второго листа        
     }
+    //=========================================================================================================================
     /**
      * @param args the command line arguments
      */
@@ -510,5 +605,6 @@ public class addOPCserver extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

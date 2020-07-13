@@ -238,35 +238,34 @@ public class DataBase implements Observed {
     }
     
     //-------------- Создать таблицу без проверки её наличия в БД -Lev--------------
-    public void createTable(String name_table,  String[] listNameColum, String comment) {
-        if (name_table.isEmpty() || listNameColum.length == 0) return; 
-        String nameSEQ = name_table.toLowerCase() +"_id_seq"; // имя итератора
-        createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
-        String sql = null;
-        name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
-        //int tmp_cell = 0;
-        String nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')";
-        for(int j=0; j<listNameColum.length; j++)
-            nc_stringing += " ," + "\"" + listNameColum[j] + "\"" + "      TEXT";
-        nc_stringing += ")";
-        try {
-            connection.setAutoCommit(true);
-            stmt = connection.createStatement();
-            sql = "CREATE TABLE \"" + name_table + "\"" + nc_stringing;
-            //System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
-            stmt.executeUpdate(sql);
-            stmt.close();
-            //connection.commit();
-            //System.out.println("-- Table created successfully");
-            createCommentTable(name_table, comment); // вызом метода добавления комментария
-
-        } catch (SQLException e) {
-            System.out.println("Failed CREATE TABLE");
-            System.out.println(sql); // смотрим какой запрос на соз
-            e.printStackTrace();
-            return;
-        }
-    }
+//    public void createTable1(String name_table,  String[] listNameColum, String comment) {
+//        
+//        if (name_table.isEmpty() || listNameColum.length == 0) return; 
+//        String nameSEQ = name_table.toLowerCase() +"_id_seq"; // имя итератора
+//        //createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
+//        String sql = null;
+//        name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
+//        String nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')";
+//        for(int j=0; j<listNameColum.length; j++)
+//            nc_stringing += " ," + "\"" + listNameColum[j] + "\"" + "      TEXT";
+//        nc_stringing += ")";
+//        try {
+//            connection.setAutoCommit(true);
+//            stmt = connection.createStatement();
+//            sql = "CREATE TABLE \"" + name_table + "\"" + nc_stringing;
+//            stmt.executeUpdate(sql);
+//            stmt.close();
+//            //connection.commit();
+//            //System.out.println("-- Table created successfully");
+//            createCommentTable(name_table, comment); // вызом метода добавления комментария
+//
+//        } catch (SQLException e) {
+//            System.out.println("Failed CREATE TABLE");
+//            System.out.println(sql); // смотрим какой запрос на соз
+//            e.printStackTrace();
+//            return;
+//        }
+//    }
     
     public void createTableEasy(String name_table,  String[] listNameColum,  ArrayList<String>  comment) {
         if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
@@ -723,7 +722,7 @@ public class DataBase implements Observed {
         }
     }
     //-------------- Удаление таблицы c сохранением резервной копии ---------------
-    public int createDelTable(String nameT) {
+    public int dropTableWithBackUp(String nameT) {
         if(!globVar.DB.isTable(nameT)) return -1;
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH_mm_ss_dd_MM_yy");
         String dt = formatForDateNow.format(new Date());
@@ -760,6 +759,22 @@ public class DataBase implements Observed {
             e.printStackTrace();
         }
     }
+    //-------------- Переименование таблицы ---------------
+    public int renameTable(String nameT, String name2) {
+        if(!globVar.DB.isTable(nameT)) return -1;
+        try {
+            stmt = connection.createStatement();
+            String sql = "ALTER TABLE \""+ nameT +"\" RENAME TO \""+name2+"\";";
+            stmt.executeUpdate(sql);
+            System.out.println(nameT+" to " + name2 +" RENAME successfully");
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed RENAME TABLE" + nameT+" to " + name2);
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
+    }
     
 
     // Функция корректировки названия таблиц для базы данных
@@ -768,28 +783,28 @@ public class DataBase implements Observed {
         return s;
     }
     
-    // --- Создание  SEQUENCE ---
-    private void createSEQ(String name){
-        String sql = null;
-                
-        try {
-            for(String s: getListSequnce()){ // пробегаем по названиям SEQUENCE 
-                System.out.println(s);
-                if(s.equalsIgnoreCase(name)){ // проверка на соответствие и удаление(создает их в нижнем регистре)
-                    sql = "DROP SEQUENCE " + s +";";
-                    stmt = connection.createStatement();
-                    stmt.executeUpdate(sql);
-                }
-            }
-            sql = "CREATE SEQUENCE " + name+";";
-            stmt = connection.createStatement();
-            stmt.executeUpdate(sql);
-            stmt.close();
-        } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
-            e.printStackTrace();
-        }
-    }
+//    // --- Создание  SEQUENCE ---
+//    private void createSEQ1(String name){
+//        String sql = null;
+//                
+//        try {
+//            for(String s: getListSequnce()){ // пробегаем по названиям SEQUENCE 
+//                System.out.println(s);
+//                if(s.equalsIgnoreCase(name)){ // проверка на соответствие и удаление(создает их в нижнем регистре)
+//                    sql = "DROP SEQUENCE " + s +";";
+//                    stmt = connection.createStatement();
+//                    stmt.executeUpdate(sql);
+//                }
+//            }
+//            sql = "CREATE SEQUENCE " + name+";";
+//            stmt = connection.createStatement();
+//            stmt.executeUpdate(sql);
+//            stmt.close();
+//        } catch (SQLException e) {
+//            FileManager.loggerConstructor("error PSQL request " + sql);
+//            e.printStackTrace();
+//        }
+//    }
     
     // --- добавить комментарий к таблице ---
     public void createCommentTable(String table, String comment){
@@ -944,7 +959,7 @@ public class DataBase implements Observed {
         ArrayList<String> list_table_base = globVar.DB.getListTable();
         if(StrTools.searchInList("Abonents", list_table_base)< 0){
             String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type", "Экземпляры"};
-            globVar.DB.createTable("Abonents", columns,"Типовые абоненты");
+            globVar.DB.createTableEasy("Abonents", columns,"Типовые абоненты");
         }
     }
     public static ArrayList<String[]> getAbonentArray() // функция для создания списка из таблицы абонентов

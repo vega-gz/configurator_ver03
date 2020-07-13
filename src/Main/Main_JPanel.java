@@ -943,7 +943,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (fileload.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
                 String newPath = fileload.getSelectedFile().getCanonicalPath();
-                if (!newPath.equals(globVar.desDir)) {
+                int ldd = newPath.length();
+                if("design".equalsIgnoreCase(newPath.substring(ldd-6))) newPath = newPath.substring(0, ldd-7);
+                if (!newPath.equalsIgnoreCase(globVar.desDir)) {
                     XMLSAX cfgSax = new XMLSAX();
                     Node cfgSaxRoot = cfgSax.readDocument("Config.xml");
                     Node desDir = cfgSax.returnFirstFinedNode(cfgSaxRoot, "DesignDir");

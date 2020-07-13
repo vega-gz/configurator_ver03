@@ -323,7 +323,7 @@ public class TableDB extends javax.swing.JFrame {
         if(1 == JOptionPane.showOptionDialog(null, "Удалить таблицу \""+tableName+"\" из БД?",
                 "Вопрос", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1])
         ) return;
-        globVar.DB.createDelTable(tableName);
+        globVar.DB.dropTableWithBackUp(tableName);
         globVar.processReg.remove(this.getTitle());
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
