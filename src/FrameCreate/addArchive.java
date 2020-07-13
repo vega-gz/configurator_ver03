@@ -77,7 +77,7 @@ public class addArchive extends javax.swing.JFrame {
         jList1.setModel(list1);
         jList2.setModel(list2);
         abList = DataBase.getAbonentArray();
-        TableTools.setArchiveSignalList(list2, archList, 0);
+        TableTools.setArchiveSignalList(list2, archList, "0");
         setPlusList();
         try {
             TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
@@ -412,7 +412,7 @@ public class addArchive extends javax.swing.JFrame {
         resetArchList();
         prevArch = x;
         list2.removeAllElements();
-        TableTools.setArchiveSignalList(list2, archList, x);
+        TableTools.setArchiveSignalList(list2, archList, ""+x);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed

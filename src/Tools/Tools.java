@@ -4,6 +4,7 @@ import globalData.globVar;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /*@author Lev*/
@@ -48,7 +49,12 @@ public class Tools {
         }
         return false;
     }
-    
+    public static boolean isInteger(String s) {
+        try { Integer.parseInt(s); } 
+        catch(NumberFormatException e) { return false; } 
+        catch(NullPointerException e) { return false; }
+        return true;
+    }    
     public static void delPlusFromArch(ArrayList<String[]> list1, DefaultListModel list2, String sig){
         for(int i=0; i < list1.size(); i++){
             String s = list1.get(i)[0];
@@ -60,6 +66,12 @@ public class Tools {
             int x = s.indexOf(".");
             if(x > 0 && sig.equals(s.substring(2,x))) list2.remove(i--);
         }
+    }
+
+    public static int getIndexOfComboBox(JComboBox<String> jComboBox, String s) {
+        int cnt = jComboBox.getItemCount();
+        for(int i=0; i < cnt; i++) if(s.equals(jComboBox.getItemAt(i))) return i;
+        return -1;
     }
     
 }

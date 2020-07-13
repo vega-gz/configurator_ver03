@@ -1,7 +1,6 @@
 package Generators;
 
 import Tools.FileManager;
-import FrameCreate.FrameTabel;
 import FrameCreate.TableDB;
 import Tools.StrTools;
 import XMLTools.*;
