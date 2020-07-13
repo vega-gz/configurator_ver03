@@ -159,7 +159,7 @@ public class FileManager {
         if (f.isDirectory()) {
             String[] children = f.list();
             for (int i = 0; i < children.length; i++) {
-                pathAllFile(dir + "\\" + children[i]); // вызываем рекурсией
+                pathAllFile(dir + File.separator + children[i]); // вызываем рекурсией
             }
             //System.out.println("Директория " +  f.getAbsolutePath() ); // сообщение о директории прячем
         } else {
@@ -174,7 +174,7 @@ public class FileManager {
         if (f.isDirectory()) {
             String[] children = f.list(); // так смотрим что в директории 
             for (int i = 0; i < children.length; i++) { // пробегаемся по ней
-                pathAllDir(dir + "\\" + children[i]); // вызываем рекурсией
+                pathAllDir(dir + File.separator + children[i]); // вызываем рекурсией
             }
             listAllPath.add(f.getAbsolutePath());
         } else {
@@ -421,7 +421,7 @@ public class FileManager {
         if (dir == null || nameType == null) {
             return null;
         }
-        File f = new File(dir + "\\" + nameType + ".type");
+        File f = new File(dir + File.separator + nameType + ".type");
         if (f.isFile()) {
             return nameType + ".type";
         }
@@ -431,7 +431,7 @@ public class FileManager {
         //if (fileList != null) {
         for (String fn : fileList) {
             if (fn.length() > 5 && ".TYPE".equalsIgnoreCase(fn.substring(fn.length() - 5))) {
-                String s = findStringInFile(dir + "\\" + fn, nameWords);
+                String s = findStringInFile(dir + File.separator + fn, nameWords);
                 String val = StrTools.getAttributValue(s, nameWords);
                 if (val != null && val.equals(nameType)) {
                     return fn;
@@ -564,7 +564,7 @@ public class FileManager {
             //System.out.println(findexpType);//находим расширение файла
             if (findType.isDirectory()) {//если это дирректория - ничего не делать
             } else if (findexpType.equals(expType)) {//если расширение type ,то читаем файл
-                String findName = findStringInFile(dir + "\\" + nameTypeFile, " Name=");//ищем строку
+                String findName = findStringInFile(dir + File.separator + nameTypeFile, " Name=");//ищем строку
                 String typeAttr = StrTools.getAttributValue(findName, "Name=\"");//находим этот аттрибут
                 String fileName = findType.getName().substring(0, nameTypeFile.indexOf('.'));//имя файла без расширения(ибо прога читает с расширением)
                 if (fileName != null && typeAttr != null && !fileName.equals(typeAttr)) {//сравниваем имя файла и имя типа(если не равны ищем фолдер)
@@ -576,7 +576,7 @@ public class FileManager {
                         String nameFolderFile = findFolder.getName();
                         String findexpFolder = nameFolderFile.substring(nameFolderFile.lastIndexOf(".") + 1);//ищу расширение folder
                         if (findexpFolder.equals(expFolder)) {//если нашли folder то начинаем его читать(нашли файл с расширение фолдер)
-                            String pathFolderFile = dir + "\\" + nameFolderFile;
+                            String pathFolderFile = dir + File.separator + nameFolderFile;
                             String myType = findStringInFile(pathFolderFile, fileName);//вроде как ищем строку содержащую имя файла(TYPE)
                             if (myType != null) {
                                 notRename = false;
@@ -588,7 +588,7 @@ public class FileManager {
                                 String itemArray[] = {"Item", "Name", fullNameAttr};//массив чтобы найти ноду по имени и атрибутам
                                 Node itemFolderNode = xmlsax.findNodeAtribute(nodeRead, itemArray);//нашли конкретный item в котором соответствия
                                 xmlsax.editDataAttr(itemFolderNode, "Name", typeAttr + "." + expType);
-                                File newName = new File(dir + "\\" + typeAttr + "." + expType);
+                                File newName = new File(dir + File.separator + typeAttr + "." + expType);
                                 if (!newName.isFile()) {
                                     boolean renameTo = findType.renameTo(newName);
                                     if (renameTo) //переименовали файл type на значение аттрибута
@@ -602,7 +602,7 @@ public class FileManager {
                         }
                     }
                     if (notRename) {
-                        File newName = new File(dir + "\\" + typeAttr + "." + expType);
+                        File newName = new File(dir + File.separator + typeAttr + "." + expType);
                         if (!newName.isFile()) {
                             findType.renameTo(newName);
                         }
@@ -631,7 +631,7 @@ public class FileManager {
             String findexpInt = nameIntFile.substring(nameIntFile.lastIndexOf(".") + 1);//получили расширение
 
             if (findexpInt.equals(expInt)) {//если нашли совпадения по расширению
-                String findTypeName = findStringInFile(dir + "\\" + nameIntFile, "Name=");//находит первое вхождение кода нашел соответствие
+                String findTypeName = findStringInFile(dir + File.separator + nameIntFile, "Name=");//находит первое вхождение кода нашел соответствие
                 attrIntValue = getAttributValue(findTypeName, "Name=" + '"');//находим этот аттрибут
                 fileName = nameIntFile.substring(0, nameIntFile.indexOf('.'));
 
@@ -652,7 +652,7 @@ public class FileManager {
                         //----МЫ НАШЛИ КОНКРЕТНЫЙ ИНТ.ЕСЛИ ИМЯ И ТИП НЕ СОВПАДАЮТ ТО ПРОБЕГАЕМСЯ СНОВА И ИЩЕМ ФАЙЛЫ С ТЕМ ЖЕ НАЗВАНИЕМ И МЕНЯЕМ ЕГО НА ЗНАЧЕНИЕ АТТРИБУТА---\\     
                         if (confName.equals(fileName)) {//если нашли совпадения по имени(int не ходят по одному,толпой,собаки)
                             nameFolderFile = nameFolderFile.substring(nameFolderFile.indexOf('.') + 1);
-                            findFolder.renameTo(new java.io.File(dir + "\\" + attrIntValue + "." + nameFolderFile));//меняем имена у всех файлов со схожими
+                            findFolder.renameTo(new java.io.File(dir + File.separator + attrIntValue + "." + nameFolderFile));//меняем имена у всех файлов со схожими
                         }
 
                         //----ЕСЛИ НАШЛИ СОВПАДЕНИЯ ПО ФОЛДЕР.ИЩЕМ СОВПАДЕНИЯ ПО ИМЕНИ ФАЙЛА И МЕНЯЕМ НА АТТРИБУТ---\\

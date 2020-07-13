@@ -94,7 +94,7 @@ public final class UnloadExcel {
         }
         // записываем созданный в памяти Excel документ в файл
         try {
-            BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(new File(globVar.desDir+"\\"+book_name+".xls")));
+            BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(new File(globVar.desDir+File.separator+book_name+".xls")));
             workbook.write(buf);
         } catch (IOException e) {
             e.printStackTrace();

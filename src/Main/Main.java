@@ -2,6 +2,7 @@ package Main;
 
 import XMLTools.XMLSAX;
 import globalData.globVar;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 
@@ -14,7 +15,7 @@ public class Main {
         globVar.sax = new XMLSAX(); // Класс работы с XML  static что бы не парится
         globVar.cfgRoot = globVar.sax.readDocument("ConfigSignals.xml");
         if(globVar.cfgRoot == null){
-            JOptionPane.showMessageDialog(null, "Не удалось прочитать "+globVar.myDir+"\\ConfigSignals.xml");
+            JOptionPane.showMessageDialog(null, "Не удалось прочитать "+globVar.myDir+File.separator+"ConfigSignals.xml");
             return;
         }
         

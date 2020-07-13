@@ -54,11 +54,11 @@ public class Generator {
         String prjFildName = abonent+subAb+isMb+globVar.sax.getDataAttr(nodeGenHW, "globData");
         String mainDriverName = globVar.sax.getDataAttr(nodeGenHW, "hwDriver");
 
-        String designDir = globVar.desDir  + "\\" + "Design";
+        String designDir = globVar.desDir  + File.separator + "Design";
         XMLSAX prj = new XMLSAX();
-        Node prjNode = prj.readDocument(designDir+"\\Project.prj");
+        Node prjNode = prj.readDocument(designDir+File.separator+"Project.prj");
         if(prjNode == null){
-            FileManager.loggerConstructor("Не удалось прочитать файл \"" + designDir+"\\Project.prj" + "\"");
+            FileManager.loggerConstructor("Не удалось прочитать файл \"" + designDir+File.separator+"Project.prj" + "\"");
             return -1;
         }
         String[] globSigAttr = {"Signal","Name", prjFildName};
@@ -70,14 +70,14 @@ public class Generator {
         String globUUID = prj.getDataAttr(globSigInPrj,"UUID");
         
         XMLSAX drv = new XMLSAX();
-        Node drvSignalsNode = drv.readDocument(designDir+"\\T_"+drvFileName);
+        Node drvSignalsNode = drv.readDocument(designDir+File.separator+"T_"+drvFileName);
         if(drvSignalsNode == null){
-            FileManager.loggerConstructor("Не удалось прочитать файл \"" + designDir+"\\T_"+drvFileName + "\"");
+            FileManager.loggerConstructor("Не удалось прочитать файл \"" + designDir+File.separator+"T_"+drvFileName + "\"");
             return -1;
         }
         XMLSAX hw = new XMLSAX();
         String currDev = "";
-        //String wfFilePref = designDir + "\\" + abonent + "_R";
+        //String wfFilePref = designDir + File.separator + abonent + "_R";
         Node hwConn=null;
         String abType = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Abonent_type"); 
         //-------------- Определение параметров драйвера модбаса ---------------------
@@ -264,14 +264,14 @@ public class Generator {
             return null;
         }//Если не вылетели - значит будет генерация
         XMLSAX bigSax = new XMLSAX();
-        String hmiProjectFile = globVar.desDir + "\\" + "Design" + "\\" + HMIcfg.getDataAttr(hmiCfgRoot, "project"); // Нужен для поиска УУИДов листов
+        String hmiProjectFile = globVar.desDir + File.separator + "Design" + File.separator + HMIcfg.getDataAttr(hmiCfgRoot, "project"); // Нужен для поиска УУИДов листов
         Node bigRoot = bigSax.readDocument(hmiProjectFile);
         if (bigRoot == null) {
             FileManager.loggerConstructor("Не найден файл проекта "+hmiProjectFile);
             return null;
         }//Если не вылетели - значит будет генерация
         
-        String filePath = globVar.desDir + "\\" + "GenHMI"; //Установили путь для файлов
+        String filePath = globVar.desDir + File.separator + "GenHMI"; //Установили путь для файлов
         File d = new File(filePath);
         if(!d.isDirectory()){
             d.mkdir();
@@ -329,8 +329,8 @@ public class Generator {
             XMLSAX HMIsax = new XMLSAX();
             findInBig[2] = pageName;
             if(targetFile==null){
-                sourceFile = "root\\HMI_Sheet.txt";
-                targetFile = filePath + "\\" + pageName +".txt";//если имени в ноде нет - конструируем имя
+                sourceFile = "root"+File.separator+"HMI_Sheet.txt";
+                targetFile = filePath + File.separator + pageName +".txt";//если имени в ноде нет - конструируем имя
                 Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
                 gctNode = HMIsax.returnFirstFinedNode(hmiRoot, "GraphicsCompositeFBType");
                 HMIsax.setDataAttr(gctNode, "Name", pageName);
@@ -519,8 +519,8 @@ public class Generator {
     public static int GenTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
         int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
-        String backUpPath = globVar.backupDir + "\\";   //установили путь для бэкапа
-        String filePath = globVar.desDir + "\\Design"; //установили путь для проекта
+        String backUpPath = globVar.backupDir + File.separator;   //установили путь для бэкапа
+        String filePath = globVar.desDir + File.separator+"Design"; //установили путь для проекта
         String nodeTable = ft.tableName();
         int x = nodeTable.indexOf("_");
         String abonent = nodeTable.substring(0,x);
@@ -544,7 +544,7 @@ public class Generator {
             return -1;
         }
         XMLSAX prjSax = new XMLSAX();
-        Node prjRoot = prjSax.readDocument(filePath + "\\Project.prj");;
+        Node prjRoot = prjSax.readDocument(filePath + File.separator+"Project.prj");;
         Node interfaceList = prjSax.returnFirstFinedNode(prjRoot, "Globals");
         NodeList nodesGenData = nodeGenData.getChildNodes(); //получаем список нод внутри ГенДаты
         int jpgMax = nodesGenData.getLength();
@@ -572,7 +572,7 @@ public class Generator {
                         dtCol = globVar.sax.getDataAttr(currNodeCfgXML, "col");
                         defType = globVar.sax.getDataAttr(currNodeCfgXML, "ifEmpty");
                     }else{
-                        fildUUID = FileManager.findStringInFile(filePath+"\\"+typeFile, "UUID=");
+                        fildUUID = FileManager.findStringInFile(filePath+File.separator+typeFile, "UUID=");
                         fildUUID = StrTools.getAttributValue(fildUUID,"UUID=\"");
                     }
                     if(fildUUID==null){
@@ -585,7 +585,7 @@ public class Generator {
                 Node intFile1 = globVar.sax.returnFirstFinedNode(currNodeCfgXML,"localData");
                 String intFile2 = globVar.sax.getDataAttr(intFile1, "int");
                 if("_".equals(intFile2.substring(0, 1))) intFile2 = abonent+intFile2;
-                Node uuidRoot = uuidSax.readDocument(filePath + "\\" + intFile2);
+                Node uuidRoot = uuidSax.readDocument(filePath + File.separator + intFile2);
                 String typeUUID = getUUIDfromPrj(uuidSax, uuidRoot, abonent+"_"+subAb+isMb+nodeName, "Type");
                 String globUUID = getUUIDfromPrj(uuidSax, uuidRoot, abonent+"_"+subAb+isMb+nodeName, "UUID");
                 uuidSax.clear();
@@ -607,8 +607,8 @@ public class Generator {
                     String[] newArray = {"Fields"};
                     newFields = localSax.insertChildNode(type, newArray);
                 } else {//сюда помещаем добавление
-                    FileManager.copyFileWoReplace(filePath + "\\" + trueName, backUpPath + trueName, true);
-                    type = localSax.readDocument(filePath + "\\" + trueName);//прочитал файл в котором нашли совпадения по имени
+                    FileManager.copyFileWoReplace(filePath + File.separator + trueName, backUpPath + trueName, true);
+                    type = localSax.readDocument(filePath + File.separator + trueName);//прочитал файл в котором нашли совпадения по имени
                     if(typeUUID==null) typeUUID = type.getAttributes().getNamedItem("UUID").getNodeValue();
                     else localSax.setDataAttr(type, "UUID", typeUUID);
                     oldFields = localSax.returnFirstFinedNode(type, "Fields");//нашел ноду Fields 
@@ -638,12 +638,12 @@ public class Generator {
                     }
                 }
                 if(oldFields != null) localSax.removeNode(oldFields);
-                localSax.writeDocument(filePath + "\\" + trueName);//записали файл
+                localSax.writeDocument(filePath + File.separator + trueName);//записали файл
                 for(Node globSig: globSigList){//--------------------------------------- Занесение сигналов в .prj и .int файлы -------------------------------------
                     String name = globVar.sax.getDataAttr(globSig, "name");
                     if(name!=null)
                         globUUID = insertVarInPrj(prjSax, interfaceList, abonent+"_"+subAb+isMb+name, typeUUID, "", true, false, null,
-                                       filePath + "\\Project.prj", backUpPath + "Project.prj");
+                                       filePath + File.separator+"Project.prj", backUpPath + "Project.prj");
                     ArrayList<Node> localSigList = globVar.sax.getHeirNode(globSig);//Находим все ноды
                     boolean glob = true;
                     for(Node localSig: localSigList){
@@ -664,10 +664,10 @@ public class Generator {
                             return -1;
                         }
                         if("_".equals(localDocName.substring(0,1))) localDocName = abonent+localDocName;
-                        Node localRoot = localSigSax.readDocument(filePath+"\\"+localDocName);
+                        Node localRoot = localSigSax.readDocument(filePath+File.separator+localDocName);
                         Node localInterfaceList = localSigSax.returnFirstFinedNode(localRoot, "InterfaceList");
                         insertVarInPrj(localSigSax, localInterfaceList, abonent+"_"+subAb+isMb+name, typeUUID, "", glob, true,
-                                       globUUID, filePath+"\\"+localDocName, backUpPath + localDocName);
+                                       globUUID, filePath+File.separator+localDocName, backUpPath + localDocName);
                     }
                 }
             }
@@ -679,12 +679,12 @@ public class Generator {
     public static Node setHWdoc(XMLSAX hw, String hwDew, String hwFileSuffix,String[] globSigAttr, XMLSAX prj,
                          String prjFildName, Node globSigInPrj, String globUUID) throws IOException{
         String backUpPath = globVar.backupDir;   //установили путь для бэкапа
-        String designDir = globVar.desDir  + "\\" + "Design\\";        
+        String designDir = globVar.desDir  + File.separator + "Design"+File.separator;        
         hw.writeDocument();
         hw.clear();                                             //удаляем старые коннекты
         String hwFileName = designDir + hwDew +hwFileSuffix;
         String intFileName = designDir + hwDew + ".int";
-        int ret = FileManager.copyFileWoReplace(hwFileName, backUpPath+"\\"+hwFileName, true);                    //создаём резервную копию
+        int ret = FileManager.copyFileWoReplace(hwFileName, backUpPath+File.separator+hwFileName, true);                    //создаём резервную копию
         if(ret==2){ //Функция копирования не нашла исходного файла
           FileManager.loggerConstructor("Не удалось прочитать файл \"" + hwFileName + "\"");
           return null;
@@ -693,7 +693,7 @@ public class Generator {
         Node intf = intFile.readDocument(intFileName);
         Node lokSig = intFile.findNodeAtribute(intf, globSigAttr);
         if(lokSig==null){
-            ret = FileManager.copyFileWoReplace(hwFileName, backUpPath+"\\"+intFileName, true);                    //создаём резервную копию
+            ret = FileManager.copyFileWoReplace(hwFileName, backUpPath+File.separator+intFileName, true);                    //создаём резервную копию
             if(ret==2){ //Функция копирования не нашла исходного файла
               FileManager.loggerConstructor("Не удалось прочитать файл \"" + intFileName + "\"");
               return null;
@@ -719,7 +719,7 @@ public class Generator {
     //================================================================================================================
     static int GenInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
                   String stFileName, String abonent, JProgressBar jProgressBar) throws IOException{
-        String filePath = globVar.desDir + "\\" + "GenST";
+        String filePath = globVar.desDir + File.separator + "GenST";
         File d = new File(filePath);
         if(!d.isDirectory()){
             d.mkdir();
@@ -728,15 +728,15 @@ public class Generator {
                 return -1;
             }
         }
-        String srcFile = filePath + "\\" + stFileName + ".txt";
-        String tmpFile = filePath + "\\" + stFileName + ".txt_tmp";
+        String srcFile = filePath + File.separator + stFileName + ".txt";
+        String tmpFile = filePath + File.separator + stFileName + ".txt_tmp";
         int ret = fm.createFile2write(tmpFile); //открываем файл на запись
         if(ret!=0){
             FileManager.loggerConstructor("Не удалось создать файл \"" + tmpFile + "\"");
             return -2;
         }
         ret = fm.openFile4read(globVar.myDir, commonFileST + ".txt");
-        if(ret!=0) return CloseByErr(fm, tmpFile, "Не удалось прочитать служебный файл \""+globVar.myDir+"\\"+commonFileST+".txt");
+        if(ret!=0) return CloseByErr(fm, tmpFile, "Не удалось прочитать служебный файл \""+globVar.myDir+File.separator+commonFileST+".txt");
         
         String algFile = (String) globVar.sax.getDataNode(nodeGenCode).get("target");
         String funcName = stFileName;//abonent + "_"+ commonFileST;
@@ -744,7 +744,7 @@ public class Generator {
         if(algFile!=null){
             if("_".equals(algFile.substring(0, 1))) algFile = abonent + algFile;
             XMLSAX algSax = new XMLSAX();
-            Node algRoot = algSax.readDocument(globVar.desDir + "\\Design\\" + algFile + ".iec_st");
+            Node algRoot = algSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + algFile + ".iec_st");
             String[] myFunc = {"Function", "Name", funcName};
             Node func = algSax.findNodeAtribute(algRoot, myFunc);
             if(func!=null) funcUUID = (String) algSax.getDataNode(func).get("UUID");
@@ -760,14 +760,14 @@ public class Generator {
             ArrayList<String> notGenTyps = StrTools.getListFromString(globVar.sax.getDataAttr(block, "notGenTyps"),",");
             ArrayList<String> isGenTyps = StrTools.getListFromString(globVar.sax.getDataAttr(block, "isGenTyps"),",");
             if(start==null || end==null) 
-                return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+"\\ConfigSignals.xml в разделе "+ nodeGenCode.getParentNode()+
+                return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+File.separator+"ConfigSignals.xml в разделе "+ nodeGenCode.getParentNode()+
                                   " неправильно сконфигурированы признаки начала и конца вставки кода");
             String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
             while(!fm.EOF && !s.contains(start)){
                 fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
                 s = fm.rd();
             }
-            if(fm.EOF) return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+"\\"+commonFileST+".txt"+" не найдена строка \""+start+"\"");
+            if(fm.EOF) return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+File.separator+commonFileST+".txt"+" не найдена строка \""+start+"\"");
             fm.wr("//"+start+"\n");
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
@@ -911,7 +911,7 @@ public class Generator {
         return 0;
     }
     public static int GenArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
-        String appPathName = globVar.desDir + "\\Design\\" + abonent + "_" + "Archive";
+        String appPathName = globVar.desDir + File.separator+"Design"+File.separator + abonent + "_" + "Archive";
         XMLSAX archSax = new XMLSAX();
         Node archRoot = archSax.readDocument(appPathName +".arc_cfg");
         if(archRoot==null){ //Функция копирования не нашла исходного файла
@@ -928,24 +928,24 @@ public class Generator {
         Node interfaceList = intSax.returnFirstFinedNode("InterfaceList");
         
         XMLSAX bigSax = new XMLSAX();
-        Node bigRoot = bigSax.readDocument(globVar.desDir + "\\Design\\Project.prj");
+        Node bigRoot = bigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         if (bigRoot == null) {
-            FileManager.loggerConstructor("Не найден файл проекта "+globVar.desDir + "\\Design\\Project.prj");
+            FileManager.loggerConstructor("Не найден файл проекта "+globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
             return -1;
         }
         XMLSAX cfgSax = new XMLSAX();
         Node cfgRoot = cfgSax.readDocument("ArchiveConfig.xml");
         if (cfgRoot == null) {
-            FileManager.loggerConstructor("Не найден файл "+globVar.myDir + "\\ArchiveConfig.xml");
+            FileManager.loggerConstructor("Не найден файл "+globVar.myDir + File.separator+"ArchiveConfig.xml");
             return -1;
         }
         HashMap trendAttr = cfgSax.getDataNode(cfgSax.returnFirstFinedNode("Trend"));
         ArrayList<Node> colorList = cfgSax.getHeirNode(cfgSax.returnFirstFinedNode("TableColor"));
         
         XMLSAX hmiSax = new XMLSAX();
-        Node hmiRoot = hmiSax.readDocument(globVar.desDir + "\\Design\\AT_HMI.iec_hmi");
+        Node hmiRoot = hmiSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"AT_HMI.iec_hmi");
         if (hmiRoot == null) {
-            FileManager.loggerConstructor("Не найден файл "+globVar.desDir + "\\Design\\AT_HMI.iec_hmi");
+            FileManager.loggerConstructor("Не найден файл "+globVar.desDir + File.separator+"Design"+File.separator+"AT_HMI.iec_hmi");
             return -1;
         }//Если не вылетели - значит будет генерация
         String trendSheetName = abonent + "_Trend";
@@ -978,14 +978,14 @@ public class Generator {
                 String uuid = bigSax.getDataAttr(n, "UUID");
                 if( isStdType(type)) insertInArcive(sig[0], archTyps[archType],uuid,archSax);
                 else{
-                    String sigFileName = FileManager.FindFile(globVar.desDir + "\\Design", type, "UUID=");
+                    String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
                     if(sigFileName==null){
-                        FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + "\\Design");
+                        FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + File.separator+"Design");
                         ret = -1;
                     }
                     else {
                         XMLSAX sigSax = new XMLSAX();
-                        sigSax.readDocument(globVar.desDir + "\\Design\\" + sigFileName);
+                        sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
                         Node sigs = sigSax.returnFirstFinedNode("Fields");
                         ArrayList<Node> sigNodeList = sigSax.getHeirNode(sigs);//Находим все ноды
                         for(Node sigNode: sigNodeList){
@@ -1019,17 +1019,17 @@ public class Generator {
                 Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
                 String type = bigSax.getDataAttr(n, "Type");
                 String uuid = bigSax.getDataAttr(n, "UUID");
-                String sigFileName = FileManager.FindFile(globVar.desDir + "\\Design", type, "UUID=");
+                String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
                 if(sigFileName==null){
-                    FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + "\\Design");
+                    FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + File.separator+"Design");
                     ret = -1;
                 }
                 else {
                     XMLSAX sigSax = new XMLSAX();
-                    sigSax.readDocument(globVar.desDir + "\\Design\\" + sigFileName);
+                    sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
                     Node sigNode = sigSax.findNodeAtribute(new String[]{"Field","Name",localName});
                     if(sigNode==null){
-                        FileManager.loggerConstructor("Не найден сигнал "+localName+" в файле "+ globVar.desDir + "\\Design\\" + sigFileName);
+                        FileManager.loggerConstructor("Не найден сигнал "+localName+" в файле "+ globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
                         ret = -1;
                     }else{
                         String typeSig = bigSax.getDataAttr(sigNode, "Type");
@@ -1054,7 +1054,7 @@ public class Generator {
                 }
             }
         }
-        hmiSax.writeDocument(globVar.desDir + "\\GenHMI\\"+ trendSheetName + ".txt");
+        hmiSax.writeDocument(globVar.desDir + File.separator+"GenHMI"+File.separator+ trendSheetName + ".txt");
         archSax.writeDocument();
         return ret;
     }
@@ -1077,7 +1077,7 @@ public class Generator {
             attr[2] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Наименование");
             return 0;
         }
-        FileManager.loggerConstructor("В таблице \""+ tableName + "\" не найден сигнал "+ globVar.desDir + "\\Design");
+        FileManager.loggerConstructor("В таблице \""+ tableName + "\" не найден сигнал "+ globVar.desDir + File.separator+"Design");
         attr[0]="0";
         attr[1]="1";
         attr[2] = sig;

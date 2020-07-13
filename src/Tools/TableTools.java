@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
@@ -307,7 +308,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             ArrayList<String> plusList) throws IOException {
         list.removeAllElements();
         XMLSAX prj = new XMLSAX();
-        Node root = prj.readDocument(globVar.desDir + "\\Design\\Project.prj");
+        Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
         for (Node n : sigList) {
@@ -366,17 +367,17 @@ public class TableTools {//ссылка на таблицу, массив шир
     public static ArrayList<String> openSig(String glibSigName) throws IOException {
         ArrayList<String> list = new ArrayList<>();
         XMLSAX prj = new XMLSAX();
-        Node root = prj.readDocument(globVar.desDir + "\\Design\\Project.prj");
+        Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         Node mySig = prj.findNodeAtribute(root, new String[]{"Signal", "Name", glibSigName});
         String type = prj.getDataAttr(mySig, "Type");
         if ("REAL".equalsIgnoreCase(type) || "INT".equalsIgnoreCase(type) || "BOOL".equalsIgnoreCase(type) || "WORD".equalsIgnoreCase(type)) {
             return list;
         }
 
-        String fileName = FileManager.FindFile(globVar.desDir + "\\Design", type, "UUID=");
+        String fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
 
         XMLSAX sigSax = new XMLSAX();
-        Node rootSig = sigSax.readDocument(globVar.desDir + "\\Design\\" + fileName);
+        Node rootSig = sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + fileName);
         Node signals = sigSax.returnFirstFinedNode(rootSig, "Fields");
         ArrayList<Node> sigList = sigSax.getHeirNode(signals);
         if (sigList == null || sigList.isEmpty()) {

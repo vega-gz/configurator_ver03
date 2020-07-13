@@ -683,7 +683,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             return;
         }
         try {
-            int ret = FileManager.renameTypeFile(globVar.desDir + "\\Design");
+            int ret = FileManager.renameTypeFile(globVar.desDir + File.separator+"Design");
             JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -756,7 +756,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             return;
         }
         try {
-            int ret = FileManager.renameIntFile(globVar.desDir + "\\Design");
+            int ret = FileManager.renameIntFile(globVar.desDir + File.separator+"Design");
             JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
