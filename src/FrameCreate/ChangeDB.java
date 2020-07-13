@@ -177,7 +177,7 @@ public final class ChangeDB extends javax.swing.JFrame {
             sax.writeDocument();
         }
         XMLSAX.getConnectBaseConfig("Config.xml");
-        globVar.DB = DataBase.getInstance();
+        globVar.DB = new DataBase();
         if(globVar.DB == null){
             m_jp.setTitle("База " + globVar.currentBase + "по пути " + globVar.dbURL + " не найдена");
             jTree1.setModel(null);

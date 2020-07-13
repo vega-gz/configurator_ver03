@@ -27,7 +27,7 @@ public class SignalTypeToBase {
         //new SignalTypeToBase("/home/ad/NetBeansProjects/Type_Mode.type");
     }
     public SignalTypeToBase(String nameFile){
-        DataBase db = DataBase.getInstance();
+        DataBase db = new DataBase();
         this.nameFile = nameFile;
         HashMap<String, String> dataRootN = null;  // данные основной ноды по которым строим таблицу
         HashMap<String, String> dataFromField = null;  // данные от ноды Field

@@ -36,11 +36,11 @@ public class DataBase implements Observed {
     
     List<Observer> observers = new ArrayList<>(); // Список наблюдателей
     
-    // Делаем синглтон
-    private static DataBase instance;
+//    // Делаем синглтон(убрал)
+//    private static DataBase instance;
 
-    private  DataBase() { // для синглтона в однопоточном варианте
-        //connectionToBase();
+    public  DataBase() { // для синглтона в однопоточном варианте
+        connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
         
     }
     // подключение к иной базе(для сравнения и слияния)
@@ -59,13 +59,13 @@ public class DataBase implements Observed {
 //        if(ret==0)return instance;		// вернуть ранее созданный объект
 //        else return null;
 //    }
-    
-        public static DataBase getInstance() { // Всегда отдаем новый объект
-            instance = new DataBase();	//создать новый объект
-            instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
-            return instance;		// вернуть ранее созданный объект
-        
-    }
+//    
+//        public static DataBase getInstance() { // Всегда отдаем новый объект
+//            instance = new DataBase();	//создать новый объект
+//            instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
+//            return instance;		// вернуть ранее созданный объект
+//        
+//    }
     
     // --- Метод подключения к базе ---
     private void connectionToBase(String URL, String DB, String USER, String PASS) {

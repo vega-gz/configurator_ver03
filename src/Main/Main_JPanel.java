@@ -50,7 +50,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     ProgressBar pb = null;
 
     public Main_JPanel() {
-        globVar.DB = DataBase.getInstance();
+        globVar.DB = new DataBase();
         initComponents();
         jTextField1.setText(globVar.desDir);
         if (globVar.DB == null) {
@@ -589,7 +589,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (!Tools.isDB()) {
             return;
         }
-        globVar.DB = DataBase.getInstance();// подключится к базе конфигом другого не дано
+        globVar.DB = new DataBase();// подключится к базе конфигом другого не дано
         if (globVar.DB == null) {
             JOptionPane.showMessageDialog(null, "Подключение к базе не удалось");
             return;
@@ -698,7 +698,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         System.out.println("Press button");
     }//GEN-LAST:event_jDialog1KeyPressed
 
-    // обработчик для всех полей
+    // обработчик для всех текстовых полей окна Jdialog1
     private void jTextField_all_ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         String addresSecondDB = jTextField2.getText(); // адрес базы
         String DB = jTextField5.getText(); // имя базы
