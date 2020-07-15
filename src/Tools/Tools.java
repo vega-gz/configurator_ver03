@@ -49,6 +49,7 @@ public class Tools {
         }
         return false;
     }
+
     public static boolean isInteger(String s) {
         try { Integer.parseInt(s); } 
         catch(NumberFormatException e) { return false; } 

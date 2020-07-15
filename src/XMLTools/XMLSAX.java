@@ -367,9 +367,15 @@ public class XMLSAX {
     // --- Удалить ноду ---
     public void removeNode(Node n) {
         Node parentN = n.getParentNode();
-        //System.out.println("What delete " + n.getNodeName());
-        //System.out.println("NameParent " + parentN.getNodeName());
        parentN.removeChild(n);
+    }
+    // --- очистить ноду ---
+    public void cleanNode(Node n) {
+        NodeList child = n.getChildNodes();
+        for (int i = 0; i < child.getLength(); i++) {
+            Node node = child.item(i);
+            if (node.getNodeType() == 1) n.removeChild(node);
+        }
     }
 
     // --- Найти первую ноду по имени и вернуть ее ---

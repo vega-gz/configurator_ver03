@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 public class StrTools {//isFilter
     
     public static boolean isFilter(String s, String f){
-        if(s==null || f==null) return false;
-        if(f.trim().isEmpty()) return true;
+        if(s==null) return false;
+        if(f==null || f.trim().isEmpty()) return true;
         return Pattern.matches(f.toUpperCase()
                 .replaceAll(" ", "")
                 .replaceAll("\\.", "\\\\.")

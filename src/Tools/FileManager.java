@@ -5,7 +5,6 @@
  */
 package Tools;
 
-import Tools.StrTools;
 import static Tools.StrTools.getAttributValue;
 import XMLTools.XMLSAX;
 import globalData.globVar;
@@ -243,12 +242,20 @@ public class FileManager {
         return 0;
     }
 
-    public void closeWrStream() throws IOException {
+    public void closeWrStream(){// throws IOException {
         if (wrStream != null) {
-            wrStream.close();
+            try {
+                wrStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (fos != null) {
-            fos.close();
+            try {
+                fos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -366,8 +373,12 @@ public class FileManager {
         return null;
     }
 
-    public void wr(String s) throws IOException {
+    public void wr(String s){try {
+        // throws IOException {
         wrStream.write(s);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String rd() throws IOException {
@@ -417,7 +428,7 @@ public class FileManager {
         return FindFile(dir, nameType, "Name=");
     }
 
-    public static String FindFile(String dir, String nameType, String nameWords) throws IOException {
+    public static String FindFile(String dir, String nameType, String nameWords){// throws IOException {
         if (dir == null || nameType == null) {
             return null;
         }
@@ -431,7 +442,12 @@ public class FileManager {
         //if (fileList != null) {
         for (String fn : fileList) {
             if (fn.length() > 5 && ".TYPE".equalsIgnoreCase(fn.substring(fn.length() - 5))) {
-                String s = findStringInFile(dir + File.separator + fn, nameWords);
+                String s=null;
+                try {
+                    s = findStringInFile(dir + File.separator + fn, nameWords);
+                } catch (IOException ex) {
+                    Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 String val = StrTools.getAttributValue(s, nameWords);
                 if (val != null && val.equals(nameType)) {
                     return fn;

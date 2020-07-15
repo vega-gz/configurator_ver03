@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
 /*@author Lev*/
 public class addOPCserver extends javax.swing.JFrame {
@@ -27,7 +28,7 @@ public class addOPCserver extends javax.swing.JFrame {
     final String[] opcTabCols = {"tagName","nameSpace"};
     ArrayList<String[]> opcList;
     ArrayList<String> plusList = new ArrayList<>();
-    //boolean isChang = false;
+    boolean isChang = false;
     int opcServName;
     String nameSpace;
     int nodeID;
@@ -63,7 +64,7 @@ public class addOPCserver extends javax.swing.JFrame {
         opcList = globVar.DB.getData(jComboBox4.getItemAt(opcServName), opcTabCols);
         setLists();
         //-------------  Для правильного списка nameSpace ------------------------------
-        int nameSpaceCnt = 2;
+        //int nameSpaceCnt = 2;
         for(String[]s:opcList){
             int x = Tools.getIndexOfComboBox(jComboBox3,s[1]);//Integer.parseInt(s[2]);
             if(x<0)jComboBox3.addItem(s[1]);
@@ -72,13 +73,13 @@ public class addOPCserver extends javax.swing.JFrame {
         //Лямбда для определения изменений
         isCange ich = ()->{//Для того, чтобы сохранение в БД происходило всегда и без переспроса, включаем сохранение в функцию проверки наличия изменений
             resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
-            TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+            saveDateInDB(isChang);//сохранение в БД списка сигналов 
             return false;
         };
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = ()->{
             resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
-            TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+            saveDateInDB(isChang);//сохранение в БД списка сигналов 
         };
         TableTools.setTableListener(this, sfd, ich, null);
    }
@@ -155,6 +156,11 @@ public class addOPCserver extends javax.swing.JFrame {
             }
         });
 
+        jList2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jList2KeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(jList2);
 
         jButton7.setText("+");
@@ -180,7 +186,7 @@ public class addOPCserver extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +194,7 @@ public class addOPCserver extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addGap(3, 3, 3))
         );
         jPanel1Layout.setVerticalGroup(
@@ -275,9 +281,9 @@ public class addOPCserver extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -327,26 +333,20 @@ public class addOPCserver extends javax.swing.JFrame {
                     list2.addElement(list1.get(i-offset));
                     list1.remove(i-offset);
                     offset++;
-                    //isChang = true;
+                    isChang = true;
                 }
             }else{
-                list2.addElement(list1.get(i-offset));
+                String s1 = list1.get(i-offset).toString();
+                if(!list2.contains(s1)) list2.addElement(s1);
                 list1.remove(i-offset);
                 offset++;
-                //isChang = true;
+                isChang = true;
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     //Кнопка "<"
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int[] x = jList2.getSelectedIndices();
-        int offset = 0;
-        for(int i: x){
-            list1.addElement(list2.get(i-offset));
-            list2.remove(i-offset);
-            offset++;
-        }
-        //isChang = true;
+        resetCelectSigsFromList2();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentResized
@@ -357,8 +357,7 @@ public class addOPCserver extends javax.swing.JFrame {
     //Кнопка "Сохранить"
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
-        comment = "nodeID:"+jComboBox1.getSelectedItem()+"; nodeIDtype:"+jComboBox2.getSelectedItem()+";";
-        TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+        saveDateInDB(isChang);//сохранение в БД списка сигналов 
         //isChang = false;
     }//GEN-LAST:event_jButton6ActionPerformed
     //Кнопка "+"
@@ -390,18 +389,15 @@ public class addOPCserver extends javax.swing.JFrame {
     //Кнопка "Приложение"
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         resetOpcList();
+        saveDateInDB(isChang);//сохранение в БД списка сигналов 
         String processName = "Генерация из таблицы";
         if(globVar.processReg.indexOf(processName)>=0){
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
             return;
         }
         DoIt di = () -> {
-            int ret = -1;
-            try {
-                ret = Generator.GenOPC(null, null, null, jProgressBar1); // вызываем функцию генерации
-            } catch (IOException ex) {
-                Logger.getLogger(addOPCserver.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            int ret = Generator.GenOPC((String)jComboBox4.getSelectedItem(), (String)jComboBox1.getSelectedItem(), 
+                                       (String)jComboBox2.getSelectedItem(), opcList, jProgressBar1);
             if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
             else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
 
@@ -429,6 +425,7 @@ public class addOPCserver extends javax.swing.JFrame {
         nameSpace = item;
         list2.removeAllElements();
         TableTools.setArchiveSignalList(list2, opcList, nameSpace);
+        saveDateInDB(isChang);//сохранение в БД списка сигналов 
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox3KeyReleased
@@ -468,8 +465,7 @@ public class addOPCserver extends javax.swing.JFrame {
                     break;
                 default://---------Создать новый
                     resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
-                    comment = "nodeID:"+jComboBox1.getSelectedItem()+"; nodeIDtype:"+jComboBox2.getSelectedItem()+";";
-                    TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+                    saveDateInDB(isChang);//сохранение в БД списка сигналов 
                     jComboBox4.addItem(item);
                     opcServName = jComboBox4.getItemCount()-1;
                     globVar.DB.createTableEasy(item, opcTabCols, comment);
@@ -484,8 +480,7 @@ public class addOPCserver extends javax.swing.JFrame {
         }else{
             if(opcServName != y){
                 resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
-                comment = "nodeID:"+jComboBox1.getSelectedItem()+"; nodeIDtype:"+jComboBox2.getSelectedItem()+";";
-                TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+                saveDateInDB(isChang);//сохранение в БД списка сигналов 
                 opcServName = y;
                 opcList.clear();
                 comment = globVar.DB.getCommentTable(item);
@@ -510,6 +505,11 @@ public class addOPCserver extends javax.swing.JFrame {
         TableTools.setSignalList(list1, null, null, false, opcList, plusList, jTextField1.getText());
         jList1.setModel(list1);
     }//GEN-LAST:event_jTextField1KeyReleased
+    //обработчик клавиатуры
+    private void jList2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList2KeyReleased
+        if(evt.getKeyCode()==127) resetCelectSigsFromList2();
+        //System.out.println("evt.getKeyCode()="+evt.getKeyCode());
+    }//GEN-LAST:event_jList2KeyReleased
 
     private void setServSettings(String s){
         if(s==null) return;
@@ -546,6 +546,26 @@ public class addOPCserver extends javax.swing.JFrame {
         }
         if(list2==null) return;
         for(int i=0; i<list2.size(); i++) opcList.add(new String[]{(String)list2.get(i),nameSpace}); //заносим в списов все сигналы из текужего списка второго листа        
+    }
+    
+    private void saveDateInDB(boolean isChng){
+        if(!isChng) return;
+        comment = "nodeID:"+jComboBox1.getSelectedItem()+"; nodeIDtype:"+jComboBox2.getSelectedItem()+";";
+        TableTools.saveListInDB(opcList, globVar.DB, jComboBox4.getItemAt(opcServName), opcTabCols, comment);//сохранение в БД списка сигналов 
+        isChang = false;
+    }
+    private void resetCelectSigsFromList2(){
+        int[] x = jList2.getSelectedIndices();
+        int offset = 0;
+        for(int i: x){
+            list2.remove(i-offset);
+            offset++;
+        }
+        resetOpcList();
+        Tools.setPlusList(opcList, plusList);
+        TableTools.setSignalList(list1, null, null, false, opcList, plusList, jTextField1.getText());
+        jList1.setModel(list1);
+        isChang = true;
     }
     //=========================================================================================================================
     /**

@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Node;
@@ -875,7 +877,7 @@ public class Generator {
     }
     //Функция занесения переменных в интерфейсные листы приложений Сонаты
     static String insertVarInPrj(XMLSAX intFile, Node interfaceList, String Name, String Type, String Comment, boolean global, boolean usage, 
-            String uuid, String hwFileName1, String backUpFile1) throws IOException{
+            String uuid, String hwFileName1, String backUpFile1){// throws IOException{
         String[] findArr = {"Signal","Name",Name};
         Node sig = intFile.findNodeAtribute(interfaceList, findArr);
         if(sig!=null){
@@ -907,8 +909,135 @@ public class Generator {
         return uuid;
     }
 
-    public static int GenOPC(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
-        return 0;
+    public static int GenOPC(String serverName, String id, String idType,  ArrayList<String[]> opcList, JProgressBar jProgressBar){
+        if(opcList==null || opcList.isEmpty()) return 0;
+        String appPathName = globVar.desDir + File.separator+"Design"+File.separator + serverName;
+        XMLSAX opcSax = new XMLSAX();
+        if(opcSax.readDocument(appPathName +".opcuaServer")==null){ //Функция копирования не нашла исходного файла
+            FileManager.loggerConstructor("Не удалось прочитать файл \"" + appPathName +".opcuaServer\"");
+            return -1;
+        }
+        Node opcConnection = opcSax.returnFirstFinedNode("Crossconnect");
+        opcSax.cleanNode(opcConnection);
+        
+        XMLSAX intSax = new XMLSAX();
+        Node intRoot = intSax.readDocument(appPathName +".int");
+        if(intRoot==null){ //Функция копирования не нашла исходного файла
+            FileManager.loggerConstructor("Не удалось прочитать файл \"" + appPathName +".int\"");
+            return -1;
+        }
+        Node interfaceList = intSax.returnFirstFinedNode("InterfaceList");
+        
+        XMLSAX bigSax = new XMLSAX();
+        Node bigRoot = bigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
+        if (bigRoot == null) {
+            FileManager.loggerConstructor("Не найден файл проекта "+globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
+            return -1;
+        }
+        FileManager fm = new FileManager();
+        try {
+            fm.createFile2write(globVar.desDir + File.separator + serverName + ".csv");
+        } catch (IOException ex) {
+            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int jpgMax = opcList.size();
+        int jpbCnt = 1;
+        int ret = 0;
+        int cnt = 1;
+        for(String[] sig: opcList){
+            if(jProgressBar!=null) jProgressBar.setValue((int)((jpbCnt++)*100.0/jpgMax));
+            //int speceName = Integer.parseInt(sig[1]);
+            int x = sig[0].indexOf(".");
+            if(x < 0){
+                Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",sig[0]});
+                if(n==null){
+                    ret = -1;
+                    FileManager.loggerConstructor("В Project.prj не найден сигнал \""+ sig[0] + "\"");
+                }
+                String type = bigSax.getDataAttr(n, "Type");
+                String uuid = bigSax.getDataAttr(n, "UUID");
+                String comment = bigSax.getDataAttr(n, "Comment");
+                if(comment==null) comment="";
+                else comment = comment.trim();
+                if( isStdType(type)) insertInOPC(sig[0], sig[1], id, idType, uuid,  comment, opcSax, fm, type, cnt++);
+                else{
+                    String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
+                    if(sigFileName==null){
+                        FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + File.separator+"Design");
+                        ret = -1;
+                    }
+                    else {
+                        XMLSAX sigSax = new XMLSAX();
+                        sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
+                        Node sigs = sigSax.returnFirstFinedNode("Fields");
+                        ArrayList<Node> sigNodeList = sigSax.getHeirNode(sigs);//Находим все ноды
+                        for(Node sigNode: sigNodeList){
+                            String nameSig = bigSax.getDataAttr(sigNode, "Name");
+                            String typeSig = bigSax.getDataAttr(sigNode, "Type");
+                            String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
+                            String commSig = bigSax.getDataAttr(n, "Comment");
+                            if(commSig==null) commSig="";
+                            else commSig = commSig.trim();
+                            if(!nameSig.contains("Res_")){
+                                nameSig = sig[0]+"."+nameSig;
+                                uuidSig = uuid+"."+uuidSig;
+                                if(!comment.isEmpty()) commSig = comment + "." + commSig;
+                                if(!isStdType(typeSig)){
+                                    nameSig += ".PV";
+                                    uuidSig += ".19F27C8242D7A36082010591B7CF4F94";
+                                    typeSig = "REAL";
+                                }
+                                insertInOPC(nameSig, sig[1], id, idType, uuidSig,  commSig, opcSax, fm, typeSig, cnt++);
+                            }                            
+                        }
+                        if(ret==0) insertVarInPrj(intSax, interfaceList, sig[0], type, "", true, true, uuid, appPathName +".int", "");
+                    }
+                }
+            }else{
+                String groupName = sig[0].substring(2, x);
+                String localName = sig[0].substring(x+1);
+                Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
+                String type = bigSax.getDataAttr(n, "Type");
+                String uuid = bigSax.getDataAttr(n, "UUID");
+                String comment = bigSax.getDataAttr(n, "Comment");
+                if(comment==null) comment="";
+                else comment = comment.trim();
+                String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
+                if(sigFileName==null){
+                    FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + File.separator+"Design");
+                    ret = -1;
+                }
+                else {
+                    XMLSAX sigSax = new XMLSAX();
+                    sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
+                    Node sigNode = sigSax.findNodeAtribute(new String[]{"Field","Name",localName});
+                    if(sigNode==null){
+                        FileManager.loggerConstructor("Не найден сигнал "+localName+" в файле "+ globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
+                        ret = -1;
+                    }else{
+                        String typeSig = bigSax.getDataAttr(sigNode, "Type");
+                        String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
+                        String commSig = bigSax.getDataAttr(n, "Comment");
+                        if(commSig==null) commSig="";
+                        else commSig = commSig.trim();
+                        if(!comment.isEmpty()) commSig = comment + "." + commSig;
+                        String tmpName = groupName+"."+localName;
+                        uuidSig = uuid+"."+uuidSig;
+                        if(!isStdType(typeSig)){
+                            tmpName += ".PV";
+                            uuidSig += ".19F27C8242D7A36082010591B7CF4F94";
+                            typeSig = "REAL";
+                        }
+                        insertInOPC(tmpName, sig[1], id, idType, uuidSig,  commSig, opcSax, fm, typeSig, cnt++);
+                        insertVarInPrj(intSax, interfaceList, groupName, type, "", true, true, uuid, appPathName +".int", "");
+                    }
+                }
+            }
+        }
+        intSax.writeDocument();
+        opcSax.writeDocument();
+        fm.closeWrStream();
+        return ret;
     }
     public static int GenArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
         String appPathName = globVar.desDir + File.separator+"Design"+File.separator + abonent + "_" + "Archive";
@@ -1150,6 +1279,18 @@ public class Generator {
                 addCol = HMIcfg.getDataAttr(hintNode, "add"+i);
             }
         }
+    }
+
+    private static void insertInOPC(String sig, String nameSpace, String id, String idType, String uuid, String comment,
+                                            XMLSAX opcSax, FileManager fm, String type, int npp) {
+        Node items = opcSax.returnFirstFinedNode("Crossconnect");
+        String sigId = sig;
+        if(id.equalsIgnoreCase("Number")) sigId = ""+npp;
+        opcSax.insertChildNode(items, new String[]{"Connection","ItemName",sig,
+                                                                "Device","",
+                                                                "Channel",idType+"@"+nameSpace+":"+sigId,
+                                                                "UUID",uuid});
+        fm.wr(npp+"\t"+sig+"\t"+comment+"\t"+type+"\n");
     }
 
 }

@@ -361,11 +361,11 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
     }
 
-    public static boolean isInList(String s, ArrayList<String[]> archList, int i) {
-        if (s == null || archList == null) {
+    public static boolean isInList(String s, ArrayList<String[]> list, int i) {
+        if (s == null || list == null) {
             return false;
         }
-        for (String[] a : archList) {
+        for (String[] a : list) {
             if (a[i].equals(s)) {
                 return true;
             }
@@ -383,14 +383,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             return list;
         }
 
-        String fileName;
-        try {
-            fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
-        } catch (IOException ex) {
-            Logger.getLogger(TableTools.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-
+        String fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
         XMLSAX sigSax = new XMLSAX();
         Node rootSig = sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + fileName);
         Node signals = sigSax.returnFirstFinedNode(rootSig, "Fields");
