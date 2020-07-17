@@ -442,7 +442,7 @@ public class addOPCserver extends javax.swing.JFrame {
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         String item = (String) jComboBox4.getSelectedItem();
-        if(item.length() < 3 || !item.substring(0, 3).equalsIgnoreCase("opc")){
+        if(item.length() < 3 || !item.substring(0, 3).equals("opc")){
             JOptionPane.showMessageDialog(null, "Имя opc-сервера должно начинаться с \"opc\"");
             return;
         }

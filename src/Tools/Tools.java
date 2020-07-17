@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /*@author Lev*/
 public class Tools {
@@ -56,6 +57,12 @@ public class Tools {
         catch(NullPointerException e) { return false; }
         return true;
     }    
+    public static boolean isNumeric(String s) {
+        try { Double.parseDouble(s); } 
+        catch(NumberFormatException e) { return false; } 
+        catch(NullPointerException e) { return false; }
+        return true;
+    }    
     public static void delPlusFromArch(ArrayList<String[]> list1, DefaultListModel list2, String sig){
         for(int i=0; i < list1.size(); i++){
             String s = list1.get(i)[0];
@@ -73,6 +80,29 @@ public class Tools {
         int cnt = jComboBox.getItemCount();
         for(int i=0; i < cnt; i++) if(s.equals(jComboBox.getItemAt(i))) return i;
         return -1;
+    }
+    public static void fillCellCol(JTable jTable1, ArrayList<String> cellNames, int rows[], int col) {
+        int cnt = 0;
+        for (int k = 0; k < rows.length; k++) {
+            jTable1.setValueAt(cellNames.get(cnt), rows[k], col);
+            cnt++;
+            if (cnt >= cellNames.size()) {
+                cnt = 0;
+            }
+        }
+    }
+    
+    public static void fillCellRect(JTable jTable1, ArrayList<String[]> cellNames, int rows[], int cols[]) {
+        for (int i = 0; i < cols.length; i++) {
+            int cnt = 0;
+            for (int k = 0; k < rows.length; k++) {
+                jTable1.setValueAt(cellNames.get(cnt)[i], rows[k], cols[i]);
+                cnt++;
+                if (cnt >= cellNames.size()) {
+                    cnt = 0;
+                }
+            }
+        }
     }
     
 }
