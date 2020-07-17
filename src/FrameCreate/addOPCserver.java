@@ -37,7 +37,7 @@ public class addOPCserver extends javax.swing.JFrame {
     ArrayList<String> tableList;
 
     public addOPCserver() {
-        if(globVar.DB==null)return;
+        if(!globVar.DB.isConnectOK())return;
         
         initComponents();
         

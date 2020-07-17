@@ -37,7 +37,7 @@ public class TableDB extends javax.swing.JFrame {
 
     public TableDB(String table) {
         tableName = table;
-        if(globVar.DB==null)return;
+        if(!globVar.DB.isConnectOK())return;
         List<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
         cols = listColumn.toArray( new String[listColumn.size()]);

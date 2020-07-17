@@ -178,7 +178,7 @@ public final class ChangeDB extends javax.swing.JFrame {
         }
         XMLSAX.getConnectBaseConfig("Config.xml");
         globVar.DB = new DataBase();
-        if(globVar.DB == null){
+        if(!globVar.DB.isConnectOK()){
             m_jp.setTitle("База " + globVar.currentBase + "по пути " + globVar.dbURL + " не найдена");
             jTree1.setModel(null);
         } else {
@@ -247,7 +247,7 @@ public final class ChangeDB extends javax.swing.JFrame {
     }
     
     public ComboBoxModel getComboBoxModelAbonents(){ // создания списка абонентов
-        if(globVar.DB==null) return null;
+        if(!globVar.DB.isConnectOK()) return null;
         ArrayList<String[]> abList = globVar.DB.getAbonentArray();
         String[] itemList  = {""};
         if(abList != null && !abList.isEmpty()){

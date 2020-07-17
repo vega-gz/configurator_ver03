@@ -20,7 +20,7 @@ public class Tools {
     }
     
     public static boolean isDB(){
-        if (globVar.DB == null) {
+        if (!globVar.DB.isConnectOK()) {
             JOptionPane.showMessageDialog(null, "База " + globVar.currentBase + "по пути " + globVar.dbURL + " не найдена");
             return false;
         }

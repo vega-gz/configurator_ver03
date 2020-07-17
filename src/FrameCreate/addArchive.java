@@ -42,7 +42,7 @@ public class addArchive extends javax.swing.JFrame {
     };
 
     public addArchive() {
-        if(globVar.DB==null)return;
+        if(!globVar.DB.isConnectOK())return;
         ArrayList<String[]> archives;
         if(!globVar.DB.isTable("Archive")){
             globVar.DB.createTableEasy("Archive",  jTableCols, "Конфигурации архивов");

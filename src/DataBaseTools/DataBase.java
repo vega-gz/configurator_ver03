@@ -32,7 +32,7 @@ public class DataBase implements Observed {
     int max;
     int value;
     
-    int statusConnectDB = -2; // 0 - connect; -1 - failed; -2 - not attempt to connect
+    public int statusConnectDB = -2; // 0 - connect; -1 - failed; -2 - not attempt to connect
     
     List<Observer> observers = new ArrayList<>(); // Список наблюдателей
     
@@ -49,24 +49,9 @@ public class DataBase implements Observed {
         connectionToBase(dbURL, currentBase, USER, PASS); // И сразу подключаемся к базе
     }
 
-    //  синглтон (убрал его 10.07.2020)
-//    public static DataBase getInstance() { // #3 static
-//        //ret=0;
-//        if (instance == null) {		//если объект еще не создан
-//            instance = new DataBase();	//создать новый объект
-//        }
-//        int ret = instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
-//        if(ret==0)return instance;		// вернуть ранее созданный объект
-//        else return null;
-//    }
-//    
-//        public static DataBase getInstance() { // Всегда отдаем новый объект
-//            instance = new DataBase();	//создать новый объект
-//            instance.connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
-//            return instance;		// вернуть ранее созданный объект
-//        
-//    }
-    
+    public boolean isConnectOK(){
+        return statusConnectDB == 0;
+    }
     // --- Метод подключения к базе ---
     private void connectionToBase(String URL, String DB, String USER, String PASS) {
         if (connection != null){
@@ -80,7 +65,7 @@ public class DataBase implements Observed {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
-            e.printStackTrace();
+            //e.printStackTrace();
             statusConnectDB = -1;
         }
         
@@ -91,7 +76,7 @@ public class DataBase implements Observed {
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             FileManager.loggerConstructor("Connection Failed base " + URL + DB);
-            e.printStackTrace();
+            //e.printStackTrace();
             statusConnectDB = -1;
         }
         
@@ -955,7 +940,7 @@ public class DataBase implements Observed {
     }
     //--------- Методы обслюживающие систему абонентов -Lev-----------------
     public static void createAbonentTable(){ //Создание таблицы абонентов, если её не было
-        if(globVar.DB==null) return;
+        if(!globVar.DB.isConnectOK()) return;
         ArrayList<String> list_table_base = globVar.DB.getListTable();
         if(StrTools.searchInList("Abonents", list_table_base)< 0){
             String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type", "Экземпляры"};
@@ -964,7 +949,7 @@ public class DataBase implements Observed {
     }
     public static ArrayList<String[]> getAbonentArray() // функция для создания списка из таблицы абонентов
     {
-        if(globVar.DB==null) return null;
+        if(!globVar.DB.isConnectOK()) return null;
         return globVar.DB.getData("Abonents","Abonent"); //Получаем список абонентов отсортированный по алгоритмическому имени 
     }
     

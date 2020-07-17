@@ -43,18 +43,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
         globVar.DB = new DataBase();
         initComponents();
         jTextField1.setText(globVar.desDir);
-        if (globVar.DB == null) {
-            this.setTitle("База " + globVar.dbURL + globVar.currentBase + " не найдена");
-        } else {
+        if (Tools.isDB())
             initMyComponent();
-        }
         Tools.isDesDir();
     }
 
     public void initMyComponent() {
-        //initComponents();
         jTextField1.setText(" " + globVar.desDir);
-        //globVar.DB = DataBase.getInstance();
         listDropT = globVar.DB.getListTable(); // получи список таблиц при включении
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
         DataBase.createAbonentTable();//
@@ -83,7 +78,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -251,13 +245,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Переподключение к базе");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jButton7.setText("исполнительный механизм");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -420,9 +407,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGap(208, 208, 208)
                                     .addComponent(jButton4))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -477,7 +462,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
                     .addComponent(jButton4))
                 .addContainerGap())
         );
@@ -537,7 +521,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     
     // --- Метод реагирования на выбор поля из списка таблиц ---
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        //if(globVar.DB==null) return;
+        //if(!globVar.DB.isConnectOK()) return;
         String selectT = (String) jComboBox1.getSelectedItem();
         showTable(selectT); // вызов метода построения таблицы 
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -573,26 +557,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         editArchive.setVisible(true);
 
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (!Tools.isDB()) {
-            return;
-        }
-        globVar.DB = new DataBase();// подключится к базе конфигом другого не дано
-        if (globVar.DB == null) {
-            JOptionPane.showMessageDialog(null, "Подключение к базе не удалось");
-            return;
-        }
-        String nameBD = globVar.DB.getCurrentNameBase();
-        String userBD = globVar.DB.getCurrentUser();
-        jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
-        
-        if (nameBD != null) {
-            JOptionPane.showMessageDialog(null, "Подключено к базе " + nameBD + " пользователем " + userBD);
-        }
-
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     // --- Кнопка вызова окна с исполнительным механизмом ---
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -748,7 +712,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
-        if (globVar.DB == null) {
+        if (!globVar.DB.isConnectOK()) {
             return null;
         }
         Iterator<String> iter_list_table = listDropT.iterator();
@@ -773,7 +737,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 
     public ComboBoxModel getComboBoxModelAbonents() { // создания списка абонентов
-        if (globVar.DB == null) {
+        if (!globVar.DB.isConnectOK()) {
             return null;
         }
         ArrayList<String[]> abList = globVar.DB.getAbonentArray();
@@ -789,7 +753,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- структура построения для дерева ---
     public static DefaultTreeModel getModelTreeNZ() {
-        if (globVar.DB == null) {
+        if (!globVar.DB.isConnectOK()) {
             return null;
         }
         globVar.DB.createAbonentTable();
@@ -838,7 +802,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
