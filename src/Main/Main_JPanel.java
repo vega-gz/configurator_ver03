@@ -509,7 +509,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "В базу загружено " + ret + " таблиц");
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
             } else if (ret < 0) {
-                JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+                JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'");
             }
             pb.setVisible(false);
             globVar.processReg.remove(processName);
