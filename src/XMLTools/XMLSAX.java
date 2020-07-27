@@ -41,6 +41,7 @@ public class XMLSAX {
     String pathWF = "";
     ReadBedXML fixXML = null; // объект реализации обхода неверно сформированного файл
     Node root = null;
+    ArrayList<Node> AllFindingNode = new ArrayList<>(); // все найденные ноды по имени
     
     
     public Node importNode(Node n){
@@ -399,6 +400,22 @@ public class XMLSAX {
         return finding;
     }
 
+    // --- Найти все ноды по имени и вернуть их ---
+    public ArrayList<Node> getNodesName(Node n, String s) { 
+        if (n.getNodeType() == n.ELEMENT_NODE) { //  проверка хз чего The node is an Element.
+            if(n.getNodeName().equals(s)){
+                AllFindingNode.add(n);
+                System.out.println("Name:Node " + n.getNodeName());
+            }
+        }
+        for (Node child = n.getFirstChild(); // если не элементы ноды то значит есть наследники
+                child != null;
+                child = child.getNextSibling()) {
+            getNodesName(child, s);
+        }
+        return AllFindingNode;
+    }
+    
     // --- получить данные по аттрибуту ноды--- 
     public String getDataAttr(Node n, String s) {
         if(n==null || s==null) return null;
