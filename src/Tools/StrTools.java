@@ -5,9 +5,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.poi.ss.formula.functions.T;
 
-public class StrTools {
+public class StrTools {//isFilter
+    
+    public static boolean isFilter(String s, String f){
+        if(s==null) return false;
+        if(f==null || f.trim().isEmpty()) return true;
+        return Pattern.matches(f.toUpperCase()
+                .replaceAll(" ", "")
+                .replaceAll("\\.", "\\\\.")
+                .replaceAll("\\?", ".")
+                .replaceAll("\\*", "\\.\\*"),s.toUpperCase());
+    }
+    
     public static ArrayList<token> strToTokArr(String tail){
         tail = tail.trim();
         tail = tail.replaceAll("\\[\\s+", "[");

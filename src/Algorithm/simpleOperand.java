@@ -37,12 +37,8 @@ public class simpleOperand extends operand{
 
     @Override
     public void drawSelf(int x, int y, int h, String id) {
-            int w = (o.length() + 3) * globVar.simbolWidth/100;
-        try {
-            globVar.fm.wr(svgTools.drawSvgTextRect((x-w),(y+h/2-globVar.simbolHeight/100/2), w, globVar.simbolHeight/100,id,o));
-        } catch (IOException ex) {
-            Logger.getLogger(simpleOperand.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int w = (o.length() + 3) * globVar.simbolWidth/100;
+        globVar.fm.wr(svgTools.drawSvgTextRect((x-w),(y+h/2-globVar.simbolHeight/100/2), w, globVar.simbolHeight/100,id,o));
     }
 
     @Override

@@ -12,6 +12,8 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -89,6 +91,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         JMenuItem menuItemCopy = new JMenuItem("Скопировать строку");
         JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
+        JMenuItem menuItemFillCells = new JMenuItem("Заполнить ячейки");
         JMenuItem menuItemOpenWindow = null;
         if (rgf != null) {
             menuItemOpenWindow = new JMenuItem("Открыть в отдельном окне");
@@ -98,6 +101,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         popupMenu.add(menuItemCopy);
         popupMenu.add(menuItemRemove);
         popupMenu.add(menuItemClearCells);
+        popupMenu.add(menuItemFillCells);
         if (rgf != null) {
             popupMenu.add(menuItemOpenWindow);
         }
@@ -172,8 +176,101 @@ public class TableTools {//ссылка на таблицу, массив шир
                 }
             }
         });
-
+        menuItemFillCells.addActionListener((ActionEvent event) -> {
+            fillCells(jTable1, tableModel);
+        });
         return 0;
+    }
+    
+    public static void fillCells(JTable jTable1, MyTableModel tableModel) {
+        int rows[] = jTable1.getSelectedRows();
+        int cols[] = jTable1.getSelectedColumns();
+        if (rows.length == 0 || cols.length == 0) {
+            JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
+            return;
+        }
+        int casedial = JOptionPane.showConfirmDialog(null, "Заполнить ячейки?"); // сообщение с выбором
+        if (casedial != 0) {
+            return; //0 - yes, 1 - no, 2 - cancel    
+        }
+        String chosseName;
+         ArrayList<String> cellNames = new ArrayList<>();
+        for (int i = 0; i < cols.length; i++) {//пробегаемся по столбцам
+            for (int j = 0; j < rows.length; j++) {//пробегаемся по строкам
+                chosseName = tableModel.getValueAt(rows[j], cols[i]);
+                if (!chosseName.isEmpty()) {
+                    cellNames.add(chosseName);//записываем в лист имена ячеек для последующего сравнения
+                } else {//бежим цикл до первой пустой ячейки
+                    if (cellNames.size() != 2) {
+                        Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
+                        break;
+                    } else {
+                       //---получение значениe 1-ой ячейки---//
+                        String st = cellNames.get(0);
+                        Matcher matcher = Pattern.compile("\\D+$").matcher(st);
+                        matcher.find();
+                        int numberEnd = matcher.start();
+                        if(numberEnd==0){
+                            Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
+                            break;
+                        }
+                        String end1 = st.substring(numberEnd);
+                        st=st.substring(0, numberEnd);
+                        
+                        matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
+                        matcher.find();
+                        int numberStart = matcher.start();
+                        String dobS = st.substring(numberStart);
+                        String start1 = st.substring(0,numberStart);
+                       
+                        boolean isInt = Tools.isInteger(dobS);
+                        Double dob1;
+                        if(Tools.isNumeric(dobS)) dob1 = Double.parseDouble(dobS);
+                        else {
+                            Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
+                            break;
+                        }
+                       
+                       //---получение значениe 2-ой ячейки---//
+                        st = cellNames.get(1);
+                        matcher = Pattern.compile("\\D+$").matcher(st);
+                        matcher.find();
+                        numberEnd = matcher.start();
+                        String end2 = st.substring(numberEnd);
+                        st=st.substring(0, numberStart);
+                        
+                        matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
+                        matcher.find();
+                        numberStart = matcher.start();
+                        dobS = st.substring(numberStart);
+                        String start2 = st.substring(0,numberStart);
+                        if(!end2.equals(end1) || !start2.equals(start1)){
+                            Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
+                            break;
+                        }
+                        isInt = isInt && Tools.isInteger(dobS);
+                        Double dob2;
+                        if(Tools.isNumeric(dobS)) dob2 = Double.parseDouble(dobS);
+                        else {
+                            Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
+                            break;
+                        }
+                        
+                        Double inc = dob2-dob1;
+                        for (int k = 0; k < rows.length; k++) {
+                            Double dobInc = dob1 + inc * k;
+                            String dbi;
+                            int ttt = dobInc.intValue();
+                            if(isInt) dbi = ""+dobInc.intValue();
+                            else dbi = ""+dobInc;
+                            jTable1.setValueAt(start1+dbi+end1, rows[k], cols[i]);
+                        }
+                        break;
+                    } //                    
+                }
+            }
+            cellNames.clear();//обнуляем все для следующего столбца
+        }
     }
 
     // ----- Функция для расстановки номеров строк в первом столбце --------------Lev---
@@ -295,6 +392,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, String i) {
+        if(archList==null) return;
         for (String[] al : archList) {
             if (al[1].equals(i)) {
                 list.addElement(al[0]);
@@ -306,14 +404,20 @@ public class TableTools {//ссылка на таблицу, массив шир
 
     public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
             ArrayList<String> plusList) throws IOException {
+        setSignalList(list, abList, abonent, commonSig, archList, plusList, null);
+    }
+    
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
+            ArrayList<String> plusList, String filter){// throws IOException {
         list.removeAllElements();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
         for (Node n : sigList) {
-            boolean ins;
             String sigName = prj.getDataAttr(n, "Name");
+            if(!StrTools.isFilter(sigName,filter)) continue;
+            boolean ins;
             if(abList!=null){
                 int x = sigName.indexOf("_");
                 String sigAb = null;
@@ -352,11 +456,11 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
     }
 
-    public static boolean isInList(String s, ArrayList<String[]> archList, int i) {
-        if (s == null || archList == null) {
+    public static boolean isInList(String s, ArrayList<String[]> list, int i) {
+        if (s == null || list == null) {
             return false;
         }
-        for (String[] a : archList) {
+        for (String[] a : list) {
             if (a[i].equals(s)) {
                 return true;
             }
@@ -364,7 +468,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         return false;
     }
 
-    public static ArrayList<String> openSig(String glibSigName) throws IOException {
+    public static ArrayList<String> openSig(String glibSigName){// throws IOException {
         ArrayList<String> list = new ArrayList<>();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
@@ -375,7 +479,6 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
 
         String fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
-
         XMLSAX sigSax = new XMLSAX();
         Node rootSig = sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + fileName);
         Node signals = sigSax.returnFirstFinedNode(rootSig, "Fields");
@@ -383,9 +486,9 @@ public class TableTools {//ссылка на таблицу, массив шир
         if (sigList == null || sigList.isEmpty()) {
             return list;
         }
-        for (Node n : sigList) {
+        sigList.forEach(n -> {
             list.add("– " + glibSigName + "." + sigSax.getDataAttr(n, "Name"));
-        }
+        });
         return list;
     }
 

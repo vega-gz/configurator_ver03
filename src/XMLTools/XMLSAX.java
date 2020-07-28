@@ -311,6 +311,8 @@ public class XMLSAX {
                         url = element.getElementsByTagName("URL").item(0).getTextContent();
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
+                        int ldd = DesignDir.length();
+                        if("design".equalsIgnoreCase(DesignDir.substring(ldd-6))) DesignDir=DesignDir.substring(0, ldd-7);
                     }
                 }
             } catch (ParserConfigurationException | SAXException | IOException ex) {
@@ -366,9 +368,15 @@ public class XMLSAX {
     // --- Удалить ноду ---
     public void removeNode(Node n) {
         Node parentN = n.getParentNode();
-        //System.out.println("What delete " + n.getNodeName());
-        //System.out.println("NameParent " + parentN.getNodeName());
        parentN.removeChild(n);
+    }
+    // --- очистить ноду ---
+    public void cleanNode(Node n) {
+        NodeList child = n.getChildNodes();
+        for (int i = 0; i < child.getLength(); i++) {
+            Node node = child.item(i);
+            if (node.getNodeType() == 1) n.removeChild(node);
+        }
     }
 
     // --- Найти первую ноду по имени и вернуть ее ---

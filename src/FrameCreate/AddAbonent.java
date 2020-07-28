@@ -203,7 +203,7 @@ public class AddAbonent extends javax.swing.JFrame {
     }
     
     public ComboBoxModel getComboBoxModelAbonents(){ // создания списка абонентов
-        if(globVar.DB==null) return null;
+        if(!globVar.DB.isConnectOK()) return null;
         ArrayList<String[]> abList = globVar.DB.getAbonentArray();
         String[] itemList  = {""};
         if(abList != null && !abList.isEmpty()){

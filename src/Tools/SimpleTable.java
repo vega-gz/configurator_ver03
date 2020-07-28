@@ -26,7 +26,7 @@ public class SimpleTable {
     String trgCol;
     
     public SimpleTable(String table,String col,String val, String trgCol) {
-        if(globVar.DB==null)return;
+        if(!globVar.DB.isConnectOK())return;
         List<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
         tableName = table;

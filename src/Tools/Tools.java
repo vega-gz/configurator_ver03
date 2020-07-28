@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /*@author Lev*/
 public class Tools {
@@ -19,7 +20,7 @@ public class Tools {
     }
     
     public static boolean isDB(){
-        if (globVar.DB == null) {
+        if (!globVar.DB.isConnectOK()) {
             JOptionPane.showMessageDialog(null, "База " + globVar.currentBase + "по пути " + globVar.dbURL + " не найдена");
             return false;
         }
@@ -49,8 +50,15 @@ public class Tools {
         }
         return false;
     }
+
     public static boolean isInteger(String s) {
         try { Integer.parseInt(s); } 
+        catch(NumberFormatException e) { return false; } 
+        catch(NullPointerException e) { return false; }
+        return true;
+    }    
+    public static boolean isNumeric(String s) {
+        try { Double.parseDouble(s); } 
         catch(NumberFormatException e) { return false; } 
         catch(NullPointerException e) { return false; }
         return true;
@@ -72,6 +80,29 @@ public class Tools {
         int cnt = jComboBox.getItemCount();
         for(int i=0; i < cnt; i++) if(s.equals(jComboBox.getItemAt(i))) return i;
         return -1;
+    }
+    public static void fillCellCol(JTable jTable1, ArrayList<String> cellNames, int rows[], int col) {
+        int cnt = 0;
+        for (int k = 0; k < rows.length; k++) {
+            jTable1.setValueAt(cellNames.get(cnt), rows[k], col);
+            cnt++;
+            if (cnt >= cellNames.size()) {
+                cnt = 0;
+            }
+        }
+    }
+    
+    public static void fillCellRect(JTable jTable1, ArrayList<String[]> cellNames, int rows[], int cols[]) {
+        for (int i = 0; i < cols.length; i++) {
+            int cnt = 0;
+            for (int k = 0; k < rows.length; k++) {
+                jTable1.setValueAt(cellNames.get(cnt)[i], rows[k], cols[i]);
+                cnt++;
+                if (cnt >= cellNames.size()) {
+                    cnt = 0;
+                }
+            }
+        }
     }
     
 }
