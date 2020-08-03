@@ -2,6 +2,7 @@ package Tools;
 
 import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;
+import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;
@@ -82,6 +83,9 @@ public class TableTools {//ссылка на таблицу, массив шир
         th.setPreferredSize(new Dimension(width, headerWidth));
         th.setSize(width, headerWidth);
         jTable1.repaint();
+        
+        // --- Вставка и копирование объектов таблицы (есть работа с excel) ---
+        ExcelAdapter editT = new ExcelAdapter(jTable1);    
         return 0;
     }
 
