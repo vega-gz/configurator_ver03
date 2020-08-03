@@ -43,8 +43,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
         globVar.DB = new DataBase();
         initComponents();
         jTextField1.setText(globVar.desDir);
-        if (Tools.isDB())
+        if (Tools.isDB()) {
             initMyComponent();
+        }
         Tools.isDesDir();
     }
 
@@ -58,7 +59,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         this.setTitle("Текущая база: " + globVar.dbURL + globVar.currentBase); // установить заголовок
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,6 +73,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
+        jButton12 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -84,7 +85,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         // прикручиваем нашу модель дерева методом getModelTreeNZ()
@@ -136,6 +137,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jLabel8.setText("base:");
 
+        jButton12.setText("Подключить");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_all_ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
@@ -154,9 +162,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -178,7 +189,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton12)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -278,7 +292,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextField1.setMargin(new java.awt.Insets(4, 8, 4, 4));
         jTextField1.setName(""); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -509,7 +523,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "В базу загружено " + ret + " таблиц");
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
             } else if (ret < 0) {
-                JOptionPane.showMessageDialog(null, "При генерации было ошибки. См. файл 'configurer.log'");
+                JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'");
             }
             pb.setVisible(false);
             globVar.processReg.remove(processName);
@@ -518,7 +532,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         bt.start();
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
     // --- Метод реагирования на выбор поля из списка таблиц ---
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         //if(!globVar.DB.isConnectOK()) return;
@@ -614,7 +628,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             return;
         }
         try {
-            int ret = FileManager.renameTypeFile(globVar.desDir + File.separator+"Design");
+            int ret = FileManager.renameTypeFile(globVar.desDir + File.separator + "Design");
             JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -632,8 +646,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private void jMenuItem_AnotherBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseActionPerformed
         jDialog1.setSize(400, 200);
         jDialog1.setLocationRelativeTo(null); // по центру экрана
+        jTextField2.setText("minoro.ru:5432");
+        jTextField5.setText("kln_gpa");
+        jTextField3.setText("mutonar");
         jDialog1.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem_AnotherBaseActionPerformed
 
     // обработчик нажатий клавиш Jdialog подключения к второстепенной базе
@@ -641,20 +658,33 @@ public final class Main_JPanel extends javax.swing.JFrame {
         System.out.println("Press button");
     }//GEN-LAST:event_jDialog1KeyPressed
 
-    // обработчик для всех текстовых полей окна Jdialog1
-    private void jTextField_all_ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    // обработчик для всех текстовых полей окна Jdialog1 и кнопки
+    private void jTextField_all_ActionPerformed(java.awt.event.ActionEvent evt) {
         String addresSecondDB = jTextField2.getText(); // адрес базы
         String DB = jTextField5.getText(); // имя базы
         String userSecondDB = jTextField3.getText(); // имя пользователя
         String passSecondDB = jTextField4.getText(); // пароль
-        //System.out.println("Press button field all " + addresSecondDB + DB + userSecondDB + passSecondDB);
-        MergeBases mergeDB = new MergeBases(addresSecondDB, DB, userSecondDB, passSecondDB); // вызов класса слияния
-        if (mergeDB.connectAnotherDB() == 0){
-            System.out.println("connect base");
-            jDialog1.dispose(); // закрываем окошко при удачном подключении
-        } else JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
+
+        // тестовые данные
+        /*
+         addresSecondDB = "minoro.ru:5432";
+         DB = "kln_gpa";
+         userSecondDB = "mutonar";
+         passSecondDB = "Solovin2";
+         */
+        //if (!addresSecondDB.equals(null) || !DB.equals(null) || !userSecondDB.equals(null) || !passSecondDB.equals(null)) {
+            //System.out.println("Press button field all " + addresSecondDB + DB + userSecondDB + passSecondDB);
+            MergeBases mergeDB = new MergeBases(addresSecondDB, DB, userSecondDB, passSecondDB); // вызов класса слияния
+            if (mergeDB.connectAnotherDB() == 0) {
+                System.out.println("connect base");
+                jDialog1.dispose(); // закрываем окошко при удачном подключении
+                mergeDB.editBases(); // запуск метода обработки баз
+            } else {
+                JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
+            }
+        
     }
-  
+
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (!Tools.isDB()) {
             return;
@@ -675,19 +705,19 @@ public final class Main_JPanel extends javax.swing.JFrame {
         //выдергиваем имя абонента и передаем в конструктор
         globVar.abonent = (String) jComboBox2.getSelectedItem();
         try {
-            UnloadExcel loadread=new UnloadExcel(globVar.abonent);
-            JOptionPane.showMessageDialog(null,"Выгрузка в Excel завершена");
+            UnloadExcel loadread = new UnloadExcel(globVar.abonent);
+            JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
         } catch (ParseException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-         if (!Tools.isDesDir()) {
+        if (!Tools.isDesDir()) {
             return;
         }
         try {
-            int ret = FileManager.renameIntFile(globVar.desDir + File.separator+"Design");
+            int ret = FileManager.renameIntFile(globVar.desDir + File.separator + "Design");
             JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -802,6 +832,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -859,7 +890,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
             try {
                 String newPath = fileload.getSelectedFile().getCanonicalPath();
                 int ldd = newPath.length();
-                if("design".equalsIgnoreCase(newPath.substring(ldd-6))) newPath = newPath.substring(0, ldd-7);
+                if ("design".equalsIgnoreCase(newPath.substring(ldd - 6))) {
+                    newPath = newPath.substring(0, ldd - 7);
+                }
                 if (!newPath.equalsIgnoreCase(globVar.desDir)) {
                     XMLSAX cfgSax = new XMLSAX();
                     Node cfgSaxRoot = cfgSax.readDocument("Config.xml");

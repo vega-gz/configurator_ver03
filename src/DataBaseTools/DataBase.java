@@ -399,10 +399,11 @@ public class DataBase implements Observed {
      
 // --- Вставка данных (название таблицы, список столбцов, данные) -Lev--
     public void insertRows(String name_table, String[] rows, String[] listNameColum) {
+        String sql = "";
         if(name_table.isEmpty() || rows.length == 0 || listNameColum.length == 0 || rows.length != listNameColum.length) return;
         try {
             connection.setAutoCommit(true);
-            String sql = "";
+            
             try {
                 name_table = replacedNt(name_table);
                 sql = "INSERT INTO \"" + name_table + "\" ("; // при первом проходе иначе будет отличаться данные и столбцы
@@ -426,6 +427,7 @@ public class DataBase implements Observed {
                 return;
             }
         } catch (SQLException ex) {
+             System.out.println("Failed ADD data \n" + sql );
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
