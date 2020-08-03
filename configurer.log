@@ -99,3 +99,16 @@
 13:08:09_2020.07.10	Connection Failed base jdbc:postgresql://ads/sd
 13:09:33_2020.07.10	Connection Failed base jdbc:postgresql:///asd
 13:09:40_2020.07.10	Connection Failed base jdbc:postgresql:///asd
+14:20:28_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+14:21:45_2020.07.17	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+14:26:21_2020.07.17	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+14:53:26_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:00:37_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:02:12_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:03:17_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:03:55_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:18:14_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:18:56_2020.07.17	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+15:18:57_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:19:07_2020.07.17	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+15:24:00_2020.07.17	Не удалось прочитать файл "/home/lev/Проекты/Калининград_Сте/Design/opcServer1.opcuaServer"
