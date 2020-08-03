@@ -264,8 +264,8 @@
 				<case val="больше" def="v"/>
 				<case val="меньше" def="n"/>
 			</M>
-            <N nameColumnPos="Наименование" concut="true"/>
-            <O nameColumnPos="TAG_NAME_PLC" concut="true">
+            <N nameColumnPos="Наименование"/> <!-- default=""concut="true"/-->
+            <O nameColumnPos="TAG_NAME_PLC"><!-- default="" concut="true"-->
 				<concut col="TAG_NAME_AnPar"/>
 				<concut col="typeSuff"/>
 				<concut col="dirSuff"/>
