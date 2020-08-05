@@ -81,6 +81,7 @@ public class Tools {
         for(int i=0; i < cnt; i++) if(s.equals(jComboBox.getItemAt(i))) return i;
         return -1;
     }
+    //--Заполнение колонки---
     public static void fillCellCol(JTable jTable1, ArrayList<String> cellNames, int rows[], int col) {
         int cnt = 0;
         for (int k = 0; k < rows.length; k++) {
@@ -91,7 +92,7 @@ public class Tools {
             }
         }
     }
-    
+    //--Заполнение прямоугольника
     public static void fillCellRect(JTable jTable1, ArrayList<String[]> cellNames, int rows[], int cols[]) {
         for (int i = 0; i < cols.length; i++) {
             int cnt = 0;
