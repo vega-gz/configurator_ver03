@@ -422,26 +422,28 @@ public class TableTools {//ссылка на таблицу, массив шир
         int posSubAb = 5;
         String abOrSubAb = abonent;
         ArrayList<String> exList = new ArrayList<>();
-        for (String[] s : abList) {//Перебираем абонентов
-            if ("".equals(s[posSubAb])){//если у абонента нет экземпляров
-                if(!s[1].equals(abonent)) exList.add(s[1]);//и абонент не тот для которого мы формируем архивы - добавляем его в список исключений
-            } else {//если экземпляры есть
-                String firstSubAb; //готовим строку для поиска первого экземпляра
-                int x = s[posSubAb].indexOf(","); //ищем позиуию разделителя экземпляров
-                if(x<0) firstSubAb = s[posSubAb].trim(); //если её нет - значит экземпляр 1, он же - первый
-                else {
-                    firstSubAb = s[posSubAb].substring(0,x).trim(); //если есть ещё экземпляры - запоминаем первый
-                    x++;
-                    int y = s[posSubAb].indexOf(",",x); //ищем ещё разделителя
-                    while(y>0){ //пока они есть
-                        exList.add(s[posSubAb].substring(x,y).trim()); //заносим экземпляры в список исключений
-                        x = y+1;
-                        y = s[posSubAb].indexOf(",",x);
+        if(abList!=null){
+            for (String[] s : abList) {//Перебираем абонентов
+                if ("".equals(s[posSubAb])){//если у абонента нет экземпляров
+                    if(!s[1].equals(abonent)) exList.add(s[1]);//и абонент не тот для которого мы формируем архивы - добавляем его в список исключений
+                } else {//если экземпляры есть
+                    String firstSubAb; //готовим строку для поиска первого экземпляра
+                    int x = s[posSubAb].indexOf(","); //ищем позиуию разделителя экземпляров
+                    if(x<0) firstSubAb = s[posSubAb].trim(); //если её нет - значит экземпляр 1, он же - первый
+                    else {
+                        firstSubAb = s[posSubAb].substring(0,x).trim(); //если есть ещё экземпляры - запоминаем первый
+                        x++;
+                        int y = s[posSubAb].indexOf(",",x); //ищем ещё разделителя
+                        while(y>0){ //пока они есть
+                            exList.add(s[posSubAb].substring(x,y).trim()); //заносим экземпляры в список исключений
+                            x = y+1;
+                            y = s[posSubAb].indexOf(",",x);
+                        }
+                        exList.add(s[posSubAb].substring(x).trim()); //заносим в список исключений последний экземпляр
                     }
-                    exList.add(s[posSubAb].substring(x).trim()); //заносим в список исключений последний экземпляр
+                    if(!s[1].equals(abonent)) exList.add(firstSubAb);//если абонент не тот - добавляем в список исключений и первый экземпляр
+                    else abOrSubAb = firstSubAb;
                 }
-                if(!s[1].equals(abonent)) exList.add(firstSubAb);//если абонент не тот - добавляем в список исключений и первый экземпляр
-                else abOrSubAb = firstSubAb;
             }
         }
         //----------------------------------------------------------------------------
