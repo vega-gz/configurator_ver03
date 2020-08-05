@@ -68,9 +68,9 @@ public class SignalTypeToBase {
                 }
                 if(i == 0){ // если это первый проход то мы создаем таблицу по образу первого Field(ошибки в XML не обрабатываем) 
                     db.createTable(nameTable, listNameColum);
-                    db.insertRows(nameTable, rows, listNameColum);
+                    db.insertRowNZ(nameTable, rows, listNameColum);
                 }else{
-                    db.insertRows(nameTable, rows, listNameColum);
+                    db.insertRowNZ(nameTable, rows, listNameColum);
                 }
            }
             db.createCommentTable(nameTable, commentTable);

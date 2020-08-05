@@ -106,3 +106,18 @@
 09:09:01_2020.07.27	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_kc
 16:25:12_2020.07.27	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'Archive_KC';
 16:38:05_2020.07.28	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_gpa
+12:33:25_2020.08.05	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'Archive_KC';
+12:33:53_2020.08.05	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'KC_UPG_mb_AI';
+13:15:54_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:16:15_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:16:58_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:18:17_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_gpa
+13:19:40_2020.08.05	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_gpa
+13:20:25_2020.08.05	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_kc
+13:20:43_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:21:39_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:23:10_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+14:50:17_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:00:51_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:24:19_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:24:36_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
