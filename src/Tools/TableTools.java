@@ -472,44 +472,17 @@ public class TableTools {//ссылка на таблицу, массив шир
 
     //Заполнение списка источника данных с учётом уже выбранных структур и раскрытых пользователем списков
     public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
-            ArrayList<String> plusList){// throws IOException {
+            ArrayList<String> plusList) throws IOException {
         setSignalList(list, abList, abonent, commonSig, archList, plusList, null);
     }
     
-    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, 
-            ArrayList<String[]> archList, ArrayList<String> plusList, String filter){// throws IOException {
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
+            ArrayList<String> plusList, String filter){// throws IOException {
         list.removeAllElements();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + File.separator + "Design" + File.separator + "Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
-        //создание списка исключенных сигналов - других абонентов и других экземпляров
-        int posSubAb = 5;
-        String abOrSubAb = abonent;
-        ArrayList<String> exList = new ArrayList<>();
-        for (String[] s : abList) {//Перебираем абонентов
-            if ("".equals(s[posSubAb])){//если у абонента нет экземпляров
-                if(!s[1].equals(abonent)) exList.add(s[1]);//и абонент не тот для которого мы формируем архивы - добавляем его в список исключений
-            } else {//если экземпляры есть
-                String firstSubAb; //готовим строку для поиска первого экземпляра
-                int x = s[posSubAb].indexOf(","); //ищем позиуию разделителя экземпляров
-                if(x<0) firstSubAb = s[posSubAb].trim(); //если её нет - значит экземпляр 1, он же - первый
-                else {
-                    firstSubAb = s[posSubAb].substring(0,x).trim(); //если есть ещё экземпляры - запоминаем первый
-                    x++;
-                    int y = s[posSubAb].indexOf(",",x); //ищем ещё разделителя
-                    while(y>0){ //пока они есть
-                        exList.add(s[posSubAb].substring(x,y).trim()); //заносим экземпляры в список исключений
-                        x = y+1;
-                        y = s[posSubAb].indexOf(",",x);
-                    }
-                    exList.add(s[posSubAb].substring(x).trim()); //заносим в список исключений последний экземпляр
-                }
-                if(!s[1].equals(abonent)) exList.add(firstSubAb);//если абонент не тот - добавляем в список исключений и первый экземпляр
-                else abOrSubAb = firstSubAb;
-            }
-        }
-        //----------------------------------------------------------------------------
         for (Node n : sigList) {
             String sigName = prj.getDataAttr(n, "Name");
             if (!StrTools.isFilter(sigName, filter)) {
@@ -522,15 +495,15 @@ public class TableTools {//ссылка на таблицу, массив шир
                 if (x > 0) {
                     sigAb = sigName.substring(0, x);
                 }
-                if (sigAb != null && sigAb.equals(abOrSubAb)) {
+                if (sigAb != null && sigAb.equals(abonent)) {
                     ins = true;
                 } else if (commonSig) {
                     if (sigAb == null) {
                         ins = true;
                     } else {
                         ins = true;
-                        for (String s : exList) {
-                            if (sigAb.equals(s)) {
+                        for (String[] s : abList) {
+                            if (sigAb.equals(s[1])) {
                                 ins = false;
                                 break;
                             }

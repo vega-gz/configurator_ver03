@@ -37,9 +37,9 @@ public class addArchive extends javax.swing.JFrame {
     // Данные для таблиц
     private final String[] continueArchiv = new String[] {"0","x100","100","30","31"};
     private final String[] jTableCols = new String[] {  "№","Наименование архива", 
-                                                            "<HTML><BODY align=\'center\'>Периодичность<br>[мсек]</BODY></HTML>", 
-                                                            "<HTML><BODY align=\'center\'>Кэш<br>[сек]</BODY></HTML>", 
-                                                            "<HTML><BODY align=\'center\'>Длительность<br>[дни]</BODY></HTML>"
+                                                            "<HTML><BODY align=\"center\">Периодичность<br/>[мсек]</BODY></HTML>", 
+                                                            "<HTML><BODY align=\"center\">Кэш<br/>[сек]</BODY></HTML>", 
+                                                            "<HTML><BODY align=\"center\">Длительность<br/>[дни]</BODY></HTML>"
     };
 
     public addArchive() {
@@ -80,8 +80,11 @@ public class addArchive extends javax.swing.JFrame {
         abList = DataBase.getAbonentArray();
         TableTools.setArchiveSignalList(list2, archList, "0");
         setPlusList();
-        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
-        
+        try {
+            TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        } catch (IOException ex) {
+            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = ()->{
             TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
@@ -93,16 +96,14 @@ public class addArchive extends javax.swing.JFrame {
         jSplitPane1.setDividerLocation(100);
    }
     private void setPlusList(){
-        if(archList==null) return;
         for(int i=0; i < archList.size(); i++){
             String s = archList.get(i)[0];
             int x = s.indexOf(".");
-            if(x > 0 && plusList!=null && !plusList.contains(s.substring(2,x))) 
+            if(x > 0 && !plusList.contains(s.substring(2,x))) 
                 plusList.add(s.substring(2,x));
         }
     }
     private boolean isPlusInList2(String sig){
-        if(archList==null) return false;
         for(int i=0; i < archList.size(); i++){
             String s = archList.get(i)[0];
             int x = s.indexOf(".");
@@ -359,10 +360,16 @@ public class addArchive extends javax.swing.JFrame {
         }
         isChang = true;
     }//GEN-LAST:event_jButton3ActionPerformed
-    //this.popupMenu.isVisible();
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         this.popupMenu.isVisible();
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentResized
+    }//GEN-LAST:event_jTable1ComponentResized
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+    }//GEN-LAST:event_jTable1MousePressed
     //Кнопка "Сохранить"
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
@@ -373,14 +380,22 @@ public class addArchive extends javax.swing.JFrame {
     //Кнопка "+"
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         plusList.add(jList1.getSelectedValue());
-        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        try {
+            TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        } catch (IOException ex) {
+            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
     //Кнопка "-"
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String s = jList1.getSelectedValue();
         int x = s.indexOf(".");
         if(x>0) plusList.remove(s = s.substring(2, x));
-        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        try {
+            TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        } catch (IOException ex) {
+            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
         x = list1.indexOf(s);
         if(x>=0) jList1.setSelectedIndex(x);
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -392,7 +407,7 @@ public class addArchive extends javax.swing.JFrame {
         //list2.removeAllElements();
         //TableTools.setArchiveSignalList(list2, archList, prevArch);
     }//GEN-LAST:event_jButton5ActionPerformed
-    //Переключение правого листа для другого типа архива
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int x = jComboBox1.getSelectedIndex();//сохранем выбранный пункт типа архива
         resetArchList();
@@ -400,10 +415,14 @@ public class addArchive extends javax.swing.JFrame {
         list2.removeAllElements();
         TableTools.setArchiveSignalList(list2, archList, ""+x);
     }//GEN-LAST:event_jComboBox1ActionPerformed
-    //разрешение показывать переменные не относящиеся к абоненту
+
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        list1.removeAllElements();
-        TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected(), archList, plusList);
+        try {
+            list1.removeAllElements();
+            TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected(), archList, plusList);
+        } catch (IOException ex) {
+            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
     //Кнопка "Приложение"
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -412,10 +431,10 @@ public class addArchive extends javax.swing.JFrame {
         int i = -1;
         try{
             for(i=0;i<x;i++) {
-                archTyps[i][0] = Integer.parseInt(tableModel.getValueAt(i, 0)); //Номер типа архива
-                archTyps[i][1] = Integer.parseInt(tableModel.getValueAt(i, 2)); //Периодичность архива
-                archTyps[i][2] = Integer.parseInt(tableModel.getValueAt(i, 3)); //Кэш в секундах
-                archTyps[i][3] = Integer.parseInt(tableModel.getValueAt(i, 4)); //Глубина в днях
+                archTyps[i][0] = Integer.parseInt(tableModel.getValueAt(i, 0).toString()); //Номер типа архива
+                archTyps[i][1] = Integer.parseInt(tableModel.getValueAt(i, 2).toString()); //Периодичность архива
+                archTyps[i][2] = Integer.parseInt(tableModel.getValueAt(i, 3).toString()); //Кэш в секундах
+                archTyps[i][3] = Integer.parseInt(tableModel.getValueAt(i, 4).toString()); //Глубина в днях
             } // переписываем данные из таблицы в массив
             String processName = "Генерация из таблицы";
             if(globVar.processReg.indexOf(processName)>=0){
@@ -444,7 +463,6 @@ public class addArchive extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void resetArchList(){
-        if(archList==null) return;
         for(int i=0;i<archList.size(); i++){    //пробегаем поо списту предназнгаченных к архивированию сигналов
             if(archList.get(i)[1].equals(""+prevArch)){ // если сигнал имеет номер нужный архива
                 archList.remove(i);                     // удаляем его
