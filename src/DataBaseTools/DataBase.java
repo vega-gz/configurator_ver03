@@ -496,7 +496,7 @@ public class DataBase implements Observed {
         return getData(table, columns, orderCol, "");
     }
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String where) {
-        if(!isTable(table)) return null;
+        
         int size = columns.size();
         String sql = "SELECT \"" + columns.get(0) + "\"";
         for (int i = 1; i < size; ++i) sql +=  ", \"" + columns.get(i) + "\"";
