@@ -37,7 +37,7 @@ public class ExcelAdapter implements ActionListener {
         KeyStroke paste = KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK, false);
       // Identifying the Paste KeyStroke user can modify this
         //to copy on some other Key combination.
-        KeyStroke delete =KeyStroke.getKeyStroke(KeyEvent.VK_D,ActionEvent.CTRL_MASK,false);
+        KeyStroke delete =KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0,false);
         // Identifying the Paste KeyStroke user can modify this
         //to copy on some other Key combination.
         jTable1.registerKeyboardAction(this, "Copy", copy, JComponent.WHEN_FOCUSED);
