@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
+    TableTools tt=new TableTools();
     public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;

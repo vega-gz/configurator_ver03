@@ -22,6 +22,7 @@ import javax.swing.JPopupMenu;
 
 /*@author Lev*/
 public class addArchive extends javax.swing.JFrame {
+   
     DefaultListModel list1 = new DefaultListModel();
     DefaultListModel list2 = new DefaultListModel();
     MyTableModel tableModel = new MyTableModel();
