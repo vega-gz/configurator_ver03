@@ -98,7 +98,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -346,14 +346,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenu3.setText("Утилиты");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Переименовать *.Int файлы");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem6.setText("Переименовать *.int файлы ");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu3.add(jCheckBoxMenuItem1);
+        jMenu3.add(jMenuItem6);
 
         jMenuItem2.setText("Переименовать *.type файлы");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -712,18 +711,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        if (!Tools.isDesDir()) {
-            return;
-        }
-        try {
-            int ret = FileManager.renameIntFile(globVar.desDir + File.separator + "Design");
-            JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
-        } catch (IOException ex) {
-            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -740,6 +727,18 @@ public final class Main_JPanel extends javax.swing.JFrame {
         addOPC.setTitle("Редактирование архивов");
         addOPC.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+          if (!Tools.isDesDir()) {
+            return;
+        }
+        try {
+            int ret = FileManager.renameIntFile(globVar.desDir + File.separator + "Design");
+            JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
@@ -840,7 +839,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JDialog jDialog1;
@@ -862,6 +860,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;

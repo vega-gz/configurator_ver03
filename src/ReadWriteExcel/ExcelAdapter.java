@@ -64,7 +64,6 @@ public class ExcelAdapter implements ActionListener {
         if (e.getActionCommand().compareTo("Copy") == 0) {
             StringBuffer sbf = new StringBuffer();
          // Check to ensure we have selected only a contiguous block of
-            // cells
             int numcols = jTable1.getSelectedColumnCount();
             int numrows = jTable1.getSelectedRowCount();
             int[] rowsselected = jTable1.getSelectedRows();
