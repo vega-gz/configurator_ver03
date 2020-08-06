@@ -105,5 +105,18 @@ public class Tools {
             }
         }
     }
+    //Если переданный аргумент является именем абонетта - возвращает его же. Если это имя экземпляра - возвращает имя абонента 
+    public static String getAbOfSubAb(String abonent) {
+        ArrayList<String[]> data = globVar.DB.getData("Abonents", new String[]{"Abonent", "Экземпляры"});
+        for(String[] s: data){
+            if(s[0].equals(abonent)) return abonent;
+            if(!s[1].isEmpty()){
+                ArrayList<String> subAbs = StrTools.getListFromString(s[1], ",");
+                for(String sa: subAbs)
+                    if(sa.equals(abonent)) return s[0];
+            }
+        }
+        return null;
+    }
     
 }

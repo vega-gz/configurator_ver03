@@ -209,16 +209,16 @@ public class RWExcel {
         //return null;
     }
 // --- сформировать даные из конфигугации XML для чтения Exel---Lev---
-    public static int ReadExelFromConfig(String pathExel, JProgressBar jpb) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
+    public static String ReadExelFromConfig(String pathExel, JProgressBar jpb) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
         FileInputStream inputStream = new FileInputStream(new File(pathExel));
         if(inputStream == null){
             FileManager.loggerConstructor("Не удалось открыть файл "+pathExel);
-            return -1;
+            return null;
         }
         HSSFWorkbook wb = new HSSFWorkbook(inputStream);
         if(wb == null){
             FileManager.loggerConstructor("Файл "+pathExel + " повреждён или это не XLS");
-            return -1;
+            return null;
         }
         
         int qSheets = wb.getNumberOfSheets();
@@ -228,7 +228,7 @@ public class RWExcel {
         FileManager.loggerConstructor("Заливаем в таблицы абонента "+globVar.abonent+" данные из книги "+pathExel);
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
-        int tCnt = 0;
+        String tCnt = "";
         int maxCnt = nList.size()-1;
         int nCnt = 0;
         for(Node n : nList){
@@ -392,18 +392,12 @@ public class RWExcel {
                         }
                         colCnt++;
                     }
-                    String tableNameAb = globVar.abonent+"_"+exSheetName;
-                    if(globVar.DB.isTable(tableNameAb)) 
-                        globVar.DB.dropTable(tableNameAb);
-                    globVar.DB.createTableEasy(tableNameAb, tabColNames, tableComment);
-                    for(int i=0; i<rowMax; i++){
-                        globVar.DB.insertRows(tableNameAb, dataFromExcel[i], tabColNames);
-                    }
-                    tCnt++;
+                    globVar.DB.createTable(globVar.abonent+"_"+exSheetName, tabColNames, dataFromExcel, tableComment);
+                    tCnt +="\nglobVar.abonent+\"_\"+exSheetName";
                 }
             }
         }
-    if(isError) return -1;
+    if(isError) return null;
     return tCnt;
     }
 }

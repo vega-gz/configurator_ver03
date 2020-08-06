@@ -33,6 +33,11 @@ import org.w3c.dom.Node;
 
 /*@author Lev*/
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
+    static ArrayList<String[]> list_str = new ArrayList<>();
+    static ArrayList<String> list_cells = new ArrayList<>();
+
+    static int rows[] = {};
+    static int cols[] = {};
     // ----- Функция для настройки свойств таблицы --------------Lev---
 
     static public int setTableSetting(JTable jTable1, int[] colWidth, int[] align, int headerWidth) {
@@ -91,21 +96,23 @@ public class TableTools {//ссылка на таблицу, массив шир
 
     // ----- Функция для настройки контекстного меню таблиц--------------Lev---
     static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, regitrationJFrame rgf, ArrayList<JFrame> listJF) {
-        JMenuItem menuItemAdd = new JMenuItem("Добавить пустую строку");
-        JMenuItem menuItemCopy = new JMenuItem("Скопировать строку");
-        JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
+        JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
+        JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
         JMenuItem menuItemFillCells = new JMenuItem("Заполнить ячейки");
+        JMenuItem menuItemCopyCells = new JMenuItem("Скопировать ячейки");
+        JMenuItem menuItemIncertCells = new JMenuItem("Вставить ячейки");
         JMenuItem menuItemOpenWindow = null;
         if (rgf != null) {
             menuItemOpenWindow = new JMenuItem("Открыть в отдельном окне");
         }
 
-        popupMenu.add(menuItemAdd);
-        popupMenu.add(menuItemCopy);
-        popupMenu.add(menuItemRemove);
+        popupMenu.add(menuItemCopyStr);
+        popupMenu.add(menuItemIncertStr);
         popupMenu.add(menuItemClearCells);
         popupMenu.add(menuItemFillCells);
+        popupMenu.add(menuItemCopyCells);
+        popupMenu.add(menuItemIncertCells);
         if (rgf != null) {
             popupMenu.add(menuItemOpenWindow);
         }
@@ -126,40 +133,70 @@ public class TableTools {//ссылка на таблицу, массив шир
                 sse.setFields(row);
             });
         }
-        menuItemAdd.addActionListener((ActionEvent event) -> {
-            int row = jTable1.getSelectedRow();
-            if (row < 0) {
-                row = jTable1.getRowCount() - 1;
-            }
-            row++;
-            tableModel.insertRow(row, new String[1]);
-            for (int i = 1; i < tableModel.getColumnCount(); i++) {
-                tableModel.setValueAt("", row, i);
-            }
-            setId(jTable1);
-        });
-        menuItemCopy.addActionListener((ActionEvent event) -> {
-            int row = jTable1.getSelectedRow();
-            if (row < 0) {
-                JOptionPane.showMessageDialog(null, "Ни одна строка не помечена");
+        menuItemCopyCells.addActionListener((ActionEvent event) -> {
+            rows = jTable1.getSelectedRows();
+            cols = jTable1.getSelectedColumns();
+
+            String value_cells = null;
+            if (rows.length == 0 || cols.length == 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
             }
-            String[] r = getRow(jTable1, row);
-            tableModel.insertRow(row + 1, r);
-            setId(jTable1);
+            for (int i = 0; i < rows.length; i++) {
+                for (int j = 0; j < cols.length; j++) {
+                    value_cells = tableModel.getValueAt(rows[i], cols[j]);
+                    list_cells.add(value_cells);
+                }
+            }
         });
-        menuItemRemove.addActionListener((ActionEvent event) -> {
-            int row = jTable1.getSelectedRow();
-            if (row < 0) {
-                JOptionPane.showMessageDialog(null, "Ни одна строка не помечена");
+        menuItemIncertCells.addActionListener((ActionEvent event) -> {
+            int[] row = jTable1.getSelectedRows();
+            int[] col = jTable1.getSelectedColumns();
+            if (rows.length == 0 || cols.length == 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
             }
-            int casedial = JOptionPane.showConfirmDialog(null, "Удалить строку " + (row + 1) + "?"); // сообщение с выбором
-            if (casedial != 0) {
-                return; //0 - yes, 1 - no, 2 - cancel            
+
+            for (int i = 0; i < col.length; i++) {
+                for (int j = 0; j < row.length; j++) {
+                    if (j > rows.length) {
+                        break;
+                    }
+                    jTable1.setValueAt(list_cells.get(i), row[j], col[i]);
+
+                }
+                if (i > cols.length) {
+                    break;
+                }
             }
-            tableModel.removeRow(row);
-            setId(jTable1);
+            list_cells.clear();
+        });
+        menuItemCopyStr.addActionListener((ActionEvent event) -> {
+            int rows[] = jTable1.getSelectedRows();
+            int cols[] = jTable1.getSelectedColumns();
+            if (rows.length == 0 || cols.length == 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
+                return;
+            }
+            for (int i = 0; i < rows.length; i++) {
+                String[] r = getRow(jTable1, rows[i]);
+                list_str.add(r);
+            }
+        });
+        menuItemIncertStr.addActionListener((ActionEvent event) -> {
+            int row = jTable1.getSelectedRow();
+            if (list_str.size() == 0) {
+                row++;
+                tableModel.insertRow(row, new String[1]);
+                for (int i = 1; i < tableModel.getColumnCount(); i++) {
+                    tableModel.setValueAt("", row, i);
+                }
+                setId(jTable1);
+            }
+            for (int i = 0; i < list_str.size(); i++) {
+                tableModel.insertRow(row + 1, list_str.get(i));
+                setId(jTable1);
+            }
         });
         menuItemClearCells.addActionListener((ActionEvent event) -> {
             int rows[] = jTable1.getSelectedRows();

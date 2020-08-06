@@ -144,7 +144,7 @@ public class AddAbonent extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String[] colNames = {"Abonent","Наименование","Path_to_Excel", "Abonent_type", "Экземпляры"};
         String[] row1 = {jTextField3.getText(),jTextField2.getText(),jTextField5.getText(),jTextField6.getText(),jTextField7.getText()};
-        globVar.DB.insertRows("Abonents", row1, colNames);
+        globVar.DB.insertRow("Abonents", row1, colNames, 0);
         //DataBase.updateAbList(abComboBox);
         abComboBox.setModel(getComboBoxModelAbonents());
         this.setVisible(false);

@@ -512,16 +512,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
         pb.setVisible(true);
 
         DoIt di = () -> {
-            int ret = 1;
+            String ret = null;
             try {
                 ret = RWExcel.ReadExelFromConfig(excel.getPath(), pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (ret >= 0) {
-                JOptionPane.showMessageDialog(null, "В базу загружено " + ret + " таблиц");
+            if (ret != null) {
+                JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
-            } else if (ret < 0) {
+            } else {
                 JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'");
             }
             pb.setVisible(false);
