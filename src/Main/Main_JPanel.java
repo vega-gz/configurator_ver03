@@ -101,6 +101,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
+        menuLoger = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -362,13 +363,26 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem_AnotherBase.setText("Подключится к другой базе");
+        jMenuItem_AnotherBase.setText("перенос данных в иную базе");
+        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jMenuItem_AnotherBaseComponentAdded(evt);
+            }
+        });
         jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem_AnotherBaseActionPerformed(evt);
             }
         });
         jMenu3.add(jMenuItem_AnotherBase);
+
+        menuLoger.setText("Просмотр логов");
+        menuLoger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLogerActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoger);
 
         jMenuBar1.add(jMenu3);
 
@@ -740,6 +754,18 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem_AnotherBaseComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem_AnotherBaseComponentAdded
+
+    private void menuLogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogerActionPerformed
+       java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LogerViewerFrame().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_menuLogerActionPerformed
+
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
             return null;
@@ -870,6 +896,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTree jTree1;
+    private javax.swing.JMenuItem menuLoger;
     // End of variables declaration//GEN-END:variables
 
     private boolean exeptCol(String s, String[] exCol) {
