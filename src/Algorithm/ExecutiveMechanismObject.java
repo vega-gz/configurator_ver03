@@ -590,7 +590,7 @@ public class ExecutiveMechanismObject {
 
         for (int i = 0; i < updatetedData.size(); ++i) {
             String[] array = updatetedData.get(i);
-            workbase.insertRows(nameTable, array, columnT); // опять значения на оборот
+            workbase.insertRowNZ(nameTable, array, columnT); // опять значения на оборот
             workbase.setValueObserver(min, max, i);
         }
     }

@@ -99,6 +99,30 @@
 13:08:09_2020.07.10	Connection Failed base jdbc:postgresql://ads/sd
 13:09:33_2020.07.10	Connection Failed base jdbc:postgresql:///asd
 13:09:40_2020.07.10	Connection Failed base jdbc:postgresql:///asd
+<<<<<<< HEAD
+10:23:53_2020.07.13	Connection Failed base jdbc:postgresql://dsgf/sdf
+10:32:19_2020.07.13	Connection Failed base jdbc:postgresql:///
+10:32:32_2020.07.13	Connection Failed base jdbc:postgresql://sw/as
+08:35:28_2020.07.24	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_kc
+09:09:01_2020.07.27	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_kc
+16:25:12_2020.07.27	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'Archive_KC';
+16:38:05_2020.07.28	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_gpa
+12:33:25_2020.08.05	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'Archive_KC';
+12:33:53_2020.08.05	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'KC_UPG_mb_AI';
+13:15:54_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:16:15_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:16:58_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:18:17_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_gpa
+13:19:40_2020.08.05	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_gpa
+13:20:25_2020.08.05	Connection Failed base jdbc:postgresql://minoro.ru:5432/kln_kc
+13:20:43_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:21:39_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:23:10_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+14:50:17_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:00:51_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:24:19_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+15:24:36_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+=======
 14:20:28_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
 14:21:45_2020.07.17	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
 14:26:21_2020.07.17	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
@@ -112,3 +136,12 @@
 15:18:57_2020.07.17	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
 15:19:07_2020.07.17	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
 15:24:00_2020.07.17	Не удалось прочитать файл "/home/lev/Проекты/Калининград_Сте/Design/opcServer1.opcuaServer"
+13:09:06_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+13:13:11_2020.08.05	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+13:29:35_2020.08.05	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+13:30:00_2020.08.05	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+14:08:20_2020.08.05	Connection Failed base jdbc:postgresql://172.16.33.43:5432/kln_kc
+14:08:29_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+14:17:26_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
+14:21:42_2020.08.05	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'Del_12_31_51_05_08_20_Archive_GPA';
+>>>>>>> e26f2ac3cedd57a10ee38d165d26c5f5e5481a6c

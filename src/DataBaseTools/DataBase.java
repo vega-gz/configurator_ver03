@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class DataBase implements Observed {
     Statement stmt;
@@ -308,7 +310,7 @@ public class DataBase implements Observed {
     }
     
 // --- Вставка данных (название таблицы, данные, список столбцов) если нет данных для UUID сам сделает---
-    public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
+    public void insertRowNZ(String name_table, String[] rows, ArrayList<String> listNameColum) {
         int colId = getLastId(name_table) + 1; // Получаем последний id и всегда +1 как инкремент
         String addUUID = "";
         String dataUUID = "";
@@ -400,6 +402,13 @@ public class DataBase implements Observed {
 // --- Вставка данных (название таблицы, список столбцов, данные) -Lev--
     public void insertRows(String name_table, String[] rows, String[] listNameColum) {
         String sql = "";
+        
+        // пробуем прикручивать id автоматом
+        if(rows.length != listNameColum.length){
+           int colId = getLastId(name_table) + 1; // id для строки базы
+           String dataId = Integer.toString(colId);
+           rows = Stream.concat(Arrays.stream(new String[] {dataId}), Arrays.stream(rows)).toArray(String[]::new);
+        }
         if(name_table.isEmpty() || rows.length == 0 || listNameColum.length == 0 || rows.length != listNameColum.length) return;
         try {
             connection.setAutoCommit(true);
@@ -417,7 +426,7 @@ public class DataBase implements Observed {
                     tmp += ", '" + rows[i] + "'";
                 }
                 sql += tmp.substring(2) + ");";
-                //System.out.println(sql); // Если надо смотрим что за sql запрос
+                System.out.println(sql); // Если надо смотрим что за sql запрос
                 stmt = connection.createStatement();
                 stmt.executeUpdate(sql);
                 stmt.close();

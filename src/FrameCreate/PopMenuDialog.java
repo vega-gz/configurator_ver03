@@ -147,7 +147,7 @@ public class PopMenuDialog extends javax.swing.JFrame implements Runnable{
                      } 
                 ++column;    
                 }
-                workbase.insertRows(name_table, rows, listNameColum); // Все в базу заносим
+                workbase.insertRowNZ(name_table, rows, listNameColum); // Все в базу заносим
                 try {
                     exchanger.exchange("update_table"); // тригер  для срабатывания отрисовщика
                 } catch (InterruptedException ex) {
