@@ -6,6 +6,7 @@ import Tools.Observed;
 import Tools.Observer;
 import Tools.StrTools;
 import XMLTools.UUID;
+import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -786,6 +788,7 @@ public class DataBase implements Observed {
             e.printStackTrace();
         }
     }
+    
     //--------- Методы обслюживающие систему абонентов -Lev-----------------
     public static void createAbonentTable(){ //Создание таблицы абонентов, если её не было
         if(!globVar.DB.isConnectOK()) return;
@@ -799,6 +802,56 @@ public class DataBase implements Observed {
     {
         if(!globVar.DB.isConnectOK()) return null;
         return globVar.DB.getData("Abonents","Abonent"); //Получаем список абонентов отсортированный по алгоритмическому имени 
+    }
+    
+    
+    // --- смотрим за временем создания коммита поля таблицы ---
+    public Timestamp getTimeFirstCommit(String table){
+        Timestamp resultT = null;
+        try {
+            stmt = connection.createStatement();
+            boolean enableTimestamp = false;
+            ResultSet rs = stmt.executeQuery("show track_commit_timestamp;");
+            while (rs.next()) {
+                // проверка на включение
+                if(rs.getString("track_commit_timestamp").equals("on")){
+                    enableTimestamp = true;
+                    break;
+                }
+            }
+            // основной запрос
+            if(enableTimestamp){
+                boolean notComm = true;
+                rs = stmt.executeQuery("SELECT pg_xact_commit_timestamp(xmin), * FROM  \"" + table +"\";");
+                while (rs.next()) {
+                    resultT = new Timestamp(System.currentTimeMillis()); // определяем текущее время системы
+                    String tmpStr = null;
+                    Timestamp timeStamp = rs.getTimestamp("pg_xact_commit_timestamp");
+                    if (timeStamp != null){
+                        // System.out.println(timeStamp); систе
+                        if(timeStamp.getTime() < resultT.getTime() ){ // ищем наименьшее время
+                            resultT = timeStamp;
+                            notComm = false;
+                        }
+                    }
+                }
+                // если не было не одного коммита
+                if(notComm){
+                    resultT = null;
+                }
+                //System.out.println(resultT);
+            }
+            else{
+                FileManager.loggerConstructor("Don't get commit :  Enable #track_commit_timestamp = on	--> postgresql.conf");
+            }
+            stmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("Faled get commit data " + table);
+            //e.printStackTrace();
+        }
+        return resultT;
+        
     }
     
     // --- Функции наблюдателя ---
@@ -829,7 +882,9 @@ public class DataBase implements Observed {
 
     
 //    public static void main(String[] arg){
-//       DataBase db = DataBase.getInstance();
+//        XMLSAX.getConnectBaseConfig("Config.xml");
+//        DataBase db = new DataBase();
+//        System.out.println(db.getTimeFirstCommit("Abonents")); // получить первый коммит времени строки таблицы
 //       //String nameBD = db.getCurrentNameBase();
 //       System.out.println(db.getListTable().toString());
 //       db.createCommentTable("NMC_DGI", "comment");
@@ -845,5 +900,5 @@ public class DataBase implements Observed {
        //listNameColum.add("Name");
        //db.insertRows("t_gpa_di_settings", rows, listNameColum);
     
-//    }
+ //   }
 }
