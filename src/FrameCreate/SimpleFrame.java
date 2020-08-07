@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FrameCreate;
-
 
 import Tools.SimpleTable;
 import java.util.ArrayList;
 import globalData.globVar;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-/*
- *
- * @author cherepanov
- */
+
 public class SimpleFrame extends javax.swing.JPanel {
 
     SimpleTable tt = new SimpleTable(null, null, null, null);
