@@ -2,14 +2,13 @@ package Tools;
 
 import globalData.globVar;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
-public class SimpleTable {
+public final class SimpleTable {
     public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
@@ -22,29 +21,32 @@ public class SimpleTable {
     public int[] colsWidth;
     int[] align;
     int qCol;
+    int trgColNum = -1;
     ArrayList<JFrame> listJF = new ArrayList();
     String trgCol;
     
-    public SimpleTable(String table,String col,String val, String trgCol) {
+    
+    public SimpleTable(String table, String col,String val, String trgCol) {
         if(!globVar.DB.isConnectOK())return;
-        List<String> listColumn = globVar.DB.getListColumns(table);
+        ArrayList<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
         tableName = table;
         this.trgCol = trgCol;
-        int tSize = listColumn.size();
-        if(trgCol!=null && listColumn.contains(trgCol)){
-            cols = new String[tSize-1];
-            int cnt=0;
-            for(int i=0; i<tSize; i++)
-                if(!trgCol.equals(listColumn.get(i))) cols[cnt++]=listColumn.get(i);
-        }else cols = listColumn.toArray( new String[tSize]);
-        
+        //Если усть целевой столбец - исключаем его из списка заголовков
+        if(trgCol!=null){
+            trgColNum =  listColumn.indexOf(trgCol); //запоминаем номер целевого столбца
+            cols = new String[listColumn.size()-1];
+            int i = 0;
+            for(String s: listColumn) if(!s.equals(trgCol)) cols[i++] = s;
+        } else cols = listColumn.toArray(new String[listColumn.size()]);
+        //---------------------------------------------------------------
         tableModel.setColumnIdentifiers(cols);
-        fromDB = globVar.DB.getData(table,"id",col,val);
-        fromDB.forEach((rowData) -> tableModel.addRow(rowData));
+        fromDB = globVar.DB.getData(table);//, listColumn, "id");//, col, val);
         comment = globVar.DB.getCommentTable(table);
+        //fromDB.forEach((rowData) -> tableModel.addRow(rowData));
+        resetTableContent(val);
         tableSize = fromDB.size();
-        qCol = listColumn.size();
+        qCol = cols.length;
         align = new int[qCol];
         colsWidth = new int[qCol];
         
@@ -58,13 +60,21 @@ public class SimpleTable {
         TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
     }
     
-    public void resetTableContent(String col,String val){
-        for(int i=tableModel.getRowCount()-1; i >= 0; i--)
-            tableModel.removeRow(i);
-        fromDB = globVar.DB.getData(tableName,"id",col,val);
-        fromDB.forEach((rowData) -> tableModel.addRow(rowData));
-        
-        isNew(fromDB, tableModel);
+    public void resetTableContent(String val){//String col,
+        tableModel.clear();
+        if(trgColNum<0){
+            fromDB.forEach((rowData) -> tableModel.addRow(rowData));
+        }else{
+            String[]data = new String[fromDB.get(0).length - 1];
+            for(String[]rowData : fromDB){
+                if(rowData[trgColNum].equals(val)){
+                    int cnt = 0;
+                    for(int i=0; i < rowData.length; i++) if(i!=trgColNum) data[cnt++] = rowData[i];
+                    tableModel.addRow(data);
+                }
+            }
+        }
+        //isNew(fromDB, tableModel);
     }
     
     private boolean  isNew(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {

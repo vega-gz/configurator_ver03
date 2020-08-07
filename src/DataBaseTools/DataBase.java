@@ -315,8 +315,13 @@ public class DataBase implements Observed {
         ArrayList<String> columns = getListColumns(table);
         return getData(table, columns, " ORDER BY \"" +orderCol +"\"");
     }
+    // получение из таблицы выборки по определённому значению одного из столбцов, отсортированной по заданному столбцу ---Lev---
     public ArrayList<String[]> getData(String table, String orderCol, String desiredCol, String disiredVal) {
         ArrayList<String> columns = getListColumns(table);
+        return getData(table, columns, orderCol, desiredCol, disiredVal);
+    }
+    // получение из таблицы выборки по определённому значению одного из столбцов, отсортированной по заданному столбцу и списку столбцов---Lev---
+    public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String desiredCol, String disiredVal) {
         String where = "";
         if(desiredCol!=null && disiredVal!=null) where = " WHERE \""+desiredCol+"\"='"+disiredVal+"'";
         String order = "";
@@ -333,9 +338,11 @@ public class DataBase implements Observed {
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
         return getData(table, columns, "");
     }
+    //метод получения данных из таблицы, учитывающий список столбцов и сортировку
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol) {
         return getData(table, columns, orderCol, "");
     }
+    //Главный метод получения данных из таблицы, учитывающий все условия: список столбцов, сортировку и фильтр
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String where) {
         
         int size = columns.size();

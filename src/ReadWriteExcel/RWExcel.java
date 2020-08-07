@@ -393,7 +393,7 @@ public class RWExcel {
                         colCnt++;
                     }
                     globVar.DB.createTable(globVar.abonent+"_"+exSheetName, tabColNames, dataFromExcel, tableComment);
-                    tCnt +="\nglobVar.abonent+\"_\"+exSheetName";
+                    tCnt +="\n - "+globVar.abonent+"_"+exSheetName;
                 }
             }
         }
