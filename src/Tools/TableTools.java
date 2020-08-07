@@ -33,6 +33,11 @@ import org.w3c.dom.Node;
 
 /*@author Lev*/
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
+    static ArrayList<String[]> list_str = new ArrayList<>();
+    static ArrayList<String> list_cells = new ArrayList<>();
+
+    static int rows[] = {};
+    static int cols[] = {};
     // ----- Функция для настройки свойств таблицы --------------Lev---
 
     static public int setTableSetting(JTable jTable1, int[] colWidth, int[] align, int headerWidth) {
@@ -91,21 +96,23 @@ public class TableTools {//ссылка на таблицу, массив шир
 
     // ----- Функция для настройки контекстного меню таблиц--------------Lev---
     static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, regitrationJFrame rgf, ArrayList<JFrame> listJF) {
-        JMenuItem menuItemAdd = new JMenuItem("Добавить пустую строку");
-        JMenuItem menuItemCopy = new JMenuItem("Скопировать строку");
-        JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
+        JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
+        JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
         JMenuItem menuItemFillCells = new JMenuItem("Заполнить ячейки");
+        JMenuItem menuItemCopyCells = new JMenuItem("Скопировать ячейки");
+        JMenuItem menuItemIncertCells = new JMenuItem("Вставить ячейки");
         JMenuItem menuItemOpenWindow = null;
         if (rgf != null) {
             menuItemOpenWindow = new JMenuItem("Открыть в отдельном окне");
         }
 
-        popupMenu.add(menuItemAdd);
-        popupMenu.add(menuItemCopy);
-        popupMenu.add(menuItemRemove);
+        popupMenu.add(menuItemCopyStr);
+        popupMenu.add(menuItemIncertStr);
         popupMenu.add(menuItemClearCells);
         popupMenu.add(menuItemFillCells);
+        popupMenu.add(menuItemCopyCells);
+        popupMenu.add(menuItemIncertCells);
         if (rgf != null) {
             popupMenu.add(menuItemOpenWindow);
         }
@@ -126,40 +133,70 @@ public class TableTools {//ссылка на таблицу, массив шир
                 sse.setFields(row);
             });
         }
-        menuItemAdd.addActionListener((ActionEvent event) -> {
-            int row = jTable1.getSelectedRow();
-            if (row < 0) {
-                row = jTable1.getRowCount() - 1;
-            }
-            row++;
-            tableModel.insertRow(row, new String[1]);
-            for (int i = 1; i < tableModel.getColumnCount(); i++) {
-                tableModel.setValueAt("", row, i);
-            }
-            setId(jTable1);
-        });
-        menuItemCopy.addActionListener((ActionEvent event) -> {
-            int row = jTable1.getSelectedRow();
-            if (row < 0) {
-                JOptionPane.showMessageDialog(null, "Ни одна строка не помечена");
+        menuItemCopyCells.addActionListener((ActionEvent event) -> {
+            rows = jTable1.getSelectedRows();
+            cols = jTable1.getSelectedColumns();
+
+            String value_cells = null;
+            if (rows.length == 0 || cols.length == 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
             }
-            String[] r = getRow(jTable1, row);
-            tableModel.insertRow(row + 1, r);
-            setId(jTable1);
+            for (int i = 0; i < rows.length; i++) {
+                for (int j = 0; j < cols.length; j++) {
+                    value_cells = tableModel.getValueAt(rows[i], cols[j]);
+                    list_cells.add(value_cells);
+                }
+            }
         });
-        menuItemRemove.addActionListener((ActionEvent event) -> {
-            int row = jTable1.getSelectedRow();
-            if (row < 0) {
-                JOptionPane.showMessageDialog(null, "Ни одна строка не помечена");
+        menuItemIncertCells.addActionListener((ActionEvent event) -> {
+            int[] row = jTable1.getSelectedRows();
+            int[] col = jTable1.getSelectedColumns();
+            if (rows.length == 0 || cols.length == 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
             }
-            int casedial = JOptionPane.showConfirmDialog(null, "Удалить строку " + (row + 1) + "?"); // сообщение с выбором
-            if (casedial != 0) {
-                return; //0 - yes, 1 - no, 2 - cancel            
+
+            for (int i = 0; i < col.length; i++) {
+                for (int j = 0; j < row.length; j++) {
+                    if (j > rows.length) {
+                        break;
+                    }
+                    jTable1.setValueAt(list_cells.get(i), row[j], col[i]);
+
+                }
+                if (i > cols.length) {
+                    break;
+                }
             }
-            tableModel.removeRow(row);
-            setId(jTable1);
+            list_cells.clear();
+        });
+        menuItemCopyStr.addActionListener((ActionEvent event) -> {
+            int rows[] = jTable1.getSelectedRows();
+            int cols[] = jTable1.getSelectedColumns();
+            if (rows.length == 0 || cols.length == 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
+                return;
+            }
+            for (int i = 0; i < rows.length; i++) {
+                String[] r = getRow(jTable1, rows[i]);
+                list_str.add(r);
+            }
+        });
+        menuItemIncertStr.addActionListener((ActionEvent event) -> {
+            int row = jTable1.getSelectedRow();
+            if (list_str.size() == 0) {
+                row++;
+                tableModel.insertRow(row, new String[1]);
+                for (int i = 1; i < tableModel.getColumnCount(); i++) {
+                    tableModel.setValueAt("", row, i);
+                }
+                setId(jTable1);
+            }
+            for (int i = 0; i < list_str.size(); i++) {
+                tableModel.insertRow(row + 1, list_str.get(i));
+                setId(jTable1);
+            }
         });
         menuItemClearCells.addActionListener((ActionEvent event) -> {
             int rows[] = jTable1.getSelectedRows();
@@ -186,88 +223,113 @@ public class TableTools {//ссылка на таблицу, массив шир
         return 0;
     }
     
-    public static void fillCells(JTable jTable1, MyTableModel tableModel) {
-        int rows[] = jTable1.getSelectedRows();
-        int cols[] = jTable1.getSelectedColumns();
+public static void fillCells(JTable jTable1, MyTableModel tableModel) {
+        rows = jTable1.getSelectedRows();
+        cols = jTable1.getSelectedColumns();
         if (rows.length == 0 || cols.length == 0) {
             JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
             return;
         }
-        int casedial = JOptionPane.showConfirmDialog(null, "Заполнить ячейки?"); // сообщение с выбором
+        Object[] options = {"Да", "Нет"};
+        int casedial = JOptionPane.showOptionDialog(null, "Заполнить выделенные ячейки?", "Выберите действие",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
         if (casedial != 0) {
             return; //0 - yes, 1 - no, 2 - cancel    
         }
         String chosseName;
-         ArrayList<String> cellNames = new ArrayList<>();
+        ArrayList<String> cellNames = new ArrayList<>();
         for (int i = 0; i < cols.length; i++) {//пробегаемся по столбцам
             for (int j = 0; j < rows.length; j++) {//пробегаемся по строкам
                 chosseName = tableModel.getValueAt(rows[j], cols[i]);
-                if (!chosseName.isEmpty()) {
+                if (!chosseName.isEmpty()) {//если не пустая,записываем в лист
                     cellNames.add(chosseName);//записываем в лист имена ячеек для последующего сравнения
                 } else {//бежим цикл до первой пустой ячейки
                     if (cellNames.size() != 2) {
                         Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                         break;
                     } else {
-                       //---получение значениe 1-ой ячейки---//
+                        //---получение значениe 1-ой ячейки---//
                         String st = cellNames.get(0);
                         Matcher matcher = Pattern.compile("\\D+$").matcher(st);
                         matcher.find();
-                        int numberEnd = matcher.start();
-                        if(numberEnd==0){
+                        int numberEnd = st.length();
+                        try {
+                            numberEnd = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
+                        if (numberEnd == 0) {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
                         String end1 = st.substring(numberEnd);
-                        st=st.substring(0, numberEnd);
-                        
+                        st = st.substring(0, numberEnd);
+
                         matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
                         matcher.find();
-                        int numberStart = matcher.start();
+                        int numberStart = st.length();
+                        try {
+                            numberStart = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
+
                         String dobS = st.substring(numberStart);
-                        String start1 = st.substring(0,numberStart);
-                       
+                        String start1 = st.substring(0, numberStart);
+
                         boolean isInt = Tools.isInteger(dobS);
                         Double dob1;
-                        if(Tools.isNumeric(dobS)) dob1 = Double.parseDouble(dobS);
-                        else {
+                        if (Tools.isNumeric(dobS)) {
+                            dob1 = Double.parseDouble(dobS);
+                        } else {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
-                       
-                       //---получение значениe 2-ой ячейки---//
+
+                        //---получение значениe 2-ой ячейки---//
                         st = cellNames.get(1);
                         matcher = Pattern.compile("\\D+$").matcher(st);
                         matcher.find();
-                        numberEnd = matcher.start();
+                        numberEnd = st.length();
+                        try {
+                            numberEnd = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
                         String end2 = st.substring(numberEnd);
-                        st=st.substring(0, numberStart);
-                        
+                        st = st.substring(0, numberEnd);
+
                         matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
                         matcher.find();
-                        numberStart = matcher.start();
+                        numberStart = st.length();
+                        try {
+                            numberStart = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
                         dobS = st.substring(numberStart);
-                        String start2 = st.substring(0,numberStart);
-                        if(!end2.equals(end1) || !start2.equals(start1)){
+                        String start2 = st.substring(0, numberStart);
+                        if (!end2.equals(end1) || !start2.equals(start1)) {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
                         isInt = isInt && Tools.isInteger(dobS);
                         Double dob2;
-                        if(Tools.isNumeric(dobS)) dob2 = Double.parseDouble(dobS);
-                        else {
+                        if (Tools.isNumeric(dobS)) {
+                            dob2 = Double.parseDouble(dobS);
+                        } else {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
-                        
-                        Double inc = dob2-dob1;
-                        for (int k = 0; k < rows.length; k++) {
+
+                        Double inc = dob2 - dob1;//вычисление инкремента
+                        for (int k = 1; k < rows.length; k++) {
                             Double dobInc = dob1 + inc * k;
                             String dbi;
-                            int ttt = dobInc.intValue();
-                            if(isInt) dbi = ""+dobInc.intValue();
-                            else dbi = ""+dobInc;
-                            jTable1.setValueAt(start1+dbi+end1, rows[k], cols[i]);
+                            if (isInt) {
+                                dbi = "" + dobInc.intValue();
+                            } else {
+                                Double z = Math.pow(10.0, (dobS.length() - dobS.indexOf(".") - 1));
+                                dobInc = Math.ceil(dobInc * z) / z;
+                                dbi = "" + dobInc;
+                            }
+                            jTable1.setValueAt(start1 + dbi + end1, rows[k], cols[i]);
                         }
                         break;
                     } //                    
@@ -276,7 +338,6 @@ public class TableTools {//ссылка на таблицу, массив шир
             cellNames.clear();//обнуляем все для следующего столбца
         }
     }
-
     // ----- Функция для расстановки номеров строк в первом столбце --------------Lev---
 
     static public void setId(JTable jTable1) {
@@ -407,17 +468,46 @@ public class TableTools {//ссылка на таблицу, массив шир
     //Заполнение списка источника данных с учётом уже выбранных структур и раскрытых пользователем списков
 
     public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
-            ArrayList<String> plusList) throws IOException {
+            ArrayList<String> plusList){// throws IOException {
         setSignalList(list, abList, abonent, commonSig, archList, plusList, null);
     }
     
-    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
-            ArrayList<String> plusList, String filter){// throws IOException {
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, 
+            ArrayList<String[]> archList, ArrayList<String> plusList, String filter){// throws IOException {
         list.removeAllElements();
         XMLSAX prj = new XMLSAX();
         Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
+        //создание списка исключенных сигналов - других абонентов и других экземпляров
+        int posSubAb = 5;
+        String abOrSubAb = abonent;
+        ArrayList<String> exList = new ArrayList<>();
+        if(abList!=null){
+            for (String[] s : abList) {//Перебираем абонентов
+                if ("".equals(s[posSubAb])){//если у абонента нет экземпляров
+                    if(!s[1].equals(abonent)) exList.add(s[1]);//и абонент не тот для которого мы формируем архивы - добавляем его в список исключений
+                } else {//если экземпляры есть
+                    String firstSubAb; //готовим строку для поиска первого экземпляра
+                    int x = s[posSubAb].indexOf(","); //ищем позиуию разделителя экземпляров
+                    if(x<0) firstSubAb = s[posSubAb].trim(); //если её нет - значит экземпляр 1, он же - первый
+                    else {
+                        firstSubAb = s[posSubAb].substring(0,x).trim(); //если есть ещё экземпляры - запоминаем первый
+                        x++;
+                        int y = s[posSubAb].indexOf(",",x); //ищем ещё разделителя
+                        while(y>0){ //пока они есть
+                            exList.add(s[posSubAb].substring(x,y).trim()); //заносим экземпляры в список исключений
+                            x = y+1;
+                            y = s[posSubAb].indexOf(",",x);
+                        }
+                        exList.add(s[posSubAb].substring(x).trim()); //заносим в список исключений последний экземпляр
+                    }
+                    if(!s[1].equals(abonent)) exList.add(firstSubAb);//если абонент не тот - добавляем в список исключений и первый экземпляр
+                    else abOrSubAb = firstSubAb;
+                }
+            }
+        }
+        //----------------------------------------------------------------------------
         for (Node n : sigList) {
             String sigName = prj.getDataAttr(n, "Name");
             if(!StrTools.isFilter(sigName,filter)) continue;
@@ -428,15 +518,15 @@ public class TableTools {//ссылка на таблицу, массив шир
                 if (x > 0) {
                     sigAb = sigName.substring(0, x);
                 }
-                if (sigAb != null && sigAb.equals(abonent)) {
+                if (sigAb != null && sigAb.equals(abOrSubAb)) {
                     ins = true;
                 } else if (commonSig) {
                     if (sigAb == null) {
                         ins = true;
                     } else {
                         ins = true;
-                        for (String[] s : abList) {
-                            if (sigAb.equals(s[1])) {
+                        for (String s : exList) {
+                            if (sigAb.equals(s)) {
                                 ins = false;
                                 break;
                             }

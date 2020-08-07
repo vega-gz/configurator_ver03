@@ -3,6 +3,7 @@ package Generators;
 import Tools.FileManager;
 import FrameCreate.TableDB;
 import Tools.StrTools;
+import Tools.Tools;
 import XMLTools.*;
 import globalData.globVar;
 import java.io.File;
@@ -1103,6 +1104,11 @@ public class Generator {
             int x = sig[0].indexOf(".");
             if(x < 0){
                 Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",sig[0]});
+                if(n==null){
+                    FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ sig[0]);
+                    ret = -1;
+                    continue;
+                }
                 String type = bigSax.getDataAttr(n, "Type");
                 String uuid = bigSax.getDataAttr(n, "UUID");
                 if( isStdType(type)) insertInArcive(sig[0], archTyps[archType],uuid,archSax);
@@ -1130,7 +1136,7 @@ public class Generator {
                                 }// <Trend ItemName="AO_D.Set_APK" UUID="D81CC7224B1F7C96DAA237A634367986.4C16C6034A798CBFCD04F398721A6E10" Min="0" Max="10" Log="FALSE" Color="#000000" InvColor="#00000000" Title="Управление АПК (выход на драйвер 0-10 В)" AxisTitle="Управление АПК (выход на драйвер 0-10 В)" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" />
 
                                 insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
-                                if(getTrendAttr(tableList, sig[0], nameSig, attr)!=0) ret = -1;
+                                if(!getTrendAttr(tableList, sig[0], nameSig, attr)) ret = -1;
                                 Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
                                 "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
                                 colorInd++;
@@ -1146,6 +1152,11 @@ public class Generator {
                 String groupName = sig[0].substring(2, x);
                 String localName = sig[0].substring(x+1);
                 Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
+                if(n==null){
+                    FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ groupName);
+                    ret = -1;
+                    continue;
+                }
                 String type = bigSax.getDataAttr(n, "Type");
                 String uuid = bigSax.getDataAttr(n, "UUID");
                 String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
@@ -1170,7 +1181,7 @@ public class Generator {
                             tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
                         }
                         insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
-                        if(getTrendAttr(tableList, groupName, localName, attr)!=0) ret = -1;
+                        if(!getTrendAttr(tableList, groupName, localName, attr)) ret = -1;
                         //Node tmpN = colorList.get(colorInd++);
                         Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
                         "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
@@ -1187,10 +1198,18 @@ public class Generator {
         archSax.writeDocument();
         return ret;
     }
-
-    private static int getTrendAttr(ArrayList<String> tableList, String group, String sig, String[]attr){
+    //Получение атрибутов тренда
+    private static boolean getTrendAttr(ArrayList<String> tableList, String group, String sig, String[]attr){
         String tableName = null;
-        for(String s: tableList) if(group.toUpperCase().contains(s.toUpperCase())) {
+        int x = group.indexOf("_");
+        if(x<0){
+            attr[0]="0";
+            attr[1]="1";
+            attr[2] = sig;
+            return false;
+        }
+        String groupAb = Tools.getAbOfSubAb(group.substring(0, x)) + group.substring(x);
+        for(String s: tableList) if(groupAb.toUpperCase().contains(s.toUpperCase())) {
             tableName = s;
             break;
         }
@@ -1204,13 +1223,17 @@ public class Generator {
                 attr[1]="1";
             }
             attr[2] = globVar.DB.getDataCell(tableName, "TAG_NAME_PLC", sig, "Наименование");
-            return 0;
+            if(attr[0]==null || attr[1]==null || attr[2]==null){
+                FileManager.loggerConstructor("При создании архива для сигнала \""+group+"."+sig+"\" возникли ошибки");
+                return false;
+            }
+            return true;
         }
-        FileManager.loggerConstructor("В таблице \""+ tableName + "\" не найден сигнал "+ globVar.desDir + File.separator+"Design");
+        FileManager.loggerConstructor("При создании архива для сигнала \""+group+"."+sig+"\" возникли ошибки");
         attr[0]="0";
         attr[1]="1";
         attr[2] = sig;
-        return -1;
+        return false;
     }
     private static void insertInArcive(String sigName, int[] archTyp, String uuid, XMLSAX archSax) {
         Node items = archSax.returnFirstFinedNode("Items");
@@ -1223,6 +1246,7 @@ public class Generator {
     }
     
     static boolean isStdType(String t){
+        if(t==null) return false;
         String[] std = {"INT", "REAL", "BOOL", "WORD", "DWORD", "BYTE", "USINT", "SINT", "UINT", "UDINT", "DINT", "ULINT", "LINT", "LREAL"};
         for(String s : std) if(t.equalsIgnoreCase(s)) return true;
         return false;

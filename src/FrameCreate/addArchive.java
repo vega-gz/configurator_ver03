@@ -22,6 +22,7 @@ import javax.swing.JPopupMenu;
 
 /*@author Lev*/
 public class addArchive extends javax.swing.JFrame {
+   
     DefaultListModel list1 = new DefaultListModel();
     DefaultListModel list2 = new DefaultListModel();
     MyTableModel tableModel = new MyTableModel();
@@ -36,9 +37,9 @@ public class addArchive extends javax.swing.JFrame {
     // Данные для таблиц
     private final String[] continueArchiv = new String[] {"0","x100","100","30","31"};
     private final String[] jTableCols = new String[] {  "№","Наименование архива", 
-                                                            "<HTML><BODY align=\"center\">Периодичность<br/>[мсек]</BODY></HTML>", 
-                                                            "<HTML><BODY align=\"center\">Кэш<br/>[сек]</BODY></HTML>", 
-                                                            "<HTML><BODY align=\"center\">Длительность<br/>[дни]</BODY></HTML>"
+                                                            "<HTML><BODY align=\'center\'>Периодичность<br/>[мсек]</BODY></HTML>", 
+                                                            "<HTML><BODY align=\'center\'>Кэш<br/>[сек]</BODY></HTML>", 
+                                                            "<HTML><BODY align=\'center\'>Длительность<br/>[дни]</BODY></HTML>"
     };
 
     public addArchive() {
@@ -79,11 +80,7 @@ public class addArchive extends javax.swing.JFrame {
         abList = DataBase.getAbonentArray();
         TableTools.setArchiveSignalList(list2, archList, "0");
         setPlusList();
-        try {
-            TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
-        } catch (IOException ex) {
-            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = ()->{
             TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
@@ -379,22 +376,14 @@ public class addArchive extends javax.swing.JFrame {
     //Кнопка "+"
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         plusList.add(jList1.getSelectedValue());
-        try {
-            TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
-        } catch (IOException ex) {
-            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
     }//GEN-LAST:event_jButton7ActionPerformed
     //Кнопка "-"
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String s = jList1.getSelectedValue();
         int x = s.indexOf(".");
         if(x>0) plusList.remove(s = s.substring(2, x));
-        try {
-            TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
-        } catch (IOException ex) {
-            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
         x = list1.indexOf(s);
         if(x>=0) jList1.setSelectedIndex(x);
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -416,12 +405,8 @@ public class addArchive extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        try {
-            list1.removeAllElements();
-            TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected(), archList, plusList);
-        } catch (IOException ex) {
-            Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        list1.removeAllElements();
+        TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected(), archList, plusList);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
     //Кнопка "Приложение"
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -98,9 +98,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
+        menuLoger = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -346,14 +347,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenu3.setText("Утилиты");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Переименовать *.Int файлы");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem6.setText("Переименовать *.int файлы ");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu3.add(jCheckBoxMenuItem1);
+        jMenu3.add(jMenuItem6);
 
         jMenuItem2.setText("Переименовать *.type файлы");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -363,13 +363,26 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem_AnotherBase.setText("Подключится к другой базе");
+        jMenuItem_AnotherBase.setText("перенос данных в иную базе");
+        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jMenuItem_AnotherBaseComponentAdded(evt);
+            }
+        });
         jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem_AnotherBaseActionPerformed(evt);
             }
         });
         jMenu3.add(jMenuItem_AnotherBase);
+
+        menuLoger.setText("Просмотр логов");
+        menuLoger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLogerActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoger);
 
         jMenuBar1.add(jMenu3);
 
@@ -513,16 +526,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
         pb.setVisible(true);
 
         DoIt di = () -> {
-            int ret = 1;
+            String ret = null;
             try {
                 ret = RWExcel.ReadExelFromConfig(excel.getPath(), pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (ret >= 0) {
-                JOptionPane.showMessageDialog(null, "В базу загружено " + ret + " таблиц");
+            if (ret != null) {
+                JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
-            } else if (ret < 0) {
+            } else {
                 JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'");
             }
             pb.setVisible(false);
@@ -712,18 +725,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        if (!Tools.isDesDir()) {
-            return;
-        }
-        try {
-            int ret = FileManager.renameIntFile(globVar.desDir + File.separator + "Design");
-            JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
-        } catch (IOException ex) {
-            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -740,6 +741,28 @@ public final class Main_JPanel extends javax.swing.JFrame {
         addOPC.setTitle("Редактирование архивов");
         addOPC.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+          if (!Tools.isDesDir()) {
+            return;
+        }
+        try {
+            int ret = FileManager.renameIntFile(globVar.desDir + File.separator + "Design");
+            JOptionPane.showMessageDialog(null, "Переименовано " + ret + " файлов");
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem_AnotherBaseComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem_AnotherBaseComponentAdded
+
+    private void menuLogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogerActionPerformed
+        LogerViewerFrame lvf = new LogerViewerFrame();
+        lvf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        lvf.setVisible(true);
+    }//GEN-LAST:event_menuLogerActionPerformed
 
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
@@ -840,7 +863,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JDialog jDialog1;
@@ -862,6 +884,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -871,6 +894,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTree jTree1;
+    private javax.swing.JMenuItem menuLoger;
     // End of variables declaration//GEN-END:variables
 
     private boolean exeptCol(String s, String[] exCol) {
