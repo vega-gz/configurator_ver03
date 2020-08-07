@@ -22,10 +22,9 @@ public class FrameTabel extends javax.swing.JPanel {
     ArrayList<ArrayList> listToTable = new ArrayList<>(); // Лист для передачи в таблицу
     String[] columnstoMass = null; // Массив столбцов для передачи в таблицу
     TableNzVer3 tableFrameModel = null;
-    //XMLSAX sax = new XMLSAX();
     int filepath;
     String filepatch;
-    DataBase workbase;// = DataBase.getInstance();
+    DataBase workbase;// 
 
     public int tableSize() {//возвращает размер таблицы
         return jTable1.getRowCount();

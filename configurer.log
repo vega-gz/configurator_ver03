@@ -120,3 +120,4 @@
 14:08:29_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
 14:17:26_2020.08.05	Connection Failed base jdbc:postgresql://127.0.0.1:5432/kln_kc
 14:21:42_2020.08.05	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'Del_12_31_51_05_08_20_Archive_GPA';
+15:38:17_2020.08.06	Не найдена нода "DGI"

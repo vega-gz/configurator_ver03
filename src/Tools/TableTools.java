@@ -4,10 +4,12 @@ import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;
 import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
@@ -27,7 +30,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
@@ -36,18 +41,8 @@ import org.w3c.dom.Node;
 /*@author Lev*/
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
 
-    static String[] r = null;
-
-    public static void setR(String[] r) {
-        TableTools.r = r;
-    }
-
-    public static String[] getR() {
-        return r;
-    }
     static List<String[]> list_str = new ArrayList<String[]>();
     static List<String> list_cells = new ArrayList<>();
-
     static int rows[] = {};
     static int cols[] = {};
 
@@ -111,16 +106,24 @@ public class TableTools {//ссылка на таблицу, массив шир
         JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
         JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
+        JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
         JMenuItem menuItemFillCells = new JMenuItem("Заполнить ячейки");
         JMenuItem menuItemCopyCells = new JMenuItem("Скопировать ячейки");
         JMenuItem menuItemIncertCells = new JMenuItem("Вставить ячейки");
         JMenuItem menuItemOpenWindow = null;
+
+        menuItemCopyCells.setRequestFocusEnabled(false);
+        //  menuItemCopyCells.setIcon(UIManager.getIcon()); //   устанавливает необходимую иконку
+        menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
+        menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
+
         if (rgf != null) {
             menuItemOpenWindow = new JMenuItem("Открыть в отдельном окне");
         }
 
         popupMenu.add(menuItemCopyStr);
         popupMenu.add(menuItemIncertStr);
+        popupMenu.add(menuItemRemove);
         popupMenu.add(menuItemClearCells);
         popupMenu.add(menuItemFillCells);
         popupMenu.add(menuItemCopyCells);
@@ -149,7 +152,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             rows = jTable1.getSelectedRows();
             cols = jTable1.getSelectedColumns();
 
-            String value_cells = null;
+            String value_cells;
             if (rows.length == 0 || cols.length == 0) {
                 JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
@@ -162,30 +165,43 @@ public class TableTools {//ссылка на таблицу, массив шир
             }
         });
         menuItemIncertCells.addActionListener((ActionEvent event) -> {
-            int[] row = jTable1.getSelectedRows();
-            int[] col = jTable1.getSelectedColumns();
-            if (rows.length == 0 || cols.length == 0) {
-                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
-                return;
-            }
+            int cnt = 1, cnt2 = 1;
+            double incr=1;
+            String value;
+            ArrayList<String> v = new ArrayList<>();
+            int startRow = (jTable1.getSelectedRows())[0];
+            int startCol = (jTable1.getSelectedColumns())[0];
+            String[] str = list_cells.toArray(new String[0]);
 
-            for (int i = 0; i < col.length; i++) {
-                for (int j = 0; j < row.length; j++) {
-                    if (j > rows.length) {
-                        break;
+            for (int i = 0; i < str.length; i++) {
+                if (cnt % cols.length == 0) {//находит количетво выбранных столбцов и делит их на три велью 
+                    for (int j = cols.length - 1; j < cols.length && j >= 0; j--) {
+                        v.add(str[i - j]);
                     }
-                    jTable1.setValueAt(list_cells.get(i), row[j], col[i]);
+                    if (cnt >= 6) {
+                        cnt2 = cnt2 + 2;
+                    } else {
+                        cnt2++;
+                    }
+                }
+                cnt++;
+                for (int j = 0; j < v.size(); j++) {
+                    value = v.get(j);
+                    if (startRow + i < jTable1.getRowCount()
+                            && startCol + j < jTable1.getColumnCount()) {
+                        jTable1.setValueAt(value, startRow + (i - cnt2), startCol + (j));
 
+                    }
                 }
-                if (i > cols.length) {
-                    break;
-                }
+
+                v.clear();
             }
+
             list_cells.clear();
         });
         menuItemCopyStr.addActionListener((ActionEvent event) -> {
-            int rows[] = jTable1.getSelectedRows();
-            int cols[] = jTable1.getSelectedColumns();
+            rows = jTable1.getSelectedRows();
+            cols = jTable1.getSelectedColumns();
             if (rows.length == 0 || cols.length == 0) {
                 JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
@@ -209,6 +225,21 @@ public class TableTools {//ссылка на таблицу, массив шир
                 tableModel.insertRow(row + 1, list_str.get(i));
                 setId(jTable1);
             }
+        });
+        menuItemRemove.addActionListener((ActionEvent event) -> {
+            int row = jTable1.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна строка не помечена");
+                return;
+            }
+            Object[] options = {"Да", "Нет"};
+            int casedial = JOptionPane.showOptionDialog(null, "Удалить строку " + (row + 1) + "?", "Выберите действие",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
+            if (casedial != 0) {
+                return; //0 - yes, 1 - no, 2 - cancel            
+            }
+            tableModel.removeRow(row);
+            setId(jTable1);
         });
         menuItemClearCells.addActionListener((ActionEvent event) -> {
             int rows[] = jTable1.getSelectedRows();
@@ -242,7 +273,9 @@ public class TableTools {//ссылка на таблицу, массив шир
             JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
             return;
         }
-        int casedial = JOptionPane.showConfirmDialog(null, "Заполнить ячейки?"); // сообщение с выбором
+        Object[] options = {"Да", "Нет"};
+        int casedial = JOptionPane.showOptionDialog(null, "Заполнить выделенные ячейки?", "Выберите действие",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
         if (casedial != 0) {
             return; //0 - yes, 1 - no, 2 - cancel    
         }
@@ -251,7 +284,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         for (int i = 0; i < cols.length; i++) {//пробегаемся по столбцам
             for (int j = 0; j < rows.length; j++) {//пробегаемся по строкам
                 chosseName = tableModel.getValueAt(rows[j], cols[i]);
-                if (!chosseName.isEmpty()) {
+                if (!chosseName.isEmpty()) {//если не пустая,записываем в лист
                     cellNames.add(chosseName);//записываем в лист имена ячеек для последующего сравнения
                 } else {//бежим цикл до первой пустой ячейки
                     if (cellNames.size() != 2) {
@@ -262,16 +295,26 @@ public class TableTools {//ссылка на таблицу, массив шир
                         String st = cellNames.get(0);
                         Matcher matcher = Pattern.compile("\\D+$").matcher(st);
                         matcher.find();
-                        int numberEnd = matcher.start();
+                        int numberEnd = st.length();
+                        try {
+                            numberEnd = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
                         if (numberEnd == 0) {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
                         String end1 = st.substring(numberEnd);
                         st = st.substring(0, numberEnd);
+
                         matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
                         matcher.find();
-                        int numberStart = matcher.start();
+                        int numberStart = st.length();
+                        try {
+                            numberStart = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
+
                         String dobS = st.substring(numberStart);
                         String start1 = st.substring(0, numberStart);
 
@@ -283,17 +326,26 @@ public class TableTools {//ссылка на таблицу, массив шир
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
+
                         //---получение значениe 2-ой ячейки---//
                         st = cellNames.get(1);
                         matcher = Pattern.compile("\\D+$").matcher(st);
                         matcher.find();
-                        numberEnd = matcher.start();
+                        numberEnd = st.length();
+                        try {
+                            numberEnd = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
                         String end2 = st.substring(numberEnd);
-                        st = st.substring(0, numberStart);
+                        st = st.substring(0, numberEnd);
 
                         matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
                         matcher.find();
-                        numberStart = matcher.start();
+                        numberStart = st.length();
+                        try {
+                            numberStart = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
                         dobS = st.substring(numberStart);
                         String start2 = st.substring(0, numberStart);
                         if (!end2.equals(end1) || !start2.equals(start1)) {
@@ -309,14 +361,15 @@ public class TableTools {//ссылка на таблицу, массив шир
                             break;
                         }
 
-                        Double inc = dob2 - dob1;
-                        for (int k = 0; k < rows.length; k++) {
+                        Double inc = dob2 - dob1;//вычисление инкремента
+                        for (int k = 1; k < rows.length; k++) {
                             Double dobInc = dob1 + inc * k;
                             String dbi;
-                            int ttt = dobInc.intValue();
                             if (isInt) {
                                 dbi = "" + dobInc.intValue();
                             } else {
+                                Double z = Math.pow(10.0, (dobS.length() - dobS.indexOf(".") - 1));
+                                dobInc = Math.ceil(dobInc * z) / z;
                                 dbi = "" + dobInc;
                             }
                             jTable1.setValueAt(start1 + dbi + end1, rows[k], cols[i]);

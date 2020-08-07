@@ -672,16 +672,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
          passSecondDB = "Solovin2";
          */
         //if (!addresSecondDB.equals(null) || !DB.equals(null) || !userSecondDB.equals(null) || !passSecondDB.equals(null)) {
-            //System.out.println("Press button field all " + addresSecondDB + DB + userSecondDB + passSecondDB);
-            MergeBases mergeDB = new MergeBases(addresSecondDB, DB, userSecondDB, passSecondDB); // вызов класса слияния
-            if (mergeDB.connectAnotherDB() == 0) {
-                System.out.println("connect base");
-                jDialog1.dispose(); // закрываем окошко при удачном подключении
-                mergeDB.editBases(); // запуск метода обработки баз
-            } else {
-                JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
-            }
-        
+        //System.out.println("Press button field all " + addresSecondDB + DB + userSecondDB + passSecondDB);
+        MergeBases mergeDB = new MergeBases(addresSecondDB, DB, userSecondDB, passSecondDB); // вызов класса слияния
+        if (mergeDB.connectAnotherDB() == 0) {
+            System.out.println("connect base");
+            jDialog1.dispose(); // закрываем окошко при удачном подключении
+            mergeDB.editBases(); // запуск метода обработки баз
+        } else {
+            JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
+        }
+
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -703,12 +703,20 @@ public final class Main_JPanel extends javax.swing.JFrame {
         pb.setVisible(true);
         //выдергиваем имя абонента и передаем в конструктор
         globVar.abonent = (String) jComboBox2.getSelectedItem();
-        try {
-            UnloadExcel loadread = new UnloadExcel(globVar.abonent);
-            JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
-        } catch (ParseException ex) {
-            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        DoIt di = () -> {
+            int ret = 1;
+            try {
+                UnloadExcel loadread = new UnloadExcel(globVar.abonent);
+                JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
+            } catch (ParseException ex) {
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pb.setVisible(false);
+            globVar.processReg.remove(processName);
+        };
+        BackgroundThread bt = new BackgroundThread(processName, di);
+        bt.start();
+        globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -729,7 +737,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-          if (!Tools.isDesDir()) {
+        if (!Tools.isDesDir()) {
             return;
         }
         try {

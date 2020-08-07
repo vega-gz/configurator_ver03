@@ -40,9 +40,13 @@ public class ExcelAdapter implements ActionListener {
         KeyStroke delete =KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0,false);
         // Identifying the Paste KeyStroke user can modify this
         //to copy on some other Key combination.
+        KeyStroke cancel=KeyStroke.getKeyStroke(KeyEvent.VK_Z,ActionEvent.CTRL_MASK,false);
+          // Identifying the Paste KeyStroke user can modify this
+        //to copy on some other Key combination.
         jTable1.registerKeyboardAction(this, "Copy", copy, JComponent.WHEN_FOCUSED);
         jTable1.registerKeyboardAction(this, "Paste", paste, JComponent.WHEN_FOCUSED);
         jTable1.registerKeyboardAction(this, "Delete",delete,JComponent. WHEN_FOCUSED);
+        jTable1.registerKeyboardAction(this, "Cancel", cancel,JComponent.WHEN_FOCUSED);
         
         system = Toolkit.getDefaultToolkit().getSystemClipboard();
         
@@ -61,6 +65,9 @@ public class ExcelAdapter implements ActionListener {
    
     
     public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().compareTo("Cancel")==0){
+           
+        }
         if(e.getActionCommand().compareTo("Delete")==0){//удаление ячейки по кнопке
             int numcols = jTable1.getSelectedColumnCount();
             int numrows = jTable1.getSelectedRowCount();
