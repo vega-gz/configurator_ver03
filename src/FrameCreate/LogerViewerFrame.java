@@ -22,8 +22,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
-import javax.swing.JFileChooser;
-import javax.swing.UIDefaults;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -66,14 +64,14 @@ public class LogerViewerFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
 
-        jButton1.setText("очистить лог файл");
+        jButton1.setText("очистить лог-файл");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -89,8 +87,8 @@ public class LogerViewerFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 466, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,7 +109,7 @@ public class LogerViewerFrame extends javax.swing.JFrame {
         File logF = new File(nameF);
         if (logF.exists()) {
             logF.delete();
-            FileManager.loggerConstructor("Лог был очисщен");
+            FileManager.loggerConstructor("Лог был очищен");
         } else {
             FileManager.loggerConstructor("Лог файла не было, был создан");
         }
@@ -196,22 +194,25 @@ public class LogerViewerFrame extends javax.swing.JFrame {
             // memory
             int tmpColor = 1;
             while (numberOfCharsRead != -1) {
-                System.out.println(tmpColor);
+                //System.out.println(tmpColor);
                 String strTmp = String.valueOf(buffer, 0, numberOfCharsRead);
                 String[] tmpSplitStr = strTmp.split("\n");
 
-                System.out.println(tmpSplitStr.length);
+                //System.out.println(tmpSplitStr.length);
 
                 for (int i = 0; i < tmpSplitStr.length; ++i) { // это просто понять что там выходит
                     //String[] podstroki = tmpSplitStr[i].split("\t"); // Создаем подстроки уже табом.
                     String[] podstroki = tmpSplitStr[i].split(" "); // Создаем подстроки уже табом.
                     for (String n : podstroki) {
-                        System.out.println(n);
+                        //System.out.println(n);
                         //тут пробуем добавлять текст цветом
                         SimpleAttributeSet randomColor = new SimpleAttributeSet();
                         StyleConstants.setForeground(randomColor, new Color(rnd(255), rnd(255), rnd(255)));
                         SimpleAttributeSet defaultColor = new SimpleAttributeSet();
                         StyleConstants.setForeground(defaultColor, Color.LIGHT_GRAY);
+                        
+                        StyleConstants.setBold(randomColor, true);
+                        StyleConstants.setBold(defaultColor, true);
 
                         // тут нужно сделать отдельную функцию для переборазначений и цветов под них пока так
                         if (check(n)) { // передам в функцию для проверки пока одного значения

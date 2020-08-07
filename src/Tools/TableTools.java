@@ -223,88 +223,113 @@ public class TableTools {//ссылка на таблицу, массив шир
         return 0;
     }
     
-    public static void fillCells(JTable jTable1, MyTableModel tableModel) {
-        int rows[] = jTable1.getSelectedRows();
-        int cols[] = jTable1.getSelectedColumns();
+public static void fillCells(JTable jTable1, MyTableModel tableModel) {
+        rows = jTable1.getSelectedRows();
+        cols = jTable1.getSelectedColumns();
         if (rows.length == 0 || cols.length == 0) {
             JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
             return;
         }
-        int casedial = JOptionPane.showConfirmDialog(null, "Заполнить ячейки?"); // сообщение с выбором
+        Object[] options = {"Да", "Нет"};
+        int casedial = JOptionPane.showOptionDialog(null, "Заполнить выделенные ячейки?", "Выберите действие",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
         if (casedial != 0) {
             return; //0 - yes, 1 - no, 2 - cancel    
         }
         String chosseName;
-         ArrayList<String> cellNames = new ArrayList<>();
+        ArrayList<String> cellNames = new ArrayList<>();
         for (int i = 0; i < cols.length; i++) {//пробегаемся по столбцам
             for (int j = 0; j < rows.length; j++) {//пробегаемся по строкам
                 chosseName = tableModel.getValueAt(rows[j], cols[i]);
-                if (!chosseName.isEmpty()) {
+                if (!chosseName.isEmpty()) {//если не пустая,записываем в лист
                     cellNames.add(chosseName);//записываем в лист имена ячеек для последующего сравнения
                 } else {//бежим цикл до первой пустой ячейки
                     if (cellNames.size() != 2) {
                         Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                         break;
                     } else {
-                       //---получение значениe 1-ой ячейки---//
+                        //---получение значениe 1-ой ячейки---//
                         String st = cellNames.get(0);
                         Matcher matcher = Pattern.compile("\\D+$").matcher(st);
                         matcher.find();
-                        int numberEnd = matcher.start();
-                        if(numberEnd==0){
+                        int numberEnd = st.length();
+                        try {
+                            numberEnd = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
+                        if (numberEnd == 0) {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
                         String end1 = st.substring(numberEnd);
-                        st=st.substring(0, numberEnd);
-                        
+                        st = st.substring(0, numberEnd);
+
                         matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
                         matcher.find();
-                        int numberStart = matcher.start();
+                        int numberStart = st.length();
+                        try {
+                            numberStart = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
+
                         String dobS = st.substring(numberStart);
-                        String start1 = st.substring(0,numberStart);
-                       
+                        String start1 = st.substring(0, numberStart);
+
                         boolean isInt = Tools.isInteger(dobS);
                         Double dob1;
-                        if(Tools.isNumeric(dobS)) dob1 = Double.parseDouble(dobS);
-                        else {
+                        if (Tools.isNumeric(dobS)) {
+                            dob1 = Double.parseDouble(dobS);
+                        } else {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
-                       
-                       //---получение значениe 2-ой ячейки---//
+
+                        //---получение значениe 2-ой ячейки---//
                         st = cellNames.get(1);
                         matcher = Pattern.compile("\\D+$").matcher(st);
                         matcher.find();
-                        numberEnd = matcher.start();
+                        numberEnd = st.length();
+                        try {
+                            numberEnd = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
                         String end2 = st.substring(numberEnd);
-                        st=st.substring(0, numberStart);
-                        
+                        st = st.substring(0, numberEnd);
+
                         matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
                         matcher.find();
-                        numberStart = matcher.start();
+                        numberStart = st.length();
+                        try {
+                            numberStart = matcher.start();
+                        } catch (IllegalStateException e) {
+                        }
                         dobS = st.substring(numberStart);
-                        String start2 = st.substring(0,numberStart);
-                        if(!end2.equals(end1) || !start2.equals(start1)){
+                        String start2 = st.substring(0, numberStart);
+                        if (!end2.equals(end1) || !start2.equals(start1)) {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
                         isInt = isInt && Tools.isInteger(dobS);
                         Double dob2;
-                        if(Tools.isNumeric(dobS)) dob2 = Double.parseDouble(dobS);
-                        else {
+                        if (Tools.isNumeric(dobS)) {
+                            dob2 = Double.parseDouble(dobS);
+                        } else {
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
-                        
-                        Double inc = dob2-dob1;
-                        for (int k = 0; k < rows.length; k++) {
+
+                        Double inc = dob2 - dob1;//вычисление инкремента
+                        for (int k = 1; k < rows.length; k++) {
                             Double dobInc = dob1 + inc * k;
                             String dbi;
-                            int ttt = dobInc.intValue();
-                            if(isInt) dbi = ""+dobInc.intValue();
-                            else dbi = ""+dobInc;
-                            jTable1.setValueAt(start1+dbi+end1, rows[k], cols[i]);
+                            if (isInt) {
+                                dbi = "" + dobInc.intValue();
+                            } else {
+                                Double z = Math.pow(10.0, (dobS.length() - dobS.indexOf(".") - 1));
+                                dobInc = Math.ceil(dobInc * z) / z;
+                                dbi = "" + dobInc;
+                            }
+                            jTable1.setValueAt(start1 + dbi + end1, rows[k], cols[i]);
                         }
                         break;
                     } //                    
@@ -313,7 +338,6 @@ public class TableTools {//ссылка на таблицу, массив шир
             cellNames.clear();//обнуляем все для следующего столбца
         }
     }
-
     // ----- Функция для расстановки номеров строк в первом столбце --------------Lev---
 
     static public void setId(JTable jTable1) {

@@ -759,11 +759,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_AnotherBaseComponentAdded
 
     private void menuLogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogerActionPerformed
-       java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LogerViewerFrame().setVisible(true);
-            }
-        });
+        LogerViewerFrame lvf = new LogerViewerFrame();
+        lvf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        lvf.setVisible(true);
     }//GEN-LAST:event_menuLogerActionPerformed
 
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы

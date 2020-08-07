@@ -28,8 +28,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jButton1" min="-2" pref="133" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="466" max="32767" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="184" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -53,7 +53,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" alignment="0" pref="975" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -73,6 +73,9 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="LogerViewerFrame_jTextPane1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -80,7 +83,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x43e;&#x447;&#x438;&#x441;&#x442;&#x438;&#x442;&#x44c; &#x43b;&#x43e;&#x433; &#x444;&#x430;&#x439;&#x43b;"/>
+        <Property name="text" type="java.lang.String" value="&#x43e;&#x447;&#x438;&#x441;&#x442;&#x438;&#x442;&#x44c; &#x43b;&#x43e;&#x433;-&#x444;&#x430;&#x439;&#x43b;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

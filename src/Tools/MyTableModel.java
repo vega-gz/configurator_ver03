@@ -15,4 +15,9 @@ public class MyTableModel  extends DefaultTableModel{
         return super.getValueAt(row, column) + "";//(String)
     }
     
+    public void clear(){
+        for(int i=this.getRowCount()-1; i >= 0; i--) 
+            this.removeRow(i);
+    }
+    
 }
