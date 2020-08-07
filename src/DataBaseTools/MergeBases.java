@@ -60,7 +60,7 @@ public class MergeBases {
             aDB.dropTableWithBackUp(diffOBJ.name); // удаляем таблицу с именем обхекта
             aDB.createTableEasy(diffOBJ.name, listColumnCurr.toArray(new String[listColumnCurr.size()]), "");
             for(String[] dataT: dataFromTableC){
-                aDB.insertRows(diffOBJ.name, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]));
+                aDB.insertRow(diffOBJ.name, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]), 0);
             }
         }
         for(String nameT: tableNotEnter){
@@ -75,7 +75,7 @@ public class MergeBases {
             }
             aDB.createTableEasy(nameT, listColumnCurr.toArray(new String[listColumnCurr.size()]), "");
             for(String[] dataT: dataFromTableC){
-                aDB.insertRows(nameT, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]));
+                aDB.insertRow(nameT, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]),0);
             }
         }
         JOptionPane.showMessageDialog(null, "Данные скорей всего загружены,\nно загляните в консоль"); // Сообщение

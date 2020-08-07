@@ -8,14 +8,10 @@ import Tools.TableTools;
 import Tools.Tools;
 import Tools.isCange;
 import globalData.globVar;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
 
 /*@author Lev*/
 public class addOPCserver extends javax.swing.JFrame {
@@ -363,22 +359,14 @@ public class addOPCserver extends javax.swing.JFrame {
     //Кнопка "+"
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         plusList.add(jList1.getSelectedValue());
-        try {
-            TableTools.setSignalList(list1, null, null, false, opcList, plusList);
-        } catch (IOException ex) {
-            Logger.getLogger(addOPCserver.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        TableTools.setSignalList(list1, null, null, false, opcList, plusList);
     }//GEN-LAST:event_jButton7ActionPerformed
     //Кнопка "-"
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String s = jList1.getSelectedValue();
         int x = s.indexOf(".");
         if(x>0) plusList.remove(s = s.substring(2, x));
-        try {
-            TableTools.setSignalList(list1, null, null, false, opcList, plusList);
-        } catch (IOException ex) {
-            Logger.getLogger(addOPCserver.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        TableTools.setSignalList(list1, null, null, false, opcList, plusList);
         x = list1.indexOf(s);
         if(x>=0) jList1.setSelectedIndex(x);
     }//GEN-LAST:event_jButton8ActionPerformed

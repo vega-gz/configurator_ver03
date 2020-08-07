@@ -233,7 +233,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         if(title!=null) this.setTitle(title + ": "+(curr+1));
         for(int i=1; i<qCols; i++)
             field[i].setText(tableModel.getValueAt(curr, i));
-        if(st!=null) st.resetTableContent("TAG_NAME_AnPar",tableModel.getValueAt(curr, 2));
+        if(st!=null) st.resetTableContent(tableModel.getValueAt(curr, 2));//"TAG_NAME_AnPar",
     }
     
     private void shiftLActionPerformed(java.awt.event.ActionEvent evt) {  

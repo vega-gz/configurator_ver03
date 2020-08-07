@@ -15,9 +15,6 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
@@ -40,13 +37,13 @@ import org.w3c.dom.Node;
 
 /*@author Lev*/
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
+    static ArrayList<String[]> list_str = new ArrayList<>();
+    static ArrayList<String> list_cells = new ArrayList<>();
 
-    static List<String[]> list_str = new ArrayList<String[]>();
-    static List<String> list_cells = new ArrayList<>();
     static int rows[] = {};
     static int cols[] = {};
-
     // ----- Функция для настройки свойств таблицы --------------Lev---
+
     static public int setTableSetting(JTable jTable1, int[] colWidth, int[] align, int headerWidth) {
         if (jTable1 == null) {
             return -1;
@@ -95,9 +92,9 @@ public class TableTools {//ссылка на таблицу, массив шир
         th.setPreferredSize(new Dimension(width, headerWidth));
         th.setSize(width, headerWidth);
         jTable1.repaint();
-
+        
         // --- Вставка и копирование объектов таблицы (есть работа с excel) ---
-        ExcelAdapter editT = new ExcelAdapter(jTable1);
+        ExcelAdapter editT = new ExcelAdapter(jTable1);    
         return 0;
     }
 
@@ -265,10 +262,10 @@ public class TableTools {//ссылка на таблицу, массив шир
         });
         return 0;
     }
-
-    public static void fillCells(JTable jTable1, MyTableModel tableModel) {
-        int rows[] = jTable1.getSelectedRows();
-        int cols[] = jTable1.getSelectedColumns();
+    
+public static void fillCells(JTable jTable1, MyTableModel tableModel) {
+        rows = jTable1.getSelectedRows();
+        cols = jTable1.getSelectedColumns();
         if (rows.length == 0 || cols.length == 0) {
             JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
             return;
@@ -381,8 +378,8 @@ public class TableTools {//ссылка на таблицу, массив шир
             cellNames.clear();//обнуляем все для следующего столбца
         }
     }
-
     // ----- Функция для расстановки номеров строк в первом столбце --------------Lev---
+
     static public void setId(JTable jTable1) {
         int n = jTable1.getRowCount();
         for (int i = 0; i < n; i++) {
@@ -391,6 +388,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     // ----- Функция для считывания строки таблицы --------------Lev---
+
     static public String[] getRow(JTable jTable1, int row) {
         int n = jTable1.getColumnCount();
         String[] s = new String[n];
@@ -401,6 +399,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     // ----- функция для загрузки таблицы в базу со стриранием старой таблицы --------------
+
     static public int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String[] listNameColum, String tableComment, ArrayList<String[]> fromDB) {
         if (DB.isTable(tableName)) {
             if (tableComment == null) {
@@ -498,9 +497,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, String i) {
-        if (archList == null) {
-            return;
-        }
+        if(archList==null) return;
         for (String[] al : archList) {
             if (al[1].equals(i)) {
                 list.addElement(al[0]);
@@ -509,51 +506,75 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     //Заполнение списка источника данных с учётом уже выбранных структур и раскрытых пользователем списков
-    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
-            ArrayList<String> plusList) throws IOException {
-        setSignalList(list, abList, abonent, commonSig, archList, plusList, null);
-    }
 
     public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
-            ArrayList<String> plusList, String filter) {// throws IOException {
+            ArrayList<String> plusList){// throws IOException {
+        setSignalList(list, abList, abonent, commonSig, archList, plusList, null);
+    }
+    
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, 
+            ArrayList<String[]> archList, ArrayList<String> plusList, String filter){// throws IOException {
         list.removeAllElements();
         XMLSAX prj = new XMLSAX();
-        Node root = prj.readDocument(globVar.desDir + File.separator + "Design" + File.separator + "Project.prj");
+        Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
+        //создание списка исключенных сигналов - других абонентов и других экземпляров
+        int posSubAb = 5;
+        String abOrSubAb = abonent;
+        ArrayList<String> exList = new ArrayList<>();
+        if(abList!=null){
+            for (String[] s : abList) {//Перебираем абонентов
+                if ("".equals(s[posSubAb])){//если у абонента нет экземпляров
+                    if(!s[1].equals(abonent)) exList.add(s[1]);//и абонент не тот для которого мы формируем архивы - добавляем его в список исключений
+                } else {//если экземпляры есть
+                    String firstSubAb; //готовим строку для поиска первого экземпляра
+                    int x = s[posSubAb].indexOf(","); //ищем позиуию разделителя экземпляров
+                    if(x<0) firstSubAb = s[posSubAb].trim(); //если её нет - значит экземпляр 1, он же - первый
+                    else {
+                        firstSubAb = s[posSubAb].substring(0,x).trim(); //если есть ещё экземпляры - запоминаем первый
+                        x++;
+                        int y = s[posSubAb].indexOf(",",x); //ищем ещё разделителя
+                        while(y>0){ //пока они есть
+                            exList.add(s[posSubAb].substring(x,y).trim()); //заносим экземпляры в список исключений
+                            x = y+1;
+                            y = s[posSubAb].indexOf(",",x);
+                        }
+                        exList.add(s[posSubAb].substring(x).trim()); //заносим в список исключений последний экземпляр
+                    }
+                    if(!s[1].equals(abonent)) exList.add(firstSubAb);//если абонент не тот - добавляем в список исключений и первый экземпляр
+                    else abOrSubAb = firstSubAb;
+                }
+            }
+        }
+        //----------------------------------------------------------------------------
         for (Node n : sigList) {
             String sigName = prj.getDataAttr(n, "Name");
-            if (!StrTools.isFilter(sigName, filter)) {
-                continue;
-            }
+            if(!StrTools.isFilter(sigName,filter)) continue;
             boolean ins;
-            if (abList != null) {
+            if(abList!=null){
                 int x = sigName.indexOf("_");
                 String sigAb = null;
                 if (x > 0) {
                     sigAb = sigName.substring(0, x);
                 }
-                if (sigAb != null && sigAb.equals(abonent)) {
+                if (sigAb != null && sigAb.equals(abOrSubAb)) {
                     ins = true;
                 } else if (commonSig) {
                     if (sigAb == null) {
                         ins = true;
                     } else {
                         ins = true;
-                        for (String[] s : abList) {
-                            if (sigAb.equals(s[1])) {
+                        for (String s : exList) {
+                            if (sigAb.equals(s)) {
                                 ins = false;
                                 break;
                             }
                         }
                     }
-                } else {
-                    ins = false;
-                }
-            } else {
-                ins = true;
-            }
-
+                } else ins = false;
+            } else ins = true;
+            
             if (ins) { //если глобальнаяя структура доложна быть включена в список
                 if (plusList.contains(sigName)) { //проверяем, нет ли её в списке раскрытых структур
                     ArrayList<String> plusSigList = openSig(sigName); //если есть - раскрываем структуру
@@ -581,19 +602,19 @@ public class TableTools {//ссылка на таблицу, массив шир
         return false;
     }
 
-    public static ArrayList<String> openSig(String glibSigName) {// throws IOException {
+    public static ArrayList<String> openSig(String glibSigName){// throws IOException {
         ArrayList<String> list = new ArrayList<>();
         XMLSAX prj = new XMLSAX();
-        Node root = prj.readDocument(globVar.desDir + File.separator + "Design" + File.separator + "Project.prj");
+        Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
         Node mySig = prj.findNodeAtribute(root, new String[]{"Signal", "Name", glibSigName});
         String type = prj.getDataAttr(mySig, "Type");
         if ("REAL".equalsIgnoreCase(type) || "INT".equalsIgnoreCase(type) || "BOOL".equalsIgnoreCase(type) || "WORD".equalsIgnoreCase(type)) {
             return list;
         }
 
-        String fileName = FileManager.FindFile(globVar.desDir + File.separator + "Design", type, "UUID=");
+        String fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
         XMLSAX sigSax = new XMLSAX();
-        Node rootSig = sigSax.readDocument(globVar.desDir + File.separator + "Design" + File.separator + fileName);
+        Node rootSig = sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + fileName);
         Node signals = sigSax.returnFirstFinedNode(rootSig, "Fields");
         ArrayList<Node> sigList = sigSax.getHeirNode(signals);
         if (sigList == null || sigList.isEmpty()) {
@@ -606,6 +627,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     //---------Функция для исключения показываемых столбцов -----------------
+
     public static boolean exeptCol(String s, String[] exCol) {
         for (String e : exCol) {
             if (e.equals(s)) {

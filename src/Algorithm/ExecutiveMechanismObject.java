@@ -17,9 +17,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import org.w3c.dom.Node;
 
 /**
@@ -584,15 +582,15 @@ public class ExecutiveMechanismObject {
         });
 
         // данные для передачи наблюдателю
-        int min = 0;
-        int max = updatetedData.size();
-        workbase.createTable(nameTable, columnT);
+        //int min = 0;
+        //int max = updatetedData.size();
+        workbase.createTable(nameTable, columnT, updatetedData, "");
 
-        for (int i = 0; i < updatetedData.size(); ++i) {
-            String[] array = updatetedData.get(i);
-            workbase.insertRows(nameTable, array, columnT); // опять значения на оборот
-            workbase.setValueObserver(min, max, i);
-        }
+//        for (int i = 0; i < updatetedData.size(); ++i) {
+//            String[] array = updatetedData.get(i);
+//            workbase.insertRowNZ(nameTable, array, columnT); // опять значения на оборот
+//            workbase.setValueObserver(min, max, i);
+//        }
     }
 
     // -- метод сращивания Листов для общей таблицы --

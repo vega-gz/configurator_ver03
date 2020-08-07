@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class DataBase implements Observed {
     Statement stmt;
@@ -143,147 +145,22 @@ public class DataBase implements Observed {
         return false;
     }
     //-------------- CREATE TABLE ---------------
-    public void createTable(String name_table,  ArrayList<String> listNameColum) {
-        //String nameSEQ = name_table +"_id_seq"; // имя итератора(по новому не нужен)
-        int number_colum = listNameColum.size();
-        //проверка если есть такая таблица удаляем ее
-        {
-        for(String s: getListTable()){ // Получаем список таблиц и пробежимся сравнивая их
-            if(name_table.equalsIgnoreCase(s)){
-                System.out.println("Finding exist table and droping: " + name_table);
-                ArrayList<String> dropingTable = new ArrayList();
-                //new ArrayList<String>().add(name_table); // так передать нельзя, разобраться 
-                dropingTable.add(name_table);
-                dropTable(dropingTable); // так удаляем по тому что изначально был список очищения(можно сделать отдельно)
-                break;
-            }
+    public void createTable(String name_table,  ArrayList<String> listNameColum, ArrayList<String[]> data, String  comment) {
+        if(isTable(name_table)) dropTable(name_table);
+        String[] arrNameCol = listNameColum.toArray(new String[listNameColum.size()]);
+        createTableEasy(name_table,  arrNameCol, comment);
+        for(int i=0; i < data.size(); i++){
+            insertRow(name_table, data.get(i), arrNameCol, i+1);
         }
-        //createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
-        }
-        
-        // Блок проверки нужен ли нам столбец с UUID и id
-        String addUUID = "\"UUID\" TEXT NOT NULL ,";
-        String addID = "\"id\" NUMERIC NOT NULL, ";
-        for(String s:listNameColum){
-            if(s.equalsIgnoreCase("UUID")){ // если нашли что создаем с нужными UUID обнуляем
-                addUUID ="";
-            } 
-            if(s.equalsIgnoreCase("id")){
-                addID = "";
-            }
-        }
-          
-        String sql = null;
-        //переменная для анализа
-        //String nameTbanalise = new String(name_table);
-        String nc_stringing = "";
-        name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
-        if (!listNameColum.isEmpty()) { // 
-                    //nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')" + addUUID;
-                    nc_stringing = " (" + addID + addUUID;
-                    for(int tmp_cell=0; tmp_cell<listNameColum.size(); ++tmp_cell){
-                    String s = listNameColum.get(tmp_cell);
-                        String bufer_named = s.replace("/", "_");
-                        if(tmp_cell == listNameColum.size()-1) { // если последняя строка
-                            nc_stringing += "\"" + bufer_named + "\"" + "      TEXT";
-                        }
-                            else nc_stringing += "\"" + bufer_named + "\"" + "      TEXT" + " ,";
-                    }
-                    // не помню для чего это
-//                    for (int i = tmp_cell + 1; i < number_colum; i++) {
-//                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
-//                    }
-                    nc_stringing += ")";
-                } else {
-                    // -- create table max lengt row in sheet
-                    nc_stringing = " (ID TEXT NOT NULL";
-                    for (int i = 1; i < number_colum; i++) {
-                        nc_stringing += " ," + "colum_" + Integer.toString(i) + "      TEXT";
-                    }
-                    nc_stringing += ")";
-                }
-
-        try {
-            connection.setAutoCommit(true);
-            stmt = connection.createStatement();
-            sql = "CREATE TABLE " + "\"" + name_table +"\""+ nc_stringing;
-            System.out.println("Create t_sql " + sql); // смотрим какой запрос на соз
-            stmt.executeUpdate(sql);
-            stmt.close();
-            //connection.commit();
-            //System.out.println("-- Table created successfully");
-            createCommentTable(name_table, "комментарий к этой таблице"); // вызом метода добавления комментария
-
-        } catch (SQLException e) {
-            System.out.println("Failed CREATE TABLE");
-            System.out.println(sql); // смотрим какой запрос на соз
-            e.printStackTrace();
-            return;
+    }
+    public void createTable(String name_table,  String[] arrNameCol, String[][] data, String  comment) {
+        if(isTable(name_table)) dropTable(name_table);
+        createTableEasy(name_table,  arrNameCol, comment);
+        for(int i=0; i < data.length; i++){
+            insertRow(name_table, data[i], arrNameCol, i+1);
         }
     }
     
-    //-------------- Создать таблицу без проверки её наличия в БД -Lev--------------
-//    public void createTable1(String name_table,  String[] listNameColum, String comment) {
-//        
-//        if (name_table.isEmpty() || listNameColum.length == 0) return; 
-//        String nameSEQ = name_table.toLowerCase() +"_id_seq"; // имя итератора
-//        //createSEQ(nameSEQ);// После удаления создаем и удаляем итератор 
-//        String sql = null;
-//        name_table = replacedNt(name_table); //Заменяем символы так как ограничения в Postgrese
-//        String nc_stringing = " (id INTEGER DEFAULT NEXTVAL(\'" +nameSEQ+"\')";
-//        for(int j=0; j<listNameColum.length; j++)
-//            nc_stringing += " ," + "\"" + listNameColum[j] + "\"" + "      TEXT";
-//        nc_stringing += ")";
-//        try {
-//            connection.setAutoCommit(true);
-//            stmt = connection.createStatement();
-//            sql = "CREATE TABLE \"" + name_table + "\"" + nc_stringing;
-//            stmt.executeUpdate(sql);
-//            stmt.close();
-//            //connection.commit();
-//            //System.out.println("-- Table created successfully");
-//            createCommentTable(name_table, comment); // вызом метода добавления комментария
-//
-//        } catch (SQLException e) {
-//            System.out.println("Failed CREATE TABLE");
-//            System.out.println(sql); // смотрим какой запрос на соз
-//            e.printStackTrace();
-//            return;
-//        }
-//    }
-    
-    public void createTableEasy(String name_table,  String[] listNameColum,  ArrayList<String>  comment) {
-        if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
-        String sql = "";
-        try {
-            connection.setAutoCommit(true);
-            stmt = connection.createStatement();
-            sql = "CREATE TABLE \"" + name_table + "\" (id INTEGER";
-            int start = 0;
-            if("id".equalsIgnoreCase(listNameColum[0]) || "№".equals(listNameColum[0])) start = 1;
-            for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\" TEXT";
-            sql += ");";
-            
-            System.out.println("Easy table " + sql); // смотрим какой запрос на соз
-            stmt.executeUpdate(sql);
-            stmt.close();
-            if(comment!=null && !comment.isEmpty()) createCommentTable(name_table, comment.get(0)); // вызом метода добавления комментария
-            for(int i = 1; i<comment.size();i++){
-                String s = comment.get(i);
-                int x = s.indexOf("colName:");
-                int y = s.indexOf(", comment:");
-                if(x>=0 && y>=0){
-                    String colName = s.substring(x+8, y).trim();
-                    String comm = s.substring(y+10);
-                    createCommentColumn(name_table, colName, comm);
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("Failed CREATE TABLE");
-            System.out.println(sql); // смотрим какой запрос на соз
-            e.printStackTrace();
-        }
-    }
     public void createTableEasy(String name_table,  String[] listNameColum,  String  comment) {
         if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
         String sql = "";
@@ -308,7 +185,7 @@ public class DataBase implements Observed {
     }
     
 // --- Вставка данных (название таблицы, данные, список столбцов) если нет данных для UUID сам сделает---
-    public void insertRows(String name_table, String[] rows, ArrayList<String> listNameColum) {
+    public void insertRowNZ(String name_table, String[] rows, ArrayList<String> listNameColum) {
         int colId = getLastId(name_table) + 1; // Получаем последний id и всегда +1 как инкремент
         String addUUID = "";
         String dataUUID = "";
@@ -397,71 +274,33 @@ public class DataBase implements Observed {
         }
     }
      
-// --- Вставка данных (название таблицы, список столбцов, данные) -Lev--
-    public void insertRows(String name_table, String[] rows, String[] listNameColum) {
-        String sql = "";
-        if(name_table.isEmpty() || rows.length == 0 || listNameColum.length == 0 || rows.length != listNameColum.length) return;
-        try {
-            connection.setAutoCommit(true);
-            
-            try {
-                name_table = replacedNt(name_table);
-                sql = "INSERT INTO \"" + name_table + "\" ("; // при первом проходе иначе будет отличаться данные и столбцы
-                String tmp = "";
-                for (int i = 0; i < listNameColum.length; i++) { // формирую данные для этого запроса - 1 так как добавили ID
-                    tmp += ", \"" + listNameColum[i] + "\"";
-                }
-                sql += tmp.substring(2)  + ") VALUES (";
-                tmp = "";
-                for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
-                    tmp += ", '" + rows[i] + "'";
-                }
-                sql += tmp.substring(2) + ");";
-                //System.out.println(sql); // Если надо смотрим что за sql запрос
-                stmt = connection.createStatement();
-                stmt.executeUpdate(sql);
-                stmt.close();
-            } catch (SQLException e) {
-                System.out.println("Failed ADD data");
-                e.printStackTrace();
-                return;
-            }
-        } catch (SQLException ex) {
-             System.out.println("Failed ADD data \n" + sql );
-            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 // --- Вставка данных (название таблицы, список столбцов, данные, index) -Lev--
     public void insertRow(String name_table, String[] row, String[] listNameColum, int index) {
         if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length) return;
+        //connection.setAutoCommit(true);
+        String sql;
         try {
-            connection.setAutoCommit(true);
-            String sql;
-            try {
-                name_table = replacedNt(name_table);
-                sql = "INSERT INTO \"" + name_table + "\" (id"; // при первом проходе иначе будет отличаться данные и столбцы
-                
-                int start = 0;
-                if("id".equalsIgnoreCase(listNameColum[0]) || "№".equals(listNameColum[0])) start = 1;
-                for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\"";
-                if(start == 0){
-                    sql += ") VALUES ("+index;
-                    for (String row1 : row) sql += ", '" + row1 + "'";
-                }else{
-                    sql += ") VALUES ("+row[0];
-                    for(int i = 1; i<row.length; i++)
-                        sql += ", '" + row[i] + "'";
-                }
-                sql += ");";
-                stmt = connection.createStatement();
-                stmt.executeUpdate(sql);
-                stmt.close();
-            } catch (SQLException e) {
-                System.out.println("Failed ADD data");
-                e.printStackTrace();
+            name_table = replacedNt(name_table);
+            sql = "INSERT INTO \"" + name_table + "\" (id"; // при первом проходе иначе будет отличаться данные и столбцы
+            
+            int start = 0;
+            if("id".equalsIgnoreCase(listNameColum[0]) || "№".equals(listNameColum[0])) start = 1;
+            for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\"";
+            if(start == 0){
+                sql += ") VALUES ("+index;
+                for (String row1 : row) sql += ", '" + row1 + "'";
+            }else{
+                sql += ") VALUES ("+row[0];
+                for(int i = 1; i<row.length; i++)
+                    sql += ", '" + row[i] + "'";
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            sql += ");";
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed ADD data");
+            e.printStackTrace();
         }
     }
      
@@ -474,8 +313,13 @@ public class DataBase implements Observed {
         ArrayList<String> columns = getListColumns(table);
         return getData(table, columns, " ORDER BY \"" +orderCol +"\"");
     }
+    // получение из таблицы выборки по определённому значению одного из столбцов, отсортированной по заданному столбцу ---Lev---
     public ArrayList<String[]> getData(String table, String orderCol, String desiredCol, String disiredVal) {
         ArrayList<String> columns = getListColumns(table);
+        return getData(table, columns, orderCol, desiredCol, disiredVal);
+    }
+    // получение из таблицы выборки по определённому значению одного из столбцов, отсортированной по заданному столбцу и списку столбцов---Lev---
+    public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String desiredCol, String disiredVal) {
         String where = "";
         if(desiredCol!=null && disiredVal!=null) where = " WHERE \""+desiredCol+"\"='"+disiredVal+"'";
         String order = "";
@@ -492,9 +336,11 @@ public class DataBase implements Observed {
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
         return getData(table, columns, "");
     }
+    //метод получения данных из таблицы, учитывающий список столбцов и сортировку
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol) {
         return getData(table, columns, orderCol, "");
     }
+    //Главный метод получения данных из таблицы, учитывающий все условия: список столбцов, сортировку и фильтр
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String where) {
         
         int size = columns.size();
@@ -538,8 +384,8 @@ public class DataBase implements Observed {
             rs.close();
             stmt.close();
         } catch (SQLException e) {
-            System.out.println("Ошибка при поиске в таблице " + table);
-            e.printStackTrace();
+            System.out.println("Ошибка при поиске элемента "+val1+" в таблице "+table);
+            //e.printStackTrace();
             return null;
         }
         return val2;

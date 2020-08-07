@@ -329,7 +329,7 @@ public class TableNzVer3 {
                         String[] rows = {Integer.toString(idicriment)}; // массив так как восим только номер id
                         ArrayList<String> listNameColum = new ArrayList<>(); // листы это столбцы
                         listNameColum.add("id");
-                        workbase.insertRows(nameTable, rows, listNameColum);
+                        workbase.insertRowNZ(nameTable, rows, listNameColum);
                         getDatredrawnTable(); // можно так перерисовать можно триггером 
                         //JOptionPane.showMessageDialog(null, "Signal ID " + idBase + "delete"); // Сообщение
                     }
