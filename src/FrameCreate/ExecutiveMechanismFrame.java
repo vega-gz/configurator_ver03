@@ -287,7 +287,8 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         //jButton2 = new javax.swing.JButton();
         //jScrollPane1 = new javax.swing.JScrollPane();
 
-        // слушатель окна выбора(не работает)
+        
+// слушатель окна выбора(не работает)
         jDialog1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPreased(java.awt.event.KeyEvent evt) {
                 //if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
