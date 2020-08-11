@@ -2,33 +2,33 @@ package Tools;
 
 import globalData.globVar;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public final class SimpleTable {
     public MyTableModel tableModel = new MyTableModel();
-    JPopupMenu popupMenu = new JPopupMenu();
+    public JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
-    String tableName;
-    int tableSize;
-    String[] cols;
-    String comment;
-    ArrayList<String[]> fromDB;
-    ArrayList<String[]> listItemList = new ArrayList<>();
+    public String tableName;
+    public int tableSize = -1;
+    public String[] cols;
+    public String comment;
+    public ArrayList<String[]> fromDB;
+    public ArrayList<String[]> listItemList = new ArrayList<>();
+    public ArrayList<ArrayList> listToTable = new ArrayList<>(); // Лист для передачи в таблицу
     public int[] colsWidth;
     int[] align;
     int qCol;
     int trgColNum = -1;
-    ArrayList<JFrame> listJF = new ArrayList();
+    //ArrayList<JFrame> listJF = new ArrayList();
     String trgCol;
-    
+    String oldVal=null;
+    ArrayList<String> listColumn;
     
     public SimpleTable(String table, String col,String val, String trgCol) {
         if(!globVar.DB.isConnectOK())return;
-        ArrayList<String> listColumn = globVar.DB.getListColumns(table);
+        listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
         tableName = table;
         this.trgCol = trgCol;
@@ -49,18 +49,41 @@ public final class SimpleTable {
         qCol = cols.length;
         align = new int[qCol];
         colsWidth = new int[qCol];
-        
+
         TableTools.setWidthCols(cols, tableModel, colsWidth, 7.7);
-        if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
+        if (tableSize > 0) {
+            TableTools.setAlignCols(fromDB.get(0), align);
+        }
     }
-    
-    public void setSimpleTableSettings(JTable jTable1){
+
+    public void setSimpleTableSettings(JTable jTable1) {
+        if(tableSize<0) return;
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, null, null, null);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20);
         TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
     }
     
-    public void resetTableContent(String val){//String col,
+    public void resetTableContent(String val){
+        if(tableSize<0) return;
+        if(oldVal!=null && trgColNum>=0){
+            for(int i = fromDB.size()-1; i >=0; i--)
+                 if(fromDB.get(i)[trgColNum].equals(oldVal)) fromDB.remove(i);
+            
+            for(int i = tableModel.getRowCount()-1; i >=0; i--){
+                String[] tmp = new String[tableModel.getColumnCount()+1];
+                int cnt=0;
+                for(int j = 0; j < tmp.length; j++){
+                    if(j!=trgColNum) tmp[j] = tableModel.getValueAt(i, cnt++);
+                }
+                tmp[trgColNum] = oldVal;
+                
+                fromDB.add(tmp);
+            }
+            TableTools.sotrList(fromDB,trgColNum);
+        }
+        
+        oldVal = val;
+        
         tableModel.clear();
         if(trgColNum<0){
             fromDB.forEach((rowData) -> tableModel.addRow(rowData));
@@ -76,22 +99,19 @@ public final class SimpleTable {
         }
         //isNew(fromDB, tableModel);
     }
+
+    public boolean isNew(){
+        if(tableSize<0) return false;
+        return TableTools.isTableDiffDB(fromDB, tableName);
+    }
     
-    private boolean  isNew(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
-        if(fromDB==null || tableModel==null) return false;
-        int fY = fromDB.size();
-        if(fY<=0) return false;
-        int x = tableModel.getColumnCount();
-        int y = tableModel.getRowCount();
-        for(int i=0;i<y;i++){
-            boolean is = false;
-            for(int k=0;k<fY;k++){
-                boolean lokal;
-                for(int j=0;j<x;j++)
-                    if(!fromDB.get(k)[j].equals(tableModel.getValueAt(i, j))) is = true;
-            }
-        }
-        return false;
+    public boolean isCreate(){
+        return tableSize>0;
+    }
+    
+    public void saveTableInDB(){
+        if(tableSize<0) return;
+        globVar.DB.createTable(tableName, listColumn, fromDB, comment);
     }
 
 }

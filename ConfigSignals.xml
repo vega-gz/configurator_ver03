@@ -225,52 +225,30 @@
 			<T_GPA_SP_Settings Type="T_SP_Settings"/>
 		</GenData>
         <EXEL>
-            <C nameColumnPos="TAG_NAME_AnPar" type="VarName"/>
-            <B nameColumnPos="Таблица"  type="VarName" default=""/>
-            <D nameColumnPos="direct" registr="down" replace="true">
+            <B nameColumnPos="TAG_NAME_AnPar" type="VarName"/>
+            <C nameColumnPos="direct" registr="down" replace="true">
 				<case from="&gt;" to="больше"/>
 				<case from="true" to="больше"/>
 				<case from="&lt;" to="меньше"/>
 				<case from="false" to="меньше"/>
-			</D>
-            <E nameColumnPos="Уставка" type="Number"/>
-            <F nameColumnPos="delay" type="Number" default="3.0"/>
-            <G nameColumnPos="тип" registr="up" default="У"  replace="true">
+			</C>
+            <D nameColumnPos="Уставка" type="Number"/>
+            <E nameColumnPos="delay" type="Number" default="3.0"/>
+            <F nameColumnPos="тип" registr="up" default="У"  replace="true">
 				<case from="U" to="У"/>
 				<case from="A" to="А"/>
 				<case from="P" to="П"/>
 				<case from="O" to="О"/>
-			</G>
-            <H nameColumnPos="defVal" type="Int" default="0"/>
-            <I nameColumnPos="гистерезис" type="Number"  default="0.0"/>
-            <J nameColumnPos="типПостфикс" swt="тип" default="упр.">
-				<case val="О" def="огр."/>
-				<case val="А" def="авар."/>
-				<case val="O" def="огр."/>
-				<case val="A" def="авар."/>
-				<case val="П" def="предупр."/>
-			</J>
-            <K nameColumnPos="директПостфикс" swt="direct">
-				<case val="больше" def=" верхняя"/>
-				<case val="меньше" def=" нижняя"/>
-			</K>
-            <L nameColumnPos="typeSuff" swt="тип" type="VarName">
-				<case val="У" def="_U"/>
-				<case val="А" def="_A"/>
-				<case val="О" def="_O"/>
-				<case val="П" def="_P"/>
-			</L>
-            <M nameColumnPos="dirSuff" swt="direct">
-				<case val="больше" def="v"/>
-				<case val="меньше" def="n"/>
-			</M>
-            <N nameColumnPos="Наименование"/> <!-- default=""concut="true"/-->
-            <O nameColumnPos="TAG_NAME_PLC"><!-- default="" concut="true"-->
+			</F>
+            <G nameColumnPos="defVal" type="Int" default="0"/>
+            <H nameColumnPos="гистерезис" type="Number"  default="0.0"/>
+            <I nameColumnPos="TAG_NAME_PLC"  default=""><!-- concut="true">
 				<concut col="TAG_NAME_AnPar"/>
 				<concut col="typeSuff"/>
-				<concut col="dirSuff"/>
-			</O>
-        </EXEL>
+				<concut col="dirSuff"/-->
+			</I>
+             <J nameColumnPos="Наименование"  default=""/><!-- concut="true"/-->
+       </EXEL>
 	</ANB>
 	<AO excelSheetName="AO" Comment="Аналоговые выходы">
 		<GenData>

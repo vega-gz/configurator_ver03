@@ -4,10 +4,12 @@ import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;
 import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -25,7 +27,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
@@ -99,16 +103,24 @@ public class TableTools {//ссылка на таблицу, массив шир
         JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
         JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
+        JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
         JMenuItem menuItemFillCells = new JMenuItem("Заполнить ячейки");
         JMenuItem menuItemCopyCells = new JMenuItem("Скопировать ячейки");
         JMenuItem menuItemIncertCells = new JMenuItem("Вставить ячейки");
         JMenuItem menuItemOpenWindow = null;
+
+        menuItemCopyCells.setRequestFocusEnabled(false);
+        //  menuItemCopyCells.setIcon(UIManager.getIcon()); //   устанавливает необходимую иконку
+        menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
+        menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
+
         if (rgf != null) {
             menuItemOpenWindow = new JMenuItem("Открыть в отдельном окне");
         }
 
         popupMenu.add(menuItemCopyStr);
         popupMenu.add(menuItemIncertStr);
+        popupMenu.add(menuItemRemove);
         popupMenu.add(menuItemClearCells);
         popupMenu.add(menuItemFillCells);
         popupMenu.add(menuItemCopyCells);
@@ -137,7 +149,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             rows = jTable1.getSelectedRows();
             cols = jTable1.getSelectedColumns();
 
-            String value_cells = null;
+            String value_cells;
             if (rows.length == 0 || cols.length == 0) {
                 JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
@@ -150,30 +162,43 @@ public class TableTools {//ссылка на таблицу, массив шир
             }
         });
         menuItemIncertCells.addActionListener((ActionEvent event) -> {
-            int[] row = jTable1.getSelectedRows();
-            int[] col = jTable1.getSelectedColumns();
-            if (rows.length == 0 || cols.length == 0) {
-                JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
-                return;
-            }
+            int cnt = 1, cnt2 = 1;
+            double incr=1;
+            String value;
+            ArrayList<String> v = new ArrayList<>();
+            int startRow = (jTable1.getSelectedRows())[0];
+            int startCol = (jTable1.getSelectedColumns())[0];
+            String[] str = list_cells.toArray(new String[0]);
 
-            for (int i = 0; i < col.length; i++) {
-                for (int j = 0; j < row.length; j++) {
-                    if (j > rows.length) {
-                        break;
+            for (int i = 0; i < str.length; i++) {
+                if (cnt % cols.length == 0) {//находит количетво выбранных столбцов и делит их на три велью 
+                    for (int j = cols.length - 1; j < cols.length && j >= 0; j--) {
+                        v.add(str[i - j]);
                     }
-                    jTable1.setValueAt(list_cells.get(i), row[j], col[i]);
+                    if (cnt >= 6) {
+                        cnt2 = cnt2 + 2;
+                    } else {
+                        cnt2++;
+                    }
+                }
+                cnt++;
+                for (int j = 0; j < v.size(); j++) {
+                    value = v.get(j);
+                    if (startRow + i < jTable1.getRowCount()
+                            && startCol + j < jTable1.getColumnCount()) {
+                        jTable1.setValueAt(value, startRow + (i - cnt2), startCol + (j));
 
+                    }
                 }
-                if (i > cols.length) {
-                    break;
-                }
+
+                v.clear();
             }
+
             list_cells.clear();
         });
         menuItemCopyStr.addActionListener((ActionEvent event) -> {
-            int rows[] = jTable1.getSelectedRows();
-            int cols[] = jTable1.getSelectedColumns();
+            rows = jTable1.getSelectedRows();
+            cols = jTable1.getSelectedColumns();
             if (rows.length == 0 || cols.length == 0) {
                 JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
                 return;
@@ -197,6 +222,21 @@ public class TableTools {//ссылка на таблицу, массив шир
                 tableModel.insertRow(row + 1, list_str.get(i));
                 setId(jTable1);
             }
+        });
+        menuItemRemove.addActionListener((ActionEvent event) -> {
+            int row = jTable1.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(null, "Ни одна строка не помечена");
+                return;
+            }
+            Object[] options = {"Да", "Нет"};
+            int casedial = JOptionPane.showOptionDialog(null, "Удалить строку " + (row + 1) + "?", "Выберите действие",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
+            if (casedial != 0) {
+                return; //0 - yes, 1 - no, 2 - cancel            
+            }
+            tableModel.removeRow(row);
+            setId(jTable1);
         });
         menuItemClearCells.addActionListener((ActionEvent event) -> {
             int rows[] = jTable1.getSelectedRows();
@@ -400,7 +440,7 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
             public void windowClosed(WindowEvent event) {
             }
 
-            public void windowClosing(WindowEvent event) {//выполнение операций сохранения данных из фрейма
+            public void windowClosing(WindowEvent event) {//операции при закрытии окна
                 int n = 1;
                 if (ich.is()) {
                     Object[] options = {"Сохранить", "Не сохранять", "Не закрывать"};
@@ -735,5 +775,45 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
             sse.setFields(row);
         }
     }
-
+    
+    public static boolean isTableDiffDB(ArrayList<String[]> t1, String dbTableName){
+        return isArrayListsDiff(t1, globVar.DB.getData(dbTableName));
+    }
+    
+    public static boolean isArrayListsDiff(ArrayList<String[]> t1, ArrayList<String[]> t2){
+        if(t1==null && t2==null) return false;
+        if(t1==null || t2==null) return true;
+        int sizeY = t1.size();
+        if(sizeY != t2.size()) return true;
+        if(sizeY==0) return false;
+        for(int i=0; i < sizeY; i++){
+            int sizeX = t1.get(i).length;
+            if(sizeX != t2.get(i).length) return true;
+            for(int j=0; j < sizeX; j++){
+                //System.out.println("t1="+t1.get(i)[j]+", t2="+t2.get(i)[j]);
+                if(!t1.get(i)[j].equals(t2.get(i)[j])) return true;
+            }
+        }
+        //System.out.println("return false");
+        return false;
+    }
+    
+//    public static void resetID(ArrayList<String[]> t1){
+//        if(t1==null) return;
+//        for(int i=0; i < t1.size(); i++) t1.get(i)[0] = "" + (i+1);
+//    }
+    
+    public static void sotrList(ArrayList<String[]> t1, int k){//ArrayList<String[]>
+        if(t1==null || t1.size() < 2) return;
+        for(int i=1; i < t1.size(); i++){
+            for(int j=0; j < i; j++){
+                if(t1.get(i)[k].compareTo(t1.get(j)[k])<0){
+                    t1.add(j, t1.get(i));
+                    t1.remove(i+1);
+                    break;
+                }
+            }
+        }
+        for(int i=0; i < t1.size(); i++) t1.get(i)[0] = "" + (i+1);
+    }
 }

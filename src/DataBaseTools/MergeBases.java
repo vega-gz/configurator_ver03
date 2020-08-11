@@ -7,6 +7,7 @@ package DataBaseTools;
 
 import FrameCreate.MergeBasesFrame;
 import globalData.globVar;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,47 +46,59 @@ public class MergeBases {
     }
 
     // --- занесенение новых данных в вновь подключенной базе---
-    public void insertDatAnotherDB() {
-        for(DiffDataTable diffOBJ: listTableDiff){
-           // System.out.println("diff Table " + diffOBJ.getName());
+    public void insertDatAnotherDB(ArrayList<DiffDataTable> listTableDiff) {
+        this.listTableDiff = listTableDiff;
+        for (DiffDataTable diffOBJ : listTableDiff) {
+            // System.out.println("diff Table " + diffOBJ.getName());
             ArrayList<String> listColumnCurr = diffOBJ.columns; // колонки  объекта
             ArrayList<String[]> dataFromTableC = diffOBJ.getData(); // данные объекта
-            
-            // удаляем номера из данных
-            for(int i=0; i<dataFromTableC.size(); ++i){
-                String[] dataMass = dataFromTableC.get(i);
-                dataFromTableC.set(i, Arrays.copyOfRange(dataMass, 1, dataMass.length));
+            String nameT = diffOBJ.name; // имя таблицы из Объекта
+
+//            // удаляем номера из данных
+//            for(int i=0; i<dataFromTableC.size(); ++i){
+//                String[] dataMass = dataFromTableC.get(i);
+//                dataFromTableC.set(i, Arrays.copyOfRange(dataMass, 1, dataMass.length));
+//            }
+//            
+            boolean nFine = true;
+            // пробежаться по списку таблиц которых нет что бы не выполнять удаление
+            for(String s: tableNotEnter){ 
+                if(s.equals(nameT)){
+                    nFine = false;
+                    break;
+                }
             }
-            
-            aDB.dropTableWithBackUp(diffOBJ.name); // удаляем таблицу с именем обхекта
-            aDB.createTableEasy(diffOBJ.name, listColumnCurr.toArray(new String[listColumnCurr.size()]), "");
-            for(String[] dataT: dataFromTableC){
+            if (nFine) aDB.dropTableWithBackUp(diffOBJ.name); // удаляем таблицу с именем объекта если ее не было в списке того чего нет
+            aDB.createTableEasy(diffOBJ.name, listColumnCurr.toArray(new String[listColumnCurr.size()]), ""); // создаем
+            aDB.createCommentTable(diffOBJ.name, diffOBJ.getComment()); // Установить комментарий
+            for (String[] dataT : dataFromTableC) {
                 aDB.insertRow(diffOBJ.name, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]), 0);
             }
         }
-        for(String nameT: tableNotEnter){
-            //System.out.println("name not exist Table " + nameT);
-            
-            ArrayList<String> listColumnCurr = currentDB.getListColumns(nameT); // колонки  текущей таблицы
-            ArrayList<String[]> dataFromTableC = currentDB.getData(nameT); // данные таблицы текущей
-             // удаляем номера из данных
-            for(int i=0; i<dataFromTableC.size(); ++i){
-                String[] dataMass = dataFromTableC.get(i);
-                dataFromTableC.set(i, Arrays.copyOfRange(dataMass, 1, dataMass.length));
-            }
-            aDB.createTableEasy(nameT, listColumnCurr.toArray(new String[listColumnCurr.size()]), "");
-            for(String[] dataT: dataFromTableC){
-                aDB.insertRow(nameT, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]),0);
-            }
-        }
+        /*
+         for (String nameT : tableNotEnter) {
+         //System.out.println("name not exist Table " + nameT);
+
+         ArrayList<String> listColumnCurr = currentDB.getListColumns(nameT); // колонки  текущей таблицы
+         ArrayList<String[]> dataFromTableC = currentDB.getData(nameT); // данные таблицы текущей
+         // удаляем номера из данных
+         for (int i = 0; i < dataFromTableC.size(); ++i) {
+         String[] dataMass = dataFromTableC.get(i);
+         dataFromTableC.set(i, Arrays.copyOfRange(dataMass, 1, dataMass.length));
+         }
+         aDB.createTableEasy(nameT, listColumnCurr.toArray(new String[listColumnCurr.size()]), "");
+         for (String[] dataT : dataFromTableC) {
+         aDB.insertRow(nameT, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]), 0);
+         }
+         }
+         */
         JOptionPane.showMessageDialog(null, "Данные скорей всего загружены,\nно загляните в консоль"); // Сообщение
-        
+
     }
 
     public void editBases() {
         // Запросы к базам
         if (connectAnotherDB() == 0) { // запуск если статус подключения есть
-            
             ArrayList<String> tableCurrentDB = currentDB.getListTable();
             ArrayList<String> tableADB = aDB.getListTable();
             Collections.sort(tableCurrentDB); // сортируем листы
@@ -107,111 +120,153 @@ public class MergeBases {
                         tableNotEnter.add(currentT);
                     }
                 }
-            } // это должен быть код когда список таблиц одинаков у 1 и второй базы
+            } //  ( это должен быть код когда список таблиц одинаков у 1 и второй базы ) 
             else {
                 System.out.println("Table fit");
             }
             // переборка таблиц(распознаем различия)
             for (String currentT : tableCurrentDB) {
+                boolean onceT = false;
+                //System.out.println("Tables fit " + aT);
+                ArrayList<String[]> columnNotFit = new ArrayList<>(); // лист не совподающих данных строке в таблице
+                ArrayList<String> listColumnCurr = currentDB.getListColumns(currentT); // колонкам  текущей таблицы
+//              Collections.sort(listColumnCurr);
+//              Collections.sort(listColumnADB);
+                ArrayList<String[]> dataFromTableC = currentDB.getData(currentT); // данные таблицы текущей
+                String commet = currentDB.getCommentTable(currentT); // берем комментарий таблицы текущей
+                Timestamp TStampCurrent = currentDB.getTimeFirstCommit(currentT); // получить первое время редактирования текущей таблицы
+
+                // Создаем объект (клон того что переносим)
+                DiffDataTable diffT = new DiffDataTable(currentT, columnNotFit, listColumnCurr);
+                diffT.setData(dataFromTableC);
+                diffT.setComment(commet);
+                diffT.setTimestamp(TStampCurrent);
+                listTableDiff.add(diffT);
+
+                // проходим по списку таблиц которых нет в подключаемой базе
+                for (String n : tableNotEnter) {
+                    if (currentT.equals(n)) {
+                        onceT = true;
+                        break;
+                    }
+                }
+                if (onceT) { // нашли имя в списке то нечего не проверяем
+                    diffT.setCommPers("Такой таблицы нет в подключаемой базе");
+                    continue;
+                }
+
                 for (String aT : tableADB) {
                     if (currentT.equals(aT)) { // Названия таблиц совпали
-                        //System.out.println("Tables fit " + aT);
-                        ArrayList<String[]> columnNotFit = new ArrayList<>(); // лист не совподающих данных строке в таблице
-                        ArrayList<String> listColumnCurr = currentDB.getListColumns(aT); // колонкам  текущей таблицы
-                        ArrayList<String> listColumnADB = aDB.getListColumns(aT); // колонкам  таблицы вновь подключенному
-//                            Collections.sort(listColumnCurr);
-//                            Collections.sort(listColumnADB);
-                        ArrayList<String[]> dataFromTableC = currentDB.getData(aT); // данные таблицы текущей
-                        ArrayList<String[]> dataFromTableA = aDB.getData(aT); // 
+                        ArrayList<String> listColumnADB = aDB.getListColumns(currentT); // колонкам  таблицы вновь подключенному
+                        ArrayList<String[]> dataFromTableA = aDB.getData(currentT); // данные таблицы к вновь подключенной
+                        Timestamp TStampA = currentDB.getTimeFirstCommit(currentT); // получить первое время редактирования вновь подключенной таблицы
+                        diffT.setСompareName(true); // имена совпали установим триггер
 
-                        if (listColumnCurr.equals(listColumnADB)) { // если колонки совпали сравниваем данные в таблице
-                            for (String[] columnCurr : dataFromTableC) {
-                                boolean dataFit = false;
-                                for (String[] columnADB : dataFromTableA) {// проходим по колонкам таблицы вновь подключенному
-                                    if (columnCurr.length == columnADB.length) {
-                                        for (int i = 1; i < columnCurr.length; ++i) { // с певой так как первый это id
-                                            if (columnCurr[i].equals(columnADB[i])) { // сравниваем данные
-                                                //System.out.print( " fit " + columnCurr[i] + " " +columnADB[i]);
-                                                dataFit = true;  // 
-                                            } else {
-                                                //System.out.println( " Diff " + columnCurr[i] + " " +columnADB[i]);
-                                                dataFit = false;
+                        // формирование информации о времени
+                        String infoTime = "";
+                        if (TStampCurrent == null & TStampA == null) {
+                            if (TStampCurrent == null) { // сравниваем время создания
+                                infoTime += "время таблицы не определить";
+                            }
+                            if (TStampA == null) {
+                                infoTime += ",время удаленной таблицы не определить. \n";
+                            }
+                        } else {
+                            if (TStampCurrent.getTime() >= TStampA.getTime()) { // сравниваем время создания
+                                infoTime += "время редактирования " + TStampCurrent.toString() + " текущей таблицы более позднее или одинаково \n";
+                            }
+                        }
+                            if (listColumnCurr.equals(listColumnADB)) { // если колонки совпали сравниваем данные в таблице
+                                for (String[] columnCurr : dataFromTableC) {
+                                    boolean dataFit = false;
+                                    for (String[] columnADB : dataFromTableA) {// проходим по колонкам таблицы вновь подключенному
+                                        if (columnCurr.length == columnADB.length) {
+                                            for (int i = 1; i < columnCurr.length; ++i) { // с певой так как первый это id
+                                                if (columnCurr[i].equals(columnADB[i])) { // сравниваем данные
+                                                    //System.out.print( " fit " + columnCurr[i] + " " +columnADB[i]);
+                                                    dataFit = true;  // 
+                                                } else {
+                                                    //System.out.println( " Diff " + columnCurr[i] + " " +columnADB[i]);
+                                                    dataFit = false;
+                                                    break;
+                                                }
+                                            }
+                                            // если строки совпадают дальше смысла читать нет и триггер собъется
+                                            if (dataFit == true) {
                                                 break;
                                             }
                                         }
-                                        // если строки совпадают дальше смысла читать нет и триггер собъется
-                                        if (dataFit == true) {
-                                            break;
-                                        }
                                     }
-                                }
-                                if (dataFit == false) {
-                                    columnNotFit.add(columnCurr); // заносим данные из талицы не совпадающие с новой базой
-                                }
+                                    if (dataFit == false) {
+                                        columnNotFit.add(columnCurr); // заносим данные из талицы не совпадающие с новой базой
+                                    }
 
-                            }
-                                //System.out.println("Table " + aT + "size Diff list " + columnNotFit.size());
-                            // Занисом наши новые объекты в список если есть различия
-                            if (columnNotFit.size() > 0) {
-                                DiffDataTable diffT = new DiffDataTable(aT, columnNotFit, listColumnCurr);
-                                diffT.setComment("Данные не совпадают");
-                                diffT.setData(dataFromTableC);
-                                listTableDiff.add(diffT);
-                            }
-                        } else { // столбцы в одинаковых таблицах разные
-                            DiffDataTable diffT = new DiffDataTable(aT, columnNotFit, listColumnCurr);
-                            diffT.setComment("Различаются столбцы");
-                            diffT.setData(dataFromTableC);
-                            listTableDiff.add(diffT);
+                                }
                             //System.out.println("Table " + aT + "size Diff list " + columnNotFit.size());
+
+                                // Заносим наши новые объекты в список если есть различия
+                                if (columnNotFit.size() > 0) {
+                                //DiffDataTable diffT = new DiffDataTable(aT, columnNotFit, listColumnCurr);
+                                    //diffT.setData(dataFromTableC);
+                                    //listTableDiff.add(diffT);
+                                    diffT.setCommPers("Данные не совпадают\n" + infoTime);
+                                }
+                            } else { // столбцы в одинаковых таблицах разные
+                                //DiffDataTable diffT = new DiffDataTable(aT, columnNotFit, listColumnCurr);
+                                //diffT.setData(dataFromTableC);
+                                diffT.setCommPers("Различаются столбцы, полностью иная структура.\n" + infoTime);
+                            //listTableDiff.add(diffT);
+                                //System.out.println("Table " + aT + "size Diff list " + columnNotFit.size());
+                            }
+                        }
+
+                    }
+                }
+                // вывод сообщения
+                if (tableNotEnter.size() > 0) {
+                    String diffT = "";
+                    int sizeNT = tableNotEnter.size();
+                    diffT = "Количество таблиц " + sizeNT + " которых нет в базе " + currentBase + "\n";
+                    for (int i = 0; i < sizeNT; ++i) {
+                        String s = tableNotEnter.get(i);
+                        diffT += s + "\n";
+                        if (i > 10) {
+                            diffT += "....";
+                            break;
                         }
                     }
-
+                    JOptionPane.showMessageDialog(null, diffT); // Сообщение
                 }
-            }
-            // вывод сообщения
-            if (tableNotEnter.size() > 0) {
                 String diffT = "";
-                int sizeNT = tableNotEnter.size();
-                diffT = "Количество таблиц "+ sizeNT+" которых нет в базе " + currentBase + "\n";
-                for (int i=0; i<sizeNT; ++i) {
-                    String s = tableNotEnter.get(i);
-                    diffT += s + "\n";
-                    if (i>10){
+                diffT = "Имена таблиц которые совпали но есть различия " + currentBase + "\n";
+                for (int i = 0; i < listTableDiff.size(); ++i) {
+                    DiffDataTable difData = listTableDiff.get(i);
+                    String nameDT = difData.getName();
+                    diffT += nameDT + "\n";
+                    if (i > 10) {
                         diffT += "....";
                         break;
                     }
                 }
                 JOptionPane.showMessageDialog(null, diffT); // Сообщение
-            }
-            String diffT = "";
-            diffT = "Имена таблиц которые совпали но есть различия " + currentBase + "\n";
-            for (int i=0;i<listTableDiff.size();++i) {
-                DiffDataTable difData = listTableDiff.get(i);
-                String nameDT = difData.getName();
-                diffT += nameDT + "\n";
-                if (i>10){
-                    diffT += "....";
-                    break;
-                }
-            }
-            JOptionPane.showMessageDialog(null, diffT); // Сообщение
 
-            MergeBasesFrame frameMergeDB = new MergeBasesFrame(this);
+                MergeBasesFrame frameMergeDB = new MergeBasesFrame(this);
 //                frameMergeDB.setDataToFrame(listTableDiff);
-            frameMergeDB.show(true);
+                frameMergeDB.show(true);
 
+            }
         }
-    }
-
-    // --- Объект хранения различающихся данных таблиц --- (может быть еще какие то хранения данных)
+        // --- Объект хранения различающихся данных таблиц --- (может быть еще какие то хранения данных)
     public class DiffDataTable {
 
         private String name;
         private ArrayList<String> columns; // колонки таблицы
         private ArrayList<String[]> diffData; // лист того что не совпало
         private ArrayList<String[]> data; // полный лист копии из базы
-        public String comment; // коммментарий (если отличаются на пример количество столбцов)
+        public String comment; // коммментарий таблицы
+        public String commentPersonal; // коммментарий (если отличаются на пример количество столбцов)
+        private boolean compareName = false; // совпадают ли имена таблицы 
+        Timestamp firstTimeEdit = null; // время первого изменения в таблице
 
         public DiffDataTable(String name) {
             this.name = name;
@@ -233,6 +288,11 @@ public class MergeBases {
         }
 
         public void setData(ArrayList<String[]> data) {
+            // преобразовываем данные убирая id 
+            for (int i = 0; i < data.size(); ++i) {
+                String[] dataMass = data.get(i);
+                data.set(i, Arrays.copyOfRange(dataMass, 1, dataMass.length));
+            }
             this.data = data;
         }
 
@@ -244,17 +304,47 @@ public class MergeBases {
             return name;
         }
 
+        // получаем чистые данные без id
         public ArrayList<String[]> getData() {
             return data;
         }
-        
+
         public ArrayList<String[]> diffData() {
             return diffData;
         }
 
-        private void setComment(String s) {
-            comment = s;
+        public void setCommPers(String s) {
+            commentPersonal = s;
         }
 
+        // --- комментарий таблицы ---
+        public void setComment(String comment) {
+            this.comment = comment;
+        }
+
+        // --- получить комментарий таблицы ---
+        public String getComment() {
+            return comment;
+        }
+
+        // --- внести информацию, совпадения имени таблицы ---
+        public void setСompareName(boolean compareName) {
+            this.compareName = compareName;
+        }
+
+        // --- получить информации, совпадения таблицы ---
+        public boolean getCompareName() {
+            return compareName;
+        }
+
+        // --- установить время создания таблицы ---
+        public void setTimestamp(Timestamp firstTimeEdit) {
+            this.firstTimeEdit = firstTimeEdit;
+        }
+
+        // --- получить время создания таблицы  ---
+        public Timestamp getTimestamp() {
+            return firstTimeEdit;
+        }
     }
 }
