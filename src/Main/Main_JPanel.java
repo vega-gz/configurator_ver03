@@ -659,9 +659,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private void jMenuItem_AnotherBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseActionPerformed
         jDialog1.setSize(400, 200);
         jDialog1.setLocationRelativeTo(null); // по центру экрана
-        jTextField2.setText("minoro.ru:5432");
-        jTextField5.setText("kln_gpa");
+        jTextField2.setText("172.16.35.50:5432");
+        jTextField5.setText("kln_kc");
         jTextField3.setText("mutonar");
+        jTextField4.setText("Solovin2");
         jDialog1.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem_AnotherBaseActionPerformed

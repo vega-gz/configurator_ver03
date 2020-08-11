@@ -824,12 +824,12 @@ public class DataBase implements Observed {
                 boolean notComm = true;
                 rs = stmt.executeQuery("SELECT pg_xact_commit_timestamp(xmin), * FROM  \"" + table +"\";");
                 while (rs.next()) {
-                    resultT = new Timestamp(System.currentTimeMillis()); // определяем текущее время системы
+                    //resultT = new Timestamp(System.currentTimeMillis()); // определяем текущее время системы
                     String tmpStr = null;
                     Timestamp timeStamp = rs.getTimestamp("pg_xact_commit_timestamp");
                     if (timeStamp != null){
-                        // System.out.println(timeStamp); систе
-                        if(timeStamp.getTime() < resultT.getTime() ){ // ищем наименьшее время
+                        //System.out.println(timeStamp); 
+                        if(resultT == null || timeStamp.getTime() < resultT.getTime()){ // ищем наименьшее время
                             resultT = timeStamp;
                             notComm = false;
                         }
@@ -900,5 +900,5 @@ public class DataBase implements Observed {
        //listNameColum.add("Name");
        //db.insertRows("t_gpa_di_settings", rows, listNameColum);
     
- //   }
+ //  }
 }
