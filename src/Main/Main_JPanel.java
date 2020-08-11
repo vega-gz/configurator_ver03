@@ -738,7 +738,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
         JFrame addOPC = new addOPCserver();
         addOPC.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addOPC.setTitle("Редактирование архивов");
+        addOPC.setTitle("Конфигурирование ОРС серверов");
         addOPC.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
