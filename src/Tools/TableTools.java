@@ -440,7 +440,7 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
             public void windowClosed(WindowEvent event) {
             }
 
-            public void windowClosing(WindowEvent event) {//выполнение операций сохранения данных из фрейма
+            public void windowClosing(WindowEvent event) {//операции при закрытии окна
                 int n = 1;
                 if (ich.is()) {
                     Object[] options = {"Сохранить", "Не сохранять", "Не закрывать"};
@@ -775,5 +775,45 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
             sse.setFields(row);
         }
     }
-
+    
+    public static boolean isTableDiffDB(ArrayList<String[]> t1, String dbTableName){
+        return isArrayListsDiff(t1, globVar.DB.getData(dbTableName));
+    }
+    
+    public static boolean isArrayListsDiff(ArrayList<String[]> t1, ArrayList<String[]> t2){
+        if(t1==null && t2==null) return false;
+        if(t1==null || t2==null) return true;
+        int sizeY = t1.size();
+        if(sizeY != t2.size()) return true;
+        if(sizeY==0) return false;
+        for(int i=0; i < sizeY; i++){
+            int sizeX = t1.get(i).length;
+            if(sizeX != t2.get(i).length) return true;
+            for(int j=0; j < sizeX; j++){
+                //System.out.println("t1="+t1.get(i)[j]+", t2="+t2.get(i)[j]);
+                if(!t1.get(i)[j].equals(t2.get(i)[j])) return true;
+            }
+        }
+        //System.out.println("return false");
+        return false;
+    }
+    
+//    public static void resetID(ArrayList<String[]> t1){
+//        if(t1==null) return;
+//        for(int i=0; i < t1.size(); i++) t1.get(i)[0] = "" + (i+1);
+//    }
+    
+    public static void sotrList(ArrayList<String[]> t1, int k){//ArrayList<String[]>
+        if(t1==null || t1.size() < 2) return;
+        for(int i=1; i < t1.size(); i++){
+            for(int j=0; j < i; j++){
+                if(t1.get(i)[k].compareTo(t1.get(j)[k])<0){
+                    t1.add(j, t1.get(i));
+                    t1.remove(i+1);
+                    break;
+                }
+            }
+        }
+        for(int i=0; i < t1.size(); i++) t1.get(i)[0] = "" + (i+1);
+    }
 }

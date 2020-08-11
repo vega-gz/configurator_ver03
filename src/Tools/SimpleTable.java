@@ -1,12 +1,9 @@
 package Tools;
 
-import FrameCreate.TableNzVer3;
 import globalData.globVar;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public final class SimpleTable {
@@ -14,7 +11,7 @@ public final class SimpleTable {
     public JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
     public String tableName;
-    public int tableSize;
+    public int tableSize = -1;
     public String[] cols;
     public String comment;
     public ArrayList<String[]> fromDB;
@@ -24,13 +21,14 @@ public final class SimpleTable {
     int[] align;
     int qCol;
     int trgColNum = -1;
-    ArrayList<JFrame> listJF = new ArrayList();
+    //ArrayList<JFrame> listJF = new ArrayList();
     String trgCol;
-    
+    String oldVal=null;
+    ArrayList<String> listColumn;
     
     public SimpleTable(String table, String col,String val, String trgCol) {
         if(!globVar.DB.isConnectOK())return;
-        ArrayList<String> listColumn = globVar.DB.getListColumns(table);
+        listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
         tableName = table;
         this.trgCol = trgCol;
@@ -59,12 +57,33 @@ public final class SimpleTable {
     }
 
     public void setSimpleTableSettings(JTable jTable1) {
+        if(tableSize<0) return;
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, null, null, null);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20);
         TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
     }
     
-    public void resetTableContent(String val){//String col,
+    public void resetTableContent(String val){
+        if(tableSize<0) return;
+        if(oldVal!=null && trgColNum>=0){
+            for(int i = fromDB.size()-1; i >=0; i--)
+                 if(fromDB.get(i)[trgColNum].equals(oldVal)) fromDB.remove(i);
+            
+            for(int i = tableModel.getRowCount()-1; i >=0; i--){
+                String[] tmp = new String[tableModel.getColumnCount()+1];
+                int cnt=0;
+                for(int j = 0; j < tmp.length; j++){
+                    if(j!=trgColNum) tmp[j] = tableModel.getValueAt(i, cnt++);
+                }
+                tmp[trgColNum] = oldVal;
+                
+                fromDB.add(tmp);
+            }
+            TableTools.sotrList(fromDB,trgColNum);
+        }
+        
+        oldVal = val;
+        
         tableModel.clear();
         if(trgColNum<0){
             fromDB.forEach((rowData) -> tableModel.addRow(rowData));
@@ -81,28 +100,18 @@ public final class SimpleTable {
         //isNew(fromDB, tableModel);
     }
 
-    private boolean isNew(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
-        if (fromDB == null || tableModel == null) {
-            return false;
-        }
-        int fY = fromDB.size();
-        if (fY <= 0) {
-            return false;
-        }
-        int x = tableModel.getColumnCount();
-        int y = tableModel.getRowCount();
-        for (int i = 0; i < y; i++) {
-            boolean is = false;
-            for (int k = 0; k < fY; k++) {
-                boolean lokal;
-                for (int j = 0; j < x; j++) {
-                    if (!fromDB.get(k)[j].equals(tableModel.getValueAt(i, j))) {
-                        is = true;
-                    }
-                }
-            }
-        }
-        return false;
+    public boolean isNew(){
+        if(tableSize<0) return false;
+        return TableTools.isTableDiffDB(fromDB, tableName);
+    }
+    
+    public boolean isCreate(){
+        return tableSize>0;
+    }
+    
+    public void saveTableInDB(){
+        if(tableSize<0) return;
+        globVar.DB.createTable(tableName, listColumn, fromDB, comment);
     }
 
 }
