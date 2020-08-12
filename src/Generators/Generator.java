@@ -85,6 +85,7 @@ public class Generator {
         String abType = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Abonent_type"); 
         //-------------- Определение параметров драйвера модбаса ---------------------
         String tabComm = globVar.DB.getCommentTable(abonent+subAb+"_"+nodeTable);
+        if(tabComm==null) tabComm ="";
         String modbusFile = "";
         String modbusAddr = "";
         String group = "";

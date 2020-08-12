@@ -167,7 +167,7 @@ public class DataBase implements Observed {
         if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
         String sql = "";
         try {
-            //connection.setAutoCommit(true);
+            connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE TABLE \"" + name_table + "\" (id INTEGER";
             int start = 0;
@@ -279,9 +279,9 @@ public class DataBase implements Observed {
 // --- Вставка данных (название таблицы, список столбцов, данные, index) -Lev--
     public void insertRow(String name_table, String[] row, String[] listNameColum, int index) {
         if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length) return;
-        //connection.setAutoCommit(true);
         String sql;
         try {
+            connection.setAutoCommit(true);
             name_table = replacedNt(name_table);
             sql = "INSERT INTO \"" + name_table + "\" (id"; // при первом проходе иначе будет отличаться данные и столбцы
             
@@ -538,7 +538,7 @@ public class DataBase implements Observed {
         //connectionToBase(); // вызов Фукция подключения к базе
         Iterator<String> iter_list_table = listT.iterator();
         try {
-            connection.setAutoCommit(false);
+            //connection.setAutoCommit(false);
             String sql;
             stmt = connection.createStatement();
             while (iter_list_table.hasNext()) {
@@ -548,7 +548,6 @@ public class DataBase implements Observed {
             stmt.close();
             connection.commit();
             System.out.println("-- Table DROPE successfully");
-
         } catch (SQLException e) {
             System.out.println("Failed DROPE TABLE");
             e.printStackTrace();
