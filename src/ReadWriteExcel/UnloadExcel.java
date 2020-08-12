@@ -26,10 +26,10 @@ public final class UnloadExcel {
     public UnloadExcel(String abonent_name) throws ParseException {
         HSSFWorkbook workbook = new HSSFWorkbook();
 
-        ArrayList<String> tableList = globVar.DB.getListTable();//список таблиц в базе данных
+        ArrayList<String> tableList = globVar.DB.getListTable();
         for (int i = 0; i < tableList.size(); i++) {
             String name_list = tableList.get(i);
-            if (name_list.indexOf(abonent_name+"_")==0) {
+            if (name_list.contains(abonent_name)) {
                 createExcelSheet(name_list, workbook);
             }
         }

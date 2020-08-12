@@ -11,7 +11,7 @@ public class SimpleFrame extends javax.swing.JPanel {
     SimpleTable tt = new SimpleTable(null, null, null, null);
 
     public SimpleFrame(String selectT, ArrayList<String> colums) {
-        
+        //
         tt.tableName = selectT;
         tt.fromDB = globVar.DB.getData(selectT, colums);
         for (String[] mass : tt.fromDB) {
@@ -21,7 +21,7 @@ public class SimpleFrame extends javax.swing.JPanel {
             }
             tt.listToTable.add(tmpList);
         }
-        //tt.tableFrameModel=new TableNzVer3(tt.tableName,colums,tt.listToTable,true);
+       // tt.tableFrameModel=new TableNzVer3(tt.tableName,colums,tt.listToTable,true);
         initComponents();
     }
     public int tableSize(){
