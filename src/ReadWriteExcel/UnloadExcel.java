@@ -29,7 +29,7 @@ public final class UnloadExcel {
         ArrayList<String> tableList = globVar.DB.getListTable();
         for (int i = 0; i < tableList.size(); i++) {
             String name_list = tableList.get(i);
-            if (name_list.contains(abonent_name)) {
+            if (name_list.indexOf(abonent_name+"_")==0) {
                 createExcelSheet(name_list, workbook);
             }
         }
