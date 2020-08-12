@@ -1,8 +1,10 @@
 package FrameCreate;
 
 import Tools.MyTableModel;
+import Tools.SaveFrameData;
 import Tools.SimpleTable;
 import Tools.TableTools;
+import Tools.isCange;
 import globalData.globVar;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
@@ -41,12 +43,13 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     JButton shiftR;
     JButton start;
     JButton end;
+    JButton save;
     int labLen = 0;
     int fieldLen = 0;
     SimpleTable st;
     int H_SIZE = 20;
     int H_GAP = 2;
-    String relatedTable;
+    String relatedTable=null;
     
     public SinglStrEdit(MyTableModel tableModel, String title, ArrayList<JFrame> listJF) {
         Container container = this.getContentPane();
@@ -90,6 +93,10 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         end.setMargin(new java.awt.Insets(2, 2, 2, 2));
         end.addActionListener((java.awt.event.ActionEvent evt) -> { endActionPerformed(evt); });
         
+        save = new JButton("Сохранить");
+        save.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        save.addActionListener((java.awt.event.ActionEvent evt) -> { saveActionPerformed(evt); });
+        
         this.title = title;
         int x = title.indexOf("_");
         String abonent = title.substring(0,x);
@@ -113,7 +120,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
                     System.out.println("FocusListener " + evt.isTemporary());
                 }
             });
-            st.setSimpleTableSettings(jTable1);
+            if(st.isCreate()) st.setSimpleTableSettings(jTable1);
             gpw = 600;
         }
     
@@ -145,6 +152,16 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         setLayout();
         if(gpw<400) gpw=400;
         this.setSize(new Dimension(gpw+40,(qCols+2)*(H_SIZE + H_GAP) + 2*H_GAP));
+        //Лямбда для операций при закрытии окна архивов
+        SaveFrameData sfd = ()->{
+            st.saveTableInDB();
+        };
+        isCange ich = ()->{
+            return st.isNew();
+        };
+        TableTools.setTableListener(this, sfd, ich, null);//cjf);
+        
+        this.setTitle("Редактирование сигнала");//table + ": "+comment);
     }
 
     private void setLayout(){    
@@ -159,7 +176,9 @@ public class SinglStrEdit  extends javax.swing.JFrame{
                 .addComponent(start)
                 .addPreferredGap(RELATED)
                 .addComponent(end)
-                .addGap(0, 0, Short.MAX_VALUE);
+                .addPreferredGap(RELATED, DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(save);
+                //.addGap(0, 0, Short.MAX_VALUE);
         
         ParallelGroup pgLabels = layout.createParallelGroup();
         for(int i = 2; i < field.length; i++)
@@ -192,7 +211,8 @@ public class SinglStrEdit  extends javax.swing.JFrame{
                     .addComponent(number, PREFERRED_SIZE, H_SIZE, PREFERRED_SIZE)
                     .addComponent(shiftR)
                     .addComponent(start)
-                    .addComponent(end);
+                    .addComponent(end)
+                    .addComponent(save);
         
         SequentialGroup sgFields = layout.createSequentialGroup();
         for(int i = 2; i < field.length; i++) 
@@ -256,6 +276,9 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     private void endActionPerformed(java.awt.event.ActionEvent evt) {  
         curr = qRows-1;
         setFields(curr);
+    }                                       
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {  
+        st.saveTableInDB();
     }                                       
  
     public void updateRelatedTable(){

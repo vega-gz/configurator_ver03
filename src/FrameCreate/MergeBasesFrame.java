@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package FrameCreate;
 
 import DataBaseTools.MergeBases;
 import DataBaseTools.MergeBases.DiffDataTable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.DefaultListModel;
 
 /**
@@ -16,7 +17,13 @@ import javax.swing.DefaultListModel;
  * @author nazarov
  */
 public class MergeBasesFrame extends javax.swing.JFrame {
+
     MergeBases MB;
+    public ArrayList<DiffDataTable> listObjRight = new ArrayList<>(); // Храним объекты различия текущей таблицы 
+    DefaultListModel<String> listModel = new DefaultListModel<String>(); // модель первого списка
+    DefaultListModel<String> listModelTwo = new DefaultListModel<String>(); // модель первого списка
+    String[] checkFieldTable = null; // хранятся выделлые группой элементы списков
+
     /**
      * Creates new form MergeBasesFrame
      */
@@ -27,18 +34,39 @@ public class MergeBasesFrame extends javax.swing.JFrame {
     }
 
     private MergeBasesFrame() {
-        
+
     }
-    
+
     // занести данные в форму
-    public void setDataToFrame(){
-        DefaultListModel<String> listModel = new DefaultListModel<String>(); 
-        
-        for(DiffDataTable difData: MB.listTableDiff){
-                    String nameDT = difData.getName();
-                   listModel.addElement(nameDT);
+    public void setDataToFrame() {
+        listModelTwo.clear(); // Очищаем модели
+        listModel.clear();
+
+        // Сортируем коллекции
+        Collections.sort(MB.listTableDiff, new Comparator<DiffDataTable>() {
+            public int compare(DiffDataTable o1, DiffDataTable o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        Collections.sort(listObjRight, new Comparator<DiffDataTable>() {
+            public int compare(DiffDataTable o1, DiffDataTable o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        // заносим данные
+        for (DiffDataTable difData : MB.listTableDiff) {
+            String nameDT = difData.getName();
+            listModel.addElement(nameDT);
         }
         jList2.setModel(listModel);
+
+        for (DiffDataTable difData : listObjRight) {
+            String nameDT = difData.getName();
+            listModelTwo.addElement(nameDT);
+        }
+        jList1.setModel(listModelTwo);
     }
 
     /**
@@ -51,34 +79,16 @@ public class MergeBasesFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jList2);
-
-        jSplitPane1.setLeftComponent(jScrollPane2);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jSplitPane1.setRightComponent(jScrollPane1);
 
         jButton1.setText("добавить и заменить таблицы");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +97,51 @@ public class MergeBasesFrame extends javax.swing.JFrame {
             }
         });
 
+        jSplitPane1.setResizeWeight(.5d);
+
+        jList2.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList2.setToolTipText("");
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList2MouseClicked(evt);
+            }
+        });
+        jList2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList2KeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        jSplitPane1.setLeftComponent(jScrollPane2);
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList1KeyPressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jList1);
+
+        jSplitPane1.setRightComponent(jScrollPane3);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -94,10 +149,11 @@ public class MergeBasesFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 424, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -105,7 +161,10 @@ public class MergeBasesFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,27 +182,133 @@ public class MergeBasesFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MB.insertDatAnotherDB();
+        // передаем что сформировали в правом столбце обратно
+        MB.insertDatAnotherDB(listObjRight); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    // нажатие на список
+    // нажатие мыши на список  слева
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-        String s = "";
-        jTextArea1.removeAll();
-        int index = jList2.locationToIndex(evt.getPoint());
-        //s += (String) jList2.getSelectedValue(); // Достаем значение из списка
-        //s += "\n";
-        DiffDataTable difEl = MB.listTableDiff.get(index);
-        s += (String) difEl.getName() + "\n"; // Достаем имя
-        s += (String) difEl.comment + "\n\n"; // комментарий к объекту
-        for(String[] Data: difEl.diffData()){
-            for(String sD: Data){       
-            s += sD + " ";
-            }
-            s += "\n";
+        // так вабираем выделенное
+        checkFieldTable = new String[jList2.getSelectedIndices().length];
+        for (int i = 0; i < jList2.getSelectedIndices().length; ++i) {// Массив индексов
+            String datainList = (String) jList2.getModel().getElementAt(jList2.getSelectedIndices()[i]);
+            System.out.println(datainList);
+            checkFieldTable[i] = datainList;
         }
-        jTextArea1.setText(s += "\n");
+
+        if (checkFieldTable.length > 0) { // если не выделили несколько объектов сразу тогда показываем
+            String s = "";
+            jTextArea1.removeAll();
+            int index = jList2.locationToIndex(evt.getPoint());
+            //s += (String) jList2.getSelectedValue(); // Достаем значение из списка
+            //s += "\n";
+            DiffDataTable difEl = MB.listTableDiff.get(index);
+            s += (String) difEl.getName() + "\n"; // Достаем имя
+            s += (String) difEl.commentPersonal + "\n\n"; // комментарий к объекту
+            for (String[] Data : difEl.diffData()) {
+                for (String sD : Data) {
+                    s += sD + " ";
+                }
+                s += "\n";
+            }
+            jTextArea1.setText(s += "\n");
+
+            if (evt.getClickCount() == 2) { // при двойном нажатии
+                String nameTL = (String) jList2.getSelectedValue(); // Достаем значение из списка
+                for (int i = 0; i < MB.listTableDiff.size(); ++i) {
+                    DiffDataTable difData = MB.listTableDiff.get(i);
+                    if (nameTL.equals(difData.getName())) {
+                        listObjRight.add(difEl);
+                        MB.listTableDiff.remove(i);
+                    }
+
+                }
+                setDataToFrame(); // перерисовка столбцов
+
+            }
+        }
     }//GEN-LAST:event_jList2MouseClicked
+
+    // нажатие мыши на список  справа
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        // так вабираем выделенное
+        checkFieldTable = new String[jList1.getSelectedIndices().length];
+        for (int i = 0; i < jList1.getSelectedIndices().length; ++i) {// Массив индексов
+            String datainList = (String) jList1.getModel().getElementAt(jList1.getSelectedIndices()[i]);
+            //System.out.println(datainList);
+            checkFieldTable[i] = datainList;
+        }
+
+        if (checkFieldTable.length > 0) { // если не выделили несколько объектов сразу тогда показываем
+            String s = "";
+            jTextArea1.removeAll();
+            int index = jList1.locationToIndex(evt.getPoint());
+            //s += (String) jList2.getSelectedValue(); // Достаем значение из списка
+            //s += "\n";
+            DiffDataTable difEl = listObjRight.get(index);
+            s += (String) difEl.getName() + "\n"; // Достаем имя
+            s += (String) difEl.commentPersonal + "\n\n"; // комментарий к объекту
+            for (String[] Data : difEl.diffData()) {
+                for (String sD : Data) {
+                    s += sD + " ";
+                }
+                s += "\n";
+            }
+            jTextArea1.setText(s += "\n");
+
+            if (evt.getClickCount() == 2) { // при двойном нажатии
+                String nameTL = (String) jList1.getSelectedValue(); // Достаем значение из списка
+                for (int i = 0; i < listObjRight.size(); ++i) {
+                    DiffDataTable difData = listObjRight.get(i);
+                    if (nameTL.equals(difData.getName())) {
+                        MB.listTableDiff.add(difEl);
+                        listObjRight.remove(i);
+                    }
+
+                }
+                setDataToFrame(); // перерисовка столбцов
+
+            }
+        }
+    }//GEN-LAST:event_jList1MouseClicked
+
+    // обработка клавишь левого листа
+    private void jList2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList2KeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            for (int i = 0; i < checkFieldTable.length; ++i) {// Массив индексов
+                String elSelect = checkFieldTable[i];
+                // таким методом выдергиваем елементы
+                for (int j = 0; j < MB.listTableDiff.size(); ++j) {
+                    DiffDataTable difData = MB.listTableDiff.get(j);
+                    if (elSelect.equals(difData.getName())) {
+                        listObjRight.add(difData);
+                        MB.listTableDiff.remove(j);
+                    }
+
+                }
+            }
+            setDataToFrame(); // перерисовка столбцов
+        }
+    }//GEN-LAST:event_jList2KeyPressed
+
+    // обработка клавишь правого листа
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            for (int i = 0; i < checkFieldTable.length; ++i) {// Массив индексов
+                String elSelect = checkFieldTable[i];
+                // таким методом выдергиваем елементы
+                for (int j = 0; j < listObjRight.size(); ++j) {
+                    DiffDataTable difData = listObjRight.get(j);
+                    if (elSelect.equals(difData.getName())) {
+                        MB.listTableDiff.add(difData);
+                        listObjRight.remove(j);
+                    }
+
+                }
+            }
+            setDataToFrame(); // перерисовка столбцов
+        }
+    }//GEN-LAST:event_jList1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -182,10 +347,12 @@ public class MergeBasesFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
