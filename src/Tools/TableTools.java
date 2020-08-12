@@ -4,7 +4,6 @@ import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;
 import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;

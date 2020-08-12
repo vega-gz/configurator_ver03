@@ -278,7 +278,12 @@ public class DataBase implements Observed {
      
 // --- Вставка данных (название таблицы, список столбцов, данные, index) -Lev--
     public void insertRow(String name_table, String[] row, String[] listNameColum, int index) {
-        if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length) return;
+        if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length){
+            String strErr = "Количество данных и столбцов не совпадает " +  row.length + " | " + listNameColum.length;
+            System.out.println(strErr);
+            FileManager.loggerConstructor(strErr);
+            return;
+        }
         String sql;
         try {
             connection.setAutoCommit(true);
@@ -558,7 +563,7 @@ public class DataBase implements Observed {
     //-------------- Удаление таблицы c сохранением резервной копии ---------------
     public int dropTableWithBackUp(String nameT) {
         if(!globVar.DB.isTable(nameT)) return -1;
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH_mm_ss_dd_MM_yy");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yy_MM_dd_HH_mm_ss");
         String dt = formatForDateNow.format(new Date());
         //connectionToBase(); // вызов Фукция подключения к базе ALTER TABLE products RENAME TO items;
         try {
@@ -566,6 +571,7 @@ public class DataBase implements Observed {
             String sql = "ALTER TABLE \""+ nameT +"\" RENAME TO \"Del_"+dt+"_"+nameT+"\";";
             stmt.executeUpdate(sql);
             System.out.println("Del_"+dt+"_"+nameT + " RENAME successfully");
+            System.out.println(sql);
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Failed RENAME TABLE");
@@ -883,7 +889,14 @@ public class DataBase implements Observed {
 //    public static void main(String[] arg){
 //        XMLSAX.getConnectBaseConfig("Config.xml");
 //        DataBase db = new DataBase();
+//        globVar.DB = db;
 //        System.out.println(db.getTimeFirstCommit("Abonents")); // получить первый коммит времени строки таблицы
+//        //db.dropTableWithBackUp("Abonents");
+//        for(String s: db.getListTable() ){
+//            System.out.println(s);
+//        }
+//        
+//        db.renameTable("Del_20_08_12_09_08_30_Abonents","Abonents");
 //       //String nameBD = db.getCurrentNameBase();
 //       System.out.println(db.getListTable().toString());
 //       db.createCommentTable("NMC_DGI", "comment");
