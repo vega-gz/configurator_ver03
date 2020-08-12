@@ -278,7 +278,12 @@ public class DataBase implements Observed {
      
 // --- Вставка данных (название таблицы, список столбцов, данные, index) -Lev--
     public void insertRow(String name_table, String[] row, String[] listNameColum, int index) {
-        if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length) return;
+        if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length){
+            String strErr = "Количество данных и столбцов не совпадает " +  row.length + " | " + listNameColum.length;
+            System.out.println(strErr);
+            FileManager.loggerConstructor(strErr);
+            return;
+        }
         String sql;
         try {
             connection.setAutoCommit(true);
