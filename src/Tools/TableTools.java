@@ -4,7 +4,6 @@ import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;
 import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,8 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
@@ -29,7 +28,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
@@ -37,9 +35,11 @@ import org.w3c.dom.Node;
 
 /*@author Lev*/
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
+
     static ArrayList<String[]> list_str = new ArrayList<>();
     static ArrayList<String> list_cells = new ArrayList<>();
-
+    HashMap<int[], Object> current_change = new HashMap<>();
+    int index_changes = 1;//индекс отсчета изменений
     static int rows[] = {};
     static int cols[] = {};
     // ----- Функция для настройки свойств таблицы --------------Lev---
@@ -92,10 +92,20 @@ public class TableTools {//ссылка на таблицу, массив шир
         th.setPreferredSize(new Dimension(width, headerWidth));
         th.setSize(width, headerWidth);
         jTable1.repaint();
-        
+
         // --- Вставка и копирование объектов таблицы (есть работа с excel) ---
-        ExcelAdapter editT = new ExcelAdapter(jTable1);    
+        ExcelAdapter editT = new ExcelAdapter(jTable1);
         return 0;
+    }
+
+    //---метод,который помещает изменения в хэшмэп
+    public void currentMap(int rows, int cols, Object value) {
+        int[] index_value = {rows, cols};
+        current_change.put(index_value, value);
+        index_changes++;
+        if (index_changes == 20) {
+            current_change.remove(current_change.keySet().toArray()[current_change.keySet().size() - 1]);//удаляем последний элемент
+        }
     }
 
     // ----- Функция для настройки контекстного меню таблиц--------------Lev---
@@ -163,7 +173,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         });
         menuItemIncertCells.addActionListener((ActionEvent event) -> {
             int cnt = 1, cnt2 = 1;
-            double incr=1;
+            double incr = 1;
             String value;
             ArrayList<String> v = new ArrayList<>();
             int startRow = (jTable1.getSelectedRows())[0];
@@ -187,13 +197,11 @@ public class TableTools {//ссылка на таблицу, массив шир
                     if (startRow + i < jTable1.getRowCount()
                             && startCol + j < jTable1.getColumnCount()) {
                         jTable1.setValueAt(value, startRow + (i - cnt2), startCol + (j));
-
                     }
                 }
 
                 v.clear();
             }
-
             list_cells.clear();
         });
         menuItemCopyStr.addActionListener((ActionEvent event) -> {
@@ -208,6 +216,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                 list_str.add(r);
             }
         });
+
         menuItemIncertStr.addActionListener((ActionEvent event) -> {
             int row = jTable1.getSelectedRow();
             if (list_str.size() == 0) {
@@ -262,19 +271,13 @@ public class TableTools {//ссылка на таблицу, массив шир
         });
         return 0;
     }
-    
-public static void fillCells(JTable jTable1, MyTableModel tableModel) {
+
+    public static void fillCells(JTable jTable1, MyTableModel tableModel) {
         rows = jTable1.getSelectedRows();
         cols = jTable1.getSelectedColumns();
         if (rows.length == 0 || cols.length == 0) {
             JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
             return;
-        }
-        Object[] options = {"Да", "Нет"};
-        int casedial = JOptionPane.showOptionDialog(null, "Заполнить выделенные ячейки?", "Выберите действие",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
-        if (casedial != 0) {
-            return; //0 - yes, 1 - no, 2 - cancel    
         }
         String chosseName;
         ArrayList<String> cellNames = new ArrayList<>();
@@ -388,7 +391,6 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
     }
 
     // ----- Функция для считывания строки таблицы --------------Lev---
-
     static public String[] getRow(JTable jTable1, int row) {
         int n = jTable1.getColumnCount();
         String[] s = new String[n];
@@ -399,7 +401,6 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
     }
 
     // ----- функция для загрузки таблицы в базу со стриранием старой таблицы --------------
-
     static public int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String[] listNameColum, String tableComment, ArrayList<String[]> fromDB) {
         if (DB.isTable(tableName)) {
             if (tableComment == null) {
@@ -497,7 +498,9 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
     }
 
     public static void setArchiveSignalList(DefaultListModel list, ArrayList<String[]> archList, String i) {
-        if(archList==null) return;
+        if (archList == null) {
+            return;
+        }
         for (String[] al : archList) {
             if (al[1].equals(i)) {
                 list.addElement(al[0]);
@@ -506,53 +509,60 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
     }
 
     //Заполнение списка источника данных с учётом уже выбранных структур и раскрытых пользователем списков
-
     public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, ArrayList<String[]> archList,
-            ArrayList<String> plusList){// throws IOException {
+            ArrayList<String> plusList) {// throws IOException {
         setSignalList(list, abList, abonent, commonSig, archList, plusList, null);
     }
-    
-    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig, 
-            ArrayList<String[]> archList, ArrayList<String> plusList, String filter){// throws IOException {
+
+    public static void setSignalList(DefaultListModel list, ArrayList<String[]> abList, String abonent, boolean commonSig,
+            ArrayList<String[]> archList, ArrayList<String> plusList, String filter) {// throws IOException {
         list.removeAllElements();
         XMLSAX prj = new XMLSAX();
-        Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
+        Node root = prj.readDocument(globVar.desDir + File.separator + "Design" + File.separator + "Project.prj");
         Node signals = prj.returnFirstFinedNode(root, "Globals");
         ArrayList<Node> sigList = prj.getHeirNode(signals);
         //создание списка исключенных сигналов - других абонентов и других экземпляров
         int posSubAb = 5;
         String abOrSubAb = abonent;
         ArrayList<String> exList = new ArrayList<>();
-        if(abList!=null){
+        if (abList != null) {
             for (String[] s : abList) {//Перебираем абонентов
-                if ("".equals(s[posSubAb])){//если у абонента нет экземпляров
-                    if(!s[1].equals(abonent)) exList.add(s[1]);//и абонент не тот для которого мы формируем архивы - добавляем его в список исключений
+                if ("".equals(s[posSubAb])) {//если у абонента нет экземпляров
+                    if (!s[1].equals(abonent)) {
+                        exList.add(s[1]);//и абонент не тот для которого мы формируем архивы - добавляем его в список исключений
+                    }
                 } else {//если экземпляры есть
                     String firstSubAb; //готовим строку для поиска первого экземпляра
                     int x = s[posSubAb].indexOf(","); //ищем позиуию разделителя экземпляров
-                    if(x<0) firstSubAb = s[posSubAb].trim(); //если её нет - значит экземпляр 1, он же - первый
-                    else {
-                        firstSubAb = s[posSubAb].substring(0,x).trim(); //если есть ещё экземпляры - запоминаем первый
+                    if (x < 0) {
+                        firstSubAb = s[posSubAb].trim(); //если её нет - значит экземпляр 1, он же - первый
+                    } else {
+                        firstSubAb = s[posSubAb].substring(0, x).trim(); //если есть ещё экземпляры - запоминаем первый
                         x++;
-                        int y = s[posSubAb].indexOf(",",x); //ищем ещё разделителя
-                        while(y>0){ //пока они есть
-                            exList.add(s[posSubAb].substring(x,y).trim()); //заносим экземпляры в список исключений
-                            x = y+1;
-                            y = s[posSubAb].indexOf(",",x);
+                        int y = s[posSubAb].indexOf(",", x); //ищем ещё разделителя
+                        while (y > 0) { //пока они есть
+                            exList.add(s[posSubAb].substring(x, y).trim()); //заносим экземпляры в список исключений
+                            x = y + 1;
+                            y = s[posSubAb].indexOf(",", x);
                         }
                         exList.add(s[posSubAb].substring(x).trim()); //заносим в список исключений последний экземпляр
                     }
-                    if(!s[1].equals(abonent)) exList.add(firstSubAb);//если абонент не тот - добавляем в список исключений и первый экземпляр
-                    else abOrSubAb = firstSubAb;
+                    if (!s[1].equals(abonent)) {
+                        exList.add(firstSubAb);//если абонент не тот - добавляем в список исключений и первый экземпляр
+                    } else {
+                        abOrSubAb = firstSubAb;
+                    }
                 }
             }
         }
         //----------------------------------------------------------------------------
         for (Node n : sigList) {
             String sigName = prj.getDataAttr(n, "Name");
-            if(!StrTools.isFilter(sigName,filter)) continue;
+            if (!StrTools.isFilter(sigName, filter)) {
+                continue;
+            }
             boolean ins;
-            if(abList!=null){
+            if (abList != null) {
                 int x = sigName.indexOf("_");
                 String sigAb = null;
                 if (x > 0) {
@@ -572,9 +582,13 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
                             }
                         }
                     }
-                } else ins = false;
-            } else ins = true;
-            
+                } else {
+                    ins = false;
+                }
+            } else {
+                ins = true;
+            }
+
             if (ins) { //если глобальнаяя структура доложна быть включена в список
                 if (plusList.contains(sigName)) { //проверяем, нет ли её в списке раскрытых структур
                     ArrayList<String> plusSigList = openSig(sigName); //если есть - раскрываем структуру
@@ -602,19 +616,19 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
         return false;
     }
 
-    public static ArrayList<String> openSig(String glibSigName){// throws IOException {
+    public static ArrayList<String> openSig(String glibSigName) {// throws IOException {
         ArrayList<String> list = new ArrayList<>();
         XMLSAX prj = new XMLSAX();
-        Node root = prj.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"Project.prj");
+        Node root = prj.readDocument(globVar.desDir + File.separator + "Design" + File.separator + "Project.prj");
         Node mySig = prj.findNodeAtribute(root, new String[]{"Signal", "Name", glibSigName});
         String type = prj.getDataAttr(mySig, "Type");
         if ("REAL".equalsIgnoreCase(type) || "INT".equalsIgnoreCase(type) || "BOOL".equalsIgnoreCase(type) || "WORD".equalsIgnoreCase(type)) {
             return list;
         }
 
-        String fileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
+        String fileName = FileManager.FindFile(globVar.desDir + File.separator + "Design", type, "UUID=");
         XMLSAX sigSax = new XMLSAX();
-        Node rootSig = sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + fileName);
+        Node rootSig = sigSax.readDocument(globVar.desDir + File.separator + "Design" + File.separator + fileName);
         Node signals = sigSax.returnFirstFinedNode(rootSig, "Fields");
         ArrayList<Node> sigList = sigSax.getHeirNode(signals);
         if (sigList == null || sigList.isEmpty()) {
@@ -627,7 +641,6 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
     }
 
     //---------Функция для исключения показываемых столбцов -----------------
-
     public static boolean exeptCol(String s, String[] exCol) {
         for (String e : exCol) {
             if (e.equals(s)) {
@@ -775,45 +788,60 @@ public static void fillCells(JTable jTable1, MyTableModel tableModel) {
             sse.setFields(row);
         }
     }
-    
-    public static boolean isTableDiffDB(ArrayList<String[]> t1, String dbTableName){
+
+    public static boolean isTableDiffDB(ArrayList<String[]> t1, String dbTableName) {
         return isArrayListsDiff(t1, globVar.DB.getData(dbTableName));
     }
-    
-    public static boolean isArrayListsDiff(ArrayList<String[]> t1, ArrayList<String[]> t2){
-        if(t1==null && t2==null) return false;
-        if(t1==null || t2==null) return true;
+
+    public static boolean isArrayListsDiff(ArrayList<String[]> t1, ArrayList<String[]> t2) {
+        if (t1 == null && t2 == null) {
+            return false;
+        }
+        if (t1 == null || t2 == null) {
+            return true;
+        }
         int sizeY = t1.size();
-        if(sizeY != t2.size()) return true;
-        if(sizeY==0) return false;
-        for(int i=0; i < sizeY; i++){
+        if (sizeY != t2.size()) {
+            return true;
+        }
+        if (sizeY == 0) {
+            return false;
+        }
+        for (int i = 0; i < sizeY; i++) {
             int sizeX = t1.get(i).length;
-            if(sizeX != t2.get(i).length) return true;
-            for(int j=0; j < sizeX; j++){
+            if (sizeX != t2.get(i).length) {
+                return true;
+            }
+            for (int j = 0; j < sizeX; j++) {
                 //System.out.println("t1="+t1.get(i)[j]+", t2="+t2.get(i)[j]);
-                if(!t1.get(i)[j].equals(t2.get(i)[j])) return true;
+                if (!t1.get(i)[j].equals(t2.get(i)[j])) {
+                    return true;
+                }
             }
         }
         //System.out.println("return false");
         return false;
     }
-    
+
 //    public static void resetID(ArrayList<String[]> t1){
 //        if(t1==null) return;
 //        for(int i=0; i < t1.size(); i++) t1.get(i)[0] = "" + (i+1);
 //    }
-    
-    public static void sotrList(ArrayList<String[]> t1, int k){//ArrayList<String[]>
-        if(t1==null || t1.size() < 2) return;
-        for(int i=1; i < t1.size(); i++){
-            for(int j=0; j < i; j++){
-                if(t1.get(i)[k].compareTo(t1.get(j)[k])<0){
+    public static void sotrList(ArrayList<String[]> t1, int k) {//ArrayList<String[]>
+        if (t1 == null || t1.size() < 2) {
+            return;
+        }
+        for (int i = 1; i < t1.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (t1.get(i)[k].compareTo(t1.get(j)[k]) < 0) {
                     t1.add(j, t1.get(i));
-                    t1.remove(i+1);
+                    t1.remove(i + 1);
                     break;
                 }
             }
         }
-        for(int i=0; i < t1.size(); i++) t1.get(i)[0] = "" + (i+1);
+        for (int i = 0; i < t1.size(); i++) {
+            t1.get(i)[0] = "" + (i + 1);
+        }
     }
 }

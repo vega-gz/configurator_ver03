@@ -72,9 +72,6 @@ public final class UnloadExcel {
             row.getCell(numberCol).setCellStyle(cellStyle);//заполняем ячейки наименования цветом
         
         }
-       
-        
-        
         rowNum++;
         ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);
         for (String[] sData : data) {
@@ -87,10 +84,8 @@ public final class UnloadExcel {
                 int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
                 row.createCell(numberCol).setCellValue(sData[j]);
                 j++;
-
             }
             ++rowNum;
-
         }
         // записываем созданный в памяти Excel документ в файл
         try {
