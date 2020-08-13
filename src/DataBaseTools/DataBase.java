@@ -6,7 +6,6 @@ import Tools.Observed;
 import Tools.Observer;
 import Tools.StrTools;
 import XMLTools.UUID;
-import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +16,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 public class DataBase implements Observed {
     Statement stmt;

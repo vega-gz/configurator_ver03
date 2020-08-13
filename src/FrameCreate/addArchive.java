@@ -428,7 +428,7 @@ public class addArchive extends javax.swing.JFrame {
             DoIt di = () -> {
                 int ret = -1;
                 try {
-                    ret = Generator.GenArchive(archTyps, archList, abonent, jProgressBar1); // вызываем функцию генерации
+                    ret = Generator.genArchive(archTyps, archList, abonent, jProgressBar1); // вызываем функцию генерации
                 } catch (IOException ex) {
                     Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
                 }
