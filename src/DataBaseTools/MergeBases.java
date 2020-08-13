@@ -46,12 +46,13 @@ public class MergeBases {
     }
 
     // --- занесенение новых данных в вновь подключенной базе---
-    public void insertDatAnotherDB(ArrayList<DiffDataTable> listTableDiff) {
-        this.listTableDiff = listTableDiff;
-        for (DiffDataTable diffOBJ : listTableDiff) {
+    public void insertDatAnotherDB(ArrayList<DiffDataTable> listTableDiffedit) {
+
+        for (DiffDataTable diffOBJ : listTableDiffedit) {
             // System.out.println("diff Table " + diffOBJ.getName());
             ArrayList<String> listColumnCurr = diffOBJ.columns; // колонки  объекта
-            ArrayList<String[]> dataFromTableC = diffOBJ.getData(); // данные объекта
+            ArrayList<String[]> dataFromTableC = diffOBJ.getData(); // данные объекта с id
+           // ArrayList<String[]> dataFromTableCWithoutID = diffOBJ.getDataWithoutId(); // данные объекта без id
             String nameT = diffOBJ.name; // имя таблицы из Объекта
 
 //            // удаляем номера из данных
@@ -288,12 +289,7 @@ public class MergeBases {
         }
 
         public void setData(ArrayList<String[]> data) {
-            // преобразовываем данные убирая id 
-            for (int i = 0; i < data.size(); ++i) {
-                String[] dataMass = data.get(i);
-                data.set(i, Arrays.copyOfRange(dataMass, 1, dataMass.length));
-            }
-            this.data = data;
+           this.data = data;
         }
 
         public void setСolumns(ArrayList<String> columns) {
@@ -304,9 +300,20 @@ public class MergeBases {
             return name;
         }
 
-        // получаем чистые данные без id
+        
         public ArrayList<String[]> getData() {
             return data;
+        }
+        
+        // получаем чистые данные без id
+        public ArrayList<String[]> getDataWithoutId() {
+            ArrayList<String[]> dataWithoutID = new ArrayList<>();
+            // преобразовываем данные убирая id 
+            for (int i = 0; i < data.size(); ++i) {
+                String[] dataMass = data.get(i);
+                dataWithoutID.add(Arrays.copyOfRange(dataMass, 1, dataMass.length)); // режим массив
+            }
+            return dataWithoutID;
         }
 
         public ArrayList<String[]> diffData() {

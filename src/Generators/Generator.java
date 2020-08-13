@@ -37,11 +37,6 @@ public class Generator {
             nodeTable = nodeTable.substring(y+1);
             isMb = "_mb";
             isModbus = true;
-//            if(nodeTable.length()>3) group = nodeTable.substring(3);
-//            else{
-//                FileManager.loggerConstructor("Не найдена группа сигналов в названии табицы \"" + ft.tableName() + "\"");
-//                return -1;
-//            }
         }
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if(findNode == null){
@@ -254,11 +249,11 @@ public class Generator {
         //--- для определения модбасовских подабонентов ----------------------------------
         int y = nodeTable.indexOf("_mb_");
         String subAb = "";
-        //String isMb = "";
+        String isMb = "";
         if(y>0){
             subAb = nodeTable.substring(0,y+1);
             nodeTable = nodeTable.substring(y+1);
-            //isMb = "mb_";
+            isMb = "mb_";
         }//-------------------------------------------------------------------------------
         XMLSAX HMIcfg = new XMLSAX();
         Node hmiCfgRoot = HMIcfg.readDocument("ConfigHMI.xml"); //AT_HMI.iec_hmi
@@ -408,7 +403,7 @@ public class Generator {
                     fbChildNode[4] = "'" + tagName + "'";
                     HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
                     fbChildNode[2] = "PrefStr";
-                    fbChildNode[4] = "'" + subAb + "'";
+                    fbChildNode[4] = "'" + subAb + isMb + "'";
                     HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
                     if(isAlarm){
                         fbChildNode[2] = "TagID";
