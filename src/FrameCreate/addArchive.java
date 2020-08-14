@@ -6,6 +6,7 @@ import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.MyTableModel;
 import Tools.SaveFrameData;
+import Tools.StrTools;
 import Tools.TableTools;
 import Tools.isCange;
 import globalData.globVar;
@@ -29,7 +30,7 @@ public class addArchive extends javax.swing.JFrame {
     JPopupMenu popupMenu = new JPopupMenu();
     String abonent = globVar.abonent;
     int prevArch = 0;
-    ArrayList<String[]> abList;
+    ArrayList<String> tabList;
     ArrayList<String[]> archList;
     ArrayList<String> plusList = new ArrayList<>();
     String[] archTabCols = {"tagName","archType"};
@@ -77,10 +78,10 @@ public class addArchive extends javax.swing.JFrame {
         jComboBox1.setModel(new DefaultComboBoxModel(archiveTyps));
         jList1.setModel(list1);
         jList2.setModel(list2);
-        abList = DataBase.getAbonentArray();
+        tabList = globVar.DB.getListTable(abonent);//DataBase.getAbonentArray();
         TableTools.setArchiveSignalList(list2, archList, "0");
         setPlusList();
-        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        TableTools.setSignalListFromDB(list1, tabList, abonent, false, archList, plusList);
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = ()->{
             TableTools.saveTableInDB(jTable1, globVar.DB, "Archive", jTableCols, "Конфигурации архивов"); //сохранение в БД настроек архивов
@@ -376,14 +377,14 @@ public class addArchive extends javax.swing.JFrame {
     //Кнопка "+"
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         plusList.add(jList1.getSelectedValue());
-        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        TableTools.setSignalListFromDB(list1, tabList, abonent, false, archList, plusList);
     }//GEN-LAST:event_jButton7ActionPerformed
     //Кнопка "-"
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String s = jList1.getSelectedValue();
         int x = s.indexOf(".");
         if(x>0) plusList.remove(s = s.substring(2, x));
-        TableTools.setSignalList(list1, abList, abonent, false, archList, plusList);
+        TableTools.setSignalListFromDB(list1, tabList, abonent, false, archList, plusList);
         x = list1.indexOf(s);
         if(x>=0) jList1.setSelectedIndex(x);
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -406,7 +407,7 @@ public class addArchive extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         list1.removeAllElements();
-        TableTools.setSignalList(list1, abList, abonent, jCheckBox1.isSelected(), archList, plusList);
+        TableTools.setSignalListFromDB(list1, tabList, abonent, jCheckBox1.isSelected(), archList, plusList);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
     //Кнопка "Приложение"
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -428,7 +429,17 @@ public class addArchive extends javax.swing.JFrame {
             DoIt di = () -> {
                 int ret = -1;
                 try {
-                    ret = Generator.GenArchive(archTyps, archList, abonent, jProgressBar1); // вызываем функцию генерации
+                    //---------------------- Определение списка экземпляров ------------------------------
+                    String exemplars = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Экземпляры"); 
+                    ArrayList<String> exArr = new ArrayList<>();
+                    if(!exemplars.isEmpty()) exArr = StrTools.getListFromString(exemplars, ",");
+                    else exArr.add(abonent);
+                    //---------------------------- Опрределение файла ЧМИ --------------------------------
+                    String hmiApp = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI");
+                    //------------------------------------------------------------------------------------
+                    for(String exemplar: exArr){
+                        ret = Generator.genArchive(archTyps, archList, exemplar, jProgressBar1, hmiApp); // вызываем функцию генерации
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -448,7 +459,7 @@ public class addArchive extends javax.swing.JFrame {
 
     private void resetArchList(){
         for(int i=0;i<archList.size(); i++){    //пробегаем поо списту предназнгаченных к архивированию сигналов
-            if(archList.get(i)[1].equals(""+prevArch)){ // если сигнал имеет номер нужный архива
+            if(archList.get(i)[1].equals(""+prevArch) || Integer.parseInt(archList.get(i)[1])>= tableModel.getRowCount()){ // если сигнал имеет номер нужный архива
                 archList.remove(i);                     // удаляем его
                 i--;
             }

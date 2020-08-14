@@ -6,7 +6,6 @@ import Tools.Observed;
 import Tools.Observer;
 import Tools.StrTools;
 import XMLTools.UUID;
-import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +16,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 public class DataBase implements Observed {
     Statement stmt;
@@ -371,8 +368,25 @@ public class DataBase implements Observed {
             }
             rs.close();
             stmt.close();
-            //connection.commit();
-            //System.out.println("-- Operation SELECT done successfully");
+        } catch (SQLException e) {
+            System.out.println("Failed select data");
+            e.printStackTrace();
+        }
+        return selectData;
+    }
+    public ArrayList<String> getDataFromColumn(String table, String colName, String sort) {
+        String sql = "SELECT \"" + colName + "\""+ " FROM \"" + table +"\""+sort+";"; 
+        ArrayList<String> selectData = new ArrayList<>();
+        try {
+            stmt = connection.createStatement();
+            //System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                selectData.add(rs.getString(colName));
+                //System.out.println(strfromtb[0]); // это просто для тестов
+            }
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             System.out.println("Failed select data");
             e.printStackTrace();
@@ -416,11 +430,9 @@ public class DataBase implements Observed {
     }
     //-------------- Получить список таблиц базы ---------------
     public ArrayList<String> getListTable() {
-        //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String> list_table_base = new ArrayList();
         try {
             stmt = connection.createStatement();
-            // Показывает все таблицы =( и из основной и из тестовой(с сортировкой)
             ResultSet rs = stmt.executeQuery(
                     "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema' "
                     + "ORDER BY tablename;");
@@ -431,8 +443,6 @@ public class DataBase implements Observed {
             }
             rs.close();
             stmt.close();
-            // connection.commit();
-            //System.out.println("-- DROPE TABLE BASE");
         } catch (SQLException e) {
             System.out.println("Failed WIEW TABLE BASE");
             e.printStackTrace();
@@ -441,13 +451,12 @@ public class DataBase implements Observed {
         if(list_table_base.isEmpty()) return null;
         return list_table_base;
     }
-    //-------------- Получить список таблиц базы ---------------
+    
+    //--------------  Показывает все таблицы которые начинаются с namePart ----------------------
     public ArrayList<String> getListTable(String namePart) {
-        //connectionToBase(); // вызов Фукция подключения к базе
         ArrayList<String> list_table_base = new ArrayList();
         try {
             stmt = connection.createStatement();
-            // Показывает все таблицы =( и из основной и из тестовой(с сортировкой)
             ResultSet rs = stmt.executeQuery(
                     "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog'"+
                     " AND schemaname != 'information_schema' "+ 
@@ -799,7 +808,7 @@ public class DataBase implements Observed {
         if(!globVar.DB.isConnectOK()) return;
         ArrayList<String> list_table_base = globVar.DB.getListTable();
         if(StrTools.searchInList("Abonents", list_table_base)< 0){
-            String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type", "Экземпляры"};
+            String[] columns = {"Abonent","Наименование","Path_to_Excel", "Abonent_type", "Экземпляры", "HMI"};
             globVar.DB.createTableEasy("Abonents", columns,"Типовые абоненты");
         }
     }

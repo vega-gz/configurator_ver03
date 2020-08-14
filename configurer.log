@@ -16,3 +16,4 @@
 12:41:24_2020.08.07	error PSQL request null
 12:41:28_2020.08.07	error PSQL request null
 14:34:32_2020.08.07	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'GPA_AI';
+15:47:08_2020.08.12	error PSQL request SELECT description FROM pg_description join pg_class on pg_description.objoid = pg_class.oid WHERE relname = 'GPA_NKU_mb_DO';

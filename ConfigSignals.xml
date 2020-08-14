@@ -60,13 +60,11 @@
 			</AI_DRV>
 			<AI_FromHMI>
 				<globData name="AI_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_FromHMI>
 			<AI_ToHMI>
 				<globData name="AI_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_ToHMI>
@@ -119,7 +117,7 @@
 				</Block>
 			</File>
 		</GenCode>
-		<GenHW hwDriver="KM_04" drvFile="_AI_DRV" globData="_AI_DRV"/>
+		<GenHW hwDriver="KM04" drvFile="_AI_DRV" globData="_AI_DRV"/>
 	</AI>
 	<Fi excelSheetName="Fi" Comment="Частотные входы">
         <EXEL>
@@ -158,13 +156,11 @@
 			</FI_DRV>
 			<FI_FromHMI typeFile="T_AI_FromHMI.type">
 				<globData name="FI_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</FI_FromHMI>
 			<FI_ToHMI typeFile="T_AI_ToHMI.type">
 				<globData name="FI_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</FI_ToHMI>
@@ -217,7 +213,7 @@
 				</Block>
 			</File>
 		</GenCode>
-		<GenHW hwDriver="KM_04" drvFile="_FI_DRV" globData="_FI_DRV"/>
+		<GenHW hwDriver="KM04" drvFile="_FI_DRV" globData="_FI_DRV"/>
 	</Fi>
 	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
 		<GenData>
@@ -257,19 +253,16 @@
 					<localData int="_Algorithm.int" />
 				</globData>	
 				<globData name="AO">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_DRV>
 			<AO_FromHMI>
 				<globData name="AO_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_FromHMI>
 			<AO_ToHMI>
 				<globData name="AO_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_ToHMI>
@@ -327,29 +320,25 @@
 				</Block>
 			</File>
 		</GenCode>
-		<GenHW hwDriver="KM_04" drvFile="_AO_DRV" globData="_AO_DRV"/>
+		<GenHW hwDriver="KM04" drvFile="_AO_DRV" globData="_AO_DRV"/>
 	</AO>
 	<DI excelSheetName="DI" Comment="Дискретные входы">
 		<GenData>
 			<DI_DRV Type="BOOL">
 				<globData name="DI_DRV">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 				<globData name="DI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DI_DRV>
 			<DI_FromHMI>
 				<globData name="DI_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DI_FromHMI>
 			<DI_ToHMI>
 				<globData name="DI_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DI_ToHMI>
@@ -410,29 +399,25 @@
 				</Block>
 			</File>
 		</GenCode>
-		<GenHW hwDriver="KM_04" drvFile="_DI_DRV" globData="_DI_DRV"/>
+		<GenHW hwDriver="KM04" drvFile="_DI_DRV" globData="_DI_DRV"/>
 	</DI>
 	<DO excelSheetName="DO" Comment="Дискретные выходы">
 		<GenData>
 			<DO_DRV Type="BOOL">
 				<globData name="DO_DRV">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 				<globData name="DO">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DO_DRV>
 			<DO_FromHMI>
 				<globData name="DO_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DO_FromHMI>
 			<DO_ToHMI>
 				<globData name="DO_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DO_ToHMI>
@@ -469,7 +454,7 @@
 				</Block>
 			</File>
 		</GenCode>
-		<GenHW hwDriver="KM_04" drvFile="_DO_DRV" globData="_DO_DRV"/>
+		<GenHW hwDriver="KM04" drvFile="_DO_DRV" globData="_DO_DRV"/>
 	</DO>
 	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Modbus: ">
         <EXEL info="R1C2">
@@ -512,13 +497,11 @@
 			</AI_DRV>
 			<AI_FromHMI typeFile="T_AI_FromHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AI_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_FromHMI>
 			<AI_ToHMI typeFile="T_AI_ToHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AI_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_ToHMI>
@@ -611,23 +594,19 @@
 		<GenData>
 			<AO_DRV dictionary="ModbusFormat.xml" col="dataType" ifEmpty="REAL">
 				<globData name="AO_DRV">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 				<globData name="AO">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_DRV>
 			<AO_FromHMI typeFile="T_AO_FromHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AO_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_FromHMI>
 			<AO_ToHMI typeFile="T_AO_ToHMI.type" notGenTyps="WORD, ABCDEFGH">
 				<globData name="AO_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_ToHMI>
@@ -700,23 +679,19 @@
 		<GenData>
 			<DI_DRV Type="BOOL">
 				<globData name="DI_DRV">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 				<globData name="DI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DI_DRV>
 			<DI_FromHMI typeFile="T_DI_FromHMI.type">
 				<globData name="DI_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DI_FromHMI>
 			<DI_ToHMI typeFile="T_DI_ToHMI.type">
 				<globData name="DI_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DI_ToHMI>
@@ -753,23 +728,19 @@
 		<GenData>
 			<DO_DRV Type="BOOL">
 				<globData name="DO_DRV">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int" />
 				</globData>	
 				<globData name="DO">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DO_DRV>
 			<DO_FromHMI typeFile="T_DO_FromHMI.type">
 				<globData name="DO_FromHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DO_FromHMI>
 			<DO_ToHMI typeFile="T_DO_ToHMI.type">
 				<globData name="DO_ToHMI">
-					<localData int="AT_HMI.int"/>
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</DO_ToHMI>

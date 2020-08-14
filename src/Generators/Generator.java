@@ -37,11 +37,6 @@ public class Generator {
             nodeTable = nodeTable.substring(y+1);
             isMb = "_mb";
             isModbus = true;
-//            if(nodeTable.length()>3) group = nodeTable.substring(3);
-//            else{
-//                FileManager.loggerConstructor("Не найдена группа сигналов в названии табицы \"" + ft.tableName() + "\"");
-//                return -1;
-//            }
         }
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if(findNode == null){
@@ -53,8 +48,6 @@ public class Generator {
             FileManager.loggerConstructor("В файле ConfigSignals.xml не найдена нода \"" + nodeTable+"/GenHW"+ "\"");
             return -1;
         }
-        String drvFileName = abonent+subAb+isMb+globVar.sax.getDataAttr(nodeGenHW, "drvFile") + ".type";
-        String prjFildName = abonent+subAb+isMb+globVar.sax.getDataAttr(nodeGenHW, "globData");
         String mainDriverName = globVar.sax.getDataAttr(nodeGenHW, "hwDriver");
 
         String designDir = globVar.desDir  + File.separator + "Design";
@@ -64,33 +57,21 @@ public class Generator {
             FileManager.loggerConstructor("Не удалось прочитать файл \"" + designDir+File.separator+"Project.prj" + "\"");
             return -1;
         }
-        String[] globSigAttr = {"Signal","Name", prjFildName};
-        Node globSigInPrj = prj.findNodeAtribute(prjNode, globSigAttr);
-        if(globSigInPrj == null){
-            FileManager.loggerConstructor("Нет \"" + prjFildName + " \" в глобальных сигналах проекта");
-            return -1;
-        }
-        String globUUID = prj.getDataAttr(globSigInPrj,"UUID");
         
-        XMLSAX drv = new XMLSAX();
-        Node drvSignalsNode = drv.readDocument(designDir+File.separator+"T_"+drvFileName);
-        if(drvSignalsNode == null){
-            FileManager.loggerConstructor("Не удалось прочитать файл \"" + designDir+File.separator+"T_"+drvFileName + "\"");
-            return -1;
-        }
-        XMLSAX hw = new XMLSAX();
-        String currDev = "";
-        //String wfFilePref = designDir + File.separator + abonent + "_R";
-        Node hwConn=null;
         String abType = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Abonent_type"); 
-        //-------------- Определение параметров драйвера модбаса ---------------------
+        //---------------------- Определение списка экземпляров ------------------------------
+        String exemplars = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Экземпляры"); 
+        ArrayList<String> exArr = new ArrayList<>();
+        if(!exemplars.isEmpty()) exArr = StrTools.getListFromString(exemplars, ",");
+        else exArr.add(abonent);
+        //------------------ Определение параметров драйвера модбаса -----------------------
         String tabComm = globVar.DB.getCommentTable(abonent+subAb+"_"+nodeTable);
         if(tabComm==null) tabComm ="";
         String modbusFile = "";
         String modbusAddr = "";
         String group = "";
         x = tabComm.indexOf("Modbus:");
-        if(x > 0){
+        if(x >= 0){
             int l = tabComm.length();
             x+=7;
             if(l < x){
@@ -123,88 +104,111 @@ public class Generator {
                 return -1;
             }
         }
+        //--- Определяем файл с описание
+        String drvFileName = "T_"+abonent+subAb+isMb+globVar.sax.getDataAttr(nodeGenHW, "drvFile")+".type";
         //------ Проход по таблице ----------------
-        int jpgMax = ft.tableSize();
-        for (int j = 0; j < jpgMax; j++) {
-            if(jProgressBar!=null) jProgressBar.setValue((int)((j+1)*100.0/jpgMax));
-            String tagName = ft.getCell("TAG_NAME_PLC", j);
-            String comment = ft.getCell("Наименование", j);
-            String device = ft.getCell("Устройство", j);
-            //--------------------- Определяем к какому устройству подключеены каналы ---------------------------------------
-            String hwDew = mainDriverName;                              //Поумолчанию - КМ04
-            String hwFileSuffix = ".km04_cfg";
-            String slot;
-            String chanell;
-            if(isModbus){
-                hwDew = modbusFile;  //Смотрим, а не по сонетовскому модбасу подключены модули
-                hwFileSuffix = ".mb_cfg";
-                slot = ft.getCell("dataType", j);
-                if(slot!=null){
-                    XMLSAX sax = new XMLSAX();
-                    Node root = sax.readDocument("ModbusFormat.xml");
-                    Node formNode = sax.returnFirstFinedNode(root, slot);
-                    slot = sax.getDataAttr(formNode,"name");
-                }else slot = "BIT";
-                chanell = (ft.getCell("mbAddr", j))+":"+slot;
-           }else{
-                if("Sonet".equals(abType)){                         //Если текущий абонент использует Сонет
-                    hwDew = ft.getCell("sonetModbus", j);  //Смотрим, а не по сонетовскому модбасу подключены модули
-                    if("".equals(hwDew)){ //Если не по нему,
-                        hwDew = abonent + "_R" + device + "_LOCALBUS";  //значит каждое устройство - иной файл HW
-                        device = "";
-                        hwFileSuffix = ".snt_lb";
-                    } else {
-                        hwFileSuffix = ".snt_mb";
-                    }
-                }
-                slot = ft.getCell("Слот", j);
-                chanell = ft.getCell("Канал", j);
+        for(String exemplar: exArr){
+            String prjFildName = exemplar+subAb+isMb+globVar.sax.getDataAttr(nodeGenHW, "globData");
+            String[] globSigAttr = {"Signal","Name", prjFildName};
+            Node globSigInPrj = prj.findNodeAtribute(prjNode, globSigAttr);
+            if(globSigInPrj == null){
+                FileManager.loggerConstructor("Нет \"" + prjFildName + " \" в глобальных сигналах проекта");
+                return -1;
             }
-            
-            //--------------------------------------------------------------------------------------------------------------
-            if(!currDev.equals(hwDew)){
-                currDev = hwDew;
-                hwConn = setHWdoc(hw, hwDew, hwFileSuffix, globSigAttr, prj, prjFildName, globSigInPrj, globUUID);
-                if(hwConn == null) return -1;
-                if(isModbus){//удаление коннектов с таким же адресом абонента и той же группы
-                    ArrayList<Node> conns = hw.getHeirNode(hwConn);
-                    for(Node n: conns){
-                        if(modbusAddr.equals(hw.getDataAttr(n, "Device")) && group.equals(hw.getDataAttr(n, "Group"))) 
-                            hw.removeNode(n);
-                    }
-                }
+            String globUUID = prj.getDataAttr(globSigInPrj,"UUID");
+
+            XMLSAX drv = new XMLSAX();
+            Node drvSignalsNode = drv.readDocument(designDir+File.separator+drvFileName);
+            if(drvSignalsNode == null){
+                FileManager.loggerConstructor("Не удалось прочитать файл \""+designDir+File.separator+drvFileName + "\"");
+                return -1;
             }
-            //вставляем новые коннекты
-            String[] signalData = {"Field","Name",tagName};
-            Node sigNode = drv.findNodeAtribute(drvSignalsNode, signalData);
-            if(sigNode == null) FileManager.loggerConstructor("В структуре \""+prjFildName+"\" не найден сигнал \""+tagName+"\"");
-            else{
+            XMLSAX hw = new XMLSAX();
+            String currDev = "";
+            //String wfFilePref = designDir + File.separator + abonent + "_R";
+            Node hwConn=null;
+            int jpgMax = ft.tableSize();
+            for (int j = 0; j < jpgMax; j++) {
+                if(jProgressBar!=null) jProgressBar.setValue((int)((j+1)*100.0/jpgMax));
+                String tagName = ft.getCell("TAG_NAME_PLC", j);
+                String comment = ft.getCell("Наименование", j);
+                String device = ft.getCell("Устройство", j);
+                //--------------------- Определяем к какому устройству подключеены каналы ---------------------------------------
+                String hwDew = exemplar+"_"+mainDriverName;                              //Поумолчанию - КМ04
+                String hwFileSuffix = ".km04_cfg";
+                String slot;
+                String chanell;
                 if(isModbus){
-                    String[] connData = {"Connection", "ItemName", prjFildName + "." + tagName,
-                                                        "Device", modbusAddr,
-                                                        "Channel", chanell,
-                                                        "Group", group,
-                                                        "UUID", globUUID + "." + drv.getDataAttr(sigNode,"UUID"),
-                                        }; 
-                    hw.insertChildNode(hwConn, connData);
-                }else{
-                    String[] findData = {"Connection",  "Device", device,
-                                                        "Slot", slot,
-                                                        "Channel", chanell}; 
-                    Node old = hw.findNodeAtribute(hwConn, findData);
-                    if(old!=null) hw.removeNode(old);
-                    String[] connData = {"Connection", "ItemName", prjFildName + "." + tagName,
-                                                        "Device", device,
-                                                        "Slot", slot,
-                                                        "Channel", chanell,
-                                                        "UUID", globUUID + "." + drv.getDataAttr(sigNode,"UUID"),
-                                                        "Comment", comment
-                                        }; 
-                    hw.insertChildNode(hwConn, connData);
+                    hwDew = exemplar+"_"+modbusFile;  //Смотрим, а не по сонетовскому модбасу подключены модули
+                    hwFileSuffix = ".mb_cfg";
+                    slot = ft.getCell("dataType", j);
+                    if(slot!=null){
+                        XMLSAX sax = new XMLSAX();
+                        Node root = sax.readDocument("ModbusFormat.xml");
+                        Node formNode = sax.returnFirstFinedNode(root, slot);
+                        slot = sax.getDataAttr(formNode,"name");
+                    }else slot = "BIT";
+                    chanell = (ft.getCell("mbAddr", j))+":"+slot;
+               }else{
+                    if("Sonet".equals(abType)){                         //Если текущий абонент использует Сонет
+                        hwDew = ft.getCell("sonetModbus", j);  //Смотрим, а не по сонетовскому модбасу подключены модули
+                        if("".equals(hwDew)){ //Если не по нему,
+                            hwDew = exemplar + "_R" + device + "_LOCALBUS";  //значит каждое устройство - иной файл HW
+                            device = "";
+                            hwFileSuffix = ".snt_lb";
+                        } else {
+                            hwFileSuffix = ".snt_mb";
+                        }
+                    }
+                    slot = ft.getCell("Слот", j);
+                    chanell = ft.getCell("Канал", j);
+                }
+
+                //--------------------------------------------------------------------------------------------------------------
+                if(!currDev.equals(hwDew)){
+                    currDev = hwDew;
+                    hwConn = setHWdoc(hw, hwDew, hwFileSuffix, globSigAttr, prj, prjFildName, globSigInPrj, globUUID);
+                    if(hwConn == null) return -1;
+                    if(isModbus){//удаление коннектов с таким же адресом абонента и той же группы
+                        ArrayList<Node> conns = hw.getHeirNode(hwConn);
+                        for(Node n: conns){
+                            if(modbusAddr.equals(hw.getDataAttr(n, "Device")) && group.equals(hw.getDataAttr(n, "Group"))) 
+                                hw.removeNode(n);
+                        }
+                    }
+                }
+                //вставляем новые коннекты
+                String[] signalData = {"Field","Name",tagName};
+                Node sigNode = drv.findNodeAtribute(drvSignalsNode, signalData);
+                if(sigNode == null) FileManager.loggerConstructor("В структуре \""+prjFildName+"\" не найден сигнал \""+tagName+"\"");
+                else{
+                    if(isModbus){
+                        String[] connData = {"Connection", "ItemName", prjFildName + "." + tagName,
+                                                            "Device", modbusAddr,
+                                                            "Channel", chanell,
+                                                            "Group", group,
+                                                            "UUID", globUUID + "." + drv.getDataAttr(sigNode,"UUID"),
+                                            }; 
+                        hw.insertChildNode(hwConn, connData);
+                    }else{
+                        String[] findData = {"Connection",  "Device", device,
+                                                            "Slot", slot,
+                                                            "Channel", chanell}; 
+                        Node old = hw.findNodeAtribute(hwConn, findData);
+                        if(old!=null) hw.removeNode(old);
+                        String[] connData = {"Connection", "ItemName", prjFildName + "." + tagName,
+                                                            "Device", device,
+                                                            "Slot", slot,
+                                                            "Channel", chanell,
+                                                            "UUID", globUUID + "." + drv.getDataAttr(sigNode,"UUID"),
+                                                            "Comment", comment
+                                            }; 
+                        hw.insertChildNode(hwConn, connData);
+                    }
                 }
             }
+            hw.writeDocument();
         }
-        hw.writeDocument();
         return 0;
     }
     
@@ -236,13 +240,13 @@ public class Generator {
         for(Node f: fileList){
             String commonFileST = (String) globVar.sax.getDataNode(f).get("src");
             String stFileName = abonent + subAb + "_" + commonFileST; //Для каждого файла
-            int ret = GenInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve,stFileName, abonent, jProgressBar1);
+            int ret = genInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve,stFileName, abonent, jProgressBar1);
             if(ret!=0) return -1;
         }
         return 0;
     }
     
-    public static String GenHMI(TableDB ft, JProgressBar jProgressBar) throws IOException {
+    public static String genHMI(TableDB ft, JProgressBar jProgressBar) throws IOException {
         int casedial = JOptionPane.showConfirmDialog(null, "Листы мнемосхем для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if(casedial != 0) return ""; //0 - yes, 1 - no, 2 - cancel
         String targetFile;// = null;
@@ -254,27 +258,29 @@ public class Generator {
         //--- для определения модбасовских подабонентов ----------------------------------
         int y = nodeTable.indexOf("_mb_");
         String subAb = "";
-        //String isMb = "";
+        String isMb = "";
         if(y>0){
             subAb = nodeTable.substring(0,y+1);
             nodeTable = nodeTable.substring(y+1);
-            //isMb = "mb_";
-        }//-------------------------------------------------------------------------------
-        XMLSAX HMIcfg = new XMLSAX();
+            isMb = "mb_";
+        }//------------------- Читаем пользовательскую конфигурацию для ЧМИ ----------------------------------------
+        XMLSAX HMIcfg = new XMLSAX(); //
         Node hmiCfgRoot = HMIcfg.readDocument("ConfigHMI.xml"); //AT_HMI.iec_hmi
         Node findNode = HMIcfg.returnFirstFinedNode(hmiCfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
             FileManager.loggerConstructor("Тип данных "+nodeTable+" не описан в файле ConfigHMI.xml");
             return null;
         }//Если не вылетели - значит будет генерация
+        //------------------------------------ Читаем ЧМИ файл Сонаты -----------------------------------------------
         XMLSAX bigSax = new XMLSAX();
-        String hmiProjectFile = globVar.desDir + File.separator + "Design" + File.separator + HMIcfg.getDataAttr(hmiCfgRoot, "project"); // Нужен для поиска УУИДов листов
+        String hmiProjectFile = globVar.desDir + File.separator + "Design" + File.separator + 
+                globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI") + ".iec_hmi"; // Нужен для поиска УУИДов листов
         Node bigRoot = bigSax.readDocument(hmiProjectFile);
         if (bigRoot == null) {
             FileManager.loggerConstructor("Не найден файл проекта "+hmiProjectFile);
             return null;
         }//Если не вылетели - значит будет генерация
-        
+        //--------------------------------------------------------------------------------------------------------------
         String filePath = globVar.desDir + File.separator + "GenHMI"; //Установили путь для файлов
         File d = new File(filePath);
         if(!d.isDirectory()){
@@ -408,7 +414,7 @@ public class Generator {
                     fbChildNode[4] = "'" + tagName + "'";
                     HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
                     fbChildNode[2] = "PrefStr";
-                    fbChildNode[4] = "'" + subAb + "'";
+                    fbChildNode[4] = "'" + subAb + isMb + "'";
                     HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
                     if(isAlarm){
                         fbChildNode[2] = "TagID";
@@ -520,9 +526,10 @@ public class Generator {
         return ret;
     }
 
-    public static int GenTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
+    public static int genTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
         int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if(casedial != 0) return 0; //0 - yes, 1 - no, 2 - cancel
+        //-------------------------------------------------------------------------------------
         String backUpPath = globVar.backupDir + File.separator;   //установили путь для бэкапа
         String filePath = globVar.desDir + File.separator+"Design"; //установили путь для проекта
         String nodeTable = ft.tableName();
@@ -551,6 +558,12 @@ public class Generator {
         Node prjRoot = prjSax.readDocument(filePath + File.separator+"Project.prj");;
         Node interfaceList = prjSax.returnFirstFinedNode(prjRoot, "Globals");
         NodeList nodesGenData = nodeGenData.getChildNodes(); //получаем список нод внутри ГенДаты
+        //---------------------- Определение списка экземпляров ------------------------------
+        String exemplars = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Экземпляры"); 
+        ArrayList<String> exArr = new ArrayList<>();
+        if(!exemplars.isEmpty()) exArr = StrTools.getListFromString(exemplars, ",");
+        else exArr.add(abonent);
+        //------------------ Определение параметров драйвера модбаса -----------------------
         int jpgMax = nodesGenData.getLength();
         for (int i = 0; i < jpgMax; i++) {//получил размерность ноды и начал цикл
             if(jProgressBar!=null) jProgressBar.setValue((int)((i+1)*100.0/jpgMax));//для прогрессбара
@@ -580,7 +593,7 @@ public class Generator {
                         fildUUID = StrTools.getAttributValue(fildUUID,"UUID=\"");
                     }
                     if(fildUUID==null){
-                        JOptionPane.showMessageDialog(null, "Не найден файл типа данных "+"T_"+isMb+nodeName +". Генерация прервана.");
+                        FileManager.loggerConstructor("Не найден файл типа данных "+"T_"+isMb+nodeName +". Генерация прервана.");
                          return -1;
                     }
                 }
@@ -645,29 +658,45 @@ public class Generator {
                 localSax.writeDocument(filePath + File.separator + trueName);//записали файл
                 for(Node globSig: globSigList){//--------------------------------------- Занесение сигналов в .prj и .int файлы -------------------------------------
                     String name = globVar.sax.getDataAttr(globSig, "name");
-                    if(name!=null)
-                        globUUID = insertVarInPrj(prjSax, interfaceList, abonent+"_"+subAb+isMb+name, typeUUID, "", true, false, null,
-                                       filePath + File.separator+"Project.prj", backUpPath + "Project.prj");
+                    if(name!=null){
+                        String hmiApp = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI");
+                        Node localRoot = null;
+                        Node localInterfaceList = null;
+                        String file = null;
+                        XMLSAX localSigSax = new XMLSAX();
+                        if(!hmiApp.isEmpty()){
+                            file = hmiApp+".int";
+                            localRoot = localSigSax.readDocument(filePath+File.separator+file);
+                            localInterfaceList = localSigSax.returnFirstFinedNode(localRoot, "InterfaceList");
+                        }
+                        for(String s: exArr){
+                            globUUID = insertVarInPrj(prjSax, interfaceList, s+"_"+subAb+isMb+name, typeUUID, "", true, false, null,
+                                           filePath + File.separator+"Project.prj", backUpPath + "Project.prj");
+                            if(!hmiApp.isEmpty())
+                                globUUID = insertVarInPrj(localSigSax, localInterfaceList, s+"_"+subAb+isMb+name, typeUUID, 
+                                        "", true, true, globUUID, filePath+File.separator+file, backUpPath+file);
+                            
+                        }
+                    }
                     ArrayList<Node> localSigList = globVar.sax.getHeirNode(globSig);//Находим все ноды
-                    boolean glob = true;
+                    boolean glob = name!=null && exArr.size()==1;
                     for(Node localSig: localSigList){
-                        if(name==null || !glob){
-                            name = globVar.sax.getDataAttr(localSig, "name");
-                            glob = false;
-                            if(name==null){
-                                FileManager.loggerConstructor("Не найдено имя переменной в разделе "+
-                                        nodeName + "/GenData/"+globSig.getNodeName()+"/"+localSig.getNodeName());
-                                return -1;
-                            }
+                        String tmp = globVar.sax.getDataAttr(localSig, "name");
+                        if(tmp!=null) name = tmp;
+                        else if(name==null){
+                            FileManager.loggerConstructor("Не найдено имя переменной в разделе "+
+                                    "/GenData/"+nodeName+globSig.getNodeName()+"/"+localSig.getNodeName());
+                            return -1;
                         }
                         XMLSAX localSigSax = new XMLSAX();
                         String localDocName = globVar.sax.getDataAttr(localSig, "int");
                         if(localDocName==null){
                             FileManager.loggerConstructor("Не найдено имя файла .int в разделе "+
-                                    nodeName + "/GenData/"+globSig.getNodeName()+"/"+localSig.getNodeName());
+                                    "/GenData/"+nodeName+globSig.getNodeName()+"/"+localSig.getNodeName());
                             return -1;
                         }
                         if("_".equals(localDocName.substring(0,1))) localDocName = abonent+localDocName;
+                        
                         Node localRoot = localSigSax.readDocument(filePath+File.separator+localDocName);
                         Node localInterfaceList = localSigSax.returnFirstFinedNode(localRoot, "InterfaceList");
                         insertVarInPrj(localSigSax, localInterfaceList, abonent+"_"+subAb+isMb+name, typeUUID, "", glob, true,
@@ -675,7 +704,6 @@ public class Generator {
                     }
                 }
             }
-
         }
         return 0;
     }
@@ -713,7 +741,7 @@ public class Generator {
         return hw.returnFirstFinedNode(hwRoot, "Crossconnect");
     }
 
-    static int CloseByErr(FileManager fm, String tmpFile, String err) throws IOException{
+    static int closeByErr(FileManager fm, String tmpFile, String err) throws IOException{
             FileManager.loggerConstructor(err);
             fm.closeRdStream();                                       //закрываем поток чтения
             fm.closeWrStream();                                       //закрываем поток записи
@@ -721,7 +749,7 @@ public class Generator {
             return -1;
     }
     //================================================================================================================
-    static int GenInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
+    static int genInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
                   String stFileName, String abonent, JProgressBar jProgressBar) throws IOException{
         String filePath = globVar.desDir + File.separator + "GenST";
         File d = new File(filePath);
@@ -740,7 +768,7 @@ public class Generator {
             return -2;
         }
         ret = fm.openFile4read(globVar.myDir, commonFileST + ".txt");
-        if(ret!=0) return CloseByErr(fm, tmpFile, "Не удалось прочитать служебный файл \""+globVar.myDir+File.separator+commonFileST+".txt");
+        if(ret!=0) return closeByErr(fm, tmpFile, "Не удалось прочитать служебный файл \""+globVar.myDir+File.separator+commonFileST+".txt");
         
         String algFile = (String) globVar.sax.getDataNode(nodeGenCode).get("target");
         String funcName = stFileName;//abonent + "_"+ commonFileST;
@@ -764,14 +792,14 @@ public class Generator {
             ArrayList<String> notGenTyps = StrTools.getListFromString(globVar.sax.getDataAttr(block, "notGenTyps"),",");
             ArrayList<String> isGenTyps = StrTools.getListFromString(globVar.sax.getDataAttr(block, "isGenTyps"),",");
             if(start==null || end==null) 
-                return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+File.separator+"ConfigSignals.xml в разделе "+ nodeGenCode.getParentNode()+
+                return closeByErr(fm, tmpFile, "В файле \""+globVar.myDir+File.separator+"ConfigSignals.xml в разделе "+ nodeGenCode.getParentNode()+
                                   " неправильно сконфигурированы признаки начала и конца вставки кода");
             String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
             while(!fm.EOF && !s.contains(start)){
                 fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
                 s = fm.rd();
             }
-            if(fm.EOF) return CloseByErr(fm, tmpFile, "В файле \""+globVar.myDir+File.separator+commonFileST+".txt"+" не найдена строка \""+start+"\"");
+            if(fm.EOF) return closeByErr(fm, tmpFile, "В файле \""+globVar.myDir+File.separator+commonFileST+".txt"+" не найдена строка \""+start+"\"");
             fm.wr("//"+start+"\n");
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
@@ -879,7 +907,7 @@ public class Generator {
     }
     //Функция занесения переменных в интерфейсные листы приложений Сонаты
     static String insertVarInPrj(XMLSAX intFile, Node interfaceList, String Name, String Type, String Comment, boolean global, boolean usage, 
-            String uuid, String hwFileName1, String backUpFile1){// throws IOException{
+            String uuid, String hwFileName1, String backUpFile1){
         String[] findArr = {"Signal","Name",Name};
         Node sig = intFile.findNodeAtribute(interfaceList, findArr);
         if(sig!=null){
@@ -911,7 +939,7 @@ public class Generator {
         return uuid;
     }
 
-    public static int GenOPC(String serverName, String id, String idType,  ArrayList<String[]> opcList, JProgressBar jProgressBar){
+    public static int genOPC(String serverName, String id, String idType,  ArrayList<String[]> opcList, JProgressBar jProgressBar){
         if(opcList==null || opcList.isEmpty()) return 0;
         String appPathName = globVar.desDir + File.separator+"Design"+File.separator + serverName;
         XMLSAX opcSax = new XMLSAX();
@@ -1041,7 +1069,8 @@ public class Generator {
         fm.closeWrStream();
         return ret;
     }
-    public static int GenArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent, JProgressBar jProgressBar) throws IOException {
+    public static int genArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent,
+            JProgressBar jProgressBar, String hmiApp) throws IOException {
         String appPathName = globVar.desDir + File.separator+"Design"+File.separator + abonent + "_" + "Archive";
         XMLSAX archSax = new XMLSAX();
         Node archRoot = archSax.readDocument(appPathName +".arc_cfg");
@@ -1074,9 +1103,9 @@ public class Generator {
         ArrayList<Node> colorList = cfgSax.getHeirNode(cfgSax.returnFirstFinedNode("TableColor"));
         
         XMLSAX hmiSax = new XMLSAX();
-        Node hmiRoot = hmiSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator+"AT_HMI.iec_hmi");
+        Node hmiRoot = hmiSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator+hmiApp+".iec_hmi");
         if (hmiRoot == null) {
-            FileManager.loggerConstructor("Не найден файл "+globVar.desDir + File.separator+"Design"+File.separator+"AT_HMI.iec_hmi");
+            FileManager.loggerConstructor("Не найден файл "+globVar.desDir + File.separator+"Design"+File.separator+hmiApp+".iec_hmi");
             return -1;
         }//Если не вылетели - значит будет генерация
         String trendSheetName = abonent + "_Trend";
@@ -1102,18 +1131,89 @@ public class Generator {
         for(String[] sig: archList){
             if(jProgressBar!=null) jProgressBar.setValue((int)((jpbCnt++)*100.0/jpgMax));
             int archType = Integer.parseInt(sig[1]);
-            int x = sig[0].indexOf(".");
-            if(x < 0){
-                Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",sig[0]});
-                if(n==null){
-                    FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ sig[0]);
+            String tableName = sig[0];
+            int x = tableName.indexOf(".");
+            //---------------------- Определение списка структур ------------------------------
+            if(x>0) tableName = tableName.substring(0, x);
+            ArrayList<String> structArr = new ArrayList<>();
+            String sigStructs = globVar.DB.getCommentTable(tableName);
+            int z = sigStructs.indexOf("Архив:");
+            if(z < 0) structArr.add("");
+            else {
+                z+=6;
+                int n = sigStructs.indexOf(";",z);
+                if(n<0){
+                    FileManager.loggerConstructor("genArchive[1] - В заголовке таблицы "+ tableName+" неправильно описаны структуры для архивирования");
                     ret = -1;
                     continue;
                 }
-                String type = bigSax.getDataAttr(n, "Type");
-                String uuid = bigSax.getDataAttr(n, "UUID");
-                if( isStdType(type)) insertInArcive(sig[0], archTyps[archType],uuid,archSax);
-                else{
+                sigStructs = sigStructs.substring(z, n);
+                if(!sigStructs.isEmpty()) structArr = StrTools.getListFromString(sigStructs, ",");
+                else structArr.add("");
+            }
+            //---------------------------------------------------------------------------
+            String sig0 = sig[0];
+            int y = sig0.indexOf("_");
+            sig0 = abonent+sig0.substring(y);
+            for(String sa: structArr){
+                if(x < 0){
+                    sig0 += sa;
+                    Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",sig0});
+                    if(n==null){
+                        FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ sig0);
+                        ret = -1;
+                        continue;
+                    }
+                    String type = bigSax.getDataAttr(n, "Type");
+                    String uuid = bigSax.getDataAttr(n, "UUID");
+                    if( isStdType(type)) insertInArcive(sig0, archTyps[archType],uuid,archSax);
+                    else{
+                        String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
+                        if(sigFileName==null){
+                            FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + File.separator+"Design");
+                            ret = -1;
+                        }
+                        else {
+                            XMLSAX sigSax = new XMLSAX();
+                            sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
+                            Node sigs = sigSax.returnFirstFinedNode("Fields");
+                            ArrayList<Node> sigNodeList = sigSax.getHeirNode(sigs);//Находим все ноды
+                            for(Node sigNode: sigNodeList){
+                                String nameSig = bigSax.getDataAttr(sigNode, "Name");
+                                String typeSig = bigSax.getDataAttr(sigNode, "Type");
+                                String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
+                                if(!nameSig.contains("Res_")){
+                                    String tmpName = sig0+"."+nameSig;
+                                    String tmpUuid = uuid+"."+uuidSig;
+                                    if(!isStdType(typeSig)){
+                                        tmpName += ".PV";
+                                        tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
+                                    }// <Trend ItemName="AO_D.Set_APK" UUID="D81CC7224B1F7C96DAA237A634367986.4C16C6034A798CBFCD04F398721A6E10" Min="0" Max="10" Log="FALSE" Color="#000000" InvColor="#00000000" Title="Управление АПК (выход на драйвер 0-10 В)" AxisTitle="Управление АПК (выход на драйвер 0-10 В)" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" />
+
+                                    insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
+                                    if(!getTrendAttr(tableList, sig0, nameSig, attr)) ret = -1;
+                                    Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
+                                    "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
+                                    colorInd++;
+                                    if(colorInd > colorMax) colorInd = 0;
+                                    for(Object key: trendAttr.keySet()) 
+                                        hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
+                                }                            
+                            }
+                            if(ret==0) insertVarInPrj(intSax, interfaceList, sig0, type, "", true, true, uuid, appPathName +".int", "");
+                        }
+                    }
+                }else{
+                    String groupName = sig0.substring(2, x)+sa;
+                    String localName = sig0.substring(x+1);
+                    Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
+                    if(n==null){
+                        FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ groupName);
+                        ret = -1;
+                        continue;
+                    }
+                    String type = bigSax.getDataAttr(n, "Type");
+                    String uuid = bigSax.getDataAttr(n, "UUID");
                     String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
                     if(sigFileName==null){
                         FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + File.separator+"Design");
@@ -1122,75 +1222,30 @@ public class Generator {
                     else {
                         XMLSAX sigSax = new XMLSAX();
                         sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
-                        Node sigs = sigSax.returnFirstFinedNode("Fields");
-                        ArrayList<Node> sigNodeList = sigSax.getHeirNode(sigs);//Находим все ноды
-                        for(Node sigNode: sigNodeList){
-                            String nameSig = bigSax.getDataAttr(sigNode, "Name");
+                        Node sigNode = sigSax.findNodeAtribute(new String[]{"Field","Name",localName});
+                        if(sigNode==null){
+                            FileManager.loggerConstructor("Не найден сигнал "+localName+" в файле "+ globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
+                            ret = -1;
+                        }else{
                             String typeSig = bigSax.getDataAttr(sigNode, "Type");
                             String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
-                            if(!nameSig.contains("Res_")){
-                                String tmpName = sig[0]+"."+nameSig;
-                                String tmpUuid = uuid+"."+uuidSig;
-                                if(!isStdType(typeSig)){
-                                    tmpName += ".PV";
-                                    tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
-                                }// <Trend ItemName="AO_D.Set_APK" UUID="D81CC7224B1F7C96DAA237A634367986.4C16C6034A798CBFCD04F398721A6E10" Min="0" Max="10" Log="FALSE" Color="#000000" InvColor="#00000000" Title="Управление АПК (выход на драйвер 0-10 В)" AxisTitle="Управление АПК (выход на драйвер 0-10 В)" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" />
-
-                                insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
-                                if(!getTrendAttr(tableList, sig[0], nameSig, attr)) ret = -1;
-                                Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
-                                "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
-                                colorInd++;
-                                if(colorInd > colorMax) colorInd = 0;
-                                for(Object key: trendAttr.keySet()) 
-                                    hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
-                            }                            
+                            String tmpName = groupName+"."+localName;
+                            String tmpUuid = uuid+"."+uuidSig;
+                            if(!isStdType(typeSig)){
+                                tmpName += ".PV";
+                                tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
+                            }
+                            insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
+                            if(!getTrendAttr(tableList, groupName, localName, attr)) ret = -1;
+                            //Node tmpN = colorList.get(colorInd++);
+                            Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
+                            "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
+                            colorInd++;
+                            if(colorInd > colorMax) colorInd = 0;
+                            for(Object key: trendAttr.keySet()) 
+                                hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
+                            insertVarInPrj(intSax, interfaceList, groupName, type, "", true, true, uuid, appPathName +".int", "");
                         }
-                        if(ret==0) insertVarInPrj(intSax, interfaceList, sig[0], type, "", true, true, uuid, appPathName +".int", "");
-                    }
-                }
-            }else{
-                String groupName = sig[0].substring(2, x);
-                String localName = sig[0].substring(x+1);
-                Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
-                if(n==null){
-                    FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ groupName);
-                    ret = -1;
-                    continue;
-                }
-                String type = bigSax.getDataAttr(n, "Type");
-                String uuid = bigSax.getDataAttr(n, "UUID");
-                String sigFileName = FileManager.FindFile(globVar.desDir + File.separator+"Design", type, "UUID=");
-                if(sigFileName==null){
-                    FileManager.loggerConstructor("Не найден файл типа "+ type + " в каталоге "+ globVar.desDir + File.separator+"Design");
-                    ret = -1;
-                }
-                else {
-                    XMLSAX sigSax = new XMLSAX();
-                    sigSax.readDocument(globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
-                    Node sigNode = sigSax.findNodeAtribute(new String[]{"Field","Name",localName});
-                    if(sigNode==null){
-                        FileManager.loggerConstructor("Не найден сигнал "+localName+" в файле "+ globVar.desDir + File.separator+"Design"+File.separator + sigFileName);
-                        ret = -1;
-                    }else{
-                        String typeSig = bigSax.getDataAttr(sigNode, "Type");
-                        String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
-                        String tmpName = groupName+"."+localName;
-                        String tmpUuid = uuid+"."+uuidSig;
-                        if(!isStdType(typeSig)){
-                            tmpName += ".PV";
-                            tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
-                        }
-                        insertInArcive(tmpName, archTyps[archType],tmpUuid,archSax);
-                        if(!getTrendAttr(tableList, groupName, localName, attr)) ret = -1;
-                        //Node tmpN = colorList.get(colorInd++);
-                        Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd),"Color"),
-                        "ItemName", tmpName,"UUID", tmpUuid,"Min", attr[0],"Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
-                        colorInd++;
-                        if(colorInd > colorMax) colorInd = 0;
-                        for(Object key: trendAttr.keySet()) 
-                            hmiSax.setDataAttr(newTrend, (String)key, (String)trendAttr.get(key));
-                        insertVarInPrj(intSax, interfaceList, groupName, type, "", true, true, uuid, appPathName +".int", "");
                     }
                 }
             }
