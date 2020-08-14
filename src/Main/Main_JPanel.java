@@ -102,6 +102,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
         menuLoger = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -136,12 +137,36 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jLabel7.setText("pass:");
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("base:");
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText("Подключить");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_all_ActionPerformed(evt);
+                jButton12ActionPerformed(evt);
             }
         });
 
@@ -195,27 +220,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addComponent(jButton12)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_all_ActionPerformed(evt);
-            }
-        });
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_all_ActionPerformed(evt);
-            }
-        });
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_all_ActionPerformed(evt);
-            }
-        });
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_all_ActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -383,6 +387,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
         jMenu3.add(menuLoger);
+
+        jMenuItem7.setText("Инспекция таблиц");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
 
@@ -674,6 +686,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // обработчик для всех текстовых полей окна Jdialog1 и кнопки
     private void jTextField_all_ActionPerformed(java.awt.event.ActionEvent evt) {
+        
+        // прикручиваем прогрессБар Льва  
+        pb = new ProgressBar();
+        pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        //pb.setUndecorated(true); // не удалить кнопки если окно инициализированно
+        //pb.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        pb.setTitle("Обработка даных");
+        pb.setVisible(true);
         String addresSecondDB = jTextField2.getText(); // адрес базы
         String DB = jTextField5.getText(); // имя базы
         String userSecondDB = jTextField3.getText(); // имя пользователя
@@ -692,7 +712,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (mergeDB.connectAnotherDB() == 0) {
             System.out.println("connect base");
             jDialog1.dispose(); // закрываем окошко при удачном подключении
-            mergeDB.editBases(); // запуск метода обработки баз
+             DoIt di = () -> {
+                mergeDB.editBases(pb.jProgressBar1); // запуск метода обработки баз(и передача прогресс бара) и нужно передать данные в Doit
+                pb.dispose();
+            };
+             
+            BackgroundThread bt = new BackgroundThread("Pbar", di);
+            bt.start();
+            
+            
         } else {
             JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
         }
@@ -772,6 +800,31 @@ public final class Main_JPanel extends javax.swing.JFrame {
         lvf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         lvf.setVisible(true);
     }//GEN-LAST:event_menuLogerActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        jTextField_all_ActionPerformed(evt); // вызов одинакового метода для всех
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        jTextField_all_ActionPerformed(evt);
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        jTextField_all_ActionPerformed(evt);
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        jTextField_all_ActionPerformed(evt);
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        jTextField_all_ActionPerformed(evt);
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    //  --- пукт инспекции таблиц ---
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
@@ -894,6 +947,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
