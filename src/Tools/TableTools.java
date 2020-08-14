@@ -38,6 +38,7 @@ public class TableTools {//ссылка на таблицу, массив шир
 
     static ArrayList<String[]> list_str = new ArrayList<>();
     static ArrayList<String> list_cells = new ArrayList<>();
+
     HashMap<int[], Object> current_change = new HashMap<>();
     int index_changes = 1;//индекс отсчета изменений
     static int rows[] = {};
@@ -504,6 +505,24 @@ public class TableTools {//ссылка на таблицу, массив шир
         for (String[] al : archList) {
             if (al[1].equals(i)) {
                 list.addElement(al[0]);
+            }
+        }
+    }
+    
+    public static void setSignalListFromDB(DefaultListModel list, ArrayList<String> tabList, String abonent, boolean b, 
+            ArrayList<String[]> archList, ArrayList<String> plusList) {
+        boolean ins=true;
+        list.removeAllElements();
+        for(String tn: tabList){
+            if (ins) { //если глобальнаяя структура доложна быть включена в список
+                if (plusList.contains(tn)) { //проверяем, нет ли её в списке раскрытых структур
+                    //ArrayList<String> plusSigList = openSigFromDB(tn); //если есть - раскрываем структуру
+                    ArrayList<String> plusSigList = globVar.DB.getDataFromColumn(tn,"TAG_NAME_PLC","");
+                    for (String psl : plusSigList) {
+                        String tmp = "– "+tn+"."+psl;
+                        if (!isInList(tmp, archList, 0)) list.addElement(tmp);
+                    }
+                } else if (!isInList(tn, archList, 0)) list.addElement(tn);
             }
         }
     }
