@@ -364,7 +364,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem_AnotherBase.setText("перенос данных в иную базе");
+        jMenuItem_AnotherBase.setText("перенос таблиц в другую базу");
         jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jMenuItem_AnotherBaseComponentAdded(evt);
@@ -734,9 +734,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
         bt.start();
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    //Меню: Проект/Абоненты
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        if(!globVar.DB.isTable("Abonents")){
+            JOptionPane.showMessageDialog(null, "Таблицы абонентов в текущей БД нет");
+            return;
+        }
+        SimpleFrame sf = new SimpleFrame("Abonents");
+        sf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        sf.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
     //Редактирование ОРС серверов и клиентов
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

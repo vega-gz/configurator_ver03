@@ -108,7 +108,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         String trgCol =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"trgCol");
         if(linkTable!=null){
             relatedTable = abonent+"_"+linkTable;
-            st = new SimpleTable(relatedTable, null, null, trgCol);
+            st = new SimpleTable(relatedTable, trgCol, null);
             jTable1 = new JTable();
             jScrollPane1 = new JScrollPane();
             jTable1.setModel(st.tableModel);
@@ -253,7 +253,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         if(title!=null) this.setTitle(title + ": "+(curr+1));
         for(int i=1; i<qCols; i++)
             field[i].setText(tableModel.getValueAt(curr, i));
-        if(st!=null) st.resetTableContent(tableModel.getValueAt(curr, 2));//"TAG_NAME_AnPar",
+        if(st!=null) st.reSetTableContent(tableModel.getValueAt(curr, 2));//"TAG_NAME_AnPar",
     }
     
     private void shiftLActionPerformed(java.awt.event.ActionEvent evt) {  
