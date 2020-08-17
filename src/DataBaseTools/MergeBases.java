@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -97,7 +98,8 @@ public class MergeBases {
 
     }
 
-    public void editBases() {
+    // анализ данных с прогрессбаром
+    public void editBases(JProgressBar pb) {
         // Запросы к базам
         if (connectAnotherDB() == 0) { // запуск если статус подключения есть
             ArrayList<String> tableCurrentDB = currentDB.getListTable();
@@ -125,8 +127,11 @@ public class MergeBases {
             else {
                 System.out.println("Table fit");
             }
+            int nCnt = 0;
+            pb.setMaximum(tableCurrentDB.size());
             // переборка таблиц(распознаем различия)
             for (String currentT : tableCurrentDB) {
+                if(pb!=null) pb.setValue(++nCnt);//Прогресс анализа данных базы
                 boolean onceT = false;
                 //System.out.println("Tables fit " + aT);
                 ArrayList<String[]> columnNotFit = new ArrayList<>(); // лист не совподающих данных строке в таблице
