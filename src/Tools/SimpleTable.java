@@ -26,7 +26,7 @@ public final class SimpleTable {
     String oldVal=null;
     ArrayList<String> listColumn;
     
-    public SimpleTable(String table, String col,String val, String trgCol) {
+    public SimpleTable(String table, String trgCol, String val) {
         if(!globVar.DB.isConnectOK())return;
         listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
@@ -44,8 +44,8 @@ public final class SimpleTable {
         fromDB = globVar.DB.getData(table);//, listColumn, "id");//, col, val);
         comment = globVar.DB.getCommentTable(table);
         //fromDB.forEach((rowData) -> tableModel.addRow(rowData));
-        resetTableContent(val);
         tableSize = fromDB.size();
+        reSetTableContent(val);
         qCol = cols.length;
         align = new int[qCol];
         colsWidth = new int[qCol];
@@ -63,7 +63,7 @@ public final class SimpleTable {
         TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
     }
     
-    public void resetTableContent(String val){
+    public void reSetTableContent(String val){
         if(tableSize<0) return;
         if(oldVal!=null && trgColNum>=0){
             for(int i = fromDB.size()-1; i >=0; i--)
@@ -97,7 +97,6 @@ public final class SimpleTable {
                 }
             }
         }
-        //isNew(fromDB, tableModel);
     }
 
     public boolean isNew(){
@@ -110,6 +109,10 @@ public final class SimpleTable {
     }
     
     public void saveTableInDB(){
+        if(tableSize<0) return;
+        globVar.DB.createTable(tableName, listColumn, fromDB, comment);
+    }
+    public void saveJTable(){
         if(tableSize<0) return;
         globVar.DB.createTable(tableName, listColumn, fromDB, comment);
     }

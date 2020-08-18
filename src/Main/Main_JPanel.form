@@ -211,7 +211,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_AnotherBase">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x43f;&#x435;&#x440;&#x435;&#x43d;&#x43e;&#x441; &#x434;&#x430;&#x43d;&#x43d;&#x44b;&#x445; &#x432; &#x438;&#x43d;&#x443;&#x44e; &#x431;&#x430;&#x437;&#x435;"/>
+                <Property name="text" type="java.lang.String" value="&#x43f;&#x435;&#x440;&#x435;&#x43d;&#x43e;&#x441; &#x442;&#x430;&#x431;&#x43b;&#x438;&#x446; &#x432; &#x434;&#x440;&#x443;&#x433;&#x443;&#x44e; &#x431;&#x430;&#x437;&#x443;"/>
               </Properties>
               <Events>
                 <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jMenuItem_AnotherBaseComponentAdded"/>
