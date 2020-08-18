@@ -21,7 +21,7 @@ public class MergeBasesFrame extends javax.swing.JFrame {
     MergeBases MB;
     public ArrayList<DiffDataTable> listObjRight = new ArrayList<>(); // Храним объекты различия текущей таблицы 
     DefaultListModel<String> listModel = new DefaultListModel<String>(); // модель первого списка
-    DefaultListModel<String> listModelTwo = new DefaultListModel<String>(); // модель первого списка
+    DefaultListModel<String> listModelTwo = new DefaultListModel<String>(); // модель второго списка
     String[] checkFieldTable = null; // хранятся выделлые группой элементы списков
 
     /**

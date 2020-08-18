@@ -102,7 +102,16 @@ public class MergeBases {
     public void editBases(JProgressBar pb) {
         // Запросы к базам
         if (connectAnotherDB() == 0) { // запуск если статус подключения есть
-            ArrayList<String> tableCurrentDB = currentDB.getListTable();
+            ArrayList<String> tableCurrentDB = currentDB.getListTable(); // текущие таблицы
+            
+            // берем только те что не удаленные
+            for (int i = 0; i < tableCurrentDB.size(); ++i) {
+                String s1 = tableCurrentDB.get(i);
+                if(s1.matches("^Del.*")){// Если начинается не с Del автоматом пропускаем 
+                    tableCurrentDB.remove(i);
+                    --i;
+                } 
+            }
             ArrayList<String> tableADB = aDB.getListTable();
             Collections.sort(tableCurrentDB); // сортируем листы
             Collections.sort(tableADB);
