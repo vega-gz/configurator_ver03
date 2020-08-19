@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -97,10 +98,20 @@ public class MergeBases {
 
     }
 
-    public void editBases() {
+    // анализ данных с прогрессбаром
+    public void editBases(JProgressBar pb) {
         // Запросы к базам
         if (connectAnotherDB() == 0) { // запуск если статус подключения есть
-            ArrayList<String> tableCurrentDB = currentDB.getListTable();
+            ArrayList<String> tableCurrentDB = currentDB.getListTable(); // текущие таблицы
+            
+            // берем только те что не удаленные
+            for (int i = 0; i < tableCurrentDB.size(); ++i) {
+                String s1 = tableCurrentDB.get(i);
+                if(s1.matches("^Del.*")){// Если начинается не с Del автоматом пропускаем 
+                    tableCurrentDB.remove(i);
+                    --i;
+                } 
+            }
             ArrayList<String> tableADB = aDB.getListTable();
             Collections.sort(tableCurrentDB); // сортируем листы
             Collections.sort(tableADB);
@@ -125,8 +136,11 @@ public class MergeBases {
             else {
                 System.out.println("Table fit");
             }
+            int nCnt = 0;
+            pb.setMaximum(tableCurrentDB.size());
             // переборка таблиц(распознаем различия)
             for (String currentT : tableCurrentDB) {
+                if(pb!=null) pb.setValue(++nCnt);//Прогресс анализа данных базы
                 boolean onceT = false;
                 //System.out.println("Tables fit " + aT);
                 ArrayList<String[]> columnNotFit = new ArrayList<>(); // лист не совподающих данных строке в таблице

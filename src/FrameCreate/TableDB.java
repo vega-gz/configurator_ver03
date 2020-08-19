@@ -3,6 +3,7 @@ package FrameCreate;
 import Generators.Generator;
 import Tools.BackgroundThread;
 import Tools.DoIt;
+import Tools.FileManager;
 import Tools.MyTableModel;
 import Tools.SaveFrameData;
 import Tools.TableTools;
@@ -93,6 +94,7 @@ public class TableDB extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton6 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,6 +174,13 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setText("изм.комм");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,6 +200,8 @@ public class TableDB extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6))
@@ -207,7 +218,8 @@ public class TableDB extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jCheckBox1)
                     .addComponent(jButton6)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7))
                 .addGap(3, 3, 3)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
         );
@@ -226,9 +238,9 @@ public class TableDB extends javax.swing.JFrame {
             if(!Tools.isDesDir()) return;
             int ret = 1;
             try {
-                ret = Generator.GenTypeFile(this, jProgressBar1);
+                ret = Generator.genTypeFile(this, jProgressBar1);
             } catch (IOException ex) {
-                //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                FileManager.loggerConstructor(ex.toString());
             }
             if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
             else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
@@ -238,7 +250,6 @@ public class TableDB extends javax.swing.JFrame {
         BackgroundThread bt = new BackgroundThread("Генерация .type", di);
         bt.start();
         globVar.processReg.add(processName);
-
     }//GEN-LAST:event_jButton1ActionPerformed
     //Конфигурирование хардваре
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -275,7 +286,7 @@ public class TableDB extends javax.swing.JFrame {
             if(!Tools.isDesDir()) return;
             String retHMI = null;
             try {
-                retHMI = Generator.GenHMI(this, jProgressBar1);
+                retHMI = Generator.genHMI(this, jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -370,6 +381,15 @@ public class TableDB extends javax.swing.JFrame {
 //        System.out.println("Component: " + evt.getComponent());
     }//GEN-LAST:event_jTable1FocusLost
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        
+        JFrame changeComm = new TextEdit("Редактор комментария", this);
+        changeComm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        changeComm.setVisible(true);
+        
+        //comment = "";
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -377,6 +397,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;

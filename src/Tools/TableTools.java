@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
@@ -28,6 +29,7 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import org.w3c.dom.Node;
@@ -37,24 +39,11 @@ public class TableTools {//ссылка на таблицу, массив шир
 
     static ArrayList<String[]> list_str = new ArrayList<>();
     static ArrayList<String> list_cells = new ArrayList<>();
-    // static HashMap<ArrayList, ArrayList> current_change = new HashMap<>();
-    static int index_changes = 1;//индекс отсчета изменений
-    static int rows[];
-    static int cols[];
-    static ArrayList<int[]> current_rows = new ArrayList<>();
-    static ArrayList<int[]> current_cols = new ArrayList<>();
-    static ArrayList<ArrayList<String[]>> current_value = new ArrayList<>();
-    static ArrayList<ArrayList> changes = new ArrayList<>();
 
-    public void setChanges(ArrayList<ArrayList> change) {
-        this.changes = change;
-    }
-
-    public ArrayList getChanges() {
-        return changes;
-
-    }
-
+    HashMap<int[], Object> current_change = new HashMap<>();
+    int index_changes = 1;//индекс отсчета изменений
+    static int rows[] = {};
+    static int cols[] = {};
     // ----- Функция для настройки свойств таблицы --------------Lev---
 
     static public int setTableSetting(JTable jTable1, int[] colWidth, int[] align, int headerWidth) {
@@ -112,21 +101,12 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     //---метод,который помещает изменения в хэшмэп
-    public static void currentMap(int[] rows, int[] cols, ArrayList<String[]> value) {
-        //  int[] index_value = {rows, cols};0
-//        ArrayList<int[]> index_value = new ArrayList<>();
-//        index_value.add(rows);
-//        index_value.add(cols);
-//        current_change.put(index_value, value);
-        current_rows.add(rows);
-        current_cols.add(cols);
-        current_value.add(value);
-        changes.add(current_cols);
-        changes.add(current_rows);
-        changes.add(current_value);
+    public void currentMap(int rows, int cols, Object value) {
+        int[] index_value = {rows, cols};
+        current_change.put(index_value, value);
         index_changes++;
         if (index_changes == 20) {
-            // current_change.remove(current_change.keySet().toArray()[current_change.keySet().size() - 1]);//удаляем последний элемент
+            current_change.remove(current_change.keySet().toArray()[current_change.keySet().size() - 1]);//удаляем последний элемент
         }
     }
 
@@ -142,6 +122,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         JMenuItem menuItemOpenWindow = null;
 
         menuItemCopyCells.setRequestFocusEnabled(false);
+        //  menuItemCopyCells.setIcon(UIManager.getIcon()); //   устанавливает необходимую иконку
         menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
         menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
 
@@ -179,6 +160,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         menuItemCopyCells.addActionListener((ActionEvent event) -> {
             rows = jTable1.getSelectedRows();
             cols = jTable1.getSelectedColumns();
+
             String value_cells;
             if (rows.length == 0 || cols.length == 0) {
                 JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");
@@ -199,6 +181,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             int startRow = (jTable1.getSelectedRows())[0];
             int startCol = (jTable1.getSelectedColumns())[0];
             String[] str = list_cells.toArray(new String[0]);
+
             for (int i = 0; i < str.length; i++) {
                 if (cnt % cols.length == 0) {//находит количетво выбранных столбцов и делит их на три велью 
                     for (int j = cols.length - 1; j < cols.length && j >= 0; j--) {
@@ -218,6 +201,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                         jTable1.setValueAt(value, startRow + (i - cnt2), startCol + (j));
                     }
                 }
+
                 v.clear();
             }
             list_cells.clear();
@@ -233,7 +217,6 @@ public class TableTools {//ссылка на таблицу, массив шир
                 String[] r = getRow(jTable1, rows[i]);
                 list_str.add(r);
             }
-            currentMap(rows, cols, list_str);
         });
 
         menuItemIncertStr.addActionListener((ActionEvent event) -> {
@@ -250,7 +233,6 @@ public class TableTools {//ссылка на таблицу, массив шир
                 tableModel.insertRow(row + 1, list_str.get(i));
                 setId(jTable1);
             }
-            currentMap(rows, cols, list_str);
         });
         menuItemRemove.addActionListener((ActionEvent event) -> {
             int row = jTable1.getSelectedRow();
@@ -346,6 +328,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
+
                         //---получение значениe 2-ой ячейки---//
                         st = cellNames.get(1);
                         matcher = Pattern.compile("\\D+$").matcher(st);
@@ -400,8 +383,8 @@ public class TableTools {//ссылка на таблицу, массив шир
             cellNames.clear();//обнуляем все для следующего столбца
         }
     }
-
     // ----- Функция для расстановки номеров строк в первом столбце --------------Lev---
+
     static public void setId(JTable jTable1) {
         int n = jTable1.getRowCount();
         for (int i = 0; i < n; i++) {
@@ -523,6 +506,24 @@ public class TableTools {//ссылка на таблицу, массив шир
         for (String[] al : archList) {
             if (al[1].equals(i)) {
                 list.addElement(al[0]);
+            }
+        }
+    }
+    
+    public static void setSignalListFromDB(DefaultListModel list, ArrayList<String> tabList, String abonent, boolean b, 
+            ArrayList<String[]> archList, ArrayList<String> plusList) {
+        boolean ins=true;
+        list.removeAllElements();
+        for(String tn: tabList){
+            if (ins) { //если глобальнаяя структура доложна быть включена в список
+                if (plusList.contains(tn)) { //проверяем, нет ли её в списке раскрытых структур
+                    //ArrayList<String> plusSigList = openSigFromDB(tn); //если есть - раскрываем структуру
+                    ArrayList<String> plusSigList = globVar.DB.getDataFromColumn(tn,"TAG_NAME_PLC","");
+                    for (String psl : plusSigList) {
+                        String tmp = "– "+tn+"."+psl;
+                        if (!isInList(tmp, archList, 0)) list.addElement(tmp);
+                    }
+                } else if (!isInList(tn, archList, 0)) list.addElement(tn);
             }
         }
     }
@@ -838,11 +839,14 @@ public class TableTools {//ссылка на таблицу, массив шир
                 }
             }
         }
-        
+        //System.out.println("return false");
         return false;
     }
 
-
+//    public static void resetID(ArrayList<String[]> t1){
+//        if(t1==null) return;
+//        for(int i=0; i < t1.size(); i++) t1.get(i)[0] = "" + (i+1);
+//    }
     public static void sotrList(ArrayList<String[]> t1, int k) {//ArrayList<String[]>
         if (t1 == null || t1.size() < 2) {
             return;
