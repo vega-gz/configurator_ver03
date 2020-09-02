@@ -626,7 +626,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
-
+//----------- Лишнее. Удалить!!!!!!!!!!!!!!!! -------------------
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -644,7 +644,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private void jFrameTableWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jFrameTableWindowClosed
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
     }//GEN-LAST:event_jFrameTableWindowClosed
-// ------ Выбор абонента, для которого будет загружаться ексель-файл
+    // ------ Выбор абонента, для которого будет загружаться ексель-файл
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         globVar.abonent = (String) jComboBox2.getSelectedItem();
     }//GEN-LAST:event_jComboBox2ActionPerformed
@@ -655,10 +655,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
             showTable(nameT); // вызов метода построения таблицы
         }
     }//GEN-LAST:event_jTree1MouseClicked
-
+//----------- Лишнее. Удалить!!!!!!!!!!!!!!!! -------------------
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_formFocusLost
+//=================================================================
 //----------- переименование .type файлов ----------------
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         if (!Tools.isDesDir()) {
@@ -678,7 +679,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         changeDB.setTitle("Сменить БД");
         changeDB.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     // обработчик пукт меню Утилит подключение в второй базе.
     private void jMenuItem_AnotherBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseActionPerformed
         XMLSAX sax = new XMLSAX();
@@ -711,16 +711,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jDialog1.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem_AnotherBaseActionPerformed
-
     // обработчик нажатий клавиш Jdialog подключения к второстепенной базе
     private void jDialog1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog1KeyPressed
         System.out.println("Press button");
     }//GEN-LAST:event_jDialog1KeyPressed
-
     // обработчик для всех текстовых полей окна Jdialog1 и кнопки
     private void jTextField_all_ActionPerformed(java.awt.event.ActionEvent evt) {
-        
-       
         String addresSecondDB = jTextField2.getText(); // адрес базы
         String DB = jTextField5.getText(); // имя базы
         String userSecondDB = jTextField3.getText(); // имя пользователя
@@ -759,14 +755,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
         }
-
     }
-
+    //--------Выгрузка из БД информации для абонента в Excel-------------
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (!Tools.isDB()) {
             return;
         }
-        String processName = "Процесс звыгрузки данных в Excel";
+        String processName = "Процесс выгрузки данных в Excel";
         if (globVar.processReg.indexOf(processName) >= 0) {
             JOptionPane.showMessageDialog(null, "Запуск нового процесса загрузки в БД данных из файла Excel заблокирован до окончания предыдущей загрузки");
             return;
@@ -819,7 +814,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         addOPC.setTitle("Конфигурирование ОРС серверов");
         addOPC.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
+    //Переименование IntFile
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         if (!Tools.isDesDir()) {
             return;
@@ -831,11 +826,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
-
+//----------- Лишнее. Удалить!!!!!!!!!!!!!!!! -------------------
     private void jMenuItem_AnotherBaseComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem_AnotherBaseComponentAdded
-
+//===============================================================
+    //Работа с удалёнными таблицами
     private void menuLogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogerActionPerformed
         LogerViewerFrame lvf = new LogerViewerFrame();
         lvf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -959,7 +955,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (!globVar.DB.isTable(table)) {
             return;
         }
-        TableDB tdb = new TableDB(table);
+        TableDB tdb = new TableDB(jTree1, table);
         tdb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         tdb.setVisible(true);
     }

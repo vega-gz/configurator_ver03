@@ -1,6 +1,7 @@
 package FrameCreate;
 
 import Generators.Generator;
+import Main.Main_JPanel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
@@ -36,9 +37,11 @@ public class TableDB extends javax.swing.JFrame {
     int[] align;
     int qCol;
     ArrayList<JFrame> listJF = new ArrayList();
+    javax.swing.JTree jTree1;
 
-    public TableDB(String table) {
+    public TableDB(javax.swing.JTree jTree, String table) {
         tableName = table;
+        jTree1 = jTree;
         if(!globVar.DB.isConnectOK())return;
         List<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
@@ -336,6 +339,8 @@ public class TableDB extends javax.swing.JFrame {
                 "Вопрос", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1])
         ) return;
         globVar.DB.dropTableWithBackUp(tableName);
+        jTree1.setModel(Main_JPanel.getModelTreeNZ());// обновить дерево
+
         globVar.processReg.remove(this.getTitle());
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
