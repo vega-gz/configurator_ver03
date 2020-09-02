@@ -39,6 +39,7 @@ public class InspectionTablesFrame extends javax.swing.JFrame {
      * Creates new form InspectionTables
      */
     public InspectionTablesFrame() {
+        this.setTitle("восстановление или полное удаление таблиц (помеченное как удаленные)."); // Установить заголовок
         initComponents();
         setDataToFrame();
     }
@@ -299,9 +300,21 @@ public class InspectionTablesFrame extends javax.swing.JFrame {
             }
         }
 
-        // заносим данные в колонки
+        // заносим данные в лист
+        ArrayList<String> leftColumn = new ArrayList<>();
         for (Map.Entry<String, ArrayList<String>> item : mapData.entrySet()) {
-            listModel.addElement(item.getKey());
+            leftColumn.add(item.getKey());
+        }
+        // Сортируем левую колонку
+        Collections.sort(leftColumn, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        // и данные в модель листа
+        for(String s: leftColumn){
+            listModel.addElement(s);
         }
         jList1.setModel(listModel);
 
