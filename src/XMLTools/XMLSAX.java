@@ -125,7 +125,7 @@ public class XMLSAX {
         String [] sa = {arg};
         return insertChildNode(parent, sa);
     }
-    // --- Вставка и сождании новой ноды с параметрами ---
+    // --- Вставка и создании новой ноды с параметрами ---
     public Node insertChildNode(Node parent, String[] arg){
         // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
         Node createN = createNode(arg[0]);

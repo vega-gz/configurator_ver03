@@ -674,7 +674,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 //------ Смена БД -----
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         JFrame changeDB = new ChangeDB(jTree1, this);
-        changeDB.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        changeDB.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         changeDB.setTitle("Сменить БД");
         changeDB.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -838,7 +838,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     private void menuLogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogerActionPerformed
         LogerViewerFrame lvf = new LogerViewerFrame();
-        lvf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        lvf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         lvf.setVisible(true);
     }//GEN-LAST:event_menuLogerActionPerformed
 
@@ -864,7 +864,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     //  --- пукт инспекции таблиц ---
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        new InspectionTablesFrame().setVisible(true);
+        InspectionTablesFrame itf = new InspectionTablesFrame();
+        itf.setVisible(true);
+        itf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        //DISPOSE_ON_CLOSE
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     // -- Лист выбора базы в меню при слиянии --
