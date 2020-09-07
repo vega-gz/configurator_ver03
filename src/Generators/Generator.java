@@ -1149,6 +1149,7 @@ public class Generator {
         }//Если не вылетели - значит будет генерация
         hmiSax.setDataAttr(trendNode, "Name", trendSheetName);
         if(trendSheetUUID!=null)hmiSax.setDataAttr(trendNode, "UUID", trendSheetUUID);
+        else hmiSax.setDataAttr(trendNode, "UUID", UUID.getUIID());
         //trendNode = hmiSax.findNodeAtribute(new String[]{"FB","Name","TREND_WINDOW"});//FB Name="TREND_WINDOW"
         trendNode = hmiSax.returnFirstFinedNode(hmiSax.findNodeAtribute(new String[]{"FB","Name","TREND_WINDOW"}), "Data");//Аццкие сонатоиды! Корневая нода и нода с трендами называются одинаково
 
