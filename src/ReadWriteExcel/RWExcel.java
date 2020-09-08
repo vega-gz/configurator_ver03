@@ -283,7 +283,7 @@ public class RWExcel {
                                     rowMax = i-1;
                                 }
                             }
-                            dataFromExcel = new String[rowMax+1][colList.size()];
+                            dataFromExcel = new String[rowMax][colList.size()];
                         }
                         for(int i=0; i<rowMax; i++ ){//Пробегаем по строкам столбца 
                             String strCell = getDataCell(sheet.getRow(i+1), colExName);

@@ -1166,10 +1166,11 @@ public class Generator {
             String tableName = sig[0];
             int x = tableName.indexOf(".");
             //---------------------- Определение списка структур ------------------------------
-            if(x>0) tableName = tableName.substring(0, x);
+            if(x>0) tableName = tableName.substring(2, x);
             ArrayList<String> structArr = new ArrayList<>();
             String sigStructs = globVar.DB.getCommentTable(tableName);
-            int z = sigStructs.indexOf("Архив:");
+            int z = -1;
+            if(!sigStructs.isEmpty() && sigStructs.length()>6) z = sigStructs.indexOf("Архив:");
             if(z < 0) structArr.add("");
             else {
                 z+=6;
@@ -1236,8 +1237,8 @@ public class Generator {
                         }
                     }
                 }else{
-                    String groupName = sig0.substring(2, x)+sa;
-                    String localName = sig0.substring(x+1);
+                    String groupName = tableName+sa;
+                    String localName = sig0.substring(x-1);
                     Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
                     if(n==null){
                         FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ groupName);

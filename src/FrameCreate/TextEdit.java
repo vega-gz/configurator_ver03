@@ -1,14 +1,19 @@
 package FrameCreate;
 
+import globalData.globVar;
+
 /*@author lev*/
 public class TextEdit extends javax.swing.JFrame {
     TableDB tdb;
+    boolean ren;
     
-    public TextEdit(String title, TableDB tdb) {
+    public TextEdit(String title, TableDB tdb, boolean rename) {
         this.tdb = tdb;
         initComponents();
         this.setTitle(title);
-        jTextArea1.append(tdb.comment);
+        ren = rename;
+        if(ren) jTextArea1.append(tdb.tableName);
+        else jTextArea1.append(tdb.comment);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -52,7 +57,12 @@ public class TextEdit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        tdb.comment = jTextArea1.getText();
+        if(ren){
+            globVar.DB.renameTable(tdb.tableName, jTextArea1.getText());
+            tdb.tableName = jTextArea1.getText();
+        }else{
+            tdb.comment = jTextArea1.getText();
+        }
         tdb.setTitle(tdb.tableName+" :"+tdb.comment);
     }//GEN-LAST:event_jButton1ActionPerformed
 
