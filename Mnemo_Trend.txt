@@ -1,63 +1,67 @@
 <Data>
-    <WindowFBType Name="T07_Trend" UUID="114D0D434EA28BA5F6830B8A3B487F84">
+    <GraphicsCompositeFBType Name="T11_KC_Trend" ShowVarTypes="true" UUID="RNLBZVL3AJXU3PTWXO65ONKBHE">
         <InterfaceList>
-            <EventInputs>
-                <Event Name="show" UUID="C7EAA1EB434D26CD0E95FEB5B380ED33" />
-                <Event Name="show_modal" UUID="783A228C4C103C44ACB680BC2632D53C" />
-                <Event Name="hide" UUID="860197FD4B47ACFA4D8E688193971E2F" />
-            </EventInputs>
             <EventOutputs>
-                <Event Name="showed" UUID="9EA97E954ACBA70E705C4F98412FA701" />
-                <Event Name="hid" UUID="2C97A00C47E7DBDF4E600BA7EB7EC064" />
+                <Event Name="mouseLBPress" Comment="событие нажатия левой кнопки мыши на объекте" UUID="V6KZEKNMZSTEPFU4AATMKR23JQ" />
+                <Event Name="mouseLBRelease" Comment="событие отпускания левой кнопки мыши на объекте" UUID="CMAONDPWHSAEHMJS6M4XSAGDNQ" />
+                <Event Name="mouseRBPress" Comment="событие нажатия правой кнопки мыши на объекте" UUID="6WJ6SXLHALQEHCL5A7XVWG6Q2M" />
+                <Event Name="mouseRBRelease" Comment="событие отпускания правой кнопки мыши на объекте" UUID="RVY3ACQCBPUUDNBFKT37BQJZDY" />
+                <Event Name="mouseEnter" Comment="событие входа указателя мыши в пределы объекта" UUID="CVJR3KU4H2OUZIFNWASV2K7YKY" />
+                <Event Name="mouseLeave" Comment="событие выхода указателя мыши за пределы объекта" UUID="ULABXQT2CWHEVGWFBP2XXTJVCY" />
+                <Event Name="mouseLBDblClick" Comment="событие двойного щелчка левой кнопки мыши на объекте" UUID="2JR5EGZ5UMXUDM6FM6RQVHYMJA" />
             </EventOutputs>
             <InputVars>
-                <VarDeclaration Name="pos" Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" InitialValue="(x:=0,y:=0)" UUID="B3E2DCE04C63F5A91D55B4B585803AB1" />
-                <VarDeclaration Name="visible" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" InitialValue="FALSE" UUID="E0FDB58B4C0E41BEF99CB99F0F523C83" />
-                <VarDeclaration Name="size" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" InitialValue="(width:=1040,height:=742)" UUID="C6CE29B54853ABD72B3982A71CC39353" />
-                <VarDeclaration Name="bg_color" Type="TColor" TypeUUID="2096F020447B4C22B73436BBC88DA44A" InitialValue="4294967295" UUID="D03F45464B2E21A355B59D837757F003" />
-                <VarDeclaration Name="caption" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" InitialValue="&apos;&apos;" UUID="8C7888E44906B8F86A91D69C32372491" />
-                <VarDeclaration Name="flags" Type="UDINT" TypeUUID="48E8E24D4C69B5FCC5612AA94912BBEA" InitialValue="0" UUID="BA33E0F641DFB93B2F2492A0A68BB0F4" />
-                <VarDeclaration Name="hScrollBarPolicy" Type="SINT" TypeUUID="0FB4748840374EDB8A7469918166E250" InitialValue="0" UUID="B8CE7BA74F8B174D8035B38D5D6770A5" />
-                <VarDeclaration Name="vScrollBarPolicy" Type="SINT" TypeUUID="0FB4748840374EDB8A7469918166E250" InitialValue="0" UUID="0DA0F7F9457C659E549C3AB8AD1EEBAD" />
-                <VarDeclaration Name="DT_new" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" InitialValue="DT#1970-01-01-00:00:00.000" UUID="777988B54D8AE6FEEC0B5791DD01968D" />
-                <VarDeclaration Name="DT_set" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" InitialValue="FALSE" UUID="94C1A5754F51E6A318C369848719896A" />
+                <VarDeclaration Name="pos" Type="TPos" TypeUUID="CUUMQF3SQNRUHD62PGG7FSXXFY" Comment="позиция объекта" InitialValue="(x:=0,y:=0)" UUID="YICJMWNGDJSENDCQB25KI7V7TI" />
+                <VarDeclaration Name="angle" Type="LREAL" Comment="угол поворота объекта" InitialValue="0" UUID="QAO7YAFI4UWUVECT5A6T3LCA2Y" />
+                <VarDeclaration Name="enabled" Type="BOOL" Comment="доступность объекта" InitialValue="TRUE" UUID="AOL3AFL4X2NUXJHAPDGTSQVGMY" />
+                <VarDeclaration Name="moveable" Type="BOOL" Comment="подвижность объекта" InitialValue="FALSE" UUID="BWAWE3KLRTPUNPRN4YTUWGLDXI" />
+                <VarDeclaration Name="visible" Type="BOOL" Comment="видимость объекта" InitialValue="TRUE" UUID="R4UML2QPG4NEHGHPSN2NKE6GUI" />
+                <VarDeclaration Name="zValue" Type="LREAL" Comment="z-индекс объекта" InitialValue="0" UUID="VXTOSKNU3FNUPMCAN6PKO5EDGI" />
+                <VarDeclaration Name="hint" Type="STRING" Comment="всплывающая подсказка" InitialValue="&apos;&apos;" UUID="CLZADEBSNHDEJMFXQH53VBNQEE" />
+                <VarDeclaration Name="size" Type="TSize" TypeUUID="XDTT5M52XMSURN23S57SF26UGU" Comment="размер прямоугольника" InitialValue="(width:=1670,height:=790)" UUID="HC2FKFJ4NBUU3J5U7QZTECI2TM" />
+                <VarDeclaration Name="caption" Type="STRING" Comment="имя области" InitialValue="&apos;&apos;" UUID="WK2HU7I67XXEDCTZGLXIRQO4YE" />
+                <VarDeclaration Name="NameRu" Type="STRING" Comment="Имя объекта" InitialValue="&apos;&apos;" UUID="LOL7W5GFINPUFCU456DKJ4AZU4" />
+                <VarDeclaration Name="PrefAb" Type="STRING" Comment="Префикс абонента" InitialValue="&apos;&apos;" UUID="YI7N2WBNOD2UVGA2BTT3DR4OT4" />
+                <VarDeclaration Name="bg_color" Type="TColor" TypeUUID="EDYJMIBCJR5UJOZWGS3UVJENZA" InitialValue="4290822336" UUID="WQK5YZN6727UDLGFYADGSXK2WU" />
+                <VarDeclaration Name="DateTrend" Type="DT" InitialValue="DT#1970-01-01-00:00:00.000" UUID="5GYYH3EBXR3EVGIZHDH47PCDPI" />
             </InputVars>
         </InterfaceList>
         <FBNetwork>
-            <FB Name="TREND_WINDOW" Type="ARCHIVE_TREND" TypeUUID="8E7D1F2B4C87981B9E15CFB2D58A0885" UUID="512D41B04596D3C9048CA49C94E6C3EE" X="845.395175558208" Y="826.230736068447">
-                <VarValue Variable="angle" Value="0" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
-                <VarValue Variable="size" Value="(width:=1678,height:=772)" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" />
-                <VarValue Variable="pos" Value="(x:=-1,y:=-1)" Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" />
-                <VarValue Variable="enabled" Value="TRUE" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
-                <VarValue Variable="visible" Value="TRUE" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" />
-                <VarValue Variable="zValue" Value="5" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" />
+            <FB Name="TREND_WINDOW" Type="ARCHIVE_TREND" TypeUUID="FMPX3DQ3TCDUZMWPCWPIKCEK2U" Enabled="true" UUID="E7U2N375YABELB2VVCH5RZSSEM" X="-305" Y="62">
+                <VarValue Variable="pos" Value="(x:=0,y:=0)" Type="TPos" TypeUUID="CUUMQF3SQNRUHD62PGG7FSXXFY" />
+                <VarValue Variable="angle" Value="0" Type="LREAL" />
+                <VarValue Variable="size" Value="(width:=1678,height:=772)" Type="TSize" TypeUUID="XDTT5M52XMSURN23S57SF26UGU" />
+                <VarValue Variable="visible" Value="TRUE" Type="BOOL" />
+                <VarValue Variable="zValue" Value="5" Type="LREAL" />
+                <VarValue Variable="enabled" Value="TRUE" Type="BOOL" />
                 <InterfaceList>
                     <EventOutputs>
-                        <Event Name="mouseLBPress" Comment="событие нажатия левой кнопки мыши на объекте" UUID="299295AF47A6CCAC26009C964C5B47C5" />
-                        <Event Name="mouseLBRelease" Comment="событие отпускания левой кнопки мыши на объекте" UUID="8DE6001343803CF639F332B16CC30079" />
-                        <Event Name="mouseRBPress" Comment="событие нажатия правой кнопки мыши на объекте" UUID="5DE993F543E00267EF077D89D3D01B5B" />
-                        <Event Name="mouseRBRelease" Comment="событие отпускания правой кнопки мыши на объекте" UUID="0AB0718D41E90B02F75425B41E39C1F0" />
-                        <Event Name="mouseEnter" Comment="событие входа указателя мыши в пределы объекта" UUID="AA1D53154C9D3E9C25B0ADA056F82B5D" />
-                        <Event Name="mouseLeave" Comment="событие выхода указателя мыши за пределы объекта" UUID="C21BC0A24A8E157AF50BC59A1635CD7B" />
-                        <Event Name="mouseLBDblClick" Comment="событие двойного щелчка левой кнопки мыши на объекте" UUID="1BD263D2412FA33DA367C5B3480C9F0A" />
-                        <Event Name="SAVED" Comment="данные сохранены" UUID="C7C2A3FD4FC522633BC893985B9A02A6" />
-                        <Event Name="PRINTED" Comment="данные распечатаны" UUID="EA660C124AEA618DD31E908BE6FFA51A" />
+                        <Event Name="mouseLBPress" Comment="событие нажатия левой кнопки мыши на объекте" UUID="V6KZEKNMZSTEPFU4AATMKR23JQ" />
+                        <Event Name="mouseLBRelease" Comment="событие отпускания левой кнопки мыши на объекте" UUID="CMAONDPWHSAEHMJS6M4XSAGDNQ" />
+                        <Event Name="mouseRBPress" Comment="событие нажатия правой кнопки мыши на объекте" UUID="6WJ6SXLHALQEHCL5A7XVWG6Q2M" />
+                        <Event Name="mouseRBRelease" Comment="событие отпускания правой кнопки мыши на объекте" UUID="RVY3ACQCBPUUDNBFKT37BQJZDY" />
+                        <Event Name="mouseEnter" Comment="событие входа указателя мыши в пределы объекта" UUID="CVJR3KU4H2OUZIFNWASV2K7YKY" />
+                        <Event Name="mouseLeave" Comment="событие выхода указателя мыши за пределы объекта" UUID="ULABXQT2CWHEVGWFBP2XXTJVCY" />
+                        <Event Name="mouseLBDblClick" Comment="событие двойного щелчка левой кнопки мыши на объекте" UUID="2JR5EGZ5UMXUDM6FM6RQVHYMJA" />
+                        <Event Name="SAVED" Comment="данные сохранены" UUID="7WR4FR3DELCU7GETZA52MAU2LM" />
+                        <Event Name="PRINTED" Comment="данные распечатаны" UUID="CIGGN2UNMHVEVC4QD3JRVJP74Y" />
                     </EventOutputs>
                     <InputVars>
-                        <VarDeclaration Name="pos" Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" Comment="позиция объекта" InitialValue="(x:=0,y:=0)" UUID="599604C246641AA6BA0E508C9ABF7EA4" />
-                        <VarDeclaration Name="angle" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Comment="угол поворота объекта" InitialValue="0" UUID="00FC1D804A2DE5A83DE85390D640AC3D" />
-                        <VarDeclaration Name="enabled" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Comment="доступность объекта" InitialValue="TRUE" UUID="15B097034B9BBE7CCD78E0A466A64239" />
-                        <VarDeclaration Name="moveable" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Comment="подвижность объекта" InitialValue="FALSE" UUID="6D62810D46DF8C4B27E62DBEBA63194B" />
-                        <VarDeclaration Name="visible" Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Comment="видимость объекта" InitialValue="TRUE" UUID="EAC5288F431A370F7493EF98A2C613D5" />
-                        <VarDeclaration Name="zValue" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" Comment="z-индекс объекта" InitialValue="0" UUID="29E9E6AD475BD9B49E6F40B0328374A7" />
-                        <VarDeclaration Name="hint" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Comment="всплывающая подсказка" InitialValue="&apos;&apos;" UUID="9001F21244C66932FB81B7B021B085BA" />
-                        <VarDeclaration Name="size" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" Comment="размер прямоугольника" InitialValue="(width:=50,height:=50)" UUID="1555B4384D69683C33FCB4A79B1A0932" />
-                        <VarDeclaration Name="font" Type="TFont" TypeUUID="90FD67C547172D027101CAA2975B8031" Comment="Шрифт текста" InitialValue="(family:=&apos;MS Shell Dlg 2&apos;,size:=11,bold:=FALSE,italic:=FALSE,underline:=FALSE,strikeout:=FALSE)" UUID="6506798C4124D61EAF94B7922188432A" />
-                        <VarDeclaration Name="DTV" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Comment="начало временной шкалы" InitialValue="DT#1970-01-01-00:00:00.000" UUID="594DE01743E5096C3EAE629F86B3AA63" />
+                        <VarDeclaration Name="pos" Type="TPos" TypeUUID="CUUMQF3SQNRUHD62PGG7FSXXFY" Comment="позиция объекта" InitialValue="(x:=0,y:=0)" UUID="YICJMWNGDJSENDCQB25KI7V7TI" />
+                        <VarDeclaration Name="angle" Type="LREAL" Comment="угол поворота объекта" InitialValue="0" UUID="QAO7YAFI4UWUVECT5A6T3LCA2Y" />
+                        <VarDeclaration Name="enabled" Type="BOOL" Comment="доступность объекта" InitialValue="TRUE" UUID="AOL3AFL4X2NUXJHAPDGTSQVGMY" />
+                        <VarDeclaration Name="moveable" Type="BOOL" Comment="подвижность объекта" InitialValue="FALSE" UUID="BWAWE3KLRTPUNPRN4YTUWGLDXI" />
+                        <VarDeclaration Name="visible" Type="BOOL" Comment="видимость объекта" InitialValue="TRUE" UUID="R4UML2QPG4NEHGHPSN2NKE6GUI" />
+                        <VarDeclaration Name="zValue" Type="LREAL" Comment="z-индекс объекта" InitialValue="0" UUID="VXTOSKNU3FNUPMCAN6PKO5EDGI" />
+                        <VarDeclaration Name="hint" Type="STRING" Comment="всплывающая подсказка" InitialValue="&apos;&apos;" UUID="CLZADEBSNHDEJMFXQH53VBNQEE" />
+                        <VarDeclaration Name="size" Type="TSize" TypeUUID="XDTT5M52XMSURN23S57SF26UGU" Comment="размер прямоугольника" InitialValue="(width:=627,height:=159)" UUID="HC2FKFJ4NBUU3J5U7QZTECI2TM" />
+                        <VarDeclaration Name="font" Type="TFont" TypeUUID="YVT73EACFULUPIWKAFYTDAC3S4" Comment="Шрифт текста" InitialValue="(family:=&apos;PT Sans&apos;,size:=12,bold:=FALSE,italic:=FALSE,underline:=FALSE,strikeout:=FALSE)" UUID="RR4QMZI62YSEDEVXSSXSUQ4IEE" />
+                        <VarDeclaration Name="DTV" Type="DT" Comment="начало временной шкалы" InitialValue="DT#1970-01-01-00:00:00.000" UUID="C7QE2WLMBHSUHH3CVY7GHKVTQY" />
                     </InputVars>
                     <OutputVars>
-                        <VarDeclaration Name="MARKERA_POS" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Comment="позиция маркера A" InitialValue="DT#1970-01-01-00:00:00.000" UUID="3DAED6CA416A9A1B25DE8FAA9D662FD9" />
-                        <VarDeclaration Name="MARKERB_POS" Type="DT" TypeUUID="8B0E0F77490C3D2B06233087F94C7C43" Comment="позиция маркера B" InitialValue="DT#1970-01-01-00:00:00.000" UUID="B0BB342848E2888CBE21AAA636B1DF19" />
+                        <VarDeclaration Name="MARKERA_POS" Type="DT" Comment="позиция маркера A" InitialValue="DT#1970-01-01-00:00:00.000" UUID="ZLLK4PI3TJVEDKUP3YS5SL3GTU" />
+                        <VarDeclaration Name="MARKERB_POS" Type="DT" Comment="позиция маркера B" InitialValue="DT#1970-01-01-00:00:00.000" UUID="FA2LXMEMRDRERJVKEG7BTX5RGY" />
+                        <VarDeclaration Name="O_DTV" Type="DT" Comment="Beginning of the timeline (output)" InitialValue="DT#1970-01-01-00:00:00.000" UUID="FP34EWKFUSTUXFJQJ3AXEMR4UE" />
                     </OutputVars>
                 </InterfaceList>
                 <Data Title="" Period="1000" TextColor="#000000" GridColor="#f0f0f0" BkgColor="#ffffff" FixedBkgColor="#F0F0F0" DiscreteAsAnalog="FALSE" ExtrnalPrint="FALSE" ExtrnalSave="FALSE" ExtrnalYRange="FALSE" ExternalXLength="FALSE">
@@ -81,12 +85,91 @@
                         <Column Id="3" Visible="TRUE" Width="1100" />
                         <Column Id="4" Visible="FALSE" Width="1100" />
                     </PrintLegend>
-</Data>
-<PrintSettings DefaultPrinter="true" PrinterName="" AutoPrinting="false" PaperSize="0" PageOrientation="1" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" />
-</FB>
-<DataConnections>
-<Connection Source="DT_new" Destination="TREND_WINDOW.DTV" SourceUUID="777988B54D8AE6FEEC0B5791DD01968D" DestinationUUID="1A095ED14CB5CC330F138E8B98D9DC88.594DE01743E5096C3EAE629F86B3AA63" />
-</DataConnections>
-</FBNetwork>
-</WindowFBType>
+                </Data>
+                <PrintSettings DefaultPrinter="true" PrinterName="" AutoPrinting="false" PaperSize="0" PageOrientation="1" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" />
+                <SaveSettings FileDialogRestricted="false" Encoding="UTF-8" Separator="," Quote="&quot;" />
+            </FB>
+            <FB Name="ENCODE_TIME_L" Type="ENCODE_TIME" TypeUUID="W2VOLUNU7SXEBKU4OV6OL3N6LA" Enabled="true" UUID="EIFO22DANXMEJGFJGJYJNQZ5OA" X="712.730167947634" Y="679.441511843278" />
+            <FB Name="ENCODE_TIME_G" Type="ENCODE_TIME" TypeUUID="W2VOLUNU7SXEBKU4OV6OL3N6LA" Enabled="true" UUID="TQR3JRDROY7UDJGNUXGNXZDPUI" X="717.506967201864" Y="449.337366115098" />
+            <FB Name="DECODE_DT_L" Type="DECODE_DT" TypeUUID="IN6TS25VCP4EFMKUEDEFJVLURU" Enabled="true" UUID="VBBKUFTTGJOUTDFIA5T5DQRRXU" X="374.542303617545" Y="679.441511843278" />
+            <FB Name="SUB0" Type="SUB" TypeUUID="LAUW4OZGSDCE3KWYNWKL4U7CZI" Enabled="true" UUID="ADDSYAXYOEZUZGLVGLDAJWRXJU" X="899.659504198744" Y="450.155129460578" />
+            <FB Name="DECODE_DT_G" Type="DECODE_DT" TypeUUID="IN6TS25VCP4EFMKUEDEFJVLURU" Enabled="true" UUID="KEAUPZ52JL7UBFDHZCCO5ANACQ" X="374.542303617545" Y="449.337366115098" />
+            <FB Name="INT_TO_UINT_H_0" Type="INT_TO_UINT" TypeUUID="BZ55TRDKJ2AEHMBXF7JSCRUPCI" Enabled="true" UUID="33QAMEMCZQFEPFS6CUYXNCOZPE" X="572.251634388554" Y="736.967548275308" />
+            <FB Name="INT_TO_UDINT_D_0" Type="INT_TO_UDINT" TypeUUID="ZV5QBKBWIHFEHCIWDDJBBLBEGY" Enabled="true" UUID="BDSACR2B3N7ETO23FBOX6BIHFQ" X="568.751634388554" Y="679.441511843278" />
+            <FB Name="INT_TO_UINT_H" Type="INT_TO_UINT" TypeUUID="BZ55TRDKJ2AEHMBXF7JSCRUPCI" Enabled="true" UUID="M5SH54EHGE5UXDSR2GL4FS6HVY" X="572.251634388554" Y="506.863402547138" />
+            <FB Name="INT_TO_UINT0_M_0" Type="INT_TO_UINT" TypeUUID="BZ55TRDKJ2AEHMBXF7JSCRUPCI" Enabled="true" UUID="JQ4FB6FF757UVMSNH74JALWHIE" X="572.251634388554" Y="794.493584707368" />
+            <FB Name="INT_TO_UINT0_M" Type="INT_TO_UINT" TypeUUID="BZ55TRDKJ2AEHMBXF7JSCRUPCI" Enabled="true" UUID="UX2VLHSTSBZEFA6VA3YHIPLNIA" X="572.251634388554" Y="564.389438979188" />
+            <FB Name="GE0" Type="GE" TypeUUID="SOA7AQ22SRKERF72ZSX3B5S5QU" Enabled="true" UUID="FLKEZ636IAWEVL3ZP4CAWDLFHE" X="3.5" Y="161">
+                <InterfaceList>
+                    <InputVars>
+                        <VarDeclaration Name="IN0" Type="ANY_ELEMENTARY" InitialValue="" UUID="TB237APVZZYEPA3VG4Y322BF4U" />
+                        <VarDeclaration Name="IN1" Type="ANY_ELEMENTARY" InitialValue="" UUID="OGAT2SKSGI4U5HY7PSN45ATTIE" />
+                    </InputVars>
+                    <OutputVars>
+                        <VarDeclaration Name="OUT" Type="BOOL" InitialValue="FALSE" UUID="KDU2J4VJVK6UPCAWDDGBD3QTHA" />
+                    </OutputVars>
+                </InterfaceList>
+            </FB>
+            <FB Name="SEL_L" Type="SEL" TypeUUID="VTYYYXK24ZYEFIHECN6CYXIJ5M" Enabled="true" UUID="UOJRQDSPPWHEPO2TPKN7BZBYGQ" X="233.337927730485" Y="379.127063722078" />
+            <FB Name="CONCAT0_0_0" Type="CONCAT" TypeUUID="7HP3AWELA2YEXGQJEJ7TED5TRU" Enabled="true" UUID="N3Q5NRZ2ZUJUTBRDEVVSEWOAQM" X="1402.27049642304" Y="433.753897444468">
+                <VarValue Variable="IN0" Value="&apos;A - B: &apos;" Type="STRING" />
+                <InterfaceList>
+                    <InputVars>
+                        <VarDeclaration Name="IN0" Type="STRING" InitialValue="&apos;&apos;" UUID="AXI6CN37DOUUZBRC5BPPTMRVWY" />
+                        <VarDeclaration Name="IN1" Type="STRING" InitialValue="&apos;&apos;" UUID="VVFNN5MKVRUU7N3IQCZRJPQYZA" />
+                    </InputVars>
+                    <OutputVars>
+                        <VarDeclaration Name="OUT" Type="STRING" InitialValue="&apos;&apos;" UUID="LSW25TPVAJUEDLEA4A36JHIQAU" />
+                    </OutputVars>
+                </InterfaceList>
+            </FB>
+            <FB Name="SEL_G" Type="SEL" TypeUUID="VTYYYXK24ZYEFIHECN6CYXIJ5M" Enabled="true" UUID="MW4ZHY46I5FUNDAJN44ELFH4DI" X="234.337927730485" Y="287.066968300817" />
+            <FB Name="IME_TO_STRING0" Type="TIME_TO_STRING" TypeUUID="PTCFDSGITCEU5EYPL3VJIZCJOU" Enabled="true" UUID="P65WGX7BGIOETAON3RAEN7OF3U" X="1206.92028071347" Y="450.799831696088" />
+            <FB Name="INT_TO_UDINT_D" Type="INT_TO_UDINT" TypeUUID="ZV5QBKBWIHFEHCIWDDJBBLBEGY" Enabled="true" UUID="TB37BATPLGBEBBQK7VUDZY6EW4" X="568.751634388554" Y="449.337366115098" />
+            <FB Name="INT_TO_UINT_S_0" Type="INT_TO_UINT" TypeUUID="BZ55TRDKJ2AEHMBXF7JSCRUPCI" Enabled="true" UUID="P2QNQWKVAU6ENMSL6P7NUJTV4Y" X="572.251634388554" Y="852.019621139398" />
+            <FB Name="INT_TO_UINT_S" Type="INT_TO_UINT" TypeUUID="BZ55TRDKJ2AEHMBXF7JSCRUPCI" Enabled="true" UUID="U5GMOUX4EU5UPLDJGO77DH3XOY" X="572.251634388554" Y="621.915475411218" />
+            <FB Name="Text_DT_L" Type="TSimpleText" TypeUUID="OBURUFGSRT7UVLSMGMSUGBKM5E" Enabled="true" UUID="VK6YDLSYNQTE7M3YUNB2AVWKKQ" X="1661.4946132791" Y="180.265770796905">
+                <VarValue Variable="pos" Value="(x:=1484,y:=2)" Type="TPos" TypeUUID="CUUMQF3SQNRUHD62PGG7FSXXFY" />
+                <VarValue Variable="zValue" Value="10" Type="LREAL" />
+                <VarValue Variable="size" Value="(width:=150,height:=20)" Type="TSize" TypeUUID="XDTT5M52XMSURN23S57SF26UGU" />
+                <VarValue Variable="text_color" Value="4278190080" Type="TColor" TypeUUID="EDYJMIBCJR5UJOZWGS3UVJENZA" />
+                <VarValue Variable="alignment" Value="8" Type="TAlignment" TypeUUID="IUA2FTZVSF6EVJPPY3ZKXNHV6E" />
+                <VarValue Variable="font" Value="(family:=&apos;MS Shell Dlg 2&apos;,size:=15,bold:=FALSE,italic:=FALSE,underline:=FALSE,strikeout:=FALSE)" Type="TFont" TypeUUID="YVT73EACFULUPIWKAFYTDAC3S4" />
+            </FB>
+            <DataConnections>
+                <Connection Source="DECODE_DT_L.HOUR" Destination="INT_TO_UINT_H_0.IN0" SourceUUID="16AA42A8495D32736707A88CBD31C2D1.3BB626B0459415F044605D9B3BC66104" DestinationUUID="1106E0DE470ACC8231155E9679D98976.30FD33D64BC3A4D6A02404B63F9431D5" dx1="10" dx2="27.2093" dy="-23.724" />
+                <Connection Source="INT_TO_UINT0_M.OUT" Destination="ENCODE_TIME_G.MINS" SourceUUID="9E55F5A542729053F006D583406D3D74.25B43E5F46D5635FEC45928CD709DB68" DestinationUUID="C4B4239C413F7671CCA5CDA4A26FE4DB.1E23F1664117DB256C402AB89F8D82C5" dx1="10" dx2="17.7553" dy="-82.5521" />
+                <Connection Source="INT_TO_UINT_S_0.OUT" Destination="ENCODE_TIME_L.SECS" SourceUUID="59D8A07E463C0555FEF34BB2E67526DA.25B43E5F46D5635FEC45928CD709DB68" DestinationUUID="68ED0A2244D86D607032A998703DC396.94DFF2244E5B626CCFB634BF12AE56F2" dx1="10" dx2="12.9785" dy="-123.828" />
+                <Connection Source="SEL_G.OUT" Destination="DECODE_DT_G.IN0" SourceUUID="E393B965464B479E386F098C1AFC9445.D94D29B049B6DB4E0A29EA9CB5266805" DestinationUUID="E747015140FF4ABA84C8679414A081EE.0A2B4F124288EBA74D93078BBACE1B4C" dx1="10" dx2="13.7044" dy="162.27" />
+                <Connection Source="INT_TO_UDINT_D_0.OUT" Destination="ENCODE_TIME_L.DAYS" SourceUUID="4701E408497EDB415D285BBB2C07057F.BE6ADF2247D20DC7D52ED09DC519E227" DestinationUUID="68ED0A2244D86D607032A998703DC396.174557F440E4094A1E6C26A99EFCEAC3" dx1="9.23927" dx2="9.23927" />
+                <Connection Source="GE0.OUT" Destination="SEL_L.G" SourceUUID="FB4CD42A4A2C407E047F79AF39650D0B.F2A4E95047BDAAA9CC1816883813EE11" DestinationUUID="0E1893A3478E7D4F9B7A53BB3438E4F0.E51CF88C46776F33BF0D21B3F4741605" dx1="10" dx2="26.3379" dy="218.127" />
+                <Connection Source="DECODE_DT_G.MIN" Destination="INT_TO_UINT0_M.IN0" SourceUUID="E747015140FF4ABA84C8679414A081EE.A1418B6147D6A65A048C0799E339BB0A" DestinationUUID="9E55F5A542729053F006D583406D3D74.30FD33D64BC3A4D6A02404B63F9431D5" dx1="10" dx2="27.2093" dy="17.5521" />
+                <Connection Source="DECODE_DT_G.HOUR" Destination="INT_TO_UINT_H.IN0" SourceUUID="E747015140FF4ABA84C8679414A081EE.3BB626B0459415F044605D9B3BC66104" DestinationUUID="F07E64674B3B318797D1518EAEC7CBC2.30FD33D64BC3A4D6A02404B63F9431D5" dx1="10" dx2="27.2093" dy="-23.724" />
+                <Connection Source="IME_TO_STRING0.OUT" Destination="CONCAT0_0_0.IN1" SourceUUID="5F63BB7F491C32E140DCCD81DDC5FD46.1A028AF94FEA0ED12B1E398EA2532C50" DestinationUUID="C7D6E16E4913CD3A6B25238683C05922.F5D64AAD4F69AC8AB38068B7C818BE14" dx1="23.8502" dx2="33" dy="-0.795934" />
+                <Connection Source="ENCODE_TIME_G.OUT" Destination="SUB0.IN0" SourceUUID="C4B4239C413F7671CCA5CDA4A26FE4DB.E91F82554EE04D528AAF8FB693A9B019" DestinationUUID="022CC7004C3371F8C63275994D37DA04.7A75BFED4866643E0618149D7D47426D" dx1="10" dx2="24.6525" dy="0.817763" />
+                <Connection Source="DECODE_DT_G.SEC" Destination="INT_TO_UINT_S.IN0" SourceUUID="E747015140FF4ABA84C8679414A081EE.ABC25E2E48BB71EE28E995B4FDC85F5F" DestinationUUID="52C74CA7473B25FCBF3369AC76779FF1.30FD33D64BC3A4D6A02404B63F9431D5" dx1="10" dx2="27.2093" dy="58.8281" />
+                <Connection Source="CONCAT0_0_0.OUT" Destination="Text_DT_L.text" SourceUUID="C7D6E16E4913CD3A6B25238683C05922.CDAEAD5C416802F537E080AC05109DE4" DestinationUUID="AE81BDAA4F266C5843A378B354CA56A0.6197985F4F26DAD792BB4698C1EFE1AA" dx1="29" dx2="78.7241" dy="0.0118734" />
+                <Connection Source="DECODE_DT_L.MIN" Destination="INT_TO_UINT0_M_0.IN0" SourceUUID="16AA42A8495D32736707A88CBD31C2D1.A1418B6147D6A65A048C0799E339BB0A" DestinationUUID="F850384C4A7FFFA5F83F4DB241C72E90.30FD33D64BC3A4D6A02404B63F9431D5" dx1="10" dx2="28.2093" dy="17.5521" />
+                <Connection Source="INT_TO_UDINT_D.OUT" Destination="ENCODE_TIME_G.DAYS" SourceUUID="82F077984082596F68FD0A86B7C4E33C.BE6ADF2247D20DC7D52ED09DC519E227" DestinationUUID="C4B4239C413F7671CCA5CDA4A26FE4DB.174557F440E4094A1E6C26A99EFCEAC3" dx1="10" dx2="14.2553" />
+                <Connection Source="SUB0.OUT" Destination="IME_TO_STRING0.IN0" SourceUUID="022CC7004C3371F8C63275994D37DA04.F95F06254FF6DACE34B9C5B606FF24F8" DestinationUUID="5F63BB7F491C32E140DCCD81DDC5FD46.A6FE3D32478297BF09D7B48EAD6AF61D" dx1="26.7608" dx2="33" dy="0.644702" />
+                <Connection Source="DECODE_DT_L.YDAY" Destination="INT_TO_UDINT_D_0.IN0" SourceUUID="16AA42A8495D32736707A88CBD31C2D1.3975B2524158A6344E5654A117EF8841" DestinationUUID="4701E408497EDB415D285BBB2C07057F.795C2E17421BE232FC19D0803B67FB12" dx1="10" dx2="23.7093" dy="-65" />
+                <Connection Source="DECODE_DT_L.SEC" Destination="INT_TO_UINT_S_0.IN0" SourceUUID="16AA42A8495D32736707A88CBD31C2D1.ABC25E2E48BB71EE28E995B4FDC85F5F" DestinationUUID="59D8A07E463C0555FEF34BB2E67526DA.30FD33D64BC3A4D6A02404B63F9431D5" dx1="10" dx2="27.2093" dy="58.8281" />
+                <Connection Source="ENCODE_TIME_L.OUT" Destination="SUB0.IN1" SourceUUID="68ED0A2244D86D607032A998703DC396.E91F82554EE04D528AAF8FB693A9B019" DestinationUUID="022CC7004C3371F8C63275994D37DA04.D232E9CC444AEC2DD8A9E3B1BDB8D5EC" dx1="10" dx2="29.4293" dy="-213.036" />
+                <Connection Source="INT_TO_UINT_S.OUT" Destination="ENCODE_TIME_G.SECS" SourceUUID="52C74CA7473B25FCBF3369AC76779FF1.25B43E5F46D5635FEC45928CD709DB68" DestinationUUID="C4B4239C413F7671CCA5CDA4A26FE4DB.94DFF2244E5B626CCFB634BF12AE56F2" dx1="10" dx2="17.7553" dy="-123.828" />
+                <Connection Source="INT_TO_UINT_H.OUT" Destination="ENCODE_TIME_G.HOURS" SourceUUID="F07E64674B3B318797D1518EAEC7CBC2.25B43E5F46D5635FEC45928CD709DB68" DestinationUUID="C4B4239C413F7671CCA5CDA4A26FE4DB.2AA25E434D042CA5EA207398FA406FDC" dx1="10" dx2="17.7553" dy="-41.276" />
+                <Connection Source="INT_TO_UINT_H_0.OUT" Destination="ENCODE_TIME_L.HOURS" SourceUUID="1106E0DE470ACC8231155E9679D98976.25B43E5F46D5635FEC45928CD709DB68" DestinationUUID="68ED0A2244D86D607032A998703DC396.2AA25E434D042CA5EA207398FA406FDC" dx1="10" dx2="12.9785" dy="-41.276" />
+                <Connection Source="GE0.OUT" Destination="SEL_G.G" SourceUUID="FB4CD42A4A2C407E047F79AF39650D0B.F2A4E95047BDAAA9CC1816883813EE11" DestinationUUID="E393B965464B479E386F098C1AFC9445.E51CF88C46776F33BF0D21B3F4741605" dx1="10" dx2="28.3379" dy="126.067" />
+                <Connection Source="SEL_L.OUT" Destination="DECODE_DT_L.IN0" SourceUUID="0E1893A3478E7D4F9B7A53BB3438E4F0.D94D29B049B6DB4E0A29EA9CB5266805" DestinationUUID="16AA42A8495D32736707A88CBD31C2D1.0A2B4F124288EBA74D93078BBACE1B4C" dx1="10" dx2="13.7044" dy="300.314" />
+                <Connection Source="INT_TO_UINT0_M_0.OUT" Destination="ENCODE_TIME_L.MINS" SourceUUID="F850384C4A7FFFA5F83F4DB241C72E90.25B43E5F46D5635FEC45928CD709DB68" DestinationUUID="68ED0A2244D86D607032A998703DC396.1E23F1664117DB256C402AB89F8D82C5" dx1="10" dx2="11.9785" dy="-82.5521" />
+                <Connection Source="DECODE_DT_G.YDAY" Destination="INT_TO_UDINT_D.IN0" SourceUUID="E747015140FF4ABA84C8679414A081EE.3975B2524158A6344E5654A117EF8841" DestinationUUID="82F077984082596F68FD0A86B7C4E33C.795C2E17421BE232FC19D0803B67FB12" dx1="10" dx2="23.7093" dy="-65" />
+                <Connection Source="TREND_WINDOW.MARKERB_POS" Destination="SEL_L.IN1" SourceUUID="EFA6E9274502C0FD8FA855872352E6D8.B0BB342848E2888CBE21AAA636B1DF19" DestinationUUID="0E1893A3478E7D4F9B7A53BB3438E4F0.E7D04E4C409286FE8F07AC896536E91F" dx1="328.838" dx2="10" dy="177.377" />
+                <Connection Source="TREND_WINDOW.MARKERA_POS" Destination="SEL_L.IN0" SourceUUID="EFA6E9274502C0FD8FA855872352E6D8.3DAED6CA416A9A1B25DE8FAA9D662FD9" DestinationUUID="0E1893A3478E7D4F9B7A53BB3438E4F0.05A371524B6281CF752891963A2DF971" dx1="328.838" dx2="10" dy="177.377" />
+                <Connection Source="TREND_WINDOW.MARKERA_POS" Destination="SEL_G.IN1" SourceUUID="EFA6E9274502C0FD8FA855872352E6D8.3DAED6CA416A9A1B25DE8FAA9D662FD9" DestinationUUID="E393B965464B479E386F098C1AFC9445.E7D04E4C409286FE8F07AC896536E91F" dx1="329.838" dx2="10" dy="101.567" />
+                <Connection Source="TREND_WINDOW.MARKERB_POS" Destination="SEL_G.IN0" SourceUUID="EFA6E9274502C0FD8FA855872352E6D8.B0BB342848E2888CBE21AAA636B1DF19" DestinationUUID="E393B965464B479E386F098C1AFC9445.05A371524B6281CF752891963A2DF971" dx1="329.838" dx2="10" dy="69.067" />
+                <Connection Source="TREND_WINDOW.MARKERA_POS" Destination="GE0.IN0" SourceUUID="EFA6E9274502C0FD8FA855872352E6D8.3DAED6CA416A9A1B25DE8FAA9D662FD9" DestinationUUID="FB4CD42A4A2C407E047F79AF39650D0B.81BF75984770CEF531377583E52568BD" dx1="99" dx2="10" dy="-57" />
+                <Connection Source="TREND_WINDOW.MARKERB_POS" Destination="GE0.IN1" SourceUUID="EFA6E9274502C0FD8FA855872352E6D8.B0BB342848E2888CBE21AAA636B1DF19" DestinationUUID="FB4CD42A4A2C407E047F79AF39650D0B.493D81714E3932529B7C1F9F417382CE" dx1="99" dx2="10" dy="-57" />
+                <Connection Source="DateTrend" Destination="TREND_WINDOW.DTV" SourceUUID="EC83B1E94A76BC81CF3819997A43BCCF" DestinationUUID="EFA6E9274502C0FD8FA855872352E6D8.594DE01743E5096C3EAE629F86B3AA63" />
+            </DataConnections>
+        </FBNetwork>
+    </GraphicsCompositeFBType>
 </Data>

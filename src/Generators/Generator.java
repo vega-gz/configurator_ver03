@@ -667,7 +667,15 @@ public class Generator {
                         if(!hmiApp.isEmpty()){
                             file = hmiApp+".int";
                             localRoot = localSigSax.readDocument(filePath+File.separator+file);
+                            if(localRoot==null){
+                                FileManager.loggerConstructor("Не найден файл "+file+" в каталоге "+filePath);
+                                return -1;
+                            }
                             localInterfaceList = localSigSax.returnFirstFinedNode(localRoot, "InterfaceList");
+                            if(localInterfaceList==null){
+                                FileManager.loggerConstructor("Не найден раздел <InterfaceList> в файле "+filePath+File.separator+file);
+                                return -1;
+                            }
                         }
                         for(String s: exArr){
                             globUUID = insertVarInPrj(prjSax, interfaceList, s+"_"+subAb+isMb+name, typeUUID, "", true, false, null,
@@ -698,7 +706,15 @@ public class Generator {
                         if("_".equals(localDocName.substring(0,1))) localDocName = abonent+localDocName;
                         
                         Node localRoot = localSigSax.readDocument(filePath+File.separator+localDocName);
+                        if(localRoot==null){
+                            FileManager.loggerConstructor("Не найден файл "+localDocName+" в каталоге "+filePath);
+                            return -1;
+                        }
                         Node localInterfaceList = localSigSax.returnFirstFinedNode(localRoot, "InterfaceList");
+                        if(localInterfaceList==null){
+                            FileManager.loggerConstructor("Не найден раздел <InterfaceList> в файле "+filePath+File.separator+localDocName);
+                            return -1;
+                        }
                         insertVarInPrj(localSigSax, localInterfaceList, abonent+"_"+subAb+isMb+name, typeUUID, "", glob, true,
                                        globUUID, filePath+File.separator+localDocName, backUpPath + localDocName);
                     }
@@ -1071,6 +1087,16 @@ public class Generator {
     }
     public static int genArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent,
             JProgressBar jProgressBar, String hmiApp) throws IOException {
+        //------- Создаём каталог для файлов для ЧМИ
+        String hmiPath = globVar.desDir + File.separator + "GenHMI"; //Установили путь для файлов
+        File d = new File(hmiPath);
+        if(!d.isDirectory()){
+            d.mkdir();
+            if(!d.isDirectory()){
+                FileManager.loggerConstructor("Не удалось создать директорию GenHMI в рабочем каталоге проекта");
+                return -1;
+            }
+        }
         String appPathName = globVar.desDir + File.separator+"Design"+File.separator + abonent + "_" + "Archive";
         XMLSAX archSax = new XMLSAX();
         Node archRoot = archSax.readDocument(appPathName +".arc_cfg");
@@ -1115,9 +1141,15 @@ public class Generator {
         hmiSax.clear();
         
         hmiSax.readDocument("Mnemo_Trend.txt");
-        Node trendNode = hmiSax.returnFirstFinedNode("WindowFBType");
+        Node trendNode = hmiSax.returnFirstFinedNode("GraphicsCompositeFBType");
+        if (trendNode == null) {
+            FileManager.loggerConstructor("Не найдена нода <GraphicsCompositeFBType> в файле "+
+                    globVar.myDir+File.separator+"Mnemo_Trend.txt");
+            return -1;
+        }//Если не вылетели - значит будет генерация
         hmiSax.setDataAttr(trendNode, "Name", trendSheetName);
         if(trendSheetUUID!=null)hmiSax.setDataAttr(trendNode, "UUID", trendSheetUUID);
+        else hmiSax.setDataAttr(trendNode, "UUID", UUID.getUIID());
         //trendNode = hmiSax.findNodeAtribute(new String[]{"FB","Name","TREND_WINDOW"});//FB Name="TREND_WINDOW"
         trendNode = hmiSax.returnFirstFinedNode(hmiSax.findNodeAtribute(new String[]{"FB","Name","TREND_WINDOW"}), "Data");//Аццкие сонатоиды! Корневая нода и нода с трендами называются одинаково
 
@@ -1134,10 +1166,11 @@ public class Generator {
             String tableName = sig[0];
             int x = tableName.indexOf(".");
             //---------------------- Определение списка структур ------------------------------
-            if(x>0) tableName = tableName.substring(0, x);
+            if(x>0) tableName = tableName.substring(2, x);
             ArrayList<String> structArr = new ArrayList<>();
             String sigStructs = globVar.DB.getCommentTable(tableName);
-            int z = sigStructs.indexOf("Архив:");
+            int z = -1;
+            if(!sigStructs.isEmpty() && sigStructs.length()>6) z = sigStructs.indexOf("Архив:");
             if(z < 0) structArr.add("");
             else {
                 z+=6;
@@ -1204,8 +1237,8 @@ public class Generator {
                         }
                     }
                 }else{
-                    String groupName = sig0.substring(2, x)+sa;
-                    String localName = sig0.substring(x+1);
+                    String groupName = tableName+sa;
+                    String localName = sig0.substring(x-1);
                     Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal","Name",groupName});
                     if(n==null){
                         FileManager.loggerConstructor("В проекте не найден глобальный сигнал "+ groupName);
@@ -1250,7 +1283,7 @@ public class Generator {
                 }
             }
         }
-        hmiSax.writeDocument(globVar.desDir + File.separator+"GenHMI"+File.separator+ trendSheetName + ".txt");
+        hmiSax.writeDocument(hmiPath+File.separator+ trendSheetName + ".txt");
         archSax.writeDocument();
         return ret;
     }
