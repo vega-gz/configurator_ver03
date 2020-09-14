@@ -57,10 +57,7 @@ public class ExcelAdapter implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().compareTo("Cancel") == 0) {
-            ArrayList ch = new ArrayList();
-            ArrayList<int[]> rows = (ArrayList<int[]>) ch.get(0);
-            ArrayList<int[]> cols = (ArrayList<int[]>) ch.get(1);
-            ArrayList<int[]> value = (ArrayList<int[]>) ch.get(2);
+          
         }
         if (e.getActionCommand().compareTo("Delete") == 0) {//удаление ячейки по кнопке
             int numcols = jTable1.getSelectedColumnCount();

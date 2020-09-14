@@ -1155,6 +1155,7 @@ public class Generator {
 
         String[] attr = new String[3];
         ArrayList<String> tableList = globVar.DB.getListTable();
+    
         int ret = 0;
         int jpgMax = archList.size();
         int jpbCnt = 1;

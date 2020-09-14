@@ -48,7 +48,7 @@ public final class UnloadExcel {
             return;
         }
         Node excelNode = globVar.sax.returnFirstFinedNode(tableNode, "EXEL");
-        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);//с одной бутылки на другую прилетел
+        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);
         // создание листа с названием 
         HSSFSheet sheet = workbook.createSheet(sheetName);
         // счетчик для строк
@@ -65,7 +65,7 @@ public final class UnloadExcel {
             String colName = globVar.sax.getDataAttr(colExcel, "nameColumnPos");//получили значение атрибута
             colNames.add(colName);
             int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
-            row.createCell(numberCol).setCellValue(colName);//я бы скореевсеговысыпалсяно этонеточно
+            row.createCell(numberCol).setCellValue(colName);
             row.getCell(numberCol).setCellStyle(cellStyle);//заполняем ячейки наименования цветом
         }
         rowNum++;
