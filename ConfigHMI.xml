@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigHMI project="AT_HMI.iec_hmi">
 	<AI>
-		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="25" type="T_BaseAnIn_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
@@ -15,7 +15,7 @@
 		</GenHMI>
 	</AI>
 	<Fi>
-		<GenHMI name="FI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="25" type="T_BaseAnIn_200520" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+		<GenHMI name="FI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200520" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
@@ -29,7 +29,7 @@
 		</GenHMI>
 	</Fi>
 	<AO>
-		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="25" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
@@ -54,7 +54,7 @@
 		</GenHMI>
 	</DO>
 	<mb_AI>
-		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730" incY="25" ruName="Наименование">
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730" incY="22" ruName="Наименование">
 			<IF cond="dataType" val="ABCDEFGH" type="T_BaseSen_200513">
 				<Hint/>
 				<additionalVar/>
@@ -78,7 +78,7 @@
 		</GenHMI>
 	</mb_AI>
 	<mb_AO>
-		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="25" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
