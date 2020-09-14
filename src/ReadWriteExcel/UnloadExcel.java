@@ -25,19 +25,17 @@ public final class UnloadExcel {
 
     public UnloadExcel(String abonent_name) throws ParseException {
         HSSFWorkbook workbook = new HSSFWorkbook();
-
         ArrayList<String> tableList = globVar.DB.getListTable();
         for (int i = 0; i < tableList.size(); i++) {
             String name_list = tableList.get(i);
-            if (name_list.indexOf(abonent_name+"_")==0) {
+            if (name_list.indexOf(abonent_name + "_") == 0) {
                 createExcelSheet(name_list, workbook);
             }
         }
     }
-
     public void createExcelSheet(String nameTable, HSSFWorkbook workbook) throws ParseException {
         int x = nameTable.indexOf("_");
-        String book_name=nameTable.substring(0,x);
+        String book_name = nameTable.substring(0, x);
         String sheetName = nameTable.substring(x + 1);
         int y = sheetName.indexOf("_mb_");
         String subAb = "";
@@ -50,16 +48,15 @@ public final class UnloadExcel {
             return;
         }
         Node excelNode = globVar.sax.returnFirstFinedNode(tableNode, "EXEL");
-        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);
-
+        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);//с одной бутылки на другую прилетел
         // создание листа с названием 
         HSSFSheet sheet = workbook.createSheet(sheetName);
         // счетчик для строк
         int rowNum = 0;
         // создаем подписи к столбцам (это будет первая строчка в листе Excel файла)
-        Row row = sheet.createRow(rowNum);
+        Row row = sheet.createRow(rowNum);//
         ArrayList<String> colNames = new ArrayList<>();
-         HSSFCellStyle cellStyle=workbook.createCellStyle();
+        HSSFCellStyle cellStyle = workbook.createCellStyle();
         cellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);//это стиль заполнения а не место
         //получаем данные из конфиг
@@ -68,9 +65,8 @@ public final class UnloadExcel {
             String colName = globVar.sax.getDataAttr(colExcel, "nameColumnPos");//получили значение атрибута
             colNames.add(colName);
             int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
-            row.createCell(numberCol).setCellValue(colName);
+            row.createCell(numberCol).setCellValue(colName);//я бы скореевсеговысыпалсяно этонеточно
             row.getCell(numberCol).setCellStyle(cellStyle);//заполняем ячейки наименования цветом
-        
         }
         rowNum++;
         ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);
@@ -78,7 +74,6 @@ public final class UnloadExcel {
             int j = 0;
             row = sheet.createRow(rowNum);
             for (Node colExcel : childExcel) {
-
                 String colExelName = colExcel.getNodeName();//получили имя адреса ячейки
 
                 int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
@@ -89,12 +84,12 @@ public final class UnloadExcel {
         }
         // записываем созданный в памяти Excel документ в файл
         try {
-            BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(new File(globVar.desDir+File.separator+book_name+".xls")));
+            BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(new File(globVar.desDir + File.separator + book_name + ".xls")));
             workbook.write(buf);
         } catch (IOException e) {
             e.printStackTrace();
         }
-       
+
     }
 
 }
