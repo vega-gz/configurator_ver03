@@ -159,7 +159,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         isCange ich = ()->{
             return st.isNew();
         };
-        TableTools.setTableListener(this, sfd, ich, null);//cjf);
+        TableTools.setFrameListener(this, sfd, ich, null);//cjf);
         
         this.setTitle("Редактирование сигнала");//table + ": "+comment);
     }

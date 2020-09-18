@@ -89,7 +89,7 @@ public class addArchive extends javax.swing.JFrame {
             TableTools.saveListInDB(archList, globVar.DB, "Archive_"+abonent, archTabCols, "");//сохранение в БД списка сигналов 
         };
         isCange ich = ()->{return isChang;};
-        TableTools.setTableListener(this, sfd, ich, null);
+        TableTools.setFrameListener(this, sfd, ich, null);
         jSplitPane1.setDividerLocation(100);
    }
     private void setPlusList(){

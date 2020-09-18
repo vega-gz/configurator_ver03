@@ -1,5 +1,6 @@
 package Main;
 
+import Tools.TableTools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.File;
@@ -21,7 +22,9 @@ public class Main {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main_JPanel().setVisible(true);
+               Main_JPanel mainF = new Main_JPanel();
+               TableTools.setFrameListener(mainF, null, null, null); // слушателей фреймов
+               mainF.setVisible(true);
             }
         });
     }

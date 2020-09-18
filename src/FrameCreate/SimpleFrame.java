@@ -23,7 +23,7 @@ public class SimpleFrame extends javax.swing.JFrame {
         isCange ich = ()->{
             return TableTools.isArrayListsDiff(st.tableModel.toArrayList(), st.fromDB);
         };
-        TableTools.setTableListener(this, sfd, ich, null);
+        TableTools.setFrameListener(this, sfd, ich, null);
     }
 
     @SuppressWarnings("unchecked")

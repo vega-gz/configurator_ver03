@@ -435,16 +435,60 @@ public class TableTools {//ссылка на таблицу, массив шир
         return 0;
     }
 
-    static public void setTableListener(JFrame frame, SaveFrameData sfd, isCange ich, closeJFrame cjf) {
+    static public void setFrameListener(JFrame frame, SaveFrameData sfd, isCange ich, closeJFrame cjf) {
         frame.addWindowListener(new WindowListener() {
+
+            
+            boolean onCreate = false; // триггер для создания окна
+            
+            // когда ткнули на окно или сняли с него фокус(при любых действиях)
             public void windowActivated(WindowEvent event) {
+                if (onCreate) { // проверка только после создания окна
+                    ++globVar.sumFrame;
+                    if (!globVar.windowIconified) { // проверка на сворачивание
+                        if (globVar.captureFocus) { // только одно окно сожет захватить управление
+                            globVar.captureFocus = false; // сразу блочим для остальныхF
+                                for (int i = 0; i < globVar.listF.size(); i++) {
+                                    JFrame f = globVar.listF.get(i);
+                                    // все окна на передний план
+                                    if (f == frame) {
+                                        System.out.println("I am find myself " + f.getTitle());
+                                        --globVar.sumFrame; // нужен правильный подсчет
+                                        continue;
+                                    }
+                                    //f.setExtendedState(JFrame.ICONIFIED);
+                                    f.setExtendedState(JFrame.NORMAL);
+                                    f.toFront();
+                                    f.requestFocus();
+                                }
+
+                        }
+                    } else {
+                        globVar.windowIconified = false;
+                        globVar.sumFrame = 0;
+                    }
+
+            if (globVar.sumFrame >= globVar.listF.size()) { // проверка раньше времени чем обработка
+                globVar.sumFrame = 0;
+                globVar.captureFocus = true; // разблокировка
+
+            }
+        }
             }
 
             public void windowClosed(WindowEvent event) {
+                System.out.println("windowClosing " + frame.getTitle());
+                for (int i = 0; i < globVar.listF.size(); i++) {
+                    JFrame f = globVar.listF.get(i);
+                        if (f == frame) {
+                            globVar.listF.remove(f);
+                        }
+                }
             }
 
             public void windowClosing(WindowEvent event) {//операции при закрытии окна
                 int n = 1;
+                if (ich != null) {
                 if (ich.is()) {
                     Object[] options = {"Сохранить", "Не сохранять", "Не закрывать"};
 
@@ -453,6 +497,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                             JOptionPane.QUESTION_MESSAGE, null, options,
                             options[0]);
                 }
+            }
                 if (n == 2) {
                     return;
                 }
@@ -484,6 +529,8 @@ public class TableTools {//ссылка на таблицу, массив шир
                 } else {
                     frame.setVisible(false);
                 }
+                onCreate = true;
+                globVar.listF.add(frame);
             }
         });
     }

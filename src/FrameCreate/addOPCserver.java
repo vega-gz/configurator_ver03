@@ -77,7 +77,7 @@ public class addOPCserver extends javax.swing.JFrame {
             resetOpcList();        //сохраняем изменения списака предназначенных к архивированию сигналов
             saveDateInDB(isChang);//сохранение в БД списка сигналов 
         };
-        TableTools.setTableListener(this, sfd, ich, null);
+        TableTools.setFrameListener(this, sfd, ich, null);
    }
 
     @SuppressWarnings("unchecked")

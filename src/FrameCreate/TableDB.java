@@ -75,7 +75,7 @@ public class TableDB extends javax.swing.JFrame {
         isCange ich = ()->{
             return compareTable(fromDB,tableModel);
         };
-        TableTools.setTableListener(this, sfd, ich, cjf);
+        TableTools.setFrameListener(this, sfd, ich, cjf);
         
         this.setTitle(table + ": "+comment);
     }

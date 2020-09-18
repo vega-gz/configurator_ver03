@@ -11,6 +11,7 @@ import XMLTools.XMLSAX;
 import Tools.FileManager;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JFrame;
 import org.w3c.dom.Node;
 
 /**
@@ -50,6 +51,12 @@ public class globVar {
         public static String USER = "";
         public static String PASS = "";
         public static ArrayList<String> processReg = new ArrayList<>();
+        
+        // Переменные для отклика всех открытых окон в программе 
+        public static ArrayList<JFrame> listF = new ArrayList<>(); // Лист с фреймами
+        public static boolean captureFocus = true; //  захват фокуса окна 
+        public static boolean windowIconified = false; // триггер определение свернутости окна
+        public static int sumFrame = 0; // сумма окон для правильного реагирования кликов по ним
                 
 	public static void SetStatUUID() {
 		Date date = new Date();

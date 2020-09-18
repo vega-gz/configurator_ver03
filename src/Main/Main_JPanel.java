@@ -1,27 +1,29 @@
 package Main;
 
+import DataBaseTools.DataBase;
 import DataBaseTools.MergeBases;
 import FrameCreate.*;
-import java.awt.Toolkit;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import DataBaseTools.DataBase;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
-import XMLTools.XMLSAX;
-import java.awt.Dimension;
 import Tools.FileManager;
+import Tools.TableTools;
 import Tools.Tools;
+import XMLTools.XMLSAX;
 import globalData.globVar;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -57,6 +59,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jComboBox2.setModel(getComboBoxModelAbonents()); // абоненты из базы
         globVar.abonent = jComboBox2.getItemAt(0);
         this.setTitle("Текущая база: " + globVar.dbURL + globVar.currentBase); // установить заголовок
+        try {
+            this.setIconImage(ImageIO.read(new File("icon.png"))); // иконка на панель и в угол
+        } catch (IOException ex) {
+            FileManager.loggerConstructor("проблема с иконкой программы");
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -674,6 +682,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 //------ Смена БД -----
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         JFrame changeDB = new ChangeDB(jTree1, this);
+        TableTools.setFrameListener(changeDB, null, null, null); // слушателей фреймов
         changeDB.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         changeDB.setTitle("Сменить БД");
         changeDB.setVisible(true);
@@ -838,6 +847,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     private void menuLogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogerActionPerformed
         LogerViewerFrame lvf = new LogerViewerFrame();
+        TableTools.setFrameListener(lvf, null, null, null); // слушателей фреймов
         lvf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         lvf.setVisible(true);
     }//GEN-LAST:event_menuLogerActionPerformed
@@ -865,6 +875,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     //  --- пукт инспекции таблиц ---
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         InspectionTablesFrame itf = new InspectionTablesFrame();
+        TableTools.setFrameListener(itf, null, null, null); // слушателей фреймов
         itf.setVisible(true);
         itf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         //DISPOSE_ON_CLOSE
