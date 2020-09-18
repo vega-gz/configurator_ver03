@@ -110,7 +110,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
     }
 
-    // ----- Функция для настройки контекстного меню таблиц--------------Lev---
+    //----- Функция для настройки контекстного меню таблиц--------------Lev----//
     static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, regitrationJFrame rgf, ArrayList<JFrame> listJF) {
         JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
         JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
@@ -143,7 +143,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         jTable1.setComponentPopupMenu(popupMenu);
         jTable1.getTableHeader().setComponentPopupMenu(popupMenu);
 
-        if (rgf != null) {
+        if (rgf != null) {//---
             menuItemOpenWindow.addActionListener((ActionEvent event) -> {
                 int row = jTable1.getSelectedRow();
                 if (row < 0) {
@@ -218,7 +218,6 @@ public class TableTools {//ссылка на таблицу, массив шир
                 list_str.add(r);
             }
         });
-
         menuItemIncertStr.addActionListener((ActionEvent event) -> {
             int row = jTable1.getSelectedRow();
             if (list_str.size() == 0) {
@@ -248,6 +247,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             }
             tableModel.removeRow(row);
             setId(jTable1);
+
         });
         menuItemClearCells.addActionListener((ActionEvent event) -> {
             int rows[] = jTable1.getSelectedRows();
@@ -273,7 +273,6 @@ public class TableTools {//ссылка на таблицу, массив шир
         });
         return 0;
     }
-
     public static void fillCells(JTable jTable1, MyTableModel tableModel) {
         rows = jTable1.getSelectedRows();
         cols = jTable1.getSelectedColumns();
@@ -308,7 +307,6 @@ public class TableTools {//ссылка на таблицу, массив шир
                         }
                         String end1 = st.substring(numberEnd);
                         st = st.substring(0, numberEnd);
-
                         matcher = Pattern.compile("[\\d\\.]+$").matcher(st);
                         matcher.find();
                         int numberStart = st.length();
@@ -316,10 +314,8 @@ public class TableTools {//ссылка на таблицу, массив шир
                             numberStart = matcher.start();
                         } catch (IllegalStateException e) {
                         }
-
                         String dobS = st.substring(numberStart);
                         String start1 = st.substring(0, numberStart);
-
                         boolean isInt = Tools.isInteger(dobS);
                         Double dob1;
                         if (Tools.isNumeric(dobS)) {
@@ -362,7 +358,6 @@ public class TableTools {//ссылка на таблицу, массив шир
                             Tools.fillCellCol(jTable1, cellNames, rows, cols[i]);
                             break;
                         }
-
                         Double inc = dob2 - dob1;//вычисление инкремента
                         for (int k = 1; k < rows.length; k++) {
                             Double dobInc = dob1 + inc * k;
@@ -521,6 +516,7 @@ public class TableTools {//ссылка на таблицу, массив шир
 
             public void windowIconified(WindowEvent event) {
             }
+            
 
             public void windowOpened(WindowEvent event) {// Регистрация фрейма в регистре
                 String title = frame.getTitle();
@@ -556,21 +552,25 @@ public class TableTools {//ссылка на таблицу, массив шир
             }
         }
     }
-    
-    public static void setSignalListFromDB(DefaultListModel list, ArrayList<String> tabList, String abonent, boolean b, 
+
+    public static void setSignalListFromDB(DefaultListModel list, ArrayList<String> tabList, String abonent, boolean b,
             ArrayList<String[]> archList, ArrayList<String> plusList) {
-        boolean ins=true;
+        boolean ins = true;
         list.removeAllElements();
-        for(String tn: tabList){
+        for (String tn : tabList) {
             if (ins) { //если глобальнаяя структура доложна быть включена в список
                 if (plusList.contains(tn)) { //проверяем, нет ли её в списке раскрытых структур
                     //ArrayList<String> plusSigList = openSigFromDB(tn); //если есть - раскрываем структуру
-                    ArrayList<String> plusSigList = globVar.DB.getDataFromColumn(tn,"TAG_NAME_PLC","");
+                    ArrayList<String> plusSigList = globVar.DB.getDataFromColumn(tn, "TAG_NAME_PLC", "");
                     for (String psl : plusSigList) {
-                        String tmp = "– "+tn+"."+psl;
-                        if (!isInList(tmp, archList, 0)) list.addElement(tmp);
+                        String tmp = "– " + tn + "." + psl;
+                        if (!isInList(tmp, archList, 0)) {
+                            list.addElement(tmp);
+                        }
                     }
-                } else if (!isInList(tn, archList, 0)) list.addElement(tn);
+                } else if (!isInList(tn, archList, 0)) {
+                    list.addElement(tn);
+                }
             }
         }
     }

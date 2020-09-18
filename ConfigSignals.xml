@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых-->
 <ConfigSignals>
-	<AI excelSheetName="AI" Comment="Аналоговые входы" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
+	<AI excelSheetName="AI" Comment="Аналоговые входы. Архив: _ToHMI;" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/><!--Обязательный нода-->
@@ -119,7 +119,7 @@
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_AI_DRV" globData="_AI_DRV"/>
 	</AI>
-	<Fi excelSheetName="Fi" Comment="Частотные входы">
+	<FI excelSheetName="FI" Comment="Частотные входы. Архив: _ToHMI;">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
@@ -214,7 +214,7 @@
 			</File>
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_FI_DRV" globData="_FI_DRV"/>
-	</Fi>
+	</FI>
 	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
 		<GenData>
 			<T_ANB Type="BOOL"/>
