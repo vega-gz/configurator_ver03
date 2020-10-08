@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -19,6 +21,7 @@ import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -111,7 +114,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     //----- Функция для настройки контекстного меню таблиц--------------Lev----//
-    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, regitrationJFrame rgf, ArrayList<JFrame> listJF) {
+    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, regitrationJFrame rgf, ArrayList<JFrame> listJF)  {
         JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
         JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
@@ -120,9 +123,10 @@ public class TableTools {//ссылка на таблицу, массив шир
         JMenuItem menuItemCopyCells = new JMenuItem("Скопировать ячейки");
         JMenuItem menuItemIncertCells = new JMenuItem("Вставить ячейки");
         JMenuItem menuItemOpenWindow = null;
-
+       
+        ImageIcon icon =new ImageIcon("C:\\Users\\cherepanov\\Desktop\\тестинг\\copy-file_icon-icons.com_56095.png");
         menuItemCopyCells.setRequestFocusEnabled(false);
-        //  menuItemCopyCells.setIcon(UIManager.getIcon()); //   устанавливает необходимую иконку
+         // menuItemCopyCells.setIcon(icon); //   устанавливает необходимую иконку
         menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
         menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
 
@@ -216,6 +220,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             for (int i = 0; i < rows.length; i++) {
                 String[] r = getRow(jTable1, rows[i]);
                 list_str.add(r);
+               
             }
         });
         menuItemIncertStr.addActionListener((ActionEvent event) -> {
@@ -229,9 +234,10 @@ public class TableTools {//ссылка на таблицу, массив шир
                 setId(jTable1);
             }
             for (int i = 0; i < list_str.size(); i++) {
-                tableModel.insertRow(row + 1, list_str.get(i));
+                tableModel.insertRow(row , list_str.get(i));
                 setId(jTable1);
             }
+            list_str.clear();
         });
         menuItemRemove.addActionListener((ActionEvent event) -> {
             int row = jTable1.getSelectedRow();
