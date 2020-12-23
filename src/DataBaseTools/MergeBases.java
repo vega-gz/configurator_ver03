@@ -114,10 +114,10 @@ public class MergeBases {
             }
             ArrayList<String> tableADB = aDB.getListTable();
             Collections.sort(tableCurrentDB); // сортируем листы
-            Collections.sort(tableADB);
+            if (tableADB != null) Collections.sort(tableADB); // это может пустым (полный перенос)
             if (!tableCurrentDB.equals(tableADB)) { // если не совпадают списки таблиц
-                System.out.println("tableCurrentDB size " + tableCurrentDB.size());
-                System.out.println("tableADB size " + tableADB.size());
+                //System.out.println("tableCurrentDB size " + tableCurrentDB.size());
+                //System.out.println("tableADB size " + tableADB.size());
 
                 for (String currentT : tableCurrentDB) {
                     boolean findT = false;
