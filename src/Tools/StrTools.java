@@ -84,6 +84,7 @@ public class StrTools {//isFilter
     }
     public static int searchInList(String s, ArrayList<String> l){
         int i;
+        if(l==null) return -1;
         for(i=0; i< l.size(); i++) if(s.equals(l.get(i))) return i;
         return -1;
     }
