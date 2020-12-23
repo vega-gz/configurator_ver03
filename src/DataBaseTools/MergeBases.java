@@ -121,10 +121,13 @@ public class MergeBases {
 
                 for (String currentT : tableCurrentDB) {
                     boolean findT = false;
-                    for (String aT : tableADB) {
-                        if (currentT.equals(aT)) { // Названия таблиц совпали
-                            findT = true;
-                            break;
+                    if (tableADB != null) 
+                    {
+                        for (String aT : tableADB) {
+                            if (currentT.equals(aT)) { // Названия таблиц совпали
+                                findT = true;
+                                break;
+                            }
                         }
                     }
                     // не нашли такую таблицу заносим в список
