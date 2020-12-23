@@ -400,4 +400,7 @@ public class RWExcel {
     if(isError) return null;
     return tCnt;
     }
+    public void algNameChange(){
+        
+    }
 }
