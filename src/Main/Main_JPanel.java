@@ -83,6 +83,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jButton12 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox();
+        jDialog_createBase = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jButton2_CreateDB = new javax.swing.JButton();
+        jButton10_CanceCreatelDB = new javax.swing.JButton();
+        label1 = new java.awt.Label();
+        jTextField6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -105,13 +111,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
         menuLoger = new javax.swing.JMenuItem();
+        jMenuBase = new javax.swing.JMenu();
+        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -241,6 +249,73 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialog_createBase.setTitle("Создание базы");
+
+        jButton2_CreateDB.setText("Create");
+        jButton2_CreateDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2_CreateDBActionPerformed(evt);
+            }
+        });
+
+        jButton10_CanceCreatelDB.setText("Cancel");
+        jButton10_CanceCreatelDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10_CanceCreatelDBActionPerformed(evt);
+            }
+        });
+
+        label1.setText("Название новой базы");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jButton2_CreateDB, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton10_CanceCreatelDB, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(74, Short.MAX_VALUE))
+                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2_CreateDB)
+                    .addComponent(jButton10_CanceCreatelDB))
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialog_createBaseLayout = new javax.swing.GroupLayout(jDialog_createBase.getContentPane());
+        jDialog_createBase.getContentPane().setLayout(jDialog_createBaseLayout);
+        jDialog_createBaseLayout.setHorizontalGroup(
+            jDialog_createBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_createBaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jDialog_createBaseLayout.setVerticalGroup(
+            jDialog_createBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_createBaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -360,14 +435,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
-        jMenuItem3.setText("Сменить БД");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem3);
-
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Утилиты");
@@ -388,6 +455,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
+        menuLoger.setText("Просмотр логов");
+        menuLoger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLogerActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuLoger);
+
+        jMenuBase.setText("Работа с базой данных");
+
         jMenuItem_AnotherBase.setText("Перенос таблиц в другую базу");
         jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -399,15 +476,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 jMenuItem_AnotherBaseActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem_AnotherBase);
+        jMenuBase.add(jMenuItem_AnotherBase);
 
-        menuLoger.setText("Просмотр логов");
-        menuLoger.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem3.setText("Сменить БД");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuLogerActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu3.add(menuLoger);
+        jMenuBase.add(jMenuItem3);
 
         jMenuItem7.setText("Инспекция таблиц");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -415,7 +492,17 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenuBase.add(jMenuItem7);
+
+        jMenuItem8.setText("Создать новую базу");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenuBase.add(jMenuItem8);
+
+        jMenu3.add(jMenuBase);
 
         jMenuBar1.add(jMenu3);
 
@@ -883,6 +970,28 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextField2.setText((String) jComboBox3.getSelectedItem());
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
+    private void jButton2_CreateDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2_CreateDBActionPerformed
+         if (!jTextField1.getText().equals("")) { // если не пустое надо еще
+            String textField6 = jTextField6.getText();
+            int code = globVar.DB.createBase(textField6); 
+            if(code == 1){
+                JOptionPane.showMessageDialog(null, "База "+ textField6 +" успешно создана."); //сообщение
+            }
+            jTextField1.setText("");
+        }
+    }//GEN-LAST:event_jButton2_CreateDBActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        jDialog_createBase.setSize(400, 200);
+        jDialog_createBase.setLocationRelativeTo(null); // по центру экрана
+        jDialog_createBase.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    // --- Кнопка закрытия диалога ---
+    private void jButton10_CanceCreatelDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10_CanceCreatelDBActionPerformed
+        jDialog_createBase.dispose();
+    }//GEN-LAST:event_jButton10_CanceCreatelDBActionPerformed
+
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
             return null;
@@ -974,7 +1083,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10_CanceCreatelDB;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2_CreateDB;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -986,6 +1097,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog_createBase;
     private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -999,6 +1111,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuBase;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1006,7 +1119,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
@@ -1014,7 +1129,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTree jTree1;
+    private java.awt.Label label1;
     private javax.swing.JMenuItem menuLoger;
     // End of variables declaration//GEN-END:variables
 
