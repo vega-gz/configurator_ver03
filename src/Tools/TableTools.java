@@ -485,6 +485,10 @@ public class TableTools {//ссылка на таблицу, массив шир
                             globVar.listF.remove(f);
                         }
                 }
+                String title = frame.getTitle();
+                globVar.processReg.remove(title);
+                event.getWindow().setVisible(false);
+                frame.setVisible(false);
             }
 
             public void windowClosing(WindowEvent event) {//операции при закрытии окна
@@ -505,6 +509,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                 if (sfd != null && n == 0) {
                     sfd.doIt();
                 }
+                
                 String title = frame.getTitle();
                 globVar.processReg.remove(title);
                 event.getWindow().setVisible(false);

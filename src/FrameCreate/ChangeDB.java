@@ -185,7 +185,7 @@ public final class ChangeDB extends javax.swing.JFrame {
             jTree1.setModel(Main_JPanel.getModelTreeNZ());// обновить дерево
             m_jp.initMyComponent();
         }
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
