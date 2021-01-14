@@ -32,7 +32,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
 
         if(listColumn==null || listColumn.isEmpty())return;
         String[] cols = listColumn.toArray( new String[listColumn.size()]);
-        tableModel.setColumnIdentifiers(cols);
+        tableModel.setColumnIdentifiers( new String[]{"asd", "ads", "12312", "123123"});
         
         fromDB = globVar.DB.getData(table, cols);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));

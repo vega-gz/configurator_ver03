@@ -111,6 +111,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -434,6 +435,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem1);
+
+        jMenuItem9.setText("Сменить БД");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem9);
 
         jMenuBar1.add(jMenu2);
 
@@ -776,7 +785,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
         changeDB.setTitle("Сменить БД");
         changeDB.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-    // обработчик пукт меню Утилит подключение в второй базе.
+    
+// обработчик пукт меню Утилит подключение в второй базе.
     private void jMenuItem_AnotherBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseActionPerformed
         XMLSAX sax = new XMLSAX();
         Node root = sax.readDocument("Config.xml");
@@ -992,6 +1002,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jDialog_createBase.dispose();
     }//GEN-LAST:event_jButton10_CanceCreatelDBActionPerformed
 
+    // --- Еще один пукт сменить базу ---
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        JFrame changeDB = new ChangeDB(jTree1, this);
+        TableTools.setFrameListener(changeDB, null, null, null); // слушателей фреймов
+        changeDB.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        changeDB.setTitle("Сменить БД");
+        changeDB.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
             return null;
@@ -1120,6 +1139,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
