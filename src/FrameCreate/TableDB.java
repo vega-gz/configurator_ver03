@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class TableDB extends javax.swing.JFrame {
     TableTools tt=new TableTools();
     public MyTableModel tableModel = new MyTableModel();
+    FileManager fm=new FileManager();
     JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
     String tableName;
@@ -212,8 +213,8 @@ public class TableDB extends javax.swing.JFrame {
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -448,7 +449,7 @@ public class TableDB extends javax.swing.JFrame {
 
     // --- Кнопка смены TAGname ---
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
+              //  fm.ChangeIntTypeFile(comment, null, null, null, null);
                 new ChangerTagNamed(tableName).setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 

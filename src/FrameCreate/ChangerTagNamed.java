@@ -3,50 +3,62 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package FrameCreate;
 
+import Tools.FileManager;
 import Tools.MyTableModel;
 import Tools.TableTools;
 import globalData.globVar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
-/**
- *
- * @author nazarov
- */
 public class ChangerTagNamed extends javax.swing.JFrame {
-
-    MyTableModel tableModel = new MyTableModel(); // модель таблицы
-    ArrayList<String[]> fromDB; // Что получим из базы
+    FileManager fm=new FileManager();
     
-
+    MyTableModel tableModel; // модель таблицы
+    ArrayList<String[]> fromDB; // Что получим из базы
+    int tableSize=0;
+    int qCol = 0;
+    ArrayList<String[]> newName;
+  
+    
+    
     public ChangerTagNamed(String table) {
-        
-        if(!globVar.DB.isConnectOK())return;
-        
-        //List<String> listColumn = globVar.DB.getListColumns(table);
-        List<String> listColumn = new ArrayList<>(Arrays.asList("Наименование", "TAG_NAME_PLC"));
 
-        if(listColumn==null || listColumn.isEmpty())return;
-        String[] cols = listColumn.toArray( new String[listColumn.size()]);
-        tableModel.setColumnIdentifiers(cols);
+        if (!globVar.DB.isConnectOK()) {
+            return;
+        }
+        newName = new ArrayList<>(); 
+        tableModel = new MyTableModel(newName);
+        //List<String> listColumn = globVar.DB.getListColumns(table);
+        List<String> listColumn = new ArrayList<>(Arrays.asList("Наименование", "TAG_NAME_PLC"));//получили лист 
+
+        if (listColumn == null || listColumn.isEmpty()) {
+            return;
+        }
+        String[] cols = listColumn.toArray(new String[listColumn.size()]);//преобразовали лист в стринговый массив
+
+        tableModel.setColumnIdentifiers(new String[]{"Наименование", "TAG_NAME_PLC", "Новое_Наименование", "New_TAG_NAME_PLC"});
+
+        fromDB = globVar.DB.getData(table, cols);//получили данные из БД
         
-        fromDB = globVar.DB.getData(table, cols);
-        fromDB.forEach((rowData) -> tableModel.addRow(rowData));
-        int tableSize = fromDB.size();
-        int qCol = listColumn.size();
+        
+        fromDB.forEach((rowData) -> tableModel.addRow(Stream.concat(Arrays.stream(rowData), Arrays.stream(new String[]{"", ""})).toArray(String[]::new)));//вставляем данные по ячейкам в таблицу
+         tableSize = fromDB.size();//размер строк
+         qCol = listColumn.size();//размер столбцов
         int[] align = new int[qCol];
         int[] colsWidth = new int[qCol];
-        
+
         TableTools.setWidthCols(cols, tableModel, colsWidth, 7.8);
-        if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
-        
+        if (tableSize > 0) {
+            TableTools.setAlignCols(fromDB.get(0), align);
+        }
+       
+
         initComponents();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,21 +72,36 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setText("Переименовать");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -90,6 +117,15 @@ public class ChangerTagNamed extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        for (String[] s: newName) {
+            System.out.println(s.toString());
+        }
+        
+        
+        fm.ChangeIntTypeFile(globVar.desDir, newName);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,6 +163,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

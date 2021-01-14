@@ -12,8 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -32,7 +30,6 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import org.w3c.dom.Node;
@@ -494,15 +491,15 @@ public class TableTools {//ссылка на таблицу, массив шир
             public void windowClosing(WindowEvent event) {//операции при закрытии окна
                 int n = 1;
                 if (ich != null) {
-                if (ich.is()) {
-                    Object[] options = {"Сохранить", "Не сохранять", "Не закрывать"};
+                    if (ich.is()) {
+                        Object[] options = {"Сохранить", "Не сохранять", "Не закрывать"};
 
-                    n = JOptionPane.showOptionDialog(event.getWindow(), "Сохранить изменения?",
-                            "Вопрос", JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE, null, options,
-                            options[0]);
+                        n = JOptionPane.showOptionDialog(event.getWindow(), "Сохранить изменения?",
+                                "Вопрос", JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options,
+                                options[0]);
+                    }
                 }
-            }
                 if (n == 2) {
                     return;
                 }
