@@ -79,7 +79,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
             }
         };
 
-      //  TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         // TableTools.setTableSetting(jTable1, colsWidth, align, 25);
         
        

@@ -172,6 +172,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                     value_cells = tableModel.getValueAt(rows[i], cols[j]);
                     list_cells.add(value_cells);
                 }
+                
             }
         });
         menuItemIncertCells.addActionListener((ActionEvent event) -> {

@@ -739,6 +739,12 @@ public class FileManager {
                         alg = tableName[1];
                         newComment = tableName[2];
                         newAlg = tableName[3];
+                        if(newComment.equals("")){
+                            newComment=comment;
+                        }
+                        if(newAlg.equals("")){
+                            newAlg=alg;
+                        }
                         if (nodeName != null) {
                             if (nodeName.equals(alg)) {
                                 xmlsax.editDataAttr(fieldNode.get(i), "Name", newAlg);
@@ -769,6 +775,12 @@ public class FileManager {
                         alg = tableName[1];//алгоритмическое имя
                         newComment = tableName[2];//новое русское имя
                         newAlg = tableName[3];//новое алг имя
+                        if(newComment.equals("")){
+                            newComment=comment;
+                        }
+                        if(newAlg.equals("")){
+                            newAlg=alg;
+                        }
                         if (nodeName != null) {//проверка,есть ли текущаяя нода
                             if (nodeName.equals(alg)) {
                                 xmlsax.editDataAttr(signalNode.get(i), "Name", newAlg);
@@ -796,6 +808,12 @@ public class FileManager {
                         alg = tableName[1];//алгоритмическое имя
                         newComment = tableName[2];//новое русское имя
                         newAlg = tableName[3];//новое алг имя
+                        if(newComment.equals("")){
+                            newComment=comment;
+                        }
+                        if(newAlg.equals("")){
+                            newAlg=alg;
+                        }
                         if (nodeName != null) {//проверка,есть ли текущаяя нода
                             if (nodeName.equals(alg)) {
                                 xmlsax.editDataAttr(signalNode.get(i), "Name", newAlg);
