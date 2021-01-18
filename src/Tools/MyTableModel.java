@@ -32,7 +32,7 @@ public class MyTableModel extends DefaultTableModel {
     @Override
     public void setValueAt(Object aValue, int row, int column) {
 
-        Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений аналог Листа
+        Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений  Листа
         rowData.set(column, aValue);
         String[] tmRow = new String[this.getColumnCount()];
 
@@ -43,7 +43,7 @@ public class MyTableModel extends DefaultTableModel {
          if(!tmRow[3].equals("")){
                 newName.add(tmRow);
             }
-       // newName.add(tmRow);
+        newName.add(tmRow);
         System.out.println(aValue.toString());
     }
 

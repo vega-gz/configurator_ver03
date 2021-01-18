@@ -11,7 +11,7 @@ import Tools.TableTools;
 import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;
-import Tools.regitrationJFrame;
+import Tools.RegistrationJFrame;
 import globalData.globVar;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class TableDB extends javax.swing.JFrame {
         
         
         
-        regitrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
+        RegistrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
         closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
         
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
@@ -465,7 +465,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    private boolean  compareTable(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
+    boolean  compareTable(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
         int x = tableModel.getColumnCount();
         int y = tableModel.getRowCount();
         if(fromDB.size() != y || fromDB.get(0).length != x) return true;

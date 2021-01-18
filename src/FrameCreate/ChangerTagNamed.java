@@ -5,49 +5,61 @@
  */
 package FrameCreate;
 
+import ReadWriteExcel.ExcelAdapter;
 import Tools.FileManager;
 import Tools.MyTableModel;
+import Tools.RegistrationJFrame;
+import Tools.SaveFrameData;
 import Tools.TableTools;
+import Tools.closeJFrame;
+import Tools.isCange;
 import globalData.globVar;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class ChangerTagNamed extends javax.swing.JFrame {
-    FileManager fm=new FileManager();
-    
+    FileManager fm = new FileManager();
     MyTableModel tableModel; // модель таблицы
     ArrayList<String[]> fromDB; // Что получим из базы
-    int tableSize=0;
+    int tableSize = 0;
     int qCol = 0;
     ArrayList<String[]> newName;
-  
+    ArrayList<JFrame> listJF = new ArrayList();
+    JPopupMenu popupMenu = new JPopupMenu();
+    ArrayList<String[]> listItemList = new ArrayList<>();
+    String tableName;
+    String comment;
     
-    
+   
     public ChangerTagNamed(String table) {
-
         if (!globVar.DB.isConnectOK()) {
             return;
         }
-        newName = new ArrayList<>(); 
+        newName = new ArrayList<>();
         tableModel = new MyTableModel(newName);
-        //List<String> listColumn = globVar.DB.getListColumns(table);
         List<String> listColumn = new ArrayList<>(Arrays.asList("Наименование", "TAG_NAME_PLC"));//получили лист 
-
         if (listColumn == null || listColumn.isEmpty()) {
             return;
         }
         String[] cols = listColumn.toArray(new String[listColumn.size()]);//преобразовали лист в стринговый массив
-
         tableModel.setColumnIdentifiers(new String[]{"Наименование", "TAG_NAME_PLC", "Новое_Наименование", "New_TAG_NAME_PLC"});
 
         fromDB = globVar.DB.getData(table, cols);//получили данные из БД
-        
-        
         fromDB.forEach((rowData) -> tableModel.addRow(Stream.concat(Arrays.stream(rowData), Arrays.stream(new String[]{"", ""})).toArray(String[]::new)));//вставляем данные по ячейкам в таблицу
-         tableSize = fromDB.size();//размер строк
-         qCol = listColumn.size();//размер столбцов
+        comment = globVar.DB.getCommentTable(table);
+        tableSize = fromDB.size();//размер строк
+        qCol = listColumn.size();//размер столбцов
         int[] align = new int[qCol];
         int[] colsWidth = new int[qCol];
 
@@ -55,9 +67,41 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         if (tableSize > 0) {
             TableTools.setAlignCols(fromDB.get(0), align);
         }
-       
 
         initComponents();
+
+        RegistrationJFrame rgf = (JFrame jf) -> {
+            listJF.add(jf);
+        };
+        closeJFrame cjf = () -> {
+            for (JFrame jf : listJF) {
+                jf.setVisible(false);
+            }
+        };
+
+      //  TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
+        // TableTools.setTableSetting(jTable1, colsWidth, align, 25);
+        
+       
+        
+        jTable1.setRowSelectionAllowed(true);           // Разрешаю выделять по строкам
+        TableColumnModel columnModel = jTable1.getColumnModel();
+        
+//         DefaultTableCellRenderer defaultTableCellRenderer = new DefaultTableCellRenderer();
+//        System.setProperty("myColor", "0XEEEEEE");
+//        defaultTableCellRenderer.setBackground(Color.getColor("myColor")); //задаем цвет столбца
+//        columnModel.getColumn(0).setCellRenderer(defaultTableCellRenderer);
+//        columnModel.getColumn(1).setCellRenderer(defaultTableCellRenderer);
+        
+        columnModel.setColumnSelectionAllowed(true);    // Разрешение выделения столбца
+        columnModel.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);// Режим выделения интервала
+        int qCol = jTable1.getColumnCount();                //Определяю количество столбцов
+        if (qCol > colsWidth.length) {
+            qCol = colsWidth.length;  //чтобы не вылететь за границы таблицы, если переданный массив ширин неправильный
+        }
+
+        ExcelAdapter editT = new ExcelAdapter(jTable1);//редактирование таблицы контрл В Ц
+
     }
 
     /**
@@ -119,11 +163,10 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        for (String[] s: newName) {
+        for (String[] s : newName) {
             System.out.println(s.toString());
         }
-        
-        
+
         fm.ChangeIntTypeFile(globVar.desDir, newName);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -160,6 +203,22 @@ public class ChangerTagNamed extends javax.swing.JFrame {
                 //new ChangerTagNamed().setVisible(true);
             }
         });
+    }
+
+    boolean compareTable(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
+        int x = tableModel.getColumnCount();
+        int y = tableModel.getRowCount();
+        if (fromDB.size() != y || fromDB.get(0).length != x) {
+            return true;
+        }
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
+                if (!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -139,6 +139,7 @@ public class ExcelAdapter implements ActionListener {
             system = Toolkit.getDefaultToolkit().getSystemClipboard();
             system.setContents(stsel, stsel);
         }
+        
         if (e.getActionCommand().compareTo("Paste") == 0) {
             System.out.println("Trying to Paste");
             int startRow = (jTable1.getSelectedRows())[0];

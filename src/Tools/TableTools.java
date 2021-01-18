@@ -111,7 +111,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     //----- Функция для настройки контекстного меню таблиц--------------Lev----//
-    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, regitrationJFrame rgf, ArrayList<JFrame> listJF)  {
+    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, RegistrationJFrame rgf, ArrayList<JFrame> listJF)  {
         JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
         JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
