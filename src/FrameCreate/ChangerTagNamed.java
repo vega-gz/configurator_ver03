@@ -66,8 +66,8 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         tableModel.setColumnIdentifiers(new String[]{"Наименование", "TAG_NAME_PLC", "Новое_Наименование", "New_TAG_NAME_PLC"});
 
         //fromDB = globVar.DB.getData(tableDB, cols);//получили данные из БД
-         tagName = table.getNumberCol("TAG_NAME_PLC");
-         rusName = table.getNumberCol("Наименование");
+        tagName = table.getNumberCol("TAG_NAME_PLC");
+        rusName = table.getNumberCol("Наименование");
         for (int i = 0; i < table.tableSize; i++) {
             tmp = new String[4];
             tmp[1] = table.getCell("TAG_NAME_PLC", i);
@@ -180,30 +180,27 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
-        
-         DoIt di = () -> {
-            if(!Tools.isDesDir()) return;
+
+        DoIt di = () -> {
+            if (!Tools.isDesDir()) {
+                return;
+            }
             int ret = 1;
             ReNameAllFile();
-            
+
             jProgressBar1.setValue(0);
-         };
+        };
 //        BackgroundThread bt = new BackgroundThread("Переименование", di);
 //        bt.start();
-        
-        
-        
-        
-        
-       
+
         for (String[] s : newName) {
             System.out.println(s.toString());
         }
-        fm.ChangeIntTypeFile(globVar.desDir, newName);
-         BackgroundThread bt = new BackgroundThread("Переименование", di);
+        String tableName=table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
+        fm.ChangeIntTypeFile(globVar.desDir, newName,tableName);
+        BackgroundThread bt = new BackgroundThread("Переименование", di);
         bt.start();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -252,32 +249,40 @@ public class ChangerTagNamed extends javax.swing.JFrame {
                 if (!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) {
                     return true;
                 }
-               
+
             }
         }
         return false;
     }
-    public void ReNameAllFile(){
-        int jpgMax = tableModel.getRowCount();      
+
+    public void ReNameAllFile() {
+        int jpgMax = tableModel.getRowCount();
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            if(jProgressBar1!=null) jProgressBar1.setValue((int)((i+1)*100.0/jpgMax));//для прогрессбара
+            
+            
+            
+            if (jProgressBar1 != null) {
+                jProgressBar1.setValue((int) ((i + 1) * 100.0 / jpgMax));//для прогрессбара
+            }
+            
+            
+            
             for (int j = 0; j < tableModel.getColumnCount(); j++) {
                 tmp[j] = tableModel.getValueAt(i, j);
             }
             if (!tmp[2].equals("") || !tmp[3].equals("")) {//если хоть одна ячейка из двух не пустая,обновляем строку
-                if(tmp[2].equals("")){
-                    tmp[2]=tmp[0];
+                if (tmp[2].equals("")) {
+                    tmp[2] = tmp[0];
                 }
-                if(tmp[3].equals("")){
-                    tmp[3]=tmp[1];
+                if (tmp[3].equals("")) {
+                    tmp[3] = tmp[1];
                 }
-                table.tableModel.setValue(tmp[2], i,rusName);
-                table.tableModel.setValue(tmp[3], i,tagName);
+                table.tableModel.setValue(tmp[2], i, rusName);
+                table.tableModel.setValue(tmp[3], i, tagName);
             }
         }
     }
-        
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
