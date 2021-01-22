@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- package ReadWriteExcel;
+package ReadWriteExcel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -35,7 +35,7 @@ public class ExcelAdapter implements ActionListener {
      * Copy-Paste and acts as a Clipboard listener.
      */
     public ExcelAdapter(JTable myJTable) {
-//undo/redo
+
         jTable1 = myJTable;
         listener = new TableCellListener(jTable1, new AbstractAction() {
             @Override
@@ -44,7 +44,7 @@ public class ExcelAdapter implements ActionListener {
                 undoSystem.put(tcl.getOldData());
             }
         });
-        undoSystem.put( ((DefaultTableModel) jTable1.getModel()).getDataVector() );
+        undoSystem.put(((DefaultTableModel) jTable1.getModel()).getDataVector());
 
         KeyStroke copy = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK, false);
         // Identifying the copy KeyStroke user can modify this
@@ -75,18 +75,26 @@ public class ExcelAdapter implements ActionListener {
         if (e.getActionCommand().compareTo("Cancel") == 0) {
             TableModel model = jTable1.getModel();
             Vector<Vector> data = undoSystem.undo();
-            if (data == null) return;
-            for (int i = 0; i < data.size(); ++i)
-                for (int j = 0; j < data.get(0).size(); ++j)
+            if (data == null) {
+                return;
+            }
+            for (int i = 0; i < data.size(); ++i) {
+                for (int j = 0; j < data.get(0).size(); ++j) {
                     model.setValueAt(data.get(i).get(j), i, j);
+                }
+            }
         }
         if (e.getActionCommand().compareTo("Redo") == 0) {
             TableModel model = jTable1.getModel();
             Vector<Vector> data = undoSystem.redo();
-            if (data == null) return;
-            for (int i = 0; i < data.size(); ++i)
-                for (int j = 0; j < data.get(0).size(); ++j)
+            if (data == null) {
+                return;
+            }
+            for (int i = 0; i < data.size(); ++i) {
+                for (int j = 0; j < data.get(0).size(); ++j) {
                     model.setValueAt(data.get(i).get(j), i, j);
+                }
+            }
         }
         if (e.getActionCommand().compareTo("Delete") == 0) {//удаление ячейки по кнопке
             int numcols = jTable1.getSelectedColumnCount();
@@ -139,7 +147,7 @@ public class ExcelAdapter implements ActionListener {
             system = Toolkit.getDefaultToolkit().getSystemClipboard();
             system.setContents(stsel, stsel);
         }
-        
+
         if (e.getActionCommand().compareTo("Paste") == 0) {
             System.out.println("Trying to Paste");
             int startRow = (jTable1.getSelectedRows())[0];
@@ -167,7 +175,9 @@ public class ExcelAdapter implements ActionListener {
             }
         }
     }
+
     private static class UndoRedoSystem {
+
         private final Deque<Vector<Vector>> history = new LinkedList<>();
         private final Deque<Vector<Vector>> trash = new LinkedList<>();
         private final int capacity;
@@ -177,13 +187,18 @@ public class ExcelAdapter implements ActionListener {
         }
 
         public Vector<Vector> undo() {
-            if (history.isEmpty()) return null;
+            if (history.isEmpty()) {
+                return null;
+            }
             Vector<Vector> data = history.removeLast();
             trash.addLast(data);
             return data;
         }
+
         public Vector<Vector> redo() {
-            if (trash.isEmpty()) return null;
+            if (trash.isEmpty()) {
+                return null;
+            }
             Vector<Vector> data = trash.removeLast();
             history.addLast(data);
             return data;
@@ -192,8 +207,9 @@ public class ExcelAdapter implements ActionListener {
         public void put(Vector<Vector> data) {
             trash.clear();
             history.addLast(data);
-            if (history.size() == capacity)
+            if (history.size() == capacity) {
                 history.removeFirst();
+            }
         }
     }
 }

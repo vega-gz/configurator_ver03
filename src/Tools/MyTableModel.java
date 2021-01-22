@@ -29,22 +29,34 @@ public class MyTableModel extends DefaultTableModel {
         return super.getValueAt(row, column) + "";//(String)
     }
 
-    @Override
+   @Override
     public void setValueAt(Object aValue, int row, int column) {
 
-        Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений  Листа
-        rowData.set(column, aValue);
+        Vector rowData = (Vector) getDataVector().get(row); 
+        rowData.setElementAt(aValue, column);
+        fireTableCellUpdated(row, column);
         String[] tmRow = new String[this.getColumnCount()];
 
         for (int i = 0; i < this.getColumnCount(); i++) {
             tmRow[i] = this.getValueAt(row, i);
-            System.out.println(tmRow[i]);
+          //  System.out.println(tmRow[i]);
         }
-         if(!tmRow[3].equals("")){
+         if(tmRow[3].equals("")){
+//             tmRow[3]=tmRow[1];
                 newName.add(tmRow);
             }
+         if(tmRow[2].equals("")){
+              tmRow[2]=tmRow[0];
+                newName.add(tmRow);
+         }
         newName.add(tmRow);
-        System.out.println(aValue.toString());
+      
+    }
+    
+    public void setValue(Object aValue, int row, int column){
+        Vector rowVector = (Vector)dataVector.elementAt(row);
+        rowVector.setElementAt(aValue, column);
+        fireTableCellUpdated(row, column);
     }
 
     public void clear() {

@@ -666,7 +666,7 @@ public class FileManager {
                         }
                         // String confName = nameFolderFile.substring(0, nameFolderFile.indexOf('.'));//получили имя без расширения
                         String findexpFolder = nameFolderFile.substring(nameFolderFile.lastIndexOf(".") + 1);//ищу расширение folder
-
+//
                         cnt++;
 
                         //----МЫ НАШЛИ КОНКРЕТНЫЙ ИНТ.ЕСЛИ ИМЯ И ТИП НЕ СОВПАДАЮТ ТО ПРОБЕГАЕМСЯ СНОВА И ИЩЕМ ФАЙЛЫ С ТЕМ ЖЕ НАЗВАНИЕМ И МЕНЯЕМ ЕГО НА ЗНАЧЕНИЕ АТТРИБУТА---\\     
@@ -711,6 +711,7 @@ public class FileManager {
         File[] filesInDirectory = new File(dir + "\\" + "Design").listFiles();//получаем список элементов по указанному адресу
         //  File[] filesInDirectory=new File(dir+File.separator).listFiles();
         String expInt = "int";
+        int cntName=0;
         String expType = "type";
         String expIec="iec_st";
         String expHMI="iec_hmi";
@@ -749,18 +750,23 @@ public class FileManager {
                             if (nodeName.equals(alg)) {
                                 xmlsax.editDataAttr(fieldNode.get(i), "Name", newAlg);
                                  xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+                                
                             }
                         }
                         if (nodeAlg != null) {
                             if (nodeAlg.equals(comment)) {
+                                if(cntName>0){
+                                    cntName=0;
+                                continue;
+                                }
                                 xmlsax.editDataAttr(fieldNode.get(i), "Comment", newComment);
                                  xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+                                 cntName++;
+                                
                             }
-                            System.out.println(nameFile);
+                          //  System.out.println(nameFile);
                         }
-
                     }
-
                 }
                 if (findexpType.equals(expInt)) {//INT
                     Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
@@ -865,6 +871,7 @@ public class FileManager {
         }
        
     }
+    
 
     public static void main(String[] args) throws IOException {//для тестирования
         FileManager fm = new FileManager();

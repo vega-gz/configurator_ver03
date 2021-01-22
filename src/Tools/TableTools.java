@@ -111,7 +111,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     //----- Функция для настройки контекстного меню таблиц--------------Lev----//
-    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, RegistrationJFrame rgf, ArrayList<JFrame> listJF)  {
+    static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, RegistrationJFrame rgf, ArrayList<JFrame> listJF) {
         JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
         JMenuItem menuItemIncertStr = new JMenuItem("Вставить строки");
         JMenuItem menuItemClearCells = new JMenuItem("Очистить ячейки");
@@ -120,10 +120,10 @@ public class TableTools {//ссылка на таблицу, массив шир
         JMenuItem menuItemCopyCells = new JMenuItem("Скопировать ячейки");
         JMenuItem menuItemIncertCells = new JMenuItem("Вставить ячейки");
         JMenuItem menuItemOpenWindow = null;
-       
-        ImageIcon icon =new ImageIcon("C:\\Users\\cherepanov\\Desktop\\тестинг\\copy-file_icon-icons.com_56095.png");
+
+        ImageIcon icon = new ImageIcon("C:\\Users\\cherepanov\\Desktop\\тестинг\\copy-file_icon-icons.com_56095.png");
         menuItemCopyCells.setRequestFocusEnabled(false);
-         // menuItemCopyCells.setIcon(icon); //   устанавливает необходимую иконку
+        // menuItemCopyCells.setIcon(icon); //   устанавливает необходимую иконку
         menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
         menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
 
@@ -172,7 +172,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                     value_cells = tableModel.getValueAt(rows[i], cols[j]);
                     list_cells.add(value_cells);
                 }
-                
+
             }
         });
         menuItemIncertCells.addActionListener((ActionEvent event) -> {
@@ -218,7 +218,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             for (int i = 0; i < rows.length; i++) {
                 String[] r = getRow(jTable1, rows[i]);
                 list_str.add(r);
-               
+
             }
         });
         menuItemIncertStr.addActionListener((ActionEvent event) -> {
@@ -232,7 +232,8 @@ public class TableTools {//ссылка на таблицу, массив шир
                 setId(jTable1);
             }
             for (int i = 0; i < list_str.size(); i++) {
-                tableModel.insertRow(row , list_str.get(i));
+                tableModel.insertRow(row, list_str.get(i));
+
                 setId(jTable1);
             }
             list_str.clear();
@@ -277,6 +278,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         });
         return 0;
     }
+
     public static void fillCells(JTable jTable1, MyTableModel tableModel) {
         rows = jTable1.getSelectedRows();
         cols = jTable1.getSelectedColumns();
@@ -437,9 +439,8 @@ public class TableTools {//ссылка на таблицу, массив шир
     static public void setFrameListener(JFrame frame, SaveFrameData sfd, isCange ich, closeJFrame cjf) {
         frame.addWindowListener(new WindowListener() {
 
-            
             boolean onCreate = false; // триггер для создания окна
-            
+
             // когда ткнули на окно или сняли с него фокус(при любых действиях)
             public void windowActivated(WindowEvent event) {
                 if (onCreate) { // проверка только после создания окна
@@ -447,19 +448,19 @@ public class TableTools {//ссылка на таблицу, массив шир
                     if (!globVar.windowIconified) { // проверка на сворачивание
                         if (globVar.captureFocus) { // только одно окно сожет захватить управление
                             globVar.captureFocus = false; // сразу блочим для остальныхF
-                                for (int i = 0; i < globVar.listF.size(); i++) {
-                                    JFrame f = globVar.listF.get(i);
-                                    // все окна на передний план
-                                    if (f == frame) {
-                                        System.out.println("I am find myself " + f.getTitle());
-                                        --globVar.sumFrame; // нужен правильный подсчет
-                                        continue;
-                                    }
-                                    //f.setExtendedState(JFrame.ICONIFIED);
-                                    f.setExtendedState(JFrame.NORMAL);
-                                    f.toFront();
-                                    f.requestFocus();
+                            for (int i = 0; i < globVar.listF.size(); i++) {
+                                JFrame f = globVar.listF.get(i);
+                                // все окна на передний план
+                                if (f == frame) {
+                                    System.out.println("I am find myself " + f.getTitle());
+                                    --globVar.sumFrame; // нужен правильный подсчет
+                                    continue;
                                 }
+                                //f.setExtendedState(JFrame.ICONIFIED);
+                                f.setExtendedState(JFrame.NORMAL);
+                                f.toFront();
+                                f.requestFocus();
+                            }
 
                         }
                     } else {
@@ -467,21 +468,21 @@ public class TableTools {//ссылка на таблицу, массив шир
                         globVar.sumFrame = 0;
                     }
 
-            if (globVar.sumFrame >= globVar.listF.size()) { // проверка раньше времени чем обработка
-                globVar.sumFrame = 0;
-                globVar.captureFocus = true; // разблокировка
+                    if (globVar.sumFrame >= globVar.listF.size()) { // проверка раньше времени чем обработка
+                        globVar.sumFrame = 0;
+                        globVar.captureFocus = true; // разблокировка
 
-            }
-        }
+                    }
+                }
             }
 
             public void windowClosed(WindowEvent event) {
                 System.out.println("windowClosing " + frame.getTitle());
                 for (int i = 0; i < globVar.listF.size(); i++) {
                     JFrame f = globVar.listF.get(i);
-                        if (f == frame) {
-                            globVar.listF.remove(f);
-                        }
+                    if (f == frame) {
+                        globVar.listF.remove(f);
+                    }
                 }
                 String title = frame.getTitle();
                 globVar.processReg.remove(title);
@@ -507,7 +508,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                 if (sfd != null && n == 0) {
                     sfd.doIt();
                 }
-                
+
                 String title = frame.getTitle();
                 globVar.processReg.remove(title);
                 event.getWindow().setVisible(false);
@@ -525,7 +526,6 @@ public class TableTools {//ссылка на таблицу, массив шир
 
             public void windowIconified(WindowEvent event) {
             }
-            
 
             public void windowOpened(WindowEvent event) {// Регистрация фрейма в регистре
                 String title = frame.getTitle();

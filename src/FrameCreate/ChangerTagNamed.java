@@ -5,33 +5,37 @@
  */
 package FrameCreate;
 
+import DataBaseTools.DataBase;
+import Generators.Generator;
 import ReadWriteExcel.ExcelAdapter;
+import Tools.BackgroundThread;
+import Tools.DoIt;
 import Tools.FileManager;
 import Tools.MyTableModel;
 import Tools.RegistrationJFrame;
-import Tools.SaveFrameData;
 import Tools.TableTools;
+import Tools.Tools;
 import Tools.closeJFrame;
-import Tools.isCange;
 import globalData.globVar;
-import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ChangerTagNamed extends javax.swing.JFrame {
+
+    DataBase db = new DataBase();
     FileManager fm = new FileManager();
     MyTableModel tableModel; // модель таблицы
-    ArrayList<String[]> fromDB; // Что получим из базы
+    //ArrayList<String[]> fromDB; // Что получим из базы
     int tableSize = 0;
     int qCol = 0;
     ArrayList<String[]> newName;
@@ -40,9 +44,15 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     ArrayList<String[]> listItemList = new ArrayList<>();
     String tableName;
     String comment;
-    
-   
-    public ChangerTagNamed(String table) {
+    TableDB table;
+    String[] cols;
+    String tmp[];
+    int tagName;
+    int rusName;
+
+    public ChangerTagNamed(TableDB tbl) {
+        this.table = tbl;
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         if (!globVar.DB.isConnectOK()) {
             return;
         }
@@ -52,21 +62,31 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         if (listColumn == null || listColumn.isEmpty()) {
             return;
         }
-        String[] cols = listColumn.toArray(new String[listColumn.size()]);//преобразовали лист в стринговый массив
+        cols = listColumn.toArray(new String[listColumn.size()]);//преобразовали лист в стринговый массив
         tableModel.setColumnIdentifiers(new String[]{"Наименование", "TAG_NAME_PLC", "Новое_Наименование", "New_TAG_NAME_PLC"});
 
-        fromDB = globVar.DB.getData(table, cols);//получили данные из БД
-        fromDB.forEach((rowData) -> tableModel.addRow(Stream.concat(Arrays.stream(rowData), Arrays.stream(new String[]{"", ""})).toArray(String[]::new)));//вставляем данные по ячейкам в таблицу
-        comment = globVar.DB.getCommentTable(table);
-        tableSize = fromDB.size();//размер строк
-        qCol = listColumn.size();//размер столбцов
+        //fromDB = globVar.DB.getData(tableDB, cols);//получили данные из БД
+         tagName = table.getNumberCol("TAG_NAME_PLC");
+         rusName = table.getNumberCol("Наименование");
+        for (int i = 0; i < table.tableSize; i++) {
+            tmp = new String[4];
+            tmp[1] = table.getCell("TAG_NAME_PLC", i);
+            tmp[0] = table.getCell("Наименование", i);
+            tmp[2] = "";
+            tmp[3] = "";
+            tableModel.addRow(tmp);
+        }
+        //fromDB.forEach((rowData) -> tableModel.addRow(table.getCell("TAG_NAME_PLC",i), qCol).getctableName, qCol)Stream.concat(Arrays.stream(rowData), Arrays.stream(new String[]{"", ""})).toArray(String[]::new)));//вставляем данные по ячейкам в таблицу
+        //comment = globVar.DB.getCommentTable(table);
+        tableSize = table.tableSize;//fromDB.size();//размер строк
+        qCol = 4;//listColumn.size();//размер столбцов
         int[] align = new int[qCol];
         int[] colsWidth = new int[qCol];
 
         TableTools.setWidthCols(cols, tableModel, colsWidth, 7.8);
-        if (tableSize > 0) {
-            TableTools.setAlignCols(fromDB.get(0), align);
-        }
+//        if (tableSize > 0) {
+//            TableTools.setAlignCols(fromDB.get(0), align);
+//        }
 
         initComponents();
 
@@ -79,20 +99,11 @@ public class ChangerTagNamed extends javax.swing.JFrame {
             }
         };
 
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, "Замена имён в таблице " + table.tableName, rgf, listJF);
         // TableTools.setTableSetting(jTable1, colsWidth, align, 25);
-        
-       
-        
+
         jTable1.setRowSelectionAllowed(true);           // Разрешаю выделять по строкам
         TableColumnModel columnModel = jTable1.getColumnModel();
-        
-//         DefaultTableCellRenderer defaultTableCellRenderer = new DefaultTableCellRenderer();
-//        System.setProperty("myColor", "0XEEEEEE");
-//        defaultTableCellRenderer.setBackground(Color.getColor("myColor")); //задаем цвет столбца
-//        columnModel.getColumn(0).setCellRenderer(defaultTableCellRenderer);
-//        columnModel.getColumn(1).setCellRenderer(defaultTableCellRenderer);
-        
         columnModel.setColumnSelectionAllowed(true);    // Разрешение выделения столбца
         columnModel.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);// Режим выделения интервала
         int qCol = jTable1.getColumnCount();                //Определяю количество столбцов
@@ -117,6 +128,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,17 +147,22 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(62, 62, 62)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,11 +180,30 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+        
+         DoIt di = () -> {
+            if(!Tools.isDesDir()) return;
+            int ret = 1;
+            ReNameAllFile();
+            
+            jProgressBar1.setValue(0);
+         };
+//        BackgroundThread bt = new BackgroundThread("Переименование", di);
+//        bt.start();
+        
+        
+        
+        
+        
+       
         for (String[] s : newName) {
             System.out.println(s.toString());
         }
-
         fm.ChangeIntTypeFile(globVar.desDir, newName);
+         BackgroundThread bt = new BackgroundThread("Переименование", di);
+        bt.start();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -216,14 +252,37 @@ public class ChangerTagNamed extends javax.swing.JFrame {
                 if (!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) {
                     return true;
                 }
+               
             }
         }
         return false;
     }
+    public void ReNameAllFile(){
+        int jpgMax = tableModel.getRowCount();      
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            if(jProgressBar1!=null) jProgressBar1.setValue((int)((i+1)*100.0/jpgMax));//для прогрессбара
+            for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                tmp[j] = tableModel.getValueAt(i, j);
+            }
+            if (!tmp[2].equals("") || !tmp[3].equals("")) {//если хоть одна ячейка из двух не пустая,обновляем строку
+                if(tmp[2].equals("")){
+                    tmp[2]=tmp[0];
+                }
+                if(tmp[3].equals("")){
+                    tmp[3]=tmp[1];
+                }
+                table.tableModel.setValue(tmp[2], i,rusName);
+                table.tableModel.setValue(tmp[3], i,tagName);
+            }
+        }
+    }
+        
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
