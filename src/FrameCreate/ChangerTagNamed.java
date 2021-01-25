@@ -6,6 +6,7 @@
 package FrameCreate;
 
 import DataBaseTools.DataBase;
+import DataBaseTools.Update;
 import Generators.Generator;
 import ReadWriteExcel.ExcelAdapter;
 import Tools.BackgroundThread;
@@ -31,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ChangerTagNamed extends javax.swing.JFrame {
-
+    Update update=new Update();
     DataBase db = new DataBase();
     FileManager fm = new FileManager();
     MyTableModel tableModel; // модель таблицы
@@ -135,7 +136,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Переименовать");
+        jButton1.setText("Переименовать1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -180,26 +181,32 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+       //   if(!Tools.isDesDir()) return;
+      //  String processName = "Генерация из таблицы";
+       // if(globVar.processReg.indexOf(processName)>=0){
+         //   JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
+         //   return;
+      //  }
         DoIt di = () -> {
-            if (!Tools.isDesDir()) {
-                return;
-            }
-            int ret = 1;
-            ReNameAllFile();
-
+            int updt = 0;
+         
+       //   updt=update.ReNameAllData(tableModel,jProgressBar1,table,tmp,rusName,tagName);
+            update.ReNameAllData(tableModel, jProgressBar1, table, tmp, rusName, tagName);
+            // if(updt == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+           // else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+           // globVar.processReg.remove(processName);
             jProgressBar1.setValue(0);
         };
-//        BackgroundThread bt = new BackgroundThread("Переименование", di);
-//        bt.start();
+        BackgroundThread bt = new BackgroundThread("Переименование", di);
+        bt.start();
 
         for (String[] s : newName) {
             System.out.println(s.toString());
         }
         String tableName=table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
         fm.ChangeIntTypeFile(globVar.desDir, newName,tableName);
-        BackgroundThread bt = new BackgroundThread("Переименование", di);
-        bt.start();
+       // BackgroundThread bt = new BackgroundThread("Переименование", di);
+      //  bt.start();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -255,33 +262,33 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         return false;
     }
 
-    public void ReNameAllFile() {
-        int jpgMax = tableModel.getRowCount();
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
-            
-            
-            
-            if (jProgressBar1 != null) {
-                jProgressBar1.setValue((int) ((i + 1) * 100.0 / jpgMax));//для прогрессбара
-            }
-            
-            
-            
-            for (int j = 0; j < tableModel.getColumnCount(); j++) {
-                tmp[j] = tableModel.getValueAt(i, j);
-            }
-            if (!tmp[2].equals("") || !tmp[3].equals("")) {//если хоть одна ячейка из двух не пустая,обновляем строку
-                if (tmp[2].equals("")) {
-                    tmp[2] = tmp[0];
-                }
-                if (tmp[3].equals("")) {
-                    tmp[3] = tmp[1];
-                }
-                table.tableModel.setValue(tmp[2], i, rusName);
-                table.tableModel.setValue(tmp[3], i, tagName);
-            }
-        }
-    }
+//    public void ReNameAllFile() {
+//        int jpgMax = tableModel.getRowCount();
+//        for (int i = 0; i < tableModel.getRowCount(); i++) {
+//            
+//            
+//            
+//            if (jProgressBar1 != null) {
+//                jProgressBar1.setValue((int) ((i + 1) * 100.0 / jpgMax));//для прогрессбара
+//            }
+//            
+//            
+//            
+//            for (int j = 0; j < tableModel.getColumnCount(); j++) {
+//                tmp[j] = tableModel.getValueAt(i, j);
+//            }
+//            if (!tmp[2].equals("") || !tmp[3].equals("")) {//если хоть одна ячейка из двух не пустая,обновляем строку
+//                if (tmp[2].equals("")) {
+//                    tmp[2] = tmp[0];
+//                }
+//                if (tmp[3].equals("")) {
+//                    tmp[3] = tmp[1];
+//                }
+//                table.tableModel.setValue(tmp[2], i, rusName);
+//                table.tableModel.setValue(tmp[3], i, tagName);
+//            }
+//        }
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

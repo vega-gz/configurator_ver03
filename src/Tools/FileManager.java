@@ -737,7 +737,7 @@ public class FileManager {
                         ArrayList<Node> fieldNode = xmlsax.getHeirNode(fieldsNode);
                         for (int i = 0; i < fieldNode.size(); i++) {
                             String nodeName = xmlsax.getDataAttr(fieldNode.get(i), "Name");
-                            String nodeAlg = xmlsax.getDataAttr(fieldNode.get(i), "Comment");
+                            String nodeComment = xmlsax.getDataAttr(fieldNode.get(i), "Comment");
 
                             //----выполняем присваивание из массива каждому элементу---
                             comment = tableName[0];
@@ -755,15 +755,15 @@ public class FileManager {
 
                             //---если нода не пустая то заменяем в файле ALG
                             if (nodeName != null) {
-                                if (nodeName.equals(alg)) {
+                                if (nodeName.equals(alg)) {//если AlgName в файле совпадает с AlgName в первом столбце таблицы
                                     xmlsax.editDataAttr(fieldNode.get(i), "Name", newAlg);
                                     xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
                                 }
                             }
 
                             //---если нода не пустая то заменяем в файле Comment
-                            if (nodeAlg != null) {
-                                if (nodeAlg.equals(comment)) {
+                            if (nodeComment != null) {
+                                if (nodeComment.equals(comment)) {//если Comment в файле совпадает с Comment в первом столбце таблицы
                                     String arg[] = {"Field", "Name", newAlg};
                                     Node findField = xmlsax.findNodeAtribute(arg);
                                     xmlsax.editDataAttr(findField, "Comment", newComment);
@@ -811,41 +811,41 @@ public class FileManager {
                             }
                         }
                     }
-                    if (findexpType.equals(expIec)) {//IEC_ST
-                        Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
-                        Node fieldsNode = xmlsax.returnFirstFinedNode(typeNoode, "Variables");
-
-                        ArrayList<Node> signalNode = xmlsax.getHeirNode(fieldsNode);
-                        for (int i = 0; i < signalNode.size(); i++) {
-                            String nodeName = xmlsax.getDataAttr(signalNode.get(i), "Name");
-                            String nodeAlg = xmlsax.getDataAttr(signalNode.get(i), "Comment");
-
-                            comment = tableName[0];//русское имя
-                            alg = tableName[1];//алгоритмическое имя
-                            newComment = tableName[2];//новое русское имя
-                            newAlg = tableName[3];//новое алг имя
-                            if (newComment.equals("")) {
-                                newComment = comment;
-                            }
-                            if (newAlg.equals("")) {
-                                newAlg = alg;
-                            }
-                            if (nodeName != null) {//проверка,есть ли текущаяя нода
-                                if (nodeName.equals(alg)) {
-                                    xmlsax.editDataAttr(signalNode.get(i), "Name", newAlg);
-                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
-                                }
-                            }
-                            if (nodeAlg != null) {
-                                if (nodeAlg.equals(comment)) {
-                                    String arg[] = {"Field", "Name", newAlg};
-                                    Node findField = xmlsax.findNodeAtribute(arg);
-                                    xmlsax.editDataAttr(findField, "Comment", newComment);
-                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
-                                }
-                            }
-                        }
-                    }
+//                    if (findexpType.equals(expIec)) {//IEC_ST
+//                        Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
+//                        Node fieldsNode = xmlsax.returnFirstFinedNode(typeNoode, "Variables");
+//
+//                        ArrayList<Node> signalNode = xmlsax.getHeirNode(fieldsNode);
+//                        for (int i = 0; i < signalNode.size(); i++) {
+//                            String nodeName = xmlsax.getDataAttr(signalNode.get(i), "Name");
+//                            String nodeAlg = xmlsax.getDataAttr(signalNode.get(i), "Comment");
+//
+//                            comment = tableName[0];//русское имя
+//                            alg = tableName[1];//алгоритмическое имя
+//                            newComment = tableName[2];//новое русское имя
+//                            newAlg = tableName[3];//новое алг имя
+//                            if (newComment.equals("")) {
+//                                newComment = comment;
+//                            }
+//                            if (newAlg.equals("")) {
+//                                newAlg = alg;
+//                            }
+//                            if (nodeName != null) {//проверка,есть ли текущаяя нода
+//                                if (nodeName.equals(alg)) {
+//                                    xmlsax.editDataAttr(signalNode.get(i), "Name", newAlg);
+//                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+//                                }
+//                            }
+//                            if (nodeAlg != null) {
+//                                if (nodeAlg.equals(comment)) {
+//                                    String arg[] = {"Field", "Name", newAlg};
+//                                    Node findField = xmlsax.findNodeAtribute(arg);
+//                                    xmlsax.editDataAttr(findField, "Comment", newComment);
+//                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+//                                }
+//                            }
+//                        }
+//                    }
 ////                           if (findexpType.equals(expHMI)) {//IEC_HMI
 ////                    Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
 ////                    Node fieldsNode = xmlsax.returnFirstFinedNode(typeNoode, "Struct");
