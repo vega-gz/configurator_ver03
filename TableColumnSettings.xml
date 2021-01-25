@@ -16,11 +16,11 @@
 			<Item t="больше"/>
 			<Item t="меньше"/>
 		</direct>
-		<тип src="this">
+		<type src="this">
 			<Item t="У"/>
 			<Item t="А"/>
 			<Item t="О"/>
 			<Item t="П"/>
-		</тип>
+		</type>
 	</ANB>
 </TableColumnSettings>
