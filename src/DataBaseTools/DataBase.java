@@ -111,13 +111,14 @@ public class DataBase implements Observed {
     }
     
     // -------------- CREATE DATABASE -----------
-    void createBase(String name) {
+    public int createBase(String name) {
         //connectionToBase(); // вызов Фукция подключения к базе
+        int rCode = -1;
         String sql = null;
         try {
             //name = name.replace("-", "_").replace(".", "_").replace(" ", "_"); // может понадобиться как в сосздании таблицы
-            connection.getAutoCommit();
-            connection.setAutoCommit(true);
+           // connection.getAutoCommit();
+           // connection.setAutoCommit(true);
             stmt = connection.createStatement();
             sql = "CREATE DATABASE  " + name + ";";
             System.out.println(sql);
@@ -125,14 +126,16 @@ public class DataBase implements Observed {
             stmt.close();
             //connection.commit();
             System.out.println("-- Base" + name + " created successfully");
+            rCode = 1;
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE BASE");
             FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
             e.printStackTrace();
-            return;
+            return rCode;
 
         }
+        return rCode;
     }
     //-------------- Проверка наличия в БД таблицы с заданным именем -Lev----
     public boolean isTable(String name){

@@ -5,6 +5,7 @@
  */
 package Tools;
 
+import Tools.StrTools;
 import static Tools.StrTools.getAttributValue;
 import XMLTools.XMLSAX;
 import globalData.globVar;
@@ -242,7 +243,7 @@ public class FileManager {
         return 0;
     }
 
-    public void closeWrStream(){// throws IOException {
+    public void closeWrStream() {// throws IOException {
         if (wrStream != null) {
             try {
                 wrStream.close();
@@ -373,9 +374,10 @@ public class FileManager {
         return null;
     }
 
-    public void wr(String s){try {
-        // throws IOException {
-        wrStream.write(s);
+    public void wr(String s) {
+        try {
+            // throws IOException {
+            wrStream.write(s);
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -428,7 +430,7 @@ public class FileManager {
         return FindFile(dir, nameType, "Name=");
     }
 
-    public static String FindFile(String dir, String nameType, String nameWords){// throws IOException {
+    public static String FindFile(String dir, String nameType, String nameWords) {// throws IOException {
         if (dir == null || nameType == null) {
             return null;
         }
@@ -442,7 +444,7 @@ public class FileManager {
         //if (fileList != null) {
         for (String fn : fileList) {
             if (fn.length() > 5 && ".TYPE".equalsIgnoreCase(fn.substring(fn.length() - 5))) {
-                String s=null;
+                String s = null;
                 try {
                     s = findStringInFile(dir + File.separator + fn, nameWords);
                 } catch (IOException ex) {
@@ -567,6 +569,7 @@ public class FileManager {
         }
         return 0;
     }
+//--ПереименованиеTYPE
 
     public static int renameTypeFile(String dir) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
@@ -629,8 +632,9 @@ public class FileManager {
         System.out.println("Выполнено замен " + cnt);
         return cnt;
     }
+//--Переименование INT
 
-    public static int renameIntFile(String dir) throws FileNotFoundException,IOException {
+    public static int renameIntFile(String dir) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
         String expInt = "int";
         String expFolder = "folder";
@@ -662,7 +666,7 @@ public class FileManager {
                         }
                         // String confName = nameFolderFile.substring(0, nameFolderFile.indexOf('.'));//получили имя без расширения
                         String findexpFolder = nameFolderFile.substring(nameFolderFile.lastIndexOf(".") + 1);//ищу расширение folder
-
+//
                         cnt++;
 
                         //----МЫ НАШЛИ КОНКРЕТНЫЙ ИНТ.ЕСЛИ ИМЯ И ТИП НЕ СОВПАДАЮТ ТО ПРОБЕГАЕМСЯ СНОВА И ИЩЕМ ФАЙЛЫ С ТЕМ ЖЕ НАЗВАНИЕМ И МЕНЯЕМ ЕГО НА ЗНАЧЕНИЕ АТТРИБУТА---\\     
@@ -701,11 +705,188 @@ public class FileManager {
         return cnt;
     }
 
+    //---МЕТОД ЗАМЕНЫ ИМЕН И АЛГОРИТМИЧЕСКИХ ИМЕН В TYPE ФАЙЛАХ-----
+    @SuppressWarnings("empty-statement")
+    public void ChangeIntTypeFile(String dir, ArrayList<String[]> name, String nameTable) {//newName---массив замен   Name---массив из БД
+        File[] filesInDirectory = new File(dir + "\\" + "Design").listFiles();//получаем список элементов по указанному адресу
+        //  File[] filesInDirectory=new File(dir+File.separator).listFiles();
+        String expInt = "int";
+        String expType = "type";
+        String expIec = "iec_st";
+        String expHMI = "iec_hmi";
+        FileManager fm = new FileManager();
+        XMLSAX xmlsax = new XMLSAX();
+        String nameFile = "";
+        String comment, alg, newComment, newAlg;
+        String[] tableName;
+
+        for (int j = 0; j < name.size(); j++) {
+            tableName = name.get(j);//получили строку с элементами
+            //пробегаемся по файлам в поисках соответствия 
+            for (File findType : filesInDirectory) {
+                nameFile = findType.getName();//имя файла с расширением(в котором в данный момент ищем)
+
+                //если находит совпадение по имени таблицы и имени файла,то выполняет замену
+                if (nameFile.contains(nameTable)) {
+                    String findexpType = nameFile.substring(nameFile.lastIndexOf(".") + 1);//получили расширение
+                    //----если типы сходятся ,открываем файл и получаем ноду Фиелдс
+                    if (findexpType.equals(expType)) {// TYPE
+                        Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
+                        Node fieldsNode = xmlsax.returnFirstFinedNode(typeNoode, "Fields");
+                        //---получаем детей ноды и строим цикл по ним
+                        ArrayList<Node> fieldNode = xmlsax.getHeirNode(fieldsNode);
+                        for (int i = 0; i < fieldNode.size(); i++) {
+                            String nodeName = xmlsax.getDataAttr(fieldNode.get(i), "Name");
+                            String nodeAlg = xmlsax.getDataAttr(fieldNode.get(i), "Comment");
+
+                            //----выполняем присваивание из массива каждому элементу---
+                            comment = tableName[0];
+                            alg = tableName[1];
+                            newComment = tableName[2];
+                            newAlg = tableName[3];
+
+                            //---если значение элемента пустое то присваиваем ему значение из основного столбца
+                            if (newComment.equals("")) {
+                                newComment = comment;
+                            }
+                            if (newAlg.equals("")) {
+                                newAlg = alg;
+                            }
+
+                            //---если нода не пустая то заменяем в файле ALG
+                            if (nodeName != null) {
+                                if (nodeName.equals(alg)) {
+                                    xmlsax.editDataAttr(fieldNode.get(i), "Name", newAlg);
+                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+                                }
+                            }
+
+                            //---если нода не пустая то заменяем в файле Comment
+                            if (nodeAlg != null) {
+                                if (nodeAlg.equals(comment)) {
+                                    String arg[] = {"Field", "Name", newAlg};
+                                    Node findField = xmlsax.findNodeAtribute(arg);
+                                    xmlsax.editDataAttr(findField, "Comment", newComment);
+                                    //    xmlsax.editDataAttr(fieldNode.get(i), "Comment", newComment);
+                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+
+                                }
+
+                                //  System.out.println(nameFile);
+                            }
+                        }
+                    }
+                    if (findexpType.equals(expInt)) {//INT
+                        Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
+                        Node fieldsNode = xmlsax.returnFirstFinedNode(typeNoode, "InterfaceList");
+
+                        ArrayList<Node> signalNode = xmlsax.getHeirNode(fieldsNode);
+                        for (int i = 0; i < signalNode.size(); i++) {
+                            String nodeName = xmlsax.getDataAttr(signalNode.get(i), "Name");
+                            String nodeAlg = xmlsax.getDataAttr(signalNode.get(i), "Comment");
+
+                            comment = tableName[0];//русское имя
+                            alg = tableName[1];//алгоритмическое имя
+                            newComment = tableName[2];//новое русское имя
+                            newAlg = tableName[3];//новое алг имя
+                            if (newComment.equals("")) {
+                                newComment = comment;
+                            }
+                            if (newAlg.equals("")) {
+                                newAlg = alg;
+                            }
+                            if (nodeName != null) {//проверка,есть ли текущаяя нода
+                                if (nodeName.equals(alg)) {
+                                    xmlsax.editDataAttr(signalNode.get(i), "Name", newAlg);
+                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+                                }
+                            }
+                            if (nodeAlg != null) {
+                                if (nodeAlg.equals(comment)) {
+                                    String arg[] = {"Field", "Name", newAlg};
+                                    Node findField = xmlsax.findNodeAtribute(arg);
+                                    xmlsax.editDataAttr(findField, "Comment", newComment);
+                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+                                }
+                            }
+                        }
+                    }
+                    if (findexpType.equals(expIec)) {//IEC_ST
+                        Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
+                        Node fieldsNode = xmlsax.returnFirstFinedNode(typeNoode, "Variables");
+
+                        ArrayList<Node> signalNode = xmlsax.getHeirNode(fieldsNode);
+                        for (int i = 0; i < signalNode.size(); i++) {
+                            String nodeName = xmlsax.getDataAttr(signalNode.get(i), "Name");
+                            String nodeAlg = xmlsax.getDataAttr(signalNode.get(i), "Comment");
+
+                            comment = tableName[0];//русское имя
+                            alg = tableName[1];//алгоритмическое имя
+                            newComment = tableName[2];//новое русское имя
+                            newAlg = tableName[3];//новое алг имя
+                            if (newComment.equals("")) {
+                                newComment = comment;
+                            }
+                            if (newAlg.equals("")) {
+                                newAlg = alg;
+                            }
+                            if (nodeName != null) {//проверка,есть ли текущаяя нода
+                                if (nodeName.equals(alg)) {
+                                    xmlsax.editDataAttr(signalNode.get(i), "Name", newAlg);
+                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+                                }
+                            }
+                            if (nodeAlg != null) {
+                                if (nodeAlg.equals(comment)) {
+                                    String arg[] = {"Field", "Name", newAlg};
+                                    Node findField = xmlsax.findNodeAtribute(arg);
+                                    xmlsax.editDataAttr(findField, "Comment", newComment);
+                                    xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+                                }
+                            }
+                        }
+                    }
+////                           if (findexpType.equals(expHMI)) {//IEC_HMI
+////                    Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
+////                    Node fieldsNode = xmlsax.returnFirstFinedNode(typeNoode, "Struct");
+////
+////                    ArrayList<Node> signalNode = xmlsax.getHeirNode(fieldsNode);
+////                    for (int i = 0; i < signalNode.size(); i++) {
+////                        String nodeName = xmlsax.getDataAttr(signalNode.get(i), "Name");
+////                        String nodeAlg = xmlsax.getDataAttr(signalNode.get(i), "Comment");
+////
+////                        comment = tableName[0];//русское имя
+////                        alg = tableName[1];//алгоритмическое имя
+////                        newComment = tableName[2];//новое русское имя
+////                        newAlg = tableName[3];//новое алг имя
+////                        if(newComment.equals("")){
+////                            newComment=comment;
+////                        }
+////                        if(newAlg.equals("")){
+////                            newAlg=alg;
+////                        }
+////                        if (nodeName != null) {//проверка,есть ли текущаяя нода
+////                            if (nodeName.equals(alg)) {
+////                                xmlsax.editDataAttr(signalNode.get(i), "Name", newAlg);
+////                                 xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+////                            }
+////                        }
+////                        if (nodeAlg != null) {
+////                            if (nodeAlg.equals(comment)) {
+////                                xmlsax.editDataAttr(signalNode.get(i), "Comment", newComment);
+////                                 xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+////                            }
+////                        }
+////                    }
+////                }
+                }
+            }
+        }
+
+    }
+
     public static void main(String[] args) throws IOException {//для тестирования
         FileManager fm = new FileManager();
         loggerConstructor("Яй криветко");
-        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
-        //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
     }
 }

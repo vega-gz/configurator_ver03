@@ -56,6 +56,7 @@ public class LogerViewerFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Просмотр логов");
 
         jTextPane1.setBackground(new java.awt.Color(51, 51, 51));
         jScrollPane1.setViewportView(jTextPane1);
