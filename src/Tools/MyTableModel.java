@@ -33,7 +33,7 @@ public class MyTableModel extends DefaultTableModel {
 
     @Override
     public void setValueAt(Object aValue, int row, int column) {
-
+        int cnt=0;
         Vector rowData = (Vector) getDataVector().get(row);
         rowData.setElementAt(aValue, column);
         fireTableCellUpdated(row, column);
@@ -42,19 +42,24 @@ public class MyTableModel extends DefaultTableModel {
         for (int i = 0; i < this.getColumnCount(); i++) {
             tmRow[i] = this.getValueAt(row, i);
             //  System.out.println(tmRow[i]);
+//           if(tmRow[i].equals("")){
+//               tmRow=null;
+//           }
         }
-        if (tmRow[2].equals("") && tmRow[3].equals("")) {
 
-        } else if (tmRow[3].equals("")) {
+        
+         if (tmRow[3].equals("")) {
              tmRow[3]=tmRow[1];
-            newName.add(tmRow);
+          
         } else if (tmRow[2].equals("")) {
             tmRow[2] = tmRow[0];
-            newName.add(tmRow);
+           
         }
 
         newName.add(tmRow);
-
+        
+      
+        
     }
 
     public void setValue(Object aValue, int row, int column) {

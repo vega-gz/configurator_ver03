@@ -32,7 +32,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ChangerTagNamed extends javax.swing.JFrame {
-    Update update=new Update();
+
+    Update update = new Update();
     DataBase db = new DataBase();
     FileManager fm = new FileManager();
     MyTableModel tableModel; // модель таблицы
@@ -182,31 +183,46 @@ public class ChangerTagNamed extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        //   if(!Tools.isDesDir()) return;
-      //  String processName = "Генерация из таблицы";
-       // if(globVar.processReg.indexOf(processName)>=0){
-         //   JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
-         //   return;
-      //  }
+        //  String processName = "Генерация из таблицы";
+        // if(globVar.processReg.indexOf(processName)>=0){
+        //   JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
+        //   return;
+        //  }
         DoIt di = () -> {
             int updt = 0;
-         
-       //   updt=update.ReNameAllData(tableModel,jProgressBar1,table,tmp,rusName,tagName);
+
+            //   updt=update.ReNameAllData(tableModel,jProgressBar1,table,tmp,rusName,tagName);
             update.ReNameAllData(tableModel, jProgressBar1, table, tmp, rusName, tagName);
             // if(updt == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-           // else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
-           // globVar.processReg.remove(processName);
+            // else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+            // globVar.processReg.remove(processName);
             jProgressBar1.setValue(0);
         };
         BackgroundThread bt = new BackgroundThread("Переименование", di);
         bt.start();
 
-        for (String[] s : newName) {
-            System.out.println(s.toString());
+//        for (String[] s : newName) {
+//            System.out.println(s.toString());
+//        }
+        
+        //----блок кода который ищет одинаковые строки и удаляет лишнее,дабы не загружать память
+        for (int i = 0; i < newName.size(); i++) {
+            String[] firstLine = newName.get(i);
+            String[] secondLine = null;
+            if (i > 0) {
+                secondLine = newName.get(i - 1);
+            }
+            if (secondLine != null) {
+                if (firstLine[1].equals(secondLine[1])) {
+                    newName.remove(i-1);
+                }
+            }
         }
-        String tableName=table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
-        fm.ChangeIntTypeFile(globVar.desDir, newName,tableName);
+        //-------блок кода который ищет одинаковые строки и удаляет лишнее,дабы не загружать память
+        String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
+        fm.ChangeIntTypeFile(globVar.desDir, newName, tableName);
        // BackgroundThread bt = new BackgroundThread("Переименование", di);
-      //  bt.start();
+        //  bt.start();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -289,7 +305,6 @@ public class ChangerTagNamed extends javax.swing.JFrame {
 //            }
 //        }
 //    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
