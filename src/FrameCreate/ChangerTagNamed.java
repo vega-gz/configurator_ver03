@@ -8,7 +8,11 @@ package FrameCreate;
 import DataBaseTools.DataBase;
 import DataBaseTools.Update;
 import Generators.Generator;
+import Main.Main_JPanel;
+import static Main.Main_JPanel.getModelTreeNZ;
+import Main.ProgressBar;
 import ReadWriteExcel.ExcelAdapter;
+import ReadWriteExcel.RWExcel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
@@ -33,6 +37,7 @@ import javax.swing.table.TableColumnModel;
 
 public class ChangerTagNamed extends javax.swing.JFrame {
 
+    ProgressBar pb = null;
     Update update = new Update();
     DataBase db = new DataBase();
     FileManager fm = new FileManager();
@@ -182,31 +187,33 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       //   if(!Tools.isDesDir()) return;
-        //  String processName = "Генерация из таблицы";
-        // if(globVar.processReg.indexOf(processName)>=0){
-        //   JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
-        //   return;
-        //  }
+        if (!Tools.isDesDir()) {
+            return;
+        }
+        String processName = "Переименование";
+        if (globVar.processReg.indexOf(processName) >= 0) {
+            JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
+            return;
+        }
+//        DoIt di = () -> {
+//            int updt = 0;
+//
+//            //   updt=update.ReNameAllData(tableModel,jProgressBar1,table,tmp,rusName,tagName);
+//            update.ReNameAllData(tableModel, jProgressBar1, table, tmp, rusName, tagName);
+//            // if(updt == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+//            // else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+//            // globVar.processReg.remove(processName);
+//            jProgressBar1.setValue(0);
+//        };
+//        BackgroundThread bt = new BackgroundThread("Переименование", di);
+//        bt.start();
+
+//        pb = new ProgressBar();
+//        pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//        pb.setTitle(processName);
+//        pb.setVisible(true);
         DoIt di = () -> {
-            int updt = 0;
-
-            //   updt=update.ReNameAllData(tableModel,jProgressBar1,table,tmp,rusName,tagName);
-            update.ReNameAllData(tableModel, jProgressBar1, table, tmp, rusName, tagName);
-            // if(updt == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            // else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
-            // globVar.processReg.remove(processName);
-            jProgressBar1.setValue(0);
-        };
-        BackgroundThread bt = new BackgroundThread("Переименование", di);
-        bt.start();
-
-//        for (String[] s : newName) {
-//            System.out.println(s.toString());
-//        }
-        
-        //----блок кода который ищет одинаковые строки и удаляет лишнее,дабы не загружать память
-        for (int i = 0; i < newName.size(); i++) {
+            for (int i = 0; i < newName.size(); i++) {
             String[] firstLine = newName.get(i);
             String[] secondLine = null;
             if (i > 0) {
@@ -214,14 +221,39 @@ public class ChangerTagNamed extends javax.swing.JFrame {
             }
             if (secondLine != null) {
                 if (firstLine[1].equals(secondLine[1])) {
-                    newName.remove(i-1);
+                    newName.remove(i - 1);
                 }
             }
         }
+
+            update.ReNameAllData(tableModel, table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
+            String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
+            fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);
+          
+            globVar.processReg.remove(processName);
+        };
+
+        BackgroundThread bt = new BackgroundThread(processName, di);
+        bt.start();
+        globVar.processReg.add(processName);
+
+        //----блок кода который ищет одинаковые строки и удаляет лишнее,дабы не загружать память
+//        for (int i = 0; i < newName.size(); i++) {
+//            String[] firstLine = newName.get(i);
+//            String[] secondLine = null;
+//            if (i > 0) {
+//                secondLine = newName.get(i - 1);
+//            }
+//            if (secondLine != null) {
+//                if (firstLine[1].equals(secondLine[1])) {
+//                    newName.remove(i - 1);
+//                }
+//            }
+//        }
         //-------блок кода который ищет одинаковые строки и удаляет лишнее,дабы не загружать память
-        String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
-        fm.ChangeIntTypeFile(globVar.desDir, newName, tableName);
-       // BackgroundThread bt = new BackgroundThread("Переименование", di);
+        // String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
+        //  fm.ChangeIntTypeFile(globVar.desDir, newName, tableName);
+        // BackgroundThread bt = new BackgroundThread("Переименование", di);
         //  bt.start();
 
     }//GEN-LAST:event_jButton1ActionPerformed

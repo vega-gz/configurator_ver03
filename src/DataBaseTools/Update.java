@@ -14,15 +14,14 @@ import javax.swing.JProgressBar;
  * @author cherepanov
  */
 public class Update {
-    public void ReNameAllData(MyTableModel tableModel,JProgressBar jProgressBar1,TableDB table,String tmp[],int rusName,int tagName){
+    public void ReNameAllData(MyTableModel tableModel,TableDB table,String tmp[],int rusName,int tagName){
              int jpgMax = tableModel.getRowCount();
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             
             
             
-            if (jProgressBar1 != null) {
-                jProgressBar1.setValue((int) ((i + 1) * 100.0 / jpgMax));//для прогрессбара
-            }
+         
+            
             
             
             

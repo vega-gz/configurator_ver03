@@ -38,6 +38,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import org.w3c.dom.Node;
 
 //import main.globVar;
@@ -707,7 +708,7 @@ public class FileManager {
 
     //---МЕТОД ЗАМЕНЫ ИМЕН И АЛГОРИТМИЧЕСКИХ ИМЕН В TYPE ФАЙЛАХ-----
     @SuppressWarnings("empty-statement")
-    public void ChangeIntTypeFile(String dir, ArrayList<String[]> name, String nameTable) {//newName---массив замен   Name---массив из БД
+    public void ChangeIntTypeFile(String dir, ArrayList<String[]> name, String nameTable,JProgressBar jProgressBar1) {//newName---массив замен   Name---массив из БД
         File[] filesInDirectory = new File(dir + "\\" + "Design").listFiles();//получаем список элементов по указанному адресу
         //  File[] filesInDirectory=new File(dir+File.separator).listFiles();
         String expInt = "int";
@@ -721,11 +722,12 @@ public class FileManager {
         String[] tableName;
 
         for (int j = 0; j < name.size(); j++) {
+            
             tableName = name.get(j);//получили строку с элементами
             //пробегаемся по файлам в поисках соответствия 
             for (File findType : filesInDirectory) {
                 nameFile = findType.getName();//имя файла с расширением(в котором в данный момент ищем)
-
+                
                 //если находит совпадение по имени таблицы и имени файла,то выполняет замену
                 if (nameFile.contains(nameTable)) {
                     String findexpType = nameFile.substring(nameFile.lastIndexOf(".") + 1);//получили расширение
@@ -775,6 +777,7 @@ public class FileManager {
                                 //  System.out.println(nameFile);
                             }
                         }
+                         if(jProgressBar1!=null) jProgressBar1.setValue((int)((j+1)*100.0/name.size()));
                     }
                     if (findexpType.equals(expInt)) {//INT
                         Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
@@ -810,6 +813,7 @@ public class FileManager {
                                 }
                             }
                         }
+                         if(jProgressBar1!=null) jProgressBar1.setValue((int)((j+1)*100.0/name.size()));
                     }
 //                    if (findexpType.equals(expIec)) {//IEC_ST
 //                        Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);
@@ -881,6 +885,7 @@ public class FileManager {
 ////                }
                 }
             }
+          //  if(jProgressBar1!=null) jProgressBar1.setValue((int)((j+1)*100.0/name.size()));
         }
 
     }
