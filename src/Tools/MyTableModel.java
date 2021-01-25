@@ -1,8 +1,10 @@
 package Tools;
 
+import java.nio.file.FileVisitResult;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import org.luaj.vm2.ast.Stat;
 
 /*@author Lev*/
 public class MyTableModel extends DefaultTableModel {
@@ -29,32 +31,34 @@ public class MyTableModel extends DefaultTableModel {
         return super.getValueAt(row, column) + "";//(String)
     }
 
-   @Override
+    @Override
     public void setValueAt(Object aValue, int row, int column) {
 
-        Vector rowData = (Vector) getDataVector().get(row); 
+        Vector rowData = (Vector) getDataVector().get(row);
         rowData.setElementAt(aValue, column);
         fireTableCellUpdated(row, column);
         String[] tmRow = new String[this.getColumnCount()];
 
         for (int i = 0; i < this.getColumnCount(); i++) {
             tmRow[i] = this.getValueAt(row, i);
-          //  System.out.println(tmRow[i]);
+            //  System.out.println(tmRow[i]);
         }
-         if(tmRow[3].equals("")){
-//             tmRow[3]=tmRow[1];
-                newName.add(tmRow);
-            }
-         if(tmRow[2].equals("")){
-              tmRow[2]=tmRow[0];
-                newName.add(tmRow);
-         }
+        if (tmRow[2].equals("") && tmRow[3].equals("")) {
+
+        } else if (tmRow[3].equals("")) {
+             tmRow[3]=tmRow[1];
+            newName.add(tmRow);
+        } else if (tmRow[2].equals("")) {
+            tmRow[2] = tmRow[0];
+            newName.add(tmRow);
+        }
+
         newName.add(tmRow);
-      
+
     }
-    
-    public void setValue(Object aValue, int row, int column){
-        Vector rowVector = (Vector)dataVector.elementAt(row);
+
+    public void setValue(Object aValue, int row, int column) {
+        Vector rowVector = (Vector) dataVector.elementAt(row);
         rowVector.setElementAt(aValue, column);
         fireTableCellUpdated(row, column);
     }
