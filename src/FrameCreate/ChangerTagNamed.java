@@ -42,6 +42,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     DataBase db = new DataBase();
     FileManager fm = new FileManager();
     
+    
     MyTableModel tableModel; // модель таблицы
     //ArrayList<String[]> fromDB; // Что получим из базы
     int tableSize = 0;
@@ -50,8 +51,8 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     ArrayList<JFrame> listJF = new ArrayList();
     JPopupMenu popupMenu = new JPopupMenu();
     ArrayList<String[]> listItemList = new ArrayList<>();
-    String tableName;
-    String comment;
+    String [] tableName;
+    String comment,alg, newComment, newAlg;;
     TableDB table;
     String[] cols;
     String tmp[];
@@ -143,7 +144,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Переименовать1");
+        jButton1.setText("Переименовать2");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -196,51 +197,11 @@ public class ChangerTagNamed extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
             return;
         }
-//        DoIt di = () -> {
-//            int updt = 0;
-//
-//            //   updt=update.ReNameAllData(tableModel,jProgressBar1,table,tmp,rusName,tagName);
-//            update.ReNameAllData(tableModel, jProgressBar1, table, tmp, rusName, tagName);
-//            // if(updt == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-//            // else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
-//            // globVar.processReg.remove(processName);
-//            jProgressBar1.setValue(0);
-//        };
-//        BackgroundThread bt = new BackgroundThread("Переименование", di);
-//        bt.start();
 
-//        pb = new ProgressBar();
-//        pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-//        pb.setTitle(processName);
-//        pb.setVisible(true);
         DoIt di = () -> {
-          //  newName=tableModel.getAddname();//может и не понадобится
-            for (int i = 0; i < newName.size(); i++) {
-            String[] firstLine = newName.get(i);
-            String[] secondLine = null;
-            if (i > 0) {
-                secondLine = newName.get(i - 1);
-            }
-            if (secondLine != null) {
-                if (firstLine[1].equals(secondLine[1])) {
-                    newName.remove(i - 1);
-                }
-            }
-        }
-
-            update.ReNameAllData(tableModel, table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
-            String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
-            fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);
-          
-            globVar.processReg.remove(processName);
-        };
-
-        BackgroundThread bt = new BackgroundThread(processName, di);
-        bt.start();
-        globVar.processReg.add(processName);
-
-        //----блок кода который ищет одинаковые строки и удаляет лишнее,дабы не загружать память
-//        for (int i = 0; i < newName.size(); i++) {
+            //----требуется доработка
+//            
+//            for (int i = 0; i < newName.size(); i++) {
 //            String[] firstLine = newName.get(i);
 //            String[] secondLine = null;
 //            if (i > 0) {
@@ -252,6 +213,34 @@ public class ChangerTagNamed extends javax.swing.JFrame {
 //                }
 //            }
 //        }
+//            
+            //----заполнение пустых ячеек
+//            for(int i=0;i<newName.size();i++){
+//                 tableName = newName.get(i);//получили строку с элементами
+//                        //----выполняем присваивание из массива каждому элементу---
+//                        comment = tableName[0];
+//                        alg = tableName[1];
+//                        newComment = tableName[2];
+//                        newAlg = tableName[3];
+//                        //----если находит пустые ячейки,заполняет их(получили сформированную строку без пустых ячеек)
+//                        if (newComment.equals("")) {
+//                            newComment = comment;
+//                        }
+//                        if (newAlg.equals("")) {
+//                            newAlg = alg;
+//                        }
+//            }
+            update.ReNameAllData(tableModel, table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
+            String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
+            fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);
+          
+            globVar.processReg.remove(processName);
+        };
+
+        BackgroundThread bt = new BackgroundThread(processName, di);
+        bt.start();
+        globVar.processReg.add(processName);
+  
         //-------блок кода который ищет одинаковые строки и удаляет лишнее,дабы не загружать память
         // String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
         //  fm.ChangeIntTypeFile(globVar.desDir, newName, tableName);
