@@ -24,7 +24,8 @@ import javax.swing.table.DefaultTableModel;
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
     TableTools tt=new TableTools();
-    public MyTableModel tableModel = new MyTableModel();
+    ArrayList<String[]> newName=new ArrayList<>();
+    public MyTableModel tableModel = new MyTableModel(newName);
     JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
     String tableName;
@@ -40,6 +41,7 @@ public class TableDB extends javax.swing.JFrame {
     javax.swing.JTree jTree1;
 
     public TableDB(javax.swing.JTree jTree, String table) {
+        
         tableName = table;
         jTree1 = jTree;
         if(!globVar.DB.isConnectOK())return;
@@ -47,6 +49,7 @@ public class TableDB extends javax.swing.JFrame {
         if(listColumn==null || listColumn.isEmpty())return;
         cols = listColumn.toArray( new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);
+        
         
         fromDB = globVar.DB.getData(table);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));

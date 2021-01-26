@@ -41,6 +41,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     Update update = new Update();
     DataBase db = new DataBase();
     FileManager fm = new FileManager();
+    
     MyTableModel tableModel; // модель таблицы
     //ArrayList<String[]> fromDB; // Что получим из базы
     int tableSize = 0;
@@ -213,6 +214,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
 //        pb.setTitle(processName);
 //        pb.setVisible(true);
         DoIt di = () -> {
+          //  newName=tableModel.getAddname();//может и не понадобится
             for (int i = 0; i < newName.size(); i++) {
             String[] firstLine = newName.get(i);
             String[] secondLine = null;
