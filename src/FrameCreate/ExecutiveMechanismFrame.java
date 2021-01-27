@@ -10,6 +10,8 @@ import Algorithm.ExecutiveMechanismObject;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,6 +40,8 @@ import javax.swing.JTable;
 import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer; //Таймер каждую секунду
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import org.w3c.dom.Node;
 
 /**
@@ -59,11 +64,13 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     String[] columns; // названия колонок для таблицы в формате масива
     ArrayList<String> columnT; // названия колонок для таблицы
     int identNodecase; // по идентификатор выбора какой механизм использовать
-    ExecutiveMechanismObject testW;
+    ExecutiveMechanismObject testW; // механизм работы с данными для обрабоки Исполнительных механизмов
     TableNzVer3 boneTable;
+    JTable tableMech; // Таблица механизмов
     boolean showAlltable = false; // тригер показать всю таблицу или только
     int caseMecha = 0; // значение по которым пойдет обработка механизмов
-    
+    ArrayList<int[]> markCelT = new ArrayList<>(); // список клеток которые метим для сопоставленя данных из базы и вновь сгенерированных
+
     /**
      * Creates new form ExecutiveMechanism
      */
@@ -71,34 +78,67 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         testW = new ExecutiveMechanismObject();
         String[] arrNameExecute = testW.getNodeMechRun();// Что передаем на выбор
         getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором какой механизм обрабатываем
-        
+
         // если в окне был какой то выбор по кнопке или списку
-        if(caseMecha != 0){ 
+        if (caseMecha != 0) {
             switch (caseMecha) {
                 case 1: { // если по списку 
                     listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
-                    nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+                    nameTable = testW.getNameTable(); // получим название таблицы строго после getDataCurrentNode
                     columns = testW.getColumns(); // получить колонки для построки таблицы
-                     //columnT = testW.getColumnsT();
+                    //columnT = testW.getColumnsT();
+
+                    ArrayList<String[]> dataDB = testW.getDataFromBase(nameTable); // Данные из базы
+                    markCelT.clear();
+
+                    if (dataDB != null) {
+                        // ==== Сравнить данные из того что сгенерировали и данные из базы ====
+                        for (int i = 0; i < listDataToTable.size(); ++i) {
+                            ArrayList<String> arrAM = listDataToTable.get(i);
+                            for (int j = 0; j < arrAM.size(); ++j) {
+                                String s = arrAM.get(j);
+                                String sB = null;
+                                if (i < dataDB.size() && j < dataDB.get(i).length) {
+                                    sB = dataDB.get(i)[j]; // должны быть идентичны
+                                }
+                                int[] tmpINT = {i, j};
+                                if (!s.equals(sB)) {
+                                    markCelT.add(tmpINT);
+                                }
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Не найдены таблицы или пусты \n" + nameTable); //сообщение
+                    }
+                    
                     boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
+                    tableMech = new TableNzVer3(nameTable, columns, listDataToTable, false).getJTable();
+                    
+                    // раскрас таблицы
+                    for (int i =0; i < tableMech.getColumnCount();i++) {
+                        System.out.println("IterI");
+                        tableMech.getColumnModel().getColumn(i).setCellRenderer(new RendererCellTable(markCelT)); 
+                    }
+                    
+                    
                     initComponents();
                     this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
                     this.setVisible(true);
-                break;
+                    break;
                 }
                 case 2: { // если по кнопке                    
                     listDataToTable = testW.getDataAllMechaNode(showAlltable);  // реализация всех механизмов
                     nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
                     columns = testW.getColumns(); // получить колонки для построки таблицы
-                     //columnT = testW.getColumnsT();
+                    //columnT = testW.getColumnsT();
                     boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
                     initComponents();
                     this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
                     this.setVisible(true);
-                break;
+                    break;
                 }
             }
-            
+
         }
     }
 
@@ -119,8 +159,9 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = boneTable.getJTable();     // Новая таблица(а есть еще более новей);
+        jTable1 = tableMech;     // Новая таблица(а есть еще более новей);
         jCheckBox1 = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -192,6 +233,13 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("GetFromDB");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -200,16 +248,19 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCheckBox1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jCheckBox1)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
         );
@@ -232,13 +283,13 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // получим данные с таблицы Swing
         SwingUtilities.invokeLater(new Runnable() {
-        @Override
-        public void run() {
+            @Override
+            public void run() {
                 ArrayList<String[]> updatetedData = boneTable.getAllData();
                 testW.addDataToBase(updatetedData);
             }
         });
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // -- активен флажок или нет --
@@ -253,7 +304,7 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
             initComponents();
             this.repaint();
             jCheckBox1.setSelected(showAlltable);
- 
+
         } else {
             showAlltable = false;
             listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
@@ -267,7 +318,10 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-   
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        testW.getDataFromBase(nameTable);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     // ---  метод диалога выбора по какому методу делаем ИМ ---
     private JDialog getJDialogChoiser(String[] massNameNode) {
         // тут он определяется до инициализации всех компонентов
@@ -287,7 +341,6 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         //jButton2 = new javax.swing.JButton();
         //jScrollPane1 = new javax.swing.JScrollPane();
 
-        
 // слушатель окна выбора(не работает)
         jDialog1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPreased(java.awt.event.KeyEvent evt) {
@@ -311,7 +364,7 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
                 jDialog1.dispose(); // Закрыть
             }
         });
-        
+
         // обработчик кнопки всех механизмов
         jButtonAllMech.setText("обработать все механизмы");
         jButtonAllMech.addActionListener(new java.awt.event.ActionListener() {
@@ -347,58 +400,93 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
 //                                .addComponent(jLabel2)
 //                                .addGap(0, 151, Short.MAX_VALUE))
 //        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jButtonAllMech)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(jLabel1))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(65, 65, 65)
+                                        .addComponent(jButtonAllMech)))
+                        .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addGap(62, 62, 62)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAllMech))
-                .addContainerGap(160, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1)
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonAllMech))
+                        .addContainerGap(160, Short.MAX_VALUE))
         );
-        
+
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
                 jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDialog1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
+                .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
         );
         jDialog1Layout.setVerticalGroup(
                 jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDialog1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
+                .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
         );
 
         return jDialog1;
     }
 
+    
+    
+    // --- Таким классом красим нашу 1 таблицу  ---
+class RendererCellTable implements TableCellRenderer {
+
+    DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+    ArrayList<int[]> markCelT;
+    
+    
+    public RendererCellTable(ArrayList<int[]> markCelT) {
+        this.markCelT = markCelT;
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+        Component cell = dtcr.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        for (int[] arrInt: markCelT) {
+            if(arrInt[1] == column & arrInt[0] == row){
+                cell.setBackground(Color.YELLOW);
+                break;
+            }else  cell.setBackground(Color.WHITE);
+        }
+//        System.out.println(Integer.toString(row) +  " " + Integer.toString(column));
+//        if (column == 0 && row == 0){
+//         cell.setBackground(Color.BLACK);
+//         }else if (column == 0 && row == 1) {
+//         cell.setBackground(Color.BLUE);
+//         }else if (column == 0 && row == 2) {
+//         cell.setBackground(Color.YELLOW);
+//         }
+        return cell;
+    }
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDialog jDialog1;

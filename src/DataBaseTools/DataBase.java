@@ -120,7 +120,7 @@ public class DataBase implements Observed {
            // connection.getAutoCommit();
            // connection.setAutoCommit(true);
             stmt = connection.createStatement();
-            sql = "CREATE DATABASE  " + name + ";";
+            sql = "CREATE DATABASE  " + "\"" +name+ "\"" + ";";
             System.out.println(sql);
             stmt.executeUpdate(sql);
             stmt.close();
@@ -351,6 +351,7 @@ public class DataBase implements Observed {
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String where) {
         
         int size = columns.size();
+        if(columns.isEmpty()) return null;
         String sql = "SELECT \"" + columns.get(0) + "\"";
         for (int i = 1; i < size; ++i) sql +=  ", \"" + columns.get(i) + "\"";
         sql += " FROM \"" + table +"\""+where+orderCol+";"; 

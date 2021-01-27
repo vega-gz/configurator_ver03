@@ -63,7 +63,8 @@ public class MergeBases {
 //            }
 //            
             boolean nFine = true;
-            // пробежаться по списку таблиц которых нет что бы не выполнять удаление
+            
+            // пробежаться по списку таблиц которых нет, что бы не выполнять удаление
             for(String s: tableNotEnter){ 
                 if(s.equals(nameT)){
                     nFine = false;

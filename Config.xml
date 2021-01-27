@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
 <Settings>
-<USER>mutonar</USER>
+<USER>postgres</USER>
 <PASS>Solovin2</PASS>
 <URL1>jdbc:postgresql://minoro.ru:5432/</URL1>
 <URL3>jdbc:postgresql://172.16.35.50:5440/</URL3>
 <URL2>jdbc:postgresql://127.0.0.1:5432/</URL2>
 <URL>jdbc:postgresql://172.16.35.50:5432/</URL>
-<BASE>kln_kc</BASE>
-<BASE1>pravoslav</BASE1>
-<BASE2>kln_gpa</BASE2>
+<BASE>kln_nz</BASE>
 <BASE3>scovoroda</BASE3>
 <DesignDir>C:\Users\cherepanov\Desktop\калиниград</DesignDir>
 <nameProject>Калининград_цех</nameProject>
+<BASE2>testassd</BASE2>
+<BASE1>kln_kc</BASE1>
+<BASE5>kln_kc</BASE5>
 </Settings>
 </config>

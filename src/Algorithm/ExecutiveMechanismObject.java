@@ -116,7 +116,7 @@ public class ExecutiveMechanismObject {
     }
 
     // --- чтение xml и формирование  из него каких таблиц читаем и что сапоставлять ---
-    // На вход документ и выбранная уже нода, и пропускать сигнал коорорый ни с кем не совпал или нет
+    //--- На вход документ и выбранная уже нода, и пропускать сигнал коорорый ни с кем не совпал или нет ---
     public ArrayList<ArrayList> getMecha(Node n, boolean missWE) {
         ArrayList<ArrayList> findingTagname = new ArrayList();//листы для хранения найденного Что передаем
         nameTable = globVar.abonent + "_AM";    //  формируем название таблицы строится
@@ -539,10 +539,38 @@ public class ExecutiveMechanismObject {
         return enterSig;
     }
 
+    // --- Считать готовые данные из DB ---
+    public ArrayList<String[]>  getDataFromBase(String nameDB) {
+        
+        ArrayList<String[]> dataFromDB = new ArrayList<>(); // массив с сырыми данными таблицы
+        ArrayList<String> nColumnT =  workbase.getListColumns(nameDB);
+        int indexID = nColumnT.indexOf("id"); // определение расположение id колонки(для игнора)
+        
+        for (String table : workbase.getListTable()) { // есть ли вообще таблица в базе
+            if (nameTable.equals(table)) {
+                ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
+                if(indexID > -1){ // если нашли столбец id
+                    for(String[] arr: allDataExecTable){
+                        // обрубаем массив(как то сложно,перестраховался)
+                        String[] bF = Arrays.copyOfRange(arr, 0, indexID);// обрубленный до нахождения может быть 0 хотя он тут и есть
+                        String[] aF = Arrays.copyOfRange(arr, indexID+1, arr.length); // это после найденного
+                        String[] tmp = Stream.concat(Arrays.stream(bF), Arrays.stream(aF)).toArray(String[]::new); // Срастить рубленные массивы
+                        dataFromDB.add(tmp);
+                    }
+                
+                }
+                break;
+            }
+        }
+        
+        return dataFromDB;
+    }
+    
     //  --- добавления данных в базу  из таблицы ---
     public void addDataToBase(ArrayList<String[]> updatetedData) {
+        
         // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
-        // только потом затереть
+        // только потом затереть(может все это не актуально)
         ArrayList<String[]> dataFromDBTrue = new ArrayList<>(); // массив с выборкой true
         for (String table : workbase.getListTable()) { // есть ли вообще таблица в базе
             if (nameTable.equals(table)) {
