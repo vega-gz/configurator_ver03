@@ -5,6 +5,7 @@
  */
 package ReadWriteExcel;
 
+import static Tools.TableTools.getRow;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -45,7 +46,7 @@ public class ExcelAdapter implements ActionListener {
             }
         });
         undoSystem.put(((DefaultTableModel) jTable1.getModel()).getDataVector());
-
+        KeyStroke deleteCopy = KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK, false);
         KeyStroke copy = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK, false);
         // Identifying the copy KeyStroke user can modify this
         KeyStroke paste = KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK, false);
@@ -53,13 +54,14 @@ public class ExcelAdapter implements ActionListener {
         KeyStroke delete = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0, false);
         // Identifying the Paste KeyStroke user can modify this
         KeyStroke cancel = KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK, false);
-        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK, false);
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_U, ActionEvent.CTRL_MASK, false);
         // Identifying the Paste KeyStroke user can modify this
         jTable1.registerKeyboardAction(this, "Copy", copy, JComponent.WHEN_FOCUSED);
         jTable1.registerKeyboardAction(this, "Paste", paste, JComponent.WHEN_FOCUSED);
         jTable1.registerKeyboardAction(this, "Delete", delete, JComponent.WHEN_FOCUSED);
         jTable1.registerKeyboardAction(this, "Cancel", cancel, JComponent.WHEN_FOCUSED);
         jTable1.registerKeyboardAction(this, "Redo", redo, JComponent.WHEN_FOCUSED);
+        jTable1.registerKeyboardAction(this, "DeleteCopy", deleteCopy, JComponent.WHEN_FOCUSED);
         system = Toolkit.getDefaultToolkit().getSystemClipboard();
     }
 
@@ -118,6 +120,29 @@ public class ExcelAdapter implements ActionListener {
                 }
             }
             listener.tableChanged();
+        }
+        if (e.getActionCommand().compareTo("DeleteCopy") == 0) {
+            StringBuffer sbf = new StringBuffer();
+            int row = jTable1.getColumnCount();
+            int rowsselected = jTable1.getSelectedRow();//здесь получаем индекс
+            for (int i = 0; i < row; i++) {//в цикле мы получаем строку
+                
+                sbf.append(jTable1.getValueAt(rowsselected, i));
+                System.out.println(jTable1.getValueAt(rowsselected, i));
+                sbf.append("\t");//разделяет построчно
+                
+            }
+            stsel = new StringSelection(sbf.toString());
+            system = Toolkit.getDefaultToolkit().getSystemClipboard();
+            system.setContents(stsel, stsel);
+            
+            listener.fixOldData();
+            for(int i = 0; i < row; i++){
+                jTable1.setValueAt("", rowsselected, i);
+            }
+            listener.tableChanged();
+            
+
         }
         if (e.getActionCommand().compareTo("Copy") == 0) {
             StringBuffer sbf = new StringBuffer();
