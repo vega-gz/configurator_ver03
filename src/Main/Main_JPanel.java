@@ -643,7 +643,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (casedial != 0) {
             return;
         }
-
         JFileChooser fileopen = new JFileChooser(globVar.desDir);
         int ren = fileopen.showDialog(null, "Загрузка данных для " + globVar.abonent);
         if (ren == JFileChooser.APPROVE_OPTION) {
@@ -653,7 +652,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
         pb.setVisible(true);
-
         DoIt di = () -> {
             String ret = null;
             try {

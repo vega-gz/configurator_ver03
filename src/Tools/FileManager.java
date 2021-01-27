@@ -5,6 +5,7 @@
  */
 package Tools;
 
+import Tools.StrTools;
 import static Tools.StrTools.getAttributValue;
 import XMLTools.XMLSAX;
 import globalData.globVar;
@@ -37,6 +38,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import org.w3c.dom.Node;
 
 //import main.globVar;
@@ -242,7 +244,7 @@ public class FileManager {
         return 0;
     }
 
-    public void closeWrStream(){// throws IOException {
+    public void closeWrStream() {// throws IOException {
         if (wrStream != null) {
             try {
                 wrStream.close();
@@ -373,9 +375,10 @@ public class FileManager {
         return null;
     }
 
-    public void wr(String s){try {
-        // throws IOException {
-        wrStream.write(s);
+    public void wr(String s) {
+        try {
+            // throws IOException {
+            wrStream.write(s);
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -428,7 +431,7 @@ public class FileManager {
         return FindFile(dir, nameType, "Name=");
     }
 
-    public static String FindFile(String dir, String nameType, String nameWords){// throws IOException {
+    public static String FindFile(String dir, String nameType, String nameWords) {// throws IOException {
         if (dir == null || nameType == null) {
             return null;
         }
@@ -442,7 +445,7 @@ public class FileManager {
         //if (fileList != null) {
         for (String fn : fileList) {
             if (fn.length() > 5 && ".TYPE".equalsIgnoreCase(fn.substring(fn.length() - 5))) {
-                String s=null;
+                String s = null;
                 try {
                     s = findStringInFile(dir + File.separator + fn, nameWords);
                 } catch (IOException ex) {
@@ -567,6 +570,7 @@ public class FileManager {
         }
         return 0;
     }
+//--ПереименованиеTYPE
 
     public static int renameTypeFile(String dir) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
@@ -629,8 +633,9 @@ public class FileManager {
         System.out.println("Выполнено замен " + cnt);
         return cnt;
     }
+//--Переименование INT
 
-    public static int renameIntFile(String dir) throws FileNotFoundException,IOException {
+    public static int renameIntFile(String dir) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
         String expInt = "int";
         String expFolder = "folder";
@@ -662,7 +667,7 @@ public class FileManager {
                         }
                         // String confName = nameFolderFile.substring(0, nameFolderFile.indexOf('.'));//получили имя без расширения
                         String findexpFolder = nameFolderFile.substring(nameFolderFile.lastIndexOf(".") + 1);//ищу расширение folder
-
+//
                         cnt++;
 
                         //----МЫ НАШЛИ КОНКРЕТНЫЙ ИНТ.ЕСЛИ ИМЯ И ТИП НЕ СОВПАДАЮТ ТО ПРОБЕГАЕМСЯ СНОВА И ИЩЕМ ФАЙЛЫ С ТЕМ ЖЕ НАЗВАНИЕМ И МЕНЯЕМ ЕГО НА ЗНАЧЕНИЕ АТТРИБУТА---\\     
@@ -701,11 +706,57 @@ public class FileManager {
         return cnt;
     }
 
+    //---МЕТОД ЗАМЕНЫ ИМЕН И АЛГОРИТМИЧЕСКИХ ИМЕН В TYPE ФАЙЛАХ-----Grigory
+    @SuppressWarnings("empty-statement")
+    public boolean ChangeIntTypeFile(String dir, ArrayList<String[]> name, String nameTable, JProgressBar jProgressBar1) {//newName---массив замен   Name---массив из БД
+        File[] filesInDirectory = new File(dir + "\\" + "Design").listFiles();//получаем список элементов по указанному адресу
+        FileManager fm = new FileManager();
+        XMLSAX xmlsax = new XMLSAX();
+        String nameFile = "";
+        String comment, alg, newComment, newAlg;
+        String[] nameLine;
+        boolean isErr = false;
+        //пробегаемся по файлам в поисках соответствия 
+        for (File findType : filesInDirectory) {
+            nameFile = findType.getName();//имя файла с расширением(в котором в данный момент ищем)
+            String nT = "T_" + nameTable;
+            int ntl = nT.length();
+            int nfl = nameFile.length();
+            if ((nfl >= ntl + 5) && (nameFile.substring(0, ntl).equalsIgnoreCase(nT)) && (nameFile.substring(nfl - 5).equalsIgnoreCase(".type"))) {
+                Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);//открываем файл
+                for (int j = 0; j < name.size(); j++) {//ищем строку в файле необходимую
+                    nameLine = name.get(j);//получили строку с элементами
+                    //----выполняем присваивание из массива каждому элементу---
+                    comment = nameLine[0];
+                    alg = nameLine[1];
+                    newComment = nameLine[2];
+                    newAlg = nameLine[3];
+                    //---находим ноду по атрибуту Name(алгоритмическое имя)
+                    String argLine[] = {"Field", "Name", alg};
+                    Node find = xmlsax.findNodeAtribute(argLine);
+                    //---если нашли ноду совершаем замену
+                    if (find != null) {
+                        xmlsax.editDataAttr(find, "Name", newAlg);//заменяем алгоритмическое имя
+                        xmlsax.editDataAttr(find, "Comment", newComment);//заменяем русское имя
+                    }
+//                    else {
+//                        //  FileManager.loggerConstructor("Не найдена нода \"" + nodeTable + "\"");
+//                        //вывод ошибки в лог и выставлене флага ошибки
+//                    }
+
+                    if (jProgressBar1 != null) {
+                        jProgressBar1.setValue((int) ((j + 1) * 100.0 / name.size()));
+                    }
+                }
+
+            }
+            xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+        }
+        return isErr;
+    }
+
     public static void main(String[] args) throws IOException {//для тестирования
         FileManager fm = new FileManager();
         loggerConstructor("Яй криветко");
-        // fm.findWords("C:\\Users\\Григорий\\Desktop\\новый конфиг и excel\\ConfigSignals.xml");
-        //  FindFile("C:\\Users\\Григорий\\Desktop\\сиг\\T_GPA_DI_ToProcessing.type", "T_GPA_DI_ToProcessing");
-        //   fm.FindFile("C:\\Users\\Григорий\\Desktop\\сиг", "T_GPA_AI_FromProcessing");
     }
 }
