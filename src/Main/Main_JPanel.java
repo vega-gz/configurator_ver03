@@ -756,8 +756,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
         if (evt.getClickCount() == 2) {
+            if(jTree1.getSelectionPath().getLastPathComponent() != null){
             String nameT = jTree1.getSelectionPath().getLastPathComponent().toString();
             showTable(nameT); // вызов метода построения таблицы
+            }
         }
     }//GEN-LAST:event_jTree1MouseClicked
 //----------- Лишнее. Удалить!!!!!!!!!!!!!!!! -------------------
@@ -785,30 +787,30 @@ public final class Main_JPanel extends javax.swing.JFrame {
         changeDB.setTitle("Сменить БД");
         changeDB.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-    
+
 // обработчик пукт меню Утилит подключение в второй базе.
     private void jMenuItem_AnotherBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_AnotherBaseActionPerformed
         XMLSAX sax = new XMLSAX();
         Node root = sax.readDocument("Config.xml");
-        ArrayList<String> listURl = new  ArrayList<>();
+        ArrayList<String> listURl = new ArrayList<>();
         // максимум первых сто адресов базы
-        for(int i=0; i<100; ++i){
+        for (int i = 0; i < 100; ++i) {
             String urlDB = "URL";
-            if(i != 0){
+            if (i != 0) {
                 urlDB += Integer.toString(i);
             }
-            if (sax.returnFirstFinedNode(urlDB) != null){
+            if (sax.returnFirstFinedNode(urlDB) != null) {
                 String url = sax.returnFirstFinedNode(urlDB).getTextContent();
                 StringBuilder sb = new StringBuilder(url);
                 String delU = "jdbc:postgresql://"; // что удаляем
-                sb.deleteCharAt(url.length()-1); // удаляем последний символ "/"
+                sb.deleteCharAt(url.length() - 1); // удаляем последний символ "/"
                 sb.delete(0, delU.length()); // и удаляем сервесные заголовки
                 listURl.add(sb.toString());
             }
         }
         String[] toComboBox = listURl.toArray(new String[listURl.size()]);
         jComboBox3.setModel(new DefaultComboBoxModel(toComboBox)); // подставили значение в комбобокс
-        
+
         jDialog1.setSize(400, 200);
         jDialog1.setLocationRelativeTo(null); // по центру экрана
         //jTextField2.setText("172.16.35.50:5432");
@@ -840,29 +842,29 @@ public final class Main_JPanel extends javax.swing.JFrame {
         //System.out.println("Press button field all " + addresSecondDB + DB + userSecondDB + passSecondDB);
         MergeBases mergeDB = new MergeBases(addresSecondDB, DB, userSecondDB, passSecondDB); // вызов класса слияния
         if (mergeDB.connectAnotherDB() == 0) {
-             // прикручиваем прогрессБар Льва  
+            // прикручиваем прогрессБар Льва  
             pb = new ProgressBar();
             pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             //pb.setUndecorated(true); // не удалить кнопки если окно инициализированно
             //pb.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
             pb.setTitle("Обработка даных");
             pb.setVisible(true);
-        
+
             System.out.println("connect base");
             jDialog1.dispose(); // закрываем окошко при удачном подключении
-             DoIt di = () -> {
+            DoIt di = () -> {
                 mergeDB.editBases(pb.jProgressBar1); // запуск метода обработки баз(и передача прогресс бара) и нужно передать данные в Doit
                 pb.dispose();
             };
-             
+
             BackgroundThread bt = new BackgroundThread("Pbar", di);
             bt.start();
-            
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Подключение не возможно \n проверьте введеные данные или доступность сервера");
         }
     }
+
     //--------Выгрузка из БД информации для абонента в Excel-------------
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (!Tools.isDB()) {
@@ -900,7 +902,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
     //Меню: Проект/Абоненты
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        if(!globVar.DB.isTable("Abonents")){
+        if (!globVar.DB.isTable("Abonents")) {
             JOptionPane.showMessageDialog(null, "Таблицы абонентов в текущей БД нет");
             return;
         }
@@ -981,12 +983,30 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jButton2_CreateDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2_CreateDBActionPerformed
-         if (!jTextField1.getText().equals("")) { // если не пустое надо еще
-            String textField6 = jTextField6.getText();
-            int code = globVar.DB.createBase(textField6); 
-            if(code == 1){
-                JOptionPane.showMessageDialog(null, "База "+ textField6 +" успешно создана."); //сообщение
-            }
+        if (!jTextField1.getText().equals("")) { // если не пустое надо еще
+            String textField6 = jTextField6.getText();//.toLowerCase(); // в нижний регистр
+            int code = globVar.DB.createBase(textField6);
+            if (code == 1) {
+                JOptionPane.showMessageDialog(null, "База " + textField6 + " успешно создана."); //сообщение
+
+                // занести базу в список
+                {
+                    XMLSAX sax = new XMLSAX();
+                    Node root = sax.readDocument(globVar.mainConf);
+                    Node tmp = sax.returnFirstFinedNode(root, globVar.nodeDBid);
+                    int sumBase = 0;
+                    ArrayList<String> aList = new ArrayList<>();
+                    for (int i = 1; tmp != null; i++) {
+                        sumBase = i;
+                        aList.add(tmp.getTextContent());
+                        tmp = sax.returnFirstFinedNode(root, globVar.nodeDBid + i);
+                    }
+                    Node Settings = sax.returnFirstFinedNode(root, "Settings");
+                    Node naodeB = sax.insertChildNode(Settings, globVar.nodeDBid + Integer.toString(sumBase));
+                    naodeB.setTextContent(textField6); // метод самой ноды
+                    sax.writeDocument();
+                }
+            }else System.out.println("Error create DB");
             jTextField1.setText("");
         }
     }//GEN-LAST:event_jButton2_CreateDBActionPerformed
