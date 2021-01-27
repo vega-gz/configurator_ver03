@@ -709,7 +709,7 @@ public class FileManager {
     //---МЕТОД ЗАМЕНЫ ИМЕН И АЛГОРИТМИЧЕСКИХ ИМЕН В TYPE ФАЙЛАХ-----Grigory
     @SuppressWarnings("empty-statement")
     public boolean ChangeIntTypeFile(String dir, ArrayList<String[]> name, String nameTable, JProgressBar jProgressBar1) {//newName---массив замен   Name---массив из БД
-        File[] filesInDirectory = new File(dir + "\\" + "Design").listFiles();//получаем список элементов по указанному адресу
+        File[] filesInDirectory = new File(dir + File.separator + "Design").listFiles();//получаем список элементов по указанному адресу
         FileManager fm = new FileManager();
         XMLSAX xmlsax = new XMLSAX();
         String nameFile = "";
@@ -723,7 +723,7 @@ public class FileManager {
             int ntl = nT.length();
             int nfl = nameFile.length();
             if ((nfl >= ntl + 5) && (nameFile.substring(0, ntl).equalsIgnoreCase(nT)) && (nameFile.substring(nfl - 5).equalsIgnoreCase(".type"))) {
-                Node typeNoode = xmlsax.readDocument(dir + "\\" + "Design" + "\\" + nameFile);//открываем файл
+                Node typeNoode = xmlsax.readDocument(dir + File.separator + "Design" + File.separator + nameFile);//открываем файл
                 for (int j = 0; j < name.size(); j++) {//ищем строку в файле необходимую
                     nameLine = name.get(j);//получили строку с элементами
                     //----выполняем присваивание из массива каждому элементу---
@@ -748,9 +748,9 @@ public class FileManager {
                         jProgressBar1.setValue((int) ((j + 1) * 100.0 / name.size()));
                     }
                 }
-
+                xmlsax.writeDocument(globVar.desDir + File.separator + "Design" + File.separator + nameFile);
             }
-            xmlsax.writeDocument(globVar.desDir + "\\" + "Design" + "\\" + nameFile);
+            
         }
         return isErr;
     }

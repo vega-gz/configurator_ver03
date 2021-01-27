@@ -110,17 +110,16 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "Не найдены таблицы или пусты \n" + nameTable); //сообщение
                     }
-                    
+
                     boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
                     tableMech = new TableNzVer3(nameTable, columns, listDataToTable, false).getJTable();
-                    
+
                     // раскрас таблицы
-                    for (int i =0; i < tableMech.getColumnCount();i++) {
+                    for (int i = 0; i < tableMech.getColumnCount(); i++) {
                         System.out.println("IterI");
-                        tableMech.getColumnModel().getColumn(i).setCellRenderer(new RendererCellTable(markCelT)); 
+                        tableMech.getColumnModel().getColumn(i).setCellRenderer(new RendererCellTable(markCelT));
                     }
-                    
-                    
+
                     initComponents();
                     this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE); // Закрываем окно а не приложение
                     this.setVisible(true);
@@ -285,8 +284,16 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ArrayList<String[]> updatetedData = boneTable.getAllData();
-                testW.addDataToBase(updatetedData);
+                ArrayList<String[]> dataTable = new ArrayList<>();
+                int columnCount = jTable1.getModel().getColumnCount(); // количество столбцов
+                for (int y = 0; y < jTable1.getRowCount(); ++y) { // бежим по строкам
+                    String[] arraRow = new String[columnCount];
+                    for (int x = 0; x < columnCount; ++x) {
+                        arraRow[x] = (String) jTable1.getModel().getValueAt(y, x);
+                    }
+                    dataTable.add(arraRow);
+                }
+                testW.addDataToBase(dataTable);
             }
         });
 
@@ -448,29 +455,28 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         return jDialog1;
     }
 
-    
-    
     // --- Таким классом красим нашу 1 таблицу  ---
-class RendererCellTable implements TableCellRenderer {
+    class RendererCellTable implements TableCellRenderer {
 
-    DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
-    ArrayList<int[]> markCelT;
-    
-    
-    public RendererCellTable(ArrayList<int[]> markCelT) {
-        this.markCelT = markCelT;
-    }
+        DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+        ArrayList<int[]> markCelT;
 
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value,
-            boolean isSelected, boolean hasFocus, int row, int column) {
-        Component cell = dtcr.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        for (int[] arrInt: markCelT) {
-            if(arrInt[1] == column & arrInt[0] == row){
-                cell.setBackground(Color.YELLOW);
-                break;
-            }else  cell.setBackground(Color.WHITE);
+        public RendererCellTable(ArrayList<int[]> markCelT) {
+            this.markCelT = markCelT;
         }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            Component cell = dtcr.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            for (int[] arrInt : markCelT) {
+                if (arrInt[1] == column & arrInt[0] == row) {
+                    cell.setBackground(Color.YELLOW);
+                    break;
+                } else {
+                    cell.setBackground(Color.WHITE);
+                }
+            }
 //        System.out.println(Integer.toString(row) +  " " + Integer.toString(column));
 //        if (column == 0 && row == 0){
 //         cell.setBackground(Color.BLACK);
@@ -479,9 +485,9 @@ class RendererCellTable implements TableCellRenderer {
 //         }else if (column == 0 && row == 2) {
 //         cell.setBackground(Color.YELLOW);
 //         }
-        return cell;
+            return cell;
+        }
     }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
