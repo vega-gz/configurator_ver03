@@ -731,7 +731,7 @@ public class FileManager {
                     alg = nameLine[1];
                     newComment = nameLine[2];
                     newAlg = nameLine[3];
-                    //---находим ноду по атрибуту Name(алгоритмичесукое имя)
+                    //---находим ноду по атрибуту Name(алгоритмическое имя)
                     String argLine[] = {"Field", "Name", alg};
                     Node find = xmlsax.findNodeAtribute(argLine);
                     //---если нашли ноду совершаем замену

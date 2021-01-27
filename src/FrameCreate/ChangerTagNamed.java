@@ -20,6 +20,7 @@ import Tools.MyTableModel;
 import Tools.RegistrationJFrame;
 import Tools.TableTools;
 import Tools.Tools;
+import Tools.Utilities;
 import Tools.closeJFrame;
 import globalData.globVar;
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     Update update = new Update();
     DataBase db = new DataBase();
     FileManager fm = new FileManager();
+    Utilities util=new Utilities();
     
     
     MyTableModel tableModel; // модель таблицы
@@ -52,7 +54,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     JPopupMenu popupMenu = new JPopupMenu();
     ArrayList<String[]> listItemList = new ArrayList<>();
     String [] tableName;
-    String comment,alg, newComment, newAlg;;
+    String comment,alg, newComment, newAlg;
     TableDB table;
     String[] cols;
     String tmp[];
@@ -66,7 +68,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
             return;
         }
         newName = new ArrayList<>();
-        tableModel = new MyTableModel(newName);
+        tableModel = new MyTableModel();
         List<String> listColumn = new ArrayList<>(Arrays.asList("Наименование", "TAG_NAME_PLC"));//получили лист 
         if (listColumn == null || listColumn.isEmpty()) {
             return;
@@ -144,7 +146,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Переименовать2");
+        jButton1.setText("Переименовать4");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -199,40 +201,11 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         }
 
         DoIt di = () -> {
-            //----требуется доработка
-//            
-//            for (int i = 0; i < newName.size(); i++) {
-//            String[] firstLine = newName.get(i);
-//            String[] secondLine = null;
-//            if (i > 0) {
-//                secondLine = newName.get(i - 1);
-//            }
-//            if (secondLine != null) {
-//                if (firstLine[1].equals(secondLine[1])) {
-//                    newName.remove(i - 1);
-//                }
-//            }
-//        }
-//            
-            //----заполнение пустых ячеек
-//            for(int i=0;i<newName.size();i++){
-//                 tableName = newName.get(i);//получили строку с элементами
-//                        //----выполняем присваивание из массива каждому элементу---
-//                        comment = tableName[0];
-//                        alg = tableName[1];
-//                        newComment = tableName[2];
-//                        newAlg = tableName[3];
-//                        //----если находит пустые ячейки,заполняет их(получили сформированную строку без пустых ячеек)
-//                        if (newComment.equals("")) {
-//                            newComment = comment;
-//                        }
-//                        if (newAlg.equals("")) {
-//                            newAlg = alg;
-//                        }
-//            }
+            newName=tableModel.toArrayList();//получили всю таблицу целиком
+            util.DeleteEmptyString(newName);//удалили строки в которых нет редактирования
             update.ReNameAllData(tableModel, table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
             String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
-            fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);
+            fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);//запускаем метод переименования
           
             globVar.processReg.remove(processName);
         };
