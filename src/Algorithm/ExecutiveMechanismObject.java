@@ -116,10 +116,13 @@ public class ExecutiveMechanismObject {
     }
 
     // --- чтение xml и формирование  из него каких таблиц читаем и что сапоставлять ---
-    // На вход документ и выбранная уже нода, и пропускать сигнал коорорый ни с кем не совпал или нет
+    //--- На вход документ и выбранная уже нода, и пропускать сигнал коорорый ни с кем не совпал или нет ---
     public ArrayList<ArrayList> getMecha(Node n, boolean missWE) {
         ArrayList<ArrayList> findingTagname = new ArrayList();//листы для хранения найденного Что передаем
         nameTable = globVar.abonent + "_AM";    //  формируем название таблицы строится
+        
+        ArrayList<String[]> dataDB = getDataFromBase(nameTable); // Данные таблицы из базы есть ли она
+        
         //this.setTitle(nameTable); // Установить заголовок
         columnT = new ArrayList<>(); // заготовка названия колонок
         columnT.add("Наименование");
@@ -149,8 +152,8 @@ public class ExecutiveMechanismObject {
             Node nodeConEnd = listNodeMethodExe.get(i);
             String nameDGOorDGI = nodeConEnd.getNodeName();
             nameDGODGI.add(nodeConEnd.getNodeName());
-
-            ObjAnalize anlizObjOI; // объект который содержит названия окончания и списки сишналов 
+ 
+           ObjAnalize anlizObjOI; // объект который содержит названия окончания и списки сишналов 
             // в зависимости от итерации ему будет присваиватся свойства кем он буде входом или выходом
             if (i % 2 == 0) {
                 anlizObjOI = new ObjAnalize(nameDGOorDGI, true);
@@ -188,7 +191,7 @@ public class ExecutiveMechanismObject {
             }
         }
 
-        // получаем исходные данные для нод механизмов из базы
+        // получаем исходные данные для нод механизмов из базы(автозаполнение Листа)
         listObjectDGODGI.forEach(mechDODI -> {
             String nameTreq = globVar.abonent + "_" + mechDODI.getName(); // Формируется название таблицы
             List<String> columnsB = workbase.getListColumns(nameTreq); // возмем Названия колонок из таблицы
@@ -213,7 +216,27 @@ public class ExecutiveMechanismObject {
         });
             //System.out.println("This formating start data"); // системный вывод
 
-        // анализ исходных данных
+        // === анализ исходных данных ===
+        
+        // Анализ что присутствует в базе и и данных для DGO DGI(Удаление что уже есть в базе и пометки что не верное)
+        for (String[] arrDB: dataDB) {
+            ObjAnalize DO = null;
+            for (ObjAnalize o: listObjectDGODGI) { // Находим объет с данными для DO
+                if (o.getName().equals("DO")) DO = o;
+            }
+            
+            if (DO == null) break;
+            ArrayList<String> tmpArr = DO.getListSig();
+            for (int i = 0; i < arrDB.length; i++) { // Проходим по строкам базы(надо последнии по идентификаторам но пока тупо перебор)        
+                int indexDO = tmpArr.indexOf(arrDB[i]);
+                if(indexDO > -1) {
+                    DO.getDataSig().remove(indexDO);
+                }
+                
+            }
+            
+        }
+        
         // вычисление кто DGO
         ObjAnalize objDGO = null;
         for (int i = 0; i < listObjectDGODGI.size(); ++i) {
@@ -233,12 +256,12 @@ public class ExecutiveMechanismObject {
             ArrayList<String> listOnOffDGO = objDGO.getEnding(); // получаем окончания
             // формируем  названия колонки DGO окончаний
             for (String sE : listOnOffDGO) {
-                columnT.add(objDGO.getName() + "_" + sE);
+                columnT.add(objDGO.getName()  + sE);
             }
             // дописываем  названия колонки DGi окончаний
             for (ObjAnalize obgDGI : listObjectDGODGI) {
                 for (String sE : obgDGI.getEnding()) {
-                    columnT.add(obgDGI.getName() + "_" + sE);
+                    columnT.add(obgDGI.getName() + sE);
                 }
             }
 
@@ -539,10 +562,36 @@ public class ExecutiveMechanismObject {
         return enterSig;
     }
 
+    // --- Считать сформированные исполнительные из DB ---
+    public ArrayList<String[]>  getDataFromBase(String nameDB) {
+        
+        ArrayList<String[]> dataFromDB = new ArrayList<>(); // массив с сырыми данными таблицы
+        ArrayList<String> nColumnT =  workbase.getListColumns(nameDB);
+        int indexID = nColumnT.indexOf("id"); // определение расположение id колонки(для игнора)
+        
+        for (String table : workbase.getListTable()) { // есть ли вообще таблица в базе
+            if (nameTable.equals(table)) {
+                ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
+                if(indexID > -1){ // если нашли столбец id
+                    for(String[] arr: allDataExecTable){
+                        // обрубаем массив(как то сложно,перестраховался)
+                        String[] bF = Arrays.copyOfRange(arr, 0, indexID);// обрубленный до нахождения может быть 0 хотя он тут и есть
+                        String[] aF = Arrays.copyOfRange(arr, indexID+1, arr.length); // это после найденного
+                        String[] tmp = Stream.concat(Arrays.stream(bF), Arrays.stream(aF)).toArray(String[]::new); // Срастить рубленные массивы
+                        dataFromDB.add(tmp);
+                    }
+                }
+                break;
+            }
+        }
+        return dataFromDB;
+    }
+    
     //  --- добавления данных в базу  из таблицы ---
     public void addDataToBase(ArrayList<String[]> updatetedData) {
+        
         // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
-        // только потом затереть
+        // только потом затереть(может все это не актуально)
         ArrayList<String[]> dataFromDBTrue = new ArrayList<>(); // массив с выборкой true
         for (String table : workbase.getListTable()) { // есть ли вообще таблица в базе
             if (nameTable.equals(table)) {
@@ -685,8 +734,9 @@ class ObjAnalize {
         return listFromBase;
     }
 
-    //получить русские имена
-    public ArrayList<String> getListSigRus() {
+    
+    // получить имена сигналов
+    public ArrayList<String> getListSig() {
         ArrayList<String> listRusSig = new ArrayList<>();
         for (String[] arr : listFromBase) {
             listRusSig.add(arr[0]);
@@ -694,8 +744,8 @@ class ObjAnalize {
         return listRusSig;
     }
 
-    // получить имена сигналов
-    public ArrayList<String> getListSig() {
+    //получить русские имена
+    public ArrayList<String> getListSigRus() {
         ArrayList<String> lisSig = new ArrayList<>();
         for (String[] arr : listFromBase) {
             lisSig.add(arr[1]);
