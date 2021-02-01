@@ -2,13 +2,13 @@
 <!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых-->
 <ConfigSignals>
 	<AI excelSheetName="AI" Comment="Аналоговые входы. Архив: _ToHMI;" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
-        <EXEL>
-            <F nameColumnPos="Наименование"/><!--Обязательный нода-->
+        <EXEL startStr="2"> <!-- startStr - с какой строки начинать читать данный лист Excel. Если атрибута startStr нет, чтение будет осуществлятся со 2-ой строки. Значение атрибута startStr не может быть меньше 2 и больше 20. -->
+            <F nameColumnPos="Наименование"/><!--Обязательный нода Русское нгазванеие-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/><!--Обязательный нода-->
             <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/><!--Обязательный нода-->
             <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/><!--Обязательный нода-->
             <J nameColumnPos="Тип_датчика" default="KM04_4_20mA"/>
-            <T nameColumnPos="Точность"  type="Int" default="2"/>
+            <T nameColumnPos="Точность"  type="Int" default="2"/><!--кол знаков после запятой-->
             <U nameColumnPos="АЦПmin" swt="Тип_датчика" default="2.0">
 				<case val="KM04_0_20mA" def="-0.02"/>
 				<case val="KM04_4_20mA" def="0.0"/>
@@ -21,24 +21,24 @@
 				<case val="Siemens" def="27648.0"/>
 				<case val="Sonet" def="59714.0"/>
 			</V>
-            <W nameColumnPos="loLim" type="Number" formula="loLimF"/>
-            <X nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
-            <Y nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
-            <Z nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
+            <W nameColumnPos="loLim" type="Number" formula="loLimF"/><!-- нижний уровень зашкала -->
+            <X nameColumnPos="hiLim" type="Number" formula="hiLimF"/><!-- верхний уровень зашкала -->
+            <Y nameColumnPos="loBrk" type="Number" formula="loBrkF"/><!-- нижний уровень обрыв -->
+            <Z nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/><!-- верхний уровень обрыв -->
             <AA nameColumnPos="ROC" type="Number"   default="0.0"/>
-            <AB nameColumnPos="recoveryTime" type="Number" default="1.0"/>
-            <AC nameColumnPos="tau" type="Number"  default="1.0"/>
-            <I nameColumnPos="Единица_измерения" default=""/>
-            <K nameColumnPos="Акт_пас" default=""/>
-            <L nameColumnPos="Адрес_1" default=""/>
-            <M nameColumnPos="Адрес_2" default=""/>
-            <N nameColumnPos="Адрес_3" default=""/>
-            <Q nameColumnPos="Устройство" type="Int"/>
-            <R nameColumnPos="Слот" type="Int"/>
-            <S nameColumnPos="Канал" type="Int"/>
-			<O nameColumnPos="Примечание" default=""/>
-			<AD nameColumnPos="sonetModbus" default=""/>
-			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
+            <AB nameColumnPos="recoveryTime" type="Number" default="1.0"/><!-- время выхода из ремота (ДУ) -->
+            <AC nameColumnPos="tau" type="Number"  default="1.0"/><!-- степень сглаживания при обработке входного сигнала -->
+            <I nameColumnPos="Единица_измерения" default=""/><!-- не используется при генерации -->
+            <K nameColumnPos="Акт_пас" default=""/><!-- не используется при генерации -->
+            <L nameColumnPos="Адрес_1" default=""/><!-- не используется при генерации -->
+            <M nameColumnPos="Адрес_2" default=""/><!-- не используется при генерации -->
+            <N nameColumnPos="Адрес_3" default=""/><!-- не используется при генерации -->
+            <Q nameColumnPos="Устройство" type="Int"/>	<!-- используются в драйвере -->
+            <R nameColumnPos="Слот" type="Int"/>		<!-- используются в драйвере -->
+            <S nameColumnPos="Канал" type="Int"/>		<!-- используются в драйвере -->
+			<O nameColumnPos="Примечание" default=""/><!-- не используется при генерации -->
+			<AD nameColumnPos="sonetModbus" default=""/><!-- используется для генерации хардваре -->
+			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/><!-- используется при генерации листа мнемосхемы-->
         </EXEL>
 		<Formulas>
 			<max operation="get" column="Диапазон_макс"/>
@@ -53,12 +53,12 @@
 			<hiBrkF operation="+" operand1="max" operand2="range6proc"/>
 		</Formulas>
 		<GenData>
-			<AI_DRV Type="REAL">
+			<AI_DRV Type="REAL"><!--AI_DRV - превращается в тип T_GPA_AI_DRV, где каждлое поле типа REAL -->
 				<globData name="AI_DRV">
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_DRV>
-			<AI_FromHMI>
+			<AI_FromHMI><!--AI_FromHMI - превращается в тип T_GPA_AI_FromHMI, где каждлое поле типа T_AI_FromHMI -->
 				<globData name="AI_FromHMI">
 					<localData int="_Algorithm.int" />
 				</globData>	
@@ -82,8 +82,8 @@
 		<GenCode >
 			<File src="AI_CallAll" target="_Algorithm">
 				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода">
-					<Function name="AI_init">
-						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+					<Function name="AI_init"><!-- AI_init(-->
+						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg><!-- GPA_AI_Settings.Pmsm,-->
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
 						<arg><dbd t="АЦПmin"/></arg>
@@ -96,7 +96,7 @@
 						<arg><dbd t="recoveryTime"/></arg>
 						<arg><text t="repTime"/></arg>
 						<arg><dbd t="tau"/></arg>
-						<arg><npp/></arg>
+						<arg><npp/></arg><!--номер по порядку-->
 					</Function>
 				</Block>
 				<Block start="Начало сгенерированного кода AI_Processing" end="Конец сгенерированного кода">
@@ -119,7 +119,7 @@
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_AI_DRV" globData="_AI_DRV"/>
 	</AI>
-	<FI excelSheetName="FI" Comment="Частотные входы. Архив: _ToHMI;">
+	<FR excelSheetName="FR" Comment="Входы ТР. Архив: _ToHMI;">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
@@ -149,37 +149,37 @@
 			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenData>
-			<FI_DRV Type="REAL">
-				<globData name="FI_DRV">
+			<FR_DRV Type="REAL">
+				<globData name="FR_DRV">
 					<localData int="_Algorithm.int" />
 				</globData>	
-			</FI_DRV>
-			<FI_FromHMI typeFile="T_AI_FromHMI.type">
-				<globData name="FI_FromHMI">
+			</FR_DRV>
+			<FR_FromHMI typeFile="T_AI_FromHMI.type">
+				<globData name="FR_FromHMI">
 					<localData int="_Algorithm.int" />
 				</globData>	
-			</FI_FromHMI>
-			<FI_ToHMI typeFile="T_AI_ToHMI.type">
-				<globData name="FI_ToHMI">
+			</FR_FromHMI>
+			<FR_ToHMI typeFile="T_AI_ToHMI.type">
+				<globData name="FR_ToHMI">
 					<localData int="_Algorithm.int" />
 				</globData>	
-			</FI_ToHMI>
-			<FI_Settings typeFile="T_AI_Settings.type">
+			</FR_ToHMI>
+			<FR_Settings typeFile="T_AI_Settings.type">
 				<globData>
-					<localData  name="FI_Settings" int="_Algorithm.int"/>
+					<localData  name="FR_Settings" int="_Algorithm.int"/>
 				</globData>
-			</FI_Settings>
-			<FI_Internal typeFile="T_AI_Internal.type">
+			</FR_Settings>
+			<FR_Internal typeFile="T_AI_Internal.type">
 				<globData>
-					<localData  name="FI_Internal" int="_Algorithm.int"/>
+					<localData  name="FR_Internal" int="_Algorithm.int"/>
 				</globData>
-			</FI_Internal>
+			</FR_Internal>
 		</GenData>
 		<GenCode >
-			<File src="FI_CallAll" target="_Algorithm">
-				<Block start="Начало сгенерированного кода FI_init" end="Конец сгенерированного кода">
+			<File src="FR_CallAll" target="_Algorithm">
+				<Block start="Начало сгенерированного кода FR_init" end="Конец сгенерированного кода">
 					<Function name="AI_init">
-						<arg><abonent/><text t="_FI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><dbd t="Диапазон_мин"/></arg>
 						<arg><dbd t="Диапазон_макс"/></arg>
 						<arg><dbd t="АЦПmin"/></arg>
@@ -195,26 +195,26 @@
 						<arg><npp/></arg>
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода FI_Processing" end="Конец сгенерированного кода">
+				<Block start="Начало сгенерированного кода FR_Processing" end="Конец сгенерированного кода">
 					<Function name="AI_Processing">
-						<arg><abonent/><text t="_FI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_FI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_FI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_FI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><abonent/><text t="_FI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
-			<File src="FI_Permit" target="_Algorithm">
-				<Block start="Начало сгенерированного кода FI_Permit" end="Конец сгенерированного кода">
+			<File src="FR_Permit" target="_Algorithm">
+				<Block start="Начало сгенерированного кода FR_Permit" end="Конец сгенерированного кода">
 					<String>
-						<abonent/><text t="_FI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
+						<abonent/><text t="_FR_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
 			</File>
 		</GenCode>
-		<GenHW hwDriver="KM04" drvFile="_FI_DRV" globData="_FI_DRV"/>
-	</FI>
+		<GenHW hwDriver="KM04" drvFile="_FR_DRV" globData="_FR_DRV"/>
+	</FR>
 	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
 		<GenData>
 			<T_ANB Type="BOOL"/>
@@ -222,7 +222,7 @@
 		</GenData>
         <EXEL>
             <B nameColumnPos="TAG_NAME_AnPar" type="VarName"/>
-            <C nameColumnPos="direct" registr="down" replace="true">
+            <C nameColumnPos="direct" registr="down" replace="true"> <!-- true или TRUE или > или БОЛЬШЕ преобразует в "больше" -->
 				<case from="&gt;" to="больше"/>
 				<case from="true" to="больше"/>
 				<case from="&lt;" to="меньше"/>
@@ -236,14 +236,12 @@
 				<case from="P" to="П"/>
 				<case from="O" to="О"/>
 			</F>
-            <G nameColumnPos="defVal" type="Int" default="0"/>
+            <G nameColumnPos="defVal" type="Int" default="0"/> <!-- значение по умолчанию при неисправности аналового 
+																0 - уставка в ложь, 1 - в истина, 2 - остаётся какой была -->
             <H nameColumnPos="гистерезис" type="Number"  default="0.0"/>
-            <I nameColumnPos="TAG_NAME_PLC"  default=""><!-- concut="true">
-				<concut col="TAG_NAME_AnPar"/>
-				<concut col="typeSuff"/>
-				<concut col="dirSuff"/-->
-			</I>
-             <J nameColumnPos="Наименование"  default=""/><!-- concut="true"/-->
+            <I nameColumnPos="TAG_NAME_PLC"  default=""/><!-- Если имя уставки пустое то TAG_NAME_AnPar_Uv1 -->
+			<!--/I-->
+            <J nameColumnPos="Наименование"  default=""/><!-- concut="true" - незаконченная попытка сконструировать русское имя уставки из имени АнПара, слова "меньше" или "больше" и типа уставки /-->
        </EXEL>
 	</ANB>
 	<AO excelSheetName="AO" Comment="Аналоговые выходы">
@@ -456,8 +454,9 @@
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_DO_DRV" globData="_DO_DRV"/>
 	</DO>
-	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Modbus: ">
-        <EXEL info="R1C2">
+	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Архив: _ToHMI; Modbus: "><!--  "Архив: _ToHMI" - указывается только для AI и mb_AI, т.к. в отличие от прочих типов данныж актуальное значение параметров хранится в структурах 
+ 																						типа GPA_AI_ToHMI.имя папаметра.PV, а не просто в GPA_AI.имя параметра -->
+        <EXEL info="R1C2"><!-- Указывает ячейку на листе Excel, из которой берётся дополнительная информация, например (GPA_AVO; 172.16.1.8:502; DI; 2) имя драйвера модбас; адрес; группа в драйвере; номер функции модбас -->
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
             <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
             <D nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
