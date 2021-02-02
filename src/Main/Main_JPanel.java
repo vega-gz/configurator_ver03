@@ -27,6 +27,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import org.w3c.dom.Node;
@@ -100,7 +101,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         // прикручиваем нашу модель дерева методом getModelTreeNZ()
@@ -109,21 +110,19 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuLoger = new javax.swing.JMenuItem();
-        jMenuBase = new javax.swing.JMenu();
-        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jFrameTable.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -393,7 +392,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextField1.setMargin(new java.awt.Insets(4, 8, 4, 4));
         jTextField1.setName(""); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -426,26 +425,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jMenu2.setText("Настройки");
-
-        jMenuItem1.setText("сменить папку проекта");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuItem9.setText("Сменить БД");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem9);
-
-        jMenuBar1.add(jMenu2);
-
         jMenu3.setText("Утилиты");
 
         jMenuItem6.setText("Переименовать *.int файлы ");
@@ -472,47 +451,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu3.add(menuLoger);
 
-        jMenuBase.setText("Работа с базой данных");
-
-        jMenuItem_AnotherBase.setText("Перенос таблиц в другую базу");
-        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jMenuItem_AnotherBaseComponentAdded(evt);
-            }
-        });
-        jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_AnotherBaseActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem_AnotherBase);
-
-        jMenuItem3.setText("Сменить БД");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem3);
-
-        jMenuItem7.setText("Инспекция таблиц");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem7);
-
-        jMenuItem8.setText("Создать новую базу");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem8);
-
-        jMenu3.add(jMenuBase);
-
         jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Проект");
@@ -533,7 +471,56 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
+        jMenuItem1.setText("сменить папку проекта");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Работа с БД");
+
+        jMenuItem3.setText("Сменить БД");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
+        jMenuItem_AnotherBase.setText("Перенос таблиц в другую базу");
+        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jMenuItem_AnotherBaseComponentAdded(evt);
+            }
+        });
+        jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_AnotherBaseActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem_AnotherBase);
+
+        jMenuItem7.setText("Инспекция таблиц");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
+
+        jMenuItem8.setText("Создать новую базу");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -644,10 +631,25 @@ public final class Main_JPanel extends javax.swing.JFrame {
             return;
         }
         JFileChooser fileopen = new JFileChooser(globVar.desDir);
+        fileopen.setFileFilter(new FileFilter() { // фильтр файлов
+            public String getDescription() {
+                return "Excel 97-2003  (*.xls)";
+            }
+
+            //@Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    String filename = f.getName().toLowerCase();
+                    return filename.endsWith(".xls");
+                }
+            }
+        });
         int ren = fileopen.showDialog(null, "Загрузка данных для " + globVar.abonent);
         if (ren == JFileChooser.APPROVE_OPTION) {
             excel = fileopen.getSelectedFile();// выбираем файл из каталога
-        }
+        }else return;
         pb = new ProgressBar();
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
@@ -1020,15 +1022,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jDialog_createBase.dispose();
     }//GEN-LAST:event_jButton10_CanceCreatelDBActionPerformed
 
-    // --- Еще один пукт сменить базу ---
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        JFrame changeDB = new ChangeDB(jTree1, this);
-        TableTools.setFrameListener(changeDB, null, null, null); // слушателей фреймов
-        changeDB.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        changeDB.setTitle("Сменить БД");
-        changeDB.setVisible(true);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
             return null;
@@ -1145,10 +1138,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuBase;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1157,7 +1149,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

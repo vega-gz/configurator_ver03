@@ -2,7 +2,7 @@
 <!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых-->
 <ConfigSignals>
 	<AI excelSheetName="AI" Comment="Аналоговые входы. Архив: _ToHMI;" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
-        <EXEL>
+        <EXEL startStr="2"> <!-- startStr - с какой строки начинать читать данный лист Excel. Если атрибута startStr нет, чтение будет осуществлятся со 2-ой строки. Значение атрибута startStr не может быть меньше 2 и больше 20. -->
             <F nameColumnPos="Наименование"/><!--Обязательный нода Русское нгазванеие-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/><!--Обязательный нода-->
             <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/><!--Обязательный нода-->
@@ -241,7 +241,7 @@
             <H nameColumnPos="гистерезис" type="Number"  default="0.0"/>
             <I nameColumnPos="TAG_NAME_PLC"  default=""/><!-- Если имя уставки пустое то TAG_NAME_AnPar_Uv1 -->
 			<!--/I-->
-            <J nameColumnPos="Наименование"  default=""/><!-- concut="true"/-->
+            <J nameColumnPos="Наименование"  default=""/><!-- concut="true" - незаконченная попытка сконструировать русское имя уставки из имени АнПара, слова "меньше" или "больше" и типа уставки /-->
        </EXEL>
 	</ANB>
 	<AO excelSheetName="AO" Comment="Аналоговые выходы">
@@ -454,8 +454,9 @@
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_DO_DRV" globData="_DO_DRV"/>
 	</DO>
-	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Modbus: ">
-        <EXEL info="R1C2"><!-- Указывает ячейку на листе Excel, из которой берётся дополнительная информация, например имя драйвера модбас, адрес и прочее -->
+	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Архив: _ToHMI; Modbus: "><!--  "Архив: _ToHMI" - указывается только для AI и mb_AI, т.к. в отличие от прочих типов данныж актуальное значение параметров хранится в структурах 
+ 																						типа GPA_AI_ToHMI.имя папаметра.PV, а не просто в GPA_AI.имя параметра -->
+        <EXEL info="R1C2"><!-- Указывает ячейку на листе Excel, из которой берётся дополнительная информация, например (GPA_AVO; 172.16.1.8:502; DI; 2) имя драйвера модбас; адрес; группа в драйвере; номер функции модбас -->
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
             <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
             <D nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>

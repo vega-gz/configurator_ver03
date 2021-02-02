@@ -44,6 +44,7 @@ public class RWExcel {
     }
 // --- Данные из ячейки по ссылке на строку и номеру столбца---Lev---
     private static String getDataCell(HSSFRow row, int numberCol) {
+        if(row==null) return null;
         Cell cell = row.getCell(numberCol); // адрес индекс
         if (cell == null) return null;
         CellType cellType = cell.getCellType();
@@ -193,20 +194,6 @@ public class RWExcel {
         if(f1==null) return null;
         String operation = globVar.sax.getDataAttr(f1, "operation");
         return calcFormula(operation, f1, f, colList,dataFromExcel, i);
-//        if("get".equals(operation)){
-//            String colName = globVar.sax.getDataAttr(f1, "column");
-//            int x = getColNumber(colName, colList);
-//            if(x>=0){
-//                try {   
-//                    return Double.parseDouble(dataFromExcel[i][x]);
-//                } catch (NumberFormatException e) {
-//                    return null;
-//                }
-//            } else return null;
-//        }else{
-//            return calcFormula(operation, f1, f, colList,dataFromExcel, i);
-//        }
-        //return null;
     }
 // --- сформировать даные из конфигугации XML для чтения Exel---Lev---
     public static String ReadExelFromConfig(String pathExel, JProgressBar jpb) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
@@ -251,6 +238,7 @@ public class RWExcel {
             for(String exSheetName : sheetList){
                 HSSFSheet sheet = wb.getSheet(exSheetName);
                 int rowMax = 32767;
+                int starExcelString = 1;
                 String tableComment = globVar.sax.getDataAttr(n, "Comment");
                 if(sheet != null){
                     String func = "";
@@ -264,6 +252,20 @@ public class RWExcel {
                             tableComment += getDataCell(sheet.getRow(row-1), col-1);
                             func = tableComment.substring(tableComment.lastIndexOf(";")+1).trim();
                         }
+                        String startStr = globVar.sax.getDataAttr(excelNode,"startStr");
+                        if(startStr!=null){
+                            try {   
+                                starExcelString = Integer.parseInt(startStr)-1;
+                            } catch (NumberFormatException e) {
+                                starExcelString = -1;
+                            }
+                            if(starExcelString < 1 || starExcelString > 19){
+                                FileManager.loggerConstructor("В настройке \"startStr\" ноды \"EXEL\" типа данных "+
+                                        n.getNodeName()+" неправильное значение \""+ startStr +"\". Должно быть целое от 2 до 20.");
+                                isError = true;
+                                starExcelString = 1;
+                            }
+                        }
 
                     }
                     ArrayList<Node> colList = globVar.sax.getHeirNode(excelNode);
@@ -276,17 +278,17 @@ public class RWExcel {
                         String colExName = col.getNodeName();
                         tabColNames[colCnt] = globVar.sax.getDataAttr(col,"nameColumnPos");
                         if(first){
-                            for(int i=1; i<rowMax; i++ ){
+                            for(int i=starExcelString; i<rowMax; i++ ){
                                 String strCell = getDataCell(sheet.getRow(i), colExName);
                                 if(strCell == null || "".equals(strCell)){
                                     first = false;
-                                    rowMax = i-1;
+                                    rowMax = i-starExcelString;
                                 }
                             }
                             dataFromExcel = new String[rowMax][colList.size()];
                         }
                         for(int i=0; i<rowMax; i++ ){//Пробегаем по строкам столбца 
-                            String strCell = getDataCell(sheet.getRow(i+1), colExName);
+                            String strCell = getDataCell(sheet.getRow(i+starExcelString), colExName);
                             if(strCell == null) strCell="";
                             if("".equals(strCell)){
                                 String def = globVar.sax.getDataAttr(col,"swt");
@@ -400,7 +402,8 @@ public class RWExcel {
     if(isError) return null;
     return tCnt;
     }
-    public void algNameChange(){
-        
-    }
+    
+//    public void algNameChange(){
+//        
+//    }
 }
