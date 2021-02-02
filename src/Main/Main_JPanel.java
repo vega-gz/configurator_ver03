@@ -885,12 +885,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
         globVar.abonent = (String) jComboBox2.getSelectedItem();
         DoIt di = () -> {
             int ret = 1;
-            try {
-                UnloadExcel loadread = new UnloadExcel(globVar.abonent);
-                JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
-            } catch (ParseException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                
+            UnloadExcel loadread = new UnloadExcel();
+            boolean workUploadExcel = loadread.runUnloadExcel(globVar.abonent);
+            if(workUploadExcel)JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
+            else JOptionPane.showMessageDialog(null, "Ошибки в выгрузке.");
+        
             pb.setVisible(false);
             globVar.processReg.remove(processName);
         };
