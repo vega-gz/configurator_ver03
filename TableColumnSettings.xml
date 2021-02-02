@@ -9,6 +9,19 @@
 			<Item t="KM04"/>
 		</Abonent_type>
 	</Abonents>
+	<AM>
+		<matches src="this">
+			<Item t="ИМ: 2х2"/>
+			<Item t="ИМ: 2х1"/>
+			<Item t="ИМ: 1х2"/>
+			<Item t="ИМ: 1x1"/>
+			<Item t="ИМ: 1x0"/>
+		</matches>
+		<true-false src="this">
+			<Item t="true"/>
+			<Item t="false"/>
+		</true-false>
+	</AM>
 	<ANB>
 		<!--Таблица src="DB"/-->
 		<TAG_NAME_AnPar src="table" table="this" col="Таблица" default="AI" colInTable="TAG_NAME_PLC"  edit="true"/>
@@ -16,11 +29,11 @@
 			<Item t="больше"/>
 			<Item t="меньше"/>
 		</direct>
-		<type src="this">
+		<тип src="this">
 			<Item t="У"/>
 			<Item t="А"/>
 			<Item t="О"/>
 			<Item t="П"/>
-		</type>
+		</тип>
 	</ANB>
 </TableColumnSettings>
