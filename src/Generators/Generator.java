@@ -60,10 +60,11 @@ public class Generator {
         
         String abType = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Abonent_type"); 
         //---------------------- Определение списка экземпляров ------------------------------
-        String exemplars = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Экземпляры"); 
+        //String exemplars = globVar.DB.getDataCell("Abonents","Abonent",abonent,"Экземпляры"); 
         ArrayList<String> exArr = new ArrayList<>();
-        if(!exemplars.isEmpty()) exArr = StrTools.getListFromString(exemplars, ",");
-        else exArr.add(abonent);
+        //if(!exemplars.isEmpty()) exArr = StrTools.getListFromString(exemplars, ",");
+        //else 
+            exArr.add(abonent);
         //------------------ Определение параметров драйвера модбаса -----------------------
         String tabComm = globVar.DB.getCommentTable(abonent+subAb+"_"+nodeTable);
         if(tabComm==null) tabComm ="";
@@ -926,14 +927,15 @@ public class Generator {
             String uuid, String hwFileName1, String backUpFile1){
         String[] findArr = {"Signal","Name",Name};
         Node sig = intFile.findNodeAtribute(interfaceList, findArr);
+        //System.out.println(sig.getNodeName());
         if(sig!=null){
-            intFile.setDataAttr(sig, "Type", Type);
-            if(uuid!=null){
+            if(uuid!=null && global == true){ // меняем значение если есть сигнал но он есть и в глобале
+                intFile.setDataAttr(sig, "Type", Type);
                 intFile.setDataAttr(sig, "UUID", uuid);
                 intFile.writeDocument();
                 return uuid;
             }else{
-                intFile.writeDocument();
+                //intFile.writeDocument();
                 return intFile.getDataAttr(sig,"UUID");
             }
         }
