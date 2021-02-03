@@ -41,6 +41,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     String filepatch, type;
     File excel = null;
     ProgressBar pb = null;
+    DefaultListModel listModel = new DefaultListModel(); // модель списка баз
 
     public Main_JPanel() {
         globVar.DB = new DataBase();
@@ -90,6 +91,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jButton10_CanceCreatelDB = new javax.swing.JButton();
         label1 = new java.awt.Label();
         jTextField6 = new javax.swing.JTextField();
+        jDialog_ListBase = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -101,7 +105,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         // прикручиваем нашу модель дерева методом getModelTreeNZ()
@@ -123,6 +127,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         jFrameTable.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -316,6 +321,25 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialog_ListBase.setTitle("Список баз");
+
+        jList1.setModel(listModel);
+        jScrollPane1.setViewportView(jList1);
+
+        javax.swing.GroupLayout jDialog_ListBaseLayout = new javax.swing.GroupLayout(jDialog_ListBase.getContentPane());
+        jDialog_ListBase.getContentPane().setLayout(jDialog_ListBaseLayout);
+        jDialog_ListBaseLayout.setHorizontalGroup(
+            jDialog_ListBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_ListBaseLayout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
+        );
+        jDialog_ListBaseLayout.setVerticalGroup(
+            jDialog_ListBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -392,7 +416,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextField1.setMargin(new java.awt.Insets(4, 8, 4, 4));
         jTextField1.setName(""); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -519,6 +543,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem8);
+
+        jMenuItem9.setText("Список баз подключенного сервера");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem9);
 
         jMenuBar1.add(jMenu4);
 
@@ -1022,6 +1054,22 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jDialog_createBase.dispose();
     }//GEN-LAST:event_jButton10_CanceCreatelDBActionPerformed
 
+    // --- вывод баз подключенного сервера ---
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        listModel.clear();
+        ArrayList<String> listDB = globVar.DB.getListBase();
+        for (int i = 0; i < listDB.size(); i++) {
+            listModel.add(i, listDB.get(i));
+        }
+        
+        //validate();
+        jDialog_ListBase.setSize(400, 200);
+        jDialog_ListBase.setLocationRelativeTo(null); // по центру экрана
+        jDialog_ListBase.setVisible(true);
+        
+                
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
             return null;
@@ -1127,6 +1175,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog_ListBase;
     private javax.swing.JDialog jDialog_createBase;
     private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;
@@ -1137,6 +1186,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -1149,8 +1199,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
