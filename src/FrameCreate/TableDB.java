@@ -409,32 +409,7 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         if(!Tools.isDesDir()) return;
-        String processName = "Генерация из таблицы";
-        if(globVar.processReg.indexOf(processName)>=0){
-            JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
-            return;
-        }
-        DoIt di = () -> {
-            if(!Tools.isDesDir()) return;
-            int ret = 1;
-            try {
-                ret = Generator.genTypeFile(this, jProgressBar1);
-            } catch (IOException ex) {
-                FileManager.loggerConstructor(ex.toString());
-            }
-            if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
-            globVar.processReg.remove(processName);
-            jProgressBar1.setValue(0);
-         };
-        BackgroundThread bt = new BackgroundThread("Генерация .type", di);
-        bt.start();
-        globVar.processReg.add(processName);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-             if(!Tools.isDesDir()) return;
+        if(!Tools.isDesDir()) return;
         String processName = "Генерация из таблицы";
         if(globVar.processReg.indexOf(processName)>=0){
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
@@ -453,6 +428,30 @@ public class TableDB extends javax.swing.JFrame {
             jProgressBar1.setValue(0);
          };
         BackgroundThread bt = new BackgroundThread("Генерация HW", di);
+        bt.start();
+        globVar.processReg.add(processName);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String processName = "Генерация из таблицы";
+        if(globVar.processReg.indexOf(processName)>=0){
+            JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
+            return;
+        }
+        DoIt di = () -> {
+            if(!Tools.isDesDir()) return;
+            String retHMI = null;
+            try {
+                retHMI = Generator.genHMI(this, jProgressBar1);
+            } catch (IOException ex) {
+                //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(retHMI==null) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+            else if(!"".equals(retHMI)) JOptionPane.showMessageDialog(null, "Создано "+retHMI); // Это сообщение 
+            jProgressBar1.setValue(0);
+            globVar.processReg.remove(processName);
+         };
+        BackgroundThread bt = new BackgroundThread("Генерация HMI", di);
         bt.start();
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton3ActionPerformed

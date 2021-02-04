@@ -53,7 +53,7 @@
 			<hiBrkF operation="+" operand1="max" operand2="range6proc"/>
 		</Formulas>
 		<GenData>
-			<AI_DRV Type="REAL"><!--AI_DRV - превращается в тип T_GPA_AI_DRV, где каждлое поле типа REAL -->
+			<AI_DRV Type="REAL"><!--AI_DRV - превращается в тип T_GPA_AI_DRV, где каждлое поле типа REAL. Type указывается ести тип полей структуры НЕ совпадает с Т_ + имя ноды -->
 				<globData name="AI_DRV">
 					<localData int="_Algorithm.int" />
 				</globData>	
@@ -68,12 +68,12 @@
 					<localData int="_Algorithm.int" />
 				</globData>	
 			</AI_ToHMI>
-			<AI_Settings>
+			<AI_Settings><!-- счетчики -->
 				<globData>
 					<localData  name="AI_Settings" int="_Algorithm.int" multyAb="true"/>
 				</globData>
 			</AI_Settings>
-			<AI_Internal>
+			<AI_Internal><!-- Триггеры -->
 				<globData>
 					<localData  name="AI_Internal" int="_Algorithm.int"/>
 				</globData>
@@ -775,8 +775,8 @@
 	
 	<AM excelSheetName="AM" Comment="Исполнительные механизмы">
         <EXEL>
-			<A nameColumnPos="RusName"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
-            <B nameColumnPos="TAG_PLC"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+			<A nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+            <B nameColumnPos="TAG_NAME_PLC"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
             <C nameColumnPos="matches" unical="true" type="VarName" />
 			<D nameColumnPos="true-false" default=""/>
 			<E nameColumnPos="DO_ON" default=""/>
@@ -784,27 +784,29 @@
 			<G nameColumnPos="DI_OF" />
 			<H nameColumnPos="DI_OF" />
         </EXEL>
-		<!--GenData>
-			<DO_DRV Type="BOOL">
-				<globData name="DO_DRV">
-					<localData int="_Algorithm.int" />
-				</globData>	
-				<globData name="DO">
+		<GenData>
+			<AM_FromHMI>
+				<globData name="AM_FromHMI">
 					<localData int="_Algorithm.int"/>
 				</globData>
-			</DO_DRV>
-			<DO_FromHMI typeFile="T_DO_FromHMI.type">
-				<globData name="DO_FromHMI">
+			</AM_FromHMI>
+			<AM_ToHMI >
+				<globData name="AM_ToHMI">
 					<localData int="_Algorithm.int"/>
 				</globData>
-			</DO_FromHMI>
-			<DO_ToHMI typeFile="T_DO_ToHMI.type">
-				<globData name="DO_ToHMI">
-					<localData int="_Algorithm.int"/>
+			</AM_ToHMI>
+			<AM_Settings><!-- счетчики -->
+				<globData>
+					<localData  name="AI_Settings" int="_Algorithm.int" multyAb="true"/>
 				</globData>
-			</DO_ToHMI>
+			</AM_Settings>
+			<AM_Internal><!-- Триггеры -->
+				<globData>
+					<localData  name="AI_Internal" int="_Algorithm.int"/>
+				</globData>
+			</AM_Internal>
 		</GenData>
-		<GenCode>
+		<!--GenCode>
 			<File src="DO_CallAll" target="_Algorithm">
 				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
 					<Function name="DO_Processing">

@@ -37,10 +37,19 @@ public class ExecutiveMechanismObject {
     ArrayList<Integer> iniySplitList = new ArrayList<>();  // список разделителя таблиц механизмов
     ArrayList<int[]> bedMark = new ArrayList<>(); // список клеток которые метим для таблицы
     String columnId = "id";
-    String columnNaim = "RusName";
-    String columnPLC = "TAG_PLC";
+    String columnNaim = "Наименование";
+    String columnPLC = "TAG_NAME_PLC";
     String columnMatches = "matches";
     String columnTF = "true-false";
+    String columnDCOA = "delayChangeOvertimeAlert"; // Новые колонки из файла Excel
+    String columnDQT = "delayQTimeout";
+    String columnDEOn = "delayExtraOn";
+    String columnDEOff = "delayExtraOff";
+    String columnDNA = "delayNotMoveAlert";
+    String columnDCBA = "delayCircBrkAlert";
+    String columnTypeAM = "TypeAM";
+    String columnNameSmall = "NameSmall";
+    
 
     // Формируем первоначальные данные для пользователя, выбор механизма обработки
     public ExecutiveMechanismObject() {
@@ -138,6 +147,14 @@ public class ExecutiveMechanismObject {
         columnT.add(columnPLC);
         columnT.add(columnMatches);
         columnT.add(columnTF);
+        columnT.add(columnDCOA);
+        columnT.add(columnDQT);
+        columnT.add(columnDEOn);
+        columnT.add(columnDEOff);
+        columnT.add(columnDNA);
+        columnT.add(columnDCBA);
+        columnT.add(columnTypeAM);
+        columnT.add(columnNameSmall);
 
         String[] nameColumnList = new String[]{"TAG_NAME_PLC", "Наименование сигнала", "Наименование"}; // наименование колонок для выборки из базы
         String[] endRusName = new String[]{"Открыть", "закрыть", "включить"};
