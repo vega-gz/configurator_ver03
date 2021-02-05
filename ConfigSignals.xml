@@ -176,7 +176,7 @@
 			</FR_Internal>
 		</GenData>
 		<GenCode >
-			<File src="FR_CallAll" target="_Algorithm">
+			<File src="FR_CallAll" target="_Algorithm" ext=".txt">
 				<Block start="Начало сгенерированного кода FR_init" end="Конец сгенерированного кода">
 					<Function name="AI_init">
 						<arg><abonent/><text t="_FR_Settings."/><dbd t="TAG_NAME_PLC"/></arg>

@@ -1,7 +1,7 @@
 package Generators;
 
-import Tools.FileManager;
 import FrameCreate.TableDB;
+import Tools.FileManager;
 import Tools.StrTools;
 import Tools.Tools;
 import XMLTools.*;
@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -240,6 +241,9 @@ public class Generator {
         ArrayList<Node> fileList = globVar.sax.getHeirNode(nodeGenCode);
         for(Node f: fileList){
             String commonFileST = (String) globVar.sax.getDataNode(f).get("src");
+//            String ext = (String) globVar.sax.getDataNode(f).get("ext");
+//            if(ext.equals("")) ext = ".txt";
+
             String stFileName = abonent + subAb + "_" + commonFileST; //Для каждого файла
             int ret = genInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve,stFileName, abonent, jProgressBar1);
             if(ret!=0) return -1;
@@ -247,6 +251,7 @@ public class Generator {
         return 0;
     }
     
+    // --- Генерация файлов HMI ---
     public static String genHMI(TableDB ft, JProgressBar jProgressBar) throws IOException {
         int casedial = JOptionPane.showConfirmDialog(null, "Листы мнемосхем для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if(casedial != 0) return ""; //0 - yes, 1 - no, 2 - cancel
@@ -295,15 +300,19 @@ public class Generator {
         ArrayList<Node> hmiNodeList = HMIcfg.getHeirNode(findNode);//Находим все ноды
         String ret = "";
         for(Node hmiNode: hmiNodeList){
+            //System.out.println(hmiNode.getNodeName()); 
+            ArrayList<String> removedVar = getListRemoveVarValue(HMIcfg, hmiNode); // получить лист нод( списка  VarValue которые не вносим)
+            
             String typeGCT = HMIcfg.getDataAttr(hmiNode, "type");
-            boolean isIF = typeGCT==null;
+            boolean isIF = typeGCT==null; // если есть аттрибут type то IF не будет работать
+            
             String uuidGCT = null;//HMIcfg.getDataAttr(hmiNode, "typeUUID");
             String[] findInBig = {"GraphicsCompositeFBType","Name",typeGCT};
             Node myBlock = bigSax.findNodeAtribute(bigRoot, findInBig);
             ArrayList<String[]> addVarsData = new ArrayList<>();
             if(myBlock!=null){
                 uuidGCT = bigSax.getDataAttr(myBlock, "UUID");
-                getAddVars(HMIcfg, hmiNode, addVarsData);
+                getAddVars(HMIcfg, hmiNode, addVarsData); // Поиск дополнительных строк
             }
             String uuidNameRuGCT = "D11E59B74DBD1F394957C4876E4DCD20";//HMIcfg.getDataAttr(hmiNode, "nameRuUUID");
             String uuidPrefAbGCT = "7B21228345FE145C1039349D18AF2C71";//HMIcfg.getDataAttr(hmiNode, "prefAbUUID");
@@ -327,9 +336,7 @@ public class Generator {
                 return null;
             }
             ArrayList<String> hintAL = new ArrayList<>();
-
-            getHintParts(HMIcfg, hmiNode,hintAL);//new ArrayList<>();
-
+            getHintParts(HMIcfg, hmiNode,hintAL);// Собрать данные по ноде Hint(формируем подсказку)
             targetFile = HMIcfg.getDataAttr(hmiNode, "file");//получили имя файла в который записываю верхний уровень,который в последствии читаем AI_HMI_inc
             String folderNodeName=null;
             String nameGCTcommon = HMIcfg.getDataAttr(hmiNode, "name");
@@ -375,7 +382,8 @@ public class Generator {
             Double posElemX = startPosX, posElemY = startPosY;
             int pageCnt = 1;
             String nameCol = HMIcfg.getDataAttr(hmiNode, "ruName");
-            boolean isAlarm = HMIcfg.getDataAttr(hmiNode, "isAlarm")!=null;
+            boolean isAlarm = HMIcfg.getDataAttr(hmiNode, "isAlarm")!=null; //!!!!!!!!!!!!!!Добавить проверку, что атрибут isAlarm == true
+            
             //-------------------- начинаем цикл по строкам таблицы ------------------------------------
             int jpgMax = ft.tableSize();
             for (int i = 0; i < jpgMax; i++) {
@@ -383,6 +391,7 @@ public class Generator {
                 String ruName = ft.getCell(nameCol, i);
                 if("".equals(ruName)) continue;
 //                if(!"".equals(ruName)){
+                    
                     if(isIF){//ищем условния выбора типа блока
                         String[] gctData=new String[3];
                         hintAL.clear();
@@ -393,6 +402,7 @@ public class Generator {
                         isAlarm = gctData[2]!=null;
                     }
                     //-- конструируем ФБ
+                    FBV objectFB = new FBV();// Объект FB
                     String fbUUID = UUID.getUIID().toUpperCase();
                     String[] fbData = {"FB","Name",     abonent + subAb + typeGCT + "_"+ i, 
                                             "Type",     typeGCT, 
@@ -400,31 +410,41 @@ public class Generator {
                                             "UUID",     fbUUID, 
                                             "X",        ""+fbX, 
                                             "Y",        ""+fbY};
-                    Node nodeFB = HMIsax.insertChildNode(FBNetwork, fbData);
+                    Node nodeFB = HMIsax.insertChildNode(FBNetwork, fbData); // Вносим сигнал FB в файл
                     fbX += 350; if(fbX > 1200){fbY+=420; fbX = 0;}//распределение ФБ по листу редактора Сонаты
-                    //-- Начинаем заполнять ФБ содержимым
+                    
+                    //-- Заполнение ФБ содержимым
                     String fbChildNode[] = {"VarValue", 
                                             "Variable", "Name", 
                                             "Value",    "'" + ruName + "'",
                                             "Type",     "STRING", 
                                             "TypeUUID", "38FDDE3B442D86554C56C884065F87B7"};//создали массив элемента вариабле ПОС
-                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
 
                     String tagName = ft.getCell("TAG_NAME_PLC", i);
                     fbChildNode[2] = "NameAlg";
                     fbChildNode[4] = "'" + tagName + "'";
-                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили NameAlg в ноду
+                    objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
+                    
                     fbChildNode[2] = "PrefStr";
                     fbChildNode[4] = "'" + subAb + isMb + "'";
-                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили PrefStr в ноду
+                    objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
+                    
                     if(isAlarm){
                         fbChildNode[2] = "TagID";
                         fbChildNode[4] = "'" + nodeTable + tagName + "'";
-                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                        //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили TagID в ноду
+                        objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
                     }
+                    
                     fbChildNode[2] = "Num";
                     fbChildNode[4] = "'" + (i+1) + "'";
-                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили Num в ноду
+                    objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
+                    
                     //Create Hint
                     String hint = "";
                     for(String hintPart : hintAL){
@@ -437,8 +457,10 @@ public class Generator {
                     if(!hint.isEmpty()){
                         fbChildNode[2] = "hint";
                         fbChildNode[4] = "'" + hint + "'";
-                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                        //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили Hint в ноду
+                        objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
                     }
+                    
                     if(isAlarm){
                         String disableAlarm = "FALSE";
                         String visiblePar = "TRUE";
@@ -447,16 +469,21 @@ public class Generator {
                         fbChildNode[4] = visiblePar;
                         fbChildNode[6] = "BOOL";
                         fbChildNode[8] = "EC797BDD4541F500AD80A78F1F991834";
-                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                        //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили visiblePar в ноду
+                        objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
+                        
                         fbChildNode[2] = "disableAlarm";
                         fbChildNode[4] = disableAlarm;
-                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                        //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили disableAlarm в ноду
+                        objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
                     }
+                    
                     fbChildNode[2] = "pos";
                     fbChildNode[4] = "(x:=" + posElemX + ",y:=" + posElemY + ")";
                     fbChildNode[6] = "TPos";
                     fbChildNode[8] = "17C82815436383728D79DA8F2EF7CAF2";
-                    HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                    //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили pos в ноду
+                    objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
 
                     if(!addVarsData.isEmpty()) for(String[] s: addVarsData){
                         fbChildNode[2] = s[0];
@@ -465,9 +492,16 @@ public class Generator {
                         fbChildNode[4] = apos + ft.getCell( s[1], i) + apos;
                         fbChildNode[6] =  s[2];
                         fbChildNode[8] =  s[3];
-                        HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                        //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
+                        objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
                     }
 
+                    objectFB.delMatche(removedVar); // Вносим что нужно удалить если таковое есть
+                    for(FBVarValue arr: objectFB.getListValue()){ // получив все данные объекта
+                        HMIsax.insertChildNode(nodeFB, arr.getToXML());//добавим каждую строку в в ноду FB
+                    }
+                    
+                    // прикручиваем связи сигналов в листе 
                     String[] connects = {"Connection",  "Source", "PrefAb", 
                                                         "Destination" , nameGCT + i + ".PrefAb" , 
                                                         "SourceUUID" , uuidPrefAbGCT,
@@ -1344,21 +1378,22 @@ public class Generator {
         return false;
     }
 
+    // --- Поле формирования подсказки ---
     private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData, 
-            String[] gctData,  int i, ArrayList<String> hintAL) {
-        Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");
-        String cond = HMIcfg.getDataAttr(ifNode, "cond");
-        String val = HMIcfg.getDataAttr(ifNode, "val");
-        if(val.equalsIgnoreCase((String)ft.getCell(cond, i))){
-            gctData[0] = HMIcfg.getDataAttr(ifNode, "type");
-            if(gctData[0]==null) return false;
-            setAtherData(HMIcfg, bigSax, ifNode, gctData, addVarsData, hintAL);
-        }else{
-            Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
-            gctData[0] = HMIcfg.getDataAttr(ELS, "type");
-            if(gctData[0]!=null)setAtherData(HMIcfg, bigSax, ELS, gctData, addVarsData, hintAL);
-            else return setTypeHintAdd(HMIcfg, bigSax, ft, ELS, addVarsData, gctData, i, hintAL);
-        }
+        String[] gctData,  int i, ArrayList<String> hintAL) {
+            Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");
+            String cond = HMIcfg.getDataAttr(ifNode, "cond");
+            String val = HMIcfg.getDataAttr(ifNode, "val");
+            if(val.equalsIgnoreCase((String)ft.getCell(cond, i))){
+                gctData[0] = HMIcfg.getDataAttr(ifNode, "type");
+                if(gctData[0]==null) return false;
+                setAtherData(HMIcfg, bigSax, ifNode, gctData, addVarsData, hintAL);
+            }else{
+                Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
+                gctData[0] = HMIcfg.getDataAttr(ELS, "type");
+                if(gctData[0]!=null)setAtherData(HMIcfg, bigSax, ELS, gctData, addVarsData, hintAL);
+                else return setTypeHintAdd(HMIcfg, bigSax, ft, ELS, addVarsData, gctData, i, hintAL);
+            }
         return true;
     }
     
@@ -1370,6 +1405,7 @@ public class Generator {
         getHintParts(HMIcfg, ifNode, hintAL);
     }
     
+    // --- Проверка есть ли дополнительные поля в блоке  ---
     private static void getAddVars(XMLSAX HMIcfg, Node hmiNode, ArrayList<String[]> addVarsData){
         Node addVar = HMIcfg.returnFirstFinedNode(hmiNode, "additionalVar");
         if(addVar!=null){
@@ -1385,6 +1421,7 @@ public class Generator {
         }
     }
     
+    // --- Занос данных из ноды Hint ---
     private static void getHintParts(XMLSAX HMIcfg, Node hmiNode, ArrayList<String> hintAL){
         //ArrayList<String> hintAL = new ArrayList<>();
         Node hintNode = HMIcfg.returnFirstFinedNode(hmiNode, "Hint");
@@ -1395,6 +1432,18 @@ public class Generator {
                 addCol = HMIcfg.getDataAttr(hintNode, "add"+i);
             }
         }
+    }
+    
+    // --- возращает список полей которые удаляются из объекта  FB ---
+    private static ArrayList<String> getListRemoveVarValue(XMLSAX HMIcfg, Node hmiNode){
+        ArrayList<String> disableVar = new ArrayList<>();
+        Node disNode = HMIcfg.returnFirstFinedNode(hmiNode, "Disable");
+        if(disNode != null){
+            for (Node nD: HMIcfg.getHeirNode(disNode)) {
+                        disableVar.add(nD.getNodeName()); // вносим имена нод входящий в состав ноды Disable
+            }
+        }
+        return disableVar;    
     }
 
     private static void insertInOPC(String sig, String nameSpace, String id, String idType, String uuid, String comment,
@@ -1409,4 +1458,83 @@ public class Generator {
         fm.wr(npp+"\t"+sig+"\t"+comment+"\t"+type+"\n");
     }
 
+}
+
+
+
+//  === класс объекта FB===
+class FBV{
+    ArrayList<FBVarValue> listVarValue = new ArrayList<>(); // список переменных полей самого FB
+    
+    // --- Добавляем элементы в список ---
+    public void addVarValue(FBVarValue fbVar){
+        listVarValue.add(fbVar);
+    }
+    
+    // --- Получить список элементов ---
+    public ArrayList<FBVarValue> getListValue(){
+        return listVarValue;
+    }
+    
+    // --- сравнить кто есть в списке и удалить при совпадениях ---
+    public void delMatche(ArrayList<String> match){
+        for(String s: match){
+            for (int i = 0; i < listVarValue.size(); i++) {
+                FBVarValue value= listVarValue.get(i);
+                if(value.getVariable().equals(s)){
+                    listVarValue.remove(i);
+                    break;
+                }
+            }   
+        }
+    }
+}
+
+// === класс переменной VarValue для FB ===
+class FBVarValue{
+    private String NameNode = "VarValue";
+    private String Type = "";
+    private String TypeUUID = "";
+    private String Value = "";
+    private String Variable = "";
+
+    public FBVarValue(String Type, String TypeUUID, String Value, String Variable){
+        this.Type = Type;
+        this.TypeUUID = TypeUUID;
+        this.Value = Value;
+        this.Variable = Variable;
+    }
+    
+    public FBVarValue(String[] dataVar){ // Конструктор с массивом из 9 (Временное что бы не переписывать Льва алгоритмы)
+        if(dataVar.length >= 9){
+            this.NameNode = dataVar[0];
+            this.Type = dataVar[6];
+            this.TypeUUID = dataVar[8];
+            this.Value = dataVar[4];
+            Variable = dataVar[2];
+        }
+    }
+    
+    public String getType(){
+        return Type;
+    }
+    public String getTypeUUID(){
+        return TypeUUID;
+    }
+    public String getValue(){
+        return Value;
+    }
+    public String getVariable(){
+        return Variable;
+    }
+    
+    // --- Подготовленные данные для занесения в ноду XML ---
+    public String[] getToXML(){
+        String[] strXml = {NameNode,
+            "Variable", Variable,
+            "Value",Value,
+            "Type", Type,
+            "TypeUUID", TypeUUID};
+        return strXml;
+    }
 }
