@@ -368,12 +368,20 @@ public class Generator {
             }
             //Определяем УУИДы этого блока ---
             String arrForFindNode[] = {"VarDeclaration", "Name", "NameRu"};
-            //Node il = HMIsax.findNodeValue(gctNode, arrForFindNode);
+            //Node il = HMIsax.findNodeValue(gctNode, arrForFindNode); // Почему это все закоменчено?
             String NameRuUUID = "31E704A94C1D0BCA16C48C8F563CAB4B";//il.getAttributes().getNamedItem("UUID").getNodeValue();
             arrForFindNode[2] = "PrefAb";
             //il = HMIsax.findNodeValue(gctNode, arrForFindNode);
             String PrefAbUUID = "7DF53A3B47B1075B9D3AE78253FC271B";//il.getAttributes().getNamedItem("UUID").getNodeValue();
-
+            
+            // ---  Nazarov новый метод поиска---
+            for(HashMap<String, String> h: getTBaseAlarmFromIEC_HMI()){ // получить уиды из мнемосхемы
+                boolean UUIDPrefAb = h.get("Name").equals("PrefAb"); // Поиск айди русского имени значения ноды
+                boolean UUIDNameRU = h.get("Name").equals("NameRU");
+                if(UUIDPrefAb) PrefAbUUID = h.get("UUID");
+                if(UUIDNameRU) NameRuUUID = h.get("UUID");
+                
+            }
             Node FBNetwork = HMIsax.returnFirstFinedNode(gctNode, "FBNetwork");         //нашел FBNetwork
             if(FBNetwork!=null) HMIsax.removeNode(FBNetwork);                           //удалили содержимое ноды FBNetwork
             FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
@@ -494,9 +502,11 @@ public class Generator {
                         fbChildNode[8] =  s[3];
                         //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
                         objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
+                        
                     }
 
                     objectFB.delMatche(removedVar); // Вносим что нужно удалить если таковое есть
+                    
                     for(FBVarValue arr: objectFB.getListValue()){ // получив все данные объекта
                         HMIsax.insertChildNode(nodeFB, arr.getToXML());//добавим каждую строку в в ноду FB
                     }
@@ -1381,7 +1391,7 @@ public class Generator {
     // --- Поле формирования подсказки ---
     private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData, 
         String[] gctData,  int i, ArrayList<String> hintAL) {
-            Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");
+            Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF"); // выдергиваем ноду с условием выбора типа 
             String cond = HMIcfg.getDataAttr(ifNode, "cond");
             String val = HMIcfg.getDataAttr(ifNode, "val");
             if(val.equalsIgnoreCase((String)ft.getCell(cond, i))){
@@ -1434,7 +1444,7 @@ public class Generator {
         }
     }
     
-    // --- возращает список полей которые удаляются из объекта  FB ---
+    // --- читаем Ноду Disable ( возращает список полей которые удаляются из объекта  FB )---
     private static ArrayList<String> getListRemoveVarValue(XMLSAX HMIcfg, Node hmiNode){
         ArrayList<String> disableVar = new ArrayList<>();
         Node disNode = HMIcfg.returnFirstFinedNode(hmiNode, "Disable");
@@ -1443,8 +1453,41 @@ public class Generator {
                         disableVar.add(nD.getNodeName()); // вносим имена нод входящий в состав ноды Disable
             }
         }
+        getTBaseAlarmFromIEC_HMI();
         return disableVar;    
     }
+    
+    // --- получить объект TBaseAlarm из HMI (его свежие UID)---
+    private static List<HashMap<String,String>> getTBaseAlarmFromIEC_HMI(){
+        List<HashMap<String,String>> dataFromTBaseAlarm = new ArrayList<>();
+        
+        //------------------------------------ Читаем HMI файл Сонаты -----------------------------------------------
+        XMLSAX bigSax = new XMLSAX();
+        String hmiProjectFile = globVar.desDir + File.separator + "Design" + File.separator + 
+                globVar.DB.getDataCell("Abonents", "Abonent",  globVar.abonent, "HMI") + ".iec_hmi"; // Нужен для поиска УУИДов листов
+        Node nRoot = bigSax.readDocument(hmiProjectFile);
+        if (nRoot == null) {
+            FileManager.loggerConstructor("Не найден файл проекта "+hmiProjectFile);
+            return null;
+        }
+        //bigSax.returnFirstFinedNode("");
+        String[] hmiTBaseAlarm = {"CompositeFBType", "Name", "TBaseAlarm"};
+        Node NodeTBaseAlarm = bigSax.findNodeAtribute(hmiTBaseAlarm); // ищем элемент TBaseAlarm по названию ноды и параметру
+        
+        if (NodeTBaseAlarm == null) {
+            FileManager.loggerConstructor("В файле "+hmiProjectFile + " не найдено" + hmiTBaseAlarm.toString());
+            return null;
+        }
+        // собираем пареметры если они есть
+        
+        for(Node n: bigSax.getHeirNode(bigSax.returnFirstFinedNode(NodeTBaseAlarm, "InputVars"))){
+            //System.out.println(n.getNodeName());
+            dataFromTBaseAlarm.add(bigSax.getDataNode(n));
+        }
+        
+        return dataFromTBaseAlarm;        
+    }
+    
 
     private static void insertInOPC(String sig, String nameSpace, String id, String idType, String uuid, String comment,
                                             XMLSAX opcSax, FileManager fm, String type, int npp) {
