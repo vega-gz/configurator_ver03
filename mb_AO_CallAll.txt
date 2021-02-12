@@ -2,7 +2,7 @@
             <Variable UUID="82129799472FD770F6DFF694CFA2D3AB" Name="tmpInt" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
             <Variable UUID="F1E5E22F4812E86A8B7F86A55E2D2A87" Name="tmpReal" Type="REAL" TypeUUID="42E054C8453789BBDD3594B53BDC7DE5" Usage="internal" />
         </Variables>
-        <ST><![CDATA[if init = false then
+        <ST><![CDATA[if not init then
 //------------------------------- аргументы функции инициализации --------------------------------
 //										min - Нижний порог ан.выхода в физ.единицах
 //										|	max - Верхний порог ан.выхода в физ.единицах

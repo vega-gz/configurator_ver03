@@ -1,0 +1,11 @@
+       <Variables>
+            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="str" Type="T_GPA_DI_FromHMI" TypeUUID="UE3JVFQJIML4G6DNN66HNOUWQY" Usage="inout" />
+            <Variable UUID="GCIFTHK4EREUVISDUUQFBML7JA" Name="c" Type="BOOL" Usage="input" />
+        </Variables>
+        <ST><![CDATA[
+//----------------------- Включение симуляции сигналов DI -----------------------------------------
+		//Начало сгенерированного кода
+		//Конец сгенерированного кода
+		]]></ST>
+    </Function>
+</Data>

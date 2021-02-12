@@ -1,0 +1,11 @@
+        <Variables>
+            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="str" Type="T_GPA_AI_FromHMI" TypeUUID="QZMKW64YJR6I72XKQ6JWDCTXIE" Usage="inout" />
+            <Variable UUID="7XPHDU6QNHBEZFGZ6LLZBVD5UU" Name="c" Type="BOOL" Usage="input" />
+        </Variables>
+        <ST><![CDATA[
+		//----------------------- Включение симуляции сигналов AI -----------------------------------------
+		//Начало сгенерированного кода
+		//Конец сгенерированного кода
+		]]></ST>
+    </Function>
+</Data>

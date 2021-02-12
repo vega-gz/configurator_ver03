@@ -409,7 +409,9 @@ public class addArchive extends javax.swing.JFrame {
         list1.removeAllElements();
         TableTools.setSignalListFromDB(list1, tabList, abonent, jCheckBox1.isSelected(), archList, plusList);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
-    //Кнопка "Приложение"
+    
+
+    // --- Кнопка "Приложение" ---
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int x = tableModel.getRowCount(); // Определяем, сколько у нас видов архивов
         int[][] archTyps = new int[x][4]; // Создаём прямоугольный массив, что бы не таскать с собой всю структуру таблицы
@@ -438,7 +440,7 @@ public class addArchive extends javax.swing.JFrame {
                     String hmiApp = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI");
                     //------------------------------------------------------------------------------------
                     for(String exemplar: exArr){
-                        ret = Generator.genArchive(archTyps, archList, exemplar, jProgressBar1, hmiApp); // вызываем функцию генерации
+                        ret = Generator.genArchive(archTyps, archList, exemplar, jProgressBar1, hmiApp); // вызываем функцию генерации "Архивов"
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);

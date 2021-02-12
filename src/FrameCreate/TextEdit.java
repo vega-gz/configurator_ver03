@@ -1,24 +1,32 @@
 package FrameCreate;
 
 import globalData.globVar;
+import Tools.TimerDialog;
 
 /*@author lev*/
 public class TextEdit extends javax.swing.JFrame {
+
     TableDB tdb;
     boolean ren;
+
     
     public TextEdit(String title, TableDB tdb, boolean rename) {
         this.tdb = tdb;
         initComponents();
         this.setTitle(title);
         ren = rename;
-        if(ren) jTextArea1.append(tdb.tableName);
-        else jTextArea1.append(tdb.comment);
+        if (ren) {
+            jTextArea1.append(tdb.tableName);
+        } else {
+            jTextArea1.append(tdb.comment);
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
@@ -57,14 +65,25 @@ public class TextEdit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(ren){
-            globVar.DB.renameTable(tdb.tableName, jTextArea1.getText());
+        int statusRequestDB;
+        if (ren) {
+            statusRequestDB = globVar.DB.renameTable(tdb.tableName, jTextArea1.getText());
             tdb.tableName = jTextArea1.getText();
-        }else{
+        } else {
             tdb.comment = jTextArea1.getText();
+            statusRequestDB = -1;
         }
-        tdb.setTitle(tdb.tableName+" :"+tdb.comment);
+        tdb.setTitle(tdb.tableName + " :" + tdb.comment);
+        if (statusRequestDB == 0) {
+
+            //getTimer(1000); // Запуск таймера
+            jOptionPane1.showMessageDialog(null, tdb.tableName + " переименнована ."); //сообщение
+            jOptionPane1.updateUI();
+            this.dispose(); // выход
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+   
 
     /**
      * @param args the command line arguments
@@ -96,6 +115,7 @@ public class TextEdit extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 //new TextEdit().setVisible(true);
             }
         });
@@ -103,6 +123,7 @@ public class TextEdit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

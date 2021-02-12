@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConfigHMI project="AT_HMI.iec_hmi">
+	<AI>
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+	</AI>
+	<FR>
+		<GenHMI name="FR_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521"  ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallFR_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+	</FR>
+	<AO>
+		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_AO_200520" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+	</AO>
+	<DI>
+		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
+			<Hint add0="Наименование" add1=", инв=" add2="Инверсия" add3=", задержка="  add4="Задержка" add5=", тип сигнала: " add6="Тип_сигнала" />
+		</GenHMI>
+	</DI>
+	<DO>
+		<GenHMI name="DO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="21" type="T_Base_DO_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="DD87E9C742BB69689219F08BAD99F4B8" -->
+			<Hint add0="Наименование" add1=" тип сигнала: " add2="Тип_сигнала" add3=", КЦУ: "  add4="КЦУ" 
+			      add5=", адрес " add6="Адрес_1" add7="," add8="Адрес_2" />
+		</GenHMI>
+	</DO>
+	<mb_AI>
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730" incY="22" ruName="Наименование">
+			<IF cond="dataType" val="ABCDEFGH" type="T_BaseSen_200513">
+				<Hint/>
+				<additionalVar/>
+				<ELSE>
+					<IF  cond="dataType" val="WORD">
+						<ELSE type="T_BaseAnIn_200521" isAlarm="true">
+							<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".." add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+							<additionalVar>
+								<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+							</additionalVar>
+						</ELSE>
+					</IF>
+				</ELSE>
+			</IF>
+		</GenHMI>
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+	</mb_AI>
+	<mb_AO>
+		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_AO_200520" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+	</mb_AO>
+	<mb_DI>
+		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
+			<Hint add0="Наименование" add1=", " add2="доп_инфо" add3=", МВ адр. "  add4="mbAddr"/>
+		</GenHMI>
+	</mb_DI>
+	<mb_DO>
+		<GenHMI name="DO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="21" type="T_Base_DO_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="DD87E9C742BB69689219F08BAD99F4B8" -->
+			<Hint add0="Наименование" add1=", " add2="доп_инфо" add3=", МВ адр. "  add4="mbAddr"/>
+		</GenHMI>
+	</mb_DO>
+	<APS>
+	<!-- <GenHMI name="Alarm_" maxY="1000" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" type="TBaseAlarm" ruName="Наименование" isAlarm="false"> 
+			<Hint/>
+			<Num/>
+			<visiblePar/>
+			<disableAlarm/>
+			<pos/>
+			<additionalVar>
+				<Category tableCol="Status" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7">
+					switch swt="Status" default="0">
+						<case val="АО сс" def="10000"/>
+						<case val="АО бс" def="10000"/>
+						<case val="АС"    def="10000"/>
+						<case val="ВО сс" def="10700"/>
+						<case val="ВО бс" def="10700"/>
+						<case val="ПС"    def="10100"/>
+					</switch
+				</Category>
+			</additionalVar>
+		</GenHMI> 
+		<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'Резерв'" Variable="Name"/>
+<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'Res_01'" Variable="NameAlg"/>
+<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="''" Variable="PrefStr"/>
+<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'AIRes_01'" Variable="TagID"/>
+<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'1'" Variable="Num"/>
+<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'Резерв [-45.0..820.0 °С]'" Variable="hint"/>
+<VarValue Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Value="FALSE" Variable="visiblePar"/>
+<VarValue Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Value="TRUE" Variable="disableAlarm"/>
+<VarValue Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" Value="(x:=20.0,y:=20.0)" Variable="pos"/>
+<VarValue Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Value="1" Variable="Analog_Ph_N"/> -->
+		<GenHMI name="Alarm_" maxY="1000" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" type="TBaseAlarm" ruName="Наименование" isAlarm="false"> 
+			<PrefStr add0="APS."/>
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 
+			<additionalVar>
+				<Category Type="STRING">
+					<switch swt="Status" default="0">
+						<case val="АО сс" def="10000"/>
+						<case val="АО бс" def="10000"/>
+						<case val="АС"    def="10000"/>
+						<case val="ВО сс" def="10700"/>
+						<case val="ВО бс" def="10700"/>
+						<case val="ПС"    def="10100"/>
+					</switch>
+				</Category>
+				<Source Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АО сс" def="АС"/>
+						<case val="АО бс" def="АС"/>
+						<case val="АС"    def="АС"/>
+						<case val="ВО сс" def="ВО"/>
+						<case val="ВО бс" def="ВО"/>
+						<case val="ПС"    def="ПС"/>
+					</switch>
+				</Source>	
+				<TAG Type="STRING" >
+					<switch swt="Status" default="">
+						<case val="АО сс" def="AOs"/>
+						<case val="АО бс" def="AOb"/>
+						<case val="АС"    def="AS"/>
+						<case val="ВО сс" def="VOs"/>
+						<case val="ВО бс" def="VOb"/>
+						<case val="ПС"    def="PS"/>
+					</switch>
+				</TAG>
+			</additionalVar>	
+		</GenHMI>	
+	</APS>
+</ConfigHMI>
