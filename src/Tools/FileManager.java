@@ -5,7 +5,6 @@
  */
 package Tools;
 
-import Tools.StrTools;
 import static Tools.StrTools.getAttributValue;
 import XMLTools.XMLSAX;
 import globalData.globVar;
@@ -41,7 +40,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Node;
 
-//import main.globVar;
 public class FileManager {
 
     public static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
@@ -234,7 +232,6 @@ public class FileManager {
     public int MoveFile(String fileName, String srcDir, String dstDir) {
         File originalFile = new File(srcDir, fileName);
         File newFile = new File(dstDir, fileName);
-
         if (originalFile.exists() && !newFile.exists()) {
             if (originalFile.renameTo(newFile)) {
             } else {
@@ -633,8 +630,14 @@ public class FileManager {
         System.out.println("Выполнено замен " + cnt);
         return cnt;
     }
-//--Переименование INT
 
+    /**
+     * Метод заменяет русское и алгоритмическое имена в базе данных и XML файлах
+     * теми значениями ,которые ввел пользователь в соответствущих ячейка
+     * таблицы.
+     *
+     * @param dir адрес по которому получаем элементы
+     */
     public static int renameIntFile(String dir) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
         String expInt = "int";
@@ -706,7 +709,17 @@ public class FileManager {
         return cnt;
     }
 
-    //---МЕТОД ЗАМЕНЫ ИМЕН И АЛГОРИТМИЧЕСКИХ ИМЕН В TYPE ФАЙЛАХ-----Grigory
+    /**
+     * Метод заменяет русское и алгоритмическое имена в базе данных и XML файлах
+     * теми значениями ,которые ввел пользователь в соответствущих ячейка
+     * таблицы.
+     *
+     * @param dir адрес по которому получаем элементы
+     * @param name лист Русских имен и Алгоритмических имен,которые были
+     * изменены
+     * @param nameTable наименование таблицы,в которой была произведены замена
+     * 
+     */
     @SuppressWarnings("empty-statement")
     public boolean ChangeIntTypeFile(String dir, ArrayList<String[]> name, String nameTable, JProgressBar jProgressBar1) {//newName---массив замен   Name---массив из БД
         File[] filesInDirectory = new File(dir + File.separator + "Design").listFiles();//получаем список элементов по указанному адресу
@@ -716,7 +729,9 @@ public class FileManager {
         String comment, alg, newComment, newAlg;
         String[] nameLine;
         boolean isErr = false;
-        //пробегаемся по файлам в поисках соответствия 
+        /**
+         * пробегаемся по файлам в поисках соответствия
+         */
         for (File findType : filesInDirectory) {
             nameFile = findType.getName();//имя файла с расширением(в котором в данный момент ищем)
             String nT = "T_" + nameTable;
@@ -750,7 +765,7 @@ public class FileManager {
                 }
                 xmlsax.writeDocument(globVar.desDir + File.separator + "Design" + File.separator + nameFile);
             }
-            
+
         }
         return isErr;
     }

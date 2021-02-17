@@ -5,7 +5,6 @@
  */
 package ReadWriteExcel;
 
-import static Tools.TableTools.getRow;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -136,10 +135,18 @@ public class ExcelAdapter implements ActionListener {
             system = Toolkit.getDefaultToolkit().getSystemClipboard();
             system.setContents(stsel, stsel);
             
+           
+            
+            
             listener.fixOldData();
             for(int i = 0; i < row; i++){
                 jTable1.setValueAt("", rowsselected, i);
             }
+            
+            
+            
+            
+            
             listener.tableChanged();
             
 
