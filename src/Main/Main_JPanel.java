@@ -27,6 +27,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import org.w3c.dom.Node;
@@ -40,6 +41,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     String filepatch, type;
     File excel = null;
     ProgressBar pb = null;
+    DefaultListModel listModel = new DefaultListModel(); // модель списка баз
 
     public Main_JPanel() {
         globVar.DB = new DataBase();
@@ -89,6 +91,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jButton10_CanceCreatelDB = new javax.swing.JButton();
         label1 = new java.awt.Label();
         jTextField6 = new javax.swing.JTextField();
+        jDialog_ListBase = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
@@ -109,21 +114,20 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuLoger = new javax.swing.JMenuItem();
-        jMenuBase = new javax.swing.JMenu();
-        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         jFrameTable.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -317,6 +321,25 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialog_ListBase.setTitle("Список баз");
+
+        jList1.setModel(listModel);
+        jScrollPane1.setViewportView(jList1);
+
+        javax.swing.GroupLayout jDialog_ListBaseLayout = new javax.swing.GroupLayout(jDialog_ListBase.getContentPane());
+        jDialog_ListBase.getContentPane().setLayout(jDialog_ListBaseLayout);
+        jDialog_ListBaseLayout.setHorizontalGroup(
+            jDialog_ListBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_ListBaseLayout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
+        );
+        jDialog_ListBaseLayout.setVerticalGroup(
+            jDialog_ListBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -426,26 +449,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jMenu2.setText("Настройки");
-
-        jMenuItem1.setText("сменить папку проекта");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuItem9.setText("Сменить БД");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem9);
-
-        jMenuBar1.add(jMenu2);
-
         jMenu3.setText("Утилиты");
 
         jMenuItem6.setText("Переименовать *.int файлы ");
@@ -472,47 +475,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu3.add(menuLoger);
 
-        jMenuBase.setText("Работа с базой данных");
-
-        jMenuItem_AnotherBase.setText("Перенос таблиц в другую базу");
-        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jMenuItem_AnotherBaseComponentAdded(evt);
-            }
-        });
-        jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_AnotherBaseActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem_AnotherBase);
-
-        jMenuItem3.setText("Сменить БД");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem3);
-
-        jMenuItem7.setText("Инспекция таблиц");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem7);
-
-        jMenuItem8.setText("Создать новую базу");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenuBase.add(jMenuItem8);
-
-        jMenu3.add(jMenuBase);
-
         jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Проект");
@@ -533,7 +495,64 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
+        jMenuItem1.setText("сменить папку проекта");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Работа с БД");
+
+        jMenuItem3.setText("Сменить БД");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
+        jMenuItem_AnotherBase.setText("Перенос таблиц в другую базу");
+        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jMenuItem_AnotherBaseComponentAdded(evt);
+            }
+        });
+        jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_AnotherBaseActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem_AnotherBase);
+
+        jMenuItem7.setText("Инспекция таблиц");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
+
+        jMenuItem8.setText("Создать новую базу");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMenuItem9.setText("Список баз подключенного сервера");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem9);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -644,10 +663,25 @@ public final class Main_JPanel extends javax.swing.JFrame {
             return;
         }
         JFileChooser fileopen = new JFileChooser(globVar.desDir);
+        fileopen.setFileFilter(new FileFilter() { // фильтр файлов
+            public String getDescription() {
+                return "Excel 97-2003  (*.xls)";
+            }
+
+            //@Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    String filename = f.getName().toLowerCase();
+                    return filename.endsWith(".xls");
+                }
+            }
+        });
         int ren = fileopen.showDialog(null, "Загрузка данных для " + globVar.abonent);
         if (ren == JFileChooser.APPROVE_OPTION) {
             excel = fileopen.getSelectedFile();// выбираем файл из каталога
-        }
+        }else return;
         pb = new ProgressBar();
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
@@ -885,12 +919,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
         globVar.abonent = (String) jComboBox2.getSelectedItem();
         DoIt di = () -> {
             int ret = 1;
-            try {
-                UnloadExcel loadread = new UnloadExcel(globVar.abonent);
-                JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
-            } catch (ParseException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                
+            UnloadExcel loadread = new UnloadExcel();
+            boolean workUploadExcel = loadread.runUnloadExcel(globVar.abonent);
+            if(workUploadExcel)JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
+            else JOptionPane.showMessageDialog(null, "Ошибки в выгрузке.");
+        
             pb.setVisible(false);
             globVar.processReg.remove(processName);
         };
@@ -1020,13 +1054,20 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jDialog_createBase.dispose();
     }//GEN-LAST:event_jButton10_CanceCreatelDBActionPerformed
 
-    // --- Еще один пукт сменить базу ---
+    // --- вывод баз подключенного сервера ---
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        JFrame changeDB = new ChangeDB(jTree1, this);
-        TableTools.setFrameListener(changeDB, null, null, null); // слушателей фреймов
-        changeDB.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        changeDB.setTitle("Сменить БД");
-        changeDB.setVisible(true);
+        listModel.clear();
+        ArrayList<String> listDB = globVar.DB.getListBase();
+        for (int i = 0; i < listDB.size(); i++) {
+            listModel.add(i, listDB.get(i));
+        }
+        
+        //validate();
+        jDialog_ListBase.setSize(400, 200);
+        jDialog_ListBase.setLocationRelativeTo(null); // по центру экрана
+        jDialog_ListBase.setVisible(true);
+        
+                
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
@@ -1134,6 +1175,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog_ListBase;
     private javax.swing.JDialog jDialog_createBase;
     private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;
@@ -1144,11 +1186,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuBase;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1160,6 +1202,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItem_AnotherBase;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;

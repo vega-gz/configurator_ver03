@@ -1,0 +1,37 @@
+        <Variables>
+             <Variable UUID="7XX6VYR6AM2ETDDCSCT2HPLXIE" Name="unlock" Type="BOOL" Usage="input" />
+            <Variable UUID="YNOQLLIBK32UJKTBDQTVDMXAXE" Name="snd" Type="T_Sound" TypeUUID="S5AARPCXPUCE7NVFGZCHJQJIKM" Usage="inout" />
+            <Variable UUID="S5XX52SRL56EVGR7ERWQPIZKUE" Name="snd_off" Type="BOOL" Usage="input" />
+            <Variable UUID="L4PWBH5IJNGUFPPCFEL3W7OUXY" Name="i" Type="INT" Usage="internal" />
+        </Variables>
+        <ST><![CDATA[
+//------------------------------- аргументы функции инициализации --------------------------------
+// 1                                Условие срабатывания АПС
+// 2                                |   				Задержка срабатывания, с
+// 3                                |   				|     Деблокировка
+// 4                                |   				|     |   			Сигнализация АПС
+// 5                                |   				|     |   			|     						Внутренний тег АПС
+// 6                                |   				|     |   			|     						|    				Индекс активного аларма (для первопричины)
+// 7                                |   				|     |   			|     						|    				|   		Индекс текущего аларма
+// 8                                |   				|     |   			|     						|    				|   		|   
+// 9                                |   				|     |   			|     						|    				|   		|   
+//10                                |   				|     |   			|     						|    				|   		|   
+//11                                |  					|     |   			|     						|    				|   		|   
+//12                                |   				|     |   			|     						|    				|   		|   
+//13                                |   				|     |   			|     						|    				|   		|   
+//APS_Processing(GPA_TS.ZH_PmK AND GPA_DI.Lm_MBK_dAn,  0.0, unlock, GPA_APS.Lm_MBK_dAn, GPA_APS_Internal.Lm_MBK_dAn, GPA_FirstOutIndex, i); 
+
+for i :=0 to 8 do AlarmTarget[i] := FALSE; end_for; 
+if unlock then GPA_FirstOutIndex := 0; end_if;
+new_wrn := false;
+new_crs := false;
+i:=0;
+//=============================================== Сигнализация ========================================================================================================
+//Начало сгенерированного кода APS_Processing
+//Конец сгенерированного кода
+//=============================================== Звук ================================================================================================================
+snd.alarm := (new_wrn or ps_im) or snd.alarm and not (snd_off or unlock); // сигн. тревога (предупр.)
+snd.crash := new_crs or snd.crash and not (snd_off or unlock); // сигн. авария
+snd.mute  := (AlarmTarget[1] or AlarmTarget[2] or AlarmTarget[3] or AlarmTarget[4] or AlarmTarget[5]) and not snd.crash  or (AlarmTarget[6] or AlarmTarget[7] or AlarmTarget[8] ) and not snd.alarm; //признак отключения звука
+]]></ST>
+    </Function></Data>

@@ -1,0 +1,10 @@
+       <Variables>
+            <Variable UUID="RWRCJSXSDLMEBBK5F6YB3AOKAQ" Name="c" Type="BOOL" Usage="input" />
+        </Variables>
+        <ST><![CDATA[
+//----------------------- Включение симуляции сигналов DI -----------------------------------------
+		//Начало сгенерированного кода
+		//Конец сгенерированного кода
+		]]></ST>
+    </Function>
+</Data>

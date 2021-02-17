@@ -63,7 +63,8 @@ public class TableDB extends javax.swing.JFrame {
         if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
  
         initComponents();
-                
+        
+        
         
         RegistrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
         closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
@@ -187,7 +188,7 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("HMI");
+        jButton1.setText("HW");
         jButton1.setMargin(new java.awt.Insets(2, 2, 2, 2));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +196,7 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("HW");
+        jButton3.setText("HMI");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -209,9 +210,9 @@ public class TableDB extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -224,16 +225,15 @@ public class TableDB extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
@@ -254,12 +254,11 @@ public class TableDB extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addComponent(jButton3)
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(663, Short.MAX_VALUE))
+                .addContainerGap(549, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addGap(32, 32, 32)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addGap(0, 28, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -271,7 +270,6 @@ public class TableDB extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -411,32 +409,7 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String processName = "Генерация из таблицы";
-        if(globVar.processReg.indexOf(processName)>=0){
-            JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
-            return;
-        }
-        DoIt di = () -> {
-            if(!Tools.isDesDir()) return;
-            String retHMI = null;
-            try {
-                retHMI = Generator.genHMI(this, jProgressBar1);
-            } catch (IOException ex) {
-                //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(retHMI==null) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
-            else if(!"".equals(retHMI)) JOptionPane.showMessageDialog(null, "Создано "+retHMI); // Это сообщение 
-            jProgressBar1.setValue(0);
-            globVar.processReg.remove(processName);
-         };
-        
-        BackgroundThread bt = new BackgroundThread("Генерация HMI", di);
-        bt.start();
-        globVar.processReg.add(processName);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-             if(!Tools.isDesDir()) return;
+        if(!Tools.isDesDir()) return;
         String processName = "Генерация из таблицы";
         if(globVar.processReg.indexOf(processName)>=0){
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
@@ -455,6 +428,30 @@ public class TableDB extends javax.swing.JFrame {
             jProgressBar1.setValue(0);
          };
         BackgroundThread bt = new BackgroundThread("Генерация HW", di);
+        bt.start();
+        globVar.processReg.add(processName);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String processName = "Генерация из таблицы";
+        if(globVar.processReg.indexOf(processName)>=0){
+            JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
+            return;
+        }
+        DoIt di = () -> {
+            if(!Tools.isDesDir()) return;
+            String retHMI = null;
+            try {
+                retHMI = Generator.genHMI(this, jProgressBar1);
+            } catch (IOException ex) {
+                //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(retHMI==null) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+            else if(!"".equals(retHMI)) JOptionPane.showMessageDialog(null, "Создано "+retHMI); // Это сообщение 
+            jProgressBar1.setValue(0);
+            globVar.processReg.remove(processName);
+         };
+        BackgroundThread bt = new BackgroundThread("Генерация HMI", di);
         bt.start();
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton3ActionPerformed

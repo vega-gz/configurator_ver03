@@ -579,15 +579,17 @@ public class DataBase implements Observed {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yy_MM_dd_HH_mm_ss");
         String dt = formatForDateNow.format(new Date());
         //connectionToBase(); // вызов Фукция подключения к базе ALTER TABLE products RENAME TO items;
+        String sql = null;
         try {
             stmt = connection.createStatement();
-            String sql = "ALTER TABLE \""+ nameT +"\" RENAME TO \"Del_"+dt+"_"+nameT+"\";";
+            sql = "ALTER TABLE \""+ nameT +"\" RENAME TO \"Del_" + dt + "_"+nameT+"\";";
             stmt.executeUpdate(sql);
             System.out.println("Del_"+dt+"_"+nameT + " RENAME successfully");
             System.out.println(sql);
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Failed RENAME TABLE");
+            System.out.println("Error requrst " + sql);
             e.printStackTrace();
             return -1;
         }

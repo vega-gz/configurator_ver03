@@ -1,4 +1,10 @@
 <modbusFormat>
+	<!--ABCD 		 		- то что в Ексел и БД
+	name="FLOAT_ABCD" 		- в Сонате
+	step="2" 				- шаг слова в драйвере
+	chng="0"  				- номер типа данных для обработчика
+	dataType="REAL"			- тип данных в Сонате
+	-->
 	<ABCD 		name="FLOAT_ABCD" 		step="2" chng="0"  dataType="REAL"/>
 	<BADC 		name="FLOAT_BADC" 		step="2" chng="1"  dataType="REAL"/>
 	<CDAB 		name="FLOAT_CDAB" 		step="2" chng="2"  dataType="REAL"/>

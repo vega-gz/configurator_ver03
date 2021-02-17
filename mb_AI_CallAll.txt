@@ -1,7 +1,7 @@
         <Variables>
             <Variable UUID="82129799472FD770F6DFF694CFA2D3AB" Name="repTime" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
         </Variables>
-        <ST><![CDATA[if init = false then
+        <ST><![CDATA[if not init then
 //------------------------------- аргументы функции инициализации --------------------------------
 // 1                               минимум шкалы канала, ед.изм. Не может быть >= max
 // 2                               |    максимум шкалы канала, ед.изм. Не может быть <= min

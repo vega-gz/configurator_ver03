@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ConfigHMI project="C_HMI2.iec_hmi">
+<ConfigHMI project="AT_HMI.iec_hmi">
 	<AI>
 		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
@@ -14,7 +14,7 @@
 			</additionalVar>
 		</GenHMI>
 	</AI>
-	<FR_AI>
+	<FR>
 		<GenHMI name="FR_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521"  ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
@@ -27,7 +27,7 @@
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
 		</GenHMI>
-	</FR_AI>
+	</FR>
 	<AO>
 		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
@@ -131,10 +131,8 @@
 <VarValue Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Value="TRUE" Variable="disableAlarm"/>
 <VarValue Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" Value="(x:=20.0,y:=20.0)" Variable="pos"/>
 <VarValue Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Value="1" Variable="Analog_Ph_N"/> -->
-		<GenHMI name="Alarm_" maxY="1000" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
-			<Edit> 
-				<PrefStr add0="APS." Type="STRING"/> 
-			</Edit>
+		<GenHMI name="Alarm_" maxY="1000" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" type="TBaseAlarm" ruName="Наименование" isAlarm="false"> 
+			<PrefStr add0="APS."/>
 			<Disable> 
 				<Num/>
 				<hint/>
@@ -143,9 +141,8 @@
 				<disableAlarm/>
 				<Analog_Ph_N/>
 			</Disable> 
-			 
 			<additionalVar>
-				<Category Type="DINT" > 
+				<Category Type="STRING">
 					<switch swt="Status" default="0">
 						<case val="АО сс" def="10000"/>
 						<case val="АО бс" def="10000"/>
@@ -153,9 +150,9 @@
 						<case val="ВО сс" def="10700"/>
 						<case val="ВО бс" def="10700"/>
 						<case val="ПС"    def="10100"/>
-					</switch> 
+					</switch>
 				</Category>
-				<Source Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7">
+				<Source Type="STRING">
 					<switch swt="Status" default="">
 						<case val="АО сс" def="АС"/>
 						<case val="АО бс" def="АС"/>
@@ -165,7 +162,7 @@
 						<case val="ПС"    def="ПС"/>
 					</switch>
 				</Source>	
-				<TAG Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7">
+				<TAG Type="STRING" >
 					<switch swt="Status" default="">
 						<case val="АО сс" def="AOs"/>
 						<case val="АО бс" def="AOb"/>

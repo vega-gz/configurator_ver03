@@ -22,18 +22,27 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.w3c.dom.Node;
 
 public final class UnloadExcel {
-
-    public UnloadExcel(String abonent_name) throws ParseException {
+    
+    
+    // --- Запуск обработчика ---
+    public boolean runUnloadExcel(String abonent_name){
+        boolean error = true;
         HSSFWorkbook workbook = new HSSFWorkbook();
         ArrayList<String> tableList = globVar.DB.getListTable();
         for (int i = 0; i < tableList.size(); i++) {
             String name_list = tableList.get(i);
             if (name_list.indexOf(abonent_name + "_") == 0) {
-                createExcelSheet(name_list, workbook);
+                if(createExcelSheet(name_list, workbook) == false){
+                    System.out.println("not find Table" + name_list);
+                    error = false;
+                }
             }
         }
+        return error;
     }
-    public void createExcelSheet(String nameTable, HSSFWorkbook workbook) throws ParseException {
+    
+    boolean createExcelSheet(String nameTable, HSSFWorkbook workbook) {
+        
         int x = nameTable.indexOf("_");
         String book_name = nameTable.substring(0, x);
         String sheetName = nameTable.substring(x + 1);
@@ -45,7 +54,7 @@ public final class UnloadExcel {
         }
         Node tableNode = globVar.sax.returnFirstFinedNode(nodeName);
         if (tableNode == null) {
-            return;
+            return false;
         }
         Node excelNode = globVar.sax.returnFirstFinedNode(tableNode, "EXEL");
         ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);//с одной бутылки на другую прилетел
@@ -86,8 +95,10 @@ public final class UnloadExcel {
         try {
             BufferedOutputStream buf = new BufferedOutputStream(new FileOutputStream(new File(globVar.desDir + File.separator + book_name + ".xls")));
             workbook.write(buf);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 
     }

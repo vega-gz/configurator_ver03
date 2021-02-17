@@ -35,6 +35,21 @@ public class ExecutiveMechanismObject {
     ArrayList<Node> listNodeRootN; // ноды рута AM_Classica, AM_NKU и тд
     XMLSAX readXML; // наш конфиг файл
     ArrayList<Integer> iniySplitList = new ArrayList<>();  // список разделителя таблиц механизмов
+    ArrayList<int[]> bedMark = new ArrayList<>(); // список клеток которые метим для таблицы
+    String columnId = "id";
+    String columnNaim = "Наименование";
+    String columnPLC = "TAG_NAME_PLC";
+    String columnMatches = "matches";
+    String columnTF = "true-false";
+    String columnDCOA = "delayChangeOvertimeAlert"; // Новые колонки из файла Excel
+    String columnDQT = "delayQTimeout";
+    String columnDEOn = "delayExtraOn";
+    String columnDEOff = "delayExtraOff";
+    String columnDNA = "delayNotMoveAlert";
+    String columnDCBA = "delayCircBrkAlert";
+    String columnTypeAM = "TypeAM";
+    String columnNameSmall = "NameSmall";
+    
 
     // Формируем первоначальные данные для пользователя, выбор механизма обработки
     public ExecutiveMechanismObject() {
@@ -70,12 +85,11 @@ public class ExecutiveMechanismObject {
         ArrayList<ArrayList> secondConnectList;
         String nameTableSecond;
         String[] columnsSecond;
-        
-        for (int i=0; i< listNodeRootN.size(); ++i) { //проходим по всем нодам механизмов
+
+        for (int i = 0; i < listNodeRootN.size(); ++i) { //проходим по всем нодам механизмов
             Node n = listNodeRootN.get(i);
-            
-        
-        if (i == 0) {
+
+            if (i == 0) {
                 fistConnectList = getMecha(n, missWE);
                 nameTableFirst = getNameTable(); // получим название таблицы строга после getDataCurrentNode
                 columnsFirst = getColumns(); // получить колонки для построки таблицы
@@ -89,7 +103,7 @@ public class ExecutiveMechanismObject {
                 columnsFirst = Stream.concat(Arrays.stream(columnsFirst), Arrays.stream(columnsSecond)).toArray(String[]::new);  // контекация массивов колонок
                 finalList = connectListMechan(fistConnectList, secondConnectList); // сращиваем Листы Листов            }
 
-        }
+            }
         }
         return finalList;
     }
@@ -114,24 +128,37 @@ public class ExecutiveMechanismObject {
     public String getNameTable() {
         return nameTable;
     }
+    
+    // -- вернуть помеченные ячейки при анализе --
+    public ArrayList<int[]> getMarkColumns() {
+        return bedMark;
+    }
+    
 
     // --- чтение xml и формирование  из него каких таблиц читаем и что сапоставлять ---
     //--- На вход документ и выбранная уже нода, и пропускать сигнал коорорый ни с кем не совпал или нет ---
     public ArrayList<ArrayList> getMecha(Node n, boolean missWE) {
         ArrayList<ArrayList> findingTagname = new ArrayList();//листы для хранения найденного Что передаем
-        nameTable = globVar.abonent + "_AM";    //  формируем название таблицы строится
-        
-        ArrayList<String[]> dataDB = getDataFromBase(nameTable); // Данные таблицы из базы есть ли она
-        
+        nameTable = globVar.abonent + "_AM";    //  формируем название таблицы строится        
         //this.setTitle(nameTable); // Установить заголовок
         columnT = new ArrayList<>(); // заготовка названия колонок
-        columnT.add("Наименование");
-        columnT.add("TAG_PLC");
-        columnT.add("совпадения");
-        columnT.add("true/false");
+        columnT.add(columnId);
+        columnT.add(columnNaim);
+        columnT.add(columnPLC);
+        columnT.add(columnMatches);
+        columnT.add(columnTF);
+        columnT.add(columnDCOA);
+        columnT.add(columnDQT);
+        columnT.add(columnDEOn);
+        columnT.add(columnDEOff);
+        columnT.add(columnDNA);
+        columnT.add(columnDCBA);
+        columnT.add(columnTypeAM);
+        columnT.add(columnNameSmall);
+
         String[] nameColumnList = new String[]{"TAG_NAME_PLC", "Наименование сигнала", "Наименование"}; // наименование колонок для выборки из базы
-        String[] endRusName = new String[]{"Открыть","закрыть", "включить"};
-        String[] simbolRemove = new String[]{"-",","}; // символы которые нужно удалить из конца строки русских названий
+        String[] endRusName = new String[]{"Открыть", "закрыть", "включить"};
+        String[] simbolRemove = new String[]{"-", ","}; // символы которые нужно удалить из конца строки русских названий
         ArrayList<String> listColumnSelect = new ArrayList(); // листы с колонками для запроса к базе
         ArrayList<ArrayList> listTagName = new ArrayList(); // 
         boolean firstStep = true; // Переменная первого прохода формирования списка
@@ -152,8 +179,8 @@ public class ExecutiveMechanismObject {
             Node nodeConEnd = listNodeMethodExe.get(i);
             String nameDGOorDGI = nodeConEnd.getNodeName();
             nameDGODGI.add(nodeConEnd.getNodeName());
- 
-           ObjAnalize anlizObjOI; // объект который содержит названия окончания и списки сишналов 
+
+            ObjAnalize anlizObjOI; // объект который содержит названия окончания и списки сишналов 
             // в зависимости от итерации ему будет присваиватся свойства кем он буде входом или выходом
             if (i % 2 == 0) {
                 anlizObjOI = new ObjAnalize(nameDGOorDGI, true);
@@ -216,27 +243,9 @@ public class ExecutiveMechanismObject {
         });
             //System.out.println("This formating start data"); // системный вывод
 
-        // === анализ исходных данных ===
-        
-        // Анализ что присутствует в базе и и данных для DGO DGI(Удаление что уже есть в базе и пометки что не верное)
-        for (String[] arrDB: dataDB) {
-            ObjAnalize DO = null;
-            for (ObjAnalize o: listObjectDGODGI) { // Находим объет с данными для DO
-                if (o.getName().equals("DO")) DO = o;
-            }
-            
-            if (DO == null) break;
-            ArrayList<String> tmpArr = DO.getListSig();
-            for (int i = 0; i < arrDB.length; i++) { // Проходим по строкам базы(надо последнии по идентификаторам но пока тупо перебор)        
-                int indexDO = tmpArr.indexOf(arrDB[i]);
-                if(indexDO > -1) {
-                    DO.getDataSig().remove(indexDO);
-                }
-                
-            }
-            
-        }
-        
+        // ******************************************** анализ исходных данных (новый алгоритм анализ базы)***********************************
+        ArrayList<String[]> analizedDataDB = compareFreshAndDB(listObjectDGODGI); // сопостовление сохраненных ИМ и новых сырых данных
+
         // вычисление кто DGO
         ObjAnalize objDGO = null;
         for (int i = 0; i < listObjectDGODGI.size(); ++i) {
@@ -256,7 +265,7 @@ public class ExecutiveMechanismObject {
             ArrayList<String> listOnOffDGO = objDGO.getEnding(); // получаем окончания
             // формируем  названия колонки DGO окончаний
             for (String sE : listOnOffDGO) {
-                columnT.add(objDGO.getName()  + sE);
+                columnT.add(objDGO.getName() + sE);
             }
             // дописываем  названия колонки DGi окончаний
             for (ObjAnalize obgDGI : listObjectDGODGI) {
@@ -272,47 +281,54 @@ public class ExecutiveMechanismObject {
                 // добавить русское название в столбец с обрезаниеме
                 if (s.length > 1) { // для подстраховки если не нашли имена столбцов
                     String commonSliceRusEnd = null; //
-                    
+
                     String regex = "(";
-                    for (int endR=0; endR < endRusName.length; ++endR){ // проходим по ненужным окончаниям и формируем патерн
+                    for (int endR = 0; endR < endRusName.length; ++endR) { // проходим по ненужным окончаниям и формируем патерн
                         String endRus = endRusName[endR];
-                        if (endR == endRusName.length - 1){
+                        if (endR == endRusName.length - 1) {
                             regex += endRus + ")";
-                        } else regex += endRus + "|";
+                        } else {
+                            regex += endRus + "|";
+                        }
                     }
                     // эта Pattern.CASE_INSENSITIVE не работает с русским языком обязательно Pattern.UNICODE_CASE
                     commonSliceRusEnd = Pattern.compile(regex, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(s[numElRusName]).replaceAll(""); // убираем все что есть в строке не нужного
                     //commonSliceRusEnd = Pattern.compile(regex, Pattern.CASE_INSENSITIVE). s[numElRusName], endRus);
-                    
+
                     if (commonSliceRusEnd != null) {
                         boolean missWord = true;
-                        while(missWord){
+                        while (missWord) {
                             boolean cleanEndRus = false;
-                            if(commonSliceRusEnd != null && commonSliceRusEnd.length() > 0){
+                            if (commonSliceRusEnd != null && commonSliceRusEnd.length() > 0) {
                                 // обрубаем пробелы с обоих концов
                                 commonSliceRusEnd = commonSliceRusEnd.trim();
-                                for(String sRem: simbolRemove){
+                                for (String sRem : simbolRemove) {
                                     // перебираем ненужные последние символы
-                                    if (commonSliceRusEnd.substring(commonSliceRusEnd.length() - 1).equals(sRem)){
-                                      commonSliceRusEnd =  commonSliceRusEnd.substring(0, commonSliceRusEnd.length() - 1); // без последнего символа
-                                      cleanEndRus = false;
-                                      break;
-                                    } else cleanEndRus = true;
+                                    if (commonSliceRusEnd.substring(commonSliceRusEnd.length() - 1).equals(sRem)) {
+                                        commonSliceRusEnd = commonSliceRusEnd.substring(0, commonSliceRusEnd.length() - 1); // без последнего символа
+                                        cleanEndRus = false;
+                                        break;
+                                    } else {
+                                        cleanEndRus = true;
+                                    }
                                 }
                                 // Если на всем переборе не найдено нечего то пропускаем это названия сигнала
-                                if(cleanEndRus){
+                                if (cleanEndRus) {
                                     missWord = false;
                                 }
-                            
-                            } else commonSliceRusEnd = "errorNamedRusName"; //   но эта проверка может не понадобиться
+
+                            } else {
+                                commonSliceRusEnd = "errorNamedRusName"; //   но эта проверка может не понадобиться
+                            }
                             System.out.println("while work");
                         }
                         findTmp.add(commonSliceRusEnd);
-                        
-                    } else findTmp.add(s[numElRusName]);
+
+                    } else {
+                        findTmp.add(s[numElRusName]);
+                    }
                 }
-                
-                
+
                 int enterEndDO = 0; // триггер вхождения в поиск окончания DO
 
                 // сигнал DO но по всем окончаниям on Off
@@ -400,13 +416,9 @@ public class ExecutiveMechanismObject {
                 else {
                     findingTagname.add(findTmp);
                 }
-
             }
 
-            // 
         }
-        //System.out.println(objDGO.getName()); // Системный вывод
-
         columns = columnT.toArray(new String[columnT.size()]); // преобразовываем в массив
 
         // и сообщение если есть какие то неполадки
@@ -418,11 +430,11 @@ public class ExecutiveMechanismObject {
             JOptionPane.showMessageDialog(null, "Не найдены таблицы \n" + message); //сообщение
         }
 
-//         сортировка
+        //  Сортировка ИМ сгенерированных сигналов ИМ
         for (int iArr = 0; iArr < findingTagname.size(); ++iArr) {
             int nextItem = iArr + 1;
             if (nextItem >= findingTagname.size()) {
-                System.out.println("Last value");
+               //System.out.println("Last value");
                 break;
             } else {
                 for (int iArrSec = nextItem; iArrSec < findingTagname.size(); ++iArrSec) {
@@ -450,6 +462,38 @@ public class ExecutiveMechanismObject {
                     }
                 }
             }
+        }
+        //  прикрутить id
+        for (int i = 0; i < findingTagname.size(); i++) {
+            findingTagname.get(i).add(0, Integer.toString(i)); // Вставить в начало id
+        }
+
+        // Сращивание сигналов
+        ArrayList<String> nColumnDB;
+        if (analizedDataDB != null) { // если что то было в таблице базы и проанализировнно из базы
+            nColumnDB = workbase.getListColumns(nameTable);
+            //nColumnDB.remove(0); // уберем ID
+            columns = nColumnDB.toArray(new String[nColumnDB.size()]); // колонки берем из базы и присваиваем глобальным
+
+            // Преобразованием занимаюсь так как что бы не потерять нить передачи данных для постройки таблицы
+            ArrayList<ArrayList> tmpArrFinal = new ArrayList<>();
+            int i = 0;
+            for (; i < analizedDataDB.size(); i++) {
+                analizedDataDB.get(i)[0] = Integer.toString(i); // будем считать что он всегда ноль(нужен вообще ID или нет ?)
+                ArrayList<String> tmpArrRow = new ArrayList<>();
+                for (int j = 0; j < analizedDataDB.get(i).length; j++) {
+                    tmpArrRow.add(analizedDataDB.get(i)[j]);
+                }
+                tmpArrFinal.add(tmpArrRow);
+            }
+            // Оставшие именно сгенерированные ИМ
+            for (int j = 0; j < findingTagname.size(); j++) {
+                ArrayList arr = findingTagname.get(j);
+                i = i + j;
+                arr.set(0, Integer.toString(i)); //продолжить нумерацию id (изменением)
+                tmpArrFinal.add(arr);
+            }
+            findingTagname = tmpArrFinal;
         }
 
         return findingTagname;
@@ -562,21 +606,21 @@ public class ExecutiveMechanismObject {
         return enterSig;
     }
 
-    // --- Считать сформированные исполнительные из DB ---
-    public ArrayList<String[]>  getDataFromBase(String nameDB) {
-        
+    // --- Считать сформированные исполнительные из DB без id ---
+    public ArrayList<String[]> getDataFromBase(String nameDB) {
+
         ArrayList<String[]> dataFromDB = new ArrayList<>(); // массив с сырыми данными таблицы
-        ArrayList<String> nColumnT =  workbase.getListColumns(nameDB);
+        ArrayList<String> nColumnT = workbase.getListColumns(nameDB);
         int indexID = nColumnT.indexOf("id"); // определение расположение id колонки(для игнора)
-        
+
         for (String table : workbase.getListTable()) { // есть ли вообще таблица в базе
             if (nameTable.equals(table)) {
                 ArrayList<String[]> allDataExecTable = workbase.getData(nameTable);
-                if(indexID > -1){ // если нашли столбец id
-                    for(String[] arr: allDataExecTable){
+                if (indexID > -1) { // если нашли столбец id
+                    for (String[] arr : allDataExecTable) {
                         // обрубаем массив(как то сложно,перестраховался)
                         String[] bF = Arrays.copyOfRange(arr, 0, indexID);// обрубленный до нахождения может быть 0 хотя он тут и есть
-                        String[] aF = Arrays.copyOfRange(arr, indexID+1, arr.length); // это после найденного
+                        String[] aF = Arrays.copyOfRange(arr, indexID + 1, arr.length); // это после найденного
                         String[] tmp = Stream.concat(Arrays.stream(bF), Arrays.stream(aF)).toArray(String[]::new); // Срастить рубленные массивы
                         dataFromDB.add(tmp);
                     }
@@ -586,10 +630,10 @@ public class ExecutiveMechanismObject {
         }
         return dataFromDB;
     }
-    
+
     //  --- добавления данных в базу  из таблицы ---
     public void addDataToBase(ArrayList<String[]> updatetedData) {
-        
+
         // прежде чем создать новую базу нужно прочитать имеющуюся и взять все сигналы у который есть true
         // только потом затереть(может все это не актуально)
         ArrayList<String[]> dataFromDBTrue = new ArrayList<>(); // массив с выборкой true
@@ -607,7 +651,6 @@ public class ExecutiveMechanismObject {
                 break;
             }
         }
-
         int elemCompare = 1; // номер элемента в массиве который сравниваем
         for (int i = 0; i < updatetedData.size(); ++i) {
             String[] arr = updatetedData.get(i);
@@ -661,7 +704,7 @@ public class ExecutiveMechanismObject {
             // сращивание данных двух листов 
             for (int i = 0; i < second.size(); ++i) {
                 int test = first.size();
-                if (i <= first.size()-1) { // пока не достигли окончания первого листа соединяем
+                if (i <= first.size() - 1) { // пока не достигли окончания первого листа соединяем
                     first.get(i).addAll(second.get(i)); // пристыковать один Лист к другому
                 } else {
                     ArrayList<String> tmp = new ArrayList<>();
@@ -670,7 +713,7 @@ public class ExecutiveMechanismObject {
                     first.add(tmp); // и прикручиваем сформированный массимуже к первому Листу(может делать новый?)
                 }
             }
-            
+
         } else if (first.size() > second.size()) { // если первый больше по длине чем тот который прикручиваем(добавить в конец данные) 
             int lenStrList = 0; // длинна строки-листа уже для второго массива Листов
             for (ArrayList<String> enterList : second) {
@@ -691,9 +734,126 @@ public class ExecutiveMechanismObject {
                 }
             }
         }
-        return first; 
+        return first;
 
     }
+
+    // --- Анализ что присутствует в базе и и данных для DGO DGI(Удаление что уже есть в базе и пометки что не верное) ---
+    private ArrayList<String[]> compareFreshAndDB(ArrayList<ObjAnalize> listObjectDGODGI) {
+
+        ArrayList<String[]> dataDB = null; // Данные таблицы из базы есть ли она
+        ArrayList<String> nColumnT = null; // колонки таблицы
+        bedMark.clear();
+
+        for (String table : workbase.getListTable()) {
+            if (nameTable.equals(table)) { // есть ли вообще таблица в базе
+                dataDB = workbase.getData(nameTable);
+                //dataDB = getDataFromBase(nameTable); // это без id
+                nColumnT = workbase.getListColumns(nameTable);
+                //nColumnT.remove(0); // убъем ID
+                break;
+            }
+        }
+
+        if (dataDB != null) {
+            for (int i = 0; i < dataDB.size(); i++) {
+
+                String[] arrDB = dataDB.get(i);
+                ObjAnalize DO = null;
+                for (ObjAnalize o : listObjectDGODGI) { // Находим объет с данными для DO
+                    if (o.getName().equals("DO")) {
+                        DO = o;
+                    }
+                }
+                if (DO == null) {
+                    continue; // проверка на всякий
+                }            //ArrayList<String> tmpArrDO = DO.getListSig(); // название DO элементов на англ.
+
+                int colDBON = nColumnT.indexOf("DO_ON");
+                if (colDBON > -1) {
+                    int index = DO.getListSig().indexOf(arrDB[colDBON]); // индекс такой же как у названия столбца таблицы
+                    if (index > -1) {
+                        DO.getDataSig().remove(index);
+                    } else {
+                        if (!arrDB[colDBON].equals("")) { // Проверка на пустое
+                            int[] tmp = {colDBON, i}; // помечаем как ненайденный
+                            bedMark.add(tmp);
+                        }
+                    }
+                }
+
+                int colDBOF = nColumnT.indexOf("DO_OF");
+                if (colDBOF > -1) {
+                    int index = DO.getListSig().indexOf(arrDB[colDBOF]); // индекс такой же как у названия столбца таблицы
+                    if (index > -1) {
+                        DO.getDataSig().remove(index);
+                    } else {
+                        if (!arrDB[colDBOF].equals("")) { // Проверка на пустое
+                            int[] tmp = {colDBOF, i}; // помечаем как ненайденный (при удалении из списка поплывет номер строки, хотя удаление ниже!!! проверить)
+                            bedMark.add(tmp);
+                        }
+                    }
+                }
+
+                // поиск отсутствующих TAG из 0x0
+                int colPLC = nColumnT.indexOf(columnPLC);// колонка TAG_PLC
+                int colMatches = nColumnT.indexOf(columnMatches);// колонка совпадений
+                if (colMatches > -1) {
+                    if (arrDB[colMatches].indexOf("0x0") > -1) { // нашли нулевые входы и выходы
+                        //System.out.println(arrDB[colMatches]);
+                        //System.out.println(arrDB[colPLC]);
+                        int index = DO.getListSig().indexOf(arrDB[colPLC]); // индекс такой же как у названия столбца таблицы
+                        if (index <= -1) { // нет такого названия удаляем в самой таблицы из BD
+                            dataDB.remove(i);
+                            --i;
+                        } else {
+                            DO.getDataSig().remove(index);
+                        }
+                    }
+                }
+
+                //Проход по списку DI
+                ObjAnalize DI = null;
+                for (ObjAnalize o : listObjectDGODGI) { // Находим объет с данными для DO
+                    if (o.getName().equals("DI")) {
+                        DI = o;
+                    }
+                }
+                if (DI == null) {
+                    continue; // проверка на всякий
+                }
+
+                int colDION = nColumnT.indexOf("DI_ON");
+                if (colDION > -1) {
+                    int index = DI.getListSig().indexOf(arrDB[colDION]); // индекс такой же как у названия столбца таблицы
+                    if (index > -1) {
+                        DI.getDataSig().remove(index);
+                    } else {
+                        if (!arrDB[colDION].equals("")) { // Проверка на пустое
+                            int[] tmp = {colDION, i}; // помечаем как ненайденный
+                            bedMark.add(tmp);
+                        }
+                    }
+                }
+
+                int colDIOF = nColumnT.indexOf("DI_OF");
+                if (colDIOF > -1) {
+                    int index = DI.getListSig().indexOf(arrDB[colDIOF]); // индекс такой же как у названия столбца таблицы
+                    if (index > -1) {
+                        DI.getDataSig().remove(index);
+                    } else {
+                        if (!arrDB[colDIOF].equals("")) { // Проверка на пустое
+                            int[] tmp = {colDIOF, i}; // помечаем как ненайденный (при удалении из списка поплывет номер строки, хотя удаление ниже!!! проверить)
+                            bedMark.add(tmp);
+                        }
+                    }
+                }
+
+            }
+        }
+        return dataDB;
+    }
+
 }
 
 // --- объект анализа ИМ ---
@@ -734,7 +894,6 @@ class ObjAnalize {
         return listFromBase;
     }
 
-    
     // получить имена сигналов
     public ArrayList<String> getListSig() {
         ArrayList<String> listRusSig = new ArrayList<>();

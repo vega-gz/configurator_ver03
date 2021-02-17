@@ -64,60 +64,60 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     String[] columns; // названия колонок для таблицы в формате масива
     ArrayList<String> columnT; // названия колонок для таблицы
     int identNodecase; // по идентификатор выбора какой механизм использовать
-    ExecutiveMechanismObject testW; // механизм работы с данными для обрабоки Исполнительных механизмов
+    ExecutiveMechanismObject EM; // механизм работы с данными для обрабоки Исполнительных механизмов
     TableNzVer3 boneTable;
     JTable tableMech; // Таблица механизмов
     boolean showAlltable = false; // тригер показать всю таблицу или только
     int caseMecha = 0; // значение по которым пойдет обработка механизмов
-    ArrayList<int[]> markCelT = new ArrayList<>(); // список клеток которые метим для сопоставленя данных из базы и вновь сгенерированных
+    //ArrayList<int[]> markCelT = new ArrayList<>(); // список клеток которые метим для сопоставленя данных из базы и вновь сгенерированных(уже не актуально)
 
     /**
      * Creates new form ExecutiveMechanism
      */
     public ExecutiveMechanismFrame() { // С передачей базы
-        testW = new ExecutiveMechanismObject();
-        String[] arrNameExecute = testW.getNodeMechRun();// Что передаем на выбор
+        EM = new ExecutiveMechanismObject();
+        String[] arrNameExecute = EM.getNodeMechRun();// Что передаем на выбор
         getJDialogChoiser(arrNameExecute).setVisible(true); // вызываем диалог с выбором какой механизм обрабатываем
 
         // если в окне был какой то выбор по кнопке или списку
         if (caseMecha != 0) {
             switch (caseMecha) {
                 case 1: { // если по списку 
-                    listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
-                    nameTable = testW.getNameTable(); // получим название таблицы строго после getDataCurrentNode
-                    columns = testW.getColumns(); // получить колонки для построки таблицы
-                    //columnT = testW.getColumnsT();
+                    
+                    listDataToTable = EM.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
+                    
+                    nameTable = EM.getNameTable(); // получим название таблицы строго после getDataCurrentNode
+                    columns = EM.getColumns(); // получить колонки для построки таблицы
 
-                    ArrayList<String[]> dataDB = testW.getDataFromBase(nameTable); // Данные из базы
-                    markCelT.clear();
-
-                    if (dataDB != null) {
-                        // ==== Сравнить данные из того что сгенерировали и данные из базы ====
-                        for (int i = 0; i < listDataToTable.size(); ++i) {
-                            ArrayList<String> arrAM = listDataToTable.get(i);
-                            for (int j = 0; j < arrAM.size(); ++j) {
-                                String s = arrAM.get(j);
-                                String sB = null;
-                                if (i < dataDB.size() && j < dataDB.get(i).length) {
-                                    sB = dataDB.get(i)[j]; // должны быть идентичны
-                                }
-                                int[] tmpINT = {i, j};
-                                if (!s.equals(sB)) {
-                                    markCelT.add(tmpINT);
-                                }
-                            }
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Не найдены таблицы или пусты \n" + nameTable); //сообщение
-                    }
+                    ArrayList<String[]> dataDB = EM.getDataFromBase(nameTable); // Данные из базы
+                   
+//                    markCelT.clear();
+//                    if (dataDB != null) {
+//                        // ==== Сравнить данные из того что сгенерировали и данные из базы ====
+//                        for (int i = 0; i < listDataToTable.size(); ++i) {
+//                            ArrayList<String> arrAM = listDataToTable.get(i);
+//                            for (int j = 0; j < arrAM.size(); ++j) {
+//                                String s = arrAM.get(j);
+//                                String sB = null;
+//                                if (i < dataDB.size() && j < dataDB.get(i).length) {
+//                                    sB = dataDB.get(i)[j]; // должны быть идентичны
+//                                }
+//                                int[] tmpINT = {i, j};
+//                                if (!s.equals(sB)) {
+//                                    markCelT.add(tmpINT);
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Не найдены таблицы или пусты \n" + nameTable); //сообщение
+//                    }
 
                     boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
                     tableMech = new TableNzVer3(nameTable, columns, listDataToTable, false).getJTable();
 
                     // раскрас таблицы
                     for (int i = 0; i < tableMech.getColumnCount(); i++) {
-                        System.out.println("IterI");
-                        tableMech.getColumnModel().getColumn(i).setCellRenderer(new RendererCellTable(markCelT));
+                        tableMech.getColumnModel().getColumn(i).setCellRenderer(new RendererCellTable(EM.getMarkColumns())); // вносим ячейки с меткой
                     }
 
                     initComponents();
@@ -126,9 +126,9 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
                     break;
                 }
                 case 2: { // если по кнопке                    
-                    listDataToTable = testW.getDataAllMechaNode(showAlltable);  // реализация всех механизмов
-                    nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
-                    columns = testW.getColumns(); // получить колонки для построки таблицы
+                    listDataToTable = EM.getDataAllMechaNode(showAlltable);  // реализация всех механизмов
+                    nameTable = EM.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+                    columns = EM.getColumns(); // получить колонки для построки таблицы
                     //columnT = testW.getColumnsT();
                     boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
                     initComponents();
@@ -163,6 +163,11 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("jLabel1");
 
@@ -293,7 +298,7 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
                     }
                     dataTable.add(arraRow);
                 }
-                testW.addDataToBase(dataTable);
+                EM.addDataToBase(dataTable);
             }
         });
 
@@ -303,9 +308,9 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         if (jCheckBox1.isSelected()) {
             showAlltable = true;
-            listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
-            nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
-            columnT = testW.getColumnsT();
+            listDataToTable = EM.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
+            nameTable = EM.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+            columnT = EM.getColumnsT();
             boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
             this.getContentPane().removeAll(); // все удаляет работает
             initComponents();
@@ -314,9 +319,9 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
 
         } else {
             showAlltable = false;
-            listDataToTable = testW.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
-            nameTable = testW.getNameTable(); // получим название таблицы строга после getDataCurrentNode
-            columnT = testW.getColumnsT();
+            listDataToTable = EM.getDataCurrentNode(identNodecase, showAlltable);  // реализация конкретного механизма
+            nameTable = EM.getNameTable(); // получим название таблицы строга после getDataCurrentNode
+            columnT = EM.getColumnsT();
             boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
             this.getContentPane().removeAll();
             initComponents();
@@ -326,8 +331,12 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        testW.getDataFromBase(nameTable);
+        EM.getDataFromBase(nameTable);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // ---  метод диалога выбора по какому методу делаем ИМ ---
     private JDialog getJDialogChoiser(String[] massNameNode) {
@@ -470,8 +479,9 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
                 boolean isSelected, boolean hasFocus, int row, int column) {
             Component cell = dtcr.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             for (int[] arrInt : markCelT) {
-                if (arrInt[1] == column & arrInt[0] == row) {
+                if (arrInt[0] == column & arrInt[1] == row) {
                     cell.setBackground(Color.YELLOW);
+                    System.out.println(Integer.toString(row) +  " " + Integer.toString(column));
                     break;
                 } else {
                     cell.setBackground(Color.WHITE);
