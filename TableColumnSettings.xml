@@ -9,19 +9,6 @@
 			<Item t="KM04"/>
 		</Abonent_type>
 	</Abonents>
-	<AM>
-		<matches src="this">
-			<Item t="ИМ: 2х2"/>
-			<Item t="ИМ: 2х1"/>
-			<Item t="ИМ: 1х2"/>
-			<Item t="ИМ: 1x1"/>
-			<Item t="ИМ: 1x0"/>
-		</matches>
-		<true-false src="this">
-			<Item t="true"/>
-			<Item t="false"/>
-		</true-false>
-	</AM>
 	<ANB>
 		<!--Таблица src="DB"/-->
 		<TAG_NAME_AnPar src="table" table="this" col="Таблица" default="AI" colInTable="TAG_NAME_PLC"  edit="true"/>
@@ -36,4 +23,41 @@
 			<Item t="П"/>
 		</тип>
 	</ANB>
+	<APS>
+		<Status src="this">
+			<Item t="АО сс"/>
+			<Item t="АО бс"/>
+			<Item t="ВО сс"/>
+			<Item t="ВО бс"/>
+			<Item t="Пожар"/>
+			<Item t="АС"/>
+			<Item t="ПС"/>
+		</Status>
+	</APS>
+	<AI>
+		<Тип_датчика src="this">
+			<Item t="KM04_0_20mA"/>
+			<Item t="KM04_4_20mA"/>
+			<Item t="Siemens"/>
+			<Item t="Sonet"/>
+			<Item t="ТХА"/>				
+			<Item t="100М"/>				
+			<Item t="100П"/>					
+			<Item t="100Pt"/>					
+			<Item t="4-20 мА"/>	
+		</Тип_датчика>	
+	</AI>
+		<FR>
+		<Тип_датчика src="this">
+			<Item t="KM04_0_20mA"/>
+			<Item t="KM04_4_20mA"/>
+			<Item t="Siemens"/>
+			<Item t="Sonet"/>
+			<Item t="ТХА"/>				
+			<Item t="100М"/>				
+			<Item t="100П"/>					
+			<Item t="100Pt"/>					
+			<Item t="4-20 мА"/>	
+		</Тип_датчика>	
+	</FR>
 </TableColumnSettings>

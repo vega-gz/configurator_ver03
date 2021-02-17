@@ -3,7 +3,7 @@
     <GraphicsCompositeFBType>
         <InterfaceList>
             <EventOutputs>
-                <Event Comment="событие нажатия левой кнопки мыши на объекте" Name="mouseLBPress" UUID="299295AF47A6CCAC26009C964C5B47C5"/>
+                <Event Comment="1событие нажатия левой кнопки мыши на объекте" Name="mouseLBPress" UUID="299295AF47A6CCAC26009C964C5B47C5"/>
                 <Event Comment="событие отпускания левой кнопки мыши на объекте" Name="mouseLBRelease" UUID="8DE6001343803CF639F332B16CC30079"/>
                 <Event Comment="событие нажатия правой кнопки мыши на объекте" Name="mouseRBPress" UUID="5DE993F543E00267EF077D89D3D01B5B"/>
                 <Event Comment="событие отпускания правой кнопки мыши на объекте" Name="mouseRBRelease" UUID="0AB0718D41E90B02F75425B41E39C1F0"/>
@@ -21,10 +21,22 @@
                 <VarDeclaration Comment="всплывающая подсказка" InitialValue="''" Name="hint" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="9001F21244C66932FB81B7B021B085BA"/>
                 <VarDeclaration Comment="размер прямоугольника" InitialValue="(width:=50,height:=50)" Name="size" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" UUID="1555B4384D69683C33FCB4A79B1A0932"/>
                 <VarDeclaration InitialValue="''" Name="PrefAb" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="7B21228345FE145C1039349D18AF2C71"/>
-                <VarDeclaration InitialValue="''" Name="NameRu" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="D11E59B74DBD1F394957C4876E4DCD20"/>
+                <VarDeclaration InitialValue="''" Name="NameRU" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="D11E59B74DBD1F394957C4876E4DCD20"/>
             </InputVars>
         </InterfaceList>
         <FBNetwork>
         </FBNetwork>
     </GraphicsCompositeFBType>
+	
+	<CompositeFBType>
+        <InterfaceList>
+            <InputVars>
+                <VarDeclaration Name="NameRU" Type="STRING" InitialValue="&apos;&apos;" UUID="2TRL7CWGTXZUXKQMBEX4OKO2S4" />
+                <VarDeclaration Name="PrefAb" Type="STRING" InitialValue="&apos;&apos;" UUID="OFVQBP34MUKUHHAUN7XQCUVIPY" />
+            </InputVars>
+        </InterfaceList>
+        <FBNetwork>
+        </FBNetwork>
+    </CompositeFBType>
+             
 </Data>

@@ -419,10 +419,12 @@ public class XMLSAX {
         return request;
     }
 
-    // --- Найти ноду по имени и ее атрибутам ---Lev---
+    // --- Найти ноду по ее атрибутам (рекурсивно) ---Lev---
     public Node findNodeAtribute(String[] arg) {
         return findNodeAtribute(root, arg);
     }
+    
+    // --- Найти ноду по имени и ее атрибутам (рекурсивно)---
     public Node findNodeAtribute(Node n, String[] arg) {
         if(arg==null || arg.length==0 || n==null) return null;
         String nameFindN = arg[0];// arg первое значение всегда Название ноды

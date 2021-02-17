@@ -2,7 +2,7 @@
 <!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых-->
 <ConfigSignals>
 	<AI excelSheetName="AI" Comment="Аналоговые входы. Архив: _ToHMI;" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
-        <EXEL>
+        <EXEL startStr="2"> <!-- startStr - с какой строки начинать читать данный лист Excel. Если атрибута startStr нет, чтение будет осуществлятся со 2-ой строки. Значение атрибута startStr не может быть меньше 2 и больше 20. -->
             <F nameColumnPos="Наименование"/><!--Обязательный нода Русское нгазванеие-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/><!--Обязательный нода-->
             <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/><!--Обязательный нода-->
@@ -14,22 +14,12 @@
 				<case val="KM04_4_20mA" def="0.0"/>
 				<case val="Siemens" def="0.0"/>
 				<case val="Sonet" def="11773.0"/>
-				<case val="ТХА" def="-45.0"/>				
-				<case val="100М" def="-60.0"/>				
-				<case val="100П" def="-60.0"/>					
-				<case val="100Pt" def="-50.0"/>					
-				<case val="4-20 мА" def="2.0"/>					
 			</U>
             <V nameColumnPos="АЦПmax" swt="Тип_датчика" default="10.0">
 				<case val="KM04_0_20mA" def="9.9"/>
 				<case val="KM04_4_20mA" def="10.0"/>
 				<case val="Siemens" def="27648.0"/>
 				<case val="Sonet" def="59714.0"/>
-				<case val="ТХА" def="820.0"/>					
-				<case val="100М" def="150.0"/>					
-				<case val="100П" def="180.0"/>
-				<case val="100Pt" def="150.0"/>	
-				<case val="4-20 мА" def="10.0"/>						
 			</V>
             <W nameColumnPos="loLim" type="Number" formula="loLimF"/><!-- нижний уровень зашкала -->
             <X nameColumnPos="hiLim" type="Number" formula="hiLimF"/><!-- верхний уровень зашкала -->
@@ -94,49 +84,42 @@
 				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода">
 					<Function name="AI_init"><!-- AI_init(-->
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg><!-- GPA_AI_Settings.Pmsm,-->
-						<arg><text t=" "/><dbd t="Диапазон_мин"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс"/></arg>
-						<arg><text t=" "/><dbd t="АЦПmin"/></arg>
-						<arg><text t=" "/><dbd t="АЦПmax"/></arg>
-						<arg><text t=" "/><dbd t="loLim"/></arg>
-						<arg><text t=" "/><dbd t="hiLim"/></arg>
-						<arg><text t=" "/><dbd t="loBrk"/></arg>
-						<arg><text t=" "/><dbd t="hiBrk"/></arg>
-						<arg><text t=" "/><dbd t="ROC"/></arg>
-						<arg><text t=" "/><dbd t="recoveryTime"/></arg>
-						<arg><text t=" "/><text t="repTime"/></arg>
-						<arg><text t=" "/><dbd t="tau"/></arg>
-						<arg><text t=" "/><npp/></arg><!--номер по порядку-->
+						<arg><dbd t="Диапазон_мин"/></arg>
+						<arg><dbd t="Диапазон_макс"/></arg>
+						<arg><dbd t="АЦПmin"/></arg>
+						<arg><dbd t="АЦПmax"/></arg>
+						<arg><dbd t="loLim"/></arg>
+						<arg><dbd t="hiLim"/></arg>
+						<arg><dbd t="loBrk"/></arg>
+						<arg><dbd t="hiBrk"/></arg>
+						<arg><dbd t="ROC"/></arg>
+						<arg><dbd t="recoveryTime"/></arg>
+						<arg><text t="repTime"/></arg>
+						<arg><dbd t="tau"/></arg>
+						<arg><npp/></arg><!--номер по порядку-->
 					</Function>
 				</Block>
 				<Block start="Начало сгенерированного кода AI_Processing" end="Конец сгенерированного кода">
 					<Function name="AI_Processing">
 						<arg><abonent/><text t="_AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="AI_Permit" target="_Algorithm">
+			<File src="AI_Permit" target="_Algorithm">
 				<Block start="Начало сгенерированного кода AI_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
-			</File> -->
-			<File src="Simulate_AI" >
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
-					<String>
-						<text t="str."/><dbd t="TAG_NAME_PLC"/><text t=".BTNmanualOn := c;  str."/><dbd t="TAG_NAME_PLC"/><text t=".BTNworkOn := not c; // "/><dbd t="Наименование"/>
-					</String>
-				</Block>
-			</File>	
+			</File>
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_AI_DRV" globData="_AI_DRV"/>
 	</AI>
-	<FR_AI excelSheetName="FR_AI" Comment="Входы ТР. Архив: _ToHMI;">
+	<FR excelSheetName="FR" Comment="Входы ТР. Архив: _ToHMI;">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода-->
             <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
@@ -144,28 +127,8 @@
             <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
             <J nameColumnPos="Тип_датчика" default=""/>
             <T nameColumnPos="Точность"  type="Int" default="0"/>
-           <U nameColumnPos="АЦПmin" swt="Тип_датчика" default="2.0">
-				<case val="KM04_0_20mA" def="-0.02"/>
-				<case val="KM04_4_20mA" def="0.0"/>
-				<case val="Siemens" def="0.0"/>
-				<case val="Sonet" def="11773.0"/>
-				<case val="ТХА" def="-45.0"/>				
-				<case val="100М" def="-60.0"/>				
-				<case val="100П" def="-60.0"/>					
-				<case val="100Pt" def="-50.0"/>					
-				<case val="4-20 мА" def="2.0"/>
-			</U>
-           <V nameColumnPos="АЦПmax" swt="Тип_датчика" default="10.0">
-				<case val="KM04_0_20mA" def="9.9"/>
-				<case val="KM04_4_20mA" def="10.0"/>
-				<case val="Siemens" def="27648.0"/>
-				<case val="Sonet" def="59714.0"/>
-				<case val="ТХА" def="820.0"/>					
-				<case val="100М" def="150.0"/>					
-				<case val="100П" def="180.0"/>
-				<case val="100Pt" def="150.0"/>	
-				<case val="4-20 мА" def="10.0"/>
-			</V>
+            <U nameColumnPos="АЦПmin" type="Number"/>
+            <V nameColumnPos="АЦПmax" type="Number"/>
             <W nameColumnPos="loLim" type="Number" formula="loLimF"/>
             <X nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
             <Y nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
@@ -186,79 +149,72 @@
 			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenData>
-			<FR_AI_DRV Type="REAL">
-				<globData name="FR_AI_DRV">
-					<localData int="_GT_4RM.int" />
+			<FR_DRV Type="REAL">
+				<globData name="FR_DRV">
+					<localData int="_Algorithm.int" />
 				</globData>	
-			</FR_AI_DRV>
-			<FR_AI_FromHMI typeFile="T_AI_FromHMI.type">
-				<globData name="FR_AI_FromHMI">
-					<localData int="_GT_4RM.int" />
+			</FR_DRV>
+			<FR_FromHMI typeFile="T_AI_FromHMI.type">
+				<globData name="FR_FromHMI">
+					<localData int="_Algorithm.int" />
 				</globData>	
-			</FR_AI_FromHMI>
-			<FR_AI_ToHMI typeFile="T_AI_ToHMI.type">
-				<globData name="FR_AI_ToHMI">
-					<localData int="_GT_4RM.int" />
+			</FR_FromHMI>
+			<FR_ToHMI typeFile="T_AI_ToHMI.type">
+				<globData name="FR_ToHMI">
+					<localData int="_Algorithm.int" />
 				</globData>	
-			</FR_AI_ToHMI>
-			<FR_AI_Settings typeFile="T_AI_Settings.type">
+			</FR_ToHMI>
+			<FR_Settings typeFile="T_AI_Settings.type">
 				<globData>
-					<localData  name="FR_AI_Settings" int="_GT_4RM.int"/>
+					<localData  name="FR_Settings" int="_Algorithm.int"/>
 				</globData>
-			</FR_AI_Settings>
-			<FR_AI_Internal typeFile="T_AI_Internal.type">
+			</FR_Settings>
+			<FR_Internal typeFile="T_AI_Internal.type">
 				<globData>
-					<localData  name="FR_AI_Internal" int="_GT_4RM.int"/>
+					<localData  name="FR_Internal" int="_Algorithm.int"/>
 				</globData>
-			</FR_AI_Internal>
+			</FR_Internal>
 		</GenData>
 		<GenCode >
-			<File src="FR_AI_CallAll" target="_GT_4RM">
-				<Block start="Начало сгенерированного кода FR_AI_init" end="Конец сгенерированного кода">
+			<File src="FR_CallAll" target="_Algorithm">
+				<Block start="Начало сгенерированного кода FR_init" end="Конец сгенерированного кода">
 					<Function name="AI_init">
-						<arg><abonent/><text t="_FR_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_мин"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс"/></arg>
-						<arg><text t=" "/><dbd t="АЦПmin"/></arg>
-						<arg><text t=" "/><dbd t="АЦПmax"/></arg>
-						<arg><text t=" "/><dbd t="loLim"/></arg>
-						<arg><text t=" "/><dbd t="hiLim"/></arg>
-						<arg><text t=" "/><dbd t="loBrk"/></arg>
-						<arg><text t=" "/><dbd t="hiBrk"/></arg>
-						<arg><text t=" "/><dbd t="ROC"/></arg>
-						<arg><text t=" "/><dbd t="recoveryTime"/></arg>
-						<arg><text t=" "/><text t="repTime"/></arg>
-						<arg><text t=" "/><dbd t="tau"/></arg>
-						<arg><text t=" "/><npp/></arg>
+						<arg><abonent/><text t="_FR_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><dbd t="Диапазон_мин"/></arg>
+						<arg><dbd t="Диапазон_макс"/></arg>
+						<arg><dbd t="АЦПmin"/></arg>
+						<arg><dbd t="АЦПmax"/></arg>
+						<arg><dbd t="loLim"/></arg>
+						<arg><dbd t="hiLim"/></arg>
+						<arg><dbd t="loBrk"/></arg>
+						<arg><dbd t="hiBrk"/></arg>
+						<arg><dbd t="ROC"/></arg>
+						<arg><dbd t="recoveryTime"/></arg>
+						<arg><text t="repTime"/></arg>
+						<arg><dbd t="tau"/></arg>
+						<arg><npp/></arg>
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода FR_AI_Processing" end="Конец сгенерированного кода">
+				<Block start="Начало сгенерированного кода FR_Processing" end="Конец сгенерированного кода">
 					<Function name="AI_Processing">
-						<arg><abonent/><text t="_FR_AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_FR_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_FR_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_FR_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_FR_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_FR_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="FR_AI_Permit" target="_GT_4RM">
-				<Block start="Начало сгенерированного кода FR_AI_Permit" end="Конец сгенерированного кода">
+			<File src="FR_Permit" target="_Algorithm">
+				<Block start="Начало сгенерированного кода FR_Permit" end="Конец сгенерированного кода">
 					<String>
-						<abonent/><text t="_FR_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
+						<abonent/><text t="_FR_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
-			</File> -->
-			<File src="Simulate_FR" >
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
-					<String>
-						<text t="str."/><dbd t="TAG_NAME_PLC"/><text t=".BTNmanualOn := c;  str."/><dbd t="TAG_NAME_PLC"/><text t=".BTNworkOn := not c; // "/><dbd t="Наименование"/>
-					</String>
-				</Block>
-			</File>				
+			</File>
 		</GenCode>
-		<GenHW hwDriver="KM04" drvFile="_FR_AI_DRV" globData="_FR_AI_DRV"/>
-	</FR_AI>
+		<GenHW hwDriver="KM04" drvFile="_FR_DRV" globData="_FR_DRV"/>
+	</FR>
 	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
 		<GenData>
 			<T_ANB Type="BOOL"/>
@@ -285,7 +241,7 @@
             <H nameColumnPos="гистерезис" type="Number"  default="0.0"/>
             <I nameColumnPos="TAG_NAME_PLC"  default=""/><!-- Если имя уставки пустое то TAG_NAME_AnPar_Uv1 -->
 			<!--/I-->
-            <J nameColumnPos="Наименование"  default=""/><!-- concut="true"/-->
+            <J nameColumnPos="Наименование"  default=""/><!-- concut="true" - незаконченная попытка сконструировать русское имя уставки из имени АнПара, слова "меньше" или "больше" и типа уставки /-->
        </EXEL>
 	</ANB>
 	<AO excelSheetName="AO" Comment="Аналоговые выходы">
@@ -293,29 +249,24 @@
 			<AO_DRV Type="REAL">
 				<globData name="AO_DRV">
 					<localData int="_Algorithm.int" />
-					<localData int="_GT_4RM.int" />
 				</globData>	
 				<globData name="AO">
 					<localData int="_Algorithm.int"/>
-					<localData int="_GT_4RM.int" />					
 				</globData>
 			</AO_DRV>
 			<AO_FromHMI>
 				<globData name="AO_FromHMI">
 					<localData int="_Algorithm.int"/>
-					<localData int="_GT_4RM.int" />					
 				</globData>
 			</AO_FromHMI>
 			<AO_ToHMI>
 				<globData name="AO_ToHMI">
 					<localData int="_Algorithm.int"/>
-					<localData int="_GT_4RM.int" />					
 				</globData>
 			</AO_ToHMI>
 			<AO_Settings>
 				<globData>
 					<localData  name="AO_Settings" int="_Algorithm.int"/>
-					<localData  name="AO_Settings" int="_GT_4RM.int"/>
 				</globData>
 			</AO_Settings>
 		</GenData>
@@ -342,38 +293,31 @@
 				<Block start="Начало сгенерированного кода AO_init" end="Конец сгенерированного кода">
 					<Function name="AO_init">
 						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="АЦПмин"/></arg>
-						<arg><text t=" "/><dbd t="АЦПмакс"/></arg>
-						<arg><text t=" "/><npp/></arg>
+						<arg><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
+						<arg><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
+						<arg><dbd t="АЦПмин"/></arg>
+						<arg><dbd t="АЦПмакс"/></arg>
+						<arg><npp/></arg>
 					</Function>
 				</Block>
 				<Block start="Начало сгенерированного кода AO_Processing" end="Конец сгенерированного кода">
 					<Function name="AO_Processing">
 						<arg><abonent/><text t="_AO."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="AO_Permit" target="_Algorithm">
+			<File src="AO_Permit" target="_Algorithm">
 				<Block start="Начало сгенерированного кода AO_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
-			</File> -->
-			<File src="Simulate_AO">
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
-					<String>
-						<text t="str."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := c; // "/><dbd t="Наименование"/>
-					</String>
-				</Block>
-			</File>									
-			</GenCode>
+			</File>
+		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_AO_DRV" globData="_AO_DRV"/>
 	</AO>
 	<DI excelSheetName="DI" Comment="Дискретные входы">
@@ -427,38 +371,31 @@
 				<Block start="Начало сгенерированного кода DI_init" end="Конец сгенерированного кода">
 					<Function name="DI_init">
 						<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><text t="repTime"/></arg>
-						<arg><text t=" "/><dbd t="Задержка"/></arg>
-						<arg><text t=" "/><dbd t="Инверсия"/></arg>
-						<arg><text t=" "/><npp/></arg>
+						<arg><text t="repTime"/></arg>
+						<arg><dbd t="Задержка"/></arg>
+						<arg><dbd t="Инверсия"/></arg>
+						<arg><npp/></arg>
 					</Function>
 				</Block>
 				<Block start="Начало сгенерированного кода DI_Processing" end="Конец сгенерированного кода">
 					<Function name="DI_Processing">
 						<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="КЦД"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><dbd t="КЦД"/></arg>
+						<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="DI_Permit" target="_Algorithm">
+			<File src="DI_Permit" target="_Algorithm">
 				<Block start="Начало сгенерированного кода DI_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
-			</File> -->
-			<File src="Simulate_DI" >
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
-					<String>
-						<text t="str."/><dbd t="TAG_NAME_PLC"/><text t=".BTNmanualOn := c;  str."/><dbd t="TAG_NAME_PLC"/><text t=".BTNworkOn := not c; // "/><dbd t="Наименование"/>
-					</String>
-				</Block> 
-			</File>				
+			</File>
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_DI_DRV" globData="_DI_DRV"/>
 	</DI>
@@ -501,9 +438,9 @@
 				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
 					<Function name="DO_Processing">
 						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
@@ -513,12 +450,13 @@
 						<abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
-			</File> 
+			</File>
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_DO_DRV" globData="_DO_DRV"/>
 	</DO>
-	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Архив: _ToHMI; Modbus: ">
-        <EXEL info="R1C2">
+	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Архив: _ToHMI; Modbus: "><!--  "Архив: _ToHMI" - указывается только для AI и mb_AI, т.к. в отличие от прочих типов данныж актуальное значение параметров хранится в структурах 
+ 																						типа GPA_AI_ToHMI.имя папаметра.PV, а не просто в GPA_AI.имя параметра -->
+        <EXEL info="R1C2"><!-- Указывает ячейку на листе Excel, из которой берётся дополнительная информация, например (GPA_AVO; 172.16.1.8:502; DI; 2) имя драйвера модбас; адрес; группа в драйвере; номер функции модбас -->
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
             <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
             <D nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
@@ -577,17 +515,17 @@
 				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
 					<Function name="mb_AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="loLim" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="hiLim" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="loBrk" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="hiBrk" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dict t="dataType" dictionary="ModbusFormat.xml" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Set1" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="Set2" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="tau" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><npp/></arg>
+						<arg><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
+						<arg><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
+						<arg><dbd t="loLim" ifEmpty="0.0"/></arg>
+						<arg><dbd t="hiLim" ifEmpty="0.0"/></arg>
+						<arg><dbd t="loBrk" ifEmpty="0.0"/></arg>
+						<arg><dbd t="hiBrk" ifEmpty="0.0"/></arg>
+						<arg><dict t="dataType" dictionary="ModbusFormat.xml" ifEmpty="0"/></arg>
+						<arg><dbd t="Set1" ifEmpty="0.0"/></arg>
+						<arg><dbd t="Set2" ifEmpty="0.0"/></arg>
+						<arg><dbd t="tau" ifEmpty="0.0"/></arg>
+						<arg><npp/></arg>
 						<arg>
 							<switch swt="dataType" default="0">
 								<case val="ABxN" def="1"/>
@@ -630,13 +568,13 @@
 								<case val="UBAxR" def=")"/>
 							</switch>
 						</arg>
-						<arg><text t=" "/><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="AI_Permit" target="_Algorithm">
+			<File src="AI_Permit" target="_Algorithm">
 				<Block start="Начало сгенерированного кода AI_Permit" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
 					<String>
 						<abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
@@ -645,13 +583,6 @@
 				<Block start="Начало сгенерированного кода AI_Alter" end="Конец сгенерированного кода" isGenTyps="ABCDEFGH">
 					<String>
 						<text t="tmpPermit := "/><abonent/><text t="_AI_DRV."/><dbd t="TAG_NAME_PLC"/><text t="; //"/><dbd t="Наименование"/>
-					</String>
-				</Block>
-			</File> -->
-			<File src="Simulate_mbAI">
-				<Block start="Начало сгенерированного кода 1" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
-					<String>
-						<abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/><text t=".BTNmanualOn := c;  "/><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/><text t=".BTNworkOn := not c; // "/><dbd t="Наименование"/>
 					</String>
 				</Block>
 			</File>
@@ -704,22 +635,22 @@
 				<Block start="Начало сгенерированного кода AO_init" end="Конец сгенерированного кода">
 					<Function name="mb_AO_init">
 						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dict t="dataType" dictionary="ModbusFormat.xml" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Set1" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Set2" ifEmpty="0"/></arg>
-						<arg><text t=" "/><npp/></arg>
+						<arg><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
+						<arg><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
+						<arg><dict t="dataType" dictionary="ModbusFormat.xml" ifEmpty="0"/></arg>
+						<arg><dbd t="Set1" ifEmpty="0"/></arg>
+						<arg><dbd t="Set2" ifEmpty="0"/></arg>
+						<arg><npp/></arg>
 					</Function>
 				</Block>
 				<Block start="Начало сгенерированного кода AO_Processing" end="Конец сгенерированного кода">
 					<Function name="mb_AO_Processing">
 						<arg><abonent/><text t="_AO."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><text t="tmpReal"/></arg>
-						<arg><text t=" "/><text t="tmpInt"/></arg>
+						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t="tmpReal"/></arg>
+						<arg><text t="tmpInt"/></arg>
 					</Function>
 					<String>
 						<abonent/><text t="_AO_DRV."/><dbd t="TAG_NAME_PLC"/><text t=" := "/>
@@ -776,23 +707,16 @@
 				<Block start="Начало сгенерированного кода DI_Processing" end="Конец сгенерированного кода">
 					<Function name="mb_DI_Processing">
 						<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
-<!--			<File src="DI_Permit" target="_Algorithm">
+			<File src="DI_Permit" target="_Algorithm">
 				<Block start="Начало сгенерированного кода DI_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
-					</String>
-				</Block>
-			</File> -->
-			<File src="Simulate_mbDI">
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
-					<String>
-						<abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/><text t=".BTNmanualOn := c;  "/><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/><text t=".BTNworkOn := not c; // "/><dbd t="Наименование"/>
 					</String>
 				</Block>
 			</File>
@@ -832,9 +756,9 @@
 				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
 					<Function name="DO_Processing">
 						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 					</Function>
 				</Block>
 			</File>
@@ -848,73 +772,56 @@
 		</GenCode>
 		<GenHW drvFile="_DO_DRV" globData="_DO_DRV"/> <!--hwFile="_modbus.mb_cfg" intFile="_modbus.int"/-->
 	</mb_DO>
-	<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА АЛАРМОВ ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<APS excelSheetName="APS" Comment="Аварино-предупредительная сигнализация">
-		<EXEL>
-			<B nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/> <!-- Алгоритмическое имя аларма-->
-			<C nameColumnPos="Наименование" /> <!--Русское название АПС-->
-			<D nameColumnPos="Условие_срабатывания_АПС" /> <!--Логическое выражение -->
-			<E nameColumnPos="Время_задержки" type="Number" default="0.0"/> <!--секунды-->
-			<F nameColumnPos="Status" /> <!--строка из набора возм. значений: АО сс, АО бс, ВО сс, ВО бс, Пожар, ПС, АС -->
-		</EXEL>
-		<GenData>	<!-- генерация типов АПС -->
-			<APS Type="BOOL"> 
-				<globData name="APS"> 
+	
+	<AM excelSheetName="AM" Comment="Исполнительные механизмы">
+        <EXEL>
+			<A nameColumnPos="RusName"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+            <B nameColumnPos="TAG_PLC"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
+            <C nameColumnPos="matches" unical="true" type="VarName" />
+			<D nameColumnPos="true-false" default=""/>
+			<E nameColumnPos="DO_ON" default=""/>
+			<F nameColumnPos="DO_OF" />
+			<G nameColumnPos="DI_OF" />
+			<H nameColumnPos="DI_OF" />
+        </EXEL>
+		<!--GenData>
+			<DO_DRV Type="BOOL">
+				<globData name="DO_DRV">
 					<localData int="_Algorithm.int" />
+				</globData>	
+				<globData name="DO">
+					<localData int="_Algorithm.int"/>
 				</globData>
-			</APS>
-			<APS_Internal>
-				<globData>
-					<localData  name="APS_Internal" int="_Algorithm.int"/>
+			</DO_DRV>
+			<DO_FromHMI typeFile="T_DO_FromHMI.type">
+				<globData name="DO_FromHMI">
+					<localData int="_Algorithm.int"/>
 				</globData>
-			</APS_Internal>	
+			</DO_FromHMI>
+			<DO_ToHMI typeFile="T_DO_ToHMI.type">
+				<globData name="DO_ToHMI">
+					<localData int="_Algorithm.int"/>
+				</globData>
+			</DO_ToHMI>
 		</GenData>
 		<GenCode>
-			<File src= "Call_APS"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
-				<Block start="Начало сгенерированного кода APS_Processing" end="Конец сгенерированного кода">
-					<Function name="APS_Processing">
-						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
-						<arg><text t=" "/><dbd t="Время_задержки"/></arg>
-						<arg><text t=" "/><text t="unlock"/></arg>
-						<arg><text t=" "/><abonent/><text t="_APS."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_APS_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><abonent/><text t="_FirstOutIndex"/></arg>
-						<arg><text t=" "/><text t="i"/></arg>
-					</Function>	
+			<File src="DO_CallAll" target="_Algorithm">
+				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
+					<Function name="DO_Processing">
+						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><abonent/><text t="_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+					</Function>
 				</Block>
 			</File>
-			<File src= "APS_Init"> <!-- target="_Algorithm"> генерация функции инициализации -->
-				<Block start="Начало сгенерированного кода APS_Init" end="Конец сгенерированного кода">
+			<File src="DO_Permit" target="_Algorithm">
+				<Block start="Начало сгенерированного кода DO_Permit" end="Конец сгенерированного кода">
 					<String>
-						<abonent/><text t="_APS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
-							<switch swt="Status" default="">
-								<case val="АС" def="AS"/>
-								<case val="ПС" def="PS"/>
-								<case val="АО сс" def="AOs"/>
-								<case val="АО бс" def="AOb"/>
-								<case val="ВО сс" def="VOs"/>
-								<case val="ВО бс" def="VOb"/>
-								<case val="Пожар" def="Fire"/>
-							</switch>
-						 <text t="; //"/><dbd t="Наименование"/> 
-					</String>						
-				</Block>
-			</File>
-			<File src= "FirstOut.lua"> <!-- генерация lua таблицы имен алармов -->	
-				<Block start="Начало таблицы" end="Конец таблицы" >
-					<String>
-						<IF cond="Status" val="ПС"> <text t=""/>
-							<ELSE>
-								<IF cond="Status" val="АС"> <text t=""/>
-									<ELSE>
-										<text t="'_APS."/><dbd t="TAG_NAME_PLC"/><text t="',  '"/><dbd t="Status"/><text t="',  - - "/><dbd t="Наименование"/> 
-									</ELSE>
-								</IF>
-							</ELSE> 
-						</IF> 
+						<abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
-			</File>	
-		</GenCode>		
-	</APS>
+			</File>
+		</GenCode-->
+	</AM>
 </ConfigSignals>
