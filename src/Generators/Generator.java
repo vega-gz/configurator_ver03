@@ -463,8 +463,6 @@ public class Generator {
                 nameAndUIIDHeadIEC_HMI.put(h.get("Name"), h.get("UUID")); // заполняю данными все что было в ноде (в дальшейм для анализа списка)
             }
 
-
-            
             String uuidPrefAbGCT = "notFindField";
             String uuidNameRuGCT = "notFindField";
             for (HashMap<String, String> h : listVarHMI) {                // прогон по Варам оригинального головного блока HMI из мнемосхемы
@@ -504,13 +502,20 @@ public class Generator {
                 }
 //                if(!"".equals(ruName)){
 
-                if (isIF) {//ищем условния выбора типа блока (типа в ноде нет но в выборе IF должен быть) 
+                if (isIF) {//ищем условния выбора типа блока ( в ноде нет "type" выполняеться "IF") 
                     String[] gctData = new String[3];
                     hintAL.clear();
                     addVarsData.clear();
-                    if (!setTypeHintAdd(HMIcfg, bigSax, ft, hmiNode, addVarsData, gctData, i, hintAL)) {
+                    if (!setTypeHintAdd(HMIcfg, bigSax, ft, hmiNode, addVarsData, gctData, i, hintAL)) { // так формируется подсказка если она есть
                         continue;
                     }
+                    
+                    {
+                        // Просто тестовое поле тестирования фукции
+                        List<Node> tmpListN = new ArrayList<>();
+                        processingIF(HMIcfg, hmiNode, ft, i, tmpListN);
+                    }
+                    
                     typeGCT = gctData[0];
                     uuidGCT = gctData[1];
                     isAlarm = gctData[2] != null;
@@ -1132,15 +1137,15 @@ public class Generator {
         return 0;
     }
 
-    // --- обработчик ноды фукции Function ---
+    // --- обработчик ноды "Function"  ---
     static int createFunction(Node funcNode, FileManager fm, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException {
-        String stFunc = (String) globVar.sax.getDataNode(funcNode).get("name");  //вычитываем её имя
-        ArrayList<Node> arglist = globVar.sax.getHeirNode(funcNode);                  //создаём список аргументов
+        String stFunc = (String) globVar.sax.getDataNode(funcNode).get("name"); //вычитываем её имя
+        ArrayList<Node> arglist = globVar.sax.getHeirNode(funcNode);            //создаём список аргументов
         String tmp = "";
-        for (Node arg : arglist) {                                        //Цикл по всем аргументам функции
+        for (Node arg : arglist) {                                              //Цикл по всем аргументам функции
             ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
-            tmp += ",";                                                //аргумент записан и отделён от следующего запятой
-            for (Node argPart : argParts) { // проход по значениям аргументов
+            tmp += ",";                                                         //аргумент записан и отделён от следующего запятой
+            for (Node argPart : argParts) {                                     // проход по значениям аргументов
                 tmp += getPartText(argPart, abonent, ft, j);
             }
         }   //Цикл по всем частям аргументов - текстовым и табличным
@@ -1172,13 +1177,13 @@ public class Generator {
         return sax.getDataAttr(n, "chng");
     }
 
-    // ---  Разбор данных (при работе ST)---
+    // ---  Разбор данных для строки (при работе ST)---
     static String getPartText(Node argPart, String abonent, TableDB ft, int j) {
         switch (argPart.getNodeName()) {
             case "text":
-                return (String) globVar.sax.getDataAttr(argPart, "t");
+                return (String) globVar.sax.getDataAttr(argPart, "t"); // Получить просто текст с ноды "text"
             case "dbd":
-                String s = ft.getCell(globVar.sax.getDataAttr(argPart, "t"), j);
+                String s = ft.getCell(globVar.sax.getDataAttr(argPart, "t"), j); // Получить текст с ноды "dbd" и сравнить с тем что в таблице на данной строке
                 if (s == null || s.isEmpty()) {
                     return globVar.sax.getDataAttr(argPart, "ifEmpty");
                 } else {
@@ -1209,6 +1214,16 @@ public class Generator {
 
         }
         return "";
+    }
+
+    // --- Парсер текстовой ноды без абонента ---
+    static String getPartTextNonAbon(Node argPart, TableDB ft, int j) {
+        String tmp = "";
+        tmp += ",";
+        for (Node n : globVar.sax.getHeirNode(argPart)) {
+            tmp += getPartText(n, null, ft, j);
+        }
+        return tmp;
     }
 
     //  --- Обработка ноды switch (Нода, таблица и строка таблицы)---
@@ -1739,23 +1754,24 @@ public class Generator {
         return false;
     }
 
-    // --- Поле формирования подсказки (Это больше разбор IF)---
+    // оригинальный метод Льва 19.02.21 закомитил
+    // --- Поле формирования Подсказки (Это больше разбор IF) LEV ---
     private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
             String[] gctData, int i, ArrayList<String> hintAL) {
-        Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF"); // выдергиваем ноду с условием выбора типа 
-        String cond = HMIcfg.getDataAttr(ifNode, "cond"); // получим условия для Условий им
-        String val = HMIcfg.getDataAttr(ifNode, "val"); // получим условия для Условий им
-        if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {  // Сравниваем полученные данные из ИФ с тадличной клеткой
+        Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");               // выдергиваем ноду с условием выбора типа "IF"
+        String cond = HMIcfg.getDataAttr(ifNode, "cond");                       // получим условия в каком столбце таблицы смотреть
+        String val = HMIcfg.getDataAttr(ifNode, "val");                         // получим условия какое значение клетки таблицы сравнивать
+        if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {               // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
             gctData[0] = HMIcfg.getDataAttr(ifNode, "type");
-            if (gctData[0] == null) {
+            if (gctData[0] == null) {                                           // Нужно ли это условие с возвратом?
                 return false;
             }
-            setAtherData(HMIcfg, bigSax, ifNode, gctData, addVarsData, hintAL);
+            setOtherData(HMIcfg, bigSax, ifNode, gctData, addVarsData, hintAL); // Нашли значение type в ноде(так же собираются ноды наследники) , и завершаем условие
         } else {
             Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
-            gctData[0] = HMIcfg.getDataAttr(ELS, "type"); // берем в ноде тип рекурсия пока его не найдем
+            gctData[0] = HMIcfg.getDataAttr(ELS, "type");                       // берем в ноде тип рекурсия пока его не найдем
             if (gctData[0] != null) {
-                setAtherData(HMIcfg, bigSax, ELS, gctData, addVarsData, hintAL);
+                setOtherData(HMIcfg, bigSax, ELS, gctData, addVarsData, hintAL);
             } else {
                 return setTypeHintAdd(HMIcfg, bigSax, ft, ELS, addVarsData, gctData, i, hintAL);
             }
@@ -1763,14 +1779,50 @@ public class Generator {
         return true;
     }
 
-    // ---  ---
-    private static void setAtherData(XMLSAX HMIcfg, XMLSAX bigSax, Node ifNode, String[] gctData,
+    // --- разбор нод IF ELSE в xml  ---
+    private static List<Node> processingIF(XMLSAX HMIcfg, Node hmiNode, TableDB ft, int i, List<Node> nodeProcessing) {
+        for (Node ifNode : HMIcfg.getHeirNode(hmiNode)) {
+            if (ifNode.getNodeName().equalsIgnoreCase("IF")) { // ищем нужные ноды с условиями
+                String cond = HMIcfg.getDataAttr(ifNode, "cond");                                               // получим условия в каком столбце таблицы смотреть
+                String val = HMIcfg.getDataAttr(ifNode, "val");                                                 // получим условия какое значение клетки таблицы сравнивать
+                if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {                                       // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
+                    for (Node nD : HMIcfg.getHeirNode(ifNode)) {                                                // добавляем ноды которые прошли по условию IF
+                        if (!nD.getNodeName().equalsIgnoreCase("IF") || !nD.getNodeName().equalsIgnoreCase("ELSE")) {
+                            nodeProcessing.add(nD);
+                            // или выполняем над ними действие (проверка на хинты доп аттрибуты и прочее)
+                        }
+                    }
+                    return nodeProcessing;
+                } else { // ищем самый первый else этой ноды
+                    Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
+                    if (ELS != null) {
+                        for (Node nD : HMIcfg.getHeirNode(ELS)) {                                                // добавляем ноды которые прошли по условию IF
+                            if (!nD.getNodeName().equalsIgnoreCase("IF")) {
+                                nodeProcessing.add(nD);
+                                // или выполняем над ними действие (проверка на хинты доп аттрибуты и прочее)
+                            } else {
+                                processingIF(HMIcfg, ELS, ft, i, nodeProcessing);
+                            }
+                        }
+                        return nodeProcessing;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    // --- Собирает доп поля и подсказку тольк в IF else(это метод применяется только в setTypeHintAdd )---
+    private static void setOtherData(XMLSAX HMIcfg, XMLSAX bigSax, Node ifNode, String[] gctData,
             ArrayList<String[]> addVarsData, ArrayList<String> hintAL) {
-        gctData[2] = HMIcfg.getDataAttr(ifNode, "isAlarm");
-        Node myBlock = bigSax.findNodeAtribute(new String[]{"GraphicsCompositeFBType", "Name", gctData[0]}); // может быть не только GraphicsCompositeFBType(ошибка!!!)
+        gctData[2] = HMIcfg.getDataAttr(ifNode, "isAlarm");                                                         // определеяет есть ли такой аттрибут в ноде
+        Node myBlock = bigSax.findNodeAtribute(new String[]{"GraphicsCompositeFBType", "Name", gctData[0]});        // Ищем в головной ноде объект на который указывает конф.файл
+        if (myBlock == null) {
+            myBlock = bigSax.findNodeAtribute(new String[]{"CompositeFBType", "Name", gctData[0]}); // второй тип графического файла  (на всякий)
+        }
         gctData[1] = bigSax.getDataAttr(myBlock, "UUID");
-        getAddVars(HMIcfg, ifNode, addVarsData);
-        getHintParts(HMIcfg, ifNode, hintAL);
+        getAddVars(HMIcfg, ifNode, addVarsData);                                                                    // Доп переменные в условии
+        getHintParts(HMIcfg, ifNode, hintAL);                                                                       // подсказку в условии
     }
 
     // --- Проверка есть ли дополнительные поля в блоке формирования сигналов (LEV )---
@@ -1876,7 +1928,9 @@ public class Generator {
         }
         List<HashMap<String, String>> dataFromFBparent = new ArrayList<>();
         Node nodeInputVars = bigSax.returnFirstFinedNode(myBlock, "InputVars");
-        if (nodeInputVars == null) return null;
+        if (nodeInputVars == null) {
+            return null;
+        }
         for (Node n : bigSax.getHeirNode(nodeInputVars)) {
             //System.out.println(n.getNodeName());
             dataFromFBparent.add(bigSax.getDataNode(n));

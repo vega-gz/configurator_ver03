@@ -4,6 +4,7 @@ import globalData.globVar;
 import Tools.TimerDialog;
 
 /*@author lev*/
+// ---- Класс переименовывания таблицы в БД ---
 public class TextEdit extends javax.swing.JFrame {
 
     TableDB tdb;
