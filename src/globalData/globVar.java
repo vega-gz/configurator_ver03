@@ -44,7 +44,7 @@ public class globVar {
 	static long dinUuid = 0;
         
         public static String abonent = ""; // текущий абонент работы с данными
-        public static XMLSAX sax = null;
+        public static XMLSAX sax = null; // в генераторе смотрит на ConfigSignals.xml, может переинициализируется еще где то
         public static Node cfgRoot = null;
         
         public static String currentBase = "";
