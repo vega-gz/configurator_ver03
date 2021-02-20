@@ -5,13 +5,13 @@
  */
 package ReadWriteExcel;
 
+import DataBaseTools.DataBase;
 import java.io.File;
 import org.apache.poi.ss.usermodel.Row;
 import globalData.globVar;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -21,18 +21,28 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.w3c.dom.Node;
 
+/**
+ *
+ * @author cherepanov
+ */
 public final class UnloadExcel {
-    
-    
-    // --- Запуск обработчика ---
-    public boolean runUnloadExcel(String abonent_name){
+
+    /**
+     * Создает объект книги с названием равным имени абонента,выбранного
+     * пользователем
+     *
+     * @param abonent_name имя абонента,для которого пользователь хочет
+     * выгрузить данные
+     * @return возвращает true если книга создалась,false если нет
+     */
+    public boolean runUnloadExcel(String abonent_name) {
         boolean error = true;
         HSSFWorkbook workbook = new HSSFWorkbook();
         ArrayList<String> tableList = globVar.DB.getListTable();
         for (int i = 0; i < tableList.size(); i++) {
             String name_list = tableList.get(i);
             if (name_list.indexOf(abonent_name + "_") == 0) {
-                if(createExcelSheet(name_list, workbook) == false){
+                if (createExcelSheet(name_list, workbook) == false) {
                     System.out.println("not find Table" + name_list);
                     error = false;
                 }
@@ -40,14 +50,24 @@ public final class UnloadExcel {
         }
         return error;
     }
-    
+
+    /**
+     * Метод создает книгу с данными ,выгружаемыми из БД
+     *
+     * @param nameTable имя листа в БД ,которое делится на имя книги(book_name)
+     * и имя листа(sheetName)
+     * @param workbook книга ,которую мы создали в
+     * методу{@link UnloadExcel#runUnloadExcel(java.lang.String)}
+     * @return true если файл создался,false если нет
+     */
     boolean createExcelSheet(String nameTable, HSSFWorkbook workbook) {
-        
+        DataBase db=new DataBase();
         int x = nameTable.indexOf("_");
         String book_name = nameTable.substring(0, x);
         String sheetName = nameTable.substring(x + 1);
         int y = sheetName.indexOf("_mb_");
         String subAb = "";
+        String fullNameTable;
         String nodeName = sheetName.substring(y + 1);
         if (y > 0) {
             nodeName = sheetName.substring(y + 1);
@@ -57,7 +77,7 @@ public final class UnloadExcel {
             return false;
         }
         Node excelNode = globVar.sax.returnFirstFinedNode(tableNode, "EXEL");
-        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);//с одной бутылки на другую прилетел
+        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);
         // создание листа с названием 
         HSSFSheet sheet = workbook.createSheet(sheetName);
         // счетчик для строк
@@ -72,11 +92,21 @@ public final class UnloadExcel {
         for (Node colExcel : childExcel) {
             String colExelName = colExcel.getNodeName();//получили имя ноды 
             String colName = globVar.sax.getDataAttr(colExcel, "nameColumnPos");//получили значение атрибута
-            colNames.add(colName);
+            
+            colNames.add(colName);//сделал для того чтобы для xml сохранилось НАИМЕНОВАНИЕ а для шапку для mb создать из комментария к таблице
+            if(sheetName.contains("mb")&&colName.equals("Наименование")){
+                fullNameTable=db.getCommentTable(nameTable);
+                int z=fullNameTable.indexOf("Modbus:");
+               colName=fullNameTable.substring(z+"Modbus:".length());
+               // colName=db.getCommentTable(nameTable);
+             
+            }
+            
             int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
-            row.createCell(numberCol).setCellValue(colName);//я бы скореевсеговысыпалсяно этонеточно
+            row.createCell(numberCol).setCellValue(colName);//создаем ячейку и заполняем ее значением colName
             row.getCell(numberCol).setCellStyle(cellStyle);//заполняем ячейки наименования цветом
         }
+        //конечный итог,создали строку(шапку)
         rowNum++;
         ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);
         for (String[] sData : data) {

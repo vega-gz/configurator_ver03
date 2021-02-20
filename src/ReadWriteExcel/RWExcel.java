@@ -30,13 +30,16 @@ public class RWExcel {
     }
 
     public RWExcel() { // по умолчанию(можно не использовать)
+        
     }
     
     public void setPathF(String path_file) {
         this.path_file = path_file;
     }
 
-// --- Данные из ячейки по ссылке на строку и имени столбца---Lev---
+/** --- Данные из ячейки по ссылке на строку и имени столбца---Lev---
+ * 
+ */
     private static String getDataCell(HSSFRow row, String colName) {
         if(row==null) return null;
         int numberCol = CellReference.convertColStringToIndex(colName); // Переводим имя в индекс
@@ -72,14 +75,24 @@ public class RWExcel {
         }
     }
     
-    //Для Excel - Преобразование буквы столбца в номер столбца ---Lev---
+    /**Для Excel - Преобразование буквы столбца в номер столбца ---Lev---
+     * 
+     * @param colName
+     * @param colList
+     * @return 
+     */
     private static int getColNumber(String colName, ArrayList<Node> colList){
         for(int i=0;i<colList.size();i++) 
             if(colName.equals(globVar.sax.getDataAttr(colList.get(i),"nameColumnPos")))
                 return i;
         return -1;
     }
-    //Замена значений на словарные ---Lev---
+    /**Замена значений на словарные ---Lev---
+     * 
+     * @param file
+     * @param src
+     * @return 
+     */
     private static String getFromDict(String file, String src){
         XMLSAX dictSax = new XMLSAX();
         Node dict = dictSax.readDocument(file);
@@ -195,7 +208,14 @@ public class RWExcel {
         String operation = globVar.sax.getDataAttr(f1, "operation");
         return calcFormula(operation, f1, f, colList,dataFromExcel, i);
     }
-// --- сформировать даные из конфигугации XML для чтения Exel---Lev---
+/** --- сформировать даные из конфигугации XML для чтения Exel---Lev---
+ * 
+ * @param pathExel
+ * @param jpb
+ * @return
+ * @throws FileNotFoundException
+ * @throws IOException 
+ */
     public static String ReadExelFromConfig(String pathExel, JProgressBar jpb) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
         FileInputStream inputStream = new FileInputStream(new File(pathExel));
         if(inputStream == null){
@@ -403,7 +423,9 @@ public class RWExcel {
     return tCnt;
     }
     
-//    public void algNameChange(){
-//        
-//    }
+
+    public void fillTag_NAME_PLC(){
+        
+    }
+        
 }
