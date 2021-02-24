@@ -5,7 +5,6 @@
  */
 package Tools;
 
-import Tools.StrTools;
 import static Tools.StrTools.getAttributValue;
 import XMLTools.XMLSAX;
 import globalData.globVar;
@@ -41,7 +40,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Node;
 
-//import main.globVar;
 public class FileManager {
 
     public static ArrayList<String> listAllPath = new ArrayList(); // отдельно вытащил из за рекурсии в pathAllFile
@@ -54,7 +52,15 @@ public class FileManager {
     public Reader rdStream = null;
     public boolean EOF;
 
-    // --- копирование файла используя поток ---
+    /**
+     * Метод копирует файл используя поток ---
+     *
+     * @param source
+     * @param dest
+     * @param notCopyFile
+     * @return
+     * @throws IOException
+     */
     public static int copyFileWoReplace(String source, String dest, boolean notCopyFile) throws IOException {
         File copy = new File(dest);
         if (copy.isFile()) {//Проверяем, есть ли такой файл в целевом каталоге
@@ -121,7 +127,13 @@ public class FileManager {
         copyFile(source, source + "_" + currentDat);
     }
 
-    // -- Поиск файла в конкретной папке ( можно по маске) Возращаем лист с путями ---
+    /**
+     * Метод поиска файла в конкретной папке.
+     *
+     * @param path путь до дирректории
+     * @param s название файла,который мы ищем
+     * @return лист с путями,где лежит файл
+     */
     public ArrayList<String> findFile(String path, String s) {
         ArrayList<String> listPathFile = new ArrayList();
         /*
@@ -139,7 +151,11 @@ public class FileManager {
         return listPathFile;
     }
 
-    // -- Рекурсивное удаление директории со всеми файлами ---
+    /**
+     * Метод рекурсивно удаляет дирректорию со всеми файлами
+     *
+     * @param dir путь до дирректории ,которую удаляем
+     */
     public void deleteDirectory(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
@@ -197,7 +213,11 @@ public class FileManager {
         return listAllPath;
     }
 
-    // --- Логирование ошибок и другая информация ---
+    /**
+     * --- Логирование ошибок и другая информация ---
+     *
+     *
+     */
     public static void loggerConstructor(String s) {// throws FileNotFoundException {
         String nameF = globVar.logFile;
         File logF = new File(nameF);
@@ -234,7 +254,6 @@ public class FileManager {
     public int MoveFile(String fileName, String srcDir, String dstDir) {
         File originalFile = new File(srcDir, fileName);
         File newFile = new File(dstDir, fileName);
-
         if (originalFile.exists() && !newFile.exists()) {
             if (originalFile.renameTo(newFile)) {
             } else {
@@ -570,8 +589,15 @@ public class FileManager {
         }
         return 0;
     }
-//--ПереименованиеTYPE
 
+    /**
+     * Метод проходит все файлы по указанному пути,читает файлы с расширением
+     * file , переименовывает файл согласно значению его атрибута Name.
+     *
+     * @param dir путь до папки проекта
+     * @exception IOException
+     * @exception FileNotFoundException
+     */
     public static int renameTypeFile(String dir) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
         String expType = "type";
@@ -633,8 +659,15 @@ public class FileManager {
         System.out.println("Выполнено замен " + cnt);
         return cnt;
     }
-//--Переименование INT
 
+    /**
+     * Метод проходит все файлы по указанному пути,читает файлы с расширением
+     * int , переименовывает файл согласно значению его атрибута Name.
+     *
+     * @param dir путь до папки проекта
+     * @exception FileNotFoundException
+     * @exception IOException
+     */
     public static int renameIntFile(String dir) throws FileNotFoundException, IOException {
         File[] filesInDirectory = new File(dir).listFiles();//получаем список элементов по указанному адресу
         String expInt = "int";
@@ -706,7 +739,17 @@ public class FileManager {
         return cnt;
     }
 
-    //---МЕТОД ЗАМЕНЫ ИМЕН И АЛГОРИТМИЧЕСКИХ ИМЕН В TYPE ФАЙЛАХ-----Grigory
+    /**
+     * Метод заменяет русское и алгоритмическое имена в базе данных и XML файлах
+     * теми значениями ,которые ввел пользователь в соответствущих ячейка
+     * таблицы.
+     *
+     * @param dir путь до папки проекта
+     * @param name лист Русских имен и Алгоритмических имен,которые были
+     * изменены
+     * @param nameTable наименование таблицы,в которой была произведены замена
+     *
+     */
     @SuppressWarnings("empty-statement")
     public boolean ChangeIntTypeFile(String dir, ArrayList<String[]> name, String nameTable, JProgressBar jProgressBar1) {//newName---массив замен   Name---массив из БД
         File[] filesInDirectory = new File(dir + File.separator + "Design").listFiles();//получаем список элементов по указанному адресу
@@ -716,7 +759,9 @@ public class FileManager {
         String comment, alg, newComment, newAlg;
         String[] nameLine;
         boolean isErr = false;
-        //пробегаемся по файлам в поисках соответствия 
+        /**
+         * пробегаемся по файлам в поисках соответствия
+         */
         for (File findType : filesInDirectory) {
             nameFile = findType.getName();//имя файла с расширением(в котором в данный момент ищем)
             String nT = "T_" + nameTable;
@@ -750,7 +795,7 @@ public class FileManager {
                 }
                 xmlsax.writeDocument(globVar.desDir + File.separator + "Design" + File.separator + nameFile);
             }
-            
+
         }
         return isErr;
     }

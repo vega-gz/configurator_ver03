@@ -5,7 +5,6 @@
  */
 package ReadWriteExcel;
 
-import static Tools.TableTools.getRow;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -126,22 +125,22 @@ public class ExcelAdapter implements ActionListener {
             int row = jTable1.getColumnCount();
             int rowsselected = jTable1.getSelectedRow();//здесь получаем индекс
             for (int i = 0; i < row; i++) {//в цикле мы получаем строку
-                
+
                 sbf.append(jTable1.getValueAt(rowsselected, i));
                 System.out.println(jTable1.getValueAt(rowsselected, i));
                 sbf.append("\t");//разделяет построчно
-                
+
             }
             stsel = new StringSelection(sbf.toString());
             system = Toolkit.getDefaultToolkit().getSystemClipboard();
             system.setContents(stsel, stsel);
-            
+
             listener.fixOldData();
-            for(int i = 0; i < row; i++){
+            for (int i = 0; i < row; i++) {
                 jTable1.setValueAt("", rowsselected, i);
             }
+
             listener.tableChanged();
-            
 
         }
         if (e.getActionCommand().compareTo("Copy") == 0) {

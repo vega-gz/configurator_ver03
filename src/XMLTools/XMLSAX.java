@@ -42,19 +42,25 @@ public class XMLSAX {
     ReadBedXML fixXML = null; // объект реализации обхода неверно сформированного файл
     Node root = null;
     ArrayList<Node> AllFindingNode = new ArrayList<>(); // все найденные ноды по имени
-    
-    
-    public Node importNode(Node n){
+
+    public Node importNode(Node n) {
         return document.importNode(n, true);
     }
-            
-    public void clear(){
+
+    public void clear() {
         document = null;
         pathWF = "";
         fixXML = null;
         root = null;
     }
-    // --- прочитать документ и передать корневую ноду ---
+
+    /**
+     * Метод читает документ и передать корневую ноду
+     *
+     * @param patchF путь,по которому находится документ,который необходимо
+     * прочитать
+     * @return корневой элемент этого файла
+     */
     public Node readDocument(String patchF) {
         pathWF = patchF;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -110,7 +116,12 @@ public class XMLSAX {
 //        return n;
 //    }
 
-    // --- Создание элемента Node  ---
+    /**
+     * Метод создает элемент Node ---
+     *
+     * @param nameElement имя ноды,которую необходимо создать
+     * @return созданную ноду
+     */
     public Node createNode(String nameElement) {
         if (document != null) {// если документ зарегистрирован или внесен то
             return document.createElement(nameElement);
@@ -120,13 +131,25 @@ public class XMLSAX {
         }
     }
 
-    // --- Вставка и сождании новой ноды с параметрами ---
+    /** --- Вставка и сождании новой ноды с параметрами ---
+     * 
+     * @param parent
+     * @param arg
+     * @return 
+     */
     public Node insertChildNode(Node parent, String arg) {
-        String [] sa = {arg};
+        String[] sa = {arg};
         return insertChildNode(parent, sa);
     }
-    // --- Вставка и создании новой ноды с параметрами ---
-    public Node insertChildNode(Node parent, String[] arg){
+
+    /** --- Вставка и создании новой ноды с параметрами ---
+     * 
+     * @param parent
+     * @param arg
+     * @return 
+     */
+
+    public Node insertChildNode(Node parent, String[] arg) {
         // arg[0] Имя ноды которую вставляем, arg[1]-arg[2] ключ значение и так далее  
         Node createN = createNode(arg[0]);
         String attr = null;
@@ -143,7 +166,11 @@ public class XMLSAX {
         return createN;
     }
 
-    // --- Создание Документа  с root нодой---
+    /** --- Создание Документа  с root нодой---
+     * 
+     * @param nameElement
+     * @return 
+     */
     public Node createDocument(String nameElement) {
         //Node root = null;
         try {
@@ -158,7 +185,11 @@ public class XMLSAX {
         return root;
     }
 
-    // --- Внести данные в ноду списком HashMap---
+    /** --- Внести данные в ноду списком HashMap---
+     * 
+     * @param o
+     * @param map 
+     */
     public void insertDataNode(Object o, HashMap<String, String> map) {
         //System.out.println(o.getClass().getName());
         Element editElem = null;
@@ -176,7 +207,12 @@ public class XMLSAX {
 
     }
 
-    // --- Внести данные в ноду ключ-значение ---
+    /** --- Внести данные в ноду ключ-значение ---
+     * 
+     * @param o
+     * @param attr
+     * @param value 
+     */
     public void setDataAttr(Object o, String attr, String value) {
         //System.out.println(o.getClass().getName());
         Element editElem = null;
@@ -189,13 +225,20 @@ public class XMLSAX {
         editElem.setAttribute(attr, value);
     }
 
-    // --- инициализировать документ с путем для его сохранения (если стандартными способами создали)---
+    /** --- инициализировать документ с путем для его сохранения (если стандартными способами создали)---
+     * 
+     * @param document
+     * @param patchWF 
+     */
     public void docInstance(Document document, String patchWF) {
         this.pathWF = patchWF;
         this.document = document;
     }
 
-    // --- пробегаме по ноды рекурсией ---
+    /** --- пробегаме по ноды рекурсией ---
+     * 
+     * @param start 
+     */
     public static void stepThroughAll(Node start) {
         //System.out.println(start.getNodeName() + " = " + start.getNodeValue());
         if (start.getNodeType() == start.ELEMENT_NODE) {
@@ -212,9 +255,15 @@ public class XMLSAX {
         }
     }
 
-    // --- получаем данные c ноды в виде ключ значение ---
+    /** --- получаем данные c ноды в виде ключ значение ---
+     * 
+     * @param n
+     * @return 
+     */
     public HashMap getDataNode(Node n) {
-        if(n==null)return null;
+        if (n == null) {
+            return null;
+        }
         HashMap<String, String> findData = null;
         if (n != null) {
             //System.out.println("NodeName" + n.getNodeName() + " NameType" + n.getNodeType());
@@ -243,9 +292,15 @@ public class XMLSAX {
         return findData;
     }
 
-    // --- получаем всех наследников ноды именно нод список(стандартно возвразает все подряд) ---
+    /** --- получаем всех наследников ноды именно нод список(стандартно возвразает все подряд) ---
+     * 
+     * @param n
+     * @return 
+     */
     public ArrayList<Node> getHeirNode(Node n) {
-        if(n==null) return null;
+        if (n == null) {
+            return null;
+        }
         ArrayList<Node> kindNode = new ArrayList<>();
 
         NodeList child = n.getChildNodes();
@@ -259,15 +314,24 @@ public class XMLSAX {
         return kindNode;
     }
 
-    // --- Запипись в файл структурой XML ---
+    /** --- Запипись в файл структурой XML ---
+     * 
+     */
     public void writeDocument() {
-        if(document == null || "".equals(pathWF)) return;
+        if (document == null || "".equals(pathWF)) {
+            return;
+        }
         writeDocument(pathWF);
     }
 
-     // --- Запипись в файл структурой XML с указанием именем файла ---
+    /** --- Запипись в файл структурой XML с указанием именем файла ---
+     * 
+     * @param NewPatchWF 
+     */
     public void writeDocument(String NewPatchWF) {
-        if(document == null) return;
+        if (document == null) {
+            return;
+        }
         try {
             File file = new File(NewPatchWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -287,7 +351,11 @@ public class XMLSAX {
         }
     }
 
-   // --- Метод чтения и подключение к базе посредством конфига ---
+    /** --- Метод чтения и подключение к базе посредством конфига
+     * 
+     * @param patchFile
+     * @return 
+     */ 
     public static int getConnectBaseConfig(String patchFile) {
         File f = new File(patchFile);
         String pass = null;
@@ -312,51 +380,82 @@ public class XMLSAX {
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
                         int ldd = DesignDir.length();
-                        if("design".equalsIgnoreCase(DesignDir.substring(ldd-6))) DesignDir=DesignDir.substring(0, ldd-7);
+                        if ("design".equalsIgnoreCase(DesignDir.substring(ldd - 6))) {
+                            DesignDir = DesignDir.substring(0, ldd - 7);
+                        }
                     }
                 }
             } catch (ParserConfigurationException | SAXException | IOException ex) {
                 System.out.println("Проверьте существование или структуру " + patchFile);
                 return -1;
             }
-            if(url != null) globVar.dbURL = url; // добавить переменную пути проекта
-            if(pass != null) globVar.PASS = pass; // добавить переменную пути проекта
-            if(user != null) globVar.USER = user; // добавить переменную пути проекта
-            if(base != null) globVar.currentBase = base; // добавить переменную пути проекта
-            if(DesignDir != null) globVar.desDir = DesignDir; // добавить переменную пути проекта
+            if (url != null) {
+                globVar.dbURL = url; // добавить переменную пути проекта
+            }
+            if (pass != null) {
+                globVar.PASS = pass; // добавить переменную пути проекта
+            }
+            if (user != null) {
+                globVar.USER = user; // добавить переменную пути проекта
+            }
+            if (base != null) {
+                globVar.currentBase = base; // добавить переменную пути проекта
+            }
+            if (DesignDir != null) {
+                globVar.desDir = DesignDir; // добавить переменную пути проекта
+            }
             return 0;
-        }else{
+        } else {
             System.out.println("Проверьте существование или структуру " + patchFile);
         }
         return -1;
     }
 
-    // --- Удалить ноду ---
+    /**
+     * Метод удаляет выбранную ноду
+     *
+     * @param n нода,которую необходимо удалить
+     */
     public void removeNode(Node n) {
         Node parentN = n.getParentNode();
-       parentN.removeChild(n);
+        parentN.removeChild(n);
     }
-    // --- очистить ноду ---
+
+    /**
+     * Метод очищает ноду ---
+     *
+     * @param n нода,которую необходимо очистить
+     */
     public void cleanNode(Node n) {
         NodeList child = n.getChildNodes();
         for (int i = 0; i < child.getLength(); i++) {
             Node node = child.item(i);
-            if (node.getNodeType() == 1) n.removeChild(node);
+            if (node.getNodeType() == 1) {
+                n.removeChild(node);
+            }
         }
     }
 
-    // --- Найти первую ноду по имени и вернуть ее ---
+    /**
+     * --- Найти первую ноду по имени и вернуть ее ---
+     *
+     * @param s нода,которую необходимо найти
+     * 
+     */
     public Node returnFirstFinedNode(String s) {
-        return returnFirstFinedNode(root,s);
+        return returnFirstFinedNode(root, s);
     }
-    // --- Найти первую ноду по имени и вернуть ее ---
+
+   /**
+    * @param n
+    * @param s
+    * @return 
+    */
     public Node returnFirstFinedNode(Node n, String s) {
         Node finding = null;
         if (n != null) {
-            //System.out.println("NodeName " + n.getNodeName() + " TypeNode " + n.getNodeType());
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
                 if (n.getNodeName().equals(s)) {
-                    //System.out.println("Find Node " + n.getNodeName());
                     finding = n;
                     return finding;
                 }
@@ -374,10 +473,13 @@ public class XMLSAX {
         return finding;
     }
 
-    // --- Найти все ноды по имени и вернуть их ---
-    public ArrayList<Node> getNodesName(Node n, String s) { 
+    
+    /** Метод находит все ноды по имени и возвращает ArrayList этих нод
+     *
+     */
+    public ArrayList<Node> getNodesName(Node n, String s) {
         if (n.getNodeType() == n.ELEMENT_NODE) { //  проверка хз чего The node is an Element.
-            if(n.getNodeName().equals(s)){
+            if (n.getNodeName().equals(s)) {
                 AllFindingNode.add(n);
                 System.out.println("Name:Node " + n.getNodeName());
             }
@@ -389,10 +491,19 @@ public class XMLSAX {
         }
         return AllFindingNode;
     }
-    
-    // --- получить данные по аттрибуту ноды--- 
+
+    /**
+     * Получаем данные по аттрибуту ноды
+     *
+     * @param n нода,из которой получаем данные
+     * @param s имя аттрибута,значение которого мы получаем
+     * @return возвращает значение аттрибута,если Нода пустая или данного
+     * атрибута нет,возвращает null
+     */
     public String getDataAttr(Node n, String s) {
-        if(n==null || s==null) return null;
+        if (n == null || s == null) {
+            return null;
+        }
         NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
             Node attr = startAttr.item(i);
@@ -402,11 +513,18 @@ public class XMLSAX {
         }
         return null;
     }
-    
-    // --- изменить данные аттрибута ноды--- 
+
+    /**
+     * Метод изменяет данные аттрибута ноды
+     *
+     * @param n нода,в которой изменяем аттрибут
+     * @param nameAtr имя аттрибута ноды,значение которого необходимо изменить
+     * @param value значение на которое заменяем
+     * @return если замена была произведена ,возвращаем true
+     */
     public boolean editDataAttr(Node n, String nameAtr, String value) {
         boolean request = false;
-        if(n !=null){
+        if (n != null) {
             NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
             for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
                 Node attr = startAttr.item(i);
@@ -419,27 +537,41 @@ public class XMLSAX {
         return request;
     }
 
-    // --- Найти ноду по ее атрибутам (рекурсивно) ---Lev---
+    /** --- Найти ноду по ее атрибутам (рекурсивно) ---Lev---
+     * 
+     * @param arg
+     * @return 
+     */
     public Node findNodeAtribute(String[] arg) {
         return findNodeAtribute(root, arg);
     }
+
+    /**
+     * Найти ноду по имени и ее атрибутам (рекурсивно)
+     *
     
-    // --- Найти ноду по имени и ее атрибутам (рекурсивно)---
+     */
     public Node findNodeAtribute(Node n, String[] arg) {
-        if(arg==null || arg.length==0 || n==null) return null;
+        if (arg == null || arg.length == 0 || n == null) {
+            return null;
+        }
         String nameFindN = arg[0];// arg первое значение всегда Название ноды
         Node finding = null;
-            //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
+        //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
         if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
             boolean access = true; // разрешение на нужную ноду
             if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя ноды
                 NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
-                if(arg.length == 1) return n;               // если аргумент был один - искали толькор имя ноды и нашли его
+                if (arg.length == 1) {
+                    return n;               // если аргумент был один - искали толькор имя ноды и нашли его
+                }
                 boolean compared = false;
                 for (int elemArh = 1; elemArh < arg.length; elemArh++) { // Пробегаем по входящему массиву с 1 элемена так как 0 имя Ноды
                     String key = arg[elemArh]; // значение элемента которое проверяем
                     String val = null;
-                    if(elemArh < arg.length- 1) val = arg[++elemArh]; //если есть ещё аргументы, значит это пара "ключ-значение"
+                    if (elemArh < arg.length - 1) {
+                        val = arg[++elemArh]; //если есть ещё аргументы, значит это пара "ключ-значение"
+                    }
                     compared = false;
                     for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды
                         Node attr = startAttr.item(i);
@@ -463,34 +595,41 @@ public class XMLSAX {
         }
         for (Node child = n.getFirstChild(); child != null; child = child.getNextSibling()) {
             finding = findNodeAtribute(child, arg);
-            if (finding != null) return finding;
+            if (finding != null) {
+                return finding;
+            }
         }
         return finding;
     }
 
-   // --- Запипись в файл структурой XML --- надо бы удалить, но оставлено на свякий случай до 1.09.2020
+    /**
+     * Метод пишет файл структурой XML
+     *
+     */
     public void writeDocument1() {
-        if(document == null || "".equals(pathWF)) return;
+        if (document == null || "".equals(pathWF)) {
+            return;
+        }
         try {
             // удаление пустых строк
             XPath xp = XPathFactory.newInstance().newXPath();
             try {
                 NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
-                for (int i=0; i < nl.getLength(); ++i) {
-                Node node = nl.item(i);
-                node.getParentNode().removeChild(node);
-            }
+                for (int i = 0; i < nl.getLength(); ++i) {
+                    Node node = nl.item(i);
+                    node.getParentNode().removeChild(node);
+                }
             } catch (XPathExpressionException ex) {
                 Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             File file = new File(pathWF);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             //System.out.println(document.getNodeName());
             transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
             //transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
             transformer.transform(new DOMSource(document), new StreamResult(file)); // наш документ в начале
-            
+
         } catch (TransformerException e) {
             e.printStackTrace(System.out);
         }
@@ -505,18 +644,23 @@ public class XMLSAX {
         }
     }
 
-    // --- Запипись в файл структурой XML с указанием именем файла --- надо бы удалить, но оставлено на свякий случай до 1.09.2020
+    /** --- Запипись в файл структурой XML с указанием именем файла --- надо бы удалить, но оставлено на свякий случай до 1.09.2020
+     * 
+     * @param NewPatchWF 
+     */
     public void writeDocument1(String NewPatchWF) {
-        if(document == null) return;
+        if (document == null) {
+            return;
+        }
         try {
             // удаление пустых строк
             XPath xp = XPathFactory.newInstance().newXPath();
             try {
                 NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", document, XPathConstants.NODESET);
-                for (int i=0; i < nl.getLength(); ++i) {
-                Node node = nl.item(i);
-                node.getParentNode().removeChild(node);
-            }
+                for (int i = 0; i < nl.getLength(); ++i) {
+                    Node node = nl.item(i);
+                    node.getParentNode().removeChild(node);
+                }
             } catch (XPathExpressionException ex) {
                 Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -538,13 +682,20 @@ public class XMLSAX {
         }
     }
 
- 
-    // --- Метод для обработки формул в построение таблицы из XML ---
+    /**
+     * --- Метод для обработки формул в построение таблицы из XML ---
+     *
+    
+     */
     String calcFormula() {
         return "i am from Formula!";
     }
 
-    // --- обработчик ошибок показывает что было не так сделанно(можно выводить логи в фал) --
+    /**
+     * --- обработчик ошибок показывает что было не так сделанно
+     *
+    
+     */
     void errorExecuter(String s) {
         JOptionPane.showMessageDialog(null, "Сообщения о ошибке " + s);
     }
@@ -555,8 +706,8 @@ public class XMLSAX {
 //        XMLSAX test = new XMLSAX();
 //        Node n = test.readDocument("test666.xml");
 //        String[] massD = {"Name66", "attr1", "val1", "attr2", "val2", "attr2", "val2"};
-       // test.insertChildNode(n, massD);
-       // test.writeDocument();
+        // test.insertChildNode(n, massD);
+        // test.writeDocument();
 //        HashMap<String,String> dataN = new HashMap<>();
 //        dataN.put("attr1", "value1");
 //        dataN.put("attr2", "value2");

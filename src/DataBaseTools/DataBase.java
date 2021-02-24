@@ -432,7 +432,10 @@ public class DataBase implements Observed {
         }
         return listColumn;
     }
-    //-------------- Получить список таблиц базы ---------------
+    /**Метод получения списка таблиц из базы 
+     * 
+     * @return список таблиц базы
+     */
     public ArrayList<String> getListTable() {
         ArrayList<String> list_table_base = new ArrayList();
         try {
