@@ -231,7 +231,7 @@ public class Generator {
         return 0;
     }
 
-    // ---  ---
+    // --- Генерация ST файлов  ---
     public static int genSTcode(TableDB ft, boolean disableReserve, JProgressBar jProgressBar1) throws IOException { //0 -ok, 1 - not source file, 2 -impossible create file
         int casedial = JOptionPane.showConfirmDialog(null, "Генерировать Функции обработки и инициализации?"); // сообщение с выбором
         if (casedial != 0) {
@@ -331,7 +331,7 @@ public class Generator {
             ArrayList<String> removedVar = getListRemoveVarValue(HMIcfg, hmiNode); // получить лист нод( списка  VarValue которые не вносим)
             ArrayList<String[]> editVar = getListEditVarValue(HMIcfg, hmiNode); // получить список переменных которые  нужно поменять в VarValue
 
-            String typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // имя HMI ноды(какой тип блочка блочок)
+            String typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // имя HMI ноды(какой тип блочка )
 
             String whoTypeFBType = ""; // Сам тип ноды HMI как будет выглядить блочок
             String typeGenFaceHHMI = HMIcfg.getDataAttr(hmiNode, "typeFace"); // какой тип основы HMI из ноды берется
@@ -510,12 +510,12 @@ public class Generator {
                         continue;
                     }
                     
-                    {
-                        // Просто тестовое поле тестирования фукции
-                        List<Node> tmpListN = new ArrayList<>();
-                        processingIF(HMIcfg, hmiNode, ft, i, tmpListN);
-                    }
-                    
+//                    {
+//                        // Просто тестовое поле тестирования фукции
+//                        List<Node> tmpListN = new ArrayList<>();
+//                        processingIF(HMIcfg, hmiNode, ft, i, tmpListN);
+//                    }
+//                    
                     typeGCT = gctData[0];
                     uuidGCT = gctData[1];
                     isAlarm = gctData[2] != null;
@@ -1001,7 +1001,13 @@ public class Generator {
     static int genInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
             String stFileName, String abonent, JProgressBar jProgressBar) throws IOException {
         String filePath = globVar.desDir + File.separator + "GenST";
+        
+        // разбор имени если есть точка в имени(нахождение расширения)
+        String[] separNameF = stFileName.split("\\.");
         String ext = ""; // Для расширения на файле
+        if(separNameF.length > 1) ext = separNameF[separNameF.length - 1]; // последнее разбитое это и будет окончание
+        else stFileName = stFileName + ".txt";
+        
         File d = new File(filePath);
         if (!d.isDirectory()) {
             d.mkdir();
@@ -1010,8 +1016,7 @@ public class Generator {
                 return -1;
             }
         }
-//        String srcFile = filePath + File.separator + stFileName + ".txt";
-//        String tmpFile = filePath + File.separator + stFileName + ".txt_tmp";
+
         String srcFile = filePath + File.separator + stFileName;
         String tmpFile = filePath + File.separator + stFileName + "_tmp";
         int ret = fm.createFile2write(tmpFile); //открываем файл на запись
@@ -1067,7 +1072,7 @@ public class Generator {
             }
             String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
             while (!fm.EOF && !s.contains(start)) {
-                fm.wr(s + "\n");                          //ищем в исходнои файле её первое вхождение
+                fm.wr(s + "\n");                                                    //ищем в исходнои файле её первое вхождение
                 s = fm.rd();
             }
             if (fm.EOF) {
@@ -1076,23 +1081,24 @@ public class Generator {
             fm.wr("//" + start + "\n");
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
-            for (int j = 0; j < tsz; j++) {                      //по всем строкам таблицы
+            for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
                 if (jProgressBar != null && tsz != 0) {
-                    jProgressBar.setValue((int) ((j + 1) * 100.0 / tsz));//Прогресс генерации
+                    jProgressBar.setValue((int) ((j + 1) * 100.0 / tsz));           //Прогресс генерации
                 }
-                String dt = ft.getCell("dataType", j); //Определяем тип данных
+                String dt = ft.getCell("dataType", j);                              //Определяем тип данных
                 if (dt != null && notGenTyps != null && notGenTyps.contains(dt)) {
-                    continue;//если тип данных есть и есть список ненужных данных и данный тип в этом списке
+                    continue;                                                       //если тип данных есть и есть список ненужных данных и данный тип в этом списке
                 }
                 if (dt != null && isGenTyps != null && !isGenTyps.contains(dt)) {
-                    continue;//если тип данных есть и есть список ненужных данных и данный тип в этом списке
+                    continue;                                                       //если тип данных есть и есть список ненужных данных и данный тип в этом списке
                 }
                 for (Node cont : blockCont) {
                     String nodeName = cont.getNodeName();
-                    if ("Function".equals(nodeName)) {// Поиск ноды фукции
-                        createFunction(cont, fm, ft, abSubAb, disableReserve, j);
+                    System.out.println(nodeName + " __ NZ find name gen Data ST");
+                    if ("Function".equals(nodeName)) {                              
+                        createFunction(cont, fm, ft, abSubAb, disableReserve, j);   // Обработка "фукции" ноды 
                     } else {
-                        createString(cont, fm, ft, abSubAb, disableReserve, j);
+                        createString(cont, fm, ft, abSubAb, disableReserve, j);     // Обработка "строковой" ноды 
                     }
                 }
             }
@@ -1100,18 +1106,18 @@ public class Generator {
             while (!fm.EOF && !s.contains(end)) {
                 s = fm.rd();
             }
-            while (!fm.EOF) {                                                 //дописываем хвост файла
+            while (!fm.EOF) {                                                       //дописываем хвост файла
                 fm.wr(s + "\n");
                 s = fm.rd();
             }
-            fm.closeRdStream();                                       //закрываем поток чтения
-            fm.closeWrStream();                                       //закрываем поток записи
+            fm.closeRdStream();                                                     //закрываем поток чтения
+            fm.closeWrStream();                                                     //закрываем поток записи
 
-            File file = new File(srcFile);                             //создаём ссылку на исходный файл(Зачем это делать еще и с разными ссылками ?) 
-            file.delete();                                             //удаляем его
-            new File(tmpFile).renameTo(file);                          //создаём ссылку на сгенерированный файл и делаем его исходным
+            File file = new File(srcFile);                                          //создаём ссылку на исходный файл(Зачем это делать еще и с разными ссылками ?) 
+            file.delete();                                                          //удаляем его
+            new File(tmpFile).renameTo(file);                                       //создаём ссылку на сгенерированный файл и делаем его исходным
 
-//            fm.openFile4read(filePath, stFileName + ".txt");              //открываем его на чтенье
+//            fm.openFile4read(filePath, stFileName + ".txt");                      //открываем его на чтенье
 //            fm.createFile2write(filePath, stFileName + ".txt_tmp");  //открываем временный файл для генерации
             fm.openFile4read(filePath, stFileName);              //открываем его на чтенье
             fm.createFile2write(filePath, stFileName + "_tmp");  //открываем временный файл для генерации
@@ -1122,9 +1128,17 @@ public class Generator {
         return 0;
     }
 
-    // ---  ---
+    // --- Создание строки из ноды ---
     static int createString(Node args, FileManager fm, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException {
-        ArrayList<Node> arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
+        ArrayList<Node> arglist = null;
+        // Проверка на IF 
+        List<Node>  nodesIFElse = new ArrayList<>();
+        processingIF(globVar.sax, args, ft, j, nodesIFElse);   
+        if(nodesIFElse.size() > 0){
+            System.out.println("Find IF ELSE");
+            arglist = (ArrayList<Node>)nodesIFElse;
+        } else arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
+        
         String tmp = "";
         for (Node arg : arglist) {                                        //Цикл по всем аргументам функции
             tmp += getPartText(arg, abonent, ft, j);
@@ -1177,7 +1191,7 @@ public class Generator {
         return sax.getDataAttr(n, "chng");
     }
 
-    // ---  Разбор данных для строки (при работе ST)---
+    // ---  Разбор данных для создания строки (при работе ST)---
     static String getPartText(Node argPart, String abonent, TableDB ft, int j) {
         switch (argPart.getNodeName()) {
             case "text":
@@ -1756,7 +1770,7 @@ public class Generator {
 
     // оригинальный метод Льва 19.02.21 закомитил
     // --- Поле формирования Подсказки (Это больше разбор IF) LEV ---
-    private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
+    /*private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
             String[] gctData, int i, ArrayList<String> hintAL) {
         Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");               // выдергиваем ноду с условием выбора типа "IF"
         String cond = HMIcfg.getDataAttr(ifNode, "cond");                       // получим условия в каком столбце таблицы смотреть
@@ -1778,6 +1792,24 @@ public class Generator {
         }
         return true;
     }
+    */
+     // --- Поле формирования Подсказки (С выбором по условиям) NZ ---
+    private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
+            String[] gctData, int i, ArrayList<String> hintAL) {
+        boolean findType = false;
+        List<Node> IfElseNode = new ArrayList<>();
+        IfElseNode = processingIF(HMIcfg, hmiNode, ft, i, IfElseNode);          // Обработка условий IF ELSE
+        
+        for(Node n: IfElseNode){
+            if(n.getNodeName().equals("type")){                                 // Написал проверку ноды а не аттрибут
+                findType = true;
+                setOtherData(HMIcfg, bigSax, n, gctData, addVarsData, hintAL);  // как и в прошлом выше методе собираем данные с ноды по условию
+            }
+        
+        }
+        
+        return findType;
+    }
 
     // --- разбор нод IF ELSE в xml  ---
     private static List<Node> processingIF(XMLSAX HMIcfg, Node hmiNode, TableDB ft, int i, List<Node> nodeProcessing) {
@@ -1787,7 +1819,17 @@ public class Generator {
                 String val = HMIcfg.getDataAttr(ifNode, "val");                                                 // получим условия какое значение клетки таблицы сравнивать
                 if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {                                       // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
                     for (Node nD : HMIcfg.getHeirNode(ifNode)) {                                                // добавляем ноды которые прошли по условию IF
-                        if (!nD.getNodeName().equalsIgnoreCase("IF") || !nD.getNodeName().equalsIgnoreCase("ELSE")) {
+                        if (nD.getNodeName().equalsIgnoreCase("ELSE") || nD.getNodeName().equalsIgnoreCase("IF")) {
+                            
+                        }else {
+                        if (!nD.getNodeName().equalsIgnoreCase("ELSE")) {
+                                System.out.println(nD.getNodeName().equalsIgnoreCase("ELSE"));
+
+                            }
+                            if (!nD.getNodeName().equalsIgnoreCase("IF")) {
+                                System.out.println(nD.getNodeName().equalsIgnoreCase("IF"));
+
+                            }
                             nodeProcessing.add(nD);
                             // или выполняем над ними действие (проверка на хинты доп аттрибуты и прочее)
                         }
