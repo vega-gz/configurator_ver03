@@ -118,9 +118,9 @@ public class Generator {
         String drvFileName = "T_" + abonent + subAb + isMb + globVar.sax.getDataAttr(nodeGenHW, "drvFile") + ".type";
         //------ Проход по таблице ----------------
         for (String exemplar : exArr) {
-            String prjFildName = exemplar + subAb + isMb + globVar.sax.getDataAttr(nodeGenHW, "globData");
+            String prjFildName = exemplar + subAb + isMb + globVar.sax.getDataAttr(nodeGenHW, "globData"); // Собрать имя для запроса к глобальному файлу
             String[] globSigAttr = {"Signal", "Name", prjFildName};
-            Node globSigInPrj = prj.findNodeAtribute(prjNode, globSigAttr);
+            Node globSigInPrj = prj.findNodeAtribute(prjNode, globSigAttr); 
             if (globSigInPrj == null) {
                 FileManager.loggerConstructor("Нет \"" + prjFildName + " \" в глобальных сигналах проекта");
                 return -1;
