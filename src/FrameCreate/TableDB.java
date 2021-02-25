@@ -480,8 +480,7 @@ public class TableDB extends javax.swing.JFrame {
     boolean  compareTable(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
         int x = tableModel.getColumnCount();
         int y = tableModel.getRowCount();
-        
-        if(fromDB.size() <= 0 || fromDB.size() != y || fromDB.get(0).length != x) return true; // еще доп проверка от пустых строк от базы
+        if(fromDB.size() != y || fromDB.get(0).length != x) return true;
         for(int i=0;i<y;i++)
             for(int j=0;j<x;j++)
                 if(!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) return true;

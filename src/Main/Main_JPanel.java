@@ -665,7 +665,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         JFileChooser fileopen = new JFileChooser(globVar.desDir);
         fileopen.setFileFilter(new FileFilter() { // фильтр файлов
             public String getDescription() {
-                return "Excel (*.xls *.xlsx)";
+                return "Excel 97-2003  (*.xls)";
             }
 
             //@Override
@@ -674,7 +674,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     return true;
                 } else {
                     String filename = f.getName().toLowerCase();
-                    return filename.endsWith(".xls") | filename.endsWith(".xlsx") | filename.endsWith(".xlsm");
+                    return filename.endsWith(".xls");
                 }
             }
         });
