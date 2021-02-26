@@ -500,18 +500,22 @@ public class addOPCserver extends javax.swing.JFrame {
     }//GEN-LAST:event_jList2KeyReleased
 
     private void setServSettings(String s){
-        if(s==null) return;
-        int x = s.indexOf("nodeID:");
-        x += 7;
-        int y = s.indexOf(";",x);
-        nodeID = Tools.indexOfArray(nodeIDitems, s.substring(x,y));
-        jComboBox1.setSelectedIndex(nodeID);
-        x = s.indexOf("nodeIDtype:");
-        x += 11;
-        y = s.indexOf(";",x);
-        nodeIDtype = Tools.indexOfArray(nodeIDtypeItems, s.substring(x,y));
-        jComboBox2.setSelectedIndex(nodeIDtype);
-        jComboBox3.setSelectedIndex(0);
+
+        if(s !=null ){
+           if(!s.equalsIgnoreCase("null")){
+                int x = s.indexOf("nodeID:");
+                x += 7;
+                int y = s.indexOf(";",x);
+                nodeID = Tools.indexOfArray(nodeIDitems, s.substring(x,y));
+                jComboBox1.setSelectedIndex(nodeID);
+                x = s.indexOf("nodeIDtype:");
+                x += 11;
+                y = s.indexOf(";",x);
+                nodeIDtype = Tools.indexOfArray(nodeIDtypeItems, s.substring(x,y));
+                jComboBox2.setSelectedIndex(nodeIDtype);
+                jComboBox3.setSelectedIndex(0);
+            }
+        }
     }
     
     private void setLists(){
