@@ -298,10 +298,15 @@ public class Generator {
             isMb = "mb_";
         }//------------------- Читаем пользовательскую конфигурацию для ЧМИ ----------------------------------------
         XMLSAX HMIcfg = new XMLSAX(); //
-        Node hmiCfgRoot = HMIcfg.readDocument("ConfigHMI.xml"); //AT_HMI.iec_hmi
+        String confHMI = "ConfigHMI.xml";
+        Node hmiCfgRoot = HMIcfg.readDocument(confHMI); //AT_HMI.iec_hmi
+        if (hmiCfgRoot == null) {
+            FileManager.loggerConstructor("не удалось прочитать " + confHMI );
+            return null;
+        }
         Node findNode = HMIcfg.returnFirstFinedNode(hmiCfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
-            FileManager.loggerConstructor("Тип данных " + nodeTable + " не описан в файле ConfigHMI.xml");
+            FileManager.loggerConstructor("Тип данных " + nodeTable + " не описан в файле" + confHMI);
             return null;
         }//Если не вылетели - значит будет генерация
         //------------------------------------ Читаем ЧМИ файл Сонаты -----------------------------------------------
