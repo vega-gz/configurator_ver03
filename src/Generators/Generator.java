@@ -1006,15 +1006,21 @@ public class Generator {
         return -1;
     }
 
-    // --- Герерация ST и LUA файлов(продолжение что ли) ---
+    // --- Герерация ST и LUA файлов(продолжение что ли тут само внесение данных в файлы) ---
     static int genInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
             String stFileName, String abonent, JProgressBar jProgressBar) throws IOException {
         String filePath = globVar.desDir + File.separator + "GenST";
         
+        
         // разбор имени если есть точка в имени(нахождение расширения)
+        String etxLUA = "lua";
+        boolean findLUAext = false;                                         
         String[] separNameF = stFileName.split("\\.");
         String ext = ""; // Для расширения на файле
-        if(separNameF.length > 1) ext = separNameF[separNameF.length - 1]; // последнее разбитое это и будет окончание
+        if(separNameF.length > 1) {                                         // если есть расширение то такой файл и будет, нет так txt
+            ext = separNameF[separNameF.length - 1];                        // последнее разбитое это и будет окончание
+            if(ext.equalsIgnoreCase(etxLUA)) findLUAext = true;             // определения файла ЛУА    
+        }  
         else stFileName = stFileName + ".txt";
         
         File d = new File(filePath);
@@ -1028,13 +1034,13 @@ public class Generator {
 
         String srcFile = filePath + File.separator + stFileName;
         String tmpFile = filePath + File.separator + stFileName + "_tmp";
-        int ret = fm.createFile2write(tmpFile); //открываем файл на запись
+        int ret = fm.createFile2write(tmpFile);                                         //открываем файл на запись
         if (ret != 0) {
             FileManager.loggerConstructor("Не удалось создать файл \"" + tmpFile + "\"");
             return -2;
         }
 
-        ret = fm.openFile4read(globVar.myDir, commonFileST); //  читаем шаблон как есть имя 
+        ret = fm.openFile4read(globVar.myDir, commonFileST);                            //  читаем шаблон как есть имя 
         if (ret != 0) {
             // Пробуем найти шаблон с раширением txt
             ret = fm.openFile4read(globVar.myDir, commonFileST + ".txt");
@@ -1042,7 +1048,7 @@ public class Generator {
                 return closeByErr(fm, tmpFile, "Не удалось прочитать служебный файл (шаблон) \""
                         + globVar.myDir + File.separator + commonFileST + " or " + commonFileST + ".txt");
             } else {
-                commonFileST = commonFileST + ".txt"; // на всякий так как не знаю для чего вообще эта переменная
+                commonFileST = commonFileST + ".txt";                                  // на всякий так как не знаю для чего вообще эта переменная
             }
         }
 
@@ -1067,7 +1073,10 @@ public class Generator {
             funcUUID = UUID.getUIID();
         }
 
-        fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
+        // это костыль для LUA файлов не вносим эту строку
+        if(!findLUAext){
+           fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
+        }
         ArrayList<Node> blockList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node block : blockList) {
             String start = (String) globVar.sax.getDataNode(block).get("start");
@@ -1079,7 +1088,9 @@ public class Generator {
                 return closeByErr(fm, tmpFile, "В файле \"" + globVar.myDir + File.separator + "ConfigSignals.xml в разделе " + nodeGenCode.getParentNode()
                         + " неправильно сконфигурированы признаки начала и конца вставки кода");
             }
-            String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, 
+            
+            String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, (оконнчание файла)
+            
             while (!fm.EOF && !s.contains(start)) {
                 fm.wr(s + "\n");                                                    //ищем в исходнои файле её первое вхождение
                 s = fm.rd();
@@ -1087,7 +1098,13 @@ public class Generator {
             if (fm.EOF) {
                 return closeByErr(fm, tmpFile, "В файле \"" + globVar.myDir + File.separator + commonFileST + " не найдена строка \"" + start + "\"");
             }
-            fm.wr("//" + start + "\n");
+            // опять идиотизм с LUA это править на до
+            if(!findLUAext){
+                fm.wr("//" + start + "\n");
+            }
+            else fm.wr("--" + start + "\n");
+            
+            
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
             for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
@@ -1112,7 +1129,7 @@ public class Generator {
             }
             //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
             while (!fm.EOF && !s.contains(end)) {
-                s = fm.rd();
+                s = fm.rd();                                                        // читаем строки из tmp файла
             }
             while (!fm.EOF) {                                                       //дописываем хвост файла
                 fm.wr(s + "\n");
@@ -1126,13 +1143,13 @@ public class Generator {
             new File(tmpFile).renameTo(file);                                       //создаём ссылку на сгенерированный файл и делаем его исходным
 
 //            fm.openFile4read(filePath, stFileName + ".txt");                      //открываем его на чтенье
-//            fm.createFile2write(filePath, stFileName + ".txt_tmp");  //открываем временный файл для генерации
-            fm.openFile4read(filePath, stFileName);              //открываем его на чтенье
-            fm.createFile2write(filePath, stFileName + "_tmp");  //открываем временный файл для генерации
+//            fm.createFile2write(filePath, stFileName + ".txt_tmp");               //открываем временный файл для генерации
+            fm.openFile4read(filePath, stFileName);                                 //открываем его на чтенье
+            fm.createFile2write(filePath, stFileName + "_tmp");                     //открываем временный файл для генерации
         }
-        fm.closeRdStream();                                       //закрываем поток чтения
-        fm.closeWrStream();                                       //закрываем поток записи
-        new File(tmpFile).delete();                          //Удаляем временный файл
+        fm.closeRdStream();                                                         //закрываем поток чтения
+        fm.closeWrStream();                                                         //закрываем поток записи
+        new File(tmpFile).delete();                                                 //Удаляем временный файл
         return 0;
     }
 
@@ -1155,6 +1172,7 @@ public class Generator {
         if (disableReserve && ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
             disable = "//";
         }
+        if(disable.equals("") & tmp.equals("")) return 0;               // нечего не нашли (нет записи в файл)
         fm.wr(disable + tmp + ";\n");
         return 0;
     }
