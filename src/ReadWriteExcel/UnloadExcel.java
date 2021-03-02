@@ -6,6 +6,8 @@
 package ReadWriteExcel;
 
 import DataBaseTools.DataBase;
+import Main.ProgressBar;
+import Tools.FileManager;
 import java.io.File;
 import org.apache.poi.ss.usermodel.Row;
 import globalData.globVar;
@@ -13,6 +15,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JProgressBar;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -33,20 +36,23 @@ public final class UnloadExcel {
      *
      * @param abonent_name имя абонента,для которого пользователь хочет
      * выгрузить данные
+     * @param ProgressBar1
      * @return возвращает true если книга создалась,false если нет
      */
-    public boolean runUnloadExcel(String abonent_name) {
+    public boolean runUnloadExcel(String abonent_name,ProgressBar ProgressBar1) {
         boolean error = true;
         HSSFWorkbook workbook = new HSSFWorkbook();
         ArrayList<String> tableList = globVar.DB.getListTable();
         for (int i = 0; i < tableList.size(); i++) {
             String name_list = tableList.get(i);
             if (name_list.indexOf(abonent_name + "_") == 0) {
+                System.out.println(name_list);
                 if (createExcelSheet(name_list, workbook) == false) {
-                    System.out.println("not find Table" + name_list);
+                    System.out.println("not find Table" +" "+ name_list);
                     error = false;
                 }
             }
+            ProgressBar1.setVal((int) ( (i+1) * 100.0 / tableList.size()));
         }
         return error;
     }
@@ -76,8 +82,8 @@ public final class UnloadExcel {
         if (tableNode == null) {
             return false;
         }
-        Node excelNode = globVar.sax.returnFirstFinedNode(tableNode, "EXEL");
-        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);
+        Node excelNode = globVar.sax.returnFirstFinedNode(tableNode, "EXEL");//сама нода в которой находятся наши имена коолнок
+        ArrayList<Node> childExcel = globVar.sax.getHeirNode(excelNode);//дети ноды excel
         // создание листа с названием 
         HSSFSheet sheet = workbook.createSheet(sheetName);
         // счетчик для строк
@@ -96,10 +102,11 @@ public final class UnloadExcel {
             colNames.add(colName);//сделал для того чтобы для xml сохранилось НАИМЕНОВАНИЕ а для шапку для mb создать из комментария к таблице
             if(sheetName.contains("mb")&&colName.equals("Наименование")){
                 fullNameTable=db.getCommentTable(nameTable);
+                if(!fullNameTable.equals("null")||fullNameTable==null){
                 int z=fullNameTable.indexOf("Modbus:");
                colName=fullNameTable.substring(z+"Modbus:".length());
+                }
                // colName=db.getCommentTable(nameTable);
-             
             }
             
             int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
@@ -108,7 +115,10 @@ public final class UnloadExcel {
         }
         //конечный итог,создали строку(шапку)
         rowNum++;
-        ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);
+        ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);//вот эту строку нужно окружить try catch
+        if(data.isEmpty()){
+            FileManager.loggerConstructor("В базе отсутствует колонка,из которой мы пытаемся получить данные");
+        }
         for (String[] sData : data) {
             int j = 0;
             row = sheet.createRow(rowNum);

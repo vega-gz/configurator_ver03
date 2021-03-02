@@ -921,7 +921,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             int ret = 1;
                 
             UnloadExcel loadread = new UnloadExcel();
-            boolean workUploadExcel = loadread.runUnloadExcel(globVar.abonent);
+            boolean workUploadExcel = loadread.runUnloadExcel(globVar.abonent,pb);
             if(workUploadExcel)JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
             else JOptionPane.showMessageDialog(null, "Ошибки в выгрузке.");
         
