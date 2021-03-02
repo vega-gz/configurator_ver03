@@ -135,7 +135,7 @@
 <VarValue Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Value="TRUE" Variable="disableAlarm"/>
 <VarValue Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" Value="(x:=20.0,y:=20.0)" Variable="pos"/>
 <VarValue Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Value="1" Variable="Analog_Ph_N"/> -->
-		<GenHMI name="Alarm_" maxY="1000" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
+		<GenHMI name="Alarm_" maxY="16" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
 				<PrefStr add0="APS." Type="STRING"/>  <!-- редактируем поле Type зарезервированное слово второе любое зназвание -->
 			</Edit>

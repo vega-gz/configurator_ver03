@@ -404,7 +404,7 @@ public class Generator {
             targetFile = HMIcfg.getDataAttr(hmiNode, "file");//получили Ноду файла в который запись верхнего уровень,который в последствии читаем _HMI_inc(нигде в файлах нигде не используется)
             String folderNodeName = null;
             String nameGCTcommon = HMIcfg.getDataAttr(hmiNode, "name");
-            String nameGCT = abonent + "_" + subAb + nameGCTcommon;
+            String nameGCT = "T_" + abonent + "_" + subAb + nameGCTcommon;
             String pageName = nameGCT + "1";
 
             Node gctNode; // Почему мы добавляем тут эту ноду(это нода на каком компоненте будет строится наш документ)?
@@ -660,7 +660,7 @@ public class Generator {
                 }
 
                 objectFB.delVar(removedVar); // Вносим что нужно удалить если таковое есть
-                objectFB.editVar(editVar);   // Вносим что нужно удалить если таковое есть
+                objectFB.editVar(editVar);   // редактируем  если есть ноды для редактирования сигналов
 
                 for (FBVarValue arr : objectFB.getListValue()) {    // получив все данные объекта
                     HMIsax.insertChildNode(nodeFB, arr.getToXML()); //добавим каждую строку в в ноду FB
@@ -699,8 +699,12 @@ public class Generator {
                         pageCnt++;
                         pageName = nameGCT + pageCnt;
                         Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
-                        //gctNode = HMIsax.returnFirstFinedNode(hmiRoot, "GraphicsCompositeFBType");
                         gctNode = HMIsax.returnFirstFinedNode(hmiRoot, whoTypeFBType);
+                        
+                        // Тупое решение по пока что бы не потерятся( берем тлоько нужную ноду)
+                        HMIsax.cleanNode(hmiRoot);
+                        hmiRoot.appendChild(gctNode);
+                        
                         HMIsax.setDataAttr(gctNode, "Name", pageName);
                         String sheetUUID = null;
                         findInBig[2] = pageName;
@@ -1002,7 +1006,7 @@ public class Generator {
         return -1;
     }
 
-    // --- Герерация ST и LUA файлов ---
+    // --- Герерация ST и LUA файлов(продолжение что ли) ---
     static int genInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
             String stFileName, String abonent, JProgressBar jProgressBar) throws IOException {
         String filePath = globVar.desDir + File.separator + "GenST";
@@ -1099,11 +1103,10 @@ public class Generator {
                 }
                 for (Node cont : blockCont) {
                     String nodeName = cont.getNodeName();
-                    System.out.println(nodeName + " __ NZ find name gen Data ST");
                     if ("Function".equals(nodeName)) {                              
                         createFunction(cont, fm, ft, abSubAb, disableReserve, j);   // Обработка "фукции" ноды 
                     } else {
-                        createString(cont, fm, ft, abSubAb, disableReserve, j);     // Обработка "строковой" ноды 
+                        createString(cont, fm, ft, abSubAb, disableReserve, j);     // Обработка "строковой" ноды (любой другой)
                     }
                 }
             }
