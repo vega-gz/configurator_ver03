@@ -51,6 +51,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     int H_GAP = 2;
     String relatedTable=null;
     
+    // --- Фрейм работа с строкой таблицы ---
     public SinglStrEdit(MyTableModel tableModel, String title, ArrayList<JFrame> listJF) {
         Container container = this.getContentPane();
         container.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT); 
@@ -104,11 +105,30 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         if(x<0) x = title.lastIndexOf("_");
         String nodeName = title.substring(x+1);
         
-        String linkTable =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"linkTable");
-        String trgCol =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"trgCol");
+        String linkTable =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"linkTable"); // что это за нода и почему она встречается только в AI
+        String trgCol =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"trgCol");       // и это значение зачем
         if(linkTable!=null){
             relatedTable = abonent+"_"+linkTable;
             st = new SimpleTable(relatedTable, trgCol, null);
+            jTable1 = new JTable();
+            jScrollPane1 = new JScrollPane();
+            jTable1.setModel(st.tableModel);
+            jScrollPane1.setViewportView(jTable1);
+
+            jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    //numberFocusLost(evt);
+                    System.out.println("FocusListener " + evt.isTemporary());
+                }
+            });
+            if(st.isCreate()) st.setSimpleTableSettings(jTable1);
+            gpw = 600;
+        }
+        // это костыль или на оборот нормальное
+        if (linkTable == null & trgCol == null){ // если нет ни каких записей в нодах к Сигналу
+        
+            relatedTable = title;               // Запрос к базе по заголвку который передали 
+            st = new SimpleTable(relatedTable, null, null);
             jTable1 = new JTable();
             jScrollPane1 = new JScrollPane();
             jTable1.setModel(st.tableModel);
@@ -157,7 +177,8 @@ public class SinglStrEdit  extends javax.swing.JFrame{
             st.saveTableInDB();
         };
         isCange ich = ()->{
-            return st.isNew();
+            boolean tmpCtash = st.isNew(); // Почему st null ?
+            return st.isNew(); // тут возращаем реализованный интерфейс(падает )
         };
         TableTools.setFrameListener(this, sfd, ich, null);//cjf);
         
@@ -278,7 +299,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         setFields(curr);
     }                                       
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {  
-        st.saveTableInDB();
+        st.saveTableInDB(); // тут тоже вываливается из таблицы APS
     }                                       
  
     public void updateRelatedTable(){
