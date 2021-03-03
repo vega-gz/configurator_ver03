@@ -1007,11 +1007,12 @@ public class Generator {
     }
 
     // --- Герерация ST и LUA файлов(продолжение что ли тут само внесение данных в файлы) ---
+    // abonent
     static int genInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
             String stFileName, String abonent, JProgressBar jProgressBar) throws IOException {
         String filePath = globVar.desDir + File.separator + "GenST";
         
-        
+        String nameToblock = commonFileST ;                                 // оригинальное название ноды сохраняем и его же и ищем потом
         // разбор имени если есть точка в имени(нахождение расширения)
         String etxLUA = "lua";
         boolean findLUAext = false;                                         
@@ -1021,7 +1022,9 @@ public class Generator {
             ext = separNameF[separNameF.length - 1];                        // последнее разбитое это и будет окончание
             if(ext.equalsIgnoreCase(etxLUA)) findLUAext = true;             // определения файла ЛУА    
         }  
-        else stFileName = stFileName + ".txt";
+        else{
+            stFileName = stFileName + ".txt";
+        }
         
         File d = new File(filePath);
         if (!d.isDirectory()) {
@@ -1053,7 +1056,7 @@ public class Generator {
         }
 
         String algFile = (String) globVar.sax.getDataNode(nodeGenCode).get("target"); // часть названия целевого файла
-        String funcName = stFileName;//abonent + "_"+ commonFileST; // Название ноды для поиска в другом файле
+        String funcName = nameToblock;//abonent + "_"+ commonFileST; // Название ноды для поиска в другом файле
         String funcUUID = null;
         if (algFile != null) {
             if ("_".equals(algFile.substring(0, 1))) {
