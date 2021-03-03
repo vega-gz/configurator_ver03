@@ -870,7 +870,7 @@
 			</APS_Internal>	
 		</GenData>
 		<GenCode>
-			<File src= "Call_APS"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
+			<File src= "Call_APS" target="_Algorithm">  <!-- target="_Algorithm"> генерация функции инициализации  в каком файле ищем подставляя Абонента-->
 				<Block start="Начало сгенерированного кода APS_Processing" end="Конец сгенерированного кода">
 					<Function name="APS_Processing">
 						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
@@ -883,7 +883,7 @@
 					</Function>	
 				</Block>
 			</File>
-			<File src= "APS_Init"> <!-- target="_Algorithm"> генерация функции инициализации -->
+			<File src= "APS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации  в каком файле ищем подставляя Абонента-->
 				<Block start="Начало сгенерированного кода APS_Init" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_APS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  

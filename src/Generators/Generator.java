@@ -1058,6 +1058,7 @@ public class Generator {
         String algFile = (String) globVar.sax.getDataNode(nodeGenCode).get("target"); // часть названия целевого файла
         String funcName = nameToblock;//abonent + "_"+ commonFileST; // Название ноды для поиска в другом файле
         String funcUUID = null;
+        String funcResultTypeUUID = null;                                             // возвращаемое значение фуйкции
         if (algFile != null) {
             if ("_".equals(algFile.substring(0, 1))) {
                 algFile = abonent + algFile;
@@ -1068,6 +1069,7 @@ public class Generator {
             Node func = algSax.findNodeAtribute(algRoot, myFunc);
             if (func != null) {
                 funcUUID = (String) algSax.getDataNode(func).get("UUID");
+                funcResultTypeUUID = (String) algSax.getDataNode(func).get("ResultTypeUUID");
             }
             if (funcUUID == null) {
                 funcUUID = UUID.getUIID();
@@ -1078,7 +1080,11 @@ public class Generator {
 
         // это костыль для LUA файлов не вносим эту строку
         if(!findLUAext){
-           fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
+           //не найдена фукции и значения по умолчанию вроде для AI
+            if(funcUUID != null & funcResultTypeUUID != null){
+                fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\""+ funcResultTypeUUID +"\">\n");
+            }
+            else fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
         }
         ArrayList<Node> blockList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node block : blockList) {
