@@ -741,7 +741,7 @@ public class Generator {
     public static int genTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
         int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if (casedial != 0) {
-            return 0; //0 - yes, 1 - no, 2 - cancel
+            return -2; //0 - yes, 1 - no, 2 - cancel
         }        //-------------------------------------------------------------------------------------
         String backUpPath = globVar.backupDir + File.separator;   //установили путь для бэкапа
         String filePath = globVar.desDir + File.separator + "Design"; //установили путь для проекта

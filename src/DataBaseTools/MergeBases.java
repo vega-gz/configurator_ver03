@@ -71,11 +71,20 @@ public class MergeBases {
                     break;
                 }
             }
-            if (nFine) aDB.dropTableWithBackUp(diffOBJ.name); // удаляем таблицу с именем объекта если ее не было в списке того чего нет
+            if (nFine) aDB.dropTableWithBackUp(diffOBJ.name);                                                 // удаляем таблицу с именем объекта если ее не было в списке того чего нет
             aDB.createTableEasy(diffOBJ.name, listColumnCurr.toArray(new String[listColumnCurr.size()]), ""); // создаем
-            aDB.createCommentTable(diffOBJ.name, diffOBJ.getComment()); // Установить комментарий
-            for (String[] dataT : dataFromTableC) {
-                aDB.insertRow(diffOBJ.name, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]), 0);
+            String comment = diffOBJ.getComment();                                                            // взять коммент
+            if(comment != null){
+                aDB.createCommentTable(diffOBJ.name, comment);                                   // Установить комментарий
+            }else{
+                System.out.println("Non comment");
+            }
+            
+            //если таблица есть но там нечего нет
+            if(dataFromTableC !=null){
+                for (String[] dataT : dataFromTableC) {
+                    aDB.insertRow(diffOBJ.name, dataT, listColumnCurr.toArray(new String[listColumnCurr.size()]), 0);
+                }
             }
         }
         /*
