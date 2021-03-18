@@ -590,8 +590,8 @@ public class TableDB extends javax.swing.JFrame {
             findDataRows.clear();
     
             for (int i = 0; i < tableModel.getColumnCount(); i++) { // пробежим столбцам
-                for (int j = 0; j < globVar.namecolumnT.length -1; j++) { // какие название столбцов сравнивать
-                    if(tableModel.getColumnName(i).equalsIgnoreCase(globVar.namecolumnT[j])){
+                for (int j = 0; j < globVar.namecolumnT.length; j++) { // какие название столбцов сравнивать
+                    if(tableModel.getColumnName(i).equalsIgnoreCase(globVar.namecolumnT[j])){ 
                         for (int k = 0; k < tableModel.getRowCount(); k++) {    // нашли столбец бежим по строкам уже
                             String dataT = tableModel.getValueAt(k, i);                        // порядок строка - колонка
                             Matcher matcher1 = pattern1.matcher(dataT);
