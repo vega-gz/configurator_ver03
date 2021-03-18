@@ -56,9 +56,10 @@ public class globVar {
         
         // Переменные для отклика всех открытых окон в программе 
         public static ArrayList<JFrame> listF = new ArrayList<>(); // Лист с фреймами
-        public static boolean captureFocus = true; //  захват фокуса окна 
+        public static boolean captureFocus = true;      //  захват фокуса окна 
         public static boolean windowIconified = false; // триггер определение свернутости окна
-        public static int sumFrame = 0; // сумма окон для правильного реагирования кликов по ним
+        public static int sumFrame = 0;                 // сумма окон для правильного реагирования кликов по ним
+        public static String[] namecolumnT = {"Наименование", "TAG_NAME_PLC"};  // Название столбцов для поиска по таблице
                 
 	public static void SetStatUUID() {
 		Date date = new Date();

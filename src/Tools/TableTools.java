@@ -52,7 +52,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
         jTable1.setRowSelectionAllowed(true);           // Разрешаю выделять по строкам
         TableColumnModel columnModel = jTable1.getColumnModel();
-        columnModel.setColumnSelectionAllowed(true);    // Разрешение выделения столбца
+        columnModel.setColumnSelectionAllowed(true);    // Разрешение выделения только в предах одного столбца
         columnModel.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);// Режим выделения интервала
         int qCol = jTable1.getColumnCount();                //Определяю количество столбцов
         if (qCol > colWidth.length) {

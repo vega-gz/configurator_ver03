@@ -6,19 +6,24 @@ import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
 import Tools.MyTableModel;
+import Tools.RegistrationJFrame;
 import Tools.SaveFrameData;
 import Tools.TableTools;
 import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;
-import Tools.RegistrationJFrame;
 import globalData.globVar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
@@ -39,6 +44,9 @@ public class TableDB extends javax.swing.JFrame {
     int qCol;
     ArrayList<JFrame> listJF = new ArrayList();
     javax.swing.JTree jTree1;
+    ArrayList<Integer> findDataRows = new ArrayList<>(); // номера строк в таблице по совпадениям
+    boolean firstClickMouseFind = true;                        //  ткнули первый раз на поиск
+    int idArrayFindigData = 0;
 
     public TableDB(javax.swing.JTree jTree, String table) {
         
@@ -70,7 +78,7 @@ public class TableDB extends javax.swing.JFrame {
         closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
         
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
-        TableTools.setTableSetting(jTable1, colsWidth, align, 20);
+        TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут броблема фокуса
         
         TableTools.setColsEditor(table, cols, fromDB, jTable1, listItemList);
         
@@ -105,6 +113,7 @@ public class TableDB extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jButton6 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -250,11 +259,46 @@ public class TableDB extends javax.swing.JFrame {
                 .addComponent(jButton9))
         );
 
+        jTextField1.setText("Поиск");
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                //System.out.println("jTextField1_add " + e);
+                compareFielTextToDataCell(jTextField1.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                //System.out.println("jTextField1_del " + e);
+                compareFielTextToDataCell(jTextField1.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                //System.out.println("jTextField1_change " + e);
+                compareFielTextToDataCell(jTextField1.getText());
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -265,7 +309,9 @@ public class TableDB extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 808, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 782, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(65, 65, 65)
@@ -357,6 +403,7 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        jTable1.setColumnSelectionAllowed(true);
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
             SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, listJF);
@@ -466,6 +513,26 @@ public class TableDB extends javax.swing.JFrame {
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    // --- переключение по найденным совпадениям ---
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        if(idArrayFindigData >= findDataRows.size() - 1){
+            idArrayFindigData = 0;
+        }
+        else{
+            ++idArrayFindigData;
+        }
+        if(findDataRows.size() > 0)selectRowInTable(findDataRows.get(idArrayFindigData));
+        
+        //System.out.println(jTable1.getSelectedRows());
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        if(firstClickMouseFind){
+            firstClickMouseFind = false;
+            jTextField1.setText(""); // затереть текст при первом наведении мыши
+        }
+    }//GEN-LAST:event_jTextField1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -482,6 +549,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     boolean  compareTable(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
@@ -512,5 +580,39 @@ public class TableDB extends javax.swing.JFrame {
     int getNumberCol(String colName){
         for(int i=0; i < cols.length; i++) if(cols[i].equals(colName)) return i;
         return -1;
+    }
+    
+    // --- Поиск с символов в поле --
+    void compareFielTextToDataCell(String str) {
+        
+        if (str != null & !str.equals("")) {
+            Pattern pattern1 = Pattern.compile("^(.*" + str + ").*$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+            findDataRows.clear();
+    
+            for (int i = 0; i < tableModel.getColumnCount(); i++) { // пробежим столбцам
+                for (int j = 0; j < globVar.namecolumnT.length -1; j++) { // какие название столбцов сравнивать
+                    if(tableModel.getColumnName(i).equalsIgnoreCase(globVar.namecolumnT[j])){
+                        for (int k = 0; k < tableModel.getRowCount(); k++) {    // нашли столбец бежим по строкам уже
+                            String dataT = tableModel.getValueAt(k, i);                        // порядок строка - колонка
+                            Matcher matcher1 = pattern1.matcher(dataT);
+                            if (matcher1.matches()) {
+                                findDataRows.add(k);
+                            }
+                        }
+                    }
+                } 
+            }
+            if(findDataRows.size() > 0) selectRowInTable(findDataRows.get(idArrayFindigData));
+        }
+    }
+    
+    // --- выделяет строку в таблице с заданым номером ---
+    private void selectRowInTable(int row){
+        jTable1.setColumnSelectionAllowed(false); // отключение по столбцам выделение
+        ListSelectionModel selModel = jTable1.getSelectionModel();
+        selModel.clearSelection();
+        selModel.addSelectionInterval(row, row);
+        jTable1.scrollRectToVisible(jTable1.getCellRect(row,0, true));  // скролю на нужное
+    
     }
 }
