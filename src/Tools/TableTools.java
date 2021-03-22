@@ -176,35 +176,15 @@ public class TableTools {//ссылка на таблицу, массив шир
             }
         });
         menuItemIncertCells.addActionListener((ActionEvent event) -> {
-            int cnt = 1, cnt2 = 1;
-            double incr = 1;
-            String value;
-            ArrayList<String> v = new ArrayList<>();
             int startRow = (jTable1.getSelectedRows())[0];
             int startCol = (jTable1.getSelectedColumns())[0];
-            String[] str = list_cells.toArray(new String[0]);
-
-            for (int i = 0; i < str.length; i++) {
-                if (cnt % cols.length == 0) {//находит количетво выбранных столбцов и делит их на три велью 
-                    for (int j = cols.length - 1; j < cols.length && j >= 0; j--) {
-                        v.add(str[i - j]);
-                    }
-                    if (cnt >= 6) {
-                        cnt2 = cnt2 + 2;
-                    } else {
-                        cnt2++;
-                    }
-                }
-                cnt++;
-                for (int j = 0; j < v.size(); j++) {
-                    value = v.get(j);
-                    if (startRow + i < jTable1.getRowCount()
-                            && startCol + j < jTable1.getColumnCount()) {
-                        jTable1.setValueAt(value, startRow + (i - cnt2), startCol + (j));
-                    }
+            int value_number = 0;
+            for (int i = 0; i < rows.length; i++) {
+                for (int j = 0; j < cols.length; j++) {
+                    jTable1.setValueAt(list_cells.get(value_number), startRow + i, startCol + j);
+                    value_number++;
                 }
 
-                v.clear();
             }
             list_cells.clear();
         });
