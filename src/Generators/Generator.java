@@ -1107,7 +1107,7 @@ public class Generator {
             if (fm.EOF) {
                 return closeByErr(fm, tmpFile, "В файле \"" + globVar.myDir + File.separator + commonFileST + " не найдена строка \"" + start + "\"");
             }
-            // опять идиотизм с LUA это править на до
+            // опять идиотизм с LUA это править надо
             if(!findLUAext){
                 fm.wr("//" + start + "\n");
             }
@@ -1136,6 +1136,7 @@ public class Generator {
                     }
                 }
             }
+            
             //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
             while (!fm.EOF && !s.contains(end)) {
                 s = fm.rd();                                                        // читаем строки из tmp файла
@@ -1910,7 +1911,7 @@ public class Generator {
             for (Node av : addVars) {
                 String[] tmp = new String[4];
                 tmp[0] = av.getNodeName();
-                tmp[1] = HMIcfg.getDataAttr(av, "tableCol");
+                tmp[1] = HMIcfg.getDataAttr(av, "tableCol"); 
                 tmp[2] = HMIcfg.getDataAttr(av, "Type");
                 tmp[3] = HMIcfg.getDataAttr(av, "TypeUUID");
                 addVarsData.add(tmp);

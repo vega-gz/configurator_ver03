@@ -870,7 +870,7 @@
 			</APS_Internal>	
 		</GenData>
 		<GenCode>
-			<File src= "Call_APS" target="_Algorithm">  <!-- target="_Algorithm"> генерация функции инициализации  в каком файле ищем подставляя Абонента-->
+			<File src= "Call_APS"  target="_Algorithm"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
 				<Block start="Начало сгенерированного кода APS_Processing" end="Конец сгенерированного кода">
 					<Function name="APS_Processing">
 						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
@@ -883,7 +883,7 @@
 					</Function>	
 				</Block>
 			</File>
-			<File src= "APS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации  в каком файле ищем подставляя Абонента-->
+			<File src= "APS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации -->
 				<Block start="Начало сгенерированного кода APS_Init" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_APS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
@@ -906,9 +906,9 @@
 						<IF cond="Status" val="ПС"><!-- пропускаем или пишем пустую строку если нашли ПС-->
 								<text t=""/>
 							<ELSE>
-								<IF cond="Status" val="АС">
+								<IF cond="Status" val="АС"> <!-- пропускаем или пишем пустую строку если нашли АС-->
 										<text t=""/>
-									<ELSE >
+									<ELSE>  <!-- в остальных случае формируем строку таблицы lua -->
 											<text t="'_APS."/>
 											<dbd t="TAG_NAME_PLC"/>
 											<text t="',  '"/>
@@ -923,5 +923,90 @@
 				</Block>
 			</File>	
 		</GenCode>		
-	</APS>
+	</APS>			
+<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА ТС ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
+	<TS excelSheetName="TS" Comment="Технологические сообщения">
+		<EXEL>
+			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/> <!-- Алгоритмическое имя аларма-->
+			<B nameColumnPos="Наименование" /> <!--Русское название АПС-->
+			<C nameColumnPos="Пейджер" /> <!--Признак вывода сообщения в пейджер -->
+		</EXEL>
+		<GenData>	<!-- генерация типов TС -->
+			<TS Type="BOOL"> 
+				<globData name="TS"> 
+					<localData int="_Algorithm.int" />
+				</globData>
+			</TS>
+		</GenData>
+		<GenCode>
+			<File src= "TechMessages.lua"> <!-- генерация lua таблицы имен алармов -->	
+			<!--		<String start="Начало имени" end="Конец имени" >
+						<text t="Tag."/><abonent/><text t="tch= {"/>
+					</String-->		
+				<Block start="Начало таблицы" end="Конец таблицы" >
+					<String> <!-- отдельной нодой обозначается разборка строки -->
+						<IF cond="Пейджер" val="Да"><!-- формируем строку таблицы lua если нашли Да-->					
+								<text t="'_TS."/>
+								<dbd t="TAG_NAME_PLC"/>
+								<text t="',  -- "/>
+								<dbd t="Наименование"/> 
+							<ELSE>
+								<text t=""/><!-- в остальных случаях пропускаем строку -->	  
+							</ELSE>
+						</IF>
+					</String>	
+				</Block>
+			</File>	
+		</GenCode>
+	</TS>
+<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА ХР ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
+	<HR excelSheetName="HR" Comment="Условия холодного резерва">
+		<EXEL>
+			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя аларма-->
+			<B nameColumnPos="Условие_ХР" />
+			<C nameColumnPos="Наименование" /> <!--Русское название АПС-->
+		</EXEL>
+		<GenData>	<!-- генерация типов ХР -->
+			<PPU_HR Type="BOOL">
+				<globData name="PPU_HR"> 
+					<localData int="_Algorithm.int" />
+				</globData>
+			</PPU_HR>
+		</GenData>	
+		<GenCode>
+			<File src= "ReadyHR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
+				<Block start="Начало кода" end="Конец кода">
+					<String>
+						<abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/><text t=" := check and ("/><dbd t="Условие_ХР"/>
+						<text t="); ReadyHR := ReadyHR and not "/><abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/><text t="; //"/><dbd t="Наименование"/> 
+					</String>						
+				</Block>
+			</File>	
+		</GenCode>	
+	</HR>
+<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА ГР ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
+	<GR excelSheetName="GR" Comment="Условия горячего резерва">
+		<EXEL>
+			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя аларма-->
+			<B nameColumnPos="Условие_ГР" />
+			<C nameColumnPos="Наименование" /> <!--Русское название АПС-->
+		</EXEL>
+		<GenData>	<!-- генерация типов ГР -->
+			<PPU_GR Type="BOOL">
+				<globData name="PPU_GR"> 
+					<localData int="_Algorithm.int" />
+				</globData>
+			</PPU_GR>
+		</GenData>	
+		<GenCode>
+			<File src= "ReadyGR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
+				<Block start="Начало кода" end="Конец кода">
+					<String>
+						<abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/><text t=" := check and ("/><dbd t="Условие_ГР"/>
+						<text t="); ReadyGR := ReadyGR and not "/><abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/><text t="; //"/><dbd t="Наименование"/> 
+					</String>						
+				</Block>
+			</File>	
+		</GenCode>	
+	</GR>	
 </ConfigSignals>

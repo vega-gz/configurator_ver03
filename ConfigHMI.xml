@@ -106,36 +106,7 @@
 		</GenHMI>
 	</mb_DO>
 	<APS>
-	<!-- <GenHMI name="Alarm_" maxY="1000" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" type="TBaseAlarm" ruName="Наименование" isAlarm="false"> 
-			<Hint/>
-			<Num/>
-			<visiblePar/>
-			<disableAlarm/>
-			<pos/>
-			<additionalVar>
-				<Category tableCol="Status" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7">
-					switch swt="Status" default="0">
-						<case val="АО сс" def="10000"/>
-						<case val="АО бс" def="10000"/>
-						<case val="АС"    def="10000"/>
-						<case val="ВО сс" def="10700"/>
-						<case val="ВО бс" def="10700"/>
-						<case val="ПС"    def="10100"/>
-					</switch
-				</Category>
-			</additionalVar>
-		</GenHMI> 
-		<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'Резерв'" Variable="Name"/>
-<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'Res_01'" Variable="NameAlg"/>
-<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="''" Variable="PrefStr"/>
-<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'AIRes_01'" Variable="TagID"/>
-<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'1'" Variable="Num"/>
-<VarValue Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" Value="'Резерв [-45.0..820.0 °С]'" Variable="hint"/>
-<VarValue Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Value="FALSE" Variable="visiblePar"/>
-<VarValue Type="BOOL" TypeUUID="EC797BDD4541F500AD80A78F1F991834" Value="TRUE" Variable="disableAlarm"/>
-<VarValue Type="TPos" TypeUUID="17C82815436383728D79DA8F2EF7CAF2" Value="(x:=20.0,y:=20.0)" Variable="pos"/>
-<VarValue Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Value="1" Variable="Analog_Ph_N"/> -->
-		<GenHMI name="Alarm_" maxY="16" maxX="1" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
+		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
 				<PrefStr add0="APS." Type="STRING"/>  <!-- редактируем поле Type зарезервированное слово второе любое зназвание -->
 			</Edit>
@@ -146,8 +117,7 @@
 				<visiblePar/>
 				<disableAlarm/>
 				<Analog_Ph_N/>
-			</Disable> 
-			 
+			</Disable> 			 
 			<additionalVar>
 				<Category Type="DINT" > 
 					<switch swt="Status" default="0">
@@ -157,19 +127,21 @@
 						<case val="ВО сс" def="10700"/>
 						<case val="ВО бс" def="10700"/>
 						<case val="ПС"    def="10100"/>
+						<case val="Пожар" def="10000"/>
 					</switch> 
 				</Category>
-				<Source Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7">
+				<Source Type="STRING">
 					<switch swt="Status" default="">
 						<case val="АО сс" def="АС"/>
 						<case val="АО бс" def="АС"/>
 						<case val="АС"    def="АС"/>
 						<case val="ВО сс" def="ВО"/>
 						<case val="ВО бс" def="ВО"/>
-						<case val="ПС"    def="ПС"/>
+						<case val="ПС"    def="ПС"/> 
+						<case val="Пожар" def="АС"/>
 					</switch>
 				</Source>	
-				<TAG Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7">
+				<TAG Type="STRING">
 					<switch swt="Status" default="">
 						<case val="АО сс" def="AOs"/>
 						<case val="АО бс" def="AOb"/>
@@ -177,9 +149,79 @@
 						<case val="ВО сс" def="VOs"/>
 						<case val="ВО бс" def="VOb"/>
 						<case val="ПС"    def="PS"/>
+						<case val="Пожар" def="Fire"/>
 					</switch>
 				</TAG>
 			</additionalVar>	
 		</GenHMI>	
 	</APS>
+	<TS>
+		<GenHMI name="Tch_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable>
+			<additionalVar>
+				<Category Type="DINT" />
+				<Source Type="STRING" />
+				<TAG Type="STRING" />
+			</additionalVar>
+			<Edit>
+				<PrefStr value="TS." Type="STRING" />
+				<Category value="10500" Type="DINT" />
+				<Source value="ТС" Type="STRING" />
+				<TAG value="TS" Type="STRING" />
+			</Edit>
+		</GenHMI>
+	</TS>
+	<HR>
+		<GenHMI name="HR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable>
+			<additionalVar>
+				<Category Type="DINT" />
+				<Source Type="STRING" />
+				<TAG Type="STRING" />
+			</additionalVar>
+			<Edit>
+				<PrefStr value="PPU_HR." Type="STRING" />
+				<Category value="10200" Type="DINT" />
+				<Source value="ХР" Type="STRING" />
+				<TAG value="PPU_HR" Type="STRING" />
+			</Edit>
+		</GenHMI>
+	</HR>
+	<GR>
+		<GenHMI name="GR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable>
+			<additionalVar>
+				<Category Type="DINT" />
+				<Source Type="STRING" />
+				<TAG Type="STRING" />
+			</additionalVar>
+			<Edit>
+				<PrefStr value="PPU_GR." Type="STRING" />
+				<Category value="10200" Type="DINT" />
+				<Source value="ГР" Type="STRING" />
+				<TAG value="PPU_GR" Type="STRING" />
+			</Edit>
+		</GenHMI>
+	</GR>	
 </ConfigHMI>
