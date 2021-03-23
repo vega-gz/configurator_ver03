@@ -6,9 +6,9 @@
 <URL1>jdbc:postgresql://minoro.ru:5432/</URL1>
 <URL2>jdbc:postgresql://127.0.0.1:5432/</URL2>
 <URL>jdbc:postgresql://172.16.35.50:5432/</URL>
-<BASE>kln_aleksey</BASE>
+<BASE>test666</BASE>
 <BASE1>kln_problem_test</BASE1>
-<BASE2>test666</BASE2>
+<BASE2>kln_aleksey</BASE2>
 <BASE3>kln_gpa</BASE3>
 <BASE4>kln_aleksey_local</BASE4>
 <DesignDir>E:\tmp\Info_script_file_work\Project\Design@2021-02-12-1(v170)</DesignDir>

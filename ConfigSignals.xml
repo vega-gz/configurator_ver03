@@ -977,8 +977,11 @@
 			<File src= "ReadyHR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
 				<Block start="Начало кода" end="Конец кода">
 					<String>
+						<text t=" // "/><dbd t="Наименование"/> 
+					</String>
+					<String>
 						<abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/><text t=" := check and ("/><dbd t="Условие_ХР"/>
-						<text t="); ReadyHR := ReadyHR and not "/><abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/><text t="; //"/><dbd t="Наименование"/> 
+						<text t="); ReadyHR := ReadyHR and not "/><abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/>
 					</String>						
 				</Block>
 			</File>	
@@ -1002,11 +1005,114 @@
 			<File src= "ReadyGR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
 				<Block start="Начало кода" end="Конец кода">
 					<String>
+						<text t=" // "/><dbd t="Наименование"/> 
+					</String>						
+					<String>
 						<abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/><text t=" := check and ("/><dbd t="Условие_ГР"/>
-						<text t="); ReadyGR := ReadyGR and not "/><abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/><text t="; //"/><dbd t="Наименование"/> 
+						<text t="); ReadyGR := ReadyGR and not "/><abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/>
 					</String>						
 				</Block>
 			</File>	
 		</GenCode>	
-	</GR>	
+	</GR>
+<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА TUNE_FR ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->	
+	<TuneFR excelSheetName="TuneFR" Comment="Настройки топливного регулятора">
+		<EXEL>
+			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя настройки-->	
+			<B nameColumnPos="Значение" type="Number" default="0.0"/><!--Обязательный нода-->	
+			<C nameColumnPos="Нижняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->	
+			<D nameColumnPos="Верхняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->
+			<E nameColumnPos="Наименование" /><!--Обязательный нода-->
+		</EXEL>	
+		<GenData>	<!-- генерация типа TUNE_FR -->		
+			<Tune_FR Type="REAL">
+				<globData name="Tune_FR">
+					<localData int="_GT_4RM.int" />
+				</globData>	
+			</Tune_FR>
+		</GenData>	
+		<GenCode>
+		<!-- 
+			<File src= "TuneInitFR" target="_GT_4RM"> <! генерация функции проверки ХР  >
+				<Block start="Начало кода" end="Конец кода">
+					<String>
+						<abonent/><text t="_Tune_FR."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Значение"/><text t="; // "/><dbd t="Наименование"/> 
+					</String>						
+				</Block>
+			</File>	
+			-->
+			<File src="B_TuneInit" target="C_HMI2.iec_hmi" nonFunc="BasicFBType"> <!-- генерация блока инициализации настроек в ЧМИ -->
+				<Block start="Начало кода" end="Конец кода">
+					<String>
+						<text t="&#x0A;A["/><npp/><text t="].text:= &apos;"/><dbd t="Наименование"/><text t="&apos;;&#x0A;A["/><npp/><text t="].name:= &apos;"/><dbd t="TAG_NAME_PLC"/>
+						<text t="&apos;;&#x0A;A["/><npp/><text t="].ng:= "/><dbd t="Нижняя_граница"/><text t=";&#x0A;A["/><npp/><text t="].vg:= "/><dbd t="Верхняя_граница"/>
+					</String>
+				</Block>
+			</File>					
+		</GenCode>
+	</TuneFR>	
+	<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА CURVE_FR ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
+	<CurveFR excelSheetName="CurveFR" Comment="Кривые топливного регулятора">
+		<EXEL>
+			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя настройки-->			
+			<B nameColumnPos="Нижняя_граница_X" type="Number" default="0.0"/><!--Обязательный нода-->	
+			<C nameColumnPos="Верхняя_граница_X" type="Number" default="0.0"/><!--Обязательный нода-->
+			<D nameColumnPos="Нижняя_граница_Y" type="Number" default="0.0"/><!--Обязательный нода-->	
+			<E nameColumnPos="Верхняя_граница_Y" type="Number" default="0.0"/><!--Обязательный нода-->
+			<F nameColumnPos="Кол-во_точек" type="Int" default="2"/>			
+			<G nameColumnPos="Наименование" /><!--Обязательный нода-->
+		</EXEL>	
+		<GenData>	<!-- генерация типа CURVE_FR -->		
+			<Curve_FR typeFile="T_Curve.type">
+				<globData name="Curve_FR">
+					<localData int="_GT_4RM.int" />
+				</globData>	
+			</Curve_FR>
+		</GenData>	
+		<!--GenCode>
+			<File src= "TuneInitFR" target="_GT_4RM">
+				<Block start="Начало кода" end="Конец кода">
+					<String>
+						<abonent/><text t="_Tune_FR."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Значение"/><text t="; // "/><dbd t="Наименование"/> 
+					</String>						
+				</Block>
+			</File>	
+		</GenCode-->
+	</CurveFR>	
+		<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА CURVE_FR_INIT ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
+	<CurveFR_Init excelSheetName="CurveFR_Init" Comment="Инициализация кривых топливного регулятора">
+		<EXEL>
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" /> <!-- Алгоритмическое имя настройки-->
+			<B nameColumnPos="Смещение" type="Int" default="0"/><!--Обязательный нода, смещение в массиве-->				
+			<C nameColumnPos="X" type="Number" default="0.0"/><!--Обязательный нода, аргумент хар-ки-->	
+			<D nameColumnPos="Y" type="Number" default="0.0"/><!--Обязательный нода, значение хар-ки-->				
+			<E nameColumnPos="Кол-во_точек" type="Int" default=""/>			
+			<H nameColumnPos="Наименование" default=""/><!--Обязательный нода-->
+		</EXEL>	
+		<!--GenData>	
+			<Curve_FR typeFile="T_Curve.type">
+				<globData name="Curve_FR">
+					<localData int="_GT_4RM.int" />
+				</globData>	
+			</Curve_FR>
+		</GenData-->	
+		<GenCode>
+			<File src= "CurveInitFR" target="_GT_4RM">
+				<Block start="Начало кода" end="Конец кода">
+					<String>							
+						<IF cond="Кол-во_точек" val=""><!-- Если не указано кол-во точек в кривой, то ничего не пишем-->	
+							<ELSE> <!-- в остальных случаях пишем кол-во точек -->
+								<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".N := "/><dbd t="Кол-во_точек"/>
+								<text t="; // "/><dbd t="Наименование"/>
+							</ELSE>
+						</IF>
+					</String>							
+					<String>					
+						<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".s["/><dbd t="Смещение"/><text t="].x := "/><dbd t="X"/><text t="; "/>
+						<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".s["/><dbd t="Смещение"/><text t="].fx := "/><dbd t="Y"/>											
+					</String>						
+				</Block>
+			</File>	
+		</GenCode>
+	</CurveFR_Init>
 </ConfigSignals>

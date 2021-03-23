@@ -21,10 +21,12 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
@@ -899,5 +901,18 @@ public class TableTools {//ссылка на таблицу, массив шир
         for (int i = 0; i < t1.size(); i++) {
             t1.get(i)[0] = "" + (i + 1);
         }
+    }
+    
+    
+    // --- Перерисовка панели с таблицой ---
+    public static void repaintJpanelTable(JPanel jPanel_Tmp, JComponent componetSwing){
+        jPanel_Tmp.removeAll();
+        jPanel_Tmp.invalidate();
+        jPanel_Tmp.repaint();
+        jPanel_Tmp.setLayout(new java.awt.CardLayout()); // без этого не сработало
+        jPanel_Tmp.add(componetSwing); // так и остальное заработало
+        jPanel_Tmp.revalidate();
+        jPanel_Tmp.repaint();
+        jPanel_Tmp.requestFocus();
     }
 }
