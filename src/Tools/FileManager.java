@@ -33,7 +33,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -739,6 +743,72 @@ public class FileManager {
         return cnt;
     }
 
+    public static int ChangeOPCNameFile(String dir) throws FileNotFoundException, IOException {
+        File[] firstDirectory = new File(dir + File.separator + "Design").listFiles();
+        XMLSAX xmlsax = new XMLSAX();
+        int counter = 0;//счетчик количества изменений
+        String nameFile_opcINT = "";//OPC файл с расширение int
+        String nameFile_opcOPCCUASERVER = "";//OPC файл с расширение opccuaServer
+        File newName;
+        String expOPC;
+        String opcServerName = null;
+        ArrayList<String> oldNameOPC = new ArrayList<>();
+        ArrayList<String> newNameOPC = new ArrayList<>();
+        for (File findFile : firstDirectory) {
+            if (findFile.isDirectory()) {//если это дирректория - ничего не делать
+                continue;
+            }
+            nameFile_opcINT = findFile.getName();//имя файла с расширением(текущее)
+            expOPC = nameFile_opcINT.substring(nameFile_opcINT.lastIndexOf(".") + 1);//получаем расширение
+            System.out.println(nameFile_opcINT);
+            Node typeNode = xmlsax.readDocument(dir + File.separator + "Design" + File.separator + nameFile_opcINT);//открываем файл
+            Node findSubAppType = xmlsax.returnFirstFinedNode(typeNode, "SubAppType");//ищем ноду для файла OPC
+            String kind = xmlsax.getDataAttr(findSubAppType, "Kind");//тип приложения,для того чтобы найти файлы OPC
+            if (findSubAppType != null && kind != null && kind.contains("OPC")) {//если нода нашлась
+                opcServerName = xmlsax.getDataAttr(findSubAppType, "Name");//получаем значение аттрибута
+                newName = new File(dir + File.separator + "Design" + File.separator + opcServerName + "." + expOPC);
+                if (findFile.renameTo(newName)) {
+                    String fillNameOPC_int = nameFile_opcINT.substring(0, nameFile_opcINT.indexOf('.'));//имя файла без расширения
+                    oldNameOPC.add(fillNameOPC_int);
+                    newNameOPC.add(opcServerName);
+                    System.out.println("файл " + findFile + " переименовался в " + newName);
+                    counter++;
+                }
+            }
+        }
+        File[] secondDirectory = new File(dir + File.separator + "Design").listFiles();//обновленная директория
+        for (int i = 0; i < oldNameOPC.size(); i++) {
+            String oldOPC = oldNameOPC.get(i);
+            String newOPC = newNameOPC.get(i);
+            for (File findOPC : secondDirectory) {
+                if (findOPC.isDirectory()) {//если это дирректория - ничего не делать
+                    continue;
+                }
+                nameFile_opcOPCCUASERVER = findOPC.getName();
+                expOPC = nameFile_opcOPCCUASERVER.substring(nameFile_opcOPCCUASERVER.lastIndexOf(".") + 1);//ищу расширение opcServer
+                String fillNameOPC_cuaServer = null;
+                try {
+                    fillNameOPC_cuaServer = nameFile_opcOPCCUASERVER.substring(0, nameFile_opcOPCCUASERVER.indexOf('.'));//имя без расширения
+                } catch (StringIndexOutOfBoundsException ex) {
+                    System.out.println("Попался файл без расширения");
+                }
+                if (oldOPC.equals(fillNameOPC_cuaServer)) {
+                    newName = new File(dir + File.separator + "Design" + File.separator + newOPC + "." + expOPC);
+                    findOPC.renameTo(newName);
+                    System.out.println("файл " + findOPC + " переименовался в " + newName);
+                    counter++;
+                }
+            }
+        }
+        System.out.println("Произведено замен " + counter);
+        return counter;
+    }
+
+    public static void main(String[] args) throws IOException {
+        FileManager fm = new FileManager();
+        fm.ChangeOPCNameFile("C:\\Users\\cherepanov\\Desktop\\test");
+    }
+
     /**
      * Метод заменяет русское и алгоритмическое имена в базе данных и XML файлах
      * теми значениями ,которые ввел пользователь в соответствущих ячейка
@@ -800,8 +870,8 @@ public class FileManager {
         return isErr;
     }
 
-    public static void main(String[] args) throws IOException {//для тестирования
-        FileManager fm = new FileManager();
-        loggerConstructor("Яй криветко");
-    }
+//    public static void main(String[] args) throws IOException {//для тестирования
+//        FileManager fm = new FileManager();
+//        loggerConstructor("Яй криветко");
+//    }
 }

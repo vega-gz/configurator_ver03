@@ -141,7 +141,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Переименовать4");
+        jButton1.setText("Переименовать");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
