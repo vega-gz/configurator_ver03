@@ -618,7 +618,7 @@ public class TableDB extends javax.swing.JFrame {
 
             // вносим данные сращивая массивы Стримами
             for (int i = 0; i < fromDB.size(); i++) {
-                fromDB.set(i, Stream.concat(Arrays.stream(fromDB.get(i)), Arrays.stream(new String[1])).toArray(String[]::new)); // замена новым массивом
+                fromDB.set(i, Stream.concat(Arrays.stream(fromDB.get(i)), Arrays.stream(new String[]{""})).toArray(String[]::new)); // замена новым массивом
             }
             comment = globVar.DB.getCommentTable(tableName);
             tableSize = fromDB.size();
@@ -679,8 +679,11 @@ public class TableDB extends javax.swing.JFrame {
         
         if(fromDB.size() <= 0 || fromDB.size() != y || fromDB.get(0).length != x) return true; // еще доп проверка от пустых строк от базы
         for(int i=0;i<y;i++)
-            for(int j=0;j<x;j++)
+            for(int j=0;j<x;j++){
+                System.out.println(tableModel.getValueAt(i, j));
+                System.out.println(fromDB.get(i)[j]);
                 if(!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) return true;
+            }
         return false;
     }
 
