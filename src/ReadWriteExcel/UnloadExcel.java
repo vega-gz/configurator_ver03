@@ -99,7 +99,7 @@ public final class UnloadExcel {
             String colExelName = colExcel.getNodeName();//получили имя ноды 
             String colName = globVar.sax.getDataAttr(colExcel, "nameColumnPos");//получили значение атрибута
             
-            colNames.add(colName);//сделал для того чтобы для xml сохранилось НАИМЕНОВАНИЕ а для шапку для mb создать из комментария к таблице
+            colNames.add(colName);//сделал для того чтобы для xml сохранилось НАИМЕНОВАНИЕ а  шапку для mb создать из комментария к таблице
             if(sheetName.contains("mb")&&colName.equals("Наименование")){
                 fullNameTable=db.getCommentTable(nameTable);
                 if(!fullNameTable.equals("null")||fullNameTable==null){
