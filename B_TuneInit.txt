@@ -1,0 +1,30 @@
+
+        <InterfaceList>
+            <EventInputs>
+                <Event Name="Exec" UUID="D2WRAEHFXMOUXNWUEWS3Z4D44Q" />
+            </EventInputs>
+            <EventOutputs>
+                <Event Name="Done" UUID="V4FZPC4A3QSEXNGLMRJRDMPAE4" />
+            </EventOutputs>
+            <OutputVars>
+                <VarDeclaration Name="A" Type="T_TuneHMI" TypeUUID="VEG247KPLV7UNEWYB652TUBDBU" ArraySize="65" InitialValue=""/>
+            </OutputVars>
+        </InterfaceList>
+        <BasicFB>
+            <Algorithm Name="Initialize" UUID="LS4HE4EZ6EXUBA5AESWT6OMUPE">
+                <ST Text= "(*Инициализация массива настроек*)
+				//Начало кода
+				//Конец кода
+				"/>
+            </Algorithm>
+            <ECC>
+                <ECState Name="STANDBY" UUID="Q5VIE7CRWJQEFAZYDHQVAQG6BQ" />
+                <ECState Name="INIT" UUID="EM43NKIV6JIURMH2EERMAUPI6A">
+                    <ECAction Algorithm="Initialize" AlgorithmUUID="LS4HE4EZ6EXUBA5AESWT6OMUPE" Output="Done" OutputUUID="V4FZPC4A3QSEXNGLMRJRDMPAE4" />
+                </ECState>
+                <ECTransition Source="STANDBY" SourceUUID="Q5VIE7CRWJQEFAZYDHQVAQG6BQ" Destination="INIT" DestinationUUID="EM43NKIV6JIURMH2EERMAUPI6A" Condition="Exec" />
+                <ECTransition Source="INIT" SourceUUID="EM43NKIV6JIURMH2EERMAUPI6A" Destination="STANDBY" DestinationUUID="Q5VIE7CRWJQEFAZYDHQVAQG6BQ" Condition="BOOL#1" />
+            </ECC>
+        </BasicFB>
+    </BasicFBType>
+</Data>

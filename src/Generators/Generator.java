@@ -1015,7 +1015,8 @@ public class Generator {
         String nameToblock = commonFileST ;                                 // оригинальное название ноды сохраняем и его же и ищем потом
         // разбор имени если есть точка в имени(нахождение расширения)
         String etxLUA = "lua";
-        boolean findLUAext = false;                                         
+        boolean findLUAext = false;   
+        boolean findNonFunction = false;
         String[] separNameF = stFileName.split("\\.");
         String ext = ""; // Для расширения на файле
         if(separNameF.length > 1) {                                         // если есть расширение то такой файл и будет, нет так txt
@@ -1055,7 +1056,13 @@ public class Generator {
             }
         }
 
+        String nameFunction = (String)globVar.sax.getDataNode(nodeGenCode).get("nonFunc"); //  название для головной ноды
         String algFile = (String) globVar.sax.getDataNode(nodeGenCode).get("target"); // часть названия целевого файла
+        if( nameFunction != null){
+            findNonFunction = true;
+        }else nameFunction = "Function";
+        
+        
         String funcName = nameToblock;//abonent + "_"+ commonFileST; // Название ноды для поиска в другом файле
         String funcUUID = null;
         String funcResultTypeUUID = null;                                             // возвращаемое значение фуйкции
@@ -1064,8 +1071,13 @@ public class Generator {
                 algFile = abonent + algFile;
             }
             XMLSAX algSax = new XMLSAX();
-            Node algRoot = algSax.readDocument(globVar.desDir + File.separator + "Design" + File.separator + algFile + ".iec_st");
-            String[] myFunc = {"Function", "Name", funcName};
+            String nameNodeinfile = globVar.desDir + File.separator + "Design" + File.separator + algFile;
+            
+            Node algRoot = algSax.readDocument(nameNodeinfile + ".iec_st");
+            //или полное имя без расширения
+            if(algRoot == null) algRoot = algSax.readDocument(nameNodeinfile);
+            
+            String[] myFunc = {nameFunction, "Name", funcName};
             Node func = algSax.findNodeAtribute(algRoot, myFunc);
             if (func != null) {
                 funcUUID = (String) algSax.getDataNode(func).get("UUID");
@@ -1080,12 +1092,16 @@ public class Generator {
 
         // это костыль для LUA файлов не вносим эту строку
         if(!findLUAext){
-           //не найдена фукции и значения по умолчанию вроде для AI
-            if(funcUUID != null & funcResultTypeUUID != null){
-                fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\""+ funcResultTypeUUID +"\">\n");
+            if(findNonFunction) fm.wr("<Data>\n<" + nameFunction +" UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ShowVarTypes=\"true\">\n");
+            else{
+                //не найдена фукции и значения по умолчанию вроде для AI
+                if(funcUUID != null & funcResultTypeUUID != null){
+                    fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\""+ funcResultTypeUUID +"\">\n");
+                }
+                else fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
             }
-            else fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
         }
+        
         ArrayList<Node> blockList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node block : blockList) {
             String start = (String) globVar.sax.getDataNode(block).get("start");
@@ -1107,7 +1123,7 @@ public class Generator {
             if (fm.EOF) {
                 return closeByErr(fm, tmpFile, "В файле \"" + globVar.myDir + File.separator + commonFileST + " не найдена строка \"" + start + "\"");
             }
-            // опять идиотизм с LUA это править на до
+            // опять идиотизм с LUA это править надо
             if(!findLUAext){
                 fm.wr("//" + start + "\n");
             }
@@ -1128,6 +1144,7 @@ public class Generator {
                     continue;                                                       //если тип данных есть и есть список ненужных данных и данный тип в этом списке
                 }
                 for (Node cont : blockCont) {
+                    
                     String nodeName = cont.getNodeName();
                     if ("Function".equals(nodeName)) {                              
                         createFunction(cont, fm, ft, abSubAb, disableReserve, j);   // Обработка "фукции" ноды 
@@ -1136,6 +1153,7 @@ public class Generator {
                     }
                 }
             }
+            
             //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
             while (!fm.EOF && !s.contains(end)) {
                 s = fm.rd();                                                        // читаем строки из tmp файла
@@ -1183,6 +1201,7 @@ public class Generator {
         }
         if(disable.equals("") & tmp.equals("")) return 0;               // нечего не нашли (нет записи в файл)
         fm.wr(disable + tmp + ";\n");
+
         return 0;
     }
 
@@ -1910,7 +1929,7 @@ public class Generator {
             for (Node av : addVars) {
                 String[] tmp = new String[4];
                 tmp[0] = av.getNodeName();
-                tmp[1] = HMIcfg.getDataAttr(av, "tableCol");
+                tmp[1] = HMIcfg.getDataAttr(av, "tableCol"); 
                 tmp[2] = HMIcfg.getDataAttr(av, "Type");
                 tmp[3] = HMIcfg.getDataAttr(av, "TypeUUID");
                 addVarsData.add(tmp);

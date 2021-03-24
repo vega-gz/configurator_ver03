@@ -666,6 +666,7 @@ public class DataBase implements Observed {
     
     // --- добавить комментарий к таблице ---
     public void createCommentTable(String table, String comment){
+        if(comment == null | comment.equals("")) return;
         String sql = null;   
         try {
             stmt = connection.createStatement();
@@ -874,7 +875,24 @@ public class DataBase implements Observed {
             //e.printStackTrace();
         }
         return resultT;
-        
+    }
+    
+    // --- добавление столбцов к таблице ---
+     public int addColumnTable(String table_name, String nameColumn){
+        String sql = null; 
+        int status = 0;
+        try {
+            stmt = connection.createStatement();
+            sql = "ALTER TABLE \""+ table_name +"\" ADD  \"" + nameColumn + "\" TEXT NULL;";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            status = 1;
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL request " + sql);
+            status = -1;
+        }finally {
+            return status;
+        }
     }
     
     // --- Функции наблюдателя ---
