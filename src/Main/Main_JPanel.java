@@ -38,10 +38,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
+    DataBase db=new DataBase();
     String filepatch, type;
     File excel = null;
     ProgressBar pb = null;
     DefaultListModel listModel = new DefaultListModel(); // модель списка баз
+    static String comment;
 
     public Main_JPanel() {
         globVar.DB = new DataBase();
@@ -66,7 +68,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         } catch (IOException ex) {
             FileManager.loggerConstructor("проблема с иконкой программы");
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -117,7 +118,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -459,8 +462,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenu1.setText("Настройки проекта");
 
-        jMenuItem11.setText("Создать таблицу");
-        jMenu1.add(jMenuItem11);
+        jMenu5.setText("Таблицы");
+
+        jMenuItem12.setText("Создать новую таблицу");
+        jMenu5.add(jMenuItem12);
+
+        jMenuItem13.setText("Создать новую таблицу по шаблону");
+        jMenu5.add(jMenuItem13);
+
+        jMenu1.add(jMenu5);
 
         jMenuItem4.setText("Абоненты");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -1111,6 +1121,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
              
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+
+    
     public ComboBoxModel getComboBoxModel() { // функция для создания списка из таблиц базы
         if (!globVar.DB.isConnectOK()) {
             return null;
@@ -1160,12 +1172,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
         ArrayList<String> listTableBd = globVar.DB.getListTable();
         final String ROOT = "дерево сигналов";
+        
 
         // Создание древовидной структуры
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT);
         // Ветви первого уровня
         for (String[] s : listAbonent) {
-            String nameBranch = s[1]; //  1 это префикс
+            String nameBranch = s[1]; //  1 это префикс(в нашем случае это имя абонента в структуре GPA KC  и тд)
             DefaultMutableTreeNode firstNode = new DefaultMutableTreeNode(nameBranch);
             // Добавление ветвей к корневой записи
             root.add(firstNode);
@@ -1175,9 +1188,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");
                 Matcher matcher1 = pattern1.matcher(sheet);
                 //String sheetPatern = ""; // годы месяцы число
+               
+               // comment=db.getCommentTable(sheet);
                 if (matcher1.matches()) {
                     //sheetPatern = matcher1.group(1);
-                    firstNode.add(new DefaultMutableTreeNode(sheet, false));
+                    
+                    
+                   // firstNode.add(new DefaultMutableTreeNode(comment+"("+sheet+")", false));//здесь у нас добавление имени в дерево
+                     firstNode.add(new DefaultMutableTreeNode(sheet, false));//здесь у нас добавление имени в дерево
                 }
 
             }
@@ -1186,6 +1204,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         // Создание стандартной модели и дерево
         return new DefaultTreeModel(root, true);
     }
+
 
     // --- метод отображения фрейма таблицы ---
     public void showTable(String table) {
@@ -1233,10 +1252,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
     TableTools tt=new TableTools();
+    Main_JPanel mj=new Main_JPanel();
     ArrayList<String[]> newName=new ArrayList<>();
     public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
