@@ -42,6 +42,8 @@ public class Generator {
             isMb = "_mb";
             isModbus = true;
         }
+        
+        globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
             FileManager.loggerConstructor("Не найдена нода \"" + nodeTable + "\"");
@@ -256,9 +258,11 @@ public class Generator {
             //group = nodeTable.substring(3);
         }
 
+        globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node nodeGenCode = globVar.sax.returnFirstFinedNode(globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable), "GenCode");
         if (nodeGenCode == null) {
-            return 0;
+            FileManager.loggerConstructor("Ошибка ноды GenCode " + nodeTable );
+            return -1;
         }
         ArrayList<Node> fileList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node f : fileList) {
@@ -757,6 +761,8 @@ public class Generator {
             nodeTable = nodeTable.substring(y + 1);
             isMb = "mb_";
         }
+        
+        globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
             FileManager.loggerConstructor("Не найдена нода \"" + nodeTable + "\"");
@@ -1016,10 +1022,12 @@ public class Generator {
         // разбор имени если есть точка в имени(нахождение расширения)
         String etxLUA = "lua";
         boolean findLUAext = false;   
+        boolean extF = false;                                               //  Есть ли вообще расширение
         boolean findNonFunction = false;
         String[] separNameF = stFileName.split("\\.");
         String ext = ""; // Для расширения на файле
         if(separNameF.length > 1) {                                         // если есть расширение то такой файл и будет, нет так txt
+            extF = true;
             ext = separNameF[separNameF.length - 1];                        // последнее разбитое это и будет окончание
             if(ext.equalsIgnoreCase(etxLUA)) findLUAext = true;             // определения файла ЛУА    
         }  
@@ -1069,13 +1077,17 @@ public class Generator {
         if (algFile != null) {
             if ("_".equals(algFile.substring(0, 1))) {
                 algFile = abonent + algFile;
+            }else{
+                String[] separAbonent = algFile.split("\\.");
+                if(separAbonent.length > 1)extF = true;      
             }
+            
             XMLSAX algSax = new XMLSAX();
             String nameNodeinfile = globVar.desDir + File.separator + "Design" + File.separator + algFile;
             
-            Node algRoot = algSax.readDocument(nameNodeinfile + ".iec_st");
-            //или полное имя без расширения
-            if(algRoot == null) algRoot = algSax.readDocument(nameNodeinfile);
+            Node algRoot;
+            if(extF)algRoot = algSax.readDocument(nameNodeinfile); //или полное имя без расширения
+            else  algRoot = algSax.readDocument(nameNodeinfile + ".iec_st");
             
             String[] myFunc = {nameFunction, "Name", funcName};
             Node func = algSax.findNodeAtribute(algRoot, myFunc);

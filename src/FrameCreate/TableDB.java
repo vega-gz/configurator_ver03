@@ -474,7 +474,10 @@ public class TableDB extends javax.swing.JFrame {
                 FileManager.loggerConstructor(ex.toString());
             }
             if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            else if(ret != -2) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+            else if(ret != -2){
+                JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+                showLogger();
+            }
             globVar.processReg.remove(processName);
             jProgressBar1.setValue(0);
          };
@@ -497,7 +500,10 @@ public class TableDB extends javax.swing.JFrame {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            else if(ret != -2) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+            else if(ret == -1) {
+                JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+                showLogger();
+            }
             jProgressBar1.setValue(0);
             globVar.processReg.remove(processName);
         };
@@ -521,7 +527,10 @@ public class TableDB extends javax.swing.JFrame {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(retHW == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            else if(retHW != -2) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+            else if(retHW != -2) {
+                JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+                showLogger();
+            }
             globVar.processReg.remove(processName);
             jProgressBar1.setValue(0);
          };
@@ -544,7 +553,10 @@ public class TableDB extends javax.swing.JFrame {
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(retHMI==null) JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+            if(retHMI==null) {
+                JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
+                showLogger();
+            }
             else if(!"".equals(retHMI)) JOptionPane.showMessageDialog(null, "Создано "+retHMI); // Это сообщение 
             jProgressBar1.setValue(0);
             globVar.processReg.remove(processName);
@@ -738,5 +750,13 @@ public class TableDB extends javax.swing.JFrame {
         selModel.addSelectionInterval(row, row);
         jTable1.scrollRectToVisible(jTable1.getCellRect(row,0, true));  // скролю на нужное
     
+    }
+    
+    // --- Выводит окно логера ---
+    private void showLogger(){
+        LogerViewerFrame lvf = new LogerViewerFrame();
+        TableTools.setFrameListener(lvf, null, null, null); // слушателей фреймов
+        lvf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        lvf.setVisible(true);
     }
 }

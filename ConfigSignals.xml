@@ -90,7 +90,7 @@
 			</AI_Internal>
 		</GenData>
 		<GenCode >
-			<File src="AI_CallAll" target="_Algorithm">
+			<File src="AI_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода">
 					<Function name="AI_init"><!-- AI_init(-->
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg><!-- GPA_AI_Settings.Pmsm,-->
@@ -213,7 +213,7 @@
 			</FR_AI_Internal>
 		</GenData>
 		<GenCode >
-			<File src="FR_AI_CallAll" target="_GT_4RM">
+			<File src="FR_AI_CallAll" target="_GT_4RM.iec_st">
 				<Block start="Начало сгенерированного кода FR_AI_init" end="Конец сгенерированного кода">
 					<Function name="AI_init">
 						<arg><abonent/><text t="_FR_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -242,7 +242,7 @@
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="FR_AI_Permit" target="_GT_4RM">
+	<!--		<File src="FR_AI_Permit" target="_GT_4RM.iec_st">
 				<Block start="Начало сгенерированного кода FR_AI_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_FR_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
@@ -338,7 +338,7 @@
 			<W nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenCode>
-			<File src="AO_CallAll" target="_Algorithm">
+			<File src="AO_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода AO_init" end="Конец сгенерированного кода">
 					<Function name="AO_init">
 						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -359,7 +359,7 @@
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="AO_Permit" target="_Algorithm">
+	<!--		<File src="AO_Permit" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода AO_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
@@ -423,7 +423,7 @@
 			<R nameColumnPos="sonetModbus" default=""/>
         </EXEL>
 		<GenCode>
-			<File src="DI_CallAll" target="_Algorithm">
+			<File src="DI_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DI_init" end="Конец сгенерированного кода">
 					<Function name="DI_init">
 						<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -445,7 +445,7 @@
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="DI_Permit" target="_Algorithm">
+	<!--		<File src="DI_Permit" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DI_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
@@ -497,7 +497,7 @@
 			<O nameColumnPos="sonetModbus" default=""/>
         </EXEL>
 		<GenCode>
-			<File src="DO_CallAll" target="_Algorithm">
+			<File src="DO_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
 					<Function name="DO_Processing">
 						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -507,7 +507,7 @@
 					</Function>
 				</Block>
 			</File>
-			<File src="DO_Permit" target="_Algorithm">
+			<File src="DO_Permit" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DO_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
@@ -573,7 +573,7 @@
 			</AI_Settings>
 		</GenData>
 		<GenCode>
-			<File src="mb_AI_CallAll" target="_Algorithm">
+			<File src="mb_AI_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
 					<Function name="mb_AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -636,7 +636,7 @@
 					</Function>
 				</Block>
 			</File>
-	<!--		<File src="AI_Permit" target="_Algorithm">
+	<!--		<File src="AI_Permit" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода AI_Permit" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
 					<String>
 						<abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
@@ -700,7 +700,7 @@
 			<N nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenCode>
-			<File src="mb_AO_CallAll" target="_Algorithm">
+			<File src="mb_AO_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода AO_init" end="Конец сгенерированного кода">
 					<Function name="mb_AO_init">
 						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -733,7 +733,7 @@
 					</String>
 				</Block>
 			</File>
-			<File src="AO_Permit" target="_Algorithm">
+			<File src="AO_Permit" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода AO_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
@@ -772,7 +772,7 @@
 			<F nameColumnPos="mbAddr" modbus="bit"/>
         </EXEL>
 		<GenCode>
-			<File src="mb_DI_CallAll" target="_Algorithm">
+			<File src="mb_DI_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DI_Processing" end="Конец сгенерированного кода">
 					<Function name="mb_DI_Processing">
 						<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -782,7 +782,7 @@
 					</Function>
 				</Block>
 			</File>
-<!--			<File src="DI_Permit" target="_Algorithm">
+<!--			<File src="DI_Permit" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DI_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_DI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".manual := tmpPermit; //"/><dbd t="Наименование"/>
@@ -828,7 +828,7 @@
 			<F nameColumnPos="mbAddr" modbus="bit"/>
         </EXEL>
 		<GenCode>
-			<File src="DO_CallAll" target="_Algorithm">
+			<File src="DO_CallAll" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
 					<Function name="DO_Processing">
 						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -838,7 +838,7 @@
 					</Function>
 				</Block>
 			</File>
-			<File src="DO_Permit" target="_Algorithm">
+			<File src="DO_Permit" target="_Algorithm.iec_st">
 				<Block start="Начало сгенерированного кода DO_Permit" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
@@ -870,7 +870,7 @@
 			</APS_Internal>	
 		</GenData>
 		<GenCode>
-			<File src= "Call_APS"  target="_Algorithm"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
+			<File src= "Call_APS"  target="_Algorithm.iec_st"> <!-- target="_Algorithm.iec_st"> генерация блока вызовов обработчиков -->
 				<Block start="Начало сгенерированного кода APS_Processing" end="Конец сгенерированного кода">
 					<Function name="APS_Processing">
 						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
@@ -883,7 +883,7 @@
 					</Function>	
 				</Block>
 			</File>
-			<File src= "APS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации -->
+			<File src= "APS_Init" target="_Algorithm.iec_st"> <!-- target="_Algorithm"> генерация функции инициализации -->
 				<Block start="Начало сгенерированного кода APS_Init" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_APS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
@@ -974,7 +974,7 @@
 			</PPU_HR>
 		</GenData>	
 		<GenCode>
-			<File src= "ReadyHR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
+			<File src= "ReadyHR" target="_Algorithm.iec_st"> <!-- генерация функции проверки ХР -->
 				<Block start="Начало кода" end="Конец кода">
 					<String>
 						<text t=" // "/><dbd t="Наименование"/> 
@@ -1002,7 +1002,7 @@
 			</PPU_GR>
 		</GenData>	
 		<GenCode>
-			<File src= "ReadyGR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
+			<File src= "ReadyGR" target="_Algorithm.iec_st"> <!-- генерация функции проверки ХР -->
 				<Block start="Начало кода" end="Конец кода">
 					<String>
 						<text t=" // "/><dbd t="Наименование"/> 
@@ -1023,6 +1023,7 @@
 			<C nameColumnPos="Нижняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->	
 			<D nameColumnPos="Верхняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->
 			<E nameColumnPos="Наименование" /><!--Обязательный нода-->
+			<F nameColumnPos="Точность" type="Int" default="1"/>
 		</EXEL>	
 		<GenData>	<!-- генерация типа TUNE_FR -->		
 			<Tune_FR Type="REAL">
@@ -1032,8 +1033,8 @@
 			</Tune_FR>
 		</GenData>	
 		<GenCode>
-		<!-- 
-			<File src= "TuneInitFR" target="_GT_4RM"> <! генерация функции проверки ХР  >
+		<!--
+			<File src= "TuneInitFR" target="_GT_4RM.iec_st"> <!генерация функции проверки ХР >
 				<Block start="Начало кода" end="Конец кода">
 					<String>
 						<abonent/><text t="_Tune_FR."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Значение"/><text t="; // "/><dbd t="Наименование"/> 
@@ -1044,8 +1045,9 @@
 			<File src="B_TuneInit" target="C_HMI2.iec_hmi" nonFunc="BasicFBType"> <!-- генерация блока инициализации настроек в ЧМИ -->
 				<Block start="Начало кода" end="Конец кода">
 					<String>
-						<text t="&#x0A;A["/><npp/><text t="].text:= &apos;"/><dbd t="Наименование"/><text t="&apos;;&#x0A;A["/><npp/><text t="].name:= &apos;"/><dbd t="TAG_NAME_PLC"/>
-						<text t="&apos;;&#x0A;A["/><npp/><text t="].ng:= "/><dbd t="Нижняя_граница"/><text t=";&#x0A;A["/><npp/><text t="].vg:= "/><dbd t="Верхняя_граница"/>
+						<text t="&#x0A;T[i]:= &apos;"/><dbd t="Наименование"/><text t="&apos;;&#x0A;N[i]:= &apos;"/><dbd t="TAG_NAME_PLC"/><text t="&apos;;&#x0A;L[i]:= REAL#"/>
+						<dbd t="Нижняя_граница"/><text t=";&#x0A;H[i]:= REAL#"/><dbd t="Верхняя_граница"/><text t=";&#x0A;F[i]:= "/><dbd t="Точность"/><text t=";"/>
+						<text t="&#x0A;i:= i+ UINT#1"/>
 					</String>
 				</Block>
 			</File>					
@@ -1061,23 +1063,25 @@
 			<E nameColumnPos="Верхняя_граница_Y" type="Number" default="0.0"/><!--Обязательный нода-->
 			<F nameColumnPos="Кол-во_точек" type="Int" default="2"/>			
 			<G nameColumnPos="Наименование" /><!--Обязательный нода-->
+			<H nameColumnPos="Точность_X" type="Int" default="1"/>
+			<I nameColumnPos="Точность_Y" type="Int" default="1"/>			
 		</EXEL>	
 		<GenData>	<!-- генерация типа CURVE_FR -->		
 			<Curve_FR typeFile="T_Curve.type">
 				<globData name="Curve_FR">
-					<localData int="_GT_4RM.int" />
+					<localData int="_GT_4RM.int"/>
 				</globData>	
 			</Curve_FR>
 		</GenData>	
-		<!--GenCode>
-			<File src= "TuneInitFR" target="_GT_4RM">
+		<GenCode>
+			<File src="TuneInitFR" target="_GT_4RM.iec_st">
 				<Block start="Начало кода" end="Конец кода">
 					<String>
 						<abonent/><text t="_Tune_FR."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Значение"/><text t="; // "/><dbd t="Наименование"/> 
 					</String>						
 				</Block>
 			</File>	
-		</GenCode-->
+		</GenCode>
 	</CurveFR>	
 		<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА CURVE_FR_INIT ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
 	<CurveFR_Init excelSheetName="CurveFR_Init" Comment="Инициализация кривых топливного регулятора">
@@ -1087,17 +1091,10 @@
 			<C nameColumnPos="X" type="Number" default="0.0"/><!--Обязательный нода, аргумент хар-ки-->	
 			<D nameColumnPos="Y" type="Number" default="0.0"/><!--Обязательный нода, значение хар-ки-->				
 			<E nameColumnPos="Кол-во_точек" type="Int" default=""/>			
-			<H nameColumnPos="Наименование" default=""/><!--Обязательный нода-->
+			<F nameColumnPos="Наименование" default=""/><!--Обязательный нода-->
 		</EXEL>	
-		<!--GenData>	
-			<Curve_FR typeFile="T_Curve.type">
-				<globData name="Curve_FR">
-					<localData int="_GT_4RM.int" />
-				</globData>	
-			</Curve_FR>
-		</GenData-->	
 		<GenCode>
-			<File src= "CurveInitFR" target="_GT_4RM">
+			<File src= "CurveInitFR" target="_GT_4RM.iec_st">
 				<Block start="Начало кода" end="Конец кода">
 					<String>							
 						<IF cond="Кол-во_точек" val=""><!-- Если не указано кол-во точек в кривой, то ничего не пишем-->	

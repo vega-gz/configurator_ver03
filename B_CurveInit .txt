@@ -1,0 +1,40 @@
+
+        <InterfaceList>
+            <EventInputs>
+                <Event Name="Exec" UUID="D2WRAEHFXMOUXNWUEWS3Z4D44Q" />
+            </EventInputs>
+            <EventOutputs>
+                <Event Name="Done" UUID="V4FZPC4A3QSEXNGLMRJRDMPAE4" />
+            </EventOutputs>
+            <OutputVars>
+			    <VarDeclaration Name="T" Type="STRING" ArraySize="13" InitialValue="" Comment="Название настройки" />
+			    <VarDeclaration Name="N" Type="STRING" ArraySize="13" InitialValue="" Comment="Имя настройки" />
+			    <VarDeclaration Name="Lx" Type="REAL" ArraySize="13" InitialValue="" Comment="Нижняя граница настройки по X" />
+			    <VarDeclaration Name="Hx" Type="REAL" ArraySize="13" InitialValue="" Comment="Верхняя граница настройки по X"/>
+				<VarDeclaration Name="Ly" Type="REAL" ArraySize="13" InitialValue="" Comment="Нижняя граница настройки по Y" />
+			    <VarDeclaration Name="Hy" Type="REAL" ArraySize="13" InitialValue="" Comment="Верхняя граница настройки по Y"/>
+			    <VarDeclaration Name="Qty" Type="INT" ArraySize="13" InitialValue="" Comment="Количество точек в кривой"/>	
+			    <VarDeclaration Name="Fx" Type="INT" ArraySize="13" InitialValue="" Comment="Точность по X"/>					
+				<VarDeclaration Name="Fy" Type="INT" ArraySize="13" InitialValue="" Comment="Точность по Y"/>
+                <VarDeclaration Name="i" Type="UINT" InitialValue="0" UUID="W3IJOZRKHNVELNMTNSH4K3FFQI"/>				
+            </OutputVars>
+        </InterfaceList>
+        <BasicFB>
+            <Algorithm Name="Initialize" UUID="LS4HE4EZ6EXUBA5AESWT6OMUPE">
+                <ST Text= "(*Инициализация массива настроек*)
+i:= UINT#0;
+//Начало кода
+//Конец кода
+				"/>
+            </Algorithm>
+            <ECC>
+                <ECState Name="STANDBY" UUID="Q5VIE7CRWJQEFAZYDHQVAQG6BQ" />
+                <ECState Name="INIT" UUID="EM43NKIV6JIURMH2EERMAUPI6A">
+                    <ECAction Algorithm="Initialize" AlgorithmUUID="LS4HE4EZ6EXUBA5AESWT6OMUPE" Output="Done" OutputUUID="V4FZPC4A3QSEXNGLMRJRDMPAE4" />
+                </ECState>
+                <ECTransition Source="STANDBY" SourceUUID="Q5VIE7CRWJQEFAZYDHQVAQG6BQ" Destination="INIT" DestinationUUID="EM43NKIV6JIURMH2EERMAUPI6A" Condition="Exec" />
+                <ECTransition Source="INIT" SourceUUID="EM43NKIV6JIURMH2EERMAUPI6A" Destination="STANDBY" DestinationUUID="Q5VIE7CRWJQEFAZYDHQVAQG6BQ" Condition="BOOL#1" />
+            </ECC>
+        </BasicFB>
+    </BasicFBType>
+</Data>

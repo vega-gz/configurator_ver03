@@ -451,7 +451,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("v.0.6");
+        jLabel9.setText("v.0.7");
 
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
