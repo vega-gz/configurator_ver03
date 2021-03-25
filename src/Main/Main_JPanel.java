@@ -38,12 +38,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
-    DataBase db=new DataBase();
     String filepatch, type;
     File excel = null;
     ProgressBar pb = null;
     DefaultListModel listModel = new DefaultListModel(); // модель списка баз
-    static String comment;
 
     public Main_JPanel() {
         globVar.DB = new DataBase();
