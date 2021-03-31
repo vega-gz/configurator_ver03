@@ -33,11 +33,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -870,8 +866,5 @@ public class FileManager {
         return isErr;
     }
 
-//    public static void main(String[] args) throws IOException {//для тестирования
-//        FileManager fm = new FileManager();
-//        loggerConstructor("Яй криветко");
-//    }
+
 }
