@@ -1,6 +1,5 @@
 package DataBaseTools;
 
-
 import Tools.FileManager;
 import Tools.Observed;
 import Tools.Observer;
@@ -695,7 +694,7 @@ public class DataBase implements Observed {
     }
     
     // --- получить комментарии таблицы ---
-    public ArrayList<String>  getCommentList(String table_name){
+    public  ArrayList<String>  getCommentList(String table_name){
         String sql = null; 
         //String comment = null;
         ArrayList<String> listComm = new ArrayList<>();
