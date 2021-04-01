@@ -1,6 +1,5 @@
 package FrameCreate;
 
-import DataBaseTools.DataBase;
 import Generators.Generator;
 import Tools.BackgroundThread;
 import Tools.DoIt;
@@ -14,10 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-//import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 

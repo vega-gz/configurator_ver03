@@ -174,6 +174,9 @@ public class TableDB extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jProgressBar1.setToolTipText("");
+        jProgressBar1.setName(""); // NOI18N
+
         jTextField1.setText("Поиск");
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -205,7 +208,7 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("без разервов");
+        jCheckBox1.setText("без резервов");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
@@ -221,21 +224,24 @@ public class TableDB extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jCheckBox1))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 1323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(219, Short.MAX_VALUE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(803, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1))
+                .addContainerGap())
         );
+
+        jProgressBar1.getAccessibleContext().setAccessibleName("");
 
         jTable1.setModel(tableModel);
         jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -270,7 +276,7 @@ public class TableDB extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1104, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -393,10 +399,6 @@ public class TableDB extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         //JOptionPane.showMessageDialog(null, "Key: " + evt.getKeyChar() + ", row: " + tableModel.getRowCount());
     }//GEN-LAST:event_jTable1KeyReleased
@@ -498,7 +500,7 @@ public class TableDB extends javax.swing.JFrame {
             try {
                 ret= Generator.genSTcode(this, jCheckBox1.isSelected(), jProgressBar1);
             } catch (IOException ex) {
-                //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+               // Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
             else if(ret == -1) {
@@ -646,7 +648,7 @@ public class TableDB extends javax.swing.JFrame {
 
             jTable1.setModel(tableModel);
 
-            TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут броблема фокуса
+            TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут проблема фокуса
             TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
 
             TableTools.repaintJpanelTable(jPanel2, new JScrollPane(jTable1));  // перерисовка фрейма
@@ -656,6 +658,10 @@ public class TableDB extends javax.swing.JFrame {
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textField1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -693,8 +699,8 @@ public class TableDB extends javax.swing.JFrame {
         if(fromDB.size() <= 0 || fromDB.size() != y || fromDB.get(0).length != x) return true; // еще доп проверка от пустых строк от базы
         for(int i=0;i<y;i++)
             for(int j=0;j<x;j++){
-                System.out.println(tableModel.getValueAt(i, j));
-                System.out.println(fromDB.get(i)[j]);
+               // System.out.println(tableModel.getValueAt(i, j));
+               // System.out.println(fromDB.get(i)[j]);
                 if(!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) return true;
             }
         return false;
