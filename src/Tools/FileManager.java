@@ -138,7 +138,7 @@ public class FileManager {
      * @param s название файла,который мы ищем
      * @return лист с путями,где лежит файл
      */
-    public ArrayList<String> findFile(String path, String s) {
+    public static ArrayList<String> findFile(String path, String s) {
         ArrayList<String> listPathFile = new ArrayList();
         /*
          path - путь до директории

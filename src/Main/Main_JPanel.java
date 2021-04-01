@@ -898,13 +898,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         String userSecondDB = jTextField3.getText(); // имя пользователя
         String passSecondDB = jTextField4.getText(); // пароль
 
-        // тестовые данные
-        /*
-         addresSecondDB = "minoro.ru:5432";
-         DB = "kln_gpa";
-         userSecondDB = "mutonar";
-         passSecondDB = "Solovin2";
-         */
         //if (!addresSecondDB.equals(null) || !DB.equals(null) || !userSecondDB.equals(null) || !passSecondDB.equals(null)) {
         //System.out.println("Press button field all " + addresSecondDB + DB + userSecondDB + passSecondDB);
         MergeBases mergeDB = new MergeBases(addresSecondDB, DB, userSecondDB, passSecondDB); // вызов класса слияния

@@ -28,7 +28,7 @@ public class globVar {
 	public static String myDir;
 	public static String desDir;
 	public static FileManager fm;
-	public static String backupDir;
+	public static String backupDir = "bkp"; // папка для бекапов
 	public static boolean EOF;
         public static String сonfigAMs = "ConfigAMs.xml"; // название файла конфигурации Исполнительных механихмов
 	//public static LineList ll = null;
