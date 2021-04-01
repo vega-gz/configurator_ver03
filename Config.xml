@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+<Settings>
+<USER>mutonar</USER>
+<PASS>Solovin2</PASS>
+<URL1>jdbc:postgresql://minoro.ru:5432/</URL1>
+<URL2>jdbc:postgresql://127.0.0.1:5432/</URL2>
+<URL>jdbc:postgresql://172.16.35.50:5432/</URL>
+<BASE>kln_aleksey</BASE>
+<BASE1>kln_problem_test</BASE1>
+<BASE2>kln_kc</BASE2>
+<BASE3>grigory_test777</BASE3>
+<BASE4>kln_aleksey_local</BASE4>
+<DesignDir>C:\Users\cherepanov\Desktop\test</DesignDir>
+<nameProject>Калининград_цех</nameProject>
+<BASE5>test</BASE5>
+<BASE6>kln_gpa</BASE6>
+<BASE7>Kln_Aleksei_wrk2</BASE7>
+<BASE8>test666</BASE8>
+</Settings>
+</config>
