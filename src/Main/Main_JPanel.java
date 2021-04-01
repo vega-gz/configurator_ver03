@@ -428,7 +428,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("v.0.7");
+        jLabel9.setText("v.0.8");
 
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -584,7 +584,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -603,17 +604,17 @@ public final class Main_JPanel extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2))))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,7 +627,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -636,7 +637,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
                             .addComponent(jButton6))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1042,10 +1045,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        JFrame createTable=new CreateTable();
+        JFrame createTable=new CreateFTable();
         createTable.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         createTable.setTitle("Окно создания таблиц");
         createTable.setVisible(true);
+        
+        // JOptionPane.showMessageDialog(null, "Таблица создана");
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 //---формирование OPC серверов----
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -1138,18 +1143,18 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
         globVar.DB.createAbonentTable();
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
-        ArrayList<String> listTableBd = globVar.DB.getListTable();
+        ArrayList<String> listTableBd = globVar.DB.getListTable();//список таблиц в базе, НО НЕ В ДЕРЕВЕ
         final String ROOT = "Абоненты";
 
         // Создание древовидной структуры
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT);
-        // Ветви первого уровня
+        // Ветви первого уровня(добавили абонента)
         for (String[] s : listAbonent) {
             String nameBranch = s[1]; //  1 это префикс(в нашем случае это имя абонента в структуре GPA KC  и тд)
             DefaultMutableTreeNode firstNode = new DefaultMutableTreeNode(nameBranch);
             // Добавление ветвей к корневой записи
             root.add(firstNode);
-            // Добавление листьев
+            // Добавление листьев(добавление таблиц)
             for (String sheet : listTableBd) {
                 // Патерн добавления того или иного совпадения по имени абонента
                 Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");

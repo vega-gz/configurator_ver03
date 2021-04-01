@@ -43,14 +43,21 @@ public class addArchive extends javax.swing.JFrame {
     public addArchive() {
         if(!globVar.DB.isConnectOK())return;
         ArrayList<String[]> archives;
-        if(!globVar.DB.isTable("Archive")){
+        if(!globVar.DB.isTable("Archive")){//если таблицы нет
             globVar.DB.createTableEasy("Archive",  jTableCols, "Конфигурации архивов");
             globVar.DB.insertRow("Archive", continueArchiv, jTableCols,0);
             archives = new ArrayList<>();
             archives.add(continueArchiv);
-        }else{
+        }else if(globVar.DB.getListColumns("Archive").isEmpty()) {//если данных нет в таблице
+            globVar.DB.insertRow("Archive", continueArchiv, jTableCols,0);
+            archives = new ArrayList<>();
+            archives.add(continueArchiv);
             archives = globVar.DB.getData("Archive");
         }
+         else{
+            archives = globVar.DB.getData("Archive");
+        }
+        
         
         tableModel.setColumnIdentifiers(jTableCols);
         
