@@ -26,17 +26,17 @@ public class Generator {
     public static int genHW(TableDB ft, JProgressBar jProgressBar) throws IOException {
         boolean generetGlobal = false;
         int casedial = JOptionPane.showConfirmDialog(null, "Генерировать привязки сигналов к аппаратным каналам\n на основе глабальных сигналов?"); // сообщение с выбором
-         switch(casedial){//0 - yes, 1 - no, 2 - cancel
+        switch (casedial) {//0 - yes, 1 - no, 2 - cancel
             case 0:
                 generetGlobal = true;
                 break;
             case 1:
                 break;
             case 2:
-                return -2; 
-                //break;
+                return -2;
+            //break;
         }
-         
+
         // найти ноду с именем таблицы в файле конфигурации, и в этой ноде ноду GenData
         String nodeTable = ft.tableName();
         int x = nodeTable.indexOf("_");
@@ -53,7 +53,7 @@ public class Generator {
             isMb = "_mb";
             isModbus = true;
         }
-        
+
         globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
@@ -67,19 +67,19 @@ public class Generator {
         }
         String mainDriverName = globVar.sax.getDataAttr(nodeGenHW, "hwDriver");
         String designDir = globVar.desDir + File.separator + "Design";
-        
+
         XMLSAX prj = new XMLSAX();
         Node prjNode = null; // вынес сюда что бы  не было ошибок по компиляции
-        if(generetGlobal){
+        if (generetGlobal) {
             prjNode = prj.readDocument(designDir + File.separator + "Project.prj");
             if (prjNode == null) {
                 FileManager.loggerConstructor("Не удалось прочитать файл \"" + designDir + File.separator + "Project.prj" + "\"");
                 return -1;
             }
         }
-       
+
         String abType = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "Abonent_type");
-        
+
         //---------------------- Определение списка экземпляров ------------------------------
         String exemplars = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "Экземпляры");
         ArrayList<String> exArr = new ArrayList<>();
@@ -88,7 +88,7 @@ public class Generator {
         //} else {
         exArr.add(abonent);
         //}
-        
+
         //------------------ Определение параметров драйвера модбаса -----------------------
         String tabComm = globVar.DB.getCommentTable(abonent + subAb + "_" + nodeTable);
         if (tabComm == null) {
@@ -136,23 +136,23 @@ public class Generator {
         }
         //--- Определяем файл с описанием
         String drvFileName = "T_" + abonent + subAb + isMb + globVar.sax.getDataAttr(nodeGenHW, "drvFile") + ".type";
-        
+
         //------ Проход по экземплярам абонентов(нужны ли эти экземпляры?) ----------------
         for (String exemplar : exArr) {
             String prjFildName = exemplar + subAb + isMb + globVar.sax.getDataAttr(nodeGenHW, "globData"); // Собрать имя для запроса к глобальному файлу(ключевое имя переменной сигнала)
             String globUUID = null;
             Node globSigInPrj = null;
             String[] globSigAttr = {"Signal", "Name", prjFildName}; // поиск сигналов в глобале
-            
-            if(generetGlobal){ // если выбрали только локальные 
-                globSigInPrj = prj.findNodeAtribute(prjNode, globSigAttr); 
+
+            if (generetGlobal) { // если выбрали только локальные 
+                globSigInPrj = prj.findNodeAtribute(prjNode, globSigAttr);
                 if (globSigInPrj == null) {
                     FileManager.loggerConstructor("Нет \"" + prjFildName + " \" в глобальных сигналах проекта");
-                    return -1; 
+                    return -1;
                 }
                 globUUID = prj.getDataAttr(globSigInPrj, "UUID"); // Если локально то генерим это просто? 
             }
-            
+
             XMLSAX drv = new XMLSAX();
             Node drvSignalsNode = drv.readDocument(designDir + File.separator + drvFileName);
             if (drvSignalsNode == null) {
@@ -163,7 +163,7 @@ public class Generator {
             String currDev = "";
             //String wfFilePref = designDir + File.separator + abonent + "_R";
             Node hwConn = null;
-            
+
             //------ Проход по таблице  с сигналами ----------------
             int jpgMax = ft.tableSize();
             for (int j = 0; j < jpgMax; j++) {
@@ -214,18 +214,18 @@ public class Generator {
                     currDev = hwDew;
                     //hwConn = setHWdoc(hw, hwDew, hwFileSuffix, globSigAttr, prj, prjFildName, globSigInPrj, globUUID); //(было у Льва)
                     String globSigInPrjType = null;
-                    if(generetGlobal){
-                        globSigInPrjType =  prj.getDataAttr(globSigInPrj, "Type"); // было до этого внутри метода
+                    if (generetGlobal) {
+                        globSigInPrjType = prj.getDataAttr(globSigInPrj, "Type"); // было до этого внутри метода
                         // globSigInPrjType нужно выдернуть из оригинального файла
                         hwConn = setHWdoc(hw, hwDew, hwFileSuffix, globSigAttr, prjFildName, globUUID, globSigInPrjType, true); // сокращенное с готовым типом
-                    }else{
+                    } else {
                         Node typeNode = drv.returnFirstFinedNode("Type"); // берем тип из ноды головного типа драйвера
-                        globSigInPrjType = prj.getDataAttr(typeNode, "UUID"); 
+                        globSigInPrjType = prj.getDataAttr(typeNode, "UUID");
                         globUUID = UUID.getUIID();
                         hwConn = setHWdoc(hw, hwDew, hwFileSuffix, globSigAttr, prjFildName, globUUID, globSigInPrjType, false); // вместо глобального УУИД генерим локально
-                        
+
                     }
-                                
+
                     if (hwConn == null) {
                         return -1;
                     }
@@ -303,20 +303,42 @@ public class Generator {
         globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node nodeGenCode = globVar.sax.returnFirstFinedNode(globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable), "GenCode");
         if (nodeGenCode == null) {
-            FileManager.loggerConstructor("Ошибка ноды GenCode " + nodeTable );
+            FileManager.loggerConstructor("Ошибка ноды GenCode " + nodeTable);
             return -1;
         }
         ArrayList<Node> fileList = globVar.sax.getHeirNode(nodeGenCode);
-        for (Node f : fileList) {
+        for (Node f : fileList) { // пробегаемся по всем нодам File
             String commonFileST = (String) globVar.sax.getDataNode(f).get("src");
 //            String ext = (String) globVar.sax.getDataNode(f).get("ext");
 //            if(ext.equals("")) ext = ".txt";
 
-            String stFileName = abonent + subAb + "_" + commonFileST; //Для каждого файла
-            int ret = genInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve, stFileName, abonent, jProgressBar1);
-            if (ret != 0) {
+            
+
+            //создавать файлы по экземплярам или единично
+            ArrayList<String> exArrList = new ArrayList<>();
+            if ((String) globVar.sax.getDataNode(f).get("instanceAbonent") != null) {
+                //---------------------- Определение списка экземпляров ------------------------------
+                String exemplars = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "Экземпляры");
+                if (!exemplars.isEmpty()) {
+                    exArrList = StrTools.getListFromString(exemplars, ",");
+                } else {
+                    exArrList.add(abonent);
+                }
+            }else exArrList.add(abonent);
+            
+            int ret = 0;
+            for (String exA : exArrList) {
+                //String stFileName = abonent + subAb + "_" + commonFileST; //Для каждого файла
+                //int ret = genInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve, stFileName, abonent, jProgressBar1);
+                String stFileName = exA + subAb + "_" + commonFileST; //Для каждого файла
+                ret = genInFile(fm, exA + subAb + isMb, commonFileST, f, ft, disableReserve, stFileName, abonent, jProgressBar1);
+                System.out.println(ret);
+            }
+            
+            if (ret != 0) { // тут может быть косяк
                 return -1;
             }
+            
         }
         return 0;
     }
@@ -347,7 +369,7 @@ public class Generator {
         String confHMI = "ConfigHMI.xml";
         Node hmiCfgRoot = HMIcfg.readDocument(confHMI); //AT_HMI.iec_hmi
         if (hmiCfgRoot == null) {
-            FileManager.loggerConstructor("не удалось прочитать " + confHMI );
+            FileManager.loggerConstructor("не удалось прочитать " + confHMI);
             return null;
         }
         Node findNode = HMIcfg.returnFirstFinedNode(hmiCfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
@@ -560,7 +582,7 @@ public class Generator {
                     if (!setTypeHintAdd(HMIcfg, bigSax, ft, hmiNode, addVarsData, gctData, i, hintAL)) { // так формируется подсказка если она есть
                         continue;
                     }
-                    
+
 //                    {
 //                        // Просто тестовое поле тестирования фукции
 //                        List<Node> tmpListN = new ArrayList<>();
@@ -746,11 +768,11 @@ public class Generator {
                         pageName = nameGCT + pageCnt;
                         Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
                         gctNode = HMIsax.returnFirstFinedNode(hmiRoot, whoTypeFBType);
-                        
+
                         // Тупое решение по пока что бы не потерятся( берем тлоько нужную ноду)
                         HMIsax.cleanNode(hmiRoot);
                         hmiRoot.appendChild(gctNode);
-                        
+
                         HMIsax.setDataAttr(gctNode, "Name", pageName);
                         String sheetUUID = null;
                         findInBig[2] = pageName;
@@ -787,21 +809,20 @@ public class Generator {
     public static int genTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
         int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать глабальными переменными?"); // сообщение с выбором
         boolean interGlobCase = false;
-        switch(casedial){//0 - yes, 1 - no, 2 - cancel
+        switch (casedial) {//0 - yes, 1 - no, 2 - cancel
             case 0:
                 interGlobCase = true;
                 break;
             case 1:
                 break;
             case 2:
-                return -2; 
-                //break;
+                return -2;
+            //break;
         }
-        
+
 //        if (casedial != 0) {
 //            return -2; 
 //        }       
-        
         //int caseGlobalOrLocal = JOptionPane.showConfirmDialog(null, "Добавить в Глобальное ?", "Выбор внесения данных", JOptionPane.YES_NO_OPTION); // сообщение с выбором
         //-------------------------------------------------------------------------------------
         String backUpPath = globVar.backupDir + File.separator;   //установили путь для бэкапа
@@ -818,7 +839,7 @@ public class Generator {
             nodeTable = nodeTable.substring(y + 1);
             isMb = "mb_";
         }
-        
+
         globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
@@ -842,7 +863,7 @@ public class Generator {
         } else {
             exArr.add(abonent);
         }
-        
+
         //------------------ Определение параметров драйвера модбаса -----------------------
         int jpgMax = nodesGenData.getLength();
         for (int i = 0; i < jpgMax; i++) {//получил размерность ноды и начал цикл
@@ -977,14 +998,14 @@ public class Generator {
                             }
                         }
                         for (String s : exArr) {
-                            if(interGlobCase){
+                            if (interGlobCase) {
                                 globUUID = insertVarInPrj(prjSax, interfaceList, s + "_" + subAb + isMb + name, typeUUID, "", true, false, null,
                                         filePath + File.separator + "Project.prj", backUpPath + "Project.prj");
                                 if (!hmiApp.isEmpty()) {
                                     globUUID = insertVarInPrj(localSigSax, localInterfaceList, s + "_" + subAb + isMb + name, typeUUID,
                                             "", true, true, globUUID, filePath + File.separator + file, backUpPath + file);
                                 }
-                            }else{
+                            } else {
                                 if (!hmiApp.isEmpty()) { //не нужно в HMI вообще помещать
 //                                    globUUID = insertVarInPrj(localSigSax, localInterfaceList, s + "_" + subAb + isMb + name, typeUUID,
 //                                            "", false, true, null, filePath + File.separator + file, backUpPath + file);
@@ -1069,14 +1090,14 @@ public class Generator {
     }
 
     // --- Функция для поиска файла с описаниями подключённых к приложению сигналов (Разные переменные на вход NZ) ---
-    public static Node setHWdoc(XMLSAX hw, String hwDew, String hwFileSuffix, String[] globSigAttr, 
+    public static Node setHWdoc(XMLSAX hw, String hwDew, String hwFileSuffix, String[] globSigAttr,
             String prjFildName, String globUUID, String typeSignal, boolean globalSig) {
-            String backUpPath = globVar.backupDir;   //установили путь для бэкапа
-            String designDir = globVar.desDir + File.separator + "Design" + File.separator;
-            hw.writeDocument();
-            hw.clear();                                             //удаляем старые коннекты
-            String hwFileName = designDir + hwDew + hwFileSuffix;
-            String intFileName = designDir + hwDew + ".int";
+        String backUpPath = globVar.backupDir;   //установили путь для бэкапа
+        String designDir = globVar.desDir + File.separator + "Design" + File.separator;
+        hw.writeDocument();
+        hw.clear();                                             //удаляем старые коннекты
+        String hwFileName = designDir + hwDew + hwFileSuffix;
+        String intFileName = designDir + hwDew + ".int";
         try {
             int ret = FileManager.copyFileWoReplace(hwFileName, backUpPath + File.separator + hwFileName, true);                    //создаём резервную копию
             if (ret == 2) { //Функция копирования не нашла исходного файла
@@ -1094,27 +1115,26 @@ public class Generator {
                 }
                 Node interfaceList = intFile.returnFirstFinedNode(intf, "InterfaceList");
                 String[] newSigArr = null;
-                if(globalSig){
-                newSigArr = new String[]{"Signal", "Name", prjFildName,
-                    "Type", typeSignal, // 
-                    "UUID", globUUID, "Usage", "", "Global", "TRUE"};
-                }else{ // без глобальных сигналов
+                if (globalSig) {
                     newSigArr = new String[]{"Signal", "Name", prjFildName,
-                    "Type", typeSignal, // 
-                    "UUID", globUUID, "Usage", ""};
+                        "Type", typeSignal, // 
+                        "UUID", globUUID, "Usage", "", "Global", "TRUE"};
+                } else { // без глобальных сигналов
+                    newSigArr = new String[]{"Signal", "Name", prjFildName,
+                        "Type", typeSignal, // 
+                        "UUID", globUUID, "Usage", ""};
                 }
                 intFile.insertChildNode(interfaceList, newSigArr);
                 intFile.writeDocument();
             }
-            
+
         } catch (IOException ex) {
             Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
         }
         Node hwRoot = hw.readDocument(hwFileName);
         return hw.returnFirstFinedNode(hwRoot, "Crossconnect");
     }
-    
-    
+
     // ---  ---
     static int closeByErr(FileManager fm, String tmpFile, String err) throws IOException {
         FileManager.loggerConstructor(err);
@@ -1129,23 +1149,24 @@ public class Generator {
     static int genInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
             String stFileName, String abonent, JProgressBar jProgressBar) throws IOException {
         String filePath = globVar.desDir + File.separator + "GenST";
-        
-        String nameToblock = commonFileST ;                                 // оригинальное название ноды сохраняем и его же и ищем потом
+
+        String nameToblock = commonFileST;                                 // оригинальное название ноды сохраняем и его же и ищем потом
         // разбор имени если есть точка в имени(нахождение расширения)
         String etxLUA = "lua";
-        boolean findLUAext = false;   
+        boolean findLUAext = false;
         boolean extF = false;                                               //  Есть ли вообще расширение
         boolean findNonFunction = false;
         String[] separNameF = stFileName.split("\\.");
         String ext = ""; // Для расширения на файле
-        if(separNameF.length > 1) {                                         // если есть расширение то такой файл и будет, нет так txt
+        if (separNameF.length > 1) {                                         // если есть расширение то такой файл и будет, нет так txt
             ext = separNameF[separNameF.length - 1];                        // последнее разбитое это и будет окончание
-            if(ext.equalsIgnoreCase(etxLUA)) findLUAext = true;             // определения файла ЛУА    
-        }  
-        else{
+            if (ext.equalsIgnoreCase(etxLUA)) {
+                findLUAext = true;             // определения файла ЛУА    
+            }
+        } else {
             stFileName = stFileName + ".txt";
         }
-        
+
         File d = new File(filePath);
         if (!d.isDirectory()) {
             d.mkdir();
@@ -1175,13 +1196,14 @@ public class Generator {
             }
         }
 
-        String nameFunction = (String)globVar.sax.getDataNode(nodeGenCode).get("nonFunc"); //  название для головной ноды
+        String nameFunction = (String) globVar.sax.getDataNode(nodeGenCode).get("nonFunc"); //  название для головной ноды
         String algFile = (String) globVar.sax.getDataNode(nodeGenCode).get("target"); // часть названия целевого файла
-        if( nameFunction != null){
+        if (nameFunction != null) {
             findNonFunction = true;
-        }else nameFunction = "Function";
-        
-        
+        } else {
+            nameFunction = "Function";
+        }
+
         String funcName = nameToblock;//abonent + "_"+ commonFileST; // Название ноды для поиска в другом файле
         String funcUUID = null;
         String funcResultTypeUUID = null;                                             // возвращаемое значение фуйкции
@@ -1189,18 +1211,22 @@ public class Generator {
             if ("_".equals(algFile.substring(0, 1))) {
                 algFile = abonent + algFile;
             }
-            
+
             String[] separAbonent = algFile.split("\\.");
-            if(separAbonent.length > 1)extF = true;      
-            
-            
+            if (separAbonent.length > 1) {
+                extF = true;
+            }
+
             XMLSAX algSax = new XMLSAX();
             String nameNodeinfile = globVar.desDir + File.separator + "Design" + File.separator + algFile;
-            
+
             Node algRoot;
-            if(extF)algRoot = algSax.readDocument(nameNodeinfile); //или полное имя без расширения
-            else  algRoot = algSax.readDocument(nameNodeinfile + ".iec_st");
-            
+            if (extF) {
+                algRoot = algSax.readDocument(nameNodeinfile); //или полное имя без расширения
+            } else {
+                algRoot = algSax.readDocument(nameNodeinfile + ".iec_st");
+            }
+
             String[] myFunc = {nameFunction, "Name", funcName};
             Node func = algSax.findNodeAtribute(algRoot, myFunc);
             if (func != null) {
@@ -1215,17 +1241,19 @@ public class Generator {
         }
 
         // это костыль для LUA файлов не вносим эту строку
-        if(!findLUAext){
-            if(findNonFunction) fm.wr("<Data>\n<" + nameFunction +" UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ShowVarTypes=\"true\">\n");
-            else{
+        if (!findLUAext) {
+            if (findNonFunction) {
+                fm.wr("<Data>\n<" + nameFunction + " UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ShowVarTypes=\"true\">\n");
+            } else {
                 //не найдена фукции и значения по умолчанию вроде для AI
-                if(funcUUID != null & funcResultTypeUUID != null){
-                    fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\""+ funcResultTypeUUID +"\">\n");
+                if (funcUUID != null & funcResultTypeUUID != null) {
+                    fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"" + funcResultTypeUUID + "\">\n");
+                } else {
+                    fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
                 }
-                else fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
             }
         }
-        
+
         ArrayList<Node> blockList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node block : blockList) {
             String start = (String) globVar.sax.getDataNode(block).get("start");
@@ -1237,9 +1265,9 @@ public class Generator {
                 return closeByErr(fm, tmpFile, "В файле \"" + globVar.myDir + File.separator + "ConfigSignals.xml в разделе " + nodeGenCode.getParentNode()
                         + " неправильно сконфигурированы признаки начала и конца вставки кода");
             }
-            
+
             String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, (оконнчание файла)
-            
+
             while (!fm.EOF && !s.contains(start)) {
                 fm.wr(s + "\n");                                                    //ищем в исходнои файле её первое вхождение
                 s = fm.rd();
@@ -1248,12 +1276,12 @@ public class Generator {
                 return closeByErr(fm, tmpFile, "В файле \"" + globVar.myDir + File.separator + commonFileST + " не найдена строка \"" + start + "\"");
             }
             // опять идиотизм с LUA это править надо
-            if(!findLUAext){
+            if (!findLUAext) {
                 fm.wr("//" + start + "\n");
+            } else {
+                fm.wr("--" + start + "\n");
             }
-            else fm.wr("--" + start + "\n");
-            
-            
+
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
             for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
@@ -1268,16 +1296,16 @@ public class Generator {
                     continue;                                                       //если тип данных есть и есть список ненужных данных и данный тип в этом списке
                 }
                 for (Node cont : blockCont) {
-                    
+
                     String nodeName = cont.getNodeName();
-                    if ("Function".equals(nodeName)) {                              
+                    if ("Function".equals(nodeName)) {
                         createFunction(cont, fm, ft, abSubAb, disableReserve, j);   // Обработка "фукции" ноды 
                     } else {
                         createString(cont, fm, ft, abSubAb, disableReserve, j);     // Обработка "строковой" ноды (любой другой)
                     }
                 }
             }
-            
+
             //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
             while (!fm.EOF && !s.contains(end)) {
                 s = fm.rd();                                                        // читаем строки из tmp файла
@@ -1308,13 +1336,14 @@ public class Generator {
     static int createString(Node args, FileManager fm, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException {
         ArrayList<Node> arglist = null;
         // Проверка на IF 
-        List<Node>  nodesIFElse = new ArrayList<>();
-        processingIF(globVar.sax, args, ft, j, nodesIFElse);   
-        if(nodesIFElse.size() > 0){
+        List<Node> nodesIFElse = new ArrayList<>();
+        processingIF(globVar.sax, args, ft, j, nodesIFElse);
+        if (nodesIFElse.size() > 0) {
             System.out.println("Find IF ELSE");
-            arglist = (ArrayList<Node>)nodesIFElse;
-        } else arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
-        
+            arglist = (ArrayList<Node>) nodesIFElse;
+        } else {
+            arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
+        }
         String tmp = "";
         for (Node arg : arglist) {                                        //Цикл по всем аргументам функции
             tmp += getPartText(arg, abonent, ft, j);
@@ -1323,7 +1352,9 @@ public class Generator {
         if (disableReserve && ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
             disable = "//";
         }
-        if(disable.equals("") & tmp.equals("")) return 0;               // нечего не нашли (нет записи в файл)
+        if (disable.equals("") & tmp.equals("")) {
+            return 0;               // нечего не нашли (нет записи в файл)
+        }
         fm.wr(disable + tmp + ";\n");
 
         return 0;
@@ -1333,12 +1364,26 @@ public class Generator {
     static int createFunction(Node funcNode, FileManager fm, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException {
         String stFunc = (String) globVar.sax.getDataNode(funcNode).get("name"); //вычитываем её имя
         ArrayList<Node> arglist = globVar.sax.getHeirNode(funcNode);            //создаём список аргументов
+
         String tmp = "";
         for (Node arg : arglist) {                                              //Цикл по всем аргументам функции
-            ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
+
+            //ArrayList<Node> argParts = globVar.sax.getHeirNode(arg);
+            ArrayList<Node> argParts = null;
             tmp += ",";                                                         //аргумент записан и отделён от следующего запятой
+
+            //Проверка на IF 
+            List<Node> nodesIFElse = new ArrayList<>();
+            processingIF(globVar.sax, arg, ft, j, nodesIFElse);
+            if (nodesIFElse.size() > 0) {
+                //System.out.println("Find IF ELSE Function");
+                argParts = (ArrayList<Node>) nodesIFElse;
+            } else {
+                argParts = globVar.sax.getHeirNode(arg);                  //создаём список аргументов
+            }
             for (Node argPart : argParts) {                                     // проход по значениям аргументов
                 tmp += getPartText(argPart, abonent, ft, j);
+
             }
         }   //Цикл по всем частям аргументов - текстовым и табличным
         String disable = "";
@@ -1949,43 +1994,43 @@ public class Generator {
     // оригинальный метод Льва 19.02.21 закомитил
     // --- Поле формирования Подсказки (Это больше разбор IF) LEV ---
     /*private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
-            String[] gctData, int i, ArrayList<String> hintAL) {
-        Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");               // выдергиваем ноду с условием выбора типа "IF"
-        String cond = HMIcfg.getDataAttr(ifNode, "cond");                       // получим условия в каком столбце таблицы смотреть
-        String val = HMIcfg.getDataAttr(ifNode, "val");                         // получим условия какое значение клетки таблицы сравнивать
-        if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {               // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
-            gctData[0] = HMIcfg.getDataAttr(ifNode, "type");
-            if (gctData[0] == null) {                                           // Нужно ли это условие с возвратом?
-                return false;
-            }
-            setOtherData(HMIcfg, bigSax, ifNode, gctData, addVarsData, hintAL); // Нашли значение type в ноде(так же собираются ноды наследники) , и завершаем условие
-        } else {
-            Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
-            gctData[0] = HMIcfg.getDataAttr(ELS, "type");                       // берем в ноде тип рекурсия пока его не найдем
-            if (gctData[0] != null) {
-                setOtherData(HMIcfg, bigSax, ELS, gctData, addVarsData, hintAL);
-            } else {
-                return setTypeHintAdd(HMIcfg, bigSax, ft, ELS, addVarsData, gctData, i, hintAL);
-            }
-        }
-        return true;
-    }
-    */
-     // --- Поле формирования Подсказки (С выбором по условиям) NZ ---
+     String[] gctData, int i, ArrayList<String> hintAL) {
+     Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");               // выдергиваем ноду с условием выбора типа "IF"
+     String cond = HMIcfg.getDataAttr(ifNode, "cond");                       // получим условия в каком столбце таблицы смотреть
+     String val = HMIcfg.getDataAttr(ifNode, "val");                         // получим условия какое значение клетки таблицы сравнивать
+     if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {               // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
+     gctData[0] = HMIcfg.getDataAttr(ifNode, "type");
+     if (gctData[0] == null) {                                           // Нужно ли это условие с возвратом?
+     return false;
+     }
+     setOtherData(HMIcfg, bigSax, ifNode, gctData, addVarsData, hintAL); // Нашли значение type в ноде(так же собираются ноды наследники) , и завершаем условие
+     } else {
+     Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
+     gctData[0] = HMIcfg.getDataAttr(ELS, "type");                       // берем в ноде тип рекурсия пока его не найдем
+     if (gctData[0] != null) {
+     setOtherData(HMIcfg, bigSax, ELS, gctData, addVarsData, hintAL);
+     } else {
+     return setTypeHintAdd(HMIcfg, bigSax, ft, ELS, addVarsData, gctData, i, hintAL);
+     }
+     }
+     return true;
+     }
+     */
+    // --- Поле формирования Подсказки (С выбором по условиям) NZ ---
     private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
             String[] gctData, int i, ArrayList<String> hintAL) {
         boolean findType = false;
         List<Node> IfElseNode = new ArrayList<>();
         IfElseNode = processingIF(HMIcfg, hmiNode, ft, i, IfElseNode);          // Обработка условий IF ELSE
-        
-        for(Node n: IfElseNode){
-            if(n.getNodeName().equals("type")){                                 // Написал проверку ноды а не аттрибут
+
+        for (Node n : IfElseNode) {
+            if (n.getNodeName().equals("type")) {                                 // Написал проверку ноды а не аттрибут
                 findType = true;
                 setOtherData(HMIcfg, bigSax, n, gctData, addVarsData, hintAL);  // как и в прошлом выше методе собираем данные с ноды по условию
             }
-        
+
         }
-        
+
         return findType;
     }
 
@@ -1998,9 +2043,9 @@ public class Generator {
                 if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {                                       // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
                     for (Node nD : HMIcfg.getHeirNode(ifNode)) {                                                // добавляем ноды которые прошли по условию IF
                         if (nD.getNodeName().equalsIgnoreCase("ELSE") || nD.getNodeName().equalsIgnoreCase("IF")) {
-                            
-                        }else {
-                        if (!nD.getNodeName().equalsIgnoreCase("ELSE")) {
+
+                        } else {
+                            if (!nD.getNodeName().equalsIgnoreCase("ELSE")) {
                                 System.out.println(nD.getNodeName().equalsIgnoreCase("ELSE"));
 
                             }
@@ -2053,7 +2098,7 @@ public class Generator {
             for (Node av : addVars) {
                 String[] tmp = new String[4];
                 tmp[0] = av.getNodeName();
-                tmp[1] = HMIcfg.getDataAttr(av, "tableCol"); 
+                tmp[1] = HMIcfg.getDataAttr(av, "tableCol");
                 tmp[2] = HMIcfg.getDataAttr(av, "Type");
                 tmp[3] = HMIcfg.getDataAttr(av, "TypeUUID");
                 addVarsData.add(tmp);

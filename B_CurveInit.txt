@@ -7,11 +7,14 @@
                 <Event Name="Done" UUID="V4FZPC4A3QSEXNGLMRJRDMPAE4" />
             </EventOutputs>
             <OutputVars>
-			    <VarDeclaration Name="T" Type="STRING" ArraySize="65" InitialValue="" Comment="Название настройки" />
-			    <VarDeclaration Name="N" Type="STRING" ArraySize="65" InitialValue="" Comment="Имя настройки" />
-			    <VarDeclaration Name="L" Type="REAL" ArraySize="65" InitialValue="" Comment="Нижняя граница настройки" />
-			    <VarDeclaration Name="H" Type="REAL" ArraySize="65" InitialValue="" Comment="Верхняя граница настройки"/>
-				<VarDeclaration Name="F" Type="INT" ArraySize="65" InitialValue="" Comment="Точность"/>
+			    <VarDeclaration Name="T" Type="STRING" ArraySize="13" InitialValue="" Comment="Название настройки" />
+			    <VarDeclaration Name="N" Type="STRING" ArraySize="13" InitialValue="" Comment="Имя настройки" />
+			    <VarDeclaration Name="Lx" Type="REAL" ArraySize="13" InitialValue="" Comment="Нижняя граница настройки по X" />
+			    <VarDeclaration Name="Hx" Type="REAL" ArraySize="13" InitialValue="" Comment="Верхняя граница настройки по X"/>
+				<VarDeclaration Name="Ly" Type="REAL" ArraySize="13" InitialValue="" Comment="Нижняя граница настройки по Y" />
+			    <VarDeclaration Name="Hy" Type="REAL" ArraySize="13" InitialValue="" Comment="Верхняя граница настройки по Y"/>
+			    <VarDeclaration Name="Fx" Type="INT" ArraySize="13" InitialValue="" Comment="Точность по X"/>					
+				<VarDeclaration Name="Fy" Type="INT" ArraySize="13" InitialValue="" Comment="Точность по Y"/>
                 <VarDeclaration Name="i" Type="UINT" InitialValue="0" UUID="W3IJOZRKHNVELNMTNSH4K3FFQI"/>				
             </OutputVars>
         </InterfaceList>
