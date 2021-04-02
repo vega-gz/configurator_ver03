@@ -945,7 +945,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             return;
         }
         
-        SimpleFrame sf = new SimpleFrame("Abonents");
+        SimpleFrame sf = new SimpleFrame("Abonents",jComboBox2);
         sf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         sf.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
