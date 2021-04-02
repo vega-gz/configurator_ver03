@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
-    CreateFTable ctf=new CreateFTable();
+   
     TableTools tt=new TableTools();
     Main_JPanel mj=new Main_JPanel();
     ArrayList<String[]> newName=new ArrayList<>();

@@ -1,0 +1,15 @@
+        <Variables>
+            <Variable UUID="MJMY7EANBB4EZBWZ3DPCBZZSJM" Name="check" Comment="Флаг проверки условий ГР" Type="BOOL" Usage="input" />
+            <Variable UUID="BJ72NQ5WWM7ULEE4CE3QAE3CAI" Name="imit" Comment="Признак работы имитатора" Type="BOOL" Usage="input" />
+            <Variable UUID="2ND7FR5PNQ3UTLP5BSJKAPVWW4" Name="hr" Comment="Признак готовности ХР" Type="BOOL" Usage="input" />
+        </Variables>
+        <ST><![CDATA[//Функция контроля условий горячего резерва, возвращает признак готовности ГР --steam
+ReadyGR := hr;
+//Начало кода
+
+//Конец кода
+//--------------------------------------------------------------------------------------------------------------------------------------
+if imit then ReadyGR := true; end_if;
+]]></ST>
+    </Function>
+</Data>

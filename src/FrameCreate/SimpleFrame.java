@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 public class SimpleFrame extends javax.swing.JFrame {
 
     SimpleTable st;
-
     public SimpleFrame(String tableName) {
+        
         st = new SimpleTable(tableName, null, null);
         initComponents();
         st.setSimpleTableSettings(jTable1);
@@ -28,6 +28,7 @@ public class SimpleFrame extends javax.swing.JFrame {
         };
         TableTools.setFrameListener(this, sfd, ich, null);
     }
+  
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -113,6 +114,8 @@ public class SimpleFrame extends javax.swing.JFrame {
         if (st.isNew()) {
             st.saveTableInDB();
         }
+       // jCombobox2.setModel(tt.getComboBoxModelAbonent());//обновление дерева
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 //удаление таблицы 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

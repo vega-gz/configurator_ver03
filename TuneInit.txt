@@ -1,10 +1,10 @@
 
         <Variables />
-        <ST><![CDATA[//Инициализация кривых
-if not init then
+        <ST><![CDATA[// - инициализация настроек
 //Начало кода
+
 //Конец кода
-end_if;
+
 ]]></ST>
     </Function>
 </Data>

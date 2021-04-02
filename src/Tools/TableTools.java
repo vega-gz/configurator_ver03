@@ -915,4 +915,36 @@ public class TableTools {//ссылка на таблицу, массив шир
         jPanel_Tmp.repaint();
         jPanel_Tmp.requestFocus();
     }
+      public DefaultComboBoxModel getComboBoxModelAbonent() {
+          String[] aList;//список абонентов окна
+        if (!globVar.DB.isConnectOK()) {
+            return null;
+        }
+        ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray();
+        aList = new String[listAbonent.size()];
+
+        for (int i = 0; i < listAbonent.size(); i++) {
+            String[] str = listAbonent.get(i);
+            aList[i] = str[1];
+        }
+
+        return new DefaultComboBoxModel(aList);
+    }
+      public DefaultComboBoxModel getComboBoxModelTable() {//----метод формирования комбобокса где AI AO DI  и тд
+        if (!globVar.DB.isConnectOK()) {
+            return null;
+        }
+        int counter = 0;
+        ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
+        String[] nodeTable = new String[nList.size()];
+        for (Node n : nList) {
+            String nodeName = globVar.sax.getDataAttr(n, "excelSheetName");
+
+            nodeTable[counter] = nodeName;
+            counter++;
+        }
+
+        return new DefaultComboBoxModel(nodeTable);
+
+    }
 }

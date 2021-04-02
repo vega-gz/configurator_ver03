@@ -39,6 +39,7 @@ public class addArchive extends javax.swing.JFrame {
                                                             "<HTML><BODY align=\'center\'>Кэш<br/>[сек]</BODY></HTML>", 
                                                             "<HTML><BODY align=\'center\'>Длительность<br/>[дни]</BODY></HTML>"
     };
+    private final String[] columnTableArchAbon = new String[] {  "id","tagName", "archType"};
 
     public addArchive() {
         if(!globVar.DB.isConnectOK())return;
@@ -58,6 +59,10 @@ public class addArchive extends javax.swing.JFrame {
             archives = globVar.DB.getData("Archive");
         }
         
+        
+        if (!globVar.DB.isTable("Archive_" + globVar.abonent)) {
+             globVar.DB.createTableEasy("Archive_" + globVar.abonent,  columnTableArchAbon, "архив абонента " + globVar.abonent);
+        }
         
         tableModel.setColumnIdentifiers(jTableCols);
         
