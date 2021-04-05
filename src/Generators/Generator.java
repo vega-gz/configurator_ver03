@@ -221,7 +221,18 @@ public class Generator {
                     } else {
                         Node typeNode = drv.returnFirstFinedNode("Type"); // берем тип из ноды головного типа драйвера
                         globSigInPrjType = prj.getDataAttr(typeNode, "UUID");
-                        globUUID = UUID.getUIID();
+                        
+                        
+                        
+                        // достаем привязку УИДА сигнала в файле драйвера для привязки
+                        String intFileName = designDir + File.separator + hwDew + ".int";
+                        XMLSAX intFile = new XMLSAX();
+                        Node intf = intFile.readDocument(intFileName);
+                        Node lokSig = intFile.findNodeAtribute(intf, globSigAttr);          // ищем сигнал в файле драйверов
+                        if (lokSig == null) {
+                           globUUID = UUID.getUIID(); 
+                        }else globUUID = intFile.getDataAttr(lokSig, "UUID");
+                        
                         hwConn = setHWdoc(hw, hwDew, hwFileSuffix, globSigAttr, prjFildName, globUUID, globSigInPrjType, false); // вместо глобального УУИД генерим локально
 
                     }

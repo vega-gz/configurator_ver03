@@ -124,7 +124,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
             if(st.isCreate()) st.setSimpleTableSettings(jTable1);
             gpw = 600;
         }
-        // это костыль или на оборот нормальное
+        // это костыль или на оборот нормальное(вообще это уставки я так понимаю)
         if (linkTable == null & trgCol == null){ // если нет ни каких записей в нодах к Сигналу
         
             relatedTable = title;               // Запрос к базе по заголвку который передали 
