@@ -34,9 +34,10 @@ import org.w3c.dom.Node;
 public final class Main_JPanel extends javax.swing.JFrame {
 
     String url, nameProject, user, pass;
-
+   
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
+    TableTools tt=new TableTools();
     String filepatch, type;
     File excel = null;
     ProgressBar pb = null;
@@ -412,10 +413,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -789,6 +792,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     // ------ Выбор абонента, для которого будет загружаться ексель-файл
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         globVar.abonent = (String) jComboBox2.getSelectedItem();
+       
     }//GEN-LAST:event_jComboBox2ActionPerformed
 //------слушатель нажатя мышки по дереву JTree-----
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
@@ -940,7 +944,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Таблицы абонентов в текущей БД нет");
             return;
         }
-        SimpleFrame sf = new SimpleFrame("Abonents");
+        
+        SimpleFrame sf = new SimpleFrame("Abonents",jComboBox2);
         sf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         sf.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -1077,10 +1082,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        JFrame createTable=new CreateTable();
+        JFrame createTable=new CreateFTable(jTree1);
         createTable.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         createTable.setTitle("Окно создания таблиц");
         createTable.setVisible(true);
+        
+        // JOptionPane.showMessageDialog(null, "Таблица создана");
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 //---формирование OPC серверов----
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -1173,18 +1180,18 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
         globVar.DB.createAbonentTable();
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
-        ArrayList<String> listTableBd = globVar.DB.getListTable();
+        ArrayList<String> listTableBd = globVar.DB.getListTable();//список таблиц в базе, НО НЕ В ДЕРЕВЕ
         final String ROOT = "Абоненты";
 
         // Создание древовидной структуры
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT);
-        // Ветви первого уровня
+        // Ветви первого уровня(добавили абонента)
         for (String[] s : listAbonent) {
             String nameBranch = s[1]; //  1 это префикс(в нашем случае это имя абонента в структуре GPA KC  и тд)
             DefaultMutableTreeNode firstNode = new DefaultMutableTreeNode(nameBranch);
             // Добавление ветвей к корневой записи
             root.add(firstNode);
-            // Добавление листьев
+            // Добавление листьев(добавление таблиц)
             for (String sheet : listTableBd) {
                 // Патерн добавления того или иного совпадения по имени абонента
                 Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");
@@ -1327,6 +1334,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 }
 
+
 // Класс Слушатель выделения узла в дереве
 class SelectionListener implements TreeSelectionListener {
 //
@@ -1341,4 +1349,6 @@ class SelectionListener implements TreeSelectionListener {
 
     public void valueChanged(TreeSelectionEvent e) {
     }
+    
 }
+

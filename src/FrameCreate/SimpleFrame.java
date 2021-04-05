@@ -7,14 +7,18 @@ import static Tools.TableTools.setId;
 import Tools.isCange;
 import globalData.globVar;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /*@author lev*/
 public class SimpleFrame extends javax.swing.JFrame {
 
     SimpleTable st;
-
-    public SimpleFrame(String tableName) {
+    JComboBox jComboBox1;
+    TableTools tt=new TableTools();
+    
+    public SimpleFrame(String tableName,JComboBox jComboBox) {
+        jComboBox1=jComboBox;
         st = new SimpleTable(tableName, null, null);
         initComponents();
         st.setSimpleTableSettings(jTable1);
@@ -28,6 +32,7 @@ public class SimpleFrame extends javax.swing.JFrame {
         };
         TableTools.setFrameListener(this, sfd, ich, null);
     }
+  
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -113,6 +118,8 @@ public class SimpleFrame extends javax.swing.JFrame {
         if (st.isNew()) {
             st.saveTableInDB();
         }
+        jComboBox1.setModel(tt.getComboBoxModelAbonent());//обновление дерева
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 //удаление таблицы 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -164,7 +171,7 @@ public class SimpleFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SimpleFrame("").setVisible(true);
+             //   new SimpleFrame("").setVisible(true);
             }
         });
     }

@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 public class DataBase implements Observed {
     Statement stmt;
@@ -439,9 +441,13 @@ public class DataBase implements Observed {
         ArrayList<String> list_table_base = new ArrayList();
         try {
             stmt = connection.createStatement();
+            
+            
             ResultSet rs = stmt.executeQuery(
                     "SELECT tablename FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema' "
                     + "ORDER BY tablename;");
+            
+            
             while (rs.next()) {
                 String table_schema = rs.getString("tablename");
                 list_table_base.add(table_schema);
@@ -523,6 +529,7 @@ public class DataBase implements Observed {
         }
         return lisrSEQ;
     }
+    
     
 
 
