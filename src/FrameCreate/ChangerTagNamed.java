@@ -7,12 +7,8 @@ package FrameCreate;
 
 import DataBaseTools.DataBase;
 import DataBaseTools.Update;
-import Generators.Generator;
-import Main.Main_JPanel;
-import static Main.Main_JPanel.getModelTreeNZ;
 import Main.ProgressBar;
 import ReadWriteExcel.ExcelAdapter;
-import ReadWriteExcel.RWExcel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
@@ -23,12 +19,9 @@ import Tools.Tools;
 import Tools.Utilities;
 import Tools.closeJFrame;
 import globalData.globVar;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -37,11 +30,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ChangerTagNamed extends javax.swing.JFrame {
-
     ProgressBar pb = null;
     Update update = new Update();
     DataBase db = new DataBase();
-    
     FileManager fm = new FileManager();
     Utilities util=new Utilities();
     int idArrayFindigData = 0;

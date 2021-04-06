@@ -38,10 +38,8 @@ import org.w3c.dom.Node;
 
 /*@author Lev*/
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
-
     static ArrayList<String[]> list_str = new ArrayList<>();
     static ArrayList<String> list_cells = new ArrayList<>();
-
     HashMap<int[], Object> current_change = new HashMap<>();
     int index_changes = 1;//индекс отсчета изменений
     static int rows[] = {};
@@ -161,11 +159,8 @@ public class TableTools {//ссылка на таблицу, массив шир
             });
         }
         menuItemCopyCells.addActionListener((ActionEvent event) -> {
-         //   rows = jTable1.getSelectedRows();
-           // rows=jTable1.getS
-            
+            rows = jTable1.getSelectedRows();
             cols = jTable1.getSelectedColumns();
-
             String value_cells;
             if (rows.length == 0 || cols.length == 0) {
                 JOptionPane.showMessageDialog(null, "Ни одна ячейка не помечена");

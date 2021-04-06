@@ -2,6 +2,9 @@ package FrameCreate;
 
 import Generators.Generator;
 import Main.Main_JPanel;
+import static Main.Main_JPanel.getModelTreeNZ;
+import Main.ProgressBar;
+import ReadWriteExcel.RWExcel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
@@ -13,13 +16,17 @@ import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;
 import globalData.globVar;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -27,6 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
@@ -53,7 +61,7 @@ public class TableDB extends javax.swing.JFrame {
     ArrayList<Integer> findDataRows = new ArrayList<>(); // номера строк в таблице по совпадениям
     boolean firstClickMouseFind = true;                        //  ткнули первый раз на поиск
     int idArrayFindigData = 0;
-
+   
     public TableDB(javax.swing.JTree jTree, String table) {
         
         tableName = table;
@@ -281,11 +289,12 @@ public class TableDB extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1559, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1559, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

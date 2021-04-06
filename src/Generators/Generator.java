@@ -34,7 +34,7 @@ public class Generator {
                 break;
             case 2:
                 return -2;
-            //break;
+                //break;
         }
 
         // найти ноду с именем таблицы в файле конфигурации, и в этой ноде ноду GenData
@@ -53,7 +53,6 @@ public class Generator {
             isMb = "_mb";
             isModbus = true;
         }
-
         globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
@@ -67,7 +66,6 @@ public class Generator {
         }
         String mainDriverName = globVar.sax.getDataAttr(nodeGenHW, "hwDriver");
         String designDir = globVar.desDir + File.separator + "Design";
-
         XMLSAX prj = new XMLSAX();
         Node prjNode = null; // вынес сюда что бы  не было ошибок по компиляции
         if (generetGlobal) {
@@ -79,7 +77,6 @@ public class Generator {
         }
 
         String abType = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "Abonent_type");
-
         //---------------------- Определение списка экземпляров ------------------------------
         String exemplars = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "Экземпляры");
         ArrayList<String> exArr = new ArrayList<>();
@@ -88,7 +85,6 @@ public class Generator {
         //} else {
         exArr.add(abonent);
         //}
-
         //------------------ Определение параметров драйвера модбаса -----------------------
         String tabComm = globVar.DB.getCommentTable(abonent + subAb + "_" + nodeTable);
         if (tabComm == null) {

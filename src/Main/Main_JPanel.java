@@ -1180,7 +1180,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray(); // лист абонентов [0] только первый запрос 1
         ArrayList<String> listTableBd = globVar.DB.getListTable();//список таблиц в базе, НО НЕ В ДЕРЕВЕ
         final String ROOT = "Абоненты";
-
         // Создание древовидной структуры
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT);
         // Ветви первого уровня(добавили абонента)
@@ -1195,12 +1194,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");
                 Matcher matcher1 = pattern1.matcher(sheet);
                 //String sheetPatern = ""; // годы месяцы число
-                
                    comment=globVar.DB.getCommentTable(sheet);
                 if (matcher1.matches()) {
                     //sheetPatern = matcher1.group(1);
-                    
-                    
                      firstNode.add(new DefaultMutableTreeNode(comment+"("+sheet+")", false));//здесь у нас добавление имени в дерево
                    // firstNode.add(new DefaultMutableTreeNode(sheet, false));//здесь у нас добавление имени в дерево
                 }
@@ -1211,7 +1207,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         // Создание стандартной модели и дерево
         return new DefaultTreeModel(root, true);
     }
-
     // --- метод отображения фрейма таблицы ---
     public void showTable(String table) {
         if (!Tools.isDB()) {//проверка ,есть ли подключение к базе
@@ -1221,7 +1216,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
            table=table.substring(table.lastIndexOf("(")+1, table.lastIndexOf(")"));
         }
               
-       
          
         if (!globVar.DB.isTable(table)) {//проверка.есть ли таблица в базе с заданным именем
             return;
