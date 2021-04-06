@@ -7,24 +7,17 @@ package DataBaseTools;
 
 import FrameCreate.TableDB;
 import Tools.MyTableModel;
-import javax.swing.JProgressBar;
 
 /**
  *
  * @author cherepanov
  */
 public class Update {
-    public void ReNameAllData(MyTableModel tableModel,TableDB table,String tmp[],int rusName,int tagName){
-             int jpgMax = tableModel.getRowCount();
+
+    public void ReNameAllData(MyTableModel tableModel, TableDB table, String tmp[], int rusName, int tagName) {
+        int jpgMax = tableModel.getRowCount();
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            
-            
-            
-         
-            
-            
-            
-            
+
             for (int j = 0; j < tableModel.getColumnCount(); j++) {
                 tmp[j] = tableModel.getValueAt(i, j);
             }

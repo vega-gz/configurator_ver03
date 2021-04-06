@@ -161,7 +161,9 @@ public class TableTools {//ссылка на таблицу, массив шир
             });
         }
         menuItemCopyCells.addActionListener((ActionEvent event) -> {
-            rows = jTable1.getSelectedRows();
+         //   rows = jTable1.getSelectedRows();
+           // rows=jTable1.getS
+            
             cols = jTable1.getSelectedColumns();
 
             String value_cells;

@@ -383,7 +383,7 @@ public class Generator {
                 + globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI") + ".iec_hmi"; // Нужен для поиска УУИДов листов
         Node bigRoot = bigSax.readDocument(hmiProjectFile);
         if (bigRoot == null) {
-            FileManager.loggerConstructor("Не найден файл проекта " + hmiProjectFile);
+            FileManager.loggerConstructor("Не найден файл проекта " + hmiProjectFile+" или графа HMI в окне Абоненты  пустая");
             return null;
         }//Если не вылетели - значит будет генерация
         //--------------------------------------------------------------------------------------------------------------

@@ -41,9 +41,11 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     ProgressBar pb = null;
     Update update = new Update();
     DataBase db = new DataBase();
+    
     FileManager fm = new FileManager();
     Utilities util=new Utilities();
-    
+    int idArrayFindigData = 0;
+    ArrayList<Integer> findDataRows = new ArrayList<>();
     
     MyTableModel tableModel; // модель таблицы
     //ArrayList<String[]> fromDB; // Что получим из базы
@@ -200,6 +202,10 @@ public class ChangerTagNamed extends javax.swing.JFrame {
             util.DeleteEmptyString(newName);//удалили строки в которых нет редактирования
             update.ReNameAllData(tableModel, table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
             String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
+            
+            if(tableName.lastIndexOf("(")!=-1){
+            tableName=tableName.substring(tableName.lastIndexOf("(")+1, tableName.lastIndexOf(")"));
+            }
             fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);//запускаем метод переименования
           
             globVar.processReg.remove(processName);
