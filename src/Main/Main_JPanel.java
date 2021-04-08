@@ -39,7 +39,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     XMLSAX createXMLSax = new XMLSAX();
     TableTools tt=new TableTools();
     String filepatch, type;
-    File excel = null;
+    
     ProgressBar pb = null;
     DefaultListModel listModel = new DefaultListModel(); // модель списка баз
 
@@ -707,36 +707,22 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (casedial != 0) {
             return;
         }
-        JFileChooser fileopen = new JFileChooser(globVar.desDir);
-        fileopen.setFileFilter(new FileFilter() { // фильтр файлов
-            public String getDescription() {
-                return "Excel (*.xls *.xlsx)";
-            }
-
-            //@Override
-            public boolean accept(File f) {
-                if (f.isDirectory()) {
-                    return true;
-                } else {
-                    String filename = f.getName().toLowerCase();
-                    return filename.endsWith(".xls") | filename.endsWith(".xlsx") | filename.endsWith(".xlsm");
-                }
-            }
-        });
-        int ren = fileopen.showDialog(null, "Загрузка данных для " + globVar.abonent);
-        if (ren == JFileChooser.APPROVE_OPTION) {
-            excel = fileopen.getSelectedFile();// выбираем файл из каталога
-        } else {
-            return;
-        }
+        
+        File excel = FileManager.getChoiserExcelFile();
+        if (excel == null) return;
+        
+        
         pb = new ProgressBar();
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
         pb.setVisible(true);
+        
+        String pathFileExcell = excel.getPath(); // Для лямбды в отдельный блок
+        
         DoIt di = () -> {
             String ret = null;
             try {
-                ret = RWExcel.ReadExelFromConfig(excel.getPath(), pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+                ret = RWExcel.ReadExelFromConfig(pathFileExcell, pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
             } catch (IOException ex) {
                 Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }

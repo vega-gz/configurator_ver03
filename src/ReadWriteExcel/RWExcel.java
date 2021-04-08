@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JProgressBar;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellReference;
@@ -22,6 +24,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Node;
 
 public class RWExcel {
+
     int startReadData = 0;
     private String path_file;
 
@@ -48,8 +51,8 @@ public class RWExcel {
         int numberCol = CellReference.convertColStringToIndex(colName); // Переводим имя в индекс
         return getDataCell(row, numberCol);
     }
-// --- Данные из ячейки по ссылке на строку и номеру столбца---Lev---
 
+    // --- Данные из ячейки по ссылке на строку и номеру столбца---Lev---
     private static String getDataCell(Row row, int numberCol) {
         if (row == null) {
             return null;
@@ -248,6 +251,55 @@ public class RWExcel {
         return calcFormula(operation, f1, f, colList, dataFromExcel, i);
     }
 
+    // --- Получить название листы с файла ---
+    public static ArrayList<String> getListSheetName(String pathExel) {
+        ArrayList<String> listSheets = new ArrayList<>();
+        Workbook wb = readDocument(pathExel);
+            
+        int qSheets = wb.getNumberOfSheets();
+        for (int i = 0; i < qSheets; i++) {
+            listSheets.add(wb.getSheetName(i));
+        }
+        return listSheets;
+    }
+    
+    // --- прочитать файл ---
+    private static Workbook readDocument(String pathExel){
+        FileInputStream inputStream = null;
+        ArrayList<String> listSheets = new ArrayList<>();
+        Workbook wb = null;
+        try {
+            inputStream = new FileInputStream(new File(pathExel));
+            if (inputStream == null) {
+                FileManager.loggerConstructor("Не удалось открыть файл " + pathExel);
+                return null;
+            }
+            String execut = pathExel.substring(pathExel.lastIndexOf(".") + 1); // получить расширение файла
+            if (execut.equalsIgnoreCase("xlsx") | execut.equalsIgnoreCase("xlsm")) {
+                wb = new XSSFWorkbook(inputStream);
+            } else {
+                wb = new HSSFWorkbook(inputStream);
+            }   
+            if (wb == null) {
+                FileManager.loggerConstructor("Файл " + pathExel + " повреждён или это не XLS");
+                return null;
+            }
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(RWExcel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return wb;
+    }
+
     /**
      * --- сформировать даные из конфигугации XML для чтения Exel---Lev---
      *
@@ -302,15 +354,15 @@ public class RWExcel {
                     int tl = exSheetName1.length();
                     // это из за идиотизма какого то в новом файле( который дали)
                     //if (sl >= tl) {
-                        //String newNameSheet = listSheets[i].substring(sl - tl).replace("#", "");
-                        //newNameSheet = newNameSheet.replace("$", "");
-                        if(sl >= tl && listSheets[i].substring(sl-tl).equals(exSheetName1)){  //так было до изменения    
-                            //if (newNameSheet.equals(exSheetName1)) {
-                            sheetList.add(listSheets[i]);
+                    //String newNameSheet = listSheets[i].substring(sl - tl).replace("#", "");
+                    //newNameSheet = newNameSheet.replace("$", "");
+                    if (sl >= tl && listSheets[i].substring(sl - tl).equals(exSheetName1)) {  //так было до изменения    
+                        //if (newNameSheet.equals(exSheetName1)) {
+                        sheetList.add(listSheets[i]);
                             //tableName = listSheets[i];
-                            //break;
-                        }
-                   // }
+                        //break;
+                    }
+                    // }
                 }
             } else {
                 sheetList.add(exSheetName1);
