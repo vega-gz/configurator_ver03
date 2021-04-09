@@ -1,5 +1,6 @@
 package FrameCreate;
 
+import Tools.TableTools;
 import globalData.globVar;
 import Tools.TimerDialog;
 
@@ -11,7 +12,7 @@ public class TextEdit extends javax.swing.JFrame {
     boolean ren;
 
     
-    public TextEdit(String title, TableDB tdb, boolean rename) {
+    public TextEdit(String title, TableDB tdb, boolean rename) {//если передаем true,то переименовываем таблицу false переименовываем комментарий
         this.tdb = tdb;
         initComponents();
         this.setTitle(title);
@@ -76,12 +77,16 @@ public class TextEdit extends javax.swing.JFrame {
         }
         tdb.setTitle(tdb.tableName + " :" + tdb.comment);
         if (statusRequestDB == 0) {
-
             //getTimer(1000); // Запуск таймера
             jOptionPane1.showMessageDialog(null, tdb.tableName + " переименнована ."); //сообщение
             jOptionPane1.updateUI();
             this.dispose(); // выход
+        }else{
+            jOptionPane1.showMessageDialog(null, " Комментарий переименован."); //сообщение
+            jOptionPane1.updateUI();
+            this.dispose(); 
         }
+    
 
     }//GEN-LAST:event_jButton1ActionPerformed
    

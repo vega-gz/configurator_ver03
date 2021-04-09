@@ -25,8 +25,8 @@ public class globVar {
         public static String logFile = "configurer.log";
         public static String PathToProject = "";
 	public static String linSep;
-	public static String myDir;
-	public static String desDir;
+	public static String myDir;//путь до конфигуратора
+	public static String desDir;//путь до папки с проектом
 	public static FileManager fm;
 	public static String backupDir = "bkp"; // папка для бекапов
 	public static boolean EOF;

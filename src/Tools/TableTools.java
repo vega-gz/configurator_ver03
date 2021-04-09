@@ -13,6 +13,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,6 +41,7 @@ import org.w3c.dom.Node;
 
 /*@author Lev*/
 public class TableTools {//ссылка на таблицу, массив ширин столбцов, массив алигнов - -1 лево, 0 - центр, 1 - право
+
     static ArrayList<String[]> list_str = new ArrayList<>();
     static ArrayList<String> list_cells = new ArrayList<>();
     HashMap<int[], Object> current_change = new HashMap<>();
@@ -899,10 +903,9 @@ public class TableTools {//ссылка на таблицу, массив шир
             t1.get(i)[0] = "" + (i + 1);
         }
     }
-    
-    
+
     // --- Перерисовка панели с таблицой ---
-    public static void repaintJpanelTable(JPanel jPanel_Tmp, JComponent componetSwing){
+    public static void repaintJpanelTable(JPanel jPanel_Tmp, JComponent componetSwing) {
         jPanel_Tmp.removeAll();
         jPanel_Tmp.invalidate();
         jPanel_Tmp.repaint();
@@ -912,8 +915,9 @@ public class TableTools {//ссылка на таблицу, массив шир
         jPanel_Tmp.repaint();
         jPanel_Tmp.requestFocus();
     }
-      public DefaultComboBoxModel getComboBoxModelAbonent() {
-          String[] aList;//список абонентов окна
+
+    public DefaultComboBoxModel getComboBoxModelAbonent() {
+        String[] aList;//список абонентов окна
         if (!globVar.DB.isConnectOK()) {
             return null;
         }
@@ -927,7 +931,8 @@ public class TableTools {//ссылка на таблицу, массив шир
 
         return new DefaultComboBoxModel(aList);
     }
-      public DefaultComboBoxModel getComboBoxModelTable() {//----метод формирования комбобокса где AI AO DI  и тд
+
+    public DefaultComboBoxModel getComboBoxModelTable() {//----метод формирования комбобокса где AI AO DI  и тд
         if (!globVar.DB.isConnectOK()) {
             return null;
         }
@@ -944,4 +949,28 @@ public class TableTools {//ссылка на таблицу, массив шир
         return new DefaultComboBoxModel(nodeTable);
 
     }
+
+    //-----возвращает список строк таблицы ,в которых были изменения
+
+    public static ArrayList<String[]> getCngRows(ArrayList<String[]> listTable, ArrayList<String[]> chgLTable, Boolean bolean) {
+        ArrayList<String[]> cngLine = new ArrayList<>();
+        Boolean result;
+        if (listTable.size() != chgLTable.size()) {
+            FileManager.loggerConstructor("Размеры таблиц не совпадают");
+        }
+        for (int i = 0; i < listTable.size(); i++) {
+            result = Arrays.equals(listTable.get(i), chgLTable.get(i));
+            if (!result) {
+                if (bolean) {
+                    cngLine.add(chgLTable.get(i));
+
+                } else {
+                    cngLine.add(listTable.get(i));
+                }
+            }
+        }
+
+        return cngLine;
+    }
+
 }

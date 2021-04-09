@@ -1,5 +1,6 @@
 package FrameCreate;
 
+import DataBaseTools.DataBase;
 import Generators.Generator;
 import Main.Main_JPanel;
 import static Main.Main_JPanel.getModelTreeNZ;
@@ -43,6 +44,7 @@ public class TableDB extends javax.swing.JFrame {
     TableTools tt=new TableTools();
     Main_JPanel mj=new Main_JPanel();
     FileManager fm=new FileManager();
+    DataBase db=new DataBase();
     ArrayList<String[]> newName=new ArrayList<>();
     public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
@@ -51,8 +53,11 @@ public class TableDB extends javax.swing.JFrame {
     public int tableSize;
     String[] cols;
     String comment;
+    ArrayList<String[]> listTable;
     ArrayList<String[]> fromDB;
     ArrayList<String[]> listItemList = new ArrayList<>();
+    ArrayList<String[]>cngList=new ArrayList<>();//массив строк с изменениями
+    ArrayList<String[]>oldList=new ArrayList<>();//массив строк без изменений
     public int[] colsWidth;
     int[] align;
     int qCol;
@@ -68,6 +73,7 @@ public class TableDB extends javax.swing.JFrame {
         jTree1 = jTree;
         if(!globVar.DB.isConnectOK())return;
         List<String> listColumn = globVar.DB.getListColumns(table);
+        listTable =db.getData(tableName);
         if(listColumn==null || listColumn.isEmpty())return;
         cols = listColumn.toArray( new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);
@@ -90,6 +96,7 @@ public class TableDB extends javax.swing.JFrame {
         
         RegistrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
         closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
+        
         
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут броблема фокуса
@@ -503,7 +510,7 @@ public class TableDB extends javax.swing.JFrame {
             if(!Tools.isDesDir()) return;
             int ret = 1;
             try {
-                ret = Generator.genTypeFile(this, jProgressBar1);
+                ret = Generator.genTypeFile(TableDB.this, jProgressBar1);
             } catch (IOException ex) {
                 FileManager.loggerConstructor(ex.toString());
             }
@@ -614,6 +621,7 @@ public class TableDB extends javax.swing.JFrame {
         JFrame changeComm = new TextEdit("Редактор комментария", this, false);
         changeComm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         changeComm.setVisible(true);
+       
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -676,7 +684,7 @@ public class TableDB extends javax.swing.JFrame {
             if (tableSize > 0) {
                 TableTools.setAlignCols(fromDB.get(0), align);
             }
-
+            
             jTable1.setModel(tableModel);
 
             TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут проблема фокуса
@@ -695,14 +703,15 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       //должна быть замена в файлах(здесь)точнее вызов метода
-        fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);//запускаем метод переименования
-        
-        
-        
         TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
+        ArrayList<String[]>chgLTable=db.getData(tableName);
+        cngList= TableTools.getCngRows(listTable,chgLTable,true);//возвращаем массив строк в которые произошли изменения
+        oldList=TableTools.getCngRows(listTable,chgLTable,false);
+        
+        fm.ChangefFileWBase(globVar.desDir, cngList,oldList, tableName,jProgressBar1);//запускаем метод переименования
+        
     }//GEN-LAST:event_jButton2ActionPerformed
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -790,6 +799,7 @@ public class TableDB extends javax.swing.JFrame {
             if(findDataRows.size() > 0) selectRowInTable(findDataRows.get(idArrayFindigData));
         }
     }
+      
     
     // --- выделяет строку в таблице с заданым номером ---
         void selectRowInTable(int row){

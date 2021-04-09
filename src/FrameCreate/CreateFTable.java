@@ -6,14 +6,11 @@
 package FrameCreate;
 
 import Main.Main_JPanel;
-import static Main.Main_JPanel.getModelTreeNZ;
-import Tools.FileManager;
 import Tools.TableTools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import org.w3c.dom.Node;
 
@@ -24,9 +21,9 @@ import org.w3c.dom.Node;
 public class CreateFTable extends javax.swing.JFrame {
 
     XMLSAX xmlsax = new XMLSAX();
-    TableTools tt=new TableTools();
+    TableTools tt = new TableTools();
     String typeTable;//тип таблицы AI AO DI итд
-    String commntTable;
+    String commentTable;
     String prefixTable;//префикс таблицы (вводится руками)
     String nameTable;//послное имя таблицы
     public String[] tableCols;
@@ -184,25 +181,34 @@ public class CreateFTable extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        typeTable = jTextField2.getText();
+        typeTable = jTextField2.getText();//тип таблицы AI AO (если хочешь создать новую)
         prefixTable = jTextField1.getText();
-        commntTable = jTextField3.getText();
+        commentTable = jTextField3.getText();
         String abonentTable = (String) jComboBox2.getSelectedItem();
         String[] tableColumns;
-        if (jTextField2.getText().equals("")) {
+        if (jTextField2.getText().equals("")) {//если поле "тип таблицы" пустое
             typeTable = (String) jComboBox1.getSelectedItem();
+            if (jTextField1.getText().equals("")) {
+                nameTable = abonentTable + "_" + typeTable;
+            } else {
+                nameTable = abonentTable + "_" + prefixTable + "_" + typeTable;
+            }
         }
-        if (jTextField1.getText().equals("")) {
-            nameTable = abonentTable + "_" + typeTable;
-        } else {
-            nameTable = abonentTable + "_" + prefixTable + "_" + typeTable;
+        else{//если пользователь решил создать новую таблицу,запускаем метод записи новой ноды и создания таблицы
+            if (jTextField1.getText().equals("")) {//продублировал два раза,надо бы исправить,но пока ничего не придумывается,работает корректно
+                nameTable = abonentTable + "_" + typeTable;
+            } else {
+                nameTable = abonentTable + "_" + prefixTable + "_" + typeTable;
+            }
+            createTableNode(nameTable,commentTable);
         }
+
         System.out.println(nameTable);
         tableColumns = getExcelChild();
         continueArchiv = new String[tableColumns.length];
         Arrays.fill(continueArchiv, "");//заполнение массива пустыми строками
         //---В процесс до этойчерты мы получаем значения из фрейма,все что далее будет относиться к построению новой таблицы
-        globVar.DB.createTableEasy(nameTable, tableColumns, commntTable);//---------создаем таблицу
+        globVar.DB.createTableEasy(nameTable, tableColumns, commentTable);//---------создаем таблицу
         globVar.DB.insertRow(nameTable, continueArchiv, tableColumns, 0);
         //(добавить условия)
         JOptionPane.showMessageDialog(null, "Таблица создана");
@@ -250,46 +256,22 @@ public class CreateFTable extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }
 //получение комбо бокс таблиц
 
-//    public DefaultComboBoxModel getComboBoxModelTable() {//----метод формирования комбобокса где AI AO DI  и тд
-//        if (!globVar.DB.isConnectOK()) {
-//            return null;
-//        }
-//        int counter = 0;
-//        ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
-//        String[] nodeTable = new String[nList.size()];
-//        for (Node n : nList) {
-//            String nodeName = globVar.sax.getDataAttr(n, "excelSheetName");
-//
-//            nodeTable[counter] = nodeName;
-//            counter++;
-//        }
-//
-//        return new DefaultComboBoxModel(nodeTable);
-//
-//    }
-//получение комбо бокс абонентов
-
-//    public DefaultComboBoxModel getComboBoxModelAbonent() {
-//        if (!globVar.DB.isConnectOK()) {
-//            return null;
-//        }
-//        ArrayList<String[]> listAbonent = globVar.DB.getAbonentArray();
-//        aList = new String[listAbonent.size()];
-//
-//        for (int i = 0; i < listAbonent.size(); i++) {
-//            String[] str = listAbonent.get(i);
-//            aList[i] = str[1];
-//        }
-//
-//        return new DefaultComboBoxModel(aList);
-//    }
-
+    public void createTableNode(String nameNode,String comment) {
+//        XMLSAX sax=new XMLSAX();
+//        String[] str={nameNode,"excelSheetName",nameNode,"Comment",comment};
+//       // Node node= sax.readDocument(globVar.sax.toString());
+//        Node node= sax.readDocument("C:\\Users\\cherepanov\\Documents\\NetBeansProjects\\new_config\\configurator_ver03\\ConfigSignals.xml");
+//        Node configSignals = sax.returnFirstFinedNode(node,"ConfigSignals");
+//        sax.insertChildNode(configSignals, str);
+//        sax.writeDocument();
+//        System.out.println("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     public javax.swing.JComboBox jComboBox1;

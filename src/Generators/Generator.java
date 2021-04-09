@@ -814,7 +814,7 @@ public class Generator {
 
     // --- Генерация Типов ---
     public static int genTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
-        int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать глабальными переменными?"); // сообщение с выбором
+        int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать глобальными переменными?"); // сообщение с выбором
         boolean interGlobCase = false;
         switch (casedial) {//0 - yes, 1 - no, 2 - cancel
             case 0:
