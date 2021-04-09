@@ -251,7 +251,7 @@ public class RWExcel {
         return calcFormula(operation, f1, f, colList, dataFromExcel, i);
     }
 
-    // --- Получить название листы с файла ---
+    // --- Получить название листов с файла ---
     public static ArrayList<String> getListSheetName(String pathExel) {
         ArrayList<String> listSheets = new ArrayList<>();
         Workbook wb = readDocument(pathExel);
@@ -306,34 +306,25 @@ public class RWExcel {
      * @param pathExel
      * @param jpb
      * @return
-     * @throws FileNotFoundException
-     * @throws IOException
      */
-    public static String ReadExelFromConfig(String pathExel, JProgressBar jpb) throws FileNotFoundException, IOException {  // pathExel Временно так как мозгов не хватило ночью.                
-        Workbook wb = null;
-
-        FileInputStream inputStream = new FileInputStream(new File(pathExel));
-        if (inputStream == null) {
-            FileManager.loggerConstructor("Не удалось открыть файл " + pathExel);
-            return null;
-        }
-        String execut = pathExel.substring(pathExel.lastIndexOf(".") + 1); // получить расширение файла
-        if (execut.equalsIgnoreCase("xlsx") | execut.equalsIgnoreCase("xlsm")) {
-            wb = new XSSFWorkbook(inputStream);
-        } else {
-            wb = new HSSFWorkbook(inputStream);
-        }
-
-        // HSSFWorkbook wb = new HSSFWorkbook(inputStream);
+    public static String ReadExelFromConfig(String pathExel, String nameSheet, String toTableInsert,  JProgressBar jpb) {  // pathExel Временно так как мозгов не хватило ночью.                
+        Workbook wb = readDocument(pathExel);
         if (wb == null) {
             FileManager.loggerConstructor("Файл " + pathExel + " повреждён или это не XLS");
             return null;
         }
 
-        int qSheets = wb.getNumberOfSheets();
-        String[] listSheets = new String[qSheets];
-        for (int i = 0; i < qSheets; i++) {
-            listSheets[i] = wb.getSheetName(i);
+        int qSheets = 0;
+        String[] listSheets = null;
+        if(nameSheet == null){ // если нет конкретной страницы
+            qSheets = wb.getNumberOfSheets();
+            listSheets = new String[qSheets];
+            for (int i = 0; i < qSheets; i++) {
+                listSheets[i] = wb.getSheetName(i);
+            }
+        }else{
+            listSheets = new String[]{nameSheet};
+            qSheets = 1;
         }
 
         FileManager.loggerConstructor("Заливаем в таблицы абонента " + globVar.abonent + " данные из книги " + pathExel);
@@ -342,12 +333,17 @@ public class RWExcel {
         String tCnt = "";
         int maxCnt = nList.size() - 1;
         int nCnt = 0;
-        for (Node n : nList) {
+        for (Node n : nList) { // вот тут по нодам перебирает от этого не верно 
             if (jpb != null) {
                 jpb.setValue((int) ((nCnt++) * 100.0 / maxCnt));//Прогресс загрузки данных из екселя в БД
             }            //String tableName = n.getNodeName();
-            String exSheetName1 = globVar.sax.getDataAttr(n, "excelSheetName");
+            
+            String exSheetName1 = null;
+            if(toTableInsert != null & nameSheet != null) exSheetName1 = nameSheet; // костыль для загрузки одного сигнала
+            else exSheetName1 = globVar.sax.getDataAttr(n, "excelSheetName");
+            
             ArrayList<String> sheetList = new ArrayList<>();
+            
             if ("mb".equals(exSheetName1.substring(0, 2))) {
                 for (int i = 0; i < qSheets; i++) {
                     int sl = listSheets[i].length();
@@ -547,10 +543,15 @@ public class RWExcel {
                         }
                         colCnt++;
                     }
-                    globVar.DB.createTable(globVar.abonent + "_" + exSheetName, tabColNames, dataFromExcel, tableComment);
+                    String nameT =  null;
+                    if(toTableInsert != null & nameSheet != null) nameT = toTableInsert; // если есть есть конкретная таблица для внесения и если есть конкретный Лист из excell
+                    else nameT = globVar.abonent + "_" + exSheetName;
+                    
+                    globVar.DB.createTable(nameT, tabColNames, dataFromExcel, tableComment);
                     tCnt += "\n - " + globVar.abonent + "_" + exSheetName;
                 }
             }
+            if(toTableInsert != null & nameSheet != null) break; // не носимвся по всем нодам XML а сразу выходим
         }
         if (isError) {
             return null;

@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -61,11 +63,15 @@ public class TableDB extends javax.swing.JFrame {
     ArrayList<Integer> findDataRows = new ArrayList<>(); // номера строк в таблице по совпадениям
     boolean firstClickMouseFind = true;                        //  ткнули первый раз на поиск
     int idArrayFindigData = 0;
+    File excel = null;                                         // ссылка на документ если отрыли загрузку Excel для таблицы
+    String sheetExcel = null;                                  // выбранный лист из Excel
    
     public TableDB(javax.swing.JTree jTree, String table) {
         
-        tableName = table;
+        
         jTree1 = jTree;
+        
+        tableName = table;
         if(!globVar.DB.isConnectOK())return;
         List<String> listColumn = globVar.DB.getListColumns(table);
         if(listColumn==null || listColumn.isEmpty())return;
@@ -106,7 +112,10 @@ public class TableDB extends javax.swing.JFrame {
         
         this.setTitle(table + ": "+comment);
     }
-
+    
+   
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,6 +125,11 @@ public class TableDB extends javax.swing.JFrame {
         textField1 = new java.awt.TextField();
         label1 = new java.awt.Label();
         jButton1 = new javax.swing.JButton();
+        jDialog1_DownloadSheetExcel = new javax.swing.JDialog();
+        label2 = new java.awt.Label();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -185,6 +199,58 @@ public class TableDB extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        label2.setText("Загрузка данных в таблицу, текущая таблица будет удалена. Бекап будет доступен.");
+
+        jButton4.setText("Загрузить");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Отмена");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog1_DownloadSheetExcelLayout = new javax.swing.GroupLayout(jDialog1_DownloadSheetExcel.getContentPane());
+        jDialog1_DownloadSheetExcel.getContentPane().setLayout(jDialog1_DownloadSheetExcelLayout);
+        jDialog1_DownloadSheetExcelLayout.setHorizontalGroup(
+            jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1_DownloadSheetExcelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addGroup(jDialog1_DownloadSheetExcelLayout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialog1_DownloadSheetExcelLayout.setVerticalGroup(
+            jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1_DownloadSheetExcelLayout.createSequentialGroup()
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5)
+                    .addComponent(jButton4))
+                .addGap(0, 227, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jProgressBar1.setToolTipText("");
@@ -219,6 +285,7 @@ public class TableDB extends javax.swing.JFrame {
                 //System.out.println("jTextField1_change " + e);
                 compareFielTextToDataCell(jTextField1.getText());
             }
+
         });
 
         jCheckBox1.setText("без резервов");
@@ -413,6 +480,11 @@ public class TableDB extends javax.swing.JFrame {
         jMenu3.add(jMenuItem7);
 
         jMenuItem12.setText("Загрузить Данные в таблицу из Excel");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem12);
 
         jMenuBar1.add(jMenu3);
@@ -689,10 +761,6 @@ public class TableDB extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField1ActionPerformed
-
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
 
     }//GEN-LAST:event_jCheckBox1ActionPerformed
@@ -706,10 +774,65 @@ public class TableDB extends javax.swing.JFrame {
         TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        sheetExcel = (String) jComboBox1.getSelectedItem();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        excel = FileManager.getChoiserExcelFile(); //  Отдельный метод выбора Excel файла
+        if (excel == null) return;
+        // TableTools.setFrameListener(jDialog1_DownloadSheetExcel, null, null, null); // слушателей фреймов надо реализовать Jframe
+        jComboBox1.setModel(getComboBoxModelExcell(excel.getAbsolutePath())); // абоненты из базы
+        jDialog1_DownloadSheetExcel.setSize(500, 300);
+        jDialog1_DownloadSheetExcel.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        ProgressBar pb = new ProgressBar();
+        String processName = "Процесс загрузки страницы из Excel ";
+        pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pb.setTitle(processName);
+        pb.setVisible(true);
+        
+        String pathFileExcell = excel.getPath(); // Для лямбды в отдельный блок
+        
+        DoIt di = () -> {
+            String ret = null;
+            ret = RWExcel.ReadExelFromConfig(pathFileExcell, sheetExcel, tableName, pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+            
+            if (ret != null) {
+                JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
+                jTree1.setModel(getModelTreeNZ());// обновить дерево
+            } else {
+                JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'");
+            }
+            pb.setVisible(false);
+            globVar.processReg.remove(processName);
+        };
+        BackgroundThread bt = new BackgroundThread(processName, di);
+        bt.start();
+        globVar.processReg.add(processName);
+        jDialog1_DownloadSheetExcel.dispose();
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        jDialog1_DownloadSheetExcel.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JDialog jDialog1_DownloadSheetExcel;
     private javax.swing.JDialog jDialog1_add_column;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -735,6 +858,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
+    private java.awt.Label label2;
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
 
@@ -757,6 +881,7 @@ public class TableDB extends javax.swing.JFrame {
     }
 
     public int tableSize() {
+        tableSize = fromDB.size();
         return tableSize;
     }
     
@@ -811,5 +936,16 @@ public class TableDB extends javax.swing.JFrame {
         TableTools.setFrameListener(lvf, null, null, null); // слушателей фреймов
         lvf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         lvf.setVisible(true);
+    }
+    
+      // -- создания списка листов Excell для передачи в ComboBox -- 
+    public ComboBoxModel getComboBoxModelExcell(String pathExel) { 
+        if (pathExel == null) {
+            return null;
+        }
+        ArrayList<String> abList = RWExcel.getListSheetName(pathExel);
+        String[] itemList = abList.toArray( new String[abList.size()]); // преобразовали в массив
+        
+        return new DefaultComboBoxModel(itemList);
     }
 }

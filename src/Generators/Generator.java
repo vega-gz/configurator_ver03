@@ -1028,6 +1028,7 @@ public class Generator {
                     newFields = localSax.insertChildNode(type, newArray);
                 }
                 for (int j = 0; j < ft.tableSize(); j++) {
+                    System.out.println(ft.tableSize());
                     String dt = ft.getCell("dataType", j); //Определяем тип данных
                     if (dt != null && notGenTyps != null && notGenTyps.contains(dt)) {
                         continue;//если тип данных есть и есть список ненужных данных и данный тип в этом списке
