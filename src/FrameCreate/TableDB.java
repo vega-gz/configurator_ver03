@@ -240,7 +240,7 @@ public class TableDB extends javax.swing.JFrame {
             .addGroup(jDialog1_DownloadSheetExcelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                     .addGroup(jDialog1_DownloadSheetExcelLayout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,7 +259,7 @@ public class TableDB extends javax.swing.JFrame {
                 .addGroup(jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5)
                     .addComponent(jButton4))
-                .addGap(0, 227, Short.MAX_VALUE))
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -362,7 +362,7 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Загрузить данные в тиблицу");
+        jButton3.setText("Загрузить данные в таблицу");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -847,7 +847,8 @@ public class TableDB extends javax.swing.JFrame {
         
         DoIt di = () -> {
             String ret = null;
-            ret = RWExcel.ReadExelFromConfig(pathFileExcell, sheetExcel, tableName, pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+           
+            ret = RWExcel.ReadExcelSheet(pathFileExcell, sheetExcel, tableName); // вызов фукции с формированием базы по файлу конфигурации
             
             if (ret != null) {
                 JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
@@ -1013,6 +1014,7 @@ public class TableDB extends javax.swing.JFrame {
             return null;
         }
         ArrayList<String> abList = RWExcel.getListSheetName(pathExel);
+        abList.add(0,"");
         String[] itemList = abList.toArray( new String[abList.size()]); // преобразовали в массив
         
         return new DefaultComboBoxModel(itemList);
