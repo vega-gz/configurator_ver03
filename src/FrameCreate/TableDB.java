@@ -71,6 +71,7 @@ public class TableDB extends javax.swing.JFrame {
     int idArrayFindigData = 0;
     File excel = null;                                         // ссылка на документ если отрыли загрузку Excel для таблицы
     String sheetExcel = null;                                  // выбранный лист из Excel
+    List<String> listNewColumn = new ArrayList<>();             // новые колонки при добавление в таблицу
    
     public TableDB(javax.swing.JTree jTree, String table) {
         
@@ -759,9 +760,15 @@ public class TableDB extends javax.swing.JFrame {
                     break;
                 }
             }
+            List<String> listColumn = new ArrayList<>();
             // тут повторяющийся код не очень хорошо, как то реши это
-            List<String> listColumn = globVar.DB.getListColumns(tableName);
+            for (int i = 0; i < jTable1.getColumnCount(); i++) {
+                listColumn.add(jTable1.getColumnName(i));
+            }
+
+            
             listColumn.add(nameNewColumn);
+            listNewColumn.add(nameNewColumn); // Тут просто вносим какие столбцы новые
             if (listColumn == null || listColumn.isEmpty()) {
                 return;
             }
@@ -772,7 +779,10 @@ public class TableDB extends javax.swing.JFrame {
 
             // вносим данные сращивая массивы Стримами
             for (int i = 0; i < fromDB.size(); i++) {
-                fromDB.set(i, Stream.concat(Arrays.stream(fromDB.get(i)), Arrays.stream(new String[]{""})).toArray(String[]::new)); // замена новым массивом
+                for (String s: listNewColumn) {      // от количества новых столбцов
+                    fromDB.set(i, Stream.concat(Arrays.stream(fromDB.get(i)), Arrays.stream(new String[]{""})).toArray(String[]::new)); // замена новым массивом пустые вносим
+                }
+                
             }
             comment = globVar.DB.getCommentTable(tableName);
             tableSize = fromDB.size();
