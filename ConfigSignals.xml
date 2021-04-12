@@ -1174,4 +1174,9 @@
 			</File>	
 		</GenCode>
 	</CurveFR_Init>
+	<DefaultTable excelSheetName="DefaultTable" Comment="">
+		<EXEL>
+			<F nameColumnPos="Наименование" default=""/><!--Обязательный нода-->
+		</EXEL>	
+	</DefaultTable>
 </ConfigSignals>

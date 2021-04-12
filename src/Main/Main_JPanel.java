@@ -42,7 +42,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     XMLSAX createXMLSax = new XMLSAX();
     TableTools tt=new TableTools();
     String filepatch, type;
-    File excel = null;
+    
     ProgressBar pb = null;
     DefaultListModel listModel = new DefaultListModel(); // модель списка баз
 
@@ -110,7 +110,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
         jButton7 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -416,18 +415,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "item1", "item2", "item3", "item4" }));
@@ -479,7 +476,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 557, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -500,11 +497,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jSeparator1)
-                    .addContainerGap()))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,14 +514,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel9)
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(221, Short.MAX_VALUE)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -707,7 +694,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -727,39 +715,22 @@ public final class Main_JPanel extends javax.swing.JFrame {
         if (casedial != 0) {
             return;
         }
-        JFileChooser fileopen = new JFileChooser(globVar.desDir);
-        fileopen.setFileFilter(new FileFilter() { // фильтр файлов
-            public String getDescription() {
-                return "Excel (*.xls *.xlsx)";
-            }
-
-            //@Override
-            public boolean accept(File f) {
-                if (f.isDirectory()) {
-                    return true;
-                } else {
-                    String filename = f.getName().toLowerCase();
-                    return filename.endsWith(".xls") | filename.endsWith(".xlsx") | filename.endsWith(".xlsm");
-                }
-            }
-        });
-        int ren = fileopen.showDialog(null, "Загрузка данных для " + globVar.abonent);
-        if (ren == JFileChooser.APPROVE_OPTION) {
-            excel = fileopen.getSelectedFile();// выбираем файл из каталога
-        } else {
-            return;
-        }
+        
+        File excel = FileManager.getChoiserExcelFile(); //  Отдельный метод выбора Excel файла
+        if (excel == null) return;
+        
+        
         pb = new ProgressBar();
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
         pb.setVisible(true);
+        
+        String pathFileExcell = excel.getPath(); // Для лямбды в отдельный блок
+        
         DoIt di = () -> {
             String ret = null;
-            try {
-                ret = RWExcel.ReadExelFromConfig(excel.getPath(), pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
-            } catch (IOException ex) {
-                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ret = RWExcel.ReadExelFromConfig(pathFileExcell, null, null, pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+            
             if (ret != null) {
                 JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
@@ -1078,7 +1049,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
 
         //validate();
-        jDialog_ListBase.setSize(400, 200);
+        jDialog_ListBase.setSize(500, 200);
         jDialog_ListBase.setLocationRelativeTo(null); // по центру экрана
         jDialog_ListBase.setVisible(true);
 
@@ -1186,7 +1157,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
         return new DefaultComboBoxModel(listarrayTable);
     }
 
-    public ComboBoxModel getComboBoxModelAbonents() { // создания списка абонентов
+    // -- создания списка абонентов  для передачи в ComboBox -- 
+    public ComboBoxModel getComboBoxModelAbonents() { 
         if (!globVar.DB.isConnectOK()) {
             return null;
         }
@@ -1313,7 +1285,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

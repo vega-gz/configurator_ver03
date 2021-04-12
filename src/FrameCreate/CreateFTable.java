@@ -186,24 +186,28 @@ public class CreateFTable extends javax.swing.JFrame {
         commentTable = jTextField3.getText();
         String abonentTable = (String) jComboBox2.getSelectedItem();
         String[] tableColumns;
+
         if (jTextField2.getText().equals("")) {//если поле "тип таблицы" пустое
-            typeTable = (String) jComboBox1.getSelectedItem();
-            if (jTextField1.getText().equals("")) {
-                nameTable = abonentTable + "_" + typeTable;
-            } else {
-                nameTable = abonentTable + "_" + prefixTable + "_" + typeTable;
+            typeTable = (String) jComboBox1.getSelectedItem();//берем значение из "Шаблон типа таблицы"
+            if (jTextField1.getText().equals("")) {//если строка префикса пустая
+                nameTable = abonentTable + "_" + typeTable;//имя таблицы без префикса
+            } else {//если пользователь написал префикс
+                nameTable = abonentTable + "_" + prefixTable + "_" + typeTable;//имя таблицы с префиксом
             }
-        }
-        else{//если пользователь решил создать новую таблицу,запускаем метод записи новой ноды и создания таблицы
-            if (jTextField1.getText().equals("")) {//продублировал два раза,надо бы исправить,но пока ничего не придумывается,работает корректно
-                nameTable = abonentTable + "_" + typeTable;
-            } else {
-                nameTable = abonentTable + "_" + prefixTable + "_" + typeTable;
+
+
+
+        } else {//если пользователь решил создать новую таблицу
+            if (jTextField1.getText().equals("")) {//продублировал два раза,надо бы исправить,но пока ничего не придумывается,работает корректно(если строка префикса пустая)
+                nameTable = abonentTable + "_" + typeTable;//имя таблицы без префикса
+            } else {//если пользователь написал префикс
+                nameTable = abonentTable + "_" + prefixTable + "_" + typeTable;//имя таблицы с префиксом
             }
-            createTableNode(nameTable,commentTable);
+
+
         }
 
-        System.out.println(nameTable);
+        // System.out.println(nameTable);
         tableColumns = getExcelChild();
         continueArchiv = new String[tableColumns.length];
         Arrays.fill(continueArchiv, "");//заполнение массива пустыми строками
@@ -215,7 +219,7 @@ public class CreateFTable extends javax.swing.JFrame {
         jTree1.setModel(Main_JPanel.getModelTreeNZ());//обновление таблицы
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public String[] getExcelChild() {//метод получения столбцов из ConfigSignals
+    public String[] getExcelChild() {//возвращает детей EXCEL ноды
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);//получили детей ноды ConfigSignals
         ArrayList<Node> eList;
         for (int i = 0; i < nList.size(); i++) {
@@ -262,7 +266,7 @@ public class CreateFTable extends javax.swing.JFrame {
     }
 //получение комбо бокс таблиц
 
-    public void createTableNode(String nameNode,String comment) {
+    public void createTableNode(String nameNode, String comment) {
 //        XMLSAX sax=new XMLSAX();
 //        String[] str={nameNode,"excelSheetName",nameNode,"Comment",comment};
 //       // Node node= sax.readDocument(globVar.sax.toString());

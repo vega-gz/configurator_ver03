@@ -224,4 +224,33 @@
 			</Edit>
 		</GenHMI>
 	</GR>	
+	<RSR>
+		<GenHMI name="Resource_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="TStatLine_Dint" ruName="Наименование" isAlarm="false"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<!---Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" /-->
+			<addVarDeclaration> <!-- доп поля в заголовок файла шаблона -->
+				<VarDeclaration InitialValue="''" Name="PrefAb_test665" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="7B21228345FE145C1039349D18AF2C71"/>
+				<VarDeclaration InitialValue="''" Name="PrefAb_test667" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="7B21228345FE145C1039349D18AF2C72"/>
+				<!--<VarDeclaration InitialValue="'1'" Name="NameRU" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="D11E59B74DBD1F394957C4876E4DCD20"/> -->
+			</addVarDeclaration>
+			<disableVarDeclaration> <!-- отключение доп поля в заголовок файла шаблона -->
+				<NameRU/>
+			</disableVarDeclaration>
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+				<PrefStr/>
+				<TagID/>
+			</Disable>
+			<additionalVar>
+				<Divr Type="UDINT"  />
+			</additionalVar>
+			<Edit>
+				<Divr value="3600" Type="UDINT" />
+			</Edit>
+		</GenHMI>
+	</RSR>
 </ConfigHMI>

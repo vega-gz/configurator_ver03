@@ -36,8 +36,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.filechooser.FileFilter;
 import org.w3c.dom.Node;
 
 public class FileManager {
@@ -897,11 +899,38 @@ public class FileManager {
                     }
                 }
                 xmlsax.writeDocument(globVar.desDir + File.separator + "Design" + File.separator + nameFile);
+                System.out.println("");
+        
             }
-
         }
         System.out.println("");
         return isErr;
+    }
+
+    
+    // --- Диалоговое окно с выбором Excel файлов ---
+    public static File getChoiserExcelFile(){
+    File excel = null;
+    JFileChooser fileopen = new JFileChooser(globVar.desDir);
+        fileopen.setFileFilter(new FileFilter() { // фильтр файлов
+            public String getDescription() {
+                return "Excel (*.xls *.xlsx)";
+            }
+            //@Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    String filename = f.getName().toLowerCase();
+                    return filename.endsWith(".xls") | filename.endsWith(".xlsx") | filename.endsWith(".xlsm");
+                }
+            }
+        });
+        int ren = fileopen.showDialog(null, "Загрузка данных для " + globVar.abonent);
+        if (ren == JFileChooser.APPROVE_OPTION) {
+            excel = fileopen.getSelectedFile();// выбираем файл из каталога
+        }
+        return excel;
     }
 
 }
