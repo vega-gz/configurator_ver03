@@ -109,10 +109,10 @@
 		</GenHMI>
 	</mb_DO>
 	<APS>
-	<!--
+	
 		 <GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
-				<PrefStr add0="APS." Type="STRING"/>   -редактируем поле Type зарезервированное слово второе любое зназвание -
+				<PrefStr add0="APS." Type="STRING"/>  <!--редактируем поле Type зарезервированное слово второе любое зназвание -->
 			</Edit>
 			<Disable> 
 				<Num/>
@@ -158,7 +158,6 @@
 				</TAG>
 			</additionalVar>	
 		</GenHMI>
-		-->
 		<GenHMI name="PPZ_" maxY="40" maxX="1" startPosX="20" startPosY="10" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" isAlarm="false" > 		
 			<disableVarDeclaration>
 				<NameRU/>
@@ -193,11 +192,11 @@
 					<NameSigA Type="STRING" tableCol="Источник"/>
 					<NameUst Type="STRING" tableCol="TAG_NAME_PLC"/>
 					<Edit>
-						<NameSigD value="test666" Type="STRING" />
+						<NameSigD value="" Type="STRING" />
 					</Edit>	
 					<ELSE> 
 						<Edit>
-							<NameSigA value="test667" Type="STRING" />
+							<NameSigA value="" Type="STRING" />
 						</Edit>	
 						<IF cond="Источник" val="">
 							<!--<NameSigD Type="STRING" text="_APS." tableCol="TAG_NAME_PLC"/>	 придумать как срастить в строку -->
