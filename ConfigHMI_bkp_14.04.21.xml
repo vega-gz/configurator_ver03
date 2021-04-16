@@ -8,9 +8,6 @@
 			</additionalVar>
 		</GenHMI>
 		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
-			<disableVarDeclaration>
-				<NameRU/>
-			</disableVarDeclaration>
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
@@ -48,6 +45,9 @@
 	<DI>
 		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
 			<Hint add0="Наименование" add1=", инв=" add2="Инверсия" add3=", задержка="  add4="Задержка" add5=", тип сигнала: " add6="Тип_сигнала" />
+			<!--<disableVarDeclaration> тестовое отключение
+			<PrefAb/>
+			</disableVarDeclaration> -->
 		</GenHMI>
 	</DI>
 	<DO>
@@ -109,10 +109,9 @@
 		</GenHMI>
 	</mb_DO>
 	<APS>
-	<!--
-		 <GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
+		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
-				<PrefStr add0="APS." Type="STRING"/>   -редактируем поле Type зарезервированное слово второе любое зназвание -
+				<PrefStr add0="APS." Type="STRING"/>  <!-- редактируем поле Type зарезервированное слово второе любое зназвание -->
 			</Edit>
 			<Disable> 
 				<Num/>
@@ -157,63 +156,7 @@
 					</switch>
 				</TAG>
 			</additionalVar>	
-		</GenHMI>
-		-->
-		<GenHMI name="PPZ_" maxY="40" maxX="1" startPosX="20" startPosY="10" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" isAlarm="false" > 		
-			<disableVarDeclaration>
-				<NameRU/>
-			</disableVarDeclaration>
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="modePZ" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" />
-				<VarDeclaration InitialValue="''" Name="Reset_PZ" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID=""/>
-				<VarDeclaration InitialValue="''" Name="Deblock" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID=""/>
-				<VarDeclaration InitialValue="''" Name="ChngAb" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID=""/>
-			</addVarDeclaration>
-			<Disable>
-				<hint/>
-				<visiblePar/>
-				<disableAlarm/>
-				<Analog_Ph_N/>
-				<PrefStr/>
-				<TagID/>
-			</Disable>
-			<IF cond="Status" val="ПС">
-				<BREAK/>
-				<ELSE>
-					<IF cond="Status" val="АС">
-						<BREAK/>
-					</IF>
-				</ELSE>	
-			</IF>				
-			<additionalVar>
-				<Delay tableCol="Время_задержки" Type="STRING"/> 
-				<!--<NameAS tableCol="TAG_NAME_PLC" Type="STRING"/> -->
-				<NameSigD Type="STRING"/>
-				<IF cond="Источник" val="*.PV"> <!-- если заканчивается на .PV-->
-					<NameSigA Type="STRING" tableCol="Источник"/>
-					<NameUst Type="STRING" tableCol="TAG_NAME_PLC"/>
-					<Edit>
-						<NameSigD value="test666" Type="STRING" />
-					</Edit>	
-					<ELSE> 
-						<Edit>
-							<NameSigA value="test667" Type="STRING" />
-						</Edit>	
-						<IF cond="Источник" val="">
-							<!--<NameSigD Type="STRING" text="_APS." tableCol="TAG_NAME_PLC"/>	 придумать как срастить в строку -->
-							<Edit>
-								<NameSigD text="_APS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
-							</Edit>	
-								<ELSE>
-									<Edit>
-										<NameSigD tableCol="Источник" Type="STRING" /> 
-									</Edit>										
-								</ELSE> 
-						</IF>
-					</ELSE>
-				</IF>
-			</additionalVar>
-		</GenHMI>			
+		</GenHMI>	
 	</APS>
 	<TS>
 		<GenHMI name="Tch_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
@@ -287,9 +230,6 @@
 	<RSR>
 		<GenHMI name="Resource_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="TStatLine_Dint" ruName="Наименование" isAlarm="false"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<!---Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" /-->
-			<disableVarDeclaration>
-				<NameRU/>
-			</disableVarDeclaration>
 			<Disable>
 				<Num/>
 				<hint/>
@@ -299,6 +239,7 @@
 				<Analog_Ph_N/>
 				<PrefStr/>
 				<TagID/>
+				<NameRU/>
 			</Disable>
 			<additionalVar>
 				<Divr Type="UDINT"  />

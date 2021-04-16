@@ -27,9 +27,9 @@ public final class SimpleTable {
     ArrayList<String> listColumn;
     
     public SimpleTable(String table, String trgCol, String val) {
-        if(!globVar.DB.isConnectOK())return;
-        listColumn = globVar.DB.getListColumns(table);
-        if(listColumn==null || listColumn.isEmpty())return;
+        
+        if(getReauestBase(table) == false) return; // к базе не достучались
+        
         tableName = table;
         this.trgCol = trgCol;
         //Если усть целевой столбец - исключаем его из списка заголовков
@@ -39,11 +39,9 @@ public final class SimpleTable {
             int i = 0;
             for(String s: listColumn) if(!s.equals(trgCol)) cols[i++] = s;
         } else cols = listColumn.toArray(new String[listColumn.size()]);
+        
         //---------------------------------------------------------------
         tableModel.setColumnIdentifiers(cols);
-        fromDB = globVar.DB.getData(table);//, listColumn, "id");//, col, val);
-        comment = globVar.DB.getCommentTable(table);
-        //fromDB.forEach((rowData) -> tableModel.addRow(rowData));
         tableSize = fromDB.size();
         reSetTableContent(val);
         qCol = cols.length;
@@ -54,6 +52,16 @@ public final class SimpleTable {
         if (tableSize > 0) {
             TableTools.setAlignCols(fromDB.get(0), align);
         }
+    }
+    
+    // --- запрос к базе ---
+    private boolean getReauestBase(String table){
+        if(!globVar.DB.isConnectOK())return false;
+        listColumn = globVar.DB.getListColumns(table);
+        if(listColumn==null || listColumn.isEmpty())return false;
+        fromDB = globVar.DB.getData(table);//, listColumn, "id");//, col, val);
+        comment = globVar.DB.getCommentTable(table);
+        return true;
     }
 
     public void setSimpleTableSettings(JTable jTable1) {

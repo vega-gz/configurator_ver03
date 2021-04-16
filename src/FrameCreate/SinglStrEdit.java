@@ -126,7 +126,6 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         }
         // это костыль или на оборот нормальное(вообще это уставки я так понимаю)
         if (linkTable == null & trgCol == null){ // если нет ни каких записей в нодах к Сигналу
-        
             relatedTable = title;               // Запрос к базе по заголвку который передали 
             st = new SimpleTable(relatedTable, null, null);
             jTable1 = new JTable();
