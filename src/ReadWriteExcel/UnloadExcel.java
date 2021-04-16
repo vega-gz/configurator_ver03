@@ -56,6 +56,24 @@ public final class UnloadExcel {
         }
         return error;
     }
+    public boolean runUnloadSheet(
+            //ProgressBar ProgressBar1,
+            String nameTable){//создание книги с одним листом
+        boolean error = true;
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        ArrayList<String> tableList = globVar.DB.getListTable();
+        for (int i=0;i<tableList.size();i++){
+            String name_list = tableList.get(i);
+            if(name_list.equals(nameTable)){
+                if (createExcelSheet(name_list, workbook) == false) {
+                    System.out.println("not find Table" +" "+ name_list);
+                    error = false;
+                }
+            }
+           // ProgressBar1.setVal((int) ( (i+1) * 100.0 / tableList.size()));
+        }
+        return error;
+    }
 
     /**
      * Метод создает книгу с данными ,выгружаемыми из БД
@@ -106,7 +124,7 @@ public final class UnloadExcel {
                 int z=fullNameTable.indexOf("Modbus:");
                colName=fullNameTable.substring(z+"Modbus:".length());
                 }
-               // colName=db.getCommentTable(nameTable);
+               
             }
             
             int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд

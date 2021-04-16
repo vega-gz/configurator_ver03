@@ -1,10 +1,12 @@
 package FrameCreate;
 
+import DataBaseTools.DataBase;
 import Generators.Generator;
 import Main.Main_JPanel;
 import static Main.Main_JPanel.getModelTreeNZ;
 import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
+import ReadWriteExcel.UnloadExcel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
@@ -45,6 +47,7 @@ public class TableDB extends javax.swing.JFrame {
     TableTools tt=new TableTools();
     Main_JPanel mj=new Main_JPanel();
     FileManager fm=new FileManager();
+    DataBase db=new DataBase();
     ArrayList<String[]> newName=new ArrayList<>();
     public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
@@ -53,8 +56,11 @@ public class TableDB extends javax.swing.JFrame {
     public int tableSize;
     String[] cols;
     String comment;
+    ArrayList<String[]> listTable;
     ArrayList<String[]> fromDB;
     ArrayList<String[]> listItemList = new ArrayList<>();
+    ArrayList<String[]>cngList=new ArrayList<>();//массив строк с изменениями
+    ArrayList<String[]>oldList=new ArrayList<>();//массив строк без изменений
     public int[] colsWidth;
     int[] align;
     int qCol;
@@ -75,6 +81,7 @@ public class TableDB extends javax.swing.JFrame {
         tableName = table;
         if(!globVar.DB.isConnectOK())return;
         List<String> listColumn = globVar.DB.getListColumns(table);
+        listTable =db.getData(tableName);
         if(listColumn==null || listColumn.isEmpty())return;
         cols = listColumn.toArray( new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);
@@ -97,6 +104,7 @@ public class TableDB extends javax.swing.JFrame {
         
         RegistrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
         closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
+        
         
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут броблема фокуса
@@ -140,6 +148,8 @@ public class TableDB extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -230,7 +240,7 @@ public class TableDB extends javax.swing.JFrame {
             .addGroup(jDialog1_DownloadSheetExcelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                     .addGroup(jDialog1_DownloadSheetExcelLayout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,7 +259,7 @@ public class TableDB extends javax.swing.JFrame {
                 .addGroup(jDialog1_DownloadSheetExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5)
                     .addComponent(jButton4))
-                .addGap(0, 227, Short.MAX_VALUE))
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -352,6 +362,20 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Загрузить данные в таблицу");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Выгрузить данные из таблицы");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -361,16 +385,24 @@ public class TableDB extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1559, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
                 .addContainerGap())
         );
 
@@ -579,7 +611,7 @@ public class TableDB extends javax.swing.JFrame {
             if(!Tools.isDesDir()) return;
             int ret = 1;
             try {
-                ret = Generator.genTypeFile(this, jProgressBar1);
+                ret = Generator.genTypeFile(TableDB.this, jProgressBar1);
             } catch (IOException ex) {
                 FileManager.loggerConstructor(ex.toString());
             }
@@ -690,6 +722,7 @@ public class TableDB extends javax.swing.JFrame {
         JFrame changeComm = new TextEdit("Редактор комментария", this, false);
         changeComm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         changeComm.setVisible(true);
+       
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -761,7 +794,7 @@ public class TableDB extends javax.swing.JFrame {
             if (tableSize > 0) {
                 TableTools.setAlignCols(fromDB.get(0), align);
             }
-
+            
             jTable1.setModel(tableModel);
 
             TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут проблема фокуса
@@ -776,12 +809,13 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       //должна быть замена в файлах(здесь)точнее вызов метода
-        fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);//запускаем метод переименования
-        
-        
-        
         TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
+        ArrayList<String[]>chgLTable=db.getData(tableName);
+        cngList= TableTools.getCngRows(listTable,chgLTable,true);//возвращаем массив строк в которые произошли изменения
+        oldList=TableTools.getCngRows(listTable,chgLTable,false);
+        
+        fm.ChangefFileWBase(globVar.desDir, cngList,oldList, tableName,jProgressBar1);//запускаем метод переименования
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
@@ -813,7 +847,8 @@ public class TableDB extends javax.swing.JFrame {
         
         DoIt di = () -> {
             String ret = null;
-            ret = RWExcel.ReadExelFromConfig(pathFileExcell, sheetExcel, tableName, pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+           
+            ret = RWExcel.ReadExcelSheet(pathFileExcell, sheetExcel, tableName); // вызов фукции с формированием базы по файлу конфигурации
             
             if (ret != null) {
                 JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
@@ -835,11 +870,35 @@ public class TableDB extends javax.swing.JFrame {
         jDialog1_DownloadSheetExcel.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       excel = FileManager.getChoiserExcelFile(); //  Отдельный метод выбора Excel файла
+        if (excel == null) return;
+        // TableTools.setFrameListener(jDialog1_DownloadSheetExcel, null, null, null); // слушателей фреймов надо реализовать Jframe
+        jComboBox1.setModel(getComboBoxModelExcell(excel.getAbsolutePath())); // абоненты из базы
+        jDialog1_DownloadSheetExcel.setSize(500, 300);
+        jDialog1_DownloadSheetExcel.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        UnloadExcel loadread = new UnloadExcel();
+         boolean workUploadExcel = loadread.runUnloadSheet(this.tableName());
+           if (workUploadExcel) {
+                JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ошибки в выгрузке.");
+            }
+
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDialog jDialog1_DownloadSheetExcel;
@@ -929,6 +988,7 @@ public class TableDB extends javax.swing.JFrame {
             if(findDataRows.size() > 0) selectRowInTable(findDataRows.get(idArrayFindigData));
         }
     }
+      
     
     // --- выделяет строку в таблице с заданым номером ---
         void selectRowInTable(int row){
@@ -954,6 +1014,7 @@ public class TableDB extends javax.swing.JFrame {
             return null;
         }
         ArrayList<String> abList = RWExcel.getListSheetName(pathExel);
+        abList.add(0,"");
         String[] itemList = abList.toArray( new String[abList.size()]); // преобразовали в массив
         
         return new DefaultComboBoxModel(itemList);

@@ -827,9 +827,6 @@ public class FileManager {
         String comment, alg, newComment, newAlg;
         String[] nameLine;
         boolean isErr = false;
-        /**
-         * пробегаемся по файлам в поисках соответствия
-         */
         for (File findType : filesInDirectory) {
             nameFile = findType.getName();//имя файла с расширением(в котором в данный момент ищем)
             String nT = "T_" + nameTable;
@@ -865,6 +862,48 @@ public class FileManager {
             }
 
         }
+        return isErr;
+    }
+    public  boolean ChangefFileWBase(String dir, ArrayList<String[]> name,ArrayList<String[]>oldname, String nameTable, JProgressBar jProgressBar1) {//newName---массив замен   Name---массив из БД
+        File[] filesInDirectory = new File(dir + File.separator + "Design").listFiles();//получаем список элементов по указанному адресу
+        FileManager fm = new FileManager();
+        XMLSAX xmlsax = new XMLSAX();
+        String nameFile = "";
+        String alg, newComment, newAlg;
+        boolean isErr = false;
+        /**
+         * пробегаемся по файлам в поисках соответствия
+         */
+        for (File findType : filesInDirectory) {
+            nameFile = findType.getName();//имя файла с расширением(в котором в данный момент ищем)
+            String nT = "T_" + nameTable;
+            int ntl = nT.length();
+            int nfl = nameFile.length();
+            if ((nfl >= ntl + 5) && (nameFile.substring(0, ntl).equalsIgnoreCase(nT)) && (nameFile.substring(nfl - 5).equalsIgnoreCase(".type"))) {
+                Node typeNoode = xmlsax.readDocument(dir + File.separator + "Design" + File.separator + nameFile);//открываем файл
+                for (int j = 0; j < name.size(); j++) {//ищем строку в файле необходимую
+                    //----выполняем присваивание из массива каждому элементу---
+                    alg = oldname.get(j)[2];
+                    newComment = name.get(j)[1];
+                    newAlg = name.get(j)[2];
+                    //---находим ноду по атрибуту Name(алгоритмическое имя)
+                    String argLine[] = {"Field", "Name", alg};
+                    Node find = xmlsax.findNodeAtribute(argLine);
+                    //---если нашли ноду совершаем замену
+                    if (find != null) {
+                        xmlsax.editDataAttr(find, "Name", newAlg);//заменяем алгоритмическое имя
+                        xmlsax.editDataAttr(find, "Comment", newComment);//заменяем русское имя
+                    }
+                    if (jProgressBar1 != null) {
+                        jProgressBar1.setValue((int) ((j + 1) * 100.0 / name.size()));
+                    }
+                }
+                xmlsax.writeDocument(globVar.desDir + File.separator + "Design" + File.separator + nameFile);
+                System.out.println("");
+        
+            }
+        }
+        System.out.println("");
         return isErr;
     }
 
