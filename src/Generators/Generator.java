@@ -546,6 +546,7 @@ public class Generator {
                     boolean findNodeVar = false;
                     String uuidVarDeclaration = UUID.getUIID();
                     String nameVarDeclaration = HMIcfg.getDataAttr(n, "Name");
+                    
                     Connection sigToConnect = new Connection(nameVarDeclaration); // структура для коннекта сигналов
                     sigToConnect.setUUIDVarDeclaration(uuidVarDeclaration);     // вносим 
                     connectionsSigs.add(sigToConnect);
@@ -676,9 +677,10 @@ public class Generator {
                 }
 
                 // конструируем ФБ
+                String nameFB = abonent + subAb + typeGCT + "_" + i; // формируем имя сигнала
                 FBV objectFB = new FBV();// Объект FB
                 String fbUUID = UUID.getUIID().toUpperCase();
-                String[] fbData = {"FB", "Name", abonent + subAb + typeGCT + "_" + i,
+                String[] fbData = {"FB", "Name", nameFB,
                     "Type", typeGCT,
                     "TypeUUID", uuidGCT,
                     "UUID", fbUUID,
@@ -826,7 +828,8 @@ public class Generator {
                 
                 if (isAlarm & c.getName().equals("NameRU")) continue;  // так же как ниже
                     connects[2] = c.getName();
-                    connects[4] = nameGCT + i + "." + c.getName();
+                    //connects[4] = nameGCT + i + "." + c.getName();
+                    connects[4] = nameFB + "." + c.getName();
                     connects[6] = c.getUUIDVarDeclaration();                        // Так же и тут зачем уид иной
                     connects[8] = fbUUID + "." + c.getUUIDOrigSignal();
                     HMIsax.insertChildNode(DataConnections, connects);  //добавили его в ноду
@@ -845,28 +848,27 @@ public class Generator {
                     if (folderNodeName == null) {//Если нет имени фолдера листов сигналов - значит мы делаем файл для импорта
                         FBNetwork.appendChild(DataConnections);
                         HMIsax.writeDocument(targetFile);
-                        HMIsax.clear();
+                        
                         targetFile = targetFile.replace("_" + pageCnt + ".txt", "_" + (pageCnt + 1) + ".txt");
                         pageCnt++;
                         pageName = nameGCT + pageCnt;
-                        Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
-                        gctNode = HMIsax.returnFirstFinedNode(hmiRoot, whoTypeFBType);
-
-                        // Тупое решение по пока что бы не потерятся( берем тлоько нужную ноду)
-                        HMIsax.cleanNode(hmiRoot);
-                        hmiRoot.appendChild(gctNode);
-
+                        
+                        //Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
+                        gctNode = HMIsax.returnFirstFinedNode(HMIsax.getRootNode(), whoTypeFBType);
+                        
+                        for (Node n : HMIsax.getHeirNode(gctNode)) {
+                            if(n.getNodeName().equals("FBNetwork")){
+                                HMIsax.removeNode(n);
+                                FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
+                                break;
+                            }
+                        }
+//                        // Тупое решение по пока что бы не потерятся( берем тлоько нужную ноду)
+//                        HMIsax.cleanNode(hmiRoot);
+//                        hmiRoot.appendChild(gctNode);
                         HMIsax.setDataAttr(gctNode, "Name", pageName);
                         String sheetUUID = null;
-                        
-//                        findInBig[2] = pageName;
-//                        Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);
-//                        if (myPage != null) {
-//                            sheetUUID = bigSax.getDataAttr(myPage, "UUID");
-//                        }
-//                        if (sheetUUID == null) {
-//                            sheetUUID = UUID.getUIID();
-//                        }
+
                         
                         // новый способ поиска  нужного блока в нодах
                         CompositeFBType myPageFB = new CompositeFBType(bigSax, pageName);
@@ -877,7 +879,7 @@ public class Generator {
                         }
                         
                         HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
-                        FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
+                        //FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
                         DataConnections = HMIsax.createNode("DataConnections");
                         fbX = 0;
                         fbY = 0;
