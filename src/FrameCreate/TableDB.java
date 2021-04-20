@@ -7,6 +7,7 @@ import static Main.Main_JPanel.getModelTreeNZ;
 import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
+import Settings.AddGenData;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
@@ -18,8 +19,10 @@ import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;
 import globalData.globVar;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,12 +46,12 @@ import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
-   
-    TableTools tt=new TableTools();
-    Main_JPanel mj=new Main_JPanel();
-    FileManager fm=new FileManager();
-    DataBase db=new DataBase();
-    ArrayList<String[]> newName=new ArrayList<>();
+
+    TableTools tt = new TableTools();
+    Main_JPanel mj = new Main_JPanel();
+    FileManager fm = new FileManager();
+    DataBase db = new DataBase();
+    ArrayList<String[]> newName = new ArrayList<>();
     public MyTableModel tableModel = new MyTableModel();
     JPopupMenu popupMenu = new JPopupMenu();
     public boolean isChang = false;
@@ -59,8 +62,8 @@ public class TableDB extends javax.swing.JFrame {
     ArrayList<String[]> listTable;
     ArrayList<String[]> fromDB;
     ArrayList<String[]> listItemList = new ArrayList<>();
-    ArrayList<String[]>cngList=new ArrayList<>();//массив строк с изменениями
-    ArrayList<String[]>oldList=new ArrayList<>();//массив строк без изменений
+    ArrayList<String[]> cngList = new ArrayList<>();//массив строк с изменениями
+    ArrayList<String[]> oldList = new ArrayList<>();//массив строк без изменений
     public int[] colsWidth;
     int[] align;
     int qCol;
@@ -72,21 +75,23 @@ public class TableDB extends javax.swing.JFrame {
     File excel = null;                                         // ссылка на документ если отрыли загрузку Excel для таблицы
     String sheetExcel = null;                                  // выбранный лист из Excel
     List<String> listNewColumn = new ArrayList<>();             // новые колонки при добавление в таблицу
-   
+
     public TableDB(javax.swing.JTree jTree, String table) {
-        
-        
+
         jTree1 = jTree;
-        
+
         tableName = table;
-        if(!globVar.DB.isConnectOK())return;
+        if (!globVar.DB.isConnectOK()) {
+            return;
+        }
         List<String> listColumn = globVar.DB.getListColumns(table);
-        listTable =db.getData(tableName);
-        if(listColumn==null || listColumn.isEmpty())return;
-        cols = listColumn.toArray( new String[listColumn.size()]);
+        listTable = db.getData(tableName);
+        if (listColumn == null || listColumn.isEmpty()) {
+            return;
+        }
+        cols = listColumn.toArray(new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);
-        
-        
+
         fromDB = globVar.DB.getData(table);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));
         comment = globVar.DB.getCommentTable(table);
@@ -94,37 +99,44 @@ public class TableDB extends javax.swing.JFrame {
         qCol = listColumn.size();
         align = new int[qCol];
         colsWidth = new int[qCol];
-        
+
         TableTools.setWidthCols(cols, tableModel, colsWidth, 7.8);
-        if(tableSize>0) TableTools.setAlignCols(fromDB.get(0), align);
- 
+        if (tableSize > 0) {
+            TableTools.setAlignCols(fromDB.get(0), align);
+        }
+
         initComponents();
-        
-        
-        
-        RegistrationJFrame rgf = (JFrame jf) ->{ listJF.add(jf); };
-        closeJFrame cjf = ()->{ for(JFrame jf: listJF) jf.setVisible(false);};
-        
-        
+
+        RegistrationJFrame rgf = (JFrame jf) -> {
+            listJF.add(jf);
+        };
+        closeJFrame cjf = () -> {
+            for (JFrame jf : listJF) {
+                jf.setVisible(false);
+            }
+        };
+
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут броблема фокуса
         TableTools.setColsEditor(table, cols, fromDB, jTable1, listItemList);
-        
+        jMenu5.setEnabled(false);
+        jMenu6.setEnabled(false);
+        jMenu8.setEnabled(false);
+        jMenu9.setEnabled(false);
+
         //Лямбда для операций при закрытии окна архивов
-        SaveFrameData sfd = ()->{
+        SaveFrameData sfd = () -> {
             TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
         };
-        isCange ich = ()->{
-            return compareTable(fromDB,tableModel);
+        isCange ich = () -> {
+            return compareTable(fromDB, tableModel);
         };
         TableTools.setFrameListener(this, sfd, ich, cjf);
-        
-        this.setTitle(table + ": "+comment);
+
+        this.setTitle(table + ": " + comment);
+
     }
-    
-   
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,10 +163,15 @@ public class TableDB extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -164,6 +181,9 @@ public class TableDB extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -383,14 +403,14 @@ public class TableDB extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1559, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1172, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1549, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,6 +442,16 @@ public class TableDB extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenu4.setText("Меню");
+
+        jMenu5.setText("Генерация");
+        jMenu4.add(jMenu5);
+
+        jMenu6.setText("Утилиты");
+        jMenu4.add(jMenu6);
+
+        jMenuBar1.add(jMenu4);
+
         jMenu2.setText("Опции");
 
         jMenuItem9.setText("Изменить комментарий к таблице");
@@ -440,15 +470,20 @@ public class TableDB extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem10);
 
-        jMenuItem11.setText("Добавить столбец");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem13.setText("Добавить структуру сигналов");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
+                jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem11);
+        jMenu2.add(jMenuItem13);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu7.setText("Настройки");
+
+        jMenu8.setText("Настройки проекта");
+        jMenu7.add(jMenu8);
 
         jMenu1.setText("Данные");
 
@@ -484,7 +519,7 @@ public class TableDB extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        jMenu7.add(jMenu1);
 
         jMenu3.setText("Таблица");
 
@@ -512,15 +547,32 @@ public class TableDB extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem7);
 
-        jMenuItem12.setText("Загрузить Данные в таблицу из Excel");
+        jMenuItem11.setText("Добавить столбец");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem11);
+
+        jMenu7.add(jMenu3);
+
+        jMenu9.setText("Настройки базы данных");
+        jMenu7.add(jMenu9);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu10.setText("Помощь");
+
+        jMenuItem12.setText("Инструкция по эксплуатации");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem12);
+        jMenu10.add(jMenuItem12);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu10);
 
         setJMenuBar(jMenuBar1);
 
@@ -555,16 +607,16 @@ public class TableDB extends javax.swing.JFrame {
 
     private void jTable1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusLost
         //        evt.getComponent().addKeyListener(new java.awt.event.KeyAdapter() {
-            //            public void keyReleased(java.awt.event.KeyEvent e) {
-                //                System.out.println("Key: " + e.getKeyChar());
-                //            }
-            //        });
-    ////        int i = jTable1.getSelectedRow();
-    ////        int j = jTable1.getSelectedColumn();
-    ////        jTable1.getComponentAt(j, i).addKeyListener(new java.awt.event.KeyAdapter() {
+        //            public void keyReleased(java.awt.event.KeyEvent e) {
+        //                System.out.println("Key: " + e.getKeyChar());
+        //            }
+        //        });
+        ////        int i = jTable1.getSelectedRow();
+        ////        int j = jTable1.getSelectedColumn();
+        ////        jTable1.getComponentAt(j, i).addKeyListener(new java.awt.event.KeyAdapter() {
         ////            public void keyReleased(java.awt.event.KeyEvent e) {
-            ////                System.out.println("Key: " + e.getKeyChar());
-            ////            }
+        ////                System.out.println("Key: " + e.getKeyChar());
+        ////            }
         ////        });
         //        System.out.println("Component: " + evt.getComponent());
     }//GEN-LAST:event_jTable1FocusLost
@@ -573,76 +625,83 @@ public class TableDB extends javax.swing.JFrame {
         //        int i = jTable1.getSelectedRow();
         //        int j = jTable1.getSelectedColumn();
         //        jTable1.getComponentAt(j, i).addKeyListener(new java.awt.event.KeyAdapter() {
-            //            public void keyReleased(java.awt.event.KeyEvent e) {
-                //                JOptionPane.showMessageDialog(null, "Key: " + e.getKeyChar());
-                //            }
-            //        });
-    //JOptionPane.showMessageDialog(null, "Component: " + jTable1.getComponentAt(j, i) + ", row: " + i + ", col: " + j);
+        //            public void keyReleased(java.awt.event.KeyEvent e) {
+        //                JOptionPane.showMessageDialog(null, "Key: " + e.getKeyChar());
+        //            }
+        //        });
+        //JOptionPane.showMessageDialog(null, "Component: " + jTable1.getComponentAt(j, i) + ", row: " + i + ", col: " + j);
     }//GEN-LAST:event_jTable1FocusGained
 
     // --- переключение по найденным совпадениям ---
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        if(idArrayFindigData >= findDataRows.size() - 1){
+        if (idArrayFindigData >= findDataRows.size() - 1) {
             idArrayFindigData = 0;
-        }
-        else{
+        } else {
             ++idArrayFindigData;
         }
-        if(findDataRows.size() > 0)selectRowInTable(findDataRows.get(idArrayFindigData));
-        
+        if (findDataRows.size() > 0) {
+            selectRowInTable(findDataRows.get(idArrayFindigData));
+        }
+
         //System.out.println(jTable1.getSelectedRows());
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        if(firstClickMouseFind){
+        if (firstClickMouseFind) {
             firstClickMouseFind = false;
             jTextField1.setText(""); // затереть текст при первом наведении мыши
         }
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-          if(!Tools.isDesDir()) return;
+        if (!Tools.isDesDir()) {
+            return;
+        }
         String processName = "Генерация из таблицы";
-        if(globVar.processReg.indexOf(processName)>=0){
+        if (globVar.processReg.indexOf(processName) >= 0) {
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
             return;
         }
         DoIt di = () -> {
-            if(!Tools.isDesDir()) return;
+            if (!Tools.isDesDir()) {
+                return;
+            }
             int ret = 1;
             try {
                 ret = Generator.genTypeFile(TableDB.this, jProgressBar1);
             } catch (IOException ex) {
                 FileManager.loggerConstructor(ex.toString());
             }
-            if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            else if(ret != -2){
+            if (ret == 0) {
+                JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+            } else if (ret != -2) {
                 JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
                 showLogger();
             }
             globVar.processReg.remove(processName);
             jProgressBar1.setValue(0);
-         };
+        };
         BackgroundThread bt = new BackgroundThread("Генерация .type", di);
         bt.start();
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-         String processName = "Генерация из таблицы";
-        if(globVar.processReg.indexOf(processName)>=0){
+        String processName = "Генерация из таблицы";
+        if (globVar.processReg.indexOf(processName) >= 0) {
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
             return;
         }
         DoIt di = () -> {
             int ret = 0;
             try {
-                ret= Generator.genSTcode(this, jCheckBox1.isSelected(), jProgressBar1);
+                ret = Generator.genSTcode(this, jCheckBox1.isSelected(), jProgressBar1);
             } catch (IOException ex) {
-               // Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                // Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            else if(ret == -1) {
+            if (ret == 0) {
+                JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+            } else if (ret == -1) {
                 JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
                 showLogger();
             }
@@ -655,9 +714,11 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       if(!Tools.isDesDir()) return;
+        if (!Tools.isDesDir()) {
+            return;
+        }
         String processName = "Генерация из таблицы";
-        if(globVar.processReg.indexOf(processName)>=0){
+        if (globVar.processReg.indexOf(processName) >= 0) {
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
             return;
         }
@@ -668,14 +729,15 @@ public class TableDB extends javax.swing.JFrame {
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(retHW == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
-            else if(retHW != -2) {
+            if (retHW == 0) {
+                JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
+            } else if (retHW != -2) {
                 JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
                 showLogger();
             }
             globVar.processReg.remove(processName);
             jProgressBar1.setValue(0);
-         };
+        };
         BackgroundThread bt = new BackgroundThread("Генерация HW", di);
         bt.start();
         globVar.processReg.add(processName);
@@ -683,37 +745,40 @@ public class TableDB extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         String processName = "Генерация из таблицы";
-        if(globVar.processReg.indexOf(processName)>=0){
+        if (globVar.processReg.indexOf(processName) >= 0) {
             JOptionPane.showMessageDialog(null, "Запуск нового процесса генерации заблокирован до окончания предыдущей генерации");
             return;
         }
         DoIt di = () -> {
-            if(!Tools.isDesDir()) return;
+            if (!Tools.isDesDir()) {
+                return;
+            }
             String retHMI = null;
             try {
                 retHMI = Generator.genHMI(this, jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if(retHMI==null) {
+            if (retHMI == null) {
                 JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
                 showLogger();
+            } else if (!"".equals(retHMI)) {
+                JOptionPane.showMessageDialog(null, "Создано " + retHMI); // Это сообщение 
             }
-            else if(!"".equals(retHMI)) JOptionPane.showMessageDialog(null, "Создано "+retHMI); // Это сообщение 
             jProgressBar1.setValue(0);
             globVar.processReg.remove(processName);
-         };
+        };
         BackgroundThread bt = new BackgroundThread("Генерация HMI", di);
         bt.start();
         globVar.processReg.add(processName);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-      TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
+        TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-       JFrame changeComm = new TextEdit("Редактор названия таблицы", this, true);
+        JFrame changeComm = new TextEdit("Редактор названия таблицы", this, true);
         changeComm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         changeComm.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
@@ -722,14 +787,15 @@ public class TableDB extends javax.swing.JFrame {
         JFrame changeComm = new TextEdit("Редактор комментария", this, false);
         changeComm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         changeComm.setVisible(true);
-       
+
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-       Object[] options = {"Да", "Нет"};
-        if(1 == JOptionPane.showOptionDialog(null, "Удалить таблицу \""+tableName+"\" из БД?",
-            "Вопрос", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1])
-        ) return;
+        Object[] options = {"Да", "Нет"};
+        if (1 == JOptionPane.showOptionDialog(null, "Удалить таблицу \"" + tableName + "\" из БД?",
+                "Вопрос", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1])) {
+            return;
+        }
         globVar.DB.dropTableWithBackUp(tableName);
         jTree1.setModel(Main_JPanel.getModelTreeNZ());// обновить дерево
 
@@ -752,7 +818,7 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         String nameNewColumn = textField1.getText();
         if (nameNewColumn != null | !nameNewColumn.equals("")) {
             for (int i = 0; i < jTable1.getColumnCount(); i++) {
@@ -766,7 +832,6 @@ public class TableDB extends javax.swing.JFrame {
                 listColumn.add(jTable1.getColumnName(i));
             }
 
-            
             listColumn.add(nameNewColumn);
             listNewColumn.add(nameNewColumn); // Тут просто вносим какие столбцы новые
             if (listColumn == null || listColumn.isEmpty()) {
@@ -779,10 +844,10 @@ public class TableDB extends javax.swing.JFrame {
 
             // вносим данные сращивая массивы Стримами
             for (int i = 0; i < fromDB.size(); i++) {
-                for (String s: listNewColumn) {      // от количества новых столбцов
+                for (String s : listNewColumn) {      // от количества новых столбцов
                     fromDB.set(i, Stream.concat(Arrays.stream(fromDB.get(i)), Arrays.stream(new String[]{""})).toArray(String[]::new)); // замена новым массивом пустые вносим
                 }
-                
+
             }
             comment = globVar.DB.getCommentTable(tableName);
             tableSize = fromDB.size();
@@ -794,7 +859,7 @@ public class TableDB extends javax.swing.JFrame {
             if (tableSize > 0) {
                 TableTools.setAlignCols(fromDB.get(0), align);
             }
-            
+
             jTable1.setModel(tableModel);
 
             TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут проблема фокуса
@@ -809,13 +874,19 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
-        ArrayList<String[]>chgLTable=db.getData(tableName);
-        cngList= TableTools.getCngRows(listTable,chgLTable,true);//возвращаем массив строк в которые произошли изменения
-        oldList=TableTools.getCngRows(listTable,chgLTable,false);
+        ArrayList<Integer>error=Сheck_Tag_Name_PLC();
+        if(error.isEmpty()){
+            TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
+        ArrayList<String[]> chgLTable = db.getData(tableName);
+        cngList = TableTools.getCngRows(listTable, chgLTable, true);//возвращаем массив строк в которые произошли изменения
+        oldList = TableTools.getCngRows(listTable, chgLTable, false);
+        fm.ChangefFileWBase(globVar.desDir, cngList, oldList, tableName, jProgressBar1);//запускаем метод переименования
+        }else{
+            JOptionPane.showMessageDialog(null,"В строках с индексами"+error+ " найдены ошибки.");
+        }
         
-        fm.ChangefFileWBase(globVar.desDir, cngList,oldList, tableName,jProgressBar1);//запускаем метод переименования
-        
+       
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
@@ -826,35 +897,27 @@ public class TableDB extends javax.swing.JFrame {
         sheetExcel = (String) jComboBox1.getSelectedItem();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        excel = FileManager.getChoiserExcelFile(); //  Отдельный метод выбора Excel файла
-        if (excel == null) return;
-        // TableTools.setFrameListener(jDialog1_DownloadSheetExcel, null, null, null); // слушателей фреймов надо реализовать Jframe
-        jComboBox1.setModel(getComboBoxModelExcell(excel.getAbsolutePath())); // абоненты из базы
-        jDialog1_DownloadSheetExcel.setSize(500, 300);
-        jDialog1_DownloadSheetExcel.setVisible(true);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+
         ProgressBar pb = new ProgressBar();
         String processName = "Процесс загрузки страницы из Excel ";
         pb.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         pb.setTitle(processName);
         pb.setVisible(true);
-        
+
         String pathFileExcell = excel.getPath(); // Для лямбды в отдельный блок
-        
+
         DoIt di = () -> {
             String ret = null;
-           
+
             ret = RWExcel.ReadExcelSheet(pathFileExcell, sheetExcel, tableName); // вызов фукции с формированием базы по файлу конфигурации
-            
+
             if (ret != null) {
                 JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
             } else {
-                JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'");
+                FileManager.loggerConstructor("Таблица в которую загружаем данные не совпадает с таблицей из которой грузим данные.");
+                JOptionPane.showMessageDialog(null, "При загрузке были ошибки.Смотри лог-файл");
             }
             pb.setVisible(false);
             globVar.processReg.remove(processName);
@@ -871,8 +934,10 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       excel = FileManager.getChoiserExcelFile(); //  Отдельный метод выбора Excel файла
-        if (excel == null) return;
+        excel = FileManager.getChoiserExcelFile(); //  Отдельный метод выбора Excel файла
+        if (excel == null) {
+            return;
+        }
         // TableTools.setFrameListener(jDialog1_DownloadSheetExcel, null, null, null); // слушателей фреймов надо реализовать Jframe
         jComboBox1.setModel(getComboBoxModelExcell(excel.getAbsolutePath())); // абоненты из базы
         jDialog1_DownloadSheetExcel.setSize(500, 300);
@@ -881,17 +946,36 @@ public class TableDB extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         UnloadExcel loadread = new UnloadExcel();
-         boolean workUploadExcel = loadread.runUnloadSheet(this.tableName());
-           if (workUploadExcel) {
-                JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
-            } else {
-                JOptionPane.showMessageDialog(null, "Ошибки в выгрузке.");
-            }
+        boolean workUploadExcel = loadread.runUnloadSheet(this.tableName());
+        if (workUploadExcel) {
+            JOptionPane.showMessageDialog(null, "Выгрузка в Excel завершена");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ошибки в выгрузке.");
+        }
 
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
-   
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        JFrame createTable = new AddGenData(tableName);
+        createTable.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        createTable.setTitle("Окно создания таблиц");
+        createTable.setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        try {
+            Desktop desktop = Desktop.getDesktop();
+            File file = new File(globVar.myDir + File.separator + "ОписаниеКонфигуратораПроектов.html");
+            URI url = file.toURI();
+            desktop.browse(url);
+        } catch (IOException ex) {
+            Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -904,13 +988,21 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1_DownloadSheetExcel;
     private javax.swing.JDialog jDialog1_add_column;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -931,20 +1023,25 @@ public class TableDB extends javax.swing.JFrame {
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
 
-    boolean  compareTable(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
+    boolean compareTable(ArrayList<String[]> fromDB, DefaultTableModel tableModel) {
         int x = tableModel.getColumnCount();
         int y = tableModel.getRowCount();
-        
-        if(fromDB.size() <= 0 || fromDB.size() != y || fromDB.get(0).length != x) return true; // еще доп проверка от пустых строк от базы
-        for(int i=0;i<y;i++)
-            for(int j=0;j<x;j++){
+
+        if (fromDB.size() <= 0 || fromDB.size() != y || fromDB.get(0).length != x) {
+            return true; // еще доп проверка от пустых строк от базы
+        }
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
                // System.out.println(tableModel.getValueAt(i, j));
-               // System.out.println(fromDB.get(i)[j]);
-                if(!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) return true;
+                // System.out.println(fromDB.get(i)[j]);
+                if (!fromDB.get(i)[j].equals(tableModel.getValueAt(i, j))) {
+                    return true;
+                }
             }
+        }
         return false;
     }
-  
+
     public String tableName() {
         return tableName;
     }
@@ -953,28 +1050,34 @@ public class TableDB extends javax.swing.JFrame {
         tableSize = fromDB.size();
         return tableSize;
     }
-    
-    public String getCell(String colName, int i){
+
+    public String getCell(String colName, int i) {
         int j = getNumberCol(colName);
-        if(j<0) return null;
+        if (j < 0) {
+            return null;
+        }
         return (String) tableModel.getValueAt(i, j);
     }
-    
-    int getNumberCol(String colName){
-        for(int i=0; i < cols.length; i++) if(cols[i].equals(colName)) return i;
+
+    int getNumberCol(String colName) {
+        for (int i = 0; i < cols.length; i++) {
+            if (cols[i].equals(colName)) {
+                return i;
+            }
+        }
         return -1;
     }
-    
+
     // --- Поиск с символов в поле --
     void compareFielTextToDataCell(String str) {
-        
+
         if (str != null & !str.equals("")) {
             Pattern pattern1 = Pattern.compile("^(.*" + str + ").*$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
             findDataRows.clear();
-    
+
             for (int i = 0; i < tableModel.getColumnCount(); i++) { // пробежим столбцам
                 for (int j = 0; j < globVar.namecolumnT.length; j++) { // какие название столбцов сравнивать
-                    if(tableModel.getColumnName(i).equalsIgnoreCase(globVar.namecolumnT[j])){ 
+                    if (tableModel.getColumnName(i).equalsIgnoreCase(globVar.namecolumnT[j])) {
                         for (int k = 0; k < tableModel.getRowCount(); k++) {    // нашли столбец бежим по строкам уже
                             String dataT = tableModel.getValueAt(k, i);                        // порядок строка - колонка
                             Matcher matcher1 = pattern1.matcher(dataT);
@@ -983,40 +1086,61 @@ public class TableDB extends javax.swing.JFrame {
                             }
                         }
                     }
-                } 
+                }
             }
-            if(findDataRows.size() > 0) selectRowInTable(findDataRows.get(idArrayFindigData));
+            if (findDataRows.size() > 0) {
+                selectRowInTable(findDataRows.get(idArrayFindigData));
+            }
         }
     }
-      
-    
+
     // --- выделяет строку в таблице с заданым номером ---
-        void selectRowInTable(int row){
+    void selectRowInTable(int row) {
         jTable1.setColumnSelectionAllowed(false); // отключение по столбцам выделение
         ListSelectionModel selModel = jTable1.getSelectionModel();
         selModel.clearSelection();
         selModel.addSelectionInterval(row, row);
-        jTable1.scrollRectToVisible(jTable1.getCellRect(row,0, true));  // скролю на нужное
-    
+        jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true));  // скролю на нужное
+
     }
-    
+
     // --- Выводит окно логера ---
-    private void showLogger(){
+    private void showLogger() {
         LogerViewerFrame lvf = new LogerViewerFrame();
         TableTools.setFrameListener(lvf, null, null, null); // слушателей фреймов
         lvf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         lvf.setVisible(true);
     }
-    
-      // -- создания списка листов Excell для передачи в ComboBox -- 
-    public ComboBoxModel getComboBoxModelExcell(String pathExel) { 
+
+    // -- создания списка листов Excell для передачи в ComboBox -- 
+    public ComboBoxModel getComboBoxModelExcell(String pathExel) {
         if (pathExel == null) {
             return null;
         }
         ArrayList<String> abList = RWExcel.getListSheetName(pathExel);
-        abList.add(0,"");
-        String[] itemList = abList.toArray( new String[abList.size()]); // преобразовали в массив
-        
+        abList.add(0, "");
+        String[] itemList = abList.toArray(new String[abList.size()]); // преобразовали в массив
+
         return new DefaultComboBoxModel(itemList);
     }
+
+    //--метод проверки  на недопустимые символы(кириллица и все символы кроме '_')
+    public ArrayList<Integer> Сheck_Tag_Name_PLC() {
+        ArrayList<Integer> num_error=new ArrayList<>();
+        Pattern pattern2=Pattern.compile(".*[^_a-zA-Z0-9].*$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+        for (int i = 0; i < tableModel.getColumnCount(); i++) {
+            if (tableModel.getColumnName(i).equals("TAG_NAME_PLC")) {//нашли столбец
+                for (int j = 0; j < tableModel.getRowCount(); j++) {//бежим по нему
+                    String tag_Value = tableModel.getValueAt(j, i);
+                    Matcher symbol=pattern2.matcher(tag_Value);
+                    if (symbol.matches()) {
+                       num_error.add(j+1);
+                    }
+                }
+            }
+        }
+        return num_error;
+
+    }
+
 }

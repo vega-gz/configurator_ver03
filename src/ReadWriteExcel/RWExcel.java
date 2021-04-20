@@ -779,6 +779,25 @@ public class RWExcel {
         
         return tCnt;
     }
+       public static String[] getExcelChild(String typeTable,String[] tableCols,ArrayList<String> nColList ) {//возвращает детей EXCEL ноды
+           XMLSAX xmlsax=new XMLSAX();
+        ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);//получили детей ноды ConfigSignals
+        ArrayList<Node> eList;
+        for (int i = 0; i < nList.size(); i++) {
+            if (nList.get(i).getNodeName().equals(typeTable)) {
+                Node excel = xmlsax.returnFirstFinedNode(nList.get(i), "EXEL");//нашли ноду
+                eList = xmlsax.getHeirNode(excel);
+                for (int j = 0; j < eList.size(); j++) {//получили детей ноды excel ,в которых хранятся наименования столбцов
+                    String nCol = xmlsax.getDataAttr(eList.get(j), "nameColumnPos");
+                    nColList.add(nCol);
+                }
+            }
+        }
+        tableCols = nColList.toArray(new String[nColList.size()]);
+
+        return tableCols;
+    }
+
     
 
     public void fillTag_NAME_PLC() {

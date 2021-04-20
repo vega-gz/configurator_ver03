@@ -1,5 +1,6 @@
 package Main;
 
+import Settings.CreateFTable;
 import DataBaseTools.DataBase;
 import DataBaseTools.MergeBases;
 import FrameCreate.*;
@@ -37,7 +38,7 @@ import java.net.URISyntaxException;
 public final class Main_JPanel extends javax.swing.JFrame {
 
     String url, nameProject, user, pass;
-   
+    
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
     TableTools tt=new TableTools();
@@ -49,6 +50,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     public Main_JPanel() {
         globVar.DB = new DataBase();
+       
         initComponents();
         jTextField1.setText(globVar.desDir);
         if (Tools.isDB()) {
@@ -59,6 +61,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     public void initMyComponent() {
         jTextField1.setText(" " + globVar.desDir);
+        jMenuItem15.setEnabled(false);
+        jMenuItem16.setEnabled(false);
+        jMenuItem17.setEnabled(false);
+        jMenu12.setEnabled(false);
+        jMenu13.setEnabled(false);
         listDropT = globVar.DB.getListTable(); // получи список таблиц при включении
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
         DataBase.createAbonentTable();//
@@ -100,6 +107,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -126,14 +134,21 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuLoger = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu12 = new javax.swing.JMenu();
+        jMenu13 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -361,6 +376,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenuItem5.setText("jMenuItem5");
 
+        jMenu10.setText("jMenu10");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -581,19 +598,41 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu11.setText("Опции");
+
+        jMenuItem15.setText("Изменить комментарий к таблице");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem15);
+
+        jMenuItem16.setText("Замена имен в файлах через базу данных");
+        jMenu11.add(jMenuItem16);
+
+        jMenuItem17.setText("Добавить структуру сигналов");
+        jMenu11.add(jMenuItem17);
+
+        jMenuBar1.add(jMenu11);
+
         jMenu7.setText("Настройки");
 
         jMenu1.setText("Настройки проекта");
 
         jMenu5.setText("Работа с таблицами");
 
-        jMenuItem13.setText("Создать таблицу");
+        jMenu9.setText("Создать таблицу");
+
+        jMenuItem13.setText("Новую");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem13);
+        jMenu9.add(jMenuItem13);
+
+        jMenu5.add(jMenu9);
 
         jMenuItem7.setText("Инспекция таблиц");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -635,6 +674,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenu7.add(jMenu1);
+
+        jMenu12.setText("Данные");
+        jMenu7.add(jMenu12);
+
+        jMenu13.setText("Таблица");
+        jMenu7.add(jMenu13);
 
         jMenu4.setText("Настройки базы данных");
 
@@ -937,6 +982,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         SimpleFrame sf = new SimpleFrame("Abonents",jComboBox2);
         sf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         sf.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
    //Переименование IntFile
@@ -1121,6 +1167,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
     
     public ArrayList<String> getTableNode(){//метод получения нод для построения таблиц AI AO DI DO  и тд
         ArrayList<String> nodeTable=new ArrayList<>();
@@ -1256,6 +1306,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -1263,6 +1317,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -1270,6 +1325,9 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
