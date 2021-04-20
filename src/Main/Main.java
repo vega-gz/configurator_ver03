@@ -11,6 +11,7 @@ public class Main {
     //static DataBase workbase =  DataBase.getInstance();
 
     public static void main(String[] args) {
+        
         XMLSAX.getConnectBaseConfig("Config.xml");
         globVar.myDir = System.getProperty("user.dir");
         globVar.sax = new XMLSAX(); // Класс работы с XML  static что бы не парится

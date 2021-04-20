@@ -78,6 +78,12 @@ public class XMLSAX {
         }
         return root;
     }
+    
+    // --- вернуть имя файла ---
+    public String getNameFile(){
+        return pathWF;
+    }
+    
 //    public Node readDocument11(String patchF) {
 //        pathWF = patchF;
 //        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -183,6 +189,11 @@ public class XMLSAX {
         } catch (ParserConfigurationException ex) {
             FileManager.loggerConstructor(nameElement + "not created but XML document null!");
         }
+        return root;
+    }
+    
+    // --- получить корневую Ноду ---
+    public Node  getRootNode(){
         return root;
     }
 

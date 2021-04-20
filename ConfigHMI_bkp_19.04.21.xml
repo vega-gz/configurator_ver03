@@ -109,9 +109,9 @@
 		</GenHMI>
 	</mb_DO>
 	<APS>
-		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
+		 <GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
-				<PrefStr value="APS." Type="STRING"/>     <!--только value переменная -->
+				<PrefStr value="APS." Type="STRING"/>   <!-- только value переменная -->
 			</Edit>
 			<Disable> 
 				<Num/>
@@ -156,15 +156,17 @@
 					</switch>
 				</TAG>
 			</additionalVar>	
-		</GenHMI> 
+		</GenHMI>
+		
 		<GenHMI name="PPZ_" maxY="40" maxX="1" startPosX="20" startPosY="10" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" isAlarm="false" > 		
+			<disableVarDeclaration>
+				<NameRU/>
+			</disableVarDeclaration>
 			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<!-- <VarDeclaration InitialValue="''" Name="NameRU" Type="STRING" /> -->
-				<VarDeclaration InitialValue="''" Name="modePZ"/>
-				<VarDeclaration InitialValue="''" Name="Reset_PZ"/>
-				<VarDeclaration InitialValue="''" Name="Deblock"/>
-				<VarDeclaration InitialValue="''" Name="ChngAb" />
+				<VarDeclaration InitialValue="''" Name="modePZ" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" />
+				<VarDeclaration InitialValue="''" Name="Reset_PZ" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID=""/>
+				<VarDeclaration InitialValue="''" Name="Deblock" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID=""/>
+				<VarDeclaration InitialValue="''" Name="ChngAb" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID=""/>
 			</addVarDeclaration>
 			<Disable>
 				<hint/>
@@ -174,74 +176,37 @@
 				<PrefStr/>
 				<TagID/>
 			</Disable>
-			<!--IF cond="Status" val="ПС"> так не работает, спросить у Димы
-				<BREAK/>
-				<ELSE/>
-			</IF-->
 			<IF cond="Status" val="ПС">
-				<BREAK/>
-				<ELSE/>
-			</IF>
-			<IF cond="Status" val="АС">
-				<BREAK/>
-				<ELSE/>
-			</IF>	
-			<!--IF cond="Status" val="ПС">
 				<BREAK/>
 				<ELSE>
 					<IF cond="Status" val="АС">
 						<BREAK/>
 					</IF>
 				</ELSE>	
-			</IF-->				
+			</IF>				
 			<additionalVar>
 				<Delay tableCol="Время_задержки" Type="STRING"/> 
+				<!--<NameAS tableCol="TAG_NAME_PLC" Type="STRING"/> -->
 				<NameSigD Type="STRING"/>
-				<!--IF cond="Источник" val="*.PV"> ***************************Рабочий вариант
+				<IF cond="Источник" val="*.PV"> <!-- если заканчивается на .PV-->
 					<NameSigA Type="STRING" tableCol="Источник"/>
 					<NameUst Type="STRING" tableCol="TAG_NAME_PLC"/>
 					<Edit>
-						<NameSigD value="" Type="STRING" />					
+						<NameSigD value="test666" Type="STRING" />
 					</Edit>	
 					<ELSE> 
 						<Edit>
-							<NameSigA value="" Type="STRING" />
+							<NameSigA value="test667" Type="STRING" />
 						</Edit>	
 						<IF cond="Источник" val="">
+							<!--<NameSigD Type="STRING" text="_APS." tableCol="TAG_NAME_PLC"/>	 придумать как срастить в строку -->
 							<Edit>
-								<NameSigD text="APS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+								<NameSigD text="_APS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
 							</Edit>	
 								<ELSE>
-									<Edit>									
-										<NameSigD Type="STRING" tableCol="Источник"/>	
-									</Edit>											
-								</ELSE> 
-						</IF>
-					</ELSE>
-				</IF-->
-				<NameSigA Type="STRING"/>
-				<NameUst Type="STRING"/>				
-				<IF cond="Источник" val="*.PV">
-					<!--NameSigA Type="STRING" tableCol="Источник"/>
-					<NameUst Type="STRING" tableCol="TAG_NAME_PLC"/-->
-					<Edit>
-						<NameSigA tableCol="Источник" Type="STRING"/>
-						<NameSigD value="" Type="STRING" />	
-						<NameUst tableCol="TAG_NAME_PLC" Type="STRING" />	
-					</Edit>	
-					<ELSE> 
-						<Edit>
-							<NameSigA value="" Type="STRING" />
-							<NameUst value="" Type="STRING" />							
-						</Edit>	
-						<IF cond="Источник" val="">
-							<Edit>
-								<NameSigD text="APS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
-							</Edit>	
-								<ELSE>
-									<Edit>									
-										<NameSigD Type="STRING" tableCol="Источник"/>	
-									</Edit>											
+									<Edit>
+										<NameSigD tableCol="Источник" Type="STRING" /> 
+									</Edit>										
 								</ELSE> 
 						</IF>
 					</ELSE>
@@ -319,7 +284,8 @@
 		</GenHMI>
 	</GR>	
 	<RSR>
-		<GenHMI name="Resource_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="TStatLine_Dint" ruName="Наименование" isAlarm="false">
+		<GenHMI name="Resource_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="TStatLine_Dint" ruName="Наименование" isAlarm="false"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<!---Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" /-->
 			<disableVarDeclaration>
 				<NameRU/>
 			</disableVarDeclaration>
@@ -341,28 +307,4 @@
 			</Edit>
 		</GenHMI>
 	</RSR>
-	<CalcPar> 
-		<GenHMI name="Calc_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_Rool_CalcPar" ruName="Наименование" isAlarm="true">
-			<Hint add0="Наименование" add1=", " add2="Единица_измерения"/>
-			<Disable>
-				<PrefStr/>
-			</Disable>			
-			<additionalVar>
-				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-				<Unit tableCol="Единица_измерения" Type="STRING"/>
-			</additionalVar>
-		</GenHMI>
-		<GenHMI name="SmallCalc_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseCalc" ruName="SmallName"> 
-			<Hint add0="Наименование" add1=", " add2="Единица_измерения"/>
-			<disableVarDeclaration>
-				<NameRU/>
-			</disableVarDeclaration>
-			<Disable>
-				<PrefStr/>
-			</Disable>		
-			<additionalVar>
-				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
-			</additionalVar>
-		</GenHMI>	
-	</CalcPar>
 </ConfigHMI>
