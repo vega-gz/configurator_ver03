@@ -436,7 +436,7 @@ public class Generator {
             String uuidGCT = null;//HMIcfg.getDataAttr(hmiNode, "typeUUID");
             // Поиск переменных ноды в независимости от условия собираем их
 
-            String[] findInBig = new String[3];    // одно из главных параметров по чему осуществляем поиске
+//            String[] findInBig = new String[3];    // одно из главных параметров по чему осуществляем поиске
             if (typeGCT != null) { // сбор данных по головному блоку
 //                findInBig = new String[]{"GraphicsCompositeFBType", "Name", typeGCT};
 //                Node parentHMINode = bigSax.findNodeAtribute(bigRoot, findInBig);   // Ищем  Нужный блок
@@ -511,16 +511,13 @@ public class Generator {
                 hmiRoot.appendChild(gctNode);
 
                 HMIsax.setDataAttr(gctNode, "Name", pageName);
-                String sheetUUID = null;
-                findInBig[2] = pageName; // меняем искомый блок поиска на тот который генерируем
-                Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);  // ищем UUID в головной есть ли такой блок Мнемосхемы который генерируем
+                
+               // findInBig[2] = pageName; // меняем искомый блок поиска на тот который генерируем
+               // Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);  // ищем UUID в головной есть ли такой блок Мнемосхемы который генерируем
 
                 CompositeFBType myPageFB = new CompositeFBType(bigSax, pageName);
-                //System.out.println(bigSax.getNameFile());
+                String sheetUUID = myPageFB.getFBUUID();
 
-                if (myPage != null) {
-                    sheetUUID = bigSax.getDataAttr(myPage, "UUID");
-                }
                 if (sheetUUID == null) {
                     sheetUUID = UUID.getUIID();
                 }
@@ -535,11 +532,6 @@ public class Generator {
                 return null;
             }
 
-//            //Определяем УУИДы этого блока ---
-//            String arrForFindNode[] = {"VarDeclaration", "Name", "NameRu"};
-//            String NameRuUUID = "31E704A94C1D0BCA16C48C8F563CAB4B";
-//            arrForFindNode[2] = "PrefAb";
-//            String PrefAbUUID = "7DF53A3B47B1075B9D3AE78253FC271B";
             // --- Добавить или удалить значения в InputVars ноде графического типа --- 
             ArrayList<Node> varDecListNode = new ArrayList<>();
             ArrayList<Connection> connectionsSigs = new ArrayList<>();       // Список сигналов которые надо соеденить в данном блоке
@@ -605,28 +597,6 @@ public class Generator {
                 }
             }
 
-//            // ---  NZ новый способ поиска полей головного блока---
-//            List<HashMap<String, String>> listSignal = new ArrayList<>();
-//            if (gctNode != null) {
-//                listSignal = getFBInputsVarIEC_HMI(HMIsax, gctNode);           // собрать InputVars какие есть по ноде из файла манекена(HMI_Sheet.txt)
-//            }
-//            HashMap<String, String> nameAndUIIDHeadIEC_HMI = new HashMap<>(); //пройтись по сигналов из манекена
-//            for (HashMap<String, String> h : listSignal) {                // получить уиды из мнемосхемы
-//                boolean UUIDPrefAb = h.get("Name").equals("PrefAb");      // это временное для конкретных сигналов
-//                boolean UUIDNameRU = h.get("Name").equals("NameRU");      // Поиск айди русского имени значения ноды
-//
-//                if (UUIDPrefAb) {
-//                    PrefAbUUID = h.get("UUID");
-//                }
-//                if (UUIDNameRU) {
-//                    NameRuUUID = h.get("UUID");
-//                }
-//
-//                nameAndUIIDHeadIEC_HMI.put(h.get("Name"), h.get("UUID")); // заполняю данными все что было в ноде (в дальшейм для анализа списка) я эьто нигде не использую
-//            }
-
-//            String uuidPrefAbGCT = "notFindFielduuidPrefAbGCT";
-//            String uuidNameRuGCT = "notFindFielduuidNameRuGCT";
                 if (!(typeGCT == null)) {                                       // прогон по файлу если только есть обозначение явно указан type в ноде
                 for (Connection c : connectionsSigs) {                          // Проход по добавленным сигналам
                     for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
@@ -888,14 +858,24 @@ public class Generator {
 
                         HMIsax.setDataAttr(gctNode, "Name", pageName);
                         String sheetUUID = null;
-                        findInBig[2] = pageName;
-                        Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);
-                        if (myPage != null) {
-                            sheetUUID = bigSax.getDataAttr(myPage, "UUID");
-                        }
+                        
+//                        findInBig[2] = pageName;
+//                        Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);
+//                        if (myPage != null) {
+//                            sheetUUID = bigSax.getDataAttr(myPage, "UUID");
+//                        }
+//                        if (sheetUUID == null) {
+//                            sheetUUID = UUID.getUIID();
+//                        }
+                        
+                        // новый способ поиска  нужного блока в нодах
+                        CompositeFBType myPageFB = new CompositeFBType(bigSax, pageName);
+                        sheetUUID = myPageFB.getFBUUID();
+
                         if (sheetUUID == null) {
                             sheetUUID = UUID.getUIID();
                         }
+                        
                         HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
                         FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
                         DataConnections = HMIsax.createNode("DataConnections");
