@@ -111,7 +111,7 @@
 	<APS>
 		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
-				<PrefStr value="APS." Type="STRING"/>     <!--только value переменная -->
+				<PrefStr value="APS." Type="STRING"/>     <!-- только value переменная > -->
 			</Edit>
 			<Disable> 
 				<Num/>
@@ -180,11 +180,11 @@
 			</IF-->
 			<IF cond="Status" val="ПС">
 				<BREAK/>
-				<ELSE/>
+				<!-- <ELSE/> -->
 			</IF>
 			<IF cond="Status" val="АС">
 				<BREAK/>
-				<ELSE/>
+				<!-- <ELSE/> -->
 			</IF>	
 			<!--IF cond="Status" val="ПС">
 				<BREAK/>

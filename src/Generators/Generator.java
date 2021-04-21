@@ -411,8 +411,6 @@ public class Generator {
         ArrayList<Node> hmiNodeList = HMIcfg.getHeirNode(findNode);//Берем всех наследников ноды Таблицы
         String ret = "";
         for (Node hmiNode : hmiNodeList) {
-            //System.out.println(hmiNode.getNodeName()); 
-
             String typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // имя HMI ноды(какой тип блочка может быть в выборе IF-ELSE)
 
             String whoTypeFBType = ""; // Сам тип ноды HMI как будет выглядить блочок
@@ -425,7 +423,6 @@ public class Generator {
 
             boolean isIF = typeGCT == null; // если есть аттрибут type то IF не будет работать(, так ли оно нужно?)
             for (Node findinfIF : HMIcfg.getHeirNode(hmiNode)) { // проходи опять но нодам проверя есть ли 
-                //System.out.println(findinfIF.getNodeName());
                 if (findinfIF.getNodeName().equalsIgnoreCase("IF")) {
                     isIF = true;
                 }
@@ -826,7 +823,7 @@ public class Generator {
                     "", "DestinationUUID", ""};
                 for (Connection c : connectionsSigs) {   
                 
-                if (isAlarm & c.getName().equals("NameRU")) continue;  // так же как ниже
+                //if (isAlarm & c.getName().equals("NameRU")) continue;  // так же как ниже
                     connects[2] = c.getName();
                     //connects[4] = nameGCT + i + "." + c.getName();
                     connects[4] = nameFB + "." + c.getName();
@@ -2177,7 +2174,7 @@ public class Generator {
                 }
             }
         }
-        return null;
+        return nodeProcessing;
     }
 
     // --- регулярка разбора строки VAL условия IF-ELSE (проверка на окончание)---
