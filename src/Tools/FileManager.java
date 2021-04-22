@@ -933,4 +933,22 @@ public class FileManager {
         return excel;
     }
 
+        // --- запись файла строкой (полная перезапись файла данными  )---
+    public static void writeStringInFile(String file, String Data) {
+        FileWriter fooWriter = null;
+        try {
+            File myFoo = new File(file);
+            fooWriter = new FileWriter(myFoo, false); // true to append
+            fooWriter.write(Data);
+            fooWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fooWriter.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

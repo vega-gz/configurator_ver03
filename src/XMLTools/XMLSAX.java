@@ -31,9 +31,14 @@ import org.xml.sax.SAXException;
 import javax.swing.JOptionPane;
 import Tools.FileManager;
 import globalData.globVar;
+import java.io.StringReader;
+import java.io.StringWriter;
 //import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.stream.StreamSource;
 
 public class XMLSAX {
 
@@ -344,14 +349,27 @@ public class XMLSAX {
         if (document == null) {
             return;
         }
-        try {
-            File file = new File(NewPatchWF);
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
-            transformer.transform(new DOMSource(document), new StreamResult(file));
-        } catch (TransformerException e) {
-            e.printStackTrace(System.out);
-        }
+//        try {
+//            File file = new File(NewPatchWF);
+//            String indent = "2";
+//            DOMSource domSource = new DOMSource(document);
+//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//            transformerFactory.setAttribute("indent-number", indent); // Так делаем отступы почему 2 - больший отступ(не работает если не в одну строку)
+//            
+//            Transformer transformer = transformerFactory.newTransformer();
+//            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
+//            transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "yes");
+//            transformer.setOutputProperty("{https://xml.apache.org/xslt}indent-amount", indent);
+//            transformer.transform(domSource, new StreamResult(file));
+//            
+//            System.out.println("XML IN String format is: \n" + prettyFormat());
+//            //System.out.println("XML IN String format is: \n" + conversionsDocumentToString()); 
+//        } catch (TransformerException e) {
+//            e.printStackTrace(System.out);
+//        }
+        
+        // *могут  быть ошибки по этому верхнее пока в коменте*
+        FileManager.writeStringInFile(NewPatchWF, prettyFormat()); // новый метод записи преобразованных данных XML
         // тут возвращаем данные которые удаляли
         if (fixXML != null) {
             try {
@@ -360,6 +378,49 @@ public class XMLSAX {
             } catch (InterruptedException ex) {
                 Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    // --- конвертировать весь документ в Строку(удаляя все \n)---
+    String conversionsDocumentToString(){
+        // тестовое для проверки
+        DOMSource domSource = new DOMSource(document);
+        StringWriter writer = new StringWriter();
+        StreamResult result = new StreamResult(writer);
+        TransformerFactory tf = TransformerFactory.newInstance();
+        tf.setAttribute("indent-number", "2"); // Так делаем отступы почему 2 не знаю
+        Transformer transformer1;
+        try {
+            transformer1 = tf.newTransformer();
+            transformer1.transform(domSource, result);
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (TransformerException e) {
+            e.printStackTrace(System.out);
+        }
+        String xmlClear = writer.toString().replaceAll("\n", "");
+        return xmlClear;
+    }
+    
+     // --- конвертировать весь документ в строку с форматированием для человеческого вида (можно ли сделать не прибигая опять к трансформации)---
+    public String prettyFormat() {
+        String indent = "2";
+        String input = conversionsDocumentToString();
+        Source xmlInput = new StreamSource(new StringReader(input));
+        StringWriter stringWriter = new StringWriter();
+        try {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            transformerFactory.setAttribute("indent-number", indent); // ИМЕННО ЭТот аттрибут за отступы влияет он Должен стоять первей чем Transformer
+            
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "yes");
+            transformer.setOutputProperty("{https://xml.apache.org/xslt}indent-amount", indent);
+            transformer.transform(xmlInput, new StreamResult(stringWriter));
+            
+            return stringWriter.toString().trim();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -636,9 +697,13 @@ public class XMLSAX {
             }
 
             File file = new File(pathWF);
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            transformerFactory.setAttribute("indent-number", "2"); // Так делаем отступы почему 2 не знаю
+            
+            Transformer transformer = transformerFactory.newInstance().newTransformer();
             //System.out.println(document.getNodeName());
             transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "1");
             //transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
             transformer.transform(new DOMSource(document), new StreamResult(file)); // наш документ в начале
 
@@ -677,9 +742,14 @@ public class XMLSAX {
                 Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
             }
             File file = new File(NewPatchWF);
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            transformerFactory.setAttribute("indent-number", "2"); // Так делаем отступы почему 2 не знаю
+            
+            Transformer transformer = transformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
             transformer.transform(new DOMSource(document), new StreamResult(file));
+            
         } catch (TransformerException e) {
             e.printStackTrace(System.out);
         }

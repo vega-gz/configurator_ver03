@@ -249,7 +249,7 @@ class ReadBedXML {
                     resultTofile += doctype + "\n";
                     resultTofile += str + "\n";
                 } else {
-                    str = str.trim();
+                    //str = str.trim(); // зачем я убирал пробелы?
                     if(!str.isEmpty()) resultTofile += str + "\n"; // таким способоб убираем пустую
                     //resultTofile += str + "\n"; // таким способоб убираем пустую и вставляем нужную
                 }
