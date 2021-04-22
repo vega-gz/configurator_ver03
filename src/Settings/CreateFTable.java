@@ -5,6 +5,7 @@
  */
 package Settings;
 
+import Settings.AddGenData;
 import Main.Main_JPanel;
 import ReadWriteExcel.RWExcel;
 import Tools.FileManager;

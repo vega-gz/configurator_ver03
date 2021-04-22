@@ -39,7 +39,8 @@ public final class UnloadExcel {
      * @param ProgressBar1
      * @return возвращает true если книга создалась,false если нет
      */
-    public boolean runUnloadExcel(String abonent_name,ProgressBar ProgressBar1) {
+    public boolean runUnloadExcel(String abonent_name, ProgressBar ProgressBar1) {
+
         boolean error = true;
         HSSFWorkbook workbook = new HSSFWorkbook();
         ArrayList<String> tableList = globVar.DB.getListTable();
@@ -48,30 +49,36 @@ public final class UnloadExcel {
             if (name_list.indexOf(abonent_name + "_") == 0) {
                 System.out.println(name_list);
                 if (createExcelSheet(name_list, workbook) == false) {
-                    System.out.println("not find Table" +" "+ name_list);
+                    System.out.println("not find Table" + " " + name_list);
                     error = false;
                 }
             }
-            ProgressBar1.setVal((int) ( (i+1) * 100.0 / tableList.size()));
+            ProgressBar1.setVal((int) ((i + 1) * 100.0 / tableList.size()));
         }
         return error;
     }
+
     public boolean runUnloadSheet(
             //ProgressBar ProgressBar1,
-            String nameTable){//создание книги с одним листом
+            String nameTable) {//создание книги с одним листом
         boolean error = true;
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        ArrayList<String> tableList = globVar.DB.getListTable();
-        for (int i=0;i<tableList.size();i++){
-            String name_list = tableList.get(i);
-            if(name_list.equals(nameTable)){
-                if (createExcelSheet(name_list, workbook) == false) {
-                    System.out.println("not find Table" +" "+ name_list);
-                    error = false;
+       // String book_name = nameTable.substring(0, nameTable.indexOf("_"));
+
+
+                HSSFWorkbook workbook = new HSSFWorkbook();
+                ArrayList<String> tableList = globVar.DB.getListTable();
+                for (int i = 0; i < tableList.size(); i++) {
+                    String name_list = tableList.get(i);
+                    if (name_list.equals(nameTable)) {
+                        if (createExcelSheet(name_list, workbook) == false) {
+                            System.out.println("not find Table" + " " + name_list);
+                            error = false;
+                        }
+                    }
+                    // ProgressBar1.setVal((int) ( (i+1) * 100.0 / tableList.size()));
                 }
-            }
-           // ProgressBar1.setVal((int) ( (i+1) * 100.0 / tableList.size()));
-        }
+        
+    
         return error;
     }
 
@@ -85,14 +92,14 @@ public final class UnloadExcel {
      * @return true если файл создался,false если нет
      */
     boolean createExcelSheet(String nameTable, HSSFWorkbook workbook) {
-        DataBase db=new DataBase();
+        DataBase db = new DataBase();
         int x = nameTable.indexOf("_");
         String book_name = nameTable.substring(0, x);
         String sheetName = nameTable.substring(x + 1);
         int y = sheetName.indexOf("_mb_");
         String subAb = "";
         String fullNameTable;
-        String nodeName = sheetName.substring(y + 1);
+        String nodeName = sheetName.substring(sheetName.lastIndexOf("_") + 1);
         if (y > 0) {
             nodeName = sheetName.substring(y + 1);
         }
@@ -116,17 +123,17 @@ public final class UnloadExcel {
         for (Node colExcel : childExcel) {
             String colExelName = colExcel.getNodeName();//получили имя ноды 
             String colName = globVar.sax.getDataAttr(colExcel, "nameColumnPos");//получили значение атрибута
-            
+
             colNames.add(colName);//сделал для того чтобы для xml сохранилось НАИМЕНОВАНИЕ а  шапку для mb создать из комментария к таблице
-            if(sheetName.contains("mb")&&colName.equals("Наименование")){
-                fullNameTable=db.getCommentTable(nameTable);
-                if(!fullNameTable.equals("null")||fullNameTable==null){
-                int z=fullNameTable.indexOf("Modbus:");
-               colName=fullNameTable.substring(z+"Modbus:".length());
+            if (sheetName.contains("mb") && colName.equals("Наименование")) {
+                fullNameTable = db.getCommentTable(nameTable);
+                if (!fullNameTable.equals("null") || fullNameTable == null) {
+                    int z = fullNameTable.indexOf("Modbus:");
+                    colName = fullNameTable.substring(z + "Modbus:".length());
                 }
-               
+
             }
-            
+
             int numberCol = CellReference.convertColStringToIndex(colExelName);//получили номер колонки F .A. B и тд
             row.createCell(numberCol).setCellValue(colName);//создаем ячейку и заполняем ее значением colName
             row.getCell(numberCol).setCellStyle(cellStyle);//заполняем ячейки наименования цветом
@@ -134,7 +141,7 @@ public final class UnloadExcel {
         //конечный итог,создали строку(шапку)
         rowNum++;
         ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);//вот эту строку нужно окружить try catch
-        if(data.isEmpty()){
+        if (data.isEmpty()) {
             FileManager.loggerConstructor("В базе отсутствует колонка,из которой мы пытаемся получить данные");
         }
         for (String[] sData : data) {

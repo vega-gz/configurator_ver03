@@ -8,6 +8,7 @@ import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
 import Settings.AddGenData;
+import Settings.AddSensor;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
@@ -46,7 +47,7 @@ import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
-
+    
     TableTools tt = new TableTools();
     Main_JPanel mj = new Main_JPanel();
     FileManager fm = new FileManager();
@@ -77,9 +78,7 @@ public class TableDB extends javax.swing.JFrame {
     List<String> listNewColumn = new ArrayList<>();             // новые колонки при добавление в таблицу
 
     public TableDB(javax.swing.JTree jTree, String table) {
-
         jTree1 = jTree;
-
         tableName = table;
         if (!globVar.DB.isConnectOK()) {
             return;
@@ -115,7 +114,6 @@ public class TableDB extends javax.swing.JFrame {
                 jf.setVisible(false);
             }
         };
-
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
         TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут броблема фокуса
         TableTools.setColsEditor(table, cols, fromDB, jTable1, listItemList);
@@ -123,7 +121,6 @@ public class TableDB extends javax.swing.JFrame {
         jMenu6.setEnabled(false);
         jMenu8.setEnabled(false);
         jMenu9.setEnabled(false);
-
         //Лямбда для операций при закрытии окна архивов
         SaveFrameData sfd = () -> {
             TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
@@ -169,6 +166,7 @@ public class TableDB extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
@@ -402,15 +400,13 @@ public class TableDB extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1172, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1549, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1172, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1569, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,6 +465,14 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem10);
+
+        jMenuItem14.setText("Добавить датчик");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem14);
 
         jMenuItem13.setText("Добавить структуру сигналов");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
@@ -959,7 +963,6 @@ public class TableDB extends javax.swing.JFrame {
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         JFrame createTable = new AddGenData(tableName);
         createTable.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        createTable.setTitle("Окно создания таблиц");
         createTable.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
@@ -974,6 +977,12 @@ public class TableDB extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        JFrame createTable = new AddSensor(tableName);
+        createTable.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        createTable.setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1003,6 +1012,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

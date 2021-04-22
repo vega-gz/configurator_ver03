@@ -15,7 +15,6 @@
 <!--кол знаков после запятой-->
 <U default="2.0" nameColumnPos="АЦПmin" swt="Тип_датчика">
 <case def="-0.02" val="KM04_0_20mA"/>
-<case def="0.0" val="KM04_4_20mA"/>
 <case def="0.0" val="Siemens"/>
 <case def="11773.0" val="Sonet"/>
 <case def="-45.0" val="ТХА"/>
@@ -23,6 +22,7 @@
 <case def="-60.0" val="100П"/>
 <case def="-50.0" val="100Pt"/>
 <case def="2.0" val="4-20 мА"/>
+<case def="0.0" val="LOLI_MOLI"/>
 </U>
 <V default="10.0" nameColumnPos="АЦПmax" swt="Тип_датчика">
 <case def="9.9" val="KM04_0_20mA"/>
@@ -34,6 +34,7 @@
 <case def="180.0" val="100П"/>
 <case def="150.0" val="100Pt"/>
 <case def="10.0" val="4-20 мА"/>
+<case def="4.0" val="LOLI_MOLI"/>
 </V>
 <W formula="loLimF" nameColumnPos="loLim" type="Number"/>
 <!-- нижний уровень зашкала -->
@@ -1756,14 +1757,4 @@
 <F default="" nameColumnPos="Наименование"/>
 </EXEL>
 </newTable>
-<NEWTABLE Comment="тестовая таблица" excelSheetName="NEWTABLE">
-<GenData>
-<Mango-DRV typeFile="REAL">
-<globData name="MANGO_R">
-<localData int="ALG"/>
-</globData>
-</Mango-DRV>
-</GenData>
-<GenCode/>
-</NEWTABLE>
 </ConfigSignals>
