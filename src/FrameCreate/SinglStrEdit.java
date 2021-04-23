@@ -105,7 +105,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         if(x<0) x = title.lastIndexOf("_");
         String nodeName = title.substring(x+1);
         
-        String linkTable =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"linkTable"); // что это за нода и почему она встречается только в AI
+        String linkTable =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"linkTable"); // что это за нода и почему она встречается только в AI(Это похоже исполнительные механизмы)
         String trgCol =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"trgCol");       // и это значение зачем
         if(linkTable!=null){
             relatedTable = abonent+"_"+linkTable;
