@@ -708,7 +708,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
         return false;
     }
-
+     
     public static void setWidthCols(String[] cols, MyTableModel tableModel, int[] colsWidth, double x) {
         if (colsWidth == null) {
             return;
