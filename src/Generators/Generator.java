@@ -421,7 +421,7 @@ public class Generator {
                 whoTypeFBType = "GraphicsCompositeFBType"; // по умолчанию так как не все конфиги с аттрибутом
             }
 
-            boolean isIF = typeGCT == null; // если есть аттрибут type то IF не будет работать(, так ли оно нужно?)
+            boolean isIF = false; // если есть аттрибут type то IF не будет работать(, так ли оно нужно?)
             for (Node findinfIF : HMIcfg.getHeirNode(hmiNode)) { // проходи опять но нодам проверя есть ли 
                 if (findinfIF.getNodeName().equalsIgnoreCase("IF")) {
                     isIF = true;
@@ -641,13 +641,22 @@ public class Generator {
                 getAddVars(HMIcfg, hmiNode, addVarsData, editVar, ft, i);                  // Формируем InputVar при каждом проходе
                 //System.out.println(editVar.size());
 
+                outerisIF:
                 if (isIF) {//ищем условния выбора типа блока ( в ноде нет "type" выполняеться "IF") 
                     String[] gctData = new String[3]; //  Третий тупо пустой пока
-                    hintAL.clear();
-                    Node nodeIFELSE = setTypeHintAdd(HMIcfg, bigSax, ft, hmiNode, addVarsData, gctData, i, hintAL);
-                    if (nodeIFELSE == null) { // так формируется подсказка если она есть(узнаем Alarm и тип блока)
+                    ArrayList<String> hintALTMP = new ArrayList<>(); // временная подсказка для этого блока
+                    Node nodeIFELSE = setTypeHintAdd(HMIcfg, bigSax, ft, hmiNode, addVarsData, gctData, i, hintALTMP); // type блока,формируется подсказка, узнаем Alarm)
+                    
+                    if (nodeIFELSE == null & typeGCT == null) { // пропуск когда нет не IF не type в конфиге заголовка
                         continue;
                     }
+                    
+                    if (nodeIFELSE == null) { // не нашли новый тип type блока просто продобжаем работу без IF
+                        break outerisIF;
+                    }
+                    
+                    
+                    hintAL = hintALTMP; // если прошли блок то подсказка такая
                     if (gctData[0] != null) { // Нашли type ноду и подставляем нужный тип иначе по умолчанию что был или пустой
                         typeGCT = gctData[0];
                     }
@@ -2189,7 +2198,11 @@ public class Generator {
      return true;
      }
      */
-    // --- Поле формирования Подсказки (С выбором по условиям) NZ ---
+    
+    /* формирования Подсказки (С выбором по условиям) NZ
+    *  выбор type блока
+    *  или приостановка условия
+    */
     private static Node setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
             String[] gctData, int i, ArrayList<String> hintAL) {
         Node finedNewType = null;
