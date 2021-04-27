@@ -6,6 +6,7 @@ import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -36,6 +37,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import org.w3c.dom.Node;
 
@@ -62,10 +64,17 @@ public class TableTools {//ссылка на таблицу, массив шир
         if (qCol > colWidth.length) {
             qCol = colWidth.length;  //чтобы не вылететь за границы таблицы, если переданный массив ширин неправильный
         }
-        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);  //запрещаю изменение ширин солбхов при растягивании окна
+        
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);  //запрещаю изменение ширин столбцов при растягивании окна
+        
         for (int i = 0; i < qCol; i++) //устанавливаю ширину всех столбцов
         {
             jTable1.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+            
+//            //Component component = jTable1.prepareRenderer(colWidth[i]);
+//            int rendererWidth = component.getPreferredSize().width;
+//            TableColumn tableColumn = jTable1.getColumnModel().getColumn(i);
+//            tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
         }
         //Работа с алигнами
         DefaultTableCellRenderer right = new DefaultTableCellRenderer();

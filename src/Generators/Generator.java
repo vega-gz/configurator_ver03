@@ -643,11 +643,13 @@ public class Generator {
 
                 outerisIF:
                 if (isIF) {//ищем условния выбора типа блока ( в ноде нет "type" выполняеться "IF") 
-                    String[] gctData = new String[3]; //  Третий тупо пустой пока
+                    String[] gctData = new String[3]; //  3 - идентификатор что произошло в фукции
                     ArrayList<String> hintALTMP = new ArrayList<>(); // временная подсказка для этого блока
                     Node nodeIFELSE = setTypeHintAdd(HMIcfg, bigSax, ft, hmiNode, addVarsData, gctData, i, hintALTMP); // type блока,формируется подсказка, узнаем Alarm)
                     
-                    if (nodeIFELSE == null & typeGCT == null) { // пропуск когда нет не IF не type в конфиге заголовка
+                    boolean findBreak = false;
+                    if(gctData[2] != null) findBreak = gctData[2].equals("3"); 
+                    if ((nodeIFELSE == null & typeGCT == null) | (nodeIFELSE == null & findBreak)) { // пропуск когда нет не IF не type в конфиге заголовка, или BREAK
                         continue;
                     }
                     
@@ -2211,6 +2213,7 @@ public class Generator {
 
         for (Node n : IfElseNode) {
             if (n.getNodeName().equals("BREAK")) {
+                gctData[2] = "3"; // просто как идентификатор что что то есть
             }
             if (n.getNodeName().equals("type")) {                                 // Написал проверку ноды а не аттрибут
                 finedNewType = n;
