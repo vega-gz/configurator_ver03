@@ -101,12 +101,13 @@ public class TableTools {//ссылка на таблицу, массив шир
         System.setProperty("myColor", "0XEEEEEE");
         defaultTableCellRenderer.setBackground(Color.getColor("myColor")); //задаем цвет столбца
         columnModel.getColumn(0).setCellRenderer(defaultTableCellRenderer);
-        //Работа с высотой заголовков столбцов, чтобы туда влезали многострочные заголовки
-        JTableHeader th = jTable1.getTableHeader();
-        int width = th.getSize().width;
-        th.setPreferredSize(new Dimension(width, headerWidth));
-        th.setSize(width, headerWidth);
-        jTable1.repaint();
+        
+        //Работа с высотой заголовков столбцов, чтобы туда влезали многострочные заголовки(не работает идет смещение)
+//        JTableHeader th = jTable1.getTableHeader();
+//        int width = th.getSize().width;
+//        th.setPreferredSize(new Dimension(width, headerWidth));
+//        th.setSize(width, headerWidth);
+//        jTable1.repaint();
 
         // --- Вставка и копирование объектов таблицы (есть работа с excel) ---
         ExcelAdapter editT = new ExcelAdapter(jTable1);
