@@ -72,7 +72,7 @@ public class TableDB extends javax.swing.JFrame {
     javax.swing.JTree jTree1;
     ArrayList<Integer> findDataRows = new ArrayList<>(); // номера строк в таблице по совпадениям
     boolean firstClickMouseFind = true;                        //  ткнули первый раз на поиск
-    int idArrayFindigData = 0;
+    int idArrayFindigData = 0;                                 
     File excel = null;                                         // ссылка на документ если отрыли загрузку Excel для таблицы
     String sheetExcel = null;                                  // выбранный лист из Excel
     List<String> listNewColumn = new ArrayList<>();             // новые колонки при добавление в таблицу

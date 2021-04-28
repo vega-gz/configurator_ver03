@@ -6,15 +6,11 @@
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>				
 		</GenHMI>
 		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-			</addVarDeclaration>	
+			<disableVarDeclaration>
+				<NameRU/>
+			</disableVarDeclaration>
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
@@ -24,19 +20,12 @@
 	<FR_AI>
 		<GenHMI name="FR_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521"  ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
 		</GenHMI>
 		<GenHMI name="SmallFR_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-			</addVarDeclaration>			
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
@@ -45,40 +34,26 @@
 	<AO>
 		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
 		</GenHMI>
 		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_AO_200520" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-			</addVarDeclaration>			
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
 		</GenHMI>
 	</AO>
 	<DI>
-		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true">  typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
+		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
 			<Hint add0="Наименование" add1=", инв=" add2="Инверсия" add3=", задержка="  add4="Задержка" add5=", тип сигнала: " add6="Тип_сигнала" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
 		</GenHMI>
 	</DI>
 	<DO>
 		<GenHMI name="DO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="21" type="T_Base_DO_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="DD87E9C742BB69689219F08BAD99F4B8" -->
-			<Hint add0="Наименование" add1=" тип сигнала: " add2="Тип_сигнала" add3=", КЦУ: "  add4="КЦУ"  add5=", адрес " add6="Адрес_1" add7="," add8="Адрес_2" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>		
+			<Hint add0="Наименование" add1=" тип сигнала: " add2="Тип_сигнала" add3=", КЦУ: "  add4="КЦУ" 
+			      add5=", адрес " add6="Адрес_1" add7="," add8="Адрес_2" />
 		</GenHMI>
 	</DO>
 	<mb_AI>
@@ -87,19 +62,12 @@
 				<type name="T_BaseSen_200513">
 					<Hint/>
 					<additionalVar/>
-					<addVarDeclaration>
-						<VarDeclaration InitialValue="''" Name="PrefAb"/>
-					</addVarDeclaration>
 				</type>
 				<ELSE>
 					<IF  cond="dataType" val="WORD"> <!--  это просто пропуск?-->
 						<ELSE>
 							<type name="T_BaseAnIn_200521" isAlarm="true">
 								<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".." add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-								<addVarDeclaration>
-									<VarDeclaration InitialValue="''" Name="PrefAb"/>
-									<VarDeclaration InitialValue="''" Name="NameRU"/>
-								</addVarDeclaration>
 								<additionalVar>
 									<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 								</additionalVar>
@@ -111,9 +79,6 @@
 		</GenHMI>
 		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-			</addVarDeclaration>
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
@@ -122,19 +87,12 @@
 	<mb_AO>
 		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
 		</GenHMI>
 		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_AO_200520" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-			</addVarDeclaration>			
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
@@ -142,31 +100,19 @@
 	</mb_AO>
 	<mb_DI>
 		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
 			<Hint add0="Наименование" add1=", " add2="доп_инфо" add3=", МВ адр. "  add4="mbAddr"/>
 		</GenHMI>
 	</mb_DI>
 	<mb_DO>
 		<GenHMI name="DO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="21" type="T_Base_DO_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="DD87E9C742BB69689219F08BAD99F4B8" -->
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
 			<Hint add0="Наименование" add1=", " add2="доп_инфо" add3=", МВ адр. "  add4="mbAddr"/>
 		</GenHMI>
 	</mb_DO>
 	<APS>
 		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
-				<PrefStr value="APS." Type="STRING"/>     <!--только value переменная -->
+				<PrefStr value="APS." Type="STRING"/>     <!-- только value переменная > -->
 			</Edit>
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
 			<Disable> 
 				<Num/>
 				<hint/>
@@ -211,9 +157,10 @@
 				</TAG>
 			</additionalVar>	
 		</GenHMI> 
-		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"> <!-- isAlarm="false" --> 		
+		<GenHMI name="PPZ_" maxY="40" maxX="1" startPosX="20" startPosY="10" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" isAlarm="false" > 		
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<!-- <VarDeclaration InitialValue="''" Name="NameRU" Type="STRING" /> -->
 				<VarDeclaration InitialValue="''" Name="modePZ"/>
 				<VarDeclaration InitialValue="''" Name="Reset_PZ"/>
 				<VarDeclaration InitialValue="''" Name="Deblock"/>
@@ -227,15 +174,51 @@
 				<PrefStr/>
 				<TagID/>
 			</Disable>
+			<!--IF cond="Status" val="ПС"> так не работает, спросить у Димы
+				<BREAK/>
+				<ELSE/>
+			</IF-->
 			<IF cond="Status" val="ПС">
 				<BREAK/>
+				<!-- <ELSE/> -->
 			</IF>
 			<IF cond="Status" val="АС">
 				<BREAK/>
-			</IF>			
+				<!-- <ELSE/> -->
+			</IF>	
+			<!--IF cond="Status" val="ПС">
+				<BREAK/>
+				<ELSE>
+					<IF cond="Status" val="АС">
+						<BREAK/>
+					</IF>
+				</ELSE>	
+			</IF-->				
 			<additionalVar>
 				<Delay tableCol="Время_задержки" Type="STRING"/> 
 				<NameSigD Type="STRING"/>
+				<!--IF cond="Источник" val="*.PV"> ***************************Рабочий вариант
+					<NameSigA Type="STRING" tableCol="Источник"/>
+					<NameUst Type="STRING" tableCol="TAG_NAME_PLC"/>
+					<Edit>
+						<NameSigD value="" Type="STRING" />					
+					</Edit>	
+					<ELSE> 
+						<Edit>
+							<NameSigA value="" Type="STRING" />
+						</Edit>	
+						<IF cond="Источник" val="">
+							<Edit>
+								<NameSigD text="APS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+							</Edit>	
+								<ELSE>
+									<Edit>									
+										<NameSigD Type="STRING" tableCol="Источник"/>	
+									</Edit>											
+								</ELSE> 
+						</IF>
+					</ELSE>
+				</IF-->
 				<NameSigA Type="STRING"/>
 				<NameUst Type="STRING"/>				
 				<IF cond="Источник" val="*.PV">
@@ -268,10 +251,6 @@
 	</APS>
 	<TS>
 		<GenHMI name="Tch_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>		
 			<Disable>
 				<Num/>
 				<hint/>
@@ -295,10 +274,6 @@
 	</TS>
 	<HR>
 		<GenHMI name="HR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>
 			<Disable>
 				<Num/>
 				<hint/>
@@ -322,10 +297,6 @@
 	</HR>
 	<GR>
 		<GenHMI name="GR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
 			<Disable>
 				<Num/>
 				<hint/>
@@ -349,9 +320,9 @@
 	</GR>	
 	<RSR>
 		<GenHMI name="Resource_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="TStatLine_Dint" ruName="Наименование" isAlarm="false">
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-			</addVarDeclaration>
+			<disableVarDeclaration>
+				<NameRU/>
+			</disableVarDeclaration>
 			<Disable>
 				<Num/>
 				<hint/>
@@ -373,10 +344,6 @@
 	<CalcPar> 
 		<GenHMI name="Calc_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_Rool_CalcPar" ruName="Наименование" isAlarm="true">
 			<Hint add0="Наименование" add1=", " add2="Единица_измерения"/>
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>
 			<Disable>
 				<PrefStr/>
 			</Disable>			
@@ -387,9 +354,9 @@
 		</GenHMI>
 		<GenHMI name="SmallCalc_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseCalc" ruName="SmallName"> 
 			<Hint add0="Наименование" add1=", " add2="Единица_измерения"/>
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-			</addVarDeclaration>
+			<disableVarDeclaration>
+				<NameRU/>
+			</disableVarDeclaration>
 			<Disable>
 				<PrefStr/>
 			</Disable>		

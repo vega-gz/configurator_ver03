@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <TableColumnSettings>
 	<mb_A>
-		<dataType src="file" file="ModbusFormat.xml" col=""/>
+		<dataType col="" file="ModbusFormat.xml" src="file"/>
 	</mb_A>
 	<Abonents>
 		<Abonent_type src="this">
@@ -11,7 +12,7 @@
 	</Abonents>
 	<ANB>
 		<!--Таблица src="DB"/-->
-		<TAG_NAME_AnPar src="table" table="this" col="Таблица" default="AI" colInTable="TAG_NAME_PLC"  edit="true"/>
+		<TAG_NAME_AnPar col="Таблица" colInTable="TAG_NAME_PLC" default="AI" edit="true" src="table" table="this"/>
 		<direct src="this">
 			<Item t="больше"/>
 			<Item t="меньше"/>
@@ -45,7 +46,8 @@
 			<Item t="100П"/>					
 			<Item t="100Pt"/>					
 			<Item t="4-20 мА"/>	
-		</Тип_датчика>	
+		<Item t="LOLI"/>
+    </Тип_датчика>	
 	</AI>
 		<FR>
 		<Тип_датчика src="this">

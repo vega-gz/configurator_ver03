@@ -113,7 +113,7 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
 //                    }
 
                     boneTable = new TableNzVer3(nameTable, columns, listDataToTable, false);  // реализация моей таблицы(без внесения в базу)
-                    tableMech = new TableNzVer3(nameTable, columns, listDataToTable, false).getJTable();
+                   tableMech = new TableNzVer3(nameTable, columns, listDataToTable, false).getJTable();
 
                     // раскрас таблицы
                     for (int i = 0; i < tableMech.getColumnCount(); i++) {

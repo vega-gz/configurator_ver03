@@ -430,25 +430,9 @@ public class Generator {
 
             // *** определяем тип наших блоков которыми заполняем лист ***
             List<HashMap<String, String>> listVarHMI = new ArrayList<>();       // InputVars из блока HMI  
-            String uuidGCT = null;//HMIcfg.getDataAttr(hmiNode, "typeUUID");
-            // Поиск переменных ноды в независимости от условия собираем их
+            String uuidGCT = null;
 
-//            String[] findInBig = new String[3];    // одно из главных параметров по чему осуществляем поиске
             if (typeGCT != null) { // сбор данных по головному блоку
-//                findInBig = new String[]{"GraphicsCompositeFBType", "Name", typeGCT};
-//                Node parentHMINode = bigSax.findNodeAtribute(bigRoot, findInBig);   // Ищем  Нужный блок
-//                if (parentHMINode != null) {
-////                    uuidGCT = bigSax.getDataAttr(parentHMINode, "UUID");            // берем уид блок 
-////                    listVarHMI = getFBInputsVarIEC_HMI(bigSax, parentHMINode);      // собрать структурированно InputVars из блока HMI основного
-//                } else {
-//                    findInBig = new String[]{"CompositeFBType", "Name", typeGCT};   // Пробуем найти и композит если не нашли обычный
-//                    parentHMINode = bigSax.findNodeAtribute(bigRoot, findInBig);    // Ищем  Нужный блок
-//                    if (parentHMINode != null) {
-////                        uuidGCT = bigSax.getDataAttr(parentHMINode, "UUID");        // берем блок уида
-////                        listVarHMI = getFBInputsVarIEC_HMI(bigSax, parentHMINode);  // собрать структурированно InputVars из блока HMI основного
-//                    }
-//                }
-
                 CompositeFBType fbBigSAX = new CompositeFBType(bigSax, typeGCT); // реализовываем новый класс хранящий данные Типа Графического блока
                 listVarHMI = fbBigSAX.getFBInputs();                            // собрать структурированно InputVars из блока HMI (на основе которых строим блочки)
                 uuidGCT = fbBigSAX.getFBUUID();
@@ -508,10 +492,9 @@ public class Generator {
                 hmiRoot.appendChild(gctNode);
 
                 HMIsax.setDataAttr(gctNode, "Name", pageName);
-                
-               // findInBig[2] = pageName; // меняем искомый блок поиска на тот который генерируем
-               // Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);  // ищем UUID в головной есть ли такой блок Мнемосхемы который генерируем
 
+                // findInBig[2] = pageName; // меняем искомый блок поиска на тот который генерируем
+                // Node myPage = bigSax.findNodeAtribute(bigRoot, findInBig);  // ищем UUID в головной есть ли такой блок Мнемосхемы который генерируем
                 CompositeFBType myPageFB = new CompositeFBType(bigSax, pageName);
                 String sheetUUID = myPageFB.getFBUUID();
 
@@ -530,72 +513,73 @@ public class Generator {
             }
 
             // --- Добавить или удалить значения в InputVars ноде графического типа --- 
-            ArrayList<Node> varDecListNode = new ArrayList<>();
             ArrayList<Connection> connectionsSigs = new ArrayList<>();       // Список сигналов которые надо соеденить в данном блоке
             Node nodeInputVars = HMIsax.returnFirstFinedNode(gctNode, "InputVars");
-            if (nodeInputVars != null) {
-                for (Node n : bigSax.getHeirNode(nodeInputVars)) {
-                    //System.out.println(n.getNodeName());
-                    varDecListNode.add(n);
+            if (!(typeGCT == null)) {
+                if (nodeInputVars != null) {
+                    addInputVarsVarDeclaration(bigSax, HMIcfg, hmiNode, HMIsax, nodeInputVars, connectionsSigs, listVarHMI);
+//                ArrayList<Node> varDecListNode = new ArrayList<>();
+//                for (Node n : bigSax.getHeirNode(nodeInputVars)) {
+//                    //System.out.println(n.getNodeName());
+//                    varDecListNode.add(n);
+//                }
+//
+//                for (Node n : getListAddVarDeclaration(HMIcfg, hmiNode)) { // если есть в ноде конфиг "addVarDeclaration"(добавляет доп поля в заголовок основной страницы генерированного блока)
+//                    boolean findNodeVar = false;
+//                    String uuidVarDeclaration = UUID.getUIID();
+//                    String nameVarDeclaration = HMIcfg.getDataAttr(n, "Name");
+//
+//                    Connection sigToConnect = new Connection(nameVarDeclaration); // структура для коннекта сигналов
+//                    sigToConnect.setUUIDVarDeclaration(uuidVarDeclaration);     // вносим 
+//                    connectionsSigs.add(sigToConnect);
+//
+//                    String typeOrigSig = null;                                  // определяем тип головного ууида что бы правильно сростить типы
+//                    String typeUUIDOrigSig = null;
+//                    for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
+//                        if (h.get("Name").equals(nameVarDeclaration)) {         // Сравниваем что добавляем и что в оригинале.
+//                            typeOrigSig = (h.get("Type"));                        // берем нужный тип и нужны ууид типа
+//                        }
+//                    }
+//
+//                    for (Node nAdd : varDecListNode) { // это проверка есть ли такой сигнал уже в структуре манекена или нет
+//                        try {
+//                            if (bigSax.getDataAttr(n, "Name").equals(HMIsax.getDataAttr(nAdd, "Name"))) { // если нашли такую же ноду
+//                                HMIsax.removeNode(nAdd);
+//                                HMIcfg.setDataAttr(n, "UUID", uuidVarDeclaration);
+//                                HMIcfg.setDataAttr(n, "Type", typeOrigSig);
+//                                nodeInputVars.appendChild(HMIsax.importNode(n)); // таким извращенным способом добавить ноду из одного документа в другой
+//                                findNodeVar = true;
+//                                break;
+//                            }
+//                        } catch (NullPointerException e) {
+//                            FileManager.loggerConstructor("не верно описан сигнал для добавления в ноде addVarDeclaration " + nAdd.getNodeName()
+//                                    + "формат должен быть пример: <VarDeclaration InitialValue=\"''\" Name=\"nameField\" Type=\"STRING\" TypeUUID=\"38FDDE3B442D86554C56C884065F87B7\"/>");
+//                            return null;
+//                        }
+//                    }
+//                    if (!findNodeVar) {
+//                        HMIcfg.setDataAttr(n, "UUID", uuidVarDeclaration);
+//                        HMIcfg.setDataAttr(n, "Type", typeOrigSig);
+//                        nodeInputVars.appendChild(HMIsax.importNode(n));
+//                    }
+//                }
+//
+//                varDecListNode.clear(); // нужно обновить список иначе Null
+//                for (Node n : bigSax.getHeirNode(nodeInputVars)) {
+//                    varDecListNode.add(n);
+//                }
+//
+//                for (Node n : getListRemoveVarDeclaration(HMIcfg, hmiNode)) {             // если есть в ноде конфиг "disableVarDeclaration"
+//                    for (Node nAdd : varDecListNode) {
+//                        if (n.getNodeName().equals(HMIsax.getDataAttr(nAdd, "Name"))) {   // а тут по имени ноды и аттрибуту
+//                            HMIsax.removeNode(nAdd);
+//                            break;
+//                        }
+//                    }
+//                }
                 }
 
-                for (Node n : getListAddVarDeclaration(HMIcfg, hmiNode)) { // если есть в ноде конфиг "addVarDeclaration"(добавляет доп поля в заголовок основной страницы генерированного блока)
-                    boolean findNodeVar = false;
-                    String uuidVarDeclaration = UUID.getUIID();
-                    String nameVarDeclaration = HMIcfg.getDataAttr(n, "Name");
-                    
-                    Connection sigToConnect = new Connection(nameVarDeclaration); // структура для коннекта сигналов
-                    sigToConnect.setUUIDVarDeclaration(uuidVarDeclaration);     // вносим 
-                    connectionsSigs.add(sigToConnect);
-                    
-                    String typeOrigSig = null;                                  // определяем тип головного ууида что бы правильно сростить типы
-                    String typeUUIDOrigSig = null;      
-                    for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
-                        if (h.get("Name").equals(nameVarDeclaration)) {         // Сравниваем что добавляем и что в оригинале.
-                           typeOrigSig= (h.get("Type"));                        // берем нужный тип и нужны ууид типа
-                        }
-                    }
-                    
-
-                    for (Node nAdd : varDecListNode) { // это проверка есть ли такой сигнал уже в структуре манекена или нет
-                        try {
-                            if (bigSax.getDataAttr(n, "Name").equals(HMIsax.getDataAttr(nAdd, "Name"))) { // если нашли такую же ноду
-                                HMIsax.removeNode(nAdd);
-                                HMIcfg.setDataAttr(n, "UUID", uuidVarDeclaration);
-                                HMIcfg.setDataAttr(n, "Type", typeOrigSig);
-                                nodeInputVars.appendChild(HMIsax.importNode(n)); // таким извращенным способом добавить ноду из одного документа в другой
-                                findNodeVar = true;
-                                break;
-                            }
-                        } catch (NullPointerException e) {
-                            FileManager.loggerConstructor("не верно описан сигнал для добавления в ноде addVarDeclaration " + nAdd.getNodeName()
-                                    + "формат должен быть пример: <VarDeclaration InitialValue=\"''\" Name=\"nameField\" Type=\"STRING\" TypeUUID=\"38FDDE3B442D86554C56C884065F87B7\"/>");
-                            return null;
-                        }
-                    }
-                    if (!findNodeVar) {
-                        HMIcfg.setDataAttr(n, "UUID", uuidVarDeclaration);
-                        HMIcfg.setDataAttr(n, "Type", typeOrigSig);
-                        nodeInputVars.appendChild(HMIsax.importNode(n));
-                    }
-                }
-
-                varDecListNode.clear(); // нужно обновить список иначе Null
-                for (Node n : bigSax.getHeirNode(nodeInputVars)) {
-                    varDecListNode.add(n);
-                }
-
-                for (Node n : getListRemoveVarDeclaration(HMIcfg, hmiNode)) {             // если есть в ноде конфиг "disableVarDeclaration"
-                    for (Node nAdd : varDecListNode) {
-                        if (n.getNodeName().equals(HMIsax.getDataAttr(nAdd, "Name"))) {   // а тут по имени ноды и аттрибуту
-                            HMIsax.removeNode(nAdd);
-                            break;
-                        }
-                    }
-                }
-            }
-
-                if (!(typeGCT == null)) {                                       // прогон по файлу если только есть обозначение явно указан type в ноде
+                // прогон по файлу если только есть обозначение явно указан type в ноде
                 for (Connection c : connectionsSigs) {                          // Проход по добавленным сигналам
                     for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
                         if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
@@ -656,7 +640,7 @@ public class Generator {
 
                 ArrayList<String[]> addVarsData = new ArrayList<>();                // данные для полей  генерированного блока(изменение добавление)
                 getAddVars(HMIcfg, hmiNode, addVarsData, editVar, ft, i);                  // Формируем InputVar при каждом проходе
-                System.out.println(editVar.size());
+                //System.out.println(editVar.size());
 
                 if (isIF) {//ищем условния выбора типа блока ( в ноде нет "type" выполняеться "IF") 
                     String[] gctData = new String[3]; //  Третий тупо пустой пока
@@ -666,8 +650,29 @@ public class Generator {
                     }
                     if (gctData[0] != null) { // Нашли type ноду и подставляем нужный тип иначе по умолчанию что был или пустой
                         CompositeFBType fromIfElseFB = new CompositeFBType(bigSax, gctData[0]); // если что то нашли в имени ноды
-                        uuidGCT = fromIfElseFB.getFBUUID();
+                        uuidGCT = fromIfElseFB.getFBUUID(); // это можно не переопределять
                         typeGCT = gctData[0];
+                    }
+
+                    // Поиск нового блока в головной по условию IF
+                    CompositeFBType fbBigSAX = new CompositeFBType(bigSax, typeGCT); // реализовываем новый класс хранящий данные Типа Графического блока
+                    listVarHMI = fbBigSAX.getFBInputs();                            // собрать структурированно InputVars из блока HMI (на основе которых строим блочки)
+                    uuidGCT = fbBigSAX.getFBUUID();
+
+                   
+                    //только один раз вносим
+                    if(connectionsSigs.size() < 1){
+                        addInputVarsVarDeclaration(bigSax, HMIcfg, hmiNode, HMIsax, nodeInputVars, connectionsSigs, listVarHMI);
+                    }
+                    
+                    // тут каждый раз будет проверять и пересоздавать InputVars -> VarDeclaration
+                    // Заново переопределение сигналов
+                    for (Connection c : connectionsSigs) {                          // Проход по добавленным сигналам
+                        for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
+                            if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
+                                c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
+                            }
+                        }
                     }
 
                     isAlarm = gctData[2] != null;
@@ -789,23 +794,7 @@ public class Generator {
                         objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
 
                     }
-//                    
-//                    for (String[] s : addVarsData) {
-//                        fbChildNode[2] = s[0];
-//                        String apos = "";
-//                        if ("STRING".equals(s[2]))  apos = "'";
-//                        fbChildNode[4] = apos + ft.getCell(s[1], i) + apos;
-//                        fbChildNode[6] = s[2];
-//                        fbChildNode[8] = s[3];
-//
-//                        // Проверка на присутствие Свитч(Ошибка ищу только первый )                         
-//                        Node nSwitch = HMIcfg.returnFirstFinedNode(hmiNode, "switch");
-//                        if (nSwitch != null) {
-//                            fbChildNode[4] = getSwitchValConfig(nSwitch, ft, i); // запуск выборки Свитча
-//                        }
-//                        //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили его в ноду
-//                        objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
-//                    }
+
                 }
 
                 objectFB.delVar(removedVar); // Вносим что нужно удалить если таковое есть
@@ -815,22 +804,20 @@ public class Generator {
                     HMIsax.insertChildNode(nodeFB, arr.getToXML()); //добавим каждую строку в в ноду FB
                 }
 
-                
-                
-    //************* *********************** прикручиваем связи сигналов в листе *********************************
+                //************* *********************** прикручиваем связи сигналов в листе *********************************
                 String[] connects = {"Connection", "Source", "",
                     "Destination", "", "SourceUUID",
                     "", "DestinationUUID", ""};
-                for (Connection c : connectionsSigs) {   
-                
-                //if (isAlarm & c.getName().equals("NameRU")) continue;  // так же как ниже
+                for (Connection c : connectionsSigs) {
+
+                    //if (isAlarm & c.getName().equals("NameRU")) continue;  // так же как ниже
                     connects[2] = c.getName();
                     //connects[4] = nameGCT + i + "." + c.getName();
                     connects[4] = nameFB + "." + c.getName();
                     connects[6] = c.getUUIDVarDeclaration();                        // Так же и тут зачем уид иной
                     connects[8] = fbUUID + "." + c.getUUIDOrigSignal();
                     HMIsax.insertChildNode(DataConnections, connects);  //добавили его в ноду
-                
+
                 }
 
                 posElemY += incY;
@@ -845,16 +832,16 @@ public class Generator {
                     if (folderNodeName == null) {//Если нет имени фолдера листов сигналов - значит мы делаем файл для импорта
                         FBNetwork.appendChild(DataConnections);
                         HMIsax.writeDocument(targetFile);
-                        
+
                         targetFile = targetFile.replace("_" + pageCnt + ".txt", "_" + (pageCnt + 1) + ".txt");
                         pageCnt++;
                         pageName = nameGCT + pageCnt;
-                        
+
                         //Node hmiRoot = HMIsax.readDocument("HMI_Sheet.txt");
                         gctNode = HMIsax.returnFirstFinedNode(HMIsax.getRootNode(), whoTypeFBType);
-                        
+
                         for (Node n : HMIsax.getHeirNode(gctNode)) {
-                            if(n.getNodeName().equals("FBNetwork")){
+                            if (n.getNodeName().equals("FBNetwork")) {
                                 HMIsax.removeNode(n);
                                 FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
                                 break;
@@ -866,7 +853,6 @@ public class Generator {
                         HMIsax.setDataAttr(gctNode, "Name", pageName);
                         String sheetUUID = null;
 
-                        
                         // новый способ поиска  нужного блока в нодах
                         CompositeFBType myPageFB = new CompositeFBType(bigSax, pageName);
                         sheetUUID = myPageFB.getFBUUID();
@@ -874,7 +860,7 @@ public class Generator {
                         if (sheetUUID == null) {
                             sheetUUID = UUID.getUIID();
                         }
-                        
+
                         HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
                         //FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
                         DataConnections = HMIsax.createNode("DataConnections");
@@ -895,6 +881,81 @@ public class Generator {
             ret += nameGCT + " - " + pageCnt + " страниц. ";
         }
         return ret;
+    }
+
+    // --- Метод поиск и добавления сигналов  ---
+    /*
+     надо бы видимо делат объект
+     XMLSAX bigSax  -- основноя нода HMI Сонаты
+     XMLSAX HMIcfg  -- основная нода конфигурационного файла
+     Node hmiNode -- одна из нод конфигурационного файла GenHMI
+     XMLSAX HMIsax -- нода файла манекена( основа из чего создаем лист с сигналами)
+     List<HashMap<String, String>> listVarHMI -- данные из сигналов блока на основе которого делаем внутренние блочки
+     */
+    private static boolean addInputVarsVarDeclaration(XMLSAX bigSax, XMLSAX HMIcfg, Node hmiNode,
+            XMLSAX HMIsax, Node nodeInputVars, ArrayList<Connection> connectionsSigs, List<HashMap<String, String>> listVarHMI) {
+        ArrayList<Node> varDecListNode = new ArrayList<>();
+
+        for (Node n : bigSax.getHeirNode(nodeInputVars)) {
+            //System.out.println(n.getNodeName());
+            varDecListNode.add(n);
+        }
+
+        for (Node n : getListAddVarDeclaration(HMIcfg, hmiNode)) { // если есть в ноде конфиг "addVarDeclaration"(добавляет доп поля в заголовок основной страницы генерированного блока)
+            boolean findNodeVar = false;
+            String uuidVarDeclaration = UUID.getUIID();
+            String nameVarDeclaration = HMIcfg.getDataAttr(n, "Name");
+
+            Connection sigToConnect = new Connection(nameVarDeclaration); // структура для коннекта сигналов
+            sigToConnect.setUUIDVarDeclaration(uuidVarDeclaration);     // вносим 
+            connectionsSigs.add(sigToConnect);
+
+            String typeOrigSig = null;                                  // определяем тип головного ууида что бы правильно сростить типы
+            String typeUUIDOrigSig = null;
+            for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
+                if (h.get("Name").equals(nameVarDeclaration)) {         // Сравниваем что добавляем и что в оригинале.
+                    typeOrigSig = (h.get("Type"));                        // берем нужный тип и нужны ууид типа
+                }
+            }
+
+            for (Node nAdd : varDecListNode) { // это проверка есть ли такой сигнал уже в структуре манекена или нет
+                try {
+                    if (bigSax.getDataAttr(n, "Name").equals(HMIsax.getDataAttr(nAdd, "Name"))) { // если нашли такую же ноду
+                        HMIsax.removeNode(nAdd);
+                        HMIcfg.setDataAttr(n, "UUID", uuidVarDeclaration);
+                        HMIcfg.setDataAttr(n, "Type", typeOrigSig);
+                        nodeInputVars.appendChild(HMIsax.importNode(n)); // таким извращенным способом добавить ноду из одного документа в другой
+                        findNodeVar = true;
+                        break;
+                    }
+                } catch (NullPointerException e) {
+                    FileManager.loggerConstructor("не верно описан сигнал для добавления в ноде addVarDeclaration " + nAdd.getNodeName()
+                            + "формат должен быть пример: <VarDeclaration InitialValue=\"''\" Name=\"PrefAb\"/>");
+                    return false;
+                }
+            }
+            if (!findNodeVar) {
+                HMIcfg.setDataAttr(n, "UUID", uuidVarDeclaration);
+                HMIcfg.setDataAttr(n, "Type", typeOrigSig);
+                nodeInputVars.appendChild(HMIsax.importNode(n));
+            }
+        }
+
+        varDecListNode.clear(); // нужно обновить список иначе Null
+        for (Node n : bigSax.getHeirNode(nodeInputVars)) {
+            varDecListNode.add(n);
+        }
+
+        for (Node n : getListRemoveVarDeclaration(HMIcfg, hmiNode)) {             // если есть в ноде конфиг "disableVarDeclaration"
+            for (Node nAdd : varDecListNode) {
+                if (n.getNodeName().equals(HMIsax.getDataAttr(nAdd, "Name"))) {   // а тут по имени ноды и аттрибуту
+                    HMIsax.removeNode(nAdd);
+                    break;
+                }
+            }
+        }
+
+        return true;
     }
 
     // --- Генерация Типов ---
@@ -1377,6 +1438,8 @@ public class Generator {
 
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
+            String lastValueGenString = null;
+            String currentValueGenString = null;
             for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
                 if (jProgressBar != null && tsz != 0) {
                     jProgressBar.setValue((int) ((j + 1) * 100.0 / tsz));           //Прогресс генерации
@@ -1394,7 +1457,28 @@ public class Generator {
                     if ("Function".equals(nodeName)) {
                         createFunction(cont, fm, ft, abSubAb, disableReserve, j);   // Обработка "фукции" ноды 
                     } else {
-                        createString(cont, fm, ft, abSubAb, disableReserve, j);     // Обработка "строковой" ноды (любой другой)
+                        String addStr = createString(cont, ft, abSubAb, disableReserve, j);     // Обработка "строковой" ноды (любой другой)
+                        if (addStr != null) {
+                            currentValueGenString = addStr;
+
+                        } else {
+                            System.out.println(); // Debug!!!
+                        }
+
+                        //по просьбе  Алексея  условие может не только для LUA
+                        if (findLUAext & j >= tsz - 1) { // если последняя строка то в файле удалить 
+
+                            int indeChar = lastValueGenString.lastIndexOf(',');
+                            lastValueGenString = lastValueGenString.substring(0, indeChar) + lastValueGenString.substring(indeChar + 1); // обрубаем строку 
+                            fm.wr(lastValueGenString);
+                        } else {
+                            if (addStr != null) {
+
+                                lastValueGenString = currentValueGenString;
+                                fm.wr(lastValueGenString);
+                            }
+                        }
+
                     }
                 }
             }
@@ -1426,18 +1510,19 @@ public class Generator {
     }
 
     // --- Создание строки из ноды ---
-    static int createString(Node args, FileManager fm, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException {
+    static String createString(Node args, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException {
+        String tmp = "";
         ArrayList<Node> arglist = null;
         // Проверка на IF 
         List<Node> nodesIFElse = new ArrayList<>();
         processingIF(globVar.sax, args, ft, j, nodesIFElse);
         if (nodesIFElse.size() > 0) {
-            System.out.println("Find IF ELSE");
+            //System.out.println("Find IF ELSE");
             arglist = (ArrayList<Node>) nodesIFElse;
         } else {
             arglist = globVar.sax.getHeirNode(args);                  //создаём список аргументов
         }
-        String tmp = "";
+
         for (Node arg : arglist) {                                        //Цикл по всем аргументам функции
             tmp += getPartText(arg, abonent, ft, j);
         }   //Цикл по всем частям аргументов - текстовым и табличным
@@ -1446,11 +1531,10 @@ public class Generator {
             disable = "//";
         }
         if (disable.equals("") & tmp.equals("")) {
-            return 0;               // нечего не нашли (нет записи в файл)
+            return null;               // нечего не нашли (нет записи в файл)
         }
-        fm.wr(disable + tmp + ";\n");
 
-        return 0;
+        return disable + tmp + ";\n";
     }
 
     // --- обработчик ноды "Function"  ---
@@ -2145,11 +2229,11 @@ public class Generator {
 
                         } else {
                             if (!nD.getNodeName().equalsIgnoreCase("ELSE")) {
-                                System.out.println(nD.getNodeName().equalsIgnoreCase("ELSE"));
+                                //System.out.println(nD.getNodeName().equalsIgnoreCase("ELSE"));
 
                             }
                             if (!nD.getNodeName().equalsIgnoreCase("IF")) {
-                                System.out.println(nD.getNodeName().equalsIgnoreCase("IF"));
+                                //System.out.println(nD.getNodeName().equalsIgnoreCase("IF"));
 
                             }
                             nodeProcessing.add(nD);
@@ -2161,7 +2245,7 @@ public class Generator {
                     Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
                     if (ELS != null) {
                         for (Node nD : HMIcfg.getHeirNode(ELS)) {                                                // добавляем ноды которые прошли по условию IF
-                            System.out.println(nD.getNodeName());
+                            //System.out.println(nD.getNodeName());
                             if (!nD.getNodeName().equalsIgnoreCase("IF")) {
                                 nodeProcessing.add(nD);
                                 // или выполняем над ними действие (проверка на хинты доп аттрибуты и прочее)

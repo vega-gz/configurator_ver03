@@ -20,8 +20,10 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
@@ -396,6 +398,7 @@ public class FileManager {
         return null;
     }
 
+    // --- Добавить строку в файл(почему Лев так назвал метод) ---
     public void wr(String s) {
         try {
             // throws IOException {
@@ -802,10 +805,6 @@ public class FileManager {
         return counter;
     }
 
-    public static void main(String[] args) throws IOException {
-        FileManager fm = new FileManager();
-        fm.ChangeOPCNameFile("C:\\Users\\cherepanov\\Desktop\\test");
-    }
 
     /**
      * Метод заменяет русское и алгоритмическое имена в базе данных и XML файлах
@@ -933,4 +932,77 @@ public class FileManager {
         return excel;
     }
 
+        // --- запись файла строкой (полная перезапись файла данными  )---
+    public static void writeStringInFile(String file, String Data) {
+        FileWriter fooWriter = null;
+        try {
+            File myFoo = new File(file);
+            fooWriter = new FileWriter(myFoo, false); // true to append
+            fooWriter.write(Data);
+            fooWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fooWriter.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    
+    // --- подсчет строк в файле ---
+    static int sumStringInFile(String path) {
+        File file = new File(path);
+        int linesCount = 0;
+        try {
+            final LineNumberReader lnr = new LineNumberReader(new FileReader(file));
+            while (null != lnr.readLine()) {
+                linesCount++;
+            }
+            //System.out.println("Koличecтвo cтpok в фaйлe: " + linesCount);
+            lnr.close(); // обязательно закрыть hz почему
+        } catch (FileNotFoundException ex) {
+
+        } catch (IOException ex) {
+
+        }
+        return linesCount;
+    }
+    
+    
+    // --- Удалить строку из файла ---
+    static void delStringNumberFile(String path, int nunStr) {
+        File file = new File(path);
+        String str = "";
+        try {
+            File temp = File.createTempFile("file_", ".txt", file.getParentFile());          // временный файл
+            InputStreamReader inputsream = new InputStreamReader(new FileInputStream(file), "UTF8"); // Правильное отображение русскаого языка чтение буыера такое себе
+            BufferedReader bufferedReader = new BufferedReader(inputsream);
+            //BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8")); // так еще можно на открытие
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(temp), "UTF8"));
+
+            String line = bufferedReader.readLine();
+            int currentLine = 0;
+            while (line != null) {
+                
+                if (currentLine != nunStr) {
+                    writer.println(line); // просто пропуск нужной строки и все
+                }
+                ++currentLine;
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close(); // Закрываем потоки
+            writer.close();
+
+            file.delete();      // удалить 
+            temp.renameTo(file); // переименовать
+
+        } catch (FileNotFoundException e) {
+            // exception handling
+        } catch (IOException e) {
+            // exception handling
+        }
+    }
 }

@@ -7,6 +7,7 @@ import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -62,7 +63,14 @@ public class TableTools {//ссылка на таблицу, массив шир
         if (qCol > colWidth.length) {
             qCol = colWidth.length;  //чтобы не вылететь за границы таблицы, если переданный массив ширин неправильный
         }
-        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);  //запрещаю изменение ширин солбхов при растягивании окна
+        
+        
+        
+       // jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);  //запрещаю изменение ширин солбхов при растягивании окна
+        
+        
+        
+        
         for (int i = 0; i < qCol; i++) //устанавливаю ширину всех столбцов
         {
             jTable1.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
@@ -98,6 +106,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         th.setPreferredSize(new Dimension(width, headerWidth));
         th.setSize(width, headerWidth);
         jTable1.repaint();
+      
 
         // --- Вставка и копирование объектов таблицы (есть работа с excel) ---
         ExcelAdapter editT = new ExcelAdapter(jTable1);
@@ -708,12 +717,13 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
         return false;
     }
-     
+     //----задаем столбцам размеры
     public static void setWidthCols(String[] cols, MyTableModel tableModel, int[] colsWidth, double x) {
         if (colsWidth == null) {
             return;
         }
-        int max = colsWidth.length;
+       int max = colsWidth.length;
+      
         if (cols != null && max > cols.length) {
             max = cols.length;
         }
@@ -721,15 +731,15 @@ public class TableTools {//ссылка на таблицу, массив шир
             max = tableModel.getColumnCount();
         }
         for (int i = 0; i < max; i++) {
-            if (cols != null && cols[i] != null) {
-                colsWidth[i] = cols[i].length();
+             if (cols != null && cols[i] != null) {
+                colsWidth[i] = cols[i].length();//длина первого столбца
             } else {
                 colsWidth[i] = 0;
             }
-            for (int j = 0; j < tableModel.getRowCount(); j++) {
+            for (int j = 0; j < tableModel.getRowCount(); j++) {//цикл по всем строкам данной таблицы в БД(исключаем строку шапку)
                 if (tableModel.getValueAt(j, i) != null) {
                     int l = tableModel.getValueAt(j, i).length();
-                    if (colsWidth[i] < l) {
+                    if (colsWidth[i] < l) {//задаем размер столбца по максимальной длине значение одной из строк
                         colsWidth[i] = l;
                     }
                 }
