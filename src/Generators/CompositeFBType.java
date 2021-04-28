@@ -25,6 +25,7 @@ public class CompositeFBType implements FindCompositeFBType {
     String uuidGCT; // УУИД головного объекта
     Node nodeFBType = null; // Сама нода с графикой
     String typeGCT = null;
+    List<HashMap<String, String>> listVarHMI = null;       // InputVars из блока HMI
 
     public CompositeFBType(XMLSAX bigSax, String typeGCT) {
         this.bigSax = bigSax;
@@ -51,33 +52,56 @@ public class CompositeFBType implements FindCompositeFBType {
 
     // --- получить объект списки полей из HMI (его свежие UUID)---
     public List<HashMap<String, String>> getFBInputs() {
-        List<HashMap<String, String>> listVarHMI = new ArrayList<>();       // InputVars из блока HMI  
-        if (nodeFBType != null) {
-            String[] UUIDFBType = new String[]{bigSax.getDataAttr(nodeFBType, "UUID")};            // берем уид блок превращаем в массив
-            // собрать структурированно InputVars из блока HMI основного
-            Node nodeInputVars = bigSax.returnFirstFinedNode(nodeFBType, "InputVars");
-            if (nodeInputVars == null) {
-                return null;
+        if (listVarHMI == null) {
+            listVarHMI = new ArrayList<>();       // InputVars из блока HMI
+            if (nodeFBType != null) {
+            //String[] UUIDFBType = new String[]{bigSax.getDataAttr(nodeFBType, "UUID")};            // берем уид блок превращаем в массив
+                // собрать структурированно InputVars из блока HMI основного
+                Node nodeInputVars = bigSax.returnFirstFinedNode(nodeFBType, "InputVars");
+                if (nodeInputVars == null) {
+                    return null;
+                }
+                for (Node n : bigSax.getHeirNode(nodeInputVars)) {
+                    listVarHMI.add(bigSax.getDataNode(n));
+                }
             }
-            for (Node n : bigSax.getHeirNode(nodeInputVars)) {
-                listVarHMI.add(bigSax.getDataNode(n));
-            }
+
         }
         return listVarHMI;
     }
-    
-    // --- получить объект списки полей из HMI (его свежие UUID)---
+
+    // --- получить UUID объекта ---
     public String getFBUUID() {
         String UUIDFBType = null;
         if (nodeFBType != null) {
-            UUIDFBType = bigSax.getDataAttr(nodeFBType, "UUID");  
+            UUIDFBType = bigSax.getDataAttr(nodeFBType, "UUID");
         }
         return UUIDFBType;
     }
-    
-    public Node getNodeFB(){
-        if(nodeFBType !=null ) return nodeFBType;
-        else{
+
+    // --- возращает UUID структуры VarDeclaration ---
+    public String getUUIDSigVarDeclaration(String Name) {
+        for (HashMap<String, String> h : getFBInputs()) {              
+            if (Name.equals(h.get("Name"))) {                
+                return h.get("UUID");                 
+            }
+        }
+        return null;
+    }
+
+    // --- возращает Type структуры VarDeclaration ---
+    public String getTypeSigVarDeclaration(String Name) {
+        for (HashMap<String, String> h : getFBInputs()) {              
+            if (Name.equals(h.get("Name"))) {                
+                return h.get("Type");                 
+            }
+        }
+        return null;
+    }
+    public Node getNodeFB() {
+        if (nodeFBType != null) {
+            return nodeFBType;
+        } else {
             FileManager.loggerConstructor("Не найден сигнал GraphicsCompositeFBType или CompositeFBType " + typeGCT + " в файле " + bigSax.getNameFile());
             return null;
         }

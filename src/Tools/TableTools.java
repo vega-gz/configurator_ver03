@@ -6,6 +6,7 @@ import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import org.w3c.dom.Node;
 
@@ -64,16 +66,16 @@ public class TableTools {//ссылка на таблицу, массив шир
             qCol = colWidth.length;  //чтобы не вылететь за границы таблицы, если переданный массив ширин неправильный
         }
         
-        
-        
-       // jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);  //запрещаю изменение ширин солбхов при растягивании окна
-        
-        
-        
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);  //запрещаю изменение ширин столбцов при растягивании окна
         
         for (int i = 0; i < qCol; i++) //устанавливаю ширину всех столбцов
         {
             jTable1.getColumnModel().getColumn(i).setPreferredWidth(colWidth[i]);
+            
+//            //Component component = jTable1.prepareRenderer(colWidth[i]);
+//            int rendererWidth = component.getPreferredSize().width;
+//            TableColumn tableColumn = jTable1.getColumnModel().getColumn(i);
+//            tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
         }
         //Работа с алигнами
         DefaultTableCellRenderer right = new DefaultTableCellRenderer();
@@ -100,13 +102,13 @@ public class TableTools {//ссылка на таблицу, массив шир
         System.setProperty("myColor", "0XEEEEEE");
         defaultTableCellRenderer.setBackground(Color.getColor("myColor")); //задаем цвет столбца
         columnModel.getColumn(0).setCellRenderer(defaultTableCellRenderer);
-        //Работа с высотой заголовков столбцов, чтобы туда влезали многострочные заголовки
-        JTableHeader th = jTable1.getTableHeader();
-        int width = th.getSize().width;
-        th.setPreferredSize(new Dimension(width, headerWidth));
-        th.setSize(width, headerWidth);
-        jTable1.repaint();
-      
+        
+        //Работа с высотой заголовков столбцов, чтобы туда влезали многострочные заголовки(не работает идет смещение)
+//        JTableHeader th = jTable1.getTableHeader();
+//        int width = th.getSize().width;
+//        th.setPreferredSize(new Dimension(width, headerWidth));
+//        th.setSize(width, headerWidth);
+//        jTable1.repaint();
 
         // --- Вставка и копирование объектов таблицы (есть работа с excel) ---
         ExcelAdapter editT = new ExcelAdapter(jTable1);
@@ -435,37 +437,37 @@ public class TableTools {//ссылка на таблицу, массив шир
 
             // когда ткнули на окно или сняли с него фокус(при любых действиях)
             public void windowActivated(WindowEvent event) {
-                if (onCreate) { // проверка только после создания окна
-                    ++globVar.sumFrame;
-                    if (!globVar.windowIconified) { // проверка на сворачивание
-                        if (globVar.captureFocus) { // только одно окно сожет захватить управление
-                            globVar.captureFocus = false; // сразу блочим для остальныхF
-                            for (int i = 0; i < globVar.listF.size(); i++) {
-                                JFrame f = globVar.listF.get(i);
-                                // все окна на передний план
-                                if (f == frame) {
-                                    System.out.println("I am find myself " + f.getTitle());
-                                    --globVar.sumFrame; // нужен правильный подсчет
-                                    continue;
-                                }
-                                //f.setExtendedState(JFrame.ICONIFIED);
-                                f.setExtendedState(JFrame.NORMAL);
-                                f.toFront();
-                                f.requestFocus();
-                            }
-
-                        }
-                    } else {
-                        globVar.windowIconified = false;
-                        globVar.sumFrame = 0;
-                    }
-
-                    if (globVar.sumFrame >= globVar.listF.size()) { // проверка раньше времени чем обработка
-                        globVar.sumFrame = 0;
-                        globVar.captureFocus = true; // разблокировка
-
-                    }
-                }
+//                if (onCreate) { // проверка только после создания окна
+//                    ++globVar.sumFrame;
+//                    if (!globVar.windowIconified) { // проверка на сворачивание
+//                        if (globVar.captureFocus) { // только одно окно может захватить управление
+//                            globVar.captureFocus = false; // сразу блочим для остальныхF
+//                            for (int i = 0; i < globVar.listF.size(); i++) {
+//                                JFrame f = globVar.listF.get(i);
+//                                // все окна на передний план
+//                                if (f == frame) {
+//                                    System.out.println("I am find myself " + f.getTitle());
+//                                    --globVar.sumFrame; // нужен правильный подсчет
+//                                    continue;
+//                                }
+//                                //f.setExtendedState(JFrame.ICONIFIED);
+//                                f.setExtendedState(JFrame.NORMAL);
+//                                f.toFront();
+//                                f.requestFocus();
+//                            }
+//
+//                        }
+//                    } else {
+//                        globVar.windowIconified = false;
+//                        globVar.sumFrame = 0;
+//                    }
+//
+//                    if (globVar.sumFrame >= globVar.listF.size()) { // проверка раньше времени чем обработка
+//                        globVar.sumFrame = 0;
+//                        globVar.captureFocus = true; // разблокировка
+//
+//                    }
+//                }
             }
 
             public void windowClosed(WindowEvent event) {

@@ -228,6 +228,7 @@ public class ExecutiveMechanismFrame extends javax.swing.JFrame {
         DefaultCellEditor editor = new DefaultCellEditor(comboTrueFalse);
         // Определение редактора ячеек для колонки
         jTable1.getColumnModel().getColumn(3).setCellEditor(editor);
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(jTable1);
 
         jCheckBox1.setText("показать без окончаний");
