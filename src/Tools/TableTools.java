@@ -6,9 +6,6 @@ import ReadWriteExcel.ExcelAdapter;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -16,8 +13,6 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,8 +32,6 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import org.w3c.dom.Node;
 
@@ -234,19 +227,26 @@ public class TableTools {//ссылка на таблицу, массив шир
             list_str.clear();
         });
         menuItemRemove.addActionListener((ActionEvent event) -> {
-            int row = jTable1.getSelectedRow();
-            if (row < 0) {
+           
+            int row[] = jTable1.getSelectedRows();
+            if (row.length < 0) {
                 JOptionPane.showMessageDialog(null, "Ни одна строка не помечена");
                 return;
             }
-            Object[] options = {"Да", "Нет"};
-            int casedial = JOptionPane.showOptionDialog(null, "Удалить строку " + (row + 1) + "?", "Выберите действие",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
-            if (casedial != 0) {
-                return; //0 - yes, 1 - no, 2 - cancel            
+//            Object[] options = {"Да", "Нет"};
+//            int casedial = JOptionPane.showOptionDialog(null, "Удалить строку " + (row + 1) + "?", "Выберите действие",
+//                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); // сообщение с выбором
+//            if (casedial != 0) {
+//                return; //0 - yes, 1 - no, 2 - cancel            
+//            }
+//            tableModel.removeRow(row);
+//            setId(jTable1);
+            for(int i=0;i<row.length;i++){
+                tableModel.removeRow(row[0]);
+                setId(jTable1);
+                System.out.println("Удалена строка "+row[i]);
             }
-            tableModel.removeRow(row);
-            setId(jTable1);
+            
 
         });
         menuItemClearCells.addActionListener((ActionEvent event) -> {
