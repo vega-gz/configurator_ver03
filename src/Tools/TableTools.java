@@ -229,6 +229,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                 tableModel.insertRow(row, list_str.get(i));
 
                 setId(jTable1);
+                row++;
             }
             list_str.clear();
         });
