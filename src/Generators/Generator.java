@@ -976,8 +976,8 @@ public class Generator {
 
     // --- Генерация Типов ---
     public static int genTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
-        boolean interGlobCase = false; // вносить ли в глобальные сигналы
-        boolean interLocalCase = false; // вносить ли в локальные сигналы приложения
+        boolean interGlobCase = true; // вносить ли в глобальные сигналы
+        boolean interLocalCase = true; // вносить ли в локальные сигналы приложения
         
         String backUpPath = globVar.backupDir + File.separator;   //установили путь для бэкапа
         String filePath = globVar.desDir + File.separator + "Design"; //установили путь для проекта
@@ -1138,10 +1138,10 @@ public class Generator {
                 for (Node globSig : globSigList) {//--------------------------------------- Занесение сигналов в .prj и .int файлы -------------------------------------
                     String name = globVar.sax.getDataAttr(globSig, "name");
                     
-                    String setEnableGlobaSignal = globVar.sax.getDataAttr(globSig, "enable"); // будет ли включен в Глобальный приложения
+                    String setEnableGlobaSignal = globVar.sax.getDataAttr(globSig, "disable"); // будет ли включен в Глобальный приложения
                     if (setEnableGlobaSignal != null)
                     {
-                        interGlobCase = true;
+                        interGlobCase = false;
                     }
  
                     if (name != null) {
@@ -1184,10 +1184,10 @@ public class Generator {
                     for (Node localSig : localSigList) {
                         String tmp = globVar.sax.getDataAttr(localSig, "name");
                         
-                        String setEnableLocalSignal = globVar.sax.getDataAttr(localSig, "enable"); // будет ли включен в локальный приложения
+                        String setEnableLocalSignal = globVar.sax.getDataAttr(localSig, "disable"); // будет ли включен в локальный приложения
                         if (setEnableLocalSignal != null)
                         {
-                            interLocalCase = true;
+                            interLocalCase = false;
                         }
                         
                         if (tmp != null) {

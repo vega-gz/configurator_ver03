@@ -1627,7 +1627,7 @@
 		</EXEL>	
 		<GenData>	<!-- генерация типа CURVE_FR -->		
 			<Curve_FR typeFile="T_Curve.type">
-				<globData name="Curve_FR" enable="">
+				<globData name="Curve_FR" disable="">
 					<localData int="_GT_4RM.int" />
 				</globData>	
 			</Curve_FR>
