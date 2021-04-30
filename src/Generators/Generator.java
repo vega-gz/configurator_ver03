@@ -976,24 +976,9 @@ public class Generator {
 
     // --- Генерация Типов ---
     public static int genTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
-        int casedial = JOptionPane.showConfirmDialog(null, "Файлы .TYPE для " + ft.tableName() + " генерировать глобальными переменными?"); // сообщение с выбором
-        boolean interGlobCase = false;
-        switch (casedial) {//0 - yes, 1 - no, 2 - cancel
-            case 0:
-                interGlobCase = true;
-                break;
-            case 1:
-                break;
-            case 2:
-                return -2;
-            //break;
-        }
-
-//        if (casedial != 0) {
-//            return -2; 
-//        }       
-        //int caseGlobalOrLocal = JOptionPane.showConfirmDialog(null, "Добавить в Глобальное ?", "Выбор внесения данных", JOptionPane.YES_NO_OPTION); // сообщение с выбором
-        //-------------------------------------------------------------------------------------
+        boolean interGlobCase = false; // вносить ли в глобальные сигналы
+        boolean interLocalCase = false; // вносить ли в локальные сигналы приложения
+        
         String backUpPath = globVar.backupDir + File.separator;   //установили путь для бэкапа
         String filePath = globVar.desDir + File.separator + "Design"; //установили путь для проекта
         String nodeTable = ft.tableName();
@@ -1041,7 +1026,11 @@ public class Generator {
             }
             if (nodesGenData.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Node currNodeCfgXML = nodesGenData.item(i);
-                ArrayList<Node> globSigList = globVar.sax.getHeirNode(currNodeCfgXML);//Находим все ноды внутри ноды типа файла
+                ArrayList<Node> globSigList = new ArrayList<>();
+                for(Node n: globVar.sax.getHeirNode(currNodeCfgXML))//Находим все ноды globData внутри ноды типа файла
+                {
+                    if(n.getNodeName().equals("globData")) globSigList.add(n);
+                }
                 String nodeName = currNodeCfgXML.getNodeName();//определяем имя ноды
                 //Создаём список типов данных, для которых не надо создавать полей в структуре
                 ArrayList<String> notGenTyps = StrTools.getListFromString(globVar.sax.getDataAttr(currNodeCfgXML, "notGenTyps"), ",");
@@ -1148,6 +1137,13 @@ public class Generator {
                 localSax.writeDocument(filePath + File.separator + trueName);//записали файл
                 for (Node globSig : globSigList) {//--------------------------------------- Занесение сигналов в .prj и .int файлы -------------------------------------
                     String name = globVar.sax.getDataAttr(globSig, "name");
+                    
+                    String setEnableGlobaSignal = globVar.sax.getDataAttr(globSig, "enable"); // будет ли включен в Глобальный приложения
+                    if (setEnableGlobaSignal != null)
+                    {
+                        interGlobCase = true;
+                    }
+ 
                     if (name != null) {
                         String hmiApp = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI");
                         Node localRoot = null;
@@ -1168,7 +1164,7 @@ public class Generator {
                             }
                         }
                         for (String s : exArr) {
-                            if (interGlobCase) {
+                            if (interGlobCase) { // вносим или пропускаем в Глобальное
                                 globUUID = insertVarInPrj(prjSax, interfaceList, s + "_" + subAb + isMb + name, typeUUID, "", true, false, null,
                                         filePath + File.separator + "Project.prj", backUpPath + "Project.prj");
                                 if (!hmiApp.isEmpty()) {
@@ -1177,17 +1173,23 @@ public class Generator {
                                 }
                             } else {
                                 if (!hmiApp.isEmpty()) { //не нужно в HMI вообще помещать
-//                                    globUUID = insertVarInPrj(localSigSax, localInterfaceList, s + "_" + subAb + isMb + name, typeUUID,
-//                                            "", false, true, null, filePath + File.separator + file, backUpPath + file);
+
                                 }
                             }
 
                         }
                     }
-                    ArrayList<Node> localSigList = globVar.sax.getHeirNode(globSig);//Находим все ноды
+                    ArrayList<Node> localSigList = globVar.sax.getHeirNode(globSig);// берем наследников globData(они должны быть localData)
                     boolean glob = name != null && exArr.size() == 1;
                     for (Node localSig : localSigList) {
                         String tmp = globVar.sax.getDataAttr(localSig, "name");
+                        
+                        String setEnableLocalSignal = globVar.sax.getDataAttr(localSig, "enable"); // будет ли включен в локальный приложения
+                        if (setEnableLocalSignal != null)
+                        {
+                            interLocalCase = true;
+                        }
+                        
                         if (tmp != null) {
                             name = tmp;
                         } else if (name == null) {
@@ -1216,8 +1218,12 @@ public class Generator {
                             FileManager.loggerConstructor("Не найден раздел <InterfaceList> в файле " + filePath + File.separator + localDocName);
                             return -1;
                         }
-                        insertVarInPrj(localSigSax, localInterfaceList, abonent + "_" + subAb + isMb + name, typeUUID, "", glob, true,
-                                globUUID, filePath + File.separator + localDocName, backUpPath + localDocName);
+                        
+                        if(interLocalCase) // помещаем в локальное приложение 
+                        {
+                            insertVarInPrj(localSigSax, localInterfaceList, abonent + "_" + subAb + isMb + name, typeUUID, "", glob, true,
+                                    globUUID, filePath + File.separator + localDocName, backUpPath + localDocName);
+                        }
                     }
                 }
             }
