@@ -51,7 +51,7 @@ public class AddGenData extends javax.swing.JFrame {
 
         jTextField1.setText("Наименование структуры");
 
-        jButton1.setText("Создать");
+        jButton1.setText("Добавить");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -84,7 +84,7 @@ public class AddGenData extends javax.swing.JFrame {
                         .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

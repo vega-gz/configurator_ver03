@@ -5,6 +5,7 @@
  */
 package Settings;
 
+import Settings.AddGenData;
 import Main.Main_JPanel;
 import ReadWriteExcel.RWExcel;
 import Tools.FileManager;
@@ -31,6 +32,7 @@ public class CreateFTable extends javax.swing.JFrame {
     String commentTable;
     String prefixTable;//префикс таблицы (вводится руками)
     String nameTable;//послное имя таблицы
+   
     public String[] tableCols;
     javax.swing.JTree jTree1;
     ArrayList<String> nColList = new ArrayList<>();//ArrayList имен столбцов Exel из ConfigSugnals
@@ -188,6 +190,10 @@ public class CreateFTable extends javax.swing.JFrame {
 
         typeTable = (String) jComboBox1.getSelectedItem();//берем значение из "Шаблон типа таблицы"
         tableColumns = RWExcel.getExcelChild(typeTable, tableCols, nColList);
+        if(!jTextField2.getText().isEmpty()&&!typeTable.equals("newTable")){
+            typeTable=jTextField2.getText();
+        }
+        
         if (tableColumns == null) {
             FileManager.loggerConstructor("Не нашел таблицу " + typeTable + " в EXCEL ");
         }
