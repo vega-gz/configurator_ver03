@@ -1329,7 +1329,9 @@ public class Generator {
         String nameToblock = commonFileST;                                 // оригинальное название ноды сохраняем и его же и ищем потом
         // разбор имени если есть точка в имени(нахождение расширения)
         String etxLUA = "lua";
+        String etxHTML = "html";
         boolean findLUAext = false;
+        boolean findHTMLext = false;
         boolean extF = false;                                               //  Есть ли вообще расширение
         boolean findNonFunction = false;
         String[] separNameF = stFileName.split("\\.");
@@ -1338,6 +1340,9 @@ public class Generator {
             ext = separNameF[separNameF.length - 1];                        // последнее разбитое это и будет окончание
             if (ext.equalsIgnoreCase(etxLUA)) {
                 findLUAext = true;             // определения файла ЛУА    
+            }
+            if (ext.equalsIgnoreCase(etxHTML)) {
+                findHTMLext = true;             // определения файла репорта HTML    
             }
         } else {
             stFileName = stFileName + ".txt";
@@ -1366,7 +1371,8 @@ public class Generator {
             ret = fm.openFile4read(globVar.myDir, commonFileST + ".txt");
             if (ret != 0) {
                 return closeByErr(fm, tmpFile, "Не удалось прочитать служебный файл (шаблон) \""
-                        + globVar.myDir + File.separator + commonFileST + " or " + commonFileST + ".txt");
+                        + globVar.myDir + File.separator + commonFileST + " or " + commonFileST + ".txt" + 
+                        "\n или ошибки в шаблоне.");
             } else {
                 commonFileST = commonFileST + ".txt";                                  // на всякий так как не знаю для чего вообще эта переменная
             }
@@ -1417,7 +1423,10 @@ public class Generator {
         }
 
         // это костыль для LUA файлов не вносим эту строку
-        if (!findLUAext) {
+        if (findLUAext || findHTMLext){
+            //  знаю идиотия но работает
+        }
+        else{
             if (findNonFunction) {
                 fm.wr("<Data>\n<" + nameFunction + " UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ShowVarTypes=\"true\">\n");
             } else {
@@ -1429,11 +1438,18 @@ public class Generator {
                 }
             }
         }
-
+           
+        ArrayList<Node> markerEdit = new ArrayList<>();             // ноды маркеров которые нужно изменить в шаблоне   
         ArrayList<Node> blockList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node block : blockList) {
+            if(block.getNodeName().equalsIgnoreCase("MarkTemplate"))
+            {
+                markerEdit = globVar.sax.getHeirNode(block);
+                continue;
+            }
             String start = (String) globVar.sax.getDataNode(block).get("start");
             String end = (String) globVar.sax.getDataNode(block).get("end");
+          
             //Создаём список типов данных, для которых не надо создавать полей в структуре
             ArrayList<String> notGenTyps = StrTools.getListFromString(globVar.sax.getDataAttr(block, "notGenTyps"), ",");
             ArrayList<String> isGenTyps = StrTools.getListFromString(globVar.sax.getDataAttr(block, "isGenTyps"), ",");
@@ -1445,7 +1461,19 @@ public class Generator {
             String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, (оконнчание файла)
 
             while (!fm.EOF && !s.contains(start)) {
-                fm.wr(s + "\n");                                                    //ищем в исходнои файле её первое вхождение
+                // изменение строки из шаблона с заданными параметрами
+                for(Node n: markerEdit){
+                    String whoEdit = (String) globVar.sax.getDataNode(n).get("edit");
+                    String toEdit = (String) globVar.sax.getDataNode(n).get("val");
+            
+                    String[] cutStringIndex = s.split(whoEdit);
+                    if(cutStringIndex.length > 1)
+                    {
+                        s = cutStringIndex[0] + toEdit + cutStringIndex[1];
+                    }
+                }
+                
+                fm.wr(s + "\n");                                                    // переписываем данные шаблона
                 s = fm.rd();
             }
             if (fm.EOF) {
@@ -1453,10 +1481,12 @@ public class Generator {
             }
             // опять идиотизм с LUA это править надо
             if (!findLUAext) {
-                fm.wr("//" + start + "\n");
+                if (findHTMLext) {
+                    fm.wr("<!--" + start + "-->\n"); // особый формат для html
+                }else fm.wr("//" + start + "\n"); // обычная запись для ST
             } else {
                 fm.wr("--" + start + "\n");
-            }
+            } 
 
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
@@ -1480,7 +1510,13 @@ public class Generator {
                     } else {
                         String addStr = createString(cont, ft, abSubAb, disableReserve, j);     // Обработка "строковой" ноды (любой другой)
                         if (addStr != null) {
-                            if(beforeValueGenString != null) fm.wr(beforeValueGenString); // записываем предыдущий
+                            if(beforeValueGenString != null){ // записываем предыдущий
+                                if(findHTMLext){
+                                    int indeChar = beforeValueGenString.lastIndexOf(';');
+                                    beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
+                                    fm.wr(beforeValueGenString);
+                                }else fm.wr(beforeValueGenString);
+                            } 
                             beforeValueGenString = addStr;
 
                         } 

@@ -5,6 +5,7 @@ import Tools.Observed;
 import Tools.Observer;
 import Tools.StrTools;
 import XMLTools.UUID;
+import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -156,6 +157,7 @@ public class DataBase implements Observed {
             insertRow(name_table, data.get(i), arrNameCol, i+1);
         }
     }
+    // ----------------------------------------------------------------------------------------------
     public void createTable(String name_table,  String[] arrNameCol, String[][] data, String  comment) {
         if(isTable(name_table)) dropTable(name_table);
         createTableEasy(name_table,  arrNameCol, comment);
@@ -164,6 +166,7 @@ public class DataBase implements Observed {
         }
     }
     
+    // --------------------------------------------------------------------------------------
     public void createTableEasy(String name_table,  String[] listNameColum,  String  comment) {
         if (name_table.isEmpty() || listNameColum.length == 0 || isTable(name_table)) return; 
         String sql = "";
@@ -176,7 +179,7 @@ public class DataBase implements Observed {
             for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\" TEXT";
             sql += ");";
             
-            System.out.println("Easy table " + sql); // смотрим какой запрос на соз
+            //System.out.println("Easy table " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
             if(comment!=null && !comment.isEmpty()) createCommentTable(name_table, comment); // вызом метода добавления комментария
@@ -312,20 +315,23 @@ public class DataBase implements Observed {
         }
     }
      
-    // получение таблицы целиком отсортированной по столбцу id
+    // --- получение таблицы целиком отсортированной по столбцу id ---
     public ArrayList<String[]> getData(String table) {
         return getData(table, "id");
     }
-    // получение таблицы целиком отсортированной по заданному столбцу ---Lev---
+    
+    // --- получение таблицы целиком отсортированной по заданному столбцу ---Lev---
     public ArrayList<String[]> getData(String table, String orderCol) {
         ArrayList<String> columns = getListColumns(table);
         return getData(table, columns, " ORDER BY \"" +orderCol +"\"");
     }
+    
     // получение из таблицы выборки по определённому значению одного из столбцов, отсортированной по заданному столбцу ---Lev---
     public ArrayList<String[]> getData(String table, String orderCol, String desiredCol, String disiredVal) {
         ArrayList<String> columns = getListColumns(table);
         return getData(table, columns, orderCol, desiredCol, disiredVal);
     }
+    
     // получение из таблицы выборки по определённому значению одного из столбцов, отсортированной по заданному столбцу и списку столбцов---Lev---
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String desiredCol, String disiredVal) {
         String where = "";
@@ -334,20 +340,24 @@ public class DataBase implements Observed {
         if(orderCol!=null) order = " ORDER BY \"" +orderCol +"\"";
         return getData(table, columns, order, where);
     }
+    
     // --- Получить данные из БД по имени таблицы и массиву столбцов ---Lev---
     public ArrayList<String[]> getData(String table, String[] columns) {
         ArrayList<String> al = new ArrayList<>();
         for(String c:columns) al.add(c);
         return getData(table, al);
     }
+    
     // --- Получить данные из БД по имени таблицы и списку столбцов ---Lev---
     public ArrayList<String[]> getData(String table, ArrayList<String> columns) {
         return getData(table, columns, "");
     }
+    
     //метод получения данных из таблицы, учитывающий список столбцов и сортировку
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol) {
         return getData(table, columns, orderCol, "");
     }
+    
     //Главный метод получения данных из таблицы, учитывающий все условия: список столбцов, сортировку и фильтр
     public ArrayList<String[]> getData(String table, ArrayList<String> columns, String orderCol, String where) {
         
@@ -416,6 +426,7 @@ public class DataBase implements Observed {
         }
         return val2;
     }
+    
     // --- Select columns Table  ---
     public ArrayList<String> getListColumns(String table) {
         ArrayList<String> listColumn = new ArrayList();
@@ -900,8 +911,10 @@ public class DataBase implements Observed {
             return status;
         }
     }
+     
+     
     
-    // --- Функции наблюдателя ---
+    // --- Функции наблюдателя (нужен он или нет Вообще наблюдатель)---
     @Override
     public void addObserver(Observer o) { // добавить слушателя
         observers.add(o);
@@ -928,31 +941,55 @@ public class DataBase implements Observed {
     }
 
     
-//    public static void main(String[] arg){
-//        XMLSAX.getConnectBaseConfig("Config.xml");
-//        DataBase db = new DataBase();
-//        globVar.DB = db;
+    // --- получить уставки сигнала (недоделан)---
+     public ArrayList<ArrayList<String>> getSetingsSignal(){
+        /*
+         1-й Лист возратит названия столбцов
+         */
+        String table_name = "SignalSetups";
+        ArrayList<String> columnSeting = getListColumns(table_name);
+        String sql = null;
+        String[] columnT = {"Abonent", "Type", "NameSig", "Direction", "Data"};
+        String commentT = "setups signals";
+        
+        if(getListTable().indexOf(table_name) < 0){
+            createTableEasy(table_name, columnT, commentT);
+        } else{
+            
+            System.out.println("Table " + table_name + " is present in DB!");
+        }
+        
+        return null;
+    }
+    
+    public static void main(String[] arg){
+        XMLSAX.getConnectBaseConfig("Config.xml");
+        DataBase db = new DataBase();
+        globVar.DB = db;
+        
+        
 //        System.out.println(db.getTimeFirstCommit("Abonents")); // получить первый коммит времени строки таблицы
 //        //db.dropTableWithBackUp("Abonents");
-//        for(String s: db.getListTable() ){
-//            System.out.println(s);
-//        }
+        for(String s: db.getListTable() ){
+            System.out.println(s);
+        }
+        db.getSetingsSignal();
 //        
 //        db.renameTable("Del_20_08_12_09_08_30_Abonents","Abonents");
 //       //String nameBD = db.getCurrentNameBase();
 //       System.out.println(db.getListTable().toString());
 //       db.createCommentTable("NMC_DGI", "comment");
 //       System.out.println(db.getCommentTable("NMC_DGI"));
-       //System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
-       //String[] rows = {"325", "Commen-665", "NZ", "0987654321", "name-struct"};
-       //String[] rows = {"Commen-665", "NZ", "name-struct"};
-       //ArrayList<String> listNameColum = new ArrayList<>();
-       //listNameColum.add("id");
-       // listNameColum.add("UUID");
-       //listNameColum.add("Comment");
-       //listNameColum.add("Type");    
-       //listNameColum.add("Name");
-       //db.insertRows("t_gpa_di_settings", rows, listNameColum);
-    
- //  }
+//       System.out.println(db.getListColumnTable("t_gpa_di_settings").toString());
+//       String[] rows = {"325", "Commen-665", "NZ", "0987654321", "name-struct"};
+//       String[] rows = {"Commen-665", "NZ", "name-struct"};
+//       ArrayList<String> listNameColum = new ArrayList<>();
+//       listNameColum.add("id");
+//        listNameColum.add("UUID");
+//       listNameColum.add("Comment");
+//       listNameColum.add("Type");    
+//       listNameColum.add("Name");
+//       db.insertRows("t_gpa_di_settings", rows, listNameColum);
+//    
+   }
 }
