@@ -1442,7 +1442,7 @@ public class Generator {
         ArrayList<Node> markerEdit = new ArrayList<>();             // ноды маркеров которые нужно изменить в шаблоне   
         ArrayList<Node> blockList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node block : blockList) {
-            if(block.getNodeName().equalsIgnoreCase("MarkTemplate"))
+            if(block.getNodeName().equalsIgnoreCase("MarkTemplate")) // поиск НОды с данными которые нужно изменить
             {
                 markerEdit = globVar.sax.getHeirNode(block);
                 continue;
@@ -1464,13 +1464,17 @@ public class Generator {
                 // изменение строки из шаблона с заданными параметрами
                 for(Node n: markerEdit){
                     String whoEdit = (String) globVar.sax.getDataNode(n).get("edit");
-                    String toEdit = (String) globVar.sax.getDataNode(n).get("val");
+                    String toEdit = "";
+                    for (Node nodemarkerEdit: globVar.sax.getHeirNode(n)) {
+                        toEdit += getPartText(nodemarkerEdit, abonent, null, 0); // проход по значениям аргументов
+                    }
             
                     String[] cutStringIndex = s.split(whoEdit);
                     if(cutStringIndex.length > 1)
                     {
                         s = cutStringIndex[0] + toEdit + cutStringIndex[1];
                     }
+                
                 }
                 
                 fm.wr(s + "\n");                                                    // переписываем данные шаблона
