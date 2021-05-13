@@ -80,6 +80,7 @@ public class XMLSAX {
         } catch (SAXException | InterruptedException | TransformerFactoryConfigurationError | IOException | ParserConfigurationException ex) {
             System.out.println(patchF + " - это не XML или ошибки в нём критические");
             ex.printStackTrace(System.out);
+            root = null;
         }
         return root;
     }

@@ -211,7 +211,7 @@
 				</TAG>
 			</additionalVar>	
 		</GenHMI> 
-		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" target=""> <!-- isAlarm="false" --> 		
+		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" target="C_HMI.iec_hmi"> <!-- isAlarm="false" --> 		
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="modePZ"/>
