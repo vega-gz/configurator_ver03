@@ -949,7 +949,7 @@ public class DataBase implements Observed {
         String table_name = "SignalSetups";
         ArrayList<String> columnSeting = getListColumns(table_name);
         String sql = null;
-        String[] columnT = {"Abonent", "Type", "NameSig", "Direction", "Data"};
+        String[] columnT = {"Abonent", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"};
         String commentT = "setups signals";
         
         if(getListTable().indexOf(table_name) < 0){
