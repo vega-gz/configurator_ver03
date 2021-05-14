@@ -2,6 +2,7 @@
 <Data>
     <GraphicsCompositeFBType>
         <InterfaceList>
+            <EventInputs/>
             <EventOutputs>
                 <Event Comment="1событие нажатия левой кнопки мыши на объекте" Name="mouseLBPress" UUID="299295AF47A6CCAC26009C964C5B47C5"/>
                 <Event Comment="событие отпускания левой кнопки мыши на объекте" Name="mouseLBRelease" UUID="8DE6001343803CF639F332B16CC30079"/>
@@ -20,8 +21,6 @@
                 <VarDeclaration Comment="z-индекс объекта" InitialValue="0" Name="zValue" Type="LREAL" TypeUUID="65F1DDD44EDA9C0776BB16BBDFE36B1F" UUID="29E9E6AD475BD9B49E6F40B0328374A7"/>
                 <VarDeclaration Comment="всплывающая подсказка" InitialValue="''" Name="hint" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="9001F21244C66932FB81B7B021B085BA"/>
                 <VarDeclaration Comment="размер прямоугольника" InitialValue="(width:=50,height:=50)" Name="size" Type="TSize" TypeUUID="B33EE7B84825BBBA7F975BB735D4EB22" UUID="1555B4384D69683C33FCB4A79B1A0932"/>
-                <VarDeclaration InitialValue="''" Name="PrefAb" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="7B21228345FE145C1039349D18AF2C71"/>
-                <VarDeclaration InitialValue="''" Name="NameRU" Type="STRING" TypeUUID="38FDDE3B442D86554C56C884065F87B7" UUID="D11E59B74DBD1F394957C4876E4DCD20"/>
             </InputVars>
         </InterfaceList>
         <FBNetwork>
@@ -30,6 +29,7 @@
 	
 	<CompositeFBType>
         <InterfaceList>
+		<EventInputs/>
             <InputVars>
                 <VarDeclaration Name="NameRU" Type="STRING" InitialValue="&apos;&apos;" UUID="2TRL7CWGTXZUXKQMBEX4OKO2S4" />
                 <VarDeclaration Name="PrefAb" Type="STRING" InitialValue="&apos;&apos;" UUID="OFVQBP34MUKUHHAUN7XQCUVIPY" />

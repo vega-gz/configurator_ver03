@@ -882,9 +882,9 @@
 		<GenHW drvFile="_DO_DRV" globData="_DO_DRV"/> <!--hwFile="_modbus.mb_cfg" intFile="_modbus.int"/-->
 	</mb_DO>
 	<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА АЛАРМОВ ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<!--APS excelSheetName="APS" Comment="Аварино-предупредительная сигнализация"> Обработка таблицы при совмещенном вварианте АПС (АС и ПС вместе)
+	<APS excelSheetName="APS" Comment="Аварино-предупредительная сигнализация"> <!--Обработка таблицы при совмещенном вварианте АПС (АС и ПС вместе) -->
 		<EXEL>
-			<B nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>  <Алгоритмическое имя аларма>
+			<B nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>  <!--Алгоритмическое имя аларма -->
 			<C nameColumnPos="Наименование" /> 
 			<D nameColumnPos="Условие_срабатывания_АПС" /> 
 			<E nameColumnPos="Время_задержки" type="Number" default="0.0"/>
@@ -892,7 +892,7 @@
 			<G nameColumnPos="Источник"  default=""/>
 			<H nameColumnPos="Примечание" default=""/>
 		</EXEL>
-		<GenData>	< генерация типов АПС >
+		<GenData>	<!--  генерация типов АПС -->
 			<APS Type="BOOL"> 
 				<globData name="APS"> 
 					<localData int="_Algorithm.int" />
@@ -905,7 +905,7 @@
 			</APS_Internal>	
 		</GenData>
 		<GenCode>
-			<File src= "Call_APS"  target="_Algorithm"> < target="_Algorithm"> генерация блока вызовов обработчиков >
+			<File src= "Call_APS"  target="_Algorithm"> <!-- генерация блока вызовов обработчиков -->
 				<Block start="Начало сгенерированного кода APS_Processing" end="Конец сгенерированного кода">
 					<Function name="APS_Processing">
 						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
@@ -918,7 +918,7 @@
 					</Function>	
 				</Block>
 			</File>
-			<File src= "APS_Init" target="_Algorithm"> < target="_Algorithm"> генерация функции инициализации >
+			<File src= "APS_Init" target="_Algorithm"> <!--генерация функции инициализации-->
 				<Block start="Начало сгенерированного кода APS_Init" end="Конец сгенерированного кода">
 					<String>
 						<abonent/><text t="_APS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
@@ -935,15 +935,15 @@
 					</String>						
 				</Block>
 			</File>
-			<File src= "FirstOut.lua"> < генерация lua таблицы имен алармов >	
+			<File src= "FirstOut.lua"> <!-- генерация lua таблицы имен алармов -->	
 				<Block start="Начало таблицы" end="Конец таблицы" >
 					<String> 
-						<IF cond="Status" val="ПС"><пропускаем или пишем пустую строку если нашли ПС>
+						<IF cond="Status" val="ПС"> <!--пропускаем или пишем пустую строку если нашли ПС-->
 								<text t=""/>
 							<ELSE>
-								<IF cond="Status" val="АС"> < пропускаем или пишем пустую строку если нашли АС>
+								<IF cond="Status" val="АС"> <!-- пропускаем или пишем пустую строку если нашли АС-->
 										<text t=""/>
-									<ELSE>  < в остальных случае формируем строку таблицы lua >
+									<ELSE>  <!-- в остальных случае формируем строку таблицы lua -->
 											<text t="'_APS."/>
 											<dbd t="TAG_NAME_PLC"/>
 											<text t="',  '"/>
@@ -958,7 +958,7 @@
 				</Block>
 			</File>	
 		</GenCode>		
-	</APS-->
+	</APS>
 	<AS excelSheetName="AS" Comment="Аварийная сигнализация">
 		<EXEL>
 			<B nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/> <!-- Алгоритмическое имя аларма-->
@@ -988,8 +988,7 @@
 			</PPZ>
 		</GenData>
 		<GenCode>
-		<!--
-			<File src= "Call_AS"  target="_Algorithm"> <!- target="_Algorithm"> генерация блока вызовов обработчиков ->
+			<File src= "Call_AS"  target="_Algorithm"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
 				<Block start="Начало кода" end="Конец кода">
 					<Function name="AS_Processing">
 						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
@@ -1002,8 +1001,7 @@
 					</Function>	
 				</Block>
 			</File>
-			
-			<File src= "AS_Init" target="_Algorithm"> <!- target="_Algorithm"> генерация функции инициализации ->
+			<File src= "AS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации -->
 				<Block start="Начало кода" end="Конец кода">
 					<String>
 						<abonent/><text t="_AS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
@@ -1018,27 +1016,29 @@
 					</String>						
 				</Block>
 			</File>
-			
-			<File src= "FirstOut.lua"> <!- генерация lua таблицы имен алармов ->	
+			<File src= "FirstOut.lua"> <!-- генерация lua таблицы имен алармов -->	
 				<Block start="Начало таблицы" end="Конец таблицы" >
-					<String> <!- отдельной нодой обозначается разборка строки ->
-						<text t="'_AS."/><dbd t="TAG_NAME_PLC"/><text t="',  '"/><dbd t="Status"/><text t="',  - "/><dbd t="Наименование"/> 
+					<String> <!-- отдельной нодой обозначается разборка строки -->
+						<text t="'_AS."/><dbd t="TAG_NAME_PLC"/><text t="',  '"/><dbd t="Status"/><text t="',  -- "/><dbd t="Наименование"/> 
 					</String>	
 				</Block>
 			</File>	
-			-->
 			<File src= "Report.html"> <!--Создание печатного протокола ПЗ -->
 				<MarkTemplate>
-					<markerEdit edit="RPT SIGNAL11:">
-						<text t= "888"/>
-						<abonent/>
+					<markerEdit edit="CurrentAbonent" val="GPA_ReportCommand.curAb"/>
+					<!--markerEdit edit="RPT SIGNAL2:" val="new_val66"/-->
+				</MarkTemplate>
+				<MarkTemplate>
+					<markerEdit edit="CurrentAbonent">				
+						<abonent/><text t= "_ReportCommand.curAb()"/>
 					</markerEdit>
-					<markerEdit edit="RPT SIGNAL21:">
+					<!--markerEdit edit="Select">
 						<text t= "777"/>
 						<abonent/>
-					</markerEdit>
-				</MarkTemplate>
-				<Block start="Начало кода" end="Конец кода" >
+					</markerEdit-->
+				</MarkTemplate>				
+				
+				<Block start="Начало кода" end="Конец кода">
 					<String>
 						<text t="&lt;tr&gt; &lt;!-- "/><dbd t="Наименование"/><text t="--&gt;"/>
 					</String>

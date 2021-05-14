@@ -361,7 +361,7 @@ public class Generator {
             return ""; //0 - yes, 1 - no, 2 - cancel
         }
         String modelFile;                  // 
-        CompositeFBType myPageFB = null;    // Объект с уидами и структурами страницы которую генерируем но если она уже есть в проекте        
+        CompositeFBTypeValInputVars myPageFBInputVars = null;    // Объект с уидами и структурами страницы которую генерируем но если она уже есть в проекте( Переменные  InputVars)      
         String nameTable = ft.tableName();  //нашли ai ao do и тд
         int x = nameTable.indexOf("_");
         String abonent = nameTable.substring(0, x);
@@ -413,7 +413,7 @@ public class Generator {
         for (Node hmiNode : hmiNodeList) {
             String typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // имя HMI ноды(какой тип блочка может быть в выборе IF-ELSE)
             
-            String mainFileReadHMI = HMIcfg.getDataAttr(hmiNode, "target"); // файл не по умолчанию головной ноды(Длясерверного по)
+            String mainFileReadHMI = HMIcfg.getDataAttr(hmiNode, "target"); // файл не по умолчанию головной ноды(Для серверного по)
             if(mainFileReadHMI != null ){
                 if(mainFileReadHMI.length() > 0){
                     hmiProjectFile = globVar.desDir + File.separator + "Design" + File.separator + mainFileReadHMI;
@@ -443,11 +443,13 @@ public class Generator {
 
             // *** определяем тип наших блоков которыми заполняем лист ***
             List<HashMap<String, String>> listVarHMI = new ArrayList<>();       // InputVars из блока HMI  
+            List<HashMap<String, String>> listEventHMI = new ArrayList<>();       // InputVars из блока HMI  
             String uuidGCT = null;
 
             if (typeGCT != null) { // сбор данных по головному блоку
-                CompositeFBType fbBigSAX = new CompositeFBType(bigSax, typeGCT); // реализовываем новый класс хранящий данные Типа Графического блока
-                listVarHMI = fbBigSAX.getFBInputs();                            // собрать структурированно InputVars из блока HMI (на основе которых строим блочки)
+                CompositeFBTypeValInputVars fbBigSAX = new CompositeFBTypeValInputVars(bigSax, typeGCT); // реализовываем новый класс хранящий данные Типа Графического блока
+                listVarHMI = fbBigSAX.getFBInputs();    // собрать структурированно InputVars из блока HMI (на основе которых строим блочки)
+                listEventHMI = fbBigSAX.getFBEvents(); // собрать структурированно Events из блока HMI (на основе которых строим блочки)
                 uuidGCT = fbBigSAX.getFBUUID();
             }
 
@@ -507,8 +509,8 @@ public class Generator {
                 HMIsax.setDataAttr(gctNode, "Name", pageName);
 
                 // ищем Готовый блок в головной ноде который генерируем
-                myPageFB = new CompositeFBType(bigSax, pageName);
-                String sheetUUID = myPageFB.getFBUUID();
+                myPageFBInputVars = new CompositeFBTypeValInputVars(bigSax, pageName);
+                String sheetUUID = myPageFBInputVars.getFBUUID();
 
                 if (sheetUUID == null) {
                     sheetUUID = UUID.getUIID();
@@ -526,21 +528,39 @@ public class Generator {
 
             // --- Добавить или удалить значения в InputVars ноде графического типа --- 
             ArrayList<ConnectionData> connectionDataSigs = new ArrayList<>();       // Список сигналов которые надо соеденить в данном блоке
-            ArrayList<ConnectionData> connectionEvent = new ArrayList<>();       // Список Событий которые надо соеденить в данном блоке
+            ArrayList<ConnectionData> connectionEvent = new ArrayList<>();          // Список Событий которые надо соеденить в данном блоке
             
 
             Node nodeInputVars = HMIsax.returnFirstFinedNode(gctNode, "InputVars");
+            Node nodeEventInputs = HMIsax.returnFirstFinedNode(gctNode, "EventInputs"); // нода входящих событий из файла манекена
+            ControlSignals controlSignals = new ControlSignals(); // следим какие сигналы редактировали
             if (!(typeGCT == null)) {
-                if (nodeInputVars != null) {
-                    ConnectionElementDeclaration gegElemenConnect = new ConnectionElementDeclaration(bigSax, HMIcfg, hmiNode, HMIsax, nodeInputVars, connectionDataSigs, listVarHMI, myPageFB);
-                    //addInputVarsVarDeclaration(bigSax, HMIcfg, hmiNode, HMIsax, nodeInputVars, connectionDataSigs, listVarHMI, myPageFB);
-                    connectionDataSigs = gegElemenConnect.getConnectionsSigs(); // получить сформированные сигналы для коннекта
+                if (nodeInputVars != null) { //  не будет работать если вообще нет InputVars
+                    Connection getElemenConnect = new ConnectionElementDeclaration(bigSax, HMIcfg, hmiNode, HMIsax, nodeInputVars, listVarHMI, myPageFBInputVars,controlSignals);
+                    connectionDataSigs = getElemenConnect.getConnectionsSigsVarDeclaration(); // получить сформированные сигналы для коннекта
                 }
                 // прогон по файлу если только есть обозначение явно указан type в ноде
                 for (ConnectionData c : connectionDataSigs) {                   // Проход по добавленным сигналам
-                    for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
-                        if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
-                            c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
+                    if(listVarHMI != null){
+                        for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
+                            if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
+                                c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
+                            }
+                        }
+                    }
+                }
+                 
+                if (nodeEventInputs != null) { //  не будет работать если вообще нет InputVars
+                    Connection elemenConnectEvent = new ConnectionElementDeclaration(bigSax, HMIcfg, hmiNode, HMIsax, nodeEventInputs, listEventHMI, myPageFBInputVars, controlSignals);
+                    connectionEvent = elemenConnectEvent.getConnectionsSigsEvent(); // получить сформированные сигналы для коннекта
+                }
+                // прогон по файлу если только есть обозначение явно указан type в ноде(уже перебор событий)
+                for (ConnectionData c : connectionEvent) {                   // Проход по добавленным сигналам
+                    if(listEventHMI != null){
+                        for (HashMap<String, String> h : listEventHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
+                            if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
+                                c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
+                            }
                         }
                     }
                 }
@@ -553,13 +573,14 @@ public class Generator {
 
             FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
             Node DataConnections = HMIsax.createNode("DataConnections");
+            Node EventConnections = HMIsax.createNode("EventConnections");           // нода для Соединения событий
             int fbX = 0, fbY = 0, col = 1, row = 1;
             Double posElemX = startPosX, posElemY = startPosY;
             int pageCnt = 1;
             String nameCol = HMIcfg.getDataAttr(hmiNode, "ruName");
             boolean isAlarm = HMIcfg.getDataAttr(hmiNode, "isAlarm") != null; //!!!!!!!!!!!!!!Добавить проверку, что атрибут isAlarm == true
 
-            // ============== цикл по строкам таблицы ==================
+            // ### цикл по строкам таблицы ###
             int jpgMax = ft.tableSize();
             for (int i = 0; i < jpgMax; i++) {
                 if (jProgressBar != null) {
@@ -589,8 +610,11 @@ public class Generator {
                 getAddVars(HMIcfg, hmiNode, addVarsData, editVar, ft, i);                  // Формируем InputVar при каждом проходе
                 //System.out.println(editVar.size());
 
+                ArrayList<ConnectionData> connectionDataSigsIF = null; // Сигналы которые нужно прикрутить тем которые есть по умолчанию.
+                ArrayList<ConnectionData> connectionEventIF = null;
                 outerisIF:
                 if (isIF) {//ищем условния выбора типа блока ( в ноде нет "type" выполняеться "IF") 
+                    typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // Еще раз читаем из конфига так как с предыдущего условия может остаться
                     String[] gctData = new String[3]; //  3 - идентификатор что произошло в фукции
                     ArrayList<String> hintALTMP = new ArrayList<>(); // временная подсказка для этого блока
                     Node nodeIFELSE = setTypeHintAdd(HMIcfg, bigSax, ft, hmiNode, addVarsData, gctData, i, hintALTMP); // type блока,формируется подсказка, узнаем Alarm)
@@ -601,7 +625,7 @@ public class Generator {
                         continue;
                     }
                     
-                    if (nodeIFELSE == null) { // не нашли новый тип type блока просто продобжаем работу без IF
+                    if (nodeIFELSE == null) { // не нашли новый тип type блока просто продолжаем работу без IF
                         break outerisIF;
                     }
                     
@@ -612,18 +636,17 @@ public class Generator {
                     }
 
                     // Поиск нового блока в головной по условию IF(Так как блок другой приходится переопределять все значения)
-                    CompositeFBType fbBigSAX = new CompositeFBType(bigSax, typeGCT); // реализовываем новый класс хранящий данные Типа Графического блока
+                    CompositeFBTypeValInputVars fbBigSAX = new CompositeFBTypeValInputVars(bigSax, typeGCT); // реализовываем новый класс хранящий данные Типа Графического блока
                     listVarHMI = fbBigSAX.getFBInputs();                            // собрать структурированно InputVars из блока HMI (на основе которых строим блочки)
+                    listEventHMI = fbBigSAX.getFBEvents();                          // собрать структурированно Events из блока HMI (на основе которых строим блочки)
                     uuidGCT = fbBigSAX.getFBUUID();
 
-                    
-                    ConnectionElementDeclaration gegElemenConnect = new ConnectionElementDeclaration(bigSax, HMIcfg, nodeIFELSE, HMIsax, nodeInputVars, connectionDataSigs, listVarHMI, myPageFB);
-                    //addInputVarsVarDeclaration(bigSax, HMIcfg, nodeIFELSE, HMIsax, nodeInputVars, connectionDataSigs, listVarHMI, myPageFB);
-                    connectionDataSigs = gegElemenConnect.getConnectionsSigs(); // получить сформированные сигналы для коннекта
+                    Connection gegElemenConnect = new ConnectionElementDeclaration(bigSax, HMIcfg, nodeIFELSE, HMIsax, nodeInputVars, listVarHMI, myPageFBInputVars, controlSignals);
+                    connectionDataSigsIF = gegElemenConnect.getConnectionsSigsVarDeclaration(); // получить сформированные сигналы для коннекта
                     
                     // тут каждый раз будет проверять и пересоздавать InputVars -> VarDeclaration
                     // Заново переопределение сигналов
-                    for (ConnectionData c : connectionDataSigs) {                          // Проход по добавленным сигналам
+                    for (ConnectionData c : connectionDataSigsIF) {                   // Проход по добавленным сигналам
                         for (HashMap<String, String> h : listVarHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
                             if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
                                 c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
@@ -631,7 +654,56 @@ public class Generator {
                         }
                     }
 
+                    // так же Евенты собираем
+                    Connection elemenConnectEvent = new ConnectionElementDeclaration(bigSax, HMIcfg, nodeIFELSE, HMIsax, nodeEventInputs, listEventHMI, myPageFBInputVars, controlSignals);
+                    connectionEventIF = elemenConnectEvent.getConnectionsSigsEvent(); // получить сформированные сигналы для коннекта
+                    // прогон по файлу если только есть обозначение явно указан type в ноде(уже перебор событий)
+                    for (ConnectionData c : connectionEventIF) {                   // Проход по добавленным сигналам
+                        if(listEventHMI != null){
+                            for (HashMap<String, String> h : listEventHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
+                                if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
+                                    c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
+                                }
+                            }
+                        }
+                    }
+                
                     isAlarm = gctData[2] != null;
+                }
+                
+                // Если в ИФ блоке что то получили для конекшена инпутваров
+                if(connectionDataSigsIF != null)
+                {
+                    for (ConnectionData c : connectionDataSigsIF) {
+                        boolean notFindSig = true;
+                        for (int k = 0; k < connectionDataSigs.size(); k++) {
+                            if(c.getName().equals(connectionDataSigs.get(k).getName()))
+                            {// нашли совпадающее, удалили и внесли из условия
+                                //connectionDataSigs.remove(k);
+                                //connectionDataSigs.add(c);
+                                notFindSig = false;
+                                break; 
+                            }
+                        }
+                        if(notFindSig) connectionDataSigs.add(c);
+                    }
+                }
+                 // Если в ИФ блоке что то получили для конекшена Event
+                if(connectionEventIF != null)
+                {
+                    for (ConnectionData c : connectionEventIF) {
+                        boolean notFindSig = true;
+                        for (int k = 0; k < connectionEvent.size(); k++) {
+                            if(c.getName().equals(connectionEvent.get(k).getName()))
+                            {// нашли совпадающее, удалили и внесли из условия
+                                //connectionDataSigs.remove(k);
+                                //connectionDataSigs.add(c);
+                                notFindSig = false;
+                                break; 
+                            }
+                        }
+                        if(notFindSig) connectionEvent.add(c);
+                    }
                 }
 
                 // конструируем ФБ
@@ -760,20 +832,24 @@ public class Generator {
                     HMIsax.insertChildNode(nodeFB, arr.getToXML()); //добавим каждую строку в в ноду FB
                 }
 
-                // прикручиваем связи сигналов Var в листе 
+                // прикручиваем связи сигналов Сигналов Var в листе 
                 String[] connects = {"Connection", "Source", "",
                     "Destination", "", "SourceUUID",
                     "", "DestinationUUID", ""};
                 for (ConnectionData c : connectionDataSigs) {
-
-                    //if (isAlarm & c.getName().equals("NameRU")) continue;  // так же как ниже
                     connects[2] = c.getName();
-                    //connects[4] = nameGCT + i + "." + c.getName();
                     connects[4] = nameFB + "." + c.getName();
                     connects[6] = c.getUUIDVarDeclaration();                        
                     connects[8] = fbUUID + "." + c.getUUIDOrigSignal();
                     HMIsax.insertChildNode(DataConnections, connects);  //добавили его в ноду
-
+                }
+                // тут проход по событиям
+                for (ConnectionData c : connectionEvent) {
+                    connects[2] = c.getName();
+                    connects[4] = nameFB + "." + c.getName();
+                    connects[6] = c.getUUIDVarDeclaration();                        
+                    connects[8] = fbUUID + "." + c.getUUIDOrigSignal();
+                    HMIsax.insertChildNode(EventConnections, connects);  //добавили его в ноду
                 }
 
                 posElemY += incY;
@@ -787,6 +863,7 @@ public class Generator {
                 if (col > maxX && i < ft.tableSize() - 1) {
                     if (folderNodeName == null) {//Если нет имени фолдера листов сигналов - значит мы делаем файл для импорта
                         FBNetwork.appendChild(DataConnections);
+                        FBNetwork.appendChild(EventConnections);
                         HMIsax.writeDocument(modelFile);
 
                         modelFile = modelFile.replace("_" + pageCnt + ".txt", "_" + (pageCnt + 1) + ".txt");
@@ -806,8 +883,8 @@ public class Generator {
                         String sheetUUID = null;
 
                         // поиск нужного блока в нодах(по разделенным страницам названия будут разные зависящие от номера)
-                        myPageFB = new CompositeFBType(bigSax, pageName);
-                        sheetUUID = myPageFB.getFBUUID();
+                        myPageFBInputVars = new CompositeFBTypeValInputVars(bigSax, pageName);
+                        sheetUUID = myPageFBInputVars.getFBUUID();
 
                         if (sheetUUID == null) {
                             sheetUUID = UUID.getUIID();
@@ -816,6 +893,7 @@ public class Generator {
                         HMIsax.setDataAttr(gctNode, "UUID", sheetUUID);
                         //FBNetwork = HMIsax.insertChildNode(gctNode, "FBNetwork");
                         DataConnections = HMIsax.createNode("DataConnections");
+                        EventConnections = HMIsax.createNode("EventConnections");
                         fbX = 0;
                         fbY = 0;
                         posElemX = startPosX;
@@ -829,6 +907,7 @@ public class Generator {
 //                }
             }
             FBNetwork.appendChild(DataConnections);
+            FBNetwork.appendChild(EventConnections);
             HMIsax.writeDocument(modelFile);
             ret += nameGCT + " - " + pageCnt + " страниц. ";
         }
@@ -2362,22 +2441,22 @@ public class Generator {
         return editVar;
     }
 
-    // --- получить объект списки полей из HMI (его свежие UUID)---
-    private static List<HashMap<String, String>> getFBInputsVarIEC_HMI(XMLSAX bigSax, Node myBlock) {
-        if (myBlock == null) {
-            return null;
-        }
-        List<HashMap<String, String>> dataFromFBparent = new ArrayList<>();
-        Node nodeInputVars = bigSax.returnFirstFinedNode(myBlock, "InputVars");
-        if (nodeInputVars == null) {
-            return null;
-        }
-        for (Node n : bigSax.getHeirNode(nodeInputVars)) {
-            //System.out.println(n.getNodeName());
-            dataFromFBparent.add(bigSax.getDataNode(n));
-        }
-        return dataFromFBparent;
-    }
+//    // --- получить объект списки полей из HMI (его свежие UUID) (почему нигде не применяется ?)---
+//    private static List<HashMap<String, String>> getFBInputsVarIEC_HMI(XMLSAX bigSax, Node myBlock) {
+//        if (myBlock == null) {
+//            return null;
+//        }
+//        List<HashMap<String, String>> dataFromFBparent = new ArrayList<>();
+//        Node nodeInputVars = bigSax.returnFirstFinedNode(myBlock, "InputVars");
+//        if (nodeInputVars == null) {
+//            return null;
+//        }
+//        for (Node n : bigSax.getHeirNode(nodeInputVars)) {
+//            //System.out.println(n.getNodeName());
+//            dataFromFBparent.add(bigSax.getDataNode(n));
+//        }
+//        return dataFromFBparent;
+//    }
 
     private static void insertInOPC(String sig, String nameSpace, String id, String idType, String uuid, String comment,
             XMLSAX opcSax, FileManager fm, String type, int npp) {

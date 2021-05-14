@@ -6,6 +6,8 @@
 
 package Generators;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author nazarov
@@ -14,15 +16,6 @@ package Generators;
  * 
  */
 interface Connection {
-
-    public Object getName();
-
-    public void setUUIDOrigSignal(String get);
-
-    public String getUUIDVarDeclaration();
-
-    public String getUUIDOrigSignal();
-
-    public void setUUIDVarDeclaration(String uuidVarDeclaration);
-    
+    public ArrayList<ConnectionData> getConnectionsSigsVarDeclaration();
+    public ArrayList<ConnectionData> getConnectionsSigsEvent();
 }

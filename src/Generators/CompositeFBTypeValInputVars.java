@@ -19,15 +19,17 @@ import org.w3c.dom.Node;
  * @author nazarov
  */
 // --- объект GraphicsCompositeFBType или CompositeFBType  ---
-public class CompositeFBType implements FindCompositeFBType {
+public class CompositeFBTypeValInputVars implements FindCompositeFBType {
 
+    String nameNodeGetSignalConnection = null;
     XMLSAX bigSax = null;
     String uuidGCT; // УУИД головного объекта
     Node nodeFBType = null; // Сама нода с графикой
     String typeGCT = null;
-    List<HashMap<String, String>> listVarHMI = null;       // InputVars из блока HMI
+    //List<HashMap<String, String>> listVar = null;       // InputVars из блока HMI
+    //List<HashMap<String, String>> listEvent = null;     // EventInputs из блока HMI
 
-    public CompositeFBType(XMLSAX bigSax, String typeGCT) {
+    public CompositeFBTypeValInputVars(XMLSAX bigSax, String typeGCT) {
         this.bigSax = bigSax;
         this.typeGCT = typeGCT;
         nodeFBType = getNodeFBTypeToHMI();
@@ -52,22 +54,27 @@ public class CompositeFBType implements FindCompositeFBType {
 
     // --- получить объект списки полей из HMI (его свежие UUID)---
     public List<HashMap<String, String>> getFBInputs() {
-        if (listVarHMI == null) {
-            listVarHMI = new ArrayList<>();       // InputVars из блока HMI
+        return getSignalsFromOBJ("InputVars");
+    }
+    
+    // --- получить объект списки полей из HMI из EventInputs(его свежие UUID)---
+    public List<HashMap<String, String>> getFBEvents() {
+        return getSignalsFromOBJ("EventInputs");
+    }
+    
+    // --- получить какие то сигналы с ноды ---
+    private List<HashMap<String, String>> getSignalsFromOBJ(String nameNodeGetSignalConnection) {
+        List<HashMap<String, String>> listTmp = new ArrayList<>(); 
             if (nodeFBType != null) {
-            //String[] UUIDFBType = new String[]{bigSax.getDataAttr(nodeFBType, "UUID")};            // берем уид блок превращаем в массив
-                // собрать структурированно InputVars из блока HMI основного
-                Node nodeInputVars = bigSax.returnFirstFinedNode(nodeFBType, "InputVars");
+                Node nodeInputVars = bigSax.returnFirstFinedNode(nodeFBType, nameNodeGetSignalConnection);
                 if (nodeInputVars == null) {
                     return null;
                 }
                 for (Node n : bigSax.getHeirNode(nodeInputVars)) {
-                    listVarHMI.add(bigSax.getDataNode(n));
+                    listTmp.add(bigSax.getDataNode(n));
                 }
-            }
-
         }
-        return listVarHMI;
+        return listTmp;
     }
 
     // --- получить UUID объекта ---

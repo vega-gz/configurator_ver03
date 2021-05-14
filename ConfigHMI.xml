@@ -83,7 +83,7 @@
 	</DO>
 	<mb_AI>
 		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730" incY="22" ruName="Наименование">
-			<IF cond="dataType" val="ABCDEFGH" >
+			<IF cond="dataType" val="ABCD" >
 				<type name="T_BaseSen_200513">
 					<Hint/>
 					<additionalVar/>
@@ -100,6 +100,9 @@
 									<VarDeclaration InitialValue="''" Name="PrefAb"/>
 									<VarDeclaration InitialValue="''" Name="NameRU"/>
 								</addVarDeclaration>
+								<addEvent>
+									<Event Name="LOGIN"/>
+								</addEvent>
 								<additionalVar>
 									<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 								</additionalVar>
@@ -109,7 +112,8 @@
 				</ELSE>
 			</IF>
 		</GenHMI>
-		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+		<!--
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName">  typeUUID="C06031C04C13BB17463EB1B889813E68"
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
@@ -118,6 +122,7 @@
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
 		</GenHMI>
+		-->
 	</mb_AI>
 	<mb_AO>
 		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
@@ -166,7 +171,7 @@
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
+			</addVarDeclaration>	
 			<Disable> 
 				<Num/>
 				<hint/>
@@ -211,7 +216,7 @@
 				</TAG>
 			</additionalVar>	
 		</GenHMI> 
-		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" target="C_HMI.iec_hmi"> <!-- isAlarm="false" --> 		
+		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" target="C_HMI2.iec_hmi"> <!-- isAlarm="false" --> 		
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="modePZ"/>
@@ -219,6 +224,9 @@
 				<VarDeclaration InitialValue="''" Name="Deblock"/>
 				<VarDeclaration InitialValue="''" Name="ChngAb" />
 			</addVarDeclaration>
+			<addEvent>
+				<Event Name="makeReport"/>
+			</addEvent>
 			<Disable>
 				<hint/>
 				<visiblePar/>
