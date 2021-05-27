@@ -2,8 +2,7 @@ package FrameCreate;
 
 import DataBaseTools.DataBase;
 import Generators.Generator;
-import Main.Main_JPanel;
-import static Main.Main_JPanel.getModelTreeNZ;
+import static FrameCreate.Main_JPanel.getModelTreeNZ;
 import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
@@ -15,7 +14,7 @@ import Tools.FileManager;
 import Tools.MyTableModel;
 import Tools.RegistrationJFrame;
 import Tools.SaveFrameData;
-import Tools.TableTools;
+import Table.TableTools;
 import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;

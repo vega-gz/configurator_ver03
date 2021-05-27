@@ -14,7 +14,7 @@ import Tools.DoIt;
 import Tools.FileManager;
 import Tools.MyTableModel;
 import Tools.RegistrationJFrame;
-import Tools.TableTools;
+import Table.TableTools;
 import Tools.Tools;
 import Tools.Utilities;
 import Tools.closeJFrame;

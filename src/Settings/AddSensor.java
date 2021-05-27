@@ -6,7 +6,7 @@
 package Settings;
 
 import Tools.SimpleTable;
-import Tools.TableTools;
+import Table.TableTools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.util.ArrayList;

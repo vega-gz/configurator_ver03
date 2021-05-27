@@ -1,7 +1,6 @@
 package FrameCreate;
 
 import DataBaseTools.DataBase;
-import Main.Main_JPanel;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package FrameCreate;
 
-import Tools.TableTools;
+import Table.TableTools;
 import globalData.globVar;
 import Tools.TimerDialog;
 

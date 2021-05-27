@@ -288,7 +288,7 @@ public class DataBase implements Observed {
             FileManager.loggerConstructor(strErr);
             return;
         }
-        String sql;
+        String sql = null;
         try {
             connection.setAutoCommit(true);
             name_table = replacedNt(name_table);
@@ -310,7 +310,7 @@ public class DataBase implements Observed {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
-            System.out.println("Failed ADD data");
+            System.out.println("Failed ADD data err request \n" + sql );
             e.printStackTrace();
         }
     }
@@ -444,6 +444,7 @@ public class DataBase implements Observed {
         }
         return listColumn;
     }
+    
     /**Метод получения списка таблиц из базы 
      * 
      * @return список таблиц базы
@@ -804,7 +805,7 @@ public class DataBase implements Observed {
               lastId = rs.getInt(id);
             }
         } catch (SQLException e) {
-		System.out.println("Failed CREATE TABLE");
+		System.out.println("Failed get ID Index");
 		e.printStackTrace();
         }
         return lastId;
@@ -949,14 +950,25 @@ public class DataBase implements Observed {
         String table_name = "SignalSetups";
         ArrayList<String> columnSeting = getListColumns(table_name);
         String sql = null;
-        String[] columnT = {"Abonent", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"};
+        String[] columnT = {"Abonent", "NameTableFromSignal", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"};
         String commentT = "setups signals";
         
         if(getListTable().indexOf(table_name) < 0){
             createTableEasy(table_name, columnT, commentT);
         } else{
-            
             System.out.println("Table " + table_name + " is present in DB!");
+            ArrayList<String> columnsSeting = getListColumns(table_name);
+            String lastIndex = Integer.toString(getLastId(table_name) + 1);
+            String[] data = columnsSeting.toArray(new String[columnsSeting.size()]);
+            String[] rows = {lastIndex, "GPA665", "SPA", "TestConfig", "TypeAnalog", "Nasos665", "UP", "3000", "-1", "600"};
+            insertRow(table_name, rows, data, getLastId(table_name));
+            
+            for (String[] arr : getData(table_name)) {
+                for (int i = 0; i < arr.length; i++) {
+                    System.out.print(arr[i] + " ");
+                }
+                System.out.println();
+            }
         }
         
         return null;
@@ -966,14 +978,10 @@ public class DataBase implements Observed {
         XMLSAX.getConnectBaseConfig("Config.xml");
         DataBase db = new DataBase();
         globVar.DB = db;
-        
+        db.getSetingsSignal();
         
 //        System.out.println(db.getTimeFirstCommit("Abonents")); // получить первый коммит времени строки таблицы
-//        //db.dropTableWithBackUp("Abonents");
-        for(String s: db.getListTable() ){
-            System.out.println(s);
-        }
-        db.getSetingsSignal();
+//        db.dropTableWithBackUp("Abonents");
 //        
 //        db.renameTable("Del_20_08_12_09_08_30_Abonents","Abonents");
 //       //String nameBD = db.getCurrentNameBase();

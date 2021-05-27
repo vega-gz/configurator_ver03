@@ -4,7 +4,7 @@ import Generators.Generator;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.SaveFrameData;
-import Tools.TableTools;
+import Table.TableTools;
 import Tools.Tools;
 import Tools.isCange;
 import globalData.globVar;

@@ -1,15 +1,16 @@
-package Main;
+package FrameCreate;
 
 import Settings.CreateFTable;
 import DataBaseTools.DataBase;
 import DataBaseTools.MergeBases;
 import FrameCreate.*;
+import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
-import Tools.TableTools;
+import Table.TableTools;
 import Tools.Tools;
 import XMLTools.XMLSAX;
 import globalData.globVar;

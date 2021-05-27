@@ -6,7 +6,7 @@ import Tools.DoIt;
 import Tools.MyTableModel;
 import Tools.SaveFrameData;
 import Tools.StrTools;
-import Tools.TableTools;
+import Table.TableTools;
 import Tools.isCange;
 import globalData.globVar;
 import java.io.IOException;

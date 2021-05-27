@@ -1,6 +1,7 @@
 package Main;
 
-import Tools.TableTools;
+import FrameCreate.Main_JPanel;
+import Table.TableTools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.File;

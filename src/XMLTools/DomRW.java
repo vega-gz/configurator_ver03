@@ -6,7 +6,7 @@
 package XMLTools;
 
 
-import configurator.StructSelectData;
+import Table.StructSelectData;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;

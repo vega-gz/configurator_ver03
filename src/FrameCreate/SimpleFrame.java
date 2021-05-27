@@ -2,8 +2,8 @@ package FrameCreate;
 
 import Tools.SaveFrameData;
 import Tools.SimpleTable;
-import Tools.TableTools;
-import static Tools.TableTools.setId;
+import Table.TableTools;
+import static Table.TableTools.setId;
 import Tools.isCange;
 import globalData.globVar;
 import java.util.ArrayList;

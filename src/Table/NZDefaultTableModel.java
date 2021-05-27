@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FrameCreate;
+package Table;
 
 import java.util.HashMap;
 import java.util.Vector;
@@ -32,8 +32,7 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
         this.workbase = globVar.DB;
     }
 
-    // Строим конструктором таким для редактирования таблицы
-
+    // Строим конструктором таким для редактирования таблицы базы(редактирование осуществляется сразу)
     public NZDefaultTableModel(Object[][] dataInTable, String[] resultColumn, String nameTable) {
         super(dataInTable, resultColumn);
         //this.dataInTable1 = dataInTable;
@@ -48,6 +47,7 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
 
     }
 
+    
     @Override
     public boolean isCellEditable(int row, int column) {
         return column == column;
@@ -61,11 +61,12 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
 
         } else {  // если нет Галки просто обновляем данные
             Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений аналог Листа
-            if (workbase != null & nameTable != null) { // проверка на редактирования и таблица и экземпляр баз
+            
+            if (workbase != null & nameTable != null) {         // проверка на редактирования и таблица и экземпляр баз
                 //String curentCell = (String) rowData.get(column); // получить предыдущие данные
                 //String ColumnName = jTable1.getColumnName(column); // Имя выделенного столбца
                 String ColumnName = resultColumn[column];
-                        //int rowTM = jTable1.getRowCount(); // количество строк
+                //int rowTM = jTable1.getRowCount(); // количество строк
                 //int ColumnTM =  jTable1.getColumnCount();  //Количество столбцов
                 int ColumnTM = resultColumn.length;
                 HashMap< String, String> mapDataRow = new HashMap<>(); // элементы для отображения в этих полях
@@ -84,7 +85,6 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
     }
 
     // --- Собственный метод получить данные из таблицы по имени столбца  ---
-
     public Object getDataNameColumn(String nameColumn, int row) {
         Object objTable = null;
         for (int i = 0; i < resultColumn.length; ++i) { // Пробегаем по всем нашим именам столбцов как они стоят 

@@ -6,10 +6,10 @@
 package Settings;
 
 import Settings.AddGenData;
-import Main.Main_JPanel;
+import FrameCreate.Main_JPanel;
 import ReadWriteExcel.RWExcel;
 import Tools.FileManager;
-import Tools.TableTools;
+import Table.TableTools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.File;

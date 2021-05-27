@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import DataBaseTools.DataBase;
 import Generators.Generator;
-import Main.Main_JPanel;
 import Tools.Tools;
 import globalData.globVar;
 import javax.swing.JFrame;

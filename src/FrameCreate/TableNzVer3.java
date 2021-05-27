@@ -5,7 +5,8 @@
  */
 package FrameCreate;
 
-import configurator.StructSelectData;
+import Table.NZDefaultTableModel;
+import Table.StructSelectData;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +14,6 @@ import java.util.stream.Stream;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import DataBaseTools.DataBase;
-import Main.Main_JPanel;
 import globalData.globVar;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
