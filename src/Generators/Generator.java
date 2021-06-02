@@ -1474,7 +1474,7 @@ public class Generator {
                             beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
                             fm.wr(beforeValueGenString);
                         } else{
-                            if ( j >= tsz - 1)  fm.wr(beforeValueGenString); // просто запись последней строки
+                            if ( !findHTMLext & j >= tsz - 1)  fm.wr(beforeValueGenString); // просто запись последней строки
                         }
 
                     }
