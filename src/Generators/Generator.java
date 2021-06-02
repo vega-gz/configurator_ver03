@@ -1597,8 +1597,8 @@ public class Generator {
                     return s;
                 }
             case "npp":
-                String numberSet = globVar.sax.getDataAttr(argPart, "t");
-                if(globVar.sax.getDataAttr(argPart, "t") != null)
+                String numberSet = globVar.sax.getDataAttr(argPart, "start");
+                if(numberSet != null)
                 {
                     int foo = Integer.parseInt(numberSet);
                     return "" + (j + foo) ;
