@@ -6,11 +6,11 @@
 <URL1>jdbc:postgresql://minoro.ru:5432/</URL1>
 <URL2>jdbc:postgresql://127.0.0.1:5432/</URL2>
 <URL>jdbc:postgresql://172.16.35.50:5432/</URL>
-<BASE>test667</BASE>
+<BASE>kln_aleksey</BASE>
 <BASE1>kln_kc</BASE1>
 <BASE2>kln_aleksey_local</BASE2>
 <BASE3>kln_gpa</BASE3>
-<BASE9>kln_aleksey</BASE9>
+<BASE9>test667</BASE9>
 <BASE4>Kln_Aleksei_wrk2</BASE4>
 <BASE5>11</BASE5>
 <BASE6>kln_gpa</BASE6>

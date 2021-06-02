@@ -1435,7 +1435,11 @@ public class Generator {
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
             String beforeValueGenString = null;
+            System.out.println(tsz);
             for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
+                if(j == 260){
+                     System.out.println(tsz);
+                }
                 if (jProgressBar != null && tsz != 0) {
                     jProgressBar.setValue((int) ((j + 1) * 100.0 / tsz));           //Прогресс генерации
                 }
@@ -1466,11 +1470,12 @@ public class Generator {
                         } 
                         //по просьбе  Алексея  условие может не только для LUA
                         if (findLUAext & j >= tsz - 1) { // если последняя строка то в файле удалить 
-
                             int indeChar = beforeValueGenString.lastIndexOf(',');
                             beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
                             fm.wr(beforeValueGenString);
-                        } 
+                        } else{
+                            if ( j >= tsz - 1)  fm.wr(beforeValueGenString); // просто запись последней строки
+                        }
 
                     }
                 }
