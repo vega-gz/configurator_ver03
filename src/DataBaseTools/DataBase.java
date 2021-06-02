@@ -978,6 +978,7 @@ public class DataBase implements Observed {
         XMLSAX.getConnectBaseConfig("Config.xml");
         DataBase db = new DataBase();
         globVar.DB = db;
+        //db.dropTable("SignalSetups");
         db.getSetingsSignal();
         
 //        System.out.println(db.getTimeFirstCommit("Abonents")); // получить первый коммит времени строки таблицы

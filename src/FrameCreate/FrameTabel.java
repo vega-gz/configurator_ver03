@@ -14,6 +14,7 @@ import globalData.globVar;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+// --- Почему нигде не применяется? ---
 public class FrameTabel extends javax.swing.JPanel {
 
     String nameTable;

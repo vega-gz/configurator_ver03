@@ -5,12 +5,13 @@
  */
 package Table;
 
+import DataBaseTools.DataBase;
+import globalData.globVar;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import DataBaseTools.DataBase;
-import globalData.globVar;
 
 /**
  *
@@ -24,12 +25,19 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
     String nameTable = null;
     DataBase workbase = null;//DataBase.getInstance();// создаем запрос к базе
 
-    // просто построить данные
+    // просто построить данные(без базы)
     public NZDefaultTableModel(Object[][] dataInTable, String[] resultColumn) {
         super(dataInTable, resultColumn);
         //this.dataInTable1 = dataInTable;
         this.resultColumn = resultColumn;
-        this.workbase = globVar.DB;
+       // this.workbase = globVar.DB;
+    }
+    
+    // --- Коструктор с ArrayList  ---
+    public NZDefaultTableModel(ArrayList<String[]> dataInTable, ArrayList<String> resultColumn) {
+        super(dataInTable.toArray(new String[dataInTable.size()][]), resultColumn.toArray(new String[resultColumn.size()]));
+        String[] columnT = resultColumn.toArray(new String[resultColumn.size()]);
+        this.resultColumn = columnT;
     }
 
     // Строим конструктором таким для редактирования таблицы базы(редактирование осуществляется сразу)
@@ -38,7 +46,15 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
         //this.dataInTable1 = dataInTable;
         this.resultColumn = resultColumn;
         this.nameTable = nameTable;
-        this.workbase = globVar.DB;
+        //this.workbase = globVar.DB;
+    }
+    
+       // --- Коструктор с ArrayList  ---
+    public NZDefaultTableModel(ArrayList<String[]> dataInTable, ArrayList<String> resultColumn, String nameTable) {
+        super(dataInTable.toArray(new String[dataInTable.size()][]), resultColumn.toArray(new String[resultColumn.size()]));
+        String[] columnT = resultColumn.toArray(new String[resultColumn.size()]);
+        this.resultColumn = columnT;
+        this.nameTable = nameTable;
     }
 
     // отключить редактирование базы когда это не нужно(нет еще таблица или самой базы)
@@ -57,30 +73,31 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
     public void setValueAt(Object aValue, int row, int column) {
         // Условие проверки не трогать 1 столбец
         if (column == 0) {
-            JOptionPane.showMessageDialog(null, "поле не редактируется");
+            JOptionPane.showMessageDialog(null, "не стоит это поле редактировать");
 
-        } else {  // если нет Галки просто обновляем данные
-            Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений аналог Листа
-            
-            if (workbase != null & nameTable != null) {         // проверка на редактирования и таблица и экземпляр баз
-                //String curentCell = (String) rowData.get(column); // получить предыдущие данные
-                //String ColumnName = jTable1.getColumnName(column); // Имя выделенного столбца
-                String ColumnName = resultColumn[column];
-                //int rowTM = jTable1.getRowCount(); // количество строк
-                //int ColumnTM =  jTable1.getColumnCount();  //Количество столбцов
-                int ColumnTM = resultColumn.length;
-                HashMap< String, String> mapDataRow = new HashMap<>(); // элементы для отображения в этих полях
-                for (int i = 1; i < ColumnTM; ++i) { // Пробежать по строке где изменяются данные и сформировать список для обновления данных в базе c 1 так как там галки
-                    //mapDataRow.put(jTable1.getColumnName(i), (String) rowData.get(i)); // Формируем список данных принудительно в String
-                    mapDataRow.put(resultColumn[i], (String) rowData.get(i)); // Формируем список данных принудительно в String
-                }
-                workbase.Update(nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
-                rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)
-                //System.out.println("columnTM " + columnTM + " yT " + yT  );
-            } else { // без базы просто обновляем
-                rowData.set(column, aValue);
-            }
-        }
+        } 
+//        else {  // если нет Галки просто обновляем данные
+//            Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений аналог Листа
+//            
+//            if (workbase != null & nameTable != null) {         // проверка на редактирования и таблица и экземпляр баз
+//                //String curentCell = (String) rowData.get(column); // получить предыдущие данные
+//                //String ColumnName = jTable1.getColumnName(column); // Имя выделенного столбца
+//                String ColumnName = resultColumn[column];
+//                //int rowTM = jTable1.getRowCount(); // количество строк
+//                //int ColumnTM =  jTable1.getColumnCount();  //Количество столбцов
+//                int ColumnTM = resultColumn.length;
+//                HashMap< String, String> mapDataRow = new HashMap<>(); // элементы для отображения в этих полях
+//                for (int i = 0; i < ColumnTM; ++i) {
+//                    //mapDataRow.put(jTable1.getColumnName(i), (String) rowData.get(i)); // Формируем список данных принудительно в String
+//                    mapDataRow.put(resultColumn[i], (String) rowData.get(i)); // Формируем список данных принудительно в String
+//                }
+//                workbase.Update(nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
+//                rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)
+//                //System.out.println("columnTM " + columnTM + " yT " + yT  );
+//            } else { // без базы просто обновляем
+//                rowData.set(column, aValue);
+//            }
+//        }
 
     }
 
@@ -93,5 +110,14 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
             }
         }
         return objTable;
+    }
+    
+    // --- названия столбцов Vectro  ---
+    public Vector getColumns() {
+        Vector ncolumns = new Vector();
+       for (int i = 0; i < resultColumn.length; ++i) { // Пробегаем по всем нашим именам столбцов как они стоят 
+            ncolumns.add(resultColumn[i]);
+        }
+        return ncolumns;
     }
 }

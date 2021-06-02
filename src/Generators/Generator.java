@@ -1597,6 +1597,12 @@ public class Generator {
                     return s;
                 }
             case "npp":
+                String numberSet = globVar.sax.getDataAttr(argPart, "t");
+                if(globVar.sax.getDataAttr(argPart, "t") != null)
+                {
+                    int foo = Integer.parseInt(numberSet);
+                    return "" + (j + foo) ;
+                }
                 return "" + j;
             case "abonent":
                 return abonent;
