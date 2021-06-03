@@ -414,6 +414,7 @@ public class Generator {
             String typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // имя HMI ноды(какой тип блочка может быть в выборе IF-ELSE)
             
             String mainFileReadHMI = HMIcfg.getDataAttr(hmiNode, "target"); // файл не по умолчанию головной ноды(Для серверного по)
+            if(mainFileReadHMI == null) mainFileReadHMI = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI") + ".iec_hmi"; // берем по умолчанию
             if(mainFileReadHMI != null ){
                 if(mainFileReadHMI.length() > 0){
                     hmiProjectFile = globVar.desDir + File.separator + "Design" + File.separator + mainFileReadHMI;

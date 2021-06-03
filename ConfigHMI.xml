@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ConfigHMI project="C_HMI2.iec_hmi">
 	<AI>
-		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="775"  incY="22" type="T_BaseAnIn_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<additionalVar>
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
@@ -64,7 +64,7 @@
 		</GenHMI>
 	</AO>
 	<DI>
-		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true">  typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
+		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
 			<Hint add0="Наименование" add1=", инв=" add2="Инверсия" add3=", задержка="  add4="Задержка" add5=", тип сигнала: " add6="Тип_сигнала" />
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
@@ -83,7 +83,7 @@
 	</DO>
 	<mb_AI>
 		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730" incY="22" ruName="Наименование">
-			<IF cond="dataType" val="ABCD" >
+			<IF cond="dataType" val="ABCDEFGH" >
 				<type name="T_BaseSen_200513">
 					<Hint/>
 					<additionalVar/>
@@ -100,9 +100,6 @@
 									<VarDeclaration InitialValue="''" Name="PrefAb"/>
 									<VarDeclaration InitialValue="''" Name="NameRU"/>
 								</addVarDeclaration>
-								<addEvent>
-									<Event Name="LOGIN"/>
-								</addEvent>
 								<additionalVar>
 									<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 								</additionalVar>
@@ -112,8 +109,7 @@
 				</ELSE>
 			</IF>
 		</GenHMI>
-		<!--
-		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName">  typeUUID="C06031C04C13BB17463EB1B889813E68"
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
 			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
@@ -122,7 +118,6 @@
 				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
 			</additionalVar>
 		</GenHMI>
-		-->
 	</mb_AI>
 	<mb_AO>
 		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
@@ -163,15 +158,15 @@
 			<Hint add0="Наименование" add1=", " add2="доп_инфо" add3=", МВ адр. "  add4="mbAddr"/>
 		</GenHMI>
 	</mb_DO>
-	<APS>
+	<APS> Обработка таблицы при совмещенном вварианте АПС (АС и ПС вместе)
 		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 
 			<Edit> 
-				<PrefStr value="APS." Type="STRING"/>     <!--только value переменная -->
+				<PrefStr value="APS." Type="STRING"/>   
 			</Edit>
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>	
+			</addVarDeclaration>			
 			<Disable> 
 				<Num/>
 				<hint/>
@@ -216,7 +211,8 @@
 				</TAG>
 			</additionalVar>	
 		</GenHMI> 
-		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" target="C_HMI2.iec_hmi"> <!-- isAlarm="false" --> 		
+		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"> 
+			<Hint add0="Примечание" add1=", " add2="Время_задержки" add3=" сек"  />			
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="modePZ"/>
@@ -228,7 +224,6 @@
 				<Event Name="makeReport"/>
 			</addEvent>
 			<Disable>
-				<hint/>
 				<visiblePar/>
 				<disableAlarm/>
 				<Analog_Ph_N/>
@@ -247,8 +242,6 @@
 				<NameSigA Type="STRING"/>
 				<NameUst Type="STRING"/>				
 				<IF cond="Источник" val="*.PV">
-					<!--NameSigA Type="STRING" tableCol="Источник"/>
-					<NameUst Type="STRING" tableCol="TAG_NAME_PLC"/-->
 					<Edit>
 						<NameSigA tableCol="Источник" Type="STRING"/>
 						<NameSigD value="" Type="STRING" />	
@@ -274,8 +267,150 @@
 			</additionalVar>
 		</GenHMI>			
 	</APS>
+	<AS>
+		<GenHMI name="Crash_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="D_CNS.iec"> <!-- target указывает приложение (по умолч. HMI), в котором находится блок в type, file имя файла, альтернативного шаблону HMIsheet -->
+			<Edit> 
+				<PrefStr value="AS." Type="STRING"/>     <!--только value переменная -->
+			</Edit>
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>			
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 
+			<additionalVar>
+				<Category Type="DINT" > 
+					<switch swt="Status" default="0">
+						<case val="АО сс" def="10000"/>
+						<case val="АО бс" def="10000"/>
+						<case val="ВО сс" def="10700"/>
+						<case val="ВО бс" def="10700"/>
+						<case val="Пожар" def="10000"/>
+					</switch> 
+				</Category>
+				<Source Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АО сс" def="АС"/>
+						<case val="АО бс" def="АС"/>
+						<case val="ВО сс" def="ВО"/>
+						<case val="ВО бс" def="ВО"/>
+						<case val="Пожар" def="АС"/>
+					</switch>
+				</Source>	
+				<TAG Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АО сс" def="AOs"/>
+						<case val="АО бс" def="AOb"/>
+						<case val="ВО сс" def="VOs"/>
+						<case val="ВО бс" def="VOb"/>
+						<case val="Пожар" def="Fire"/>
+					</switch>
+				</TAG>
+			</additionalVar>	
+		</GenHMI> 
+		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"> <!-- isAlarm="false" --> 		
+			<Hint add0="Примечание" add1=", " add2="Время_задержки" add3=" сек"  />			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="modePZ"/>
+				<VarDeclaration InitialValue="''" Name="Reset_PZ"/>
+				<VarDeclaration InitialValue="''" Name="Deblock"/>
+				<VarDeclaration InitialValue="''" Name="ChngAb" />
+			</addVarDeclaration>
+			<addEvent>
+				<Event Name="makeReport"/>
+			</addEvent>
+			<Disable>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+				<PrefStr/>
+				<TagID/>
+			</Disable>
+			<additionalVar>
+				<Delay tableCol="Время_задержки" Type="STRING"/> 
+				<NameSigD Type="STRING"/>
+				<NameSigA Type="STRING"/>
+				<NameUst Type="STRING"/>				
+				<IF cond="Источник" val="*.PV">
+					<Edit>
+						<NameSigA tableCol="Источник" Type="STRING"/>
+						<NameSigD value="" Type="STRING" />	
+						<NameUst tableCol="TAG_NAME_PLC" Type="STRING" />	
+					</Edit>	
+					<ELSE> 
+						<Edit>
+							<NameSigA value="" Type="STRING" />
+							<NameUst value="" Type="STRING" />							
+						</Edit>	
+						<IF cond="Источник" val="">
+							<Edit>
+								<NameSigD text="AS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+							</Edit>	
+							<ELSE>
+								<Edit>									
+									<NameSigD Type="STRING" tableCol="Источник"/>	
+								</Edit>											
+							</ELSE> 
+						</IF>
+					</ELSE>
+				</IF>
+			</additionalVar>
+		</GenHMI>			
+	</AS>	
+	<PS>
+		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="D_CNS.iec"> 
+			<Edit> 
+				<PrefStr value="PS." Type="STRING"/>     <!--только value переменная -->
+			</Edit>
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>			
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 
+			<additionalVar>
+				<Category Type="DINT" > 
+					<switch swt="Status" default="0">
+						<case val="АС"    def="10000"/>
+						<case val="ОС" 	  def="10700"/>
+						<case val="ПС"    def="10100"/>
+					</switch> 
+				</Category>
+				<Source Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АС"    def="АС"/>
+						<case val="ОС" 	  def="ПС"/>
+						<case val="ПС"    def="ПС"/> 
+					</switch>
+				</Source>	
+				<TAG Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АС"    def="AS"/>
+						<case val="ОС"    def="OS"/>
+						<case val="ПС"    def="PS"/>
+					</switch>
+				</TAG>
+			</additionalVar>	
+		</GenHMI> 
+	</PS>	
 	<TS>
-		<GenHMI name="Tch_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
+		<GenHMI name="Tch_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="D_CNS.iec"> 			
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="NameRU"/>
@@ -302,7 +437,8 @@
 		</GenHMI>
 	</TS>
 	<HR>
-		<GenHMI name="HR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
+		<GenHMI name="HR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="D_CNS.iec"> 			
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="NameRU"/>
@@ -329,7 +465,8 @@
 		</GenHMI>
 	</HR>
 	<GR>
-		<GenHMI name="GR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""> 			
+		<GenHMI name="GR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""  target="D_CNS.iec"> 			
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="NameRU"/>
