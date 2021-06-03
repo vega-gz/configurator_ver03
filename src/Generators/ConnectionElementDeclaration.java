@@ -62,7 +62,8 @@ public class ConnectionElementDeclaration  implements Connection {
     //---------------------------------------------------------------------
     private void generationConnectionData(ArrayList<Node> nodesConnect){
         ArrayList<Node> varDecListNode = new ArrayList<>();
-        for (Node n : bigSax.getHeirNode(nodeInputVars))
+        //String s1= nodeInputVars.getNodeName();
+        for (Node n : bigSax.getHeirNode(nodeInputVars)) // проход по нодам менекена
         {
             varDecListNode.add(n);
         }

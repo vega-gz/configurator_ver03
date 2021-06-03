@@ -66,12 +66,15 @@ public class CompositeFBTypeValInputVars implements FindCompositeFBType {
     private List<HashMap<String, String>> getSignalsFromOBJ(String nameNodeGetSignalConnection) {
         List<HashMap<String, String>> listTmp = new ArrayList<>(); 
             if (nodeFBType != null) {
-                Node nodeInputVars = bigSax.returnFirstFinedNode(nodeFBType, nameNodeGetSignalConnection);
-                if (nodeInputVars == null) {
-                    return null;
-                }
-                for (Node n : bigSax.getHeirNode(nodeInputVars)) {
-                    listTmp.add(bigSax.getDataNode(n));
+               Node intetfaceListNode = bigSax.returnFirstFinedNode(nodeFBType, "InterfaceList"); // надо ограничить  иначе вернуть дичь
+               if(intetfaceListNode != null){
+                    Node nodeInputVars = bigSax.returnFirstFinedNode(intetfaceListNode, nameNodeGetSignalConnection);
+                    if (nodeInputVars == null) {
+                        return null;
+                    }
+                    for (Node n : bigSax.getHeirNode(nodeInputVars)) {
+                        listTmp.add(bigSax.getDataNode(n));
+                    }
                 }
         }
         return listTmp;
@@ -93,12 +96,22 @@ public class CompositeFBTypeValInputVars implements FindCompositeFBType {
                 return h.get("UUID");                 
             }
         }
+        for (HashMap<String, String> h : getFBEvents()) {              
+            if (Name.equals(h.get("Name"))) {                
+                return h.get("UUID");                 
+            }
+        }
         return null;
     }
 
     // --- возращает Type структуры VarDeclaration ---
     public String getTypeSigVarDeclaration(String Name) {
         for (HashMap<String, String> h : getFBInputs()) {              
+            if (Name.equals(h.get("Name"))) {                
+                return h.get("Type");                 
+            }
+        }
+        for (HashMap<String, String> h : getFBEvents()) {              
             if (Name.equals(h.get("Name"))) {                
                 return h.get("Type");                 
             }

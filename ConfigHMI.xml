@@ -268,53 +268,7 @@
 		</GenHMI>			
 	</APS>
 	<AS>
-		<GenHMI name="Crash_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" 
-				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="D_CNS.iec"> <!-- target указывает приложение (по умолч. HMI), в котором находится блок в type, file имя файла, альтернативного шаблону HMIsheet -->
-			<Edit> 
-				<PrefStr value="AS." Type="STRING"/>     <!--только value переменная -->
-			</Edit>
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>	
-			<Disable> 
-				<Num/>
-				<hint/>
-				<pos/>
-				<visiblePar/>
-				<disableAlarm/>
-				<Analog_Ph_N/>
-			</Disable> 			 
-			<additionalVar>
-				<Category Type="DINT" > 
-					<switch swt="Status" default="0">
-						<case val="АО сс" def="10000"/>
-						<case val="АО бс" def="10000"/>
-						<case val="ВО сс" def="10700"/>
-						<case val="ВО бс" def="10700"/>
-						<case val="Пожар" def="10000"/>
-					</switch> 
-				</Category>
-				<Source Type="STRING">
-					<switch swt="Status" default="">
-						<case val="АО сс" def="АС"/>
-						<case val="АО бс" def="АС"/>
-						<case val="ВО сс" def="ВО"/>
-						<case val="ВО бс" def="ВО"/>
-						<case val="Пожар" def="АС"/>
-					</switch>
-				</Source>	
-				<TAG Type="STRING">
-					<switch swt="Status" default="">
-						<case val="АО сс" def="AOs"/>
-						<case val="АО бс" def="AOb"/>
-						<case val="ВО сс" def="VOs"/>
-						<case val="ВО бс" def="VOb"/>
-						<case val="Пожар" def="Fire"/>
-					</switch>
-				</TAG>
-			</additionalVar>	
-		</GenHMI> 
+		
 		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"> <!-- isAlarm="false" --> 		
 			<addEvent>
 				<Event Name="makeReport"/>

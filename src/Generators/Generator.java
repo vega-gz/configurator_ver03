@@ -556,12 +556,12 @@ public class Generator {
                     }
                 }
                  
-                if (nodeEventInputs != null) { //  не будет работать если вообще нет InputVars
+                
+                if (nodeEventInputs != null) { //  
                     Connection elemenConnectEvent = new ConnectionElementDeclaration(bigSax, HMIcfg, hmiNode, HMIsax, nodeEventInputs, listEventHMI, myPageFBInputVars, controlSignals);
                     connectionEvent = elemenConnectEvent.getConnectionsSigsEvent(); // получить сформированные сигналы для коннекта
                 }
-                // прогон по файлу если только есть обозначение явно указан type в ноде(уже перебор событий)
-                for (ConnectionData c : connectionEvent) {                   // Проход по добавленным сигналам
+                   for (ConnectionData c : connectionEvent) {                   // Проход по добавленным сигналам
                     if(listEventHMI != null){
                         for (HashMap<String, String> h : listEventHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
                             if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
@@ -570,6 +570,8 @@ public class Generator {
                         }
                     }
                 }
+                
+                
             } // if (!(typeGCT == null))
 
             Node FBNetwork = HMIsax.returnFirstFinedNode(gctNode, "FBNetwork");         //нашел FBNetwork в манекене
@@ -599,12 +601,14 @@ public class Generator {
 
                 ArrayList<String> removedVar = new ArrayList<>();
                 ArrayList<String[]> editVar = new ArrayList<>();
+                
                 for (Node nodeChild : HMIcfg.getHeirNode(hmiNode)) { // прогнать по всем нодам и собрать нужные данные
                     editVar = getListEditVarValue(HMIcfg, nodeChild, null, 0); // получить список переменных которые  нужно поменять в VarValue
                     if (editVar.size() > 0) {
                         break;
                     }
                 }
+                
                 for (Node nodeChild : HMIcfg.getHeirNode(hmiNode)) { // прогнать по всем нодам и собрать нужные данные
                     removedVar = getListRemoveVarValue(HMIcfg, nodeChild); // получить лист нод( списка  VarValue которые не вносим)
                     if (removedVar.size() > 0) {
@@ -619,6 +623,7 @@ public class Generator {
                 ArrayList<ConnectionData> connectionDataSigsIF = null; // Сигналы которые нужно прикрутить тем которые есть по умолчанию.
                 ArrayList<ConnectionData> connectionEventIF = null;
                 outerisIF:
+                
                 if (isIF) {//ищем условния выбора типа блока ( в ноде нет "type" выполняеться "IF") 
                     typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // Еще раз читаем из конфига так как с предыдущего условия может остаться
                     String[] gctData = new String[3]; //  3 - идентификатор что произошло в фукции
@@ -663,17 +668,15 @@ public class Generator {
                     // так же Евенты собираем
                     Connection elemenConnectEvent = new ConnectionElementDeclaration(bigSax, HMIcfg, nodeIFELSE, HMIsax, nodeEventInputs, listEventHMI, myPageFBInputVars, controlSignals);
                     connectionEventIF = elemenConnectEvent.getConnectionsSigsEvent(); // получить сформированные сигналы для коннекта
-                    // прогон по файлу если только есть обозначение явно указан type в ноде(уже перебор событий)
+                
+                    // Заново переопределение Event
                     for (ConnectionData c : connectionEventIF) {                   // Проход по добавленным сигналам
-                        if(listEventHMI != null){
-                            for (HashMap<String, String> h : listEventHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
-                                if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
-                                    c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
-                                }
+                        for (HashMap<String, String> h : listEventHMI) {              // прогон по Варам оригинального головного блока HMI из мнемосхемы
+                            if (c.getName().equals(h.get("Name"))) {                // Сравниваем что добавляем и что в оригинале.
+                                c.setUUIDOrigSignal(h.get("UUID"));                 // вносим оригинальный УУИд в структуру
                             }
                         }
                     }
-                
                     isAlarm = gctData[2] != null;
                 }
                 
@@ -694,7 +697,8 @@ public class Generator {
                         if(notFindSig) connectionDataSigs.add(c);
                     }
                 }
-                 // Если в ИФ блоке что то получили для конекшена Event
+                
+                // Если в ИФ блоке что то получили для конекшена Event
                 if(connectionEventIF != null)
                 {
                     for (ConnectionData c : connectionEventIF) {
