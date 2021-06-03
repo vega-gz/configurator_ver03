@@ -742,7 +742,7 @@
 						<arg><text t=" "/><dict t="dataType" dictionary="ModbusFormat.xml" ifEmpty="0"/></arg>
 						<arg><text t=" "/><dbd t="Set1" ifEmpty="0"/></arg>
 						<arg><text t=" "/><dbd t="Set2" ifEmpty="0"/></arg>
-						<arg><text t=" "/><npp start="66"/></arg> <!-- npp t="1" отсчет не от нуля а от +1-->
+						<arg><text t=" "/><npp start="10"/></arg> <!-- npp t="1" отсчет не от нуля а от +1-->
 					</Function>
 				</Block>
 				<Block start="Начало сгенерированного кода AO_Processing" end="Конец сгенерированного кода">

@@ -463,7 +463,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.10.13");
+        jLabel9.setText("v.10.14");
 
         jLabel3.setText("Текущий абонент");
 
@@ -832,7 +832,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
 //------слушатель нажатя мышки по дереву JTree-----
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
         if (evt.getClickCount() == 2) {
-            if (jTree1.getSelectionPath().getLastPathComponent() != null) {
+            if (jTree1.getSelectionPath() !=null && jTree1.getSelectionPath().getLastPathComponent() != null) {
                 String nameT = jTree1.getSelectionPath().getLastPathComponent().toString();
                 showTable(nameT); // вызов метода построения таблицы
             }

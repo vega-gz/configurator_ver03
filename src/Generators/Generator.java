@@ -1437,9 +1437,9 @@ public class Generator {
             String beforeValueGenString = null;
             System.out.println(tsz);
             for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
-                if(j == 260){
-                     System.out.println(tsz);
-                }
+//                if(j == 182){
+//                     System.out.println(tsz);
+//                }
                 if (jProgressBar != null && tsz != 0) {
                     jProgressBar.setValue((int) ((j + 1) * 100.0 / tsz));           //Прогресс генерации
                 }
@@ -1450,7 +1450,8 @@ public class Generator {
                 if (dt != null && isGenTyps != null && !isGenTyps.contains(dt)) {
                     continue;                                                       //если тип данных есть и есть список ненужных данных и данный тип в этом списке
                 }
-                for (Node cont : blockCont) {
+                for ( int k=0; k < blockCont.size(); k++) { // проход по нодам тем же формированием строк
+                    Node cont =  blockCont.get(k);
 
                     String nodeName = cont.getNodeName();
                     if ("Function".equals(nodeName)) {
@@ -1463,6 +1464,11 @@ public class Generator {
                                     int indeChar = beforeValueGenString.lastIndexOf(';');
                                     beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
                                     fm.wr(beforeValueGenString);
+                                    if(k >= blockCont.size() -1 & j >= tsz - 1) { // до присвоения не дойдет так как тут может быть не одно значение для 1 значения из таблица сигнала
+                                        indeChar = addStr.lastIndexOf(';');
+                                        addStr = addStr.substring(0, indeChar) + addStr.substring(indeChar + 1); // обрубаем строку 
+                                        fm.wr(addStr);
+                                    }
                                 }else fm.wr(beforeValueGenString);
                             } 
                             beforeValueGenString = addStr;
@@ -1474,7 +1480,7 @@ public class Generator {
                             beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
                             fm.wr(beforeValueGenString);
                         } else{
-                            if ( !findHTMLext & j >= tsz - 1)  fm.wr(beforeValueGenString); // просто запись последней строки
+                            if ( !findHTMLext & j >= tsz -1)  fm.wr(beforeValueGenString); // просто запись последней строки
                         }
 
                     }
