@@ -2,7 +2,7 @@
 <Data>
     <GraphicsCompositeFBType>
         <InterfaceList>
-            <EventInputs/>
+		<EventInputs/>
             <EventOutputs>
                 <Event Comment="1событие нажатия левой кнопки мыши на объекте" Name="mouseLBPress" UUID="299295AF47A6CCAC26009C964C5B47C5"/>
                 <Event Comment="событие отпускания левой кнопки мыши на объекте" Name="mouseLBRelease" UUID="8DE6001343803CF639F332B16CC30079"/>

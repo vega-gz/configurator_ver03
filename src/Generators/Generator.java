@@ -534,6 +534,11 @@ public class Generator {
 
             Node nodeInputVars = HMIsax.returnFirstFinedNode(gctNode, "InputVars");
             Node nodeEventInputs = HMIsax.returnFirstFinedNode(gctNode, "EventInputs"); // нода входящих событий из файла манекена
+            if(nodeEventInputs == null) {
+                Node interfaceList = HMIsax.returnFirstFinedNode("InterfaceList");
+                nodeEventInputs = HMIsax.createNode("EventInputs");
+                interfaceList.appendChild(nodeEventInputs);
+            }
             ControlSignals controlSignals = new ControlSignals(); // следим какие сигналы редактировали
             if (!(typeGCT == null)) {
                 if (nodeInputVars != null) { //  не будет работать если вообще нет InputVars

@@ -276,7 +276,7 @@
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="NameRU"/>
-			</addVarDeclaration>			
+			</addVarDeclaration>	
 			<Disable> 
 				<Num/>
 				<hint/>
@@ -316,6 +316,9 @@
 			</additionalVar>	
 		</GenHMI> 
 		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"> <!-- isAlarm="false" --> 		
+			<addEvent>
+				<Event Name="makeReport"/>
+			</addEvent>
 			<Hint add0="Примечание" add1=", " add2="Время_задержки" add3=" сек"  />			
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
@@ -324,9 +327,6 @@
 				<VarDeclaration InitialValue="''" Name="Deblock"/>
 				<VarDeclaration InitialValue="''" Name="ChngAb" />
 			</addVarDeclaration>
-			<addEvent>
-				<Event Name="makeReport"/>
-			</addEvent>
 			<Disable>
 				<visiblePar/>
 				<disableAlarm/>
