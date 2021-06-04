@@ -1981,6 +1981,10 @@ public class Generator {
                 System.out.println("Not find comment Archive Table " + tableName);
                 FileManager.loggerConstructor("Not find comment Archive Table " + tableName);
             } // просто отработка поиска ошибок
+            
+            //  ууиды  T_CalcPar T_AI_ToHMI
+            String[] arrayS1 = {"T_CalcPar.type", "T_AI_ToHMI.type"};
+            String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI(arrayS1);
 
             if (z < 0) {
                 structArr.add("");
@@ -2035,8 +2039,15 @@ public class Generator {
                                     String tmpUuid = uuid + "." + uuidSig;
                                     if (!isStdType(typeSig)) {
                                         tmpName += ".PV";
-                                        tmpUuid += ".19F27C8242D7A36082010591B7CF4F94";
-                                    }// <Trend ItemName="AO_D.Set_APK" UUID="D81CC7224B1F7C96DAA237A634367986.4C16C6034A798CBFCD04F398721A6E10" Min="0" Max="10" Log="FALSE" Color="#000000" InvColor="#00000000" Title="Управление АПК (выход на драйвер 0-10 В)" AxisTitle="Управление АПК (выход на драйвер 0-10 В)" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" />
+                                        String fileReadPV = "";
+                                        XMLSAX  CalcParOrAI_ToHMI = new XMLSAX();
+                                        if (sig0.contains("CalcPar")) {
+                                            tmpUuid += "." + asdad[0];
+                                        }else{
+                                            tmpUuid += "." + asdad[1];
+                                        }
+                                    }
+                                    // <Trend ItemName="AO_D.Set_APK" UUID="D81CC7224B1F7C96DAA237A634367986.4C16C6034A798CBFCD04F398721A6E10" Min="0" Max="10" Log="FALSE" Color="#000000" InvColor="#00000000" Title="Управление АПК (выход на драйвер 0-10 В)" AxisTitle="Управление АПК (выход на драйвер 0-10 В)" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" />
 
                                     insertInArcive(tmpName, archTyps[archType], tmpUuid, archSax);
                                     if (!getTrendAttr(tableList, sig0, nameSig, attr)) {
@@ -2060,7 +2071,7 @@ public class Generator {
                     }
                 } else {
                     String groupName = tableName + sa;
-                    // уту часть принес выше  из IF NZ
+                    // эту часть принес выше  из IF NZ
                     String sig0Else = tableName;
                     int yElse = sig0Else.indexOf("_");
                     sig0Else = abonent + sig0Else.substring(yElse);
@@ -2121,6 +2132,26 @@ public class Generator {
         return ret;
     }
 
+    // --- получить UUID PV из файлов ---
+    private static String[] GetUuid_PV_T_CalcPar_T_AI_ToHMI(String[] fileReadPV ){
+        String[] returnUUID = new String[fileReadPV.length];
+        XMLSAX CalcParOrAI_ToHMI = new XMLSAX();
+        for (int i = 0; i < fileReadPV.length; i++) {
+            String file = fileReadPV[i];
+            CalcParOrAI_ToHMI.readDocument(globVar.desDir + File.separator + "Design" + File.separator + file);
+            Node nFields = CalcParOrAI_ToHMI.returnFirstFinedNode("Fields");
+            ArrayList<Node> arrayField = CalcParOrAI_ToHMI.getHeirNode(nFields);// берем Field
+            for (Node nF : arrayField) {
+                String nameField = CalcParOrAI_ToHMI.getDataAttr(nF, "Name");
+                if (nameField.equals("PV")) {
+                    returnUUID[i] = CalcParOrAI_ToHMI.getDataAttr(nF, "UUID");
+                    break;
+                }
+            }
+        }
+        return returnUUID;
+    }
+    
     // --- Получение атрибутов тренда ---
     private static boolean getTrendAttr(ArrayList<String> tableList, String group, String sig, String[] attr) {
         String tableName = null;
