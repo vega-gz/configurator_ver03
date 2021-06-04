@@ -51,15 +51,13 @@ public class addArchive extends javax.swing.JFrame {
             archives.add(continueArchiv);
         }else if(globVar.DB.getListColumns("Archive").isEmpty()) {//если данных нет в таблице
             globVar.DB.insertRow("Archive", continueArchiv, jTableCols,0);
-            archives = new ArrayList<>();
-            archives.add(continueArchiv);
             archives = globVar.DB.getData("Archive");
         }
          else{
             archives = globVar.DB.getData("Archive");
         }
         
-        
+        // таблица настроек архива(Если нет комментария то крашится сохранение)
         if (!globVar.DB.isTable("Archive_" + globVar.abonent)) {
              globVar.DB.createTableEasy("Archive_" + globVar.abonent,  columnTableArchAbon, "архив абонента " + globVar.abonent);
         }
@@ -82,7 +80,7 @@ public class addArchive extends javax.swing.JFrame {
             archiveTyps[i]= jTable1.getValueAt(i, 1).toString();
         }
         
-        archList = globVar.DB.getData("Archive_"+abonent, archTabCols);
+        archList = globVar.DB.getData("Archive_" + abonent, archTabCols);
         
         jComboBox1.setModel(new DefaultComboBoxModel(archiveTyps));
         jList1.setModel(list1);
