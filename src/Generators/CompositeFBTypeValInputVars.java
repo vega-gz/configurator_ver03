@@ -91,16 +91,23 @@ public class CompositeFBTypeValInputVars implements FindCompositeFBType {
 
     // --- возращает UUID структуры VarDeclaration ---
     public String getUUIDSigVarDeclaration(String Name) {
-        for (HashMap<String, String> h : getFBInputs()) {              
-            if (Name.equals(h.get("Name"))) {                
-                return h.get("UUID");                 
+        List<HashMap<String, String>> varList = getFBInputs();
+        if(varList != null){
+            for (HashMap<String, String> h : getFBInputs()) {              
+                if (Name.equals(h.get("Name"))) {                
+                    return h.get("UUID");                 
+                }
             }
         }
-        for (HashMap<String, String> h : getFBEvents()) {              
-            if (Name.equals(h.get("Name"))) {                
-                return h.get("UUID");                 
+        
+        List<HashMap<String, String>> EventList = getFBEvents();
+        if(EventList != null){
+            for (HashMap<String, String> h : EventList) {              
+                if (Name.equals(h.get("Name"))) {                
+                    return h.get("UUID");                 
+                }
+                }
             }
-        }
         return null;
     }
 
