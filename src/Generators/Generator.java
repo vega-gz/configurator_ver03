@@ -1092,7 +1092,7 @@ public class Generator {
                     if (setEnableGlobaSignal != null)
                     {
                         interGlobCase = false;
-                    }
+                    }else interGlobCase = true;
  
                     if (name != null) {
                         String hmiApp = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI");
@@ -1982,7 +1982,7 @@ public class Generator {
                 FileManager.loggerConstructor("Not find comment Archive Table " + tableName);
             } // просто отработка поиска ошибок
             
-            //  ууиды  T_CalcPar T_AI_ToHMI
+            //  ууиды PV T_CalcPar T_AI_ToHMI
             String[] arrayS1 = {"T_CalcPar.type", "T_AI_ToHMI.type"};
             String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI(arrayS1);
 

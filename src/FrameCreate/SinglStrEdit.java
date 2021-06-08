@@ -51,7 +51,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     int H_GAP = 2;
     String relatedTable=null;
     
-    // --- Фрейм работа с строкой таблицы ---
+    // --- Фрейм работа с строкой таблицы (тут же и уставки)---
     public SinglStrEdit(MyTableModel tableModel, String title, ArrayList<JFrame> listJF) {
         Container container = this.getContentPane();
         container.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT); 
@@ -124,7 +124,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
             if(st.isCreate()) st.setSimpleTableSettings(jTable1);
             gpw = 600;
         }
-        // это костыль или на оборот нормальное(вообще это уставки я так понимаю)
+        // это костыль просто открываю таблицу которая есть(вообще это уставки я так понимаю)
         if (linkTable == null & trgCol == null){ // если нет ни каких записей в нодах к Сигналу
             relatedTable = title;               // Запрос к базе по заголвку который передали 
             st = new SimpleTable(relatedTable, null, null);

@@ -23,6 +23,9 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author nazarov
+ * 
+ * Тестовый класс работы с таблицами и базой (измененние в таблицы сразу меняет в базе)
+ * 
  */
 public class MainTestTable extends JFrame {
 
