@@ -101,7 +101,7 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
 
     }
 
-    // --- Собственный метод получить данные из таблицы по имени столбца  ---
+    // --- получить данные из таблицы по имени столбца  ---
     public Object getDataNameColumn(String nameColumn, int row) {
         Object objTable = null;
         for (int i = 0; i < resultColumn.length; ++i) { // Пробегаем по всем нашим именам столбцов как они стоят 
@@ -112,7 +112,7 @@ public class NZDefaultTableModel extends DefaultTableModel { // название
         return objTable;
     }
     
-    // --- названия столбцов Vectro  ---
+    // --- названия столбцов Vectr  ---
     public Vector getColumns() {
         Vector ncolumns = new Vector();
        for (int i = 0; i < resultColumn.length; ++i) { // Пробегаем по всем нашим именам столбцов как они стоят 

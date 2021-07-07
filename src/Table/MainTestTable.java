@@ -36,8 +36,8 @@ public class MainTestTable extends JFrame {
         XMLSAX.getConnectBaseConfig("Config.xml");
         DataBase db = new DataBase();
         globVar.DB = db;
+        
         String table_name = "SignalSetups";
-
         db.getListColumns(table_name);
         NZDefaultTableModel madelTable = new NZDefaultTableModel(db.getData(table_name), db.getListColumns(table_name), table_name);
         DefaultTableModel modelBase = new ConnectBaseTable(madelTable);

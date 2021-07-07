@@ -6,14 +6,13 @@
 
 package Table;
 
-import DataBaseTools.DataBase;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JComponent;
 
 /**
  *
  * @author nazarov
  */
-public interface SetBaseDefaultTableModelInterface {
+public interface InterfacePopmenu {
     
-    public void setModelTable(DefaultTableModel model);
+    void setPopMenu(JComponent jTable);
 }

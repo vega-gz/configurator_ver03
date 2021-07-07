@@ -14,6 +14,9 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author nazarov
+ * 
+ * Пробовал декоратор но все работает не верно
+ * 
  */
 public class ConnectBaseTable extends DefaultTableModel {
 
@@ -30,24 +33,27 @@ public class ConnectBaseTable extends DefaultTableModel {
     public boolean isCellEditable(int row, int column) {
         return nz.isCellEditable(row, column);
     }
-
     @Override
-    public void setValueAt(Object aValue, int row, int column) {
-        
+    public void setValueAt(Object aValue, int row, int column) {   
          if (column == 0) {
             return;
         } 
         
-        Vector rowData = (Vector) nz.getDataVector().get(row); // Получаем список значений аналог Листа
-        String ColumnName = nz.resultColumn[column];
-        int ColumnTM = nz.resultColumn.length;
+        Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений аналог Листа
+        String ColumnName = this.getColumnName(column);
+        int ColumnTM = this.getColumnCount();
         HashMap< String, String> mapDataRow = new HashMap<>(); // элементы для отображения в этих полях
         for (int i = 0; i < ColumnTM; ++i) { // Пробежать по строке где изменяются данные и сформировать список для обновления данных в базе c 1 так как там галки
-            mapDataRow.put(nz.resultColumn[i], (String) rowData.get(i)); // Формируем список данных принудительно в String
+            mapDataRow.put(this.getColumnName(i), (String) rowData.get(i)); // Формируем список данных принудительно в String
         }
         workbase.Update(nz.nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
         
-        nz.setValueAt(aValue, row, column); // вызов метода что декорируем
         rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)            
+    }
+    
+    @Override
+    public void insertRow(int row,Object aValue[]){
+        super.insertRow(row, aValue);
+        workbase.getSetingsSignal((String[])aValue);
     }
 }

@@ -158,7 +158,7 @@ public class TableTools {//ссылка на таблицу, массив шир
             popupMenu.add(menuItemOpenWindow);
         }
         jTable1.setComponentPopupMenu(popupMenu);
-        jTable1.getTableHeader().setComponentPopupMenu(popupMenu);
+        jTable1.getTableHeader().setComponentPopupMenu(popupMenu); // к заголовку меню так как при пустой таблице не создать строки
 
         if (rgf != null) {//---
             menuItemOpenWindow.addActionListener((ActionEvent event) -> {
@@ -233,6 +233,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                 row++;
             }
             list_str.clear();
+
         });
         menuItemRemove.addActionListener((ActionEvent event) -> {
            
@@ -388,7 +389,6 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
     }
     // ----- Функция для расстановки номеров строк в первом столбце --------------Lev---
-
     static public void setId(JTable jTable1) {
         int n = jTable1.getRowCount();
         for (int i = 0; i < n; i++) {

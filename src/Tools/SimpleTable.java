@@ -65,6 +65,7 @@ public final class SimpleTable {
         return true;
     }
 
+    // ---  Какие то настройки для таблице(было использовано в Уставках) ---
     public void setSimpleTableSettings(JTable jTable1) {
         if(tableSize<0) return;
         TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, null, null, null);

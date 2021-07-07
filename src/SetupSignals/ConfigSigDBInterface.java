@@ -11,7 +11,7 @@ package SetupSignals;
  * @author nazarov
  */
 public interface ConfigSigDBInterface {
-    ConfigSig get();
+    ConfigSig get(String nameSig);
     boolean remove();
     boolean edit();
     

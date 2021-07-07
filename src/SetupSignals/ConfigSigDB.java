@@ -9,16 +9,24 @@ package SetupSignals;
 import DataBaseTools.DataBase;
 import globalData.globVar;
 
+
 /**
  *
  * @author nazarov
  */
 public class ConfigSigDB implements ConfigSigDBInterface {
     DataBase db = globVar.DB;
+    String nameTableSetups = "SigSetups";
+    String nameColumn1 = "Abonent";
+    String nameColumn2 = "NameSig";
+    
+
 
     @Override
-    public ConfigSig get() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ConfigSig get(String nameSig) {
+        //db.getListTable().equals(globVar.abonent + "_" + nameTableSetups);
+        db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, nameColumn2}, {globVar.abonent, nameSig}}); // поиск данны=х с выборкой
+        return null;
     }
 
     @Override

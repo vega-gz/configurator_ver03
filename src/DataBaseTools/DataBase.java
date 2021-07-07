@@ -282,6 +282,9 @@ public class DataBase implements Observed {
      
 // --- Вставка данных (название таблицы, список столбцов, данные, index) -Lev--
     public void insertRow(String name_table, String[] row, String[] listNameColum, int index) {
+        /*
+         если в столбцах есть идентификатор ID он будет игнорировать index
+        */
         if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length){
             String strErr = "Количество данных и столбцов не совпадает " +  row.length + " | " + listNameColum.length;
             System.out.println(strErr);
@@ -389,6 +392,7 @@ public class DataBase implements Observed {
         }
         return selectData;
     }
+    
     public ArrayList<String> getDataFromColumn(String table, String colName, String sort) {
         String sql = "SELECT \"" + colName + "\""+ " FROM \"" + table +"\""+sort+";"; 
         ArrayList<String> selectData = new ArrayList<>();
@@ -408,6 +412,7 @@ public class DataBase implements Observed {
         }
         return selectData;
     }
+    
         // ---найти данные по имени столбца и значению ячейки и имени искомого столбца---Lev---
     public String getDataCell(String table, String col1, String val1, String col2) {
         String sql = "SELECT \"" + col2 + "\" FROM \"" + table +"\" WHERE \""+col1+"\"='"+val1+"';";
@@ -443,6 +448,41 @@ public class DataBase implements Observed {
             e.printStackTrace();
         }
         return listColumn;
+    }
+    
+    // --- получить данные из таблицы по условию ---
+     public ArrayList<String[]> getDataCondition(String table, String[][] condition) {
+        /*
+         condition - условие where 
+         1- столбец
+         2- значение
+         */
+        ArrayList<String[]> selectData = new ArrayList<>();
+        String sql = "SELECT * " + " FROM \"" + table +"\" WHERE "; 
+        for (int i = 0; i < condition .length; i++) {
+            sql += "\"" + condition[i][0] + "\"=" + "'" + condition[i][1] + "'";
+            if(i + 1 < condition .length) sql += " AND ";
+        }
+        sql += ";";
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int columns = rs.getMetaData().getColumnCount(); // количество колонок выборки
+                String[] strFromTb = new String[columns]; // массив под данные
+                for (int i = 1; i <= columns; ++i) { //  запрос по индексу идет с 1
+                    strFromTb[i-1] = rs.getString(i);
+                    if(strFromTb[i-1] == null) strFromTb[i] = "";
+                }
+                selectData.add(strFromTb);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            FileManager.loggerConstructor("Failed select:" + sql);
+            e.printStackTrace();
+        }
+        return selectData;
     }
     
     /**Метод получения списка таблиц из базы 
@@ -542,10 +582,8 @@ public class DataBase implements Observed {
         return lisrSEQ;
     }
     
-    
 
-
-        // ---  Обновить данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
+    // ---  Обновить данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
     public int Update(String table, String column, String newData, HashMap< String, String> mapDataRow) {
         int requestr = 0;
         try {
@@ -697,7 +735,7 @@ public class DataBase implements Observed {
             e.printStackTrace();
         }
     }
-   // --- добавить комментарий к столюцу ---
+   // --- добавить комментарий к столбцу ---
     public void createCommentColumn(String table, String col, String comment){
         String sql = null;   
         try {
@@ -735,6 +773,7 @@ public class DataBase implements Observed {
         }
         return listComm;
     }
+    
     // --- получить комментарии таблицы ---
     public String getCommentTable(String table_name){
         String sql = null; 
@@ -943,7 +982,8 @@ public class DataBase implements Observed {
 
     
     // --- получить уставки сигнала (недоделан)---
-     public ArrayList<ArrayList<String>> getSetingsSignal(){
+    //public ArrayList<ArrayList<String>> getSetingsSignal(String abonent, String table, String signal ){
+    public ArrayList<ArrayList<String>> getSetingsSignal(String[] rows ){
         /*
          1-й Лист возратит названия столбцов
          */
@@ -958,28 +998,29 @@ public class DataBase implements Observed {
         } else{
             System.out.println("Table " + table_name + " is present in DB!");
             ArrayList<String> columnsSeting = getListColumns(table_name);
-            String lastIndex = Integer.toString(getLastId(table_name) + 1);
-            String[] data = columnsSeting.toArray(new String[columnsSeting.size()]);
-            String[] rows = {lastIndex, "GPA665", "SPA", "TestConfig", "TypeAnalog", "Nasos665", "UP", "3000", "-1", "600"};
-            insertRow(table_name, rows, data, getLastId(table_name));
+            //String indexID = Integer.toString(getLastId(table_name) + 1);
+            int indexID = getLastId(table_name) + 1;
+            String[] data = columnsSeting.toArray(new String[columnsSeting.size()]); // тут с id возращает
+            //String[] rows = 
+            insertRow(table_name, rows, data, indexID);
             
-            for (String[] arr : getData(table_name)) {
-                for (int i = 0; i < arr.length; i++) {
-                    System.out.print(arr[i] + " ");
-                }
-                System.out.println();
-            }
+//            for (String[] arr : getData(table_name)) {
+//                for (int i = 0; i < arr.length; i++) {
+//                    System.out.print(arr[i] + " ");
+//                }
+//                System.out.println();
+//            }
         }
-        
         return null;
     }
     
     public static void main(String[] arg){
-        XMLSAX.getConnectBaseConfig("Config.xml");
-        DataBase db = new DataBase();
-        globVar.DB = db;
-        //db.dropTable("SignalSetups");
-        db.getSetingsSignal();
+//        XMLSAX.getConnectBaseConfig("Config.xml");
+//        DataBase db = new DataBase();
+//        globVar.DB = db;
+//        db.dropTable("SignalSetups");
+//        db.getSetingsSignal(new String[]{"3", "GPA665", "SPA", "TestConfig", "TypeAnalog", "Nasos665", "UP", "3000", "-1", "600"});
+//        db.getDataCondition("Abonents", new String[][]{{"Abonent_type", "Sonet"}, {"Path_to_Excel", "D:222"}}); // поиск данны=х с выборкой
         
 //        System.out.println(db.getTimeFirstCommit("Abonents")); // получить первый коммит времени строки таблицы
 //        db.dropTableWithBackUp("Abonents");

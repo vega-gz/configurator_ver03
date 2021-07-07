@@ -1,9 +1,12 @@
 package FrameCreate;
 
+import Table.ConnectBaseTable;
+import Table.NZDefaultTableModel;
+import Table.PopUpMenuJtableSetupsSignal;
+import Table.TableTools;
 import Tools.MyTableModel;
 import Tools.SaveFrameData;
 import Tools.SimpleTable;
-import Table.TableTools;
 import Tools.isCange;
 import globalData.globVar;
 import java.awt.ComponentOrientation;
@@ -25,6 +28,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import static javax.swing.LayoutStyle.ComponentPlacement.RELATED;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class SinglStrEdit  extends javax.swing.JFrame{
@@ -105,44 +109,25 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         if(x<0) x = title.lastIndexOf("_");
         String nodeName = title.substring(x+1);
         
-        String linkTable =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"linkTable"); // что это за нода и почему она встречается только в AI(Это похоже исполнительные механизмы)
-        String trgCol =globVar.sax.getDataAttr(globVar.sax.returnFirstFinedNode(nodeName),"trgCol");       // и это значение зачем
-        if(linkTable!=null){
-            relatedTable = abonent+"_"+linkTable;
-            st = new SimpleTable(relatedTable, trgCol, null);
-            jTable1 = new JTable();
-            jScrollPane1 = new JScrollPane();
-            jTable1.setModel(st.tableModel);
-            jScrollPane1.setViewportView(jTable1);
+        // Уставки из отдельной таблицы
+        String table_name = "SignalSetups";
+        NZDefaultTableModel madelTable = new NZDefaultTableModel(globVar.DB.getData(table_name), globVar.DB.getListColumns(table_name), table_name);
+        DefaultTableModel modelBase = new ConnectBaseTable(madelTable);
+        jTable1 = new JTable(modelBase);
+        new PopUpMenuJtableSetupsSignal().setPopMenu(jTable1);
+        jScrollPane1 = new JScrollPane();
+        jScrollPane1.setViewportView(jTable1);
 
-            jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
-                public void focusLost(java.awt.event.FocusEvent evt) {
-                    //numberFocusLost(evt);
-                    System.out.println("FocusListener " + evt.isTemporary());
-                }
-            });
-            if(st.isCreate()) st.setSimpleTableSettings(jTable1);
-            gpw = 600;
-        }
-        // это костыль просто открываю таблицу которая есть(вообще это уставки я так понимаю)
-        if (linkTable == null & trgCol == null){ // если нет ни каких записей в нодах к Сигналу
-            relatedTable = title;               // Запрос к базе по заголвку который передали 
-            st = new SimpleTable(relatedTable, null, null);
-            jTable1 = new JTable();
-            jScrollPane1 = new JScrollPane();
-            jTable1.setModel(st.tableModel);
-            jScrollPane1.setViewportView(jTable1);
+        jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                //numberFocusLost(evt);
+                System.out.println("FocusListener " + evt.isTemporary());
+            }
+        });
+        //if(st.isCreate()) st.setSimpleTableSettings(jTable1);
+        gpw = 600;
+        //}
 
-            jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
-                public void focusLost(java.awt.event.FocusEvent evt) {
-                    //numberFocusLost(evt);
-                    System.out.println("FocusListener " + evt.isTemporary());
-                }
-            });
-            if(st.isCreate()) st.setSimpleTableSettings(jTable1);
-            gpw = 600;
-        }
-    
         this.addMouseWheelListener((MouseWheelEvent e) -> {
             curr += e.getWheelRotation();
             if(curr<0) curr = 0;
@@ -176,7 +161,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
             st.saveTableInDB();
         };
         isCange ich = ()->{
-            boolean tmpCtash = st.isNew(); // Почему st null ?
+            if(st == null) return false; // 
             return st.isNew(); // тут возращаем реализованный интерфейс(падает )
         };
         TableTools.setFrameListener(this, sfd, ich, null);//cjf);
