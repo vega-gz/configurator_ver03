@@ -8,35 +8,76 @@ package SetupSignals;
 
 import DataBaseTools.DataBase;
 import globalData.globVar;
+import java.util.ArrayList;
 
 
 /**
  *
  * @author nazarov
  */
-public class ConfigSigDB implements ConfigSigDBInterface {
-    DataBase db = globVar.DB;
-    String nameTableSetups = "SigSetups";
-    String nameColumn1 = "Abonent";
-    String nameColumn2 = "NameSig";
+public class ConfigSigDB implements ConfigSigStorageInterface {
+    private DataBase db = globVar.DB;
+    private String nameTableSetups = globVar.nameTableSetups;
+    private String nameSig = null;
+    private String nameColumn1 = "Abonent";
+    private String nameColumn2 = "NameSig";
+    private String[] columnSetingArr = null;
     
-
+    public ConfigSigDB(String nameSig){
+        this.nameSig = nameSig;
+        ArrayList<String> columnSetingList = db.getListColumns(nameTableSetups);
+        columnSetingArr = columnSetingList.toArray(new String[columnSetingList.size()]);
+    }
 
     @Override
-    public ConfigSig get(String nameSig) {
+    public ArrayList<ConfigSig> get() {
         //db.getListTable().equals(globVar.abonent + "_" + nameTableSetups);
-        db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, nameColumn2}, {globVar.abonent, nameSig}}); // поиск данны=х с выборкой
-        return null;
+        ArrayList<ConfigSig> savedConfigsSignal = new ArrayList<>();
+        ArrayList<String[]> dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}, {nameColumn2, nameSig}}); // поиск данных с выборкой
+        for (int i = 0; i < dataSettingDB.size(); i++)
+        {   
+            String[] arr = dataSettingDB.get(i);
+            ConfigSig config = new AnalogSetup();
+            config.setData(arr);
+            config.setLocalId(i + 1); // с еденицы
+            savedConfigsSignal.add(config);
+        }
+        return savedConfigsSignal;
     }
 
     @Override
-    public boolean remove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void removeByIDSignal(ConfigSig s) {
+        db.deleteRowId(nameTableSetups, s.getId());
     }
 
     @Override
-    public boolean edit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void editSignal(ConfigSig s) {       
+        if(s.getStatus() == ConfigSig.StatusSeting.FROMBASE)
+        {
+            removeByIDSignal(s);
+            addSignal(s);
+        }else
+        {
+            System.out.println("Edit setting " + s.getName() + "not posible, not ID");
+        }
+    }
+
+    @Override
+    public void addSignal(ConfigSig s) {
+        /*
+         Сождаем новый ID 
+        вносим его в настройку
+        записываем строку
+        */
+        
+        String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
+        s.setId(newIdSetting);
+        db.insertRow(nameColumn1, s.getData(), columnSetingArr, null);
+    }
+
+    @Override
+    public String[] getNameColumnSetings() {
+        return columnSetingArr;
     }
     
 }

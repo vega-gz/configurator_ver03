@@ -665,13 +665,13 @@ public class ExecutiveMechanismObject {
             }
         }
 
-        //создадим таск бар в потоке(не работает)
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                TaskBarFrame testBar = new TaskBarFrame();
-                workbase.addObserver(testBar); // добавить слушателя для базы
-            }
-        });
+//        //создадим таск бар в потоке(не работает)
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                TaskBarFrame testBar = new TaskBarFrame();
+//                //workbase.addObserver(testBar); // добавить слушателя для базы когда то было
+//            }
+//        });
 
         // данные для передачи наблюдателю
         //int min = 0;

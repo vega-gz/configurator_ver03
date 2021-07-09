@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
-public class DataBase implements Observed {
+public class DataBase {
     Statement stmt;
     Connection connection = null;
     
@@ -281,7 +281,7 @@ public class DataBase implements Observed {
     }
      
 // --- Вставка данных (название таблицы, список столбцов, данные, index) -Lev--
-    public void insertRow(String name_table, String[] row, String[] listNameColum, int index) {
+    public void insertRow(String name_table, String[] row, String[] listNameColum, Integer index) {
         /*
          если в столбцах есть идентификатор ID он будет игнорировать index
         */
@@ -299,7 +299,10 @@ public class DataBase implements Observed {
             
             int start = 0;
             if("id".equalsIgnoreCase(listNameColum[0]) || "№".equals(listNameColum[0])) start = 1;
-            for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\"";
+            for (int i = start; i<listNameColum.length;i++ )
+            {
+                sql += ", \"" + listNameColum[i] + "\"";
+            }
             if(start == 0){
                 sql += ") VALUES ("+index;
                 for (String row1 : row) sql += ", '" + row1 + "'";
@@ -586,9 +589,10 @@ public class DataBase implements Observed {
     // ---  Обновить данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
     public int Update(String table, String column, String newData, HashMap< String, String> mapDataRow) {
         int requestr = 0;
+        String sql = null;
         try {
             connection.setAutoCommit(true);
-            String sql = "UPDATE " + "\"" + table + "\""+ " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
+            sql = "UPDATE " + "\"" + table + "\""+ " SET " + "\"" + column + "\""  // очень строго вот так почему то(UPDATE  sharp__var SET "Num_0" = 'NULL' WHERE 'Num_0' = '3';)
                     + " = \'" + newData + "\' WHERE " ;
             // Формируем условие запроса из столбцов и данных
             int lastValue = 1; // с первого так как размер не с нуля
@@ -601,11 +605,12 @@ public class DataBase implements Observed {
                 ++lastValue;
               }
             sql += ";";
-            System.out.println(sql);
+            //System.out.println(sql);
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
+            FileManager.loggerConstructor("error PSQL Update: " + sql);
             e.printStackTrace();
         }
         return requestr;
@@ -950,34 +955,6 @@ public class DataBase implements Observed {
         }finally {
             return status;
         }
-    }
-     
-     
-    
-    // --- Функции наблюдателя (нужен он или нет Вообще наблюдатель)---
-    @Override
-    public void addObserver(Observer o) { // добавить слушателя
-        observers.add(o);
-    }
-
-    @Override
-    public void removeObserver(Observer o) { // удалить слушателя
-        observers.remove(o);
-    }
-
-    @Override
-    public void notifyObserver() {
-       for(Observer o: observers){ // Рассылаем слушетелям 
-       o.handleEvent(min, max, value);
-       }
-    }
-    
-     // метод изменения состояни 
-    public void setValueObserver(int min, int max, int value){
-        this.min = min;
-        this.max = max; 
-        this.value = value;
-        notifyObserver(); // вызов оповещения всем слушателям
     }
 
     

@@ -1,5 +1,6 @@
 package FrameCreate;
 
+import Table.ConfigSignalsTableModel;
 import Table.ConnectBaseTable;
 import Table.NZDefaultTableModel;
 import Table.PopUpMenuJtableSetupsSignal;
@@ -50,7 +51,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     JButton save;
     int labLen = 0;
     int fieldLen = 0;
-    SimpleTable st;
+    SimpleTable st; // Нужно выяснить какая таблица
     int H_SIZE = 20;
     int H_GAP = 2;
     String relatedTable=null;
@@ -110,9 +111,10 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         String nodeName = title.substring(x+1);
         
         // Уставки из отдельной таблицы
-        String table_name = "SignalSetups";
-        NZDefaultTableModel madelTable = new NZDefaultTableModel(globVar.DB.getData(table_name), globVar.DB.getListColumns(table_name), table_name);
-        DefaultTableModel modelBase = new ConnectBaseTable(madelTable);
+//        String table_name = "SignalSetups";
+//        NZDefaultTableModel madelTable = new NZDefaultTableModel(globVar.DB.getData(table_name), globVar.DB.getListColumns(table_name), table_name);
+//        DefaultTableModel modelBase = new ConnectBaseTable(madelTable);
+        DefaultTableModel modelBase = new ConfigSignalsTableModel(title);
         jTable1 = new JTable(modelBase);
         new PopUpMenuJtableSetupsSignal().setPopMenu(jTable1);
         jScrollPane1 = new JScrollPane();
@@ -282,7 +284,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         curr = qRows-1;
         setFields(curr);
     }                                       
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {  
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {  // Слушатель кнопки сохранения
         st.saveTableInDB(); // тут тоже вываливается из таблицы APS
     }                                       
  

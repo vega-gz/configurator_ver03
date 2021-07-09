@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author nazarov
  * 
- * Пробовал декоратор но все работает не верно
+ * Обновление базы в реальном режиме изменения таблицы
  * 
  */
 public class ConnectBaseTable extends DefaultTableModel {

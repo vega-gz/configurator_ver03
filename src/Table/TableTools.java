@@ -166,11 +166,19 @@ public class TableTools {//ссылка на таблицу, массив шир
                 if (row < 0) {
                     row = 0;
                 }
-                SinglStrEdit sse = new SinglStrEdit(tableModel, title, listJF);
-                sse.setVisible(true);
-                if (rgf != null) {
-                    rgf.reg(sse);
+                int countcolumn = jTable1.getColumnCount();
+                String nameSinglSeting = null;
+                for (int i = 0; i < countcolumn; i++) {
+                    String nameColumn = jTable1.getColumnName(i);
+                    if(nameColumn.equals(globVar.TAGPLC))
+                    {
+                        nameSinglSeting = (String)jTable1.getValueAt(row, i);
+                        break;
+                    }
                 }
+                SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, listJF);
+                sse.setVisible(true);
+                rgf.reg(sse);
                 sse.setFields(row);
             });
         }

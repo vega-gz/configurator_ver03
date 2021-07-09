@@ -34,8 +34,8 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
         JMenuItem menuItemRemove = new JMenuItem("Удалить строку");
         JMenuItem menuItemCreateStr = new JMenuItem("Создать уставку");
 
-//        menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
-//        menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
+//      menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
+//      menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
         popupMenu.add(menuItemCopyStr);
         popupMenu.add(menuItemInsertStr);
         popupMenu.add(menuItemRemove);
@@ -52,10 +52,16 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
                 int n = jTable.getColumnCount();
                 String[] s = new String[n];
                 for (int j = 0; j < n; j++) {
-                    s[j] = jTable.getValueAt(i, j).toString();
+                    Object dataCell = jTable.getValueAt(i, j);
+                    if(dataCell != null)
+                    {
+                        s[j] = jTable.getValueAt(i, j).toString();
+                    }else 
+                    {
+                        s[j] = "";
+                    }
                 }
                 list_cell.add(s);
-
             }
         });
         
@@ -76,7 +82,7 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
             if (rows.length == 0) {
                 return;
             }
-             DefaultTableModel tm = (DefaultTableModel) jTable.getModel();
+            DefaultTableModel tm = (DefaultTableModel) jTable.getModel();
             for (int i = 0; i < rows.length; i++) {
                  tm.removeRow(i);
             }

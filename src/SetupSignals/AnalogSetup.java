@@ -13,6 +13,9 @@ package SetupSignals;
  * Аналогавая уставка 
  * 
  */
-public class AnalogSetup extends Setup{
+public class AnalogSetup extends ConfigSig{
+    public AnalogSetup(){
+        setName("AnalogSetup");
+    }
     
 }

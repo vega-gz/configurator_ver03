@@ -6,20 +6,16 @@
 
 package SetupSignals;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author nazarov
- * 
- * Класс описывающий список Уставок
- * 
  */
-public class SumConfigs {
-    ArrayList<Setup> setupArray = new ArrayList<>();
+public interface SetupsDataToTables {
     
-    public void collectConfig(){
-    
-    }
-    
+   String[][] getDataToTable();
+   String[] getNameColumnsToTable();
+   int addSetingSignal(Object[] row);
+   ConfigSig getSetingByIdLocal(int i);
+   void removeRowToData(Object row);
+   void SaveData();
 }
