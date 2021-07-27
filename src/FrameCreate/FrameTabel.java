@@ -209,7 +209,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         String retHMI = null;
         try {
-            retHMI = Generator.genHMI(null,null);
+            retHMI = Generator.genHMI(null, false, null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

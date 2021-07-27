@@ -355,7 +355,10 @@ public class Generator {
     }
 
     // --- Генерация файлов HMI ---
-    public static String genHMI(TableDB ft, JProgressBar jProgressBar) throws IOException {
+    public static String genHMI(TableDB ft, boolean ignoreEvent, JProgressBar jProgressBar) throws IOException {
+        /*
+        ignoreEvent -- игнорировать события по резервам
+        */
         int casedial = JOptionPane.showConfirmDialog(null, "Листы мнемосхем для " + ft.tableName() + " генерировать?"); // сообщение с выбором
         if (casedial != 0) {
             return ""; //0 - yes, 1 - no, 2 - cancel
@@ -605,6 +608,10 @@ public class Generator {
                 String ruName = ft.getCell(nameCol, i);
                 if ("".equals(ruName)) {
                     continue;
+                }
+                
+                if(ignoreEvent & ft.getCell(globVar.TAGPLC, i).indexOf("Res_") >= 0){
+                 continue;
                 }
 
                 ArrayList<String> removedVar = new ArrayList<>();

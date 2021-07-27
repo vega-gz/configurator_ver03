@@ -130,6 +130,12 @@ public class TableDB extends javax.swing.JFrame {
         TableTools.setFrameListener(this, sfd, ich, cjf);
 
         this.setTitle(table + ": " + comment);
+        
+        // скрыть галку от названия таблицы
+        if(table.indexOf("AI") > 0 | table.indexOf("AO") > 0 
+                | table.indexOf("DI") > 0 | table.indexOf("D0") > 0){
+            
+        }else jCheckBoxNotCreateEvent.hide();
 
     }
 
@@ -152,6 +158,7 @@ public class TableDB extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jTextField1 = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBoxNotCreateEvent = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -324,6 +331,14 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxNotCreateEvent.setSelected(true);
+        jCheckBoxNotCreateEvent.setText("Не создавать событий для резервов");
+        jCheckBoxNotCreateEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxNotCreateEventActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -334,7 +349,9 @@ public class TableDB extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1))
+                        .addComponent(jCheckBox1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBoxNotCreateEvent))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(820, Short.MAX_VALUE))
         );
@@ -346,7 +363,8 @@ public class TableDB extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBoxNotCreateEvent))
                 .addContainerGap())
         );
 
@@ -759,7 +777,7 @@ public class TableDB extends javax.swing.JFrame {
             }
             String retHMI = null;
             try {
-                retHMI = Generator.genHMI(this, jProgressBar1);
+                retHMI = Generator.genHMI(this, jCheckBoxNotCreateEvent.isSelected(), jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -984,6 +1002,10 @@ public class TableDB extends javax.swing.JFrame {
         createTable.setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jCheckBoxNotCreateEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxNotCreateEventActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxNotCreateEventActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -993,6 +1015,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxNotCreateEvent;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDialog jDialog1_DownloadSheetExcel;
     private javax.swing.JDialog jDialog1_add_column;

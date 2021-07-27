@@ -379,6 +379,8 @@
                               <Component id="jTextField1" min="-2" pref="170" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxNotCreateEvent" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jProgressBar1" alignment="0" min="-2" pref="739" max="-2" attributes="0"/>
                       </Group>
@@ -395,6 +397,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxNotCreateEvent" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -430,6 +433,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCheckBoxNotCreateEvent">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="&#x41d;&#x435; &#x441;&#x43e;&#x437;&#x434;&#x430;&#x432;&#x430;&#x442;&#x44c; &#x441;&#x43e;&#x431;&#x44b;&#x442;&#x438;&#x439; &#x434;&#x43b;&#x44f; &#x440;&#x435;&#x437;&#x435;&#x440;&#x432;&#x43e;&#x432;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxNotCreateEventActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
