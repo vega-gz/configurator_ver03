@@ -408,7 +408,7 @@ public class Generator {
                 return null;
             }
         }
-        ArrayList<Node> hmiNodeList = HMIcfg.getHeirNode(findNode);//Берем всех наследников ноды Таблицы
+        ArrayList<Node> hmiNodeList = HMIcfg.getHeirNode(findNode);//Берем всех наследников ноды Таблицы (по идеи GenHMI)
         String ret = "";
         for (Node hmiNode : hmiNodeList) {
             String typeGCT = HMIcfg.getDataAttr(hmiNode, "type"); // имя HMI ноды(какой тип блочка может быть в выборе IF-ELSE)
@@ -454,7 +454,7 @@ public class Generator {
                 uuidGCT = fbBigSAX.getFBUUID();
             }
 
-            Integer maxX = null, maxY = null;
+            Integer maxX = null, maxY = null, incPosFBX = null, incPosFBY = null;
             Double startPosX = null, startPosY = null, incX = null, incY = null;
             String tmp = HMIcfg.getDataAttr(hmiNode, "maxX");
             if (tmp != null) {
@@ -480,6 +480,14 @@ public class Generator {
             if (tmp != null) {
                 incY = Double.parseDouble(tmp);
             }
+            tmp = HMIcfg.getDataAttr(hmiNode, "incPosFBX");
+            if (tmp != null) {
+                incPosFBX = Integer.parseInt(tmp);
+            } else incPosFBX = 350;
+            tmp = HMIcfg.getDataAttr(hmiNode, "incPosFBY");
+            if (tmp != null) {
+                incPosFBY = Integer.parseInt(tmp);
+            } else incPosFBY = 420;
             if (maxX == null || maxY == null || startPosX == null || startPosY == null || incX == null || incY == null) {
                 FileManager.loggerConstructor("Для типа данных " + nodeTable + " не полностью описаны координаты элементов ЧМИ");
                 return null;
@@ -727,9 +735,9 @@ public class Generator {
                     "X", "" + fbX,
                     "Y", "" + fbY};
                 Node nodeFB = HMIsax.insertChildNode(FBNetwork, fbData); // Вносим сигнал FB в файл
-                fbX += 350;
+                fbX += incPosFBX;
                 if (fbX > 1200) {
-                    fbY += 420;
+                    fbY += incPosFBY;
                     fbX = 0;
                 }//распределение ФБ по листу редактора Сонаты
 
