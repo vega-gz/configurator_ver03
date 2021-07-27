@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * Обновление базы в реальном режиме изменения таблицы
  * 
  */
-public class ConfigSignalsTableModel extends DefaultTableModel {
+public class ConfigSignalsTableModel extends DefaultTableModel implements SaveTable{
     SetupsDataToTables dataSetings = null;
     
     
@@ -68,5 +68,10 @@ public class ConfigSignalsTableModel extends DefaultTableModel {
     public void removeRow(int row) {
         dataVector.removeElementAt(row);
         fireTableRowsDeleted(row, row);
+    }
+
+    @Override
+    public void saveTable() {
+        dataSetings.SaveData();
     }
 }

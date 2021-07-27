@@ -21,6 +21,7 @@ import org.w3c.dom.Node;
 public class globVar {
         public static String mainConf = "Config.xml";
         public static String mainConfSig = "ConfigSignals.xml";
+        public static String ConfigHMI = "ConfigHMI.xml";
         public static String nodeDBid = "BASE";
         public static String logFile = "configurer.log";
         public static String PathToProject = "";

@@ -40,6 +40,7 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
             ConfigSig config = new AnalogSetup();
             config.setData(arr);
             config.setLocalId(i + 1); // с еденицы
+            config.setStatus(ConfigSig.StatusSeting.FROMBASE); // установить статус
             savedConfigsSignal.add(config);
         }
         return savedConfigsSignal;
@@ -65,7 +66,7 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     @Override
     public void addSignal(ConfigSig s) {
         /*
-         Сождаем новый ID 
+         Создаем новый ID 
         вносим его в настройку
         записываем строку
         */

@@ -118,8 +118,11 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
 
     @Override
     public void setPopMenu(JComponent jTable) {
-        this.jTable = (JTable) jTable;
-        jTable.setComponentPopupMenu(popupMenu);
+        //if(JComponent.class.getName().equals("JTable")){
+            System.out.println(jTable.getClass().getSimpleName());
+            this.jTable = (JTable) jTable;
+            jTable.setComponentPopupMenu(popupMenu);
+        //}
     }
     
     

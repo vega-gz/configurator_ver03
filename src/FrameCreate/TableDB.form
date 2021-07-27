@@ -425,7 +425,8 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBox1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x431;&#x435;&#x437; &#x440;&#x435;&#x437;&#x435;&#x440;&#x432;&#x43e;&#x432;"/>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="&#x431;&#x435;&#x437; &#x440;&#x435;&#x437;&#x435;&#x440;&#x432;&#x43e;&#x432; (&#x414;&#x43b;&#x44f; ST)"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>

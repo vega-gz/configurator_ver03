@@ -382,6 +382,34 @@ public class XMLSAX {
         }
     }
     
+    // --- простой метод записи удаленны(не верно работал с конфигом из за ручного ввода)  ---
+    public void writeDocumentHowConfig() {
+        if (document == null || "".equals(pathWF)) {
+            return;
+        }
+        try {
+            File file = new File(pathWF);
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            //transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // без этого в одну строку все запишет
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            //transformer.setOutputProperty(OutputKeys.INDENT, "no");
+            
+            transformer.transform(new DOMSource(document), new StreamResult(file));
+        } catch (TransformerException e) {
+            e.printStackTrace(System.out);
+        }
+        // тут возвращаем данные которые удаляли
+        if (fixXML != null) {
+            try {
+                // если был вызван парсер удаления возвращамем что удалил
+                fixXML.returnToFileDtd(pathWF);//и возвращаем ему удаленный DOCTYPE
+            } catch (InterruptedException ex) {
+                Logger.getLogger(XMLSAX.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     // --- конвертировать весь документ в Строку(удаляя все \n)---
     String conversionsDocumentToString(){
         // тестовое для проверки
@@ -411,8 +439,7 @@ public class XMLSAX {
         StringWriter stringWriter = new StringWriter();
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            transformerFactory.setAttribute("indent-number", indent); // ИМЕННО ЭТот аттрибут за отступы влияет он Должен стоять первей чем Transformer
-            
+            transformerFactory.setAttribute("indent-number", indent); // ИМЕННО Этот аттрибут за отступы влияет он Должен стоять первей чем Transformer
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "yes");

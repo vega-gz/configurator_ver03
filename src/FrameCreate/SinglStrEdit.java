@@ -2,8 +2,10 @@ package FrameCreate;
 
 import Table.ConfigSignalsTableModel;
 import Table.ConnectBaseTable;
+import Table.InterfacePopmenu;
 import Table.NZDefaultTableModel;
 import Table.PopUpMenuJtableSetupsSignal;
+import Table.SaveTable;
 import Table.TableTools;
 import Tools.MyTableModel;
 import Tools.SaveFrameData;
@@ -24,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -55,6 +58,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     int H_SIZE = 20;
     int H_GAP = 2;
     String relatedTable=null;
+    private DefaultTableModel modelBase;
     
     // --- Фрейм работа с строкой таблицы (тут же и уставки)---
     public SinglStrEdit(MyTableModel tableModel, String title, ArrayList<JFrame> listJF) {
@@ -114,10 +118,12 @@ public class SinglStrEdit  extends javax.swing.JFrame{
 //        String table_name = "SignalSetups";
 //        NZDefaultTableModel madelTable = new NZDefaultTableModel(globVar.DB.getData(table_name), globVar.DB.getListColumns(table_name), table_name);
 //        DefaultTableModel modelBase = new ConnectBaseTable(madelTable);
-        DefaultTableModel modelBase = new ConfigSignalsTableModel(title);
+        modelBase = new ConfigSignalsTableModel(title);
         jTable1 = new JTable(modelBase);
-        new PopUpMenuJtableSetupsSignal().setPopMenu(jTable1);
+        InterfacePopmenu popupMenu = new PopUpMenuJtableSetupsSignal();
+        popupMenu.setPopMenu(jTable1);
         jScrollPane1 = new JScrollPane();
+        //jScrollPane1.setComponentPopupMenu((JPopupMenu) popupMenu);
         jScrollPane1.setViewportView(jTable1);
 
         jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -285,7 +291,9 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         setFields(curr);
     }                                       
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {  // Слушатель кнопки сохранения
-        st.saveTableInDB(); // тут тоже вываливается из таблицы APS
+//        st.saveTableInDB(); // тут тоже вываливается из таблицы APS
+        SaveTable save = (SaveTable) modelBase;
+        save.saveTable();
     }                                       
  
     public void updateRelatedTable(){

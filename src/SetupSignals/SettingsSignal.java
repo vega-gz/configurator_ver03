@@ -43,7 +43,7 @@ public class SettingsSignal implements SetupsDataToTables{
     @Override
     public String[][] getDataToTable() {
         /*
-        берем данные с того что есть но подставляем локальный id
+        берем данные с того что есть подставляем локальный id
         */
         String[][] dataToTable = new String[listSettings.size()][];
         for (int i = 0; i < listSettings.size(); i++) {
@@ -98,15 +98,19 @@ public class SettingsSignal implements SetupsDataToTables{
     @Override
     public void SaveData() {
         for (ConfigSig c : listSettings) {
-            switch (c.getStatus()) {
-                case NEWSIGNAL:
-                    containSetting.addSignal(c);
-                    break;
-                case FROMBASE: {
-                    containSetting.editSignal(c);
-                    break;
+            if (c.getStatus() != null) {
+                switch (c.getStatus()) {
+                    case NEWSIGNAL:
+                        containSetting.addSignal(c);
+                        break;
+                    case FROMBASE: {
+                        containSetting.editSignal(c);
+                        break;
+                    }
                 }
-            }            
+            } else {
+                System.out.println("Error sig " + c.getName() + " not status!!!!");
+            }
         }
         
     }

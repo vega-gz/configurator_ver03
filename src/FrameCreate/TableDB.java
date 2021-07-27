@@ -316,7 +316,8 @@ public class TableDB extends javax.swing.JFrame {
 
         });
 
-        jCheckBox1.setText("без резервов");
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("без резервов (Для ST)");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);

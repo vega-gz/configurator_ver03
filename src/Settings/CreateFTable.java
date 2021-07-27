@@ -257,7 +257,7 @@ public class CreateFTable extends javax.swing.JFrame {
         xmlsax.insertChildNode(table, "GenData");
         xmlsax.insertChildNode(table, "GenCode");
 
-        xmlsax.writeDocument();
+        xmlsax.writeDocumentHowConfig();
         
     }
 

@@ -377,7 +377,7 @@ public class Generator {
             isMb = "mb_";
         }// Читаем пользовательскую конфигурацию для ЧМИ 
         XMLSAX HMIcfg = new XMLSAX(); //
-        String confHMI = "ConfigHMI.xml";
+        String confHMI = globVar.ConfigHMI;
         Node hmiCfgRoot = HMIcfg.readDocument(confHMI); //AT_HMI.iec_hmi
         if (hmiCfgRoot == null) {
             FileManager.loggerConstructor("не удалось прочитать " + confHMI);
