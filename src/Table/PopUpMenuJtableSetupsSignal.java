@@ -23,9 +23,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
 
-    JPopupMenu popupMenu;
-    ArrayList<String[]> list_cell = new ArrayList<>();
-    JTable jTable;
+    private JPopupMenu popupMenu;
+    private ArrayList<String[]> list_cell = new ArrayList<>();
+    ArrayList<JComponent> listJComponentToPopmenu = new ArrayList<>();
+    private JTable jTable;
 
     public PopUpMenuJtableSetupsSignal() {        
         popupMenu = new JPopupMenu();
@@ -117,12 +118,18 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
     
 
     @Override
-    public void setPopMenu(JComponent jTable) {
-        //if(JComponent.class.getName().equals("JTable")){
-            System.out.println(jTable.getClass().getSimpleName());
-            this.jTable = (JTable) jTable;
-            jTable.setComponentPopupMenu(popupMenu);
-        //}
+    public void setPopMenu(JComponent jObject) {
+        if(jObject.getClass().getSimpleName().equals("JTable")){
+            System.out.println();
+            this.jTable = (JTable) jObject;
+        }
+        if(listJComponentToPopmenu.indexOf(jObject) < 0){
+            listJComponentToPopmenu.add(jObject);
+            for (JComponent jc: listJComponentToPopmenu) {
+                jc.setComponentPopupMenu(popupMenu);
+            }
+        }
+        
     }
     
     

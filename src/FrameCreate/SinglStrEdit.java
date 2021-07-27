@@ -123,7 +123,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         InterfacePopmenu popupMenu = new PopUpMenuJtableSetupsSignal();
         popupMenu.setPopMenu(jTable1);
         jScrollPane1 = new JScrollPane();
-        //jScrollPane1.setComponentPopupMenu((JPopupMenu) popupMenu);
+        popupMenu.setPopMenu(jScrollPane1);
         jScrollPane1.setViewportView(jTable1);
 
         jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
