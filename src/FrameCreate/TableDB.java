@@ -133,7 +133,7 @@ public class TableDB extends javax.swing.JFrame {
         
         // скрыть галку от названия таблицы
         if(table.indexOf("AI") > 0 | table.indexOf("AO") > 0 
-                | table.indexOf("DI") > 0 | table.indexOf("D0") > 0){
+                | table.indexOf("DI") > 0 | table.indexOf("DO") > 0){
             
         }else jCheckBoxNotCreateEvent.hide();
 
