@@ -69,11 +69,10 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
          Создаем новый ID 
         вносим его в настройку
         записываем строку
-        */
-        
+        */        
         String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
         s.setId(newIdSetting);
-        db.insertRow(nameColumn1, s.getData(), columnSetingArr, null);
+        db.insertRow(nameTableSetups, s.getData(), columnSetingArr, null);
     }
 
     @Override

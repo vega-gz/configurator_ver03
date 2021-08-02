@@ -6,6 +6,7 @@
 
 package Table;
 
+import globalData.globVar;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JComponent;
@@ -95,23 +96,26 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
 
             int row = jTable.getRowCount();
             int column = jTable.getColumnCount();
-            Integer numberIdColumn = null;
-            for (int i = 0; i < jTable.getColumnCount(); i++) {
-                if(jTable.getColumnName(i).equalsIgnoreCase("ID")){
-                    numberIdColumn = i;
-                }
-            }
-            String[] tmpArr;
-            if(numberIdColumn != null){
-                tmpArr = new String[column - 1];
-            }
-            else {
-                tmpArr = new String[column];
-            }
+            String[] tmpArr = new String[column];
             
             for (int i = 0; i < tmpArr.length; i++) {
                 tmpArr[i] = "";
             }
+            for (int i = 0; i < jTable.getColumnCount(); i++) {
+                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[0])){
+                    
+                }
+                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[1])){
+                    tmpArr[i] = globVar.abonent;
+                }
+                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[2])){
+                    tmpArr[i] = globVar.nameTableSignal;
+                }
+                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[5])){
+                   tmpArr[i] = globVar.currentSetupsSignal;
+                }
+            }
+            
             tm.insertRow(row, tmpArr);
         });
     }

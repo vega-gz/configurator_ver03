@@ -176,7 +176,7 @@ public class TableTools {//ссылка на таблицу, массив шир
                         break;
                     }
                 }
-                SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, listJF);
+                SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName(), listJF);
                 sse.setVisible(true);
                 rgf.reg(sse);
                 sse.setFields(row);
@@ -870,7 +870,7 @@ public class TableTools {//ссылка на таблицу, массив шир
     public static void jTable1MouseClicked(java.awt.event.MouseEvent evt, JTable jTable1, MyTableModel tableModel, String tableName, ArrayList<JFrame> listJF) {
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
-            FrameCreate.SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, listJF);
+            FrameCreate.SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, jTable1.getName(), listJF);
             sse.setVisible(true);
             listJF.add(sse);
             sse.setFields(row);

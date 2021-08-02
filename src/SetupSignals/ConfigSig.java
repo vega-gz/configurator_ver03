@@ -14,7 +14,6 @@ public abstract class ConfigSig {
     private String  name = null;
     public enum StatusSeting { NEWSIGNAL, FROMBASE, COPY , DELBASE}
     private StatusSeting status = null;
-    //private String[] columnT = {"id", "Abonent", "NameTable", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"}; // Набор столбцов для базы таблицы
     private String[] data = null; 
     private String id = null;
     private Integer localId = null;
@@ -43,8 +42,10 @@ public abstract class ConfigSig {
 //            if(i > data.length - 1) break;  // на всякий если что то не то попало
 //            data[i] = newData[i];
 //        }
-        data = newData; 
-        id = data[0];
+        data = newData;
+        if(id == null ){
+            id = data[0];
+        }
     }
     
     public String[] getData(){

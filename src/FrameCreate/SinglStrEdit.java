@@ -61,7 +61,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     private DefaultTableModel modelBase;
     
     // --- Фрейм работа с строкой таблицы (тут же и уставки)---
-    public SinglStrEdit(MyTableModel tableModel, String title, ArrayList<JFrame> listJF) {
+    public SinglStrEdit(MyTableModel tableModel, String title, String nameTableSignal, ArrayList<JFrame> listJF) {
         Container container = this.getContentPane();
         container.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT); 
         int gpw = 0;
@@ -120,6 +120,8 @@ public class SinglStrEdit  extends javax.swing.JFrame{
 //        DefaultTableModel modelBase = new ConnectBaseTable(madelTable);
         modelBase = new ConfigSignalsTableModel(title);
         jTable1 = new JTable(modelBase);
+        globVar.nameTableSignal = nameTableSignal;
+        globVar.currentSetupsSignal = title;
         InterfacePopmenu popupMenu = new PopUpMenuJtableSetupsSignal();
         popupMenu.setPopMenu(jTable1);
         jScrollPane1 = new JScrollPane();

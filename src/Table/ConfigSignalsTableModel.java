@@ -42,15 +42,23 @@ public class ConfigSignalsTableModel extends DefaultTableModel implements SaveTa
         } 
         
         Vector rowData = (Vector) getDataVector().get(row); // Получаем список значений аналог Листа
+        rowData.set(column, aValue);
+        
         String ColumnName = this.getColumnName(column);
         int ColumnTM = this.getColumnCount();
         String[] DataRow = new String[ColumnTM]; 
         for (int i = 0; i < ColumnTM; ++i) { 
             DataRow[i] = (String) rowData.get(i); // Формируем список данных принудительно в String
         }
-        //workbase.Update(nz.nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
+        String idColumn = this.getColumnName(0);
+        if(idColumn != null && idColumn.equalsIgnoreCase("ID")){
+            ConfigSig editSeting = dataSetings.getSetingByIdLocal(row + 1);
+            editSeting.setData(DataRow);
+            ConfigSig editSetingAfterEdit = dataSetings.getSetingByIdLocal(row + 1);
+            System.out.println(editSetingAfterEdit.getData());
+        }
         
-        rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)            
+                 
     }
     
     @Override
@@ -59,6 +67,7 @@ public class ConfigSignalsTableModel extends DefaultTableModel implements SaveTa
         ConfigSig newCreateSeting = dataSetings.getSetingByIdLocal(idLocal);
         String[] dataInsertRow = newCreateSeting.getData();
         dataInsertRow[0] = Integer.toString(newCreateSeting.getLocalId());
+        
         super.insertRow(this.getRowCount(), dataInsertRow);
         
 

@@ -64,6 +64,9 @@ public class globVar {
         public static String[] namecolumnT = {"Наименование", "TAG_NAME_PLC"};  // Название столбцов для поиска по таблице
         public static String TAGPLC = namecolumnT[1];
         public static String nameTableSetups = "SignalSetups";
+        public static final String[] columnT = {"id", "Abonent", "NameTableFromSignal", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"}; // Набор столбцов для базы таблицы
+        public static String currentSetupsSignal;
+        public static String nameTableSignal;
                 
 	public static void SetStatUUID() {
 		Date date = new Date();

@@ -967,7 +967,7 @@ public class DataBase {
         String table_name = "SignalSetups";
         ArrayList<String> columnSeting = getListColumns(table_name);
         String sql = null;
-        String[] columnT = {"Abonent", "NameTableFromSignal", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"};
+        String[] columnT = globVar.columnT;
         String commentT = "setups signals";
         
         if(getListTable().indexOf(table_name) < 0){

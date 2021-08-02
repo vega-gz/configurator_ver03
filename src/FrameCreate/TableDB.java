@@ -89,6 +89,7 @@ public class TableDB extends javax.swing.JFrame {
         }
         cols = listColumn.toArray(new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);
+        
 
         fromDB = globVar.DB.getData(table);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));
@@ -105,6 +106,8 @@ public class TableDB extends javax.swing.JFrame {
 
         initComponents();
 
+        jTable1.setName(table); // имя таблицы через него и передаю имена
+        
         RegistrationJFrame rgf = (JFrame jf) -> {
             listJF.add(jf);
         };
@@ -620,7 +623,7 @@ public class TableDB extends javax.swing.JFrame {
         jTable1.setColumnSelectionAllowed(true);
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
-            SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, listJF);
+            SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, jTable1.getName(), listJF);
             sse.setVisible(true);
             listJF.add(sse);
             sse.setFields(row);
