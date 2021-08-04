@@ -22,7 +22,8 @@ public class Tools {
                 JOptionPane.showMessageDialog(null, "папка проекта по умолчанию не найдена " + globVar.desDir);
                 return false;
             }else{
-                JOptionPane.showMessageDialog(null, "Будет использован проект по умолчанию " + globVar.DefaultProjectDir);
+                JOptionPane.showMessageDialog(null, "не найден проект в выбранной папке \n" + globVar.desDir +
+                        "\nБудет использован проект по умолчанию " + globVar.DefaultProjectDir);
                 globVar.desDir = globVar.DefaultProjectDir;
                 isDesDir();
             }

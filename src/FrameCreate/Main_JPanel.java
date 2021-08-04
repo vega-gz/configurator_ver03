@@ -1377,12 +1377,16 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     newPath = newPath.substring(0, ldd - 7);
                 }
                 if (!newPath.equalsIgnoreCase(globVar.desDir)) {
+                    globVar.desDir = newPath;
+                    if (!Tools.isDesDir()) {
+                       return;
+                    }
                     XMLSAX cfgSax = new XMLSAX();
                     Node cfgSaxRoot = cfgSax.readDocument("Config.xml");
                     Node desDir = cfgSax.returnFirstFinedNode(cfgSaxRoot, "DesignDir");
                     desDir.setTextContent(newPath);
                     cfgSax.writeDocument("Config.xml");
-                    globVar.desDir = newPath;
+                    
                 }
                 jTextField1.setText(" " + globVar.desDir);
                 // TODO add your handling code here:
