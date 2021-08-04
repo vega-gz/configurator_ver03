@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_FRegMode" Kind="Struct" Comment=" список режимов работы топливного регулЯтора" UUID="A6ADECC047E6A40EDBD3F69CA549F44D">
+    <Fields>
+        <Field Name="stop" Type="INT" UUID="4AFF6E7147E13EB0BC2879BA4D22AC71" Comment=" &quot;Останов&quot;" />
+        <Field Name="reserve" Type="INT" UUID="A863C2754541825DA5F93C9E91744A9C" Comment=" &quot;Резерв&quot;" />
+        <Field Name="fire" Type="INT" UUID="DD5311B64D20E9BC9C3E2FB5CFBB0DB2" Comment=" розжиг" />
+        <Field Name="rate" Type="INT" UUID="87474AF94F98EAEA28F979B93077F668" Comment="разгон по графику &quot;Расход от времени&quot;" />
+        <Field Name="rateNvd" Type="INT" UUID="FBD3923D43DAC2CCDE2F43887AD52378" Comment=" разгон по N КВД" />
+        <Field Name="heatMG" Type="INT" UUID="C1E1907B4297EB69EE685B9AD4F9AA4C" Comment=" прогрев на МГ" />
+        <Field Name="rateNst" Type="INT" UUID="F9C51754463D2CA25E2875AC9B19AED1" Comment="Разгон до NstMin (ХХ)" />
+        <Field Name="work" Type="INT" UUID="5E34042D4CE9E996C2A545A00A4CF8ED" Comment=" &quot;Работа&quot;" />
+        <Field Name="godwMG" Type="INT" UUID="A065C9E64E70C9EB6884E2AF35532DC1" Comment="снижение на МГ" />
+        <Field Name="coolingMG" Type="INT" UUID="E1E74F0347A80471B8216593231251B6" Comment="охлаждение на МГ" />
+    </Fields>
+</Type>

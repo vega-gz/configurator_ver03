@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_connectDB" Kind="Struct" UUID="NREKG6PYGE2UBANPPS2SVIKH2E">
+	<Fields>
+		<Field Name="linkErrorUNTS" Type="BOOL" UUID="TZ2EYAGKCCRE7LY6YDVYGC4DXI" />
+		<Field Name="linkErrorUZRG" Type="BOOL" UUID="WVM7AFILC5FEDPKBLABSZBKQQU" />
+		<Field Name="linkErrorUPTIG" Type="BOOL" UUID="XPL6JATEPTWU3H3MUTXWXHCQPE" />
+		<Field Name="linkErrorGSM" Type="BOOL" UUID="2D5CFAIALNRUDIIMGC4HYBJW2E" />
+		<Field Name="linkErrorKOS" Type="BOOL" UUID="QYC623JETBMUVCDOVVO243KBYE" />
+		<Field Name="linkErrorVOS" Type="BOOL" UUID="34B6C4XPKZXEDFIZO6BCXWUV5E" />
+		<Field Name="linkErrorNM" Type="BOOL" UUID="WBBWLOXN3MQEVF4P5JWRXVRCRY" />
+		<Field Name="linkErrorUPOU" Type="BOOL" UUID="WJ4EYWLKTOOENGALNZQBZJUIA4" />
+		<Field Name="linkErrorGPA1" Type="BOOL" UUID="LLWJT2J4KI5U3HQFTJWATZLLXQ" />
+		<Field Name="linkErrorGPA2" Type="BOOL" UUID="BQIOVV3CPM5ULGZ5RDQD6BGGII" />
+		<Field Name="linkErrorGPA3" Type="BOOL" UUID="PNGF7MZDPVLUHMKUZE2TPESJNI" />
+		<Field Name="ConnectionStatus" Type="INT" UUID="QJ76AMJHIUQEBMPMC35M6MEFCU" />
+	</Fields>
+</Type>

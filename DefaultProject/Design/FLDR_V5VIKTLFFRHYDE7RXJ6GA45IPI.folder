@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Алармы">
+	<Items>
+		<Item Name="T_APS_Internal.type" />
+		<Item Name="T_Alarm.type" />
+		<Item Name="T_AlarmTarget.type" />
+		<Item Name="T_AlarmType.type" />
+		<Item Name="T_Alarm_Internal.type" />
+		<Item Name="T_Sound.type" />
+	</Items>
+</Folder>

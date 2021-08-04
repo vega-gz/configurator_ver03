@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AlarmType" Kind="Struct" UUID="EFOB7S6IMONEPLW6JZER4UPGSM">
+	<Fields>
+		<Field Name="Fire" Type="INT" UUID="6UNKDDFPSCMUDNYAESEYL27WGY" Comment="Пожар" />
+		<Field Name="AOs" Type="INT" UUID="FVIHWRJOH2YEDA6C6QEMHPFJZ4" Comment="Аварийный останов со стравливанием" />
+		<Field Name="AOb" Type="INT" UUID="32RFG4BSSIQEFCUDPCDG46MSJU" Comment="Аварийный останов без стравливания" />
+		<Field Name="VOs" Type="INT" UUID="FQ5MFMSDNIOEJG26PHDX574IQY" Comment="Вынужденный останов со стравливанием" />
+		<Field Name="VOb" Type="INT" UUID="FYM6JARLQ3FULM6HZM2TELRDKY" Comment="Вынужденный останов без стравливания" />
+		<Field Name="AS" Type="INT" UUID="I5BA7K5L7YGUPF4DNE4OF67RUE" Comment="Авариная сигнализация без останова" />
+		<Field Name="PS" Type="INT" UUID="OJHA57AHQ7KEPI4RTYZ2KMBSAU" Comment="Предупредительная сигнализация" />
+		<Field Name="OS" Type="INT" UUID="ESH2QDI4AETUPJOXRA7VX2HRYY" Comment="Ограничительная сигнализация" />
+	</Fields>
+</Type>

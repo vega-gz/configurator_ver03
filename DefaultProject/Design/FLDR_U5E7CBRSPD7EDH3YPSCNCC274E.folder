@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Ab05_NMS">
+	<Items>
+		<Item Name="AT_3VZRIOVTYGKUFB6ZRUA7C2Y26Y.int" />
+		<Item Name="AT_43JIV3YHXT5EZITCCGGMKYHNZY.int" />
+		<Item Name="AT_ALG7M5WUX3YEZB7T7E6MVJE6XE.int" />
+		<Item Name="AT_QDLAQRKMILYUDFBC4OFETAVMEU.int" />
+		<Item Name="NMS_ALG.int" />
+		<Item Name="NMS_AlertArchive.int" />
+		<Item Name="NMS_Algorithm.int" />
+		<Item Name="NMS_Archive.int" />
+		<Item Name="NMS_BVKS.int" />
+		<Item Name="NMS_R1_LOCALBUS.int" />
+		<Item Name="NMS_R2_R3.int" />
+	</Items>
+</Folder>

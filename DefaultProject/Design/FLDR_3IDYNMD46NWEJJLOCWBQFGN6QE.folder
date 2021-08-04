@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Old_Project">
+	<Items>
+		<Item Name="T_TSK_AM.type" />
+		<Item Name="T_TSK_tuneAM.type" />
+		<Item Name="Type_MJ4WG72LRX2EHCXHS4LTDJ72U4.type" />
+		<Item Name="Type_MMJ6ACSBH75EJKESUJFPP3RBY4.type" />
+	</Items>
+</Folder>

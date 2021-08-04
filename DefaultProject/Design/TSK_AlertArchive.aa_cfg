@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AlertArchive >
+<Configuration StoragePath="/extendedDisk/Archive/" StorageCapacity="512000" OverflowEvents="TRUE" OverflowEventCount="10" OverflowEventPeriod="3600000000" CreatePacketsInReserve="TRUE">
+	<SignalArchives Enabled="TRUE">
+		<Item Name="V_SRV1.TSK_Arch" Enabled="TRUE" />
+	</SignalArchives>
+	<EventArchives Enabled="TRUE">
+		<Item Name="V_SRV1.Events" Enabled="TRUE" />
+	</EventArchives>
+	<Item TriggerId="BBA115D54BAFB0EED6AF6B9242B2DD9A.BSO3O2PTWJ3EPO5AN3SW3R7KQY" TriggerName="TSK_SS.ArchStop" Name="Архив останова" Category="0" TimeBefore="600000000" TimeAfter="600000000" FileNamePattern="YYYY_MM_dd hh_mm_ss_zzz" />
+	<Item TriggerId="BBA115D54BAFB0EED6AF6B9242B2DD9A.GAZYVFCT4YIEZMI5RDHOLU2HWE" TriggerName="TSK_SS.ArchUser" Name="Пользовательский архив" Category="0" TimeBefore="600000000" TimeAfter="600000000" FileNamePattern="YYYY_MM_dd hh_mm_ss_zzz" />
+</Configuration>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Curve" Kind="Struct" UUID="E32ABE3547D78C0E0EA3838A31C5B19C">
+	<Fields>
+		<Field Name="N" Type="INT" UUID="388CEAC947A71E7D462A099FD45E031B" />
+		<Field Name="s" Type="62F330F1453F839B02E2F48B04BD90AB" UUID="AE1A879845A69BA0014934B18A43FC9C" ArraySize="14" />
+	</Fields>
+</Type>

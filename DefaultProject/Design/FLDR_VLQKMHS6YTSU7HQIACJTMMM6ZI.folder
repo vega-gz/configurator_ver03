@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Алг">
+	<Items>
+		<Item Name="T_ALG_UPA.type" />
+		<Item Name="T_Mode_UPA.type" />
+		<Item Name="T_UPA_TS.type" />
+		<Item Name="T_UPA_mode.type" />
+		<Item Name="Type_J46DT5CFEM7UJNNKWWMCPTB6SY.type" />
+		<Item Name="Type_WKT4QKS2J6REFABDIR6KLYR6YU.type" />
+	</Items>
+</Folder>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_BK2_mb_DI_DRV" UUID="2ACEB09B22F5493B9B6E5EBCC067877A">
+<Fields>
+<Field Comment="Выбрана первая линия" Name="First_Line_main" Type="BOOL" UUID="D2D5320661ED4C6B8E080B38475DC504"/>
+<Field Comment="Выбрана вторая линия" Name="Second_Line_main" Type="BOOL" UUID="2973F4935C244F76BA5C25823F218396"/>
+<Field Comment="Резервирование включено" Name="Reservation_On" Type="BOOL" UUID="96E2E25A7910497792FF144B99EEAFF8"/>
+<Field Comment="АВР отказ" Name="AVR_fault" Type="BOOL" UUID="39F9D5BD8BB44ACAA5E4C0702A857004"/>
+<Field Comment="АВР не готов" Name="AVR_not_ready" Type="BOOL" UUID="F71E1CA45B2A44A8B15DE9EB0287129D"/>
+<Field Comment="АВР включен" Name="AVR_On" Type="BOOL" UUID="0F6B4CE9AD9F44BAA83B3B99625E7DB2"/>
+<Field Comment="АВ питания отключения независимых расцепителей" Name="AV_Rasc" Type="BOOL" UUID="3126BF70AC5048D4A46BB15E473A5D7B"/>
+<Field Comment="Включен АВ электрообогрева и конденсатопровода" Name="AV_Heat_Cond_On" Type="BOOL" UUID="F51C8D586BAE4592978A3AC5B5910E1A"/>
+<Field Comment="Неисправность электрообогрева и конденсатопровода" Name="Heat_Cond_fault" Type="BOOL" UUID="7985EC3B9EBA4AC89A7F91C2063C4B63"/>
+<Field Comment="Включен АВ электрообогрева и конденсатопровода блок-бокса" Name="AV_Heat_Cond_BB_On" Type="BOOL" UUID="CA678B601EBE46D08258A8D4EAB85893"/>
+<Field Comment="QF03. Включен" Name="QF03_On" Type="BOOL" UUID="9DD2E95ABED643CB9018E9929760EC0A"/>
+<Field Comment="QF03. Отключен" Name="QF03_Off" Type="BOOL" UUID="8B036F53A46D4C75AA53577D4355328C"/>
+<Field Comment="Включен АВ 10ВВ10, 10ВВ11 10ВВ15" Name="AV_10_15_On" Type="BOOL" UUID="E3F6F9233CD54AF4B63188DE6BC793C2"/>
+<Field Comment="ОПС. Неисправность" Name="OPS_fault" Type="BOOL" UUID="DD636E4BB2E54EC9B9B22523FDE2AD31"/>
+<Field Comment="ОПС. Пожар" Name="OPS_fire" Type="BOOL" UUID="B4045D6569F141BD8E18929CC838E764"/>
+<Field Comment="Неисправность вводного выключателя 1" Name="INP1_fault" Type="BOOL" UUID="CA93FFB06AC34BE4AECC9F598415EC24"/>
+<Field Comment="QF01. Отключен" Name="QF01_Off" Type="BOOL" UUID="780E1524C05B4C70A45855E16E82D93D"/>
+<Field Comment="QF01. Включен" Name="QF01_On" Type="BOOL" UUID="7FA3075AD23748D392F1B064360A36E8"/>
+<Field Comment="QF02. Отключен" Name="QF02_Off" Type="BOOL" UUID="718F359BF5B7403E8035DFC0FF3D01D7"/>
+<Field Comment="QF02. Включен" Name="QF02_On" Type="BOOL" UUID="1840C841770845A7B6189287634E90DA"/>
+<Field Comment="Неисправность секционного выключателя" Name="Section_switch_fault" Type="BOOL" UUID="0EEFB9838A174B82896E3A406ABF89B6"/>
+<Field Comment="УЗИП. Неисправность" Name="UZIP_fault" Type="BOOL" UUID="8263ECB15C9E406F9AAAB7C2C1F88ED7"/>
+<Field Comment="Неисправность цепи питания 10ВВ10, 10ВВ11 10ВВ15" Name="U_chain_fault" Type="BOOL" UUID="85AEC07331BF4626AAE9ABD939345F4F"/>
+<Field Comment="Режим работы станции: 0-Авто, 1-РУ" Name="Station_mode" Type="BOOL" UUID="0B4B792D8EBE441DAFCB65FB86D0FBC8"/>
+<Field Comment="Режим работы вентиляции: 0-Авто, 1-РУ" Name="Vent_mode" Type="BOOL" UUID="23130B57D1B84611BFBCDEFADC90946D"/>
+<Field Comment="Наличие напряжения на 1 секции" Name="U_1_section" Type="BOOL" UUID="57B12C4762374FCAB8B65FAC23171780"/>
+<Field Comment="Наличие напряжения на 2 секции" Name="U_2_section" Type="BOOL" UUID="4501D13503904F41A80A19FD106579D9"/>
+<Field Comment="Станция запущена" Name="Station_On" Type="BOOL" UUID="C4A9480B8DCC46C7BEE72378BE4D0966"/>
+<Field Comment="Управление станцией заблокировано" Name="Station_Control_Blocked" Type="BOOL" UUID="321472A612A94611B66527C71D277710"/>
+<Field Comment="Нажата аварийная кнопка" Name="Btn_AO" Type="BOOL" UUID="4F22109AE0DA4FD09BDD8A0457DD447B"/>
+<Field Comment="Наличие питания на шкафу АСУ" Name="U_cab" Type="BOOL" UUID="A992D44A518843B7B6EB52D8F3845F85"/>
+<Field Comment="10TS10. Высокая температура в отсеке 1" Name="T_ots1_hi" Type="BOOL" UUID="8CEAA68B298F4D1BAA71F2E7408E46C8"/>
+<Field Comment="10TS11. Высокая температура в отсеке 2" Name="T_ots2_hi" Type="BOOL" UUID="20441D4495EC42FC8AF56E23CDDA9774"/>
+<Field Comment="10TS15. Высокая температура в аппаратной" Name="T_ap_hi" Type="BOOL" UUID="2B502359DB474E54AB68E5370EAF1107"/>
+</Fields>
+</Type>

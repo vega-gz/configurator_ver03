@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Type Kind="Struct" Name="T_GPA_FWL_mb_AI_DRV" UUID="9877AB2DC9034877B6FC6D63C1924E53">
+<Fields>
+<Field Comment="Управление ВНА(КЦУ)" Name="Set_VNA_KCU" Type="REAL" UUID="5E7B4DC4C53A4AD68BEF47C966D66CB9"/>
+<Field Comment="Установка скорости по току ЭС (КЦУ)" Name="Set_N_ES_KCU" Type="REAL" UUID="5A2BA4EB27E645018FBA6622D0CB48C3"/>
+<Field Comment="Управление дозатором газа ДУС (КЦУ)" Name="Set_TRK_KCU" Type="REAL" UUID="6B8997B3F6334BC7B4A97245DD9233DD"/>
+<Field Comment="Управление клапаном КлР6 (КЦУ)" Name="Set_Kr6r_KCU" Type="REAL" UUID="4F1489F757FF4E5997F44773A24EB2B0"/>
+<Field Comment="Вентилятор 1 МОК: управление (КЦУ)" Name="Set_Vn1_MON_KCU" Type="REAL" UUID="7A8E194CF8814365A7D4C135B39E2BF3"/>
+<Field Comment="Вентилятор 2 МОК: управление(КЦУ)" Name="Set_Vn2_MON_KCU" Type="REAL" UUID="BC90EB916C9F4F3AA3113BF9725D81ED"/>
+<Field Comment="Вентилятор 1 МОД: управление (КЦУ)" Name="Set_Vn1_MOD_KCU" Type="REAL" UUID="5CA1C839729045C5AF4F3718DAE9C3A1"/>
+<Field Comment="Вентилятор 2 МОД: управление (КЦУ)" Name="Set_Vn2_MOD_KCU" Type="REAL" UUID="0E51B33FDE714C69B6895778866C9D7C"/>
+<Field Comment="Частота вращения ротора СТ КЦУ" Name="N_ST_ext_KCU" Type="REAL" UUID="B0AC9848D4984E05AF67B31759617D71"/>
+<Field Comment="Резерв (не подкл)" Name="Res_not_podkl_37" Type="REAL" UUID="4F04623D50A2490FB155C968CC494460"/>
+<Field Comment="Вентилятор 1 МОКР управление КЦУ" Name="Set_Vn1_MOR_KCU" Type="REAL" UUID="4EBC1148D51A424A831C0DE01FEFDC30"/>
+<Field Comment="Вентилятор 2 МОР упрапвление КЦУ" Name="Set_Vn2_MOR_KCU" Type="REAL" UUID="042695E9FC5A4FB6B3909BD493E24DF7"/>
+<Field Comment="Вентилятор 3 МОР управление КЦУ" Name="Set_Vn3_MOR_KCU" Type="REAL" UUID="78FBB7B020B3462F9AD80ED0A4696FF8"/>
+<Field Comment="Вентилятор 4 МОКР управление КЦУ" Name="Set_Vn4_MOR_KCU" Type="REAL" UUID="B3C361C4F0CB46AFA64D42ABEA5793C0"/>
+<Field Comment="Основное напряжение питания САУ ГПА" Name="Uosn_SAU" Type="REAL" UUID="30149ECD8C4245CBA4381E764BB70D00"/>
+<Field Comment="Напряжение pезервного питания САУ ГПА" Name="Urez_SAU" Type="REAL" UUID="5511F795FFE94C17BB0D9527D9253FB2"/>
+<Field Comment="Частота вращения ротора ГТД(обмотка 2 датчика 1) от БЗРТ" Name="N_TK_BZRT" Type="REAL" UUID="44A08F97E6B4459BAA2E361DD187E9BA"/>
+<Field Comment="Частота вращения ротора СТ (обмотка 2 датчика 1) от БЗРТ" Name="N_ST_BZRT" Type="REAL" UUID="798C57ECFF58470B900EA1154AC0AD34"/>
+<Field Comment="Температура контроллера" Name="T_PLC" Type="REAL" UUID="69138BF105A84A48A6BD81A1FDC75A9E"/>
+<Field Comment="Резерв (не подкл.)" Name="Res_not_podkl_39" Type="REAL" UUID="18A80C50C9314B45A8820103E6FAB7A3"/>
+<Field Comment="Резерв (не подкл.)" Name="Res_not_podkl_40" Type="REAL" UUID="D59AE4E8AD4644DDAFA24E541CD74E96"/>
+<Field Comment="Резерв (не подкл.)" Name="Res_not_podkl_41" Type="REAL" UUID="BBE1709FD8CE4D75A44BD7886EEC1F6F"/>
+</Fields>
+</Type>

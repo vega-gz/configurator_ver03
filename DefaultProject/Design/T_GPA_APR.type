@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_APR" Kind="Struct" UUID="VP2322QBRUSEJOSSCO6AGYGBPM">
+	<Fields>
+		<Field Name="CurModeK" Type="INT" UUID="BY2YMKHUWHEUDFK5EMAKJ27QIU" Comment="Режим компрессора" />
+		<Field Name="SetModeK" Type="INT" UUID="WZQRGIGH2B5EZFGK4UYWDX2QXA" Comment="Задананный режим компрессора" />
+		<Field Name="APK_SetDU" Type="REAL" UUID="ZFOSMC4MVXGEDBD235RC7WSDHY" Comment="Задание АПК при ДУ" />
+		<Field Name="APK_DU" Type="BOOL" UUID="AFP722YETBRUPK73TAMXNUKFPM" Comment="ДУ АПК включено" />
+		<Field Name="APK_Permit_DU" Type="BOOL" UUID="I52F7JY26D3E3NN2C6JIL6S5RM" Comment="Доступ к кнопке ДУ АПК" />
+		<Field Name="APK_isOf" Type="BOOL" UUID="DQ6CAZM2AZKUVI5WQO4W3DCNLU" Comment="АПЛ закрывается" />
+		<Field Name="APK_isOn" Type="BOOL" UUID="T7QYHKHUSJ6URKRFMA67NZCXMQ" Comment="АПЛ открывается" />
+		<Field Name="APK_bad" Type="BOOL" UUID="OZDP3CDFLNJU7HXCMALQIRR3ZQ" Comment="АПЛ неисправен" />
+	</Fields>
+</Type>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_PPU_HR" UUID="66B6D278C8E44B4EA38A5DE3C7E81868">
+<Fields>
+    <Field Comment="Нет основного питания САУ ГПА ~220 В" Name="No_AC220_SAU" Type="BOOL" UUID="C756BCC08B2247A0BB6642162C55C69E"/>
+    <Field Comment="Нет резервного питания САУ ГПА =220 В" Name="No_DC220_SAU" Type="BOOL" UUID="6974CB2081384B5FB6542F41134022C3"/>
+    <Field Comment="Нет питания БУШД -М1 ~220 В" Name="No_AC220_BUSD" Type="BOOL" UUID="904A98083A2C4007A79ACA5EDA52E385"/>
+    <Field Comment="Нет питания кранов =220 В" Name="No_DC220_Kr" Type="BOOL" UUID="34ECE250C12248F1820FD4E25774241B"/>
+    <Field Comment="Нет основного питания БЭАО ~220 В" Name="No_AC220_BEO" Type="BOOL" UUID="5F14C94E62AC4924814C300E26516054"/>
+    <Field Comment="Нет резервного питания БЭАО =220 В" Name="No_DC220_BEO" Type="BOOL" UUID="00AE1AEA7FF046419CB63877E336CDE1"/>
+    <Field Comment="Неисправны разрядники" Name="No_razr_ok" Type="BOOL" UUID="95DCF9B4EA864E9DA0556DBBAA01F776"/>
+    <Field Comment="Нет питания кранов №1,2,4 =24 В" Name="No_DC24_Kr124" Type="BOOL" UUID="89F03A56865A4601A619133C715CA446"/>
+    <Field Comment="Нет питания кранов №5,6,9 =24 В" Name="No_DC24_Kr569" Type="BOOL" UUID="538CC62ADDC64CA799079790E20F1CC8"/>
+    <Field Comment="Нет питания крана №12" Name="No_DC24_Kr12" Type="BOOL" UUID="1358DD3E607640879F49786A03B365F8"/>
+    <Field Comment="Нет питания терминальных панелей АI" Name="No_U_TPAI" Type="BOOL" UUID="77B4C0DE43704F66AB0DE55BEF00D096"/>
+    <Field Comment="Нет питания DI" Name="No_U_TPDI" Type="BOOL" UUID="EB462DD25FEE4C7B95AA618749A94897"/>
+    <Field Comment="Неисправен основной ИП =24 В БЭАО, РПКУ" Name="DC24osn_PRU_bad" Type="BOOL" UUID="33749358380445CD85D14B2D17AE5F12"/>
+    <Field Comment="Нет исправности резервного ИП =24 В БЭАО, РПКУ" Name="DC24rez_PRU_bad" Type="BOOL" UUID="7E2E1D8C9BA64E71A93B81A590A6CCD6"/>
+    <Field Comment="Неисправен основной ИП =24 В ПЛК" Name="DC24osn_PLC_bad" Type="BOOL" UUID="FDDAFE90566A4A3C8532996995C9CFE6"/>
+    <Field Comment="Неисправен резервный ИП =24 В ПЛК" Name="DC24rez_PLC_bad" Type="BOOL" UUID="A14A5E4C7970492E9810EF61EDEF982A"/>
+    <Field Comment="Неисправен основной ИП =24 В внутренних устройств" Name="DC24osn_Int_bad" Type="BOOL" UUID="2A5A3C50249E42F0BB2C5D689245DFA3"/>
+    <Field Comment="Неисправен резервный ИП =24 В внутренних устройств" Name="DC24rez_Int_bad" Type="BOOL" UUID="1FFA3B12A0DE48A98E242B266C483AAF"/>
+    <Field Comment="Неисправен основной ИП =24 В аналоговых входов" Name="DC24osn_AI_bad" Type="BOOL" UUID="FCE2702CB9F2442A8086A6E8F69FBDD3"/>
+    <Field Comment="Неисправен резервный ИП =24 В аналоговых входов" Name="DC24rez_AI_bad" Type="BOOL" UUID="190EE92ECCB645DCB4F4BA5E7DB4C892"/>
+    <Field Comment="Неисправен основной ИП =24 В дискретных входов" Name="DC24osn_DI_bad" Type="BOOL" UUID="072C046A492E4814844E79C79FD9612B"/>
+    <Field Comment="Неисправен резервный ИП =24 В дискретных входов" Name="DC24rez_DI_bad" Type="BOOL" UUID="FF7C172E6B264A47B13349EDBE3DF39A"/>
+    <Field Comment="Неисправен основной ИП =24 В внешних устройств" Name="DC24osn_Ext_bad" Type="BOOL" UUID="FFB8A218C17246ED998F1D2626C4CF49"/>
+    <Field Comment="Неисправен резервный ИП =24 В внешних устройств" Name="DC24rez_Ext_bad" Type="BOOL" UUID="BC7E7F5AFB444A779E50D6CB06839BCB"/>
+    <Field Comment="Неисправен основной ИП =24 В дискретных выходов" Name="DC24osn_DO_bad" Type="BOOL" UUID="3B3E89C274FA468E8FB0E4FB30F68D52"/>
+    <Field Comment="Неисправен резервный ИП =24 В дискретных выходов" Name="DC24rez_DO_bad" Type="BOOL" UUID="1FD4382038DA4863AAA742C2B0FF3379"/>
+    <Field Comment="Автоматы питания не включены" Name="QF_Of" Type="BOOL" UUID="9DDC0CE4C5DA455BA35A758341B78D1A"/>
+    <Field Comment="Нет питания DO" Name="No_U_TPDO" Type="BOOL" UUID="59D666A65CBC4BCCA39D63445C5D84F5"/>
+    <Field Comment="Кран 1 не закрыт" Name="Kr1_nOF" Type="BOOL" UUID="901C4996A7F8438FB6C93B0BEB93F466"/>
+    <Field Comment="Кран 2 не закрыт" Name="Kr2_nOF" Type="BOOL" UUID="D01380895DAC45EE9C9C1F48886702ED"/>
+    <Field Comment="Кран 5 не открыт" Name="Kr5_nON" Type="BOOL" UUID="C66A54A42B564EC080CC983436B70EAA"/>
+    <Field Comment="Кран 4 не закрыт" Name="Kr4_nOF" Type="BOOL" UUID="2036397A22EC49CCA231DCAF36A6A90E"/>
+    <Field Comment="Кран 6 не закрыт" Name="Kr6_nOF" Type="BOOL" UUID="E50CB91133E24B50B0CE51C5F4A628B2"/>
+    <Field Comment="ОГК не закрыт" Name="SK_nOF" Type="BOOL" UUID="8E1C7B1E748443AE9DB5F06A7E3838F2"/>
+    <Field Comment="Кран 6р не открыт" Name="Kr6r_nON" Type="BOOL" UUID="854B12362B6B464EA26458A4C85D2221"/>
+    <Field Comment="Установка пожарной сигнализации неисправна" Name="ASPS_bad" Type="BOOL" UUID="7F80844879A441FD9903037B2CC879A5"/>
+    <Field Comment="Система контроля загазованности неисправна" Name="AKZ_FLT" Type="BOOL" UUID="E864DAEC35EE4CDFB2DB469DB8C7BD21"/>
+    <Field Comment="Валоповоротное устройство в зацеплении" Name="Check_VPU" Type="BOOL" UUID="45D6374259324782B52A78696A486746"/>
+    <Field Comment="Двери КВОУ не закрыты" Name="Dver_VOU_Open" Type="BOOL" UUID="712478ACF39E4130AD38AF188E35404E"/>
+    <Field Comment="Двери ВЗК не закрыты" Name="Dver_VZK_Open" Type="BOOL" UUID="NX2S2X6C6CKEVFFOGJLL2RT7X4"/>
+    <Field Comment="Загазованность отсеков" Name="Zg_GPA" Type="BOOL" UUID="6C48649A02324B118ECE1ACC7D0E107C"/>
+    <Field Comment="Есть аварийные сигналы" Name="isAS" Type="BOOL" UUID="72AADEC49EA8422497A66FF5ED5BAC81"/>
+    <Field Comment="Пожар в ГПА" Name="Fire_GPA" Type="BOOL" UUID="3D6856702138409A95381E93E6E366D8"/>
+    <Field Comment="Байпасный клапан не закрыт" Name="BK_nOF" Type="BOOL" UUID="5A34E644659646D89C7E30AEC938AC96"/>
+    <Field Comment="Давление воздуха РП и УОП &lt; 0,43 МПа или &gt; 1,2 МПа" Name="Pa_RP_nOK" Type="BOOL" UUID="EB360F74E6904C198225CED691D2642B"/>
+    <Field Comment="ВОД1 и ВОД2 не готовы" Name="VOD_bad" Type="BOOL" UUID="EB6778389D6F4227A9A429F93D91E571"/>
+    <Field Comment="ВА ОД не готов" Name="VAOD_bad" Type="BOOL" UUID="56E918D468D744E6BCF281FDCF0C7BF4"/>
+    <Field Comment="Холодно в отсеке ГТД" Name="Tv_OD_PPUn" Type="BOOL" UUID="35686860890C4D73B13372FF5557D2A4"/>
+    <Field Comment="Холодно в укрытии компрессора" Name="Tv_ON_PPUn" Type="BOOL" UUID="B66AD86E41FE469DB28DC86E59E802B2"/>
+    <Field Comment="Холодно в электротехническом отсеке" Name="Tv_ETO_PPUn" Type="BOOL" UUID="84720E0E8CE04E5599AEC15CB4BF42C0"/>
+    <Field Comment="Масло на выходе из компрессора холодное" Name="Tmsm_outN_PPUn" Type="BOOL" UUID="93923484C74E4B07A25723DD9385AC1B"/>
+    <Field Comment="Масло редуктора холодное" Name="Tm_MBR_PPUn1" Type="BOOL" UUID="55BDDD1F4CC449CAAEDBC3238AEA7141"/>
+    <Field Comment="Заслонка защиты от обледенения в ручном режиме" Name="ZsZO_MU" Type="BOOL" UUID="BT6FYQKCLOZETKK4AJVJQGXTLU"/>
+    <Field Comment="Заслонка защиты от обледенения неисправна" Name="ZsZO_bad" Type="BOOL" UUID="53QGCCASQENEPF6MGDM3IIUO64"/>
+    <Field Comment="Заслонка защиты от обледенения не закрыта" Name="ZsZO_nOF" Type="BOOL" UUID="912C58680E984A6BA481A9B374D77D58"/>
+    <Field Comment="Нет питания =220 В (шины ПТ)" Name="NoU_DC220" Type="BOOL" UUID="QCNJ3DQRAVDE5KZSUBZBRW2G24"/>
+    <Field Comment="Нет питания ~380 В (шины ГП)" Name="NoU_AC380" Type="BOOL" UUID="2D4F5B472E814925BC3CF2DF576FCEBB"/>
+    <Field Comment="ПОК не закрыт" Name="POK_nOF" Type="BOOL" UUID="90F88269E16E472EBCCE4D35D6B4BFB0"/>
+    <Field Comment="Уровень масла в маслобаке лубрикантной системы не в норме" Name="LmLub_nOK" Type="BOOL" UUID="D8844F9FC53F4BC9A92425F661128449"/>
+    <Field Comment="Уровень охлаждающей жидкости не в норме" Name="L_freeze_Bak_nOK" Type="BOOL" UUID="E6BF3E27EA5943F194599B91BBC8CADC"/>
+    <Field Comment="Уровень в маслобаке компрессора Б1 низкий" Name="Lm_MBN_PPUn" Type="BOOL" UUID="57FD32D50B234F55AA319C359AF80F43"/>
+    <Field Comment="Уровень масла в картере компрессора не в норме" Name="Lm_kart_nOK" Type="BOOL" UUID="13547ABDFD4544288898C1413131F8ED"/>
+    <Field Comment="Неисправность дискр. каналов" Name="DI_FLT" Type="BOOL" UUID="9AC4CC824E464DFC957F459210F26D2A"/>
+    <Field Comment="Неисправность аналоговых каналов" Name="AI_FLT" Type="BOOL" UUID="F9EB333827DD4E5BAC9B2FC385654121"/>
+    <Field Comment="Неисправность цепей исполнительных механизмов" Name="IM_FLT" Type="BOOL" UUID="F2E76744E897459B9C56116E3F7146BC"/>
+    <Field Comment="Мало масла в маслобаке редуктора" Name="Lm_MBR_Pn" Type="BOOL" UUID="A0361DE32D884CB493DB180270BE84C4"/>
+    <Field Comment="ПНСР неисправен" Name="PNSR_bad" Type="BOOL" UUID="C380E350D0B04C5F96DE534ED8C25F26"/>
+    <Field Comment="ЦНР неисправен" Name="CNR_bad" Type="BOOL" UUID="0EEADCAEDD054E2386C0570AF198526D"/>
+    <Field Comment="ЦНД неисправен" Name="CND_bad" Type="BOOL" UUID="C64296381BD246D1BE23B70C1CE49620"/>
+    <Field Comment="ПНСД неисправен" Name="PNSD_bad" Type="BOOL" UUID="9B4C5E5F5904455FAA175FE7B969AAA4"/>
+    <Field Comment="ПНСК неисправен" Name="PNSK_bad" Type="BOOL" UUID="011A84614CCD4018962DD47A489E5E2A"/>
+    <Field Comment="Ввод 4 (=220 В) НКУ не включен" Name="NKU_DC220_nON" Type="BOOL" UUID="FDF09E94BBE64EE783D9F74B6CCAAAA0"/>
+    <Field Comment="Шины ПТ (=24 В) НКУ не включены" Name="NKU_DC24_nON" Type="BOOL" UUID="6DE27ABEBF114587A875262144A7DDE6"/>
+    <Field Comment="Шины ПТ (=48 В) НКУ не включены" Name="NKU_DC48_nON" Type="BOOL" UUID="ADC313B6D5CB43F8A8DB09883D8BD3AA"/>
+    <Field Comment="Напряжение вводов НКУ не в норме" Name="U_NKU_GPA_nOK" Type="BOOL" UUID="EC4D7E618328497DAF132E9C7CE28A34"/>
+    <Field Comment="Вентилятор охлаждения ангара не готов" Name="VOK_bad" Type="BOOL" UUID="C1E43B9028FE434DA0758E17AF5DC526"/>
+    <Field Comment="Вентилятор системы загазованности ангара не готов" Name="VAOK_bad" Type="BOOL" UUID="9BDE537AC9564559B9D9A86EE5C3A021"/>
+    <Field Comment="ВОТ не готовы" Name="VOT_bad" Type="BOOL" UUID="49AC727AC30547F39A76A271B5773367"/>
+    <Field Comment="Отключено резервное питания АСПС" Name="NoU_ASPS_rez" Type="BOOL" UUID="3CEE762474CC44BCA8ACD95EBF5D2F6F"/>
+    <Field Comment="Отключено основное питания АСПС" Name="NoU_ASPS_osn" Type="BOOL" UUID="29DF7549CA7A411EAB2B6BB72CD1E98D"/>
+    <Field Comment="ЭН воздуха укрытия компрессора не готовы" Name="EN_Ukr_bad" Type="BOOL" UUID="3FDBAB7671E84738B8917C8876DB81F3"/>
+    <Field Comment="ЭН воздуха ЭТО не готовы" Name="EN_ETO_bad" Type="BOOL" UUID="F8F7E09AE4774745823D0ECE5D5D12B5"/>
+  </Fields>
+</Type>

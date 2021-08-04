@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_BEO" Kind="Struct" UUID="8EEE45E645CE6C609CDAF788CAC62D27">
+	<Fields>
+		<Field Name="Meandr_GPA_ALg" Type="BOOL" UUID="759B61374AB14D70A265B2AEA5E668BB" />
+		<Field Name="Meandr_GPA_FR" Type="BOOL" UUID="595AE8904A5007F4BC56EC8628AD8048" />
+		<Field Name="DO_OK" Type="BOOL" UUID="BAF18FF94F9AB34ABCA54581BA62DB26" Comment="Контроль работы БЭО" />
+		<Field Name="Force_DO" Type="BOOL" UUID="5AA666D141BFE26A228785A5451CC6CF" />
+	</Fields>
+</Type>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_DRM_KC" Kind="Struct" Comment="Формирование режимов" UUID="06C4187B4EEC889ED1844DA897DE07CF">
+    <Fields>
+        <Field Name="Fire" Type="2433DEE54E72840E369C8C97603D4040" UUID="BD219B1048F9E6D9970022954DB5B7E4" Comment="Пожар" />
+        <Field Name="AOss" Type="2433DEE54E72840E369C8C97603D4040" UUID="97CAB7E44438F4AA6A85F59C025738D5" Comment="АОсс" />
+        <Field Name="AObs" Type="2433DEE54E72840E369C8C97603D4040" UUID="5353DD0A472CAD4526D3DCAC321C4AD1" Comment="АОбс" />
+    </Fields>
+</Type>

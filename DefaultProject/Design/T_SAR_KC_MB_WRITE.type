@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_SAR_KC_MB_WRITE" Kind="Struct" UUID="75CB79D14BB0FCE071EAA89A41D8B1F7">
+    <Fields>
+        <Field Name="SP_cv" Type="REAL" UUID="A50FBF6C400CD3E8F0B8F6BC53532834" Comment="Задание обороты СТ в ГПА" />
+        <Field Name="NOb" Type="BOOL" UUID="4E889414447D7E80ED3BAA86B5D3E915" />
+    </Fields>
+</Type>

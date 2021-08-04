@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_mb_DI_ToHMI" Kind="Struct" Comment="устанавливаются программой обработки канала" UUID="0BECAC4B4FA33C8BC2A698A105D6A388">
+    <Fields>
+        <Field Name="manual" Type="BOOL" UUID="9C070FE1417AC6B86199468AD200F933" Comment="канал в дист.упр." />
+        <Field Name="fault_common" Type="BOOL" UUID="910BC389D94842EC4644E1B6CB1ED50C" Comment="обобщённая неисправность. Образуется по «ИЛИ» от settingErr и неисправности цепи датчика" />
+    </Fields>
+</Type>

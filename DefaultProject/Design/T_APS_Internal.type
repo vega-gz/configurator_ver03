@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_APS_Internal" Kind="Struct" UUID="Y2SUFYR34WCUVAETREJRLVIA74">
+	<Fields>
+		<Field Name="tmr" Type="REAL" UUID="SW4246EO2NWU5CQN5ODA6OPOUI" Comment="Счетчик времени задержки" />
+		<Field Name="pr_value" Type="BOOL" UUID="V6KC3PUL2GGUXCYZ4IXVPRX4NI" Comment="пред. значение" />
+		<Field Name="target" Type="INT" UUID="IYUBAOIBGQXEFF5UWNT4SITBCQ" Comment="Реакция 1 пожар, 2 АОС, 3 АОБ, 4 АС, 5 ПС" />
+	</Fields>
+</Type>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Folder Name="NKU">
+<Items>
+<Item Name="T_AM_Btn_NKU.type"/>
+<Item Name="T_AM_ToHMI_NKU.type"/>
+<Item Name="T_AM_Internal_NKU.type"/>
+<Item Name="T_AM_Setting_NKU.type"/>
+<Item Name="T_AM_Simulation_NKU.type"/>
+<Item Name="T_AM_FromALG_NKU.type"/>
+</Items>
+</Folder>

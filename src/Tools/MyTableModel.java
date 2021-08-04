@@ -9,13 +9,13 @@ import javax.swing.table.DefaultTableModel;
 /*@author Lev*/
 public class MyTableModel extends DefaultTableModel {
     String[] tmRow;
-    ArrayList<String[]> newName;
+//    ArrayList<String[]> newName;
 
     public MyTableModel() {
     }
-    public MyTableModel(ArrayList<String[]> newName) {
-        this.newName = newName;
-    }
+//    public MyTableModel(ArrayList<String[]> newName) {
+//        this.newName = newName;
+//    }
 
     @Override
     public boolean isCellEditable(int row, int column) {
@@ -24,7 +24,7 @@ public class MyTableModel extends DefaultTableModel {
         }
         return super.isCellEditable(row, column);
     }
-    @Override
+    @Override // просто что бы всегда возращали String
     public String getValueAt(int row, int column) {
         return super.getValueAt(row, column) + "";//(String)
     }

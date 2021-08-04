@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Tag" Kind="Struct" UUID="B5OFNWNNVRCEDHW7UMU423DSAI">
+	<Fields>
+		<Field Name="value" Type="REAL" UUID="KA6WL5LLLNPUNLDCH6VI6XKYWU" Comment="Значение сигнала" />
+		<Field Name="fault" Type="BOOL" UUID="RVAOTMSWE3XUZOX3ENWW5KEVQ4" Comment="Признак недостоверности" />
+	</Fields>
+</Type>

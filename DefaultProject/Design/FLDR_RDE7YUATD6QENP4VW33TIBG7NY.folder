@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Folder Name="Статистика">
+<Items>
+<Item Name="Counters.type"/>
+<Item Name="GDH.type"/>
+<Item Name="RP_GTU_IN.type"/>
+<Item Name="RP_GTU_OUT.type"/>
+<Item Name="RTG_IN.type"/>
+<Item Name="RTG_OUT.type"/>
+<Item Name="Statistic.type"/>
+</Items>
+</Folder>

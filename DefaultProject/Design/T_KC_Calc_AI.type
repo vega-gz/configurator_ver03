@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_Calc_AI" Kind="Struct" UUID="3EB4320090F64D0E99F12A337E6DABD5">
+    <Fields>
+        <Field Name="evPg_in_KC" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="EAEEA0667B6044429ED7426F1F7B6E17" Comment="Давление на входе КЦ" />
+        <Field Name="evPg_out_KC" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4752E728B0C84AEE88915228DA21CFF1" Comment="Давление на выходе КЦ" />
+        <Field Name="Q" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="9E2CD7562BDA45D38B2975BD675AB65D" Comment="ЦР: Расход" />
+        <Field Name="EoutEin" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="38F215F09FA84DDC966DA411D1411233" Comment="ЦР: Степень сжатия" />
+        <Field Name="Eout" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="8BDA51A28C36402A937223A15592B39A" Comment="ЦР: Давление выхода" />
+        <Field Name="Ein" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="02765568FD8449EBBE8D451A15E23D7E" Comment="ЦР: Давление входа" />
+        <Field Name="chosen_Q" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="A09E4D2A275A4D63BEBD170327FC4EB1" Comment="ЦР: выбран расход" />
+        <Field Name="chosen_Eout" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="678E86B0B2284688A8535DBD02EFAF28" Comment="ЦР: выбрано давление выхода" />
+        <Field Name="chosen_Nst" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="B6648428C6C44231AAA83F61EB0C43BF" Comment="ЦР: выбраны обороты СТ" />
+        <Field Name="chosen_Nvd_r" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E7A85176E4E84BA580E05E660D9E8CBC" Comment="ЦР: выбраны обороты ВД" />
+        <Field Name="Set_Q" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E058E62070A44685BE98F8FA9D1118EF" Comment="ЦР: Задание расход" />
+        <Field Name="Set_EoutEin" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="726C9F36BFBA432E9FBDDAAF09E8AC3E" Comment="ЦР: Задание степень сжатия" />
+        <Field Name="Set_Eout" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="A0A4DBC6ED404D61840EC7CFF1F7CF7D" Comment="ЦР: Задание давление выхода" />
+        <Field Name="Set_Ein" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F0A841B2B8F84FC6BFC50CDD5FB57576" Comment="ЦР: Задание давление входа" />
+        <Field Name="GPA1_Q" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="2F28DFDCB55E456D80F2EB3D341EB248" Comment="ГПА1  Статус: Расход через ГПА" />
+        <Field Name="GPA1_Ein" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="8A82493E15484B7CB75B4455708E656B" Comment="ГПА1  Статус: Давление на входе в нагнетатель" />
+        <Field Name="GPA1_EoutEin" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="C8F8C58E80204C35A5EF06088415313F" Comment="ГПА1  Статус: Степень сжатия" />
+        <Field Name="GPA1_Eout" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="3A909C742DC2483596EB8E57650DEF43" Comment="ГПА1  Статус: Давление на выходе из нагнетателя" />
+        <Field Name="GPA1_Nst" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4518376E0F044A35A8D70B320F33FC55" Comment="ГПА1  Статус: Обороты СТ" />
+        <Field Name="GPA1_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="480042D464D249CD86AFC394F4F33C22" Comment="ГПА1  Статус: Удаленность от линии помпажа" />
+        <Field Name="GPA1_delta_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="030670AE736A409F998B42B5C81C79E9" Comment="ГПА1  Конфиг: запас по помажу" />
+        <Field Name="GPA1_Nvd_r" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="5034A8DE3708498794FC8E6426DA00BB" Comment="ГПА1  Статус: Прив. обороты ВД" />
+        <Field Name="GPA1_ls_error" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="D4AA8C6CF97444A4848B3BA9D2B17543" Comment="ГПА1  Статус: Рассогласование по нагрузке" />
+        <Field Name="GPA1_time_offline" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="3AFE0C5C1B44450E91E62E58E75B4EED" Comment="ГПА1  Статус: время неответа" />
+        <Field Name="GPA1_ls_DB" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E53EA5EC4878412FBFBE5C341348A7B8" Comment="ГПА1  Конфиг: ЗН по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_KI" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="6B0E5C1E90624B79B918BE33D5CB447C" Comment="ГПА1  Статус: КИ по выравниванию нагрузки " />
+        <Field Name="GPA1_ls_Kr" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F3A6069C41F44961B7B04A960E1F5299" Comment="ГПА1  Конфиг: КИ по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_KP" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="5694471C64EE49E9A538F68A79F25B3F" Comment="ГПА1  Конфиг: Кп по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_P_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="9EF06580D43C45EA987C16FD4E5F6B31" Comment="ГПА1  Статус: П- часть по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_dI_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="12AA1B3097F249F1B4AB82233477DB04" Comment="ГПА1  Статус: И-часть по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_KD" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="2060662476BA4F0383E7B8D09F3AEA15" Comment="ГПА1  Конфиг: КД по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="DE988C42C86847BE80789E2599D1DADA" Comment="ГПА1  Статус: Д-часть по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_P_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BEC8B3827A124F409AF9267A1C5CA3C3" Comment="ГПА1  Статус: ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_P_D_part_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="0288A936A37C4F02B150620ED73CDCF2" Comment="ГПА1  Статус: пред. ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA1_ls_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="AB82E626DEF641938702B747B8EB807E" Comment="ГПА1  Статус: воздействие по выравниванию нагрузки" />
+        <Field Name="GPA1_cv_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="FFB2446EBFF64DD883C2CFB48FD4A289" Comment="ГПА1  Статус: пред. задание для ГПА в процентах" />
+        <Field Name="GPA1_SP_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F1DE7AD022FE49B4ACF6F4EAC4D3E43F" Comment="ГПА1  Статус: задание для ГПА" />
+        <Field Name="GPA1_SP_LowLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BE8A0A30781E4681B91369D6A06901AD" Comment="ГПА1  Конфиг: мин. значение задания для ГПА" />
+        <Field Name="GPA1_SP_HighLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="CE5019F6835642F2A3825888ED46E3D1" Comment="ГПА1  Конфиг: макс. значение задания для ГПА" />
+        <Field Name="GPA1_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BA1287B639724D7A96E04C11F647F975" Comment="ГПА1  Статус: задание для ГПА в процентах" />
+        <Field Name="GPA2_Q" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4336EE76B97E489F8F1149886D55E1D9" Comment="ГПА2  Статус: Расход через ГПА" />
+        <Field Name="GPA2_Ein" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BDD2A24A0C6A439DB5D3103563F1A7F6" Comment="ГПА2  Статус: Давление на входе в нагнетатель" />
+        <Field Name="GPA2_EoutEin" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="35766CB44F1446A88F7B82FF0836FFB6" Comment="ГПА2  Статус: Степень сжатия" />
+        <Field Name="GPA2_Eout" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="468E8E3064B64D239264C18E43F293DE" Comment="ГПА2  Статус: Давление на выходе из нагнетателя" />
+        <Field Name="GPA2_Nst" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E3D2519671C84AA98C8AA888B5D4E3D0" Comment="ГПА2  Статус: Обороты СТ" />
+        <Field Name="GPA2_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="943859AA3D1A48FC951BE9671775D578" Comment="ГПА2  Статус: Удаленность от линии помпажа" />
+        <Field Name="GPA2_delta_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="48486B7ED1764F99A686AFEBE00CDAAB" Comment="ГПА2  Конфиг: запас по помажу" />
+        <Field Name="GPA2_Nvd_r" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="9E50B8FEB88041AB9803D2777E8F4F82" Comment="ГПА2  Статус: Прив. обороты ВД" />
+        <Field Name="GPA2_ls_error" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="03308DD2A6964262BB54AD2923632F65" Comment="ГПА2  Статус: Рассогласование по нагрузке" />
+        <Field Name="GPA2_time_offline" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="02240CB09C304BEAB224ACA281E770DE" Comment="ГПА2  Статус: время неответа" />
+        <Field Name="GPA2_ls_DB" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F4908214A7E04E259AF7F4510B8C0FB7" Comment="ГПА2  Конфиг: ЗН по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_KI" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4D00BBD295E24998923C4C0E53331F77" Comment="ГПА2  Статус: КИ по выравниванию нагрузки " />
+        <Field Name="GPA2_ls_Kr" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="C056803292724581AFF12C77893C8F54" Comment="ГПА2  Конфиг: КИ по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_KP" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="530010BC02A04301A458CCF7BA963560" Comment="ГПА2  Конфиг: Кп по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_P_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="46D852021850452DABF16AEFAEA63F27" Comment="ГПА2  Статус: П- часть по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_dI_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="3566EEF0721E4F489DC7EBEB2AAB0FC2" Comment="ГПА2  Статус: И-часть по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_KD" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BB60648EAD7A4D5399E65CE0D271DB6A" Comment="ГПА2  Конфиг: КД по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F21E15800C7A48E9AD1D3C987FE6BE75" Comment="ГПА2  Статус: Д-часть по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_P_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="972A4C40E4744485877F728F2C7C952E" Comment="ГПА2  Статус: ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_P_D_part_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="709051C6EF184E5A98E791E8665BC674" Comment="ГПА2  Статус: пред. ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA2_ls_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4F7E4770F7A44ACC844FDA5A4639B369" Comment="ГПА2  Статус: воздействие по выравниванию нагрузки" />
+        <Field Name="GPA2_cv_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="9E1C2AC2278E4394A626990BA9741E91" Comment="ГПА2  Статус: пред. задание для ГПА в процентах" />
+        <Field Name="GPA2_SP_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="925EB568DD244F44B06AE59705F0D8D3" Comment="ГПА2  Статус: задание для ГПА" />
+        <Field Name="GPA2_SP_LowLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="EF8645E4CA3A40E486165B8678A76B92" Comment="ГПА2  Конфиг: мин. значение задания для ГПА" />
+        <Field Name="GPA2_SP_HighLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="FD80E684F79048C09D55C424D43D46D9" Comment="ГПА2  Конфиг: макс. значение задания для ГПА" />
+        <Field Name="GPA2_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="22CC32A25C9A488A981F4B5CC7054D84" Comment="ГПА2  Статус: задание для ГПА в процентах" />
+        <Field Name="GPA3_Q" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E7E2BC563E744C8993E1AE52A8410F16" Comment="ГПА3  Статус: Расход через ГПА" />
+        <Field Name="GPA3_Ein" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="07668A8E09DE40EF871C85EBEE6E5F92" Comment="ГПА3  Статус: Давление на входе в нагнетатель" />
+        <Field Name="GPA3_EoutEin" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="0EE2E77EB5C84EC6B917BCE562C261F9" Comment="ГПА3  Статус: Степень сжатия" />
+        <Field Name="GPA3_Eout" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="01A488667AEA4EB5ABEED7CE27ED0287" Comment="ГПА3  Статус: Давление на выходе из нагнетателя" />
+        <Field Name="GPA3_Nst" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E400CB4A5C38491EA0A8E7C8860552B3" Comment="ГПА3  Статус: Обороты СТ" />
+        <Field Name="GPA3_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="901280BE513042BDA710725F1F95AAB3" Comment="ГПА3  Статус: Удаленность от линии помпажа" />
+        <Field Name="GPA3_delta_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F94CCD7E7C8C4F4699CB173EAB2A9575" Comment="ГПА3  Конфиг: запас по помажу" />
+        <Field Name="GPA3_Nvd_r" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F09C23C0CE8A463E8E63FF0F544A2D75" Comment="ГПА3  Статус: Прив. обороты ВД" />
+        <Field Name="GPA3_ls_error" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BEA4BB9CA70A4889A5F1EA9B1F0CB36D" Comment="ГПА3  Статус: Рассогласование по нагрузке" />
+        <Field Name="GPA3_time_offline" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BD583FB0C2A04453A761CD84A63F81FB" Comment="ГПА3  Статус: время неответа" />
+        <Field Name="GPA3_ls_DB" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="8AA494F8A41443258092FE85BDAAB4F8" Comment="ГПА3  Конфиг: ЗН по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_KI" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="97A0009808E646EB9987E4825BCDB041" Comment="ГПА3  Статус: КИ по выравниванию нагрузки " />
+        <Field Name="GPA3_ls_Kr" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E6A813DC91D84BFFA48378C2695CE744" Comment="ГПА3  Конфиг: КИ по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_KP" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="5A9281E858C046D0994C311352A2DE23" Comment="ГПА3  Конфиг: Кп по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_P_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="658C5E2433624DA7B1E7CFC58E9B7F66" Comment="ГПА3  Статус: П- часть по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_dI_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="746A135083F04D87AF6DC0A2C6698024" Comment="ГПА3  Статус: И-часть по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_KD" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="119CF8825FE84DC5AE63649B43F7A088" Comment="ГПА3  Конфиг: КД по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="90DEF2B81DB44E07ABE92B60AA157E35" Comment="ГПА3  Статус: Д-часть по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_P_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="D6700DDE9D844AEAA5037FB2C056AFBD" Comment="ГПА3  Статус: ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_P_D_part_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4CFC919087D648D6A9B57502BA9CE29F" Comment="ГПА3  Статус: пред. ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA3_ls_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="580CF708635C4776849CDD3041832621" Comment="ГПА3  Статус: воздействие по выравниванию нагрузки" />
+        <Field Name="GPA3_cv_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="DFB4E45229144AE5B044137BB6503825" Comment="ГПА3  Статус: пред. задание для ГПА в процентах" />
+        <Field Name="GPA3_SP_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="890E4D10635643978B314BBB11FD4265" Comment="ГПА3  Статус: задание для ГПА" />
+        <Field Name="GPA3_SP_LowLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="1876D78CBB164E87AA9988F617ABD4C2" Comment="ГПА3  Конфиг: мин. значение задания для ГПА" />
+        <Field Name="GPA3_SP_HighLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="2646539EB44641B1804CDC18AA8E3F08" Comment="ГПА3  Конфиг: макс. значение задания для ГПА" />
+        <Field Name="GPA3_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="701CF63ECC584D1E998A972936731234" Comment="ГПА3  Статус: задание для ГПА в процентах" />
+        <Field Name="GPA4_Q" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="2678CE9AE1DA4830A56B7ED98C153E03" Comment="ГПА4  Статус: Расход через ГПА" />
+        <Field Name="GPA4_Ein" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="C68EB1CE653A48BDBDC9B56F0A8F6AD6" Comment="ГПА4  Статус: Давление на входе в нагнетатель" />
+        <Field Name="GPA4_EoutEin" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="49A60154E82243B186B0AEE1D581DE46" Comment="ГПА4  Статус: Степень сжатия" />
+        <Field Name="GPA4_Eout" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="6A4EB478D5BC40A197DF6B7FE8D0FD5C" Comment="ГПА4  Статус: Давление на выходе из нагнетателя" />
+        <Field Name="GPA4_Nst" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="63A643BC14F04E8D902D914DEE6BB386" Comment="ГПА4  Статус: Обороты СТ" />
+        <Field Name="GPA4_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="CD6A537AABF04490B2D0CE0FF1E522E0" Comment="ГПА4  Статус: Удаленность от линии помпажа" />
+        <Field Name="GPA4_delta_S" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E25EECB2D1E84149BE3B416EC2FFB770" Comment="ГПА4  Конфиг: запас по помажу" />
+        <Field Name="GPA4_Nvd_r" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="75E0B6E251B04352A1D5F56E0706A28D" Comment="ГПА4  Статус: Прив. обороты ВД" />
+        <Field Name="GPA4_ls_error" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="8876E6FC96A443FD93EE71EC5D105886" Comment="ГПА4  Статус: Рассогласование по нагрузке" />
+        <Field Name="GPA4_time_offline" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="E614C11C72BA4221A866FCF90599FF0D" Comment="ГПА4  Статус: время неответа" />
+        <Field Name="GPA4_ls_DB" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="81BCC0F6D2904DCC9E81131C2ACB25F9" Comment="ГПА4  Конфиг: ЗН по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_KI" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="0C62495CB2B247949C187101B17B1E10" Comment="ГПА4  Статус: КИ по выравниванию нагрузки " />
+        <Field Name="GPA4_ls_Kr" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="F734058EA2FC4E91B413322CEEF36CAA" Comment="ГПА4  Конфиг: КИ по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_KP" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="DF56F7E805184EB496571771A2A46C98" Comment="ГПА4  Конфиг: Кп по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_P_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="3CF0CFA6C21A425E86F97739DCE28858" Comment="ГПА4  Статус: П- часть по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_dI_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="C69A2446C7C840109752669B52AA24C3" Comment="ГПА4  Статус: И-часть по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_KD" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="BCAA6F3E6836401182DBF38CFDE3413B" Comment="ГПА4  Конфиг: КД по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="EF3299883326494C9E6034C6A29CAC15" Comment="ГПА4  Статус: Д-часть по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_P_D_part" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="FC5A42C8F9144E24A16417929DEA834D" Comment="ГПА4  Статус: ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_P_D_part_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4C163D886958494D9DCBDEF4CB6A668E" Comment="ГПА4  Статус: пред. ПД-часть по выравниванию нагрузки" />
+        <Field Name="GPA4_ls_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="B0A034D66B9845108120478CF27B2186" Comment="ГПА4  Статус: воздействие по выравниванию нагрузки" />
+        <Field Name="GPA4_cv_prev" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="6AB6646608D04A57BDBF1D98B164F6D6" Comment="ГПА4  Статус: пред. задание для ГПА в процентах" />
+        <Field Name="GPA4_SP_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="CF4C418482AA4EEAADE3439763AC4447" Comment="ГПА4  Статус: задание для ГПА" />
+        <Field Name="GPA4_SP_LowLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="0D663A1A44984D8B94D741236494A3BD" Comment="ГПА4  Конфиг: мин. значение задания для ГПА" />
+        <Field Name="GPA4_SP_HighLimit" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="2EE29D024AAE42B6B54FD5D65ECFE935" Comment="ГПА4  Конфиг: макс. значение задания для ГПА" />
+        <Field Name="GPA4_cv" Type="AC59CC004BD30BA0F15733A0F35F01BC" UUID="4C74406CC7744EDF86BBCCFDF7BBD940" Comment="ГПА4  Статус: задание для ГПА в процентах" />
+        <Field Name="Set_Kr36p" Type="REAL" UUID="17A05622462FF23AF19FE880E7E9CA23" Comment="Задание 36р" />
+    </Fields>
+</Type>

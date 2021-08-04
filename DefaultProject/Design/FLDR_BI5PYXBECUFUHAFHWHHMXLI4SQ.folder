@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Ab02_UPA">
+	<Items>
+		<Item Name="AT_2DOSDIGKO47UBOFE63CT434WEY.int" />
+		<Item Name="AT_NXYEY2WMWXUE3L23YGPK4GFI2M.int" />
+		<Item Name="AT_OEZORKRLR4IEDK3TEEP2EH43QE.int" />
+		<Item Name="AT_R6FTGG5YFPMEBNCT73ER2O5WQE.int" />
+		<Item Name="AT_Y37CXZHW6QPU3ERWDNLR3MSYJI.int" />
+		<Item Name="UPA_AlertArchive.int" />
+		<Item Name="UPA_Algorithm.int" />
+		<Item Name="UPA_Archive.int" />
+		<Item Name="UPA_MODBUS_PIR.int" />
+		<Item Name="UPA_R1_ALG.int" />
+		<Item Name="UPA_R1_LOCALBUS.int" />
+		<Item Name="UPA_R2_LOCALBUS.int" />
+	</Items>
+</Folder>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_CalcPar" Kind="Struct" UUID="F1ACA50C6E7440508407BD98293ACA28">
+	<Fields>
+		<Field Name="Nvd" Type="FA0047664275CF9B0C76139B78188A33" UUID="9CF8B03A56004A26BB3327BFF0FCD164" Comment="Расчетные обороты ТВД" />
+		<Field Name="Nst" Type="FA0047664275CF9B0C76139B78188A33" UUID="A74E6AF2008E45AF90479851588143EF" Comment="Расчетные обороты СТ" />
+		<Field Name="delta_Tst" Type="FA0047664275CF9B0C76139B78188A33" UUID="8C229AE017DA4D8AB5F27695F8DAAC7F" Comment="Отклонение Т газов СТ от средней" />
+		<Field Name="Tmax_podK" Type="FA0047664275CF9B0C76139B78188A33" UUID="B97E10F865EC45CDBFC90210C186E690" Comment="Макс. температура подшипников компрессора" />
+		<Field Name="T_outVD" Type="FA0047664275CF9B0C76139B78188A33" UUID="ACDC25D263E641128AEAA3B9D3962D05" Comment="Средняя Т за турбиной" />
+		<Field Name="Tv_inTK" Type="FA0047664275CF9B0C76139B78188A33" UUID="A34CB034218C4502B694F3ED234A50C6" Comment="Средняя Т на входе в Д" />
+		<Field Name="Pv_outTK" Type="FA0047664275CF9B0C76139B78188A33" UUID="57J3CPJITWLUPKIIHGRUIJZKXI" Comment="Статическое давление воздуха за осевым компрессором" />
+		<Field Name="Tg_outAVOG2" Type="FA0047664275CF9B0C76139B78188A33" UUID="0E44E03A6712405BA51E01E7C261FA2E" Comment="Температура газа после АВО2" />
+		<Field Name="Pg_outAVOG2" Type="FA0047664275CF9B0C76139B78188A33" UUID="4DBA30C6617A487BA647B33297BBE288" Comment="Давление газа после АВО2" />
+		<Field Name="ModeFR" Type="FA0047664275CF9B0C76139B78188A33" UUID="0DFEE14CDB5A4D9AB0F381467D5E5C62" Comment="Режим топливного регулятора" />
+		<Field Name="ConturFR" Type="FA0047664275CF9B0C76139B78188A33" UUID="5ACEA2FC61CC41839C6E5D60E9145E41" Comment="Контур топливного регулятора" />
+		<Field Name="NvdNorm" Type="FA0047664275CF9B0C76139B78188A33" UUID="DCB063DEB9EE474584506110F5235AEA" Comment="Приведенные обороты ТВД" />
+		<Field Name="cr" Type="FA0047664275CF9B0C76139B78188A33" UUID="CVTO6SVR3KXENADI3FVJ35UOTY" Comment="Степень сжатия" />
+		<Field Name="TPROC1" Type="FA0047664275CF9B0C76139B78188A33" UUID="7XBIDZH6YXLUJAUR3N5454DBHY" Comment="Т процессора 1" />
+		<Field Name="TPROC2" Type="FA0047664275CF9B0C76139B78188A33" UUID="K6BOFCCHVZXUVH7QXTSO7J3G6U" Comment="Т процессора 2" />
+		<Field Name="QgNorm" Type="FA0047664275CF9B0C76139B78188A33" UUID="CV7Z3TOHMH2E3A7LFVAOXFYPXY" Comment="Приведенный расход" />
+		<Field Name="Vlaga_atm" Type="FA0047664275CF9B0C76139B78188A33" UUID="MXRIU2OQZ6KEZDDVJJSMARRPHA" Comment="Относительная влажность атмосферного воздуха (расч.)" />
+		<Field Name="dP_Vf" Type="FA0047664275CF9B0C76139B78188A33" UUID="LEGPXSDGCEUENK3GS3MVRNS2AY" Comment="Перепад на воздушных фильтрах" />
+		<Field Name="dP_Kr1" Type="FA0047664275CF9B0C76139B78188A33" UUID="GOQQUUHGPVYEXLJ62PVLHLOFF4" Comment="Перепад на кр. 1" />
+		<Field Name="dP_FS1" Type="FA0047664275CF9B0C76139B78188A33" UUID="RJ4FZQLCKB5E7CWGFGXBXDB2BM" Comment="Перепад давления на фильтре ФС1 " />
+		<Field Name="StokForce1S" Type="FA0047664275CF9B0C76139B78188A33" UUID="QJCBT56GSKCUPOQDZOOQRQPLJY" Comment="Нагрузка на шток 1 ст. компрессора при сжатии" />
+		<Field Name="StokForce1R" Type="FA0047664275CF9B0C76139B78188A33" UUID="IYDHOKY2XHYUTBSH7GY6VILWNA" Comment="Нагрузка на шток 1 ст. компрессора при растяжении" />
+		<Field Name="StokForce2S" Type="FA0047664275CF9B0C76139B78188A33" UUID="FQY4Y2FDVDEU5AEEFB3YEGSSVI" Comment="Нагрузка на шток 2 ст. компрессора при сжатии" />
+		<Field Name="StokForce2R" Type="FA0047664275CF9B0C76139B78188A33" UUID="H457UZXU32CEPIYN2AYO4ZPS24" Comment="Нагрузка на шток 2 ст. компрессора при растяжении" />
+		<Field Name="dT_KP" Type="FA0047664275CF9B0C76139B78188A33" UUID="EXWNTAGIADJETI325GJ6NDM2NE" Comment="Разность температур коренных подшипников К" />
+	</Fields>
+</Type>

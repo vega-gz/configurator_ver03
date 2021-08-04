@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Подсистемы">
+<Items>
+<Item Name="Buttons.type"/>
+<Item Name="Crane_EVENTS.type"/>
+<Item Name="E079B0E64556720E806FA393FCDC7989"/>
+<Item Name="HMI_VLV.type"/>
+<Item Name="HMI_VLV_1.type"/>
+<Item Name="IVG_1.type"/>
+<Item Name="KP_10.type"/>
+<Item Name="SNDRCV.type"/>
+<Item Name="STU3_AI.type"/>
+<Item Name="STU3_AO.type"/>
+<Item Name="STU3_APS.type"/>
+<Item Name="STU3_DI.type"/>
+<Item Name="STU3_DO.type"/>
+<Item Name="STU3_VLV.type"/>
+<Item Name="TEK270.type"/>
+<Item Name="T_Test.type"/>
+<Item Name="UPG_DIAGN.type"/>
+<Item Name="UPG_IM.type"/>
+<Item Name="Type_16.type"/>
+<Item Name="Type_17.type"/>
+<Item Name="Type_9.type"/>
+<Item Name="UPIG_500.type"/>
+<Item Name="VIMPEL_500.type"/>
+</Items>
+</Folder>

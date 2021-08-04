@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_Ust" Kind="Struct" UUID="5918B5C2328C4F4BACE71940680B8A2C">
+<Fields>
+<Field Name="Tg_out_KC_Av" Type="REAL" UUID="00344F3EC00E4AB3AA7AE6B4A78DAB32" Comment="Высокая температура на выходе КЦ" />
+<Field Name="Tg_out_KC_Pv" Type="REAL" UUID="EA32707ADD8A4F2882F46E725A6A7C26" Comment="Повышенная температура на выходе КЦ" />
+<Field Name="Pg_out_KC_Av" Type="REAL" UUID="6E0AC330B812422C84084753EA3DA4CF" Comment="Высокое давление на выходе КЦ" />
+<Field Name="Pg_out_KC_Pv" Type="REAL" UUID="0AC04A9243424EFA9A309B8A7FE6B814" Comment="Повышенное давление на выходе КЦ" />
+</Fields>
+</Type>

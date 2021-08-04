@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_SKM_mb_DI_ToHMI" UUID="41DA23F9A9C94369A7A8A7833F09E3F0">
+<Fields>
+<Field Comment="Регистр состояния НГК-БИ-ИКП1:исправен" Name="State_IKP_1_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0AA3F6F1314A47A789F2BB49CD96C734"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП1:вскрыт" Name="State_IKP_1_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1C193707CB004F74ACBEBFD424915358"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП1:отсутствует" Name="State_IKP_1_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="EE24EBA4D41249E69404D80B1585BCC9"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП1:авария" Name="State_IKP_1_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="AF531D6DB065482EAAC0FFC80AA8F51B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП1:датчик 1 обрыв" Name="State_IKP_1_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7FFB8CE8D224468F91A3ACEFA4356CAD"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП1:датчик 2 обрыв" Name="State_IKP_1_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="846904E7199A4B599890C3B001CFD105"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП1:датчик 3 обрыв" Name="State_IKP_1_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="42DD8B9DF2884517BA466E0512EFEA85"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП2:исправен" Name="State_IKP_2_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="FD2002A8768D413EA1F07BF9FFD40A04"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП2:вскрыт" Name="State_IKP_2_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C69196105D1542099ADDA6A5B131399D"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП2:отсутствует" Name="State_IKP_2_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7596818A0A5545948588D203E0A13866"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП2:авария" Name="State_IKP_2_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D07A981F92244DB58CAFEF0068BACA69"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП2:датчик 1 обрыв" Name="State_IKP_2_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3BB3BB1CF59E44A089E3CF69B3C6869C"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП2:датчик 2 обрыв" Name="State_IKP_2_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="CC422889C22F42C2AB8243C40A539018"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП2:датчик 3 обрыв" Name="State_IKP_2_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="CC9EBAAF3B854ECAB8E370CDF8F72ACD"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП3:исправен" Name="State_IKP_3_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="25C90D72FF9A45D8ADE8C169D0E1A586"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП3:вскрыт" Name="State_IKP_3_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="50C0C6A15BFD477681D80870D2A87356"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП3:отсутствует" Name="State_IKP_3_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="FBCB1C03626F4F57B5017DBEC1B56D86"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП3:авария" Name="State_IKP_3_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B3C3E3EBE4854442A03F2FD3D960073B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП3:датчик 1 обрыв" Name="State_IKP_3_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3247F3E4074140F2B27A643DCA1F6B1D"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП3:датчик 2 обрыв" Name="State_IKP_3_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="650EC19CFC1F45F9B1DC482705EF6E46"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП3:датчик 3 обрыв" Name="State_IKP_3_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="559A51FCC046413897DCD1EE10A8A6DC"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП4:исправен" Name="State_IKP_4_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8A449AD7B1E84528AAB1756422A3FCE6"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП4:вскрыт" Name="State_IKP_4_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="64789009C148475B88D90EB5B1DC882D"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП4:отсутствует" Name="State_IKP_4_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="78EB810714CD434CB0AACB88C5B8990F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП4:авария" Name="State_IKP_4_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1D5A4D3FBD434D2EABD15518F9B1EA5C"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП4:датчик 1 обрыв" Name="State_IKP_4_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="794D1C2C6A9A4BA6BC2F9E60DEEB60B8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП4:датчик 2 обрыв" Name="State_IKP_4_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A55F9F9F8E594DFA96EDE2C72D53E71B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП4:датчик 3 обрыв" Name="State_IKP_4_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="DD2307CE660B4C72A4B0A4BA9F675DB7"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП5:исправен" Name="State_IKP_5_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7A99622AAF2C40D4B6BA18E95A6B05DF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП5:вскрыт" Name="State_IKP_5_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D947DBD463FB499C9578855650348FA1"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП5:отсутствует" Name="State_IKP_5_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="77400BFFF700448081558CB5999FF4EF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП5:авария" Name="State_IKP_5_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E108772FD80F4FE2B666151BA3AEFF42"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП5:датчик 1 обрыв" Name="State_IKP_5_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A60A3045741D427DA4B05883B3132893"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП5:датчик 2 обрыв" Name="State_IKP_5_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1AE91A20A8574763B7FEA3E7813CAF91"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП5:датчик 3 обрыв" Name="State_IKP_5_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="68E34C62BE694EB3907BA302B1BF025B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП6:исправен" Name="State_IKP_6_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9C4A965A66A1400C9876E4E0DF3E1DDF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП6:вскрыт" Name="State_IKP_6_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="50D3187AACEE4376AB92060AB24DCED2"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП6:отсутствует" Name="State_IKP_6_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E78CAF5EF57146B5A56C3432D372AE2C"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП6:авария" Name="State_IKP_6_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D43C329480BD4BB5A80E555EA1F4AF66"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП6:датчик 1 обрыв" Name="State_IKP_6_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="509EDAA91E2847B2A0CD1A33BE9FAD08"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП6:датчик 2 обрыв" Name="State_IKP_6_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="49B9AC97F78642278C8CD31DBFD18B28"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП6:датчик 3 обрыв" Name="State_IKP_6_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="FE4B463F0F6748F0A891B628C717B40B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП7:исправен" Name="State_IKP_7_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3454C34A24564A7198D47416435B78CB"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП7:вскрыт" Name="State_IKP_7_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8B7F6DF7A29B42BE8C6CDF920F471B09"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП7:отсутствует" Name="State_IKP_7_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B50236320C1D469E92D62D891F34A4AD"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП7:авария" Name="State_IKP_7_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C1D36A5AF0FB4079844FB1DD48EC65BE"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП7:датчик 1 обрыв" Name="State_IKP_7_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A1ACD7A571F8432185B5B2C1A8BF0900"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП7:датчик 2 обрыв" Name="State_IKP_7_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C595595A3F2F46859E53097714C0F3D4"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП7:датчик 3 обрыв" Name="State_IKP_7_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BA9138D519394301B391A9DB6EC172FF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП8:исправен" Name="State_IKP_8_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5ECFAEC8EB3342B3B2BDB08363AC039B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП8:вскрыт" Name="State_IKP_8_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="372F7500F979461CB0AC7044FDE00EEF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП8:отсутствует" Name="State_IKP_8_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="83BB3AB21AA5486D9C52C591636FA02B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП8:авария" Name="State_IKP_8_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="DBD411280B5A44C4B55350C3722FA470"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП8:датчик 1 обрыв" Name="State_IKP_8_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F89B44A465E64F1F90698704B14DBBC4"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП8:датчик 2 обрыв" Name="State_IKP_8_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6EFA83066E7D4459A9BBEAA484EE9BB8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП8:датчик 3 обрыв" Name="State_IKP_8_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="80CE3D48D176477B998E728F1C25F388"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП9:исправен" Name="State_IKP_9_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3A104A4ED3434957A9D504C1850B3F01"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП9:вскрыт" Name="State_IKP_9_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5896833C13144229A56335E4393549DB"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП9:отсутствует" Name="State_IKP_9_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="09067CBA01954E50B5525E86CFC7C510"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП9:авария" Name="State_IKP_9_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8B7A748BDBEC4D7C88800E7D9E20E087"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП9:датчик 1 обрыв" Name="State_IKP_9_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="039E1EAC1B0A4FDB8D4A5C50CA22CE97"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП9:датчик 2 обрыв" Name="State_IKP_9_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D4D8FF70D1DC4A24BFF8D20C7F484A83"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП9:датчик 3 обрыв" Name="State_IKP_9_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B87F5958114A484F8C2DAED5655C0D53"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП10:исправен" Name="State_IKP_10_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="AB2DEFB54DC74B84BC8B3DFE71663A96"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП10:вскрыт" Name="State_IKP_10_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9AD3366CBB2A4BB093848385CFA0CE4C"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП10:отсутствует" Name="State_IKP_10_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BC9860A88BE849ECBA4BE75500A4DDD2"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП10:авария" Name="State_IKP_10_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="77B759883FD34F59BFC2D08BDCF06CB0"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП10:датчик 1 обрыв" Name="State_IKP_10_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F5F8F9C2DCCA4C48BF3FFCBE207C4249"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП10:датчик 2 обрыв" Name="State_IKP_10_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4C937EFADC9747F387AB626017BF66FF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП10:датчик 3 обрыв" Name="State_IKP_10_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E09D5240B4CD42F68FA35DB17E739E73"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП11:исправен" Name="State_IKP_11_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="EC3B1037B4D944FFB1B154916DE47B7B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП11:вскрыт" Name="State_IKP_11_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8C5064F0F28C484BA919929B7841BA0B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП11:отсутствует" Name="State_IKP_11_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B9D474E70A194C9BA6BDE7FC85B570E6"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП11:авария" Name="State_IKP_11_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E37D5B4CCC2946DC9EF98B11B5780036"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП11:датчик 1 обрыв" Name="State_IKP_11_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C269F5D1F385400A85F74639AD51D773"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП11:датчик 2 обрыв" Name="State_IKP_11_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="DCA8E0A0652040C98D7CF3E136273314"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП11:датчик 3 обрыв" Name="State_IKP_11_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="96593948A58E4C72B2B8EFBDEC43B3E5"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП12:исправен" Name="State_IKP_12_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="007393F9A6354E0CB8A10E49F1879979"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП12:вскрыт" Name="State_IKP_12_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="33D6355567D746BDAE5466FC8A80A7A7"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП12:отсутствует" Name="State_IKP_12_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="709E32EE63184BD78422F8200079FEF2"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП12:авария" Name="State_IKP_12_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="CDFDC90B00D74C9A96A617D096166E86"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП12:датчик 1 обрыв" Name="State_IKP_12_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="123B3D421CEF499590F9A0D9718CA37B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП12:датчик 2 обрыв" Name="State_IKP_12_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2AF28FB738C24646B2A12CFF54E180AC"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП12:датчик 3 обрыв" Name="State_IKP_12_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="FCEF1693918144F1B47B41A40D398343"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП13:исправен" Name="State_IKP_13_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="55A24D867A2F4AD3BFB6F447959C8C99"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП13:вскрыт" Name="State_IKP_13_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4DBC11967C6E48B88A2721F32EA23E2B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП13:отсутствует" Name="State_IKP_13_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="ED9D59BD4F1B4583975BC586629352B5"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП13:авария" Name="State_IKP_13_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="726E1F4A96624A8FAFEDE0D173CD0E41"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП13:датчик 1 обрыв" Name="State_IKP_13_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="423212A0F9DB4D5AA43D602DDFAD8A32"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП13:датчик 2 обрыв" Name="State_IKP_13_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="60DFB21213F048F08BC09186D457F908"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП13:датчик 3 обрыв" Name="State_IKP_13_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="076223881F1E4A2A9B1E683CC9F8D95F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП14:исправен" Name="State_IKP_14_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E40A3AE22F264BB18409D0BE6C91482D"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП14:вскрыт" Name="State_IKP_14_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="801C68F92E524B4F96DEF22B6EFD439F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП14:отсутствует" Name="State_IKP_14_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6C34AAD4F87D4E6888664038A9257C84"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП14:авария" Name="State_IKP_14_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="71419E63E26A420EA06277C5DF60DE7D"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП14:датчик 1 обрыв" Name="State_IKP_14_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BC825FFE75E5419CAE4037D3A01F3CF9"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП14:датчик 2 обрыв" Name="State_IKP_14_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D78B5EE4B402488B8C0F1256FFD515A6"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП14:датчик 3 обрыв" Name="State_IKP_14_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E8FA16D61A9E4C4DAA535D7C434A5EB8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП15:исправен" Name="State_IKP_15_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C23FB594E2D14D9AB5A0CA5B72FACDAC"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП15:вскрыт" Name="State_IKP_15_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="787F51427EF44EA2A0B825E38C944144"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП15:отсутствует" Name="State_IKP_15_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E778F16A08A54C5B9B32DC408E29C2AC"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП15:авария" Name="State_IKP_15_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1D357BCCC1B54F2B9A50A0E5B8274A43"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП15:датчик 1 обрыв" Name="State_IKP_15_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="AF27F44C1DF84F07BF41AB35283F83C4"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП15:датчик 2 обрыв" Name="State_IKP_15_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="541DB0F5821C4BFE9CB48B0451BDFE7A"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП15:датчик 3 обрыв" Name="State_IKP_15_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="539694B0422240C9A787C593A2A46D50"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП16:исправен" Name="State_IKP_16_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="044BE708FDF54D5798F71E083EA603D2"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП16:вскрыт" Name="State_IKP_16_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5C6210B0DADB4FA6A30E4594CB22FCC7"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП16:отсутствует" Name="State_IKP_16_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="325C110DDBB84ED9BADFA60EFB22EC37"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП16:авария" Name="State_IKP_16_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="07175C92410C4E3BA5FBDB9519D6D1AF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП16:датчик 1 обрыв" Name="State_IKP_16_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3E990980B95E40D497319B472FA45F56"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП16:датчик 2 обрыв" Name="State_IKP_16_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="797945BCCE894B38A2BAFD604A826C84"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП16:датчик 3 обрыв" Name="State_IKP_16_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D6420957D86F48C08E7702575597F9D8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП17:исправен" Name="State_IKP_17_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1BD6CBDEA84141B6853E298C91BE81A1"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП17:вскрыт" Name="State_IKP_17_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="87EF5B57287B41CEBA400893F8005D23"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП17:отсутствует" Name="State_IKP_17_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2F15AA1BE9E74F979F3348FC3E62428C"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП17:авария" Name="State_IKP_17_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1926F0E4609B4C06ADCE23FF6F751AB1"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП17:датчик 1 обрыв" Name="State_IKP_17_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B43D0C893FFF455FB104EBC4E0CC9133"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП17:датчик 2 обрыв" Name="State_IKP_17_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5B74B607167D49B6B217E0392D6A8B12"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП17:датчик 3 обрыв" Name="State_IKP_17_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="137B4AD468EF4EEDA7A9CC7B76CFE3C1"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП18:исправен" Name="State_IKP_18_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3AA8D2302AC3447087865D40707F8E36"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП18:вскрыт" Name="State_IKP_18_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="83B778E3ACEC4A5B921E35B5E4ABA627"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП18:отсутствует" Name="State_IKP_18_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1A958875DC664A6593E8AEF8C58C2900"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП18:авария" Name="State_IKP_18_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="97AD89E2169F4D46B5AE6FB969A2395B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП18:датчик 1 обрыв" Name="State_IKP_18_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8982ED3026994286A6B1E55B78F945C2"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП18:датчик 2 обрыв" Name="State_IKP_18_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="627355A20F41406BBD35623698EECCBE"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП18:датчик 3 обрыв" Name="State_IKP_18_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="95D3E58389C848DABD021893DA9249B8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП19:исправен" Name="State_IKP_19_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="21113DB35A1A4CC68862E8F3E1E66868"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП19:вскрыт" Name="State_IKP_19_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F0BD6A4A5EE84044930F3B537C3AF437"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП19:отсутствует" Name="State_IKP_19_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C7B80BA4429C42F582680772964A80C1"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП19:авария" Name="State_IKP_19_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="46C03D4FBFCD409E81FA485DB61C3A28"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП19:датчик 1 обрыв" Name="State_IKP_19_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F6E75784FC5D43B7A7CBB01117E344F8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП19:датчик 2 обрыв" Name="State_IKP_19_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BAFEFC9DACE04611A74631E8FD7CB99E"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП19:датчик 3 обрыв" Name="State_IKP_19_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F6599C5AF3434880AA225343064A9607"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП20:исправен" Name="State_IKP_20_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="CABB0F19559349508B598CFC741EA0FE"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП20:вскрыт" Name="State_IKP_20_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A7BD73C2702246FA83303B8AEF8A1A08"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП20:отсутствует" Name="State_IKP_20_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C8AEDCC23B6B4AD2B101DFA0585F7EB2"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП20:авария" Name="State_IKP_20_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E43BE9C381304753B6E971325B830F29"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП20:датчик 1 обрыв" Name="State_IKP_20_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="FF0C06AE048941DAAA9BE86659028342"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП20:датчик 2 обрыв" Name="State_IKP_20_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="558717197E8C42ECA30151E4CF9203C1"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП20:датчик 3 обрыв" Name="State_IKP_20_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="525F80E64669453B80C93328070DD147"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП21:исправен" Name="State_IKP_21_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0F9696EA9C4345DDB933A85B3791E70A"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП21:вскрыт" Name="State_IKP_21_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2DB1A3BEAC3E4ADCA973CE543E54C7BC"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП21:отсутствует" Name="State_IKP_21_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8D9C36CA15A94C9D820B814E127DDB84"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП21:авария" Name="State_IKP_21_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F529CABDF3954CF3975C1B78439A5CFF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП21:датчик 1 обрыв" Name="State_IKP_21_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="192EA6B3F65F48DB8882BEEFC9BA5241"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП21:датчик 2 обрыв" Name="State_IKP_21_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5F757226258943839B5E1B4D056D8273"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП21:датчик 3 обрыв" Name="State_IKP_21_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4AF3F91294924162A2A965F2EBEE464F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП22:исправен" Name="State_IKP_22_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="00A619FACED243D4AEF0B6B836524AD0"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП22:вскрыт" Name="State_IKP_22_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4A2367F8D6D948B0A8A45FC8B32CCF32"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП22:отсутствует" Name="State_IKP_22_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0566A662C3EE4D05926AE2FE6DA8F8EA"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП22:авария" Name="State_IKP_22_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="57B3C100FEE5422A8640C77E4685A737"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП22:датчик 1 обрыв" Name="State_IKP_22_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="EAE64D4E0FE947C5B32A218D7992B301"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП22:датчик 2 обрыв" Name="State_IKP_22_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6DE0A82C1DEF4D4CACD26308551D18AD"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП22:датчик 3 обрыв" Name="State_IKP_22_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="09ED76249FC64E9F94772DEA836B09B5"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП23:исправен" Name="State_IKP_23_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9817557CF5D5424B86B277A0C157A3D8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП23:вскрыт" Name="State_IKP_23_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0C5D1EA8F629419D9C6C4128A3A171D7"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП23:отсутствует" Name="State_IKP_23_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="279DD92E8983471EB3D538AF9AECEED6"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП23:авария" Name="State_IKP_23_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7324AAED84EF4E77AB189ABBBF959690"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП23:датчик 1 обрыв" Name="State_IKP_23_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5E1934CA823C42848D2A6F02327C27B6"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП23:датчик 2 обрыв" Name="State_IKP_23_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B776B84236104ABB8CD08F5DF34FA016"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП23:датчик 3 обрыв" Name="State_IKP_23_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8547F1D43CD54E3F82E8CE95F473DF6C"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП24:исправен" Name="State_IKP_24_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0F16B724073B466DA155C03EBFA41943"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП24:вскрыт" Name="State_IKP_24_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8DDB3CE28A56451EBA2415AC15196FAE"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП24:отсутствует" Name="State_IKP_24_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6D502BB51C2F4568B7B771FCAF162F6B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП24:авария" Name="State_IKP_24_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6569AEA6DE23466798E4470C8638B4C5"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП24:датчик 1 обрыв" Name="State_IKP_24_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2670AE11906142CBAF660F3668F36561"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП24:датчик 2 обрыв" Name="State_IKP_24_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B5B0EBFF2DDD427E94319FE4A546FF4F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП24:датчик 3 обрыв" Name="State_IKP_24_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2CD8EC0C4B42420C9D89A3D4D7A6F7D3"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП25:исправен" Name="State_IKP_25_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6282DC96A8BA4511BCF8602FDC449C57"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП25:вскрыт" Name="State_IKP_25_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="77D291A1E6D64372A9193CA04E378CD8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП25:отсутствует" Name="State_IKP_25_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="718AE970940E410C86D25FA78D0C56D4"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП25:авария" Name="State_IKP_25_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2D52113C32D8487CB728F161026467F6"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП25:датчик 1 обрыв" Name="State_IKP_25_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9590C960BDC04077A5CC8293F84D2338"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП25:датчик 2 обрыв" Name="State_IKP_25_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0209A9466031435E85E1263B92C197AB"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП25:датчик 3 обрыв" Name="State_IKP_25_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4E855202286C4843A481585BEC0A623D"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП26:исправен" Name="State_IKP_26_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1D4845EE73144D449BA92CCDCC366113"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП26:вскрыт" Name="State_IKP_26_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="71D77AC5787C4A4B988B6A3822C595E0"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП26:отсутствует" Name="State_IKP_26_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="FFEE910EDD55408D95EF1599EA1A7EC3"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП26:авария" Name="State_IKP_26_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A72F4C9FD1FF44D89D852AC17F3C4E5A"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП26:датчик 1 обрыв" Name="State_IKP_26_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5881136D2ABD441C8C203DAA9B5E3CFF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП26:датчик 2 обрыв" Name="State_IKP_26_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="ACF9BAC1B3A24C7A8D480DE7BE470AE8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП26:датчик 3 обрыв" Name="State_IKP_26_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="42506656F580410586D7AC43AF7875EB"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП27:исправен" Name="State_IKP_27_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="833130BF7BF348E1A5CA875BC0FAA1C8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП27:вскрыт" Name="State_IKP_27_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="12B7032A115042B6B0E76BC746EF8FCC"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП27:отсутствует" Name="State_IKP_27_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F2B7EF22BB3E463884092D640DAEA116"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП27:авария" Name="State_IKP_27_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C51F95FD544C43C6B1049EF00A61FFFA"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП27:датчик 1 обрыв" Name="State_IKP_27_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="F7B3691662CB4476BFE20233A9AE535E"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП27:датчик 2 обрыв" Name="State_IKP_27_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6F74056D35A84200ADEE9DA849C20B1F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП27:датчик 3 обрыв" Name="State_IKP_27_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1D6077F0FB144A9BA1ED3C8D6E531375"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП28:исправен" Name="State_IKP_28_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5D57FA43B2F34B55B45FDBD93B7607D8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП28:вскрыт" Name="State_IKP_28_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8835D904D2A94416B9DDAD2CD04D626B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП28:отсутствует" Name="State_IKP_28_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="1E409ADA61964563B1570AB7A4DE44F5"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП28:авария" Name="State_IKP_28_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C4C90C260D2C41B396E682FCE6AF244F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП28:датчик 1 обрыв" Name="State_IKP_28_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D0664DC131E74CB4BACB8E6530A4B9F5"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП28:датчик 2 обрыв" Name="State_IKP_28_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="494E5239065B40048C0F8C59877547A5"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП28:датчик 3 обрыв" Name="State_IKP_28_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3C6345561C904B368A70BBF31B97F2FC"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП29:исправен" Name="State_IKP_29_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="E7D1E4F2D29D43A2AB65C2FDE3D91717"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП29:вскрыт" Name="State_IKP_29_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0D58484DACDB49F581A9CBBA3E8FB20B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП29:отсутствует" Name="State_IKP_29_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="521ACD884FD2454D9E1EC2C2FFB84AC4"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП29:авария" Name="State_IKP_29_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="DC0F1D4C8E944DA0BCDE08ABEF26A447"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП29:датчик 1 обрыв" Name="State_IKP_29_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9707F65B95C045639B8158F1AADA0962"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП29:датчик 2 обрыв" Name="State_IKP_29_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D696C566B3DA4E3E9F4145A939EE6917"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП29:датчик 3 обрыв" Name="State_IKP_29_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9243F30FF9A04C19B1907A1105472B5F"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП30:исправен" Name="State_IKP_30_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="96D6F8F7BC4E4D1AA124978F1A920A57"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП30:вскрыт" Name="State_IKP_30_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C22208CD19CB42ADA4C2A987F84635EE"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП30:отсутствует" Name="State_IKP_30_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="409BD78E0EEC4ADEB3DB6D24ABFD91A8"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП30:авария" Name="State_IKP_30_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0CD18878DBF54CA7AF5EB0C3A853CC97"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП30:датчик 1 обрыв" Name="State_IKP_30_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7509304D351E4ACC90D967C313454F9A"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП30:датчик 2 обрыв" Name="State_IKP_30_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D3F141EC49A94DDE8C93D19D7DF19ED1"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП30:датчик 3 обрыв" Name="State_IKP_30_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3713DD9B8E1B4582BAEE03A8687C219B"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП31:исправен" Name="State_IKP_31_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="11570FBEF74542199EE550E6AAD6EE71"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП31:вскрыт" Name="State_IKP_31_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D64FAAEB44F148C78DF3A4FFDF691598"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП31:отсутствует" Name="State_IKP_31_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0FE752B7C6F7442ABBD1F15E98F7D71C"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП31:авария" Name="State_IKP_31_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D85F70D5179F423DBB3FCF4B67F30D39"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП31:датчик 1 обрыв" Name="State_IKP_31_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="EC5E1A2935D74921AEA2C8F88E26D4B3"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП31:датчик 2 обрыв" Name="State_IKP_31_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="00A33FBB93214FAC95EC383CC245D754"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП31:датчик 3 обрыв" Name="State_IKP_31_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="522D5A233C8844AE980D16BB604C49A2"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП32:исправен" Name="State_IKP_32_good" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2062966B6E91495085B346FDB31B4990"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП32:вскрыт" Name="State_IKP_32_opened" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="25E3A1CC698B4F70804DC9AE0EC62396"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП32:отсутствует" Name="State_IKP_32_absent" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9FEA07C1DEF042D5A73C72754D0F38FA"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП32:авария" Name="State_IKP_32_failure" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="93F0F75B2DD04DD482BBE0871BD84DBF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП32:датчик 1 обрыв" Name="State_IKP_32_break_sensor_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D7329AAFF241490E80264394182FFCAF"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП32:датчик 2 обрыв" Name="State_IKP_32_break_sensor_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4175C8EB29284DEB838D7365DE52C358"/>
+<Field Comment="Регистр состояния НГК-БИ-ИКП32:датчик 3 обрыв" Name="State_IKP_32_break_sensor_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="5BD75347E13D4CD680628BAB0648EB52"/>
+</Fields>
+</Type>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_PRU" Kind="Struct" UUID="A3D64A9F46AF3EB4248FB393A742803B">
+    <Fields>
+        <Field Name="AOss_BTN" Type="BOOL" UUID="3F5E1AA64E0F1B45312AE2B312BDB26E" Comment="АО со стравливанием" />
+        <Field Name="AObs_BTN" Type="BOOL" UUID="3F4FD81F4C477B75379D569AADC904FC" Comment="АО без стравливания" />
+        <Field Name="Tg_in_KC" Type="REAL" UUID="AB07BB5046B2887DF3460EADE1854580" Comment="Температура газа на входе КЦ" />
+        <Field Name="Tg_out_KC" Type="REAL" UUID="BF7EDB3E4EAB908238C3FCBA3925425E" Comment="Температура газа на выходе КЦ" />
+        <Field Name="Pg_in_KC" Type="REAL" UUID="115494B044B410732543D28F3014ED9C" Comment="Давление газа на входе КЦ" />
+        <Field Name="Pg_out_KC" Type="REAL" UUID="6AA209624779DD47B9246389405DF5AC" Comment="Давление газа на выходе КЦ" />
+        <Field Name="Pg_in_kolKC" Type="REAL" UUID="CFDB36F84AAC2DF1CDE51193312B20B9" Comment="Давление на входном коллекторе КЦ" />
+        <Field Name="Pg_out_kolKC" Type="REAL" UUID="2C9642424F2CE1B908C249989E1730D4" Comment="Давление на выходном коллекторе КЦ" />
+        <Field Name="Rejim" Type="INT" UUID="01B34E0943E911AAD6EFABA6A1048F5D" Comment="Режим" />
+        <Field Name="Kr51" Type="INT" UUID="4E70D8194FE9424901347BAFFC91D7D6" Comment="Кран Кр51" />
+        <Field Name="Kr52" Type="INT" UUID="0BE7ACE549AC9B35701D0BA1298DFAD3" Comment="Кран Кр52" />
+        <Field Name="Kr51_2" Type="INT" UUID="23F8115E4693563C314067A78CD25543" Comment="Кран Кр51.2" />
+        <Field Name="Kr52_2" Type="INT" UUID="D6D040CA493E966CCD3B539A664C890B" Comment="Кран Кр52.2" />
+        <Field Name="Kr53" Type="INT" UUID="E435DFEB4D3E1F26AF5168B4982D0143" Comment="Кран Кр53" />
+        <Field Name="Kr53b" Type="INT" UUID="B50896284D262B3F9EAFDFB13D8519A5" Comment="Кран Кр53бп" />
+        <Field Name="Kr54" Type="INT" UUID="BA07A4594881D34578A89CA9564EADA0" Comment="Кран Кр54" />
+        <Field Name="Kr54b" Type="INT" UUID="21EC99C64E8AB97C6964929E5F5D3118" Comment="Кран Кр54бп" />
+    </Fields>
+</Type>

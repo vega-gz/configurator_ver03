@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Old_Style_Project">
+	<Items>
+		<Item Name="T_AM_Type.type" />
+		<Item Name="T_tuneAM.type" />
+		<Item Name="support_AM.type" />
+	</Items>
+</Folder>

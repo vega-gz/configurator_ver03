@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TSK_tuneAM" Kind="Struct" UUID="MYSUFAI3AL4EDKFK4H2L2QKQMY">
+	<Fields>
+		<Field Name="Kr_1T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="7VDUOZBLB5JULLFBSPZZ6IX5RE" Comment="Кран отсечной 1Т-1" />
+		<Field Name="Kr_2T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="W7JOOSGL3OZEPEI6ZQNH42CETE" Comment="Кран отсечной 2Т-1" />
+		<Field Name="Kr_3T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="O6OGQMPU5KSEJNBFIAMHB42SVI" Comment="Кран отсечной 3Т-1" />
+		<Field Name="Kr_4T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="J5JQWHLK224ULBVVU2WM6WFXIM" Comment="Кран отсечной 4Т-1" />
+		<Field Name="Kr_5T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="OCK57KKKSSDU5D3WT3EOXVWMHU" Comment="Кран отсечной 5Т-1" />
+		<Field Name="Kr_6T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="MHYZDGTWKD6EZCW7FAEULPB3XA" Comment="Кран отсечной 6Т-1" />
+		<Field Name="Kr_7T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="UQCKAAAJM6NERBXSDUZAIIWXEU" Comment="Кран отсечной 7Т-1" />
+		<Field Name="Kr_8T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="OZUAS336ERUUJFX2RZRVZNZRPY" Comment="Кран отсечной 8Т-1" />
+		<Field Name="Kr_9T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="3JARRIKBE5CEDPIBR74KTHMGHE" Comment="Кран отсечной 9Т-1" />
+		<Field Name="Kr_10T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="U2QKB6KB4OOUXAQ6RFF3XHCQDA" Comment="Кран отсечной 10Т-1" />
+		<Field Name="Kr_11T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="CRVIQ4ZCYNDUVFH23BFCV7WCDQ" Comment="Кран отсечной 11Т-1" />
+		<Field Name="Kr_12T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="NFUYUSYMVH2U7GRGB3AHHWHNNY" Comment="Кран отсечной 12Т-1" />
+		<Field Name="Kr_13T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="SJGYJZNVX3CEBNN3IWD7E2T2QA" Comment="Кран отсечной 13Т-1" />
+		<Field Name="Kr_14T1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="GCTDXANMBCWERMVQFMROWZJL3Q" Comment="Кран отсечной 14Т-1" />
+		<Field Name="EN_BB_6T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="SVIHXZ2USRVEBHTLUXTNY7H6IA" Comment="Электрообогрев приборных боксов 6Т" />
+		<Field Name="EN_BB_7T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="2Q3UDTJ37XBE7L2L5PLFNIY6DQ" Comment="Электрообогрев приборных боксов 7Т" />
+		<Field Name="EN_BB_8T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="2Q5ROEI67Q5UPIH6T6T6LZI2RQ" Comment="Электрообогрев приборных боксов 8Т" />
+		<Field Name="EN_BB_9T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="YTFWSEHGAN5ERDO24HTFIWUBYU" Comment="Электрообогрев приборных боксов 9Т" />
+		<Field Name="EN_BB_10T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="E545UZFZBBKUVMJ6N3MXMKE5NY" Comment="Электрообогрев приборных боксов 10Т" />
+		<Field Name="EN_BB_11T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="TLRGS2EEOQDELGY55HQZ4JAX2A" Comment="Электрообогрев приборных боксов 11Т" />
+		<Field Name="EN_BB_12T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="CJXEIMULZ5OUJLNPC7LI3F6V4Q" Comment="Электрообогрев приборных боксов 12Т" />
+		<Field Name="EN_BB_13T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="MEKILNYUWWUEBJBY4VVKVSIKM4" Comment="Электрообогрев приборных боксов 13Т" />
+		<Field Name="EN_BB_14T" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="C52FZ4Q6JK2UXPG55T2ZMQEWQM" Comment="Электрообогрев приборных боксов 14Т" />
+	</Fields>
+</Type>

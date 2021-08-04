@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UPA_ANB_Settings" Kind="Struct" UUID="9258D02E41DA494CDD2D6F81667A967C">
+    <Fields>
+        <Field Name="Pg_Kol_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="2BFB1C504B78CA96B3983389255A43BE" Comment="Пониженное давление газа в коллекторе газа поз.PT-15: предупредительная нижняя" />
+        <Field Name="Pg_Kol_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="74AC9E6F486643AB3FF1CDADBC5CD27E" Comment="Повышенное давление газа в коллекторе газа поз.PT-15: предупредительная верхняя" />
+        <Field Name="Pg_Kol_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="27224DFF4005192E26E1A99E79FF46E8" Comment="Высокое давление газа в коллекторе газа поз.PT-15: аварийная верхняя" />
+        <Field Name="T_BB_UPA_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="15E27E034F047B65AA5FEDADD76CF301" Comment="Пониженная температура воздуха в ББ САУ УПА: предупредительная нижняя" />
+        <Field Name="T_BB_UPA_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="8922E24243AE26102AB9CD9A60DD3FDF" Comment="Повышенная температура воздуха в ББ САУ УПА: предупредительная верхняя" />
+        <Field Name="Pg_PT1_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="0E8CB28D4139B9E9EC6504903AD375E6" Comment="Пониженное давление газа, поз.PT-1: предупредительная нижняя" />
+        <Field Name="Pg_PT2_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="CCF3AB9C43FF8E956123AC9C64FB3D18" Comment="Пониженное давление газа, поз.PT-2: предупредительная нижняя" />
+        <Field Name="Pg_PT3_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="9E92BB234DC9E4D4F0CBB78B3B608194" Comment="Пониженное давление газа, поз.PT-3: предупредительная нижняя" />
+        <Field Name="Pg_PT4_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="1D42C3E0456CFFC06441FC8157280F45" Comment="Пониженное давление газа, поз.PT-4: предупредительная нижняя" />
+        <Field Name="Pg_PT5_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="F74FFB3942654CA339FA32B75AD658D2" Comment="Пониженное давление газа, поз.PT-5: предупредительная нижняя" />
+        <Field Name="Pg_PT6_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="2683D69A46AEADDFF4253F984957BF63" Comment="Пониженное давление газа, поз.PT-6: предупредительная нижняя" />
+        <Field Name="Pg_PT7_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="FB86EA3C402E5BBBD88EA2BF95ACCD52" Comment="Пониженное давление газа, поз.PT-7: предупредительная нижняя" />
+        <Field Name="Pg_PT8_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="C1DF899548D7550643879BBA04107729" Comment="Пониженное давление газа, поз.PT-8: предупредительная нижняя" />
+        <Field Name="Pg_PT9_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="9C1473E0430FB69C09782AADF90632D1" Comment="Пониженное давление газа, поз.PT-9: предупредительная нижняя" />
+        <Field Name="Pg_PT10_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="8A53E9DA427F82CFD3934F962BCDC5CA" Comment="Пониженное давление газа, поз.PT-10: предупредительная нижняя" />
+        <Field Name="Pg_PT11_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="B18628EA47382D41FABEF68B77C0A7F2" Comment="Пониженное давление газа, поз.PT-11: предупредительная нижняя" />
+        <Field Name="Pg_PT12_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="A9D05A034962CEE7D9A3EBA62DA627AF" Comment="Пониженное давление газа, поз.PT-12: предупредительная нижняя" />
+        <Field Name="Pg_PT13_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="BAFD683846688EAF50BED3ADE2C06A74" Comment="Пониженное давление газа, поз.PT-13: предупредительная нижняя" />
+        <Field Name="Pg_PT14_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="887195C640F533CBAE1F69B27033F921" Comment="Пониженное давление газа, поз.PT-14: предупредительная нижняя" />
+        <Field Name="Pg_PT1_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="7F6C162343D3DC297EA253BE5472BA15" Comment="Повышенное давление газа, поз.PT-1: предупредительная верхняя" />
+        <Field Name="Pg_PT2_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="37E24447483D7CFF6778C6964E66736C" Comment="Повышенное давление газа, поз.PT-2: предупредительная верхняя" />
+        <Field Name="Pg_PT3_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="5701AE1E44B6E97AD7E5898CE115C765" Comment="Повышенное давление газа, поз.PT-3: предупредительная верхняя" />
+        <Field Name="Pg_PT4_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="2A6EC687415283490F36F98E915D202E" Comment="Повышенное давление газа, поз.PT-4: предупредительная верхняя" />
+        <Field Name="Pg_PT5_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="D8F46CDB4C380489F1A0C99AC2F0E96D" Comment="Повышенное давление газа, поз.PT-5: предупредительная верхняя" />
+        <Field Name="Pg_PT6_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="388FE95E4F766C905EF136991885CB30" Comment="Повышенное давление газа, поз.PT-6: предупредительная верхняя" />
+        <Field Name="Pg_PT7_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="85A7B21A4B6B46C6DE70EFB25F51B615" Comment="Повышенное давление газа, поз.PT-7: предупредительная верхняя" />
+        <Field Name="Pg_PT8_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="8C76B5934F57E49CCBA336AE0EB0E0A2" Comment="Повышенное давление газа, поз.PT-8: предупредительная верхняя" />
+        <Field Name="Pg_PT9_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="AEE931DE49E9D7ABF384C787EDB1CF6C" Comment="Повышенное давление газа, поз.PT-9: предупредительная верхняя" />
+        <Field Name="Pg_PT10_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="EAE4B7094EECD2E47CB1C3B6D22881F7" Comment="Повышенное давление газа, поз.PT-10: предупредительная верхняя" />
+        <Field Name="Pg_PT11_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="A9705E204A7D77427ECA56AF2FB34F7B" Comment="Повышенное давление газа, поз.PT-11: предупредительная верхняя" />
+        <Field Name="Pg_PT12_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="3B32CAB04379A20E62E379A5BE6F092B" Comment="Повышенное давление газа, поз.PT-12: предупредительная верхняя" />
+        <Field Name="Pg_PT13_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="651178E94B861D5040107C87137C54F6" Comment="Повышенное давление газа, поз.PT-13: предупредительная верхняя" />
+        <Field Name="Pg_PT14_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="895575C846C55F5F26B8B2B35D12C603" Comment="Повышенное давление газа, поз.PT-14: предупредительная верхняя" />
+        <Field Name="Pg_PT1_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="65C88D65471CADF6132679B9237D6E5B" Comment="Высокое давление газа, поз.PT-1: аварийная верхняя" />
+        <Field Name="Pg_PT2_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="AB729889423E9AAABD82BD88D185757D" Comment="Высокое давление газа, поз.PT-2: аварийная верхняя" />
+        <Field Name="Pg_PT3_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="53E7B3C0485A5DAAB07A1983ACB62BF2" Comment="Высокое давление газа, поз.PT-3: аварийная верхняя" />
+        <Field Name="Pg_PT4_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="E37703B2412E969478418CBEC80A476F" Comment="Высокое давление газа, поз.PT-4: аварийная верхняя" />
+        <Field Name="Pg_PT5_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="F593419442ED24E3910D018A8DF537C9" Comment="Высокое давление газа, поз.PT-5: аварийная верхняя" />
+        <Field Name="Pg_PT6_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="631D8B0C4B26EA8E6814E785EF510244" Comment="Высокое давление газа, поз.PT-6: аварийная верхняя" />
+        <Field Name="Pg_PT7_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="820FDB4F44CE7E7BC37C6CB39F29C539" Comment="Высокое давление газа, поз.PT-7: аварийная верхняя" />
+        <Field Name="Pg_PT8_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="3763F5624B97D494F0B8368776A322C7" Comment="Высокое давление газа, поз.PT-8: аварийная верхняя" />
+        <Field Name="Pg_PT9_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="7F7F2DCA4124E1BEC84F9B8FB3EF1C1F" Comment="Высокое давление газа, поз.PT-9: аварийная верхняя" />
+        <Field Name="Pg_PT10_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="9B6CDBAE4CF44DFB2BCA1AB3BB44AF84" Comment="Высокое давление газа, поз.PT-10: аварийная верхняя" />
+        <Field Name="Pg_PT11_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="8B8BA8694F802885DF0D8989434AAF9C" Comment="Высокое давление газа, поз.PT-11: аварийная верхняя" />
+        <Field Name="Pg_PT12_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="C0F4B7A44BF36E9288DB84816530E7D1" Comment="Высокое давление газа, поз.PT-12: аварийная верхняя" />
+        <Field Name="Pg_PT13_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="AED12544444AC19BB127B5B92B64E11D" Comment="Высокое давление газа, поз.PT-13: аварийная верхняя" />
+        <Field Name="Pg_PT14_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="62C388D9447968978E4AD58A4CBB597C" Comment="Высокое давление газа, поз.PT-14: аварийная верхняя" />
+        <Field Name="Tg_TE1_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="D3318A124188B3E0897C7684A32D779A" Comment="Низкая температура газа, поз.TE-1: предупредительная нижняя" />
+        <Field Name="Tg_TE2_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="AF7B4A9C48C1A4D299559F8F7E03E68C" Comment="Низкая температура газа, поз.TE-2: предупредительная нижняя" />
+        <Field Name="Tg_TE3_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="04BEF6B14C306829010693861AC026EC" Comment="Низкая температура газа, поз.TE-3: предупредительная нижняя" />
+        <Field Name="Tg_TE4_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="7CE8AC964F2B8506A9190E98A479B9ED" Comment="Низкая температура газа, поз.TE-4: предупредительная нижняя" />
+        <Field Name="Tg_TE5_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="3844B5514837791F1ECD88B68A43147B" Comment="Низкая температура газа, поз.TE-5: предупредительная нижняя" />
+        <Field Name="Tg_TE6_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="6DB57FBF4A246D396CFA4FB1C8B6EEF6" Comment="Низкая температура газа, поз.TE-6: предупредительная нижняя" />
+        <Field Name="Tg_TE7_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="B268C25148B8528BBD9EFEBD7A36A07A" Comment="Низкая температура газа, поз.TE-7: предупредительная нижняя" />
+        <Field Name="Tg_TE8_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="1B71A95549EB35635E2D5986F6E6DEEF" Comment="Низкая температура газа, поз.TE-8: предупредительная нижняя" />
+        <Field Name="Tg_TE9_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="8A82A9AB45EBE3E5DD030988FDB526E7" Comment="Низкая температура газа, поз.TE-9: предупредительная нижняя" />
+        <Field Name="Tg_TE10_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="B4FCDD5D4AF0CC6F10BD689EE44408C5" Comment="Низкая температура газа, поз.TE-10: предупредительная нижняя" />
+        <Field Name="Tg_TE11_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="21633D744A6D62B277DE6086074666A1" Comment="Низкая температура газа, поз.TE-11: предупредительная нижняя" />
+        <Field Name="Tg_TE12_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="0BE23B8A45677A78D74DF88DB8626EF6" Comment="Низкая температура газа, поз.TE-12: предупредительная нижняя" />
+        <Field Name="Tg_TE13_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="1FF6E8C6467CBC398E11CE92D1E762C9" Comment="Низкая температура газа, поз.TE-13: предупредительная нижняя" />
+        <Field Name="Tg_TE14_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="5FC37B394BA552DB7687EF945BB15980" Comment="Низкая температура газа, поз.TE-14: предупредительная нижняя" />
+        <Field Name="Tg_TE1_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="D8B265104B383CEDE060339D6F5A0A16" Comment="Высокая температура газа, поз.TE-1: предупредительная верхняя" />
+        <Field Name="Tg_TE2_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="72B82FDC458ABFF60074B28182CCCF24" Comment="Высокая температура газа, поз.TE-2: предупредительная верхняя" />
+        <Field Name="Tg_TE3_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="C009742A425E1BD970D4AFA95FC2C570" Comment="Высокая температура газа, поз.TE-3: предупредительная верхняя" />
+        <Field Name="Tg_TE4_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="859269D54226EB6850A93D999603C024" Comment="Высокая температура газа, поз.TE-4: предупредительная верхняя" />
+        <Field Name="Tg_TE5_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="7F7086864FBB69836657DEB51DB0F2A5" Comment="Высокая температура газа, поз.TE-5: предупредительная верхняя" />
+        <Field Name="Tg_TE6_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="E465BC084A010FAA7FD1ADB4883C04A0" Comment="Высокая температура газа, поз.TE-6: предупредительная верхняя" />
+        <Field Name="Tg_TE7_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="8E4550FE456A624BC3F70B8EA54B1D94" Comment="Высокая температура газа, поз.TE-7: предупредительная верхняя" />
+        <Field Name="Tg_TE8_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="BEEF583C499BE43B217AF9A110930749" Comment="Высокая температура газа, поз.TE-8: предупредительная верхняя" />
+        <Field Name="Tg_TE9_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="A46BD34A42B2C7764FE06EB7F19F523E" Comment="Высокая температура газа, поз.TE-9: предупредительная верхняя" />
+        <Field Name="Tg_TE10_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="0843DFDB4D4F9DD60988639A198D51B9" Comment="Высокая температура газа, поз.TE-10: предупредительная верхняя" />
+        <Field Name="Tg_TE11_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="2EE3756D44FF77932E3DEA893B33BD62" Comment="Высокая температура газа, поз.TE-11: предупредительная верхняя" />
+        <Field Name="Tg_TE12_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="C2EC7BD3496A3966EAD28B80F33006D2" Comment="Высокая температура газа, поз.TE-12: предупредительная верхняя" />
+        <Field Name="Tg_TE13_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="857E0F4048D2C65DC79EA0BD5DFD1858" Comment="Высокая температура газа, поз.TE-13: предупредительная верхняя" />
+        <Field Name="Tg_TE14_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="80007A44426DD529226025A5FFA17EB8" Comment="Высокая температура газа, поз.TE-14: предупредительная верхняя" />
+    </Fields>
+</Type>

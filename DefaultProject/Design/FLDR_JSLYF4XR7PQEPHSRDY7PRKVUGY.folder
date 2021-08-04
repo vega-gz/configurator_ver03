@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Алг">
+	<Items>
+		<Item Name="T_ALG_NMS.type" />
+		<Item Name="T_Mode_NMS.type" />
+		<Item Name="T_NMS_TS.type" />
+		<Item Name="T_NMS_mode.type" />
+	</Items>
+</Folder>

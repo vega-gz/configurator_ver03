@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_NMS_DI_DRV" UUID="9E6D977699474E52BB5D4CE785FAAFD2">
+    
+    <Fields>
+        <Field Comment="Контроль основного питания ~220 В" Name="Chk_AC220osn_SAU" Type="BOOL" UUID="C45BC52695FB48E88298431F5F53FBC0"/>
+        <Field Comment="Контроль резервного питания ~220 В" Name="Chk_AC220rez_SAU" Type="BOOL" UUID="C9C79422A3CF4F3AB0DC946B279CC6FA"/>
+        <Field Comment="Автоматы питания включены" Name="QF_ON" Type="BOOL" UUID="CBE34B81A9DA42ABB4EA100072849870"/>
+        <Field Comment="Контроль исправности разрядников" Name="Chk_razr" Type="BOOL" UUID="15C8775A76BB43E3BD6CC2814B24E85C"/>
+        <Field Comment="Исправность осн. ИП =24 В внутренних цепей" Name="DC24osn_Int_ok" Type="BOOL" UUID="096C7C9547B541379BAFB1F37C80C52F"/>
+        <Field Comment="Исправность рез. ИП =24 В внутренних цепей" Name="DC24rez_Int_ok" Type="BOOL" UUID="606B47B6E6F24EED9F181A82A1CF30F5"/>
+        <Field Comment="Исправность осн. ИП =24 В AI,внешних цепей" Name="DC24osn_AI_ok" Type="BOOL" UUID="E9E5CA7741D346D188851F77B737ECE2"/>
+        <Field Comment="Исправность рез. ИП =24 В AI,внешних цепей" Name="DC24rez_AI_ok" Type="BOOL" UUID="86BED293853646AFA648CE17E0BCEF21"/>
+        <Field Comment="Исправность осн. ИП =24 В D0,внешних цепей" Name="DC24osn_DO_ok" Type="BOOL" UUID="74EDCC73A345422384B966EA38821F55"/>
+        <Field Comment="Исправность рез. ИП =24 В D0,внешних цепей" Name="DC24rez_DO_ok" Type="BOOL" UUID="589F8CD549BF4312BB1844072DC9742E"/>
+        <Field Comment="Дверь СтУ-4 открыта" Name="Dver_STU4_open" Type="BOOL" UUID="838E97F6521040CB8FA31B6C4E2BEEDA"/>
+        <Field Comment="Резерв внутр." Name="Res_0" Type="BOOL" UUID="57C8E271066B4DD5A1F1BF53F3AD625B"/>
+        <Field Comment="Резерв внутр." Name="Res_1" Type="BOOL" UUID="03DA8E2C0DF643C8A2431135D9A05012"/>
+        <Field Comment="Резерв внутр." Name="Res_2" Type="BOOL" UUID="9583D66CD4C54F05812222370A574B3F"/>
+        <Field Comment="Резерв внутр." Name="Res_3" Type="BOOL" UUID="D42997DB86D6436AA54C76FB1258BA9E"/>
+        <Field Comment="Резерв внутр." Name="Res_4" Type="BOOL" UUID="7980A4991764497C9B45ECF693669139"/>
+        <Field Comment="Ввод 1 380 VAC включен" Name="Q1_AC380_ON" Type="BOOL" UUID="F362384C39C1467E9D74E8BDD9BE30B9"/>
+        <Field Comment="Ввод 1 380 VAC отключен" Name="Q1_AC380_OF" Type="BOOL" UUID="36E2EA24AC7946E6B865AA615A82FD97"/>
+        <Field Comment="Наличие 380 VAC на вводе 1" Name="U1_AC380_ok" Type="BOOL" UUID="4CC22355B1A5435EB6A0B3DBBD6B9093"/>
+        <Field Comment="Ввод 1 380 VAC аварийно отключен" Name="Q1_AC380_AOF" Type="BOOL" UUID="2064EE1F27184C01966395FE81CE68C2"/>
+        <Field Comment="Ввод 2 380 VAC включен" Name="Q2_AC380_ON" Type="BOOL" UUID="BFE55E154AFE406397E95FFD1C53ECF2"/>
+        <Field Comment="Ввод 2 380 VAC отключен" Name="Q2_AC380_OF" Type="BOOL" UUID="736A8F3EA9AE4554935CE8DC782DFC19"/>
+        <Field Comment="Наличие 380 VAC на вводе 2" Name="U2_AC380_ok" Type="BOOL" UUID="3180CD372E924811B95A509EADD8306F"/>
+        <Field Comment="Ввод 2 380 VAC аварийно отключен" Name="Q2_AC380_AOF" Type="BOOL" UUID="C56F6CC62FCB4B0EA762E220FE489CEA"/>
+        <Field Comment="Ввод 3 380 VAC включен" Name="Q3_AC380_ON" Type="BOOL" UUID="EE8237B9A3C74D068D15E73152266394"/>
+        <Field Comment="Ввод 3 380 VAC отключен" Name="Q3_AC380_OF" Type="BOOL" UUID="168280DA497B42FDBB6435E11CDDC775"/>
+        <Field Comment="Наличие 380 VAC на вводе 3" Name="U3_AC380_ok" Type="BOOL" UUID="FD3F78830F5A4375AF6AC504F7221F62"/>
+        <Field Comment="Ввод 3 380 VAC аварийно отключен" Name="Q3_AC380_AOF" Type="BOOL" UUID="C98D44F9AF054DAD9794102BF049C468"/>
+        <Field Comment="АВР сработал" Name="AVR_work" Type="BOOL" UUID="3623793B5ABF4027A39666E7BB11D40D"/>
+        <Field Comment="Неисправность УЗИП" Name="UZIP_Bad" Type="BOOL" UUID="D0DA15735E944367BD22600A3C02538C"/>
+        <Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="2E8A147491D14BD4B81DD456961E2317"/>
+        <Field Comment="Резерв" Name="Res_6" Type="BOOL" UUID="6C6D671A0E294F868B9514B432B58D44"/>
+        <Field Comment="Насос включен Н1" Name="N1_ON" Type="BOOL" UUID="B58DF6E825A7475C8F15EA60F34C2C2D"/>
+        <Field Comment="Насос включен Н2" Name="N2_ON" Type="BOOL" UUID="D30505DE6BE143919A2D211A99D3DA27"/>
+        <Field Comment="Насос включен Н3" Name="N3_ON" Type="BOOL" UUID="831C21B03E0841399C208457DF2A8E1A"/>
+        <Field Comment="Насос включен Н4" Name="N4_ON" Type="BOOL" UUID="65368E8CC75E44C4918561E87DF937E4"/>
+        <Field Comment="Насос включен Н5" Name="N5_ON" Type="BOOL" UUID="070C64E74F6647E180E5C0608BCC7FDD"/>
+        <Field Comment="Насос включен Н6" Name="N6_ON" Type="BOOL" UUID="CCF98E7640F2450D85EE02D6514078A5"/>
+        <Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="ADB5FF6D547C4D6CBE3F59C183814B49"/>
+        <Field Comment="Резерв" Name="Res_8" Type="BOOL" UUID="85F16C578F66455C85BE26885CEEB41D"/>
+        <Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="B82859F86E47416E846C51BAD43C32AF"/>
+        <Field Comment="Резерв" Name="Res_10" Type="BOOL" UUID="973A77A6352942D39C946711570C6F4B"/>
+        <Field Comment="Резерв" Name="Res_11" Type="BOOL" UUID="B803BC6C99974F7886C8453DBDEDB439"/>
+        <Field Comment="Резерв" Name="Res_12" Type="BOOL" UUID="DBDAAFD04A944FB4BEE8D919C46A3EEC"/>
+        <Field Comment="Резерв" Name="Res_13" Type="BOOL" UUID="57452B1A0CC2441CBCEC13C658F64FBB"/>
+        <Field Comment="Резерв" Name="Res_14" Type="BOOL" UUID="BBB295234F19437AA78AD5F12C0224A5"/>
+        <Field Comment="Резерв" Name="Res_15" Type="BOOL" UUID="376BF25C940041E584377749CB73128A"/>
+        <Field Comment="Резерв" Name="Res_16" Type="BOOL" UUID="59805AC0D48B4029930DA639D01F17E7"/>
+    </Fields>
+</Type>

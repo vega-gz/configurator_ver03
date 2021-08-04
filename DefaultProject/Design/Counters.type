@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Counters" Kind="Struct" Comment="Счетчики и наработки" UUID="39C93759447B805BBC469C830D320488">
+    <Fields>
+        <Field Name="SumAO" Type="REAL" UUID="625587074056554B31E67CB357E4CD71" Comment="Количество аварийных остановов" />
+        <Field Name="SumAO_Month" Type="REAL" UUID="FAC06CFE42002D228C36368BC70D0244" Comment="Количество аварийных остановов за месяц" />
+        <Field Name="SumAO_Year" Type="REAL" UUID="CE405F284461A572FC075F97B1559F2F" Comment="Количество аварийных остановов за год" />
+        <Field Name="SumNO" Type="REAL" UUID="47B3E51E412F9ECE39AEB695F634F555" Comment="Количество нормальных остановов" />
+        <Field Name="SumNO_Month" Type="REAL" UUID="43B34A674123D48AB2DCA5B0662C1B23" Comment="Количество нормальных остановов за месяц" />
+        <Field Name="SumNO_Year" Type="REAL" UUID="A95C5FC94DC72DB33D5C8D8B2F8725C6" Comment="Количество нормальных остановов за год" />
+        <Field Name="SumGZ" Type="REAL" UUID="2F7743F74203EC179B20FFBDCB3C38B5" Comment="Количество горячих запусков" />
+        <Field Name="SumGZ_Month" Type="REAL" UUID="3E3EB3804EB73BD0BB2AF692C711CB98" Comment="Количество горячих запусков за месяц" />
+        <Field Name="SumGZ_Year" Type="REAL" UUID="337C4AA24823B413445E0BAE016AB6F9" Comment="Количество горячих запусков за год" />
+        <Field Name="SumHP" Type="REAL" UUID="3D6279DC44E17F90B9C43383DDB33E27" Comment="Количество холодных прокруток" />
+        <Field Name="SumHP_Month" Type="REAL" UUID="89E8A05547CE80B4BB5A768CD07DD30D" Comment="Количество холодных прокруток за месяц" />
+        <Field Name="SumHP_Year" Type="REAL" UUID="534B9EC94457C5743AE1C1900F40D925" Comment="Количество холодных прокруток за год" />
+        <Field Name="SumStV" Type="REAL" UUID="6930CEDB4DA9D4DF6C0BCCBE863F67C8" Comment="Количество запусков стартера" />
+        <Field Name="SumStV_Month" Type="REAL" UUID="14F2022343B6669C4F659C8A3984D172" Comment="Количество запусков стартера за месяц" />
+        <Field Name="SumStV_Year" Type="REAL" UUID="04F1BD8648EEDD255D55B184923A7307" Comment="Количество запусков стартера за год" />
+        <Field Name="GPA" Type="REAL" UUID="932D94CA448D2CEC5CDF0B897B9AD258" Comment="Наработка ГПА, ч" />
+        <Field Name="GPA_Repair" Type="REAL" UUID="23FF37E6424A5BE6BBE654B33ACD9A4B" Comment="Наработка ГПА после ремонта, ч" />
+        <Field Name="GPA_last" Type="REAL" UUID="89CC72F64B404979491F07ABFCB7E4C9" Comment="Наработка ГПА с последнего запуска, ч" />
+        <Field Name="GPA_Month" Type="REAL" UUID="9AE354284811CEE66E1E46B867ED6DA6" Comment="Наработка ГПА за месяц, ч" />
+        <Field Name="GPA_Year" Type="REAL" UUID="3A06CC16468A27052D151BA2D875A21C" Comment="Наработка ГПА за год, ч" />
+        <Field Name="GG" Type="REAL" UUID="0B7BFECE4D916B28054BCBA27BD6CA93" Comment="Наработка ГГ, ч" />
+        <Field Name="GG_Repair" Type="REAL" UUID="82B8927E449ED1C403AC6F9A3215D132" Comment="Наработка ГГ после ремонта, ч" />
+        <Field Name="ST" Type="REAL" UUID="7B0D3D784694C994E3643EAC0B54320B" Comment="Наработка СТ, ч" />
+        <Field Name="ST_Repair" Type="REAL" UUID="7D2AB8BE4A166B7C9A4C7EAC802558AD" Comment="Наработка СТ после ремонта, ч" />
+        <Field Name="CBN" Type="REAL" UUID="9C611FFF46D7137A6C35FFBCDE275B51" Comment="Наработка ЦБН, ч" />
+        <Field Name="CBN_Repair" Type="REAL" UUID="ADC482D9475FCCEDFADF56B02CD976F9" Comment="Наработка ЦБН после ремонта, ч" />
+        <Field Name="SPCh" Type="REAL" UUID="46F297404FEA30F9055CB9A5434F4703" Comment="Наработка СПЧ, ч" />
+        <Field Name="SPCh_Repair" Type="REAL" UUID="F92A58984FA891A4667EA8B1E214B7C1" Comment="Наработка СПЧ после ремонта, ч" />
+        <Field Name="Promval" Type="REAL" UUID="FC27BA3949D09D640C068D973962B2E8" Comment="Наработка промвала, ч" />
+        <Field Name="PNS" Type="REAL" UUID="15A053B04E3E907C899B718214FA17EC" Comment="Наработка ПНС, мин" />
+        <Field Name="PNU1" Type="REAL" UUID="753C072643430F8F45DDB49CA2C74F43" Comment="Наработка ПНУ1, мин" />
+        <Field Name="PNU2" Type="REAL" UUID="8DD2FC5340F97560CE19F5936E338784" Comment="Наработка ПНУ2, мин" />
+        <Field Name="NPM" Type="REAL" UUID="BCB961FD4D6E059110C4A793846C5899" Comment="Наработка НПМ, мин" />
+        <Field Name="MNO" Type="REAL" UUID="302697BA440A342EC2CF4294DA84E14B" Comment="Наработка МНО, мин" />
+        <Field Name="SMP" Type="REAL" UUID="0D57309A4EAE7D612ACD3E9F253A6A9B" Comment="Наработка СМП, ч" />
+        <Field Name="VOD1" Type="REAL" UUID="00E1813A43F55FE09A8AB6AC926E03A7" Comment="Наработка ВОД1, ч" />
+        <Field Name="VOD2" Type="REAL" UUID="6FDAFA3B4A2C1A4646F7308CE4B4D26E" Comment="Наработка ВОД2, ч" />
+        <Field Name="POS_open" Type="REAL" UUID="767A347744811C425A757E9C6F0DECAD" Comment="Наработка ГПА с открытым ПОС, ч" />
+        <Field Name="POS_open_Repair" Type="REAL" UUID="D486EA1B4C2CF14B10706BAB141DCA7E" Comment="Наработка ГПА с открытым ПОС после ремонта, ч" />
+        <Field Name="KPGV_open" Type="REAL" UUID="921A090F418AA94A661B43AFC36174FF" Comment="Наработка ГПА с открытым КПГВ, ч" />
+        <Field Name="KPGV_open_Repair" Type="REAL" UUID="C10CC7EC41F2DE306F664CA13628FBAF" Comment="Наработка ГПА с открытым КПГВ после ремонта, ч" />
+        <Field Name="SAU" Type="REAL" UUID="953F2BE54B42A234D14EC99967842DE5" Comment="Наработка САУ, ч" />
+        <Field Name="N1_out_time" Type="REAL" UUID="B24BA4C54599785CFB5E75AD1ABA959D" Comment="Время выбега ротора НД, сек." />
+        <Field Name="N2_out_time" Type="REAL" UUID="FCBE8CA742CFCA5DAE72F8A500F7A6BB" Comment="Время выбега ротора ВД, сек." />
+        <Field Name="N3_out_time" Type="REAL" UUID="2D7AA6C14605C084E4D761BE0A8D63FD" Comment="Время выбега ротора СТ, сек." />
+        <Field Name="NORM" Type="REAL" UUID="A28DB0DC4928907ADD34A1BC375C0343" Comment="Наработка НОМР, мин." />
+        <Field Name="NPMD" Type="REAL" UUID="3564774D434C67AC451D9A9BD26B7AAD" Comment="Наработка НПМД, мин." />
+        <Field Name="NP" Type="REAL" UUID="4020C041449D025B6EDA42B56230CD28" Comment="Наработка НП, мин." />
+        <Field Name="NPMK" Type="REAL" UUID="3DEF7553441B5BB1A73BC5864283C24E" Comment="Наработка НПМК, мин." />
+        <Field Name="KBV1" Type="REAL" UUID="67CB71D348BF9AFFB81A6A821E5370BC" Comment="Наработка КБВ1, мин." />
+        <Field Name="KBV2" Type="REAL" UUID="E54581DC4FA2258BE04C3C87070A776F" Comment="Наработка КБВ2, мин." />
+        <Field Name="VPK" Type="REAL" UUID="B1D803734C118DD6E4F1208B99FC49C5" Comment="Наработка ВПК, мин." />
+    </Fields>
+</Type>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ALG_NMS" Kind="Struct" UUID="376029B84A9C041D85FE2EB21E987D7A">
+	<Fields>
+		<Field Name="noActivMode" Type="BOOL" UUID="7390AEA547FFBB6A9FCFCCA69E83CF22" />
+		<Field Name="Unlock" Type="BOOL" UUID="7AF80DAA44818A1206132083F495EFF8" />
+		<Field Name="AOss" Type="BOOL" UUID="2D77620A4A3813D1591108A08590DF59" />
+		<Field Name="AObs" Type="BOOL" UUID="DE8D6E32495065E472110299B396CE4D" />
+		<Field Name="AO" Type="BOOL" UUID="OKDJOMLHPYZEHM5USWKIJJS4AQ" />
+		<Field Name="Fire" Type="BOOL" UUID="96B9D13A4BE80E53FEC95789BAB480E7" />
+		<Field Name="condReserve" Type="BOOL" UUID="F548D83648E2E2195E232EBFF3C29788" />
+		<Field Name="Lm_E1_n" Type="BOOL" UUID="53759A4B46882D5CB55414B01D0C95AB" Comment="Уровень в ёмкости Е1 минимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E2_n" Type="BOOL" UUID="8529E1AF46E2175E2D2375BD9D737608" Comment="Уровень в ёмкости Е2 минимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E3_n" Type="BOOL" UUID="4FEC11C34B8BB9522A152B9765C3F026" Comment="Уровень в ёмкости Е3 минимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E4_n" Type="BOOL" UUID="7C8F8401414768418AABFDA4631CEDDE" Comment="Уровень в ёмкости Е4 минимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E5_n" Type="BOOL" UUID="2AAB8BFA49D211E4D64900A4E88D3504" Comment="Уровень в ёмкости Е5 минимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E6_n" Type="BOOL" UUID="2DE374D144B3B8E36F1242B43D6F7CCB" Comment="Уровень в ёмкости Е6 минимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E1_v" Type="BOOL" UUID="5A2A4313404156C7E13DD5B70A4A053F" Comment="Уровень в ёмкости Е1 максимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E2_v" Type="BOOL" UUID="973EFC2742BF1D5B6BE3DCB0F206E02C" Comment="Уровень в ёмкости Е2 максимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E3_v" Type="BOOL" UUID="AFEF55BA4B25D1AB575E618CEF624D06" Comment="Уровень в ёмкости Е3 максимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E4_v" Type="BOOL" UUID="C616A5A740FA8DD6F58488AB8EC3AEB0" Comment="Уровень в ёмкости Е4 максимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E5_v" Type="BOOL" UUID="05370C594256D516E3486899F611788A" Comment="Уровень в ёмкости Е5 максимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E6_v" Type="BOOL" UUID="793198EE4B54BD2572B99492EE9DDD94" Comment="Уровень в ёмкости Е6 максимальный. Насосная масел, поз.38.3" />
+		<Field Name="Lm_R8_v" Type="BOOL" UUID="50D70D824810151AD84D99A14B757662" Comment="Уровень в емкости максимальный. Емкость для аварийного слива масла, поз.38.4" />
+		<Field Name="Lm_R1_n" Type="BOOL" UUID="BD4EB1414B1FEDDD12E97B99906D6CA1" Comment="Мин. уровень в Р1 (склад ГСМ)" />
+		<Field Name="Lm_R2_n" Type="BOOL" UUID="199FE43B44F1F39DDEE73BA1A09560E6" Comment="Мин. уровень в Р2 (склад ГСМ)" />
+		<Field Name="Lm_R3_n" Type="BOOL" UUID="DBA6D2854E469B7B3D0E0EBD64BFB27B" Comment="Мин. уровень в Р3 (склад ГСМ)" />
+		<Field Name="Lm_R4_n" Type="BOOL" UUID="D233A5C14252BEAEC0F820A86D48B4A6" Comment="Мин. уровень в Р4 (склад ГСМ)" />
+		<Field Name="Lm_R5_n" Type="BOOL" UUID="300CA5A4457237F72E8814B87A1418D3" Comment="Мин. уровень в Р5 (склад ГСМ)" />
+		<Field Name="Lm_R6_n" Type="BOOL" UUID="E65A9DB04208D8734588A2A1550C4AE8" Comment="Мин. уровень в Р6 (склад ГСМ)" />
+		<Field Name="Lm_R7_n" Type="BOOL" UUID="6DFC97B248665C6C7E0813BC9BC4357D" Comment="Мин. уровень в Р7 (склад ГСМ)" />
+		<Field Name="Lm_R1_v" Type="BOOL" UUID="55CF155547C1A31383F3AFB5EF8CBB9E" Comment="Макс. уровень в Р1 (склад ГСМ)" />
+		<Field Name="Lm_R2_v" Type="BOOL" UUID="B409CFF8481D251960EF37B867B0EB75" Comment="Макс. уровень в Р2 (склад ГСМ)" />
+		<Field Name="Lm_R3_v" Type="BOOL" UUID="4438ECE04CF356CE450D3A851C9EAAD0" Comment="Макс. уровень в Р3 (склад ГСМ)" />
+		<Field Name="Lm_R4_v" Type="BOOL" UUID="79DC6AB04B1D66498F09AD905F42EA55" Comment="Макс. уровень в Р4 (склад ГСМ)" />
+		<Field Name="Lm_R5_v" Type="BOOL" UUID="B1344EC84E3D89D1BD3A26BC3F5FB740" Comment="Макс. уровень в Р5 (склад ГСМ)" />
+		<Field Name="Lm_R6_v" Type="BOOL" UUID="4543999C4373F94C4591388486B40CE1" Comment="Макс. уровень в Р6 (склад ГСМ)" />
+		<Field Name="Lm_R7_v" Type="BOOL" UUID="0BBCAFE04539FDE0C19543AE09F42F54" Comment="Макс. уровень в Р7 (склад ГСМ)" />
+	</Fields>
+</Type>

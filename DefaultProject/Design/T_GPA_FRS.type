@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_FRS" Kind="Struct" Comment="Выходы регулятора" UUID="D2CF6A0C49843C1283BB3384C9EAF477">
+	<Fields>
+		<Field Name="R_reserve" Type="BOOL" UUID="19CF183B4A39CA77C837A1A318BDEFDD" Comment="Резерв" />
+		<Field Name="R_start" Type="BOOL" UUID="55AECE45474D8BECEC9B8D871C56664F" Comment="Пуск" />
+		<Field Name="R_work" Type="BOOL" UUID="3A0AFA764E4305F2DFEC40995BE5EDDE" Comment="Работа" />
+		<Field Name="R_stop" Type="BOOL" UUID="3B76A7AC47A47F840C22EC84AD509F16" Comment="Останов" />
+		<Field Name="Rp_fire" Type="BOOL" UUID="6D0BB0C24B34533AEF1F8C89B8E0F41A" Comment="Розжиг" />
+		<Field Name="Rp_rate" Type="BOOL" UUID="1A5EFA8D4F0026744DAF208FA2A11825" Comment="Разгон по программе" />
+		<Field Name="Rp_heat" Type="BOOL" UUID="4511BCE8498C8EF2880B2DAAD5CF7FBE" Comment="Прогрев на малом газу" />
+		<Field Name="Rp_MG" Type="BOOL" UUID="D1B52B4B4AAADAF55A564DA36DA1E7C0" Comment="Малый газ" />
+		<Field Name="Rp_GoMG" Type="BOOL" UUID="4COTOYAAM2OEZKVJOMYGZ2G7S4" Comment="Снижение до МГ" />
+		<Field Name="Rp_OxlD" Type="BOOL" UUID="YRQFKC4E3VWE3JIT4H5OT2TV3E" Comment="Охлаждение двигателя" />
+		<Field Name="Rp_HH" Type="BOOL" UUID="DE64MKDCAXKUVH6CUTP6QJD7LY" Comment="Холостой ход двигателя" />
+		<Field Name="isFlame" Type="BOOL" UUID="1AC6EF494D0C488E54EA96BCAD69BE6C" Comment="Есть горение" />
+		<Field Name="Rp_regNvd" Type="BOOL" UUID="5DDF468147A9D4A1A4F773ACF0ABC635" Comment="Регулирование по N КВД" />
+		<Field Name="Rp_regNst" Type="BOOL" UUID="F1FFB4EA4C1EC28A3443849680F2D2D7" Comment="Регулирование по N СТ" />
+		<Field Name="Rp_DG_DU" Type="BOOL" UUID="9B9CE8FF450DEE83683A97975BFC742B" Comment="ДУ дозатором" />
+		<Field Name="Rp_hiLimitPok" Type="BOOL" UUID="AFB21E9D4708BACC3E3EBFBB4B386420" Comment="Верхнее ограничение по P за КВД" />
+		<Field Name="Rp_hiLimitT" Type="BOOL" UUID="OTZADGPLLFGCFEQKXSNIFNKCXY" Comment="Верхнее ограничение по T за TВД" />
+		<Field Name="Rp_hiLimitNvd" Type="BOOL" UUID="A434E1DF4168A7BD50968DBA86AD4019" Comment="Верхнее ограничение по N КВД" />
+		<Field Name="Rp_hiLimitNvdNorm" Type="BOOL" UUID="ZRNCNXA54JH5VARZU6BICZ6AWA" Comment="Верхнее ограничение по N КВД norm" />
+		<Field Name="Rp_hiLimitNst" Type="BOOL" UUID="523FD1754934F8609777CEB1CE0B035C" Comment="Верхнее ограничение по N st" />
+		<Field Name="Rp_loLimitNvdNorm" Type="BOOL" UUID="A741B41247537D555F1E92A262BB2FAD" Comment="Нижнее ограничение по N КВД norm" />
+		<Field Name="Rp_loLimitNst" Type="BOOL" UUID="88E241C64E8C2CC8020636ADFDAA97C3" Comment="Нижнее ограничение по N st" />
+		<Field Name="Rp_hiLimited" Type="BOOL" UUID="FE48297F43B3CB820A5BF98FDF47596D" Comment="Двигатель на верхнем ограничении" />
+		<Field Name="Rp_loLimited" Type="BOOL" UUID="057A814E40D52BCF673B08BB80106A66" Comment="Двигатель на нижнем ограничении" />
+		<Field Name="P_NvdDistort" Type="BOOL" UUID="EBD8DA664CA129149821369FA896336D" Comment="Рассогласование по N КВД" />
+		<Field Name="P_NstDistort" Type="BOOL" UUID="48313E244677CB7CAD56D7915C2B3FED" Comment="Рассогласование по N СТ" />
+		<Field Name="P_TgDistort" Type="BOOL" UUID="3J3W7B4BFVHOBCRKVEQ5HKUKZU" Comment="Рассогласование каналов Т за ГГ" />
+		<Field Name="P_DGbrk" Type="BOOL" UUID="F85D3CD44822B453479AC7A97D7F39D9" Comment="Рассогласование по ДГ" />
+		<Field Name="P_surgeHit" Type="BOOL" UUID="J6B43F7UNJHMZB2CKFOI7YZ5OM" Comment="Помпажный хлопок компрессора Д" />
+		<Field Name="P_NvdHigh" Type="BOOL" UUID="5MW7U3FQMR7UZMFNDIMWLSV2AY" Comment="Повышенные обороты ТВД" />
+		<Field Name="P_Tgg_v" Type="BOOL" UUID="7YTDM7DA3CNU3I3RMR77KNSXXM" Comment="Повышенная Т газа за турбиной" />
+		<Field Name="A_NvdNormHigh" Type="BOOL" UUID="4570D7554DD181E757F0EE93CC68B67C" Comment="Высокая N КВД приведённая" />
+		<Field Name="A_NvdNormLow" Type="BOOL" UUID="2I3F5EZPGJFDPIFJ24BKDALO44" Comment="Низкая Nvd прив." />
+		<Field Name="A_NvdHigh" Type="BOOL" UUID="VQBFYAOBF7WULGJJ24CJVDU74Q" Comment="Высокая N КВД" />
+		<Field Name="A_NstHigh" Type="BOOL" UUID="C5D4323C4E69D693C511F4859D6E0298" Comment="Высокая N СТ" />
+		<Field Name="A_NstLow" Type="BOOL" UUID="72E54QNQXFEGFCAJEUOXWSSWO4" Comment="Низкая Nst" />
+		<Field Name="A_NstJamp" Type="BOOL" UUID="UWN3H4ROH5CLPKESNFA5WDBTTY" Comment="Раскрутка СТ" />
+		<Field Name="A_SurgeD" Type="BOOL" UUID="P3B333NCB5A6VE7BV5HMXXACC4" Comment="Помпаж Д" />
+		<Field Name="A_DGbrk" Type="BOOL" UUID="E381EDF94E8D50C50589D0883EABC2BC" Comment="Рассогласование по ДГ" />
+		<Field Name="A_VNAdistort" Type="BOOL" UUID="DTOKKA62NVCSBHDYVW3LQEXY34" Comment="Рассогласование ВНА" />
+		<Field Name="A_noFlame" Type="BOOL" UUID="D64FA936480DE36C5E40DD8EA7018AE0" Comment="Нет розжига" />
+		<Field Name="A_FlameOff" Type="BOOL" UUID="7BD6E16441BCC7029CE871AD22E08F1C" Comment="Погасание факела" />
+		<Field Name="A_hiT_outTK" Type="BOOL" UUID="HJ4TPNLG3ZXEBN4VLPTJTKZKVQ" Comment="Высокая Т за турбиной" />
+		<Field Name="A_NvdBrk" Type="BOOL" UUID="291EB3A34D531349526621849C7943E3" Comment="Отказ каналов изм. N КВД" />
+		<Field Name="A_NstBrk" Type="BOOL" UUID="26097D3049632C7911AB30B8A14BB3E9" Comment="Отказ каналов изм. N СТ" />
+		<Field Name="A_Tg_outTKbrk" Type="BOOL" UUID="CKMONG4LTJFOLPK47USWJQOGSY" Comment="Отказ всех термопар Т газа за турбиной" />
+		<Field Name="A_common" Type="BOOL" UUID="A7D5888B4F3D3606FADD9E9967E585C9" Comment="Обобщённая авария от регулятора топлива" />
+		<Field Name="AI_Fault" Type="BOOL" UUID="I6XDYCAKNNFS5DAE6LCWFG2MPI" Comment="Обобщённая неисправность аналогового входа от ТР" />
+		<Field Name="VNA_close" Type="BOOL" UUID="MHBNSHDLUDMUTIOA7YACMLI2OE" Comment="ВНА прикрыт" />
+		<Field Name="Nvd" Type="B5OFNWNNVRCEDHW7UMU423DSAI" UUID="OSIS3ZLMRVBCNN6UVBD2IKCUV4" Comment="Расчётная Nвд" />
+		<Field Name="Nst" Type="B5OFNWNNVRCEDHW7UMU423DSAI" UUID="4RLIENDOSRCWJFD6672FS5L6QY" Comment="Расчётная Nст" />
+		<Field Name="Tgg" Type="B5OFNWNNVRCEDHW7UMU423DSAI" UUID="WB3DH7ONFJAGVCLQLKDTMRKP64" Comment="Расчётная Т за ГГ" />
+		<Field Name="Pv_outTK" Type="B5OFNWNNVRCEDHW7UMU423DSAI" UUID="CL23RKAL6DAURE3YGGDI6JQWZQ" Comment="Статическое давление воздуха за компрессором" />
+		<Field Name="NvdNorm" Type="REAL" UUID="63LXX7HGY5DU5FJIC2YLEGRAYE" Comment="Nвд приведённая" />
+		<Field Name="timeWarm" Type="REAL" UUID="UPHM3KIZZXCUXDXVHK6LRSR7ZI" Comment="Текущее время прогрева" />
+		<Field Name="NvdStart_RunOut" Type="REAL" UUID="PUYLYEWVYYGUNAW5UL6JMRJ4AU" Comment="Обороты начала контроля выбега ТВД" />
+		<Field Name="NvdEnd_RunOut" Type="REAL" UUID="PFJVAPJO3HTUJE77MWYUCDC7HI" Comment="Обороты окончания контроля выбега ТВД" />
+		<Field Name="NstStart_RunOut" Type="REAL" UUID="NWHN63V4LV4ETPV4K47EEOH43A" Comment="Обороты начала контроля выбега СТ" />
+		<Field Name="NstEnd_RunOut" Type="REAL" UUID="2WTS6OTRHQ6UNHH2EUG7XCFO5E" Comment="Обороты окончания контроля выбега СТ" />
+		<Field Name="FRegMode" Type="INT" UUID="882334F4401DF779C1B48AA24EE087A0" Comment="Режим регулятора" />
+		<Field Name="contur" Type="INT" UUID="A06FF2894A9A7C380295A394FB7BFEAF" Comment="Активный контур" />
+	</Fields>
+</Type>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_DRM" Kind="Struct" Comment="Drum Step Number (номера шагов в барабанах)" UUID="WZFEHN3YRLAU3GOKH2X6JFL2V4">
+	<Fields>
+		<Field Name="AOs" Type="2433DEE54E72840E369C8C97603D4040" UUID="AR2YMZCANVGEBIOH3A4QCM6M2M" Comment="Блок барабана АО сс" />
+		<Field Name="AOb" Type="2433DEE54E72840E369C8C97603D4040" UUID="2YXK5HMAWAOUVIYTYKHIVRK3QM" Comment="Блок барабана АО бс" />
+		<Field Name="NOs" Type="2433DEE54E72840E369C8C97603D4040" UUID="F3TXIFAN42OU3NR3FN6C6P7BFM" Comment="Блок барабана НО сс" />
+		<Field Name="NOb" Type="2433DEE54E72840E369C8C97603D4040" UUID="SYPYWR6DQ5XUHHRQDYPFI77VXM" Comment="Блок барабана НО бс" />
+		<Field Name="VOs" Type="2433DEE54E72840E369C8C97603D4040" UUID="QYMAPQUFZ3HEHLBSEMA7XSBDRI" Comment="Блок барабана ВО сс" />
+		<Field Name="VOb" Type="2433DEE54E72840E369C8C97603D4040" UUID="QE2O2O4W2LDUXHONK6RFMYNLVM" Comment="Блок барабана ВО бс" />
+		<Field Name="Fire" Type="2433DEE54E72840E369C8C97603D4040" UUID="356KK67E6UWUFLSNVRWEQTNFRY" Comment="Блок барабана Пожар" />
+		<Field Name="Crank" Type="2433DEE54E72840E369C8C97603D4040" UUID="XTK6TDSU7CUEFBZ5RDURDC3UYA" Comment="Блок барабана ХП (ТП)" />
+		<Field Name="APK" Type="2433DEE54E72840E369C8C97603D4040" UUID="5CNO2FRGXUSURANONGW7EJ7MMM" Comment="Блок барабана АПК" />
+		<Field Name="APM" Type="2433DEE54E72840E369C8C97603D4040" UUID="PBK6LP2N5KKUPBSAFOEWNHIEXY" Comment="Блок барабана АПM" />
+		<Field Name="PZM" Type="2433DEE54E72840E369C8C97603D4040" UUID="FWU6YG2RYDXURG4TTTPS7UAOCI" Comment="Блок барабана ПЗМ" />
+		<Field Name="KPK" Type="2433DEE54E72840E369C8C97603D4040" UUID="ISXQC7GGAABUPKXAZEKYQRKPXM" Comment="Блок барабана КПК" />
+		<Field Name="StopD" Type="2433DEE54E72840E369C8C97603D4040" UUID="64UHUF5ZVXMUNN4OSFHEROIENI" Comment="Блок барабана останова Д" />
+		<Field Name="StrK" Type="2433DEE54E72840E369C8C97603D4040" UUID="4FKY7NDR5DBEXHQF46BXIZOTRU" Comment="Блок барабана стравл. К" />
+		<Field Name="StartMSK" Type="2433DEE54E72840E369C8C97603D4040" UUID="LCX2J5WOMQMEZDH4BK74OFLEWA" Comment="Блок барабана запуска МС К" />
+		<Field Name="StartMSD" Type="2433DEE54E72840E369C8C97603D4040" UUID="VU2APPASSEOEDBJANOULZHLNUY" Comment="Блок барабана запуска МС Д" />
+		<Field Name="StartMSR" Type="2433DEE54E72840E369C8C97603D4040" UUID="3CW5LVLMJH7UBFPCOEH7HDX7I4" Comment="Блок барабана запуска МС Р" />
+		<Field Name="StartCrank" Type="2433DEE54E72840E369C8C97603D4040" UUID="6JZRCIJY4UZEDFAGDCAKMBS4J4" Comment="Блок барабана запуска раскрутки" />
+		<Field Name="StopCrank" Type="2433DEE54E72840E369C8C97603D4040" UUID="QNV26LAVLJKEZK5LPOWWUYCYVU" Comment="Блок барабана останова раскрутки" />
+		<Field Name="ZapK" Type="2433DEE54E72840E369C8C97603D4040" UUID="VEHURZKG3STU3OCQMUXOJGXFRA" Comment="Блок барабана заполнения К" />
+		<Field Name="StartD" Type="2433DEE54E72840E369C8C97603D4040" UUID="QO5MWVNMZPBETK6FHZFVQLOEFQ" Comment="Блок барабана запуска Д" />
+		<Field Name="ChkSAU" Type="2433DEE54E72840E369C8C97603D4040" UUID="OMXSDHMQUJXEXCZJYX6ORTJXGY" Comment="Блок барабана контроля САУ" />
+		<Field Name="StartOxlK" Type="2433DEE54E72840E369C8C97603D4040" UUID="CY6LTDS6AZEULGG2DXINO5CPBE" Comment="Блок барабана пуска охл. K" />
+		<Field Name="StopMS" Type="2433DEE54E72840E369C8C97603D4040" UUID="J4KGA23TR4UE7F7QDGGUAMEOQE" Comment="Блок барабана останов МС" />
+		<Field Name="Rp_KM" Type="2433DEE54E72840E369C8C97603D4040" UUID="2KDQWOFXLLIEPHK5JWJQ6THGBU" Comment="Блок барабана  подрежима КМ" />
+		<Field Name="Rp_MK" Type="2433DEE54E72840E369C8C97603D4040" UUID="VX2COZBET66ELPOUQ22YC6C6EM" Comment="Блок барабана подрежима MK" />
+		<Field Name="StopOxlK" Type="2433DEE54E72840E369C8C97603D4040" UUID="B4BNKBEOGARE5J3OQRPQVSRZGA" Comment="Блок барабана остановки охл. K" />
+		<Field Name="WrmM_Kompr" Type="2433DEE54E72840E369C8C97603D4040" UUID="NZQ6Y6XUGKLE7M6JW4ATOQMIWI" Comment="Блок барабана подогрева масла компрессора" />
+		<Field Name="DolivKar" Type="2433DEE54E72840E369C8C97603D4040" UUID="KOJP2AF5CKUU7KTB6RYQFDOP6Q" Comment="Блок барабана долива масла в картер" />
+	</Fields>
+</Type>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="Y6J7IBZLJFTUVGG4EO76O43H4M" Name="GPA6_InitFR" Period="1000" PutDataAtEndOfCycle="true">
+    <Variables>
+        <Variable UUID="GYLPF4RNZOZU5MUWVP4OVIGXOU" Name="init" Type="BOOL" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[//Инициализация индивидуальных настроек ТР --steam
+//ГПА6							
+if not init then
+ // Зависимость расхода топлива от степени открытия ТРК;	
+GPA_Curve_FR.openToGT.N := 14	;	
+GPA_Curve_FR.openToGT.s[0].x 	:=	0.0	;  	 GPA_Curve_FR.openToGT.s[0].fx 	:=	5.0	;  
+GPA_Curve_FR.openToGT.s[1].x 	:=	6.250	;  	 GPA_Curve_FR.openToGT.s[1].fx 	:=	50.0	;  
+GPA_Curve_FR.openToGT.s[2].x 	:=	12.50	;  	 GPA_Curve_FR.openToGT.s[2].fx 	:=	104.0	;  
+GPA_Curve_FR.openToGT.s[3].x 	:=	15.625	;  	 GPA_Curve_FR.openToGT.s[3].fx 	:=	135.0	;  
+GPA_Curve_FR.openToGT.s[4].x 	:=	18.750	;  	 GPA_Curve_FR.openToGT.s[4].fx 	:=	180.0	;  
+GPA_Curve_FR.openToGT.s[5].x 	:=	21.875	;  	 GPA_Curve_FR.openToGT.s[5].fx 	:=	241.0	;  
+GPA_Curve_FR.openToGT.s[6].x 	:=	25.0	;  	 GPA_Curve_FR.openToGT.s[6].fx 	:=	332.0	;  
+GPA_Curve_FR.openToGT.s[7].x 	:=	28.125	;  	 GPA_Curve_FR.openToGT.s[7].fx 	:=	425.0	;  
+GPA_Curve_FR.openToGT.s[8].x 	:=	37.50	;  	 GPA_Curve_FR.openToGT.s[8].fx 	:=	778.0	;  
+GPA_Curve_FR.openToGT.s[9].x 	:=	50.0	;  	 GPA_Curve_FR.openToGT.s[9].fx 	:=	1356.0	;  
+GPA_Curve_FR.openToGT.s[10].x 	:=	62.50	;  	 GPA_Curve_FR.openToGT.s[10].fx 	:=	1866.0	;  
+GPA_Curve_FR.openToGT.s[11].x 	:=	75.0	;  	 GPA_Curve_FR.openToGT.s[11].fx 	:=	2189.0	;  
+GPA_Curve_FR.openToGT.s[12].x 	:=	87.50	;  	 GPA_Curve_FR.openToGT.s[12].fx 	:=	2360.0	;  
+GPA_Curve_FR.openToGT.s[13].x 	:=	100.0	;  	 GPA_Curve_FR.openToGT.s[13].fx 	:=	2497.0	;  
+// Программа огр. Т газа за турбиной от Т воздуха на входе ГТД;
+GPA_Curve_FR.TinToTmax.N := 6;								
+GPA_Curve_FR.TairToNvd.s[0].x	:=	15.0	;  	GPA_Curve_FR.TairToNvd.s[0].fx	:=	14013.0	;  
+GPA_Curve_FR.TairToNvd.s[1].x	:=	30.0	;  	GPA_Curve_FR.TairToNvd.s[1].fx	:=	14431.0	;  
+ // Ограничение макс. оборотов ротора ТВД от температуры наружного воздуха;
+GPA_Curve_FR.TairToNvd.N := 2; 							
+GPA_Curve_FR.TinToTmax.s[0].x	:=	-45.0	;  	GPA_Curve_FR.TinToTmax.s[0].fx	:=	559.0	;  
+GPA_Curve_FR.TinToTmax.s[1].x	:=	-23.0	;  	GPA_Curve_FR.TinToTmax.s[1].fx	:=	559.0	;  
+GPA_Curve_FR.TinToTmax.s[2].x	:=	-4.0	;  	GPA_Curve_FR.TinToTmax.s[2].fx	:=	611.0	;  
+GPA_Curve_FR.TinToTmax.s[3].x	:=	15.0	;  	GPA_Curve_FR.TinToTmax.s[3].fx	:=	611.0	;  
+GPA_Curve_FR.TinToTmax.s[4].x	:=	30.0	;  	GPA_Curve_FR.TinToTmax.s[4].fx	:=	649.0	;  
+GPA_Curve_FR.TinToTmax.s[5].x	:=	45.0	;  	GPA_Curve_FR.TinToTmax.s[5].fx	:=	649.0	;  
+
+GPA_Curve_FR.GTtoOpen.N := 14;
+end_if;
+
+// Обратная зависимость расхода топлива от степени открытия ТРК;
+GPA_Curve_FR.GTtoOpen.s[0].x  := GPA_Curve_FR.openToGT.s[0].fx ; GPA_Curve_FR.GTtoOpen.s[0].fx  := GPA_Curve_FR.openToGT.s[0].x ;
+GPA_Curve_FR.GTtoOpen.s[1].x  := GPA_Curve_FR.openToGT.s[1].fx ; GPA_Curve_FR.GTtoOpen.s[1].fx  := GPA_Curve_FR.openToGT.s[1].x ;
+GPA_Curve_FR.GTtoOpen.s[2].x  := GPA_Curve_FR.openToGT.s[2].fx ; GPA_Curve_FR.GTtoOpen.s[2].fx  := GPA_Curve_FR.openToGT.s[2].x ;
+GPA_Curve_FR.GTtoOpen.s[3].x  := GPA_Curve_FR.openToGT.s[3].fx ; GPA_Curve_FR.GTtoOpen.s[3].fx  := GPA_Curve_FR.openToGT.s[3].x ;
+GPA_Curve_FR.GTtoOpen.s[4].x  := GPA_Curve_FR.openToGT.s[4].fx ; GPA_Curve_FR.GTtoOpen.s[4].fx  := GPA_Curve_FR.openToGT.s[4].x ;
+GPA_Curve_FR.GTtoOpen.s[5].x  := GPA_Curve_FR.openToGT.s[5].fx ; GPA_Curve_FR.GTtoOpen.s[5].fx  := GPA_Curve_FR.openToGT.s[5].x ;
+GPA_Curve_FR.GTtoOpen.s[6].x  := GPA_Curve_FR.openToGT.s[6].fx ; GPA_Curve_FR.GTtoOpen.s[6].fx  := GPA_Curve_FR.openToGT.s[6].x ;
+GPA_Curve_FR.GTtoOpen.s[7].x  := GPA_Curve_FR.openToGT.s[7].fx ; GPA_Curve_FR.GTtoOpen.s[7].fx  := GPA_Curve_FR.openToGT.s[7].x ;
+GPA_Curve_FR.GTtoOpen.s[8].x  := GPA_Curve_FR.openToGT.s[8].fx ; GPA_Curve_FR.GTtoOpen.s[8].fx  := GPA_Curve_FR.openToGT.s[8].x ;
+GPA_Curve_FR.GTtoOpen.s[9].x  := GPA_Curve_FR.openToGT.s[9].fx ; GPA_Curve_FR.GTtoOpen.s[9].fx  := GPA_Curve_FR.openToGT.s[9].x ;
+GPA_Curve_FR.GTtoOpen.s[10].x := GPA_Curve_FR.openToGT.s[10].fx; GPA_Curve_FR.GTtoOpen.s[10].fx := GPA_Curve_FR.openToGT.s[10].x;
+GPA_Curve_FR.GTtoOpen.s[11].x := GPA_Curve_FR.openToGT.s[11].fx; GPA_Curve_FR.GTtoOpen.s[11].fx := GPA_Curve_FR.openToGT.s[11].x;
+GPA_Curve_FR.GTtoOpen.s[12].x := GPA_Curve_FR.openToGT.s[12].fx; GPA_Curve_FR.GTtoOpen.s[12].fx := GPA_Curve_FR.openToGT.s[12].x;
+GPA_Curve_FR.GTtoOpen.s[13].x := GPA_Curve_FR.openToGT.s[13].fx; GPA_Curve_FR.GTtoOpen.s[13].fx := GPA_Curve_FR.openToGT.s[13].x;
+
+init := true;]]></ST>
+    <DataTypes />
+</Program>

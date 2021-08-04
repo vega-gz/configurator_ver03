@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Driver.KM04 v. 1.0 >
+<Configuration>
+	<Bus ConfigUpdatePeriod="3000000" CyclePeriod="100000" RetryCount="20">
+		<Device Address="1" DeviceId="16640" PCIBusNum="9" PCIDeviceNum="10" VendorId="4466">
+			<Slot Address="1" ModuleType="4177"/>
+			<Slot Address="5" ModuleType="4177"/>
+		</Device>
+		<Device Address="2" DeviceId="16640" PCIBusNum="9" PCIDeviceNum="11" VendorId="4466">
+			<Slot Address="1" ModuleType="4177"/>
+			<Slot Address="5" ModuleType="4177"/>
+		</Device>
+		<Device Address="3" DeviceId="16640" PCIBusNum="9" PCIDeviceNum="12" VendorId="4466">
+			<Slot Address="1" ModuleType="4177"/>
+			<Slot Address="5" ModuleType="4177"/>
+		</Device>
+		<Device Address="4" DeviceId="16640" PCIBusNum="9" PCIDeviceNum="14" VendorId="4466">
+			<Slot Address="1" ModuleType="4146"/>
+		</Device>
+		<Device Address="5" DeviceId="16640" PCIBusNum="10" PCIDeviceNum="10" VendorId="4466">
+			<Slot Address="1" ModuleType="98116"/>
+			<Slot Address="2" ModuleType="98116"/>
+			<Slot Address="3" ModuleType="98116"/>
+			<Slot Address="4" ModuleType="98116"/>
+			<Slot Address="5" ModuleType="98116"/>
+			<Slot Address="6" ModuleType="98116"/>
+			<Slot Address="7" ModuleType="98116"/>
+			<Slot Address="8" ModuleType="98116"/>
+		</Device>
+		<Device Address="6" DeviceId="16640" PCIBusNum="10" PCIDeviceNum="9" VendorId="4466">
+			<Slot Address="1" ModuleType="98116"/>
+			<Slot Address="2" ModuleType="98116"/>
+			<Slot Address="3" ModuleType="98116"/>
+			<Slot Address="4" ModuleType="98116"/>
+			<Slot Address="5" ModuleType="98116"/>
+			<Slot Address="6" ModuleType="98116"/>
+			<Slot Address="7" ModuleType="98116"/>
+			<Slot Address="8" ModuleType="98116"/>
+		</Device>
+		<Device Address="7" DeviceId="16640" PCIBusNum="10" PCIDeviceNum="11" VendorId="4466">
+			<Slot Address="1" ModuleType="98116"/>
+			<Slot Address="2" ModuleType="98116"/>
+			<Slot Address="3" ModuleType="98116"/>
+			<Slot Address="4" ModuleType="98116"/>
+			<Slot Address="5" ModuleType="98116"/>
+			<Slot Address="6" ModuleType="98116"/>
+			<Slot Address="7" ModuleType="98116"/>
+			<Slot Address="8" ModuleType="98116"/>
+		</Device>
+		<Device Address="8" DeviceId="16640" PCIBusNum="10" PCIDeviceNum="12" VendorId="4466">
+			<Slot Address="1" ModuleType="98116"/>
+			<Slot Address="2" ModuleType="98116"/>
+			<Slot Address="3" ModuleType="98116"/>
+			<Slot Address="4" ModuleType="98116"/>
+			<Slot Address="5" ModuleType="98116"/>
+			<Slot Address="6" ModuleType="98116"/>
+			<Slot Address="7" ModuleType="98116"/>
+			<Slot Address="8" ModuleType="98116"/>
+		</Device>
+		<Device Address="9" DeviceId="16640" PCIBusNum="10" PCIDeviceNum="13" VendorId="4466">
+			<Slot Address="1" ModuleType="98116"/>
+			<Slot Address="2" ModuleType="98116"/>
+			<Slot Address="3" ModuleType="98116"/>
+			<Slot Address="4" ModuleType="98116"/>
+			<Slot Address="5" ModuleType="98116"/>
+			<Slot Address="6" ModuleType="98116"/>
+			<Slot Address="7" ModuleType="98116"/>
+			<Slot Address="8" ModuleType="98116"/>
+		</Device>
+		<Device Address="10" DeviceId="16640" PCIBusNum="9" PCIDeviceNum="15" VendorId="4466">
+			<Slot Address="1" ModuleType="98111"/>
+			<Slot Address="2" ModuleType="98111"/>
+			<Slot Address="3" ModuleType="98111"/>
+			<Slot Address="4" ModuleType="98111"/>
+			<Slot Address="5" ModuleType="98111"/>
+			<Slot Address="6" ModuleType="98111"/>
+			<Slot Address="7" ModuleType="98111"/>
+			<Slot Address="8" ModuleType="98111"/>
+		</Device>
+		<Device Address="11" DeviceId="16640" PCIBusNum="10" PCIDeviceNum="14" VendorId="4466">
+			<Slot Address="1" ModuleType="98155"/>
+			<Slot Address="2" ModuleType="98155"/>
+		</Device>
+		<Device Address="12" DeviceId="16640" PCIBusNum="10" PCIDeviceNum="15" VendorId="4466">
+			<Slot Address="1" ModuleType="98155"/>
+			<Slot Address="2" ModuleType="98155"/>
+		</Device>
+	</Bus>
+	<Crossconnect>
+		<Connection Channel="status" Comment="info" Device="1" ItemName="GPA_DIAG_KM.A1_1" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.WWF2ZHHSLMIUBLJESRBQW37CI4"/>
+		<Connection Channel="status" Comment="info" Device="2" ItemName="GPA_DIAG_KM.A1_2" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.MIDXSPFZ3E6UNLH7LANBUD7LCE"/>
+		<Connection Channel="status" Comment="info" Device="3" ItemName="GPA_DIAG_KM.A1_3" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.YZBVEFXYVKOUBLTGILEXCMKFEI"/>
+		<Connection Channel="status" Comment="info" Device="4" ItemName="GPA_DIAG_KM.A1_4" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.G2MB35LSSUUU3LYM7RZ5RRMBLI"/>
+		<Connection Channel="status" Comment="info" Device="5" ItemName="GPA_DIAG_KM.A1_5" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.IZAE6OJU5V2UZLMJRGER4M5GMU"/>
+		<Connection Channel="status" Comment="info" Device="6" ItemName="GPA_DIAG_KM.A1_6" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.KY5U6QLFKVQEBJTQBAHKXNEWZ4"/>
+		<Connection Channel="status" Comment="info" Device="7" ItemName="GPA_DIAG_KM.A1_7" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.74S27E7NIKTEPHG53GR4C44OJI"/>
+		<Connection Channel="status" Comment="info" Device="8" ItemName="GPA_DIAG_KM.A1_8" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.JMA2DZX6ABIE7DF42MEPPE6DCA"/>
+		<Connection Channel="status" Comment="info" Device="9" ItemName="GPA_DIAG_KM.A1_9" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.3IXYYJI5STZEHPVT2J4WBBE3AE"/>
+		<Connection Channel="status" Comment="info" Device="10" ItemName="GPA_DIAG_KM.A1_10" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.REFNZQEQGDQERBXS4HFY6CP57Q"/>
+		<Connection Channel="status" Comment="info" Device="11" ItemName="GPA_DIAG_KM.A1_11" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.AMMOHW4TTRTEJEGNNLVX3SWTGI"/>
+		<Connection Channel="status" Comment="info" Device="12" ItemName="GPA_DIAG_KM.A1_12" Slot="info" UUID="ZX3LTYHOTP2ERFTQQMX7YXHK2M.VLIS73J7KUKU7LAEM3HFE4R2FY"/>
+		<Connection Channel="1" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr3_ON" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.E73277C05C424ADE903F341BD984EAB0"/>
+		<Connection Channel="2" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr3_OF" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.B6603141846B46039174EA05654EA069"/>
+		<Connection Channel="3" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Lock_VNA" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.7BC496C648C14E66AD63C3A4AD7EDAAD"/>
+		<Connection Channel="4" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Vlagomer_ON" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.C1B473D04F4D4EB1A393244140651FD9"/>
+		<Connection Channel="5" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.TEN_Vlagomer_ON" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.AA7E805CF47646E59B43080678C0E372"/>
+		<Connection Channel="6" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr1_ON" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.C7E2FDCADE524AF3AE191E512EB78EFD"/>
+		<Connection Channel="7" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr1_OF" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.708EF0A4F56F475FA454CEBA15EBF814"/>
+		<Connection Channel="8" Comment="1: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr2_ON" Slot="1" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.5F85A9134A5B4736B9A47BE674A6D87B"/>
+		<Connection Channel="1" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr2_OF" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.7987B5CDDD6D455593913AB5E84CAC48"/>
+		<Connection Channel="2" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr4_ON" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.A62C9AB970DF4A8AA7380E5CBF26585B"/>
+		<Connection Channel="3" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr4_OF" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.DB5D1E00F34D418CB6558BE87A204420"/>
+		<Connection Channel="4" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr5_ON" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.17A1B7AA11D348ADB64449DA6B6F9A66"/>
+		<Connection Channel="5" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr5_OF" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.A657B5B0FADC43E1B1D137DA7C639019"/>
+		<Connection Channel="6" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Reg_C1_N_OF" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.B536C568DF5742F9B4A97E6ADE4F0031"/>
+		<Connection Channel="7" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Reg_C2_N_OF" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.D5FE6ECB129F410FB21DAD2732E81980"/>
+		<Connection Channel="8" Comment="2: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Reg_C3_N_OF" Slot="2" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.01925D8C24B54EA78F31176C2E82F978"/>
+		<Connection Channel="1" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Reg_C4_N_OF" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.A20A0D440B214874A3734F1E45D0BE3C"/>
+		<Connection Channel="2" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Reg_C5_N_OF" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.551D2DD794ED49E88DF268404791C2D6"/>
+		<Connection Channel="3" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Reg_C6_N_OF" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.115DCE82CADC4AA3ADFE4249D35A0224"/>
+		<Connection Channel="4" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Unlock_ES" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.62389A91DA464304B54B3751A71969BE"/>
+		<Connection Channel="5" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.ES_ON" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.80B26D415717427FAA36E17E429A2BFC"/>
+		<Connection Channel="6" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.SK_ON" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.4BC447E60D454D39B9192100DBB5FDE3"/>
+		<Connection Channel="7" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.POK_ON" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.61888267B4A04E5DAE716C0D1050D938"/>
+		<Connection Channel="8" Comment="3: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.SPV_ON" Slot="3" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.75D59CA1CF324906ADD2D9EC3C6D442E"/>
+		<Connection Channel="1" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.ZsPV_ON" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.52BA58988EB54695A61943692A1F3756"/>
+		<Connection Channel="2" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KLR1_ON" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.9B2B52B09913456EA2B57E9F70FFB337"/>
+		<Connection Channel="3" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KLR1_OF" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.5C6F73FD54AF4E989065538DDA0DB66C"/>
+		<Connection Channel="4" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KLR2_ON" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.4E68CC0369364072A4562AB98A1DF424"/>
+		<Connection Channel="5" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KLR2_OF" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.75111D88BD284BF8A307A236A5AF6B8B"/>
+		<Connection Channel="6" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kl_PE_ON" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.902C0815B21C4C649A9046323FC631F4"/>
+		<Connection Channel="7" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE1_BFTG_ON" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.D7DE072FDFBF440CB2220EB568120F12"/>
+		<Connection Channel="8" Comment="4: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE2_BFTG_OF" Slot="4" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.36950123DA38448B8F7702E11CEFA2BE"/>
+		<Connection Channel="1" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KLR1_D" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.4F4A40EB4CE140399D3AC8CF62398DC6"/>
+		<Connection Channel="2" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr6_OF" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.9E37D7B645854EFDB1F98E2B74AC3507"/>
+		<Connection Channel="3" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr6_ON" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.F8271E8CEED44D28BA7EA4A83C630B87"/>
+		<Connection Channel="4" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr9_OF" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.96C061C1A54A4A0EB8E67ABE12DDD955"/>
+		<Connection Channel="5" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr9_ON" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.1CDB47D9551047B1AA1AE3B3430B82C1"/>
+		<Connection Channel="6" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr12_OF" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.955916A0EBF143169CB69F926C57F613"/>
+		<Connection Channel="7" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Kr12_ON" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.B7F030D7CDA74B7DA4CFA3BD4301EC2C"/>
+		<Connection Channel="8" Comment="5: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE5_OF" Slot="5" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.D87FB78A7FE24E73BF0047FBEA60AEEE"/>
+		<Connection Channel="1" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE5_Stop" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.A5AF6BD84A454CFA9C1B5FA8F2A9AD8D"/>
+		<Connection Channel="2" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE5_av" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.F605B81F60DC44BBA1BCE096256C01B0"/>
+		<Connection Channel="3" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_4" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.FF778FA7ED0E4040B21D7F808752BE61"/>
+		<Connection Channel="4" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_5" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.58386F8735F140029DA35038F38B5C66"/>
+		<Connection Channel="5" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_6" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.A0F8EFD918974878A2F385614F2BC23C"/>
+		<Connection Channel="6" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_7" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.66C01F9BEE384CF6BFE30C6D421B78B3"/>
+		<Connection Channel="7" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_8" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.E63FD89AE29E402687FF4E4B7E3A0608"/>
+		<Connection Channel="8" Comment="6: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_9" Slot="6" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.E4930395AD24439E9940BC4C2F4BE0C6"/>
+		<Connection Channel="1" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.U_SPV_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.A61692C7D3924C15892DEC9BE7F4B780"/>
+		<Connection Channel="2" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.PNSD_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.471AF91AE4124D14A25C4312BF60D942"/>
+		<Connection Channel="3" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.PNSR_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.2811598850F84A878E4861D60B034D0A"/>
+		<Connection Channel="4" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.PNSN_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.039D5DEBF75D464AA8AD3577DEAA7CA5"/>
+		<Connection Channel="5" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE3_1_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.8F30FD1B794E43319C2855B5C6CFE27A"/>
+		<Connection Channel="6" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE3_2_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.AA0265C37C964E538735754E519D773C"/>
+		<Connection Channel="7" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE3_3_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.4432ACD38009465AB3EF7D603C4D5AB5"/>
+		<Connection Channel="8" Comment="7: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KE5_ON" Slot="7" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.4AA12ADDAAA94FDD8CAE0AE341634114"/>
+		<Connection Channel="1" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KLE5_ON" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.69D12730316147DDA55AFFAC678EAB7F"/>
+		<Connection Channel="2" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_11" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.D66036C95AC74621AD9E0EDFEC6E7D2E"/>
+		<Connection Channel="3" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_12" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.4289421CCCD343A79F7FCF9BC9CF0E3F"/>
+		<Connection Channel="4" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_13" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.85ACA3A5BDC94061BCF9A90BF6E8B068"/>
+		<Connection Channel="5" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.Res_14" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.94B7B06EB9EF4142BC5B6BCCBE6AD281"/>
+		<Connection Channel="6" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.KLR2_D" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.2C64128FF080468B9B10D4AC596A3C8F"/>
+		<Connection Channel="7" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.VNA_Permit" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.F2CC18AC54C34CBBBC5EBC9D7B7021A3"/>
+		<Connection Channel="8" Comment="8: 8-ch (1 slots) DO: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="10" ItemName="GPA_DO_DRV.PLC_ok" Slot="8" UUID="UVNP5GPSVEQUDHODO3RQMOJTYQ.0F13CCAB2CDB4231A3A868D56BE6F59D"/>
+		
+		
+		<Connection Channel="1" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_VNA" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.F0B731663A604F99AE519AF42902DA4C"/>
+		<Connection Channel="2" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_N_ES" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.5107D5E06C6642BB8D02C83FCF7B0BF6"/>
+		<Connection Channel="3" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_TRK" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.145912C65FB24FE89F599FB6D22421A2"/>
+		<Connection Channel="4" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Kr6r" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.8C8E81520ABD4A9D9589FB02C9B38381"/>
+		<Connection Channel="5" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn1_MON" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.23802A4379444DC7BBA78F7663ED7E6E"/>
+		<Connection Channel="6" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn2_MON" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.95A4946B8CBA4A549A286DD6F69C7F95"/>
+		<Connection Channel="7" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn1_MOD" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.7DDFDAFE77294DD7B8E914EC6D408C13"/>
+		<Connection Channel="8" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn2_MOD" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.9EDC055E412A49E79C6BF6C7DB04BD6B"/>
+		<Connection Channel="9" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.N_ST_ext" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.AE1C1B0A68B14156989F5BF518EF1690"/>
+		<Connection Channel="10" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_KLR1" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.85EB388D0D1C49DB93B856065868C2B9"/>
+		<Connection Channel="11" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_KLR2" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.29BC2777C4964072AD439335A6854654"/>
+		<Connection Channel="12" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn1_MOR" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.C7E430138A9743CE8287B529C3DF0DFA"/>
+		<Connection Channel="13" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn2_MOR" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.121EE252BBB04C779D90A7444766793C"/>
+		<Connection Channel="14" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn3_MOR" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.B952375854744AAEBCDC6301853FE562"/>
+		<Connection Channel="15" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Set_Vn4_MOR" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.4B2ACCAD680F4622A404012ADAF5FF72"/>
+		<Connection Channel="16" Comment="1: 16-ch (2 slots) AO: 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V, 0..10 V" Device="4" ItemName="GPA_AO_DRV.Res_2" Slot="1" UUID="OWRNOFYSSJ3EDOYBNWTS3OSBPM.8DC37BA7AB6943F699580B36FA2D045D"/>
+		<Connection Channel="1" Comment="1: 2-ch (1 slots) AI: 0..429497 Hz, 0..429497 Hz" Device="11" ItemName="GPA_FR_AI_DRV.Nvd1" Slot="1" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.C43D92F7E15F4B1EAC0526A0DCD87E6C"/>
+		<Connection Channel="2" Comment="1: 2-ch (1 slots) AI: 0..429497 Hz, 0..429497 Hz" Device="11" ItemName="GPA_FR_AI_DRV.Nvd2" Slot="1" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.BFD6B84FBCCE4D83A3828782ED796431"/>
+		<Connection Channel="1" Comment="2: 2-ch (1 slots) AI: 0..429497 Hz, 0..429497 Hz" Device="11" ItemName="GPA_FR_AI_DRV.Nst1" Slot="2" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.0A3FBE049C4446FF8B1DD0EA7BF9D4B9"/>
+		<Connection Channel="2" Comment="2: 2-ch (1 slots) AI: 0..429497 Hz, 0..429497 Hz" Device="11" ItemName="GPA_FR_AI_DRV.Nst2" Slot="2" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.894D0970D4064AF8A70BFF63BC33557C"/>
+		<Connection Channel="27" Comment="1: 32-ch (4 slots) AI: -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V" Device="1" ItemName="GPA_FR_AI_DRV.T1_outGG" Slot="1" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.2XSFD7NYDZFGFOPMHHAEYBUCGU"/>
+		<Connection Channel="28" Comment="1: 32-ch (4 slots) AI: -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V" Device="1" ItemName="GPA_FR_AI_DRV.T2_outGG" Slot="1" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.IEDIINYWMJCT7MNQVWU4KB2OVU"/>
+		<Connection Channel="16" Comment="1: 32-ch (4 slots) AI: -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V" Device="2" ItemName="GPA_FR_AI_DRV.Pos1_TRK" Slot="1" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.HEBKP34PHBFVLP5AP4M2OTTQQY"/>
+		<Connection Channel="1" Comment="5: 32-ch (4 slots) AI: -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V" Device="2" ItemName="GPA_FR_AI_DRV.Pv_outTK" Slot="5" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.FRYXRCZ7ZBB5TF2WQVFKG65Z3Y"/>
+		<Connection Channel="14" Comment="1: 32-ch (4 slots) AI: -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V" Device="2" ItemName="GPA_FR_AI_DRV.Pos_VNA" Slot="1" UUID="GEGCUJQ3JALU7GUP5BMVSXKMY4.HJJHOJY45JBOLADSUUPHJLER3Q"/>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<Connection Channel="26" Comment="1: 32-ch (4 slots) AI: -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V" Device="3" ItemName="GPA_AI_DRV.F_Starter" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.ED22C25AC5ED49FBAD7469A2FC6931E4"/>
+		
+		<Connection Channel="28" Comment="1: 32-ch (4 slots) AI: -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V, -10..10 V" Device="3" ItemName="GPA_AI_DRV.Res_31" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.32D84D8F853D43E69BAB84C3CF1FE4DA"/>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<Connection Channel="1" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.BK_OF" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.1C37547BBCEC4902BFCB33FC63C70BDD"/>
+		<Connection Channel="2" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Dver1_VOU_Close" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D4564B3396414BB6BF0881C9DD08F438"/>
+		<Connection Channel="3" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Dver2_VOU_Close" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.EE9363A01E804C3E96517446E18AD272"/>
+		<Connection Channel="4" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Dver_VZK_Close" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F266411F268C476BAACA3B3B9B915D52"/>
+		<Connection Channel="5" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_222" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.56C19BB3D48A486399B5661D1C0C7915"/>
+		<Connection Channel="6" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_223" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F52742EB3A3F437EBB7083768395742F"/>
+		<Connection Channel="7" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr1_ON" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.EA44B303BE8643DD898F561FAEAF45E4"/>
+		<Connection Channel="8" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr1_OF" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.49C1C0D1D38A4995831B5BB79BD11A98"/>
+		<Connection Channel="1" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr2_ON" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C00B28E3A69B45FDA9631AC6D7CBFD8E"/>
+		<Connection Channel="2" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr2_OF" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.AFD358C676984A99B0EAAFCC18B5F84A"/>
+		<Connection Channel="3" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_0" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.DD773017643E4D33A9992F51961516D7"/>
+		<Connection Channel="4" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_1" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F1FDD8D9244B4D519F1B63FB3581945E"/>
+		<Connection Channel="5" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr4_ON" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.03BF497E27DF4B799C2C7FDE7B04BB18"/>
+		<Connection Channel="6" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr4_OF" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.B392BC5E62AC43D7901C034CAD2B8F41"/>
+		<Connection Channel="7" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr5_ON" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.DB6AD1C99C834D50A7027C48A8B67E5C"/>
+		<Connection Channel="8" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Kr5_OF" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.39946C6F0DDC4B3FBDA3127443060E6C"/>
+		<Connection Channel="1" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_2" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5C59307503B14819BCD2018CDE7F1922"/>
+		<Connection Channel="2" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_3" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.2E0EFD69FBFE46658798780602F120D7"/>
+		<Connection Channel="3" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.dPm_F_N" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A47E95DF931E4BC5B731FA009FAF7ECA"/>
+		<Connection Channel="4" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.dPm_F_Lub" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.28263450146D45AB909DECF5A25DCBB7"/>
+		<Connection Channel="5" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Lm_Nkar_dAn" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.28AD0B5606F5430CAA93274B8CA1E3BD"/>
+		<Connection Channel="6" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Lm_Nkar_an_KCD" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.AB5907742B4F41E7B5C639336FA3B21E"/>
+		<Connection Channel="7" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Lm_Nkar_dPn" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C3C0A0617F944F0AAEDE99B3EF9072EB"/>
+		<Connection Channel="8" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Lm_Nkar_pn_KCD" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.625683EAAC9C4C99BDE435DE81FA5EDA"/>
+		<Connection Channel="1" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Qm_Lub1" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.41501CD678664092AFD0BE1779FCE891"/>
+		<Connection Channel="2" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Qm_Lub1_KCD" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.AA97AE64B56F46ACA024CB6289DA7BFA"/>
+		<Connection Channel="3" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Qm_Lub2" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.1C3DC0B64D6D4041B4492C53576C5EB1"/>
+		<Connection Channel="4" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Qm_Lub2_KCD" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.FAE8DB675A6A49D5BD0F55AF546C3C52"/>
+		<Connection Channel="5" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_5" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F1B285B5DC6C4C27B46DF969EAEDD197"/>
+		<Connection Channel="6" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_KCD_6" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.DEFAEE7306AA45448EBBAC81BBCE5ED3"/>
+		<Connection Channel="7" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_7" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.408D15DEAA234968A57FFA2544C867A7"/>
+		<Connection Channel="8" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_KCD_8" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.52C24A3686D347838BE652163793976F"/>
+		<Connection Channel="1" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_9" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CFAF1A05B73E4E1493906AE2E8BA8FEB"/>
+		<Connection Channel="2" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_KCD_10" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.4F816D8369EF4725946D3E238BE43A29"/>
+		<Connection Channel="3" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_11" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9D5F3CE60160415A98AD5C2F3B09617D"/>
+		<Connection Channel="4" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_KCD_12" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6D743E132B6F4308A41DB1212C5FBC19"/>
+		<Connection Channel="5" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vs_N_av" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E06E36F1AD974E3485E977D866B77506"/>
+		<Connection Channel="6" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vs_N_av_KCD" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E626F707DF6E4C6E9F14AD2313DA0BEC"/>
+		<Connection Channel="7" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vp_SlowVal_av" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F20C9E74EE6D42E89BF0F9C5002737CB"/>
+		<Connection Channel="8" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vp_SlowVal_av_KCD" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.783BDC66A8C248BF982A8AD1E206DB20"/>
+		<Connection Channel="1" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vp_FastVal_av" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.8A084D24C89F47929183B0A8C86F43FF"/>
+		<Connection Channel="2" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vp_FastVal_av_KCD" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0FA4B12A8CD34474A415ACB16E9C040E"/>
+		<Connection Channel="3" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Os_Rdk_av" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.304ACF95BED54F87A43AC069E63EFA5F"/>
+		<Connection Channel="4" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Os_Rdk_av_KCD" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.752754B664EE46728389B8FF9713C42C"/>
+		<Connection Channel="5" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vs_N_v" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.70D8E1078EFE4865B885039D3C4EBB6D"/>
+		<Connection Channel="6" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vp_SlowVal_v" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.7CA2D83D1F544D959215FBEB4C57A5A3"/>
+		<Connection Channel="7" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Vp_FastVal_v" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E614842422854882B8365218B9CBCAD3"/>
+		<Connection Channel="8" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Os_Rdk_v" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5ECD8E4A94B84A498DDEFEBA73AC3AB7"/>
+		<Connection Channel="1" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.SKV_FLT" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C2D2696935A14B54995F134F43E010EB"/>
+		<Connection Channel="2" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Check_SKV" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0A4C2B918AD34B7AA09A465AA02588F8"/>
+		<Connection Channel="3" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_217" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.AD9B25FA54B04883953967ACB6631478"/>
+		<Connection Channel="4" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_218" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F4D7A5566FE9446A8913A924A95864AE"/>
+		<Connection Channel="5" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_219" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5323CC14502847D282094481EF96CFCB"/>
+		<Connection Channel="6" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_220" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.81F1DA95124A4B3693F500E7744047F4"/>
+		<Connection Channel="7" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_221" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.841FCDA007264918A80792C43ECDD059"/>
+		<Connection Channel="8" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_13" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.ECCE1BCACD5046C1A53649413F0A10E0"/>
+		<Connection Channel="1" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_14" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.FBDF65B6A8404FD18F6BF4ABAB9B952F"/>
+		<Connection Channel="2" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_201" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3BE76A5368864D3E8B9AC7D402BCDAEF"/>
+		<Connection Channel="3" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_202" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0A8026F49F3E48458430F219D6191B69"/>
+		<Connection Channel="4" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_203" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.33DA5FD87C6B44F88E530E0D271EDC24"/>
+		<Connection Channel="5" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_204" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.031B642C261349669328E2161794F638"/>
+		<Connection Channel="6" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_205" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A9FA4EE2ED0D435AAF5F8F52C432CB25"/>
+		<Connection Channel="7" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.Res_206" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.91B772684F77418988384179797B53A2"/>
+		<Connection Channel="8" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="5" ItemName="GPA_DI_DRV.KLR1_brk" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.486A6ED43ACF45C5B972FEB6C244E8F9"/>
+		<Connection Channel="1" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.KLR2_brk" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.163E6636BA594677A6F7AEF25FDF76E3"/>
+		<Connection Channel="2" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_207" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.565681C900F44E97BCC13336B98C3D7D"/>
+		<Connection Channel="3" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_208" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9D95CC083CA04AF8B575E7E142EA9D29"/>
+		<Connection Channel="4" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_209" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C9A7E9E38D1E4B948887FC0AA9CC2046"/>
+		<Connection Channel="5" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_200" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.DFBAE9D9CD0E4ECDBE158F871AB21A15"/>
+		<Connection Channel="6" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_20" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E95977CAA4014D229B2F10629842FE66"/>
+		<Connection Channel="7" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_21" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.AC3F1E9B7A8D4A0DAE61041A1D61D24A"/>
+		<Connection Channel="8" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.KLE5_ON" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.833E12A05A1747A08902EB9404388B5A"/>
+		<Connection Channel="1" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_33" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5213C275BA1143CE8314AA42B772C8D7"/>
+		<Connection Channel="2" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_33_KCD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.76053C4507324E59B3091135BEAB3740"/>
+		<Connection Channel="3" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBK_dAn" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.EB5BD51A24CC4D5BA851DFBE757BC6EA"/>
+		<Connection Channel="4" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBK_an_KCD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.43256A13B2594C1386043EF9503A14EB"/>
+		<Connection Channel="5" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.L_freeze_Bak_dAn" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.34429C441AFB404AA9A867B170DE08B3"/>
+		<Connection Channel="6" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.L_freeze_Bak_an_KCD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.039B17291E5745C1B5765D759F70FCCF"/>
+		<Connection Channel="7" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_16" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.63F0207CEB9E4E7198810939D59B565F"/>
+		<Connection Channel="8" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.dPm_F_Rdk_v" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.155813CF6098492F800E60DAC51CD7A0"/>
+		<Connection Channel="1" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBL_dAn" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.65BEA8429DD54ECEAB6D6B383D80B648"/>
+		<Connection Channel="2" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBL_an_KCD" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D8E8A999250A4A419B9AD705A2579FF7"/>
+		<Connection Channel="3" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBL_dav" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D1DA9F62BD1F446F83F93D40878C4A16"/>
+		<Connection Channel="4" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBL_av_KCD" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.88F890E056F14C46A2223F0413FEB8E1"/>
+		<Connection Channel="5" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBN_dAv" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A02916F8828A4C578BE225E9B89814F3"/>
+		<Connection Channel="6" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBN_av_KCD" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C3879A4E12AF42F5ABDEF90CA0825EE2"/>
+		<Connection Channel="7" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBR_dAv" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CFA61660BB9D4899A8497ADCD091F981"/>
+		<Connection Channel="8" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBR_av_KCD" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.58747DF67E994BE496701AA71F241FCC"/>
+		<Connection Channel="1" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Vs_GPA_av" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.404B71C663454B329D91BCCC4D91CC20"/>
+		<Connection Channel="2" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Vs_GPA_av_KCD" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.01D693DCB9B14309A57A22FF545343B1"/>
+		<Connection Channel="3" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_238" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.31B9D2F17B5F4D68A9727A8D887116B0"/>
+		<Connection Channel="4" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Vs_GPA_pv" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A406D4BD6AF14F13893C94DBBBE95BE9"/>
+		<Connection Channel="5" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Reg_Starter_ON" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.13589BC5EFD04BCDA25CD8ECE247C10C"/>
+		<Connection Channel="6" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Reg_Starter_Work" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F5209AD1480146AAB208ABBE4287CC84"/>
+		<Connection Channel="7" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.SK_OF" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.7001A598C3A046C28B50D6CC524B0544"/>
+		<Connection Channel="1" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Kr9_ON" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BF1BD0125D48480088105F52EB176E07"/>
+		<Connection Channel="8" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Kr9_OF" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.751ECDD87A5642C5A8CF1F67CF0E0E93"/>
+		<Connection Channel="3" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Kr12_ON" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6994BE23F3664BA1A5874BCD16C34E65"/>
+		<Connection Channel="2" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Kr12_OF" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.B0355FD4548946AA9157728CD1F2DAEB"/>
+		<Connection Channel="4" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_224" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.1420A8D32BDE4E97B0477FCF7283C543"/>
+		<Connection Channel="5" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.dPm_FTO_v" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.831944A6C22C4C9986DE6FEBCA9A2499"/>
+		<Connection Channel="6" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.dPm_FGO_v" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.629A791EBA544063AD51DE1A2507E6C5"/>
+		<Connection Channel="7" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Pm_inD_40v" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.43C65D370ED44584B8520E5781D3D1E6"/>
+		<Connection Channel="8" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Pm_inD_40v_KCD" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6B02FC45EB6E4318B722DA77A7C3E1C4"/>
+		<Connection Channel="1" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_234" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.7060B7C006C04F35B1AA6DD1D2FC8AD8"/>
+		<Connection Channel="2" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_235" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3D466D2D33954CFA8442642E0B662173"/>
+		<Connection Channel="3" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_236" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D11C3F0E7D6C45A584153CEC81E0110F"/>
+		<Connection Channel="4" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_237" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6D4D214C6929492BA28237C5376A7D51"/>
+		<Connection Channel="5" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_19" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.1571DC4C9AC648C68CCB1B19FD7F13C2"/>
+		<Connection Channel="6" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lk_E1_max" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.8027C5CB2E7E4684BEAB3EC6EAEF4D1E"/>
+		<Connection Channel="7" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lk_E2_max" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.7180D2BCA564410B8E38EE09461B867A"/>
+		<Connection Channel="8" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.U_SPV_ON" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CD61A67A60604B10B153B9567C33C6A7"/>
+		<Connection Channel="1" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.No_upr_VNA" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.493B4AD12C194F9399961E64E6D98691"/>
+		<Connection Channel="2" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.VNA_FLT" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.01BCDEB050DD446D88DD4894C28D4B5A"/>
+		<Connection Channel="3" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.KE5_OF" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.4D93D1034ED84C838BB567B5AFE7BA2A"/>
+		<Connection Channel="4" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.KE5_brk" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.360A9446DF284B93A77B76A91ECAD535"/>
+		<Connection Channel="5" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.KE5_Rdy" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.DCFCD4F08AB44A99B677AF1954E0D9B3"/>
+		<Connection Channel="6" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.KE5_mom" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.02058C6675224E51969D8B7A5D7C919F"/>
+		<Connection Channel="7" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.KE5_MU" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E013802C47A14268A68E15EBCF341F56"/>
+		<Connection Channel="8" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_25" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D163FF58258E4D25AE33944646DDB6B8"/>
+		<Connection Channel="1" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBD_dAn" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.36DC319C85504AA88653406948D2051F"/>
+		<Connection Channel="2" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Lm_MBD_an_KCD" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9C243AEF038C411D92E425794F17F93E"/>
+		<Connection Channel="3" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.AO_Shop" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.EBDF22B2F80C4B57AD9B65D8FAB417C1"/>
+		<Connection Channel="4" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.AO_Shop_KCD" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CE101EFD21C84EE38A9787C5B363866F"/>
+		<Connection Channel="5" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Fire_inOD" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C04D7455DF334C918044B51CD24BC65D"/>
+		<Connection Channel="6" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Fire_inOD_KCD" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.2F10B63135594D25A87D78A787D844A7"/>
+		<Connection Channel="7" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Res_227" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.FA979330FFA94AE18ABFEA78A8F9BDD4"/>
+		<Connection Channel="8" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="6" ItemName="GPA_DI_DRV.Dver_OD_Open" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.7A66009AF41448A5AFCB9FB161FA46B9"/>
+		<Connection Channel="1" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Fire_inUkr" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F40039A1B97E47C4926BA6365AD494C3"/>
+		<Connection Channel="2" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Fire_inUkr_KCD" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C21522EF8C2248EC84072ADE3A7F365C"/>
+		<Connection Channel="3" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Fire_inETO" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.62A82CDAD1FE48E5993B6EA696769291"/>
+		<Connection Channel="4" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Fire_inETO_KCD" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CEC519AC04414D12ACEEC72968350FD3"/>
+		<Connection Channel="5" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Res_228" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.1D2AF5E6E3A84EA6A12372144EC2E5C4"/>
+		<Connection Channel="6" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Gas10_ON" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6C0CAF3D614A40B39A3E7D2596DC9E41"/>
+		<Connection Channel="7" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Gas20_ON" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6762AF33BCFF483BBC036116BCC92EF8"/>
+		<Connection Channel="8" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Gas20_ON_KCD" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C3E1A53E735843C2B06A2CA9FAA3B93A"/>
+		<Connection Channel="1" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Gas10_OD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C43806503762451D8F150C04144F1E0D"/>
+		<Connection Channel="2" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.ASPS_ok" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.11A97F1BF1A146399E0FFA11714F2E0A"/>
+		<Connection Channel="3" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Gas20_OD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F8A8C2DB33F24E09A9CA612D6308BCFD"/>
+		<Connection Channel="4" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Gas20_OD_KCD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.EE54D8A40E504C9F868FF2FFE19B60C3"/>
+		<Connection Channel="5" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS1_G1_max" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.B9FBBD95099E4060B894CC1DB1708BE3"/>
+		<Connection Channel="6" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS1_G1_min" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0F3DA75D76D240E3AC9F4633DC499151"/>
+		<Connection Channel="7" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS1_G2_max" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BB98FD8068D049D2AA3F81341C9EECE4"/>
+		<Connection Channel="8" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS1_G2_min" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BC9A4DCF5E5146738240FEF1293B609A"/>
+		<Connection Channel="1" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS2_G1_max" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5777E416B1E54D01B559EB6CF6F01F89"/>
+		<Connection Channel="2" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS2_G1_min" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.95C80836B9104FE2AC5C225D3840DF2A"/>
+		<Connection Channel="3" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS3_G1_max" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.141E69166EEB4FCCBD6AC07FBC033832"/>
+		<Connection Channel="4" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS3_G1_min" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.89D851425225483F8AE6507B3AB943FB"/>
+		<Connection Channel="5" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS3_G2_max" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A4747AB1BB3D4ED9829099CE15A77B42"/>
+		<Connection Channel="6" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lk_FS3_G2_min" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.46B23CE37F6D4896B7F747F21054C28C"/>
+		<Connection Channel="7" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KE3_1_ON" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A889861D39884206A249711A8DD912EE"/>
+		<Connection Channel="8" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KE3_2_ON" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.38FA337E44DE40C69BF7EF441785C30C"/>
+		<Connection Channel="1" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KE3_3_ON" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9D824C01332040B4BB1AA546AAC4A0CB"/>
+		<Connection Channel="2" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KE5_ON" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D184570CCFA243A58EAD732625E8636E"/>
+		<Connection Channel="3" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lm_MBR_dAn" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.42A957977FB948318FF664CF9D4A325D"/>
+		<Connection Channel="4" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lm_MBR_an_KCD" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.64D25E1079FD4A64BFAD36E9F318148C"/>
+		<Connection Channel="5" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lm_MBD_av" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E137F1222E9C45E2B216FA086E4A0DA1"/>
+		<Connection Channel="6" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Lm_MBD_av_KCD" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0FA6F5C8DE084ABEA14D098977162D10"/>
+		<Connection Channel="7" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.L_freeze_dAv" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BBFDF65ED23548DBA05C0539338D56B8"/>
+		<Connection Channel="8" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.L_freeze_dAv_KCD" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.8C1DEF84D8334E2C91EFE4A5F656460A"/>
+		<Connection Channel="1" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Res_28" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5E2013DA211142C6BC6B4F1AFFA92960"/>
+		<Connection Channel="2" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Res_29" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.DB781490296B4AFE958D69E5ECCC3555"/>
+		<Connection Channel="3" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Kr6_OF" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3C0DD5BB680242C1855953039DC148F6"/>
+		<Connection Channel="4" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Kr6_ON" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.38ADC805DCF94E5BB8F5EB70F4D0D5E1"/>
+		<Connection Channel="5" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KE1_BFTG_ON" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3F9B3472FB764C1FA10F027986ED3F93"/>
+		<Connection Channel="6" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KE2_BFTG_OF" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.353BF7A837B64D82BF0365779DEE2ED5"/>
+		<Connection Channel="7" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.AKZ_FLT" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C526F11431FB44E998BA55AD55724F7E"/>
+		<Connection Channel="8" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Kn_AO_ETO" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.81109462BFE543DD9F3D908F08C8EAB5"/>
+		<Connection Channel="1" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KLR6_ON" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.86E2E387DD244E8B9618651CFAEAB604"/>
+		<Connection Channel="2" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KLR6_OF" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BC20D7C6104543CDA333C0BBA884E4C9"/>
+		<Connection Channel="3" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KLR1_OF" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.AF4074286C5644E0A293A59258751EA3"/>
+		<Connection Channel="4" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KLR1_ON" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.585E098CE38A467EBE3423EAC4441592"/>
+		<Connection Channel="5" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KLR2_OF" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.29A97D19E2C8400680873DEBFAD63A5E"/>
+		<Connection Channel="6" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.KLR2_ON" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0CF6EDAE77FE482BAC25DADC85A2259C"/>
+		<Connection Channel="7" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Struj_PO_TK" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D1F757902BB8436E90B1AA68EB419873"/>
+		<Connection Channel="8" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Struj_ZO_TK" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0358CE572907485E9F7FF70B75300E68"/>
+		<Connection Channel="1" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Struj_ST" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.530DA5899A644768A1B4B135A8B4D6C9"/>
+		<Connection Channel="2" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.AB_Bad" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.87B2543BC73B42ADBA64273037E4D4AF"/>
+		<Connection Channel="3" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.El_Bypass_ON" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CCD7FCFF3F874319BF4A393147B16247"/>
+		<Connection Channel="4" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.El_Network_ON" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.B5C77399DD024FD6B9F971B4AC6BC76D"/>
+		<Connection Channel="5" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.BypassServ_ON" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3A8173BEE3854081BCDB7D6F3ED9D006"/>
+		<Connection Channel="6" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.No_El_Network" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.41C249F5928F4529AE051B7D39B34813"/>
+		<Connection Channel="7" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.ZU_FLT" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.74C31FC0583141D1942FB7AB8A509D98"/>
+		<Connection Channel="8" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.IBP_FLT" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.1F836FDB78C449819AD3F5BD7B7B2255"/>
+		<Connection Channel="1" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Vn_MON_FLT" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5BFD1D62257A4A20A915F56FFE769518"/>
+		<Connection Channel="2" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Vn_MOR_FLT" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.96B5AA5C7E9345D59D5FB9116C2F9CB1"/>
+		<Connection Channel="3" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Vn_MOD_FLT" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9D964EA1DFF5456AB6859F7B7D9F5019"/>
+		<Connection Channel="4" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.VA_OD_ON" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.932586FDDCF24A5AB7C63DA2450B48ED"/>
+		<Connection Channel="5" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Check_VPU" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D94272B641474F2DBF0B46F6B9FF83A3"/>
+		<Connection Channel="6" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Check_AZ1" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3C6110CAC9F841E4B32514062BBE38A2"/>
+		<Connection Channel="7" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Check_AZ2" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9905D8BCB1E140B89A0B46B7D8CF9878"/>
+		<Connection Channel="8" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="7" ItemName="GPA_DI_DRV.Kl_PE3_OF" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.38C9AE9A7F85407F96E72A64D463D480"/>
+		<Connection Channel="1" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kl_PE3_ON" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.965101B4AFDA4344ABC993183E5495FD"/>
+		<Connection Channel="2" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kl_PE2_OF" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.EBB6CF104A98491A9CAA0810BB9F8663"/>
+		<Connection Channel="3" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kl_PE2_ON" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A5B1237644FD4A6DB93732C1773DF369"/>
+		<Connection Channel="4" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kl_PE1_OF" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D65A2CC272F9492593CB8499255E932E"/>
+		<Connection Channel="5" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kl_PE1_ON" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.18CFEDCD2BF74F759B680C2A8001DDFB"/>
+		<Connection Channel="6" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_30" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6F8A76D53C12403AA4CE5AF0457D7818"/>
+		<Connection Channel="7" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_30_KCD" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5CB01BFA001A465C934AA8E9017BFFF7"/>
+		<Connection Channel="8" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_31" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.662E3F19698D4ADF91CA461E4DB482DF"/>
+		<Connection Channel="1" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_31_KCD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.ADE36EF2A20E46EC86FFE05DA75574B2"/>
+		<Connection Channel="2" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_32" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.783F3E770BED432EAEA5F9EFFE2E71CF"/>
+		<Connection Channel="3" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_32_KCD" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D06AB587F74042C6BD9C5BBDAA34B3F8"/>
+		<Connection Channel="4" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_210" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0885FCEF11EA4E4EB0EB075DDF388CE6"/>
+		<Connection Channel="5" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_211" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.05C9717A32124290BE80AADF05D0962C"/>
+		<Connection Channel="6" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_212" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BDD8EC2D339B49E7A68F88397E2D8833"/>
+		<Connection Channel="7" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_213" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.02032C3629A343439D480873A99CFC90"/>
+		<Connection Channel="8" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_214" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.270F9387008747AEA8BFB4DD9CAD6EA8"/>
+		<Connection Channel="1" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_35" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5AB0140C527B4DDAB27D4F591BF026F4"/>
+		<Connection Channel="2" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_45" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6ACC16A94BBB4B91AB505DC2987031C1"/>
+		<Connection Channel="3" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Lock_VNA_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D923D295145D4D0EB67A804824726EE8"/>
+		<Connection Channel="4" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.GPA_Work_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.47CB97651B8C4B69A59EEF65CB414C65"/>
+		<Connection Channel="5" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.TEN_Vlagomer_ON_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5942927A0AFF4CEC8382D7851E293FB8"/>
+		<Connection Channel="6" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr1_ON_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5DF67ACF180A403E940297DFBB3770C4"/>
+		<Connection Channel="7" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr1_OF_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E09BDE44252A45B4BFFCB6D31CE6DCBB"/>
+		<Connection Channel="8" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr2_ON_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.24862A95502E4698B7DB4FBA4604B3B1"/>
+		<Connection Channel="1" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr2_OF_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0214C2080EE349A6AFB5CD24222194C6"/>
+		<Connection Channel="2" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr4_ON_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.21E18B67521E401181C269612EC0EF3D"/>
+		<Connection Channel="3" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr4_OF_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.32DA3C988F52449582778D0288884FB7"/>
+		<Connection Channel="4" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr5_ON_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.80805C27E9DD4CBDB834E8507E055CAE"/>
+		<Connection Channel="5" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Kr5_OF_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.244EB3C1C6E84B34AF71AF9ED4EF92EA"/>
+		<Connection Channel="6" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Reg_C1_N_OF_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.541CD75044944F568E1D30FAE2937475"/>
+		<Connection Channel="7" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Reg_C2_N_OF_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D705C98D27BC4F90883C2578082A4FFB"/>
+		<Connection Channel="8" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Reg_C3_N_OF_KCU" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.01ACC131D36D41A8B34D73B37B4EF6E0"/>
+		<Connection Channel="1" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_AC220_SAU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BDC47195D8304D808F170B608FB6E2C9"/>
+		<Connection Channel="2" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_DC220_SAU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.8CDE1EDE3563491FA5471C368721F009"/>
+		<Connection Channel="3" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_AC220_BUSD" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D3F01DEBA8D34192A3AA41C4E8488E0B"/>
+		<Connection Channel="4" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_DC220_Kr" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.639D8CE3E65D49AF813D3DEDB0DBF4A7"/>
+		<Connection Channel="5" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_AC220_BEO" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BBF3BB40B0B74486AAC63E199745E117"/>
+		<Connection Channel="6" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_DC220_BEO" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9C4F41904BF2468D88D58E0BAE3FF3B6"/>
+		<Connection Channel="7" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_razr" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5017DC4FC76B4A5EB78DA7A410639314"/>
+		<Connection Channel="8" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_DC24_Kr124" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5369A8EA7D4B4D5EB6BCE46E008F45AF"/>
+		<Connection Channel="1" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_DC24_Kr569" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0BDF2B3C095144E58ACE6C34A3102CC9"/>
+		<Connection Channel="2" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_DC24_Kr12" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E56DA57D5F6247C58638DD1E96A7BA10"/>
+		<Connection Channel="3" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_U_TPAI" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.697A8C6CD1BF4BEBB658DDDB2AB3A42F"/>
+		<Connection Channel="4" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_U_TPDI" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9924AD12502C46E8AF1F5D2E201813BF"/>
+		<Connection Channel="5" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24osn_PRU_ok" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5B1584D82FAB4398B36BB5A43B8EE7CD"/>
+		<Connection Channel="6" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24rez_PRU_ok" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CDF061F0C2054D4FBD0A7CDEF6142A59"/>
+		<Connection Channel="7" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24osn_PLC_ok" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.21E6FAD28BB549EBB77247CB160F8967"/>
+		<Connection Channel="8" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24rez_PLC_ok" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BC5FD0423B994306B4F2C8DF058EF942"/>
+		<Connection Channel="1" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24osn_Int_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.11C1EAD8FB7B440087F9FAFF29F1AA26"/>
+		<Connection Channel="2" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24rez_Int_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.4BDFE0D646DA4A04B23C7948EE4087E8"/>
+		<Connection Channel="3" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24osn_AI_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.45693E2BB27E4AF6BE2FBCA0AFC57984"/>
+		<Connection Channel="4" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24rez_AI_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0948D4C3A4084CBC83FB034CAE4238E3"/>
+		<Connection Channel="5" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24osn_DI_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D6A40C3F03044E558C6C13878A94496C"/>
+		<Connection Channel="6" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24rez_DI_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.644C327860564F008A5256B23F5D0B72"/>
+		<Connection Channel="7" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24osn_Ext_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.09CF68437E684C6986C9CD4B7A7BCC89"/>
+		<Connection Channel="8" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24rez_Ext_ok" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.8B1FA46893B54276B6F11A28AFAC3D8D"/>
+		<Connection Channel="1" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24osn_DO_ok" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BE3C3EE3830F43F7976488A0A6E1934E"/>
+		<Connection Channel="2" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.DC24rez_DO_ok" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.06C362FBE12943E691ECFEC1AC045EBE"/>
+		<Connection Channel="3" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_36" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6283B09B3E2A42049E4246EDEA6D812B"/>
+		<Connection Channel="4" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_37" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.97B20FDC59804D22A1369821B9CE3D1E"/>
+		<Connection Channel="5" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.QF_ON" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.550BD6D5B258440DAECCCA6428835D82"/>
+		<Connection Channel="6" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Dver_PLC_close" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.B4856556800645F786DB82B8DDBC5AEA"/>
+		<Connection Channel="7" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Chk_U_TPDO" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.381986EE0BE140DD981B55D12269A908"/>
+		<Connection Channel="8" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="8" ItemName="GPA_DI_DRV.Res_56" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F05B8D7247A04132ADDF1C0E4F69234E"/>
+		<Connection Channel="1" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Reg_C4_N_OF_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.7FCC9AF1D21C4A93884898AFBA1FD195"/>
+		<Connection Channel="2" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Reg_C5_N_OF_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BD972D83345048BFA5F7254B0FDF5535"/>
+		<Connection Channel="3" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Reg_C6_N_OF_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.204E4A625A624C1F94371BE4F85A1A7B"/>
+		<Connection Channel="4" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Unlock_ES_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0C2E57738C7C4A6DB2200B11323BEA2B"/>
+		<Connection Channel="5" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.ES_ON_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.BECA17AAA147483E8F6CF6A6C3D88541"/>
+		<Connection Channel="6" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.SK_ON_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.2D1E00E912DF4F1A91840B7AEC6D80C6"/>
+		<Connection Channel="7" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.POK_ON_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.34F9F91B5D1C45F8884A4775CAA425B9"/>
+		<Connection Channel="8" Comment="1: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.SPV_ON_KCU" Slot="1" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C03FAF4705B8453AB10F824DB081A2EB"/>
+		<Connection Channel="1" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.ZsPV_ON_KCU" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.1B8A4B8CD415472681D505ED0A7CB6F1"/>
+		<Connection Channel="2" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_48" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.574DDB252F97403F949C55EC1FB1A87A"/>
+		<Connection Channel="3" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_49" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.AA5C3D2CFC874C288A1B8E99820A900D"/>
+		<Connection Channel="4" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_50" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.48BFB622E5A74E06BE4F51969C10FAA2"/>
+		<Connection Channel="5" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_51" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.534A5CB8F70D4077A9D7F2678D0CBA3B"/>
+		<Connection Channel="6" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_52" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A517930647A141578AE0D92E172F9F2A"/>
+		<Connection Channel="7" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_53" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E377C957804E4C6991293E8C7A8D7ECA"/>
+		<Connection Channel="8" Comment="2: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_54" Slot="2" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.75813B72F45E4557938F54A4D1EAA786"/>
+		<Connection Channel="1" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_55" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.542ABD90B800472B8576A5104DDC2B2D"/>
+		<Connection Channel="2" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kr6_OF_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9697BF0F14FA4E4EBE8B4405038EB2E4"/>
+		<Connection Channel="3" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kr6_ON_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.2AE197A53A9F4502A5804979119129BA"/>
+		<Connection Channel="4" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kr9_OF_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3CBEA91E8B6C4E2A8CB1F16DD607F043"/>
+		<Connection Channel="5" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kr9_ON_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.DD05868552E1428E88CB59A928F042A7"/>
+		<Connection Channel="6" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kr12_OF_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F540C3FC80874826AA9D2941CC5D10B2"/>
+		<Connection Channel="7" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kr12_ON_KCU" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.CA6AE200D83B4112AE6E862CF93DA4A7"/>
+		<Connection Channel="8" Comment="3: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_56" Slot="3" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.B16DB1E2B2394B489E9C49519437D981"/>
+		<Connection Channel="1" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_57" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.101461E7580647AE9CBE76FF65CE4F55"/>
+		<Connection Channel="2" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_58" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.FD97403BDA6D4C54A3AFEACAA6957323"/>
+		<Connection Channel="3" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_59" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.2D1ABDE1C0A7452C9E52764807096240"/>
+		<Connection Channel="4" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_60" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3EE4D38C4E194082B248702872C60556"/>
+		<Connection Channel="5" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_61" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E6A3D2C0083643E3815929D0208420BC"/>
+		<Connection Channel="6" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_62" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.9FA3224C814240C6A69B7773640ADA15"/>
+		<Connection Channel="7" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_63" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D1EC272B01374F3CB317BA22C01C87B8"/>
+		<Connection Channel="8" Comment="4: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_64" Slot="4" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.893D2D63D61F4AA2843D549870EBD337"/>
+		<Connection Channel="1" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.SPV_U_En_KCU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A6F5962CF17E4A9498658E6B2B06CC16"/>
+		<Connection Channel="2" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.PNSD_ON_KCU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.02DF86AF20144EAAA79D44C6B61387CA"/>
+		<Connection Channel="3" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.PNSR_ON_KCU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.D504304860AA4664AEF6E330C807CD75"/>
+		<Connection Channel="4" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.PNSN_ON_KCU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.F56233D82A8047A5A30D0FB5AACBA33B"/>
+		<Connection Channel="5" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.KE3_1_ON_KCU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.31A45ED595364199A4552B3F4F7F0282"/>
+		<Connection Channel="6" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.KE3_2_ON_KCU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.385900078CE14A6F9BF586144F640F7B"/>
+		<Connection Channel="7" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.KE3_3_ON_KCU" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0FFA910F67D546D981F186516786EC83"/>
+		<Connection Channel="8" Comment="5: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_71" Slot="5" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.305BFBB6C4B949FB836B4FD5709C7222"/>
+		<Connection Channel="1" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_65" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.562084D5C9BF477EAB3BB65766A8129D"/>
+		<Connection Channel="2" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_66" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.91CDBFD234214FE59ACC3F11F57832D0"/>
+		<Connection Channel="3" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_67" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.307C4B39E7B844DBA8B769FA07445723"/>
+		<Connection Channel="4" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_68" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.35FF18CA2B784939B05EEEDB93804355"/>
+		<Connection Channel="5" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_69" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.A344A30F99AC43ADA6C3293B85029332"/>
+		<Connection Channel="6" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_KCU_70" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.0AD12817A4944A5C8E242969A0405AFC"/>
+		<Connection Channel="7" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_38" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.48041D45FE614ACD8C76F18728587EDC"/>
+		<Connection Channel="8" Comment="6: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_39" Slot="6" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.B172E45D90ED4FFCACA47ACFD6647C51"/>
+		<Connection Channel="1" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kn_NO_PRU" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.3F910473B2604A84B3164ACAF1F5E7F6"/>
+		<Connection Channel="2" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kn_EO_PRU" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6280B351BC954370876ABC0168D460CC"/>
+		<Connection Channel="3" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kn_EO_PRU_KCD" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.08830ACB905F4F65B66C679D8A6A2AF7"/>
+		<Connection Channel="4" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kn_AO_PRU" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.020392DF816043BC9987E8B040D29F58"/>
+		<Connection Channel="5" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kn_AO_PRU_KCD" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.6EFC2BF1D3FA426E984DFAC082257084"/>
+		<Connection Channel="6" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Kn_Quit" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C7CC05437CF34099AA0AE164C9532FC3"/>
+		<Connection Channel="7" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.BEO_Work" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.5EC5ADE7BE6B460FAF39B857158614BE"/>
+		<Connection Channel="8" Comment="7: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.BEO_Rdy" Slot="7" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.4E6EA2F409594E3A808C0460C134A3E1"/>
+		<Connection Channel="1" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.N_TK_BZRT_av" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.14A62766117B4AC0AA189BE1F5A0AD4D"/>
+		<Connection Channel="2" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.N_ST_BZRT_av" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.871D9D10E8EA4728B80DA55AC7D40213"/>
+		<Connection Channel="3" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.T_outGG_av" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.7EC48F610C7A40178B9E829285DA703E"/>
+		<Connection Channel="4" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_40" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.472600C0B4E24341BE0E34911FF96E54"/>
+		<Connection Channel="5" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_41" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.E55A44AF69BE47EBA325689F2A9F607D"/>
+		<Connection Channel="6" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_42" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.08EEF0A32BF64120BF74E2ED4D933EA3"/>
+		<Connection Channel="7" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_43" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.09122E2F76484053AD0F712273E0888C"/>
+		<Connection Channel="8" Comment="8: 8-ch (1 slots) DI: 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V, 0..1 24V" Device="9" ItemName="GPA_DI_DRV.Res_44" Slot="8" UUID="YBCIKRM7IFSU3MA22Q3MIAKRVQ.C60D9555577F4021B2258A03F6BFF520"/>
+	<Connection Channel="25" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_01" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E7CC0C48DC664ABDA6813CD3549319F5"/>
+    <Connection Channel="26" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_02" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.5C070F4047CD4AAFB9830F96460B41B6"/>
+    <Connection Channel="29" Comment="Температура воздуха за компрессором" Device="1" ItemName="GPA_AI_DRV.Tv_outTK" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C962922E6E6145039455801B5F12C12F"/>
+    <Connection Channel="30" Comment="Температура выхлопных газов за СТ ГТД" Device="1" ItemName="GPA_AI_DRV.T_outST" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.001F74CDE30B43B380E6C50369D9F936"/>
+    <Connection Channel="31" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_0" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.4194FABE269743D080D6188DB80A6576"/>
+    <Connection Channel="32" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.02BB3FDEE2AE4093BDAC623ED374134C"/>
+    <Connection Channel="17" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.8B7587872FF248A39718C0BA1A42E6B5"/>
+    <Connection Channel="18" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_3" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.9A8DE46F24324D9E91EFD97B1C34443E"/>
+    <Connection Channel="19" Comment="Температура воздуха отсека ГТД" Device="1" ItemName="GPA_AI_DRV.Tv_OD" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.68FDC04618A94E2D8EB3AE0DFDE4998D"/>
+    <Connection Channel="20" Comment="Температура воздуха в укрытии компрессора" Device="1" ItemName="GPA_AI_DRV.Tv_ON" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A518C579BFBC4B79AC6AC48AC4B97568"/>
+    <Connection Channel="21" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_200" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.7122A9AFE8EC46B6AB2D17A3FDF5E889"/>
+    <Connection Channel="22" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_201" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.57CAFFB0ADA14575B1BA0A804A430DDE"/>
+    <Connection Channel="23" Comment="Температура наружного воздуха" Device="1" ItemName="GPA_AI_DRV.T_atm" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DC674C93FCAF4BA682DF36349C344848"/>
+    <Connection Channel="24" Comment="Температура газа на входе в компрессор" Device="1" ItemName="GPA_AI_DRV.Tg_inN" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D97694095A684E9FB5C7C9077567EA00"/>
+    <Connection Channel="9" Comment="Температура газа на выходе первой ступени компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outNag1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.4C84457B41834BF29B5EB539AFB83367"/>
+    <Connection Channel="10" Comment="Температура газа на выходе компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outNag" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.4D5D631C39E24BA6BD99EB1B66DFC028"/>
+    <Connection Channel="11" Comment="Температура газа на выходе из цилиндра 1 компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outN_C1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.8EE5B6D6395A4A468FBC0783DB0F53A8"/>
+    <Connection Channel="12" Comment="Температура газа на выходе из цилиндра 2 компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outN_C2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DAA1A8320F4E47A1952D941B7A227D88"/>
+    <Connection Channel="13" Comment="Температура газа на выходе из цилиндра 3 компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outN_C3" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.04C11DBDEFCD45B8A8190E0C917FD8E5"/>
+    <Connection Channel="14" Comment="Температура газа на выходе из цилиндра 4 компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outN_C4" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D736298EEA324A818714B8A3150F22C7"/>
+    <Connection Channel="15" Comment="Температура газа на выходе из цилиндра 5 компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outN_C5" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.5F547091A40149C3B8406D965790F17B"/>
+    <Connection Channel="16" Comment="Температура газа на выходе из цилиндра 6 компрессора" Device="1" ItemName="GPA_AI_DRV.Tg_outN_C6" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.87899EE74D6042CEB0369F409AD01C1C"/>
+    <Connection Channel="1" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_202" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.4DB9A8B4DE1348848EE4A550CA82A831"/>
+    <Connection Channel="2" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_203" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E57076DF383B47E2B3184111F4B5934E"/>
+    <Connection Channel="3" Comment="Температура масла смазки на входе в компрессор" Device="1" ItemName="GPA_AI_DRV.Tmsm_inN" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A9F9B6F9251C49BB8B38B8EAEB5D2623"/>
+    <Connection Channel="4" Comment="Температура масла смазки на выходе из компрессора" Device="1" ItemName="GPA_AI_DRV.Tmsm_outN" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.0A054174B7EF43C0A534F47498663DAC"/>
+    <Connection Channel="5" Comment="Температура масла в подогревателе масла смазки компрессора" Device="1" ItemName="GPA_AI_DRV.Tmsm_TEN_N" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.1DC6588FA84D4F62A4E352B9EC5E5913"/>
+    <Connection Channel="6" Comment="Температура охлаждающей жидкости на выходе драйкуллера" Device="1" ItemName="GPA_AI_DRV.T_freeze_outDC" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.450A55662F1E45FC965FA7E66FAE5992"/>
+    <Connection Channel="7" Comment="Температура охлаждающей жидкости в баке" Device="1" ItemName="GPA_AI_DRV.T_freeze_Bak" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C0A0924033854424B6CC1BEC9EBE0DBE"/>
+    <Connection Channel="8" Comment="Температура первичных утечек от сальников штока" Device="1" ItemName="GPA_AI_DRV.T_utech_salnik" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DB68194ADA234AD492ABE82B0D290176"/>
+    <Connection Channel="25" Comment="Температура коренного подшипника 1 компрессора" Device="1" ItemName="GPA_AI_DRV.T_KP1_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.7CF0DF45C5F741089C7EC9AE6F3A2584"/>
+    <Connection Channel="26" Comment="Температура коренного подшипника 1 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T_KP1_N_Res" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.03520DA2621A490497BEA6EBF820D21F"/>
+    <Connection Channel="27" Comment="Температура коренного подшипника 2 компрессора" Device="1" ItemName="GPA_AI_DRV.T_KP2_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C744A43BFF6148EAAD40CCA2C94061A0"/>
+    <Connection Channel="28" Comment="Температура коренного подшипника 2 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T_KP2_N_Res" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.9834C02EEE924373AA2F5CF3179BEFA7"/>
+    <Connection Channel="29" Comment="Температура коренного подшипника 3 компрессора" Device="1" ItemName="GPA_AI_DRV.T_KP3_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A6C02C1BDED040EBAB0CD4BFD02CAD6C"/>
+    <Connection Channel="30" Comment="Температура коренного подшипника 3 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T_KP3_N_Res" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DEFA4CDBB357469BB240501EBB0DBF60"/>
+    <Connection Channel="31" Comment="Температура коренного подшипника 4 компрессора" Device="1" ItemName="GPA_AI_DRV.T_KP4_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.521A694BD2A84C059BFD37D4B2E80DAB"/>
+    <Connection Channel="32" Comment="Температура коренного подшипника 4 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T_KP4_N_Res" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A1BB352E12AF4DB1ACED10E37E39A18D"/>
+    <Connection Channel="17" Comment="Температура коренного подшипника 5 компрессора" Device="1" ItemName="GPA_AI_DRV.T_KP5_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.80A498191C1646C48BFB2654BB4B97ED"/>
+    <Connection Channel="18" Comment="Температура коренного подшипника 5 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T_KP5_N_Res" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.6ADAC1014D42438F9D8BF434F1D62991"/>
+    <Connection Channel="19" Comment="Температура коренного подшипника 6 компрессора" Device="1" ItemName="GPA_AI_DRV.T_KP6_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.132C663A9EF2437E8D0788BB0FD9FC06"/>
+    <Connection Channel="20" Comment="Температура коренного подшипника 6 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T_KP6_N_Res" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.8AE0DC39059743B39909363C3BCE918B"/>
+    <Connection Channel="21" Comment="Температура опорного подшипника промежуточного вала со стороны компрессора (L213)" Device="1" ItemName="GPA_AI_DRV.T_POP_PromVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.69368F41446E40A4AF8B8A0D59BD4F91"/>
+    <Connection Channel="22" Comment="Температура опорного подшипника тихоходного вала со стороны компрессора (L111)" Device="1" ItemName="GPA_AI_DRV.T_POP_SlowVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A529148A34E04C7C9FD85A48DDE1D484"/>
+    <Connection Channel="23" Comment="Температура опорного подшипника промежуточного вала со стороны ГТД (L223)" Device="1" ItemName="GPA_AI_DRV.T_ZOP_PromVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.028AFC18F4764825973C7378322F6D28"/>
+    <Connection Channel="24" Comment="Температура опорного подшипника тихоходного вала со стороны ГТД (L121)" Device="1" ItemName="GPA_AI_DRV.T_ZOP_SlowVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.0ACDE887D9B14577830FB1DE25FDE3F9"/>
+    <Connection Channel="9" Comment="Температура упорного подшипника тихоходного вала со стороны компрессора  (L161)" Device="1" ItemName="GPA_AI_DRV.T_PUP_SlowVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.CD2FE2F571CF4781A0A1E985850BD541"/>
+    <Connection Channel="10" Comment="Температура опорного подшипника быстроходного вала со стороны ГТД (L313)" Device="1" ItemName="GPA_AI_DRV.T_ZOP_FastVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.5ACF912C165443EEA3583FB1B6BEED15"/>
+    <Connection Channel="11" Comment="Температура опорного подшипника быстроходного вала со стороны компрессора (L323)" Device="1" ItemName="GPA_AI_DRV.T_POP_FastVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.01C06A91A9BB45B495C73B358C59DEE2"/>
+    <Connection Channel="12" Comment="Температура упорного подшипника тихоходного вала со стороны ГТД (L151)" Device="1" ItemName="GPA_AI_DRV.T_ZUP_SlowVal" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.68D6E2A359FD426F931D15A98DF065B3"/>
+    <Connection Channel="13" Comment="Температура 1 воздуха на входе в ГТД" Device="1" ItemName="GPA_AI_DRV.Tv1_inTK" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.34BD5A29A56C4622A118F1116C84B2FF"/>
+    <Connection Channel="14" Comment="Температура 2 воздуха на входе в ГТД" Device="1" ItemName="GPA_AI_DRV.Tv2_inTK" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B033042E33314FFDBF0F80E07CC625FF"/>
+    <Connection Channel="15" Comment="Температура масла на сливе из задней опоры ТК" Device="1" ItemName="GPA_AI_DRV.Tm_outZO_TK" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.4178396E4C9E4205A721B1CA7D61C11E"/>
+    <Connection Channel="16" Comment="Температура масла на сливе из опор СТ" Device="1" ItemName="GPA_AI_DRV.Tm_outST" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.2E82A86AAC5F4CA99240BA6D8FF04515"/>
+    <Connection Channel="1" Comment="Температура масла на сливе из коробки агрег. и  передней опоры ТК" Device="1" ItemName="GPA_AI_DRV.Tm_outPO_TK" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.819B6F8A06444EB6AA55D9BED25B99DC"/>
+    <Connection Channel="2" Comment="Температура упорного подшипника 1 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T1_UP_Kr" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B5F8F5AAE22F4B91A13D8B4D6F35BA45"/>
+    <Connection Channel="3" Comment="Температура упорного подшипника 2 компрессора (резерв)" Device="1" ItemName="GPA_AI_DRV.T2_UP_Kr" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E01EB1EDFC5D4028ACDD088E0A1A89A0"/>
+    <Connection Channel="4" Comment="Температура упорного подшипника 1 компрессора" Device="1" ItemName="GPA_AI_DRV.T1_UP_K" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.1F4F04A72E154879A2154FF3D50D38DD"/>
+    <Connection Channel="5" Comment="Температура упорного подшипника 2 компрессора" Device="1" ItemName="GPA_AI_DRV.T2_UP_K" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D46ACA969A194133B515163A85D29524"/>
+    <Connection Channel="6" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_14" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.EBC770525C5044F9B69626C00062A606"/>
+    <Connection Channel="7" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_15" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A13DAFEC31C4432880166D719BEC9D70"/>
+    <Connection Channel="8" Comment="Резерв" Device="1" ItemName="GPA_AI_DRV.Res_16" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.20ADCB5308034DD9A4E88FD252820D86"/>
+    <Connection Channel="25" Comment="Температура масла на входе в редуктор" Device="2" ItemName="GPA_AI_DRV.Tm_inR" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B8C7A45DCF954BB0BA5570CCFD34D9B0"/>
+    <Connection Channel="26" Comment="Температура масла на выходе из редуктора" Device="2" ItemName="GPA_AI_DRV.Tm_outR" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.BF345B6590624AB09CB326B826238247"/>
+    <Connection Channel="27" Comment="Температура масла в маслобаке редуктора" Device="2" ItemName="GPA_AI_DRV.Tm_MBR" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.4AAA945407BA4F60A7FEDA9093C04833"/>
+    <Connection Channel="28" Comment="Температура топливного газа перед ОГК 1" Device="2" ItemName="GPA_AI_DRV.Ttg_inSK" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.FB87A139BE924988B0D0C8822700E832"/>
+    <Connection Channel="29" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_17" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A023132CCC5946EA9B60CC83D94BCEE0"/>
+    <Connection Channel="30" Comment="Температура масла на входе в ГТД" Device="2" ItemName="GPA_AI_DRV.Tm_inD" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.1FD13952488544BFAB70A9D9F6766821"/>
+    <Connection Channel="31" Comment="Температура масла в маслобаке ГТД" Device="2" ItemName="GPA_AI_DRV.Tm_MBD" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.39506DE126CC4557A2E8A988E79AAEDD"/>
+    <Connection Channel="32" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_204" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.FC765A4FEA74479DB5F7699247373D48"/>
+    <Connection Channel="17" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_205" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.AB045B3E30074BB1B6A54C0D77BCE1F7"/>
+    <Connection Channel="18" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_18" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.3A46FF47CD414E41861B2BD18C56DEE2"/>
+    <Connection Channel="19" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_19" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.6ACBA38FA6D24BAFAA01599417F26C32"/>
+    <Connection Channel="20" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_20" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E735C49B8F2F4E10BFEF9C823D747794"/>
+    <Connection Channel="21" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_21" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.92A1380062514950AA3FF2769452856F"/>
+    <Connection Channel="22" Comment="Давление газа на входе в компрессор" Device="2" ItemName="GPA_AI_DRV.Pg_inN" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.131D142A9B1645E1B9348A709B9166EE"/>
+    <Connection Channel="23" Comment="Давление газа на выходе первой ступени компримирования" Device="2" ItemName="GPA_AI_DRV.Pg_outN1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.0FE626F8A8294219A4057AADE891569D"/>
+    <Connection Channel="24" Comment="Давление газа на выходе компрессора" Device="2" ItemName="GPA_AI_DRV.Pg_outN" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B1682532F1BB49B7AB4655EB4608AB65"/>
+    <Connection Channel="9" Comment="Вибрация корпуса компрессора со стороны привода (горизонтальная составляющая) " Device="2" ItemName="GPA_AI_DRV.Vs_ZONg" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.3076FF6F3C13466DA4D32559629582EE"/>
+    <Connection Channel="10" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_22" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.F4F3768C7B32433B911126E58350604F"/>
+    <Connection Channel="11" Comment="Вибрация корпуса компрессора со стороны маслонасоса (горизонтальная составляющая)" Device="2" ItemName="GPA_AI_DRV.Vs_PONg" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.2F28107A7EED44B08B7A4959653C1870"/>
+    <Connection Channel="12" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_23" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E813BB50B3E9459C989770658F33F895"/>
+    <Connection Channel="13" Comment="Положение штока ВНА" Device="2" ItemName="GPA_AI_DRV.Pos_VNA_lvr" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.21897F6B1B78410FBA6E5A5D3C63C8C3"/>
+    <Connection Channel="15" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_24" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.44D28156296844B89CFD32589F9CFFE1"/>
+    <Connection Channel="1" Comment="Радиальное виброперемещение тихоходного вала (горизонтальная составляющая)" Device="2" ItemName="GPA_AI_DRV.Vp_rd_SlowVal_g" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.80B3E151E531491CAC09E7B62B9B5C1D"/>
+    <Connection Channel="2" Comment="Радиальное виброперемещение тихоходного вала (вертикальная составляющая)" Device="2" ItemName="GPA_AI_DRV.Vp_rd_SlowVal_v" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D98CC8068F8D40FCB86226A5ECD675A9"/>
+    <Connection Channel="3" Comment="Аксиальное виброперемещение 1 тихоходного вала" Device="2" ItemName="GPA_AI_DRV.Vp_ax_SlowVal" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.51AF2D514E594E30B651D37631578814"/>
+    <Connection Channel="4" Comment="Аксиальное виброперемещение 2 тихоходного вала (резерв)" Device="2" ItemName="GPA_AI_DRV.Vp_ax_SlowVal_Res" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.34DCDF11B4F944EEB7CB9F870CA6AF8C"/>
+    <Connection Channel="5" Comment="Радиальное виброперемещение быстроходного вала (горизонтальная составляющая)" Device="2" ItemName="GPA_AI_DRV.Vp_rd_FastVal_g" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.20D386A1BADA413F831F6F90B1E4ADB3"/>
+    <Connection Channel="6" Comment="Радиальное виброперемещение быстроходного вала (вертикальная составляющая)" Device="2" ItemName="GPA_AI_DRV.Vp_rd_FastVal_v" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B9A7039D337A45398C84E2DD85E7569C"/>
+    <Connection Channel="7" Comment="Вибрация по переднему стоечному узлу ТК" Device="2" ItemName="GPA_AI_DRV.Vs_PO_TK" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.718DB0EEF0494E6FAEB9C45B6C757F5A"/>
+    <Connection Channel="8" Comment="Вибрация по задней опоре ротора ТК" Device="2" ItemName="GPA_AI_DRV.Vs_ZO_TK" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A4EE351E373543B2A7DEA80CEF20DDD4"/>
+    <Connection Channel="25" Comment="Вибрация по опоре ротора СТ " Device="2" ItemName="GPA_AI_DRV.Vs_ST" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B5EBC31D1791403F98F4CFF6897E4DA1"/>
+    <Connection Channel="26" Comment="Давление масла на входе в компрессор после фильтров Ф1,Ф2" Device="2" ItemName="GPA_AI_DRV.Pm_inK_outF" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.EC1C191E7ECE4BB3B5173FABA682BD31"/>
+    <Connection Channel="27" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_207" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.0DF771F417C049B99D72B12D59433954"/>
+    <Connection Channel="28" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_208" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.17317CBD08C24BCAA49403103514D507"/>
+    <Connection Channel="29" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_209" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C992D48E31E642A6BBDCF6A9F2D167A9"/>
+    <Connection Channel="30" Comment="Давление масла смазки на входе в компрессор" Device="2" ItemName="GPA_AI_DRV.Pmsm_inN" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.01168A6AD98B4A1EAD4596B624EEA628"/>
+    <Connection Channel="31" Comment="Давление масла в подогревателе масла смазки компрессора" Device="2" ItemName="GPA_AI_DRV.Pmsm_TEN_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.6CCFBE7E9F7248809223ED7C25744DD8"/>
+    <Connection Channel="32" Comment="Уровень масла в маслобаке Б1 компрессора" Device="2" ItemName="GPA_AI_DRV.Lm_MBN" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.82C18B6388F44B279231A2D21281D291"/>
+    <Connection Channel="17" Comment="Давление воздуха управления РП компрессорных цилиндров компрессора" Device="2" ItemName="GPA_AI_DRV.Pv_uprRP_N" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C78F87E266E84C8D85B08C9AFF6F1B18"/>
+    <Connection Channel="18" Comment="Давление утечек из РП" Device="2" ItemName="GPA_AI_DRV.P_utech_RP" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.7E64F29B805E4E69A053AFE8E0E04ED0"/>
+    <Connection Channel="19" Comment="Избыточное давление в лубрикаторной системе смазки " Device="2" ItemName="GPA_AI_DRV.Pm_lub" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DC7EA253443D4EF0BE6315705B75FDCC"/>
+    <Connection Channel="20" Comment="Уровень масла в маслобаке лубрикаторной системы" Device="2" ItemName="GPA_AI_DRV.Lm_MBL" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B58A0E2C3CCF4B5DB9BA92BE2F18F1E8"/>
+    <Connection Channel="21" Comment="Уровень охлаждающей жидкости в баке" Device="2" ItemName="GPA_AI_DRV.L_freeze_Bak" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.51796C35CB6F46279252F6E84066AC06"/>
+    <Connection Channel="22" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_26" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E020742C9E424724914C19B973135026"/>
+    <Connection Channel="23" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_210" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.275998E8A99E425CAFAB98EE4C2F4CBE"/>
+    <Connection Channel="24" Comment="Расход охлаждающей жидкости" Device="2" ItemName="GPA_AI_DRV.Q_freeze" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.95813C93F8604D058BFE4E3CCBAD8F88"/>
+    <Connection Channel="9" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_27" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.AD1EEA8007AA4DF4B18C64F7F52BC91F"/>
+    <Connection Channel="10" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_28" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.EF5CE57FE0B2418E8ABD5A07DF0D53C0"/>
+    <Connection Channel="11" Comment="Резерв" Device="2" ItemName="GPA_AI_DRV.Res_29" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.EB3E3A762F7143928B0A25E40D32C899"/>
+    <Connection Channel="12" Comment="Положение клапана КлР1" Device="2" ItemName="GPA_AI_DRV.Pos_KLR1" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.2F93DD149D47413389A64ADB5EA346E6"/>
+    <Connection Channel="13" Comment="Положение клапана КлР2" Device="2" ItemName="GPA_AI_DRV.Pos_KLR2" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.78E3281907E14958AF95B530F8C5C5DA"/>
+    <Connection Channel="14" Comment="Давление масла на входе в редуктор" Device="2" ItemName="GPA_AI_DRV.Pm_inR" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C3E75550E3D34F4EB0E044E1A89667B9"/>
+    <Connection Channel="15" Comment="Уровень масла в маслобаке редуктора" Device="2" ItemName="GPA_AI_DRV.Lm_MBR" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A81BCD2A1DE545738F10CC0B94324598"/>
+    <Connection Channel="16" Comment="Статическое давление воздуха на входе в ГТД" Device="2" ItemName="GPA_AI_DRV.Pv_inTK" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.12F0515A0EF44073A711C712BFE50F23"/>
+    <Connection Channel="2" Comment="Перепад давления топливного газа в подсистеме топливопитания на фильтрах" Device="2" ItemName="GPA_AI_DRV.dPtg_F" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E104BE029D434AE0B010C4285562E2FB"/>
+    <Connection Channel="3" Comment="Перепад давления топливного газа в первом коллекторе форсунок" Device="2" ItemName="GPA_AI_DRV.dPtg_KF" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.9CD0F569262D480BA89C3877967E859B"/>
+    <Connection Channel="4" Comment="Давление топливного газа перед дозатором" Device="2" ItemName="GPA_AI_DRV.Ptg_inTRK" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.F27VYTHEPAKUHFL5PUW2FPHOME"/>
+    <Connection Channel="5" Comment="Давление масла на входе в ГТД" Device="2" ItemName="GPA_AI_DRV.Pm_inD" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.965DC5128FDE4C288C9DD7736DCD43DE"/>
+    <Connection Channel="6" Comment="Уровень масла в маслобаке ГТД" Device="2" ItemName="GPA_AI_DRV.Lm_MBD" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D1EDC2982A0B4A2495BB0E34C8D50E71"/>
+    <Connection Channel="7" Comment="Полное давление выхлопных газов за СТ ГТД" Device="2" ItemName="GPA_AI_DRV.P_outST" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.74B40BDEA079433EA493C18B3E7FC83C"/>
+    <Connection Channel="8" Comment="Барометрическое давление" Device="2" ItemName="GPA_AI_DRV.Patm" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.46BE9629E9594CB68EFF86FF02B90005"/>
+    <Connection Channel="25" Comment="Выходной ток в цепи электростартера" Device="3" ItemName="GPA_AI_DRV.I_Starter" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.04FE17CE1E9146B2B0FE72DC785A3FC7"/>
+    <Connection Channel="26" Comment="Частота тока в цепи электростартера" Device="3" ItemName="GPA_AI_DRV.F_Starter" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.ED22C25AC5ED49FBAD7469A2FC6931E4"/>
+    <Connection Channel="27" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_30" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.3B61FFFD1BA3439987CAAF4749545E72"/>
+    <Connection Channel="28" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_31" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.32D84D8F853D43E69BAB84C3CF1FE4DA"/>
+    <Connection Channel="29" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_32" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.03CCD14BBA79433089F4D65015014879"/>
+    <Connection Channel="30" Comment="Перепад давления масла на маслофильтре тонкой очистки" Device="3" ItemName="GPA_AI_DRV.dPm_FTO" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.7A61AAE0A787400B8AAA8F3CA04C8860"/>
+    <Connection Channel="31" Comment="Перепад давления масла на маслофильтре грубой очистки" Device="3" ItemName="GPA_AI_DRV.dPm_FGO" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E8C20B0B867541BCA4CE91B118F9C042"/>
+    <Connection Channel="32" Comment="Датчик избыточного давления масла прокачки" Device="3" ItemName="GPA_AI_DRV.Pm_pomping" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.59748E829D544ABC9F651DC19A857B22"/>
+    <Connection Channel="17" Comment="Относительная влажность наружного воздуха" Device="3" ItemName="GPA_AI_DRV.Vlaga_atm" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.7A438BB2819C4BBD9E34074D9723CF79"/>
+    <Connection Channel="18" Comment="Температура влагомера" Device="3" ItemName="GPA_AI_DRV.T_Vlagomer" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.46896C9BEE604376972C8C9AE30D1240"/>
+    <Connection Channel="19" Comment="Разрежение за шумоглушителем КВОУ в воздухоприемной камере" Device="3" ItemName="GPA_AI_DRV.Pr_VZK" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.F61E370FC17649C6899A65751F5EDCEB"/>
+    <Connection Channel="20" Comment="Разрежение за первой ступенью очистки КВОУ (мультициклонами)" Device="3" ItemName="GPA_AI_DRV.Pr_VOU" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.F3E46CC058B946BEB725CF4D2D8E3163"/>
+    <Connection Channel="21" Comment="Давление в т/п газа до Кр1" Device="3" ItemName="GPA_AI_DRV.Pg_inKr1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.525065E30A0445AC96A696AC99945004"/>
+    <Connection Channel="22" Comment="Давление в т/п газа после Кр1" Device="3" ItemName="GPA_AI_DRV.Pg_outKr1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.37BFA3AE508141499BA3A207C4B8A785"/>
+    <Connection Channel="23" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_37" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DAFD004159F74B9FAEBA33B8AA9A15E2"/>
+    <Connection Channel="24" Comment="Давление в т/п газа до АВО2" Device="3" ItemName="GPA_AI_DRV.Pg_inAVOG2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.55CF06F3BC4740E598F829C26D91F848"/>
+    <Connection Channel="9" Comment="Давление в т/п дренажа до емкости Е-2" Device="3" ItemName="GPA_AI_DRV.Pdr_inE2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A6C18C5A522E4BCABC8ADA404E32CDD9"/>
+    <Connection Channel="10" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_38" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.62C7E163262349B6A29392D205379820"/>
+    <Connection Channel="11" Comment="Температура в т/п топливного газа к ГПА" Device="3" ItemName="GPA_AI_DRV.Ttg_GPA" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.658EB2BBF5074F82969556C42DB4361F"/>
+    <Connection Channel="12" Comment="Давление в т/п топливного газа к ГПА" Device="3" ItemName="GPA_AI_DRV.Ptg_GPA" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.FBF58DD7753F460FA6B956ECE7C66867"/>
+    <Connection Channel="13" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_39" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.8C5F088BFEFB47CEB22E55164CEC6613"/>
+    <Connection Channel="14" Comment="Температура в т/п газа после АВО1" Device="3" ItemName="GPA_AI_DRV.Tg_outAVOG1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E345BE59FC7448F3B57086246AB15283"/>
+    <Connection Channel="15" Comment="Давление в т/п газа после АВО2" Device="3" ItemName="GPA_AI_DRV.Pg_outAVOG2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.2F2CF1E5995942E784CCCEAE07069579"/>
+    <Connection Channel="16" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_40" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.1FC9EF4C42E84F72860FC28D71242F35"/>
+    <Connection Channel="1" Comment="Давление в т/п газа после АВО1" Device="3" ItemName="GPA_AI_DRV.Pg_outAVOG1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.BC86B92457964B30B9158C4E7A767E7F"/>
+    <Connection Channel="2" Comment="Давление в т/п газа до АВО1" Device="3" ItemName="GPA_AI_DRV.Pg_inAVOG1" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.64073244A5FA42328CCAECA39BAE6A22"/>
+    <Connection Channel="3" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_41" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.26A9CD84EE264F45AB46B84CCA4C5A27"/>
+    <Connection Channel="4" Comment="Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)" Device="3" ItemName="GPA_AI_DRV.Tg1_outAVOG2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D3DECBCC85414A71A1CCB6E078919BBD"/>
+    <Connection Channel="5" Comment="Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)" Device="3" ItemName="GPA_AI_DRV.Tg2_outAVOG2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.1562646A5308474C8D38E933A30DC1E4"/>
+    <Connection Channel="6" Comment="Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)" Device="3" ItemName="GPA_AI_DRV.Pg1_outAVOG2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.B9F9EB97F2404539878277184186AF01"/>
+    <Connection Channel="7" Comment="Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)" Device="3" ItemName="GPA_AI_DRV.Pg2_outAVOG2" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.09CB3E2960D24E4989CEA2FEDA744468"/>
+    <Connection Channel="8" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_42" Slot="1" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A306CE7CE726429783097C7B34D6BFC4"/>
+    <Connection Channel="25" Comment="Давление в т/п газа после Кр2" Device="3" ItemName="GPA_AI_DRV.Pg_outKr2" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D3DB683E2F43498B9CA5D3BAE4E392CA"/>
+    <Connection Channel="26" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_43" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DFF062F478094921B5F2968CAFEC68B7"/>
+    <Connection Channel="27" Comment="Давление в т/п газа до Кр2" Device="3" ItemName="GPA_AI_DRV.Pg_inKr2" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.54CBE3D7412F4ED080676B9CA2CB5343"/>
+    <Connection Channel="28" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_44" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.81E3A957204B48C1A3AD1C753E8F53D9"/>
+    <Connection Channel="29" Comment="Температура в т/п газа на входе в ФС1" Device="3" ItemName="GPA_AI_DRV.Tg_inFS1" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.59A58303FDE44742B2C705EBBB2A104A"/>
+    <Connection Channel="30" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_4" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.3EFD7F1342AF45ED804F7AEC9A3B2426"/>
+    <Connection Channel="31" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_5" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.459B43FF93D448888FBC991102E66761"/>
+    <Connection Channel="32" Comment="Перепад давления на секции циклонных элементов ФС1 (PDT1-1)" Device="3" ItemName="GPA_AI_DRV.dPg_FS1c" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.F359694A9AD546B1B0BC42CD14D2A141"/>
+    <Connection Channel="17" Comment="Перепад давления на секции фильтрующих элементов ФС1 (PDT1-2)" Device="3" ItemName="GPA_AI_DRV.dPg_FS1f" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.ADA60AD59B974873972A3DE6CD696CFA"/>
+    <Connection Channel="18" Comment="Перепад давления на секции циклонных элементов ФС2 (PDT2-1)" Device="3" ItemName="GPA_AI_DRV.dPg_FS2c" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.1AEAB9A995D7462293E1066467255D80"/>
+    <Connection Channel="19" Comment="Перепад давления на секции циклонных элементов ФС3 (PDT3-1)" Device="3" ItemName="GPA_AI_DRV.dPg_FS3c" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E66531E0F6814288B022F2BBB2A84292"/>
+    <Connection Channel="20" Comment="Положение клапана КлР6" Device="3" ItemName="GPA_AI_DRV.Pos_Kr6r" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E55A333AF3884B8497FF25E2083D6180"/>
+    <Connection Channel="21" Comment="Максимальный уровень в подземном резервуаре слива масла двигателя " Device="3" ItemName="GPA_AI_DRV.Lm_TankD_v" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.6F4A187D25754D40BD5FB545E2FB5CFC"/>
+    <Connection Channel="22" Comment="Максимальный уровень в подземных резервуарах слива масла компрессора" Device="3" ItemName="GPA_AI_DRV.Lm_TankK_v" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C47815F4687A43D89944404CBE2F0C18"/>
+    <Connection Channel="23" Comment="Температура масла на входе МОК" Device="3" ItemName="GPA_AI_DRV.Tm_inMON" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.7D5203CBDA7748DEA54AA92BCC8E665C"/>
+    <Connection Channel="24" Comment="Температура масла на выходе МОК" Device="3" ItemName="GPA_AI_DRV.Tm_outMON" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.CE13CD1B433D449F961402BF1E27FEC9"/>
+    <Connection Channel="9" Comment="Температура секции МОК" Device="3" ItemName="GPA_AI_DRV.T_MON_skc" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.A9EB265834FE4709BDE108C6731CFB0A"/>
+    <Connection Channel="10" Comment="Давление масла на входе МОК" Device="3" ItemName="GPA_AI_DRV.Pm_inMON" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.DE1C2D7E6BCD47338B4B07C85A6C0719"/>
+    <Connection Channel="11" Comment="Температура масла на входе МОР" Device="3" ItemName="GPA_AI_DRV.Tm_inMOR" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.386B4CF8455445E580DCBA51776F4585"/>
+    <Connection Channel="12" Comment="Температура масла на выходе МОР" Device="3" ItemName="GPA_AI_DRV.Tm_outMOR" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.FBB55E9FA90A4B9DA775C7CC11EE042E"/>
+    <Connection Channel="13" Comment="Температура секции МОР" Device="3" ItemName="GPA_AI_DRV.T_MOR_skc" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.3CEEE164D5364883970BC36EDBA67048"/>
+    <Connection Channel="14" Comment="Давление масла на входе МОР" Device="3" ItemName="GPA_AI_DRV.Pm_inMOR" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.221826FC7E4A4062AFD9FBF8387422C0"/>
+    <Connection Channel="15" Comment="Температура масла на входе МОД" Device="3" ItemName="GPA_AI_DRV.Tm_inMOD" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D4A436E7CF10446382C132FCB0828013"/>
+    <Connection Channel="16" Comment="Температура масла на выходе МОД" Device="3" ItemName="GPA_AI_DRV.Tm_outMOD" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.76774616BA7344079A7B0F45C6ACD861"/>
+    <Connection Channel="1" Comment="Температура секции МОД" Device="3" ItemName="GPA_AI_DRV.T_MOD_skc" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.D67D5F69D6704BAD814D887FB321DC20"/>
+    <Connection Channel="2" Comment="Давление масла на входе МОД" Device="3" ItemName="GPA_AI_DRV.Pm_inMOD" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.C948D5529E5E4E1B8F7D6A766A726A8B"/>
+    <Connection Channel="3" Comment="Перепад давления воздуха на заслонке ЗПВ" Device="3" ItemName="GPA_AI_DRV.dPv_ZsPV" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.E9B05CF67C6E4F9B86CB242EDC5C0859"/>
+    <Connection Channel="4" Comment="Максимальный уровень в подземном резервуаре слива масла редуктора" Device="3" ItemName="GPA_AI_DRV.Lm_TankR_v" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.271545442FD74297AE29B3E886C5A705"/>
+    <Connection Channel="5" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_33" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.581CEE548E3E4EEF9662AB5897C8D954"/>
+    <Connection Channel="6" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_34" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.BD4B026730F54F24A4B4EAE1BF40CF33"/>
+    <Connection Channel="7" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_35" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.F03AE1521A494DCDB21ECF38033EB6DD"/>
+    <Connection Channel="8" Comment="Резерв" Device="3" ItemName="GPA_AI_DRV.Res_36" Slot="5" UUID="B5D4HTPWOEOU5HFERUJOE3RNQU.FC77F0F5C61840DFA54C92DE31A8E9AF"/>
+  </Crossconnect>
+</Configuration>

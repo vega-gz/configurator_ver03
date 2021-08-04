@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_APS_Internal" Kind="Struct" UUID="BC50863B4DB38DF3C3304A94A788122C">
+	<Fields>
+		<Field Name="Kn_AOss_PRU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="29AA38A545FB721075E558A89F6A6B4D" Comment="АОcc от ПРУ КЦ" />
+		<Field Name="Kn_AOss_HMI" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="42C321104AB773AFD0F2B5BA7CE258D0" Comment="АОcc c АРМ оператора " />
+		<Field Name="Kn_AObs_PRU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="C1882F7240565B240A2A6B9B0EC8BF5A" Comment="АОбc от ПРУ КЦ " />
+		<Field Name="Kn_AObs_HMI" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="0D639F0546A8973563196BB4D9940151" Comment="АОбc c АРМ оператора " />
+		<Field Name="Kn_EO_PRU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="29CB65264186E566A05A33A7DE8CC066" Comment="ЭО от ПРУ КЦ" />
+		<Field Name="Tg_out_KC_Av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="485397184B8FAE9779FCD9BFADE7BF2F" Comment="Высокая температура на выходе КЦ" />
+		<Field Name="Pg_out_KC_Av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EB869454400002EF3AA54DAC5B11B95E" Comment="Высокое давление на выходе КЦ" />
+		<Field Name="GPA5_GAS20" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="963C60D24ABBB837E39C43A6AA188C6E" Comment="Загазованность аварийная (20%) ГПА, поз. 31.2" />
+		<Field Name="GPA6_GAS20" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="CA9FADE240B5974F577B2BBF800B566D" Comment="Загазованность аварийная (20%) ГПА, поз. 31.3" />
+		<Field Name="GPA4_GAS20" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="80AE59E5488CAC92E9A00AA30D1110FF" Comment="Загазованность аварийная (20%) ГПА, поз.31.1" />
+		<Field Name="UPG_GAS20" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="07D91AC344545C4054BA6B98FBDAFF7D" Comment="Загазованность аварийная (20%) УПГ" />
+		<Field Name="ASPS_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="81D0623B492004B3622604BA30548A8A" Comment="Неисправность ПС" />
+		<Field Name="Fire_in_ADES" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3DC982C847A8DEFBC01933AB1694E441" Comment="Пожар в аварийной дизельной электростанции, поз.35" />
+		<Field Name="Fire_in_BB_BVVUP" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="A2B70ACC495928088F32B08B11A55697" Comment="Пожар в ББ БВВ УП, поз. 47" />
+		<Field Name="Fire_in_EXZ" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="A278005A414B8CCEDC348783CC0AE3F0" Comment="Пожар в БКУ ЭХЗ &quot;Антик&quot;, поз.43" />
+		<Field Name="Fire_in_Oil_Atanks" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6D69E2294AFDF88BE7B09AAFF18D77F6" Comment="Пожар в емкости для аварийного слива масла, поз.38.4" />
+		<Field Name="Fire_in_Fuel_ATanks2" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="365F71BC43375818F74C21AC963E329D" Comment="Пожар в емкости для аварийного слива топлива, поз.35.1" />
+		<Field Name="Fire_in_MetanolTank" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="2A65906E40C6A9E63CD505BA6D287135" Comment="Пожар в емкости метанола " />
+		<Field Name="Fire_in_ZADES" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="D381EAF9404106716B6F7DB901BB4A73" Comment="Пожар в здании АДЭС " />
+		<Field Name="Fire_in_Kot" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6412989846843E8136466285F8B8BE73" Comment="Пожар в здании котельной" />
+		<Field Name="Fire_in_NasOil" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="F82CDB3D4245B69FAFF4509271EFC712" Comment="Пожар в здании насосной масел" />
+		<Field Name="Fire_in_NasMet" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E5DF39934688B0B06E7087BBF9BC6E91" Comment="Пожар в здании насосной метанола" />
+		<Field Name="Fire_in_NasPPV" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="A65360ED49CA3B47A2F361A0CE3FD1DB" Comment="Пожар в здании насосной противопожарного водоснабжения" />
+		<Field Name="Fire_in_Wwplant" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5D7DFB28471DDC43576C31B4C481760F" Comment="Пожар в здании очистных сооружений сточных вод" />
+		<Field Name="Fire_in_ZdGate" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="F912A40A49BABD64754415A60CD5B1FA" Comment="Пожар в здании проходной" />
+		<Field Name="Fire_in_PEB" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="50824CBB4CAAF17D93A0C2B256F01C55" Comment="Пожар в здании ПЭБ" />
+		<Field Name="Fire_in_REB" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="4D29431A4D04EDEA7A6D1EABED967CD8" Comment="Пожар в здании РЭБ " />
+		<Field Name="Fire_in_UZRG" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="BBEDFC3440D0E3632A4BCAA6085DCB44" Comment="Пожар в здании УЗРГ" />
+		<Field Name="Fire_in_ZdUPG" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="961B0CF641A4B6CB644DBD902E853818" Comment="Пожар в здании УПГ" />
+		<Field Name="Fire_in_UTO" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B31CA7AB4B1E8AFF1E52679F0D4A5F49" Comment="Пожар в здании УТО" />
+		<Field Name="Fire_in_Vkompr" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="00A1E4FE4FA554FD7919B3B76254A51E" Comment="Пожар в компрессорной сжатого воздуха, поз. 32" />
+		<Field Name="Fire_in_NasOil2" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="7396C243406899A9CE1ED09BB4010C09" Comment="Пожар в насосной масел, поз.38.3" />
+		<Field Name="Fire_in_DainTank" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="8FB5FD8E40ED180735ECC094934EAEA1" Comment="Пожар в подземной дренажной емкости" />
+		<Field Name="Fire_in_Gate" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3E887C284DF48B89D24FCA9675938089" Comment="Пожар в проходной, поз 44" />
+		<Field Name="Fire_in_Fuel_Atanks" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EF8131A64783D2364B31FD937335433F" Comment="Пожар в резервуаре для аварийного слива топлива" />
+		<Field Name="Fire_in_FuelTanks" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3B7B7AF441FC13A911547396685FE11A" Comment="Пожар в резервуарном парке для хранения дизтоплива" />
+		<Field Name="Fire_in_Eblock" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B17B832C461F219EED243BAD3831CD2C" Comment="Пожар в энергоблоке, поз. 34" />
+		<Field Name="Fire_in_GPA" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5B7FA8964748090085C2C2AE0B71BC34" Comment="Пожар ГПА" />
+		<Field Name="Fire_in_GPA5" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5F772ADA481ACBAE5D1BDFA996F14C94" Comment="Пожар ГПА, поз. 31.2" />
+		<Field Name="Fire_in_GPA6" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="7258C77947363611F6C803AFFFD3291E" Comment="Пожар ГПА, поз. 31.3" />
+		<Field Name="Fire_in_GPA4" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="03B2484C4BBB065D4D2EDAB2520370A3" Comment="Пожар ГПА, поз.31.1" />
+		<Field Name="Fire_in_OilTanks" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E6175C3F48C1AE3011CA69A427574A8B" Comment="Пожар на площадке блока резервуаров V=2x10м3, поз.38.1" />
+		<Field Name="Fire_in_FuelTanks2" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="49923F9F4505B340748E1DBA0368A9FB" Comment="Пожар на площадке резервуара для дизтоплива V=25,0 м3 поз.36" />
+		<Field Name="Fire_in_MetanolSklad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3D97BD39453E7180D5B5E5BEC5B39A92" Comment="Пожар на складе метанола" />
+		<Field Name="Fire_in_UDK" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="8A7025B344E8E4401A2D29A9BB63DA7C" Comment="Пожар на установке дожимных компрессоров" />
+		<Field Name="Fire_in_RegenMetanol" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E572A7504177ABB97CCD05B00E3E6DDB" Comment="Пожар на установке регенерации метанола" />
+		<Field Name="Fire_in_URM" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="AB761B9E465EB0273840F4A62BD2A453" Comment="Пожар УРМ" />
+		<Field Name="Gasmain_in_KC_brk" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="9177B9E64BDDF46F23AC379E6D5BC20C" Comment="Прорыв трубопровода на входе КЦ" />
+		<Field Name="Gasmain_out_KC_brk" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="2424E94042CA500EBB8C1982B0BF5250" Comment="Прорыв трубопровода на выходе КЦ" />
+		<Field Name="UTUO_Alarm" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B01EFBF44D84E84BC938A19868B03A59" Comment="УТУО. Обобщенный сигнал аварии " />
+		<Field Name="Kr51_selfON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="0C619E5E4AE0C5DD08D89E8ABDC30442" Comment="Самопроизвольное открытие Крана 51" />
+		<Field Name="Kr51_selfOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="71200AF14EC571C7D1F9729795859DA1" Comment="Самопроизвольное закрытие Крана 51" />
+		<Field Name="Kr52_selfON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EC60C523403B535BCAE29BBBA8574AFD" Comment="Самопроизвольное открытие Крана 52" />
+		<Field Name="Kr52_selfOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="12F2B14D4A0B0BAD61A63F9BF319CB16" Comment="Самопроизвольное закрытие Крана 52" />
+		<Field Name="Kr53_selfON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E6166A674C421EE8CCF567B68C1F491B" Comment="Самопроизвольное открытие Крана 53" />
+		<Field Name="Kr53_selfOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="F93B9EFC447CAD5F78C6FB9502C0192D" Comment="Самопроизвольное закрытие Крана 53" />
+		<Field Name="Kr53bp_selfON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="A666ED284969FA62B3E085B2876317B1" Comment="Самопроизвольное открытие Крана 53бп" />
+		<Field Name="Kr53bp_selfOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="56E374C44F347B4DA40B8C84D8882E87" Comment="Самопроизвольное закрытие Крана 53бп" />
+		<Field Name="Kr54_selfON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="90B9FFB3405147E6156EF78A56DCCB44" Comment="Самопроизвольное открытие Крана 54" />
+		<Field Name="Kr54_selfOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="414C9FFC497C2874EE3A9C94BC5C6461" Comment="Самопроизвольное закрытие Крана 54" />
+		<Field Name="Kr54bp_selfON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="BEB8770342E617DDAEDF2C98E534571F" Comment="Самопроизвольное открытие Крана 54бп" />
+		<Field Name="Kr54bp_selfOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="64893D6343BE22285AC15CA04B8D220C" Comment="Самопроизвольное закрытие Крана 54бп" />
+		<Field Name="Dver_US_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="F9D8984142205CE46E151DBEBA232C4E" Comment="Дверь УС открыта " />
+		<Field Name="U_AC220_UK" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="A17894D44AE51831795D0ABFC8ACE51E" Comment=" Нет  ~220В в УК " />
+		<Field Name="T_US_25v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="96CA0FB24B4BFF357F7B3A8A8780D1AB" Comment=" Температура в УС больше 25 °С " />
+		<Field Name="Vn_P1_Alarm" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="4D7F96BA46968A71802C2D8DC9F3EF1A" Comment="Авария вентсистемы П1 " />
+		<Field Name="Vn_P4_Alarm" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E2E339D9411BF80BD6CE47966EAED36F" Comment="Авария вентсистемы П4" />
+		<Field Name="Lm_R1_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="AF941F2742AEBA5C06DDF8B633E93D81" Comment="Агрегат 1.1. Верхний уровень в резервуаре Р1 для дренажа масла нагнетателя поз.LSA1" />
+		<Field Name="Lm_R4_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="ECDA6A3542D16D9CE05821AE0642AD35" Comment="Агрегат 1.1. Верхний уровень в резервуаре Р4 для отработанного масла двигателя поз.LSA4" />
+		<Field Name="Lm_R2_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B43B0AEE4760DA715407138A093F0A10" Comment="Агрегат 1.2. Верхний уровень в резервуаре Р2 для дренажа масла нагнетателя поз.LSA2" />
+		<Field Name="Lm_R5_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="F5BD4023411365B92853D48C18CAFB80" Comment="Агрегат 1.2. Верхний уровень в резервуаре Р5 для отработанного масла двигателя поз.LSA5" />
+		<Field Name="Lm_R3_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E58C776948AFF8C026D4E78822954024" Comment="Агрегат 1.3. Верхний уровень в резервуаре Р3 для дренажа масла нагнетателя поз.LSA3" />
+		<Field Name="Lm_R6_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="F51D2ACF46BD5A7E9295B8BC07FB9D97" Comment="Агрегат 1.3. Верхний уровень в резервуаре Р6 для отработанного масла двигателя поз.LSA6" />
+		<Field Name="Vn_V4_Alarm" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="DDA069124DCE80B48A3ECB890629D387" Comment="Вентсистема В4.Авария" />
+		<Field Name="Lf_R1_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="64A47BF3422736D94D4DD9B6A8758D8A" Comment="Верхний уровень в Р1 для дизтоплива, поз.LSA1" />
+		<Field Name="Lf_R2a_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="CD96C5994AA0E30D5DCDAEBE4CD42F1D" Comment="Верхний уровень в Р2 для аварийного слива топлива, поз.LSA3" />
+		<Field Name="Cabin_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="415D720349CBE24519A0949A50D0AD0C" Comment="Двери САУ КЦ открыты" />
+		<Field Name="Dver_UK_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B5B5A570421CE712BB3058BA1CA59B0E" Comment="Дверь УК открыта" />
+		<Field Name="UPG_Gas1" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="C520FD854E57951DC1AADD82B9546D40" Comment="Загазованность в УПГ более 1%" />
+		<Field Name="GPA4_GAS10" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B9C21E84484BC245DDB9D3B5BB5838C8" Comment="Загазованность предупредительная (10%) ГПА, поз.31.1" />
+		<Field Name="GPA5_GAS10" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="ECF1E1854BEEF5C1A721F7B7D7304375" Comment="Загазованность предупредительная (10%) ГПА, поз. 31.2" />
+		<Field Name="GPA6_GAS10" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="65529FBF4B557FDBFFDE189171B0735A" Comment="Загазованность предупредительная (10%) ГПА, поз. 31.3" />
+		<Field Name="UPG_GAS10" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="19E7B7D1466A987CA0FB2991C6139B57" Comment="Загазованность предупредительная (10%) УПГ" />
+		<Field Name="UZ1_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="7EAB52EE46758020C058419C16F03354" Comment="Неисправность UZ1 " />
+		<Field Name="UZ1_Bad_KCD" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5761E71F491DF1B97A07288285646AD6" Comment="Неисправность UZ1. КЦД  " />
+		<Field Name="UZ2_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EDE77A4C4048EF1463019C82E7EBF86E" Comment="Неисправность UZ2 " />
+		<Field Name="UZ2_Bad_KCD" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B5E381664846AAE49A29EC8A41BC739E" Comment="Неисправность UZ2. КЦД  " />
+		<Field Name="GPA6_ASPS_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="AFAAC3C4499A9075084C8D8703A8F8DC" Comment="Неисправность АСПС, КЗ и ПТ ГПА, поз. 31.3" />
+		<Field Name="GPA4_ASPS_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="08DC6475443A7752BD486286D581B77F" Comment="Неисправность АСПС, КЗ и ПТ ГПА, поз.31.1" />
+		<Field Name="GPA5_ASPS_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="26835C7D43B1B2F028D7108326740941" Comment="Неисправность АСПС, КЗ и ПТ ГПА, поз.31.2" />
+		<Field Name="UPG_ASPS_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="82765D6C4974EC1F0496A483554EAEDE" Comment="Неисправность АСПС, КЗ и ПТ УПГ" />
+		<Field Name="URM_ASPS_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6622D4BC47B66F4413617B939AEA20EF" Comment="Неисправность АСПС, КЗ и ПТ УРМ" />
+		<Field Name="PLC_GPA4_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6E57401247ABDE615CE052B790FC0C6B" Comment="Неисправность контроллера САУ ГПА №1 " />
+		<Field Name="PLC_GPA5_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="8AB0291846EB8C53982C5D8E469C1AA7" Comment="Неисправность контроллера САУ ГПА №2" />
+		<Field Name="PLC_GPA6_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="10020321439E84C264C9C59869DEBE2A" Comment="Неисправность контроллера САУ ГПА №3" />
+		<Field Name="DC24osn_Ext1_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5943911742E9F18FD96A818BC01E8C55" Comment="Неисправность осн. ИП =24В внешних цепей" />
+		<Field Name="DC24osn_Ext2_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3B5538F346AD9FFBEB1F1F90D6951C33" Comment="Неисправность осн. ИП =24В внешних цепей" />
+		<Field Name="DC24osn_Int_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="CADE387C4F81179CE285138F63139EC0" Comment="Неисправность осн. ИП =24В внутренних цепей" />
+		<Field Name="DC24rez_Ext1_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="83746D8B43CC7C5D6A5893A2BDD2BCD4" Comment="Неисправность рез. ИП =24В внешних цепей" />
+		<Field Name="DC24rez_Ext2_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="DDFEEDE741A0152052311E833234D28A" Comment="Неисправность рез. ИП =24В внешних цепей" />
+		<Field Name="DC24rez_Int_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="C186ABB04AEFF15FE0C9F3AD3A993BFD" Comment="Неисправность рез. ИП =24В внутренних цепей" />
+		<Field Name="SAPS_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E051FA4748B94FE7318FED89C8023FD9" Comment="Неисправность САПС обобщенный" />
+		<Field Name="SAU_UPG_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B5FA655E42ED2E074A93E19E487778D8" Comment="Неисправность САУ УПГ" />
+		<Field Name="U_AC220_US" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="60568FB944A7298D17D44BBD7B87D846" Comment="Нет ~220В в УC " />
+		<Field Name="Chk_razr" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B16DC70C4410F12190BA6E9C68FBF707" Comment="Нет исправности разрядников" />
+		<Field Name="Chk_AC220_SAU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="217A23E5429A63D2E7AA3D815BFA385A" Comment="Нет основного питания  ~220 В" />
+		<Field Name="Chk_DC220_Kr" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="90C939974CA967425F09D68CC980102A" Comment="Нет питания кранов =220В" />
+		<Field Name="Chk_DC220_SAU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="2BAC851142881F14879441BFE59FC94D" Comment="Нет резервного питания  =220 В" />
+		<Field Name="Lf_R1_n" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="D84DDC37455FE8F12085FFA09687770F" Comment="Нижний уровень в Р1 для дизтоплива, поз.LSA2" />
+		<Field Name="Tg_out_KC_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="22D47B1B455D6D40CDAF3386173FFC5C" Comment="Повышенная температура на выходе КЦ" />
+		<Field Name="Pg_out_KC_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="CD65E8054BED501EA0D9E18D33E0F5EA" Comment="Повышенное давление на выходе КЦ" />
+		<Field Name="U_hi" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="E6F9F4B649B537F380C15AAAE09BD493" Comment="Повышенное напряжение " />
+		<Field Name="U_lo" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="9F0824EF4F5000804CEFDB960DF107DC" Comment="Пониженное напряжение" />
+		<Field Name="UK_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="FBE2CD5D4A01E71E5F5986B5F5493E67" Comment="УК неисправен" />
+		<Field Name="UTUO_Gas10" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="678204394756E2E93610E9AD8CA10226" Comment="УТУО. Загазованность по метану более 10% НКПР" />
+		<Field Name="UTUO_No_U" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="BD422E0E455DBEA21ABFA7A13DB05BDC" Comment="УТУО. Исчезновение напряжения питания" />
+		<Field Name="UTUO_Kl_ots_OF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6B223294498318DD64A1D4965A0212E2" Comment="УТУО. Срабатывание отсечного клапана на подводящем газопроводе" />
+		<Field Name="Fire_in_2obj" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5W7I235F3RREJE4MBSHJ5XSO7Q" Comment="Пожар в двух и более помещениях" />
+		<Field Name="Fire_in_2GPA" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="W5F267ULSOFEZFUGYX2TJA7FUM" Comment="Пожар на двух и более ГПА" />
+		<Field Name="Gas_in_2GPA" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="X73MAZDNV4XEVOXXLS5NFSDTFU" Comment="Аварийная загазованность на двух и более ГПА" />
+		<Field Name="PRU_AOss_BTN" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6OISVVUHC2KE5EVAK7W67EO5PE" Comment="АОcc от ПРУ КЦ (сенсорная кнопка)" />
+		<Field Name="PRU_AObs_BTN" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="KUQKDADD33MELALAR4ZU7CB5GI" Comment="АОбc от ПРУ КЦ (сенсорная кнопка)" />
+		<Field Name="zagaz_CH_10_NKPV" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3KD4UCV4TRWETEFZ3BMNPKAY4A" Comment="Котельная: Загазованность СН 10% НКПВ" />
+		<Field Name="zagaz_CO_100_2" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3JTV76QOQXVU5CY65KIHW5WYZY" Comment="Котельная: Загазованность СО 100 мГ/м3 2-й порог" />
+		<Field Name="P_obr_v_AvLow" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="IR7HCG4CYSLUBIRJQH5QG3SDII" Comment="Котельная: Давление обратной воды аварийно низкое" />
+		<Field Name="Pozhar" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="XA3BFZXOVM5E7GWMHSO6BAFKXU" Comment="Котельная: Пожар в котельной" />
+		<Field Name="P_gaza_Fault" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="MQCRBH7UU7EUNMEJWBJ7HBZD7Y" Comment="Котельная: Давление газа не в норме" />
+		<Field Name="P_obr_v_AvHi" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="R4NAMFU4KFSEDGFPORYMT3NMUA" Comment="Котельная: Давление обратной воды аварийно высокое" />
+		<Field Name="P_prym_sv_AvHi" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="XITNBBVPRPWENP6N5GVY5SBAKE" Comment="Котельная: Давление прямой сетевой воды аварийно высокое" />
+		<Field Name="AVR_SN_Fault" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="TSTHM2ALHOGUZOLUBELGPRVMPE" Comment="Котельная: Не сработал АВР сетевых насосов" />
+		<Field Name="Avar_v_APV" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="OBGO3QJH6VJUHCAHQ2JLYDBIS4" Comment="Котельная: Авария в системе АПВ" />
+		<Field Name="Avar_VRU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="OU5LUQK55FXEDJ3WFUPGWESX7M" Comment="Котельная: Авария ВРУ" />
+		<Field Name="Stop_Kotel1" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="GML5IDTMJL7EVLFZJWBRPSSCJM" Comment="Котельная: Аварийно остановился котел №1" />
+		<Field Name="Stop_Kotel2" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="HGUDDN7BHMDUXPPRY2KH23NIWQ" Comment="Котельная: Аварийно остановился котел №2" />
+		<Field Name="EKV_vh_NIV_max" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="GDJFZ74AOA5UBGHC4VP6D7FHSQ" Comment="Котельная: ЭКМ на выходе НИВ максимум" />
+		<Field Name="EKV_vh_NIV_min" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="SY3D4B7QYJEEPNVCDJO3AT3KIA" Comment="Котельная: ЭКМ на выходе НИВ минимум" />
+		<Field Name="zagaz_CO_20_1" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="XTRGSSXC75EEXOPRVU75BXXHJQ" Comment="Котельная: Загазованность СО 20 мГ/м3 1-й порог" />
+		<Field Name="AVR_SN_ON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="A647JQFX6KPEFEPTYB6KFS2BKM" Comment="Котельная: Работал АВР сетевых насосов" />
+		<Field Name="Reagent_Low" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="YHEUZUBOWFSEPKOUQ6YAV2YNME" Comment="Котельная: Заканчивается реагент в бачке" />
+		<Field Name="Fault_OPS" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="MPOYAP4HO2LEDOR7JNQ57QHJRI" Comment="Котельная: Неисправность ОПС" />
+		<Field Name="P_obr_v_Low" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="IG4E6JRZ47WUVH5KM3PY2K26BI" Comment="Котельная: Давление обратной воды понижено" />
+		<Field Name="P_obr_v_Hi" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5J7VR5NF4NHEFMNOLZJIPFM42I" Comment="Котельная: Давление обратной воды повышено" />
+		<Field Name="NIV_P_Low" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="GSYZ4VJ6RHSERFH7COOZLI7PM4" Comment="Котельная: Насос НИВ не набрал давления" />
+		<Field Name="Osn_R11" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3FAMX7CBR6YU7MOYG6R7CKBCBM" Comment="Пульсар: Осн. R пластины 1 в т. 1 (N1-1) &gt; 11 Ом" />
+		<Field Name="Osn_R12" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="X7H7QSBXVS5U3DHC22DDZHSBXA" Comment="Пульсар: Осн. R пластины 2 в т. 1 (N1-2) &gt; 11 Ом" />
+		<Field Name="Osn_R13" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="62GHDN6YCO2ELCZY4ITPX5VSE4" Comment="Пульсар: Осн. R пластины 3 в т. 1 (N1-3) &gt; 11 Ом" />
+		<Field Name="Osn_R21" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6DFW65NFZN6EVOV5ET5XYFS4QE" Comment="Пульсар: Осн. R пластины 1 в т. 2 (N2-1) &gt; 11 Ом" />
+		<Field Name="Osn_R22" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6HEV5OF2RQZUZHDTZASZ4LO4DE" Comment="Пульсар: Осн. R пластины 2 в т. 2 (N2-2) &gt; 11 Ом" />
+		<Field Name="Osn_R23" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="H3ILOO45ZIUE3OLXORVKFZHZBI" Comment="Пульсар: Осн. R пластины 3 в т. 2 (N2-3) &gt; 11 Ом" />
+		<Field Name="Osn_R31" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="UANYHHVZEJOE5AP47KNUKUPFJY" Comment="Пульсар: Осн. R пластины 1 в т. 3 (N3-1) &gt; 11 Ом" />
+		<Field Name="Osn_R32" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5D5GKVBSBT2URIYKGQODJIGGMY" Comment="Пульсар: Осн. R пластины 2 в т. 3 (N3-2) &gt; 11 Ом" />
+		<Field Name="Osn_R33" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3DGYUJJYHJYUXHY22T2WDFDSII" Comment="Пульсар: Осн. R пластины 3 в т. 3 (N3-3) &gt; 11 Ом" />
+		<Field Name="Osn_R41" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="KOLGHSAVBYAETJRHZX7YLHUPXM" Comment="Пульсар: Осн. R пластины 1 в т. 4 (N4-1) &gt; 11 Ом" />
+		<Field Name="Osn_R42" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="LKGMAOGKWDUUZFAHJVK3J6UXSA" Comment="Пульсар: Осн. R пластины 2 в т. 4 (N4-2) &gt; 11 Ом" />
+		<Field Name="Osn_R43" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="XKSCLXJPCADU3AT4X73OXHGBSI" Comment="Пульсар: Осн. R пластины 3 в т. 4 (N4-3) &gt; 11 Ом" />
+		<Field Name="Osn_R51" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="2REB4SQR2QJUBLXL2MUO4ZNCIA" Comment="Пульсар: Осн. R пластины 1 в т. 5 (N5-1) &gt; 11 Ом" />
+		<Field Name="Osn_R52" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="WTV7Y2XHFHZEVNNBW5I7JOQ5A4" Comment="Пульсар: Осн. R пластины 2 в т. 5 (N5-2) &gt; 11 Ом" />
+		<Field Name="Osn_R53" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="32DJBLHRARJEVIQE6L46RRDONE" Comment="Пульсар: Осн. R пластины 3 в т. 5 (N5-3) &gt; 11 Ом" />
+		<Field Name="Osn_R61" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EFPKVY7OJTDUFFFDUSERLRK7HY" Comment="Пульсар: Осн. R пластины 1 в т. 6 (N6-1) &gt; 11 Ом" />
+		<Field Name="Osn_R62" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="YFUAJ3MQNC6E5KXR7ZPQWLDZSA" Comment="Пульсар: Осн. R пластины 2 в т. 6 (N6-2) &gt; 11 Ом" />
+		<Field Name="Osn_R63" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EHCYBLB7U22U7CGOJ3PZ6AF6BQ" Comment="Пульсар: Осн. R пластины 3 в т. 6 (N6-3) &gt; 11 Ом" />
+		<Field Name="Osn_R71" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="BI7KP6ZODMDUTDGYYESH5F62LI" Comment="Пульсар: Осн. R пластины 1 в т. 7 (N7-1) &gt; 11 Ом" />
+		<Field Name="Osn_R72" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="WGM4LHN7V6CEHDJ46NQZ4EVPHM" Comment="Пульсар: Осн. R пластины 2 в т. 7 (N7-2) &gt; 11 Ом" />
+		<Field Name="Osn_R73" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="TT4TI67KELFUFIYXAXENJRWNNM" Comment="Пульсар: Осн. R пластины 3 в т. 7 (N7-3) &gt; 11 Ом" />
+		<Field Name="Osn_R81" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="P2TIWFWEPKRURKJPFP4LE66ILE" Comment="Пульсар: Осн. R пластины 1 в т. 8 (N8-1) &gt; 11 Ом" />
+		<Field Name="Osn_R82" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="WO3JC6AQ3XYEHGWS2ZZ5SQYFTY" Comment="Пульсар: Осн. R пластины 2 в т. 8 (N8-2) &gt; 11 Ом" />
+		<Field Name="Osn_R83" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="4V2UAS7SSEZUNAUW4LHYZALCO4" Comment="Пульсар: Осн. R пластины 3 в т. 8 (N8-3) &gt; 11 Ом" />
+		<Field Name="Osn_KIP_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="25F57SG3FLBE5KPUOSTSGHVRTE" Comment="Пульсар: Осн. КИП вскрыт" />
+		<Field Name="Osn_BB_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RY65N63V3XZEXBNSK7E7Y3HF7A" Comment="Пульсар: Осн. б/б вскрыт" />
+		<Field Name="Osn_No_U_EXZ" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="FDRCSKKLH2QUNFGAKVXLYSN4RA" Comment="Пульсар: Осн. нет 220 В на апп. ЭХЗ" />
+		<Field Name="Osn_Smodul1_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="XK2XCLH757KE5I7K2BKLFZRLDI" Comment="Пульсар: Осн. силовой модуль 1 неисправен" />
+		<Field Name="Osn_Smodul2_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6PKEZPQADNXEBD45GLUQPDFXLA" Comment="Пульсар: Осн. силовой модуль 2 неисправен" />
+		<Field Name="Osn_Smodul3_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="HSVRPHUT4AHEXDJJ4WEXMN4ZZ4" Comment="Пульсар: Осн. силовой модуль 3 неисправен" />
+		<Field Name="Osn_Smodul4_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="4PIRH2U5HPQUDMEZQQXRUQF2GI" Comment="Пульсар: Осн. силовой модуль 4 неисправен" />
+		<Field Name="Osn_Smodul5_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="KMDFH7M2ATGENNQGBL2L4DUF44" Comment="Пульсар: Осн. силовой модуль 5 неисправен" />
+		<Field Name="Osn_Smodul6_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6LGWGO7QNFWUZPSBTKUSEWZQLY" Comment="Пульсар: Осн. силовой модуль 6 неисправен" />
+		<Field Name="Osn_Smodul7_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="ZISLZS7M4KWEZPN4AMVIIMQAUU" Comment="Пульсар: Осн. силовой модуль 7 неисправен" />
+		<Field Name="Osn_Smodul8_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EMQCUVJRFOKUHC45TVHJDFUJXM" Comment="Пульсар: Осн. силовой модуль 8 неисправен" />
+		<Field Name="Osn_Smodul9_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="LSK34SZLDOOEPOST7RKL55HLLQ" Comment="Пульсар: Осн. силовой модуль 9 неисправен" />
+		<Field Name="Osn_Smodul10_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="44ULIOH3CGBULAHYCWS4U753CU" Comment="Пульсар: Осн. силовой модуль 10 неисправен" />
+		<Field Name="Osn_Smodul11_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="BWRHIJVN6JLUFFEHQVYQPASTKU" Comment="Пульсар: Осн. силовой модуль 11 неисправен" />
+		<Field Name="Osn_Smodul12_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="ASNEZAJSXHEUZJ2GAOS3ZZZ74A" Comment="Пульсар: Осн. силовой модуль 12 неисправен" />
+		<Field Name="Osn_1ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="IDE26STKQI4URCXNTMBULCKBPQ" Comment="Пульсар: Осн. 1 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_2ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="NJGLKSBNJDJEZEJ3CZEVN2LJZU" Comment="Пульсар: Осн. 2 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_3ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="BBPPA7FMX3BUJIHOAAXGKLFTZI" Comment="Пульсар: Осн. 3 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_4ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="GLPYOFF64RUEHL5PNSVSXD22NI" Comment="Пульсар: Осн. 4 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_5ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="DPFVXVHSHPZUTJ55JW6B7C3RBU" Comment="Пульсар: Осн. 5 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_6ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EXZL62UJUOKEZMHUUS7SMJ3JBQ" Comment="Пульсар: Осн. 6 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_R11" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="HUCAVGG2YFZELMUKHNA47LL22Y" Comment="Пульсар: Рез. R пластины 1 в т. 1 (N1-1) &gt; 11 Ом" />
+		<Field Name="Rez_R12" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EZIS7AEKGEKUJNBBHKNACXJ7MQ" Comment="Пульсар: Рез. R пластины 2 в т. 1 (N1-2) &gt; 11 Ом" />
+		<Field Name="Rez_R13" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="FTDVMIOEHWHE5KTEHNPATSXNGI" Comment="Пульсар: Рез. R пластины 3 в т. 1 (N1-3) &gt; 11 Ом" />
+		<Field Name="Rez_R21" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6OA44WT4AFWU3MN2FOLU7ZN3AM" Comment="Пульсар: Рез. R пластины 1 в т. 2 (N2-1) &gt; 11 Ом" />
+		<Field Name="Rez_R22" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="MS5CIYTEMDSUJFEI5GSA7E4WQ4" Comment="Пульсар: Рез. R пластины 2 в т. 2 (N2-2) &gt; 11 Ом" />
+		<Field Name="Rez_R23" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RQIANHMYYUFERBJQSO4LTDXFLQ" Comment="Пульсар: Рез. R пластины 3 в т. 2 (N2-3) &gt; 11 Ом" />
+		<Field Name="Rez_R31" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="TMLMEAGNBSGUTPVKQ5ISCAXE4Y" Comment="Пульсар: Рез. R пластины 1 в т. 3 (N3-1) &gt; 11 Ом" />
+		<Field Name="Rez_R32" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="2X6FHRJG5F3ERAKABTVXJZEFGQ" Comment="Пульсар: Рез. R пластины 2 в т. 3 (N3-2) &gt; 11 Ом" />
+		<Field Name="Rez_R33" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="ZLSEIT2J5EGETBZ5SMIMC6OMKI" Comment="Пульсар: Рез. R пластины 3 в т. 3 (N3-3) &gt; 11 Ом" />
+		<Field Name="Rez_R41" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="JEEBJQLZHVOEBOJVV4PXXHSRJM" Comment="Пульсар: Рез. R пластины 1 в т. 4 (N4-1) &gt; 11 Ом" />
+		<Field Name="Rez_R42" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RLJKYKL54KKUJOVNQP4W37D3W4" Comment="Пульсар: Рез. R пластины 2 в т. 4 (N4-2) &gt; 11 Ом" />
+		<Field Name="Rez_R43" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="ZJILLJ6NNSQEVMN7JWX5QUO2YI" Comment="Пульсар: Рез. R пластины 3 в т. 4 (N4-3) &gt; 11 Ом" />
+		<Field Name="Rez_R51" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6HKEWGVHSRPUZCIUBVBS6RR4FI" Comment="Пульсар: Рез. R пластины 1 в т. 5 (N5-1) &gt; 11 Ом" />
+		<Field Name="Rez_R52" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RMFONG35JZUU7DQJUSRMO5Y63U" Comment="Пульсар: Рез. R пластины 2 в т. 5 (N5-2) &gt; 11 Ом" />
+		<Field Name="Rez_R53" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="PRNAP24QJ7XULOG7K2DKGJ4B3E" Comment="Пульсар: Рез. R пластины 3 в т. 5 (N5-3) &gt; 11 Ом" />
+		<Field Name="Rez_R61" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="MITZADFTI3MELDM27UCKI4Q4ZU" Comment="Пульсар: Рез. R пластины 1 в т. 6 (N6-1) &gt; 11 Ом" />
+		<Field Name="Rez_R62" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="SD3QFZ6HLTHE5D23HCRO3UHZHI" Comment="Пульсар: Рез. R пластины 2 в т. 6 (N6-2) &gt; 11 Ом" />
+		<Field Name="Rez_R63" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="KSV7ZOAHIDUURBO3ROZY5CXIWU" Comment="Пульсар: Рез. R пластины 3 в т. 6 (N6-3) &gt; 11 Ом" />
+		<Field Name="Rez_R71" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="P5YMLZTJ747EDISIAZJZOZOMVQ" Comment="Пульсар: Рез. R пластины 1 в т. 7 (N7-1) &gt; 11 Ом" />
+		<Field Name="Rez_R72" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="77OJUVY5WWAEVF2MH6HTO57HFA" Comment="Пульсар: Рез. R пластины 2 в т. 7 (N7-2) &gt; 11 Ом" />
+		<Field Name="Rez_R73" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="DII3BDPVAUSUZPG277RELS65PI" Comment="Пульсар: Рез. R пластины 3 в т. 7 (N7-3) &gt; 11 Ом" />
+		<Field Name="Rez_R81" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="TGAB45IF7L4E3D72DQSUJ6TNIQ" Comment="Пульсар: Рез. R пластины 1 в т. 8 (N8-1) &gt; 11 Ом" />
+		<Field Name="Rez_R82" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="OTDJZNMKQPSUXLOFY25YTS53QU" Comment="Пульсар: Рез. R пластины 2 в т. 8 (N8-2) &gt; 11 Ом" />
+		<Field Name="Rez_R83" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="4AELLGJ7WZDELN73KGUYF6V6HE" Comment="Пульсар: Рез. R пластины 3 в т. 8 (N8-3) &gt; 11 Ом" />
+		<Field Name="Rez_KIP_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="ZL3V7TDYF2ZU7N44GKQF6STSNQ" Comment="Пульсар: Рез. КИП вскрыт" />
+		<Field Name="Rez_BB_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="VDTJ7VF47NOUPPGR65V3I3RCEY" Comment="Пульсар: Рез. б/б вскрыт" />
+		<Field Name="Rez_No_U_EXZ" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="GBHKPX5OVV7ELDJQWX4P3FQTLE" Comment="Пульсар: Рез. нет 220 В на апп. ЭХЗ" />
+		<Field Name="Rez_Smodul1_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="Y2KV2J6RINLE5BZ54WUDIA6MNM" Comment="Пульсар: Рез. силовой модуль 1 неисправен" />
+		<Field Name="Rez_Smodul2_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="PRWNPBALLW3UHOB3XLGNASXMEQ" Comment="Пульсар: Рез. силовой модуль 2 неисправен" />
+		<Field Name="Rez_Smodul3_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="QDXQIBOCU47ENEMMSRHCKAVNVM" Comment="Пульсар: Рез. силовой модуль 3 неисправен" />
+		<Field Name="Rez_Smodul4_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EWJQ6O3Z32SEDEZK34LXBAY3GI" Comment="Пульсар: Рез. силовой модуль 4 неисправен" />
+		<Field Name="Rez_Smodul5_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="XW4UTO4UNT2EJNSKKHRMJN2APU" Comment="Пульсар: Рез. силовой модуль 5 неисправен" />
+		<Field Name="Rez_Smodul6_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EIBI4BPVPZOEPFR4N3LD342U7Y" Comment="Пульсар: Рез. силовой модуль 6 неисправен" />
+		<Field Name="Rez_Smodul7_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="GAIVKX4OHVDULEDIDWN6Y4WZOU" Comment="Пульсар: Рез. силовой модуль 7 неисправен" />
+		<Field Name="Rez_Smodul8_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="QSBUWAZYPPZERN5PCNMFKCRICY" Comment="Пульсар: Рез. силовой модуль 8 неисправен" />
+		<Field Name="Rez_Smodul9_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="EYBDP44JM5HEHECPNTQ2YMGLBM" Comment="Пульсар: Рез. силовой модуль 9 неисправен" />
+		<Field Name="Rez_Smodul10_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="N32NVRNA4I5EJORHR2WUAFBDOY" Comment="Пульсар: Рез. силовой модуль 10 неисправен" />
+		<Field Name="Rez_Smodul11_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="4ALUJ5LSGVME3KSJC7GJMTTVTQ" Comment="Пульсар: Рез. силовой модуль 11 неисправен" />
+		<Field Name="Rez_Smodul12_bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="V2ENBGKNDTFUNJJKHPTX7635HA" Comment="Пульсар: Рез. силовой модуль 12 неисправен" />
+		<Field Name="Rez_1ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="IJ5QKZIJAXPURD4Y3LBGQGNVQY" Comment="Пульсар: Рез. 1 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_2ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="KNRECVJLD7UE5E5Z6EBUU4XBAU" Comment="Пульсар: Рез. 2 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_3ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B7GX6FUE4H4E5KKVBKAG6PRYEI" Comment="Пульсар: Рез. 3 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_4ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="SZNURSO6WSOE5FPYXTNT6D2Z5Y" Comment="Пульсар: Рез. 4 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_5ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="AZ5ZWCPSCHUETMZR4QCDVOOQWQ" Comment="Пульсар: Рез. 5 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_6ch_ResOn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="2JGA3EG6DLAUNJIZGHTTQBNCME" Comment="Пульсар: Рез. 6 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_SKZ1" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="FR7EHZOIGZKEPKRIEZ6DV7JC6I" Comment="Пульсар: Осн. режим стабилизации СКЗ-1" />
+		<Field Name="Osn_SKZ2" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="YAYJBR3L32YEFGB4INBFELKL6Q" Comment="Пульсар: Осн. режим стабилизации СКЗ-2" />
+		<Field Name="Osn_SKZ3" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="WT32Z2SAR5WU3IPIPOK4RCQTMY" Comment="Пульсар: Осн. режим стабилизации СКЗ-3" />
+		<Field Name="Osn_SKZ4" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="CQ5NTENV3FOUBECKR2CIXCP4BU" Comment="Пульсар: Осн. режим стабилизации СКЗ-4" />
+		<Field Name="Osn_SKZ5" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RDZY4HFCJNPERA3LAOZMMZTCAQ" Comment="Пульсар: Осн. режим стабилизации СКЗ-5" />
+		<Field Name="Osn_SKZ6" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="JMBKYQQXTX4UDJXNXSFYU26U6Y" Comment="Пульсар: Осн. режим стабилизации СКЗ-6" />
+		<Field Name="Res_SKZ1" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5OMLGQAMWPIU5IVA6YPXE6QUC4" Comment="Пульсар: Рез. режим стабилизации СКЗ-1" />
+		<Field Name="Res_SKZ2" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6LSYPZCG6SOEZJ63TW4SH63VLY" Comment="Пульсар: Рез. режим стабилизации СКЗ-2" />
+		<Field Name="Res_SKZ3" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="YGZJBZVJ5PCEBAR5ABVOAUSRHA" Comment="Пульсар: Рез. режим стабилизации СКЗ-3" />
+		<Field Name="Res_SKZ4" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="7O3VW7KN2YSEXPND5IVWUPTJAA" Comment="Пульсар: Рез. режим стабилизации СКЗ-4" />
+		<Field Name="Res_SKZ5" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="SJFXQ7QUKZEUDPVDVQH3NDAS5Q" Comment="Пульсар: Рез. режим стабилизации СКЗ-5" />
+		<Field Name="Res_SKZ6" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RY5QK5QQVHWU3EGHGA2HNEBJNE" Comment="Пульсар: Рез. режим стабилизации СКЗ-6" />
+	</Fields>
+</Type>

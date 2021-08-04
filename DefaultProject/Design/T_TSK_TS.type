@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TSK_TS" Kind="Struct" UUID="5JCLGKE4I65UPBYVACCZMJD4NY">
+	<Fields>
+		<Field Name="DU_IM" Type="BOOL" UUID="V6VQ5US3TSPUFC4Y7DJWQLZQ4I" Comment="Ручное управление ИМ" />
+	</Fields>
+</Type>

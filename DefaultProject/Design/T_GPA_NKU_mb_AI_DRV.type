@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_NKU_mb_AI_DRV" UUID="81C87252898C4737A08A41C180F3296B">
+<Fields>
+<Field Comment="Температура воздуха в отсеке ЭТО" Name="Tv_ETO" Type="REAL" UUID="10064874047C47E09948ED6561D06A72"/>
+<Field Comment="Температура воздуха в отсеке САУ" Name="Tv_SAU" Type="REAL" UUID="C04E6E0BE5314D46848114C9B717DD4C"/>
+<Field Comment="Резерв" Name="Res_0" Type="REAL" UUID="2CB31B34E8DB42D1A27A520425F3DF1D"/>
+<Field Comment="Резерв" Name="Res_1" Type="REAL" UUID="5ECDF26705554DE0A7AE98414421598D"/>
+<Field Comment="Резерв" Name="Res_2" Type="REAL" UUID="DA4ADC050104447F8A67ACBDDF6F5578"/>
+<Field Comment="Резерв" Name="Res_3" Type="REAL" UUID="BE8133928C874DFFA316E2A1B30C9F89"/>
+<Field Comment="Резерв" Name="Res_4" Type="REAL" UUID="1FB0C0E8B95A421FB8506C021F9DC069"/>
+<Field Comment="Резерв" Name="Res_5" Type="REAL" UUID="7AC241F514EC46C5B616435D3C9F3E40"/>
+<Field Comment="Напряжение на шинах ПТ =220В" Name="U_DC220" Type="REAL" UUID="CF73F4A0993E40DBA02EFB97DF51099D"/>
+<Field Comment="Резерв" Name="Res_6" Type="REAL" UUID="D6645520F1EB4F4DB6CB436D093AF3B9"/>
+<Field Comment="Резерв" Name="Res_7" Type="REAL" UUID="1FAB1AAC1F3C4B379F10631FB20FBB1C"/>
+<Field Comment="Резерв" Name="Res_8" Type="REAL" UUID="332B8389355C4358AA63D60FC4565C48"/>
+<Field Comment="Резерв" Name="Res_9" Type="REAL" UUID="1245AEDC8D6945DEA1229CDF873487BC"/>
+<Field Comment="Резерв" Name="Res_10" Type="REAL" UUID="4F56B680943C44CCAD25FE0CAFA641BC"/>
+<Field Comment="Резерв" Name="Res_11" Type="REAL" UUID="E1B789F92E5B4F25A6B06C0AB18109A6"/>
+<Field Comment="Резерв" Name="Res_12" Type="REAL" UUID="76F2A790F7734E7DBF7C1350E7CFBEE6"/>
+</Fields>
+</Type>

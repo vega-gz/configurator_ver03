@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_TSK_AI_ToHMI" UUID="1905811CF75D4F68B016A2E8D0EFFB46">
+<Fields>
+<Field Comment="Температура воздуха в ББ САУ ТСк ПХГ TТ-100" Name="T_BB_TSK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E214DF1C6D4E4B8AB854150669C8A0DA"/>
+<Field Comment="Трубное давление в скважине 1Т (НКТ 114мм) РТ-11" Name="Pg_1T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DC0D40E796274F17AE6A9663AA7169D0"/>
+<Field Comment="Межколонное давление в скважине 1Т (между колоннами 114-178мм)  РТ-12" Name="Pg_1T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DC67DADA7CD44514A0B93CB165F39C60"/>
+<Field Comment="Межколонное давление в скважине 1Т (между колоннами 178-245мм) РТ-13" Name="Pg_1T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2C58CC5CD7174795BF17E8BB1532BDF0"/>
+<Field Comment="Межколонное давление в скважине 1Т (между колоннами 245-324мм) РТ-14" Name="Pg_1T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="705B817BC6C840C581FD412129830BA7"/>
+<Field Comment="Температура газа на скважине 1Т TТ-11" Name="Tg_1T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="ED5BB3F97E8E44F98589C3CD84D55B21"/>
+<Field Comment="Резерв" Name="Res_0" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="86F5C993240B426793BE176CB668B6D9"/>
+<Field Comment="Трубное давление в скважине 2Т  (НКТ 114мм) РТ-21" Name="Pg_2T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="777264BDCD684BC2A1F0CBAAE6A6270F"/>
+<Field Comment="Межколонное давление в скважине 2Т (между колоннами 114-178мм) РТ-22" Name="Pg_2T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1DD23C84F2BD45E68EB3329EA268BB7A"/>
+<Field Comment="Межколонное давление в скважине 2Т (между колоннами 178-245мм) РТ-23" Name="Pg_2T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BC69EFBBBE6A49E0BFC567FC79ADC6E3"/>
+<Field Comment="Межколонное давление в скважине 2Т (между колоннами 245-324мм) РТ-23" Name="Pg_2T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2B9735098E204375A32E45128017430D"/>
+<Field Comment="Температура газа на скважине 2Т TТ-21" Name="Tg_2T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D7101C11014940DA82E3E5DE6734481E"/>
+<Field Comment="Резерв" Name="Res_1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5396BC2457FE468ABFB1B101A0DBFA5F"/>
+<Field Comment="Трубное давление в скважине 3Т (НКТ 114мм) РТ-31" Name="Pg_3T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="46BA19625AEF4247901957602126E075"/>
+<Field Comment="Межколонное давление в скважине 3Т (между колоннами 114-178мм) РТ-32" Name="Pg_3T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DC17B50DE01A437CBB1D089EC7210F9F"/>
+<Field Comment="Межколонное давление в скважине 3Т (между колоннами 178-245мм) РТ-33" Name="Pg_3T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8D124828E68549169297F1CDC711FA30"/>
+<Field Comment="Межколонное давление в скважине 3Т (между колоннами 245-324мм) РТ-34" Name="Pg_3T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="320AC0C9493C4D639C9DFADBF8990772"/>
+<Field Comment="Температура газа на скважине 3Т TТ-31" Name="Tg_3T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C4F0D21C0B704DA7B2310738765E04E5"/>
+<Field Comment="Загазованность на скважине 3ТAТ-31" Name="Zg_3T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="675A04B145894042A41A6A41D33CE227"/>
+<Field Comment="Трубное давление в скважине 4Т (НКТ 114мм) РТ-41" Name="Pg_4T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B561703526414E6F8BF084D4590CD3FD"/>
+<Field Comment="Межколонное давление в скважине 4Т (между колоннами 114-178мм) РТ-42" Name="Pg_4T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="84EA45EA7A7D4906941A8D1899113A59"/>
+<Field Comment="Межколонное давление в скважине 4Т (между колоннами 178-245мм) РТ-43" Name="Pg_4T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="42A096B6C54241FFA57EA0673436E818"/>
+<Field Comment="Межколонное давление в скважине 4Т (между колоннами 245-324мм) РТ-44" Name="Pg_4T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AC15D1C467C044EF82F98008D0B8CFC1"/>
+<Field Comment="Температура газа на скважине 4Т TТ-41" Name="Tg_4T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="80D16B18D58B488BA5221EE3D5E03B9C"/>
+<Field Comment="Загазованность на скважине 4Т AТ-41" Name="Zg_4T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="875E3F118FDF4B7481709733CC169FFD"/>
+<Field Comment="Трубное давление в скважине 5Т (НКТ 114мм) РТ-51" Name="Pg_5T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E4773DC36B364723993C6987E8BF7CA2"/>
+<Field Comment="Межколонное давление в скважине 5Т (между колоннами 114-178мм) РТ-52" Name="Pg_5T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="37E9B1F56620464B8BD734E6BE717B70"/>
+<Field Comment="Межколонное давление в скважине 5Т (между колоннами 178-245мм) РТ-53" Name="Pg_5T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CA519E86DE7A47BEBDB0FEAAE9B2E868"/>
+<Field Comment="Межколонное давление в скважине 5Т (между колоннами 245-324мм) РТ-54" Name="Pg_5T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CED6AB0F8FD546D1BF99718BEF403667"/>
+<Field Comment="Температура газа на скважине 5Т TТ-51" Name="Tg_5T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C0348C2760A24F6282B62C4149906A6C"/>
+<Field Comment="Загазованность на скважине 5Т AТ-51" Name="Zg_5T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A4AE71432CAF419887638859CD11C439"/>
+<Field Comment="Температура воздуха в ББ САУ ТСк ПХГ" Name="T_BB_TSK2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="33AB276414324603929105F129DDCAC3"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 6Т TТ-62" Name="T_BB_EXZ_6T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EF16FA34850246E3BECFC40838E1E485"/>
+<Field Comment="Температура атмосферного воздуха 6Т TТ-63" Name="Tatm_6T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="70D2086FC1984C3D8572130694B397BF"/>
+<Field Comment="Трубное давление в скважине 6Т (НКТ 114мм) РТ-61" Name="Pg_6T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="36EE5371FA80452A95D50D7B98CC88C0"/>
+<Field Comment="Межколонное давление в скважине 6Т (между колоннами 114-178мм) РТ-62" Name="Pg_6T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9B5B66C1FB254B5DA8DA28E61A843DBC"/>
+<Field Comment="Межколонное давление в скважине 6Т (между колоннами 178-245мм) РТ-63" Name="Pg_6T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2D5563D3E41C4ED9A99A9711339E0512"/>
+<Field Comment="Межколонное давление в скважине 6Т (между колоннами 245-324мм) РТ-64" Name="Pg_6T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E3338E2754384BF8B7C0F2E9BE2E5F75"/>
+<Field Comment="Температура газа на скважине 6Т TТ-61" Name="Tg_6T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7DA9394FE30E4E128DCC66303296FA27"/>
+<Field Comment="Загазованность на скважине 6Т AТ-61" Name="Zg_6T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C8F2ED3736E9499DAAD50B013BC2E4CF"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 7Т TТ-72" Name="T_BB_EXZ_7T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BCADDAF467F340A9A3F7ABC285EF1D8A"/>
+<Field Comment="Температура атмосферного воздуха 7Т TТ-73" Name="Tatm_7T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="18CF9D46B8AA4058BD230B53D5F0C122"/>
+<Field Comment="Трубное давление в скважине 7Т (НКТ 114мм) РТ-71" Name="Pg_7T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4C113256090B47C4A336485851C84D4E"/>
+<Field Comment="Межколонное давление в скважине 7Т (между колоннами 114-178мм) РТ-72" Name="Pg_7T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="061DAE80F00249C88201059FFFCCF16A"/>
+<Field Comment="Межколонное давление в скважине 7Т (между колоннами 178-245мм) РТ-73" Name="Pg_7T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3E7424DC6B844BA8A0CDB548ED89EC09"/>
+<Field Comment="Межколонное давление в скважине 7Т (между колоннами 245-324мм) РТ-74" Name="Pg_7T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4960DA51F7CC4F5DA9225E0276551F8B"/>
+<Field Comment="Температура газа на скважине 7Т TТ-71" Name="Tg_7T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="11E37164E6F9451D94C680A403167069"/>
+<Field Comment="Загазованность на скважине 7Т AТ-71" Name="Zg_7T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E67537D1CB63411EA7F2045D87BACD8E"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 8Т TТ-82" Name="T_BB_EXZ_8T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="465B65DB4E9943D9B194CE2E8529C87E"/>
+<Field Comment="Температура атмосферного воздуха 8Т TТ-83" Name="Tatm_8T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AACB46876AC242E495DA4DB8A5ABB3DC"/>
+<Field Comment="Трубное давление в скважине 8Т (НКТ 114мм) РТ-81" Name="Pg_8T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="79291B41A8EF49B9AB06C4EBBB97B7B5"/>
+<Field Comment="Межколонное давление в скважине 8Т (между колоннами 114-178мм) РТ-82" Name="Pg_8T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="52751ECA4B4D4B35B6EBCE3D45353962"/>
+<Field Comment="Межколонное давление в скважине 8Т (между колоннами 178-245мм) РТ-83" Name="Pg_8T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="61E390D13B7B42ADBE47945868CF62CD"/>
+<Field Comment="Межколонное давление в скважине 8Т (между колоннами 245-324мм) РТ-84" Name="Pg_8T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3BBE880BD99F46FC9E0846B602E6685A"/>
+<Field Comment="Температура газа на скважине 8Т TТ-81" Name="Tg_8T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="03A171AF576B4311BA113F67B07DDE86"/>
+<Field Comment="Загазованность на скважине 8Т AТ-81" Name="Zg_8T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7E95BE5ABF954F519CCCD8994D42E8E1"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 9Т TТ-92 " Name="T_BB_EXZ_9T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8ACFEA70218F40849EAA9410347F1FD7"/>
+<Field Comment="Температура атмосферного воздуха 9Т TТ-93" Name="Tatm_9T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7AC09784F927454A8A7642C8BCA25140"/>
+<Field Comment="Трубное давление в скважине 9Т (НКТ 114мм) РТ-91" Name="Pg_9T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F9FD9C8A83B44F99895A0DA8C3381497"/>
+<Field Comment="Межколонное давление в скважине 9Т (между колоннами 114-178мм) РТ-92" Name="Pg_9T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9AAF5544620947238DE83A4B4470AF75"/>
+<Field Comment="Межколонное давление в скважине 9Т (между колоннами 178-245мм) РТ-93" Name="Pg_9T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3DF165A3BE6E4D9982CE7A75EB38FEDC"/>
+<Field Comment="Межколонное давление в скважине 9Т (между колоннами 245-324мм) РТ-94" Name="Pg_9T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="20AB48CF28D446C18071D9DEED29CE91"/>
+<Field Comment="Температура газа на скважине 9Т TТ-91" Name="Tg_9T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6441F9BD4D724E69A3AB373AF15E62EF"/>
+<Field Comment="Загазованность на скважине 9Т AТ-91" Name="Zg_9T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4AEF11877A5E45CDA4ABB6A4F5FA63F5"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 10Т TТ-102" Name="T_BB_EXZ_10T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B4344782BA164DB7924D21BAD8813D12"/>
+<Field Comment="Температура атмосферного воздуха 10Т TТ-103" Name="Tatm_10T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BF8A39BCC5E741C695159CD8D5EF0254"/>
+<Field Comment="Трубное давление в скважине 10Т (НКТ 114мм) РТ-101" Name="Pg_10T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="85CFC16567C64C5694DAAE2E626DE6F3"/>
+<Field Comment="Межколонное давление в скважине 10Т (между колоннами 114-178мм) РТ-102" Name="Pg_10T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BFFDAA1B8A4F43F0B308BF0C5F4910A2"/>
+<Field Comment="Межколонное давление в скважине 10Т (между колоннами 178-245мм) РТ-103" Name="Pg_10T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="578FD20C69F04A808C1EBFA75889CE79"/>
+<Field Comment="Межколонное давление в скважине 10Т (между колоннами 245-324мм) РТ-104" Name="Pg_10T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="79293664B5754E15B14C4D80F76B219F"/>
+<Field Comment="Температура газа на скважине 10Т TТ-101" Name="Tg_10T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="19C078FB6C004C7C98F8E0F1676F40F5"/>
+<Field Comment="Загазованность на скважине 10Т AТ-101" Name="Zg_10T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9C58B625BBAF4DD3ADB5061D244BF26F"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 11Т TТ-112" Name="T_BB_EXZ_11T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2C43BF927915482EA38BC972E8118182"/>
+<Field Comment="Температура атмосферного воздуха 11Т TТ-113" Name="Tatm_11T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D6C3550461854FBD93559D97E35CF9F5"/>
+<Field Comment="Трубное давление в скважине 11Т (НКТ 114мм) РТ-111" Name="Pg_11T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A5FE5B4BDB96488AAA6EF099E97CAE18"/>
+<Field Comment="Межколонное давление в скважине 11Т (между колоннами 114-178мм) РТ-112" Name="Pg_11T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D9B99F2A2E924F58A730893F084DF71C"/>
+<Field Comment="Межколонное давление в скважине 11Т (между колоннами 178-245мм) РТ-113" Name="Pg_11T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CC20AB47EF9B464497F4EC14730B0CDF"/>
+<Field Comment="Межколонное давление в скважине 11Т (между колоннами 245-324мм) РТ-114" Name="Pg_11T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7992C4059F0A49D498560D6E725A30FE"/>
+<Field Comment="Температура газа на скважине 11Т TТ-111" Name="Tg_11T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="57B4FE5BA1454B248A613A7FD47DB5D5"/>
+<Field Comment="Загазованность на скважине 11Т AТ-111" Name="Zg_11T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AC77B981C1C047E2AD56BD05E85FC0F9"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 12Т TТ-122" Name="T_BB_EXZ_12T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5DB3D56B149049F3AA8BE2880683C969"/>
+<Field Comment="Температура атмосферного воздуха 12 TТ-123" Name="Tatm_12T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A07AC826151646D7BF2E80895C305CFE"/>
+<Field Comment="Трубное давление в скважине 12Т (НКТ 114мм) РТ-121" Name="Pg_12T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="48D3B901900D4169ADF0457483A7AD7D"/>
+<Field Comment="Межколонное давление в скважине 12Т (между колоннами 114-178мм) РТ-122" Name="Pg_12T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DE31A03102B2438A8507F390C5984580"/>
+<Field Comment="Межколонное давление в скважине 12Т (между колоннами 178-245мм) РТ-123" Name="Pg_12T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9C44B47EBE3B40A89713D6C398957BE0"/>
+<Field Comment="Межколонное давление в скважине 12Т (между колоннами 245-324мм) РТ-124" Name="Pg_12T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2CD9FFAEF02247E7B464BB7DD774D97C"/>
+<Field Comment="Температура газа на скважине 12Т TТ-121" Name="Tg_12T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F83CADE0416947349BE522B7931ABC69"/>
+<Field Comment="Загазованность на скважине 12Т AТ-121" Name="Zg_12T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D7AF9979464C4A00B51F41FD354797DE"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 13Т TТ-132" Name="T_BB_EXZ_13T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8E0E5F8F81FF4849B4F51F1F20D672B2"/>
+<Field Comment="Температура атмосферного воздуха 13 TТ-133" Name="Tatm_13T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="69A114162AE24427BFD31BD1F742C23C"/>
+<Field Comment="Трубное давление в скважине 13Т (НКТ 114мм) РТ-131" Name="Pg_13T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CD54F2874BF946F98A29A3EFA3C17A93"/>
+<Field Comment="Межколонное давление в скважине 13Т (между колоннами 114-178мм) РТ-132" Name="Pg_13T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="82E6207DA5DD4185A262AA35E1F25574"/>
+<Field Comment="Межколонное давление в скважине 13Т (между колоннами 178-245мм) РТ-133" Name="Pg_13T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="295DD121035049F587CBC4F0BD48D5DA"/>
+<Field Comment="Межколонное давление в скважине 13Т (между колоннами 245-324мм) РТ-134" Name="Pg_13T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1FCC69C09C8B4BE5B3E11C2640BB591D"/>
+<Field Comment="Температура газа на скважине 13Т TТ-131" Name="Tg_13T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="495767AB494B4D0783848C3BA2DF2523"/>
+<Field Comment="Загазованность на скважине 13Т AТ-131" Name="Zg_13T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BA7C77D22DDC43568F567BAA3D4A18AD"/>
+<Field Comment="Температура воздуха в ББ ЭХЗ 14Т TТ-142" Name="T_BB_EXZ_14T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="77403AEB75584E33B7B4FECA37FD243A"/>
+<Field Comment="Температура атмосферного воздуха 14Т TТ-143" Name="Tatm_14T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B97566F19446497ABFFC8E5392225EB4"/>
+<Field Comment="Трубное давление в скважине 14Т (НКТ 114мм) РТ-141" Name="Pg_14T_t" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E55D783775504354BFE2CD8897CD6478"/>
+<Field Comment="Межколонное давление в скважине 14Т (между колоннами 114-178мм) РТ-142" Name="Pg_14T_mk1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C7E38B96C7354B03ABFFF57C84C0BDC2"/>
+<Field Comment="Межколонное давление в скважине 14Т (между колоннами 178-245мм) РТ-143" Name="Pg_14T_mk2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="FE669D25DA1242B48039223475070A6B"/>
+<Field Comment="Межколонное давление в скважине 14Т (между колоннами 245-324мм) РТ-144" Name="Pg_14T_mk3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="41D6DD93B1BD458A9FC9B7A574E1D17D"/>
+<Field Comment="Температура газа на скважине 14Т TТ-141" Name="Tg_14T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="31C671EEF65A4D7D9702A0917757093A"/>
+<Field Comment="Загазованность на скважине 14Т AТ-141" Name="Zg_14T" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="853D6BFE939146948C43F89169CB5ACC"/>
+<Field Comment="Резерв" Name="Res_2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8683F2A156F1435A96433E9D90405637"/>
+<Field Comment="Резерв" Name="Res_3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="01414A82CBDD4B7E818A4B1BB4338CE8"/>
+<Field Comment="Резерв" Name="Res_4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7839CAF985A649C3B96C8E6FDE25FE61"/>
+<Field Comment="Резерв" Name="Res_5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="56D5C9C7D6D34AFDB80C403AB66E29FA"/>
+<Field Comment="Измерение основного напряжения" Name="Uosn_SAU" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4E4DC4DE6CA54997B9978824C09F95E5"/>
+<Field Comment="Резерв" Name="Res_6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8D705C18F8E946289541E6529D740EE6"/>
+<Field Comment="Резерв" Name="Res_7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C30AF5B0424341E49193EF89D47EB07D"/>
+<Field Comment="Резерв" Name="Res_8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="289AC5EB5A63456F825B57EA4AAD3D64"/>
+</Fields>
+</Type>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_FRegData" Kind="Struct" Comment="данные регулятора" UUID="A52E396B450FA502D4D94C92B8AAF8F0">
+	<Fields>
+		<Field Name="regs" Type="04A91D9149B2C11C4FA587ACBE8E9908" UUID="7875F71C46B1F570E8E58397A5753C47" ArraySize="10" />
+		<Field Name="contur" Type="INT" UUID="E78B32D84DD3DA8A9FF9BDA3BE0F4567" Comment=" номер контура, по которому определилсЯ общий выход" />
+		<Field Name="conturLim" Type="INT" UUID="E63B2E0644E73EE95979F8A22A7B6EAD" Comment=" номер контура с учетом &quot;виртуальных&quot; контуров" />
+		<Field Name="integ" Type="REAL" UUID="2CF6E13347F58AB1997305BB96A9A70E" Comment=" общий интегратор" />
+		<Field Name="outTemp" Type="REAL" UUID="2E2C9B6744D42100D5914AAFD83EEEF2" Comment=" выход" />
+		<Field Name="hiLimitRateNvd" Type="REAL" UUID="C7E4D6FF4E2C1C0CCACD9D815842A1BC" Comment=" ограничение скорости роста заданиЯ на частоту вращениЯ КВД" />
+		<Field Name="hiLimitRateNst" Type="REAL" UUID="BD1D04C04B33CFFAB70082938FDD56B7" Comment=" ограничение скорости роста заданиЯ на частоту вращениЯ СТ" />
+		<Field Name="TonLighting" Type="REAL" UUID="FAC61A7A4527D2F4309CFB95B7C2671D" Comment="температура до росжига" />
+		<Field Name="qGoodTC" Type="INT" UUID="5B9C056E4CDEC98E6CC1D290A80DBED3" Comment=" число исправных термопар" />
+		<Field Name="ti" Type="REAL" UUID="23FFCB42438EEEF92ED000827AE04DE2" Comment=" общий таймер" />
+		<Field Name="isRegNst" Type="BOOL" UUID="9F5C68184E2AB3985C72E28FB4197553" Comment=" регулирование по оборотам СТ" />
+		<Field Name="setTmp" Type="REAL" UUID="CD5F1291433442D98C650095C42678F1" Comment=" задание на частоту вращениЯ, пропущенное через ограничениЯ" />
+		<Field Name="setGt" Type="REAL" UUID="FA34768548C1DFC959ADA1AD4D3A9687" Comment=" задание на расход топливного газа через 1-й дозатор" />
+		<Field Name="NvdRate" Type="REAL" UUID="95339C3645EE0F57C55185AF37357896" Comment=" производная по частоте вращениЯ КВД" />
+		<Field Name="NstRate" Type="REAL" UUID="7A83B2F9454077DB2EDE25BD40B2F99F" Comment=" производная по частоте вращения СТ" />
+		<Field Name="FRegMode" Type="INT" UUID="0B2585104CB54BD46A13AEBB74BB04FA" Comment="текущий режим регулятора на работе" />
+		<Field Name="FRegMode_old" Type="INT" UUID="B66EB40B4B694D7BDA90D9A1207C1EDD" Comment="бывший режим регулятора на работе" />
+		<Field Name="wasRegNst" Type="BOOL" UUID="9D37FADB4AAAEF4B60E2D8B72FB100A0" Comment=" регулирование по оборотам СТ на предыдущем цикле" />
+		<Field Name="wasFriHH" Type="BOOL" UUID="0FBAD2B24821CA8F76254A90042251A9" Comment=" наличие сигнала FRI.HH на предыдущем цикле" />
+		<Field Name="NstMin" Type="BOOL" UUID="51B3EA1E471C92A1A55D13823F9DC995" Comment="выйти на минимальные обороты СТ" />
+		<Field Name="isFeedback" Type="BOOL" UUID="D886E3A74EEDA6B7EE7452AEEF0A8996" Comment=" работает система контуров ОС" />
+		<Field Name="wasFeedback" Type="BOOL" UUID="D01CD1584EADDC1067BBA8838C9B3CDA" Comment=" работает система контуров ОС  на предыдущем цикле" />
+		<Field Name="init" Type="BOOL" UUID="E6171FDA44D91300081A9CB4E126B570" Comment=" если = 1, значиит инициализация была" />
+		<Field Name="tiFire" Type="REAL" UUID="E6636AAF45BA74C79E968A9C14EAA484" Comment="Таймер розжига" />
+	</Fields>
+</Type>

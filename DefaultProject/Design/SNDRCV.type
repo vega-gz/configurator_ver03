@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="SNDRCV" Kind="Struct" UUID="2F3CB74B4FBEF2E7233360BA3D99E43F">
+    <Fields>
+        <Field Name="SNDRCV1" Type="BYTE" UUID="A82590BD42855DAF3A5F18A07FCE7517" />
+        <Field Name="SNDRCV2" Type="BYTE" UUID="13ACA826494C0DEAB3BD2F8599FC98D0" />
+        <Field Name="SNDRCV3" Type="BYTE" UUID="BE5BEA5945655CC42545648EB7821E3F" />
+        <Field Name="SNDRCV4" Type="BYTE" UUID="9CAD562D444F87FEAF3620BC9EA41051" />
+    </Fields>
+</Type>

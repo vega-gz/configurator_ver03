@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Driver.MODBUS v. 1.3 >
+<Configuration Slave="FALSE" TCP="TRUE">
+<Devices CommConfig="">
+<Device Address="10.50.50.100:502,7" DisconnectInReserve="FALSE" InterpacketDelay="5000" MaxRegs="32" MaxStatus="32" ResponseTimeout="50000" RetryCount="3" RetryDelay="5000" SymbolTimeout="10000">
+<Group Function="READ_INPUT_REGISTERS" Name="AI" UpdatePeriod="0"/>
+</Device>
+</Devices>
+<Crossconnect>
+<Connection Channel="30:FLOAT_BADC" Device="10.50.50.100:502,7" Group="AI" ItemName="GPA_FTG_mb_AI_DRV.Qtg_n" UUID="CF43BDFEE40E438BBB4A35C24D195531.D889AF6193C74E9F84FE8BB8F1714E22"/>
+<Connection Channel="88:FLOAT_BADC" Device="10.50.50.100:502,7" Group="AI" ItemName="GPA_FTG_mb_AI_DRV.Vtg_n_sut" UUID="CF43BDFEE40E438BBB4A35C24D195531.4DF260A08A9D4E42BC1271AB284683B8"/>
+</Crossconnect>
+</Configuration>

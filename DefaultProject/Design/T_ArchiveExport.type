@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ArchiveExport" Kind="Struct" UUID="20994A4B43417D6B23C03ABA94162E8B">
+    <Fields>
+        <Field Name="Bufer_from_date" Type="LREAL" UUID="7769087E43CCC906A4FE02B7AAD07B25" Comment="Буфер выгрузки данных" />
+        <Field Name="Set_interval" Type="LREAL" UUID="B2723CA149BC0E659F926B8584C6C1C2" Comment="Время начальной точки архива" />
+        <Field Name="Select_Event" Type="BOOL" UUID="CCC600F14D468DE87A46E686A7DDB6C3" Comment="Выбор. События" />
+        <Field Name="Select_Trend" Type="BOOL" UUID="EBFAAF77457032B7D3A263943D14E6D9" Comment="Выбор. Тренды" />
+        <Field Name="DateTime" Type="STRING" UUID="01DE9C1441816A4B4E4887AE9C785B47" Comment="Время конечной точки архива" />
+        <Field Name="BTN_UploadArchive" Type="BOOL" UUID="1C03FA1046CAE3EC5B2AA8BE71E6567D" Comment="Выгрузить данные" />
+        <Field Name="BTN_UploadArchiveStop" Type="BOOL" UUID="29EC8E8147B712F1E59189BA2F5BB27A" Comment="Остановить выгрузку архива" />
+    </Fields>
+</Type>

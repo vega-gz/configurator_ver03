@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ALG_UVI" Kind="Struct" UUID="8DCA587C4C56BC3BF00058BDDA3ACB94">
+	<Fields>
+		<Field Name="noActivMode" Type="BOOL" UUID="2DF006DC46562FD757B4EC8EFF520F82" />
+		<Field Name="Unlock" Type="BOOL" UUID="72391F77464581C8488ECEB4876E0B4E" />
+		<Field Name="AOss" Type="BOOL" UUID="9DCA28E64FDDC4EFF4FBDD82332DDBB0" />
+		<Field Name="AObs" Type="BOOL" UUID="DA51031C4CEE26B5B5E57C90FEC6EFC1" />
+		<Field Name="AO" Type="BOOL" UUID="GDFQPSTLNPZUDDWFZOXIBKJNQM" />
+		<Field Name="Fire" Type="BOOL" UUID="79C3CABB4AEEAB0D6B87F9A23AA67A6B" />
+		<Field Name="condReserve" Type="BOOL" UUID="ED3113F8477874C904CF5EAA64FF226B" />
+		<Field Name="ev_Pmet_Kl_UVI1_Pv" Type="BOOL" UUID="E2A941D44AAD963F0A1DCC81CA7390E0" Comment="Давление метанола перед распределительными клапанами УВИ1 повышенное" />
+		<Field Name="ev_Pmet_Kl_UVI1_Av" Type="BOOL" UUID="7F8F994D4BA351F64571EFA4C7E28DDE" Comment="Давление метанола перед распределительными клапанами УВИ1 высокое" />
+		<Field Name="ev_Pmet_Kl_UVI2_Pv" Type="BOOL" UUID="BAD59786412B06C8246E85A51138C254" Comment="Давление метанола перед распределительными клапанами УВИ2 повышенное" />
+		<Field Name="ev_Pmet_Kl_UVI2_Av" Type="BOOL" UUID="BFACD02B4CE9BC0E1A233791E19ACDD3" Comment="Давление метанола перед распределительными клапанами УВИ2 высокое" />
+		<Field Name="ev_Qmgms_met_UVI1_An" Type="BOOL" UUID="F251E11D49DCFB7C2AE00A9F1F041119" Comment="Мгновенный массовый расход метанола на УВИ1 низкий" />
+		<Field Name="ev_Qmgms_met_UVI1_Pn" Type="BOOL" UUID="51002C054FEBD87D1D3577838C754B17" Comment="Мгновенный массовый расход метанола на УВИ1 пониженный" />
+		<Field Name="ev_Qmgms_met_UVI1_Pv" Type="BOOL" UUID="3A1A369E44409CE1379093BD7C655397" Comment="Мгновенный массовый расход метанола на УВИ1 повышенный" />
+		<Field Name="ev_Qmgms_met_UVI1_Av" Type="BOOL" UUID="1D5345FE474369B1F386E190EDC3DBE8" Comment="Мгновенный массовый расход метанола на УВИ1 высокий" />
+		<Field Name="ev_Qmgms_met_UVI2_An" Type="BOOL" UUID="8EB85E1B47A3E26793786FAC178F57DC" Comment="Мгновенный массовый расход метанола на УВИ2 низкий" />
+		<Field Name="ev_Qmgms_met_UVI2_Pn" Type="BOOL" UUID="DD7813C84E77A3CE9C0FFF8783CA69B9" Comment="Мгновенный массовый расход метанола на УВИ2 пониженный" />
+		<Field Name="ev_Qmgms_met_UVI2_Pv" Type="BOOL" UUID="5C01CAEC4ADD357FE1F94886C7F9D87E" Comment="Мгновенный массовый расход метанола на УВИ2 повышенный" />
+		<Field Name="ev_Qmgms_met_UVI2_Av" Type="BOOL" UUID="EBE80BD149826D4CEF5867B41F8B0EB7" Comment="Мгновенный массовый расход метанола на УВИ2 высокий" />
+	</Fields>
+</Type>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Shop_GPA" Kind="Struct" UUID="5463135A4E40F4323DF6B08AD046D1AF">
+	<Fields>
+		<Field Name="Set_Nst" Type="REAL" UUID="F425715E4522F3A24E073D8EB6660B5A" Comment="Задание оборотов СТ" />
+		<Field Name="On" Type="BOOL" UUID="VUFCH4PPKYEENDQUYISQPDJVQA" Comment="Цеховое регулирование включено" />
+	</Fields>
+</Type>

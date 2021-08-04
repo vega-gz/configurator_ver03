@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_TRG" Kind="Struct" Comment="Сигналы от топливного регулятора" UUID="12C046F5E24B187293E447A1383773E4">
+	<Fields>
+		<Field Name="FR_mode" Type="INT" UUID="MCAWNAGGM6AUXGL3FGDRWBBBWY" Comment="Режим работы регулятора турбины" />
+		<Field Name="Permit_ConST" Type="BOOL" UUID="CXFCKRGAZYWUVKA4IGN5KBGRYQ" Comment="Разрешение на управление по СТ" />
+		<Field Name="Permit_ConVD" Type="BOOL" UUID="4AZ3EHYVM4BUDADMUJBPAWLY7Y" Comment="Разрешение на управление по ТВД" />
+		<Field Name="TRK_Permit_DU" Type="BOOL" UUID="CDQ4WUTLP2PULDJ32XHKJLEN4U" Comment="Разрешение на ДУ ТРК" />
+		<Field Name="TRK_DU" Type="BOOL" UUID="WPA2Q3SUHSAEVOYLYSEORHXO5A" Comment="ДУ ТРК включено" />
+		<Field Name="TRK_isOn" Type="BOOL" UUID="SA5LNMF62MJU5KBCLH4OQZGK7Q" Comment="ТРК открывается" />
+		<Field Name="TRK_isOf" Type="BOOL" UUID="6WU7T4N5I5QE5NZDVK6TYIRT24" Comment="ТРК закрывается" />
+		<Field Name="TRK_bad" Type="BOOL" UUID="RUT2J7ZK7BNEXDBMXZIJHMSUQM" Comment="ТРК неисправен" />
+		<Field Name="TRK_SetDU" Type="REAL" UUID="2ISEIDW7U67UZNWDZ3SCDMY3ZU" Comment="Задание ТРК при ДУ" />
+		<Field Name="SetNst" Type="REAL" UUID="OSFSH7LUE4RUFLEYDE6GHABBYU" Comment="Задание оборотов СТ" />
+		<Field Name="SetNvd" Type="REAL" UUID="5D6IFPEJZVUU7HVJL4KN3KW47U" Comment="Задание приведенных оборотов ТВД" />
+	</Fields>
+</Type>

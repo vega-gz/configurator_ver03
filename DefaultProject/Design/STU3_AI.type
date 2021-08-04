@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="STU3_AI" Kind="Struct" UUID="4C99F2224C0EAE5C6B728DAF69F8F260">
+    <Fields>
+        <Field Name="A1_3_1_P_ENTER_UPTIG_VP_1_1_PV" Type="REAL" UUID="57A1AA3F42AFCCD4AB6D98A9C56A9192" Comment="Давление газа на входе УПТИГ (поз.ВР1-1) Текущее значение" />
+        <Field Name="A1_3_2_T_ENTER_UPTIG_VK_1_1_PV" Type="REAL" UUID="058BC32B4597398028F2339FB5AC463D" Comment="Температура на входе УПТИГ, °С (поз.ВК1-1) Текущее значение" />
+        <Field Name="A1_3_3_H_P_VP_2_1_PV" Type="REAL" UUID="8B118D1540623FD6E84295904152A5AC" Comment="Перепад давления на узле очистки, кПа  (поз.ВР2-1) Текущее значение" />
+        <Field Name="A1_3_4_RESERVE_PV" Type="REAL" UUID="806841994F3CB17DE79B8DA02A124292" Comment="Резерв Текущее значение" />
+        <Field Name="A1_4_1_T_ENTER_VK_3_1_PV" Type="REAL" UUID="C1311EF34E84A8B3630A33B0D4BEB9B1" Comment="Температура на входе узла ПГ, °С (поз.ВК3-1) Текущее значение" />
+        <Field Name="A1_4_2_T_EXIT_VK_3_2_PV" Type="REAL" UUID="69CACD20484968B25B55D8BC11D84357" Comment="Температура на выходе узла ПГ, °С  (поз.ВК3-2) Текущее значение" />
+        <Field Name="A1_4_3_P_EXIT_VP_1_4_PV" Type="REAL" UUID="85E279E54972EF0EE4075F899BBB8DCB" Comment="Давление на выходе 3 УПТИГ УПИГ-500, МПа (поз.ВР1-4) Текущее значение" />
+        <Field Name="A1_4_4_T_EXIT_3_VK_1_4_PV" Type="REAL" UUID="AA17274F420E153F33947E9DE7A6C1BB" Comment="Температура на выходе 3 УПТИГ УПИГ-500, °С  (поз.ВК1-4) Текущее значение" />
+        <Field Name="A1_5_1_P_EXIT_1_VP_4_1_PV" Type="REAL" UUID="BCD2A0714E341057B22A079FCD1189E8" Comment="Давление на выходе БР выход 1, МПа (поз.ВР4-1) Текущее значение" />
+        <Field Name="A1_5_2_P_EXIT_1_VP_1_2_PV" Type="REAL" UUID="D0ADAD1243B5B38D1B93AD841F966F11" Comment="Давление на выходе 1 УПТИГ, МПа (поз.ВР1-2) Текущее значение" />
+        <Field Name="A1_5_3_T_EXIT_1_VK_1_2_PV" Type="REAL" UUID="DBF82D274FCDCD90791AC0AEA1DCFA5E" Comment="Температура на выходе 1 УПТИГ, °С (поз.ВК1-2) Текущее значение" />
+        <Field Name="A1_5_4_RESERVE_PV" Type="REAL" UUID="2083DA424C78239B2434A694BC45565E" Comment="Резерв Текущее значение" />
+        <Field Name="A1_6_1_P_EXIT_2_VP_4_2_PV" Type="REAL" UUID="2817F1F442F51AF428BC699E4F064BD8" Comment="Давление на выходе БР выход 2, МПа (поз.ВР4-2) Текущее значение" />
+        <Field Name="A1_6_2_P_EXIT_2_VP_1_3_PV" Type="REAL" UUID="5DFF3E404E9188B2F5073D94861E18E6" Comment="Давление на выходе 2 УПТИГ, МПа (поз.ВР1-3) Текущее значение" />
+        <Field Name="A1_6_3_T_EXIT_2_VK_1_3_PV" Type="REAL" UUID="382422D84959E393FF18DBB3F8CAF264" Comment="Температура на выходе 2 УПТИГ, °С (поз.ВК1-3) Текущее значение" />
+        <Field Name="A1_6_4_Reserve_PV" Type="REAL" UUID="805927A24B4A52931EFA6290F531FAFC" Comment="Резерв Текущее значение" />
+        <Field Name="A1_7_1_T_OPERATOR_VK_11_1_PV" Type="REAL" UUID="25778A5F434881FFA32641ADB814C58C" Comment="Температура в помещении операторной, °С (поз.ВК11-1) Текущее значение" />
+        <Field Name="A1_7_2_LEVEL_ESK_PV" Type="REAL" UUID="35A7843944EC9B3B10FC2C85BB8050C9" Comment="Уровень в ЕСК Текущее значение" />
+        <Field Name="A1_7_3_RESERVE_PV" Type="REAL" UUID="60AF19D74632ED25D3559E8B594C63D0" Comment="Резерв Текущее значение" />
+        <Field Name="A1_7_4_RESERVE_PV" Type="REAL" UUID="F610AB9D4D4FBB531D4E4C98102A86E2" Comment="Резерв Текущее значение" />
+        <Field Name="A1_8_1_RESERVE_PV" Type="REAL" UUID="9629EB91481C09511FB196A9D6750530" Comment="Резерв Текущее значение" />
+        <Field Name="A1_8_2_RESERVE_PV" Type="REAL" UUID="D164EA9C46BE0E2A59E870AA25FBC7DA" Comment="Резерв Текущее значение" />
+        <Field Name="A1_8_3_RESERVE_PV" Type="REAL" UUID="A4EFE7984D4ABFC89B58EA9DCD20DA67" Comment="Резерв Текущее значение" />
+        <Field Name="A1_8_4_RESERVE_PV" Type="REAL" UUID="DCC7FBD64B01C09C05C8FFAC01CB9ADC" Comment="Резерв Текущее значение" />
+        <Field Name="A1_9_1_RESERVE_PV" Type="REAL" UUID="CD1898724D74B92E4AD06DBC191B31AE" Comment="Резерв Текущее значение" />
+        <Field Name="A1_9_2_MAIN_U_PV" Type="REAL" UUID="8A3E4FFB4121B85D27D57390D2156ABA" Comment="Измерение основного напряжения Текущее значение" />
+        <Field Name="A1_9_3_RESERVE_U_PV" Type="REAL" UUID="863B03124ED598346D4CD6A5AB52D788" Comment="Измерение резервного напряжения Текущее значение" />
+        <Field Name="A1_9_4_RESERVE_PV" Type="REAL" UUID="0C29875F42357C4B26129BB9FC326F27" Comment="Резерв Текущее значение" />
+        <Field Name="A1_3_STATUS" Type="BOOL" UUID="0B65579247B9ED0F97541CB4203C100B" />
+        <Field Name="A1_4_STATUS" Type="BOOL" UUID="A0F1CDCB47029D660851AFB823FBA606" />
+        <Field Name="A1_5_STATUS" Type="BOOL" UUID="88FFE99D44753C7E2355219919364925" />
+        <Field Name="A1_6_STATUS" Type="BOOL" UUID="772AD0CD4B73AB188E3CB998AD107334" />
+        <Field Name="A1_7_STATUS" Type="BOOL" UUID="AE6502044078A39C1A1540B8CBB27662" />
+        <Field Name="A1_8_STATUS" Type="BOOL" UUID="44E39E744A1D401022CB55A7D75E2CE1" />
+        <Field Name="A1_9_STATUS" Type="BOOL" UUID="7493D8A14677AB02354017A18BCA2F20" />
+    </Fields>
+</Type>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TEST" Kind="Struct" UUID="863D481B47924D0FFD0DA1B369757C15">
+    <Fields>
+        <Field Name="var" Type="REAL" UUID="AAF2825F4074094EA3C0F39350CCDA9E" />
+        <Field Name="var_1" Type="REAL" UUID="B19B9D43468C5689356C2BBD015D5A95" />
+        <Field Name="var_2" Type="REAL" UUID="32C5C5814A4A55F313A1BE9D9EC410D4" />
+        <Field Name="var_3" Type="REAL" UUID="D89D28854AF39BE14F0DCAAF2E18D44C" />
+    </Fields>
+</Type>

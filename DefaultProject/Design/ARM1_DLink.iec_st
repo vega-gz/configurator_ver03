@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="4YIJEDC3VV4EPCQROORPWJRRSI" Name="ARM1_DLink" Comment="Диагностика сявзи с АРМ1" Period="100" PutDataAtEndOfCycle="true">
+    <Variables>
+        <Variable UUID="UFSVRRCUNREUPLHJL5HX32AP2U" Name="Pulse" Type="FB_Pulse" TypeUUID="LCERBCVHMURELEDEHKKNKLUZNQ" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[//= меандр для диагностики связи
+Pulse(true, T#1s, ARM1_SS.CPU_HeartBit);]]></ST>
+    <DataTypes />
+    <FBLibrary>
+        <FunctionBlock UUID="LCERBCVHMURELEDEHKKNKLUZNQ" Name="FB_Pulse" Comment="Блок формирования импульсов с периодом Tp">
+            <Variables>
+                <Variable UUID="CMR5BQDGRKPEZBIKWN5RA576SY" Name="on" Comment="Запуск ипульсов" Type="BOOL" Usage="input" />
+                <Variable UUID="B6IJ67FPJ3RUFJNLPAS7YG4QFE" Name="tp" Comment="Период следования импульсов" Type="TIME" Usage="input" />
+                <Variable UUID="XZGD3TDBOORUPN4TMQKQ32TE3I" Name="tic" Comment="Выход" Type="BOOL" Usage="output" />
+                <Variable UUID="TIVKZZA76UQEBDGHCVSWZRJTPI" Name="tmr" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[//таймер периода
+tmr(IN:= on AND NOT tmr.Q, PT:= tp);
+//на полупериоде установить 0
+//выход
+tic :=  tmr.ET < tp/2 AND NOT tmr.Q AND on;
+//Steam
+]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

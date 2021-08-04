@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UPA_BTN" Kind="Struct" UUID="C3E281B341FD750F91B9538E25A95CE9">
+	<Fields>
+		<Field Name="Sound_Off" Type="BOOL" UUID="1140EC0F4526B1E9B9102D854790C75A" Comment="Отключить звук (УПА)" />
+		<Field Name="Deblock" Type="BOOL" UUID="8D5EA78D41D44C7B371F06A763D3DE91" Comment="Деблокировка УПА" />
+		<Field Name="AO" Type="BOOL" UUID="4A5936474BF3FA453DA2759AE56DB8B5" Comment="Аварийный останов УПА" />
+		<Field Name="DU_IM" Type="BOOL" UUID="PNAKO7LUMIJEZPT7JZR4TWKPV4" Comment="ДУ ИМ" />
+		<Field Name="ArchUser" Type="BOOL" UUID="ET5Z7WQFJKIEBHL2HMOELMC57Y" Comment="Запись пользовательского архива" />
+	</Fields>
+</Type>

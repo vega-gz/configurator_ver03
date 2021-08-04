@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_GPA1_mb_DI_DRV" UUID="6070621D4409489CA225F78F8AF0D364">
+<Fields>
+<Field Comment="Режим работы ГПА &quot;Магистраль&quot;" Name="mde_M" Type="BOOL" UUID="ACD985CE8B35455783D81113F3A65DC5"/>
+<Field Comment="Режим работы ГПА &quot;Кольцо&quot;" Name="mde_K" Type="BOOL" UUID="E9F13AEED6C84E09B8C92DBBBB31C3AD"/>
+<Field Comment="Признак включеного цехового регулирования в ГПА" Name="shopReg_ON" Type="BOOL" UUID="85CBC54EFA69459CA4D6A544BDE77B41"/>
+<Field Comment="Неисправность" Name="fault" Type="BOOL" UUID="8616C7B82C38427BB189C63869DF6AF8"/>
+<Field Comment="Пожар" Name="Fire" Type="BOOL" UUID="3EF5B6F212324FC79DC0E9DBC4215C47"/>
+<Field Comment="Загазованность" Name="Zgz" Type="BOOL" UUID="5321328DB93B468EB2EBF74474572AB3"/>
+</Fields>
+</Type>

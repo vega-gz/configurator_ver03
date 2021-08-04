@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Ab06_UPG">
+	<Items>
+		<Item Name="AT_AOQ2YKWEP2LUZFIGHS57YCKWZY.int" />
+		<Item Name="AT_CBOXQD3OGPBE7AOL7FNWTEHVNE.int" />
+		<Item Name="AT_EZTFVPZRKL5ELJEVRZURE7JGPU.int" />
+		<Item Name="AT_PVOU6O2KPGQEDB5IDXRRBNBB5I.int" />
+		<Item Name="UPG_Algorithm.int" />
+		<Item Name="UPG_Archive.int" />
+		<Item Name="UPG_modbus.int" />
+	</Items>
+</Folder>

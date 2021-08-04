@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Type Kind="Struct" Name="T_GPA_PS" UUID="09814F5B1717441490C0604E013A71BC">
+  
+<Fields>
+    <Field Comment="Предельная вибрация агрегата (любой из 7 каналов)" Name="Vs_GPA_pv" Type="BOOL" UUID="3BD14B2438BB48D899C9BFCED5D094E0"/>
+    <Field Comment="Дверь 1 КВОУ не закрыта" Name="Dver1_VOU_Open" Type="BOOL" UUID="E9291AD05C034B228791136A04434705"/>
+    <Field Comment="Дверь 2 КВОУ не закрыта" Name="Dver2_VOU_Open" Type="BOOL" UUID="0C38F73BE5F94668926289D096310560"/>
+    <Field Comment="Дверь воздухозаборной камеры не закрыта" Name="Dver_VZK_Open" Type="BOOL" UUID="10C7E483EBB94E868B2E61B241EEE667"/>
+    <Field Comment="Двери отсека ГТД открыты" Name="Dver_OD_Open" Type="BOOL" UUID="D759B4BE3A514F9385B84E0EEEBD5478"/>
+    <Field Comment="Питание кранов 1.2,4" Name="NoChk_DC24_Kr124_PS" Type="BOOL" UUID="356885287FC04BB1B2CD08E94C5935B3"/>
+    <Field Comment="Питание кранов 5.6,9" Name="NoChk_DC24_Kr569_PS" Type="BOOL" UUID="CAEF9244BB314846A7EE6EBA83F98F38"/>
+    <Field Comment="Питание крана 12 (=24 В)" Name="NoChk_DC24_Kr12_PS" Type="BOOL" UUID="3101144462EC46A680C4C1DEA9DC09E3"/>
+    <Field Comment="Питание ~220 В на входе САУ не в норме" Name="NoChk_AC220_SAU_PS" Type="BOOL" UUID="A421ADAD44C84B698025DDFEBB030FB5"/>
+    <Field Comment="Питание =220 В на входе САУ не в норме" Name="NoChk_DC220_SAU_PS" Type="BOOL" UUID="B131D5B7A58C4C408241BDBDD5BD95CA"/>
+    <Field Comment="Питание =220 В кранов не в норме" Name="NoChk_DC220_Kr_PS" Type="BOOL" UUID="502567A43ABF4540AF5B2F794C1E7C9A"/>
+    <Field Comment="Питание РЧТиН ЭС в ручном режиме" Name="Reg_Starter_nON" Type="BOOL" UUID="9AA6F4B37F49412B818A896F2AD3490D"/>
+    <Field Comment="Минимальное давление масла на входе в ГТД менее 40 кПа" Name="Pm_inD_40n" Type="BOOL" UUID="8F208913370744FF93B0727580F1B79B"/>
+    <Field Comment="ВНА в ручном режиме" Name="VNA_FLT" Type="BOOL" UUID="D95926818B434A688A81E51A4DC4A607"/>
+    <Field Comment="Нет напряжения 220 В в крановой обвязке" Name="No_U_Kr" Type="BOOL" UUID="9412B93F29B648278E6B2265D4D7F74F"/>
+    <Field Comment="Загазованность 10 % НКПВ в отсеке компрессора" Name="Gas10_ON" Type="BOOL" UUID="DC4A2F5275684973A454767C2FCA387E"/>
+    <Field Comment="Загазованность 10% НКПВ в отсека двигателя" Name="Gas10_OD" Type="BOOL" UUID="DAA448EB36C04B7FB6D6269D00936162"/>
+    <Field Comment="Система контроля загазованности неисправна" Name="AKZ_FLT" Type="BOOL" UUID="669213FE9EE94D2687E0E21A8B0B4C5A"/>
+    <Field Comment="Загрязнен фильтр маслосистемы компрессора" Name="dPm_F_N" Type="BOOL" UUID="70F7FF369ACB4B78AABD6948DBFEEEE9"/>
+    <Field Comment="Пониженный уровень масла в картере компрессора" Name="Lm_Nkar_dPn" Type="BOOL" UUID="58C527DC8C7C49E285E12D6ED1C6ACD5"/>
+    <Field Comment="Верхний уровень жидкости в первой ступени ФС 1" Name="Lk_FS1_G1_max" Type="BOOL" UUID="E007021788C343EBB9AB13FB5BA1A22B"/>
+    <Field Comment="Верхний уровень жидкости во второй ступени ФС 1" Name="Lk_FS1_G2_max" Type="BOOL" UUID="5BB916738B8444D79AB5B262C4A462CD"/>
+    <Field Comment="Верхний уровень жидкости в первой ступени ФС 2" Name="Lk_FS2_G1_max" Type="BOOL" UUID="6734D5072B5C495BA712236D7A0A6505"/>
+    <Field Comment="Верхний уровень жидкости в первой ступени ФС 3" Name="Lk_FS3_G1_max" Type="BOOL" UUID="B6E88C423F9E4E97AA9FA527901AB95B"/>
+    <Field Comment="Верхний уровень жидкости во второй ступени ФС 3" Name="Lk_FS3_G2_max" Type="BOOL" UUID="3505C0194AE14CB2AFBF50519B9B61AB"/>
+    <Field Comment="Фильтр тонкой очистки редуктора загрязнён" Name="dPm_F_Rdk_v" Type="BOOL" UUID="8B684A97011F4630A90C217AB69B2BE7"/>
+    <Field Comment="Повышенная вибрация компрессора" Name="Vs_N_v" Type="BOOL" UUID="ED4A530EEB544E69BC8354BE5A1FDD4C"/>
+    <Field Comment="Повышенные обороты ТВД" Name="Nvd_pv" Type="BOOL" UUID="EA60271A8F374C54B67FB05E662EDC04"/>
+    <Field Comment="Повышенные привед. обороты ТВД не режиме" Name="NvdNorm_Pv" Type="BOOL" UUID="B59AF113178C463BAF68C66C9EB9FFF8"/>
+    <Field Comment="Условия обледенения" Name="Ice" Type="BOOL" UUID="923EA239A86D4426A7386C1D5CEA6301"/>
+    <Field Comment="Внутреннее освещение отсеков ГПА неисправно" Name="Lamp_in_GPA_bad" Type="BOOL" UUID="0CE97CB2DDFB4C9D990688E93BE20CAF"/>
+    <Field Comment="Внутреннее освещение ангара неисправно" Name="Lamp_ang_bad" Type="BOOL" UUID="F63E1029B55A4F2694E602639FF3F659"/>
+    <Field Comment="Аварийное освещение ангара отключено" Name="Lamp_angAV_bad" Type="BOOL" UUID="C08BF8BAEAA3487FBB48A049C534F927"/>
+    <Field Comment="Аварийное освещение отсеков ГПА отключено" Name="Lamp_avar_MU" Type="BOOL" UUID="01D5B5E6A1CD47988AB3EC9D93F79225"/>
+    <Field Comment="Непредвиденное отключение ПМК" Name="Trim_PMK" Type="BOOL" UUID="E1FDEF6E4FB342338B1BE53664E5A655"/>
+    <Field Comment="Неисправность контура ГНС" Name="GNS_bad" Type="BOOL" UUID="F69BA166920F4898914426077A73A35A"/>
+    <Field Comment="Давление масла редуктора не в норме" Name="Pm_Rdk_nOk" Type="BOOL" UUID="1FC477C6113C415B876E643E7F72A844"/>
+    <Field Comment="Наряжение 380 В на входе 1 НКУ ГПА не в норме" Name="U1_NKU_bad" Type="BOOL" UUID="8DD03827B1B445EE8DE1B5B551D8345E"/>
+    <Field Comment="Наряжение 380 В на входе 2 НКУ ГПА не в норме" Name="U2_NKU_bad" Type="BOOL" UUID="8F214CF025F542D49A14305C2CA4D601"/>
+    <Field Comment="Невозможна работа ГПА под цеховым регулятором" Name="Shop_NoWork" Type="BOOL" UUID="CC7F8E3D952E48B38E656F59FA744511"/>
+    <Field Comment="Обрыв связи с ЛИС КЦ" Name="NoLnk_AbKC" Type="BOOL" UUID="971DCF08A3124515A0E2BE3C4A1A11F0"/>
+    <Field Comment="Повышенная температура в отсеке двигателя" Name="Tv_OD_Pv" Type="BOOL" UUID="8F7865EE3B8548188E8508866B994904"/>
+    <Field Comment="Пониженная температура в отсеке двигателя" Name="Tv_OD_Pn" Type="BOOL" UUID="6C227F03267E4827B523A3B5B66E81B7"/>
+    <Field Comment="Повышенная температура в отсеке электротехническом отсеке" Name="Tv_ETO_Pv" Type="BOOL" UUID="0CB7279FFF864EE1B585CBAFB0D7E12A"/>
+    <Field Comment="Пониженная температура в отсеке электротехническом отсеке" Name="Tv_ETO_Pn" Type="BOOL" UUID="0020304F50DE4094B32CEB6CD98257FF"/>
+    <Field Comment="Повышенная температура наружного воздуха" Name="T_atm_Pv" Type="BOOL" UUID="EFFE08E88F444AE4A1E100F2B826759E"/>
+    <Field Comment="Пониженная температура наружного воздуха" Name="T_atm_Pn" Type="BOOL" UUID="CAFBC1BA90424CF2BC5B09B5680F074D"/>
+    <Field Comment="Повышенная температура газа на входе в компрессор" Name="Tg_inN_Pv" Type="BOOL" UUID="9811EFA1B6CB48D1B443A46438CA429A"/>
+    <Field Comment="Повышенная Т газа на выходе 1-й ступени компрессора" Name="Tg_outNag1_Pv" Type="BOOL" UUID="E852AF9146FB4061B37BD06738CB25A9"/>
+    <Field Comment="Повышенная температура газа на выходе компрессора" Name="Tg_outNag_Pv" Type="BOOL" UUID="452411846D84413BB47DBC80C98F77EF"/>
+    <Field Comment="Повышенная температура газа на выходе цилиндра 1" Name="Tg_outN_C1_Pv" Type="BOOL" UUID="A9B08081989648BCB84FA0B84772EBCB"/>
+    <Field Comment="Повышенная температура газа на выходе цилиндра 2" Name="Tg_outN_C2_Pv" Type="BOOL" UUID="00BE72B5C2A54E3AB2FC15F432784826"/>
+    <Field Comment="Повышенная температура газа на выходе цилиндра 3" Name="Tg_outN_C3_Pv" Type="BOOL" UUID="7C923C484FD4445F91100F5F2B503A14"/>
+    <Field Comment="Повышенная температура газа на выходе цилиндра 4" Name="Tg_outN_C4_Pv" Type="BOOL" UUID="F9FBD1D2D84546A88569A95691AA0301"/>
+    <Field Comment="Повышенная температура газа на выходе цилиндра 5" Name="Tg_outN_C5_Pv" Type="BOOL" UUID="DA0C5949211E4C11B8D601F3E6096BE6"/>
+    <Field Comment="Повышенная температура газа на выходе цилиндра 6" Name="Tg_outN_C6_Pv" Type="BOOL" UUID="CA8BEC4ED8874FC885B43EBD8DD20277"/>
+    <Field Comment="Низкая температура масла на входе в компрессор" Name="Tmsm_inN_Pn" Type="BOOL" UUID="78E07CE52677402A8E708851497851E9"/>
+    <Field Comment="Пониженная температура масла на входе в компрессор" Name="Tmsm_inN_Pn1" Type="BOOL" UUID="1DC4367E5F97442DB949524987084DA7"/>
+    <Field Comment="Повышенная температура масла на входе в компрессор" Name="Tmsm_inN_Pv" Type="BOOL" UUID="1368E2C9268A4F1DB62C495EB75C2A0B"/>
+    <Field Comment="Высокая температура в ПМК" Name="Tmsm_TEN_N_Pv" Type="BOOL" UUID="8C39CF2C3B5144CC83A4CEAEA3E26774"/>
+    <Field Comment="Повышенная температура охл. жидкости на выходе драйкуллера" Name="T_freeze_outDC_Pv" Type="BOOL" UUID="B30D640E1768455D802E0D46DFC37055"/>
+    <Field Comment="Повышенная температура охлаждающей жидкости в баке" Name="T_freeze_Bak_Pv" Type="BOOL" UUID="97BA0726B4364D32A5260B570E368F1E"/>
+    <Field Comment="Повышенная Т коренного подшипника 1 компрессора" Name="T_KP1_N_Pv" Type="BOOL" UUID="35F11C1B48B349D4B037EAF3062DEBFB"/>
+    <Field Comment="Повышенная Т коренного подшипника 2 компрессора" Name="T_KP2_N_Pv" Type="BOOL" UUID="3BC57B7843D941A59DB4D1DCE874657B"/>
+    <Field Comment="Повышенная Т коренного подшипника 3 компрессора" Name="T_KP3_N_Pv" Type="BOOL" UUID="AA076C1E514946DA9F5219825D6C7E5A"/>
+    <Field Comment="Повышенная Т коренного подшипника 4 компрессора" Name="T_KP4_N_Pv" Type="BOOL" UUID="48BC947B897743D99BC2BB650D5D781D"/>
+    <Field Comment="Повышенная Т коренного подшипника 5 компрессора" Name="T_KP5_N_Pv" Type="BOOL" UUID="4D13E3AD0D4C47FE892D3033B93ABA4E"/>
+    <Field Comment="Повышенная Т коренного подшипника 6 компрессора" Name="T_KP6_N_Pv" Type="BOOL" UUID="F8998DDDC97A4F1788BC70B6D2596EAE"/>
+    <Field Comment="Повышенная Т опорного подш. промежуточного вала (ст. компрессора)" Name="T_POP_PromVal_Pv" Type="BOOL" UUID="FECCC4819E0B46B5A856A76B103B3F1B"/>
+    <Field Comment="Повышенная Т опорного подшипника тихоходного вала (ст. компрессора)" Name="T_POP_SlowVal_Pv" Type="BOOL" UUID="FAA168D5B0764BEA8BC8C753E695D5A2"/>
+    <Field Comment="Повышенная Т опорного подш. промежуточного вала (ст. двигателя)" Name="T_ZOP_PromVal_Pv" Type="BOOL" UUID="5B3DC023E5074C83B1B1FB3FC3FF2302"/>
+    <Field Comment="Повышенная Т опорного подшипника тихоходного вала (ст. двигателя)" Name="T_ZOP_SlowVal_Pv" Type="BOOL" UUID="4D552C9EB22C4C6EA7E0C711FBFA9746"/>
+    <Field Comment="Повышенная Т упорного подшипника тихоходного вала (ст. компрессора)" Name="T_PUP_SlowVal_Pv" Type="BOOL" UUID="9EC23DAC616D4C60A3F23A606268DE14"/>
+    <Field Comment="Повышенная Т опорного подш. быстроходного вала (ст. двигателя)" Name="T_ZOP_FastVal_Pv" Type="BOOL" UUID="B0C7817F73AA4E4E9C2417FF17BB7E2B"/>
+    <Field Comment="Повышенная Т опорного подш. быстроходного вала (ст. компрессора)" Name="T_POP_FastVal_Pv" Type="BOOL" UUID="1C3DF724465340C9AF4436E869A88680"/>
+    <Field Comment="Повышенная Т упорного подшипника тихоходного вала (ст. двигателя)" Name="T_ZUP_SlowVal_Pv" Type="BOOL" UUID="0CE4ABD8016E456DB935B3BE5A690E83"/>
+    <Field Comment="Повышенная температура масла слива задней опоры ГТД" Name="Tm_outZO_TK_Pv" Type="BOOL" UUID="804C3772FC20447EB3B0526F57A0921D"/>
+    <Field Comment="Температура масла на сливе из опор СТ повышенная" Name="Tm_outST_Pv" Type="BOOL" UUID="D1C15D91D8B544939590B0E2171E03A9"/>
+    <Field Comment="Повышенная температура масла слива передней опоры ГТД" Name="Tm_outPO_TK_Pv" Type="BOOL" UUID="CC4B085A5DD44F1398ABE250EC72AFA2"/>
+    <Field Comment="Повышенная температура упорного подшипника компрессора (т. 1)" Name="T1_UP_N_Pv" Type="BOOL" UUID="E53E6F9C773D4FEBACA6ED8048EE5EAD"/>
+    <Field Comment="Повышенная температура упорного подшипника компрессора (т. 2)" Name="T2_UP_N_Pv" Type="BOOL" UUID="7B262699E88C4A9A877545CF4B042295"/>
+    <Field Comment="Повышенная температура масла на входе в редуктор" Name="Tm_inR_Pv" Type="BOOL" UUID="67E7F87A479C4D97B49C79F23DC799AA"/>
+    <Field Comment="Низкая температура масла на входе в редуктор" Name="Tm_inR_Pn" Type="BOOL" UUID="8F704F383A43429B837E3A2415409FCE"/>
+    <Field Comment="Повышенная температура масла на выходе из редуктора" Name="Tm_outR_Pv" Type="BOOL" UUID="30C80BF900664FD98D6B666F18C83AA9"/>
+    <Field Comment="Пониженная температура масла в маслобаке редуктора" Name="Tm_MBR_Pn" Type="BOOL" UUID="07A3EC0BB1144CB5A5DDBDFDEC1164CC"/>
+    <Field Comment="Повышенная температура масла на входе в двигатель" Name="Tm_inD_Pv" Type="BOOL" UUID="2DD12A0A18F141E9B1058C05761A0BB9"/>
+    <Field Comment="Пониженная температура масла на входе в двигатель" Name="Tm_inD_Pn" Type="BOOL" UUID="F1BCF156EB39445794BD42B4CFF8AB37"/>
+    <Field Comment="Повышенная температура масла МБД" Name="Tm_MBD_Pv" Type="BOOL" UUID="A859E34A0C3248339213C8F1A337E044"/>
+    <Field Comment="Пониженная температура масла МБД" Name="Tm_MBD_Pn" Type="BOOL" UUID="24016D26D51E460D9BB272D32FD57B61"/>
+    <Field Comment="Пониженное давление газа на входе компрессора" Name="Pg_inN_Pn" Type="BOOL" UUID="617A2CAF7417476E85957C94E5CDEEF9"/>
+    <Field Comment="Повышенное давление газа на входе компрессора" Name="Pg_inN_Pv" Type="BOOL" UUID="0107DF5E927F457692781E0BC4B982CA"/>
+    <Field Comment="Пониженное давление газа на выходе 1-й ступени" Name="Pg_outN1_Pn" Type="BOOL" UUID="818B77E3550D41F0AB2A120781D95C85"/>
+    <Field Comment="Повышенное давление газа на выходе 1-й ступени" Name="Pg_outN1_Pv" Type="BOOL" UUID="DFD7D9247AE2449E9280E2E8600BDAB0"/>
+    <Field Comment="Повышенное давление газа на выходе компрессора" Name="Pg_outN_Pv" Type="BOOL" UUID="4CF7DD64B7D84B5698E0B9B1A657BE00"/>
+    <Field Comment="Повышенная вибрация компрессора со стороны привода ( ГС )" Name="Vs_ZONg_Pv" Type="BOOL" UUID="F9C2A9101D904F939B6945825E6BD7FE"/>
+    <Field Comment="Повышенная вибрация компрессора со стороны маслонасоса ( ГС )" Name="Vs_PONg_Pv" Type="BOOL" UUID="32B0ED2A0D2C42FE9FA61B7AC08B42F4"/>
+    <Field Comment="Повышенное радиальное виброперемещение тихоходного вала (гор.)" Name="Vp_rd_SlowVal_g_Pv" Type="BOOL" UUID="5AE8834E65BC458F9CC9F30B18B6A14A"/>
+    <Field Comment="Повышенное радиальное виброперемещение тихоходного вала (верт.)" Name="Vp_rd_SlowVal_v_Pv" Type="BOOL" UUID="B828BAD2A2AD4AD694C38900DCD8E610"/>
+    <Field Comment="Повышенное аксиальное виброперемещение тихоходного вала вперед" Name="Vp_ax_SlowVal_Pv" Type="BOOL" UUID="3BF2B0FAA9334E1CB385F9C3BA5E4D1B"/>
+    <Field Comment="Повышенное аксиальное виброперемещение тихоходного вала назад" Name="Vp_ax_SlowVal_Pn" Type="BOOL" UUID="AA9467B010CB48A78B26F201A6EA8556"/>
+    <Field Comment="Повышенное аксиальное виброперемещ. тихоходного вала 2 вперед" Name="Vp_ax_SlowVal_Res_Pv" Type="BOOL" UUID="08272E42A6C247FEA80C33E71F39A4CE"/>
+    <Field Comment="Повышенное аксиальное виброперемещ. тихоходного вала 2 назад" Name="Vp_ax_SlowVal_Res_Pn" Type="BOOL" UUID="0EAAC087FFCF4F0CB7AB3BE03B577981"/>
+    <Field Comment="Повышенное радиальное виброперемещение быстроходного вала (гор.)" Name="Vp_rd_FastVal_g_Pv" Type="BOOL" UUID="7F6D13366D74438FB59265E35D363A0F"/>
+    <Field Comment="Повышенное радиальное виброперемещение быстроходного вала (верт.)" Name="Vp_rd_FastVal_v_Pv" Type="BOOL" UUID="F1F9F1C82FB544D29BEA86186C9E3BB0"/>
+    <Field Comment="Повышенная вибрация по переднему стоечному узлу ТК" Name="Vs_PO_TK_Pv" Type="BOOL" UUID="9889081FF93D49029FEE6CAEFF454F5D"/>
+    <Field Comment="Повышенная вибрация по задней опоре ротора ТК" Name="Vs_ZO_TK_Pv" Type="BOOL" UUID="D9E0FE89D852409FB3A3D7412549BC78"/>
+    <Field Comment="Повышенная вибрация по опоре ротора СТ" Name="Vs_ST_Pv" Type="BOOL" UUID="81D92373D6BF40E5A50756C1450B7A23"/>
+    <Field Comment="Повышенное давление газа на выходе ГПА" Name="Pg_outGPA_Pv" Type="BOOL" UUID="C323793509B54BC3899DF03F32A7B156"/>
+    <Field Comment="Повышенный перепад давления на ФС 1" Name="dPg_FS1_Pv" Type="BOOL" UUID="D71C3330EB8640A2887AB84F723FB9E5"/>
+    <Field Comment="Повышенный перепад давления на ФС 2" Name="dPg_FS2_Pv" Type="BOOL" UUID="AF3DA9F6CC5D4E70B5A7ED8C6C370062"/>
+    <Field Comment="Повышенный перепад давления на ФС 3" Name="dPg_FS3_Pv" Type="BOOL" UUID="68B2C0BE74604B4F9AF6FB7F18D7B407"/>
+    <Field Comment="Пониженное давление масла на входе в компрессор" Name="Pmsm_inN_Pn" Type="BOOL" UUID="38E8C4BC06F844079CE76464061C6C79"/>
+    <Field Comment="Давление масла на входе в компрессор не в норме" Name="Pmsm_inN_Pn1" Type="BOOL" UUID="9A29985575E64114A662DD32BA551F9E"/>
+    <Field Comment="Повышенное давление масла на входе в компрессор" Name="Pmsm_inN_Pv" Type="BOOL" UUID="8ACA540803964E179E91C356B9CC88BF"/>
+    <Field Comment="Низкое давление в ПМК" Name="Pmsm_TEN_N_Pn" Type="BOOL" UUID="3C962CB115234C7A891F44F2137F0D56"/>
+    <Field Comment="Повышенный уровень масла в маслобаке компрессора" Name="Lm_MBN_Pv" Type="BOOL" UUID="FE83F83D66D446F9B6C0F4D152A5A8E6"/>
+    <Field Comment="Пониженный уровень масла в маслобаке компрессора" Name="Lm_MBN_Pn" Type="BOOL" UUID="1FDC872DD5544201BFE7FCE39D4AA4F3"/>
+    <Field Comment="Пониженное давление воздуха упр. РП и УОП цилиндров компрессора" Name="Pv_uprRP_N_Pn" Type="BOOL" UUID="A554A85024104BB3A5CFB59DBBCE255A"/>
+    <Field Comment="Повышенное давление воздуха упр. РП и УОП цилиндров компрессора" Name="Pv_uprRP_N_Pv" Type="BOOL" UUID="170A0D19653A480EACC94F68F3CEC10B"/>
+    <Field Comment="Пониженное давление в лубрикаторной системе" Name="Pm_lub_Pn" Type="BOOL" UUID="673EDCCD00354289B897CC12640A9D9E"/>
+    <Field Comment="Повышенное давление в лубрикаторной системе" Name="Pm_lub_Pv" Type="BOOL" UUID="73D654742A43457B9D51821525E9F939"/>
+    <Field Comment="Пониженное уровень масла в маслобаке лубрикаторной системы" Name="Lm_MBL_Pn" Type="BOOL" UUID="D738496341EF4781AD4A42BAB6F7599F"/>
+    <Field Comment="Повышенный уровень масла в маслобаке лубрикаторной системы" Name="Lm_MBL_Pv" Type="BOOL" UUID="EF5A9B002016460882E000A17D14A4FF"/>
+    <Field Comment="Заправить бак охлаждающей жидкости (пониженный уровень)" Name="L_freeze_Bak_Pn" Type="BOOL" UUID="207DB1CB92244319B32A0F9B19ADD9A8"/>
+    <Field Comment="Повышенный уровень охлаждающей жидкости в баке" Name="L_freeze_Bak_Pv" Type="BOOL" UUID="9E471CF0C5F541DAB7383F2B08445E9A"/>
+    <Field Comment="Пониженный расход охлаждающей жидкости" Name="Q_freeze_Pn" Type="BOOL" UUID="FEC67564CC374FF5BD48458028CFFF48"/>
+    <Field Comment="Пониженное давление масла на входе в редуктор" Name="Pm_inR_Pn" Type="BOOL" UUID="B7D949E85B4E4E599FD603331675D7AD"/>
+    <Field Comment="Пониженный уровень масла в маслобаке редуктора" Name="Lm_MBR_Pn" Type="BOOL" UUID="B8B48165C306451D87BD7002AE9C4070"/>
+    <Field Comment="Повышенный уровень масла в маслобаке редуктора" Name="Lm_MBR_Pv" Type="BOOL" UUID="E689EC73BEDB4E4098A7E3D7927316A5"/>
+    <Field Comment="Повышенное статичекское давление воздуха в компрессоре" Name="Pv_outTK_Pv" Type="BOOL" UUID="9AE820BDA6274BFE897413E91D12179F"/>
+    <Field Comment="Пониженное давление масла на входе в двигатель на режиме" Name="Pm_inD_Pn" Type="BOOL" UUID="9B2951397CB74204AAE421B42321806D"/>
+    <Field Comment="Повышенный уровень масла в МБД" Name="Lm_MBD_Pv" Type="BOOL" UUID="4717A0600B2D4D89A45E83D5CE92EDD8"/>
+    <Field Comment="Пониженный уровень масла в МБД" Name="Lm_MBD_Pn" Type="BOOL" UUID="0AFACB7E81A64A1ABA75D5F726FF85F8"/>
+    <Field Comment="Повышенный перепад давления масла на ФТО" Name="dPm_FTO_Pv" Type="BOOL" UUID="5B9F5DAF81274732A61019336D997EF0"/>
+    <Field Comment="Повышенный перепад давления масла на ФГО" Name="dPm_FGO_Pv" Type="BOOL" UUID="A7A9E4247D8444F085BBE434CCAE607F"/>
+    <Field Comment="Загрязнение воздушных фильтров КВОУ" Name="Pr_VZK_Pv" Type="BOOL" UUID="4AE3554C759349E69A82CF3CA6CD7088"/>
+    <Field Comment="Мультициклоны загрязнены" Name="Pr_VOU_Pv" Type="BOOL" UUID="DF100B6B408F402790F318EECADBD093"/>
+    <Field Comment="Повышенная температура газа на выходе АВОГ 1 ст. компрессора" Name="Tg_outAVOG1_Pv" Type="BOOL" UUID="76A0185BA5FF46E3B86E1AAA817F12D4"/>
+    <Field Comment="Повышенные обороты СТ" Name="Nst_Pv" Type="BOOL" UUID="008FE992FF65460EAEDCC95670AAAD2E"/>
+    <Field Comment="Повышенная температура газа на выходе АВОГ 2 ст. компрессора" Name="Tg_outAVOG2_Pv" Type="BOOL" UUID="0980EE8B86C142DCA3AD5E90DBDF7ABD"/>
+    <Field Comment="Отключена система защиты от обледенения" Name="ZsZO_nRdy" Type="BOOL" UUID="BFF8A8CE0B0D468DB01559D993618AA8"/>
+    <Field Comment="Ввод 1 САУ не включен" Name="No_PLC_AC220_En" Type="BOOL" UUID="4AFD4F77CF874F53BD45A27677136A52"/>
+    <Field Comment="Ввод 2 САУ не включен" Name="No_PLC_DC220_En" Type="BOOL" UUID="FC232ADC751542089204178AC3FD9B59"/>
+    <Field Comment="Питание РЧТиН ЭС неисправно" Name="ES_nRdy" Type="BOOL" UUID="9ED2FDAFBF7746C0B3A615F85590C443"/>
+    <Field Comment="Питание ВНА неисправно" Name="No_VNA_En" Type="BOOL" UUID="58549C74EF2742F78CF4C3ABB7F5D059"/>
+    <Field Comment="ПНСД неисправен" Name="PNSD_nRdy" Type="BOOL" UUID="3649C651455946459095E810FFE52B51"/>
+    <Field Comment="Кран отсечки масла от двигателя неисправен" Name="KOMD_nRdy" Type="BOOL" UUID="A1B768FC5C9F42D5A01235845D5EEE0F"/>
+    <Field Comment="Кран прокачки маслосистемы двигателя неисправен" Name="KPMD_nRdy" Type="BOOL" UUID="7EEFE116A6714E3F9AE8A9BD8A0FBCB6"/>
+    <Field Comment="Питание =24 В от преобразователя отключено" Name="No_BP_DC24_En" Type="BOOL" UUID="66C2F83119E9495AA5F4BA3AD9EDF5B1"/>
+    <Field Comment="Питание =48 В от преобразователя отключено" Name="No_BP_DC48_En" Type="BOOL" UUID="487C38B5A2894523AB252CDB35F862DA"/>
+    <Field Comment="Питание 220 В СПВ отключено" Name="No_SPV_En" Type="BOOL" UUID="6C5E881A1B414F1DB7C6F8BBAC6A11D1"/>
+    <Field Comment="Питание 36 В неисправно" Name="No_U_GarPit" Type="BOOL" UUID="824E40DA80FA42FB847A6D0A4EDDAA70"/>
+    <Field Comment="Основное питание САУ неисправно" Name="No_Uosn_SAU_En" Type="BOOL" UUID="77E58FBC4D9D4E67B63965AF63BE2639"/>
+    <Field Comment="Основное питание АСПС КЗ и ПТ неисправно" Name="No_Uosn_ASPS_En" Type="BOOL" UUID="6B1022BEA59A484C8E2953636A0CD228"/>
+    <Field Comment="Резервное питание САУ неисправно" Name="No_Urez_SAU_En" Type="BOOL" UUID="7F0BB1343FDD42B4BEFEAF81EE654663"/>
+    <Field Comment="Резервное питание АСПС КЗ и ПТ неисправно" Name="No_Urez_ASPS_En" Type="BOOL" UUID="FDE5227946D044599E7B3F9FA1103F6D"/>
+    <Field Comment="ВОД 1 неисправен" Name="VOD1_nRdy" Type="BOOL" UUID="90E58B4D50044777883C7A8BA13B2891"/>
+    <Field Comment="ВОД 2 неисправен" Name="VOD2_nRdy" Type="BOOL" UUID="AAEFFC2EB0E140129A61D1DB673469DA"/>
+    <Field Comment="Вентилятор охлаждения укрытия компрессора (ВОК) неисправен" Name="Vn_ang_nRdy" Type="BOOL" UUID="CF96F8B472034864A75B8472138B34F2"/>
+    <Field Comment="Кондиционер 1 электротехнического отсека неисправен" Name="Cool1_ETO_AOF" Type="BOOL" UUID="ECA54BFF642F4A64984B9FA05AF5C383"/>
+    <Field Comment="Кондиционер 2 электротехнического отсека неисправен" Name="Cool2_ETO_AOF" Type="BOOL" UUID="5CF5517E6C95410EB6D50BF7FDBDCBBE"/>
+    <Field Comment="ЭН 1-3 воздуха укрытия компрессора неисправны" Name="EN13_Ukr_nRdy" Type="BOOL" UUID="5A9A25D1FF934F9FAB31B99C5A2837ED"/>
+    <Field Comment="ЭН 4-6 воздуха укрытия компрессора неисправны" Name="EN46_Ukr_nRdy" Type="BOOL" UUID="FFAC1EF9925E4503800B23E2FAAE17FE"/>
+    <Field Comment="ЭН 7-9 воздуха укрытия компрессора неисправны" Name="EN79_Ukr_nRdy" Type="BOOL" UUID="C4911A9F6A7F48E7A79E2DEAB80395B9"/>
+    <Field Comment="ЭН воздуха отсека ГТД неисправен" Name="EN_OD_nRdy" Type="BOOL" UUID="D9D3452676BD4D289B5A77ED1E4C712C"/>
+    <Field Comment="ЭН1 масла в маслобаке редуктора неисправен" Name="TEN1_MBR_nRdy" Type="BOOL" UUID="67371DFA7D10483782A0D09ED2A90FC5"/>
+    <Field Comment="ЭН2 масла в маслобаке редуктора неисправен" Name="TEN2_MBR_nRdy" Type="BOOL" UUID="741DE4D531C042E28F74834038ACD4FB"/>
+    <Field Comment="ЭН воздуха отсека пожаротушения неисправен" Name="EK_OPT_nRdy" Type="BOOL" UUID="551EB5C1DBB44D66B1057BDE3414821F"/>
+    <Field Comment="ЭН1 воздуха электротехнического отсека неисправен" Name="EK1_ETO_nRdy" Type="BOOL" UUID="6444C409ED4C4E4795045AE7914ACCF7"/>
+    <Field Comment="ЭН2 воздуха электротехнического отсека неисправен" Name="EK2_ETO_nRdy" Type="BOOL" UUID="5BFF1BAE7DBB4EA4ACE12C11D1DDF6E5"/>
+    <Field Comment="ЭН3 воздуха электротехнического отсека неисправен" Name="EK3_ETO_nRdy" Type="BOOL" UUID="48EDCA85F30245A596AB5171C7399380"/>
+    <Field Comment="ЭН маслобака ГТД неисправен" Name="TEN_MBD_nRdy" Type="BOOL" UUID="DB447FD3F24A4E7DA833B43B89188113"/>
+    <Field Comment="Освещение воздушного тракта неисправно" Name="Lamp_VOU_nRdy" Type="BOOL" UUID="9E96C5780A8543E89737AA0B91BA6574"/>
+    <Field Comment="Клапан КПМК неисправен" Name="KPMN_nRdy" Type="BOOL" UUID="346B2150E9094DFAA705658A97C8A87D"/>
+    <Field Comment="Сопротивление изоляции ЩПТ ниже нормы" Name="NKU_GPA_DC220_Rbad" Type="BOOL" UUID="411CD1DEBD3C4E2FBFC5B76DA35563EB"/>
+    <Field Comment="Выключатель Q1 НКУ ГПА не включен" Name="NKU_GPA_Q1_OF" Type="BOOL" UUID="0041BED3C85C4948854F299101117847"/>
+    <Field Comment="Выключатель Q2 НКУ ГПА не включен" Name="NKU_GPA_Q2_OF" Type="BOOL" UUID="53C8313BEA964DF6B86CAEADEBA7FC0F"/>
+    <Field Comment="Выключатель Q3 НКУ ГПА не включен" Name="NKU_GPA_Q3_OF" Type="BOOL" UUID="427C05F1B2E04D009E5037103C7BD33A"/>
+    <Field Comment="Выключатель Q1 НКУ АВОГ не включен" Name="NKU_AVOG_Q1_OF" Type="BOOL" UUID="92C366B3D4D34FBCAED9750CBB8B2D8E"/>
+    <Field Comment="Выключатель Q2 НКУ АВОГ не включен" Name="NKU_AVOG_Q2_OF" Type="BOOL" UUID="DC28D83CE92941F1B97854FC4FA207AF"/>
+    <Field Comment="Нет питания =24 В (НКУ ГПА)" Name="U_NKU_DC24_bad" Type="BOOL" UUID="D6D554D6458C413EBA328EA4FA9A6927"/>
+    <Field Comment="Отключено напряжение =24 В (ШЛ1)" Name="SHL1_DC24_OF" Type="BOOL" UUID="252B9CDB92504851A724D342E56F4D4F"/>
+    <Field Comment="УЗИП в НКУ ГПА неисправно (ввод 1)" Name="Q1_UZIP_bad" Type="BOOL" UUID="273F06BC0BF344D78636C7A9A962BB0C"/>
+    <Field Comment="УЗИП в НКУ ГПА неисправно (ввод 2)" Name="Q2_UZIP_bad" Type="BOOL" UUID="9A6707E37A2547E6891610DBDF4BC5AE"/>
+    <Field Comment="УЗИП в НКУ ГПА неисправно (ввод 3)" Name="Q3_UZIP_bad" Type="BOOL" UUID="031955BC7820459CB660A3A51EBC1344"/>
+    <Field Comment="УЗИП в НКУ ГПА неисправно (ввод 4)" Name="Q4_UZIP_bad" Type="BOOL" UUID="901F0F083CBF42D4873F842374E1E724"/>
+    <Field Comment="УЗИП в НКУ АВОГ неисправно (ввод 1)" Name="AVOG_Q1_UZIP_bad" Type="BOOL" UUID="D48B1DF68E54463D8764081F470347E3"/>
+    <Field Comment="УЗИП в НКУ АВОГ неисправно (ввод 2)" Name="AVOG_Q2_UZIP_bad" Type="BOOL" UUID="636AC293D3BF42CDB257391791E4F96A"/>
+    <Field Comment="Авария УПП двигателя 1-1 АВОГ" Name="AVOG1_Vn1_FLT" Type="BOOL" UUID="0C5BC649F9234BE2BB1A84944C73DB28"/>
+    <Field Comment="Авария УПП двигателя 1-2 АВОГ" Name="AVOG1_Vn2_FLT" Type="BOOL" UUID="6E714CF98E2844BDAE92E6AA8B19550C"/>
+    <Field Comment="Авария УПП двигателя 1-3 АВОГ" Name="AVOG1_Vn3_FLT" Type="BOOL" UUID="DA66A2776F014B6EB4DE66FAEDDE85B3"/>
+    <Field Comment="Авария УПП двигателя 2-1 АВОГ" Name="AVOG2_Vn1_FLT" Type="BOOL" UUID="BB312D2F9CFA4A038070ADB17977991A"/>
+    <Field Comment="Авария УПП двигателя 2-2 АВОГ" Name="AVOG2_Vn2_FLT" Type="BOOL" UUID="8D12A8D2AC99498A90E0C810F864A6B2"/>
+    <Field Comment="Авария УПП двигателя 2-3 АВОГ" Name="AVOG2_Vn3_FLT" Type="BOOL" UUID="8B2AE7EC9E334EFDA040BB304BE9D9F4"/>
+    <Field Comment="Нет питания клапана КлР 1" Name="U_KLR1_OF" Type="BOOL" UUID="B5EED92A5E6C434B9087236BCD9FE2DE"/>
+    <Field Comment="Нет питания клапана КлР 2" Name="U_KLR2_OF" Type="BOOL" UUID="20F41D405D2A4288BE22CF1455DD2773"/>
+    <Field Comment="Нет питания клапана КШЭ5" Name="U_KE5_OF" Type="BOOL" UUID="12185A8DAF7F445B8B3C19B8E132EA88"/>
+    <Field Comment="Время выбега ТВД мало" Name="ShortTime_RunOutVD" Type="BOOL" UUID="F9B8D0D66D3F4DD6943560285E29F8C9"/>
+    <Field Comment="Время выбега СТ мало" Name="ShortTime_RunOutST" Type="BOOL" UUID="E889605EE2AF4C3D91C82A9E94B09013"/>
+    <Field Comment="Неисправны клапана маслосистемы компрессора" Name="Brk_ValveMSK" Type="BOOL" UUID="4E6AA85166504CAB8A54A8343A876F04"/>
+    <Field Comment="Просадка Рм компрессора. Включен НППМК" Name="PNSK_OnWork" Type="BOOL" UUID="9BF4B5A12E2F4C9980E252F6E96B0539"/>
+    <Field Comment="Просадка Рм компрессора. Включен НМП" Name="PNSR_OnWork" Type="BOOL" UUID="9AC0E780D35A496891C566488B506257"/>
+    <Field Comment="Низкое давление масла на входе в компрессор (для ПЗМ)" Name="Pmsm_inN_PZM" Type="BOOL" UUID="E48017E7F0E346C19AE180308C9C068E"/>
+    <Field Comment="Низкий уровень в маслобаке Б1. Заправить бак" Name="Doliv_B1" Type="BOOL" UUID="81A1347883DF43DC9EA27850A7E6A6A9"/>
+    <Field Comment="Низкое давление масла на входе в редуктор (для ПЗМ)" Name="Pm_inR_PZM" Type="BOOL" UUID="086593E62DFB46C18D84391D0A86D049"/>
+    <Field Comment="Низкое давление масла на входе в двигатель (для ПЗМ)" Name="Pm_inD_PZM" Type="BOOL" UUID="7425E222323E4A6286139413EE3B8ECF"/>
+    <Field Comment="Перегрев влагомера" Name="T_Vlagomer_v" Type="BOOL" UUID="0A3476ED46CD430080AD06D1ED332ADA"/>
+    <Field Comment="Достигнуто макс. время работы с открытым БК" Name="MaxWorkBK" Type="BOOL" UUID="F9270FBE354A4B549CD85B4B55B02FAE"/>
+    <Field Comment="Пониженное давление масла на вх. в компрессор после фильтров" Name="Pm_inK_outF_Pn" Type="BOOL" UUID="01A36A914B06431B85D3A2800F27D70F"/>
+    <Field Comment="Повышенное давление масла на вх. в компрессор после фильтров" Name="Pm_inK_outF_Pv" Type="BOOL" UUID="CFE8D64D39124306BD794F0196CE30C3"/>
+    <Field Comment="Прерывание пуска" Name="BreakStart" Type="BOOL" UUID="CD6A61DF8AC840E1BA6A1910776144EF"/>
+    <Field Comment="Макс. уровень в подземном резервуаре слива масла двигателя " Name="Lm_TankD_v" Type="BOOL" UUID="E12DDCC53B1B4E31BEEB8CF7926EFB33"/>
+    <Field Comment="Макс. уровень в подземном резервуаре слива масла компрессора" Name="Lm_TankK_v" Type="BOOL" UUID="01441D7CD3164D4FAC5AA9CB84AC2FDA"/>
+    <Field Comment="Макс. уровень в подземном резервуаре слива масла редуктора" Name="Lm_TankR_v" Type="BOOL" UUID="A97943E50DB44346BDF2CB6CAE7EC1E5"/>
+    <Field Comment="Регулятор АВОГ1 на верхнем ограничении" Name="AVOG1_vlim" Type="BOOL" UUID="23D662FFD4074F5F83C7D14EE5AAB7E0"/>
+    <Field Comment="Регулятор АВОГ2 на верхнем ограничении" Name="AVOG2_vlim" Type="BOOL" UUID="3DE72642EC814F929CDA0A9E79DD0731"/>
+    <Field Comment="Повышенная нагрузка на шток 1 ст. компрессора при сжатии" Name="StokForce1S_pv" Type="BOOL" UUID="A51D6DA7C9904273B60FC8C3FCB4A34C"/>
+    <Field Comment="Повышенная нагрузка на шток 1 ст. компрессора при растяжении" Name="StokForce1R_pv" Type="BOOL" UUID="5C851B3C94A343019276184046DE1FC6"/>
+    <Field Comment="Повышенная нагрузка на шток 2 ст. компрессора при сжатии" Name="StokForce2S_pv" Type="BOOL" UUID="A6A19F9DFD8E49F79F8AF3446E687D65"/>
+    <Field Comment="Повышенная нагрузка на шток 2 ст. компрессора при растяжении" Name="StokForce2R_pv" Type="BOOL" UUID="A6E9983F4ED940A389F43DA2BCEF9202"/>
+    <Field Comment="Повышенная разность температур кореных подшипников" Name="dT_KP_pv" Type="BOOL" UUID="F997D0C6EF214C1B94391A4DA796C35C"/>
+    <Field Comment="Неисправность клапана КлР1" Name="KLR1_bad" Type="BOOL" UUID="3DA23894D7354B5394CEEEFDAC0D27C9"/>
+    <Field Comment="Неисправность клапана КлР2" Name="KLR2_bad" Type="BOOL" UUID="82B994EBA97345ADA270BC7C95C67E21"/>
+    <Field Comment="АВОМ редуктора неисправен" Name="Vn_MOR_bad" Type="BOOL" UUID="C17B063DBBE24F6CAFF5B29B7A1B9B31"/>
+    <Field Comment="Пониженная температура ТГ перед ОГК" Name="Ttg_inSK_Pn" Type="BOOL" UUID="0E8B3F67E22C4E388121CE1AB75CF8A1"/>
+    <Field Comment="Повышенная температура ТГ перед ОГК" Name="Ttg_inSK_Pv" Type="BOOL" UUID="E1FB95373243472A9DB2A1678252C893"/>
+    <Field Comment="Пониженное давление масла на входе в двигатель на запуске" Name="Pm_inD_Pn1" Type="BOOL" UUID="05CAA9FA59604A4DA488001259C7D757"/>
+    <Field Comment="Пониженное давление ТГ перед дозатором" Name="Ptg_inTRK_Pn" Type="BOOL" UUID="1BC1511490EB4A8F8C322B66BBC162BB"/>
+    <Field Comment="Повышенное давление масла на входе в двигатель" Name="Pm_inD_Pv" Type="BOOL" UUID="8EA3D34A51E84314AACC424C3A32BC1B"/>
+    <Field Comment="Автоматы питания не включены" Name="QF_nON" Type="BOOL" UUID="BA940EED080B4494899BD16E843FE6A7"/>
+    <Field Comment="Вентилятор аварийный укрытия компрессора неисправен" Name="VVA_ang_brk" Type="BOOL" UUID="E1224768CE7D4F8D8D67FF1E98E6FC69"/>
+    <Field Comment="Ремонтное освещение неисправно" Name="Lamp220_Rem_brk" Type="BOOL" UUID="C6814B6919C543A29A396D95839C2BAD"/>
+    <Field Comment="Нет питания АDI" Name="Chk_U_TPDI" Type="BOOL" UUID="EA29BDAA46334E42948A72C92B79CC20"/>
+    <Field Comment="Нет питания АDO" Name="Chk_U_TPDO" Type="BOOL" UUID="B25BE3015BA4404892A8071B1804CA1E"/>
+    <Field Comment="Нет исправности основного ИП =24 В аналоговых входов" Name="DC24osn_AI_ok" Type="BOOL" UUID="A82C0F3EFB7D44C7B5D1D90D81E72597"/>
+    <Field Comment="Нет исправности основного ИП =24 В БЭАО, РПКУ" Name="DC24osn_PRU_ok" Type="BOOL" UUID="B47D0B3146A946E39409DB3BA2DFBC4D"/>
+    <Field Comment="Нет исправности основного ИП =24 В внешних устройств" Name="DC24osn_Ext_ok" Type="BOOL" UUID="314F7EA7C30B470E83168CE5FF3B84D4"/>
+    <Field Comment="Нет исправности основного ИП =24 В внутренних устройств" Name="DC24osn_Int_ok" Type="BOOL" UUID="DA2994E8FCF74030A8621D2D86497104"/>
+    <Field Comment="Нет исправности основного ИП =24 В дискретных входов" Name="DC24osn_DI_ok" Type="BOOL" UUID="E66B757A911042A4B2C7F1A04F27D3A3"/>
+    <Field Comment="Нет исправности основного ИП =24 В дискретных выходов" Name="DC24osn_DO_ok" Type="BOOL" UUID="15EABE6C08B64B53B041375EC611BF33"/>
+    <Field Comment="Нет исправности основного ИП =24 В ПЛК" Name="DC24osn_PLC_ok" Type="BOOL" UUID="1EBE89B8C4AE4F6DB67C3A80E1D4907F"/>
+    <Field Comment="Нет исправности резервного ИП =24 В аналоговых входов" Name="DC24rez_AI_ok" Type="BOOL" UUID="803965669D0E49ACA441F10A7EDDC46F"/>
+    <Field Comment="Нет исправности резервного ИП =24 В БЭАО, РПКУ" Name="DC24rez_PRU_ok" Type="BOOL" UUID="8E59A6F3919D4FEA9B9FC7B503DAEE31"/>
+    <Field Comment="Нет исправности резервного ИП =24 В внешних устройств" Name="DC24rez_Ext_ok" Type="BOOL" UUID="313B82853EE24263ADD2F35498287E59"/>
+    <Field Comment="Нет исправности резервного ИП =24 В внутренних устройств" Name="DC24rez_Int_ok" Type="BOOL" UUID="E7AFB1EAD6124D7AA923238A1EAF4812"/>
+    <Field Comment="Нет исправности резервного ИП =24 В дискретных входов" Name="DC24rez_DI_ok" Type="BOOL" UUID="6118E5D352A54F7F8A0A70D0DCA4A165"/>
+    <Field Comment="Нет исправности резервного ИП =24 В дискретных выходов" Name="DC24rez_DO_ok" Type="BOOL" UUID="CE182CD8C7674E029C9F5679FE45470E"/>
+    <Field Comment="Нет исправности резервного ИП =24 В ПЛК" Name="DC24rez_PLC_ok" Type="BOOL" UUID="B05586D3BD7546C4AC99929B1DA02DF4"/>
+    <Field Comment="Нет контроля исправности разрядников" Name="Chk_razr" Type="BOOL" UUID="1FB4D6E5DF0545C6BDCB06EBACC63314"/>
+    <Field Comment="Нет контроля основного питания БЭАО ~220 В" Name="Chk_AC220_BEO" Type="BOOL" UUID="7BB8F8B6C7DF4CA49C68D27C570D2795"/>
+    <Field Comment="Нет контроля основного питания САУ ГПА ~220 В" Name="Chk_AC220_SAU" Type="BOOL" UUID="F67B7F6B33C44FF2A07AEC4DB2035DFE"/>
+    <Field Comment="Нет контроля питания БУШД -М1 ~220 В" Name="Chk_AC220_BUSD" Type="BOOL" UUID="09D43995B84249A8B9A07938A7C03675"/>
+    <Field Comment="Нет контроля питания терминальных панелей А1" Name="Chk_U_TPAI" Type="BOOL" UUID="BFD70F37A99F48A690AD2F98714E3FF2"/>
+    <Field Comment="Нет контроля резервного питания БЭАО =220 В" Name="Chk_DC220_BEO" Type="BOOL" UUID="4E182E31B8454B3A9D273B4C95D07172"/>
+    <Field Comment="Нет контроля резервного питания САУ ГПА =220 В" Name="Chk_DC220_SAU" Type="BOOL" UUID="A3BBC2C38EF74FB6ACAC4937BEB75A23"/>
+    <Field Comment="Повышенная температура газа за турбиной" Name="P_Tgg_v" Type="BOOL" UUID="4787D4FCD95E46FC995B114A2C39CBF8"/>
+  </Fields>
+</Type>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Сигналы">
+	<Items>
+		<Item Name="E079B0E64556720E806FA393FCDC7989" />
+		<Item Name="FLDR_G67VW6XXAM2EXELNVXZQEBY3PY.folder" />
+		<Item Name="FLDR_RMSSNMZNNKDERA2YZETXYLXJ7M.folder" />
+		<Item Name="FLDR_VMICDLMQDYHEDD7GMJFJJCWJ5Q.folder" />
+		<Item Name="Type_CalcAI.type" />
+	</Items>
+</Folder>

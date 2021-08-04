@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_FR_AI_Internal" UUID="IUBFK3KUWVAEVOSNGRWPEEHCCI">
+<Fields>
+<Field Comment="Частота 1 вращения ротора ГТД (обмотка 1 датчика 1)" Name="Nvd1" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="99174AC7CECC4953A29F8D72E29EABCB"/>
+<Field Comment="Частота 2 вращения ротора ГТД (обмотка 1 датчика 2)" Name="Nvd2" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="3A4CF1251A9D4B21A64D337D54FDD074"/>
+<Field Comment="Частота 1 вращения ротора СТ (обмотка 1 датчика 1)" Name="Nst1" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="39A0C1C141E64A8A8BD4030ACD7297F7"/>
+<Field Comment="Частота 2 вращения ротора СТ (обмотка 1 датчика 2)" Name="Nst2" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="68F3805E6DEC4184BA6792E3DAB20061"/>
+<Field Comment="Температура 1 газа за турбиной" Name="T1_outGG" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="2XSFD7NYDZFGFOPMHHAEYBUCGU"/>
+<Field Comment="Температура 2 газа за турбиной" Name="T2_outGG" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="IEDIINYWMJCT7MNQVWU4KB2OVU"/>
+<Field Comment="Положение 1 дозатора топливного газа" Name="Pos1_TRK" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="HEBKP34PHBFVLP5AP4M2OTTQQY"/>
+<Field Comment="Статическое давление воздуха за компрессором" Name="Pv_outTK" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="FRYXRCZ7ZBB5TF2WQVFKG65Z3Y"/>
+<Field Comment="Положение ВНА" Name="Pos_VNA" Type="744A7D367B498F7EF3E4B8BC15643AB2" UUID="HJJHOJY45JBOLADSUUPHJLER3Q"/>
+</Fields>
+</Type>

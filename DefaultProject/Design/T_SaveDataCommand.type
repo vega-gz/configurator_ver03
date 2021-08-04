@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_SaveDataCommand" Kind="Struct" UUID="IXEK2GWABSUERMPRSIMACYWHLA">
+	<Fields>
+		<Field Name="CopyData" Type="BOOL" UUID="NK24VPVQHFRUTP3SE3P773XIQE" Comment="Записать данные" />
+		<Field Name="ReadData" Type="BOOL" UUID="EY4KMMK5OVTUTKVQN2J5FB5KTU" Comment="Прочесть данные" />
+		<Field Name="file" Type="STRING" UUID="YCIHH5WT5MAE3LVMNBZINM4BCU" Comment="Запрашиваемый файл" />
+	</Fields>
+</Type>

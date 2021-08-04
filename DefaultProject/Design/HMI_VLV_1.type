@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="HMI_VLV_1" Kind="Struct" UUID="COBUNGY7TFREZBMYTOLRCXQ6GM">
+	<Fields>
+		<Field Name="DA" Type="BOOL" UUID="4K5MNWMR46WERNV4T3BWAKR6PE" Comment="0 - автомат, 1 - дистанция" />
+		<Field Name="rOn" Type="BOOL" UUID="QKM4WMXSEW4E5JCUYSTCCPGKFM" Comment="Кн. &quot;Открыть&quot;" />
+		<Field Name="rOff" Type="BOOL" UUID="ECZK5HWJGVREXEIZ3JU7NPMDCA" Comment="Кн. &quot;Закрыть&quot;" />
+		<Field Name="state" Type="WORD" UUID="XL2II5TQC5OEZIAM74VH34MJDE" Comment="Положение (0 - ничего, 1 - закрыт, 2 - открыт, 3 - оба)" />
+		<Field Name="block_DA" Type="BOOL" UUID="IXYVDKYTXCFUVIGWDEPAJ2F7OM" Comment="Блокировка ДУ" />
+		<Field Name="block_ON_ru" Type="BOOL" UUID="KRRWIE6U4S6UZL6PBRPA3LZPGE" Comment="Блокировка Открытия в ДУ" />
+		<Field Name="block_OFF_ru" Type="BOOL" UUID="WIVOEXSNJ4NEZEEKVFO6SZRBJY" Comment="Блокировка Закрытия в ДУ" />
+		<Field Name="block_IMIT" Type="BOOL" UUID="LYNSBLFOAIOEZIK2CD57OYQCQM" Comment="Блокировка имитации" />
+		<Field Name="general" Type="BOOL" UUID="RRPNZVS3IHAEBPK2Z67DW4SEIA" Comment="Обобщённая ошибка ИМ" />
+		<Field Name="ON" Type="BOOL" UUID="ZIEV3S447CRE5ARR3DGCJZCKWA" />
+		<Field Name="OFF" Type="BOOL" UUID="GV75O73OBT3UFG4L5FMLT23GNQ" />
+		<Field Name="ONOF" Type="BOOL" UUID="26VXJRFFHB3E7PRQWVI7VAPY6M" />
+	</Fields>
+</Type>

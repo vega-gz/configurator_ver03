@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_SS" Kind="Struct" UUID="N6S672M4R47EFCOWLQXLOW47IE">
+	<Fields>
+		<Field Name="CPU_HeartBit" Type="BOOL" UUID="QLKHP6TI4UAULML7HVXAGW3S4M" Comment="Меандр от контроллера" />
+		<Field Name="Prm_DU_IM" Type="BOOL" UUID="DDRUUOJS6RCUPHWKOKRFDPQUGQ" Comment="Разрешение кнопки ДУ ИМ" />
+		<Field Name="Prm_Kn_Cancel" Type="BOOL" UUID="ADIGG7BEQPJUFNJTNSK6R4NSRI" Comment="Доступ к кн. Отмена" />
+		<Field Name="Prm_Kn_Pusk" Type="BOOL" UUID="SE5GJLYHOHBULA3GBUSEHDM4GQ" Comment="Доступ к кн. Пуск" />
+		<Field Name="Prm_Shop" Type="BOOL" UUID="LMAR47B7FWHEFMCIX6GFC57X4Q" Comment="Разрешение управления ГПА от цеховой системы" />
+		<Field Name="FWL_A1_FLT" Type="BOOL" UUID="ZP4AKBX67Y7EJCUNLSWK6GBT4U" Comment="Неисправность модуля А1 Фаствел" />
+		<Field Name="FWL_A2_FLT" Type="BOOL" UUID="XUAZVTVLDTLU5K33G234S54XJY" Comment="Неисправность модуля А2 Фаствел" />
+		<Field Name="FWL_A3_FLT" Type="BOOL" UUID="MRBFYEEP2XOUZIIFKJBHAYPKBQ" Comment="Неисправность модуля А3 Фаствел" />
+		<Field Name="FWL_A4_FLT" Type="BOOL" UUID="JSIYKKACZTQUFMCQNIS6UOU3OA" Comment="Неисправность модуля А4 Фаствел" />
+		<Field Name="FWL_A5_FLT" Type="BOOL" UUID="4PIDZYPFPJ6UPDAPJO74GZ5GNY" Comment="Неисправность модуля А5 Фаствел" />
+		<Field Name="FWL_A6_FLT" Type="BOOL" UUID="RY24VIWC7MXETEDOS3APX5DBGQ" Comment="Неисправность модуля А6 Фаствел" />
+		<Field Name="FWL_A7_FLT" Type="BOOL" UUID="O7STJJNREBDUXICD534PHJ7JBU" Comment="Неисправность модуля А7 Фаствел" />
+		<Field Name="FWL_A8_FLT" Type="BOOL" UUID="EFW4N4KCA3PUDJLIJXU5SOT32Q" Comment="Неисправность модуля А8 Фаствел" />
+		<Field Name="U24_FWL_FLT" Type="BOOL" UUID="EGEMOCWFQTSENJJHLNLYH2XCFQ" Comment="Нет напряжения 24В Фаствел" />
+		<Field Name="FWL_A9_FLT" Type="BOOL" UUID="5WVJNV2GC35EPACEMHL5LYQJJM" Comment="Неисправность модуля А9 Фаствел" />
+		<Field Name="FWL_A10_FLT" Type="BOOL" UUID="LV5M6HRRF2XEDAD7YXXUAR4S6M" Comment="Неисправность модуля А10 Фаствел" />
+		<Field Name="KM_A1_1_FLT" Type="BOOL" UUID="QO3GZPD6BGGE5B4QV74DS2M5MM" Comment="Неисправность 1й платы КМ" />
+		<Field Name="KM_A1_2_FLT" Type="BOOL" UUID="IQWM4QXPTE4E5PO4VTDSCTPAIQ" Comment="Неисправность 2й платы КМ" />
+		<Field Name="KM_A1_3_FLT" Type="BOOL" UUID="EVUDPNDYF3JELMHJ3KPG363IIM" Comment="Неисправность 3й платы КМ" />
+		<Field Name="KM_A1_4_FLT" Type="BOOL" UUID="XX334DKNL2QENHH4G6XBDHTKJM" Comment="Неисправность 4й платы КМ" />
+		<Field Name="KM_A1_5_FLT" Type="BOOL" UUID="AZ2TWOEAMHFEBFHML4UWVEQC3U" Comment="Неисправность 5й платы КМ" />
+		<Field Name="KM_A1_6_FLT" Type="BOOL" UUID="CWCTHC7M4QPUBDARK46ORGS5OY" Comment="Неисправность 6й платы КМ" />
+		<Field Name="KM_A1_7_FLT" Type="BOOL" UUID="KOR56M2O4FEELOQXBHXEU442NE" Comment="Неисправность 7й платы КМ" />
+		<Field Name="KM_A1_8_FLT" Type="BOOL" UUID="VGGUUCO637AUNBFPXHZ5CKQF5M" Comment="Неисправность 8й платы КМ" />
+		<Field Name="KM_A1_9_FLT" Type="BOOL" UUID="2MJCJADNTE5U3ABPHKDS2AVXZE" Comment="Неисправность 9й платы КМ" />
+		<Field Name="KM_A1_10_FLT" Type="BOOL" UUID="XKMLM2XW63VEBIU4V2HCVKYLDQ" Comment="Неисправность 10й платы КМ" />
+		<Field Name="KM_A1_11_FLT" Type="BOOL" UUID="MBNVDWMNYNBELG3DZX5LMVVTTA" Comment="Неисправность 11й платы КМ" />
+		<Field Name="KM_A1_12_FLT" Type="BOOL" UUID="CC5JDVVRHCLU3BKUFJ22V4RB3A" Comment="Неисправность 12й платы КМ" />
+		<Field Name="AI_FLT" Type="BOOL" UUID="4NZOVEBBNWQUFMPTPU3VR5NAFM" Comment="неисправность AI" />
+		<Field Name="IM_FLT" Type="BOOL" UUID="4YSW53X6MHWUVA4WUFHSMBZQCI" Comment="неисправность ИМ" />
+		<Field Name="ArchStop" Type="BOOL" UUID="4RJX2JAZFGUEZHIPKOYJ3QR664" Comment="Запуск архива останова" />
+		<Field Name="ArchPusk" Type="BOOL" UUID="KH3WSN7DWLOEJLMVKXGHPLNRCI" Comment="Запуск архива пуска" />
+	</Fields>
+</Type>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UPA_Ust" Kind="Struct" UUID="0F7C2F34E874403DAADC18A0C9306C96">
+	<Fields>
+		<Field Name="Pg_Kol_Pn" Type="REAL" UUID="37449918B2FE40809F2362BEED719BCE" Comment="Пониженное давление газа в коллекторе газа PT-15" />
+		<Field Name="Pg_Kol_Pv" Type="REAL" UUID="0E5623F818704A258E1C35F12A356CC4" Comment="Повышенное давление газа в коллекторе газа PT-15" />
+		<Field Name="Pg_Kol_Av" Type="REAL" UUID="7B8AF5F8E48E44B08740899B198FA982" Comment="Высокое давление газа в коллекторе газа PT-15" />
+		<Field Name="T_BB_UPA_Pn" Type="REAL" UUID="AF72FAA212B4433F84C23888073252BD" Comment="Пониженная температура воздуха в ББ САУ УПА" />
+		<Field Name="T_BB_UPA_Pv" Type="REAL" UUID="650ED910A38C4FF7AB0660F35F26BC91" Comment="Повышенная температура воздуха в ББ САУ УПА" />
+		<Field Name="Pg_PT1_Pn" Type="REAL" UUID="73B09494171841D58AD3741DB9E39ACE" Comment="Пониженное давление газа на скважине 1Т" />
+		<Field Name="Pg_PT1_Pv" Type="REAL" UUID="5850275C6B9448D3B50694512648335B" Comment="Повышенное давление газа на скважине 1Т" />
+		<Field Name="Pg_PT1_Av" Type="REAL" UUID="70E26EFC99704CB391C7A2D2B8FBCD9C" Comment="Высокое давление газа на скважине 1Т" />
+		<Field Name="Pg_PT2_Pn" Type="REAL" UUID="04AA0D5A03F64C28A82647101E7FE509" Comment="Пониженное давление газа на скважине 2Т" />
+		<Field Name="Pg_PT2_Pv" Type="REAL" UUID="D6925B10906A4FCC84B6A3395419EC53" Comment="Повышенное давление газа на скважине 2Т" />
+		<Field Name="Pg_PT2_Av" Type="REAL" UUID="660CE00C2190439D864DEBD6D8CAC1DE" Comment="Высокое давление газа на скважине 2Т" />
+		<Field Name="Pg_PT3_Pn" Type="REAL" UUID="E80289025D1641B7A47D32F87A795E36" Comment="Пониженное давление газа на скважине 3Т" />
+		<Field Name="Pg_PT3_Pv" Type="REAL" UUID="C464AFFAF52C4E81AEF89C9F01724AF6" Comment="Повышенное давление газа на скважине 3Т" />
+		<Field Name="Pg_PT3_Av" Type="REAL" UUID="80D839629A80439D9A2329D248299145" Comment="Высокое давление газа на скважине 3Т" />
+		<Field Name="Pg_PT4_Pn" Type="REAL" UUID="4D90C50A428447FB8034A705D8E2DD3F" Comment="Пониженное давление газа на скважине 4Т" />
+		<Field Name="Pg_PT4_Pv" Type="REAL" UUID="8A180566506C4567AD51A99037426ABD" Comment="Повышенное давление газа на скважине 4Т" />
+		<Field Name="Pg_PT4_Av" Type="REAL" UUID="15D82F8681504EFD8DEAEAFDECF8D903" Comment="Высокое давление газа на скважине 4Т" />
+		<Field Name="Pg_PT5_Pn" Type="REAL" UUID="1874BE462D3241029943083206E2DDFC" Comment="Пониженное давление газа на скважине 5Т" />
+		<Field Name="Pg_PT5_Pv" Type="REAL" UUID="EF36AB46F8BE4C2C89A4D6CA3F9ACAAE" Comment="Повышенное давление газа на скважине 5Т" />
+		<Field Name="Pg_PT5_Av" Type="REAL" UUID="3BAE743011EA41EEA406F1C89F0884EC" Comment="Высокое давление газа на скважине 5Т" />
+		<Field Name="Pg_PT6_Pn" Type="REAL" UUID="7406109EB9A644889AD00F0A63A1158D" Comment="Пониженное давление газа на скважине 6Т" />
+		<Field Name="Pg_PT6_Pv" Type="REAL" UUID="9790285C853445FD87061C3FDCE1F88D" Comment="Повышенное давление газа на скважине 6Т" />
+		<Field Name="Pg_PT6_Av" Type="REAL" UUID="432C98E0E6024814978D9E32D158B5EF" Comment="Высокое давление газа на скважине 6Т" />
+		<Field Name="Pg_PT7_Pn" Type="REAL" UUID="6F5A6FBC7C18468590E2DDA6AE3EA56F" Comment="Пониженное давление газа на скважине 7Т" />
+		<Field Name="Pg_PT7_Pv" Type="REAL" UUID="1A4E30C0D6CA454EA1869F022E04DC8F" Comment="Повышенное давление газа на скважине 7Т" />
+		<Field Name="Pg_PT7_Av" Type="REAL" UUID="78F04676F8B245E7B4C1FDF41025ED3C" Comment="Высокое давление газа на скважине 7Т" />
+		<Field Name="Pg_PT8_Pn" Type="REAL" UUID="CD201B6C97AE4F0CBCE83AAF5CCFB6BE" Comment="Пониженное давление газа на скважине 8Т" />
+		<Field Name="Pg_PT8_Pv" Type="REAL" UUID="4DA0D29A82F244BF8686365C9A4DF80E" Comment="Повышенное давление газа на скважине 8Т" />
+		<Field Name="Pg_PT8_Av" Type="REAL" UUID="AF56659E7AD244578BD858D982F8E7B9" Comment="Высокое давление газа на скважине 8Т" />
+		<Field Name="Pg_PT9_Pn" Type="REAL" UUID="C2BE773898644D3FAC907128353CC073" Comment="Пониженное давление газа на скважине 9Т" />
+		<Field Name="Pg_PT9_Pv" Type="REAL" UUID="81663884D5184B2FA44C46C7C0854702" Comment="Повышенное давление газа на скважине 9Т" />
+		<Field Name="Pg_PT9_Av" Type="REAL" UUID="FD02FF6AFC2C4CFCBD2799D5E578D8D2" Comment="Высокое давление газа на скважине 9Т" />
+		<Field Name="Pg_PT10_Pn" Type="REAL" UUID="EE7420D6E5F641A1AAD04855AD15507B" Comment="Пониженное давление газа на скважине 10Т" />
+		<Field Name="Pg_PT10_Pv" Type="REAL" UUID="CDD2733E71164761A4D3A4F68454E465" Comment="Повышенное давление газа на скважине 10Т" />
+		<Field Name="Pg_PT10_Av" Type="REAL" UUID="CCAEF6C824844E6894CC4C0E27C885BB" Comment="Высокое давление газа на скважине 10Т" />
+		<Field Name="Pg_PT11_Pn" Type="REAL" UUID="FA7CF74EFC064F03AC29543B5517B281" Comment="Пониженное давление газа на скважине 11Т" />
+		<Field Name="Pg_PT11_Pv" Type="REAL" UUID="3790604C45B8454EB3405A1343E0459C" Comment="Повышенное давление газа на скважине 11Т" />
+		<Field Name="Pg_PT11_Av" Type="REAL" UUID="917489C875A444A68FD9BB3C0CC4384A" Comment="Высокое давление газа на скважине 11Т" />
+		<Field Name="Pg_PT12_Pn" Type="REAL" UUID="E6180768EE7C45D9841A7AA89B9C9C5A" Comment="Пониженное давление газа на скважине 12Т" />
+		<Field Name="Pg_PT12_Pv" Type="REAL" UUID="8A9826CC0E8441449D75043BD2241393" Comment="Повышенное давление газа на скважине 12Т" />
+		<Field Name="Pg_PT12_Av" Type="REAL" UUID="6D94B2E2C68C4653BBC66AE226518A4C" Comment="Высокое давление газа на скважине 12Т" />
+		<Field Name="Pg_PT13_Pn" Type="REAL" UUID="BBAE77E099944767B276B3080346FB95" Comment="Пониженное давление газа на скважине 13Т" />
+		<Field Name="Pg_PT13_Pv" Type="REAL" UUID="13F0982E27C843F6B47EE324979246D4" Comment="Повышенное давление газа на скважине 13Т" />
+		<Field Name="Pg_PT13_Av" Type="REAL" UUID="CAF0514015444944B1704221B269AC48" Comment="Высокое давление газа на скважине 13Т" />
+		<Field Name="Pg_PT14_Pn" Type="REAL" UUID="0B5099C89000452DBE0F9388500DF34E" Comment="Пониженное давление газа на скважине 14Т" />
+		<Field Name="Pg_PT14_Pv" Type="REAL" UUID="5E088202240C466EAAA32D6BF783CE1B" Comment="Повышенное давление газа на скважине 14Т" />
+		<Field Name="Pg_PT14_Av" Type="REAL" UUID="0AC8D600E9CA4DF78DA138F2CA2DD244" Comment="Высокое давление газа на скважине 14Т" />
+		<Field Name="Tg_TE1_Pn" Type="REAL" UUID="6C3282B211C047ADB40C2476844D8F0D" Comment="Низкая температура газа на скважине 1Т" />
+		<Field Name="Tg_TE1_Pv" Type="REAL" UUID="1F1ECD0669404B19B5FBC468DFAE0FBD" Comment="Высокая температура газа на скважине 1Т" />
+		<Field Name="Tg_TE2_Pn" Type="REAL" UUID="6B82AA3ECC2C4D3EB7A938278B39DAD0" Comment="Низкая температура газа на скважине 2Т" />
+		<Field Name="Tg_TE2_Pv" Type="REAL" UUID="A0FE1A7E52AE41E6AD6DE8C178B3F492" Comment="Высокая температура газа на скважине 2Т" />
+		<Field Name="Tg_TE3_Pn" Type="REAL" UUID="5898501C426842BEB36F8FD290F5BA89" Comment="Низкая температура газа на скважине 3Т" />
+		<Field Name="Tg_TE3_Pv" Type="REAL" UUID="B26CAB501F204D1AA532C7CF9E4FEE62" Comment="Высокая температура газа на скважине 3Т" />
+		<Field Name="Tg_TE4_Pn" Type="REAL" UUID="E060BD282F66404CABA7FB622EBDCA49" Comment="Низкая температура газа на скважине 4Т" />
+		<Field Name="Tg_TE4_Pv" Type="REAL" UUID="1678C9F05B3C4EC983ACA33FB3975D9A" Comment="Высокая температура газа на скважине 4Т" />
+		<Field Name="Tg_TE5_Pn" Type="REAL" UUID="5B9EFD587C4448C183FCD8BDAC7767CC" Comment="Низкая температура газа на скважине 5Т" />
+		<Field Name="Tg_TE5_Pv" Type="REAL" UUID="1EEAEDBC6AA04B75A266E66A6B7D5FEA" Comment="Высокая температура газа на скважине 5Т" />
+		<Field Name="Tg_TE6_Pn" Type="REAL" UUID="3A245FBC307E45D8939D441EDA34C1F5" Comment="Низкая температура газа на скважине 6Т" />
+		<Field Name="Tg_TE6_Pv" Type="REAL" UUID="1032A3DA26B44731B990092F643F7082" Comment="Высокая температура газа на скважине 6Т" />
+		<Field Name="Tg_TE7_Pn" Type="REAL" UUID="2CAC35B07D38485C8EF116F4696EFCB1" Comment="Низкая температура газа на скважине 7Т" />
+		<Field Name="Tg_TE7_Pv" Type="REAL" UUID="D7B2251CF1EA4A1B8B8E36D41110741C" Comment="Высокая температура газа на скважине 7Т" />
+		<Field Name="Tg_TE8_Pn" Type="REAL" UUID="AABEC654540046B98FEE93710675FD4F" Comment="Низкая температура газа на скважине 8Т" />
+		<Field Name="Tg_TE8_Pv" Type="REAL" UUID="ABAAD76410BC463894AC28A13792367F" Comment="Высокая температура газа на скважине 8Т" />
+		<Field Name="Tg_TE9_Pn" Type="REAL" UUID="45CE622204EA46A18CC91F912F0B1E0C" Comment="Низкая температура газа на скважине 9Т" />
+		<Field Name="Tg_TE9_Pv" Type="REAL" UUID="7FBC391A0C1A4E12850325D66E46729E" Comment="Высокая температура газа на скважине 9Т" />
+		<Field Name="Tg_TE10_Pn" Type="REAL" UUID="1B68E15E444C43CFAB8348679F1A14F1" Comment="Низкая температура газа на скважине 10Т" />
+		<Field Name="Tg_TE10_Pv" Type="REAL" UUID="AF8652420B584369A044663F0CD8A8B0" Comment="Высокая температура газа на скважине 10Т" />
+		<Field Name="Tg_TE11_Pn" Type="REAL" UUID="8CD05A5E70EA4F28B550E7312C1FC933" Comment="Низкая температура газа на скважине 11Т" />
+		<Field Name="Tg_TE11_Pv" Type="REAL" UUID="9B90B6C642244CA6BB18F3874D1DC77B" Comment="Высокая температура газа на скважине 11Т" />
+		<Field Name="Tg_TE12_Pn" Type="REAL" UUID="4AB823381FE249559EEEE64CB5983DED" Comment="Низкая температура газа на скважине 12Т" />
+		<Field Name="Tg_TE12_Pv" Type="REAL" UUID="D2F48A7C6190483BB1A79DA806248D43" Comment="Высокая температура газа на скважине 12Т" />
+		<Field Name="Tg_TE13_Pn" Type="REAL" UUID="E092DCEEF4344BA38C2593E43A8F7D87" Comment="Низкая температура газа на скважине 13Т" />
+		<Field Name="Tg_TE13_Pv" Type="REAL" UUID="66E6EF9411C840DCAA6ED9642E9B440C" Comment="Высокая температура газа на скважине 13Т" />
+		<Field Name="Tg_TE14_Pn" Type="REAL" UUID="5B24F4A2BC20445AADBBB7EB62A2D354" Comment="Низкая температура газа на скважине 14Т" />
+		<Field Name="Tg_TE14_Pv" Type="REAL" UUID="CBA0F4BA7490469F9D1D7302F4C3517A" Comment="Высокая температура газа на скважине 14Т" />
+	</Fields>
+</Type>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_FRI" Kind="Struct" Comment="Входы регулятора" UUID="9907572D444C8CE6F1A71EB6E064BF4C">
+	<Fields>
+		<Field Name="deblock" Type="BOOL" UUID="D3D1B5C24A863A8C8C0FEA8FACB53B65" Comment="Деблокировка" />
+		<Field Name="check" Type="BOOL" UUID="CB00B4AB4C5571748342628A444F34C0" Comment="Проверка защит" />
+		<Field Name="start" Type="BOOL" UUID="7E6A11324033D777A7728686A3A5207D" Comment="Команда запуска двигателя" />
+		<Field Name="stop" Type="BOOL" UUID="49A482E5465C3C9023C0D8A922625850" Comment="Команда останова" />
+		<Field Name="EnLoLim" Type="BOOL" UUID="732765344F4570D26FCDA49A83F7C49D" Comment="Включить нижние ограничения" />
+		<Field Name="regNvd" Type="BOOL" UUID="5F1000AF4F575AB018EF58B47776764C" Comment="Регулирование N КВД" />
+		<Field Name="regNst" Type="BOOL" UUID="C845BA244042FFBB17F401BDF191F4FF" Comment="Регулирование N ТН" />
+		<Field Name="NO" Type="BOOL" UUID="3C56222046F8565F878DAFBD585A59D4" Comment="Нормальный останов" />
+		<Field Name="DG_DU" Type="BOOL" UUID="AF56BB9F4AD7E4F0CA0FC69E3679869F" Comment="ДУ дозатором" />
+		<Field Name="I_Starter" Type="REAL" UUID="1E7B84CB44599095AEB5E7BCD082CF14" Comment="Ток стартера" />
+		<Field Name="Repair" Type="BOOL" UUID="3F9E82CB4466744B4A11F89E97D606F3" Comment="ГПА в ремонте" />
+		<Field Name="PinD" Type="REAL" UUID="E7J55RRRB5DE5IHEMUEKM2XIDA" Comment="Статическое давление воздуха на входе в ГТД" />
+		<Field Name="Tatm" Type="REAL" UUID="XS6TO7NMXGUUZGPMYFACMENWBM" Comment="Температура атмосферного воздуха" />
+		<Field Name="SetNst" Type="REAL" UUID="LHERNHGBXCSEXKCTEDEXWQUJBM" Comment="Задание на обороты СТ" />
+		<Field Name="SetNvd" Type="REAL" UUID="DXQSNKFVIXMEHBTNMXWIGHHRSY" Comment="Задание на обороты ТВД" />
+		<Field Name="Prm_DU" Type="BOOL" UUID="LR2KKL35JWTUNPHWZZA36KRHJQ" Comment="Разрешение на ДУ ИМ" />
+	</Fields>
+</Type>

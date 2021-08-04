@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Buttons" Kind="Struct" UUID="99E9E6E14126B1BF744013BFCD0FFA64">
+    <Fields>
+        <Field Name="AVAR_CLOSE_UPG_SAU" Type="BOOL" UUID="65F05EE64BCFDE2163068290406969CB" Comment="команда с ПУ САУ УПТИГ «Аварийное закрытие УПТИГ&quot;" />
+        <Field Name="AVAR_CLOSE_UPG_DISP" Type="BOOL" UUID="B1337995495F5A2669D9E180C62F18DD" Comment="команда с ПУ диспетчера «Аварийное закрытие УПТИГ»" />
+        <Field Name="AO_UPG_SAU_PANEL" Type="BOOL" UUID="B3BACCBF47817C60F4EE38BA1D97777E" Comment="нажатие кнопки «АОСС УПТИГ» на панели САУ" />
+        <Field Name="AOBS_UPG_SAU_PANEL" Type="BOOL" UUID="424940C3453DC60F43B50798E0DDB698" Comment="нажатие кнопки «АОБС УПТИГ» на панели САУ" />
+        <Field Name="CLOSE_UPG_SAU" Type="BOOL" UUID="323A6FFB446B5947E46EB2844657B594" Comment="команда с ПУ САУ УПТИГ «закрытие УПТИГ»;" />
+        <Field Name="CLOSE_UPG_DISP" Type="BOOL" UUID="ECDD92874842C366D6E4C9B91BB59D64" Comment="команда с ПУ диспетчера ЛПУ «закрытие УПТИГ»" />
+        <Field Name="SBROS_F1_1_OPERATOR" Type="BOOL" UUID="E383C90D4629855173DA4FAFC5976D3D" Comment="Сброс конденсата с 1 фильтра" />
+        <Field Name="SBROS_F2_1_OPERATOR" Type="BOOL" UUID="FB62CD6B4BA5D22C21E0F797770E42EC" Comment="Сброс конденсата со 2 фильтра" />
+        <Field Name="SBROS_F1_2_OPERATOR" Type="BOOL" UUID="CED37CE74ECA25EBFDACDE8E559E3E89" Comment="Сброс конденсата с 1 фильтра" />
+        <Field Name="SBROS_F2_2_OPERATOR" Type="BOOL" UUID="C3AE1608423B3F48D9000EA52C30F30A" Comment="Сброс конденсата со 2 фильтра" />
+		<Field Name="Deblock_PRU" Type="BOOL" UUID="KA5FBUB2B3UEZNGLAQI3LN4GSY" />
+		<Field Name="MD_PZ_PRU_off" Type="BOOL" UUID="R24EH3U4TNYU7PXSIREKUGZP3E" />
+		<Field Name="MD_PZ_PRU_on" Type="BOOL" UUID="AHX3MAA2L62EHEPSMXHFGJTWMY" />
+		<Field Name="Reset_AO" Type="BOOL" UUID="ISYN4A25WIHETEAVLOCTFR3SNE" />
+    </Fields>
+</Type>

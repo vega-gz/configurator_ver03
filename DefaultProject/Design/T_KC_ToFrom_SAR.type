@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_ToFrom_SAR" Kind="Struct" UUID="8742BE734675766F53829DAA1789FD0C">
+    <Fields>
+        <Field Name="evPg_in_KC" Type="REAL" UUID="15A9E59C47D0B651EBF53AAD5BEDBCEC" Comment="Р вх" />
+        <Field Name="evPg_out_KC" Type="REAL" UUID="92EE4AA748C4946DFDF2A68F3C1BC844" Comment="Р вых" />
+        <Field Name="Q1" Type="REAL" UUID="0176D11C4E2EEC365FFD48A3D29FFD5E" Comment="Расход УП1" />
+        <Field Name="Q2" Type="REAL" UUID="AA43293E4521809012D672B5B3D97C51" Comment="Расход УП2" />
+    </Fields>
+</Type>

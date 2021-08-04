@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UVI_AM_ToHMI" Kind="Struct" UUID="A8F1E7084DB1F69EBC0807B2E37E49A7">
+    <Fields>
+        <Field Name="Vn_V1" Type="A6D7875840F9E702E7824F8046D18141" UUID="2FD2701B455265F5CD9024A8D473D04E" />
+    </Fields>
+</Type>

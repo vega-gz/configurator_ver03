@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="UPIG_500" Kind="Struct" UUID="714311344A56286B1521B49710EFF3CE">
+    <Fields>
+        <Field Name="Operating_Mode" Type="WORD" UUID="317D2EE640CE8FD37A99728D5CC7F7D5" Comment="Режим работы" />
+        <Field Name="Neisp" Type="WORD" UUID="CFB54E7D48A15C4A57EA0BAEC6FB8EBA" Comment="Неисправность" />
+        <Field Name="Avar_Stop" Type="BOOL" UUID="1B4AC39E47E286CAA015418B1ADE7360" Comment="Аварийный останов" />
+        <Field Name="T_Enter_Gas" Type="INT" UUID="D063A3AC4BE79B5122E10B99CC2CD84B" Comment="Температура входного газа" />
+        <Field Name="T_Absor_A_1_1" Type="INT" UUID="E83446174746262EEE1B11AE4D5A315E" Comment="Температура  адсорбера  А1.1   " />
+        <Field Name="T_Absor_A_1_2" Type="INT" UUID="B966B51F4C08BDD633B26DB999F65457" Comment="Температура  адсорбера  А1.2" />
+        <Field Name="T_Absor_A_2_1" Type="INT" UUID="50D48A3041B906102EAF19B0692C87FB" Comment="Температура  адсорбера  А2.1   " />
+        <Field Name="T_Absor_A_2_2" Type="INT" UUID="BD5F8C1947B59BDD278C8C941AE0C9C9" Comment="Температура  адсорбера  А2.2   " />
+        <Field Name="Vakuum" Type="INT" UUID="DB3010A14ACE489D7FF8B1B90E280E98" Comment="Ваккумметр" />
+        <Field Name="Pressure" Type="INT" UUID="299759164C6B43F74B14838D84907410" Comment="Давление" />
+        <Field Name="TTP_exit_Gas" Type="INT" UUID="5E25391D4BCF6B2A529AB281BB7A8C4A" Comment="ТТР выходного газа" />
+    </Fields>
+</Type>

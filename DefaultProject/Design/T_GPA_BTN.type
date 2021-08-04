@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_BTN" Kind="Struct" UUID="424D191F994AD519993F1E84A3477D2A">
+	<Fields>
+		<Field Name="Deblock" Type="BOOL" UUID="BA4BZFDSYB6ULNFHLLFR7NHWFU" Comment="Кн. «Деблокировка»" />
+		<Field Name="AOss" Type="BOOL" UUID="ZZBXRHPQRKHELODTP3AS4NMPII" Comment="Кн. «АОсс»" />
+		<Field Name="AObs" Type="BOOL" UUID="PRCULJWZGNHUHEM5XSTCG2UMRE" Comment="Кн. «АОбс»" />
+		<Field Name="NOss" Type="BOOL" UUID="E6QAENTVPSBE3BZTZJN5Y6LQDQ" Comment="Кн. «НОсс»" />
+		<Field Name="NObs" Type="BOOL" UUID="ZQ64XBNOKVSELE3GJKGCQNXRKM" Comment="Кн. «НОбс»" />
+		<Field Name="APM" Type="BOOL" UUID="SEPS3AJSNISEDE7444TS7WMPSE" Comment="Кн. «АПМ»" />
+		<Field Name="APK" Type="BOOL" UUID="EIATNI4OVBEEHMJBVP3MBLW3JM" Comment="Кн. «АПК»" />
+		<Field Name="KPK" Type="BOOL" UUID="23UY5HTA3AZEVPM2GYDU4525ZQ" Comment="Кн. «КПК»" />
+		<Field Name="Repair" Type="BOOL" UUID="CTBAUQXQFBMUHLVRQEZMFDNCLI" Comment="Кн. «Ремонт»" />
+		<Field Name="HR" Type="BOOL" UUID="DN5WQGB2L53EPE2DRRGMU4ZMJA" Comment="Кн. «ХР»" />
+		<Field Name="GR" Type="BOOL" UUID="IWBLXOPQ2FNUZKZASRJAV4KL2Y" Comment="Кн. «ГР»" />
+		<Field Name="HP" Type="BOOL" UUID="DTJFOCWJCUCEPIFSBJCKBWQOIQ" Comment="Кн. «ХП»" />
+		<Field Name="TP" Type="BOOL" UUID="CAQOBSZSZF6ENAMA5RXU66G35A" Comment="Кн. «Технологическая прокрутка»" />
+		<Field Name="PZ" Type="BOOL" UUID="44HO2DM6YSVEHH6AVBWWGVYSYE" Comment="Кн. «ПЗ»" />
+		<Field Name="M" Type="BOOL" UUID="GPS4HWH2QQUUVL2LX2WVBIU6NU" Comment="Кн. «Магистраль»" />
+		<Field Name="K" Type="BOOL" UUID="GO57A4LNRAQE5NTNRZYPNFCHE4" Comment="Кн. «Кольцо»" />
+		<Field Name="PZM" Type="BOOL" UUID="6THBNJGQ66LUBNC3T5W3EWPHVU" Comment="Кн. «ПЗМ»" />
+		<Field Name="Cancel" Type="BOOL" UUID="AQRITXAT24PE7J76FWKZAF5JDY" Comment="Кн. «Отмена»" />
+		<Field Name="Pusk" Type="BOOL" UUID="DNC5LJ5336JUPO3AQ57OED2BSE" Comment="Кн. «Пуск»" />
+		<Field Name="Reg_VD" Type="BOOL" UUID="VNNJLQYONJAEFIYWLEZOLT3MIA" Comment="Кн. «Регулировние по КВД»" />
+		<Field Name="Reg_ST" Type="BOOL" UUID="BXBSV6ADHZTEDIBQR5CONVF3EA" Comment="Кн. «Регулирование по СТ»" />
+		<Field Name="Reg_AVOG1_On" Type="BOOL" UUID="TFLUWEU6RGKETMNDM7H576CIMQ" Comment="Кн. «Вкл. регулирование АВОГ1»" />
+		<Field Name="Reg_AVOG1_Of" Type="BOOL" UUID="UDMFVULIFKAU3LAAOFNHO2KHIY" Comment="Кн. «Откл. регулирование АВОГ1»" />
+		<Field Name="Reg_AVOG2_On" Type="BOOL" UUID="CCM2RO3GXSDE7PCQLIU5EGUGZE" Comment="Кн. «Вкл. регулирование АВОГ2»" />
+		<Field Name="Reg_AVOG2_Of" Type="BOOL" UUID="OSO7JU5YTR2E7LW7EB57YTS2ZM" Comment="Кн. «Откл. регулирование АВОГ2»" />
+		<Field Name="Sound_Off" Type="BOOL" UUID="HBQ53EMLG37UVPP5JETRBBFXM4" Comment="Кн. &quot;Отключить звук&quot;" />
+		<Field Name="goUp" Type="BOOL" UUID="NS4LCV2BPHKETAMW5AYB366EWE" Comment="Кн. &quot;Обороты СТ выше&quot;" />
+		<Field Name="goDown" Type="BOOL" UUID="W7BEFP7TFC6EDB73WRLSUQWGGU" Comment="Кн. &quot;Обороты СТ ниже&quot;" />
+		<Field Name="DU_IM" Type="BOOL" UUID="HRJEWGFIM4QEJFLMTXIMVNTJNI" Comment="Кн. &quot;ДУ ИМ&quot;" />
+		<Field Name="Chk_SAU" Type="BOOL" UUID="YI6T56P2A7KU5KVIR4UPMYCAGA" Comment="Кн. &quot;Контроль САУ&quot;" />
+		<Field Name="JumpK" Type="BOOL" UUID="MRWK4RYSZZVEZFZ6FUJFKN6NIQ" Comment="Кн. &quot;Смена режима компрессора&quot;" />
+		<Field Name="PNSK_OfWork" Type="BOOL" UUID="ZKSHOYAUADHELOMZQ5W6ALF2JM" Comment="Кн. &quot;Отключить НППМК&quot;" />
+		<Field Name="PNSR_OfWork" Type="BOOL" UUID="Z3FCCUYLTLOUNNDULNICVF7SOE" Comment="Кн. &quot;Отключить НМП&quot;" />
+		<Field Name="Shop" Type="BOOL" UUID="4N3LFX7EKLYUHBIFHHASMSJ7LI" Comment="Кн. &quot;Разрешение на управление от ЦР&quot;" />
+		<Field Name="KLR1_D" Type="BOOL" UUID="UPZ4TSDUXN2E3GAWLGQAYNYLDY" Comment="Кн. &quot;Дискретное управление клапаном КлР1&quot;" />
+		<Field Name="KLR2_D" Type="BOOL" UUID="YGDM3K2SIK5EBNEVXAHUL2MSK4" Comment="Кн. &quot;Дискретное управление клапаном КлР2&quot;" />
+		<Field Name="Rej_CNVO" Type="BOOL" UUID="BWOJR3HXZZLERLC44ZI6UDVDQQ" Comment="Кн. &quot;Режим прямого пуска насоса НОК вкл./откл." />
+		<Field Name="VOT1_Main" Type="BOOL" UUID="C6ENT3VPJ3CEVBWFQNSPI723S4" Comment="Кн. &quot;ВОТ1 основной&quot;" />
+		<Field Name="VOT2_Main" Type="BOOL" UUID="LDVKWF6E4EZUJGSZWOWCVCFY5A" Comment="Кн. &quot;ВОТ2 основной&quot;" />
+		<Field Name="AVOG1_Rej" Type="BOOL" UUID="XILI2XVQ222EXAL2Z3GPGTNZHM" Comment="Кн.: &quot;Переключение режима пуска вентиляторов АВОГ1&quot;" />
+		<Field Name="AVOG1_RegOn" Type="BOOL" UUID="KVK5667RDCVE3ECHWGIAXYEBAU" Comment="Кн.: &quot;Включить регулятор АВОГ1&quot;" />
+		<Field Name="AVOG2_Rej" Type="BOOL" UUID="6ABHTADC5NJEVPBIG3IW3TOWAI" Comment="Кн.: &quot;Переключение режима пуска вентиляторов АВОГ2&quot;" />
+		<Field Name="AVOG2_RegOn" Type="BOOL" UUID="O4CAKPIACJEUTMN6JVEA64WNSA" Comment="Кн.: &quot;Включить регулятор АВОГ2&quot;" />
+	</Fields>
+</Type>

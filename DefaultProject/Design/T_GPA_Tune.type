@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Type Kind="Struct" Name="T_GPA_Tune" UUID="59F0C191D6F5420785255269FC897CCD">
+<Fields>
+    <Field Comment="Время ХП, с" Name="TimeHP" Type="REAL" UUID="21C21BA1BC0E4AC799B555BD97E63333"/>
+    <Field Comment="Время ТП, с" Name="TimeTP" Type="REAL" UUID="2090D06B27F741189E92AE0DE921D373"/>
+    <Field Comment="Время раскрутки при разгоне, с" Name="TimeCrankUp" Type="REAL" UUID="81F887DF092D4E3D9C6C747B5556FDA7"/>
+    <Field Comment="Ток СР при ТП, %" Name="I_TP" Type="REAL" UUID="E38443A2DC4048E99546A00733E16F48"/>
+    <Field Comment="Ток СР при разгоне, %" Name="I_CrankUp" Type="REAL" UUID="AF4D69AD7A194AC891C20A74F8CE2362"/>
+    <Field Comment="Скважность открытия ПОК" Name="SkvPOK" Type="REAL" UUID="5DCD85FBCDC34F339C328B74B48B8F99"/>
+    <Field Comment="Период ипульсов открытия ПОК, с" Name="TauPOK" Type="REAL" UUID="5D2F85AC843F4E35933192E2369EFFE8"/>
+    <Field Comment="Время работы воспламенителей после розжига, с" Name="TimeSPV" Type="REAL" UUID="A7CB1BD86F6946BF9D01D670F6379B71"/>
+    <Field Comment="Обороты ТВД отключения стартера, об./мин" Name="NvdStopSR" Type="REAL" UUID="CE7FE87052EE4905952675E6391361CD"/>
+    <Field Comment="Приведенные обороты ТВД закрытия ЗПВ" Name="NvdCloseZPV" Type="REAL" UUID="E037C9DA6C23449FA97C9DB822E94E72"/>
+    <Field Comment="Приведенные обороты ТВД открытия ЗПВ" Name="NvdOpenZPV" Type="REAL" UUID="53FA4818AE834EDBACE55DEB693F044F"/>
+    <Field Comment="Продолжительность контроля розжига, с" Name="ControlFlame" Type="REAL" UUID="9255DE800A5946F18702CFE89FDC3C60"/>
+    <Field Comment="Ограничение давления на выходе компрессора, МПа" Name="Limit_Pg_outK" Type="REAL" UUID="CF01736653504C7CB298DA0670A06E30"/>
+    <Field Comment="Зона нечувствительности регулятора Р вых. К, МПа" Name="APZ_dz" Type="REAL" UUID="6F8FF410B3D54858BA405D68224ECE23"/>
+    <Field Comment="Коэффициент пропорц. регулятора Р вых. К" Name="APZ_kp" Type="REAL" UUID="BA5C5EB616C2481FB81F8E438F98F9BB"/>
+    <Field Comment="Время интегрирования регулятора Р вых. К, с " Name="APZ_taui" Type="REAL" UUID="8B96AF40B3CE4D96BABC2E662D80ACF9"/>
+    <Field Comment="Время дифференц. регулятора Р вых. К, с" Name="APZ_taud" Type="REAL" UUID="A0C23BABF08344C7B889B90B119417E6"/>
+    <Field Comment="Уставка по Т возд. в отсеке двигателя, °С" Name="Tv1" Type="REAL" UUID="2F771B11F01848069E56D7EEF5E80FAE"/>
+    <Field Comment="Порог регулирования Тм АВОМ Д, °С" Name="Reg_Tm_MOD_sp" Type="REAL" UUID="57D0357A7F28469F815F0E1EC7BEF183"/>
+    <Field Comment="Кп реулятора Тм АВОМ Д" Name="Reg_Tm_MOD_kp" Type="REAL" UUID="9B433C8BCD814FDABC61A00DC167C51C"/>
+    <Field Comment="Тау интегр. регулятора Тм АВОМ Д, с" Name="Reg_Tm_MOD_taui" Type="REAL" UUID="5E9C5D2EA2934036969B7237F59925D9"/>
+    <Field Comment="ЗН регулятора Тм АВОМ Д, °С" Name="Reg_Tm_MOD_dz" Type="REAL" UUID="D26BC3DD025D4396A1CBF269017DD036"/>
+    <Field Comment="Ппорог регулирования Тм АВОМ К, °С" Name="Reg_Tm_MON_sp" Type="REAL" UUID="9C1121D59D0F4DB0AC9B824D297359D4"/>
+    <Field Comment="Кп реулятора Тм АВОМ К" Name="Reg_Tm_MON_kp" Type="REAL" UUID="3C810386AD484CCB9F1A7E6DF57C6F7D"/>
+    <Field Comment="Тау интегр. регулятора Тм АВОМ К, с" Name="Reg_Tm_MON_taui" Type="REAL" UUID="DCFD4CE8B4374565A1A5063D67CD8C52"/>
+    <Field Comment="ЗН регулятора Тм АВОМ К, °С" Name="Reg_Tm_MON_dz" Type="REAL" UUID="FBB778867919483881AE625B47E6C164"/>
+    <Field Comment="Порог регулирования Тм АВОМ Р, °С" Name="Reg_Tm_MOR_sp" Type="REAL" UUID="0517977A1322491A887717C111AC40B0"/>
+    <Field Comment="Кп реулятора Тм АВОМ Р" Name="Reg_Tm_MOR_kp" Type="REAL" UUID="3F599AFCD458438B86398E1F7A79431D"/>
+    <Field Comment="Тау интегр. регулятора Тм АВОМ Р, с" Name="Reg_Tm_MOR_taui" Type="REAL" UUID="6D803811ADAD4176BB15541E6179A8A3"/>
+    <Field Comment="ЗН регулятора Тм АВОМ Р, °С" Name="Reg_Tm_MOR_dz" Type="REAL" UUID="EFDDAB4581974B95924643917B0C696A"/>
+    <Field Comment="Задание Тг на вых. АВОГ1, °С" Name="Reg_Tg_AVOG1_sp" Type="REAL" UUID="67DF05B109614032B76B2AE750DE119F"/>
+    <Field Comment="Кп реулятора Тг АВОГ1" Name="Reg_Tg_AVOG1_kp" Type="REAL" UUID="616755A5156E4EBB8CB67E76AECE438F"/>
+    <Field Comment="Тау интегр. регулятора Тг АВОГ1, с" Name="Reg_Tg_AVOG1_taui" Type="REAL" UUID="5EEF1512489C4C368A746B516B927510"/>
+    <Field Comment="ЗН регулятора Тг АВОГ1, °С" Name="Reg_Tg_AVOG1_dz" Type="REAL" UUID="3AC1080DDEA248C19BD34064D2D8B678"/>
+    <Field Comment="Задание Тг на вых. АВОГ2, °С" Name="Reg_Tg_AVOG2_sp" Type="REAL" UUID="BD7FDA95D102439DBD42D44BDF9CA7C5"/>
+    <Field Comment="Кп реулятора Тг АВОГ2" Name="Reg_Tg_AVOG2_kp" Type="REAL" UUID="9CE423497B4F4EAAB114669AC5519288"/>
+    <Field Comment="Тау интегр. регулятора Тг АВОГ2, с" Name="Reg_Tg_AVOG2_taui" Type="REAL" UUID="CF85C6D899734FD598A9109F33680C61"/>
+    <Field Comment="ЗН регулятора Тг АВОГ2, °С" Name="Reg_Tg_AVOG2_dz" Type="REAL" UUID="507F08A5146E4A9682BE96B3F880E0EB"/>
+    <Field Comment="Потеря давления на всасе 1 ст. компрессора, %" Name="EPS_K1st" Type="REAL" UUID="6ED770D9157D43EDBEA79A3261E3AFBF"/>
+    <Field Comment="Потеря давления на выпуске 1 ст. компрессора, %" Name="EPD_K1st" Type="REAL" UUID="ECAFBFA8E9434FE78787318AEC3275D1"/>
+    <Field Comment="Потеря давления на всасе 2 ст. компрессора, %" Name="EPS_K2st" Type="REAL" UUID="FAFCBF6A063C47F38E982EFE3B27D3A3"/>
+    <Field Comment="Потеря давления на выпуске 2 ст. компрессора, %" Name="EPD_K2st" Type="REAL" UUID="FC36728925BF4E679DC92984E198D80E"/>
+  </Fields>
+</Type>

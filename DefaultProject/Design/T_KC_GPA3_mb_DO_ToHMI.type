@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_GPA3_mb_DO_ToHMI" UUID="0B5384081B134E0E8D67343C4B6AAF94">
+<Fields>
+<Field Comment="Поднятие оборотов ГПА" Name="Nst_UP" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="09C9E9FB801D4087A84C8E7585BDE414"/>
+<Field Comment="Снижение оборотов ГПА" Name="Nst_DN" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="4817A9A01C45462C9ECAD38B7353A179"/>
+<Field Comment="Признак включенного регултрования в САУ КЦ" Name="shopReg" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="0B2ABDF4CE804FAC8D8139185BE6A2C2"/>
+<Field Comment="АО (от САУ КЦ)" Name="AO" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="C7333F8852AD45159B76C154EF43A08B"/>
+</Fields>
+</Type>

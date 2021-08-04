@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TSK_BTN" Kind="Struct" UUID="250523044522F508CCE2979BE9E7A389">
+	<Fields>
+		<Field Name="Deblock" Type="BOOL" UUID="CB1E32184656FDB8A7F60A9DC8E7C497" Comment="Деблокировка ТСК" />
+		<Field Name="Sound_Off" Type="BOOL" UUID="E87189B04DA59023776C1B9AC2FAEA97" Comment="Отключить звук (ТСК)" />
+		<Field Name="AO" Type="BOOL" UUID="CF0CAD954602E4913FD683B8EC59EDD8" Comment="Аварийный останов ТСК" />
+		<Field Name="DU_IM" Type="BOOL" UUID="C4DG3F2KFNYUDEKRZCQVHYWWZA" Comment="ДУ ИМ" />
+		<Field Name="ArchUser" Type="BOOL" UUID="5RBSXOGGUDMUPACFG56GLD5FGI" Comment="Запись пользовательского архива" />
+	</Fields>
+</Type>

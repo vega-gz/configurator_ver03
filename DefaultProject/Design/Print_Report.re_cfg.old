@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ReportEngine >
+<Configuration>
+	<ReportList>
+		<Report Equation="GPA_ReportCommand.make=TRUE" Printer="lp" Template="GPA_Report.html" Print="FALSE" ShowPreview="TRUE" Archive="" FileNameTemplate="Report_%Y%m%d_%H%M%S.html" Comment="GPA_PZ" Landscape="FALSE" MarginTop="10" MarginLeft="10" MarginRight="10" MarginBottom="10" PageSize="A4" FullPage="FALSE" EventCategory="3" />
+	</ReportList>
+</Configuration>

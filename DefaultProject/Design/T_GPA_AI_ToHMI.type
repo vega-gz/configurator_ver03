@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_AI_ToHMI" UUID="3C676AC5F7D64DB69F07B845BE546AE6">
+	
+<Fields>
+    <Field Comment="Резерв" Name="Res_01" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9EA635379C6B44B5AA289BA0F449F381"/>
+    <Field Comment="Резерв" Name="Res_02" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="188C0DA3E4934A4DA4A5E4D4C4DD2C52"/>
+    <Field Comment="Температура воздуха за компрессором" Name="Tv_outTK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C614CCFD54CE4986B9DA46D27823720A"/>
+    <Field Comment="Температура выхлопных газов за СТ ГТД" Name="T_outST" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3EA48F11FF944BBFA8715A8DDB79B1D5"/>
+    <Field Comment="Резерв" Name="Res_0" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="56EC7EB43C2A47E89DB0D6FEAED59F87"/>
+    <Field Comment="Резерв" Name="Res_1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1079FF5AC75F4896AA85275F9EE1D7EE"/>
+    <Field Comment="Резерв" Name="Res_2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3D5C4EF25A834A9A853D0076ECE48821"/>
+    <Field Comment="Резерв" Name="Res_3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F466DD187CD546D7AD86D385E385D0BC"/>
+    <Field Comment="Температура воздуха отсека ГТД" Name="Tv_OD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="64CB2CFB7E724295AB961174E027CD73"/>
+    <Field Comment="Температура воздуха в укрытии компрессора" Name="Tv_ON" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="67982027995740AFBCDDD1196CF83003"/>
+    <Field Comment="Резерв" Name="Res_200" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5849882967EB461FB0DBA1F79E57F18C"/>
+    <Field Comment="Резерв" Name="Res_201" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="ED991E58D7714D2B92BC0CDC7530D794"/>
+    <Field Comment="Температура наружного воздуха" Name="T_atm" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="54A8D4FF75E747C9AF6B268BB88111D1"/>
+    <Field Comment="Температура газа на входе в компрессор" Name="Tg_inN" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A3869DC2B262409794C7CF814AEFC6AC"/>
+    <Field Comment="Температура газа на выходе первой ступени компрессора" Name="Tg_outNag1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="075F0BB26B6C49F297A94780827FD3C2"/>
+    <Field Comment="Температура газа на выходе компрессора" Name="Tg_outNag" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="52AF38967E7147139B26637A47199A89"/>
+    <Field Comment="Температура газа на выходе из цилиндра 1 компрессора" Name="Tg_outN_C1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E7277672B1D145B29CCEF394EB862F39"/>
+    <Field Comment="Температура газа на выходе из цилиндра 2 компрессора" Name="Tg_outN_C2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="41C5BC6BA0C24B05B85DF64CE6EFBEA9"/>
+    <Field Comment="Температура газа на выходе из цилиндра 3 компрессора" Name="Tg_outN_C3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="12E52240D43B4A9B8C6B287A87B4C04A"/>
+    <Field Comment="Температура газа на выходе из цилиндра 4 компрессора" Name="Tg_outN_C4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0999C9AE1499438FAA9D246FCB5E39B3"/>
+    <Field Comment="Температура газа на выходе из цилиндра 5 компрессора" Name="Tg_outN_C5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9AE26DC7D55F4685BCF16BC83949A06B"/>
+    <Field Comment="Температура газа на выходе из цилиндра 6 компрессора" Name="Tg_outN_C6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0B46F92EF1254A3784CB603D484F99BF"/>
+    <Field Comment="Резерв" Name="Res_202" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9B039BBB535A48248875E7E66DEB9F32"/>
+    <Field Comment="Резерв" Name="Res_203" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="372503D78B834B149BA501E79D6A1252"/>
+    <Field Comment="Температура масла смазки на входе в компрессор" Name="Tmsm_inN" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0095A60F86974A278C84570D6C83E194"/>
+    <Field Comment="Температура масла смазки на выходе из компрессора" Name="Tmsm_outN" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7301B68BCF1A4373A0F8393F1FC888B5"/>
+    <Field Comment="Температура масла в подогревателе масла смазки компрессора" Name="Tmsm_TEN_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="59441FF28AA54523B98BE47B77FD11E0"/>
+    <Field Comment="Температура охлаждающей жидкости на выходе драйкуллера" Name="T_freeze_outDC" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3EBCB9B63BCB4D23B4B2283EE8D3C20A"/>
+    <Field Comment="Температура охлаждающей жидкости в баке" Name="T_freeze_Bak" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="138AACCD61494F0A803BD8367A17CDB1"/>
+    <Field Comment="Температура первичных утечек от сальников штока" Name="T_utech_salnik" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="09E245EACBF44B8DA09291F2324EC9C0"/>
+    <Field Comment="Температура коренного подшипника 1 компрессора" Name="T_KP1_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="46DCD753459E4EE7A4978CAE004E3871"/>
+    <Field Comment="Температура коренного подшипника 1 компрессора (резерв)" Name="T_KP1_N_Res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9EC3689EBD5F4C3AB3F6A561A8C60555"/>
+    <Field Comment="Температура коренного подшипника 2 компрессора" Name="T_KP2_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="69FFEB415D934084BA4170E2BFFE6983"/>
+    <Field Comment="Температура коренного подшипника 2 компрессора (резерв)" Name="T_KP2_N_Res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="11842A09AB594E5FBA7997AF7657DADA"/>
+    <Field Comment="Температура коренного подшипника 3 компрессора" Name="T_KP3_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="73392C1995BB4C7FA55D9170FA8F002B"/>
+    <Field Comment="Температура коренного подшипника 3 компрессора (резерв)" Name="T_KP3_N_Res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="53F87A9AABE847078CB7666F9D239945"/>
+    <Field Comment="Температура коренного подшипника 4 компрессора" Name="T_KP4_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E33F43114F5C4D5197359CBFE5BD467E"/>
+    <Field Comment="Температура коренного подшипника 4 компрессора (резерв)" Name="T_KP4_N_Res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0F9DBF82B2284529B114C7938B2C7097"/>
+    <Field Comment="Температура коренного подшипника 5 компрессора" Name="T_KP5_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D09C2056630B4EF7B1274E1606E810EE"/>
+    <Field Comment="Температура коренного подшипника 5 компрессора (резерв)" Name="T_KP5_N_Res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A8E9749B9F2246EF8F36F545A09546E5"/>
+    <Field Comment="Температура коренного подшипника 6 компрессора" Name="T_KP6_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2DAD8010D5C244B495F2148BFF57FE0B"/>
+    <Field Comment="Температура коренного подшипника 6 компрессора (резерв)" Name="T_KP6_N_Res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B4EC859A3FA949A397F9A12DD8F2FBF7"/>
+    <Field Comment="Температура опорного подшипника промежуточного вала со стороны компрессора (L213)" Name="T_POP_PromVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="352622343CD14923815CDC5095C8DBCD"/>
+    <Field Comment="Температура опорного подшипника тихоходного вала со стороны компрессора (L111)" Name="T_POP_SlowVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5C71C1229A084F698CA513C34E548B2E"/>
+    <Field Comment="Температура опорного подшипника промежуточного вала со стороны ГТД (L223)" Name="T_ZOP_PromVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="30FBF11C869C4A9CA15FB1C427148413"/>
+    <Field Comment="Температура опорного подшипника тихоходного вала со стороны ГТД (L121)" Name="T_ZOP_SlowVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D30D7E1E9FCE47F8BDA557C047CB0F6B"/>
+    <Field Comment="Температура упорного подшипника тихоходного вала со стороны компрессора  (L161)" Name="T_PUP_SlowVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A837DD752B5148268143B0933C69A7FF"/>
+    <Field Comment="Температура опорного подшипника быстроходного вала со стороны ГТД (L313)" Name="T_ZOP_FastVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7DE807428642434E9890FF3BBC8F1CD4"/>
+    <Field Comment="Температура опорного подшипника быстроходного вала со стороны компрессора (L323)" Name="T_POP_FastVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="92380735CB734102B0D0A5FB8445359A"/>
+    <Field Comment="Температура упорного подшипника тихоходного вала со стороны ГТД (L151)" Name="T_ZUP_SlowVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EEB678EA89724B7285B4FC693D6B1A53"/>
+    <Field Comment="Температура 1 воздуха на входе в ГТД" Name="Tv1_inTK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2066F60F9E1E4F8B8CBD7725FCE105E9"/>
+    <Field Comment="Температура 2 воздуха на входе в ГТД" Name="Tv2_inTK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="75DF06B2C49C4C43B59318F5D00E5FA5"/>
+    <Field Comment="Температура масла на сливе из задней опоры ТК" Name="Tm_outZO_TK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F73E3AF0E5514C00BC592B128AB86F3F"/>
+    <Field Comment="Температура масла на сливе из опор СТ" Name="Tm_outST" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="812DDDCFE95345129E0AF5E70F3DEB9E"/>
+    <Field Comment="Температура масла на сливе из коробки агрег. и  передней опоры ТК" Name="Tm_outPO_TK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4A222A7B41D64710BA2A068AF1089F21"/>
+    <Field Comment="Температура упорного подшипника 1 компрессора (резерв)" Name="T1_UP_Kr" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8AA5E9ECE36D48A8974E9F005E7E83C2"/>
+    <Field Comment="Температура упорного подшипника 2 компрессора (резерв)" Name="T2_UP_Kr" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="50DF564904114B01A10CFF04AD5B40CF"/>
+    <Field Comment="Температура упорного подшипника 1 компрессора" Name="T1_UP_K" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4084E812F7DB437ABFAA4701F94BC5BE"/>
+    <Field Comment="Температура упорного подшипника 2 компрессора" Name="T2_UP_K" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C564FA84886347A880C33729FF2E2EB0"/>
+    <Field Comment="Резерв" Name="Res_14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="579F5809DD044E93A0CB45CDDE0EF32D"/>
+    <Field Comment="Резерв" Name="Res_15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="48BBC12BCCAF47739FC03DE3D271CFCC"/>
+    <Field Comment="Резерв" Name="Res_16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EC43C60C3D0640059903ACEDE8E9B1E9"/>
+    <Field Comment="Температура масла на входе в редуктор" Name="Tm_inR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C4A639C946BE4B8586FD080565E4ED28"/>
+    <Field Comment="Температура масла на выходе из редуктора" Name="Tm_outR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="56062EB7F0D64C1B98F6733C32A2006F"/>
+    <Field Comment="Температура масла в маслобаке редуктора" Name="Tm_MBR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EFD037599F5440A99888E2A1BDE68476"/>
+    <Field Comment="Температура топливного газа перед ОГК 1" Name="Ttg_inSK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7A5D8D282B9C4D4C9849662E72A27F41"/>
+    <Field Comment="Резерв" Name="Res_17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1A75DAB95D564A0A87A5A6B5F52AFAE1"/>
+    <Field Comment="Температура масла на входе в ГТД" Name="Tm_inD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6AD528460D4948FEA5D63295AFD40EA5"/>
+    <Field Comment="Температура масла в маслобаке ГТД" Name="Tm_MBD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6F48B22B9F1E4A4C83BBBCDCA1C4727F"/>
+    <Field Comment="Резерв" Name="Res_204" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="ADC24AF7E0FA4090B58799B9096099A7"/>
+    <Field Comment="Резерв" Name="Res_205" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="03511C8307764CD88C0251E9A778344B"/>
+    <Field Comment="Резерв" Name="Res_18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6E8D67F14A8E4A79A97900C52BD8052D"/>
+    <Field Comment="Резерв" Name="Res_19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4E11DC63F73E4BFC8B7406ECFEC8BFF3"/>
+    <Field Comment="Резерв" Name="Res_20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9E4A2E4D1BBB482C874565CD56B416E6"/>
+    <Field Comment="Резерв" Name="Res_21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="45194490AB6B48599156C94193282C4D"/>
+    <Field Comment="Давление газа на входе в компрессор" Name="Pg_inN" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0C91149CA90B49A495A5A471FA75B687"/>
+    <Field Comment="Давление газа на выходе первой ступени компримирования" Name="Pg_outN1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="674714F1463F4F80B1DEFC6DF2749DFC"/>
+    <Field Comment="Давление газа на выходе компрессора" Name="Pg_outN" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C27D067A22C2497DAED688A62A380ADD"/>
+    <Field Comment="Вибрация корпуса компрессора со стороны привода (горизонтальная составляющая) " Name="Vs_ZONg" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="05824CD84F0344CFA27DA871A2B7406A"/>
+    <Field Comment="Резерв" Name="Res_22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DD584702F4034A83A70E1DB0387E5907"/>
+    <Field Comment="Вибрация корпуса компрессора со стороны маслонасоса (горизонтальная составляющая)" Name="Vs_PONg" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="480945066D8D42E0A94B96C478424DE3"/>
+    <Field Comment="Резерв" Name="Res_23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DE8EB29B8CD84546A3877A985F7DD4AE"/>
+    <Field Comment="Положение штока ВНА" Name="Pos_VNA_lvr" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E75BDD5EAB3B4B6296C0D14351204B09"/>
+    <Field Comment="Резерв" Name="Res_24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="242C18E8687E4F8BAFDFC73A44AE3766"/>
+    <Field Comment="Радиальное виброперемещение тихоходного вала (горизонтальная составляющая)" Name="Vp_rd_SlowVal_g" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0F7453F5D50B4F79BE103046BC80F301"/>
+    <Field Comment="Радиальное виброперемещение тихоходного вала (вертикальная составляющая)" Name="Vp_rd_SlowVal_v" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E95BC2ABBB244D0B869C2BDC12ADC5F5"/>
+    <Field Comment="Аксиальное виброперемещение 1 тихоходного вала" Name="Vp_ax_SlowVal" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="30051B74FFE446E08980C29740617792"/>
+    <Field Comment="Аксиальное виброперемещение 2 тихоходного вала (резерв)" Name="Vp_ax_SlowVal_Res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="11B9501B57D54EBEBDFC6951E8DC0FB7"/>
+    <Field Comment="Радиальное виброперемещение быстроходного вала (горизонтальная составляющая)" Name="Vp_rd_FastVal_g" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2C951E2228164E58ADA1867F862EBE93"/>
+    <Field Comment="Радиальное виброперемещение быстроходного вала (вертикальная составляющая)" Name="Vp_rd_FastVal_v" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="302090590E3E4DB98748AA520ACE0322"/>
+    <Field Comment="Вибрация по переднему стоечному узлу ТК" Name="Vs_PO_TK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="537EC56FE3254A02BD574383361D9D8C"/>
+    <Field Comment="Вибрация по задней опоре ротора ТК" Name="Vs_ZO_TK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F0476E989B5B4F2D911A969CB558FB34"/>
+    <Field Comment="Вибрация по опоре ротора СТ " Name="Vs_ST" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="35CB740DEC0646C8BACC2C4719C3AB97"/>
+    <Field Comment="Давление масла на входе в компрессор после фильтров Ф1,Ф2" Name="Pm_inK_outF" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6FC6DEE9F02A43398D1A6A376C05FB4C"/>
+    <Field Comment="Резерв" Name="Res_207" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6C5739D5E28E4B11A17E247CC2623E07"/>
+    <Field Comment="Резерв" Name="Res_208" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8762F8A5AF7D46BCBDABE0D47D1E227F"/>
+    <Field Comment="Резерв" Name="Res_209" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C472D51394D841188D5B96E53E3CA32D"/>
+    <Field Comment="Давление масла смазки на входе в компрессор" Name="Pmsm_inN" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2C36BB1AA24A43EFA9016A6B7C578D29"/>
+    <Field Comment="Давление масла в подогревателе масла смазки компрессора" Name="Pmsm_TEN_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="742276F5925B4CEFAB4226266FF23EBE"/>
+    <Field Comment="Уровень масла в маслобаке Б1 компрессора" Name="Lm_MBN" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0F2BCA81C57E49259329E8E3DB43F85F"/>
+    <Field Comment="Давление воздуха управления РП компрессорных цилиндров компрессора" Name="Pv_uprRP_N" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8C9DB2104F184BCBB2A955C9C36E13F3"/>
+    <Field Comment="Давление утечек из РП" Name="P_utech_RP" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B3E6596C0DC94870A38821631EDFB39D"/>
+    <Field Comment="Избыточное давление в лубрикаторной системе смазки " Name="Pm_lub" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="60A54748B375400DB2A901826E8E6253"/>
+    <Field Comment="Уровень масла в маслобаке лубрикаторной системы" Name="Lm_MBL" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B76A89281AC24564A5B25C1B1B47B470"/>
+    <Field Comment="Уровень охлаждающей жидкости в баке" Name="L_freeze_Bak" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D2EC9B14F88F4A64A4C01910A04C66B9"/>
+    <Field Comment="Резерв" Name="Res_26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CCB9C40FC5304F78961D56A672D350BC"/>
+    <Field Comment="Резерв" Name="Res_210" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6DABE6115381402188B0BC664362EA7F"/>
+    <Field Comment="Расход охлаждающей жидкости" Name="Q_freeze" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6F193FC6EFAE415DB14727A1733246BF"/>
+    <Field Comment="Резерв" Name="Res_27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="033EBD1F4B694EA983B28A6DB97CFBF5"/>
+    <Field Comment="Резерв" Name="Res_28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="07F06061466E4F6E89DAA9B6265A7F7D"/>
+    <Field Comment="Резерв" Name="Res_29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="08BA504CE26349268D7E8EC25DFA9D37"/>
+    <Field Comment="Положение клапана КлР1" Name="Pos_KLR1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="76FF44A0D15D4637ACC5BB0F9D67211B"/>
+    <Field Comment="Положение клапана КлР2" Name="Pos_KLR2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0BC02FDE25054D7AA5846A5E638D1F2A"/>
+    <Field Comment="Давление масла на входе в редуктор" Name="Pm_inR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="53791D5260E5479EA71A271867BF5D39"/>
+    <Field Comment="Уровень масла в маслобаке редуктора" Name="Lm_MBR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EA43F6969D024D76BCB19EB2D33050ED"/>
+    <Field Comment="Статическое давление воздуха на входе в ГТД" Name="Pv_inTK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A4E33A69C64C4ACAAA6D68FCCAB72E0B"/>
+    <Field Comment="Перепад давления топливного газа в подсистеме топливопитания на фильтрах" Name="dPtg_F" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0E0AC9173EA04C3697149CB5D26F63B3"/>
+    <Field Comment="Перепад давления топливного газа в первом коллекторе форсунок" Name="dPtg_KF" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="76BE0599CA7545FA8708E70FBE5C1432"/>
+    <Field Comment="Давление топливного газа перед дозатором" Name="Ptg_inTRK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="IHGI7NCCHA2UFBW433YAZSVYPY"/>
+    <Field Comment="Давление масла на входе в ГТД" Name="Pm_inD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E3DFB4A87BF24F44A7418E9206EC3436"/>
+    <Field Comment="Уровень масла в маслобаке ГТД" Name="Lm_MBD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D6FB94E1A25D43B59685FB5BC4948573"/>
+    <Field Comment="Полное давление выхлопных газов за СТ ГТД" Name="P_outST" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0DD08236B42B4F15A32A14EC7FFCD033"/>
+    <Field Comment="Барометрическое давление" Name="Patm" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="54E12340AB7747AC993F1C6BF1A4418B"/>
+    <Field Comment="Выходной ток в цепи электростартера" Name="I_Starter" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="83011BAE396D49F78DE80B424AB053F1"/>
+    <Field Comment="Частота тока в цепи электростартера" Name="F_Starter" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C9B1162DA89D4366B996D2921FC28E5D"/>
+    <Field Comment="Резерв" Name="Res_30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F372E55C5C274741B5ED793BE507BAEF"/>
+    <Field Comment="Резерв" Name="Res_31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="087632E20A884C5796E998E880C650DF"/>
+    <Field Comment="Резерв" Name="Res_32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D244D55453F34A85B7F27FFE88799E99"/>
+    <Field Comment="Перепад давления масла на маслофильтре тонкой очистки" Name="dPm_FTO" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="85BED4F83FFA4E31904D9B22DEF306F5"/>
+    <Field Comment="Перепад давления масла на маслофильтре грубой очистки" Name="dPm_FGO" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="76B253D890E9455DBD4199C07E489079"/>
+    <Field Comment="Датчик избыточного давления масла прокачки" Name="Pm_pomping" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BA38CD4E2BE8430584F9821E27030D71"/>
+    <Field Comment="Относительная влажность наружного воздуха" Name="Vlaga_atm" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7450107478AF43D68A61B51F45C5C0B6"/>
+    <Field Comment="Температура влагомера" Name="T_Vlagomer" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7135B98CF5D74991B093E626BC3C1CFA"/>
+    <Field Comment="Разрежение за шумоглушителем КВОУ в воздухоприемной камере" Name="Pr_VZK" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="884FDCBCD0434143A8E836A2A690A0C8"/>
+    <Field Comment="Разрежение за первой ступенью очистки КВОУ (мультициклонами)" Name="Pr_VOU" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BE53AB6332B4489995DA264EC9F2F991"/>
+    <Field Comment="Давление в т/п газа до Кр1" Name="Pg_inKr1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1BCBF9848B5B405D989E9E995920260A"/>
+    <Field Comment="Давление в т/п газа после Кр1" Name="Pg_outKr1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="371BAA3FDA9D43189B8A921F6EB3C551"/>
+    <Field Comment="Резерв" Name="Res_37" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D6CCB9F8A1DC4FFE988E490B933BD866"/>
+    <Field Comment="Давление в т/п газа до АВО2" Name="Pg_inAVOG2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E77C6046B5FA4AFDA380A618ED9AC069"/>
+    <Field Comment="Давление в т/п дренажа до емкости Е-2" Name="Pdr_inE2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="36FFE0CFC318428795D56DBEA24206F3"/>
+    <Field Comment="Резерв" Name="Res_38" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0DA23F4D857B455D8C9CEC3CB165F448"/>
+    <Field Comment="Температура в т/п топливного газа к ГПА" Name="Ttg_GPA" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5985F17914F44E90BE2A985C13F56A52"/>
+    <Field Comment="Давление в т/п топливного газа к ГПА" Name="Ptg_GPA" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8F15404A0D3743F08E55882FD5013EDE"/>
+    <Field Comment="Резерв" Name="Res_39" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AD8DC4EF37FD4038B7A666B23270B164"/>
+    <Field Comment="Температура в т/п газа после АВО1" Name="Tg_outAVOG1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EBFEEAD310A24E61BFAB4BF76D4F9E8A"/>
+    <Field Comment="Давление в т/п газа после АВО2" Name="Pg_outAVOG2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D33FDB021B414B5D8065A0BAD2F32679"/>
+    <Field Comment="Резерв" Name="Res_40" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4BC267E81B9644C3B0B4BCEA8027295B"/>
+    <Field Comment="Давление в т/п газа после АВО1" Name="Pg_outAVOG1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BA353B159C8E4F7993F310A34D680A0B"/>
+    <Field Comment="Давление в т/п газа до АВО1" Name="Pg_inAVOG1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="44B166756AD04903B59D722DFE2B4BDF"/>
+    <Field Comment="Резерв" Name="Res_41" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="936A36BFAFCB4A539390CB22828FBAB2"/>
+    <Field Comment="Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)" Name="Tg1_outAVOG2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="31B22B9E82F948DEB9026B98EF35BDB7"/>
+    <Field Comment="Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)" Name="Tg2_outAVOG2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="691AC3EA2FAB4BFCBECCDF99FDDC9618"/>
+    <Field Comment="Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)" Name="Pg1_outAVOG2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6D1A61B6DE54449C8AD3F4E94D31205F"/>
+    <Field Comment="Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)" Name="Pg2_outAVOG2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E39037E8003C4632B6C25A2915416372"/>
+    <Field Comment="Резерв" Name="Res_42" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="89F634E46E564BEFA564A6AA992ADFAC"/>
+    <Field Comment="Давление в т/п газа после Кр2" Name="Pg_outKr2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1F6E0E20A7094696BA5CC1F4FAE905F1"/>
+    <Field Comment="Резерв" Name="Res_43" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4BF8468BC92F4FC5980BBDABC850EE21"/>
+    <Field Comment="Давление в т/п газа до Кр2" Name="Pg_inKr2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="388C3C2ABFF742E7A9158EFB0EE66624"/>
+    <Field Comment="Резерв" Name="Res_44" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="963D5919BC0844128383AE7E5C7394EF"/>
+    <Field Comment="Температура в т/п газа на входе в ФС1" Name="Tg_inFS1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="282597EFAD6A4C0A99C9F0846DF5F8B9"/>
+    <Field Comment="Резерв" Name="Res_4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="776EF97C191D4219BA1E94749E74A894"/>
+    <Field Comment="Резерв" Name="Res_5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D95068A5A83F43468A0C6100DBFD684A"/>
+    <Field Comment="Перепад давления на секции циклонных элементов ФС1 (PDT1-1)" Name="dPg_FS1c" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B924EB7B47AD46B9BCD8E88A0A7083BA"/>
+    <Field Comment="Перепад давления на секции фильтрующих элементов ФС1 (PDT1-2)" Name="dPg_FS1f" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DBB0EC4097FB45819C76BD16D6673EB6"/>
+    <Field Comment="Перепад давления на секции циклонных элементов ФС2 (PDT2-1)" Name="dPg_FS2c" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="43C7EFDC51944B93B2D11FEECB42E5A6"/>
+    <Field Comment="Перепад давления на секции циклонных элементов ФС3 (PDT3-1)" Name="dPg_FS3c" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E5497AB4B24E4B518F59232FF4620454"/>
+    <Field Comment="Положение клапана КлР6" Name="Pos_Kr6r" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="41E7F9A037F243C29E6DCF025D71756F"/>
+    <Field Comment="Максимальный уровень в подземном резервуаре слива масла двигателя " Name="Lm_TankD_v" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="71AB15B6832141CDB53DE2F93E902C4E"/>
+    <Field Comment="Максимальный уровень в подземных резервуарах слива масла компрессора" Name="Lm_TankK_v" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C74BDD8778404508BBD9AD03113427F3"/>
+    <Field Comment="Температура масла на входе МОК" Name="Tm_inMON" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CC92AEF510DE44EF9056C3701693C720"/>
+    <Field Comment="Температура масла на выходе МОК" Name="Tm_outMON" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="58C81B77D559445EBC4415057E613B6A"/>
+    <Field Comment="Температура секции МОК" Name="T_MON_skc" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7565C33D9F244782BE45727AD5C57C87"/>
+    <Field Comment="Давление масла на входе МОК" Name="Pm_inMON" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="44F324BF1F09498EBA77501429D303BC"/>
+    <Field Comment="Температура масла на входе МОР" Name="Tm_inMOR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4B477E2B1E6E483AAABB4F4276C40E3E"/>
+    <Field Comment="Температура масла на выходе МОР" Name="Tm_outMOR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D1596C588FC04F94B061C373036FE4BA"/>
+    <Field Comment="Температура секции МОР" Name="T_MOR_skc" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BC168039AE8A4975A7A8F4ECF6297C2E"/>
+    <Field Comment="Давление масла на входе МОР" Name="Pm_inMOR" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DDA4AC427AF04DAC9AE71A5FD0E1ACF1"/>
+    <Field Comment="Температура масла на входе МОД" Name="Tm_inMOD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="336A814BA4324B839D8B219EA884B4C3"/>
+    <Field Comment="Температура масла на выходе МОД" Name="Tm_outMOD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="04B01D71F1C04C33AFE86E21850840D8"/>
+    <Field Comment="Температура секции МОД" Name="T_MOD_skc" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E747ADDD78D4473B966AAA9DE0C2C2EB"/>
+    <Field Comment="Давление масла на входе МОД" Name="Pm_inMOD" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E0E0DA58411B4925938CA7D2AC0BC47B"/>
+    <Field Comment="Перепад давления воздуха на заслонке ЗПВ" Name="dPv_ZsPV" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="FA609F4D0AC4489D9290D4ABA3F97F04"/>
+    <Field Comment="Максимальный уровень в подземном резервуаре слива масла редуктора" Name="Lm_TankR_v" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DE66B34E39454CC3BACED8DEEA06A97C"/>
+    <Field Comment="Резерв" Name="Res_33" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="66284A7F07E14C6FBA3982B8887D9017"/>
+    <Field Comment="Резерв" Name="Res_34" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2AEFBD77D45B425EA24F956F1707852B"/>
+    <Field Comment="Резерв" Name="Res_35" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6D0D300F294548E18BD7C5B090756645"/>
+    <Field Comment="Резерв" Name="Res_36" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C2F27FEF5A414291B49B1F53A9D5DF26"/>
+  </Fields>
+</Type>

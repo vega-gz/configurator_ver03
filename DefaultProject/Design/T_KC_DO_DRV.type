@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_DO_DRV" UUID="D4F9A4D8411244E18A82E5040F31FC34">
+<Fields>
+<Field Comment="Кран 51 открыть" Name="Kr51_ON" Type="BOOL" UUID="993CACA7E6D44B4EA76AC499BD86FB9E"/>
+<Field Comment="Кран 51 закрыть" Name="Kr51_OF" Type="BOOL" UUID="C0C95395B9EA4B8EB2E82219EB507296"/>
+<Field Comment="Кран 52 открыть" Name="Kr52_ON" Type="BOOL" UUID="4234FE5D0EB340F4A23D9D3710AFAC11"/>
+<Field Comment="Кран 52 закрыть " Name="Kr52_OF" Type="BOOL" UUID="251579773DF94118886AEDD031D20ADA"/>
+<Field Comment="Инд. ЭО КЦ на ПРУ (+) " Name="EO_LED_PRU" Type="BOOL" UUID="0E2568F070BC43C8AFBC7670A7952843"/>
+<Field Comment="Инд. АОсс на ПРУ (+) " Name="AOss_LED_PRU" Type="BOOL" UUID="2470EF8AAB3C44B9B003E39864D06BC0"/>
+<Field Comment="Инд. АОбс на ПРУ (+) " Name="AObs_LED_PRU" Type="BOOL" UUID="331FFBEDB0E749B28D4241CA6654DFC8"/>
+<Field Comment="Инд. Вкл. пожнасоса на ПРУ (+) " Name="FirePump_LED_PRU" Type="BOOL" UUID="DCB42FE8180D49749EA0FD2C57089A35"/>
+<Field Comment="АО в САУ ГПА 4" Name="AO_GPA4" Type="BOOL" UUID="D1749A9D713D4509A2B8FDBEEAE7A0A1"/>
+<Field Comment="АО в САУ ГПА 5" Name="AO_GPA5" Type="BOOL" UUID="6756FE88AD934D61B63E1F4433F03C26"/>
+<Field Comment="АО в САУ ГПА 6" Name="AO_GPA6" Type="BOOL" UUID="40FB81A464D94DC7A21AF67DA0F4EB5E"/>
+<Field Comment="АО в САУ УПА " Name="AO_UPA" Type="BOOL" UUID="131C3275C7D741FEB5D02C403203F254"/>
+<Field Comment="АО в САУ УВИ" Name="AO_UVI" Type="BOOL" UUID="4C38298FAAF2487BB793D8A5D8716736"/>
+<Field Comment="АО в САУ ТСк" Name="AO_TSK" Type="BOOL" UUID="1847F566A5BF4350A9CC88569193C919"/>
+<Field Comment="АО в САУ УПГ" Name="AO_UPG" Type="BOOL" UUID="E99E829C9F1544048C2BB8F2403DA96B"/>
+<Field Comment="АО в САУ НМс" Name="AO_NMS" Type="BOOL" UUID="9BE531110BE948FA84597F39ABB30004"/>
+<Field Comment="АО в САУ БВКС" Name="AO_BVKS" Type="BOOL" UUID="2FBED53D365246B98294FD2DFFC88156"/>
+<Field Comment="Резерв 110VDC" Name="Res_0" Type="BOOL" UUID="70300E806AE54CDEB4D374AF5770EEE4"/>
+<Field Comment="Резерв 110VDC" Name="Res_1" Type="BOOL" UUID="8ADBC50320324AC38C647A495E33C357"/>
+<Field Comment="Резерв 110VDC" Name="Res_2" Type="BOOL" UUID="70898E1C63914A75B4054A88A83BE67E"/>
+<Field Comment="Резерв 110VDC" Name="Res_3" Type="BOOL" UUID="68E6E5FB760F420F863BE68EF3B515DB"/>
+<Field Comment="Резерв 110VDC" Name="Res_4" Type="BOOL" UUID="8C5D5FC288C544668D5D0D57ED310524"/>
+<Field Comment="Резерв 110VDC" Name="Res_5" Type="BOOL" UUID="15FAFBD02FFB47CE924943D0C7A57E62"/>
+<Field Comment="Инд. вкл. пожнасоса на ПРУ" Name="FirePump_LED_PRU2" Type="BOOL" UUID="D96B115F81AC4FAE8162567D0CC148FD"/>
+<Field Comment="АО в САУ ГПА 1" Name="AO_GPA1" Type="BOOL" UUID="44BBC2C5AC8344378F7519CB90E635B9"/>
+<Field Comment="АО в САУ ГПА 2 " Name="AO_GPA2" Type="BOOL" UUID="6E5B2FB8F4D24711BC399111D8F29C29"/>
+<Field Comment="АО в САУ ГПА 3 " Name="AO_GPA3" Type="BOOL" UUID="6033745797314E8DBC8E778CEF154BB7"/>
+<Field Comment="АО в ЛИС ГСМ " Name="AO_GSM" Type="BOOL" UUID="59E288D630EA4230AEAC68C1C17BD773"/>
+<Field Comment="АО в ЛИС УПТИГ" Name="AO_UPTIG" Type="BOOL" UUID="76DE546742AB41C89011ADE3E91BAE6E"/>
+<Field Comment="АОсс в ЛИС УПОУ (осн.) " Name="AOss_UPOU_osn" Type="BOOL" UUID="382CC41B6F65446FB154813373DCD204"/>
+<Field Comment="АОбс в ЛИС УПОУ (осн.) " Name="AObs_UPOU_osn" Type="BOOL" UUID="F843616800E2419DA03BD644929CB756"/>
+<Field Comment="АОсс в ЛИС УПОУ (рез.)" Name="AOss_UPOU_rez" Type="BOOL" UUID="768C8E07E8504794A7D5DA07CD4DBCC0"/>
+<Field Comment="АОбс в ЛИС УПОУ (рез.) " Name="AObs_UPOU_rez" Type="BOOL" UUID="C76CDC693F9E422E93E93D015F79902B"/>
+<Field Comment="Инд. АОсс на ПРУ " Name="AOss_LED_PRU2" Type="BOOL" UUID="A8FF3CFF807B40DDA3C5BDE42347878C"/>
+<Field Comment="Инд. АОбс на ПРУ" Name="AObs_LED_PRU2" Type="BOOL" UUID="BBF5BB0E02EB42C991DD56785E927AFA"/>
+<Field Comment="АО в ЛИС КОС " Name="AO_KOS" Type="BOOL" UUID="79DD1D9BE6D74071847F79924FE7F2BE"/>
+<Field Comment="АО в ЛИС НМ " Name="AO_NM" Type="BOOL" UUID="4F5AFA5DE25E4C029905C0C6300A51FD"/>
+<Field Comment="АО в ЛИС УНТС " Name="AO_UNTS" Type="BOOL" UUID="131F871F6A7343A29F8E5F3582B6D757"/>
+<Field Comment="АО в ЛИС УЗРГ" Name="AO_UZRG" Type="BOOL" UUID="DA8A28D6976A42439EBDD67963A4F243"/>
+<Field Comment="Обогрев прибора АДЭС LSA1 включить" Name="EN_LSA1_ADES_ON" Type="BOOL" UUID="C184585620B34E62871F4E7249776C37"/>
+<Field Comment="Обогрев прибора АДЭС LSA2 включить" Name="EN_LSA2_ADES_ON" Type="BOOL" UUID="18A2AB91543745789ADD2010CC1001EB"/>
+<Field Comment="Обогрев прибора АДЭС LSA3 включить" Name="EN_LSA3_ADES_ON" Type="BOOL" UUID="7751B229432F44FB823D8C28928A238E"/>
+<Field Comment="Обогрев прибора LSA1 включить " Name="EN_LSA1_GPA_ON" Type="BOOL" UUID="02066DF1753F4C79BEA982B83FE61E2F"/>
+<Field Comment="Обогрев прибора LSA2 включить " Name="EN_LSA2_GPA_ON" Type="BOOL" UUID="ABACCFB062A24BD1AD36CA7EA698F48F"/>
+<Field Comment="Обогрев прибора LSA3 включить" Name="EN_LSA3_GPA_ON" Type="BOOL" UUID="D600733DB202421FBE127BF1DDE36932"/>
+<Field Comment="Обогрев прибора LSA4 включить" Name="EN_LSA4_GPA_ON" Type="BOOL" UUID="6B2D8F754B6D465E89DB7AA236D500C5"/>
+<Field Comment="Обогрев прибора LSA5 включить " Name="EN_LSA5_GPA_ON" Type="BOOL" UUID="2C7FE9D90C1D4C09978A5F92B7AE0B02"/>
+<Field Comment="Обогрев прибора LSA6 включить " Name="EN_LSA6_GPA_ON" Type="BOOL" UUID="0DCEE5F15A874906918CA7267C9A689B"/>
+<Field Comment="Кран Кр51-2 - закрыть" Name="Kr51_2_OF" Type="BOOL" UUID="31FA123EC2D4419EB0A56EA590C388CD"/>
+<Field Comment="Кран Кр51-2 - открыть" Name="Kr51_2_ON" Type="BOOL" UUID="6CF21213E3ED42AFB25D04BB3AB76425"/>
+<Field Comment="Кран Кр52-2 - закрыть" Name="Kr52_2_OF" Type="BOOL" UUID="DA488EA7A339488BAA0E202BAB885EA2"/>
+<Field Comment="Кран Кр52-2 - открыть" Name="Kr52_2_ON" Type="BOOL" UUID="28583AB9EFA44E998C6F3F22107309BA"/>
+<Field Comment="Кран Кр53 - закрыть" Name="Kr53_OF" Type="BOOL" UUID="64F25F93E0574719A1018D09E097CD07"/>
+<Field Comment="Кран Кр53 - открыть" Name="Kr53_ON" Type="BOOL" UUID="2664CD92979945EE9C40F377AB35AA6D"/>
+<Field Comment="Кран Кр53бп - закрыть" Name="Kr53b_OF" Type="BOOL" UUID="8420C116991B4EC697F5CC795F3F70B6"/>
+<Field Comment="Кран Кр53бп - открыть" Name="Kr53b_ON" Type="BOOL" UUID="4658E96D2846447894FABB16223BD2E0"/>
+<Field Comment="Кран Кр54 - закрыть" Name="Kr54_OF" Type="BOOL" UUID="CE3332B0ED324C2F8FAE9E4DCEBF82C8"/>
+<Field Comment="Кран Кр54 - открыть" Name="Kr54_ON" Type="BOOL" UUID="323D41C4223541F295CED7A5C97F1557"/>
+<Field Comment="Кран Кр54бп - закрыть" Name="Kr54b_OF" Type="BOOL" UUID="DE7BF5600F864A5B8A014C03E711E810"/>
+<Field Comment="Кран Кр54бп - открыть" Name="Kr54b_ON" Type="BOOL" UUID="3C6AF3BBE985408A9B99536A5B47B1B4"/>
+<Field Comment="ЭО от САУ КЦ" Name="EO_KC" Type="BOOL" UUID="BEA37FE0BEC246B1AA19ADB84EA650C5"/>
+<Field Comment="Инд. ЭО от САУ КЦ" Name="EO_LED_KC" Type="BOOL" UUID="77CE9287B63F49DCAA08F094F272624B"/>
+<Field Comment="АОсс от САУ КЦ" Name="AOss_KC" Type="BOOL" UUID="2908989CA9134A8896D2ABDA0D5C4E8F"/>
+<Field Comment="АОбс от САУ КЦ" Name="AObs_KC" Type="BOOL" UUID="6BF7A7F53768440FB33B8560AF06F110"/>
+</Fields>
+</Type>

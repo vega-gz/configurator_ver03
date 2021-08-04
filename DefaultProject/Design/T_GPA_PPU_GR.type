@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_PPU_GR" UUID="30666F36A87640AF9A20BF5D6164B59E">
+<Fields>
+    <Field Comment="Уровень в маслобаке двигателя не в норме" Name="Lm_MBD_nOK" Type="BOOL" UUID="AB2A6E8BE7614A67A05201DCC9B09D64"/>
+    <Field Comment="Давление воздуха РП и УОП &lt; 0,6 или &gt; 1,0 МПа" Name="Pa_RP_nOK_GR" Type="BOOL" UUID="0E48E8B4F85F4D2BB4639EC17D0898F7"/>
+    <Field Comment="Давление масла в лубрикаторной системе &lt; 0,1 или &gt; 0.3 МПа" Name="PmLub_nOK" Type="BOOL" UUID="BD127327E4174667A8FE2CB35CF70791"/>
+    <Field Comment="АВОМ ГТД не готов" Name="MOD_nRdy" Type="BOOL" UUID="AA90F857403C4D62863E9337F47A0B9A"/>
+    <Field Comment="АВОМ компрессора не готов" Name="MOK_nRdy" Type="BOOL" UUID="C0162B5B2DC04734B83012C516D9A086"/>
+    <Field Comment="Нет нулевых оборотов СТ" Name="ST_Run" Type="BOOL" UUID="706BF69FDBFC4602A63C922F6CEDF3AA"/>
+    <Field Comment="Нет нулевых оборотов ТВД" Name="TVD_Run" Type="BOOL" UUID="3ECE5993F1314575A1432F7B4442BA3D"/>
+    <Field Comment="Высокая Т воздуха в отсеке ГТД" Name="Tv_OD_PPUv" Type="BOOL" UUID="DDE0B60D8152497F86701E3F00B2D30A"/>
+    <Field Comment="Высокая Т воздуха в укрытии компрессора" Name="Tv_ON_PPUv" Type="BOOL" UUID="868B29419E0841C295D9CC3B11E67451"/>
+    <Field Comment="Высокая Т воздуха в электротехническом отсеке" Name="Tv_ETO_PPUv" Type="BOOL" UUID="E7034B6CA28E4413AFDF17C3A9BFA286"/>
+    <Field Comment="Низкая Т маслосмазки на выходе компрессора" Name="Tmsm_outN_PPUn1" Type="BOOL" UUID="C1E037FACF6B44D68142F0E923F664DC"/>
+    <Field Comment="Низкая Т масла  в маслобаке редуктора" Name="Tm_MBR_PPUn" Type="BOOL" UUID="772FB95A2CB643C39D4E0AA3D4E7BA99"/>
+    <Field Comment="Низкая Т масла  в маслобаке двигателя" Name="Tm_MBD_PPUn1" Type="BOOL" UUID="33A0574D0320464DB61BFDCAB2B0CD62"/>
+    <Field Comment="Не подано питание СПВ" Name="No_U_SPV_ON" Type="BOOL" UUID="AD4386D76C904318975576F78A075392"/>
+    <Field Comment="Нет готовности КШЭ5" Name="KE5_nRdy" Type="BOOL" UUID="5C0CD584AFC541F5BE0A4FFC06E0F1E3"/>
+    <Field Comment="Нет питания на КлР1" Name="No_U_KLR1" Type="BOOL" UUID="5C54F83B355141EC91B0C921F5F28387"/>
+    <Field Comment="Нет питания на КлР2" Name="No_U_KLR2" Type="BOOL" UUID="4BC369ACF39D4102B64AE4F45A3743B7"/>
+    <Field Comment="ВНА не прикрыт" Name="VNA_notClose" Type="BOOL" UUID="A3F72E524EAC44DEAA5F06C6E080477D"/>
+    <Field Comment="Кран 5 не закрыт" Name="Kr5_nOF" Type="BOOL" UUID="20FCC7B85DF94F3E8F04E0BEBF99DE9D"/>
+    <Field Comment="Кран 1 не открыт" Name="Kr1_nON" Type="BOOL" UUID="1335E169D97B45169E455F97941B5E9B"/>
+    <Field Comment="Клапана МС двигателя не в пусковом положении" Name="KMSD_nRdy" Type="BOOL" UUID="A04525E370C4429E90B481BF8077358D"/>
+    <Field Comment="Клапана РП компрессора не открыты" Name="RP_nOpen" Type="BOOL" UUID="203176D89D2D41E9BF15376D1B7C5C82"/>
+    <Field Comment="Кран 12 не закрыт" Name="Kr12_nOF" Type="BOOL" UUID="412A1D4391444D4B9429162251CBC103"/>
+    <Field Comment="Кран 9 не открыт" Name="Kr9_nON" Type="BOOL" UUID="D7BCDAE11721410BB73B1A071A17AB5B"/>
+    <Field Comment="Горячая охлаждающая жидкость в баке" Name="Freeze_hot" Type="BOOL" UUID="5B34665CDB4C4E90BEDC3E0C59DA0FAE"/>
+    <Field Comment="Клапан подачи газа в БФТГ не закрыт" Name="KE1_nOF" Type="BOOL" UUID="7E503F1F1087488EACFB9C0682330B82"/>
+    <Field Comment="Клапан сброса газа из БФТГ не открыт" Name="KE2_nON" Type="BOOL" UUID="758A74F4137D40E59278D7253F3AF91D"/>
+    <Field Comment="Двери ГТД не закрыты" Name="Dver_OD_Open" Type="BOOL" UUID="319B8973367447028109445E64EA9490"/>
+    <Field Comment="АВОМ редуктора не готов" Name="MOR_nRdy" Type="BOOL" UUID="286B3AB9ADB042FF887E9F4BBE7C4EEE"/>
+  </Fields>
+</Type>

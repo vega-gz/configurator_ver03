@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_APS" Kind="Struct" UUID="2544DB1A4889DBCF544BF6B72503A215">
+	<Fields>
+		<Field Name="Kn_AOss_PRU" Type="BOOL" UUID="RBRHIUJONRJULB6ZMMEERV7WTI" Comment="АОcc от ПРУ КЦ" />
+		<Field Name="Kn_AOss_HMI" Type="BOOL" UUID="ZL7KUAHZP3LU7AZT4YQCROMSEE" Comment="АОcc c АРМ оператора " />
+		<Field Name="Kn_AObs_PRU" Type="BOOL" UUID="V7YYMQZHT6BEHBXPH4T3RD7QNI" Comment="АОбc от ПРУ КЦ " />
+		<Field Name="Kn_AObs_HMI" Type="BOOL" UUID="OABI4EI7GPMU3AZRQXQEVX4TSA" Comment="АОбc c АРМ оператора " />
+		<Field Name="Kn_EO_PRU" Type="BOOL" UUID="UUNWUHJUTFYUJA4B5XVTAKOMQI" Comment="ЭО от ПРУ КЦ" />
+		<Field Name="Tg_out_KC_Av" Type="BOOL" UUID="PULQCXZOONPEDCXAI6WGO427TQ" Comment="Высокая температура на выходе КЦ" />
+		<Field Name="Pg_out_KC_Av" Type="BOOL" UUID="NRQSVLO2QT5UNLFKPQIE74E45M" Comment="Высокое давление на выходе КЦ" />
+		<Field Name="GPA5_GAS20" Type="BOOL" UUID="IA7ZK2J6DJHEXJEGKGVUTU5ENM" Comment="Загазованность аварийная (20%) ГПА5" />
+		<Field Name="GPA6_GAS20" Type="BOOL" UUID="XLY6662T2QUU5JCPCKNYG46QDM" Comment="Загазованность аварийная (20%) ГПА6" />
+		<Field Name="GPA4_GAS20" Type="BOOL" UUID="NKFICFPXNLUEFJYF7QT52O64HM" Comment="Загазованность аварийная (20%) ГПА4" />
+		<Field Name="UPG_GAS20" Type="BOOL" UUID="TRMENA6DD2DENEHX3I6YR4OFX4" Comment="Загазованность аварийная (20%) УПГ" />
+		<Field Name="ASPS_Bad" Type="BOOL" UUID="ED2PRLNJTGRUDMCY4JWHOBZCVI" Comment="Неисправность ПС" />
+		<Field Name="Fire_in_ADES" Type="BOOL" UUID="VUM5IL27HHKU5JRFCO4EMMK72U" Comment="Пожар в аварийной дизельной электростанции" />
+		<Field Name="Fire_in_BB_BVVUP" Type="BOOL" UUID="2LSHG4JTIHZUNBKJUBA4E4SVME" Comment="Пожар в ББ БВВ УП" />
+		<Field Name="Fire_in_EXZ" Type="BOOL" UUID="6WUSMIBUI7AUVIHKPXH5KP7SI4" Comment="Пожар в БКУ ЭХЗ &quot;Антик&quot;" />
+		<Field Name="Fire_in_Oil_Atanks" Type="BOOL" UUID="C42E76FSVZKULOHHCPZURHN6IE" Comment="Пожар в емкости для аварийного слива масла" />
+		<Field Name="Fire_in_Fuel_ATanks2" Type="BOOL" UUID="FRTCVDDUHDCE7LIX6LWJWQPX4Y" Comment="Пожар в емкости для аварийного слива топлива" />
+		<Field Name="Fire_in_MetanolTank" Type="BOOL" UUID="YEI2ISOGW3CUTOW6QKJMW4CCSE" Comment="Пожар в емкости метанола " />
+		<Field Name="Fire_in_ZADES" Type="BOOL" UUID="XJ4DWO6NX2ZUBHTJZ74XVRQWCU" Comment="Пожар в здании АДЭС " />
+		<Field Name="Fire_in_Kot" Type="BOOL" UUID="54EUCLXDXOBUNF4MXAFICWNFGE" Comment="Пожар в здании котельной" />
+		<Field Name="Fire_in_NasOil" Type="BOOL" UUID="JJS363L2V24UXIDO4T52B5WG2I" Comment="Пожар в здании насосной масел" />
+		<Field Name="Fire_in_NasMet" Type="BOOL" UUID="E7GYYJQLMMJEVF24FVHOUSDRRA" Comment="Пожар в здании насосной метанола" />
+		<Field Name="Fire_in_NasPPV" Type="BOOL" UUID="ZBV7QECGHSOENKSLYYPWOTW2AA" Comment="Пожар в здании насосной противопожарного водоснабжения" />
+		<Field Name="Fire_in_Wwplant" Type="BOOL" UUID="HNUX6DXIA4EEVK4XWYBPH7HUKM" Comment="Пожар в здании очистных сооружений сточных вод" />
+		<Field Name="Fire_in_ZdGate" Type="BOOL" UUID="447FHAGJWNQEZOISPJSGKEZ3F4" Comment="Пожар в здании проходной" />
+		<Field Name="Fire_in_PEB" Type="BOOL" UUID="MMDRYSWB7NAUDHKX3TIPRMI2CQ" Comment="Пожар в здании ПЭБ" />
+		<Field Name="Fire_in_REB" Type="BOOL" UUID="NRZQRIRHUKKUTCVAA54ZOT7YUM" Comment="Пожар в здании РЭБ " />
+		<Field Name="Fire_in_UZRG" Type="BOOL" UUID="JGP34RA4YNCUVMPGE3KANAMMC4" Comment="Пожар в здании УЗРГ" />
+		<Field Name="Fire_in_ZdUPG" Type="BOOL" UUID="LP6NJYWXRZIUZEBYZVGN6AFPKY" Comment="Пожар в здании УПГ" />
+		<Field Name="Fire_in_UTO" Type="BOOL" UUID="Y3PP7PGQLKSEJMEN3BFRPRBPQU" Comment="Пожар в здании УТО" />
+		<Field Name="Fire_in_Vkompr" Type="BOOL" UUID="4JIIS65S7XOULADCBFOHGY5AMQ" Comment="Пожар в компрессорной сжатого воздуха" />
+		<Field Name="Fire_in_NasOil2" Type="BOOL" UUID="TOCWH7GGUBEUVI3KKQVH73EJSM" Comment="Пожар в насосной масел" />
+		<Field Name="Fire_in_DainTank" Type="BOOL" UUID="Y45WMPRAXGVEJNQCB4NL5EUIJE" Comment="Пожар в подземной дренажной емкости" />
+		<Field Name="Fire_in_Gate" Type="BOOL" UUID="MS7LH65YKJNENAWQX5BPEJAUCY" Comment="Пожар в проходной" />
+		<Field Name="Fire_in_Fuel_Atanks" Type="BOOL" UUID="5C4DYLXXDOWEFLWV2VTS3LZKVE" Comment="Пожар в резервуаре для аварийного слива топлива" />
+		<Field Name="Fire_in_FuelTanks" Type="BOOL" UUID="3CDS2Z46J3WU5IFLKDMTM3ZTOI" Comment="Пожар в резервуарном парке для хранения дизтоплива" />
+		<Field Name="Fire_in_Eblock" Type="BOOL" UUID="OTTXX6DPCOQEVPGQ2ET34KGTAI" Comment="Пожар в энергоблоке" />
+		<Field Name="Fire_in_GPA" Type="BOOL" UUID="TTFCP6KYBZFUHJJPL2URCCKDZ4" Comment="Пожар ГПА" />
+		<Field Name="Fire_in_GPA5" Type="BOOL" UUID="465E3YGNNUVEZHVOVM2X6BOKSI" Comment="Пожар ГПА5" />
+		<Field Name="Fire_in_GPA6" Type="BOOL" UUID="MEHAQVV3MKUURASS5OMYI2KTEY" Comment="Пожар ГПА6" />
+		<Field Name="Fire_in_GPA4" Type="BOOL" UUID="A65G25JHPVNEJIEFBFMOTJ7TMQ" Comment="Пожар ГПА4" />
+		<Field Name="Fire_in_OilTanks" Type="BOOL" UUID="2UBEGAEWA3GUPOZK2GDKSGEULM" Comment="Пожар на площадке блока резервуаров 2x10 м куб." />
+		<Field Name="Fire_in_FuelTanks2" Type="BOOL" UUID="MV4RSCBWPILUHDSPB4KF53X2XY" Comment="Пожар на площадке резервуара для дизтоплива 25 м куб." />
+		<Field Name="Fire_in_MetanolSklad" Type="BOOL" UUID="AFPJT2ANZEYERJVGDF75SKSJ64" Comment="Пожар на складе метанола" />
+		<Field Name="Fire_in_UDK" Type="BOOL" UUID="7L35K7IFQSEEZGWTRVCGIIFRFQ" Comment="Пожар на установке дожимных компрессоров" />
+		<Field Name="Fire_in_RegenMetanol" Type="BOOL" UUID="A2ARLBDHD6TE5GJJJACB6VO4E4" Comment="Пожар на установке регенерации метанола" />
+		<Field Name="Fire_in_URM" Type="BOOL" UUID="OHOJZCJABFNEPKNEY4SVSTIU3Q" Comment="Пожар УРМ" />
+		<Field Name="Gasmain_in_KC_brk" Type="BOOL" UUID="S74I67PV544ERD2O4NOLAXPXKA" Comment="Прорыв трубопровода на входе КЦ" />
+		<Field Name="Gasmain_out_KC_brk" Type="BOOL" UUID="KIXAUOLYSCTEDITLBVLYMH56YA" Comment="Прорыв трубопровода на выходе КЦ" />
+		<Field Name="UTUO_Alarm" Type="BOOL" UUID="DWRJSMS2ENGULK3MD6VR5QUACU" Comment="УТУО. Обобщенный сигнал аварии " />
+		<Field Name="Kr51_selfON" Type="BOOL" UUID="FP2VUUSQQPHU5LW3ZYKUD23WPE" Comment="Самопроизвольное открытие крана 51" />
+		<Field Name="Kr51_selfOF" Type="BOOL" UUID="BK5JX6HQ7TPE5K7CDQROBVDV6Y" Comment="Самопроизвольное закрытие крана 51" />
+		<Field Name="Kr52_selfON" Type="BOOL" UUID="UZ553K2OYK5UDJHAHKO2Y4H5WI" Comment="Самопроизвольное открытие крана 52" />
+		<Field Name="Kr52_selfOF" Type="BOOL" UUID="25UTOAKMRERUBLTNOPOZCXESSE" Comment="Самопроизвольное закрытие крана 52" />
+		<Field Name="Kr53_selfON" Type="BOOL" UUID="QIVHNC3DIHIEVN6WBREIMTOPAE" Comment="Самопроизвольное открытие крана 53" />
+		<Field Name="Kr53_selfOF" Type="BOOL" UUID="UD4FNIRPNN4EHMXPEBTEDMXVEA" Comment="Самопроизвольное закрытие крана 53" />
+		<Field Name="Kr53bp_selfON" Type="BOOL" UUID="KDBYB2LKTB4U7BZUAQORGJB7OU" Comment="Самопроизвольное открытие крана 53бп" />
+		<Field Name="Kr53bp_selfOF" Type="BOOL" UUID="YKSEYBFEILTEHABEJ3J5H4HSZQ" Comment="Самопроизвольное закрытие крана 53бп" />
+		<Field Name="Kr54_selfON" Type="BOOL" UUID="6E6MC2SP3LPUNBITGBUGBAPDFI" Comment="Самопроизвольное открытие крана 54" />
+		<Field Name="Kr54_selfOF" Type="BOOL" UUID="ZFKAV4MKYCLU7G2RHMTUK34KNU" Comment="Самопроизвольное закрытие крана 54" />
+		<Field Name="Kr54bp_selfON" Type="BOOL" UUID="CK3YDTASATPUPKBRLM5MGYDZWA" Comment="Самопроизвольное открытие крана 54бп" />
+		<Field Name="Kr54bp_selfOF" Type="BOOL" UUID="66VNPYJEQJLERNNF3SCYMUO5OY" Comment="Самопроизвольное закрытие крана 54бп" />
+		<Field Name="Dver_US_open" Type="BOOL" UUID="7WDK7HQ5YJKENOGUX2H6YYHYSI" Comment="Дверь УС открыта " />
+		<Field Name="U_AC220_UK" Type="BOOL" UUID="5WTJG7MYDWXUREIUWOYD2PWA2A" Comment=" Нет  ~220В в УК " />
+		<Field Name="T_US_25v" Type="BOOL" UUID="4JLKNAFWCOSERDQXB7PHUSCNHQ" Comment=" Температура в УС больше 25 °С " />
+		<Field Name="Vn_P1_Alarm" Type="BOOL" UUID="RRJ6CJJWM2JUXO3GWYSRCY5YTI" Comment="Авария вентсистемы П1 " />
+		<Field Name="Vn_P4_Alarm" Type="BOOL" UUID="JQM2TC66REOEJNXB3YZK4UFPV4" Comment="Авария вентсистемы П4" />
+		<Field Name="Lm_R1_v" Type="BOOL" UUID="6IP6FRSMCLKEHIZKUIGGREVFXU" Comment="Верхний уровень в резервуаре Р1 для дренажа масла нагнетателя ГПА4" />
+		<Field Name="Lm_R4_v" Type="BOOL" UUID="6OKIHWZWSMBUVD7XXEWFOCP6LE" Comment="Верхний уровень в резервуаре Р4 для отработанного масла двигателя ГПА4" />
+		<Field Name="Lm_R2_v" Type="BOOL" UUID="CLDDNKCRTOAEVBGMKPLWSQHQX4" Comment="Верхний уровень в резервуаре Р2 для дренажа масла нагнетателя ГПА5" />
+		<Field Name="Lm_R5_v" Type="BOOL" UUID="BZZ2WVI7LIVE7G3RAI5Y6Q32LU" Comment="Верхний уровень в резервуаре Р5 для отработанного масла двигателя ГПА5" />
+		<Field Name="Lm_R3_v" Type="BOOL" UUID="A7NYCJE42PEETKJOAMXLJLL5R4" Comment="Верхний уровень в резервуаре Р3 для дренажа масла нагнетателя ГПА6" />
+		<Field Name="Lm_R6_v" Type="BOOL" UUID="RCQTQEF2MOHEVDA6C5C5MCHLRM" Comment="Верхний уровень в резервуаре Р6 для отработанного масла двигателя ГПА6" />
+		<Field Name="Vn_V4_Alarm" Type="BOOL" UUID="22NBROA5NSUE5HHPP6S3BFSJNI" Comment="Авария вентсистемы В4" />
+		<Field Name="Lf_R1_v" Type="BOOL" UUID="GWFSRPWGR6EENCWZWMVXNFRE5E" Comment="Верхний уровень в Р1 для дизтоплива" />
+		<Field Name="Lf_R2a_v" Type="BOOL" UUID="QHLHKOXJMZQEVMXBS5Y2HJ5WNU" Comment="Верхний уровень в Р2 для аварийного слива топлива" />
+		<Field Name="Cabin_open" Type="BOOL" UUID="HE7OQD2VZDFEJC2U25A5G2PD2Q" Comment="Двери САУ КЦ открыты" />
+		<Field Name="Dver_UK_open" Type="BOOL" UUID="4RNXTGPSMVYU5ERI4J5BL4IGNU" Comment="Дверь УК открыта" />
+		<Field Name="UPG_Gas1" Type="BOOL" UUID="GVWQGG7RB5UERFR3AWWGDP5GHA" Comment="Загазованность в УПГ более 1%" />
+		<Field Name="GPA4_GAS10" Type="BOOL" UUID="VZVMJ5LLYKIEXFPQWMFVNQ756A" Comment="Загазованность предупредительная (10%) ГПА4" />
+		<Field Name="GPA5_GAS10" Type="BOOL" UUID="AN4CAMRDZ7RUDKCF6TW3CKDD5A" Comment="Загазованность предупредительная (10%) ГПА5" />
+		<Field Name="GPA6_GAS10" Type="BOOL" UUID="KXBOXUG2N5DURLBBSJPQYM7O4Q" Comment="Загазованность предупредительная (10%) ГПА6" />
+		<Field Name="UPG_GAS10" Type="BOOL" UUID="B6KLFZXTVO2UNDX5UGHCD3SYRA" Comment="Загазованность предупредительная (10%) УПГ" />
+		<Field Name="UZ1_Bad" Type="BOOL" UUID="SYNOFSXM4M7U7IGLOI24EHAVBQ" Comment="Неисправность UZ1 " />
+		<Field Name="UZ1_Bad_KCD" Type="BOOL" UUID="ST5OV2T4KKBUDNVK42HRTQ5S3Y" Comment="Неисправность UZ1. КЦД  " />
+		<Field Name="UZ2_Bad" Type="BOOL" UUID="SP4PKAMLXZ4ELCHMMO6YGAUAOM" Comment="Неисправность UZ2 " />
+		<Field Name="UZ2_Bad_KCD" Type="BOOL" UUID="S2AD5OGVR4PU7CXCSZGRZEN4NU" Comment="Неисправность UZ2. КЦД  " />
+		<Field Name="GPA6_ASPS_Bad" Type="BOOL" UUID="7S5PENF2SNJELPM3D4236PO3FM" Comment="Неисправность АСПС, КЗ и ПТ ГПА6" />
+		<Field Name="GPA4_ASPS_Bad" Type="BOOL" UUID="P4SIHPPWKFCULJOYLS2UXRGU3Q" Comment="Неисправность АСПС, КЗ и ПТ ГПА4" />
+		<Field Name="GPA5_ASPS_Bad" Type="BOOL" UUID="5FT2KJDXKQNEBMB6T3DW5A7ORI" Comment="Неисправность АСПС, КЗ и ПТ ГПА5" />
+		<Field Name="UPG_ASPS_Bad" Type="BOOL" UUID="4JRHITMV3BYE3DTUU6GRAGJVSQ" Comment="Неисправность АСПС, КЗ и ПТ УПГ" />
+		<Field Name="URM_ASPS_Bad" Type="BOOL" UUID="QCR22XWANGGEBDNJ6ZUACP6VX4" Comment="Неисправность АСПС, КЗ и ПТ УРМ" />
+		<Field Name="PLC_GPA4_Bad" Type="BOOL" UUID="Q345ZXT7G4LU7D4O7SSSUJ4T6Q" Comment="Неисправность контроллера САУ ГПА4" />
+		<Field Name="PLC_GPA5_Bad" Type="BOOL" UUID="S4GAYTNABKTENPXGWD4H2HQQ4I" Comment="Неисправность контроллера САУ ГПА5" />
+		<Field Name="PLC_GPA6_Bad" Type="BOOL" UUID="CWQFHOGKNB4UVMWVRMKJMUU4DE" Comment="Неисправность контроллера САУ ГПА6" />
+		<Field Name="DC24osn_Ext1_Bad" Type="BOOL" UUID="WGHIQVCCB4CEZORQMA7FCR2NBM" Comment="Неисправность осн. ИП =24В внешних цепей" />
+		<Field Name="DC24osn_Ext2_Bad" Type="BOOL" UUID="YXCNT5CES3UUNBGOUODVLIWQ6U" Comment="Неисправность осн. ИП =24В внешних цепей" />
+		<Field Name="DC24osn_Int_Bad" Type="BOOL" UUID="C56B4Y5HUA2EHAMDAZLEIY2BEE" Comment="Неисправность осн. ИП =24В внутренних цепей" />
+		<Field Name="DC24rez_Ext1_Bad" Type="BOOL" UUID="TJZ2JR4FM5SE7NO33ITBGQDWBQ" Comment="Неисправность рез. ИП =24В внешних цепей" />
+		<Field Name="DC24rez_Ext2_Bad" Type="BOOL" UUID="NBGDKTK64HDUXMVCLICKTFMGXI" Comment="Неисправность рез. ИП =24В внешних цепей" />
+		<Field Name="DC24rez_Int_Bad" Type="BOOL" UUID="QH46AFEWWMJUJLA6SEISQKXCOI" Comment="Неисправность рез. ИП =24В внутренних цепей" />
+		<Field Name="SAPS_Bad" Type="BOOL" UUID="H5NTG2FLOU2UFCMA6WQ6NEX4QQ" Comment="Неисправность САПС обобщенный" />
+		<Field Name="SAU_UPG_Bad" Type="BOOL" UUID="YDB3KBCUTOOEBK4S62WZFAGELM" Comment="Неисправность САУ УПГ" />
+		<Field Name="U_AC220_US" Type="BOOL" UUID="SRZ64N7NBXWEZEWNYPL7JN7AMA" Comment="Нет ~220В в УC " />
+		<Field Name="Chk_razr" Type="BOOL" UUID="4SL4JB7NQUHU7KJB23XGRAUIWY" Comment="Нет исправности разрядников" />
+		<Field Name="Chk_AC220_SAU" Type="BOOL" UUID="S33FPDCPGDEUDKOM5HPCIYTA6A" Comment="Нет основного питания  ~220 В" />
+		<Field Name="Chk_DC220_Kr" Type="BOOL" UUID="N7JJEL45N5UUDPTD72QUUPGI7Q" Comment="Нет питания кранов =220В" />
+		<Field Name="Chk_DC220_SAU" Type="BOOL" UUID="GSBDMZXXU5PENDN4SVLT7RA5AM" Comment="Нет резервного питания  =220 В" />
+		<Field Name="Lf_R1_n" Type="BOOL" UUID="OZXPQXNUR4IEDPHXIVQC7Z4GGQ" Comment="Нижний уровень в Р1 для дизтоплива" />
+		<Field Name="Tg_out_KC_Pv" Type="BOOL" UUID="3BOIM4SVOZAE5DZE2SOYKD64BU" Comment="Повышенная температура на выходе КЦ" />
+		<Field Name="Pg_out_KC_Pv" Type="BOOL" UUID="2YUM7DVR55HE5BK6O5JCMTA2EA" Comment="Повышенное давление на выходе КЦ" />
+		<Field Name="U_hi" Type="BOOL" UUID="E2AOPG5RARFEFDA7NO3EYOJ5NE" Comment="Повышенное напряжение " />
+		<Field Name="U_lo" Type="BOOL" UUID="DD72NI5B4QGUZFWGEQPR4ZHWKM" Comment="Пониженное напряжение" />
+		<Field Name="UK_Bad" Type="BOOL" UUID="C5TLESTXSPTUFO65ZILXDH7STM" Comment="УК неисправен" />
+		<Field Name="UTUO_Gas10" Type="BOOL" UUID="3CWLUZJGULEUDCWVISVFJNP76M" Comment="УТУО. Загазованность по метану более 10% НКПР" />
+		<Field Name="UTUO_No_U" Type="BOOL" UUID="DKDWNHD4RBXUHMI4ZOHIM5UGXY" Comment="УТУО. Исчезновение напряжения питания" />
+		<Field Name="UTUO_Kl_ots_OF" Type="BOOL" UUID="PEVD4G7ZAXOUXBSOWDAPH7XN54" Comment="УТУО. Срабатывание отсечного клапана на подводящем газопроводе" />
+		<Field Name="Fire_in_2obj" Type="BOOL" UUID="EYQAOLYUDG6UDOW4ON6VPKB634" Comment="Пожар в двух и более помещениях" />
+		<Field Name="Fire_in_2GPA" Type="BOOL" UUID="3WY4EHC5FWNEBAFSOCXJHEJCLU" Comment="Пожар на двух и более ГПА" />
+		<Field Name="Gas_in_2GPA" Type="BOOL" UUID="436OHUCGM5CEZCFOJM6WLF5YRU" Comment="Аварийная загазованность на двух и более ГПА" />
+		<Field Name="PRU_AOss_BTN" Type="BOOL" UUID="GCNKNN3D7EFULNM7S5VKQA5TBI" Comment="АОcc от ПРУ КЦ (сенсорная кнопка)" />
+		<Field Name="PRU_AObs_BTN" Type="BOOL" UUID="TNOGHOQHGG4UTBLHKJCMAO6TGI" Comment="АОбc от ПРУ КЦ (сенсорная кнопка)" />
+		<Field Name="zagaz_CH_10_NKPV" Type="BOOL" UUID="SNKVFZLVLUOEXNHD6AWB3DJ26Y" Comment="Котельная: Загазованность СН 10% НКПВ" />
+		<Field Name="zagaz_CO_100_2" Type="BOOL" UUID="4QW7Z3UJSM6UTDEX74VVQXSXII" Comment="Котельная: Загазованность СО 100 мГ/м3 2-й порог" />
+		<Field Name="P_obr_v_AvLow" Type="BOOL" UUID="GCIG7GBBNRFUPNFCYEUAG24FBY" Comment="Котельная: Давление обратной воды аварийно низкое" />
+		<Field Name="Pozhar" Type="BOOL" UUID="OBBONBTMTPVEDFI4WWOCZZO63M" Comment="Котельная: Пожар в котельной" />
+		<Field Name="P_gaza_Fault" Type="BOOL" UUID="WMB2LLCH7ZSU7MLZK6SYZWW6TA" Comment="Котельная: Давление газа не в норме" />
+		<Field Name="P_obr_v_AvHi" Type="BOOL" UUID="LTFBUN2BH2SUDBUQYDGOCEHREE" Comment="Котельная: Давление обратной воды аварийно высокое" />
+		<Field Name="P_prym_sv_AvHi" Type="BOOL" UUID="HTK26UUDGRYEDMVVE7X47KREXU" Comment="Котельная: Давление прямой сетевой воды аварийно высокое" />
+		<Field Name="AVR_SN_Fault" Type="BOOL" UUID="K4Z2SJKRBRJEXNDJOOCVW4MDKY" Comment="Котельная: Не сработал АВР сетевых насосов" />
+		<Field Name="Avar_v_APV" Type="BOOL" UUID="NRF5S5CH7GLEXF3FXMSX4P7VZY" Comment="Котельная: Авария в системе АПВ" />
+		<Field Name="Avar_VRU" Type="BOOL" UUID="YYLLVGITU3WU3DG4OULBJRLT7U" Comment="Котельная: Авария ВРУ" />
+		<Field Name="Stop_Kotel1" Type="BOOL" UUID="U2UD2FIYH6UEVE3RHUOGXWQB3Q" Comment="Котельная: Аварийно остановился котел №1" />
+		<Field Name="Stop_Kotel2" Type="BOOL" UUID="L3FS7P746M2UDOEG4XLIT3U6AI" Comment="Котельная: Аварийно остановился котел №2" />
+		<Field Name="EKV_vh_NIV_max" Type="BOOL" UUID="Y66PJ42SZYBEDPDGOYMKNAEFAY" Comment="Котельная: ЭКМ на выходе НИВ максимум" />
+		<Field Name="EKV_vh_NIV_min" Type="BOOL" UUID="KCCL7GQCX7NUNOOQN5YKLEDK4I" Comment="Котельная: ЭКМ на выходе НИВ минимум" />
+		<Field Name="zagaz_CO_20_1" Type="BOOL" UUID="IYGBCWJHRYPUXB2D7CNKUUTKFE" Comment="Котельная: Загазованность СО 20 мГ/м3 1-й порог" />
+		<Field Name="AVR_SN_ON" Type="BOOL" UUID="7RJVS4727ZOURJHYNULFJSMC3U" Comment="Котельная: Работал АВР сетевых насосов" />
+		<Field Name="Reagent_Low" Type="BOOL" UUID="HTL4YSPCH3JUBHIFTNFCOL66SQ" Comment="Котельная: Заканчивается реагент в бачке" />
+		<Field Name="Fault_OPS" Type="BOOL" UUID="6EGWBOSRB7LUFD2CZZG7FPKXPU" Comment="Котельная: Неисправность ОПС" />
+		<Field Name="P_obr_v_Low" Type="BOOL" UUID="JRKSXSY2GC6EVBW7TALLSHM4UU" Comment="Котельная: Давление обратной воды понижено" />
+		<Field Name="P_obr_v_Hi" Type="BOOL" UUID="Q62IUBQBJGPUPKQAXABL6MK5MM" Comment="Котельная: Давление обратной воды повышено" />
+		<Field Name="NIV_P_Low" Type="BOOL" UUID="6TLXWNBXLMCEZNIVPMEBNCF2RA" Comment="Котельная: Насос НИВ не набрал давления" />
+		<Field Name="Osn_R11" Type="BOOL" UUID="AUXDFJYLL63EPAKI4H3R3TZFZA" Comment="Пульсар: Осн. R пластины 1 в т. 1 (N1-1) &gt; 11 Ом" />
+		<Field Name="Osn_R12" Type="BOOL" UUID="LRHCZJJJILPUZF5BNHJPBP57LE" Comment="Пульсар: Осн. R пластины 2 в т. 1 (N1-2) &gt; 11 Ом" />
+		<Field Name="Osn_R13" Type="BOOL" UUID="BZ5DH2LMDENUVOI22UGZACMODA" Comment="Пульсар: Осн. R пластины 3 в т. 1 (N1-3) &gt; 11 Ом" />
+		<Field Name="Osn_R21" Type="BOOL" UUID="TT6PPS5HILUUNE2CFORSFQ2R7Y" Comment="Пульсар: Осн. R пластины 1 в т. 2 (N2-1) &gt; 11 Ом" />
+		<Field Name="Osn_R22" Type="BOOL" UUID="4BZ3FNFO7ZUURPQI6NJJHLV6KQ" Comment="Пульсар: Осн. R пластины 2 в т. 2 (N2-2) &gt; 11 Ом" />
+		<Field Name="Osn_R23" Type="BOOL" UUID="XEMVHXWGGXOEFFIOR2NE3N3VJI" Comment="Пульсар: Осн. R пластины 3 в т. 2 (N2-3) &gt; 11 Ом" />
+		<Field Name="Osn_R31" Type="BOOL" UUID="CT4WGJBSWJXUHAEL74PN772IQU" Comment="Пульсар: Осн. R пластины 1 в т. 3 (N3-1) &gt; 11 Ом" />
+		<Field Name="Osn_R32" Type="BOOL" UUID="ESUDNDNH7PJUNGGRCBJFPY7RNA" Comment="Пульсар: Осн. R пластины 2 в т. 3 (N3-2) &gt; 11 Ом" />
+		<Field Name="Osn_R33" Type="BOOL" UUID="NUIGUWRB2ZNUTH2UAQFD6GVBI4" Comment="Пульсар: Осн. R пластины 3 в т. 3 (N3-3) &gt; 11 Ом" />
+		<Field Name="Osn_R41" Type="BOOL" UUID="UAXDDE2IZXREJLZI3DM5US6MII" Comment="Пульсар: Осн. R пластины 1 в т. 4 (N4-1) &gt; 11 Ом" />
+		<Field Name="Osn_R42" Type="BOOL" UUID="7DBBMVCFG6VUHATKYQW6C6N3XU" Comment="Пульсар: Осн. R пластины 2 в т. 4 (N4-2) &gt; 11 Ом" />
+		<Field Name="Osn_R43" Type="BOOL" UUID="XGCE2PMV33KEBHYXKIDFJ2AOCU" Comment="Пульсар: Осн. R пластины 3 в т. 4 (N4-3) &gt; 11 Ом" />
+		<Field Name="Osn_R51" Type="BOOL" UUID="DSB7VILLIGUU7HSIKWRU3GXZEU" Comment="Пульсар: Осн. R пластины 1 в т. 5 (N5-1) &gt; 11 Ом" />
+		<Field Name="Osn_R52" Type="BOOL" UUID="WN4EYXNUNRMEBABEFDEUE2GIFI" Comment="Пульсар: Осн. R пластины 2 в т. 5 (N5-2) &gt; 11 Ом" />
+		<Field Name="Osn_R53" Type="BOOL" UUID="AHHFEV4VRZTEZGXYPMIJSIKBDU" Comment="Пульсар: Осн. R пластины 3 в т. 5 (N5-3) &gt; 11 Ом" />
+		<Field Name="Osn_R61" Type="BOOL" UUID="4X5DK2WXLC4EBJ36WYAQT2NMA4" Comment="Пульсар: Осн. R пластины 1 в т. 6 (N6-1) &gt; 11 Ом" />
+		<Field Name="Osn_R62" Type="BOOL" UUID="UKTV26QSSO3E3JZTLM7WXPH3VM" Comment="Пульсар: Осн. R пластины 2 в т. 6 (N6-2) &gt; 11 Ом" />
+		<Field Name="Osn_R63" Type="BOOL" UUID="WBXU4D37QHPU7GRIT5VSO4FI4E" Comment="Пульсар: Осн. R пластины 3 в т. 6 (N6-3) &gt; 11 Ом" />
+		<Field Name="Osn_R71" Type="BOOL" UUID="LYBLD3B35PTE7ADE6ZPY6AJOKI" Comment="Пульсар: Осн. R пластины 1 в т. 7 (N7-1) &gt; 11 Ом" />
+		<Field Name="Osn_R72" Type="BOOL" UUID="DTJIRWVEKKEELA4CKEQTQBG7TA" Comment="Пульсар: Осн. R пластины 2 в т. 7 (N7-2) &gt; 11 Ом" />
+		<Field Name="Osn_R73" Type="BOOL" UUID="JMBU3ZGDT3KEFHHZZRR6QTKFYA" Comment="Пульсар: Осн. R пластины 3 в т. 7 (N7-3) &gt; 11 Ом" />
+		<Field Name="Osn_R81" Type="BOOL" UUID="ZQTDP62LW5PEXBR26QYCPRQOAM" Comment="Пульсар: Осн. R пластины 1 в т. 8 (N8-1) &gt; 11 Ом" />
+		<Field Name="Osn_R82" Type="BOOL" UUID="4VBYWOMWMSXUHCC4YTB4M4QXLA" Comment="Пульсар: Осн. R пластины 2 в т. 8 (N8-2) &gt; 11 Ом" />
+		<Field Name="Osn_R83" Type="BOOL" UUID="AOUCG3HVOPFEBP66MZJGWRPXPA" Comment="Пульсар: Осн. R пластины 3 в т. 8 (N8-3) &gt; 11 Ом" />
+		<Field Name="Osn_KIP_open" Type="BOOL" UUID="YNRHNJTFKQIUZEEW5AVJO3UZBI" Comment="Пульсар: Осн. КИП вскрыт" />
+		<Field Name="Osn_BB_open" Type="BOOL" UUID="XV7DRJQKCSVELHRO2IXWDBDZCU" Comment="Пульсар: Осн. б/б вскрыт" />
+		<Field Name="Osn_No_U_EXZ" Type="BOOL" UUID="CLDLYEAP5GGUFKOL3DCV6F4IWE" Comment="Пульсар: Осн. нет 220 В на апп. ЭХЗ" />
+		<Field Name="Osn_Smodul1_bad" Type="BOOL" UUID="6TXE45L4CMGE3JZRNAMXJAKOBQ" Comment="Пульсар: Осн. силовой модуль 1 неисправен" />
+		<Field Name="Osn_Smodul2_bad" Type="BOOL" UUID="ZRDUDJQ7CAVENIKYJRUY4TIOCA" Comment="Пульсар: Осн. силовой модуль 2 неисправен" />
+		<Field Name="Osn_Smodul3_bad" Type="BOOL" UUID="NWBW5VETCZ2UHM3LBQTYVPULQM" Comment="Пульсар: Осн. силовой модуль 3 неисправен" />
+		<Field Name="Osn_Smodul4_bad" Type="BOOL" UUID="7G4H5KGOIHXUXGNJAMH6EOWTTA" Comment="Пульсар: Осн. силовой модуль 4 неисправен" />
+		<Field Name="Osn_Smodul5_bad" Type="BOOL" UUID="N3H3ICRGTAZUROZHOLGM4NSCEA" Comment="Пульсар: Осн. силовой модуль 5 неисправен" />
+		<Field Name="Osn_Smodul6_bad" Type="BOOL" UUID="EIW43UIBGQ5ULM3E5ONF6GWXCQ" Comment="Пульсар: Осн. силовой модуль 6 неисправен" />
+		<Field Name="Osn_Smodul7_bad" Type="BOOL" UUID="DOZKSMT2VXEEZFKQLCZQOVZYT4" Comment="Пульсар: Осн. силовой модуль 7 неисправен" />
+		<Field Name="Osn_Smodul8_bad" Type="BOOL" UUID="NIQ4EOJFAHAEVIUJ3UNBJ46SWQ" Comment="Пульсар: Осн. силовой модуль 8 неисправен" />
+		<Field Name="Osn_Smodul9_bad" Type="BOOL" UUID="DJHF5L6E45YUDPSK7YSHI4QDVE" Comment="Пульсар: Осн. силовой модуль 9 неисправен" />
+		<Field Name="Osn_Smodul10_bad" Type="BOOL" UUID="DCHYW4ITDV2ELFNA4ERUIE4VGI" Comment="Пульсар: Осн. силовой модуль 10 неисправен" />
+		<Field Name="Osn_Smodul11_bad" Type="BOOL" UUID="2SC3YN75Y23UFJT55MJKUNHOEE" Comment="Пульсар: Осн. силовой модуль 11 неисправен" />
+		<Field Name="Osn_Smodul12_bad" Type="BOOL" UUID="YFMOUVOUGPXEFGIXGQUEX26UJY" Comment="Пульсар: Осн. силовой модуль 12 неисправен" />
+		<Field Name="Osn_1ch_ResOn" Type="BOOL" UUID="4OJQLCMC2EMEZI3Z7ZNXUACWRI" Comment="Пульсар: Осн. 1 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_2ch_ResOn" Type="BOOL" UUID="IIWZDEITDZLEFI6H56RG4XBEJI" Comment="Пульсар: Осн. 2 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_3ch_ResOn" Type="BOOL" UUID="JUGZZGRNGF4EXOVPSGYPCCRCUM" Comment="Пульсар: Осн. 3 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_4ch_ResOn" Type="BOOL" UUID="WOQUAJ7YFFDUTL4FBW5UJRUSVE" Comment="Пульсар: Осн. 4 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_5ch_ResOn" Type="BOOL" UUID="RG4UEDY4THHUFLNONV7CGL274I" Comment="Пульсар: Осн. 5 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_6ch_ResOn" Type="BOOL" UUID="NUFAEWASAAAUNJKMFYRNB3FUDA" Comment="Пульсар: Осн. 6 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_R11" Type="BOOL" UUID="YZG633EWUTSE7LH3J4DCJ73GRQ" Comment="Пульсар: Рез. R пластины 1 в т. 1 (N1-1) &gt; 11 Ом" />
+		<Field Name="Rez_R12" Type="BOOL" UUID="TZQXIUJAXPQE7KJHIZMLG2IVEI" Comment="Пульсар: Рез. R пластины 2 в т. 1 (N1-2) &gt; 11 Ом" />
+		<Field Name="Rez_R13" Type="BOOL" UUID="TQSTX6GZGG3EFNEDSR54A4JRNQ" Comment="Пульсар: Рез. R пластины 3 в т. 1 (N1-3) &gt; 11 Ом" />
+		<Field Name="Rez_R21" Type="BOOL" UUID="OP23M34HFIKUTKAPKA5GCRVYXE" Comment="Пульсар: Рез. R пластины 1 в т. 2 (N2-1) &gt; 11 Ом" />
+		<Field Name="Rez_R22" Type="BOOL" UUID="ZFQGGTFBADSURL65J4HTLAXKCE" Comment="Пульсар: Рез. R пластины 2 в т. 2 (N2-2) &gt; 11 Ом" />
+		<Field Name="Rez_R23" Type="BOOL" UUID="C32CBIK7U5JERMIVTVQ6OV3V4Y" Comment="Пульсар: Рез. R пластины 3 в т. 2 (N2-3) &gt; 11 Ом" />
+		<Field Name="Rez_R31" Type="BOOL" UUID="EQSLQ55UDLTERJRFGVLQSOBLKI" Comment="Пульсар: Рез. R пластины 1 в т. 3 (N3-1) &gt; 11 Ом" />
+		<Field Name="Rez_R32" Type="BOOL" UUID="IO7DBMPH5KMENKSN4KIZZINDQM" Comment="Пульсар: Рез. R пластины 2 в т. 3 (N3-2) &gt; 11 Ом" />
+		<Field Name="Rez_R33" Type="BOOL" UUID="Q3XPK6GADKSULFKCQ2U5VOUSLE" Comment="Пульсар: Рез. R пластины 3 в т. 3 (N3-3) &gt; 11 Ом" />
+		<Field Name="Rez_R41" Type="BOOL" UUID="K77Y4SU3ZCDENOGMIC6ZNO3YDA" Comment="Пульсар: Рез. R пластины 1 в т. 4 (N4-1) &gt; 11 Ом" />
+		<Field Name="Rez_R42" Type="BOOL" UUID="VKQ2XQ43ZIOU7CNV3HLGTVISHI" Comment="Пульсар: Рез. R пластины 2 в т. 4 (N4-2) &gt; 11 Ом" />
+		<Field Name="Rez_R43" Type="BOOL" UUID="SY5OLMBMIN2E7J3GFGY2KRXKJE" Comment="Пульсар: Рез. R пластины 3 в т. 4 (N4-3) &gt; 11 Ом" />
+		<Field Name="Rez_R51" Type="BOOL" UUID="3C2ILIJYA3VE5A5VY7NV6HH5TI" Comment="Пульсар: Рез. R пластины 1 в т. 5 (N5-1) &gt; 11 Ом" />
+		<Field Name="Rez_R52" Type="BOOL" UUID="BFHFWZD3EWUEHDCTE3FPNL7HAI" Comment="Пульсар: Рез. R пластины 2 в т. 5 (N5-2) &gt; 11 Ом" />
+		<Field Name="Rez_R53" Type="BOOL" UUID="HS37UM446UOELG5OKK7RDUZGEE" Comment="Пульсар: Рез. R пластины 3 в т. 5 (N5-3) &gt; 11 Ом" />
+		<Field Name="Rez_R61" Type="BOOL" UUID="LDXOCTMVR4LE5COP3ISDYRG7QA" Comment="Пульсар: Рез. R пластины 1 в т. 6 (N6-1) &gt; 11 Ом" />
+		<Field Name="Rez_R62" Type="BOOL" UUID="RDZ73WGMPY6UPBNUP6G2V3PJVU" Comment="Пульсар: Рез. R пластины 2 в т. 6 (N6-2) &gt; 11 Ом" />
+		<Field Name="Rez_R63" Type="BOOL" UUID="DLJXRSNNRV6EFEMKH3E62R6G64" Comment="Пульсар: Рез. R пластины 3 в т. 6 (N6-3) &gt; 11 Ом" />
+		<Field Name="Rez_R71" Type="BOOL" UUID="B77PSANI3XKULCMSRHXTLBCTIM" Comment="Пульсар: Рез. R пластины 1 в т. 7 (N7-1) &gt; 11 Ом" />
+		<Field Name="Rez_R72" Type="BOOL" UUID="TFDRMAJWPM5UZNQQNMPSCHEZIM" Comment="Пульсар: Рез. R пластины 2 в т. 7 (N7-2) &gt; 11 Ом" />
+		<Field Name="Rez_R73" Type="BOOL" UUID="AXIMWDRBDSNEXKKO27Z66XN6NQ" Comment="Пульсар: Рез. R пластины 3 в т. 7 (N7-3) &gt; 11 Ом" />
+		<Field Name="Rez_R81" Type="BOOL" UUID="35EE65NZ5JREBEDQ4BHF435DC4" Comment="Пульсар: Рез. R пластины 1 в т. 8 (N8-1) &gt; 11 Ом" />
+		<Field Name="Rez_R82" Type="BOOL" UUID="D3EXXEFQLHEEVEDCZWLD6EV4PU" Comment="Пульсар: Рез. R пластины 2 в т. 8 (N8-2) &gt; 11 Ом" />
+		<Field Name="Rez_R83" Type="BOOL" UUID="4XG32WE53WQUDEIWG5L22GTRSE" Comment="Пульсар: Рез. R пластины 3 в т. 8 (N8-3) &gt; 11 Ом" />
+		<Field Name="Rez_KIP_open" Type="BOOL" UUID="527I6F7N57GEPJY37XS6JJ3WYQ" Comment="Пульсар: Рез. КИП вскрыт" />
+		<Field Name="Rez_BB_open" Type="BOOL" UUID="FKAV2QF5VNOUFOCDIEKDYUTTWU" Comment="Пульсар: Рез. б/б вскрыт" />
+		<Field Name="Rez_No_U_EXZ" Type="BOOL" UUID="KA33JBSLTCGE5FFF24B73OIEYM" Comment="Пульсар: Рез. нет 220 В на апп. ЭХЗ" />
+		<Field Name="Rez_Smodul1_bad" Type="BOOL" UUID="YXT52X2VC4JEDCPJF6TBSIDXQA" Comment="Пульсар: Рез. силовой модуль 1 неисправен" />
+		<Field Name="Rez_Smodul2_bad" Type="BOOL" UUID="E2E6Q4VWPQJEHIKREREBNS7Y4Q" Comment="Пульсар: Рез. силовой модуль 2 неисправен" />
+		<Field Name="Rez_Smodul3_bad" Type="BOOL" UUID="SZYWAKOWB6IUHLQ25UZMPBG6EM" Comment="Пульсар: Рез. силовой модуль 3 неисправен" />
+		<Field Name="Rez_Smodul4_bad" Type="BOOL" UUID="H7Z7IQFNTTWUJPNY6MQZN3MPVI" Comment="Пульсар: Рез. силовой модуль 4 неисправен" />
+		<Field Name="Rez_Smodul5_bad" Type="BOOL" UUID="IC52IIPTJ33E5ME756Q77OHNSQ" Comment="Пульсар: Рез. силовой модуль 5 неисправен" />
+		<Field Name="Rez_Smodul6_bad" Type="BOOL" UUID="36HHJVZDR4OUPLF75VHQLAGZHI" Comment="Пульсар: Рез. силовой модуль 6 неисправен" />
+		<Field Name="Rez_Smodul7_bad" Type="BOOL" UUID="7VSBKJUHMQJE5OZO2RAV6PZMWQ" Comment="Пульсар: Рез. силовой модуль 7 неисправен" />
+		<Field Name="Rez_Smodul8_bad" Type="BOOL" UUID="6RBTPS65O4KELLXOLJC4IPKAGM" Comment="Пульсар: Рез. силовой модуль 8 неисправен" />
+		<Field Name="Rez_Smodul9_bad" Type="BOOL" UUID="62DJQQBM5WCETNNPRRDWAOWZ34" Comment="Пульсар: Рез. силовой модуль 9 неисправен" />
+		<Field Name="Rez_Smodul10_bad" Type="BOOL" UUID="PEJK4LREVJHUNNEVHZ5GT2HZGM" Comment="Пульсар: Рез. силовой модуль 10 неисправен" />
+		<Field Name="Rez_Smodul11_bad" Type="BOOL" UUID="BJMQGZBONNRUBA2OWVN6BLFBY4" Comment="Пульсар: Рез. силовой модуль 11 неисправен" />
+		<Field Name="Rez_Smodul12_bad" Type="BOOL" UUID="MIKCH5H4TTBEVH27ZU6BLOA2LU" Comment="Пульсар: Рез. силовой модуль 12 неисправен" />
+		<Field Name="Rez_1ch_ResOn" Type="BOOL" UUID="GJGUZ6ORX5HELET64E4E4YIJV4" Comment="Пульсар: Рез. 1 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_2ch_ResOn" Type="BOOL" UUID="INBPUOOCMQZUFNCSB4K34VEHUI" Comment="Пульсар: Рез. 2 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_3ch_ResOn" Type="BOOL" UUID="B6AJNGFVN53E3KRHPZOH365EE4" Comment="Пульсар: Рез. 3 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_4ch_ResOn" Type="BOOL" UUID="IH3F6LE5NXHEXBLRLXSWWGVJQQ" Comment="Пульсар: Рез. 4 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_5ch_ResOn" Type="BOOL" UUID="AHLOFTCFHHOUNKNH6YQRMMQUKA" Comment="Пульсар: Рез. 5 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_6ch_ResOn" Type="BOOL" UUID="XENIEUFHCOXEVOD2ZNQEEOFHNU" Comment="Пульсар: Рез. 6 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_SKZ1" Type="BOOL" UUID="3QAPJZWIISTERHU26KYXB5F2BE" Comment="Пульсар: Осн. режим стабилизации СКЗ-1" />
+		<Field Name="Osn_SKZ2" Type="BOOL" UUID="WVIO5YMHF7KUBKIAFYCUTSWH4I" Comment="Пульсар: Осн. режим стабилизации СКЗ-2" />
+		<Field Name="Osn_SKZ3" Type="BOOL" UUID="SXRZCQDG5LVUXA4CBMK36YWIOA" Comment="Пульсар: Осн. режим стабилизации СКЗ-3" />
+		<Field Name="Osn_SKZ4" Type="BOOL" UUID="ASKRXBL6CA4ELLL7LK6DBSQJK4" Comment="Пульсар: Осн. режим стабилизации СКЗ-4" />
+		<Field Name="Osn_SKZ5" Type="BOOL" UUID="DJ5ASY6V3VGUDJXWMV5TJRLNY4" Comment="Пульсар: Осн. режим стабилизации СКЗ-5" />
+		<Field Name="Osn_SKZ6" Type="BOOL" UUID="PSGO55J65QREPNXHJEV6A5MXXY" Comment="Пульсар: Осн. режим стабилизации СКЗ-6" />
+		<Field Name="Res_SKZ1" Type="BOOL" UUID="X654B3M7P2WUHCP4F7UWB4OYOM" Comment="Пульсар: Рез. режим стабилизации СКЗ-1" />
+		<Field Name="Res_SKZ2" Type="BOOL" UUID="DW5ZHKBKNO2E3GLBDTBNK6WQSU" Comment="Пульсар: Рез. режим стабилизации СКЗ-2" />
+		<Field Name="Res_SKZ3" Type="BOOL" UUID="YLI3I7KY5SSERPOYE45VFGHL7U" Comment="Пульсар: Рез. режим стабилизации СКЗ-3" />
+		<Field Name="Res_SKZ4" Type="BOOL" UUID="ONS5RGRL4VSEHCTNKQGDWHUZJA" Comment="Пульсар: Рез. режим стабилизации СКЗ-4" />
+		<Field Name="Res_SKZ5" Type="BOOL" UUID="LOYCUEAU4R4UPGXSG23IQO6VIA" Comment="Пульсар: Рез. режим стабилизации СКЗ-5" />
+		<Field Name="Res_SKZ6" Type="BOOL" UUID="AKYG2ZM5PYZEBLTKOMT6CBAJDI" Comment="Пульсар: Рез. режим стабилизации СКЗ-6" />
+	</Fields>
+</Type>

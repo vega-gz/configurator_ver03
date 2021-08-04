@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_ANB_Settings" Kind="Struct" UUID="FDB2FB9243287298E3F0C9AE5B1113A3">
+    <Fields>
+        <Field Name="Tg_out_KC_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="07A1A3A14BA2DE11E876AAB83DDF2278" Comment="Температура газа на выходе КЦ: предупредительная верхняя" />
+        <Field Name="Tg_out_KC_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="A0CFA6254FB75B4994D305B24FE9B67D" Comment="Температура газа на выходе КЦ: аварийная верхняя" />
+        <Field Name="Pg_out_KC_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="348084194011E2E377A73CB08B84EFF5" Comment="Давление газа на выходе КЦ: предупредительная верхняя" />
+        <Field Name="Pg_out_KC_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="FE2CE5444F8D69A7EFCE71A9FC06040B" Comment="Давление газа на выходе КЦ: аварийная верхняя" />
+    </Fields>
+</Type>

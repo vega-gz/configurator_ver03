@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_mb_AO_Settings" Kind="Struct" UUID="555805FA4179A4B09D29A09B8882863F">
+    <Fields>
+        <Field Name="min" Type="REAL" UUID="B5546E793F42B69D8F44E1B85A3FC375" Comment="Нижний порог ан.выхода в физ.единицах" />
+        <Field Name="max" Type="REAL" UUID="7AE86AB983414206BD62F7BDD01F450C" Comment="Верхний порог ан.выхода в физ.единицах" />
+        <Field Name="format" Type="INT" UUID="C77E9EA748BFFDB322C01F9F17635A2E" />
+        <Field Name="set1" Type="REAL" UUID="2EC3290746A5B22779D06D909C20E4BD" />
+        <Field Name="set2" Type="REAL" UUID="9B32DE144448AF629CB61DAD5DAB8A02" />
+        <Field Name="id" Type="INT" UUID="084AB8725F4B7BB7FB892C93E378D7E2" />
+    </Fields>
+</Type>

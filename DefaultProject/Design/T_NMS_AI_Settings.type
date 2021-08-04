@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_NMS_AI_Settings" UUID="0614F769662D429DB86B752F0A0E166E">
+    
+    <Fields>
+        <Field Comment="Температура в P1 (склад ГСМ)" Name="Tm_R1" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="B1C7D7FD74E44373884B90330AF4A066"/>
+        <Field Comment="Температура в P2 (склад ГСМ)" Name="Tm_R2" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="D39548C8565843F0BF82DEDA9DFF37ED"/>
+        <Field Comment="Температура в P3 (склад ГСМ)" Name="Tm_R3" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="8A9CBB667E904AF5AF1763B49D976ED3"/>
+        <Field Comment="Температура в P4 (склад ГСМ)" Name="Tm_R4" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="454B91A6F86B4B13A6A7E509519341B1"/>
+        <Field Comment="Температура в P5 (склад ГСМ)" Name="Tm_R5" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="C64F8159D5B643C680C21F3856250B64"/>
+        <Field Comment="Температура в P6 (склад ГСМ)" Name="Tm_R6" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="45691B8DFEED488C81CFFA8D5F226D18"/>
+        <Field Comment="Температура в P7 (склад ГСМ)" Name="Tm_R7" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="49F1C14961CF4A118C473579180BDF74"/>
+        <Field Comment="Уровень масла в P1 (склад ГСМ)" Name="Lm_R1" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="E56A542A7DF045D297064D3090B819F1"/>
+        <Field Comment="Уровень масла в P2 (склад ГСМ)" Name="Lm_R2" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="4F2C678D5B0D40E59FFE31C47591C066"/>
+        <Field Comment="Уровень масла в P3 (склад ГСМ)" Name="Lm_R3" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="BB718B29B55441359E154EFA8BE35D54"/>
+        <Field Comment="Уровень масла в P4 (склад ГСМ)" Name="Lm_R4" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="1A560542FBD44517A8E20C2FE6811337"/>
+        <Field Comment="Уровень масла в P5 (склад ГСМ)" Name="Lm_R5" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="EA40525BE3124A44B436737132667B14"/>
+        <Field Comment="Уровень масла в P6 (склад ГСМ)" Name="Lm_R6" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="98CAAD385862465D8967A71C5F126F12"/>
+        <Field Comment="Уровень масла в P7 (склад ГСМ)" Name="Lm_R7" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="AC2AEB4BEE114727972AFC86AC20F9B9"/>
+        <Field Comment="Резерв" Name="Res_0" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="52E63EC09FEF477692FB6218633C9DAE"/>
+        <Field Comment="Резерв" Name="Res_1" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="FA10F79C121E492DAB02C04FA3BAF071"/>
+        <Field Comment="Мин. уровень в Р1 (склад ГСМ)" Name="Lm_R1_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="09CAED5D6B794199B4EE8B1C7E37DD52"/>
+        <Field Comment="Мин. уровень в Р2 (склад ГСМ)" Name="Lm_R2_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="DE2E4B026EB74F08BCE1A57800689A15"/>
+        <Field Comment="Мин. уровень в Р3 (склад ГСМ)" Name="Lm_R3_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="F38343222E3645DC88C4F695F46E60F7"/>
+        <Field Comment="Мин. уровень в Р4 (склад ГСМ)" Name="Lm_R4_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="E6EE91DE2C064CB896FB03B317FF5858"/>
+        <Field Comment="Мин. уровень в Р5 (склад ГСМ)" Name="Lm_R5_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="65E0EE7BE823490A8CE3D7BCD9DAC874"/>
+        <Field Comment="Мин. уровень в Р6 (склад ГСМ)" Name="Lm_R6_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="73539708D4204E7CBCF838912C969457"/>
+        <Field Comment="Мин. уровень в Р7 (склад ГСМ)" Name="Lm_R7_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="AED08ED039DD464D9AE4A3E24E514ECC"/>
+        <Field Comment="Макс. уровень в Р1 (склад ГСМ)" Name="Lm_R1_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="1B212B6DEF2F4B0A843E24EF6B0EF9F6"/>
+        <Field Comment="Макс. уровень в Р2 (склад ГСМ)" Name="Lm_R2_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="0FE1ABD90BF4467EB9768FBA9E09BC5C"/>
+        <Field Comment="Макс. уровень в Р3 (склад ГСМ)" Name="Lm_R3_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="B53C1ABE0CE54F3EB4098CD32F30C5C8"/>
+        <Field Comment="Макс. уровень в Р4 (склад ГСМ)" Name="Lm_R4_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="B42FA1ECB9284A98B3CD5439B3074D11"/>
+        <Field Comment="Макс. уровень в Р5 (склад ГСМ)" Name="Lm_R5_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="6B6E260FF1F64281914A1F441A7DBEAC"/>
+        <Field Comment="Макс. уровень в Р6 (склад ГСМ)" Name="Lm_R6_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="C1A51D9BFCDE45BAA141660090CDDFAA"/>
+        <Field Comment="Макс. уровень в Р7 (склад ГСМ)" Name="Lm_R7_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="6002B5FF8F8A4F939827DF43A8CFFD21"/>
+        <Field Comment="Резерв" Name="Res_2" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="3AB5DA3522AD48AB86D43FBFE87C4C28"/>
+        <Field Comment="Резерв" Name="Res_3" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="AE82C776146D4937AB084076008A95A2"/>
+        <Field Comment="Давление на нагнетании насоса Н1 (насосная масел)" Name="Pm_out_N1" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="1E04A01F97AA4E2F8E15CEDAA3528B4A"/>
+        <Field Comment="Давление на нагнетании насоса Н2 (насосная масел)" Name="Pm_out_N2" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="97F0C23D53514478B1C1853832CDBCDE"/>
+        <Field Comment="Давление на нагнетании насоса Н3 (насосная масел)" Name="Pm_out_N3" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="B370DE9F08774F9C93EECE429B9959CF"/>
+        <Field Comment="Давление на нагнетании насоса Н4 (насосная масел)" Name="Pm_out_N4" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="1800FFEA5F324A7AA591443BF380D71D"/>
+        <Field Comment="Давление на нагнетании насоса Н5 (насосная масел)" Name="Pm_out_N5" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="BF9A8B1BA9DC449EAE21DF54250C3297"/>
+        <Field Comment="Давление на нагнетании насоса Н6 (насосная масел)" Name="Pm_out_N6" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="7AA07682CFA943E09E926FE7F08DF5CC"/>
+        <Field Comment="Температура в ёмкости масла E1 (насосная масел)" Name="Tm_E1" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="28EC625B880B4A7EB6A5BE6E6CB146BB"/>
+        <Field Comment="Температура в ёмкости масла E2 (насосная масел)" Name="Tm_E2" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="FAD9C82DFC3141AAA627A05183792AF9"/>
+        <Field Comment="Температура в ёмкости масла E3 (насосная масел)" Name="Tm_E3" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="7F5BC8FE28F744A29F7076CC62D6FD7F"/>
+        <Field Comment="Температура в ёмкости масла E4 (насосная масел)" Name="Tm_E4" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="A97C383305724179913A752F1889B4E0"/>
+        <Field Comment="Температура в ёмкости масла E5 (насосная масел)" Name="Tm_E5" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="466CDB4AABF6479A8C13EA168EE40541"/>
+        <Field Comment="Температура в ёмкости масла E6 (насосная масел)" Name="Tm_E6" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="9D538F15FF214F3A96ED02781CB82CDF"/>
+        <Field Comment="Резерв" Name="Res_4" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="A8E0E62D20E54999B4613610E10E5C72"/>
+        <Field Comment="Резерв" Name="Res_5" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="381345CC6AFA46589D26F1ADC74A2526"/>
+        <Field Comment="Резерв" Name="Res_6" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="AE43CAC3F5034D58BEE079177F88C659"/>
+        <Field Comment="Резерв" Name="Res_7" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="D311D0C7D7404C4D9D40D1C0B2367F46"/>
+        <Field Comment="Мин. уровень в ёмкости Е1 (насосная масел)" Name="Lm_E1_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="48057862C077415E9B4B05DDE855744E"/>
+        <Field Comment="Мин. уровень в ёмкости Е2 (насосная масел)" Name="Lm_E2_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="69461D172B7A4CDAB8CB7A6BD00FD371"/>
+        <Field Comment="Мин. уровень в ёмкости Е3 (насосная масел)" Name="Lm_E3_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="80FE6CD5BE694DD586BE5F021B906FDD"/>
+        <Field Comment="Мин. уровень в ёмкости Е4 (насосная масел)" Name="Lm_E4_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="D3E3113DA4E24684951EA91BACCCAD55"/>
+        <Field Comment="Мин. уровень в ёмкости Е5 (насосная масел)" Name="Lm_E5_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="EEEE6096CB394895BE99C547C5A76285"/>
+        <Field Comment="Мин. уровень в ёмкости Е6 (насосная масел)" Name="Lm_E6_n" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="54CABF5515494360916B450B65667523"/>
+        <Field Comment="Макс. уровень в ёмкости Е1 (насосная масел)" Name="Lm_E1_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="EAD506D4E0094CFD9A51152519E68106"/>
+        <Field Comment="Макс. уровень в ёмкости Е2 (насосная масел)" Name="Lm_E2_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="2C8B9CC92BE64A048B3EEBB794137B9C"/>
+        <Field Comment="Макс. уровень в ёмкости Е3 (насосная масел)" Name="Lm_E3_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="F47C285F08E44D7AB513FD1689CFAFF8"/>
+        <Field Comment="Макс. уровень в ёмкости Е4 (насосная масел)" Name="Lm_E4_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="CC4EE88906984127B4019C36493401CD"/>
+        <Field Comment="Макс. уровень в ёмкости Е5 (насосная масел)" Name="Lm_E5_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="D85A2CC579444C848D5D243432BE3B32"/>
+        <Field Comment="Макс. уровень в ёмкости Е6 (насосная масел)" Name="Lm_E6_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="9F8D1898CCF54236B747DED79D5981A2"/>
+        <Field Comment="Макс. уровень в емкости аварийного слива масла Р8" Name="Lm_R8_v" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="579750C28AE740CB9BB6227ACF221D7F"/>
+        <Field Comment="Резерв" Name="Res_8" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="78332572BE644F75A48B1A4250CE1A67"/>
+        <Field Comment="Резерв" Name="Res_9" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="B55A0E3A0C624721BAE5F094BA58EE10"/>
+        <Field Comment="Резерв" Name="Res_10" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="8A3CFE2DF78041DD9300DA103787799F"/>
+        <Field Comment="Расход масла после наосов Н1, Н2" Name="Qm_out_N1" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="3D3A54908F92438D986E3E3B956EFCCA"/>
+        <Field Comment="Расход масла после наосов Н3" Name="Qm_out_N3" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="0E24724CDE9240B5925AF96934CB769E"/>
+        <Field Comment="Расход масла после наосов Н4" Name="Qm_out_N4" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="5ECDB6765D99482B85D745B2A3833876"/>
+        <Field Comment="Резерв" Name="Res_11" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="D40BE7C2350849A6A86E08E1E617477D"/>
+        <Field Comment="Измерение основного напряжения САУ НМ" Name="Uosn_SAU" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="B4DB24D217FD460B895A6CEA0794490B"/>
+        <Field Comment="Измерение резервного напряжения САУ НМ" Name="Urez_SAU" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="6EDDB00DDAA4477C85C41B443441764D"/>
+        <Field Comment="Резерв" Name="Res_12" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="78C85A0C7CD84073BCFFFEB2525BA4A7"/>
+        <Field Comment="Резерв" Name="Res_13" Type="668FE9B94A603427C8EDBBB8917A7594" UUID="D8366C24D7014332B3BC1611E6B2A844"/>
+    </Fields>
+</Type>

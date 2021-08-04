@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ReportCommand" Kind="Struct" UUID="X4KW53OMW3XETNI7KSVC3WZYQY">
+	<Fields>
+		<Field Name="make" Type="BOOL" UUID="QM2C7CHQINOULHSMNC6JPOU7ZE" Comment="Создать отчет" />
+		<Field Name="curAb" Type="STRING" UUID="W5NOQRUJ2MIEHMY2NO65BUBL7I" Comment="Имя абонента для отчета" />
+	</Fields>
+</Type>

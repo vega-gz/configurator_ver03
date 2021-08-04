@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_PRU" Kind="Struct" UUID="69061350479FF075132885BA792A0CDA">
+    <Fields>
+        <Field Name="Tg_in_N" Type="REAL" UUID="FED8B3244D3505F6B999D5AB2EE3041D" />
+        <Field Name="Tg_out_N" Type="REAL" UUID="2E0304614D460A39D756F0A129ECDBBB" />
+        <Field Name="Pm_in_D" Type="REAL" UUID="367020364A2B388B368F989586FA868C" />
+        <Field Name="Tm_in_D" Type="REAL" UUID="4EF8B3204EFEC2644D4FF3B19C66B4CC" />
+        <Field Name="N_KVD" Type="REAL" UUID="42F8866446ED41E3B82BCF874D457EE5" />
+        <Field Name="N_ST" Type="REAL" UUID="6E3873834C2F12B9676A9293FE947FD2" />
+        <Field Name="Pg_in_N" Type="REAL" UUID="BDF7517D45F0BCF0B04DE496C9844947" Comment="Давление газа на входе в компрессор" />
+        <Field Name="Pg_out_N" Type="REAL" UUID="FF4BB77E46AF451B17A81A95A3E3F3F1" Comment="Давление газа на выходе из компрессора" />
+        <Field Name="NObs" Type="BOOL" UUID="ABCF09FA4DF90FDA53084F8FBA55CC0E" Comment="Кн. ПРУ &quot;НОбс&quot;" />
+        <Field Name="NOss" Type="BOOL" UUID="E209CB1B42D9445A152EC98D21259F63" Comment="Кн. ПРУ &quot;НОcс&quot;" />
+        <Field Name="AObs" Type="BOOL" UUID="D49B7EA84A163F42BA25D8A7311D8101" Comment="Кн. ПРУ &quot;АОбс&quot;" />
+        <Field Name="AOss" Type="BOOL" UUID="F94FC90A4588D242A510C48A5435C0E3" Comment="Кн. ПРУ &quot;АОсс&quot;" />
+    </Fields>
+</Type>

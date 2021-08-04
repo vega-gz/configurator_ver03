@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_AO_DRV" UUID="55D66431A22B449998EBCB03A5B1728A">
+<Fields>
+<Field Comment="Управление ВНА" Name="Set_VNA" Type="REAL" UUID="F0B731663A604F99AE519AF42902DA4C"/>
+<Field Comment="Установка скорости по току ЭС" Name="Set_N_ES" Type="REAL" UUID="5107D5E06C6642BB8D02C83FCF7B0BF6"/>
+<Field Comment="Управление дозатором газа ДУС" Name="Set_TRK" Type="REAL" UUID="145912C65FB24FE89F599FB6D22421A2"/>
+<Field Comment="Управление клапаном КлР6" Name="Set_Kr6r" Type="REAL" UUID="8C8E81520ABD4A9D9589FB02C9B38381"/>
+<Field Comment="Вентилятор 1 МОК: управление" Name="Set_Vn1_MON" Type="REAL" UUID="23802A4379444DC7BBA78F7663ED7E6E"/>
+<Field Comment="Вентилятор 2 МОК: управление" Name="Set_Vn2_MON" Type="REAL" UUID="95A4946B8CBA4A549A286DD6F69C7F95"/>
+<Field Comment="Вентилятор 1 МОД: управление" Name="Set_Vn1_MOD" Type="REAL" UUID="7DDFDAFE77294DD7B8E914EC6D408C13"/>
+<Field Comment="Вентилятор 2 МОД: управление" Name="Set_Vn2_MOD" Type="REAL" UUID="9EDC055E412A49E79C6BF6C7DB04BD6B"/>
+<Field Comment="Частота вращения ротора СТ" Name="N_ST_ext" Type="REAL" UUID="AE1C1B0A68B14156989F5BF518EF1690"/>
+<Field Comment="Задание на клапан КлР1" Name="Set_KLR1" Type="REAL" UUID="85EB388D0D1C49DB93B856065868C2B9"/>
+<Field Comment="Задание на клапан КлР2" Name="Set_KLR2" Type="REAL" UUID="29BC2777C4964072AD439335A6854654"/>
+<Field Comment="Вентилятор 1 МОР: управление" Name="Set_Vn1_MOR" Type="REAL" UUID="C7E430138A9743CE8287B529C3DF0DFA"/>
+<Field Comment="Вентилятор 2 МОР: управление" Name="Set_Vn2_MOR" Type="REAL" UUID="121EE252BBB04C779D90A7444766793C"/>
+<Field Comment="Вентилятор 3 МОР: управление" Name="Set_Vn3_MOR" Type="REAL" UUID="B952375854744AAEBCDC6301853FE562"/>
+<Field Comment="Вентилятор 4 МОР: управление" Name="Set_Vn4_MOR" Type="REAL" UUID="4B2ACCAD680F4622A404012ADAF5FF72"/>
+<Field Comment="Резерв" Name="Res_2" Type="REAL" UUID="8DC37BA7AB6943F699580B36FA2D045D"/>
+</Fields>
+</Type>

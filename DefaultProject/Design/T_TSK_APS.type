@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TSK_APS" Kind="Struct" UUID="9FC492887ADE4ACC935151729569566B">
+	<Fields>
+		<Field Name="Zg_3T_Av" Type="BOOL" UUID="8854820E23004792A8A5A5744A77EDF7" Comment="Загазованность на скважине 3Т высокая" />
+		<Field Name="Zg_4T_Av" Type="BOOL" UUID="06682BDCD4604881BFA2FD7A966868CA" Comment="Загазованность на скважине 4Т высокая" />
+		<Field Name="Zg_5T_Av" Type="BOOL" UUID="CE34EB180C304D40B142EAD8EBEC449A" Comment="Загазованность на скважине 5Т высокая" />
+		<Field Name="Zg_6T_Av" Type="BOOL" UUID="F5985BD69B0C44279B1F3C629922015E" Comment="Загазованность на скважине 6Т высокая" />
+		<Field Name="Zg_7T_Av" Type="BOOL" UUID="3CC8C6C4F1324F21985A266EBF566BB1" Comment="Загазованность на скважине 7Т высокая" />
+		<Field Name="Zg_8T_Av" Type="BOOL" UUID="A4709A56DFB84D03A649E03F162578BE" Comment="Загазованность на скважине 8Т высокая" />
+		<Field Name="Zg_9T_Av" Type="BOOL" UUID="9BA8606C99A04CFDA719BF9ED1916AA6" Comment="Загазованность на скважине 9Т высокая" />
+		<Field Name="Zg_10T_Av" Type="BOOL" UUID="44EC51BAB248424A85D312E76A3CFFA1" Comment="Загазованность на скважине 10Т высокая" />
+		<Field Name="Zg_11T_Av" Type="BOOL" UUID="9A8237CCE9F2464D8CBACF831B1A9008" Comment="Загазованность на скважине 11Т высокая" />
+		<Field Name="Zg_12T_Av" Type="BOOL" UUID="3750F9AAB2604DCDB92DDCB9431A30BA" Comment="Загазованность на скважине 12Т высокая" />
+		<Field Name="Zg_13T_Av" Type="BOOL" UUID="7296ED88AB0E4A5C98E0BB57C8C405BB" Comment="Загазованность на скважине 13Т высокая" />
+		<Field Name="Zg_14T_Av" Type="BOOL" UUID="25B28178995644709E5D34C38A596E4F" Comment="Загазованность на скважине 14Т высокая" />
+		<Field Name="Kr_1T1_selfON" Type="BOOL" UUID="1632EDBEDF944860BBB0C40F63F3945E" Comment="Самопроизвольное открытие Крана 1Т-1" />
+		<Field Name="Kr_2T1_selfON" Type="BOOL" UUID="D478E3A6708A4EC7A60831490EBFB80B" Comment="Самопроизвольное открытие Крана 2Т-1" />
+		<Field Name="Kr_3T1_selfON" Type="BOOL" UUID="EEB416F82BF84A7E956DAD1E6F65C464" Comment="Самопроизвольное открытие Крана 3Т-1" />
+		<Field Name="Kr_4T1_selfON" Type="BOOL" UUID="C11AD6A6D8264B2186CB16458BC00904" Comment="Самопроизвольное открытие Крана 4Т-1" />
+		<Field Name="Kr_5T1_selfON" Type="BOOL" UUID="9C28444CDD2445A2A68AA51B44FD3FAA" Comment="Самопроизвольное открытие Крана 5Т-1" />
+		<Field Name="Kr_6T1_selfON" Type="BOOL" UUID="C8EA2D6AE6784378AF62399DC996BB9E" Comment="Самопроизвольное открытие Крана 6Т-1" />
+		<Field Name="Kr_7T1_selfON" Type="BOOL" UUID="E0147E10837443FAB91B480A6C39B8D0" Comment="Самопроизвольное открытие Крана 7Т-1" />
+		<Field Name="Kr_8T1_selfON" Type="BOOL" UUID="26563CC6E0C44F1B8B6E6AE4E7EB1747" Comment="Самопроизвольное открытие Крана 8Т-1" />
+		<Field Name="Kr_9T1_selfON" Type="BOOL" UUID="777CC4C886D04B45BFAC8DFB61FDAEB5" Comment="Самопроизвольное открытие Крана 9Т-1" />
+		<Field Name="Kr_10T1_selfON" Type="BOOL" UUID="3B3E21487ACC439394618B56CE3AD2ED" Comment="Самопроизвольное открытие Крана 10Т-1" />
+		<Field Name="Kr_11T1_selfON" Type="BOOL" UUID="C6A20EC22ADA4C9888C64E51303C7CF7" Comment="Самопроизвольное открытие Крана 11Т-1" />
+		<Field Name="Kr_12T1_selfON" Type="BOOL" UUID="FBE8AB7A8AF64C2C8D34B79789195DC0" Comment="Самопроизвольное открытие Крана 12Т-1" />
+		<Field Name="Kr_13T1_selfON" Type="BOOL" UUID="7BBA492AD0C84B18942970CBEA3A05B3" Comment="Самопроизвольное открытие Крана 13Т-1" />
+		<Field Name="Kr_14T1_selfON" Type="BOOL" UUID="7E2EA736554E45B5BD10C2DDB8F26D5C" Comment="Самопроизвольное открытие Крана 14Т-1" />
+		<Field Name="Kr_1T1_selfOF" Type="BOOL" UUID="53F619D27EF04C1E979E3DDC5132AAE8" Comment="Самопроизвольное закрытие Крана 1Т-1" />
+		<Field Name="Kr_2T1_selfOF" Type="BOOL" UUID="5562C520D8364E6E855BE069C77E3323" Comment="Самопроизвольное закрытие Крана 2Т-1" />
+		<Field Name="Kr_3T1_selfOF" Type="BOOL" UUID="990CDF9C74AE4F89AA40C127B4D96EDF" Comment="Самопроизвольное закрытие Крана 3Т-1" />
+		<Field Name="Kr_4T1_selfOF" Type="BOOL" UUID="1B9A43AE022C42C6B78CAAFE17A68F2A" Comment="Самопроизвольное закрытие Крана 4Т-1" />
+		<Field Name="Kr_5T1_selfOF" Type="BOOL" UUID="5BD023B4738E449DB00FA9DFE8383A37" Comment="Самопроизвольное закрытие Крана 5Т-1" />
+		<Field Name="Kr_6T1_selfOF" Type="BOOL" UUID="F5BA300688404870A725A1141737313D" Comment="Самопроизвольное закрытие Крана 6Т-1" />
+		<Field Name="Kr_7T1_selfOF" Type="BOOL" UUID="82DC76840D7640638A47CBC270D84A82" Comment="Самопроизвольное закрытие Крана 7Т-1" />
+		<Field Name="Kr_8T1_selfOF" Type="BOOL" UUID="2018551859D04C8593EB118D37AA16B6" Comment="Самопроизвольное закрытие Крана 8Т-1" />
+		<Field Name="Kr_9T1_selfOF" Type="BOOL" UUID="1AEEAFBC51C248CC8C98E479CBAA0621" Comment="Самопроизвольное закрытие Крана 9Т-1" />
+		<Field Name="Kr_10T1_selfOF" Type="BOOL" UUID="C602520C861840C4A4B992294DBD9106" Comment="Самопроизвольное закрытие Крана 10Т-1" />
+		<Field Name="Kr_11T1_selfOF" Type="BOOL" UUID="90FCD90641DA44DEAE1994502A240B17" Comment="Самопроизвольное закрытие Крана 11Т-1" />
+		<Field Name="Kr_12T1_selfOF" Type="BOOL" UUID="AEF077B2F51C49BAB65E159E0237E816" Comment="Самопроизвольное закрытие Крана 12Т-1" />
+		<Field Name="Kr_13T1_selfOF" Type="BOOL" UUID="3C84CFFC288040E8A5C527E81D110A68" Comment="Самопроизвольное закрытие Крана 13Т-1" />
+		<Field Name="Kr_14T1_selfOF" Type="BOOL" UUID="C8BC96CAB5924D748BD9AB93A4E9AF23" Comment="Самопроизвольное закрытие Крана 14Т-1" />
+		<Field Name="Fire_BB_TSK" Type="BOOL" UUID="8352040AE5324772A075CD62C1E088DE" Comment="Пожар в ББ САУ ТСк ПХГ" />
+		<Field Name="Fire_BB_EXZ_6T" Type="BOOL" UUID="66AE77F8F63A428FAF612D968307C0DA" Comment="Пожар в ББ ЭХЗ 6Т" />
+		<Field Name="Fire_BB_EXZ_7T" Type="BOOL" UUID="8616C18017C8469BAA26D54A1878906E" Comment="Пожар в ББ ЭХЗ 7Т" />
+		<Field Name="Fire_BB_EXZ_8T" Type="BOOL" UUID="51A2E83A295C4BE19089DFF0583FD8B8" Comment="Пожар в ББ ЭХЗ 8Т" />
+		<Field Name="Fire_BB_EXZ_9T" Type="BOOL" UUID="50005BD076EA47F6A676A09B775547A0" Comment="Пожар в ББ ЭХЗ 9Т" />
+		<Field Name="Fire_BB_EXZ_10T" Type="BOOL" UUID="9E28BB926DDA4F94AA6DAEA311FAE7F4" Comment="Пожар в ББ ЭХЗ 10Т" />
+		<Field Name="Fire_BB_EXZ_11T" Type="BOOL" UUID="91EA5D161E4A486EA27A119169E1ED98" Comment="Пожар в ББ ЭХЗ 11Т" />
+		<Field Name="Fire_BB_EXZ_12T" Type="BOOL" UUID="C9E481E649824B8AB662CD9F21A0C102" Comment="Пожар в ББ ЭХЗ 12Т" />
+		<Field Name="Fire_BB_EXZ_13T" Type="BOOL" UUID="A40CC9EAE86240828D8ECBF1409B9FF7" Comment="Пожар в ББ ЭХЗ 13Т" />
+		<Field Name="Fire_BB_EXZ_14T" Type="BOOL" UUID="020088B0250845EA89112DD6A422A590" Comment="Пожар в ББ ЭХЗ 14Т" />
+		<Field Name="Pg_1T_t_Pn" Type="BOOL" UUID="NRDXS53EKBNEHES3MYU5NPFE7I" Comment="Трубное давление в скважине 1Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_1T_t_Pv" Type="BOOL" UUID="R26MFARZ377UJE5P6QM5JXMWUM" Comment="Трубное давление в скважине 1Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_1T_mk1_Pn" Type="BOOL" UUID="DINYC6UES5AUXFRX46VASR46MA" Comment="Межколонное давление в скважине 1Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_1T_mk1_Pv" Type="BOOL" UUID="QXQEXULBIIRE3LYEVBPI2YP3TE" Comment="Межколонное давление в скважине 1Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_1T_mk2_Pn" Type="BOOL" UUID="MRVG65YN6VXUDKE5CGZFJHSOJU" Comment="Межколонное давление в скважине 1Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_1T_mk2_Pv" Type="BOOL" UUID="SE6L65BXWLBE7N7KDOWF5OKI6Y" Comment="Межколонное давление в скважине 1Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_1T_mk3_Pn" Type="BOOL" UUID="263OG4AKIMYU3M2KNSVAVACQ4Y" Comment="Межколонное давление в скважине 1Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_1T_mk3_Pv" Type="BOOL" UUID="UPLZFPIQPCNEFEURRJSUS3MYJE" Comment="Межколонное давление в скважине 1Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_1T_Pn" Type="BOOL" UUID="7W3E3IBNSKYEZE4RTOA23LIXPE" Comment="Температура газа на скважине 1Т пониженная" />
+		<Field Name="Tg_1T_Pv" Type="BOOL" UUID="AQYKOQRB7TIUPASUFAZD6P2KKE" Comment="Температура газа на скважине 1Т повышенная" />
+		<Field Name="Pg_2T_t_Pn" Type="BOOL" UUID="EOVUMXRXW7FEFIB65V3KBVOWBQ" Comment="Трубное давление в скважине 2Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_2T_t_Pv" Type="BOOL" UUID="7PTEEPEZMSFU7HS4MWW6XVYBGQ" Comment="Трубное давление в скважине 2Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_2T_mk1_Pn" Type="BOOL" UUID="C6KD7EROXYPEFC5JD6W73FL3RI" Comment="Межколонное давление в скважине 2Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_2T_mk1_Pv" Type="BOOL" UUID="NMN5EK6AAZPUTIWKT6WE4A3RYI" Comment="Межколонное давление в скважине 2Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_2T_mk2_Pn" Type="BOOL" UUID="CWJIQPOAXSXUJI45SVNXFIF5C4" Comment="Межколонное давление в скважине 2Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_2T_mk2_Pv" Type="BOOL" UUID="E4NFVYCPJ6UUXBRNUIJAOM3UAE" Comment="Межколонное давление в скважине 2Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_2T_mk3_Pn" Type="BOOL" UUID="AGUXCUJRXXEEHH75SS777RFVLM" Comment="Межколонное давление в скважине 2Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_2T_mk3_Pv" Type="BOOL" UUID="657XOXQQKO5U5PV7FQP7IX7PSM" Comment="Межколонное давление в скважине 2Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_2T_Pn" Type="BOOL" UUID="P5NA6YAXRQREPELSYFOU5YK6KE" Comment="Температура газа на скважине 2Т пониженная" />
+		<Field Name="Tg_2T_Pv" Type="BOOL" UUID="QQ6MJKENVLPENKTSLBGZ3RCE7I" Comment="Температура газа на скважине 2Т повышенная" />
+		<Field Name="Pg_3T_t_Pn" Type="BOOL" UUID="HCZRGFCNGBGUVPIOICIXWX5JFU" Comment="Трубное давление в скважине 3Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_3T_t_Pv" Type="BOOL" UUID="OI7SDTJEORZUBBUEVJINUBWASE" Comment="Трубное давление в скважине 3Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_3T_mk1_Pn" Type="BOOL" UUID="4NKQRVS2VDCEPBZZ773BOJDUKM" Comment="Межколонное давление в скважине 3Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_3T_mk1_Pv" Type="BOOL" UUID="4XGXNESBM6ZELKCAQ24MTTXVNY" Comment="Межколонное давление в скважине 3Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_3T_mk2_Pn" Type="BOOL" UUID="CYWK3E7PDHMELODV7ZWQ4XSRPQ" Comment="Межколонное давление в скважине 3Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_3T_mk2_Pv" Type="BOOL" UUID="XBRWNDB4GODETDQ73SMXIN7X6M" Comment="Межколонное давление в скважине 3Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_3T_mk3_Pn" Type="BOOL" UUID="HU4IBXW5T6WEXA4IXOPB27VO6E" Comment="Межколонное давление в скважине 3Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_3T_mk3_Pv" Type="BOOL" UUID="MWAT5L2MG6ZEDBS6H4HGYU4YBM" Comment="Межколонное давление в скважине 3Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_3T_Pn" Type="BOOL" UUID="P4QZZDM25B3EXONAZDYKRVDPYA" Comment="Температура газа на скважине 3Т пониженная" />
+		<Field Name="Tg_3T_Pv" Type="BOOL" UUID="BVF75ITCXDGUPJQ35GDGGMUSUQ" Comment="Температура газа на скважине 3Т повышенная" />
+		<Field Name="Zg_3T_Pv" Type="BOOL" UUID="LFR3DFMAHNUUZIM5JCT5VFAYIM" Comment="Загазованность на скважине 3Т повышенная" />
+		<Field Name="Pg_4T_t_Pn" Type="BOOL" UUID="I7Y6UPR5NHSUZPFOIVW67R6ZGE" Comment="Трубное давление в скважине 4Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_4T_t_Pv" Type="BOOL" UUID="MCRD6Z4NQJSEXJZFVBVYT5COEU" Comment="Трубное давление в скважине 4Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_4T_mk1_Pn" Type="BOOL" UUID="UK7UPC7PQIRUJM6G3LPMU4Y3PI" Comment="Межколонное давление в скважине 4Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_4T_mk1_Pv" Type="BOOL" UUID="YEDLV6PXAFAE5GELLYVZWNZMJA" Comment="Межколонное давление в скважине 4Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_4T_mk2_Pn" Type="BOOL" UUID="2HU34IPKJ6REXLI5YTUCXXXZ34" Comment="Межколонное давление в скважине 4Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_4T_mk2_Pv" Type="BOOL" UUID="B4JMXO7BKWXUNE4F2YIZA5A2RQ" Comment="Межколонное давление в скважине 4Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_4T_mk3_Pn" Type="BOOL" UUID="EA563MK52YYE5H5PMM6R2UYYZA" Comment="Межколонное давление в скважине 4Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_4T_mk3_Pv" Type="BOOL" UUID="I4CEFMFFOCNEFCH2ALXKGAYMJQ" Comment="Межколонное давление в скважине 4Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_4T_Pn" Type="BOOL" UUID="YB4Z5KYNOBIUTEX5Y5GIWP33DI" Comment="Температура газа на скважине 4Т пониженная" />
+		<Field Name="Tg_4T_Pv" Type="BOOL" UUID="I46LVZKHPWYEFCMKHJNB6NMGPY" Comment="Температура газа на скважине 4Т повышенная" />
+		<Field Name="Zg_4T_Pv" Type="BOOL" UUID="GL6BMPUQBVAUNK5EFYMZYGBWV4" Comment="Загазованность на скважине 4Т повышенная" />
+		<Field Name="Pg_5T_t_Pn" Type="BOOL" UUID="CMONM7KYSZ2UZCB6JXE27H4MXQ" Comment="Трубное давление в скважине 5Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_5T_t_Pv" Type="BOOL" UUID="OAZDXN3VIMBEZAZZ5WNDJ7NDXE" Comment="Трубное давление в скважине 5Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_5T_mk1_Pn" Type="BOOL" UUID="LXTHUHTMGUEU5DMTILIQ6MVQUY" Comment="Межколонное давление в скважине 5Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_5T_mk1_Pv" Type="BOOL" UUID="OQ6WYFW73VJEPNN2H5ZA7AG334" Comment="Межколонное давление в скважине 5Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_5T_mk2_Pn" Type="BOOL" UUID="VEWM6RDYEJSEBATT4QRQ2F7KNE" Comment="Межколонное давление в скважине 5Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_5T_mk2_Pv" Type="BOOL" UUID="Z52WE7DKD4GUHCU3SAJ2WSYDYU" Comment="Межколонное давление в скважине 5Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_5T_mk3_Pn" Type="BOOL" UUID="MFXLSDLL3WIE3PDK2SGN3FSBYQ" Comment="Межколонное давление в скважине 5Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_5T_mk3_Pv" Type="BOOL" UUID="RJRAMIFTSYVE7LNO6PF2IHQITI" Comment="Межколонное давление в скважине 5Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_5T_Pn" Type="BOOL" UUID="XAQK55W3DUCULNK25LARBHF42U" Comment="Температура газа на скважине 5Т пониженная" />
+		<Field Name="Tg_5T_Pv" Type="BOOL" UUID="DFPFZLTNVT6ETL4II27LYA633M" Comment="Температура газа на скважине 5Т повышенная" />
+		<Field Name="Zg_5T_Pv" Type="BOOL" UUID="GUAAVDMM4QXERHHXFVEGI5WTZQ" Comment="Загазованность на скважине 5Т повышенная" />
+		<Field Name="T_BB_TSK_Pn" Type="BOOL" UUID="WUYSTXZEZWWUFEL524DV53MCDM" Comment="Температура воздуха в ББ САУ ТСк ПХГ пониженная" />
+		<Field Name="T_BB_TSK_Pv" Type="BOOL" UUID="GYDCFAX2QZWUTKSS5K4BCE4534" Comment="Температура воздуха в ББ САУ ТСк ПХГ повышенная" />
+		<Field Name="T_BB_EXZ_6T_Pn" Type="BOOL" UUID="OFRGLXJDNVHU3AABV3GTEK27LI" Comment="Температура воздуха в ББ ЭХЗ 6Т пониженная" />
+		<Field Name="T_BB_EXZ_6T_Pv" Type="BOOL" UUID="GKCJOBJXWKCUNN7EBRHUWNC7LA" Comment="Температура воздуха в ББ ЭХЗ 6Т повышенная" />
+		<Field Name="Pg_6T_t_Pn" Type="BOOL" UUID="UDU3PVDIIEAEDPDWFQH75O34B4" Comment="Трубное давление в скважине 6Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_6T_t_Pv" Type="BOOL" UUID="GBJNNNWVT6KE3OM7V6JTJNGTMQ" Comment="Трубное давление в скважине 6Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_6T_mk1_Pn" Type="BOOL" UUID="QA7E3EKA4ZYU5KTFKABTWRIAAY" Comment="Межколонное давление в скважине 6Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_6T_mk1_Pv" Type="BOOL" UUID="BIETUQR2UOCURAZBSAHPGCNAEU" Comment="Межколонное давление в скважине 6Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_6T_mk2_Pn" Type="BOOL" UUID="ZUOKCWZMU5UU3OHY4WWXBXAFEU" Comment="Межколонное давление в скважине 6Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_6T_mk2_Pv" Type="BOOL" UUID="VLIAKYJPDIWEVBVYCQLACLOZHI" Comment="Межколонное давление в скважине 6Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_6T_mk3_Pn" Type="BOOL" UUID="X7ACP3HP7CYUBIRCTAS2DK7RII" Comment="Межколонное давление в скважине 6Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_6T_mk3_Pv" Type="BOOL" UUID="KOVWVIDQ5NTU3LUECXXYBJ25ZY" Comment="Межколонное давление в скважине 6Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_6T_Pn" Type="BOOL" UUID="PD642ITFQ6MU5E7DBWKJKAO7VM" Comment="Температура газа на скважине 6Т пониженная" />
+		<Field Name="Tg_6T_Pv" Type="BOOL" UUID="RHEHGHXDSYAERNQGBYLURBB2JA" Comment="Температура газа на скважине 6Т повышенная" />
+		<Field Name="Zg_6T_Pv" Type="BOOL" UUID="NHIEC7ODC4XUFIDDIQRPQU4KPY" Comment="Загазованность на скважине 6Т повышенная" />
+		<Field Name="T_BB_EXZ_7T_Pn" Type="BOOL" UUID="6XW6R35MDXRE3IJYIIJ7L6J2HQ" Comment="Температура воздуха в ББ ЭХЗ 7Т пониженная" />
+		<Field Name="T_BB_EXZ_7T_Pv" Type="BOOL" UUID="UQRD7C5OIPXU7GOKORIZ3TFMDY" Comment="Температура воздуха в ББ ЭХЗ 7Т повышенная" />
+		<Field Name="Pg_7T_t_Pn" Type="BOOL" UUID="5OJEWPYRSNFEPJ3BCNXINHSJIQ" Comment="Трубное давление в скважине 7Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_7T_t_Pv" Type="BOOL" UUID="7IXJPRPIT6SEBNKKCY6MLIVWNM" Comment="Трубное давление в скважине 7Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_7T_mk1_Pn" Type="BOOL" UUID="NFMKKRBJABVEVE2BZAZLD6GUCM" Comment="Межколонное давление в скважине 7Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_7T_mk1_Pv" Type="BOOL" UUID="CFPZSYYOC5XE5ATRDEWMU2W6TE" Comment="Межколонное давление в скважине 7Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_7T_mk2_Pn" Type="BOOL" UUID="QDOX6ZL4YHXE5CVZIEBSISHRPQ" Comment="Межколонное давление в скважине 7Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_7T_mk2_Pv" Type="BOOL" UUID="4VPEJEKWGCZU3BBMZARVE4PMIA" Comment="Межколонное давление в скважине 7Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_7T_mk3_Pn" Type="BOOL" UUID="3DTJTYLAHPPE5LEQXCVUYMINCQ" Comment="Межколонное давление в скважине 7Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_7T_mk3_Pv" Type="BOOL" UUID="MU3V44TE47LU3BDGONOE5PWW3Q" Comment="Межколонное давление в скважине 7Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_7T_Pn" Type="BOOL" UUID="GRVN6MMQCJAEROFWV4Y4NEVTKA" Comment="Температура газа на скважине 7Т пониженная" />
+		<Field Name="Tg_7T_Pv" Type="BOOL" UUID="JFA2QMORNMKEZNB4UIJ25MNZX4" Comment="Температура газа на скважине 7Т повышенная" />
+		<Field Name="Zg_7T_Pv" Type="BOOL" UUID="VCJPBOEW3VWU5NOBLI5VVQ5Y2E" Comment="Загазованность на скважине 7Т повышенная" />
+		<Field Name="T_BB_EXZ_8T_Pn" Type="BOOL" UUID="TRZ4RBDHSLPUZJUDNMSAE54AR4" Comment="Температура воздуха в ББ ЭХЗ 8Т пониженная" />
+		<Field Name="T_BB_EXZ_8T_Pv" Type="BOOL" UUID="RJZRNCMDUG4U3EEPX7SV2H4KDU" Comment="Температура воздуха в ББ ЭХЗ 8Т повышенная" />
+		<Field Name="Pg_8T_t_Pn" Type="BOOL" UUID="N426NMR6LVUUDCBQQMAVOL5TUM" Comment="Трубное давление в скважине 8Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_8T_t_Pv" Type="BOOL" UUID="6AO67KRLJDJUJH567SUYGSIQWQ" Comment="Трубное давление в скважине 8Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_8T_mk1_Pn" Type="BOOL" UUID="AKDJC6JZMEHULCBPMBRAVLZAAI" Comment="Межколонное давление в скважине 8Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_8T_mk1_Pv" Type="BOOL" UUID="6UQOEENRXOWURNMS3NWYOI2KS4" Comment="Межколонное давление в скважине 8Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_8T_mk2_Pn" Type="BOOL" UUID="I7W4VAIBSSMETNFG6MGU574W7Q" Comment="Межколонное давление в скважине 8Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_8T_mk2_Pv" Type="BOOL" UUID="DZUIO7DQBQAE7EWJ3IS66Y4C2I" Comment="Межколонное давление в скважине 8Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_8T_mk3_Pn" Type="BOOL" UUID="BJIDOZF4YNDE7OIGSYW3MLWBY4" Comment="Межколонное давление в скважине 8Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_8T_mk3_Pv" Type="BOOL" UUID="PDCXH7AXLHHE7HQ3MNAOVU63VM" Comment="Межколонное давление в скважине 8Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_8T_Pn" Type="BOOL" UUID="YIUF2L7AUETETD24BZAPOBEKQE" Comment="Температура газа на скважине 8Т пониженная" />
+		<Field Name="Tg_8T_Pv" Type="BOOL" UUID="6LYRC3ARGBSUZL7FHKNEVZBW4I" Comment="Температура газа на скважине 8Т повышенная" />
+		<Field Name="Zg_8T_Pv" Type="BOOL" UUID="ZFALGXGPBNCEDLV3USKRP6CXKI" Comment="Загазованность на скважине 8Т повышенная" />
+		<Field Name="T_BB_EXZ_9T_Pn" Type="BOOL" UUID="GGLRNIYM2STUJJ775G36LYOX74" Comment="Температура воздуха в ББ ЭХЗ 9Т пониженная" />
+		<Field Name="T_BB_EXZ_9T_Pv" Type="BOOL" UUID="DNDQ7LTAJDNU5K45KBWLJ35RXQ" Comment="Температура воздуха в ББ ЭХЗ 9Т повышенная" />
+		<Field Name="Pg_9T_t_Pn" Type="BOOL" UUID="32QXZ65UKXPUDOSUYAYE4NS3Z4" Comment="Трубное давление в скважине 9Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_9T_t_Pv" Type="BOOL" UUID="PZQOXDGOWBGUJEWRNH3GUTVTSI" Comment="Трубное давление в скважине 9Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_9T_mk1_Pn" Type="BOOL" UUID="VLE4KXXHZ2GELF6BUTHWYWVEZM" Comment="Межколонное давление в скважине 9Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_9T_mk1_Pv" Type="BOOL" UUID="NX42KPKJCL7UZBFV7K4ARF4XY4" Comment="Межколонное давление в скважине 9Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_9T_mk2_Pn" Type="BOOL" UUID="RBRY6EBGGIJURB2LHHTHBIVYVQ" Comment="Межколонное давление в скважине 9Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_9T_mk2_Pv" Type="BOOL" UUID="7NHNWRR2H4BUZOTATCILF3C35I" Comment="Межколонное давление в скважине 9Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_9T_mk3_Pn" Type="BOOL" UUID="N4BWDNUZOLVEPKRCYIWGDHRX2I" Comment="Межколонное давление в скважине 9Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_9T_mk3_Pv" Type="BOOL" UUID="PXFZQ5OFZHKUROFB6GS2WJPBVY" Comment="Межколонное давление в скважине 9Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_9T_Pn" Type="BOOL" UUID="DCC57E6RGD2EZBMFXWZBPKWPVA" Comment="Температура газа на скважине 9Т пониженная" />
+		<Field Name="Tg_9T_Pv" Type="BOOL" UUID="OYKEQZGKA4OE5C743FVGPAFUQA" Comment="Температура газа на скважине 9Т повышенная" />
+		<Field Name="Zg_9T_Pv" Type="BOOL" UUID="JRHO4ZSDAY4UJFKFLBMA54MTRY" Comment="Загазованность на скважине 9Т повышенная" />
+		<Field Name="T_BB_EXZ_10T_Pn" Type="BOOL" UUID="SG4AH3ZU4NCUPNGOFSSWFB5CZY" Comment="Температура воздуха в ББ ЭХЗ 10Т пониженная" />
+		<Field Name="T_BB_EXZ_10T_Pv" Type="BOOL" UUID="W7ERRMPKCALEFLXPIQXY2W33LA" Comment="Температура воздуха в ББ ЭХЗ 10Т повышенная" />
+		<Field Name="Pg_10T_t_Pn" Type="BOOL" UUID="I4CKS5322THUFI7MIF4A22ZTSE" Comment="Трубное давление в скважине 10Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_10T_t_Pv" Type="BOOL" UUID="S2FHKIZK3HWE7BKHD4ILSNA6WQ" Comment="Трубное давление в скважине 10Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_10T_mk1_Pn" Type="BOOL" UUID="NKGIYNL6TDGURH3TJGYZ3RPHXE" Comment="Межколонное давление в скважине 10Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_10T_mk1_Pv" Type="BOOL" UUID="EREDBP75YSREXCEVOMUWZIZUUU" Comment="Межколонное давление в скважине 10Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_10T_mk2_Pn" Type="BOOL" UUID="I2BW2RJVS4KEVLWVCG7SLGRDBA" Comment="Межколонное давление в скважине 10Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_10T_mk2_Pv" Type="BOOL" UUID="X6K5FLCZNFMUNJFIS7JAVRDBLA" Comment="Межколонное давление в скважине 10Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_10T_mk3_Pn" Type="BOOL" UUID="2ZDWLXEEE3KUDJJQUIO6W7PUZY" Comment="Межколонное давление в скважине 10Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_10T_mk3_Pv" Type="BOOL" UUID="3P6NLARNJWVULDHHQYKQZTIV7Q" Comment="Межколонное давление в скважине 10Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_10T_Pn" Type="BOOL" UUID="UFXM7JZNJHXU5CJX3SQDO7BH3I" Comment="Температура газа на скважине 10Т пониженная" />
+		<Field Name="Tg_10T_Pv" Type="BOOL" UUID="DIJOF66GCTWULIC465XPMVVICE" Comment="Температура газа на скважине 10Т повышенная" />
+		<Field Name="Zg_10T_Pv" Type="BOOL" UUID="FNNEG7IB7N2UDBHHLYJVCADLWM" Comment="Загазованность на скважине 10Т повышенная" />
+		<Field Name="T_BB_EXZ_11T_Pn" Type="BOOL" UUID="6DSJZWWWW5REFG4VUZN6BU3C3M" Comment="Температура воздуха в ББ ЭХЗ 11Т пониженная" />
+		<Field Name="T_BB_EXZ_11T_Pv" Type="BOOL" UUID="MRJJFWFLUBHEZORWQGLWTBI3JI" Comment="Температура воздуха в ББ ЭХЗ 11Т повышенная" />
+		<Field Name="Pg_11T_t_Pn" Type="BOOL" UUID="RL2FCCTEVUCETFLVOWF4B7RG2A" Comment="Трубное давление в скважине 11Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_11T_t_Pv" Type="BOOL" UUID="GQJC7TXOANFUHI4SNDCUM6YRKQ" Comment="Трубное давление в скважине 11Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_11T_mk1_Pn" Type="BOOL" UUID="WT5TLNRGVMTEBG75ZPJ25Z7WTE" Comment="Межколонное давление в скважине 11Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_11T_mk1_Pv" Type="BOOL" UUID="MTBZZSP7B24EJJ5G7D4WLRDX7M" Comment="Межколонное давление в скважине 11Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_11T_mk2_Pn" Type="BOOL" UUID="H7SAEKNMEHKEJCER3DCZOK2IUU" Comment="Межколонное давление в скважине 11Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_11T_mk2_Pv" Type="BOOL" UUID="NYRVO7DKFROENBJ7XVSXH5JBNE" Comment="Межколонное давление в скважине 11Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_11T_mk3_Pn" Type="BOOL" UUID="RF7T2ETCVQQEHOU7AIIZKWHIKA" Comment="Межколонное давление в скважине 11Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_11T_mk3_Pv" Type="BOOL" UUID="W5XPBHQPUZVUHDENBDDAUBHKJI" Comment="Межколонное давление в скважине 11Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_11T_Pn" Type="BOOL" UUID="HKRIIT2PGF7EPMTJJ2H67INMCY" Comment="Температура газа на скважине 11Т пониженная" />
+		<Field Name="Tg_11T_Pv" Type="BOOL" UUID="H2S73UVZB3WUZNI4W2VRUEHO2Q" Comment="Температура газа на скважине 11Т повышенная" />
+		<Field Name="Zg_11T_Pv" Type="BOOL" UUID="NGRZBNEZ27XU7BQFTO4U3STS2Q" Comment="Загазованность на скважине 11Т повышенная" />
+		<Field Name="T_BB_EXZ_12T_Pn" Type="BOOL" UUID="BLZA6FA5IV3UVK4NGABAAOSCRM" Comment="Температура воздуха в ББ ЭХЗ 12Т пониженная" />
+		<Field Name="T_BB_EXZ_12T_Pv" Type="BOOL" UUID="S22HAGCCQY2EJEDHMSMOIWHN3M" Comment="Температура воздуха в ББ ЭХЗ 12Т повышенная" />
+		<Field Name="Pg_12T_t_Pn" Type="BOOL" UUID="WQS3CZVLLVGEFLQLHLC7OLUYWM" Comment="Трубное давление в скважине 12Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_12T_t_Pv" Type="BOOL" UUID="67JE6FME2QHU3HL4PKODG2LUBQ" Comment="Трубное давление в скважине 12Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_12T_mk1_Pn" Type="BOOL" UUID="7IEN2NVWHHMUFOH5Z4AM2NWNWE" Comment="Межколонное давление в скважине 12Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_12T_mk1_Pv" Type="BOOL" UUID="SJSH7BJH5UWUBNAQWB6OYPFZCQ" Comment="Межколонное давление в скважине 12Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_12T_mk2_Pn" Type="BOOL" UUID="EKNZRZXLBVREPIFEJG5X7MVRKQ" Comment="Межколонное давление в скважине 12Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_12T_mk2_Pv" Type="BOOL" UUID="VSJA5JM4RX3UNCVCLMRIVVA26I" Comment="Межколонное давление в скважине 12Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_12T_mk3_Pn" Type="BOOL" UUID="DE5U7PENEEQUPMQVAFAKWZX4CM" Comment="Межколонное давление в скважине 12Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_12T_mk3_Pv" Type="BOOL" UUID="O62VAXR23GFEBBBYZPPXIFOKSA" Comment="Межколонное давление в скважине 12Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_12T_Pn" Type="BOOL" UUID="ZDEQV2QS7YKUNDD7ABKGTQGFTI" Comment="Температура газа на скважине 12Т пониженная" />
+		<Field Name="Tg_12T_Pv" Type="BOOL" UUID="EX3CW2JRLCZEPPHLB6FXM7H4RU" Comment="Температура газа на скважине 12Т повышенная" />
+		<Field Name="Zg_12T_Pv" Type="BOOL" UUID="NMPGVEVVHRPEBOVDU36JRDONIY" Comment="Загазованность на скважине 12Т повышенная" />
+		<Field Name="T_BB_EXZ_13T_Pn" Type="BOOL" UUID="62VY7GYSEYPUNMQLCZ7GKGP7RY" Comment="Температура воздуха в ББ ЭХЗ 13Т пониженная" />
+		<Field Name="T_BB_EXZ_13T_Pv" Type="BOOL" UUID="UJ2ZH2JLDF3E3JF6NKMAE5N5AI" Comment="Температура воздуха в ББ ЭХЗ 13Т повышенная" />
+		<Field Name="Pg_13T_t_Pn" Type="BOOL" UUID="OYCVICPVTK3U5ME6DAISVEKWWA" Comment="Трубное давление в скважине 13Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_13T_t_Pv" Type="BOOL" UUID="S2K25I7GYYAU7IO3M4S3TWGBZU" Comment="Трубное давление в скважине 13Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_13T_mk1_Pn" Type="BOOL" UUID="4P2CCLFBSI5ENC7YXTKJB4643E" Comment="Межколонное давление в скважине 13Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_13T_mk1_Pv" Type="BOOL" UUID="SM2WHSNY4SSU5MB56JF77MZN5I" Comment="Межколонное давление в скважине 13Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_13T_mk2_Pn" Type="BOOL" UUID="LNBDLJQOLDRENOMPBZ4QQDRUZE" Comment="Межколонное давление в скважине 13Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_13T_mk2_Pv" Type="BOOL" UUID="SYJGOIUZOXRETOVTW2KKUC2ZW4" Comment="Межколонное давление в скважине 13Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_13T_mk3_Pn" Type="BOOL" UUID="IRSB6BCOLEWUJAFK37ORPJU4AY" Comment="Межколонное давление в скважине 13Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_13T_mk3_Pv" Type="BOOL" UUID="MB2HULVMO3MUBJDXX3KOE6UTFY" Comment="Межколонное давление в скважине 13Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_13T_Pn" Type="BOOL" UUID="KNHRHQAAENAUDFWZWEAO46IBPA" Comment="Температура газа на скважине 13Т пониженная" />
+		<Field Name="Tg_13T_Pv" Type="BOOL" UUID="SXX5IRH5IAVEVPZVYFG76CZJQY" Comment="Температура газа на скважине 13Т повышенная" />
+		<Field Name="Zg_13T_Pv" Type="BOOL" UUID="RJ2TDW5SRBGUZEDHFAHXTXIZ4I" Comment="Загазованность на скважине 13Т повышенная" />
+		<Field Name="T_BB_EXZ_14T_Pn" Type="BOOL" UUID="YI2P44K2ZHMUTH5V7XX3427CAY" Comment="Температура воздуха в ББ ЭХЗ 14Т пониженная" />
+		<Field Name="T_BB_EXZ_14T_Pv" Type="BOOL" UUID="V3EKJKWZ53PEREFABLM3KMYYOM" Comment="Температура воздуха в ББ ЭХЗ 14Т повышенная" />
+		<Field Name="Pg_14T_t_Pn" Type="BOOL" UUID="3LSNSCYNFXGENAHBSQVGUQN7W4" Comment="Трубное давление в скважине 14Т (НКТ 114 мм) пониженное" />
+		<Field Name="Pg_14T_t_Pv" Type="BOOL" UUID="64INUKYXS5JU7AYYEVLMQAC22A" Comment="Трубное давление в скважине 14Т (НКТ 114 мм) повышенное" />
+		<Field Name="Pg_14T_mk1_Pn" Type="BOOL" UUID="ZLS3BZNDB7VEVCQWNU4ALXTJVI" Comment="Межколонное давление в скважине 14Т (между колоннами 114-178 мм) пониженное" />
+		<Field Name="Pg_14T_mk1_Pv" Type="BOOL" UUID="LLMH4QAH6HSELDDHXJMJO32A5U" Comment="Межколонное давление в скважине 14Т (между колоннами 114-178 мм) повышенное" />
+		<Field Name="Pg_14T_mk2_Pn" Type="BOOL" UUID="CYAIDVC53NZUZK3VJLVAJKCFMY" Comment="Межколонное давление в скважине 14Т (между колоннами 178-245 мм) пониженное" />
+		<Field Name="Pg_14T_mk2_Pv" Type="BOOL" UUID="VKZCLDTCMC6EVH6E4TETX4AH2Q" Comment="Межколонное давление в скважине 14Т (между колоннами 178-245 мм) повышенное" />
+		<Field Name="Pg_14T_mk3_Pn" Type="BOOL" UUID="QV7H545KY2LE3KIJQNY56H44ZQ" Comment="Межколонное давление в скважине 14Т (между колоннами 245-324 мм) пониженное" />
+		<Field Name="Pg_14T_mk3_Pv" Type="BOOL" UUID="7TPAUNRJDCYULLLF5PQEO7R5QM" Comment="Межколонное давление в скважине 14Т (между колоннами 245-324 мм) повышенное" />
+		<Field Name="Tg_14T_Pn" Type="BOOL" UUID="LHHA7AEPSI4UXMD2SNNDIRLUME" Comment="Температура газа на скважине 14Т пониженная" />
+		<Field Name="Tg_14T_Pv" Type="BOOL" UUID="BGAWCWODYHJE3NLSLPPB4Y64SQ" Comment="Температура газа на скважине 14Т повышенная" />
+		<Field Name="Zg_14T_Pv" Type="BOOL" UUID="7ORPZ2P3RFBULJWCQDLRIU4EMI" Comment="Загазованность на скважине 14Т повышенная" />
+		<Field Name="ev_Qmg_shl_1T_2T_Pn" Type="BOOL" UUID="K6HRSEZECGEE5N3PFZRS47U5TY" Comment="Мгновенный расход газа на шлейфе 1Т-2Т пониженный" />
+		<Field Name="ev_Qmg_shl_1T_2T_Pv" Type="BOOL" UUID="XUHDYCUSFDMU3KPPGIKQDFGLEE" Comment="Мгновенный расход газа на шлейфе 1Т-2Т повышенный" />
+		<Field Name="ev_Qmg_shl_3T_5T_Pn" Type="BOOL" UUID="LN6OYUT3XIVEHP4QF2CODJRILM" Comment="Мгновенный расход газа на шлейфе 3Т-5Т пониженный" />
+		<Field Name="ev_Qmg_shl_3T_5T_Pv" Type="BOOL" UUID="ZWU6WT4PVESUVNMRMEH2A272OA" Comment="Мгновенный расход газа на шлейфе 3Т-5Т повышенный" />
+		<Field Name="ev_Qmg_shl_6T_14T_Pn" Type="BOOL" UUID="WDZV3PEI4TFUTDU5WXDYMOAXN4" Comment="Мгновенный расход газа на шлейфе 6Т-14Т пониженный" />
+		<Field Name="ev_Qmg_shl_6T_14T_Pv" Type="BOOL" UUID="LXDRMBRB5RMELEXYDY4QH7HFBM" Comment="Мгновенный расход газа на шлейфе 6Т-14Т повышенный" />
+		<Field Name="Pg_6T_v" Type="BOOL" UUID="OSZICXBX3PNUPDZGCFLU2RLRW4" Comment="Давление газа в трубе эксплуатационной скважины 6Т высокое" />
+		<Field Name="Pg_7T_v" Type="BOOL" UUID="MHLGBHA53IKEJNJX5I6N7M4V6Q" Comment="Давление газа в трубе эксплуатационной скважины 7Т высокое" />
+		<Field Name="Pg_8T_v" Type="BOOL" UUID="IOQIGIK73U7ULKVOP2ROXNEEEQ" Comment="Давление газа в трубе эксплуатационной скважины 8Т высокое" />
+		<Field Name="Pg_9T_v" Type="BOOL" UUID="Y54MYJLOISTU7LON6VYK2VJCVY" Comment="Давление газа в трубе эксплуатационной скважины 9Т высокое" />
+		<Field Name="Pg_10T_v" Type="BOOL" UUID="2UGXRHFST4HUVIGKIVJN52AGOI" Comment="Давление газа в трубе эксплуатационной скважины 10Т высокое" />
+		<Field Name="Pg_11T_v" Type="BOOL" UUID="CU7JON75Q7IEXHO6JESKN3CJBE" Comment="Давление газа в трубе эксплуатационной скважины 11Т высокое" />
+		<Field Name="Pg_12T_v" Type="BOOL" UUID="VB7ENY3KI53ELJTDA5X66Y6UHU" Comment="Давление газа в трубе эксплуатационной скважины 12Т высокое" />
+		<Field Name="Pg_13T_v" Type="BOOL" UUID="UEGRLGI5EPFURCSU66AYEHPLMI" Comment="Давление газа в трубе эксплуатационной скважины 13Т высокое" />
+		<Field Name="Pg_14T_v" Type="BOOL" UUID="DX7UMMUENH4E5PRGMLGH6FXV4Y" Comment="Давление газа в трубе эксплуатационной скважины 14Т высокое" />
+		<Field Name="Vlaga_BB_TSK_v" Type="BOOL" UUID="5WFB4IF3PGMUXGAZT6X4VBXH2Y" Comment="Влажность в ББ САУ ТСк ПХГ повышенная" />
+		<Field Name="Dver_BB_TSK_open" Type="BOOL" UUID="ZYD4R3O7UCNEHGXEPR77HA2K3I" Comment="Дверь ББ САУ ТСк ПХГ открыта" />
+		<Field Name="Q_AC380_TSK_OF" Type="BOOL" UUID="SJQTCOOGS7OUVHXASS7RTHVS3E" Comment="Ввод 380VAC отключен (ББ САУ ТСк)" />
+		<Field Name="Q_AC380_TSK_AOF" Type="BOOL" UUID="7QF3IENKAAVUVE6LMEHQMS4LWQ" Comment="Ввод 380 VAC аварийно отключен (ББ САУ ТСк)" />
+		<Field Name="UPS_TSK_Bad" Type="BOOL" UUID="VWXWYJ2JXWOUXMAVSBT33E3FKA" Comment="ИБП неисправность (ББ САУ ТСк)" />
+		<Field Name="Q_AC220_6T_OF" Type="BOOL" UUID="BN2HXSHIYUFU3CXBTDTECDYY7A" Comment="6Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_6T_AOF" Type="BOOL" UUID="CY6H6ZGIOYPEZARIBW2EPIFO5A" Comment="6Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_6T_Bad" Type="BOOL" UUID="ACBDMG2NLZEETO46R6NNHFB3RE" Comment="6Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_7T_OF" Type="BOOL" UUID="L4IGDTGTRQLEDAMNO7HTNKOSMM" Comment="7Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_7T_AOF" Type="BOOL" UUID="CSHNFFGEJIOUDOWSVOJT7WGK4M" Comment="7Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_7T_Bad" Type="BOOL" UUID="BTJ3V74NVXNURFOIZP7NHZCE5I" Comment="7Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_8T_OF" Type="BOOL" UUID="PM62VUBUGK5UHHV7VODGRMXXY4" Comment="8Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_8T_AOF" Type="BOOL" UUID="THXDTAQZ7XXEPOHWTZEGODETHE" Comment="8Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_8T_Bad" Type="BOOL" UUID="BPFEJDXCQL3UHMNWGQEIY7UOI4" Comment="8Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_9T_OF" Type="BOOL" UUID="75SIDXZZKT4E5NJEQ5UBNATWYA" Comment="9Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_9T_AOF" Type="BOOL" UUID="UURNI2AI2YDUVMZJRUTQIRDG7E" Comment="9Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_9T_Bad" Type="BOOL" UUID="V6XRCFBO6MIUPGFAOKBQL2OOJ4" Comment="9Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_10T_OF" Type="BOOL" UUID="FVUFBUWYLMNURHJBAPJZV7OQB4" Comment="10Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_10T_AOF" Type="BOOL" UUID="GHHLMWP34LWEXJPMMPSBPMDE6Q" Comment="10Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_10T_Bad" Type="BOOL" UUID="75I7D723CBNUZGQ7PEGKGYK3RU" Comment="10Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_11T_OF" Type="BOOL" UUID="KS2OIGLZERDULNIXZUVUYRJFRI" Comment="11Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_11T_AOF" Type="BOOL" UUID="OVIIZDFFAGOUTIOJV5DH3CTQFU" Comment="11Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_11T_Bad" Type="BOOL" UUID="ASLLNZT2VWIUXMOHZXBIWIDE7U" Comment="11Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_12T_OF" Type="BOOL" UUID="KDHRFAWWGANURI3DF2YP4X5HSQ" Comment="12Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_12T_AOF" Type="BOOL" UUID="FHHSBREXZX2U3LNV2OA3ADO6PQ" Comment="12Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_12T_Bad" Type="BOOL" UUID="NLODTD45MXWEVKKKHIZOP7EQKQ" Comment="12Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_13T_OF" Type="BOOL" UUID="L47TDWFE77JEVDJPNRMX6YQCSQ" Comment="13Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_13T_AOF" Type="BOOL" UUID="3Y6JU2RPMWYUZDNAJAND6OQY6Q" Comment="13Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_13T_Bad" Type="BOOL" UUID="DSDEJRCAFIVU7OKDFBUSHF2WKY" Comment="13Т-1 ИБП неисправность" />
+		<Field Name="Q_AC220_14T_OF" Type="BOOL" UUID="66ZXUHZ63NYEVGDF3NBOWEXCUE" Comment="14Т-1 Ввод 220VAC отключен" />
+		<Field Name="Q_AC220_14T_AOF" Type="BOOL" UUID="6I2XT4KITDXUHOHQJHAOC5CDNI" Comment="14Т-1 Ввод 220 VAC аварийно отключен" />
+		<Field Name="UPS_14T_Bad" Type="BOOL" UUID="X55TSI7VXPRUFH26ZUR7PEORAU" Comment="14Т-1 ИБП неисправность" />
+		<Field Name="Chk_AC220osn_SAU" Type="BOOL" UUID="MSIYQJLCA25URPYAGIEGTUMZYM" Comment="Нет питания на осн. входе САУ ~220 В" />
+		<Field Name="Chk_AC220rez_SAU" Type="BOOL" UUID="BPCW3UCRFKXEJG2PKB2DGZLMVM" Comment="Нет питания на рез. входе САУ ~220 В" />
+		<Field Name="QF_ON" Type="BOOL" UUID="SLVNXVL7WIBERLOFSQ2Y7CQLFE" Comment="Автоматы питания отключены" />
+		<Field Name="Chk_razr" Type="BOOL" UUID="L5UYR4VFKYVU5GTXB4T6ERSDAI" Comment="Нет исправности разрядников" />
+		<Field Name="Chk_UPS_DC24" Type="BOOL" UUID="WLQGUEPLJAYEFD2W35EIKYCGFY" Comment="Нет питания на выходе ИБП =24 В" />
+		<Field Name="DC24osn_Int_ok" Type="BOOL" UUID="PLXYX6XLCUEENJ3WJQB6P3PK5Y" Comment="Неисправность осн. ИП =24В внутренних цепей" />
+		<Field Name="DC24rez_Int_ok" Type="BOOL" UUID="CXFYW5577NZURPXEBUT7HE3UGY" Comment="Неисправность рез. ИП =24В внутренних цепей" />
+		<Field Name="DC24osn_Ext1_ok" Type="BOOL" UUID="O2746DPKNZPE7FMPSMJ55QBF7I" Comment="Неисправность осн. ИП =24В внешних цепей (1)" />
+		<Field Name="DC24rez_Ext1_ok" Type="BOOL" UUID="NZGEVRD5GQBUPMD5ZTEGBUYXCM" Comment="Неисправность рез. ИП =24В внешних цепей (1)" />
+		<Field Name="DC24osn_Ext2_ok" Type="BOOL" UUID="IXCV6XIZGT7EXJB2KTFURMUC4A" Comment="Неисправность осн. ИП =24В внешних цепей (2)" />
+		<Field Name="DC24rez_Ext2_ok" Type="BOOL" UUID="OEK5QM6TY33U5NJNXZGXJC6SAA" Comment="Неисправность рез. ИП =24В внешних цепей (2)" />
+		<Field Name="AO_KC" Type="BOOL" UUID="S5G2ZXSXGSVE5KULYHQA2TIYF4" Comment="Останов от цеховой системы" />
+	</Fields>
+</Type>

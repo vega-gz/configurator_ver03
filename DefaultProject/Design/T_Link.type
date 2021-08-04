@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Link" Kind="Struct" UUID="99B03A2B42AC7ECC8D450BB4B66CE709">
+	<Fields>
+		<Field Name="GPA1" Type="BOOL" UUID="FFA16327462AECD3224821A06DC8C4D3" Comment="1 - нет связи" />
+		<Field Name="GPA2" Type="BOOL" UUID="731346AC4504E9F6F903008FE62CE17C" Comment="1 - нет связи" />
+		<Field Name="GPA3" Type="BOOL" UUID="752F01DE4EE3427988C37FA94645F24C" Comment="1 - нет связи" />
+		<Field Name="GPA4" Type="BOOL" UUID="1474CF3A4DD90EB41B9DADA9B7B17262" Comment="1 - нет связи" />
+		<Field Name="GPA1_Siemens" Type="BOOL" UUID="3BC94B8E4AAF7E3B957AFBA0F8C6F4F3" Comment="1 - нет связи" />
+		<Field Name="GPA2_Siemens" Type="BOOL" UUID="6CFE54A140AFF6C93F22EA852DBA4CC6" Comment="1 - нет связи" />
+		<Field Name="GPA3_Siemens" Type="BOOL" UUID="C9D8018C4F3C1930D9E239BCC9FAEABF" Comment="1 - нет связи" />
+		<Field Name="GPA4_Siemens" Type="BOOL" UUID="2593DD62477E3FD2C56833B4017684D2" Comment="1 - нет связи" />
+		<Field Name="Server1" Type="BOOL" UUID="BD761DA248D1727978E9E7AC2A9ED6AC" Comment="1 - нет связи" />
+		<Field Name="Server2" Type="BOOL" UUID="BD6AE90345F4C83F734A498D66810D65" Comment="1 - нет связи" />
+		<Field Name="GPA1_NKU" Type="BOOL" UUID="608FD01B46EFA419279690B924B90D07" Comment="1 - нет связи" />
+		<Field Name="GPA2_NKU" Type="BOOL" UUID="712CCB5C4E5B3784EE7F589D344F9DBA" Comment="1 - нет связи" />
+		<Field Name="GPA3_NKU" Type="BOOL" UUID="475ABCC8472BC3AC883EBCB2A6D06737" Comment="1 - нет связи" />
+		<Field Name="GPA4_NKU" Type="BOOL" UUID="DF36F311454273C3C6F50A8D503BDF4B" Comment="1 - нет связи" />
+		<Field Name="GPA1_NKU1_AVO" Type="BOOL" UUID="F52E49F3474C25E2E1B15F86F11BA66E" Comment="1 - нет связи" />
+		<Field Name="GPA2_NKU1_AVO" Type="BOOL" UUID="956CE34D484B554E03CD86A7C1510F91" Comment="1 - нет связи" />
+		<Field Name="GPA3_NKU1_AVO" Type="BOOL" UUID="AC57D40A4246B4517B5125BEF1507968" Comment="1 - нет связи" />
+		<Field Name="GPA4_NKU1_AVO" Type="BOOL" UUID="7F1487C546A9FB3A5426C580EBBF716E" Comment="1 - нет связи" />
+		<Field Name="GPA1_NKU2_AVO" Type="BOOL" UUID="C1BE24FA41EAC9DC157DCFB08356048D" Comment="1 - нет связи" />
+		<Field Name="GPA2_NKU2_AVO" Type="BOOL" UUID="AE9C1E2E447BDF4E37D695BF5018EAC0" Comment="1 - нет связи" />
+		<Field Name="GPA3_NKU2_AVO" Type="BOOL" UUID="1616AE244FD30254A8F69FAEE72C594C" Comment="1 - нет связи" />
+		<Field Name="GPA4_NKU2_AVO" Type="BOOL" UUID="1A972E04401A901704813DAD8242C31D" Comment="1 - нет связи" />
+		<Field Name="Server1_N" Type="BOOL" UUID="DC84C5714BAA1029AD5A3888B9309ED5" />
+		<Field Name="Server2_N" Type="BOOL" UUID="4533888C4F57F41583BEECA327168144" />
+	</Fields>
+</Type>

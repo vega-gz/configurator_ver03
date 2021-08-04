@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_mb_AI_ToHMI" Kind="Struct" Comment="устанавливаются программой обработки канала" UUID="70F8496D4350C534A505F1A2AD528C9C">
+    <Fields>
+        <Field Name="PV" Type="REAL" UUID="19F27C8242D7A36082010591B7CF4F94" Comment="значение для САУ. Рассчитывается из  measure, Manual_Target с учётом неисправностей и фильтрации" />
+        <Field Name="fault_common" Type="BOOL" UUID="91BA71324E5A549D017A04ADEA8F79D0" Comment="обобщённая неисправность. Образуется по «ИЛИ» от break,up_scale,down_scale,ROC,settingErr" />
+        <Field Name="break" Type="BOOL" UUID="3C4E50D84C86F18E26AB11B82F29366B" Comment="обрыв канала" />
+        <Field Name="up_scale" Type="BOOL" UUID="0D6DA34841CAD4EC78135AB63D380E46" Comment="выход за верхний зашкал" />
+        <Field Name="down_scale" Type="BOOL" UUID="5B8683E24E32517CC4004890703E4F48" Comment="выход за нижний зашкал" />
+        <Field Name="settingErr" Type="BOOL" UUID="18C0BED74B6CD173D937BCB0E13A9E0A" Comment="ошибка задания настроек – несоответствие допустимым значениям" />
+        <Field Name="manual" Type="BOOL" UUID="4C50A79642D731899CE3CF85880FAFF1" Comment="канал в дист.упр." />
+        <Field Name="as" Type="BOOL" UUID="301C81C44EE468B35ADAD0AC9837E78B" Comment="отображать красным. Выставляется при выходе канала за аварийную уставку." />
+        <Field Name="os" Type="BOOL" UUID="E1F11EA3422912180948FB97CB1458A7" Comment="отображать фиолетовым. Выставляется при выходе канала за ограничительную уставку." />
+        <Field Name="ps" Type="BOOL" UUID="0F59F94740C73B2018ED6297FB25E7C3" Comment="отображать жёлтым. Выставляется при выходе канала за предупредительную уставку." />
+        <Field Name="criticalFault" Type="BOOL" UUID="456B68894990B62206AC6FAC914AC64C" Comment="Критическая ошибка обработки" />
+        <Field Name="hint" Type="STRING" UUID="B7564C8A49C1B3312AED55847423C043" />
+    </Fields>
+</Type>

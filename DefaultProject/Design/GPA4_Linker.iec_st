@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="6Y6EOWGSX7NEHB53FFYWHUWLSQ" Name="GPA4_Linker" Period="100" PutDataAtEndOfCycle="true">
+    <Variables>
+        <Variable UUID="BUTFWI4ENAJURKTLZ3F3XVBSBA" Name="tmr_s" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+        <Variable UUID="LGHGCAGHSLLEHON2OHI3FJ2QKU" Name="tmr_r" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+        <Variable UUID="ZF7CMXUKPJIEPALMYLYVMCWTTQ" Name="wasLink" Type="BOOL" Usage="internal" />
+        <Variable UUID="IWVTMREI45XUPEGKAGI7GVKLVM" Name="tmr_rsr" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[// ----- Данные, направленные из контроллера -----
+GPA4_AI_ToHMI 		    := GPA_AI_ToHMI;
+GPA4_AO_DRV           := GPA_AO_DRV;
+GPA4_AO               := GPA_AO;
+GPA4_AO_ToHMI         := GPA_AO_ToHMI;
+GPA4_DI               := GPA_DI;
+GPA4_DI_ToHMI         := GPA_DI_ToHMI;
+GPA4_DO_DRV           := GPA_DO_DRV;
+GPA4_DO               := GPA_DO;
+GPA4_DO_ToHMI         := GPA_DO_ToHMI;
+GPA4_FR_AI_ToHMI      := GPA_FR_AI_ToHMI;
+GPA4_NKU_mb_AI_ToHMI  := NKU_AI_ToHMI;
+GPA4_NKU_mb_DI        := NKU1_DI;
+GPA4_NKU_mb_DI_ToHMI  := NKU1_DI_ToHMI;
+GPA4_NKU2_mb_DI       := NKU2_DI;
+GPA4_NKU2_mb_DI_ToHMI := NKU2_DI_ToHMI;
+GPA4_NKU_mb_DO        := NKU_DO;
+GPA4_NKU_mb_DO_DRV    := NKU_DO_DRV;
+GPA4_NKU_mb_DO_ToHMI  := NKU_DO_ToHMI;
+GPA4_CalcPar          := GPA_CalcPar;
+GPA4_FirstOutIndex    := GPA_FirstOutIndex;
+GPA4_ANB              := GPA_ANB;
+GPA4_AS               := GPA_AS;
+GPA4_PS               := GPA_PS;
+GPA4_Mode             := GPA_Mode;
+GPA4_SS               := GPA_SS;
+GPA4_Sound            := GPA_Sound;
+GPA4_TS               := GPA_TS;
+GPA4_PPU_HR           := GPA_PPU_HR;
+GPA4_PPU_GR           := GPA_PPU_GR;
+GPA4_TMR              := GPA_TMR;
+GPA4_DLT              := GPA_DLT;
+GPA4_DI_DRV           := GPA_DI_DRV;
+GPA4_NKU_mb_DI_DRV    := NKU1_DI_DRV;
+GPA4_NKU2_mb_DI_DRV   := NKU2_DI_DRV;
+KC_GPA4_CalcPar		 := GPA_KC_CalcPar;
+KC_GPA4				    := GPA_KC;
+GPA4_DSN              := GPA_DSN;
+//GPA4_RSR              := GPA_RSR;
+GPA4_AVO_mb_DI_DRV	 := AVO_DI_DRV;
+GPA4_AVO_mb_DI			 := AVO_DI;
+GPA4_AVO_mb_DI_ToHMI	 := AVO_DI_ToHMI;
+GPA4_AVO_mb_DO_DRV	 := AVO_DO_DRV;
+GPA4_AVO_mb_DO    	 := AVO_DO;
+GPA4_AVO_mb_DO_ToHMI	 := AVO_DO_ToHMI;
+GPA4_EA1_mb_AI_ToHMI  := EA1_AI_ToHMI;
+GPA4_EA2_mb_AI_ToHMI  := EA2_AI_ToHMI;
+GPA4_EA3_mb_AI_ToHMI  := EA3_AI_ToHMI;
+GPA4_EA4_mb_AI_ToHMI  := EA4_AI_ToHMI;
+GPA4_EA5_mb_AI_ToHMI  := EA5_AI_ToHMI;
+GPA4_FG_mb_AI_ToHMI	 := FG_AI_ToHMI;
+GPA4_FTG_mb_AI_ToHMI	:= FTG_AI_ToHMI;
+GPA4_SaveRes			:= GPA_SaveRes;
+GPA4_FWL_mb_AI_ToHMI	:= GPA_FWL_mb_AI_ToHMI;	
+				
+tmr_s(IN:= not tmr_s.Q, PT:= T#1s); //1s
+if tmr_s.Q then 
+	GPA4_Ust := GPA_Ust; //передача уставок
+	GPA4_TRG := GPA_TRG;
+   GPA4_APR := GPA_APR;
+	GPA4_Tune := Tunes;
+	GPA4_AIM := GPA_AIM;
+//	GPA4_BTN := GPA_BTN; //для сброса кнопок из алгоритма- сброс кнопок вверху по таймеру (иначе кнопка нестабильно работает)
+	GPA4_Tune_FR := GPA_Tune_FR;
+	GPA4_Curve_FR := GPA_Curve_FR;
+//	GPA4_RSR      := GPA_RSR;
+end_if;
+
+// ----- Данные, направленные в контроллер -----
+GPA_AI_FromHMI        := GPA4_AI_FromHMI;
+GPA_AO_FromHMI        := GPA4_AO_FromHMI;
+GPA_DI_FromHMI        := GPA4_DI_FromHMI;
+GPA_DO_FromHMI        := GPA4_DO_FromHMI;
+GPA_FR_AI_FromHMI     := GPA4_FR_AI_FromHMI;
+NKU_AI_FromHMI        := GPA4_NKU_mb_AI_FromHMI;
+NKU1_DI_FromHMI       := GPA4_NKU_mb_DI_FromHMI;
+NKU2_DI_FromHMI       := GPA4_NKU2_mb_DI_FromHMI;
+NKU_DO_FromHMI        := GPA4_NKU_mb_DO_FromHMI;
+GPA_BTN               := GPA4_BTN;
+Shop_GPA			 	:= Shop_GPA4;
+AVO_DI_FromHMI			 := GPA4_AVO_mb_DI_FromHMI;
+AVO_DO_FromHMI			 := GPA4_AVO_mb_DO_FromHMI;
+EA1_AI_FromHMI			 := GPA4_EA1_mb_AI_FromHMI;
+EA2_AI_FromHMI			 := GPA4_EA2_mb_AI_FromHMI;
+EA3_AI_FromHMI			 := GPA4_EA3_mb_AI_FromHMI;
+EA4_AI_FromHMI			 := GPA4_EA4_mb_AI_FromHMI;
+EA5_AI_FromHMI			 := GPA4_EA5_mb_AI_FromHMI;
+FG_AI_FromHMI			 := GPA4_FG_mb_AI_FromHMI;		
+FTG_AI_FromHMI			 := GPA4_FTG_mb_AI_FromHMI;	
+GPA_FWL_mb_AI_FromHMI	:= GPA4_FWL_mb_AI_FromHMI;
+
+wasLink := GPA4_SS.CPU_HeartBit or wasLink;
+tmr_r(IN:= wasLink, PT:= T#2s);
+if tmr_r.Q then 
+	GPA_Ust := GPA4_Ust; // чтение уставок
+	Tunes := GPA4_Tune; //настройки
+	GPA_TRG.TRK_DU := GPA4_TRG.TRK_DU;
+	GPA_APR.APK_DU := GPA4_APR.APK_DU;
+	GPA_AIM.KLR1_DU := GPA4_AIM.KLR1_DU;
+	GPA_AIM.KLR2_DU := GPA4_AIM.KLR2_DU;
+	GPA_Tune_FR := GPA4_Tune_FR;
+	GPA_Curve_FR := GPA4_Curve_FR;
+end_if; 
+
+//запись данных в контроллер по флагу (флаг формируется в HMI)
+if GPA4_CopyParam then
+	GPA_APR.SetModeK := GPA4_APR.SetModeK;
+	GPA_TRG.SetNst := GPA4_TRG.SetNst;
+	GPA_TRG.SetNvd := GPA4_TRG.SetNvd;	
+	GPA_TRG.TRK_SetDU := GPA4_TRG.TRK_SetDU ;
+	GPA_APR.APK_SetDU := GPA4_APR.APK_SetDU ;
+	GPA_AIM.MOD1_SetDU := GPA4_AIM.MOD1_SetDU;
+	GPA_AIM.MOD2_SetDU := GPA4_AIM.MOD2_SetDU;
+	GPA_AIM.MON1_SetDU := GPA4_AIM.MON1_SetDU;
+	GPA_AIM.MON2_SetDU := GPA4_AIM.MON2_SetDU;
+	GPA_AIM.MOR1_SetDU := GPA4_AIM.MOR1_SetDU;
+	GPA_AIM.MOR2_SetDU := GPA4_AIM.MOR2_SetDU;
+	GPA_AIM.MOR3_SetDU := GPA4_AIM.MOR3_SetDU;
+	GPA_AIM.MOR4_SetDU := GPA4_AIM.MOR4_SetDU;
+	GPA_AIM.Mode_AVOG1 := GPA4_AIM.Mode_AVOG1;
+	GPA_AIM.Mode_AVOG2 := GPA4_AIM.Mode_AVOG2;
+	GPA_AIM.KLR1_SetDU := GPA4_AIM.KLR1_SetDU;
+	GPA_AIM.KLR2_SetDU := GPA4_AIM.KLR2_SetDU;
+end_if;
+
+//Запись ресурсов 
+tmr_rsr(IN:= GPA_SaveRes.ReadData , PT:= T#1s);
+if GPA_SaveRes.ReadData and not tmr_rsr.Q then GPA_RSR := GPA4_RSR; 
+	else GPA4_RSR := GPA_RSR; 	
+end_if;
+
+// ------------- Исполнительные -------------------
+TransferAM(GPA4_AM.Kr1, GPA_AM.Kr1, tmr_s.Q);
+TransferAM(GPA4_AM.Kr2, GPA_AM.Kr2, tmr_s.Q);
+TransferAM(GPA4_AM.Kr4, GPA_AM.Kr4, tmr_s.Q);
+TransferAM(GPA4_AM.Kr5, GPA_AM.Kr5, tmr_s.Q);
+TransferAM(GPA4_AM.Kr9, GPA_AM.Kr9, tmr_s.Q);
+TransferAM(GPA4_AM.Kr12, GPA_AM.Kr12, tmr_s.Q);
+TransferAM(GPA4_AM.Kr6, GPA_AM.Kr6, tmr_s.Q);
+TransferAM(GPA4_AM.ZsPV, GPA_AM.ZsPV, tmr_s.Q);
+TransferAM(GPA4_AM.SK, GPA_AM.SK, tmr_s.Q);
+TransferAM(GPA4_AM.POK, GPA_AM.POK, tmr_s.Q);
+TransferAM(GPA4_AM.SPV, GPA_AM.SPV, tmr_s.Q);
+TransferAM(GPA4_AM.U_SPV, GPA_AM.U_SPV, tmr_s.Q);
+TransferAM(GPA4_AM.RPKC1, GPA_AM.RPKC1, tmr_s.Q);
+TransferAM(GPA4_AM.RPKC2, GPA_AM.RPKC2, tmr_s.Q);
+TransferAM(GPA4_AM.RPKC3, GPA_AM.RPKC3, tmr_s.Q);
+TransferAM(GPA4_AM.RPKC4, GPA_AM.RPKC4, tmr_s.Q);
+TransferAM(GPA4_AM.RPKC5, GPA_AM.RPKC5, tmr_s.Q);
+TransferAM(GPA4_AM.RPKC6, GPA_AM.RPKC6, tmr_s.Q);
+TransferAM(GPA4_AM.KE5, GPA_AM.KE5, tmr_s.Q);
+TransferAM(GPA4_AM.ES, GPA_AM.ES, tmr_s.Q);
+TransferAM(GPA4_AM.KLR1, GPA_AM.KLR1, tmr_s.Q);
+TransferAM(GPA4_AM.KLR2, GPA_AM.KLR2, tmr_s.Q);
+TransferAM(GPA4_AM.KE1_BFTG, GPA_AM.KE1_BFTG, tmr_s.Q);
+TransferAM(GPA4_AM.KE2_BFTG, GPA_AM.KE2_BFTG, tmr_s.Q);
+TransferAM(GPA4_AM.KE3_1, GPA_AM.KE3_1, tmr_s.Q);
+TransferAM(GPA4_AM.KE3_2, GPA_AM.KE3_2, tmr_s.Q);
+TransferAM(GPA4_AM.KE3_3, GPA_AM.KE3_3, tmr_s.Q);
+TransferAM(GPA4_AM.KPE1, GPA_AM.KPE1, tmr_s.Q);
+TransferAM(GPA4_AM.KPE2, GPA_AM.KPE2, tmr_s.Q);
+TransferAM(GPA4_AM.KPE3, GPA_AM.KPE3, tmr_s.Q);
+TransferAM(GPA4_AM.ZsZO, GPA_AM.ZsZO, tmr_s.Q);
+TransferAM(GPA4_AM.KOMD, GPA_AM.KOMD, tmr_s.Q);
+TransferAM(GPA4_AM.KPMD, GPA_AM.KPMD, tmr_s.Q);
+TransferAM(GPA4_AM.PNSD, GPA_AM.PNSD, tmr_s.Q);
+TransferAM(GPA4_AM.PNSN, GPA_AM.PNSN, tmr_s.Q);
+TransferAM(GPA4_AM.PNSR, GPA_AM.PNSR, tmr_s.Q);
+TransferAM(GPA4_AM.CNR, GPA_AM.CNR, tmr_s.Q);
+TransferAM(GPA4_AM.VOD1, GPA_AM.VOD1, tmr_s.Q);
+TransferAM(GPA4_AM.VOD2, GPA_AM.VOD2, tmr_s.Q);
+TransferAM(GPA4_AM.VVA_ang, GPA_AM.VVA_ang, tmr_s.Q);
+TransferAM(GPA4_AM.VOT1, GPA_AM.VOT1, tmr_s.Q);
+TransferAM(GPA4_AM.VOT2, GPA_AM.VOT2, tmr_s.Q);
+TransferAM(GPA4_AM.EN_OD, GPA_AM.EN_OD, tmr_s.Q);
+TransferAM(GPA4_AM.CNVO, GPA_AM.CNVO, tmr_s.Q);
+TransferAM(GPA4_AM.CNVO_UPP, GPA_AM.CNVO_UPP, tmr_s.Q);
+TransferAM(GPA4_AM.CNSD, GPA_AM.CNSD, tmr_s.Q);
+TransferAM(GPA4_AM.EN13_Ukr, GPA_AM.EN13_Ukr, tmr_s.Q);
+TransferAM(GPA4_AM.EN46_Ukr, GPA_AM.EN46_Ukr, tmr_s.Q);
+TransferAM(GPA4_AM.EN79_Ukr, GPA_AM.EN79_Ukr, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG1_Vn1, GPA_AM.AVOG1_Vn1, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG1_Vn1_UPP, GPA_AM.AVOG1_Vn1_UPP, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG1_Vn2, GPA_AM.AVOG1_Vn2, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG1_Vn2_UPP, GPA_AM.AVOG1_Vn2_UPP, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG1_Vn3, GPA_AM.AVOG1_Vn3, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG1_Vn3_UPP, GPA_AM.AVOG1_Vn3_UPP, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG2_Vn1, GPA_AM.AVOG2_Vn1, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG2_Vn1_UPP, GPA_AM.AVOG2_Vn1_UPP, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG2_Vn2, GPA_AM.AVOG2_Vn2, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG2_Vn2_UPP, GPA_AM.AVOG2_Vn2_UPP, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG2_Vn3, GPA_AM.AVOG2_Vn3, tmr_s.Q);
+TransferAM(GPA4_AM.AVOG2_Vn3_UPP, GPA_AM.AVOG2_Vn3_UPP, tmr_s.Q);
+TransferAM(GPA4_AM.KDMN, GPA_AM.KDMN, tmr_s.Q);
+TransferAM(GPA4_AM.KPPMN, GPA_AM.KPPMN, tmr_s.Q);
+TransferAM(GPA4_AM.KPMN, GPA_AM.KPMN, tmr_s.Q);
+TransferAM(GPA4_AM.TEN_Vlagomer, GPA_AM.TEN_Vlagomer, tmr_s.Q);
+TransferAM(GPA4_AM.KDML, GPA_AM.KDML, tmr_s.Q);
+TransferAM(GPA4_AM.KBMN, GPA_AM.KBMN, tmr_s.Q);
+TransferAM(GPA4_AM.Vk_MON, GPA_AM.Vk_MON, tmr_s.Q);
+TransferAM(GPA4_AM.TEN_MON, GPA_AM.TEN_MON, tmr_s.Q);
+TransferAM(GPA4_AM.Vn1_MON, GPA_AM.Vn1_MON, tmr_s.Q);
+TransferAM(GPA4_AM.Vn2_MON, GPA_AM.Vn2_MON, tmr_s.Q);
+TransferAM(GPA4_AM.Vk1_MOR, GPA_AM.Vk1_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.TEN1_MOR, GPA_AM.TEN1_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.Vn1_MOR, GPA_AM.Vn1_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.Vn2_MOR, GPA_AM.Vn2_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.Vn3_MOR, GPA_AM.Vn3_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.Vn4_MOR, GPA_AM.Vn4_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.Vk_MOD, GPA_AM.Vk_MOD, tmr_s.Q);
+TransferAM(GPA4_AM.TEN_MOD, GPA_AM.TEN_MOD, tmr_s.Q);
+TransferAM(GPA4_AM.Vn1_MOD, GPA_AM.Vn1_MOD, tmr_s.Q);
+TransferAM(GPA4_AM.Vn2_MOD, GPA_AM.Vn2_MOD, tmr_s.Q);
+TransferAM(GPA4_AM.EK1_ETO, GPA_AM.EK1_ETO, tmr_s.Q);
+TransferAM(GPA4_AM.EK2_ETO, GPA_AM.EK2_ETO, tmr_s.Q);
+TransferAM(GPA4_AM.EK3_ETO, GPA_AM.EK3_ETO, tmr_s.Q);
+TransferAM(GPA4_AM.Vk2_MOR, GPA_AM.Vk2_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.TEN2_MOR, GPA_AM.TEN2_MOR, tmr_s.Q);
+TransferAM(GPA4_AM.EK_OPT, GPA_AM.EK_OPT, tmr_s.Q);
+TransferAM(GPA4_AM.TEN_MBD, GPA_AM.TEN_MBD, tmr_s.Q);
+TransferAM(GPA4_AM.VPU, GPA_AM.VPU, tmr_s.Q);
+TransferAM(GPA4_AM.Vn_ang, GPA_AM.Vn_ang, tmr_s.Q);
+TransferAM(GPA4_AM.Cooler_VON_Slow, GPA_AM.Cooler_VON_Slow, tmr_s.Q);
+TransferAM(GPA4_AM.Cooler_VON_Fast, GPA_AM.Cooler_VON_Fast, tmr_s.Q);
+//TransferAM(GPA4_AM.KVRN, GPA_AM.KVRN, tmr_s.Q);
+TransferAM(GPA4_AM.U_KLR1, GPA_AM.U_KLR1, tmr_s.Q);
+TransferAM(GPA4_AM.U_KLR2, GPA_AM.U_KLR2, tmr_s.Q);
+TransferAM(GPA4_AM.U_KE5, GPA_AM.U_KE5, tmr_s.Q);
+TransferAM(GPA4_AM.U_ES, GPA_AM.U_ES, tmr_s.Q);
+TransferAM(GPA4_AM.Lamp_Dver_out, GPA_AM.Lamp_Dver_out, tmr_s.Q);
+TransferAM(GPA4_AM.Lamp_ang, GPA_AM.Lamp_ang, tmr_s.Q);
+TransferAM(GPA4_AM.Lamp_OD, GPA_AM.Lamp_OD, tmr_s.Q);
+TransferAM(GPA4_AM.Lamp_VOU, GPA_AM.Lamp_VOU, tmr_s.Q);
+TransferAM(GPA4_AM.Lamp_Dver_ETO, GPA_AM.Lamp_Dver_ETO, tmr_s.Q);
+TransferAM(GPA4_AM.Lamp_ETO, GPA_AM.Lamp_ETO, tmr_s.Q);
+TransferAM(GPA4_AM.EN_ang_krovl, GPA_AM.EN_ang_krovl, tmr_s.Q);
+TransferAM(GPA4_AM.EN_SHK_KIP, GPA_AM.EN_SHK_KIP, tmr_s.Q);
+TransferAM(GPA4_AM.EN_Pipe_FS1, GPA_AM.EN_Pipe_FS1, tmr_s.Q);
+TransferAM(GPA4_AM.EN_Pipe_FS2, GPA_AM.EN_Pipe_FS2, tmr_s.Q);
+TransferAM(GPA4_AM.EN_Pipe_FS3, GPA_AM.EN_Pipe_FS3, tmr_s.Q);
+TransferAM(GPA4_AM.EN_Pipe9_10, GPA_AM.EN_Pipe9_10, tmr_s.Q);
+TransferAM(GPA4_AM.EN_Pipe_GTD, GPA_AM.EN_Pipe_GTD, tmr_s.Q);
+TransferAM(GPA4_AM.EN_Kl_Vn, GPA_AM.EN_Kl_Vn, tmr_s.Q);
+TransferAM(GPA4_AM.TEN1_MBN, GPA_AM.TEN1_MBN, tmr_s.Q);
+TransferAM(GPA4_AM.TEN2_MBN, GPA_AM.TEN2_MBN, tmr_s.Q);
+TransferAM(GPA4_AM.TEN3_MBN, GPA_AM.TEN3_MBN, tmr_s.Q);
+TransferAM(GPA4_AM.VA_OD, GPA_AM.VA_OD, tmr_s.Q);
+TransferAM(GPA4_AM.TEN1_MBR, GPA_AM.TEN1_MBR, tmr_s.Q);
+TransferAM(GPA4_AM.TEN2_MBR, GPA_AM.TEN2_MBR, tmr_s.Q);
+TransferAM(GPA4_AM.TEN3_MBR, GPA_AM.TEN3_MBR, tmr_s.Q);
+TransferAM(GPA4_AM.TEN4_MBR, GPA_AM.TEN4_MBR, tmr_s.Q);
+TransferAM(GPA4_AM.KLE5, GPA_AM.KLE5, tmr_s.Q);
+//TransferAM(GPA4_AM.PMK, GPA_AM.PMK, tmr_s.Q);]]></ST>
+    <DataTypes>
+        <Struct UUID="JOKANQL3O4QURP2EITPYYDMUV4" Name="support_AM" Comment="v1.0 от 20170724">
+            <Field UUID="AJPZSGTBOZSURAEDGCYX3WHU3E" Name="iOn" Comment="Вход - &quot;включен&quot; (открыт)" Type="BOOL" />
+            <Field UUID="6OD2DJH7NPKELOTUDZ75Y2AKVQ" Name="iOff" Comment="Вход - &quot;отключен&quot; (закрыт)" Type="BOOL" />
+            <Field UUID="TB67SA6DTYPEDKISO6NAMC5SWQ" Name="iCon" Comment="Вход - контроль цепи включения (открытия)" Type="BOOL" />
+            <Field UUID="EIFZU5L22RQUXBFPPCCT236FCQ" Name="iCoff" Comment="Вход - контроль цепи отключения (закрытия)" Type="BOOL" />
+            <Field UUID="GIVBYIHUOBNU5DS3D7NB6IIQEA" Name="qOn" Comment="Выход - &quot;включить&quot; (открыть, форсировка)" Type="BOOL" />
+            <Field UUID="B3U4CEPC5FQEXKDEAGWOPCDWZU" Name="qOff" Comment="Выход - &quot;отключить&quot; (закрыть)" Type="BOOL" />
+            <Field UUID="5OXOOXY3F2CEHER2BZBJPT3FSA" Name="qHoldOn" Comment="Выход - &quot;удержание&quot; (трехходовой клапан)" Type="BOOL" />
+            <Field UUID="W6BNQGNNUFSUXGQ3RZQ4V2XMD4" Name="algOn" Comment="Команда включения из алгоритма" Type="BOOL" />
+            <Field UUID="Z3KAE3E5VX5UDAOPXTO4SUHYEY" Name="algOff" Comment="Команда отключения из алгоритма" Type="BOOL" />
+            <Field UUID="U3KPWCQJYP4E7O6Z6S6U43Q2V4" Name="modeManual" Comment="Режим ручного управления" Type="BOOL" />
+            <Field UUID="VSW5JXZJSMLUZFMXRYKWIBFB2I" Name="disableManual" Comment="Блокировка ручного управления" Type="BOOL" />
+            <Field UUID="JO4FIXI66MRULCSWOZ7JRQSOBA" Name="disableCon" Comment="Не учитывать контроль цепи управления команды &apos;открыть&apos;" Type="BOOL" />
+            <Field UUID="UZCWPJ5FO2OETORGJUJ77MHWEQ" Name="disableCoff" Comment="Не учитывать контроль цепи управления команды &apos;закрыть&apos;" Type="BOOL" />
+            <Field UUID="XB6FRKLPQHBU3KBCQJ2O4LMWOI" Name="btnMode" Comment="Кнопка переключения режима Ручной/Авто (СКАДА)" Type="BOOL" />
+            <Field UUID="HQXXP3VK6B7UFEZCLYPOAIJCVE" Name="btnOn" Comment="Кнопка &quot;включить&quot; (СКАДА)" Type="BOOL" />
+            <Field UUID="EUREFPVUSAJU5MPE72IMKULFAQ" Name="btnOff" Comment="Кнопка &quot;отключить&quot; (СКАДА)" Type="BOOL" />
+            <Field UUID="AILDXTDC3NIELCLUI3YK5YT24Q" Name="prmBtnOn" Comment="Разрешение ручного включения в авто-режиме (для повтора команды)" Type="BOOL" />
+            <Field UUID="N3ML4S2CGYTUNLC75YT4BMSOZE" Name="prmBtnOff" Comment="Разрешение ручного отключения в авто-режиме (для повтора команды)" Type="BOOL" />
+            <Field UUID="T6O6PYG5FOHE5M2XV53ZQ6EC4Q" Name="fNotOn" Comment="Не включен" Type="BOOL" />
+            <Field UUID="FGO5HC5NS2AENDSJ7FTV6YTIKM" Name="fNotOff" Comment="Не отключен" Type="BOOL" />
+            <Field UUID="SUNJAVMMKXFUTFOAEJWMDGD4B4" Name="fNotStart" Comment="Не стронулся" Type="BOOL" />
+            <Field UUID="UOQBPEA7JBMU7KFLOB4CAR2Q5A" Name="fSelfOn" Comment="Самопроизвольное включение" Type="BOOL" />
+            <Field UUID="DJLHHLRC674EHNL2W5UHHLPB4Y" Name="fSelfOff" Comment="Самопроизвольное отключение" Type="BOOL" />
+            <Field UUID="URJGYYBT4DXU5N4YI3XNJOKP5M" Name="fFB" Comment="Двойное положение" Type="BOOL" />
+            <Field UUID="WPU7QKFWK6TU5DDMTVHYF5AIOY" Name="fCon" Comment="Нет контроля цепи включения" Type="BOOL" />
+            <Field UUID="WJBPVHFY5IPEZOLM74FY44PYMY" Name="fCoff" Comment="Нет контроля цепи отключения" Type="BOOL" />
+            <Field UUID="3QBLSEMS7OCERKXNV3GPVS7PNM" Name="fCommon" Comment="Обобщенная неисправность" Type="BOOL" />
+        </Struct>
+    </DataTypes>
+    <FBLibrary>
+        <Function UUID="NXITDVLCRSQEXOAYJ456KB4DNI" Name="TransferAM" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+            <Variables>
+                <Variable UUID="AKGBW4D7LVZUVKETYPIKMIRFGU" Name="arm" Type="support_AM" TypeUUID="JOKANQL3O4QURP2EITPYYDMUV4" Usage="inout" />
+                <Variable UUID="JC54MMUSMO6E7ISSRG6OHBA6KM" Name="plc" Type="support_AM" TypeUUID="JOKANQL3O4QURP2EITPYYDMUV4" Usage="inout" />
+                <Variable UUID="VFJKP5H6R7VEZIQELMD6LDKZYQ" Name="send" Type="BOOL" Usage="input" />
+            </Variables>
+            <ST><![CDATA[// <---------
+arm.iOn          := plc.iOn;
+arm.iOff         := plc.iOff;
+arm.iCon         := plc.iCon;
+arm.iCoff        := plc.iCoff;
+arm.qOn          := plc.qOn;
+arm.qOff         := plc.qOff;
+arm.qHoldOn      := plc.qHoldOn;
+arm.algOn        := plc.algOn;
+arm.algOff       := plc.algOff;
+arm.modeManual   := plc.modeManual;
+arm.disableManual:= plc.disableManual;
+arm.disableCon   := plc.disableCon;
+arm.disableCoff  := plc.disableCoff;
+arm.prmBtnOn     := plc.prmBtnOn;
+arm.prmBtnOff    := plc.prmBtnOff;
+arm.fNotOn       := plc.fNotOn;
+arm.fNotOff      := plc.fNotOff;
+arm.fNotStart    := plc.fNotStart;
+arm.fSelfOn      := plc.fSelfOn;
+arm.fSelfOff     := plc.fSelfOff;
+arm.fFB          := plc.fFB;
+arm.fCon         := plc.fCon;
+arm.fCoff        := plc.fCoff;
+arm.fCommon      := plc.fCommon;
+
+if send then 
+arm.btnMode      := plc.btnMode;
+arm.btnOn        := plc.btnOn;
+arm.btnOff       := plc.btnOff;
+end_if;
+
+// ---------->
+plc.btnMode      := arm.btnMode;
+plc.btnOn        := arm.btnOn;
+plc.btnOff       := arm.btnOff;
+]]></ST>
+        </Function>
+    </FBLibrary>
+</Program>

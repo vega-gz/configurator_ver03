@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="IVG_1" Kind="Struct" UUID="8D0D01B24294301DA58057842C8ED5C6">
+    <Fields>
+        <Field Name="Temprature" Type="REAL" UUID="311012FE4CB7C056B61F1CB59C736FC9" Comment="Температура" />
+        <Field Name="Dew_Point_Temprature" Type="REAL" UUID="C0B93BBE4534470DDFBBA09FA4992DCF" Comment="Температура точки росы  " />
+        <Field Name="Error_humidity" Type="BOOL" UUID="C7DCEC064A218D5DCF324D8E95D99BCC" Comment="Неисправен датчик влажности (BIT6)" />
+        <Field Name="Error_temprature" Type="BOOL" UUID="85AA1EEC4F48B9CFF22DC18EF1B466A8" Comment="Неисправен датчик температуры (BIT7)" />
+    </Fields>
+</Type>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TSK_SS" Kind="Struct" UUID="BD43010C4D0219B819146D8C8EA4E990">
+	<Fields>
+		<Field Name="CPU_HeartBit" Type="BOOL" UUID="CBAEONCSBAAUPPRRTBBPRX72YY" Comment="Меандр от контроллера" />
+		<Field Name="mute" Type="BOOL" UUID="4A45BK62AXQELGADVSWC5MRHNI" Comment="Звук отключен" />
+		<Field Name="Prm_DU_IM" Type="BOOL" UUID="UZV42NDDAO6ELERMMLPFLLMSII" Comment="Разрешение кнопки ДУ ИМ" />
+		<Field Name="ArchStop" Type="BOOL" UUID="BSO3O2PTWJ3EPO5AN3SW3R7KQY" Comment="Запуск архива останова" />
+		<Field Name="ArchUser" Type="BOOL" UUID="GAZYVFCT4YIEZMI5RDHOLU2HWE" Comment="Запуск пользовательского архива" />
+	</Fields>
+</Type>

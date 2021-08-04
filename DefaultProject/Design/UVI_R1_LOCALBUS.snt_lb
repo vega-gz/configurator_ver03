@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+    <Device CyclePeriod="50000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="FALSE">
+        <Slot Address="1" ModuleType="68" />
+        <Slot Address="2" ModuleType="68" />
+        <Slot Address="3" ModuleType="33" />
+        <Slot Address="4" ModuleType="33" />
+        <Slot Address="5" ModuleType="33" />
+        <Slot Address="6" ModuleType="21" />
+    </Device>
+    <Crossconnect>
+        <Connection ItemName="UVI_A1_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.8A0A6D1C41CF457D94442F8831617049" />
+        <Connection ItemName="UVI_A1_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.559489694EF4757F074EFBAF4ED2BE04" />
+        <Connection ItemName="UVI_A1_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.257D167249D88B24D42F53B7C893779E" />
+        <Connection ItemName="UVI_A1_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.26FFA4AE4FE6B82840F52A81A540B7BC" />
+        <Connection ItemName="UVI_A1_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.A4CC71954594084C3612759E1D786328" />
+        <Connection ItemName="UVI_A1_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.EFDACBE7493CD384E161BD9F7713F864" />
+        <Connection ItemName="UVI_A1_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.BE36D8BE4D68EE980579328DFC460CDC" />
+        <Connection ItemName="UVI_A1_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="CD06C9A24F1D40E172DB55BC81799FA2.532AF0334C06CC4D645F92AEF48908D5" />
+        <Connection ItemName="UVI_AI_DRV.Lmet_E8_1_v" Device="" Slot="1" Channel="1" Comment="Р’РµСЂС…РЅРёР№ СѓСЂРѕРІРµРЅСЊ РІ РµР�?РєРѕСЃС‚Рё E-8.1 РґСЂРµРЅР°Р¶Р° Р�?РµС‚Р°РЅРѕР»Р°" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.34F924020F7F45688D2C3652455609F3" />
+        <Connection ItemName="UVI_AI_DRV.Gas_met1_v" Device="" Slot="1" Channel="2" Comment="Р—Р°РіР°Р·РѕРІР°РЅРЅРѕСЃС‚СЊ РїРѕ Р�?РµС‚Р°РЅРѕР»Сѓ (QISA-1)" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.CFC6236695F743C59096151AC16F813F" />
+        <Connection ItemName="UVI_AI_DRV.Gas_met2_v" Device="" Slot="1" Channel="3" Comment="Р—Р°РіР°Р·РѕРІР°РЅРЅРѕСЃС‚СЊ РїРѕ Р�?РµС‚Р°РЅРѕР»Сѓ (QISA-2)" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.DCC9E1EEAE5F4205A49E3462D227BED1" />
+        <Connection ItemName="UVI_AI_DRV.Res_0" Device="" Slot="1" Channel="4" Comment="Р РµР·РµСЂРІ" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.8E310E96FF67483BA14D5EEC369B74B8" />
+        <Connection ItemName="UVI_AI_DRV.Uosn_SAU" Device="" Slot="2" Channel="1" Comment="Р?Р·Р�?РµСЂРµРЅРёРµ РѕСЃРЅРѕРІРЅРѕРіРѕ РЅР°РїСЂСЏР¶РµРЅРёСЏ" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.1D8AB86091A149CA9F99ED33FD955753" />
+        <Connection ItemName="UVI_AI_DRV.Urez_SAU" Device="" Slot="2" Channel="2" Comment="Р?Р·Р�?РµСЂРµРЅРёРµ СЂРµР·РµСЂРІРЅРѕРіРѕ РЅР°РїСЂСЏР¶РµРЅРёСЏ" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.7E1B4E31ED8941FB882411FF26D6EC8B" />
+        <Connection ItemName="UVI_AI_DRV.Res_1" Device="" Slot="2" Channel="3" Comment="Р РµР·РµСЂРІ" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.ED6B8B7736DE42ED82103B57260CFACE" />
+        <Connection ItemName="UVI_AI_DRV.Res_2" Device="" Slot="2" Channel="4" Comment="Р РµР·РµСЂРІ" UUID="0D74C5CF4E1E785B6D3BFFBF109FAB69.266B5CB57D68487D9B28F3A7DF3BE155" />
+        <Connection ItemName="UVI_DI_DRV.Gas_met1_v" Device="" Slot="3" Channel="1" Comment="Загазованность по метанолу QISA-1, порог 1" UUID="372CFE0F4509FCDF418D6AA0228854FF.FCE52BF223E44BF3B72F862BE1D22470" />
+        <Connection ItemName="UVI_DI_DRV.Gas_met1_av" Device="" Slot="3" Channel="2" Comment="Загазованность по метанолу QISA-1, порог 2" UUID="372CFE0F4509FCDF418D6AA0228854FF.82E6ED56072A42BB8BD3CBE92B65C6F3" />
+        <Connection ItemName="UVI_DI_DRV.Gas_met1_Bad" Device="" Slot="3" Channel="3" Comment="Загазованность по метанолу QISA-1, неисправность датчика" UUID="372CFE0F4509FCDF418D6AA0228854FF.B4E96DB8CB034CE99BA79533221AEE7C" />
+        <Connection ItemName="UVI_DI_DRV.Gas_met2_v" Device="" Slot="3" Channel="4" Comment="Загазованность по метанолу QISA-2, порог 1" UUID="372CFE0F4509FCDF418D6AA0228854FF.6D8AD8F351A74851992A2923EAF9BA8A" />
+        <Connection ItemName="UVI_DI_DRV.Gas_met2_av" Device="" Slot="3" Channel="5" Comment="Загазованность по метанолу QISA-2, порог 2" UUID="372CFE0F4509FCDF418D6AA0228854FF.BC26C85E37644D32950420194A2CCDFD" />
+        <Connection ItemName="UVI_DI_DRV.Gas_met2_Bad" Device="" Slot="3" Channel="6" Comment="Загазованность по метанолу QISA-2, неисправность датчика" UUID="372CFE0F4509FCDF418D6AA0228854FF.87ED0939EEC64F12A9C5B2B39E22D859" />
+        <Connection ItemName="UVI_DI_DRV.Vn_V1_ON" Device="" Slot="3" Channel="7" Comment="Вентсистема В1 работает" UUID="372CFE0F4509FCDF418D6AA0228854FF.31507D8B68204A219237D6129647C4DA" />
+        <Connection ItemName="UVI_DI_DRV.Vn_V1_Alarm" Device="" Slot="3" Channel="8" Comment="Авария вентсистемы В1" UUID="372CFE0F4509FCDF418D6AA0228854FF.ACA3BCDAF31242DEA69C8AAEBDD813A2" />
+        <Connection ItemName="UVI_DI_DRV.QS_ON" Device="" Slot="3" Channel="9" Comment="ШЩ. Секционный автоматический выключатель включен" UUID="372CFE0F4509FCDF418D6AA0228854FF.86C827CDCDD5415DAA1EC84E24F754C1" />
+        <Connection ItemName="UVI_DI_DRV.QS_OF" Device="" Slot="3" Channel="10" Comment="ШЩ. Секционный автоматический выключатель отключен" UUID="372CFE0F4509FCDF418D6AA0228854FF.F5DB01723E2B4BCEB8E9EB66D3F40F0F" />
+        <Connection ItemName="UVI_DI_DRV.QS_AOF" Device="" Slot="3" Channel="11" Comment="ШЩ.  Секционный автоматический выключатель аварийно отключен" UUID="372CFE0F4509FCDF418D6AA0228854FF.9016047226E64557BB435F1DEA2E46FB" />
+        <Connection ItemName="UVI_DI_DRV.U1_ok" Device="" Slot="3" Channel="12" Comment="ШЩ.  Сигнализация наличия напряжения. I секция шин" UUID="372CFE0F4509FCDF418D6AA0228854FF.2D062871D0074378B9C9227A9BD4EA29" />
+        <Connection ItemName="UVI_DI_DRV.Q1_ON" Device="" Slot="3" Channel="13" Comment="ШЩ. Вводной автоматический выключатель включен" UUID="372CFE0F4509FCDF418D6AA0228854FF.0F0172F9A4464F02B0F9EC7374C7C18A" />
+        <Connection ItemName="UVI_DI_DRV.Q1_OF" Device="" Slot="3" Channel="14" Comment="ШЩ. Вводной автоматический выключатель отключен" UUID="372CFE0F4509FCDF418D6AA0228854FF.F3FA3E979ADA4219AB3504C262F285CF" />
+        <Connection ItemName="UVI_DI_DRV.Q1_AOF" Device="" Slot="3" Channel="15" Comment="ШЩ. Вводной автоматический выключатель аварийно отключен" UUID="372CFE0F4509FCDF418D6AA0228854FF.4AF0179313684C269CCA973CF06B0A4F" />
+        <Connection ItemName="UVI_DI_DRV.Q2_ON" Device="" Slot="3" Channel="16" Comment="ШЩ. Вводной автоматический выключатель включен" UUID="372CFE0F4509FCDF418D6AA0228854FF.4E056A29E25144C18EC930B0D9198278" />
+        <Connection ItemName="UVI_DI_DRV.Q2_OF" Device="" Slot="4" Channel="1" Comment="ШЩ. Вводной автоматический выключатель отключен" UUID="372CFE0F4509FCDF418D6AA0228854FF.0E6BC834AD01498B981BB61FCC2F7162" />
+        <Connection ItemName="UVI_DI_DRV.Q2_AOF" Device="" Slot="4" Channel="2" Comment="ШЩ.  Вводной автоматический выключатель аварийно отключен" UUID="372CFE0F4509FCDF418D6AA0228854FF.938DE76AF750424C99B928F738EE8EED" />
+        <Connection ItemName="UVI_DI_DRV.U2_ok" Device="" Slot="4" Channel="3" Comment="ШЩ.  Сигнализация наличия напряжения. II секция шин" UUID="372CFE0F4509FCDF418D6AA0228854FF.560C05DC93AF4B528BF9D80EFA698F83" />
+        <Connection ItemName="UVI_DI_DRV.UZIP_Bad" Device="" Slot="4" Channel="4" Comment="УЗ�?П неисправен" UUID="372CFE0F4509FCDF418D6AA0228854FF.FCB30BA22D074241B7A4D703E11B9EEB" />
+        <Connection ItemName="UVI_DI_DRV.Res_0" Device="" Slot="4" Channel="5" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.01C372310EDA4BC79F6DC851B585B735" />
+        <Connection ItemName="UVI_DI_DRV.Res_1" Device="" Slot="4" Channel="6" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.07950A2D4A7E433DA74F67035CE5D90C" />
+        <Connection ItemName="UVI_DI_DRV.Res_2" Device="" Slot="4" Channel="7" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.07E6A1CCC19F4341A5FF34D0F6D32F24" />
+        <Connection ItemName="UVI_DI_DRV.Res_3" Device="" Slot="4" Channel="8" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.BB8EFD45F15E4668BFBE389AE1BA38AC" />
+        <Connection ItemName="UVI_DI_DRV.Res_4" Device="" Slot="4" Channel="9" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.040488EEB2A24A019593628D3AC68B95" />
+        <Connection ItemName="UVI_DI_DRV.Res_5" Device="" Slot="4" Channel="10" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.D37BF1183BCE4621BFD1316ED9217CF2" />
+        <Connection ItemName="UVI_DI_DRV.Res_6" Device="" Slot="4" Channel="11" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.6F3D37CB96084D3AB5BAEDE491E3A26C" />
+        <Connection ItemName="UVI_DI_DRV.Res_7" Device="" Slot="4" Channel="12" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.1805632D1C58460FA6D37CD31D6A870B" />
+        <Connection ItemName="UVI_DI_DRV.Res_8" Device="" Slot="4" Channel="13" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.0740290147304038BDD26AFAA21ECFDE" />
+        <Connection ItemName="UVI_DI_DRV.Res_9" Device="" Slot="4" Channel="14" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.790D9E088B5545A2931C6705512C1216" />
+        <Connection ItemName="UVI_DI_DRV.Res_10" Device="" Slot="4" Channel="15" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.A9943D2BBF8A46ABA3D216F3BB5B3D8E" />
+        <Connection ItemName="UVI_DI_DRV.Res_11" Device="" Slot="4" Channel="16" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.9817285B6F05428389F25F18C3A70422" />
+        <Connection ItemName="UVI_DI_DRV.Chk_AC220_SAU" Device="" Slot="5" Channel="1" Comment="Контроль основного питания  ~220 В" UUID="372CFE0F4509FCDF418D6AA0228854FF.6F72F8418AF84C358F3DF449580FDD3F" />
+        <Connection ItemName="UVI_DI_DRV.Chk_DC220_SAU" Device="" Slot="5" Channel="2" Comment="Контроль резервного питания  =220 В" UUID="372CFE0F4509FCDF418D6AA0228854FF.FDF3E5A32E664A2395753019A0CD0CA0" />
+        <Connection ItemName="UVI_DI_DRV.Cabin_open" Device="" Slot="5" Channel="3" Comment="Двери шкафа открыты" UUID="372CFE0F4509FCDF418D6AA0228854FF.616CF91CB9D042F1BAA57B101F52FDB5" />
+        <Connection ItemName="UVI_DI_DRV.Chk_razr" Device="" Slot="5" Channel="4" Comment="Контроль исправности разрядников" UUID="372CFE0F4509FCDF418D6AA0228854FF.5B3A31B7C09444128E22B27F81DDB259" />
+        <Connection ItemName="UVI_DI_DRV.QF_ON" Device="" Slot="5" Channel="5" Comment="Автоматы питания включены" UUID="372CFE0F4509FCDF418D6AA0228854FF.FDA4E4FF72A94A7BBB829100256FD610" />
+        <Connection ItemName="UVI_DI_DRV.DC24osn_Int_ok" Device="" Slot="5" Channel="6" Comment="�?справность осн. �?П =24В внутренних цепей" UUID="372CFE0F4509FCDF418D6AA0228854FF.BFBE0FA6E372464C9D58423386BCF759" />
+        <Connection ItemName="UVI_DI_DRV.DC24rez_Int_ok" Device="" Slot="5" Channel="7" Comment="�?справность рез. �?П =24В внутренних цепей" UUID="372CFE0F4509FCDF418D6AA0228854FF.3F436DA8A40E4CD8A277E88F922B7C0D" />
+        <Connection ItemName="UVI_DI_DRV.DC24osn_Ext_ok" Device="" Slot="5" Channel="8" Comment="�?справность осн. �?П =24В внешних цепей" UUID="372CFE0F4509FCDF418D6AA0228854FF.E5E2E7112F4C47EBB1A0B63E085720E0" />
+        <Connection ItemName="UVI_DI_DRV.DC24rez_Ext_ok" Device="" Slot="5" Channel="9" Comment="�?справность рез. �?П =24В внешних цепей" UUID="372CFE0F4509FCDF418D6AA0228854FF.E12D2256D95E40478050F71B60FE3070" />
+        <Connection ItemName="UVI_DI_DRV.Res_12" Device="" Slot="5" Channel="10" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.FB09915E2AC047D3A9D3EA9897C32BE9" />
+        <Connection ItemName="UVI_DI_DRV.Res_13" Device="" Slot="5" Channel="11" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.E24FA8AF3812429691D61D9CEB25669A" />
+        <Connection ItemName="UVI_DI_DRV.Res_14" Device="" Slot="5" Channel="12" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.2887E3129D4A48E79E94C68181DE4DEF" />
+        <Connection ItemName="UVI_DI_DRV.Res_15" Device="" Slot="5" Channel="13" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.F12294F5314D430DABF097315F298A55" />
+        <Connection ItemName="UVI_DI_DRV.Res_16" Device="" Slot="5" Channel="14" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.AD9ABBA344C242BE9A53C3976FAB7593" />
+        <Connection ItemName="UVI_DI_DRV.Res_17" Device="" Slot="5" Channel="15" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.1056868722554C0DB944BF2E2EEF8ABA" />
+        <Connection ItemName="UVI_DI_DRV.Res_18" Device="" Slot="5" Channel="16" Comment="(Резерв)" UUID="372CFE0F4509FCDF418D6AA0228854FF.4AC9AAC3A1C24B0B92EB4090E17D5394" />
+        <Connection ItemName="UVI_DO_DRV.Lmet_E8_1_v" Device="" Slot="6" Channel="1" Comment="Верхний уровень в емкости E-8.1 для дренажа метанола" UUID="77A922D223F8433BAF97A1CC144C7D92.68479EDD5C404D4697407032030BC74C" />
+        <Connection ItemName="UVI_DO_DRV.Gas_Alarm1" Device="" Slot="6" Channel="2" Comment="Загазованность по метанолу табло информационное" UUID="77A922D223F8433BAF97A1CC144C7D92.B02E9695C4964035A96FE5284AD4D248" />
+        <Connection ItemName="UVI_DO_DRV.Gas_Alarm2" Device="" Slot="6" Channel="3" Comment="Загазованность по метанолу пост сигнализации" UUID="77A922D223F8433BAF97A1CC144C7D92.1F44C12A4E154638BE43E274A9FF3B75" />
+        <Connection ItemName="UVI_DO_DRV.Vn_V1_ON" Device="" Slot="6" Channel="4" Comment="Пуск вентсистемы В1" UUID="77A922D223F8433BAF97A1CC144C7D92.6147EDE440E44EB6942A5319CDB76956" />
+        <Connection ItemName="UVI_DO_DRV.Vn_V1_OF" Device="" Slot="6" Channel="5" Comment="Стоп вентсистемы В1" UUID="77A922D223F8433BAF97A1CC144C7D92.E828235F48DE471A88B1F85DCFDDC37B" />
+        <Connection ItemName="UVI_DO_DRV.Res_0" Device="" Slot="6" Channel="6" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.6EF72CA8C6D74F07A45C8C33F758F565" />
+        <Connection ItemName="UVI_DO_DRV.Res_1" Device="" Slot="6" Channel="7" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.2AF7A19E772B4AEDAC5B612693272ABC" />
+        <Connection ItemName="UVI_DO_DRV.Res_2" Device="" Slot="6" Channel="8" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.77FBB3FB4EE64154B5A8CB278BF78711" />
+        <Connection ItemName="UVI_DO_DRV.Res_3" Device="" Slot="6" Channel="9" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.2768148E654548E4ADF21DFAA3F28B03" />
+        <Connection ItemName="UVI_DO_DRV.Res_4" Device="" Slot="6" Channel="10" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.574C93B8486E48AEA99CCDAFCD54FD89" />
+        <Connection ItemName="UVI_DO_DRV.Res_5" Device="" Slot="6" Channel="11" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.5C647320403C48188DF799CD145A6184" />
+        <Connection ItemName="UVI_DO_DRV.Res_6" Device="" Slot="6" Channel="12" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.56BE9907D50940168DE840E84D5946ED" />
+        <Connection ItemName="UVI_DO_DRV.Res_7" Device="" Slot="6" Channel="13" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.71C0F6225B684407990D5513D5A1AA57" />
+        <Connection ItemName="UVI_DO_DRV.Res_8" Device="" Slot="6" Channel="14" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.5639E3EF3125455FAF6C4F3122780389" />
+        <Connection ItemName="UVI_DO_DRV.Res_9" Device="" Slot="6" Channel="15" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.99AA051DF91743728A180B1669C4873C" />
+        <Connection ItemName="UVI_DO_DRV.Res_10" Device="" Slot="6" Channel="16" Comment="Резерв" UUID="77A922D223F8433BAF97A1CC144C7D92.D48D326C80C54D45B19F6C7FF38D3474" />
+    </Crossconnect>
+</Configuration>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_FG_mb_AI_DRV" UUID="CB2D9BF9A97E4FB38DDD6B2E67DDC772">
+<Fields>
+<Field Comment="Мгн. массовый расход техн. газа" Name="Mg" Type="REAL" UUID="47AC986395D842709B0CE0B97637F5E2"/>
+<Field Comment="Мгн. объемный расход техн. газа" Name="Qg" Type="REAL" UUID="C3A737920C5549C8946A3FB305CDC2D5"/>
+</Fields>
+</Type>

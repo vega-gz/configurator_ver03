@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UVI_ANB_Settings" Kind="Struct" UUID="CDAE84744059C47198EE91B0A752C740">
+    <Fields>
+        <Field Name="Uosn_SAU_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="2BE1A5494C4910C8D22548937766E106" Comment="Измерение основного напряжения: предупредительная нижняя" />
+        <Field Name="Urez_SAU_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="C848335D4B74935672ACBBA87A85A7FF" Comment="Измерение резервного напряжения: предупредительная нижняя" />
+        <Field Name="Uosn_SAU_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="D81481A74AC9D788278951AA718F3D6E" Comment="Измерение основного напряжения: предупредительная верхняя" />
+        <Field Name="Urez_SAU_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="32E933FE4FCC4A28966319BFD99422F3" Comment="Измерение резервного напряжения: предупредительная верхняя" />
+        <Field Name="Lmet_E8_1_v_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="87F2ACD94619AC7614819680360A4013" Comment="Верхний уровень в Е-8.1" />
+        <Field Name="Pmet_Kl_UVI1_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="CC72842C41CEFF21029FE58F71A21C0F" Comment="Давление метанола перед распределительными клапанами УВИ1 повышенное" />
+        <Field Name="Pmet_Kl_UVI1_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="C5E34FF544CB6B2314806B84016D90FF" Comment="Давление метанола перед распределительными клапанами УВИ1 высокое" />
+        <Field Name="Pmet_Kl_UVI2_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="A40F0DEE45AFBD56912A6D9B724B98B8" Comment="Давление метанола перед распределительными клапанами УВИ2 повышенное" />
+        <Field Name="Pmet_Kl_UVI2_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="6509E29148E121BA79102AA707B90119" Comment="Давление метанола перед распределительными клапанами УВИ2 высокое" />
+        <Field Name="Qmgms_met_UVI1_An" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="1FCC5D49442E5E163291DB8819DA8241" Comment="Мгновенный массовый расход метанола на УВИ1 низкий" />
+        <Field Name="Qmgms_met_UVI1_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="9C414C2C418A6F450D64788A7939E870" Comment="Мгновенный массовый расход метанола на УВИ1 пониженный" />
+        <Field Name="Qmgms_met_UVI1_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="976514BE47F12B8B7FCE6B8ACB548C14" Comment="Мгновенный массовый расход метанола на УВИ1 повышенный" />
+        <Field Name="Qmgms_met_UVI1_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="FBAA73A74F3315EB5080B2AABF1C1535" Comment="Мгновенный массовый расход метанола на УВИ1 высокий" />
+        <Field Name="Qmgms_met_UVI2_An" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="8B2F86BD463842FEF17ED89BC705EB46" Comment="Мгновенный массовый расход метанола на УВИ2 низкий" />
+        <Field Name="Qmgms_met_UVI2_Pn" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="711777924FDB735016A942998495512F" Comment="Мгновенный массовый расход метанола на УВИ2 пониженный" />
+        <Field Name="Qmgms_met_UVI2_Pv" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="63BEDD2746F9E728F150198D9FA78535" Comment="Мгновенный массовый расход метанола на УВИ2 повышенный" />
+        <Field Name="Qmgms_met_UVI2_Av" Type="F35CE5474F9ED831D3CDE984BA397134" UUID="D394944A4DD0ACEC2ABAFC9AD7B614CE" Comment="Мгновенный массовый расход метанола на УВИ2 высокий" />
+    </Fields>
+</Type>

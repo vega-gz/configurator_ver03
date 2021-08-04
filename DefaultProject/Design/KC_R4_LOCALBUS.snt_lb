@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+	<Device CyclePeriod="250000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="FALSE">
+		<Slot Address="1" ModuleType="21" />
+		<Slot Address="2" ModuleType="21" />
+		<Slot Address="3" ModuleType="33" />
+		<Slot Address="4" ModuleType="33" />
+		<Slot Address="5" ModuleType="33" />
+		<Slot Address="6" ModuleType="33" />
+		<Slot Address="7" ModuleType="33" />
+	</Device>
+	<Crossconnect>
+		<Connection ItemName="KC_A4_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.8A0A6D1C41CF457D94442F8831617049" />
+		<Connection ItemName="KC_A4_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.559489694EF4757F074EFBAF4ED2BE04" />
+		<Connection ItemName="KC_A4_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.257D167249D88B24D42F53B7C893779E" />
+		<Connection ItemName="KC_A4_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.26FFA4AE4FE6B82840F52A81A540B7BC" />
+		<Connection ItemName="KC_A4_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.A4CC71954594084C3612759E1D786328" />
+		<Connection ItemName="KC_A4_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.EFDACBE7493CD384E161BD9F7713F864" />
+		<Connection ItemName="KC_A4_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.BE36D8BE4D68EE980579328DFC460CDC" />
+		<Connection ItemName="KC_A4_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="75F1BF5A42A598506D8428A25BCF1689.532AF0334C06CC4D645F92AEF48908D5" />
+		<Connection ItemName="KC_DI_DRV.Kr51_ON_KCU" Device="" Slot="3" Channel="1" Comment="Кран 51 открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.9A142C7C4F794BDA88FE73FE3EAE07C7" />
+		<Connection ItemName="KC_DI_DRV.Kr51_OF_KCU" Device="" Slot="3" Channel="2" Comment="Кран 51 закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.3627E0E0C3EB4290AC6CE788A87E0B04" />
+		<Connection ItemName="KC_DI_DRV.Kr52_ON_KCU" Device="" Slot="3" Channel="3" Comment="Кран 52 открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.E93EB369E68A41B69135CBB4BAEF74BA" />
+		<Connection ItemName="KC_DI_DRV.Kr52_OF_KCU" Device="" Slot="3" Channel="4" Comment="Кран 52 закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.D15D8D41FDD44058A337ED265CE257F7" />
+		<Connection ItemName="KC_DI_DRV.EO_LED_PRU_KCU" Device="" Slot="3" Channel="5" Comment="Инд. ЭО КЦ на ПРУ (+) (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.18F010D01AE14F18BD6DC41BC57701D1" />
+		<Connection ItemName="KC_DI_DRV.AOss_LED_PRU_KCU" Device="" Slot="3" Channel="6" Comment="Инд. АОсс на ПРУ (+) (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.6BF379B10DEA40E0A90BD38A86EE6591" />
+		<Connection ItemName="KC_DI_DRV.AObs_LED_PRU_KCU" Device="" Slot="3" Channel="7" Comment="Инд. АОбс на ПРУ (+) (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.1AB67E77592A4B9D86EA5A85A56EF604" />
+		<Connection ItemName="KC_DI_DRV.FirePump_LED_PRU_KCU" Device="" Slot="3" Channel="8" Comment="Инд. Вкл. пожнасоса на ПРУ (+) (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.AC6E9FE68F4741178C09221CE2D2B2E9" />
+		<Connection ItemName="KC_DI_DRV.Res_24" Device="" Slot="3" Channel="9" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.A7DF21E6B8AE4FDD9A4278EA89DC792F" />
+		<Connection ItemName="KC_DI_DRV.Res_25" Device="" Slot="3" Channel="10" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.76C14CD4471B4DA3A3EDF975AC1EDD32" />
+		<Connection ItemName="KC_DI_DRV.Res_26" Device="" Slot="3" Channel="11" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.B8563760459B4D3F9908855DFE724081" />
+		<Connection ItemName="KC_DI_DRV.Res_27" Device="" Slot="3" Channel="12" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.B11974F726C2460F80B4DED706324880" />
+		<Connection ItemName="KC_DI_DRV.Res_28" Device="" Slot="3" Channel="13" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.4D364852DCA5487A8589A6ECF75D2124" />
+		<Connection ItemName="KC_DI_DRV.Res_29" Device="" Slot="3" Channel="14" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.FD4CA5E99DB04851B157D02B122C813C" />
+		<Connection ItemName="KC_DI_DRV.Res_30" Device="" Slot="3" Channel="15" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.D670741E247C4B21B8596A638A04AEF0" />
+		<Connection ItemName="KC_DI_DRV.Res_31" Device="" Slot="3" Channel="16" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.2C609F1E31904E8CAA43576046A3A543" />
+		<Connection ItemName="KC_DI_DRV.Res_32" Device="" Slot="4" Channel="1" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.2B8F7332A7F745ADBD3B349DF293C19D" />
+		<Connection ItemName="KC_DI_DRV.Res_33" Device="" Slot="4" Channel="2" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.400BF2CBFC1440E393302EB5E0681F6A" />
+		<Connection ItemName="KC_DI_DRV.Res_34" Device="" Slot="4" Channel="3" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.9C4F457F8E6F484398C3E2EE63AE75DD" />
+		<Connection ItemName="KC_DI_DRV.Res_35" Device="" Slot="4" Channel="4" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.F5F8CACD0F3B41539F194313AEF5DD5E" />
+		<Connection ItemName="KC_DI_DRV.Res_36" Device="" Slot="4" Channel="5" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.E6F562E8E8694611AD1AAEF6D3B85FB5" />
+		<Connection ItemName="KC_DI_DRV.Res_37" Device="" Slot="4" Channel="6" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.C11B1D7BAA47492695103C55B147CB70" />
+		<Connection ItemName="KC_DI_DRV.Res_38" Device="" Slot="4" Channel="7" Comment="Резерв 110VDC (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.82ADB0D2F05649A298712AD16C6F7E57" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA1_ADES_ON_KCU" Device="" Slot="4" Channel="8" Comment="Обогрев прибора АДЭС LSA1 включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.2EE73E7040E94EF7B8C59A7C9E0705AC" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA2_ADES_ON_KCU" Device="" Slot="4" Channel="9" Comment="Обогрев прибора АДЭС LSA2 включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.BF556C4A33A4434BABCFBAFBE2AF99E0" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA3_ADES_ON_KCU" Device="" Slot="4" Channel="10" Comment="Обогрев прибора АДЭС LSA3 включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.F44252A86CFA4E029DDEF73EEE0E2EA0" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA1_GPA_ON_KCU" Device="" Slot="4" Channel="11" Comment="Обогрев прибора LSA1 (ГПА4) включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.E6B36871F6964E2C84FDC3B81A473C02" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA2_GPA_ON_KCU" Device="" Slot="4" Channel="12" Comment="Обогрев прибора LSA2 (ГПА5) включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.7D353E41FEA64795A023E8162303F5CE" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA3_GPA_ON_KCU" Device="" Slot="4" Channel="13" Comment="Обогрев прибора LSA3 (ГПА6)  включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.725F9C4EDF4F4420BCFB496301139F90" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA4_GPA_ON_KCU" Device="" Slot="4" Channel="14" Comment="Обогрев прибора LSA4 (ГПА4)  включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.84147D2870A24B8F9866E4B1B5A0C6F6" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA5_GPA_ON_KCU" Device="" Slot="4" Channel="15" Comment="Обогрев прибора LSA5 (ГПА5)  включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.6448937C3CF84C60945697BF955F985D" />
+		<Connection ItemName="KC_DI_DRV.EN_LSA6_GPA_ON_KCU" Device="" Slot="4" Channel="16" Comment="Обогрев прибора LSA6 (ГПА6) включить (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.21D2E755FBF94A6D9AC9210E7050F84C" />
+		<Connection ItemName="KC_DI_DRV.Kr51_2_OF_KCU" Device="" Slot="5" Channel="1" Comment="Кран Кр51-2 - закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.8C4B5573CD1A46C98BEFD526E13882EF" />
+		<Connection ItemName="KC_DI_DRV.Kr51_2_ON_KCU" Device="" Slot="5" Channel="2" Comment="Кран Кр51-2 - открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.C1D122DB94ED4F38A599DC50B608FD6C" />
+		<Connection ItemName="KC_DI_DRV.Kr52_2_OF_KCU" Device="" Slot="5" Channel="3" Comment="Кран Кр52-2 - закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.1335F60E7C5B4377A9919FE0002B34FC" />
+		<Connection ItemName="KC_DI_DRV.Kr52_2_ON_KCU" Device="" Slot="5" Channel="4" Comment="Кран Кр52-2 - открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.9F7004DE2AC24058B2DFADEB07037C4A" />
+		<Connection ItemName="KC_DI_DRV.Kr53_OF_KCU" Device="" Slot="5" Channel="5" Comment="Кран Кр53 - закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.E5FABD5884604EF5B4D6B6EBB9E32849" />
+		<Connection ItemName="KC_DI_DRV.Kr53_ON_KCU" Device="" Slot="5" Channel="6" Comment="Кран Кр53 - открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.5D1906BF0246488D83C5D6848F0E6BDD" />
+		<Connection ItemName="KC_DI_DRV.Kr53b_OF_KCU" Device="" Slot="5" Channel="7" Comment="Кран Кр53бп - закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.C895692BB08F421EAE5641F920814697" />
+		<Connection ItemName="KC_DI_DRV.Kr53b_ON_KCU" Device="" Slot="5" Channel="8" Comment="Кран Кр53бп - открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.77AF7FC72BF443DCA7AECE0459403C79" />
+		<Connection ItemName="KC_DI_DRV.Kr54_OF_KCU" Device="" Slot="5" Channel="9" Comment="Кран Кр54 - закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.4F88FF8E2D9347649DB06E11E2FBFD7C" />
+		<Connection ItemName="KC_DI_DRV.Kr54_ON_KCU" Device="" Slot="5" Channel="10" Comment="Кран Кр54 - открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.28619DCDFBBA43AB951B4F77B293A946" />
+		<Connection ItemName="KC_DI_DRV.Kr54b_OF_KCU" Device="" Slot="5" Channel="11" Comment="Кран Кр54бп - закрыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.1C8CA453CD4C4262A844C745BFDAEF4D" />
+		<Connection ItemName="KC_DI_DRV.Kr54b_ON_KCU" Device="" Slot="5" Channel="12" Comment="Кран Кр54бп - открыть (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.E1F18240F0A64A4E8E1A0F28904763BC" />
+		<Connection ItemName="KC_DI_DRV.EO_KC_KCU" Device="" Slot="5" Channel="13" Comment="ЭО от САУ КЦ (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.9DA556EAA82B4603ADAE1D275AC7BDBC" />
+		<Connection ItemName="KC_DI_DRV.EO_LED_KC_KCU" Device="" Slot="5" Channel="14" Comment="Инд. ЭО от САУ КЦ (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.ED021976D8374E76B9EDC870D1DEA76A" />
+		<Connection ItemName="KC_DI_DRV.AOss_KC_KCU" Device="" Slot="5" Channel="15" Comment="АОсс от САУ КЦ (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.CF4CF4A89B664F308481340B100312BC" />
+		<Connection ItemName="KC_DI_DRV.AObs_KC_KCU" Device="" Slot="5" Channel="16" Comment="АОбс от САУ КЦ (КЦУ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.7B1D50772EBF4F41AB3B2367FE6D63B8" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_Eblock" Device="" Slot="6" Channel="1" Comment="Пожар в энергоблоке" UUID="370BB8454B0BBAAC1D538DB0310CF415.5E5C63A3059842FE974C463C14787842" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_NasOil2" Device="" Slot="6" Channel="2" Comment="Пожар в насосной масел" UUID="370BB8454B0BBAAC1D538DB0310CF415.2359A33A0CD34F1FBFBFED83ACA1744C" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_Gate" Device="" Slot="6" Channel="3" Comment="Пожар в проходной" UUID="370BB8454B0BBAAC1D538DB0310CF415.220BF4AE65E5433B972C8DD6EAAA4005" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_BB_BVVUP" Device="" Slot="6" Channel="4" Comment="Пожар в б/б БВВ УП" UUID="370BB8454B0BBAAC1D538DB0310CF415.EBAA5737542145E687C3CC628CA7369D" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_ADES" Device="" Slot="6" Channel="5" Comment="Пожар в аварийной дизельной электростанции" UUID="370BB8454B0BBAAC1D538DB0310CF415.65AA87BA2E7B40DDAB22C67C7D713C36" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_EXZ" Device="" Slot="6" Channel="6" Comment="Пожар в БКУ ЭХЗ" UUID="370BB8454B0BBAAC1D538DB0310CF415.C05E0EE7100D421EB2A17B5698BF86B7" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_VKompr" Device="" Slot="6" Channel="7" Comment="Пожар в компрессорной сжатого воздуха" UUID="370BB8454B0BBAAC1D538DB0310CF415.A435248C44404A988A27278F7FCF7745" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_OilTanks" Device="" Slot="6" Channel="8" Comment="Пожар на площадке блока резервуаров масла (НМ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.DD7C614B071145ED8FDDF7FEEB348551" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_Oil_Atanks" Device="" Slot="6" Channel="9" Comment="Пожар в емкости для аварийного слива масла (НМ)" UUID="370BB8454B0BBAAC1D538DB0310CF415.8DF6D3C603D64CCBBA591705451006D7" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_Fuel_ATanks2" Device="" Slot="6" Channel="10" Comment="Пожар в емкости для аварийного слива топлива (АДЭС)" UUID="370BB8454B0BBAAC1D538DB0310CF415.F35BEC3E4A39490BBA410CA565DD580A" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_FuelTanks2" Device="" Slot="6" Channel="11" Comment="Пожар на площадке резервуара для дизтоплива (АДЭС)" UUID="370BB8454B0BBAAC1D538DB0310CF415.4F507A0A54EC403C88981126A7F1341D" />
+		<Connection ItemName="KC_DI_DRV.SAPS_Bad" Device="" Slot="6" Channel="12" Comment="Неисправность САПС обобщенный" UUID="370BB8454B0BBAAC1D538DB0310CF415.6F75B5AC9E3B416BB7628DF7ACE1EACC" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_GPA4" Device="" Slot="6" Channel="13" Comment="Пожар ГПА 4" UUID="370BB8454B0BBAAC1D538DB0310CF415.7EFF5F17087A4C329A7CDB7858179B0B" />
+		<Connection ItemName="KC_DI_DRV.GPA4_ASPS_Bad" Device="" Slot="6" Channel="14" Comment="Неисправность АСПС, КЗ и ПТ ГПА 4" UUID="370BB8454B0BBAAC1D538DB0310CF415.6FFA5C453B2A4A7D9C38F76D22C4DFB4" />
+		<Connection ItemName="KC_DI_DRV.GPA4_GAS10" Device="" Slot="6" Channel="15" Comment="Загазованность предупредительная (10%) ГПА 4" UUID="370BB8454B0BBAAC1D538DB0310CF415.F1E9CC236A84455081B2AC70FB26E00A" />
+		<Connection ItemName="KC_DI_DRV.GPA4_GAS20" Device="" Slot="6" Channel="16" Comment="Загазованность аварийная (20%) ГПА 4" UUID="370BB8454B0BBAAC1D538DB0310CF415.A9FB7E1516F54E54A612F10BA612D215" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_GPA5" Device="" Slot="7" Channel="1" Comment="Пожар ГПА 5" UUID="370BB8454B0BBAAC1D538DB0310CF415.1172C4BFA559462086997F66FA5872F1" />
+		<Connection ItemName="KC_DI_DRV.GPA5_ASPS_Bad" Device="" Slot="7" Channel="2" Comment="Неисправность АСПС, КЗ и ПТ ГПА 5" UUID="370BB8454B0BBAAC1D538DB0310CF415.839E24DACE044F86A186EB0EEFD65C2C" />
+		<Connection ItemName="KC_DI_DRV.GPA5_GAS10" Device="" Slot="7" Channel="3" Comment="Загазованность предупредительная (10%) ГПА 5" UUID="370BB8454B0BBAAC1D538DB0310CF415.28CADD11B43D4075955CA07EE19FF1B4" />
+		<Connection ItemName="KC_DI_DRV.GPA5_GAS20" Device="" Slot="7" Channel="4" Comment="Загазованность аварийная (20%) ГПА 5" UUID="370BB8454B0BBAAC1D538DB0310CF415.B39876B5FC4B44898C7451A0CA2444E8" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_GPA6" Device="" Slot="7" Channel="5" Comment="Пожар ГПА 6" UUID="370BB8454B0BBAAC1D538DB0310CF415.30EC6932FC57458C85A5B00B7DF49071" />
+		<Connection ItemName="KC_DI_DRV.GPA6_ASPS_Bad" Device="" Slot="7" Channel="6" Comment="Неисправность АСПС, КЗ и ПТ ГПА 6" UUID="370BB8454B0BBAAC1D538DB0310CF415.C32CA2FEC1114A94AD9E81748B06FED1" />
+		<Connection ItemName="KC_DI_DRV.GPA6_GAS10" Device="" Slot="7" Channel="7" Comment="Загазованность предупредительная (10%) ГПА 6" UUID="370BB8454B0BBAAC1D538DB0310CF415.E9AB276D3FCF4274B8C3F61510A0F861" />
+		<Connection ItemName="KC_DI_DRV.GPA6_GAS20" Device="" Slot="7" Channel="8" Comment="Загазованность аварийная (20%) ГПА 6" UUID="370BB8454B0BBAAC1D538DB0310CF415.015E8346747648E987BB521341A17D6C" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_UPG" Device="" Slot="7" Channel="9" Comment="Пожар УПГ" UUID="370BB8454B0BBAAC1D538DB0310CF415.1CE97C189D764493ABBFE5C7E89D250F" />
+		<Connection ItemName="KC_DI_DRV.UPG_ASPS_Bad" Device="" Slot="7" Channel="10" Comment="Неисправность АСПС, КЗ и ПТ УПГ" UUID="370BB8454B0BBAAC1D538DB0310CF415.8C5038E12A1045529F43D16BE872FF2A" />
+		<Connection ItemName="KC_DI_DRV.UPG_GAS10" Device="" Slot="7" Channel="11" Comment="Загазованность предупредительная (10%) УПГ" UUID="370BB8454B0BBAAC1D538DB0310CF415.F5969CE4AC984BFC83F56113FC149DD6" />
+		<Connection ItemName="KC_DI_DRV.UPG_GAS20" Device="" Slot="7" Channel="12" Comment="Загазованность аварийная (20%) УПГ" UUID="370BB8454B0BBAAC1D538DB0310CF415.57DB78F420DD4161B0D1DBE0B36B1020" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_URM" Device="" Slot="7" Channel="13" Comment="Пожар УРМ" UUID="370BB8454B0BBAAC1D538DB0310CF415.47EAA39AF42E464DB36B8D12FFBEB250" />
+		<Connection ItemName="KC_DI_DRV.URM_ASPS_Bad" Device="" Slot="7" Channel="14" Comment="Неисправность АСПС, КЗ и ПТ УРМ" UUID="370BB8454B0BBAAC1D538DB0310CF415.8A424A7D029D4F0E93FF0848F74D2C09" />
+		<Connection ItemName="KC_DI_DRV.Res_39" Device="" Slot="7" Channel="15" Comment="Резерв под сигнал Загазованность предупредительная (10%) УРМ" UUID="370BB8454B0BBAAC1D538DB0310CF415.8ED4F8492DED4F83982FED3B4FC646F7" />
+		<Connection ItemName="KC_DI_DRV.Res_40" Device="" Slot="7" Channel="16" Comment="Резерв под сигнал Загазованность аварийная (20%) УРМ" UUID="370BB8454B0BBAAC1D538DB0310CF415.23E56A12080842A784F57A3F40E56D2D" />
+		<Connection ItemName="KC_DO_DRV.AObs_UPOU_rez" Device="" Slot="1" Channel="1" Comment="АОбс в ЛИС УПОУ (рез.) " UUID="1C2E6CB343852592FE713CA8C8131991.C76CDC693F9E422E93E93D015F79902B" />
+		<Connection ItemName="KC_DO_DRV.AOss_LED_PRU2" Device="" Slot="1" Channel="2" Comment="Инд. АОсс на ПРУ " UUID="1C2E6CB343852592FE713CA8C8131991.A8FF3CFF807B40DDA3C5BDE42347878C" />
+		<Connection ItemName="KC_DO_DRV.AObs_LED_PRU2" Device="" Slot="1" Channel="3" Comment="Инд. АОбс на ПРУ" UUID="1C2E6CB343852592FE713CA8C8131991.BBF5BB0E02EB42C991DD56785E927AFA" />
+		<Connection ItemName="KC_DO_DRV.AO_KOS" Device="" Slot="1" Channel="4" Comment="АО в ЛИС КОС " UUID="1C2E6CB343852592FE713CA8C8131991.79DD1D9BE6D74071847F79924FE7F2BE" />
+		<Connection ItemName="KC_DO_DRV.AO_NM" Device="" Slot="1" Channel="5" Comment="АО в ЛИС НМ " UUID="1C2E6CB343852592FE713CA8C8131991.4F5AFA5DE25E4C029905C0C6300A51FD" />
+		<Connection ItemName="KC_DO_DRV.AO_UNTS" Device="" Slot="1" Channel="6" Comment="АО в ЛИС УНТС " UUID="1C2E6CB343852592FE713CA8C8131991.131F871F6A7343A29F8E5F3582B6D757" />
+		<Connection ItemName="KC_DO_DRV.AO_UZRG" Device="" Slot="1" Channel="7" Comment="АО в ЛИС УЗРГ" UUID="1C2E6CB343852592FE713CA8C8131991.DA8A28D6976A42439EBDD67963A4F243" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA1_ADES_ON" Device="" Slot="1" Channel="8" Comment="Обогрев прибора АДЭС LSA1 включить" UUID="1C2E6CB343852592FE713CA8C8131991.C184585620B34E62871F4E7249776C37" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA2_ADES_ON" Device="" Slot="1" Channel="9" Comment="Обогрев прибора АДЭС LSA2 включить" UUID="1C2E6CB343852592FE713CA8C8131991.18A2AB91543745789ADD2010CC1001EB" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA3_ADES_ON" Device="" Slot="1" Channel="10" Comment="Обогрев прибора АДЭС LSA3 включить" UUID="1C2E6CB343852592FE713CA8C8131991.7751B229432F44FB823D8C28928A238E" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA1_GPA_ON" Device="" Slot="1" Channel="11" Comment="Обогрев прибора LSA1 включить " UUID="1C2E6CB343852592FE713CA8C8131991.02066DF1753F4C79BEA982B83FE61E2F" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA2_GPA_ON" Device="" Slot="1" Channel="12" Comment="Обогрев прибора LSA2 включить " UUID="1C2E6CB343852592FE713CA8C8131991.ABACCFB062A24BD1AD36CA7EA698F48F" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA3_GPA_ON" Device="" Slot="1" Channel="13" Comment="Обогрев прибора LSA3 включить" UUID="1C2E6CB343852592FE713CA8C8131991.D600733DB202421FBE127BF1DDE36932" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA4_GPA_ON" Device="" Slot="1" Channel="14" Comment="Обогрев прибора LSA4 включить" UUID="1C2E6CB343852592FE713CA8C8131991.6B2D8F754B6D465E89DB7AA236D500C5" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA5_GPA_ON" Device="" Slot="1" Channel="15" Comment="Обогрев прибора LSA5 включить " UUID="1C2E6CB343852592FE713CA8C8131991.2C7FE9D90C1D4C09978A5F92B7AE0B02" />
+		<Connection ItemName="KC_DO_DRV.EN_LSA6_GPA_ON" Device="" Slot="1" Channel="16" Comment="Обогрев прибора LSA6 включить " UUID="1C2E6CB343852592FE713CA8C8131991.0DCEE5F15A874906918CA7267C9A689B" />
+		<Connection ItemName="KC_DO_DRV.Kr51_2_OF" Device="" Slot="2" Channel="1" Comment="Кран Кр51-2 - закрыть" UUID="1C2E6CB343852592FE713CA8C8131991.31FA123EC2D4419EB0A56EA590C388CD" />
+		<Connection ItemName="KC_DO_DRV.Kr51_2_ON" Device="" Slot="2" Channel="2" Comment="Кран Кр51-2 - открыть" UUID="1C2E6CB343852592FE713CA8C8131991.6CF21213E3ED42AFB25D04BB3AB76425" />
+		<Connection ItemName="KC_DO_DRV.Kr52_2_OF" Device="" Slot="2" Channel="3" Comment="Кран Кр52-2 - закрыть" UUID="1C2E6CB343852592FE713CA8C8131991.DA488EA7A339488BAA0E202BAB885EA2" />
+		<Connection ItemName="KC_DO_DRV.Kr52_2_ON" Device="" Slot="2" Channel="4" Comment="Кран Кр52-2 - открыть" UUID="1C2E6CB343852592FE713CA8C8131991.28583AB9EFA44E998C6F3F22107309BA" />
+		<Connection ItemName="KC_DO_DRV.Kr53_OF" Device="" Slot="2" Channel="5" Comment="Кран Кр53 - закрыть" UUID="1C2E6CB343852592FE713CA8C8131991.64F25F93E0574719A1018D09E097CD07" />
+		<Connection ItemName="KC_DO_DRV.Kr53_ON" Device="" Slot="2" Channel="6" Comment="Кран Кр53 - открыть" UUID="1C2E6CB343852592FE713CA8C8131991.2664CD92979945EE9C40F377AB35AA6D" />
+		<Connection ItemName="KC_DO_DRV.Kr53b_OF" Device="" Slot="2" Channel="7" Comment="Кран Кр53бп - закрыть" UUID="1C2E6CB343852592FE713CA8C8131991.8420C116991B4EC697F5CC795F3F70B6" />
+		<Connection ItemName="KC_DO_DRV.Kr53b_ON" Device="" Slot="2" Channel="8" Comment="Кран Кр53бп - открыть" UUID="1C2E6CB343852592FE713CA8C8131991.4658E96D2846447894FABB16223BD2E0" />
+		<Connection ItemName="KC_DO_DRV.Kr54_OF" Device="" Slot="2" Channel="9" Comment="Кран Кр54 - закрыть" UUID="1C2E6CB343852592FE713CA8C8131991.CE3332B0ED324C2F8FAE9E4DCEBF82C8" />
+		<Connection ItemName="KC_DO_DRV.Kr54_ON" Device="" Slot="2" Channel="10" Comment="Кран Кр54 - открыть" UUID="1C2E6CB343852592FE713CA8C8131991.323D41C4223541F295CED7A5C97F1557" />
+		<Connection ItemName="KC_DO_DRV.Kr54b_OF" Device="" Slot="2" Channel="11" Comment="Кран Кр54бп - закрыть" UUID="1C2E6CB343852592FE713CA8C8131991.DE7BF5600F864A5B8A014C03E711E810" />
+		<Connection ItemName="KC_DO_DRV.Kr54b_ON" Device="" Slot="2" Channel="12" Comment="Кран Кр54бп - открыть" UUID="1C2E6CB343852592FE713CA8C8131991.3C6AF3BBE985408A9B99536A5B47B1B4" />
+		<Connection ItemName="KC_DO_DRV.EO_KC" Device="" Slot="2" Channel="13" Comment="ЭО от САУ КЦ" UUID="1C2E6CB343852592FE713CA8C8131991.BEA37FE0BEC246B1AA19ADB84EA650C5" />
+		<Connection ItemName="KC_DO_DRV.EO_LED_KC" Device="" Slot="2" Channel="14" Comment="Инд. ЭО от САУ КЦ" UUID="1C2E6CB343852592FE713CA8C8131991.77CE9287B63F49DCAA08F094F272624B" />
+		<Connection ItemName="KC_DO_DRV.AOss_KC" Device="" Slot="2" Channel="15" Comment="АОсс от САУ КЦ" UUID="1C2E6CB343852592FE713CA8C8131991.2908989CA9134A8896D2ABDA0D5C4E8F" />
+		<Connection ItemName="KC_DO_DRV.AObs_KC" Device="" Slot="2" Channel="16" Comment="АОбс от САУ КЦ" UUID="1C2E6CB343852592FE713CA8C8131991.6BF7A7F53768440FB33B8560AF06F110" />
+	</Crossconnect>
+</Configuration>

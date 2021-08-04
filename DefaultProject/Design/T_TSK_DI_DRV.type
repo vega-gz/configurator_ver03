@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_TSK_DI_DRV" UUID="227A687257A349E3BA92A6A36AB9076D">
+<Fields>
+<Field Comment="Кран отсечной 1Т-1 открыт" Name="Kr_1T1_ON" Type="BOOL" UUID="8E3CAD70FDC7436CA2F565357973E98E"/>
+<Field Comment="Кран отсечной 1Т-1 закрыт" Name="Kr_1T1_OF" Type="BOOL" UUID="94A68844253F414CA0595CCFF31F9B54"/>
+<Field Comment="Кран отсечной 2Т-1 открыт" Name="Kr_2T1_ON" Type="BOOL" UUID="7585783A8A9D44E18498896C83D2A901"/>
+<Field Comment="Кран отсечной 2Т-1 закрыт" Name="Kr_2T1_OF" Type="BOOL" UUID="AFF765713971402D9DCF24E9884AF414"/>
+<Field Comment="Кран отсечной 3Т-1 открыт" Name="Kr_3T1_ON" Type="BOOL" UUID="B5E87EA87ECD4AFFBF2299C920BAAE41"/>
+<Field Comment="Кран отсечной 3Т-1 закрыт" Name="Kr_3T1_OF" Type="BOOL" UUID="4DF90FCE3C504F8180A5786189157771"/>
+<Field Comment="Кран отсечной 4Т-1 открыт" Name="Kr_4T1_ON" Type="BOOL" UUID="934E75D240734471B5E4847D68B54944"/>
+<Field Comment="Кран отсечной 4Т-1 закрыт" Name="Kr_4T1_OF" Type="BOOL" UUID="240A3846B5BA412E882869B01B4F403A"/>
+<Field Comment="Кран отсечной 5Т-1 открыт" Name="Kr_5T1_ON" Type="BOOL" UUID="8DCF2A6118A74C1B95D1D5D66A6778BE"/>
+<Field Comment="Кран отсечной 5Т-1 закрыт" Name="Kr_5T1_OF" Type="BOOL" UUID="C9EA98D790334C9EB0B3E05B14ED6806"/>
+<Field Comment="Ввод 380VAC включен (ББ САУ ТСк)" Name="Q_AC380_TSK_ON" Type="BOOL" UUID="62B852371B6444F28942AB0CFA58FEF3"/>
+<Field Comment="Ввод 380VAC отключен (ББ САУ ТСк)" Name="Q_AC380_TSK_OF" Type="BOOL" UUID="DBED31BC82B047D6B16D869785EA18F0"/>
+<Field Comment="Наличие 380 VAC на вводе 1 (ББ САУ ТСк)" Name="U1_AC380_TSK_ok" Type="BOOL" UUID="4AF055B5915E4FB7AC73CBE664036354"/>
+<Field Comment="Ввод 380 VAC аварийно отключен (ББ САУ ТСк)" Name="Q_AC380_TSK_AOF" Type="BOOL" UUID="5C4951AF627B40E9BD6FCA3F2BE51A43"/>
+<Field Comment="ИБП готов к работе (ББ САУ ТСк)" Name="UPS_TSK_Rdy" Type="BOOL" UUID="B4FA79A5B62F405588455DFEE6253F6E"/>
+<Field Comment="ИБП в работе (ББ САУ ТСк)" Name="UPS_TSK_work" Type="BOOL" UUID="743B861F480E43EC9B3B6A24B830A1F5"/>
+<Field Comment="ИБП неисправность (ББ САУ ТСк)" Name="UPS_TSK_Bad" Type="BOOL" UUID="A39F3592D17041AEB83DE20CEB345960"/>
+<Field Comment="Резерв" Name="Res_0" Type="BOOL" UUID="B5153B9F78834A0A9D63A29A1BA56DB9"/>
+<Field Comment="Кран отсечной 6Т-1 открыт" Name="Kr_6T1_ON" Type="BOOL" UUID="C4FA14BD6A66472B94213EBA40D284A2"/>
+<Field Comment="Кран отсечной 6Т-1 закрыт" Name="Kr_6T1_OF" Type="BOOL" UUID="293328241FC3473F9AAE0E6F874E5B27"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 6T высокое" Name="Pg_6T_v" Type="BOOL" UUID="B4C5EBAB02714C9C902ED140F2251DA7"/>
+<Field Comment="Электрообогрев приборных боксов 6Т включен" Name="EN_BB_6T_ON" Type="BOOL" UUID="D8A3816C6C374EAF978C7827B6CF9482"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 6Т)" Name="Q_AC220_6T_ON" Type="BOOL" UUID="ED2DDF61A8574D6BB717B9B331F8421E"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 6Т)" Name="Q_AC220_6T_OF" Type="BOOL" UUID="496F3B342E07408585A6A0DBA1244CA9"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 6Т)" Name="U1_AC220_6T_ok" Type="BOOL" UUID="F97614E44015497F9BD774F3E2D6C6E0"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 6Т)" Name="Q_AC220_6T_AOF" Type="BOOL" UUID="FAA3EE2D9C254091AD310125A27F7533"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 6Т)" Name="UPS_6T_Rdy" Type="BOOL" UUID="8E37130DA4484743972DA73ECCCE36AC"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 6Т)" Name="UPS_6T_work" Type="BOOL" UUID="B616EE9A0DCC41EE92F27838B01611B0"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 6Т)" Name="UPS_6T_Bad" Type="BOOL" UUID="D8EDFC371846414A982410AA728743B6"/>
+<Field Comment="Резерв" Name="Res_1" Type="BOOL" UUID="3CD2B91063674B60A123F44C6B3F09AC"/>
+<Field Comment="Кран отсечной 7Т-1 открыт" Name="Kr_7T1_ON" Type="BOOL" UUID="D23E9741C602444490E74862A1EFC045"/>
+<Field Comment="Кран отсечной 7Т-1 закрыт" Name="Kr_7T1_OF" Type="BOOL" UUID="9CA07E9DDE16461D97289197C1FC9D82"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 7T высокое" Name="Pg_7T_v" Type="BOOL" UUID="46DE6B48A4AD4D91AF2511503E7F30C2"/>
+<Field Comment="Электрообогрев приборных боксов 7Т включен" Name="EN_BB_7T_ON" Type="BOOL" UUID="C7820CF7819F44E48042818466AA4228"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 7Т)" Name="Q_AC220_7T_ON" Type="BOOL" UUID="84BC95E5D96B4D828A29394C40E07D7A"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 7Т)" Name="Q_AC220_7T_OF" Type="BOOL" UUID="B6523FEA48444B3A8B29E13FBD8E84FD"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 7Т)" Name="U1_AC220_7T_ok" Type="BOOL" UUID="70023F5635A745B1911061117C251149"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 7Т)" Name="Q_AC220_7T_AOF" Type="BOOL" UUID="33AC11C8CDE1451FB14B46C680EC443A"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 7Т)" Name="UPS_7T_Rdy" Type="BOOL" UUID="ACB2BD8AA54E474D80422A2D623630D0"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 7Т)" Name="UPS_7T_work" Type="BOOL" UUID="B5618B6A33654AE29A3FB6934F995A5E"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 7Т)" Name="UPS_7T_Bad" Type="BOOL" UUID="011A1F4726C442CFB03E9228EC426794"/>
+<Field Comment="Резерв" Name="Res_2" Type="BOOL" UUID="B63AB9F5A10F4379BE5D2193AB939CB2"/>
+<Field Comment="Кран отсечной 8Т-1 открыт" Name="Kr_8T1_ON" Type="BOOL" UUID="E6512C6E6C20453AA3D3D55604D9AF2B"/>
+<Field Comment="Кран отсечной 8Т-1 закрыт" Name="Kr_8T1_OF" Type="BOOL" UUID="108A6D338C974D06BF46275636F0D971"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 8T высокое" Name="Pg_8T_v" Type="BOOL" UUID="6A6427EB64224E8BB25E169F6A6C6C9A"/>
+<Field Comment="Электрообогрев приборных боксов 8Т включен" Name="EN_BB_8T_ON" Type="BOOL" UUID="A237224277C04092A1F5A18AF3D094D2"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 8Т)" Name="Q_AC220_8T_ON" Type="BOOL" UUID="849E8BF68E834406BFF07ECEA3291AC4"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 8Т)" Name="Q_AC220_8T_OF" Type="BOOL" UUID="5A6F56B7E79C493483D15242FCD3D6AC"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 8Т)" Name="U1_AC220_8T_ok" Type="BOOL" UUID="E18B2C1923B54B268EBB1C5D388B8881"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 8Т)" Name="Q_AC220_8T_AOF" Type="BOOL" UUID="AA1981877FC449BE97588FCA125ABDF9"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 8Т)" Name="UPS_8T_Rdy" Type="BOOL" UUID="13A6D82DEB7E42CCB612B3002CA0FF33"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 8Т)" Name="UPS_8T_work" Type="BOOL" UUID="22BC2DB78A204D5E96D9622F62F50408"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 8Т)" Name="UPS_8T_Bad" Type="BOOL" UUID="8B4EBCFED44743D59CCE04F3DCED02F4"/>
+<Field Comment="Резерв" Name="Res_3" Type="BOOL" UUID="A1777963A4DC44999A59FD31DC191D32"/>
+<Field Comment="Кран отсечной 9Т-1 открыт" Name="Kr_9T1_ON" Type="BOOL" UUID="C623E7B32A414F0FAF741871E347A408"/>
+<Field Comment="Кран отсечной 9Т-1 закрыт" Name="Kr_9T1_OF" Type="BOOL" UUID="356FE6D00E8C483D9818DF5EE7D22488"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 9T высокое" Name="Pg_9T_v" Type="BOOL" UUID="8DE20F8913CE4264B7C1506E813C19BF"/>
+<Field Comment="Электрообогрев приборных боксов 9Т включен" Name="EN_BB_9T_ON" Type="BOOL" UUID="747DAA598E5144CFA0607F6A7164AD11"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 9Т)" Name="Q_AC220_9T_ON" Type="BOOL" UUID="2DD2B223C9B34100B450D902D3A620A9"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 9Т)" Name="Q_AC220_9T_OF" Type="BOOL" UUID="EB6EAA36B2E9455096B284D25859C916"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 9Т)" Name="U1_AC220_9T_ok" Type="BOOL" UUID="26E23900FC8543FF95D28D255F722EAA"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 9Т)" Name="Q_AC220_9T_AOF" Type="BOOL" UUID="DB92223AFFC74EF6A4F295C777254859"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 9Т)" Name="UPS_9T_Rdy" Type="BOOL" UUID="D15135380AB647229791824A909C5FEA"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 9Т)" Name="UPS_9T_work" Type="BOOL" UUID="201369B7616F46EFB13F109F0EBA83CA"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 9Т)" Name="UPS_9T_Bad" Type="BOOL" UUID="FA6477934886418ABF9222E9DA6F715D"/>
+<Field Comment="Резерв" Name="Res_4" Type="BOOL" UUID="0B4D794731984218BFA4244FD61A756F"/>
+<Field Comment="Кран отсечной 10Т-1 открыт" Name="Kr_10T1_ON" Type="BOOL" UUID="29E21C5E3D0C4C6A843A81DCC501A023"/>
+<Field Comment="Кран отсечной 10Т-1 закрыт" Name="Kr_10T1_OF" Type="BOOL" UUID="848F10300355488B9B09CB93854E14EE"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 10T высокое" Name="Pg_10T_v" Type="BOOL" UUID="698C30A15E0A41BCA13B9CEA72B2BFF5"/>
+<Field Comment="Электрообогрев приборных боксов 10Т включен" Name="EN_BB_10T_ON" Type="BOOL" UUID="55F433C6316B4E62A8B560FCE0229A29"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 10Т)" Name="Q_AC220_10T_ON" Type="BOOL" UUID="3EF05AC1182C4164B172661606DB15D2"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 10Т)" Name="Q_AC220_10T_OF" Type="BOOL" UUID="3CAC7ADE0C454E72943913652A7DD184"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 10Т)" Name="U1_AC220_10T_ok" Type="BOOL" UUID="171AFC183EED4FB581A3B1E96172E454"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 10Т)" Name="Q_AC220_10T_AOF" Type="BOOL" UUID="B7FC8C04D24841ECB7624B66A0DD33B9"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 10Т)" Name="UPS_10T_Rdy" Type="BOOL" UUID="19953D7A26D4400CB3DCC9F632631AD4"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 10Т)" Name="UPS_10T_work" Type="BOOL" UUID="9C83BB458708471A9A2EF792E7BD4FC5"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 10Т)" Name="UPS_10T_Bad" Type="BOOL" UUID="1B2B42E97BEC44319DDD1FDCDD8E73A0"/>
+<Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="39971841373D4D899E83F9925C9BDC14"/>
+<Field Comment="Кран отсечной 11Т-1 открыт" Name="Kr_11T1_ON" Type="BOOL" UUID="6A5FBBEE5D1F49058FE7DC8D56608EBB"/>
+<Field Comment="Кран отсечной 11Т-1 закрыт" Name="Kr_11T1_OF" Type="BOOL" UUID="5442DF783C5C46F68C2197D2E7A6C58D"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 11T высокое" Name="Pg_11T_v" Type="BOOL" UUID="9B11A018C2DC42648E77A6D31A6DFF1C"/>
+<Field Comment="Электрообогрев приборных боксов 11Т включен" Name="EN_BB_11T_ON" Type="BOOL" UUID="D1D872D272EF4F759C0735814B823186"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 11Т)" Name="Q_AC220_11T_ON" Type="BOOL" UUID="B09EB9FEF02D489E8F7FBB2A4CFCA17C"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 11Т)" Name="Q_AC220_11T_OF" Type="BOOL" UUID="73BF473A70AA4820B03DAB0009B80B16"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 11Т)" Name="U1_AC220_11T_ok" Type="BOOL" UUID="B34F318A63C34F8FABD6B8FA64536438"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 11Т)" Name="Q_AC220_11T_AOF" Type="BOOL" UUID="9EA2B7A5AB4D4525A0ABDF2C715537C3"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 11Т)" Name="UPS_11T_Rdy" Type="BOOL" UUID="90EE9C402AA041DEB566D5512E9DCF11"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 11Т)" Name="UPS_11T_work" Type="BOOL" UUID="23E6E31200594FD28699C2364213A87F"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 11Т)" Name="UPS_11T_Bad" Type="BOOL" UUID="DA663A3081164DD1BACF17CA1246659A"/>
+<Field Comment="Резерв" Name="Res_6" Type="BOOL" UUID="38A9B9167BAA476BB9A119072611629F"/>
+<Field Comment="Кран отсечной 12Т-1 открыт" Name="Kr_12T1_ON" Type="BOOL" UUID="3BB8C814DAD04CC989A497F4D9D9F0CD"/>
+<Field Comment="Кран отсечной 12Т-1 закрыт" Name="Kr_12T1_OF" Type="BOOL" UUID="96316C147394459189CE970010FFEEF9"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 12T высокое" Name="Pg_12T_v" Type="BOOL" UUID="58A184171EC84EC58290E289514C402C"/>
+<Field Comment="Электрообогрев приборных боксов 12Т включен" Name="EN_BB_12T_ON" Type="BOOL" UUID="65EC96EB1EF14D03928840606351ED23"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 12Т)" Name="Q_AC220_12T_ON" Type="BOOL" UUID="C3AC06765D954A85870AA1C4D857BCB3"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 12Т)" Name="Q_AC220_12T_OF" Type="BOOL" UUID="B084E1FF22EB4E8E839B4E15A229CEDD"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 12Т)" Name="U1_AC220_12T_ok" Type="BOOL" UUID="22B89AA3CEAE45E1A872BA97E56E73D5"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 12Т)" Name="Q_AC220_12T_AOF" Type="BOOL" UUID="04C5F8BC23B947CD8236DF93A3DB4D51"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 12Т)" Name="UPS_12T_Rdy" Type="BOOL" UUID="207A77BE707A4AC6883E5BE52646FFF3"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 12Т)" Name="UPS_12T_work" Type="BOOL" UUID="777DCE5EB78141C089B9A900B3675DEB"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 12Т)" Name="UPS_12T_Bad" Type="BOOL" UUID="CEC53581F8E449D3B2B82CB0ED5ADE0D"/>
+<Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="C1B077C7BB004954B3935941D36F6D12"/>
+<Field Comment="Кран отсечной 13Т-1 открыт " Name="Kr_13T1_ON" Type="BOOL" UUID="3653346802AA47FAA741A43044BDC278"/>
+<Field Comment="Кран отсечной 13Т-1 закрыт" Name="Kr_13T1_OF" Type="BOOL" UUID="B163577BB4AB4CEEBF0AFA409B167C94"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 13T высокое" Name="Pg_13T_v" Type="BOOL" UUID="436D1864D92541B8B7D9412387138F29"/>
+<Field Comment="Электрообогрев приборных боксов 13Т включен" Name="EN_BB_13T_ON" Type="BOOL" UUID="884BBB048C1944758D4EAF2B1FD76216"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 13Т)" Name="Q_AC220_13T_ON" Type="BOOL" UUID="B7D07EAEFB02483CADEC2A0F1018659A"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 13Т)" Name="Q_AC220_13T_OF" Type="BOOL" UUID="5AC2CB2F37D7471598946A8217E4A3BC"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 13Т)" Name="U1_AC220_13T_ok" Type="BOOL" UUID="88E2F07D2B5B41928CA83EF3E66D7308"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 13Т)" Name="Q_AC220_13T_AOF" Type="BOOL" UUID="695377C94B9D496AB2C2BF0680711800"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 13Т)" Name="UPS_13T_Rdy" Type="BOOL" UUID="C310FDD3DDAC488D8C210F1B7CD17518"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 13Т)" Name="UPS_13T_work" Type="BOOL" UUID="785F00C503C94CE693C4A995C4B1E071"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 13Т)" Name="UPS_13T_Bad" Type="BOOL" UUID="08C31CA2080B4170B211359BF84F438A"/>
+<Field Comment="Резерв" Name="Res_8" Type="BOOL" UUID="20CAFB26D6F848C98DD247B0573EC10A"/>
+<Field Comment="Кран отсечной 14Т-1 открыт" Name="Kr_14T1_ON" Type="BOOL" UUID="41591F0DAFD84819AFFC3255E1322368"/>
+<Field Comment="Кран отсечной 14Т-1 закрыт" Name="Kr_14T1_OF" Type="BOOL" UUID="8C3EB982EB474D80A2A96AB95370861F"/>
+<Field Comment="Давление газа в трубе эксплуатационной скв. 14T высокое" Name="Pg_14T_v" Type="BOOL" UUID="281ED549346348C59AF572EA5701E6DC"/>
+<Field Comment="Электрообогрев приборных боксов 14Т включен" Name="EN_BB_14T_ON" Type="BOOL" UUID="209E3370E9084EC9A2B32C32557ED2D7"/>
+<Field Comment="Ввод 220VAC включен (ББ ЭХЗ 14Т)" Name="Q_AC220_14T_ON" Type="BOOL" UUID="442983DED4744126963E17A4BAA69B40"/>
+<Field Comment="Ввод 220VAC отключен (ББ ЭХЗ 14Т)" Name="Q_AC220_14T_OF" Type="BOOL" UUID="BF1A6C61517B49BFA3AF1EEFD2D3A0DF"/>
+<Field Comment="Наличие 220 VAC на вводе 1 (ББ ЭХЗ 14Т)" Name="U1_AC220_14T_ok" Type="BOOL" UUID="A50746451B804BA69A239AE7777075F2"/>
+<Field Comment="Ввод 220 VAC аварийно отключен (ББ ЭХЗ 14Т)" Name="Q_AC220_14T_AOF" Type="BOOL" UUID="495CA44380FA4D43A330DFFA1C04D28E"/>
+<Field Comment="ИБП готов к работе (ББ ЭХЗ 14Т)" Name="UPS_14T_Rdy" Type="BOOL" UUID="2680F74549A34E029EF37D0F1EA5B650"/>
+<Field Comment="ИБП в работе (ББ ЭХЗ 14Т)" Name="UPS_14T_work" Type="BOOL" UUID="5FAA5ECA79B44B3DB2F4BD2F72AC4CBF"/>
+<Field Comment="ИБП неисправность (ББ ЭХЗ 14Т)" Name="UPS_14T_Bad" Type="BOOL" UUID="58341DF7728843FFAAF24A58EF4B80C6"/>
+<Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="62EBFD4891614DF98592F93FFEBDE920"/>
+<Field Comment="Влажность в ББ САУ ТСк ПХГ повышенная" Name="Vlaga_BB_TSK_v" Type="BOOL" UUID="5785396962D04222ABE3D1E23A7F2773"/>
+<Field Comment="Дверь ББ САУ ТСк ПХГ открыта" Name="Dver_BB_TSK_open" Type="BOOL" UUID="8884EE5F51E54EEF9671976ACC712FBD"/>
+<Field Comment="Резерв" Name="Res_10" Type="BOOL" UUID="B1ED74A1C36448529E25A903A2D546B9"/>
+<Field Comment="Резерв" Name="Res_11" Type="BOOL" UUID="E81DD20C0A584E8FAA248A78A9573E40"/>
+<Field Comment="Резерв" Name="Res_12" Type="BOOL" UUID="CFD95AD4B8F54B058FF18162D3065A6C"/>
+<Field Comment="Резерв" Name="Res_13" Type="BOOL" UUID="44BD486C27034DD28C2C2EDBB8827F33"/>
+<Field Comment="Резерв" Name="Res_14" Type="BOOL" UUID="BB44B0A258CD4DE38622B157274CF890"/>
+<Field Comment="Резерв" Name="Res_15" Type="BOOL" UUID="61A30117880B4C97B8D60A9A7C0998B2"/>
+<Field Comment="Резерв" Name="Res_16" Type="BOOL" UUID="C196FE2D7CA046E387348933455E3475"/>
+<Field Comment="Резерв" Name="Res_17" Type="BOOL" UUID="2B00F3399FF24BC593BC4A0694986FC8"/>
+<Field Comment="Резерв" Name="Res_18" Type="BOOL" UUID="C571D947C8F445059A92A61A7831CFBB"/>
+<Field Comment="Резерв" Name="Res_19" Type="BOOL" UUID="A6233ABA432B4675B8DAFC841BA194BD"/>
+<Field Comment="Резерв" Name="Res_20" Type="BOOL" UUID="B5FF6CF035EE46A79EF0B588FBB521D4"/>
+<Field Comment="Резерв" Name="Res_21" Type="BOOL" UUID="43DEDAE726E54147B85FC1FB78B89116"/>
+<Field Comment="Резерв" Name="Res_22" Type="BOOL" UUID="CAE4216A3004405695E9DFEF05C069AE"/>
+<Field Comment="Резерв" Name="Res_23" Type="BOOL" UUID="6B582B6C29014D53B9A56E6A94D7A376"/>
+<Field Comment="Резерв" Name="Res_24" Type="BOOL" UUID="F81DDD0071204E9C877141365109E8D7"/>
+<Field Comment="Резерв" Name="Res_25" Type="BOOL" UUID="F125479883B44E71945C2559D84BC3BE"/>
+<Field Comment="КЦУ. Кран отсечной 1Т-1 закрыть" Name="Kr_1T1_OF_KCU" Type="BOOL" UUID="2D0F680B3E4C4FD99C761D66078D52E0"/>
+<Field Comment="КЦУ. Кран отсечной 2Т-1 закрыть" Name="Kr_2T1_OF_KCU" Type="BOOL" UUID="F851D7731AE24782BAFD93C1418CE59C"/>
+<Field Comment="КЦУ. Кран отсечной 3Т-1 закрыть" Name="Kr_3T1_OF_KCU" Type="BOOL" UUID="B83BB79F67F540B1B20F862C014F96F7"/>
+<Field Comment="КЦУ. Кран отсечной 4Т-1 закрыть" Name="Kr_4T1_OF_KCU" Type="BOOL" UUID="82DECAD395D64AF3BA5BAD2411CF22AA"/>
+<Field Comment="КЦУ. Кран отсечной 5Т-1 закрыть" Name="Kr_5T1_OF_KCU" Type="BOOL" UUID="A6376882704F449F8E11B8A00FD4C721"/>
+<Field Comment="КЦУ. Кран отсечной 6Т-1 закрыть" Name="Kr_6T1_OF_KCU" Type="BOOL" UUID="B40C9F0D500C4F12B40EFF9A21BDEF2F"/>
+<Field Comment="КЦУ. Кран отсечной 7Т-1 закрыть" Name="Kr_7T1_OF_KCU" Type="BOOL" UUID="F230CC83320849949024FF550BE34E85"/>
+<Field Comment="КЦУ. Кран отсечной 8Т-1 закрыть" Name="Kr_8T1_OF_KCU" Type="BOOL" UUID="D5A9EED56C4544B3B3BC196270EF103A"/>
+<Field Comment="КЦУ. Кран отсечной 9Т-1 закрыть" Name="Kr_9T1_OF_KCU" Type="BOOL" UUID="46B92D16AC0F41D9B1980372A9200A59"/>
+<Field Comment="КЦУ. Кран отсечной 10Т-1 закрыть" Name="Kr_10T1_OF_KCU" Type="BOOL" UUID="786C2DDE4CF64F15822FC86EF3A340EF"/>
+<Field Comment="КЦУ. Кран отсечной 11Т-1 закрыть" Name="Kr_11T1_OF_KCU" Type="BOOL" UUID="AAA5271617774DE6A13C3B1D13F8928F"/>
+<Field Comment="КЦУ. Кран отсечной 12Т-1 закрыть" Name="Kr_12T1_OF_KCU" Type="BOOL" UUID="82D4091C054645928AA3B848B20531C1"/>
+<Field Comment="КЦУ. Кран отсечной 13Т-1 закрыть" Name="Kr_13T1_OF_KCU" Type="BOOL" UUID="BC52206475C24614B1A458369641F7AC"/>
+<Field Comment="КЦУ. Кран отсечной 14Т-1 закрыть" Name="Kr_14T1_OF_KCU" Type="BOOL" UUID="920F3C0D8EFA49A78CDD9731FF20990F"/>
+<Field Comment="Резерв" Name="Res_26" Type="BOOL" UUID="9E761F183E2345989A45704FEE6E0BB3"/>
+<Field Comment="Резерв" Name="Res_27" Type="BOOL" UUID="5B4F34A9683A4FEAB0B63379DEC0C9F1"/>
+<Field Comment="Контроль питания на рез. входе САУ ~220 В" Name="Chk_AC220rez_SAU" Type="BOOL" UUID="7F7F6494781C4E0D92D6B37182D67BBD"/>
+<Field Comment="Автоматы питания включены" Name="QF_ON" Type="BOOL" UUID="D57F8939F9A94F9287B9CB432C09330A"/>
+<Field Comment="Контроль исправности разрядников" Name="Chk_razr" Type="BOOL" UUID="C69BF5B2A3244215AEC6937F458E6945"/>
+<Field Comment="Контроль питания на выходе ИБП =24 В" Name="Chk_UPS_DC24" Type="BOOL" UUID="ADC7996B64724569A7D367E505D9C666"/>
+<Field Comment="Исправность осн. ИП =24В внутренних цепей" Name="DC24osn_Int_ok" Type="BOOL" UUID="670CF480242142FE97F94FC26CAAD7BE"/>
+<Field Comment="Исправность рез. ИП =24В внутренних цепей" Name="DC24rez_Int_ok" Type="BOOL" UUID="6C73122AC7D14E7895BA29CAE9C632CE"/>
+<Field Comment="Исправность осн. ИП =24В внешних цепей" Name="DC24osn_Ext1_ok" Type="BOOL" UUID="B2F86591E12944EFB39D181A8EEB2239"/>
+<Field Comment="Исправность рез. ИП =24В внешних цепей" Name="DC24rez_Ext1_ok" Type="BOOL" UUID="3D245FC87A78489BA6338E00517FAF1E"/>
+<Field Comment="Исправность осн. ИП =24В внешних цепей" Name="DC24osn_Ext2_ok" Type="BOOL" UUID="9C440AB4F27A4D77B75746DF6853D427"/>
+<Field Comment="Исправность рез. ИП =24В внешних цепей" Name="DC24rez_Ext2_ok" Type="BOOL" UUID="39FD2FB68FE34848BD97749B9236E237"/>
+<Field Comment="Контроль питания на осн. входе САУ ~220 В" Name="Chk_AC220osn_SAU" Type="BOOL" UUID="A243BC8C402E4BFE875400A826849CAA"/>
+<Field Comment="Резерв" Name="Res_28" Type="BOOL" UUID="2EC8BCAE48674EFA9508D672EDDC52A4"/>
+<Field Comment="Резерв" Name="Res_29" Type="BOOL" UUID="F087C9886D1C41E290930CF1BF8018E0"/>
+<Field Comment="Резерв" Name="Res_30" Type="BOOL" UUID="D10E9F3861554F1FADF04C7361F5EC18"/>
+<Field Comment="Резерв" Name="Res_31" Type="BOOL" UUID="699DD263D86C4E1B9798CBA68B9364CA"/>
+<Field Comment="Резерв" Name="Res_32" Type="BOOL" UUID="331D94E1BFE44D649F09D18C58B32DD5"/>
+</Fields>
+</Type>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Sound" Kind="Struct" UUID="S5AARPCXPUCE7NVFGZCHJQJIKM">
+	<Fields>
+		<Field Name="alarm" Type="BOOL" UUID="NSYGJ4W5PHSUFPTWSSNWYHUOPI" Comment="Предупредительный" />
+		<Field Name="crash" Type="BOOL" UUID="BQAKJ4D2WVAUBBSUSDYB66VRLM" Comment="Аварийный" />
+		<Field Name="mute" Type="BOOL" UUID="PPMYAR2CDCWENC5B5YAKIA2U5M" Comment="Признак отключения звука" />
+	</Fields>
+</Type>

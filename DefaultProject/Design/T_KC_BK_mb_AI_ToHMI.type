@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_BK_mb_AI_ToHMI" UUID="FFC3008A2566497E8D0F0665C10083E0">
+<Fields>
+<Field Comment="Расход газа на выходе потребителю  ,Ст.м3/ч" Name="Qg_out" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="078282E00C0C49928CDF2E1FB260F106"/>
+<Field Comment="Суммарное количество газа  ,м3" Name="Sum_Qg" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6CC91FF108CB435199F47F5541703291"/>
+<Field Comment="Температура точки росы после 010А01  ,°C" Name="Tpd1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4FAE24AED4EC4F2C903045B396359D1F"/>
+<Field Comment="Давление на выходе станции  ,МПа" Name="Pout_st" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F79B91A92A06427AAC5F96EA21108436"/>
+<Field Comment="Давление в контуре расходомер  ,МПа" Name="P_flow" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7908B23176264C258721DA8D49DA84BC"/>
+<Field Comment="Давление в ресивере  ,МПа" Name="P_res" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DFD09BB7BCC742C184E866E5E23092EF"/>
+<Field Comment="Температура перед фильтрами после 01КМ01  ,°C" Name="T_in_F1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B8C54958CD3148F3B04D18BC4D2228AF"/>
+<Field Comment="Температура в контуре расходомера  ,°C" Name="T_flow" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2F6AA1DD08374214AA8839828A087E0A"/>
+<Field Comment="Температура на всасе компрессора 01КМ01  ,°C" Name="T_in_K1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7F93F34454B04B7EBC8902C89FC4D099"/>
+<Field Comment="Температура точки росы после 020А01  ,°C" Name="Tpd2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9DC17368165E441B8CBA420BC39A7FFE"/>
+<Field Comment="Температура перед фильтрами после 02КМ01  ,°C" Name="T_in_F2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7D8989CC10064EDBB4F26EEA6C8B696B"/>
+<Field Comment="Температура на всасе компрессора 02КМ01  ,°C" Name="T_in_K2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9E4DA22D63174C75A9BEBAC3E3D48BA8"/>
+<Field Comment="Наработка 01KM01  ,ч" Name="Nar_01KM01" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="146E2362E8744B79B3FC7372575FAC6A"/>
+<Field Comment="Наработка 01ОА01  ,ч" Name="Nar_01OA01" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="937535C1176847C580F15A36C546AA66"/>
+<Field Comment="Наработка 02КМ01  ,ч" Name="Nar_02KM01" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C2FE9595145943C5B64A210FB320BDCB"/>
+<Field Comment="Наработка 02ОА01  ,ч" Name="Nar_02OA01" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BB1A31343309419F82EA27A84CE17CEF"/>
+<Field Comment="Счетчик электрообогрева ресивера и конденсатопровода: Текущий ток  ,А" Name="EL_Count_I" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="160E97F3F4C74D609F80701CFC70EE46"/>
+<Field Comment="Счетчик электрообогрева ресивера и конденсатопровода: Текущее напряжение  ,В" Name="EL_Count_U" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="371A04D661934AA885823F9342F0D5C7"/>
+<Field Comment="Счетчик электрообогрева ресивера и конденсатопровода: Текущая мощность  ,Вт" Name="EL_Count_Pow" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="29D7D0854FEF48C780B3E84292F7DF2E"/>
+<Field Comment="Счетчик электрообогрева ресивера и конденсатопровода блок-бокса: Текущий ток  ,А" Name="EL_BB_Count_I" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AD107BDF8A0F4F3685D68AFD57E74470"/>
+<Field Comment="Счетчик электрообогрева ресивера и конденсатопровода блок-бокса:  Текущее напряжение  ,В" Name="EL_BB_Count_U" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7AD2EED2ED584A7D803CCAAE4CBC803D"/>
+<Field Comment="Счетчик электрообогрева ресивера и конденсатопровода блок-бокса:  Текущее мощность  ,Вт" Name="EL_BB_Count_Pow" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="88B4EED78D694DCDBA49836C453821C9"/>
+</Fields>
+</Type>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Crane_EVENTS" Kind="Struct" UUID="70DE6C78441214C1D693E9BFDB7294B5">
+    <Fields>
+        <Field Name="non" Type="BOOL" UUID="8754BD0140B2CAEB4CD9A592909A71DA" Comment="ИМ &quot;Не открыт&quot;" />
+        <Field Name="noff" Type="BOOL" UUID="4306AE204D934B4537CC11863E692D60" Comment="ИМ &quot;Не закрыт&quot;" />
+        <Field Name="nstart" Type="BOOL" UUID="50C1B01B4F0B7AD1DF08E6A61AAECCE3" Comment="ИМ &quot;Не стронулся&quot;" />
+        <Field Name="selfon" Type="BOOL" UUID="BC0F3CA242BEDFBD525EE3ACB3978ACC" Comment="ИМ &quot;Самопроизвольное открытие&quot;" />
+        <Field Name="selfoff" Type="BOOL" UUID="476F05EA429036298BA292BCA2F6F97F" Comment="ИМ &quot;Самопроизвольное закрытие&quot;" />
+        <Field Name="flt" Type="BOOL" UUID="41546FA44593F54692130AADA57BE1E5" Comment="ИМ &quot;Ошибка концевиков&quot;" />
+        <Field Name="ncon" Type="BOOL" UUID="987C821948C067B996CA66AD6273AA1E" Comment="ИМ &quot;Нет КЦУ открытия&quot;" />
+        <Field Name="ncoff" Type="BOOL" UUID="3A099EEC4D7A7BB6B9189AAC6D6D3688" Comment="ИМ &quot;Нет КЦУ закрытия&quot;" />
+        <Field Name="power" Type="BOOL" UUID="F2F47F544AB85E8615964A931787CF5F" Comment="ИМ Питание крана не включено" />
+        <Field Name="lo_prs" Type="BOOL" UUID="FD8F051C4ED76820168F03A1F5DDBB06" Comment="ИМ низкое давление в гидроаккумуляторе " />
+        <Field Name="lo_urv" Type="BOOL" UUID="4AFCF1F04694BA31777C26AA39ED8431" Comment="ИМ низкий уровень жидкости в баке" />
+        <Field Name="engine" Type="BOOL" UUID="79178E434214BBE6E8858DB77B005A35" Comment="ИМ защита двигателя" />
+        <Field Name="uprv" Type="BOOL" UUID="89C40E5642B36F7D6602BB952392A60F" Comment="ИМ напряжение управления двигателем" />
+        <Field Name="manual" Type="BOOL" UUID="A93716C84901EB450496AFAEB70655D0" Comment="ИМ местный режим управления" />
+        <Field Name="union" Type="BOOL" UUID="49759CE447129E05A26D2B8119352EB6" Comment="ИМ общая неисправность привода" />
+        <Field Name="bl_upr" Type="BOOL" UUID="13D66A1542FDA492DD567D970342F478" Comment="ИМ блок управления приводом включен/выключен" />
+        <Field Name="kku" Type="BOOL" UUID="6CC420E646A3B9117F061F925C3D9857" Comment="ИМ контроль команды управления охранными краном от СЛТМ" />
+        <Field Name="all" Type="BOOL" UUID="259AD30842F2A4E878CCEEA7262AC22F" Comment="ИМ общая неисправность" />
+    </Fields>
+</Type>

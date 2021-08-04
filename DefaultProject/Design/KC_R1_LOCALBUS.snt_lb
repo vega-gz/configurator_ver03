@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+	<Device CyclePeriod="250000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="TRUE">
+		<Slot Address="1" ModuleType="68" />
+		<Slot Address="2" ModuleType="68" />
+		<Slot Address="3" ModuleType="68" />
+		<Slot Address="4" ModuleType="68" />
+		<Slot Address="5" ModuleType="68" />
+		<Slot Address="6" ModuleType="33" />
+		<Slot Address="7" ModuleType="33" />
+		<Slot Address="8" ModuleType="33" />
+	</Device>
+	<Crossconnect>
+		<Connection ItemName="KC_A1_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.8A0A6D1C41CF457D94442F8831617049" />
+		<Connection ItemName="KC_A1_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.559489694EF4757F074EFBAF4ED2BE04" />
+		<Connection ItemName="KC_A1_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.257D167249D88B24D42F53B7C893779E" />
+		<Connection ItemName="KC_A1_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.26FFA4AE4FE6B82840F52A81A540B7BC" />
+		<Connection ItemName="KC_A1_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.A4CC71954594084C3612759E1D786328" />
+		<Connection ItemName="KC_A1_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.EFDACBE7493CD384E161BD9F7713F864" />
+		<Connection ItemName="KC_A1_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.BE36D8BE4D68EE980579328DFC460CDC" />
+		<Connection ItemName="KC_A1_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="94E912C3494BE2F95A6E0EA4D8279A01.532AF0334C06CC4D645F92AEF48908D5" />
+		<Connection ItemName="KC_DI_DRV.Kr51_ON" Device="" Slot="6" Channel="1" Comment="Кран 51 открыт" UUID="370BB8454B0BBAAC1D538DB0310CF415.5C62856D36ED42898FB17B306D4928AA" />
+		<Connection ItemName="KC_DI_DRV.Kr51_ON_KCD" Device="" Slot="6" Channel="2" Comment="Кран 51 открыт. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.D8FF662DAD9E40E7BD2B8C5C78E6FECE" />
+		<Connection ItemName="KC_DI_DRV.Kr51_OF" Device="" Slot="6" Channel="3" Comment="Кран 51 закрыт " UUID="370BB8454B0BBAAC1D538DB0310CF415.76FFAA8D87C04D158B74F513A918335A" />
+		<Connection ItemName="KC_DI_DRV.Kr51_OF_KCD" Device="" Slot="6" Channel="4" Comment="Кран 51 закрыт. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.5EAE5F4C52174C67AA252E791788A101" />
+		<Connection ItemName="KC_DI_DRV.Kr52_ON" Device="" Slot="6" Channel="5" Comment="Кран 52 открыт " UUID="370BB8454B0BBAAC1D538DB0310CF415.35D7E3351E5741C99C11C2E661607FFC" />
+		<Connection ItemName="KC_DI_DRV.Kr52_ON_KCD" Device="" Slot="6" Channel="6" Comment="Кран 52 открыт. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.EE6A026C6D5D423F943597F57CC5F762" />
+		<Connection ItemName="KC_DI_DRV.Kr52_OF" Device="" Slot="6" Channel="7" Comment="Кран 52 закрыт" UUID="370BB8454B0BBAAC1D538DB0310CF415.4E4767D5559849FFAA448A02D3D2565C" />
+		<Connection ItemName="KC_DI_DRV.Kr52_OF_KCD" Device="" Slot="6" Channel="8" Comment="Кран 52 закрыт. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.4D987AF40221451DAB91BF3441F3EB24" />
+		<Connection ItemName="KC_DI_DRV.UTUO_Alarm" Device="" Slot="6" Channel="9" Comment="УТУО. Обобщенный сигнал аварии " UUID="370BB8454B0BBAAC1D538DB0310CF415.59D87AE6CF9040FB9F45CA96E82B9223" />
+		<Connection ItemName="KC_DI_DRV.UTUO_Alarm_KCD" Device="" Slot="6" Channel="10" Comment="УТУО. Обобщенный сигнал аварии. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.C4FA17ECABD040B6BEC105044B2D8784" />
+		<Connection ItemName="KC_DI_DRV.UTUO_Gas10" Device="" Slot="6" Channel="11" Comment="УТУО. Загазованность по метану более 10% НКПР" UUID="370BB8454B0BBAAC1D538DB0310CF415.6666DFA6AAB84BD7BA2FBA2341BAE431" />
+		<Connection ItemName="KC_DI_DRV.UTUO_Gas10_KCD" Device="" Slot="6" Channel="12" Comment="УТУО. Загазованность по метану более 10% НКПР. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.78B1EE607A274155A42DDA032BD49F09" />
+		<Connection ItemName="KC_DI_DRV.UTUO_Kl_ots_OF" Device="" Slot="6" Channel="13" Comment="УТУО. Срабатывание отсечного клапана на подводящем газопроводе" UUID="370BB8454B0BBAAC1D538DB0310CF415.4A61E7AF328D4FB1993198CABFB73F54" />
+		<Connection ItemName="KC_DI_DRV.UTUO_Kl_ots_OF_KCD" Device="" Slot="6" Channel="14" Comment="УТУО. Срабатывание отсечного клапана на подводящем газопроводе. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.FFB9F78D36AC4DEA87C6BC7238FA9215" />
+		<Connection ItemName="KC_DI_DRV.UTUO_No_U" Device="" Slot="6" Channel="15" Comment="УТУО. Исчезновение напряжения питания" UUID="370BB8454B0BBAAC1D538DB0310CF415.9F2566A4063C4108B51F41387B787347" />
+		<Connection ItemName="KC_DI_DRV.UTUO_No_U_KCD" Device="" Slot="6" Channel="16" Comment="УТУО. Исчезновение напряжения питания. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.9BDE60304E7D4FD98898C8058B17AE61" />
+		<Connection ItemName="KC_DI_DRV.Vn_P2_ON" Device="" Slot="7" Channel="1" Comment="Вентсистема П2 в работе " UUID="370BB8454B0BBAAC1D538DB0310CF415.FCF49215EC6D4AC786F9333F580B2641" />
+		<Connection ItemName="KC_DI_DRV.Vn_P2_ON_KCD" Device="" Slot="7" Channel="2" Comment="Вентсистема П2 в работе. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.E4F2A67C77AF42BDA377696F312EC14F" />
+		<Connection ItemName="KC_DI_DRV.Vn_P3_ON" Device="" Slot="7" Channel="3" Comment="Вентсистема П3 в работе " UUID="370BB8454B0BBAAC1D538DB0310CF415.A2682D20F7DB4BF1A43E6AF51E6F51B0" />
+		<Connection ItemName="KC_DI_DRV.Vn_P3_ON_KCD" Device="" Slot="7" Channel="4" Comment="Вентсистема П3 в работе. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.82E088DB2137447D8073F6C048F44E8C" />
+		<Connection ItemName="KC_DI_DRV.Vn_V2_ON" Device="" Slot="7" Channel="5" Comment="Вентсистема В2 в работе " UUID="370BB8454B0BBAAC1D538DB0310CF415.9712226B62A842E18F743DCE708BD4E3" />
+		<Connection ItemName="KC_DI_DRV.Vn_V2_ON_KCD" Device="" Slot="7" Channel="6" Comment="Вентсистема В2 в работе. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.12D28894A68F4B63B06533E0E1A18348" />
+		<Connection ItemName="KC_DI_DRV.Vn_V3_ON" Device="" Slot="7" Channel="7" Comment="Вентсистема В3 в работе " UUID="370BB8454B0BBAAC1D538DB0310CF415.BE4A21B7BBAF4E9A9AA740CE9406E187" />
+		<Connection ItemName="KC_DI_DRV.Vn_V3_ON_KCD" Device="" Slot="7" Channel="8" Comment="Вентсистема В3 в работе. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.02A6CBC3126342B89DF156EDDBC1B819" />
+		<Connection ItemName="KC_DI_DRV.Vn_P1_Alarm" Device="" Slot="7" Channel="9" Comment="Авария вентсистемы П1 " UUID="370BB8454B0BBAAC1D538DB0310CF415.1FF17E5ECA01493883FD5E42E112F7E5" />
+		<Connection ItemName="KC_DI_DRV.Vn_P1_Alarm_KCD" Device="" Slot="7" Channel="10" Comment="Авария вентсистемы П1. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.22BB8F26769A44309D40AC01537D92C8" />
+		<Connection ItemName="KC_DI_DRV.Vn_P4_Alarm" Device="" Slot="7" Channel="11" Comment="Авария вентсистемы П4" UUID="370BB8454B0BBAAC1D538DB0310CF415.CF96465EB96C4356B4378A0A5E141AA6" />
+		<Connection ItemName="KC_DI_DRV.Vn_P4_Alarm_KCD" Device="" Slot="7" Channel="12" Comment="Авария вентсистемы П4. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.23AFADEBF8824C0789573F2527F52372" />
+		<Connection ItemName="KC_DI_DRV.Vn_V4_Alarm" Device="" Slot="7" Channel="13" Comment="Вентсистема В4.Авария" UUID="370BB8454B0BBAAC1D538DB0310CF415.1D4CB4CD08CA47E7A099B272E3FC8FC1" />
+		<Connection ItemName="KC_DI_DRV.Vn_V4_Alarm_KCD" Device="" Slot="7" Channel="14" Comment="Вентсистема В4.Авария. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.444912DD5F4E4BEEAD19847B73A04B53" />
+		<Connection ItemName="KC_DI_DRV.Vn_V4_ON" Device="" Slot="7" Channel="15" Comment="Вентсистема В4 в работе " UUID="370BB8454B0BBAAC1D538DB0310CF415.77A9B01C7A5641A9BEB6BB1A44CB275B" />
+		<Connection ItemName="KC_DI_DRV.Vn_V4_ON_KCD" Device="" Slot="7" Channel="16" Comment="Вентсистема В4 в работе. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.E79EE4F29EE7410C95230D9ACF746437" />
+		<Connection ItemName="KC_DI_DRV.Lt_R1_ADES_v" Device="" Slot="8" Channel="1" Comment="Верхний уровень в резервуаре Р1 для хранения дизтоплива, LSA1" UUID="370BB8454B0BBAAC1D538DB0310CF415.1FCAB8C9EE1245B987397C2A641107A9" />
+		<Connection ItemName="KC_DI_DRV.Lt_R1_ADES_v_KCD" Device="" Slot="8" Channel="2" Comment="Верхний уровень в резервуаре Р1 для хранения дизтоплива, LSA1. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.D2E11596F475460F96C3FE79B014D2CC" />
+		<Connection ItemName="KC_DI_DRV.Lt_R1_ADES_n" Device="" Slot="8" Channel="3" Comment="Нижний уровень в резервуаре Р1 для хранения дизтоплива, LSA2" UUID="370BB8454B0BBAAC1D538DB0310CF415.6E438AAF383745BBAFE8671705AE0413" />
+		<Connection ItemName="KC_DI_DRV.Lt_R1_ADES_n_KCD" Device="" Slot="8" Channel="4" Comment="Нижний уровень в резервуаре Р1 для хранения дизтоплива, LSA2. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.E249544298014FBAB53E9097CFA107EC" />
+		<Connection ItemName="KC_DI_DRV.Lt_R2_ADES_v" Device="" Slot="8" Channel="5" Comment="Верхний уровень в резервуаре Р2 для аварийного слива топлива, LSA3" UUID="370BB8454B0BBAAC1D538DB0310CF415.C31097EBC1A741C4A06300869ED9B893" />
+		<Connection ItemName="KC_DI_DRV.Lt_R2_v_KCD" Device="" Slot="8" Channel="6" Comment="Верхний уровень в резервуаре Р2 для аварийного слива топлива, LSA3. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.BFB6EDF2FE0A4B78B20C57F3B916D0AF" />
+		<Connection ItemName="KC_DI_DRV.LSA1_ADES_ok" Device="" Slot="8" Channel="7" Comment="Исправность датчика уровня, LSA1 " UUID="370BB8454B0BBAAC1D538DB0310CF415.8CA6596637E14D59AC9122D0EA90445D" />
+		<Connection ItemName="KC_DI_DRV.LSA1_ADES_ok_KCD" Device="" Slot="8" Channel="8" Comment="Исправность датчика уровня, LSA1. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.FB4249E48C224717976223C89D2DAC41" />
+		<Connection ItemName="KC_DI_DRV.LSA2_ADES_ok" Device="" Slot="8" Channel="9" Comment="Исправность датчика уровня, LSA2" UUID="370BB8454B0BBAAC1D538DB0310CF415.4DF0E5F4AB3747C381C02FDF7B26F596" />
+		<Connection ItemName="KC_DI_DRV.LSA2_ADES_ok_KCD" Device="" Slot="8" Channel="10" Comment="Исправность датчика уровня, LSA2. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.37EF06A70F3E4A758ABEE6224752636F" />
+		<Connection ItemName="KC_DI_DRV.LSA3_ADES_ok" Device="" Slot="8" Channel="11" Comment="Исправность датчика уровня, LSA3" UUID="370BB8454B0BBAAC1D538DB0310CF415.CE6A6168B8F64561820E982038FE04EC" />
+		<Connection ItemName="KC_DI_DRV.LSA3_ADES_ok_KCD" Device="" Slot="8" Channel="12" Comment="Исправность датчика уровня, LSA3. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.E45DB4EEFBE14163A78D933E614DB248" />
+		<Connection ItemName="KC_DI_DRV.Lm_R1_v" Device="" Slot="8" Channel="13" Comment="Агрегат 4 Верхний уровень в резервуаре Р1 для дренажа масла нагнетателя LSA1" UUID="370BB8454B0BBAAC1D538DB0310CF415.960C484658C5481CA848835FC54FFDFE" />
+		<Connection ItemName="KC_DI_DRV.Lm_R1_v_KCD" Device="" Slot="8" Channel="14" Comment="Агрегат 4. Верхний уровень в резервуаре Р1 для дренажа масла нагнетателя LSA1. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.89211C76008744ADA458BB6D9E32683D" />
+		<Connection ItemName="KC_DI_DRV.Lm_R4_v" Device="" Slot="8" Channel="15" Comment="Агрегат 4 Верхний уровень в резервуаре Р4 для отработанного масла двигателя LSA4" UUID="370BB8454B0BBAAC1D538DB0310CF415.7360EF30C28A4A28A86FD89CF6B1212E" />
+		<Connection ItemName="KC_DI_DRV.Lm_R4_v_KCD" Device="" Slot="8" Channel="16" Comment="Агрегат 4.Верхний уровень в резервуаре Р4 для отработанного масла двигателя LSA4.КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.BDE783BC393F4D819FC6AB12C3B4942F" />
+		<Connection ItemName="KC_AI_DRV.Res_00" Device="" Slot="1" Channel="1" Comment="Резерв" UUID="FA4AECE64BB26411B2511DA8021B6996.8112FB5D126E430AB3CC82BD57715394" />
+		<Connection ItemName="KC_AI_DRV.Tg_in_KC" Device="" Slot="1" Channel="2" Comment="Температура газа на входе КЦ" UUID="FA4AECE64BB26411B2511DA8021B6996.715B35FAB5E3493E80F208423FD6A057" />
+		<Connection ItemName="KC_AI_DRV.Tg_out_KC" Device="" Slot="1" Channel="3" Comment="Температура газа на выходе КЦ" UUID="FA4AECE64BB26411B2511DA8021B6996.C803F98FFD624472A04CC7560D55727A" />
+		<Connection ItemName="KC_AI_DRV.Pg_in_KC" Device="" Slot="1" Channel="4" Comment="Давление газа на входе КЦ" UUID="FA4AECE64BB26411B2511DA8021B6996.6AB37FE001684986854A59B807A1A6EF" />
+		<Connection ItemName="KC_AI_DRV.Pg_out_KC" Device="" Slot="2" Channel="1" Comment="Давление газа на выходе КЦ" UUID="FA4AECE64BB26411B2511DA8021B6996.71531563042D41DA8C73205DC9F03E23" />
+		<Connection ItemName="KC_AI_DRV.I_AB" Device="" Slot="2" Channel="2" Comment="Ток разряда-заряда Аб в ЩПТ =220" UUID="FA4AECE64BB26411B2511DA8021B6996.226227F1C06F4B05BA4BFFDCF7A24F93" />
+		<Connection ItemName="KC_AI_DRV.U1_DC220" Device="" Slot="2" Channel="3" Comment="Напряжение на I секции шин в ЩПТ =220В" UUID="FA4AECE64BB26411B2511DA8021B6996.2E5A555E2A8D48B09EDF496AB39B2E94" />
+		<Connection ItemName="KC_AI_DRV.U2_DC220" Device="" Slot="2" Channel="4" Comment="Напряжение на II секции шин в ЩПТ =220В" UUID="FA4AECE64BB26411B2511DA8021B6996.39877295164C4803A24099255FDFB79F" />
+		<Connection ItemName="KC_AI_DRV.Pg1_in_Kol" Device="" Slot="3" Channel="1" Comment="Давление на входном коллекторе КЦ (1)" UUID="FA4AECE64BB26411B2511DA8021B6996.B00938C334104E0F91654DD5D3A4C005" />
+		<Connection ItemName="KC_AI_DRV.Pg2_in_Kol" Device="" Slot="3" Channel="2" Comment="Давление на входном коллекторе КЦ (2)" UUID="FA4AECE64BB26411B2511DA8021B6996.9FB26A4A52EF4ED08C5E7BA39F4187F6" />
+		<Connection ItemName="KC_AI_DRV.Pg1_out_Kol" Device="" Slot="3" Channel="3" Comment="Давление на выходном коллекторе КЦ (1)" UUID="FA4AECE64BB26411B2511DA8021B6996.038A34698B2545399BA579C134D446EA" />
+		<Connection ItemName="KC_AI_DRV.Pg2_out_Kol" Device="" Slot="3" Channel="4" Comment="Давление на выходном коллекторе КЦ (2)" UUID="FA4AECE64BB26411B2511DA8021B6996.3C4FC43DC5FD423289809822F7BDB7E2" />
+		<Connection ItemName="KC_AI_DRV.Res_0" Device="" Slot="4" Channel="1" Comment="Резерв0" UUID="FA4AECE64BB26411B2511DA8021B6996.6749D81B0F1F4517BFED4FEF4CF40CBB" />
+		<Connection ItemName="KC_AI_DRV.Res_1" Device="" Slot="4" Channel="2" Comment="Резерв1" UUID="FA4AECE64BB26411B2511DA8021B6996.B3F591DC1EAD44AC9A6D6CB3CF019068" />
+		<Connection ItemName="KC_AI_DRV.Res_2" Device="" Slot="4" Channel="3" Comment="Резерв2" UUID="FA4AECE64BB26411B2511DA8021B6996.5E5A58A0A11349FF93D16188006F59C9" />
+		<Connection ItemName="KC_AI_DRV.Res_3" Device="" Slot="4" Channel="4" Comment="Резерв3" UUID="FA4AECE64BB26411B2511DA8021B6996.78282D5B95CC49B68378CAC4DDC64ECB" />
+		<Connection ItemName="KC_AI_DRV.Uosn_SAU" Device="" Slot="5" Channel="1" Comment="Измерение основного напряжения" UUID="FA4AECE64BB26411B2511DA8021B6996.4D2F787CA849495AA60DC0EA855895F8" />
+		<Connection ItemName="KC_AI_DRV.Urez_SAU" Device="" Slot="5" Channel="2" Comment="Напряжение резервного питания" UUID="FA4AECE64BB26411B2511DA8021B6996.BAFC44562ABA4462A4590298145BC394" />
+		<Connection ItemName="KC_AI_DRV.Ukr" Device="" Slot="5" Channel="3" Comment="Напряжение питания кранов" UUID="FA4AECE64BB26411B2511DA8021B6996.24832F80920B4AA283CCA4C7D6C02A9A" />
+		<Connection ItemName="KC_AI_DRV.Res_4" Device="" Slot="5" Channel="4" Comment="Резерв4" UUID="FA4AECE64BB26411B2511DA8021B6996.9590E817F70B4FE4B45436175BC45930" />
+	</Crossconnect>
+</Configuration>

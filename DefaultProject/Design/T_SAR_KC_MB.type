@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_SAR_KC_MB" Kind="Struct" UUID="0F08D23E4E6FD8793A889CBDD2076D5B">
+    <Fields>
+        <Field Name="online" Type="BOOL" UUID="1FEB3F394BFAD5C0680E3FBC1B060615" Comment="Статус: ГПА в онлайне" />
+        <Field Name="run" Type="BOOL" UUID="1E3D1BAA481AADC013947D887259E434" Comment="Статус: ГПА в магистрали" />
+        <Field Name="remote" Type="BOOL" UUID="3E45FAD44758ABB21F538F989A1708D0" Comment="Статус: Удаленное регулирование" />
+        <Field Name="Q" Type="REAL" UUID="405B27A84F31C540218BE4926798D6A7" Comment="Статус: Расход через ГПА" />
+        <Field Name="Ein" Type="REAL" UUID="72989A63444352A4AD1C8F928012BF7B" Comment="Статус: Давление на входе в нагнетатель" />
+        <Field Name="Eout" Type="REAL" UUID="80AC765C426F0B82840403B950A0268B" Comment="Статус: Давление на выходе из нагнетателя" />
+        <Field Name="EoutEin" Type="REAL" UUID="7FD44C6E44BCD254F80C75B7EC5344DA" Comment="Статус: Степень сжатия" />
+        <Field Name="S" Type="REAL" UUID="0D8062CC42E528CB69D60BA05B79E0F4" Comment="Статус: Удаленность от линии помпажа" />
+        <Field Name="Nst" Type="REAL" UUID="A5AED1244CBC60CB69B474AB2E17236F" Comment="Статус: Обороты СТ" />
+        <Field Name="Nvd_r" Type="REAL" UUID="E83CCCE24FE9BC3C21838A8F2C1B9827" Comment="Статус: Прив. обороты ВД" />
+        <Field Name="SP_Nst" Type="REAL" UUID="C3887FC844E82FA930C8A1A5319E1C99" Comment="Статус: Задание обороты СТ из ГПА" />
+        <Field Name="Rejim" Type="INT" UUID="B42B597741428669D3F5A19D93389F96" />
+        <Field Name="CR_vkl" Type="BOOL" UUID="A5E689C54377CB6C0DD8678F0B16A417" Comment="Цеховой регулятор в работе" />
+        <Field Name="OGR" Type="BOOL" UUID="7D0527BD451112B571E108B40AC152C2" Comment="36р сидит на ограничении от цехового регулятора" />
+        <Field Name="OGR_P" Type="BOOL" UUID="166DD33A4FC237D2BCC68D8C317C0443" Comment="Рвых больше уставки ограничительного регулирования" />
+        <Field Name="OGR_E" Type="BOOL" UUID="D4CC86E2461A4AD136732C89706E848E" Comment="Степень сжатия больше уставки ограничительного регулирования" />
+        <Field Name="OGR_S" Type="BOOL" UUID="5D908ACE4835933FAF1F6B8896B08190" Comment="ПЗ больше уставки ограничительного регулирования" />
+    </Fields>
+</Type>

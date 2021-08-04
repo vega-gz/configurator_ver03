@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_FRevParDB" Kind="Struct" UUID="1D994ABB4B4C2B9ED758C69B270D89AD">
+	<Fields>
+		<Field Name="Pv_outKVD" Type="83EEA55C4C82ED094CE3FCACD6615CA7" UUID="5D387F21433176DD332DC987AAE7A34D" Comment="Расчетное P воздуха за ОК (1 канал), МПа" />
+		<Field Name="Tg_outTND" Type="83EEA55C4C82ED094CE3FCACD6615CA7" UUID="2579C2FC4AE11073E8E531A2E7DDA549" Comment="РасчетнаЯ Т газа за ТНД (1 термопара), [°C]" />
+		<Field Name="Nvd" Type="83EEA55C4C82ED094CE3FCACD6615CA7" UUID="FAFCA114493CA5E1A0AD93B09BD39F69" Comment="РасчетнаЯ N КВД (2 канала), [об/мин]" />
+		<Field Name="Nst" Type="83EEA55C4C82ED094CE3FCACD6615CA7" UUID="5EEC3D5F4C91116479E6628E7A59863B" Comment="РасчетнаЯ N ТН (2 канала), [об/мин]" />
+		<Field Name="Nvd1_2" Type="7F2350184E29F403EB651FB7EF5924EF" UUID="6666EC164EBA1E848ADC79A3388F357F" Comment="РасчетнаЯ N КВД (2 канала), [об/мин] по двум каналам" />
+		<Field Name="Nst1_2" Type="7F2350184E29F403EB651FB7EF5924EF" UUID="7602F620478CC1A25DB9DF918B5A7DB5" Comment="РасчетнаЯ N ТН (2 канала), [об/мин] по двум каналам" />
+		<Field Name="Tg_outTND1_2" Type="7F2350184E29F403EB651FB7EF5924EF" UUID="32D8D1164E890DDA676C329D445B6E32" Comment="РасчетнаЯ Т газа за ТНД (1 термопара), [°C] по двум каналам" />
+		<Field Name="NvdNorm" Type="REAL" UUID="8ADEEF8D47F6C09DD2E61DAC868E7AFF" Comment="приведеннаЯ к условиЯм на входе в двигатель частота вращениЯ КНД, [об/мин]" />
+		<Field Name="d_timeToGT" Type="REAL" UUID="2EBEFB564BD78F4AE49F4590034B5E0B" Comment="Расход на розжиг" />
+		<Field Name="dNvd" Type="REAL" UUID="620CF56E45CABBA733871C86B7EE5952" Comment="Фильтрованное изменение Nвд за 10 циклов" />
+		<Field Name="dNst" Type="REAL" UUID="63AD05414AE65572E37035B68A389233" Comment="Фильтрованное изменение Nst за 5 циклов" />
+		<Field Name="dToutTND" Type="REAL" UUID="681072674DE6928E1CD353A2E4FBB9FB" Comment="Фильтрованное изменение Т газа за ТНД за 10 циклов" />
+		<Field Name="TatmLag" Type="REAL" UUID="9EA7EDB54E5F0AAC79A94886AD50957C" Comment="Фильтрованная lag Т атм." />
+		<Field Name="KnormPtg" Type="REAL" UUID="MXU6XO2ECRDQRGHPYAPIGSRXM4" Comment="Коэффициент нормирования Ртг на пуске" />
+		<Field Name="TggLim" Type="REAL" UUID="7KJPKIEEUFFQRDJKXCMLZ36UGY" Comment="Ограничение Т за ГГ в зависимости от Т атм" />
+	</Fields>
+</Type>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_FG_mb_AI_FromHMI" UUID="51A5165149D14AC1821D467D20BB36C3">
+<Fields>
+<Field Comment="Мгн. массовый расход техн. газа" Name="Mg" Type="187F76AE49C59E950138DDA3067101D0" UUID="0435C78F2BAD4A48878E7633BB9C09C1"/>
+<Field Comment="Мгн. объемный расход техн. газа" Name="Qg" Type="187F76AE49C59E950138DDA3067101D0" UUID="1E256DBF766C41999B32717E163370B5"/>
+</Fields>
+</Type>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="NKU">
+<Items>
+<Item Name="GPA_NKU.int"/>
+<Item Name="T_GPA_AVO_mb_DI_DRV.type"/>
+<Item Name="T_GPA_AVO_mb_DI_FromHMI.type"/>
+<Item Name="T_GPA_AVO_mb_DI_ToHMI.type"/>
+<Item Name="T_GPA_AVO_mb_DO_DRV.type"/>
+<Item Name="T_GPA_AVO_mb_DO_FromHMI.type"/>
+<Item Name="T_GPA_AVO_mb_DO_ToHMI.type"/>
+<Item Name="T_GPA_EA_mb_AI_DRV.type"/>
+<Item Name="T_GPA_EA_mb_AI_FromHMI.type"/>
+<Item Name="T_GPA_EA_mb_AI_Settings.type"/>
+<Item Name="T_GPA_EA_mb_AI_ToHMI.type"/>
+<Item Name="T_GPA_EA2_mb_AI_DRV.type"/>
+<Item Name="T_GPA_EA2_mb_AI_FromHMI.type"/>
+<Item Name="T_GPA_EA2_mb_AI_Settings.type"/>
+<Item Name="T_GPA_EA2_mb_AI_ToHMI.type"/>
+<Item Name="T_GPA_EA3_mb_AI_DRV.type"/>
+<Item Name="T_GPA_EA3_mb_AI_FromHMI.type"/>
+<Item Name="T_GPA_EA3_mb_AI_Settings.type"/>
+<Item Name="T_GPA_EA3_mb_AI_ToHMI.type"/>
+<Item Name="T_GPA_EA4_mb_AI_DRV.type"/>
+<Item Name="T_GPA_EA4_mb_AI_FromHMI.type"/>
+<Item Name="T_GPA_EA4_mb_AI_Settings.type"/>
+<Item Name="T_GPA_EA4_mb_AI_ToHMI.type"/>
+<Item Name="T_GPA_EA5_mb_AI_DRV.type"/>
+<Item Name="T_GPA_EA5_mb_AI_FromHMI.type"/>
+<Item Name="T_GPA_EA5_mb_AI_Settings.type"/>
+<Item Name="T_GPA_EA5_mb_AI_ToHMI.type"/>
+<Item Name="T_GPA_NKU2_mb_DI_DRV.type"/>
+<Item Name="T_GPA_NKU2_mb_DI_FromHMI.type"/>
+<Item Name="T_GPA_NKU2_mb_DI_ToHMI.type"/>
+<Item Name="T_GPA_NKU_mb_AI_DRV.type"/>
+<Item Name="T_GPA_NKU_mb_AI_FromHMI.type"/>
+<Item Name="T_GPA_NKU_mb_AI_Internal.type"/>
+<Item Name="T_GPA_NKU_mb_AI_Settings.type"/>
+<Item Name="T_GPA_NKU_mb_AI_ToHMI.type"/>
+<Item Name="T_GPA_NKU_mb_DI_DRV.type"/>
+<Item Name="T_GPA_NKU_mb_DI_FromHMI.type"/>
+<Item Name="T_GPA_NKU_mb_DI_ToHMI.type"/>
+<Item Name="T_GPA_NKU_mb_DO_DRV.type"/>
+<Item Name="T_GPA_NKU_mb_DO_FromHMI.type"/>
+<Item Name="T_GPA_NKU_mb_DO_ToHMI.type"/>
+</Items>
+</Folder>

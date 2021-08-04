@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Modbus">
+	<Items>
+		<Item Name="FLDR_25MACJPX6MQUZB6TPCOHXFAXJQ.folder" />
+		<Item Name="FLDR_7BGY5ZIMEGIE5GDAQMLMJYGSWA.folder" />
+		<Item Name="FLDR_EMWHTIBVRUPELNT7TC75UIXDRU.folder" />
+		<Item Name="FLDR_HLX63WZ7SVYENJHFOA4FBKB2OQ.folder" />
+		<Item Name="FLDR_JG2FOKZVMEWURIUMRUTNLTUOMI.folder" />
+		<Item Name="FLDR_RMT3JAV7UY7ENEWEDDI3WEHDHQ.folder" />
+		<Item Name="FLDR_RY5SQALB5NWEPHPBIDCXTTXPWA.folder" />
+		<Item Name="T_connectDB.type" />
+	</Items>
+</Folder>

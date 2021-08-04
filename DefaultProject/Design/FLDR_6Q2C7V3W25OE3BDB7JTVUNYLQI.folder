@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Механизмы">
+	<Items>
+		<Item Name="E079B0E64556720E806FA393FCDC7989" />
+		<Item Name="FLDR_52WDWHSGKF4ULDDARY753BNYRM.folder" />
+		<Item Name="FLDR_D6GVJTCTQXYUXJJ77JNGUZCDAA.folder" />
+		<Item Name="FLDR_OAAOGHX6AWGEHH2C57H6MX432E.folder" />
+		<Item Name="T_AM_FromALG.type" />
+		<Item Name="T_AM_FromALG_NKU.type" />
+		<Item Name="T_AM_ToHMI.type" />
+		<Item Name="T_AM_ToHMI_NKU.type" />
+		<Item Name="Type_X5OPASMFA4UEDH7Y25ZAKQIKNA.type" />
+	</Items>
+</Folder>

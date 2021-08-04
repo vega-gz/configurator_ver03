@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Mode_KC" Kind="Struct" UUID="B58E247A43139B9B5B817F89338BA177">
+    <Fields>
+        <Field Name="graph" Type="EE67E15142EC74278378C1A6B2ADA2E4" UUID="8217D7CE4B4AF95DD99793975008C0E9" Comment="Граф режима" />
+        <Field Name="FaultKC" Type="BOOL" UUID="DBE3E095486E30B4260405AAF650F7DB" Comment="Нет режима" />
+        <Field Name="AOssKC" Type="BOOL" UUID="85BC959F499B19E26CBAFEBDF4F10229" Comment="АОсс" />
+        <Field Name="AObsKC" Type="BOOL" UUID="4E8CD93044842834065927AABFDD4AE6" Comment="АОбс" />
+        <Field Name="FireKC" Type="BOOL" UUID="4B300EBD45F79A11CF04C7943052DC3A" Comment="Пожар" />
+        <Field Name="RepairKC" Type="BOOL" UUID="13BEB241424C34065BF0518D7A9A6055" Comment="Ремонт" />
+        <Field Name="ReserveKC" Type="BOOL" UUID="2884BF1C46913D355624BAAA0622A62E" Comment="Pезерв" />
+        <Field Name="InjectKC" Type="BOOL" UUID="C89F87504BAB0F7B15353FB3FDB24E65" Comment="Закачка" />
+        <Field Name="ExtractKC" Type="BOOL" UUID="540A683D498AB1E7E81E6290BE87FC22" Comment="Отбор" />
+        <Field Name="EOKC" Type="BOOL" UUID="549857F14D940460FAB7B78ECBEEF974" Comment="Экстренный останов" />
+    </Fields>
+</Type>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_TSK_DO_DRV" UUID="4E85386CDBE7463DB16AD2A4DA95C639">
+    <Fields>
+        <Field Comment="Кран отсечной 1Т-1 открыть" Name="Kr_1T1_ON" Type="BOOL" UUID="42059AD3EC8C4D01BE6912F1324A7572"/>
+        <Field Comment="Кран отсечной 1Т-1 закрыть" Name="Kr_1T1_OF" Type="BOOL" UUID="B5CA8FA6607C499FBB3DC66298CBEE3B"/>
+        <Field Comment="Кран отсечной 2Т-1 открыть" Name="Kr_2T1_ON" Type="BOOL" UUID="8785FA6D014C473FB1615D73E17F2F71"/>
+        <Field Comment="Кран отсечной 2Т-1 закрыть" Name="Kr_2T1_OF" Type="BOOL" UUID="B5D52F1B714E4BEDB3EDF37BAD40054C"/>
+        <Field Comment="Кран отсечной 3Т-1 открыть" Name="Kr_3T1_ON" Type="BOOL" UUID="8073DAA341324DEE9AEE797B5766C2A9"/>
+        <Field Comment="Кран отсечной 3Т-1 закрыть" Name="Kr_3T1_OF" Type="BOOL" UUID="E8A5F83E18A243DBA3B0206D42B3CDD2"/>
+        <Field Comment="Кран отсечной 4Т-1 открыть" Name="Kr_4T1_ON" Type="BOOL" UUID="45ECB6FC21904269A3E8A212AC73BCB6"/>
+        <Field Comment="Кран отсечной 4Т-1 закрыть" Name="Kr_4T1_OF" Type="BOOL" UUID="CC4E366A1EF24DB996947F77774F5D85"/>
+        <Field Comment="Кран отсечной 5Т-1 открыть" Name="Kr_5T1_ON" Type="BOOL" UUID="80817D81B3714ED2AE04F851000258BB"/>
+        <Field Comment="Кран отсечной 5Т-1 закрыть" Name="Kr_5T1_OF" Type="BOOL" UUID="68F5E16A37EB45529BCEECE3C6E3E0E7"/>
+        <Field Comment="Кран отсечной 6Т-1 открыть" Name="Kr_6T1_ON" Type="BOOL" UUID="DB9C33FB1FE94111AC5A535DD45D391F"/>
+        <Field Comment="Кран отсечной 6Т-1 закрыть" Name="Kr_6T1_OF" Type="BOOL" UUID="5DA3C02615A34BBABB522FE9934AA451"/>
+        <Field Comment="Включить электрообогрев приборных боксов 6Т" Name="EN_BB_6T_ON" Type="BOOL" UUID="AF5368126E4140AF84A6280E55F22B46"/>
+        <Field Comment="Кран отсечной 7Т-1 открыть" Name="Kr_7T1_ON" Type="BOOL" UUID="802758CEF8DD4ED5AF2A36A09437B7D1"/>
+        <Field Comment="Кран отсечной 7Т-1 закрыть" Name="Kr_7T1_OF" Type="BOOL" UUID="B1CF9CA1CA4D433DAD1DA970978701EE"/>
+        <Field Comment="Включить электрообогрев приборных боксов 7Т" Name="EN_BB_7T_ON" Type="BOOL" UUID="2BD616CA16C24B8CBBE5058B1C1302F1"/>
+        <Field Comment="Кран отсечной 8Т-1 открыть" Name="Kr_8T1_ON" Type="BOOL" UUID="8118040EC8E0426481D5AB19EC64B2AC"/>
+        <Field Comment="Кран отсечной 8Т-1 закрыть" Name="Kr_8T1_OF" Type="BOOL" UUID="492D07B553C843BDA663CCC2F3098865"/>
+        <Field Comment="Включить электрообогрев приборных боксов 8Т" Name="EN_BB_8T_ON" Type="BOOL" UUID="CFE5CF31088A4A8AB558B59A98F7FF6C"/>
+        <Field Comment="Кран отсечной 9Т-1 открыть" Name="Kr_9T1_ON" Type="BOOL" UUID="055D683170B64AC490619A786B6476C3"/>
+        <Field Comment="Кран отсечной 9Т-1 закрыть" Name="Kr_9T1_OF" Type="BOOL" UUID="AE1F15F9AF6D42FFB8200CECA646AAAA"/>
+        <Field Comment="Включить электрообогрев приборных боксов 9Т" Name="EN_BB_9T_ON" Type="BOOL" UUID="597FC835851D4960A2B9F24EA258D1B5"/>
+        <Field Comment="Кран отсечной 10Т-1 открыть" Name="Kr_10T1_ON" Type="BOOL" UUID="0210055B7D834B8392090B05088A0344"/>
+        <Field Comment="Кран отсечной 10Т-1 закрыть" Name="Kr_10T1_OF" Type="BOOL" UUID="41B0DF5B906A428CAC547D3759A23C79"/>
+        <Field Comment="Включить электрообогрев приборных боксов 10Т" Name="EN_BB_10T_ON" Type="BOOL" UUID="81A1D3EF8459488A98DB3A6B999F98AD"/>
+        <Field Comment="Кран отсечной 11Т-1 открыть" Name="Kr_11T1_ON" Type="BOOL" UUID="2BD389A757C24BC8A24640002D5F675B"/>
+        <Field Comment="Кран отсечной 11Т-1 закрыть" Name="Kr_11T1_OF" Type="BOOL" UUID="CDE964C2F8DF446FA5E04BF6CD29111D"/>
+        <Field Comment="Включить электрообогрев приборных боксов 11Т" Name="EN_BB_11T_ON" Type="BOOL" UUID="61C56C9CF8234D22BF5076A86AC88BE2"/>
+        <Field Comment="Кран отсечной 12Т-1 открыть" Name="Kr_12T1_ON" Type="BOOL" UUID="B06F222AC2C34006A91FA72118465EFB"/>
+        <Field Comment="Кран отсечной 12Т-1 закрыть" Name="Kr_12T1_OF" Type="BOOL" UUID="B804BE41D43A4B7D9E8F97CC9CF8F5D6"/>
+        <Field Comment="Включить электрообогрев приборных боксов 12Т" Name="EN_BB_12T_ON" Type="BOOL" UUID="5B1341B35BAF45E68B86A6AB3D1E3C51"/>
+        <Field Comment="Резерв" Name="Res_0" Type="BOOL" UUID="B33CFF9762D74BD49E131FD8C8BFE203"/>
+        <Field Comment="Кран отсечной 13Т-1 открыть" Name="Kr_13T1_ON" Type="BOOL" UUID="2591267E3F0D42EC8C3A8C4098A5D6EA"/>
+        <Field Comment="Кран отсечной 13Т-1 закрыть" Name="Kr_13T1_OF" Type="BOOL" UUID="0F3E81FD08464EF0AF9E9D8DE5834033"/>
+        <Field Comment="Включить электрообогрев приборных боксов13Т" Name="EN_BB_13T_ON" Type="BOOL" UUID="7721163CF9EB4EE788E73577743531B5"/>
+        <Field Comment="Кран отсечной 14Т-1 открыть" Name="Kr_14T1_ON" Type="BOOL" UUID="40CEEA8FCA94488A8048308ACCDA9475"/>
+        <Field Comment="Кран отсечной 14Т-1 закрыть" Name="Kr_14T1_OF" Type="BOOL" UUID="0C18440FC0814E929716C0C9111E6DCD"/>
+        <Field Comment="Включить электрообогрев приборных боксов 14Т" Name="EN_BB_14T_ON" Type="BOOL" UUID="401FB8B813574AB8B54E5C3F097D09D2"/>
+        <Field Comment="Резерв" Name="Res_1" Type="BOOL" UUID="50EF44AEEE124AFAB501617F36511816"/>
+        <Field Comment="Резерв" Name="Res_2" Type="BOOL" UUID="BACBCFA35D7D4729B140C2A37C3A7C37"/>
+        <Field Comment="Резерв" Name="Res_3" Type="BOOL" UUID="5F457BB3B47048E08B7A76EEE5F90A95"/>
+        <Field Comment="Резерв" Name="Res_4" Type="BOOL" UUID="FB64266F3FC24D69807F82BE1EE49371"/>
+        <Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="225D1A7391C24B3CB3E50F47E2E31E84"/>
+        <Field Comment="Резерв" Name="Res_6" Type="BOOL" UUID="2AFF53B7B161472CACDA10E51182007E"/>
+        <Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="F4BEF629AAFD41989D8FAA25D0572D48"/>
+        <Field Comment="Резерв" Name="Res_8" Type="BOOL" UUID="16AF1DD0B4644712800AE83378368116"/>
+        <Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="2217287E213D470881E61646533E9732"/>
+        <Field Comment="Резерв" Name="Res_10" Type="BOOL" UUID="BDE7CE2EBF20460C8748C7984B352B56"/>
+    </Fields>
+</Type>

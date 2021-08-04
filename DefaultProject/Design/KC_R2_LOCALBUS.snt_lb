@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+	<Device CyclePeriod="250000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="FALSE">
+		<Slot Address="1" ModuleType="33" />
+		<Slot Address="2" ModuleType="33" />
+		<Slot Address="3" ModuleType="33" />
+		<Slot Address="4" ModuleType="33" />
+		<Slot Address="5" ModuleType="33" />
+		<Slot Address="6" ModuleType="33" />
+		<Slot Address="7" ModuleType="33" />
+		<Slot Address="8" ModuleType="33" />
+	</Device>
+	<Crossconnect>
+		<Connection ItemName="KC_A2_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.8A0A6D1C41CF457D94442F8831617049" />
+		<Connection ItemName="KC_A2_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.559489694EF4757F074EFBAF4ED2BE04" />
+		<Connection ItemName="KC_A2_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.257D167249D88B24D42F53B7C893779E" />
+		<Connection ItemName="KC_A2_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.26FFA4AE4FE6B82840F52A81A540B7BC" />
+		<Connection ItemName="KC_A2_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.A4CC71954594084C3612759E1D786328" />
+		<Connection ItemName="KC_A2_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.EFDACBE7493CD384E161BD9F7713F864" />
+		<Connection ItemName="KC_A2_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.BE36D8BE4D68EE980579328DFC460CDC" />
+		<Connection ItemName="KC_A2_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="C893166E4A436B7E743C0886AA7726A0.532AF0334C06CC4D645F92AEF48908D5" />
+		<Connection ItemName="KC_DI_DRV.Lm_R2_v" Device="" Slot="1" Channel="1" Comment="Агрегат 5 Верхний уровень в резервуаре Р2 для дренажа масла нагнетателя LSA2" UUID="370BB8454B0BBAAC1D538DB0310CF415.E3B80483CB364B01BF19AF3123A6FC50" />
+		<Connection ItemName="KC_DI_DRV.Lm_R2_v_KCD" Device="" Slot="1" Channel="2" Comment="Агрегат 5. Верхний уровень в резервуаре Р2 для дренажа масла нагнетателя LSA2. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.7ADB595310D045BD9D4DD75EA76F3871" />
+		<Connection ItemName="KC_DI_DRV.Lm_R5_v" Device="" Slot="1" Channel="3" Comment="Агрегат 5. Верхний уровень в резервуаре Р5 для отработанного масла двигателя LSA5" UUID="370BB8454B0BBAAC1D538DB0310CF415.F01D5F2A53C5471E871102E7DA39B54D" />
+		<Connection ItemName="KC_DI_DRV.Lm_R5_v_KCD" Device="" Slot="1" Channel="4" Comment="Агрегат 5.Верхний уровень в резервуаре Р5 для отработанного масла двигателя LSA5.КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.A6387A25A50049F8A53DE940F77AC7E0" />
+		<Connection ItemName="KC_DI_DRV.Lm_R3_v" Device="" Slot="1" Channel="5" Comment="Агрегат 6. Верхний уровень в резервуаре Р3 для дренажа масла нагнетателя LSA3" UUID="370BB8454B0BBAAC1D538DB0310CF415.340ACF70583141018A947444FCD969B0" />
+		<Connection ItemName="KC_DI_DRV.Lm_R3_v_KCD" Device="" Slot="1" Channel="6" Comment="Агрегат 6. Верхний уровень в резервуаре Р3 для дренажа масла нагнетателя LSA3. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.D6F05935EBF04443B4F6F0B31FC84D0E" />
+		<Connection ItemName="KC_DI_DRV.Lm_R6_v" Device="" Slot="1" Channel="7" Comment="Агрегат 6. Верхний уровень в резервуаре Р6 для отработанного масла двигателя LSA6" UUID="370BB8454B0BBAAC1D538DB0310CF415.6C6545F8A5474F3A8C3563ABE81105DB" />
+		<Connection ItemName="KC_DI_DRV.Lm_R6_v_KCD" Device="" Slot="1" Channel="8" Comment="Агрегат 6.Верхний уровень в резервуаре Р6 для отработанного масла двигателя LSA6.КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.51A8B30BFFDC436B8866377630F6F5C8" />
+		<Connection ItemName="KC_DI_DRV.LSA1_GRA_ok" Device="" Slot="1" Channel="9" Comment="Исправность датчика уровня, LSA1" UUID="370BB8454B0BBAAC1D538DB0310CF415.6A4116671199438194E96C604E3634B8" />
+		<Connection ItemName="KC_DI_DRV.LSA1_GPA_ok_KCD" Device="" Slot="1" Channel="10" Comment="Исправность датчика уровня, LSA1. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.57681256F27D475A9CED9A8B8EC51E8A" />
+		<Connection ItemName="KC_DI_DRV.LSA2_GPA_ok" Device="" Slot="1" Channel="11" Comment="Исправность датчика уровня, LSA2" UUID="370BB8454B0BBAAC1D538DB0310CF415.34CC8D6DB63144938EDAE4469DC09D11" />
+		<Connection ItemName="KC_DI_DRV.LSA2_GPA_ok_KCD" Device="" Slot="1" Channel="12" Comment="Исправность датчика уровня, LSA2. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.A47FCC8904EF4422AC22AA7E10D4D19F" />
+		<Connection ItemName="KC_DI_DRV.LSA3_GPA_ok" Device="" Slot="1" Channel="13" Comment="Исправность датчика уровня, LSA3 " UUID="370BB8454B0BBAAC1D538DB0310CF415.6A1261E6021C499BA659A385B33390CC" />
+		<Connection ItemName="KC_DI_DRV.LSA3_GPA_ok_KCD" Device="" Slot="1" Channel="14" Comment="Исправность датчика уровня, LSA3. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.EB4EFA069DFE4790B352C9D0D0EB3F38" />
+		<Connection ItemName="KC_DI_DRV.LSA4_GPA_ok" Device="" Slot="1" Channel="15" Comment="Исправность датчика уровня, LSA4 " UUID="370BB8454B0BBAAC1D538DB0310CF415.B5DAEA3A7FE642F09F1FE2E16276AD0E" />
+		<Connection ItemName="KC_DI_DRV.LSA4_GPA_ok_KCD" Device="" Slot="1" Channel="16" Comment="Исправность датчика уровня, LSA4. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.8DE63D34AFCC460DB141C9006E6B7DD3" />
+		<Connection ItemName="KC_DI_DRV.LSA5_GPA_ok" Device="" Slot="2" Channel="1" Comment="Исправность датчика уровня, LSA5" UUID="370BB8454B0BBAAC1D538DB0310CF415.E701458793F4461D8A66F9F2FCF40E53" />
+		<Connection ItemName="KC_DI_DRV.LSA5_GPA_ok_KCD" Device="" Slot="2" Channel="2" Comment="Исправность датчика уровня, LSA5. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.F3383F12DAB34641B9378C911E8878B2" />
+		<Connection ItemName="KC_DI_DRV.LSA6_GPA_ok" Device="" Slot="2" Channel="3" Comment="Исправность датчика уровня, LSA6" UUID="370BB8454B0BBAAC1D538DB0310CF415.0EF526AD3890433C90A9A7C3B237A11B" />
+		<Connection ItemName="KC_DI_DRV.LSA6_GPA_ok_KCD" Device="" Slot="2" Channel="4" Comment="Исправность датчика уровня, LSA6. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.361C7D58A6F24BA88B88999F3F1E79C4" />
+		<Connection ItemName="KC_DI_DRV.UZ1_Bad" Device="" Slot="2" Channel="5" Comment="Неисправность UZ1 " UUID="370BB8454B0BBAAC1D538DB0310CF415.B09598FA6F314734A52CB22B6EBD6EBC" />
+		<Connection ItemName="KC_DI_DRV.UZ1_Bad_KCD" Device="" Slot="2" Channel="6" Comment="Неисправность UZ1. КЦД  " UUID="370BB8454B0BBAAC1D538DB0310CF415.A2B36CEE24FD422B8130AA76BE08A3F6" />
+		<Connection ItemName="KC_DI_DRV.UZ2_Bad" Device="" Slot="2" Channel="7" Comment="Неисправность UZ2 " UUID="370BB8454B0BBAAC1D538DB0310CF415.96743AB44A68487B8DFC94529390EAFB" />
+		<Connection ItemName="KC_DI_DRV.UZ2_Bad_KCD" Device="" Slot="2" Channel="8" Comment="Неисправность UZ2. КЦД  " UUID="370BB8454B0BBAAC1D538DB0310CF415.FBC54E3DA2E74DA993A16DF1E07230CD" />
+		<Connection ItemName="KC_DI_DRV.Q_AB_OF" Device="" Slot="2" Channel="9" Comment="Выключатель АБ отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.51987C98A0A645E3AFF5401A065626C1" />
+		<Connection ItemName="KC_DI_DRV.Q_AB_OF_KCD" Device="" Slot="2" Channel="10" Comment="Выключатель АБ отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.303B920C3BB24A058E8A8048D0422E89" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez1_OF" Device="" Slot="2" Channel="11" Comment="Выключатель 1 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.3666C9052AE6456E90C4FA6D32A22B3F" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez1_OF_KCD" Device="" Slot="2" Channel="12" Comment="Выключатель 1 «Резерв» отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.FA9FCD75356540D0830ACBCC0CDC1C57" />
+		<Connection ItemName="KC_DI_DRV.Q_UZ1_OF" Device="" Slot="2" Channel="13" Comment="Выключатель UZ1 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.C4B9DA0C3EBF4CD588D5E85556BF25B2" />
+		<Connection ItemName="KC_DI_DRV.Q_UZ1_OF_KCD" Device="" Slot="2" Channel="14" Comment="Выключатель UZ1 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.49017A34D7464BC891867E116D92614C" />
+		<Connection ItemName="KC_DI_DRV.Q_UZ2_OF" Device="" Slot="2" Channel="15" Comment="Выключатель UZ2 отключен " UUID="370BB8454B0BBAAC1D538DB0310CF415.1DDF478670E64328AA09C4ED2B6D0252" />
+		<Connection ItemName="KC_DI_DRV.Q_UZ2_OF_KCD" Device="" Slot="2" Channel="16" Comment="Выключатель UZ2 отключен. КЦД  " UUID="370BB8454B0BBAAC1D538DB0310CF415.3D813357CE734F029CFFCC316F6F5184" />
+		<Connection ItemName="KC_DI_DRV.QS1_OF" Device="" Slot="3" Channel="1" Comment="Секционный выключатель QS1 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.BD713E8F5C5F48BD9ADE5784E1914336" />
+		<Connection ItemName="KC_DI_DRV.QS1_OF_KCD" Device="" Slot="3" Channel="2" Comment="Секционный выключатель QS1 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.5C0623246E5E4682A49FBBDB3F79E935" />
+		<Connection ItemName="KC_DI_DRV.QS2_OF" Device="" Slot="3" Channel="3" Comment="Секционный выключатель QS2 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.4386A8D7ED354E1DB95BEDD6F0762922" />
+		<Connection ItemName="KC_DI_DRV.QS2_OF_KCD" Device="" Slot="3" Channel="4" Comment="Секционный выключатель QS2 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.1802B541B852429EBBAA4712505367F8" />
+		<Connection ItemName="KC_DI_DRV.QS3_OF" Device="" Slot="3" Channel="5" Comment="Секционный выключатель QS3 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.FD28A1FE908F4249AB757E1595820348" />
+		<Connection ItemName="KC_DI_DRV.QS3_OF_KCD" Device="" Slot="3" Channel="6" Comment="Секционный выключатель QS3 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.055C8413508640FA93639DE0EDF956F0" />
+		<Connection ItemName="KC_DI_DRV.QS4_OF" Device="" Slot="3" Channel="7" Comment="Секционный выключатель QS4 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.910619206C6849F18ADC1C75692F4185" />
+		<Connection ItemName="KC_DI_DRV.QS4_OF_KCD" Device="" Slot="3" Channel="8" Comment="Секционный выключатель QS4 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.DD93460B815A4C6DB6F4B05937363F91" />
+		<Connection ItemName="KC_DI_DRV.QS5_OF" Device="" Slot="3" Channel="9" Comment="Секционный выключатель QS5 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.B581D54FD81848F7A857E9216D88C6F7" />
+		<Connection ItemName="KC_DI_DRV.QS5_OF_KCD" Device="" Slot="3" Channel="10" Comment="Секционный выключатель QS5 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.7258A5A4CB2D4511A513E9D11F767568" />
+		<Connection ItemName="KC_DI_DRV.Q_ETO1_OF" Device="" Slot="3" Channel="11" Comment="Выключатель блока электротехнического ГПА №1.1 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.DC4C2A5CE1D14798B54DCF5D1350BDB0" />
+		<Connection ItemName="KC_DI_DRV.Q_ETO1_OF_KCD" Device="" Slot="3" Channel="12" Comment="Выключатель блока электротехнического ГПА №1.1 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.3DCA8A8A8CC14F009BA3C63C9FC80F71" />
+		<Connection ItemName="KC_DI_DRV.Q_ETO2_OF" Device="" Slot="3" Channel="13" Comment="Выключатель блока электротехнического ГПА №1.2 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.27D32329C9A54BA59661A6ABF0164DAE" />
+		<Connection ItemName="KC_DI_DRV.Q_ETO2_OF_KCD" Device="" Slot="3" Channel="14" Comment="Выключатель блока электротехнического ГПА №1.2 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.05DB723D32BD4D218759C174AFC8F919" />
+		<Connection ItemName="KC_DI_DRV.Q_ASUES3_OF" Device="" Slot="3" Channel="15" Comment="Выключатель шкафа 2АСУ ЭС, ввод №3 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.14CB3E045D5D4AFAAD5B156A209CD7A0" />
+		<Connection ItemName="KC_DI_DRV.Q_ASUES3_OF_KCD" Device="" Slot="3" Channel="16" Comment="Выключатель шкафа 2АСУ ЭС, ввод №3 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.426C57C2F872486387D40F8DCE1775E6" />
+		<Connection ItemName="KC_DI_DRV.Q_KTP_PEB1_OF" Device="" Slot="4" Channel="1" Comment="Выключатель КТП ПЭБа. Шкаф №1 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.D535FFC8DF9B4499AED1A5FECC193A20" />
+		<Connection ItemName="KC_DI_DRV.Q_KTP_PEB1_OF_KCD" Device="" Slot="4" Channel="2" Comment="Выключатель КТП ПЭБа. Шкаф №1 отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.791A93802A72429CAC8D54EDA1242A6E" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez2_OF" Device="" Slot="4" Channel="3" Comment="Выключатель 2 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.5B9E580B4B6D4EB1A97F1498A795F88E" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez2_OF_KCD" Device="" Slot="4" Channel="4" Comment="Выключатель 2 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.60AD39F22069464DB41ED6F0F59C1D52" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez3_OF" Device="" Slot="4" Channel="5" Comment="Выключатель 3 «Резерв» отключен " UUID="370BB8454B0BBAAC1D538DB0310CF415.43A20C4AADA049F793B4AA79EDB23F7F" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez3_OF_KCD" Device="" Slot="4" Channel="6" Comment="Выключатель 3 «Резерв» отключен . КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.B7D9BBD8EF984D53BDBFEF8AD3B54B47" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez4_OF" Device="" Slot="4" Channel="7" Comment="Выключатель 4 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.AA5518C15BC14B9D90D3A73F8B484041" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez4_OF_KCD" Device="" Slot="4" Channel="8" Comment="Выключатель 4 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.0C3EEFC3BEC148C5AC47466AC92A62CB" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez5_OF" Device="" Slot="4" Channel="9" Comment="Выключатель 5 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.0A50461767F147B59CB47C98D16B986F" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez5_OF_KCD" Device="" Slot="4" Channel="10" Comment="Выключатель 5 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.4F747A096EA442DABFBABE437A11FB52" />
+		<Connection ItemName="KC_DI_DRV.Q_ETO3_OF" Device="" Slot="4" Channel="11" Comment="Выключатель блока электротехнического ГПА №1.3 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.7F129A9D86F44A8785F813168EBF28A5" />
+		<Connection ItemName="KC_DI_DRV.Q_ETO3_OF_KCD" Device="" Slot="4" Channel="12" Comment="Выключатель блока электротехнического ГПА №1.3 отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.B0613BD4AFF1435A925557CCBBFA1A66" />
+		<Connection ItemName="KC_DI_DRV.Q_ASUES4_OF" Device="" Slot="4" Channel="13" Comment="Выключатель шкафа 2АСУ ЭС, ввод №4 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.994E3BB6CE24451BA677B33B9B33E3AE" />
+		<Connection ItemName="KC_DI_DRV.Q_ASUES4_OF_KCD" Device="" Slot="4" Channel="14" Comment="Выключатель шкафа 2АСУ ЭС, ввод №4 отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.6DE462D8F9FC4A84850B0384C3D5CE4A" />
+		<Connection ItemName="KC_DI_DRV.Q_KTP_PEB14_OF" Device="" Slot="4" Channel="15" Comment="Выключатель КТП ПЭБа. Шкаф №14 отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.5B4ADDB415DE460A955E8C6106381AC6" />
+		<Connection ItemName="KC_DI_DRV.Q_KTP_PEB14_OF_KCD" Device="" Slot="4" Channel="16" Comment="Выключатель КТП ПЭБа. Шкаф №14 отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.AC4725A5A790458A9591F61EAB395836" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez6_OF" Device="" Slot="5" Channel="1" Comment="Выключатель 6 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.A8BE72CDBF064CEF911B85A89AB29ED2" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez6_OF_KCD" Device="" Slot="5" Channel="2" Comment="Выключатель 6 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.ECA80D73965446C197777FBC52E7EE6F" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez7_OF" Device="" Slot="5" Channel="3" Comment="Выключатель 7 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.35BD9EC5E8A04C3B85DE11C56B1EB83B" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez7_OF_KCD" Device="" Slot="5" Channel="4" Comment="Выключатель 7 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.9A8CDA45E432431498EFC4B212F8B696" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez8_OF" Device="" Slot="5" Channel="5" Comment="Выключатель 8 «Резерв» отключен " UUID="370BB8454B0BBAAC1D538DB0310CF415.D4DEF2272D10442F93F7D440EAAE65E2" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez8_OF_KCD" Device="" Slot="5" Channel="6" Comment="Выключатель 8 «Резерв» отключен . КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.CCF701CB836D4C0DAD95DA69D5D8E742" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez9_OF" Device="" Slot="5" Channel="7" Comment="Выключатель 9 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.35B8EDD8B0D8463D8ECE410676E7A764" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez9_OF_KCD" Device="" Slot="5" Channel="8" Comment="Выключатель 9 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.6CA84F0C8A054BCC80F363A2DF3F447B" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez10_OF" Device="" Slot="5" Channel="9" Comment="Выключатель 10 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.2C9B8D8C4F2C415C8C884001A9BEA060" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez10_OF_KCD" Device="" Slot="5" Channel="10" Comment="Выключатель 10 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.EAC5A43B70C34F11914FFF486C8CD50E" />
+		<Connection ItemName="KC_DI_DRV.Q_Lamp_PEB_A_OF" Device="" Slot="5" Channel="11" Comment="Выключатель Q10 аварийное освещение ПЭБ отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.D20DF97F42BA4471AD95C53CFCDA6A8E" />
+		<Connection ItemName="KC_DI_DRV.Q_Lamp_PEB_A_OF_KCD" Device="" Slot="5" Channel="12" Comment="Выключатель Q10 аварийное освещение ПЭБ отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.D33704B563744DB5920D6845B924CAA8" />
+		<Connection ItemName="KC_DI_DRV.Q_NasMet_NM_OF" Device="" Slot="5" Channel="13" Comment="Выключатель Насосная метанола (Шкаф ЛИС НМ) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.7DD396556EF6423B8AE3972709F693E9" />
+		<Connection ItemName="KC_DI_DRV.Q_NasMet_NM_OF_KCD" Device="" Slot="5" Channel="14" Comment="Выключатель Насосная метанола (Шкаф ЛИС НМ) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.A225FE1407FB47639E99E52CC574AB44" />
+		<Connection ItemName="KC_DI_DRV.Q_NasMet_PK_OF" Device="" Slot="5" Channel="15" Comment="Выключатель Насосная метанола (Шкаф ПК) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.99B49DDB13FD431195D50B25A38A303F" />
+		<Connection ItemName="KC_DI_DRV.Q_NasMet_PK_OF_KCD" Device="" Slot="5" Channel="16" Comment="Выключатель Насосная метанола (Шкаф ПК) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.AF97499680434705A3E0DA4C7DA9B83E" />
+		<Connection ItemName="KC_DI_DRV.Q_UZRG_OF" Device="" Slot="6" Channel="1" Comment="Выключатель УЗРГ (Шкаф ЛИС УЗРГ) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.03B496D25F074E28852561B5C585004A" />
+		<Connection ItemName="KC_DI_DRV.Q_UZRG_OF_KCD" Device="" Slot="6" Channel="2" Comment="Выключатель УЗРГ (Шкаф ЛИС УЗРГ) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.112ADC19E1BE45CC8DD21670912736F9" />
+		<Connection ItemName="KC_DI_DRV.Q_UZRG_NTS_OF" Device="" Slot="6" Channel="3" Comment="Выключатель УЗРГ (Шкаф ЛИС УНТС) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.A16B51C8342F4832A4982ED1E0094BB5" />
+		<Connection ItemName="KC_DI_DRV.Q_UZRG_NTS_OF_KCD" Device="" Slot="6" Channel="4" Comment="Выключатель УЗРГ (Шкаф ЛИС УНТС) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.539DF90E5A584084AFEDBDF0AFF9743A" />
+		<Connection ItemName="KC_DI_DRV.Q_UPI_OF" Device="" Slot="6" Channel="5" Comment="Выключатель шкафа УПИ АСП отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.98654D2183EF449AAF16E50E4D71A9B8" />
+		<Connection ItemName="KC_DI_DRV.Q_UPI_OF_KCD" Device="" Slot="6" Channel="6" Comment="Выключатель шкафа УПИ АСП отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.3DF78192C1984E3EA145B41830737C79" />
+		<Connection ItemName="KC_DI_DRV.Q_LISKC_OF" Device="" Slot="6" Channel="7" Comment="Выключатель шкафа ЛИС КЦ отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.94DF6A6F41C44EF29178F27EB53ACA6A" />
+		<Connection ItemName="KC_DI_DRV.Q_LISKC_OF_KCD" Device="" Slot="6" Channel="8" Comment="Выключатель шкафа ЛИС КЦ отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.7526F0C148D84297A53281A0B5DCC41F" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez11_OF" Device="" Slot="6" Channel="9" Comment="Выключатель 11 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.1659A0A62A33428086DCD91C09AC77A3" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez11_OF_KCD" Device="" Slot="6" Channel="10" Comment="Выключатель 11 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.1444731105E041C8B92CF737DF93F5C7" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez12_OF" Device="" Slot="6" Channel="11" Comment="Выключатель 12 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.4AC620EC79C14DF4A02B2F28902D4B36" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez12_OF_KCD" Device="" Slot="6" Channel="12" Comment="Выключатель 12 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.94C2203BE20F4EC1A04DA6B220E50A37" />
+		<Connection ItemName="KC_DI_DRV.Q_BK200_OF" Device="" Slot="6" Channel="13" Comment="Выключатель Блок БК-200 отключен " UUID="370BB8454B0BBAAC1D538DB0310CF415.6A9BB81CAA7B45DD906A0435C40E5D6C" />
+		<Connection ItemName="KC_DI_DRV.Q_BK200_OF_KCD" Device="" Slot="6" Channel="14" Comment="Выключатель Блок БК-200 отключен. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.89FF20233E424FF88D324C49D83BCE93" />
+		<Connection ItemName="KC_DI_DRV.Q_NasPPV_OF" Device="" Slot="6" Channel="15" Comment="Выключатель Насосная противопожарного водоснабжения (Шкаф ЛИС ВОС) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.6BD5CA0577074250A22362C751E88CC2" />
+		<Connection ItemName="KC_DI_DRV.Q_NasPPV_OF_KCD" Device="" Slot="6" Channel="16" Comment="Выключатель Насосная противопожарного водоснабжения (Шкаф ЛИС ВОС) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.2CF8FD89AD6042F0AA97C474579B65A5" />
+		<Connection ItemName="KC_DI_DRV.Q_Kotel_OF" Device="" Slot="7" Channel="1" Comment="Выключатель Котельная (Шкаф ЛИС) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.A5F9700B67474ACD9DE31EDDB7121066" />
+		<Connection ItemName="KC_DI_DRV.Q_Kotel_OF_KCD" Device="" Slot="7" Channel="2" Comment="Выключатель Котельная (Шкаф ЛИС) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.C93CB7E4CA364998856BA4B85B57A386" />
+		<Connection ItemName="KC_DI_DRV.Q_SkGSM_OF" Device="" Slot="7" Channel="3" Comment="Выключатель Склад ГСМ (Шкаф ЛИС ГСМ) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.2A4E52057E4E4077854D54E7505D56D9" />
+		<Connection ItemName="KC_DI_DRV.Q_SkGSM_OF_KCD" Device="" Slot="7" Channel="4" Comment="Выключатель Склад ГСМ (Шкаф ЛИС ГСМ) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.5C941E3D66A84E239A18584B9B621011" />
+		<Connection ItemName="KC_DI_DRV.Q_BB_UPTIG_OF" Device="" Slot="7" Channel="5" Comment="Выключатель Блок-бокс УПТПГ отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.1910E1C033C440EDA4ED2EC6F5FF3064" />
+		<Connection ItemName="KC_DI_DRV.Q_SBB_UPTIG_OF_KCD" Device="" Slot="7" Channel="6" Comment="Выключатель Блок-бокс УПТПГ отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.5FB89C976266443DB716D3416D284C7F" />
+		<Connection ItemName="KC_DI_DRV.Q_KTP_AVOG_OF" Device="" Slot="7" Channel="7" Comment="Выключатель КТП ПЭБ (Шкаф САУ АВО) отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.0FAC70AEEEFC46AE9448246BF637B039" />
+		<Connection ItemName="KC_DI_DRV.Q_KTP_AVOG_OF_KCD" Device="" Slot="7" Channel="8" Comment="Выключатель КТП ПЭБ (Шкаф САУ АВО) отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.1B71DC3AF69E48E8867F8EBB446F49D7" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez13_OF" Device="" Slot="7" Channel="9" Comment="Выключатель 13 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.C6ECC76373394F969872B8BA19E0D58A" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez13_OF_KCD" Device="" Slot="7" Channel="10" Comment="Выключатель 13 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.81CF2161ADCD4C24994369AA5093D44D" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez14_OF" Device="" Slot="7" Channel="11" Comment="Выключатель 14 «Резерв» отключен" UUID="370BB8454B0BBAAC1D538DB0310CF415.3ED00EE13AF747079D20491C661A7235" />
+		<Connection ItemName="KC_DI_DRV.Q_Rez14_OF_KCD" Device="" Slot="7" Channel="12" Comment="Выключатель 14 «Резерв» отключен. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.C1096A3BD2034CC8A5EAEDD3491B929C" />
+		<Connection ItemName="KC_DI_DRV.Rsh_Bad" Device="" Slot="7" Channel="13" Comment="«Земля» на шинах" UUID="370BB8454B0BBAAC1D538DB0310CF415.96A543A95BCF42CC9256CBB168AA29DA" />
+		<Connection ItemName="KC_DI_DRV.Rsh_Bad_KCD" Device="" Slot="7" Channel="14" Comment="«Земля» на шинах. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.B8180B469CE249AC9202C26CFCADB293" />
+		<Connection ItemName="KC_DI_DRV.Rf_Bad" Device="" Slot="7" Channel="15" Comment="«Земля» на фидерах" UUID="370BB8454B0BBAAC1D538DB0310CF415.F77F58E9E8F348BCB486733C085156DC" />
+		<Connection ItemName="KC_DI_DRV.Rf_Bad_KCD" Device="" Slot="7" Channel="16" Comment="«Земля» на фидерах. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.090DC85B941B456BAE4E68B989EA1486" />
+		<Connection ItemName="KC_DI_DRV.U_lo" Device="" Slot="8" Channel="1" Comment="Пониженное напряжение" UUID="370BB8454B0BBAAC1D538DB0310CF415.6A5711879420417687B68AE5B798CADF" />
+		<Connection ItemName="KC_DI_DRV.U_lo_KCD" Device="" Slot="8" Channel="2" Comment="Пониженное напряжение. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.22C3D0A429CB4EBCA7C7EBBE9CDD0E8C" />
+		<Connection ItemName="KC_DI_DRV.U_hi" Device="" Slot="8" Channel="3" Comment="Повышенное напряжение " UUID="370BB8454B0BBAAC1D538DB0310CF415.DF7D6B977C424FCFADFA7E4202383F80" />
+		<Connection ItemName="KC_DI_DRV.U_hi_KCD" Device="" Slot="8" Channel="4" Comment="Повышенное напряжение. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.55A77D5F65644497B49B5CE7E7FDFC9B" />
+		<Connection ItemName="KC_DI_DRV.Kn_AOss_PRU_nz" Device="" Slot="8" Channel="5" Comment="АОcc от ПРУ КЦ " UUID="370BB8454B0BBAAC1D538DB0310CF415.8EE2A63D611241C49B506C30658A4638" />
+		<Connection ItemName="KC_DI_DRV.Kn_AOss_PRU_KCD" Device="" Slot="8" Channel="6" Comment="АОcc от ПРУ КЦ. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.C509E418C9CA4233A4A3209D91E72A82" />
+		<Connection ItemName="KC_DI_DRV.Kn_AObs_PRU_nz" Device="" Slot="8" Channel="7" Comment="АОбc от ПРУ КЦ " UUID="370BB8454B0BBAAC1D538DB0310CF415.2C1A9A7585934018A1AAF0AA30B44464" />
+		<Connection ItemName="KC_DI_DRV.Kn_AObs_PRU_KCD" Device="" Slot="8" Channel="8" Comment="АОбc от ПРУ КЦ. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.2ECCE67EA4F241369D04185622AF9170" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_ZdGate" Device="" Slot="8" Channel="9" Comment="Пожар в здании проходной" UUID="370BB8454B0BBAAC1D538DB0310CF415.605A35124DDB426180BBEE04900BD15C" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_ZdGate_KCD" Device="" Slot="8" Channel="10" Comment="Пожар в здании проходной. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.B668D3D4384741D38C6BB10DA768A2A1" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_NasPPV" Device="" Slot="8" Channel="11" Comment="Пожар в здании насосной противопожарного водоснабжения" UUID="370BB8454B0BBAAC1D538DB0310CF415.7D3BF2EFC3C94F14B146BC53B5722BEE" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_NasPPV_KCD" Device="" Slot="8" Channel="12" Comment="Пожар в здании насосной противопожарного водоснабжения. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.3350E189B6EF43648DC9993530FBB9FC" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_REB" Device="" Slot="8" Channel="13" Comment="Пожар в здании РЭБ " UUID="370BB8454B0BBAAC1D538DB0310CF415.AE210ACAD1114E3C99286F80240D641A" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_REB_KCD" Device="" Slot="8" Channel="14" Comment="Пожар в здании РЭБ. КЦД " UUID="370BB8454B0BBAAC1D538DB0310CF415.E74ECE4DDE8B414293F320A703E40292" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_WWplant" Device="" Slot="8" Channel="15" Comment="Пожар в здании очистных сооружений сточных вод" UUID="370BB8454B0BBAAC1D538DB0310CF415.35E7C99E45784633A92E4C8C3BA373D9" />
+		<Connection ItemName="KC_DI_DRV.Fire_in_Wwplant" Device="" Slot="8" Channel="16" Comment="Пожар в здании очистных сооружений сточных вод. КЦД" UUID="370BB8454B0BBAAC1D538DB0310CF415.4B36FE09869348AE9B67671CABF47619" />
+	</Crossconnect>
+</Configuration>

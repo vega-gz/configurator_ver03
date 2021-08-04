@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_MnemoSystSign" Kind="Struct" UUID="9B9980C047608D7E68D6498CE4109CCD">
+	<Fields>
+		<Field Name="Fault_MainCh" Type="BOOL" UUID="2F2A687C4F93D56728C3C8A10E182819" Comment="Неисправность основного канала связи с ЦПУ" />
+		<Field Name="Fault_ReservCh" Type="BOOL" UUID="7FDE302D42BA8622967623BCE14345EF" Comment="Неисправность резервного канала связи с ЦПУ" />
+		<Field Name="Meandr_1s" Type="BOOL" UUID="E901B00A4C755D4DFDC23DBCBE6C7C78" Comment="Меандр 1с обрыва контроллера и АСПС" />
+		<Field Name="UpdateSignal" Type="BOOL" UUID="50DE924D4E7F733E7A3CA9B246C425A4" Comment="Частота обновления сигналов" />
+		<Field Name="UpdateAM" Type="BOOL" UUID="EA7B4E0A47AC1BACE8EEE788B4CF4591" Comment="Частота обновления механизмов" />
+	</Fields>
+</Type>

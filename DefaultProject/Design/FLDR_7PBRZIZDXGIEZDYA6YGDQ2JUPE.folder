@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="КС">
+	<Items>
+		<Item Name="FLDR_2BZPGUW5H5PEPG6GOOQY3Q3JUE.folder" />
+		<Item Name="FLDR_CK66S2FXIJXEZHEPVSTHIC4NZY.folder" />
+		<Item Name="FLDR_EOAOGXL5USEEDONESGWWEL6K2M.folder" />
+		<Item Name="FLDR_I46KNWHF4TFETEIHAHFGFSDF2M.folder" />
+		<Item Name="FLDR_M4PN4IRR524EVJIXBNYIFWPLBE.folder" />
+		<Item Name="FLDR_MD3ZLCFPZNDELO6Y5S4WMKLKZE.folder" />
+		<Item Name="FLDR_VJM7WCJVUNQE5FBMX4EFZL7NCI.folder" />
+		<Item Name="T_KC_AI_Trend.type" />
+		<Item Name="T_KC_BTN.type" />
+		<Item Name="T_KC_BTN_Mode.type" />
+		<Item Name="T_KC_CRS.type" />
+		<Item Name="T_KC_CalcPar.type" />
+	</Items>
+</Folder>

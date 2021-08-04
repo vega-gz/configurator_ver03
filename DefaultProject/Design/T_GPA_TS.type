@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_TS" UUID="T223I7SQQ4RUZA55G6ORNJG6QA">
+<Fields>
+<Field Comment="Система охлаждения готова" Name="SO_Rdy" Type="BOOL" UUID="IAPC6MBWR3JUVN5ZQJXOOWYEQI"/>
+<Field Comment="Заправьте охл. жидкость" Name="Low_freeze" Type="BOOL" UUID="BZXRVHOQEBEEVHFISTLMJO7QKI"/>
+<Field Comment="Регулирование по ТВД" Name="RegVD" Type="BOOL" UUID="25WLHONOQXXENM77ARB3DTDWZY"/>
+<Field Comment="Регулирование по СТ" Name="RegST" Type="BOOL" UUID="NPRJGZMQVA7EFMF5ASEIXQMCI4"/>
+<Field Comment="Есть горение" Name="isFlame" Type="BOOL" UUID="CZD7DQROVKPEVK5PSMGWZEOEXE"/>
+<Field Comment="Управление от ЦР" Name="Shop_On" Type="BOOL" UUID="UFS7WCD4E4YUVKCAYJBNJ6HBQA"/>
+<Field Comment="Отключение стартера" Name="StopSR" Type="BOOL" UUID="GRNVXIMD6WOE7DIBWDY6IBOFAE"/>
+<Field Comment="Разблокировка СР" Name="SR_Unlock" Type="BOOL" UUID="4TLBNTU7FA5EBAFIXXFED4S2A4"/>
+<Field Comment="Готовность СР" Name="SR_Rdy" Type="BOOL" UUID="SWUGIUBBB6WEVCDSWYP6N3ENME"/>
+<Field Comment="Пуск СР" Name="SR_Start" Type="BOOL" UUID="ETCZQLWIQIKELD2EBNI5WUSIHE"/>
+<Field Comment="ВПУ в зацеплении" Name="VPU_Clip" Type="BOOL" UUID="OKSYCQLB4E3EVK7WARGFDML3JU"/>
+<Field Comment="АОсс завершен" Name="AOss_end" Type="BOOL" UUID="YEI3WGPC3Q7EXOJSSKX322X4QU"/>
+<Field Comment="АОбс завершен" Name="AObs_end" Type="BOOL" UUID="XFJTEWA2O4MUNHOZVCEIMJW5TU"/>
+<Field Comment="НОсс завершен" Name="NOss_end" Type="BOOL" UUID="6IXDBT6NZRLENGSHKQGCNAQICA"/>
+<Field Comment="НОбс завершен" Name="NObs_end" Type="BOOL" UUID="ZXF63CLINI3UNMGU6S7A4SBOO4"/>
+<Field Comment="ВОсс завершен" Name="VOss_end" Type="BOOL" UUID="WXP7ERHW3FUURBDA2LRR3KZMTI"/>
+<Field Comment="ВОбс завершен" Name="VObs_end" Type="BOOL" UUID="KIDN62I6GO3UVLWIGWMMJFYASY"/>
+<Field Comment="ПЗ завершена" Name="PZ_end" Type="BOOL" UUID="52M5XWN5JARUROUOCDGQK6CNSM"/>
+<Field Comment="ДУ ИМ включено" Name="DU_IM" Type="BOOL" UUID="G76L3M6GFXPEDCHZRY6YYOIA34"/>
+<Field Comment="ПЗМ завершена" Name="PZM_end" Type="BOOL" UUID="5Q6G7O4YKC3EBPAUVIJHREH5CM"/>
+<Field Comment="Прокрутка ТВД" Name="StartSR" Type="BOOL" UUID="AOSXY45RXNGEBMT3ZJDQM5742U"/>
+<Field Comment="Готов к ХР" Name="HR_Rdy" Type="BOOL" UUID="PXUDLGPUWQVUJLLECZLFXMHIDU"/>
+<Field Comment="Готов к ГР" Name="GR_Rdy" Type="BOOL" UUID="S2TNUQFA7H3ETDWDVIG3GQ42N4"/>
+<Field Comment="Готов к ПЗМ" Name="PZM_Rdy" Type="BOOL" UUID="SRI535KJKUREDOG54ZO6QIF4KA"/>
+<Field Comment="Готов к ХП" Name="HP_Rdy" Type="BOOL" UUID="EUDLJV7FPENEXERA6XBI4KP6HY"/>
+<Field Comment="Готов к ТП" Name="TP_Rdy" Type="BOOL" UUID="2AKUTNSF5JUE3BJVKV2WFVJPEM"/>
+<Field Comment="Готов к АПК" Name="APK_Rdy" Type="BOOL" UUID="3MK7QMV56EXERLRCXWW32UFXCQ"/>
+<Field Comment="Готов к АПМ" Name="APM_Rdy" Type="BOOL" UUID="UZBVH2BYNSGEFKBRGCNCY7IYPA"/>
+<Field Comment="Готов к КПК" Name="KPK_Rdy" Type="BOOL" UUID="4F2KFWTBZMPEBDYXGEDRYFJAXY"/>
+<Field Comment="Готов к ПЗ" Name="PZ_Rdy" Type="BOOL" UUID="YYNNJFD6ZCTEJLXSXYSSBEIWBM"/>
+<Field Comment="Готов к выходу в магистраль" Name="M_Rdy" Type="BOOL" UUID="3RXDYCVLTBEEZB2XF63EPE22CA"/>
+<Field Comment="Готов к переходу на кольцо" Name="K_Rdy" Type="BOOL" UUID="TIK5KGF4HODUZFBHCOAC3XWNNY"/>
+<Field Comment="Контроль холодного резерва" Name="Chk_HR" Type="BOOL" UUID="XEIASJJCHFOETOI2J7QEWCUL7M"/>
+<Field Comment="Контроль горячего резерва" Name="Chk_GR" Type="BOOL" UUID="PM2JCRYDNVOE5NZYFQTZXF6BU4"/>
+<Field Comment="Нет готовности ГР" Name="GR_nRdy" Type="BOOL" UUID="GGMW7T625JNEDENMT2USRJ5JXU"/>
+<Field Comment="Нет готовности ХР" Name="HR_nRdy" Type="BOOL" UUID="E6KSEE7NJAMEJAIDP7N3WUBRYU"/>
+<Field Comment="Нет газа в контуре К" Name="NoGas_inK" Type="BOOL" UUID="XJO6IVX4RGFE7BJFV6LYKZKEBM"/>
+<Field Comment="Газ в компрессоре" Name="Gas_inK" Type="BOOL" UUID="7THP7SNJINZERKACCCEX36KFPE"/>
+<Field Comment="Продувка компрессора" Name="ProdK" Type="BOOL" UUID="BMYPRGOLJGPERK76TYBZIUV2WY"/>
+<Field Comment="Заполнение компрессора" Name="ZapK" Type="BOOL" UUID="SL35Y4376OXU7GWTZ6MNFUSQSU"/>
+<Field Comment="Запуск двигателя" Name="StartD" Type="BOOL" UUID="HFOOCHUV26EEVLMDICGNMMQKNQ"/>
+<Field Comment="Разгон двигателя" Name="RunUpD" Type="BOOL" UUID="73HXXIZJQUOEHGR65TDF3T22MU"/>
+<Field Comment="Прогрев двигателя" Name="WarmD" Type="BOOL" UUID="HT7JZDRMAZ7UXOAN3HYAHU5VRE"/>
+<Field Comment="Стравливание компрессора" Name="StrK" Type="BOOL" UUID="RXFVXL34TFSE5EVR7O5F6OGUCM"/>
+<Field Comment="Защита по погасанию факела" Name="ZH_Fakel" Type="BOOL" UUID="7EUVHTA3ND3EXPLPGREUJWAPBA"/>
+<Field Comment="Проверка МС пройдена" Name="PZM_Pass" Type="BOOL" UUID="ZOKEPXXDHLVENDOQQA6EHQZUFI"/>
+<Field Comment="Стабилизация газа в компр." Name="StabK" Type="BOOL" UUID="NCTZ4LLSUM3EBLBIIEKVYLAW3M"/>
+<Field Comment="Охлаждение двигателя" Name="OxlD" Type="BOOL" UUID="KOKIYEPEJNJU7LEUEFLEGWITUI"/>
+<Field Comment="Двигатель работает" Name="WrkD" Type="BOOL" UUID="B25SGAZZFIWUNAQJRWUJN2BYAI"/>
+<Field Comment="Запуск МС компрессора" Name="StartMSK" Type="BOOL" UUID="HZ3OBGDF7WBUNARGOD6GK2ES7A"/>
+<Field Comment="Защита по Р масла двигателя взведена" Name="ZH_PmsmD" Type="BOOL" UUID="L4TPREBBLKKE7JQX5JZIIHXSXY"/>
+<Field Comment="Защита по Р топл. газа взведена" Name="ZH_Ptg" Type="BOOL" UUID="EO5LHQWVM6RUHMFFTHZNKERK3I"/>
+<Field Comment="Идет розжиг" Name="Flame_go" Type="BOOL" UUID="CPCIVX4SEK6UXGSH5EUYHIXQ5Q"/>
+<Field Comment="ГПА работает" Name="GPA_Work" Type="BOOL" UUID="MEDAVIOTX55U5BPT7VM5EPHHV4"/>
+<Field Comment="Защита по Р масла компрессора взведена" Name="ZH_PmK" Type="BOOL" UUID="FGSNTXMRMNJEJNY6Q6QMXIF3IY"/>
+<Field Comment="Защита по Р возд. управления взведена" Name="ZH_PaRP" Type="BOOL" UUID="V7BU7VJYMQRUHB5XBOWGG36RH4"/>
+<Field Comment="Защита по Р масла лубриканта взведена" Name="ZH_PmLub" Type="BOOL" UUID="WQLH4B6HYOHUVKCZPCQ7FKYZAE"/>
+<Field Comment="Защита по Р охл. жидкости взведена" Name="ZH_Pcool" Type="BOOL" UUID="SFYG5BQEHF4U5IWVQTUO7RRGOE"/>
+<Field Comment="Запуск МС двигателя" Name="StartMSD" Type="BOOL" UUID="GMSCFKPKN73ERDZ3ODLOXVPGQM"/>
+<Field Comment="Защита по P масла редуктора" Name="ZH_PmR" Type="BOOL" UUID="HTRYCGRZYAMUXIYXES55FMHAJM"/>
+<Field Comment="Контроль САУ" Name="Chk_SAU" Type="BOOL" UUID="FHTBUSMSL7RUXLPVGSHTV2VWP4"/>
+<Field Comment="Запуск МС редуктора" Name="StartMSR" Type="BOOL" UUID="NMNJ3J3RJYIUJGXSVUHQL65MJM"/>
+<Field Comment="Прогрев масла редуктора" Name="Wrm_oil_R" Type="BOOL" UUID="3ROQHAZ66Z6U3GFP4AV2L5QALI"/>
+<Field Comment="Заполнение МС редуктора" Name="Zap_MS_R" Type="BOOL" UUID="ON3UPNS65KRUTCZFVLH6EZWHY4"/>
+<Field Comment="Защита по T масла редуктора" Name="ZH_TmR" Type="BOOL" UUID="ZP44X7SOO76UZDYJAMJXHIHWHQ"/>
+<Field Comment="Защита по T масла компрессора" Name="ZH_TmK" Type="BOOL" UUID="UYZMFORCMMLEXAY5K6K2ZUWNBU"/>
+<Field Comment="Контур компр. заполняется" Name="ZapK_go" Type="BOOL" UUID="I33YWXORP7YEREIOQICUYWA4BY"/>
+<Field Comment="Горячий резерв с газом" Name="GRg" Type="BOOL" UUID="EYZVQOX67PDELNFQ4UZ7BROL6I"/>
+<Field Comment="Горячий резерв без газа" Name="GRng" Type="BOOL" UUID="FNAJELWGSZXERP6M25WDITEPKU"/>
+<Field Comment="Прокрутка завершена" Name="Crank_end" Type="BOOL" UUID="NBDVOD6DYO5UBBXV5OY7FAIRVE"/>
+<Field Comment="Останов маслосистемы" Name="StopMS" Type="BOOL" UUID="VXKG7JWCUGMEPLHUU3N62JPBJU"/>
+<Field Comment="Идет выход в магистраль" Name="K_M" Type="BOOL" UUID="M6OBQWKUPCJETFZT7KBTWCVMWU"/>
+<Field Comment="Ожидание останова МС" Name="StopMS_Crank" Type="BOOL" UUID="5ANVPH24J4AETAPBR3WROMDGSA"/>
+<Field Comment="Защита по Р газа в компрессоре" Name="ZH_Pg_inK" Type="BOOL" UUID="22KTAWMMUFAEDHMLVXCPF2LLOY"/>
+<Field Comment="Холостой ход компрессора" Name="HH_K" Type="BOOL" UUID="HXBQE362HWSEREQPNRYKU5WOHE"/>
+<Field Comment="Малый газ" Name="MG" Type="BOOL" UUID="NQFT3U34R6AUNBD4OE3IXEC4BQ"/>
+<Field Comment="Холостой ход двигателя" Name="HH" Type="BOOL" UUID="3LUWV4ZQ2STUFHPZZGY7OTQGKM"/>
+<Field Comment="Доп. защита по Рм двигателя" Name="ZH_Pm_inD_dop" Type="BOOL" UUID="GNMSMZLN7WZUFE6REGQWPRIX6E"/>
+<Field Comment="Запуск охлажд. компрессора" Name="StartOxlK" Type="BOOL" UUID="7G3TNH4QNPPEJMWWN44WJDB6KA"/>
+<Field Comment="Маслосистема готова" Name="MS_Rdy" Type="BOOL" UUID="NZH2UM22NGSULHTLW7ARDDCJ4A"/>
+<Field Comment="Компрессор готов к загрузке" Name="Load_Rdy" Type="BOOL" UUID="OZ2PS73YLVJU7IKCBSW66LBX3Q"/>
+<Field Comment="Защита по охл. жидкости" Name="ZH_freeze" Type="BOOL" UUID="4UDJUP2LINVULKNBUGPCMPMLTM"/>
+<Field Comment="Компрессор загружен" Name="K_load" Type="BOOL" UUID="RBJVQHNKEEJUDHTK4IDICSGGCY"/>
+<Field Comment="Идет подъем оборотов (КМ)" Name="RunUp_KM" Type="BOOL" UUID="VTE6GML7JVUU7NVV5YXKUVYF3Y"/>
+<Field Comment="Высокое Рг на вых. К" Name="HiPg_outK_KM" Type="BOOL" UUID="LHC72BIHEGQEPF5ZDR544BR4EU"/>
+<Field Comment="Идет смена режима К" Name="ChangeModeK_go" Type="BOOL" UUID="DLPXF7GWICAEXIB6F7ERPDFPLE"/>
+<Field Comment="Бросок тока стартера на пуске" Name="CrankUp" Type="BOOL" UUID="QSLH4SDS6BWEZPGBJP5ZYSRGEQ"/>
+<Field Comment="Компрессор разгружен" Name="K_Unload" Type="BOOL" UUID="2LIGSCZDFDDELNJBLDY6O3I2W4"/>
+<Field Comment="Перепуск воздуха открыт" Name="ZPV_On" Type="BOOL" UUID="HC7QYZ32U5GUPENJDVFUAFMSIA"/>
+<Field Comment="Останов двигателя" Name="StopD" Type="BOOL" UUID="DNWSL74GD7FU7PIPWT2LI67ERY"/>
+<Field Comment="Выбег СТ" Name="RunOutST" Type="BOOL" UUID="6XWNYHI7O65EVHGUY7CVYQWATU"/>
+<Field Comment="Выбег ТВД" Name="RunOutVD" Type="BOOL" UUID="7CWZIB6QFHFUDNDRIJPBNQYQ2E"/>
+<Field Comment="Двигатель остановлен" Name="D_stoped" Type="BOOL" UUID="5XXPHTKKGIZEZID4OUMN5O7W7Y"/>
+<Field Comment="Прокрутка после останова" Name="TP1" Type="BOOL" UUID="L3K5KCX53RGULIIQ3YZPA6VE3Y"/>
+<Field Comment="2я прокрутка после останова" Name="TP2" Type="BOOL" UUID="P6B44UNWG23UXPKHBTDTNW7Q3I"/>
+<Field Comment="Останов СО компрессора" Name="StopOxlK" Type="BOOL" UUID="GWWBSZ3SPX2END6VLUWFSVEASM"/>
+<Field Comment="Охлаждение подшипников К" Name="Oxl_PodK" Type="BOOL" UUID="ECN2YJIAWTTURLTEQWRKXBK3VI"/>
+<Field Comment="Прогрев масла компрессора" Name="WrmM_Kompr" Type="BOOL" UUID="ORNFRBXHFXDU5JJHBNCWIPF6EY"/>
+<Field Comment="Просадка Р масла компрессора" Name="Fall_PmsmK" Type="BOOL" UUID="BL7JH5RQXI5UHLL6BW6D63DUTI"/>
+<Field Comment="Просадка Р масла редуктора" Name="Fall_PmsmR" Type="BOOL" UUID="DJMIAP5F44OEJP3LP54VZDOS5Q"/>
+<Field Comment="Двигатель остановлен" Name="D_Stoped" Type="BOOL" UUID="6EEGFN7WWPPEVAMGTWJPRUWIKQ"/>
+<Field Comment="Д на верхнем огр. по Рквд" Name="Rp_hiLimitPok" Type="BOOL" UUID="IEC3UIPYJCGELBSWFNKRDVM7BI"/>
+<Field Comment="Д на верхнем огр. по Ттвд" Name="Rp_hiLimitT" Type="BOOL" UUID="FCGSPUSTJ54UTD7EFS3YNU6ZEY"/>
+<Field Comment="Д на верхнем огр. по Nтвд" Name="Rp_hiLimitNvd" Type="BOOL" UUID="C2P5GJDAS3CUHNO3MD5DI756FE"/>
+<Field Comment="Д на верхнем огр. по Nприв." Name="Rp_hiLimitNvdNorm" Type="BOOL" UUID="VEVT4FWXXGKEJBXR46WZFAOZOI"/>
+<Field Comment="Д на верхнем огр. по Nст" Name="Rp_hiLimitNst" Type="BOOL" UUID="MLIS23SH6NYUVJCADZX46DXHGA"/>
+<Field Comment="Д на нижнем огр. по Nприв." Name="Rp_loLimitNvdNorm" Type="BOOL" UUID="LOBRTGRIV2QEBHU4V5S4UFCYJY"/>
+<Field Comment="Д на нижнем огр. по Nст" Name="Rp_loLimitNst" Type="BOOL" UUID="MUF7SJVIPN4EFBQTW4PU6I6LLI"/>
+<Field Comment="Двигатель на верхнем огр." Name="Rp_hiLimited" Type="BOOL" UUID="YHHMKDAFGGZE3HQMF2QLOW5PVM"/>
+<Field Comment="Двигатель на нижнем огр." Name="Rp_loLimited" Type="BOOL" UUID="P3422RUMRMNUPNLMOS2IFPXWXU"/>
+<Field Comment="Идет разгон до ХХ" Name="HH_go" Type="BOOL" UUID="5J6TTWSM36IE5N3LNTMDYMWCMA"/>
+<Field Comment="Защита по протоку масла лубриканта взведена" Name="ZH_QmLub" Type="BOOL" UUID="H66PKVJZHVRUNGPFPH56MNFZPY"/>
+<Field Comment="Защита по вибрации компрессора взведена" Name="ZH_Vibro_K" Type="BOOL" UUID="MDXY7NYX2FSEHLB23B527ENJMI"/>
+<Field Comment="Идет переход на кольцо" Name="M_K" Type="BOOL" UUID="MKFFP5L5KI3E3JYIPFMQMIBIZM"/>
+<Field Comment="Прокачка масла дв." Name="Oil_StopD" Type="BOOL" UUID="AFMZLZ2UEK3U7NNIEJFTGAJBZA"/>
+<Field Comment="Снижение до МГ" Name="GoMG" Type="BOOL" UUID="DB2TH7ZNDLIUZNFGBWYBEACODI"/>
+<Field Comment="Идет сброс оборотов до ХХ" Name="RunDown_HH" Type="BOOL" UUID="LZXM62KUVZUEBH4DHBCKZCZLOQ"/>
+<Field Comment="АО по пожару завершен" Name="Fire_end" Type="BOOL" UUID="PSHOKEEBL3BUVC254HBXJQMJJA"/>
+<Field Comment="Останов ГПА по пожару" Name="Fire_AO" Type="BOOL" UUID="T2RSTG3WG2IERKD4THQGF73MWY"/>
+<Field Comment="Авт. переход в режим Ремонт по истечению 100 суток" Name="OverTime_HR" Type="BOOL" UUID="DFVQOJ7II5EEHLAOY7HHR7FIJI"/>
+<Field Comment="Авт. переход в режим ХР по истечению 30 суток" Name="OverTime_GR" Type="BOOL" UUID="TSE43Q4PM75UDLQ25IWL57P4LI"/>
+<Field Comment="Долив масла в картер К" Name="DolivKar" Type="BOOL" UUID="7CBXCFVOTWUE7MG7P35HZHIYEI"/>
+<Field Comment="Режим прямого пуска насоса НОК" Name="CNVO_BP" Type="BOOL" UUID="55YNAI6JF6BE7ICIWSZ3H2LDMM"/>
+<Field Comment="ВОТ1 основной" Name="VOT1_Main" Type="BOOL" UUID="353E6REO6JYEXHCYXWKNT2JS5I"/>
+<Field Comment="ВОТ2 основной" Name="VOT2_Main" Type="BOOL" UUID="HVID4PCKHTYEFHEJMY2SOH4CUU"/>
+<Field Comment="Возможность обледенения" Name="Ice" Type="BOOL" UUID="II26ZUYX3VYUHMIPP7G7PK6YSM"/>
+<Field Comment="Регулирование АВОМ Д" Name="Reg_MOD" Type="BOOL" UUID="HJLFXMOY3EREVLWQLWEB2BHNU4"/>
+<Field Comment="Регулирование АВОМ К" Name="Reg_MON" Type="BOOL" UUID="XFYPYYUUQVIUFOD46UMIT7GBPI"/>
+<Field Comment="Регулирование АВОМ Р" Name="Reg_MOR" Type="BOOL" UUID="3VXQLEDLNO2E3E2GDDXL5RPB3Y"/>
+<Field Comment="Выбран режим прямого пуска для АВОГ1" Name="AVOG1_BP" Type="BOOL" UUID="AE24ZNOI4TMUHENLFHBYNHPR5Y"/>
+<Field Comment="Выбран режим плавного пуска для АВОГ1" Name="AVOG1_UPP" Type="BOOL" UUID="BNXDBCUOXZ3ERHCY6QGO4J5TGY"/>
+<Field Comment="Выбран режим прямого пуска для АВОГ2" Name="AVOG2_BP" Type="BOOL" UUID="TJZRMJQNVYJURHIWF33JHZSTXU"/>
+<Field Comment="Выбран режим плавного пуска для АВОГ2" Name="AVOG2_UPP" Type="BOOL" UUID="I4VIMFJIUL4ELDIZIYF47XWVMU"/>
+<Field Comment="Регулятор АВОГ1 работает" Name="AVOG1_RegOn" Type="BOOL" UUID="OWOFFG7DT4IEVCFGC7H4N3IHSE"/>
+<Field Comment="Регулятор АВОГ2 работает" Name="AVOG2_RegOn" Type="BOOL" UUID="EFREIZWDBY3ETAE6BQX2WKXRNI"/>
+</Fields>
+</Type>

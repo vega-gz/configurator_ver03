@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_RSR" Kind="Struct" Comment="Ресурсные счетчики" UUID="JIWAZP4EUCAEZLWIKNJKS6DO7A">
+	<Fields>
+		<Field Name="RunOutTime_ST" Type="UINT" UUID="IO7XTW27RAREDKGAQQD6MUGIWA" Comment="Время выбега ротора СТ" />
+		<Field Name="RunOutTime_VD" Type="UINT" UUID="4I27QWNG5P2UNCIAIOYSS5LNP4" Comment="Время выбега ротора ТВД" />
+		<Field Name="SumAO" Type="UINT" UUID="ZEXKILFKQ32U5G3GV23KMOVIOE" Comment="Счетчик АО" />
+		<Field Name="SumNO" Type="UINT" UUID="OQSJI7YTC6HEBFDV4YYMGWM3FI" Comment="Счетчик НО" />
+		<Field Name="SumGZ" Type="UINT" UUID="ZBB6WT5Y3D4EFHAUBMG3EZHKFQ" Comment="Счетчик горячих запусков" />
+		<Field Name="SumHP" Type="UINT" UUID="NODVQ7BGCLUEBKQUZVWLT7S6DM" Comment="Счетчик прокруток" />
+		<Field Name="Kr1On" Type="UINT" UUID="YFNHXAXZDHJE3DJITEXRSJYAG4" Comment="Число открытий крана 1" />
+		<Field Name="Kr2On" Type="UINT" UUID="QI3GGQVGN72E7EHJAMOVRTV3OQ" Comment="Число открытий крана 2" />
+		<Field Name="TK_work" Type="UDINT" UUID="PCW4KURHCBZUXPD4XXONGSAPUI" Comment="Наработка двигателя, с" />
+		<Field Name="GPA_work" Type="UDINT" UUID="JZQTFMPOD3FULPGPLNYW43WVU4" Comment="Наработка компрессора под нагрузкой" />
+		<Field Name="GPA_HH" Type="UDINT" UUID="IUPNGY4K6JLETB5BCRJCPO22EY" Comment="Наработка компрессора на холостом ходу" />
+		<Field Name="ZsZO_On" Type="UDINT" UUID="CH5KJ7PVI2DUVCKQXPJAWKCWMU" Comment="Наработка ГПА при открытой ЗЗО" />
+		<Field Name="WorkOpenBK" Type="UDINT" UUID="TJXJJY2FQRHUHGHXIWNOAO63IY" Comment="Наработка ГПА при открытом БК ВОУ (в год)" />
+		<Field Name="PNSD" Type="UDINT" UUID="ESDIRGIP6WNURCUAU5ZK7J6KTM" Comment="Наработка ПНСД" />
+		<Field Name="PNSN" Type="UDINT" UUID="NL3F5SWF5V7U7PLDGEOSUA35MQ" Comment="Наработка ПНСК" />
+		<Field Name="PNSR" Type="UDINT" UUID="KNQSKYQQRPVUHENNLRQLJDNNEM" Comment="Наработка ПНСР" />
+		<Field Name="CNR" Type="UDINT" UUID="RWKOTOEHLWIERHSHNHAZYSLRUQ" Comment="Наработка ЦНР" />
+		<Field Name="VOD1" Type="UDINT" UUID="ITXNQOJINHTUVGX7IRJ765FIOU" Comment="Наработка  ВОД1" />
+		<Field Name="VOD2" Type="UDINT" UUID="TFFSTFCBM55E3BAFHPSAOI424M" Comment="Наработка  ВОД2" />
+		<Field Name="VOT1" Type="UDINT" UUID="GQRAFJ3LY4YURMRWNACBKOTLNA" Comment="Наработка  ВОТ1" />
+		<Field Name="VOT2" Type="UDINT" UUID="GHHG6XG7FZOEHIYO3USOMPPNBE" Comment="Наработка  ВОТ2" />
+		<Field Name="CNVO" Type="UDINT" UUID="FRTLTZUFLBRUPOHNLZWOP2N3KM" Comment="Наработка  НОК" />
+		<Field Name="CNSD" Type="UDINT" UUID="JG27UAUJ5EYUDI4O6MO7VO44RM" Comment="Наработка ЦНД" />
+		<Field Name="SR" Type="UDINT" UUID="QR63XWTF6CHEBI7HNSTQVVGWDI" Comment="Наработка стартера" />
+	</Fields>
+</Type>

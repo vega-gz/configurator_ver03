@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ALG_TSK" Kind="Struct" UUID="4FE6B9B2452CE88BCE6ACCBA0D58BA84">
+	<Fields>
+		<Field Name="noActivMode" Type="BOOL" UUID="959F79C84C55CADDF4FCFE96EF2DA9CE" />
+		<Field Name="Unlock" Type="BOOL" UUID="11823C084449E463C7807DA31574F320" />
+		<Field Name="AOss" Type="BOOL" UUID="618E0B39415A436037D988A5883CDFCE" />
+		<Field Name="AObs" Type="BOOL" UUID="678C83744884DAFF5157C69B55CD7C30" />
+		<Field Name="AO" Type="BOOL" UUID="TOD3MFXBDYAUHASAMTUMAVLYIQ" />
+		<Field Name="Fire" Type="BOOL" UUID="8E7318A845C71A58B66909A89140591C" />
+		<Field Name="condReserve" Type="BOOL" UUID="3708CE7B4C7FC8454D7EFCA5839624D7" />
+		<Field Name="Kr_1T1_selfON" Type="BOOL" UUID="9023B71147E1258381909E80DFEF0AB7" Comment="Самопроизвольное открытие Крана 1Т-1" />
+		<Field Name="Kr_2T1_selfON" Type="BOOL" UUID="3B8E5C434045E1C07F66E09A63E1A867" Comment="Самопроизвольное открытие Крана 2Т-1" />
+		<Field Name="Kr_3T1_selfON" Type="BOOL" UUID="FB58CC004DAA5C8A538FB8B01CCEFB55" Comment="Самопроизвольное открытие Крана 3Т-1" />
+		<Field Name="Kr_4T1_selfON" Type="BOOL" UUID="A765AFCA4415B337BC13FA9BE6771A59" Comment="Самопроизвольное открытие Крана 4Т-1" />
+		<Field Name="Kr_5T1_selfON" Type="BOOL" UUID="6C2720C04138AC215251FFACFE758178" Comment="Самопроизвольное открытие Крана 5Т-1" />
+		<Field Name="Kr_6T1_selfON" Type="BOOL" UUID="25E3E8754C2405F13E5B83942EFA2002" Comment="Самопроизвольное открытие Крана 6Т-1" />
+		<Field Name="Kr_7T1_selfON" Type="BOOL" UUID="D30BCC6940265271447164BF946962A0" Comment="Самопроизвольное открытие Крана 7Т-1" />
+		<Field Name="Kr_8T1_selfON" Type="BOOL" UUID="68609BC64B93230271CDAAA9B68B8091" Comment="Самопроизвольное открытие Крана 8Т-1" />
+		<Field Name="Kr_9T1_selfON" Type="BOOL" UUID="84A6452A4D9B5AECF620FE9A68746656" Comment="Самопроизвольное открытие Крана 9Т-1" />
+		<Field Name="Kr_10T1_selfON" Type="BOOL" UUID="AEDD559F41CC5928635FCEBF0C7A6751" Comment="Самопроизвольное открытие Крана 10Т-1" />
+		<Field Name="Kr_11T1_selfON" Type="BOOL" UUID="888C931E45F8E3DFC82DCA94B1516693" Comment="Самопроизвольное открытие Крана 11Т-1" />
+		<Field Name="Kr_12T1_selfON" Type="BOOL" UUID="F58624C848DC2EAC2CA2158E5FB384E9" Comment="Самопроизвольное открытие Крана 12Т-1" />
+		<Field Name="Kr_13T1_selfON" Type="BOOL" UUID="A3EB38194926D818EE00B18F4B23CC88" Comment="Самопроизвольное открытие Крана 13Т-1" />
+		<Field Name="Kr_14T1_selfON" Type="BOOL" UUID="73805084450E1B3671F89E9490C50702" Comment="Самопроизвольное открытие Крана 14Т-1" />
+		<Field Name="Kr_1T1_selfOF" Type="BOOL" UUID="B3FD97114975FB8BC8B4FFA348E6C768" Comment="Самопроизвольное закрытие Крана 1Т-1" />
+		<Field Name="Kr_2T1_selfOF" Type="BOOL" UUID="4E3A0C234E9D6EC7927D93AA9E05B325" Comment="Самопроизвольное закрытие Крана 2Т-1" />
+		<Field Name="Kr_3T1_selfOF" Type="BOOL" UUID="ECD641F14C8233CF16098F8835C28246" Comment="Самопроизвольное закрытие Крана 3Т-1" />
+		<Field Name="Kr_4T1_selfOF" Type="BOOL" UUID="7BC520A74CB2A84B90DB8DAD5BA71513" Comment="Самопроизвольное закрытие Крана 4Т-1" />
+		<Field Name="Kr_5T1_selfOF" Type="BOOL" UUID="B8BFC55F46AD4C240547539C7B445BD1" Comment="Самопроизвольное закрытие Крана 5Т-1" />
+		<Field Name="Kr_6T1_selfOF" Type="BOOL" UUID="EA806D414D85502DC207E4AD93BEC8B4" Comment="Самопроизвольное закрытие Крана 6Т-1" />
+		<Field Name="Kr_7T1_selfOF" Type="BOOL" UUID="E0034D0B4C617698C616B5B56AB7DDEA" Comment="Самопроизвольное закрытие Крана 7Т-1" />
+		<Field Name="Kr_8T1_selfOF" Type="BOOL" UUID="7D4803FD42B2A76A6C9DB4B2023D68FE" Comment="Самопроизвольное закрытие Крана 8Т-1" />
+		<Field Name="Kr_9T1_selfOF" Type="BOOL" UUID="386A42924F33DCA972BC5DB4DC04AC67" Comment="Самопроизвольное закрытие Крана 9Т-1" />
+		<Field Name="Kr_10T1_selfOF" Type="BOOL" UUID="0BA58E684E1D4093E61E9E85586D77EF" Comment="Самопроизвольное закрытие Крана 10Т-1" />
+		<Field Name="Kr_11T1_selfOF" Type="BOOL" UUID="1C4392924ACB7253C5453EB1C4C0EF3A" Comment="Самопроизвольное закрытие Крана 11Т-1" />
+		<Field Name="Kr_12T1_selfOF" Type="BOOL" UUID="D1CC686646DEEF6225EE619F191716F2" Comment="Самопроизвольное закрытие Крана 12Т-1" />
+		<Field Name="Kr_13T1_selfOF" Type="BOOL" UUID="D49E861742907208E7B804A709F30C81" Comment="Самопроизвольное закрытие Крана 13Т-1" />
+		<Field Name="Kr_14T1_selfOF" Type="BOOL" UUID="DA2AA7D648F269529AD681A5B3AC2CA7" Comment="Самопроизвольное закрытие Крана 14Т-1" />
+		<Field Name="Fire_BB_TSK" Type="BOOL" UUID="3B0F67C746728696319BBFBEC2637B1D" Comment="Пожар в ББ САУ ТСк ПХГ" />
+		<Field Name="Fire_BB_EXZ_6T" Type="BOOL" UUID="1D75075843AFFE9D49E95F8B637C55DC" Comment="Пожар в ББ ЭХЗ 6Т" />
+		<Field Name="Fire_BB_EXZ_7T" Type="BOOL" UUID="7BA67B504A016B31F0F883996007D28F" Comment="Пожар в ББ ЭХЗ 7Т" />
+		<Field Name="Fire_BB_EXZ_8T" Type="BOOL" UUID="3454AE7A426B6CDF2CA244B263475DF9" Comment="Пожар в ББ ЭХЗ 8Т" />
+		<Field Name="Fire_BB_EXZ_9T" Type="BOOL" UUID="A2EEBA274213ED296D4A1985E7C5C434" Comment="Пожар в ББ ЭХЗ 9Т" />
+		<Field Name="Fire_BB_EXZ_10T" Type="BOOL" UUID="6159446B4F357DFB49A9AAB582C5F2AF" Comment="Пожар в ББ ЭХЗ 10Т" />
+		<Field Name="Fire_BB_EXZ_11T" Type="BOOL" UUID="72707917438AEF17A0FF21BA646C0EA6" Comment="Пожар в ББ ЭХЗ 11Т" />
+		<Field Name="Fire_BB_EXZ_12T" Type="BOOL" UUID="2D5962E04715DEBA783CAC9DAE680AF5" Comment="Пожар в ББ ЭХЗ 12Т" />
+		<Field Name="Fire_BB_EXZ_13T" Type="BOOL" UUID="ADCD325D414C50C587ABDFAF803F9188" Comment="Пожар в ББ ЭХЗ 13Т" />
+		<Field Name="Fire_BB_EXZ_14T" Type="BOOL" UUID="14D0D42B4CEB7670CA34C1BB0E2B1E47" Comment="Пожар в ББ ЭХЗ 14Т" />
+		<Field Name="ev_Qmg_shl_1T_2T_Pn" Type="BOOL" UUID="CA538C7D42D3FC5BC4DDA3B4E7EB19A2" Comment="Мгновенный расход газа на шлейфе 1Т-2Т: предупредительная нижняя" />
+		<Field Name="ev_Qmg_shl_1T_2T_Pv" Type="BOOL" UUID="2CE842CB43DB9405022359BADD0BAD36" Comment="Мгновенный расход газа на шлейфе 1Т-2Т: предупредительная верхняя" />
+		<Field Name="ev_Qmg_shl_3T_5T_Pn" Type="BOOL" UUID="0AA1795A4B09B6B022613FAAA6BF34D4" Comment="Мгновенный расход газа на шлейфе 3Т-5Т: предупредительная нижняя" />
+		<Field Name="ev_Qmg_shl_3T_5T_Pv" Type="BOOL" UUID="D40F82AA441EA2286EAAE4A0E8804C44" Comment="Мгновенный расход газа на шлейфе 3Т-5Т: предупредительная верхняя" />
+		<Field Name="ev_Qmg_shl_6T_14T_Pn" Type="BOOL" UUID="491D7D0B4996E36BE72616B8F790F20A" Comment="Мгновенный расход газа на шлейфе 6Т-14Т: предупредительная нижняя" />
+		<Field Name="ev_Qmg_shl_6T_14T_Pv" Type="BOOL" UUID="9B13CE21478D13A2FC3D98B407486693" Comment="Мгновенный расход газа на шлейфе 6Т-14Т: предупредительная верхняя" />
+	</Fields>
+</Type>

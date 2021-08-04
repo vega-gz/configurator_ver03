@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_DRO" Kind="Struct" UUID="TSNW6D55K3VENNSJQLTFLBEJZM">
+	<Fields>
+		<Field Name="StartMSR_2" Type="BOOL" UUID="G7JQSF7ENXVUHJKEMMJ7GEAB24" Comment="Включение ПНСР (2 шаг бараб.  StartMSR)" />
+		<Field Name="StartMSR_3" Type="BOOL" UUID="H5UIWVPYFOQUJEVLYFIIVVWT2Y" Comment="Взвести защиту по Тм редуктора (3 шаг бараб.  StartMSR)" />
+		<Field Name="StartMSR_4" Type="BOOL" UUID="RTIH66CDUQAEBNZVNNLUK27RCM" Comment="Взвести защиту по Рм редуктора (4 шаг бараб.  StartMSR)" />
+		<Field Name="StartMSK_1" Type="BOOL" UUID="OMVIDGLKHMUEXJ5IANDCDMAGPE" Comment="Включение ПНСК (НППМК) (1 шаг бараб.  StartMSК)" />
+		<Field Name="StartMSK_2" Type="BOOL" UUID="6QXYEQP274XELMXCZ3L626YWKI" Comment="Контроль параметров масла компрессора (2 шаг бараб.  StartMSК)" />
+		<Field Name="StartMSK_3" Type="BOOL" UUID="D3KUYN7O24CEVHJU343HQA23AY" Comment="Взвести защиту по Рм компрессора (3 шаг бараб.  StartMSК)" />
+		<Field Name="StartMSK_4" Type="BOOL" UUID="ZLFHE3DGPZ6E5H62YPMMR3FMS4" Comment="4 шаг бараб.  StartMSK" />
+		<Field Name="StartMSK_5" Type="BOOL" UUID="XLPNZLVYGCLUFHWRFDVTQZUYO4" Comment="5 шаг бараб.  StartMSK" />
+		<Field Name="StartMSD_1" Type="BOOL" UUID="YEILGUSKBUPEDHVVWWFNQBBR4M" Comment="1 шаг бараб.  StartMD" />
+		<Field Name="StartMSD_2" Type="BOOL" UUID="JUFSEK5NCUYEHGVYQ47T6WG2H4" Comment="2 шаг бараб.  StartMD" />
+		<Field Name="StartMSD_3" Type="BOOL" UUID="Q64ZBFIDU6IUTONKKGTGCWTUSU" Comment="3 шаг бараб.  StartMD" />
+		<Field Name="StartMSD_4" Type="BOOL" UUID="75LALWZ3SSHUPAC2NCM5KRF6ZA" Comment="4 шаг бараб.  StartMD" />
+		<Field Name="PZM_2" Type="BOOL" UUID="HBQFGNHQBXAEVMW64SG6WMKIUM" Comment="2 шаг барабана ПЗМ" />
+		<Field Name="PZM_3" Type="BOOL" UUID="2W572UKCJTJULA4HBATC5AOOVU" Comment="3 шаг барабана ПЗМ" />
+		<Field Name="PZM_4" Type="BOOL" UUID="4P2N4EMFHFMUJHB6MXJ6P2LRRA" Comment="4 шаг барабана ПЗМ" />
+		<Field Name="ZapK_1" Type="BOOL" UUID="5VFP6ZDPMN5EFN3HCWAXXDT2V4" Comment="1 шаг барабана ZapK" />
+		<Field Name="ZapK_2" Type="BOOL" UUID="MONQV7THEOQUZNHJ23PABEYB2E" Comment="2 шаг барабана ZapK" />
+		<Field Name="ZapK_3" Type="BOOL" UUID="TOCMX3DG4RZEJJEPKY7Y2LP3IU" Comment="3 шаг барабана ZapK" />
+		<Field Name="ZapK_4" Type="BOOL" UUID="WOMZOIXH57JENKOTQ5TZCED5II" Comment="4 шаг барабана ZapK" />
+		<Field Name="ZapK_5" Type="BOOL" UUID="3URZH747CA2EXJRYB6MKBHVW4U" Comment="5 шаг барабана ZapK" />
+		<Field Name="ZapK_6" Type="BOOL" UUID="DU7V4AHNRBCEXLGRIBLPQ7Z6EA" Comment="6 шаг барабана ZapK" />
+		<Field Name="KPK_2" Type="BOOL" UUID="3CHXHN5UNU4ENBZZ5LUIDE7QWQ" Comment="2 шаг барабана КПК" />
+		<Field Name="KPK_3" Type="BOOL" UUID="RN2GGCJHO4GUDIM2E3Q33LV5XU" Comment="3 шаг барабана КПК" />
+		<Field Name="KPK_4" Type="BOOL" UUID="IDWL7T537SOE3NCLRHKYCK7PPI" Comment="4 шаг барабана КПК" />
+		<Field Name="KPK_5" Type="BOOL" UUID="WAE7P527ASDU7IWUQ7LWNP6X7E" Comment="5 шаг барабана КПК" />
+		<Field Name="KPK_6" Type="BOOL" UUID="OBFSQAZFERHELKKOUQYYGXE67E" Comment="6 шаг барабана КПК" />
+		<Field Name="KPK_7" Type="BOOL" UUID="TBX6D2F46IOUJHXH6SKG2W7O4Q" Comment="7 шаг барабана КПК" />
+		<Field Name="KPK_8" Type="BOOL" UUID="TIE4FJYLSDIELKHNWMSUJHODI4" Comment="8 шаг барабана КПК" />
+		<Field Name="KPK_9" Type="BOOL" UUID="KS2Q4VQLIWQEJHK63BYVLRA2GM" Comment="9 шаг барабана КПК" />
+		<Field Name="KPK_10" Type="BOOL" UUID="WDI5UGLOCLDUNEPK6Q6W6CD2EY" Comment="10 шаг барабана КПК" />
+		<Field Name="KPK_11" Type="BOOL" UUID="L25R4RFTX76EPBQVKG7OXX4FMQ" Comment="11 шаг барабана КПК" />
+		<Field Name="StartCrank_1" Type="BOOL" UUID="Y5XTG2JZBPNEZPC4GGQTFM3E3A" Comment="1 шаг бараб.  StartCrank" />
+		<Field Name="StartCrank_2" Type="BOOL" UUID="3WEFLSOEHRXUBPSAFMZ5LF7VSY" Comment="2 шаг бараб.  StartCrank" />
+		<Field Name="StartCrank_3" Type="BOOL" UUID="ANEU2AOJRKJEFJDBAPTSGNUFKY" Comment="3 шаг бараб.  StartCrank" />
+		<Field Name="StartCrank_4" Type="BOOL" UUID="O4EOKU7VMHQUNJFEHMJEQPMMOM" Comment="4 шаг бараб.  StartCrank" />
+		<Field Name="StopCrank_1" Type="BOOL" UUID="ASANWHVL6DJUBFFJQOPLZRKNQM" Comment="1 шаг бараб.  StartCrank" />
+		<Field Name="StopCrank_2" Type="BOOL" UUID="NUFG2XWRNDOULM7G3NIBSKLMAA" Comment="2 шаг бараб.  StartCrank" />
+		<Field Name="StopCrank_3" Type="BOOL" UUID="ZVZY6PKC4WXUHGACYYYEFTPFO4" Comment="3 шаг бараб.  StartCrank" />
+		<Field Name="StopMS_1" Type="BOOL" UUID="LTYUF3FDRD4EVDHHNTFJZOXDJE" Comment="1 шаг бараб.  StartMS" />
+		<Field Name="StopMS_2" Type="BOOL" UUID="THCBT5STIYJU3PAJHSFPLF6YTM" Comment="2 шаг бараб.  StartMS" />
+		<Field Name="StopMS_3" Type="BOOL" UUID="IT2ZL3BNW6EUXK4XCREMGV4SFI" Comment="3 шаг бараб.  StartMS" />
+		<Field Name="Crank_2" Type="BOOL" UUID="7I66ZEBHZM7UNIKTBNAZ6TSBUM" Comment="2 шаг бараб.  ХП/ТП" />
+		<Field Name="Crank_3" Type="BOOL" UUID="IPF7IGTOQXRUFCUUR7YLUC3RLY" Comment="3 шаг бараб.  ХП/ТП" />
+		<Field Name="Crank_4" Type="BOOL" UUID="GDAK2HSWSIRUXEURHEFLEVQ42Q" Comment="4 шаг бараб.  ХП/ТП" />
+		<Field Name="Crank_5" Type="BOOL" UUID="XVB47ZMZIAHEXJUFUNZLZ3XOXI" Comment="5 шаг бараб.  ХП/ТП" />
+		<Field Name="StrK_1" Type="BOOL" UUID="K3U4QFP7S5OUZJ7TI2THBU5YII" Comment="1 шаг бараб.  StrK" />
+		<Field Name="StrK_2" Type="BOOL" UUID="ZAXBEYUXNHJUHLPHY56XPRWFRE" Comment="2 шаг бараб.  StrK" />
+		<Field Name="StartD_1" Type="BOOL" UUID="6EAFW2HNHVFEBL62OA3LIZP6YE" Comment="1 шаг бараб.  StartD" />
+		<Field Name="StartD_2" Type="BOOL" UUID="T7WHZNEVLBZUZP3I5CJHTAGK3A" Comment="2 шаг бараб.  StartD" />
+		<Field Name="StartD_3" Type="BOOL" UUID="WLWIKSKKKRCULMPNY4ZIH7OU3A" Comment="3 шаг бараб.  StartD" />
+		<Field Name="StartD_4" Type="BOOL" UUID="46FOW2GEHFYUDM3R2733RUXMWU" Comment="4 шаг бараб.  StartD" />
+		<Field Name="StartD_5" Type="BOOL" UUID="PVBQZTAHL7XU5MOJGF5FPLI6S4" Comment="5 шаг бараб.  StartD" />
+		<Field Name="StartD_6" Type="BOOL" UUID="DYOKW5B2G5NUPIZ7K5JRJR2BNA" Comment="6 шаг бараб.  StartD" />
+		<Field Name="StartD_7" Type="BOOL" UUID="I5YZBITYWF2E7G7D3EOOQ6NSTA" Comment="7 шаг бараб.  StartD" />
+		<Field Name="StartD_8" Type="BOOL" UUID="XGVN3USEZLGEPMB62IO6UTQS7I" Comment="6 шаг бараб.  StartD" />
+		<Field Name="StartD_9" Type="BOOL" UUID="RETLUFHZS77UZPXUOSNDYJG2LQ" Comment="7 шаг бараб.  StartD" />
+		<Field Name="StartD_10" Type="BOOL" UUID="6KF3E4NRFMVETCXHL7NDBQ42Z4" />
+		<Field Name="StartD_11" Type="BOOL" UUID="SMKHZZ5MBBBUPBQ7DAPZKDS5XY" />
+		<Field Name="APK_1" Type="BOOL" UUID="IWUIHBDV7IVUHC36NHEU64WCX4" Comment="1 шаг барабана АПK" />
+		<Field Name="APK_2" Type="BOOL" UUID="OT5HQW6Q7XBEJL6ESCBYFTKOVM" Comment="2 шаг барабана АПK" />
+		<Field Name="APK_3" Type="BOOL" UUID="X5XP4HOCH5QULEANNSCBN4A7XM" Comment="3 шаг барабана АПK" />
+		<Field Name="APK_4" Type="BOOL" UUID="KWST3FYQEHRENGBAV7P2PAAGRY" Comment="4 шаг барабана АПK" />
+		<Field Name="APK_5" Type="BOOL" UUID="LGVYSRIVUJGUPLXZLNPRW4Z33A" Comment="5 шаг барабана АПK" />
+		<Field Name="APM_1" Type="BOOL" UUID="FHGBR4XZEDOEVP4KONNWIMLASQ" Comment="1 шаг барабана АПM" />
+		<Field Name="APM_2" Type="BOOL" UUID="LW4UN4LSRQBUJN3PVDLBWVTA7I" Comment="2 шаг барабана АПM" />
+		<Field Name="APM_3" Type="BOOL" UUID="WUNZI2EXSOFEXIYFKJRS46J3QE" Comment="3 шаг барабана АПM" />
+		<Field Name="APM_4" Type="BOOL" UUID="FWX4D7X7SYUETF35GKB7ADZX6M" Comment="4 шаг барабана АПM" />
+		<Field Name="APM_5" Type="BOOL" UUID="MWBPEC5UD5BU5NOMQANUFMIGCE" Comment="5 шаг барабана АПM" />
+		<Field Name="APM_6" Type="BOOL" UUID="ABWQISZVLVJEFHWDF23R724MJY" Comment="6 шаг барабана АПM" />
+		<Field Name="APM_7" Type="BOOL" UUID="6H5MAXHMEEZEFPSVYSSU73AJCA" Comment="7 шаг барабана АПM" />
+		<Field Name="APM_8" Type="BOOL" UUID="VYABDUZ4HISUDMSK37D6ML2W5U" Comment="8 шаг барабана АПM" />
+		<Field Name="APM_9" Type="BOOL" UUID="VXTKDMOUMYVEXK3HYNWKZRV7KU" Comment="9 шаг барабана АПM" />
+		<Field Name="Rp_KM_1" Type="BOOL" UUID="K57XNJP5ZJTUZDEFL4KQI6QDPU" Comment="1 шаг бараб.  Rp_KM" />
+		<Field Name="Rp_KM_2" Type="BOOL" UUID="XZPNDWJXHN7UBBDNF6WNQ73NBE" Comment="2 шаг бараб.  Rp_KM" />
+		<Field Name="StartOxlK_1" Type="BOOL" UUID="YVT2I2XOLV2UVNFDJTEZIJYODA" Comment="1 шаг бараб.  StartOxl" />
+		<Field Name="StartOxlK_2" Type="BOOL" UUID="HJQPGR3XLHRENGEMNC4BBQZ62Q" Comment="2 шаг бараб.  StartOxl" />
+		<Field Name="StartOxlK_3" Type="BOOL" UUID="WJHKQGZF2NREXEYYMSSN7XVICQ" Comment="3 шаг бараб.  StartOxl" />
+		<Field Name="StopOxlK_1" Type="BOOL" UUID="EEQWBVHQGC6EHLP72KZQT6IVCI" Comment="1 шаг бараб.  StopOxl" />
+		<Field Name="StopOxlK_2" Type="BOOL" UUID="QZGDTMBLWIIU5GASMYVYZ4C2GI" Comment="2 шаг бараб.  StopOxl" />
+		<Field Name="StopOxlK_3" Type="BOOL" UUID="YAZGDRNOIIHUZEV76YTPEWQPOU" Comment="3 шаг бараб.  StopOxl" />
+		<Field Name="WrmM_Kompr_1" Type="BOOL" UUID="UY7F6MWU4X3U5PXS57VNPOSRDY" Comment="1 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_2" Type="BOOL" UUID="CSIQRBERUAZE5EU7S5Z5NJ3MTQ" Comment="2 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_3" Type="BOOL" UUID="ABACPUZ3QHIUHCFIPJRVAG6QVU" Comment="3 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_4" Type="BOOL" UUID="KT3DBV2D4TFEVNVJZ2QX35D4VE" Comment="4 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_5" Type="BOOL" UUID="3QELARXG3MFULBDB3A5KFX7DMA" Comment="5 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_6" Type="BOOL" UUID="SXM5ZD5AC5KUBGNEXILN7VXAUU" Comment="6 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_7" Type="BOOL" UUID="BRPKON7F2EIEJCPVMGL33FFO3Q" Comment="7 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_8" Type="BOOL" UUID="LHGJK2IUOWRUJDKUAI3C6W3FQA" Comment="8 шаг бараб.  WrmM_Kompr" />
+		<Field Name="WrmM_Kompr_9" Type="BOOL" UUID="UVNYMO6INR2EJFXBUNLOG5SOFQ" Comment="9 шаг бараб.  WrmM_Kompr" />
+		<Field Name="AOs_1" Type="BOOL" UUID="MV4FZLGLBV3ENGNEGAGGO2SH5E" Comment="1 шаг бараб.  AOs" />
+		<Field Name="AOs_2" Type="BOOL" UUID="LFORADT5BYOUDERIMLJFE2HTDY" Comment="2 шаг бараб.  AOs" />
+		<Field Name="AOs_3" Type="BOOL" UUID="W7TE3P6LDPQEDBB2NVVESJWHFA" Comment="3 шаг бараб.  AOs" />
+		<Field Name="AOs_4" Type="BOOL" UUID="7KLB6LEOTFKENJBVEEG3XZYQBY" Comment="4 шаг бараб.  AOs" />
+		<Field Name="AOs_5" Type="BOOL" UUID="EFF3YVHBXS2EDNWHJ3UXRQXPTE" Comment="5 шаг бараб.  AOs" />
+		<Field Name="AOs_6" Type="BOOL" UUID="AR2F6T52BUBUFFOSCSVYC47ZXI" Comment="6 шаг бараб.  AOs" />
+		<Field Name="AOs_7" Type="BOOL" UUID="3HOLL2EYRRDE5A27MZHI7RN5M4" Comment="7 шаг бараб.  AOs" />
+		<Field Name="AOs_8" Type="BOOL" UUID="IXEOXZUQHKUE5LHLS2ZO5PHN7M" Comment="8 шаг бараб.  AOs" />
+		<Field Name="AOb_1" Type="BOOL" UUID="YPCT3HZMXMGUNLDUMJVZ5YCOVA" Comment="1 шаг бараб.  AOб" />
+		<Field Name="AOb_2" Type="BOOL" UUID="FJF2EUK5I5HU3ERLBWSE2AWGP4" Comment="2 шаг бараб.  AOб" />
+		<Field Name="AOb_3" Type="BOOL" UUID="XF25SWKBSB7UJJM56KTSAAJB2Q" Comment="3 шаг бараб.  AOб" />
+		<Field Name="AOb_4" Type="BOOL" UUID="OBWVIFQRAS7EJPT37FJBY5HOC4" Comment="4 шаг бараб.  AOб" />
+		<Field Name="AOb_5" Type="BOOL" UUID="UIZAWEHRDAXU3EZMRELENMBHKA" Comment="5 шаг бараб.  AOб" />
+		<Field Name="AOb_6" Type="BOOL" UUID="TQSCYX56BQHU5NGIQN65C5BEJA" Comment="6 шаг бараб.  AOб" />
+		<Field Name="MK_NOs" Type="BOOL" UUID="REOJQJIQJ5ELXMAPAEJGNQKRPU" />
+		<Field Name="NOtoFR_NOs" Type="BOOL" UUID="U4Q7JD3W7KYEXG2FIYQGTRL3TM" />
+		<Field Name="OxlD_NOs" Type="BOOL" UUID="C3OB2QVUPNANJOMSFEB5XKWXPE" />
+		<Field Name="StopD_NOs" Type="BOOL" UUID="7KWUZNCOXVGM5ARJ57IPOSPMN4" />
+		<Field Name="StrK_NOs" Type="BOOL" UUID="TRGGZTNWZNBK5CMW7IKJVYEHV4" />
+		<Field Name="Kr1_OF_NOs" Type="BOOL" UUID="VDZ7KKDCYPXUJL4A52JOPELJI4" />
+		<Field Name="Kr6_OF_NOs" Type="BOOL" UUID="AMY4PGCZ3ZRUBOLF3U4GP6DMUI" />
+		<Field Name="MK_NOb" Type="BOOL" UUID="IWCA5DL4GNDMVJ7ROJPS44YX2E" />
+		<Field Name="NOtoFR_NOb" Type="BOOL" UUID="3C5UF3NUUAVUNEVPX2O7HXZXRY" />
+		<Field Name="OxlD_NOb" Type="BOOL" UUID="2IJEB6XLPFBWJDI5QQIU3LYAKA" />
+		<Field Name="StopD_NOb" Type="BOOL" UUID="IGMXNXNUH5CRHD4L53EQI247MQ" />
+		<Field Name="Kr6_OF_NOb" Type="BOOL" UUID="F3X3OGRV4LPERKYJANNFC4M2RA" />
+		<Field Name="MK_VOs" Type="BOOL" UUID="ET7QCMCVGJBTLBOUNG5PAY3Z6Y" />
+		<Field Name="NOtoFR_VOs" Type="BOOL" UUID="GS6G4RA4ZQRUZNNT2DKE2GBKOQ" />
+		<Field Name="OxlD_VOs" Type="BOOL" UUID="RTBZRYIK7BCXPF7Z4OD27PKKJI" />
+		<Field Name="StopD_VOs" Type="BOOL" UUID="SWFGD24JTZGEHCE4JZBXQCIDYA" />
+		<Field Name="StrK_VOs" Type="BOOL" UUID="4BDDNHUNI5DCTDRYZBV6OSFC3I" />
+		<Field Name="Kr1_OF_VOs" Type="BOOL" UUID="ZNHDMD3OR6FEBHWHXHPNAY7UFE" />
+		<Field Name="Kr6_OF_VOs" Type="BOOL" UUID="7TPIP6GX4ZVEJAJ6ZCQVMO7W6U" />
+		<Field Name="VOs_end" Type="BOOL" UUID="YH635SRVH22UXBPVWSD4MZ6WUY" />
+		<Field Name="MK_VOb" Type="BOOL" UUID="HTXTXKDN35E6HK23OU3KKB32HM" />
+		<Field Name="NOtoFR_VOb" Type="BOOL" UUID="RTD7LFQIUUYETIMGWEGHH3QYTY" />
+		<Field Name="OxlD_VOb" Type="BOOL" UUID="IU56BFSYDFCZRGDD66HEDJRJSA" />
+		<Field Name="StopD_VOb" Type="BOOL" UUID="P5HX27MMA5FODDYM5HSA64Y52M" />
+		<Field Name="Kr6_OF_VOb" Type="BOOL" UUID="A3D2WL2GTGIERGHY5NCPOK3QDQ" />
+		<Field Name="VOb_end" Type="BOOL" UUID="EI6SDWABWBMUZFLEVXP6SCK64E" />
+		<Field Name="RPtarget11_MK" Type="BOOL" UUID="ZGC2KNKAYZDFZGT2GANU7ZFSJY" />
+		<Field Name="NstToXX_MK" Type="BOOL" UUID="KHEWDSFNVFEFLGHGKEWZEV6OGE" />
+		<Field Name="APK_ON_MK" Type="BOOL" UUID="GGFFRAHTXZENTKTJU7E27WFVAI" />
+		<Field Name="Kr2_OF_MK" Type="BOOL" UUID="QRMY3C5ATNEATDA6FF2CRA5WHY" />
+		<Field Name="StopD_1" Type="BOOL" UUID="GJ2R7FAASCBE5OS2YLFJAVNNBA" Comment="1 шаг бараб.  StopD" />
+		<Field Name="StopD_2" Type="BOOL" UUID="Z5BYF6JIH3VUNO4DPK4E4MF6TQ" Comment="2 шаг бараб.  StopD" />
+		<Field Name="StopD_3" Type="BOOL" UUID="HPYFCHPIUL2EXAZCEA5AHIQP2A" Comment="3 шаг бараб.  StopD" />
+		<Field Name="StopD_4" Type="BOOL" UUID="RXPDERY63GTU3GH7FM4KV7FSVY" Comment="4 шаг бараб.  StopD" />
+		<Field Name="StopD_5" Type="BOOL" UUID="QWBTOAW5R2SURKKZUTBVUP543U" Comment="5 шаг бараб.  StopD" />
+		<Field Name="StopD_6" Type="BOOL" UUID="ZUMTEMGFCE3EBGOJJ7YMXKVLHA" Comment="6 шаг бараб.  StopD" />
+		<Field Name="StopD_7" Type="BOOL" UUID="VUVD4SGTDEBE7E6WPPZ3MEQ6WU" Comment="7 шаг бараб.  StopD" />
+		<Field Name="Stop_Fire" Type="BOOL" UUID="GNSEDJIHT3NEPNN7NIY53EKQHQ" />
+		<Field Name="End_Fire" Type="BOOL" UUID="TOWNK5CP7OBU3A7OTOBB5J55KE" />
+		<Field Name="DolivKar_PNSN_OF" Type="BOOL" UUID="QT24HZVQPTXURGPCUK5IXOQGDY" />
+		<Field Name="DolivKar_KDMN_ON" Type="BOOL" UUID="TW4UFREEBN2ETIDG2U2D5A3KDA" />
+	</Fields>
+</Type>

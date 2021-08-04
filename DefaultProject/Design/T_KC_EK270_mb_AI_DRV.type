@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_EK270_mb_AI_DRV" Kind="Struct" UUID="ACB832FAF79A4C78A4317005D0E9F789">
+	<Fields>
+		<Field Name="pb301" Type="REAL" UUID="382C242DCA2A4B36BF25281844699051" Comment="Давление, Бар" />
+		<Field Name="Tb303" Type="REAL" UUID="7E48C8020BDA4DA7AD5329EC7FB99FDE" Comment="Температура, °C" />
+		<Field Name="p_Abs305" Type="REAL" UUID="C53CF3AF96CC465F9CFD5FD9FC493494" Comment="Абсолютное давление, Бар" />
+		<Field Name="p_Mes307" Type="REAL" UUID="997879A6F4554E2F8A7C3060A51D5CE5" Comment="Измеренное давление, Бар" />
+		<Field Name="T_Mes309" Type="REAL" UUID="C6B20732E55A49C68BEDE5420D183A28" Comment="Измеренная температура, °C" />
+		<Field Name="C311" Type="REAL" UUID="01BD718AA3B649A9B7D18F20D64D39F2" Comment="Коэффициент коррекции, Бар" />
+		<Field Name="K313" Type="REAL" UUID="9B43F48B1143443A966527184115AF30" Comment="Коэффициент сжимаемости газа" />
+		<Field Name="p_F315" Type="REAL" UUID="239804B2C4404F6CA8E46D169F843359" Comment="Подстановочное значение давления, Бар" />
+		<Field Name="T_F317" Type="REAL" UUID="885219FBCC24447489C848C1C2CB4E53" Comment="Подстановочное значение температуры, °C" />
+		<Field Name="N2_319" Type="REAL" UUID="373C86AB92E6456EB8966B283A4CC6A7" Comment="Содержание азота, %" />
+		<Field Name="H2_321" Type="REAL" UUID="FF832BF074334AF0B723BEBC2482F383" Comment="Содержание водорода, %" />
+		<Field Name="CO2_323" Type="REAL" UUID="6C9B6F8C0D5A4A899973D6625B7C161A" Comment="Содержание двуокиси углерода, %" />
+		<Field Name="Rhob325" Type="REAL" UUID="8FC2DAE817B047119CBDE8182574E096" Comment="Плотность газа при нормальных условиях, кг/м3" />
+		<Field Name="Q327" Type="REAL" UUID="06BB132EEAB74E4AAEE3F088E2C39694" Comment="Рабочий расход газа, м3/ч" />
+		<Field Name="Qb329" Type="REAL" UUID="1623AFBBB3F94FBC888246D9E2BB77A2" Comment="Стандартный расход газа, м3/ч" />
+		<Field Name="P331" Type="REAL" UUID="29B7A88B52AB456896E39D6FAD14CF89" Comment="Мощность, kВт" />
+		<Field Name="Ho_b333" Type="REAL" UUID="18AC0874465D475EA3AC4FCBD3FB6428" Comment="Теплотворная способность, kВтч/м3" />
+		<Field Name="dr335" Type="REAL" UUID="AFFCFE019FF149BA847C1BEAAFD39B35" Comment="Коэффициент плотности" />
+		<Field Name="p337" Type="REAL" UUID="1D7EE341218D42F6A30FB20F1FA71F20" Comment="Давление_1, Бар" />
+		<Field Name="T339" Type="REAL" UUID="490E6AC155564B93BAB3C0632F7CA592" Comment="Температура,_1 °C" />
+	</Fields>
+</Type>

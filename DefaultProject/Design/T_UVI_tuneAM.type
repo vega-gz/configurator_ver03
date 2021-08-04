@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UVI_tuneAM" Kind="Struct" UUID="DYQMZKC4M25UHEUL2SPMU7TGMY">
+	<Fields>
+		<Field Name="Vn_V1" Type="EKXWTT2XQFVEBA2O4SGLDA6X4E" UUID="QFSH5L5HD6WUZGEOC6NCFCK2L4" />
+	</Fields>
+</Type>

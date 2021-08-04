@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UVI_DI_ToHMI" UUID="481324A183D04568AFE23EC6754ED694">
+    
+    <Fields>
+        <Field Comment="Загазованность по метанолу QISA-1, порог 1" Name="Gas_met1_v" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2424C461B1DE4B78805CCF3E495F9C21"/>
+        <Field Comment="Загазованность по метанолу QISA-1, порог 2" Name="Gas_met1_av" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7B53CB5D804642E8A0C8CEDACD94951E"/>
+        <Field Comment="Загазованность по метанолу QISA-1, неисправность датчика" Name="Gas_met1_Bad" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4AE3B06D458F4149B43CAE6924B77F77"/>
+        <Field Comment="Загазованность по метанолу QISA-2, порог 1" Name="Gas_met2_v" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="DD193AD30C1442BE943B8C6B0A401D2D"/>
+        <Field Comment="Загазованность по метанолу QISA-2, порог 2" Name="Gas_met2_av" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0109D6050D5C4C97B630DA7D9161EF7D"/>
+        <Field Comment="Загазованность по метанолу QISA-2, неисправность датчика" Name="Gas_met2_Bad" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="67CF2654DC31433CAE70CED071435254"/>
+        <Field Comment="Вентсистема В1 работает" Name="Vn_V1_ON" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7BA7377ADCD24AE1BBEBF4831BECE66E"/>
+        <Field Comment="Авария вентсистемы В1" Name="Vn_V1_Alarm" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="2190C8BC3CEC4DBAA1D07CA5F0FB5697"/>
+        <Field Comment="ШЩ. Секционный автоматический выключатель включен" Name="QS_ON" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="67FD0235CC9A4923A5E7936D23941293"/>
+        <Field Comment="ШЩ. Секционный автоматический выключатель отключен" Name="QS_OF" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3D013418324A4D8BA0C7FBFBB029F098"/>
+        <Field Comment="ШЩ.  Секционный автоматический выключатель аварийно отключен" Name="QS_AOF" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BA69A5E379E146C591A47391789CCCCA"/>
+        <Field Comment="ШЩ.  Сигнализация наличия напряжения. I секция шин" Name="U1_ok" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BFE3CCEBA55E4B6084B4AD61FE9F5680"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель включен" Name="Q1_ON" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="105A609362B34954B7AD5B0857CDC2AA"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель отключен" Name="Q1_OF" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A11140B4EBA3483C8E37A1282AC5F995"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель аварийно отключен" Name="Q1_AOF" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="72E3801A1B2E42319C299BB455A1CF2F"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель включен" Name="Q2_ON" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BA54981C2708409B9A5411EB9023EEAD"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель отключен" Name="Q2_OF" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="3354EE149AA34816BC3DE9E72DE696F9"/>
+        <Field Comment="ШЩ.  Вводной автоматический выключатель аварийно отключен" Name="Q2_AOF" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0485F63C003A467C9E829099C91A619A"/>
+        <Field Comment="ШЩ.  Сигнализация наличия напряжения. II секция шин" Name="U2_ok" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A4043C912B314937B2AB2C8368BD3636"/>
+        <Field Comment="УЗИП неисправен" Name="UZIP_Bad" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8C75644926C44C999BE030173D03F4D9"/>
+        <Field Comment="(Резерв)" Name="Res_0" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="A465F0E4355D46A1BECC2E7099B20076"/>
+        <Field Comment="(Резерв)" Name="Res_1" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7609E4C08AF547D7AC40EE4FF0B63158"/>
+        <Field Comment="(Резерв)" Name="Res_2" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8BA9F15D343A44FCA2884E84D9646091"/>
+        <Field Comment="(Резерв)" Name="Res_3" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="189D87B493CA4C0FA1D8C5ED7DB5A71D"/>
+        <Field Comment="(Резерв)" Name="Res_4" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="6C25246D33F848E6B19F2F22EE36E409"/>
+        <Field Comment="(Резерв)" Name="Res_5" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="CBD2CBCD2D2A440E806076668757B7D0"/>
+        <Field Comment="(Резерв)" Name="Res_6" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="906815FA091D4A9CBBF38A3CF05375B0"/>
+        <Field Comment="(Резерв)" Name="Res_7" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="61CA53385A5347E2A818EA25AD248386"/>
+        <Field Comment="(Резерв)" Name="Res_8" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="15DF5AB4F63441E0B212D6C26C651EA4"/>
+        <Field Comment="(Резерв)" Name="Res_9" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="DB78BF7297054A65BA0870F4BC0FFC42"/>
+        <Field Comment="(Резерв)" Name="Res_10" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="BFA6AF23F8DB4847AA966A288AE0E8D1"/>
+        <Field Comment="(Резерв)" Name="Res_11" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="456A9DB8A0B54DA68100D788EDA838A5"/>
+        <Field Comment="Контроль основного питания  ~220 В" Name="Chk_AC220_SAU" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7043829BE68E4C2398D5283E77C58C4E"/>
+        <Field Comment="Контроль резервного питания  =220 В" Name="Chk_DC220_SAU" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="52452CF1F81B455BA9A128EBAED413DE"/>
+        <Field Comment="Двери шкафа открыты" Name="Cabin_open" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="9F7C90C15E2440159021030795ACE897"/>
+        <Field Comment="Контроль исправности разрядников" Name="Chk_razr" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="84A7EED0CAC746A39CC6E1681608A033"/>
+        <Field Comment="Автоматы питания включены" Name="QF_ON" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="0E212D003D1047FBAB39E42825BB3570"/>
+        <Field Comment="Исправность осн. ИП =24В внутренних цепей" Name="DC24osn_Int_ok" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="82C2D3DDD9904E82AD1957B6C75F77D8"/>
+        <Field Comment="Исправность рез. ИП =24В внутренних цепей" Name="DC24rez_Int_ok" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="65ED0929C8284F7E9131E9F4343A02DA"/>
+        <Field Comment="Исправность осн. ИП =24В внешних цепей" Name="DC24osn_Ext_ok" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="66099B60E50C489B9955AAA0FBF11087"/>
+        <Field Comment="Исправность рез. ИП =24В внешних цепей" Name="DC24rez_Ext_ok" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D411A3D3738E40F3876CB86BAAFE7FB4"/>
+        <Field Comment="(Резерв)" Name="Res_12" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8F2505B0878C440DBF6B43F04540B6E8"/>
+        <Field Comment="(Резерв)" Name="Res_13" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="74ED2092E94C4FD1916B50FD986935AB"/>
+        <Field Comment="(Резерв)" Name="Res_14" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="4A9E95258845444FA111A885DDE4E13A"/>
+        <Field Comment="(Резерв)" Name="Res_15" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="7C9532697E984E4682CCFE0C1A431142"/>
+        <Field Comment="(Резерв)" Name="Res_16" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="D82B62896BC24F749547C0C26294AF74"/>
+        <Field Comment="(Резерв)" Name="Res_17" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="C008B7DE457640B78A3C97D974989FCA"/>
+        <Field Comment="(Резерв)" Name="Res_18" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="AAD8F872173849CDB1C5AD6A29CDA147"/>
+    </Fields>
+</Type>

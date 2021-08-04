@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.MODBUS v. 1.3 >
+<Configuration Slave="TRUE" TCP="TRUE">
+    <Devices CommConfig="">
+        <Device Address="1" RetryCount="3" RetryDelay="5000" SymbolTimeout="10000" ResponseTimeout="50000" InterpacketDelay="5000" MaxStatus="32" MaxRegs="32" DisconnectInReserve="FALSE">
+            <Group Name="IN" Function="FORCE_SINGLE_COIL" UpdatePeriod="0" />
+            <Group Name="OUT" Function="READ_HOLDING_REGISTERS" UpdatePeriod="0" />
+        </Device>
+    </Devices>
+    <Crossconnect>
+        <Connection ItemName="PRU.AOss_BTN" Device="1" Channel="1:BIT" Group="IN" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.3F5E1AA64E0F1B45312AE2B312BDB26E" />
+        <Connection ItemName="PRU.AObs_BTN" Device="1" Channel="2:BIT" Group="IN" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.3F4FD81F4C477B75379D569AADC904FC" />
+        <Connection ItemName="PRU.Tg_in_KC" Device="1" Channel="0:LONG_BADC" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.AB07BB5046B2887DF3460EADE1854580" />
+        <Connection ItemName="PRU.Tg_out_KC" Device="1" Channel="2:LONG_BADC" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.BF7EDB3E4EAB908238C3FCBA3925425E" />
+        <Connection ItemName="PRU.Pg_in_KC" Device="1" Channel="4:LONG_BADC" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.115494B044B410732543D28F3014ED9C" />
+        <Connection ItemName="PRU.Pg_out_KC" Device="1" Channel="6:LONG_BADC" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.6AA209624779DD47B9246389405DF5AC" />
+        <Connection ItemName="PRU.Pg_in_kolKC" Device="1" Channel="8:LONG_BADC" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.CFDB36F84AAC2DF1CDE51193312B20B9" />
+        <Connection ItemName="PRU.Pg_out_kolKC" Device="1" Channel="10:LONG_BADC" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.2C9642424F2CE1B908C249989E1730D4" />
+        <Connection ItemName="PRU.Rejim" Device="1" Channel="12:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.01B34E0943E911AAD6EFABA6A1048F5D" />
+        <Connection ItemName="PRU.Kr51" Device="1" Channel="50:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.4E70D8194FE9424901347BAFFC91D7D6" />
+        <Connection ItemName="PRU.Kr52" Device="1" Channel="51:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.0BE7ACE549AC9B35701D0BA1298DFAD3" />
+        <Connection ItemName="PRU.Kr51_2" Device="1" Channel="52:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.23F8115E4693563C314067A78CD25543" />
+        <Connection ItemName="PRU.Kr52_2" Device="1" Channel="53:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.D6D040CA493E966CCD3B539A664C890B" />
+        <Connection ItemName="PRU.Kr53" Device="1" Channel="54:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.E435DFEB4D3E1F26AF5168B4982D0143" />
+        <Connection ItemName="PRU.Kr53b" Device="1" Channel="55:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.B50896284D262B3F9EAFDFB13D8519A5" />
+        <Connection ItemName="PRU.Kr54" Device="1" Channel="56:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.BA07A4594881D34578A89CA9564EADA0" />
+        <Connection ItemName="PRU.Kr54b" Device="1" Channel="57:SHORT_BA" Group="OUT" UUID="V6UBL6UWYW2UDCNJ6LZAZOY6OA.21EC99C64E8AB97C6964929E5F5D3118" />
+    </Crossconnect>
+</Configuration>

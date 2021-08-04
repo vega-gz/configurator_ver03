@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="IM">
+	<Items>
+		<Item Name="FLDR_A5SUCZSN2AMUZJIO7F5NCQRQY4.folder" />
+		<Item Name="T_KC_AM_Btn.type" />
+		<Item Name="T_KC_AM_FromALG.type" />
+		<Item Name="T_KC_AM_Internal.type" />
+		<Item Name="T_KC_AM_Settings.type" />
+		<Item Name="T_KC_AM_Simulation.type" />
+		<Item Name="T_KC_AM_ToHMI.type" />
+		<Item Name="T_KC_tuneAM.type" />
+		<Item Name="T_K_AM_Internal.type" />
+	</Items>
+</Folder>

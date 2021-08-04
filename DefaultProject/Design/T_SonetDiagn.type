@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_SonetDiagn" Kind="Struct" UUID="9B3F8D45445FD04B4D2A16AAF0F9076B">
+    <Fields>
+        <Field Name="Slot1" Type="BOOL" UUID="8A0A6D1C41CF457D94442F8831617049" Comment="Неисправность модуля в слоте 1" />
+        <Field Name="Slot2" Type="BOOL" UUID="559489694EF4757F074EFBAF4ED2BE04" Comment="Неисправность модуля в слоте 2" />
+        <Field Name="Slot3" Type="BOOL" UUID="257D167249D88B24D42F53B7C893779E" Comment="Неисправность модуля в слоте 3" />
+        <Field Name="Slot4" Type="BOOL" UUID="26FFA4AE4FE6B82840F52A81A540B7BC" Comment="Неисправность модуля в слоте 4" />
+        <Field Name="Slot5" Type="BOOL" UUID="A4CC71954594084C3612759E1D786328" Comment="Неисправность модуля в слоте 5" />
+        <Field Name="Slot6" Type="BOOL" UUID="EFDACBE7493CD384E161BD9F7713F864" Comment="Неисправность модуля в слоте 6" />
+        <Field Name="Slot7" Type="BOOL" UUID="BE36D8BE4D68EE980579328DFC460CDC" Comment="Неисправность модуля в слоте 7" />
+        <Field Name="Slot8" Type="BOOL" UUID="532AF0334C06CC4D645F92AEF48908D5" Comment="Неисправность модуля в слоте 8" />
+    </Fields>
+</Type>

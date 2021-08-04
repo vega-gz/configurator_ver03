@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_GPA3_mb_AO_DRV" UUID="DB52F53A202B49A082D4AD47AB9AFDC6">
+<Fields>
+<Field Comment="Задание на обороты ГПА от САУ КЦ" Name="Nst_Set" Type="REAL" UUID="6B964927615641CABFFA44418BF7B81C"/>
+<Field Comment="Тип изменения оборотов (1-импульсный, 2-ан.задание)" Name="TypeTurn" Type="REAL" UUID="5F11B0A297614B3EBDC0613713ECFB87"/>
+</Fields>
+</Type>

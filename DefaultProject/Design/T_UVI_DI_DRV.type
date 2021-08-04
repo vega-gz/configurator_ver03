@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UVI_DI_DRV" UUID="63298815B29340C5A903A8C614734B30">
+    
+    <Fields>
+        <Field Comment="Загазованность по метанолу QISA-1, порог 1" Name="Gas_met1_v" Type="BOOL" UUID="FCE52BF223E44BF3B72F862BE1D22470"/>
+        <Field Comment="Загазованность по метанолу QISA-1, порог 2" Name="Gas_met1_av" Type="BOOL" UUID="82E6ED56072A42BB8BD3CBE92B65C6F3"/>
+        <Field Comment="Загазованность по метанолу QISA-1, неисправность датчика" Name="Gas_met1_Bad" Type="BOOL" UUID="B4E96DB8CB034CE99BA79533221AEE7C"/>
+        <Field Comment="Загазованность по метанолу QISA-2, порог 1" Name="Gas_met2_v" Type="BOOL" UUID="6D8AD8F351A74851992A2923EAF9BA8A"/>
+        <Field Comment="Загазованность по метанолу QISA-2, порог 2" Name="Gas_met2_av" Type="BOOL" UUID="BC26C85E37644D32950420194A2CCDFD"/>
+        <Field Comment="Загазованность по метанолу QISA-2, неисправность датчика" Name="Gas_met2_Bad" Type="BOOL" UUID="87ED0939EEC64F12A9C5B2B39E22D859"/>
+        <Field Comment="Вентсистема В1 работает" Name="Vn_V1_ON" Type="BOOL" UUID="31507D8B68204A219237D6129647C4DA"/>
+        <Field Comment="Авария вентсистемы В1" Name="Vn_V1_Alarm" Type="BOOL" UUID="ACA3BCDAF31242DEA69C8AAEBDD813A2"/>
+        <Field Comment="ШЩ. Секционный автоматический выключатель включен" Name="QS_ON" Type="BOOL" UUID="86C827CDCDD5415DAA1EC84E24F754C1"/>
+        <Field Comment="ШЩ. Секционный автоматический выключатель отключен" Name="QS_OF" Type="BOOL" UUID="F5DB01723E2B4BCEB8E9EB66D3F40F0F"/>
+        <Field Comment="ШЩ.  Секционный автоматический выключатель аварийно отключен" Name="QS_AOF" Type="BOOL" UUID="9016047226E64557BB435F1DEA2E46FB"/>
+        <Field Comment="ШЩ.  Сигнализация наличия напряжения. I секция шин" Name="U1_ok" Type="BOOL" UUID="2D062871D0074378B9C9227A9BD4EA29"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель включен" Name="Q1_ON" Type="BOOL" UUID="0F0172F9A4464F02B0F9EC7374C7C18A"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель отключен" Name="Q1_OF" Type="BOOL" UUID="F3FA3E979ADA4219AB3504C262F285CF"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель аварийно отключен" Name="Q1_AOF" Type="BOOL" UUID="4AF0179313684C269CCA973CF06B0A4F"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель включен" Name="Q2_ON" Type="BOOL" UUID="4E056A29E25144C18EC930B0D9198278"/>
+        <Field Comment="ШЩ. Вводной автоматический выключатель отключен" Name="Q2_OF" Type="BOOL" UUID="0E6BC834AD01498B981BB61FCC2F7162"/>
+        <Field Comment="ШЩ.  Вводной автоматический выключатель аварийно отключен" Name="Q2_AOF" Type="BOOL" UUID="938DE76AF750424C99B928F738EE8EED"/>
+        <Field Comment="ШЩ.  Сигнализация наличия напряжения. II секция шин" Name="U2_ok" Type="BOOL" UUID="560C05DC93AF4B528BF9D80EFA698F83"/>
+        <Field Comment="УЗИП неисправен" Name="UZIP_Bad" Type="BOOL" UUID="FCB30BA22D074241B7A4D703E11B9EEB"/>
+        <Field Comment="(Резерв)" Name="Res_0" Type="BOOL" UUID="01C372310EDA4BC79F6DC851B585B735"/>
+        <Field Comment="(Резерв)" Name="Res_1" Type="BOOL" UUID="07950A2D4A7E433DA74F67035CE5D90C"/>
+        <Field Comment="(Резерв)" Name="Res_2" Type="BOOL" UUID="07E6A1CCC19F4341A5FF34D0F6D32F24"/>
+        <Field Comment="(Резерв)" Name="Res_3" Type="BOOL" UUID="BB8EFD45F15E4668BFBE389AE1BA38AC"/>
+        <Field Comment="(Резерв)" Name="Res_4" Type="BOOL" UUID="040488EEB2A24A019593628D3AC68B95"/>
+        <Field Comment="(Резерв)" Name="Res_5" Type="BOOL" UUID="D37BF1183BCE4621BFD1316ED9217CF2"/>
+        <Field Comment="(Резерв)" Name="Res_6" Type="BOOL" UUID="6F3D37CB96084D3AB5BAEDE491E3A26C"/>
+        <Field Comment="(Резерв)" Name="Res_7" Type="BOOL" UUID="1805632D1C58460FA6D37CD31D6A870B"/>
+        <Field Comment="(Резерв)" Name="Res_8" Type="BOOL" UUID="0740290147304038BDD26AFAA21ECFDE"/>
+        <Field Comment="(Резерв)" Name="Res_9" Type="BOOL" UUID="790D9E088B5545A2931C6705512C1216"/>
+        <Field Comment="(Резерв)" Name="Res_10" Type="BOOL" UUID="A9943D2BBF8A46ABA3D216F3BB5B3D8E"/>
+        <Field Comment="(Резерв)" Name="Res_11" Type="BOOL" UUID="9817285B6F05428389F25F18C3A70422"/>
+        <Field Comment="Контроль основного питания  ~220 В" Name="Chk_AC220_SAU" Type="BOOL" UUID="6F72F8418AF84C358F3DF449580FDD3F"/>
+        <Field Comment="Контроль резервного питания  =220 В" Name="Chk_DC220_SAU" Type="BOOL" UUID="FDF3E5A32E664A2395753019A0CD0CA0"/>
+        <Field Comment="Двери шкафа открыты" Name="Cabin_open" Type="BOOL" UUID="616CF91CB9D042F1BAA57B101F52FDB5"/>
+        <Field Comment="Контроль исправности разрядников" Name="Chk_razr" Type="BOOL" UUID="5B3A31B7C09444128E22B27F81DDB259"/>
+        <Field Comment="Автоматы питания включены" Name="QF_ON" Type="BOOL" UUID="FDA4E4FF72A94A7BBB829100256FD610"/>
+        <Field Comment="Исправность осн. ИП =24В внутренних цепей" Name="DC24osn_Int_ok" Type="BOOL" UUID="BFBE0FA6E372464C9D58423386BCF759"/>
+        <Field Comment="Исправность рез. ИП =24В внутренних цепей" Name="DC24rez_Int_ok" Type="BOOL" UUID="3F436DA8A40E4CD8A277E88F922B7C0D"/>
+        <Field Comment="Исправность осн. ИП =24В внешних цепей" Name="DC24osn_Ext_ok" Type="BOOL" UUID="E5E2E7112F4C47EBB1A0B63E085720E0"/>
+        <Field Comment="Исправность рез. ИП =24В внешних цепей" Name="DC24rez_Ext_ok" Type="BOOL" UUID="E12D2256D95E40478050F71B60FE3070"/>
+        <Field Comment="(Резерв)" Name="Res_12" Type="BOOL" UUID="FB09915E2AC047D3A9D3EA9897C32BE9"/>
+        <Field Comment="(Резерв)" Name="Res_13" Type="BOOL" UUID="E24FA8AF3812429691D61D9CEB25669A"/>
+        <Field Comment="(Резерв)" Name="Res_14" Type="BOOL" UUID="2887E3129D4A48E79E94C68181DE4DEF"/>
+        <Field Comment="(Резерв)" Name="Res_15" Type="BOOL" UUID="F12294F5314D430DABF097315F298A55"/>
+        <Field Comment="(Резерв)" Name="Res_16" Type="BOOL" UUID="AD9ABBA344C242BE9A53C3976FAB7593"/>
+        <Field Comment="(Резерв)" Name="Res_17" Type="BOOL" UUID="1056868722554C0DB944BF2E2EEF8ABA"/>
+        <Field Comment="(Резерв)" Name="Res_18" Type="BOOL" UUID="4AC9AAC3A1C24B0B92EB4090E17D5394"/>
+    </Fields>
+</Type>

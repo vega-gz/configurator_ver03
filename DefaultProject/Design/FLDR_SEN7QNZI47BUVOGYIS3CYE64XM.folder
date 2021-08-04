@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Algorithm">
+	<Items>
+		<Item Name="E079B0E64556720E806FA393FCDC7989" />
+		<Item Name="T_ALG.type" />
+		<Item Name="T_DrumOuts.type" />
+		<Item Name="T_GPA_AIM.type" />
+		<Item Name="T_GPA_ALG.type" />
+		<Item Name="T_GPA_APR.type" />
+		<Item Name="T_GPA_BTN.type" />
+		<Item Name="T_GPA_DRM.type" />
+		<Item Name="T_GPA_DRO.type" />
+		<Item Name="T_GPA_DSN.type" />
+		<Item Name="T_GPA_FRI.type" />
+		<Item Name="T_GPA_FRS.type" />
+		<Item Name="T_GPA_INTMR.type" />
+		<Item Name="T_GPA_Mode.type" />
+		<Item Name="T_GPA_RSR.type" />
+		<Item Name="T_GPA_SMD.type" />
+		<Item Name="T_GPA_SS.type" />
+		<Item Name="T_GPA_TMO.type" />
+		<Item Name="T_GPA_TMR.type" />
+		<Item Name="T_GPA_TRG.type" />
+		<Item Name="T_GPA_TS.type" />
+		<Item Name="T_GPA_Tune.type" />
+		<Item Name="T_GPA_Tunes.type" />
+		<Item Name="T_Mode.type" />
+		<Item Name="T_QueueRP.type" />
+		<Item Name="T_init.type" />
+		<Item Name="Type_HT2HUZYGMELEVBP6LT4YQFR7WE.type" />
+		<Item Name="Type_IELADALBLUME7HL47QKTMFKGGQ.type" />
+		<Item Name="Type_LF3U2ZADL34URDNTMMXNE763F4.type" />
+	</Items>
+</Folder>

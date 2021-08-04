@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_AVO_mb_DO_DRV" UUID="8BA87F82B0ED4211A4366196A5470D3C">
+<Fields>
+<Field Comment="Вентилятор 1 АВО1. Пуск в режиме УПП" Name="AVOG1_Vn1_uppON" Type="BOOL" UUID="3395125D07ED476DBB3A387F20582C0F"/>
+<Field Comment="Вентилятор 1 АВО1. Пуск в режиме БП" Name="AVOG1_Vn1_ON" Type="BOOL" UUID="77B057F5C37E471D8A833FEA5C999A4E"/>
+<Field Comment="Вентилятор 2 АВО1. Пуск в режиме УПП" Name="AVOG1_Vn2_uppON" Type="BOOL" UUID="3EC205377B7E44D8B2287D632767FDE0"/>
+<Field Comment="Вентилятор 2 АВО1. Пуск в режиме БП" Name="AVOG1_Vn2_ON" Type="BOOL" UUID="9D342030D68D4FE3B5E004552D400399"/>
+<Field Comment="Вентилятор 3 АВО1. Пуск в режиме УПП" Name="AVOG1_Vn3_uppON" Type="BOOL" UUID="6431CC9D8A6144438777287A2379E04B"/>
+<Field Comment="Вентилятор 3 АВО1. Пуск в режиме БП" Name="AVOG1_Vn3_ON" Type="BOOL" UUID="E1D762D021CC46FB90A9CC9CFF2AFA3D"/>
+<Field Comment="Резерв (эл. двигатель). Пуск" Name="Res_23" Type="BOOL" UUID="DCAA8D78593C44FF97CE2089B5CE55AE"/>
+<Field Comment="Резерв " Name="Res_24" Type="BOOL" UUID="714889471A8E4D1A94DDCD17C7FAA379"/>
+<Field Comment="Вентилятор 1 АВО2. Пуск в режиме УПП" Name="AVOG2_Vn1_uppON" Type="BOOL" UUID="228FF821B9E842A3B2288683DF7165A6"/>
+<Field Comment="Вентилятор 1 АВО2. Пуск в режиме БП" Name="AVOG2_Vn1_ON" Type="BOOL" UUID="81B4F51E2CD742B8911918C14301139B"/>
+<Field Comment="Вентилятор 2 АВО2. Пуск в режиме УПП" Name="AVOG2_Vn2_uppON" Type="BOOL" UUID="12E31B4931C44900967165F6BE6A4695"/>
+<Field Comment="Вентилятор 2 АВО2. Пуск в режиме БП" Name="AVOG2_Vn2_ON" Type="BOOL" UUID="C185012F076848CE89EB57D8060CA489"/>
+<Field Comment="Вентилятор 3 АВО2. Пуск в режиме УПП" Name="AVOG2_Vn3_uppON" Type="BOOL" UUID="523ADACF80374444977C63240A3527DA"/>
+<Field Comment="Вентилятор 3 АВО2. Пуск в режиме БП" Name="AVOG2_Vn3_ON" Type="BOOL" UUID="FFCC7921291D44D1A3D30E93A47C2D5F"/>
+<Field Comment="Резерв (эл. двигатель). Пуск" Name="Res_25" Type="BOOL" UUID="09D7CA4FD14A4B1790F8A2607C30D8A3"/>
+<Field Comment="Резерв " Name="Res_26" Type="BOOL" UUID="75A67D13C29F4F178B7740FD19FAA3D7"/>
+</Fields>
+</Type>

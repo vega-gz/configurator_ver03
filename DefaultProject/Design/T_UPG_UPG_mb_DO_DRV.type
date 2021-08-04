@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UPG_UPG_mb_DO_DRV" UUID="45794E7A795948AAB6FE0D6EDCE1545A">
+<Fields>
+<Field Comment="Клапан сброса НД выход 1 (КЭ4-1)" Name="KE41_ON" Type="BOOL" UUID="BABBAE1972EA4A05AF3141E7FC1B6FD5"/>
+<Field Comment="Клапан сброса НД выход 2 (КЭ4-2)" Name="KE42_ON" Type="BOOL" UUID="FB0EB1AED80E4E7B9DCB8F68ABB502C3"/>
+<Field Comment="Клапан отсечной ТГ в УПТН (КЭ3-1)" Name="KE31_ON" Type="BOOL" UUID="1101228C791A431FB968C5A8988AC48E"/>
+<Field Comment="Резерв" Name="Res_1" Type="BOOL" UUID="3E3DC16CE7F54EA18050C70A9AFDB876"/>
+<Field Comment="Резерв" Name="Res_2" Type="BOOL" UUID="F81729EFD0F14D108AB3180B7DCBDF24"/>
+<Field Comment="Резерв" Name="Res_3" Type="BOOL" UUID="1531986E2BFC455A8D5B9046EBB71E76"/>
+<Field Comment="Резерв" Name="Res_4" Type="BOOL" UUID="9739B2A3E7A74528859184567EEF198A"/>
+<Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="78221D03F6374311A326D5C1357C0B4B"/>
+<Field Comment="Кран Кр8.1 открыть" Name="Kr8_1_ON" Type="BOOL" UUID="17AF567B11694A4194DD0C1143672709"/>
+<Field Comment="Кран Кр8.1 закрыть" Name="Kr8_1_OF" Type="BOOL" UUID="F9F97F3A247B401980394423B2160B45"/>
+<Field Comment="Кран Кр8.1 стоп" Name="Kr8_1_Stop" Type="BOOL" UUID="E9439C52890C410A8EEA58DBC4E4C03E"/>
+<Field Comment="Кран Кр8.1a открыть" Name="Kr8_1A_ON" Type="BOOL" UUID="8B174367381B4407B6790E74ACF8AEDC"/>
+<Field Comment="Кран Кр8.1a закрыть" Name="Kr8_1A_OF" Type="BOOL" UUID="13C43018FD3B425285760F3B7F397EE9"/>
+<Field Comment="Кран Кр8.1a стоп" Name="Kr8_1A_Stop" Type="BOOL" UUID="C55A1272C5954ADE81E3D3AD8DBD1992"/>
+<Field Comment="Резерв" Name="Res_6" Type="BOOL" UUID="84C54B9B596A463B89CFB0411BA7FB07"/>
+<Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="E9A4401AA7294AD1ACC483807D529DD8"/>
+<Field Comment="Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыть" Name="Kr2_1_3_ON" Type="BOOL" UUID="F7D7F5E8DC3949F7A8D08F73C336C1B0"/>
+<Field Comment="Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыть" Name="Kr2_1_3_OF" Type="BOOL" UUID="94F0D3A4E09D43898CB689E6A4051F79"/>
+<Field Comment="Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыть" Name="Kr2_1_4_ON" Type="BOOL" UUID="2759AD9743274DA2B7FAC3C601974414"/>
+<Field Comment="Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыть" Name="Kr2_1_4_OF" Type="BOOL" UUID="2981995547D443C1B11E6ACEA22B7EFF"/>
+<Field Comment="Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыть" Name="Kr2_2_3_ON" Type="BOOL" UUID="055402E156A94E73A548FFEB35E7D706"/>
+<Field Comment="Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыть" Name="Kr2_2_3_OF" Type="BOOL" UUID="4086AB9E91244275836BE534864308A0"/>
+<Field Comment="Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыть" Name="Kr2_2_4_ON" Type="BOOL" UUID="216C32642F234A168D9D4BF476082A8E"/>
+<Field Comment="Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыт" Name="Kr2_2_4_OF" Type="BOOL" UUID="7BE1EC9526BE46D2B1D6BEAF01F78C80"/>
+<Field Comment="С/з оповещ. &quot;Авария УПТИГ&quot; (КИПиА)" Name="UPG_Alarm" Type="BOOL" UUID="C3618ED382A64D34878699341E3AEF40"/>
+<Field Comment="Вытяжной вентилятор блока технологии (АМ1-1) включить" Name="VnV_BT_ON" Type="BOOL" UUID="E60BF927149A4CB18C543294B4B859D8"/>
+<Field Comment="Вытяжной вентилятор УПТН (АМ3-1) включить" Name="VnV_UPNT_ON" Type="BOOL" UUID="2ED3276B8C724C09BEC44267C22D7455"/>
+<Field Comment="Вытяжной вентилятор блока технологии (АМ1-1) отключить" Name="VnV_BT_OF" Type="BOOL" UUID="D4BA61A4B05142EE87EAD9334F285673"/>
+<Field Comment="Вытяжной вентилятор УПТН (АМ3-1) отключить" Name="VnV_UPNT_OF" Type="BOOL" UUID="B9DD5D5D82F54B0F965D3B2A78D239E7"/>
+<Field Comment="Резерв" Name="Res_8" Type="BOOL" UUID="652169B964ED45DBAEC198B55364A1CC"/>
+<Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="B71CB9BECA9A43EA95719CB17C2C4389"/>
+<Field Comment="Резерв" Name="Res_10" Type="BOOL" UUID="05467B4EF33D48FAAE336C15B3110E67"/>
+<Field Comment="Обобщенная предупредительная сигнализация «Внимание»" Name="PS_Warn" Type="BOOL" UUID="C099CADF45CE467888FFC4598D94D5F5"/>
+<Field Comment="Обобщенная сигнализация «Авария»" Name="AS_Alarm" Type="BOOL" UUID="99D40FB051F24CF8A50CCE25B5AB47F6"/>
+<Field Comment="Резерв" Name="Res_11" Type="BOOL" UUID="6496822418D74B249C284CC45DA53B19"/>
+<Field Comment="Резерв" Name="Res_12" Type="BOOL" UUID="F62AB41F66A34278BCB2769CF917D20B"/>
+<Field Comment="Резерв" Name="Res_13" Type="BOOL" UUID="241D52F3D09347C3BDF51F06C6DED580"/>
+<Field Comment="Резерв" Name="Res_14" Type="BOOL" UUID="6FC9206464CD450DAA0AF9BC267AFAFC"/>
+<Field Comment="Резерв" Name="Res_15" Type="BOOL" UUID="0EAE0033485047B396CA8A0DB07C9EDB"/>
+<Field Comment="Резерв" Name="Res_16" Type="BOOL" UUID="F12DC6A8DDEF4A2FB1931D1F3994E4AA"/>
+<Field Comment="Резерв" Name="Res_17" Type="BOOL" UUID="B30763AFFD5B47AAB2C7ED9B42407927"/>
+<Field Comment="Резерв" Name="Res_18" Type="BOOL" UUID="A7EF6D314AF1459BBC49030D9E2E8547"/>
+<Field Comment="Резерв" Name="Res_19" Type="BOOL" UUID="0E99BB50D1CF49349F88CEF6B73B27CB"/>
+<Field Comment="Резерв" Name="Res_20" Type="BOOL" UUID="3AAD9A5366594538BDA7D08F6467CD58"/>
+<Field Comment="Резерв" Name="Res_21" Type="BOOL" UUID="092A692B72894686AAA9DDBB98C03C2D"/>
+<Field Comment="Резерв" Name="Res_22" Type="BOOL" UUID="09A37936158143D7814B264BE9A5A3E2"/>
+<Field Comment="Резерв" Name="Res_23" Type="BOOL" UUID="2F6354EC7DE04054BD935F8B39CFFF89"/>
+<Field Comment="Включить сирену" Name="Syrena_ON" Type="BOOL" UUID="A25D115B30A543BF9AF10CFD0E900270"/>
+</Fields>
+</Type>

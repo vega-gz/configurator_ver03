@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_KOT_mb_DI_DRV" UUID="7CBA7D8FD6E54AFA88ECFB8EF8F583B5">
+<Fields>
+<Field Comment="ЭКМ на выходе НИВ максимум (разр.включ. если нет)" Name="EKV_vh_NIV_max" Type="BOOL" UUID="D8CA679F27314ABD8F6F2892E08A4E49"/>
+<Field Comment="ЭКМ на выходе НИВ минимум (отключ. если не набрал)" Name="EKV_vh_NIV_min" Type="BOOL" UUID="95416C16042E443AA72F6471C977B621"/>
+<Field Comment="Датчик регенерации ХВО" Name="Regener_HVO" Type="BOOL" UUID="1ED02B5AA1E343278115374D81D3155B"/>
+<Field Comment="Режим работы клапана подпитки Т2" Name="Rezhim_Kl_podpit_T2" Type="BOOL" UUID="9BB6A8CDAC944F29B3B6251CB60666ED"/>
+<Field Comment="Режим работы клапана перепуска" Name="Rezhim_Kl_perepusk" Type="BOOL" UUID="D13CCA7C144B4D9992521A444461FFAA"/>
+<Field Comment="Включен котел №1" Name="Kotel1_ON" Type="BOOL" UUID="FD816F6DEC00415391E643538FC83306"/>
+<Field Comment="Включен котел №2" Name="Kotel2_ON" Type="BOOL" UUID="861F24314B70415D8F3A8E9CEE16CD5C"/>
+<Field Comment="Клапан БГК открыт" Name="Kl_BGK_ON" Type="BOOL" UUID="AC0CCD65385D44B190151B501A3501B0"/>
+<Field Comment="Сетевой насос №1 включен" Name="SN1_ON" Type="BOOL" UUID="E9FE03D94F0B46CDB95A1DB034C6ED2F"/>
+<Field Comment="Сетевой насос №2 включен" Name="SN2_ON" Type="BOOL" UUID="31F0127A56B94522A6D7F8B7258E8D2D"/>
+<Field Comment="Насос рециркулЯции №1 включен" Name="NR1_ON" Type="BOOL" UUID="B37D69561BF245D981452449901318E5"/>
+<Field Comment="Насос рециркулЯции №2 включен" Name="NR2_ON" Type="BOOL" UUID="BF3140AC46A842F0A90162FD9536E49D"/>
+<Field Comment="Насос НИВ включен" Name="NIV_ON" Type="BOOL" UUID="12A63F9B3CA0425AA96099DD07FBEE3B"/>
+<Field Comment="Клапан подпитки Т2 - Открыт" Name="KL_T2_ON" Type="BOOL" UUID="D0F74F813B7E4C62AEB2FF9A3CF01DD8"/>
+<Field Comment="Отключение клапана БГК" Name="KL_BGK_OFF" Type="BOOL" UUID="BC4CADB043964165A0A9EA095ED24A7B"/>
+<Field Comment="Загазованность СО 20 мГ/м3 1-й порог" Name="zagaz_CO_20_1" Type="BOOL" UUID="5418B6A5D29A4285B85D57EB4B29505F"/>
+<Field Comment="Работал АВР сетевых насосов" Name="AVR_SN_ON" Type="BOOL" UUID="D2B74C85D3AB48268F6DC4D0A8150E9F"/>
+<Field Comment="ЗаканчиваетсЯ реагент в бачке" Name="Reagent_Low" Type="BOOL" UUID="48A810E9BDAC46899BB3A384E84993D6"/>
+<Field Comment="Неисправность ОПС" Name="Fault_OPS" Type="BOOL" UUID="4EA82189B0C94198A8549DBDAE75FDF1"/>
+<Field Comment="Давление обратной воды понижено" Name="P_obr_v_Low" Type="BOOL" UUID="F319ABD72BD44F7992C891DAA4FC832B"/>
+<Field Comment="Давление обратной воды повышено" Name="P_obr_v_Hi" Type="BOOL" UUID="9757B2B1B30E46C298EBAD11C7FDF149"/>
+<Field Comment="Давление воды В1 понижено" Name="P_v_V1_Low" Type="BOOL" UUID="C8287D5689284719B40DE9F43FEB2F7A"/>
+<Field Comment="Насос НИВ не набрал давлениЯ" Name="NIV_P_Low" Type="BOOL" UUID="2798075A75134ABA9F79064AB267DCB2"/>
+<Field Comment="Резерв" Name="rezerv_1" Type="BOOL" UUID="09DBD0D64A5749A6AEE90463842EDD11"/>
+<Field Comment="Резерв" Name="rezerv_2" Type="BOOL" UUID="6FBA131E0686466E8968935E3D0CF28A"/>
+<Field Comment="Резерв" Name="rezerv_3" Type="BOOL" UUID="11CFC68D0BBB4B88ADDFCA2958AEEFDC"/>
+<Field Comment="Резерв" Name="rezerv_4" Type="BOOL" UUID="856B1043B357413AA7032923B460936F"/>
+<Field Comment="Резерв" Name="rezerv_5" Type="BOOL" UUID="F98240D259A64E069917E98B1EE24818"/>
+<Field Comment="Резерв" Name="rezerv_6" Type="BOOL" UUID="A55B4B02C8DA4CC6AE256789FDA420F4"/>
+<Field Comment="Резерв" Name="rezerv_7" Type="BOOL" UUID="869950507A4044EE8FA0451B6EB26EB1"/>
+<Field Comment="Резерв" Name="rezerv_8" Type="BOOL" UUID="E70B6C2D823A4F9DBC1C836B3984E797"/>
+<Field Comment="Загазованность СН 10% НКПВ" Name="zagaz_CH_10_NKPV" Type="BOOL" UUID="259C17E231484453B70E5D73AD5C98F5"/>
+<Field Comment="Загазованность СО 100 мГ/м3 2-й порог" Name="zagaz_CO_100_2" Type="BOOL" UUID="EC06B94DD79E4F6C920CD72485BCD86D"/>
+<Field Comment="Давление обратной воды аварийно низкое" Name="P_obr_v_AvLow" Type="BOOL" UUID="0580ADD6C839410D90D044C295516B41"/>
+<Field Comment="Пожар в котельной" Name="Pozhar" Type="BOOL" UUID="4D4184B931854DDEAAD989515D52BCD9"/>
+<Field Comment="Давление газа не в норме" Name="P_gaza_Fault" Type="BOOL" UUID="40673270A05C4C2AB86B4170875331EC"/>
+<Field Comment="Давление обратной воды аварийно высокое" Name="P_obr_v_AvHi" Type="BOOL" UUID="100E8AC28A4A446D86C639A077E89130"/>
+<Field Comment="Давление прЯмой сетевой воды аварийно высокое" Name="P_prym_sv_AvHi" Type="BOOL" UUID="55EF81AAD166476488689F31F227D0D8"/>
+<Field Comment="Не сработал АВР сетевых насосов" Name="AVR_SN_Fault" Type="BOOL" UUID="3A7CE506872C45A68B8F361BDD83200D"/>
+<Field Comment="АвариЯ в системе АПВ" Name="Avar_v_APV" Type="BOOL" UUID="04DAA744E14D4C95A90D98E14D7CB423"/>
+<Field Comment="АвариЯ ВРУ" Name="Avar_VRU" Type="BOOL" UUID="14572268B5C94A1CBE1BC7D79A14FD2E"/>
+<Field Comment="Аварийно остановилсЯ котел №1" Name="Stop_Kotel1" Type="BOOL" UUID="872C3562BD8D49379464E4B3C60C2700"/>
+<Field Comment="Аварийно остановилсЯ котел №2" Name="Stop_Kotel2" Type="BOOL" UUID="DA8E79A0017E4DF7B15CE6FD363CFA84"/>
+<Field Comment="Резерв" Name="rezerv_9" Type="BOOL" UUID="58F8B5AB0F6043779F003A62D8009AE5"/>
+<Field Comment="Резерв" Name="rezerv_10" Type="BOOL" UUID="3356098EBFF44F14AD60E992B8B94B34"/>
+<Field Comment="Резерв" Name="rezerv_11" Type="BOOL" UUID="1C767EBAB76F4736B764CBD6C02A1F9D"/>
+<Field Comment="Резерв" Name="rezerv_12" Type="BOOL" UUID="8E96393FBDE9410F9B83927EA926BDAA"/>
+</Fields>
+</Type>

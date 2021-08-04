@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="GT">
+	<Items>
+		<Item Name="C_const.type" />
+		<Item Name="C_tun.type" />
+		<Item Name="C_tunCurv.type" />
+		<Item Name="T_2chanel.type" />
+		<Item Name="T_AnInput.type" />
+		<Item Name="T_FRegContur.type" />
+		<Item Name="T_FRegData.type" />
+		<Item Name="T_FRegMode.type" />
+		<Item Name="T_FRevParDB.type" />
+		<Item Name="T_GPA_Curve_FR.type" />
+		<Item Name="T_GPA_Tune_FR.type" />
+		<Item Name="T_ModelSettings.type" />
+		<Item Name="T_PID.type" />
+	</Items>
+</Folder>

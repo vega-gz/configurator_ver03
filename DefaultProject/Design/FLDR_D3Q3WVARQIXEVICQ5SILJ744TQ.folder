@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Ab04_TSK">
+	<Items>
+		<Item Name="AT_2QDJQIOUAATU7ODTQSEFXR362Q.int" />
+		<Item Name="Ab04_R1_LOCALBUS.int" />
+		<Item Name="Ab04_R2_LOCALBUS.int" />
+		<Item Name="Ab04_R3_LOCALBUS.int" />
+		<Item Name="Ab04_R4_LOCALBUS.int" />
+		<Item Name="Ab04_R5_LOCALBUS.int" />
+		<Item Name="Ab04_R6_LOCALBUS.int" />
+		<Item Name="TSK_AlertArchive.int" />
+		<Item Name="TSK_Algorithm.int" />
+		<Item Name="TSK_Archive.int" />
+		<Item Name="TSK_R1_ALG.int" />
+		<Item Name="TSK_R1_LOCALBUS.int" />
+		<Item Name="TSK_R2_LOCALBUS.int" />
+		<Item Name="TSK_R3_LOCALBUS.int" />
+		<Item Name="TSK_R4_LOCALBUS.int" />
+		<Item Name="TSK_R5_LOCALBUS.int" />
+		<Item Name="TSK_R6_LOCALBUS.int" />
+	</Items>
+</Folder>

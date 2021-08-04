@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_AI_HMI" Kind="Struct" UUID="26F0D3F4D7FC43E89DBA0F7E08FAAFD4">
+    <Fields>
+        <Field Name="Pg_in_KC_t1" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="3F66C3D461F6403A8B6C203A56289FCF" Comment="Давление газа на входе КЦ (точка 1)" />
+        <Field Name="Pg_out_KC_t1" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="AB621D746E3E43DCB91B27D05DE1066B" Comment="Давление газа на выходе КЦ (точка 1)" />
+        <Field Name="Pos_Kr36r" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="FCBAA542E7B4491A9331C826A7BFD655" Comment="Кран 36р: положение крана" />
+        <Field Name="Uosn" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="6486876E396E4651B971BE408AA0CBA0" Comment="Напряжение основного питания ШКУ-17" />
+        <Field Name="Ures" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="08700A3A80BE44DFB9E2C98C51E9AC87" Comment="Напряжение резервного питания ШКУ-17" />
+        <Field Name="dPg_PU" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="5E9CD3E88EF84F1CB7E4CC94F75BC2A4" Comment="Перепад давления на входном и выходном коллекторах ПУ" />
+        <Field Name="dPg_PU_21" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="5CCE173295E044BB988B05826E998A16" Comment="Перепад давления газа на пылеуловителе 2.1" />
+        <Field Name="dPg_PU_22" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="927EFB5CAC984453A9EE84DFC7BD9033" Comment="Перепад давления газа на пылеуловителе 2.2" />
+        <Field Name="dPg_PU_23" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="D080AD0CE5CE47AB9F24A3C54A206F9B" Comment="Перепад давления газа на пылеуловителе 2.3" />
+        <Field Name="dPg_PU_24" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="3240A3963CB049CEA8AF130F9A1EC3E4" Comment="Перепад давления газа на пылеуловителе 2.4" />
+        <Field Name="Pg_kol_HiP" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="EA1A478ADEB64BC1A99974EB8DAE61F6" Comment="Давление газа в коллекторе высокого давления" />
+        <Field Name="Pg_in_E2" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="4F22D3064D4C4FA8A57B4FC2924B38DF" Comment="Давление газа в блоке емкости сборов продуктов очистки Е-2" />
+        <Field Name="Pg_in_KC_t2" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="21683A68E3F041A28B613D75627A33B4" Comment="Давление газа на входе КЦ (после ПУ) (точка 2)" />
+        <Field Name="Pg_out_KC_t2" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="8BFA068E87D4411D89B2752A1E61A20E" Comment="Давление газа на выходе КЦ  (точка 2)" />
+        <Field Name="Tg_in_KC_out_PU" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="1396FDF2AD564DB1A1A12BDAE8F13CB0" Comment="Температура газа на входе КЦ после ПУ" />
+        <Field Name="Tg_out_KC_1BL" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="3FDEBE50AB8047649E67B12AB5BF6B23" Comment="Температура газа на выходе КЦ шлейф 1 (МГ Белоусово Ленинград)" />
+        <Field Name="Tg_out_KC_2SL" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="35B8284A28584774A68C89EABFCD170F" Comment="Температура газа на выходе КЦ шлейф 2 (МГ Серпухов Ленинград)" />
+        <Field Name="Tg_in_SV" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="919228A09592467487A61CCEF8B55BB1" Comment="Температура газа в трубопроводе сжатого воздуха" />
+        <Field Name="Pg_in_SV" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="FBDC714A015443DA82C3C045FB4CB0FD" Comment="Давление газа в трубопроводе сжатого воздуха" />
+        <Field Name="Tv_PEB" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="CC4468A09E944257AE1F3E475CEE2415" Comment="Температура воздуха в аппаратной КЦ" />
+        <Field Name="Vlag_PEB" Type="5C4EAAB340E0F06BB767F6AEE30C69DF" UUID="D91CD34CDE4E4CCE9778A57AD6DFE295" Comment="Влажность воздуха в аппаратной КЦ" />
+    </Fields>
+</Type>

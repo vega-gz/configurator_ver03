@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Server">
+	<Items>
+		<Item Name="D_CNS.int"/>
+		<Item Name="AT_Pult.int"/>
+		<Item Name="AT_SaveData.int"/>
+		<Item Name="Print_Report.int"/>
+		<Item Name="Server.int"/>
+		<Item Name="TLinkControl.int"/>
+		<Item Name="TRedundSrv.int"/>
+		<Item Name="Z_Events.int"/>
+	</Items>
+</Folder>

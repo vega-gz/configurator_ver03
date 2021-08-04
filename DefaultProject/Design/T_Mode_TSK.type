@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Mode_TSK" Kind="Struct" UUID="AY776M4644BULM3YEAZPZGFDEI">
+	<Fields>
+		<Field Name="graph" Type="EE67E15142EC74278378C1A6B2ADA2E4" UUID="DVLNLPBX7WQEPPL6WLXWWZPOEY" Comment="Граф режима" />
+		<Field Name="FaultTSK" Type="BOOL" UUID="4GOCAMNAC2DEVCAUNKQWBDVMWI" Comment="Нет режима" />
+		<Field Name="AOTSK" Type="BOOL" UUID="PJOVGWMMUMTU5KLAXT762AF2KQ" Comment="АО" />
+		<Field Name="NormaTSK" Type="BOOL" UUID="FLPP3SL23OAELCT6QQXQP4FZZA" Comment="Норма" />
+	</Fields>
+</Type>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_GPA2_mb_AO_FromHMI" UUID="B9D99B02DFFF411A806E7546190764A2">
+<Fields>
+<Field Comment="Задание на обороты ГПА от САУ КЦ" Name="Nst_Set" Type="28BBA2F94E53F5E7D050CBA8820F76E4" UUID="36D99BA61206455B9E5AD0CC3B5B5E45"/>
+<Field Comment="Тип изменения оборотов (1-импульсный, 2-ан.задание)" Name="TypeTurn" Type="28BBA2F94E53F5E7D050CBA8820F76E4" UUID="F136CE31E79C4505A3ACF2B7761BDB30"/>
+</Fields>
+</Type>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+    <Device CyclePeriod="500000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="FALSE">
+        <Slot Address="1" ModuleType="68" />
+        <Slot Address="2" ModuleType="68" />
+        <Slot Address="3" ModuleType="68" />
+        <Slot Address="4" ModuleType="68" />
+        <Slot Address="5" ModuleType="68" />
+        <Slot Address="6" ModuleType="68" />
+        <Slot Address="7" ModuleType="68" />
+        <Slot Address="8" ModuleType="68" />
+    </Device>
+    <Crossconnect>
+        <Connection ItemName="NMS_A1_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.8A0A6D1C41CF457D94442F8831617049" />
+        <Connection ItemName="NMS_A1_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.559489694EF4757F074EFBAF4ED2BE04" />
+        <Connection ItemName="NMS_A1_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.257D167249D88B24D42F53B7C893779E" />
+        <Connection ItemName="NMS_A1_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.26FFA4AE4FE6B82840F52A81A540B7BC" />
+        <Connection ItemName="NMS_A1_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.A4CC71954594084C3612759E1D786328" />
+        <Connection ItemName="NMS_A1_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.EFDACBE7493CD384E161BD9F7713F864" />
+        <Connection ItemName="NMS_A1_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.BE36D8BE4D68EE980579328DFC460CDC" />
+        <Connection ItemName="NMS_A1_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="7A3553894232230BF02B3FB228D7F297.532AF0334C06CC4D645F92AEF48908D5" />
+        <Connection ItemName="NMS_AI_DRV.Tm_R1" Device="" Slot="1" Channel="1" Comment="Температура в P1 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.AB344C27458B41529780433C2E576324" />
+        <Connection ItemName="NMS_AI_DRV.Tm_R2" Device="" Slot="1" Channel="2" Comment="Температура в P2 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.A47F8D6B63E7476E8CEB09D8D0226D3C" />
+        <Connection ItemName="NMS_AI_DRV.Tm_R3" Device="" Slot="1" Channel="3" Comment="Температура в P3 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.9781A6E60C7A45BE890C38EC2E699B63" />
+        <Connection ItemName="NMS_AI_DRV.Tm_R4" Device="" Slot="1" Channel="4" Comment="Температура в P4 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.5DCE1DFEC4EE4F3788B7ADC5D4F0DF46" />
+        <Connection ItemName="NMS_AI_DRV.Tm_R5" Device="" Slot="2" Channel="1" Comment="Температура в P5 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.902FA828AFAE48FEAEA95A1D226A763A" />
+        <Connection ItemName="NMS_AI_DRV.Tm_R6" Device="" Slot="2" Channel="2" Comment="Температура в P6 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.113D9BB2C768423FB22E02A8FA6E1C23" />
+        <Connection ItemName="NMS_AI_DRV.Tm_R7" Device="" Slot="2" Channel="3" Comment="Температура в P7 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.46AB6EDB5FDC47E2A9A0470AFA441D9A" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R1" Device="" Slot="2" Channel="4" Comment="Уровень масла в P1 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.C63BB39888DB4DEDAEC46939F65B0D96" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R2" Device="" Slot="3" Channel="1" Comment="Уровень масла в P2 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.6B2D35501C9C4AC4B7F3E3EE5275A581" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R3" Device="" Slot="3" Channel="2" Comment="Уровень масла в P3 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.10697A1D828E443F9ED45810263E06FC" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R4" Device="" Slot="3" Channel="3" Comment="Уровень масла в P4 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.5720ABFDD8424726805F2CD0A1D98A4A" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R5" Device="" Slot="3" Channel="4" Comment="Уровень масла в P5 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.BAB26EF4D6594C0D900E9B0050C6FDB7" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R6" Device="" Slot="4" Channel="1" Comment="Уровень масла в P6 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.C4CC3912426546E9A7675277C5B7FE09" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R7" Device="" Slot="4" Channel="2" Comment="Уровень масла в P7 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.C51A5450907E446DAAB529C9CB770F28" />
+        <Connection ItemName="NMS_AI_DRV.Res_0" Device="" Slot="4" Channel="3" Comment="Резерв" UUID="5A016086399148FE878EB9643A3FA65B.7C89639F3811456894FBB236FE0665C3" />
+        <Connection ItemName="NMS_AI_DRV.Res_1" Device="" Slot="4" Channel="4" Comment="Резерв" UUID="5A016086399148FE878EB9643A3FA65B.FA857CD8B99D42CE81D6B31D01F1EF4C" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R1_n" Device="" Slot="5" Channel="1" Comment="Мин. уровень в Р1 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.FA07F3E3234047D48C42692A71066F45" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R2_n" Device="" Slot="5" Channel="2" Comment="Мин. уровень в Р2 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.D3BC4A35F37745C8B79C5FB21107522B" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R3_n" Device="" Slot="5" Channel="3" Comment="Мин. уровень в Р3 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.3574F91E0E90432E9B7C8E6068D52348" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R4_n" Device="" Slot="5" Channel="4" Comment="Мин. уровень в Р4 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.F079BFCF583A43A0BD68C24C3C658350" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R5_n" Device="" Slot="6" Channel="1" Comment="Мин. уровень в Р5 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.8872AB38FEEB40749FA47382FBCC963C" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R6_n" Device="" Slot="6" Channel="2" Comment="Мин. уровень в Р6 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.6B5D425C72934230AA1E56B9440EF9EA" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R7_n" Device="" Slot="6" Channel="3" Comment="Мин. уровень в Р7 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.2F981A2209774876B834F523E7200B62" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R1_v" Device="" Slot="6" Channel="4" Comment="Макс. уровень в Р1 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.9FF9EAE071444DB198F9A61927C089FC" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R2_v" Device="" Slot="7" Channel="1" Comment="Макс. уровень в Р2 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.DA78D183624141A4B1FF34E17B5B8F8A" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R3_v" Device="" Slot="7" Channel="2" Comment="Макс. уровень в Р3 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.D40491A05857401A9851A129FE0C157F" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R4_v" Device="" Slot="7" Channel="3" Comment="Макс. уровень в Р4 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.962DC4968E3343C381371E72D4681803" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R5_v" Device="" Slot="7" Channel="4" Comment="Макс. уровень в Р5 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.7A3E7061CEEF4C2480C4DA051E252C4C" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R6_v" Device="" Slot="8" Channel="1" Comment="Макс. уровень в Р6 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.A29B1AB53BA24016B36C8233701457B6" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R7_v" Device="" Slot="8" Channel="2" Comment="Макс. уровень в Р7 (склад ГСМ)" UUID="5A016086399148FE878EB9643A3FA65B.12180C6BE7E44F12B9FF94737696C2A9" />
+        <Connection ItemName="NMS_AI_DRV.Res_2" Device="" Slot="8" Channel="3" Comment="Резерв" UUID="5A016086399148FE878EB9643A3FA65B.A49FC4D79CD24919AB84AF4D1A6DE362" />
+        <Connection ItemName="NMS_AI_DRV.Res_3" Device="" Slot="8" Channel="4" Comment="Резерв" UUID="5A016086399148FE878EB9643A3FA65B.0840873816A645BABCE0EEDA67A2BE74" />
+    </Crossconnect>
+</Configuration>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_FromKCtoLIS_mb_AO_ToHMI" Kind="Struct" UUID="5LS3K7YSQ4DUVJ42HATXIWXCZM">
+	<Fields>
+		<Field Name="P_in_KC_UPTIG" Type="D225A65348D2770B341BAC9762DA1766" UUID="3JVQ3SMQOD6UXM7E3TGWPMGZVA" Comment="КЦ: Давление для регулятора в УПТИГ" />
+	</Fields>
+</Type>

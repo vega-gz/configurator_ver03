@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_GPA" Kind="Struct" UUID="8492E7F14BB709C84F42AAAAAE05B2A5">
+	<Fields>
+		<Field Name="Mag" Type="BOOL" UUID="72E29A0E4D7BB07F194320B6BD670DC8" Comment="Признак работы ГПА в магистраль" />
+		<Field Name="Remote" Type="BOOL" UUID="4FE2E82545DC3414ABC3CCACEE89E05F" Comment="Признак управления от ЦР" />
+		<Field Name="Alarm" Type="BOOL" UUID="0CA32DFC4FA172EA7D14E0982772A1D5" Comment="Авария ГПА" />
+		<Field Name="pulse" Type="BOOL" UUID="KZW7ZR4WIVAEFEKVUEO6KAJ45M" Comment="Сигнал контроля связи" />
+		<Field Name="Kr1_ON" Type="BOOL" UUID="A2EC111E4E9B3E3D26770EBB3DF9D6C4" Comment="Кран 1 открыт" />
+		<Field Name="Kr1_OF" Type="BOOL" UUID="19C69F7C47D03B37882654B6138B71BE" Comment="Кран 1 закрыт" />
+		<Field Name="Kr2_ON" Type="BOOL" UUID="B8D6BFFD4DF85779BFA4A0AE330F6E69" Comment="Кран 2 открыт" />
+		<Field Name="Kr2_OF" Type="BOOL" UUID="FF86D3034CB2801E29BB41B2C683F627" Comment="Кран 2 закрыт" />
+		<Field Name="Kr4_ON" Type="BOOL" UUID="1E1FFEB6417408F7CEBB09A891E8F176" Comment="Кран 4 открыт" />
+		<Field Name="Kr4_OF" Type="BOOL" UUID="FE2748104CE0592E5D85208A5AF5EA56" Comment="Кран 4 закрыт" />
+		<Field Name="Kr5_ON" Type="BOOL" UUID="C8CE4DD843B2DF4F0AFE1B94E59C640A" Comment="Кран 5 открыт" />
+		<Field Name="Kr5_OF" Type="BOOL" UUID="BD70EC74495271A77D3221A73E830F43" Comment="Кран 5 закрыт" />
+		<Field Name="APK_ON" Type="BOOL" UUID="8E2D82704FC41560B45FFD805FCDFA48" Comment="АПК открыт" />
+		<Field Name="APK_OF" Type="BOOL" UUID="257BFAB04A5F19F8249CBF842BA3FD80" Comment="АПК закрыт" />
+	</Fields>
+</Type>

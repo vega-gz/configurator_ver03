@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="TEK270" Kind="Struct" UUID="8B9F4DEC48A386BCCE4BEC8580B56F9D">
+    <Fields>
+        <Field Name="Bat_R1" Type="INT" UUID="AE04E97844A329EE473168925B26AE8E" Comment="Остаточный срок службы элемен-тов питания, месяц" />
+        <Field Name="Stat2" Type="INT" UUID="0A296A8D4A0B6438639F6FA97B126DFE" Comment="Системный статус" />
+        <Field Name="VT3" Type="UINT" UUID="0EC4BEF1414BDD997BD60B9416189F19" Comment="Рабочий объём, десятичная часть, 0.0001*м³" />
+        <Field Name="VbT4" Type="UINT" UUID="69380B9746C20C6A8015E6BD89ACB1AF" Comment="Стандартный объём, десятичная часть, 0.0001*м³" />
+        <Field Name="W_T5" Type="UINT" UUID="8C2DF066477D9899A56757B3A2DD6A55" Comment="Энергия, десятичная часть, 0.0001*кВтч" />
+        <Field Name="VT101" Type="DINT" UUID="C57FCC2F4651F95F29BA1389761633D8" Comment="Рабочий объём, целая часть, м³" />
+        <Field Name="VbT103" Type="DINT" UUID="12ABE57F4DE7415B5011468173ACBE56" Comment="Стандартный объём, целая часть, м³" />
+        <Field Name="W_T105" Type="DINT" UUID="1172EC3145ECBF13EB4D43AFA537DAAB" Comment="Энергия, целая часть, кВтч" />
+        <Field Name="pb301" Type="REAL" UUID="2F7B3CFC486D5331FB10779FF8BE12D5" Comment="Давление, Бар" />
+        <Field Name="Tb303" Type="REAL" UUID="B2621BFB4384A6A029C1F68B38097B51" Comment="Температура, °C" />
+        <Field Name="p_Abs305" Type="REAL" UUID="85E5F5194FFA4FE4671328992E6F5162" Comment="Абсолютное давление, Бар" />
+        <Field Name="p_Mes307" Type="REAL" UUID="20735872435E6DFA77BD49B500986690" Comment="Измеренное давление, Бар" />
+        <Field Name="T_Mes309" Type="REAL" UUID="38D69F244DFCA362B677F89F6121803A" Comment="Измеренная температура, °C" />
+        <Field Name="C311" Type="REAL" UUID="F487E31442D6C77BBAA89BB67BD17CDF" Comment="Коэффициент коррекции, Бар" />
+        <Field Name="K313" Type="REAL" UUID="49EE4C254FF73C93202D058F2C4EFE1F" Comment="Коэффициент сжимаемости газа" />
+        <Field Name="p_F315" Type="REAL" UUID="3E1FA4594C3A93384FDB32B0A126BFC4" Comment="Подстановочное значение давления, Бар" />
+        <Field Name="T_F317" Type="REAL" UUID="4D1A70EC4727ED1DC81C1B90248520CA" Comment="Подстановочное значение температуры, °C" />
+        <Field Name="N2_319" Type="REAL" UUID="ED9F876E4A7E1B197AF4C2B3F445B324" Comment="Содержание азота, %" />
+        <Field Name="H2_321" Type="REAL" UUID="B2AD9C2E434E4AA653DF3CB4856207BE" Comment="Содержание водорода, %" />
+        <Field Name="CO2_323" Type="REAL" UUID="A229733247044C81F30B35B242D54074" Comment="Содержание двуокиси углерода, %" />
+        <Field Name="Rhob325" Type="REAL" UUID="0B6F70B642CAEF80770F579E26CFCAF3" Comment="Плотность газа при нормальных условиях, кг/м³" />
+        <Field Name="Q327" Type="REAL" UUID="E68BBA1D40DC917CC79B6CA6779FBC63" Comment="Рабочий расход газа, м³/ч" />
+        <Field Name="Qb329" Type="REAL" UUID="E20D0C3B4A30A85D5A3BDA92924E5CBF" Comment="Стандартный расход газа, м³/ч" />
+        <Field Name="P331" Type="REAL" UUID="BEC5C7434A10BF5B938EE387F7425E50" Comment="Мощность, kВт" />
+        <Field Name="Ho_b333" Type="REAL" UUID="9455B65A466FA57FE77A6F8E2BC94722" Comment="Теплотворная способность, kВтч/м³" />
+        <Field Name="dr335" Type="REAL" UUID="51DAB9004EA2E253905CA4986677AB5A" Comment="Коэффициент плотности" />
+        <Field Name="p337" Type="REAL" UUID="78D00366413989631FB87FA52462AF39" Comment="Давление, Бар" />
+        <Field Name="T339" Type="REAL" UUID="BCD681EB48B245E58AF0ECB4EE9380A3" Comment="Температура, °C" />
+        <Field Name="VT501" Type="259ECB80454A5D613A7DDDBA4CF6C30A" UUID="E0FE451D45D00267A0779CB1D2DA0579" Comment="Рабочий объём, м³" />
+        <Field Name="VbT504" Type="259ECB80454A5D613A7DDDBA4CF6C30A" UUID="CB91815A4BAA3D300F167497D7B34671" Comment="Стандартный объём, м³" />
+        <Field Name="W_T507" Type="259ECB80454A5D613A7DDDBA4CF6C30A" UUID="23D10F3543CB68843D00B695A297E003" Comment="Энергия, кВтч" />
+        <Field Name="VT801" Type="BB3E2B10438428ED9F20B7B167F22EA0" UUID="5BBE411446CF143E44ED34B02ED9226B" Comment="Рабочий объём, м³" />
+        <Field Name="VbT805" Type="BB3E2B10438428ED9F20B7B167F22EA0" UUID="317509DA4E719064CBE11DB633C1302D" Comment="Стандартный объём, м³" />
+        <Field Name="W_T809" Type="BB3E2B10438428ED9F20B7B167F22EA0" UUID="8DF157F44108ABEBCC57C3BD0A585B3E" Comment="Энергия, кВтч" />
+        <Field Name="Time813" Type="BB3E2B10438428ED9F20B7B167F22EA0" UUID="BDB46E3649DD1F78A98A8AAF3A1E812E" Comment="Дата и время" />
+        <Field Name="SNo817" Type="C957634C49632C42B1145EA95B42C373" UUID="6A9643224C383541ED3E8F87FED3D3A8" Comment="Серийный номер" />
+        <Field Name="DayB820" Type="INT" UUID="E4029DF544A3811B45B143B56C153F85" Comment="Начало газового дня" />
+        <Field Name="VT_calc" Type="LREAL" UUID="A99D106D4C3A4833B664BBA89BE5B2C4" Comment="Рабочий объём, м³" />
+        <Field Name="VbT_calc" Type="LREAL" UUID="6C43CB5F4CCFEE3F30C4A9B07D89FD58" Comment="Стандартный объём, м³" />
+        <Field Name="W_T_calc" Type="LREAL" UUID="4B2E5BAC4DF7C5AE687DC4888A75FDED" Comment="Энергия, кВтч" />
+    </Fields>
+</Type>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UVI_AM_Settings" Kind="Struct" UUID="2F7DE9464B795F84F4C1078DE07EAD51">
+    <Fields>
+        <Field Name="Vn_V1" Type="256A18694412558E2A55A4B7624DD172" UUID="23A7BACA44E8659C45A475B4BBD7D661" Comment="Вентиляция В1" />
+    </Fields>
+</Type>

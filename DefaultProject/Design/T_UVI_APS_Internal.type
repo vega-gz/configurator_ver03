@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UVI_APS_Internal" Kind="Struct" UUID="ACGTJCVYNWPUNL7CKRNOMI3PEE">
+	<Fields>
+		<Field Name="Arr" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="WAJI7S4VWXVUDNKOJOE4KAHECQ" ArraySize="1" />
+		<Field Name="ev_Pmet_Kl_UVI1_Av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="04BA2088E1104F4FA19069E8CBFD6504" Comment="Давление метанола перед распределительными клапанами УВИ1 высокое" />
+		<Field Name="ev_Pmet_Kl_UVI2_Av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="10D87DA2E64A42D1AB2E31749964CB55" Comment="Давление метанола перед распределительными клапанами УВИ2 высокое" />
+		<Field Name="ev_Qmgms_met_UVI1_An" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="98DAB7C808C04FCF864A4AA2E3CC040E" Comment="Мгновенный массовый расход метанола на УВИ1 низкий" />
+		<Field Name="ev_Qmgms_met_UVI1_Av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="4BD28D4C48BA4D7CA91ACCFC8657DC14" Comment="Мгновенный массовый расход метанола на УВИ1 высокий" />
+		<Field Name="ev_Qmgms_met_UVI2_An" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="B6ECAEF051584322A060F4582C1393DB" Comment="Мгновенный массовый расход метанола на УВИ2 низкий" />
+		<Field Name="ev_Qmgms_met_UVI2_Av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="20921B8E7DB8489CB2655B034D99DF05" Comment="Мгновенный массовый расход метанола на УВИ2 высокий" />
+		<Field Name="Gas_met1_av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="2B10EB18BF784BB4AE5114E09E58C5BC" Comment="Загазованность по метанолу поз. QISA-1 Порог «2»" />
+		<Field Name="Gas_met2_av" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="61B81716D57240DD9709223640AA4231" Comment="Загазованность по метанолу поз. QISA-2 Порог «2»" />
+		<Field Name="Lmet_E8_1_v_Pn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="THYANGVSX35UBNMXUQ3JBKJ5NE" Comment="Верхний уровень в емкости E-8.1 дренажа метанола" />
+		<Field Name="Uosn_SAU_Pn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="PABL2F36KJGEDEAADLOEDI2YBE" Comment="Основное напряжение САУ низкое" />
+		<Field Name="Uosn_SAU_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="YBIXXCS3EUKERANDESOD3OW3RY" Comment="Основное напряжение САУ высокое" />
+		<Field Name="Urez_SAU_Pn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="MYD54RUDABZE5J53X36G2L4LSA" Comment="Резервное напряжение САУ низкое" />
+		<Field Name="Urez_SAU_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="6RHZFNOAVPHE7JHRJXBUI3KPCQ" Comment="Резервное напряжение САУ высокое" />
+		<Field Name="ev_Pmet_Kl_UVI1_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RXY3NXEEDUZEPCSKPFZTGZ2I5I" Comment="Давление метанола перед распределительными клапанами УВИ1 повышенное" />
+		<Field Name="ev_Pmet_Kl_UVI2_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="TRRLZE4LXKQUXFWWWEOWCGY3R4" Comment="Давление метанола перед распределительными клапанами УВИ2 повышенное" />
+		<Field Name="ev_Qmgms_met_UVI1_Pn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="MMME537Z5JCUHPWVFC5OIKK45Q" Comment="Мгновенный массовый расход метанола на УВИ1 пониженный" />
+		<Field Name="ev_Qmgms_met_UVI1_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="WOJL5DVMIO6EPB3SJ6LY7RFS7E" Comment="Мгновенный массовый расход метанола на УВИ1 повышенный" />
+		<Field Name="ev_Qmgms_met_UVI2_Pn" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="MNLQXXUFHJKE3EBUVL7W3MKCOQ" Comment="Мгновенный массовый расход метанола на УВИ2 пониженный" />
+		<Field Name="ev_Qmgms_met_UVI2_Pv" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="QPHIDXQMO3PEVGWJFBWHD3MHPA" Comment="Мгновенный массовый расход метанола на УВИ2 повышенный" />
+		<Field Name="Gas_met1_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="55Z47EOPHSOERD35WYMGRC2AQI" Comment="Загазованность по метанолу поз. QISA-1 Порог «1»" />
+		<Field Name="Gas_met1_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="W4NE4OKWMG4EDOT6LRUSDBV5ZE" Comment="Загазованность по метанолу поз. QISA-1 «Неисправность датчика»" />
+		<Field Name="Gas_met2_v" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="CUG4FP57CJ4EZNZ5VTYFSCW4XA" Comment="Загазованность по метанолу поз. QISA-2 Порог «1»" />
+		<Field Name="Gas_met2_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="7GZGFQCEWLPEZCN7G3ECUMV33E" Comment="Загазованность по метанолу поз. QISA-2 «Неисправность датчика»" />
+		<Field Name="QS_OF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="7KZ6DTDUSWQUJMATDU7R56ANWE" Comment="ШЩ. Секционный автоматический выключатель п.QF3 Отключен" />
+		<Field Name="QS_AOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="VS5NDTHUB5CEVHDMRFQ7FBVX2A" Comment="ШЩ.  Секционный автоматический выключатель п.QF3 Аварийное отключение " />
+		<Field Name="Q1_OF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="5YUHYMJDCDWUJKHQE7WP5NXA5E" Comment="ШЩ. Вводной автоматический выключатель п.QF1  Отключен" />
+		<Field Name="Q2_OF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="3X27XUSDQZNUVJ2WV5YJEQPLBU" Comment="ШЩ. Вводной автоматический выключатель п.QF2  Отключен" />
+		<Field Name="Q2_AOF" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="Q3GQJ4H5GVQUHIDUQ77GXESZ74" Comment="ШЩ.  Вводной автоматический выключатель п.QF2 Аварийное отключение" />
+		<Field Name="UZIP_Bad" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="NLYXH6U6VDZUTNRQPCAW5XKWQM" Comment="ЩЗИП. Сигнализация выхода из строя УЗИП" />
+		<Field Name="Chk_AC220_SAU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="DUHNK6Y4QSREDO7PWI54K47JHQ" Comment="Нет основного питания  ~220 В" />
+		<Field Name="Chk_DC220_SAU" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="JAMQPVUEOZKEFHFQCJDLIAFUF4" Comment="Нет резервного питания  =220 В" />
+		<Field Name="Cabin_open" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="L2UWEFXLFWAU3OCPQKU7TED2BY" Comment="Двери шкафа открыты" />
+		<Field Name="Chk_razr" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="S4D4V4SCDMBE5FEP3ZQ6WOR3B4" Comment="Нет исправности разрядников" />
+		<Field Name="QF_ON" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="RVDIJCNQHYQUTHC3KN5E7AYPAA" Comment="Автоматы питания выключены" />
+		<Field Name="DC24osn_Int_ok" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="65WGC2ANAKOUJDB6YAZ7SK5GF4" Comment="Неисправность осн. ИП =24В внутренних цепей" />
+		<Field Name="DC24rez_Int_ok" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="H55ZMEHNYXQURPHBMDHY7QD52E" Comment="Неисправность рез. ИП =24В внутренних цепей" />
+		<Field Name="DC24osn_Ext_ok" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="TDD6ZG43744URMSI2SMM2GIHJY" Comment="Неисправность осн. ИП =24В внешних цепей" />
+		<Field Name="DC24rez_Ext_ok" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="NXC7WZRAQJYETMMIVEOWZ2KA54" Comment="Неисправность рез. ИП =24В внешних цепей" />
+		<Field Name="Vn_V1_Alarm" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="42YAZBJ3VAAUTHOAIAVSNP6Q6A" Comment="Авария вентсистемы В1" />
+		<Field Name="AO_KC" Type="Y2SUFYR34WCUVAETREJRLVIA74" UUID="TYY6YXXY7BRUHLZH4R23XNPKUI" Comment="Останов от цеховой системы" />
+	</Fields>
+</Type>

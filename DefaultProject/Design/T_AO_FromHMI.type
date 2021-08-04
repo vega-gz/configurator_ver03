@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AO_FromHMI" Kind="Struct" UUID="28BBA2F94E53F5E7D050CBA8820F76E4">
+    <Fields>
+        <Field Name="manualTarget" Type="REAL" UUID="433A02C4CA4F5D526061E4AD90ECC329" Comment="Задание из ЧМИ" />
+        <Field Name="BTNforceOn" Type="BOOL" UUID="04F6F9ED7B4BF33CCC3B1896F5DC3841" Comment="кнопка включения режима форсировки" />
+        <Field Name="BTNworkOn" Type="BOOL" UUID="B216E8D2EF48401758F900B7800C4A76" Comment="Кнопка перекл. в работу" />
+    </Fields>
+</Type>

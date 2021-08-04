@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UPA_PIR_mb_AI_DRV" Kind="Struct" UUID="70C3C4F66EDB45EB81AF032F667A0AAE">
+	<Fields>
+		<Field Name="T_SR" Type="REAL" UUID="AD1CEFB90C914013A0A9913A87773925" Comment="Температура среды (в точке, где измеряется расход)" />
+		<Field Name="P_SR" Type="REAL" UUID="D5845956807549E99E9751985E08D8F1" Comment="Давление среды (в точке, где измеряется расход)" />
+		<Field Name="T_SR_2" Type="REAL" UUID="A6C274B8C558420688A76E9F0737DC2F" Comment="Температура среды (в точке, где измеряется расход), канал 2" />
+		<Field Name="P_SR_2" Type="REAL" UUID="1E36756B1BBE48B6B993F5E4894BFBD6" Comment="Давление среды (в точке, где измеряется расход), канал 2" />
+		<Field Name="QV" Type="REAL" UUID="B2CECC972C764342A0EFA30D5ACBDC4B" Comment="Объемный расход, м3/час" />
+		<Field Name="QV_ST" Type="REAL" UUID="7FB30FD31A074010B1BB410C8E54D7B2" Comment="Объемный расход, приведенный к стандартным условиям, нм3/час" />
+		<Field Name="QM" Type="REAL" UUID="75641BB644E84924A8D27218E1DD3E7A" Comment="Массовый расход, кг/с" />
+		<Field Name="QQ" Type="REAL" UUID="31829AF3B9BB428895229F93898F5B99" Comment="Тепловой расход, Вт" />
+		<Field Name="KONC" Type="REAL" UUID="44F5E67F2BE14CC5B70C11AFB7702B6A" Comment="Концентрация" />
+		<Field Name="K_s" Type="REAL" UUID="53E049E3B5BA440C8468849E7C1B7842" Comment="Коэффициент сжимаемости газа" />
+		<Field Name="PLT" Type="REAL" UUID="19409EAFEA1C43FEA3C9600181AD72B3" Comment="Плотность " />
+	</Fields>
+</Type>

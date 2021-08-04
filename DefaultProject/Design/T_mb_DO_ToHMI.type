@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_mb_DO_ToHMI" Kind="Struct" UUID="7C6148964D66EF09284563A3920EAF97">
+    <Fields>
+        <Field Name="forsPermit" Type="BOOL" UUID="E189DEDF4744C3CD7E2E1C80CD99232C" Comment="Форсировка разрешена" />
+        <Field Name="forsEnable" Type="BOOL" UUID="AFB3B525044B20A30C33BAB29977EDA8" Comment="Форсировка включена" />
+    </Fields>
+</Type>

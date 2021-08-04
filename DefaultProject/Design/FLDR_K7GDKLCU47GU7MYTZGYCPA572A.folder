@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="ANB">
+	<Items>
+		<Item Name="T_UVI_ANB.type" />
+		<Item Name="T_UVI_ANB_Internal.type" />
+		<Item Name="T_UVI_ANB_Settings.type" />
+		<Item Name="T_UVI_Ust.type" />
+	</Items>
+</Folder>

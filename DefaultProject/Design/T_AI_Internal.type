@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AI_Internal" Kind="Struct" Comment="Настройки канала" UUID="744A7D367B498F7EF3E4B8BC15643AB2">
+    <Fields>
+        <Field Name="qCycleROC" Type="INT" UUID="9C9F4CA4254049C8838B8C869EA6E128" Comment="Количество циклов для контроля РОК" />
+        <Field Name="summCycleROC" Type="REAL" UUID="0F4ECECFEB4122E5FACCDB91C2647540" Comment="сумма значений для РОК" />
+        <Field Name="prevMeasure" Type="REAL" UUID="2C4FB98DD24EDA3A036F7AB1A18B7D00" Comment="Значение на предыдущем цикле" />
+        <Field Name="validMeasure" Type="REAL" UUID="AFBA6686A2411F2221B1C9B5B4BE2A29" Comment="Последнее валидное измерение" />
+        <Field Name="prevFault" Type="BOOL" UUID="0A2FC1748749524E06BB7FB53FDBD253" Comment="наличие неисправности на предыдущем цикле " />
+        <Field Name="timerRecover" Type="REAL" UUID="5A1BAFBD5041B124084751A33CFBD56C" Comment="Таймер восстановления канала в работу после неисправности" />
+        <Field Name="timerRepair" Type="REAL" UUID="F5E88B52FD4A20CD6B6ABA8D9C52B3B8" Comment="Таймер ремонта реальный" />
+    </Fields>
+</Type>

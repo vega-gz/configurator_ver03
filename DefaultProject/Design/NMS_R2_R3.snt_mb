@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.MODBUS v. 1.0 >
+<Configuration>
+    <Wire Port="/dev/ser2" ReservePort="" InverseRTS="TRUE" HardwareRTS="TRUE" RTSReleaseOffset="0" BaudRate="115200" CyclePeriod="500000" ConfigUpdatePeriod="2000000" FailoverTimeout="1000000" ResponseTimeout="50000" SymbolTimeout="5000" MinResponseTimeout="700" RetryDelay="5000" RetryCount="5" OperabilityDelay="10000000">
+        <Device Address="2" HasAutoReserve="FALSE" AutoSwitchToReserve="FALSE" FailoverRequired="FALSE" ConnectedToReservePort="FALSE" PLC="FALSE" CheckStatus="FALSE">
+            <Slot Address="1" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="2" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="3" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="4" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="5" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="6" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="7" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="8" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+        </Device>
+        <Device Address="3" HasAutoReserve="FALSE" AutoSwitchToReserve="FALSE" FailoverRequired="FALSE" ConnectedToReservePort="FALSE" PLC="FALSE" CheckStatus="FALSE">
+            <Slot Address="1" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="2" ModuleType="68" ChannelCount="4" Min="0" Max="22" Units="mA" IsAnalog="TRUE" IsInput="TRUE" />
+            <Slot Address="3" ModuleType="33" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="TRUE" />
+            <Slot Address="4" ModuleType="21" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="FALSE" />
+            <Slot Address="5" ModuleType="21" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="FALSE" />
+            <Slot Address="6" ModuleType="33" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="TRUE" />
+            <Slot Address="7" ModuleType="33" ChannelCount="16" Min="0" Max="1" Units="" IsAnalog="FALSE" IsInput="TRUE" />
+        </Device>
+    </Wire>
+    <Crossconnect>
+        <Connection ItemName="NMS_A2_Diag.Slot1" Device="2" Slot="1" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.8A0A6D1C41CF457D94442F8831617049" />
+        <Connection ItemName="NMS_A2_Diag.Slot2" Device="2" Slot="2" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.559489694EF4757F074EFBAF4ED2BE04" />
+        <Connection ItemName="NMS_A2_Diag.Slot3" Device="2" Slot="3" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.257D167249D88B24D42F53B7C893779E" />
+        <Connection ItemName="NMS_A2_Diag.Slot4" Device="2" Slot="4" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.26FFA4AE4FE6B82840F52A81A540B7BC" />
+        <Connection ItemName="NMS_A2_Diag.Slot5" Device="2" Slot="5" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.A4CC71954594084C3612759E1D786328" />
+        <Connection ItemName="NMS_A2_Diag.Slot6" Device="2" Slot="6" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.EFDACBE7493CD384E161BD9F7713F864" />
+        <Connection ItemName="NMS_A2_Diag.Slot7" Device="2" Slot="7" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.BE36D8BE4D68EE980579328DFC460CDC" />
+        <Connection ItemName="NMS_A2_Diag.Slot8" Device="2" Slot="8" Channel="status" UUID="4BC3883442EB048E0E47249721B36347.532AF0334C06CC4D645F92AEF48908D5" />
+        <Connection ItemName="NMS_A3_Diag.Slot1" Device="3" Slot="1" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.8A0A6D1C41CF457D94442F8831617049" />
+        <Connection ItemName="NMS_A3_Diag.Slot2" Device="3" Slot="2" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.559489694EF4757F074EFBAF4ED2BE04" />
+        <Connection ItemName="NMS_A3_Diag.Slot3" Device="3" Slot="3" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.257D167249D88B24D42F53B7C893779E" />
+        <Connection ItemName="NMS_A3_Diag.Slot4" Device="3" Slot="4" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.26FFA4AE4FE6B82840F52A81A540B7BC" />
+        <Connection ItemName="NMS_A3_Diag.Slot5" Device="3" Slot="5" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.A4CC71954594084C3612759E1D786328" />
+        <Connection ItemName="NMS_A3_Diag.Slot6" Device="3" Slot="6" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.EFDACBE7493CD384E161BD9F7713F864" />
+        <Connection ItemName="NMS_A3_Diag.Slot7" Device="3" Slot="7" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.BE36D8BE4D68EE980579328DFC460CDC" />
+        <Connection ItemName="NMS_A3_Diag.Slot8" Device="3" Slot="8" Channel="status" UUID="5FA5A888427F5482FDC3BAB9671D0F70.532AF0334C06CC4D645F92AEF48908D5" />
+        <Connection ItemName="NMS_AI_DRV.Pm_out_N1" Device="2" Slot="1" Channel="1" Comment="Р вЂќР В°Р Р†Р В»Р ВµР Р…Р С�?Р Вµ Р Р…Р В° Р Р…Р В°Р С–Р Р…Р ВµРЎвЂљР В°Р Р…Р С�?Р С�? Р Р…Р В°РЎРѓР С•РЎРѓР В° Р Сњ1 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.224E21AAAF334C0496B69BD263A07563" />
+        <Connection ItemName="NMS_AI_DRV.Pm_out_N2" Device="2" Slot="1" Channel="2" Comment="Р вЂќР В°Р Р†Р В»Р ВµР Р…Р С�?Р Вµ Р Р…Р В° Р Р…Р В°Р С–Р Р…Р ВµРЎвЂљР В°Р Р…Р С�?Р С�? Р Р…Р В°РЎРѓР С•РЎРѓР В° Р Сњ2 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.C4472D523D414B63A93428898B4499AD" />
+        <Connection ItemName="NMS_AI_DRV.Pm_out_N3" Device="2" Slot="1" Channel="3" Comment="Р вЂќР В°Р Р†Р В»Р ВµР Р…Р С�?Р Вµ Р Р…Р В° Р Р…Р В°Р С–Р Р…Р ВµРЎвЂљР В°Р Р…Р С�?Р С�? Р Р…Р В°РЎРѓР С•РЎРѓР В° Р Сњ3 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.B45380DAAB6C40DC8AA1B5F2573B1644" />
+        <Connection ItemName="NMS_AI_DRV.Pm_out_N4" Device="2" Slot="1" Channel="4" Comment="Р вЂќР В°Р Р†Р В»Р ВµР Р…Р С�?Р Вµ Р Р…Р В° Р Р…Р В°Р С–Р Р…Р ВµРЎвЂљР В°Р Р…Р С�?Р С�? Р Р…Р В°РЎРѓР С•РЎРѓР В° Р Сњ4 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.E52A18AF73134C1DB6A53608352C7078" />
+        <Connection ItemName="NMS_AI_DRV.Pm_out_N5" Device="2" Slot="2" Channel="1" Comment="Р вЂќР В°Р Р†Р В»Р ВµР Р…Р С�?Р Вµ Р Р…Р В° Р Р…Р В°Р С–Р Р…Р ВµРЎвЂљР В°Р Р…Р С�?Р С�? Р Р…Р В°РЎРѓР С•РЎРѓР В° Р Сњ5 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.915EC319B9EB4A9AA235CF7E9EE5BC77" />
+        <Connection ItemName="NMS_AI_DRV.Pm_out_N6" Device="2" Slot="2" Channel="2" Comment="Р вЂќР В°Р Р†Р В»Р ВµР Р…Р С�?Р Вµ Р Р…Р В° Р Р…Р В°Р С–Р Р…Р ВµРЎвЂљР В°Р Р…Р С�?Р С�? Р Р…Р В°РЎРѓР С•РЎРѓР В° Р Сњ6 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.CC132434CDC248FDA2F3F3C0F8F66C22" />
+        <Connection ItemName="NMS_AI_DRV.Tm_E1" Device="2" Slot="2" Channel="3" Comment="Р СћР ВµР С?Р С—Р ВµРЎР‚Р В°РЎвЂљРЎС“РЎР‚Р В° Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р С?Р В°РЎРѓР В»Р В° E1 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.1CF2CCC5E0A142138A39ED7D91679829" />
+        <Connection ItemName="NMS_AI_DRV.Tm_E2" Device="2" Slot="2" Channel="4" Comment="Р СћР ВµР С?Р С—Р ВµРЎР‚Р В°РЎвЂљРЎС“РЎР‚Р В° Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р С?Р В°РЎРѓР В»Р В° E2 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.388A2D5C89A549F89563D274A3E25806" />
+        <Connection ItemName="NMS_AI_DRV.Tm_E3" Device="2" Slot="3" Channel="1" Comment="Р СћР ВµР С?Р С—Р ВµРЎР‚Р В°РЎвЂљРЎС“РЎР‚Р В° Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р С?Р В°РЎРѓР В»Р В° E3 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.5EB38513F2A4418D983787A90973E391" />
+        <Connection ItemName="NMS_AI_DRV.Tm_E4" Device="2" Slot="3" Channel="2" Comment="Р СћР ВµР С?Р С—Р ВµРЎР‚Р В°РЎвЂљРЎС“РЎР‚Р В° Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р С?Р В°РЎРѓР В»Р В° E4 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.26630B586AF743E6A6A44192B02C1B03" />
+        <Connection ItemName="NMS_AI_DRV.Tm_E5" Device="2" Slot="3" Channel="3" Comment="Р СћР ВµР С?Р С—Р ВµРЎР‚Р В°РЎвЂљРЎС“РЎР‚Р В° Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р С?Р В°РЎРѓР В»Р В° E5 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.160BD52747054E1E817CB086111F1D1F" />
+        <Connection ItemName="NMS_AI_DRV.Tm_E6" Device="2" Slot="3" Channel="4" Comment="Р СћР ВµР С?Р С—Р ВµРЎР‚Р В°РЎвЂљРЎС“РЎР‚Р В° Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р С?Р В°РЎРѓР В»Р В° E6 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.F488C8B4467743ACBADEC9B11033AA5A" />
+        <Connection ItemName="NMS_AI_DRV.Res_4" Device="2" Slot="4" Channel="1" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.2EDD99ABAA6F4D1AA57D0237044F0A41" />
+        <Connection ItemName="NMS_AI_DRV.Res_5" Device="2" Slot="4" Channel="2" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.6853B3A04639486385F83768E128A263" />
+        <Connection ItemName="NMS_AI_DRV.Res_6" Device="2" Slot="4" Channel="3" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.F3D5498FEA3D40BA9570CFD60E12DB19" />
+        <Connection ItemName="NMS_AI_DRV.Res_7" Device="2" Slot="4" Channel="4" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.5043AE76E49C4F8A9A59DD35967501F2" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E1_n" Device="2" Slot="5" Channel="1" Comment="Р СљР С�?Р Р…. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў1 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.DAA21DABCFF54C3CB2BA8F10F8DE52F6" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E2_n" Device="2" Slot="5" Channel="2" Comment="Р СљР С�?Р Р…. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў2 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.C1420B8D1C464D4DA4C32717EBD16F60" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E3_n" Device="2" Slot="5" Channel="3" Comment="Р СљР С�?Р Р…. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў3 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.C6D64D88C2F04E45AE16EA9479B17553" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E4_n" Device="2" Slot="5" Channel="4" Comment="Р СљР С�?Р Р…. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў4 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.55A6D3D244F5400289FF99A728FAEE7D" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E5_n" Device="2" Slot="6" Channel="1" Comment="Р СљР С�?Р Р…. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў5 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.A96DC7694FE8453097E61EA5C157BC23" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E6_n" Device="2" Slot="6" Channel="2" Comment="Р СљР С�?Р Р…. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў6 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.06A6899610894342BD9C3F9DB0DE2C92" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E1_v" Device="2" Slot="6" Channel="3" Comment="Р СљР В°Р С”РЎРѓ. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў1 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.4AF0B05225B542B09D53AD9E6ABB3F55" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E2_v" Device="2" Slot="6" Channel="4" Comment="Р СљР В°Р С”РЎРѓ. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў2 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.7753ADA7FD834AB38095BB9929FBACC1" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E3_v" Device="2" Slot="7" Channel="1" Comment="Р СљР В°Р С”РЎРѓ. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў3 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.2E24942EDA8147B8B2A6311B8D499CA0" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E4_v" Device="2" Slot="7" Channel="2" Comment="Р СљР В°Р С”РЎРѓ. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў4 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.24777B4A97B44A088A679E5515811705" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E5_v" Device="2" Slot="7" Channel="3" Comment="Р СљР В°Р С”РЎРѓ. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў5 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.DE5BB066CC8A4F7E8150600C47B32A48" />
+        <Connection ItemName="NMS_AI_DRV.Lm_E6_v" Device="2" Slot="7" Channel="4" Comment="Р СљР В°Р С”РЎРѓ. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† РЎвЂ?Р С?Р С”Р С•РЎРѓРЎвЂљР С�? Р вЂў6 (Р Р…Р В°РЎРѓР С•РЎРѓР Р…Р В°РЎРЏ Р С?Р В°РЎРѓР ВµР В»)" UUID="5A016086399148FE878EB9643A3FA65B.92F100058AA34962A47C8845D53E9BA0" />
+        <Connection ItemName="NMS_AI_DRV.Lm_R8_v" Device="2" Slot="8" Channel="1" Comment="Р СљР В°Р С”РЎРѓ. РЎС“РЎР‚Р С•Р Р†Р ВµР Р…РЎРЉ Р Р† Р ВµР С?Р С”Р С•РЎРѓРЎвЂљР С�? Р В°Р Р†Р В°РЎР‚Р С�?Р в„–Р Р…Р С•Р С–Р С• РЎРѓР В»Р С�?Р Р†Р В° Р С?Р В°РЎРѓР В»Р В° Р В 8" UUID="5A016086399148FE878EB9643A3FA65B.EBBAE686FED84CD586169DF384407079" />
+        <Connection ItemName="NMS_AI_DRV.Res_8" Device="2" Slot="8" Channel="2" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.3DD11FC9A0F54BC2BE66A7B93997AF2E" />
+        <Connection ItemName="NMS_AI_DRV.Res_9" Device="2" Slot="8" Channel="3" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.953501748A0F478895B9E080A546F871" />
+        <Connection ItemName="NMS_AI_DRV.Res_10" Device="2" Slot="8" Channel="4" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.3788D2FB3DB84330BBAB17997A06F558" />
+        <Connection ItemName="NMS_AI_DRV.Qm_out_N1" Device="3" Slot="1" Channel="1" Comment="Р В Р В°РЎРѓРЎвЂ¦Р С•Р Т�? Р С?Р В°РЎРѓР В»Р В° Р С—Р С•РЎРѓР В»Р Вµ Р Р…Р В°Р С•РЎРѓР С•Р Р† Р Сњ1, Р Сњ2" UUID="5A016086399148FE878EB9643A3FA65B.35285C00847D41F2BCF765AB06577D01" />
+        <Connection ItemName="NMS_AI_DRV.Qm_out_N3" Device="3" Slot="1" Channel="2" Comment="Р В Р В°РЎРѓРЎвЂ¦Р С•Р Т�? Р С?Р В°РЎРѓР В»Р В° Р С—Р С•РЎРѓР В»Р Вµ Р Р…Р В°Р С•РЎРѓР С•Р Р† Р Сњ3" UUID="5A016086399148FE878EB9643A3FA65B.B8E0263CB6C240D8A1752E180CB3D5B0" />
+        <Connection ItemName="NMS_AI_DRV.Qm_out_N4" Device="3" Slot="1" Channel="3" Comment="Р В Р В°РЎРѓРЎвЂ¦Р С•Р Т�? Р С?Р В°РЎРѓР В»Р В° Р С—Р С•РЎРѓР В»Р Вµ Р Р…Р В°Р С•РЎРѓР С•Р Р† Р Сњ4" UUID="5A016086399148FE878EB9643A3FA65B.C3401050A5934B2F914AE621383BBAA9" />
+        <Connection ItemName="NMS_AI_DRV.Res_11" Device="3" Slot="1" Channel="4" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.EE4E63166256426FB7DEEDD5C675F791" />
+        <Connection ItemName="NMS_AI_DRV.Uosn_SAU" Device="3" Slot="2" Channel="1" Comment="Р ?Р В·Р С?Р ВµРЎР‚Р ВµР Р…Р С�?Р Вµ Р С•РЎРѓР Р…Р С•Р Р†Р Р…Р С•Р С–Р С• Р Р…Р В°Р С—РЎР‚РЎРЏР В¶Р ВµР Р…Р С�?РЎРЏ Р РЋР С’Р Р€ Р СњР Сљ" UUID="5A016086399148FE878EB9643A3FA65B.EA589AC8F661490DA609C7EEE5CBE2C3" />
+        <Connection ItemName="NMS_AI_DRV.Urez_SAU" Device="3" Slot="2" Channel="2" Comment="Р ?Р В·Р С?Р ВµРЎР‚Р ВµР Р…Р С�?Р Вµ РЎР‚Р ВµР В·Р ВµРЎР‚Р Р†Р Р…Р С•Р С–Р С• Р Р…Р В°Р С—РЎР‚РЎРЏР В¶Р ВµР Р…Р С�?РЎРЏ Р РЋР С’Р Р€ Р СњР Сљ" UUID="5A016086399148FE878EB9643A3FA65B.45A69E578F7F40CD8A4EE0EED929BC40" />
+        <Connection ItemName="NMS_AI_DRV.Res_12" Device="3" Slot="2" Channel="3" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.BEC0252B70A4477F94729285A857110D" />
+        <Connection ItemName="NMS_AI_DRV.Res_13" Device="3" Slot="2" Channel="4" Comment="Р В Р ВµР В·Р ВµРЎР‚Р Р†" UUID="5A016086399148FE878EB9643A3FA65B.41FF981C0961437E96D0D69BC1C13B78" />
+        <Connection ItemName="NMS_DI_DRV.Chk_AC220osn_SAU" Device="3" Slot="3" Channel="1" Comment="РљРѕРЅС‚СЂРѕР»СЊ РѕСЃРЅРѕРІРЅРѕРіРѕ РїРёС‚Р°РЅРёСЏ ~220 Р’" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.C45BC52695FB48E88298431F5F53FBC0" />
+        <Connection ItemName="NMS_DI_DRV.Chk_AC220rez_SAU" Device="3" Slot="3" Channel="2" Comment="РљРѕРЅС‚СЂРѕР»СЊ СЂРµР·РµСЂРІРЅРѕРіРѕ РїРёС‚Р°РЅРёСЏ ~220 Р’" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.C9C79422A3CF4F3AB0DC946B279CC6FA" />
+        <Connection ItemName="NMS_DI_DRV.QF_ON" Device="3" Slot="3" Channel="3" Comment="РђРІС‚РѕР�?Р°С‚С‹ РїРёС‚Р°РЅРёСЏ РІРєР»СЋС‡РµРЅС‹" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.CBE34B81A9DA42ABB4EA100072849870" />
+        <Connection ItemName="NMS_DI_DRV.Chk_razr" Device="3" Slot="3" Channel="4" Comment="РљРѕРЅС‚СЂРѕР»СЊ РёСЃРїСЂР°РІРЅРѕСЃС‚Рё СЂР°Р·СЂСЏРґРЅРёРєРѕРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.15C8775A76BB43E3BD6CC2814B24E85C" />
+        <Connection ItemName="NMS_DI_DRV.DC24osn_Int_ok" Device="3" Slot="3" Channel="5" Comment="Р?СЃРїСЂР°РІРЅРѕСЃС‚СЊ РѕСЃРЅ. Р?Рџ =24 Р’ РІРЅСѓС‚СЂРµРЅРЅРёС… С†РµРїРµР№" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.096C7C9547B541379BAFB1F37C80C52F" />
+        <Connection ItemName="NMS_DI_DRV.DC24rez_Int_ok" Device="3" Slot="3" Channel="6" Comment="Р?СЃРїСЂР°РІРЅРѕСЃС‚СЊ СЂРµР·. Р?Рџ =24 Р’ РІРЅСѓС‚СЂРµРЅРЅРёС… С†РµРїРµР№" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.606B47B6E6F24EED9F181A82A1CF30F5" />
+        <Connection ItemName="NMS_DI_DRV.DC24osn_AI_ok" Device="3" Slot="3" Channel="7" Comment="Р?СЃРїСЂР°РІРЅРѕСЃС‚СЊ РѕСЃРЅ. Р?Рџ =24 Р’ AI,РІРЅРµС€РЅРёС… С†РµРїРµР№" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.E9E5CA7741D346D188851F77B737ECE2" />
+        <Connection ItemName="NMS_DI_DRV.DC24rez_AI_ok" Device="3" Slot="3" Channel="8" Comment="Р?СЃРїСЂР°РІРЅРѕСЃС‚СЊ СЂРµР·. Р?Рџ =24 Р’ AI,РІРЅРµС€РЅРёС… С†РµРїРµР№" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.86BED293853646AFA648CE17E0BCEF21" />
+        <Connection ItemName="NMS_DI_DRV.DC24osn_DO_ok" Device="3" Slot="3" Channel="9" Comment="Р?СЃРїСЂР°РІРЅРѕСЃС‚СЊ РѕСЃРЅ. Р?Рџ =24 Р’ D0,РІРЅРµС€РЅРёС… С†РµРїРµР№" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.74EDCC73A345422384B966EA38821F55" />
+        <Connection ItemName="NMS_DI_DRV.DC24rez_DO_ok" Device="3" Slot="3" Channel="10" Comment="Р?СЃРїСЂР°РІРЅРѕСЃС‚СЊ СЂРµР·. Р?Рџ =24 Р’ D0,РІРЅРµС€РЅРёС… С†РµРїРµР№" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.589F8CD549BF4312BB1844072DC9742E" />
+        <Connection ItemName="NMS_DI_DRV.Dver_STU4_open" Device="3" Slot="3" Channel="11" Comment="Р”РІРµСЂСЊ РЎС‚РЈ-4 РѕС‚РєСЂС‹С‚Р°" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.838E97F6521040CB8FA31B6C4E2BEEDA" />
+        <Connection ItemName="NMS_DI_DRV.Res_0" Device="3" Slot="3" Channel="12" Comment="Р РµР·РµСЂРІ РІРЅСѓС‚СЂ." UUID="A34CE227CB324B9CB3A85934D0AF8BA5.57C8E271066B4DD5A1F1BF53F3AD625B" />
+        <Connection ItemName="NMS_DI_DRV.Res_1" Device="3" Slot="3" Channel="13" Comment="Р РµР·РµСЂРІ РІРЅСѓС‚СЂ." UUID="A34CE227CB324B9CB3A85934D0AF8BA5.03DA8E2C0DF643C8A2431135D9A05012" />
+        <Connection ItemName="NMS_DI_DRV.Res_2" Device="3" Slot="3" Channel="14" Comment="Р РµР·РµСЂРІ РІРЅСѓС‚СЂ." UUID="A34CE227CB324B9CB3A85934D0AF8BA5.9583D66CD4C54F05812222370A574B3F" />
+        <Connection ItemName="NMS_DI_DRV.Res_3" Device="3" Slot="3" Channel="15" Comment="Р РµР·РµСЂРІ РІРЅСѓС‚СЂ." UUID="A34CE227CB324B9CB3A85934D0AF8BA5.D42997DB86D6436AA54C76FB1258BA9E" />
+        <Connection ItemName="NMS_DI_DRV.Res_4" Device="3" Slot="3" Channel="16" Comment="Р РµР·РµСЂРІ РІРЅСѓС‚СЂ." UUID="A34CE227CB324B9CB3A85934D0AF8BA5.7980A4991764497C9B45ECF693669139" />
+        <Connection ItemName="NMS_DI_DRV.Q1_AC380_ON" Device="3" Slot="6" Channel="1" Comment="Р’РІРѕРґ 1 380 VAC РІРєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.F362384C39C1467E9D74E8BDD9BE30B9" />
+        <Connection ItemName="NMS_DI_DRV.Q1_AC380_OF" Device="3" Slot="6" Channel="2" Comment="Р’РІРѕРґ 1 380 VAC РѕС‚РєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.36E2EA24AC7946E6B865AA615A82FD97" />
+        <Connection ItemName="NMS_DI_DRV.U1_AC380_ok" Device="3" Slot="6" Channel="3" Comment="РќР°Р»РёС‡РёРµ 380 VAC РЅР° РІРІРѕРґРµ 1" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.4CC22355B1A5435EB6A0B3DBBD6B9093" />
+        <Connection ItemName="NMS_DI_DRV.Q1_AC380_AOF" Device="3" Slot="6" Channel="4" Comment="Р’РІРѕРґ 1 380 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.2064EE1F27184C01966395FE81CE68C2" />
+        <Connection ItemName="NMS_DI_DRV.Q2_AC380_ON" Device="3" Slot="6" Channel="5" Comment="Р’РІРѕРґ 2 380 VAC РІРєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.BFE55E154AFE406397E95FFD1C53ECF2" />
+        <Connection ItemName="NMS_DI_DRV.Q2_AC380_OF" Device="3" Slot="6" Channel="6" Comment="Р’РІРѕРґ 2 380 VAC РѕС‚РєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.736A8F3EA9AE4554935CE8DC782DFC19" />
+        <Connection ItemName="NMS_DI_DRV.U2_AC380_ok" Device="3" Slot="6" Channel="7" Comment="РќР°Р»РёС‡РёРµ 380 VAC РЅР° РІРІРѕРґРµ 2" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.3180CD372E924811B95A509EADD8306F" />
+        <Connection ItemName="NMS_DI_DRV.Q2_AC380_AOF" Device="3" Slot="6" Channel="8" Comment="Р’РІРѕРґ 2 380 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.C56F6CC62FCB4B0EA762E220FE489CEA" />
+        <Connection ItemName="NMS_DI_DRV.Q3_AC380_ON" Device="3" Slot="6" Channel="9" Comment="Р’РІРѕРґ 3 380 VAC РІРєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.EE8237B9A3C74D068D15E73152266394" />
+        <Connection ItemName="NMS_DI_DRV.Q3_AC380_OF" Device="3" Slot="6" Channel="10" Comment="Р’РІРѕРґ 3 380 VAC РѕС‚РєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.168280DA497B42FDBB6435E11CDDC775" />
+        <Connection ItemName="NMS_DI_DRV.U3_AC380_ok" Device="3" Slot="6" Channel="11" Comment="РќР°Р»РёС‡РёРµ 380 VAC РЅР° РІРІРѕРґРµ 3" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.FD3F78830F5A4375AF6AC504F7221F62" />
+        <Connection ItemName="NMS_DI_DRV.Q3_AC380_AOF" Device="3" Slot="6" Channel="12" Comment="Р’РІРѕРґ 3 380 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.C98D44F9AF054DAD9794102BF049C468" />
+        <Connection ItemName="NMS_DI_DRV.AVR_work" Device="3" Slot="6" Channel="13" Comment="РђР’Р  СЃСЂР°Р±РѕС‚Р°Р»" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.3623793B5ABF4027A39666E7BB11D40D" />
+        <Connection ItemName="NMS_DI_DRV.UZIP_Bad" Device="3" Slot="6" Channel="14" Comment="РќРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ РЈР—Р?Рџ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.D0DA15735E944367BD22600A3C02538C" />
+        <Connection ItemName="NMS_DI_DRV.Res_5" Device="3" Slot="6" Channel="15" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.2E8A147491D14BD4B81DD456961E2317" />
+        <Connection ItemName="NMS_DI_DRV.Res_6" Device="3" Slot="6" Channel="16" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.6C6D671A0E294F868B9514B432B58D44" />
+        <Connection ItemName="NMS_DI_DRV.N1_ON" Device="3" Slot="7" Channel="1" Comment="РќР°СЃРѕСЃ РІРєР»СЋС‡РµРЅ Рќ1" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.B58DF6E825A7475C8F15EA60F34C2C2D" />
+        <Connection ItemName="NMS_DI_DRV.N2_ON" Device="3" Slot="7" Channel="2" Comment="РќР°СЃРѕСЃ РІРєР»СЋС‡РµРЅ Рќ2" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.D30505DE6BE143919A2D211A99D3DA27" />
+        <Connection ItemName="NMS_DI_DRV.N3_ON" Device="3" Slot="7" Channel="3" Comment="РќР°СЃРѕСЃ РІРєР»СЋС‡РµРЅ Рќ3" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.831C21B03E0841399C208457DF2A8E1A" />
+        <Connection ItemName="NMS_DI_DRV.N4_ON" Device="3" Slot="7" Channel="4" Comment="РќР°СЃРѕСЃ РІРєР»СЋС‡РµРЅ Рќ4" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.65368E8CC75E44C4918561E87DF937E4" />
+        <Connection ItemName="NMS_DI_DRV.N5_ON" Device="3" Slot="7" Channel="5" Comment="РќР°СЃРѕСЃ РІРєР»СЋС‡РµРЅ Рќ5" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.070C64E74F6647E180E5C0608BCC7FDD" />
+        <Connection ItemName="NMS_DI_DRV.N6_ON" Device="3" Slot="7" Channel="6" Comment="РќР°СЃРѕСЃ РІРєР»СЋС‡РµРЅ Рќ6" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.CCF98E7640F2450D85EE02D6514078A5" />
+        <Connection ItemName="NMS_DI_DRV.Res_7" Device="3" Slot="7" Channel="7" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.ADB5FF6D547C4D6CBE3F59C183814B49" />
+        <Connection ItemName="NMS_DI_DRV.Res_8" Device="3" Slot="7" Channel="8" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.85F16C578F66455C85BE26885CEEB41D" />
+        <Connection ItemName="NMS_DI_DRV.Res_9" Device="3" Slot="7" Channel="9" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.B82859F86E47416E846C51BAD43C32AF" />
+        <Connection ItemName="NMS_DI_DRV.Res_10" Device="3" Slot="7" Channel="10" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.973A77A6352942D39C946711570C6F4B" />
+        <Connection ItemName="NMS_DI_DRV.Res_11" Device="3" Slot="7" Channel="11" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.B803BC6C99974F7886C8453DBDEDB439" />
+        <Connection ItemName="NMS_DI_DRV.Res_12" Device="3" Slot="7" Channel="12" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.DBDAAFD04A944FB4BEE8D919C46A3EEC" />
+        <Connection ItemName="NMS_DI_DRV.Res_13" Device="3" Slot="7" Channel="13" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.57452B1A0CC2441CBCEC13C658F64FBB" />
+        <Connection ItemName="NMS_DI_DRV.Res_14" Device="3" Slot="7" Channel="14" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.BBB295234F19437AA78AD5F12C0224A5" />
+        <Connection ItemName="NMS_DI_DRV.Res_15" Device="3" Slot="7" Channel="15" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.376BF25C940041E584377749CB73128A" />
+        <Connection ItemName="NMS_DI_DRV.Res_16" Device="3" Slot="7" Channel="16" Comment="Р РµР·РµСЂРІ" UUID="A34CE227CB324B9CB3A85934D0AF8BA5.59805AC0D48B4029930DA639D01F17E7" />
+        <Connection ItemName="NMS_DO_DRV.Res_0" Device="3" Slot="4" Channel="1" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.38B54AA62A434F81BE8C109606503DA1" />
+        <Connection ItemName="NMS_DO_DRV.Res_1" Device="3" Slot="4" Channel="2" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.E1CCD7FEDC2647BBB0B11EC014C41A76" />
+        <Connection ItemName="NMS_DO_DRV.Res_2" Device="3" Slot="4" Channel="3" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.9DF35752381D4B3CA3DF9C3BD0FDA465" />
+        <Connection ItemName="NMS_DO_DRV.Res_3" Device="3" Slot="4" Channel="4" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.B2832910231E427F9456E31FCE9EF87C" />
+        <Connection ItemName="NMS_DO_DRV.Res_4" Device="3" Slot="4" Channel="5" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.ED26AA059D0F42C6B06E0C692B63D3B2" />
+        <Connection ItemName="NMS_DO_DRV.Res_5" Device="3" Slot="4" Channel="6" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.172ACC93C81D428A8DB8C6474A5CA24B" />
+        <Connection ItemName="NMS_DO_DRV.Res_6" Device="3" Slot="4" Channel="7" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.92E0AB6D16014A81A40611D2E84E01B8" />
+        <Connection ItemName="NMS_DO_DRV.Res_7" Device="3" Slot="4" Channel="8" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.D3297F38A57A42DB971298C7C0C70BDA" />
+        <Connection ItemName="NMS_DO_DRV.Res_8" Device="3" Slot="4" Channel="9" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.8333076769274F9E8B43F34DE1961749" />
+        <Connection ItemName="NMS_DO_DRV.Res_9" Device="3" Slot="4" Channel="10" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.D15597D67C454395981DC3B78C49C3CF" />
+        <Connection ItemName="NMS_DO_DRV.Res_10" Device="3" Slot="4" Channel="11" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.88C1FD399207473D9C8BD4DDDCCA289E" />
+        <Connection ItemName="NMS_DO_DRV.Res_11" Device="3" Slot="4" Channel="12" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.10FDBA53574B46739F771619C60AE84E" />
+        <Connection ItemName="NMS_DO_DRV.Res_12" Device="3" Slot="4" Channel="13" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.DC5348CAB647470F8E2E10596F36E818" />
+        <Connection ItemName="NMS_DO_DRV.Res_13" Device="3" Slot="4" Channel="14" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.9201354DA93348459899B760A7EE56E4" />
+        <Connection ItemName="NMS_DO_DRV.Res_14" Device="3" Slot="4" Channel="15" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.56ECC25274CA47FA9E7C66B2498B73C1" />
+        <Connection ItemName="NMS_DO_DRV.Res_15" Device="3" Slot="4" Channel="16" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.AA5551024C6A47099C9DF41E36EC5600" />
+        <Connection ItemName="NMS_DO_DRV.N1_OF" Device="3" Slot="5" Channel="1" Comment="Насос Н1 отключить" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.80C9A8C7C00B4E808B0BEFE91F92DD79" />
+        <Connection ItemName="NMS_DO_DRV.N2_OF" Device="3" Slot="5" Channel="2" Comment="Насос Н2 отключить" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.56A0B0A2312145E3BB97C6B2ED5EF02B" />
+        <Connection ItemName="NMS_DO_DRV.N3_OF" Device="3" Slot="5" Channel="3" Comment="Насос Н3 отключить" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.829D198728D546DCBB50E8B8E2326555" />
+        <Connection ItemName="NMS_DO_DRV.N4_OF" Device="3" Slot="5" Channel="4" Comment="Насос Н4 отключить" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.6774DE3781E049F7A2484A9E94636A3A" />
+        <Connection ItemName="NMS_DO_DRV.N5_OF" Device="3" Slot="5" Channel="5" Comment="Насос Н5 отключить" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.6A01A8B21ACB484C87092F83F108B7D4" />
+        <Connection ItemName="NMS_DO_DRV.N6_OF" Device="3" Slot="5" Channel="6" Comment="Насос Н6 отключить" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.2A4D073322204255AA207AED2FCA348F" />
+        <Connection ItemName="NMS_DO_DRV.Res_16" Device="3" Slot="5" Channel="7" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.6D647F4D7A444274B27DFCE62DDD30D5" />
+        <Connection ItemName="NMS_DO_DRV.Res_17" Device="3" Slot="5" Channel="8" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.029E8E4A30EF4B6D8AB75C71D64CB5EB" />
+        <Connection ItemName="NMS_DO_DRV.Res_18" Device="3" Slot="5" Channel="9" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.46336F12DC9044D1B85005D3C6C5E25A" />
+        <Connection ItemName="NMS_DO_DRV.Res_19" Device="3" Slot="5" Channel="10" Comment="Резерв" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.76FB802E752A4BE38ACAD4EF31D021AC" />
+        <Connection ItemName="NMS_DO_DRV.EN_SHUN1" Device="3" Slot="5" Channel="11" Comment="Нагрев разрешен (Шкаф ШУН-202Г(1))" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.45328E0BC0A9404C886157EF9C35F31C" />
+        <Connection ItemName="NMS_DO_DRV.EN_SHUN2" Device="3" Slot="5" Channel="12" Comment="Нагрев разрешен (Шкаф ШУН-202Г(2))" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.6D3F01D0DD8A4C1EAF5C12EE2176A33A" />
+        <Connection ItemName="NMS_DO_DRV.EN_SHUN3" Device="3" Slot="5" Channel="13" Comment="Нагрев разрешен (Шкаф ШУН-202Г(3))" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.70DB4C700EA446B59ED607D428FC8220" />
+        <Connection ItemName="NMS_DO_DRV.EN_SHUN4" Device="3" Slot="5" Channel="14" Comment="Нагрев разрешен (Шкаф ШУН-202Г(4))" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.6CE6F2AE35C54895A1CCC5E9F7E9A6FC" />
+        <Connection ItemName="NMS_DO_DRV.EN_SHUN5" Device="3" Slot="5" Channel="15" Comment="Нагрев разрешен (Шкаф ШУН-202Г(5))" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.19971EC746FC43EF85068DCE726659F8" />
+        <Connection ItemName="NMS_DO_DRV.EN_SHUN6" Device="3" Slot="5" Channel="16" Comment="Нагрев разрешен (Шкаф ШУН-202Г(6))" UUID="5DD8CC8C2D004C61959E5EBB88D4DA74.90F35F7E676646A686FD28343C9EB7D1" />
+    </Crossconnect>
+</Configuration>

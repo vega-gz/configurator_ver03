@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_KOT_mb_AI_DRV" UUID="48D1DE3AB4C14F3790198EBB798C92FB">
+<Fields>
+<Field Comment="Температура прЯмой сет. воды" Name="T_prym_set_v" Type="REAL" UUID="EC9F38301BCE4E0F9773BBE83AD682A5"/>
+<Field Comment="Температура воздуха на улице" Name="T_vozduh" Type="REAL" UUID="8BF2938F768247E29A15CD9E61278AE6"/>
+<Field Comment="Температура на входе в котлы" Name="T_vh_v_kotl" Type="REAL" UUID="20F8C06C5108470DB9929B77B72F003C"/>
+<Field Comment="Давление в впускном коллекторе СН" Name="P_vpusk_kollector_SN" Type="REAL" UUID="3EA5B9C7A22A49ABB1C5E429E619EEFD"/>
+</Fields>
+</Type>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ModelSettings" Kind="Struct" Comment="Настройки модели" UUID="175B83EF4D3E95CF92ACCCAD2C44E0F1">
+	<Fields>
+		<Field Name="Ptg" Type="REAL" UUID="A16CD8264D629B5B37437F92DCCDC86A" Comment="давление ТГ" />
+		<Field Name="tauToutTND" Type="REAL" UUID="AE677BB64655C1D5EF2138ABB74F831E" Comment="сглаживание Тза ГГ" />
+		<Field Name="tauNvd" Type="REAL" UUID="B8768EB842EC63FE45E1BAB2C2E26FCD" Comment="сглаживание ВД" />
+		<Field Name="tauNst" Type="REAL" UUID="23653D79476056E9EE125E864BF6525F" Comment="сглаживание СТ" />
+		<Field Name="minPosDG" Type="REAL" UUID="9AB20B3A43FFA3ACB5A5F087E1221229" Comment="Позиция ДГ, ниже которой факела быть не может" />
+		<Field Name="minNvd" Type="REAL" UUID="D8A9F55C4983B3C0A47BE4B30D9E7AF6" Comment="Обороты ВД, ниже которых факела быть не может" />
+		<Field Name="minNvd2" Type="REAL" UUID="E335095D479B5B7A9C94C2B8F2CBB8D4" Comment="Обороты ВД, ниже которых ВД влияет на Т за ГГ положительно, а выше - отрицательно" />
+		<Field Name="NvdStarter" Type="REAL" UUID="F03F87BD4499E7A5D44ADF8AFAF37D20" Comment="Обороты ВД, до которых её разгоняет стартeр" />
+		<Field Name="NvdfNst" Type="REAL" UUID="658E21BE4E466C945D3A1EB57F8A9208" Comment="Обороты ВД, при которых начинается влияние на СТ" />
+		<Field Name="koeffPosDG_ToutTND" Type="REAL" UUID="455226894C2D1C024C195FB7CB4A9E07" Comment="Влияние положения ДГ на Т за ГГ" />
+		<Field Name="koeffNvd_ToutTND" Type="REAL" UUID="ABBB7CA34299B8EF00F620A5D59E68E6" Comment="Влияние ВД на Т за ГГ" />
+		<Field Name="koeffToutTND_Nvd" Type="REAL" UUID="5108871742E2F9520A7D268B126D0F23" Comment="Влияние Т за ГГ на ВД" />
+		<Field Name="koeffNvd_Nst" Type="REAL" UUID="7EE34DD04F3F869CE65545AE22BEF970" Comment="Влияние ВД на СТ" />
+		<Field Name="koeffNvd_Pok" Type="REAL" UUID="95ED88AA4759E8DC7A2FDD915F1ADE59" Comment="Влияние ВД на Рок" />
+		<Field Name="AZisON" Type="BOOL" UUID="9F56583243E4ECAAECBBD59E965E71AA" Comment="Агрегат зажигания включен" />
+	</Fields>
+</Type>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="ТСк">
+	<Items>
+		<Item Name="FLDR_4NGCS4XTPRFUFJ52X3TKCEFCAE.folder" />
+		<Item Name="FLDR_5A3G4NK5UR4U5OCRSNXSZTM45U.folder" />
+		<Item Name="FLDR_GMG6PYA6OB7UVMOSEEFPZQ226Y.folder" />
+		<Item Name="FLDR_SAOPFWZYFRMEROBYGO42EH5MIQ.folder" />
+		<Item Name="FLDR_YYWTALRELHKURHEVHQ3KK345QU.folder" />
+		<Item Name="T_TSK_BTN.type" />
+		<Item Name="T_TSK_SS.type" />
+		<Item Name="Type_B4CAFKAVUMKE5CZVEYBLUXFNDM.type" />
+	</Items>
+</Folder>

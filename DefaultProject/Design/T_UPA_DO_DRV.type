@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UPA_DO_DRV" UUID="469F77DBDA4047D080851B81FDD33D74">
+<Fields>
+<Field Comment="Кран отсечной 1Т-2 открыть" Name="Kr_1T2_ON" Type="BOOL" UUID="692DBD0B7C3A4398B2900D1C2F374279"/>
+<Field Comment="Кран отсечной 1Т-2 закрыть" Name="Kr_1T2_OF" Type="BOOL" UUID="DFF06DFAB54E445786F4173A73A4CE21"/>
+<Field Comment="Кран отсечной 2Т-2 открыть" Name="Kr_2T2_ON" Type="BOOL" UUID="310C29CE45E7406BA40EFF7C688D37BE"/>
+<Field Comment="Кран отсечной 2Т-2 закрыть" Name="Kr_2T2_OF" Type="BOOL" UUID="F274728531344D29A9B11072D4FF6CC5"/>
+<Field Comment="Кран отсечной 3Т-2 открыть" Name="Kr_3T2_ON" Type="BOOL" UUID="C7987317501D49EF810D392AB7ECF244"/>
+<Field Comment="Кран отсечной 3Т-2 закрыть" Name="Kr_3T2_OF" Type="BOOL" UUID="1AC2E028E8F448229633D009418D7F94"/>
+<Field Comment="Кран отсечной 4Т-2 открыть" Name="Kr_4T2_ON" Type="BOOL" UUID="497617E9DE42457797F83E7EC2ABD80C"/>
+<Field Comment="Кран отсечной 4Т-2 закрыть" Name="Kr_4T2_OF" Type="BOOL" UUID="FCA7849793484EA09F2FB4A28E54F06A"/>
+<Field Comment="Кран отсечной 5Т-2 открыть" Name="Kr_5T2_ON" Type="BOOL" UUID="8B6E5BD6E16048CF8B669080E60FC620"/>
+<Field Comment="Кран отсечной 5Т-2 закрыть" Name="Kr_5T2_OF" Type="BOOL" UUID="ACF8A42568C7432B86FD19AE88A632ED"/>
+<Field Comment="Кран отсечной 6Т-2 открыть" Name="Kr_6T2_ON" Type="BOOL" UUID="713A551DA62E4019AF476765FA01A5F9"/>
+<Field Comment="Кран отсечной 6Т-2 закрыть" Name="Kr_6T2_OF" Type="BOOL" UUID="E11D347D464042FE9F55E4BA41C2AC1A"/>
+<Field Comment="Кран отсечной 7Т-2 открыть" Name="Kr_7T2_ON" Type="BOOL" UUID="620F988BB0DE4CF49C68709F45A6330E"/>
+<Field Comment="Кран отсечной 7Т-2 закрыть" Name="Kr_7T2_OF" Type="BOOL" UUID="3B1949BA55C64AC1ACFA9D2084BB09E6"/>
+<Field Comment="Кран отсечной 8Т-2 открыть" Name="Kr_8T2_ON" Type="BOOL" UUID="2352F4C60C024DBA8B28A4A00D773A86"/>
+<Field Comment="Кран отсечной 8Т-2 закрыть" Name="Kr_8T2_OF" Type="BOOL" UUID="49F807B001384EA189E744864E72E100"/>
+<Field Comment="Кран отсечной 9Т-2 открыть" Name="Kr_9T2_ON" Type="BOOL" UUID="57E6ED6F66D948D3BE11ED2BCF46E1B4"/>
+<Field Comment="Кран отсечной 9Т-2 закрыть" Name="Kr_9T2_OF" Type="BOOL" UUID="FA31D7D3093A4E418E1FFDE39379998E"/>
+<Field Comment="Кран отсечной 10Т-2 открыть" Name="Kr_10T2_ON" Type="BOOL" UUID="DD194FC83A0546D9B26287E2A1B58A67"/>
+<Field Comment="Кран отсечной 10Т-2 закрыть" Name="Kr_10T2_OF" Type="BOOL" UUID="E48B399791FC42CA91A7AFBD2D66860F"/>
+<Field Comment="Кран отсечной 11Т-2 открыть" Name="Kr_11T2_ON" Type="BOOL" UUID="11D64ACA3A5D4B9087995FE08E2F8A71"/>
+<Field Comment="Кран отсечной 11Т-2 закрыть" Name="Kr_11T2_OF" Type="BOOL" UUID="B124B763A04E4E8C96BD3112C9623410"/>
+<Field Comment="Кран отсечной 12Т-2 открыть" Name="Kr_12T2_ON" Type="BOOL" UUID="910BC7D164E143B8B3DEA7E0396C9BC0"/>
+<Field Comment="Кран отсечной 12Т-2 закрыть" Name="Kr_12T2_OF" Type="BOOL" UUID="A658DA2CD03A4EF7ACAA6B0B31758308"/>
+<Field Comment="Кран отсечной 13Т-2 открыть" Name="Kr_13T2_ON" Type="BOOL" UUID="367FE76228D24412896EF650D69DB063"/>
+<Field Comment="Кран отсечной 13Т-2 закрыть" Name="Kr_13T2_OF" Type="BOOL" UUID="99117B7B72994B9CBB71A8532ED07827"/>
+<Field Comment="Кран отсечной 14Т-2 открыть" Name="Kr_14T2_ON" Type="BOOL" UUID="5ADA8A6BDE794D4292C917E549EE536D"/>
+<Field Comment="Кран отсечной 14Т-2 закрыть" Name="Kr_14T2_OF" Type="BOOL" UUID="AE7ABD5C6B634737A11C9D7DE0922706"/>
+<Field Comment="(Резерв)" Name="Res_0" Type="BOOL" UUID="42455316A3AE44449278D050130950F9"/>
+<Field Comment="(Резерв)" Name="Res_1" Type="BOOL" UUID="BE736BE9B1DF4F7A8AB911BA83CFA62B"/>
+<Field Comment="(Резерв)" Name="Res_2" Type="BOOL" UUID="EBFB1761EB974EAB93AA9DB839908E34"/>
+<Field Comment="(Резерв)" Name="Res_3" Type="BOOL" UUID="7D4D0254621C4119B4E0BE4A55BCD5D0"/>
+</Fields>
+</Type>

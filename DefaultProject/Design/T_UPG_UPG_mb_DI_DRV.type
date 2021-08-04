@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_UPG_UPG_mb_DI_DRV" UUID="F0D6DDB5A81E439E86478CC17CB2F5AE">
+<Fields>
+<Field Comment="Отклонение давления на входе вниз (МН1-1)" Name="P_in_UPG_v" Type="BOOL" UUID="C31DADA47D434087A04E15F0F34D4D06"/>
+<Field Comment="Отклонение давления на входе вверх (МН1-1)" Name="P_in_UPG_n" Type="BOOL" UUID="C8F4B51E075B464D8328DC4FEB7B795D"/>
+<Field Comment="Отклонение давления на выходе 1 вниз (МН1-2)" Name="P_out1_UPG_v" Type="BOOL" UUID="9DF17E1F30FE42BE91F485AE76887D25"/>
+<Field Comment="Отклонение давления на выходе 1 вверх (МН1-2)" Name="P_out1_UPG_n" Type="BOOL" UUID="000387BB639B436DB199F72F8675E74C"/>
+<Field Comment="Отклонение давления на выходе 2 вниз (МН1-3)" Name="P_out2_UPG_v" Type="BOOL" UUID="5E54766E0EF440DCA215FA4AA330E8BC"/>
+<Field Comment="Отклонение давления на выходе 2 вверх (МН1-3)" Name="P_out2_UPG_n" Type="BOOL" UUID="A15554E291DF43E29EC1A72C8487A31C"/>
+<Field Comment="Отклонение давления на выходе 3 вниз (МН1-4)" Name="P_out3_UPG_v" Type="BOOL" UUID="272B63E4B61C4889B4F587E541D684A6"/>
+<Field Comment="Отклонение давления на выходе 3 вверх (МН1-4)" Name="P_out3_UPG_n" Type="BOOL" UUID="D5A2B9987BCD406F84E1FA1A228975EC"/>
+<Field Comment="Прорыв трубного пучка ПГ3.1 (МН3.1-1)" Name="Brk_Tr_PG31" Type="BOOL" UUID="E5FEE2B58531450C930C181E31A3842F"/>
+<Field Comment="Прорыв трубного пучка ПГ3.2 (МН3.2-1)" Name="Brk_Tr_PG32" Type="BOOL" UUID="238689629BB2442DB4EC471F7ACB8BE8"/>
+<Field Comment="Уровень в 1 ступени фильтра Ф2.1 «мах»" Name="Lk_F21_s1_v" Type="BOOL" UUID="5D041FACC21747AB91B7E6931ED4789E"/>
+<Field Comment="Уровень во 2 ступени фильтра Ф2.1 «мах»" Name="Lk_F21_s2_v" Type="BOOL" UUID="C5F99743B98D49F4A9C12B007AA01BE5"/>
+<Field Comment="Уровень в 1 ступени фильтра Ф2.2 «мах»" Name="Lk_F22_s1_v" Type="BOOL" UUID="E15268AD1C7042C5A852EE91DD83B1E8"/>
+<Field Comment="Уровень во 2 ступени фильтра Ф2.2 «мах»" Name="Lk_F22_s2_v" Type="BOOL" UUID="105D0B9F9F834AF9B4A04D1F03E49603"/>
+<Field Comment="Резерв" Name="Res_0" Type="BOOL" UUID="B6A163A9E3A34AD290949E0879927C23"/>
+<Field Comment="Резерв" Name="Res_1" Type="BOOL" UUID="675DA526823F492FA2A168CCB9B38F19"/>
+<Field Comment="Сигнал включения контрольного регулятора ЛР1 (ОЛР) выход 1 (МН4.1)" Name="OLR1_out_ON" Type="BOOL" UUID="D9E41972F23D436FAEA8CD1CE6723705"/>
+<Field Comment="Сигнал включения контрольного регулятора ЛР2 (РЛР) выход 1 (МН4.3)" Name="RLR1_out_ON" Type="BOOL" UUID="4E3F4D00BD444821ACDBA29ADAC86CD2"/>
+<Field Comment="Сигнал включения контр. регулятора ЛР1 (ОЛР) выход 2 (МН4.2)" Name="OLR2_out_ON" Type="BOOL" UUID="F53962357C20435C84C2B2B4CEB83574"/>
+<Field Comment="Сигнал включения контр. регулятора ЛР2 (РЛР) выход 2 (МН4.4)" Name="RLR2_out_ON" Type="BOOL" UUID="192D97C335524BCDA84DDEAECE47CCE8"/>
+<Field Comment="Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыт" Name="Kr2_1_3_OF" Type="BOOL" UUID="03B408715B634BA2B6558C2447E0FB82"/>
+<Field Comment="Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыт" Name="Kr2_1_3_ON" Type="BOOL" UUID="865CA35A917E44C7924E6D8456EEB411"/>
+<Field Comment="Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыт" Name="Kr2_1_4_OF" Type="BOOL" UUID="707880ABF1E7495783470F1CD6F962E6"/>
+<Field Comment="Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыт" Name="Kr2_1_4_ON" Type="BOOL" UUID="6838035EA9184C50B4DAC6B40744912A"/>
+<Field Comment="Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыт" Name="Kr2_2_3_OF" Type="BOOL" UUID="914046BF50E54AE8BCCE7DC2E06A7EEB"/>
+<Field Comment="Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыт" Name="Kr2_2_3_ON" Type="BOOL" UUID="89E9C2FBFBAF46BC97A5B317539DC79E"/>
+<Field Comment="Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыт" Name="Kr2_2_4_OF" Type="BOOL" UUID="4FAC6302F506487E98A4530E33209D77"/>
+<Field Comment="Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыт" Name="Kr2_2_4_ON" Type="BOOL" UUID="5061EA6F62674C3D8EC00EEE4CB51BD1"/>
+<Field Comment="Резерв" Name="Res_2" Type="BOOL" UUID="DABC927CF57047F089CDC52D4F73DD49"/>
+<Field Comment="Резерв" Name="Res_3" Type="BOOL" UUID="2B5F66188C30448E8DD53BCB0892586E"/>
+<Field Comment="Резерв" Name="Res_4" Type="BOOL" UUID="6444EC6206AF4B56963C643332DFC7EF"/>
+<Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="6C30B1D93432433FB6166D38399DE9E4"/>
+<Field Comment="Клапан топливного газа УПТН закрыт" Name="KE31_OF" Type="BOOL" UUID="209545EE51B0409990BF248F50EEA60F"/>
+<Field Comment="Кран Кр8.1 открыт" Name="Kr8_1_ON" Type="BOOL" UUID="945C372394834B99BFA379E999958DE1"/>
+<Field Comment="Кран Кр8.1 закрыт" Name="Kr8_1_OF" Type="BOOL" UUID="8924C7AC08E4466DB797A3943C07A3B6"/>
+<Field Comment="Кран Кр8.1, местное управление" Name="Kr8_1_MU" Type="BOOL" UUID="11CFF4875D7F4016A87577B8FEA5C080"/>
+<Field Comment="Кран Кр8.1, неисправность" Name="Kr8_1_FLT" Type="BOOL" UUID="E2A1818F5D474602A870A1966D5CCCD7"/>
+<Field Comment="Кран Кр8.1a открыт" Name="Kr8_1A_ON" Type="BOOL" UUID="AA8DF7E301804802A863C4B524DD8979"/>
+<Field Comment="Кран Кр8.1a закрыт" Name="Kr8_1A_OF" Type="BOOL" UUID="0FF354F628C84688849EE013CF62DE1A"/>
+<Field Comment="Кран Кр8.1a, местное управление" Name="Kr8_1A_MU" Type="BOOL" UUID="CE09089B4B3E458FAB5E96A7D477FB66"/>
+<Field Comment="Кран Кр8.1a, неисправность" Name="Kr8_1A_FLT" Type="BOOL" UUID="8B679A77A57C4BB9BBB29EEA86CBC6DD"/>
+<Field Comment="Вытяжной вентилятор блока технологии (АМ1-1) включен" Name="VnV_BT_ON" Type="BOOL" UUID="276E4A5BAE8C4A5AB44F1F4012E36F35"/>
+<Field Comment="Вытяжной вентилятор блока технологии (АМ1-1) неисправен" Name="VnV_BT_FLT" Type="BOOL" UUID="B035C8872109413F884227CED8EB7D5F"/>
+<Field Comment="Вытяжной вентилятор УПТН (АМ3-1) включен" Name="VnV_UPNT_ON" Type="BOOL" UUID="7ECA6973568F462EB849E1F7DADDCCEB"/>
+<Field Comment="Вытяжной вентилятор УПТН (АМ3-1) неисправен" Name="VnV_UPNT_FLT" Type="BOOL" UUID="62333CF32A554B139F04614FC186DAEE"/>
+<Field Comment="Резерв" Name="Res_6" Type="BOOL" UUID="308CB726090D457AADF07285F33ACAB7"/>
+<Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="59F459B399B44D30BC2E923321B65D41"/>
+<Field Comment="Резерв" Name="Res_8" Type="BOOL" UUID="438B3723F3774587B9CD54B83B189B6A"/>
+<Field Comment="Загазованность обобщенный порог 1 (СПАиКЗ)" Name="Gas_pv" Type="BOOL" UUID="D59A3AB382EA40E5A77514AD88DC74E6"/>
+<Field Comment="Загазованность обобщенный порог 2 (СПАиКЗ)" Name="Gas_av" Type="BOOL" UUID="4369719F41BE47ED9A52692354C14AF6"/>
+<Field Comment="Пожар блока технологического УПТИГ общий (СПАиКЗ)" Name="Fire_BT" Type="BOOL" UUID="B590C3E9DE0D4B669F437AA97F9673AE"/>
+<Field Comment="Неисправность пожарной сигнализации (СПАиКЗ)" Name="AKZ_FLT" Type="BOOL" UUID="E6E91337309B4B0296DB0232819FE136"/>
+<Field Comment="Загазованность СО узла подготовки теплоносителя порог 1" Name="GasCO_pv" Type="BOOL" UUID="0B06C63A19164B5ABAC65BAAEF1C3388"/>
+<Field Comment="Загазованность СО узла подготовки теплоносителя порог 2" Name="GasCO_av" Type="BOOL" UUID="94B43FE5DFE44B93AE75CC319C506C1A"/>
+<Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="93834B77518F4DC6B5B5AF46CBBB9831"/>
+<Field Comment="Резерв" Name="Res_10" Type="BOOL" UUID="5FDC0DA541634E6AA8C4B37FA46A5D13"/>
+<Field Comment="Экстренный останов Цеха (ЭО)" Name="EO_Shop" Type="BOOL" UUID="5C399238C8B74B04BDEE6B645F90F7CE"/>
+<Field Comment="Аварийный останов цеха 1 степени (АО-1)" Name="AO1_Shop" Type="BOOL" UUID="9286C729DEAF4BB6ABFB530FC8EC4C9C"/>
+<Field Comment="Аварийный останов цеха 2 степени (АО-2)" Name="AO2_Shop" Type="BOOL" UUID="BDE779C1440A4C4BBD9DF5F5EC4878C5"/>
+<Field Comment="Наличие напряжения 380В на вводе 1" Name="U1_AC380_ok" Type="BOOL" UUID="A900BC7D91064DA9A06B53CDF6A2A177"/>
+<Field Comment="Наличие напряжения 380В на вводе 2" Name="U2_AC380_ok" Type="BOOL" UUID="EE917442A80249E288D9C45129CC2E5A"/>
+<Field Comment="Резерв" Name="Res_11" Type="BOOL" UUID="8F241A4B59094F04BBCEC0F2D40EDC69"/>
+<Field Comment="Резерв" Name="Res_12" Type="BOOL" UUID="0C09C844F5634B168A4CB31021838C1F"/>
+<Field Comment="Резерв" Name="Res_13" Type="BOOL" UUID="F21743B2331E46999166F79653306837"/>
+<Field Comment="Наличие напряжения 220В на 1СШ ВРУ L1" Name="U1a_VRU_ok" Type="BOOL" UUID="75E31275250E453FBF7FD6488ECCC87E"/>
+<Field Comment="Наличие напряжения 220В на 1СШ ВРУ L2" Name="U1b_VRU_ok" Type="BOOL" UUID="26B83F93CE304CBB801DCD1C8E035E07"/>
+<Field Comment="Наличие напряжения 220В на 1СШ ВРУ L3" Name="U1c_VRU_ok" Type="BOOL" UUID="E8EEB7F51FD249889BAC47E784EFFDF6"/>
+<Field Comment="Наличие напряжения 220В на 2СШ ВРУ L1" Name="U2a_VRU_ok" Type="BOOL" UUID="1CE755DF26D347949E273E6BE4A2B7CE"/>
+<Field Comment="Наличие напряжения 220В на 2СШ ВРУ L2" Name="U2b_VRU_ok" Type="BOOL" UUID="8357CB7FF1F54CDFAF774ED844C2B166"/>
+<Field Comment="Наличие напряжения 220В на 2СШ ВРУ L3" Name="U2c_VRU_ok" Type="BOOL" UUID="429C58985F4748BEA8663057320D36EB"/>
+<Field Comment="Выключатель ввода 1 включен" Name="Q1_ON" Type="BOOL" UUID="08B8E95BA5E4457C8CE951E05838B4F5"/>
+<Field Comment="Выключатель ввода 1 отключен" Name="Q1_OF" Type="BOOL" UUID="10671DA582DF4CB59CDD34DF5A2A409B"/>
+<Field Comment="Выключатель ввода 1 отключен защитой" Name="Q1_AOF" Type="BOOL" UUID="022A6FEC83284CA494ECA430CB53CCC1"/>
+<Field Comment="Выключатель ввода 2 включен" Name="Q2_ON" Type="BOOL" UUID="40F566F1A19E4A299A18062307B0DC36"/>
+<Field Comment="Выключатель ввода 2 отключен" Name="Q2_OF" Type="BOOL" UUID="837CFA7595B044E39577CDC730BB96F3"/>
+<Field Comment="Выключатель ввода 2 отключен защитой" Name="Q2_AOF" Type="BOOL" UUID="569B9722B54241139675A34BE28BF978"/>
+<Field Comment="Резерв" Name="Res_14" Type="BOOL" UUID="C2E00C048D984B47BA325538B2992251"/>
+<Field Comment="Резерв" Name="Res_15" Type="BOOL" UUID="6FE29808C28B49B59DB2286731D38707"/>
+<Field Comment="Резерв" Name="Res_16" Type="BOOL" UUID="09C0BA40DC374F68BF8CEE9ECF7D93B1"/>
+<Field Comment="Резерв" Name="Res_17" Type="BOOL" UUID="33755438ABF643E09F4C299CA3B5C18A"/>
+<Field Comment="Секционный выключатель включен" Name="QS_ON" Type="BOOL" UUID="FD041B0099DC4D24A9EE5748DEECA216"/>
+<Field Comment="Секционный выключатель отключен" Name="QS_OF" Type="BOOL" UUID="D1CA0B4EB01F48E28589AEFC1737D948"/>
+<Field Comment="Секционный выключатель отключен защитой" Name="QS_AOF" Type="BOOL" UUID="34AD4FC0249741D6A868D339F0A05684"/>
+<Field Comment="АВР включен" Name="AVR_ON" Type="BOOL" UUID="162C9CE7F8D74CD3951EAAB5954D48EE"/>
+<Field Comment="АВР отключен" Name="AVR_OF" Type="BOOL" UUID="FEF5BFB09F034335A934D46F3A5A44AF"/>
+<Field Comment="Резерв" Name="Res_18" Type="BOOL" UUID="F7CDFC3ADBED462A8328F53EC48E7997"/>
+<Field Comment="Резерв" Name="Res_19" Type="BOOL" UUID="39DB9CCF26554AEE92167F3833BC6A15"/>
+<Field Comment="Резерв" Name="Res_20" Type="BOOL" UUID="A63A42C7481E46CAA2233685ACCA9429"/>
+<Field Comment="Резерв" Name="Res_21" Type="BOOL" UUID="53D090A0151143D6AB396200E7E465B9"/>
+<Field Comment="Резерв" Name="Res_22" Type="BOOL" UUID="FA7055EB7B004E1EB04E4CD3D437FEA3"/>
+<Field Comment="Резерв" Name="Res_23" Type="BOOL" UUID="2512500E5D2D43CABB8A2F9FFC23D445"/>
+<Field Comment="Резерв" Name="Res_24" Type="BOOL" UUID="130BFA4B06B5489D9C56C80F1F74C615"/>
+<Field Comment="Резерв" Name="Res_25" Type="BOOL" UUID="CBEC40B1D1584194AF04D6C83B00C4FD"/>
+<Field Comment="Резерв" Name="Res_26" Type="BOOL" UUID="0BD60EC27DE14152880C9FFDB65CF176"/>
+<Field Comment="Резерв" Name="Res_27" Type="BOOL" UUID="0A3E18BCAA684BF6BE0E113ACCDAB93F"/>
+<Field Comment="Резерв" Name="Res_28" Type="BOOL" UUID="37AD46EEB13B4966A1783D81B39B6C69"/>
+<Field Comment="Контроль основного питания ~220 В" Name="Chk_AC220_SAU" Type="BOOL" UUID="475D279F0BB440029BF835103DDCD6AE"/>
+<Field Comment="Контроль резервного питания =220 В" Name="Chk_DC220_SAU" Type="BOOL" UUID="4D3489A7F4E74D7790521EE52A19266A"/>
+<Field Comment="Автоматы питания включены" Name="OF_ON" Type="BOOL" UUID="63291D293B4C4303B65946DEFF128DF4"/>
+<Field Comment="Контроль исправности разрядников" Name="Chk_razr" Type="BOOL" UUID="C770A76DBF894EA58F2DCEF592292060"/>
+<Field Comment="Исправность осн. ИП =24 В внутренних цепей" Name="DC24osn_Int_ok" Type="BOOL" UUID="77C806C9B2564B42B1AB00A4B26921EE"/>
+<Field Comment="Исправность рез. ИП =24 В внутренних цепей" Name="DC24rez_Int_ok" Type="BOOL" UUID="17537F4CE67C4AB19DB98205BAA530E0"/>
+<Field Comment="Исправность осн. ИП =24В  внешн. AI, AO, DI" Name="DC24osn_IO_ok" Type="BOOL" UUID="A94A105A09C744E5B8A25A8799CF30E9"/>
+<Field Comment="Исправность рез. ИП =24В  внешн. AI, AO, DI" Name="DC24rez_IO_ok" Type="BOOL" UUID="95133E8CF1DD47B1B5BAEF0F7141AAD0"/>
+<Field Comment="Исправность осн. ИП =24 В DO внешних цепей" Name="DC24osn_Ext_ok" Type="BOOL" UUID="300BFBB0895F4A72B3112486365F2027"/>
+<Field Comment="Исправность рез. ИП =24 В DO внешних цепей" Name="DC24rez_Ext_ok" Type="BOOL" UUID="6AB5C94E2F71497C8790446135609DAA"/>
+<Field Comment="Двери шкафа отрыты" Name="Cabin_open" Type="BOOL" UUID="70191A8521A74865A9B183D4894F230D"/>
+<Field Comment="Резерв" Name="Res_29" Type="BOOL" UUID="52869E379E1740098C4F36315A2B300F"/>
+<Field Comment="Резерв" Name="Res_30" Type="BOOL" UUID="75EE706DEF5E4E58ABED8F1960D221C5"/>
+<Field Comment="Резерв" Name="Res_31" Type="BOOL" UUID="3D2C7BE82D2E444CACAAEA04CD4A6A80"/>
+<Field Comment="Резерв" Name="Res_32" Type="BOOL" UUID="915B5EB7CFA04B08B0C3CD4DC64C8FC9"/>
+<Field Comment="Резерв" Name="Res_33" Type="BOOL" UUID="28A8134AFCED4453A993F0248EFAC56E"/>
+<Field Comment="Контроль основного питания  БЭАО ~220 В" Name="Chk_AC220_BEO" Type="BOOL" UUID="71140A9DA29D4FDBAFE7F5C2706BCFA8"/>
+<Field Comment="Контроль резервного питания  БЭАО =220 В" Name="Chk_DC220_BEO" Type="BOOL" UUID="5230B42BD95C4519A0C483BF49AF01B1"/>
+<Field Comment="Исправность осн. ИП =24В БЭАО" Name="DC24osn_BEO_ok" Type="BOOL" UUID="45F4273F25D249C5A069AE17A9F65D20"/>
+<Field Comment="Исправность рез. ИП =24В БЭАО" Name="DC24rez_BEO_ok" Type="BOOL" UUID="4FCF1585C27C495AB4F590CFF6A7F87A"/>
+<Field Comment=" ЭО от БЭАО" Name="EO_BEO" Type="BOOL" UUID="614D3780E38A4136BE54F8B48A779210"/>
+<Field Comment=" ЭО от БЭАО. КЦД" Name="EO_BEO_KCD" Type="BOOL" UUID="AF57383D3A3C4CA2B826F06B0B52860C"/>
+<Field Comment="Резерв" Name="Res_34" Type="BOOL" UUID="B384D336634745A5963AC8A130AFC828"/>
+<Field Comment="Резерв. КЦД" Name="Res_35" Type="BOOL" UUID="39F3736A66564276B19F4E6925D260F4"/>
+<Field Comment="Резерв" Name="Res_36" Type="BOOL" UUID="CA2375A3B254430F8E3D8DE6121A6839"/>
+<Field Comment="Резерв. КЦД" Name="Res_37" Type="BOOL" UUID="9D3BE469C9A1476A9D912125667FBEDA"/>
+<Field Comment="Резерв" Name="Res_38" Type="BOOL" UUID="D3600CD73F9E4A8B90B73D12BE3C0638"/>
+<Field Comment="Резерв. КЦД" Name="Res_39" Type="BOOL" UUID="109C3FD6CACC4A37A171FB570989DDFD"/>
+<Field Comment="Готовность БЭАО" Name="BEO_Rdy" Type="BOOL" UUID="0D1BD6A711E94F4BA9F1E4501A777093"/>
+<Field Comment="АО (в ПЛК)" Name="AO_PLC" Type="BOOL" UUID="AFA4FEBBDEA643BB83D969F6DA542BEB"/>
+<Field Comment="Квитирование" Name="Kn_Quit" Type="BOOL" UUID="2525B7A2BBE34D5D9938AEECA8ABE027"/>
+<Field Comment="Резерв внутр." Name="Res_40" Type="BOOL" UUID="7C6CADE7AE8941E58EAEB52515806B81"/>
+<Field Comment="Клапан сброса НД выход 1 (КЭ4-1). КЦУ" Name="KE41_ON_KCU" Type="BOOL" UUID="A8F58639737D4370916FE54110F032C1"/>
+<Field Comment="Клапан сброса НД выход 2 (КЭ4-2). КЦУ" Name="KE42_ON_KCU" Type="BOOL" UUID="1D8C27FB6BE24E1BBCC6E3DE7CEFF5D0"/>
+<Field Comment="Клапан отсечной ТГ в УПТН (КЭ3-1). КЦУ" Name="KE31_ON_KCU" Type="BOOL" UUID="99E6A814C595466BB1F2309189A53C81"/>
+<Field Comment="Резерв" Name="Res_41" Type="BOOL" UUID="7915DDFD482A4087BC5EF782EBBFE128"/>
+<Field Comment="Кран Кр8.1 закрыть. КЦУ" Name="Kr8_1_OF_KCU" Type="BOOL" UUID="F43A53D87A864C279589B7AA2E0CE0E5"/>
+<Field Comment="Кран Кр8.1а открыть. КЦУ" Name="Kr8_1A_ON_KCU" Type="BOOL" UUID="952755581DF64AF2964C7009A6B6579D"/>
+<Field Comment="Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыть" Name="Kr2_1_3_ON_KCU" Type="BOOL" UUID="11A9F8A5B3354203A200C966A422C68D"/>
+<Field Comment="Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыть" Name="Kr2_1_3_OF_KCU" Type="BOOL" UUID="6C57019EE29F4C76B4B3BCA3B3B5508E"/>
+<Field Comment="Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыть" Name="Kr2_1_4_ON_KCU" Type="BOOL" UUID="93D035BC6EB3481E8F4C423FE9A62379"/>
+<Field Comment="Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыть" Name="Kr2_1_4_OF_KCU" Type="BOOL" UUID="8787BD9E95164EFDAD7BFB787A1BE7DF"/>
+<Field Comment="Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыть" Name="Kr2_2_3_ON_KCU" Type="BOOL" UUID="4CEAEBFF081C49AD9FA22C27673D8A76"/>
+<Field Comment="Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыть" Name="Kr2_2_3_OF_KCU" Type="BOOL" UUID="208998619DF24B15B48C98E1B22D009D"/>
+<Field Comment="Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыть" Name="Kr2_2_4_ON_KCU" Type="BOOL" UUID="D6B00B8E219F474FA2D852824E6BF50C"/>
+<Field Comment="Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыть" Name="Kr2_2_4_OF_KCU" Type="BOOL" UUID="0DE03B730221480D83CD4DF4661569E9"/>
+<Field Comment="Резерв. КЦУ" Name="Res_42" Type="BOOL" UUID="A365BA93BE8F44E3AD271E3A8CBDA8C3"/>
+<Field Comment="Резерв. КЦУ" Name="Res_43" Type="BOOL" UUID="5B0A7CAFC641487A994FF7A989312F65"/>
+</Fields>
+</Type>

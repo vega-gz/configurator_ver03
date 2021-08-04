@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_NMS_BTN" Kind="Struct" UUID="4AD69D094D6D20FECA8B6A89EE9CA01E">
+	<Fields>
+		<Field Name="Deblock" Type="BOOL" UUID="43BE07A94B6C337C1C30A19FC0471495" Comment="Деблокировка НМС" />
+		<Field Name="Sound_Off" Type="BOOL" UUID="6138198847E58ACA7370F0A23468C672" Comment="Отключить звук (НМС)" />
+		<Field Name="AO" Type="BOOL" UUID="B36F35FF4A2D9AD29F8897962E7C0170" Comment="Аварийный останов НМС" />
+		<Field Name="DU_IM" Type="BOOL" UUID="K7Y4NQQNS3GUZMPZUSRWY4TCHI" Comment="ДУ ИМ" />
+		<Field Name="ArchUser" Type="BOOL" UUID="EDVS3FOKBV3ELIEQ3L6KWUAPDQ" Comment="Запись пользовательского архива" />
+	</Fields>
+</Type>

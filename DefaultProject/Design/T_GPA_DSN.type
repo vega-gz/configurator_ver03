@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_DSN" Kind="Struct" Comment="Drum Step Number (номера шагов в барабанах)" UUID="O7QJB4J3IQQULIDX4HL7EPICG4">
+	<Fields>
+		<Field Name="AOs" Type="INT" UUID="AR2YMZCANVGEBIOH3A4QCM6M2M" Comment="Номер шага в барабане АО сс" />
+		<Field Name="AOb" Type="INT" UUID="2YXK5HMAWAOUVIYTYKHIVRK3QM" Comment="Номер шага в барабане АО бс" />
+		<Field Name="NOs" Type="INT" UUID="F3TXIFAN42OU3NR3FN6C6P7BFM" Comment="Номер шага в барабане НО сс" />
+		<Field Name="NOb" Type="INT" UUID="SYPYWR6DQ5XUHHRQDYPFI77VXM" Comment="Номер шага в барабане НО бс" />
+		<Field Name="VOs" Type="INT" UUID="2SXWHJ5WCZFE5M4Z52FYLS7FGY" Comment="Номер шага в барабане ВО сс" />
+		<Field Name="VOb" Type="INT" UUID="LXFU2KV6HMWERL24PEMB2HVGGE" Comment="Номер шага в барабане ВО бс" />
+		<Field Name="Fire" Type="INT" UUID="356KK67E6UWUFLSNVRWEQTNFRY" Comment="Номер шага в барабане Пожар" />
+		<Field Name="Crank" Type="INT" UUID="XTK6TDSU7CUEFBZ5RDURDC3UYA" Comment="Номер шага в барабане ХП (ТП)" />
+		<Field Name="APKng" Type="INT" UUID="5CNO2FRGXUSURANONGW7EJ7MMM" Comment="Номер шага в барабане АПК" />
+		<Field Name="APMng" Type="INT" UUID="5CCGUSZSBJ5EDM76QIKQUEDIDU" Comment="Номер шага в барабане АПM" />
+		<Field Name="PZM" Type="INT" UUID="FWU6YG2RYDXURG4TTTPS7UAOCI" Comment="Номер шага в барабане ПЗМ" />
+		<Field Name="KPK" Type="INT" UUID="ISXQC7GGAABUPKXAZEKYQRKPXM" Comment="Номер шага в барабане КПК" />
+		<Field Name="StopD" Type="INT" UUID="64UHUF5ZVXMUNN4OSFHEROIENI" Comment="Номер шага в барабане останова Д" />
+		<Field Name="StrK" Type="INT" UUID="4FKY7NDR5DBEXHQF46BXIZOTRU" Comment="Номер шага в барабане стравл. К" />
+		<Field Name="StartMSK" Type="INT" UUID="LCX2J5WOMQMEZDH4BK74OFLEWA" Comment="Номер шага в барабане запуска МС К" />
+		<Field Name="StartMSD" Type="INT" UUID="VU2APPASSEOEDBJANOULZHLNUY" Comment="Номер шага в барабане запуска МС Д" />
+		<Field Name="StartMSR" Type="INT" UUID="3CW5LVLMJH7UBFPCOEH7HDX7I4" Comment="Номер шага в барабане запуска МС Р" />
+		<Field Name="StartCrank" Type="INT" UUID="6JZRCIJY4UZEDFAGDCAKMBS4J4" Comment="Номер шага в барабане запуска раскрутки" />
+		<Field Name="StopCrank" Type="INT" UUID="QNV26LAVLJKEZK5LPOWWUYCYVU" Comment="Номер шага в барабане останова раскрутки" />
+		<Field Name="ZapK" Type="INT" UUID="VEHURZKG3STU3OCQMUXOJGXFRA" Comment="Номер шага в барабане заполнения К" />
+		<Field Name="StartD" Type="INT" UUID="QO5MWVNMZPBETK6FHZFVQLOEFQ" Comment="Номер шага в барабане запуска Д" />
+		<Field Name="StartOxlK" Type="INT" UUID="CY6LTDS6AZEULGG2DXINO5CPBE" Comment="Номер шага в барабане пуска охл. K" />
+		<Field Name="APKg" Type="INT" UUID="OMXSDHMQUJXEXCZJYX6ORTJXGY" Comment="Номер шага в барабане АПК (с газом)" />
+		<Field Name="APMg" Type="INT" UUID="PGTX6B35W5QU3GOOIFBZDEOKIY" Comment="Номер шага в барабане АПМ (с газом)" />
+		<Field Name="Rp_KM" Type="INT" UUID="MHXXODRQIEBERJONUADFOO52ZQ" Comment="Номер шага в барабане подрежима КМ" />
+		<Field Name="Rp_MK" Type="INT" UUID="4IDYSFK2OUEEXNFOKVGB3FH2PU" Comment="Номер шага в барабане подрежима MK" />
+		<Field Name="StopOxlK" Type="INT" UUID="2A7OT46VS4WU5HAREVQ4HFD6MY" Comment="Номер шага в барабане остановки охл. K" />
+		<Field Name="WrmM_Kompr" Type="INT" UUID="HG23RIGQUNFU5D26DWYHFMJHUI" Comment="Номер шага в барабане подогрева массла К" />
+		<Field Name="DolivKar" Type="INT" UUID="IQO3UYCT2TIE7JCQJPUYKUXJU4" Comment="Номер шага в барабане долива масла в картер" />
+	</Fields>
+</Type>

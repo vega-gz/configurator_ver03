@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_NMS_DO_DRV" UUID="5AC066CD94E24AEF8377CFBE08499D43">
+    <Fields>
+        <Field Comment="Резерв" Name="Res_0" Type="BOOL" UUID="38B54AA62A434F81BE8C109606503DA1"/>
+        <Field Comment="Резерв" Name="Res_1" Type="BOOL" UUID="E1CCD7FEDC2647BBB0B11EC014C41A76"/>
+        <Field Comment="Резерв" Name="Res_2" Type="BOOL" UUID="9DF35752381D4B3CA3DF9C3BD0FDA465"/>
+        <Field Comment="Резерв" Name="Res_3" Type="BOOL" UUID="B2832910231E427F9456E31FCE9EF87C"/>
+        <Field Comment="Резерв" Name="Res_4" Type="BOOL" UUID="ED26AA059D0F42C6B06E0C692B63D3B2"/>
+        <Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="172ACC93C81D428A8DB8C6474A5CA24B"/>
+        <Field Comment="Резерв" Name="Res_6" Type="BOOL" UUID="92E0AB6D16014A81A40611D2E84E01B8"/>
+        <Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="D3297F38A57A42DB971298C7C0C70BDA"/>
+        <Field Comment="Резерв" Name="Res_8" Type="BOOL" UUID="8333076769274F9E8B43F34DE1961749"/>
+        <Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="D15597D67C454395981DC3B78C49C3CF"/>
+        <Field Comment="Резерв" Name="Res_10" Type="BOOL" UUID="88C1FD399207473D9C8BD4DDDCCA289E"/>
+        <Field Comment="Резерв" Name="Res_11" Type="BOOL" UUID="10FDBA53574B46739F771619C60AE84E"/>
+        <Field Comment="Резерв" Name="Res_12" Type="BOOL" UUID="DC5348CAB647470F8E2E10596F36E818"/>
+        <Field Comment="Резерв" Name="Res_13" Type="BOOL" UUID="9201354DA93348459899B760A7EE56E4"/>
+        <Field Comment="Резерв" Name="Res_14" Type="BOOL" UUID="56ECC25274CA47FA9E7C66B2498B73C1"/>
+        <Field Comment="Резерв" Name="Res_15" Type="BOOL" UUID="AA5551024C6A47099C9DF41E36EC5600"/>
+        <Field Comment="Насос Н1 отключить" Name="N1_OF" Type="BOOL" UUID="80C9A8C7C00B4E808B0BEFE91F92DD79"/>
+        <Field Comment="Насос Н2 отключить" Name="N2_OF" Type="BOOL" UUID="56A0B0A2312145E3BB97C6B2ED5EF02B"/>
+        <Field Comment="Насос Н3 отключить" Name="N3_OF" Type="BOOL" UUID="829D198728D546DCBB50E8B8E2326555"/>
+        <Field Comment="Насос Н4 отключить" Name="N4_OF" Type="BOOL" UUID="6774DE3781E049F7A2484A9E94636A3A"/>
+        <Field Comment="Насос Н5 отключить" Name="N5_OF" Type="BOOL" UUID="6A01A8B21ACB484C87092F83F108B7D4"/>
+        <Field Comment="Насос Н6 отключить" Name="N6_OF" Type="BOOL" UUID="2A4D073322204255AA207AED2FCA348F"/>
+        <Field Comment="Резерв" Name="Res_16" Type="BOOL" UUID="6D647F4D7A444274B27DFCE62DDD30D5"/>
+        <Field Comment="Резерв" Name="Res_17" Type="BOOL" UUID="029E8E4A30EF4B6D8AB75C71D64CB5EB"/>
+        <Field Comment="Резерв" Name="Res_18" Type="BOOL" UUID="46336F12DC9044D1B85005D3C6C5E25A"/>
+        <Field Comment="Резерв" Name="Res_19" Type="BOOL" UUID="76FB802E752A4BE38ACAD4EF31D021AC"/>
+        <Field Comment="Нагрев разрешен (Шкаф ШУН-202Г(1))" Name="EN_SHUN1" Type="BOOL" UUID="45328E0BC0A9404C886157EF9C35F31C"/>
+        <Field Comment="Нагрев разрешен (Шкаф ШУН-202Г(2))" Name="EN_SHUN2" Type="BOOL" UUID="6D3F01D0DD8A4C1EAF5C12EE2176A33A"/>
+        <Field Comment="Нагрев разрешен (Шкаф ШУН-202Г(3))" Name="EN_SHUN3" Type="BOOL" UUID="70DB4C700EA446B59ED607D428FC8220"/>
+        <Field Comment="Нагрев разрешен (Шкаф ШУН-202Г(4))" Name="EN_SHUN4" Type="BOOL" UUID="6CE6F2AE35C54895A1CCC5E9F7E9A6FC"/>
+        <Field Comment="Нагрев разрешен (Шкаф ШУН-202Г(5))" Name="EN_SHUN5" Type="BOOL" UUID="19971EC746FC43EF85068DCE726659F8"/>
+        <Field Comment="Нагрев разрешен (Шкаф ШУН-202Г(6))" Name="EN_SHUN6" Type="BOOL" UUID="90F35F7E676646A686FD28343C9EB7D1"/>
+    </Fields>
+</Type>

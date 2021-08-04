@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Comment="Сигналы аналоговыых ИМ" Kind="Struct" Name="T_GPA_AIM" UUID="UVBXNVC5LHNERBSPUUEQJZUMEQ">
+<Fields>
+<Field Comment="Разрешение ДУ МОД1" Name="MOD1_Permit_DU" Type="BOOL" UUID="2Y7XDIUHBEBEDOZTV6ZHUUTNYQ"/>
+<Field Comment="Разрешение ДУ МОД2" Name="MOD2_Permit_DU" Type="BOOL" UUID="STFGL5MFCNLEVLEUAAXSLATJGE"/>
+<Field Comment="Задание на МОД1 при ДУ" Name="MOD1_SetDU" Type="REAL" UUID="BT3UBOX4LQLEDCJGOZHMZR4LV4"/>
+<Field Comment="Задание на МОД2 при ДУ" Name="MOD2_SetDU" Type="REAL" UUID="ALT2KYATIX2UNOU7RC5SRXBCLE"/>
+<Field Comment="Разрешение ДУ МОК1" Name="MON1_Permit_DU" Type="BOOL" UUID="T6XJ25KDOOWEZOOP2QGLC7N7GI"/>
+<Field Comment="Разрешение ДУ МОК2" Name="MON2_Permit_DU" Type="BOOL" UUID="ZNUNMDNH7PLU3J2NICXA6CK7CM"/>
+<Field Comment="Задание на МОК1 при ДУ" Name="MON1_SetDU" Type="REAL" UUID="VYLZCZXDZ72ULEXO4VJ3HLCR6Q"/>
+<Field Comment="Задание на МОК2 при ДУ" Name="MON2_SetDU" Type="REAL" UUID="UGS3DDT2OWDERAOXNJ2CSUDNGA"/>
+<Field Comment="Разрешение ДУ МОР1" Name="MOR1_Permit_DU" Type="BOOL" UUID="4F3DB5ZZWYHUXFO4X5RQXQPN24"/>
+<Field Comment="Разрешение ДУ МОР2" Name="MOR2_Permit_DU" Type="BOOL" UUID="JKNTDNAWDWAEBON3KVQDRRKR5E"/>
+<Field Comment="Задание на МОР1 при ДУ" Name="MOR1_SetDU" Type="REAL" UUID="CQROYEWLD2OUFI3Y4RMMZN3I7Y"/>
+<Field Comment="Задание на МОР2 при ДУ" Name="MOR2_SetDU" Type="REAL" UUID="UPODEILJNYYUVOKWY5ZSJP5UYI"/>
+<Field Comment="Разрешение ДУ МОР3" Name="MOR3_Permit_DU" Type="BOOL" UUID="ECR2J6Z3BOFEPC43ABSSCVNUA4"/>
+<Field Comment="Разрешение ДУ МОР4" Name="MOR4_Permit_DU" Type="BOOL" UUID="D7BJRQQPH5NUNBDEJME5QHLY4Q"/>
+<Field Comment="Задание на МОР3 при ДУ" Name="MOR3_SetDU" Type="REAL" UUID="M5V6FSX6U2VUNC3HHDWDQVTHB4"/>
+<Field Comment="Задание на МОР4 при ДУ" Name="MOR4_SetDU" Type="REAL" UUID="5AKB3FNYLIQUBKE4AIGUJ7NSP4"/>
+<Field Comment="Режим включения вентиляторов АВОГ1" Name="Mode_AVOG1" Type="INT" UUID="CILSBTF36IVEXBRGOVMPAPV6SE"/>
+<Field Comment="Режим включения вентиляторов АВОГ2" Name="Mode_AVOG2" Type="INT" UUID="5LZT4XRTM7OU5PL43ZDNODFC7Q"/>
+<Field Comment="Разрешение ДУ КлР1" Name="KLR1_Permit_DU" Type="BOOL" UUID="VFNYJDWKXFRU5ODGSIAFVMYWRM"/>
+<Field Comment="ДУ КлР1 включено" Name="KLR1_DU" Type="BOOL" UUID="FVEI52QZ7JUE5IWXEHZAALC7YE"/>
+<Field Comment="Задание на КлР1 при ДУ" Name="KLR1_SetDU" Type="REAL" UUID="HAYETVIPCHCE7IWLAIW3SCVFMU"/>
+<Field Comment="КлР1 открывается" Name="KLR1_isOn" Type="BOOL" UUID="VWYVCJIIS24UZCFAGUIRNHP6ZY"/>
+<Field Comment="КлР1 закрывается" Name="KLR1_isOf" Type="BOOL" UUID="A3GSRUOD5BHUDO7SVVKP3GS4AQ"/>
+<Field Comment="КлР1 неисправен" Name="KLR1_bad" Type="BOOL" UUID="WYK34GQNB2SU5BOZYWRKH77RZQ"/>
+<Field Comment="Разрешение ДУ КлР2" Name="KLR2_Permit_DU" Type="BOOL" UUID="5PX26DH5D3TENJEB7J2OF2F7U4"/>
+<Field Comment="ДУ КлР2 включено" Name="KLR2_DU" Type="BOOL" UUID="JAUSMOSCIZJEBAX7K3CZNPGEFM"/>
+<Field Comment="Задание на КлР2 при ДУ" Name="KLR2_SetDU" Type="REAL" UUID="MQPD35X6SDKEFONZ7S236AWXME"/>
+<Field Comment="КлР2 открывается" Name="KLR2_isOn" Type="BOOL" UUID="YTOJ7IHT5GOETPROWSER3CFGUQ"/>
+<Field Comment="КлР2 закрывается" Name="KLR2_isOf" Type="BOOL" UUID="XCZXADXG4OZEBIL3FYLHZE3IC4"/>
+<Field Comment="КлР2 неисправен" Name="KLR2_bad" Type="BOOL" UUID="HX3PVFWDZTJU5BNS5AHE3UP5I4"/>
+</Fields>
+</Type>

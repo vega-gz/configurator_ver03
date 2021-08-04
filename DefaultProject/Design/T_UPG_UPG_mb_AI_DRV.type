@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_UPG_UPG_mb_AI_DRV" UUID="81F30E8B2E1A433FAE0B3C2C05B127AB">
+<Fields>
+<Field Comment="Давление газа на входе УПТИГ (ВР1-1)" Name="Pg_in_UPG" Type="REAL" UUID="1119291B99DE4DDBAC237BCC92CD092C"/>
+<Field Comment="Температура на входе УПТИГ (ВК1-1)" Name="Tg_in_UPG" Type="REAL" UUID="FBA545FFFF4D4292B2D1FB977FFDF83B"/>
+<Field Comment="Перепад давления на узле очистки Ф2.1 (ВР2-1)" Name="dPg_F21" Type="REAL" UUID="1C9906F5B8B7475D8C5B3FD8E0C1ED8D"/>
+<Field Comment="Резерв" Name="Res_0" Type="REAL" UUID="5C2129444D394F0E8845A89896F3ED71"/>
+<Field Comment="Температура на входе узла ПГ (ВК3-1)" Name="Tg_in_Warm" Type="REAL" UUID="680C25BFE4C744D6870A68C9CD212ABA"/>
+<Field Comment="Температура на выходе узла ПГ  (ВК3-2)" Name="Tg_out_Warm" Type="REAL" UUID="2DF9B24A47F84C23BCF919FAFD59D910"/>
+<Field Comment="Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)" Name="Pg_out3_UPG" Type="REAL" UUID="40315AE4B66E4A8ABB3802DB68E9FE1D"/>
+<Field Comment="Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)" Name="Tg_out3_UPG" Type="REAL" UUID="4DE3758AA0E44914A48A52FC426672E9"/>
+<Field Comment="Давление на выходе БР выход 1 (ВР4-1)" Name="Pg_out1_BR" Type="REAL" UUID="6D8EBAEF6BD7465E95F7F2CD34826F51"/>
+<Field Comment="Давление на выходе 1 УПТИГ (ВР1-2)" Name="Pg_out1_UPG" Type="REAL" UUID="1F8CF1BDD708405FA5DDF93A354315AA"/>
+<Field Comment="Температура на выходе 1 УПТИГ (ВК1-2)" Name="Tg_out1_UPG" Type="REAL" UUID="CD39CCC0B7774B999CACC0866B772F09"/>
+<Field Comment="Резерв" Name="Res_1" Type="REAL" UUID="9F3E5CA1E3254F10A97980A765F3E58C"/>
+<Field Comment="Давление на выходе БР выход 2 (ВР4-2)" Name="Pg_out2_BR" Type="REAL" UUID="C951549FC42D4FA4954BBA8A1CB30D5F"/>
+<Field Comment="Давление на выходе 2 УПТИГ (ВР1-3)" Name="Pg_out2_UPG" Type="REAL" UUID="6884833A0A9F4A3EBF2753EA32FBCD5F"/>
+<Field Comment="Температура на выходе 2 УПТИГ (ВК1-3)" Name="Tg_out2_UPG" Type="REAL" UUID="4CE07D4EC1BD45A4AB0EADBE4365B076"/>
+<Field Comment="Резерв" Name="Res_2" Type="REAL" UUID="677A198D486248E481BC4089F6FD3FCF"/>
+<Field Comment="Температура в помещении операторной (ВК11-1)" Name="T_OProom" Type="REAL" UUID="3B574EF090C2469CAAF525E7AB00BA33"/>
+<Field Comment="Уровень в ЕСК" Name="Lk_ESK" Type="REAL" UUID="714D62C823B74FA59594F9497BA26E19"/>
+<Field Comment="Резерв" Name="Res_3" Type="REAL" UUID="BCAB0D0B246A4CDD90D05EAA339799AF"/>
+<Field Comment="Резерв" Name="Res_4" Type="REAL" UUID="BB2EFFD5B039441FA7E1701E7CC05D63"/>
+<Field Comment="Резерв" Name="Res_5" Type="REAL" UUID="78F1306B2F2C4B188612E00B1FC009D7"/>
+<Field Comment="Резерв" Name="Res_6" Type="REAL" UUID="6B45041E7C1949BE9BA589DACD3C7451"/>
+<Field Comment="Резерв" Name="Res_7" Type="REAL" UUID="A61E494ED31B44E984A7308E138B21D5"/>
+<Field Comment="Резерв" Name="Res_8" Type="REAL" UUID="BA546DA915BA4DA5B681624BF077FA01"/>
+<Field Comment="Измерение основного напряжения" Name="Uosn_SAU" Type="REAL" UUID="32A8AC77F728445DA45117BECBBFE947"/>
+<Field Comment="Измерение резервного напряжения" Name="Urez_SAU" Type="REAL" UUID="F23E96340DF04E549554D73C5EF00235"/>
+<Field Comment="Резерв" Name="Res_9" Type="REAL" UUID="9CF07FA197144280A887E6BB7BB29259"/>
+<Field Comment="Резерв" Name="Res_10" Type="REAL" UUID="27058F90B0154CC0BDDBD65E4146E510"/>
+</Fields>
+</Type>

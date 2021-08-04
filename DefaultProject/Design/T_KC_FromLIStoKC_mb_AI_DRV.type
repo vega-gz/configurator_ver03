@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_FromLIStoKC_mb_AI_DRV" Kind="Struct" UUID="106CFE2697064920B8BA1E0B5728E2F5">
+	<Fields>
+		<Field Name="Patm_UPOU" Type="REAL" UUID="926896DA3EDF431BA3E2882047518C92" Comment="УПОУ: Давление атм. Воздуха" />
+		<Field Name="SF_1_1_AtmPress" Type="REAL" UUID="E4C6ABB104EB4517AC16BDBD8D530E7E" Comment="УЗРГ: Атмосферное давление SF11" />
+		<Field Name="SF_1_1_GuagePress" Type="REAL" UUID="BC62EABE19E641C88F553578587012FC" Comment="УЗРГ: Избыточное давление SF11" />
+		<Field Name="SF_1_1_AbsPress" Type="REAL" UUID="2DF847A0C547426C96E3D86B18CA71A8" Comment="УЗРГ: Абсолютное давление SF11" />
+		<Field Name="SF_1_1_DiffPress" Type="REAL" UUID="6399C1D628E547E49DE9A49C74D4F8BF" Comment="УЗРГ: Дифференциальное давление SF11" />
+		<Field Name="SF_1_1_Temperature" Type="REAL" UUID="6AF5C3F474FD4B86A3A41319147014CA" Comment="УЗРГ: Температура SF11" />
+		<Field Name="SF_1_1_FlowRate" Type="REAL" UUID="A0BBEF0790EB44838047EF81E4DA7817" Comment="УЗРГ: Приведенный  объемный расход SF11" />
+		<Field Name="SF_1_1_Power" Type="REAL" UUID="CFE02FA4290941CFBCEE9B594A3AFF54" Comment="УЗРГ: Расход энергии SF11" />
+		<Field Name="SF_1_1_Volume" Type="REAL" UUID="AF6BE6BED22C4619AD2F1025655C9450" Comment="УЗРГ: Приведенный объем с начала контактного часа SF11" />
+		<Field Name="SF_1_1_Energy" Type="REAL" UUID="157E09886A6A4CD7820066B77661CF44" Comment="УЗРГ: Энергия с начала контактного часа SF11" />
+		<Field Name="SF_1_1_Density" Type="REAL" UUID="BA876F1A07C64BA6B62AA428C1233A9F" Comment="УЗРГ: Плотность газа при стандартных условиях SF11" />
+		<Field Name="SF_1_1_Caloricity" Type="REAL" UUID="95160C8CFC0043C6B5604DC3B430F07D" Comment="УЗРГ: Объемная теплота сгорания газа SF11" />
+		<Field Name="SF_1_1_Mol_N2" Type="REAL" UUID="116606AB26A14756A0B1975F172D4D66" Comment="УЗРГ: Молярная доля N2 SF11" />
+		<Field Name="SF_1_1_Mol_CO2" Type="REAL" UUID="A3BE24276FD0455EAAF73A120CB139B0" Comment="УЗРГ: Молярная доля СО2 SF11  " />
+		<Field Name="SF_1_2_AtmPress" Type="REAL" UUID="1176F0B7E0D344319BD471F6CCA96FB8" Comment="УЗРГ: Атмосферное давление SF12" />
+		<Field Name="SF_1_2_GuagePress" Type="REAL" UUID="AA57615BBFA841F38D530BE98042D294" Comment="УЗРГ: Избыточное давление SF12" />
+		<Field Name="SF_1_2_AbsPress" Type="REAL" UUID="C3BC61AF3EEE4AEF9AA73070B8F0B8E6" Comment="УЗРГ: Абсолютное давление SF12" />
+		<Field Name="SF_1_2_DiffPress" Type="REAL" UUID="0EBDC80AB41049108C13B6CC19697E46" Comment="УЗРГ: Дифференциальное давление SF12" />
+		<Field Name="SF_1_2_Temperature" Type="REAL" UUID="9687B8AD6DA245759CF4B8CF994FB3D8" Comment="УЗРГ: Температура SF12" />
+		<Field Name="SF_1_2_FlowRate" Type="REAL" UUID="2AD23D40D4CD43E79EE1CAD00444C9B6" Comment="УЗРГ: Приведенный  объемный расход SF12" />
+		<Field Name="SF_1_2_Power" Type="REAL" UUID="F68BE81901E544F5999396C63CBB58A8" Comment="УЗРГ: Расход энергии SF12" />
+		<Field Name="SF_1_2_Volume" Type="REAL" UUID="2A70147531DE49C79DC5F5CBF23EFE67" Comment="УЗРГ: Приведенный объем с начала контактного часа SF12" />
+		<Field Name="SF_1_2_Energy" Type="REAL" UUID="A6548F0E26C94AEA885B684F7A7D4DB1" Comment="УЗРГ: Энергия с начала контактного часа SF12" />
+		<Field Name="SF_1_2_Density" Type="REAL" UUID="03938D3F17724AA39A2508FDF54C7B79" Comment="УЗРГ: Плотность газа при стандартных условиях SF12" />
+		<Field Name="SF_1_2_Caloricity" Type="REAL" UUID="764709A1EE3F47FD9468F20F2DADB046" Comment="УЗРГ: Объемная теплота сгорания газа SF12" />
+		<Field Name="SF_1_2_Mol_N2" Type="REAL" UUID="0AF405B161A949DF98A907C34378FD7A" Comment="УЗРГ: Молярная доля N2 SF12" />
+		<Field Name="SF_1_2_Mol_CO2" Type="REAL" UUID="9B30017084724B37900CBC201BCEC3CF" Comment="УЗРГ: Молярная доля СО2 SF12" />
+	</Fields>
+</Type>

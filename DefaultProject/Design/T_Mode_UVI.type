@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Mode_UVI" Kind="Struct" UUID="6EWLE7Q6WHZUXLCET2DNSPFPFI">
+	<Fields>
+		<Field Name="graph" Type="EE67E15142EC74278378C1A6B2ADA2E4" UUID="DYCQYUW7AGREVGFCI5JTW4ZSW4" Comment="Граф режима" />
+		<Field Name="FaultUVI" Type="BOOL" UUID="RGOYDEHJTE5E3GDESFJOOXRTVU" Comment="Нет режима" />
+		<Field Name="AOUVI" Type="BOOL" UUID="5AALTZA5BF2ENGSCGS6ZKMEJK4" Comment="АО" />
+		<Field Name="NormaUVI" Type="BOOL" UUID="J3G66JWKDANEFJOSWNFHNF76RY" Comment="Норма" />
+	</Fields>
+</Type>

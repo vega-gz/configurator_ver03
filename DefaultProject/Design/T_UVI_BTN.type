@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UVI_BTN" Kind="Struct" UUID="F6F8A1644103C100CCF3AE9D326C3D23">
+	<Fields>
+		<Field Name="Deblock" Type="BOOL" UUID="1356DCBF488EF37ABDE20788F813332F" Comment="Деблокировка УВИ" />
+		<Field Name="Sound_Off" Type="BOOL" UUID="3792A5E8485B892B2D766FA38CDEF508" Comment="Отключить звук (УВИ)" />
+		<Field Name="AO" Type="BOOL" UUID="B8A928524AE2A14E3EF357B7B0D72782" Comment="Аварийный останов УВИ" />
+		<Field Name="DU_IM" Type="BOOL" UUID="M7VUCS2BBQXEFC3UYQRROLQ4YA" Comment="ДУ ИМ" />
+		<Field Name="ArchUser" Type="BOOL" UUID="2H55KHSRZKMUVMQE2QWPGYECVY" Comment="Запись пользовательского архива" />
+	</Fields>
+</Type>

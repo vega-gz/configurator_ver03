@@ -126,6 +126,27 @@ public class TableTools {//ссылка на таблицу, массив шир
         }
     }
 
+//    // --- открыть сигнал в отдельном окне ---
+//      public static void OpenFrameEditableSignal(JTable jTable1) {
+//        int row = jTable1.getSelectedRow();
+//        if (row < 0) {
+//            row = 0;
+//        }
+//        int countcolumn = jTable1.getColumnCount();
+//        String nameSinglSeting = null;
+//        for (int i = 0; i < countcolumn; i++) {
+//            String nameColumn = jTable1.getColumnName(i);
+//            if (nameColumn.equals(globVar.TAGPLC)) {
+//                nameSinglSeting = (String) jTable1.getValueAt(row, i);
+//                break;
+//            }
+//        }
+//        SinglStrEdit sse = new SinglStrEdit(jTable1.getModel(), nameSinglSeting, jTable1.getName());
+//        sse.setVisible(true);
+//        rgf.reg(sse);
+//        sse.setFields(row);
+//    }
+    
     //----- Функция для настройки контекстного меню таблиц--------------Lev----//
     static public int setPopUpMenu(JTable jTable1, JPopupMenu popupMenu, MyTableModel tableModel, String title, RegistrationJFrame rgf, ArrayList<JFrame> listJF) {
         JMenuItem menuItemCopyStr = new JMenuItem("Скопировать строки");
@@ -137,9 +158,13 @@ public class TableTools {//ссылка на таблицу, массив шир
         JMenuItem menuItemIncertCells = new JMenuItem("Вставить ячейки");
         JMenuItem menuItemOpenWindow = null;
 
-        ImageIcon icon = new ImageIcon("C:\\Users\\cherepanov\\Desktop\\тестинг\\copy-file_icon-icons.com_56095.png");
+        ImageIcon icon_copy = new ImageIcon("icon_copy.png");
+        menuItemCopyStr.setRequestFocusEnabled(false);
+        menuItemCopyStr.setIcon(icon_copy); //   устанавливает необходимую иконку вставить
+        
+        ImageIcon icon_paste = new ImageIcon("icon_paste.png");
         menuItemCopyCells.setRequestFocusEnabled(false);
-        // menuItemCopyCells.setIcon(icon); //   устанавливает необходимую иконку
+        menuItemCopyCells.setIcon(icon_paste); //   устанавливает необходимую иконку вставить
         menuItemCopyCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
         menuItemIncertCells.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
 
@@ -162,6 +187,7 @@ public class TableTools {//ссылка на таблицу, массив шир
 
         if (rgf != null) {//---
             menuItemOpenWindow.addActionListener((ActionEvent event) -> {
+                
                 int row = jTable1.getSelectedRow();
                 if (row < 0) {
                     row = 0;
@@ -176,7 +202,8 @@ public class TableTools {//ссылка на таблицу, массив шир
                         break;
                     }
                 }
-                SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName(), listJF);
+                //SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName(), listJF);
+                SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName());
                 sse.setVisible(true);
                 rgf.reg(sse);
                 sse.setFields(row);
@@ -870,7 +897,8 @@ public class TableTools {//ссылка на таблицу, массив шир
     public static void jTable1MouseClicked(java.awt.event.MouseEvent evt, JTable jTable1, MyTableModel tableModel, String tableName, ArrayList<JFrame> listJF) {
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
-            FrameCreate.SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, jTable1.getName(), listJF);
+         //   FrameCreate.SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, jTable1.getName(), listJF);
+            FrameCreate.SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, jTable1.getName());
             sse.setVisible(true);
             listJF.add(sse);
             sse.setFields(row);

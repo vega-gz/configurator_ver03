@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_NKU2_mb_DI_DRV" UUID="0AD0436A14FD4C3E96A566AB04B07536">
+<Fields>
+<Field Comment="Ввод 4 =220 В. АВ включен" Name="NKU_GPA_Q4_En" Type="BOOL" UUID="E7064841EB934D55918859362CDBA0D7"/>
+<Field Comment="Ввод 4 =220 В. АВ аварийно отключен" Name="NKU_GPA_Q4_AOF" Type="BOOL" UUID="AA6D5D3EA55E4CFFB82958A3ACD624AF"/>
+<Field Comment="Шины ПТ =220 В. Напряжение в норме" Name="NKU_GPA_U_DC220_ok" Type="BOOL" UUID="B698013856C44EA68C6344C241B3C7D2"/>
+<Field Comment="Шины ПТ =220 В. Сопротивление изоляции ниже нормы" Name="NKU_GPA_DC220_Rbad" Type="BOOL" UUID="C890EF2349334A1E852FDA5350A6D21C"/>
+<Field Comment="Ввод 4 =220 В. УЗИП исправны" Name="NKU_GPA_Q4_UZIP_ok" Type="BOOL" UUID="DDFE3EC645F246EA911BF3D3264DB58A"/>
+<Field Comment=" Резерв" Name="Res_158" Type="BOOL" UUID="FB57979EF5B242838E8176529486EB68"/>
+<Field Comment=" Резерв" Name="Res_159" Type="BOOL" UUID="C6CA6EA1C1064672ACB954A3C4B31B18"/>
+<Field Comment=" Резерв" Name="Res_160" Type="BOOL" UUID="647BB1AD1B504CEE9FA5ABD4E1A7DA2D"/>
+<Field Comment="Освещение аварийное ангара. АВ включен" Name="Lamp_A_ang_En" Type="BOOL" UUID="0E5911EE2F41404DB99D67E2335D211D"/>
+<Field Comment="Освещение аварийное ангара.  Включено" Name="Lamp_A_ang_ON" Type="BOOL" UUID="B5EBC3E24E6D4B8DBBD267F070A3D603"/>
+<Field Comment="Освещение аварийное турбоблока. АВ включен" Name="Lamp_A_OD_En" Type="BOOL" UUID="B786D4BFA171459BBC96EC9926EF564C"/>
+<Field Comment="Освещение аварийное турбоблока. Включено" Name="Lamp_A_OD_ON" Type="BOOL" UUID="7B9DCA54F8D0415887C2EED456A9D85F"/>
+<Field Comment="Освещение аварийное БЭТ ГПА. АВ включен" Name="Lamp_A_ETO_En" Type="BOOL" UUID="4983B38A18FC487F8EF3771300669D7E"/>
+<Field Comment="Освещение аварийное БЭТ ГПА. Включено" Name="Lamp_A_ETO_ON" Type="BOOL" UUID="E8266CED946F42BBB983415A3406B894"/>
+<Field Comment="Резерв" Name="Res_161" Type="BOOL" UUID="E6559BC89112430DBD6DD915F39CCCB0"/>
+<Field Comment="Резерв" Name="Res_162" Type="BOOL" UUID="602A8C929F8C4DB5AC63B9836F8D3FE0"/>
+<Field Comment="Освещение аварийное эвакуационное. АВ включен" Name="Lamp_A_Ev_En" Type="BOOL" UUID="BCB2DB8486E4402187BBB93467FC660A"/>
+<Field Comment="Электроосвещение крановых площадок ГПА (аварийное питание). АВ включен" Name="Lamp_A_Kr_En" Type="BOOL" UUID="1ED709DA872F47A4A5ABBAFF8250C0C1"/>
+<Field Comment="Система агрегатной автоматики (аварийное питание). АВ включен" Name="Urez_SAU_En" Type="BOOL" UUID="8150A970FAA24DC3B8F91098E4A1D5D7"/>
+<Field Comment="Блок экстренного останова (аварийное питание). АВ включен" Name="Urez_BEO_En" Type="BOOL" UUID="4B64AD8794EF41CFB74CDCC6EF530BB7"/>
+<Field Comment="Шкафы управления кранов газовой обвязки (резерв). АВ включен" Name="Res_163" Type="BOOL" UUID="2A45F9E80E4D4B43A95D05E31157B29C"/>
+<Field Comment="Система противопожарной автоматики (аварийное питание). АВ включен" Name="Urez_ASPS_En" Type="BOOL" UUID="1D1A54E072A14665BD20D22F0B6D4815"/>
+<Field Comment="СУВД НКУ ГПА (аварийное питание). АВ включен" Name="SUVD_A_En" Type="BOOL" UUID="A913B3ADAAB843B9B47B2DB84F4AF621"/>
+<Field Comment="Резерв (аппарат). АВ включен" Name="Res_164" Type="BOOL" UUID="A05ADFEF2581425196869529FFE86939"/>
+<Field Comment="Шины ПТ =48 В. АВ БП включены" Name="NKU_GPA_DC48_En" Type="BOOL" UUID="EAECCE428EAE435FBAB2E48369AF026C"/>
+<Field Comment="Шины ПТ =48 В. Напряжение в норме" Name="NKU_GPA_U_DC48_ok" Type="BOOL" UUID="609596F5C1EE494D86153D1B5103B6B3"/>
+<Field Comment="Шины ПТ =48 В. БП исправны" Name="NKU_GPA_BP_DC48_ok" Type="BOOL" UUID="A5B59F415F944B15AD2350C3B3C2737D"/>
+<Field Comment="Резерв" Name="Res_165" Type="BOOL" UUID="160CF4030F864F2985AED2C36F9DD225"/>
+<Field Comment="Аппарат входной направляющий ГТД. АВ включен" Name="VNA_En" Type="BOOL" UUID="28501150B57C4712A8BBEBFE7380D674"/>
+<Field Comment="Резерв (аппарат). АВ включен" Name="Res_166" Type="BOOL" UUID="13E3911AA7C94679B868B5DF876BDD8E"/>
+<Field Comment="Резерв" Name="Res_167" Type="BOOL" UUID="6EA2E9018B9649EBAF33A9723AC85936"/>
+<Field Comment="Резерв" Name="Res_168" Type="BOOL" UUID="466FF09A41024E5495D672C64441AA80"/>
+<Field Comment="Шины ПТ =24 В. АВ БП включены" Name="NKU_GPA_DC24_En" Type="BOOL" UUID="DDD82A4366384D66990AA7C76CD22B99"/>
+<Field Comment="Шины ПТ =24 В. Напряжение в норме" Name="NKU_GPA_U_DC24_ok" Type="BOOL" UUID="03FD9B4AF5EF4C2488BD91FFC76D243A"/>
+<Field Comment="Шины ПТ =24 В. БП исправны" Name="NKU_GPA_BP_DC24_ok" Type="BOOL" UUID="5CF3440440814963A1D53CFE41FB3178"/>
+<Field Comment="Резерв" Name="Res_169" Type="BOOL" UUID="C2521D6F97444324B4EB1A8A47047A3A"/>
+<Field Comment="Питание модулей УСО.  АВ включен" Name="U_USO_En" Type="BOOL" UUID="AC7AB7945A2646E494F67625490DCC75"/>
+<Field Comment="Питание исполнительных механизмов (аварийное питание).  АВ включен" Name="U_IM_A_En" Type="BOOL" UUID="227A4F5036084E849EE174FDF4D692B2"/>
+<Field Comment="Резерв (аппарат). АВ включен" Name="Res_170" Type="BOOL" UUID="F9FC5F6B386B4AF39099B8ACD2C55906"/>
+<Field Comment="Резерв" Name="Res_171" Type="BOOL" UUID="C4DEFD5A14364F1BA324648736106CE9"/>
+<Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. АВ включен" Name="NKU_GPA_PLC_AC220_En" Type="BOOL" UUID="39B36A76387342319A59CEA080164491"/>
+<Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. АВ аварийно отключен" Name="NKU_GPA_PLC_AC220_AOF" Type="BOOL" UUID="EF9ACB8B752E489DA503FE42DD706B02"/>
+<Field Comment="Питание ПЛК, линия =220 В. АВ включен" Name="NKU_GPA_PLC_DC220_En" Type="BOOL" UUID="7C459AC209A04627B8BF74138FEAA7E3"/>
+<Field Comment="Резерв" Name="Res_172" Type="BOOL" UUID="7249D78A134F4CD586053AA244902F62"/>
+<Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. УЗИП исправно" Name="NKU_GPA_PLC_AC220_UZIP_ok" Type="BOOL" UUID="B1811F8876EC4EFBAE766727D50F014D"/>
+<Field Comment="Питание ПЛК, линия =220 В. УЗИП исправно" Name="NKU_GPA_PLC_DC220_UZIP_ok" Type="BOOL" UUID="1568DB50C8B841BFAC47F302137BB5D5"/>
+<Field Comment="Питание ПЛК, ввод 230 В, 50 Гц. БП исправен" Name="NKU_GPA_PLC_AC220_BP_ok" Type="BOOL" UUID="901AD49B825846B3A11F67F8F020F38D"/>
+<Field Comment="Питание ПЛК, линия =220 В. БП исправен" Name="NKU_GPA_PLC_DC220_BP_ok" Type="BOOL" UUID="236C9AF23A424C3AB0FF822EBFDE6233"/>
+</Fields>
+</Type>

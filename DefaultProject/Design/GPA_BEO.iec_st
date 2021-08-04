@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="NPCWOF3KNSTERIPFGWRMJSSTQE" Name="TGPA_BEO" Period="50" PutDataAtEndOfCycle="true">
+    <Variables>
+        <Variable UUID="UHYQMIVKDTBE7NVVDN44OSRQBI" Name="Watch_GPA_Alg" Type="FB_AppControl" TypeUUID="AXCXOIB7AKCUXFLF2MWOV6AZOE" Usage="internal" />
+        <Variable UUID="RAHH2PNPLQUUJDBCCX5LRW4DNY" Name="Watch_GPA_FR" Type="FB_AppControl" TypeUUID="AXCXOIB7AKCUXFLF2MWOV6AZOE" Usage="internal" />
+        <Variable UUID="Z2PLCCV6P7CEPG3TMNFBHPRARI" Name="Pulse" Type="FB_Pulse" TypeUUID="LCERBCVHMURELEDEHKKNKLUZNQ" Usage="internal" />
+        <Variable UUID="C45HBFOBMJIEXD7JFFP7KJCGPY" Name="isOK" Type="BOOL" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[//------------- Время цикла --------------------
+(*tmpREALtime := CLOCK();
+del_T := LREAL_TO_REAL(tmpREALtime - tmpREALtime_prev);
+tmpREALtime_prev := tmpREALtime;*)
+
+//------ Диагностика связи с приложениями --------
+if not BEO.Force_DO then
+	Watch_GPA_Alg(bit:= BEO.Meandr_GPA_ALg, tDiag:= T#1s); //Контроль работы логики
+	Watch_GPA_FR(bit:= BEO.Meandr_GPA_FR, tDiag:= T#1s); //Контроль работы топливного регулятора
+
+
+//------ Формирование дискретного выхода ------------------
+isOK := not Watch_GPA_Alg.break and
+		not Watch_GPA_FR.break and
+		GPA_DIAG_KM.A1_1 = WORD#0 and   
+	 	GPA_DIAG_KM.A1_2 = WORD#0 and
+		GPA_DIAG_KM.A1_3 = WORD#0 and
+		GPA_DIAG_KM.A1_4 = WORD#0 and
+		GPA_DIAG_KM.A1_5 = WORD#0 and
+		GPA_DIAG_KM.A1_6 = WORD#0 and
+	 	GPA_DIAG_KM.A1_7 = WORD#0 and
+		GPA_DIAG_KM.A1_8 = WORD#0 and
+	 	GPA_DIAG_KM.A1_9 = WORD#0 and
+	 	GPA_DIAG_KM.A1_10 = WORD#0 and
+	 	GPA_DIAG_KM.A1_11 = WORD#0 and
+	 	GPA_DIAG_KM.A1_12 = WORD#0;
+Pulse(isOK, T#500ms, BEO.DO_OK); //выход меандра в БЭО
+end_if;
+
+if isOK then FLT_INDEX := 0; end_if;
+
+//------ Формирование индекса неработающего приложения -----------
+if Watch_GPA_Alg.break then FLT_INDEX := 1; end_if;
+if Watch_GPA_FR.break  then FLT_INDEX := 2; end_if;
+
+if GPA_DIAG_KM.A1_1  <> WORD#0 then FLT_INDEX := 11; end_if;
+if GPA_DIAG_KM.A1_2  <> WORD#0 then FLT_INDEX := 12; end_if;
+if GPA_DIAG_KM.A1_3  <> WORD#0 then FLT_INDEX := 13; end_if;
+if GPA_DIAG_KM.A1_4  <> WORD#0 then FLT_INDEX := 14; end_if;
+if GPA_DIAG_KM.A1_5  <> WORD#0 then FLT_INDEX := 15; end_if;
+if GPA_DIAG_KM.A1_6  <> WORD#0 then FLT_INDEX := 16; end_if;
+if GPA_DIAG_KM.A1_7  <> WORD#0 then FLT_INDEX := 17; end_if;
+if GPA_DIAG_KM.A1_8  <> WORD#0 then FLT_INDEX := 18; end_if;
+if GPA_DIAG_KM.A1_9  <> WORD#0 then FLT_INDEX := 19; end_if;
+if GPA_DIAG_KM.A1_10 <> WORD#0 then FLT_INDEX := 20; end_if;
+if GPA_DIAG_KM.A1_11 <> WORD#0 then FLT_INDEX := 21; end_if;
+if GPA_DIAG_KM.A1_12 <> WORD#0 then FLT_INDEX := 22; end_if;
+
+]]></ST>
+    <DataTypes />
+    <FBLibrary>
+        <FunctionBlock UUID="AXCXOIB7AKCUXFLF2MWOV6AZOE" Name="FB_AppControl" Comment="Контроль активности приложения">
+            <Variables>
+                <Variable UUID="FJNZ62WTBYHUZDJXUSUSQDW774" Name="bit" Comment="сигнал активности от узла" Type="BOOL" Usage="input" />
+                <Variable UUID="LD7GCONSB7MURMJP2RSX6HRPSE" Name="tDiag" Comment="период диагностирования обрыва" Type="TIME" InitialValue="T#3s" Usage="input" />
+                <Variable UUID="OFQUBN4RRDUEZIJ4LT6MGUYA64" Name="break" Comment="нет связи" Type="BOOL" Usage="output" />
+                <Variable UUID="MVM4JD3HK3UUXL3SE7JYE6R5RI" Name="tmr" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+                <Variable UUID="E6JSUXK52I3UXJHHFRQPWMUBDM" Name="pr" Type="BOOL" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[//сброс таймера по смене фронта меандра
+tmr(IN:= NOT(bit AND NOT pr), PT:= tDiag, Q=>break);
+pr := bit; //запоминаем на предыдущем цикле]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="LCERBCVHMURELEDEHKKNKLUZNQ" Name="FB_Pulse" Comment="Блок формирования импульсов с периодом Tp">
+            <Variables>
+                <Variable UUID="CMR5BQDGRKPEZBIKWN5RA576SY" Name="on" Comment="Запуск ипульсов" Type="BOOL" Usage="input" />
+                <Variable UUID="B6IJ67FPJ3RUFJNLPAS7YG4QFE" Name="tp" Comment="Период следования импульсов" Type="TIME" Usage="input" />
+                <Variable UUID="XZGD3TDBOORUPN4TMQKQ32TE3I" Name="tic" Comment="Выход" Type="BOOL" Usage="output" />
+                <Variable UUID="TIVKZZA76UQEBDGHCVSWZRJTPI" Name="tmr" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[//таймер периода
+tmr(IN:= on AND NOT tmr.Q, PT:= tp);
+//на полупериоде установить 0
+//выход
+tic :=  tmr.ET < tp/2 AND NOT tmr.Q AND on;
+//Steam
+]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

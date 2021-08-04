@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Ab07_GPA">
+	<Items>
+		<Item Name="AT_2EYLVCJSINNEJG26II7X32EAA4.int" />
+		<Item Name="AT_CW7D2NPUSOLEROJQNTPFQB2TDQ.int" />
+		<Item Name="AT_FWXNSWSVHSXUNDT35YPRGK4JPY.int" />
+		<Item Name="AT_KATVWWEE26REDGKQK76NSVM6FY.int" />
+		<Item Name="AT_N4W56Y4DRUTULEKF6UHY7N6FIY.int" />
+		<Item Name="AT_OQDI7IJWDYWURBHAGPQ64MGKCQ.int" />
+		<Item Name="AT_QNS6AIQYWVRUPHFFBMC3DKL5CU.int" />
+		<Item Name="AT_U7H3QBZFNQ2EDIBYRLUDEAUTAE.int" />
+		<Item Name="AT_UE67ADAUKYSE5CAMOHA3LMUZL4.int" />
+		<Item Name="AT_Z2BBHXMMDTQENLQITIAHQQSDKE.int" />
+		<Item Name="A_Algorithm.int" />
+		<Item Name="FLDR_7QKTUT3YXBVE7NLYBRTC5HVLK4.folder" />
+		<Item Name="FLDR_EASAHBUSTCPEJK7SFAOFANRLWY.folder" />
+		<Item Name="GPA4_Archive.int" />
+		<Item Name="GPA4_Linker.int" />
+		<Item Name="GPA5_Archive.int" />
+		<Item Name="GPA5_Linker.int" />
+		<Item Name="GPA6_Archive.int" />
+		<Item Name="GPA6_Linker.int" />
+		<Item Name="GPA_Algorithm.int" />
+		<Item Name="GPA_BEO.int" />
+		<Item Name="GPA_DRV.int" />
+		<Item Name="GPA_EA.int" />
+		<Item Name="GPA_FG.int" />
+		<Item Name="GPA_FTG.int" />
+		<Item Name="GPA_FWL.int" />
+		<Item Name="GPA_GT_4RM.int" />
+		<Item Name="GPA_KM04.int" />
+		<Item Name="GPA_NKU_AVOG.int" />
+		<Item Name="GPA_PRU.int" />
+		<Item Name="KM_04.int" />
+		<Item Name="MODBUS_AI.int" />
+		<Item Name="N_DRV.int" />
+		<Item Name="TGPA4_Linker.int" />
+		<Item Name="TGPA5_Linker.int" />
+		<Item Name="TGPA6_Linker.int" />
+		<Item Name="TGPA_Algorithm.int" />
+		<Item Name="TGPA_BEO.int" />
+		<Item Name="TGPA_DRV.int" />
+		<Item Name="TGPA_FWL.int" />
+		<Item Name="TGPA_NKU.int" />
+		<Item Name="TGPA_PRU.int" />
+	</Items>
+</Folder>

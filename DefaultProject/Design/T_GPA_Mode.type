@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_Mode" Kind="Struct" UUID="92D90DE349CAC94C56BC41A25AA0F384">
+	<Fields>
+		<Field Name="Fault" Type="BOOL" UUID="DBE3E095486E30B4260405AAF650F7DB" Comment="Нет режима" />
+		<Field Name="AOss" Type="BOOL" UUID="85BC959F499B19E26CBAFEBDF4F10229" Comment="АОсс" />
+		<Field Name="AObs" Type="BOOL" UUID="4E8CD93044842834065927AABFDD4AE6" Comment="АОбс" />
+		<Field Name="VOss" Type="BOOL" UUID="3144464047EEBDD35D7FCBB5452B1755" Comment="ВОсс" />
+		<Field Name="VObs" Type="BOOL" UUID="D312929443AB851F2FBBFF8DB632642E" Comment="ВОбс" />
+		<Field Name="Fire" Type="BOOL" UUID="4B300EBD45F79A11CF04C7943052DC3A" Comment="Пожар" />
+		<Field Name="NOss" Type="BOOL" UUID="2FA50E0749DECA897A5D20AD5342125C" Comment="НОсс" />
+		<Field Name="NObs" Type="BOOL" UUID="C2C109AC4E1FB1B79FEA938A545408CE" Comment="НОбс" />
+		<Field Name="Repair" Type="BOOL" UUID="13BEB241424C34065BF0518D7A9A6055" Comment="Ремонт" />
+		<Field Name="HR" Type="BOOL" UUID="2884BF1C46913D355624BAAA0622A62E" Comment="Холодный резерв" />
+		<Field Name="GR" Type="BOOL" UUID="80D024ED4F5BCDB0AA5C8C846A6B3FBF" Comment="Горячий резерв" />
+		<Field Name="PZ" Type="BOOL" UUID="E9F55061442A83C4940A84BCC5E31242" Comment="Проверка защит" />
+		<Field Name="PZM" Type="BOOL" UUID="493B34254B9AE01C362A5C9A60AD8E29" Comment="ПЗМ" />
+		<Field Name="HP" Type="BOOL" UUID="D04C0BDF4837D8D5684B4C9809F2D454" Comment="Холодная прокрутка" />
+		<Field Name="TP" Type="BOOL" UUID="8D6558C640928A35E99474986083FBB7" Comment="Техн. прокрутка" />
+		<Field Name="KPK" Type="BOOL" UUID="520F33E3435D68DED8D16EAE6B632C58" Comment="КПК" />
+		<Field Name="APK" Type="BOOL" UUID="7D372D244659537E66E583B4A67B3748" Comment="АПК" />
+		<Field Name="APM" Type="BOOL" UUID="9ECC7F1F4E38AF02D8979CA83F73F89A" Comment="АПМ" />
+		<Field Name="K" Type="BOOL" UUID="2A348EF24FC1B78CA7F301AF6F8C87D2" Comment="Кольцо" />
+		<Field Name="M" Type="BOOL" UUID="7324FF6847FEE5E9679E23B0F3B6DD34" Comment="Магистраль" />
+		<Field Name="K_M" Type="BOOL" UUID="A9D5C266495F6302989D42835B765C7B" Comment="Переход К М" />
+		<Field Name="M_K" Type="BOOL" UUID="45B38E1645A01ACF92AF0E84D0587CE1" Comment="Переход М К" />
+		<Field Name="GoHH" Type="BOOL" UUID="AMHSC3RXJVBUJC55KHRL2XJWUE" Comment="Выход на ХХ" />
+		<Field Name="Stop" Type="BOOL" UUID="D57803A343A5E9E771B38394BC9B1A95" Comment="Обобщенный останов" />
+		<Field Name="Pusk" Type="BOOL" UUID="A1692238417DB249290A7AAE565758D6" Comment="Пусковые режимы" />
+		<Field Name="Check" Type="BOOL" UUID="A21373684EF0A93B57FEC6A0C29794E4" Comment="Проверочные режимы" />
+		<Field Name="Work" Type="BOOL" UUID="196F1821472062BFB4128181582B79ED" Comment="Рабочие режимы" />
+		<Field Name="Reserv" Type="BOOL" UUID="D8992A364C48EE1B4808D9A636CB0407" Comment="Режимы резерва" />
+		<Field Name="Crank" Type="BOOL" UUID="F19891FD4796C28141DD519C470BBD55" Comment="Режимы прокрутки" />
+		<Field Name="EO" Type="BOOL" UUID="549857F14D940460FAB7B78ECBEEF974" Comment="Экстренный останов" />
+		<Field Name="NORegims" Type="BOOL" UUID="BE385F17412DBC84A0206DABBE333B57" Comment="Режимы нормального останова" />
+		<Field Name="Num" Type="INT" UUID="6G7M4ROYHBAUVKGVF2CSN4QBLQ" Comment="Номер режима" />
+	</Fields>
+</Type>

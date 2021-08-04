@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_FromKCtoLIS_mb_DO_DRV" Kind="Struct" UUID="WMPZEFSKNZSELENIWKHH6N5OF4">
+	<Fields>
+		<Field Name="Unlock_UNTS" Type="BOOL" UUID="6O4C7VH6YD3ETEEDKTTYPUEUPE" Comment="КЦ: Деблокировка в ЛИС УНТС" />
+		<Field Name="AOss_UNTS" Type="BOOL" UUID="TC2VYARPZ3IE5GX63HED53GXME" Comment="КЦ: АОcc от ЛИС КЦ в ЛИС УНТС" />
+		<Field Name="AObs_UNTS" Type="BOOL" UUID="LVCLZRU4UBAEHKSCI4LSUN336M" Comment="КЦ: АОбc от ЛИС КЦ в ЛИС УНТС" />
+		<Field Name="Unlock_UZRG" Type="BOOL" UUID="LIQRUAY7IBYUXFA7NEI3BKY4SA" Comment="КЦ: Деблокировка в ЛИС УЗРГ" />
+		<Field Name="AO_UZRG" Type="BOOL" UUID="YFM4HXBZIGDULKL2WQNM3U7QME" Comment="КЦ: АО от ЛИС КЦ в ЛИС УЗРГ" />
+		<Field Name="Unlock_UPTIG" Type="BOOL" UUID="V5UKGMW7YE7UPNOYVIK55PHPIQ" Comment="КЦ: Деблокировка в ЛИС УПТИГ" />
+		<Field Name="AObs_UPTIG" Type="BOOL" UUID="W5TLL4RHMJHELETQZQZZGU7YRM" Comment="КЦ: АОбс от ЛИС КЦ в ЛИС УПТИГ" />
+		<Field Name="AOss_UPTIG" Type="BOOL" UUID="YOUV6HDSGNLUNGA7V47C5WWYEQ" Comment="КЦ: АОсс от ЛИС КЦ в ЛИС УПТИГ" />
+		<Field Name="Unlock_GSM" Type="BOOL" UUID="RXRUHT7YRVFUTH5CXK57KIYH2A" Comment="КЦ: Деблокировка в ЛИС ГСМ" />
+		<Field Name="AO_GSM" Type="BOOL" UUID="ZXKWTKQ7NB3UJOM345HFGJRW5Y" Comment="КЦ: АО от ЛИС КЦ в ЛИС ГСМ" />
+		<Field Name="Unlock_KOS" Type="BOOL" UUID="XZMK6B3GIDCEBMU5RJ4YU4UFKM" Comment="КЦ: Деблокировка в ЛИС КОС" />
+		<Field Name="AO_KOS" Type="BOOL" UUID="JPZEJOLQLDBE3M3UN32OYQEG24" Comment="КЦ: АО от ЛИС КЦ в ЛИС КОС" />
+		<Field Name="Unlock_VOS" Type="BOOL" UUID="JF6NRUM5A7UEPCSI3ASBTCEX5M" Comment="КЦ: Деблокировка в ЛИС ВОС" />
+		<Field Name="AO_VOS" Type="BOOL" UUID="NWZ3BXX6YBNEFG3YM44KUK2ZTE" Comment="КЦ: АО от ЛИС КЦ в ЛИС ВОС" />
+		<Field Name="Unlock_NM" Type="BOOL" UUID="O4DJXUPVXLMU7DYIIAKAU76TEE" Comment="КЦ: Деблокировка в ЛИС НМ" />
+		<Field Name="AO_NM" Type="BOOL" UUID="4TGX5K7O4ENE3NEENILKKMMJUM" Comment="КЦ: АО от ЛИС КЦ в ЛИС НМ" />
+		<Field Name="Unlock_UPOU" Type="BOOL" UUID="CUDEBR2QLZIUJLP7BNCOMRRQCQ" Comment="КЦ: Деблокировка в ЛИС УПОУ" />
+		<Field Name="AOss_UPOU" Type="BOOL" UUID="ID54YE5E362URIPEFSXW2YAQGY" Comment="КЦ: АОсс от ЛИС КЦ в ЛИС УПОУ" />
+		<Field Name="AObs_UPOU" Type="BOOL" UUID="DMXWYTDDEUEEJKI22TCO6HZELM" Comment="КЦ: АОбс от ЛИС КЦ в ЛИС УПОУ" />
+	</Fields>
+</Type>

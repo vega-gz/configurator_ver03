@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="AI_AO">
+	<Items>
+		<Item Name="E079B0E64556720E806FA393FCDC7989" />
+		<Item Name="T_ANB.type" />
+		<Item Name="T_GPA_AI_DRV.type" />
+		<Item Name="T_GPA_AI_FWL_DRV.type" />
+		<Item Name="T_GPA_AI_FromHMI.type" />
+		<Item Name="T_GPA_AI_Internal.type" />
+		<Item Name="T_GPA_AI_Settings.type" />
+		<Item Name="T_GPA_AI_ToHMI.type" />
+		<Item Name="T_GPA_AI_Trends.type" />
+		<Item Name="T_GPA_AO_DRV.type" />
+		<Item Name="T_GPA_AO_FromHMI.type" />
+		<Item Name="T_GPA_AO_Settings.type" />
+		<Item Name="T_GPA_AO_ToHMI.type" />
+		<Item Name="T_GPA_CalcPar.type" />
+		<Item Name="T_GPA_FR_AI_DRV.type" />
+		<Item Name="T_GPA_FR_AI_FromHMI.type" />
+		<Item Name="T_GPA_FR_AI_Internal.type" />
+		<Item Name="T_GPA_FR_AI_Settings.type" />
+		<Item Name="T_GPA_FR_AI_ToHMI.type" />
+		<Item Name="T_GPA_FWL_mb_AI_DRV.type" />
+		<Item Name="T_GPA_FWL_mb_AI_FromHMI.type" />
+		<Item Name="T_GPA_FWL_mb_AI_Settings.type" />
+		<Item Name="T_GPA_FWL_mb_AI_ToHMI.type" />
+		<Item Name="Type_2IWYMQGCEG3EXESWB7EP5OZYHE.type" />
+		<Item Name="Type_537VHHNPTVCUFCJXVKRRBEUPKA.type" />
+		<Item Name="Type_AAA6PJGQB6HUPHSTHX2FCIIEAE.type" />
+		<Item Name="Type_Calc_AI.type" />
+		<Item Name="Type_FYWVVBVQZKEUPCKQEI4GBTNFUY.type" />
+		<Item Name="Type_ITRADXODA5DSTLBGBGZKTH5SEY.type" />
+		<Item Name="Type_MAKXEQ6MM2CENAIGOMOIUL6EBU.type" />
+		<Item Name="Type_ZSXARCTYTKHUZA2X2IWK7QWDFU.type" />
+	</Items>
+</Folder>

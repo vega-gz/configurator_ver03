@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TST" Kind="Struct" Comment="test" UUID="NVTPLSL6LQQUDEOWOR34BZARBE">
+	<Fields>
+		<Field Name="bad1" Type="BOOL" UUID="GHMBUH37DKREBMPJUKX24G737M" />
+		<Field Name="bad2" Type="BOOL" UUID="NLDGUYD5TWFUDLDTLSGCSQTP5Y" />
+		<Field Name="bad3" Type="BOOL" UUID="O36LF4ESGLSU7BEV6SJ3TYW3U4" />
+		<Field Name="float0" Type="REAL" UUID="2XM2QOOXLS7UTBISLA7D7HC2KQ" />
+		<Field Name="WORK" Type="BOOL" UUID="JKCVIM35A2IUBL7VIY3ZLGTQAQ" />
+		<Field Name="int2" Type="INT" UUID="MAWXH3AY2YFEBOOHX7NPIWLZIA" />
+	</Fields>
+</Type>

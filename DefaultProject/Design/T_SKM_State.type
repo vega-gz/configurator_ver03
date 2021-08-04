@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_SKM_State" Kind="Struct" UUID="GFFXRJZZ2JOU5KZFSQCVG75ZUQ">
+	<Fields>
+		<Field Name="State_IKP_1" Type="WORD" UUID="2A6BIEPA5MMUHNXV7YMB2LKCDQ" Comment="Регистр состояния НГК-БИ-ИКП1" />
+		<Field Name="State_IKP_2" Type="WORD" UUID="SM4E4KW3OTJUBMBWUWDYQF7PXQ" Comment="Регистр состояния НГК-БИ-ИКП2" />
+		<Field Name="State_IKP_3" Type="WORD" UUID="ERU5ZN56AJ3EDDKXOX7EKFYHYM" Comment="Регистр состояния НГК-БИ-ИКП3" />
+		<Field Name="State_IKP_4" Type="WORD" UUID="GYI7OIMJ62JE3CQOCE7GKK6I7Q" Comment="Регистр состояния НГК-БИ-ИКП4" />
+		<Field Name="State_IKP_5" Type="WORD" UUID="OCG5ZLQ5FM5UXE7P3OADPPVIAM" Comment="Регистр состояния НГК-БИ-ИКП5" />
+		<Field Name="State_IKP_6" Type="WORD" UUID="C44KEJ57VEYEFB6GN2JQIBWWIM" Comment="Регистр состояния НГК-БИ-ИКП6" />
+		<Field Name="State_IKP_7" Type="WORD" UUID="U3ESLKO6JPMEJIDL7FYUQFJTDQ" Comment="Регистр состояния НГК-БИ-ИКП7" />
+		<Field Name="State_IKP_8" Type="WORD" UUID="4K72UORTFOZE5B3DAONYHYBW4Y" Comment="Регистр состояния НГК-БИ-ИКП8" />
+		<Field Name="State_IKP_9" Type="WORD" UUID="USCWU5XEKRGETDWEANC3MQFES4" Comment="Регистр состояния НГК-БИ-ИКП9" />
+		<Field Name="State_IKP_10" Type="WORD" UUID="2FMUMU547B4UBI6GRCGBGMJOLA" Comment="Регистр состояния НГК-БИ-ИКП10" />
+		<Field Name="State_IKP_11" Type="WORD" UUID="C5S36PJQ2K6E5KLJCD4ANXYHFQ" Comment="Регистр состояния НГК-БИ-ИКП11" />
+		<Field Name="State_IKP_12" Type="WORD" UUID="HBADLO2CHJ7UBMVK2YHSKSH4I4" Comment="Регистр состояния НГК-БИ-ИКП12" />
+		<Field Name="State_IKP_13" Type="WORD" UUID="AZWAPQ4HFMSUTPMNUG4UI3T2DU" Comment="Регистр состояния НГК-БИ-ИКП13" />
+		<Field Name="State_IKP_14" Type="WORD" UUID="NVZBVI5Q37GU3PBMTP7URIN6TU" Comment="Регистр состояния НГК-БИ-ИКП14" />
+		<Field Name="State_IKP_15" Type="WORD" UUID="Z36QRPFC6SQULNX4NGELAEQXRQ" Comment="Регистр состояния НГК-БИ-ИКП15" />
+		<Field Name="State_IKP_16" Type="WORD" UUID="3UJ52UHBSKRUBKEVZP67TA7Q7M" Comment="Регистр состояния НГК-БИ-ИКП16" />
+		<Field Name="State_IKP_17" Type="WORD" UUID="OV5JPMP3EYZUBMBVFPL27L7VFM" Comment="Регистр состояния НГК-БИ-ИКП17" />
+		<Field Name="State_IKP_18" Type="WORD" UUID="UY5AQJM2WDJEJEABIUR7L6ABO4" Comment="Регистр состояния НГК-БИ-ИКП18" />
+		<Field Name="State_IKP_19" Type="WORD" UUID="NECDPHW2I2KE5O2DLUE24ILEAY" Comment="Регистр состояния НГК-БИ-ИКП19" />
+		<Field Name="State_IKP_20" Type="WORD" UUID="AXNWPX3X3SNUTOAQL3JMZUD7RA" Comment="Регистр состояния НГК-БИ-ИКП20" />
+		<Field Name="State_IKP_21" Type="WORD" UUID="RNQLCA2PYYDUXNXF6P37DULJ5U" Comment="Регистр состояния НГК-БИ-ИКП21" />
+		<Field Name="State_IKP_22" Type="WORD" UUID="DPPNB2IRYWAENHHBT5AEPT5V3M" Comment="Регистр состояния НГК-БИ-ИКП22" />
+		<Field Name="State_IKP_23" Type="WORD" UUID="SBVLWDYXJGQUDFI6O5QE7XBNVE" Comment="Регистр состояния НГК-БИ-ИКП23" />
+		<Field Name="State_IKP_24" Type="WORD" UUID="MPZ2XEJUCQLEDKGS6KYOUE6D74" Comment="Регистр состояния НГК-БИ-ИКП24" />
+		<Field Name="State_IKP_25" Type="WORD" UUID="R5CRDMSL47PUBHIRT5MPQTGQ5Y" Comment="Регистр состояния НГК-БИ-ИКП25" />
+		<Field Name="State_IKP_26" Type="WORD" UUID="SEEX65SVSEJEZCKZPW2NQSDQOA" Comment="Регистр состояния НГК-БИ-ИКП26" />
+		<Field Name="State_IKP_27" Type="WORD" UUID="GVIKNATLNMLU7NWW3EFOHMKA54" Comment="Регистр состояния НГК-БИ-ИКП27" />
+		<Field Name="State_IKP_28" Type="WORD" UUID="6HN2YYVKP2CUZP4QFWM6EQ6ELU" Comment="Регистр состояния НГК-БИ-ИКП28" />
+		<Field Name="State_IKP_29" Type="WORD" UUID="YDETILNOIDQU5IU2F67HDNUAMI" Comment="Регистр состояния НГК-БИ-ИКП29" />
+		<Field Name="State_IKP_30" Type="WORD" UUID="3FTU3CY2JB2URCDSUEH6VKKPWY" Comment="Регистр состояния НГК-БИ-ИКП30" />
+		<Field Name="State_IKP_31" Type="WORD" UUID="BYRTCIGAQ5KERMD4O4ZKLFZW7M" Comment="Регистр состояния НГК-БИ-ИКП31" />
+		<Field Name="State_IKP_32" Type="WORD" UUID="VME6NVMLY7FE3ESN4CTYOHU4VY" Comment="Регистр состояния НГК-БИ-ИКП32" />
+	</Fields>
+</Type>

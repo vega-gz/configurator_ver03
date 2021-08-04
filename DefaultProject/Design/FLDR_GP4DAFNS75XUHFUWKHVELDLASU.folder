@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="УПА">
+	<Items>
+		<Item Name="FLDR_A5VOJKVJA24U3DEICHLCAYLWLI.folder" />
+		<Item Name="FLDR_K7WW4624CUIUZGWBICXZTTUIJU.folder" />
+		<Item Name="FLDR_SBJ5RL5Q7XIUPDFF533S336OVQ.folder" />
+		<Item Name="FLDR_VLQKMHS6YTSU7HQIACJTMMM6ZI.folder" />
+		<Item Name="FLDR_WILEUI4CZIVU3ML4F5DWTE6YAE.folder" />
+		<Item Name="T_UPA_BTN.type" />
+		<Item Name="T_UPA_SS.type" />
+	</Items>
+</Folder>

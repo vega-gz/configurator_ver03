@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Ab01_KC">
+	<Items>
+		<Item Name="AS36.int" />
+		<Item Name="AT_5VWVWH4Q7YBUHJMJ57ZV2TAMMY.int" />
+		<Item Name="AT_7WMVA76WBLTEDMTX44SPZ25NZA.int" />
+		<Item Name="AT_FTQ35MFP3QPEFD7B2OMEMHUOVE.int" />
+		<Item Name="AT_JETAH35MQQQUDJJFX2E3XYONRY.int" />
+		<Item Name="AT_KCBJDZETJIJULKIMA66VFCGS5Q.int" />
+		<Item Name="AT_MIDQNYH3URHUHMJVHL5WGCUDBU.int" />
+		<Item Name="AT_QBPTWPLQKEXE7B2QV6WNXKEO3U.int" />
+		<Item Name="AT_URQ7GFLFMR3E3A6IKPMJAJN5EY.int" />
+		<Item Name="AT_VFQ5W2HVLXFURC2AMCMZF44JOY.int" />
+		<Item Name="Ab01_R1_ALG.int" />
+		<Item Name="Ab01_R1_LOCALBUS.int" />
+		<Item Name="DRV_MODBUS_BK.int" />
+		<Item Name="DRV_MODBUS_EKG270.int" />
+		<Item Name="DRV_MODBUS_NGK_SKM.int" />
+		<Item Name="Driver_PRU.int" />
+		<Item Name="KC_ALG.int" />
+		<Item Name="KC_AlertArchive.int" />
+		<Item Name="KC_AlertArchive_1.int" />
+		<Item Name="KC_AlertArchive_2.int" />
+		<Item Name="KC_Algorithm.int" />
+		<Item Name="KC_Archive.int" />
+		<Item Name="KC_KC_modbus_GPA123.int" />
+		<Item Name="KC_R1_LOCALBUS.int" />
+		<Item Name="KC_R2_LOCALBUS.int" />
+		<Item Name="KC_R3_LOCALBUS.int" />
+		<Item Name="KC_R4_LOCALBUS.int" />
+		<Item Name="KC_modbus.int" />
+		<Item Name="KC_modbus_GPA.int" />
+		<Item Name="KC_modbus_UTUO.int" />
+		<Item Name="perf.int" />
+	</Items>
+</Folder>

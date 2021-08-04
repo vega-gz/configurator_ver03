@@ -1,0 +1,2897 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="OYMXFCBNOGSUPLTYBRJHALF4VA" Name="Server" Period="100" PutDataAtEndOfCycle="true">
+    <Variables>
+        <Variable UUID="MCKPX4LUCG6ERGJJ2ZYFYTXZUI" Name="proc_mb_IM" Type="mb_IM" TypeUUID="5R5CB5GFDUTUNMVS5PC4QJTLMY" Usage="internal" />
+        <Variable UUID="2WQHQ732QUAU5IS6OCWXK536M4" Name="Proc_KC_to_ARM" Type="FB_KC_to_ARM" TypeUUID="CUU6GMID5AAU7ADVJJHB5W6MBQ" Usage="internal" />
+        <Variable UUID="UG2EJIWDD7HELO6Z3BI6PNPIOI" Name="Proc_ARM_to_KC" Type="FB_ARM_to_KC" TypeUUID="K7YPQYOKWOGURJQU6AYDBB2B2I" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[//Определение длительности цикла
+//cycle_time:
+tim.tmpREALtime := CLOCK();
+tim.cycle := LREAL_TO_REAL(tim.tmpREALtime - tim.tmpREALtime_prev);
+tim.tmpREALtime_prev := tim.tmpREALtime;
+//================================== Имитаторы ===================================
+//AM_All_imit();
+//================================== ввод ==================================
+//Обработка
+UPG_UPG_mb_AI_CallAll();
+
+UPG_UPG_mb_DI_CallAll();
+//================================== АПС ==================================
+//APS_CallAll();
+
+//APS_initAll();
+//================================== Регуляторы ==================================
+//Инициализация
+//Обработка
+
+IF TMR_GPA_to_ARM <= 1.0 THEN
+   TMR_GPA_to_ARM := TMR_GPA_to_ARM + tim.cycle;
+ELSE 
+   Proc_KC_to_ARM();
+   TMR_GPA_to_ARM := 0.0;
+END_IF;
+
+Proc_ARM_to_KC();
+
+//================================== ППУ ==================================
+//Инициализация
+//Обработка
+//================================== Граф режимов ==================================
+//Mode_CallAll();
+//================================== Барабаны ==================================
+//DRM_CallAll();
+//================================== ИМ ==================================
+//Резервированные
+//Обычные
+//AM_CallAll();
+//================================== Обмен по интерфейсам ==================================
+//================================== вывод ==================================
+UPG_UPG_mb_AO_CallAll();
+proc_mb_IM();
+UPG_UPG_mb_DO_CallAll();
+init:= true;//=]]></ST>
+    <DataTypes>
+        <Struct UUID="VZ3H6GEVT3CUTI65HAA5AALRAY" Name="T_AI_FromHMI" Comment="команды из ЧМИ">
+            <Field UUID="SCKERE4PHRDEBGWST4LC2RTTSE" Name="manualTarget" Comment="Задание из ЧМИ" Type="REAL" />
+            <Field UUID="P47TXVXBU2GUBJ5JZEXSX4KSJ4" Name="BTNmanualOn" Comment="Кнопка вкл. задания значения из ЧМИ" Type="BOOL" />
+            <Field UUID="GZSU6SS7CYNUPOLP767OZHJUK4" Name="BTNrepairOn" Comment="Кнопка вкл. ремонта" Type="BOOL" />
+            <Field UUID="DI7XBJR5XPIE7L7MXPXMVNN3JI" Name="BTNworkOn" Comment="Кнопка перекл. в работу" Type="BOOL" />
+            <Field UUID="R7L6QVFARZUU3FCBO456DXWXDQ" Name="BTNrepairProlong" Comment="Кнопка продления ремонта" Type="BOOL" />
+        </Struct>
+        <Struct UUID="J74RQIZG5I6EZDCM32A6SZRKIM" Name="T_AI_ToHMI" Comment="устанавливаются программой обработки канала">
+            <Field UUID="QJ6PEGLAUPLUFEIFAGBJIT6PW4" Name="PV" Comment="значение для САУ. Рассчитывается из  measure, Manual_Target с учётом неисправностей и фильтрации" Type="REAL" />
+            <Field UUID="WBZOXI5CNLLEXLWHLINZ2KMYF4" Name="measure" Comment="Пересчёт кода АЦП в инженерные единицы" Type="REAL" />
+            <Field UUID="6ZWUCOB6MR2ENPVJU6GJK7ZWXI" Name="CurrentTimeOfRepair" Comment="оставшееся время ремонта" Type="INT" />
+            <Field UUID="GJY3VEM5KRNE5LIEPIA5A6MP5I" Name="fault_common" Comment="обобщённая неисправность. Образуется по «ИЛИ» от break,up_scale,down_scale,ROC,settingErr" Type="BOOL" />
+            <Field UUID="3BIE4PEO6GDEZOARVMTGWNRJF4" Name="break" Comment="обрыв канала" Type="BOOL" />
+            <Field UUID="JCRW2DPM2TFEDNS2CN4EMDRYHU" Name="up_scale" Comment="выход за верхний зашкал" Type="BOOL" />
+            <Field UUID="4KBYMW34KEZE5ECIADCEQTZ6OA" Name="down_scale" Comment="выход за нижний зашкал" Type="BOOL" />
+            <Field UUID="CKL3UGPLCBNUJBWI6XLA2VGNRQ" Name="ROC" Comment="превышение скорости изменения вверх или вниз" Type="BOOL" />
+            <Field UUID="267MAGDT2FWEXMF4G7MQVHR24E" Name="settingErr" Comment="ошибка задания настроек – несоответствие допустимым значениям" Type="BOOL" />
+            <Field UUID="S2TVATEJGHLUFBOP4OOPDLYPRA" Name="manual" Comment="канал в дист.упр." Type="BOOL" />
+            <Field UUID="RBLIJTEXCENEXF4ULLUV3Q7PRU" Name="repair" Comment="канал в ремонте" Type="BOOL" />
+            <Field UUID="TG5OXUO2FTCU5GZL2PWACX4G7E" Name="repair_time_less_10_percent" Comment="до конца ремонта осталось меньше 10% от заданного времени" Type="BOOL" />
+            <Field UUID="YSARYMFTNDSE5LGQ3JNIXZZXTA" Name="as" Comment="отображать красным. Выставляется при выходе канала за аварийную уставку." Type="BOOL" />
+            <Field UUID="UMPPDYIYCIUUFF73JAE2OWAUZM" Name="os" Comment="отображать фиолетовым. Выставляется при выходе канала за ограничительную уставку." Type="BOOL" />
+            <Field UUID="I74VSDZAHPDUBF3C5UMMHZZF7M" Name="ps" Comment="отображать жёлтым. Выставляется при выходе канала за предупредительную уставку." Type="BOOL" />
+            <Field UUID="RFUGWRJCW2IETLDPVQDEZRSKSE" Name="criticalFault" Comment="Критическая ошибка обработки" Type="BOOL" />
+            <Field UUID="NAC3XDBC7TKE5COYOS7EGC37CY" Name="hint" Type="STRING" />
+        </Struct>
+        <Struct UUID="ANRR6BLMKETURJI5AWVQRMBAWA" Name="T_AM_Type" Comment="Типы ИМ">
+            <Field UUID="R5GH244D3G6E5DEQ2KVL3QUOPI" Name="am1x0" Comment="1 команда, 0 конечников" Type="INT" />
+            <Field UUID="EJFBQPJBB3XULMGIE7YE5QDS5Y" Name="am2x2fh" Comment="2 команды, 2 конечника (открытие, удержание)" Type="INT" />
+            <Field UUID="PEAWQ344DBNUBPNVEK6VIDXUMQ" Name="am1x1" Comment="1 команда, 1 конечник" Type="INT" />
+            <Field UUID="YXE6GIVXD3UUNKU3HRZPTTZBOE" Name="am1x2" Comment="1 команда, 2 конечника" Type="INT" />
+            <Field UUID="MFOXKBTRKOKU3IUXG27BRR6PJU" Name="am2x1" Comment="2 команды, 1 конечник" Type="INT" />
+            <Field UUID="CDSXEEZ5QJVETJCNSILRMROO5Q" Name="am2x2" Comment="2 команды, 2 конечника" Type="INT" />
+            <Field UUID="XF7TYKMMVOAEXDRIKZ7ZD4YPTI" Name="am1ofx1of" Comment="1 команда OF, 1 конечник OF" Type="INT" />
+            <Field UUID="QCC7QFFLWAIUFCBCEJXJDPMERY" Name="am1ofx2" Comment="1 команда OF, 2 конечника" Type="INT" />
+            <Field UUID="4UM4UUEK6RMUPM6VL5ID7Q7ROY" Name="am1x1of" Comment="1 команда , 1 конечник OF" Type="INT" />
+            <Field UUID="Y4PYZ4D5FQJUJN7SZNZX54JCW4" Name="amPos" Comment="Прочие с положением (АПК, ТРК...)" Type="INT" />
+            <Field UUID="KBA3PS23ZYPEHHLFPRWZ6K2HSU" Name="am3x2" Comment="3 команды (on, off, stop), 2 конечника" Type="INT" />
+            <Field UUID="ZMCVOELEKJSEHDWZMR7RVCXAQQ" Name="am2x2x3ware" Comment="2 команды, 2 конечника, трёхпроводная схема" Type="INT" />
+            <Field UUID="5XGMK4PV7ZFK5OVFGH6GCCODQU" Name="am1x4nku" Comment="1 команда, 4 сигнала от НКУ" Type="INT" />
+            <Field UUID="3ETYUGWR4FDSTEGO7ONOD7ACZA" Name="am2x7upp" Comment="2 команды (БП и УПП) и 7 сигналов от НКУ" Type="INT" />
+            <Field UUID="ROV7ATBVJFGPPIFIL3A5A73ZOQ" Name="am2x8nku" Comment="2 команды и 8 сигналов от НКУ" Type="INT" />
+        </Struct>
+        <Struct UUID="7GRLWKHH6VJU5KGLKDIOI5QPQI" Name="T_AO_FromHMI">
+            <Field UUID="YQBDUQ2SLVH4VLPEMFQCTQ7MSA" Name="manualTarget" Comment="Задание из ЧМИ" Type="REAL" />
+            <Field UUID="5X47MBB46NFXXFQYHPGECOG46U" Name="BTNforceOn" Comment="кнопка включения режима форсировки" Type="BOOL" />
+            <Field UUID="2LUBNMQXIBEO7NYA7FMHMSQMQA" Name="BTNworkOn" Comment="Кнопка перекл. в работу" Type="BOOL" />
+        </Struct>
+        <Struct UUID="KOTCLUQLO7JERF5MDM2GMF62MI" Name="T_AO_ToHMI">
+            <Field UUID="37PITYONYNCEPAA4FZ7CYI4ZZU" Name="forsPermit" Comment="Форсировка разрешена" Type="BOOL" />
+            <Field UUID="EW23HL5DEBFQJMV2GMGKR3LXTE" Name="forsEnable" Comment="Форсировка включена" Type="BOOL" />
+            <Field UUID="DXLEHCRAXMWERIXDDJCFFR6DXU" Name="hint" Type="STRING" />
+        </Struct>
+        <Struct UUID="CB63GVNINFXE5NDGOS62CUMGSY" Name="T_DI_FromHMI" Comment="команды из ЧМИ">
+            <Field UUID="ALOR7DBMYYIEBCY2WB7KWCUIGU" Name="manualTarget" Comment="Задание из ЧМИ" Type="BOOL" />
+            <Field UUID="B22NFHW4UO5ETI7GYQLXF3XAJM" Name="BTNmanualOn" Comment="Кнопка вкл. задания значения из ЧМИ" Type="BOOL" />
+            <Field UUID="S7MY7EBTY62UHGFUKNDBNJEETM" Name="BTNrepairOn" Comment="Кнопка вкл. ремонта" Type="BOOL" />
+            <Field UUID="JJ6OIYCGVKUURBCSRNZ6KZLHKE" Name="BTNworkOn" Comment="Кнопка перекл. в работу" Type="BOOL" />
+            <Field UUID="6QZL235TTWWEFK6PJPHINDPP5Y" Name="BTNrepairProlong" Comment="Кнопка продления ремонта" Type="BOOL" />
+        </Struct>
+        <Struct UUID="GHOQ5H5MCDOEHDF2HTYC2D4HJI" Name="T_DI_ToHMI" Comment="устанавливаются программой обработки канала">
+            <Field UUID="TNUWHHXWAKSE7ARXDZINL2OUL4" Name="CurrentTimeOfRepair" Comment="оставшееся время ремонта" Type="INT" />
+            <Field UUID="Q5OI5ENSF7VEHIS4O4MQ3YADRU" Name="settingErr" Comment="ошибка задания настроек – несоответствие допустимым значениям" Type="BOOL" />
+            <Field UUID="4EHQPHFYYZ5EDCSGTFQTH6IA2I" Name="manual" Comment="канал в дист.упр." Type="BOOL" />
+            <Field UUID="26KRQPMZSAFUHEQWAFEZYCEXNA" Name="repair" Comment="канал в ремонте" Type="BOOL" />
+            <Field UUID="2FXLROIDYK2UXEJA6MWOZVCPEQ" Name="repair_time_less_10_percent" Comment="до конца ремонта осталось меньше 10% от заданного времени" Type="BOOL" />
+            <Field UUID="RHBQXEPMIJENTNXBIRDAZVI6ZM" Name="fault_common" Comment="обобщённая неисправность. Образуется по «ИЛИ» от settingErr и неисправности цепи датчика" Type="BOOL" />
+            <Field UUID="6W6OANKZ3VDE7IFEAF7IFND5TY" Name="hint" Type="STRING" />
+        </Struct>
+        <Struct UUID="ICYCYA5WR5FTZMTITNXXGA6V4U" Name="T_DO_FromHMI">
+            <Field UUID="YQBDUQ2SLVH4VLPEMFQCTQ7MSA" Name="manualTarget" Comment="Задание из ЧМИ" Type="BOOL" />
+            <Field UUID="5X47MBB46NFXXFQYHPGECOG46U" Name="BTNforceOn" Comment="кнопка включения режима форсировки" Type="BOOL" />
+            <Field UUID="2LUBNMQXIBEO7NYA7FMHMSQMQA" Name="BTNworkOn" Comment="Кнопка перекл. в работу" Type="BOOL" />
+        </Struct>
+        <Struct UUID="JPIXI5FFWBGSRAAFIJ2MBV77UE" Name="T_DO_ToHMI">
+            <Field UUID="37PITYONYNCEPAA4FZ7CYI4ZZU" Name="forsPermit" Comment="Форсировка разрешена" Type="BOOL" />
+            <Field UUID="EW23HL5DEBFQJMV2GMGKR3LXTE" Name="forsEnable" Comment="Форсировка включена" Type="BOOL" />
+            <Field UUID="WP3KGWM747AURJEIHTUIQJLS5M" Name="hint" Type="STRING" />
+        </Struct>
+        <Struct UUID="ESHVMMDQRNWUVGD5OOWOXN2N44" Name="T_mb_AI_Settings" Comment="Настройки канала">
+            <Field UUID="3KRWP62AKYDUFINJHEYQWHS2UU" Name="min" Comment="минимум шкалы канала, ед.изм. Не может быть &gt;= max" Type="REAL" />
+            <Field UUID="RHO37XVNDVTUPEFTMJHSLHKUNY" Name="max" Comment="максимум шкалы канала, ед.изм. Не может быть &lt;= min" Type="REAL" />
+            <Field UUID="RT6HE3WIDNSU7NDWHC2ZBOTRCI" Name="hiLim" Comment="уровень зашкала вверх, ед.изм. Не может быть &lt;= loLim и &gt; max" Type="REAL" />
+            <Field UUID="NONAD4XZLCAUFCYSSF3ZG5Y2RM" Name="loLim" Comment="уровень зашкала вниз, ед.изм. Не может быть &gt;= hiLim и &lt; min" Type="REAL" />
+            <Field UUID="IUL5HZOYX5CRDAD2EFAJYKUZ5Y" Name="hiBrk" Comment="уровень обрыва вверх, ед.изм. Не может быть &lt;= hiLim" Type="REAL" />
+            <Field UUID="MYIPHEQSBJAADA2AH7XXTJLX64" Name="loBrk" Comment="уровень зашкала вниз, ед.изм. Не может быть &gt;= loLim" Type="REAL" />
+            <Field UUID="6EEWY5YRIALELEVHNEOYVOVOKI" Name="format" Comment="Формат данных" Type="INT" />
+            <Field UUID="UN2HNI376ZEU7EIB4YK7GZB34Y" Name="set1" Comment="Настройка 1" Type="REAL" />
+            <Field UUID="OC357N75CFDUJLIQMDTSPYRANE" Name="set2" Comment="Настройка 2" Type="REAL" />
+            <Field UUID="65QNI3SAURVUXMDDIVWNLWTPRA" Name="tau" Comment="тау фильтра, сек. Если «0» - фильтрация отсутствует" Type="REAL" />
+            <Field UUID="CZKTSP7UMKMUHNAN43U4PZ3TDA" Name="id" Comment="номер по порядку" Type="INT" />
+        </Struct>
+        <Struct UUID="7ICVQVNQUR4UDG5AFGOT7BUCRA" Name="T_mb_AO_Settings">
+            <Field UUID="PFXFJNM5WZBD7OHBISHXLQZ7LI" Name="min" Comment="Нижний порог ан.выхода в физ.единицах" Type="REAL" />
+            <Field UUID="XFVOQ6QGIJAYHPPXMK6QYRI72A" Name="max" Comment="Верхний порог ан.выхода в физ.единицах" Type="REAL" />
+            <Field UUID="U6PH5R5T7W7URHY7YARC4WTDC4" Name="format" Type="INT" />
+            <Field UUID="A4U4GLRHWKSUNEDN2B433ZBATQ" Name="set1" Type="REAL" />
+            <Field UUID="CTPDFG3CV5EEJLI5W2OAFCVLLU" Name="set2" Type="REAL" />
+            <Field UUID="OK4EUCFXPNFV7EZMRH56FV3Y4M" Name="id" Type="INT" />
+        </Struct>
+        <Struct UUID="EKXWTT2XQFVEBA2O4SGLDA6X4E" Name="T_tuneAM">
+            <Field UUID="O6YCSYX2QRLUTFJS52ZQUGTAWU" Name="delayChangeOvertimeAlert" Comment="Время перестановки, при превышении которого выдается предупреждение" Type="REAL" />
+            <Field UUID="JGXKJLANO2SELHO62MUIPISOLM" Name="delayQTimeout" Comment="Время перестановки, при превышении которого снимается выходная команда" Type="REAL" />
+            <Field UUID="WCIMRV5J5ANE7HJUA6CNAGFFG4" Name="delayExtraOn" Comment="Время дожима на открытие" Type="REAL" />
+            <Field UUID="TI3CBQNB5L5UXB5JAB22HNT2WE" Name="delayExtraOff" Comment="Время дожима на закрытие" Type="REAL" />
+            <Field UUID="F5QLAOOZQ23E5PP4LDMIH4DAZU" Name="delayNotMoveAlert" Comment="Задержка формирования нестрагивания" Type="REAL" />
+            <Field UUID="TYZJFVKVMAREDE55SVBM4IKIQQ" Name="delayCircBrkAlert" Comment="Задержка формирования обрыва контроля цепи" Type="REAL" />
+        </Struct>
+        <Struct UUID="JOKANQL3O4QURP2EITPYYDMUV4" Name="support_AM" Comment="v1.0 от 20170724">
+            <Field UUID="AJPZSGTBOZSURAEDGCYX3WHU3E" Name="iOn" Comment="Вход - &quot;включен&quot; (открыт)" Type="BOOL" />
+            <Field UUID="6OD2DJH7NPKELOTUDZ75Y2AKVQ" Name="iOff" Comment="Вход - &quot;отключен&quot; (закрыт)" Type="BOOL" />
+            <Field UUID="TB67SA6DTYPEDKISO6NAMC5SWQ" Name="iCon" Comment="Вход - контроль цепи включения (открытия)" Type="BOOL" />
+            <Field UUID="EIFZU5L22RQUXBFPPCCT236FCQ" Name="iCoff" Comment="Вход - контроль цепи отключения (закрытия)" Type="BOOL" />
+            <Field UUID="GIVBYIHUOBNU5DS3D7NB6IIQEA" Name="qOn" Comment="Выход - &quot;включить&quot; (открыть, форсировка)" Type="BOOL" />
+            <Field UUID="B3U4CEPC5FQEXKDEAGWOPCDWZU" Name="qOff" Comment="Выход - &quot;отключить&quot; (закрыть)" Type="BOOL" />
+            <Field UUID="5OXOOXY3F2CEHER2BZBJPT3FSA" Name="qHoldOn" Comment="Выход - &quot;удержание&quot; (трехходовой клапан)" Type="BOOL" />
+            <Field UUID="W6BNQGNNUFSUXGQ3RZQ4V2XMD4" Name="algOn" Comment="Команда включения из алгоритма" Type="BOOL" />
+            <Field UUID="Z3KAE3E5VX5UDAOPXTO4SUHYEY" Name="algOff" Comment="Команда отключения из алгоритма" Type="BOOL" />
+            <Field UUID="U3KPWCQJYP4E7O6Z6S6U43Q2V4" Name="modeManual" Comment="Режим ручного управления" Type="BOOL" />
+            <Field UUID="VSW5JXZJSMLUZFMXRYKWIBFB2I" Name="disableManual" Comment="Блокировка ручного управления" Type="BOOL" />
+            <Field UUID="JO4FIXI66MRULCSWOZ7JRQSOBA" Name="disableCon" Comment="Не учитывать контроль цепи управления команды &apos;открыть&apos;" Type="BOOL" />
+            <Field UUID="UZCWPJ5FO2OETORGJUJ77MHWEQ" Name="disableCoff" Comment="Не учитывать контроль цепи управления команды &apos;закрыть&apos;" Type="BOOL" />
+            <Field UUID="XB6FRKLPQHBU3KBCQJ2O4LMWOI" Name="btnMode" Comment="Кнопка переключения режима Ручной/Авто (СКАДА)" Type="BOOL" />
+            <Field UUID="HQXXP3VK6B7UFEZCLYPOAIJCVE" Name="btnOn" Comment="Кнопка &quot;включить&quot; (СКАДА)" Type="BOOL" />
+            <Field UUID="EUREFPVUSAJU5MPE72IMKULFAQ" Name="btnOff" Comment="Кнопка &quot;отключить&quot; (СКАДА)" Type="BOOL" />
+            <Field UUID="AILDXTDC3NIELCLUI3YK5YT24Q" Name="prmBtnOn" Comment="Разрешение ручного включения в авто-режиме (для повтора команды)" Type="BOOL" />
+            <Field UUID="N3ML4S2CGYTUNLC75YT4BMSOZE" Name="prmBtnOff" Comment="Разрешение ручного отключения в авто-режиме (для повтора команды)" Type="BOOL" />
+            <Field UUID="T6O6PYG5FOHE5M2XV53ZQ6EC4Q" Name="fNotOn" Comment="Не включен" Type="BOOL" />
+            <Field UUID="FGO5HC5NS2AENDSJ7FTV6YTIKM" Name="fNotOff" Comment="Не отключен" Type="BOOL" />
+            <Field UUID="SUNJAVMMKXFUTFOAEJWMDGD4B4" Name="fNotStart" Comment="Не стронулся" Type="BOOL" />
+            <Field UUID="UOQBPEA7JBMU7KFLOB4CAR2Q5A" Name="fSelfOn" Comment="Самопроизвольное включение" Type="BOOL" />
+            <Field UUID="DJLHHLRC674EHNL2W5UHHLPB4Y" Name="fSelfOff" Comment="Самопроизвольное отключение" Type="BOOL" />
+            <Field UUID="URJGYYBT4DXU5N4YI3XNJOKP5M" Name="fFB" Comment="Двойное положение" Type="BOOL" />
+            <Field UUID="WPU7QKFWK6TU5DDMTVHYF5AIOY" Name="fCon" Comment="Нет контроля цепи включения" Type="BOOL" />
+            <Field UUID="WJBPVHFY5IPEZOLM74FY44PYMY" Name="fCoff" Comment="Нет контроля цепи отключения" Type="BOOL" />
+            <Field UUID="3QBLSEMS7OCERKXNV3GPVS7PNM" Name="fCommon" Comment="Обобщенная неисправность" Type="BOOL" />
+        </Struct>
+    </DataTypes>
+    <FBLibrary>
+        <Folder Name="CR" Comment="" Data="" UUID="6K6DCBZ6QWDUJNPCXDJOZZTOKU">
+            <FunctionBlock UUID="K7YPQYOKWOGURJQU6AYDBB2B2I" Name="FB_ARM_to_KC">
+                <Variables />
+                <ST><![CDATA[//Выбор контура регAlg_улирования
+Wish_main_loop_in := Alg_Wish_main_loop_in;
+local_SP_in := Alg_local_SP_in;
+(*Wish_main_loop_out := Alg_Wish_main_loop_out;
+local_SP_out := Alg_local_SP_out;*)
+
+//Выбор параметра выравнивания нагрузки
+//shop := Alg_shop;//inv
+shop.ls_type :=Alg_shop.ls_type;
+
+//Задание на регулирование
+
+Zadan_R := Alg_Zadan_R;
+
+(*//= на будущее
+//Регулятор крана 36р
+
+AS36_str_in.SP_Pout := Alg_AS36_str_in.SP_Pout;   // Добавлено АМС
+AS36_str_in.SP_PoutPin := Alg_AS36_str_in.SP_PoutPin;      // Добавлено АМС
+AS36_str_in.SP_S := Alg_AS36_str_in.SP_S;      // Добавлено АМС
+
+//Обнуление задания с цехового регулятора для 36р
+
+IF SAR_KC_GPA1.OGR and Alg_AS_MStruct.CV = 0.0 then AS_MStruct.CV := 0.0; end_if;
+Alg_AS_MStruct.CV := 1.0;
+*)]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="CUU6GMID5AAU7ADVJJHB5W6MBQ" Name="FB_KC_to_ARM">
+                <Variables />
+                <ST><![CDATA[//SAR_KC
+Alg_SAR_KC_GPA1 := SAR_KC_GPA1;
+Alg_SAR_KC_GPA2 := SAR_KC_GPA2;
+Alg_SAR_KC_GPA3 := SAR_KC_GPA3;
+(*Alg_SAR_KC_GPA4 := SAR_KC_GPA4;
+Alg_SAR_KC_GPA5 := SAR_KC_GPA5;
+Alg_SAR_KC_GPA6 := SAR_KC_GPA6;*)
+
+Alg_shop := shop;//inv
+//Выбор контура регулирования
+Alg_Wish_main_loop_out := Wish_main_loop_out;
+Alg_local_SP_out := local_SP_out;
+Alg_AS36_str := AS36_str;
+
+//Цеховой регулятор в работе
+Alg_SAR_KC_GPA1.CR_vkl := Alg_SAR_KC_GPA1.online AND Alg_SAR_KC_GPA1.run AND Alg_SAR_KC_GPA1.remote;
+Alg_SAR_KC_GPA2.CR_vkl := Alg_SAR_KC_GPA2.online AND Alg_SAR_KC_GPA2.run AND Alg_SAR_KC_GPA2.remote;
+Alg_SAR_KC_GPA3.CR_vkl := Alg_SAR_KC_GPA3.online AND Alg_SAR_KC_GPA3.run AND Alg_SAR_KC_GPA3.remote;
+(*Alg_SAR_KC_GPA4.CR_vkl := Alg_SAR_KC_GPA4.online AND Alg_SAR_KC_GPA4.run AND Alg_SAR_KC_GPA4.remote;
+Alg_SAR_KC_GPA5.CR_vkl := Alg_SAR_KC_GPA5.online AND Alg_SAR_KC_GPA5.run AND Alg_SAR_KC_GPA5.remote;
+Alg_SAR_KC_GPA6.CR_vkl := Alg_SAR_KC_GPA6.online AND Alg_SAR_KC_GPA6.run AND Alg_SAR_KC_GPA6.remote;
+*)
+(*//= на будущее
+//Регулятор крана 36р
+
+Alg_AS36_str_out.SP_Pout := AS36_str_out.SP_Pout;   // Добавлено АМС
+Alg_AS36_str_out.SP_PoutPin := AS36_str_out.SP_PoutPin;      // Добавлено АМС
+Alg_AS36_str_out.SP_S := AS36_str_out.SP_S;      // Добавлено АМС
+*)]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="UPG" Comment="" Data="" UUID="4NNTS4JEKCVEHLOBDZAYOWZTTI">
+            <Folder Name="IM" Comment="" Data="" UUID="UZ6GEPZHGE4EVIFC45Q2VUSBQA">
+                <FunctionBlock UUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Name="FB_IM" Comment="FB Исполнительных механизмов">
+                    <Variables>
+                        <Variable UUID="5XYFD3YZLLBUNB42KO2XYNFDCU" Name="AMtype" Comment="тип ИМ" Type="INT" Usage="input" />
+                        <Variable UUID="PETOOKKOZ5ZUHGDFGUI235UOWE" Name="AM" Comment="структура ИМ" Type="support_AM" TypeUUID="JOKANQL3O4QURP2EITPYYDMUV4" Usage="inout" />
+                        <Variable UUID="FECD53T2D3CUTMVI42ECGHMCLY" Name="tuns" Comment="Настройки ИМ" Type="T_tuneAM" TypeUUID="EKXWTT2XQFVEBA2O4SGLDA6X4E" Usage="input" />
+                        <Variable UUID="EDVZIRQWLT3UDFKHACOVGWPYM4" Name="cycle" Comment="цикл вызова (с)" Type="REAL" Usage="input" />
+                        <Variable UUID="MC7WZK735E7EDGYPA7FMYZ6ZYY" Name="onImit" Comment="включить режим имитации" Type="BOOL" Usage="input" />
+                        <Variable UUID="KNJWSZAW7KLUHKINAJIYOXQUFU" Name="imtChangeTime" Comment="время переключения состояния для имитатора" Type="REAL" InitialValue="4" Usage="input" />
+                        <Variable UUID="YJALDEKXZIAEBF7TAWFK34VG7A" Name="I_ON" Type="BOOL" Usage="input" />
+                        <Variable UUID="JACB2RJGQM3EJFEEH5UBKF5TIM" Name="I_OFF" Type="BOOL" Usage="input" />
+                        <Variable UUID="ICKZ3QWAXBMUTKG6JQNPTEC2QM" Name="I_Con" Type="BOOL" Usage="input" />
+                        <Variable UUID="EMWHYR3US7OUVAQURMVK5WK2VU" Name="I_Coff" Type="BOOL" Usage="input" />
+                        <Variable UUID="7M6X7SOAZ6CE3C3LKAET4H3KUA" Name="unlock" Type="BOOL" Usage="input" />
+                        <Variable UUID="PDPZIK7RNIGEZALSPLREI2IPK4" Name="Q_ON" Type="BOOL" Usage="output" />
+                        <Variable UUID="V6MUNN55PDPUTAJTEWOJUXQR6U" Name="Q_OFF" Type="BOOL" Usage="output" />
+                        <Variable UUID="RKQGJ6QQUGQUXAIFQADPHSMOUM" Name="Q_HoldOn" Type="BOOL" Usage="output" />
+                        <Variable UUID="BTZJYNYJ2UUURFURQFWR6S5O3Y" Name="ps" Comment="Сигналка предупреждения" Type="BOOL" Usage="output" />
+                        <Variable UUID="HO5QMS37KGRUFNJ4JJRITZIMP4" Name="algOn" Comment="команда открытия от алгоритма" Type="BOOL" Usage="internal" />
+                        <Variable UUID="CMXCEEFW6Z6ENAFCXGRHJOGI6M" Name="algOff" Comment="команда закрытия от алгоритма" Type="BOOL" Usage="internal" />
+                        <Variable UUID="IZJKEDDZ47GUFO7BOZC7YKLQZE" Name="iOn" Comment="сигнал (конечник) открытия" Type="BOOL" Usage="internal" />
+                        <Variable UUID="IT7YET3ZRL2EDH6OY4RZ7F5AKI" Name="iOff" Comment="сигнал (конечник) закрытия" Type="BOOL" Usage="internal" />
+                        <Variable UUID="JZG6WQHPJMMUZBZE7X2FA4VPKM" Name="qOn" Comment="выход на открытие" Type="BOOL" Usage="internal" />
+                        <Variable UUID="ZPLMRSLMHTCUHIP6TYW4CL2N5I" Name="qOff" Comment="выход на закрытие" Type="BOOL" Usage="internal" />
+                        <Variable UUID="VUPVKP7RMWTERJ7AZBTZVEYPCY" Name="btnOn" Comment="кнопка открытия (включения)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="KGF35AM36CXUJJFX4C37TTI4EU" Name="btnOff" Comment="кнопка закрытия (отключения)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="6WBGZYIOBLMETEEEQZ6B5ASQII" Name="modeManual" Comment="ручное управление" Type="BOOL" Usage="internal" />
+                        <Variable UUID="TNVNQT5NADZUHEA5XCOVODKHHM" Name="notOn" Comment="не открыт (не включен)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="RQOS2DNCVDXUXMEHU43U66PC2M" Name="notOff" Comment="не закрыт (не выключен)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="XWDUTHDWEMTEXF363ZDXUPB2FI" Name="setOn" Comment="обобщенная команда на открытие" Type="BOOL" Usage="internal" />
+                        <Variable UUID="S7TDCYI34UAURMWX7LNZ7Q3DVQ" Name="setOff" Comment="обобщенная команда на закрытие" Type="BOOL" Usage="internal" />
+                        <Variable UUID="2YFKES4RS6TEZIQK64GSW2VMLI" Name="int_iOn" Type="BOOL" Usage="internal" />
+                        <Variable UUID="GZBUQS2K6R2EDONSFQIJ3B2AVM" Name="int_iOff" Type="BOOL" Usage="internal" />
+                        <Variable UUID="JJPQIEFP32SUXG4U4O4MLUTJPI" Name="qOnPrev" Type="BOOL" Usage="internal" />
+                        <Variable UUID="MZRVQ5DAR6FELAA4OJQ4ZJF47U" Name="qOffPrev" Type="BOOL" Usage="internal" />
+                        <Variable UUID="VGZDX656BHWUHMVRFQ5T7UFPGA" Name="timeQOn" Comment="текущее время подачи команды открытия" Type="REAL" Usage="internal" />
+                        <Variable UUID="BJ7NG6XPBDVEVD7WNGL2ATIDGE" Name="timeQOff" Comment="текущее время подачи команды закрытия" Type="REAL" Usage="internal" />
+                        <Variable UUID="R4AU66NU2YVEHBFVJROOTEM2TM" Name="timeExtraOn" Comment="текущее время дожима открытия" Type="REAL" Usage="internal" />
+                        <Variable UUID="GNURLIKPQ7HE5GHCKFJEQAONAI" Name="timeExtraOff" Comment="текущее время дожима закрытия" Type="REAL" Usage="internal" />
+                        <Variable UUID="PDM4LADFVAUEFE5HUDLZHS7SEM" Name="timeCircBrkOn" Comment="текущее время КЦУ On" Type="REAL" Usage="internal" />
+                        <Variable UUID="MGYODHIFDPRUBN4T56OY56ICHU" Name="timeCircBrkOff" Comment="текущее время КЦУ Off" Type="REAL" Usage="internal" />
+                        <Variable UUID="AJO5AFGGN7BUDDZ7BWYSA5RPEQ" Name="changeCounter" Comment="количество попыток перевода в текущее положение" Type="INT" Usage="internal" />
+                        <Variable UUID="ICO74YEEKVHELOXAIVEXGPQADQ" Name="FRONT_BTN" Comment="передний фронт кнопки РУ" Type="R_TRIG" TypeUUID="S45Q5WLSRRGU3MJDOGDVF24XVA" Usage="internal" />
+                        <Variable UUID="R6PIXZGPSYXURC2XIL6YCBZWIY" Name="frBTN" Comment="передний фронт кнопки РУ" Type="BOOL" Usage="internal" />
+                        <Variable UUID="IM6CQF6KSQCUVA7X4SECMK6LCM" Name="wasOn" Type="BOOL" Usage="internal" />
+                        <Variable UUID="2S6R7J3WHQLULLRVMT2EJOD6YI" Name="wasOff" Type="BOOL" Usage="internal" />
+                        <Variable UUID="CMAZOKJUL7ZETKJDW5UR5D743Q" Name="selfOn" Comment="самопроизвольное открытие (включение)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="6MJNYD4M6ALEZGQ5FROHQR5MCI" Name="selfOff" Comment="самопроизвольное закрытие (отключение)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="UJ646BIRCAFEJPINNWJFYZK27U" Name="imtState" Comment="текущее состояние" Type="REAL" Usage="internal" />
+                        <Variable UUID="BT2WTUA36XFUHK5JVE57VGP7MU" Name="imt_qOn" Comment="внутренний сигнал ON (для унификации разнотипных ИМ)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="R6A5AI6O7K6ETL3VWIGD5RNVDU" Name="imt_qOff" Comment="внутренний сигнал OFF (для унификации разнотипных ИМ)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="SCKVA6FKP3UUJNHQUPGI2FXD7I" Name="iCon" Comment="контроль цепи" Type="BOOL" Usage="internal" />
+                        <Variable UUID="FJBNTNBQHFREZNBP6FFGAKB64Y" Name="iCoff" Comment="контроль цепи" Type="BOOL" Usage="internal" />
+                        <Variable UUID="NQH4CDIJEABERJZC2LFG46JX7E" Name="frontImitOn" Type="R_TRIG" TypeUUID="S45Q5WLSRRGU3MJDOGDVF24XVA" Usage="internal" />
+                        <Variable UUID="P3NHLORDEEAEVENDKAOMT666JU" Name="frImitOn" Type="BOOL" Usage="internal" />
+                        <Variable UUID="HF7YYOEZACGEXH23CYTA2BQ23Y" Name="disableManual" Comment="запрет ручного режима (внутренний сигнал)" Type="BOOL" Usage="internal" />
+                        <Variable UUID="IB3U55AUN5UU7NW5VSDNGRDCKU" Name="fNotOn_prv" Type="BOOL" Usage="internal" />
+                        <Variable UUID="ECXVHPRFC5XUXDL4FXXVLJU4PM" Name="fNotOff_prv" Type="BOOL" Usage="internal" />
+                        <Variable UUID="RCCP626CVVQEDM5UZRBEWQAQAI" Name="fNotStart_prv" Type="BOOL" Usage="internal" />
+                        <Variable UUID="J244K4GAFILUNINAFURJQGVEEY" Name="fSelfOn_prv" Type="BOOL" Usage="internal" />
+                        <Variable UUID="MJPL45THOCLUTNSKBQLD3H6PGE" Name="fSelfOff_prv" Type="BOOL" Usage="internal" />
+                        <Variable UUID="NJWXABGIHTKEBN4UVYBRAHZTLQ" Name="fFB_prv" Type="BOOL" Usage="internal" />
+                        <Variable UUID="BMFNBKYDUCDUTGTY4MWQUMM3LY" Name="fCon_prv" Type="BOOL" Usage="internal" />
+                        <Variable UUID="GMQ6D2T5AQAUPBWTXOAHL2QD2E" Name="fCoff_prv" Type="BOOL" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[// ==================== Макрос для исполнительных механизмов =====================================
+
+// константы AMtype
+// 2-ИМ 1Q 0FB 1 команда 0 конечников (1x0)
+// 3-ИМ 2Q(Fors+Hold) 2FB 2 команды 0 конечников (2x0)
+// 4-ИМ 1Q 1FB 1 команда 1 конечник (1x1)
+// 5-ИМ 1Q 2FB 1 команда 2 конечника (1x2)
+// 6-ИМ 2Q 1FB 2 команды 1 конечник (2x1)
+// 7-ИМ 2Q 2FB 2 команды 2 конечника (2x2)
+// 8-ИМ 1Q 1FB с командой/конечником OFF
+// 9-ИМ 1Q 2FB с командой OFF и двумя конечниками
+// 10-ИМ 1Q 1FB с командой ON/ конечником OF 
+// 11-ИМ ТРК, АПК и прочие с положением
+
+  AM.iOn   := I_ON;
+  AM.iOff  := I_OFF;
+  AM.iCon  := I_Con;
+  AM.iCoff := I_Coff;
+
+// привязка к входам структуры AM
+  btnOn  := AM.btnOn;
+  btnOff := AM.btnOff;
+  algOn  := AM.algOn;
+  algOff := AM.algOff;
+  modeManual := AM.modeManual;
+ //запись типа ИМ в структуру  
+//  AM.AMtype := AMtype; 
+
+// инициализация задержек (если в структуре задержка не инициализирована - используем значение по-умолчанию)
+//время перестановки, при превышении которого выдается предупреждение
+IF tuns.delayChangeOvertimeAlert = 0.0 THEN tuns.delayChangeOvertimeAlert := 45.0; END_IF; 
+//		delayChangeOvertimeAlert := 45.0; 
+//	ELSE delayChangeOvertimeAlert := tuns.delayChangeOvertimeAlert; 
+//END_IF; 
+
+//время перестановки, при превышении которого снимается выходная команда
+IF tuns.delayQTimeout = 0.0 THEN tuns.delayQTimeout := 90.0; END_IF; 
+//	ELSE delayQTimeout := AM.delayQTimeout; 
+//END_IF; 
+
+//delayExtraOn := AM.delayExtraOn; //время дожима на открытие
+//delayExtraOff := AM.delayExtraOff; //время дожима на закрытие
+//задержка формирования нестрагивания
+IF tuns.delayNotMoveAlert = 0.0 THEN tuns.delayNotMoveAlert := 4.0; END_IF; 
+//ELSE delayNotMoveAlert := AM.delayNotMoveAlert; 
+//END_IF; 
+//задержка формирования обрыва контроля цепи
+IF tuns.delayCircBrkAlert = 0.0 THEN tuns.delayCircBrkAlert := 1.0; END_IF; 
+//	ELSE delayCircBrkAlert := AM.delayCircBrkAlert; 
+//END_IF; 
+// обобщенная неисправность
+AM.fCommon := AM.fNotOn OR AM.fNotOff OR AM.fNotStart OR AM.fSelfOn OR AM.fSelfOff OR AM.fFB OR AM.fCon OR AM.fCoff;
+// запрет ручного режима (внутренний сигнал)
+disableManual := AM.disableManual AND NOT (AM.fNotOn OR AM.fNotOff); 
+
+//** Переключатель РУЧНОГО РЕЖИМА (переключение по одному сигналу)
+FRONT_BTN(AM.btnMode, frBTN); //передний фронт кнопки сохраняем в темп (frBTN)
+IF frBTN AND AM.modeManual OR disableManual THEN //если есть фронт кнопки, и включен ручной режим - сброс ручного режима так же, ручной режим сбрасывается, когда он не разрешен!
+	AM.modeManual := FALSE; //сброс ручного режима
+	frBTN := FALSE; //сброс фронта
+	AM.btnMode := FALSE; //сброс кнопки
+END_IF;
+//если есть фронт кнопки, ручной режим не включен, и нет запрета ручного режима
+IF frBTN AND NOT AM.modeManual AND NOT disableManual THEN 
+	AM.modeManual := TRUE; //включение ручного режима
+	frBTN := FALSE; //сброс фронта
+	AM.btnMode := FALSE; //сброс кнопки
+END_IF;
+
+//=========================================================================================================
+CASE AMtype OF
+
+2: // AM_1Q0FB *************************** ИМ 1Q 0FB ******************************************************
+
+qOn := NOT modeManual AND (algOn OR btnOn AND AM.prmBtnOn) OR  modeManual AND (btnOn OR qOn) AND NOT btnOff;
+       
+// сигналы положения (конечники)
+AM.iOn := AM.qOn;
+AM.iOff := NOT AM.iOn;
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+// обрыв КЦУ
+IF iCon or qOn THEN timeCircBrkOn := 0.0;
+	ELSIF timeCircBrkOn < tuns.delayCircBrkAlert THEN timeCircBrkOn := timeCircBrkOn + cycle; 
+END_IF;
+//обрыв КЦУ команды "открыть (включить)"
+AM.fCon := NOT AM.disableCon AND timeCircBrkOn > tuns.delayCircBrkAlert;      
+
+3: // AM_2Q_FH *************************** ИМ 2Q(Fors+Hold) 2FB *******************************************
+
+// сигналы положения (конечники)
+iOn  := AM.iOn;
+iOff := AM.iOff;
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+// формирование внутренних сигналов для реализации дожима
+IF iOff OR NOT iOn THEN timeExtraOn  := 0.0; 
+	ELSIF timeExtraOn  < 10000000.0 THEN timeExtraOn  := timeExtraOn  + cycle; 
+END_IF;
+int_iOn := timeExtraOn > tuns.delayExtraOn; // на время дожима - задерживаем сигналы открытия...
+
+IF iOn OR NOT iOff THEN timeExtraOff  := 0.0; 
+	ELSIF timeExtraOff  < 10000000.0 THEN timeExtraOff  := timeExtraOff  + cycle; 
+END_IF;
+int_iOff := timeExtraOff > tuns.delayExtraOff; // ...и закрытия.
+
+// обобщенные команды от алгоритма и от кнопок РУ
+AM.qHoldOn := int_iOn AND NOT setOff; //команда "удержание"
+// обобщенная команда: открыть
+setOn  := (modeManual AND  btnOn OR NOT modeManual AND algOn  OR setOn ) 
+          AND NOT (modeManual  AND btnOff  OR NOT modeManual AND algOff); 
+// обобщенная команда: закрыть
+setOff := (modeManual AND btnOff OR NOT modeManual AND algOff OR setOff) 
+          AND NOT (modeManual  AND  btnOn  OR NOT modeManual AND algOn ); 
+ // выход на ИМ: открыть
+qOn  := setOn  AND NOT int_iOn  AND timeQOn < tuns.delayQTimeout AND (changeCounter < 2  OR qOn );  
+
+// подсчет попыток перестановки - только для ИМ (2х )
+IF changeCounter > 0 AND (qOff OR btnOn) OR changeCounter < 0 AND (qOn OR btnOff) (*OR reset*) THEN changeCounter := 0;
+	ELSIF NOT qOnPrev  AND qOn  THEN changeCounter := changeCounter + 1;
+	ELSIF NOT qOffPrev AND qOff THEN changeCounter := changeCounter - 1;
+END_IF;
+qOnPrev := qOn;
+qOffPrev := qOff;
+
+// накапливаем время подачи команды открытия (включения)
+IF NOT setOn  OR btnOn  THEN timeQOn  := 0.0; 
+	ELSIF timeQOn  < 10000000.0 THEN timeQOn  := timeQOn  + cycle; 
+END_IF;
+IF NOT setOff OR btnOff THEN timeQOff := 0.0; 
+	ELSIF timeQOff < 10000000.0 THEN timeQOff := timeQOff + cycle; 
+END_IF;
+
+// нестрагивание (только для ИМ с двумя конечниками)
+//на закрытие
+AM.fNotStart := (timeQOn > tuns.delayNotMoveAlert AND qOn AND iOff)    //на открытие
+             OR (timeQOff > tuns.delayNotMoveAlert AND NOT qOn AND NOT AM.qHoldOn AND iOn); 
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := (timeQOn  > tuns.delayChangeOvertimeAlert AND qOn  OR notOn)  AND NOT int_iOn;     // не открыт
+notOff := (timeQOff > tuns.delayChangeOvertimeAlert AND qOff OR notOff) AND NOT int_iOff;    // не закрыт
+
+// неисправность концевых выключателей
+AM.fFB:= iOff AND iOn; //двойное положение
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn);
+selfOff := (wasOn  AND NOT iOn OR selfOff) AND NOT iOn;
+wasOn  := iOn AND (qOn OR AM.qHoldOn);
+wasOff := (iOff OR wasOff) AND NOT (qOn OR AM.qHoldOn);
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+4: // AM_1Q1FB *************************** ИМ 1Q 1FB ******************************************************
+// сигналы положения (конечники)
+iOn  := AM.iOn;
+iOff := NOT iOn;
+AM.iOff := NOT iOn;
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+// обобщенные команды от алгоритма и от кнопок РУ
+qOn := NOT modeManual AND (algOn OR btnOn AND AM.prmBtnOn)
+       OR  modeManual AND (btnOn OR qOn) AND NOT btnOff;
+
+// накапливаем время подачи команды открытия (включения)
+IF NOT qOn THEN timeQOn  := 0.0; 
+	ELSIF timeQOn  < 10000000.0 THEN timeQOn  := timeQOn  + cycle; 
+END_IF;
+
+IF qOn THEN timeQOff := 0.0; 
+	ELSIF timeQOff < 10000000.0 THEN timeQOff := timeQOff + cycle; 
+END_IF;
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := timeQOn  > tuns.delayChangeOvertimeAlert AND NOT iOn;      // не включен
+notOff := timeQOff > tuns.delayChangeOvertimeAlert AND NOT iOff;     // не выключен
+
+// обрыв КЦУ
+IF iCon or qOn THEN timeCircBrkOn := 0.0;
+	ELSIF timeCircBrkOn < tuns.delayCircBrkAlert THEN timeCircBrkOn := timeCircBrkOn + cycle; 
+END_IF;
+//обрыв КЦУ команды "открыть (включить)"
+AM.fCon := NOT AM.disableCon AND timeCircBrkOn > tuns.delayCircBrkAlert;      
+
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn);
+selfOff := (wasOn  AND NOT iOn OR selfOff) AND NOT iOn;
+wasOn  := iOn AND qOn;
+wasOff := (iOff OR wasOff) AND NOT qOn;
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+5: // AM_1Q2FB *************************** ИМ 1Q 2FB ******************************************************
+// сигналы положения (конечники)
+iOn  := AM.iOn;
+iOff := AM.iOff;
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+//  обобщенные команды от алгоритма и от кнопок РУ
+qOn := NOT modeManual AND (algOn OR btnOn AND AM.prmBtnOn)
+       OR  modeManual AND (btnOn OR qOn) AND NOT btnOff;
+
+// накапливаем время подачи команды открытия (включения)
+IF NOT qOn THEN timeQOn  := 0.0; 
+	ELSIF timeQOn  < 10000000.0 THEN timeQOn  := timeQOn  + cycle; 
+END_IF;
+
+IF qOn THEN timeQOff := 0.0; 
+	ELSIF timeQOff < 10000000.0 THEN timeQOff := timeQOff + cycle; 
+END_IF;
+
+// нестрагивание (только для ИМ с двумя конечниками)
+ //на закрытие
+AM.fNotStart := (timeQOn > tuns.delayNotMoveAlert AND qOn AND iOff)    //на открытие
+             OR (timeQOff > tuns.delayNotMoveAlert AND NOT qOn AND NOT AM.qHoldOn AND iOn);
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := timeQOn  > tuns.delayChangeOvertimeAlert AND NOT iOn;      // не включен
+notOff := timeQOff > tuns.delayChangeOvertimeAlert AND NOT iOff;     // не выключен
+
+// обрыв КЦУ
+IF iCon or qOn THEN timeCircBrkOn := 0.0;
+	ELSIF timeCircBrkOn < tuns.delayCircBrkAlert THEN timeCircBrkOn := timeCircBrkOn + cycle; 
+END_IF;
+AM.fCon := NOT AM.disableCon AND timeCircBrkOn > tuns.delayCircBrkAlert;      //обрыв КЦУ команды "открыть (включить)"
+
+// неисправность концевых выключателей
+AM.fFB:= iOff AND iOn; //двойное положение
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn);
+selfOff := (wasOn  AND NOT iOn OR selfOff) AND NOT iOn;
+wasOn  := iOn AND qOn;
+wasOff := (iOff OR wasOff) AND NOT qOn;
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+6: // AM_2Q1FB *************************** ИМ 2Q 1FB ******************************************************   // 
+// сигналы положения (конечники)
+iOn  := AM.iOn;
+iOff := NOT iOn;
+AM.iOff := NOT iOn;
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+// формирование внутренних сигналов для реализации дожима
+IF iOff OR NOT iOn THEN timeExtraOn  := 0.0; 
+	ELSIF timeExtraOn  < 10000000.0 THEN timeExtraOn  := timeExtraOn  + cycle; 
+END_IF;
+int_iOn := timeExtraOn > tuns.delayExtraOn; // на время дожима - задерживаем сигналы открытия...
+
+IF iOn OR NOT iOff THEN timeExtraOff  := 0.0; 
+	ELSIF timeExtraOff  < 10000000.0 THEN timeExtraOff  := timeExtraOff  + cycle; 
+END_IF;
+int_iOff := timeExtraOff > tuns.delayExtraOff; // ...и закрытия.
+
+//  обобщенные команды от алгоритма и от кнопок РУ
+// обобщенная команда: открыть  
+  setOn  := (modeManual AND btnOn OR NOT modeManual AND (algOn OR btnOn AND AM.prmBtnOn) OR setOn)  
+					AND NOT (modeManual  AND btnOff  OR NOT modeManual AND algOff); 
+ 
+ setOff := (modeManual AND btnOff OR NOT modeManual AND (algOff OR btnOff AND AM.prmBtnOff) OR setOff) 
+						AND NOT (modeManual  AND  btnOn  OR NOT modeManual AND algOn); // обобщенная команда: закрыть
+ 
+ qOn  := setOn  AND NOT int_iOn  AND timeQOn < tuns.delayQTimeout AND (changeCounter < 2  OR qOn);   // выход на ИМ: открыть 
+ qOff := setOff AND NOT int_iOff AND timeQOff< tuns.delayQTimeout AND (changeCounter > -2 OR qOff);   // выход на ИМ: закрыть
+
+// подсчет попыток перестановки - только для ИМ (2х )
+IF changeCounter > 0 AND (qOff OR btnOn) OR changeCounter < 0 AND (qOn OR btnOff) (*OR reset*) THEN changeCounter := 0;
+	ELSIF NOT qOnPrev  AND qOn  THEN changeCounter := changeCounter + 1;
+	ELSIF NOT qOffPrev AND qOff THEN changeCounter := changeCounter - 1;
+END_IF;
+qOnPrev := qOn;
+qOffPrev := qOff;
+
+// накапливаем время подачи команды открытия (включения)
+IF NOT setOn  OR btnOn  THEN timeQOn  := 0.0; 
+	ELSIF timeQOn  < 10000000.0 THEN timeQOn  := timeQOn  + cycle; 
+END_IF;
+
+IF NOT setOff OR btnOff THEN timeQOff := 0.0; 
+	ELSIF timeQOff < 10000000.0 THEN timeQOff := timeQOff + cycle; 
+END_IF;
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := (timeQOn  > tuns.delayChangeOvertimeAlert AND qOn  OR notOn)  AND NOT int_iOn;     // не открыт
+notOff := (timeQOff > tuns.delayChangeOvertimeAlert AND qOff OR notOff) AND NOT int_iOff;    // не закрыт
+
+// обрыв КЦУ
+IF NOT qOn AND iCon OR qOn THEN timeCircBrkOn := 0.0;
+	ELSIF timeCircBrkOn < tuns.delayCircBrkAlert THEN timeCircBrkOn := timeCircBrkOn + cycle; 
+END_IF;
+AM.fCon := NOT AM.disableCon AND (timeCircBrkOn > tuns.delayCircBrkAlert OR AM.fCon) AND NOT iCon;      //обрыв КЦУ команды "открыть (включить)"
+
+IF NOT qOff AND iCoff OR qOff THEN timeCircBrkOff := 0.0;
+	ELSIF timeCircBrkOff < tuns.delayCircBrkAlert THEN timeCircBrkOff := timeCircBrkOff + cycle; 
+END_IF;
+AM.fCoff := NOT AM.disableCoff AND (timeCircBrkOff > tuns.delayCircBrkAlert OR AM.fCoff) AND NOT iCoff; //обрыв КЦУ команды "закрыть (отключить)"
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+  selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn);
+  selfOff := (wasOn AND NOT iOn OR selfOff) AND NOT (iOn OR qOff); //
+  wasOn  := (iOn OR wasOn) AND NOT qOff;
+  wasOff := (iOff OR wasOff) AND NOT qOn;
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+7: // AM_2Q2FB *************************** ИМ 2Q 2FB ******************************************************
+// сигналы положения (конечники)
+iOn  := AM.iOn;
+iOff := AM.iOff;
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+// формирование внутренних сигналов для реализации дожима
+IF iOff OR NOT iOn THEN timeExtraOn  := 0.0; 
+	ELSIF timeExtraOn  < 10000000.0 THEN timeExtraOn  := timeExtraOn  + cycle; 
+END_IF;
+int_iOn := timeExtraOn > tuns.delayExtraOn; // на время дожима - задерживаем сигналы открытия...
+
+IF iOn OR NOT iOff THEN timeExtraOff  := 0.0; 
+	ELSIF timeExtraOff  < 10000000.0 THEN timeExtraOff  := timeExtraOff  + cycle; 
+END_IF;
+int_iOff := timeExtraOff > tuns.delayExtraOff; // ...и закрытия.
+
+//  обобщенные команды от алгоритма и от кнопок РУ
+setOn  := (modeManual AND  btnOn OR NOT modeManual AND (algOn OR btnOn AND AM.prmBtnOn)  OR setOn)
+          AND NOT (modeManual  AND btnOff  OR NOT modeManual AND algOff); // обобщенная команда: открыть
+setOff := (modeManual AND btnOff OR NOT modeManual AND (algOff OR btnOff AND AM.prmBtnOff) OR setOff)           
+          AND NOT (modeManual  AND  btnOn  OR NOT modeManual AND algOn); // обобщенная команда: закрыть
+
+qOn  := setOn  AND NOT int_iOn  AND timeQOn < tuns.delayQTimeout AND (changeCounter < 2  OR qOn );   // выход на ИМ: открыть 
+qOff := setOff AND NOT int_iOff AND timeQOff< tuns.delayQTimeout AND (changeCounter > -2 OR qOff);   // выход на ИМ: закрыть
+
+// подсчет попыток перестановки - только для ИМ (2х )
+IF changeCounter > 0 AND (qOff OR btnOn) OR changeCounter < 0 AND (qOn OR btnOff) (*OR reset*) THEN changeCounter := 0;
+	ELSIF NOT qOnPrev  AND qOn  THEN changeCounter := changeCounter + 1;
+	ELSIF NOT qOffPrev AND qOff THEN changeCounter := changeCounter - 1;
+END_IF;
+qOnPrev := qOn;
+qOffPrev := qOff;
+
+// накапливаем время подачи команды открытия (включения)
+IF NOT setOn  OR btnOn  THEN timeQOn  := 0.0; 
+	ELSIF timeQOn  < 10000000.0 THEN timeQOn  := timeQOn  + cycle; 
+END_IF;
+
+IF NOT setOff OR btnOff THEN timeQOff := 0.0; 
+	ELSIF timeQOff < 10000000.0 THEN timeQOff := timeQOff + cycle; 
+END_IF;
+
+// нестрагивание (только для ИМ с двумя конечниками)
+AM.fNotStart := (timeQOn > tuns.delayNotMoveAlert AND qOn AND iOff)    //на открытие
+             OR (timeQOff > tuns.delayNotMoveAlert AND qOff AND iOn);   //на закрытие
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := (timeQOn  > tuns.delayChangeOvertimeAlert AND qOn  OR notOn)  AND NOT int_iOn;     // не открыт
+notOff := (timeQOff > tuns.delayChangeOvertimeAlert AND qOff OR notOff) AND NOT int_iOff;    // не закрыт
+
+// обрыв КЦУ
+IF iCon or qOn THEN timeCircBrkOn := 0.0;
+	ELSIF timeCircBrkOn < tuns.delayCircBrkAlert THEN timeCircBrkOn := timeCircBrkOn + cycle; 
+END_IF;
+AM.fCon := NOT AM.disableCon AND timeCircBrkOn > tuns.delayCircBrkAlert;      //обрыв КЦУ команды "открыть (включить)"
+
+IF iCoff or qOff THEN timeCircBrkOff := 0.0;
+	ELSIF timeCircBrkOff < tuns.delayCircBrkAlert THEN timeCircBrkOff := timeCircBrkOff + cycle; 
+END_IF;
+AM.fCoff := NOT AM.disableCoff AND timeCircBrkOff > tuns.delayCircBrkAlert; //обрыв КЦУ команды "закрыть (отключить)"
+
+// неисправность концевых выключателей
+AM.fFB:= iOff AND iOn; //двойное положение
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn);
+selfOff := (wasOn AND NOT iOn OR selfOff) AND NOT (iOn OR qOff); 
+wasOn  := (iOn OR wasOn) AND NOT qOff;
+wasOff := (iOff OR wasOff) AND NOT qOn;
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+8: // AM_inv1Q1FB ************************ ИМ 1Q 1FB с командой/конечником OFF ****************************
+// сигналы положения (конечники)
+iOff := AM.iOff;
+iOn  := NOT iOff;
+AM.iOn := NOT iOff; 
+
+// сигналы контроля цепи
+iCoff := AM.iCoff;
+
+//  обобщенные команды от алгоритма и от кнопок РУ
+qOff := NOT modeManual AND (algOff OR btnOff AND AM.prmBtnOff) OR modeManual AND (btnOff OR qOff) AND NOT btnOn;
+       
+// накапливаем время подачи команды открытия (включения)
+IF NOT qOff THEN timeQOff  := 0.0; 
+	ELSIF timeQOff  < 10000000.0 THEN timeQOff  := timeQOff  + cycle; 
+END_IF;
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := (timeQOn  > tuns.delayChangeOvertimeAlert AND qOn  OR notOn)  AND NOT iOn;     // не открыт
+notOff := (timeQOff > tuns.delayChangeOvertimeAlert AND qOff OR notOff) AND NOT iOff;    // не закрыт
+
+// обрыв КЦУ
+IF NOT qOff AND iCoff OR qOff THEN timeCircBrkOff := 0.0;
+	ELSIF timeCircBrkOff < tuns.delayCircBrkAlert THEN timeCircBrkOff := timeCircBrkOff + cycle; 
+END_IF;
+AM.fCoff := NOT AM.disableCoff AND (timeCircBrkOff > tuns.delayCircBrkAlert OR AM.fCoff) AND NOT iCoff; //обрыв КЦУ команды "закрыть (отключить)"
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn);
+selfOff := (wasOn  AND NOT iOn OR selfOff) AND NOT iOn;
+wasOff  := iOff AND qOff;
+wasOn := (iOn OR wasOn) AND NOT qOff;
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+9: // AM_inv1Q2FB ************************ ИМ 1Q 2FB с командой OFF/ и двумя конечниками ******************
+// сигналы положения (конечники)
+iOff := AM.iOff;
+iOn  := AM.iOn;
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+//  обобщенные команды от алгоритма и от кнопок РУ
+qOff := NOT modeManual AND (algOff OR btnOff AND AM.prmBtnOff) OR  modeManual AND (btnOff OR qOff) AND NOT btnOn;
+       
+
+// накапливаем время подачи команды открытия (включения)
+IF NOT qOff THEN timeQOff  := 0.0; 
+	ELSIF timeQOff  < 10000000.0 THEN timeQOff  := timeQOff  + cycle; 
+END_IF;
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := (timeQOn  > tuns.delayChangeOvertimeAlert AND qOn  OR notOn)  AND NOT iOn;     // не открыт
+notOff := (timeQOff > tuns.delayChangeOvertimeAlert AND qOff OR notOff) AND NOT iOff;    // не закрыт
+
+// обрыв КЦУ
+IF NOT qOff AND iCoff OR qOff THEN timeCircBrkOff := 0.0;
+	ELSIF timeCircBrkOff < tuns.delayCircBrkAlert THEN timeCircBrkOff := timeCircBrkOff + cycle; 
+END_IF;
+AM.fCoff := NOT AM.disableCoff AND (timeCircBrkOff > tuns.delayCircBrkAlert OR AM.fCoff) AND NOT iCoff; //обрыв КЦУ команды "закрыть (отключить)"
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn);
+selfOff := (wasOn  AND NOT iOn OR selfOff) AND NOT iOn;
+wasOff  := iOff AND qOff;
+wasOn := (iOn OR wasOn) AND NOT qOff;
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+10: // AM_1Q1CFB *************************** ИМ 1Q 1FB ******************************************************
+
+// сигналы положения (конечники)
+iOff := AM.iOff;
+iOn  := NOT iOff;
+AM.iOn := NOT iOff; 
+
+// сигналы контроля цепи
+iCon  := AM.iCon;
+iCoff := AM.iCoff;
+
+// обобщенные команды от алгоритма и от кнопок РУ
+qOn := NOT modeManual AND (algOn OR btnOn AND AM.prmBtnOn) OR  modeManual AND (btnOn OR qOn) AND NOT btnOff;
+      
+// накапливаем время подачи команды открытия (включения)
+IF NOT qOn or unlock THEN timeQOn  := 0.0; 
+	ELSIF timeQOn  < 10000000.0 THEN timeQOn  := timeQOn  + cycle; 
+END_IF;
+
+IF qOn or unlock THEN timeQOff := 0.0; 
+	ELSIF timeQOff < 10000000.0 THEN timeQOff := timeQOff + cycle; 
+END_IF;
+
+// не включен (не открыт) / не выключен (не закрыт)
+notOn  := timeQOn  > tuns.delayChangeOvertimeAlert AND NOT iOn;      // не включен
+notOff := timeQOff > tuns.delayChangeOvertimeAlert AND NOT iOff;     // не выключен
+
+// обрыв КЦУ
+IF NOT qOn AND iCon OR qOn THEN timeCircBrkOn := 0.0;
+	ELSIF timeCircBrkOn < tuns.delayCircBrkAlert THEN timeCircBrkOn := timeCircBrkOn + cycle; 
+END_IF;
+AM.fCon := NOT AM.disableCon AND (timeCircBrkOn > tuns.delayCircBrkAlert OR AM.fCon) AND NOT iCon;      //обрыв КЦУ команды "открыть (включить)"
+
+// самопроизвольное открытие/закрытие
+// сигнал сбрасывается при наличии нужного положения ИМ или при подаче противоположной команды
+selfOn  := (wasOff AND NOT iOff OR selfOn) AND NOT (iOff OR qOn or unlock);
+selfOff := (wasOn  AND NOT iOn OR selfOff) AND NOT (iOn or unlock);
+wasOn  := iOn AND qOn;
+wasOff := (iOff OR wasOff) AND NOT (qOn or unlock);
+
+// разрешение для кнопок, когда ИМ не_открылся/не_закрылся
+AM.prmBtnOn := notOn  AND algOn  AND NOT qOn;
+AM.prmBtnOff := notOff AND algOff AND NOT qOff;
+
+END_CASE;
+
+//------------------------------------ Имитатор ИМ ---------------------------------------------------------
+
+frontImitOn(onImit, frImitOn); //передний фронт onImit
+
+IF onImit THEN //Начало имитации
+
+	IF frImitOn THEN // по переднему фронту onImit инициализация положение ИМ
+	  IF iOn AND NOT iOff THEN imtState := imtChangeTime; // открыт
+		ELSIF iOff AND NOT iOn THEN imtState := 0.0; //закрыт
+		ELSE imtState := imtChangeTime / 2.0; // ставим в середину
+	  END_IF;
+	END_IF;
+
+	// формирование внутренних команд в соответствии с типом ИМ
+	IF AMtype = 1 OR AMtype = 6 OR AMtype = 7 THEN // ИМ с двумя командами
+	  imt_qOn  := qOn;
+	  imt_qOff := qOff;
+	ELSIF AMtype = 3 THEN // ИМ с форсировкой-удержанием
+	  imt_qOn  := qOn OR AM.qHoldOn;
+	  imt_qOff := NOT imt_qOn;
+	ELSIF AMtype = 8 OR AMtype = 9 THEN // для ИМ (1x1) (с командой/конечником OFF)
+	  imt_qOff  := qOff;
+	  imt_qOn := NOT qOff;
+	ELSE // ИМ с одной командой
+	  imt_qOn  := qOn;
+	  imt_qOff := NOT qOn;
+	END_IF;    
+
+	IF imt_qOn  THEN imtState := imtState + cycle; END_IF; // перемещение -> ON
+	IF imt_qOff THEN imtState := imtState - cycle; END_IF; // перемещение -> OFF
+
+	IF imtState > imtChangeTime THEN imtState := imtChangeTime; END_IF; // ограничение
+	IF imtState < 0.0 THEN imtState := 0.0; END_IF;
+
+	//концевики
+	IF AMtype = 4 OR AMtype = 6 THEN
+	  AM.iOn  := imtState/imtChangeTime > 0.9; // формируем выход при 90% перемещения 
+	  AM.iOff := NOT iOn; // для ИМ 2х1
+	ELSIF AMtype = 8 THEN // для ИМ (1x1) (с командой/конечником OFF)
+	  AM.iOff  := imtState/imtChangeTime < 0.1; 
+	  AM.iOn := NOT iOff; // для ИМ 2х1
+	ELSIF AMtype = 11 THEN // для ИМ ТРК, АПК и прочих 
+	  AM.iOff  := I_OFF; 
+	  AM.iOn :=  I_ON; 
+	ELSIF AMtype <> 2 THEN
+	  AM.iOn  := imtState/imtChangeTime > 0.9; // формируем выход при 90% перемещения
+	  AM.iOff := imtState/imtChangeTime < 0.1; // формируем выход при 10% перемещения
+	END_IF;
+
+	//КЦУ (формируется, когда не подается команда управления)
+	AM.iCon  := NOT imt_qOn;
+	AM.iCoff := NOT imt_qOff;
+
+END_IF; //Конец имитации
+
+//---------------------------------------------------------------------
+IF unlock THEN 
+	notOn   := FALSE;
+	notOff  := FALSE;
+	selfOn  := FALSE;
+	selfOff := FALSE;
+	wasOn:= FALSE; //Добавлено
+	wasOff:= FALSE; //Добавлено
+	changeCounter := 0; //Добавлено
+END_IF;
+
+// привязка к выходам структуры AM
+AM.fNotOn  := notOn;	//не включен (не открыт)
+AM.fNotOff := notOff;	//не выключен (не закрыт)
+AM.fSelfOn  := selfOn;	//самопроизвольное открытие
+AM.fSelfOff := selfOff;	//самопроизвольное закрытие
+AM.qOn  := qOn;
+AM.qOff := qOff;
+// передача выходных сигналов
+Q_ON     := AM.qOn;
+Q_OFF    := AM.qOff;
+Q_HoldOn := AM.qHoldOn;
+// сброс кнопок РУ (откр/закр)
+AM.btnOn  := FALSE;
+AM.btnOff := FALSE;
+
+//ПС по ИМ для сирены. Снимать там же где и остальные ПС
+ps := AM.fNotOn and not fNotOn_prv
+	  or AM.fNotOff and not fNotOff_prv
+	  or AM.fNotStart and not fNotStart_prv
+	  or AM.fSelfOn and not fSelfOn_prv
+	  or AM.fSelfOff and not fSelfOff_prv
+	  or AM.fFB and not fFB_prv
+	  or AM.fCon and not fCon_prv
+	  or AM.fCoff and not fCoff_prv;
+
+fNotOn_prv		:= AM.fNotOn;
+fNotOff_prv		:= AM.fNotOff;
+fNotStart_prv	:= AM.fNotStart;
+fSelfOn_prv		:=	AM.fSelfOn;
+fSelfOff_prv	:=	AM.fSelfOff;
+fFB_prv			:=	AM.fFB;
+fCon_prv		:=	AM.fCon;
+fCoff_prv		:=	AM.fCoff;
+
+]]></ST>
+                </FunctionBlock>
+                <FunctionBlock UUID="XICUTQAGUXZEZLSIPSBXR2UEV4" Name="FB_IM_Call">
+                    <Variables>
+                        <Variable UUID="V3F7UFOBJBJKS7XR3CRKAY2IAQ" Name="Proc_Kr51" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="YDQZ4QFEIV6N56LHE63MN2SDLM" Name="Proc_Kr52" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="JLPQUBIZIROBWYUS7CB672RTWA" Name="Proc_Kr53" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="U3PIVH55JIKISPK5LSKIKU75TU" Name="Proc_Kr54" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="3Q5EMMJXIUIESHSDHK6OTW2GQ4" Name="Proc_Kr53b" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="VDRAZ3ZUJC2D3NAOAKIR7CABEI" Name="Proc_Kr54b" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="BBNEBDAHJ6BB5EQXA6UOI6CLKY" Name="Proc_EN_LSA1_ADES" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="O33NMC4KJT5BLWNI5O5WIR2EDE" Name="Proc_EN_LSA2_ADES" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="LRD6ZX72I6YBEST4RO2IG6Y4LE" Name="Proc_EN_LSA3_ADES" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="ZIGM4QZWI6KDIABV6GLABUVJFI" Name="Proc_EN_LSA1_GPA" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="V3PTR54PIRPCND2DGKTJACQYKM" Name="Proc_EN_LSA2_GPA" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="6TIYJTULJV7KWUQVZSOEZZMKSU" Name="Proc_EN_LSA3_GPA" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="UDTH4Q35JCBJOTTHQOXPOK4GFM" Name="Proc_EN_LSA4_GPA" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="2D7TR7ANI44N2NLLMGAZ222I24" Name="Proc_EN_LSA5_GPA" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="NQQEIWGSIP5OZE3IXKHR2AZI6Q" Name="Proc_EN_LSA6_GPA" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="VCXRDCCTG7JU7HGIZFREOJTEDY" Name="Proc_Kr51_2" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="LPE6ZPIN22WEJOYJCAONDRR5VQ" Name="Proc_Kr52_2" Type="FB_IM" TypeUUID="JIOIQ3APYP4UTCXLJQK7Q6LHCA" Usage="internal" />
+                        <Variable UUID="H5PBCAC4VRDULBAEGWVD6PFO3U" Name="IM_type" Type="T_AM_Type" TypeUUID="ANRR6BLMKETURJI5AWVQRMBAWA" Usage="internal" />
+                    </Variables>
+                    <ST><![CDATA[//Константы ИМ
+(*
+//= if not init.AM then 
+if not init then 
+	IM_type.am1x0	   	:= 2; //ИМ 1 команда, 0 конечников
+	IM_type.am2x2fh	   	:= 3; //ИМ 2 команды, 2 конечника (открытие, удержание)
+	IM_type.am1x1	   	:= 4; //ИМ 1 команда, 1 конечник
+	IM_type.am1x2	   	:= 5; //ИМ 1 команда, 2 конечника
+	IM_type.am2x1	   	:= 6; //ИМ 2 команды, 1 конечник
+	IM_type.am2x2	   	:= 7; //ИМ 2 команды, 2 конечника
+	IM_type.am1ofx1of  	:= 8; //ИМ 1 команда OF, 1 конечник OF
+	IM_type.am1ofx2	   	:= 9; //ИМ 1 команда OF, 2 конечника
+	IM_type.am1x1of		:= 10; //ИМ 1 команда, 1 конечник OF
+	IM_type.amPos		:= 11; //ИМ прочие с положением (АПК, ТРК...)
+	IM_type.am3x2		:= 12; //ИМ 3 команды (on, off, stop), 2 конечника
+	IM_type.am2x2x3ware	:= 13; //ИМ 2 команды, 2 конечника, трёхпроводная схема
+	IM_type.am1x4nku	:= 14; //ИМ 1 команда, 4 сигнала от НКУ
+	IM_type.am2x7upp	:= 15; //ИМ 2 команды (БП и УПП) и 7 сигналов от НКУ
+	IM_type.am2x8nku	:= 16; //ИМ 2 команды и 8 сигналов от НКУ
+	IM_Init(); 
+//=	init.APS := true; 
+end_if;
+//КЦ !!!!!!!
+ps_im := false; //звуковое предупреждение по ИМ
+
+//Кран 51
+//2x2
+KC_AM.Kr51.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr51.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr51.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr51( AMtype := IM_type.am2x2, AM := KC_AM.Kr51, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr51_ON.forsEnable OR KC_DO_ToHMI.Kr51_OF.forsEnable),
+tuns := TuneAM.Kr51,
+I_ON       := KC_DI.Kr51_ON
+I_OFF      := KC_DI.Kr51_OF
+I_Con      := KC_DI.Kr51_ON_KCU
+I_Coff     := KC_DI.Kr51_OF_KCU
+Q_ON     	=> KC_DO.Kr51_ON
+Q_OFF     	=> KC_DO.Kr51_OF);
+
+ps_im := ps_im OR Proc_Kr51.ps;
+
+//Кран 52
+//2x2
+KC_AM.Kr52.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr52.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr52.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr52( AMtype := IM_type.am2x2, AM := KC_AM.Kr52, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr52_ON.forsEnable OR KC_DO_ToHMI.Kr52_OF.forsEnable),
+tuns := TuneAM.Kr52,
+I_ON       := KC_DI.Kr52_ON
+I_OFF      := KC_DI.Kr52_OF
+I_Con      := KC_DI.Kr52_ON_KCU
+I_Coff     := KC_DI.Kr52_OF_KCU
+Q_ON     	=> KC_DO.Kr52_ON
+Q_OFF     	=> KC_DO.Kr52_OF);
+
+ps_im := ps_im OR Proc_Kr52.ps;
+
+//Кран 51-2
+//2x2
+KC_AM.Kr51_2.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr51_2.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr51_2.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr51_2( AMtype := IM_type.am2x2, AM := KC_AM.Kr51_2, onImit := ImitOn   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr51_2_ON.forsEnable OR KC_DO_ToHMI.Kr51_2_OF.forsEnable),
+tuns := TuneAM.Kr51_2,
+I_ON       := KC_DI.Kr51_2_ON
+I_OFF      := KC_DI.Kr51_2_OF
+I_Con      := KC_DI.Kr51_2_ON_KCU
+I_Coff     := KC_DI.Kr51_2_OF_KCU
+Q_ON     	=> KC_DO.Kr51_2_ON
+Q_OFF     	=> KC_DO.Kr51_2_OF);
+
+ps_im := ps_im OR Proc_Kr51_2.ps;
+
+//Кран 52-2
+//2x2
+KC_AM.Kr52_2.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr52_2.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr52_2.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr52_2( AMtype := IM_type.am2x2, AM := KC_AM.Kr52_2, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr52_2_ON.forsEnable OR KC_DO_ToHMI.Kr52_2_OF.forsEnable),
+tuns := TuneAM.Kr52_2,
+I_ON       := KC_DI.Kr52_2_ON
+I_OFF      := KC_DI.Kr52_2_OF
+I_Con      := KC_DI.Kr52_2_ON_KCU
+I_Coff     := KC_DI.Kr52_2_OF_KCU
+Q_ON     	=> KC_DO.Kr52_2_ON
+Q_OFF     	=> KC_DO.Kr52_2_OF);
+
+ps_im := ps_im OR Proc_Kr52_2.ps;
+
+//Кран 53
+//2x2
+KC_AM.Kr53.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr53.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr53.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr53( AMtype := IM_type.am2x2, AM := KC_AM.Kr53, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr53_ON.forsEnable OR KC_DO_ToHMI.Kr53_OF.forsEnable),
+tuns := TuneAM.Kr53,
+I_ON       := KC_DI.Kr53_ON
+I_OFF      := KC_DI.Kr53_OF
+I_Con      := KC_DI.Kr53_ON_KCU
+I_Coff     := KC_DI.Kr53_OF_KCU
+Q_ON     	=> KC_DO.Kr53_ON
+Q_OFF     	=> KC_DO.Kr53_OF);
+
+ps_im := ps_im OR Proc_Kr53.ps;
+
+//Кран 54
+//2x2
+KC_AM.Kr54.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr54.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr54.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr54( AMtype := IM_type.am2x2, AM := KC_AM.Kr54, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr54_ON.forsEnable OR KC_DO_ToHMI.Kr54_OF.forsEnable),
+tuns := TuneAM.Kr54,
+I_ON       := KC_DI.Kr54_ON
+I_OFF      := KC_DI.Kr54_OF
+I_Con      := KC_DI.Kr54_ON_KCU
+I_Coff     := KC_DI.Kr54_OF_KCU
+Q_ON     	=> KC_DO.Kr54_ON
+Q_OFF     	=> KC_DO.Kr54_OF);
+
+ps_im := ps_im OR Proc_Kr54.ps;
+
+//Кран 53 (бп)
+//2x2
+KC_AM.Kr53b.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr53b.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr53b.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr53b( AMtype := IM_type.am2x2, AM := KC_AM.Kr53b, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr53b_ON.forsEnable OR KC_DO_ToHMI.Kr53b_OF.forsEnable),
+tuns := TuneAM.Kr53b,
+I_ON       := KC_DI.Kr53b_ON
+I_OFF      := KC_DI.Kr53b_OF
+I_Con      := KC_DI.Kr53b_ON_KCU
+I_Coff     := KC_DI.Kr53b_OF_KCU
+Q_ON     	=> KC_DO.Kr53b_ON
+Q_OFF     	=> KC_DO.Kr53b_OF);
+
+ps_im := ps_im OR Proc_Kr53b.ps;
+
+//Кран 54 (бп)
+//2x2
+KC_AM.Kr54b.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.Kr54b.algOff	:=	FALSE;  //Логическая команда на закр.(выкл.)
+KC_AM.Kr54b.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_Kr54b( AMtype := IM_type.am2x2, AM := KC_AM.Kr54b, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT (KC_DO_ToHMI.Kr54b_ON.forsEnable OR KC_DO_ToHMI.Kr54b_OF.forsEnable),
+tuns := TuneAM.Kr54b,
+I_ON       := KC_DI.Kr54b_ON
+I_OFF      := KC_DI.Kr54b_OF
+I_Con      := KC_DI.Kr54b_ON_KCU
+I_Coff     := KC_DI.Kr54b_OF_KCU
+Q_ON     	=> KC_DO.Kr54b_ON
+Q_OFF     	=> KC_DO.Kr54b_OF);
+
+ps_im := ps_im OR Proc_Kr54b.ps;
+
+//Обогреватель прибора АДЭС LSA1
+//1x0
+KC_AM.EN_LSA1_ADES.disableManual := not KC_TS.DU_IM;  //Запрет РУ
+KC_AM.EN_LSA1_ADES.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA1_ADES( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA1_ADES, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA1_ADES_ON.forsEnable,
+tuns := TuneAM.EN_LSA1_ADES,
+I_Con      := KC_DI.EN_LSA1_ADES_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA1_ADES_ON);
+
+ps_im := ps_im OR Proc_EN_LSA1_ADES.ps;
+
+//Обогреватель прибора АДЭС LSA2
+//1x0
+KC_AM.EN_LSA2_ADES.disableManual :=	false; //Запрет РУ
+KC_AM.EN_LSA2_ADES.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA2_ADES( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA2_ADES, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA2_ADES_ON.forsEnable,
+tuns := TuneAM.EN_LSA2_ADES,
+I_Con      := KC_DI.EN_LSA2_ADES_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA2_ADES_ON);
+
+ps_im := ps_im OR Proc_EN_LSA2_ADES.ps;
+
+//Обогреватель прибора АДЭС LSA3
+//1x0
+KC_AM.EN_LSA3_ADES.disableManual :=	false;  //Запрет РУ
+KC_AM.EN_LSA3_ADES.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA3_ADES( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA3_ADES, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA3_ADES_ON.forsEnable,
+tuns := TuneAM.EN_LSA3_ADES,
+I_Con      := KC_DI.EN_LSA3_ADES_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA3_ADES_ON);
+
+ps_im := ps_im OR Proc_EN_LSA3_ADES.ps;
+
+//Обогреватель прибора LSA1 
+//1x0
+KC_AM.EN_LSA1_GPA.disableManual :=	false;  //Запрет РУ
+KC_AM.EN_LSA1_GPA.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA1_GPA( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA1_GPA, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA1_GPA_ON.forsEnable,
+tuns := TuneAM.EN_LSA1_GPA,
+I_Con      := KC_DI.EN_LSA1_GPA_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA1_GPA_ON);
+
+ps_im := ps_im OR Proc_EN_LSA1_GPA.ps;
+
+
+//Обогреватель прибора LSA2 
+//1x0
+KC_AM.EN_LSA2_GPA.disableManual :=	false;  //Запрет РУ
+KC_AM.EN_LSA2_GPA.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA2_GPA( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA2_GPA, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA2_GPA_ON.forsEnable,
+tuns := TuneAM.EN_LSA2_GPA,
+I_Con      := KC_DI.EN_LSA2_GPA_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA2_GPA_ON);
+
+ps_im := ps_im OR Proc_EN_LSA2_GPA.ps;
+
+//Обогреватель прибора LSA3
+//1x0
+KC_AM.EN_LSA3_GPA.disableManual	 :=	false;  //Запрет РУ
+KC_AM.EN_LSA3_GPA.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA3_GPA( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA3_GPA, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA3_GPA_ON.forsEnable, 
+tuns := TuneAM.EN_LSA3_GPA,
+I_Con      := KC_DI.EN_LSA3_GPA_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA3_GPA_ON);
+
+ps_im := ps_im OR Proc_EN_LSA3_GPA.ps;
+
+//Обогреватель прибора LSA4
+//1x0
+KC_AM.EN_LSA4_GPA.disableManual :=	false; //Запрет РУ
+KC_AM.EN_LSA4_GPA.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA4_GPA( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA4_GPA, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA4_GPA_ON.forsEnable,
+tuns := TuneAM.EN_LSA4_GPA,
+I_Con      := KC_DI.EN_LSA4_GPA_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA4_GPA_ON);
+
+ps_im := ps_im OR Proc_EN_LSA4_GPA.ps;
+
+//Обогреватель прибора LSA5 
+//1x0
+KC_AM.EN_LSA5_GPA.disableManual :=	false;  //Запрет РУ
+KC_AM.EN_LSA5_GPA.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA5_GPA( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA5_GPA, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA5_GPA_ON.forsEnable,
+tuns := TuneAM.EN_LSA5_GPA,
+I_Con      := KC_DI.EN_LSA5_GPA_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA5_GPA_ON);
+
+ps_im := ps_im OR Proc_EN_LSA5_GPA.ps;
+
+//Обогреватель прибора LSA6 
+//1x0
+KC_AM.EN_LSA6_GPA.disableManual :=	false;  //Запрет РУ
+KC_AM.EN_LSA6_GPA.algOn	:=	FALSE;  //Логическая команда на откр.(вкл.)
+
+Proc_EN_LSA6_GPA( AMtype := IM_type.am1x0, AM := KC_AM.EN_LSA6_GPA, onImit := ImitOn,   cycle := tim.cycle, unlock := KC_BTN.Deblock
+EN := NOT KC_DO_ToHMI.EN_LSA6_GPA_ON.forsEnable,
+tuns := TuneAM.EN_LSA6_GPA,
+I_Con      := KC_DI.EN_LSA6_GPA_ON_KCU,
+Q_ON     	=> KC_DO.EN_LSA6_GPA_ON);
+
+ps_im := ps_im OR Proc_EN_LSA6_GPA.ps;
+*)
+
+]]></ST>
+                </FunctionBlock>
+                <Function UUID="CODNAAKPURQE5ISSMFLXHEFINI" Name="IM_Init" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                    <Variables />
+                    <ST><![CDATA[
+(*//Кран 51
+TuneAM.Kr51.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr51.delayQTimeout := 20.0;
+TuneAM.Kr51.delayExtraOn := 1.0;
+TuneAM.Kr51.delayExtraOff := 1.0;
+TuneAM.Kr51.delayNotMoveAlert := 5.0;
+TuneAM.Kr51.delayCircBrkAlert := 1.0;
+
+//Кран 52
+TuneAM.Kr52.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr52.delayQTimeout := 20.0;
+TuneAM.Kr52.delayExtraOn := 1.0;
+TuneAM.Kr52.delayExtraOff := 1.0;
+TuneAM.Kr52.delayNotMoveAlert := 5.0;
+TuneAM.Kr52.delayCircBrkAlert := 1.0;
+
+//Кран 51-2
+TuneAM.Kr51_2.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr51_2.delayQTimeout := 20.0;
+TuneAM.Kr51_2.delayExtraOn := 1.0;
+TuneAM.Kr51_2.delayExtraOff := 1.0;
+TuneAM.Kr51_2.delayNotMoveAlert := 5.0;
+TuneAM.Kr51_2.delayCircBrkAlert := 1.0;
+
+//Кран 52-2
+TuneAM.Kr52_2.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr52_2.delayQTimeout := 20.0;
+TuneAM.Kr52_2.delayExtraOn := 1.0;
+TuneAM.Kr52_2.delayExtraOff := 1.0;
+TuneAM.Kr52_2.delayNotMoveAlert := 5.0;
+TuneAM.Kr52_2.delayCircBrkAlert := 1.0;
+
+//Кран 53
+TuneAM.Kr53.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr53.delayQTimeout := 20.0;
+TuneAM.Kr53.delayExtraOn := 1.0;
+TuneAM.Kr53.delayExtraOff := 1.0;
+TuneAM.Kr53.delayNotMoveAlert := 5.0;
+TuneAM.Kr53.delayCircBrkAlert := 1.0;
+
+//Кран 54
+TuneAM.Kr54.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr54.delayQTimeout := 20.0;
+TuneAM.Kr54.delayExtraOn := 1.0;
+TuneAM.Kr54.delayExtraOff := 1.0;
+TuneAM.Kr54.delayNotMoveAlert := 5.0;
+TuneAM.Kr54.delayCircBrkAlert := 1.0;
+
+//Кран 53 (бп)
+TuneAM.Kr53b.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr53b.delayQTimeout := 20.0;
+TuneAM.Kr53b.delayExtraOn := 1.0;
+TuneAM.Kr53b.delayExtraOff := 1.0;
+TuneAM.Kr53b.delayNotMoveAlert := 5.0;
+TuneAM.Kr53b.delayCircBrkAlert := 1.0;
+
+//Кран 54 (бп)
+TuneAM.Kr54b.delayChangeOvertimeAlert := 15.0;
+TuneAM.Kr54b.delayQTimeout := 20.0;
+TuneAM.Kr54b.delayExtraOn := 1.0;
+TuneAM.Kr54b.delayExtraOff := 1.0;
+TuneAM.Kr54b.delayNotMoveAlert := 5.0;
+TuneAM.Kr54b.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора АДЭС LSA1
+TuneAM.EN_LSA1_ADES.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA1_ADES.delayQTimeout := 20.0;
+TuneAM.EN_LSA1_ADES.delayExtraOn := 1.0;
+TuneAM.EN_LSA1_ADES.delayExtraOff := 1.0;
+TuneAM.EN_LSA1_ADES.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA1_ADES.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора АДЭС LSA2
+TuneAM.EN_LSA2_ADES.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA2_ADES.delayQTimeout := 20.0;
+TuneAM.EN_LSA2_ADES.delayExtraOn := 1.0;
+TuneAM.EN_LSA2_ADES.delayExtraOff := 1.0;
+TuneAM.EN_LSA2_ADES.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA2_ADES.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора АДЭС LSA3
+TuneAM.EN_LSA3_ADES.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA3_ADES.delayQTimeout := 20.0;
+TuneAM.EN_LSA3_ADES.delayExtraOn := 1.0;
+TuneAM.EN_LSA3_ADES.delayExtraOff := 1.0;
+TuneAM.EN_LSA3_ADES.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA3_ADES.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора LSA1 
+TuneAM.EN_LSA1_GPA.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA1_GPA.delayQTimeout := 20.0;
+TuneAM.EN_LSA1_GPA.delayExtraOn := 1.0;
+TuneAM.EN_LSA1_GPA.delayExtraOff := 1.0;
+TuneAM.EN_LSA1_GPA.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA1_GPA.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора LSA2 
+TuneAM.EN_LSA2_GPA.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA2_GPA.delayQTimeout := 20.0;
+TuneAM.EN_LSA2_GPA.delayExtraOn := 1.0;
+TuneAM.EN_LSA2_GPA.delayExtraOff := 1.0;
+TuneAM.EN_LSA2_GPA.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA2_GPA.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора LSA3
+TuneAM.EN_LSA3_GPA.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA3_GPA.delayQTimeout := 20.0;
+TuneAM.EN_LSA3_GPA.delayExtraOn := 1.0;
+TuneAM.EN_LSA3_GPA.delayExtraOff := 1.0;
+TuneAM.EN_LSA3_GPA.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA3_GPA.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора LSA4
+TuneAM.EN_LSA4_GPA.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA4_GPA.delayQTimeout := 20.0;
+TuneAM.EN_LSA4_GPA.delayExtraOn := 1.0;
+TuneAM.EN_LSA4_GPA.delayExtraOff := 1.0;
+TuneAM.EN_LSA4_GPA.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA4_GPA.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора LSA5 
+TuneAM.EN_LSA5_GPA.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA5_GPA.delayQTimeout := 20.0;
+TuneAM.EN_LSA5_GPA.delayExtraOn := 1.0;
+TuneAM.EN_LSA5_GPA.delayExtraOff := 1.0;
+TuneAM.EN_LSA5_GPA.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA5_GPA.delayCircBrkAlert := 1.0;
+
+//Обогреватель прибора LSA6 
+TuneAM.EN_LSA6_GPA.delayChangeOvertimeAlert := 15.0;
+TuneAM.EN_LSA6_GPA.delayQTimeout := 20.0;
+TuneAM.EN_LSA6_GPA.delayExtraOn := 1.0;
+TuneAM.EN_LSA6_GPA.delayExtraOff := 1.0;
+TuneAM.EN_LSA6_GPA.delayNotMoveAlert := 5.0;
+TuneAM.EN_LSA6_GPA.delayCircBrkAlert := 1.0;
+*)]]></ST>
+                </Function>
+                <FunctionBlock UUID="5R5CB5GFDUTUNMVS5PC4QJTLMY" Name="mb_IM">
+                    <Variables />
+                    <ST><![CDATA[
+//////////////////////////////////////////////////////////////////////////////////////////MODBAS/////////////////////////////////////////////////////////////////////////////////
+//Упаковка флагов состояния ИМ
+//ИМ закрыт/выключен state = 1
+UPG_AM.Kr2_1_3.OFF  := IM_SNDRCV[0].SNDRCV1.0 ; //Кран К2.1-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_1_4.OFF := IM_SNDRCV[1].SNDRCV1.0; //Кран К2.1-4, сброса конденсата из 2 ступени
+UPG_AM.Kr2_2_3.OFF := IM_SNDRCV[2].SNDRCV1.0; //Кран К2.2-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_2_4.OFF := IM_SNDRCV[3].SNDRCV1.0; //Кран К2.2-4, сброса конденсата из 2ступени
+UPG_AM.Kr8_1.OFF := IM_SNDRCV[4].SNDRCV1.0; //Входной кран
+UPG_AM.Kr8_1A.OFF := IM_SNDRCV[5].SNDRCV1.0; //Кран сброса газа на свечу на входе
+UPG_AM.KE41.OFF := IM_SNDRCV[6].SNDRCV1.0; //Кран сброса НД выход 1
+UPG_AM.KE42.OFF := IM_SNDRCV[7].SNDRCV1.0; //Кран сброса НД выход 2
+UPG_AM.KE31.OFF := IM_SNDRCV[8].SNDRCV1.0; //Кран отсечной ТГ в УПТН
+UPG_AM.VnV_BT.OFF := IM_SNDRCV[9].SNDRCV1.0; //Вытяжной вентилятор блока технолог.(АМ1-1)
+UPG_AM.VnV_UPNT.OFF := IM_SNDRCV[10].SNDRCV1.0; //Вытяжной вент. УПТН (АМ3-1)
+
+
+//ИМ открыт/включен state = 2
+UPG_AM.Kr2_1_3.ON := IM_SNDRCV[0].SNDRCV1.1; //Кран К2.1-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_1_4.ON := IM_SNDRCV[1].SNDRCV1.1; //Кран К2.1-4, сброса конденсата из 2 ступени
+UPG_AM.Kr2_2_3.ON := IM_SNDRCV[2].SNDRCV1.1; //Кран К2.2-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_2_4.ON := IM_SNDRCV[3].SNDRCV1.1; //Кран К2.2-4, сброса конденсата из 2ступени
+UPG_AM.Kr8_1.ON := IM_SNDRCV[4].SNDRCV1.1; //Входной кран
+UPG_AM.Kr8_1A.ON := IM_SNDRCV[5].SNDRCV1.1; //Кран сброса газа на свечу на входе
+UPG_AM.KE41.ON := IM_SNDRCV[6].SNDRCV1.1; //Кран сброса НД выход 1
+UPG_AM.KE42.ON := IM_SNDRCV[7].SNDRCV1.1; //Кран сброса НД выход 2
+UPG_AM.KE31.ON := IM_SNDRCV[8].SNDRCV1.1; //Кран отсечной ТГ в УПТН
+UPG_AM.VnV_BT.ON := IM_SNDRCV[9].SNDRCV1.1; //Вытяжной вентилятор блока технолог.(АМ1-1)
+UPG_AM.VnV_UPNT.ON := IM_SNDRCV[10].SNDRCV1.1; //Вытяжной вент. УПТН (АМ3-1)
+
+
+//ИМ ошибка концевиков state = 3
+UPG_AM.Kr2_1_3.ONOF := IM_SNDRCV[0].SNDRCV1.2; //Кран К2.1-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_1_4.ONOF := IM_SNDRCV[1].SNDRCV1.2; //Кран К2.1-4, сброса конденсата из 2 ступени
+UPG_AM.Kr2_2_3.ONOF := IM_SNDRCV[2].SNDRCV1.2; //Кран К2.2-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_2_4.ONOF := IM_SNDRCV[3].SNDRCV1.2; //Кран К2.2-4, сброса конденсата из 2ступени
+UPG_AM.Kr8_1.ONOF := IM_SNDRCV[4].SNDRCV1.2; //Входной кран
+UPG_AM.Kr8_1A.ONOF := IM_SNDRCV[5].SNDRCV1.2; //Кран сброса газа на свечу на входе
+UPG_AM.KE41.ONOF := IM_SNDRCV[6].SNDRCV1.2; //Кран сброса НД выход 1
+UPG_AM.KE42.ONOF := IM_SNDRCV[7].SNDRCV1.2; //Кран сброса НД выход 2
+UPG_AM.KE31.ONOF := IM_SNDRCV[8].SNDRCV1.2; //Кран отсечной ТГ в УПТН
+UPG_AM.VnV_BT.ONOF := IM_SNDRCV[9].SNDRCV1.2; //Вытяжной вентилятор блока технолог.(АМ1-1)
+UPG_AM.VnV_UPNT.ONOF := IM_SNDRCV[10].SNDRCV1.2; //Вытяжной вент. УПТН (АМ3-1)
+
+//ИМ DA	0 - автомат, 1 - дистанция
+IM_SNDRCV[0].SNDRCV1.3 := UPG_AM.Kr2_1_3.DA ; //Кран К2.1-3, сброса конденсата из 1 ступени
+IM_SNDRCV[1].SNDRCV1.3 := UPG_AM.Kr2_1_4.DA; //Кран К2.1-4, сброса конденсата из 2 ступени
+IM_SNDRCV[2].SNDRCV1.3 := UPG_AM.Kr2_2_3.DA ; //Кран К2.2-3, сброса конденсата из 1 ступени
+IM_SNDRCV[3].SNDRCV1.3 := UPG_AM.Kr2_2_4.DA ; //Кран К2.2-4, сброса конденсата из 2ступени
+IM_SNDRCV[4].SNDRCV1.3 := UPG_AM.Kr8_1.DA ; //Входной кран
+IM_SNDRCV[5].SNDRCV1.3 := UPG_AM.Kr8_1A.DA ; //Кран сброса газа на свечу на входе
+IM_SNDRCV[6].SNDRCV1.3 := UPG_AM.KE41.DA; //Кран сброса НД выход 1
+IM_SNDRCV[7].SNDRCV1.3 := UPG_AM.KE42.DA ; //Кран сброса НД выход 2
+IM_SNDRCV[8].SNDRCV1.3 :=  UPG_AM.KE31.DA; //Кран отсечной ТГ в УПТН
+IM_SNDRCV[9].SNDRCV1.3 :=  UPG_AM.VnV_BT.DA; //Вытяжной вентилятор блока технолог.(АМ1-1)
+IM_SNDRCV[10].SNDRCV1.3 :=  UPG_AM.VnV_UPNT.DA; //Вытяжной вент. УПТН (АМ3-1)
+
+//ИМ general Обобщённая ошибка ИМ
+UPG_AM.Kr2_1_3.general := IM_SNDRCV[0].SNDRCV1.4 ; //Кран К2.1-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_1_4.general := IM_SNDRCV[1].SNDRCV1.4 ; //Кран К2.1-4, сброса конденсата из 2 ступени
+UPG_AM.Kr2_2_3.general := IM_SNDRCV[2].SNDRCV1.4 ; //Кран К2.2-3, сброса конденсата из 1 ступени
+UPG_AM.Kr2_2_4.general := IM_SNDRCV[3].SNDRCV1.4 ; //Кран К2.2-4, сброса конденсата из 2ступени
+UPG_AM.Kr8_1.general := IM_SNDRCV[4].SNDRCV1.4 ; //Входной кран
+UPG_AM.Kr8_1A.general := IM_SNDRCV[5].SNDRCV1.4 ; //Кран сброса газа на свечу на входе
+UPG_AM.KE41.general := IM_SNDRCV[6].SNDRCV1.4 ; //Кран сброса НД выход 1
+UPG_AM.KE42.general := IM_SNDRCV[7].SNDRCV1.4 ; //Кран сброса НД выход 2
+UPG_AM.KE31.general := IM_SNDRCV[8].SNDRCV1.4 ; //Кран отсечной ТГ в УПТН
+UPG_AM.VnV_BT.general := IM_SNDRCV[9].SNDRCV1.4 ; //Вытяжной вентилятор блока технолог.(АМ1-1)
+UPG_AM.VnV_UPNT.general := IM_SNDRCV[10].SNDRCV1.4 ; //Вытяжной вент. УПТН (АМ3-1)
+
+
+//ИМ rOn Кн. "Открыть"
+IM_SNDRCV[0].SNDRCV1.5 := UPG_AM.Kr2_1_3.rOn; //Кран К2.1-3, сброса конденсата из 1 ступени
+IM_SNDRCV[1].SNDRCV1.5 := UPG_AM.Kr2_1_4.rOn ; //Кран К2.1-4, сброса конденсата из 2 ступени
+IM_SNDRCV[2].SNDRCV1.5 := UPG_AM.Kr2_2_3.rOn; //Кран К2.2-3, сброса конденсата из 1 ступени
+IM_SNDRCV[3].SNDRCV1.5  := UPG_AM.Kr2_2_4.rOn; //Кран К2.2-4, сброса конденсата из 2ступени
+IM_SNDRCV[4].SNDRCV1.5  := UPG_AM.Kr8_1.rOn; //Входной кран
+IM_SNDRCV[5].SNDRCV1.5  := UPG_AM.Kr8_1A.rOn ; //Кран сброса газа на свечу на входе
+IM_SNDRCV[6].SNDRCV1.5 := UPG_AM.KE41.rOn ; //Кран сброса НД выход 1
+IM_SNDRCV[7].SNDRCV1.5 := UPG_AM.KE42.rOn ; //Кран сброса НД выход 2
+IM_SNDRCV[8].SNDRCV1.5 := UPG_AM.KE31.rOn ; //Кран отсечной ТГ в УПТН
+IM_SNDRCV[9].SNDRCV1.5 := UPG_AM.VnV_BT.rOn ; //Вытяжной вентилятор блока технолог.(АМ1-1)
+IM_SNDRCV[10].SNDRCV1.5 := UPG_AM.VnV_UPNT.rOn ; //Вытяжной вент. УПТН (АМ3-1)
+
+
+//ИМ rOff Кн. "Закрыть"
+IM_SNDRCV[0].SNDRCV1.6 := UPG_AM.Kr2_1_3.rOff ; //Кран К2.1-3, сброса конденсата из 1 ступени
+IM_SNDRCV[1].SNDRCV1.6 := UPG_AM.Kr2_1_4.rOff ; //Кран К2.1-4, сброса конденсата из 2 ступени
+IM_SNDRCV[2].SNDRCV1.6 := UPG_AM.Kr2_2_3.rOff ; //Кран К2.2-3, сброса конденсата из 1 ступени
+IM_SNDRCV[3].SNDRCV1.6 := UPG_AM.Kr2_2_4.rOff ; //Кран К2.2-4, сброса конденсата из 2ступени
+IM_SNDRCV[4].SNDRCV1.6 := UPG_AM.Kr8_1.rOff ; //Входной кран
+IM_SNDRCV[5].SNDRCV1.6 := UPG_AM.Kr8_1A.rOff ; //Кран сброса газа на свечу на входе
+IM_SNDRCV[6].SNDRCV1.6 := UPG_AM.KE41.rOff ; //Кран сброса НД выход 1
+IM_SNDRCV[7].SNDRCV1.6 := UPG_AM.KE42.rOff ; //Кран сброса НД выход 2
+IM_SNDRCV[8].SNDRCV1.6 := UPG_AM.KE31.rOff ; //Кран отсечной ТГ в УПТН
+IM_SNDRCV[9].SNDRCV1.6 := UPG_AM.VnV_BT.rOff ; //Вытяжной вентилятор блока технолог.(АМ1-1)
+IM_SNDRCV[10].SNDRCV1.6 :=  UPG_AM.VnV_UPNT.rOff; //Вытяжной вент. УПТН (АМ3-1)
+]]></ST>
+                </FunctionBlock>
+            </Folder>
+            <Folder Name="InOut" Comment="" Data="" UUID="QKXPXV4BE6KU3GO4GRWTJE6JDA">
+                <Folder Name="AI" Comment="" Data="" UUID="VZA4GQFWRYCERISJHQGHJ2WNKY">
+                    <Function UUID="VVD6IBB2IGKPCF3F6CXLU6VLSY" Name="UPG_UPG_AI_Permit" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="tmpPermit" Type="BOOL" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[(*//--- Групповое разрешение ДУ ---
+tmpPermit := true;
+//Начало сгенерированного кода AI_Permit
+UPG_UPG_mb_AI_ToHMI.Pg_in_UPG.manual := tmpPermit; //Давление газа на входе УПТИГ (ВР1-1);
+UPG_UPG_mb_AI_ToHMI.Tg_in_UPG.manual := tmpPermit; //Температура на входе УПТИГ (ВК1-1);
+UPG_UPG_mb_AI_ToHMI.dPg_F21.manual := tmpPermit; //Перепад давления на узле очистки Ф2.1 (ВР2-1);
+UPG_UPG_mb_AI_ToHMI.Res_0.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Tg_in_Warm.manual := tmpPermit; //Температура на входе узла ПГ (ВК3-1);
+UPG_UPG_mb_AI_ToHMI.Tg_out_Warm.manual := tmpPermit; //Температура на выходе узла ПГ  (ВК3-2);
+UPG_UPG_mb_AI_ToHMI.Pg_out3_UPG.manual := tmpPermit; //Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4);
+UPG_UPG_mb_AI_ToHMI.Tg_out3_UPG.manual := tmpPermit; //Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4);
+UPG_UPG_mb_AI_ToHMI.Pg_out1_BR.manual := tmpPermit; //Давление на выходе БР выход 1 (ВР4-1);
+UPG_UPG_mb_AI_ToHMI.Pg_out1_UPG.manual := tmpPermit; //Давление на выходе 1 УПТИГ (ВР1-2);
+UPG_UPG_mb_AI_ToHMI.Tg_out1_UPG.manual := tmpPermit; //Температура на выходе 1 УПТИГ (ВК1-2);
+UPG_UPG_mb_AI_ToHMI.Res_1.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Pg_out2_BR.manual := tmpPermit; //Давление на выходе БР выход 2 (ВР4-2);
+UPG_UPG_mb_AI_ToHMI.Pg_out2_UPG.manual := tmpPermit; //Давление на выходе 2 УПТИГ (ВР1-3);
+UPG_UPG_mb_AI_ToHMI.Tg_out2_UPG.manual := tmpPermit; //Температура на выходе 2 УПТИГ (ВК1-3);
+UPG_UPG_mb_AI_ToHMI.Res_2.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.T_OProom.manual := tmpPermit; //Температура в помещении операторной (ВК11-1);
+UPG_UPG_mb_AI_ToHMI.Lk_ESK.manual := tmpPermit; //Уровень в ЕСК;
+UPG_UPG_mb_AI_ToHMI.Res_3.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Res_4.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Res_5.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Res_6.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Res_7.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Res_8.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Uosn_SAU.manual := tmpPermit; //Измерение основного напряжения;
+UPG_UPG_mb_AI_ToHMI.Urez_SAU.manual := tmpPermit; //Измерение резервного напряжения;
+UPG_UPG_mb_AI_ToHMI.Res_9.manual := tmpPermit; //Резерв;
+UPG_UPG_mb_AI_ToHMI.Res_10.manual := tmpPermit; //Резерв;
+//Конец сгенерированного кода
+*)]]></ST>
+                    </Function>
+                    <Function UUID="HGRAXUKLIC4WNHU6JCU65ENJGI" Name="UPG_UPG_mb_AI_CallAll" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="repTime" Type="INT" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[///////////////////////////////////////////////////////////////////////////////////////////MODBAS/////////////////////////////////////////////////////////////////////////////////
+//Упаковка флагов состояния аналоговых входов
+//обрыв
+UPG_UPG_AI_ToHMI.Pg_in_UPG.break :=AI_SNDRCV[0].SNDRCV1.0; //Давление газа на входе УПТИГ (ВР1-1)
+UPG_UPG_AI_ToHMI.Tg_in_UPG.break :=AI_SNDRCV[1].SNDRCV1.0; //Температура на входе УПТИГ (ВК1-1)
+UPG_UPG_AI_ToHMI.dPg_F21.break :=AI_SNDRCV[2].SNDRCV1.0; //Перепад давления на узле очистки Ф2.1 (ВР2-1)
+UPG_UPG_AI_ToHMI.Res_0.break :=AI_SNDRCV[3].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Tg_in_Warm.break :=AI_SNDRCV[4].SNDRCV1.0; //Температура на входе узла ПГ (ВК3-1)
+UPG_UPG_AI_ToHMI.Tg_out_Warm.break :=AI_SNDRCV[5].SNDRCV1.0; //Температура на выходе узла ПГ  (ВК3-2)
+UPG_UPG_AI_ToHMI.Pg_out3_UPG.break :=AI_SNDRCV[6].SNDRCV1.0; //Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+UPG_UPG_AI_ToHMI.Tg_out3_UPG.break :=AI_SNDRCV[7].SNDRCV1.0; //Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+UPG_UPG_AI_ToHMI.Pg_out1_BR.break :=AI_SNDRCV[8].SNDRCV1.0; //Давление на выходе БР выход 1 (ВР4-1)
+UPG_UPG_AI_ToHMI.Pg_out1_UPG.break :=AI_SNDRCV[9].SNDRCV1.0; //Давление на выходе 1 УПТИГ (ВР1-2)
+UPG_UPG_AI_ToHMI.Tg_out1_UPG.break :=AI_SNDRCV[10].SNDRCV1.0; //Температура на выходе 1 УПТИГ (ВК1-2)
+UPG_UPG_AI_ToHMI.Res_1.break :=AI_SNDRCV[11].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Pg_out2_BR.break :=AI_SNDRCV[12].SNDRCV1.0; //Давление на выходе БР выход 2 (ВР4-2)
+UPG_UPG_AI_ToHMI.Pg_out2_UPG.break :=AI_SNDRCV[13].SNDRCV1.0; //Давление на выходе 2 УПТИГ (ВР1-3)
+UPG_UPG_AI_ToHMI.Tg_out2_UPG.break :=AI_SNDRCV[14].SNDRCV1.0; //Температура на выходе 2 УПТИГ (ВК1-3)
+UPG_UPG_AI_ToHMI.Res_2.break :=AI_SNDRCV[15].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.T_OProom.break :=AI_SNDRCV[16].SNDRCV1.0; //Температура в помещении операторной (ВК11-1)
+UPG_UPG_AI_ToHMI.Lk_ESK.break :=AI_SNDRCV[17].SNDRCV1.0; //Уровень в ЕСК
+UPG_UPG_AI_ToHMI.Res_3.break :=AI_SNDRCV[18].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Res_4.break :=AI_SNDRCV[19].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Res_5.break :=AI_SNDRCV[20].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Res_6.break :=AI_SNDRCV[21].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Res_7.break :=AI_SNDRCV[22].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Res_8.break :=AI_SNDRCV[23].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Uosn_SAU.break :=AI_SNDRCV[24].SNDRCV1.0; //Измерение основного напряжения
+UPG_UPG_AI_ToHMI.Urez_SAU.break :=AI_SNDRCV[25].SNDRCV1.0; //Измерение резервного напряжения
+UPG_UPG_AI_ToHMI.Res_9.break :=AI_SNDRCV[26].SNDRCV1.0; //Резерв
+UPG_UPG_AI_ToHMI.Res_10.break :=AI_SNDRCV[27].SNDRCV1.0; //Резерв
+
+
+
+//КЗ (верхний зашкал)
+
+UPG_UPG_AI_ToHMI.Pg_in_UPG.up_scale :=AI_SNDRCV[0].SNDRCV1.1; //Давление газа на входе УПТИГ (ВР1-1)
+UPG_UPG_AI_ToHMI.Tg_in_UPG.up_scale :=AI_SNDRCV[1].SNDRCV1.1; //Температура на входе УПТИГ (ВК1-1)
+UPG_UPG_AI_ToHMI.dPg_F21.up_scale :=AI_SNDRCV[2].SNDRCV1.1; //Перепад давления на узле очистки Ф2.1 (ВР2-1)
+UPG_UPG_AI_ToHMI.Res_0.up_scale :=AI_SNDRCV[3].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Tg_in_Warm.up_scale :=AI_SNDRCV[4].SNDRCV1.1; //Температура на входе узла ПГ (ВК3-1)
+UPG_UPG_AI_ToHMI.Tg_out_Warm.up_scale :=AI_SNDRCV[5].SNDRCV1.1; //Температура на выходе узла ПГ  (ВК3-2)
+UPG_UPG_AI_ToHMI.Pg_out3_UPG.up_scale :=AI_SNDRCV[6].SNDRCV1.1; //Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+UPG_UPG_AI_ToHMI.Tg_out3_UPG.up_scale :=AI_SNDRCV[7].SNDRCV1.1; //Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+UPG_UPG_AI_ToHMI.Pg_out1_BR.up_scale :=AI_SNDRCV[8].SNDRCV1.1; //Давление на выходе БР выход 1 (ВР4-1)
+UPG_UPG_AI_ToHMI.Pg_out1_UPG.up_scale :=AI_SNDRCV[9].SNDRCV1.1; //Давление на выходе 1 УПТИГ (ВР1-2)
+UPG_UPG_AI_ToHMI.Tg_out1_UPG.up_scale :=AI_SNDRCV[10].SNDRCV1.1; //Температура на выходе 1 УПТИГ (ВК1-2)
+UPG_UPG_AI_ToHMI.Res_1.up_scale :=AI_SNDRCV[11].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Pg_out2_BR.up_scale :=AI_SNDRCV[12].SNDRCV1.1; //Давление на выходе БР выход 2 (ВР4-2)
+UPG_UPG_AI_ToHMI.Pg_out2_UPG.up_scale :=AI_SNDRCV[13].SNDRCV1.1; //Давление на выходе 2 УПТИГ (ВР1-3)
+UPG_UPG_AI_ToHMI.Tg_out2_UPG.up_scale :=AI_SNDRCV[14].SNDRCV1.1; //Температура на выходе 2 УПТИГ (ВК1-3)
+UPG_UPG_AI_ToHMI.Res_2.up_scale :=AI_SNDRCV[15].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.T_OProom.up_scale :=AI_SNDRCV[16].SNDRCV1.1; //Температура в помещении операторной (ВК11-1)
+UPG_UPG_AI_ToHMI.Lk_ESK.up_scale :=AI_SNDRCV[17].SNDRCV1.1; //Уровень в ЕСК
+UPG_UPG_AI_ToHMI.Res_3.up_scale :=AI_SNDRCV[18].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Res_4.up_scale :=AI_SNDRCV[19].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Res_5.up_scale :=AI_SNDRCV[20].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Res_6.up_scale :=AI_SNDRCV[21].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Res_7.up_scale :=AI_SNDRCV[22].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Res_8.up_scale :=AI_SNDRCV[23].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Uosn_SAU.up_scale :=AI_SNDRCV[24].SNDRCV1.1; //Измерение основного напряжения
+UPG_UPG_AI_ToHMI.Urez_SAU.up_scale :=AI_SNDRCV[25].SNDRCV1.1; //Измерение резервного напряжения
+UPG_UPG_AI_ToHMI.Res_9.up_scale :=AI_SNDRCV[26].SNDRCV1.1; //Резерв
+UPG_UPG_AI_ToHMI.Res_10.up_scale :=AI_SNDRCV[27].SNDRCV1.1; //Резерв
+
+
+//Flt-Обобщенная неисправность
+
+UPG_UPG_AI_ToHMI.Pg_in_UPG.fault_common :=AI_SNDRCV[0].SNDRCV1.2; //Давление газа на входе УПТИГ (ВР1-1)
+UPG_UPG_AI_ToHMI.Tg_in_UPG.fault_common :=AI_SNDRCV[1].SNDRCV1.2; //Температура на входе УПТИГ (ВК1-1)
+UPG_UPG_AI_ToHMI.dPg_F21.fault_common :=AI_SNDRCV[2].SNDRCV1.2; //Перепад давления на узле очистки Ф2.1 (ВР2-1)
+UPG_UPG_AI_ToHMI.Res_0.fault_common :=AI_SNDRCV[3].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Tg_in_Warm.fault_common :=AI_SNDRCV[4].SNDRCV1.2; //Температура на входе узла ПГ (ВК3-1)
+UPG_UPG_AI_ToHMI.Tg_out_Warm.fault_common :=AI_SNDRCV[5].SNDRCV1.2; //Температура на выходе узла ПГ  (ВК3-2)
+UPG_UPG_AI_ToHMI.Pg_out3_UPG.fault_common :=AI_SNDRCV[6].SNDRCV1.2; //Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+UPG_UPG_AI_ToHMI.Tg_out3_UPG.fault_common :=AI_SNDRCV[7].SNDRCV1.2; //Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+UPG_UPG_AI_ToHMI.Pg_out1_BR.fault_common :=AI_SNDRCV[8].SNDRCV1.2; //Давление на выходе БР выход 1 (ВР4-1)
+UPG_UPG_AI_ToHMI.Pg_out1_UPG.fault_common :=AI_SNDRCV[9].SNDRCV1.2; //Давление на выходе 1 УПТИГ (ВР1-2)
+UPG_UPG_AI_ToHMI.Tg_out1_UPG.fault_common :=AI_SNDRCV[10].SNDRCV1.2; //Температура на выходе 1 УПТИГ (ВК1-2)
+UPG_UPG_AI_ToHMI.Res_1.fault_common :=AI_SNDRCV[11].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Pg_out2_BR.fault_common :=AI_SNDRCV[12].SNDRCV1.2; //Давление на выходе БР выход 2 (ВР4-2)
+UPG_UPG_AI_ToHMI.Pg_out2_UPG.fault_common :=AI_SNDRCV[13].SNDRCV1.2; //Давление на выходе 2 УПТИГ (ВР1-3)
+UPG_UPG_AI_ToHMI.Tg_out2_UPG.fault_common :=AI_SNDRCV[14].SNDRCV1.2; //Температура на выходе 2 УПТИГ (ВК1-3)
+UPG_UPG_AI_ToHMI.Res_2.fault_common :=AI_SNDRCV[15].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.T_OProom.fault_common :=AI_SNDRCV[16].SNDRCV1.2; //Температура в помещении операторной (ВК11-1)
+UPG_UPG_AI_ToHMI.Lk_ESK.fault_common :=AI_SNDRCV[17].SNDRCV1.2; //Уровень в ЕСК
+UPG_UPG_AI_ToHMI.Res_3.fault_common :=AI_SNDRCV[18].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Res_4.fault_common :=AI_SNDRCV[19].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Res_5.fault_common :=AI_SNDRCV[20].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Res_6.fault_common :=AI_SNDRCV[21].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Res_7.fault_common :=AI_SNDRCV[22].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Res_8.fault_common :=AI_SNDRCV[23].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Uosn_SAU.fault_common :=AI_SNDRCV[24].SNDRCV1.2; //Измерение основного напряжения
+UPG_UPG_AI_ToHMI.Urez_SAU.fault_common :=AI_SNDRCV[25].SNDRCV1.2; //Измерение резервного напряжения
+UPG_UPG_AI_ToHMI.Res_9.fault_common :=AI_SNDRCV[26].SNDRCV1.2; //Резерв
+UPG_UPG_AI_ToHMI.Res_10.fault_common :=AI_SNDRCV[27].SNDRCV1.2; //Резерв
+
+
+//AS-Превышение аварийной уставки
+
+UPG_UPG_AI_ToHMI.Pg_in_UPG.as :=AI_SNDRCV[0].SNDRCV1.3; //Давление газа на входе УПТИГ (ВР1-1)
+UPG_UPG_AI_ToHMI.Tg_in_UPG.as :=AI_SNDRCV[1].SNDRCV1.3; //Температура на входе УПТИГ (ВК1-1)
+UPG_UPG_AI_ToHMI.dPg_F21.as :=AI_SNDRCV[2].SNDRCV1.3; //Перепад давления на узле очистки Ф2.1 (ВР2-1)
+UPG_UPG_AI_ToHMI.Res_0.as :=AI_SNDRCV[3].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Tg_in_Warm.as :=AI_SNDRCV[4].SNDRCV1.3; //Температура на входе узла ПГ (ВК3-1)
+UPG_UPG_AI_ToHMI.Tg_out_Warm.as :=AI_SNDRCV[5].SNDRCV1.3; //Температура на выходе узла ПГ  (ВК3-2)
+UPG_UPG_AI_ToHMI.Pg_out3_UPG.as :=AI_SNDRCV[6].SNDRCV1.3; //Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+UPG_UPG_AI_ToHMI.Tg_out3_UPG.as :=AI_SNDRCV[7].SNDRCV1.3; //Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+UPG_UPG_AI_ToHMI.Pg_out1_BR.as :=AI_SNDRCV[8].SNDRCV1.3; //Давление на выходе БР выход 1 (ВР4-1)
+UPG_UPG_AI_ToHMI.Pg_out1_UPG.as :=AI_SNDRCV[9].SNDRCV1.3; //Давление на выходе 1 УПТИГ (ВР1-2)
+UPG_UPG_AI_ToHMI.Tg_out1_UPG.as :=AI_SNDRCV[10].SNDRCV1.3; //Температура на выходе 1 УПТИГ (ВК1-2)
+UPG_UPG_AI_ToHMI.Res_1.as :=AI_SNDRCV[11].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Pg_out2_BR.as :=AI_SNDRCV[12].SNDRCV1.3; //Давление на выходе БР выход 2 (ВР4-2)
+UPG_UPG_AI_ToHMI.Pg_out2_UPG.as :=AI_SNDRCV[13].SNDRCV1.3; //Давление на выходе 2 УПТИГ (ВР1-3)
+UPG_UPG_AI_ToHMI.Tg_out2_UPG.as :=AI_SNDRCV[14].SNDRCV1.3; //Температура на выходе 2 УПТИГ (ВК1-3)
+UPG_UPG_AI_ToHMI.Res_2.as :=AI_SNDRCV[15].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.T_OProom.as :=AI_SNDRCV[16].SNDRCV1.3; //Температура в помещении операторной (ВК11-1)
+UPG_UPG_AI_ToHMI.Lk_ESK.as :=AI_SNDRCV[17].SNDRCV1.3; //Уровень в ЕСК
+UPG_UPG_AI_ToHMI.Res_3.as :=AI_SNDRCV[18].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Res_4.as :=AI_SNDRCV[19].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Res_5.as :=AI_SNDRCV[20].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Res_6.as :=AI_SNDRCV[21].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Res_7.as :=AI_SNDRCV[22].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Res_8.as :=AI_SNDRCV[23].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Uosn_SAU.as :=AI_SNDRCV[24].SNDRCV1.3; //Измерение основного напряжения
+UPG_UPG_AI_ToHMI.Urez_SAU.as :=AI_SNDRCV[25].SNDRCV1.3; //Измерение резервного напряжения
+UPG_UPG_AI_ToHMI.Res_9.as :=AI_SNDRCV[26].SNDRCV1.3; //Резерв
+UPG_UPG_AI_ToHMI.Res_10.as :=AI_SNDRCV[27].SNDRCV1.3; //Резерв
+
+
+//PS-Превышение предупредительной
+
+UPG_UPG_AI_ToHMI.Pg_in_UPG.ps :=AI_SNDRCV[0].SNDRCV1.4; //Давление газа на входе УПТИГ (ВР1-1)
+UPG_UPG_AI_ToHMI.Tg_in_UPG.ps :=AI_SNDRCV[1].SNDRCV1.4; //Температура на входе УПТИГ (ВК1-1)
+UPG_UPG_AI_ToHMI.dPg_F21.ps :=AI_SNDRCV[2].SNDRCV1.4; //Перепад давления на узле очистки Ф2.1 (ВР2-1)
+UPG_UPG_AI_ToHMI.Res_0.ps :=AI_SNDRCV[3].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Tg_in_Warm.ps :=AI_SNDRCV[4].SNDRCV1.4; //Температура на входе узла ПГ (ВК3-1)
+UPG_UPG_AI_ToHMI.Tg_out_Warm.ps :=AI_SNDRCV[5].SNDRCV1.4; //Температура на выходе узла ПГ  (ВК3-2)
+UPG_UPG_AI_ToHMI.Pg_out3_UPG.ps :=AI_SNDRCV[6].SNDRCV1.4; //Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+UPG_UPG_AI_ToHMI.Tg_out3_UPG.ps :=AI_SNDRCV[7].SNDRCV1.4; //Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+UPG_UPG_AI_ToHMI.Pg_out1_BR.ps :=AI_SNDRCV[8].SNDRCV1.4; //Давление на выходе БР выход 1 (ВР4-1)
+UPG_UPG_AI_ToHMI.Pg_out1_UPG.ps :=AI_SNDRCV[9].SNDRCV1.4; //Давление на выходе 1 УПТИГ (ВР1-2)
+UPG_UPG_AI_ToHMI.Tg_out1_UPG.ps :=AI_SNDRCV[10].SNDRCV1.4; //Температура на выходе 1 УПТИГ (ВК1-2)
+UPG_UPG_AI_ToHMI.Res_1.ps :=AI_SNDRCV[11].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Pg_out2_BR.ps :=AI_SNDRCV[12].SNDRCV1.4; //Давление на выходе БР выход 2 (ВР4-2)
+UPG_UPG_AI_ToHMI.Pg_out2_UPG.ps :=AI_SNDRCV[13].SNDRCV1.4; //Давление на выходе 2 УПТИГ (ВР1-3)
+UPG_UPG_AI_ToHMI.Tg_out2_UPG.ps :=AI_SNDRCV[14].SNDRCV1.4; //Температура на выходе 2 УПТИГ (ВК1-3)
+UPG_UPG_AI_ToHMI.Res_2.ps :=AI_SNDRCV[15].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.T_OProom.ps :=AI_SNDRCV[16].SNDRCV1.4; //Температура в помещении операторной (ВК11-1)
+UPG_UPG_AI_ToHMI.Lk_ESK.ps :=AI_SNDRCV[17].SNDRCV1.4; //Уровень в ЕСК
+UPG_UPG_AI_ToHMI.Res_3.ps :=AI_SNDRCV[18].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Res_4.ps :=AI_SNDRCV[19].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Res_5.ps :=AI_SNDRCV[20].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Res_6.ps :=AI_SNDRCV[21].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Res_7.ps :=AI_SNDRCV[22].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Res_8.ps :=AI_SNDRCV[23].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Uosn_SAU.ps :=AI_SNDRCV[24].SNDRCV1.4; //Измерение основного напряжения
+UPG_UPG_AI_ToHMI.Urez_SAU.ps :=AI_SNDRCV[25].SNDRCV1.4; //Измерение резервного напряжения
+UPG_UPG_AI_ToHMI.Res_9.ps :=AI_SNDRCV[26].SNDRCV1.4; //Резерв
+UPG_UPG_AI_ToHMI.Res_10.ps :=AI_SNDRCV[27].SNDRCV1.4; //Резерв
+
+
+
+UPG_UPG_AI_ToHMI.Pg_in_UPG.PV :=UPG_UPG_AI_DRV.Pg_in_UPG;//Давление газа на входе УПТИГ (ВР1-1)
+UPG_UPG_AI_ToHMI.Tg_in_UPG.PV :=UPG_UPG_AI_DRV.Tg_in_UPG;//Температура на входе УПТИГ (ВК1-1)
+UPG_UPG_AI_ToHMI.dPg_F21.PV :=UPG_UPG_AI_DRV.dPg_F21;//Перепад давления на узле очистки Ф2.1 (ВР2-1)
+UPG_UPG_AI_ToHMI.Res_0.PV :=UPG_UPG_AI_DRV.Res_0;//Резерв
+UPG_UPG_AI_ToHMI.Tg_in_Warm.PV :=UPG_UPG_AI_DRV.Tg_in_Warm;//Температура на входе узла ПГ (ВК3-1)
+UPG_UPG_AI_ToHMI.Tg_out_Warm.PV :=UPG_UPG_AI_DRV.Tg_out_Warm;//Температура на выходе узла ПГ  (ВК3-2)
+UPG_UPG_AI_ToHMI.Pg_out3_UPG.PV :=UPG_UPG_AI_DRV.Pg_out3_UPG;//Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+UPG_UPG_AI_ToHMI.Tg_out3_UPG.PV :=UPG_UPG_AI_DRV.Tg_out3_UPG;//Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+UPG_UPG_AI_ToHMI.Pg_out1_BR.PV :=UPG_UPG_AI_DRV.Pg_out1_BR;//Давление на выходе БР выход 1 (ВР4-1)
+UPG_UPG_AI_ToHMI.Pg_out1_UPG.PV :=UPG_UPG_AI_DRV.Pg_out1_UPG;//Давление на выходе 1 УПТИГ (ВР1-2)
+UPG_UPG_AI_ToHMI.Tg_out1_UPG.PV :=UPG_UPG_AI_DRV.Tg_out1_UPG;//Температура на выходе 1 УПТИГ (ВК1-2)
+UPG_UPG_AI_ToHMI.Res_1.PV :=UPG_UPG_AI_DRV.Res_1;//Резерв
+UPG_UPG_AI_ToHMI.Pg_out2_BR.PV :=UPG_UPG_AI_DRV.Pg_out2_BR;//Давление на выходе БР выход 2 (ВР4-2)
+UPG_UPG_AI_ToHMI.Pg_out2_UPG.PV :=UPG_UPG_AI_DRV.Pg_out2_UPG;//Давление на выходе 2 УПТИГ (ВР1-3)
+UPG_UPG_AI_ToHMI.Tg_out2_UPG.PV :=UPG_UPG_AI_DRV.Tg_out2_UPG;//Температура на выходе 2 УПТИГ (ВК1-3)
+UPG_UPG_AI_ToHMI.Res_2.PV :=UPG_UPG_AI_DRV.Res_2;//Резерв
+UPG_UPG_AI_ToHMI.T_OProom.PV :=UPG_UPG_AI_DRV.T_OProom;//Температура в помещении операторной (ВК11-1)
+UPG_UPG_AI_ToHMI.Lk_ESK.PV :=UPG_UPG_AI_DRV.Lk_ESK;//Уровень в ЕСК
+UPG_UPG_AI_ToHMI.Res_3.PV :=UPG_UPG_AI_DRV.Res_3;//Резерв
+UPG_UPG_AI_ToHMI.Res_4.PV :=UPG_UPG_AI_DRV.Res_4;//Резерв
+UPG_UPG_AI_ToHMI.Res_5.PV :=UPG_UPG_AI_DRV.Res_5;//Резерв
+UPG_UPG_AI_ToHMI.Res_6.PV :=UPG_UPG_AI_DRV.Res_6;//Резерв
+UPG_UPG_AI_ToHMI.Res_7.PV :=UPG_UPG_AI_DRV.Res_7;//Резерв
+UPG_UPG_AI_ToHMI.Res_8.PV :=UPG_UPG_AI_DRV.Res_8;//Резерв
+UPG_UPG_AI_ToHMI.Uosn_SAU.PV :=UPG_UPG_AI_DRV.Uosn_SAU;//Измерение основного напряжения
+UPG_UPG_AI_ToHMI.Urez_SAU.PV :=UPG_UPG_AI_DRV.Urez_SAU;//Измерение резервного напряжения
+UPG_UPG_AI_ToHMI.Res_9.PV :=UPG_UPG_AI_DRV.Res_9;//Резерв
+UPG_UPG_AI_ToHMI.Res_10.PV :=UPG_UPG_AI_DRV.Res_10;//Резерв
+
+
+
+(*if init = false then
+//------------------------------- аргументы функции инициализации --------------------------------
+// 1                               минимум шкалы канала, ед.изм. Не может быть >= max
+// 2                               |    максимум шкалы канала, ед.изм. Не может быть <= min
+// 3                               |    |   уровень зашкала вниз, ед.изм. Не может быть >= hiLim и < min
+// 4                               |    |   |   уровень зашкала вверх, ед.изм. Не может быть <= loLim и > max
+// 5                               |    |   |   |    уровень обрыва вниз, ед.изм. Не может быть >= loLim
+// 6                               |    |   |   |    |    уровень обрыва вверх, ед.изм. Не может быть <= hiLim
+// 7                               |    |   |   |    |    |  Формат данных
+// 8                               |    |   |   |    |    |  |  Настройка 1
+// 9                               |    |   |   |    |    |  |  |   Настройка 2
+//12                               |    |   |   |    |    |  |  |   |   тау фильтра, сек. Если «0» - фильтрация отсутствует
+//13                               |    |   |   |    |    |  |  |   |   |  номер по порядку	
+//mb_AI_init(mb_AI_Settings.T_VT1,0.0,50.0,0.0,0.0,-1.5,51.5,0,0.0,0.0,0.0,0);
+//-------------------------------------------------------------------------------------------
+//Начало сгенерированного кода AI_init
+//Давление газа на входе УПТИГ (ВР1-1)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Pg_in_UPG,0.0,6.0,0.0,6.0,-1024.0,32000.0,1,0.0,0.0,0.0,0);
+//Температура на входе УПТИГ (ВК1-1)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Tg_in_UPG,-50.0,50.0,-50.0,50.0,-1024.0,32000.0,1,0.0,0.0,0.0,1);
+//Перепад давления на узле очистки Ф2.1 (ВР2-1)
+mb_AI_init(UPG_UPG_mb_AI_Settings.dPg_F21,0.0,120.0,0.0,120.0,-1024.0,32000.0,1,0.0,0.0,0.0,2);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_0,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,100.0,0.0,0.0,3);
+//Температура на входе узла ПГ (ВК3-1)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Tg_in_Warm,-50.0,50.0,-50.0,50.0,-1024.0,32000.0,1,100.0,0.0,0.0,4);
+//Температура на выходе узла ПГ  (ВК3-2)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Tg_out_Warm,-50.0,50.0,-50.0,50.0,-1024.0,32000.0,1,100.0,0.0,0.0,5);
+//Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Pg_out3_UPG,0.0,6.0,0.0,6.0,-1024.0,32000.0,1,100.0,0.0,0.0,6);
+//Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Tg_out3_UPG,-50.0,50.0,-50.0,50.0,-1024.0,32000.0,1,100.0,0.0,0.0,7);
+														//Давление на выходе БР выход 1 (ВР4-1)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Pg_out1_BR,0.0,4.0,0.0,4.0,-1024.0,32000.0,1,3000.0,28000.0,0.0,8);
+//Давление на выходе 1 УПТИГ (ВР1-2)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Pg_out1_UPG,0.0,4.0,0.0,4.0,-1024.0,32000.0,1,3000.0,28000.0,0.0,9);
+//Температура на выходе 1 УПТИГ (ВК1-2)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Tg_out1_UPG,-50.0,50.0,-50.0,50.0,-1024.0,32000.0,1,3000.0,28000.0,0.0,10);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_1,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,3000.0,28000.0,0.0,11);
+														//Давление на выходе БР выход 2 (ВР4-2)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Pg_out2_BR,0.0,1.0,0.0,1.0,-1024.0,32000.0,1,3000.0,28000.0,0.0,12);
+//Давление на выходе 2 УПТИГ (ВР1-3)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Pg_out2_UPG,0.0,1.0,0.0,1.0,-1024.0,32000.0,1,3000.0,28000.0,0.0,13);
+//Температура на выходе 2 УПТИГ (ВК1-3)
+mb_AI_init(UPG_UPG_mb_AI_Settings.Tg_out2_UPG,-50.0,50.0,-50.0,50.0,-1024.0,32000.0,1,0.0,0.0,0.0,14);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_2,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,15);
+//Температура в помещении операторной (ВК11-1)
+mb_AI_init(UPG_UPG_mb_AI_Settings.T_OProom,-50.0,50.0,-50.0,50.0,-1024.0,32000.0,1,0.0,0.0,0.0,16);
+//Уровень в ЕСК
+mb_AI_init(UPG_UPG_mb_AI_Settings.Lk_ESK,0.0,2.0,0.0,2.0,-1024.0,32000.0,1,0.0,0.0,0.0,17);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_3,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,18);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_4,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,19);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_5,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,20);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_6,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,21);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_7,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,22);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_8,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,23);
+//Измерение основного напряжения
+mb_AI_init(UPG_UPG_mb_AI_Settings.Uosn_SAU,0.0,370.0,0.0,370.0,-1024.0,32000.0,1,0.0,0.0,0.0,24);
+//Измерение резервного напряжения
+mb_AI_init(UPG_UPG_mb_AI_Settings.Urez_SAU,0.0,370.0,0.0,370.0,-1024.0,32000.0,1,0.0,0.0,0.0,25);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_9,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,26);
+//Резерв
+mb_AI_init(UPG_UPG_mb_AI_Settings.Res_10,4.0,20.0,4.0,20.0,-1024.0,32000.0,1,0.0,0.0,0.0,27);
+//Конец сгенерированного кода
+end_if;
+//Начало сгенерированного кода AI_Processing
+//Давление газа на входе УПТИГ (ВР1-1)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Pg_in_UPG,UPG_UPG_mb_AI_Settings.Pg_in_UPG,UPG_UPG_mb_AI_FromHMI.Pg_in_UPG,UPG_UPG_mb_AI_ToHMI.Pg_in_UPG);
+//Температура на входе УПТИГ (ВК1-1)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Tg_in_UPG,UPG_UPG_mb_AI_Settings.Tg_in_UPG,UPG_UPG_mb_AI_FromHMI.Tg_in_UPG,UPG_UPG_mb_AI_ToHMI.Tg_in_UPG);
+//Перепад давления на узле очистки Ф2.1 (ВР2-1)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.dPg_F21,UPG_UPG_mb_AI_Settings.dPg_F21,UPG_UPG_mb_AI_FromHMI.dPg_F21,UPG_UPG_mb_AI_ToHMI.dPg_F21);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_0,UPG_UPG_mb_AI_Settings.Res_0,UPG_UPG_mb_AI_FromHMI.Res_0,UPG_UPG_mb_AI_ToHMI.Res_0);
+//Температура на входе узла ПГ (ВК3-1)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Tg_in_Warm,UPG_UPG_mb_AI_Settings.Tg_in_Warm,UPG_UPG_mb_AI_FromHMI.Tg_in_Warm,UPG_UPG_mb_AI_ToHMI.Tg_in_Warm);
+//Температура на выходе узла ПГ  (ВК3-2)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Tg_out_Warm,UPG_UPG_mb_AI_Settings.Tg_out_Warm,UPG_UPG_mb_AI_FromHMI.Tg_out_Warm,UPG_UPG_mb_AI_ToHMI.Tg_out_Warm);
+//Давление на выходе 3 УПТИГ УПИГ-500 (ВР1-4)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Pg_out3_UPG,UPG_UPG_mb_AI_Settings.Pg_out3_UPG,UPG_UPG_mb_AI_FromHMI.Pg_out3_UPG,UPG_UPG_mb_AI_ToHMI.Pg_out3_UPG);
+//Температура на выходе 3 УПТИГ УПИГ-500  (ВК1-4)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Tg_out3_UPG,UPG_UPG_mb_AI_Settings.Tg_out3_UPG,UPG_UPG_mb_AI_FromHMI.Tg_out3_UPG,UPG_UPG_mb_AI_ToHMI.Tg_out3_UPG);
+//Давление на выходе БР выход 1 (ВР4-1)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Pg_out1_BR,UPG_UPG_mb_AI_Settings.Pg_out1_BR,UPG_UPG_mb_AI_FromHMI.Pg_out1_BR,UPG_UPG_mb_AI_ToHMI.Pg_out1_BR);
+//Давление на выходе 1 УПТИГ (ВР1-2)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Pg_out1_UPG,UPG_UPG_mb_AI_Settings.Pg_out1_UPG,UPG_UPG_mb_AI_FromHMI.Pg_out1_UPG,UPG_UPG_mb_AI_ToHMI.Pg_out1_UPG);
+//Температура на выходе 1 УПТИГ (ВК1-2)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Tg_out1_UPG,UPG_UPG_mb_AI_Settings.Tg_out1_UPG,UPG_UPG_mb_AI_FromHMI.Tg_out1_UPG,UPG_UPG_mb_AI_ToHMI.Tg_out1_UPG);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_1,UPG_UPG_mb_AI_Settings.Res_1,UPG_UPG_mb_AI_FromHMI.Res_1,UPG_UPG_mb_AI_ToHMI.Res_1);
+//Давление на выходе БР выход 2 (ВР4-2)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Pg_out2_BR,UPG_UPG_mb_AI_Settings.Pg_out2_BR,UPG_UPG_mb_AI_FromHMI.Pg_out2_BR,UPG_UPG_mb_AI_ToHMI.Pg_out2_BR);
+//Давление на выходе 2 УПТИГ (ВР1-3)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Pg_out2_UPG,UPG_UPG_mb_AI_Settings.Pg_out2_UPG,UPG_UPG_mb_AI_FromHMI.Pg_out2_UPG,UPG_UPG_mb_AI_ToHMI.Pg_out2_UPG);
+//Температура на выходе 2 УПТИГ (ВК1-3)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Tg_out2_UPG,UPG_UPG_mb_AI_Settings.Tg_out2_UPG,UPG_UPG_mb_AI_FromHMI.Tg_out2_UPG,UPG_UPG_mb_AI_ToHMI.Tg_out2_UPG);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_2,UPG_UPG_mb_AI_Settings.Res_2,UPG_UPG_mb_AI_FromHMI.Res_2,UPG_UPG_mb_AI_ToHMI.Res_2);
+//Температура в помещении операторной (ВК11-1)
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.T_OProom,UPG_UPG_mb_AI_Settings.T_OProom,UPG_UPG_mb_AI_FromHMI.T_OProom,UPG_UPG_mb_AI_ToHMI.T_OProom);
+//Уровень в ЕСК
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Lk_ESK,UPG_UPG_mb_AI_Settings.Lk_ESK,UPG_UPG_mb_AI_FromHMI.Lk_ESK,UPG_UPG_mb_AI_ToHMI.Lk_ESK);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_3,UPG_UPG_mb_AI_Settings.Res_3,UPG_UPG_mb_AI_FromHMI.Res_3,UPG_UPG_mb_AI_ToHMI.Res_3);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_4,UPG_UPG_mb_AI_Settings.Res_4,UPG_UPG_mb_AI_FromHMI.Res_4,UPG_UPG_mb_AI_ToHMI.Res_4);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_5,UPG_UPG_mb_AI_Settings.Res_5,UPG_UPG_mb_AI_FromHMI.Res_5,UPG_UPG_mb_AI_ToHMI.Res_5);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_6,UPG_UPG_mb_AI_Settings.Res_6,UPG_UPG_mb_AI_FromHMI.Res_6,UPG_UPG_mb_AI_ToHMI.Res_6);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_7,UPG_UPG_mb_AI_Settings.Res_7,UPG_UPG_mb_AI_FromHMI.Res_7,UPG_UPG_mb_AI_ToHMI.Res_7);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_8,UPG_UPG_mb_AI_Settings.Res_8,UPG_UPG_mb_AI_FromHMI.Res_8,UPG_UPG_mb_AI_ToHMI.Res_8);
+//Измерение основного напряжения
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Uosn_SAU,UPG_UPG_mb_AI_Settings.Uosn_SAU,UPG_UPG_mb_AI_FromHMI.Uosn_SAU,UPG_UPG_mb_AI_ToHMI.Uosn_SAU);
+//Измерение резервного напряжения
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Urez_SAU,UPG_UPG_mb_AI_Settings.Urez_SAU,UPG_UPG_mb_AI_FromHMI.Urez_SAU,UPG_UPG_mb_AI_ToHMI.Urez_SAU);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_9,UPG_UPG_mb_AI_Settings.Res_9,UPG_UPG_mb_AI_FromHMI.Res_9,UPG_UPG_mb_AI_ToHMI.Res_9);
+//Резерв
+mb_AI_Processing(UPG_UPG_mb_AI_DRV.Res_10,UPG_UPG_mb_AI_Settings.Res_10,UPG_UPG_mb_AI_FromHMI.Res_10,UPG_UPG_mb_AI_ToHMI.Res_10);
+//Конец сгенерированного кода
+*)
+
+
+]]></ST>
+                    </Function>
+                    <Function UUID="2F3UB23OXIHELI6M3KYMPN46DE" Name="mb_AI_Processing" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="L27BSM7XEZH7PBAFCWXQPDPAHM" Name="in" Type="REAL" Usage="input" />
+                            <Variable UUID="3RRZ672T65H27KGUANWIHJUTAQ" Name="set" Type="T_mb_AI_Settings" TypeUUID="ESHVMMDQRNWUVGD5OOWOXN2N44" Usage="input" />
+                            <Variable UUID="6GENIMNWPJBGLDUSADU5POKSIU" Name="fromHMI" Type="T_AI_FromHMI" TypeUUID="VZ3H6GEVT3CUTI65HAA5AALRAY" Usage="inout" />
+                            <Variable UUID="2ISD2SFA6RHOVBLDUJA43YIYKA" Name="toHMI" Type="T_AI_ToHMI" TypeUUID="J74RQIZG5I6EZDCM32A6SZRKIM" Usage="inout" />
+                            <Variable UUID="4FOVGDDSVNDJVMJ33BNQD4UHBQ" Name="criticalSettingErr" Type="BOOL" Usage="internal" />
+                            <Variable UUID="SIMSIEIFINHRJIC55L2DCXT3CM" Name="limSettingErr" Type="BOOL" Usage="internal" />
+                            <Variable UUID="BGOHZRGBKVHJFGQBERMGBC6VXU" Name="brkSettingErr" Type="BOOL" Usage="internal" />
+                            <Variable UUID="26HV5IVYA7UE5DV5U7Q5EC2O2Q" Name="tmp" Type="REAL" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[(*
+//0- float ABCD, 1- float CDAB, 2- float BADC, 3- float DCBA, 4 - INT ABxN,  5 - INT BAxN,   6 - INT ABxR,   7 - INT BAxR
+//                                                            8 - UINT ABxN, 9 - UINT BAxN, 10 - UINT ABxR, 11 - UINT BAxR
+
+//---------------------- Поиск ошибок задания настроек – несоответствие допустимым значениям (BOOL)-----------------------------------------
+criticalSettingErr := (set.format = 6 or set.format = 7 or set.format = 10 or set.format = 11) and (set.min >= set.max or set.set2 = set.set1);
+limSettingErr := set.loLim >= set.hiLim or set.loLim >= set.max or set.hiLim <= set.min;
+brkSettingErr := set.hiBrk <= set.hiLim or set.loBrk >= set.loLim;
+toHMI.settingErr := criticalSettingErr or limSettingErr or brkSettingErr;
+toHMI.fault_common := toHMI.settingErr or toHMI.break or toHMI.up_scale or toHMI.down_scale;//обобщённая неисправность. Образуется по «ИЛИ» от break,up_scale,down_scale,ROC,settingErr (BOOL)
+toHMI.criticalFault := criticalSettingErr or toHMI.break;//Критическая ошибка, свидетельствующая о полной неисправности канала
+if criticalSettingErr then
+	return;
+end_if;
+//---------------------------------------------------------------------------------------------------------------------------------------------
+//----------------- Пересчёт парамера из кодов АЦП в единицы измерения -----------------------------------------------------------------------
+if    set.format = 4 or set.format = 5 then
+	if set.set1 = 0.0 then
+		set.set1 := 1.0;
+	end_if;
+	toHMI.measure := in * set.set1;
+elsif set.format = 6 or set.format = 7 then
+	toHMI.measure := (in - set.set1)/(set.set2 - set.set1)*(set.max - set.min) + set.min;
+else
+	toHMI.measure := in;
+end_if;
+//---------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------- Определение обрыва и зашкалов -----------------------------------------------------------------------
+if not brkSettingErr then
+	toHMI.break      := toHMI.break      and not fromHMI.BTNworkOn or toHMI.measure > set.hiBrk or toHMI.measure < set.loBrk;	//обрыв канала (BOOL)
+end_if;
+if not limSettingErr then
+	toHMI.up_scale   := toHMI.up_scale   and not fromHMI.BTNworkOn or toHMI.measure > set.hiLim;							//выход за верхний зашкал (BOOL)
+	toHMI.down_scale := toHMI.down_scale and not fromHMI.BTNworkOn or toHMI.measure < set.loLim;							//выход за нижний зашкал (BOOL)
+end_if;
+//------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------- Обработка ДУ ----------------------------------------------------------------------------------------------------------
+tmp := toHMI.measure;
+toHMI.manual := (fromHMI.BTNmanualOn or toHMI.manual) and not fromHMI.BTNworkOn;//канал в дист.упр. (BOOL)
+if toHMI.manual then
+	toHMI.PV := fromHMI.manualTarget;//значение для САУ. Рассчитывается из  measure, Manual_Target с учётом неисправностей и фильтрации (REAL)
+else
+	toHMI.PV := toHMI.measure;
+	fromHMI.manualTarget := toHMI.PV;
+end_if;
+if set.tau > 0.0 then
+	toHMI.PV := toHMI.PV + (tmp - toHMI.PV)/set.tau;
+else
+	toHMI.PV := tmp;
+end_if;
+//-------------- Обнуление кнопок -----------
+fromHMI.BTNmanualOn := false;
+fromHMI.BTNworkOn := false;]]></ST>
+                    </Function>
+                    <Function UUID="NVF5WA36MS3EDEJJCGBUSAEYDY" Name="mb_AI_init" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="3PUM5EGSZZGW5B46GT7GJGJYHY" Name="setStruct" Type="T_mb_AI_Settings" TypeUUID="ESHVMMDQRNWUVGD5OOWOXN2N44" Usage="output" />
+                            <Variable UUID="A4X47N4MTNEGBMHG5JCV54OYD4" Name="min" Type="REAL" Usage="input" />
+                            <Variable UUID="J3PMJZQQPFCKTLXZKHCSBVW2FY" Name="max" Type="REAL" Usage="input" />
+                            <Variable UUID="SNMC52OSVNCEJC2WKNQ55IXRDU" Name="loLim" Type="REAL" Usage="input" />
+                            <Variable UUID="C5FFNJBSORADZKDONAJYIOYQMM" Name="hiLim" Type="REAL" Usage="input" />
+                            <Variable UUID="BLJ7QPD3B5GIFOK5INHVLE4N4M" Name="loBrk" Type="REAL" Usage="input" />
+                            <Variable UUID="BRAZ2SPNOBCCNMKASNN375STCQ" Name="hiBrk" Type="REAL" Usage="input" />
+                            <Variable UUID="UCAGZSJ77NAYTFYRM4N5QV62A4" Name="format" Type="INT" Usage="input" />
+                            <Variable UUID="PPFZBCEPQNDGDPXS4GFZ5DG2R4" Name="set1" Type="REAL" Usage="input" />
+                            <Variable UUID="YGKONKKT2ZACFPHVF5HQIODJOQ" Name="set2" Type="REAL" Usage="input" />
+                            <Variable UUID="FIPADVDHNWOEBDOPFXPJ6QM5UM" Name="tau" Type="REAL" Usage="input" />
+                            <Variable UUID="O2PSTUZUB5EIRAZBONFYBOPYXU" Name="id" Type="INT" Usage="input" />
+                        </Variables>
+                        <ST><![CDATA[setStruct.min:= min;//минимум шкалы канала, ед.изм. Не может быть >= max
+setStruct.max:= max;//максимум шкалы канала, ед.изм. Не может быть <= min
+setStruct.loLim:= loLim;//уровень зашкала вниз, ед.изм. Не может быть >= hiLim и < min
+setStruct.hiLim:= hiLim;//уровень зашкала вверх, ед.изм. Не может быть <= loLim и > max
+setStruct.loBrk:= loBrk;//уровень зашкала вниз, ед.изм. Не может быть >= loLim
+setStruct.hiBrk:= hiBrk;//уровень обрыва вверх, ед.изм. Не может быть <= hiLim
+setStruct.format:= format;//Формат данных
+setStruct.set1:= set1;//Настройка 1
+setStruct.set2:= set2;//Настройка 2
+setStruct.tau:= tau;//Настройка лаг-фильтра
+setStruct.id:= id;//номер по порядку]]></ST>
+                    </Function>
+                </Folder>
+                <Folder Name="AO" Comment="" Data="" UUID="CQXIGEZZRQJU5DDKAUKZWXFLZ4">
+                    <Function UUID="5ZNNBF3GI4JNAXYVYKQHQGOC2M" Name="UPG_UPG_AO_Permit" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="tmpPermit" Type="BOOL" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[//--- Групповое разрешение ДУ ---
+tmpPermit := true;
+//Начало сгенерированного кода AO_Permit
+UPG_UPG_AO_ToHMI.Res_0.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_AO_ToHMI.Res_1.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_AO_ToHMI.Res_2.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_AO_ToHMI.Res_3.forsPermit := tmpPermit; //Резерв;
+//Конец сгенерированного кода
+]]></ST>
+                    </Function>
+                    <Function UUID="VUNMGDF3JXLGHJ42D2HHWYZJPQ" Name="UPG_UPG_mb_AO_CallAll" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="tmpInt" Type="INT" Usage="internal" />
+                            <Variable UUID="F7ROL4LK5AJERJMGP6FYOKRNLY" Name="tmpReal" Type="REAL" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[if init = false then
+//------------------------------- аргументы функции инициализации --------------------------------
+//										min - Нижний порог ан.выхода в физ.единицах
+//										|	max - Верхний порог ан.выхода в физ.единицах
+//										|	|	 dataType - Тип данных для модбаса
+//										|	|	 | set1 - Настройка 1 (множитель или мин. ранжирования
+//										|	|	 | | set2 - Настройка 2 (максимум ранжирования)
+//										|	|	 | | | id - Номер по порядку
+//AO_init(UPG_UPG_AO_Settings.Res_0,0.0,100.0,2,0,0,0);
+//-------------------------------------------------------------------------------------------
+//Начало сгенерированного кода AO_init
+//Резерв
+mb_AO_init(UPG_UPG_AO_Settings.Res_0,0.0,100.0,0,0.0,0.0,0);
+//Резерв
+mb_AO_init(UPG_UPG_AO_Settings.Res_1,0.0,100.0,0,100.0,0.0,1);
+//Резерв
+mb_AO_init(UPG_UPG_AO_Settings.Res_2,0.0,100.0,0,3000.0,28000.0,2);
+//Резерв
+mb_AO_init(UPG_UPG_AO_Settings.Res_3,0.0,100.0,0,0.0,0.0,3);
+//Конец сгенерированного кода
+end_if;
+//Начало сгенерированного кода AO_Processing
+//Резерв
+mb_AO_Processing(UPG_UPG_AO.Res_0,UPG_UPG_AO_Settings.Res_0,UPG_UPG_AO_FromHMI.Res_0,UPG_UPG_AO_ToHMI.Res_0,tmpReal,tmpInt);
+UPG_UPG_AO_DRV.Res_0 := tmpReal; //Резерв;
+//Резерв
+mb_AO_Processing(UPG_UPG_AO.Res_1,UPG_UPG_AO_Settings.Res_1,UPG_UPG_AO_FromHMI.Res_1,UPG_UPG_AO_ToHMI.Res_1,tmpReal,tmpInt);
+UPG_UPG_AO_DRV.Res_1 := tmpReal; //Резерв;
+//Резерв
+mb_AO_Processing(UPG_UPG_AO.Res_2,UPG_UPG_AO_Settings.Res_2,UPG_UPG_AO_FromHMI.Res_2,UPG_UPG_AO_ToHMI.Res_2,tmpReal,tmpInt);
+UPG_UPG_AO_DRV.Res_2 := tmpReal; //Резерв;
+//Резерв
+mb_AO_Processing(UPG_UPG_AO.Res_3,UPG_UPG_AO_Settings.Res_3,UPG_UPG_AO_FromHMI.Res_3,UPG_UPG_AO_ToHMI.Res_3,tmpReal,tmpInt);
+UPG_UPG_AO_DRV.Res_3 := tmpReal; //Резерв;
+//Конец сгенерированного кода]]></ST>
+                    </Function>
+                    <Function UUID="C355Y7K6M5IU3JESUKH26M6TTA" Name="mb_AO_Processing" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="YWZFMDKLMVYUNFNPE5IXHVSIGY" Name="alg" Type="REAL" Usage="input" />
+                            <Variable UUID="CFXXFVD5OJA45LRO7CLY355CNE" Name="set" Type="T_mb_AO_Settings" TypeUUID="7ICVQVNQUR4UDG5AFGOT7BUCRA" Usage="input" />
+                            <Variable UUID="5R5WL3HGLRGMXN3ZVPA3FETS6Q" Name="fromHMI" Type="T_AO_FromHMI" TypeUUID="7GRLWKHH6VJU5KGLKDIOI5QPQI" Usage="inout" />
+                            <Variable UUID="EDA4FRWG6FGWJPKIBGBT6SNR2Q" Name="toHMI" Type="T_AO_ToHMI" TypeUUID="KOTCLUQLO7JERF5MDM2GMF62MI" Usage="inout" />
+                            <Variable UUID="E2P6NR4I7IXEBKC63CP7BOLLQI" Name="outReal" Type="REAL" Usage="output" />
+                            <Variable UUID="VBNLWELECL2ELOHFKCMBCNOXDQ" Name="outInt" Type="INT" Usage="output" />
+                            <Variable UUID="BH6EHBZAY7HUJMOBUFZLHOB7YQ" Name="tmp" Type="REAL" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[//0- float ABCD, 1- float CDAB, 2- float BADC, 3- float DCBA, 4 - INT ABxN,  5 - INT BAxN,   6 - INT ABxR,   7 - INT BAxR
+//                                                            8 - UINT ABxN, 9 - UINT BAxN, 10 - UINT ABxR, 11 - UINT BAxR
+//------------------------------------------------------------------------------------------------------------------------------
+toHMI.forsEnable := (toHMI.forsEnable or fromHMI.BTNforceOn) and toHMI.forsPermit and not fromHMI.BTNworkOn;
+if toHMI.forsEnable then
+	tmp := fromHMI.manualTarget;	
+else
+	tmp := alg;
+	fromHMI.manualTarget := alg;
+end_if;
+//----------------- Пересчёт парамера из единиц измерения в коды modbus -----------------------------------------------------------------------
+if set.format = 4 or set.format = 5 or set.format = 8 or set.format = 9 then
+	if set.set1 = 0.0 then
+		set.set1 := 1.0;
+	end_if;
+	outInt := REAL_TO_INT(tmp / set.set1);
+elsif set.format = 6 or set.format = 7 or set.format = 10 or set.format = 11 then
+	if set.max <> set.min then
+		outInt := REAL_TO_INT((tmp - set.min)/(set.max - set.min)*(set.set2 - set.set1) + set.set1);
+	else
+		outInt := 0;
+	end_if;
+else
+	outReal := tmp;
+end_if;
+//-------------- Обнуление кнопок -----------
+fromHMI.BTNforceOn := false;
+fromHMI.BTNworkOn := false;]]></ST>
+                    </Function>
+                    <Function UUID="3RCK6I23LYKEDH2INOAP7YEI7A" Name="mb_AO_init" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="3PUM5EGSZZGW5B46GT7GJGJYHY" Name="setStruct" Type="T_mb_AO_Settings" TypeUUID="7ICVQVNQUR4UDG5AFGOT7BUCRA" Usage="output" />
+                            <Variable UUID="A4X47N4MTNEGBMHG5JCV54OYD4" Name="min" Type="REAL" Usage="input" />
+                            <Variable UUID="J3PMJZQQPFCKTLXZKHCSBVW2FY" Name="max" Type="REAL" Usage="input" />
+                            <Variable UUID="Z6XQFDI42ZUEHDDY2ZBDTQSSYM" Name="format" Type="INT" Usage="input" />
+                            <Variable UUID="SNMC52OSVNCEJC2WKNQ55IXRDU" Name="set1" Type="REAL" Usage="input" />
+                            <Variable UUID="C5FFNJBSORADZKDONAJYIOYQMM" Name="set2" Type="REAL" Usage="input" />
+                            <Variable UUID="UCAGZSJ77NAYTFYRM4N5QV62A4" Name="id" Type="INT" Usage="input" />
+                        </Variables>
+                        <ST><![CDATA[setStruct.min:= min;//минимум шкалы канала, ед.изм. Не может быть >= max
+setStruct.max:= max;//максимум шкалы канала, ед.изм. Не может быть <= min
+setStruct.format:= format;//Формат данных
+setStruct.set1:= set1;//Настройка 1.
+setStruct.set2:= set2;//Настройка 2
+setStruct.id:= id;//номер по порядку	]]></ST>
+                    </Function>
+                </Folder>
+                <Folder Name="DI" Comment="" Data="" UUID="6ND7YUSTK5PUBHGQADDUJ3Y3HA">
+                    <Function UUID="PNKSEFUCJ7VOU5DND2THTRZGGI" Name="UPG_UPG_DI_Permit" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="tmpPermit" Type="BOOL" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[//--- Групповое разрешение ДУ ---
+tmpPermit := true;
+//Начало сгенерированного кода DI_Permit
+UPG_UPG_DI_ToHMI.P_in_UPG_v.manual := tmpPermit; //Отклонение давления на входе вниз (МН1-1);
+UPG_UPG_DI_ToHMI.P_in_UPG_n.manual := tmpPermit; //Отклонение давления на входе вверх (МН1-1);
+UPG_UPG_DI_ToHMI.P_out1_UPG_v.manual := tmpPermit; //Отклонение давления на выходе 1 вниз (МН1-2);
+UPG_UPG_DI_ToHMI.P_out1_UPG_n.manual := tmpPermit; //Отклонение давления на выходе 1 вверх (МН1-2);
+UPG_UPG_DI_ToHMI.P_out2_UPG_v.manual := tmpPermit; //Отклонение давления на выходе 2 вниз (МН1-3);
+UPG_UPG_DI_ToHMI.P_out2_UPG_n.manual := tmpPermit; //Отклонение давления на выходе 2 вверх (МН1-3);
+UPG_UPG_DI_ToHMI.P_out3_UPG_v.manual := tmpPermit; //Отклонение давления на выходе 3 вниз (МН1-4);
+UPG_UPG_DI_ToHMI.P_out3_UPG_n.manual := tmpPermit; //Отклонение давления на выходе 3 вверх (МН1-4);
+UPG_UPG_DI_ToHMI.Brk_Tr_PG31.manual := tmpPermit; //Прорыв трубного пучка ПГ3.1 (МН3.1-1);
+UPG_UPG_DI_ToHMI.Brk_Tr_PG32.manual := tmpPermit; //Прорыв трубного пучка ПГ3.2 (МН3.2-1);
+UPG_UPG_DI_ToHMI.Lk_F21_s1_v.manual := tmpPermit; //Уровень в 1 ступени фильтра Ф2.1 «мах»;
+UPG_UPG_DI_ToHMI.Lk_F21_s2_v.manual := tmpPermit; //Уровень во 2 ступени фильтра Ф2.1 «мах»;
+UPG_UPG_DI_ToHMI.Lk_F22_s1_v.manual := tmpPermit; //Уровень в 1 ступени фильтра Ф2.2 «мах»;
+UPG_UPG_DI_ToHMI.Lk_F22_s2_v.manual := tmpPermit; //Уровень во 2 ступени фильтра Ф2.2 «мах»;
+UPG_UPG_DI_ToHMI.Res_0.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_1.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.OLR1_out_ON.manual := tmpPermit; //Сигнал включения контрольного регулятора ЛР1 (ОЛР) выход 1 (МН4.1);
+UPG_UPG_DI_ToHMI.RLR1_out_ON.manual := tmpPermit; //Сигнал включения контрольного регулятора ЛР2 (РЛР) выход 1 (МН4.3);
+UPG_UPG_DI_ToHMI.OLR2_out_ON.manual := tmpPermit; //Сигнал включения контр. регулятора ЛР1 (ОЛР) выход 2 (МН4.2);
+UPG_UPG_DI_ToHMI.RLR2_out_ON.manual := tmpPermit; //Сигнал включения контр. регулятора ЛР2 (РЛР) выход 2 (МН4.4);
+UPG_UPG_DI_ToHMI.Kr2_1_3_OF.manual := tmpPermit; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыт;
+UPG_UPG_DI_ToHMI.Kr2_1_3_ON.manual := tmpPermit; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыт;
+UPG_UPG_DI_ToHMI.Kr2_1_4_OF.manual := tmpPermit; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыт;
+UPG_UPG_DI_ToHMI.Kr2_1_4_ON.manual := tmpPermit; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыт;
+UPG_UPG_DI_ToHMI.Kr2_2_3_OF.manual := tmpPermit; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыт;
+UPG_UPG_DI_ToHMI.Kr2_2_3_ON.manual := tmpPermit; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыт;
+UPG_UPG_DI_ToHMI.Kr2_2_4_OF.manual := tmpPermit; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыт;
+UPG_UPG_DI_ToHMI.Kr2_2_4_ON.manual := tmpPermit; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыт;
+UPG_UPG_DI_ToHMI.Res_2.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_3.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_4.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_5.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.KE31_OF.manual := tmpPermit; //Клапан топливного газа УПТН закрыт;
+UPG_UPG_DI_ToHMI.Kr8_1_ON.manual := tmpPermit; //Кран Кр8.1 открыт;
+UPG_UPG_DI_ToHMI.Kr8_1_OF.manual := tmpPermit; //Кран Кр8.1 закрыт;
+UPG_UPG_DI_ToHMI.Kr8_1_MU.manual := tmpPermit; //Кран Кр8.1, местное управление;
+UPG_UPG_DI_ToHMI.Kr8_1_FLT.manual := tmpPermit; //Кран Кр8.1, неисправность;
+UPG_UPG_DI_ToHMI.Kr8_1A_ON.manual := tmpPermit; //Кран Кр8.1a открыт;
+UPG_UPG_DI_ToHMI.Kr8_1A_OF.manual := tmpPermit; //Кран Кр8.1a закрыт;
+UPG_UPG_DI_ToHMI.Kr8_1A_MU.manual := tmpPermit; //Кран Кр8.1a, местное управление;
+UPG_UPG_DI_ToHMI.Kr8_1A_FLT.manual := tmpPermit; //Кран Кр8.1a, неисправность;
+UPG_UPG_DI_ToHMI.VnV_BT_ON.manual := tmpPermit; //Вытяжной вентилятор блока технологии (АМ1-1) включен;
+UPG_UPG_DI_ToHMI.VnV_BT_FLT.manual := tmpPermit; //Вытяжной вентилятор блока технологии (АМ1-1) неисправен;
+UPG_UPG_DI_ToHMI.VnV_UPNT_ON.manual := tmpPermit; //Вытяжной вентилятор УПТН (АМ3-1) включен;
+UPG_UPG_DI_ToHMI.VnV_UPNT_FLT.manual := tmpPermit; //Вытяжной вентилятор УПТН (АМ3-1) неисправен;
+UPG_UPG_DI_ToHMI.Res_6.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_7.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_8.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Gas_pv.manual := tmpPermit; //Загазованность обобщенный порог 1 (СПАиКЗ);
+UPG_UPG_DI_ToHMI.Gas_av.manual := tmpPermit; //Загазованность обобщенный порог 2 (СПАиКЗ);
+UPG_UPG_DI_ToHMI.Fire_BT.manual := tmpPermit; //Пожар блока технологического УПТИГ общий (СПАиКЗ);
+UPG_UPG_DI_ToHMI.AKZ_FLT.manual := tmpPermit; //Неисправность пожарной сигнализации (СПАиКЗ);
+UPG_UPG_DI_ToHMI.GasCO_pv.manual := tmpPermit; //Загазованность СО узла подготовки теплоносителя порог 1;
+UPG_UPG_DI_ToHMI.GasCO_av.manual := tmpPermit; //Загазованность СО узла подготовки теплоносителя порог 2;
+UPG_UPG_DI_ToHMI.Res_9.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_10.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.EO_Shop.manual := tmpPermit; //Экстренный останов Цеха (ЭО);
+UPG_UPG_DI_ToHMI.AO1_Shop.manual := tmpPermit; //Аварийный останов цеха 1 степени (АО-1);
+UPG_UPG_DI_ToHMI.AO2_Shop.manual := tmpPermit; //Аварийный останов цеха 2 степени (АО-2);
+UPG_UPG_DI_ToHMI.U1_AC380_ok.manual := tmpPermit; //Наличие напряжения 380В на вводе 1;
+UPG_UPG_DI_ToHMI.U2_AC380_ok.manual := tmpPermit; //Наличие напряжения 380В на вводе 2;
+UPG_UPG_DI_ToHMI.Res_11.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_12.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_13.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.U1a_VRU_ok.manual := tmpPermit; //Наличие напряжения 220В на 1СШ ВРУ L1;
+UPG_UPG_DI_ToHMI.U1b_VRU_ok.manual := tmpPermit; //Наличие напряжения 220В на 1СШ ВРУ L2;
+UPG_UPG_DI_ToHMI.U1c_VRU_ok.manual := tmpPermit; //Наличие напряжения 220В на 1СШ ВРУ L3;
+UPG_UPG_DI_ToHMI.U2a_VRU_ok.manual := tmpPermit; //Наличие напряжения 220В на 2СШ ВРУ L1;
+UPG_UPG_DI_ToHMI.U2b_VRU_ok.manual := tmpPermit; //Наличие напряжения 220В на 2СШ ВРУ L2;
+UPG_UPG_DI_ToHMI.U2c_VRU_ok.manual := tmpPermit; //Наличие напряжения 220В на 2СШ ВРУ L3;
+UPG_UPG_DI_ToHMI.Q1_ON.manual := tmpPermit; //Выключатель ввода 1 включен;
+UPG_UPG_DI_ToHMI.Q1_OF.manual := tmpPermit; //Выключатель ввода 1 отключен;
+UPG_UPG_DI_ToHMI.Q1_AOF.manual := tmpPermit; //Выключатель ввода 1 отключен защитой;
+UPG_UPG_DI_ToHMI.Q2_ON.manual := tmpPermit; //Выключатель ввода 2 включен;
+UPG_UPG_DI_ToHMI.Q2_OF.manual := tmpPermit; //Выключатель ввода 2 отключен;
+UPG_UPG_DI_ToHMI.Q2_AOF.manual := tmpPermit; //Выключатель ввода 2 отключен защитой;
+UPG_UPG_DI_ToHMI.Res_14.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_15.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_16.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_17.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.QS_ON.manual := tmpPermit; //Секционный выключатель включен;
+UPG_UPG_DI_ToHMI.QS_OF.manual := tmpPermit; //Секционный выключатель отключен;
+UPG_UPG_DI_ToHMI.QS_AOF.manual := tmpPermit; //Секционный выключатель отключен защитой;
+UPG_UPG_DI_ToHMI.AVR_ON.manual := tmpPermit; //АВР включен;
+UPG_UPG_DI_ToHMI.AVR_OF.manual := tmpPermit; //АВР отключен;
+UPG_UPG_DI_ToHMI.Res_18.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_19.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_20.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_21.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_22.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_23.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_24.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_25.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_26.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_27.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_28.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Chk_AC220_SAU.manual := tmpPermit; //Контроль основного питания ~220 В;
+UPG_UPG_DI_ToHMI.Chk_DC220_SAU.manual := tmpPermit; //Контроль резервного питания =220 В;
+UPG_UPG_DI_ToHMI.OF_ON.manual := tmpPermit; //Автоматы питания включены;
+UPG_UPG_DI_ToHMI.Chk_razr.manual := tmpPermit; //Контроль исправности разрядников;
+UPG_UPG_DI_ToHMI.DC24osn_Int_ok.manual := tmpPermit; //Исправность осн. ИП =24 В внутренних цепей;
+UPG_UPG_DI_ToHMI.DC24rez_Int_ok.manual := tmpPermit; //Исправность рез. ИП =24 В внутренних цепей;
+UPG_UPG_DI_ToHMI.DC24osn_IO_ok.manual := tmpPermit; //Исправность осн. ИП =24В  внешн. AI, AO, DI;
+UPG_UPG_DI_ToHMI.DC24rez_IO_ok.manual := tmpPermit; //Исправность рез. ИП =24В  внешн. AI, AO, DI;
+UPG_UPG_DI_ToHMI.DC24osn_Ext_ok.manual := tmpPermit; //Исправность осн. ИП =24 В DO внешних цепей;
+UPG_UPG_DI_ToHMI.DC24rez_Ext_ok.manual := tmpPermit; //Исправность рез. ИП =24 В DO внешних цепей;
+UPG_UPG_DI_ToHMI.Cabin_open.manual := tmpPermit; //Двери шкафа отрыты;
+UPG_UPG_DI_ToHMI.Res_29.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_30.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_31.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_32.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_33.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Chk_AC220_BEO.manual := tmpPermit; //Контроль основного питания  БЭАО ~220 В;
+UPG_UPG_DI_ToHMI.Chk_DC220_BEO.manual := tmpPermit; //Контроль резервного питания  БЭАО =220 В;
+UPG_UPG_DI_ToHMI.DC24osn_BEO_ok.manual := tmpPermit; //Исправность осн. ИП =24В БЭАО;
+UPG_UPG_DI_ToHMI.DC24rez_BEO_ok.manual := tmpPermit; //Исправность рез. ИП =24В БЭАО;
+UPG_UPG_DI_ToHMI.EO_BEO.manual := tmpPermit; // ЭО от БЭАО;
+UPG_UPG_DI_ToHMI.EO_BEO_KCD.manual := tmpPermit; // ЭО от БЭАО. КЦД;
+UPG_UPG_DI_ToHMI.Res_34.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_35.manual := tmpPermit; //Резерв. КЦД;
+UPG_UPG_DI_ToHMI.Res_36.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_37.manual := tmpPermit; //Резерв. КЦД;
+UPG_UPG_DI_ToHMI.Res_38.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Res_39.manual := tmpPermit; //Резерв. КЦД;
+UPG_UPG_DI_ToHMI.BEO_Rdy.manual := tmpPermit; //Готовность БЭАО;
+UPG_UPG_DI_ToHMI.AO_PLC.manual := tmpPermit; //АО (в ПЛК);
+UPG_UPG_DI_ToHMI.Kn_Quit.manual := tmpPermit; //Квитирование;
+UPG_UPG_DI_ToHMI.Res_40.manual := tmpPermit; //Резерв внутр.;
+UPG_UPG_DI_ToHMI.KE41_ON_KCU.manual := tmpPermit; //Клапан сброса НД выход 1 (КЭ4-1). КЦУ;
+UPG_UPG_DI_ToHMI.KE42_ON_KCU.manual := tmpPermit; //Клапан сброса НД выход 2 (КЭ4-2). КЦУ;
+UPG_UPG_DI_ToHMI.KE31_ON_KCU.manual := tmpPermit; //Клапан отсечной ТГ в УПТН (КЭ3-1). КЦУ;
+UPG_UPG_DI_ToHMI.Res_41.manual := tmpPermit; //Резерв;
+UPG_UPG_DI_ToHMI.Kr8_1_OF_KCU.manual := tmpPermit; //Кран Кр8.1 закрыть. КЦУ;
+UPG_UPG_DI_ToHMI.Kr8_1A_ON_KCU.manual := tmpPermit; //Кран Кр8.1а открыть. КЦУ;
+UPG_UPG_DI_ToHMI.Kr2_1_3_ON_KCU.manual := tmpPermit; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыть;
+UPG_UPG_DI_ToHMI.Kr2_1_3_OF_KCU.manual := tmpPermit; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыть;
+UPG_UPG_DI_ToHMI.Kr2_1_4_ON_KCU.manual := tmpPermit; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыть;
+UPG_UPG_DI_ToHMI.Kr2_1_4_OF_KCU.manual := tmpPermit; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыть;
+UPG_UPG_DI_ToHMI.Kr2_2_3_ON_KCU.manual := tmpPermit; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыть;
+UPG_UPG_DI_ToHMI.Kr2_2_3_OF_KCU.manual := tmpPermit; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыть;
+UPG_UPG_DI_ToHMI.Kr2_2_4_ON_KCU.manual := tmpPermit; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыть;
+UPG_UPG_DI_ToHMI.Kr2_2_4_OF_KCU.manual := tmpPermit; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыть;
+UPG_UPG_DI_ToHMI.Res_42.manual := tmpPermit; //Резерв. КЦУ;
+UPG_UPG_DI_ToHMI.Res_43.manual := tmpPermit; //Резерв. КЦУ;
+//Конец сгенерированного кода
+]]></ST>
+                    </Function>
+                    <Function UUID="DMTEMNBRI7K7SEBACSBFDYR55M" Name="UPG_UPG_mb_DI_CallAll" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables />
+                        <ST><![CDATA[//-------- Обработка дискретных входов полученных по сети --------------
+//Начало сгенерированного кода DI_Processing
+//Отклонение давления на входе вниз (МН1-1)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_in_UPG_v,UPG_UPG_DI_FromHMI.P_in_UPG_v,UPG_UPG_DI_ToHMI.P_in_UPG_v,UPG_UPG_DI.P_in_UPG_v);
+//Отклонение давления на входе вверх (МН1-1)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_in_UPG_n,UPG_UPG_DI_FromHMI.P_in_UPG_n,UPG_UPG_DI_ToHMI.P_in_UPG_n,UPG_UPG_DI.P_in_UPG_n);
+//Отклонение давления на выходе 1 вниз (МН1-2)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_out1_UPG_v,UPG_UPG_DI_FromHMI.P_out1_UPG_v,UPG_UPG_DI_ToHMI.P_out1_UPG_v,UPG_UPG_DI.P_out1_UPG_v);
+//Отклонение давления на выходе 1 вверх (МН1-2)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_out1_UPG_n,UPG_UPG_DI_FromHMI.P_out1_UPG_n,UPG_UPG_DI_ToHMI.P_out1_UPG_n,UPG_UPG_DI.P_out1_UPG_n);
+//Отклонение давления на выходе 2 вниз (МН1-3)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_out2_UPG_v,UPG_UPG_DI_FromHMI.P_out2_UPG_v,UPG_UPG_DI_ToHMI.P_out2_UPG_v,UPG_UPG_DI.P_out2_UPG_v);
+//Отклонение давления на выходе 2 вверх (МН1-3)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_out2_UPG_n,UPG_UPG_DI_FromHMI.P_out2_UPG_n,UPG_UPG_DI_ToHMI.P_out2_UPG_n,UPG_UPG_DI.P_out2_UPG_n);
+//Отклонение давления на выходе 3 вниз (МН1-4)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_out3_UPG_v,UPG_UPG_DI_FromHMI.P_out3_UPG_v,UPG_UPG_DI_ToHMI.P_out3_UPG_v,UPG_UPG_DI.P_out3_UPG_v);
+//Отклонение давления на выходе 3 вверх (МН1-4)
+mb_DI_Processing(UPG_UPG_DI_DRV.P_out3_UPG_n,UPG_UPG_DI_FromHMI.P_out3_UPG_n,UPG_UPG_DI_ToHMI.P_out3_UPG_n,UPG_UPG_DI.P_out3_UPG_n);
+//Прорыв трубного пучка ПГ3.1 (МН3.1-1)
+mb_DI_Processing(UPG_UPG_DI_DRV.Brk_Tr_PG31,UPG_UPG_DI_FromHMI.Brk_Tr_PG31,UPG_UPG_DI_ToHMI.Brk_Tr_PG31,UPG_UPG_DI.Brk_Tr_PG31);
+//Прорыв трубного пучка ПГ3.2 (МН3.2-1)
+mb_DI_Processing(UPG_UPG_DI_DRV.Brk_Tr_PG32,UPG_UPG_DI_FromHMI.Brk_Tr_PG32,UPG_UPG_DI_ToHMI.Brk_Tr_PG32,UPG_UPG_DI.Brk_Tr_PG32);
+//Уровень в 1 ступени фильтра Ф2.1 «мах»
+mb_DI_Processing(UPG_UPG_DI_DRV.Lk_F21_s1_v,UPG_UPG_DI_FromHMI.Lk_F21_s1_v,UPG_UPG_DI_ToHMI.Lk_F21_s1_v,UPG_UPG_DI.Lk_F21_s1_v);
+//Уровень во 2 ступени фильтра Ф2.1 «мах»
+mb_DI_Processing(UPG_UPG_DI_DRV.Lk_F21_s2_v,UPG_UPG_DI_FromHMI.Lk_F21_s2_v,UPG_UPG_DI_ToHMI.Lk_F21_s2_v,UPG_UPG_DI.Lk_F21_s2_v);
+//Уровень в 1 ступени фильтра Ф2.2 «мах»
+mb_DI_Processing(UPG_UPG_DI_DRV.Lk_F22_s1_v,UPG_UPG_DI_FromHMI.Lk_F22_s1_v,UPG_UPG_DI_ToHMI.Lk_F22_s1_v,UPG_UPG_DI.Lk_F22_s1_v);
+//Уровень во 2 ступени фильтра Ф2.2 «мах»
+mb_DI_Processing(UPG_UPG_DI_DRV.Lk_F22_s2_v,UPG_UPG_DI_FromHMI.Lk_F22_s2_v,UPG_UPG_DI_ToHMI.Lk_F22_s2_v,UPG_UPG_DI.Lk_F22_s2_v);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_0,UPG_UPG_DI_FromHMI.Res_0,UPG_UPG_DI_ToHMI.Res_0,UPG_UPG_DI.Res_0);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_1,UPG_UPG_DI_FromHMI.Res_1,UPG_UPG_DI_ToHMI.Res_1,UPG_UPG_DI.Res_1);
+//Сигнал включения контрольного регулятора ЛР1 (ОЛР) выход 1 (МН4.1)
+mb_DI_Processing(UPG_UPG_DI_DRV.OLR1_out_ON,UPG_UPG_DI_FromHMI.OLR1_out_ON,UPG_UPG_DI_ToHMI.OLR1_out_ON,UPG_UPG_DI.OLR1_out_ON);
+//Сигнал включения контрольного регулятора ЛР2 (РЛР) выход 1 (МН4.3)
+mb_DI_Processing(UPG_UPG_DI_DRV.RLR1_out_ON,UPG_UPG_DI_FromHMI.RLR1_out_ON,UPG_UPG_DI_ToHMI.RLR1_out_ON,UPG_UPG_DI.RLR1_out_ON);
+//Сигнал включения контр. регулятора ЛР1 (ОЛР) выход 2 (МН4.2)
+mb_DI_Processing(UPG_UPG_DI_DRV.OLR2_out_ON,UPG_UPG_DI_FromHMI.OLR2_out_ON,UPG_UPG_DI_ToHMI.OLR2_out_ON,UPG_UPG_DI.OLR2_out_ON);
+//Сигнал включения контр. регулятора ЛР2 (РЛР) выход 2 (МН4.4)
+mb_DI_Processing(UPG_UPG_DI_DRV.RLR2_out_ON,UPG_UPG_DI_FromHMI.RLR2_out_ON,UPG_UPG_DI_ToHMI.RLR2_out_ON,UPG_UPG_DI.RLR2_out_ON);
+//Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_3_OF,UPG_UPG_DI_FromHMI.Kr2_1_3_OF,UPG_UPG_DI_ToHMI.Kr2_1_3_OF,UPG_UPG_DI.Kr2_1_3_OF);
+//Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_3_ON,UPG_UPG_DI_FromHMI.Kr2_1_3_ON,UPG_UPG_DI_ToHMI.Kr2_1_3_ON,UPG_UPG_DI.Kr2_1_3_ON);
+//Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_4_OF,UPG_UPG_DI_FromHMI.Kr2_1_4_OF,UPG_UPG_DI_ToHMI.Kr2_1_4_OF,UPG_UPG_DI.Kr2_1_4_OF);
+//Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_4_ON,UPG_UPG_DI_FromHMI.Kr2_1_4_ON,UPG_UPG_DI_ToHMI.Kr2_1_4_ON,UPG_UPG_DI.Kr2_1_4_ON);
+//Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_3_OF,UPG_UPG_DI_FromHMI.Kr2_2_3_OF,UPG_UPG_DI_ToHMI.Kr2_2_3_OF,UPG_UPG_DI.Kr2_2_3_OF);
+//Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_3_ON,UPG_UPG_DI_FromHMI.Kr2_2_3_ON,UPG_UPG_DI_ToHMI.Kr2_2_3_ON,UPG_UPG_DI.Kr2_2_3_ON);
+//Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_4_OF,UPG_UPG_DI_FromHMI.Kr2_2_4_OF,UPG_UPG_DI_ToHMI.Kr2_2_4_OF,UPG_UPG_DI.Kr2_2_4_OF);
+//Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_4_ON,UPG_UPG_DI_FromHMI.Kr2_2_4_ON,UPG_UPG_DI_ToHMI.Kr2_2_4_ON,UPG_UPG_DI.Kr2_2_4_ON);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_2,UPG_UPG_DI_FromHMI.Res_2,UPG_UPG_DI_ToHMI.Res_2,UPG_UPG_DI.Res_2);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_3,UPG_UPG_DI_FromHMI.Res_3,UPG_UPG_DI_ToHMI.Res_3,UPG_UPG_DI.Res_3);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_4,UPG_UPG_DI_FromHMI.Res_4,UPG_UPG_DI_ToHMI.Res_4,UPG_UPG_DI.Res_4);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_5,UPG_UPG_DI_FromHMI.Res_5,UPG_UPG_DI_ToHMI.Res_5,UPG_UPG_DI.Res_5);
+//Клапан топливного газа УПТН закрыт
+mb_DI_Processing(UPG_UPG_DI_DRV.KE31_OF,UPG_UPG_DI_FromHMI.KE31_OF,UPG_UPG_DI_ToHMI.KE31_OF,UPG_UPG_DI.KE31_OF);
+//Кран Кр8.1 открыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1_ON,UPG_UPG_DI_FromHMI.Kr8_1_ON,UPG_UPG_DI_ToHMI.Kr8_1_ON,UPG_UPG_DI.Kr8_1_ON);
+//Кран Кр8.1 закрыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1_OF,UPG_UPG_DI_FromHMI.Kr8_1_OF,UPG_UPG_DI_ToHMI.Kr8_1_OF,UPG_UPG_DI.Kr8_1_OF);
+//Кран Кр8.1, местное управление
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1_MU,UPG_UPG_DI_FromHMI.Kr8_1_MU,UPG_UPG_DI_ToHMI.Kr8_1_MU,UPG_UPG_DI.Kr8_1_MU);
+//Кран Кр8.1, неисправность
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1_FLT,UPG_UPG_DI_FromHMI.Kr8_1_FLT,UPG_UPG_DI_ToHMI.Kr8_1_FLT,UPG_UPG_DI.Kr8_1_FLT);
+//Кран Кр8.1a открыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1A_ON,UPG_UPG_DI_FromHMI.Kr8_1A_ON,UPG_UPG_DI_ToHMI.Kr8_1A_ON,UPG_UPG_DI.Kr8_1A_ON);
+//Кран Кр8.1a закрыт
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1A_OF,UPG_UPG_DI_FromHMI.Kr8_1A_OF,UPG_UPG_DI_ToHMI.Kr8_1A_OF,UPG_UPG_DI.Kr8_1A_OF);
+//Кран Кр8.1a, местное управление
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1A_MU,UPG_UPG_DI_FromHMI.Kr8_1A_MU,UPG_UPG_DI_ToHMI.Kr8_1A_MU,UPG_UPG_DI.Kr8_1A_MU);
+//Кран Кр8.1a, неисправность
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1A_FLT,UPG_UPG_DI_FromHMI.Kr8_1A_FLT,UPG_UPG_DI_ToHMI.Kr8_1A_FLT,UPG_UPG_DI.Kr8_1A_FLT);
+//Вытяжной вентилятор блока технологии (АМ1-1) включен
+mb_DI_Processing(UPG_UPG_DI_DRV.VnV_BT_ON,UPG_UPG_DI_FromHMI.VnV_BT_ON,UPG_UPG_DI_ToHMI.VnV_BT_ON,UPG_UPG_DI.VnV_BT_ON);
+//Вытяжной вентилятор блока технологии (АМ1-1) неисправен
+mb_DI_Processing(UPG_UPG_DI_DRV.VnV_BT_FLT,UPG_UPG_DI_FromHMI.VnV_BT_FLT,UPG_UPG_DI_ToHMI.VnV_BT_FLT,UPG_UPG_DI.VnV_BT_FLT);
+//Вытяжной вентилятор УПТН (АМ3-1) включен
+mb_DI_Processing(UPG_UPG_DI_DRV.VnV_UPNT_ON,UPG_UPG_DI_FromHMI.VnV_UPNT_ON,UPG_UPG_DI_ToHMI.VnV_UPNT_ON,UPG_UPG_DI.VnV_UPNT_ON);
+//Вытяжной вентилятор УПТН (АМ3-1) неисправен
+mb_DI_Processing(UPG_UPG_DI_DRV.VnV_UPNT_FLT,UPG_UPG_DI_FromHMI.VnV_UPNT_FLT,UPG_UPG_DI_ToHMI.VnV_UPNT_FLT,UPG_UPG_DI.VnV_UPNT_FLT);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_6,UPG_UPG_DI_FromHMI.Res_6,UPG_UPG_DI_ToHMI.Res_6,UPG_UPG_DI.Res_6);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_7,UPG_UPG_DI_FromHMI.Res_7,UPG_UPG_DI_ToHMI.Res_7,UPG_UPG_DI.Res_7);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_8,UPG_UPG_DI_FromHMI.Res_8,UPG_UPG_DI_ToHMI.Res_8,UPG_UPG_DI.Res_8);
+//Загазованность обобщенный порог 1 (СПАиКЗ)
+mb_DI_Processing(UPG_UPG_DI_DRV.Gas_pv,UPG_UPG_DI_FromHMI.Gas_pv,UPG_UPG_DI_ToHMI.Gas_pv,UPG_UPG_DI.Gas_pv);
+//Загазованность обобщенный порог 2 (СПАиКЗ)
+mb_DI_Processing(UPG_UPG_DI_DRV.Gas_av,UPG_UPG_DI_FromHMI.Gas_av,UPG_UPG_DI_ToHMI.Gas_av,UPG_UPG_DI.Gas_av);
+//Пожар блока технологического УПТИГ общий (СПАиКЗ)
+mb_DI_Processing(UPG_UPG_DI_DRV.Fire_BT,UPG_UPG_DI_FromHMI.Fire_BT,UPG_UPG_DI_ToHMI.Fire_BT,UPG_UPG_DI.Fire_BT);
+//Неисправность пожарной сигнализации (СПАиКЗ)
+mb_DI_Processing(UPG_UPG_DI_DRV.AKZ_FLT,UPG_UPG_DI_FromHMI.AKZ_FLT,UPG_UPG_DI_ToHMI.AKZ_FLT,UPG_UPG_DI.AKZ_FLT);
+//Загазованность СО узла подготовки теплоносителя порог 1
+mb_DI_Processing(UPG_UPG_DI_DRV.GasCO_pv,UPG_UPG_DI_FromHMI.GasCO_pv,UPG_UPG_DI_ToHMI.GasCO_pv,UPG_UPG_DI.GasCO_pv);
+//Загазованность СО узла подготовки теплоносителя порог 2
+mb_DI_Processing(UPG_UPG_DI_DRV.GasCO_av,UPG_UPG_DI_FromHMI.GasCO_av,UPG_UPG_DI_ToHMI.GasCO_av,UPG_UPG_DI.GasCO_av);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_9,UPG_UPG_DI_FromHMI.Res_9,UPG_UPG_DI_ToHMI.Res_9,UPG_UPG_DI.Res_9);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_10,UPG_UPG_DI_FromHMI.Res_10,UPG_UPG_DI_ToHMI.Res_10,UPG_UPG_DI.Res_10);
+//Экстренный останов Цеха (ЭО)
+mb_DI_Processing(UPG_UPG_DI_DRV.EO_Shop,UPG_UPG_DI_FromHMI.EO_Shop,UPG_UPG_DI_ToHMI.EO_Shop,UPG_UPG_DI.EO_Shop);
+//Аварийный останов цеха 1 степени (АО-1)
+mb_DI_Processing(UPG_UPG_DI_DRV.AO1_Shop,UPG_UPG_DI_FromHMI.AO1_Shop,UPG_UPG_DI_ToHMI.AO1_Shop,UPG_UPG_DI.AO1_Shop);
+//Аварийный останов цеха 2 степени (АО-2)
+mb_DI_Processing(UPG_UPG_DI_DRV.AO2_Shop,UPG_UPG_DI_FromHMI.AO2_Shop,UPG_UPG_DI_ToHMI.AO2_Shop,UPG_UPG_DI.AO2_Shop);
+//Наличие напряжения 380В на вводе 1
+mb_DI_Processing(UPG_UPG_DI_DRV.U1_AC380_ok,UPG_UPG_DI_FromHMI.U1_AC380_ok,UPG_UPG_DI_ToHMI.U1_AC380_ok,UPG_UPG_DI.U1_AC380_ok);
+//Наличие напряжения 380В на вводе 2
+mb_DI_Processing(UPG_UPG_DI_DRV.U2_AC380_ok,UPG_UPG_DI_FromHMI.U2_AC380_ok,UPG_UPG_DI_ToHMI.U2_AC380_ok,UPG_UPG_DI.U2_AC380_ok);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_11,UPG_UPG_DI_FromHMI.Res_11,UPG_UPG_DI_ToHMI.Res_11,UPG_UPG_DI.Res_11);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_12,UPG_UPG_DI_FromHMI.Res_12,UPG_UPG_DI_ToHMI.Res_12,UPG_UPG_DI.Res_12);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_13,UPG_UPG_DI_FromHMI.Res_13,UPG_UPG_DI_ToHMI.Res_13,UPG_UPG_DI.Res_13);
+//Наличие напряжения 220В на 1СШ ВРУ L1
+mb_DI_Processing(UPG_UPG_DI_DRV.U1a_VRU_ok,UPG_UPG_DI_FromHMI.U1a_VRU_ok,UPG_UPG_DI_ToHMI.U1a_VRU_ok,UPG_UPG_DI.U1a_VRU_ok);
+//Наличие напряжения 220В на 1СШ ВРУ L2
+mb_DI_Processing(UPG_UPG_DI_DRV.U1b_VRU_ok,UPG_UPG_DI_FromHMI.U1b_VRU_ok,UPG_UPG_DI_ToHMI.U1b_VRU_ok,UPG_UPG_DI.U1b_VRU_ok);
+//Наличие напряжения 220В на 1СШ ВРУ L3
+mb_DI_Processing(UPG_UPG_DI_DRV.U1c_VRU_ok,UPG_UPG_DI_FromHMI.U1c_VRU_ok,UPG_UPG_DI_ToHMI.U1c_VRU_ok,UPG_UPG_DI.U1c_VRU_ok);
+//Наличие напряжения 220В на 2СШ ВРУ L1
+mb_DI_Processing(UPG_UPG_DI_DRV.U2a_VRU_ok,UPG_UPG_DI_FromHMI.U2a_VRU_ok,UPG_UPG_DI_ToHMI.U2a_VRU_ok,UPG_UPG_DI.U2a_VRU_ok);
+//Наличие напряжения 220В на 2СШ ВРУ L2
+mb_DI_Processing(UPG_UPG_DI_DRV.U2b_VRU_ok,UPG_UPG_DI_FromHMI.U2b_VRU_ok,UPG_UPG_DI_ToHMI.U2b_VRU_ok,UPG_UPG_DI.U2b_VRU_ok);
+//Наличие напряжения 220В на 2СШ ВРУ L3
+mb_DI_Processing(UPG_UPG_DI_DRV.U2c_VRU_ok,UPG_UPG_DI_FromHMI.U2c_VRU_ok,UPG_UPG_DI_ToHMI.U2c_VRU_ok,UPG_UPG_DI.U2c_VRU_ok);
+//Выключатель ввода 1 включен
+mb_DI_Processing(UPG_UPG_DI_DRV.Q1_ON,UPG_UPG_DI_FromHMI.Q1_ON,UPG_UPG_DI_ToHMI.Q1_ON,UPG_UPG_DI.Q1_ON);
+//Выключатель ввода 1 отключен
+mb_DI_Processing(UPG_UPG_DI_DRV.Q1_OF,UPG_UPG_DI_FromHMI.Q1_OF,UPG_UPG_DI_ToHMI.Q1_OF,UPG_UPG_DI.Q1_OF);
+//Выключатель ввода 1 отключен защитой
+mb_DI_Processing(UPG_UPG_DI_DRV.Q1_AOF,UPG_UPG_DI_FromHMI.Q1_AOF,UPG_UPG_DI_ToHMI.Q1_AOF,UPG_UPG_DI.Q1_AOF);
+//Выключатель ввода 2 включен
+mb_DI_Processing(UPG_UPG_DI_DRV.Q2_ON,UPG_UPG_DI_FromHMI.Q2_ON,UPG_UPG_DI_ToHMI.Q2_ON,UPG_UPG_DI.Q2_ON);
+//Выключатель ввода 2 отключен
+mb_DI_Processing(UPG_UPG_DI_DRV.Q2_OF,UPG_UPG_DI_FromHMI.Q2_OF,UPG_UPG_DI_ToHMI.Q2_OF,UPG_UPG_DI.Q2_OF);
+//Выключатель ввода 2 отключен защитой
+mb_DI_Processing(UPG_UPG_DI_DRV.Q2_AOF,UPG_UPG_DI_FromHMI.Q2_AOF,UPG_UPG_DI_ToHMI.Q2_AOF,UPG_UPG_DI.Q2_AOF);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_14,UPG_UPG_DI_FromHMI.Res_14,UPG_UPG_DI_ToHMI.Res_14,UPG_UPG_DI.Res_14);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_15,UPG_UPG_DI_FromHMI.Res_15,UPG_UPG_DI_ToHMI.Res_15,UPG_UPG_DI.Res_15);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_16,UPG_UPG_DI_FromHMI.Res_16,UPG_UPG_DI_ToHMI.Res_16,UPG_UPG_DI.Res_16);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_17,UPG_UPG_DI_FromHMI.Res_17,UPG_UPG_DI_ToHMI.Res_17,UPG_UPG_DI.Res_17);
+//Секционный выключатель включен
+mb_DI_Processing(UPG_UPG_DI_DRV.QS_ON,UPG_UPG_DI_FromHMI.QS_ON,UPG_UPG_DI_ToHMI.QS_ON,UPG_UPG_DI.QS_ON);
+//Секционный выключатель отключен
+mb_DI_Processing(UPG_UPG_DI_DRV.QS_OF,UPG_UPG_DI_FromHMI.QS_OF,UPG_UPG_DI_ToHMI.QS_OF,UPG_UPG_DI.QS_OF);
+//Секционный выключатель отключен защитой
+mb_DI_Processing(UPG_UPG_DI_DRV.QS_AOF,UPG_UPG_DI_FromHMI.QS_AOF,UPG_UPG_DI_ToHMI.QS_AOF,UPG_UPG_DI.QS_AOF);
+//АВР включен
+mb_DI_Processing(UPG_UPG_DI_DRV.AVR_ON,UPG_UPG_DI_FromHMI.AVR_ON,UPG_UPG_DI_ToHMI.AVR_ON,UPG_UPG_DI.AVR_ON);
+//АВР отключен
+mb_DI_Processing(UPG_UPG_DI_DRV.AVR_OF,UPG_UPG_DI_FromHMI.AVR_OF,UPG_UPG_DI_ToHMI.AVR_OF,UPG_UPG_DI.AVR_OF);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_18,UPG_UPG_DI_FromHMI.Res_18,UPG_UPG_DI_ToHMI.Res_18,UPG_UPG_DI.Res_18);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_19,UPG_UPG_DI_FromHMI.Res_19,UPG_UPG_DI_ToHMI.Res_19,UPG_UPG_DI.Res_19);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_20,UPG_UPG_DI_FromHMI.Res_20,UPG_UPG_DI_ToHMI.Res_20,UPG_UPG_DI.Res_20);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_21,UPG_UPG_DI_FromHMI.Res_21,UPG_UPG_DI_ToHMI.Res_21,UPG_UPG_DI.Res_21);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_22,UPG_UPG_DI_FromHMI.Res_22,UPG_UPG_DI_ToHMI.Res_22,UPG_UPG_DI.Res_22);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_23,UPG_UPG_DI_FromHMI.Res_23,UPG_UPG_DI_ToHMI.Res_23,UPG_UPG_DI.Res_23);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_24,UPG_UPG_DI_FromHMI.Res_24,UPG_UPG_DI_ToHMI.Res_24,UPG_UPG_DI.Res_24);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_25,UPG_UPG_DI_FromHMI.Res_25,UPG_UPG_DI_ToHMI.Res_25,UPG_UPG_DI.Res_25);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_26,UPG_UPG_DI_FromHMI.Res_26,UPG_UPG_DI_ToHMI.Res_26,UPG_UPG_DI.Res_26);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_27,UPG_UPG_DI_FromHMI.Res_27,UPG_UPG_DI_ToHMI.Res_27,UPG_UPG_DI.Res_27);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_28,UPG_UPG_DI_FromHMI.Res_28,UPG_UPG_DI_ToHMI.Res_28,UPG_UPG_DI.Res_28);
+//Контроль основного питания ~220 В
+mb_DI_Processing(UPG_UPG_DI_DRV.Chk_AC220_SAU,UPG_UPG_DI_FromHMI.Chk_AC220_SAU,UPG_UPG_DI_ToHMI.Chk_AC220_SAU,UPG_UPG_DI.Chk_AC220_SAU);
+//Контроль резервного питания =220 В
+mb_DI_Processing(UPG_UPG_DI_DRV.Chk_DC220_SAU,UPG_UPG_DI_FromHMI.Chk_DC220_SAU,UPG_UPG_DI_ToHMI.Chk_DC220_SAU,UPG_UPG_DI.Chk_DC220_SAU);
+//Автоматы питания включены
+mb_DI_Processing(UPG_UPG_DI_DRV.OF_ON,UPG_UPG_DI_FromHMI.OF_ON,UPG_UPG_DI_ToHMI.OF_ON,UPG_UPG_DI.OF_ON);
+//Контроль исправности разрядников
+mb_DI_Processing(UPG_UPG_DI_DRV.Chk_razr,UPG_UPG_DI_FromHMI.Chk_razr,UPG_UPG_DI_ToHMI.Chk_razr,UPG_UPG_DI.Chk_razr);
+//Исправность осн. ИП =24 В внутренних цепей
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24osn_Int_ok,UPG_UPG_DI_FromHMI.DC24osn_Int_ok,UPG_UPG_DI_ToHMI.DC24osn_Int_ok,UPG_UPG_DI.DC24osn_Int_ok);
+//Исправность рез. ИП =24 В внутренних цепей
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24rez_Int_ok,UPG_UPG_DI_FromHMI.DC24rez_Int_ok,UPG_UPG_DI_ToHMI.DC24rez_Int_ok,UPG_UPG_DI.DC24rez_Int_ok);
+//Исправность осн. ИП =24В  внешн. AI, AO, DI
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24osn_IO_ok,UPG_UPG_DI_FromHMI.DC24osn_IO_ok,UPG_UPG_DI_ToHMI.DC24osn_IO_ok,UPG_UPG_DI.DC24osn_IO_ok);
+//Исправность рез. ИП =24В  внешн. AI, AO, DI
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24rez_IO_ok,UPG_UPG_DI_FromHMI.DC24rez_IO_ok,UPG_UPG_DI_ToHMI.DC24rez_IO_ok,UPG_UPG_DI.DC24rez_IO_ok);
+//Исправность осн. ИП =24 В DO внешних цепей
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24osn_Ext_ok,UPG_UPG_DI_FromHMI.DC24osn_Ext_ok,UPG_UPG_DI_ToHMI.DC24osn_Ext_ok,UPG_UPG_DI.DC24osn_Ext_ok);
+//Исправность рез. ИП =24 В DO внешних цепей
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24rez_Ext_ok,UPG_UPG_DI_FromHMI.DC24rez_Ext_ok,UPG_UPG_DI_ToHMI.DC24rez_Ext_ok,UPG_UPG_DI.DC24rez_Ext_ok);
+//Двери шкафа отрыты
+mb_DI_Processing(UPG_UPG_DI_DRV.Cabin_open,UPG_UPG_DI_FromHMI.Cabin_open,UPG_UPG_DI_ToHMI.Cabin_open,UPG_UPG_DI.Cabin_open);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_29,UPG_UPG_DI_FromHMI.Res_29,UPG_UPG_DI_ToHMI.Res_29,UPG_UPG_DI.Res_29);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_30,UPG_UPG_DI_FromHMI.Res_30,UPG_UPG_DI_ToHMI.Res_30,UPG_UPG_DI.Res_30);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_31,UPG_UPG_DI_FromHMI.Res_31,UPG_UPG_DI_ToHMI.Res_31,UPG_UPG_DI.Res_31);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_32,UPG_UPG_DI_FromHMI.Res_32,UPG_UPG_DI_ToHMI.Res_32,UPG_UPG_DI.Res_32);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_33,UPG_UPG_DI_FromHMI.Res_33,UPG_UPG_DI_ToHMI.Res_33,UPG_UPG_DI.Res_33);
+//Контроль основного питания  БЭАО ~220 В
+mb_DI_Processing(UPG_UPG_DI_DRV.Chk_AC220_BEO,UPG_UPG_DI_FromHMI.Chk_AC220_BEO,UPG_UPG_DI_ToHMI.Chk_AC220_BEO,UPG_UPG_DI.Chk_AC220_BEO);
+//Контроль резервного питания  БЭАО =220 В
+mb_DI_Processing(UPG_UPG_DI_DRV.Chk_DC220_BEO,UPG_UPG_DI_FromHMI.Chk_DC220_BEO,UPG_UPG_DI_ToHMI.Chk_DC220_BEO,UPG_UPG_DI.Chk_DC220_BEO);
+//Исправность осн. ИП =24В БЭАО
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24osn_BEO_ok,UPG_UPG_DI_FromHMI.DC24osn_BEO_ok,UPG_UPG_DI_ToHMI.DC24osn_BEO_ok,UPG_UPG_DI.DC24osn_BEO_ok);
+//Исправность рез. ИП =24В БЭАО
+mb_DI_Processing(UPG_UPG_DI_DRV.DC24rez_BEO_ok,UPG_UPG_DI_FromHMI.DC24rez_BEO_ok,UPG_UPG_DI_ToHMI.DC24rez_BEO_ok,UPG_UPG_DI.DC24rez_BEO_ok);
+// ЭО от БЭАО
+mb_DI_Processing(UPG_UPG_DI_DRV.EO_BEO,UPG_UPG_DI_FromHMI.EO_BEO,UPG_UPG_DI_ToHMI.EO_BEO,UPG_UPG_DI.EO_BEO);
+// ЭО от БЭАО. КЦД
+mb_DI_Processing(UPG_UPG_DI_DRV.EO_BEO_KCD,UPG_UPG_DI_FromHMI.EO_BEO_KCD,UPG_UPG_DI_ToHMI.EO_BEO_KCD,UPG_UPG_DI.EO_BEO_KCD);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_34,UPG_UPG_DI_FromHMI.Res_34,UPG_UPG_DI_ToHMI.Res_34,UPG_UPG_DI.Res_34);
+//Резерв. КЦД
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_35,UPG_UPG_DI_FromHMI.Res_35,UPG_UPG_DI_ToHMI.Res_35,UPG_UPG_DI.Res_35);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_36,UPG_UPG_DI_FromHMI.Res_36,UPG_UPG_DI_ToHMI.Res_36,UPG_UPG_DI.Res_36);
+//Резерв. КЦД
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_37,UPG_UPG_DI_FromHMI.Res_37,UPG_UPG_DI_ToHMI.Res_37,UPG_UPG_DI.Res_37);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_38,UPG_UPG_DI_FromHMI.Res_38,UPG_UPG_DI_ToHMI.Res_38,UPG_UPG_DI.Res_38);
+//Резерв. КЦД
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_39,UPG_UPG_DI_FromHMI.Res_39,UPG_UPG_DI_ToHMI.Res_39,UPG_UPG_DI.Res_39);
+//Готовность БЭАО
+mb_DI_Processing(UPG_UPG_DI_DRV.BEO_Rdy,UPG_UPG_DI_FromHMI.BEO_Rdy,UPG_UPG_DI_ToHMI.BEO_Rdy,UPG_UPG_DI.BEO_Rdy);
+//АО (в ПЛК)
+mb_DI_Processing(UPG_UPG_DI_DRV.AO_PLC,UPG_UPG_DI_FromHMI.AO_PLC,UPG_UPG_DI_ToHMI.AO_PLC,UPG_UPG_DI.AO_PLC);
+//Квитирование
+mb_DI_Processing(UPG_UPG_DI_DRV.Kn_Quit,UPG_UPG_DI_FromHMI.Kn_Quit,UPG_UPG_DI_ToHMI.Kn_Quit,UPG_UPG_DI.Kn_Quit);
+//Резерв внутр.
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_40,UPG_UPG_DI_FromHMI.Res_40,UPG_UPG_DI_ToHMI.Res_40,UPG_UPG_DI.Res_40);
+//Клапан сброса НД выход 1 (КЭ4-1). КЦУ
+mb_DI_Processing(UPG_UPG_DI_DRV.KE41_ON_KCU,UPG_UPG_DI_FromHMI.KE41_ON_KCU,UPG_UPG_DI_ToHMI.KE41_ON_KCU,UPG_UPG_DI.KE41_ON_KCU);
+//Клапан сброса НД выход 2 (КЭ4-2). КЦУ
+mb_DI_Processing(UPG_UPG_DI_DRV.KE42_ON_KCU,UPG_UPG_DI_FromHMI.KE42_ON_KCU,UPG_UPG_DI_ToHMI.KE42_ON_KCU,UPG_UPG_DI.KE42_ON_KCU);
+//Клапан отсечной ТГ в УПТН (КЭ3-1). КЦУ
+mb_DI_Processing(UPG_UPG_DI_DRV.KE31_ON_KCU,UPG_UPG_DI_FromHMI.KE31_ON_KCU,UPG_UPG_DI_ToHMI.KE31_ON_KCU,UPG_UPG_DI.KE31_ON_KCU);
+//Резерв
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_41,UPG_UPG_DI_FromHMI.Res_41,UPG_UPG_DI_ToHMI.Res_41,UPG_UPG_DI.Res_41);
+//Кран Кр8.1 закрыть. КЦУ
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1_OF_KCU,UPG_UPG_DI_FromHMI.Kr8_1_OF_KCU,UPG_UPG_DI_ToHMI.Kr8_1_OF_KCU,UPG_UPG_DI.Kr8_1_OF_KCU);
+//Кран Кр8.1а открыть. КЦУ
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr8_1A_ON_KCU,UPG_UPG_DI_FromHMI.Kr8_1A_ON_KCU,UPG_UPG_DI_ToHMI.Kr8_1A_ON_KCU,UPG_UPG_DI.Kr8_1A_ON_KCU);
+//Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_3_ON_KCU,UPG_UPG_DI_FromHMI.Kr2_1_3_ON_KCU,UPG_UPG_DI_ToHMI.Kr2_1_3_ON_KCU,UPG_UPG_DI.Kr2_1_3_ON_KCU);
+//Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_3_OF_KCU,UPG_UPG_DI_FromHMI.Kr2_1_3_OF_KCU,UPG_UPG_DI_ToHMI.Kr2_1_3_OF_KCU,UPG_UPG_DI.Kr2_1_3_OF_KCU);
+//Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_4_ON_KCU,UPG_UPG_DI_FromHMI.Kr2_1_4_ON_KCU,UPG_UPG_DI_ToHMI.Kr2_1_4_ON_KCU,UPG_UPG_DI.Kr2_1_4_ON_KCU);
+//Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_1_4_OF_KCU,UPG_UPG_DI_FromHMI.Kr2_1_4_OF_KCU,UPG_UPG_DI_ToHMI.Kr2_1_4_OF_KCU,UPG_UPG_DI.Kr2_1_4_OF_KCU);
+//Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_3_ON_KCU,UPG_UPG_DI_FromHMI.Kr2_2_3_ON_KCU,UPG_UPG_DI_ToHMI.Kr2_2_3_ON_KCU,UPG_UPG_DI.Kr2_2_3_ON_KCU);
+//Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_3_OF_KCU,UPG_UPG_DI_FromHMI.Kr2_2_3_OF_KCU,UPG_UPG_DI_ToHMI.Kr2_2_3_OF_KCU,UPG_UPG_DI.Kr2_2_3_OF_KCU);
+//Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_4_ON_KCU,UPG_UPG_DI_FromHMI.Kr2_2_4_ON_KCU,UPG_UPG_DI_ToHMI.Kr2_2_4_ON_KCU,UPG_UPG_DI.Kr2_2_4_ON_KCU);
+//Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыть
+mb_DI_Processing(UPG_UPG_DI_DRV.Kr2_2_4_OF_KCU,UPG_UPG_DI_FromHMI.Kr2_2_4_OF_KCU,UPG_UPG_DI_ToHMI.Kr2_2_4_OF_KCU,UPG_UPG_DI.Kr2_2_4_OF_KCU);
+//Резерв. КЦУ
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_42,UPG_UPG_DI_FromHMI.Res_42,UPG_UPG_DI_ToHMI.Res_42,UPG_UPG_DI.Res_42);
+//Резерв. КЦУ
+mb_DI_Processing(UPG_UPG_DI_DRV.Res_43,UPG_UPG_DI_FromHMI.Res_43,UPG_UPG_DI_ToHMI.Res_43,UPG_UPG_DI.Res_43);
+//Конец сгенерированного кода
+
+(*
+
+//////////////////////////////////////////////////////////////////////////////////////////MODBAS/////////////////////////////////////////////////////////////////////////////////
+UPG_UPG_DI_DRV.P_in_UPG_v:=UPG_UPG_DI_ToHMI.P_in_UPG_v; //Отклонение давления на входе вниз (МН1-1);
+UPG_UPG_DI_DRV.P_in_UPG_n:=UPG_UPG_DI.P_in_UPG_n; //Отклонение давления на входе вверх (МН1-1);
+UPG_UPG_DI_DRV.P_out1_UPG_v:=UPG_UPG_DI.P_out1_UPG_v; //Отклонение давления на выходе 1 вниз (МН1-2);
+UPG_UPG_DI_DRV.P_out1_UPG_n:=UPG_UPG_DI.P_out1_UPG_n; //Отклонение давления на выходе 1 вверх (МН1-2);
+UPG_UPG_DI_DRV.P_out2_UPG_v:=UPG_UPG_DI.P_out2_UPG_v; //Отклонение давления на выходе 2 вниз (МН1-3);
+UPG_UPG_DI_DRV.P_out2_UPG_n:=UPG_UPG_DI.P_out2_UPG_n; //Отклонение давления на выходе 2 вверх (МН1-3);
+UPG_UPG_DI_DRV.P_out3_UPG_v:=UPG_UPG_DI.P_out3_UPG_v; //Отклонение давления на выходе 3 вниз (МН1-4);
+UPG_UPG_DI_DRV.P_out3_UPG_n:=UPG_UPG_DI.P_out3_UPG_n; //Отклонение давления на выходе 3 вверх (МН1-4);
+UPG_UPG_DI_DRV.Brk_Tr_PG31:=UPG_UPG_DI.Brk_Tr_PG31; //Прорыв трубного пучка ПГ3.1 (МН3.1-1);
+UPG_UPG_DI_DRV.Brk_Tr_PG32:=UPG_UPG_DI.Brk_Tr_PG32; //Прорыв трубного пучка ПГ3.2 (МН3.2-1);
+UPG_UPG_DI_DRV.Lk_F21_s1_v:=UPG_UPG_DI.Lk_F21_s1_v; //Уровень в 1 ступени фильтра Ф2.1 «мах»;
+UPG_UPG_DI_DRV.Lk_F21_s2_v:=UPG_UPG_DI.Lk_F21_s2_v; //Уровень во 2 ступени фильтра Ф2.1 «мах»;
+UPG_UPG_DI_DRV.Lk_F22_s1_v:=UPG_UPG_DI.Lk_F22_s1_v; //Уровень в 1 ступени фильтра Ф2.2 «мах»;
+UPG_UPG_DI_DRV.Lk_F22_s2_v:=UPG_UPG_DI.Lk_F22_s2_v; //Уровень во 2 ступени фильтра Ф2.2 «мах»;
+UPG_UPG_DI_DRV.Res_0:=UPG_UPG_DI.Res_0; //Резерв;
+UPG_UPG_DI_DRV.Res_1:=UPG_UPG_DI.Res_1; //Резерв;
+UPG_UPG_DI_DRV.OLR1_out_ON:=UPG_UPG_DI.OLR1_out_ON; //Сигнал включения контрольного регулятора ЛР1 (ОЛР) выход 1 (МН4.1);
+UPG_UPG_DI_DRV.RLR1_out_ON:=UPG_UPG_DI.RLR1_out_ON; //Сигнал включения контрольного регулятора ЛР2 (РЛР) выход 1 (МН4.3);
+UPG_UPG_DI_DRV.OLR2_out_ON:=UPG_UPG_DI.OLR2_out_ON; //Сигнал включения контр. регулятора ЛР1 (ОЛР) выход 2 (МН4.2);
+UPG_UPG_DI_DRV.RLR2_out_ON:=UPG_UPG_DI.RLR2_out_ON; //Сигнал включения контр. регулятора ЛР2 (РЛР) выход 2 (МН4.4);
+UPG_UPG_DI_DRV.Kr2_1_3_OF:=UPG_UPG_DI.Kr2_1_3_OF; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыт;
+UPG_UPG_DI_DRV.Kr2_1_3_ON:=UPG_UPG_DI.Kr2_1_3_ON; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыт;
+UPG_UPG_DI_DRV.Kr2_1_4_OF:=UPG_UPG_DI.Kr2_1_4_OF; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыт;
+UPG_UPG_DI_DRV.Kr2_1_4_ON:=UPG_UPG_DI.Kr2_1_4_ON; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыт;
+UPG_UPG_DI_DRV.Kr2_2_3_OF:=UPG_UPG_DI.Kr2_2_3_OF; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыт;
+UPG_UPG_DI_DRV.Kr2_2_3_ON:=UPG_UPG_DI.Kr2_2_3_ON; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыт;
+UPG_UPG_DI_DRV.Kr2_2_4_OF:=UPG_UPG_DI.Kr2_2_4_OF; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыт;
+UPG_UPG_DI_DRV.Kr2_2_4_ON:=UPG_UPG_DI.Kr2_2_4_ON; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыт;
+UPG_UPG_DI_DRV.Res_2:=UPG_UPG_DI.Res_2; //Резерв;
+UPG_UPG_DI_DRV.Res_3:=UPG_UPG_DI.Res_3; //Резерв;
+UPG_UPG_DI_DRV.Res_4:=UPG_UPG_DI.Res_4; //Резерв;
+UPG_UPG_DI_DRV.Res_5:=UPG_UPG_DI.Res_5; //Резерв;
+UPG_UPG_DI_DRV.KE31_OF:=UPG_UPG_DI.KE31_OF; //Клапан топливного газа УПТН закрыт;
+UPG_UPG_DI_DRV.Kr8_1_ON:=UPG_UPG_DI.Kr8_1_ON; //Кран Кр8.1 открыт;
+UPG_UPG_DI_DRV.Kr8_1_OF:=UPG_UPG_DI.Kr8_1_OF; //Кран Кр8.1 закрыт;
+UPG_UPG_DI_DRV.Kr8_1_MU:=UPG_UPG_DI.Kr8_1_MU; //Кран Кр8.1, местное управление;
+UPG_UPG_DI_DRV.Kr8_1_FLT:=UPG_UPG_DI.Kr8_1_FLT; //Кран Кр8.1, неисправность;
+UPG_UPG_DI_DRV.Kr8_1A_ON:=UPG_UPG_DI.Kr8_1A_ON; //Кран Кр8.1a открыт;
+UPG_UPG_DI_DRV.Kr8_1A_OF:=UPG_UPG_DI.Kr8_1A_OF; //Кран Кр8.1a закрыт;
+UPG_UPG_DI_DRV.Kr8_1A_MU:=UPG_UPG_DI.Kr8_1A_MU; //Кран Кр8.1a, местное управление;
+UPG_UPG_DI_DRV.Kr8_1A_FLT:=UPG_UPG_DI.Kr8_1A_FLT; //Кран Кр8.1a, неисправность;
+UPG_UPG_DI_DRV.VnV_BT_ON:=UPG_UPG_DI.VnV_BT_ON; //Вытяжной вентилятор блока технологии (АМ1-1) включен;
+UPG_UPG_DI_DRV.VnV_BT_FLT:=UPG_UPG_DI.VnV_BT_FLT; //Вытяжной вентилятор блока технологии (АМ1-1) неисправен;
+UPG_UPG_DI_DRV.VnV_UPNT_ON:=UPG_UPG_DI.VnV_UPNT_ON; //Вытяжной вентилятор УПТН (АМ3-1) включен;
+UPG_UPG_DI_DRV.VnV_UPNT_FLT:=UPG_UPG_DI.VnV_UPNT_FLT; //Вытяжной вентилятор УПТН (АМ3-1) неисправен;
+UPG_UPG_DI_DRV.Res_6:=UPG_UPG_DI.Res_6; //Резерв;
+UPG_UPG_DI_DRV.Res_7:=UPG_UPG_DI.Res_7; //Резерв;
+UPG_UPG_DI_DRV.Res_8:=UPG_UPG_DI.Res_8; //Резерв;
+UPG_UPG_DI_DRV.Gas_pv:=UPG_UPG_DI.Gas_pv; //Загазованность обобщенный порог 1 (СПАиКЗ);
+UPG_UPG_DI_DRV.Gas_av:=UPG_UPG_DI.Gas_av; //Загазованность обобщенный порог 2 (СПАиКЗ);
+UPG_UPG_DI_DRV.Fire_BT:=UPG_UPG_DI.Fire_BT; //Пожар блока технологического УПТИГ общий (СПАиКЗ);
+UPG_UPG_DI_DRV.AKZ_FLT:=UPG_UPG_DI.AKZ_FLT; //Неисправность пожарной сигнализации (СПАиКЗ);
+UPG_UPG_DI_DRV.GasCO_pv:=UPG_UPG_DI.GasCO_pv; //Загазованность СО узла подготовки теплоносителя порог 1;
+UPG_UPG_DI_DRV.GasCO_av:=UPG_UPG_DI.GasCO_av; //Загазованность СО узла подготовки теплоносителя порог 2;
+UPG_UPG_DI_DRV.Res_9:=UPG_UPG_DI.Res_9; //Резерв;
+UPG_UPG_DI_DRV.Res_10:=UPG_UPG_DI.Res_10; //Резерв;
+UPG_UPG_DI_DRV.EO_Shop:=UPG_UPG_DI.EO_Shop; //Экстренный останов Цеха (ЭО);
+UPG_UPG_DI_DRV.AO1_Shop:=UPG_UPG_DI.AO1_Shop; //Аварийный останов цеха 1 степени (АО-1);
+UPG_UPG_DI_DRV.AO2_Shop:=UPG_UPG_DI.AO2_Shop; //Аварийный останов цеха 2 степени (АО-2);
+UPG_UPG_DI_DRV.U1_AC380_ok:=UPG_UPG_DI.U1_AC380_ok; //Наличие напряжения 380В на вводе 1;
+UPG_UPG_DI_DRV.U2_AC380_ok:=UPG_UPG_DI.U2_AC380_ok; //Наличие напряжения 380В на вводе 2;
+UPG_UPG_DI_DRV.Res_11:=UPG_UPG_DI.Res_11; //Резерв;
+UPG_UPG_DI_DRV.Res_12:=UPG_UPG_DI.Res_12; //Резерв;
+UPG_UPG_DI_DRV.Res_13:=UPG_UPG_DI.Res_13; //Резерв;
+UPG_UPG_DI_DRV.U1a_VRU_ok:=UPG_UPG_DI.U1a_VRU_ok; //Наличие напряжения 220В на 1СШ ВРУ L1;
+UPG_UPG_DI_DRV.U1b_VRU_ok:=UPG_UPG_DI.U1b_VRU_ok; //Наличие напряжения 220В на 1СШ ВРУ L2;
+UPG_UPG_DI_DRV.U1c_VRU_ok:=UPG_UPG_DI.U1c_VRU_ok; //Наличие напряжения 220В на 1СШ ВРУ L3;
+UPG_UPG_DI_DRV.U2a_VRU_ok:=UPG_UPG_DI.U2a_VRU_ok; //Наличие напряжения 220В на 2СШ ВРУ L1;
+UPG_UPG_DI_DRV.U2b_VRU_ok:=UPG_UPG_DI.U2b_VRU_ok; //Наличие напряжения 220В на 2СШ ВРУ L2;
+UPG_UPG_DI_DRV.U2c_VRU_ok:=UPG_UPG_DI.U2c_VRU_ok; //Наличие напряжения 220В на 2СШ ВРУ L3;
+UPG_UPG_DI_DRV.Q1_ON:=UPG_UPG_DI.Q1_ON; //Выключатель ввода 1 включен;
+UPG_UPG_DI_DRV.Q1_OF:=UPG_UPG_DI.Q1_OF; //Выключатель ввода 1 отключен;
+UPG_UPG_DI_DRV.Q1_AOF:=UPG_UPG_DI.Q1_AOF; //Выключатель ввода 1 отключен защитой;
+UPG_UPG_DI_DRV.Q2_ON:=UPG_UPG_DI.Q2_ON; //Выключатель ввода 2 включен;
+UPG_UPG_DI_DRV.Q2_OF:=UPG_UPG_DI.Q2_OF; //Выключатель ввода 2 отключен;
+UPG_UPG_DI_DRV.Q2_AOF:=UPG_UPG_DI.Q2_AOF; //Выключатель ввода 2 отключен защитой;
+UPG_UPG_DI_DRV.Res_14:=UPG_UPG_DI.Res_14; //Резерв;
+UPG_UPG_DI_DRV.Res_15:=UPG_UPG_DI.Res_15; //Резерв;
+UPG_UPG_DI_DRV.Res_16:=UPG_UPG_DI.Res_16; //Резерв;
+UPG_UPG_DI_DRV.Res_17:=UPG_UPG_DI.Res_17; //Резерв;
+UPG_UPG_DI_DRV.QS_ON:=UPG_UPG_DI.QS_ON; //Секционный выключатель включен;
+UPG_UPG_DI_DRV.QS_OF:=UPG_UPG_DI.QS_OF; //Секционный выключатель отключен;
+UPG_UPG_DI_DRV.QS_AOF:=UPG_UPG_DI.QS_AOF; //Секционный выключатель отключен защитой;
+UPG_UPG_DI_DRV.AVR_ON:=UPG_UPG_DI.AVR_ON; //АВР включен;
+UPG_UPG_DI_DRV.AVR_OF:=UPG_UPG_DI.AVR_OF; //АВР отключен;
+UPG_UPG_DI_DRV.Res_18:=UPG_UPG_DI.Res_18; //Резерв;
+UPG_UPG_DI_DRV.Res_19:=UPG_UPG_DI.Res_19; //Резерв;
+UPG_UPG_DI_DRV.Res_20:=UPG_UPG_DI.Res_20; //Резерв;
+UPG_UPG_DI_DRV.Res_21:=UPG_UPG_DI.Res_21; //Резерв;
+UPG_UPG_DI_DRV.Res_22:=UPG_UPG_DI.Res_22; //Резерв;
+UPG_UPG_DI_DRV.Res_23:=UPG_UPG_DI.Res_23; //Резерв;
+UPG_UPG_DI_DRV.Res_24:=UPG_UPG_DI.Res_24; //Резерв;
+UPG_UPG_DI_DRV.Res_25:=UPG_UPG_DI.Res_25; //Резерв;
+UPG_UPG_DI_DRV.Res_26:=UPG_UPG_DI.Res_26; //Резерв;
+UPG_UPG_DI_DRV.Res_27:=UPG_UPG_DI.Res_27; //Резерв;
+UPG_UPG_DI_DRV.Res_28:=UPG_UPG_DI.Res_28; //Резерв;
+UPG_UPG_DI_DRV.Chk_AC220_SAU:=UPG_UPG_DI.Chk_AC220_SAU; //Контроль основного питания ~220 В;
+UPG_UPG_DI_DRV.Chk_DC220_SAU:=UPG_UPG_DI.Chk_DC220_SAU; //Контроль резервного питания =220 В;
+UPG_UPG_DI_DRV.OF_ON:=UPG_UPG_DI.OF_ON; //Автоматы питания включены;
+UPG_UPG_DI_DRV.Chk_razr:=UPG_UPG_DI.Chk_razr; //Контроль исправности разрядников;
+UPG_UPG_DI_DRV.DC24osn_Int_ok:=UPG_UPG_DI.DC24osn_Int_ok; //Исправность осн. ИП =24 В внутренних цепей;
+UPG_UPG_DI_DRV.DC24rez_Int_ok:=UPG_UPG_DI.DC24rez_Int_ok; //Исправность рез. ИП =24 В внутренних цепей;
+UPG_UPG_DI_DRV.DC24osn_IO_ok:=UPG_UPG_DI.DC24osn_IO_ok; //Исправность осн. ИП =24В внешн. AI, AO, DI;
+UPG_UPG_DI_DRV.DC24rez_IO_ok:=UPG_UPG_DI.DC24rez_IO_ok; //Исправность рез. ИП =24В внешн. AI, AO, DI;
+UPG_UPG_DI_DRV.DC24osn_Ext_ok:=UPG_UPG_DI.DC24osn_Ext_ok; //Исправность осн. ИП =24 В DO внешних цепей;
+UPG_UPG_DI_DRV.DC24rez_Ext_ok:=UPG_UPG_DI.DC24rez_Ext_ok; //Исправность рез. ИП =24 В DO внешних цепей;
+UPG_UPG_DI_DRV.Cabin_open:=UPG_UPG_DI.Cabin_open; //Двери шкафа отрыты;
+UPG_UPG_DI_DRV.Res_29:=UPG_UPG_DI.Res_29; //Резерв;
+UPG_UPG_DI_DRV.Res_30:=UPG_UPG_DI.Res_30; //Резерв;
+UPG_UPG_DI_DRV.Res_31:=UPG_UPG_DI.Res_31; //Резерв;
+UPG_UPG_DI_DRV.Res_32:=UPG_UPG_DI.Res_32; //Резерв;
+UPG_UPG_DI_DRV.Res_33:=UPG_UPG_DI.Res_33; //Резерв;
+UPG_UPG_DI_DRV.Chk_AC220_BEO:=UPG_UPG_DI.Chk_AC220_BEO; //Контроль основного питания БЭАО ~220 В;
+UPG_UPG_DI_DRV.Chk_DC220_BEO:=UPG_UPG_DI.Chk_DC220_BEO; //Контроль резервного питания БЭАО =220 В;
+UPG_UPG_DI_DRV.DC24osn_BEO_ok:=UPG_UPG_DI.DC24osn_BEO_ok; //Исправность осн. ИП =24В БЭАО;
+UPG_UPG_DI_DRV.DC24rez_BEO_ok:=UPG_UPG_DI.DC24rez_BEO_ok; //Исправность рез. ИП =24В БЭАО;
+UPG_UPG_DI_DRV.EO_BEO:=UPG_UPG_DI.EO_BEO; //ЭО от БЭАО;
+UPG_UPG_DI_DRV.EO_BEO_KCD:=UPG_UPG_DI.EO_BEO_KCD; // ЭО от БЭАО. КЦД;
+UPG_UPG_DI_DRV.Res_34:=UPG_UPG_DI.Res_34; //Резерв;
+UPG_UPG_DI_DRV.Res_35:=UPG_UPG_DI.Res_35; //Резерв. КЦД;
+UPG_UPG_DI_DRV.Res_36:=UPG_UPG_DI.Res_36; //Резерв;
+UPG_UPG_DI_DRV.Res_37:=UPG_UPG_DI.Res_37; //Резерв. КЦД;
+UPG_UPG_DI_DRV.Res_38:=UPG_UPG_DI.Res_38; //Резерв;
+UPG_UPG_DI_DRV.Res_39:=UPG_UPG_DI.Res_39; //Резерв. КЦД;
+UPG_UPG_DI_DRV.BEO_Rdy:=UPG_UPG_DI.BEO_Rdy; //Готовность БЭАО;
+UPG_UPG_DI_DRV.AO_PLC:=UPG_UPG_DI.AO_PLC; //АО (в ПЛК);
+UPG_UPG_DI_DRV.Kn_Quit:=UPG_UPG_DI.Kn_Quit; //Квитирование;
+UPG_UPG_DI_DRV.Res_40:=UPG_UPG_DI.Res_40; //Резерв внутр.;
+UPG_UPG_DI_DRV.KE41_ON_KCU:=UPG_UPG_DI.KE41_ON_KCU; //Клапан сброса НД выход 1 (КЭ4-1). КЦУ;
+UPG_UPG_DI_DRV.KE42_ON_KCU:=UPG_UPG_DI.KE42_ON_KCU; //Клапан сброса НД выход 2 (КЭ4-2). КЦУ;
+UPG_UPG_DI_DRV.KE31_ON_KCU:=UPG_UPG_DI.KE31_ON_KCU; //Клапан отсечной ТГ в УПТН (КЭ3-1). КЦУ;
+UPG_UPG_DI_DRV.Res_41:=UPG_UPG_DI.Res_41; //Резерв;
+UPG_UPG_DI_DRV.Kr8_1_OF_KCU:=UPG_UPG_DI.Kr8_1_OF_KCU; //Кран Кр8.1 закрыть. КЦУ;
+UPG_UPG_DI_DRV.Kr8_1A_ON_KCU:=UPG_UPG_DI.Kr8_1A_ON_KCU; //Кран Кр8.1а открыть. КЦУ;
+UPG_UPG_DI_DRV.Kr2_1_3_ON_KCU:=UPG_UPG_DI.Kr2_1_3_ON_KCU; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыть;
+UPG_UPG_DI_DRV.Kr2_1_3_OF_KCU:=UPG_UPG_DI.Kr2_1_3_OF_KCU; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыть;
+UPG_UPG_DI_DRV.Kr2_1_4_ON_KCU:=UPG_UPG_DI.Kr2_1_4_ON_KCU; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыть;
+UPG_UPG_DI_DRV.Kr2_1_4_OF_KCU:=UPG_UPG_DI.Kr2_1_4_OF_KCU; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыть;
+UPG_UPG_DI_DRV.Kr2_2_3_ON_KCU:=UPG_UPG_DI.Kr2_2_3_ON_KCU; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыть;
+UPG_UPG_DI_DRV.Kr2_2_3_OF_KCU:=UPG_UPG_DI.Kr2_2_3_OF_KCU; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыть;
+UPG_UPG_DI_DRV.Kr2_2_4_ON_KCU:=UPG_UPG_DI.Kr2_2_4_ON_KCU; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыть;
+UPG_UPG_DI_DRV.Kr2_2_4_OF_KCU:=UPG_UPG_DI.Kr2_2_4_OF_KCU; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыть;
+UPG_UPG_DI_DRV.Res_42:=UPG_UPG_DI.Res_42; //Резерв. КЦУ;
+UPG_UPG_DI_DRV.Res_43:=UPG_UPG_DI.Res_43; //Резерв. КЦУ;
+
+
+
+
+
+]]></ST>
+                    </Function>
+                    <Function UUID="2ULQSEEY2MWERNE72WRM6UMD4Q" Name="mb_DI_Processing" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="L27BSM7XEZH7PBAFCWXQPDPAHM" Name="in" Type="BOOL" Usage="input" />
+                            <Variable UUID="6GENIMNWPJBGLDUSADU5POKSIU" Name="btn" Type="T_DI_FromHMI" TypeUUID="CB63GVNINFXE5NDGOS62CUMGSY" Usage="inout" />
+                            <Variable UUID="2ISD2SFA6RHOVBLDUJA43YIYKA" Name="hmi" Type="T_DI_ToHMI" TypeUUID="GHOQ5H5MCDOEHDF2HTYC2D4HJI" Usage="inout" />
+                            <Variable UUID="EAYMNT5AXKIEPERYPL4MAHCRDA" Name="out" Type="BOOL" Usage="inout" />
+                            <Variable UUID="BHQXJT3WMZFR5CMWIFB25VJNXQ" Name="tmp" Type="INT" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[//--------------------------------------------------------------------------------------------
+hmi.manual := (btn.BTNmanualOn or hmi.manual) and not btn.BTNworkOn;//канал в дист.упр. (BOOL)
+//------------------- Обработка ДУ -----------------------------------------------------------
+out := hmi.manual and btn.manualTarget or not hmi.manual and in;
+btn.manualTarget := out;
+//----------------- Обнуление кнопок ---------------------------------------------------------
+btn.BTNmanualOn := false;
+btn.BTNworkOn := false;]]></ST>
+                    </Function>
+                </Folder>
+                <Folder Name="DO" Comment="" Data="" UUID="EZLBHYYKTI3UDGB4DRTQH2AMSQ">
+                    <Function UUID="DXPQCMXYJUY7HADW3W5QFA5K5Q" Name="UPG_UPG_DO_Permit" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="tmpPermit" Type="BOOL" Usage="internal" />
+                        </Variables>
+                        <ST><![CDATA[//--- Групповое разрешение ДУ ---
+tmpPermit := false;
+//Начало сгенерированного кода DO_Permit
+UPG_UPG_DO_ToHMI.KE41_ON.forsPermit := tmpPermit; //Клапан сброса НД выход 1 (КЭ4-1);
+UPG_UPG_DO_ToHMI.KE42_ON.forsPermit := tmpPermit; //Клапан сброса НД выход 2 (КЭ4-2);
+UPG_UPG_DO_ToHMI.KE31_ON.forsPermit := tmpPermit; //Клапан отсечной ТГ в УПТН (КЭ3-1);
+UPG_UPG_DO_ToHMI.Res_1.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_2.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_3.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_4.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_5.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Kr8_1_ON.forsPermit := tmpPermit; //Кран Кр8.1 открыть;
+UPG_UPG_DO_ToHMI.Kr8_1_OF.forsPermit := tmpPermit; //Кран Кр8.1 закрыть;
+UPG_UPG_DO_ToHMI.Kr8_1_Stop.forsPermit := tmpPermit; //Кран Кр8.1 стоп;
+UPG_UPG_DO_ToHMI.Kr8_1A_ON.forsPermit := tmpPermit; //Кран Кр8.1a открыть;
+UPG_UPG_DO_ToHMI.Kr8_1A_OF.forsPermit := tmpPermit; //Кран Кр8.1a закрыть;
+UPG_UPG_DO_ToHMI.Kr8_1A_Stop.forsPermit := tmpPermit; //Кран Кр8.1a стоп;
+UPG_UPG_DO_ToHMI.Res_6.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_7.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Kr2_1_3_ON.forsPermit := tmpPermit; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыть;
+UPG_UPG_DO_ToHMI.Kr2_1_3_OF.forsPermit := tmpPermit; //Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыть;
+UPG_UPG_DO_ToHMI.Kr2_1_4_ON.forsPermit := tmpPermit; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыть;
+UPG_UPG_DO_ToHMI.Kr2_1_4_OF.forsPermit := tmpPermit; //Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыть;
+UPG_UPG_DO_ToHMI.Kr2_2_3_ON.forsPermit := tmpPermit; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыть;
+UPG_UPG_DO_ToHMI.Kr2_2_3_OF.forsPermit := tmpPermit; //Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыть;
+UPG_UPG_DO_ToHMI.Kr2_2_4_ON.forsPermit := tmpPermit; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыть;
+UPG_UPG_DO_ToHMI.Kr2_2_4_OF.forsPermit := tmpPermit; //Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыт;
+UPG_UPG_DO_ToHMI.UPG_Alarm.forsPermit := tmpPermit; //С/з оповещ. "Авария УПТИГ" (КИПиА);
+UPG_UPG_DO_ToHMI.VnV_BT_ON.forsPermit := tmpPermit; //Вытяжной вентилятор блока технологии (АМ1-1) включить;
+UPG_UPG_DO_ToHMI.VnV_UPNT_ON.forsPermit := tmpPermit; //Вытяжной вентилятор УПТН (АМ3-1) включить;
+UPG_UPG_DO_ToHMI.VnV_BT_OF.forsPermit := tmpPermit; //Вытяжной вентилятор блока технологии (АМ1-1) отключить;
+UPG_UPG_DO_ToHMI.VnV_UPNT_OF.forsPermit := tmpPermit; //Вытяжной вентилятор УПТН (АМ3-1) отключить;
+UPG_UPG_DO_ToHMI.Res_8.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_9.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_10.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.PS_Warn.forsPermit := tmpPermit; //Обобщенная предупредительная сигнализация «Внимание»;
+UPG_UPG_DO_ToHMI.AS_Alarm.forsPermit := tmpPermit; //Обобщенная сигнализация «Авария»;
+UPG_UPG_DO_ToHMI.Res_11.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_12.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_13.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_14.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_15.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_16.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_17.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_18.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_19.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_20.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_21.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_22.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Res_23.forsPermit := tmpPermit; //Резерв;
+UPG_UPG_DO_ToHMI.Syrena_ON.forsPermit := tmpPermit; //Включить сирену;
+//Конец сгенерированного кода
+]]></ST>
+                    </Function>
+                    <Function UUID="7Y2JZ253ICALSOSH72MAAFXS5E" Name="UPG_UPG_mb_DO_CallAll" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables />
+                        <ST><![CDATA[(*//----------- Обработка дискретных выходов ---------------
+//Начало сгенерированного кода DO_Processing
+//Клапан сброса НД выход 1 (КЭ4-1)
+mb_DO_Processing(UPG_UPG_DO.KE41_ON,UPG_UPG_DO_FromHMI.KE41_ON,UPG_UPG_DO_ToHMI.KE41_ON,UPG_UPG_DO_DRV.KE41_ON);
+//Клапан сброса НД выход 2 (КЭ4-2)
+mb_DO_Processing(UPG_UPG_DO.KE42_ON,UPG_UPG_DO_FromHMI.KE42_ON,UPG_UPG_DO_ToHMI.KE42_ON,UPG_UPG_DO_DRV.KE42_ON);
+//Клапан отсечной ТГ в УПТН (КЭ3-1)
+mb_DO_Processing(UPG_UPG_DO.KE31_ON,UPG_UPG_DO_FromHMI.KE31_ON,UPG_UPG_DO_ToHMI.KE31_ON,UPG_UPG_DO_DRV.KE31_ON);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_1,UPG_UPG_DO_FromHMI.Res_1,UPG_UPG_DO_ToHMI.Res_1,UPG_UPG_DO_DRV.Res_1);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_2,UPG_UPG_DO_FromHMI.Res_2,UPG_UPG_DO_ToHMI.Res_2,UPG_UPG_DO_DRV.Res_2);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_3,UPG_UPG_DO_FromHMI.Res_3,UPG_UPG_DO_ToHMI.Res_3,UPG_UPG_DO_DRV.Res_3);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_4,UPG_UPG_DO_FromHMI.Res_4,UPG_UPG_DO_ToHMI.Res_4,UPG_UPG_DO_DRV.Res_4);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_5,UPG_UPG_DO_FromHMI.Res_5,UPG_UPG_DO_ToHMI.Res_5,UPG_UPG_DO_DRV.Res_5);
+//Кран Кр8.1 открыть
+mb_DO_Processing(UPG_UPG_DO.Kr8_1_ON,UPG_UPG_DO_FromHMI.Kr8_1_ON,UPG_UPG_DO_ToHMI.Kr8_1_ON,UPG_UPG_DO_DRV.Kr8_1_ON);
+//Кран Кр8.1 закрыть
+mb_DO_Processing(UPG_UPG_DO.Kr8_1_OF,UPG_UPG_DO_FromHMI.Kr8_1_OF,UPG_UPG_DO_ToHMI.Kr8_1_OF,UPG_UPG_DO_DRV.Kr8_1_OF);
+//Кран Кр8.1 стоп
+mb_DO_Processing(UPG_UPG_DO.Kr8_1_Stop,UPG_UPG_DO_FromHMI.Kr8_1_Stop,UPG_UPG_DO_ToHMI.Kr8_1_Stop,UPG_UPG_DO_DRV.Kr8_1_Stop);
+//Кран Кр8.1a открыть
+mb_DO_Processing(UPG_UPG_DO.Kr8_1A_ON,UPG_UPG_DO_FromHMI.Kr8_1A_ON,UPG_UPG_DO_ToHMI.Kr8_1A_ON,UPG_UPG_DO_DRV.Kr8_1A_ON);
+//Кран Кр8.1a закрыть
+mb_DO_Processing(UPG_UPG_DO.Kr8_1A_OF,UPG_UPG_DO_FromHMI.Kr8_1A_OF,UPG_UPG_DO_ToHMI.Kr8_1A_OF,UPG_UPG_DO_DRV.Kr8_1A_OF);
+//Кран Кр8.1a стоп
+mb_DO_Processing(UPG_UPG_DO.Kr8_1A_Stop,UPG_UPG_DO_FromHMI.Kr8_1A_Stop,UPG_UPG_DO_ToHMI.Kr8_1A_Stop,UPG_UPG_DO_DRV.Kr8_1A_Stop);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_6,UPG_UPG_DO_FromHMI.Res_6,UPG_UPG_DO_ToHMI.Res_6,UPG_UPG_DO_DRV.Res_6);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_7,UPG_UPG_DO_FromHMI.Res_7,UPG_UPG_DO_ToHMI.Res_7,UPG_UPG_DO_DRV.Res_7);
+//Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 открыть
+mb_DO_Processing(UPG_UPG_DO.Kr2_1_3_ON,UPG_UPG_DO_FromHMI.Kr2_1_3_ON,UPG_UPG_DO_ToHMI.Kr2_1_3_ON,UPG_UPG_DO_DRV.Kr2_1_3_ON);
+//Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1 закрыть
+mb_DO_Processing(UPG_UPG_DO.Kr2_1_3_OF,UPG_UPG_DO_FromHMI.Kr2_1_3_OF,UPG_UPG_DO_ToHMI.Kr2_1_3_OF,UPG_UPG_DO_DRV.Kr2_1_3_OF);
+//Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 открыть
+mb_DO_Processing(UPG_UPG_DO.Kr2_1_4_ON,UPG_UPG_DO_FromHMI.Kr2_1_4_ON,UPG_UPG_DO_ToHMI.Kr2_1_4_ON,UPG_UPG_DO_DRV.Kr2_1_4_ON);
+//Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1 закрыть
+mb_DO_Processing(UPG_UPG_DO.Kr2_1_4_OF,UPG_UPG_DO_FromHMI.Kr2_1_4_OF,UPG_UPG_DO_ToHMI.Kr2_1_4_OF,UPG_UPG_DO_DRV.Kr2_1_4_OF);
+//Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 открыть
+mb_DO_Processing(UPG_UPG_DO.Kr2_2_3_ON,UPG_UPG_DO_FromHMI.Kr2_2_3_ON,UPG_UPG_DO_ToHMI.Kr2_2_3_ON,UPG_UPG_DO_DRV.Kr2_2_3_ON);
+//Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2 закрыть
+mb_DO_Processing(UPG_UPG_DO.Kr2_2_3_OF,UPG_UPG_DO_FromHMI.Kr2_2_3_OF,UPG_UPG_DO_ToHMI.Kr2_2_3_OF,UPG_UPG_DO_DRV.Kr2_2_3_OF);
+//Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 открыть
+mb_DO_Processing(UPG_UPG_DO.Kr2_2_4_ON,UPG_UPG_DO_FromHMI.Kr2_2_4_ON,UPG_UPG_DO_ToHMI.Kr2_2_4_ON,UPG_UPG_DO_DRV.Kr2_2_4_ON);
+//Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2 закрыт
+mb_DO_Processing(UPG_UPG_DO.Kr2_2_4_OF,UPG_UPG_DO_FromHMI.Kr2_2_4_OF,UPG_UPG_DO_ToHMI.Kr2_2_4_OF,UPG_UPG_DO_DRV.Kr2_2_4_OF);
+//С/з оповещ. "Авария УПТИГ" (КИПиА)
+mb_DO_Processing(UPG_UPG_DO_DRV.UPG_Alarm,UPG_UPG_DO_FromHMI.UPG_Alarm,UPG_UPG_DO_ToHMI.UPG_Alarm,UPG_UPG_DO.UPG_Alarm);
+//Вытяжной вентилятор блока технологии (АМ1-1) включить
+mb_DO_Processing(UPG_UPG_DO.VnV_BT_ON,UPG_UPG_DO_FromHMI.VnV_BT_ON,UPG_UPG_DO_ToHMI.VnV_BT_ON,UPG_UPG_DO_DRV.VnV_BT_ON);
+//Вытяжной вентилятор УПТН (АМ3-1) включить
+mb_DO_Processing(UPG_UPG_DO.VnV_UPNT_ON,UPG_UPG_DO_FromHMI.VnV_UPNT_ON,UPG_UPG_DO_ToHMI.VnV_UPNT_ON,UPG_UPG_DO_DRV.VnV_UPNT_ON);
+//Вытяжной вентилятор блока технологии (АМ1-1) отключить
+mb_DO_Processing(UPG_UPG_DO.VnV_BT_OF,UPG_UPG_DO_FromHMI.VnV_BT_OF,UPG_UPG_DO_ToHMI.VnV_BT_OF,UPG_UPG_DO_DRV.VnV_BT_OF);
+//Вытяжной вентилятор УПТН (АМ3-1) отключить
+mb_DO_Processing(UPG_UPG_DO.VnV_UPNT_OF,UPG_UPG_DO_FromHMI.VnV_UPNT_OF,UPG_UPG_DO_ToHMI.VnV_UPNT_OF,UPG_UPG_DO_DRV.VnV_UPNT_OF);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_8,UPG_UPG_DO_FromHMI.Res_8,UPG_UPG_DO_ToHMI.Res_8,UPG_UPG_DO_DRV.Res_8);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_9,UPG_UPG_DO_FromHMI.Res_9,UPG_UPG_DO_ToHMI.Res_9,UPG_UPG_DO_DRV.Res_9);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_10,UPG_UPG_DO_FromHMI.Res_10,UPG_UPG_DO_ToHMI.Res_10,UPG_UPG_DO_DRV.Res_10);
+//Обобщенная предупредительная сигнализация «Внимание»
+mb_DO_Processing(UPG_UPG_DO.PS_Warn,UPG_UPG_DO_FromHMI.PS_Warn,UPG_UPG_DO_ToHMI.PS_Warn,UPG_UPG_DO_DRV.PS_Warn);
+//Обобщенная сигнализация «Авария»
+mb_DO_Processing(UPG_UPG_DO.AS_Alarm,UPG_UPG_DO_FromHMI.AS_Alarm,UPG_UPG_DO_ToHMI.AS_Alarm,UPG_UPG_DO_DRV.AS_Alarm);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_11,UPG_UPG_DO_FromHMI.Res_11,UPG_UPG_DO_ToHMI.Res_11,UPG_UPG_DO_DRV.Res_11);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_12,UPG_UPG_DO_FromHMI.Res_12,UPG_UPG_DO_ToHMI.Res_12,UPG_UPG_DO_DRV.Res_12);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_13,UPG_UPG_DO_FromHMI.Res_13,UPG_UPG_DO_ToHMI.Res_13,UPG_UPG_DO_DRV.Res_13);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_14,UPG_UPG_DO_FromHMI.Res_14,UPG_UPG_DO_ToHMI.Res_14,UPG_UPG_DO_DRV.Res_14);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_15,UPG_UPG_DO_FromHMI.Res_15,UPG_UPG_DO_ToHMI.Res_15,UPG_UPG_DO_DRV.Res_15);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_16,UPG_UPG_DO_FromHMI.Res_16,UPG_UPG_DO_ToHMI.Res_16,UPG_UPG_DO_DRV.Res_16);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_17,UPG_UPG_DO_FromHMI.Res_17,UPG_UPG_DO_ToHMI.Res_17,UPG_UPG_DO_DRV.Res_17);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_18,UPG_UPG_DO_FromHMI.Res_18,UPG_UPG_DO_ToHMI.Res_18,UPG_UPG_DO_DRV.Res_18);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_19,UPG_UPG_DO_FromHMI.Res_19,UPG_UPG_DO_ToHMI.Res_19,UPG_UPG_DO_DRV.Res_19);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_20,UPG_UPG_DO_FromHMI.Res_20,UPG_UPG_DO_ToHMI.Res_20,UPG_UPG_DO_DRV.Res_20);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_21,UPG_UPG_DO_FromHMI.Res_21,UPG_UPG_DO_ToHMI.Res_21,UPG_UPG_DO_DRV.Res_21);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_22,UPG_UPG_DO_FromHMI.Res_22,UPG_UPG_DO_ToHMI.Res_22,UPG_UPG_DO_DRV.Res_22);
+//Резерв
+mb_DO_Processing(UPG_UPG_DO.Res_23,UPG_UPG_DO_FromHMI.Res_23,UPG_UPG_DO_ToHMI.Res_23,UPG_UPG_DO_DRV.Res_23);
+//Включить сирену
+mb_DO_Processing(UPG_UPG_DO.Syrena_ON,UPG_UPG_DO_FromHMI.Syrena_ON,UPG_UPG_DO_ToHMI.Syrena_ON,UPG_UPG_DO_DRV.Syrena_ON);
+//Конец сгенерированного кода
+]]></ST>
+                    </Function>
+                    <Function UUID="KC3UFSWRQQPE5CS4AE6ZFPYEQY" Name="mb_DO_Processing" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                        <Variables>
+                            <Variable UUID="KQE6TXSBPSYUZBETKKJ3RJNA2U" Name="algCom" Type="BOOL" Usage="input" />
+                            <Variable UUID="5R5WL3HGLRGMXN3ZVPA3FETS6Q" Name="hmi" Type="T_DO_FromHMI" TypeUUID="ICYCYA5WR5FTZMTITNXXGA6V4U" Usage="inout" />
+                            <Variable UUID="EDA4FRWG6FGWJPKIBGBT6SNR2Q" Name="plc" Type="T_DO_ToHMI" TypeUUID="JPIXI5FFWBGSRAAFIJ2MBV77UE" Usage="inout" />
+                            <Variable UUID="7WXGR7INBZ7UBK5X2H62BJBGNE" Name="out" Type="BOOL" Usage="inout" />
+                        </Variables>
+                        <ST><![CDATA[plc.forsEnable := (plc.forsEnable or hmi.BTNforceOn) and plc.forsPermit and not hmi.BTNworkOn;
+out := algCom and not plc.forsEnable or hmi.manualTarget and plc.forsEnable;
+hmi.manualTarget := out;
+//-------------- Обнуление кнопок -----------
+hmi.BTNforceOn := false;
+hmi.BTNworkOn := false;]]></ST>
+                    </Function>
+                </Folder>
+            </Folder>
+        </Folder>
+    </FBLibrary>
+</Program>

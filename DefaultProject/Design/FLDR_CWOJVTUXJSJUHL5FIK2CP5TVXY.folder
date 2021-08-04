@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Ab03_UVI">
+	<Items>
+		<Item Name="AT_CITJNHKKVTKEJOT3UX5PN2P3MY.int" />
+		<Item Name="AT_KYJU4PZ6I75UBGOBZACLKSGTGI.int" />
+		<Item Name="GPA_NKU.int" />
+		<Item Name="UVI_AlertArchive.int" />
+		<Item Name="UVI_Algorithm.int" />
+		<Item Name="UVI_Archive.int" />
+		<Item Name="UVI_MODBUS_UVI.int" />
+		<Item Name="UVI_R1_ALG.int" />
+		<Item Name="UVI_R1_LOCALBUS.int" />
+	</Items>
+</Folder>

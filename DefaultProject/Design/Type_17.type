@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Type_17" Kind="Struct" UUID="BB3E2B10438428ED9F20B7B167F22EA0">
+    <Fields>
+        <Field Name="arr_word" Type="WORD" UUID="486A70C540EE444FC67D7FA1B12784D7" ArraySize="4" Comment="4 регистра, 0 - старший регистр  " />
+        <Field Name="r1" Type="UINT" UUID="CF6B359147ED7F885B33EA992D2A52D5" Comment="1 регистр" />
+        <Field Name="r2" Type="UINT" UUID="599B81214C3F7353DB4D79AEA3D75809" Comment="2 регистр" />
+        <Field Name="r3" Type="UINT" UUID="1D7C2FD0401AE67D8E2682AE9DA008B5" Comment="3 регистр" />
+        <Field Name="r4" Type="UINT" UUID="F33EF07E42E827555242BD9D551F9D97" Comment="4 регистр" />
+    </Fields>
+</Type>

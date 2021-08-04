@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_SS" Kind="Struct" UUID="C885809940EEAAD643D8848E5FA82AE9">
+	<Fields>
+		<Field Name="CPU_HeartBit" Type="BOOL" UUID="A2U2FZVN3C4UVPC6XEJDYIMN6A" Comment="Меандр от контроллера" />
+		<Field Name="ShopReg_ON" Type="BOOL" UUID="3DA68F2F4E77503FC96D58BBFEA7C531" Comment="Цеховой регулятор включен" />
+		<Field Name="ShopReg_cr" Type="BOOL" UUID="17AEC13F436B629591759CAFEA851BB8" Comment="Признак регулирования по ст. сжатия" />
+		<Field Name="ShopReg_Pout" Type="BOOL" UUID="3D65BA0941CFE85E21DF47AA5A8ED72A" Comment="Признак регулирования по вых. давлению" />
+		<Field Name="ShopReg_Qg" Type="BOOL" UUID="38F939B040B1F4B3448BF6A8C86360D0" Comment="Признак регулирования по расходу" />
+		<Field Name="Req_Start_GPA" Type="BOOL" UUID="A49EE5B64CBDB09D601CFFA9C0B4CAC9" Comment="Требование запуска ГПА" />
+		<Field Name="Req_Stop_GPA" Type="BOOL" UUID="85C96DB34C061CD32CDF78AC4FCC1E98" Comment="Требование остановки ГПА" />
+		<Field Name="RegParam_FLT" Type="BOOL" UUID="0CBC404343EE274526C629B04FF484DE" Comment="Недостоверность параметров регулятора" />
+		<Field Name="ShopReg_NoWork" Type="BOOL" UUID="597904A94867AC59B27D908F45E41201" Comment="Невозможность работы регулятора" />
+		<Field Name="LSA1_Bad" Type="BOOL" UUID="F3FBE75144CCA115008A169BF932B722" Comment="Неисправность датчика урвня масла LSA1" />
+		<Field Name="LSA2_Bad" Type="BOOL" UUID="266EA1204B665134129E0386C5BDB8C8" Comment="Неисправность датчика урвня масла LSA2" />
+		<Field Name="LSA3_Bad" Type="BOOL" UUID="1E183C6C4B2BB09426BDC783F381002C" Comment="Неисправность датчика урвня масла LSA3" />
+		<Field Name="LSA4_Bad" Type="BOOL" UUID="7F660A6942C9D609EEDD248A1BB6C723" Comment="Неисправность датчика урвня масла LSA4" />
+		<Field Name="LSA5_Bad" Type="BOOL" UUID="65CDB185432A3E7DF6235E99D7945A65" Comment="Неисправность датчика урвня масла LSA5" />
+		<Field Name="LSA6_Bad" Type="BOOL" UUID="4D40792B456D057314FE3B8329C7356E" Comment="Неисправность датчика урвня масла LSA6" />
+		<Field Name="LSA1_ADES_Bad" Type="BOOL" UUID="F788FA10473C806979117FB21F8771FA" Comment="Неисправность датчика урвня топлива АДЭС LSA1" />
+		<Field Name="LSA2_ADES_Bad" Type="BOOL" UUID="13542A63480D7F9BE4C1E4A1304CB10A" Comment="Неисправность датчика урвня топлива АДЭС LSA2" />
+		<Field Name="LSA3_ADES_Bad" Type="BOOL" UUID="F71C56684F257EB997DD358E51354FFB" Comment="Неисправность датчика урвня топлива АДЭС LSA3" />
+		<Field Name="mute" Type="BOOL" UUID="06BFCC424D224F4F5224CC9DE81114C4" Comment="Звук отключен" />
+		<Field Name="Prm_DU_IM" Type="BOOL" UUID="ORGV22WYIZXEDL3UB7KKU7CSXE" Comment="Разрешение кнопки ДУ ИМ" />
+		<Field Name="ShopReg_N_ST" Type="BOOL" UUID="WQQ5QRNZXJ5E3GCGRZ6KFCWR5A" Comment="Признак регулирования по оборотам СТ" />
+		<Field Name="GPA1_HeartBit" Type="BOOL" UUID="4HJ2GUPBG3CEXPCLYJBXJIIXJU" Comment="Меандр ГПА1" />
+		<Field Name="GPA2_HeartBit" Type="BOOL" UUID="JM4OFX6IFT4EFNWSYIT6BODQ4Y" Comment="Меандр ГПА2" />
+		<Field Name="GPA3_HeartBit" Type="BOOL" UUID="QY4KPLBJR56EZDHW63E5KGMSMY" Comment="Меандр ГПА3" />
+		<Field Name="UPTIG_HeartBit" Type="BOOL" UUID="HCZMAKBM36OEPBSTHKUNW5FTZU" Comment="Меандр УПТИГ" />
+		<Field Name="UZRG_HeartBit" Type="BOOL" UUID="TDPD3JGO676E5BQ2H22CVHT7HY" Comment="Меандр УЗРГ" />
+		<Field Name="UNTS_HeartBit" Type="BOOL" UUID="DUIFSBAYI3EUJIU4IAQCNPCVAQ" Comment="Меандр УНТС" />
+		<Field Name="UPOU_HeartBit" Type="BOOL" UUID="ZF4GQRGIKANE3K2R3TNV3KI4R4" Comment="Меандр УПОУ" />
+		<Field Name="NM_HeartBit" Type="BOOL" UUID="AZMXCMFKBMIEXDWQYIA2GTBEPM" Comment="Меандр НМ" />
+		<Field Name="GSM_HeartBit" Type="BOOL" UUID="KZ7KEGEIW5DEZEIXIIYHTXVTQU" Comment="Меандр ГСМ" />
+		<Field Name="KOS_HeartBit" Type="BOOL" UUID="M3PHAFYQFGPEPDGUGDHSFVYI44" Comment="Меандр КОС" />
+		<Field Name="VOS_HeartBit" Type="BOOL" UUID="PMHLWT3K7ICEFLS7V6LWBMCQEA" Comment="Меандр ВОС" />
+		<Field Name="ArchStop" Type="BOOL" UUID="MBDJNDHLS4PELJLWIIS3RUI2BY" Comment="Запуск архива останова" />
+		<Field Name="ArchUser" Type="BOOL" UUID="QCG3LRRBUM5EDM67V6RODHY5HQ" Comment="Запуск пользовательского архива" />
+	</Fields>
+</Type>

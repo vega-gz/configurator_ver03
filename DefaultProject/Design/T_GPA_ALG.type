@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_ALG" Kind="Struct" UUID="03C1A6E0A8487FCEDE9804BB4239518F">
+	<Fields>
+		<Field Name="AO" Type="BOOL" UUID="5F5B28846F4F3484B8F7DA91C747DA73" Comment="Авария" />
+		<Field Name="wasPusk" Type="BOOL" UUID="ULHCUZEGQZJELFZYHKMEZAWRRY" Comment="Был запуск" />
+		<Field Name="was_CrankUp" Type="BOOL" UUID="4ESTHHV4RKWE5MQZLIRBYV4YRQ" Comment="Был была раскрутка" />
+		<Field Name="was_Flame" Type="BOOL" UUID="OVXYY3G4LKKEFMVIUCN4KKOOEQ" Comment="Был розжиг" />
+		<Field Name="usl_Kr2_On" Type="BOOL" UUID="KVPA4PJHI6FEZB2WIU7BDZHHEM" Comment="Условие отрытия кр.2" />
+		<Field Name="usl_Kr1_On" Type="BOOL" UUID="V5TBE2U4YCOU7AYNOT6QYV5Q6Q" Comment="Условие отрытия кр.1" />
+		<Field Name="MOR_nRdy" Type="BOOL" UUID="272P3NM5LB7ULFQ7FV6WNGFPPI" Comment="Нет раскрутки ТВД" />
+		<Field Name="StartD_lock" Type="BOOL" UUID="NHUXRZCWPRPEZEUDG2CM3KI2NU" Comment="Зависание запуска" />
+		<Field Name="Shop_NoWork" Type="BOOL" UUID="WKJEHHP4NFFETCMQZQ7B3O5VUA" Comment="Невозможна работа агрегата под цех. регулятором" />
+		<Field Name="Pm_Rdk_nOk" Type="BOOL" UUID="VUUUWH3KZNVUNIYLQXQSHGSJKI" Comment="Давление масла редуктора не в норме" />
+		<Field Name="NoLnk_AbKC" Type="BOOL" UUID="MTHY4QYOQXOEZEPEDV4Q4ADSUY" Comment="Нет связи с САУ КЦ" />
+		<Field Name="No_U_AVR" Type="BOOL" UUID="2IONNXUYCTHEFHDI4GZNFR6JWU" Comment="Нет напряжения питания АВР" />
+		<Field Name="NO_break" Type="BOOL" UUID="E4EFRSR7XAEEHPEAK7IHTFF6DE" Comment="Прерывание нормального останова" />
+		<Field Name="NO" Type="BOOL" UUID="CDDGWRMR6IREVHHYKGKQNQMQ4Q" Comment="Идет НО" />
+		<Field Name="VO" Type="BOOL" UUID="3CRCNE3RBMPUDCGCCPMVZCZJ4I" Comment="Идет ВО" />
+		<Field Name="Kr1sh" Type="BOOL" UUID="UZ5AZRLUWO5EZEW2NS2AXJMMVA" Comment="Самопроизвольная перестановка кр. 1" />
+		<Field Name="PZ_end" Type="BOOL" UUID="Z5CFN2RA3VHE7JLKHNVR3PAAXM" Comment="ПЗ закончена" />
+		<Field Name="Msm_K_avar" Type="BOOL" UUID="NA6ASVUGRYDE7EQKK7UPWXK4IE" Comment="Авария системы смазки компрессора" />
+		<Field Name="Trim_PMK" Type="BOOL" UUID="CM56VWH3G3DEJFVX3U4ISADNLA" Comment="Непредвиденное отключение ПМК" />
+		<Field Name="KE5_bad" Type="BOOL" UUID="Z53JAAZD4JGUFNN7J2XD7WS4XI" Comment="Неисправность клапана КШЭ5" />
+		<Field Name="GNS_bad" Type="BOOL" UUID="OR6LZA5D2C5ERPFQFZ3LICKQEY" Comment="Неисправность контура ГНС" />
+		<Field Name="GN_Rdk_bad" Type="BOOL" UUID="XYZ4RC5IIYWUNO6WQT3FEU7MOY" Comment="Неисправность гл. насоса редуктора" />
+		<Field Name="GKS_Rdk_bad" Type="BOOL" UUID="V3JJRDFTRC3EXEAB5PPKITVZQI" Comment="Неисправность главного контура смазки редуктора" />
+		<Field Name="FS3_Sliv2_bad" Type="BOOL" UUID="YNEMNASLLPQE5AUKMH7WJI34DA" Comment="Неисправность системы слива 2-ой ступени ФС 3" />
+		<Field Name="FS3_Sliv1_bad" Type="BOOL" UUID="Z2GPWW3AXFOERJGDLJIDXLP4XQ" Comment="Неисправность системы слива 1-ой ступени ФС 3" />
+		<Field Name="FS2_Sliv_bad" Type="BOOL" UUID="OPVIX6MNWJXEZPGZERDLYYYP7U" Comment="Неисправность системы слива ФС2" />
+		<Field Name="FS1_Sliv2_bad" Type="BOOL" UUID="UUW3PZS4WUYUBL7ISHF6FITL5Q" Comment="Неисправность системы слива 2-ой ступени ФС 1" />
+		<Field Name="FS1_Sliv1_bad" Type="BOOL" UUID="ATFZWR6QD2KE3HEGKS4XDH5RCU" Comment="Неисправность системы слива 1-ой ступени ФС 1" />
+		<Field Name="AOss_TU" Type="BOOL" UUID="BKRHGO4ZMRUEZCK5SZTC35VZGM" Comment="АОсс по рех. условиям" />
+		<Field Name="AOs_PRU" Type="BOOL" UUID="MG7LKFICPYSE5MS42PNSEPIBQE" Comment="АОсс от ПРУ" />
+		<Field Name="AObs_TU" Type="BOOL" UUID="V3V2YWUK3YDE5P42DNLUN62K4Q" Comment="АОбс по тех. условиям" />
+		<Field Name="AOb_PRU" Type="BOOL" UUID="X5WCGTCJWYJURJRRLJSA4C22WA" Comment="АОбс от ПРУ" />
+		<Field Name="NOs_PRU" Type="BOOL" UUID="7RZMTM7LA4YURGH5P3TF2I55IQ" Comment="НОсс от ПРУ" />
+		<Field Name="NOb_PRU" Type="BOOL" UUID="H6JKQZ36SS3EVHORA4AUQSEAVI" Comment="НОбс от ПРУ" />
+		<Field Name="MOD_nRdy" Type="BOOL" UUID="4JWQPITFJR4UVO55WQMLE3PX7U" Comment="МОД не готов" />
+		<Field Name="MOK_nRdy" Type="BOOL" UUID="XJ3BSYIWPGRE3HEX7UGJWXQU7Y" Comment="МОК не готов" />
+		<Field Name="AI_FLT" Type="BOOL" UUID="BJGP5RHXN6REHBI5HMJ76SFAXI" Comment="Неисправность аналоговых каналов" />
+		<Field Name="IM_FLT" Type="BOOL" UUID="YSGAUWBFIIIE3H5SVBFT5GMG6M" Comment="Неисправны механизмы" />
+		<Field Name="DI_FLT" Type="BOOL" UUID="7ODV6LY56SIUXGAJMTURKTYDBA" Comment="Неисправность дискретных входов" />
+		<Field Name="isAS" Type="BOOL" UUID="LKHMXVMKIAREXMUH34DVK4UNN4" Comment="Есть аварийные сигналы" />
+		<Field Name="fire" Type="BOOL" UUID="LOKDBCVVQJEEBH6Y5VM6ZRB2HM" Comment="Пожар в отсеках" />
+		<Field Name="WarmMSK_R" Type="BOOL" UUID="4CGXW4YRCBEE7IURXDMYK4PYTU" Comment="Прогрев масла компрессора в режимах ХР, ГР" />
+		<Field Name="JumpToHR" Type="BOOL" UUID="FZT6J5MSA45UDIDXXHZSGYM4JA" Comment="Переход в ХР" />
+		<Field Name="JumpToGR" Type="BOOL" UUID="SKBG3BHC7FEE5MIV7R3GHLU7KU" Comment="Переход в ГР" />
+		<Field Name="GR_nRdy" Type="BOOL" UUID="TKWBHFILMXMU3JGIGYXH3QY7CM" Comment="Нет готовности ГР" />
+		<Field Name="HR_nRdy" Type="BOOL" UUID="VTD6SXYNXHPETMDWMOITID7ELE" Comment="Нет готовности ХР" />
+		<Field Name="Chk_HR" Type="BOOL" UUID="J2LCQ57TQ7FU7P3CNTC2W3P2SA" Comment="Контроль холодного резерва" />
+		<Field Name="Chk_GR" Type="BOOL" UUID="PN27TQH2WU6E5BUE7XZ7MNJQOI" Comment="Контроль горячего резерва" />
+		<Field Name="CrankUp" Type="BOOL" UUID="VGIQ3AMRQBHUHGHHQT5WQ7VGOA" Comment="Раскрутка турбины при пуске" />
+		<Field Name="StopCrank_Pusk" Type="BOOL" UUID="XTVINSQTWBWEHLZXCYL33RXS44" Comment="Флаг останова стартера при пуске" />
+		<Field Name="POK_on" Type="BOOL" UUID="BON6JQ22FCFUXBYINA5KGFEINU" Comment="включение ПОК" />
+		<Field Name="No_Gas_onStart" Type="BOOL" UUID="HBXRLTFIZOHETPOJX4LWHTIOI4" Comment="Не было газа в К при пуске" />
+		<Field Name="ChangeMode_K_done" Type="BOOL" UUID="2WIXA2MJ5DQUFI23MNDQNXKTMI" Comment="Смена режима комрпессора завершена" />
+		<Field Name="VOD1_On" Type="BOOL" UUID="WZNOKZ7MHIXE5MC3GTZDAANR24" Comment="Включение ВОД1" />
+		<Field Name="VOD2_On" Type="BOOL" UUID="Z5WZ4DXOH3LUFPRI4M7B2U3F2M" Comment="Включение ВОД2" />
+		<Field Name="Load" Type="BOOL" UUID="ZRMQDDRIJD5URPBCPRND5AAK54" Comment="Флаг компрессор загружен" />
+		<Field Name="Unload" Type="BOOL" UUID="67S673CJH6DETHFFUMBBTQEIYA" Comment="Флаг компрессор разгружен" />
+		<Field Name="was_Nvd_12200v" Type="BOOL" UUID="3FS6FLLIMZZU7EGUUQGHS7E4QU" Comment="Была работа Д выше 12200 ВД" />
+		<Field Name="StopSR" Type="BOOL" UUID="IXAPIWZNS3AU7KHK5XVQL5EOC4" Comment="Остановка СР" />
+		<Field Name="PNSN_On" Type="BOOL" UUID="F6ECODDHBHOE3JILD7AVDJGJIE" Comment="Пусковой маслонасос компрессора включить" />
+		<Field Name="PNSD_On" Type="BOOL" UUID="IIOQGCY2MG7UBMKJ42B7QFXFEQ" Comment="Пусковой маслонасос двигателя включить" />
+		<Field Name="WarmMSK" Type="BOOL" UUID="WW4DJPHIRLBEFHDFMDNN5KEXBM" Comment="Запуск подогрева масла в компрессоре" />
+		<Field Name="WarmMSR" Type="BOOL" UUID="QOJODPLVZ3XURDX5NJ32IWO3SU" Comment="Запуск подогрева масла редуктора" />
+		<Field Name="PNSN_OnPusk" Type="BOOL" UUID="S4L5ZQOZYPWUZKCSKZFFRLLDQU" Comment="Неисправность ПНСК на пуске" />
+		<Field Name="PNSN_OnWork" Type="BOOL" UUID="3NG6FEYYQTJUTDRKWEQSXRK5UQ" Comment="Неисправность ПНСК при работе" />
+		<Field Name="PNSR_OnPusk" Type="BOOL" UUID="SJMUBRXPNZXUHLOZM3HE5BMWQE" Comment="Неисправность ПНСР на пуске" />
+		<Field Name="PNSR_OnWork" Type="BOOL" UUID="ZDP4BEBJRT2ERDCX4ZMRUI3T6M" Comment="Неисправность ПНСР при работе" />
+		<Field Name="WarmMBD" Type="BOOL" UUID="GUZSCHDRN5FERHUKORJQRI6NL4" Comment="Прогрев масла в маслобаке двигателя" />
+		<Field Name="ShortTime_RunOutVD" Type="BOOL" UUID="WTUK6DT75COUDDBZ3HLY56WVH4" Comment="Контроль выбега ТВД" />
+		<Field Name="ShortTime_RunOutST" Type="BOOL" UUID="EWHGXGFORTVUJA43TMBHUMP5LM" Comment="Контроль выбега СТ" />
+		<Field Name="usl_StartMSK" Type="BOOL" UUID="RG5OMMINNGJULCBI3BBWZWKEPE" Comment="Условия запуска МС компрессора" />
+		<Field Name="PNSN_LongWork" Type="BOOL" UUID="PUAVFARWRAVEZO3RTNJLPVB7AU" Comment="Работа насосов после останова" />
+		<Field Name="PNSN_R_On" Type="BOOL" UUID="GUL6GMQ64DWE5MMEVBMRXYL7VI" Comment="Включение ПНСК на резерве" />
+		<Field Name="BlockTP" Type="BOOL" UUID="EEIJM2OFZ6RURNYDAXFY27BRBU" Comment="Блокировка ТП" />
+		<Field Name="Fall_PmsmK" Type="BOOL" UUID="VSZUSV2S4WNUZKBXCTKX5S6OZQ" Comment="Была просадка Рм компрессора" />
+		<Field Name="PNSR_On" Type="BOOL" UUID="HS3FRVNIKJ7UVBN2OWJA4WZTCY" Comment="Пусковой маслонасос редуктора включить" />
+		<Field Name="Fall_PmsmR" Type="BOOL" UUID="3U547JIDFI7E7P7XOEPYNK4XRU" Comment="Была просадка Рм редуктора" />
+		<Field Name="CNR_On" Type="BOOL" UUID="G3IKKZZDLAJU3NEV5T6E6GOQLE" Comment="Включение ЦНР" />
+		<Field Name="DK_Avt" Type="BOOL" UUID="CZHXFIH73QSERLYXGWR67WRQMY" Comment="флаг автоматической работы драйкулера" />
+		<Field Name="TEN_MBR_On" Type="BOOL" UUID="BWDXKDDVHVNUDLOGRQ5Z7SLWKU" Comment="ТЭН МБР включить" />
+		<Field Name="StopOxlK" Type="BOOL" UUID="67CZVFBGHCQE5EFNM4LOY7ORJQ" Comment="останов системы охлаждения компрессора" />
+		<Field Name="flashPusk" Type="BOOL" UUID="4S3PT5LV64OEHAVQBQN2SRKULA" Comment="Передний фронт режима Пуск" />
+		<Field Name="flashAO" Type="BOOL" UUID="HR7VFGT2NFPUFABASA6RSKJWKI" Comment="Передний фронт режима АО" />
+		<Field Name="RunPNSR_OnStop" Type="BOOL" UUID="S63O3KCU7WFUHI2REWKGJ4JFDQ" Comment="фронт включения ПНСР на останове" />
+		<Field Name="RunPNSK_OnStop" Type="BOOL" UUID="PYHYNIGC64TE7NMVEIX7LCSC44" Comment="фронт включения ПНСK на останове" />
+		<Field Name="Pg_Kr1" Type="REAL" UUID="OJCTORCUSQOEPFPXWMR2CO36WE" Comment="Давление газа за кр.1" />
+		<Field Name="Kr2sh" Type="BOOL" UUID="D56EHN5PWHKUBHSSZPMK4UPFUU" Comment="Самопроизвольная перестановка кр. 2" />
+		<Field Name="Pg_Kr2" Type="REAL" UUID="THBVBHCVC6HUDPI7AMCU4JTPE4" Comment="Давление газа за перед кр.2" />
+		<Field Name="Kr5sh" Type="BOOL" UUID="FOV5CPQQ2B4ELDQGTIPXWRH2MA" Comment="Самопроизвольная перестановка кр. 5" />
+		<Field Name="usl_Kr5_Of" Type="BOOL" UUID="B6SCPBMHKKVEZPXYCFXXEDO6FI" Comment="Условия закрытия кр.5" />
+		<Field Name="StopD" Type="BOOL" UUID="YX7MXIJA4LJUBEL5RDWTL7IKMQ" Comment="Остановка двигателя" />
+		<Field Name="StartD_end" Type="BOOL" UUID="DUVNVPZVNX7EHDCN4EJINU4GP4" Comment="Запуск двигателя завершен" />
+		<Field Name="Cancel_NOmk" Type="BOOL" UUID="ZLGTEJLHRZ7EPCJMXNIRJOECA4" Comment="Отмена НО (из М_К)" />
+		<Field Name="Cancel_NOmg" Type="BOOL" UUID="C46K5HXM4ATUFD3YQRHPMURWQI" Comment="Отмена НО (из МГ)" />
+		<Field Name="StopD_NO" Type="BOOL" UUID="OPG4QGEOFB5ETJLI2TGJZNK6UE" Comment="Запуск останова Д при НО" />
+		<Field Name="StrK_GR" Type="BOOL" UUID="JETWLXJQV2KUZDOXDANJXIFK34" Comment="Стравливание компрессора на ГР" />
+		<Field Name="Vn_UK_On" Type="BOOL" UUID="3UGHP4PDV7IURE7EJ6ZZA3HRHA" Comment="Условие работы вентилятора укрытия" />
+		<Field Name="EN_UK_On" Type="BOOL" UUID="26MXI73A3S7EBMIW2JGSGTY2FE" Comment="Условие работы ЭН укрытия К" />
+		<Field Name="En_ETO" Type="BOOL" UUID="UQAI6Q5CVWWEVOXACQ6SQC77CM" Comment="Условие работы ЭН в ЭТО" />
+		<Field Name="En_OD" Type="BOOL" UUID="JVO5QYAAQZXUTEDRW2B4S3CGLU" Comment="Условие работы ЭН в ОД" />
+		<Field Name="VA_OD" Type="BOOL" UUID="QD2WLT6SSCDUDM644CBOGBHQMA" Comment="Условие работы ВА в ОД" />
+		<Field Name="PNSN_GR" Type="BOOL" UUID="KCJHCMXXNHCE7NKAVAPF4VG3D4" Comment="Включение ПНСК при подогреве на ГР" />
+		<Field Name="Doliv_B1" Type="BOOL" UUID="PH74TIQWPJQUDIWMLYXMFGGYPE" Comment="Заправить бак Б1" />
+		<Field Name="Block_PNSK_Doliv" Type="BOOL" UUID="YQQMLWBJLDLUDPRB3D6CGXFEYA" Comment="блокировка включения ПНСК, ПМК при доливе" />
+		<Field Name="flashHR" Type="BOOL" UUID="MR4VOEYOCZSEZNMNVPD5JMNW2Q" Comment="передний фронт ХР" />
+		<Field Name="flashRemont" Type="BOOL" UUID="P3CVBRKRWP2UHKI5TDY3OWMCIE" Comment="передний фронт ремонта" />
+		<Field Name="pusk" Type="BOOL" UUID="LLPSP5K2ZJCEJHKIMICT32636M" Comment="режим запуска/прокрутки" />
+		<Field Name="PNSD_GR" Type="BOOL" UUID="TTP6WQVQOYRU7BYH6CO6HJE7LI" Comment="Включить ПНСД для прогрева на ГР" />
+		<Field Name="CNVO_On" Type="BOOL" UUID="LXJD77JBENEUZCXW7DBB5TXP54" Comment="Условия работы НОК" />
+		<Field Name="CNVO_BP" Type="BOOL" UUID="3HUC7BL5SOSEBERH2BHC2AS5XM" Comment="Прямой пуск НОК" />
+		<Field Name="CNVO_UPP" Type="BOOL" UUID="6PF5VY3ZJCFU3IES4MZPRULXTM" Comment="Плавный пуск НОК" />
+		<Field Name="DK_Slow" Type="BOOL" UUID="4PLG55FD4USUNBEVOWA7BTSC3E" Comment="Режим драйкулера медленно" />
+		<Field Name="DK_Fast" Type="BOOL" UUID="VV7Z7KHVRENEDEG2B27XP2C74E" Comment="Режим драйкулера быстро" />
+		<Field Name="VOT_On" Type="BOOL" UUID="2KZP2VTH5CAEJGFNATLWS6E7QI" Comment="ВОТ включить" />
+		<Field Name="TK_noMove" Type="BOOL" UUID="2E2EJKUJ3XXUTELVCYWILQTO2A" Comment="Турбина остановилась (первично до прокруток)" />
+		<Field Name="was_TurnVD" Type="BOOL" UUID="NQ3CRDQOTUXEVPSXGV2E57YNYQ" Comment="Было вращение ТВД" />
+		<Field Name="DK_Fast_On_bak" Type="BOOL" UUID="AOKTJPND4QHUXFR32HXE3FM5FI" Comment="включение быстрого режима по Т охл в баке" />
+		<Field Name="KMOD_On" Type="BOOL" UUID="PFJU2HIB5XVUZMZMFFOC7QEXHY" Comment="Включить калорифер МОД" />
+		<Field Name="VMOD1_On" Type="BOOL" UUID="6GKDXUWYLVYETFT6MKVNYBIETQ" Comment="ВМОД1 включить" />
+		<Field Name="VMOD2_On" Type="BOOL" UUID="UAKJTTFKBEMEBFIZVA5W7CRGAA" Comment="ВМОД2 включить" />
+		<Field Name="VMOD_R_On" Type="BOOL" UUID="YGWOPZTCIKYE7FQWXPMVP7DMEE" Comment="Включение резервного МОД" />
+		<Field Name="KMON_On" Type="BOOL" UUID="PHJ4FWRWV5OULHJQ7MVYLWR7GI" Comment="Включить калорифер МОК" />
+		<Field Name="VMON1_On" Type="BOOL" UUID="RQEWVDMZZW3EXECW7ZMPPIUIQQ" Comment="ВМОК1 включить" />
+		<Field Name="VMON2_On" Type="BOOL" UUID="CPSP2J6CAF6U3EM7H2TWUZV5ZM" Comment="ВМОК2 включить" />
+		<Field Name="VMON_R_On" Type="BOOL" UUID="QOEKEIEWTX2U5FYVLFGZQ7LJIQ" Comment="Включение резервного МОК" />
+		<Field Name="KMOR_On" Type="BOOL" UUID="FXHCNH6SPGGUDASNRHAOD4PQOI" Comment="Включить калорифер МОР" />
+		<Field Name="VMOR1_On" Type="BOOL" UUID="DEOZJDVOC3LEVCN47BDROQUR4I" Comment="ВМОР1 включить" />
+		<Field Name="VMOR2_On" Type="BOOL" UUID="HAHPKSBST5IE5BSAOQM3JE2B2U" Comment="ВМОР2 включить" />
+		<Field Name="VMOR3_On" Type="BOOL" UUID="JJDQMHCEKJSEZEAIABT5NAZ5DU" Comment="ВМОР3 включить" />
+		<Field Name="VMOR4_On" Type="BOOL" UUID="VUBDX7F73BKEHMT2TJ6WKIT5RA" Comment="ВМОР4 включить" />
+		<Field Name="VMOR2_R_On" Type="BOOL" UUID="6QCPXJMRB6EUTO36GBKD2SN2HA" Comment="Включение резервного МОР2" />
+		<Field Name="VMOR4_R_On" Type="BOOL" UUID="FQUD6Z4KPJAEROGRVTUWXX4BUY" Comment="Включение резервного МОР4" />
+		<Field Name="Vlagomer_On" Type="BOOL" UUID="YHGF37UOGOBU7EZ3P3B5JPI3YI" Comment="Включить влагомер" />
+		<Field Name="TEN_Vlagomer_On" Type="BOOL" UUID="QSBQD7HVTITUPFD7U7YO74R2YM" Comment="Включить термостат влагомера" />
+		<Field Name="TK_work" Type="BOOL" UUID="PZVHBMZLX4EEDKD33MVQKU2HEI" Comment="Турбина работает" />
+		<Field Name="KPPMK_OfStop" Type="BOOL" UUID="4E67BUSJYBUETOVENFPWM2WFDY" Comment="Закрытие клапана КППМК после останова" />
+		<Field Name="AVOG1_vlim" Type="BOOL" UUID="DUPQGRFHSH6E7JPN6X6OAN6YBY" Comment="Регулятор АВОГ1 на верхнем ограничении " />
+		<Field Name="AVOG2_vlim" Type="BOOL" UUID="EZCE5IY5DLOE5FPGR2KKGIAE2A" Comment="Регулятор АВОГ2 на верхнем ограничении " />
+		<Field Name="KE5_On" Type="BOOL" UUID="ALGD4HZHT5CETBUDPIHMWRT5DU" Comment="Открытие клапана КШЭ5" />
+		<Field Name="KE5_Of" Type="BOOL" UUID="XHROMKIDJPAUTA4LJQ3TVPN3YY" Comment="Закрытие клапана КШЭ5" />
+		<Field Name="KE3_1_On" Type="BOOL" UUID="CWU3HNKMNMAELOXZFMI5QSHXLM" Comment="Открытие клапана КЛЭ3-1" />
+		<Field Name="KE3_2_On" Type="BOOL" UUID="WM2Z5VTCFKUUDEPN4FPF253LNE" Comment="Открытие клапана КЛЭ3-2" />
+		<Field Name="KE3_3_On" Type="BOOL" UUID="7XX2TVDFFLFEDGFRPRVURWW46Y" Comment="Открытие клапана КЛЭ3-3" />
+		<Field Name="KLE5_On" Type="BOOL" UUID="QXGRVWMSEJ7ETKMH4SVVH5ERUA" Comment="Открытие клапана КЛЭ5" />
+		<Field Name="Q1_bad" Type="BOOL" UUID="NPZMXLV3PFUE5PX7CTVWFEQ33I" Comment="Напряжение ввода 1 НКУ не в норме" />
+		<Field Name="Q2_bad" Type="BOOL" UUID="UZ6PWFASXBFEVLCUDW3EWM5UR4" Comment="Напряжение ввода 2 НКУ не в норме" />
+		<Field Name="Q3_bad" Type="BOOL" UUID="Z7P5ABOXG3VU3JVF3B6CQJ6ZQI" Comment="Напряжение ввода 3 НКУ не в норме" />
+		<Field Name="Q4_bad" Type="BOOL" UUID="GINSB4P4ABWEZGYHLOVAC5DUQA" Comment="Напряжение ввода 4 НКУ не в норме" />
+		<Field Name="T_KP_bad" Type="BOOL" UUID="WPRUTPJIYBCEDEP3E7G2BIGOPM" Comment="Отказ датчиков Т коренных  подшипников компрессора" />
+		<Field Name="Ptg_Start" Type="BOOL" UUID="O7LPKR5V7WGU3CQOXEBNOT47WY" Comment="Контроль Ртг на запуске" />
+	</Fields>
+</Type>

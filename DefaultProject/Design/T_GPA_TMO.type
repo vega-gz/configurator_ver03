@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_TMO" Kind="Struct" Comment="Выходы таймеров" UUID="STPWX44BMDGUDJRSST34OL6CNU">
+	<Fields>
+		<Field Name="zvonok" Type="BOOL" UUID="S4VLDPQ47PBUXLFQVNV74UG2JY" Comment="Звонок предпусковой сигнализации" />
+		<Field Name="StartMSR_1" Type="BOOL" UUID="363GYYWRU32EDC32PDLJSTXR34" Comment="Таймер на 1 шаге барабана StartMSR" />
+		<Field Name="StartMSR_2" Type="BOOL" UUID="5L2N3HI7S63UVJSRCA3WLINMPE" Comment="Таймер на 2 шаге барабана StartMSR" />
+		<Field Name="StartMSR_3" Type="BOOL" UUID="VGJ7EJMZCNOUNOVQH76TDSNIII" Comment="Таймер на 3 шаге барабана StartMSR" />
+		<Field Name="Control_TmMSK" Type="BOOL" UUID="VKHK26GSNPZU7MIGHYCEDAI4GI" Comment="Таймер контроля Т масла компрессора" />
+		<Field Name="Stab_MSK" Type="BOOL" UUID="XI2R5P5B3V5E5IKAAWDL6WUAAA" Comment="Таймер стабилизации МС компрессора" />
+		<Field Name="StartMSD_3" Type="BOOL" UUID="ZIE7MDEOUDYUNBMK43KWRNNPLQ" Comment="Таймер на 3 шаге барабана StartMSD" />
+		<Field Name="ProdK" Type="BOOL" UUID="P7D4LIDRGS6ETMAPSSNFTVJW64" Comment="Taймер 1 шагу барабана ZapK (продувка)" />
+		<Field Name="StabK" Type="BOOL" UUID="3CNG6GFF6HJE7G7ZZUOUWPDNUM" Comment="Стабилизация газа в компрессоре" />
+		<Field Name="ProdTG_KPK" Type="BOOL" UUID="E3MHU6P22I7UTATNAFZ4CGLE3M" Comment="Продувка тг (КПК)" />
+		<Field Name="StartCrank_1" Type="BOOL" UUID="TFBPTHMCG22ERKJ3VKGRUAHKGI" Comment="Таймер на 1 шаге барабана StartCrank" />
+		<Field Name="StartCrank_2" Type="BOOL" UUID="I6QG3W4UMLKEPLNTPV53O4WLDY" Comment="Таймер на 1 шаге барабана StartCrank" />
+		<Field Name="RunCrank" Type="BOOL" UUID="YMHA65T735BEBGDRRLEY6OJ5AI" Comment="Прокрутка ГТД завершена" />
+		<Field Name="KPK_pause" Type="BOOL" UUID="QVKGISI2OSTE5EMXQ2FCASIOVU" Comment="Пауза при КПК" />
+		<Field Name="StopCrank" Type="BOOL" UUID="F23R3WXJQRAEBFW65R6WKD2VQY" Comment="Таймер отключения стартера" />
+		<Field Name="StopMS_Crank" Type="BOOL" UUID="VUHIHBLBJNNE3HAIBFR5NUTTNE" Comment="Запуск останова МС после прокрутки" />
+		<Field Name="StopCrank_Pusk" Type="BOOL" UUID="TULDKD2HKVFUZCTTMHE7TJIZDU" Comment="Ожидание останова стартера при пуске " />
+		<Field Name="ProdTG" Type="BOOL" UUID="BLQEJSJFBNZERLKC2SP2HAUTJM" Comment="Продувка тг" />
+		<Field Name="OpenSK" Type="BOOL" UUID="4MZN4YFXVUBEBOZGFFI6YLVBWA" Comment="Открыть СК" />
+		<Field Name="SPV_of" Type="BOOL" UUID="STLAK63HVFREDFONKTOEKOQALM" Comment="отключение запальников" />
+		<Field Name="StabOxl" Type="BOOL" UUID="QF65UNBTQNCE7E5FZSZEPW5TNA" Comment="стабилизация сист. охл." />
+		<Field Name="WarmMSK1" Type="BOOL" UUID="YSH4CYICFZEUBHY3VC2ICIMI4Q" Comment="Таймер1 барабана WarmMSK" />
+		<Field Name="WarmMSK2" Type="BOOL" UUID="UOIUFIO6OX5EZF5T6F4JJTXM3I" Comment="Таймер2 барабана WarmMSK" />
+		<Field Name="WarmMSK3" Type="BOOL" UUID="5PDDZZY72XEUDDDQS4SWHBYG5A" Comment="Таймер3 барабана WarmMSK" />
+		<Field Name="Kr6r_nOn" Type="BOOL" UUID="S33RG5TVUSDU5KVASBZFYAHWQ4" Comment="не открылся кр.6р" />
+		<Field Name="AO_finish" Type="BOOL" UUID="REQDP3WNTWFEJC5XT4AARZR23Q" Comment="Ожидание окончания АО" />
+		<Field Name="PNSN_LongWork" Type="BOOL" UUID="WCURDI4BCLXUTJ7PFTMKCH7IXE" Comment="Идет охлажд. подшип. компресора" />
+		<Field Name="Oil_StopD" Type="BOOL" UUID="BNQPKIQYNC5UJBCK4YMYXECPMA" Comment="прокачка после АО" />
+		<Field Name="Fall_PmsmK" Type="BOOL" UUID="2RJYPKZDXIWEZNXWOAZBHLY5DE" Comment="Была просадка Рм компрессора" />
+		<Field Name="Fall_PmsmR" Type="BOOL" UUID="KEXL3ANAGAWEXGQBD32SBOXBBI" Comment="Была просадка Рм редуктора" />
+		<Field Name="AO_1" Type="BOOL" UUID="E3MD5YWTZRSUPKVQA3VM2MEKLU" Comment="Таймер на 1 шаге барабана АО сс/бс" />
+		<Field Name="RunUp_KM" Type="BOOL" UUID="7YZIXNSCLNTEBFLQQWPJUZOPGQ" Comment="Подъем при переходе КМ" />
+		<Field Name="RunST_90s" Type="BOOL" UUID="XMUS7RXNJZHELNGXMFD52Y5Z4M" Comment="90 сек после раскрутки СТ" />
+		<Field Name="OverTime_HR" Type="BOOL" UUID="F5ZMERGZC74UFGUJPO4HBF7644" Comment="Таймер нахождения ГПА в режиме ХР" />
+		<Field Name="OverTime_GR" Type="BOOL" UUID="TAJRR4M3REYERHRWTT2F3A2LVM" Comment="Таймер нахождения ГПА в режиме ГР" />
+		<Field Name="Stop_PNSN_WarmGR" Type="BOOL" UUID="LNJPOBYWXWMUFLAGXFCPTWMMGU" Comment="Отключение ПНСК" />
+		<Field Name="PMK_OF" Type="BOOL" UUID="A643EBGCOLYUJKUI4YG34BGRQE" Comment="Отключен ПМК" />
+		<Field Name="L_kar_n" Type="BOOL" UUID="PTS2TFMI3L3ETA6GXRQ3QTFWSA" Comment="Уровень масла в картере нормальный" />
+		<Field Name="Trim_PMK" Type="BOOL" UUID="CW752QHPPAME7ABT6T37UG4TJU" Comment="Ожидание закр. КПМПК" />
+		<Field Name="ZZO_close" Type="BOOL" UUID="FSN2LGPCJPREFMTFGFG2UFEBJM" Comment="Закрытие ЗЗО" />
+		<Field Name="VOT_stop" Type="BOOL" UUID="FANZDRWLEBREXN7WWXNORHZIR4" Comment="Задержка на отключение ВОТ" />
+		<Field Name="Vn_KMOD" Type="BOOL" UUID="OBKHCF44LPHUJNFUKDEJX6RLFM" Comment="Включение вентилятора калорифера МОД" />
+		<Field Name="Vn_KMON" Type="BOOL" UUID="PQAYOWIBCT3E3OJOIR33O2CFN4" Comment="Включение вентилятора калорифера МОК" />
+		<Field Name="Vn_KMOR" Type="BOOL" UUID="NUL5LLIC3OJEVHBHSCOM5LDMDA" Comment="Включение вентилятора калорифера МОР" />
+		<Field Name="TEN_Vlagomer_Of" Type="BOOL" UUID="5CUTRJY3Q6YUNOIGM5WK4GEMUU" Comment="Время после отключения термостата" />
+		<Field Name="KE1_open" Type="BOOL" UUID="WT63K7AA7PUEJL2W7OG5RWPPHQ" Comment="Задержка открытия  КЭ1 БПТГ " />
+		<Field Name="KPPMK_OfStop" Type="BOOL" UUID="NA7A5EL53ZHEDNL6XEMLDYF6IU" Comment="Закрытие клапана КППМК после останова" />
+	</Fields>
+</Type>

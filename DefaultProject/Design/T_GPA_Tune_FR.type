@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_Tune_FR" UUID="BC4C0F570B7347C9AFFE4E96ADA188A6">
+<Fields>
+<Field Comment="Коэф. пропорциональности оборотов ТВД" Name="KpropNvd" Type="REAL" UUID="B235E0CFBF5A4469AC8DE93AC0E874D6"/>
+<Field Comment="Коэф. интегральной сост. оборотов ТВД" Name="KintegNvd" Type="REAL" UUID="EC16EA85658A4E2DB0D802272CEEAC36"/>
+<Field Comment="Коэф. дифференциальной сост. оборотов ТВД" Name="KdiffNvd" Type="REAL" UUID="0FAA6B0A73FA4C298C9A1A2FF73BB6A6"/>
+<Field Comment="Зона нечувствительности оборотов ТВД, об./мин" Name="DZNvd" Type="REAL" UUID="DFBB46FED7F342909E71F9CBFCA70FE8"/>
+<Field Comment="Коэф. пропорциональности оборотов СТ" Name="KpropNst" Type="REAL" UUID="506EDCDA8D9E46908E606EF896564A4E"/>
+<Field Comment="Коэф. интегральной сост. оборотов СТ" Name="KintegNst" Type="REAL" UUID="4E4FD48836294E9F9871B7E8EB7116F8"/>
+<Field Comment="Коэф. дифференциальной сост. оборотов СТ" Name="KdiffNst" Type="REAL" UUID="D4EDD8292CED422B9463BFE4FD41AE03"/>
+<Field Comment="Зона нечувствительности оборотов СТ, об./мин" Name="DZNst" Type="REAL" UUID="5A004373C0124B7892BBC91552DFF355"/>
+<Field Comment="Коэф. пропорциональности Тза СТ" Name="KpropTnd" Type="REAL" UUID="608CE3133B4B4B9C8E607286080A5F3E"/>
+<Field Comment="Коэф. интегральной сост. Тза СТ" Name="KintegTnd" Type="REAL" UUID="BFDC1FACA00D48B98737434AD5AFEED8"/>
+<Field Comment="Коэф. дифференциальной сост. Тза СТ" Name="KdiffTnd" Type="REAL" UUID="4B4AB29D5FED465F966BDCB07CFE26D3"/>
+<Field Comment="Зона нечувствительности оборотов Тза СТ, °С" Name="DZTnd" Type="REAL" UUID="56858998818B4559927D913B536DC98E"/>
+<Field Comment="Максимальные приведенные обороты ТВД" Name="NvdNormMax" Type="REAL" UUID="9CBA9B471EBF476895FF0C9D129527C6"/>
+<Field Comment="Предупредительная уставка по макс. привед. оборотам ТВД" Name="NvdNormMaxP" Type="REAL" UUID="3BA0246EC6414D3D928BF8F4DEB0D4AA"/>
+<Field Comment="Аварийная уставка по макс. привед. оборотам ТВД" Name="NvdNormMaxAO" Type="REAL" UUID="A1315E86A34F430CA0EBFF5622710A0F"/>
+<Field Comment="Минимальные приведенные обороты ТВД" Name="NvdNormMin" Type="REAL" UUID="5C46DF8820C0446CBE053FBBA14314AF"/>
+<Field Comment="Аварийная уставка по минимальным привед. оборотам ТВД" Name="NvdMinAO" Type="REAL" UUID="3A9214E60B9648F89D9FA412C9FB4472"/>
+<Field Comment="Максимальная разница отсчетов по каналам измерения оборотов ТВД" Name="distortNvdMax" Type="REAL" UUID="8E07F0C3C48C47C1BEB43E67B4F6F4F7"/>
+<Field Comment="Величина ускорения частоты вращения ТВД при анализе неисправности" Name="dNvdMax" Type="REAL" UUID="7ED70FD291154558AD48473FDB1B3D37"/>
+<Field Comment="Обороты начала контроля выбега ТВД" Name="NvdStartTime" Type="REAL" UUID="92FC16C295C347D5AC8C393587A62FF3"/>
+<Field Comment="Обороты окончания контроля выбега ТВД" Name="NvdStopTime" Type="REAL" UUID="9E56E86849774C9C85D4ECDF476B330A"/>
+<Field Comment="Максимальные обороты СТ" Name="NstMax" Type="REAL" UUID="D326F4B3F5FB4DB9B78D7BF04B688F7B"/>
+<Field Comment="Предупредительная уставка по максимальным оборотам СТ" Name="NstMaxP" Type="REAL" UUID="EE6B1405F2A249E9BB61CBDCFD18CF3B"/>
+<Field Comment="Аварийная уставка по максимальным оборотам СТ" Name="NstMaxAO" Type="REAL" UUID="527B51C3830B4AE89614F9277577E92E"/>
+<Field Comment="Минимальные обороты СТ" Name="NstMin" Type="REAL" UUID="2DA39371360A4DF19A77DE1D015335F2"/>
+<Field Comment="Аварийная уставка по минимальным оборотам СТ" Name="NstMinAO" Type="REAL" UUID="E5319B26075E4C66AC6A79F182742A9C"/>
+<Field Comment="Максимальная разница отсчетов по каналам измерения оборотов СТ" Name="distortNstMax" Type="REAL" UUID="7EAAF7E0114F43B991B91ACF713692C5"/>
+<Field Comment="Величина ускорения частоты вращения СТ при анализе неисправности" Name="dNstMax" Type="REAL" UUID="E8DE3A71738B4256801562C014E6C0BD"/>
+<Field Comment="Обороты начала контроля выбега СТ" Name="NstStartTime" Type="REAL" UUID="F78319D9454348F3A002E63234CDB862"/>
+<Field Comment="Обороты окончания контроля выбега СТ" Name="NstStopTime" Type="REAL" UUID="3B7232BEEFBD4F86B54FDFCFA2347DF7"/>
+<Field Comment="Превышение над максимальной Т газа за турбиной для предупреждения" Name="dTmaxP" Type="REAL" UUID="BF9DDE52B9904B7B93295074743B5CBB"/>
+<Field Comment="Превышение над максимальной Т газа за турбиной для аварии" Name="dTmaxAO" Type="REAL" UUID="003A23C0ADE54D69BCA8D636C2AB1046"/>
+<Field Comment="Максимальная Т газа за турбиной на запуске" Name="TstartMax" Type="REAL" UUID="0678A4AF96E7477286062A25723C9165"/>
+<Field Comment="Предупредительная уставка по максимальной Т газа за турбиной на запуске" Name="TstartMaxP" Type="REAL" UUID="AC8D2CBD2712415DBECB75837A3FF1C4"/>
+<Field Comment="Аварийная уставка по максимальной Т газа за турбиной на запуске" Name="TstartMaxAO" Type="REAL" UUID="E218843C1D4F4ADABE0E906763E8A0D1"/>
+<Field Comment="Ширина зоны торможения ДГ по температуре на запуске" Name="dTstartMax" Type="REAL" UUID="0AAEFA03CB554CB389886B62FD7F0429"/>
+<Field Comment="Максимальная разница значений по каналам Т газа за турбиной" Name="distortTmax" Type="REAL" UUID="A6D93266145F4973888BC6C7AEFD760F"/>
+<Field Comment="Максимальное отклонение i-й термопары от средней Т газа за турбиной" Name="distortTbrk" Type="REAL" UUID="0F525D28C39C448FA7D36EA7CAF1450F"/>
+<Field Comment="Минимальная Т газа за турбиной (для контроля)" Name="minT" Type="REAL" UUID="599F703978B84DD4B01516DEB6C62DA9"/>
+<Field Comment="Максимальная Т газа за турбиной (для контроля)" Name="maxT" Type="REAL" UUID="68802F1E229A479386CF81D7144E2A9A"/>
+<Field Comment="Давление, для которого построена характеристика ДГ" Name="PtgNorm" Type="REAL" UUID="A5F08D72ACE845CCBCC2B02659AB9E33"/>
+<Field Comment="Температура, для которой построена характеристика ДГ" Name="TtgNorm" Type="REAL" UUID="517B9FB9E6DC47BBA8C53E3CB8FB3215"/>
+<Field Comment="Минимальное давление топливного газа" Name="PtgMin" Type="REAL" UUID="24285661C7264606A741E12E9B911556"/>
+<Field Comment="Максимальное давление топливного газа" Name="PtgMax" Type="REAL" UUID="6DE11E53EB074BAF836C68F8E30EA684"/>
+<Field Comment="Регулировка верхнего ограничения по расходу топливного газа" Name="R_GtMax" Type="REAL" UUID="81C4D59DBEA142DBAA941FE65251D21D"/>
+<Field Comment="Регулировка нижнего ограничения по расходу топливного газа" Name="R_GtMin" Type="REAL" UUID="39838FB849E54340A102EE9492F85432"/>
+<Field Comment="Ограничение по скорости перекладки дозатора газа на пуске" Name="rateGt" Type="REAL" UUID="DD78612595134711820B2FB01123A8B1"/>
+<Field Comment="Максимальное рассогласование между заданием и положением ДГ" Name="distortDG" Type="REAL" UUID="777D7217FE4940C1AF16666330B95949"/>
+<Field Comment="Максимальное рассогласование между заданием и положением ВНА" Name="distortVNA" Type="REAL" UUID="FA6259E2E2D74604997C024096921646"/>
+<Field Comment="Регулировка расхода на розжиг" Name="R_GtFire" Type="REAL" UUID="F85A37444B6A490C86115D2E21A24A72"/>
+<Field Comment="Задержка до начала розжига" Name="fireDelay" Type="REAL" UUID="34D80367722245C5A0E4FEF3661490CE"/>
+<Field Comment="Бросок температуры, по которому фиксируется розжиг в начале запуска" Name="fireShiftStart" Type="REAL" UUID="C72503F8CF9D416292D58B1CE37D6984"/>
+<Field Comment="Время прогрева на малом газу" Name="timeHeat" Type="REAL" UUID="7FDB200BE5644BFAAEE7C3A207F5B050"/>
+<Field Comment="Время охлаждения на малом газу при НО" Name="timeCooling" Type="REAL" UUID="E540A58028F94BB8BCB3CDA4AC240071"/>
+<Field Comment="Коэфициет изменения P за ОК для расчёта 1-го условия помпажа Д" Name="Ksurge1" Type="REAL" UUID="F6A35506D86F48B8879097E5A5885B33"/>
+<Field Comment="Коэфициет изменения P за ОК для расчёта 2-го условия помпажа Д" Name="Ksurge2" Type="REAL" UUID="A0CEFBFEAEA34ADFB1ADCFDC176F707D"/>
+<Field Comment="Номинальная скорость изменения задания на обороты ТВД" Name="rateNvdBtn" Type="REAL" UUID="EF3A488A6FD34EBABBD8EF840019EDFC"/>
+<Field Comment="Номинальная скорость изменения задания оборотов ТВД на пуске" Name="rateNvdStart" Type="REAL" UUID="8BC8267AAA4F44EA985A2926EAA56AA5"/>
+<Field Comment="Номинальная скорость изменения задания оборотов ТВД на НО" Name="rateNvdNO" Type="REAL" UUID="8FF08A1B11E948768D99639FB9B8973C"/>
+<Field Comment="Номинальная скорость изменения задания оборотов СТ" Name="rateNstBtn" Type="REAL" UUID="B40C903E3A7D4448A359EA459E1CC2F9"/>
+<Field Comment="Номинальная скорость изменения задания оборотов СТ на пуске" Name="rateNstStart" Type="REAL" UUID="8095360EF3D64877B695B442E487DBD2"/>
+<Field Comment="Номинальная скорость изменения задания оборотов СТ на НО" Name="rateNstNO" Type="REAL" UUID="3A8E362E4BF049AD99F04E661338853F"/>
+<Field Comment="Степень сглаживания дифференциала регулятора оборотов ТВД" Name="LagDiff_Nvd" Type="REAL" UUID="4B616B43D4604A39BC3C90FC11E97CD5"/>
+<Field Comment="Степень сглаживания дифференциала регулятора оборотов СТ" Name="LagDiff_Nst" Type="REAL" UUID="8C8610C9215549808F5884E77A724219"/>
+<Field Comment="Степень сглаживания дифференциала регулятора контура Т за СТ" Name="LagDiff_Tst" Type="REAL" UUID="09DD41E054CF4F99BA62DBD4A98F61DF"/>
+</Fields>
+</Type>

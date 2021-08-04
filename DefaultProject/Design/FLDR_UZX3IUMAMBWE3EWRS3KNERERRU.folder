@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="ЦР">
+<Items>
+<Item Name="AS36_struct.type"/>
+<Item Name="PID_conf_fx.type"/>
+<Item Name="AI_.type"/>
+<Item Name="AI_Calc.type"/>
+<Item Name="AI_HMI.type"/>
+<Item Name="T_KC_Calc_AI.type"/>
+<Item Name="T_KC_AI_HMI.type"/>
+<Item Name="Link_Status.type"/>
+<Item Name="Param_GPA.type"/>
+<Item Name="Regul.type"/>
+<Item Name="TEST.type"/>
+<Item Name="T_KC_ToFrom_SAR.type"/>
+<Item Name="T_SAR_KC_MB.type"/>
+<Item Name="T_SAR_KC_MB_WRITE.type"/>
+<Item Name="T_UnitState_DPar.type"/>
+<Item Name="dPID.type"/>
+<Item Name="dSEL.type"/>
+<Item Name="funct.type"/>
+<Item Name="gpa_str.type"/>
+<Item Name="shop_str.type"/>
+<Item Name="ext_var.type"/>
+</Items>
+</Folder>

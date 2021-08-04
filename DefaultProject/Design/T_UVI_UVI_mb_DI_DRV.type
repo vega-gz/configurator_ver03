@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UVI_UVI_mb_DI_DRV" UUID="273CA7DFAA6A49A7A07FA4993D6C8610">
+<Fields>
+<Field Comment="Клапан 1 открыт" Name="Vlv_on_1" Type="BOOL" UUID="57DC238C45DC4CA2A210270437CC0800"/>
+<Field Comment="Клапан 2 открыт" Name="Vlv_on_2" Type="BOOL" UUID="9406356B8AA040879C6667956CCA1F49"/>
+<Field Comment="Клапан 3 открыт" Name="Vlv_on_3" Type="BOOL" UUID="6D06041F753844588E68505744752BA7"/>
+<Field Comment="Клапан 4 открыт" Name="Vlv_on_4" Type="BOOL" UUID="E00272BFF8894EBC9C60E685C2CF5CB0"/>
+<Field Comment="Клапан 5 открыт" Name="Vlv_on_5" Type="BOOL" UUID="69D6924C192846048202F7760D8D2E22"/>
+<Field Comment="Клапан 6 открыт" Name="Vlv_on_6" Type="BOOL" UUID="C58A25687A5146FE982E7EAC5B64E356"/>
+<Field Comment="Клапан 7 открыт" Name="Vlv_on_7" Type="BOOL" UUID="B2AF4343CFED436EB00002596E998855"/>
+<Field Comment="Клапан 8 открыт" Name="Vlv_on_8" Type="BOOL" UUID="771FCB2F99F44F7BA1151CF12DAEAC06"/>
+<Field Comment="Цепь клапана 1 в норме" Name="Vlv_1_ok" Type="BOOL" UUID="DEF71B0AB27F4855B8302E458E5B8E1D"/>
+<Field Comment="КЗ цепи клапана 1" Name="Vlv_1_kz" Type="BOOL" UUID="CD423496D5C74FF9B232FBDA64072BF2"/>
+<Field Comment="Обрыв цепи клапан 1" Name="Vlv_1_brk" Type="BOOL" UUID="4BB4BA001F954E3EA98C8FF9EE51F79B"/>
+<Field Comment="Цепь клапана 2 в норме" Name="Vlv_2_ok" Type="BOOL" UUID="311C5FAE8CF245CD84B3CEB220D1E130"/>
+<Field Comment="КЗ цепи клапана 2" Name="Vlv_2_kz" Type="BOOL" UUID="28C4F93BF7C042CE956E1DFDD3B4E0FE"/>
+<Field Comment="Обрыв цепи клапан 2" Name="Vlv_2_brk" Type="BOOL" UUID="57C351E4A39748F18B53AE1910FCA191"/>
+<Field Comment="Цепь клапана 3 в норме" Name="Vlv_3_ok" Type="BOOL" UUID="135B9D48803D4E65A9F042402BE03D7C"/>
+<Field Comment="КЗ цепи клапана 3" Name="Vlv_3_kz" Type="BOOL" UUID="FD13769E20164A8B8560BB2A0F94C171"/>
+<Field Comment="Обрыв цепи клапан 3" Name="Vlv_3_brk" Type="BOOL" UUID="373698C9C2B145AC86E7D2A5B5C33C44"/>
+<Field Comment="Цепь клапана 4 в норме" Name="Vlv_4_ok" Type="BOOL" UUID="9F560FB61EF247C49E28D06A8034B23A"/>
+<Field Comment="КЗ цепи клапана 4" Name="Vlv_4_kz" Type="BOOL" UUID="C8D1782147134F3ABA91773711C60834"/>
+<Field Comment="Обрыв цепи клапан 4" Name="Vlv_4_brk" Type="BOOL" UUID="5B3C33ABC6274C10AD88E57A9367E7CC"/>
+<Field Comment="Цепь клапана 5 в норме" Name="Vlv_5_ok" Type="BOOL" UUID="D72E54534EBA4DDAB6E37B6B5310B6B1"/>
+<Field Comment="КЗ цепи клапана 5" Name="Vlv_5_kz" Type="BOOL" UUID="ADF7ABC6CD5F43E0A65731A733E8C25E"/>
+<Field Comment="Обрыв цепи клапан 5" Name="Vlv_5_brk" Type="BOOL" UUID="2BBB31992F0549CEB733DDF3C40499CA"/>
+<Field Comment="Цепь клапана 6 в норме" Name="Vlv_6_ok" Type="BOOL" UUID="ABF82B1C3FB849F58533599A6AE8D7A8"/>
+<Field Comment="КЗ цепи клапана 6" Name="Vlv_6_kz" Type="BOOL" UUID="187EEA9C160E4FA2AFF5FD0A14F5A18E"/>
+<Field Comment="Обрыв цепи клапан 6" Name="Vlv_6_brk" Type="BOOL" UUID="0C506DDBAAB649518B8604C972910F5E"/>
+<Field Comment="Цепь клапана 7 в норме" Name="Vlv_7_ok" Type="BOOL" UUID="541716AE4EDB49A1917DBB7D643851BF"/>
+<Field Comment="КЗ цепи клапана 7" Name="Vlv_7_kz" Type="BOOL" UUID="A91BA649C8734547A39A085DB0F5CA2D"/>
+<Field Comment="Обрыв цепи клапан 7" Name="Vlv_7_brk" Type="BOOL" UUID="7ADDA55868E24879A96581C7DD35B1F1"/>
+<Field Comment="Цепь клапана 8 в норме" Name="Vlv_8_ok" Type="BOOL" UUID="A7B4DAE703FD4CF48F256CEA08734170"/>
+<Field Comment="КЗ цепи клапана 8" Name="Vlv_8_kz" Type="BOOL" UUID="047B6407A4AE406B8ACBECC48BF4229F"/>
+<Field Comment="Обрыв цепи клапан 8" Name="Vlv_8_brk" Type="BOOL" UUID="A4B94C4FCE1C43E885A40045B7F94D33"/>
+<Field Comment="Флаг &quot;Напряжение меньше допустимого&quot;" Name="U_low" Type="BOOL" UUID="D49B51F427914E8E94B73800A169B32F"/>
+<Field Comment="Флаг &quot;Температура внутри корпуса больше заданной&quot;" Name="T_GZ" Type="BOOL" UUID="96BFF5E75D2345E180F63C97BCAEEAE1"/>
+<Field Comment="Флаг неисправность датчика плотности" Name="Den_flt" Type="BOOL" UUID="002E23674F734920B71AF23170F3C885"/>
+<Field Comment="Флаг неисправность датчика перепада давления на фильтре" Name="dP_flt" Type="BOOL" UUID="8757CDC4766149958B9416D1880570B4"/>
+<Field Comment="Флаг &quot;Перепад давления на фильтре больше заданного&quot;" Name="dP_GZ" Type="BOOL" UUID="97DB4AE20C094D57815F851B0B971B86"/>
+<Field Comment="Флаг неисправности расходомера" Name="Flow_flt" Type="BOOL" UUID="9219790834794157BD8839DDAFE9E38D"/>
+<Field Comment="Флаг &quot;Напряжение больше допустимого&quot;" Name="U_hi" Type="BOOL" UUID="DC38E933EFEC4E1FB7C5098F9EB49724"/>
+<Field Comment="Флаг &quot;Расхождение суммарных расходов более заданной ошибки&quot;" Name="deltaQ_flt" Type="BOOL" UUID="47BC4F10CC864AB29572B6E82EC58CB4"/>
+<Field Comment="Флаг &quot;Давление на входе меньше допустимого&quot;" Name="Pin_low" Type="BOOL" UUID="D5B829D3FAC44DA7BCC742543F248ADB"/>
+<Field Comment="Флаг &quot;Неисправность датчика входного давления&quot;" Name="Pin_flt" Type="BOOL" UUID="117FF2345FC64B7295A46108C315DAC6"/>
+<Field Comment="Флаг &quot;Протечка по байпасам&quot;" Name="Leak" Type="BOOL" UUID="E7ABE898ECE4409E85972585C55449B0"/>
+<Field Comment="Флаг &quot;Аварийное засорение фильтра&quot;" Name="Filter_flt" Type="BOOL" UUID="02B3E434D76E48CF8BC334F3C90EC7BE"/>
+<Field Comment="Флаг Цепь датчика 1 в норме" Name="Fl_sens_1_ok" Type="BOOL" UUID="304B06058E6A45579E5D09BD78345A6B"/>
+<Field Comment="Флаг  КЗ цепи датчика 1" Name="Fl_sens_1_kz" Type="BOOL" UUID="2AAE95E0B56F465E96C37A9B74072D5C"/>
+<Field Comment="Флаг Обрыв цепи датчика 1" Name="Fl_sens_1_brk" Type="BOOL" UUID="C56A36C5FFEC45A59264938029D4F8B5"/>
+<Field Comment="Флаг Цепь датчика 2 в норме" Name="Fl_sens_2_ok" Type="BOOL" UUID="58DBEF348CE9468A9FB4FD5ACA91C36E"/>
+<Field Comment="Флаг  КЗ цепи датчика 2" Name="Fl_sens_2_kz" Type="BOOL" UUID="C7AC7DB347A945CAA90CB764C09DCC76"/>
+<Field Comment="Флаг Обрыв цепи датчика 2" Name="Fl_sens_2_brk" Type="BOOL" UUID="6A5C3F142A1B4E7A90940E2968F32D0F"/>
+<Field Comment="Флаг Цепь датчика 3 в норме" Name="Fl_sens_3_ok" Type="BOOL" UUID="0904204B776D44A690AD44FFEE7E9D4B"/>
+<Field Comment="Флаг  КЗ цепи датчика 3" Name="Fl_sens_3_kz" Type="BOOL" UUID="FEDD3CC5EEC84F6299343753D67BAFCA"/>
+<Field Comment="Флаг Обрыв цепи датчика 3" Name="Fl_sens_3_brk" Type="BOOL" UUID="CDB9C3F504674E079DC6AE9DD7174985"/>
+<Field Comment="Флаг Цепь датчика 4 в норме" Name="Fl_sens_4_ok" Type="BOOL" UUID="42E637278D5C45AD8D0237A76952A52F"/>
+<Field Comment="Флаг  КЗ цепи датчика 4" Name="Fl_sens_4_kz" Type="BOOL" UUID="5F9046A7847947E2AB7D0014903D929B"/>
+<Field Comment="Флаг Обрыв цепи датчика 4" Name="Fl_sens_4_brk" Type="BOOL" UUID="050103EA544B412BBA4EE71D712EB0D8"/>
+<Field Comment="Флаг Цепь датчика 5 в норме" Name="Fl_sens_5_ok" Type="BOOL" UUID="9F9FA7B65A754804BCFFA6F324364502"/>
+<Field Comment="Флаг  КЗ цепи датчика 5" Name="Fl_sens_5_kz" Type="BOOL" UUID="F00F2ABDCCAB45DE83959B03336B03E1"/>
+<Field Comment="Флаг Обрыв цепи датчика 5" Name="Fl_sens_5_brk" Type="BOOL" UUID="042FC27ADA9C4D71B705906740C2BC47"/>
+<Field Comment="Флаг Цепь датчика 6 в норме" Name="Fl_sens_6_ok" Type="BOOL" UUID="051EB688A7CE46959FE4B3DD18C30871"/>
+<Field Comment="Флаг  КЗ цепи датчика 6" Name="Fl_sens_6_kz" Type="BOOL" UUID="2FEDC5DB71A941478673D88E8DEEDB0C"/>
+<Field Comment="Флаг Обрыв цепи датчика 6" Name="Fl_sens_6_brk" Type="BOOL" UUID="4C0F659A1B254D8D812B4B85D2F979D7"/>
+<Field Comment="Флаг Цепь датчика 7 в норме" Name="Fl_sens_7_ok" Type="BOOL" UUID="6BFDCDD377D84975A80CACDEC0023507"/>
+<Field Comment="Флаг  КЗ цепи датчика 7" Name="Fl_sens_7_kz" Type="BOOL" UUID="D4F9247104B2498EAD64F0C84BB779AC"/>
+<Field Comment="Флаг Обрыв цепи датчика 7" Name="Fl_sens_7_brk" Type="BOOL" UUID="6B0FE835C65C47E2B88962AF96324079"/>
+<Field Comment="Флаг Цепь датчика 8 в норме" Name="Fl_sens_8_ok" Type="BOOL" UUID="9029C7ACF76A4FDBBD320D15242767EA"/>
+<Field Comment="Флаг  КЗ цепи датчика 8" Name="Fl_sens_8_kz" Type="BOOL" UUID="2671A0F0F5EF421DB2FAC617EBBE2782"/>
+<Field Comment="Флаг Обрыв цепи датчика 8" Name="Fl_sens_8_brk" Type="BOOL" UUID="48A60F62E57D456993042C09EE1213A2"/>
+<Field Comment="Флаг неиспраности канала 1 сброшен" Name="Fl_ch_1_ackn" Type="BOOL" UUID="35CACD5AF0EA4F98A746284CABFDEA2A"/>
+<Field Comment="Флаг засорен канал 1" Name="Fl_ch_1_clodge" Type="BOOL" UUID="F0CC452FAA8949D78BB89A1971B587F3"/>
+<Field Comment="Флаг протечка канал 1" Name="Fl_ch_1_leak" Type="BOOL" UUID="245FEBFFABC3437E8953ED8B90A735BB"/>
+<Field Comment="Флаг неиспраности канала 2 сброшен" Name="Fl_ch_2_ackn" Type="BOOL" UUID="E5EF5B93D76645D9A6BC820966CC6D34"/>
+<Field Comment="Флаг засорен канал 2" Name="Fl_ch_2_clodge" Type="BOOL" UUID="B41870299037435EB5FD75BA252FAB22"/>
+<Field Comment="Флаг протечка канал 2" Name="Fl_ch_2_leak" Type="BOOL" UUID="9C95275C35114ADEB8800CB0FFFD7744"/>
+<Field Comment="Флаг неиспраности канала 3 сброшен" Name="Fl_ch_3_ackn" Type="BOOL" UUID="A53BC466EB9445B7AD022C3EFBF12E94"/>
+<Field Comment="Флаг засорен канал 3" Name="Fl_ch_3_clodge" Type="BOOL" UUID="8BA03FBDE9E64E6D9989B867BAAC3FB7"/>
+<Field Comment="Флаг протечка канал 3" Name="Fl_ch_3_leak" Type="BOOL" UUID="7ED57529928F439A95449F14C7027D74"/>
+<Field Comment="Флаг неиспраности канала 4 сброшен" Name="Fl_ch_4_ackn" Type="BOOL" UUID="5B42A0BD89FE4EAFA3270BE875DC91B1"/>
+<Field Comment="Флаг засорен канал 4" Name="Fl_ch_4_clodge" Type="BOOL" UUID="B744814100DA4C39A7C48EA61900D9C9"/>
+<Field Comment="Флаг протечка канал 4" Name="Fl_ch_4_leak" Type="BOOL" UUID="E40E6C2CF1E14A84BB793BD1D070C64B"/>
+<Field Comment="Флаг неиспраности канала 5 сброшен" Name="Fl_ch_5_ackn" Type="BOOL" UUID="60AA071696E047B6B6EE4564120629E2"/>
+<Field Comment="Флаг засорен канал 5" Name="Fl_ch_5_clodge" Type="BOOL" UUID="85F546908D864114A18EEC3CF086CA74"/>
+<Field Comment="Флаг протечка канал 5" Name="Fl_ch_5_leak" Type="BOOL" UUID="43E0508666184CA9B31094033A2E1CFB"/>
+<Field Comment="Флаг неиспраности канала 6 сброшен" Name="Fl_ch_6_ackn" Type="BOOL" UUID="10860418E70A4E1AA8E5BF6B2955A70C"/>
+<Field Comment="Флаг засорен канал 6" Name="Fl_ch_6_clodge" Type="BOOL" UUID="35124434DE784FFCBCB67677CFBDCF0F"/>
+<Field Comment="Флаг протечка канал 6" Name="Fl_ch_6_leak" Type="BOOL" UUID="840593F8EA3344C0885E962FEB49E77E"/>
+<Field Comment="Флаг неиспраности канала 7 сброшен" Name="Fl_ch_7_ackn" Type="BOOL" UUID="CE9C439E2520482C888E8B86FFD48261"/>
+<Field Comment="Флаг засорен канал 7" Name="Fl_ch_7_clodge" Type="BOOL" UUID="72D26A4816FB40CABA8C719BC91D1786"/>
+<Field Comment="Флаг протечка канал 7" Name="Fl_ch_7_leak" Type="BOOL" UUID="FBC742BF5E2A4C89AC4478078AB67E3F"/>
+<Field Comment="Флаг неиспраности канала 8 сброшен" Name="Fl_ch_8_ackn" Type="BOOL" UUID="8B5DA2D0053E480FBCE86B4E72014863"/>
+<Field Comment="Флаг засорен канал 8" Name="Fl_ch_8_clodge" Type="BOOL" UUID="F22758C96DC24D49BB019ED249131C7B"/>
+<Field Comment="Флаг протечка канал 8" Name="Fl_ch_8_leak" Type="BOOL" UUID="145971B4C17344E4AD2DFE58281F930E"/>
+<Field Comment="Канал 1 в работе" Name="Ch_on_1" Type="BOOL" UUID="72658894459D4AC691E5138B0EB7DA92"/>
+<Field Comment="Канал 2 в работе" Name="Ch_on_2" Type="BOOL" UUID="FBC6D583EB664B8195EB96A0F6D9B520"/>
+<Field Comment="Канал 3 в работе" Name="Ch_on_3" Type="BOOL" UUID="C5CF24747D2A49D58EDE4068A414851F"/>
+<Field Comment="Канал 4 в работе" Name="Ch_on_4" Type="BOOL" UUID="B5D755EBC17F4CE69B22CCCE6284CAD6"/>
+<Field Comment="Канал 5 в работе" Name="Ch_on_5" Type="BOOL" UUID="908ED9AA805543BD86B81DC4CA5CE711"/>
+<Field Comment="Канал 6 в работе" Name="Ch_on_6" Type="BOOL" UUID="3B1737437E3648FBB6E85CDE12DD53A5"/>
+<Field Comment="Канал 7 в работе" Name="Ch_on_7" Type="BOOL" UUID="F6B7272A657C4B47A597A353F289361D"/>
+<Field Comment="Канал 8 в работе" Name="Ch_on_8" Type="BOOL" UUID="63064679664C45C9A4E2A3FC1980AF40"/>
+</Fields>
+</Type>

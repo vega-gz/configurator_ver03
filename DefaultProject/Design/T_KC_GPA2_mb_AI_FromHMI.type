@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_GPA2_mb_AI_FromHMI" UUID="E10ED40ECC044D5F9C4F2DB7BAE1A41C">
+<Fields>
+<Field Comment="Текущие обороты СТ" Name="N_ST" Type="187F76AE49C59E950138DDA3067101D0" UUID="E8079E858EE94439BE917D25D2E4FD9C"/>
+<Field Comment="Текущие обороты ВД" Name="N_VD" Type="187F76AE49C59E950138DDA3067101D0" UUID="AF422AAA235E48BE96226CB55D4A4B10"/>
+<Field Comment="Давление на входе нагнетателя" Name="Pg_inN" Type="187F76AE49C59E950138DDA3067101D0" UUID="06D45B8BBD894CB5AE8DD99A30C62AE3"/>
+<Field Comment="Давление на выходе нагнетателя" Name="Pg_outN" Type="187F76AE49C59E950138DDA3067101D0" UUID="B8C98DE950B54DB0B0CC28F0662372C0"/>
+<Field Comment="Температура на входе нагнетателя" Name="Tg_inN" Type="187F76AE49C59E950138DDA3067101D0" UUID="C499783F9E7641BD96A9A5C7F04ACB11"/>
+<Field Comment="Температура на выходе нагнетателя" Name="Tg_outN" Type="187F76AE49C59E950138DDA3067101D0" UUID="B7E3033E9DE54F56991F5F165BD4DD05"/>
+<Field Comment="Расход технологического газа" Name="prod" Type="187F76AE49C59E950138DDA3067101D0" UUID="19B39D38AF604655B65044E5F057BD60"/>
+<Field Comment="Запас до нижнего ограничения" Name="loLimRes" Type="187F76AE49C59E950138DDA3067101D0" UUID="DBD556F17034422798C30285AD29A8B3"/>
+<Field Comment="Запас до верхнего ограничения" Name="hiLimRes" Type="187F76AE49C59E950138DDA3067101D0" UUID="25469F7F16E942FCB6BA5EA3ECE4D60B"/>
+</Fields>
+</Type>

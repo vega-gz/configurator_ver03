@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="НМс">
+	<Items>
+		<Item Name="FLDR_JSLYF4XR7PQEPHSRDY7PRKVUGY.folder" />
+		<Item Name="FLDR_RMNWWKDGJJHUZPP3DDXXRWU7QE.folder" />
+		<Item Name="FLDR_SC4APJET736UPIBPM3BV23JVPE.folder" />
+		<Item Name="FLDR_WASJ3RHJY6LEXDQR6OJK2YFKAA.folder" />
+		<Item Name="FLDR_Y5JOBNNQO63EHARQDI6QJTXPA4.folder" />
+		<Item Name="T_NMS_BTN.type" />
+		<Item Name="T_NMS_SS.type" />
+		<Item Name="T_NMs_IM.type" />
+		<Item Name="T_NMs_tuneAM.type" />
+	</Items>
+</Folder>

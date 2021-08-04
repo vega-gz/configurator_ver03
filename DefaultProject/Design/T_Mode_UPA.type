@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Mode_UPA" Kind="Struct" UUID="T55K4PT6OEGEJODKFHIKVDWKMQ">
+	<Fields>
+		<Field Name="graph" Type="EE67E15142EC74278378C1A6B2ADA2E4" UUID="ZGE7GFRD5ZXELGI6DLOGQJILTI" Comment="Граф режима" />
+		<Field Name="FaultUPA" Type="BOOL" UUID="PIBYKATNAQFELHLG5AT3DSV2IQ" Comment="Нет режима" />
+		<Field Name="AOUPA" Type="BOOL" UUID="SLZTRPWBPBTUBMRCC6XKN472CI" Comment="АО" />
+		<Field Name="NormaUPA" Type="BOOL" UUID="2EGQ2TUOSPTEHHJ24JE3GMMUDQ" Comment="Норма" />
+	</Fields>
+</Type>

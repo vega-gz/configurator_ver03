@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="ANB">
+	<Items>
+		<Item Name="T_NMS_ANB.type" />
+		<Item Name="T_NMS_ANB_Internal.type" />
+		<Item Name="T_NMS_ANB_Settings.type" />
+		<Item Name="T_NMS_Ust.type" />
+		<Item Name="Type_7NZ42MZ66O6ERPOYO24E4GRZG4.type" />
+	</Items>
+</Folder>

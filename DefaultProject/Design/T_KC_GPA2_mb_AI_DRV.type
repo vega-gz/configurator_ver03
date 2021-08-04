@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_GPA2_mb_AI_DRV" UUID="5AE4765D07CB4B279142D56667EFEA0B">
+<Fields>
+<Field Comment="Текущие обороты СТ" Name="N_ST" Type="REAL" UUID="42731426439E4142AD022A0B4D9E255B"/>
+<Field Comment="Текущие обороты ВД" Name="N_VD" Type="REAL" UUID="879C11770C12470B8A40C865C895A73C"/>
+<Field Comment="Давление на входе нагнетателя" Name="Pg_inN" Type="REAL" UUID="E48273435EB942578D2D457926CE0E3E"/>
+<Field Comment="Давление на выходе нагнетателя" Name="Pg_outN" Type="REAL" UUID="91BA5B1C394C46A98813BAB2FC5A8556"/>
+<Field Comment="Температура на входе нагнетателя" Name="Tg_inN" Type="REAL" UUID="342AC62B359C40119DDC0A2CF5547874"/>
+<Field Comment="Температура на выходе нагнетателя" Name="Tg_outN" Type="REAL" UUID="BA3F6897B05B4346A9693DA0F1FD031C"/>
+<Field Comment="Расход технологического газа" Name="prod" Type="REAL" UUID="6BDE3235FC7140EF9B1E81C0761BFAA3"/>
+<Field Comment="Запас до нижнего ограничения" Name="loLimRes" Type="REAL" UUID="873C6CB44C56462A8A02890A73A1D3B0"/>
+<Field Comment="Запас до верхнего ограничения" Name="hiLimRes" Type="REAL" UUID="8E37583E4A7C45E59347DB01D400AF18"/>
+</Fields>
+</Type>

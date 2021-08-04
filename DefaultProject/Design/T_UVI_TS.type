@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UVI_TS" Kind="Struct" UUID="EAJBVOTHMVKUXPVNXAZMB4XPX4">
+	<Fields>
+		<Field Name="DU_IM" Type="BOOL" UUID="6K5CGAQSLRHU5LM4LKRNG27D6U" />
+	</Fields>
+</Type>

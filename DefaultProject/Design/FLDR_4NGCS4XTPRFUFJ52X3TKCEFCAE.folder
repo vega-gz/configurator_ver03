@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Алг">
+	<Items>
+		<Item Name="T_ALG_TSK.type" />
+		<Item Name="T_Mode_TSK.type" />
+		<Item Name="T_TSK_TS.type" />
+		<Item Name="T_TSK_mode.type" />
+		<Item Name="Type_4A6ABRQZFLNEDNTE4CRNO7D774.type" />
+		<Item Name="Type_57TNS22OMH6EHCCGBPYLCNH37I.type" />
+		<Item Name="Type_A37JM3OS5IWE3KYXRX3RQCF2FY.type" />
+		<Item Name="Type_BBGM4HHMJ5OENHGIWHECVC243M.type" />
+	</Items>
+</Folder>

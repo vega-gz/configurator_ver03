@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Алгоритм">
+	<Items>
+		<Item Name="T_DRM_KC.type" />
+		<Item Name="T_KC_exchange.type" />
+		<Item Name="Type_QF3IS3HY33JUPEEQSJGKLTT3R4.type" />
+		<Item Name="Type_UTSLHVC5L3IUNOGJXM2E73W6AI.type" />
+		<Item Name="Type_UUSWX4PCSH7EVLQCVUYK34T5PY.type" />
+		<Item Name="Type_WMJIOCDTSJNEROXWFS3MP3EMDM.type" />
+	</Items>
+</Folder>

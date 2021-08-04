@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_DO_DRV" Kind="Struct" UUID="18E9276365FA449A88EEF0D223B01566">
+	<Fields>
+		<Field Name="Kr3_ON" Type="BOOL" UUID="E73277C05C424ADE903F341BD984EAB0" Comment="Кран Кр3 открыть (резерв)" />
+		<Field Name="Kr3_OF" Type="BOOL" UUID="B6603141846B46039174EA05654EA069" Comment="Кран Кр3 закрыть (резерв)" />
+		<Field Name="Lock_VNA" Type="BOOL" UUID="7BC496C648C14E66AD63C3A4AD7EDAAD" Comment="Блокировка ВНА" />
+		<Field Name="Vlagomer_ON" Type="BOOL" UUID="C1B473D04F4D4EB1A393244140651FD9" Comment="Влагомер включить" />
+		<Field Name="TEN_Vlagomer_ON" Type="BOOL" UUID="AA7E805CF47646E59B43080678C0E372" Comment="Включить термостат влагомера" />
+		<Field Name="Kr1_ON" Type="BOOL" UUID="C7E2FDCADE524AF3AE191E512EB78EFD" Comment="Открыть кран 1" />
+		<Field Name="Kr1_OF" Type="BOOL" UUID="708EF0A4F56F475FA454CEBA15EBF814" Comment="Закрыть кран 1" />
+		<Field Name="Kr2_ON" Type="BOOL" UUID="5F85A9134A5B4736B9A47BE674A6D87B" Comment="Открыть кран 2" />
+		<Field Name="Kr2_OF" Type="BOOL" UUID="7987B5CDDD6D455593913AB5E84CAC48" Comment="Закрыть кран 2" />
+		<Field Name="Kr4_ON" Type="BOOL" UUID="A62C9AB970DF4A8AA7380E5CBF26585B" Comment="Открыть кран 4" />
+		<Field Name="Kr4_OF" Type="BOOL" UUID="DB5D1E00F34D418CB6558BE87A204420" Comment="Закрыть кран 4" />
+		<Field Name="Kr5_ON" Type="BOOL" UUID="17A1B7AA11D348ADB64449DA6B6F9A66" Comment="Открыть кран 5" />
+		<Field Name="Kr5_OF" Type="BOOL" UUID="A657B5B0FADC43E1B1D137DA7C639019" Comment="Закрыть кран 5" />
+		<Field Name="Reg_C1_N_OF" Type="BOOL" UUID="B536C568DF5742F9B4A97E6ADE4F0031" Comment="Закрыть регулятор производительности цилиндра 1 компрессора" />
+		<Field Name="Reg_C2_N_OF" Type="BOOL" UUID="D5FE6ECB129F410FB21DAD2732E81980" Comment="Закрыть регулятор производительности цилиндра 2 компрессора" />
+		<Field Name="Reg_C3_N_OF" Type="BOOL" UUID="01925D8C24B54EA78F31176C2E82F978" Comment="Закрыть регулятор производительности цилиндра 3 компрессора" />
+		<Field Name="Reg_C4_N_OF" Type="BOOL" UUID="A20A0D440B214874A3734F1E45D0BE3C" Comment="Закрыть регулятор производительности цилиндра 4 компрессора" />
+		<Field Name="Reg_C5_N_OF" Type="BOOL" UUID="551D2DD794ED49E88DF268404791C2D6" Comment="Закрыть регулятор производительности цилиндра 5 компрессора" />
+		<Field Name="Reg_C6_N_OF" Type="BOOL" UUID="115DCE82CADC4AA3ADFE4249D35A0224" Comment="Закрыть регулятор производительности цилиндра 6 компрессора" />
+		<Field Name="Unlock_ES" Type="BOOL" UUID="62389A91DA464304B54B3751A71969BE" Comment="Разблокировать ЭС" />
+		<Field Name="ES_ON" Type="BOOL" UUID="80B26D415717427FAA36E17E429A2BFC" Comment="Включить ЭС" />
+		<Field Name="SK_ON" Type="BOOL" UUID="4BC447E60D454D39B9192100DBB5FDE3" Comment="Включить ЭМ открытия клапана ОГК1" />
+		<Field Name="POK_ON" Type="BOOL" UUID="61888267B4A04E5DAE716C0D1050D938" Comment="Открыть клапан  подвода газа к воспламенителям" />
+		<Field Name="SPV_ON" Type="BOOL" UUID="75D59CA1CF324906ADD2D9EC3C6D442E" Comment="Включить зажигание" />
+		<Field Name="ZsPV_ON" Type="BOOL" UUID="52BA58988EB54695A61943692A1F3756" Comment="Открыть ЗПВ1" />
+		<Field Name="KLR1_ON" Type="BOOL" UUID="9B2B52B09913456EA2B57E9F70FFB337" Comment="Клапан КлР1 открыть" />
+		<Field Name="KLR1_OF" Type="BOOL" UUID="5C6F73FD54AF4E989065538DDA0DB66C" Comment="Клапан КлР1 закрыть" />
+		<Field Name="KLR2_ON" Type="BOOL" UUID="4E68CC0369364072A4562AB98A1DF424" Comment="Клапан КлР2 открыть" />
+		<Field Name="KLR2_OF" Type="BOOL" UUID="75111D88BD284BF8A307A236A5AF6B8B" Comment="Клапан КлР2 закрыть" />
+		<Field Name="Kl_PE_ON" Type="BOOL" UUID="902C0815B21C4C649A9046323FC631F4" Comment="Открыть клапаны противопожарные ПЕ1,ПЕ2,ПЕ3" />
+		<Field Name="KE1_BFTG_ON" Type="BOOL" UUID="D7DE072FDFBF440CB2220EB568120F12" Comment="Клапан БФТГ подачи газа в ГТД открыть" />
+		<Field Name="KE2_BFTG_OF" Type="BOOL" UUID="36950123DA38448B8F7702E11CEFA2BE" Comment="Клапан БФТГ сброса давления в атмосферу закрыть" />
+		<Field Name="KLR1_D" Type="BOOL" UUID="4F4A40EB4CE140399D3AC8CF62398DC6" Comment="Клапан КлР1 дискретное управление" />
+		<Field Name="Kr6_OF" Type="BOOL" UUID="9E37D7B645854EFDB1F98E2B74AC3507" Comment="Закрыть кран 6" />
+		<Field Name="Kr6_ON" Type="BOOL" UUID="F8271E8CEED44D28BA7EA4A83C630B87" Comment="Открыть кран 6" />
+		<Field Name="Kr9_OF" Type="BOOL" UUID="96C061C1A54A4A0EB8E67ABE12DDD955" Comment="Закрыть кран 9" />
+		<Field Name="Kr9_ON" Type="BOOL" UUID="1CDB47D9551047B1AA1AE3B3430B82C1" Comment="Открыть кран 9" />
+		<Field Name="Kr12_OF" Type="BOOL" UUID="955916A0EBF143169CB69F926C57F613" Comment="Закрыть кран 12" />
+		<Field Name="Kr12_ON" Type="BOOL" UUID="B7F030D7CDA74B7DA4CFA3BD4301EC2C" Comment="Открыть кран 12" />
+		<Field Name="KE5_OF" Type="BOOL" UUID="D87FB78A7FE24E73BF0047FBEA60AEEE" Comment="Клапан шаровой  КШЭ5 закрыть" />
+		<Field Name="KE5_Stop" Type="BOOL" UUID="A5AF6BD84A454CFA9C1B5FA8F2A9AD8D" Comment="Клапан шаровой  КШЭ5 стоп" />
+		<Field Name="KE5_av" Type="BOOL" UUID="F605B81F60DC44BBA1BCE096256C01B0" Comment="Клапан шаровой  КШЭ5, авария" />
+		<Field Name="Res_4" Type="BOOL" UUID="FF778FA7ED0E4040B21D7F808752BE61" Comment="Резерв" />
+		<Field Name="Res_5" Type="BOOL" UUID="58386F8735F140029DA35038F38B5C66" Comment="Резерв" />
+		<Field Name="Res_6" Type="BOOL" UUID="A0F8EFD918974878A2F385614F2BC23C" Comment="Резерв" />
+		<Field Name="Res_7" Type="BOOL" UUID="66C01F9BEE384CF6BFE30C6D421B78B3" Comment="Резерв" />
+		<Field Name="Res_8" Type="BOOL" UUID="E63FD89AE29E402687FF4E4B7E3A0608" Comment="Резерв" />
+		<Field Name="Res_9" Type="BOOL" UUID="E4930395AD24439E9940BC4C2F4BE0C6" Comment="Резерв" />
+		<Field Name="U_SPV_ON" Type="BOOL" UUID="A61692C7D3924C15892DEC9BE7F4B780" Comment="Подать питание СПВ" />
+		<Field Name="PNSD_ON" Type="BOOL" UUID="471AF91AE4124D14A25C4312BF60D942" Comment="Включить насос смазки пусковой ГТД" />
+		<Field Name="PNSR_ON" Type="BOOL" UUID="2811598850F84A878E4861D60B034D0A" Comment="Включить эл. насос предпусковой прокачки масла (НПМ) редуктора" />
+		<Field Name="PNSN_ON" Type="BOOL" UUID="039D5DEBF75D464AA8AD3577DEAA7CA5" Comment="Включить пусковой насос НППМК компрессора" />
+		<Field Name="KE3_1_ON" Type="BOOL" UUID="8F30FD1B794E43319C2855B5C6CFE27A" Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-1)" />
+		<Field Name="KE3_2_ON" Type="BOOL" UUID="AA0265C37C964E538735754E519D773C" Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-2)" />
+		<Field Name="KE3_3_ON" Type="BOOL" UUID="4432ACD38009465AB3EF7D603C4D5AB5" Comment="Открыть клапан электромагнитный КЛЭ3 (КЛЭ3-3)" />
+		<Field Name="KE5_ON" Type="BOOL" UUID="4AA12ADDAAA94FDD8CAE0AE341634114" Comment="Открыть клапан шаровой с электроприводом КШЭ5" />
+		<Field Name="KLE5_ON" Type="BOOL" UUID="69D12730316147DDA55AFFAC678EAB7F" Comment="Открыть клапан электромагнитный КЛЭ5" />
+		<Field Name="Res_11" Type="BOOL" UUID="D66036C95AC74621AD9E0EDFEC6E7D2E" Comment="Резерв" />
+		<Field Name="Res_12" Type="BOOL" UUID="4289421CCCD343A79F7FCF9BC9CF0E3F" Comment="Резерв" />
+		<Field Name="Res_13" Type="BOOL" UUID="85ACA3A5BDC94061BCF9A90BF6E8B068" Comment="Резерв" />
+		<Field Name="Res_14" Type="BOOL" UUID="94B7B06EB9EF4142BC5B6BCCBE6AD281" Comment="Резерв" />
+		<Field Name="KLR2_D" Type="BOOL" UUID="2C64128FF080468B9B10D4AC596A3C8F" Comment="Клапан КлР2 дискретное управление" />
+		<Field Name="VNA_Permit" Type="BOOL" UUID="F2CC18AC54C34CBBBC5EBC9D7B7021A3" Comment="Разрешение на управление ВНА" />
+		<Field Name="PLC_ok" Type="BOOL" UUID="0F13CCAB2CDB4231A3A868D56BE6F59D" Comment="Исправность ПЛК" />
+	</Fields>
+</Type>

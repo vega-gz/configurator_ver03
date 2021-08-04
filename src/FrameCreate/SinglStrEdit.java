@@ -36,32 +36,34 @@ import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class SinglStrEdit  extends javax.swing.JFrame{
-    MyTableModel tableModel;
-    int[] colsWidth;
-    int curr=0;
-    JTextField number = new JTextField();
-    int qCols;
-    int qRows;
-    JTextField[] field;
-    JLabel[] labels;
-    String title;
-    JTable jTable1;
-    JScrollPane jScrollPane1=null;
-    JButton shiftL;
-    JButton shiftR;
-    JButton start;
-    JButton end;
-    JButton save;
-    int labLen = 0;
-    int fieldLen = 0;
-    SimpleTable st; // Нужно выяснить какая таблица
-    int H_SIZE = 20;
-    int H_GAP = 2;
-    String relatedTable=null;
+    private DefaultTableModel tableModel; // было MyTableModel пробую рефакторить
+//    private MyTableModel tableModel;
+    private int[] colsWidth;
+    private int curr=0;
+    private JTextField number = new JTextField();
+    private int qCols;
+    private int qRows;
+    private JTextField[] field;
+    private JLabel[] labels;
+    private String title;
+    private JTable jTable1;
+    private JScrollPane jScrollPane1=null;
+    private JButton shiftL;
+    private JButton shiftR;
+    private JButton start;
+    private JButton end;
+    private JButton save;
+    private int labLen = 0;
+    private int fieldLen = 0;
+    private SimpleTable st; // Нужно выяснить какая таблица
+    private int H_SIZE = 20;
+    private int H_GAP = 2;
+    private String relatedTable=null;
     private DefaultTableModel modelBase;
     
     // --- Фрейм работа с строкой таблицы (тут же и уставки)---
-    public SinglStrEdit(MyTableModel tableModel, String title, String nameTableSignal, ArrayList<JFrame> listJF) {
+//    public SinglStrEdit(MyTableModel tableModel, String title, String nameTableSignal, ArrayList<JFrame> listJF) { // зачем мы передаем лист с фреймами? 
+    public SinglStrEdit(MyTableModel tableModel, String title, String nameTableSignal) {
         Container container = this.getContentPane();
         container.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT); 
         int gpw = 0;
@@ -115,11 +117,9 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         String nodeName = title.substring(x+1);
         
         // Уставки из отдельной таблицы
-//        String table_name = "SignalSetups";
-//        NZDefaultTableModel madelTable = new NZDefaultTableModel(globVar.DB.getData(table_name), globVar.DB.getListColumns(table_name), table_name);
-//        DefaultTableModel modelBase = new ConnectBaseTable(madelTable);
         modelBase = new ConfigSignalsTableModel(title);
         jTable1 = new JTable(modelBase);
+        
         globVar.nameTableSignal = nameTableSignal;
         globVar.currentSetupsSignal = title;
         InterfacePopmenu popupMenu = new PopUpMenuJtableSetupsSignal();
@@ -255,7 +255,9 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     public void numberFocusLost(FocusEvent e) {
         if(!e.isTemporary()){
             int i = Integer.parseInt(e.getComponent().getName());
-            if(i>0) tableModel.setValueAt(field[i].getText(), curr, i);
+            if(i>0){
+                tableModel.setValueAt(field[i].getText(), curr, i);
+            }
         }
     }   
     
@@ -266,9 +268,16 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         }else curr = j;
         number.setText(""+(curr+1));
         if(title!=null) this.setTitle(title + ": "+(curr+1));
-        for(int i=1; i<qCols; i++)
-            field[i].setText(tableModel.getValueAt(curr, i));
-        if(st!=null) st.reSetTableContent(tableModel.getValueAt(curr, 2));//"TAG_NAME_AnPar",
+        for(int i=1; i<qCols; i++){
+            field[i].setText((String) tableModel.getValueAt(curr, i));
+        }
+        String namePLC = (String) tableModel.getValueAt(curr, 2);
+        //if(st!=null) st.reSetTableContent(namePLC);//"TAG_NAME_AnPar",
+        
+        // обновить данные в таблице уставок
+        modelBase = new ConfigSignalsTableModel(namePLC);
+        jTable1.setModel(modelBase);
+        modelBase.fireTableDataChanged();
     }
     
     private void shiftLActionPerformed(java.awt.event.ActionEvent evt) {  

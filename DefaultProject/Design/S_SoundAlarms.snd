@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Sound >
+<Configuration>
+	<FileList>
+		<File SignalUUID="FOQOUSHRBQZUVDY5WQPJ6DJTWE" Path="Alarm2.wav" />
+		<File SignalUUID="4ZDXETI27UQUBBAHLWEAZXRUCI" Path="Crash2.wav" />
+	</FileList>
+</Configuration>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_BK_mb_DO_DRV" UUID="B8E4F93380374361AE14C3F30899A764">
+<Fields>
+<Field Comment="Выбрать первую линию основной" Name="Set_first_line" Type="BOOL" UUID="2D66E352F3FA467EBB4DD76A2A2DB536"/>
+<Field Comment="Выбрать вторую линию основной" Name="Set_second_line" Type="BOOL" UUID="3EA7C3F9EBC54F68BD5304ABF91CAF9B"/>
+<Field Comment="Включить горяее резервирование" Name="Set_reservation_on" Type="BOOL" UUID="D02760B84EB94F36A0CE1D0476CA47FD"/>
+<Field Comment="Запустить станцию" Name="Set_station_on" Type="BOOL" UUID="046EAD047595499081A6E127B3DB9700"/>
+<Field Comment="Остановить станцию" Name="Set_station_off" Type="BOOL" UUID="B3FA911F52DF488D8C1217E6737810DC"/>
+</Fields>
+</Type>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="InitFR">
+	<Items>
+		<Item Name="GPA6_InitFR.int"/>
+		<Item Name="GPA4_InitFR.int"/>
+		<Item Name="GPA5_InitFR.int"/>
+	</Items>
+</Folder>

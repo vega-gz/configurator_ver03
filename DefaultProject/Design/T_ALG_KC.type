@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ALG_KC" Kind="Struct" UUID="2C1B15F34991A45B8C2E24BACCE1126A">
+	<Fields>
+		<Field Name="noActivMode" Type="BOOL" UUID="5F5B28846F4F3484B8F7DA91C747DA73" />
+		<Field Name="Unlock" Type="BOOL" UUID="11D3997549753A8F0271858F8E09A4D6" />
+		<Field Name="AOss" Type="BOOL" UUID="5AE2936041C37FC969A721879AAE1AD0" />
+		<Field Name="AObs" Type="BOOL" UUID="911FC582466BFCD6E190F99E255D820E" />
+		<Field Name="Fire" Type="BOOL" UUID="07837FFA4CAE430F0A690CA6E1C56BFB" />
+		<Field Name="condReserve" Type="BOOL" UUID="66282C16435D86399B882B906A748CBE" />
+		<Field Name="g_inLoop" Type="BOOL" UUID="BFBC65C549625C0153113DB7946123DD" />
+		<Field Name="not_g_inLoop" Type="BOOL" UUID="2CD7FBA34890F4D9C0735E8FA62C909B" />
+		<Field Name="Gas_GPA_more2" Type="BOOL" UUID="57C882514F41B74287BF3CA2C378AB71" Comment="Загазованность на двух и более ГПА" />
+		<Field Name="Fire_GPA_more2" Type="BOOL" UUID="998EEEED486FDD57696BB2AB43364240" Comment="Пожар двух и более ГПА" />
+		<Field Name="Fire_object_more2" Type="BOOL" UUID="D83145EC4114E9940F15DBB844F17AB2" Comment="Пожар в двух и более помещениях (объектах)" />
+		<Field Name="Inject" Type="BOOL" UUID="380575E844E06844A59A0298E0C19BFF" Comment="Закачка" />
+		<Field Name="Extract" Type="BOOL" UUID="FC38D8FC484DFB879BE5A7A00380D3E0" Comment="Отбор" />
+		<Field Name="Inject_Kr" Type="BOOL" UUID="C78622F0489E0C4FA67ACD8A5152C9BF" Comment="Положение кранов при режиме &quot;Закачка&quot;" />
+		<Field Name="Extract_Kr" Type="BOOL" UUID="B2E4F6ED46AB395395089B9E4FAD3246" Comment="Положение кранов при режиме &quot;Отбор&quot;" />
+		<Field Name="Kn_AOss_HMI" Type="BOOL" UUID="D3C9AAA94704C25B046D4A8053415D21" Comment="Кнопка АОсс со Скады" />
+		<Field Name="Kn_AObs_HMI" Type="BOOL" UUID="FEBCA47043B20E5F96FCD0BE6E6A5BC5" Comment="Кнопка АОбс со Скады" />
+		<Field Name="Gasmain_in_KC_brk" Type="BOOL" UUID="A48FA5EB4013379BDCD90BB3F5672040" Comment="Прорыв трубопровода на входе в КЦ" />
+		<Field Name="Gasmain_out_KC_brk" Type="BOOL" UUID="F4566CA241D352D413CA3280B83893B9" Comment="Прорыв трубопровода на выходе в КЦ" />
+		<Field Name="Kr51_selfON" Type="BOOL" UUID="2A5E1C364A5C6E13248E6F9BCB38ACE8" Comment="Самопроизвольное открытие Крана 51" />
+		<Field Name="Kr51_selfOF" Type="BOOL" UUID="55BED9A140D4998AE784238A3C586413" Comment="Самопроизвольное закрытие Крана 51" />
+		<Field Name="Kr52_selfON" Type="BOOL" UUID="2421A4ED49732F43215B8981B2F17114" Comment="Самопроизвольное открытие Крана 52" />
+		<Field Name="Kr52_selfOF" Type="BOOL" UUID="0BC4BF764F614A86F3CB0381983FE52C" Comment="Самопроизвольное закрытие Крана 52" />
+		<Field Name="Kr53_selfON" Type="BOOL" UUID="9C1C1E1847CDAFA1819EDC8D2090F3D4" Comment="Самопроизвольное открытие Крана 53" />
+		<Field Name="Kr53_selfOF" Type="BOOL" UUID="688F59004A6138FAFE2E4286B6ABE5AA" Comment="Самопроизвольное закрытие Крана 53" />
+		<Field Name="Kr53bp_selfON" Type="BOOL" UUID="C40B34384F98757510272BA03CB89906" Comment="Самопроизвольное открытие Крана 53бп" />
+		<Field Name="Kr53bp_selfOF" Type="BOOL" UUID="B06CCB4140A9374625F4C5B12615E0C2" Comment="Самопроизвольное закрытие Крана 53бп" />
+		<Field Name="Kr54_selfON" Type="BOOL" UUID="472511B146D5407E01013E84DAE6F22C" Comment="Самопроизвольное открытие Крана 54" />
+		<Field Name="Kr54_selfOF" Type="BOOL" UUID="375EC4BB41F93F26D9394EAECECF0BA2" Comment="Самопроизвольное закрытие Крана 54" />
+		<Field Name="Kr54bp_selfON" Type="BOOL" UUID="C682EB4847AE3659A035D19C6CCD7943" Comment="Самопроизвольное открытие Крана 54бп" />
+		<Field Name="Kr54bp_selfOF" Type="BOOL" UUID="22363A444F063EB381766FB6163B4E3B" Comment="Самопроизвольное закрытие Крана 54бп" />
+		<Field Name="Lf_R1_v" Type="BOOL" UUID="4FB51E04439CE473421AF5BF9A2251FB" Comment="Верхний уровень в Р1 для дизтоплива, поз.LSA1" />
+		<Field Name="Lf_R2a_v" Type="BOOL" UUID="54393A634FFCB8C3DAD572B19AF504C2" Comment="Верхний уровень в Р2 для аварийного слива топлива, поз.LSA3" />
+		<Field Name="Lf_R1_n" Type="BOOL" UUID="A61CCAC748BC37B47FEAD9A9AC7EF7D5" Comment="Нижний уровень в Р1 для дизтоплива, поз.LSA2" />
+		<Field Name="Fire_in_GPA" Type="BOOL" UUID="700535444B3B0F0715BAC1BE11CFC17F" Comment="Пожар ГПА" />
+		<Field Name="AO" Type="BOOL" UUID="HP7PAPHYPDIUNDFWBPNYUE3CCI" Comment="Обобщённый АО" />
+		<Field Name="GPA1_CntrlSumm1" Type="REAL" UUID="IX5YK7G4OIAUVGT75YU2ZGX4T4" Comment="Контрольная сумма 1 ГПА1 (для диагностики связи)" />
+		<Field Name="GPA1_CntrlSumm2" Type="REAL" UUID="CV5ZBRFXPEEUPCCDDPN36TQ26A" Comment="Контрольная сумма 2 ГПА1 (для диагностики связи)" />
+		<Field Name="GPA1_NoLink" Type="BOOL" UUID="UCJ3FQOFYL7ENGAO32RLWHJDUU" Comment="Нет связи с ГПА1" />
+		<Field Name="GPA2_CntrlSumm1" Type="REAL" UUID="WEZMSMQVJWFUFP2LU74RXV3XSU" Comment="Контрольная сумма 1 ГПА2 (для диагностики связи)" />
+		<Field Name="GPA2_CntrlSumm2" Type="REAL" UUID="BXYYRZU2LXZEPNOYE4MHHEUQRQ" Comment="Контрольная сумма 2 ГПА2 (для диагностики связи)" />
+		<Field Name="GPA2_NoLink" Type="BOOL" UUID="W3LP3JPXLMDUDFTDW4WCH4V7WA" Comment="Нет связи с ГПА2" />
+		<Field Name="GPA3_CntrlSumm1" Type="REAL" UUID="TLY33VTN57FU5PTQBSRY4JTI3Q" Comment="Контрольная сумма 1 ГПА3 (для диагностики связи)" />
+		<Field Name="GPA3_CntrlSumm2" Type="REAL" UUID="MXSUOBGYAPLUXI7G5XODG3Q554" Comment="Контрольная сумма 2 ГПА3 (для диагностики связи)" />
+		<Field Name="GPA3_NoLink" Type="BOOL" UUID="USK33FFMB33EBMHKMZCAV5TR7I" Comment="Нет связи с ГПА3" />
+		<Field Name="UPTIG_CntrlSumm1" Type="REAL" UUID="ZYUP76ZEBFTUJIHUSBRHMTFKPM" Comment="Значение контрольного параметра 1 УПТИГ (для диагностики связи)" />
+		<Field Name="UPTIG_CntrlSumm2" Type="REAL" UUID="IV2IG3ZJ3TJUFHENWXIJIZXCJU" Comment="Значение контрольного параметра 2 УПТИГ (для диагностики связи)" />
+		<Field Name="UPTIG_NoLink" Type="BOOL" UUID="BCHWL6VITNIUPL6OQXBGPN6EDE" Comment="Нет связи с УПТИГ" />
+		<Field Name="UZRG_CntrlSumm1" Type="REAL" UUID="OGOR3KQJZA7U7BVZKFYHUIKAK4" Comment="Значение контрольного параметра 1 УЗРГ (для диагностики связи)" />
+		<Field Name="UZRG_CntrlSumm2" Type="REAL" UUID="ULMMC6H4UZJURO5XL6FIMTQXFA" Comment="Значение контрольного параметра 2 УЗРГ (для диагностики связи)" />
+		<Field Name="UZRG_NoLink" Type="BOOL" UUID="VJIMXLNVDYQEZP43CSEE6ZD7QE" Comment="Нет связи с УЗРГ" />
+		<Field Name="UNTS_CntrlSumm1" Type="REAL" UUID="AIMNI2C5BR2ERKZZHZB6EFLVRY" Comment="Значение контрольного параметра 1 УНТС (для диагностики связи)" />
+		<Field Name="UNTS_CntrlSumm2" Type="REAL" UUID="6FBNIQIK6NJEVD6SEBKXCYVUZU" Comment="Значение контрольного параметра 2 УНТС (для диагностики связи)" />
+		<Field Name="UNTS_NoLink" Type="BOOL" UUID="FRT3CCVG7RIUBA5SDCLYJUU4OQ" Comment="Нет связи с УНТС" />
+		<Field Name="UPOU_CntrlSumm1" Type="REAL" UUID="PTEM2VN62WMUBHTJHXRSVS6E5A" Comment="Значение контрольного параметра 1 УПОУ (для диагностики связи)" />
+		<Field Name="UPOU_CntrlSumm2" Type="REAL" UUID="6DKCGFRNU6JEVLXZW32A7E7PGQ" Comment="Значение контрольного параметра 2 УПОУ (для диагностики связи)" />
+		<Field Name="UPOU_NoLink" Type="BOOL" UUID="UJI2CW24FTTEVG33VY567SLQUA" Comment="Нет связи с УПОУ" />
+		<Field Name="NM_CntrlSumm1" Type="REAL" UUID="FAYQT6RGOLIU7LHSYX5PTI5R5Y" Comment="Значение контрольного параметра 1 НМ (для диагностики связи)" />
+		<Field Name="NM_CntrlSumm2" Type="REAL" UUID="HUAPWJCYW67ETKASFJHBMSQEN4" Comment="Значение контрольного параметра 2 НМ (для диагностики связи)" />
+		<Field Name="NM_NoLink" Type="BOOL" UUID="SHFESO3YSVGUXPPGD27WXIDIHE" Comment="Нет связи с НМ" />
+		<Field Name="GSM_CntrlSumm1" Type="REAL" UUID="3TSURDALISOE3A7EE2K5SWVKLQ" Comment="Значение контрольного параметра 1 ГСМ (для диагностики связи)" />
+		<Field Name="GSM_CntrlSumm2" Type="REAL" UUID="PJWFIX5HLXCEBIH32USRG7UFJU" Comment="Значение контрольного параметра 2 ГСМ (для диагностики связи)" />
+		<Field Name="GSM_NoLink" Type="BOOL" UUID="MIWVNKHFBXFETOCN5G7NOAFJH4" Comment="Нет связи с ГСМ" />
+		<Field Name="KOS_CntrlSumm1" Type="REAL" UUID="5XVQFJBHFHAETOHA5GBR4DJ6OE" Comment="Значение контрольного параметра 1 КОС (для диагностики связи)" />
+		<Field Name="KOS_CntrlSumm2" Type="REAL" UUID="LQG4G7NPECXENIGBYWDBQC7HEI" Comment="Значение контрольного параметра 2 КОС (для диагностики связи)" />
+		<Field Name="KOS_NoLink" Type="BOOL" UUID="RA5L25CHGOYEDDDGUQCQ3SSRXU" Comment="Нет связи с КОС" />
+		<Field Name="VOS_CntrlSumm1" Type="REAL" UUID="OEKDJC744KNERDT4YUSDRPP6KE" Comment="Значение контрольного параметра 1 ВОС (для диагностики связи)" />
+		<Field Name="VOS_CntrlSumm2" Type="REAL" UUID="FU7MXQN7LMTUXKESUMEGXTIRKE" Comment="Значение контрольного параметра 2 ВОС (для диагностики связи)" />
+		<Field Name="VOS_NoLink" Type="BOOL" UUID="J4HFJ3AQTV7EVIL4HDCAIKX5SY" Comment="Нет связи с ВОС" />
+	</Fields>
+</Type>

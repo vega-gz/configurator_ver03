@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_NKU_mb_DO_ToHMI" UUID="6F433DEFDF0140BAABC31DF36EC003F2">
+<Fields>
+<Field Comment="Электронагреватель Е1-3 воздуха укрытия поршневого компрессора. Включить" Name="EN13_Ukr_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="641FEDA8F398492985B5BDC06942EF68"/>
+<Field Comment="Электронагреватель Е4-6 воздуха укрытия поршневого компрессора. Включить" Name="EN46_Ukr_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="13059A4F9ADE40E492DCD2774E8D36FF"/>
+<Field Comment="Электронагреватель Е7-9 воздуха укрытия поршневого компрессора. Включить" Name="EN79_Ukr_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="77ADB9834FC44A47A838E15E39A016AF"/>
+<Field Comment="Резерв (нагреватель). Включить" Name="Res_0" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="2FEDB75E3CE444F38E7F9E4D8BCC7FF5"/>
+<Field Comment="Резерв (нагреватель). Включить" Name="Res_1" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="55CDE7C5B1714EC59D133163B870B89E"/>
+<Field Comment="Электронагреватель маслобака ГТД. Включить" Name="TEN_MBD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="308C2A6140B44888B10E2A041F4C59AA"/>
+<Field Comment="Резерв (нагреватель). Включить" Name="Res_2" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="1CB5B17AE7B74758A65CAE6A392365BC"/>
+<Field Comment="Обогрев блока электротехнического EK1. Включить" Name="EK1_ETO_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="B046C315B49D4316966D050AC0759D17"/>
+<Field Comment="Обогрев блока электротехнического EK2. Включить" Name="EK2_ETO_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="F988A94CC937417E95F81DB6A8803D7F"/>
+<Field Comment="Обогрев блока электротехнического EK3. Включить" Name="EK3_ETO_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="70879E008F2C4602818C66A4E919314E"/>
+<Field Comment="Нагреватель воздуха блока ГТД. Включить" Name="EN_OD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="9D6B4537A33640F7BD5D28FEECCB2FDF"/>
+<Field Comment="Резерв" Name="Reserv_11" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="052A0D0CC688430E9F7CC471615D06F1"/>
+<Field Comment="Валоповоротное устройство редуктора. Пуск" Name="VPU_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="CFF806E368004E9C8750974DB9CC1DB8"/>
+<Field Comment="Вентилятор калорифера МО ГТД. Пуск" Name="Vk_MOD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="76EFC5D584094FA595B781B065CD80B4"/>
+<Field Comment="Вентилятор 1 калорифера МО редуктора. Пуск" Name="Vk1_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="2EA8BF75D6674A6DAD60D47D7D5EC174"/>
+<Field Comment="Вентилятор калорифера МО компрессора. Пуск" Name="Vk_MON_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="0376ADDD5472416DA16B796816A93AD7"/>
+<Field Comment="Вентилятор охлаждения ангара. Пуск" Name="Vn_ang_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="73408CC470E843A49892EB991CFBA0D5"/>
+<Field Comment="Насос прокачки маслосистемы ГТД. Пуск" Name="CNSD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="A77E70D248C64F7185A8C6EDE07B05D0"/>
+<Field Comment="Кран прокачки маслосистемы ГТД. Открыть" Name="KPMD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="8ADF1F9F56784346B0419C109FFB8AF9"/>
+<Field Comment="Кран прокачки маслосистемы ГТД. Закрыть" Name="KPMD_OF" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="6154540F28F745B6B5A3AE41D43E6E64"/>
+<Field Comment="Заслонка защиты ГТД от обледенения. Открыть" Name="ZsZO_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="12D43996DBF54E2296AED185BDB0B221"/>
+<Field Comment="Заслонка защиты ГТД от обледенения. Закрыть" Name="ZsZO_OF" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="10ED2B8067E94A3096CE7EBFDEDCF79E"/>
+<Field Comment="Резерв (Кран). Открыть" Name="Res_4" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="A4CADF43D69B41A993F8D8BB3B9E06B7"/>
+<Field Comment="Резерв (Кран). Закрыть" Name="Res_5" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="670779494B8444258AD0EDBEA043CD18"/>
+<Field Comment="Вентилятор 2 калорифера МО редуктора. Пуск" Name="Vk2_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="0B19BFD7D7EA47B1945BFDA16093C766"/>
+<Field Comment="Насос масла циркуляционный редуктора (М16). Пуск" Name="CNR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="4C65E1289DA342E98308A8E2F7BC654B"/>
+<Field Comment="Вентилятор 3 МО редуктора. Пуск" Name="Vn3_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="E7CA58EAC6AE4624845E9CEFDBADBA1D"/>
+<Field Comment="Вентилятор 4 МО редуктора. Пуск" Name="Vn4_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="B58F8B30E64048DA907708C262B05A25"/>
+<Field Comment="Резерв (аппарат). Пуск" Name="Res_6" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="4714F0489C73456D8AB9BC407776BDBE"/>
+<Field Comment="Резерв (аппарат). Пуск" Name="Res_7" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="94BF3969DF764D4B84167CD7203CD9F0"/>
+<Field Comment="Резерв (аппарат). Пуск" Name="Res_8" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="718F0CA115E247549FDDAA0672D8D549"/>
+<Field Comment="Резерв (аппарат). Пуск" Name="Res_9" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="882EE5645962492585F939DDAB6E6650"/>
+<Field Comment="Клапан подогрева масла компрессора. Включить" Name="KPMN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="4B572DFE1AB44B139AD6037CAFD77CF1"/>
+<Field Comment="Клапан долива масла в маслобак компрессора. Включить" Name="KDMN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="FF38A53FF2A74223A8FDE175C7657045"/>
+<Field Comment="Клапан предпусковой прокачки масла компрессора. Включить" Name="KPPMN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="6B4C1E60869D420683F3D741315DBB73"/>
+<Field Comment="Клапан байпасса аппарата воздушного охлаждения масла компрессора. Включить" Name="KBMN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="543B8DA80C6A44198A434A56C4DC67D9"/>
+<Field Comment="Клапан подачи воздуха с ресивера для нужд компрессора. Включить" Name="KVRN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="CA5CFC3952AB412883D94DCD978BBAEA"/>
+<Field Comment="Питание клапана КлР 1.1 Э5. Включить" Name="U_KLR1_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="B6F5291AF1CD4428B69BE8A82D8BC7F9"/>
+<Field Comment="Питание клапана КлР 2.1 Э5. Включить" Name="U_KLR2_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="2609316B3833486BA4AE1B092D402F9E"/>
+<Field Comment="Питание клапана КШЭ5.1.1 Э5. Включить" Name="U_KE5_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="8A761EB180784113A771E25458EFD07A"/>
+<Field Comment="Клапан долива масла в маслобаке лубрикаторной системы. Включить" Name="KDML_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="893E9BEDE4634CD480C75EC0EEA87583"/>
+<Field Comment="Ввод для питания стартера. Включить" Name="NKU_GPA_Q_ES_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="467C768B4D234229959DB3756C1FB965"/>
+<Field Comment="Освещение дверей (уличное). Включить" Name="Lamp_Dver_out_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="FB3E1508FBA04160838652EB2D0D80E7"/>
+<Field Comment="Освещение ангара. Включить" Name="Lamp_ang_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="C4E4DFB7AD124C4998BCE0DD78424A3A"/>
+<Field Comment="Освещение блока ГТД. Включить" Name="Lamp_OD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="25B5E26C221D469281B38F8E2A0DEEB6"/>
+<Field Comment="Освещение ВОУ. Включить" Name="Lamp_VOU_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="9D483314DF4246B7BB0747A340E01479"/>
+<Field Comment="Освещение дверей уличное (блока электротехнического) EL5, EL6. Включить" Name="Lamp_Dver_ETO_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="2C35FA02066D4D30A4BC353EAFE00776"/>
+<Field Comment="Освещение блока электротехнического (рабочее) EL1...EL4. Включить" Name="Lamp_ETO_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="F0120AD3CFBF466A9051DE6C44827DB8"/>
+<Field Comment="Электронагреватель кровли ангара. Включить" Name="EN_ang_krovl_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="FAE865DCDBEE4E8DB3A26247DA930DAB"/>
+<Field Comment="Резерв" Name="Res_10" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="7B3EA6C02875467F944E6BE6307F88D6"/>
+<Field Comment="Резерв (освещение). Включить" Name="Res_11" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="A109969EA4CE4B33BF0271F81A3B3F35"/>
+<Field Comment="Электронагреватели шкафов КИПиА. Включить" Name="EN_SHK_KIP_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="885CD0AAEFE94590B16EBE92AD4BA2E9"/>
+<Field Comment="Электрообогрев воздухопроводов трубопровод ФС1. Включить" Name="EN_Pipe_FS1_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="060B75417E444D898B5A7D414F668FD2"/>
+<Field Comment="Электрообогрев воздухопроводов трубопровод ФС2. Включить" Name="EN_Pipe_FS2_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="7ADCED5B8F2946E1BF3DC290D1194819"/>
+<Field Comment="Электрообогрев воздухопроводов трубопровод ФС3. Включить" Name="EN_Pipe_FS3_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="45139FCC96E64D75A7604B06570CE7CB"/>
+<Field Comment="Электрообогрев воздухопроводов трубопровод №9, №10. Включить" Name="EN_Pipe9_10_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="B27AFFD220214A58A8881AFCF4D7B679"/>
+<Field Comment="Электронагреватель трубопроводов маслосистемы ГТД (вне помещений). Включить" Name="EN_Pipe_GTD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="76E54E2C6DD442A28237BF37F587E32B"/>
+<Field Comment="Электронагреватели клапанов вентиляции турбоблока. Нагреватели клапанов байпасных ВОУ. Нагреватель расходомера воздуха. Нагреватели клапанов ангара. Включить" Name="EN_Kl_Vn_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="D9A9F8E851D642CC8B6E89901DA03407"/>
+<Field Comment="Электронагреватель 1 МО редуктора. Включить" Name="TEN1_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="7A8B12879C3147F280C35E41F9CFA621"/>
+<Field Comment="Электронагреватель МО компрессора. Включить" Name="TEN_MON_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="167EB75079214907BF34460C69FB177B"/>
+<Field Comment="Электронагреватель 2 МО ГТД. Включить" Name="TEN2_MOD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="9ACDC03A940642FEA85F1CCC6274AE6F"/>
+<Field Comment="Электронагреватель № 1 маслобака компрессора. Включить" Name="TEN1_MBN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="90DF4FDA892244E89BBD3FED1826861C"/>
+<Field Comment="Электронагреватель № 2 маслобака компрессора. Включить" Name="TEN2_MBN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="6ADE997AA4504252BCB1826EE311DC38"/>
+<Field Comment="Электронагреватель № 3 маслобака компрессора. Включить" Name="TEN3_MBN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="6181F445AB46402EA34BA6AD32B652B0"/>
+<Field Comment="Резерв. Включить" Name="Res_12" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="7072A54802864FC29F389F6DF19C435E"/>
+<Field Comment="Электрокалорифер отсека пожаротушения ГТД.  Включить" Name="EK_OPT_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="D17D8B3DB84A4CD29F7408ADE1D4696A"/>
+<Field Comment="Электронагреватель 1 масла в маслобаке редуктора.  Включить" Name="TEN1_MBR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="9216F959812345B5B1D49C60ADED3809"/>
+<Field Comment="Электронагреватель 2 масла в маслобаке редуктора.  Включить" Name="TEN2_MBR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="179C4C16A1F34499A42DBBDFFC13C47F"/>
+<Field Comment="Электронагреватель 3 масла в маслобаке редуктора.  Включить" Name="TEN3_MBR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="8D0BB1802D11474188F8082A9B8FA36D"/>
+<Field Comment="Электронагреватель 4 масла в маслобаке редуктора.  Включить" Name="TEN4_MBR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="9EAF1744D8844977A745B0C5E0E8E2B5"/>
+<Field Comment="Электронагреватель 2 МО редуктора.  Включить" Name="TEN2_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="FC558CC5A1734644A4406CD555D15500"/>
+<Field Comment="Резерв (нагреватель).  Включить" Name="Res_13" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="A44C46CBD44E4646AB85A2630D665F79"/>
+<Field Comment="Резерв (нагреватель).  Включить" Name="Res_14" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="D522D20DA04C4093B9EB11FCA09935CF"/>
+<Field Comment="Резерв (нагреватель).  Включить" Name="Res_15" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="5455832F01D54581802AA56A11055404"/>
+<Field Comment="Насос предпусковой прокачки масла компрессора.  Пуск" Name="PNSN_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="C72436D50CFC470B9A89F81EEB840812"/>
+<Field Comment="Резерв" Name="Res_16" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="F730A07506464556B9EC01BD0986C781"/>
+<Field Comment="Вентилятор 1 МО ГТД.  Пуск" Name="Vn1_MOD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="19175248A39D48A393AF9B6FF58479D8"/>
+<Field Comment="Вентилятор 2 МО ГТД.  Пуск" Name="Vn2_MOD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="D9AAC81B1B674130A34622983096E16E"/>
+<Field Comment="Вентилятор 1 МО редуктора.  Пуск" Name="Vn1_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="E116D06BBD3F4F72B3B817C865E52027"/>
+<Field Comment="Вентилятор 2 МО редуктора.  Пуск" Name="Vn2_MOR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="364984292F0742DBACBB1C6DFE997205"/>
+<Field Comment="Вентилятор 1 МО компрессора.  Пуск" Name="Vn1_MON_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="F39B99615ED245499CC434B60ABE3895"/>
+<Field Comment="Вентилятор 2 МО компрессора.  Пуск" Name="Vn2_MON_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="264F5B5CAC1443EE97917B9D31BEDB76"/>
+<Field Comment="Кран подачи/отсечки масла в ГТД. Открыть" Name="KOMD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="06E2E497A0CC421ABAC001CA905AC577"/>
+<Field Comment="Кран подачи/отсечки масла в ГТД. Закрыть" Name="KOMD_OF" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="769E630342124D97980BF92A3E692F63"/>
+<Field Comment="Насос пусковой масла редуктора М17. Пуск" Name="PNSR_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="D3DAF43068F74688A860FD31861A94D5"/>
+<Field Comment="Резерв" Name="Res_17" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="493C08CD1B844F38B9C92911ED93DF1F"/>
+<Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Пуск в режиме УПП" Name="CNVO_uppON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="B095AAB2E1394CFF9F9F4D7DCD892BD2"/>
+<Field Comment="Насос циркуляционный системы водяного охлаждения компрессора. Пуск в режиме БП" Name="CNVO_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="D869B4C0D6B84528819B9308CCE29CC3"/>
+<Field Comment="Вентилятор 1 трансмиссии ГТД. Пуск" Name="VOT1_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="4F00A6DBB1E8438DBA4EAAC8C7A2702C"/>
+<Field Comment="Вентилятор 2 трансмиссии ГТД. Пуск" Name="VOT2_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="B837A3D156ED4006ABF39F753C181C76"/>
+<Field Comment="Вентилятор аварийный блока ГТД. Пуск" Name="VA_OD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="8CDDC937FEAA47FD98D15F1300DEB9D4"/>
+<Field Comment="Вентилятор 1 блока ГТД. Пуск" Name="VOD1_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="B69B2275E9284F23A450DB8767DE47D7"/>
+<Field Comment="Вентилятор 2 блока ГТД. Пуск" Name="VOD2_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="AB688115EB02446F901721AB33D8B212"/>
+<Field Comment="Насос пусковой масла ГТД. Пуск" Name="PNSD_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="A3F82D188A914C5E855120D3C736C18C"/>
+<Field Comment="Драйкулер системы водяного охлаждения компрессора. Быстро" Name="Cooler_VON_Fast" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="A788A4437B154331B23C93F10120F6B3"/>
+<Field Comment="Драйкулер системы водяного охлаждения компрессора. Медленно" Name="Cooler_VON_Slow" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="2D9C975E072346798F5D230077E14CE9"/>
+<Field Comment="Резерв" Name="Res_18" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="114B851F1D274F4B8D5AB60E5E1820C3"/>
+<Field Comment="Резерв" Name="Res_19" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="66C51CFB90F34C65BB41A13AB7AD829F"/>
+<Field Comment="Вентилятор системы загазованности ангара. Пуск" Name="VVA_ang_ON" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="1004966F7F87463FA924EEE686579354"/>
+<Field Comment="Резерв (эл. двигатель). Пуск" Name="Res_20" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="EE3FF482A61D4C9A989093787D6D165B"/>
+<Field Comment="Резерв (эл. двигатель). Пуск" Name="Res_21" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="C64FB37F8DCA4E8F9A86FE8AE0E8033A"/>
+<Field Comment="Резерв (эл. двигатель). Пуск" Name="Res_22" Type="7474D14B284DB0A574420580A1FFD7C0" UUID="333CFE60A68546368FE3F3BA98A79C2F"/>
+</Fields>
+</Type>

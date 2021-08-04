@@ -1,0 +1,779 @@
+<Data>
+<Function UUID="TRBQ2TWLIBWXRPBJXGJW7NHQ3I" Name="Call_AI" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+        <Variables>
+            <Variable UUID="82129799472FD770F6DFF694CFA2D3AB" Name="repTime" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" Usage="internal" />
+        </Variables>
+        <ST><![CDATA[repTime := 3600;
+if not init then
+//------------------------------- аргументы функции инициализации --------------------------------
+// 1                                минимум шкалы канала, ед.изм. Не может быть >= max
+// 2                                |   максимум шкалы канала, ед.изм. Не может быть <= min
+// 3                                |   |   значение АЦП, соответствующее минимуму шкалы канала, б.р.
+// 4                                |   |   |   значение АЦП, соотв. макс. шкалы, б.р. Не может быть равно minADC
+// 5                                |   |   |   |     уровень зашкала вниз, ед.изм. Не может быть >= hiLim и < min
+// 6                                |   |   |   |     |    уровень зашкала вверх, ед.изм. Не может быть <= loLim и > max
+// 7                                |   |   |   |     |    |   уровень обрыва вниз, ед.изм. Не может быть >= loLim
+// 8                                |   |   |   |     |    |    |   уровень обрыва вверх, ед.изм. Не может быть <= hiLim
+// 9                                |   |   |   |     |    |    |   |  макс. допустимая скорость роста, ед.изм./сек. Если «0» - скорость роста не анализируется
+//10                                |   |   |   |     |    |    |   |   |   время восстановления после неисправности, сек. Не может быть меньше "0"
+//11                                |   |   |   |     |    |    |   |   |   |   максимальное время в ремонте, сек. Не может быть меньше или равно «0»
+//12                                |   |   |   |     |    |    |   |   |   |   |    тау фильтра, сек. Если «0» - фильтрация отсутствует
+//13                                |   |   |   |     |    |    |   |   |   |   |    |  номер по порядку	
+//AI_init(UPG_AI_Settings.Pg_in_UPG,0.0,6.0,2.0,10.0,-0.5,6.5,-1.0,7.0,0.0,1.0,3600,1.0,0);
+//-------------------------------------------------------------------------------------------
+//Начало сгенерированного кода AI_init
+//Резерв
+//AI_init(GPA_AI_Settings.Res_01, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 0);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_02, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 1);
+//Температура воздуха за компрессором
+AI_init(GPA_AI_Settings.Tv_outTK, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 2);
+//Температура выхлопных газов за СТ ГТД
+AI_init(GPA_AI_Settings.T_outST, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 3);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_0, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 4);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_1, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 5);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_2, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 6);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_3, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 0.4, 7);
+//Температура воздуха отсека ГТД
+AI_init(GPA_AI_Settings.Tv_OD, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 8);
+//Температура воздуха в укрытии компрессора
+AI_init(GPA_AI_Settings.Tv_ON, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 9);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_200, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 10);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_201, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 11);
+//Температура наружного воздуха
+AI_init(GPA_AI_Settings.T_atm, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 12);
+//Температура газа на входе в компрессор
+AI_init(GPA_AI_Settings.Tg_inN, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 13);
+//Температура газа на выходе первой ступени компрессора
+AI_init(GPA_AI_Settings.Tg_outNag1, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 14);
+//Температура газа на выходе компрессора
+AI_init(GPA_AI_Settings.Tg_outNag, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 15);
+//Температура газа на выходе из цилиндра 1 компрессора
+AI_init(GPA_AI_Settings.Tg_outN_C1, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 16);
+//Температура газа на выходе из цилиндра 2 компрессора
+AI_init(GPA_AI_Settings.Tg_outN_C2, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 17);
+//Температура газа на выходе из цилиндра 3 компрессора
+AI_init(GPA_AI_Settings.Tg_outN_C3, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 18);
+//Температура газа на выходе из цилиндра 4 компрессора
+AI_init(GPA_AI_Settings.Tg_outN_C4, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 19);
+//Температура газа на выходе из цилиндра 5 компрессора
+AI_init(GPA_AI_Settings.Tg_outN_C5, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 20);
+//Температура газа на выходе из цилиндра 6 компрессора
+AI_init(GPA_AI_Settings.Tg_outN_C6, -60.0, 180.0, -60.0, 180.0, -55.0, 182.5, -57.5, 185.0, 0.0, 5.0, repTime, 0.4, 21);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_202, -50.0, 100.0, -50.0, 100.0, -47.5, 102.5, -49.0, 104.5, 0.0, 5.0, repTime, 0.4, 22);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_203, -50.0, 100.0, -50.0, 100.0, -47.5, 102.5, -49.0, 104.5, 0.0, 5.0, repTime, 0.4, 23);
+//Температура масла смазки на входе в компрессор
+AI_init(GPA_AI_Settings.Tmsm_inN, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 24);
+//Температура масла смазки на выходе из компрессора
+AI_init(GPA_AI_Settings.Tmsm_outN, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 25);
+//Температура масла в подогревателе масла смазки компрессора
+AI_init(GPA_AI_Settings.Tmsm_TEN_N, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 26);
+//Температура охлаждающей жидкости на выходе драйкуллера
+AI_init(GPA_AI_Settings.T_freeze_outDC, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 27);
+//Температура охлаждающей жидкости в баке
+AI_init(GPA_AI_Settings.T_freeze_Bak, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 28);
+//Температура первичных утечек от сальников штока
+AI_init(GPA_AI_Settings.T_utech_salnik, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 29);
+//Температура коренного подшипника 1 компрессора
+AI_init(GPA_AI_Settings.T_KP1_N, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 30);
+//Температура коренного подшипника 1 компрессора (резерв)
+AI_init(GPA_AI_Settings.T_KP1_N_Res, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 31);
+//Температура коренного подшипника 2 компрессора
+AI_init(GPA_AI_Settings.T_KP2_N, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 32);
+//Температура коренного подшипника 2 компрессора (резерв)
+AI_init(GPA_AI_Settings.T_KP2_N_Res, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 33);
+//Температура коренного подшипника 3 компрессора
+AI_init(GPA_AI_Settings.T_KP3_N, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 34);
+//Температура коренного подшипника 3 компрессора (резерв)
+AI_init(GPA_AI_Settings.T_KP3_N_Res, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 35);
+//Температура коренного подшипника 4 компрессора
+AI_init(GPA_AI_Settings.T_KP4_N, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 36);
+//Температура коренного подшипника 4 компрессора (резерв)
+AI_init(GPA_AI_Settings.T_KP4_N_Res, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 37);
+//Температура коренного подшипника 5 компрессора
+AI_init(GPA_AI_Settings.T_KP5_N, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 38);
+//Температура коренного подшипника 5 компрессора (резерв)
+AI_init(GPA_AI_Settings.T_KP5_N_Res, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 39);
+//Температура коренного подшипника 6 компрессора
+AI_init(GPA_AI_Settings.T_KP6_N, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 40);
+//Температура коренного подшипника 6 компрессора (резерв)
+AI_init(GPA_AI_Settings.T_KP6_N_Res, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 41);
+//Температура опорного подшипника промежуточного вала со стороны компрессора (L213)
+AI_init(GPA_AI_Settings.T_POP_PromVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 42);
+//Температура опорного подшипника тихоходного вала со стороны компрессора (L111)
+AI_init(GPA_AI_Settings.T_POP_SlowVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 43);
+//Температура опорного подшипника промежуточного вала со стороны ГТД (L223)
+AI_init(GPA_AI_Settings.T_ZOP_PromVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 44);
+//Температура опорного подшипника тихоходного вала со стороны ГТД (L121)
+AI_init(GPA_AI_Settings.T_ZOP_SlowVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 45);
+//Температура упорного подшипника тихоходного вала со стороны компрессора  (L161)
+AI_init(GPA_AI_Settings.T_PUP_SlowVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 46);
+//Температура опорного подшипника быстроходного вала со стороны ГТД (L313)
+AI_init(GPA_AI_Settings.T_ZOP_FastVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 47);
+//Температура опорного подшипника быстроходного вала со стороны компрессора (L323)
+AI_init(GPA_AI_Settings.T_POP_FastVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 48);
+//Температура упорного подшипника тихоходного вала со стороны ГТД (L151)
+AI_init(GPA_AI_Settings.T_ZUP_SlowVal, -50.0, 150.0, 2.0, 10.0, -56.0, 156.0, -62.0, 162.0, 0.0, 5.0, repTime, 0.4, 49);
+//Температура 1 воздуха на входе в ГТД
+AI_init(GPA_AI_Settings.Tv1_inTK, -60.0, 250.0, 2.0, 10.0, -69.3, 259.3, -78.6, 268.6, 0.0, 5.0, repTime, 0.4, 50);
+//Температура 2 воздуха на входе в ГТД
+AI_init(GPA_AI_Settings.Tv2_inTK, -60.0, 250.0, 2.0, 10.0, -69.3, 259.3, -78.6, 268.6, 0.0, 5.0, repTime, 0.4, 51);
+//Температура масла на сливе из задней опоры ТК
+AI_init(GPA_AI_Settings.Tm_outZO_TK, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 52);
+//Температура масла на сливе из опор СТ
+AI_init(GPA_AI_Settings.Tm_outST, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 53);
+//Температура масла на сливе из коробки агрег. и  передней опоры ТК
+AI_init(GPA_AI_Settings.Tm_outPO_TK, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 54);
+//Температура упорного подшипника 1 компрессора (резерв)
+AI_init(GPA_AI_Settings.T1_UP_Kr, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 55);
+//Температура упорного подшипника 2 компрессора (резерв)
+AI_init(GPA_AI_Settings.T2_UP_Kr, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 56);
+//Температура упорного подшипника 1 компрессора
+AI_init(GPA_AI_Settings.T1_UP_K, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 57);
+//Температура упорного подшипника 2 компрессора
+AI_init(GPA_AI_Settings.T2_UP_K, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 58);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_14, -50.0, 250.0, 2.0, 10.0, -59.0, 259.0, -68.0, 268.0, 0.0, 5.0, repTime, 0.4, 59);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_15, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 60);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_16, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 61);
+//Температура масла на входе в редуктор
+AI_init(GPA_AI_Settings.Tm_inR, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 62);
+//Температура масла на выходе из редуктора
+AI_init(GPA_AI_Settings.Tm_outR, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 63);
+//Температура масла в маслобаке редуктора
+AI_init(GPA_AI_Settings.Tm_MBR, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 64);
+//Температура топливного газа перед ОГК 1
+AI_init(GPA_AI_Settings.Ttg_inSK, -60.0, 150.0, -60.0, 150.0, -55.0, 152.5, -57.5, 155.0, 0.0, 5.0, repTime, 0.4, 65);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_17, -50.0, 250.0, -50.0, 250.0, -47.5, 254.6, -49.0, 257.0, 0.0, 5.0, repTime, 0.4, 66);
+//Температура масла на входе в ГТД
+AI_init(GPA_AI_Settings.Tm_inD, -50.0, 250.0, -50.0, 250.0, -47.5, 254.6, -49.0, 257.0, 0.0, 5.0, repTime, 0.4, 67);
+//Температура масла в маслобаке ГТД
+AI_init(GPA_AI_Settings.Tm_MBD, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 68);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_204, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 69);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_205, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 70);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_18, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 71);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_19, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 72);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_20, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 73);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_21, -50.0, 150.0, -50.0, 150.0, -47.5, 152.5, -49.0, 155.0, 0.0, 5.0, repTime, 0.4, 74);
+//Давление газа на входе в компрессор
+AI_init(GPA_AI_Settings.Pg_inN, 0.0, 6.0, 2.0, 10.0, -0.18, 6.18, -0.36, 6.36, 0.0, 5.0, repTime, 0.4, 75);
+//Давление газа на выходе первой ступени компримирования
+AI_init(GPA_AI_Settings.Pg_outN1, 0.0, 16.0, 2.0, 10.0, -0.48, 16.48, -0.96, 16.96, 0.0, 5.0, repTime, 0.4, 76);
+//Давление газа на выходе компрессора
+AI_init(GPA_AI_Settings.Pg_outN, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 77);
+//Вибрация корпуса компрессора со стороны привода (горизонтальная составляющая) 
+AI_init(GPA_AI_Settings.Vs_ZONg, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 78);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_22, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 79);
+//Вибрация корпуса компрессора со стороны маслонасоса (горизонтальная составляющая)
+AI_init(GPA_AI_Settings.Vs_PONg, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 80);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_23, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 81);
+//Положение штока ВНА
+AI_init(GPA_AI_Settings.Pos_VNA_lvr, -40.0, 5.0, 2.0, 10.0, -41.35, 6.35, -42.7, 7.7, 0.0, 5.0, repTime, 0.4, 82);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_24, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 83);
+//Радиальное виброперемещение тихоходного вала (горизонтальная составляющая)
+AI_init(GPA_AI_Settings.Vp_rd_SlowVal_g, 0.0, 200.0, 2.0, 10.0, -6.0, 206.0, -12.0, 212.0, 0.0, 5.0, repTime, 0.4, 84);
+//Радиальное виброперемещение тихоходного вала (вертикальная составляющая)
+AI_init(GPA_AI_Settings.Vp_rd_SlowVal_v, 0.0, 200.0, 2.0, 10.0, -6.0, 206.0, -12.0, 212.0, 0.0, 5.0, repTime, 0.4, 85);
+//Аксиальное виброперемещение 1 тихоходного вала
+AI_init(GPA_AI_Settings.Vp_ax_SlowVal, -1.0, 1.0, 2.0, 10.0, -1.06, 1.06, -1.12, 1.12, 0.0, 5.0, repTime, 0.4, 86);
+//Аксиальное виброперемещение 2 тихоходного вала (резерв)
+AI_init(GPA_AI_Settings.Vp_ax_SlowVal_Res, -1.0, 1.0, 2.0, 10.0, -1.06, 1.06, -1.12, 1.12, 0.0, 5.0, repTime, 0.4, 87);
+//Радиальное виброперемещение быстроходного вала (горизонтальная составляющая)
+AI_init(GPA_AI_Settings.Vp_rd_FastVal_g, 0.0, 200.0, 2.0, 10.0, -6.0, 206.0, -12.0, 212.0, 0.0, 5.0, repTime, 0.4, 88);
+//Радиальное виброперемещение быстроходного вала (вертикальная составляющая)
+AI_init(GPA_AI_Settings.Vp_rd_FastVal_v, 0.0, 200.0, 2.0, 10.0, -6.0, 206.0, -12.0, 212.0, 0.0, 5.0, repTime, 0.4, 89);
+//Вибрация по переднему стоечному узлу ТК
+AI_init(GPA_AI_Settings.Vs_PO_TK, 0, 50.0, 2.0, 10.0, -0.47, 51.47, -1.94, 52.94, 0.0, 5.0, repTime, 0.4, 90);
+//Вибрация по задней опоре ротора ТК
+AI_init(GPA_AI_Settings.Vs_ZO_TK, 0, 50.0, 2.0, 10.0, -0.47, 51.47, -1.94, 52.94, 0.0, 5.0, repTime, 0.4, 91);
+//Вибрация по опоре ротора СТ 
+AI_init(GPA_AI_Settings.Vs_ST, 0, 50.0, 2.0, 10.0, -0.47, 51.47, -1.94, 52.94, 0.0, 5.0, repTime, 0.4, 92);
+//Давление масла на входе в компрессор после фильтров Ф1,Ф2
+AI_init(GPA_AI_Settings.Pm_inK_outF, 0.0, 1.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 93);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_207, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 94);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_208, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 95);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_209, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 96);
+//Давление масла смазки на входе в компрессор
+AI_init(GPA_AI_Settings.Pmsm_inN, 0.0, 0.6, 2.0, 10.0, -0.02, 0.62, -0.04, 0.64, 0.0, 5.0, repTime, 0.4, 97);
+//Давление масла в подогревателе масла смазки компрессора
+AI_init(GPA_AI_Settings.Pmsm_TEN_N, 0.0, 0.4, 2.0, 10.0, -0.01, 0.41, -0.02, 0.42, 0.0, 5.0, repTime, 0.4, 98);
+//Уровень масла в маслобаке Б1 компрессора
+AI_init(GPA_AI_Settings.Lm_MBN, 25.00, 600.00, 2.0, 9.8, 7.75, 617.25, -9.50, 634.50, 0.0, 5.0, repTime, 0.4, 99);
+//Давление воздуха управления РП компрессорных цилиндров компрессора
+AI_init(GPA_AI_Settings.Pv_uprRP_N, 0.0, 1.6, 2.0, 10.0, -0.05, 1.65, -0.1, 1.7, 0.0, 5.0, repTime, 0.4, 100);
+//Давление утечек из РП
+AI_init(GPA_AI_Settings.P_utech_RP, 0.0, 0.6, 2.0, 10.0, -0.02, 0.62, -0.04, 0.64, 0.0, 5.0, repTime, 0.4, 101);
+//Избыточное давление в лубрикаторной системе смазки 
+AI_init(GPA_AI_Settings.Pm_lub, 0.0, 0.4, 2.0, 10.0, -0.01, 0.41, -0.02, 0.42, 0.0, 5.0, repTime, 0.4, 102);
+//Уровень масла в маслобаке лубрикаторной системы
+AI_init(GPA_AI_Settings.Lm_MBL, 25.0, 600.0, 2.0, 9.5, 7.75, 617.25, -9.50, 634.50, 0.0, 5.0, repTime, 0.4, 103);
+//Уровень охлаждающей жидкости в баке
+AI_init(GPA_AI_Settings.L_freeze_Bak, 10.0, 150.0, 2.0, 9.1, 5.80, 154.20, 1.60, 158.40, 0.0, 5.0, repTime, 0.4, 104);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_26, 0.0, 0.6, 2.0, 10.0, -0.02, 0.62, -0.04, 0.64, 0.0, 5.0, repTime, 0.4, 105);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_210, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 106);
+//Расход охлаждающей жидкости
+AI_init(GPA_AI_Settings.Q_freeze, 0.0, 20.0, 2.0, 10.0, -0.6, 20.6, -1.2, 21.2, 0.0, 5.0, repTime, 0.4, 107);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_27, 0.0, 630.0, 2.0, 10.0, -18.9, 648.9, -37.8, 667.8, 0.0, 5.0, repTime, 0.4, 108);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_28, 0.0, 630.0, 2.0, 10.0, -18.9, 648.9, -37.8, 667.8, 0.0, 5.0, repTime, 0.4, 109);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_29, 0.0, 630.0, 2.0, 10.0, -18.9, 648.9, -37.8, 667.8, 0.0, 5.0, repTime, 0.4, 110);
+//Положение клапана КлР1
+AI_init(GPA_AI_Settings.Pos_KLR1, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 111);
+//Положение клапана КлР2
+AI_init(GPA_AI_Settings.Pos_KLR2, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 112);
+//Давление масла на входе в редуктор
+AI_init(GPA_AI_Settings.Pm_inR, 0.0, 0.6, 2.0, 10.0, -0.02, 0.62, -0.04, 0.64, 0.0, 5.0, repTime, 0.4, 113);
+//Уровень масла в маслобаке редуктора
+AI_init(GPA_AI_Settings.Lm_MBR, 150.0, 2700.0, 2.0, 9.2, 73.50, 2776.50, -3.00, 2853.00, 0.0, 5.0, repTime, 0.4, 114);
+//Статическое давление воздуха на входе в ГТД
+AI_init(GPA_AI_Settings.Pv_inTK, 80.0, 120.0, 2.0, 10.0, 78.8, 121.2, 77.6, 122.4, 0.0, 5.0, repTime, 0.4, 115);
+//Перепад давления топливного газа в подсистеме топливопитания на фильтрах
+AI_init(GPA_AI_Settings.dPtg_F, 0.0, 160.0, 2.0, 10.0, -4.8, 164.8, -9.6, 169.6, 0.0, 5.0, repTime, 0.4, 116);
+//Перепад давления топливного газа в первом коллекторе форсунок
+AI_init(GPA_AI_Settings.dPtg_KF, 0.0, 4.0, 2.0, 10.0, -0.12, 4.12, -0.24, 4.24, 0.0, 5.0, repTime, 0.4, 117);
+//Давление топливного газа перед дозатором
+AI_init(GPA_AI_Settings.Ptg_inTRK, 0.0, 4.0, 2.0, 10.0, -0.12, 4.12, -0.24, 4.24, 0.0, 5.0, repTime, 0.4, 118);
+//Давление масла на входе в ГТД
+AI_init(GPA_AI_Settings.Pm_inD, 0.0, 1.0, 2.0, 10.0, -0.03, 1.03, -0.06, 1.06, 0.0, 5.0, repTime, 0.4, 119);
+//Уровень масла в маслобаке ГТД
+AI_init(GPA_AI_Settings.Lm_MBD, 58.53, 800.0, 2.0, 9.3, 36.29, 822.24, 14.04, 844.49, 0.0, 5.0, repTime, 0.4, 120);
+//Полное давление выхлопных газов за СТ ГТД
+AI_init(GPA_AI_Settings.P_outST, 0.0, 6.3, 2.0, 10.0, -0.19, 6.49, -0.38, 6.68, 0.0, 5.0, repTime, 0.4, 121);
+//Барометрическое давление
+AI_init(GPA_AI_Settings.Patm, 80.0, 120.0, 2.0, 10.0, 78.8, 121.2, 77.6, 122.4, 0.0, 5.0, repTime, 0.4, 122);
+//Выходной ток в цепи электростартера
+AI_init(GPA_AI_Settings.I_Starter, 0.0, 207.0, 2.0, 10.0, -6.21, 213.21, -12.42, 219.42, 0.0, 5.0, repTime, 0.4, 123);
+//Частота тока в цепи электростартера
+AI_init(GPA_AI_Settings.F_Starter, 0.0, 80.0, 2.0, 10.0, -2.4, 82.4, -4.8, 84.8, 0.0, 5.0, repTime, 0.4, 124);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_30, 0.0, 2000.0, 2.0, 10.0, -60.0, 2060.0, -120.0, 2120.0, 0.0, 5.0, repTime, 0.4, 125);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_31, 0.0, 2000.0, 2.0, 10.0, -60.0, 2060.0, -120.0, 2120.0, 0.0, 5.0, repTime, 0.4, 126);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_32, 0.0, 2000.0, 2.0, 10.0, -60.0, 2060.0, -120.0, 2120.0, 0.0, 5.0, repTime, 0.4, 127);
+//Перепад давления масла на маслофильтре тонкой очистки
+AI_init(GPA_AI_Settings.dPm_FTO, 0.0, 160.0, 2.0, 10.0, -4.8, 164.8, -9.6, 169.6, 0.0, 5.0, repTime, 0.4, 128);
+//Перепад давления масла на маслофильтре грубой очистки
+AI_init(GPA_AI_Settings.dPm_FGO, 0.0, 160.0, 2.0, 10.0, -4.8, 164.8, -9.6, 169.6, 0.0, 5.0, repTime, 0.4, 129);
+//Датчик избыточного давления масла прокачки
+AI_init(GPA_AI_Settings.Pm_pomping, 0.0, 0.4, 2.0, 10.0, -0.01, 0.41, -0.02, 0.42, 0.0, 5.0, repTime, 0.4, 130);
+//Относительная влажность наружного воздуха
+AI_init(GPA_AI_Settings.Vlaga_atm, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 131);
+//Температура влагомера
+AI_init(GPA_AI_Settings.T_Vlagomer, -40.0, 110.0, 2.0, 10.0, -44.5, 114.5, -49.0, 119.0, 0.0, 5.0, repTime, 0.4, 132);
+//Разрежение за шумоглушителем КВОУ в воздухоприемной камере
+AI_init(GPA_AI_Settings.Pr_VZK, 0.0, 1.6, 2.0, 10.0, -0.05, 1.65, -0.1, 1.7, 0.0, 5.0, repTime, 0.4, 133);
+//Разрежение за первой ступенью очистки КВОУ (мультициклонами)
+AI_init(GPA_AI_Settings.Pr_VOU, 0.0, 1.6, 2.0, 10.0, -0.05, 1.65, -0.1, 1.7, 0.0, 5.0, repTime, 0.4, 134);
+//Давление в т/п газа до Кр1
+AI_init(GPA_AI_Settings.Pg_inKr1, 0.0, 6.0, 2.0, 10.0, -0.18, 6.18, -0.36, 6.36, 0.0, 5.0, repTime, 0.4, 135);
+//Давление в т/п газа после Кр1
+AI_init(GPA_AI_Settings.Pg_outKr1, 0.0, 6.0, 2.0, 10.0, -0.18, 6.18, -0.36, 6.36, 0.0, 5.0, repTime, 0.4, 136);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_37, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 137);
+//Давление в т/п газа до АВО2
+AI_init(GPA_AI_Settings.Pg_inAVOG2, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 138);
+//Давление в т/п дренажа до емкости Е-2
+AI_init(GPA_AI_Settings.Pdr_inE2, 0.0, 10.0, 2.0, 10.0, -0.3, 10.3, -0.6, 10.6, 0.0, 5.0, repTime, 0.4, 139);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_38, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 140);
+//Температура в т/п топливного газа к ГПА
+AI_init(GPA_AI_Settings.Ttg_GPA, 15.0, 27.5, 2.0, 10.0, 14.63, 27.88, 14.25, 28.25, 0.0, 5.0, repTime, 0.4, 141);
+//Давление в т/п топливного газа к ГПА
+AI_init(GPA_AI_Settings.Ptg_GPA, 0.0, 6.0, 2.0, 10.0, -0.18, 6.18, -0.36, 6.36, 0.0, 5.0, repTime, 0.4, 142);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_39, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 143);
+//Температура в т/п газа после АВО1
+AI_init(GPA_AI_Settings.Tg_outAVOG1, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 144);
+//Давление в т/п газа после АВО2
+AI_init(GPA_AI_Settings.Pg_outAVOG2, 0.0, 16.0, 2.0, 10.0, -0.48, 16.48, -0.96, 16.96, 0.0, 5.0, repTime, 0.4, 145);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_40, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 146);
+//Давление в т/п газа после АВО1
+AI_init(GPA_AI_Settings.Pg_outAVOG1, 0.0, 16.0, 2.0, 10.0, -0.48, 16.48, -0.96, 16.96, 0.0, 5.0, repTime, 0.4, 147);
+//Давление в т/п газа до АВО1
+AI_init(GPA_AI_Settings.Pg_inAVOG1, 0.0, 16.0, 2.0, 10.0, -0.48, 16.48, -0.96, 16.96, 0.0, 5.0, repTime, 0.4, 148);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_41, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 149);
+//Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)
+AI_init(GPA_AI_Settings.Tg1_outAVOG2, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 150);
+//Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)
+AI_init(GPA_AI_Settings.Tg2_outAVOG2, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 151);
+//Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)
+AI_init(GPA_AI_Settings.Pg1_outAVOG2, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 152);
+//Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)
+AI_init(GPA_AI_Settings.Pg2_outAVOG2, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 153);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_42, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 154);
+//Давление в т/п газа после Кр2
+AI_init(GPA_AI_Settings.Pg_outKr2, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 155);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_43, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 156);
+//Давление в т/п газа до Кр2
+AI_init(GPA_AI_Settings.Pg_inKr2, 0.0, 25.0, 2.0, 10.0, -0.75, 25.75, -1.5, 26.5, 0.0, 5.0, repTime, 0.4, 157);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_44, 0.0, 15.0, 2.0, 10.0, -0.45, 15.45, -0.9, 15.9, 0.0, 5.0, repTime, 0.4, 158);
+//Температура в т/п газа на входе в ФС1
+AI_init(GPA_AI_Settings.Tg_inFS1, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 159);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_4, 7.0, 14.0, 2.0, 10.0, 6.79, 14.21, 6.58, 14.42, 0.0, 5.0, repTime, 0.4, 160);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_5, 7.0, 14.0, 2.0, 10.0, 6.79, 14.21, 6.58, 14.42, 0.0, 5.0, repTime, 0.4, 161);
+//Перепад давления на секции циклонных элементов ФС1 (PDT1-1)
+AI_init(GPA_AI_Settings.dPg_FS1c, 0.0, 250.0, 2.0, 10.0, -7.5, 257.5, -15.0, 265.0, 0.0, 5.0, repTime, 0.4, 162);
+//Перепад давления на секции фильтрующих элементов ФС1 (PDT1-2)
+AI_init(GPA_AI_Settings.dPg_FS1f, 0.0, 250.0, 2.0, 10.0, -7.5, 257.5, -15.0, 265.0, 0.0, 5.0, repTime, 0.4, 163);
+//Перепад давления на секции циклонных элементов ФС2 (PDT2-1)
+AI_init(GPA_AI_Settings.dPg_FS2c, 0.0, 250.0, 2.0, 10.0, -7.5, 257.5, -15.0, 265.0, 0.0, 5.0, repTime, 0.4, 164);
+//Перепад давления на секции циклонных элементов ФС3 (PDT3-1)
+AI_init(GPA_AI_Settings.dPg_FS3c, 0.0, 250.0, 2.0, 10.0, -7.5, 257.5, -15.0, 265.0, 0.0, 5.0, repTime, 0.4, 165);
+//Положение клапана КлР6
+AI_init(GPA_AI_Settings.Pos_Kr6r, 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 0.4, 166);
+//Максимальный уровень в подземном резервуаре слива масла двигателя 
+AI_init(GPA_AI_Settings.Lm_TankD_v, 4.0, 20.0, 2.0, 10.0, 3.52, 20.48, 3.04, 20.96, 0.0, 5.0, repTime, 0.4, 167);
+//Максимальный уровень в подземных резервуарах слива масла компрессора
+AI_init(GPA_AI_Settings.Lm_TankK_v, 4.0, 20.0, 2.0, 10.0, 3.52, 20.48, 3.04, 20.96, 0.0, 5.0, repTime, 0.4, 168);
+//Температура масла на входе МОК
+AI_init(GPA_AI_Settings.Tm_inMON, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 169);
+//Температура масла на выходе МОК
+AI_init(GPA_AI_Settings.Tm_outMON, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 170);
+//Температура секции МОК
+AI_init(GPA_AI_Settings.T_MON_skc, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 171);
+//Давление масла на входе МОК
+AI_init(GPA_AI_Settings.Pm_inMON, 0.0, 1.6, 2.0, 10.0, -0.05, 1.65, -0.1, 1.7, 0.0, 5.0, repTime, 0.4, 172);
+//Температура масла на входе МОР
+AI_init(GPA_AI_Settings.Tm_inMOR, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 173);
+//Температура масла на выходе МОР
+AI_init(GPA_AI_Settings.Tm_outMOR, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 174);
+//Температура секции МОР
+AI_init(GPA_AI_Settings.T_MOR_skc, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 175);
+//Давление масла на входе МОР
+AI_init(GPA_AI_Settings.Pm_inMOR, 0.0, 1.6, 2.0, 10.0, -0.05, 1.65, -0.1, 1.7, 0.0, 5.0, repTime, 0.4, 176);
+//Температура масла на входе МОД
+AI_init(GPA_AI_Settings.Tm_inMOD, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 177);
+//Температура масла на выходе МОД
+AI_init(GPA_AI_Settings.Tm_outMOD, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 178);
+//Температура секции МОД
+AI_init(GPA_AI_Settings.T_MOD_skc, -50.0, 200.0, 2.0, 10.0, -57.5, 207.5, -65.0, 215.0, 0.0, 5.0, repTime, 0.4, 179);
+//Давление масла на входе МОД
+AI_init(GPA_AI_Settings.Pm_inMOD, 0.0, 1.6, 2.0, 10.0, -0.05, 1.65, -0.1, 1.7, 0.0, 5.0, repTime, 0.4, 180);
+//Перепад давления воздуха на заслонке ЗПВ
+AI_init(GPA_AI_Settings.dPv_ZsPV, 0.0, 6.3, 2.0, 10.0, -0.19, 6.49, -0.38, 6.68, 0.0, 5.0, repTime, 0.4, 181);
+//Максимальный уровень в подземном резервуаре слива масла редуктора
+AI_init(GPA_AI_Settings.Lm_TankR_v, 4.0, 20.0, 2.0, 10.0, 3.52, 20.48, 3.04, 20.96, 0.0, 5.0, repTime, 0.4, 182);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_33, 4.0, 20.0, 2.0, 10.0, 3.52, 20.48, 3.04, 20.96, 0.0, 5.0, repTime, 0.4, 183);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_34, 4.0, 20.0, 2.0, 10.0, 3.52, 20.48, 3.04, 20.96, 0.0, 5.0, repTime, 0.4, 184);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_35, 4.0, 20.0, 2.0, 10.0, 3.52, 20.48, 3.04, 20.96, 0.0, 5.0, repTime, 0.4, 185);
+//Резерв
+//AI_init(GPA_AI_Settings.Res_36, 4.0, 20.0, 2.0, 10.0, 3.52, 20.48, 3.04, 20.96, 0.0, 5.0, repTime, 0.4, 186);
+//Конец сгенерированного кода
+end_if;
+//Начало сгенерированного кода AI_Processing
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_01, GPA_AI_Settings.Res_01, GPA_AI_FromHMI.Res_01, GPA_AI_ToHMI.Res_01, GPA_AI_Internal.Res_01, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_02, GPA_AI_Settings.Res_02, GPA_AI_FromHMI.Res_02, GPA_AI_ToHMI.Res_02, GPA_AI_Internal.Res_02, alg.AI_FLT);
+//Температура воздуха за компрессором
+AI_Processing(GPA_AI_DRV.Tv_outTK, GPA_AI_Settings.Tv_outTK, GPA_AI_FromHMI.Tv_outTK, GPA_AI_ToHMI.Tv_outTK, GPA_AI_Internal.Tv_outTK, alg.AI_FLT);
+//Температура выхлопных газов за СТ ГТД
+AI_Processing(GPA_AI_DRV.T_outST, GPA_AI_Settings.T_outST, GPA_AI_FromHMI.T_outST, GPA_AI_ToHMI.T_outST, GPA_AI_Internal.T_outST, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_0, GPA_AI_Settings.Res_0, GPA_AI_FromHMI.Res_0, GPA_AI_ToHMI.Res_0, GPA_AI_Internal.Res_0, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_1, GPA_AI_Settings.Res_1, GPA_AI_FromHMI.Res_1, GPA_AI_ToHMI.Res_1, GPA_AI_Internal.Res_1, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_2, GPA_AI_Settings.Res_2, GPA_AI_FromHMI.Res_2, GPA_AI_ToHMI.Res_2, GPA_AI_Internal.Res_2, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_3, GPA_AI_Settings.Res_3, GPA_AI_FromHMI.Res_3, GPA_AI_ToHMI.Res_3, GPA_AI_Internal.Res_3, alg.AI_FLT);
+//Температура воздуха отсека ГТД
+AI_Processing(TSM(GPA_AI_DRV.Tv_OD, 0.0), GPA_AI_Settings.Tv_OD, GPA_AI_FromHMI.Tv_OD, GPA_AI_ToHMI.Tv_OD, GPA_AI_Internal.Tv_OD, alg.AI_FLT);
+//Температура воздуха в укрытии компрессора
+AI_Processing(TSM(GPA_AI_DRV.Tv_ON, 0.0), GPA_AI_Settings.Tv_ON, GPA_AI_FromHMI.Tv_ON, GPA_AI_ToHMI.Tv_ON, GPA_AI_Internal.Tv_ON, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_200, GPA_AI_Settings.Res_200, GPA_AI_FromHMI.Res_200, GPA_AI_ToHMI.Res_200, GPA_AI_Internal.Res_200, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_201, GPA_AI_Settings.Res_201, GPA_AI_FromHMI.Res_201, GPA_AI_ToHMI.Res_201, GPA_AI_Internal.Res_201, alg.AI_FLT);
+//Температура наружного воздуха
+AI_Processing(TSM(GPA_AI_DRV.T_atm, 0.0), GPA_AI_Settings.T_atm, GPA_AI_FromHMI.T_atm, GPA_AI_ToHMI.T_atm, GPA_AI_Internal.T_atm, alg.AI_FLT);
+//Температура газа на входе в компрессор
+AI_Processing(TSP(GPA_AI_DRV.Tg_inN, 0.0), GPA_AI_Settings.Tg_inN, GPA_AI_FromHMI.Tg_inN, GPA_AI_ToHMI.Tg_inN, GPA_AI_Internal.Tg_inN, alg.AI_FLT);
+//Температура газа на выходе первой ступени компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outNag1, 0.0), GPA_AI_Settings.Tg_outNag1, GPA_AI_FromHMI.Tg_outNag1, GPA_AI_ToHMI.Tg_outNag1, GPA_AI_Internal.Tg_outNag1, alg.AI_FLT);
+//Температура газа на выходе компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outNag, 0.0), GPA_AI_Settings.Tg_outNag, GPA_AI_FromHMI.Tg_outNag, GPA_AI_ToHMI.Tg_outNag, GPA_AI_Internal.Tg_outNag, alg.AI_FLT);
+//Температура газа на выходе из цилиндра 1 компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outN_C1, 0.0), GPA_AI_Settings.Tg_outN_C1, GPA_AI_FromHMI.Tg_outN_C1, GPA_AI_ToHMI.Tg_outN_C1, GPA_AI_Internal.Tg_outN_C1, alg.AI_FLT);
+//Температура газа на выходе из цилиндра 2 компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outN_C2, 0.0), GPA_AI_Settings.Tg_outN_C2, GPA_AI_FromHMI.Tg_outN_C2, GPA_AI_ToHMI.Tg_outN_C2, GPA_AI_Internal.Tg_outN_C2, alg.AI_FLT);
+//Температура газа на выходе из цилиндра 3 компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outN_C3, 0.0), GPA_AI_Settings.Tg_outN_C3, GPA_AI_FromHMI.Tg_outN_C3, GPA_AI_ToHMI.Tg_outN_C3, GPA_AI_Internal.Tg_outN_C3, alg.AI_FLT);
+//Температура газа на выходе из цилиндра 4 компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outN_C4, 0.0), GPA_AI_Settings.Tg_outN_C4, GPA_AI_FromHMI.Tg_outN_C4, GPA_AI_ToHMI.Tg_outN_C4, GPA_AI_Internal.Tg_outN_C4, alg.AI_FLT);
+//Температура газа на выходе из цилиндра 5 компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outN_C5, 0.0), GPA_AI_Settings.Tg_outN_C5, GPA_AI_FromHMI.Tg_outN_C5, GPA_AI_ToHMI.Tg_outN_C5, GPA_AI_Internal.Tg_outN_C5, alg.AI_FLT);
+//Температура газа на выходе из цилиндра 6 компрессора
+AI_Processing(TSP(GPA_AI_DRV.Tg_outN_C6, 0.0), GPA_AI_Settings.Tg_outN_C6, GPA_AI_FromHMI.Tg_outN_C6, GPA_AI_ToHMI.Tg_outN_C6, GPA_AI_Internal.Tg_outN_C6, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_202, GPA_AI_Settings.Res_202, GPA_AI_FromHMI.Res_202, GPA_AI_ToHMI.Res_202, GPA_AI_Internal.Res_202, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_203, GPA_AI_Settings.Res_203, GPA_AI_FromHMI.Res_203, GPA_AI_ToHMI.Res_203, GPA_AI_Internal.Res_203, alg.AI_FLT);
+//Температура масла смазки на входе в компрессор
+AI_Processing(TSM(GPA_AI_DRV.Tmsm_inN, 0.0), GPA_AI_Settings.Tmsm_inN, GPA_AI_FromHMI.Tmsm_inN, GPA_AI_ToHMI.Tmsm_inN, GPA_AI_Internal.Tmsm_inN, alg.AI_FLT);
+//Температура масла смазки на выходе из компрессора
+AI_Processing(TSM(GPA_AI_DRV.Tmsm_outN, 0.0), GPA_AI_Settings.Tmsm_outN, GPA_AI_FromHMI.Tmsm_outN, GPA_AI_ToHMI.Tmsm_outN, GPA_AI_Internal.Tmsm_outN, alg.AI_FLT);
+//Температура масла в подогревателе масла смазки компрессора
+AI_Processing(TSM(GPA_AI_DRV.Tmsm_TEN_N, 0.0), GPA_AI_Settings.Tmsm_TEN_N, GPA_AI_FromHMI.Tmsm_TEN_N, GPA_AI_ToHMI.Tmsm_TEN_N, GPA_AI_Internal.Tmsm_TEN_N, alg.AI_FLT);
+//Температура охлаждающей жидкости на выходе драйкуллера
+AI_Processing(TSM(GPA_AI_DRV.T_freeze_outDC, 0.0), GPA_AI_Settings.T_freeze_outDC, GPA_AI_FromHMI.T_freeze_outDC, GPA_AI_ToHMI.T_freeze_outDC, GPA_AI_Internal.T_freeze_outDC, alg.AI_FLT);
+//Температура охлаждающей жидкости в баке
+AI_Processing(TSM(GPA_AI_DRV.T_freeze_Bak, 0.0), GPA_AI_Settings.T_freeze_Bak, GPA_AI_FromHMI.T_freeze_Bak, GPA_AI_ToHMI.T_freeze_Bak, GPA_AI_Internal.T_freeze_Bak, alg.AI_FLT);
+//Температура первичных утечек от сальников штока
+AI_Processing(TSM(GPA_AI_DRV.T_utech_salnik, 0.0), GPA_AI_Settings.T_utech_salnik, GPA_AI_FromHMI.T_utech_salnik, GPA_AI_ToHMI.T_utech_salnik, GPA_AI_Internal.T_utech_salnik, alg.AI_FLT);
+//Температура коренного подшипника 1 компрессора
+AI_Processing(GPA_AI_DRV.T_KP1_N, GPA_AI_Settings.T_KP1_N, GPA_AI_FromHMI.T_KP1_N, GPA_AI_ToHMI.T_KP1_N, GPA_AI_Internal.T_KP1_N, alg.AI_FLT);
+//Температура коренного подшипника 1 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T_KP1_N_Res, GPA_AI_Settings.T_KP1_N_Res, GPA_AI_FromHMI.T_KP1_N_Res, GPA_AI_ToHMI.T_KP1_N_Res, GPA_AI_Internal.T_KP1_N_Res, alg.AI_FLT);
+//Температура коренного подшипника 2 компрессора
+AI_Processing(GPA_AI_DRV.T_KP2_N, GPA_AI_Settings.T_KP2_N, GPA_AI_FromHMI.T_KP2_N, GPA_AI_ToHMI.T_KP2_N, GPA_AI_Internal.T_KP2_N, alg.AI_FLT);
+//Температура коренного подшипника 2 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T_KP2_N_Res, GPA_AI_Settings.T_KP2_N_Res, GPA_AI_FromHMI.T_KP2_N_Res, GPA_AI_ToHMI.T_KP2_N_Res, GPA_AI_Internal.T_KP2_N_Res, alg.AI_FLT);
+//Температура коренного подшипника 3 компрессора
+AI_Processing(GPA_AI_DRV.T_KP3_N, GPA_AI_Settings.T_KP3_N, GPA_AI_FromHMI.T_KP3_N, GPA_AI_ToHMI.T_KP3_N, GPA_AI_Internal.T_KP3_N, alg.AI_FLT);
+//Температура коренного подшипника 3 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T_KP3_N_Res, GPA_AI_Settings.T_KP3_N_Res, GPA_AI_FromHMI.T_KP3_N_Res, GPA_AI_ToHMI.T_KP3_N_Res, GPA_AI_Internal.T_KP3_N_Res, alg.AI_FLT);
+//Температура коренного подшипника 4 компрессора
+AI_Processing(GPA_AI_DRV.T_KP4_N, GPA_AI_Settings.T_KP4_N, GPA_AI_FromHMI.T_KP4_N, GPA_AI_ToHMI.T_KP4_N, GPA_AI_Internal.T_KP4_N, alg.AI_FLT);
+//Температура коренного подшипника 4 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T_KP4_N_Res, GPA_AI_Settings.T_KP4_N_Res, GPA_AI_FromHMI.T_KP4_N_Res, GPA_AI_ToHMI.T_KP4_N_Res, GPA_AI_Internal.T_KP4_N_Res, alg.AI_FLT);
+//Температура коренного подшипника 5 компрессора
+AI_Processing(GPA_AI_DRV.T_KP5_N, GPA_AI_Settings.T_KP5_N, GPA_AI_FromHMI.T_KP5_N, GPA_AI_ToHMI.T_KP5_N, GPA_AI_Internal.T_KP5_N, alg.AI_FLT);
+//Температура коренного подшипника 5 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T_KP5_N_Res, GPA_AI_Settings.T_KP5_N_Res, GPA_AI_FromHMI.T_KP5_N_Res, GPA_AI_ToHMI.T_KP5_N_Res, GPA_AI_Internal.T_KP5_N_Res, alg.AI_FLT);
+//Температура коренного подшипника 6 компрессора
+AI_Processing(GPA_AI_DRV.T_KP6_N, GPA_AI_Settings.T_KP6_N, GPA_AI_FromHMI.T_KP6_N, GPA_AI_ToHMI.T_KP6_N, GPA_AI_Internal.T_KP6_N, alg.AI_FLT);
+//Температура коренного подшипника 6 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T_KP6_N_Res, GPA_AI_Settings.T_KP6_N_Res, GPA_AI_FromHMI.T_KP6_N_Res, GPA_AI_ToHMI.T_KP6_N_Res, GPA_AI_Internal.T_KP6_N_Res, alg.AI_FLT);
+//Температура опорного подшипника промежуточного вала со стороны компрессора (L213)
+AI_Processing(GPA_AI_DRV.T_POP_PromVal, GPA_AI_Settings.T_POP_PromVal, GPA_AI_FromHMI.T_POP_PromVal, GPA_AI_ToHMI.T_POP_PromVal, GPA_AI_Internal.T_POP_PromVal, alg.AI_FLT);
+//Температура опорного подшипника тихоходного вала со стороны компрессора (L111)
+AI_Processing(GPA_AI_DRV.T_POP_SlowVal, GPA_AI_Settings.T_POP_SlowVal, GPA_AI_FromHMI.T_POP_SlowVal, GPA_AI_ToHMI.T_POP_SlowVal, GPA_AI_Internal.T_POP_SlowVal, alg.AI_FLT);
+//Температура опорного подшипника промежуточного вала со стороны ГТД (L223)
+AI_Processing(GPA_AI_DRV.T_ZOP_PromVal, GPA_AI_Settings.T_ZOP_PromVal, GPA_AI_FromHMI.T_ZOP_PromVal, GPA_AI_ToHMI.T_ZOP_PromVal, GPA_AI_Internal.T_ZOP_PromVal, alg.AI_FLT);
+//Температура опорного подшипника тихоходного вала со стороны ГТД (L121)
+AI_Processing(GPA_AI_DRV.T_ZOP_SlowVal, GPA_AI_Settings.T_ZOP_SlowVal, GPA_AI_FromHMI.T_ZOP_SlowVal, GPA_AI_ToHMI.T_ZOP_SlowVal, GPA_AI_Internal.T_ZOP_SlowVal, alg.AI_FLT);
+//Температура упорного подшипника тихоходного вала со стороны компрессора  (L161)
+AI_Processing(GPA_AI_DRV.T_PUP_SlowVal, GPA_AI_Settings.T_PUP_SlowVal, GPA_AI_FromHMI.T_PUP_SlowVal, GPA_AI_ToHMI.T_PUP_SlowVal, GPA_AI_Internal.T_PUP_SlowVal, alg.AI_FLT);
+//Температура опорного подшипника быстроходного вала со стороны ГТД (L313)
+AI_Processing(GPA_AI_DRV.T_ZOP_FastVal, GPA_AI_Settings.T_ZOP_FastVal, GPA_AI_FromHMI.T_ZOP_FastVal, GPA_AI_ToHMI.T_ZOP_FastVal, GPA_AI_Internal.T_ZOP_FastVal, alg.AI_FLT);
+//Температура опорного подшипника быстроходного вала со стороны компрессора (L323)
+AI_Processing(GPA_AI_DRV.T_POP_FastVal, GPA_AI_Settings.T_POP_FastVal, GPA_AI_FromHMI.T_POP_FastVal, GPA_AI_ToHMI.T_POP_FastVal, GPA_AI_Internal.T_POP_FastVal, alg.AI_FLT);
+//Температура упорного подшипника тихоходного вала со стороны ГТД (L151)
+AI_Processing(GPA_AI_DRV.T_ZUP_SlowVal, GPA_AI_Settings.T_ZUP_SlowVal, GPA_AI_FromHMI.T_ZUP_SlowVal, GPA_AI_ToHMI.T_ZUP_SlowVal, GPA_AI_Internal.T_ZUP_SlowVal, alg.AI_FLT);
+//Температура 1 воздуха на входе в ГТД
+AI_Processing(GPA_AI_DRV.Tv1_inTK, GPA_AI_Settings.Tv1_inTK, GPA_AI_FromHMI.Tv1_inTK, GPA_AI_ToHMI.Tv1_inTK, GPA_AI_Internal.Tv1_inTK, alg.AI_FLT);
+//Температура 2 воздуха на входе в ГТД
+AI_Processing(GPA_AI_DRV.Tv2_inTK, GPA_AI_Settings.Tv2_inTK, GPA_AI_FromHMI.Tv2_inTK, GPA_AI_ToHMI.Tv2_inTK, GPA_AI_Internal.Tv2_inTK, alg.AI_FLT);
+//Температура масла на сливе из задней опоры ТК
+AI_Processing(GPA_AI_DRV.Tm_outZO_TK, GPA_AI_Settings.Tm_outZO_TK, GPA_AI_FromHMI.Tm_outZO_TK, GPA_AI_ToHMI.Tm_outZO_TK, GPA_AI_Internal.Tm_outZO_TK, alg.AI_FLT);
+//Температура масла на сливе из опор СТ
+AI_Processing(GPA_AI_DRV.Tm_outST, GPA_AI_Settings.Tm_outST, GPA_AI_FromHMI.Tm_outST, GPA_AI_ToHMI.Tm_outST, GPA_AI_Internal.Tm_outST, alg.AI_FLT);
+//Температура масла на сливе из коробки агрег. и  передней опоры ТК
+AI_Processing(GPA_AI_DRV.Tm_outPO_TK, GPA_AI_Settings.Tm_outPO_TK, GPA_AI_FromHMI.Tm_outPO_TK, GPA_AI_ToHMI.Tm_outPO_TK, GPA_AI_Internal.Tm_outPO_TK, alg.AI_FLT);
+//Температура упорного подшипника 1 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T1_UP_Kr, GPA_AI_Settings.T1_UP_Kr, GPA_AI_FromHMI.T1_UP_Kr, GPA_AI_ToHMI.T1_UP_Kr, GPA_AI_Internal.T1_UP_Kr, alg.AI_FLT);
+//Температура упорного подшипника 2 компрессора (резерв)
+AI_Processing(GPA_AI_DRV.T2_UP_Kr, GPA_AI_Settings.T2_UP_Kr, GPA_AI_FromHMI.T2_UP_Kr, GPA_AI_ToHMI.T2_UP_Kr, GPA_AI_Internal.T2_UP_Kr, alg.AI_FLT);
+//Температура упорного подшипника 1 компрессора
+AI_Processing(GPA_AI_DRV.T1_UP_K, GPA_AI_Settings.T1_UP_K, GPA_AI_FromHMI.T1_UP_K, GPA_AI_ToHMI.T1_UP_K, GPA_AI_Internal.T1_UP_K, alg.AI_FLT);
+//Температура упорного подшипника 2 компрессора
+AI_Processing(GPA_AI_DRV.T2_UP_K, GPA_AI_Settings.T2_UP_K, GPA_AI_FromHMI.T2_UP_K, GPA_AI_ToHMI.T2_UP_K, GPA_AI_Internal.T2_UP_K, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_14, GPA_AI_Settings.Res_14, GPA_AI_FromHMI.Res_14, GPA_AI_ToHMI.Res_14, GPA_AI_Internal.Res_14, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_15, GPA_AI_Settings.Res_15, GPA_AI_FromHMI.Res_15, GPA_AI_ToHMI.Res_15, GPA_AI_Internal.Res_15, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_16, GPA_AI_Settings.Res_16, GPA_AI_FromHMI.Res_16, GPA_AI_ToHMI.Res_16, GPA_AI_Internal.Res_16, alg.AI_FLT);
+//Температура масла на входе в редуктор
+AI_Processing(TSM(GPA_AI_DRV.Tm_inR, 0.0), GPA_AI_Settings.Tm_inR, GPA_AI_FromHMI.Tm_inR, GPA_AI_ToHMI.Tm_inR, GPA_AI_Internal.Tm_inR, alg.AI_FLT);
+//Температура масла на выходе из редуктора
+AI_Processing(TSM(GPA_AI_DRV.Tm_outR, 0.0), GPA_AI_Settings.Tm_outR, GPA_AI_FromHMI.Tm_outR, GPA_AI_ToHMI.Tm_outR, GPA_AI_Internal.Tm_outR, alg.AI_FLT);
+//Температура масла в маслобаке редуктора
+AI_Processing(TSM(GPA_AI_DRV.Tm_MBR, 0.0), GPA_AI_Settings.Tm_MBR, GPA_AI_FromHMI.Tm_MBR, GPA_AI_ToHMI.Tm_MBR, GPA_AI_Internal.Tm_MBR, alg.AI_FLT);
+//Температура топливного газа перед ОГК 1
+AI_Processing(TSM(GPA_AI_DRV.Ttg_inSK, 0.0), GPA_AI_Settings.Ttg_inSK, GPA_AI_FromHMI.Ttg_inSK, GPA_AI_ToHMI.Ttg_inSK, GPA_AI_Internal.Ttg_inSK, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_17, GPA_AI_Settings.Res_17, GPA_AI_FromHMI.Res_17, GPA_AI_ToHMI.Res_17, GPA_AI_Internal.Res_17, alg.AI_FLT);
+//Температура масла на входе в ГТД
+AI_Processing(TSM(GPA_AI_DRV.Tm_inD, 0.0), GPA_AI_Settings.Tm_inD, GPA_AI_FromHMI.Tm_inD, GPA_AI_ToHMI.Tm_inD, GPA_AI_Internal.Tm_inD, alg.AI_FLT);
+//Температура масла в маслобаке ГТД
+AI_Processing(TSM(GPA_AI_DRV.Tm_MBD, 0.0), GPA_AI_Settings.Tm_MBD, GPA_AI_FromHMI.Tm_MBD, GPA_AI_ToHMI.Tm_MBD, GPA_AI_Internal.Tm_MBD, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_204, GPA_AI_Settings.Res_204, GPA_AI_FromHMI.Res_204, GPA_AI_ToHMI.Res_204, GPA_AI_Internal.Res_204, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_205, GPA_AI_Settings.Res_205, GPA_AI_FromHMI.Res_205, GPA_AI_ToHMI.Res_205, GPA_AI_Internal.Res_205, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_18, GPA_AI_Settings.Res_18, GPA_AI_FromHMI.Res_18, GPA_AI_ToHMI.Res_18, GPA_AI_Internal.Res_18, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_19, GPA_AI_Settings.Res_19, GPA_AI_FromHMI.Res_19, GPA_AI_ToHMI.Res_19, GPA_AI_Internal.Res_19, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_20, GPA_AI_Settings.Res_20, GPA_AI_FromHMI.Res_20, GPA_AI_ToHMI.Res_20, GPA_AI_Internal.Res_20, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_21, GPA_AI_Settings.Res_21, GPA_AI_FromHMI.Res_21, GPA_AI_ToHMI.Res_21, GPA_AI_Internal.Res_21, alg.AI_FLT);
+//Давление газа на входе в компрессор
+AI_Processing(GPA_AI_DRV.Pg_inN, GPA_AI_Settings.Pg_inN, GPA_AI_FromHMI.Pg_inN, GPA_AI_ToHMI.Pg_inN, GPA_AI_Internal.Pg_inN, alg.AI_FLT);
+//Давление газа на выходе первой ступени компримирования
+AI_Processing(GPA_AI_DRV.Pg_outN1, GPA_AI_Settings.Pg_outN1, GPA_AI_FromHMI.Pg_outN1, GPA_AI_ToHMI.Pg_outN1, GPA_AI_Internal.Pg_outN1, alg.AI_FLT);
+//Давление газа на выходе компрессора
+AI_Processing(GPA_AI_DRV.Pg_outN, GPA_AI_Settings.Pg_outN, GPA_AI_FromHMI.Pg_outN, GPA_AI_ToHMI.Pg_outN, GPA_AI_Internal.Pg_outN, alg.AI_FLT);
+//Вибрация корпуса компрессора со стороны привода (горизонтальная составляющая) 
+AI_Processing(GPA_AI_DRV.Vs_ZONg, GPA_AI_Settings.Vs_ZONg, GPA_AI_FromHMI.Vs_ZONg, GPA_AI_ToHMI.Vs_ZONg, GPA_AI_Internal.Vs_ZONg, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_22, GPA_AI_Settings.Res_22, GPA_AI_FromHMI.Res_22, GPA_AI_ToHMI.Res_22, GPA_AI_Internal.Res_22, alg.AI_FLT);
+//Вибрация корпуса компрессора со стороны маслонасоса (горизонтальная составляющая)
+AI_Processing(GPA_AI_DRV.Vs_PONg, GPA_AI_Settings.Vs_PONg, GPA_AI_FromHMI.Vs_PONg, GPA_AI_ToHMI.Vs_PONg, GPA_AI_Internal.Vs_PONg, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_23, GPA_AI_Settings.Res_23, GPA_AI_FromHMI.Res_23, GPA_AI_ToHMI.Res_23, GPA_AI_Internal.Res_23, alg.AI_FLT);
+//Положение штока ВНА
+AI_Processing(GPA_AI_DRV.Pos_VNA_lvr, GPA_AI_Settings.Pos_VNA_lvr, GPA_AI_FromHMI.Pos_VNA_lvr, GPA_AI_ToHMI.Pos_VNA_lvr, GPA_AI_Internal.Pos_VNA_lvr, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_24, GPA_AI_Settings.Res_24, GPA_AI_FromHMI.Res_24, GPA_AI_ToHMI.Res_24, GPA_AI_Internal.Res_24, alg.AI_FLT);
+//Радиальное виброперемещение тихоходного вала (горизонтальная составляющая)
+AI_Processing(GPA_AI_DRV.Vp_rd_SlowVal_g, GPA_AI_Settings.Vp_rd_SlowVal_g, GPA_AI_FromHMI.Vp_rd_SlowVal_g, GPA_AI_ToHMI.Vp_rd_SlowVal_g, GPA_AI_Internal.Vp_rd_SlowVal_g, alg.AI_FLT);
+//Радиальное виброперемещение тихоходного вала (вертикальная составляющая)
+AI_Processing(GPA_AI_DRV.Vp_rd_SlowVal_v, GPA_AI_Settings.Vp_rd_SlowVal_v, GPA_AI_FromHMI.Vp_rd_SlowVal_v, GPA_AI_ToHMI.Vp_rd_SlowVal_v, GPA_AI_Internal.Vp_rd_SlowVal_v, alg.AI_FLT);
+//Аксиальное виброперемещение 1 тихоходного вала
+AI_Processing(GPA_AI_DRV.Vp_ax_SlowVal, GPA_AI_Settings.Vp_ax_SlowVal, GPA_AI_FromHMI.Vp_ax_SlowVal, GPA_AI_ToHMI.Vp_ax_SlowVal, GPA_AI_Internal.Vp_ax_SlowVal, alg.AI_FLT);
+//Аксиальное виброперемещение 2 тихоходного вала (резерв)
+AI_Processing(GPA_AI_DRV.Vp_ax_SlowVal_Res, GPA_AI_Settings.Vp_ax_SlowVal_Res, GPA_AI_FromHMI.Vp_ax_SlowVal_Res, GPA_AI_ToHMI.Vp_ax_SlowVal_Res, GPA_AI_Internal.Vp_ax_SlowVal_Res, alg.AI_FLT);
+//Радиальное виброперемещение быстроходного вала (горизонтальная составляющая)
+AI_Processing(GPA_AI_DRV.Vp_rd_FastVal_g, GPA_AI_Settings.Vp_rd_FastVal_g, GPA_AI_FromHMI.Vp_rd_FastVal_g, GPA_AI_ToHMI.Vp_rd_FastVal_g, GPA_AI_Internal.Vp_rd_FastVal_g, alg.AI_FLT);
+//Радиальное виброперемещение быстроходного вала (вертикальная составляющая)
+AI_Processing(GPA_AI_DRV.Vp_rd_FastVal_v, GPA_AI_Settings.Vp_rd_FastVal_v, GPA_AI_FromHMI.Vp_rd_FastVal_v, GPA_AI_ToHMI.Vp_rd_FastVal_v, GPA_AI_Internal.Vp_rd_FastVal_v, alg.AI_FLT);
+//Вибрация по переднему стоечному узлу ТК
+AI_Processing(GPA_AI_DRV.Vs_PO_TK, GPA_AI_Settings.Vs_PO_TK, GPA_AI_FromHMI.Vs_PO_TK, GPA_AI_ToHMI.Vs_PO_TK, GPA_AI_Internal.Vs_PO_TK, alg.AI_FLT);
+//Вибрация по задней опоре ротора ТК
+AI_Processing(GPA_AI_DRV.Vs_ZO_TK, GPA_AI_Settings.Vs_ZO_TK, GPA_AI_FromHMI.Vs_ZO_TK, GPA_AI_ToHMI.Vs_ZO_TK, GPA_AI_Internal.Vs_ZO_TK, alg.AI_FLT);
+//Вибрация по опоре ротора СТ 
+AI_Processing(GPA_AI_DRV.Vs_ST, GPA_AI_Settings.Vs_ST, GPA_AI_FromHMI.Vs_ST, GPA_AI_ToHMI.Vs_ST, GPA_AI_Internal.Vs_ST, alg.AI_FLT);
+//Давление масла на входе в компрессор после фильтров Ф1,Ф2
+AI_Processing(GPA_AI_DRV.Pm_inK_outF, GPA_AI_Settings.Pm_inK_outF, GPA_AI_FromHMI.Pm_inK_outF, GPA_AI_ToHMI.Pm_inK_outF, GPA_AI_Internal.Pm_inK_outF, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_207, GPA_AI_Settings.Res_207, GPA_AI_FromHMI.Res_207, GPA_AI_ToHMI.Res_207, GPA_AI_Internal.Res_207, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_208, GPA_AI_Settings.Res_208, GPA_AI_FromHMI.Res_208, GPA_AI_ToHMI.Res_208, GPA_AI_Internal.Res_208, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_209, GPA_AI_Settings.Res_209, GPA_AI_FromHMI.Res_209, GPA_AI_ToHMI.Res_209, GPA_AI_Internal.Res_209, alg.AI_FLT);
+//Давление масла смазки на входе в компрессор
+AI_Processing(GPA_AI_DRV.Pmsm_inN, GPA_AI_Settings.Pmsm_inN, GPA_AI_FromHMI.Pmsm_inN, GPA_AI_ToHMI.Pmsm_inN, GPA_AI_Internal.Pmsm_inN, alg.AI_FLT);
+//Давление масла в подогревателе масла смазки компрессора
+AI_Processing(GPA_AI_DRV.Pmsm_TEN_N, GPA_AI_Settings.Pmsm_TEN_N, GPA_AI_FromHMI.Pmsm_TEN_N, GPA_AI_ToHMI.Pmsm_TEN_N, GPA_AI_Internal.Pmsm_TEN_N, alg.AI_FLT);
+//Уровень масла в маслобаке Б1 компрессора
+AI_Processing(GPA_AI_DRV.Lm_MBN, GPA_AI_Settings.Lm_MBN, GPA_AI_FromHMI.Lm_MBN, GPA_AI_ToHMI.Lm_MBN, GPA_AI_Internal.Lm_MBN, alg.AI_FLT);
+//Давление воздуха управления РП компрессорных цилиндров компрессора
+AI_Processing(GPA_AI_DRV.Pv_uprRP_N, GPA_AI_Settings.Pv_uprRP_N, GPA_AI_FromHMI.Pv_uprRP_N, GPA_AI_ToHMI.Pv_uprRP_N, GPA_AI_Internal.Pv_uprRP_N, alg.AI_FLT);
+//Давление утечек из РП
+AI_Processing(GPA_AI_DRV.P_utech_RP, GPA_AI_Settings.P_utech_RP, GPA_AI_FromHMI.P_utech_RP, GPA_AI_ToHMI.P_utech_RP, GPA_AI_Internal.P_utech_RP, alg.AI_FLT);
+//Избыточное давление в лубрикаторной системе смазки 
+AI_Processing(GPA_AI_DRV.Pm_lub, GPA_AI_Settings.Pm_lub, GPA_AI_FromHMI.Pm_lub, GPA_AI_ToHMI.Pm_lub, GPA_AI_Internal.Pm_lub, alg.AI_FLT);
+//Уровень масла в маслобаке лубрикаторной системы
+AI_Processing(GPA_AI_DRV.Lm_MBL, GPA_AI_Settings.Lm_MBL, GPA_AI_FromHMI.Lm_MBL, GPA_AI_ToHMI.Lm_MBL, GPA_AI_Internal.Lm_MBL, alg.AI_FLT);
+//Уровень охлаждающей жидкости в баке
+AI_Processing(GPA_AI_DRV.L_freeze_Bak, GPA_AI_Settings.L_freeze_Bak, GPA_AI_FromHMI.L_freeze_Bak, GPA_AI_ToHMI.L_freeze_Bak, GPA_AI_Internal.L_freeze_Bak, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_26, GPA_AI_Settings.Res_26, GPA_AI_FromHMI.Res_26, GPA_AI_ToHMI.Res_26, GPA_AI_Internal.Res_26, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_210, GPA_AI_Settings.Res_210, GPA_AI_FromHMI.Res_210, GPA_AI_ToHMI.Res_210, GPA_AI_Internal.Res_210, alg.AI_FLT);
+//Расход охлаждающей жидкости
+AI_Processing(GPA_AI_DRV.Q_freeze, GPA_AI_Settings.Q_freeze, GPA_AI_FromHMI.Q_freeze, GPA_AI_ToHMI.Q_freeze, GPA_AI_Internal.Q_freeze, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_27, GPA_AI_Settings.Res_27, GPA_AI_FromHMI.Res_27, GPA_AI_ToHMI.Res_27, GPA_AI_Internal.Res_27, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_28, GPA_AI_Settings.Res_28, GPA_AI_FromHMI.Res_28, GPA_AI_ToHMI.Res_28, GPA_AI_Internal.Res_28, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_29, GPA_AI_Settings.Res_29, GPA_AI_FromHMI.Res_29, GPA_AI_ToHMI.Res_29, GPA_AI_Internal.Res_29, alg.AI_FLT);
+//Положение клапана КлР1
+AI_Processing(GPA_AI_DRV.Pos_KLR1, GPA_AI_Settings.Pos_KLR1, GPA_AI_FromHMI.Pos_KLR1, GPA_AI_ToHMI.Pos_KLR1, GPA_AI_Internal.Pos_KLR1, alg.AI_FLT);
+//Положение клапана КлР2
+AI_Processing(GPA_AI_DRV.Pos_KLR2, GPA_AI_Settings.Pos_KLR2, GPA_AI_FromHMI.Pos_KLR2, GPA_AI_ToHMI.Pos_KLR2, GPA_AI_Internal.Pos_KLR2, alg.AI_FLT);
+//Давление масла на входе в редуктор
+AI_Processing(GPA_AI_DRV.Pm_inR, GPA_AI_Settings.Pm_inR, GPA_AI_FromHMI.Pm_inR, GPA_AI_ToHMI.Pm_inR, GPA_AI_Internal.Pm_inR, alg.AI_FLT);
+//Уровень масла в маслобаке редуктора
+AI_Processing(GPA_AI_DRV.Lm_MBR, GPA_AI_Settings.Lm_MBR, GPA_AI_FromHMI.Lm_MBR, GPA_AI_ToHMI.Lm_MBR, GPA_AI_Internal.Lm_MBR, alg.AI_FLT);
+//Статическое давление воздуха на входе в ГТД
+AI_Processing(GPA_AI_DRV.Pv_inTK, GPA_AI_Settings.Pv_inTK, GPA_AI_FromHMI.Pv_inTK, GPA_AI_ToHMI.Pv_inTK, GPA_AI_Internal.Pv_inTK, alg.AI_FLT);
+//Перепад давления топливного газа в подсистеме топливопитания на фильтрах
+AI_Processing(GPA_AI_DRV.dPtg_F, GPA_AI_Settings.dPtg_F, GPA_AI_FromHMI.dPtg_F, GPA_AI_ToHMI.dPtg_F, GPA_AI_Internal.dPtg_F, alg.AI_FLT);
+//Перепад давления топливного газа в первом коллекторе форсунок
+AI_Processing(GPA_AI_DRV.dPtg_KF, GPA_AI_Settings.dPtg_KF, GPA_AI_FromHMI.dPtg_KF, GPA_AI_ToHMI.dPtg_KF, GPA_AI_Internal.dPtg_KF, alg.AI_FLT);
+//Давление топливного газа перед дозатором
+AI_Processing(GPA_AI_DRV.Ptg_inTRK, GPA_AI_Settings.Ptg_inTRK, GPA_AI_FromHMI.Ptg_inTRK, GPA_AI_ToHMI.Ptg_inTRK, GPA_AI_Internal.Ptg_inTRK, alg.AI_FLT);
+//Давление масла на входе в ГТД
+AI_Processing(GPA_AI_DRV.Pm_inD, GPA_AI_Settings.Pm_inD, GPA_AI_FromHMI.Pm_inD, GPA_AI_ToHMI.Pm_inD, GPA_AI_Internal.Pm_inD, alg.AI_FLT);
+//Уровень масла в маслобаке ГТД
+AI_Processing(GPA_AI_DRV.Lm_MBD, GPA_AI_Settings.Lm_MBD, GPA_AI_FromHMI.Lm_MBD, GPA_AI_ToHMI.Lm_MBD, GPA_AI_Internal.Lm_MBD, alg.AI_FLT);
+//Полное давление выхлопных газов за СТ ГТД
+AI_Processing(GPA_AI_DRV.P_outST, GPA_AI_Settings.P_outST, GPA_AI_FromHMI.P_outST, GPA_AI_ToHMI.P_outST, GPA_AI_Internal.P_outST, alg.AI_FLT);
+//Барометрическое давление
+AI_Processing(GPA_AI_DRV.Patm, GPA_AI_Settings.Patm, GPA_AI_FromHMI.Patm, GPA_AI_ToHMI.Patm, GPA_AI_Internal.Patm, alg.AI_FLT);
+//Выходной ток в цепи электростартера
+AI_Processing(GPA_AI_DRV.I_Starter, GPA_AI_Settings.I_Starter, GPA_AI_FromHMI.I_Starter, GPA_AI_ToHMI.I_Starter, GPA_AI_Internal.I_Starter, alg.AI_FLT);
+//Частота тока в цепи электростартера
+AI_Processing(GPA_AI_DRV.F_Starter, GPA_AI_Settings.F_Starter, GPA_AI_FromHMI.F_Starter, GPA_AI_ToHMI.F_Starter, GPA_AI_Internal.F_Starter, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_30, GPA_AI_Settings.Res_30, GPA_AI_FromHMI.Res_30, GPA_AI_ToHMI.Res_30, GPA_AI_Internal.Res_30, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_31, GPA_AI_Settings.Res_31, GPA_AI_FromHMI.Res_31, GPA_AI_ToHMI.Res_31, GPA_AI_Internal.Res_31, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_32, GPA_AI_Settings.Res_32, GPA_AI_FromHMI.Res_32, GPA_AI_ToHMI.Res_32, GPA_AI_Internal.Res_32, alg.AI_FLT);
+//Перепад давления масла на маслофильтре тонкой очистки
+AI_Processing(GPA_AI_DRV.dPm_FTO, GPA_AI_Settings.dPm_FTO, GPA_AI_FromHMI.dPm_FTO, GPA_AI_ToHMI.dPm_FTO, GPA_AI_Internal.dPm_FTO, alg.AI_FLT);
+//Перепад давления масла на маслофильтре грубой очистки
+AI_Processing(GPA_AI_DRV.dPm_FGO, GPA_AI_Settings.dPm_FGO, GPA_AI_FromHMI.dPm_FGO, GPA_AI_ToHMI.dPm_FGO, GPA_AI_Internal.dPm_FGO, alg.AI_FLT);
+//Датчик избыточного давления масла прокачки
+AI_Processing(GPA_AI_DRV.Pm_pomping, GPA_AI_Settings.Pm_pomping, GPA_AI_FromHMI.Pm_pomping, GPA_AI_ToHMI.Pm_pomping, GPA_AI_Internal.Pm_pomping, alg.AI_FLT);
+//Относительная влажность наружного воздуха
+AI_Processing(GPA_AI_DRV.Vlaga_atm, GPA_AI_Settings.Vlaga_atm, GPA_AI_FromHMI.Vlaga_atm, GPA_AI_ToHMI.Vlaga_atm, GPA_AI_Internal.Vlaga_atm, alg.AI_FLT);
+//Температура влагомера
+AI_Processing(GPA_AI_DRV.T_Vlagomer, GPA_AI_Settings.T_Vlagomer, GPA_AI_FromHMI.T_Vlagomer, GPA_AI_ToHMI.T_Vlagomer, GPA_AI_Internal.T_Vlagomer, alg.AI_FLT);
+//Разрежение за шумоглушителем КВОУ в воздухоприемной камере
+AI_Processing(GPA_AI_DRV.Pr_VZK, GPA_AI_Settings.Pr_VZK, GPA_AI_FromHMI.Pr_VZK, GPA_AI_ToHMI.Pr_VZK, GPA_AI_Internal.Pr_VZK, alg.AI_FLT);
+//Разрежение за первой ступенью очистки КВОУ (мультициклонами)
+AI_Processing(GPA_AI_DRV.Pr_VOU, GPA_AI_Settings.Pr_VOU, GPA_AI_FromHMI.Pr_VOU, GPA_AI_ToHMI.Pr_VOU, GPA_AI_Internal.Pr_VOU, alg.AI_FLT);
+//Давление в т/п газа до Кр1
+AI_Processing(GPA_AI_DRV.Pg_inKr1, GPA_AI_Settings.Pg_inKr1, GPA_AI_FromHMI.Pg_inKr1, GPA_AI_ToHMI.Pg_inKr1, GPA_AI_Internal.Pg_inKr1, alg.AI_FLT);
+//Давление в т/п газа после Кр1
+AI_Processing(GPA_AI_DRV.Pg_outKr1, GPA_AI_Settings.Pg_outKr1, GPA_AI_FromHMI.Pg_outKr1, GPA_AI_ToHMI.Pg_outKr1, GPA_AI_Internal.Pg_outKr1, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_37, GPA_AI_Settings.Res_37, GPA_AI_FromHMI.Res_37, GPA_AI_ToHMI.Res_37, GPA_AI_Internal.Res_37, alg.AI_FLT);
+//Давление в т/п газа до АВО2
+AI_Processing(GPA_AI_DRV.Pg_inAVOG2, GPA_AI_Settings.Pg_inAVOG2, GPA_AI_FromHMI.Pg_inAVOG2, GPA_AI_ToHMI.Pg_inAVOG2, GPA_AI_Internal.Pg_inAVOG2, alg.AI_FLT);
+//Давление в т/п дренажа до емкости Е-2
+AI_Processing(GPA_AI_DRV.Pdr_inE2, GPA_AI_Settings.Pdr_inE2, GPA_AI_FromHMI.Pdr_inE2, GPA_AI_ToHMI.Pdr_inE2, GPA_AI_Internal.Pdr_inE2, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_38, GPA_AI_Settings.Res_38, GPA_AI_FromHMI.Res_38, GPA_AI_ToHMI.Res_38, GPA_AI_Internal.Res_38, alg.AI_FLT);
+//Температура в т/п топливного газа к ГПА
+AI_Processing(GPA_AI_DRV.Ttg_GPA, GPA_AI_Settings.Ttg_GPA, GPA_AI_FromHMI.Ttg_GPA, GPA_AI_ToHMI.Ttg_GPA, GPA_AI_Internal.Ttg_GPA, alg.AI_FLT);
+//Давление в т/п топливного газа к ГПА
+AI_Processing(GPA_AI_DRV.Ptg_GPA, GPA_AI_Settings.Ptg_GPA, GPA_AI_FromHMI.Ptg_GPA, GPA_AI_ToHMI.Ptg_GPA, GPA_AI_Internal.Ptg_GPA, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_39, GPA_AI_Settings.Res_39, GPA_AI_FromHMI.Res_39, GPA_AI_ToHMI.Res_39, GPA_AI_Internal.Res_39, alg.AI_FLT);
+//Температура в т/п газа после АВО1
+AI_Processing(GPA_AI_DRV.Tg_outAVOG1, GPA_AI_Settings.Tg_outAVOG1, GPA_AI_FromHMI.Tg_outAVOG1, GPA_AI_ToHMI.Tg_outAVOG1, GPA_AI_Internal.Tg_outAVOG1, alg.AI_FLT);
+//Давление в т/п газа после АВО2
+AI_Processing(GPA_AI_DRV.Pg_outAVOG2, GPA_AI_Settings.Pg_outAVOG2, GPA_AI_FromHMI.Pg_outAVOG2, GPA_AI_ToHMI.Pg_outAVOG2, GPA_AI_Internal.Pg_outAVOG2, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_40, GPA_AI_Settings.Res_40, GPA_AI_FromHMI.Res_40, GPA_AI_ToHMI.Res_40, GPA_AI_Internal.Res_40, alg.AI_FLT);
+//Давление в т/п газа после АВО1
+AI_Processing(GPA_AI_DRV.Pg_outAVOG1, GPA_AI_Settings.Pg_outAVOG1, GPA_AI_FromHMI.Pg_outAVOG1, GPA_AI_ToHMI.Pg_outAVOG1, GPA_AI_Internal.Pg_outAVOG1, alg.AI_FLT);
+//Давление в т/п газа до АВО1
+AI_Processing(GPA_AI_DRV.Pg_inAVOG1, GPA_AI_Settings.Pg_inAVOG1, GPA_AI_FromHMI.Pg_inAVOG1, GPA_AI_ToHMI.Pg_inAVOG1, GPA_AI_Internal.Pg_inAVOG1, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_41, GPA_AI_Settings.Res_41, GPA_AI_FromHMI.Res_41, GPA_AI_ToHMI.Res_41, GPA_AI_Internal.Res_41, alg.AI_FLT);
+//Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)
+AI_Processing(GPA_AI_DRV.Tg1_outAVOG2, GPA_AI_Settings.Tg1_outAVOG2, GPA_AI_FromHMI.Tg1_outAVOG2, GPA_AI_ToHMI.Tg1_outAVOG2, GPA_AI_Internal.Tg1_outAVOG2, alg.AI_FLT);
+//Температура в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)
+AI_Processing(GPA_AI_DRV.Tg2_outAVOG2, GPA_AI_Settings.Tg2_outAVOG2, GPA_AI_FromHMI.Tg2_outAVOG2, GPA_AI_ToHMI.Tg2_outAVOG2, GPA_AI_Internal.Tg2_outAVOG2, alg.AI_FLT);
+//Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (1)
+AI_Processing(GPA_AI_DRV.Pg1_outAVOG2, GPA_AI_Settings.Pg1_outAVOG2, GPA_AI_FromHMI.Pg1_outAVOG2, GPA_AI_ToHMI.Pg1_outAVOG2, GPA_AI_Internal.Pg1_outAVOG2, alg.AI_FLT);
+//Давление в т/п газа от АВО2 к нагнетательному коллектору до ФСЗ (2)
+AI_Processing(GPA_AI_DRV.Pg2_outAVOG2, GPA_AI_Settings.Pg2_outAVOG2, GPA_AI_FromHMI.Pg2_outAVOG2, GPA_AI_ToHMI.Pg2_outAVOG2, GPA_AI_Internal.Pg2_outAVOG2, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_42, GPA_AI_Settings.Res_42, GPA_AI_FromHMI.Res_42, GPA_AI_ToHMI.Res_42, GPA_AI_Internal.Res_42, alg.AI_FLT);
+//Давление в т/п газа после Кр2
+AI_Processing(GPA_AI_DRV.Pg_outKr2, GPA_AI_Settings.Pg_outKr2, GPA_AI_FromHMI.Pg_outKr2, GPA_AI_ToHMI.Pg_outKr2, GPA_AI_Internal.Pg_outKr2, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_43, GPA_AI_Settings.Res_43, GPA_AI_FromHMI.Res_43, GPA_AI_ToHMI.Res_43, GPA_AI_Internal.Res_43, alg.AI_FLT);
+//Давление в т/п газа до Кр2
+AI_Processing(GPA_AI_DRV.Pg_inKr2, GPA_AI_Settings.Pg_inKr2, GPA_AI_FromHMI.Pg_inKr2, GPA_AI_ToHMI.Pg_inKr2, GPA_AI_Internal.Pg_inKr2, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_44, GPA_AI_Settings.Res_44, GPA_AI_FromHMI.Res_44, GPA_AI_ToHMI.Res_44, GPA_AI_Internal.Res_44, alg.AI_FLT);
+//Температура в т/п газа на входе в ФС1
+AI_Processing(GPA_AI_DRV.Tg_inFS1, GPA_AI_Settings.Tg_inFS1, GPA_AI_FromHMI.Tg_inFS1, GPA_AI_ToHMI.Tg_inFS1, GPA_AI_Internal.Tg_inFS1, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_4, GPA_AI_Settings.Res_4, GPA_AI_FromHMI.Res_4, GPA_AI_ToHMI.Res_4, GPA_AI_Internal.Res_4, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_5, GPA_AI_Settings.Res_5, GPA_AI_FromHMI.Res_5, GPA_AI_ToHMI.Res_5, GPA_AI_Internal.Res_5, alg.AI_FLT);
+//Перепад давления на секции циклонных элементов ФС1 (PDT1-1)
+AI_Processing(GPA_AI_DRV.dPg_FS1c, GPA_AI_Settings.dPg_FS1c, GPA_AI_FromHMI.dPg_FS1c, GPA_AI_ToHMI.dPg_FS1c, GPA_AI_Internal.dPg_FS1c, alg.AI_FLT);
+//Перепад давления на секции фильтрующих элементов ФС1 (PDT1-2)
+AI_Processing(GPA_AI_DRV.dPg_FS1f, GPA_AI_Settings.dPg_FS1f, GPA_AI_FromHMI.dPg_FS1f, GPA_AI_ToHMI.dPg_FS1f, GPA_AI_Internal.dPg_FS1f, alg.AI_FLT);
+//Перепад давления на секции циклонных элементов ФС2 (PDT2-1)
+AI_Processing(GPA_AI_DRV.dPg_FS2c, GPA_AI_Settings.dPg_FS2c, GPA_AI_FromHMI.dPg_FS2c, GPA_AI_ToHMI.dPg_FS2c, GPA_AI_Internal.dPg_FS2c, alg.AI_FLT);
+//Перепад давления на секции циклонных элементов ФС3 (PDT3-1)
+AI_Processing(GPA_AI_DRV.dPg_FS3c, GPA_AI_Settings.dPg_FS3c, GPA_AI_FromHMI.dPg_FS3c, GPA_AI_ToHMI.dPg_FS3c, GPA_AI_Internal.dPg_FS3c, alg.AI_FLT);
+//Положение клапана КлР6
+AI_Processing(GPA_AI_DRV.Pos_Kr6r, GPA_AI_Settings.Pos_Kr6r, GPA_AI_FromHMI.Pos_Kr6r, GPA_AI_ToHMI.Pos_Kr6r, GPA_AI_Internal.Pos_Kr6r, alg.AI_FLT);
+//Максимальный уровень в подземном резервуаре слива масла двигателя 
+AI_Processing(GPA_AI_DRV.Lm_TankD_v, GPA_AI_Settings.Lm_TankD_v, GPA_AI_FromHMI.Lm_TankD_v, GPA_AI_ToHMI.Lm_TankD_v, GPA_AI_Internal.Lm_TankD_v, alg.AI_FLT);
+//Максимальный уровень в подземных резервуарах слива масла компрессора
+AI_Processing(GPA_AI_DRV.Lm_TankK_v, GPA_AI_Settings.Lm_TankK_v, GPA_AI_FromHMI.Lm_TankK_v, GPA_AI_ToHMI.Lm_TankK_v, GPA_AI_Internal.Lm_TankK_v, alg.AI_FLT);
+//Температура масла на входе МОК
+AI_Processing(GPA_AI_DRV.Tm_inMON, GPA_AI_Settings.Tm_inMON, GPA_AI_FromHMI.Tm_inMON, GPA_AI_ToHMI.Tm_inMON, GPA_AI_Internal.Tm_inMON, alg.AI_FLT);
+//Температура масла на выходе МОК
+AI_Processing(GPA_AI_DRV.Tm_outMON, GPA_AI_Settings.Tm_outMON, GPA_AI_FromHMI.Tm_outMON, GPA_AI_ToHMI.Tm_outMON, GPA_AI_Internal.Tm_outMON, alg.AI_FLT);
+//Температура секции МОК
+AI_Processing(GPA_AI_DRV.T_MON_skc, GPA_AI_Settings.T_MON_skc, GPA_AI_FromHMI.T_MON_skc, GPA_AI_ToHMI.T_MON_skc, GPA_AI_Internal.T_MON_skc, alg.AI_FLT);
+//Давление масла на входе МОК
+AI_Processing(GPA_AI_DRV.Pm_inMON, GPA_AI_Settings.Pm_inMON, GPA_AI_FromHMI.Pm_inMON, GPA_AI_ToHMI.Pm_inMON, GPA_AI_Internal.Pm_inMON, alg.AI_FLT);
+//Температура масла на входе МОР
+AI_Processing(GPA_AI_DRV.Tm_inMOR, GPA_AI_Settings.Tm_inMOR, GPA_AI_FromHMI.Tm_inMOR, GPA_AI_ToHMI.Tm_inMOR, GPA_AI_Internal.Tm_inMOR, alg.AI_FLT);
+//Температура масла на выходе МОР
+AI_Processing(GPA_AI_DRV.Tm_outMOR, GPA_AI_Settings.Tm_outMOR, GPA_AI_FromHMI.Tm_outMOR, GPA_AI_ToHMI.Tm_outMOR, GPA_AI_Internal.Tm_outMOR, alg.AI_FLT);
+//Температура секции МОР
+AI_Processing(GPA_AI_DRV.T_MOR_skc, GPA_AI_Settings.T_MOR_skc, GPA_AI_FromHMI.T_MOR_skc, GPA_AI_ToHMI.T_MOR_skc, GPA_AI_Internal.T_MOR_skc, alg.AI_FLT);
+//Давление масла на входе МОР
+AI_Processing(GPA_AI_DRV.Pm_inMOR, GPA_AI_Settings.Pm_inMOR, GPA_AI_FromHMI.Pm_inMOR, GPA_AI_ToHMI.Pm_inMOR, GPA_AI_Internal.Pm_inMOR, alg.AI_FLT);
+//Температура масла на входе МОД
+AI_Processing(GPA_AI_DRV.Tm_inMOD, GPA_AI_Settings.Tm_inMOD, GPA_AI_FromHMI.Tm_inMOD, GPA_AI_ToHMI.Tm_inMOD, GPA_AI_Internal.Tm_inMOD, alg.AI_FLT);
+//Температура масла на выходе МОД
+AI_Processing(GPA_AI_DRV.Tm_outMOD, GPA_AI_Settings.Tm_outMOD, GPA_AI_FromHMI.Tm_outMOD, GPA_AI_ToHMI.Tm_outMOD, GPA_AI_Internal.Tm_outMOD, alg.AI_FLT);
+//Температура секции МОД
+AI_Processing(GPA_AI_DRV.T_MOD_skc, GPA_AI_Settings.T_MOD_skc, GPA_AI_FromHMI.T_MOD_skc, GPA_AI_ToHMI.T_MOD_skc, GPA_AI_Internal.T_MOD_skc, alg.AI_FLT);
+//Давление масла на входе МОД
+AI_Processing(GPA_AI_DRV.Pm_inMOD, GPA_AI_Settings.Pm_inMOD, GPA_AI_FromHMI.Pm_inMOD, GPA_AI_ToHMI.Pm_inMOD, GPA_AI_Internal.Pm_inMOD, alg.AI_FLT);
+//Перепад давления воздуха на заслонке ЗПВ
+AI_Processing(GPA_AI_DRV.dPv_ZsPV, GPA_AI_Settings.dPv_ZsPV, GPA_AI_FromHMI.dPv_ZsPV, GPA_AI_ToHMI.dPv_ZsPV, GPA_AI_Internal.dPv_ZsPV, alg.AI_FLT);
+//Максимальный уровень в подземном резервуаре слива масла редуктора
+AI_Processing(GPA_AI_DRV.Lm_TankR_v, GPA_AI_Settings.Lm_TankR_v, GPA_AI_FromHMI.Lm_TankR_v, GPA_AI_ToHMI.Lm_TankR_v, GPA_AI_Internal.Lm_TankR_v, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_33, GPA_AI_Settings.Res_33, GPA_AI_FromHMI.Res_33, GPA_AI_ToHMI.Res_33, GPA_AI_Internal.Res_33, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_34, GPA_AI_Settings.Res_34, GPA_AI_FromHMI.Res_34, GPA_AI_ToHMI.Res_34, GPA_AI_Internal.Res_34, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_35, GPA_AI_Settings.Res_35, GPA_AI_FromHMI.Res_35, GPA_AI_ToHMI.Res_35, GPA_AI_Internal.Res_35, alg.AI_FLT);
+//Резерв
+//AI_Processing(GPA_AI_DRV.Res_36, GPA_AI_Settings.Res_36, GPA_AI_FromHMI.Res_36, GPA_AI_ToHMI.Res_36, GPA_AI_Internal.Res_36, alg.AI_FLT);
+//Конец сгенерированного кода
+]]></ST>
+    </Function>
+</Data>

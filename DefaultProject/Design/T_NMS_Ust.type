@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_NMS_Ust" Kind="Struct" UUID="WI5F7ADIOMNEDAEI6FBXWSYTVE">
+	<Fields>
+		<Field Name="Tm_R1_Pn" Type="REAL" UUID="VXU5YPYTBKEETMCBD75G7FGKJE" Comment="Температура масла в P1. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Tm_R1_Pv" Type="REAL" UUID="O3JLICWFRVXUNOKGCUYM5E6UC4" Comment="Температура масла в P1. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Tm_R1_Av" Type="REAL" UUID="77XIYY5OGT5UFAYDP3ZJTF6J4Y" Comment="Температура масла в P1. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Tm_R2_Pn" Type="REAL" UUID="BX2IR6KKCMIE5BHTEJE24N5JK4" Comment="Температура масла в P2. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Tm_R2_Pv" Type="REAL" UUID="HAPGZDOVR72UTB5YPF2HWOU6DI" Comment="Температура масла в P2. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Tm_R2_Av" Type="REAL" UUID="ZSK5RGJLNCKULMBHWLGXG7H454" Comment="Температура масла в P2. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Tm_R3_Pn" Type="REAL" UUID="F23HFTLHJEEEPIM6VUQTUGS6F4" Comment="Температура масла в P3. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Tm_R3_Pv" Type="REAL" UUID="URB5PBDVXTWUHAEHKOX445NNDE" Comment="Температура масла в P3. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Tm_R3_Av" Type="REAL" UUID="YXWZOTJLBIEUNOIFDBHEIZXFEU" Comment="Температура масла в P3. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Tm_R4_Pn" Type="REAL" UUID="TFJ75XQRVH4UDIFGXDFPMLY64Q" Comment="Температура масла в P4. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Tm_R4_Pv" Type="REAL" UUID="IQB2NP4M6PFEJOEG736FWRAVUU" Comment="Температура масла в P4. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Tm_R4_Av" Type="REAL" UUID="UQB7PLF2X2EEFCLRCUAN7LMKTY" Comment="Температура масла в P4. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Tm_R5_Pn" Type="REAL" UUID="5CI5SXE6LVCUTPD6P6FYLO5JHE" Comment="Температура масла в P5. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Tm_R5_Pv" Type="REAL" UUID="AJIS2OKIP2IU7PRP3M6VXFTQJQ" Comment="Температура масла в P5. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Tm_R5_Av" Type="REAL" UUID="ZGV7IT6WEMIEDA3EEQRKG6VKGQ" Comment="Температура масла в P5. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Tm_R6_Pn" Type="REAL" UUID="SK525XC2MWSUHD4JSABS5WPRJI" Comment="Температура масла в P6. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Tm_R6_Pv" Type="REAL" UUID="EQH5DWSSPX6EVH2UQZXZ6SWSAQ" Comment="Температура масла в P6. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Tm_R6_Av" Type="REAL" UUID="NT2WQNHGQ4GETAKUJT6ICFZL2Y" Comment="Температура масла в P6. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Tm_R7_Pn" Type="REAL" UUID="7PUYTZMZBVGUFCLYMMIGD756N4" Comment="Температура масла в P7. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Tm_R7_Pv" Type="REAL" UUID="67A5HHBOJX5UXL743B433RJBVU" Comment="Температура масла в P7. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Tm_R7_Av" Type="REAL" UUID="FBORWYTHXAQEZA6LKKSHFYLAF4" Comment="Температура масла в P7. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Lm_R1_An" Type="REAL" UUID="BV6AJU77AU6URN27VRGHNXJG44" Comment="Уровень масла в P1. Склад ГСМ, поз.38: аварийная нижняя" />
+		<Field Name="Lm_R1_Pn" Type="REAL" UUID="AFDYQN5GY22UVME5HYAYSFL5YY" Comment="Уровень масла в P1. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Lm_R1_Pv" Type="REAL" UUID="4XI7TA2HGRVUVNN6QDJTRSJD5Q" Comment="Уровень масла в P1. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Lm_R1_Av" Type="REAL" UUID="TMGEJGO2MUSEVDKFCPXBQJQEPI" Comment="Уровень масла в P1. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Lm_R2_An" Type="REAL" UUID="R47GYZQK7IUEXL5B6HD4CZPCR4" Comment="Уровень масла в P2. Склад ГСМ, поз.38: аварийная нижняя" />
+		<Field Name="Lm_R2_Pn" Type="REAL" UUID="4VLKA4VVDZTEDDTTXMJSUFELAQ" Comment="Уровень масла в P2. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Lm_R2_Pv" Type="REAL" UUID="22SPVVN5MFPUZMMVWA4XRRMFI4" Comment="Уровень масла в P2. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Lm_R2_Av" Type="REAL" UUID="TIJNCKZAQBOEZL374LIJ5TBSHY" Comment="Уровень масла в P2. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Lm_R3_An" Type="REAL" UUID="5ZXA6J5VBQZUFJRZ3HMNMR3CHQ" Comment="Уровень масла в P3. Склад ГСМ, поз.38: аварийная нижняя" />
+		<Field Name="Lm_R3_Pn" Type="REAL" UUID="TUGT3YPQHTZE7D4LFBT63NC7HI" Comment="Уровень масла в P3. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Lm_R3_Pv" Type="REAL" UUID="54C4CSNG6ODEPI3IJF52BCAT2A" Comment="Уровень масла в P3. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Lm_R3_Av" Type="REAL" UUID="RPEY3JMSVNYUTABMSE3WCDTNAU" Comment="Уровень масла в P3. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Lm_R4_An" Type="REAL" UUID="6UYDCDBAXGBUNDNWS6FNA3UDAE" Comment="Уровень масла в P4. Склад ГСМ, поз.38: аварийная нижняя" />
+		<Field Name="Lm_R4_Pn" Type="REAL" UUID="YT55HWFVUGCEXFVJG2GPFJ4QNQ" Comment="Уровень масла в P4. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Lm_R4_Pv" Type="REAL" UUID="7LD2RO5VOF7UDIIJZUZJ3HGMZI" Comment="Уровень масла в P4. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Lm_R4_Av" Type="REAL" UUID="CHL5FZIMAJ7ENIRT3EYHHYPMKY" Comment="Уровень масла в P4. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Lm_R5_An" Type="REAL" UUID="GI7UU3WHGWFUTI26AIEOUEWY6A" Comment="Уровень масла в P5. Склад ГСМ, поз.38: аварийная нижняя" />
+		<Field Name="Lm_R5_Pn" Type="REAL" UUID="BCJZ6SHVVEKU7HFKSK4P7U2AAU" Comment="Уровень масла в P5. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Lm_R5_Pv" Type="REAL" UUID="FHUCDTJ6KQOU3N2PQ62UAM4E4I" Comment="Уровень масла в P5. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Lm_R5_Av" Type="REAL" UUID="N7CBZUPWZWVUTL6IRTBWMTVIOA" Comment="Уровень масла в P5. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Lm_R6_An" Type="REAL" UUID="6GXAIYXY3ZPUVGW67SAF6EDRQM" Comment="Уровень масла в P6. Склад ГСМ, поз.38: аварийная нижняя" />
+		<Field Name="Lm_R6_Pn" Type="REAL" UUID="BA2CLWDKENKEJN5IUN376TPDDE" Comment="Уровень масла в P6. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Lm_R6_Pv" Type="REAL" UUID="TI2TGTTYHKLE7KALO6UPTN7UFI" Comment="Уровень масла в P6. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Lm_R6_Av" Type="REAL" UUID="JNVMHWQLBUBUJNW4HIWT4SEAZ4" Comment="Уровень масла в P6. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Lm_R7_An" Type="REAL" UUID="KLIKMG2TVLKE5MPH2YJ33OH4EI" Comment="Уровень масла в P7. Склад ГСМ, поз.38: аварийная нижняя" />
+		<Field Name="Lm_R7_Pn" Type="REAL" UUID="L3RR66ALHUFUPPCNLIKYZ2SFCE" Comment="Уровень масла в P7. Склад ГСМ, поз.38: предупредительная нижняя" />
+		<Field Name="Lm_R7_Pv" Type="REAL" UUID="5RAWP3RVZT2ULDMBL3KEYKGT24" Comment="Уровень масла в P7. Склад ГСМ, поз.38: предупредительная верхняя" />
+		<Field Name="Lm_R7_Av" Type="REAL" UUID="VV52HWZU3VTE7KENIOCEFQSU5M" Comment="Уровень масла в P7. Склад ГСМ, поз.38: аварийная верхняя" />
+		<Field Name="Pm_out_N1_An" Type="REAL" UUID="2T4HQQZAD5CU5F2KDAUF2EQ7BE" Comment="Давление на нагнетательном т/п насоса Н1. Насосная масел, поз.38.3: аварийная нижняя" />
+		<Field Name="Pm_out_N1_Pn" Type="REAL" UUID="MWM7Z4HSVPUU5M6XCZOQK5JN2E" Comment="Давление на нагнетательном т/п насоса Н1. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Pm_out_N1_Pv" Type="REAL" UUID="4VUVNYF6PWHUHF2NFDB5YWFMHM" Comment="Давление на нагнетательном т/п насоса Н1. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Pm_out_N1_Av" Type="REAL" UUID="GQWPQI6CIBCETN5Q56XRSI4UKY" Comment="Давление на нагнетательном т/п насоса Н1. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Pm_out_N2_An" Type="REAL" UUID="MLLPFVWWIYFUZM3CZD7CKGY2YU" Comment="Давление на нагнетательном т/п насоса Н2. Насосная масел, поз.38.3: аварийная нижняя" />
+		<Field Name="Pm_out_N2_Pn" Type="REAL" UUID="CE4NE75DZCMUXD5SEEJ4LCTH74" Comment="Давление на нагнетательном т/п насоса Н2. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Pm_out_N2_Pv" Type="REAL" UUID="V6IJNNJUPFZE3L7VLHJW3QH5AA" Comment="Давление на нагнетательном т/п насоса Н2. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Pm_out_N2_Av" Type="REAL" UUID="W3BFWSIOETMENKW6PMCXAM65KQ" Comment="Давление на нагнетательном т/п насоса Н2. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Pm_out_N3_An" Type="REAL" UUID="FJRN3SP3QYHUVDG2KT5KE45OQE" Comment="Давление на нагнетательном т/п насоса Н3. Насосная масел, поз.38.3: аварийная нижняя" />
+		<Field Name="Pm_out_N3_Pn" Type="REAL" UUID="LAAKQCIDPLWUBNSFT37KQVLVPE" Comment="Давление на нагнетательном т/п насоса Н3. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Pm_out_N3_Pv" Type="REAL" UUID="PRPYVD6NK7SE7PEEXUAFW5VMUY" Comment="Давление на нагнетательном т/п насоса Н3. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Pm_out_N3_Av" Type="REAL" UUID="PB6QJVSFROVEXPXAAI4AJ3WO5Y" Comment="Давление на нагнетательном т/п насоса Н3. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Pm_out_N4_An" Type="REAL" UUID="XORIRVDQNHXEZKJZ3PYZLCT7U4" Comment="Давление на нагнетательном т/п насоса Н4. Насосная масел, поз.38.3: аварийная нижняя" />
+		<Field Name="Pm_out_N4_Pn" Type="REAL" UUID="GSK6NVMVVRQEVARZJIWWSFUCBE" Comment="Давление на нагнетательном т/п насоса Н4. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Pm_out_N4_Pv" Type="REAL" UUID="OKHZUBV7XY2U3CATUISKW4ADLQ" Comment="Давление на нагнетательном т/п насоса Н4. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Pm_out_N4_Av" Type="REAL" UUID="FLYVMS4CV2KUZMC3K7WRKYKACQ" Comment="Давление на нагнетательном т/п насоса Н4. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Pm_out_N5_An" Type="REAL" UUID="VWZERUGLDWJU5LW3ACID5CH5TU" Comment="Давление на нагнетательном т/п насоса Н5. Насосная масел, поз.38.3: аварийная нижняя" />
+		<Field Name="Pm_out_N5_Pn" Type="REAL" UUID="GKGJGYY7T7MENEUIPESY5S5MPU" Comment="Давление на нагнетательном т/п насоса Н5. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Pm_out_N5_Pv" Type="REAL" UUID="FUYI4SPLRLQEDDARBXAI4QRAKM" Comment="Давление на нагнетательном т/п насоса Н5. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Pm_out_N5_Av" Type="REAL" UUID="73JFWKUMEMQUDBST2WFFGXNFK4" Comment="Давление на нагнетательном т/п насоса Н5. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Pm_out_N6_An" Type="REAL" UUID="AGFDYKSP6Y6EPPPT2BKVPIJW4Q" Comment="Давление на нагнетательном т/п насоса Н6. Насосная масел, поз.38.3: аварийная нижняя" />
+		<Field Name="Pm_out_N6_Pn" Type="REAL" UUID="OV22UOEWN4CEND23OZAQB6BTVI" Comment="Давление на нагнетательном т/п насоса Н6. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Pm_out_N6_Pv" Type="REAL" UUID="YLFAYSBGBS4ENMX25DSYLMQ7XA" Comment="Давление на нагнетательном т/п насоса Н6. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Pm_out_N6_Av" Type="REAL" UUID="YKG5CCDLWQCEDIDR23HFYWK2AI" Comment="Давление на нагнетательном т/п насоса Н6. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Tm_E1_Pn" Type="REAL" UUID="SPX3DLQGCA3UBBQMNZVD5KMXG4" Comment="Температура в ёмкости масла E1. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Tm_E1_Pv" Type="REAL" UUID="SPKCI5JZZ2KUJJOHLEUSWQOUBA" Comment="Температура в ёмкости масла E1. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Tm_E1_Av" Type="REAL" UUID="VAXTJMOPH3CEVNOOUKXWXNZM5Y" Comment="Температура в ёмкости масла E1. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Tm_E2_Pn" Type="REAL" UUID="LPGNUPGHWP7UHF5BINTSSAWJQ4" Comment="Температура в ёмкости масла E2. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Tm_E2_Pv" Type="REAL" UUID="UEISQJTF3B5EBL5DWWRLHXT7DI" Comment="Температура в ёмкости масла E2. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Tm_E2_Av" Type="REAL" UUID="MXCJH2SMD2QEBF7I55QPFD2NBI" Comment="Температура в ёмкости масла E2. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Tm_E3_Pn" Type="REAL" UUID="BBVJA5422JPEFGNTYIEF5VL2BQ" Comment="Температура в ёмкости масла E3. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Tm_E3_Pv" Type="REAL" UUID="ATB5JI5W3YHEZAZJUD2S23WOOM" Comment="Температура в ёмкости масла E3. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Tm_E3_Av" Type="REAL" UUID="YKLK33YMPZAEPAWWOLL3YU5QAE" Comment="Температура в ёмкости масла E3. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Tm_E4_Pn" Type="REAL" UUID="TK2NUJWNOQHEXCQFB7OUFO47QQ" Comment="Температура в ёмкости масла E4. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Tm_E4_Pv" Type="REAL" UUID="RKKL45GWJX7EJJUH3KXYGJKYZM" Comment="Температура в ёмкости масла E4. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Tm_E4_Av" Type="REAL" UUID="JVROCYR5MUEURJMR6BGN6EKIDI" Comment="Температура в ёмкости масла E4. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Tm_E5_Pn" Type="REAL" UUID="GV4H6QAEXGBUXMQJ6WUV7AV3JE" Comment="Температура в ёмкости масла E5. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Tm_E5_Pv" Type="REAL" UUID="T43RULZRX7PELHRXEZLW3Z7QGQ" Comment="Температура в ёмкости масла E5. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Tm_E5_Av" Type="REAL" UUID="YV26CEMPJ3YEVJC3DGXQOMLQQE" Comment="Температура в ёмкости масла E5. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Tm_E6_Pn" Type="REAL" UUID="YWYVQBRM6XWUDC6B3BFBWFTRUE" Comment="Температура в ёмкости масла E6. Насосная масел, поз.38.3: предупредительная нижняя" />
+		<Field Name="Tm_E6_Pv" Type="REAL" UUID="T7F7OO6Q6OWENNDCIPPYJPDOL4" Comment="Температура в ёмкости масла E6. Насосная масел, поз.38.3: предупредительная верхняя" />
+		<Field Name="Tm_E6_Av" Type="REAL" UUID="6XIVOBBHNLSURCPS4N4Z3R2WHA" Comment="Температура в ёмкости масла E6. Насосная масел, поз.38.3: аварийная верхняя" />
+		<Field Name="Uosn_SAU_Pn" Type="REAL" UUID="IJLJ2OMSV4YUDOFXD3HKQHVN2E" Comment="Основное напряжение питания ~220 В: предупредительная нижняя" />
+		<Field Name="Uosn_SAU_Pv" Type="REAL" UUID="TQXHWRYBR3PURA6NS422MBEI7U" Comment="Основное напряжение питания ~220 В : предупредительная верхняя" />
+		<Field Name="Urez_SAU_Pn" Type="REAL" UUID="Q56YGAO2TCAEVC3DVGGVQFQRIU" Comment="Резервное напряжение питания ~220 В: предупредительная нижняя" />
+		<Field Name="Urez_SAU_Pv" Type="REAL" UUID="IJHLMTQOZ7DEZGSESW5G7NCCLI" Comment="Резервное напряжение питания ~220 В : предупредительная верхняя" />
+		<Field Name="Lm_R1_n_Pn" Type="REAL" UUID="NS7EGF3NELGUVELCXRGM6TEYUU" Comment="Сигнализация мин. уровня в Р1. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R2_n_Pn" Type="REAL" UUID="VLKGHYDUL4JUDO4DNHAO5D2FRU" Comment="Сигнализация мин. уровня в Р2. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R3_n_Pn" Type="REAL" UUID="C3EELSR5KNNURGI2DX2JXTVVG4" Comment="Сигнализация мин. уровня в Р3. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R4_n_Pn" Type="REAL" UUID="JDJKQXTGR3EE7INREC67THS3BA" Comment="Сигнализация мин. уровня в Р4. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R5_n_Pn" Type="REAL" UUID="ONUMABJ3G7BE3HPHGSTVBK6JDU" Comment="Сигнализация мин. уровня в Р5. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R6_n_Pn" Type="REAL" UUID="VZAM3IKUB2MU3NOEXGABXOIFVE" Comment="Сигнализация мин. уровня в Р6. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R7_n_Pn" Type="REAL" UUID="FOEPAJ5JXD4UVIJY7PO2WR4PNM" Comment="Сигнализация мин. уровня в Р7. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R1_v_Pv" Type="REAL" UUID="PBXHHWMJORGEVJTMZ4MMZEWIF4" Comment="Сигнализация макс. уровня в Р1. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R2_v_Pv" Type="REAL" UUID="CFGRTRY62JKU5EE2RUR4YHKOKI" Comment="Сигнализация макс. уровня в Р2. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R3_v_Pv" Type="REAL" UUID="6MEXSRXLISXETJ4FT7GDL74FDU" Comment="Сигнализация макс. уровня в Р3. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R4_v_Pv" Type="REAL" UUID="XDVJH3NGWGLU3LVXICHXLWGCBY" Comment="Сигнализация макс. уровня в Р4. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R5_v_Pv" Type="REAL" UUID="3WYYABCV2SOE7KRLIIA2KZLBS4" Comment="Сигнализация макс. уровня в Р5. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R6_v_Pv" Type="REAL" UUID="Y3NAQUNAHHWE5MRPESNSEC3P3M" Comment="Сигнализация макс. уровня в Р6. Склад ГСМ, поз.38" />
+		<Field Name="Lm_R7_v_Pv" Type="REAL" UUID="D7HXNZ6ESMIEFK23GS7JRRBJQY" Comment="Сигнализация макс. уровня в Р7. Склад ГСМ, поз.38" />
+		<Field Name="Lm_E1_n_Pn" Type="REAL" UUID="4SSZYNJAHDDETMJFSPQU2HYMDM" Comment="Сигнализация мин. уровня в ёмкости Е1. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E2_n_Pn" Type="REAL" UUID="FJB3IXLXXSHEXPQDGRODZOM7L4" Comment="Сигнализация мин. уровня в ёмкости Е2. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E3_n_Pn" Type="REAL" UUID="H3MWHLCGZRFEXNN7L756JFMDOE" Comment="Сигнализация мин. уровня в ёмкости Е3. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E4_n_Pn" Type="REAL" UUID="4RKCYJTN76DUNBUMJSYWYLPD7Q" Comment="Сигнализация мин. уровня в ёмкости Е4. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E5_n_Pn" Type="REAL" UUID="SIU2LTJTPKUU5CXPRAYFA7WIHE" Comment="Сигнализация мин. уровня в ёмкости Е5. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E6_n_Pn" Type="REAL" UUID="NIYPVCKF46AE7ODVMM6NOFUBYY" Comment="Сигнализация мин. уровня в ёмкости Е6. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E1_v_Pv" Type="REAL" UUID="5L3JZ5OBDXDEFPVEIYYI2JOTRI" Comment="Сигнализация макс. уровня в ёмкости Е1. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E2_v_Pv" Type="REAL" UUID="ATB6D7QVDP4EZGNRFUB3GO6XNE" Comment="Сигнализация макс. уровня в ёмкости Е2. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E3_v_Pv" Type="REAL" UUID="DDPWPUKZTPJEXDHAMMCMFKJ7AY" Comment="Сигнализация макс. уровня в ёмкости Е3. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E4_v_Pv" Type="REAL" UUID="OQIPE7UZBB2UFLIE76IV3F5II4" Comment="Сигнализация макс. уровня в ёмкости Е4. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E5_v_Pv" Type="REAL" UUID="JMJTRMF7RFFUXMIDVSIEIGEOEM" Comment="Сигнализация макс. уровня в ёмкости Е5. Насосная масел, поз.38.3" />
+		<Field Name="Lm_E6_v_Pv" Type="REAL" UUID="JKOSGNK3WUTUJCVKWSZNCKBC2M" Comment="Сигнализация макс. уровня в ёмкости Е6. Насосная масел, поз.38.3" />
+		<Field Name="Lm_R8_v_Pv" Type="REAL" UUID="IHWDMTZVMONUXLENRVTCEWYLAE" Comment="Сигнализация уровня в емкости. Емкость для аварийного слива масла, поз.38.4" />
+	</Fields>
+</Type>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+    <Device CyclePeriod="200000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="FALSE">
+        <Slot Address="1" ModuleType="68" />
+        <Slot Address="2" ModuleType="68" />
+        <Slot Address="3" ModuleType="68" />
+        <Slot Address="4" ModuleType="68" />
+        <Slot Address="5" ModuleType="68" />
+        <Slot Address="6" ModuleType="68" />
+        <Slot Address="7" ModuleType="68" />
+        <Slot Address="8" ModuleType="68" />
+    </Device>
+    <Crossconnect>
+        <Connection ItemName="TSK_A1_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.8A0A6D1C41CF457D94442F8831617049" />
+        <Connection ItemName="TSK_A1_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.559489694EF4757F074EFBAF4ED2BE04" />
+        <Connection ItemName="TSK_A1_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.257D167249D88B24D42F53B7C893779E" />
+        <Connection ItemName="TSK_A1_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.26FFA4AE4FE6B82840F52A81A540B7BC" />
+        <Connection ItemName="TSK_A1_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.A4CC71954594084C3612759E1D786328" />
+        <Connection ItemName="TSK_A1_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.EFDACBE7493CD384E161BD9F7713F864" />
+        <Connection ItemName="TSK_A1_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.BE36D8BE4D68EE980579328DFC460CDC" />
+        <Connection ItemName="TSK_A1_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="663DC414499400BA7DDF7A8D90ED0630.532AF0334C06CC4D645F92AEF48908D5" />
+        <Connection ItemName="TSK_AI_DRV.T_BB_TSK" Device="" Slot="1" Channel="1" Comment="Температура воздуха в ББ САУ ТСк ПХГ TТ-100" UUID="91B1DACC444022F64ADC68B3DBC78EBF.C4A9BF2DF5CB494183AFF84FCC8BE4AE" />
+        <Connection ItemName="TSK_AI_DRV.Pg_1T_t" Device="" Slot="1" Channel="2" Comment="Трубное давление в скважине 1Т (НКТ 114мм) РТ-11" UUID="91B1DACC444022F64ADC68B3DBC78EBF.4569D345C30D41369A8D1E25A8AD43EB" />
+        <Connection ItemName="TSK_AI_DRV.Pg_1T_mk1" Device="" Slot="1" Channel="3" Comment="Межколонное давление в скважине 1Т (между колоннами 114-178мм)  РТ-12" UUID="91B1DACC444022F64ADC68B3DBC78EBF.625780D729B5430A8A942D055D6BC8D6" />
+        <Connection ItemName="TSK_AI_DRV.Pg_1T_mk2" Device="" Slot="1" Channel="4" Comment="Межколонное давление в скважине 1Т (между колоннами 178-245мм) РТ-13" UUID="91B1DACC444022F64ADC68B3DBC78EBF.1AC1E50850BD41A5A9BAA4C982D81F5A" />
+        <Connection ItemName="TSK_AI_DRV.Pg_1T_mk3" Device="" Slot="2" Channel="1" Comment="Межколонное давление в скважине 1Т (между колоннами 245-324мм) РТ-14" UUID="91B1DACC444022F64ADC68B3DBC78EBF.DC7D9E6DEF73424F98EEC4AFE130B848" />
+        <Connection ItemName="TSK_AI_DRV.Tg_1T" Device="" Slot="2" Channel="2" Comment="Температура газа на скважине 1Т TТ-11" UUID="91B1DACC444022F64ADC68B3DBC78EBF.6408ECEA4C4045CA9A7B67FA519EEC5A" />
+        <Connection ItemName="TSK_AI_DRV.Res_0" Device="" Slot="2" Channel="3" Comment="Резерв" UUID="91B1DACC444022F64ADC68B3DBC78EBF.3D368EAE95974408B99E7ED1B54183E7" />
+        <Connection ItemName="TSK_AI_DRV.Pg_2T_t" Device="" Slot="2" Channel="4" Comment="Трубное давление в скважине 2Т  (НКТ 114мм) РТ-21" UUID="91B1DACC444022F64ADC68B3DBC78EBF.170892197F2A44D1A212B4A6355A58F3" />
+        <Connection ItemName="TSK_AI_DRV.Pg_2T_mk1" Device="" Slot="3" Channel="1" Comment="Межколонное давление в скважине 2Т (между колоннами 114-178мм) РТ-22" UUID="91B1DACC444022F64ADC68B3DBC78EBF.32011386DF7545BA9E0BE6ADE0B3AC59" />
+        <Connection ItemName="TSK_AI_DRV.Pg_2T_mk2" Device="" Slot="3" Channel="2" Comment="Межколонное давление в скважине 2Т (между колоннами 178-245мм) РТ-23" UUID="91B1DACC444022F64ADC68B3DBC78EBF.B7B31789ABEF40DC90308DAD90FD2488" />
+        <Connection ItemName="TSK_AI_DRV.Pg_2T_mk3" Device="" Slot="3" Channel="3" Comment="Межколонное давление в скважине 2Т (между колоннами 245-324мм) РТ-23" UUID="91B1DACC444022F64ADC68B3DBC78EBF.58EF2DBF08A14752AC0EB9E107FB11D1" />
+        <Connection ItemName="TSK_AI_DRV.Tg_2T" Device="" Slot="3" Channel="4" Comment="Температура газа на скважине 2Т TТ-21" UUID="91B1DACC444022F64ADC68B3DBC78EBF.4FD84A8D81C548039F06C0DBA2B068F2" />
+        <Connection ItemName="TSK_AI_DRV.Res_1" Device="" Slot="4" Channel="1" Comment="Резерв" UUID="91B1DACC444022F64ADC68B3DBC78EBF.2F92F99D0D3E4D1B96397E69EF512BAD" />
+        <Connection ItemName="TSK_AI_DRV.Pg_3T_t" Device="" Slot="4" Channel="2" Comment="Трубное давление в скважине 3Т (НКТ 114мм) РТ-31" UUID="91B1DACC444022F64ADC68B3DBC78EBF.B5C338979C1E4F3F8DA594F2FF1D49E6" />
+        <Connection ItemName="TSK_AI_DRV.Pg_3T_mk1" Device="" Slot="4" Channel="3" Comment="Межколонное давление в скважине 3Т (между колоннами 114-178мм) РТ-32" UUID="91B1DACC444022F64ADC68B3DBC78EBF.9415111034464647A2F782CDAD457652" />
+        <Connection ItemName="TSK_AI_DRV.Pg_3T_mk2" Device="" Slot="4" Channel="4" Comment="Межколонное давление в скважине 3Т (между колоннами 178-245мм) РТ-33" UUID="91B1DACC444022F64ADC68B3DBC78EBF.BDA29C9E43FC47D8B090325C8B725A56" />
+        <Connection ItemName="TSK_AI_DRV.Pg_3T_mk3" Device="" Slot="5" Channel="1" Comment="Межколонное давление в скважине 3Т (между колоннами 245-324мм) РТ-34" UUID="91B1DACC444022F64ADC68B3DBC78EBF.141725FBBCC244F696C6648808964464" />
+        <Connection ItemName="TSK_AI_DRV.Tg_3T" Device="" Slot="5" Channel="2" Comment="Температура газа на скважине 3Т TТ-31" UUID="91B1DACC444022F64ADC68B3DBC78EBF.1E7B00943CA64C358BC950F2AA041BD4" />
+        <Connection ItemName="TSK_AI_DRV.Zg_3T" Device="" Slot="5" Channel="3" Comment="Загазованность на скважине 3ТAТ-31" UUID="91B1DACC444022F64ADC68B3DBC78EBF.2B0F7127925642559ADD88DA18BD3F68" />
+        <Connection ItemName="TSK_AI_DRV.Pg_4T_t" Device="" Slot="5" Channel="4" Comment="Трубное давление в скважине 4Т (НКТ 114мм) РТ-41" UUID="91B1DACC444022F64ADC68B3DBC78EBF.1C0CB05FB5E84C6BA12A4D786571AA3A" />
+        <Connection ItemName="TSK_AI_DRV.Pg_4T_mk1" Device="" Slot="6" Channel="1" Comment="Межколонное давление в скважине 4Т (между колоннами 114-178мм) РТ-42" UUID="91B1DACC444022F64ADC68B3DBC78EBF.E3858500041F4DA09FFCFD98D7EDE36D" />
+        <Connection ItemName="TSK_AI_DRV.Pg_4T_mk2" Device="" Slot="6" Channel="2" Comment="Межколонное давление в скважине 4Т (между колоннами 178-245мм) РТ-43" UUID="91B1DACC444022F64ADC68B3DBC78EBF.B22737A725544DC280451622044BEB59" />
+        <Connection ItemName="TSK_AI_DRV.Pg_4T_mk3" Device="" Slot="6" Channel="3" Comment="Межколонное давление в скважине 4Т (между колоннами 245-324мм) РТ-44" UUID="91B1DACC444022F64ADC68B3DBC78EBF.BFF6705D076D49788C4057605046DEB4" />
+        <Connection ItemName="TSK_AI_DRV.Tg_4T" Device="" Slot="6" Channel="4" Comment="Температура газа на скважине 4Т TТ-41" UUID="91B1DACC444022F64ADC68B3DBC78EBF.02EE40E738984C4AA73971C34C69E909" />
+        <Connection ItemName="TSK_AI_DRV.Zg_4T" Device="" Slot="7" Channel="1" Comment="Загазованность на скважине 4Т AТ-41" UUID="91B1DACC444022F64ADC68B3DBC78EBF.26366278AFA7407F81DBC564148CFE8A" />
+        <Connection ItemName="TSK_AI_DRV.Pg_5T_t" Device="" Slot="7" Channel="2" Comment="Трубное давление в скважине 5Т (НКТ 114мм) РТ-51" UUID="91B1DACC444022F64ADC68B3DBC78EBF.FD97E6A12A6A4AA39E7746E6E59C4F29" />
+        <Connection ItemName="TSK_AI_DRV.Pg_5T_mk1" Device="" Slot="7" Channel="3" Comment="Межколонное давление в скважине 5Т (между колоннами 114-178мм) РТ-52" UUID="91B1DACC444022F64ADC68B3DBC78EBF.0B953C4849694DB39AB9A00E87713213" />
+        <Connection ItemName="TSK_AI_DRV.Pg_5T_mk2" Device="" Slot="7" Channel="4" Comment="Межколонное давление в скважине 5Т (между колоннами 178-245мм) РТ-53" UUID="91B1DACC444022F64ADC68B3DBC78EBF.7829ACFDE478463D92D123204E950E32" />
+        <Connection ItemName="TSK_AI_DRV.Pg_5T_mk3" Device="" Slot="8" Channel="1" Comment="Межколонное давление в скважине 5Т (между колоннами 245-324мм) РТ-54" UUID="91B1DACC444022F64ADC68B3DBC78EBF.2A138F59AA1E446298C9318715972166" />
+        <Connection ItemName="TSK_AI_DRV.Tg_5T" Device="" Slot="8" Channel="2" Comment="Температура газа на скважине 5Т TТ-51" UUID="91B1DACC444022F64ADC68B3DBC78EBF.CAD1D192B90349D4BAF847B4D6E46BFC" />
+        <Connection ItemName="TSK_AI_DRV.Zg_5T" Device="" Slot="8" Channel="3" Comment="Загазованность на скважине 5Т AТ-51" UUID="91B1DACC444022F64ADC68B3DBC78EBF.87935FC6C6CB4F99B87E605F02969280" />
+        <Connection ItemName="TSK_AI_DRV.T_BB_TSK2" Device="" Slot="8" Channel="4" Comment="Температура воздуха в ББ САУ ТСк ПХГ" UUID="91B1DACC444022F64ADC68B3DBC78EBF.B9FD3970E5EB4135B8E3A0199B41C334" />
+    </Crossconnect>
+</Configuration>

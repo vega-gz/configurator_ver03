@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="UPG_IM" Kind="Struct" UUID="PTWD4BFNDHEU5BDI6CQYAHPU44">
+	<Fields>
+		<Field Name="Kr2_1_3" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="FYZ4LPG6SXQUJAMVWQD7PIPDBA" Comment="Кран К2.1-3 слива конден. с 1 ступени фильтра Ф2.1" />
+		<Field Name="Kr2_1_4" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="ZCBSMAB2N6ZUJEV4DO6TMT4QW4" Comment="Кран К2.1-4 слива конден. с 2 ступени фильтра Ф2.1" />
+		<Field Name="Kr2_2_3" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="SSF2XFVCX3OUBCOOXYW2JL37NQ" Comment="Кран К2.2-3 слива конден. с 1 ступени фильтра Ф2.2" />
+		<Field Name="Kr2_2_4" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="YMUXN74WA6EEHII6QLVNV3QVV4" Comment="Кран К2.2-4 слива конден. с 2 ступени фильтра Ф2.2" />
+		<Field Name="Kr8_1" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="ARQSMIG3BY2ERD6NZXQ246MFRM" Comment="Кран Кр8.1" />
+		<Field Name="Kr8_1A" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="U4NQTPX5NPVEFFDXWM7IFZCYKA" Comment="Кран Кр8.1a" />
+		<Field Name="KE41" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="DBFZMDNR4FSUTK7SEBX6YNZNA4" Comment="Клапан сброса НД выход 1" />
+		<Field Name="KE42" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="VRCKU2FEQUIUZCYU3KJ4ZLCVKA" Comment="Клапан сброса НД выход 2" />
+		<Field Name="KE31" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="NS6JDD2TAOJEFO4IAHUBJSOJYE" Comment="Клапан топливного газа УПТН" />
+		<Field Name="VnV_BT" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="ITY7HXUESOQUZB3EEN3W3UC6AQ" Comment="Вытяжной вентилятор блока технологии (АМ1-1)" />
+		<Field Name="VnV_UPNT" Type="COBUNGY7TFREZBMYTOLRCXQ6GM" UUID="CRTE6YN3VOFEJCU4AD43KELCRE" Comment="Вытяжной вентилятор УПТН (АМ3-1)" />
+	</Fields>
+</Type>

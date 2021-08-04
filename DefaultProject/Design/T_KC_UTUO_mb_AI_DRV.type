@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_UTUO_mb_AI_DRV" UUID="A8AFD52E7E7E4AEBB092BE2E3D75C9BD">
+<Fields>
+<Field Comment="P - Давление" Name="r_Press" Type="REAL" UUID="B544CD589F704A8B8ADC88AC36B74F4F"/>
+<Field Comment="t - Температура" Name="r_TM" Type="REAL" UUID="42B0451B36AB4BC686F6E45077B365D2"/>
+<Field Comment="Vco - Общий рабочий обьем" Name="Vco_EK" Type="REAL" UUID="DC7AA527798941B58FAEE6207D43A1F1"/>
+<Field Comment="Vpo - Общий стандартный обьем" Name="Vpo_EK" Type="REAL" UUID="8DD7A151844F440E948D2C74AFE57FC2"/>
+<Field Comment="N2 - Содержание азота" Name="N2_EK" Type="REAL" UUID="6F2A773497CD412EA78F06A1972CE2A8"/>
+<Field Comment="CO2 - Содержание СО2" Name="CO2_EK" Type="REAL" UUID="B86114A1DE8A40778230F89259C7091C"/>
+<Field Comment="Ho.C - Теплота сгораниЯ" Name="Ho_EK" Type="REAL" UUID="EDEFDE80EFFE4F9088F7BB47AE2410DB"/>
+<Field Comment="dv - ОтносительнаЯ плотность газа" Name="dv_EK" Type="REAL" UUID="36DB07BE641F486BAE35499A7C903CBE"/>
+</Fields>
+</Type>

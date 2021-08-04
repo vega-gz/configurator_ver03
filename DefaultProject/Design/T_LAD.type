@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_LAD" Kind="Struct" Comment="Структура отображения лестницы алгоритма" UUID="UXTZI5INY2WEVJDNXQRARB4F44">
+	<Fields>
+		<Field Name="Qnty" Type="INT" UUID="D7FWUXBR6TPUFC4YIYHQRJ4NNM" Comment="Общее количество шагов алгоритма" />
+		<Field Name="CurStep" Type="INT" UUID="VCDPSJGR7IJUHJZJ4PRF56VPYQ" Comment="Текущий шаг" />
+		<Field Name="StepText" Type="STRING" UUID="2AZERAKQ5DXUZALERF6WLYBI3A" ArraySize="28" Comment="Массив названий шагов" />
+	</Fields>
+</Type>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UVI_DO_DRV" UUID="ED327C3E63494F1FB469B95C289E201E">
+<Fields>
+<Field Comment="Верхний уровень в емкости E-8.1 для дренажа метанола" Name="Lmet_E8_1_v" Type="BOOL" UUID="68479EDD5C404D4697407032030BC74C"/>
+<Field Comment="Загазованность по метанолу табло информационное" Name="Gas_Alarm1" Type="BOOL" UUID="B02E9695C4964035A96FE5284AD4D248"/>
+<Field Comment="Загазованность по метанолу пост сигнализации" Name="Gas_Alarm2" Type="BOOL" UUID="1F44C12A4E154638BE43E274A9FF3B75"/>
+<Field Comment="Пуск вентсистемы В1" Name="Vn_V1_ON" Type="BOOL" UUID="6147EDE440E44EB6942A5319CDB76956"/>
+<Field Comment="Стоп вентсистемы В1" Name="Vn_V1_OF" Type="BOOL" UUID="E828235F48DE471A88B1F85DCFDDC37B"/>
+<Field Comment="Резерв" Name="Res_0" Type="BOOL" UUID="6EF72CA8C6D74F07A45C8C33F758F565"/>
+<Field Comment="Резерв" Name="Res_1" Type="BOOL" UUID="2AF7A19E772B4AEDAC5B612693272ABC"/>
+<Field Comment="Резерв" Name="Res_2" Type="BOOL" UUID="77FBB3FB4EE64154B5A8CB278BF78711"/>
+<Field Comment="Резерв" Name="Res_3" Type="BOOL" UUID="2768148E654548E4ADF21DFAA3F28B03"/>
+<Field Comment="Резерв" Name="Res_4" Type="BOOL" UUID="574C93B8486E48AEA99CCDAFCD54FD89"/>
+<Field Comment="Резерв" Name="Res_5" Type="BOOL" UUID="5C647320403C48188DF799CD145A6184"/>
+<Field Comment="Резерв" Name="Res_6" Type="BOOL" UUID="56BE9907D50940168DE840E84D5946ED"/>
+<Field Comment="Резерв" Name="Res_7" Type="BOOL" UUID="71C0F6225B684407990D5513D5A1AA57"/>
+<Field Comment="Резерв" Name="Res_8" Type="BOOL" UUID="5639E3EF3125455FAF6C4F3122780389"/>
+<Field Comment="Резерв" Name="Res_9" Type="BOOL" UUID="99AA051DF91743728A180B1669C4873C"/>
+<Field Comment="Резерв" Name="Res_10" Type="BOOL" UUID="D48D326C80C54D45B19F6C7FF38D3474"/>
+</Fields>
+</Type>

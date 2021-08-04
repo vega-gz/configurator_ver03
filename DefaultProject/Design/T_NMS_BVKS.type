@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_NMS_BVKS" Kind="Struct" UUID="5PNUDPWN26HEZOUGIATG2OYPAU">
+	<Fields>
+		<Field Name="Tv_in_BVKS" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="LI2DPNBKWZLU7ACTQPOEEVD47I" Comment="БВКС: TT01 – Температура воздуха на входе установки" />
+		<Field Name="Tv_in_KM1" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="IWFLVFAPPWCEFG4ZCATRQ5PCCA" Comment="БВКС: TT49 – Температура воздуха на всасе компрессора КМ1" />
+		<Field Name="Tv_in_KM2" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="YEFQJPCCPVBU7GKD6RT67N4UBY" Comment="БВКС: TT50 - Температура воздуха на всасе компрессора КМ2" />
+		<Field Name="Tv_in_ROOM" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="IEXBUQJY4G6EPF76QVVF3MD7QU" Comment="БВКС: TT51 - Температура воздуха в помещении" />
+		<Field Name="Pv_in_BVKS" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="UW3RURMAD5JU3DGBUKLTWJ53LY" Comment="БВКС: PT01 – Давление воздуха на входе в установку" />
+		<Field Name="Tdp_out_BVKS" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="BLDYETLTFZ2UJFKXM4Z7EMK5VE" Comment="БВКС: МT01 – Температура точки росы воздуха на выходе установки" />
+		<Field Name="Qv" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="C7V4OCDJNQMUXJLZNCSUXKOHMI" Comment="БВКС: FT01 - Расход воздуха" />
+		<Field Name="Nv" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="AS3WQGRZNKTUHDOYBNSTRZORRY" Comment="БВКС: FT01 - Количество наработанного воздуха" />
+		<Field Name="AO_BVKS" Type="BOOL" UUID="XHTITONHZ3LUJO7BCRB4U5LXPE" Comment="БВКС: Аварийный останов установки" />
+		<Field Name="NO_BVKS" Type="BOOL" UUID="L3IEOO26W4OU3BRXXMJQ6EHSTM" Comment="БВКС: Штатный останов установки" />
+		<Field Name="Pusk_BVKS" Type="BOOL" UUID="4D5ZWIIL7CTEFGMGIYTGTLAN2A" Comment="БВКС: Запуск установки" />
+		<Field Name="OperCond" Type="REAL" UUID="RJQ272NR276EJB6QCSHFJ4SS44" Comment="БВКС: Состояние работы установки" />
+		<Field Name="OA1_Auto" Type="BOOL" UUID="AOCC6JXC6SDUXLCH6TK2L3KPW4" Comment="БВКС: ОА1 - Автоматический/Ручной режим" />
+		<Field Name="OA1_ON" Type="BOOL" UUID="NR5RA6FPP3HUNPUPOHTIDIIKUU" Comment="БВКС: ОА1 - Включен/Выключен" />
+		<Field Name="OA1_AO" Type="BOOL" UUID="SMW5YMPV2C3U7CYJDPLUFASU54" Comment="БВКС: ОА1 - Авария" />
+		<Field Name="KM1_Auto" Type="BOOL" UUID="CV33KPBWRQ5UZEBCZGSLXDR5PY" Comment="БВКС: КМ1 - Автоматический/Ручной режим" />
+		<Field Name="KM1_ON" Type="BOOL" UUID="XUGNC563QJEEZJZRFUQLLK3YSE" Comment="БВКС: КМ1 – Включен/Выключен" />
+		<Field Name="KM1_AO" Type="BOOL" UUID="QHH543O3OSGE5EQ5DEFK34GYSI" Comment="БВКС: КМ1 - Авария" />
+		<Field Name="KM2_Auto" Type="BOOL" UUID="RC6VH6TV4J4ELA5LYM7C4JQSLE" Comment="БВКС: КМ2- Автоматический/Ручной режим" />
+		<Field Name="KM2_ON" Type="BOOL" UUID="DVHK3KGGQVAENHC75XXQXQB4YI" Comment="БВКС: КМ2– Включен/Выключен" />
+		<Field Name="KM2_AO" Type="BOOL" UUID="5PHZLD23FQ4ELDPYOAFGEBVPLU" Comment="БВКС: КМ2- Авария" />
+		<Field Name="EK1_ON" Type="BOOL" UUID="63CRYCTCJTHUTGLQV36RQJBPVA" Comment="БВКС: ЭК01 – Включен/Выключен" />
+		<Field Name="EK2_ON" Type="BOOL" UUID="4USN2BLEVYGU7MWQBGNHWCLHD4" Comment="БВКС: ЭК02 – Включен/Выключен" />
+		<Field Name="EK3_ON" Type="BOOL" UUID="Y27WRO5RQI5UNA2D5QYQSJMQDA" Comment="БВКС: ЭК03 – Включен/Выключен" />
+		<Field Name="KLC1_ON" Type="BOOL" UUID="GLOAOTQUNVPUBI5LYCDYWRC5ZY" Comment="БВКС: KЛС01 - Открыт" />
+		<Field Name="KLR1_OF" Type="BOOL" UUID="Z5INUCCN626UZOQLSEVRW4FD7Q" Comment="БВКС: KЛР01 - Закрыт" />
+		<Field Name="KLP1_ON" Type="BOOL" UUID="G4OONXO3KTSEDFSFSRHTZT6SKA" Comment="БВКС: KЛП01 - Открыт" />
+		<Field Name="KLC2_ON" Type="BOOL" UUID="IRHNN2J2YOKUTILP5S7G5PBTNI" Comment="БВКС: KЛС02 - Открыт" />
+		<Field Name="KLR2_OF" Type="BOOL" UUID="J3PQITGLDFUUVI7BCRJFA5EHMM" Comment="БВКС: KЛР02 - Закрыт" />
+		<Field Name="KLP10_ON" Type="BOOL" UUID="FSYXWOKISOHUBJPSED7F772DRI" Comment="БВКС: KЛП10 - Открыт" />
+		<Field Name="VV10_ON" Type="BOOL" UUID="645HGRTDYI5ERH2JI6JAMMZ2AM" Comment="БВКС: ВВ10 - Включен" />
+		<Field Name="TT01_brk" Type="BOOL" UUID="XB2YFIHJDZ7E5MRGLBXBLI3CBE" Comment="БВКС: ТT01 – Отказ канала измерения" />
+		<Field Name="TT49_brk" Type="BOOL" UUID="O7NARU422Y3E3E2IE5HFQHRXRE" Comment="БВКС: TT49 – Отказ канала измерения" />
+		<Field Name="TT50_brk" Type="BOOL" UUID="KWELHSKNO2REFPQYGWBWV6M4LI" Comment="БВКС: TT50 – Отказ канала измерения" />
+		<Field Name="PT01_brk" Type="BOOL" UUID="C2YO56HNEE4EPNVRPXTL3RHNUQ" Comment="БВКС: PT01 – Отказ канала измерения" />
+		<Field Name="MT01_brk" Type="BOOL" UUID="DS5XBX7LM6BERJIO57VUFZBIMM" Comment="БВКС: МT01 – Отказ канала измерения" />
+		<Field Name="FT01_brk" Type="BOOL" UUID="3U2YGTMT2Z5E7EKBMRZZRVFOTQ" Comment="БВКС: FT01 – Отказ канала измерения" />
+		<Field Name="KM1Time" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="5UVARS6SHIEUTFIRLESD63GMGU" Comment="БВКС: Наработка компрессора КМ1" />
+		<Field Name="KM2Time" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="753N56535X2EDFHCOKGBYEKRXI" Comment="БВКС: Наработка компрессора КМ2" />
+		<Field Name="OA1Time" Type="6ULU6XPXBBREHIO25DI7EJF5CE" UUID="QNHPJSETY3DE7HB2OY742N2FEM" Comment="БВКС: Наработка осушителя ОА1" />
+	</Fields>
+</Type>

@@ -28,6 +28,7 @@ public class globVar {
 	public static String linSep;
 	public static String myDir;//путь до конфигуратора
         public static String desDir;//путь до папки с проектом
+        public static String DefaultProjectDir = "DefaultProject"; //путь проекта по умолчанию
 	public static FileManager fm;
 	public static String backupDir = "bkp"; // папка для бекапов
 	public static boolean EOF;

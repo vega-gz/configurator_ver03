@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_ALG_UPA" Kind="Struct" UUID="AB09495B43781C6315201BAF2BE88679">
+	<Fields>
+		<Field Name="noActivMode" Type="BOOL" UUID="9022063C472770F43F2746BECBAF12C3" />
+		<Field Name="Unlock" Type="BOOL" UUID="07C13E2F48A489E511543AAA24DB93D4" />
+		<Field Name="AOss" Type="BOOL" UUID="E6D60D3448069417461BD99B65D9735A" />
+		<Field Name="AObs" Type="BOOL" UUID="94E8CD7141E3A71ED266D48308776823" />
+		<Field Name="AO" Type="BOOL" UUID="JASVZKPGJUOEPE6A7ET7S2TRTQ" />
+		<Field Name="Fire" Type="BOOL" UUID="CE2582C0496135488BD8D19845049638" />
+		<Field Name="condReserve" Type="BOOL" UUID="7390F821470C42A2FED599B2EBE48F10" />
+		<Field Name="Pg_PT1_Pn" Type="BOOL" UUID="5C06EE654701891A512F0EB967B2CA31" Comment="Пониженное давление газа, поз.PT-1" />
+		<Field Name="Pg_PT2_Pn" Type="BOOL" UUID="BD30215A47A8AB2A2F88AA98E6363248" Comment="Пониженное давление газа, поз.PT-2" />
+		<Field Name="Pg_PT3_Pn" Type="BOOL" UUID="58D8464643964C61EE9393A7389AFE49" Comment="Пониженное давление газа, поз.PT-3" />
+		<Field Name="Pg_PT4_Pn" Type="BOOL" UUID="F0D92D974A6656FD5D9EFB8649B23CF2" Comment="Пониженное давление газа, поз.PT-4" />
+		<Field Name="Pg_PT5_Pn" Type="BOOL" UUID="5383CCDA4F6A4ED677E94D8CA63771F5" Comment="Пониженное давление газа, поз.PT-5" />
+		<Field Name="Pg_PT6_Pn" Type="BOOL" UUID="142D36E5437EE454DBBE4B876AB8DF97" Comment="Пониженное давление газа, поз.PT-6" />
+		<Field Name="Pg_PT7_Pn" Type="BOOL" UUID="AA5364B447ABE96FCC49AE9A93E17BA6" Comment="Пониженное давление газа, поз.PT-7" />
+		<Field Name="Pg_PT8_Pn" Type="BOOL" UUID="B6B1166A4FE1F78D176215A5169B3188" Comment="Пониженное давление газа, поз.PT-8" />
+		<Field Name="Pg_PT9_Pn" Type="BOOL" UUID="538AA9C146A321D007266F98E1345FAC" Comment="Пониженное давление газа, поз.PT-9" />
+		<Field Name="Pg_PT10_Pn" Type="BOOL" UUID="06CCED344D37608035BC3891B3534DC5" Comment="Пониженное давление газа, поз.PT-10" />
+		<Field Name="Pg_PT11_Pn" Type="BOOL" UUID="7FBF8BE245FCA4BFE263F893CEF0CF85" Comment="Пониженное давление газа, поз.PT-11" />
+		<Field Name="Pg_PT12_Pn" Type="BOOL" UUID="DC410A3B417732E67836F1A9829EF9D1" Comment="Пониженное давление газа, поз.PT-12" />
+		<Field Name="Pg_PT13_Pn" Type="BOOL" UUID="CF44E9AA415D35DB1F33B4A876DE1710" Comment="Пониженное давление газа, поз.PT-13" />
+		<Field Name="Pg_PT14_Pn" Type="BOOL" UUID="6AE67FB2428C19FBB2D1CEADBB633C90" Comment="Пониженное давление газа, поз.PT-14" />
+		<Field Name="Pg_PT1_Pv" Type="BOOL" UUID="AE601E71455D8A33E5E9C48C8B31F16D" Comment="Повышенное давление газа, поз.PT-1" />
+		<Field Name="Pg_PT2_Pv" Type="BOOL" UUID="1EEA500E4FC9CAA1DF2279B67C6D75E0" Comment="Повышенное давление газа, поз.PT-2" />
+		<Field Name="Pg_PT3_Pv" Type="BOOL" UUID="93BB0EF145292F1E1911DDADE9AC18C2" Comment="Повышенное давление газа, поз.PT-3" />
+		<Field Name="Pg_PT4_Pv" Type="BOOL" UUID="3B179631424A4B0507AC6D8ABB228F43" Comment="Повышенное давление газа, поз.PT-4" />
+		<Field Name="Pg_PT5_Pv" Type="BOOL" UUID="6FA0018641F40ED9ECCA33BC95329364" Comment="Повышенное давление газа, поз.PT-5" />
+		<Field Name="Pg_PT6_Pv" Type="BOOL" UUID="E4CC9ABB41E77B84C9A4BDA1E95F78C8" Comment="Повышенное давление газа, поз.PT-6" />
+		<Field Name="Pg_PT7_Pv" Type="BOOL" UUID="000FE9244F7FC6B273A3C18B0E43050F" Comment="Повышенное давление газа, поз.PT-7" />
+		<Field Name="Pg_PT8_Pv" Type="BOOL" UUID="01B1D2EC49844CFB51CDA38D882AD534" Comment="Повышенное давление газа, поз.PT-8" />
+		<Field Name="Pg_PT9_Pv" Type="BOOL" UUID="3EB5DFA44593ED0B78621AA650054A24" Comment="Повышенное давление газа, поз.PT-9" />
+		<Field Name="Pg_PT10_Pv" Type="BOOL" UUID="83EC8A174596053356AFAFA1663DDF30" Comment="Повышенное давление газа, поз.PT-10" />
+		<Field Name="Pg_PT11_Pv" Type="BOOL" UUID="EC024E534449D082F1EABE91E1CFC9CF" Comment="Повышенное давление газа, поз.PT-11" />
+		<Field Name="Pg_PT12_Pv" Type="BOOL" UUID="6FFF9EFB4C72674CBEE25AA7823F54F2" Comment="Повышенное давление газа, поз.PT-12" />
+		<Field Name="Pg_PT13_Pv" Type="BOOL" UUID="3AD409274CF516971889569A8AE1192F" Comment="Повышенное давление газа, поз.PT-13" />
+		<Field Name="Pg_PT14_Pv" Type="BOOL" UUID="CA9912E94ACE8EDD66768886E2EDDE3B" Comment="Повышенное давление газа, поз.PT-14" />
+		<Field Name="Pg_PT1_Av" Type="BOOL" UUID="1F315FAD4055C900AF87A3A03384C001" Comment="Высокое давление газа, поз.PT-1" />
+		<Field Name="Pg_PT2_Av" Type="BOOL" UUID="472390FD4F0FAF023C861E971E71E3D6" Comment="Высокое давление газа, поз.PT-2" />
+		<Field Name="Pg_PT3_Av" Type="BOOL" UUID="84F657FA444855F788C8009FB85DEB5E" Comment="Высокое давление газа, поз.PT-3" />
+		<Field Name="Pg_PT4_Av" Type="BOOL" UUID="2C1AE4D74CB713B852285DB31B0C2E6E" Comment="Высокое давление газа, поз.PT-4" />
+		<Field Name="Pg_PT5_Av" Type="BOOL" UUID="9C09D55746F0561E6CFFF1AA0731EF2C" Comment="Высокое давление газа, поз.PT-5" />
+		<Field Name="Pg_PT6_Av" Type="BOOL" UUID="FB1E59EF41A45B333CB16D89FB6A7D51" Comment="Высокое давление газа, поз.PT-6" />
+		<Field Name="Pg_PT7_Av" Type="BOOL" UUID="FE2E4CF4493B6F6ED2DE898EEB4A770E" Comment="Высокое давление газа, поз.PT-7" />
+		<Field Name="Pg_PT8_Av" Type="BOOL" UUID="475365DF4ACEFC6BC95ACCA7874A7F69" Comment="Высокое давление газа, поз.PT-8" />
+		<Field Name="Pg_PT9_Av" Type="BOOL" UUID="45C898BE45236E652EB9EAAFD8D6B56C" Comment="Высокое давление газа, поз.PT-9" />
+		<Field Name="Pg_PT10_Av" Type="BOOL" UUID="5CE5AD954305567A8F1CE89726EC4470" Comment="Высокое давление газа, поз.PT-10" />
+		<Field Name="Pg_PT11_Av" Type="BOOL" UUID="EE3BE2304175C1C2C64D848BC4516DE3" Comment="Высокое давление газа, поз.PT-11" />
+		<Field Name="Pg_PT12_Av" Type="BOOL" UUID="A2B930D446F44A3CC36345BA4A04D8A1" Comment="Высокое давление газа, поз.PT-12" />
+		<Field Name="Pg_PT13_Av" Type="BOOL" UUID="840AA6BF4FAC28C6D710B8B90BE9FD88" Comment="Высокое давление газа, поз.PT-13" />
+		<Field Name="Pg_PT14_Av" Type="BOOL" UUID="5D28835F47A11D45516D14BEA5A7C49B" Comment="Высокое давление газа, поз.PT-14" />
+		<Field Name="Tg_TE1_Pn" Type="BOOL" UUID="C5100900424E5225478EAF9A9D02A987" Comment="Низкая температура газа, поз.TE-1" />
+		<Field Name="Tg_TE2_Pn" Type="BOOL" UUID="3816D5734300F6D04A4A15B27EDF5146" Comment="Низкая температура газа, поз.TE-2" />
+		<Field Name="Tg_TE3_Pn" Type="BOOL" UUID="53E286094C7DE5C6EA8D1E9ED00C6AD3" Comment="Низкая температура газа, поз.TE-3" />
+		<Field Name="Tg_TE4_Pn" Type="BOOL" UUID="1ED647044E558CC66477879F8DEC32E1" Comment="Низкая температура газа, поз.TE-4" />
+		<Field Name="Tg_TE5_Pn" Type="BOOL" UUID="AF70316C48CB17F1E1FE14819F1EB652" Comment="Низкая температура газа, поз.TE-5" />
+		<Field Name="Tg_TE6_Pn" Type="BOOL" UUID="BD61698B47ABD62B470E43BC4B57278F" Comment="Низкая температура газа, поз.TE-6" />
+		<Field Name="Tg_TE7_Pn" Type="BOOL" UUID="00CDE6364B15824E1C7E2393671F148A" Comment="Низкая температура газа, поз.TE-7" />
+		<Field Name="Tg_TE8_Pn" Type="BOOL" UUID="B8FF140A4D5307ACAE0F9AAFA9588BF1" Comment="Низкая температура газа, поз.TE-8" />
+		<Field Name="Tg_TE9_Pn" Type="BOOL" UUID="A8A8D2FA41AB5CF95A5B9FA9B9746898" Comment="Низкая температура газа, поз.TE-9" />
+		<Field Name="Tg_TE10_Pn" Type="BOOL" UUID="1680BD624332269D762E12B232E94DDB" Comment="Низкая температура газа, поз.TE-10" />
+		<Field Name="Tg_TE11_Pn" Type="BOOL" UUID="3B7ADD1048D3B068457773BE60A20BF5" Comment="Низкая температура газа, поз.TE-11" />
+		<Field Name="Tg_TE12_Pn" Type="BOOL" UUID="00D0F8D149AD717C933964A86AACBB52" Comment="Низкая температура газа, поз.TE-12" />
+		<Field Name="Tg_TE13_Pn" Type="BOOL" UUID="F1C2041A4CA49B9B910A7DBD733F503C" Comment="Низкая температура газа, поз.TE-13" />
+		<Field Name="Tg_TE14_Pn" Type="BOOL" UUID="7F9700814041C37061DC239A1B199CE7" Comment="Низкая температура газа, поз.TE-14" />
+		<Field Name="Tg_TE1_Pv" Type="BOOL" UUID="1D57455B463908DEC1E8E0B82DDABB40" Comment="Высокая температура газа, поз.TE-1" />
+		<Field Name="Tg_TE2_Pv" Type="BOOL" UUID="164A0DBD40C7BDDDD4CFF49FE0DF2E6B" Comment="Высокая температура газа, поз.TE-2" />
+		<Field Name="Tg_TE3_Pv" Type="BOOL" UUID="C46DDEFD4E76D1FFD505CA8715A6A967" Comment="Высокая температура газа, поз.TE-3" />
+		<Field Name="Tg_TE4_Pv" Type="BOOL" UUID="E002F58E477B1C9ADBCC33A47CEB3D0E" Comment="Высокая температура газа, поз.TE-4" />
+		<Field Name="Tg_TE5_Pv" Type="BOOL" UUID="72B6B5CE44BB38573B957F83289352DE" Comment="Высокая температура газа, поз.TE-5" />
+		<Field Name="Tg_TE6_Pv" Type="BOOL" UUID="7E3190304073A92A1C7B889AFFAA2B9A" Comment="Высокая температура газа, поз.TE-6" />
+		<Field Name="Tg_TE7_Pv" Type="BOOL" UUID="A38835DA4A371B3592F848AB2007E404" Comment="Высокая температура газа, поз.TE-7" />
+		<Field Name="Tg_TE8_Pv" Type="BOOL" UUID="E1253EDB428CE7F7DD72B38924346BE9" Comment="Высокая температура газа, поз.TE-8" />
+		<Field Name="Tg_TE9_Pv" Type="BOOL" UUID="EBE7619D41550F8AAEDE89882B063B02" Comment="Высокая температура газа, поз.TE-9" />
+		<Field Name="Tg_TE10_Pv" Type="BOOL" UUID="888D07B04F8E67FBCDEE3CB8C2C21029" Comment="Высокая температура газа, поз.TE-10" />
+		<Field Name="Tg_TE11_Pv" Type="BOOL" UUID="4B1AF877493149712A20088EA9ADBC60" Comment="Высокая температура газа, поз.TE-11" />
+		<Field Name="Tg_TE12_Pv" Type="BOOL" UUID="B8698BF14762E2572F69D699428EC1AD" Comment="Высокая температура газа, поз.TE-12" />
+		<Field Name="Tg_TE13_Pv" Type="BOOL" UUID="1644B69441445CB06BEC37829387D155" Comment="Высокая температура газа, поз.TE-13" />
+		<Field Name="Tg_TE14_Pv" Type="BOOL" UUID="592FE1744005DB43859FB693BA7A24FE" Comment="Высокая температура газа, поз.TE-14" />
+		<Field Name="Kr_1T2_selfON" Type="BOOL" UUID="D148BCA44ACCB4ABE4E01CA00945DE37" Comment="Самопроизвольное открытие Крана 1Т-2" />
+		<Field Name="Kr_1T2_selfOF" Type="BOOL" UUID="A50B9DF845AF05CFA3BD7A8ECD1281E5" Comment="Самопроизвольное закрытие Крана  1Т-2" />
+		<Field Name="Kr_2T2_selfON" Type="BOOL" UUID="EEEAD00B4E681731BB0AAE804B30D479" Comment="Самопроизвольное открытие Крана 2Т-2" />
+		<Field Name="Kr_2T2_selfOF" Type="BOOL" UUID="0A8DF9624774FD643AA4A2B90C9CB688" Comment="Самопроизвольное закрытие Крана  2Т-2" />
+		<Field Name="Kr_3T2_selfON" Type="BOOL" UUID="045FA95B4D3E71B9272B56A6498EA445" Comment="Самопроизвольное открытие Крана 3Т-2" />
+		<Field Name="Kr_3T2_selfOF" Type="BOOL" UUID="D2C4257444877DF58BB815BF304AE107" Comment="Самопроизвольное закрытие Крана  3Т-2" />
+		<Field Name="Kr_4T2_selfON" Type="BOOL" UUID="6AA9EE084459C0D5796C1C90684AC165" Comment="Самопроизвольное открытие Крана 4Т-2" />
+		<Field Name="Kr_4T2_selfOF" Type="BOOL" UUID="289B3E6D472314EF61DC6BA6FDF07648" Comment="Самопроизвольное закрытие Крана  4Т-2" />
+		<Field Name="Kr_5T2_selfON" Type="BOOL" UUID="5F6156954B1753309E4BAAADC55AAAD9" Comment="Самопроизвольное открытие Крана 5Т-2" />
+		<Field Name="Kr_5T2_selfOF" Type="BOOL" UUID="3F02EFBA442B8DEAD75ACE91EBC0932B" Comment="Самопроизвольное закрытие Крана  5Т-2" />
+		<Field Name="Kr_6T2_selfON" Type="BOOL" UUID="D9C7A86047F3856D7DAC98B0C738AB8A" Comment="Самопроизвольное открытие Крана 6Т-2" />
+		<Field Name="Kr_6T2_selfOF" Type="BOOL" UUID="596CF1F14BF503F8924F6682A5F731C5" Comment="Самопроизвольное закрытие Крана  6Т-2" />
+		<Field Name="Kr_7T2_selfON" Type="BOOL" UUID="C2D0300640B21D2CA5E6B78E59119788" Comment="Самопроизвольное открытие Крана 7Т-2" />
+		<Field Name="Kr_7T2_selfOF" Type="BOOL" UUID="AD60A21A4F7F683EA36B28B5244FF49C" Comment="Самопроизвольное закрытие Крана  7Т-2" />
+		<Field Name="Kr_8T2_selfON" Type="BOOL" UUID="759836CC4F46A795BDAC3894B9F6F820" Comment="Самопроизвольное открытие Крана 8Т-2" />
+		<Field Name="Kr_8T2_selfOF" Type="BOOL" UUID="0EF477094A68D3B647A2978365880F81" Comment="Самопроизвольное закрытие Крана  8Т-2" />
+		<Field Name="Kr_9T2_selfON" Type="BOOL" UUID="2317233B4A41E580D452DCA13C4F62FD" Comment="Самопроизвольное открытие Крана 9Т-2" />
+		<Field Name="Kr_9T2_selfOF" Type="BOOL" UUID="8FE7A42C45AF7EA231FD6B86F39A021A" Comment="Самопроизвольное закрытие Крана  9Т-2" />
+		<Field Name="Kr_10T2_selfON" Type="BOOL" UUID="52C4607E42A390FEB245C29176E79741" Comment="Самопроизвольное открытие Крана 10Т-2" />
+		<Field Name="Kr_10T2_selfOF" Type="BOOL" UUID="01BDAFC648A6713828AC6FB5D891BB7F" Comment="Самопроизвольное закрытие Крана  10Т-2" />
+		<Field Name="Kr_11T2_selfON" Type="BOOL" UUID="908A4E1B4BA428D01225D6BD34DDD386" Comment="Самопроизвольное открытие Крана 11Т-2" />
+		<Field Name="Kr_11T2_selfOF" Type="BOOL" UUID="3BC7AF3948F8BB085FB799986CDE8B67" Comment="Самопроизвольное закрытие Крана  11Т-2" />
+		<Field Name="Kr_12T2_selfON" Type="BOOL" UUID="01A6A228434FD5FCF2B8618968EACC67" Comment="Самопроизвольное открытие Крана 12Т-2" />
+		<Field Name="Kr_12T2_selfOF" Type="BOOL" UUID="2A3A595A4771F89E9BDC80BF35494F09" Comment="Самопроизвольное закрытие Крана  12Т-2" />
+		<Field Name="Kr_13T2_selfON" Type="BOOL" UUID="7308576C4504EFE5C7398AA4B55709F2" Comment="Самопроизвольное открытие Крана 13Т-2" />
+		<Field Name="Kr_13T2_selfOF" Type="BOOL" UUID="F656EFB948F41920ADB4BCA5D9B2E534" Comment="Самопроизвольное закрытие Крана  13Т-2" />
+		<Field Name="Kr_14T2_selfON" Type="BOOL" UUID="67FC916D4A91A5A5FE40DC8018C19981" Comment="Самопроизвольное открытие Крана 14Т-2" />
+		<Field Name="Kr_14T2_selfOF" Type="BOOL" UUID="7202DC9F4231ABD479C01A96CF3BE2EF" Comment="Самопроизвольное закрытие Крана  14Т-2" />
+	</Fields>
+</Type>

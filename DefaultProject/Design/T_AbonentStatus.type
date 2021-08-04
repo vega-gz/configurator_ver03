@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_AbonentStatus" Kind="Struct" UUID="Y3DMTXQG22VU7AGOUG7GFN6JEU">
+	<Fields>
+		<Field Name="NoLink_CPU" Type="BOOL" UUID="CB17764642F8AB4B1DF8CEB46E15F7B8" Comment="Нет связи с ЦПУ" />
+		<Field Name="Fault_MainCh" Type="BOOL" UUID="2F2A687C4F93D56728C3C8A10E182819" Comment="Неисправность основного канала связи с ЦПУ" />
+		<Field Name="Fault_ReservCh" Type="BOOL" UUID="7FDE302D42BA8622967623BCE14345EF" Comment="Неисправность резервного канала связи с ЦПУ" />
+		<Field Name="ModeMessage" Type="STRING" UUID="8B0E3B8443D24FCBF7BB08AD77E06883" Comment="Статус режима" />
+		<Field Name="TchMessage" Type="STRING" UUID="2E136D7840FD5C5A922486A7C110C43F" Comment="Статус подрежима" />
+		<Field Name="ModeColor" Type="INT" UUID="50088B96486B18EE699642B251534F1F" Comment="Цвет в окне пейджера" />
+		<Field Name="TimerDelay" Type="STRING" UUID="14EC4F8C4CF77CD6EFAE8DAD34DC9076" Comment="Имя таймера технологической задержки" />
+		<Field Name="FirstOut" Type="STRING" UUID="53ED66JN2HGU7A6CQQKIZZ45AM" Comment="Первопричина останова" />
+	</Fields>
+</Type>

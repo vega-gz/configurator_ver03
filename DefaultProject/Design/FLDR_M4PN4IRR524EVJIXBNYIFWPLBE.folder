@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Сигналы">
+	<Items>
+		<Item Name="FLDR_5FDNOFMRAAEEBG23B4ECVX3COE.folder" />
+		<Item Name="FLDR_JBZYEGCNV4UUJPJNRGWV4UUIJE.folder" />
+		<Item Name="FLDR_LFYFC4BHGTGUVM2AQCTPMEMOW4.folder" />
+		<Item Name="FLDR_XKZNFHI3EOTENLHLB72GNKLDBM.folder" />
+		<Item Name="FLDR_YYZEMJ4DRJXEHD3JNS4NDI6WYA.folder" />
+		<Item Name="T_KC_Pulsar.type" />
+	</Items>
+</Folder>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_GPA1_mb_AI_DRV" Kind="Struct" UUID="ABA61A2B739F4C38ADB14CCDB5A13564">
+	<Fields>
+		<Field Name="N_ST" Type="REAL" UUID="54059FB6ABC644498256F84770B63850" Comment="Текущие обороты СТ" />
+		<Field Name="N_VD" Type="REAL" UUID="5CF0DD290A4042A390AD104E57551031" Comment="Текущие обороты ВД" />
+		<Field Name="Pg_inN" Type="REAL" UUID="B57541B0B50F4C80BC20B9C8A5542246" Comment="Давление на входе нагнетателя" />
+		<Field Name="Pg_outN" Type="REAL" UUID="57D6AFCF6785436F8530CEFFB6D29A67" Comment="Давление на выходе нагнетателя" />
+		<Field Name="Tg_inN" Type="REAL" UUID="B10E61B79AC04351A4026A8E88B26486" Comment="Температура на входе нагнетателя" />
+		<Field Name="Tg_outN" Type="REAL" UUID="A1734B881F2847159A2CAEAF80BD3FF2" Comment="Температура на выходе нагнетателя" />
+		<Field Name="prod" Type="REAL" UUID="25C3298BA20B47F7B2BB1E53EA058CCB" Comment="Расход технологического газа" />
+		<Field Name="loLimRes" Type="REAL" UUID="10851DCE09F340279A396AE005CDE403" Comment="Запас до нижнего ограничения" />
+		<Field Name="hiLimRes" Type="REAL" UUID="BF616962D5354473B9D2C780F146D86A" Comment="Запас до верхнего ограничения" />
+		<Field Name="SurgeRez" Type="REAL" UUID="4EPAKCSLUAGU7F5HH3UBDQ4RVI" Comment="Помпажный запас" />
+		<Field Name="PosAPK" Type="REAL" UUID="ILQZE4K5YOMURA2MMALYQMU3UE" Comment="Положение АПК" />
+	</Fields>
+</Type>

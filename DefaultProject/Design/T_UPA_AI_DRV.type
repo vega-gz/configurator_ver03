@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UPA_AI_DRV" UUID="6214B23784E3467A97810DA7588804A9">
+<Fields>
+<Field Comment="Расход компримируемого газа по скважине 1Т" Name="Qg_1T" Type="REAL" UUID="FAA1EFF062534820BEAC9FDFA7466FCE"/>
+<Field Comment="Расход компримируемого газа по скважине 2Т" Name="Qg_2T" Type="REAL" UUID="0104A1B473D04AC39559F99E3973C677"/>
+<Field Comment="Расход компримируемого газа по скважине 3Т" Name="Qg_3T" Type="REAL" UUID="9C5834706FAA463381FA24739308BD9B"/>
+<Field Comment="Расход компримируемого газа по скважине 4Т" Name="Qg_4T" Type="REAL" UUID="3BBB1F9919774BCB8EB17D4F4D6EB199"/>
+<Field Comment="Расход компримируемого газа по скважине 5Т" Name="Qg_5T" Type="REAL" UUID="D2C2260FFA724466A7805FDE7928701C"/>
+<Field Comment="Расход компримируемого газа по скважине 6Т" Name="Qg_6T" Type="REAL" UUID="D445854924D945BF94B381F8646F956A"/>
+<Field Comment="Расход компримируемого газа по скважине 7Т" Name="Qg_7T" Type="REAL" UUID="5B45013AC48A47929852673D77315B91"/>
+<Field Comment="Расход компримируемого газа по скважине 8Т" Name="Qg_8T" Type="REAL" UUID="B4594DA71EFA4DE1AD2AF37CFAFD8F2C"/>
+<Field Comment="Расход компримируемого газа по скважине 9Т" Name="Qg_9T" Type="REAL" UUID="4646B87C8D854712B341A7B3BBF7FD9C"/>
+<Field Comment="Расход компримируемого газа по скважине 10Т" Name="Qg_10T" Type="REAL" UUID="15F092C1C15C403AABC0805F8EB364D6"/>
+<Field Comment="Расход компримируемого газа по скважине 11Т" Name="Qg_11T" Type="REAL" UUID="35ECF4DCD9374852A438E3393D1D6477"/>
+<Field Comment="Расход компримируемого газа по скважине 12Т" Name="Qg_12T" Type="REAL" UUID="BEFDE01212E54E0CA2E45A7F96BAC03B"/>
+<Field Comment="Расход компримируемого газа по скважине 13Т" Name="Qg_13T" Type="REAL" UUID="12FA33E6DD3843E485261C9040B3D48B"/>
+<Field Comment="Расход компримируемого газа по скважине 14Т" Name="Qg_14T" Type="REAL" UUID="49544C1C0396400EAC609A7B8F158A55"/>
+<Field Comment="Давление газа в коллекторе газа" Name="Pg_Kol" Type="REAL" UUID="AA8FD179D4E14C8FAD1F97D1403245B7"/>
+<Field Comment="Температура воздуха в ББ САУ УПА" Name="T_BB_UPA" Type="REAL" UUID="DF90B1C9EF3B4F58BBC425FD1EC6BE75"/>
+<Field Comment="Резерв" Name="Res_0" Type="REAL" UUID="BD75BC3368C94B0EA61BC1F8A4C2E1F4"/>
+<Field Comment="Резерв" Name="Res_1" Type="REAL" UUID="6A0D33656D1E4D79BD3E04FB0A6BD16F"/>
+<Field Comment="Резерв" Name="Res_2" Type="REAL" UUID="D2F0EC730A8F40188BAA5A19CE47C1C8"/>
+<Field Comment="Резерв" Name="Res_3" Type="REAL" UUID="AB68FB225C374180BC27950BAF770C60"/>
+<Field Comment="�?змерение основного напряжения" Name="Uosn_SAU" Type="REAL" UUID="0E3873397B7F49BA8F58B12E2E93BEE7"/>
+<Field Comment="�?змерение резервного напряжения" Name="Urez_SAU" Type="REAL" UUID="C99672B06F4340F786E8BF1599A7487E"/>
+<Field Comment="Резерв" Name="Res_4" Type="REAL" UUID="FCDF77D254B54C76B8EDCD2903A0AF23"/>
+<Field Comment="Резерв" Name="Res_5" Type="REAL" UUID="95766B6DBADD45CFA04C6FB83AE5ADA2"/>
+</Fields>
+</Type>

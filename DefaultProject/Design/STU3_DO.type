@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="STU3_DO" Kind="Struct" UUID="E3ED36704996A49F580662B8263EBEB3">
+    <Fields>
+        <Field Name="A3_4_1_KE4_1_OPEN" Type="BOOL" UUID="E79DCBC94B577E7E4D207395C7DED5DA" Comment="Клапан сброса НД выход 1(КЭ4-1)" />
+        <Field Name="A3_4_2_KE4_2_OPEN" Type="BOOL" UUID="ECB570F248F5B9EA22DE00AD97D15B0E" Comment="Клапан сброса НД выход 2(КЭ4-2)" />
+        <Field Name="A3_4_3_KE3_1_OPEN" Type="BOOL" UUID="8B84677843CA3B9BE9B8DCB74B55F38A" Comment="Клапан отсечной ТГ в УПТН (КЭ3-1)" />
+        <Field Name="A3_4_4_RESERVE" Type="BOOL" UUID="A5A79C8A4DA4303412825D98E0D6215C" Comment="Резерв" />
+        <Field Name="A3_4_5_RESERVE" Type="BOOL" UUID="E3389CF04717A7CB3BC14F90D4DF7970" Comment="Резерв" />
+        <Field Name="A3_4_6_RESERVE" Type="BOOL" UUID="2CEC09294104CEA2AD7C5B97B099AE0E" Comment="Резерв" />
+        <Field Name="A3_4_7_RESERVE" Type="BOOL" UUID="9DDDCFF44806FADE78D28A832AFF3DC7" Comment="Резерв" />
+        <Field Name="A3_4_8_RESERVE" Type="BOOL" UUID="2EBE1C554CD6FCB5BE2A2993E34F37FB" Comment="Резерв" />
+        <Field Name="A3_4_9_VLV_8_1_ON" Type="BOOL" UUID="968630F844F54F9FE5BD3B873B34C4D7" Comment="Команда крана входного «открыть» (Кр8.1)" />
+        <Field Name="A3_4_10_VLV_8_1_OFF" Type="BOOL" UUID="D2D989D34F087B69A8152C9591A56F8E" Comment="Команда крана входного «закрыть» (Кр8.1)" />
+        <Field Name="A3_4_11_VLV_8_1_STOP" Type="BOOL" UUID="69FD657E47CFAC21B7EC7D87546B56BB" Comment="Команда крана входного «стоп»(Кр8.1)" />
+        <Field Name="A3_4_12_VLV_8_1_A_ON" Type="BOOL" UUID="6BD1DD67461587B48687288DE8144FDF" Comment="Команда крана сброса на свечу «открыть» (Кр8.1а)" />
+        <Field Name="A3_4_13_VLV_8_1_A_OFF" Type="BOOL" UUID="819CB47944948C1FEFC655AF086CF5EF" Comment="Команда крана сброса на свечу «закрыть» (Кр8.1а)" />
+        <Field Name="A3_4_14_VLV_8_1_A_STOP" Type="BOOL" UUID="8D2653F541682A7A58F7678E7821AE81" Comment="Команда крана сброса на свечу «стоп»(Кр8.1а)" />
+        <Field Name="A3_4_15_RESERVE" Type="BOOL" UUID="6BF2599C412C89511232DFB85256A11E" Comment="Резерв" />
+        <Field Name="A3_4_16_RESERVE" Type="BOOL" UUID="E65C76FC4E2E2A4B6BEB3686A540F4C4" Comment="Резерв" />
+        <Field Name="A3_5_1_VLV_2_1_3_OPEN" Type="BOOL" UUID="FEB4568641BADCE1234E3BBE0DEBF6A7" Comment="Открыть Кран К2.1-3, сброса конденсата из 1 ступени" />
+        <Field Name="A3_5_2_VLV_2_1_3_CLOSE" Type="BOOL" UUID="7869B8B7419FB082E38853B85E5CB59D" Comment="Закрыть Кран К2.1-3, сброса конденсата из 1 ступени" />
+        <Field Name="A3_5_3_VLV_2_1_4_OPEN" Type="BOOL" UUID="75AC08E843BF3F502034BFB875F215BE" Comment="Открыть Кран К2.1-4, сброса конденсата из 2 ступени" />
+        <Field Name="A3_5_4_VLV_2_1_4_CLOSE" Type="BOOL" UUID="BE13CC7746E1189A9457848CD0DC6A67" Comment="Закрыть Кран К2.1-4, сброса конденсата из 2 ступени" />
+        <Field Name="A3_5_5_VLV_2_2_3_OPEN" Type="BOOL" UUID="CFDEE9184D239BE414CB2785C6A89E9D" Comment="Открыть Кран К2.2-3, сброса конденсата из 1 ступени" />
+        <Field Name="A3_5_6_VLV_2_2_3_CLOSE" Type="BOOL" UUID="C0EDCB95412211C483AF55A1CC0BE637" Comment="Закрыть Кран К2.2-3, сброса конденсата из 1 ступени" />
+        <Field Name="A3_5_7_VLV_2_2_4_OPEN" Type="BOOL" UUID="A32F9D894C1C3B42F6401EB4F8404C42" Comment="Открыть Кран К2.2-4, сброса конденсата из 2 ступени" />
+        <Field Name="A3_5_8_VLV_2_2_4_CLOSE" Type="BOOL" UUID="FDD3918A4E1F9028BEAA90A32C0EF000" Comment="Закрыть Кран К2.2-4, сброса конденсата из 2 ступени" />
+        <Field Name="A3_5_9_AVAR_UPTIG" Type="BOOL" UUID="C1E08B9F42C4A794CF1235A33EE580A5" Comment="С/з оповещ. &quot;Авария УПТИГ&quot; (КИПиА)" />
+        <Field Name="A3_5_10_AM_1_1_ON" Type="BOOL" UUID="D07A6E9749D2C8E4C4B4D3B0B971F8B7" Comment="Включение вытяжного вентилятора БТ (АМ1-1)" />
+        <Field Name="A3_5_11_AM3_1_ON" Type="BOOL" UUID="347230D6410DCB4A612F61ACA137C89A" Comment="Включение вытяжного вентилятора УПТН (АМ3-1)" />
+        <Field Name="A3_5_12_AM_1_1_OFF" Type="BOOL" UUID="721A51094D9ED2CE23E50795ADAFC096" Comment="Отключение вытяжного вентилятора БТ (АМ1-1)" />
+        <Field Name="A3_5_13_AM3_1_OFF" Type="BOOL" UUID="19CD195E4F5E2F09747203A3708B3DAC" Comment="Отключение вытяжного вентилятора УПТН (АМ3-1)" />
+        <Field Name="A3_5_14_RESERVE" Type="BOOL" UUID="C2C9AB764BD5BE757FC60A93F1091609" Comment="Резерв" />
+        <Field Name="A3_5_15_RESERVE" Type="BOOL" UUID="F5C50D054385CF4F6250EABAF49753C2" Comment="Резерв" />
+        <Field Name="A3_5_16_RESERVE" Type="BOOL" UUID="115659BA48DBF4494209168A255C1180" Comment="Резерв" />
+        <Field Name="A3_6_1_ALARM_ALL" Type="BOOL" UUID="3410D957493DFD24372050B4B682232B" Comment="Обобщенная предупредительная сигнализация «Внимание»" />
+        <Field Name="A3_6_2_ALERT" Type="BOOL" UUID="089672754BD26EDF77BA17BC3CE98EF9" Comment="Обобщенная сигнализация «Авария»" />
+        <Field Name="A3_6_3_RESERVE" Type="BOOL" UUID="E3A40F0447AA343FB64A7EAAF62F7371" Comment="Резерв" />
+        <Field Name="A3_6_4_RESERVE" Type="BOOL" UUID="7A9F63064730DE8BB6C49F838B735530" Comment="Резерв" />
+        <Field Name="A3_6_5_RESERVE" Type="BOOL" UUID="8BC2D065412F0736CCC10997DE49FBFD" Comment="Резерв" />
+        <Field Name="A3_6_6_RESERVE" Type="BOOL" UUID="5B9740184F81A0BE0270799C85659738" Comment="Резерв" />
+        <Field Name="A3_6_7_RESERVE" Type="BOOL" UUID="1FC206D24B5A9D04185A5FA5303C42AA" Comment="Резерв" />
+        <Field Name="A3_6_8_RESERVE" Type="BOOL" UUID="A1A4690B426964BC028632A1A0720046" Comment="Резерв" />
+        <Field Name="A3_6_9_RESERVE" Type="BOOL" UUID="302F41A44B124844AFDC43B256031006" Comment="Резерв" />
+        <Field Name="A3_6_10_RESERVE" Type="BOOL" UUID="273E6BFC49D29EDA0D7EED8FE89B3F44" Comment="Резерв" />
+        <Field Name="A3_6_11_RESERVE" Type="BOOL" UUID="EDB2B63243751E0224DC408BB69AB622" Comment="Резерв" />
+        <Field Name="A3_6_12_RESERVE" Type="BOOL" UUID="58FE9A1E40159E42EB73688B2F57D149" Comment="Резерв" />
+        <Field Name="A3_6_13_RESERVE" Type="BOOL" UUID="2705597C49AE5BCAD46190B9659D9ACC" Comment="Резерв" />
+        <Field Name="A3_6_14_RESERVE" Type="BOOL" UUID="91758239434361357F4E199A15841B7C" Comment="Резерв" />
+        <Field Name="A3_6_15_RESERVE" Type="BOOL" UUID="AD3A61C54DF926958BAF9C9174C9B2BB" Comment="Резерв" />
+        <Field Name="A3_6_16_SIREN_ON" Type="BOOL" UUID="E56619EC413451A6D88414918AC1145D" Comment="Включить сирену" />
+        <Field Name="A3_4_STATUS" Type="BOOL" UUID="58893BE740BFF27FFF7E5E90D0C3F7D2" />
+        <Field Name="A3_5_STATUS" Type="BOOL" UUID="C9497EE04A6DEEF7D4D1629D65260FEF" />
+        <Field Name="A3_6_STATUS" Type="BOOL" UUID="2CE8662446ADEAA55400428CA9D48ADA" />
+        <Field Name="dummy" Type="BOOL" UUID="E459DC5E4D7E4C9AE8DBB1B1E38D10E4" />
+    </Fields>
+</Type>

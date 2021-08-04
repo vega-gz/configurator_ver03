@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="PLC">
+	<Items>
+		<Item Name="Node_6EZQ2OGTMWYEJLBMDXON56FO7M.nod" />
+		<Item Name="Node_6U4WFU6CYVOULDO6LW5XAY53RA.nod" />
+		<Item Name="Node_CKXQD4YHHILULKBW7FH75SZ2CI.nod" />
+		<Item Name="Node_CP2IYLD4KLAENHGNZIJMD4KMII.nod" />
+		<Item Name="Node_CTCBRN67JXQUFG5M5GXVTDYWQ4.nod" />
+		<Item Name="Node_CUW5ES2CHZ2EXISPYTJ5L5UJVU.nod" />
+		<Item Name="Node_F7I6JOO3KBVERF2P5SBEU67ADA.nod" />
+		<Item Name="Node_ICHWAWKY3TMUXA2GZSRYJP6HBM.nod" />
+		<Item Name="Node_IHKB5L7KZOSEBDVZG77FODI4FU.nod" />
+		<Item Name="Node_LK74LJ6HQ6HULOHZJQ7Q4ZNBWA.nod" />
+		<Item Name="Node_NHYYQ6AKQ7YUFKKF6FALZ6B534.nod" />
+		<Item Name="Node_R7IELHJKFEOUROVPHXTJGTPKKU.nod" />
+		<Item Name="Node_YERPKLB3WVNELERG5NQGYWII2Y.nod" />
+		<Item Name="Node_YPAV45GYPIZEPA3FYOEM4MIXWY.nod" />
+		<Item Name="Node_YSKH2FOTZIJUZE2TNJAPVGJA6A.nod" />
+	</Items>
+</Folder>

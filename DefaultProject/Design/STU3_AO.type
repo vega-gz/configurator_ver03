@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="STU3_AO" Kind="Struct" UUID="E86D2DA0477A7E36C351A58BBFC06BD9">
+    <Fields>
+        <Field Name="A2_4_1_RESERVE" Type="LREAL" UUID="2D718E3046C864950CB1C9BE1C568783" Comment="Резерв" />
+        <Field Name="A2_4_2_RESERVE" Type="LREAL" UUID="0597234B4323050D532A1CAF96AD5985" Comment="Резерв" />
+        <Field Name="A2_4_3_RESERVE" Type="LREAL" UUID="C8E209A64EF677D645A216BD81DC3BBF" Comment="Резерв" />
+        <Field Name="A2_4_4_RESERVE" Type="LREAL" UUID="CCC9F290419B6FB0012BCA8D33F18027" Comment="Резерв" />
+        <Field Name="A2_5_1_RESERVE" Type="LREAL" UUID="13DC7BF348ED003909940F8968F06F8B" Comment="Резерв" />
+        <Field Name="A2_5_2_RESERVE" Type="LREAL" UUID="E1508FE44494C3E4C957C8AA88A0A344" Comment="Резерв" />
+        <Field Name="A2_5_3_RESERVE" Type="LREAL" UUID="9A3BB86B435F713E7E08B596D7F27D93" Comment="Резерв" />
+        <Field Name="A2_5_4_RESERVE" Type="LREAL" UUID="174932A6404B4ED27C253C8BAEA638FC" Comment="Резерв" />
+        <Field Name="A2_4_STATUS" Type="BOOL" UUID="42216B56479E28C9A7403DA64EC405C5" />
+        <Field Name="A2_5_STATUS" Type="BOOL" UUID="3D3478AD44334AA74D6BEEB272AC0FC3" />
+    </Fields>
+</Type>

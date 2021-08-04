@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_Mode_NMS" Kind="Struct" UUID="QHO5OOWXDPLEPERTBBA27N7RTQ">
+	<Fields>
+		<Field Name="graph" Type="EE67E15142EC74278378C1A6B2ADA2E4" UUID="BBOJDG6KATIEPJQWWKYR2RBAHI" Comment="Граф режима" />
+		<Field Name="FaultNMS" Type="BOOL" UUID="AWBDYXSP7K7UPCB32XUVXFT464" Comment="Нет режима" />
+		<Field Name="AONMS" Type="BOOL" UUID="VDSD77CAFYYULIGYT6HOX6W4Q4" Comment="АО" />
+		<Field Name="NormaNMS" Type="BOOL" UUID="V6FKR4CJEHVUJDPDDRUPGCVG5U" Comment="Норма" />
+	</Fields>
+</Type>

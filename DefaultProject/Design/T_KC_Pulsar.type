@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_Pulsar" Kind="Struct" UUID="6W7SEGSP5D6ENGQJFSIEBCMTDI">
+	<Fields>
+		<Field Name="Osn_R11" Type="BOOL" UUID="PKKNKR3PMALE3BPQODLCKMAXX4" Comment="Осн. R пластины 1 в т. 1 (N1-1) &gt; 11 Ом" />
+		<Field Name="Osn_R12" Type="BOOL" UUID="24UXCTXBKCPEXEYUECMFDU5GYU" Comment="Осн. R пластины 2 в т. 1 (N1-2) &gt; 11 Ом" />
+		<Field Name="Osn_R13" Type="BOOL" UUID="UXOY4D5VGCJU5BIQB4XT5JPDUA" Comment="Осн. R пластины 3 в т. 1 (N1-3) &gt; 11 Ом" />
+		<Field Name="Osn_R21" Type="BOOL" UUID="3JTEVL75PFEUVN4VZDRSVIU7TU" Comment="Осн. R пластины 1 в т. 2 (N2-1) &gt; 11 Ом" />
+		<Field Name="Osn_R22" Type="BOOL" UUID="PASZ6DF445RUXKJF2VMZP3N44M" Comment="Осн. R пластины 2 в т. 2 (N2-2) &gt; 11 Ом" />
+		<Field Name="Osn_R23" Type="BOOL" UUID="27EZXB2BKL5U3LRYHIK35YGVGQ" Comment="Осн. R пластины 3 в т. 2 (N2-3) &gt; 11 Ом" />
+		<Field Name="Osn_R31" Type="BOOL" UUID="IG6BCA3QFJDEDPJOQ74ZJGBUDI" Comment="Осн. R пластины 1 в т. 3 (N3-1) &gt; 11 Ом" />
+		<Field Name="Osn_R32" Type="BOOL" UUID="ACR64KVTBUAEVDH3DIB6AC3OXQ" Comment="Осн. R пластины 2 в т. 3 (N3-2) &gt; 11 Ом" />
+		<Field Name="Osn_R33" Type="BOOL" UUID="UYZAAYXANTWUJCJCPD4E3GCZQI" Comment="Осн. R пластины 3 в т. 3 (N3-3) &gt; 11 Ом" />
+		<Field Name="Osn_R41" Type="BOOL" UUID="JNPGUXQNGAFEJMWKNFSHWDQBQQ" Comment="Осн. R пластины 1 в т. 4 (N4-1) &gt; 11 Ом" />
+		<Field Name="Osn_R42" Type="BOOL" UUID="76A6PVX56UKU3ENCWQXQ57V6UQ" Comment="Осн. R пластины 2 в т. 4 (N4-2) &gt; 11 Ом" />
+		<Field Name="Osn_R43" Type="BOOL" UUID="NG3YV3AC7E7UVGBY2GUXCZGBEQ" Comment="Осн. R пластины 3 в т. 4 (N4-3) &gt; 11 Ом" />
+		<Field Name="Osn_R51" Type="BOOL" UUID="GEWX5HQMTOPU5IGNRWDAACZOEE" Comment="Осн. R пластины 1 в т. 5 (N5-1) &gt; 11 Ом" />
+		<Field Name="Osn_R52" Type="BOOL" UUID="DB3UIYRDCXWUNNYGQKZYKP5FC4" Comment="Осн. R пластины 2 в т. 5 (N5-2) &gt; 11 Ом" />
+		<Field Name="Osn_R53" Type="BOOL" UUID="TRKJFNL7E6WUDN2FKZ5NXJDQ5A" Comment="Осн. R пластины 3 в т. 5 (N5-3) &gt; 11 Ом" />
+		<Field Name="Osn_R61" Type="BOOL" UUID="4I3Y3KE6F2RURG4DSPRTEPRJAA" Comment="Осн. R пластины 1 в т. 6 (N6-1) &gt; 11 Ом" />
+		<Field Name="Osn_R62" Type="BOOL" UUID="YSUUE65XFBGELL5K5K36GY6AQQ" Comment="Осн. R пластины 2 в т. 6 (N6-2) &gt; 11 Ом" />
+		<Field Name="Osn_R63" Type="BOOL" UUID="UPNGWM7TRI3UFPNP47IS2AG45I" Comment="Осн. R пластины 3 в т. 6 (N6-3) &gt; 11 Ом" />
+		<Field Name="Osn_R71" Type="BOOL" UUID="S55ZCEW635ZEJJUKG5KWWLDGM4" Comment="Осн. R пластины 1 в т. 7 (N7-1) &gt; 11 Ом" />
+		<Field Name="Osn_R72" Type="BOOL" UUID="DBO2H6X5ASIENGLFOZU4SPE5E4" Comment="Осн. R пластины 2 в т. 7 (N7-2) &gt; 11 Ом" />
+		<Field Name="Osn_R73" Type="BOOL" UUID="FEMFGHQTTOOUBDH3OLAR5IF2T4" Comment="Осн. R пластины 3 в т. 7 (N7-3) &gt; 11 Ом" />
+		<Field Name="Osn_R81" Type="BOOL" UUID="IY7ZVUSHG7HE5OPSPVWKHLQ2OM" Comment="Осн. R пластины 1 в т. 8 (N8-1) &gt; 11 Ом" />
+		<Field Name="Osn_R82" Type="BOOL" UUID="WHIYP5NXXCWEVFTMHT45MQW7XY" Comment="Осн. R пластины 2 в т. 8 (N8-2) &gt; 11 Ом" />
+		<Field Name="Osn_R83" Type="BOOL" UUID="5KGLOAWGOERU7HXALICPR33QYY" Comment="Осн. R пластины 3 в т. 8 (N8-3) &gt; 11 Ом" />
+		<Field Name="Osn_KIP_open" Type="BOOL" UUID="6URCUWI5MQSEHENY35ZSYCNJF4" Comment="Осн. КИП вскрыт" />
+		<Field Name="Osn_BB_open" Type="BOOL" UUID="SMD66ED4LYDETGHXGDC33EEGB4" Comment="Осн. б/б вскрыт" />
+		<Field Name="Osn_No_U_EXZ" Type="BOOL" UUID="HLM4OZ75YLDUDMAYHZ4ZPTECG4" Comment="Осн. нет 220 В на апп. ЭХЗ" />
+		<Field Name="Osn_Smodul1_bad" Type="BOOL" UUID="G6ODWF2R24KUTJUGRMVC6HENAY" Comment="Осн. силовой модуль 1 неисправен" />
+		<Field Name="Osn_Smodul2_bad" Type="BOOL" UUID="3JCBWE23AFAUZI4A4PQOUKICTA" Comment="Осн. силовой модуль 2 неисправен" />
+		<Field Name="Osn_Smodul3_bad" Type="BOOL" UUID="OP23LVAFJ3LUVGFXTU5EXSRDEU" Comment="Осн. силовой модуль 3 неисправен" />
+		<Field Name="Osn_Smodul4_bad" Type="BOOL" UUID="2Y7DOO5RZ3KUTFURL6O2HYFUBM" Comment="Осн. силовой модуль 4 неисправен" />
+		<Field Name="Osn_Smodul5_bad" Type="BOOL" UUID="RU6CK4RW3NRUNAFVRN6LGON76Y" Comment="Осн. силовой модуль 5 неисправен" />
+		<Field Name="Osn_Smodul6_bad" Type="BOOL" UUID="E3YO5V7VDZHUBHP6QWTWLO4XYE" Comment="Осн. силовой модуль 6 неисправен" />
+		<Field Name="Osn_Smodul7_bad" Type="BOOL" UUID="J2DRVSOKM6MUTMCG7WQKQLIMQA" Comment="Осн. силовой модуль 7 неисправен" />
+		<Field Name="Osn_Smodul8_bad" Type="BOOL" UUID="46NIWLH3AC2E5HXOXND33GGJK4" Comment="Осн. силовой модуль 8 неисправен" />
+		<Field Name="Osn_Smodul9_bad" Type="BOOL" UUID="G22QCWJKQKFEJBPIMKT63XAQMQ" Comment="Осн. силовой модуль 9 неисправен" />
+		<Field Name="Osn_Smodul10_bad" Type="BOOL" UUID="PO3LS6URGOJUNC7W7PS6VKTH2Q" Comment="Осн. силовой модуль 10 неисправен" />
+		<Field Name="Osn_Smodul11_bad" Type="BOOL" UUID="6WJZKIPG77GENIYY3QCL2OBKSM" Comment="Осн. силовой модуль 11 неисправен" />
+		<Field Name="Osn_Smodul12_bad" Type="BOOL" UUID="QQJTBH4HFZZENPXB4ROYKBUPIQ" Comment="Осн. силовой модуль 12 неисправен" />
+		<Field Name="Osn_1ch_ResOn" Type="BOOL" UUID="VOU5CQFQVOMUZIEH26M2ZQAZCM" Comment="Осн. 1 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_2ch_ResOn" Type="BOOL" UUID="E77HNQKM5MHU7AFHABLU6X5NUM" Comment="Осн. 2 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_3ch_ResOn" Type="BOOL" UUID="F2ZM6DIP6XQERBIUY5KS7Z7ACU" Comment="Осн. 3 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_4ch_ResOn" Type="BOOL" UUID="RIBER5RYMHGE7F5TLGYCSDTSW4" Comment="Осн. 4 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_5ch_ResOn" Type="BOOL" UUID="ZI276OWELB3EJC5KAA3FBSUFFM" Comment="Осн. 5 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_6ch_ResOn" Type="BOOL" UUID="NQBX72PE2S6EFGKO4XNNRURYN4" Comment="Осн. 6 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_R11" Type="BOOL" UUID="KBB6RUFTNYKE5JTDBQLILPMVTM" Comment="Рез. R пластины 1 в т. 1 (N1-1) &gt; 11 Ом" />
+		<Field Name="Rez_R12" Type="BOOL" UUID="S44Q6KXA2GMEVBGE2ISQG4HXOY" Comment="Рез. R пластины 2 в т. 1 (N1-2) &gt; 11 Ом" />
+		<Field Name="Rez_R13" Type="BOOL" UUID="HSDU6QJCTDLU5MIN3SV6QMBTCY" Comment="Рез. R пластины 3 в т. 1 (N1-3) &gt; 11 Ом" />
+		<Field Name="Rez_R21" Type="BOOL" UUID="3ZYTKRJD64CEDCZOGMRU4FKWYY" Comment="Рез. R пластины 1 в т. 2 (N2-1) &gt; 11 Ом" />
+		<Field Name="Rez_R22" Type="BOOL" UUID="2D26XU5NOOAETJOL6NK6H3FXXY" Comment="Рез. R пластины 2 в т. 2 (N2-2) &gt; 11 Ом" />
+		<Field Name="Rez_R23" Type="BOOL" UUID="6OX4EG4LXUYUNOJEQEP27N3FVI" Comment="Рез. R пластины 3 в т. 2 (N2-3) &gt; 11 Ом" />
+		<Field Name="Rez_R31" Type="BOOL" UUID="ZCVUNGEWBMPUROHWGNENJOGPLQ" Comment="Рез. R пластины 1 в т. 3 (N3-1) &gt; 11 Ом" />
+		<Field Name="Rez_R32" Type="BOOL" UUID="YZBMKKH3IP4UXL7S4XPKQU5HIA" Comment="Рез. R пластины 2 в т. 3 (N3-2) &gt; 11 Ом" />
+		<Field Name="Rez_R33" Type="BOOL" UUID="XSNJNP4PGUVUBAUFJNC6NJQ2TU" Comment="Рез. R пластины 3 в т. 3 (N3-3) &gt; 11 Ом" />
+		<Field Name="Rez_R41" Type="BOOL" UUID="UQNPDQNVEBNEJE2BNMZH7XOZD4" Comment="Рез. R пластины 1 в т. 4 (N4-1) &gt; 11 Ом" />
+		<Field Name="Rez_R42" Type="BOOL" UUID="7NXETU54N3UUDOO3AQJIXUHRLQ" Comment="Рез. R пластины 2 в т. 4 (N4-2) &gt; 11 Ом" />
+		<Field Name="Rez_R43" Type="BOOL" UUID="IFR5OLK4DTUETCIHTZVSV3VK2E" Comment="Рез. R пластины 3 в т. 4 (N4-3) &gt; 11 Ом" />
+		<Field Name="Rez_R51" Type="BOOL" UUID="KFGVVH5D5AXEFMNSTZTIJFZNVE" Comment="Рез. R пластины 1 в т. 5 (N5-1) &gt; 11 Ом" />
+		<Field Name="Rez_R52" Type="BOOL" UUID="S3XEPJZ5MQKUNLCP5PG2QL3ABA" Comment="Рез. R пластины 2 в т. 5 (N5-2) &gt; 11 Ом" />
+		<Field Name="Rez_R53" Type="BOOL" UUID="2ZGEN4CSNXCU3IVHRIAS7YMQAQ" Comment="Рез. R пластины 3 в т. 5 (N5-3) &gt; 11 Ом" />
+		<Field Name="Rez_R61" Type="BOOL" UUID="YXGX5FSW5HWUDCFVIPZ5OPRUPQ" Comment="Рез. R пластины 1 в т. 6 (N6-1) &gt; 11 Ом" />
+		<Field Name="Rez_R62" Type="BOOL" UUID="OXUOY6TREEHU7CFGZYIMQB2Y2A" Comment="Рез. R пластины 2 в т. 6 (N6-2) &gt; 11 Ом" />
+		<Field Name="Rez_R63" Type="BOOL" UUID="Y77PXP4Q75UUHDGZ7F67NZXFOI" Comment="Рез. R пластины 3 в т. 6 (N6-3) &gt; 11 Ом" />
+		<Field Name="Rez_R71" Type="BOOL" UUID="JSE6ZJMUA2BUBLJNMPXRK34R74" Comment="Рез. R пластины 1 в т. 7 (N7-1) &gt; 11 Ом" />
+		<Field Name="Rez_R72" Type="BOOL" UUID="4Q7TNVBYZHLETA44M6H7PFN22U" Comment="Рез. R пластины 2 в т. 7 (N7-2) &gt; 11 Ом" />
+		<Field Name="Rez_R73" Type="BOOL" UUID="VPEW6KK53YDE5G6LBH5XYIC6ZU" Comment="Рез. R пластины 3 в т. 7 (N7-3) &gt; 11 Ом" />
+		<Field Name="Rez_R81" Type="BOOL" UUID="BDMOOK7F5LEUXGYUZQJWUYX4NQ" Comment="Рез. R пластины 1 в т. 8 (N8-1) &gt; 11 Ом" />
+		<Field Name="Rez_R82" Type="BOOL" UUID="A5YGC3TX7PFU5DTR4ZOVLRUDIQ" Comment="Рез. R пластины 2 в т. 8 (N8-2) &gt; 11 Ом" />
+		<Field Name="Rez_R83" Type="BOOL" UUID="RKYBKYDHWLDUPDNO2WD5GL2OBI" Comment="Рез. R пластины 3 в т. 8 (N8-3) &gt; 11 Ом" />
+		<Field Name="Rez_KIP_open" Type="BOOL" UUID="H2R4SWHT47XELIF4YYCD32HGVY" Comment="Рез. КИП вскрыт" />
+		<Field Name="Rez_BB_open" Type="BOOL" UUID="R3PVRKNDWRQE3JZLQ4C7F4CASU" Comment="Рез. б/б вскрыт" />
+		<Field Name="Rez_No_U_EXZ" Type="BOOL" UUID="TU6YUVXOC5ZEFK6APCZZCYNKHA" Comment="Рез. нет 220 В на апп. ЭХЗ" />
+		<Field Name="Rez_Smodul1_bad" Type="BOOL" UUID="AYDDOF4K7XHEVFGXXBSQL6AOCA" Comment="Рез. силовой модуль 1 неисправен" />
+		<Field Name="Rez_Smodul2_bad" Type="BOOL" UUID="NURJF46OQ2HEJBN4Z26ADSPRMI" Comment="Рез. силовой модуль 2 неисправен" />
+		<Field Name="Rez_Smodul3_bad" Type="BOOL" UUID="BTTSNOL4ZQKE3AREYWQ5YU35VE" Comment="Рез. силовой модуль 3 неисправен" />
+		<Field Name="Rez_Smodul4_bad" Type="BOOL" UUID="ZPLUGFMURMFEZOWF4W46FQZFLA" Comment="Рез. силовой модуль 4 неисправен" />
+		<Field Name="Rez_Smodul5_bad" Type="BOOL" UUID="QTQOXHBWILZE7EKX5XZ5YDD7NM" Comment="Рез. силовой модуль 5 неисправен" />
+		<Field Name="Rez_Smodul6_bad" Type="BOOL" UUID="3BDWIULTDX5E7IIM72FPCBBJWM" Comment="Рез. силовой модуль 6 неисправен" />
+		<Field Name="Rez_Smodul7_bad" Type="BOOL" UUID="MI3DREFERIPEPANU3LVETUBE4Q" Comment="Рез. силовой модуль 7 неисправен" />
+		<Field Name="Rez_Smodul8_bad" Type="BOOL" UUID="A6LWR5TUYW6ENLLAINKWNBCPKI" Comment="Рез. силовой модуль 8 неисправен" />
+		<Field Name="Rez_Smodul9_bad" Type="BOOL" UUID="IDSAIM6O3U2EFMXYPIVOQ3PLUU" Comment="Рез. силовой модуль 9 неисправен" />
+		<Field Name="Rez_Smodul10_bad" Type="BOOL" UUID="7CVLH7MGM6DEFJ5GAPJII5J5OM" Comment="Рез. силовой модуль 10 неисправен" />
+		<Field Name="Rez_Smodul11_bad" Type="BOOL" UUID="ZDOH5FJ37CQUVHQDGCAPLNEXMY" Comment="Рез. силовой модуль 11 неисправен" />
+		<Field Name="Rez_Smodul12_bad" Type="BOOL" UUID="VBOHAIQAJW6UNLZ6JG5X5UB73Q" Comment="Рез. силовой модуль 12 неисправен" />
+		<Field Name="Rez_1ch_ResOn" Type="BOOL" UUID="UZAOLNJU7JOU7ELYBVPHECGJR4" Comment="Рез. 1 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_2ch_ResOn" Type="BOOL" UUID="I2HFITQDG2IUNHXZOUAZHERA4E" Comment="Рез. 2 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_3ch_ResOn" Type="BOOL" UUID="NDI2RFP57KUERMEAVQVXJVSJ5M" Comment="Рез. 3 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_4ch_ResOn" Type="BOOL" UUID="OM3PWN45Q5RUDI63MDCAOGRM2M" Comment="Рез. 4 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_5ch_ResOn" Type="BOOL" UUID="M4YAU2DC5NQEHM23HEYXB7EDUQ" Comment="Рез. 5 канал в работе резерв. сил. модуль" />
+		<Field Name="Rez_6ch_ResOn" Type="BOOL" UUID="UZTEWTZXJFCELBKLCOKZ73XGPM" Comment="Рез. 6 канал в работе резерв. сил. модуль" />
+		<Field Name="Osn_SKZ1" Type="BOOL" UUID="FL5RUQERGSMUFMX523VV5B5TGQ" Comment="Осн. режим стабилизации СКЗ-1" />
+		<Field Name="Osn_SKZ2" Type="BOOL" UUID="UDT4JGV7UAIENJAM6OMBI5ETYU" Comment="Осн. режим стабилизации СКЗ-2" />
+		<Field Name="Osn_SKZ3" Type="BOOL" UUID="VW7Y7OHKUD3EZPVJUQRSOLII6U" Comment="Осн. режим стабилизации СКЗ-3" />
+		<Field Name="Osn_SKZ4" Type="BOOL" UUID="DHW46KTG4YVUDI4MNCENFVJOZA" Comment="Осн. режим стабилизации СКЗ-4" />
+		<Field Name="Osn_SKZ5" Type="BOOL" UUID="7K54V2AQIBSU5DIHNJFPP27RCE" Comment="Осн. режим стабилизации СКЗ-5" />
+		<Field Name="Osn_SKZ6" Type="BOOL" UUID="HNJZNSG4ANSEZF4JAZYVQQML3Q" Comment="Осн. режим стабилизации СКЗ-6" />
+		<Field Name="Res_SKZ1" Type="BOOL" UUID="GNWTEAWOR64UBF6LKAEU626M7U" Comment="Рез. режим стабилизации СКЗ-1" />
+		<Field Name="Res_SKZ2" Type="BOOL" UUID="L3SFZ4WVSTWURGULYME577UHYM" Comment="Рез. режим стабилизации СКЗ-2" />
+		<Field Name="Res_SKZ3" Type="BOOL" UUID="RIDVXLPUGIHEFGTXF4E5DYU2F4" Comment="Рез. режим стабилизации СКЗ-3" />
+		<Field Name="Res_SKZ4" Type="BOOL" UUID="RB2HO3VJY4HELLLJMFRU762ITQ" Comment="Рез. режим стабилизации СКЗ-4" />
+		<Field Name="Res_SKZ5" Type="BOOL" UUID="B2772ALE3IXEJHBURUZJKIFQSU" Comment="Рез. режим стабилизации СКЗ-5" />
+		<Field Name="Res_SKZ6" Type="BOOL" UUID="GMVVLCQBW3YE3HOYH22D666J5Y" Comment="Рез. режим стабилизации СКЗ-6" />
+	</Fields>
+</Type>

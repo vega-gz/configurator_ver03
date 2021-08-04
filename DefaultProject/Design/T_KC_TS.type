@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_TS" Kind="Struct" UUID="PKTWGMNYZDGE3EHNR4Q2BHBUNI">
+	<Fields>
+		<Field Name="StravShop_go" Type="BOOL" UUID="RIHFGAEX3O3E3JMVNE6JFEQNRI" Comment="Идет стравливание цеха" />
+		<Field Name="FullShop_go" Type="BOOL" UUID="CUICDL2N72YEHIKQFQLFR6KS54" Comment="Идет заполнение цеха" />
+		<Field Name="DU_IM" Type="BOOL" UUID="U6QCWNIPPANUHOJ7JN2QE5MIAU" Comment="Ручное управление ИМ" />
+	</Fields>
+</Type>

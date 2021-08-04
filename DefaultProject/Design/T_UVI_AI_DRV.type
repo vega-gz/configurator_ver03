@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UVI_AI_DRV" UUID="07D842854C484B9FBE8E2A7CB1A3D0ED">
+<Fields>
+<Field Comment="Верхний уровень в емкости E-8.1 дренажа метанола" Name="Lmet_E8_1_v" Type="REAL" UUID="34F924020F7F45688D2C3652455609F3"/>
+<Field Comment="Загазованность по метанолу (QISA-1)" Name="Gas_met1_v" Type="REAL" UUID="CFC6236695F743C59096151AC16F813F"/>
+<Field Comment="Загазованность по метанолу (QISA-2)" Name="Gas_met2_v" Type="REAL" UUID="DCC9E1EEAE5F4205A49E3462D227BED1"/>
+<Field Comment="Резерв" Name="Res_0" Type="REAL" UUID="8E310E96FF67483BA14D5EEC369B74B8"/>
+<Field Comment="Измерение основного напряжения" Name="Uosn_SAU" Type="REAL" UUID="1D8AB86091A149CA9F99ED33FD955753"/>
+<Field Comment="Измерение резервного напряжения" Name="Urez_SAU" Type="REAL" UUID="7E1B4E31ED8941FB882411FF26D6EC8B"/>
+<Field Comment="Резерв" Name="Res_1" Type="REAL" UUID="ED6B8B7736DE42ED82103B57260CFACE"/>
+<Field Comment="Резерв" Name="Res_2" Type="REAL" UUID="266B5CB57D68487D9B28F3A7DF3BE155"/>
+</Fields>
+</Type>

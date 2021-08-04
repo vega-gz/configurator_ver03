@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_Curve_FR" UUID="E666DE56254844A3A7E2EB383401A9D4">
+<Fields>
+<Field Comment="Зависимость расхода топлива от процента открытия ТРК" Name="openToGT" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="D01E48F04D8E4EDC970DBCAB34768BAF"/>
+<Field Comment="Обратная зависимость расхода топлива от степени открытия ТРК" Name="GTtoOpen" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="CD2C4DDB4A85442AA406650BD8C1A3B7"/>
+<Field Comment="Расход топлива на этапе розжига и разгона, [кг/ч]" Name="timeToGt" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="7EDDCB5E8CF9410CAED78EBBB9C6E326"/>
+<Field Comment="КоррекциЯ расхода топлива на этапе розжига и разгона от температуры воздуха на входе в ГТД" Name="TinToKkGt" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="6F9647EAFB014BC58B79EDA6BCD795E1"/>
+<Field Comment="Программа огр. Т газа за турбиной от Т воздуха на входе ГТД" Name="TinToTmax" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="10ADA3EBDE0649A9828B4126CD72410E"/>
+<Field Comment="Зависимость нижнего огр. расхода топлива от приведенных оборотов КВД" Name="NvdToGtMin" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="52DEDC82D0A84B8FBCFEAF0F87608127"/>
+<Field Comment="Зависимость верхнего огр. расхода топлива от приведенных оборотов КВД" Name="NvdToGtMax" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="68C2056BE59246E98905C875DE784355"/>
+<Field Comment="Программа регулированиЯ ВНА компрессора" Name="NvdToVNA" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="B9F1D98A9EC244FBB3942212FCB8222B"/>
+<Field Comment="Ограничение макс. оборотов ротора ТВД от температуры наружного воздуха" Name="TairToNvd" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="9E9A17F3B7334CB3BD7C163B05A998C2"/>
+<Field Comment="Коррекция проп. коэфф. ПИД-регулятора по оборотам КВД" Name="corrKpropNvdFromNvd" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="75CE94E1B5444C759AAC9AA6CC0C2160"/>
+<Field Comment="Коррекция проп. коэфф. ПИД-регулятора по оборотам СТ" Name="corrKpropNstFromNvd" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="05291737002D4781BBEB5340B0C7551D"/>
+<Field Comment="Коррекция проп. коэфф. ПИД-регулятора по оборотам СТ" Name="corrKpropNstFromNst" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="A7631FDD25BA4987A4B121E877CBAB29"/>
+<Field Comment="Коррекция проп. коэфф. ПИД-регулятора по Т газов за СТ" Name="corrKpropTndFromNvd" Type="E32ABE3547D78C0E0EA3838A31C5B19C" UUID="046C4D669C48439DA7C0F587FE736D30"/>
+</Fields>
+</Type>

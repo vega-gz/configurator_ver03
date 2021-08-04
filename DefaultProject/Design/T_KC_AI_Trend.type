@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_AI_Trend" Kind="Struct" UUID="A7204596C028413FBF81E467FDE67F3F">
+<Fields>
+<Field Name="Tg_out_KC" Type="REAL" UUID="83CA742C4B8A47DC8AA57577C07F6315" Comment="Температура газа на выходе КЦ" />
+<Field Name="Pg_in_KC" Type="REAL" UUID="24B01074B52A4D35812AD14A2D51DABD" Comment="Давление газа на входе КЦ" />
+<Field Name="Pg_out_KC" Type="REAL" UUID="F15E58E0C0584B4DB1E87492D5121FA1" Comment="Давление газа на выходе КЦ" />
+<Field Name="I_AB" Type="REAL" UUID="8C828BFC43CE4D4FB91E904B2D065E00" Comment="Ток разряда-заряда Аб в ЩПТ =220" />
+<Field Name="U1_DC220" Type="REAL" UUID="75664210423649F39044D5CCD79FEC74" Comment="Напряжение на I секции шин в ЩПТ =220В" />
+<Field Name="U2_DC220" Type="REAL" UUID="4184B050B0FC412299A2EE8E06603049" Comment="Напряжение на II секции шин в ЩПТ =220В" />
+<Field Name="Pg1_in_Kol" Type="REAL" UUID="090C8C4E332E4BF7B7DC5399543F6DD0" Comment="Давление на входном коллекторе КЦ (1)" />
+<Field Name="Pg2_in_Kol" Type="REAL" UUID="68A43A2E53F24ACD8EA02B1CD2D1C1B5" Comment="Давление на входном коллекторе КЦ (2)" />
+<Field Name="Pg1_out_Kol" Type="REAL" UUID="B2DA4A2CB8F241C59E882E64E4C72BB1" Comment="Давление на выходном коллекторе КЦ (1)" />
+<Field Name="Pg2_out_Kol" Type="REAL" UUID="37DABEC857B24B44A536667E4FD222F2" Comment="Давление на выходном коллекторе КЦ (2)" />
+<Field Name="Res_0" Type="REAL" UUID="A3E819C0B5444EC7A95EE97BDAF4090F" Comment="Резерв0" />
+<Field Name="Res_1" Type="REAL" UUID="EE1AAD0EFC12492C930386802A8879A9" Comment="Резерв1" />
+<Field Name="Res_2" Type="REAL" UUID="C34A773CEF2E4B7DA2E018519E84DAF4" Comment="Резерв2" />
+<Field Name="Res_3" Type="REAL" UUID="EF9609CA2E984DC4A62D0B29CB0B0D95" Comment="Резерв3" />
+<Field Name="Uosn_SAU" Type="REAL" UUID="6032A39E680043DC9931AE185A300287" Comment="Измерение основного напряжения" />
+<Field Name="Urez_SAU" Type="REAL" UUID="6C92F42E919247A2B979E1D1665B2EB8" Comment="Напряжение резервного питания" />
+<Field Name="Ukr" Type="REAL" UUID="FB7C8D02D342479F96ECEC56D8959E37" Comment="Напряжение питания кранов" />
+<Field Name="Res_4" Type="REAL" UUID="E738356C6A8C4085887985A782799ADE" Comment="Резерв4" />
+</Fields>
+</Type>

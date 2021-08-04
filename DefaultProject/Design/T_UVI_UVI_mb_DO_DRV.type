@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UVI_UVI_mb_DO_DRV" UUID="1E95A3D14F514A2A8748AD9726EF03D9">
+<Fields>
+<Field Comment="Открыть клапан 1" Name="Vlv_on_1" Type="BOOL" UUID="611CEBB2800A46D7B3C40B6FB7FAD705"/>
+<Field Comment="Открыть клапан 2" Name="Vlv_on_2" Type="BOOL" UUID="AE5D557DEBD349B6B48EA8C56E769323"/>
+<Field Comment="Открыть клапан 3" Name="Vlv_on_3" Type="BOOL" UUID="4219D7F15A7D4B49829D282E3EBFBEA4"/>
+<Field Comment="Открыть клапан 4" Name="Vlv_on_4" Type="BOOL" UUID="E3CBB3D23DC6463F9F89B13BA9E36891"/>
+<Field Comment="Открыть клапан 5" Name="Vlv_on_5" Type="BOOL" UUID="58F64F3B3816460E97B8B6B87537B055"/>
+<Field Comment="Открыть клапан 6" Name="Vlv_on_6" Type="BOOL" UUID="63F55C65348344A298472249B00ED69B"/>
+<Field Comment="Открыть клапан 7" Name="Vlv_on_7" Type="BOOL" UUID="F3957E98E8224A7D90866CF21EA935F3"/>
+<Field Comment="Открыть клапан 8" Name="Vlv_on_8" Type="BOOL" UUID="7E515AA556B5454EA6D87BF9E6AC9E0B"/>
+<Field Comment="Квитирование" Name="Ackn" Type="BOOL" UUID="8E20BB6F18554BD7B21921DDB51FBC79"/>
+</Fields>
+</Type>

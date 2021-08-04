@@ -623,7 +623,19 @@ public class TableDB extends javax.swing.JFrame {
         jTable1.setColumnSelectionAllowed(true);
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
-            SinglStrEdit sse = new SinglStrEdit(tableModel, tableName, jTable1.getName(), listJF);
+            
+            int countcolumn = jTable1.getColumnCount();
+            String nameSinglSeting = null;
+            for (int i = 0; i < countcolumn; i++) {
+                String nameColumn = jTable1.getColumnName(i);
+                if (nameColumn.equals(globVar.TAGPLC)) {
+                    nameSinglSeting = (String) jTable1.getValueAt(row, i);
+                    break;
+                }
+            }
+
+//            SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName(), listJF);
+            SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName());
             sse.setVisible(true);
             listJF.add(sse);
             sse.setFields(row);

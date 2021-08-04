@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_EA_mb_AI_DRV" Kind="Struct" UUID="483ED8CEC6C94AB986B3689B3661219F">
+	<Fields>
+		<Field Name="Uab" Type="UINT" UUID="78082FD5580147EB821C33D7304D3FD5" Comment="Напряжение фазы AB " />
+		<Field Name="Ubc" Type="UINT" UUID="58F5EC0888C64A27A319B780E5FCAFDB" Comment="Напряжение фазы BC " />
+		<Field Name="Uca" Type="UINT" UUID="B089348EBF094497AF747A51B6AE21A2" Comment="Напряжение фазы CA " />
+		<Field Name="Ua" Type="UINT" UUID="8CCA6AD514284431AF90DCD8D08894C0" Comment="Напряжение фазы A" />
+		<Field Name="Ub" Type="UINT" UUID="B10D5BE3FA3E4A0F9E4FFA5B54A8D92E" Comment="Напряжение фазы B" />
+		<Field Name="Uc" Type="UINT" UUID="4CF52B60BF97479E8C0D7F2F859AE6B7" Comment="Напряжение фазы C " />
+		<Field Name="Ia" Type="UINT" UUID="68F7901BC47F49B3821182BB44B15604" Comment="Ток фазы A " />
+		<Field Name="Ib" Type="UINT" UUID="3CB3F3C4DB764E6880032868DD54E6C1" Comment="Ток фазы B " />
+		<Field Name="Ic" Type="UINT" UUID="8647D1A5EC84460EA0545B71399C1F96" Comment="Ток фазы C " />
+		<Field Name="F" Type="UINT" UUID="0AAB94CF5F384F1EBD7C3BDCA49AD281" Comment="Частота сети " />
+		<Field Name="P" Type="UINT" UUID="0C111FA5D37C43E3B05543BEC206FA50" Comment="Активная мощность " />
+		<Field Name="Q" Type="UINT" UUID="A3A8AE31C865486197DFE28FA20711AC" Comment="Реактивная мощность " />
+		<Field Name="S" Type="UINT" UUID="43623BDDE26249A888A929ADCF8EC7F1" Comment="Полная мощность " />
+	</Fields>
+</Type>

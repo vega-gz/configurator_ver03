@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_INTMR" Kind="Struct" Comment="Массив внутренних таймеров алгоритма" UUID="AKQ7Q4T6ODAU7I2OJ7GZY6AXWU">
+	<Fields>
+		<Field Name="KPK_pause" Type="REAL" UUID="XAS2RE2W5GLUNM6CYYXY2ZT6RU" Comment="Пауза при КПК" />
+		<Field Name="Drm_StopMS" Type="REAL" UUID="R7SDAT4NFQKUDADYFC5OIRZYKE" Comment="Таймер остановки МС" />
+		<Field Name="StopCrank_Pusk" Type="REAL" UUID="7QSLJ2GSXERERCFPDKX4T4YZ3I" Comment="Таймер ожидания останова стартера при пуске" />
+		<Field Name="OpenSK" Type="REAL" UUID="TX7U72JYFY4E7PMCYVZNHF57I4" Comment="Таймер задержки открытия ОГК" />
+		<Field Name="SPV_Of" Type="REAL" UUID="IJVNOEXEZ33UPHQV5ONBKW7TCQ" Comment="Таймер отключения СПВ" />
+		<Field Name="Kr6r_nOn" Type="REAL" UUID="IIVAHO7HF3CUNBQ5XR4NUL3GNA" Comment="Таймер открытия кр6р" />
+		<Field Name="WarmMSK1" Type="REAL" UUID="KORFBD2P45IE3G66QR653JNN3Q" Comment="Таймер1 барабана WarmMSK" />
+		<Field Name="WarmMSK2" Type="REAL" UUID="6PJUHX5GUMFUFJUDBOFTOTN56I" Comment="Таймер2 барабана WarmMSK" />
+		<Field Name="CNR" Type="REAL" UUID="6HUFDXZ7JWPUXADDTTYTM4EPDQ" Comment="Таймер включения ЦНР" />
+		<Field Name="TEN_MBR" Type="REAL" UUID="P3BLLNTUHERULH7NQOXDW5QOKY" Comment="Таймер включения ТЭН МБР" />
+		<Field Name="Fall_PmsmK" Type="REAL" UUID="NSL23RPCKYMULC6A7AMMV7QUJE" Comment="Таймер просадки Рм компрессора" />
+		<Field Name="Fall_PmsmR" Type="REAL" UUID="QILZ3GQP7PCEFEANZDYKACR2UU" Comment="Таймер просадки Рм редуктора" />
+		<Field Name="AOs_1" Type="REAL" UUID="TNY64BCJCNGENPWBQSYCVSABM4" Comment="Таймер на 1 шаге АО для разгрузки компрессора" />
+		<Field Name="RunST_90s" Type="REAL" UUID="ZYF7U4GILSGEDJKTUWQ3F64ANI" Comment="Таймер времени раскрутки СТ" />
+		<Field Name="PMK_OF" Type="REAL" UUID="PHVHAFIBRPNUXLBEQQ2NCGF6HA" Comment="Таймер признака отключения ПМК" />
+		<Field Name="L_kar_n" Type="REAL" UUID="6I2W2NJ7T4ZERL3GK6TBSGXG6Q" Comment="Таймер подъема уровня масла в картере" />
+		<Field Name="VOT_stop" Type="REAL" UUID="UNTK2WXA3JJURDSNDO5KS7UTVI" Comment="Задержка на отключение ВОТ" />
+		<Field Name="ZZO_close" Type="REAL" UUID="U3FHIBPAVCIEPKRDB6QHBNA5KA" Comment="Закрытие ЗЗО" />
+		<Field Name="Vn_KMOD" Type="REAL" UUID="ABQ5BXBSAZPEBIFKK6UW7GITUA" Comment="Включение вентилятора калорифера МОД" />
+		<Field Name="Vn_KMON" Type="REAL" UUID="W4H72FAW5UKUHPG2T7ZPT6MDX4" Comment="Включение вентилятора калорифера МОК" />
+		<Field Name="Vn_KMOR" Type="REAL" UUID="4MVUN2NC24AENAKHQHYXRIC6QA" Comment="Включение вентилятора калорифера МОР" />
+		<Field Name="TEN_Vlagomer_Of" Type="REAL" UUID="B5GEVHLY4F3UBJMHFGQS4YBFLM" Comment="Время после отключения термостата" />
+		<Field Name="KE1_open" Type="REAL" UUID="V2CRCOZASV3ETDYGTBP2N6ADDM" Comment="Задержка открытия  КЭ1 БПТГ " />
+		<Field Name="KPPMK_OfStop" Type="REAL" UUID="56QRI4MTIDNEHAU7VJE7E7BUCA" Comment="Закрытие клапана КППМК после останова" />
+		<Field Name="APS_init" Type="REAL" UUID="XFC3363SZNSE3AQWGUO42BE4CA" Comment="Задержка при запуске для вызова АПС" />
+	</Fields>
+</Type>

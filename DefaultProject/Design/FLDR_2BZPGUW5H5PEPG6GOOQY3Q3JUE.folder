@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="APS">
+<Items>
+<Item Name="T_KC_APS_Internal.type"/>
+<Item Name="T_KC_APS.type"/>
+<Item Name="T_KC_APS_AOss.type"/>
+<Item Name="T_KC_APS_AS.type"/>
+<Item Name="T_KC_APS_PS.type"/>
+<Item Name="Type_EWVVGZAFA5UE5AQEOT2V3NAHNM.type"/>
+</Items>
+</Folder>

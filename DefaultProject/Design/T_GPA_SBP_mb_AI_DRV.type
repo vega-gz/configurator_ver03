@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Type Kind="Struct" Name="T_GPA_SBP_mb_AI_DRV" UUID="F82C807BAABB480C87455E8861777619">
+  
+<Fields>
+    <Field Comment="Байпасс: полная мощность" Name="BP_App_Power" Type="INT" UUID="9E9F0CBEC1DE4BB28DF472928DEA098E"/>
+    <Field Comment="Байпасс: Частота" Name="BP_Freq_Note" Type="INT" UUID="1FE32EFDC77B4F4D92419C1610C0DE9B"/>
+    <Field Comment="Байпасс: Напряжение L1-N" Name="BP_U_L1_N" Type="INT" UUID="2764669C3C6B4DF7B4383B030AFA4672"/>
+    <Field Comment="Байпасс: Напряжение L2-N" Name="BP_U_L2_N" Type="INT" UUID="E4B6A25A3A9246008A8F90A96D2B349D"/>
+    <Field Comment="Байпасс: Напряжение L3-N" Name="BP_U_L3_N" Type="INT" UUID="6FB5621526E545D99E2F10A00D319190"/>
+    <Field Comment="Байпасс: Напряжение L1-L" Name="BP_U_L1_L" Type="INT" UUID="F8D34953B1934EFA84264321311EF5C8"/>
+    <Field Comment="Байпасс: Напряжение L2-L" Name="BP_U_L2_L" Type="INT" UUID="BD6A37CE7049446B94F84876FFAAC5CB"/>
+    <Field Comment="Байпасс: Напряжение L3-L" Name="BP_U_L3_L" Type="INT" UUID="4F61B4D0C7D6439B839A76E544E9F0A4"/>
+    <Field Comment="Байпасс: Ток L1" Name="BP_I_L1" Type="INT" UUID="D21A929BCB8940108940E573E2BC5179"/>
+    <Field Comment="Байпасс: Ток L2" Name="BP_I_L2" Type="INT" UUID="43BAD2C0C0A84F2080384414DF798808"/>
+    <Field Comment="Байпасс: Ток L3" Name="BP_I_L3" Type="INT" UUID="B15947428A644B20AA085C3BAFB208EC"/>
+    <Field Comment="DC: Напряжение" Name="DC_U" Type="INT" UUID="1F713F8F49C7457892BC447409EE4287"/>
+    <Field Comment="DC: Ток" Name="DC_I" Type="INT" UUID="06AEF21830E34450AAD0BC88EB996236"/>
+    <Field Comment="Инвертор: полная мощность" Name="INV_App_Power" Type="INT" UUID="4D8F683D23C2498AACAFE2AFB0BCAC70"/>
+    <Field Comment="Инвертор: Частота" Name="INV_Freq" Type="INT" UUID="CC1B007FBC3647439AC54164692FE7C0"/>
+    <Field Comment="Инвертор: Напряжение L1-N" Name="INV_U_L1_N" Type="INT" UUID="72A9F1FEFEC54656B9F285F9DA8D6DA3"/>
+    <Field Comment="Инвертор: Напряжение L2-N" Name="INV_U_L2_N" Type="INT" UUID="77993659B44042789EEF40F3E4ABD611"/>
+    <Field Comment="Инвертор: Напряжение L3-N" Name="INV_U_L3_N" Type="INT" UUID="96E4A6AAFEDE44ADBF4676700F526177"/>
+    <Field Comment="Инвертор: Напряжение L1-L" Name="INV_U_L1_L" Type="INT" UUID="0B4FDA0166BE486DBFF6B010092207FC"/>
+    <Field Comment="Инвертор: Напряжение L2-L" Name="INV_U_L2_L" Type="INT" UUID="8AA6624AF8164F309D5651CD2F95654D"/>
+    <Field Comment="Инвертор: Напряжение L3-L" Name="INV_U_L3_L" Type="INT" UUID="F873F6E0DCAB4392B7431E9953A6088A"/>
+    <Field Comment="Инвертор: Ток L1" Name="INV_I_L1" Type="INT" UUID="11BFFE19571C41BE94EE6D49778A69B0"/>
+    <Field Comment="Инвертор: Ток L2" Name="INV_I_L2" Type="INT" UUID="BA9464C128CF47759C3A82566BF6D101"/>
+    <Field Comment="Инвертор: Ток L3" Name="INV_I_L3" Type="INT" UUID="16C99685AE64436BBBCCCEC0FC27E7FC"/>
+    <Field Comment="Сдвиг фазы инвертор-сеть" Name="PS_Phase_main" Type="INT" UUID="0F9500ECC3D94267AA672F77D325407D"/>
+    <Field Comment="Сдвиг фазы инвертор-шина " Name="PS_Phase_inverter" Type="INT" UUID="99BBB27877484A95B333A46CDE59D4B3"/>
+    <Field Comment="Номинальная входная мощность" Name="ADD_Nom_in_Power" Type="INT" UUID="B377BD17B5D74661ABE2DFFE5C886085"/>
+    <Field Comment="Номинальная входная частота" Name="ADD_Nom_in_Freq" Type="INT" UUID="E5AB6097B9CE4DA6969156A8E2FAA2E1"/>
+    <Field Comment="Номинальная выходная частота" Name="ADD_Nom_out_Freq" Type="INT" UUID="BAFC5098DFED441CA5A645DABB4DCDB0"/>
+    <Field Comment="Номинальное выходное напряжение" Name="ADD_Nom_out_U" Type="INT" UUID="DFDB9AB08E8F47FEBDDC97D6083BAD29"/>
+  </Fields>
+</Type>

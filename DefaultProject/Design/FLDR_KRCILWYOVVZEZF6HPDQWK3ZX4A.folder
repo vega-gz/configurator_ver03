@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Модбас">
+    <Items>
+        <Item Name="T_mb_AI_FromHMI.type" />
+        <Item Name="T_mb_AI_Settings.type" />
+        <Item Name="T_mb_AI_ToHMI.type" />
+        <Item Name="T_mb_AO_FromHMI.type" />
+        <Item Name="T_mb_AO_Settings.type" />
+        <Item Name="T_mb_AO_ToHMI.type" />
+        <Item Name="T_mb_DI_FromHMI.type" />
+        <Item Name="T_mb_DI_ToHMI.type" />
+        <Item Name="T_mb_DO_FromHMI.type" />
+        <Item Name="T_mb_DO_ToHMI.type" />
+    </Items>
+</Folder>
+

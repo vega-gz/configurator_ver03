@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+    <Device CyclePeriod="200000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="FALSE">
+        <Slot Address="1" ModuleType="68" />
+        <Slot Address="2" ModuleType="68" />
+        <Slot Address="3" ModuleType="68" />
+        <Slot Address="4" ModuleType="33" />
+        <Slot Address="5" ModuleType="33" />
+        <Slot Address="6" ModuleType="33" />
+        <Slot Address="7" ModuleType="33" />
+        <Slot Address="8" ModuleType="33" />
+    </Device>
+    <Crossconnect>
+        <Connection ItemName="TSK_A4_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="347F045540423C1104E25EA8892F1219.8A0A6D1C41CF457D94442F8831617049" />
+        <Connection ItemName="TSK_A4_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="347F045540423C1104E25EA8892F1219.559489694EF4757F074EFBAF4ED2BE04" />
+        <Connection ItemName="TSK_A4_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="347F045540423C1104E25EA8892F1219.257D167249D88B24D42F53B7C893779E" />
+        <Connection ItemName="TSK_A4_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="347F045540423C1104E25EA8892F1219.26FFA4AE4FE6B82840F52A81A540B7BC" />
+        <Connection ItemName="TSK_A4_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="347F045540423C1104E25EA8892F1219.A4CC71954594084C3612759E1D786328" />
+        <Connection ItemName="TSK_A4_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="347F045540423C1104E25EA8892F1219.EFDACBE7493CD384E161BD9F7713F864" />
+        <Connection ItemName="TSK_A4_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="347F045540423C1104E25EA8892F1219.BE36D8BE4D68EE980579328DFC460CDC" />
+        <Connection ItemName="TSK_A4_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="347F045540423C1104E25EA8892F1219.532AF0334C06CC4D645F92AEF48908D5" />
+        <Connection ItemName="TSK_DI_DRV.Kr_1T1_ON" Device="" Slot="4" Channel="1" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 1Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.8E3CAD70FDC7436CA2F565357973E98E" />
+        <Connection ItemName="TSK_DI_DRV.Kr_1T1_OF" Device="" Slot="4" Channel="2" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 1Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.94A68844253F414CA0595CCFF31F9B54" />
+        <Connection ItemName="TSK_DI_DRV.Kr_2T1_ON" Device="" Slot="4" Channel="3" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 2Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.7585783A8A9D44E18498896C83D2A901" />
+        <Connection ItemName="TSK_DI_DRV.Kr_2T1_OF" Device="" Slot="4" Channel="4" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 2Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.AFF765713971402D9DCF24E9884AF414" />
+        <Connection ItemName="TSK_DI_DRV.Kr_3T1_ON" Device="" Slot="4" Channel="5" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 3Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.B5E87EA87ECD4AFFBF2299C920BAAE41" />
+        <Connection ItemName="TSK_DI_DRV.Kr_3T1_OF" Device="" Slot="4" Channel="6" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 3Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.4DF90FCE3C504F8180A5786189157771" />
+        <Connection ItemName="TSK_DI_DRV.Kr_4T1_ON" Device="" Slot="4" Channel="7" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 4Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.934E75D240734471B5E4847D68B54944" />
+        <Connection ItemName="TSK_DI_DRV.Kr_4T1_OF" Device="" Slot="4" Channel="8" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 4Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.240A3846B5BA412E882869B01B4F403A" />
+        <Connection ItemName="TSK_DI_DRV.Kr_5T1_ON" Device="" Slot="4" Channel="9" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 5Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.8DCF2A6118A74C1B95D1D5D66A6778BE" />
+        <Connection ItemName="TSK_DI_DRV.Kr_5T1_OF" Device="" Slot="4" Channel="10" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 5Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.C9EA98D790334C9EB0B3E05B14ED6806" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC380_TSK_ON" Device="" Slot="4" Channel="11" Comment="Р’РІРѕРґ 380VAC РІРєР»СЋС‡РµРЅ (Р�?Р�? РЎРђРЈ РўРЎРє)" UUID="D8572DBD4D772F6D686FF59C583FAD71.62B852371B6444F28942AB0CFA58FEF3" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC380_TSK_OF" Device="" Slot="4" Channel="12" Comment="Р’РІРѕРґ 380VAC РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? РЎРђРЈ РўРЎРє)" UUID="D8572DBD4D772F6D686FF59C583FAD71.DBED31BC82B047D6B16D869785EA18F0" />
+        <Connection ItemName="TSK_DI_DRV.U1_AC380_TSK_ok" Device="" Slot="4" Channel="13" Comment="РќР°Р»РёС‡РёРµ 380 VAC РЅР° РІРІРѕРґРµ 1 (Р�?Р�? РЎРђРЈ РўРЎРє)" UUID="D8572DBD4D772F6D686FF59C583FAD71.4AF055B5915E4FB7AC73CBE664036354" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC380_TSK_AOF" Device="" Slot="4" Channel="14" Comment="Р’РІРѕРґ 380 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? РЎРђРЈ РўРЎРє)" UUID="D8572DBD4D772F6D686FF59C583FAD71.5C4951AF627B40E9BD6FCA3F2BE51A43" />
+        <Connection ItemName="TSK_DI_DRV.UPS_TSK_Rdy" Device="" Slot="4" Channel="15" Comment="Р?Р�?Рџ РіРѕС‚РѕРІ Рє СЂР°Р±РѕС‚Рµ (Р�?Р�? РЎРђРЈ РўРЎРє)" UUID="D8572DBD4D772F6D686FF59C583FAD71.B4FA79A5B62F405588455DFEE6253F6E" />
+        <Connection ItemName="TSK_DI_DRV.UPS_TSK_work" Device="" Slot="4" Channel="16" Comment="Р?Р�?Рџ РІ СЂР°Р±РѕС‚Рµ (Р�?Р�? РЎРђРЈ РўРЎРє)" UUID="D8572DBD4D772F6D686FF59C583FAD71.743B861F480E43EC9B3B6A24B830A1F5" />
+        <Connection ItemName="TSK_DI_DRV.UPS_TSK_Bad" Device="" Slot="5" Channel="1" Comment="Р?Р�?Рџ РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ (Р�?Р�? РЎРђРЈ РўРЎРє)" UUID="D8572DBD4D772F6D686FF59C583FAD71.A39F3592D17041AEB83DE20CEB345960" />
+        <Connection ItemName="TSK_DI_DRV.Res_0" Device="" Slot="5" Channel="2" Comment="Р РµР·РµСЂРІ" UUID="D8572DBD4D772F6D686FF59C583FAD71.B5153B9F78834A0A9D63A29A1BA56DB9" />
+        <Connection ItemName="TSK_DI_DRV.Kr_6T1_ON" Device="" Slot="5" Channel="3" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 6Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.C4FA14BD6A66472B94213EBA40D284A2" />
+        <Connection ItemName="TSK_DI_DRV.Kr_6T1_OF" Device="" Slot="5" Channel="4" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 6Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.293328241FC3473F9AAE0E6F874E5B27" />
+        <Connection ItemName="TSK_DI_DRV.Pg_6T_v" Device="" Slot="5" Channel="5" Comment="Р”Р°РІР»РµРЅРёРµ РіР°Р·Р° РІ С‚СЂСѓР±Рµ СЌРєСЃРїР»СѓР°С‚Р°С†РёРѕРЅРЅРѕР№ СЃРєРІ. 6T РІС‹СЃРѕРєРѕРµ" UUID="D8572DBD4D772F6D686FF59C583FAD71.B4C5EBAB02714C9C902ED140F2251DA7" />
+        <Connection ItemName="TSK_DI_DRV.EN_BB_6T_ON" Device="" Slot="5" Channel="6" Comment="Р­Р»РµРєС‚СЂРѕРѕР±РѕРіСЂРµРІ РїСЂРёР±РѕСЂРЅС‹С… Р±РѕРєСЃРѕРІ 6Рў РІРєР»СЋС‡РµРЅ" UUID="D8572DBD4D772F6D686FF59C583FAD71.D8A3816C6C374EAF978C7827B6CF9482" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_6T_ON" Device="" Slot="5" Channel="7" Comment="Р’РІРѕРґ 220VAC РІРєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 6Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.ED2DDF61A8574D6BB717B9B331F8421E" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_6T_OF" Device="" Slot="5" Channel="8" Comment="Р’РІРѕРґ 220VAC РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 6Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.496F3B342E07408585A6A0DBA1244CA9" />
+        <Connection ItemName="TSK_DI_DRV.U1_AC220_6T_ok" Device="" Slot="5" Channel="9" Comment="РќР°Р»РёС‡РёРµ 220 VAC РЅР° РІРІРѕРґРµ 1 (Р�?Р�? Р­РҐР— 6Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.F97614E44015497F9BD774F3E2D6C6E0" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_6T_AOF" Device="" Slot="5" Channel="10" Comment="Р’РІРѕРґ 220 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 6Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.FAA3EE2D9C254091AD310125A27F7533" />
+        <Connection ItemName="TSK_DI_DRV.UPS_6T_Rdy" Device="" Slot="5" Channel="11" Comment="Р?Р�?Рџ РіРѕС‚РѕРІ Рє СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 6Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.8E37130DA4484743972DA73ECCCE36AC" />
+        <Connection ItemName="TSK_DI_DRV.UPS_6T_work" Device="" Slot="5" Channel="12" Comment="Р?Р�?Рџ РІ СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 6Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.B616EE9A0DCC41EE92F27838B01611B0" />
+        <Connection ItemName="TSK_DI_DRV.UPS_6T_Bad" Device="" Slot="5" Channel="13" Comment="Р?Р�?Рџ РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ (Р�?Р�? Р­РҐР— 6Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.D8EDFC371846414A982410AA728743B6" />
+        <Connection ItemName="TSK_DI_DRV.Res_1" Device="" Slot="5" Channel="14" Comment="Р РµР·РµСЂРІ" UUID="D8572DBD4D772F6D686FF59C583FAD71.3CD2B91063674B60A123F44C6B3F09AC" />
+        <Connection ItemName="TSK_DI_DRV.Kr_7T1_ON" Device="" Slot="5" Channel="15" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 7Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.D23E9741C602444490E74862A1EFC045" />
+        <Connection ItemName="TSK_DI_DRV.Kr_7T1_OF" Device="" Slot="5" Channel="16" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 7Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.9CA07E9DDE16461D97289197C1FC9D82" />
+        <Connection ItemName="TSK_DI_DRV.Pg_7T_v" Device="" Slot="6" Channel="1" Comment="Р”Р°РІР»РµРЅРёРµ РіР°Р·Р° РІ С‚СЂСѓР±Рµ СЌРєСЃРїР»СѓР°С‚Р°С†РёРѕРЅРЅРѕР№ СЃРєРІ. 7T РІС‹СЃРѕРєРѕРµ" UUID="D8572DBD4D772F6D686FF59C583FAD71.46DE6B48A4AD4D91AF2511503E7F30C2" />
+        <Connection ItemName="TSK_DI_DRV.EN_BB_7T_ON" Device="" Slot="6" Channel="2" Comment="Р­Р»РµРєС‚СЂРѕРѕР±РѕРіСЂРµРІ РїСЂРёР±РѕСЂРЅС‹С… Р±РѕРєСЃРѕРІ 7Рў РІРєР»СЋС‡РµРЅ" UUID="D8572DBD4D772F6D686FF59C583FAD71.C7820CF7819F44E48042818466AA4228" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_7T_ON" Device="" Slot="6" Channel="3" Comment="Р’РІРѕРґ 220VAC РІРєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 7Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.84BC95E5D96B4D828A29394C40E07D7A" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_7T_OF" Device="" Slot="6" Channel="4" Comment="Р’РІРѕРґ 220VAC РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 7Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.B6523FEA48444B3A8B29E13FBD8E84FD" />
+        <Connection ItemName="TSK_DI_DRV.U1_AC220_7T_ok" Device="" Slot="6" Channel="5" Comment="РќР°Р»РёС‡РёРµ 220 VAC РЅР° РІРІРѕРґРµ 1 (Р�?Р�? Р­РҐР— 7Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.70023F5635A745B1911061117C251149" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_7T_AOF" Device="" Slot="6" Channel="6" Comment="Р’РІРѕРґ 220 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 7Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.33AC11C8CDE1451FB14B46C680EC443A" />
+        <Connection ItemName="TSK_DI_DRV.UPS_7T_Rdy" Device="" Slot="6" Channel="7" Comment="Р?Р�?Рџ РіРѕС‚РѕРІ Рє СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 7Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.ACB2BD8AA54E474D80422A2D623630D0" />
+        <Connection ItemName="TSK_DI_DRV.UPS_7T_work" Device="" Slot="6" Channel="8" Comment="Р?Р�?Рџ РІ СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 7Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.B5618B6A33654AE29A3FB6934F995A5E" />
+        <Connection ItemName="TSK_DI_DRV.UPS_7T_Bad" Device="" Slot="6" Channel="9" Comment="Р?Р�?Рџ РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ (Р�?Р�? Р­РҐР— 7Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.011A1F4726C442CFB03E9228EC426794" />
+        <Connection ItemName="TSK_DI_DRV.Res_2" Device="" Slot="6" Channel="10" Comment="Р РµР·РµСЂРІ" UUID="D8572DBD4D772F6D686FF59C583FAD71.B63AB9F5A10F4379BE5D2193AB939CB2" />
+        <Connection ItemName="TSK_DI_DRV.Kr_8T1_ON" Device="" Slot="6" Channel="11" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 8Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.E6512C6E6C20453AA3D3D55604D9AF2B" />
+        <Connection ItemName="TSK_DI_DRV.Kr_8T1_OF" Device="" Slot="6" Channel="12" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 8Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.108A6D338C974D06BF46275636F0D971" />
+        <Connection ItemName="TSK_DI_DRV.Pg_8T_v" Device="" Slot="6" Channel="13" Comment="Р”Р°РІР»РµРЅРёРµ РіР°Р·Р° РІ С‚СЂСѓР±Рµ СЌРєСЃРїР»СѓР°С‚Р°С†РёРѕРЅРЅРѕР№ СЃРєРІ. 8T РІС‹СЃРѕРєРѕРµ" UUID="D8572DBD4D772F6D686FF59C583FAD71.6A6427EB64224E8BB25E169F6A6C6C9A" />
+        <Connection ItemName="TSK_DI_DRV.EN_BB_8T_ON" Device="" Slot="6" Channel="14" Comment="Р­Р»РµРєС‚СЂРѕРѕР±РѕРіСЂРµРІ РїСЂРёР±РѕСЂРЅС‹С… Р±РѕРєСЃРѕРІ 8Рў РІРєР»СЋС‡РµРЅ" UUID="D8572DBD4D772F6D686FF59C583FAD71.A237224277C04092A1F5A18AF3D094D2" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_8T_ON" Device="" Slot="6" Channel="15" Comment="Р’РІРѕРґ 220VAC РІРєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 8Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.849E8BF68E834406BFF07ECEA3291AC4" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_8T_OF" Device="" Slot="6" Channel="16" Comment="Р’РІРѕРґ 220VAC РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 8Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.5A6F56B7E79C493483D15242FCD3D6AC" />
+        <Connection ItemName="TSK_DI_DRV.U1_AC220_8T_ok" Device="" Slot="7" Channel="1" Comment="РќР°Р»РёС‡РёРµ 220 VAC РЅР° РІРІРѕРґРµ 1 (Р�?Р�? Р­РҐР— 8Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.E18B2C1923B54B268EBB1C5D388B8881" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_8T_AOF" Device="" Slot="7" Channel="2" Comment="Р’РІРѕРґ 220 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 8Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.AA1981877FC449BE97588FCA125ABDF9" />
+        <Connection ItemName="TSK_DI_DRV.UPS_8T_Rdy" Device="" Slot="7" Channel="3" Comment="Р?Р�?Рџ РіРѕС‚РѕРІ Рє СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 8Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.13A6D82DEB7E42CCB612B3002CA0FF33" />
+        <Connection ItemName="TSK_DI_DRV.UPS_8T_work" Device="" Slot="7" Channel="4" Comment="Р?Р�?Рџ РІ СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 8Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.22BC2DB78A204D5E96D9622F62F50408" />
+        <Connection ItemName="TSK_DI_DRV.UPS_8T_Bad" Device="" Slot="7" Channel="5" Comment="Р?Р�?Рџ РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ (Р�?Р�? Р­РҐР— 8Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.8B4EBCFED44743D59CCE04F3DCED02F4" />
+        <Connection ItemName="TSK_DI_DRV.Res_3" Device="" Slot="7" Channel="6" Comment="Р РµР·РµСЂРІ" UUID="D8572DBD4D772F6D686FF59C583FAD71.A1777963A4DC44999A59FD31DC191D32" />
+        <Connection ItemName="TSK_DI_DRV.Kr_9T1_ON" Device="" Slot="7" Channel="7" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 9Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.C623E7B32A414F0FAF741871E347A408" />
+        <Connection ItemName="TSK_DI_DRV.Kr_9T1_OF" Device="" Slot="7" Channel="8" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 9Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.356FE6D00E8C483D9818DF5EE7D22488" />
+        <Connection ItemName="TSK_DI_DRV.Pg_9T_v" Device="" Slot="7" Channel="9" Comment="Р”Р°РІР»РµРЅРёРµ РіР°Р·Р° РІ С‚СЂСѓР±Рµ СЌРєСЃРїР»СѓР°С‚Р°С†РёРѕРЅРЅРѕР№ СЃРєРІ. 9T РІС‹СЃРѕРєРѕРµ" UUID="D8572DBD4D772F6D686FF59C583FAD71.8DE20F8913CE4264B7C1506E813C19BF" />
+        <Connection ItemName="TSK_DI_DRV.EN_BB_9T_ON" Device="" Slot="7" Channel="10" Comment="Р­Р»РµРєС‚СЂРѕРѕР±РѕРіСЂРµРІ РїСЂРёР±РѕСЂРЅС‹С… Р±РѕРєСЃРѕРІ 9Рў РІРєР»СЋС‡РµРЅ" UUID="D8572DBD4D772F6D686FF59C583FAD71.747DAA598E5144CFA0607F6A7164AD11" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_9T_ON" Device="" Slot="7" Channel="11" Comment="Р’РІРѕРґ 220VAC РІРєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 9Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.2DD2B223C9B34100B450D902D3A620A9" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_9T_OF" Device="" Slot="7" Channel="12" Comment="Р’РІРѕРґ 220VAC РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 9Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.EB6EAA36B2E9455096B284D25859C916" />
+        <Connection ItemName="TSK_DI_DRV.U1_AC220_9T_ok" Device="" Slot="7" Channel="13" Comment="РќР°Р»РёС‡РёРµ 220 VAC РЅР° РІРІРѕРґРµ 1 (Р�?Р�? Р­РҐР— 9Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.26E23900FC8543FF95D28D255F722EAA" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_9T_AOF" Device="" Slot="7" Channel="14" Comment="Р’РІРѕРґ 220 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 9Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.DB92223AFFC74EF6A4F295C777254859" />
+        <Connection ItemName="TSK_DI_DRV.UPS_9T_Rdy" Device="" Slot="7" Channel="15" Comment="Р?Р�?Рџ РіРѕС‚РѕРІ Рє СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 9Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.D15135380AB647229791824A909C5FEA" />
+        <Connection ItemName="TSK_DI_DRV.UPS_9T_work" Device="" Slot="7" Channel="16" Comment="Р?Р�?Рџ РІ СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 9Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.201369B7616F46EFB13F109F0EBA83CA" />
+        <Connection ItemName="TSK_DI_DRV.UPS_9T_Bad" Device="" Slot="8" Channel="1" Comment="Р?Р�?Рџ РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ (Р�?Р�? Р­РҐР— 9Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.FA6477934886418ABF9222E9DA6F715D" />
+        <Connection ItemName="TSK_DI_DRV.Res_4" Device="" Slot="8" Channel="2" Comment="Р РµР·РµСЂРІ" UUID="D8572DBD4D772F6D686FF59C583FAD71.0B4D794731984218BFA4244FD61A756F" />
+        <Connection ItemName="TSK_DI_DRV.Kr_10T1_ON" Device="" Slot="8" Channel="3" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 10Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.29E21C5E3D0C4C6A843A81DCC501A023" />
+        <Connection ItemName="TSK_DI_DRV.Kr_10T1_OF" Device="" Slot="8" Channel="4" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 10Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.848F10300355488B9B09CB93854E14EE" />
+        <Connection ItemName="TSK_DI_DRV.Pg_10T_v" Device="" Slot="8" Channel="5" Comment="Р”Р°РІР»РµРЅРёРµ РіР°Р·Р° РІ С‚СЂСѓР±Рµ СЌРєСЃРїР»СѓР°С‚Р°С†РёРѕРЅРЅРѕР№ СЃРєРІ. 10T РІС‹СЃРѕРєРѕРµ" UUID="D8572DBD4D772F6D686FF59C583FAD71.698C30A15E0A41BCA13B9CEA72B2BFF5" />
+        <Connection ItemName="TSK_DI_DRV.EN_BB_10T_ON" Device="" Slot="8" Channel="6" Comment="Р­Р»РµРєС‚СЂРѕРѕР±РѕРіСЂРµРІ РїСЂРёР±РѕСЂРЅС‹С… Р±РѕРєСЃРѕРІ 10Рў РІРєР»СЋС‡РµРЅ" UUID="D8572DBD4D772F6D686FF59C583FAD71.55F433C6316B4E62A8B560FCE0229A29" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_10T_ON" Device="" Slot="8" Channel="7" Comment="Р’РІРѕРґ 220VAC РІРєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 10Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.3EF05AC1182C4164B172661606DB15D2" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_10T_OF" Device="" Slot="8" Channel="8" Comment="Р’РІРѕРґ 220VAC РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 10Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.3CAC7ADE0C454E72943913652A7DD184" />
+        <Connection ItemName="TSK_DI_DRV.U1_AC220_10T_ok" Device="" Slot="8" Channel="9" Comment="РќР°Р»РёС‡РёРµ 220 VAC РЅР° РІРІРѕРґРµ 1 (Р�?Р�? Р­РҐР— 10Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.171AFC183EED4FB581A3B1E96172E454" />
+        <Connection ItemName="TSK_DI_DRV.Q_AC220_10T_AOF" Device="" Slot="8" Channel="10" Comment="Р’РІРѕРґ 220 VAC Р°РІР°СЂРёР№РЅРѕ РѕС‚РєР»СЋС‡РµРЅ (Р�?Р�? Р­РҐР— 10Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.B7FC8C04D24841ECB7624B66A0DD33B9" />
+        <Connection ItemName="TSK_DI_DRV.UPS_10T_Rdy" Device="" Slot="8" Channel="11" Comment="Р?Р�?Рџ РіРѕС‚РѕРІ Рє СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 10Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.19953D7A26D4400CB3DCC9F632631AD4" />
+        <Connection ItemName="TSK_DI_DRV.UPS_10T_work" Device="" Slot="8" Channel="12" Comment="Р?Р�?Рџ РІ СЂР°Р±РѕС‚Рµ (Р�?Р�? Р­РҐР— 10Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.9C83BB458708471A9A2EF792E7BD4FC5" />
+        <Connection ItemName="TSK_DI_DRV.UPS_10T_Bad" Device="" Slot="8" Channel="13" Comment="Р?Р�?Рџ РЅРµРёСЃРїСЂР°РІРЅРѕСЃС‚СЊ (Р�?Р�? Р­РҐР— 10Рў)" UUID="D8572DBD4D772F6D686FF59C583FAD71.1B2B42E97BEC44319DDD1FDCDD8E73A0" />
+        <Connection ItemName="TSK_DI_DRV.Res_5" Device="" Slot="8" Channel="14" Comment="Р РµР·РµСЂРІ" UUID="D8572DBD4D772F6D686FF59C583FAD71.39971841373D4D899E83F9925C9BDC14" />
+        <Connection ItemName="TSK_DI_DRV.Kr_11T1_ON" Device="" Slot="8" Channel="15" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 11Рў-1 РѕС‚РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.6A5FBBEE5D1F49058FE7DC8D56608EBB" />
+        <Connection ItemName="TSK_DI_DRV.Kr_11T1_OF" Device="" Slot="8" Channel="16" Comment="РљСЂР°РЅ РѕС‚СЃРµС‡РЅРѕР№ 11Рў-1 Р·Р°РєСЂС‹С‚" UUID="D8572DBD4D772F6D686FF59C583FAD71.5442DF783C5C46F68C2197D2E7A6C58D" />
+        <Connection ItemName="TSK_AI_DRV.T_BB_EXZ_14T" Device="" Slot="1" Channel="1" Comment="Температура воздуха в ББ ЭХЗ 14Т TТ-142" UUID="91B1DACC444022F64ADC68B3DBC78EBF.AFB08CA4FBB0449D82140F3F4CC133E4" />
+        <Connection ItemName="TSK_AI_DRV.Tatm_14T" Device="" Slot="1" Channel="2" Comment="Температура атмосферного воздуха 14Т TТ-143" UUID="91B1DACC444022F64ADC68B3DBC78EBF.C6E2788F33AB4237BD58213F1CBF6C16" />
+        <Connection ItemName="TSK_AI_DRV.Pg_14T_t" Device="" Slot="1" Channel="3" Comment="Трубное давление в скважине 14Т (НКТ 114мм) РТ-141" UUID="91B1DACC444022F64ADC68B3DBC78EBF.F54DD265A54C46DC823AB0A4A2C55A2A" />
+        <Connection ItemName="TSK_AI_DRV.Pg_14T_mk1" Device="" Slot="1" Channel="4" Comment="Межколонное давление в скважине 14Т (между колоннами 114-178мм) РТ-142" UUID="91B1DACC444022F64ADC68B3DBC78EBF.9B6679A8820C4D3FBB58A1CB3EEDBC89" />
+        <Connection ItemName="TSK_AI_DRV.Pg_14T_mk2" Device="" Slot="2" Channel="1" Comment="Межколонное давление в скважине 14Т (между колоннами 178-245мм) РТ-143" UUID="91B1DACC444022F64ADC68B3DBC78EBF.8D0DE1DA52934E628A24907086C9C520" />
+        <Connection ItemName="TSK_AI_DRV.Pg_14T_mk3" Device="" Slot="2" Channel="2" Comment="Межколонное давление в скважине 14Т (между колоннами 245-324мм) РТ-144" UUID="91B1DACC444022F64ADC68B3DBC78EBF.F494BCC1390D404AB97ABD0DAD656315" />
+        <Connection ItemName="TSK_AI_DRV.Tg_14T" Device="" Slot="2" Channel="3" Comment="Температура газа на скважине 14Т TТ-141" UUID="91B1DACC444022F64ADC68B3DBC78EBF.8E41FA06566C4611AA8EF232F6DB2C86" />
+        <Connection ItemName="TSK_AI_DRV.Zg_14T" Device="" Slot="2" Channel="4" Comment="Загазованность на скважине 14Т AТ-141" UUID="91B1DACC444022F64ADC68B3DBC78EBF.722D7A4EF7D947CAB6B7BE2D68E06037" />
+        <Connection ItemName="TSK_AI_DRV.Res_2" Device="" Slot="3" Channel="1" Comment="Резерв" UUID="91B1DACC444022F64ADC68B3DBC78EBF.A79815FA812E4B9C8F9FE3CC001F45EE" />
+        <Connection ItemName="TSK_AI_DRV.Res_3" Device="" Slot="3" Channel="2" Comment="Резерв" UUID="91B1DACC444022F64ADC68B3DBC78EBF.40A6083F4A044ABB8E77013CC00587FA" />
+        <Connection ItemName="TSK_AI_DRV.Res_4" Device="" Slot="3" Channel="3" Comment="Резерв" UUID="91B1DACC444022F64ADC68B3DBC78EBF.7553B6A9DB434336ABF4D8B12DFFBF9D" />
+        <Connection ItemName="TSK_AI_DRV.Res_5" Device="" Slot="3" Channel="4" Comment="Резерв" UUID="91B1DACC444022F64ADC68B3DBC78EBF.748BEF4017B24113B1413AC29BE31057" />
+    </Crossconnect>
+</Configuration>

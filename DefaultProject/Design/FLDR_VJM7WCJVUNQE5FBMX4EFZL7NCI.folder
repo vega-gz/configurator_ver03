@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Алгоритм">
+	<Items>
+		<Item Name="T_ALG_KC.type" />
+		<Item Name="T_KC_SS.type" />
+		<Item Name="T_KC_TS.type" />
+		<Item Name="T_KC_mode.type" />
+		<Item Name="T_Mode_KC.type" />
+	</Items>
+</Folder>

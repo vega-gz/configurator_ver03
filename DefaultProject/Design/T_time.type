@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_time" Kind="Struct" UUID="5D0E86C04EAC04BA5241629526A141A6">
+    <Fields>
+        <Field Name="cycle" Type="REAL" UUID="4FB3096D4A77184416CC5C8D73C9627B" />
+        <Field Name="tmpREALtime_prev" Type="LREAL" UUID="AA24399745069385617DC0877E3A8166" />
+        <Field Name="tmpREALtime" Type="LREAL" UUID="3E47300F443559BA8A945B86B929E777" />
+    </Fields>
+</Type>

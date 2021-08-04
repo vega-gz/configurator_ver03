@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_BK_mb_DI_DRV" UUID="373095ED8F12434B9021E3B70C13F183">
+<Fields>
+<Field Comment="Состояние станции:Станция остановлена" Name="Station_Stopped" Type="BOOL" UUID="DB63485F112247A0BB2EDB08FE5C2DDC"/>
+<Field Comment="Состояние станции:Включается регулятор" Name="Station_Reg_On" Type="BOOL" UUID="C2577A27C014467288E7ED8EE0204067"/>
+<Field Comment="Состояние станции:Проверка давления на выходе" Name="Station_Check_P" Type="BOOL" UUID="24640697DFBC41438CC603DBB397D77C"/>
+<Field Comment="Состояние станции:Запуск осушителя и компрессора" Name="Station_Start_K" Type="BOOL" UUID="DBBA3D6DBEF84492B506893FB272865D"/>
+<Field Comment="Состояние станции:Станция работает" Name="Station_Work1" Type="BOOL" UUID="E4B9E46DDDC0463BB951745A1BFCA223"/>
+<Field Comment="Состояние станции:Станция работает" Name="Station_Work2" Type="BOOL" UUID="58E7EEEEDA6149799CA6FD65D68665C8"/>
+<Field Comment="Состояние станции:Переход в ожидание, останов компрессора и осушителя" Name="Station_Go_waiting1" Type="BOOL" UUID="8F8FCC4936ED4DCF8F40A4B7B2677136"/>
+<Field Comment="Состояние станции:Переход в ожидание, останов компрессора и осушителя" Name="Station_Go_waiting2" Type="BOOL" UUID="49811798AB5D41D593C0A46471DD02C7"/>
+<Field Comment="Состояние станции:Ожидание" Name="Station_Waiting" Type="BOOL" UUID="D71FBFF55CCF4F3BB09EBE21A822643C"/>
+<Field Comment="Состояние станции:Остановка компрессора и осушителя" Name="Station_Stop_K1" Type="BOOL" UUID="9BB84C2AF5ED4C5594AA059D9360B114"/>
+<Field Comment="Состояние станции:Остановка компрессора и осушителя" Name="Station_Stop_K2" Type="BOOL" UUID="9B3BFBEF13AE448B8DB1C6E3FFEC4124"/>
+<Field Comment="Состояние станции:Выключается регулятор" Name="Station_Stop_Reg" Type="BOOL" UUID="078517F1CC054C9CA9DF43A9A6FD7BE4"/>
+<Field Comment="Общеобменная вентиляция 02KM01:Остановлен" Name="OV2_Stopped" Type="BOOL" UUID="1C1552E6C13A4171B21713BA4B351BD8"/>
+<Field Comment="Общеобменная вентиляция 02KM01:Запускается" Name="OV2_Starting" Type="BOOL" UUID="22346D4229E9482FAD9206F1BB209BF7"/>
+<Field Comment="Общеобменная вентиляция 02KM01:Работает" Name="OV2_Work" Type="BOOL" UUID="256A751C62104D3E8F8C4FDC36B28752"/>
+<Field Comment="Общеобменная вентиляция 02KM01:Останавливается" Name="OV2_Stopping" Type="BOOL" UUID="1402E26148424A35885E63821E3DDFFE"/>
+<Field Comment="Общеобменная вентиляция 02KM01:Отказ" Name="OV2_Fault" Type="BOOL" UUID="8001D8777FDD4CB9B4E8E5B196C7C8CC"/>
+<Field Comment="Общеобменная вентиляция 02KM01:Заблокирован" Name="OV2_Blocked" Type="BOOL" UUID="38255D562D534331917C965943473F5C"/>
+<Field Comment="Общеобменная вентиляция 01KM01:Остановлен" Name="OV1_Stopped" Type="BOOL" UUID="85FCB79AAA7D48559B51A7B354A40136"/>
+<Field Comment="Общеобменная вентиляция 01KM01:Запускается" Name="OV1_Starting" Type="BOOL" UUID="57B298DCC0694B098BDC509ED08CD09C"/>
+<Field Comment="Общеобменная вентиляция 01KM01:Работает" Name="OV1_Work" Type="BOOL" UUID="1725E10159E043EE9C1BF01F96BDAFEA"/>
+<Field Comment="Общеобменная вентиляция 01KM01:Останавливается" Name="OV1_Stopping" Type="BOOL" UUID="F5B5463E79B54E4FB4AB63DF42D8F5C4"/>
+<Field Comment="Общеобменная вентиляция 01KM01:Отказ" Name="OV1_Fault" Type="BOOL" UUID="7F5A39FA552F4E18A9E9059D1E678979"/>
+<Field Comment="Общеобменная вентиляция  отсек осушки:Заблокирован" Name="OV1_Blocked" Type="BOOL" UUID="D36029D21ABF4AF680AA7824D6805029"/>
+<Field Comment="Общеобменная вентиляция  отсек осушки:Остановлен" Name="OV_Ots_Os_Stopped" Type="BOOL" UUID="2E2C96E4DFC0497B949232B3CFA130C2"/>
+<Field Comment="Общеобменная вентиляция  отсек осушки:Запускается" Name="OV_Ots_Os_Starting" Type="BOOL" UUID="F1DEC56C50944287B10561EE5C10F406"/>
+<Field Comment="Общеобменная вентиляция  отсек осушки:Работает" Name="OV_Ots_Os_Work" Type="BOOL" UUID="28B1DFE7C7D64347A78A0D06382691FE"/>
+<Field Comment="Общеобменная вентиляция  отсек осушки:Останавливается" Name="OV_Ots_Os_Stopping" Type="BOOL" UUID="14DF86A3B95649DAABC6D219CC313E01"/>
+<Field Comment="Общеобменная вентиляция  отсек осушки:Отказ" Name="OV_Ots_Os_Fault" Type="BOOL" UUID="68CB81E60498478C8FAE2FF0E7F0F04A"/>
+<Field Comment="Общеобменная вентиляция  отсек осушки:Заблокирован" Name="OV_Ots_Os_Blocked" Type="BOOL" UUID="402D3863E5034DAB81BD81A7D53F2AAF"/>
+<Field Comment="Клапан 01ЭК01:Исходное состояние" Name="Vlv_01EK01_Init_state" Type="BOOL" UUID="DB53B29FC59F4136838DDFBF79625859"/>
+<Field Comment="Клапан 01ЭК01:Открывается" Name="Vlv_01EK01_Opening" Type="BOOL" UUID="D154E3C7A579456199D3F9A4D15898DB"/>
+<Field Comment="Клапан 01ЭК01:Открыт" Name="Vlv_01EK01_Opened" Type="BOOL" UUID="BD810ECED621484B9CAA74F7C3EAA442"/>
+<Field Comment="Клапан 01ЭК01:Закрывается" Name="Vlv_01EK01_Closing" Type="BOOL" UUID="DB5A1B1C0D7049E78AF148B67CB10C19"/>
+<Field Comment="Клапан 01ЭК01:Закрыт" Name="Vlv_01EK01_Closed" Type="BOOL" UUID="988A71CB29FA4B64BCC5A22B4E092CFC"/>
+<Field Comment="Клапан 01ЭК01:Отказ" Name="Vlv_01EK01_Fault" Type="BOOL" UUID="FACFE133022249A7B0D713361218A214"/>
+<Field Comment="Клапан 01ЭК01:Заблокирован" Name="Vlv_01EK01_Blocked" Type="BOOL" UUID="F4067B69618548ADB28CA6F3042DF40D"/>
+<Field Comment="Клапан 01ЭК02:Исходное состояние" Name="Vlv_01EK02_Init_state" Type="BOOL" UUID="751481AD78914A97BAE97A83B579C6E0"/>
+<Field Comment="Клапан 01ЭК02:Открывается" Name="Vlv_01EK02_Opening" Type="BOOL" UUID="611C9446DD6845D887D5FCC8D3816FF0"/>
+<Field Comment="Клапан 01ЭК02:Открыт" Name="Vlv_01EK02_Opened" Type="BOOL" UUID="192B9EC15CDF415497E326856BA25C0F"/>
+<Field Comment="Клапан 01ЭК02:Закрывается" Name="Vlv_01EK02_Closing" Type="BOOL" UUID="E1CA9B5FD4EC404C8220671DB3F1303E"/>
+<Field Comment="Клапан 01ЭК02:Закрыт" Name="Vlv_01EK02_Closed" Type="BOOL" UUID="4022A5C34955403BABFBB53C65D6B4B4"/>
+<Field Comment="Клапан 01ЭК02:Отказ" Name="Vlv_01EK02_Fault" Type="BOOL" UUID="AEA7E0A51968445588C39D52840E90C5"/>
+<Field Comment="Клапан 01ЭК02:Заблокирован" Name="Vlv_01EK02_Blocked" Type="BOOL" UUID="57E082BB639F4B56A43A76EB4DA22C65"/>
+<Field Comment="Клапан 01КЛП01:Исходное состояние" Name="Vlv_01KLP01_Init_state" Type="BOOL" UUID="E7CB04A7A9D140F488C86A2A02C54604"/>
+<Field Comment="Клапан 01КЛП01:Открывается" Name="Vlv_01KLP01_Opening" Type="BOOL" UUID="99F5F9D84C964EF5804BE1BF09E5D4F8"/>
+<Field Comment="Клапан 01КЛП01:Открыт" Name="Vlv_01KLP01_Opened" Type="BOOL" UUID="FBD2FB6360414D6DAB500B916CDDB3CC"/>
+<Field Comment="Клапан 01КЛП01:Закрывается" Name="Vlv_01KLP01_Closing" Type="BOOL" UUID="0488B3511CC248F78E99473985287C5A"/>
+<Field Comment="Клапан 01КЛП01:Закрыт" Name="Vlv_01KLP01_Closed" Type="BOOL" UUID="5617274BF96642DDB4328E55008FC369"/>
+<Field Comment="Клапан 01КЛП01:Отказ" Name="Vlv_01KLP01_Fault" Type="BOOL" UUID="7A0F8B2B948D4D04B2AC3DEF83F9227D"/>
+<Field Comment="Клапан 01КЛП01:Заблокирован" Name="Vlv_01KLP01_Blocked" Type="BOOL" UUID="F438972A2DB0404F85379BFB8B0D9A6D"/>
+<Field Comment="Клапан 01КЛП02:Исходное состояние" Name="Vlv_01KLP02_Init_state" Type="BOOL" UUID="4A7D07EA9DF6467393AD0267E8DA236F"/>
+<Field Comment="Клапан 01КЛП02:Открывается" Name="Vlv_01KLP02_Opening" Type="BOOL" UUID="A79E324AF22F48BB845A2E887EF72FB7"/>
+<Field Comment="Клапан 01КЛП02:Открыт" Name="Vlv_01KLP02_Opened" Type="BOOL" UUID="9F638592E6C049BB92DD44098092A4E9"/>
+<Field Comment="Клапан 01КЛП02:Закрывается" Name="Vlv_01KLP02_Closing" Type="BOOL" UUID="141A28D98D274CFCB8DD15335A380D85"/>
+<Field Comment="Клапан 01КЛП02:Закрыт" Name="Vlv_01KLP02_Closed" Type="BOOL" UUID="4AF0B0E296C74729B1BB686021478EF7"/>
+<Field Comment="Клапан 01КЛП02:Отказ" Name="Vlv_01KLP02_Fault" Type="BOOL" UUID="7E91644066DA44CEAD6A75A51FCBE5F1"/>
+<Field Comment="Клапан 01КЛП02:Заблокирован" Name="Vlv_01KLP02_Blocked" Type="BOOL" UUID="DFE951467B97487C9ED97B3E8EF5137B"/>
+<Field Comment="Клапан 01КЛP01:Исходное состояние" Name="Vlv_01KLR01_Init_state" Type="BOOL" UUID="5FE4A3A9ED164EFD8AEC3FA1180C2F7A"/>
+<Field Comment="Клапан 01КЛP01:Открывается" Name="Vlv_01KLR01_Opening" Type="BOOL" UUID="A6619F6956604223912669610D0A066E"/>
+<Field Comment="Клапан 01КЛP01:Открыт" Name="Vlv_01KLR01_Opened" Type="BOOL" UUID="10C3AA4B89124A83BBBFB52621CEAB21"/>
+<Field Comment="Клапан 01КЛP01:Закрывается" Name="Vlv_01KLR01_Closing" Type="BOOL" UUID="55DBC3373C0048F5B0A5AFEEA3884CF7"/>
+<Field Comment="Клапан 01КЛP01:Закрыт" Name="Vlv_01KLR01_Closed" Type="BOOL" UUID="54CFF8E7DC334AC2AFA0317A386C399E"/>
+<Field Comment="Клапан 01КЛP01:Отказ" Name="Vlv_01KLR01_Fault" Type="BOOL" UUID="0E0EB4B8471A4F919C78A6A4E2E09269"/>
+<Field Comment="Клапан 01КЛP01:Заблокирован" Name="Vlv_01KLR01_Blocked" Type="BOOL" UUID="7F31DB823C0B40388A1C66D587E09E49"/>
+<Field Comment="Клапан 01КЛC01:Исходное состояние" Name="Vlv_01KLS01_Init_state" Type="BOOL" UUID="54A717273FB44C0894719332B7E99F16"/>
+<Field Comment="Клапан 01КЛC01:Открывается" Name="Vlv_01KLS01_Opening" Type="BOOL" UUID="828CE7745DB4427791F531638D2907A6"/>
+<Field Comment="Клапан 01КЛC01:Открыт" Name="Vlv_01KLS01_Opened" Type="BOOL" UUID="59BFCB4161994A418877C4EA6714C5A5"/>
+<Field Comment="Клапан 01КЛC01:Закрывается" Name="Vlv_01KLS01_Closing" Type="BOOL" UUID="FE33F26D91A44FCE94289BDDCDBDFC31"/>
+<Field Comment="Клапан 01КЛC01:Закрыт" Name="Vlv_01KLS01_Closed" Type="BOOL" UUID="BB9FE6E95C66407082DC619414BFDFE8"/>
+<Field Comment="Клапан 01КЛC01:Отказ" Name="Vlv_01KLS01_Fault" Type="BOOL" UUID="BA98B000DB134000AFD7ADE6E5E8E6FC"/>
+<Field Comment="Клапан 01КЛC01:Заблокирован" Name="Vlv_01KLS01_Blocked" Type="BOOL" UUID="E1E2FB61B20F4640BC7A0B9BDA5C3907"/>
+<Field Comment="Состояние 01КМ01:Остановлен" Name="State_01KM01_Stopped" Type="BOOL" UUID="AC0C4E6FA8544B1BAD2DD443FE2D553B"/>
+<Field Comment="Состояние 01КМ01:Запускается" Name="State_01KM01_Starting" Type="BOOL" UUID="256711FCC629449EA208DE9DCBAD6FE5"/>
+<Field Comment="Состояние 01КМ01:Работает" Name="State_01KM01_Work" Type="BOOL" UUID="4156AA41248B4CB78D2B8B48C346D56E"/>
+<Field Comment="Состояние 01КМ01:Останавливается" Name="State_01KM01_Stoping" Type="BOOL" UUID="72AC4EF8E6E54D018863A6C29D3418B8"/>
+<Field Comment="Состояние 01КМ01:Отказ" Name="State_01KM01_Fault" Type="BOOL" UUID="A96A515039E741F0B4ADF7F7D5D56FB3"/>
+<Field Comment="Состояние 01КМ01:Заблокирован" Name="State_01KM01_Blocked" Type="BOOL" UUID="E7002E7E50A144F5BCFAFB9473C2D37B"/>
+<Field Comment="Состояние 01ОА01:Остановлен" Name="State_01OA01_Stopped" Type="BOOL" UUID="9B133F4CA01A42A9888ABD4D3AA6BCAD"/>
+<Field Comment="Состояние 01ОА01:Запускается" Name="State_01OA01_Starting" Type="BOOL" UUID="D63CC8B39E814EDF85A8F0236E102C97"/>
+<Field Comment="Состояние 01ОА01:Работает" Name="State_01OA01_Work" Type="BOOL" UUID="D64763CFB08B4AE9846D60A7DB2FF08B"/>
+<Field Comment="Состояние 01ОА01:Останавливается" Name="State_01OA01_Stoping" Type="BOOL" UUID="B42F849339FC46A297255DB605D03506"/>
+<Field Comment="Состояние 01ОА01:Отказ" Name="State_01OA01_Fault" Type="BOOL" UUID="C1CCF69E78374F4496164B777E96CC44"/>
+<Field Comment="Состояние 01ОА01:Заблокирован" Name="State_01OA01_Blocked" Type="BOOL" UUID="25CDC0294B2C443D893961BE97D08B8F"/>
+<Field Comment="Клапан 02ЭК01:Исходное состояние" Name="Vlv_02EK01_Init_state" Type="BOOL" UUID="4A217736934443A6A0ACF20035D160CC"/>
+<Field Comment="Клапан 02ЭК01:Открывается" Name="Vlv_02EK01_Opening" Type="BOOL" UUID="17E2E4C1AD5E486898B46AE08460127C"/>
+<Field Comment="Клапан 02ЭК01:Открыт" Name="Vlv_02EK01_Opened" Type="BOOL" UUID="201E936B28504E4EAEC68B813BE9A3D6"/>
+<Field Comment="Клапан 02ЭК01:Закрывается" Name="Vlv_02EK01_Closing" Type="BOOL" UUID="C23A9BBB9F0049479A8C6892A0379EC6"/>
+<Field Comment="Клапан 02ЭК01:Закрыт" Name="Vlv_02EK01_Closed" Type="BOOL" UUID="70F6824E85AE4744AE50BB0779A03C94"/>
+<Field Comment="Клапан 02ЭК01:Отказ" Name="Vlv_02EK01_Fault" Type="BOOL" UUID="164CE2D2B6F74C1F83ED13F99F1E66E6"/>
+<Field Comment="Клапан 02ЭК01:Заблокирован" Name="Vlv_02EK01_Blocked" Type="BOOL" UUID="3338D1B2E9F240669301D21B5CBAFC41"/>
+<Field Comment="Клапан 02ЭК02:Исходное состояние" Name="Vlv_02EK02_Init_state" Type="BOOL" UUID="E6F50076CCA449509EDA550BFCC4913E"/>
+<Field Comment="Клапан 02ЭК02:Открывается" Name="Vlv_02EK02_Opening" Type="BOOL" UUID="B4A4C26C174D42409B174CB78FADC913"/>
+<Field Comment="Клапан 02ЭК02:Открыт" Name="Vlv_02EK02_Opened" Type="BOOL" UUID="B288251619C84B2E86DA71456AADE72D"/>
+<Field Comment="Клапан 02ЭК02:Закрывается" Name="Vlv_02EK02_Closing" Type="BOOL" UUID="0F8910E2024C49EBAAF85FA57206EE73"/>
+<Field Comment="Клапан 02ЭК02:Закрыт" Name="Vlv_02EK02_Closed" Type="BOOL" UUID="4D6DD4980A8E46C8B15CF14A5AA53E5C"/>
+<Field Comment="Клапан 02ЭК02:Отказ" Name="Vlv_02EK02_Fault" Type="BOOL" UUID="3995813C97064318A3A207BC3DDE2625"/>
+<Field Comment="Клапан 02ЭК02:Заблокирован" Name="Vlv_02EK02_Blocked" Type="BOOL" UUID="3847CDFC241348A4A6D75CB4F5D63E0F"/>
+<Field Comment="Клапан 02КЛП01:Исходное состояние" Name="Vlv_02KLP01_Init_state" Type="BOOL" UUID="C8A4B1EDCF9E4486B2D512446C909BF5"/>
+<Field Comment="Клапан 02КЛП01:Открывается" Name="Vlv_02KLP01_Opening" Type="BOOL" UUID="D56D9FC490E445819F427CA0841775CF"/>
+<Field Comment="Клапан 02КЛП01:Открыт" Name="Vlv_02KLP01_Opened" Type="BOOL" UUID="7F20A288DB374B07B12C360E7E831986"/>
+<Field Comment="Клапан 02КЛП01:Закрывается" Name="Vlv_02KLP01_Closing" Type="BOOL" UUID="539823B766224DFFAA40C3B7B60D07CA"/>
+<Field Comment="Клапан 02КЛП01:Закрыт" Name="Vlv_02KLP01_Closed" Type="BOOL" UUID="D2C7F4F5AFDB4AC3A188DE24C0181CF2"/>
+<Field Comment="Клапан 02КЛП01:Отказ" Name="Vlv_02KLP01_Fault" Type="BOOL" UUID="300361A0565543248033343D7C734C40"/>
+<Field Comment="Клапан 02КЛП01:Заблокирован" Name="Vlv_02KLP01_Blocked" Type="BOOL" UUID="FF7D1E6FFFB4447DAD5F833E4922C518"/>
+<Field Comment="Клапан 02КЛП02:Исходное состояние" Name="Vlv_02KLP02_Init_state" Type="BOOL" UUID="69E6C6C7DFF844C6BCC2EE669705D41B"/>
+<Field Comment="Клапан 02КЛП02:Открывается" Name="Vlv_02KLP02_Opening" Type="BOOL" UUID="80007D14393F4F03A81E654DCA988444"/>
+<Field Comment="Клапан 02КЛП02:Открыт" Name="Vlv_02KLP02_Opened" Type="BOOL" UUID="153BA8873C264F81A4029D0832447F43"/>
+<Field Comment="Клапан 02КЛП02:Закрывается" Name="Vlv_02KLP02_Closing" Type="BOOL" UUID="C3D98D278DB245A28C31233E8C4D3E8C"/>
+<Field Comment="Клапан 02КЛП02:Закрыт" Name="Vlv_02KLP02_Closed" Type="BOOL" UUID="9BBD87AAAEF74FBA8513C56406A44DFF"/>
+<Field Comment="Клапан 02КЛП02:Отказ" Name="Vlv_02KLP02_Fault" Type="BOOL" UUID="2610F09D6D3442E990EC37E271EF8484"/>
+<Field Comment="Клапан 02КЛП02:Заблокирован" Name="Vlv_02KLP02_Blocked" Type="BOOL" UUID="28084C026A034140868E2E529EEFBE06"/>
+<Field Comment="Клапан 02КЛР01:Исходное состояние" Name="Vlv_02KLR01_Init_state" Type="BOOL" UUID="6BB6C97ABEA34B589DCE99FFD9FD32F0"/>
+<Field Comment="Клапан 02КЛР01:Открывается" Name="Vlv_02KLR01_Opening" Type="BOOL" UUID="65E98145F9184A44A6957EF698CA7D12"/>
+<Field Comment="Клапан 02КЛР01:Открыт" Name="Vlv_02KLR01_Opened" Type="BOOL" UUID="D184395B2E724A03AE7CA3C2062FF876"/>
+<Field Comment="Клапан 02КЛР01:Закрывается" Name="Vlv_02KLR01_Closing" Type="BOOL" UUID="A6B665B7E74A46FEA5F01841BA6342B0"/>
+<Field Comment="Клапан 02КЛР01:Закрыт" Name="Vlv_02KLR01_Closed" Type="BOOL" UUID="409F2595E2D144A3B6B424737B55D716"/>
+<Field Comment="Клапан 02КЛР01:Отказ" Name="Vlv_02KLR01_Fault" Type="BOOL" UUID="594B00B1B0144328ACFBAD18936CFD52"/>
+<Field Comment="Клапан 02КЛР01:Заблокирован" Name="Vlv_02KLR01_Blocked" Type="BOOL" UUID="A11ED43B34194FC68701FE58FEB460CF"/>
+<Field Comment="Клапан 02КЛC01:Исходное состояние" Name="Vlv_02KLS01_Init_state" Type="BOOL" UUID="D14D0A2FD40C4ACF9CC243F405748703"/>
+<Field Comment="Клапан 02КЛC01:Открывается" Name="Vlv_02KLS01_Opening" Type="BOOL" UUID="5B4D178427E8446B8016FEF6B30FFAB3"/>
+<Field Comment="Клапан 02КЛC01:Открыт" Name="Vlv_02KLS01_Opened" Type="BOOL" UUID="F4ABAC8ADE614D9A8151BFD027772168"/>
+<Field Comment="Клапан 02КЛC01:Закрывается" Name="Vlv_02KLS01_Closing" Type="BOOL" UUID="715D7AD5609E4A4284E5FCAFCF83960C"/>
+<Field Comment="Клапан 02КЛC01:Закрыт" Name="Vlv_02KLS01_Closed" Type="BOOL" UUID="A2F279F6DA994135A72A8111C708170D"/>
+<Field Comment="Клапан 02КЛC01:Отказ" Name="Vlv_02KLS01_Fault" Type="BOOL" UUID="6BC82A7332B1492E9B7FED10889BD67B"/>
+<Field Comment="Клапан 02КЛC01:Заблокирован" Name="Vlv_02KLS01_Blocked" Type="BOOL" UUID="7AA5A270D0FF4227A616B8C21BCE3E06"/>
+<Field Comment="Состояние 02КМ01: Остановлен" Name="State_02KM01_Stopped" Type="BOOL" UUID="80E7E4B1DCCF4C13947427FE21236246"/>
+<Field Comment="Состояние 02КМ01: Запускается" Name="State_02KM01_Starting" Type="BOOL" UUID="DE18418D74AA48D5B0D16E10166971C7"/>
+<Field Comment="Состояние 02КМ01: Работает" Name="State_02KM01_Work" Type="BOOL" UUID="34068949ED8D420583EBA7F3442C07C4"/>
+<Field Comment="Состояние 02КМ01: Отсанавливается" Name="State_02KM01_Stoping" Type="BOOL" UUID="40B74FBD58C94B079571007D4E2B1CD2"/>
+<Field Comment="Состояние 02КМ01: Отказ" Name="State_02KM01_Fault" Type="BOOL" UUID="95B088D1C922440996672A1F5F387766"/>
+<Field Comment="Состояние 02КМ01:Заблокирован" Name="State_02KM01_Blocked" Type="BOOL" UUID="15917DB1A50542D8AAADCB80CB27CBA9"/>
+<Field Comment="Состояние 02ОА01: Остановлен" Name="State_02OA01_Stopped" Type="BOOL" UUID="7030230D1D4E48308978A091FAF08D55"/>
+<Field Comment="Состояние 02ОА01: Запускается" Name="State_02OA01_Starting" Type="BOOL" UUID="8DA80209C13D4F7F9D85C59BDEA01282"/>
+<Field Comment="Состояние 02ОА01: Работает" Name="State_02OA01_Work" Type="BOOL" UUID="9E22A037CE904344950B69EE0A007794"/>
+<Field Comment="Состояние 02ОА01: Отсанавливается" Name="State_02OA01_Stoping" Type="BOOL" UUID="A204BA41E9644D608ABD48D5B920BC26"/>
+<Field Comment="Состояние 02ОА01: Отказ" Name="State_02OA01_Fault" Type="BOOL" UUID="50209A736BB94FF59AA24DF0E389EDAA"/>
+<Field Comment="Состояние 02ОА01:Заблокирован" Name="State_02OA01_Blocked" Type="BOOL" UUID="5E523B464CB9451EAE7C0D53C71307C0"/>
+<Field Comment="Клапан 10КЛП10: Исходное состояние" Name="Vlv_10KLP10_Init_state" Type="BOOL" UUID="AE0A4BEEECAF4CA4A9A981D4D7D5B524"/>
+<Field Comment="Клапан 10КЛП10: Открывается" Name="Vlv_10KLP10_Opening" Type="BOOL" UUID="501055B76E7D4A7CAF430A4AEC6916A5"/>
+<Field Comment="Клапан 10КЛП10: Открыт" Name="Vlv_10KLP10_Opened" Type="BOOL" UUID="090BE1631E6345B886A313595F683CE1"/>
+<Field Comment="Клапан 10КЛП10: Закрывается" Name="Vlv_10KLP10_Closing" Type="BOOL" UUID="7EEF508205394B25A86571D3AFFA89EC"/>
+<Field Comment="Клапан 10КЛП10: Закрыт" Name="Vlv_10KLP10_Closed" Type="BOOL" UUID="5EF574791F1340CC802CCFDD7DF5D6AC"/>
+<Field Comment="Клапан 10КЛП10: Отказ" Name="Vlv_10KLP10_Fault" Type="BOOL" UUID="472CEC62146C44EB8DC122F6E74C125F"/>
+<Field Comment="Клапан 10КЛП10: Заблокирован" Name="Vlv_10KLP10_Blocked" Type="BOOL" UUID="D6EFD0209A1640CA8538D355BE784784"/>
+<Field Comment="Клапан 10КЛП11: Исходное состояние" Name="Vlv_10KLP11_Init_state" Type="BOOL" UUID="53F86172520A489EBC7BC72642D128AE"/>
+<Field Comment="Клапан 10КЛП11: Открывается" Name="Vlv_10KLP11_Opening" Type="BOOL" UUID="479FCBD05F984CE392DC3B4E10A6B66F"/>
+<Field Comment="Клапан 10КЛП11: Открыт" Name="Vlv_10KLP11_Opened" Type="BOOL" UUID="01A8F76BA73A424A91366A8C7AEFD202"/>
+<Field Comment="Клапан 10КЛП11: Закрывается" Name="Vlv_10KLP11_Closing" Type="BOOL" UUID="9B5E2D0FF8204AF7A11F596835B1E5FD"/>
+<Field Comment="Клапан 10КЛП11: Закрыт" Name="Vlv_10KLP11_Closed" Type="BOOL" UUID="9A6BFB7CDB2E4107A5E2D6ED6FBF9ACE"/>
+<Field Comment="Клапан 10КЛП11: Отказ" Name="Vlv_10KLP11_Fault" Type="BOOL" UUID="732239F3C2FF43AF81185C92D7896970"/>
+<Field Comment="Клапан 10КЛП11: Заблокирован" Name="Vlv_10KLP11_Blocked" Type="BOOL" UUID="F53E830DC29F45EC9D08B1CA9E3BE168"/>
+<Field Comment="Клапан 10КЛП15: Исходное состояние" Name="Vlv_10KLP15_Init_state" Type="BOOL" UUID="845FD131B5A745DA8DB083298E376030"/>
+<Field Comment="Клапан 10КЛП15: Открывается" Name="Vlv_10KLP15_Opening" Type="BOOL" UUID="E39E94BCC8E34A5792BB6E89D54A3041"/>
+<Field Comment="Клапан 10КЛП15: Открыт" Name="Vlv_10KLP15_Opened" Type="BOOL" UUID="F474C417D928417395A7DE6E99CA13EB"/>
+<Field Comment="Клапан 10КЛП15: Закрывается" Name="Vlv_10KLP15_Closing" Type="BOOL" UUID="871E9070E62C421FB447A0355A56953B"/>
+<Field Comment="Клапан 10КЛП15: Закрыт" Name="Vlv_10KLP15_Closed" Type="BOOL" UUID="66D7E4BD57CA49268BE002F3C52B4A03"/>
+<Field Comment="Клапан 10КЛП15: Отказ" Name="Vlv_10KLP15_Fault" Type="BOOL" UUID="BE3D49E9A95A4AE895DE8FC989C041AF"/>
+<Field Comment="Клапан 10КЛП15: Заблокирован" Name="Vlv_10KLP15_Blocked" Type="BOOL" UUID="57093E38EB2A4C9BA5B7C9D03071ACB0"/>
+</Fields>
+</Type>

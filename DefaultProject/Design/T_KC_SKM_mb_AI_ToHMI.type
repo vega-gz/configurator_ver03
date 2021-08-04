@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_SKM_mb_AI_ToHMI" UUID="078964A4EF264172B53895FFAE1CDD50">
+<Fields>
+<Field Comment="Ток поляризации НГК_БИ_ИКП, мА" Name="I_IKP1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D418B2C0AFC44466BEA3A148C832D0E5"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП2, мА" Name="I_IKP2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C7E12930E62942A8A66C670CD43E5B34"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП3, мА" Name="I_IKP3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CE68D30783C84C91966C5B3607C4FDAA"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП4, мА" Name="I_IKP4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8AA325CDFA624405BEB0236E06AAF091"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП5, мА" Name="I_IKP5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="29B77CE653A740DEB65FB97A384D61C0"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП6, мА" Name="I_IKP6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6B410043A4674CF19B8D6E9ABA79CF9C"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП7, мА" Name="I_IKP7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DEE91EB8AE264203A4A663BB8565C383"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП8, мА" Name="I_IKP8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EB2C50E9E3674E6FB50D2DDA41FFCFCC"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП9, мА" Name="I_IKP9" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7E8BA968B8B84088BF91A4018AC66A66"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП10, мА" Name="I_IKP10" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="15ADF51381AF46C99E51090314F11FE9"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП11, мА" Name="I_IKP11" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CE2464F3B8E942B680745D55CE0C919B"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП12, мА" Name="I_IKP12" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1B8E27BD8B0140E383FD59E0233B8290"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП13, мА" Name="I_IKP13" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5D4F9F97C0D4467EB90F83D5AB953012"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП14, мА" Name="I_IKP14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9A36598AB4494321B103F2D38EBA15C8"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП15, мА" Name="I_IKP15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7FBE8C5A75824EDABCEF582069971E23"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП16, мА" Name="I_IKP16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9D800C3E7D154CEBA22379F5D00D121F"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП17, мА" Name="I_IKP17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="29457116F8D842B9873084B42F80931C"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП18, мА" Name="I_IKP18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="69DB67E091B54B6D96E2217E5DACCA2D"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП19, мА" Name="I_IKP19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8F6B124E70444EDE9332EDD524347F77"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП20, мА" Name="I_IKP20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7ED40381579F44C2959E591CA101881F"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП21, мА" Name="I_IKP21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="498C9D73AD9B43CB960F19BADEF470E9"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП22, мА" Name="I_IKP22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E325840D2B4D4BE9B39C5DB918328D09"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП23, мА" Name="I_IKP23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8DDAE538318041DFB32F7B31F9E0ED51"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП24, мА" Name="I_IKP24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A169BA3647F948CA9236E6F48CFA9192"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП25, мА" Name="I_IKP25" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E7E36B17CA8742B08BCE0D03D3736BB8"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП26, мА" Name="I_IKP26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7A680D251DA0451E8FFC7C3AC7B887F1"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП27, мА" Name="I_IKP27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F483F8CB5380472E9A81D0689AC34637"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП28, мА" Name="I_IKP28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7B78D50FFC5A4E06991E87014E1584E5"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП29, мА" Name="I_IKP29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8CF70D79C0744C9CB00F1B5D84BF54B6"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП30, мА" Name="I_IKP30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9D409987E2AF4B50855EC990E38CC9F1"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП31, мА" Name="I_IKP31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0CF1CA8B241E4EFF879205AC5B5FE334"/>
+<Field Comment="Ток поляризации НГК_БИ_ИКП32, мА" Name="I_IKP32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="29F7F63A32E74B079964E2036E5239F6"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП1, В" Name="U_IKP1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="51DA051B14C0479B8B0872DB449BE390"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП2, В" Name="U_IKP2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="060FF0FB34D74B1CB32410B5AF72B00B"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП3, В" Name="U_IKP3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="75081546EE734862910C9913B381BAFE"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП4, В" Name="U_IKP4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8C00E22DC3E3412C800561D581071D66"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП5, В" Name="U_IKP5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8E106465CE584019B6E186485770FC1F"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП6, В" Name="U_IKP6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1092F1BA82814D2FB53595A59A0D6F58"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП7, В" Name="U_IKP7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="86B92B07A6BA471BB3F3960B2F6F9972"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП8, В" Name="U_IKP8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="12CDDEE3D077434C9AC2FF9B584FD672"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП9, В" Name="U_IKP9" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0879576192C24A1EAB644077633A970E"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП10, В" Name="U_IKP10" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7EB648C2B9DD49B5945BEF1AE4B89A44"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП11, В" Name="U_IKP11" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AC58C1F332054F29AB8D201B8DEE586E"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП12, В" Name="U_IKP12" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3ED6967C973D4817AA71AEBE2C27FD29"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП13, В" Name="U_IKP13" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="49C889092A374BCA861A5A32FE2F3F49"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП14, В" Name="U_IKP14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="45DD45F098634A6896F6083916806877"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП15, В" Name="U_IKP15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="308916BF8E58459CA116003F56444E34"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП16, В" Name="U_IKP16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BAAAE6A3EC794CE2AAAAD12313C35495"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП17, В" Name="U_IKP17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9EB87BC789C14C4B9B21096CF40F1708"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП18, В" Name="U_IKP18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4A31175A612F4C899BAE476A98E89B88"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП19, В" Name="U_IKP19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="21D2631F810443C49EE2D199CE395F2D"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП20, В" Name="U_IKP20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="18EE3247B5DE4F459629A812D36AB466"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП21, В" Name="U_IKP21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="81FDDA2BC9F34AD08DA2F3263B9DEA23"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП22, В" Name="U_IKP22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D7C8BA51E756426385A8C88459944FF3"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП23, В" Name="U_IKP23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="20231F79F1A244DC9715B9E140689150"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП24, В" Name="U_IKP24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EF6D2FDE26004ACE89475569EDA7386E"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП25, В" Name="U_IKP25" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AF34530A6F8A49FA95FC84BC7B32FE47"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП26, В" Name="U_IKP26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BF97560E8A86412FA4659CBF1CBEE338"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП27, В" Name="U_IKP27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0D597CABF52843DDADAC5B6D2E1EF453"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП28, В" Name="U_IKP28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="822358331E164C20B0CCD06F018D31CF"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП29, В" Name="U_IKP29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F2B9678F86C043F9A9DAAAD1CA6B3227"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП30, В" Name="U_IKP30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EB0E1A3C59704A31ABBE38364204A27B"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП31, В" Name="U_IKP31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E80E6226C1E04646A20B010ACC08A7BB"/>
+<Field Comment="Поляризационнный потенциал НГК_БИ_ИКП32, В" Name="U_IKP32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3C5D3D2FF30E426C86C07279E021AEA6"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП1, В" Name="Sum_U_IKP1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2391854200C14D65827AE6B3683F6914"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП2, В" Name="Sum_U_IKP2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5F9EFD0602EB49598AB04624FA31DFC4"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП3, В" Name="Sum_U_IKP3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="429A960CC656427A956E958E74664A30"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП4, В" Name="Sum_U_IKP4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C76BFAB419A7485DA641421F37C81DEB"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП5, В" Name="Sum_U_IKP5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1DD45831B6F346FBA0FC95733DD60592"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП6, В" Name="Sum_U_IKP6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="800A29F72355440C8ABB6CF996B8E98B"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП7, В" Name="Sum_U_IKP7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AAFF3057122846948CF27FD391803A80"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП8, В" Name="Sum_U_IKP8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A836F2ED3243494481E3A862F5DB9307"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП9, В" Name="Sum_U_IKP9" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D6B51845B62B4EA9A3F1715E8D60D463"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП10, В" Name="Sum_U_IKP10" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="11D8344FFDDF4820A62BC4B4125F2A7C"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП11, В" Name="Sum_U_IKP11" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8B55F036FA8B42568DB00C912F6DDD62"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП12, В" Name="Sum_U_IKP12" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EF0FC79073C84545BB63FC00EC9DF216"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП13, В" Name="Sum_U_IKP13" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D325BE3A9F8942AC921A447A92A4E911"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП14, В" Name="Sum_U_IKP14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B0D7B32A8EE54FCE9C5D48CBBCF30316"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП15, В" Name="Sum_U_IKP15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8C22133326D54F4AB752B781667C09F5"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП16, В" Name="Sum_U_IKP16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="09D582C507ED433E827B0636BFA0DA99"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП17, В" Name="Sum_U_IKP17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9101B84E80AD4DBBA72ADC1BC5F85933"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП18, В" Name="Sum_U_IKP18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BADE5D2FFEFA485CBCDBD3B397CFDEF8"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП19, В" Name="Sum_U_IKP19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8EB83B34A11C47E0B2CDFFF37951E406"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП20, В" Name="Sum_U_IKP20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D12620AD2E8B40378C946B1D8855CBFE"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП21, В" Name="Sum_U_IKP21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A48695D2B5A3477FA6B3E33CEF4EEEB3"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП22, В" Name="Sum_U_IKP22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1E5315DC1FE947168FD411599F3C97BC"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП23, В" Name="Sum_U_IKP23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4EFF7659D29F4FC2973F001911F74207"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП24, В" Name="Sum_U_IKP24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7B1871D1F9E74838AEF60599766AD2EA"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП25, В" Name="Sum_U_IKP25" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A4EC1345636E4F51A1A796E18AD994AD"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП26, В" Name="Sum_U_IKP26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E7DC42711E944F5283B9BBE2A2FDAEE1"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП27, В" Name="Sum_U_IKP27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="99B53595A3FA49C1B01F681C8A5FF581"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП28, В" Name="Sum_U_IKP28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C3E0DAD4F38F46B2903BE4BA2C8EF8B9"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП29, В" Name="Sum_U_IKP29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="96A326C23E9A4364AE3E5E8B9C6A3AB6"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП30, В" Name="Sum_U_IKP30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="14C7CF6C31C547F5A6E4C234BB4C65B7"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП31, В" Name="Sum_U_IKP31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5726F183CBB248D08D6D8DEDE55E1782"/>
+<Field Comment="Суммарный потенциал НГК_БИ_ИКП32, В" Name="Sum_U_IKP32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="05BC1523F59347878B98B985ADC426ED"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП1, Ом" Name="R1_IKP1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0FD396E04F4A4C66BDC2B946D612C82C"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП2, Ом" Name="R1_IKP2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DCDC639ACE2044479A0C696ECAE7815E"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП3, Ом" Name="R1_IKP3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="633316B54ACC4E0EBA4CCCA6C3D696BB"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП4, Ом" Name="R1_IKP4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="85B89177C0E84ABFA1E918E928907EDB"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП5, Ом" Name="R1_IKP5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7C9EC276EE844EB8805E7AB15BC2C9D5"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП6, Ом" Name="R1_IKP6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3A02F015372B4726AD059A975E7462E4"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП7, Ом" Name="R1_IKP7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1010E26B888149AC8CD1136434ECAC98"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП8, Ом" Name="R1_IKP8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C7094F51CBDA4AA497500ABA6251ED74"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП9, Ом" Name="R1_IKP9" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EC030770C7BF49BAAFB3E1D33232644B"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП10, Ом" Name="R1_IKP10" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="422EC95924684253B54A5AA01A341A79"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП11, Ом" Name="R1_IKP11" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B9E30080FB4A4046B42D730A1BDAE953"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП12, Ом" Name="R1_IKP12" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3042D1151DAB44118E7C6355A7C86370"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП13, Ом" Name="R1_IKP13" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CABAA50F3EE74F458540B6DE38354CF4"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП14, Ом" Name="R1_IKP14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C0757A90F3294565873FB69958BF5B09"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП15, Ом" Name="R1_IKP15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="EEE47998486D49319A59928171151B08"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП16, Ом" Name="R1_IKP16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F1C625C4E3A94E4181A786DFDDD36674"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП17, Ом" Name="R1_IKP17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="FF6F8B123A704CE3B1BD262B4EB1BF9A"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП18, Ом" Name="R1_IKP18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="85DF16552616446EB57A1CC580D87113"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП19, Ом" Name="R1_IKP19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6637E0D1AAD6416797BBC59246E7CE0F"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП20, Ом" Name="R1_IKP20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="01DE7D58912D47C5A9E26571261E5C2F"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП21, Ом" Name="R1_IKP21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0CB20623195E4B49971FC2CC4272E05B"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП22, Ом" Name="R1_IKP22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="2344885EA40D4381AD07B7D0AC206CA4"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП23, Ом" Name="R1_IKP23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F454A92E03DB4A1E887023CAD8CC9A4F"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП24, Ом" Name="R1_IKP24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="D79CAD0B19A74DF89977B4EA7D367B7C"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП25, Ом" Name="R1_IKP25" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6E114E4AD6D84A83961DE449E2D891F2"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП26, Ом" Name="R1_IKP26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A555A8B28B79433FB11415A84C418802"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП27, Ом" Name="R1_IKP27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="B434874BF71040EC82E649CE5D67B8F9"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП28, Ом" Name="R1_IKP28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9569B5AC1C5644F093F91157EA0EBFFC"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП29, Ом" Name="R1_IKP29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6D6167670FFC49DCA660135FF5B0A3FD"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП30, Ом" Name="R1_IKP30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="67302B33D93D46BA89FF4F1FB37813AF"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП31, Ом" Name="R1_IKP31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="39C9F1BC83C549F3A16308D8B26C03A8"/>
+<Field Comment="Сопротивление первой пластины датчикка корозии НГК_БИ_ИКП32, Ом" Name="R1_IKP32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C9D93F0FE8CC4FC9BA64A3FF5922EADF"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП1, Ом" Name="R2_IKP1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="02914CEEFED2479E92E956D5B790CBB2"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП2, Ом" Name="R2_IKP2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="88C13B53B021442F9B6BCA5E181E0827"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП3, Ом" Name="R2_IKP3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="26674A56F0B84BA496844572FBC713C2"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП4, Ом" Name="R2_IKP4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8CFF3BCEE5644DFF9626A830C32FE2F9"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП5, Ом" Name="R2_IKP5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="89908017DCB84341BD24011D8181197B"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП6, Ом" Name="R2_IKP6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F10C3B5CB8BB45419C2CDFC7A5CFB2C0"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП7, Ом" Name="R2_IKP7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0A9A26971CF84BEAAB8BE1F226CF4386"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП8, Ом" Name="R2_IKP8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AA8CAB88F6E44527838EC012D23F3B4B"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП9, Ом" Name="R2_IKP9" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="98F69C9689634CE08D7D00DA0B2EC4B3"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП10, Ом" Name="R2_IKP10" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BEB7F274354541D6894E408B627EF86F"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП11, Ом" Name="R2_IKP11" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="372610AA24E9406F8FFA2218DC226606"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП12, Ом" Name="R2_IKP12" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F837978F667C4A578CA5795BA8A17778"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП13, Ом" Name="R2_IKP13" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="889C1AA746BC4DA38C1797FF40806F37"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП14, Ом" Name="R2_IKP14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C28BE5D7E6DB4CBC8C2C1AD162544729"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП15, Ом" Name="R2_IKP15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="253304A5F7144C53A73747A804FC4009"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП16, Ом" Name="R2_IKP16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9E41CF76406A4800AB37413731AF72DB"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП17, Ом" Name="R2_IKP17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4F08EA35037A4FB2A7041A64460A63AB"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП18, Ом" Name="R2_IKP18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0FB92039B11247F489DFC6694A279659"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП19, Ом" Name="R2_IKP19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="46AFDA51ACB04235BDC0F2588E2CB387"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП20, Ом" Name="R2_IKP20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A3AF805CA779489F8186C4358CAFE2B7"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП21, Ом" Name="R2_IKP21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C12C1F110E0E4007ACBD4B8F711E54ED"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП22, Ом" Name="R2_IKP22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="08F5DCF3FE7B457D8F7907B2B3DAC8FE"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП23, Ом" Name="R2_IKP23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5D420FD2E470441E957E37E09191C4AC"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП24, Ом" Name="R2_IKP24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AF0351386A034C6E850B80E7BF0187DE"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП25, Ом" Name="R2_IKP25" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A2E43284424F4F8DAC8C1B8FCE2CCAC4"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП26, Ом" Name="R2_IKP26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="6CF0C238060D409AB75C72DE2F66D7FB"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП27, Ом" Name="R2_IKP27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="380664A8D4A94C61AB2EE7655DCA0F7E"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП28, Ом" Name="R2_IKP28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="72D51DC5E1AB42249509589F303ED1A6"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП29, Ом" Name="R2_IKP29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F2F2EFE9294C4566A4353ACFC7FF380A"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП30, Ом" Name="R2_IKP30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="67760A59A59B4B8A92A22F602270F4A8"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП31, Ом" Name="R2_IKP31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="249D1CA9CE7047679FA3C2722076E55A"/>
+<Field Comment="Сопротивление второй пластины датчикка корозии НГК_БИ_ИКП32, Ом" Name="R2_IKP32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="35AB578D5AB54F0A8D265C9B17A831F4"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП1, Ом" Name="R3_IKP1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="54347B47FD0945E3AAC07074DE8121DD"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП2, Ом" Name="R3_IKP2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="4FE7DDF69313424991AE30DAC0DE7FB9"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП3, Ом" Name="R3_IKP3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="8645206EB6F849088F4EF1DCC653F27A"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП4, Ом" Name="R3_IKP4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CA0093045F414C058B111C7ABC992F61"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП5, Ом" Name="R3_IKP5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="41DE5F9445A04D5CAA69656B94B2F85E"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП6, Ом" Name="R3_IKP6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DBC4309E1A9541C7B574DFDB8E2281EB"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП7, Ом" Name="R3_IKP7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1EAD58A0D1A14A72AEE14A68F2B0A0FE"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП8, Ом" Name="R3_IKP8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E3F5145286494804A319EDE1BF3A2FA1"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП9, Ом" Name="R3_IKP9" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="03738025E7FC49F1B5410DD284416B43"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП10, Ом" Name="R3_IKP10" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A9D8D43B493A4BD6877E28FE3421C16F"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП11, Ом" Name="R3_IKP11" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="CD11202964F8423CAC6144709EE8D39A"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП12, Ом" Name="R3_IKP12" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="50CA4B9FB3F84448BB1D1B800719A222"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП13, Ом" Name="R3_IKP13" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="187B93C290FF439B9CBCA4F65CE3D9B4"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП14, Ом" Name="R3_IKP14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="DFB73BF9F9CA4029AF5255B0E496D817"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП15, Ом" Name="R3_IKP15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1AF5662819CE490280529B6361AF46EF"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП16, Ом" Name="R3_IKP16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C70CFC2129CC4CC7B3B19E347DD7331F"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП17, Ом" Name="R3_IKP17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="42804E16CC7A44D2B4B7C8C28B4ADCAD"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП18, Ом" Name="R3_IKP18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="0778CB2BA61B474AB199FCCDCC863FB2"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП19, Ом" Name="R3_IKP19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E0A996577FE141BABE22AC42AD401B23"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП20, Ом" Name="R3_IKP20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5A2E84499B7A4DE084B5DFF6755E1194"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП21, Ом" Name="R3_IKP21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="561A23FDD5B84B78AD724531EC2D4D74"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП22, Ом" Name="R3_IKP22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="45595616754547AEA649EE4EE872E431"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП23, Ом" Name="R3_IKP23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="22C978AE061B420B92FAF88A8FE8014D"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП24, Ом" Name="R3_IKP24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5E2A18ADE62D497C926CA9F3608B7881"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП25, Ом" Name="R3_IKP25" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="187324916E03481EBEDCAC7AE004BCDD"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП26, Ом" Name="R3_IKP26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="031EEEE19F6348478159A2EFDCDAF39A"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП27, Ом" Name="R3_IKP27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BFF93F94B7C74113863C7B2F5196044B"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП28, Ом" Name="R3_IKP28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7BE6390139884A3E84A68118070E2840"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП29, Ом" Name="R3_IKP29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7CD2F0FCDDC74CAE966D54D1C8EB5036"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП30, Ом" Name="R3_IKP30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="93024FD6CA544867B4CC44A0081DAFED"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП31, Ом" Name="R3_IKP31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AA0671BDEF0E4328836F7EF8B9D158F8"/>
+<Field Comment="Сопротивление третьей пластины датчикка корозии НГК_БИ_ИКП32, Ом" Name="R3_IKP32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="557AC26B0A9547FD9BBC872556BD2319"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП1, А" Name="Iz_IKP1" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="19594CBA9BA74822BDB893809B230D9D"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП2, А" Name="Iz_IKP2" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="156CE6A6051743338153DFC618E1C1AA"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП3, А" Name="Iz_IKP3" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="76F94118E2A1429196B3B2853FA263A1"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП4, А" Name="Iz_IKP4" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3E1D6A01E152449D95897303EDC1BEC4"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП5, А" Name="Iz_IKP5" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="E854DDB0842744D3B2ECC8FF2BFCE577"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП6, А" Name="Iz_IKP6" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="FEBFDA7162B941AB903D488BB6C35EEE"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП7, А" Name="Iz_IKP7" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9026D811CFAC454CBDA6E6ED5EB15FB7"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП8, А" Name="Iz_IKP8" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7CA1D2D675EB4C209541DAA8827EA3C4"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП9, А" Name="Iz_IKP9" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="13B91EE23B24473EBBA5D6F2D2B6D249"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП10, А" Name="Iz_IKP10" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="C4F74A38451C476BBF29B90093DB162B"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП11, А" Name="Iz_IKP11" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1F57FD7DDA674355808E499A9A0BF0A9"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП12, А" Name="Iz_IKP12" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="A843EDA53BA94CE2BD96DF2F4A3A2290"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП13, А" Name="Iz_IKP13" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="5C4530DAF83A4C41B7E69F2C994945A2"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП14, А" Name="Iz_IKP14" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AE77A2B96520409ABD9C274214E87C92"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП15, А" Name="Iz_IKP15" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="790366F8FBC84B8690582C8E9E1DB374"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП16, А" Name="Iz_IKP16" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="7CC5A6A8A9DD4F0D80060E3B2B5EF313"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП17, А" Name="Iz_IKP17" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="25FA5D168CE44694A66B13CF5C33B0A1"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП18, А" Name="Iz_IKP18" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="290E36773C904F75B438F48A53D7C05F"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП19, А" Name="Iz_IKP19" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="42A7266EA0FC4D628BD9BB8ED0667A32"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП20, А" Name="Iz_IKP20" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F27D9AA3F6CE4B23B3AE45A63330A9C6"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП21, А" Name="Iz_IKP21" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="17416177BB3D49118BCFDE878AD3F0FC"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП22, А" Name="Iz_IKP22" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="75060EE59ADB47D19B60103FE9D115F7"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП23, А" Name="Iz_IKP23" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="9D442D83E68E4838BA5EF8DFFBE7E5C7"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП24, А" Name="Iz_IKP24" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3FC286660A3B4A93ACB2851E60E14CFC"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП25, А" Name="Iz_IKP25" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="1BABC36C84C84E5F93B48328B1A04FA2"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП26, А" Name="Iz_IKP26" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="BC15A41ABB984866B99306FCB482BF00"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП27, А" Name="Iz_IKP27" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="68646EA5B1964C9F8EFFC89FC3020C76"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП28, А" Name="Iz_IKP28" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="3390EE8D4F2D4DDEAE14619B6818279C"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП29, А" Name="Iz_IKP29" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="AFC92C5F3B534E3793C494E58511B08E"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП30, А" Name="Iz_IKP30" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="FF94B45746B647C787860EAAE9D2EAA0"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП31, А" Name="Iz_IKP31" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="F46DA1DA78CC469F8739646579F0CB7D"/>
+<Field Comment="Защитный ток НГК_БИ_ИКП32, А" Name="Iz_IKP32" Type="2318F94F4C3CEA2681DE4C8C432A66E9" UUID="55033A6B86634C04BC1FB8381CED9DE7"/>
+</Fields>
+</Type>

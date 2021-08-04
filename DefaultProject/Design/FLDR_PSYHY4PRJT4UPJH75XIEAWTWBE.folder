@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="ЧМИ">
+	<Items>
+		<Item Name="TNoLink.type"/>
+		<Item Name="T_AbonentStatus.type"/>
+		<Item Name="T_ArchiveExport.type"/>
+		<Item Name="T_LAD.type"/>
+		<Item Name="T_MnemoSystSign.type"/>
+		<Item Name="T_PPZ.type"/>
+		<Item Name="T_ReportCommand.type"/>
+	</Items>
+</Folder>

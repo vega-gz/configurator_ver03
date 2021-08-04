@@ -12,11 +12,22 @@ import javax.swing.JTable;
 public class Tools {
     public static boolean isDesDir(){
         File f = new File(globVar.desDir + File.separator +"Design");
+        boolean dirDesign = false;
         
-        boolean x = false;
-        if(f!=null) x = f.isDirectory();
-        if(!x) JOptionPane.showMessageDialog(null, "В каталоге \"" + globVar.desDir + "\" нет каталога \"Design\"");
-        return x;
+        if(f != null) {
+            dirDesign = f.isDirectory();
+        }
+        if(!dirDesign){
+            if(globVar.desDir.equals(globVar.DefaultProjectDir)){
+                JOptionPane.showMessageDialog(null, "папка проекта по умолчанию не найдена " + globVar.desDir);
+                return false;
+            }else{
+                JOptionPane.showMessageDialog(null, "Будет использован проект по умолчанию " + globVar.DefaultProjectDir);
+                globVar.desDir = globVar.DefaultProjectDir;
+                isDesDir();
+            }
+        }
+        return dirDesign;
     }
     
     public static boolean isDB(){

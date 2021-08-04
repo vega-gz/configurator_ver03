@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Folder Name="ИБ">
+<Items>
+<Item Name="T_IB_Event.type"/>
+<Item Name="T_IB_Event_Teh.type"/>
+<Item Name="Type_IS.type"/>
+</Items>
+</Folder>

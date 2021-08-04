@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="RTG_OUT" Kind="Struct" UUID="6D60ABAC471237FF8313EF89CEEF55F1">
+    <Fields>
+        <Field Name="q_c" Type="REAL" UUID="45A09F7048D65AA3F84C3987CEB1CB8D" Comment="Объемный расход среды приведенный к стандартным условиям, нм3/час" />
+        <Field Name="q_v" Type="REAL" UUID="77AA11184FEB868279DF93A312D5560D" Comment="Объемный расход среды при рабочих условиях, м3/час" />
+        <Field Name="q_m" Type="REAL" UUID="83E4FC2941AF18770AB52C8398A967AB" Comment="Массовый расход, кг/час" />
+        <Field Name="Hour" Type="REAL" UUID="BC8FE4F14BE0F68FB80D358F74118F4E" Comment="Накопленный расход за текущий час, нм3" />
+        <Field Name="Last_Hour" Type="REAL" UUID="60475307440F2E1A63E593B71CAE105E" Comment="Накопленный расход за прошлый час, нм3" />
+        <Field Name="Day" Type="REAL" UUID="0AE3300C4E4ED036A91A06A62CA749D9" Comment="Накопленный расход за текущий день, нм3" />
+        <Field Name="Last_Day" Type="REAL" UUID="50A370464DB824426AB86AA0337DDDA8" Comment="Накопленный расход за прошлый день, нм3" />
+        <Field Name="Month" Type="REAL" UUID="294D8F804E5C31296572FDA127BC0250" Comment="Накопленный расход за текущий месяц, нм3" />
+        <Field Name="Last_Month" Type="REAL" UUID="9841E04D4DEEB667EFFF4285D903040C" Comment="Накопленный расход за прошлый месяц, нм3" />
+        <Field Name="Ro" Type="REAL" UUID="B05CC85245180FCC1F785D942BDA0685" Comment="Плотность в рабочих условиях (Стандартные условия t =293.15 град К и Р = 0.101325 МПа)" />
+        <Field Name="Fault" Type="BOOL" UUID="57965F4C4D54035D8263B5ACE909C05C" Comment="Fault" />
+        <Field Name="Error" Type="INT" UUID="D953E6D949025F40D890DBBDED85F074" Comment="Ошибки вычисления расхда (по битам)" />
+    </Fields>
+</Type>

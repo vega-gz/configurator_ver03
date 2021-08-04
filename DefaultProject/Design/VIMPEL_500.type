@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="VIMPEL_500" Kind="Struct" UUID="193F7BA047C4D790C32FF698EFD216E4">
+    <Fields>
+        <Field Name="Sost" Type="UDINT" UUID="4F014B564A8D1AAFD7EF7CA5C0D8878A" Comment="Код состояния " />
+        <Field Name="Error1" Type="UDINT" UUID="0481E7884739BD51AA1003A0ABFFE9C5" Comment="Код ошибок 1" />
+        <Field Name="Error2" Type="UDINT" UUID="33E1D7A1449EBFECEC46C49353C73C74" Comment="Код ошибок 2" />
+        <Field Name="Com_day" Type="UDINT" UUID="309134B74D954B4D193F81AA77B64D81" Comment="Начало коммерческих суток" />
+        <Field Name="Pressure" Type="REAL" UUID="520EB46649CD0FFEFC9444B4C936C03B" Comment="Измеренное давление " />
+        <Field Name="Density_work" Type="REAL" UUID="60CD80CB480FE5BA3543D489A24DF28A" Comment="Плотность в рабочих условиях" />
+        <Field Name="Density_standart" Type="REAL" UUID="40B5B689472D8C09E64B6188C9411036" Comment="Плотность в стандартных условиях" />
+        <Field Name="N_Content" Type="REAL" UUID="9F929DD543C39F031B69658F5181B595" Comment="Содержание  азота" />
+        <Field Name="CO_Content" Type="REAL" UUID="07A2E22745958AB6959D1BB88BF8E1A9" Comment="Содержание  диоксида углерода" />
+        <Field Name="Temprature" Type="REAL" UUID="1CA7F45744283C6EECA5E6AD99C0968F" Comment="Измеренная температура " />
+        <Field Name="Flow_Rate_at_work" Type="REAL" UUID="AC3B0249409006A4363493B51B7B0076" Comment="Мгновенный  рабочий расход " />
+        <Field Name="Flow_Rate_at_standart" Type="REAL" UUID="BBF6C84E427CE37D21B239AAAE03526D" Comment="Мгновенный  расход в стандартных условиях " />
+        <Field Name="Hour_Flow_Rate" Type="UDINT" UUID="E6F0DBA649F812E434ECEE98599D8F87" Comment="Часовой расход: дата время" />
+        <Field Name="Flow_Rate_at_work_hour" Type="REAL" UUID="807C618F4005882BB89EAEA8FE32B801" Comment="Часовой расход в рабочих условиях " />
+        <Field Name="Flow_Rate_at_standart_hour" Type="REAL" UUID="DFFF08764D8B63156D5B8B9FCB4EE127" Comment="Часовой расход в стандартных условиях" />
+        <Field Name="Day_Flow_Rate" Type="UDINT" UUID="777D83564C905051C3E6059ABC704045" Comment="Суточный расход: дата время" />
+        <Field Name="Flow_Rate_at_work_day" Type="REAL" UUID="CE9D0255476305F241557CB7021FAE6B" Comment="Суточный расход в рабочих условиях " />
+        <Field Name="Flow_Rate_at_standart_day" Type="REAL" UUID="346CEF164FBD2219F4F4DCBB748C9318" Comment="Суточный расход в стандартных условиях" />
+        <Field Name="Flow_Rate_at_work_sum" Type="REAL" UUID="0175F37C42C8584111984996FFB3D743" Comment="Суммарный расход в рабочих условиях" />
+        <Field Name="Flow_Rate_at_standart_sum" Type="REAL" UUID="BB5BABB1474D7B308AF9B0BCD3787ACF" Comment="Суммарный расход в стандартных условиях" />
+    </Fields>
+</Type>

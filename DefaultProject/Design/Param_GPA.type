@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Param_GPA" Kind="Struct" UUID="35BA632E41146D303365EAA718384BA7">
+    <Fields>
+        <Field Name="P_vh" Type="REAL" UUID="415BE54D4A1EADA04B0031A963E5D0B5" />
+        <Field Name="P_vuh" Type="REAL" UUID="E8224FD54C40A929D7BBB99752DB50B2" />
+        <Field Name="St_s" Type="REAL" UUID="ACA371E7435A8F081CF4179BF2C1ABE2" />
+        <Field Name="N_st" Type="REAL" UUID="58DD7F704B34E03C5DA65BBDF81C9127" />
+        <Field Name="N_tk" Type="REAL" UUID="A0187F1E4CE1E58B1CEFC2B556007DC4" />
+        <Field Name="Q" Type="REAL" UUID="7C738F754944BE200F8FE1995346BAA5" />
+        <Field Name="Zapas" Type="REAL" UUID="DA86A6A7460F13571FEF05AAEA44CAA8" />
+        <Field Name="Zap" Type="BOOL" UUID="BE49FF52430A138BC6E75B95162E3FEA" />
+        <Field Name="NObs_to_GPA" Type="BOOL" UUID="62FEAA724C0B6E926E959D86CBF6C776" />
+    </Fields>
+</Type>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="STU3_APS" Kind="Struct" UUID="31AC6D90431B7A25C006DA9C59815ADC">
+    <Fields>
+        <Field Name="A1_3_1_P_ENTER_UPTIG_VP_1_1_kz" Type="BOOL" UUID="35FBB5514D0869E7FE0A14A95E3DBA56" Comment="КЗ канал - Давление газа на входе УПТИГ (поз.ВР1-1)" />
+        <Field Name="A1_3_2_T_ENTER_UPTIG_VK_1_1_kz" Type="BOOL" UUID="C4F312D143CCE21C97041AB5673D5C8F" Comment="КЗ канал - Температура на входе УПТИГ, °С (поз.ВК1-1)" />
+        <Field Name="A1_3_3_H_P_VP_2_1_kz" Type="BOOL" UUID="76EC0E484B48F3DA32E987B42EF35D06" Comment="КЗ канал - Перепад давления на узле очистки, кПа  (поз.ВР2-1)" />
+        <Field Name="A1_3_4_RESERVE_kz" Type="BOOL" UUID="0086F8064453C1B1B246C691B23D3ECD" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_4_1_T_ENTER_VK_3_1_kz" Type="BOOL" UUID="373E9EBD4AC4DEEF485F87BB1786DCE1" Comment="КЗ канал - Температура на входе узла ПГ, °С (поз.ВК3-1)" />
+        <Field Name="A1_4_2_T_EXIT_VK_3_2_kz" Type="BOOL" UUID="810B909145F55D0170406B80C4576F23" Comment="КЗ канал - Температура на выходе узла ПГ, °С  (поз.ВК3-2)" />
+        <Field Name="A1_4_3_P_EXIT_VP_1_4_kz" Type="BOOL" UUID="1D0321A349DFEBCA489853A404FAD894" Comment="КЗ канал - Давление на выходе 3 УПТИГ УПИГ-500, МПа (поз.ВР1-4)" />
+        <Field Name="A1_4_4_T_EXIT_3_VK_1_4_kz" Type="BOOL" UUID="F298D2FF440B7036C4F401BB67EBF095" Comment="КЗ канал - Температура на выходе 3 УПТИГ УПИГ-500, °С  (поз.ВК1-4)" />
+        <Field Name="A1_5_1_P_EXIT_1_VP_4_1_kz" Type="BOOL" UUID="442400104585124CA461B7AF238BBD94" Comment="КЗ канал - Давление на выходе БР выход 1, МПа (поз.ВР4-1)" />
+        <Field Name="A1_5_2_P_EXIT_1_VP_1_2_kz" Type="BOOL" UUID="D20AE2F5452ECFF372B2B783DE2DCA82" Comment="КЗ канал - Давление на выходе 1 УПТИГ, МПа (поз.ВР1-2)" />
+        <Field Name="A1_5_3_T_EXIT_1_VK_1_2_kz" Type="BOOL" UUID="E84DF742419B2D42A3A27EBEC85E5D56" Comment="КЗ канал - Температура на выходе 1 УПТИГ, °С (поз.ВК1-2)1" />
+        <Field Name="A1_5_4_RESERVE_kz" Type="BOOL" UUID="A9214CC943F5B40AD57A12B52727BED2" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_6_1_P_EXIT_2_VP_4_2_kz" Type="BOOL" UUID="72A8375044BB91D37BBCEFAFEFAFBD9B" Comment="КЗ канал - Давление на выходе БР выход 2, МПа (поз.ВР4-2)" />
+        <Field Name="A1_6_2_P_EXIT_2_VP_1_3_kz" Type="BOOL" UUID="6CE471BD4DBCCDC234034CB39B790587" Comment="КЗ канал - Давление на выходе 2 УПТИГ, МПа (поз.ВР1-3)" />
+        <Field Name="A1_6_3_T_EXIT_2_VK_1_3_kz" Type="BOOL" UUID="1F6AC6204C5E6D159349E2A4F88DD479" Comment="КЗ канал - Температура на выходе 2 УПТИГ, °С (поз.ВК1-3)" />
+        <Field Name="A1_6_4_Reserve_kz" Type="BOOL" UUID="AB780EE64099CE5CE23DDA93DD6D6F84" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_7_1_T_OPERATOR_VK_11_1_kz" Type="BOOL" UUID="BF3059C04BB82A7E5F74A197E83CBFE8" Comment="КЗ канал - Температура в помещении операторной, °С (поз.ВК11-1)" />
+        <Field Name="A1_7_2_LEVEL_ESK_kz" Type="BOOL" UUID="5BC355054F2B7A0E9F6D68A3F0F56018" Comment="КЗ канал - Уровень в ЕСК" />
+        <Field Name="A1_7_3_RESERVE_kz" Type="BOOL" UUID="D693C6944F403AE5068FFFAAE08D7136" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_7_4_RESERVE_kz" Type="BOOL" UUID="F29833EC4F4C44FE5698239C83CB3B10" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_8_1_RESERVE_kz" Type="BOOL" UUID="5013E5F04B5E96B81517D38AADF73EE7" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_8_2_RESERVE_kz" Type="BOOL" UUID="CDB7BA354191176FE7813FA9642836F5" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_8_3_RESERVE_kz" Type="BOOL" UUID="792FE4194B7E0064EEB096AD59E3EF11" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_8_4_RESERVE_kz" Type="BOOL" UUID="F333CA114D6BC7C8B16578A3F3F9CA76" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_9_1_RESERVE_kz" Type="BOOL" UUID="6B17EDC343DCCE66A9AE838624A04BB0" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_9_2_MAIN_U_kz" Type="BOOL" UUID="8689F1FF4C6DAD9B037BE28134576A9B" Comment="КЗ канал -Измерение основного напряжения" />
+        <Field Name="A1_9_3_RESERVE_U_kz" Type="BOOL" UUID="6722191340EE9FCE65179D8B7B5D2E24" Comment="КЗ канал - Измерение резервного напряжения" />
+        <Field Name="A1_9_4_RESERVE_kz" Type="BOOL" UUID="3F3A7F5646645810264A19B105BA144A" Comment="КЗ канал - Резерв" />
+        <Field Name="A1_3_1_P_ENTER_UPTIG_VP_1_1_obriv" Type="BOOL" UUID="F202644E4CFD79FA45B68E8FBCC07972" Comment="Обрыв канал - Давление газа на входе УПТИГ (поз.ВР1-1)" />
+        <Field Name="A1_3_2_T_ENTER_UPTIG_VK_1_1_obriv" Type="BOOL" UUID="D2885C4347FD52AC7B8CE2B015FD8EB0" Comment="Обрыв канал - Температура на входе УПТИГ, °С (поз.ВК1-1)" />
+        <Field Name="A1_3_3_H_P_VP_2_1_obriv" Type="BOOL" UUID="C2539E854B2323D97403FE978EC776B3" Comment="Обрыв канал - Перепад давления на узле очистки, кПа  (поз.ВР2-1)" />
+        <Field Name="A1_3_4_RESERVE_obriv" Type="BOOL" UUID="46A0719144EC9EA81E454E870DC2F870" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_4_1_T_ENTER_VK_3_1_obriv" Type="BOOL" UUID="FC1ACE5B4972FECB7DBA9E82081ACC6D" Comment="Обрыв канал - Температура на входе узла ПГ, °С (поз.ВК3-1)" />
+        <Field Name="A1_4_2_T_EXIT_VK_3_2_obriv" Type="BOOL" UUID="400D10E34E844BA2B2D694A1D32F7DF2" Comment="Обрыв канал - Температура на выходе узла ПГ, °С  (поз.ВК3-2)" />
+        <Field Name="A1_4_3_P_EXIT_VP_1_4_obriv" Type="BOOL" UUID="741FDB494E85C153C205ACA17A0609A4" Comment="Обрыв канал - Давление на выходе 3 УПТИГ УПИГ-500, МПа (поз.ВР1-4)" />
+        <Field Name="A1_4_4_T_EXIT_3_VK_1_4_obriv" Type="BOOL" UUID="E006899847A9E2FE7EDC37BFF880877C" Comment="Обрыв канал - Температура на выходе 3 УПТИГ УПИГ-500, °С  (поз.ВК1-4)" />
+        <Field Name="A1_5_1_P_EXIT_1_VP_4_1_obriv" Type="BOOL" UUID="2CF09D244E8A60AAA0ED50969DB676DE" Comment="Обрыв канал - Давление на выходе БР выход 1, МПа (поз.ВР4-1)" />
+        <Field Name="A1_5_2_P_EXIT_1_VP_1_2_obriv" Type="BOOL" UUID="BD106CF94887E00CCD6AE7A186DFCB06" Comment="Обрыв канал - Давление на выходе 1 УПТИГ, МПа (поз.ВР1-2)" />
+        <Field Name="A1_5_3_T_EXIT_1_VK_1_2_obriv" Type="BOOL" UUID="439FEF654B225D194D957CB1EB4A7199" Comment="Обрыв канал - Температура на выходе 1 УПТИГ, °С (поз.ВК1-2)" />
+        <Field Name="A1_5_4_RESERVE_obriv" Type="BOOL" UUID="D09F6BF24748BA25ED38E8B034ACA78E" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_6_1_P_EXIT_2_VP_4_2_obriv" Type="BOOL" UUID="A95DB3E64CF7E0B8CB6871A49CBF156B" Comment="Обрыв канал - Давление на выходе БР выход 2, МПа (поз.ВР4-2)" />
+        <Field Name="A1_6_2_P_EXIT_2_VP_1_3_obriv" Type="BOOL" UUID="B9AC016A403283CAB3D97EBE0D0A8525" Comment="Обрыв канал - Давление на выходе 2 УПТИГ, МПа (поз.ВР1-3)" />
+        <Field Name="A1_6_3_T_EXIT_2_VK_1_3_obriv" Type="BOOL" UUID="5C272054439B6109285084B68D1FE437" Comment="Обрыв канал - Температура на выходе 2 УПТИГ, °С (поз.ВК1-3)" />
+        <Field Name="A1_6_4_Reserve_obriv" Type="BOOL" UUID="6F88DA294FDE566C2173018055B27A00" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_7_1_T_OPERATOR_VK_11_1_obriv" Type="BOOL" UUID="24A9F9554DD6D24113AE0D9EF5207604" Comment="Обрыв канал - Температура в помещении операторной, °С (поз.ВК11-1)" />
+        <Field Name="A1_7_2_LEVEL_ESK_obriv" Type="BOOL" UUID="B76614E441AAB9B18C6B5585BD1F2187" Comment="Обрыв канал - Уровень в ЕСК" />
+        <Field Name="A1_7_3_RESERVE_obriv" Type="BOOL" UUID="56AF61114A47158F448B67B0066DE03A" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_7_4_RESERVE_obriv" Type="BOOL" UUID="18C7846D4416365E5CFE32BD3306E99E" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_8_1_RESERVE_obriv" Type="BOOL" UUID="46010E1D492908230D2143AFB0C23DE0" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_8_2_RESERVE_obriv" Type="BOOL" UUID="8B1CF3EC4E167E8395E10AA108348C89" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_8_3_RESERVE_obriv" Type="BOOL" UUID="3137E86644FEC3E10FB6658BEA77217B" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_8_4_RESERVE_obriv" Type="BOOL" UUID="9A6EC24E476C927F692E94BAF55C6277" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_9_1_RESERVE_obriv" Type="BOOL" UUID="2BDD60A14AA7104C110D5B9E885978AE" Comment="Обрыв канал - Резерв" />
+        <Field Name="A1_9_2_MAIN_U_obriv" Type="BOOL" UUID="9A9E6C3E436DE82082E6C9B82F1327A4" Comment="Обрыв канал - Измерение основного напряжения" />
+        <Field Name="A1_9_3_RESERVE_U_obriv" Type="BOOL" UUID="816B13D14D2E8FD03A060FB0CE9DEEC1" Comment="Обрыв канал - Измерение резервного напряжения" />
+        <Field Name="A1_9_4_RESERVE_obriv" Type="BOOL" UUID="FF29C2DD4DA0DA8BF627E9803BF8058F" Comment="Обрыв канал - Резерв" />
+        <Field Name="sonet_A1_3_flt" Type="BOOL" UUID="B333809A491CCFEE4639CE971126C1AA" Comment="Ошибка модуля Сонет: A1_3" />
+        <Field Name="sonet_A1_4_flt" Type="BOOL" UUID="67166EC346981C8369E2FDAB240351E4" Comment="Ошибка модуля Сонет: A1_4" />
+        <Field Name="sonet_A1_5_flt" Type="BOOL" UUID="2D23F03649DAF00AC8F55E9BF63CC764" Comment="Ошибка модуля Сонет: A1_5" />
+        <Field Name="sonet_A1_6_flt" Type="BOOL" UUID="DF403C0245972D8B64C414A55477E39F" Comment="Ошибка модуля Сонет: A1_6" />
+        <Field Name="sonet_A1_7_flt" Type="BOOL" UUID="524BC5184A6C493FEFD0B3B494F650BE" Comment="Ошибка модуля Сонет: A1_7" />
+        <Field Name="sonet_A1_8_flt" Type="BOOL" UUID="68E463D94338C9BE20692087927DFE7B" Comment="Ошибка модуля Сонет: A1_8" />
+        <Field Name="sonet_A1_9_flt" Type="BOOL" UUID="BEE68FD2432ABD4D865E33AD7BBCA8BE" Comment="Ошибка модуля Сонет: A1_9" />
+        <Field Name="sonet_A1_10_flt" Type="BOOL" UUID="D3E6B15C4F71C405704FCFB745766A23" Comment="Ошибка модуля Сонет: A1_10" />
+        <Field Name="sonet_A2_3_flt" Type="BOOL" UUID="63E0558741F07AC18073418AC9A08810" Comment="Ошибка модуля Сонет: A2_3" />
+        <Field Name="sonet_A2_4_flt" Type="BOOL" UUID="C3EE4EFD4E5ED21C1879FE90551D3232" Comment="Ошибка модуля Сонет: A2_4" />
+        <Field Name="sonet_A2_5_flt" Type="BOOL" UUID="A519542B4F2E535A2501B195161C0FCD" Comment="Ошибка модуля Сонет: A2_5" />
+        <Field Name="sonet_A2_6_flt" Type="BOOL" UUID="72B198E5437A73659625EBBC86E6A10F" Comment="Ошибка модуля Сонет: A2_6" />
+        <Field Name="sonet_A2_7_flt" Type="BOOL" UUID="248DAF8F413CA27AFDF125961E8CB9A8" Comment="Ошибка модуля Сонет: A2_7" />
+        <Field Name="sonet_A2_8_flt" Type="BOOL" UUID="5A3524354A5BCB42C5E62697AF2C1186" Comment="Ошибка модуля Сонет: A2_8" />
+        <Field Name="sonet_A2_9_flt" Type="BOOL" UUID="56548DE34102BD0531D2DF97A6892269" Comment="Ошибка модуля Сонет: A2_9" />
+        <Field Name="sonet_A2_10_flt" Type="BOOL" UUID="6F57DDFD4F759AADF6B76285686318E8" Comment="Ошибка модуля Сонет: A2_10" />
+        <Field Name="sonet_A3_3_flt" Type="BOOL" UUID="9EFEDB474179BE08B31A6D91B6F0B0FE" Comment="Ошибка модуля Сонет: A3_3" />
+        <Field Name="sonet_A3_4_flt" Type="BOOL" UUID="18BBD607443CD15C9EE347BB3938448A" Comment="Ошибка модуля Сонет: A3_4" />
+        <Field Name="sonet_A3_5_flt" Type="BOOL" UUID="57A05FA14EBC5F6C454F56918ED95F8F" Comment="Ошибка модуля Сонет: A3_5" />
+        <Field Name="sonet_A3_6_flt" Type="BOOL" UUID="7F65F1174D17AB0703C2C1AAC9E77F55" Comment="Ошибка модуля Сонет: A3_6" />
+        <Field Name="sonet_A3_7_flt" Type="BOOL" UUID="5B9DC22447EF49D46A6062806F15605D" Comment="Ошибка модуля Сонет: A3_7" />
+        <Field Name="sonet_A3_8_flt" Type="BOOL" UUID="37D3B2CD4AABA2F087EDA1904A6DE144" Comment="Ошибка модуля Сонет: A3_8" />
+        <Field Name="sonet_A3_9_flt" Type="BOOL" UUID="B62750CE48EBF53A149B4C85032107E5" Comment="Ошибка модуля Сонет: A3_9" />
+        <Field Name="A2_3_1_MH1_1_MIN" Type="BOOL" UUID="9440221A4A1E17AA6EA8D6BBF045C4BA" Comment="МН1-1. Отклонение давления на входе, min" />
+        <Field Name="A2_3_2_MH1_1_MAX" Type="BOOL" UUID="C0BDF983471D3C4BD3BC888288E7A08F" Comment=" МН1-1. Отклонение давления на входе, max" />
+        <Field Name="A2_3_3_MH1_2_MIN" Type="BOOL" UUID="135788B14614A8D96CE9BEB9B44CCBFE" Comment="МН1-2. Отклонение давления на выходе 1, min " />
+        <Field Name="A2_3_4_MH1_2_MAX" Type="BOOL" UUID="BA0E95664DD249A5D5A3D1A74BAE4804" Comment=" МН1-2. Отклонение давления на выходе 1, max" />
+        <Field Name="A2_3_5_MH1_3_MIN" Type="BOOL" UUID="9C10005F448FBE1205A1ECBD0C18959D" Comment="МН1-3. Отклонение давления на выходе 2, min" />
+        <Field Name="A2_3_6_MH1_3_MAX" Type="BOOL" UUID="10B58BD64A5B249096119F9967406CCC" Comment="МН1-3. Отклонение давления на выходе 2, max" />
+        <Field Name="A2_3_7_MH1_4_MIN" Type="BOOL" UUID="C54B53B545CE7D08CFC18598A43CF79B" Comment="МН1-4. Отклонение давления на выходе 3, min" />
+        <Field Name="A2_3_8_MH1_4_MAX" Type="BOOL" UUID="91B281C5423D826E42A66F86614E2B84" Comment="МН1-4. Отклонение давления на выходе 3, max (МН1-4)" />
+        <Field Name="A2_3_9_MH3_1_1" Type="BOOL" UUID="223C44E64FB76C130D040CA7EEFDEBE0" Comment="МН3.1-1. Прорыв трубного пучка ПГ3.1" />
+        <Field Name="A2_3_10_MH3_2_1" Type="BOOL" UUID="BB075B3D48A4A747C4E5B89A43454ECB" Comment="МН3.2-1. Прорыв трубного пучка ПГ3.2" />
+        <Field Name="A2_3_11_F_2_1_1_MAX" Type="BOOL" UUID="782B8F344116032FEC132E9F362A5536" Comment="Уровень в 1 ступени фильтра Ф2.1«мах»" />
+        <Field Name="A2_3_12_F_2_1_2_MAX" Type="BOOL" UUID="B0B0214745A9F9D4F965DE832CEB1D23" Comment="Уровень во 2ступени фильтра Ф2.1«мах»" />
+        <Field Name="A2_3_13_F_2_2_1_MAX" Type="BOOL" UUID="3AF2B9424553F18EC9A01AAD3FD270FA" Comment="Уровень в 1 ступени фильтра Ф2.2«мах»" />
+        <Field Name="A2_3_14_F_2_2_2_MAX" Type="BOOL" UUID="9310290A45ADAA1A502BE4B2BEEF956F" Comment="Уровень во 2ступени фильтра Ф2.2«мах»" />
+        <Field Name="A2_3_15_Reserve" Type="BOOL" UUID="BCF338E84AB51B1C59DD2FB060FF5145" Comment="Резерв" />
+        <Field Name="A2_3_16_Reserve" Type="BOOL" UUID="6F4E652342E877BF1C93469A0AC3075F" Comment="Резерв" />
+        <Field Name="A2_4_1_ON_MH4_1" Type="BOOL" UUID="D92539CD43E3BF824E8A9191D64E8796" Comment="Сигнал включения контрольного регулятора ЛР1 (ОЛР) выход 1(МН4.1)" />
+        <Field Name="A2_4_2_ON_MH4_3" Type="BOOL" UUID="E5A160B548A53ADEC1948CACB501FDF1" Comment="Сигнал включения контрольного регулятора ЛР2 (РЛР) выход 1(МН4.3)" />
+        <Field Name="A2_4_3_ON_MH4_2" Type="BOOL" UUID="4DE9177147E855D2A2BBC7853ADC435A" Comment="Сигнал включения контр. регулятора ЛР1 (ОЛР) выход 2 (МН4.2)" />
+        <Field Name="A2_4_4_ON_MH4_4" Type="BOOL" UUID="DC2B8FCD46A7A167684F7E9A3CD91C64" Comment="Сигнал включения контр. регулятора ЛР2 (РЛР) выход 2 (МН4.4)" />
+        <Field Name="A2_4_5_VLV_K2_1_3_OFF" Type="BOOL" UUID="C3BF068643C4CB3AF982BAA450681CB9" Comment="К2.1-3. Кран слива конден. с 1 ступени фильтра Ф2.1 закрыто" />
+        <Field Name="A2_4_6_VLV_K2_1_3_ON" Type="BOOL" UUID="78AB96354E49EFC0BAC058AA4EA2D20B" Comment="К2.1-3. Кран слива конден. с 1 ступени фильтра Ф2.1 открыто" />
+        <Field Name="A2_4_7_VLV_K2_1_4_OFF" Type="BOOL" UUID="64F8E372432F1E02A24546AAB89D19FC" Comment="К2.1-4. Кран слива конден. со 2 ступени фильтра Ф2.1 закрыто " />
+        <Field Name="A2_4_8_VLV_K2_1_4_ON" Type="BOOL" UUID="0667B1A34BC8F4D2633FCCAA6DF4C111" Comment="К2.1-4. Кран слива конден. со 2 ступени фильтра Ф2.1 открыто" />
+        <Field Name="A2_4_9_VLV_K2_2_3_OFF" Type="BOOL" UUID="0C2C63214F9D3DCB024404AFA943F24D" Comment="К2.2-3. Кран слива конден. с 1 ступени фильтра Ф2.2 закрыто " />
+        <Field Name="A2_4_10_VLV_K2_2_3_ON" Type="BOOL" UUID="585A8AB64BA11A0ED229DDAC7B7F9294" Comment="К2.2-3. Кран слива конден. с 1 ступени фильтра Ф2.2 открыто" />
+        <Field Name="A2_4_11_VLV_K2_2_4_OFF" Type="BOOL" UUID="5EFB7AF449CC44889F0C0B9CBAE3947A" Comment="К2.2-4. Кран слива конден. с 1 ступени фильтра Ф2.2 закрыто" />
+        <Field Name="A2_4_12_VLV_K2_2_4_ON" Type="BOOL" UUID="96F702B84CD5401E2A37DE9C2BC3936E" Comment="К2.2-4. Кран слива конден. с 1 ступени фильтра Ф2.2 открыто" />
+        <Field Name="A2_4_13_RESERVE" Type="BOOL" UUID="3ED3996946A5669D5D9F738C67F2E56B" Comment="Резерв" />
+        <Field Name="A2_4_14_RESERVE" Type="BOOL" UUID="4EE19BD94EC0427C5F635C8CC443DEFC" Comment="Резерв" />
+        <Field Name="A2_4_15_RESERVE" Type="BOOL" UUID="F3B497174A09EDC9D2C21EAF7F510280" Comment="Резерв" />
+        <Field Name="A2_4_16_RESERVE" Type="BOOL" UUID="F11E843F4909B0BF31FCFEBE4DBC6E33" Comment="Резерв" />
+        <Field Name="A2_5_1_FUEL_VLV_UPTN_CLOSE" Type="BOOL" UUID="054EE0E2427A1CFAE5A972BE3E1A037F" Comment="Клапан топливного газа УПТН «Закрыт»" />
+        <Field Name="A2_5_2_VLV_8_1_OPEN" Type="BOOL" UUID="C7269FA14B3BC957642CF5B53832A37C" Comment="Положение крана входного «открыто»(Кр8.1)" />
+        <Field Name="A2_5_3_VLV_8_1_CLOSE" Type="BOOL" UUID="A52B1382435B8AB7B045DFB9BED0FC8B" Comment="Положение крана входного «закрыто» (Кр8.1)" />
+        <Field Name="A2_5_4_VLV_8_1_DA" Type="BOOL" UUID="CF019CAE4A5B7B9BE9E1198802999998" Comment="Режим управления крана входного «местное/дистанционное» (Кр8.1)" />
+        <Field Name="A2_5_5_VLV_8_1_NEISP" Type="BOOL" UUID="BCCE8B5E4FEF7B4958685590E5AA3009" Comment="Сигнализация крана входного «Неисправность» (Кр8.1)" />
+        <Field Name="A2_5_6_VLV_8_1_A_OPEN" Type="BOOL" UUID="9B804A904F729C6A89DC5DB00C297E98" Comment=" Положение крана сброса на свечу «открыто» (Кр8.1.а)" />
+        <Field Name="A2_5_7_VLV_8_1_A_CLOSE" Type="BOOL" UUID="F9AADC2343208C76EAC901B60E50EE32" Comment="Положение крана сброса на свечу «закрыто» (Кр8.1a)" />
+        <Field Name="A2_5_8_VLV_8_1_A_DA" Type="BOOL" UUID="4B6BD5C844911011D19561AD39EC3430" Comment="Режим управ. крана сброса на свечу «мест./дист.(Кр8.1.а)" />
+        <Field Name="A2_5_9_VLV_8_1_A_NEISP" Type="BOOL" UUID="F69B143C4D2AF89969763FBE0FC4C459" Comment="Сигнал. крана сброса на свечу «Неисправность»(Кр8.1a)" />
+        <Field Name="A2_5_10_AM1_1_ON" Type="BOOL" UUID="62103AC74B00A036DFB0D280DEDFB82B" Comment="Сигнал вкл. вытяжного вентилятора блока технолог.(АМ1-1)" />
+        <Field Name="A2_5_11_AM1_1_NEISP" Type="BOOL" UUID="2D9B0DD1424EC125AA58D1BE72223D02" Comment="Сигнал «Неиспр.» вытяжного вент. блока технолог.(АМ1-1)" />
+        <Field Name="A2_5_12_AM3_1_ON" Type="BOOL" UUID="02CA9B794B7EB1F64C9B97AFFA9AE92E" Comment="Сигнал вкл. вытяжного вент. УПТН (АМ3-1)" />
+        <Field Name="A2_5_13_AM3_1_NEISP" Type="BOOL" UUID="7C11E0214B656747386F20B744E75FEE" Comment="Сигнал «Неиспр.» вытяжного вент. блока технолог.(АМ3-1)" />
+        <Field Name="A2_5_14_RESERVE" Type="BOOL" UUID="689FD30D4BD6C37F98F6C7A39AC03912" Comment="Резерв" />
+        <Field Name="A2_5_15_RESERVE" Type="BOOL" UUID="5AF643DE415961E6506CC2B9F76B45AD" Comment="Резерв" />
+        <Field Name="A2_5_16_RESERVE" Type="BOOL" UUID="423D457448677A3282CA698DB7C6AC50" Comment="Резерв" />
+        <Field Name="A2_6_1_ZAG_1_SPAKZ" Type="BOOL" UUID="140310B44FFCB9B7AA516489FC59AE3F" Comment="Загазованность обобщенный порог 1 (СПАиКЗ)" />
+        <Field Name="A2_6_2_ZAG_2_SPAKZ" Type="BOOL" UUID="A997097642015791B19917901CE4A4A6" Comment="Загазованность обобщенный порог 2 (СПАиКЗ)" />
+        <Field Name="A2_6_3_FIRE_SPAKZ" Type="BOOL" UUID="D9BFCFED40ED648FAFEB83B1F9E63360" Comment="Пожар блока технологического УПТИГ общий (СПАиКЗ)" />
+        <Field Name="A2_6_4_NEISP_SPA_KZ" Type="BOOL" UUID="424E4CDF41E753DB870199A7D780DA12" Comment="Неисправность пожарной сигнализации (СПАиКЗ)" />
+        <Field Name="A2_6_5_ZAG_CO_1" Type="BOOL" UUID="8195DC3B42B91012CE74408CB4ECFF5A" Comment="Загазованность СО узла подготовки теплоносителя порог 1" />
+        <Field Name="A2_6_6_ZAG_CO_2" Type="BOOL" UUID="357D51E845BF4E770D95B5A304480A89" Comment="Загазованность СО узла подготовки теплоносителя порог 2" />
+        <Field Name="A2_6_7_RESERVE" Type="BOOL" UUID="CFE8C48348F84BBC739DF68266AC9120" Comment="Резерв" />
+        <Field Name="A2_6_8_RESERVE" Type="BOOL" UUID="1466DF1F441EC8505F532A8908121841" Comment="Резерв" />
+        <Field Name="A2_6_9_EMERGENCY_STOP_CEX_ALL" Type="BOOL" UUID="5700C8C54385323876FEDEA6E89A2D72" Comment="Экстренный останов Цеха (ЭО)" />
+        <Field Name="A2_6_10_EMERGENCY_STOP_CEX_1" Type="BOOL" UUID="32A6A4F546B010D3F30DE58396DDD053" Comment="Аварийный останов цеха 1 степени (АО-1)" />
+        <Field Name="A2_6_11_EMERGENCY_STOP_CEX_2" Type="BOOL" UUID="847BC38D42765D091C648F872A7C9D37" Comment="Аварийный останов цеха 2 степени (АО-2)" />
+        <Field Name="A2_6_12_U_ENTER_1" Type="BOOL" UUID="80629A45455F8523E3CCC3A236B1EBDB" Comment="Наличие напряжения 380В на вводе 1" />
+        <Field Name="A2_6_13_U_ENTER_2" Type="BOOL" UUID="5862169E44C70382EF83169163BE8B96" Comment="Наличие напряжения 380В на вводе 2" />
+        <Field Name="A2_6_14_RESERVE" Type="BOOL" UUID="53CEE6494B89D4D405AFF19FF796F961" Comment="Резерв" />
+        <Field Name="A2_6_15_RESERVE" Type="BOOL" UUID="E5726F48489C39220D0A9F9EF3FEE0C2" Comment="Резерв" />
+        <Field Name="A2_6_16_RESERVE" Type="BOOL" UUID="B3BD97A64DC852036149DEA6178C1B0D" Comment="Резерв" />
+        <Field Name="A2_7_1_U_1SSH_L1" Type="BOOL" UUID="81544A894485C003E6D8E69117BDF557" Comment="Наличие напряжения 220В на 1СШ ВРУ L1" />
+        <Field Name="A2_7_2_U_1SSH_L2" Type="BOOL" UUID="D0C6F6534BDE9DE2C1AA7C8693C34B13" Comment="Наличие напряжения 220В на 1СШ ВРУ L2" />
+        <Field Name="A2_7_3_U_1SSH_L3" Type="BOOL" UUID="F261F2A443496CA48A63C28A5C19BF69" Comment="Наличие напряжения 220В на 1СШ ВРУ L3" />
+        <Field Name="A2_7_4_U_2SSH_L1" Type="BOOL" UUID="0DAAC0884A31BF214274ABA678091741" Comment="Наличие напряжения 220В на 2СШ ВРУ L1" />
+        <Field Name="A2_7_5_U_2SSH_L2" Type="BOOL" UUID="07216F664F17862F2B6EB4A9C81487E2" Comment="Наличие напряжения 220В на 2СШ ВРУ L2" />
+        <Field Name="A2_7_6_U_2SSH_L3" Type="BOOL" UUID="01056B964903CFF46BF00D9A594DBC7A" Comment="Наличие напряжения 220В на 2СШ ВРУ L3" />
+        <Field Name="A2_7_7_ENTER_1_ON" Type="BOOL" UUID="91B8F5FB42730114971680984C758A29" Comment="Выключатель ввода 1 включен" />
+        <Field Name="A2_7_8_ENTER_1_OFF" Type="BOOL" UUID="505F0B7E469AA870FCB8D0B09CBF8273" Comment="Выключатель ввода 1 отключен" />
+        <Field Name="A2_7_9_ENTER_1_OFF_PROTECT" Type="BOOL" UUID="1632336B461421D1188F52B60619BFAA" Comment="Выключатель ввода 1 отключен защитой" />
+        <Field Name="A2_7_10_ENTER_2_ON" Type="BOOL" UUID="6F02A8E444D91F5AED069DA358EC843A" Comment="Выключатель ввода 2 включен" />
+        <Field Name="A2_7_11_ENTER_2_OFF" Type="BOOL" UUID="96F5C8944E04D73C374EE48844F7B6C1" Comment="Выключатель ввода 2 отключен" />
+        <Field Name="A2_7_12_ENTER_1_OFF_PROTECT" Type="BOOL" UUID="07FB3A00427A3F4F87CE36BA5C9F2C5C" Comment="Выключатель ввода 2 отключен защитой" />
+        <Field Name="A2_7_13_RESERVE" Type="BOOL" UUID="5FBC898E45CA6D90C11E1589E886A5D3" Comment="Резерв" />
+        <Field Name="A2_7_14_RESERVE" Type="BOOL" UUID="7F69E6B4499D48720E1DF09D3ADDE78B" Comment="Резерв" />
+        <Field Name="A2_7_15_RESERVE" Type="BOOL" UUID="E598AB7E481DF4780D336D92E7CFC6AB" Comment="Резерв" />
+        <Field Name="A2_7_16_RESERVE" Type="BOOL" UUID="D9F91A834A79AA604FAD87BB0F41E607" Comment="Резерв" />
+        <Field Name="A2_8_1_SELECTION_SWITCH_ON" Type="BOOL" UUID="323076914D77B6D7AE291D94ABAD4535" Comment="Секционный выключатель включен" />
+        <Field Name="A2_8_2_SELECTION_SWITCH_OFF" Type="BOOL" UUID="3DA7FECA41DBCEA9DF5F8C9932F7FED1" Comment="Секционный выключатель отключен" />
+        <Field Name="A2_8_3_SELECTION_SWITCH_ON_PROTECT" Type="BOOL" UUID="309908A34A5BFC60136564A63424FC05" Comment="Секционный выключатель отключен защитой" />
+        <Field Name="A2_8_4_AVR_ON" Type="BOOL" UUID="1A0F60354ACDCC663448E9940509FFCA" Comment="АВР включен" />
+        <Field Name="A2_8_5_AVR_OFF" Type="BOOL" UUID="8EF12DF6432AE25A065A2DA50DC0FD48" Comment="АВР отключен" />
+        <Field Name="A2_8_6_RESERVE" Type="BOOL" UUID="2AAF0CBB47E57BFAA848CC9ADD3FBFD2" Comment="Резерв" />
+        <Field Name="A2_8_7_RESERVE" Type="BOOL" UUID="D12903224351A1DCF0AC50AC4A4A393A" Comment="Резерв" />
+        <Field Name="A2_8_8_RESERVE" Type="BOOL" UUID="37A51C4E46CE962CD726DC8DB4E2C29C" Comment="Резерв" />
+        <Field Name="A2_8_9_RESERVE" Type="BOOL" UUID="E35207FD42A0D96EADC3EFB8DC55440D" Comment="Резерв" />
+        <Field Name="A2_8_10_RESERVE" Type="BOOL" UUID="363459034CD242F21B04D8B1800693BD" Comment="Резерв" />
+        <Field Name="A2_8_11_RESERVE" Type="BOOL" UUID="50125F074C3E1345736934A4E021BE9C" Comment="Резерв" />
+        <Field Name="A2_8_12_RESERVE" Type="BOOL" UUID="BFE71877424FAA8F8EC8CB924EA30860" Comment="Резерв" />
+        <Field Name="A2_8_13_RESERVE" Type="BOOL" UUID="5FB0337042F1257084FAFFA1277C10CF" Comment="Резерв" />
+        <Field Name="A2_8_14_RESERVE" Type="BOOL" UUID="49E96DFE41BAE59236F1549341578168" Comment="Резерв" />
+        <Field Name="A2_8_15_RESERVE" Type="BOOL" UUID="6E917E9344D46BEB908D2BB154F58A1F" Comment="Резерв" />
+        <Field Name="A2_8_16_RESERVE" Type="BOOL" UUID="7F39ED5A424C9B8EFA92C293FB849F03" Comment="Резерв" />
+        <Field Name="A2_9_1_CONTROL_MAIN_220" Type="BOOL" UUID="4CD31CA94BB126F434921393493BF1EC" Comment="Контроль резервного питания ~220 В" />
+        <Field Name="A2_9_2_CONTROL_RESERVE_220" Type="BOOL" UUID="CC76001442C665969B10399CEEEFFFD6" Comment="Контроль резервного питания ~220 В" />
+        <Field Name="A2_9_3_POWER_ON" Type="BOOL" UUID="AB602A744F1E062CE684578B7E311BAD" Comment="Автоматы питания включены" />
+        <Field Name="A2_9_4_CONTROL_RAZRYADNIKOV" Type="BOOL" UUID="A0DDB4EA4CA1B0330CAA48BFAAB90295" Comment="Контроль исправности разрядников" />
+        <Field Name="A2_9_5_ISPRAV_MAIN_24_IP" Type="BOOL" UUID="764748CF43ED6C0D2B1EC1A1131C0657" Comment="Исправность рез. ИП =24 В внутренних цепей" />
+        <Field Name="A2_9_6_ISPRAV_RES_24_IP" Type="BOOL" UUID="E7AA61074224A662C2710A8A9B41C558" Comment="Исправность рез. ИП =24 В внутренних цепей" />
+        <Field Name="A2_9_7_ISPRAV_MAIN_24_AI_AO_DI" Type="BOOL" UUID="15498D0F49A57D31F7EDA29F8A8218D3" Comment="Исправность осн. ИП =24В  внешн. AI, AO, DI" />
+        <Field Name="A2_9_8_ISPRAV_RES_24_AI_AO_DI" Type="BOOL" UUID="5DAAA2254CBB03BCB53AA683DADEA449" Comment="Исправность осн. ИП =24В  внешн. AI, AO, DI" />
+        <Field Name="A2_9_9_ISPRAV_MAIN_24_DO" Type="BOOL" UUID="559280E4407574DE1B8167A7E71D78C6" Comment="Исправность осн. ИП =24 В DO внешних цепей" />
+        <Field Name="A2_9_10_ISPRAV_RES_24_DO" Type="BOOL" UUID="15F585E94352D94D0039F2A17D390675" Comment="Исправность осн. ИП =24 В DO внешних цепей" />
+        <Field Name="A2_9_11_DOOR_OPEN" Type="BOOL" UUID="6F8F9BB645611923420D74931988EE54" Comment="Двери шкафа открыты" />
+        <Field Name="A2_9_12_RESERVE" Type="BOOL" UUID="F79E5D6A4D1E5C0623108BB30568E54E" Comment="Резерв" />
+        <Field Name="A2_9_13_RESERVE" Type="BOOL" UUID="ECB01BD94C56CB57E427B9BB21387AEA" Comment="Резерв" />
+        <Field Name="A2_9_14_RESERVE" Type="BOOL" UUID="971423074F95D70ECD90E8A235EDB420" Comment="Резерв" />
+        <Field Name="A2_9_15_RESERVE" Type="BOOL" UUID="167E008247134CF4B157D6BD460C669C" Comment="Резерв" />
+        <Field Name="A2_9_16_RESERVE" Type="BOOL" UUID="51FA502446E7D67A3E2CE78F3254CE72" Comment="Резерв" />
+        <Field Name="A2_10_1_BEAO_CONTROL_MAIN_POWER" Type="BOOL" UUID="EEBBD6FB44B8C2B2215D888EA4412BC7" Comment="Контроль резервного питания  БЭАО =220 В" />
+        <Field Name="A2_10_2_BEAO_RES_MAIN_POWER" Type="BOOL" UUID="DE5003B440BE0B5C2D2CB29C8FD0DB18" Comment="Контроль резервного питания  БЭАО =220 В" />
+        <Field Name="A2_10_3_ISPRAV_MAIN_BEAO" Type="BOOL" UUID="A2EA69AD406D04946A85F6ABB3905048" Comment="Исправность рез. ИП =24В БЭАО" />
+        <Field Name="A2_10_4_ISPRAV_RES_BEAO" Type="BOOL" UUID="48A221D64F6CB779515905ABD8DFCDE5" Comment="Исправность рез. ИП =24В БЭАО" />
+        <Field Name="A2_10_5_EO_BEAO" Type="BOOL" UUID="A8329D9E4D1DDB58CE621898B77BADDC" Comment="ЭО от БЭАО" />
+        <Field Name="A2_10_6_EO_BEAO_KCD" Type="BOOL" UUID="1970C427469079FA8C058D8C9A31E9B3" Comment="ЭО от БЭАО. КЦД" />
+        <Field Name="A2_10_7_RESERVE" Type="BOOL" UUID="1647892B478671D727CFBB87B116918A" Comment="Резерв" />
+        <Field Name="A2_10_8_RESERVE_KCD" Type="BOOL" UUID="DD81D76246FB3A09009A8EBF59597F61" Comment="Резерв. КЦД" />
+        <Field Name="A2_10_9_RESERVE" Type="BOOL" UUID="2300CE0841FCF08C24D37FA90DD37135" Comment="Резерв" />
+        <Field Name="A2_10_10_RESERVE_KCD" Type="BOOL" UUID="19A3E4EB46DEF1471B2CF2BB2CF50E0E" Comment="Резерв. КЦД" />
+        <Field Name="A2_10_11_RESERVE" Type="BOOL" UUID="DA34335F4AD1436A63523AA586901B9B" Comment="Резерв" />
+        <Field Name="A2_10_12_RESERVE_KCD" Type="BOOL" UUID="1FF0A680423FCE3371AA5DB2895BFBDD" Comment="Резерв. КЦД" />
+        <Field Name="A2_10_13_GOTOV_BEAO" Type="BOOL" UUID="E53B803849FA9CD7EB0D0799E5AA5600" Comment="Гтовность БЭАО" />
+        <Field Name="A2_10_14_AO" Type="BOOL" UUID="ADD32ACA45098153BDD96085F93D85E7" Comment="АО (в ПЛК)" />
+        <Field Name="A2_10_15_KVITIR" Type="BOOL" UUID="F7805F7A46EF3DD9B2A0F78E5C290331" Comment="Квитирование" />
+        <Field Name="A2_10_16_RESERVE" Type="BOOL" UUID="A40F706B43FB5F530C17CBB41035BD76" Comment="Резерв внутр." />
+        <Field Name="A3_3_1_VLV_ND_1_KCU" Type="BOOL" UUID="01F1F0204CF247391830DF9FB7E283F7" Comment="Клапан сброса НД выход 1(КЭ4-1). КЦУ" />
+        <Field Name="A3_3_2_VLV_ND_2_KCU" Type="BOOL" UUID="C46435FC4D66B1B2772103A949B1A77E" Comment="Клапан сброса НД выход 2(КЭ4-2). КЦУ" />
+        <Field Name="A3_3_3_TG_UPTN" Type="BOOL" UUID="9ED0299546C379DADBB335840ABE2437" Comment="Клапан отсечной ТГ в УПТН (КЭ3-1). КЦУ" />
+        <Field Name="A3_3_4_RESERVE" Type="BOOL" UUID="7948232340A739C80E23008EAC082911" Comment="Резерв" />
+        <Field Name="A3_3_5_VLV_8_1_CLOSE_KCU" Type="BOOL" UUID="BF98084442BB2FA382C7DF9E4873257C" Comment="Команда крана входного «закрыть» (Кр8.1). КЦУ" />
+        <Field Name="A3_3_6_VLV_8_1_A_CLOSE_KCU" Type="BOOL" UUID="8CC3BA7B4A899BAD7F94E3BE063BF3B8" Comment="Команда крана сброса на свечу «открыть» (Кр8.1а). КЦУ" />
+        <Field Name="A3_3_7_VLV_K2_1_3_ON_KCU" Type="BOOL" UUID="09C6B966478CEB289ED5E2AA6EE3216A" Comment="Открыть Кран К2.1-3, сброса конденсата из 1 ступени. КЦУ" />
+        <Field Name="A3_3_8_VLV_K2_1_3_OFF_KCU" Type="BOOL" UUID="857A5C0C4ED098067B2D49908281D2D4" Comment="Закрыть Кран К2.1-3, сброса конденсата из 1 ступени.КЦУ" />
+        <Field Name="A3_3_9_VLV_K2_1_4_ON_KCU" Type="BOOL" UUID="BD3F926F48AEEED0375B8997C73B952C" Comment="Открыть Кран К2.1-4, сброса конденсата из 2 ступени.КЦУ" />
+        <Field Name="A3_3_10_VLV_K2_1_4_OFF_KCU" Type="BOOL" UUID="55C5D636441F9AA74FB3D5B9C03821FC" Comment="Закрыть Кран К2.1-4, сброса конденсата из 2 ступени. КЦУ" />
+        <Field Name="A3_3_11_VLV_K2_2_3_ON_KCU" Type="BOOL" UUID="F9EF429A4E9C1E1319333097CFDB8995" Comment="Открыть Кран К2.2-3, сброса конденсата из 1 ступени.КЦУ" />
+        <Field Name="A3_3_12_VLV_K2_2_3_OFF_KCU" Type="BOOL" UUID="B0743B484603EC4245E6B8A14D59128F" Comment="Закрыть Кран К2.2-3, сброса конденсата из 1 ступени. КЦУ" />
+        <Field Name="A3_3_13_VLV_K2_2_4_ON_KCU" Type="BOOL" UUID="F3E8B4D0458356F4C08971B9B3881661" Comment="Открыть Кран К2.2-4, сброса конденсата из 2 ступени. КЦУ" />
+        <Field Name="A3_3_14_VLV_K2_2_4_OFF_KCU" Type="BOOL" UUID="DCB0D7014C471FA63D8DDCAE87A52EA0" Comment="Закрыть Кран К2.2-4, сброса конденсата из 2 ступени. КЦУ" />
+        <Field Name="A3_3_15_RESERVE_KCU" Type="BOOL" UUID="80E8C997493BDD16D6616FB74FC228C1" Comment="Резерв. КЦУ" />
+        <Field Name="A3_3_16_RESERVE_KCU" Type="BOOL" UUID="DAF7C0094A6EF851DEA0B5B1CC23D9F7" Comment="Резерв. КЦУ" />
+        <Field Name="VLV_KR_8_1_A_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="F5A2F94E4DBF89A19B8D61894BB59687" Comment="Кран сброса газа на свечу на входе" />
+        <Field Name="VLV_KE_4_1_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="60D32A334958565C30520CA25911EF0E" Comment=" Кран сброса НД выход 1" />
+        <Field Name="VLV_KE_4_2_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="1D41E6184FE1AB15C37A1489C09FA11A" Comment=" Кран сброса НД выход 2" />
+        <Field Name="VLV_KE_3_1_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="1EE8A92142BA3A9C1B1644855C788BAE" Comment="Кран отсечной ТГ в УПТН " />
+        <Field Name="VLV_KR_8_1_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="1D7E53A743D1222F99F3F095F62363FE" Comment="Входной кран" />
+        <Field Name="VLV_K_2_1_3_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="DFF06CFA4C91DE99AC825BB816B03A55" Comment="Кран К2.1-3, сброса конденсата из 1 ступени " />
+        <Field Name="VLV_K_2_1_4_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="868BC7C4463E50054A146CBF8592A41F" Comment="Кран К2.1-4, сброса конденсата из 2 ступени" />
+        <Field Name="VLV_K_2_2_3_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="A73ABE7E445E4C1B7AB4378950D7524F" Comment="Кран К2.2-3, сброса конденсата из 1 ступени" />
+        <Field Name="VLV_K_2_2_4_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="EA6311EB4FDF5D4C780EEE9138FCCB41" Comment="Кран К2.2-4, сброса конденсата из 2ступени" />
+        <Field Name="AM1_1_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="6E3A861F418C4CD35845F6BFE7E1C286" Comment="Вытяжной вентилятор блока технолог.(АМ1-1)" />
+        <Field Name="AM3_1_flt" Type="70DE6C78441214C1D693E9BFDB7294B5" UUID="ADCB0EDD4E2E1C867AFF1D96ACF7BB44" Comment="Вытяжной вент. УПТН (АМ3-1)" />
+        <Field Name="A1_3_1_P_ENTER_UPTIG_VP_1_1_lo" Type="BOOL" UUID="5B0E31EF4F3237433C39D3A710BE3352" Comment="Давление газа на входе УПТИГ (поз.ВР1-1) - низкое" />
+        <Field Name="A1_3_1_P_ENTER_UPTIG_VP_1_1_hi" Type="BOOL" UUID="87F609D34F73859837C95DBE98F58619" Comment="Давление газа на входе УПТИГ (поз.ВР1-1) - высокое" />
+        <Field Name="A1_3_4_RESERVE_hi" Type="BOOL" UUID="119B85CD4877E9ED7DA4A2B92B32CEEA" Comment="Резерв - высокая" />
+        <Field Name="A1_5_1_P_EXIT_1_VP_4_1_hi" Type="BOOL" UUID="ACBED04F439F9320872A9AB571AB1D98" Comment="Давление на выходе БР выход 1, МПа (поз.ВР4-1) - высокое" />
+        <Field Name="A1_5_2_P_EXIT_1_VP_1_2_hi" Type="BOOL" UUID="40FC208944AC8F41F15647A12F688DB2" Comment="Давление на выходе 1 УПТИГ, МПа (поз.ВР1-2) - высокое" />
+        <Field Name="A1_5_3_T_EXIT_1_VK_1_2_lo" Type="BOOL" UUID="A8A3BC7D42F427DF31608E9B9A1CC7E4" Comment="Температура на выходе 1 УПТИГ, °С (поз.ВК1-2) - низкая" />
+        <Field Name="A1_5_3_T_EXIT_1_VK_1_2_hi" Type="BOOL" UUID="E6EFADD748CBB262A86F9695951B583D" Comment="Температура на выходе 1 УПТИГ, °С (поз.ВК1-2) - высокая" />
+        <Field Name="A1_5_4_RESERVE_lo" Type="BOOL" UUID="8069A9404E48A9619BE216987BD25BA7" Comment="Резерв - низкая" />
+        <Field Name="A1_5_4_RESERVE_hi" Type="BOOL" UUID="9CAF868147F2543BBEF1C4ABB0DA5362" Comment="Резерв - высокая" />
+        <Field Name="A1_6_1_P_EXIT_2_VP_4_2_lo" Type="BOOL" UUID="A8368E9947D94D8FD2C5BA942AD4060C" Comment="Давление на выходе БР выход 2, МПа (поз.ВР4-2) - низкая" />
+        <Field Name="A1_6_1_P_EXIT_2_VP_4_2_hi" Type="BOOL" UUID="50F7428C4AAF852B8FFA7A9C018E6BA1" Comment="Давление на выходе БР выход 2, МПа (поз.ВР4-2) - высокая" />
+        <Field Name="A1_6_2_P_EXIT_2_VP_1_3_lo" Type="BOOL" UUID="754003854114F7EDB253B19700A69AFA" Comment="Давление на выходе 2 УПТИГ, МПа (поз.ВР1-3) - низкая" />
+        <Field Name="A1_6_2_P_EXIT_2_VP_1_3_hi" Type="BOOL" UUID="BA2BFBDA4ACAB7EDD8B0809F29394E0A" Comment="Давление на выходе 2 УПТИГ, МПа (поз.ВР1-3) - высокая" />
+        <Field Name="A1_4_1_T_ENTER_VK_3_1_lo" Type="BOOL" UUID="53D5E44843FFB07929E3ECB39AE21518" Comment="Температура на входе узла ПГ, °С (поз.ВК3-1) - низкая" />
+        <Field Name="A1_4_1_T_ENTER_VK_3_1_hi" Type="BOOL" UUID="CC2929604F5B8DD2EF490C8416550AE6" Comment="Температура на входе узла ПГ, °С (поз.ВК3-1) - высокая" />
+        <Field Name="A1_4_2_T_EXIT_VK_3_2_lo" Type="BOOL" UUID="2A3258B94736FF669DEAC08AE53364DA" Comment="Температура на выходе узла ПГ, °С  (поз.ВК3-2) - низкая" />
+        <Field Name="A1_4_2_T_EXIT_VK_3_2_hi" Type="BOOL" UUID="345256B34A6D506E78870EBD625BF962" Comment="Температура на выходе узла ПГ, °С  (поз.ВК3-2) - высокая" />
+        <Field Name="A1_7_1_T_OPERATOR_VK_11_1_lo" Type="BOOL" UUID="FCBA5F0E49B6F5682320D7AD7336F6F0" Comment="Температура в помещении операторной, °С (поз.ВК11-1) - низкое" />
+        <Field Name="A1_7_1_T_OPERATOR_VK_11_1_hi" Type="BOOL" UUID="B6C0A0B74E52B334E070249079373F1C" Comment="Температура в помещении операторной, °С (поз.ВК11-1) - высокое" />
+        <Field Name="A1_7_2_LEVEL_ESK_lo" Type="BOOL" UUID="4BFB0396445B83D7D4AB0786CCCF70A6" Comment="Уровень в ЕСК - низкое" />
+        <Field Name="A1_7_2_LEVEL_ESK_hi" Type="BOOL" UUID="61FFEAE54B7433A4B79AE7A1DE315D0A" Comment="Уровень в ЕСК - высокое" />
+        <Field Name="A1_4_3_P_EXIT_VP_1_4_hi" Type="BOOL" UUID="704A76274B4BCDD13C22718E82F78922" Comment="Давление на выходе 3 УПТИГ УПИГ-500, МПа (поз.ВР1-4) - высокая" />
+        <Field Name="A1_6_3_T_EXIT_2_VK_1_3_lo" Type="BOOL" UUID="2730F5D744401E6037610D9F435CE855" Comment="Температура на выходе 2 УПТИГ, °С (поз.ВК1-3) - низкое" />
+        <Field Name="A1_6_3_T_EXIT_2_VK_1_3_hi" Type="BOOL" UUID="EC06BFE94B8853FD05FE899367341DA2" Comment="Температура на выходе 2 УПТИГ, °С (поз.ВК1-3) - высокое" />
+        <Field Name="A1_7_3_RESERVE_lo" Type="BOOL" UUID="01F02A634CDB906236C880B2A924411B" Comment="Резерв - низкая" />
+        <Field Name="A1_7_3_RESERVE_hi" Type="BOOL" UUID="DA75753F424BC16ACC031FBAB49557FF" Comment="Резерв - высокая" />
+        <Field Name="A1_7_4_RESERVE_lo" Type="BOOL" UUID="A082E4E844D34A9D1BCDF783E798A5AA" Comment="Резерв - низкая" />
+        <Field Name="A1_7_4_RESERVE_hi" Type="BOOL" UUID="C29EAAEB4B417972633961A9815466F3" Comment="Резерв - высокая" />
+        <Field Name="A1_8_1_RESERVE_lo" Type="BOOL" UUID="3539AE6640D123D49F4C6BBE3AAC7BF6" Comment="Резерв - низкая" />
+        <Field Name="A1_8_1_RESERVE_hi" Type="BOOL" UUID="AF4D110A4E61DBD49571DFAAD82AAFD6" Comment="Резерв - высокая" />
+        <Field Name="A1_8_2_RESERVE_lo" Type="BOOL" UUID="D8B0B1924A8B75EF0226758F0D4AA7AB" Comment="Резерв - низкая" />
+        <Field Name="A1_8_2_RESERVE_hi" Type="BOOL" UUID="FFD472194BC36EEBD2D696B4FBD1F539" Comment="Резерв - высокая" />
+        <Field Name="A1_8_3_RESERVE_lo" Type="BOOL" UUID="29157E5F4AEBC503AFFEBC88A5F31CDA" Comment="Резерв - низкая" />
+        <Field Name="A1_8_3_RESERVE_hi" Type="BOOL" UUID="204ED76846767C3005524A81EB936C2C" Comment="Резерв - высокая" />
+        <Field Name="A1_8_4_RESERVE_lo" Type="BOOL" UUID="D363EF5B4E69BE7160CCBD9CC3491321" Comment="Резерв - низкая" />
+        <Field Name="A1_8_4_RESERVE_hi" Type="BOOL" UUID="8A4F234E4B54AF3652B374B275E97CE8" Comment="Резерв - высокая" />
+        <Field Name="A1_9_1_RESERVE_lo" Type="BOOL" UUID="31A14CD84FDB56D047F6AF9D44D9357B" Comment="Резерв - низкая" />
+        <Field Name="A1_9_2_MAIN_U_lo" Type="BOOL" UUID="393C50C24AB67CA30CBC1C9EBCF83A6D" Comment="Измерение основного напряжения - низкая" />
+        <Field Name="A1_4_4_T_EXIT_3_VK_1_4_hi" Type="BOOL" UUID="2CCE9F74471B8DF30B085AB7635815E0" Comment="Температура на выходе 3 УПТИГ УПИГ-500, °С  (поз.ВК1-4) - высокая" />
+        <Field Name="A1_4_4_T_EXIT_3_VK_1_4_lo" Type="BOOL" UUID="01C1E4CC41E8DDAC1F4ECFA22CA11A32" Comment="Температура на выходе 3 УПТИГ УПИГ-500, °С  (поз.ВК1-4) - низкая" />
+        <Field Name="msg_AOB_UPGSN" Type="BOOL" UUID="364D67854555088626D3C99F34F587FA" Comment="Начат АО без стравливания" />
+        <Field Name="msg_AOB_UPGSN_DONE" Type="BOOL" UUID="301E88294BEF7AFECB3B03A0A24AE85A" Comment="АО без стравливания завершен" />
+        <Field Name="msg_AOB_UPGSN_DONE_INCORRECT" Type="BOOL" UUID="2E1243B941800795B21F4992C8760814" Comment="АО без стравливания завершен некорректно" />
+        <Field Name="msg_AOS_UPGSN" Type="BOOL" UUID="A8DF22264FEC6D5DBB820A8248EFEEAA" Comment="Начат АО со стравливанием" />
+        <Field Name="msg_AOS_UPGSN_DONE" Type="BOOL" UUID="5ADE23D24E280AFF2E9378ADED84BD05" Comment="АО со стравливанием завершен" />
+        <Field Name="msg_AOS_UPGSN_DONE_INCORRECT" Type="BOOL" UUID="60D53D5E419A3E62E8C895A9398D4B45" Comment="АО со стравливанием завершен некорректно" />
+        <Field Name="msg_MD_PZ" Type="BOOL" UUID="2111EBD04E7927392F8C7E8BAAE40A80" Comment="Режим проверки защит" />
+        <Field Name="FIRE" Type="BOOL" UUID="FD4E1F834B122FC24DB1A88085A1B6B7" Comment="Пожар" />
+        <Field Name="NEISP_SPAKZ" Type="BOOL" UUID="3A6542464AC2B848C6655EB90DE71A2C" Comment="Неисправность СПАиКЗ" />
+        <Field Name="ZAG_POROG_1" Type="BOOL" UUID="934FDF084E62DB5064075795D3C47ACF" Comment="Порог1" />
+        <Field Name="ZAG_POROG_2" Type="BOOL" UUID="9732133B4FE018B5493482BD13477118" Comment="Порог2" />
+        <Field Name="ZAG_NEISP_SEN" Type="BOOL" UUID="DA9381D04A36DD8FBF594DA0815F9F97" Comment="Неисправность датчика" />
+        <Field Name="ZAG_POROG_1_ALARM" Type="BOOL" UUID="07965C2348F39D7CF98F86B90ECB1E8C" Comment="Уровень загазованности в блоке Порог1" />
+        <Field Name="PRINUD_VENT_ON" Type="BOOL" UUID="55C68BE74690C90BC658AB926F947C97" Comment="Включена принудительная вентиляция" />
+        <Field Name="P_ENTER_LOW_MIN" Type="BOOL" UUID="F5A8D0E441576A81B55F9F892FDBDE7F" Comment="Давление на входе ниже допустимого" />
+        <Field Name="CONTROL_LINE_REDUCE" Type="BOOL" UUID="ACBA763840FB6A7C090C64A8EA06256B" Comment="Проверь режим работы ЛР и настройку РД" />
+        <Field Name="DIF_P_UO_HI" Type="BOOL" UUID="8E0A577F4FCFC2CDCEF3C0A04C60AEBF" Comment="Перепад давления на УО выше нормы" />
+        <Field Name="DIF_P_UO_VERY_HI" Type="BOOL" UUID="FF68EB374AAA84AF3CAD9AAE29063714" Comment="Перепад давления на узле очистки превышает максимальный" />
+        <Field Name="T_GAS_LOW" Type="BOOL" UUID="0F0BAB2F4B86474DAE629CACD1D1B635" Comment="Температура газа за ПГ ниже нормы" />
+        <Field Name="PROIV_GAZ_TEPLONOS" Type="BOOL" UUID="C00EAACF4ED1096CB03870B392D9942D" Comment="&quot;Прорыв газа в систему теплоносителя&quot; " />
+        <Field Name="VENT_WORK" Type="BOOL" UUID="6ABCE1434128C49E6F9069B2E67C0575" Comment="Работа" />
+        <Field Name="ERROR_VENT" Type="BOOL" UUID="DB204BBB4481B27A31749097DCA27A29" Comment="Авария вентилятора" />
+        <Field Name="ALARM_VENT" Type="BOOL" UUID="A1E9557E4DA3D76280A6DB86AD8D0123" Comment="Отказ вентилятора" />
+        <Field Name="HI_RASHOD_UPTIG" Type="BOOL" UUID="3834DBFE44903AA6CF29B0B88BD2443D" Comment="Превышен максимальный порог расхода на УПТИГ" />
+        <Field Name="VENT_PRINUD_ON" Type="BOOL" UUID="5394E9754379834A0CC0EE8AAE980AF8" Comment="«Включена принудительная вентиляция». " />
+        <Field Name="NEISP_VENT" Type="BOOL" UUID="41ADF7EF47FA647C91EA7CBA3D46D088" Comment="Неисправность вентилятора" />
+        <Field Name="ZAGAZ_UPTN_POROG_1" Type="BOOL" UUID="7EC1B45D48A329015FC58C88691579DE" Comment="«Загазованность в котельной Порог1» " />
+        <Field Name="AOB_UPGSN_START" Type="BOOL" UUID="5428BCAE457A770FCE8E61AC227549CA" Comment="Алгоритм АОБ начат" />
+        <Field Name="AOB_UPGSN_WELL_DONE" Type="BOOL" UUID="85D260FE4D34C57A761A62AB6FD3CED5" Comment="АОБ успешно завершен" />
+        <Field Name="AOB_UPGSN_WELL_DONE_INCORRECT" Type="BOOL" UUID="2DC620624BFF09A1E7FA9E8F8D6815B2" Comment="АОБ завершен неккоректно" />
+        <Field Name="AOS_UPGSN_START" Type="BOOL" UUID="F32EA05F46250BF40A02E880DE383818" Comment="Алгоритм АОС начат" />
+        <Field Name="AOS_UPGSN_WELL_DONE" Type="BOOL" UUID="5EBBEFEA4AE3C673B5A9DDBD5EB57A01" Comment="АОC успешно завершен" />
+        <Field Name="AOS_UPGSN_WELL_DONE_INCORRECT" Type="BOOL" UUID="697E63744AB448E1D3E915826E6A4F99" Comment="АОC завершен неккоректно" />
+        <Field Name="A1_3_3_H_P_VP_2_1_hi" Type="BOOL" UUID="EBFAA1034511A8AD8028BF8ECA145510" Comment="Перепад давления на узле очистки, кПа  (поз.ВР2-1) максимальное" />
+        <Field Name="A1_5_2_P_EXIT_1_VP_1_2_lo" Type="BOOL" UUID="69D813064E3C7C1B2EE190BBBDF983B8" Comment="Давление на выходе 1 УПТИГ, МПа (поз.ВР1-2) - низкое" />
+        <Field Name="A1_4_3_P_EXIT_VP_1_4_lo" Type="BOOL" UUID="739BE1594981B456ABBA129E25C34B8C" Comment="Давление на выходе 3 УПТИГ УПИГ-500, МПа (поз.ВР1-4) - низкое" />
+        <Field Name="AM_1_1_NEISP_ALG" Type="BOOL" UUID="B9817343455385A025A6A087CE0BC2B7" Comment="Неисправность АМ1_1" />
+        <Field Name="AM_3_1_NEISP_ALG" Type="BOOL" UUID="8DEA6E1C4BA27695E7F8F297EA6A0CBF" Comment="Неисправность АМ3_1" />
+        <Field Name="VLV_2_1_3_ALG_off" Type="BOOL" UUID="A7B798AA4FFF4F312702C39223006E83" Comment="Не закрыт 1_1_3" />
+        <Field Name="VLV_2_1_4_ALG_off" Type="BOOL" UUID="08BDBF514B34B4E0E42E289607C27908" Comment="Не закрыт 1_1_4" />
+        <Field Name="VLV_2_2_3_ALG_off" Type="BOOL" UUID="BADBFBD4486D34D6F259ADA36BA4AD27" Comment="Не закрыт 1_2_3" />
+        <Field Name="VLV_2_2_4_ALG_off" Type="BOOL" UUID="78C408AA4CB794FED801A9BB8125ECD9" Comment="Не закрыт 1_2_4" />
+        <Field Name="EO_WELL_DONE" Type="BOOL" UUID="DE8E524E426BAF94F7F9FEA0F5013DB3" />
+        <Field Name="EO_WELL_DONE_INCORRECTED" Type="BOOL" UUID="F8E6C0D644D0FA10B09E08BE256A3476" />
+    </Fields>
+</Type>

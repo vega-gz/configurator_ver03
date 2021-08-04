@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_mode" Kind="Struct" UUID="KRE5R2Z5EZJENMCW262RL6ZLJ4">
+	<Fields>
+		<Field Name="FaultKC" Type="BOOL" UUID="PDADQ3M6WR6UBNBHCKV6HXNIRE" Comment="Нет режима" />
+		<Field Name="AOssKC" Type="BOOL" UUID="XOW2VEIMM2VEBFGKHMTYMRSWLM" Comment="АО со стравливанием" />
+		<Field Name="AObsKC" Type="BOOL" UUID="4QFHFNNCAEKURO2PATONNVJEPM" Comment="АО без стравливания" />
+		<Field Name="FireKC" Type="BOOL" UUID="EEQS32TEMTVE7NFOJU4CWYWTVA" Comment="Пожар" />
+		<Field Name="RepairKC" Type="BOOL" UUID="XH32P76MQLYULASXIYC6SK55EM" Comment="Ремонт" />
+		<Field Name="ReserveKC" Type="BOOL" UUID="QXIDVPDOYVBELFPJTPKBONNEYY" Comment="Pезерв" />
+		<Field Name="InjectKC" Type="BOOL" UUID="P7HTETECYRZU5BSRYUX7JPFRDY" Comment="Закачка" />
+		<Field Name="ExtractKC" Type="BOOL" UUID="TJFTTIESSQKE7N4T77NBZXOET4" Comment="Отбор" />
+		<Field Name="EOKC" Type="BOOL" UUID="R5NVXIC6XW6UNAOIMO7J3T2F3I" Comment="Экстренный останов" />
+		<Field Name="Num" Type="INT" UUID="C4QOBDU3GBKUJFKKHWMEA74QQY" Comment="Номер режима" />
+	</Fields>
+</Type>

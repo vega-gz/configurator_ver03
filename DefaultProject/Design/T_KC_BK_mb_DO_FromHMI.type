@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_BK_mb_DO_FromHMI" UUID="8D0A82997D9B4F61BD44208DBBA62F19">
+<Fields>
+<Field Comment="Выбрать первую линию основной" Name="Set_first_line" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="292E69126C204F1EB91E6B61B617A839"/>
+<Field Comment="Выбрать вторую линию основной" Name="Set_second_line" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="A0110BE3026844EABB498FDB55879B99"/>
+<Field Comment="Включить горяее резервирование" Name="Set_reservation_on" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="02E1E1A6B0FB41C58A67D70D922CFF58"/>
+<Field Comment="Запустить станцию" Name="Set_station_on" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="ED8989AB6B854CB796A6444E80C3AC68"/>
+<Field Comment="Остановить станцию" Name="Set_station_off" Type="032CB0403C4B8FB66F9B68B2E5D50373" UUID="573EBDE0C4E242E99E379D83902B3FA4"/>
+</Fields>
+</Type>

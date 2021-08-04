@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="НКУ">
+<Items>
+<Item Name="GPA_AVO.int"/>
+<Item Name="GPA_NKU.int"/>
+<Item Name="GPA5_AVO.int"/>
+<Item Name="GPA5_NKU.int"/>
+<Item Name="GPA6_AVO.int"/>
+<Item Name="GPA6_NKU.int"/>
+</Items>
+</Folder>

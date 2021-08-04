@@ -1,0 +1,1830 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="V6KN27CZORDETEA3IFDG4V44QM" Name="GPA_GT_4RM" Period="20" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="KB2Y2ASLJ5AEPGVB352URSDXHI" Name="Call_CalcFR" Type="FB_Calc_FR" TypeUUID="HIN4GZ5MWPCUDEAQPCRY2S745M" Usage="internal" />
+        <Variable UUID="JSX4P3SYAVJENNLLKT4EKCEAJU" Name="APS" Type="FR_APS" TypeUUID="JXIYBOUHNXIELM4T6O2KSEGWFY" Usage="internal" />
+        <Variable UUID="KDXNZ7QT7PPEXCG6EX4LM42DGQ" Name="Model" Type="FB_Model4RM" TypeUUID="MC5NZK4LTAJUBHGWC7GEWVVRN4" Usage="internal" />
+        <Variable UUID="4AQI4IT2NNHUPKRXWSR6WVQMPU" Name="Pulse" Type="FB_Pulse" TypeUUID="LCERBCVHMURELEDEHKKNKLUZNQ" Usage="internal" />
+        <Variable UUID="UBECJNUJ65GUVH6RJF55TCAK3A" Name="t_init" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[// ----------------    Определение времени цикла -----------------------
+tim.tmpREALtime := CLOCK();
+tim.cycle := LREAL_TO_REAL(tim.tmpREALtime - tim.tmpREALtime_prev);
+tim.tmpREALtime_prev := tim.tmpREALtime;
+	
+// --------------- Инициализация ------------------------- 
+InitModel(); //Инициализация пароаметров имитатора
+TuneInitFR(); //Инициализация настроек
+CurveInitFR(); //Инициализация кривых
+
+//------- должно быть включено что-то одно: AI() или Model(); ----------//
+FRS.AI_Fault := false;
+(*if FRI.Imit then Model(); 
+	else Call_AI(); 
+end_if; *)
+Call_AI(); // --steam
+if ImitOn then Model(); end_if;
+//----------------------------------------------------------------------//
+Call_CalcFR();	//Вычисление расчётных параметров
+t_init(IN:= true, PT:= T#5s);
+if t_init.Q then APS(FRI.deblock); end_if;		//Аварийно-предупредительная сигнализация
+
+//------------------------------------------------------------------------
+(* Теперь вызов в Свитчере
+//Вызов элементов регулятора. Обязательно должен быть выше FC_SwitchMode
+SetPID();
+LimitSpeedToSetN();
+FRegulConturUpdate();
+*)
+//---------------------- Вызов переключателя режимов ------------------
+FC_SwitchMode();//Управление режимами
+//---------------------------------------------------------------------
+ControlVNA();  // Управление ВНА -steam
+FC_SetFRS();	//Выдача сигнализации для логики
+Call_AO(); 
+
+Pulse(true, T#250ms, BEO.Meandr_GPA_FR); //меандр в приложение БЭО -steam
+
+init := true;	//обеспечение однократной инициализации
+// -------------------------------- ИНФО -------------------------------
+(*
+разработал Зиндер Л.В. 29.09.20
+*)
+ProgTime := CLOCK() - tim.tmpREALtime;]]></ST>
+    <DataTypes>
+        <Struct UUID="X2QZBMVZKJOU3KITLYL5EQD42Q" Name="AI_PLC">
+            <Field UUID="AHMBORND6GSUXIUQYQOWZZ6Y7Q" Name="Span" Comment="диапазон датчика в EU" Type="REAL" />
+            <Field UUID="MAEVWYTAOC2U3AWZY3DCX63DOI" Name="Offset" Comment="смещение датчика в EU" Type="REAL" />
+            <Field UUID="TCL6LWVAV7BE7CJL5FIGFY3KTA" Name="Tf" Comment="постоянная фильтра &gt; 0.001" Type="REAL" />
+            <Field UUID="N6MHLKCKSZWENG7A43WQ6QQ2VQ" Name="min_ADC" Comment="минимальное значение в единицах АЦП для обрабатываемого канала" Type="REAL" />
+            <Field UUID="AK6OX3SXZWKEBEGGLSHLUMJLUQ" Name="max_ADC" Comment="максимальное значение в единицах АЦП для обрабатываемого канала" Type="REAL" />
+            <Field UUID="77EZFA45CJRUXJNFYWYSSOZJX4" Name="min_fault_sensor_Eu" Comment="если сигнал с датчика Status.Input_sensor_eu меньше этого значения, то отказ канала" Type="REAL" />
+            <Field UUID="3ZMDUC3JTJXUXJOBOTK5TIZPEA" Name="max_fault_sensor_Eu" Comment="если сигнал с датчика Status.Input_sensor_eu больше этого значения, то отказ канала" Type="REAL" />
+            <Field UUID="6HC53D754OZUFFXSMQ7DRTYUZQ" Name="ROC" Comment="скорость изменения сигнала" Type="REAL" />
+            <Field UUID="27BGQFPEWPFENFGXPVGVOKJ3G4" Name="recovery_time" Comment="время восстановления канала после исчезновения неисправности" Type="REAL" />
+            <Field UUID="YJCO5X2ITDNE3ALS4XNI56NZCM" Name="repair_time" Comment="время через которое канал будет автоматически выведен из ручного режима" Type="REAL" />
+            <Field UUID="DZIWMKI4DBFENFVSKVE56C6YM4" Name="ROC_max" Comment="максимальное значение ROC, если ROC_enable = 1" Type="REAL" />
+            <Field UUID="GT2FMHRMJNSUBPFKJCHRYQLD5U" Name="ROC_min" Comment="минимальное значение ROC, если ROC_enable = 1" Type="REAL" />
+            <Field UUID="SU3HMQL72KXUTBDT4FHHHMBB64" Name="ROC_time" Comment="Время определения скорости изменения сигнала  (сек)" Type="REAL" />
+            <Field UUID="AR5I7IUQAWSE3ORN3MUOK5VZJY" Name="nAi" Comment="Номер канала" Type="INT" />
+        </Struct>
+        <Struct UUID="DBICG7YD6QUU5NY7MXV66JCZ54" Name="T_2chanel">
+            <Field UUID="DCNKFW5HX2KUPDYLMJWTXXZV34" Name="in1" Type="REAL" />
+            <Field UUID="U3DY4QFP5RREJNDLGOF2SJCXX4" Name="in2" Type="REAL" />
+            <Field UUID="AIGFU2DGQ5REPEP35UKLCVMUTY" Name="brk1" Type="BOOL" />
+            <Field UUID="ZUT5PMVXHI4EBIJUQL5VSI6M7M" Name="brk2" Type="BOOL" />
+            <Field UUID="D4CTPAS6AIWEZPM6O55JSUR2NU" Name="ti1" Type="REAL" />
+            <Field UUID="W7ONQ6DNXDUEFEYTFGJQLOIFKQ" Name="ti2" Type="REAL" />
+            <Field UUID="JTKVIZ2C5FDPDLHXJQXBEVNFIU" Name="distort" Type="BOOL" />
+        </Struct>
+        <Struct UUID="VZ3H6GEVT3CUTI65HAA5AALRAY" Name="T_AI_FromHMI" Comment="команды из ЧМИ">
+            <Field UUID="SCKERE4PHRDEBGWST4LC2RTTSE" Name="manualTarget" Comment="Задание из ЧМИ" Type="REAL" />
+            <Field UUID="P47TXVXBU2GUBJ5JZEXSX4KSJ4" Name="BTNmanualOn" Comment="Кнопка вкл. задания значения из ЧМИ" Type="BOOL" />
+            <Field UUID="GZSU6SS7CYNUPOLP767OZHJUK4" Name="BTNrepairOn" Comment="Кнопка вкл. ремонта" Type="BOOL" />
+            <Field UUID="DI7XBJR5XPIE7L7MXPXMVNN3JI" Name="BTNworkOn" Comment="Кнопка перекл. в работу" Type="BOOL" />
+            <Field UUID="R7L6QVFARZUU3FCBO456DXWXDQ" Name="BTNrepairProlong" Comment="Кнопка продления ремонта" Type="BOOL" />
+        </Struct>
+        <Struct UUID="GZ6UU5D6R5EXXPFY4TZ3EOTECU" Name="T_AI_Internal" Comment="Настройки канала">
+            <Field UUID="URGJ7HGIJFACLBUMROBSRYNGTY" Name="qCycleROC" Comment="Количество циклов для контроля РОК" Type="INT" />
+            <Field UUID="Z7HE4D7FEJA6XEO3ZT5EA5LEYI" Name="summCycleROC" Comment="сумма значений для РОК" Type="REAL" />
+            <Field UUID="RW4U6LB23JHNFML2N4BQA7MLUE" Name="prevMeasure" Comment="Значение на предыдущем цикле" Type="REAL" />
+            <Field UUID="QZTLVLZCD5A2FNOJWEQSSKV6WQ" Name="validMeasure" Comment="Последнее валидное измерение" Type="REAL" />
+            <Field UUID="OTAS6CSOKJEYPNL7XMDFHUW3H4" Name="prevFault" Comment="наличие неисправности на предыдущем цикле " Type="BOOL" />
+            <Field UUID="XWXRWWREWFAVBI2RI4EGZVP3HQ" Name="timerRecover" Comment="Таймер восстановления канала в работу после неисправности" Type="REAL" />
+            <Field UUID="KKF6R5ONEBFP3DN2NJV3RM2STQ" Name="timerRepair" Comment="Таймер ремонта реальный" Type="REAL" />
+        </Struct>
+        <Struct UUID="XHUY6ZRHGRQEVOF35XEJI5L2SE" Name="T_AI_Settings" Comment="Настройки канала">
+            <Field UUID="3KRWP62AKYDUFINJHEYQWHS2UU" Name="min" Comment="минимум шкалы канала, ед.изм. Не может быть &gt;= max" Type="REAL" />
+            <Field UUID="RHO37XVNDVTUPEFTMJHSLHKUNY" Name="max" Comment="максимум шкалы канала, ед.изм. Не может быть &lt;= min" Type="REAL" />
+            <Field UUID="RT6HE3WIDNSU7NDWHC2ZBOTRCI" Name="hiLim" Comment="уровень зашкала вверх, ед.изм. Не может быть &lt;= loLim и &gt; max" Type="REAL" />
+            <Field UUID="NONAD4XZLCAUFCYSSF3ZG5Y2RM" Name="loLim" Comment="уровень зашкала вниз, ед.изм. Не может быть &gt;= hiLim и &lt; min" Type="REAL" />
+            <Field UUID="IUL5HZOYX5CRDAD2EFAJYKUZ5Y" Name="hiBrk" Comment="уровень обрыва вверх, ед.изм. Не может быть &lt;= hiLim" Type="REAL" />
+            <Field UUID="MYIPHEQSBJAADA2AH7XXTJLX64" Name="loBrk" Comment="уровень зашкала вниз, ед.изм. Не может быть &gt;= loLim" Type="REAL" />
+            <Field UUID="35MUITRQHY5EPKM27DJOZ4D6SQ" Name="minADC" Comment="значение АЦП, соответствующее минимуму шкалы канала, б.р." Type="REAL" />
+            <Field UUID="DW4YTEEV6RPEFHVBRONZ7WJRDI" Name="maxADC" Comment="значение АЦП, соотв. макс. шкалы, б.р. Не может быть равно minADC" Type="REAL" />
+            <Field UUID="WIQAREZUYVCIVMICFARE4YILCI" Name="corrADC" Comment="корректировка минимуму АЦП" Type="REAL" />
+            <Field UUID="YT5OLJPK5IAU7MM5REJ76FO7HM" Name="maxROC" Comment="макс. допустимая скорость роста, ед.изм./сек. Если «0» - скорость роста не анализируется" Type="REAL" />
+            <Field UUID="Y52LQTQH7KVEPHEO2JGKSNLEYQ" Name="recoveryTime" Comment="время восстановления после неисправности, сек. Не может быть меньше &quot;0&quot;" Type="REAL" />
+            <Field UUID="MX7EBZEDTNJUXGLTSFW2KWSO7U" Name="repairTime" Comment="максимальное время в ремонте, сек. Не может быть меньше или равно «0»" Type="INT" />
+            <Field UUID="65QNI3SAURVUXMDDIVWNLWTPRA" Name="tau" Comment="тау фильтра, сек. Если «0» - фильтрация отсутствует" Type="REAL" />
+            <Field UUID="CZKTSP7UMKMUHNAN43U4PZ3TDA" Name="id" Comment="номер по порядку" Type="INT" />
+        </Struct>
+        <Struct UUID="J74RQIZG5I6EZDCM32A6SZRKIM" Name="T_AI_ToHMI" Comment="устанавливаются программой обработки канала">
+            <Field UUID="QJ6PEGLAUPLUFEIFAGBJIT6PW4" Name="PV" Comment="значение для САУ. Рассчитывается из  measure, Manual_Target с учётом неисправностей и фильтрации" Type="REAL" />
+            <Field UUID="WBZOXI5CNLLEXLWHLINZ2KMYF4" Name="measure" Comment="Пересчёт кода АЦП в инженерные единицы" Type="REAL" />
+            <Field UUID="6ZWUCOB6MR2ENPVJU6GJK7ZWXI" Name="CurrentTimeOfRepair" Comment="оставшееся время ремонта" Type="INT" />
+            <Field UUID="GJY3VEM5KRNE5LIEPIA5A6MP5I" Name="fault_common" Comment="обобщённая неисправность. Образуется по «ИЛИ» от break,up_scale,down_scale,ROC,settingErr" Type="BOOL" />
+            <Field UUID="3BIE4PEO6GDEZOARVMTGWNRJF4" Name="break" Comment="обрыв канала" Type="BOOL" />
+            <Field UUID="JCRW2DPM2TFEDNS2CN4EMDRYHU" Name="up_scale" Comment="выход за верхний зашкал" Type="BOOL" />
+            <Field UUID="4KBYMW34KEZE5ECIADCEQTZ6OA" Name="down_scale" Comment="выход за нижний зашкал" Type="BOOL" />
+            <Field UUID="CKL3UGPLCBNUJBWI6XLA2VGNRQ" Name="ROC" Comment="превышение скорости изменения вверх или вниз" Type="BOOL" />
+            <Field UUID="267MAGDT2FWEXMF4G7MQVHR24E" Name="settingErr" Comment="ошибка задания настроек – несоответствие допустимым значениям" Type="BOOL" />
+            <Field UUID="S2TVATEJGHLUFBOP4OOPDLYPRA" Name="manual" Comment="канал в дист.упр." Type="BOOL" />
+            <Field UUID="RBLIJTEXCENEXF4ULLUV3Q7PRU" Name="repair" Comment="канал в ремонте" Type="BOOL" />
+            <Field UUID="TG5OXUO2FTCU5GZL2PWACX4G7E" Name="repair_time_less_10_percent" Comment="до конца ремонта осталось меньше 10% от заданного времени" Type="BOOL" />
+            <Field UUID="YSARYMFTNDSE5LGQ3JNIXZZXTA" Name="as" Comment="отображать красным. Выставляется при выходе канала за аварийную уставку." Type="BOOL" />
+            <Field UUID="UMPPDYIYCIUUFF73JAE2OWAUZM" Name="os" Comment="отображать фиолетовым. Выставляется при выходе канала за ограничительную уставку." Type="BOOL" />
+            <Field UUID="I74VSDZAHPDUBF3C5UMMHZZF7M" Name="ps" Comment="отображать жёлтым. Выставляется при выходе канала за предупредительную уставку." Type="BOOL" />
+            <Field UUID="RFUGWRJCW2IETLDPVQDEZRSKSE" Name="criticalFault" Comment="Критическая ошибка обработки" Type="BOOL" />
+            <Field UUID="NAC3XDBC7TKE5COYOS7EGC37CY" Name="imitTarget" Comment="Задание из имитатора" Type="REAL" />
+        </Struct>
+        <Struct UUID="7GRLWKHH6VJU5KGLKDIOI5QPQI" Name="T_AO_FromHMI">
+            <Field UUID="YQBDUQ2SLVH4VLPEMFQCTQ7MSA" Name="manualTarget" Comment="Задание из ЧМИ" Type="REAL" />
+            <Field UUID="5X47MBB46NFXXFQYHPGECOG46U" Name="BTNforceOn" Comment="кнопка включения режима форсировки" Type="BOOL" />
+            <Field UUID="2LUBNMQXIBEO7NYA7FMHMSQMQA" Name="BTNworkOn" Comment="Кнопка перекл. в работу" Type="BOOL" />
+        </Struct>
+        <Struct UUID="HS6IKQOLQ5HKPGR3ZZN56FHWGM" Name="T_AO_Settings">
+            <Field UUID="PFXFJNM5WZBD7OHBISHXLQZ7LI" Name="min" Comment="Нижний порог ан.выхода в физ.единицах" Type="REAL" />
+            <Field UUID="XFVOQ6QGIJAYHPPXMK6QYRI72A" Name="max" Comment="Верхний порог ан.выхода в физ.единицах" Type="REAL" />
+            <Field UUID="EXEXSPZPT5AFNLRO4NCFUKVKHE" Name="minDAC" Comment="мин. ЦАП" Type="REAL" />
+            <Field UUID="WBM7NXLVXBDK5IWMTE3XC3C7KY" Name="maxDAC" Comment="макс. ЦАП" Type="REAL" />
+            <Field UUID="OK4EUCFXPNFV7EZMRH56FV3Y4M" Name="id" Type="INT" />
+        </Struct>
+        <Struct UUID="KOTCLUQLO7JERF5MDM2GMF62MI" Name="T_AO_ToHMI">
+            <Field UUID="37PITYONYNCEPAA4FZ7CYI4ZZU" Name="forsPermit" Comment="Форсировка разрешена" Type="BOOL" />
+            <Field UUID="EW23HL5DEBFQJMV2GMGKR3LXTE" Name="forsEnable" Comment="Форсировка включена" Type="BOOL" />
+            <Field UUID="DXLEHCRAXMWERIXDDJCFFR6DXU" Name="hint" Type="STRING" />
+        </Struct>
+        <Struct UUID="LSS65AYJ5WBEZLH44NGKOXDB2Y" Name="T_AnInput">
+            <Field UUID="IZKPQJWHTEZEHLZPIJFQDJLXYI" Name="in" Comment="текущее значение фильтруемой величины&#x0A;" Type="REAL" />
+            <Field UUID="EEGX5K3LCXQU5PFOX2AJUOLDAI" Name="out" Comment="отфильтрованное значение&#x0A;" Type="REAL" />
+            <Field UUID="M4E3UULJHTWUNAVFK2IYTFQ54Y" Name="ti" Comment="таймер задержки на восстановление канала после обрыва&#x0A;" Type="REAL" />
+            <Field UUID="IIE7NEVVDVSUFCMMSUUUUGJB4I" Name="inBrk" Comment="признак недостоверности сигнала (входной)&#x0A;" Type="BOOL" />
+            <Field UUID="KD7FVVBUE7WURFNJ3HYS2DMXR4" Name="outBrk" Comment="признак недостоверности сигнала (выходной)&#x0A;" Type="BOOL" />
+            <Field UUID="UDCV45M5A2CE3EAOIHRDTHOJDQ" Name="wasOk" Comment="признак достоверности сигнала (внутренний)&#x0A;" Type="BOOL" />
+        </Struct>
+        <Struct UUID="6EYPGYU3QM7ULC7U4IBKXEF5AQ" Name="T_Coord">
+            <Field UUID="Z6OWEBVBV6FUDATVWFKEWVFYGA" Name="x" Type="REAL" />
+            <Field UUID="TONHHFFZNJIU3OQBOBKEFSQAIQ" Name="fx" Type="REAL" />
+        </Struct>
+        <Struct UUID="GW7CVYYORTLUPCUDUMHJZMOFGE" Name="T_Curve">
+            <Field UUID="ZHVIYOD5D2TUPHYJFJDBWA262Q" Name="N" Type="INT" />
+            <Field UUID="TCDRVLVATOTELMJUJEAZZ7CDRI" Name="s" Type="T_Coord" TypeUUID="6EYPGYU3QM7ULC7U4IBKXEF5AQ" Size="14" Array="TRUE" />
+        </Struct>
+        <Struct UUID="SEO2SBA4YGZETLEHUVHQRGMOXY" Name="T_PID">
+            <Field UUID="7PDACLDGDNVUNB4QMFEEBSGJW4" Name="num" Comment="порЯдковый номер регулЯтора" Type="INT" />
+            <Field UUID="7PW5JXBEBBSEDKPMGYOZVGAEJI" Name="Kp" Comment="П-коэффициент" Type="REAL" />
+            <Field UUID="XYHVGRCAFOOEBMJNR2WWBS53E4" Name="Ki" Comment="И-коэффициент" Type="REAL" />
+            <Field UUID="VWBQGFSNWK2ERAR3YMKPPOCNH4" Name="Kd" Comment="Д-коэффициент" Type="REAL" />
+            <Field UUID="NURTQR5SITXUDFJ4BVBOKTM4MU" Name="DZ" Comment="зона нечувствительности" Type="REAL" />
+            <Field UUID="JL2DJ3TEJAUEXN4RPO3P2CXZKE" Name="dInteg" Comment="добавка к общему интегратору от текущего контура" Type="REAL" />
+            <Field UUID="K3AM7LJDS3KUVKQHXMRCFABSEI" Name="oldErr" Comment="ошибка регулированиЯ на предыдущем цикле" Type="REAL" />
+            <Field UUID="XAMHE764FVYE3LZWBZZS5HL5OY" Name="out" Comment="выход регулЯтора" Type="REAL" />
+            <Field UUID="QD6V33PV5X7UXPMN6S5NJK34X4" Name="integ" Comment="интегратор" Type="REAL" />
+            <Field UUID="5AGVOBPSWQJU7EEE2WQWU7M4PQ" Name="lagDiff" Comment="Сглаженный дифференциал" Type="REAL" />
+            <Field UUID="NNQOUPBJSO3EVE53AKDYVYTD5E" Name="tauLagDiff" Comment="степень сглаживания дифферециала " Type="REAL" />
+        </Struct>
+    </DataTypes>
+    <FBLibrary>
+        <Folder Name="APS" Comment="" Data="" UUID="ABBZDLRPVN2EZCBRIHDCJKW4IY">
+            <FunctionBlock UUID="JXIYBOUHNXIELM4T6O2KSEGWFY" Name="FR_APS" Comment="формирование предупредительной, ограничительной и аварийной сигнализации&#x0A;">
+                <Variables>
+                    <Variable UUID="C772ISQN7JZE3ETVUED7BOOSCY" Name="deblock" Type="BOOL" Usage="input" />
+                    <Variable UUID="RYHSPSXLJVFUPN3HQOUYXMRNGY" Name="ti" Type="REAL" Size="10" Array="TRUE" Usage="internal" />
+                    <Variable UUID="4VUXNV2NDFFHVNHYDMCA4QKKII" Name="prevPok" Type="REAL" Usage="internal" />
+                    <Variable UUID="3WYOPGDOXBDRRAJJ5JJSGJEPDA" Name="dPok" Type="REAL" Usage="internal" />
+                    <Variable UUID="XKE23UE7K5AXTC5XSBM3CMFCYY" Name="dPokSumm" Type="REAL" Usage="internal" />
+                    <Variable UUID="UFSFBHHEBFH4NATKQAYZNUDVAQ" Name="PokSumm" Type="REAL" Usage="internal" />
+                    <Variable UUID="LC4YL55BIRAHHEO6XCX6VH2W54" Name="arrPok" Type="REAL" Size="20" Array="TRUE" Usage="internal" />
+                    <Variable UUID="BIISNTP3B5DMDMVTTTDMKHWO2I" Name="arr_dPok" Type="REAL" Size="20" Array="TRUE" Usage="internal" />
+                    <Variable UUID="4AQBQCNSKBGAJK7YB2DR2YLKLE" Name="i" Type="INT" Usage="internal" />
+                    <Variable UUID="4Y6W37YVS5ENZGZY3GTMDTC7HY" Name="surgeD1" Type="BOOL" Usage="internal" />
+                    <Variable UUID="QB6VG5AVKFAE7PMQOH5W2LNCPI" Name="surgeD2" Type="BOOL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[// ----------------------------------------
+// сброс обобщённого сигнала
+FRS.A_common := FALSE;
+
+// Отказ каналов изм. N КВД
+IF (FR_evPar.Nvd.out < GPA_Tune_FR.NvdMinAO) AND FRegData.isFeedback OR FRI.check THEN
+	ti[3] := ti[3] +  tim.cycle;
+ELSE
+	ti[3] := 0.0;
+END_IF;
+FRS.A_NvdBrk := ti[3] >= 2.0 OR FRS.A_NvdBrk AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_NvdBrk;
+
+// Отказ каналов изм. N СТ
+IF (FR_evPar.Nst.out < GPA_Tune_FR.NstMinAO) AND FRegData.isFeedback OR FRI.check THEN
+	ti[4] := ti[4] +  tim.cycle;
+ELSE
+	ti[4] := 0.0;
+END_IF;
+FRS.A_NstBrk := ti[4] >= 0.5 OR FRS.A_NstBrk AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_NstBrk;
+
+// Отказ каналов изм. Т газа за ТНД
+IF FR_evPar.Tg_outTND.outBrk and FRS.isFlame OR FRI.check THEN
+	ti[5] := ti[5] +  tim.cycle;
+ELSE
+	ti[5] := 0.0;
+END_IF;
+FRS.A_Tg_outTKbrk := ti[5] >= 0.5 OR FRS.A_Tg_outTKbrk AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_Tg_outTKbrk;
+
+// Рассогласование по ДГ
+IF (ABS(GPA_AO.Set_TRK - FR_AI_ToHMI.Pos1_TRK.PV) > GPA_Tune_FR.distortDG) and not (FR_AI_ToHMI.Pos1_TRK.fault_common OR FR_AI_ToHMI.Pos1_TRK.repair) and not FRS.R_reserve THEN
+	ti[6] := ti[6] +  tim.cycle;
+ELSE
+	ti[6] := 0.0;
+END_IF;
+FRS.A_DGbrk := ti[6] >= 2.0 OR FRS.A_DGbrk AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_DGbrk;
+
+// Рассогласование по ВНА
+IF (ABS(GPA_AO.Set_VNA - FR_AI_ToHMI.Pos_VNA.PV) > GPA_Tune_FR.distortVNA) and not (FR_AI_ToHMI.Pos_VNA.fault_common OR FR_AI_ToHMI.Pos_VNA.repair) and not FRS.R_reserve THEN
+	ti[2] := ti[2] +  tim.cycle;
+ELSE
+	ti[2] := 0.0;
+END_IF;
+FRS.A_VNAdistort := ti[2] >= 2.0 OR FRS.A_VNAdistort AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_VNAdistort;
+
+// Нет розжига ----------------- Реализовано в FC_SwitchMode ------------------------
+//FRS.A_noFire1 := FRI.check AND NOT FRS.isFire OR FRS.A_noFire1 AND NOT deblock; //авария выставляется в FC_SwitchMode
+//FRS.A_common := FRS.A_common OR FRS.A_noFire1;
+
+// Нет факела
+FRS.A_FlameOff := (FRegData.isFeedback OR FRI.check) AND NOT FRS.isFlame OR FRS.A_FlameOff AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_FlameOff;
+
+// Высокая Т газа за ТНД
+FRS.A_hiT_outTK := FRegData.isFeedback AND FR_evPar.Tg_outTND.out > (FR_evPar.TggLim + GPA_Tune_FR.dTmaxAO) OR 
+				   (FRS.R_start OR FRI.check) AND FR_evPar.Tg_outTND.out > GPA_Tune_FR.TstartMaxAO OR 
+				    FRS.A_hiT_outTK AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_hiT_outTK;
+// Высокая N КВД
+FRS.A_NvdHigh := (FR_evPar.Nvd.out > getTun(arg := FR_evPar.TatmLag, curve := GPA_Curve_FR.TairToNvd)* 1.03) OR FRS.A_NvdHigh AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_NvdHigh;
+// Высокая N КВД приведённая
+FRS.A_NvdNormHigh := (FR_evPar.NvdNorm > GPA_Tune_FR.NvdNormMaxAO) OR FRS.A_NvdNormHigh AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_NvdNormHigh;
+// Низкая N КВД приведённая на режиме
+//FRS.A_NvdLow := (FR_evPar.Nvd.out < GPA_Tune_FR.NvdMinAO) and (FRI.EnLoLim or FRI.check) OR FRS.A_NvdLow AND NOT deblock;
+FRS.A_NvdNormLow := (FR_evPar.NvdNorm < GPA_Tune_FR.NvdMinAO) and (FRI.EnLoLim or FRI.check) OR FRS.A_NvdNormLow AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_NvdNormLow;
+// Высокая N СТ
+FRS.A_NstHigh := (FR_evPar.Nst.out > GPA_Tune_FR.NstMaxAO) OR FRS.A_NstHigh AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_NstHigh;
+// Низкая N СТ
+FRS.A_NstLow := (FR_evPar.Nst.out < GPA_Tune_FR.NstMinAO) and (FRI.EnLoLim or FRI.check) OR FRS.A_NstLow AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_NstLow;
+
+//Предупредительные по N ВД повышенные
+FRS.P_NvdHigh := FR_evPar.Nvd.out > getTun(arg := FR_evPar.TatmLag, curve := GPA_Curve_FR.TairToNvd)* 1.02;
+// Повышенная Т газа за турбиной
+FRS.P_Tgg_v := FR_evPar.Tg_outTND.out > FR_evPar.TggLim + 20.0;
+
+//---------------- Помпаж Д ------------------------
+PokSumm := PokSumm - arrPok[i] + FR_AI_ToHMI.Pv_outTK.PV;
+arrPok[i]:= FR_AI_ToHMI.Pv_outTK.PV;
+
+dPok := FR_AI_ToHMI.Pv_outTK.PV - prevPok;
+dPokSumm := dPokSumm - arr_dPok[i] + dPok*dPok;
+arr_dPok[i]:= dPok*dPok;
+
+i := i + 1;
+if i >= 10 then i:= 0; end_if;
+
+prevPok := FR_AI_ToHMI.Pv_outTK.PV;
+// помпаж 1
+if prevPok > 0.0 then
+	surgeD1 := ABS(dPok/prevPok) >= GPA_Tune_FR.Ksurge1;
+else
+	surgeD1 := false;
+end_if;
+//помпаж 2
+if PokSumm > 0.0 then
+	surgeD2 := SQRT(dPokSumm/10.0)/(PokSumm/10.0) > GPA_Tune_FR.Ksurge2;
+else
+	surgeD2 := false;
+end_if;
+FRS.P_surgeHit := surgeD1 or surgeD2;
+IF FRS.P_surgeHit THEN
+	ti[7] := ti[7] +  tim.cycle;
+ELSE
+	ti[7] := 0.0;
+END_IF;
+FRS.A_SurgeD := ti[7] >= 2.0 (*and FRI.EnLoLim*) OR FRS.A_SurgeD AND NOT deblock;
+FRS.A_common := FRS.A_common OR FRS.A_SurgeD;
+
+//-------------------- Раскрутка СТ -------------------------
+IF (FR_evPar.dNst*20.0 > (0.6*FR_evPar.Nst.out - GPA_Tune_FR.dNstMax)) and FR_evPar.Nst.out > 3000.0 THEN
+	ti[8] := ti[8] +  tim.cycle;
+ELSE
+	ti[8] := 0.0;
+END_IF;
+FRS.A_NstJamp := ti[8] >= 0.05 OR FRS.A_NstJamp AND NOT deblock;
+FRS.A_common  := FRS.A_common OR FRS.A_NstJamp;
+
+//------------ Предупреждения --------------------------------------
+FRS.P_NvdDistort :=  ABS(FR_evPar.Nvd1_2.in1 - FR_evPar.Nvd1_2.in2) > GPA_Tune_FR.distortNvdMax;//Рассогласование по N КВД
+FRS.P_NstDistort :=  ABS(FR_evPar.Nst1_2.in1 - FR_evPar.Nst1_2.in2) > GPA_Tune_FR.distortNvdMax;//Рассогласование по N СТ
+FRS.P_TgDistort :=  ABS(FR_evPar.Tg_outTND1_2.in1 - FR_evPar.Tg_outTND1_2.in2) > GPA_Tune_FR.distortTmax;//Рассогласование по N СТ
+
+// Рассогласование по ДГ выдаётся по половинному (относительно аварийного) рассогласованию
+IF (ABS(GPA_AO.Set_TRK - FR_AI_ToHMI.Pos1_TRK.PV) > GPA_Tune_FR.distortDG/2.0) THEN
+	IF ti[1] < 0.5 THEN ti[1] := ti[1] +  tim.cycle; END_IF;
+ELSE ti[1] := 0.0; END_IF;
+FRS.P_DGbrk := ti[1] >= 0.5;
+
+//------------ ВНА прикрыты (для ППУ) -------------------------
+FRS.VNA_close := (FR_AI_ToHMI.Pos_VNA.PV <= -35.0) and not FR_AI_ToHMI.Pos_VNA.fault_common and FRS.R_reserve;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="EvSigProcessing" Comment="Расчёт вспомогательных сигналов" Data="" UUID="BR6KPDH2LVAEVB2PHX2VYX7LZQ">
+            <FunctionBlock UUID="HIN4GZ5MWPCUDEAQPCRY2S745M" Name="FB_Calc_FR" Comment="Расчёт сигналов из блока Calc_FR">
+                <Variables>
+                    <Variable UUID="Z26T3D3VHWJUPEQKLKODPEIO7A" Name="NstFlt" Type="FB_FltDiff" TypeUUID="QGDF6R7GCY5U5G3LG4OK3YE33A" Usage="internal" />
+                    <Variable UUID="WVM53OFWLTJUHDGUXUUKI6JLR4" Name="NvdFlt" Type="FB_FltDiff" TypeUUID="QGDF6R7GCY5U5G3LG4OK3YE33A" Usage="internal" />
+                    <Variable UUID="7UBK7225OBG5HHJBOAPU5MGIIM" Name="kNorm" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[          
+//----- Расчетное P воздуха за ОК (1 канал), МПа
+FR_evPar.Pv_outKVD.inBrk := FR_AI_ToHMI.Pv_outTK.fault_common OR FR_AI_ToHMI.Pv_outTK.repair;
+FR_evPar.Pv_outKVD.in := FR_AI_ToHMI.Pv_outTK.PV;
+calc1chan(tau := 0.3, chan := FR_evPar.Pv_outKVD, tiBrk := 1.5);
+
+//----- Расчетное Pтг перед ДГ (1 канал), МПа
+(*FR_evPar.Ptg_inD.inBrk := FR_AI_ToHMI.Ptg_inTRK.fault_common OR FR_AI_ToHMI.Ptg_inTRK.repair;
+FR_evPar.Ptg_inD.in := FR_AI_ToHMI.Ptg_inTRK.PV;
+calc1chan(tau := 0.3, chan := FR_evPar.Ptg_inD, tiBrk := 1.5);*)
+
+//----- РасчетнаЯ Т газа за ТНД (2 термопары), [°C]
+FR_evPar.Tg_outTND1_2.brk1 := FR_AI_ToHMI.T1_outGG.fault_common OR FR_AI_ToHMI.T1_outGG.repair;
+FR_evPar.Tg_outTND1_2.in1 := FR_AI_ToHMI.T1_outGG.PV;
+FR_evPar.Tg_outTND1_2.brk2 := FR_AI_ToHMI.T2_outGG.fault_common OR FR_AI_ToHMI.T2_outGG.repair;
+FR_evPar.Tg_outTND1_2.in2 := FR_AI_ToHMI.T2_outGG.PV;
+calc2chan(tau := 0.3, chanIn := FR_evPar.Tg_outTND1_2, chan := FR_evPar.Tg_outTND, tiBrk := 1.5, procVar:=0, distortSet:=GPA_Tune_FR.distortTmax);
+FRS.P_TgDistort := FR_evPar.Tg_outTND1_2.distort;
+
+//----- РасчетнаЯ N КВД (2 канала), [об/мин]
+FR_evPar.Nvd1_2.brk1 := FR_AI_ToHMI.Nvd1.fault_common OR FR_AI_ToHMI.Nvd1.repair;
+FR_evPar.Nvd1_2.in1 := FR_AI_ToHMI.Nvd1.PV;
+FR_evPar.Nvd1_2.brk2 := FR_AI_ToHMI.Nvd2.fault_common OR FR_AI_ToHMI.Nvd2.repair;
+FR_evPar.Nvd1_2.in2 := FR_AI_ToHMI.Nvd2.PV;
+calc2chan(tau := 0.3, chanIn := FR_evPar.Nvd1_2, chan := FR_evPar.Nvd, tiBrk := 1.5, procVar:=1, distortSet:=GPA_Tune_FR.distortNvdMax);
+FRS.P_NvdDistort := FR_evPar.Nvd1_2.distort;
+
+//----- РасчетнаЯ Nst (2 канала), [об/мин]
+FR_evPar.Nst1_2.brk1 := FR_AI_ToHMI.Nst1.fault_common OR FR_AI_ToHMI.Nst1.repair;
+FR_evPar.Nst1_2.in1 := FR_AI_ToHMI.Nst1.PV;
+FR_evPar.Nst1_2.brk2 := FR_AI_ToHMI.Nst2.fault_common OR FR_AI_ToHMI.Nst2.repair;
+FR_evPar.Nst1_2.in2 := FR_AI_ToHMI.Nst2.PV;
+calc2chan(tau := 0.3, chanIn := FR_evPar.Nst1_2, chan := FR_evPar.Nst, tiBrk := 1.5, procVar:=1, distortSet:=GPA_Tune_FR.distortNstMax);
+FRS.P_NstDistort := FR_evPar.Nst1_2.distort;
+
+//------------ вычисление изменения Nвд, Т за ТНД и Пос ДГ за 10 циклов ---------------------
+NvdFlt(FR_evPar.Nvd.out,  10,FR_evPar.dNvd);				
+NstFlt(FR_evPar.Nvd.out,  5,FR_evPar.dNst);				
+(*ToutTndFlt(FR_evPar.Tg_outTND.out,10,FR_evPar.dToutTND); //FR_evPar.dT_onKS
+PosDGFlt(FR_evPar.Pos_DG.out,10,FR_evPar.dPosDG);
+FR_evPar.dNvd := FR_evPar.Nnd.out;*)
+//------------ вычисление приведённых оборотов ----------------------------------------------
+FR_evPar.TatmLag := FR_evPar.TatmLag + (FRI.Tatm - FR_evPar.TatmLag)/120000.0;
+kNorm := SQRT(288.15/(273.0+FR_evPar.TatmLag));
+FR_evPar.NvdNorm := FR_evPar.Nvd.out * kNorm;//приведеннаЯ к условиЯм на входе в двигатель частота вращениЯ КВД, [об/мин]
+if FRI.PinD < 80.0 OR FRI.PinD > 120.0 then
+	FR_evPar.KnormPtg := kNorm;
+else
+	FR_evPar.KnormPtg := FRI.PinD/101.325*kNorm;
+end_if;
+
+FR_evPar.TggLim := getTun(arg := FR_evPar.TatmLag, curve := GPA_Curve_FR.TinToTmax);
+
+//Сглаживание дифференциала контуров
+FRegData.regs[FRegContur.N_VD].tauLagDiff  := GPA_Tune_FR.LagDiff_Nvd;	           
+FRegData.regs[FRegContur.N_ST].tauLagDiff  := GPA_Tune_FR.LagDiff_Nst;	            
+FRegData.regs[FRegContur.T_MAX].tauLagDiff := GPA_Tune_FR.LagDiff_Tst;	
+FRegData.regs[FRegContur.N_VDnorm_MAX].tauLagDiff := GPA_Tune_FR.LagDiff_Nvd;	//степень сглаживания дифференциала для ПИД регулятора нижний ограничительный контур N КВД
+FRegData.regs[FRegContur.N_VDnorm_MIN].tauLagDiff := GPA_Tune_FR.LagDiff_Nvd;	//степень сглаживания дифференциала для ПИД регулятора нижний ограничительный контур N КВД
+FRegData.regs[FRegContur.N_VD_MAX].tauLagDiff :=  GPA_Tune_FR.LagDiff_Nvd;	//степень сглаживания дифференциала для ПИД регулятора верхний ограничительный контур N КВД
+FRegData.regs[FRegContur.N_ST_MIN].tauLagDiff := GPA_Tune_FR.LagDiff_Nst;	//степень сглаживания дифференциала для ПИД регулятора нижний ограничительный контур N СТ
+FRegData.regs[FRegContur.N_ST_MAX].tauLagDiff := GPA_Tune_FR.LagDiff_Nst;	//степень сглаживания дифференциала для ПИД регулятора верхний ограничительный контур N СТ]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="INIT" Comment="" Data="" UUID="ICPZKYX6V3XUZGIYJX5XN3NHDM">
+            <Function UUID="NFRSREN4R4XUZDSOD4CMWUQZEU" Name="CurveInitFR" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[//Инициализация кривых
+if not init then
+//Начало кода
+(*//инициализация перенесена в приложение InitFR
+GPA_Curve_FR.openToGT.N := 14; // Зависимость расхода топлива от процента открытия ТРК;
+GPA_Curve_FR.openToGT.s[0].x := openToGT[0].x; GPA_Curve_FR.openToGT.s[0].fx := openToGT[0].fx ;
+GPA_Curve_FR.openToGT.s[1].x := openToGT[1].x; GPA_Curve_FR.openToGT.s[1].fx := openToGT[1].fx ;
+GPA_Curve_FR.openToGT.s[2].x := 12.5; GPA_Curve_FR.openToGT.s[2].fx := 83.2;
+GPA_Curve_FR.openToGT.s[3].x := 15.6; GPA_Curve_FR.openToGT.s[3].fx := 100.9;
+GPA_Curve_FR.openToGT.s[4].x := 18.8; GPA_Curve_FR.openToGT.s[4].fx := 126.2;
+GPA_Curve_FR.openToGT.s[5].x := 21.9; GPA_Curve_FR.openToGT.s[5].fx := 170.5;
+GPA_Curve_FR.openToGT.s[6].x := 25.0; GPA_Curve_FR.openToGT.s[6].fx := 227.8;
+GPA_Curve_FR.openToGT.s[7].x := 28.1; GPA_Curve_FR.openToGT.s[7].fx := 294.6;
+GPA_Curve_FR.openToGT.s[8].x := 37.5; GPA_Curve_FR.openToGT.s[8].fx := 549.0;
+GPA_Curve_FR.openToGT.s[9].x := 50.0; GPA_Curve_FR.openToGT.s[9].fx := 941.2;
+GPA_Curve_FR.openToGT.s[10].x := 62.5; GPA_Curve_FR.openToGT.s[10].fx := 1295.8;
+GPA_Curve_FR.openToGT.s[11].x := 75.0; GPA_Curve_FR.openToGT.s[11].fx := 1534.5;
+GPA_Curve_FR.openToGT.s[12].x := 87.5; GPA_Curve_FR.openToGT.s[12].fx := 1684.5;
+GPA_Curve_FR.openToGT.s[13].x := 100.0; GPA_Curve_FR.openToGT.s[13].fx := 1745.9;
+
+GPA_Curve_FR.GTtoOpen.N := 14; // Обратная зависимость расхода топлива от степени открытия ТРК;
+GPA_Curve_FR.GTtoOpen.s[0].x := 10.2; GPA_Curve_FR.GTtoOpen.s[0].fx := 0.0;
+GPA_Curve_FR.GTtoOpen.s[1].x := 42.3; GPA_Curve_FR.GTtoOpen.s[1].fx := 6.3;
+GPA_Curve_FR.GTtoOpen.s[2].x := 83.2; GPA_Curve_FR.GTtoOpen.s[2].fx := 12.5;
+GPA_Curve_FR.GTtoOpen.s[3].x := 100.9; GPA_Curve_FR.GTtoOpen.s[3].fx := 15.6;
+GPA_Curve_FR.GTtoOpen.s[4].x := 126.2; GPA_Curve_FR.GTtoOpen.s[4].fx := 18.8;
+GPA_Curve_FR.GTtoOpen.s[5].x := 170.5; GPA_Curve_FR.GTtoOpen.s[5].fx := 21.9;
+GPA_Curve_FR.GTtoOpen.s[6].x := 227.8; GPA_Curve_FR.GTtoOpen.s[6].fx := 25.0;
+GPA_Curve_FR.GTtoOpen.s[7].x := 294.6; GPA_Curve_FR.GTtoOpen.s[7].fx := 28.1;
+GPA_Curve_FR.GTtoOpen.s[8].x := 549.0; GPA_Curve_FR.GTtoOpen.s[8].fx := 37.5;
+GPA_Curve_FR.GTtoOpen.s[9].x := 941.2; GPA_Curve_FR.GTtoOpen.s[9].fx := 50.0;
+GPA_Curve_FR.GTtoOpen.s[10].x := 1295.8; GPA_Curve_FR.GTtoOpen.s[10].fx := 62.5;
+GPA_Curve_FR.GTtoOpen.s[11].x := 1534.5; GPA_Curve_FR.GTtoOpen.s[11].fx := 75.0;
+GPA_Curve_FR.GTtoOpen.s[12].x := 1684.5; GPA_Curve_FR.GTtoOpen.s[12].fx := 87.5;
+GPA_Curve_FR.GTtoOpen.s[13].x := 1745.9; GPA_Curve_FR.GTtoOpen.s[13].fx := 100.0;*)
+GPA_Curve_FR.timeToGt.N := 5; // Расход топлива на этапе розжига и разгона, кг/ч;
+GPA_Curve_FR.timeToGt.s[0].x := 0.0; GPA_Curve_FR.timeToGt.s[0].fx := 70.0;
+GPA_Curve_FR.timeToGt.s[1].x := 20.0; GPA_Curve_FR.timeToGt.s[1].fx := 90.0;
+GPA_Curve_FR.timeToGt.s[2].x := 45.0; GPA_Curve_FR.timeToGt.s[2].fx := 130.0;
+GPA_Curve_FR.timeToGt.s[3].x := 80.0; GPA_Curve_FR.timeToGt.s[3].fx := 240.0;
+GPA_Curve_FR.timeToGt.s[4].x := 140.0; GPA_Curve_FR.timeToGt.s[4].fx := 470.0;
+GPA_Curve_FR.TinToKkGt.N := 7; // Коррекция расхода топлива на розжиге и разгоне от Т воздуха на входе в ГТД;
+GPA_Curve_FR.TinToKkGt.s[0].x := -50.0; GPA_Curve_FR.TinToKkGt.s[0].fx := 1.5;
+GPA_Curve_FR.TinToKkGt.s[1].x := -45.0; GPA_Curve_FR.TinToKkGt.s[1].fx := 1.5;
+GPA_Curve_FR.TinToKkGt.s[2].x := -15.0; GPA_Curve_FR.TinToKkGt.s[2].fx := 1.2;
+GPA_Curve_FR.TinToKkGt.s[3].x := 0.0; GPA_Curve_FR.TinToKkGt.s[3].fx := 1.1;
+GPA_Curve_FR.TinToKkGt.s[4].x := 15.0; GPA_Curve_FR.TinToKkGt.s[4].fx := 1.0;
+GPA_Curve_FR.TinToKkGt.s[5].x := 30.0; GPA_Curve_FR.TinToKkGt.s[5].fx := 0.9;
+GPA_Curve_FR.TinToKkGt.s[6].x := 45.0; GPA_Curve_FR.TinToKkGt.s[6].fx := 0.9;
+//инициализация перенесена в приложение InitFR
+(*GPA_Curve_FR.TinToTmax.N := 6; // Программа огр. Т газа за турбиной от Т воздуха на входе ГТД;
+GPA_Curve_FR.TinToTmax.s[0].x := -45.0; GPA_Curve_FR.TinToTmax.s[0].fx := 557.0;
+GPA_Curve_FR.TinToTmax.s[1].x := -23.0; GPA_Curve_FR.TinToTmax.s[1].fx := 557.0;
+GPA_Curve_FR.TinToTmax.s[2].x := -4.0; GPA_Curve_FR.TinToTmax.s[2].fx := 609.0;
+GPA_Curve_FR.TinToTmax.s[3].x := 15.0; GPA_Curve_FR.TinToTmax.s[3].fx := 609.0;
+GPA_Curve_FR.TinToTmax.s[4].x := 30.0; GPA_Curve_FR.TinToTmax.s[4].fx := 647.0;
+GPA_Curve_FR.TinToTmax.s[5].x := 45.0; GPA_Curve_FR.TinToTmax.s[5].fx := 647.0;*)
+GPA_Curve_FR.NvdToGtMin.N := 4; // Зависимость нижнего огр. расхода топлива от приведенных оборотов КВД;
+GPA_Curve_FR.NvdToGtMin.s[0].x := 11000.0; GPA_Curve_FR.NvdToGtMin.s[0].fx := 200.0;
+GPA_Curve_FR.NvdToGtMin.s[1].x := 12200.0; GPA_Curve_FR.NvdToGtMin.s[1].fx := 250.0;
+GPA_Curve_FR.NvdToGtMin.s[2].x := 14500.0; GPA_Curve_FR.NvdToGtMin.s[2].fx := 450.0;
+GPA_Curve_FR.NvdToGtMin.s[3].x := 15275.0; GPA_Curve_FR.NvdToGtMin.s[3].fx := 550.0;
+GPA_Curve_FR.NvdToGtMax.N := 4; // Зависимость верхнего огр. расхода топлива от приведенных оборотов КВД;
+GPA_Curve_FR.NvdToGtMax.s[0].x := 11000.0; GPA_Curve_FR.NvdToGtMax.s[0].fx := 550.0;
+GPA_Curve_FR.NvdToGtMax.s[1].x := 12200.0; GPA_Curve_FR.NvdToGtMax.s[1].fx := 650.0;
+GPA_Curve_FR.NvdToGtMax.s[2].x := 14500.0; GPA_Curve_FR.NvdToGtMax.s[2].fx := 1250.0;
+GPA_Curve_FR.NvdToGtMax.s[3].x := 15300.0; GPA_Curve_FR.NvdToGtMax.s[3].fx := 1350.0;
+GPA_Curve_FR.NvdToVNA.N := 5; // Программа регулированиЯ ВНА компрессора;
+GPA_Curve_FR.NvdToVNA.s[0].x := 0.0; GPA_Curve_FR.NvdToVNA.s[0].fx := -40.0;
+GPA_Curve_FR.NvdToVNA.s[1].x := 1100.0; GPA_Curve_FR.NvdToVNA.s[1].fx := -40.0;
+GPA_Curve_FR.NvdToVNA.s[2].x := 11450.0; GPA_Curve_FR.NvdToVNA.s[2].fx := -40.0;
+GPA_Curve_FR.NvdToVNA.s[3].x := 14160.0; GPA_Curve_FR.NvdToVNA.s[3].fx := 0.0;
+GPA_Curve_FR.NvdToVNA.s[4].x := 15275.0; GPA_Curve_FR.NvdToVNA.s[4].fx := 0.0;
+//инициализация перенесена в приложение InitFR
+(*GPA_Curve_FR.TairToNvd.N := 2; // Ограничение макс. оборотов ротора ТВД от температуры наружного воздуха;
+GPA_Curve_FR.TairToNvd.s[0].x := 15.0; GPA_Curve_FR.TairToNvd.s[0].fx := 14110.0;
+GPA_Curve_FR.TairToNvd.s[1].x := 30.0; GPA_Curve_FR.TairToNvd.s[1].fx := 14380.0; *)
+
+GPA_Curve_FR.corrKpropNvdFromNvd.N := 9; // Коррекция проп. коэфф. ПИД-регулятора по оборотам КВД;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[0].x := 0.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[0].fx := 1.6;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[1].x := 11596.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[1].fx := 2.1;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[2].x := 12300.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[2].fx := 2.2;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[3].x := 12712.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[3].fx := 3.0;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[4].x := 13431.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[4].fx := 6.9;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[5].x := 13735.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[5].fx := 8.2;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[6].x := 14237.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[6].fx := 9.9;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[7].x := 14552.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[7].fx := 10.0;
+GPA_Curve_FR.corrKpropNvdFromNvd.s[8].x := 14867.0; GPA_Curve_FR.corrKpropNvdFromNvd.s[8].fx := 10.0;
+GPA_Curve_FR.corrKpropNstFromNvd.N := 5; // Коррекция проп. коэфф. ПИД-регулятора по оборотам СТ;
+GPA_Curve_FR.corrKpropNstFromNvd.s[0].x := 0.0; GPA_Curve_FR.corrKpropNstFromNvd.s[0].fx := 0.3;
+GPA_Curve_FR.corrKpropNstFromNvd.s[1].x := 11610.0; GPA_Curve_FR.corrKpropNstFromNvd.s[1].fx := 0.5;
+GPA_Curve_FR.corrKpropNstFromNvd.s[2].x := 12712.0; GPA_Curve_FR.corrKpropNstFromNvd.s[2].fx := 0.6;
+GPA_Curve_FR.corrKpropNstFromNvd.s[3].x := 14867.0; GPA_Curve_FR.corrKpropNstFromNvd.s[3].fx := 2.7;
+GPA_Curve_FR.corrKpropNstFromNvd.s[4].x := 15182.0; GPA_Curve_FR.corrKpropNstFromNvd.s[4].fx := 3.1;
+GPA_Curve_FR.corrKpropNstFromNst.N := 5; // Коррекция проп. коэфф. ПИД-регулятора по оборотам СТ;
+GPA_Curve_FR.corrKpropNstFromNst.s[0].x := 0.0; GPA_Curve_FR.corrKpropNstFromNst.s[0].fx := 1.0;
+GPA_Curve_FR.corrKpropNstFromNst.s[1].x := 5200.0; GPA_Curve_FR.corrKpropNstFromNst.s[1].fx := 0.8;
+GPA_Curve_FR.corrKpropNstFromNst.s[2].x := 5900.0; GPA_Curve_FR.corrKpropNstFromNst.s[2].fx := 0.7;
+GPA_Curve_FR.corrKpropNstFromNst.s[3].x := 7400.0; GPA_Curve_FR.corrKpropNstFromNst.s[3].fx := 0.6;
+GPA_Curve_FR.corrKpropNstFromNst.s[4].x := 11400.0; GPA_Curve_FR.corrKpropNstFromNst.s[4].fx := 0.4;
+GPA_Curve_FR.corrKpropTndFromNvd.N := 9; // Коррекция проп. коэфф. ПИД-регулятора по Т газов за СТ;
+GPA_Curve_FR.corrKpropTndFromNvd.s[0].x := 0.0; GPA_Curve_FR.corrKpropTndFromNvd.s[0].fx := 0.9;
+GPA_Curve_FR.corrKpropTndFromNvd.s[1].x := 11610.0; GPA_Curve_FR.corrKpropTndFromNvd.s[1].fx := 1.1;
+GPA_Curve_FR.corrKpropTndFromNvd.s[2].x := 12300.0; GPA_Curve_FR.corrKpropTndFromNvd.s[2].fx := 1.1;
+GPA_Curve_FR.corrKpropTndFromNvd.s[3].x := 12712.0; GPA_Curve_FR.corrKpropTndFromNvd.s[3].fx := 1.6;
+GPA_Curve_FR.corrKpropTndFromNvd.s[4].x := 12940.0; GPA_Curve_FR.corrKpropTndFromNvd.s[4].fx := 2.4;
+GPA_Curve_FR.corrKpropTndFromNvd.s[5].x := 13260.0; GPA_Curve_FR.corrKpropTndFromNvd.s[5].fx := 3.3;
+GPA_Curve_FR.corrKpropTndFromNvd.s[6].x := 13790.0; GPA_Curve_FR.corrKpropTndFromNvd.s[6].fx := 4.0;
+GPA_Curve_FR.corrKpropTndFromNvd.s[7].x := 14867.0; GPA_Curve_FR.corrKpropTndFromNvd.s[7].fx := 5.1;
+GPA_Curve_FR.corrKpropTndFromNvd.s[8].x := 15182.0; GPA_Curve_FR.corrKpropTndFromNvd.s[8].fx := 5.2;
+//Конец кода
+end_if;
+
+]]></ST>
+            </Function>
+            <Function UUID="CBZV4XPQZXSENAR6GUEIVPQLCI" Name="InitModel" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[//Инициализация имитатора
+if not init then
+	ms.Ptg						:= 5.0; //давление ТГ
+	ms.tauToutTND				:=100.0; //сглаживание Тза ГГ
+	ms.tauNvd 					:= 300.0; //сглаживание ВД
+	ms.tauNst 					:= 600.0; //сглаживание СТ
+	ms.minPosDG 				:= 10.0;//Позиция ДГ, ниже которой факела быть не может
+	ms.minNvd 					:= 4000.0; //Обороты ВД, ниже которых факела быть не может
+	ms.minNvd2 					:= 12000.0; //Обороты ВД, ниже которых ВД влияет на Т за ГГ положительно, а выше - отрицательно
+	ms.NvdStarter 				:= 10000.0; //Обороты ВД, до которых её разгоняет старткр
+	ms.NvdfNst					:= 9000.0; //Обороты ВД, при которых начинается влияние на СТ -steam
+	ms.koeffPosDG_ToutTND 	:= 9.0; //Влияние положения ДГ на Т за ГГ 10.0
+	ms.koeffNvd_ToutTND 		:= 0.07; //Влияние ВД на Т за ГГ 0.125
+	ms.koeffToutTND_Nvd 		:= 35.0; //Влияние Т за ГГ на ВД 10.0
+	ms.koeffNvd_Nst 			:= 2.75; //Влияние ВД на СТ-> Nnom_st/(Nnom_vd-NvdfNst)
+	//ms.koeffNvd_Nnd 		:= 0.76; //Влияние ВД на НД
+	ms.koeffNvd_Pok 			:= 6.5e-05; //Влияние ВД на Рок
+end_if; ]]></ST>
+            </Function>
+            <Function UUID="UUN7EUMPIEHGIN7HOKDNSQJMWQ" Name="TuneInitFR" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[
+// ===============================================================================
+// список режимов работы топливного регулЯтора
+// ===============================================================================
+FRegMode.reserve 	                           := 1;  	            // "Резерв"
+FRegMode.fire		                           := 2;  	            // розжиг 
+FRegMode.rate		                           := 3;  	            // разгон по программе
+FRegMode.rateNvd 	                           := 4;  	            // разгон по N КВД
+FRegMode.heatMG  	                           := 5;  	            // Прогрев на МГ
+FRegMode.rateNst 	                           := 6;  	            // разгон по N СТ
+FRegMode.work    	                           := 7;  	            // "Работа"
+FRegMode.godwMG		                        := 8; 	            //режим "НО, снижение до МГ"
+FRegMode.coolingMG	                        := 9; 	            //режим "НО, охлаждение на МГ"
+FRegMode.stop    	                           := 10;  	            // "Останов"
+// ===============================================================================
+// список контуров регулирования
+// ===============================================================================
+FRegContur.NUM                               := 8;	            //	 число настоящих контуров регулирования
+FRegContur.NONE                              := 0;	            //	 регулирование по разомкнутому контуру
+                                                                    //---------- рабочие контура регулирования --------------------
+FRegContur.N_VD 	                           := 1;	            //	 регулирующий контур N КВД
+FRegContur.N_ST 	                           := 2;	            //	 регулирующий контур N СТ
+FRegContur.N_VD_MAX                          := 3;	            //	 верхний ограничительный контур N КВД
+FRegContur.N_ST_MAX                          := 4;	            //	 верхний ограничительный контур N СТ
+FRegContur.N_ST_MIN                          := 6;	            //	 нижний ограничительный контур N СТ
+FRegContur.T_MAX 	                           := 7;	            //	 верхний ограничительный контур Т продуктов сгорания
+FRegContur.N_VDnorm_MAX                      := 8;	            //	 верхний ограничительный контур N КВД приведённый
+FRegContur.N_VDnorm_MIN                      := 9;	            //	 нижний ограничительный контур N КВД приведённый
+                                                                    //------- "виртуальные" контура (только длЯ отображениЯ в HMI) -------------
+FRegContur.GT_RATE_UP                        := 11;	            //	 верхний ограничительный контур по максимальному расходу от NvdNorm
+FRegContur.GT_RATE_DN                        := 12;	            //	 нижний ограничительный контур по максимальному расходу от NvdNorm
+//------------------------------------------------------------------------------------------------------------
+if not init then
+FRS.R_reserve := true;
+// Дальше идут настройки, которые можно менять при работе САУ
+//Начало кода
+GPA_Tune_FR.KpropNvd := 0.1; // Коэф. пропорциональности оборотов ТВД;
+GPA_Tune_FR.KintegNvd := 0.1; // Коэф. интегральной сост. оборотов ТВД;
+GPA_Tune_FR.KdiffNvd := 0.0; // Коэф. дифференциальной сост. оборотов ТВД;
+GPA_Tune_FR.DZNvd := 10.0; // Зона нечувствительности оборотов ТВД, об./мин;
+GPA_Tune_FR.KpropNst := 1.0; // Коэф. пропорциональности оборотов СТ;
+GPA_Tune_FR.KintegNst := 0.3; // Коэф. интегральной сост. оборотов СТ;
+GPA_Tune_FR.KdiffNst := 1.0; // Коэф. дифференциальной сост. оборотов СТ;
+GPA_Tune_FR.DZNst := 10.0; // Зона нечувствительности оборотов СТ, об./мин;
+GPA_Tune_FR.KpropTnd := 1.0; // Коэф. пропорциональности Тза СТ;
+GPA_Tune_FR.KintegTnd := 1.0; // Коэф. интегральной сост. Тза СТ;
+GPA_Tune_FR.KdiffTnd := 0.0; // Коэф. дифференциальной сост. Тза СТ;
+GPA_Tune_FR.DZTnd := 5.0; // Зона нечувствительности оборотов Тза СТ, °С;
+GPA_Tune_FR.NvdNormMax := 15275.0; // Максимальные приведенные обороты ТВД;
+GPA_Tune_FR.NvdNormMaxP := 15600.0; // Предупредительная уставка по макс. привед. оборотам ТВД;
+GPA_Tune_FR.NvdNormMaxAO := 15800.0; // Аварийная уставка по макс. привед. оборотам ТВД;
+GPA_Tune_FR.NvdNormMin := 11600.0; // Обороты МГ (минимальные приведенные обороты ТВД);
+GPA_Tune_FR.NvdMinAO := 9000.0; // Аварийная уставка по минимальным привед. оборотам ТВД;
+GPA_Tune_FR.distortNvdMax := 150.0; // Максимальная разница отсчетов по каналам измерения оборотов ТВД;
+GPA_Tune_FR.dNvdMax := 6000.0; // Величина ускорения частоты вращения ТВД при анализе неисправности;
+GPA_Tune_FR.NvdStartTime := 1500.0; // Обороты начала контроля выбега ТВД;
+GPA_Tune_FR.NvdStopTime := 150.0; // Обороты окончания контроля выбега ТВД;
+GPA_Tune_FR.NstMax := 11000.0; // Максимальные обороты СТ;
+GPA_Tune_FR.NstMaxP := 11200.0; // Предупредительная уставка по максимальным оборотам СТ;
+GPA_Tune_FR.NstMaxAO := 11600.0; // Аварийная уставка по максимальным оборотам СТ;
+GPA_Tune_FR.NstMin := 7204.0; // Минимальные обороты СТ;
+GPA_Tune_FR.NstMinAO := 1700.0; // Аварийная уставка по минимальным оборотам СТ;
+GPA_Tune_FR.distortNstMax := 150.0; // Максимальная разница отсчетов по каналам измерения оборотов СТ;
+GPA_Tune_FR.dNstMax := 1600.0; // Величина ускорения частоты вращения СТ при анализе неисправности;
+GPA_Tune_FR.NstStartTime := 1000.0; // Обороты начала контроля выбега СТ;
+GPA_Tune_FR.NstStopTime := 150.0; // Обороты окончания контроля выбега СТ;
+GPA_Tune_FR.dTmaxP := 20.0; // Превышение над максимальной Т газа за турбиной для предупреждения;
+GPA_Tune_FR.dTmaxAO := 30.0; // Превышение над максимальной Т газа за турбиной для аварии;
+GPA_Tune_FR.TstartMax := 500.0; // Максимальная Т газа за турбиной на запуске;
+GPA_Tune_FR.TstartMaxP := 520.0; // Предупредительная уставка по максимальной Т газа за турбиной на запуске;
+GPA_Tune_FR.TstartMaxAO := 550.0; // Аварийная уставка по максимальной Т газа за турбиной на запуске;
+GPA_Tune_FR.dTstartMax := 50.0; // Ширина зоны торможения ДГ по температуре на запуске;
+GPA_Tune_FR.distortTmax := 60.0; // Максимальная разница значений по каналам Т газа за турбиной;
+GPA_Tune_FR.distortTbrk := 50.0; // Максимальное отклонение i-й термопары от средней Т газа за турбиной;
+GPA_Tune_FR.minT := -50.0; // Минимальная Т газа за турбиной (для контроля);
+GPA_Tune_FR.maxT := 1000.0; // Максимальная Т газа за турбиной (для контроля);
+GPA_Tune_FR.PtgNorm := 2.4; // Давление, для которого построена характеристика ДГ;
+GPA_Tune_FR.TtgNorm := 25.0; // Температура, для которой построена характеристика ДГ;
+GPA_Tune_FR.PtgMin := 1.9; // Минимальное давление топливного газа;
+GPA_Tune_FR.PtgMax := 2.5; // Максимальное давление топливного газа;
+GPA_Tune_FR.R_GtMax := 0.0; // Регулировка верхнего ограничения по расходу топливного газа;
+GPA_Tune_FR.R_GtMin := 0.0; // Регулировка нижнего ограничения по расходу топливного газа;
+GPA_Tune_FR.rateGt := 20.0; // Ограничение по скорости перекладки дозатора газа на пуске;
+GPA_Tune_FR.distortDG := 5.0; // Максимальное рассогласование между заданием и положением ДГ;
+GPA_Tune_FR.distortVNA := 5.0; // Максимальное рассогласование между заданием и положением ВНА;
+GPA_Tune_FR.R_GtFire := 0.0; // Регулировка расхода на розжиг;
+GPA_Tune_FR.fireDelay := 10.0; // Задержка до начала розжига;
+GPA_Tune_FR.fireShiftStart := 70.0; // Бросок температуры, по которому фиксируется розжиг в начале запуска;
+GPA_Tune_FR.timeHeat := 600.0; // Время прогрева на малом газу;
+GPA_Tune_FR.timeCooling := 600.0; // Время охлаждения на малом газу при НО;
+GPA_Tune_FR.Ksurge1 := 0.14; // Коэфициет изменения P за ОК для расчёта 1-го условия помпажа Д;
+GPA_Tune_FR.Ksurge2 := 0.1; // Коэфициет изменения P за ОК для расчёта 2-го условия помпажа Д;
+GPA_Tune_FR.rateNvdBtn := 20.0; // Номинальная скорость изменения задания на обороты ТВД;
+GPA_Tune_FR.rateNvdStart := 10.0; // Номинальная скорость изменения задания оборотов ТВД на пуске;
+GPA_Tune_FR.rateNvdNO := 15.0; // Номинальная скорость изменения задания оборотов ТВД на НО;
+GPA_Tune_FR.rateNstBtn := 15.0; // Номинальная скорость изменения задания оборотов СТ;
+GPA_Tune_FR.rateNstStart := 15.0; // Номинальная скорость изменения задания оборотов СТ на пуске;
+GPA_Tune_FR.rateNstNO := 20.0; // Номинальная скорость изменения задания оборотов СТ на НО;
+GPA_Tune_FR.LagDiff_Nvd := 5.0; // Степень сглаживания дифференциала регулятора оборотов ТВД;
+GPA_Tune_FR.LagDiff_Nst := 5.0; // Степень сглаживания дифференциала регулятора оборотов СТ;
+GPA_Tune_FR.LagDiff_Tst := 5.0; // Степень сглаживания дифференциала регулятора контура Т за СТ;
+//Конец кода
+end_if;
+]]></ST>
+            </Function>
+        </Folder>
+        <Folder Name="IO" Comment="" Data="" UUID="GQUY4VFN6BAUTEKZS4YOE4M5KY">
+            <Function UUID="FRQ7F67BQNBCDLLM53Q4UKPGR4" Name="AI_Processing" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="L27BSM7XEZH7PBAFCWXQPDPAHM" Name="in" Type="REAL" Usage="input" />
+                    <Variable UUID="3RRZ672T65H27KGUANWIHJUTAQ" Name="set" Type="T_AI_Settings" TypeUUID="XHUY6ZRHGRQEVOF35XEJI5L2SE" Usage="input" />
+                    <Variable UUID="6GENIMNWPJBGLDUSADU5POKSIU" Name="btn" Type="T_AI_FromHMI" TypeUUID="VZ3H6GEVT3CUTI65HAA5AALRAY" Usage="input" />
+                    <Variable UUID="2ISD2SFA6RHOVBLDUJA43YIYKA" Name="out" Type="T_AI_ToHMI" TypeUUID="J74RQIZG5I6EZDCM32A6SZRKIM" Usage="inout" />
+                    <Variable UUID="KNUNDWLBWVFKTOYD3CUNK54D2I" Name="my" Type="T_AI_Internal" TypeUUID="GZ6UU5D6R5EXXPFY4TZ3EOTECU" Usage="inout" />
+                    <Variable UUID="YU42DRFFJVKU5GGVOXFMENQXPY" Name="nOk" Comment="Канал не в порядке" Type="BOOL" Usage="inout" />
+                    <Variable UUID="Z3VWPXEY7ZHYHLOJY634T36OTI" Name="tmp" Type="INT" Usage="internal" />
+                    <Variable UUID="3JRCDCALYZAKDD252W6PF3GDLA" Name="qCycleCheckROC" Comment="Количество циклов контроля РОК" Type="INT" Usage="internal" />
+                    <Variable UUID="5M2NFBWVLJEB5GONNQSVU37O3M" Name="tau" Type="REAL" Usage="internal" />
+                    <Variable UUID="4FOVGDDSVNDJVMJ33BNQD4UHBQ" Name="criticalSettingErr" Type="BOOL" Usage="internal" />
+                    <Variable UUID="SIMSIEIFINHRJIC55L2DCXT3CM" Name="limSettingErr" Type="BOOL" Usage="internal" />
+                    <Variable UUID="BGOHZRGBKVHJFGQBERMGBC6VXU" Name="brkSettingErr" Type="BOOL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[//---------------------- Поиск ошибок задания настроек – несоответствие допустимым значениям (BOOL)-----------------------------------------
+criticalSettingErr := (set.min >= set.max or 
+					set.minADC = set.maxADC or
+					set.repairTime = 0 or set.recoveryTime < 0.0)  and not out.manual ;     //AKV
+limSettingErr := (set.loLim >= set.hiLim or set.loLim >= set.max or set.hiLim <= set.min)  and not out.manual ;    //AKV
+brkSettingErr := (set.hiBrk <= set.hiLim or set.loBrk >= set.loLim)  and not out.manual ;     //AKV
+out.settingErr := criticalSettingErr or limSettingErr or brkSettingErr;
+	out.fault_common := (out.settingErr or out.break or out.up_scale or out.down_scale or out.ROC)  and not out.manual ;  //AKV //обобщённая неисправность. Образуется по «ИЛИ» от break,up_scale,down_scale,ROC,settingErr (BOOL)
+	out.criticalFault := (criticalSettingErr or out.break or out.ROC)  and not out.manual ;   //AKV //Критическая ошибка, свидетельствующая о полной неисправности канала
+
+//---------------- таймер восстановления канала после неисправности или ремонта или ДУ ----------------------------------------------------------------
+if not (criticalSettingErr or out.repair or out.manual) and my.prevFault then
+	my.timerRecover := set.recoveryTime;
+elsif my.timerRecover > 0.0 then
+	my.timerRecover := my.timerRecover - tim.cycle;
+else
+	my.timerRecover := 0.0;
+end_if;
+my.prevFault := criticalSettingErr or out.repair or out.manual;
+if criticalSettingErr then return; end_if; //Если есть ошибки настроек - прекращаем обработку
+//---------------------------------------------------------------------------------------------------------------------------------------------
+//----------------- Пересчёт парамера из кодов АЦП в единицы измерения -----------------------------------------------------------------------
+out.measure := (in - set.minADC  + set.corrADC)/(set.maxADC - set.minADC)*(set.max - set.min)+set.min;//Пересчёт кода АЦП в инженерные единицы (REAL)
+//---------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------- Определение обрыва и зашкалов -----------------------------------------------------------------------
+(*if not brkSettingErr and not out.manual  then     //AKV
+	out.break      := out.break      and not btn.BTNworkOn or out.measure > set.hiBrk or out.measure < set.loBrk;	//обрыв канала (BOOL)
+	elsif out.manual then
+		out.break      := false;
+
+end_if;
+if not limSettingErr and not out.manual then //AKV
+	out.up_scale   := out.up_scale   and not btn.BTNworkOn or out.measure > set.hiLim;							//выход за верхний зашкал (BOOL)
+	out.down_scale := out.down_scale and not btn.BTNworkOn or out.measure < set.loLim;							//выход за нижний зашкал (BOOL)
+		elsif out.manual then
+			out.up_scale   :=false;
+			out.down_scale :=false;
+
+end_if;
+*)
+//steam
+if out.manual or ImitOn then  out.break := false;   	
+  elsif not brkSettingErr then out.break := out.break  and not btn.BTNworkOn or out.measure > set.hiBrk or out.measure < set.loBrk;	//обрыв канала (BOOL)
+end_if;
+
+if out.manual or ImitOn then 
+	out.up_scale   :=false;
+	out.down_scale :=false;
+  elsif not limSettingErr then
+	out.up_scale   := out.up_scale   and not btn.BTNworkOn or out.measure > set.hiLim;							//выход за верхний зашкал (BOOL)
+	out.down_scale := out.down_scale and not btn.BTNworkOn or out.measure < set.loLim;							//выход за нижний зашкал (BOOL)			
+end_if;
+
+//----------- Расчёт превышения максимальной скорости изменения парамера -----------------------------------------------------------------------
+if set.maxROC > 0.0 and tim.cycle > 0.0 then //Работает только если макс.скорость задана и есть корректное время цикла
+	qCycleCheckROC := 3; //Количество циклов подряд, когда скорость изменения параметра превышает заданный предел
+	if (out.measure - my.prevMeasure)/tim.cycle > set.maxROC  then //если новый замер больше старого на заданную величину приведённую к времени цикла
+		if    my.qCycleROC >= 0 and my.qCycleROC < qCycleCheckROC then my.qCycleROC := my.qCycleROC + 1; //и предыдущий тоже был больше или никаким - увеличиваем счётчик на 1
+		elsif my.qCycleROC < 0 then my.qCycleROC := 1;														//если предыдущая проверка показала падение скорости - устанавливаем счётчик на 1
+		end_if;
+	elsif (my.prevMeasure - out.measure)/tim.cycle > set.maxROC then // то же делаем для отрицательной разницы
+		if    my.qCycleROC <= 0 and my.qCycleROC > -qCycleCheckROC then my.qCycleROC := my.qCycleROC - 1;
+		elsif my.qCycleROC < 0 then my.qCycleROC := -1;
+		end_if;
+	else
+		my.qCycleROC := 0; 		//если скорость в норме - обнуляем счётчик превышений подряд
+								//и, если таймер восстановления не запущен, запоминаем достоверное значение
+		//------- Обработка вывода канала в работу ----------------------------------------------------------------------------------------------------------
+		if my.timerRecover <= 0.0 then my.validMeasure := out.measure;
+		else my.validMeasure := my.validMeasure + (out.measure - my.validMeasure)*(set.recoveryTime - my.timerRecover + 1.0)/(set.recoveryTime + 1.0);
+		end_if;
+	end_if;
+else
+	//------- Обработка вывода канала в работу ----------------------------------------------------------------------------------------------------------
+	if my.timerRecover <= 0.0 then my.validMeasure := out.measure;
+	else my.validMeasure := my.validMeasure + (out.measure - my.validMeasure)*(set.recoveryTime - my.timerRecover + 1.0)/(set.recoveryTime + 1.0);
+	end_if;
+end_if;
+//Если количество циклов с превышением скорости больше заданного количества, неисправность запоминаем до нажатия кнопки "в работу"
+//= out.ROC := out.ROC and not btn.BTNworkOn or (my.qCycleROC >= qCycleCheckROC) or (my.qCycleROC <= -qCycleCheckROC);
+out.ROC := (out.ROC and not btn.BTNworkOn or (my.qCycleROC >= qCycleCheckROC) or (my.qCycleROC <= -qCycleCheckROC)) and set.maxROC > 0.0;//=
+my.prevMeasure := out.measure; //запоминаем предыдущее измерение.
+//------------------------------------------------------------------------------------------------------------------------------------------------
+out.repair := (btn.BTNrepairOn or out.repair) and not(btn.BTNworkOn or btn.BTNmanualOn or out.CurrentTimeOfRepair > set.repairTime);//канал в ремонте (BOOL)
+out.manual := (btn.BTNmanualOn or out.manual) and not(btn.BTNworkOn or btn.BTNrepairOn);//канал в дист.упр. (BOOL)
+//------------------- Обработка ремонта ----------------------------------------------------------------------------------------------------------
+if out.repair and not btn.BTNrepairProlong then
+	my.timerRepair := my.timerRepair + tim.cycle;//оставшееся время ремонта (INT)
+else
+	my.timerRepair := 0.0;
+end_if;
+tmp := set.repairTime - REAL_TO_INT(my.timerRepair);
+if tmp >= 0 then out.CurrentTimeOfRepair := tmp;
+else out.CurrentTimeOfRepair := 0;
+end_if;
+out.repair_time_less_10_percent := out.CurrentTimeOfRepair < set.repairTime/10;//до конца ремонта осталось меньше 10% от заданного времени (BOOL)
+if out.repair then return; end_if; //если выставлен ремонт - не обновляем значение параметра для алгоритма
+
+//------------------- Обработка ДУ ----------------------------------------------------------------------------------------------------------
+if out.manual then my.validMeasure := btn.manualTarget;//значение для САУ. Рассчитывается из  measure, Manual_Target с учётом неисправностей и фильтрации (REAL)	
+else
+	if ImitOn then my.validMeasure := out.imitTarget; end_if; //steam
+	btn.manualTarget := my.validMeasure;
+end_if;
+
+//------------------- Расчёт PV ----------------------------------------------------------------------------------------------------------
+//значение для САУ. Рассчитывается из  measure, Manual_Target с учётом неисправностей и фильтрации (REAL)
+if tim.cycle > 0.0 then
+	tau := 1.0 * set.tau/tim.cycle;
+	if tau > 1.0 then
+		out.PV := out.PV + (my.validMeasure - out.PV)/tau;
+	else
+		out.PV := my.validMeasure;
+	end_if;
+else
+	out.PV := my.validMeasure;
+end_if;
+//--------------------- Канал не в порядке (для ППУ) ------------------ Steam
+nOk := nOk or out.manual or out.repair or out.break ;
+]]></ST>
+            </Function>
+            <Function UUID="CF4QENKSGJC3PJ2UNFRMVS5ILY" Name="AI_init" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="3PUM5EGSZZGW5B46GT7GJGJYHY" Name="setStruct" Type="T_AI_Settings" TypeUUID="XHUY6ZRHGRQEVOF35XEJI5L2SE" Usage="output" />
+                    <Variable UUID="A4X47N4MTNEGBMHG5JCV54OYD4" Name="min" Type="REAL" Usage="input" />
+                    <Variable UUID="J3PMJZQQPFCKTLXZKHCSBVW2FY" Name="max" Type="REAL" Usage="input" />
+                    <Variable UUID="PPFZBCEPQNDGDPXS4GFZ5DG2R4" Name="minADC" Type="REAL" Usage="input" />
+                    <Variable UUID="YGKONKKT2ZACFPHVF5HQIODJOQ" Name="maxADC" Type="REAL" Usage="input" />
+                    <Variable UUID="SNMC52OSVNCEJC2WKNQ55IXRDU" Name="loLim" Type="REAL" Usage="input" />
+                    <Variable UUID="C5FFNJBSORADZKDONAJYIOYQMM" Name="hiLim" Type="REAL" Usage="input" />
+                    <Variable UUID="BLJ7QPD3B5GIFOK5INHVLE4N4M" Name="loBrk" Type="REAL" Usage="input" />
+                    <Variable UUID="BRAZ2SPNOBCCNMKASNN375STCQ" Name="hiBrk" Type="REAL" Usage="input" />
+                    <Variable UUID="A5ZCH4MWLNBG7GEVV73JJRNRZ4" Name="maxROC" Type="REAL" Usage="input" />
+                    <Variable UUID="322VB4Q5PNEOBO55S4FRZSF2IQ" Name="recoveryTime" Type="REAL" Usage="input" />
+                    <Variable UUID="UCAGZSJ77NAYTFYRM4N5QV62A4" Name="repairTime" Type="INT" Usage="input" />
+                    <Variable UUID="3WUETIGW3VCGPPNXPQHEFM4NP4" Name="tau" Type="REAL" Usage="input" />
+                    <Variable UUID="O2PSTUZUB5EIRAZBONFYBOPYXU" Name="id" Type="INT" Usage="input" />
+                </Variables>
+                <ST><![CDATA[setStruct.min:= min;//минимум шкалы канала, ед.изм. Не может быть >= max
+setStruct.max:= max;//максимум шкалы канала, ед.изм. Не может быть <= min
+setStruct.minADC:= minADC;//значение АЦП, соответствующее минимуму шкалы канала, б.р.
+setStruct.maxADC:= maxADC;//значение АЦП, соотв. макс. шкалы, б.р. Не может быть равно minADC
+setStruct.loLim:= loLim;//уровень зашкала вниз, ед.изм. Не может быть >= hiLim и < min
+setStruct.hiLim:= hiLim;//уровень зашкала вверх, ед.изм. Не может быть <= loLim и > max
+setStruct.loBrk:= loBrk;//уровень зашкала вниз, ед.изм. Не может быть >= loLim
+setStruct.hiBrk:= hiBrk;//уровень обрыва вверх, ед.изм. Не может быть <= hiLim
+setStruct.maxROC:= maxROC;//макс. допустимая скорость роста, ед.изм./сек. Если «0» - скорость роста не анализируется
+setStruct.recoveryTime:= recoveryTime;//время восстановления после неисправности, сек. Не может быть меньше "0"
+setStruct.repairTime:= repairTime;//максимальное время в ремонте, сек. Не может быть меньше или равно «0»
+setStruct.tau:= tau;//тау фильтра, сек. Если «0» - фильтрация отсутствует
+setStruct.id:= id;//номер по порядку	
+setStruct.corrADC:= 0.0;//корректировка минимумa АЦП
+]]></ST>
+            </Function>
+            <Function UUID="ZS4VBCFFVNFNVP3RNQZWDLLMUU" Name="AO_Processing" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="TCGAROKTGNXENPSIYCXQZJSVBQ" Name="in" Type="REAL" Usage="input" />
+                    <Variable UUID="CFXXFVD5OJA45LRO7CLY355CNE" Name="set" Type="T_AO_Settings" TypeUUID="HS6IKQOLQ5HKPGR3ZZN56FHWGM" Usage="input" />
+                    <Variable UUID="5R5WL3HGLRGMXN3ZVPA3FETS6Q" Name="hmi" Type="T_AO_FromHMI" TypeUUID="7GRLWKHH6VJU5KGLKDIOI5QPQI" Usage="input" />
+                    <Variable UUID="EDA4FRWG6FGWJPKIBGBT6SNR2Q" Name="plc" Type="T_AO_ToHMI" TypeUUID="KOTCLUQLO7JERF5MDM2GMF62MI" Usage="inout" />
+                    <Variable UUID="MHW6NFNKNUGEFJYZKCPDKC5BAU" Name="out" Type="REAL" Usage="output" />
+                </Variables>
+                <ST><![CDATA[plc.forsEnable := (plc.forsEnable or hmi.BTNforceOn) and plc.forsPermit and not hmi.BTNworkOn;
+if plc.forsEnable then
+	out := (hmi.manualTarget - set.min)/(set.max - set.min)*(set.maxDAC - set.minDAC)+set.minDAC;	
+else
+	out := (in - set.min)/(set.max - set.min)*(set.maxDAC - set.minDAC)+set.minDAC;
+	hmi.manualTarget := out;
+end_if;]]></ST>
+            </Function>
+            <Function UUID="VXLIP2ZGBZEKZI6NJ77FGFWIIY" Name="AO_init" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="3PUM5EGSZZGW5B46GT7GJGJYHY" Name="setStruct" Type="T_AO_Settings" TypeUUID="HS6IKQOLQ5HKPGR3ZZN56FHWGM" Usage="output" />
+                    <Variable UUID="A4X47N4MTNEGBMHG5JCV54OYD4" Name="min" Type="REAL" Usage="input" />
+                    <Variable UUID="J3PMJZQQPFCKTLXZKHCSBVW2FY" Name="max" Type="REAL" Usage="input" />
+                    <Variable UUID="SNMC52OSVNCEJC2WKNQ55IXRDU" Name="minDAC" Type="REAL" Usage="input" />
+                    <Variable UUID="C5FFNJBSORADZKDONAJYIOYQMM" Name="maxDAC" Type="REAL" Usage="input" />
+                    <Variable UUID="UCAGZSJ77NAYTFYRM4N5QV62A4" Name="id" Type="INT" Usage="input" />
+                </Variables>
+                <ST><![CDATA[setStruct.min:= min;//минимум шкалы канала, ед.изм. Не может быть >= max
+setStruct.max:= max;//максимум шкалы канала, ед.изм. Не может быть <= min
+setStruct.minDAC:= minDAC;//значение ЦАП, соответствующее минимуму шкалы канала, б.р.
+setStruct.maxDAC:= maxDAC;//значение ЦАП, соотв. макс. шкалы, б.р. Не может быть равно minADC
+setStruct.id:= id;//номер по порядку	]]></ST>
+            </Function>
+            <Function UUID="6UY5XQ5YILQYD6DOAWOYQKOB2E" Name="Call_AI" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="TGLRFATQ24XUPFHW373KXU5CZ4" Name="repTime" Type="INT" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[repTime := 3600;
+if not init then
+//------------------------------- аргументы функции инициализации --------------------------------
+// 1                                минимум шкалы канала, ед.изм. Не может быть >= max
+// 2                                |   максимум шкалы канала, ед.изм. Не может быть <= min
+// 3                                |   |   значение АЦП, соответствующее минимуму шкалы канала, б.р.
+// 4                                |   |   |   значение АЦП, соотв. макс. шкалы, б.р. Не может быть равно minADC
+// 5                                |   |   |   |     уровень зашкала вниз, ед.изм. Не может быть >= hiLim и < min
+// 6                                |   |   |   |     |    уровень зашкала вверх, ед.изм. Не может быть <= loLim и > max
+// 7                                |   |   |   |     |    |   уровень обрыва вниз, ед.изм. Не может быть >= loLim
+// 8                                |   |   |   |     |    |    |   уровень обрыва вверх, ед.изм. Не может быть <= hiLim
+// 9                                |   |   |   |     |    |    |   |  макс. допустимая скорость роста, ед.изм./сек. Если «0» - скорость роста не анализируется
+//10                                |   |   |   |     |    |    |   |   |   время восстановления после неисправности, сек. Не может быть меньше "0"
+//11                                |   |   |   |     |    |    |   |   |   |   максимальное время в ремонте, сек. Не может быть меньше или равно «0»
+//12                                |   |   |   |     |    |    |   |   |   |   |    тау фильтра, сек. Если «0» - фильтрация отсутствует
+//13                                |   |   |   |     |    |    |   |   |   |   |    |  номер по порядку	
+//AI_init(UPG_AI_Settings.Pg_in_UPG,0.0,6.0,2.0,10.0,-0.5,6.5,-1.0,7.0,0.0,1.0,3600,1.0,0);
+//-------------------------------------------------------------------------------------------
+//Начало сгенерированного кода AI_init
+//Температура 1 газа за турбиной
+AI_init(FR_AI_Settings.T1_outGG, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 1.0, 1);
+//Температура 2 газа за турбиной
+AI_init(FR_AI_Settings.T2_outGG, -45.0, 820.0, -45.0, 820.0, -46.5, 822.5, -55.0, 840.0, 0.0, 5.0, repTime, 1.0, 2);
+//Положение ВНА
+AI_init(FR_AI_Settings.Pos_VNA  , -40.0, 5.0, 2.0, 7.37, -41.35, 6.35, -42.70, 7.70, 0.0, 5.0, repTime, 1.0, 3);
+//Положение 1 дозатора топливного газа
+AI_init(FR_AI_Settings.Pos1_TRK , 0.0, 100.0, 2.0, 10.0, -3.0, 103.0, -6.0, 106.0, 0.0, 5.0, repTime, 1.0, 4);
+//Статическое давление воздуха за компрессором
+AI_init(FR_AI_Settings.Pv_outTK , 0.0, 2.50, 2.0, 10.0, -0.08, 2.58, -0.15, 2.65, 0.0, 5.0, repTime, 1.0, 5);
+//Давление топливного газа перед дозатором
+//AI_init(FR_AI_Settings.Ptg_inTRK, 0.0, 4.0, 2.0, 10.0, -0.12, 4.12, -0.24, 4.24, 0.0, 5.0, repTime, 1.0, 6);
+//Частота 1 вращения ротора ГТД (обмотка 1 датчика 1)
+//AI_init(FR_AI_Settings.Nvd1     ,0.0, 16000.0, 24.525, 3924.0, 110.0, 15990.0, 105.0, 15995.0, 0.0, 2.0, repTime, 0.0, 7);
+AI_init(FR_AI_Settings.Nvd1     ,0.0, 16000.0, 0.0, 3924.0, 0.0, 15990.0, -1.0, 15995.0, 200.0, 2.0, repTime, 0.1, 7);
+//Частота 2 вращения ротора ГТД (обмотка 1 датчика 2)
+AI_init(FR_AI_Settings.Nvd2     , 0.0, 16000.0, 0.0, 3924.0, 0.0, 15990.0, -1.0, 15995.0, 200.0, 2.0, repTime, 0.1, 8);
+//Частота 1 вращения ротора СТ (обмотка 1 датчика 1)
+AI_init(FR_AI_Settings.Nst1     , 0.0, 12000.0, 0.0, 8000.0, 0.0, 11990.0, -1.0, 11995.0, 200.0, 2.0, repTime, 0.1, 9);
+//Частота 2 вращения ротора СТ (обмотка 1 датчика 2)
+AI_init(FR_AI_Settings.Nst2     , 0.0, 12000.0, 0.0, 8000.0, 0.0, 11990.0, -1.0, 11995.0, 200.0, 2.0, repTime, 0.1, 10);
+//Конец сгенерированного кода
+end_if;
+
+//FRS.AI_Fault := false; // Признак любой ошибки аналогового входа.
+//Начало сгенерированного кода AI_Processing
+//Температура 1 газа за турбиной
+AI_Processing(FR_AI_DRV.T1_outGG,FR_AI_Settings.T1_outGG,FR_AI_FromHMI.T1_outGG,FR_AI_ToHMI.T1_outGG,FR_AI_Internal.T1_outGG, FRS.AI_Fault);
+//Температура 2 газа за турбиной
+AI_Processing(FR_AI_DRV.T2_outGG,FR_AI_Settings.T2_outGG,FR_AI_FromHMI.T2_outGG,FR_AI_ToHMI.T2_outGG,FR_AI_Internal.T2_outGG, FRS.AI_Fault);
+//Положение ВНА
+AI_Processing(FR_AI_DRV.Pos_VNA,FR_AI_Settings.Pos_VNA,FR_AI_FromHMI.Pos_VNA,FR_AI_ToHMI.Pos_VNA,FR_AI_Internal.Pos_VNA, FRS.AI_Fault);
+//Положение 1 дозатора топливного газа
+AI_Processing(FR_AI_DRV.Pos1_TRK,FR_AI_Settings.Pos1_TRK,FR_AI_FromHMI.Pos1_TRK,FR_AI_ToHMI.Pos1_TRK,FR_AI_Internal.Pos1_TRK, FRS.AI_Fault);
+//Статическое давление воздуха за компрессором
+AI_Processing(FR_AI_DRV.Pv_outTK,FR_AI_Settings.Pv_outTK,FR_AI_FromHMI.Pv_outTK,FR_AI_ToHMI.Pv_outTK,FR_AI_Internal.Pv_outTK, FRS.AI_Fault);
+//Давление топливного газа перед дозатором
+//AI_Processing(FR_AI_DRV.Ptg_inTRK,FR_AI_Settings.Ptg_inTRK,FR_AI_FromHMI.Ptg_inTRK,FR_AI_ToHMI.Ptg_inTRK,FR_AI_Internal.Ptg_inTRK, FRS.AI_Fault);
+//Частота 1 вращения ротора ГТД (обмотка 1 датчика 1)
+AI_Processing(FR_AI_DRV.Nvd1,FR_AI_Settings.Nvd1,FR_AI_FromHMI.Nvd1,FR_AI_ToHMI.Nvd1,FR_AI_Internal.Nvd1, FRS.AI_Fault);
+//Частота 2 вращения ротора ГТД (обмотка 1 датчика 2)
+AI_Processing(FR_AI_DRV.Nvd2,FR_AI_Settings.Nvd2,FR_AI_FromHMI.Nvd2,FR_AI_ToHMI.Nvd2,FR_AI_Internal.Nvd2, FRS.AI_Fault);
+//Частота 1 вращения ротора СТ (обмотка 1 датчика 1)
+AI_Processing(FR_AI_DRV.Nst1,FR_AI_Settings.Nst1,FR_AI_FromHMI.Nst1,FR_AI_ToHMI.Nst1,FR_AI_Internal.Nst1, FRS.AI_Fault);
+//Частота 2 вращения ротора СТ (обмотка 1 датчика 2)
+AI_Processing(FR_AI_DRV.Nst2,FR_AI_Settings.Nst2,FR_AI_FromHMI.Nst2,FR_AI_ToHMI.Nst2,FR_AI_Internal.Nst2, FRS.AI_Fault);
+//Конец сгенерированного кода
+]]></ST>
+            </Function>
+            <Function UUID="CUM6QJ4D2YDEFD6QYK5UGHMMUQ" Name="Call_AO" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[if not init then
+//------------------------------- аргументы функции инициализации --------------------------------
+//                                 минимум шкалы канала, ед.изм. Не может быть >= max
+//                                 |   максимум шкалы канала, ед.изм. Не может быть <= min
+//                                 |   |   значение АЦП, соответствующее минимуму шкалы канала, б.р.
+//                                 |   |   |   значение АЦП, соотв. макс. шкалы, б.р. Не может быть равно minADC
+//                                 |   |   |   |    
+//                                 |   |   |   |   номер по порядку	
+//AO_init(UPG_AO_Settings.Pg_in_UPG,0.0,6.0,2.0,10.0,0);
+//-------------------------------------------------------------------------------------------
+//Управление ВНА
+AO_init(GPA_AO_Settings.Set_VNA, -40.0, 5.0, 0.0, 10.0, 0);
+//Управление дозатором газа ДУС
+AO_init(GPA_AO_Settings.Set_TRK, 0.0, 100.0, 0.0, 10.0, 2);
+end_if;
+
+//Управление ВНА
+AO_Processing(GPA_AO.Set_VNA,GPA_AO_Settings.Set_VNA,GPA_AO_FromHMI.Set_VNA,GPA_AO_ToHMI.Set_VNA,GPA_AO_DRV.Set_VNA);
+//Управление дозатором газа ДУС
+AO_Processing(GPA_AO.Set_TRK,GPA_AO_Settings.Set_TRK,GPA_AO_FromHMI.Set_TRK,GPA_AO_ToHMI.Set_TRK,GPA_AO_DRV.Set_TRK);
+
+//----------------------- Включение симуляции сигналов AO 
+GPA_AO_ToHMI.Set_VNA.forsPermit := FRI.Prm_DU; // Управление ВНА;
+GPA_AO_ToHMI.Set_TRK.forsPermit := FRI.Prm_DU; // Управление дозатором газа ДУС;]]></ST>
+            </Function>
+        </Folder>
+        <Folder Name="Link" Comment="Функции формирования сигналов для других приложений" Data="" UUID="6ZH4UKSVFQLEDDNYTF6T6QPADU">
+            <Function UUID="GZ7S4RB2Q54U7AGIZHCUQZGVMM" Name="FC_SetFRS" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[// -------------  формирование выходов регулЯтора ---------------------------------------------
+// ------------- формирование сигнализации режимов работы регулЯтора -------------------------
+FRS.R_start   := FRegData.FRegMode = FRegMode.fire OR FRegData.FRegMode = FRegMode.rate OR FRegData.FRegMode = FRegMode.rateNvd OR 
+				 FRegData.FRegMode = FRegMode.rateNvd OR FRegData.FRegMode = FRegMode.heatMG OR FRegData.FRegMode = FRegMode.rateNst; 	// Процесс запуска ГТД от момента подачи команды на росжиг до окончания прогрева на МГ
+FRS.R_work    := FRegData.FRegMode = FRegMode.work; 											// Нормальная работа регулятора - удержание оборотова СТ или ВД на заданном уровне
+FRS.R_stop    := FRegData.FRegMode = FRegMode.stop; 											// Останов ГТД закрытием ДГ. Также обнуляет все интегралы и сбрасывает флаги в исходное состояние
+//FRS.R_NO      := FRegData.FRegMode = FRegMode.godwMG OR FRegData.FRegMode = FRegMode.coolingMG;	// Снижение режима до МГ (охлаждение), выстой на нём и переход в режим R_stop
+
+//FRS.R_reserve := not(FRS.R_start or FRS.R_work or FRS.R_stop or FRS.R_NO);						// Если никакого другого режима нет, значит - резерв
+FRS.R_reserve := FRegData.FRegMode = FRegMode.reserve  or FRegData.FRegMode = 0;	// -steam
+
+// ------------- формирование сигнализации подрежимов работы регулЯтора -------------------------
+FRS.Rp_fire := FRegData.FRegMode = FRegMode.fire; 			// розжиг
+FRS.Rp_rate := FRegData.FRegMode = FRegMode.rate; 			// разгон по графику "Расход от времени" с соблюдением ограничения по температуре
+//FRS.Rp_rateNvd  := FRegData.FRegMode = FRegMode.rateNvd;  		// замыкание обратной связхи и разгон по ВД до МГ
+FRS.Rp_heat     := FRegData.FRegMode = FRegMode.heatMG;			// выстой на МГ
+//FRS.Rp_rateNst := FRegData.FRegMode = FRegMode.rateNst;	// -steam выход на ХХ
+FRS.Rp_regNvd := FRegData.isFeedback AND NOT FRegData.isRegNst; // удержание оборотов ВД
+FRS.Rp_regNst := FRegData.isFeedback AND FRegData.isRegNst; 	// удержание оборотов СТ
+FRS.Rp_DG_DU := FRI.DG_DU AND NOT FRI.stop; 					// переключение ДГ в ДУ по команде из алгоритма 
+
+// сигнализациЯ "Малый газ" (мин. обороты ТВД)       
+//FRS.Rp_MG := (FRS.R_start OR FRS.R_work OR FRS.R_NO) AND  	
+FRS.Rp_MG := (FRS.R_start OR FRS.R_work OR FRS.Rp_GoMG or FRS.Rp_OxlD) AND  				
+             ((ABS(FR_evPar.NvdNorm - GPA_Tune_FR.NvdNormMin) <= 2.0 * GPA_Tune_FR.DZNvd) OR FRS.Rp_MG and not
+             (ABS(FR_evPar.Nvd.out - GPA_Tune_FR.NvdNormMin) >= 8.0 * GPA_Tune_FR.DZNvd));
+//Сигналихация "Холостой ход двигателя"  
+FRS.Rp_HH := (FRS.R_start or FRS.R_work) and   				
+             ((ABS(FR_evPar.Nst.out - GPA_Tune_FR.NstMin) <= 2.0 *GPA_Tune_FR.DZNst) or FRS.Rp_HH and not
+             (ABS(FR_evPar.Nst.out - GPA_Tune_FR.NstMin) >= 8.0 *GPA_Tune_FR.DZNst)); 
+         
+FRS.Rp_hiLimitNvdNorm := FRegData.contur = FRegContur.N_VDnorm_MAX;				// сигнализациЯ верхнего ограничениЯ по N КНД
+FRS.Rp_hiLimitNvd := FRegData.contur = FRegContur.N_VD_MAX;				// сигнализациЯ верхнего ограничениЯ по N КВД
+FRS.Rp_hiLimitNst := FRegData.contur = FRegContur.N_ST_MAX;				// сигнализациЯ верхнего ограничениЯ по N СТ
+FRS.Rp_hiLimitT   := FRegData.contur = FRegContur.T_MAX; 					// сигнализациЯ верхнего ограничениЯ по Т газов за ТВД
+FRS.Rp_hiLimited  := FRS.Rp_hiLimitNvdNorm OR FRS.Rp_hiLimitNvd OR FRS.Rp_hiLimitNst OR // обобщенный сигнал "Двигатель на верхнем ограничении"
+					 FRS.Rp_hiLimitT OR FRegData.contur = FRegContur.GT_RATE_UP; //OR FRS.Rp_hiLimitPok
+FRS.Rp_loLimitNvdNorm := FRegData.contur = FRegContur.N_VDnorm_MIN;			// сигнализациЯ верхнего ограничениЯ по N КВД
+FRS.Rp_loLimitNst := FRegData.contur = FRegContur.N_ST_MIN;				// сигнализациЯ верхнего ограничениЯ по N СТ
+FRS.Rp_loLimited  := FRS.Rp_loLimitNvdNorm OR FRS.Rp_loLimitNst OR FRegData.contur = FRegContur.GT_RATE_DN;// обобщенный сигнал "Двигатель на нижнем ограничении"
+
+FRS.FRegMode := FRegData.FRegMode; 	// безопасная копия состояния регулятора для использования в логике
+FRS.contur := FRegData.contur; 		// то же
+FRS.Rp_GoMG := FRegData.FRegMode = FRegMode.godwMG; //Снижение до МГ
+FRS.Rp_OxlD := FRegData.FRegMode = FRegMode.coolingMG; // выстой на МГ при охлаждении
+//FR_evPar.MinNst :=  GPA_Tune_FR.NstMin; // Передача настройки мин скорости СТ в логику, steam
+
+// ----------- формирование сигнализации "есть горение" 
+//IF(FRS.R_start OR FRS.R_work OR FRS.R_NO) THEN 
+IF(FRS.R_start OR FRS.R_work OR FRS.Rp_GoMG or FRS.Rp_OxlD) THEN 																// актуально только на режимах пуска, работы и НО
+    FRS.isFlame := (FRS.Rp_fire OR FRS.Rp_rate) AND ((FR_evPar.Tg_outTND.out - FRegData.TonLighting) > GPA_Tune_FR.fireShiftStart) OR	// устанавливается только на подрежиме "Росжиг" или
+//                   (FRS.R_work OR FRS.R_NO OR FRS.Rp_heat) AND ((FR_evPar.Nvd.out > 10000.0) OR (FR_evPar.dNvd*10.0 > -400.0) AND (FR_evPar.Tg_outTND.out > FR_evPar.TggLim * 0.3));												// всегда, когда Т за ТНД выше уставки
+ 					 (FRS.R_work OR FRS.Rp_GoMG or FRS.Rp_OxlD OR FRS.Rp_heat) AND ((FR_evPar.Nvd.out > 10000.0) OR 
+					 (FR_evPar.dNvd*10.0 > -400.0) AND (FR_evPar.Tg_outTND.out > FR_evPar.TggLim * 0.3));
+ELSE													// если любой режим, в котором топливо перекрыто -
+    FRegData.TonLighting := FR_evPar.Tg_outTND.out;			// запоминаем температуру за ТНД для определения броска от росжига 
+    FRS.isFlame := false;									// и держим флаг факела в 0
+END_IF;
+
+//-steam
+//FRS.Nst := FR_evPar.Nst.out; FRS.Nst_fault := FR_evPar.Nst.outBrk; //передача оборотов ст в логику
+FRS.Nst.value := FR_evPar.Nst.out; FRS.Nst.fault := FR_evPar.Nst.outBrk; //передача оборотов ст в логику
+//FRS.Nvd := FR_evPar.Nvd.out; FRS.Nvd_fault := FR_evPar.Nvd.outBrk; //передача оборотов вд в логику
+FRS.Nvd.value := FR_evPar.Nvd.out; FRS.Nvd.fault := FR_evPar.Nvd.outBrk; //передача оборотов вд в логику
+//FRS.Tgg := FR_evPar.Tg_outTND.out; FRS.Tgg_fault := FR_evPar.Tg_outTND.outBrk; //передача температуры за твд в логику 
+FRS.Tgg.value := FR_evPar.Tg_outTND.out; FRS.Tgg.fault := FR_evPar.Tg_outTND.outBrk; //передача температуры за твд в логику 
+//FRS.Pv_outTK := FR_evPar.Pv_outKVD.out; FRS.Pv_outTK_fault := FR_evPar.Pv_outKVD.outBrk; //передача давления за ОК в логику 
+FRS.Pv_outTK.value := FR_evPar.Pv_outKVD.out; FRS.Pv_outTK.fault := FR_evPar.Pv_outKVD.outBrk; //передача давления за ОК в логику 
+FRS.NvdNorm := FR_evPar.NvdNorm; //передача приведенных оборотов вд в логику
+//время прогрева/ охлаждения на МГ
+if FRS.Rp_heat or FRS.Rp_OxlD then FRS.timeWarm := FRegData.ti;
+	else FRS.timeWarm :=  0.0;
+end_if;
+
+//FRS.Rp_hiLimitPok :=
+//передача настроек выбегов в алг. --Steam 
+FRS.NvdStart_RunOut:= GPA_Tune_FR.NvdStartTime;
+FRS.NvdEnd_RunOut	 := GPA_Tune_FR.NvdStopTime;
+FRS.NstStart_RunOut:= GPA_Tune_FR.NstStartTime;
+FRS.NstEnd_RunOut  := GPA_Tune_FR.NstStopTime;]]></ST>
+            </Function>
+        </Folder>
+        <Folder Name="Model" Comment="" Data="" UUID="7OTFLZC4DYSEJLNMC7RTPXSYXY">
+            <FunctionBlock UUID="MC5NZK4LTAJUBHGWC7GEWVVRN4" Name="FB_Model4RM">
+                <Variables>
+                    <Variable UUID="QTXBMMWVMUOEXMCVXYKKF6DBJU" Name="ToutTND" Comment="Переменная для сглаживания Т за ТНД" Type="REAL" Usage="internal" />
+                    <Variable UUID="6LE5EYRNCWRUHICXBFHHKSRXLQ" Name="Nvd" Comment="Переменная для сглаживания Nвд" Type="REAL" Usage="internal" />
+                    <Variable UUID="IHEECY5NBZJETMCXKJ6KOT4SDM" Name="Nst" Comment="Переменная для сглаживания Nст" Type="REAL" Usage="internal" />
+                    <Variable UUID="HAGHQOGXBADUNEYCBEFF7TSTVE" Name="flashWas" Comment="зажигание было" Type="BOOL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[(*
+FR_AI_ToHMI.Pv_outTK.fault_common  :=  false; FR_AI_ToHMI.Pv_outTK.break  	:=  false;
+//FR_AI_ToHMI.Ptg_inTRK.fault_common :=  false; FR_AI_ToHMI.Ptg_inTRK.break 	:=  false;
+FR_AI_ToHMI.T1_outGG.fault_common  :=  false; FR_AI_ToHMI.T1_outGG.break  	:=  false;
+FR_AI_ToHMI.T2_outGG.fault_common  :=  false; FR_AI_ToHMI.T2_outGG.break  	:=  false;
+FR_AI_ToHMI.Nvd1.fault_common		  :=  false; FR_AI_ToHMI.Nvd1.break			:=  false;
+FR_AI_ToHMI.Nvd2.fault_common		  :=  false; FR_AI_ToHMI.Nvd2.break			:=  false;
+FR_AI_ToHMI.Nst1.fault_common		  :=  false; FR_AI_ToHMI.Nst1.break			:=  false;
+FR_AI_ToHMI.Nst2.fault_common		  :=  false; FR_AI_ToHMI.Nst2.break			:=  false;
+FR_AI_ToHMI.Pos1_TRK.fault_common  :=  false; FR_AI_ToHMI.Pos1_TRK.break  	:=  false;
+FR_AI_ToHMI.Pos_VNA.fault_common  :=  false; FR_AI_ToHMI.Pos_VNA.break  	:=  false; *)
+
+//----------- Давление топливного газа на входе в Д -----------------------------------
+//FR_AI_ToHMI.Ptg_inTRK.PV := ms.Ptg;
+
+//----------- Положение ТРК -----------------------------------------------------------
+(*FR_AI_ToHMI.Pos1_TRK.PV := GPA_AO.Set_TRK; 				 	
+//---------- имитация Т за ТНД --------------------------------------------------------
+flashWas:= FR_AI_ToHMI.Pos1_TRK.PV > ms.minPosDG AND FR_AI_ToHMI.Nvd1.PV > ms.minNvd AND (FRI.start OR flashWas); //если зажигание было подано в подходящий момент - фиксируем росжиг
+if flashWas then
+	ToutTND := ms.koeffPosDG_ToutTND * FR_AI_ToHMI.Pos1_TRK.PV - ms.koeffNvd_ToutTND * (FR_AI_ToHMI.Nvd1.PV - ms.minNvd2);
+else
+	ToutTND := 0.0;
+end_if;
+
+FR_AI_ToHMI.T1_outGG.PV 	:= FR_AI_ToHMI.T1_outGG.PV + (ToutTND - FR_AI_ToHMI.T1_outGG.PV)/ms.tauToutTND;
+FR_AI_ToHMI.T2_outGG.PV 	:= FR_AI_ToHMI.T1_outGG.PV;
+//FR_AI_ToHMI.T_inST.PV 	:= ToutTND;
+
+//-------------------------------------------------------------------------------------
+//------ Частота вращения ротора ТВД  кан. 1 ------------------------------------------
+if FRS.R_stop and FRI.I_Starter = 0.0 then Nvd := 0.0;  //на останове обороты 0, -steam	
+	elsif FRI.I_Starter > 0.0 AND NOT FRS.Rp_rate then Nvd := FRI.I_Starter * 100.0; //I_Starter в процентах	
+	else Nvd := FR_AI_ToHMI.T1_outGG.PV *ms.koeffToutTND_Nvd;
+end_if;
+ 
+FR_AI_ToHMI.Nvd1.PV := FR_AI_ToHMI.Nvd1.PV + (Nvd - FR_AI_ToHMI.Nvd1.PV)/ms.tauNvd; 
+FR_AI_ToHMI.Nvd2.PV := FR_AI_ToHMI.Nvd1.PV; //Частота вращения ротора ТВД кан. 2
+
+//-------------------------------------------------------------------------------------
+//--------------- Частота вращения ротора СТ кан. 1 -----------------------------------
+if FR_AI_ToHMI.Nvd1.PV > ms.NvdfNst then Nst := (FR_AI_ToHMI.Nvd1.PV - ms.NvdfNst) * ms.koeffNvd_Nst;
+else
+	Nst := 0.0;
+end_if;
+
+FR_AI_ToHMI.Nst1.PV 		:= FR_AI_ToHMI.Nst1.PV + (Nst - FR_AI_ToHMI.Nst1.PV)/ms.tauNst;
+FR_AI_ToHMI.Nst2.PV 		:= FR_AI_ToHMI.Nst1.PV; //Частота вращения ротора СТ кан. 2
+
+//--------------------------------------------------------------------------------------
+FR_AI_ToHMI.Pv_outTK.PV := FR_AI_ToHMI.Nvd1.PV *ms.koeffNvd_Pok; //P воздуха за КВД
+// Положение ВНА
+FR_AI_ToHMI.Pos_VNA.PV := GPA_AO.Set_VNA;
+*)
+
+// --steam
+FR_AI_ToHMI.Pos1_TRK.imitTarget := GPA_AO.Set_TRK; 				 	
+//---------- имитация Т за ТНД --------------------------------------------------------
+flashWas:= FR_AI_ToHMI.Pos1_TRK.imitTarget > ms.minPosDG AND FR_AI_ToHMI.Nvd1.imitTarget > ms.minNvd AND (FRI.start OR flashWas); //если зажигание было подано в подходящий момент - фиксируем росжиг
+if flashWas then
+	ToutTND := ms.koeffPosDG_ToutTND * FR_AI_ToHMI.Pos1_TRK.imitTarget - ms.koeffNvd_ToutTND * (FR_AI_ToHMI.Nvd1.imitTarget - ms.minNvd2);
+else
+	ToutTND := 0.0;
+end_if;
+
+FR_AI_ToHMI.T1_outGG.imitTarget 	:= FR_AI_ToHMI.T1_outGG.imitTarget + (ToutTND - FR_AI_ToHMI.T1_outGG.imitTarget)/ms.tauToutTND;
+FR_AI_ToHMI.T2_outGG.imitTarget 	:= FR_AI_ToHMI.T1_outGG.imitTarget;
+//FR_AI_ToHMI.T_inST.PV 	:= ToutTND;
+
+//-------------------------------------------------------------------------------------
+//------ Частота вращения ротора ТВД  кан. 1 ------------------------------------------
+if FRS.R_stop and FRI.I_Starter = 0.0 then Nvd := 0.0;  //на останове обороты 0, -steam	
+	elsif FRI.I_Starter > 0.0 AND NOT FRS.Rp_rate then Nvd := FRI.I_Starter * 100.0; //I_Starter в процентах	
+	else Nvd := FR_AI_ToHMI.T1_outGG.imitTarget *ms.koeffToutTND_Nvd;
+end_if;
+ 
+FR_AI_ToHMI.Nvd1.imitTarget := FR_AI_ToHMI.Nvd1.imitTarget + (Nvd - FR_AI_ToHMI.Nvd1.imitTarget)/ms.tauNvd; 
+FR_AI_ToHMI.Nvd2.imitTarget := FR_AI_ToHMI.Nvd1.imitTarget; //Частота вращения ротора ТВД кан. 2
+
+//-------------------------------------------------------------------------------------
+//--------------- Частота вращения ротора СТ кан. 1 -----------------------------------
+if FR_AI_ToHMI.Nvd1.imitTarget > ms.NvdfNst then Nst := (FR_AI_ToHMI.Nvd1.imitTarget - ms.NvdfNst) * ms.koeffNvd_Nst;
+else
+	Nst := 0.0;
+end_if;
+
+FR_AI_ToHMI.Nst1.imitTarget 		:= FR_AI_ToHMI.Nst1.imitTarget + (Nst - FR_AI_ToHMI.Nst1.imitTarget)/ms.tauNst;
+FR_AI_ToHMI.Nst2.imitTarget 		:= FR_AI_ToHMI.Nst1.imitTarget; //Частота вращения ротора СТ кан. 2
+
+//--------------------------------------------------------------------------------------
+FR_AI_ToHMI.Pv_outTK.imitTarget := FR_AI_ToHMI.Nvd1.imitTarget *ms.koeffNvd_Pok; //P воздуха за КВД
+// Положение ВНА
+FR_AI_ToHMI.Pos_VNA.imitTarget := GPA_AO.Set_VNA;]]></ST>
+            </FunctionBlock>
+        </Folder>
+        <Folder Name="Modes" Comment="Режимы и подрежимы регулятора" Data="" UUID="VYNFY4GYXLLUVK4NICPPMXJ7TE">
+            <Function UUID="A2X4ZIMWDPIU7DWDT4QKMBGX4U" Name="FC_SwitchMode" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[//========================================================= РЕЖИМ СТОП ======================================================================
+IF   FRI.stop OR FRS.A_common THEN											//Если есть команда от логики или сработала аварийная защита ТР
+	FRegData.FRegMode := FRegMode.stop; 									//переходим в СТОП из любого режима
+	Mode_0_Stop();															//
+elsif 	FRegData.FRegMode = FRegMode.stop THEN								//режим "Останов"
+	Mode_0_Stop();															//
+	if 	(FR_evPar.Nvd.out < GPA_Tune_FR.NvdStopTime AND 						//
+		 FR_evPar.Nst.out < GPA_Tune_FR.NstStopTime) THEN						//
+		FRegData.FRegMode := FRegMode.reserve;								//переходим в РЕЗЕРВ
+	end_if;																	//
+//========================================================= РЕЖИМ РЕЗЕРВ ======================================================================
+ELSIF  	FRegData.FRegMode = 0 OR FRegData.FRegMode = FRegMode.reserve THEN	//режим "Резерв"
+	Mode_1_Reserve(); 														//
+	if 	FRI.start THEN														//
+		FRegData.FRegMode := FRegMode.fire;									//
+	end_if; 																//
+//========================================================= РЕЖИМЫ СТАРТА ======================================================================
+ELSIF  	(FRegData.FRegMode = FRegMode.fire) THEN//-------------------------	//режим "Розжиг"
+	Mode_2_Fire();															//
+	if FRegData.ti > GPA_Tune_FR.fireDelay THEN					//если зафиксировано пламя или прошло 10 сек (настройка)
+		if FRS.isFlame THEN										//если зафиксировано пламя или прошло 10 сек (настройка)
+			FRegData.FRegMode := FRegMode.rate;						//переходим в режим РАЗГОН по Pасходу Tоплива
+		else													//если пламени так и не пришло
+			FRS.A_noFlame := true;									//переходим в АО по неросжигу
+		end_if;
+	end_if;
+ELSIF  	(FRegData.FRegMode = FRegMode.rate) THEN//------------------------- //режим "РАЗГОН по Pасходу Tоплива"
+	Mode_3_RateQT();														//
+	if	FR_evPar.NvdNorm >= GPA_Tune_FR.NvdNormMin - GPA_Tune_FR.DZNvd THEN	//если обороты достигли МГс точностью двойной мертвой зоны по ВД	
+		FRegData.FRegMode := FRegMode.heatMG;								//переходим на режим Прогрева на МГ
+		FRI.SetNst := FR_evPar.Nvd.out;									//Устанавливаем задание на обороты ВД = текущим, т.к. держать надо приведённые
+	end_if;	  																//
+ELSIF   (FRegData.FRegMode = FRegMode.heatMG) 	THEN//---------------------	//режим "Прогрев на МГ"
+	Mode_4_StandInMG();														//
+	if	(FRegData.ti > GPA_Tune_FR.timeHeat) THEN								//если прошло требуемое время (настройка)		
+		FRegData.FRegMode := FRegMode.work;									//
+		FRegData.isRegNst := true;											//
+		FRI.SetNst := FR_evPar.Nst.out;									//
+	end_if; 																//
+//========================================================= РЕЖИМ РАБОТА ======================================================================
+ELSIF  	(FRegData.FRegMode = FRegMode.work)  	THEN//--------------------- //режим "Работа"
+	if	FRI.NO THEN															//
+		FRegData.FRegMode := FRegMode.godwMG; 								//
+	end_if;																	//
+//========================================================= РЕЖИМЫ НО =========================================================================
+ELSIF  	(FRegData.FRegMode = FRegMode.godwMG)  	THEN //--------------------- //режим "НО, снижение до МГ"
+	Mode_5_GoToMG();														//
+	if	ABS(FR_evPar.NvdNorm - GPA_Tune_FR.NvdNormMin) <= GPA_Tune_FR.DZNvd THEN	// если достигнуты обороты NvdMG
+		FRegData.FRegMode := FRegMode.coolingMG; 							// переходим к выстою
+	elsif FRI.start THEN													// !!!!!!!!!!!Если во время НО появилась команда СТАРТ, значит пользователь запросил отмену НО
+//		FRegData.NstMin := true;											//выставляем флаг перехода на минимальные обороты СТ
+		FRegData.isRegNst := true;											//
+		FRI.SetNst := FR_evPar.Nst.out;	
+		FRegData.FRegMode := FRegMode.work;									//и переходим на режим работа
+	end_if;																	//
+ELSIF  	(FRegData.FRegMode = FRegMode.coolingMG) THEN //-------------------- //режим "НО, охлаждение на МГ"
+	Mode_4_StandInMG();	   													//
+	if	FRegData.ti > GPA_Tune_FR.timeCooling THEN								//когда время охлаждения заканчивается,
+		FRegData.FRegMode := FRegMode.stop; 								//переходим в СТОП
+	elsif FRI.start THEN													// !!!!!!!!!!!!Если во время НО появилась команда СТАРТ, значит пользователь запросил отмену НО
+//		FRegData.NstMin := true;											//выставляем флаг перехода на минимальные обороты СТ
+		FRegData.isRegNst := true;											//
+		FRI.SetNst := FR_evPar.Nst.out;	
+		FRegData.FRegMode := FRegMode.work;									//и переходим на режим работа
+	end_if;																	//
+END_IF;																		//
+//===============================================================================================================================================
+//Обнуление таймера при любом переходе с режима на режим
+IF FRegData.FRegMode_old <> FRegData.FRegMode THEN FRegData.ti := 0.0; END_IF;
+FRegData.FRegMode_old := FRegData.FRegMode;
+
+// задание на ДГ при ручном управлении обнуляется при любом режиме , кроме "Резерв"
+//IF FRegData.FRegMode <> FRegMode.reserve THEN
+//  	FR_evPar.setDG_DU := 0.0;
+//END_IF;
+
+// формирование флага "Замкнута обратная связь"
+FRegData.isFeedback :=  (FRegData.FRegMode = FRegMode.heatMG) OR 
+						(FRegData.FRegMode = FRegMode.godwMG) OR
+						(FRegData.FRegMode = FRegMode.coolingMG) OR
+						(FRegData.FRegMode = FRegMode.work);
+// формирование флага "Регулирование по N ротора СТ"
+FRegData.isRegNst := (FRegData.FRegMode = FRegMode.work) AND (FRI.regNst OR FRegData.isRegNst AND NOT FRI.regNvd);
+
+if FRegData.isFeedback then
+	SetPID();
+	LimitSpeedToSetN();
+	FRegulConturUpdate();
+end_if;]]></ST>
+            </Function>
+            <Function UUID="L3LNVBWMJ47U5PXLPVBZRICX24" Name="Mode_0_Stop" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[// обнуление внутренних переменных
+FRI.SetNst    := 0.0;
+FRI.SetNvd    := 0.0;
+FRegData.setTmp    := 0.0;
+FRegData.setGt     := 0.0;
+FRegData.integ     := 0.0;
+FRegData.contur    := FRegContur.NONE;
+GPA_AO.Set_TRK     := 0.0;]]></ST>
+            </Function>
+            <Function UUID="YC5WF5C6TYMEPBAUEIIRTE7KAU" Name="Mode_1_Reserve" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[FRI.SetNvd     := 0.0;
+FRI.SetNst     := 0.0;
+FRegData.setTmp     := 0.0;
+FRegData.integ      := 0.0;
+FRegData.setGt      := 0.0;
+FRegData.tiFire     := 0.0;
+FRegData.ti     	 := 0.0;
+FRegData.contur    := FRegContur.NONE;	
+GPA_AO.Set_TRK     := 0.0;
+]]></ST>
+            </Function>
+            <Function UUID="HRAK3NIFMWAEBJEYD3C42WAOWE" Name="Mode_2_Fire" Comment="программа росжига" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[FRegData.setGt := getTun(arg := 0.0, curve := GPA_Curve_FR.timeToGt);
+//---------------------------------------------------------------------------------------------------------------------------
+FRegData.integ := FRegData.setGt;										// приравнивание общего интегратора контуров регулирования текщему расходу, 
+// ------------ Пересчёт расхода в степень открытия ТК ----------------------------
+GPA_AO.Set_TRK := getTun(arg := FRegData.setGt, curve := GPA_Curve_FR.GTtoOpen);
+
+// приращение таймера (подсчет времени прогрева)
+FRegData.ti := FRegData.ti +  tim.cycle;
+
+
+]]></ST>
+            </Function>
+            <Function UUID="KB5AF4HRCYDUFNZLQXOAVRUEL4" Name="Mode_3_RateQT" Comment="Программа разгона с фиксированным приращением расхода за единицу времени" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="FUL7R4U22QEETGT5CGWADYNORE" Name="dTi" Comment="коэффициент скорости нарастания расхода в зависимости от приближения к критической температуре" Type="REAL" Usage="internal" />
+                    <Variable UUID="XBNYH2JEPHHUFOFUMYWCSOJTYY" Name="maxGt" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[// приращение таймера (и увеличение заданиЯ на расход топлива) осуществлЯетсЯ только при
+// отсутствии ограничениЯ по температуре на запуске
+IF FR_evPar.Tg_outTND.out < GPA_Tune_FR.TstartMax - GPA_Tune_FR.dTstartMax THEN // если Тза ТНД не подходит к ограничению Т на пуске ближе, чем настройка GPA_Tune_FR.dTstartMax
+    dTi :=  tim.cycle;															// время пуска течёт с нормальной скоростью
+ELSIF (FR_evPar.Tg_outTND.out < GPA_Tune_FR.TstartMax) AND (GPA_Tune_FR.dTstartMax) > 0.0 THEN					 // если Тза ТНД подходит к ограничению Т на пуске ближе, чем настройка GPA_Tune_FR.dTstartMax но не переходит
+    	dTi :=  tim.cycle * (GPA_Tune_FR.TstartMax - FR_evPar.Tg_outTND.out) / GPA_Tune_FR.dTstartMax; // время пуска замедляется
+ELSE
+	dTi := 0.0;											// если Тза ТНД переходит ограничение Т на пуске время пуска останавливается и дозатор перестаёт открываться
+END_IF;
+
+FRegData.tiFire := FRegData.tiFire + dTi;
+FRegData.setGt := getTun(arg := FRegData.tiFire, curve := GPA_Curve_FR.timeToGt)*FR_evPar.KnormPtg;
+maxGt := getTun(arg := FR_evPar.NvdNorm, curve := GPA_Curve_FR.NvdToGtMax);
+if FRegData.setGt > maxGt then
+	FRegData.setGt := maxGt;
+end_if;
+//---------------------------------------------------------------------------------------------------------------------------
+FRegData.integ := FRegData.setGt;										// приравнивание общего интегратора контуров регулирования текщему расходу, 
+
+// ------------ Пересчёт расхода в степень открытия ТК ----------------------------
+GPA_AO.Set_TRK := getTun(arg := FRegData.setGt, curve := GPA_Curve_FR.GTtoOpen);
+
+FRegData.ti := 0.0; //обнуляем счётчик времени для прогрева на МГ]]></ST>
+            </Function>
+            <Function UUID="RIADTUF2V35ERAREHMXUDCXSWU" Name="Mode_4_StandInMG" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[FRegData.isRegNst := false;				//Регулируем обороты ВД
+FRI.SetNvd := GPA_Tune_FR.NvdNormMin;	//Цель - минимальные приведённые обороты ВД
+FRegData.ti := FRegData.ti +  tim.cycle;		// приращение таймера (подсчет времени прогрева/охлаждения)
+]]></ST>
+            </Function>
+            <Function UUID="KI45ZQKYX3ZEFGLCH5I6MQJPEE" Name="Mode_5_GoToMG" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[FRegData.isRegNst := false;				//Регулируем обороты ВД
+FRI.SetNvd := GPA_Tune_FR.NvdNormMin;	//Цель - минимальные приведённые обороты ВД
+FRegData.ti := 0.0; //обнуляем счётчик времени для охлаждения на МГ]]></ST>
+            </Function>
+        </Folder>
+        <Folder Name="TLS_Common" Comment="Инструменты общего назначения" Data="" UUID="IIXHQZUMGYNEDH6R4B6AZLXCDE">
+            <Function UUID="VIL5IMTI3TDE7DIUQPIBRQRSUQ" Name="DZ" Comment="зона нечувствительности&#x0A;" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="6M63XNHDX2ME3OZ3FCZ4FJREAY" Name="value" Type="REAL" Usage="input" />
+                    <Variable UUID="3CWH3RDYSSDUVKZKK2K7IC3UDI" Name="zone" Type="REAL" Usage="input" />
+                </Variables>
+                <ST><![CDATA[IF value > zone THEN
+    DZ := value - zone;
+ELSIF value < -zone THEN
+    DZ := value + zone;
+ELSE
+    DZ := 0.0;
+END_IF;
+]]></ST>
+            </Function>
+            <FunctionBlock UUID="QGDF6R7GCY5U5G3LG4OK3YE33A" Name="FB_FltDiff" Comment="фильтрованный дифференциал за заданное количество циклов. Фильтрация по скользящему среднему, буфер фильтра равен количеству циклов, за которые вычисляется дифференциал">
+                <Variables>
+                    <Variable UUID="S7MOJX3KBHFUVFQNMDN7JK675Y" Name="in" Type="REAL" Usage="input" />
+                    <Variable UUID="RMCRYD2N6QHUBP7SZUHPUBVC7M" Name="size" Type="INT" Usage="input" />
+                    <Variable UUID="IRER4ACBX2TULE6GIXIX5ALNNI" Name="out" Type="REAL" Usage="output" />
+                    <Variable UUID="5BE7N5OXAMTUNCZ5ITZDQJ4R3E" Name="fltMA" Type="FB_Flt_MA" TypeUUID="CE6QCA3MSXQUPIWOUJWIPQPHSI" Usage="internal" />
+                    <Variable UUID="EXGU4V2D6LHE3EEXE3OO4CJQTU" Name="arr" Type="REAL" Size="20" Array="TRUE" Usage="internal" />
+                    <Variable UUID="E3DPIYLCBXJEXISJVZFPKNN6QE" Name="i" Type="INT" Usage="internal" />
+                    <Variable UUID="7A7CGJDIFTHUVHXYBUUHIIYXIA" Name="outFlt" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[fltMA(in,size,outFlt);			//вызываем фильтр скользящего среднего и записываем текщий фильтрованный результат во временную переменную
+out := outFlt - arr[i];			//сравниваем текущий фильтрованный результат с результатом size циклов назад
+arr[i] := outFlt;				//записываем текущий фильтрованный результат в буфер
+i := i + 1;						//переходим к следующему циклу
+if i > size then i := 0; end_if;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="CE6QCA3MSXQUPIWOUJWIPQPHSI" Name="FB_Flt_MA" Comment="фильтр &quot;скользящее среднее&quot; (moving averge)">
+                <Variables>
+                    <Variable UUID="MYIUTM5ATMFUVGOTB3F7IROXHQ" Name="in" Comment="фильтруемая величина" Type="REAL" Usage="input" />
+                    <Variable UUID="43TQTHFLDNIENPHZFP3XBQ7PXI" Name="size" Comment="Размер буфера (не более размера массива arr)" Type="INT" Usage="input" />
+                    <Variable UUID="M74M5EBQ6ESEVIGTOV3GJOKRKE" Name="arr" Comment="буфер" Type="REAL" Size="20" Array="TRUE" Usage="internal" />
+                    <Variable UUID="RGYNMGWOEPNENMKLHCM6EYBTFA" Name="summ" Comment="сумма элементов массива" Type="REAL" Usage="internal" />
+                    <Variable UUID="5TCIHZGOGIDURCIWT7OVSBB4IY" Name="i" Comment="индекс текущего элемента буфера" Type="INT" Usage="internal" />
+                    <Variable UUID="KCM2H67OSJLE3HG74QCE7S6O4Q" Name="out" Comment="среднее арифметическое буфера" Type="REAL" Usage="output" />
+                </Variables>
+                <ST><![CDATA[if size > 0 then					//если размер буфера больше 0, производим вычисления
+	summ := summ - arr[i];			//вычитаем из суммы значение, записанное size циклов назад
+	arr[i] := in;					//записываем в буфер рекущее значение
+	summ := summ + in;				//добавляем к сумме текущее значение
+	out := summ/INT_TO_REAL(size);	//вычисляем среднеарифметическое буфера
+	i := i + 1;						//переходим к следующему элемету буфера
+	if i >= size then i := 0; end_if;
+else								//если размер буфера равен или мельше 0, возвращаем 0
+	out := 0.0;
+end_if;]]></ST>
+            </FunctionBlock>
+            <FunctionBlock UUID="LCERBCVHMURELEDEHKKNKLUZNQ" Name="FB_Pulse" Comment="Блок формирования импульсов с периодом Tp">
+                <Variables>
+                    <Variable UUID="CMR5BQDGRKPEZBIKWN5RA576SY" Name="on" Comment="Запуск ипульсов" Type="BOOL" Usage="input" />
+                    <Variable UUID="B6IJ67FPJ3RUFJNLPAS7YG4QFE" Name="tp" Comment="Период следования импульсов" Type="TIME" Usage="input" />
+                    <Variable UUID="XZGD3TDBOORUPN4TMQKQ32TE3I" Name="tic" Comment="Выход" Type="BOOL" Usage="output" />
+                    <Variable UUID="TIVKZZA76UQEBDGHCVSWZRJTPI" Name="tmr" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[//таймер периода
+tmr(IN:= on AND NOT tmr.Q, PT:= tp);
+//на полупериоде установить 0
+//выход
+tic :=  tmr.ET < tp/2 AND NOT tmr.Q AND on;
+//Steam
+]]></ST>
+            </FunctionBlock>
+            <Function UUID="IXGGKDG7QGNEBGFHIQ6S3A7E44" Name="calc1chan" Comment="Обработка одного канала с задержкой ввода после неисправности" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="43YB57E4BYRULHCHA73B3HJDJA" Name="tau" Comment="сглаженный переход от последнего значения исправного  к новому после восстановлении исправности канала" Type="REAL" Usage="input" />
+                    <Variable UUID="HBDKJLEAGDZUHAU5WGUM2AOYXM" Name="tiBrk" Comment="время восстановления канала из неисправности" Type="REAL" Usage="input" />
+                    <Variable UUID="IXDQPS473BYUNMV44LXTGZCNIE" Name="chan" Comment="данные обрабатываемого канала" Type="T_AnInput" TypeUUID="LSS65AYJ5WBEZLH44NGKOXDB2Y" Usage="inout" />
+                </Variables>
+                <ST><![CDATA[IF chan.inBrk THEN					//Если канал неисправен
+    chan.ti := 0.0;						//обнуляем таймер возврата
+else 								//если канал исправен, 
+	chan.ti := chan.ti +  tim.cycle;			//считаем, сколько прошло времени от прихода исправности
+end_if;
+  
+if chan.ti >= tiBrk then		//если от прихода исправности канала прошло достаточно времени - можно записывать в канал измеренное значение
+    if tau > 0.0 and  tim.cycle/tau < 1.0 then //если задано сглаживание и оно корректное - переходим от старого значения к новому постепенно
+		chan.out := chan.out + (chan.in - chan.out)* tim.cycle/tau;	//в канал пишется фильтрованное lag-фильтром изменение сигнала. постоянная времени фильтра приводится к времени цикла
+	else chan.out := chan.in; end_if; //Если tau не задано в него пишется входное значение 
+end_if;
+
+chan.outBrk := chan.ti < tiBrk;		//флаг неисправности канала]]></ST>
+            </Function>
+            <Function UUID="TZDI3FODKQVEBF6RGRTE3VDJIY" Name="calc2chan" Comment="обработка дублированныъх каналов" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="YYXYEWIZESFEVPH7FGB5RJI74A" Name="chanIn" Type="T_2chanel" TypeUUID="DBICG7YD6QUU5NY7MXV66JCZ54" Usage="inout" />
+                    <Variable UUID="YSEJZAGL2C4ERFJC7V5XNSIHL4" Name="chan" Type="T_AnInput" TypeUUID="LSS65AYJ5WBEZLH44NGKOXDB2Y" Usage="inout" />
+                    <Variable UUID="6C7NR3UUYH7E3NJVJTDM6N5GVY" Name="tau" Type="REAL" Usage="input" />
+                    <Variable UUID="AMBEOR4DTN3EDOA342QANZRT2E" Name="tiBrk" Type="REAL" Usage="input" />
+                    <Variable UUID="2RPWXUATKTYEZASB5N76LDXQAI" Name="procVar" Comment="вариант обработки: 0 - среднее арифметическое, 1 - выбор наибольшего, 2 - выбор наименьшего" Type="INT" Usage="input" />
+                    <Variable UUID="CZKEPF3R7ZCIJBCPFLBJGD6OQA" Name="distortSet" Type="REAL" Usage="input" />
+                    <Variable UUID="TGV2SXNYDB6UZNSQWJ6FFGFWIQ" Name="tmp" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[//------ проверяем исправность каналов -----------------------------
+IF chanIn.brk1 THEN					//Если канал неисправен
+    chanIn.ti1 := 0.0;						//обнуляем таймер возврата
+else 								//если канал исправен, 
+	chanIn.ti1 := chanIn.ti1 +  tim.cycle;			//считаем, сколько прошло времени от прихода исправности
+end_if;
+
+IF chanIn.brk2 THEN					//Если канал неисправен
+	 chanIn.ti2 := 0.0;						//обнуляем таймер возврата
+else 								//если канал исправен, 
+	chanIn.ti2 := chanIn.ti2 +  tim.cycle;			//считаем, сколько прошло времени от прихода исправности
+end_if;
+
+
+//------- в зависимости от исправности каналов и варианта обработки пишем в выход среднее, максимальное, минимальное или единственное испавное значение -----------------------------
+if chanIn.ti1 >= tiBrk and chanIn.ti2 >= tiBrk then		//если от прихода исправности обоих каналов прошло достаточно времени - можно записывать в выходной канал измеренное значение
+	if procVar = 0 then									// Если procVar = 0 - результат - среднее арифметическое.
+		tmp := (chanIn.in1 + chanIn.in2)/2.0;
+	elsif procVar = 1 then								// Если procVar = 1 - результат - наибольший.
+		if chanIn.in1 > chanIn.in2 then tmp := chanIn.in1;
+		else tmp := chanIn.in2; end_if;
+	else												// Если procVar = 2 - результат - наименьший.
+		if chanIn.in1 > chanIn.in2 then tmp := chanIn.in2;
+		else tmp := chanIn.in1; end_if;
+	end_if;
+	if distortSet > 0.0 then //Установка предупреждения о критическом расхождении показаний каналов
+		chanIn.distort := ABS(chanIn.in1 - chanIn.in2) > distortSet;		
+	else
+		chanIn.distort := false;
+	end_if;
+elsif chanIn.ti1 >= tiBrk then tmp := chanIn.in1;			// Если исправен только первый - используем его.
+elsif chanIn.ti2 >= tiBrk then tmp := chanIn.in2;
+else tmp := chan.out;									// Если ни одного исправного - оставляем последнее исправное значение
+end_if;
+//---------- выполняем фильтрацию -----------------------------------------------------------
+if tau > 0.0 and  tim.cycle/tau < 1.0 then //если задано сглаживание и оно корректное - переходим от старого значения к новому постепенно
+	chan.out := chan.out + (tmp - chan.out)* tim.cycle/tau;	//в канал пишется фильтрованное lag-фильтром изменение сигнала. постоянная времени фильтра приводится к времени цикла
+else chan.out := tmp;  									//Если tau не задано, в выход пишется входное значение 
+end_if;
+//----------- выставляем флаг исправености результата -----------------------------------------------------------
+chan.outBrk := chanIn.ti1 < tiBrk and chanIn.ti2 < tiBrk;		//флаг неисправности канала
+]]></ST>
+            </Function>
+            <Function UUID="F3XMWQLOMNZEVPGO2JLJB4DFOM" Name="getTun" Comment="Возвращает динамическую настройку в зависимости от аргумента" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="BZQHSXZ3LYOE7G2APFVEQAMKSA" Name="arg" Comment="аргумент настроечной функции" Type="REAL" Usage="input" />
+                    <Variable UUID="LAH5LYIR23JULJDAYN2K56LKME" Name="curve" Comment="индекс настроечной функции" Type="T_Curve" TypeUUID="GW7CVYYORTLUPCUDUMHJZMOFGE" Usage="input" />
+                    <Variable UUID="GZNIFO5CEH6UVPLPVCIF7RQ7PM" Name="tmpX1" Comment="найденная правая точка для аппроксимации" Type="INT" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[if curve.N = 1 then // если в данной настройке только одна точка - выходим, возвращая единственное значение функции
+	getTun := curve.s[0].fx;
+	return;
+end_if;
+
+	// если в настройке больше одной точки, начинаем искать отрезок, по которому будем вычислять возвращамеое значение
+
+if arg > curve.s[1].x and curve.N > 2 then  // если аргумент правее второй точки и количество точек больше 2-х 
+	for tmpX1 := 2 to curve.N - 2 do					  // ищем от второго до предпоследнего отрезка, потому что, если аргумент окажется на последнем отрезке, это = окончанию цикла
+		if arg < curve.s[tmpX1].x then exit; end_if;							// если аргумент меньше Х по текущей точке, значит он принадлежит текущему отрезку. Выходим из цикла	
+	end_for;
+else																// если аргумент не правее второй точки или количество точек = 2
+	tmpX1 := 1;														  // нам нужен первый (или единственный) отрезок
+end_if;
+// вычисляем значение функции по выбранному отрезку между точками tmpX1 и tmpX1-1	
+getTun := (arg - curve.s[tmpX1-1].x)*(curve.s[tmpX1].fx - curve.s[tmpX1-1].fx)/
+									   (curve.s[tmpX1].x  - curve.s[tmpX1-1].x ) +  curve.s[tmpX1-1].fx;]]></ST>
+            </Function>
+            <Function UUID="PMJLJGULVMQUJGMS6VHL53P6EQ" Name="lag" Comment="Функция фильтра типа апериодическое звено 1-го порядка" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="3H7XZDLDMQOUHKZMN2DX4FDZGA" Name="in" Comment="Входная величина" Type="REAL" Usage="input" />
+                    <Variable UUID="66QQLW3IL5CENHINLOUXH6URXA" Name="oldIn" Comment="Входная величина на предыдущем цикле" Type="REAL" Usage="input" />
+                    <Variable UUID="WRW4KC7XKIQUPAWAPH24CNWE2M" Name="tau" Comment="постоЯннаЯ времени фильтрации" Type="REAL" Usage="input" />
+                    <Variable UUID="FLU3M3AMWY3E7DCNV6WDD4FE7Q" Name="cycle" Comment="Цикл" Type="REAL" Usage="input" />
+                    <Variable UUID="MYNIDTNE2A3EXFWBMWVRD64IVQ" Name="nan" Comment="Для проверки на NAN" Type="DINT" Usage="internal" />
+                    <Variable UUID="Y3XWT6KTEL6U3MAOUQZQWGOJMQ" Name="OK" Type="BOOL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[OK := true;
+nan := REAL_TO_DINT(in);
+IF tau < cycle THEN
+lag := in;
+ELSIF OK THEN
+lag := oldIn + (in - oldIn)/tau * cycle;
+ELSE
+lag := oldIn ;
+END_IF;
+]]></ST>
+            </Function>
+            <Function UUID="6BO43HSREEIEPD4JXNLX7YABUQ" Name="maxValue" Comment="функция, возвращающая максимальное из двух значений на входе" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="KPKTJTWPYMFE3M6A6P4A5LSD54" Name="value1" Type="REAL" Usage="input" />
+                    <Variable UUID="5UKFMAIYHOSEHHKXEN45ILO4S4" Name="value2" Type="REAL" Usage="input" />
+                </Variables>
+                <ST><![CDATA[maxValue := value1;
+IF value2 > value1 THEN maxValue := value2; END_IF;]]></ST>
+            </Function>
+            <Function UUID="ASBJWKW4WAFEZLTX45XM2CFAYU" Name="minValue" Comment="функция, возвращающая минимальное из двух значений на входе" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="THMZ7UWIVHSEPLBRGCBSYSNGRA" Name="value1" Type="REAL" Usage="input" />
+                    <Variable UUID="SNPG3BC4KOGUDKPFAWX3THCYVE" Name="value2" Type="REAL" Usage="input" />
+                </Variables>
+                <ST><![CDATA[minValue := value1;
+IF value2 < value1 THEN minValue := value2; END_IF;]]></ST>
+            </Function>
+            <Function UUID="GUHLO4F77FMEFKH6MOAOKPNCFQ" Name="modDZ" Comment="модифицированная зона нечувствительности&#x0A;" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="GCKQFRXURWFURGQA6IYBX6GR3M" Name="value" Comment="входная величина" Type="REAL" Usage="input" />
+                    <Variable UUID="PEW2KE4CJNTE5B2C6EVGI6KY3Y" Name="zone" Comment="значение зоны нечувствительности" Type="REAL" Usage="input" />
+                    <Variable UUID="JWUFCWIHKSYEJIPW2KQ7QMFRDY" Name="H" Comment="ширина модифицированной зоны нечувствительности" Type="REAL" Usage="input" />
+                    <Variable UUID="UQI5LFHWZHBE3OBQP5HNB5BW7I" Name="K" Comment="коэффициент усиления в модифицированной зоне нечувствительности" Type="REAL" Usage="input" />
+                    <Variable UUID="BB73DZJTSYQUXHLMGEKSXZYMJY" Name="sign" Comment="знак входного параметра" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[// определение знака входного параметра - {+1; -1; 0}
+  IF value <> 0.0 THEN
+    sign := value / ABS(value);
+  ELSE
+    sign := 0.0;
+  END_IF;
+// расчет выхода
+  IF ABS(value) <= zone THEN
+    modDZ := 0.0;
+  ELSIF ABS(value) > zone AND ABS(value) < zone + H THEN
+    modDZ := K * (value - sign * zone);
+  ELSE
+    modDZ := value + sign * (K * (H - zone) - H);
+  END_IF;
+]]></ST>
+            </Function>
+            <Function UUID="ICGKZOANLCMEPE2E7OUPJCMWWU" Name="valueLimit" Comment="функция, ограничивающая значение на входе величиной hiLimit сверху и loLimit&#x0A;" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="YM5JNS6IQHHEZEFNSSQHVORZVM" Name="value" Comment="Входная величина" Type="REAL" Usage="input" />
+                    <Variable UUID="W6DA7IEJAS7UHOA4MXNSAI3R7A" Name="hiLimit" Comment="Верхний предел" Type="REAL" Usage="input" />
+                    <Variable UUID="XU7X2XSS257E7CDHXOIQMPN4SA" Name="loLimit" Comment="Нижний предел" Type="REAL" Usage="input" />
+                </Variables>
+                <ST><![CDATA[IF loLimit >= hiLimit THEN 	valueLimit := value;
+ELSIF value < loLimit THEN 	valueLimit := loLimit;
+ELSIF value > hiLimit THEN 	valueLimit := hiLimit;
+ELSE 						valueLimit := value;
+END_IF;
+]]></ST>
+            </Function>
+        </Folder>
+        <Folder Name="TLS_PID" Comment="" Data="" UUID="2RPQ2V72I3GEFP53OGTJLVJKAY">
+            <Function UUID="U624NSWN637UXBIKP3LJ4DRE6M" Name="PIDregul" ResultTypeUUID="ZBKOAQV3RE3ULNMUGXO6K7O4HM">
+                <Variables>
+                    <Variable UUID="J23TJDB3XN3ERDNIBPVECMIAVM" Name="err" Type="REAL" Usage="input" />
+                    <Variable UUID="H7DKESGXL36UZMIFAX4RZZ7E7I" Name="regCycle" Type="REAL" Usage="input" />
+                    <Variable UUID="YKQTJJRZDRYELA6CUJBBEWOQ2U" Name="reg" Type="T_PID" TypeUUID="SEO2SBA4YGZETLEHUVHQRGMOXY" Usage="inout" />
+                    <Variable UUID="C5IF77Q7BFYEBDFQAP3UZ7RH2I" Name="errTemp" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[if regCycle <= 0.0 then PIDregul := 0.0; return; end_if; // Если в функцию передано 0-е или меньше значение времени цикла - выходим без вычислений, т.к. это ошибка
+
+IF err > reg.DZ THEN // вычитаем мёртвую зону из текущей ошибки
+	errTemp := err - reg.DZ; 
+ELSIF err < -reg.DZ THEN 
+	errTemp := err + reg.DZ; 
+ELSE 
+	errTemp := 0.0; 
+END_IF;
+
+reg.dInteg := ((errTemp + reg.oldErr) / 2.0) * regCycle * reg.Ki; 						// вычисляем интеграл за цикл по формуле трапеции и умножаем на интегральный коэффициент
+reg.lagDiff := reg.lagDiff + (((errTemp - reg.oldErr)/regCycle) - reg.lagDiff)/reg.tauLagDiff; // вычисляем сглаженный дифференциал
+reg.oldErr := errTemp;
+
+PIDregul := reg.dInteg + errTemp * reg.Kp + reg.lagDiff * reg.Kd;						// вычисляем выход регулятора]]></ST>
+            </Function>
+        </Folder>
+        <Folder Name="ToolsGTD" Comment="" Data="" UUID="5HA6I7VYTC3E5IBOIG6KD752UY">
+            <Function UUID="6J4G4KDOTJB7FGKLAW4UIZQCLI" Name="ControlVNA" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[GPA_AO.Set_VNA := getTun(arg := FR_evPar.NvdNorm, curve := GPA_Curve_FR.NvdToVNA);]]></ST>
+            </Function>
+            <Function UUID="J4ANANFEYIRUFL3MU2FMSUM5SU" Name="FRegulConturUpdate" Comment="Вызов всех контуров регулирования" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="SZTRRGX6YZOU7I7USUMX3YLPH4" Name="maxSpeed" Comment="максимальная скорость роста расхода топлива" Type="REAL" Usage="internal" />
+                    <Variable UUID="72J4MG6I6ILEVKUHYK3ZMMNEDU" Name="tmpSpeed" Type="REAL" Usage="internal" />
+                    <Variable UUID="W6ZMAWRFMH6E3JFRCKP6IRYZXA" Name="dInteger" Comment="на сколько меняется интеграл" Type="REAL" Usage="internal" />
+                    <Variable UUID="ZCGF62GVL5CIPGCJQ3OP6MYYTE" Name="maxGt" Comment="Максимальный допустимый расход" Type="REAL" Usage="internal" />
+                    <Variable UUID="CM5DJKTXK5F6LMKMN5JYPJY7IE" Name="minGt" Comment="Минимальный допустимый расход" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[IF FRegData.isRegNst THEN // если включено регулирование Nст, 
+		tmpOut[FRegContur.N_ST] := PIDregul(	reg := FRegData.regs[FRegContur.N_ST], 	//то вызывается регулирующий контур Nст
+               									err := FRegData.setTmp - FR_evPar.Nst.out,// на вход контура подается разность внутреннего задания на обороты и оборотов СТ
+               					  			regCycle :=  tim.cycle
+									);
+		FRegData.outTemp := tmpOut[FRegContur.N_ST];
+		FRegData.contur := FRegContur.N_ST;
+ELSE											// если включено регулирование Nвд, то вызывается регулирующий контур Nвд
+      	tmpOut[FRegContur.N_VD] := PIDregul(	reg := FRegData.regs[FRegContur.N_VD], 	//то вызывается регулирующий контур Nст
+               						err := FRegData.setTmp - FR_evPar.NvdNorm,// на вход контура подается разность внутреннего задания на обороты и оборотов СТ
+               					  regCycle :=  tim.cycle);
+		FRegData.outTemp := tmpOut[FRegContur.N_VD];
+		FRegData.contur := FRegContur.N_VD;
+END_IF;
+
+//-----------------вызов ограничительных контуров - чем ниже вызов ограничителя, тем выше приоритет ограничительного контура
+  
+IF FRegData.FRegMode = FRegMode.work and FRI.EnLoLim THEN // вызов нижних ограничительных контуров осуществляется только на рабочих режимах
+	// ограничение минимальных оборотов СТ не позволит дать команду на расход топлива ниже, чем необходимо для поддержания минимальных оборотов СТ
+	//IF NOT FRI.MG  THEN //FRI.HH THEN -------- steam
+    	tmpOut[FRegContur.N_ST_MIN] := PIDregul(reg := FRegData.regs[FRegContur.N_ST_MIN], 
+												err := GPA_Tune_FR.NstMin - FR_evPar.Nst.out, 
+										   regCycle :=  tim.cycle);
+		if tmpOut[FRegContur.N_ST_MIN] > FRegData.outTemp then // Если расход по этому контуру больше, чем рассчитанный по предыдущим контурам - делаем этот контур активным
+			FRegData.outTemp := tmpOut[FRegContur.N_ST_MIN]; 
+			FRegData.contur := FRegContur.N_ST_MIN;
+		end_if;
+	//END_IF;
+	// ограничение минимальных оборотов ВД
+	//IF NOT FR_evPar.Nvd.outBrk THEN
+    	tmpOut[FRegContur.N_VDnorm_MIN] := PIDregul(reg := FRegData.regs[FRegContur.N_VDnorm_MIN], 
+											err := GPA_Tune_FR.NvdNormMin - FR_evPar.NvdNorm, 
+									   regCycle :=  tim.cycle);
+		if tmpOut[FRegContur.N_VDnorm_MIN] > FRegData.outTemp then 
+			FRegData.outTemp := tmpOut[FRegContur.N_VDnorm_MIN]; 
+			FRegData.contur := FRegContur.N_VDnorm_MIN; 
+		end_if;
+	//END_IF;
+END_IF;
+// ------------- Ограничения максимума работают даже при разгоне на старте и снижени на останове -------------------
+// ограничение максимальных оборотов СТ не позволит дать команду на расход топлива выше, чем необходимо для поддержания максимальных оборотов СТ
+tmpOut[FRegContur.N_ST_MAX] := PIDregul(reg := FRegData.regs[FRegContur.N_ST_MAX], 
+										err := GPA_Tune_FR.NstMax - FR_evPar.Nst.out, 
+								   regCycle :=  tim.cycle);
+if tmpOut[FRegContur.N_ST_MAX] < FRegData.outTemp then 
+	FRegData.outTemp := tmpOut[FRegContur.N_ST_MAX]; 
+	FRegData.contur := FRegContur.N_ST_MAX; 
+end_if;
+// ограничение максимальных оборотов ВД
+IF NOT FR_evPar.Nvd.outBrk THEN
+	//Обычные ВД
+	tmpOut[FRegContur.N_VD_MAX] := PIDregul(reg := FRegData.regs[FRegContur.N_VD_MAX], 
+                                        err := getTun(arg := FR_evPar.TatmLag, curve := GPA_Curve_FR.TairToNvd) - FR_evPar.Nvd.out, 
+                                   regCycle :=  tim.cycle);
+	if tmpOut[FRegContur.N_VD_MAX] < FRegData.outTemp then 
+		FRegData.outTemp := tmpOut[FRegContur.N_VD_MAX]; 
+		FRegData.contur := FRegContur.N_VD_MAX; 
+	end_if;
+	//Приведённые ВД
+	tmpOut[FRegContur.N_VDnorm_MAX] := PIDregul(reg := FRegData.regs[FRegContur.N_VDnorm_MAX], 
+                                        err := GPA_Tune_FR.NvdNormMax - FR_evPar.NvdNorm, 
+                                   regCycle :=  tim.cycle);
+	if tmpOut[FRegContur.N_VDnorm_MAX] < FRegData.outTemp then 
+		FRegData.outTemp := tmpOut[FRegContur.N_VDnorm_MAX]; 
+		FRegData.contur := FRegContur.N_VDnorm_MAX; 
+	end_if;
+END_IF;
+
+// ограничение максимальной температуры за ТНД
+tmpOut[FRegContur.T_MAX] := PIDregul(reg := FRegData.regs[FRegContur.T_MAX], 
+									 err := FR_evPar.TggLim - FR_evPar.Tg_outTND.out, 
+								regCycle :=  tim.cycle);
+if (tmpOut[FRegContur.T_MAX] < FRegData.outTemp) then 
+	FRegData.outTemp := tmpOut[FRegContur.T_MAX]; 
+	FRegData.contur := FRegContur.T_MAX; 
+end_if;
+
+// ------------------- Добавляем к рассчитанному расходу топлива интеграл от предыдущего цикла. ------------
+FRegData.outTemp := FRegData.outTemp + FRegData.integ;
+tmpContur := FRegData.contur;
+
+//-------------------- Ограничения изменения расхода ----------------------------------------------------
+dInteger := 1.0; // коэффицент интегрирования для учёта ограничений. 0 - расход ограничен, 1 - нет ограничений, >0 и <1 - ограничена скорость изменения расхода ТГ
+// -------------------  ограничение изменения задания на расход топлива ----------------------------
+tmpSpeed := FRegData.outTemp - FRegData.setGt; 	// требуемое регулятором приращение расхода на цикл программы
+maxSpeed := GPA_Tune_FR.rateGt *  tim.cycle;		// разрешённое паспортом двигателя приращение расхода за цикл программы
+
+IF tmpSpeed > maxSpeed THEN // если требуемое приращение  больше допустимого 
+    FRegData.setGt := FRegData.setGt + maxSpeed;
+	dInteger := maxSpeed/tmpSpeed;
+	//FRegData.contur := FRegContur.GT_RATE_UP;
+ELSIF tmpSpeed < -maxSpeed THEN
+  // нижнее ограничение по скорости
+    FRegData.setGt := FRegData.setGt - maxSpeed;
+	dInteger := maxSpeed/tmpSpeed;
+	//FRegData.contur := FRegContur.GT_RATE_DN;
+ELSE
+  // ограничения нет
+    FRegData.setGt := FRegData.outTemp;
+END_IF;
+
+// ------------ Ограничение расхода по характеразерам -----------------------------
+minGt := getTun(arg := FR_evPar.NvdNorm, curve := GPA_Curve_FR.NvdToGtMin)/FR_evPar.KnormPtg;
+maxGt := getTun(arg := FR_evPar.NvdNorm, curve := GPA_Curve_FR.NvdToGtMax)/FR_evPar.KnormPtg;
+if FRegData.setGt > maxGt then
+	FRegData.setGt := maxGt;
+	dInteger := 0.0;					//Если упёрлись в ограничение - интеграл не растёт
+	FRegData.contur := FRegContur.GT_RATE_UP;
+elsif FRegData.setGt < minGt then
+	FRegData.setGt := minGt;
+	dInteger := 0.0;
+	FRegData.contur := FRegContur.GT_RATE_DN;
+end_if;
+// ------------ Пересчёт расхода в степень открытия ТК ----------------------------
+if NOT FRS.Rp_fire then
+	GPA_AO.Set_TRK := getTun(arg := FRegData.setGt, curve := GPA_Curve_FR.GTtoOpen);
+end_if;
+
+// ------------ Изменение общего интегратора в зависимости от ограничений
+if FRegData.regs[FRegData.contur].oldErr * FRegData.regs[tmpContur].dInteg >= 0.0 then // Если ошибка и интеграл одного знака
+	FRegData.integ := FRegData.integ + FRegData.regs[tmpContur].dInteg * dInteger;		//к общему интегралу добавляется интеграл активного контура
+																								//умноженный на коэффицент интегрирования
+else 																			// если ошибка и интеграл разного знака
+	FRegData.integ := FRegData.integ + FRegData.regs[tmpContur].dInteg;		// прибавляем интеграл активного контура к общему интегралу полностью
+end_if;
+]]></ST>
+            </Function>
+            <Function UUID="3V6NUDHUM6JENMW2TDK4JAMTIA" Name="LimitSpeedToSetN" Comment="Ограничеие скорости роста задания на ЧВ " ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables>
+                    <Variable UUID="TGRKOA6FXVFU3OSCKDC7NJ2TNY" Name="maxRateNst" Type="REAL" Usage="internal" />
+                    <Variable UUID="6EMCFA2R76UERHT2IATSMUS6XI" Name="maxRateNvd" Type="REAL" Usage="internal" />
+                </Variables>
+                <ST><![CDATA[//На разных режимах разные предельные скорости изменения расхода
+if FRegData.FRegMode = FRegMode.work then 	//на рабочем режиме
+	maxRateNst := GPA_Tune_FR.rateNstBtn* tim.cycle;
+	maxRateNvd := GPA_Tune_FR.rateNvdBtn* tim.cycle;
+elsif FRS.R_start then						//на пуске
+	maxRateNst := GPA_Tune_FR.rateNstStart* tim.cycle;
+	maxRateNvd := GPA_Tune_FR.rateNvdStart* tim.cycle;
+else										//на НО
+	maxRateNst := GPA_Tune_FR.rateNstNO* tim.cycle;
+	maxRateNvd := GPA_Tune_FR.rateNvdNO* tim.cycle;
+end_if;
+
+IF FRegData.isRegNst THEN // и если включено регулирование СТ, вводим ограничение изменения задания на обороты СТ
+		if NOT (FRegData.wasFeedback AND FRegData.wasRegNst) then //если обратной связи  или регулирования СТ не было на прошлом цикле
+			FRegData.setTmp := FR_evPar.Nst.out;					// присваимаем теущему заданию текущие обороты СТ
+			//FRegData.setNst := FRegData.setTmp;
+			FRI.SetNst := FRegData.setTmp;
+		end_if;
+      	//-------------------
+		if FRI.SetNst > FRegData.setTmp and FRS.Rp_hiLimited then
+			;
+		elsif FRI.SetNst < FRegData.setTmp and FRS.Rp_loLimited then
+			;
+		elsif (FRI.SetNst - FRegData.setTmp) > maxRateNst then // если текущее задание на СТ отличается от внутреннего задания более, чем настройка "максимальный рост задания на СТ"
+			FRegData.setTmp := FRegData.setTmp + maxRateNst;	 // увеличивает внутреннее задание на величину максимального роста задания
+		elsif FRI.SetNst - FRegData.setTmp < -maxRateNst then // то же для снижения задания
+			FRegData.setTmp := FRegData.setTmp - maxRateNst;
+		else
+			FRegData.setTmp := FRI.SetNst;
+		end_if;
+else	// ограничение изменения задания на обороты ВД - аналогично СТ
+		if NOT FRegData.wasFeedback OR FRegData.wasRegNst then
+			FRegData.setTmp := FR_evPar.NvdNorm;
+			//FRegData.setNvd := FRegData.setTmp;
+			FRI.SetNvd := FRegData.setTmp;
+		end_if;
+		//----------------------
+		//FRegData.setNvd := FRI.SetNvd;
+
+		if FRI.SetNvd > FRegData.setTmp and FRS.Rp_hiLimited then
+			;
+		elsif FRI.SetNvd < FRegData.setTmp and FRS.Rp_loLimited then
+			;
+		elsif FRI.SetNvd - FRegData.setTmp > maxRateNvd then
+			FRegData.setTmp := FRegData.setTmp +  maxRateNvd;
+		elsif FRI.SetNvd - FRegData.setTmp < -maxRateNvd then
+			FRegData.setTmp := FRegData.setTmp - maxRateNvd;
+		else
+			FRegData.setTmp := FRI.SetNvd;
+		end_if;
+end_if;
+
+FRegData.wasFeedback := FRegData.isFeedback;
+FRegData.wasRegNst := FRegData.isRegNst;
+]]></ST>
+            </Function>
+            <Function UUID="RP6RD66JO5BUTNGX5RMC2TGZQQ" Name="SetPID" ResultTypeUUID="3V5XT3AA6VAULD5HQCWTIGEZD4">
+                <Variables />
+                <ST><![CDATA[// ------------------- Выставляем параметры контуров ПИД -----------------------------------------------------
+// Три контура Nvd - следящий, ограничение снизу, ограничение сверху
+FRegData.regs[FRegContur.N_VD].Kp := GPA_Tune_FR.KpropNvd * getTun(arg := FR_evPar.Nvd.out, curve := GPA_Curve_FR.corrKpropNvdFromNvd);//П-коэффициент
+FRegData.regs[FRegContur.N_VD].Ki := GPA_Tune_FR.KintegNvd * getTun(arg := FR_evPar.Nvd.out, curve := GPA_Curve_FR.corrKpropNvdFromNvd);	//И-коэффициент
+FRegData.regs[FRegContur.N_VD].Kd := GPA_Tune_FR.KdiffNvd;	//Д-коэффициент
+FRegData.regs[FRegContur.N_VD].DZ := GPA_Tune_FR.DZNvd;	//зона нечувствительности
+
+FRegData.regs[FRegContur.N_VDnorm_MIN].Kp := FRegData.regs[FRegContur.N_VD].Kp;//П-коэффициент
+FRegData.regs[FRegContur.N_VDnorm_MIN].Ki := FRegData.regs[FRegContur.N_VD].Ki;	//И-коэффициент
+FRegData.regs[FRegContur.N_VDnorm_MIN].Kd := GPA_Tune_FR.KdiffNvd;	//Д-коэффициент
+FRegData.regs[FRegContur.N_VDnorm_MIN].DZ := GPA_Tune_FR.DZNvd;	//зона нечувствительности
+
+FRegData.regs[FRegContur.N_VD_MAX].Kp := FRegData.regs[FRegContur.N_VD].Kp;//П-коэффициент
+FRegData.regs[FRegContur.N_VD_MAX].Ki := FRegData.regs[FRegContur.N_VD].Ki;	//И-коэффициент
+FRegData.regs[FRegContur.N_VD_MAX].Kd := GPA_Tune_FR.KdiffNvd;	//Д-коэффициент
+FRegData.regs[FRegContur.N_VD_MAX].DZ := GPA_Tune_FR.DZNvd;	//зона нечувствительности
+
+FRegData.regs[FRegContur.N_VDnorm_MAX].Kp := FRegData.regs[FRegContur.N_VD].Kp;//П-коэффициент
+FRegData.regs[FRegContur.N_VDnorm_MAX].Ki := FRegData.regs[FRegContur.N_VD].Ki;	//И-коэффициент
+FRegData.regs[FRegContur.N_VDnorm_MAX].Kd := GPA_Tune_FR.KdiffNvd;	//Д-коэффициент
+FRegData.regs[FRegContur.N_VDnorm_MAX].DZ := GPA_Tune_FR.DZNvd;	//зона нечувствительности
+
+// Три контура Nst - следящий, ограничение снизу, ограничение сверху
+FRegData.regs[FRegContur.N_ST].Kp := GPA_Tune_FR.KpropNst * getTun(arg := FR_evPar.Nvd.out, curve := GPA_Curve_FR.corrKpropNstFromNvd);//П-коэффициент
+FRegData.regs[FRegContur.N_ST].Ki := GPA_Tune_FR.KintegNst * getTun(arg := FR_evPar.Nvd.out, curve := GPA_Curve_FR.corrKpropNstFromNvd);	//И-коэффициент
+FRegData.regs[FRegContur.N_ST].Kd := GPA_Tune_FR.KdiffNst;// * getTun(arg := FR_evPar.Nst.out, tunCurv := GPA_Curve_FR.corrKpropNstFromNst);	//Д-коэффициент
+FRegData.regs[FRegContur.N_ST].DZ := GPA_Tune_FR.DZNst;	//зона нечувствительности
+
+FRegData.regs[FRegContur.N_ST_MIN].Kp := FRegData.regs[FRegContur.N_ST].Kp ;//П-коэффициент
+FRegData.regs[FRegContur.N_ST_MIN].Ki := FRegData.regs[FRegContur.N_ST].Ki;	//И-коэффициент
+FRegData.regs[FRegContur.N_ST_MIN].Kd := FRegData.regs[FRegContur.N_ST].Kd;	//Д-коэффициент
+FRegData.regs[FRegContur.N_ST_MIN].DZ := GPA_Tune_FR.DZNst;	//зона нечувствительности
+
+FRegData.regs[FRegContur.N_ST_MAX].Kp := FRegData.regs[FRegContur.N_ST].Kp ;//П-коэффициент
+FRegData.regs[FRegContur.N_ST_MAX].Ki := FRegData.regs[FRegContur.N_ST].Ki;	//И-коэффициент
+FRegData.regs[FRegContur.N_ST_MAX].Kd := FRegData.regs[FRegContur.N_ST].Kd;	//Д-коэффициент
+FRegData.regs[FRegContur.N_ST_MAX].DZ := GPA_Tune_FR.DZNst;	//зона нечувствительности
+
+// контур Tout TND - ограничение сверху
+FRegData.regs[FRegContur.T_MAX].Kp := GPA_Tune_FR.KpropTnd * getTun(arg := FR_evPar.Nvd.out, curve := GPA_Curve_FR.corrKpropTndFromNvd);//П-коэффициент зависит от текущих оборотов КВД
+FRegData.regs[FRegContur.T_MAX].Ki := GPA_Tune_FR.KintegTnd * getTun(arg := FR_evPar.Nvd.out, curve := GPA_Curve_FR.corrKpropTndFromNvd);	//И-коэффициент зависит от текущих оборотов КВД
+FRegData.regs[FRegContur.T_MAX].Kd := GPA_Tune_FR.KdiffTnd;	//Д-коэффициент
+FRegData.regs[FRegContur.T_MAX].DZ := GPA_Tune_FR.DZTnd;	//зона нечувствительности
+
+]]></ST>
+            </Function>
+        </Folder>
+    </FBLibrary>
+</Program>

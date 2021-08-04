@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Old_Project">
+	<Items>
+		<Item Name="T_KC_AM.type" />
+	</Items>
+</Folder>

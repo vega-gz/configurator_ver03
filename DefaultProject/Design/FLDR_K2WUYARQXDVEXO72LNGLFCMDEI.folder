@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Алг">
+	<Items>
+		<Item Name="T_ALG_UVI.type" />
+		<Item Name="T_Mode_UVI.type" />
+		<Item Name="T_UVI_TS.type" />
+		<Item Name="T_UVI_mode.type" />
+		<Item Name="Type_KKC6CZPONQ5ULLUCHMAGEYQLRU.type" />
+		<Item Name="Type_MOL4GQ3H5BEEVPLLTIQVDB6WDA.type" />
+		<Item Name="Type_P2NHC6KKGBCENKKTK7KFEEIBCA.type" />
+	</Items>
+</Folder>

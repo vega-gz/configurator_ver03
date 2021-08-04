@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Type v. 1.0 >
+<Type Kind="Struct" Name="T_GPA_FR_AI_DRV" UUID="NGMN63HCTRCC7JXBDL4BUZOBRE">
+<Fields>
+<Field Comment="Частота 1 вращения ротора ГТД (обмотка 1 датчика 1)" Name="Nvd1" Type="REAL" UUID="C43D92F7E15F4B1EAC0526A0DCD87E6C"/>
+<Field Comment="Частота 2 вращения ротора ГТД (обмотка 1 датчика 2)" Name="Nvd2" Type="REAL" UUID="BFD6B84FBCCE4D83A3828782ED796431"/>
+<Field Comment="Частота 1 вращения ротора СТ (обмотка 1 датчика 1)" Name="Nst1" Type="REAL" UUID="0A3FBE049C4446FF8B1DD0EA7BF9D4B9"/>
+<Field Comment="Частота 2 вращения ротора СТ (обмотка 1 датчика 2)" Name="Nst2" Type="REAL" UUID="894D0970D4064AF8A70BFF63BC33557C"/>
+<Field Comment="Температура 1 газа за турбиной" Name="T1_outGG" Type="REAL" UUID="2XSFD7NYDZFGFOPMHHAEYBUCGU"/>
+<Field Comment="Температура 2 газа за турбиной" Name="T2_outGG" Type="REAL" UUID="IEDIINYWMJCT7MNQVWU4KB2OVU"/>
+<Field Comment="Положение 1 дозатора топливного газа" Name="Pos1_TRK" Type="REAL" UUID="HEBKP34PHBFVLP5AP4M2OTTQQY"/>
+<Field Comment="Статическое давление воздуха за компрессором" Name="Pv_outTK" Type="REAL" UUID="FRYXRCZ7ZBB5TF2WQVFKG65Z3Y"/>
+<Field Comment="Положение ВНА" Name="Pos_VNA" Type="REAL" UUID="HJJHOJY45JBOLADSUUPHJLER3Q"/>
+</Fields>
+</Type>

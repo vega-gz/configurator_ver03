@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_CalcPar" Kind="Struct" UUID="0EC70B0E49DC317532C7809D2EDB58F6">
+	<Fields>
+		<Field Name="Set_Pout" Type="FA0047664275CF9B0C76139B78188A33" UUID="58405E3842D332009072809ED25DDBE4" Comment="Задание вых. давления" />
+		<Field Name="Set_cr" Type="FA0047664275CF9B0C76139B78188A33" UUID="699861534226F18844153FA4759FB62D" Comment="Задание степени сжатия" />
+		<Field Name="Set_Qg" Type="FA0047664275CF9B0C76139B78188A33" UUID="3F7DF938458949CDF2B04C90721EF0BD" Comment="Задание расхода газа" />
+		<Field Name="Cr" Type="FA0047664275CF9B0C76139B78188A33" UUID="013FB7F044C06BA8F08FCFBC5CA07D48" Comment="Степень сжатия по цеху" />
+		<Field Name="Qg" Type="FA0047664275CF9B0C76139B78188A33" UUID="5BA088BD40706CBB86638E82288B8602" Comment="Расход газа по цеху" />
+		<Field Name="Pg_in_Kol" Type="FA0047664275CF9B0C76139B78188A33" UUID="73C551C24AAE6B480BBA1181D3D1768A" Comment="Давление во входном коллекторе КЦ" />
+		<Field Name="Pg_out_Kol" Type="FA0047664275CF9B0C76139B78188A33" UUID="057DCED540EE45565D187097BE58E203" Comment="Давление в выходном коллекторе КЦ" />
+		<Field Name="Set_N_ST" Type="FA0047664275CF9B0C76139B78188A33" UUID="HJJFFN2IYHEULNFW3VY6ZY4R3A" Comment="Задание на обороты СТ" />
+		<Field Name="GPA1_HiLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="OA5HGHWEV7JU7H7KNKGBG6CUDM" Comment="Запас до верхних ограничений ГПА1" />
+		<Field Name="GPA1_LoLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="6VODGDJYFPZUZMUA7B3RYDA75U" Comment="Запас до нижних ограничений ГПА1" />
+		<Field Name="GPA2_HiLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="6BU4NFWAWZQURDXPV44Y6UARDU" Comment="Запас до верхних ограничений ГПА2" />
+		<Field Name="GPA2_LoLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="ISMWSIDGOX3EXDOGDU3VNGRGVM" Comment="Запас до нижних ограничений ГПА2" />
+		<Field Name="GPA3_HiLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="NHFHKYG5M57UXOIWMY23NCNGJU" Comment="Запас до верхних ограничений ГПА3" />
+		<Field Name="GPA3_LoLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="Q3II6AZKAE7E7OQKM67TF3NJH4" Comment="Запас до нижних ограничений ГПА3" />
+		<Field Name="GPA4_HiLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="VU45ZTU44C7ELKAY2VKVEFJBCQ" Comment="Запас до верхних ограничений ГПА4" />
+		<Field Name="GPA4_LoLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="ORBVDL3WSGSEHG7H2PFK3DJLVY" Comment="Запас до нижних ограничений ГПА4" />
+		<Field Name="GPA5_HiLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="555JEG4RY72E7FNQ5HRUIYBL4E" Comment="Запас до верхних ограничений ГПА5" />
+		<Field Name="GPA5_LoLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="FVUIBDAVEKBERO2XNBG27FL6AI" Comment="Запас до нижних ограничений ГПА5" />
+		<Field Name="GPA6_HiLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="SUVI77DBV4SEJM27J4NNNAO5RE" Comment="Запас до верхних ограничений ГПА6" />
+		<Field Name="GPA6_LoLim" Type="FA0047664275CF9B0C76139B78188A33" UUID="ML34QGCXE5VE5IO3IIY5TBPARE" Comment="Запас до нижних ограничений ГПА6" />
+	</Fields>
+</Type>

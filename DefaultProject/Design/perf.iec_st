@@ -1,0 +1,2224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Program >
+<Program UUID="7MPFGH7JDWSUHCVMAUMZBCFO2E" Name="perf" Period="250" PutDataAtEndOfCycle="false">
+    <Variables>
+        <Variable UUID="BSCSKJ74JZIURPUAKQ2RWGHI2A" Name="tmpREALtime" Type="LREAL" Usage="internal" />
+        <Variable UUID="DY2O25ZIYDZEVL6KX2DFQ6HKBU" Name="tmpREALtime_prev" Type="LREAL" Usage="internal" />
+        <Variable UUID="ZBEAISXHV5REJPKVJCRTJJDYX4" Name="call_perf" Type="perf_main" TypeUUID="VLBUI5IGKJMELCF43O7FQMNAZ4" Usage="internal" />
+        <Variable UUID="BYSP5HER7WZE5KYMCY6IREDXAI" Name="used_gpa_N" Type="REAL" Usage="internal" />
+        <Variable UUID="DDPVJWOIX7JURHGVQ7KG4Y6B4Y" Name="W" Type="INT" Usage="internal" />
+        <Variable UUID="ODP3IJBPQ7BE3K2MSSQ3RA6FMQ" Name="OB_st" Type="REAL" Usage="internal" />
+    </Variables>
+    <ST><![CDATA[//	Eout_conf := ;
+//	Ein_conf := ;
+//	EoutEin_conf := ;
+//	Q_conf := ;
+
+//	gpa := ;
+//	shop := ;
+
+
+// определение времени цикла
+tmpREALtime := CLOCK();
+del_T := LREAL_TO_REAL(tmpREALtime - tmpREALtime_prev);
+tmpREALtime_prev := tmpREALtime;
+
+
+
+
+call_perf(//del_T := del_T,
+		//	Eout_conf := Eout_conf,
+		//	Ein_conf := Ein_conf,
+		//	EoutEin_conf := EoutEin_conf,
+		//	Q_conf := Q_conf,
+		//	gt_Mstruct := gt_Mstruct,
+		//	gpa := gpa,
+		//	shop := shop,
+		//	glob_conf_change := glob_conf_change,
+		//	test_array := test_array
+);
+
+//	 := Eout_conf;
+//	 := Ein_conf;
+//	 := EoutEin_conf;
+//	 := Q_conf;
+//	 := gt_Mstruct;
+//	 := gpa;
+//	 := shop;
+used_gpa_N := 0.0;
+OB_st := 0.0;
+FOR W := 1 TO 6 DO
+  			if (gpa[W].online  and gpa[W].run  and gpa[W].remote  and gpa[W].Nst <> 0.0) then
+				OB_st := OB_st + gpa[W].Nst;
+				used_gpa_N := used_gpa_N + 1.0;
+			end_if;
+end_for;
+
+(*
+If Wish_main_loop = 1 and used_gpa_N > 0.0 then
+					gt_Mstruct.pid_struct[1].local_SP := Zadan_R.Q;
+(*					else 
+gt_Mstruct.pid_struct[1].local_SP := gt_Mstruct.pid_struct[1].real_PV;
+Zadan_R.Q := gt_Mstruct.pid_struct[1].real_PV;*)
+(*end_if;
+
+If Wish_main_loop = 3 and used_gpa_N > 0.0 then
+					gt_Mstruct.pid_struct[3].local_SP := Zadan_R.P_v;
+(*					else 
+gt_Mstruct.pid_struct[3].local_SP := gt_Mstruct.pid_struct[3].real_PV;
+Zadan_R.P_v := gt_Mstruct.pid_struct[3].real_PV;*)
+(*end_if;
+
+If Wish_main_loop = 4 and used_gpa_N > 0.0 then
+					gt_Mstruct.pid_struct[4].local_SP := Zadan_R.ST_s;
+(*					else 
+gt_Mstruct.pid_struct[4].local_SP := gt_Mstruct.pid_struct[4].real_PV;
+Zadan_R.ST_s := gt_Mstruct.pid_struct[4].real_PV;*)
+(*end_if;
+
+If Wish_main_loop = 5 and used_gpa_N > 0.0 then
+					gt_Mstruct.pid_struct[5].local_SP := Zadan_R.N_st;
+(*					else
+if used_gpa_N < 1.0 then used_gpa_N :=1.0; end_if;
+gt_Mstruct.pid_struct[5].local_SP := OB_st/used_gpa_N;
+Zadan_R.N_st := OB_st/used_gpa_N;*)
+(*end_if;
+
+(*
+gt_Mstruct.pid_struct[3].local_SP := Zadan_R.P_v;
+gt_Mstruct.pid_struct[4].local_SP := Zadan_R.ST_s;
+gt_Mstruct.pid_struct[5].local_SP := Zadan_R.N_st;
+*)]]></ST>
+    <DataTypes>
+        <Struct UUID="ANDH5HVLGZKE3D2D6SYUCZESVI" Name="dPID">
+            <Field UUID="KGJ6WTXSYGUUDH5X65SQADFZ2Q" Name="loop_type" Type="INT" />
+            <Field UUID="BFNED3A2A77E7H7YCAEEDP6MQU" Name="loop_num" Type="INT" />
+            <Field UUID="LDKTAVVOWRRERMMNTHJXINBLG4" Name="loop_priority" Type="INT" />
+            <Field UUID="OPOYURDLA7ZE3N4WNGMU6LETRY" Name="loop_enable" Type="BOOL" />
+            <Field UUID="NSPF55DCGBZUTG6YAP65Z6ALNU" Name="loop_valid" Type="BOOL" />
+            <Field UUID="PPKGLDTEVLKUBM7VIA4YLLS57M" Name="rem_loc" Type="BOOL" />
+            <Field UUID="522JT7UFWKGEDPWTD2WN23AJWE" Name="auto_man" Type="BOOL" />
+            <Field UUID="IBQLSRQVGAQETB7CAYCE7GQI2U" Name="loop_direct" Type="BOOL" />
+            <Field UUID="P7VYE6JAUWBEJIC3JF2AKSSRRE" Name="delt_t" Type="REAL" />
+            <Field UUID="HVM6NJ6MIHBULNXJFFPPW3JKYI" Name="SP_ramp_rate" Type="REAL" />
+            <Field UUID="F7KWZEILW6FUTP7G74ZZSNEONU" Name="DB" Type="REAL" />
+            <Field UUID="EYSDZF6RSOHUPBEHDPNK3QJZ6Y" Name="SP_gain" Type="REAL" />
+            <Field UUID="JCSW3WMD4XTE3KQYHTKO3SMNLM" Name="SP_bias" Type="REAL" />
+            <Field UUID="ABSD3VGZ4WBEXNME7A5ZG5OKNM" Name="PV_gain" Type="REAL" />
+            <Field UUID="FYFOABFV6JSERCPP4EV2JKPTGE" Name="PV_bias" Type="REAL" />
+            <Field UUID="AP73HGFOSNWEPHM77L246PSUVM" Name="SP_LowClamp" Type="REAL" />
+            <Field UUID="Z55XH2JLXVKE3NZFINAYYHD2XE" Name="SP_HighClamp" Type="REAL" />
+            <Field UUID="RS4LAWTBIKLU7PMSFMNNPTNYTM" Name="KP" Type="REAL" />
+            <Field UUID="R5L3PWDOC2BU3FDEIQG254CK54" Name="KI" Type="REAL" />
+            <Field UUID="RIN6LUQ2NN2EZBEYGTU6Y7X2VA" Name="non_conv_D_part_enable" Type="BOOL" />
+            <Field UUID="PR2HIG5OO2MEHHP64ZVISNFNAM" Name="D_part_clamp" Type="REAL" />
+            <Field UUID="2L4AZOVHZ2SE3OFNHPATUCQI6M" Name="dMax_value" Type="REAL" />
+            <Field UUID="35BVRLZTFHQUBFTPKVH4LQW7IY" Name="dMin_value" Type="REAL" />
+            <Field UUID="KOUCI6NBN7MUFK42BFZBRBEHVA" Name="Reset_D_max_value" Type="BOOL" />
+            <Field UUID="PP6Y6DCH423E7BB3SZYBDDPWDY" Name="KD" Type="REAL" />
+            <Field UUID="GIINPV4APIHU5HOLQ5DFZWVABI" Name="PV_failure" Type="BOOL" />
+            <Field UUID="M7EJBLYRT3TULBVAO2S4S2WIBA" Name="SwitchFlag" Type="BOOL" />
+            <Field UUID="AIQKIYI6NVHETPHVA64DNXRWGU" Name="PV" Type="REAL" />
+            <Field UUID="FSJI5XW3SHCE7MKJBRDOEBNLAI" Name="real_PV" Type="REAL" />
+            <Field UUID="MUMZ2QYQIGZEPOM2KCPQIZTWJA" Name="real_SP" Type="REAL" />
+            <Field UUID="M62CT3J22IVETKQZRR64NFE6JY" Name="local_SP" Type="REAL" />
+            <Field UUID="VKMTJGDMGIOUZDM6KNOAXJ5QZE" Name="remote_SP" Type="REAL" />
+            <Field UUID="ZOBXAMQAKHFUZE2ZV7OGNMOJZI" Name="limit_SP" Type="REAL" />
+            <Field UUID="CIGZBBPT74SUVK23KSKZ5HCA3A" Name="act_SP" Type="REAL" />
+            <Field UUID="S5RYWBBAOO5UJH2DZMXY4OQQSE" Name="active" Type="BOOL" />
+            <Field UUID="IOJKBALPJGUEXDWW5DGMDNEHIY" Name="cur_act" Type="BOOL" />
+            <Field UUID="FUEQ44DR6RVUVJES2CDATRJIG4" Name="goal_dir" Type="BOOL" />
+            <Field UUID="JBK7P3NSNQRETKDTU6F6NEXSRA" Name="limit_goal" Type="BOOL" />
+            <Field UUID="OM3HGA334QTE5PGMRONH54XBNM" Name="err" Type="REAL" />
+            <Field UUID="IYEZOTZOJDPEBHHELNEA5CJUOE" Name="P_part" Type="REAL" />
+            <Field UUID="QX2Q4FTCXMCUXOBRTPEDNGEQZ4" Name="dI_part" Type="REAL" />
+            <Field UUID="RD7CIPOCGV7ENBMF2ZJ4RSK5WY" Name="D_part" Type="REAL" />
+            <Field UUID="TZGVHBOOENFUJF4IMCHFR6632A" Name="PplusD_part" Type="REAL" />
+            <Field UUID="XFFTGMAGRSCUDDLLVAUY7RJHTQ" Name="m_mGOV" Type="REAL" />
+            <Field UUID="UMFRJE6DNRRURFOAKLMFMD7RYI" Name="derivative_threshold" Type="REAL" />
+            <Field UUID="GOGJDWS3FC7EFGHHM6YB3FR3G4" Name="d_PV" Type="REAL" />
+        </Struct>
+        <Struct UUID="UYJYHMSBU7MU7DTPCWIELHBL4I" Name="dSEL">
+            <Field UUID="QXE7DVNIHEOUXCXNX54DO35NP4" Name="pid_struct" Type="dPID" TypeUUID="ANDH5HVLGZKE3D2D6SYUCZESVI" Size="10" Array="TRUE" />
+            <Field UUID="6PU46ZPAVM5UJBCE7REHNIKVXI" Name="local_SP" Type="REAL" />
+            <Field UUID="4Q6PYWNE4IRUPPM3AYFILP2P3I" Name="remote_SP" Type="REAL" />
+            <Field UUID="NISOUK34I3WUFNSWYG7ALCKKMY" Name="act_SP" Type="REAL" />
+            <Field UUID="W3PBBSSKBCLU3IBOSTMM6H2G5Y" Name="manual_target" Type="REAL" />
+            <Field UUID="5WPL4YKGCH6ENDEUR7DUH34DLM" Name="PplusD_selected" Type="REAL" />
+            <Field UUID="O4FIQ573O5JUXJMN65Z5PTSKEE" Name="dI_selected" Type="REAL" />
+            <Field UUID="KH2A4KTSYGDULLLJNH3P4BKEUA" Name="goal_dir_selected" Type="BOOL" />
+            <Field UUID="ORQ7NJ36DQDERMRANI45ONS6SI" Name="priority_selected" Type="INT" />
+            <Field UUID="EE2POZFJTLEUNC2PV7FFSQLCUU" Name="main_loop" Type="INT" />
+            <Field UUID="6NCKHFH54XHUBLIPJU7PS3Q7CQ" Name="state" Type="INT" />
+            <Field UUID="QHCEEPKW4IFUVMZ6DFROJSFFSI" Name="act_control_mode" Type="INT" />
+            <Field UUID="MLXYOD4PNGQUNPQR7FFVO55ZU4" Name="N_loops" Type="INT" />
+            <Field UUID="SY3MPZZRYL5UXEGJYJD5BYNJZA" Name="tune_mode" Type="BOOL" />
+            <Field UUID="B6ZFK7F2RXLE7BJAUHGN46WHLE" Name="auto_man" Type="BOOL" />
+            <Field UUID="XP5FCJCQHJGUTB7VTPPI42Q6H4" Name="manual_enable" Type="BOOL" />
+            <Field UUID="BYRCOPTWRY6ERNWA62WSXX2S3M" Name="rem_loc" Type="BOOL" />
+            <Field UUID="MJMTT5LKKF2EFKRRIRKYWQ6OQA" Name="lim_in_man_enable" Type="BOOL" />
+            <Field UUID="7HHGAKPJEMUEVMVKC35PATIRN4" Name="lim_in_man_type" Type="INT" />
+            <Field UUID="4THQYQEM5TSU7O3W3HYFKJ4QEQ" Name="rem_SP_filt_const" Type="REAL" />
+            <Field UUID="Z5PU2MKRAHUUXN4DPDY4RIROZA" Name="manual_r_rate_s" Type="REAL" />
+            <Field UUID="4HXWHC2RG34EDOASDGLUEBH5EQ" Name="manual_r_rate_f" Type="REAL" />
+            <Field UUID="2WHVWQX3JBJUHAIXQGMDBI2JYY" Name="loop_selected" Type="INT" />
+            <Field UUID="JZY45I55KRBULFZNAD4YROBE4E" Name="LimitCondition" Type="BOOL" />
+            <Field UUID="MZQFRKBOOLLEZJ4XWHDW7S2CDE" Name="force_out_of_limit" Type="BOOL" />
+            <Field UUID="NRX46ZQI6HSEHPFVAKRL5FL6KI" Name="last_goal_dir" Type="BOOL" />
+            <Field UUID="4LC23YNBR6NEFKVGQ6ZZ73E2WE" Name="limit_goal" Type="BOOL" />
+            <Field UUID="C3O62HXERBEUDAZPZM2Z6AGBJM" Name="oppos_limits" Type="BOOL" />
+            <Field UUID="G3T4R3M2KKRUXIG7M3RTO7K3Q4" Name="high_clamp" Type="REAL" />
+            <Field UUID="I3JXZV4HCDTUJJYY35X6VTISR4" Name="low_clamp" Type="REAL" />
+            <Field UUID="JBKU3XJWIZBUJIMCL5VASXTRIQ" Name="clamp" Type="INT" />
+            <Field UUID="BFDXKYFMRCYUPGIBWJMHMBLVEQ" Name="vel_high_limit" Type="REAL" />
+            <Field UUID="26YMOPLTRAFUZACH3PQXVFZM7I" Name="vel_low_limit" Type="REAL" />
+            <Field UUID="W7RW7RBFDRJUFMBRTEUFIBSQSA" Name="vel_limit_ind" Type="BOOL" />
+            <Field UUID="FG4LIUOUDG6UVAB4BFIRCC6ZS4" Name="hyst" Type="REAL" />
+            <Field UUID="7UOZ6NLWKNIETPRFKXTOSXKBSM" Name="FCV_reverse" Type="BOOL" />
+            <Field UUID="IKZHBJFQDQ5UNF3GIZ5BCY7LUA" Name="CV" Type="REAL" />
+            <Field UUID="3LXUIYW3C2GU3M5F4X5IJZG4VQ" Name="FCV" Type="REAL" />
+            <Field UUID="3J4EHDP5MBLUDFLD7D2SLK3FOQ" Name="d_out_min" Type="REAL" />
+            <Field UUID="FFMQCCLGFQAE3NAODPUALQADBY" Name="d_out_max" Type="REAL" />
+            <Field UUID="DASIO6MXY7YENGPDOWFSJPPWQI" Name="delta_time" Type="DINT" />
+            <Field UUID="ZFKSLGGB4Q7EXIIUQR2EFZIFSU" Name="had_ESD" Type="BOOL" />
+            <Field UUID="Z7GSJUCXSC4E3KUABGIQWR6EPE" Name="had_SD" Type="BOOL" />
+        </Struct>
+        <Struct UUID="6CTZENGKRKXEROFVYZQWMZPW5Q" Name="ext_var">
+            <Field UUID="M6TYA7AGUR6URH4M5UEDR4W7PI" Name="PV" Type="REAL" />
+            <Field UUID="FUF2TGSQQ4FEJFTFCF2GDAS2FA" Name="real_PV" Type="REAL" />
+            <Field UUID="PADQLD23CNIUPJWF2GVBRU6N6M" Name="Tf" Type="REAL" />
+            <Field UUID="5TZJQ3SVEKGENEOTIBL3NFNCSY" Name="selection_method" Type="INT" />
+            <Field UUID="MH4VCP6X3ZCUVIBUF473MBYLDQ" Name="trans_enable" Type="BOOL" Size="25" Array="TRUE" />
+            <Field UUID="MFIW36GPHK3U7FYCV23AX5KO3M" Name="failure" Type="BOOL" />
+            <Field UUID="2CFZ3DY5KFBEBPWIX5IKIVF3Y4" Name="PV_gain" Type="REAL" />
+            <Field UUID="LF7AEMGXODUU5CM2J4BQ7T4YBY" Name="PV_bias" Type="REAL" />
+            <Field UUID="2NAFXRKJG34EHOUAYQWN5BFAXU" Name="RX_gain" Type="REAL" />
+            <Field UUID="OFYLQGTOWX7EJBYJRFYGENIAEA" Name="RX_bias" Type="REAL" />
+            <Field UUID="TA23MXTPFORUDFZMQYDCLYYWBM" Name="AlarmHigh" Type="REAL" />
+            <Field UUID="X5ONS54NL5VU3GMA7NXMUDAYL4" Name="AlarmLow" Type="REAL" />
+            <Field UUID="NMRMEB2RSLCEDL5W7XD7TQEV4E" Name="CharType" Type="INT" />
+            <Field UUID="5R5F3AL6OGDEXACSOYYOS3IBVY" Name="TransmitterHigh" Type="REAL" />
+            <Field UUID="5AZVGRVHBPQE3B6KLW5WOFCGJ4" Name="TransmitterLow" Type="REAL" />
+        </Struct>
+    </DataTypes>
+    <FBLibrary>
+        <FunctionBlock UUID="P5ZIVPJWKS7EXEX7JUV646SASM" Name="AbortSeq_1_1">
+            <Variables>
+                <Variable UUID="DBIPDHSUZDXELNV3JQXDBVIZ5M" Name="SP" Type="REAL" Usage="input" />
+                <Variable UUID="P5IPBCCOCW4UDJKKEPHMVV3N7I" Name="cond" Type="BOOL" Usage="output" />
+                <Variable UUID="5DHHIYDJPN6EFHHAFKKVYAOPN4" Name="HighLimit" Type="BOOL" Usage="output" />
+                <Variable UUID="U34T7AJUL55UBJJUXA3YE657VI" Name="LowLimit" Type="BOOL" Usage="output" />
+                <Variable UUID="5GYQJQ4DLTPEXECDYBHXTUJZHY" Name="SP_previous" Type="REAL" Usage="internal" />
+                <Variable UUID="RQDMQWIRVARUTEABN42OLGRB7U" Name="loop_selected" Type="INT" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[	cond:= FALSE;
+	HighLimit := FALSE;
+	LowLimit := FALSE;
+	IF gt_Mstruct.LimitCondition THEN
+		loop_selected :=gt_Mstruct.loop_selected;
+		IF loop_selected = 0 THEN RETURN; END_IF;
+		IF (loop_selected<>gt_Mstruct.main_loop) THEN
+		 IF( gt_Mstruct.pid_struct[loop_selected].loop_type = 1) THEN
+		 		HighLimit := TRUE;		        (*High limit *)
+		 	IF  (SP > SP_previous) THEN 
+				cond := TRUE;                      (* Sequence Up *)   
+            END_IF;
+	     ELSIF (gt_Mstruct.pid_struct[loop_selected].loop_type = -1) THEN   (*Low Limit *)
+		 		LowLimit := TRUE;
+			 IF (SP < SP_previous) THEN							 (* Sequence Down *)
+         		cond := TRUE;
+             END_IF;
+		 ELSIF (gt_Mstruct.clamp = -1) OR (gt_Mstruct.clamp = 1) THEN
+		 	cond := TRUE;
+		 END_IF; 
+	    END_IF;
+	END_IF;
+	SP_previous := SP;]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="AXCXOIB7AKCUXFLF2MWOV6AZOE" Name="FB_AppControl" Comment="Контроль активности приложения">
+            <Variables>
+                <Variable UUID="FJNZ62WTBYHUZDJXUSUSQDW774" Name="bit" Comment="сигнал активности от узла" Type="BOOL" Usage="input" />
+                <Variable UUID="LD7GCONSB7MURMJP2RSX6HRPSE" Name="tDiag" Comment="период диагностирования обрыва" Type="TIME" InitialValue="T#3s" Usage="input" />
+                <Variable UUID="OFQUBN4RRDUEZIJ4LT6MGUYA64" Name="break" Comment="нет связи" Type="BOOL" Usage="output" />
+                <Variable UUID="MVM4JD3HK3UUXL3SE7JYE6R5RI" Name="tmr" Type="TON" TypeUUID="NM52J2VHZ3GU3NCIW4VK3USPKU" Usage="internal" />
+                <Variable UUID="E6JSUXK52I3UXJHHFRQPWMUBDM" Name="pr" Type="BOOL" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[//сброс таймера по смене фронта меандра
+tmr(IN:= NOT(bit AND NOT pr), PT:= tDiag, Q=>break);
+pr := bit; //запоминаем на предыдущем цикле]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="EERK2SUBVLWE3OAWFFFHBTUABI" Name="OUTGT_4">
+            <Variables>
+                <Variable UUID="763CLLXWUADUTOY5A6TY57VVRU" Name="d_out_max" Type="REAL" Usage="output" />
+                <Variable UUID="Z7IXPFVTBAUERI6QN4DVUGPRYQ" Name="d_out_min" Type="REAL" Usage="output" />
+                <Variable UUID="VFJDJIX6WKIEJHX6SI6ZN6JYEY" Name="clamp" Type="INT" Usage="output" />
+                <Variable UUID="HCCPUA6XMJDUTB7UWUIDA7JJRU" Name="d_out" Type="REAL" Usage="output" />
+                <Variable UUID="MAGE3G4R4FHULBT7IHVWSXABYI" Name="decouple" Type="REAL" Usage="internal" />
+                <Variable UUID="I5YC3D6Y545U3PJER5NVLT734Q" Name="open_seq" Type="BOOL" Usage="internal" />
+                <Variable UUID="3Y3V2TYXLBLULCLL5Y5MT2UF6U" Name="rate_lim_1" Type="rate_lim_2" TypeUUID="NB62DYFM7JMEDJ3275MTXEOBHA" Usage="internal" />
+                <Variable UUID="2BZDFDQDVUJUTGCMGSVDJSXM2Q" Name="accel_clamp_alarm" Type="BOOL" Usage="internal" />
+                <Variable UUID="QR55R3TZPCIULNX7MKQJ2FZZSI" Name="decel_clamp_alarm" Type="BOOL" Usage="internal" />
+                <Variable UUID="IXITWC2VV2UERJWANE2E3E3G3Y" Name="dOl" Type="REAL" Usage="internal" />
+                <Variable UUID="TJA2ERNFDH6E7GYBO5OOI2IHSM" Name="cond_switch" Type="BOOL" Usage="internal" />
+                <Variable UUID="U6IJH2Q6AXDUBEJ3QL4WKTJPRA" Name="d_FCV" Type="REAL" Usage="internal" />
+                <Variable UUID="DTIOGOZQCUNUZBYVYPL2Z6H5GY" Name="out_inter" Type="REAL" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[
+ decouple := 0.0;
+ open_seq := FALSE;
+
+
+  rate_lim_1(s_sel := gt_Mstruct, decouple := decouple, switch := cond_switch, open_seq := open_seq);  
+  
+  	d_out := rate_lim_1.d_out;
+  	d_FCV := rate_lim_1.d_out;	
+//	t_d_fcv := d_FCV;
+    out_inter :=   d_out  ; (* positional signal *)
+
+  	(* ------------------------------------------------------------------------------------------*)
+    accel_clamp_alarm := FALSE;
+    decel_clamp_alarm := FALSE; 
+  	IF gt_Mstruct.auto_man AND NOT open_seq THEN
+  		(* ------------------------Anti-wind protection -----------------------*)
+    	IF ( out_inter >= gt_Mstruct.high_clamp) THEN
+    		clamp := 1;
+      		out_inter := gt_Mstruct.high_clamp;
+      		accel_clamp_alarm := TRUE;
+   		ELSIF (out_inter <= gt_Mstruct.low_clamp) THEN
+      		clamp := -1;
+      		out_inter := gt_Mstruct.low_clamp;      
+      		decel_clamp_alarm := TRUE;
+    	ELSE
+      		clamp := 0;          
+    	END_IF;        
+  	END_IF;  
+  	
+  	gt_Mstruct.CV := gt_Mstruct.CV + out_inter;
+d_FCV := gt_Mstruct.CV;
+//  	rt := gt_Mstruct.cv;
+  	gt_Mstruct.clamp := clamp;]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="LOAEFZ2XY4CUTOMCP6ILQUFUZQ" Name="Read_CNF_4">
+            <Variables>
+                <Variable UUID="2LH5QB63TCSETP3YVXFVKGH7QE" Name="ext_var_3" Type="ext_var" TypeUUID="6CTZENGKRKXEROFVYZQWMZPW5Q" Usage="internal" />
+                <Variable UUID="5ECOEXQIIDPE3NXWYPMKKJT6UI" Name="ext_var_4" Type="ext_var" TypeUUID="6CTZENGKRKXEROFVYZQWMZPW5Q" Usage="internal" />
+                <Variable UUID="U6RYSPGO56EUZPPJLMHHZ7SECU" Name="switch_command_byte" Type="BOOL" Usage="internal" />
+                <Variable UUID="BYW74US3MSVENIYW4JPBA5LBWU" Name="ReaL1" Type="REAL" Usage="internal" />
+                <Variable UUID="DK4RDGVZ4DQE7PZ2CQDCZSDH3A" Name="glob_conf_change" Type="BOOL" Usage="input" />
+                <Variable UUID="TZGD4VI7IU4E5OFRLOVTTCF7XQ" Name="test_array" Type="INT" Size="20" Array="TRUE" Usage="input" />
+                <Variable UUID="Y3ZCUIXKOKDUVBFITQTS45FL34" Name="conf_PID_Q" Type="c_conf_PID_fx_3_exe" TypeUUID="BEQHHC532D6ENERD2TJNMFHZJY" Usage="internal" />
+                <Variable UUID="DATM6D6P53MEBKPRKJVYZDMOOM" Name="conf_PID_Ein" Type="c_conf_PID_fx_3_exe" TypeUUID="BEQHHC532D6ENERD2TJNMFHZJY" Usage="internal" />
+                <Variable UUID="P6Z46VMH7DLEJNSPCHLXH2UHQ4" Name="conf_PID_Eout" Type="c_conf_PID_fx_3_exe" TypeUUID="BEQHHC532D6ENERD2TJNMFHZJY" Usage="internal" />
+                <Variable UUID="R4LFSAYYIJAUZLMZUG4F2LRMJU" Name="conf_PID_EoutEin" Type="c_conf_PID_fx_3_exe" TypeUUID="BEQHHC532D6ENERD2TJNMFHZJY" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[//=
+
+conf_PID_Q(switch_command := switch_command_byte,
+			loop_cnf := Eout_conf,
+			in_add_arg_1 := ReaL1,
+			in_add_arg_2 := ReaL1,
+			in_add_arg_3 := ReaL1,
+			s_sel := gt_Mstruct,
+			ext_PV_1 := ext_var_3,
+			ext_PV_2 := ext_var_3,
+			ext_PV_3 := ext_var_3,
+			ext_PV_4 := ext_var_3,
+			ext_PV_5 := ext_var_3,
+			glog_conf_change := glob_conf_change,
+			test_array := test_array);		
+
+
+conf_PID_Ein(switch_command := switch_command_byte,
+			loop_cnf := Ein_conf,
+			in_add_arg_1 := ReaL1,
+			in_add_arg_2 := ReaL1,
+			in_add_arg_3 := ReaL1,
+			s_sel := gt_Mstruct,
+			ext_PV_1 := ext_var_3,
+			ext_PV_2 := ext_var_3,
+			ext_PV_3 := ext_var_3,
+			ext_PV_4 := ext_var_3,
+			ext_PV_5 := ext_var_3,
+			glog_conf_change := glob_conf_change,
+			test_array := test_array);
+			
+
+conf_PID_Eout(switch_command := switch_command_byte,
+			loop_cnf := Q_conf,
+			in_add_arg_1 := ReaL1,
+			in_add_arg_2 := ReaL1,
+			in_add_arg_3 := ReaL1,
+			s_sel := gt_Mstruct,
+			ext_PV_1 := ext_var_3,
+			ext_PV_2 := ext_var_3,
+			ext_PV_3 := ext_var_3,
+			ext_PV_4 := ext_var_3,
+			ext_PV_5 := ext_var_3,
+			glog_conf_change := glob_conf_change,
+			test_array := test_array);
+			
+conf_PID_EoutEin(switch_command := switch_command_byte,
+			loop_cnf := EoutEin_conf,
+			in_add_arg_1 := ReaL1,
+			in_add_arg_2 := ReaL1,
+			in_add_arg_3 := ReaL1,
+			s_sel := gt_Mstruct,
+			ext_PV_1 := ext_var_3,
+			ext_PV_2 := ext_var_3,
+			ext_PV_3 := ext_var_3,
+			ext_PV_4 := ext_var_3,
+			ext_PV_5 := ext_var_3,
+			glog_conf_change := glob_conf_change,
+			test_array := test_array);
+			
+			
+
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="TJKXICXJV6FEFAPAZTW2NW5WCM" Name="Read_Com_2">
+            <Variables>
+                <Variable UUID="Y6X3O4B5QWBUJFH7WQW4MXUGRM" Name="AbortSeq1" Type="AbortSeq_1_1" TypeUUID="P5ZIVPJWKS7EXEX7JUV646SASM" Usage="internal" />
+                <Variable UUID="PKMQE4M2SQ5UJO5KOKYSUOWXWE" Name="ic" Type="INT" Usage="internal" />
+                <Variable UUID="X5U5AZS2GYZEBB5BB5SYRYVSSA" Name="loop_selected" Type="INT" Usage="internal" />
+                <Variable UUID="7VHDFNLGL7LUDDQC3TG4IMEAGM" Name="new_main" Type="BOOL" Usage="internal" />
+                <Variable UUID="WYF7BV4REESUXALDXQVVKDA2PU" Name="SP_HighClamp" Type="REAL" Usage="internal" />
+                <Variable UUID="MUT2WX3BX7JETH55GUFQWKHCGY" Name="SP_LowClamp" Type="REAL" Usage="internal" />
+                <Variable UUID="INBOYVTUY5WEDNCKK3Q2XXT6TM" Name="local_SP_prev" Type="REAL" Usage="internal" />
+                <Variable UUID="UEDQESXUJQIENHLGX7S6XL725Q" Name="wish_loop" Type="INT" Usage="internal" />
+                <Variable UUID="R5SZZO2ZJQ5U7J4XWQKJ46ZMDQ" Name="main_loop" Type="INT" Usage="internal" />
+                <Variable UUID="ISUUY6TSA7ZEJJ3K2YDKXGLY6I" Name="i" Type="INT" Usage="internal" />
+                <Variable UUID="BCYKSGJC4VSUXD522EZ33UGGRI" Name="used_gpa" Type="INT" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[used_gpa := 0;
+FOR i := 1 TO 7 DO 
+	if (gpa[i].online  and gpa[i].run  and gpa[i].remote  ) then
+				
+				used_gpa := used_gpa + 1;
+				
+	end_if;
+end_for;
+shop.num_rem_gpa := INT_TO_REAL(used_gpa);
+
+if gt_Mstruct.main_loop < 1 or gt_Mstruct.main_loop > 5 then
+	gt_Mstruct.main_loop := 1;
+	Wish_main_loop := 1;
+end_if;
+ if used_gpa = 0 then
+ 	local_SP := gt_Mstruct.pid_struct[gt_Mstruct.main_loop].real_PV;
+ end_if;
+
+
+   FOR ic:=1 TO  gt_Mstruct.N_loops DO
+   gt_Mstruct.pid_struct[ic].delt_t := del_T;
+   END_FOR;
+   loop_selected := gt_Mstruct.loop_selected;
+   IF loop_selected=0 THEN loop_selected:=1; END_IF;
+
+(* ----------New loop ------------- *)
+wish_loop := Wish_main_loop;   // Wish_main_loop - переменная для назначения контура регулирования цеха
+
+IF ((gt_Mstruct.main_loop <> wish_loop) AND (gt_Mstruct.pid_struct[wish_loop].PV_failure = FALSE))   THEN 
+   main_loop := Wish_main_loop;
+       IF main_loop=0 THEN 
+	   		main_loop:=1; 
+	   END_IF;
+   IF gt_Mstruct.pid_struct[main_loop].loop_enable AND gt_Mstruct.pid_struct[main_loop].loop_valid THEN
+	   new_main := TRUE;
+   	   gt_Mstruct.main_loop := Wish_main_loop;  
+	ELSE
+		new_main := FALSE;
+		main_loop := gt_Mstruct.main_loop;
+		Wish_main_loop := main_loop;
+	END_IF;	
+ELSE
+   new_main := FALSE;
+END_IF;  
+IF   gt_Mstruct.main_loop=0 THEN 
+	gt_Mstruct.main_loop := 1;
+	Wish_main_loop := 1;
+END_IF;	 
+
+
+ 
+
+(*------------------------------------------------*)
+(* --- Auto /  Manual----- *)
+  
+ 
+(* Distribution Manual/Auto mode to main  PID's *) 
+   gt_Mstruct.pid_struct[main_loop].auto_man := gt_Mstruct.auto_man;  
+   
+
+
+(*** Setpoints treatment ***) 
+
+IF gt_Mstruct.auto_man THEN
+   IF gt_Mstruct.rem_loc THEN    (* Remote SP - in use, incoming signal in  [0...1] ????? Dave_H: 0...100 *)
+       
+    ;   
+    ELSE                         (* Local  SP - in use  *)      
+    //  t_tmp55 := t_tmp55 + 1;     
+(* Verification of limit conditions for stopping SP ramp *)
+	  AbortSeq1(//Mstruct:=gt_Mstruct,
+		SP := gt_Mstruct.act_SP);
+	//'  gt_Mstruct := AbortSeq1.Mstruct;
+	co_no_SP_ramp := FALSE;
+	
+	  IF local_SP<>local_SP_prev THEN
+	    IF ((AbortSeq1.HighLimit AND (local_SP < gt_Mstruct.pid_struct[main_loop].real_PV)) OR
+			(AbortSeq1.LowLimit  AND (local_SP > gt_Mstruct.pid_struct[main_loop].real_PV))) THEN
+			co_no_SP_ramp := TRUE;
+		END_IF;
+	  END_IF;
+
+	
+(*-------------------------------------------------------------------------------*)
+	  		SP_HighClamp := gt_Mstruct.pid_struct[main_loop].SP_HighClamp *  gt_Mstruct.pid_struct[main_loop].PV_gain + gt_Mstruct.pid_struct[main_loop].PV_bias;
+	  		SP_LowClamp := gt_Mstruct.pid_struct[main_loop].SP_LowClamp *  gt_Mstruct.pid_struct[main_loop].PV_gain + gt_Mstruct.pid_struct[main_loop].PV_bias;
+		IF	local_SP > SP_HighClamp THEN
+			local_SP := SP_HighClamp;
+	//		t_tmp56 := t_tmp56 + 1;
+		END_IF;
+	  	
+			IF local_SP<SP_LowClamp THEN
+			  local_SP:=SP_LowClamp;
+		//	  t_tmp57 := t_tmp57 + 1;
+			END_IF;
+		
+		IF co_no_SP_ramp THEN
+			gt_Mstruct.pid_struct[main_loop].local_SP := gt_Mstruct.pid_struct[main_loop].PV;
+		ELSE
+      		gt_Mstruct.pid_struct[main_loop].local_SP :=gt_Mstruct.pid_struct[main_loop].SP_gain*local_SP + gt_Mstruct.pid_struct[main_loop].SP_bias;
+		//	t_tmp80 := local_SP;
+		//	t_tmp81 := gt_Mstruct.pid_struct[main_loop].local_SP;
+		END_IF;
+    
+   		(*   gt_Commands.remote_SP := (gt_Mstruct.pid_struct[main_loop].PV-gt_Mstruct.pid_struct[main_loop].SP_LowClamp)/gt_Mstruct.pid_struct[main_loop].m_mGOV * 100.0; *)
+
+         IF new_main THEN  (* recalculation local_SP for new main loop *)
+            local_SP :=  gt_Mstruct.pid_struct[main_loop].real_PV;
+        //    t_tmp58 := t_tmp58 + 1;
+         END_IF;
+   END_IF; 
+      (* Remote SP filtering *)
+      
+END_IF;  
+ (* Preparation  for display current active SP in outside world  *)
+  gt_Mstruct.act_SP := gt_Mstruct.pid_struct[main_loop].real_SP;
+
+	
+		local_SP_prev := local_SP;
+ 	]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="XMM33P4547QEHNHD5RY4DTOACU" Name="Read_IO_2">
+            <Variables>
+                <Variable UUID="TSFYBBCCEQWEXOI2SG5QKM3WZA" Name="iCount" Type="INT" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[
+
+gt_Mstruct.pid_struct[1].PV := shop.Q / gt_MStruct.pid_struct[1].PV_gain ;
+gt_Mstruct.pid_struct[1].real_PV := shop.Q;
+//gt_Mstruct.pid_struct[1].PV_failure := Q_from_RIUS_Error;
+
+gt_Mstruct.pid_struct[2].PV := shop.Ein / gt_MStruct.pid_struct[2].PV_gain;
+gt_Mstruct.pid_struct[2].real_PV := shop.Ein;
+//gt_Mstruct.pid_struct[2].PV_failure := Ein_from_RIUS_Error;
+
+gt_Mstruct.pid_struct[3].PV := shop.Eout / gt_MStruct.pid_struct[3].PV_gain;
+gt_Mstruct.pid_struct[3].real_PV := shop.Eout;
+//gt_Mstruct.pid_struct[3].PV_failure := Eout_from_RIUS_Error;
+
+gt_Mstruct.pid_struct[4].PV := shop.EoutEin / gt_MStruct.pid_struct[4].PV_gain;
+gt_Mstruct.pid_struct[4].real_PV := shop.EoutEin;
+//gt_Mstruct.pid_struct[4].PV_failure := EoutEin_from_RIUS_Error;
+
+//= добавлено 05.07.2020 (ОАЕ)
+gt_Mstruct.pid_struct[5].PV := shop.EoutEin / gt_MStruct.pid_struct[5].PV_gain;
+gt_Mstruct.pid_struct[5].real_PV := shop.EoutEin;
+//gt_Mstruct.pid_struct[5].PV_failure := EoutEin_from_RIUS_Error;
+
+gt_Mstruct.pid_struct[6].PV := shop.EoutEin / gt_MStruct.pid_struct[6].PV_gain;
+gt_Mstruct.pid_struct[6].real_PV := shop.EoutEin;
+//gt_Mstruct.pid_struct[6].PV_failure := EoutEin_from_RIUS_Error;
+
+FOR iCount := 1 TO gt_Mstruct.N_loops DO
+	IF gt_Mstruct.pid_struct[iCount].PV_failure THEN 
+ 		gt_Mstruct.pid_struct[iCount].loop_valid := FALSE;
+	ELSE 
+ 		gt_Mstruct.pid_struct[iCount].loop_valid := TRUE;
+ 	END_IF;
+END_FOR; 
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="YWVB5OHKSKIUBM4WYWOLJTWTSU" Name="SPPID_2">
+            <Variables>
+                <Variable UUID="2ADOQLPP7J4E7KIBH3VBKDZ5UA" Name="pid" Type="dPID" TypeUUID="ANDH5HVLGZKE3D2D6SYUCZESVI" Usage="inout" />
+                <Variable UUID="YTWTKQPIWLBEHIDGMLBJ2LON7U" Name="no_SP_ramp" Type="BOOL" Usage="input" />
+                <Variable UUID="JJ3SJHOALIHEJINSHJEMGZRGDY" Name="main_loop" Type="INT" Usage="input" />
+                <Variable UUID="7473TLY4XSLU3G5OJI3ZL3YJ64" Name="deriv1" Type="deriv_1" TypeUUID="WANJAQMX4LSEFMJLD6G5QCWPFQ" Usage="internal" />
+                <Variable UUID="DWOBXJDZ6QJUFMI4UDWMCSC5PA" Name="target" Type="REAL" Usage="internal" />
+                <Variable UUID="OWVY3ZGXMRCEHMUOVJW6HLFITI" Name="prev_SP" Type="REAL" Usage="internal" />
+                <Variable UUID="EIKJQODCXDYU5ORBDCORGZXU64" Name="prev_loop_type" Type="INT" Usage="internal" />
+                <Variable UUID="WL2OEBXHXSAUXK5Z7A2WKDRS3Y" Name="r_rate" Type="REAL" Usage="internal" />
+                <Variable UUID="RZYLQH3WOZYU5B5GHCHZROOFNE" Name="prev_man_auto" Type="BOOL" Usage="internal" />
+                <Variable UUID="US4ETQYXLOWUTONV6RGAJTNNYQ" Name="main_loop_previos" Type="INT" Usage="internal" />
+                <Variable UUID="AD75SOG6UZGUHLHT4HX3AB3QHE" Name="prev_enable_disable" Type="BOOL" Usage="internal" />
+                <Variable UUID="AOKIAVEDA4CEVI4DQVO23OVTGU" Name="prev_PV_failure" Type="BOOL" Usage="internal" />
+                <Variable UUID="4CUGUR5IKSPUJMHYEB3PKYAQDE" Name="D_part" Type="REAL" Usage="internal" />
+                <Variable UUID="HLCUDKKPEZNE5EPCVHAU4FKHZU" Name="SP_depression" Type="REAL" Usage="internal" />
+                <Variable UUID="E7SZSUPWM27UTBAHLPROSYAJFA" Name="der" Type="REAL" Usage="internal" />
+                <Variable UUID="2BH5ZZHC6RAU7PPS7V5POVI4IM" Name="internal_flag_no_ramp" Type="BOOL" Usage="internal" />
+                <Variable UUID="ZJNSPDZ5GERUFIXQCHXXARA3UU" Name="v1" Type="BOOL" Usage="internal" />
+                <Variable UUID="AZO5DXCYZHNEBA5MHGTTS7EGX4" Name="v2" Type="REAL" Usage="internal" />
+                <Variable UUID="HG6MDKZ6U6IUTKKFTY6I4ZAXXI" Name="v3" Type="REAL" Usage="internal" />
+                <Variable UUID="Y4HYKJRVZOUUTF6654JDXCT4IQ" Name="v4" Type="REAL" Usage="internal" />
+                <Variable UUID="RPQF6BIMLVRUZBGFPHK62VQEGY" Name="v5" Type="REAL" Usage="internal" />
+                <Variable UUID="WKHDZN7JFJVEFHWYDQ3TP7M2UY" Name="ramp1" Type="ramp_1" TypeUUID="2X55INEGQ2VEJBYG3KOWVOO6DE" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[internal_flag_no_ramp:= FALSE;
+IF pid.loop_enable AND pid.loop_valid THEN
+ IF (prev_loop_type <> pid.loop_type) THEN (* scan when loop_type of the loop changed *)     
+  CASE prev_loop_type OF
+  -1,1 :           (*  previosly was Limit *)
+       IF pid.loop_type=0 THEN    			(* transition  Limit -> Main Loop  *)
+         pid.local_SP := pid.PV;                 
+         prev_SP := pid.PV ;      
+       ELSE   		(* transition  Low Limit -> High Limit OR High Limit -> Low Limit  *) 
+         target  := pid.limit_SP ;
+         prev_SP := pid.PV ;
+       END_IF;
+
+   0 :           (* previosly was Main Loop *)
+         prev_SP := pid.PV ;(* transition  Main Loop -> LOW OR HIGH Limit  *)
+         target := pid.limit_SP ;
+  END_CASE;
+ 
+         prev_loop_type := pid.loop_type ;     
+ END_IF; (*--------------- End of changing loop_type ----------------*) 
+     
+(*--------------------------Main Loop---------------------------------------------*)
+ IF pid.loop_num = main_loop THEN          (* Treatment for main loop  *)
+  IF pid.rem_loc THEN          (* Remote   *) 
+    target := pid.remote_SP * pid.m_mGOV/100.0 + pid.SP_LowClamp; (*remote SP in %  *)
+    pid.local_SP := pid.PV ;
+  ELSE                         (* Local *)
+    target := pid.local_SP ;
+    if pid.m_mGOV <> 0.0 then 
+		pid.remote_SP := (pid.PV - pid.SP_LowClamp)/pid.m_mGOV * 100.0;
+	end_if;
+    (* Verification for Limits SP's for the main loop  *)
+    IF (((pid.loop_type=1 AND target>pid.limit_SP) OR (pid.loop_type=-1 AND target<pid.limit_SP)) AND pid.limit_SP <>0.0) THEN
+      target := pid.limit_SP;
+    END_IF;   
+  END_IF;  
+ ELSIF pid.loop_type=0 AND main_loop<>pid.loop_num THEN
+  internal_flag_no_ramp := TRUE;
+  target:=pid.PV;
+  prev_SP := pid.PV ;      
+ ELSE 
+  target := pid.limit_SP ;   
+ END_IF;
+
+(*--------------- D-part in the SP (non-conventional D-part)---------------------------------------- *)
+(* derivative calculation *)
+  derInit := derInit OR pid.SwitchFlag OR pid.PV_failure;
+ (* der := *)deriv1(input := pid.PV, n_samples := 24, Tc := del_T);
+  der := deriv1.derivative;
+  pid.d_PV := der;
+ (* derInit:=deriv.init;
+  Peak_storage_max(Reset:=pid.Reset_D_max_value, Max_or_Min:=TRUE,current:=der);
+  pid.dMax_value:=Peak_storage_max.Peak_value;
+  Peak_storage_min(Reset:=pid.Reset_D_max_value, Max_or_Min:=FALSE,current:=der);
+  pid.dMin_value:=Peak_storage_min.Peak_value;*)
+  IF pid.KD > 0.0001  THEN 
+   IF der <= pid.derivative_threshold and der >= - pid.derivative_threshold THEN
+     der := 0.0;
+   ELSIF der > 0.0 THEN
+     der := der - pid.derivative_threshold;
+   ELSE
+     der := der + pid.derivative_threshold ;
+   END_IF ;
+     
+        D_part := pid.KD * der ;
+        pid.D_part := D_part;
+         
+
+	IF pid.non_conv_D_part_enable THEN (* SP depression calculation *)
+		IF D_part>pid.D_part_clamp THEN  (*               .             *)
+			D_part := pid.D_part_clamp;
+		ELSIF D_part<-pid.D_part_clamp THEN
+			D_part := -pid.D_part_clamp;
+		END_IF;
+	  CASE pid.loop_type OF
+	   -1: (* Low limit case *)
+	      IF ((der < 0.0) AND (D_part < SP_depression)) THEN    (* PV decreasing *)
+	        SP_depression := D_part;
+	        internal_flag_no_ramp := TRUE;
+	      ELSE
+	        IF SP_depression < 0.0 THEN
+	          SP_depression := SP_depression + del_T * pid.SP_ramp_rate; (*resetting depressed value *) 
+	          internal_flag_no_ramp := TRUE;
+	        ELSE 
+	          SP_depression := 0.0;
+	        END_IF;
+	      END_IF;
+	   1:(* High limit case *)           
+	     IF ((der > 0.0) AND (D_part > SP_depression))   THEN    (* PV decreasing *)
+	       SP_depression := D_part;
+	       internal_flag_no_ramp := TRUE;
+	     ELSE
+	       IF SP_depression > 0.0 THEN
+	         SP_depression := SP_depression - del_T * pid.SP_ramp_rate; (*resetting depressed value *) 
+	         internal_flag_no_ramp := TRUE;
+	       ELSE 
+	         SP_depression := 0.0;
+	       END_IF;
+	     END_IF;
+	  END_CASE;   
+	  target:= target - SP_depression;
+	ELSE 
+	  D_part := 0.0 ;
+	END_IF ; (* END of SP depression *)       
+ ELSE 
+ pid.D_part := 0.0;
+ END_IF; (* END of derivative calculation *)
+    
+(*-------------------------------------------------------------------*)     
+(* main loop change *)
+ IF main_loop <> main_loop_previos AND (pid.loop_num = main_loop OR pid.loop_num = main_loop_previos )   THEN     (* Main Loop Changed on the current scan *)
+  internal_flag_no_ramp := TRUE;
+  target := pid.PV;
+  main_loop_previos := main_loop;  
+ END_IF;
+(* end of changing main loop *)
+
+(*------------------------ Switch from manual to auto OR  local remote ---------------------------------*)     
+ IF (pid.auto_man <> prev_man_auto) THEN
+  internal_flag_no_ramp := TRUE;
+  target := pid.PV;
+  pid.local_SP := target;
+ END_IF;
+(*  End of switching from manual to auto *)
+
+(*  Manual mode  *)
+ IF NOT pid.auto_man AND pid.loop_num = main_loop THEN 
+  internal_flag_no_ramp := TRUE;
+  target := pid.PV;   (* Tracking SP for main loop *)
+ END_IF;       
+ IF no_SP_ramp OR (prev_PV_failure <> pid.PV_failure)OR internal_flag_no_ramp THEN
+  r_rate := 0.0; 
+ ELSE
+  r_rate := pid.SP_ramp_rate;
+ END_IF;
+  (*-------------------------------------- Loop switch on/off ------------------------ *)         
+ELSE
+  internal_flag_no_ramp := TRUE;
+  IF pid.loop_type = 0 THEN
+		  target:=pid.PV;
+		  prev_SP := pid.PV ;
+   ELSE
+     target:=pid.limit_SP;
+     prev_SP := pid.limit_SP ;
+   END_IF;
+END_IF;
+  	
+IF prev_enable_disable <> (pid.loop_enable AND pid.loop_valid)  THEN
+  internal_flag_no_ramp := TRUE;
+  target:=pid.PV;
+  prev_SP := pid.PV ;
+END_IF; 
+(*___pid.act_SP :=__________________________SP ramping _____________________________________________*)
+
+(*ramp01(enable1 := TRUE,ramp_rate:=r_rate,y_target := target, y_current := prev_SP,delt_T := pid.delt_t );*)
+v1 := TRUE;
+v2 := r_rate;
+//if pid.loop_num = 2 then
+//	t_v2 := r_rate;
+//	t_no_ramp := no_SP_ramp OR (prev_PV_failure <> pid.PV_failure)OR internal_flag_no_ramp;
+//end_if;
+v3 := target; 
+v4 := prev_SP;
+v5 := pid.delt_t;
+ramp1(enable1 := v1,ramp_rate:=v2,y_target := v3, y_current :=v4);
+
+pid.act_SP := ramp1.ramp;
+
+prev_man_auto := pid.auto_man;
+prev_PV_failure := pid.PV_failure;
+
+IF pid.act_SP > pid.SP_HighClamp THEN
+  pid.act_SP := pid.SP_HighClamp;
+ELSIF pid.act_SP < pid.SP_LowClamp THEN
+  pid.act_SP := pid.SP_LowClamp;
+END_IF;
+prev_SP := pid.act_SP ;       
+prev_enable_disable := pid.loop_enable AND pid.loop_valid;  ]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="46FGAPDWVOKUJENSP3HLN54K7A" Name="SP_treat_3">
+            <Variables>
+                <Variable UUID="U5CRHYNCSS2EJFC3U7ZV4W734U" Name="co_no_SP_ramp" Type="BOOL" Usage="internal" />
+                <Variable UUID="DDINATXCBB7ETBKMSGJ3JKCZYI" Name="spPID_Q" Type="SPPID_2" TypeUUID="YWVB5OHKSKIUBM4WYWOLJTWTSU" Usage="internal" />
+                <Variable UUID="NABSADQ54IJEBO76NXT7ELMEJA" Name="spPID_Ein" Type="SPPID_2" TypeUUID="YWVB5OHKSKIUBM4WYWOLJTWTSU" Usage="internal" />
+                <Variable UUID="ATLUDKDTR3JUPPPEI6UYFJK4YQ" Name="spPID_Eout" Type="SPPID_2" TypeUUID="YWVB5OHKSKIUBM4WYWOLJTWTSU" Usage="internal" />
+                <Variable UUID="O2ABD7SZZVPURACLGSN5IF7CDE" Name="spPID_EoutEin" Type="SPPID_2" TypeUUID="YWVB5OHKSKIUBM4WYWOLJTWTSU" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[spPID_Q(pid:=gt_Mstruct.pid_struct[1],no_SP_ramp := co_no_SP_ramp, main_loop:=gt_Mstruct.main_loop);
+
+ 
+spPID_Ein(pid:=gt_Mstruct.pid_struct[2],no_SP_ramp := co_no_SP_ramp, main_loop:=gt_Mstruct.main_loop); 
+
+ 
+spPID_Eout(pid:=gt_Mstruct.pid_struct[3], no_SP_ramp := co_no_SP_ramp, main_loop:=gt_Mstruct.main_loop);
+
+
+spPID_EoutEin(pid:=gt_Mstruct.pid_struct[4], no_SP_ramp := co_no_SP_ramp, main_loop:=gt_Mstruct.main_loop);
+
+//= добавлено 05.07.2020 (ОАЕ)
+
+spPID_Eout(pid:=gt_Mstruct.pid_struct[5], no_SP_ramp := co_no_SP_ramp, main_loop:=gt_Mstruct.main_loop);
+
+
+spPID_EoutEin(pid:=gt_Mstruct.pid_struct[6], no_SP_ramp := co_no_SP_ramp, main_loop:=gt_Mstruct.main_loop);]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="STKGR4ZWTBZULIZEMHUOVGEW4Q" Name="alarms">
+            <Variables />
+            <ST><![CDATA[perf_alarms[0] := (gt_Mstruct.main_loop = 1); // Регулирование по расходу
+perf_alarms[1] := (gt_Mstruct.main_loop = 3); // Регулирование по выходному давлению
+perf_alarms[2] := (gt_Mstruct.main_loop = 4); // Регулирование по степени сжатия
+perf_alarms[3] := (gt_Mstruct.main_loop = 5); // Регулирование оборотов нагнетателей
+perf_alarms[4] := (shop.ls_type = 1); // 
+perf_alarms[5] := (shop.ls_type = 3); // 
+perf_alarms[6] := (shop.ls_type = 4); // 
+perf_alarms[7] := (shop.ls_type = 5); // 
+perf_alarms[8] := gpa[5].remote;// 				//= ГПА5
+perf_alarms[9] := gpa[5].run; // 
+(*perf_alarms[10] := ; // 
+perf_alarms[11] := ; // 
+perf_alarms[12] := ; // 
+perf_alarms[13] := ; // 
+perf_alarms[14] := ; // 
+perf_alarms[15] := ; // *)
+
+//ГПА1
+perf_alarms[10] := gpa[1].remote;// 
+perf_alarms[11] := gpa[1].run; // 
+
+//ГПА2
+perf_alarms[12] := gpa[2].remote;// 
+perf_alarms[13] := gpa[2].run; // 
+
+//ГПА3
+perf_alarms[14] := gpa[3].remote;// 
+perf_alarms[15] := gpa[3].run; // 
+
+//ГПА4
+perf_alarms[16] := gpa[4].remote;// 
+perf_alarms[17] := gpa[4].run; // 
+
+//ГПА7
+perf_alarms[18] := gpa[7].remote;// 
+perf_alarms[19] := gpa[7].run; // 
+
+//= добавлено 05.07.2020 (ОАЕ)
+//ГПА6
+perf_alarms[20] := gpa[6].remote;// 
+perf_alarms[21] := gpa[6].run; // ]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="OO5OSPHDFP2UNGYQML67KGF2VU" Name="data_from_gpa1">
+            <Variables>
+                <Variable UUID="ELLNV3QSHCQEFDUPEOOIWUVQVU" Name="i" Type="INT" Usage="internal" />
+                <Variable UUID="ZYVWZPAEBXJEDGOQC4UL2MIBQE" Name="LinkControl_GPA4" Type="FB_AppControl" TypeUUID="AXCXOIB7AKCUXFLF2MWOV6AZOE" Usage="internal" />
+                <Variable UUID="7JIZQ4QVGF6UHGYAEWL4FUSK6M" Name="LinkControl_GPA5" Type="FB_AppControl" TypeUUID="AXCXOIB7AKCUXFLF2MWOV6AZOE" Usage="internal" />
+                <Variable UUID="LGHDJB46AOPE3MFHDA3HXJZ3YE" Name="LinkControl_GPA6" Type="FB_AppControl" TypeUUID="AXCXOIB7AKCUXFLF2MWOV6AZOE" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[(*
+gpa[01].online := 		;	// связь с ГПА1 исправна
+gpa[01].run := 			; 	// режим ГПА1 магистраль
+gpa[01].remote :=  		; 	// ГПА1 переведен в режим управления от САР
+gpa[01].Q :=  			;	// приведенный расход переводим в реальный
+gpa[01].Ein := 			; 	// давление газа на входе ГПА1
+gpa[01].Eout := 		; 	// давление газа на выходе ГПА1
+gpa[01].EoutEin := 		;	// степень сжатия через ГПА1
+gpa[01].S := 			; 	// запас по помпажу ГПА1
+gpa[01].Nst := 			; 	// обороты СТ ГПА1
+gpa[01].Nvd_r := 		; 	// о,ороты приведенные ВД ГПА1
+gpa[01].SP_Nst := 		; 	// задание по оборотам СТ ГПА1
+
+
+
+*)
+
+//-- Steam -- Контроль связи с ГПА
+LinkControl_GPA4(bit:= KC_GPA4.pulse, tDiag:= T#2s);
+LinkControl_GPA5(bit:= KC_GPA5.pulse, tDiag:= T#2s);
+LinkControl_GPA6(bit:= KC_GPA6.pulse, tDiag:= T#2s);
+
+local_SP := local_SP_in; //local_SP := Alg_local_SP_in  ; //inv
+Wish_main_loop := Wish_main_loop_in;//Wish_main_loop := Alg_Wish_main_loop_in;//inv
+
+//ГПА1
+gpa[01].online := 	SAR_KC_GPA1.online	;	// связь с ГПА1 исправна
+gpa[01].run := 		SAR_KC_GPA1.run	; 	// режим ГПА1 магистраль
+gpa[01].remote :=  	SAR_KC_GPA1.remote	; 	// ГПА1 переведен в режим управления от САР
+gpa[01].Q :=  		SAR_KC_GPA1.Q	;	// приведенный расход переводим в реальный
+gpa[01].Ein := 		SAR_KC_GPA1.Ein	; 	// давление газа на входе ГПА1
+gpa[01].Eout := 	SAR_KC_GPA1.Eout	; 	// давление газа на выходе ГПА1
+gpa[01].EoutEin := 	SAR_KC_GPA1.EoutEin	;	// степень сжатия через ГПА1
+gpa[01].S := 		SAR_KC_GPA1.S	; 	// запас по помпажу ГПА1
+gpa[01].Nst := 		SAR_KC_GPA1.Nst	; 	// обороты СТ ГПА1
+gpa[01].Nvd_r := 	SAR_KC_GPA1.Nvd_r	; 	// о,ороты приведенные ВД ГПА1
+gpa[01].SP_Nst := 	SAR_KC_GPA1.SP_Nst	; 	// задание по оборотам СТ ГПА1
+//ГПА2
+gpa[02].online := 	SAR_KC_GPA2.online	;	// связь с ГПА2 исправна
+gpa[02].run := 		SAR_KC_GPA2.run	; 	// режим ГПА2 магистраль
+gpa[02].remote :=  	SAR_KC_GPA2.remote	; 	// ГПА2 переведен в режим управления от САР
+gpa[02].Q :=  		SAR_KC_GPA2.Q	;	// приведенный расход переводим в реальный
+gpa[02].Ein := 		SAR_KC_GPA2.Ein	; 	// давление газа на входе ГПА2
+gpa[02].Eout := 	SAR_KC_GPA2.Eout	; 	// давление газа на выходе ГПА2
+gpa[02].EoutEin := 	SAR_KC_GPA2.EoutEin	;	// степень сжатия через ГПА2
+gpa[02].S := 		SAR_KC_GPA2.S	; 	// запас по помпажу ГПА2
+gpa[02].Nst := 		SAR_KC_GPA2.Nst	; 	// обороты СТ ГПА2
+gpa[02].Nvd_r := 	SAR_KC_GPA2.Nvd_r	; 	// о,ороты приведенные ВД ГПА2
+gpa[02].SP_Nst := 	SAR_KC_GPA2.SP_Nst	; 	// задание по оборотам СТ ГПА2
+//ГПА3
+gpa[03].online := 	SAR_KC_GPA3.online	;	// связь с ГПА3 исправна
+gpa[03].run := 		SAR_KC_GPA3.run	; 	// режим ГПА3 магистраль
+gpa[03].remote :=  	SAR_KC_GPA3.remote	; 	// ГПА3 переведен в режим управления от САР
+gpa[03].Q :=  		SAR_KC_GPA3.Q	;	// приведенный расход переводим в реальный
+gpa[03].Ein := 		SAR_KC_GPA3.Ein	; 	// давление газа на входе ГПА3
+gpa[03].Eout := 	SAR_KC_GPA3.Eout	; 	// давление газа на выходе ГПА3
+gpa[03].EoutEin := 	SAR_KC_GPA3.EoutEin	;	// степень сжатия через ГПА3
+gpa[03].S := 		SAR_KC_GPA3.S	; 	// запас по помпажу ГПА3
+gpa[03].Nst := 		SAR_KC_GPA3.Nst	; 	// обороты СТ ГПА3
+gpa[03].Nvd_r := 	SAR_KC_GPA3.Nvd_r	; 	// о,ороты приведенные ВД ГПА3
+gpa[03].SP_Nst := 	SAR_KC_GPA3.SP_Nst	; 	// задание по оборотам СТ ГПА3
+
+//-------------------------- Агрегаты 2го цеха ------------------------------------------ steam
+//ГПА4
+gpa[04].online := not LinkControl_GPA4.break;	//SAR_KC_GPA4.online	;	// связь с ГПА4 исправна
+gpa[04].run 	:= KC_GPA4.Mag;		//SAR_KC_GPA4.run	; 	// режим ГПА4 магистраль
+gpa[04].remote := KC_GPA4.Remote; // SAR_KC_GPA4.remote	; 	// ГПА4 переведен в режим управления от САР
+gpa[04].Q 		:= KC_GPA4_CalcPar.Q_GPA.PV; // SAR_KC_GPA4.Q	;	// приведенный расход переводим в реальный
+gpa[04].Ein 	:= KC_GPA4_CalcPar.Pg_inN.PV; //		SAR_KC_GPA4.Ein	; 	// давление газа на входе ГПА4
+gpa[04].Eout 	:= KC_GPA4_CalcPar.Pg_outN.PV; // 	SAR_KC_GPA4.Eout	; 	// давление газа на выходе ГПА4
+gpa[04].EoutEin:= KC_GPA4_CalcPar.cr.PV; // 	SAR_KC_GPA4.EoutEin	;	// степень сжатия через ГПА4
+gpa[04].S 		:= 100.0; //		SAR_KC_GPA4.S	; 	// запас по помпажу ГПА4
+gpa[04].Nst 	:= KC_GPA4_CalcPar.Nst.PV; //		SAR_KC_GPA4.Nst	; 	// обороты СТ ГПА4
+gpa[04].Nvd_r 	:= KC_GPA4_CalcPar.NvdNorm.PV; //	SAR_KC_GPA4.Nvd_r	; 	// о,ороты приведенные ВД ГПА4
+gpa[04].SP_Nst := KC_GPA4_CalcPar.Nst_sp.PV; // SAR_KC_GPA4.SP_Nst	; 	// задание по оборотам СТ ГПА4
+//= добавлено 05.07.2020 (ОАЕ)
+//GPA5
+gpa[05].online := not LinkControl_GPA5.break;	// 	SAR_KC_GPA5.online	;	// связь с ГПА5 исправна
+gpa[05].run 	:= KC_GPA5.Mag;		//		SAR_KC_GPA5.run	; 	// режим ГПА5 магистраль
+gpa[05].remote := KC_GPA5.Remote; //	SAR_KC_GPA5.remote	; 	// ГПА5 переведен в режим управления от САР
+gpa[05].Q 		:= KC_GPA5_CalcPar.Q_GPA.PV; //   		SAR_KC_GPA5.Q	;	// приведенный расход переводим в реальный
+gpa[05].Ein 	:= KC_GPA5_CalcPar.Pg_inN.PV; // 		SAR_KC_GPA5.Ein	; 	// давление газа на входе ГПА5
+gpa[05].Eout 	:= KC_GPA5_CalcPar.Pg_outN.PV; // 	SAR_KC_GPA5.Eout	; 	// давление газа на выходе ГПА5
+gpa[05].EoutEin:= KC_GPA5_CalcPar.cr.PV; // 	SAR_KC_GPA5.EoutEin	;	// степень сжатия через ГПА5
+gpa[05].S 		:= 100.0; // 		SAR_KC_GPA5.S	; 	// запас по помпажу ГПА5
+gpa[05].Nst 	:= KC_GPA5_CalcPar.Nst.PV; //	 		SAR_KC_GPA5.Nst	; 	// обороты СТ ГПА5
+gpa[05].Nvd_r 	:= KC_GPA5_CalcPar.NvdNorm.PV; // 	SAR_KC_GPA5.Nvd_r	; 	// о,ороты приведенные ВД ГПА5
+gpa[05].SP_Nst := KC_GPA5_CalcPar.Nst_sp.PV; //  	SAR_KC_GPA5.SP_Nst	; 	// задание по оборотам СТ ГПА5
+//GPA6
+gpa[06].online := not LinkControl_GPA6.break;	// 	SAR_KC_GPA6.online	;	// связь с ГПА6 исправна
+gpa[06].run 	:= KC_GPA6.Mag;		//	 		SAR_KC_GPA6.run	; 	// режим ГПА6 магистраль
+gpa[06].remote := KC_GPA6.Remote; //  	SAR_KC_GPA6.remote	; 	// ГПА6 переведен в режим управления от САР
+gpa[06].Q 		:= KC_GPA6_CalcPar.Q_GPA.PV; //   		SAR_KC_GPA6.Q	;	// приведенный расход переводим в реальный
+gpa[06].Ein 	:= KC_GPA6_CalcPar.Pg_inN.PV; // 		SAR_KC_GPA6.Ein	; 	// давление газа на входе ГПА6
+gpa[06].Eout 	:= KC_GPA6_CalcPar.Pg_outN.PV; // 	SAR_KC_GPA6.Eout	; 	// давление газа на выходе ГПА6
+gpa[06].EoutEin:= KC_GPA6_CalcPar.cr.PV; //  	SAR_KC_GPA6.EoutEin	;	// степень сжатия через ГПА6
+gpa[06].S 		:= 100.0; //  		SAR_KC_GPA6.S	; 	// запас по помпажу ГПА6
+gpa[06].Nst 	:= KC_GPA6_CalcPar.Nst.PV; //	 		SAR_KC_GPA6.Nst	; 	// обороты СТ ГПА6
+gpa[06].Nvd_r 	:= KC_GPA6_CalcPar.NvdNorm.PV; // 	SAR_KC_GPA6.Nvd_r	; 	// о,ороты приведенные ВД ГПА6
+gpa[06].SP_Nst := KC_GPA6_CalcPar.Nst_sp.PV; //  	SAR_KC_GPA6.SP_Nst	; 	// задание по оборотам СТ ГПА6
+
+
+shop.Q := 0.0;
+shop.Ein := 0.0;
+shop.Eout := 0.0;
+shop.EoutEin := 0.0;
+
+
+FOR i := 1 TO 7 DO
+	if(gpa[i].online  AND gpa[i].run ) then
+		shop.Q := shop.Q + gpa[i].Q;	
+		if(gpa[i].EoutEin > shop.EoutEin)then
+			shop.EoutEin := gpa[i].EoutEin;
+		end_if;
+		if(gpa[i].Eout > shop.Eout)then
+			shop.Eout := gpa[i].Eout;
+		end_if;		
+		if ((shop.Ein = 0.0 OR gpa[i].Ein < shop.Ein) AND gpa[i].Ein > 0.0) then
+			shop.Ein := gpa[i].Ein;
+		end_if;	
+	end_if;
+	
+END_FOR;
+
+if (shop.Ein <> 0.101325) then 
+	shop.EoutEin := (shop.Eout - 0.101325) / (shop.Ein - 0.101325);
+end_if;
+
+
+   // Здесь при наличии цеховых датчиков давления на входе и выходе с исправными показаниями
+	 //	должнно быть присвоение от них
+IF  not Alg_KC_AI_HMI.Pg_in_KC_t1.Condition.fault_common  OR  not Alg_KC_AI_HMI.Pg_in_KC_t2.Condition.fault_common then 
+									shop.Ein :=  	KC_to_SAR.evPg_in_KC;		// давление на входе цеха
+End_if;
+IF not Alg_KC_AI_HMI.Pg_out_KC_t1.Condition.fault_common OR not Alg_KC_AI_HMI.Pg_out_KC_t2.Condition.fault_common	then
+									shop.Eout :=	KC_to_SAR.evPg_out_KC;		// давление на выходе цеха
+End_if;
+//		shop.EoutEin := ;		// степень сжатия через цех
+(*IF not Link_Status.PIR1 AND not Link_Status.PIR2	then*)	shop.Q := 		(KC_to_SAR.Q1 + KC_to_SAR.Q2); //end_if;		// расход газа через цех (Расход должен быть 2,3,4 и т.д. если больше 100, то надо это разделить, задание делится на 100)
+ 
+if (shop.Ein <> 0.101325) then 
+	shop.EoutEin := (shop.Eout - 0.101325) / (shop.Ein - 0.101325);
+end_if;
+		
+
+if shop.EoutEin < 1.0 then shop.EoutEin := 1.0; end_if;
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="ESTLBV5HO33EDP4WHXWQDE3RHI" Name="data_to_GPAs_1">
+            <Variables />
+            <ST><![CDATA[//  := gpa[1].SP_cv;  // задание по оборотам СТ от САР в ГПА1
+SAR_KC_MB_WRITE_GPA1.SP_cv  := gpa[1].SP_cv;  // задание по оборотам СТ от САР в ГПА1
+SAR_KC_MB_WRITE_GPA2.SP_cv  := gpa[2].SP_cv;  // задание по оборотам СТ от САР в ГПА2
+SAR_KC_MB_WRITE_GPA3.SP_cv  := gpa[3].SP_cv;  // задание по оборотам СТ от САР в ГПА3
+
+//ГПА 2го цеха ------------ steam
+//SAR_KC_MB_WRITE_GPA4.SP_cv  := gpa[4].SP_cv;  // задание по оборотам СТ от САР в ГПА4
+Shop_GPA4.Set_Nst := gpa[4].SP_cv;
+//= добавлено 05.07.2020 (ОАЕ)
+//SAR_KC_MB_WRITE_GPA5.SP_cv  := gpa[5].SP_cv;  // задание по оборотам СТ от САР в ГПА5
+Shop_GPA5.Set_Nst := gpa[5].SP_cv;
+//SAR_KC_MB_WRITE_GPA6.SP_cv  := gpa[6].SP_cv;  // задание по оборотам СТ от САР в ГПА6
+Shop_GPA6.Set_Nst := gpa[6].SP_cv;
+
+local_SP_out := local_SP;//Alg_local_SP_out := local_SP;//inv
+Wish_main_loop_out := Wish_main_loop;//Alg_Wish_main_loop_out := Wish_main_loop;//inv]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Name="deriv1">
+            <Variables>
+                <Variable UUID="AHBCFQDYTLPUFMSY37O4OTGF54" Name="init" Type="BOOL" Usage="inout" />
+                <Variable UUID="6DNJJLGM3G7U7NBMDZ6ZRML6WI" Name="input" Type="REAL" Usage="inout" />
+                <Variable UUID="5FVLT3WLPBUU5L2BYFG5X5Q2F4" Name="N_samples" Type="INT" Usage="internal" />
+                <Variable UUID="FBKM2ANZB2DELKFRKHZGCFMHHU" Name="derivative" Type="REAL" Usage="output" />
+                <Variable UUID="R2VUDKBBUPTEFCCERFM7UVWEIQ" Name="wrong_der" Type="BOOL" Usage="output" />
+                <Variable UUID="SXUW6AAFIYMUFFTRGFWLQ4TZ6M" Name="Sample_Array" Type="REAL" Size="25" Array="TRUE" Usage="internal" />
+                <Variable UUID="S44X7QCGYSWUTAVYDBRRS3CB3I" Name="index" Type="INT" Usage="internal" />
+                <Variable UUID="QBYAU234DFVUTPYICO56ABL2XY" Name="n_real" Type="REAL" Usage="internal" />
+                <Variable UUID="LRV2K2NYTHCEPL3II22ATPXM3Q" Name="mid_term" Type="INT" Usage="internal" />
+                <Variable UUID="CVA6UBFFCJNUFOE3UDZSJ4GLCE" Name="last_term" Type="INT" Usage="internal" />
+                <Variable UUID="U4TSSSHOFRBEZMFHBYOBVSD5E4" Name="sumtemp" Type="REAL" Usage="internal" />
+                <Variable UUID="WIZ7TO673F7EJIA6SZTINGKDNE" Name="index_1" Type="INT" Usage="internal" />
+                <Variable UUID="EUOLIW5YJJ2EXNJBHBFI5A5GRE" Name="n_samples_previous" Type="INT" Usage="internal" />
+                <Variable UUID="7QGDPETU3FZULPEUNY4GFGONSE" Name="flag_change" Type="INT" Usage="internal" />
+                <Variable UUID="EVOWEDJ46KXUHMHXJZA2HI2O6A" Name="n_samples_used" Type="INT" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[N_samples := 24;
+//IF N_samples = 0 THEN N_samples := 2; END_IF;
+
+IF init THEN
+	init := FALSE;
+	flag_change:=0;
+    n_samples_previous := 0;
+END_IF;
+IF del_T = 0.0 THEN RETURN; END_IF;
+
+IF N_samples<>n_samples_previous  THEN
+
+   IF ((N_samples MOD 2)<>0) THEN
+         n_samples_used := N_samples+1;
+      ELSE  
+         n_samples_used := N_samples;
+   END_IF;
+   	IF n_samples_used < 2 THEN  n_samples_used :=  2;  END_IF;(* Minimal number of scans =2 *)
+	IF n_samples_used >24 THEN  n_samples_used := 24;  END_IF;(* Max number of scans =24  *)   
+
+   IF (flag_change<(n_samples_used-n_samples_previous))  THEN
+      wrong_der := TRUE;
+      flag_change := flag_change + 1;
+   ELSE
+      wrong_der := FALSE;
+      n_samples_previous := N_samples; 
+      flag_change := 0;
+   END_IF;      
+END_IF;
+(* End of verification *)
+
+mid_term  := n_samples_used / 2 + 1;
+last_term := n_samples_used; 
+
+sumtemp := input;
+
+index := last_term;
+WHILE index >= mid_term DO
+   index_1 := index - 1;
+   Sample_Array[index] := Sample_Array[index_1]; 
+   sumtemp := sumtemp - Sample_Array[index];
+   index := index_1;
+END_WHILE; 
+
+WHILE index >= 2 DO
+   index_1 := index - 1;
+   Sample_Array[index] := Sample_Array[index_1]; 
+   sumtemp := sumtemp + Sample_Array[index];
+   index := index_1;
+END_WHILE; 
+
+Sample_Array[1] := input;
+
+//INT_TO_REAL(
+n_real := INT_TO_REAL(n_samples_used);
+
+IF  NOT wrong_der THEN
+   derivative := sumtemp * 4.0 / (n_real * n_real * del_T);
+END_IF;
+
+
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="WANJAQMX4LSEFMJLD6G5QCWPFQ" Name="deriv_1">
+            <Variables>
+                <Variable UUID="E7BA3CCADIAEHMCFZKFA6YABHQ" Name="n_samples" Type="INT" Usage="input" />
+                <Variable UUID="STO3DOFYQVYEDMNDKIZECYW57U" Name="input" Type="REAL" Usage="input" />
+                <Variable UUID="H4MDRQAM2WKUFE23CQWSSQ23YI" Name="Tc" Type="REAL" Usage="input" />
+                <Variable UUID="CNZYQ2DRPZQEFODJJ4MYUMAS5Y" Name="derivative" Type="REAL" Usage="output" />
+                <Variable UUID="TXIMAEYXKNCE5JRELNUUBKZYSM" Name="flag_change" Type="INT" Usage="internal" />
+                <Variable UUID="ASFDZCOGH2LULJ2N7NN5DYPDBU" Name="n_samples_previous" Type="INT" Usage="internal" />
+                <Variable UUID="A366DEIXJ25EBNJC3VB25NOXCA" Name="n_samples_used" Type="INT" Usage="internal" />
+                <Variable UUID="3YVHWKS5PGXUJKDCYXMSKPU4XU" Name="wrong_der" Type="BOOL" Usage="internal" />
+                <Variable UUID="6XYCLCPN567E5MXNALIZY5FUO4" Name="mid_term" Type="INT" Usage="internal" />
+                <Variable UUID="BENBQFKQSX7UXJDU2GOPC6EIMI" Name="last_term" Type="INT" Usage="internal" />
+                <Variable UUID="HBNOXEH6AJWENH73AJLAQ2QYVQ" Name="sumtemp" Type="REAL" Usage="internal" />
+                <Variable UUID="26P4QA7ETIVE5MFCGKUZJCQ5HY" Name="index" Type="INT" Usage="internal" />
+                <Variable UUID="XZOHMXE32ZFUVLUBA3MQTH5S2M" Name="index_1" Type="INT" Usage="internal" />
+                <Variable UUID="X44OFICNNMQEJB2VPKM263SU5M" Name="Sample_Array" Type="REAL" Size="24" Array="TRUE" Usage="internal" />
+                <Variable UUID="FVOUCN6FKETU5JRCVD36XPRJVA" Name="n_real" Type="REAL" Usage="internal" />
+                <Variable UUID="LXEZUBJ2M4SE3K7632CUAJZGDA" Name="n_samples_used_" Type="INT" Usage="internal" />
+                <Variable UUID="Q7PUZUFYC3RENJBBCBBIE66QEY" Name="n_samples_previous_" Type="INT" Usage="internal" />
+                <Variable UUID="VXZRMJB2DKWU5JZSSFEMGWCAYA" Name="last_term_" Type="INT" Usage="internal" />
+                <Variable UUID="RM3U7O5W7G7UTI2MDZXYRZGFWM" Name="mid_term_" Type="INT" Usage="internal" />
+                <Variable UUID="ZCXT7Q2E74XEBOZWJLNAAGBIGA" Name="wrong_der_" Type="BOOL" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[(* Verification of changing parameters *)
+n_samples_used_ := n_samples;
+IF n_samples_used_ = 0 THEN n_samples_used_ := 2; END_IF;
+
+IF derInit THEN
+	derInit := FALSE;
+	flag_change:=0;
+    n_samples_previous_ := 0;
+END_IF;
+IF Tc=0.0 THEN RETURN; END_IF;
+
+IF n_samples_used_<>n_samples_previous_  THEN
+
+   IF ((n_samples_used_ MOD 2 )<>0) THEN
+         n_samples_used_ := n_samples+1;
+      ELSE  
+         n_samples_used_ := n_samples;
+   END_IF;
+   	IF n_samples_used_ < 2 THEN  n_samples_used_ :=  2;  END_IF;(* Minimal number of scans =2 *)
+	IF n_samples_used_ >24 THEN  n_samples_used_ := 24;  END_IF;(* Max number of scans =24  *)   
+
+   IF (flag_change < (n_samples_used_-n_samples_previous_))  THEN
+      wrong_der := TRUE;
+      flag_change := flag_change + 1;
+   ELSE
+      wrong_der := FALSE;
+      n_samples_previous_ := n_samples; 
+      flag_change := 0;
+   END_IF;      
+END_IF;
+(* End of verification *)
+
+mid_term_  := n_samples_used_ / 2 + 1;
+last_term_ := n_samples_used_; 
+
+sumtemp := input;
+
+index := last_term_;
+WHILE index >= mid_term_ DO
+   index_1 := index - 1;
+   Sample_Array[index] := Sample_Array[index_1]; 
+   sumtemp := sumtemp - Sample_Array[index];
+   index := index_1;
+END_WHILE; 
+
+WHILE index >= 2 DO
+   index_1 := index - 1;
+   Sample_Array[index] := Sample_Array[index_1]; 
+   sumtemp := sumtemp + Sample_Array[index];
+   index := index_1;
+END_WHILE; 
+
+Sample_Array[1] := input;
+
+n_real := INT_TO_REAL(n_samples_used_);
+
+IF  NOT wrong_der AND n_real <> 0.0 and Tc <> 0.0 THEN
+   derivative := sumtemp * 4.0 / (n_real * n_real * Tc);
+END_IF;
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="5XA3W4DEM2IETNQXIAWCB5PMJI" Name="ls_and_SP">
+            <Variables>
+                <Variable UUID="SAFYHWOPMUNUTBMNUVK55EMEDQ" Name="i" Type="INT" Usage="internal" />
+                <Variable UUID="PJY7TNLAH2CE7PW63YH5AK4EI4" Name="used_gpa" Type="REAL" Usage="internal" />
+                <Variable UUID="GUMIOACNTYKEDAMYDNYXL7MRMY" Name="deriv1_" Type="deriv1" TypeUUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Usage="internal" />
+                <Variable UUID="TX4UU3GF5EDERJJWHLPUATCNUE" Name="deriv2" Type="deriv1" TypeUUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Usage="internal" />
+                <Variable UUID="7SML4GP7Z7CULACKU2KOEP6LYE" Name="deriv3" Type="deriv1" TypeUUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Usage="internal" />
+                <Variable UUID="7GYJNJ3L3TXUVOWRR5D5PPZECQ" Name="deriv4" Type="deriv1" TypeUUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Usage="internal" />
+                <Variable UUID="JFJ3YCARZBTEJFMU4RHAQSPWAE" Name="deriv5" Type="deriv1" TypeUUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Usage="internal" />
+                <Variable UUID="G4MQOXSXS2BU7IO32RT7E5HU24" Name="deriv6" Type="deriv1" TypeUUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Usage="internal" />
+                <Variable UUID="HUETO3Z5WBHU5CZFTCKDLXAKVI" Name="ls_derInit" Type="BOOL" Usage="internal" />
+                <Variable UUID="5LXQHL3CGW5EHHJJOXCH67L33U" Name="der" Type="REAL" Usage="internal" />
+                <Variable UUID="EVPC6PKFRCGEJKJIKQ22G65V24" Name="v1" Type="BOOL" Usage="internal" />
+                <Variable UUID="BBT6XZWEMLUEHMLBBUTTESX3TM" Name="ramp1" Type="ramp_1" TypeUUID="2X55INEGQ2VEJBYG3KOWVOO6DE" Usage="internal" />
+                <Variable UUID="RL7NHOXPTGGEDI4I4UJ7GBHTLQ" Name="Wish_main_loop_prev" Type="INT" Usage="internal" />
+                <Variable UUID="DLCPF6TE7AJEDOX3IIJ34RZGEE" Name="deriv7" Type="deriv1" TypeUUID="UHTV7F65N5ZUBMC7VIQVYRXQ3Y" Usage="internal" />
+                <Variable UUID="T2ULAAVX4A2E7H7FNOQE7AUID4" Name="used_gpa_prev" Type="REAL" Usage="internal" />
+                <Variable UUID="35TGQCDIYGQEPIE4G5ATHZWVNA" Name="clamp" Type="INT" Size="8" Array="TRUE" Usage="internal" />
+                <Variable UUID="HCJDWIEQZ56EBFZX4XFZCSRHPQ" Name="gt_Mstruct_cv_prev" Type="REAL" Usage="internal" />
+                <Variable UUID="3XZQBXLROBQEXCB4IWR2G45OYA" Name="v2" Type="REAL" Usage="internal" />
+                <Variable UUID="2CDZ6RZ572UEVOHOTW6QADRGFE" Name="ReadIO" Type="Read_IO_2" TypeUUID="XMM33P4547QEHNHD5RY4DTOACU" Usage="internal" />
+                <Variable UUID="TSPZLU6TYYZEHL5JF4TNCJRO7M" Name="time_count1_7" Type="INT" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[FOR i := 1 TO 8 DO
+	if ((gpa[i].Q_max - gpa[i].Q_min) <> 0.0) then
+		gpa[i].Q_perc := (gpa[i].Q - gpa[i].Q_min)/ (gpa[i].Q_max - gpa[i].Q_min) * 100.0;
+	end_if;
+	if ((gpa[i].Nst_max - gpa[i].Nst_min) <> 0.0) then
+		gpa[i].Nst_perc := (gpa[i].Nst - gpa[i].Nst_min)/ (gpa[i].Nst_max - gpa[i].Nst_min) * 100.0;
+	end_if;
+
+ 	if ((gpa[i].Nvd_max - gpa[i].Nvd_min) <> 0.0) then
+ 		gpa[i].Nvd_perc := (gpa[i].Nvd_r - gpa[i].Nvd_min)/ (gpa[i].Nvd_max - gpa[i].Nvd_min) * 100.0;
+	end_if;	
+
+
+END_FOR;
+
+shop.chosen_Q := 0.0;
+shop.chosen_Eout:= 0.0;
+shop.chosen_Nst := 0.0;
+shop.chosen_Nvd_r := 0.0;
+shop.chosen_S := 0.0;
+used_gpa := 0.0;
+//W1062 := 0; W1162 := 0; W1262 := 0; W1362 := 0; W1462 := 0; W1562 := 0; W1662 := 0;
+
+FOR i := 1 TO 7 DO
+  			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nst <> 0.0) then
+				shop.chosen_Nst := shop.chosen_Nst + gpa[i].Nst;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+END_FOR;
+if used_gpa <> 0.0 then
+				shop.chosen_Nst := shop.chosen_Nst / used_gpa;				
+end_if;
+  	if Wish_main_loop = 5 AND (Wish_main_loop <> Wish_main_loop_prev OR used_gpa_prev = 0.0)then
+  	//	t_kosyak_loop := t_kosyak_loop + 1;  		
+		local_SP := shop.chosen_Nst ;  	
+  	end_if;
+ used_gpa_prev := used_gpa;
+// shop.chosen_Nst := 0.0;
+ used_gpa := 0.0;
+  
+ shop.chosen_Nst := 0.0;
+
+// end_if;
+
+//end_for;
+
+FOR i := 1 TO 7 DO
+	case i of 
+	1: 	
+		if(gpa[01].S < gpa[01].Line_Reg + gpa[01].delta_S AND gpa[01].run  AND gpa[01].online ) then
+			GPAnotS[1] := TRUE;  // выход из дист управления по малому запасу по помпажу GPA1
+		end_if;
+			
+	2:
+		if(gpa[02].S < gpa[02].Line_Reg + gpa[02].delta_S AND gpa[02].run  AND gpa[02].online ) then
+			GPAnotS[2] := TRUE;  // выход из дист управления по малому запасу по помпажу GPA2
+		end_if;	
+	3:
+		if(gpa[03].S < gpa[03].Line_Reg + gpa[03].delta_S AND gpa[03].run AND gpa[03].online ) then
+			GPAnotS[3] := TRUE;  // выход из дист управления по малому запасу по помпажу GPA3
+		end_if;	
+	4:
+		if(gpa[04].S < gpa[04].Line_Reg + gpa[04].delta_S AND gpa[04].run AND gpa[04].online) then
+			GPAnotS[4] := TRUE;  // выход из дист управления по малому запасу по помпажу GPA4
+		end_if;
+	5:
+		if(gpa[05].S < gpa[05].Line_Reg + gpa[05].delta_S AND gpa[05].run  AND gpa[05].online) then
+			GPAnotS[5] := TRUE;  // выход из дист управления по малому запасу по помпажу GPA5
+		end_if;	
+	6:
+		if(gpa[06].S < gpa[06].Line_Reg + gpa[06].delta_S AND gpa[06].run AND gpa[06].online ) then
+			GPAnotS[6] := TRUE;  // выход из дист управления по малому запасу по помпажу GPA6
+		end_if;	
+	7:
+		if(gpa[07].S < gpa[07].Line_Reg + gpa[07].delta_S AND gpa[07].run  AND gpa[07].online ) then
+			GPAnotS[7] := TRUE;  // выход из дист управления по малому запасу по помпажу GPA7
+		end_if;		
+	end_case;
+
+END_FOR;
+
+
+//t14 := t14 + 1;
+FOR i := 1 TO 7 DO
+    clamp[i] := 0;
+
+	if(shop.ls_type = 1) then  // выравнивание по Q
+		case(shop.ls_choice_type)of
+		1: // max	
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Q_perc > shop.chosen_Q) then shop.chosen_Q := gpa[i].Q_perc; end_if;
+		3: // min
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Q_perc < shop.chosen_Q  and gpa[i].Q_perc <> 0.0 or (shop.chosen_Q = 0.0  and gpa[i].Q_perc <> 0.0)) then shop.chosen_Q := gpa[i].Q_perc; end_if;
+		2: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Q_perc <> 0.0) then
+				shop.chosen_Q := shop.chosen_Q + gpa[i].Q_perc;				
+				used_gpa := used_gpa + 1.0;
+			end_if;
+
+			if i = 7 and used_gpa <> 0.0 then				
+				shop.chosen_Q := shop.chosen_Q / used_gpa;
+			end_if;	
+		4: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Q_perc <> 0.0) then
+				shop.chosen_Q := shop.chosen_Q + gpa[i].Q_perc;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_Q := shop.chosen_Q / used_gpa;
+			end_if;		
+		end_case;
+	end_if;  // выравнивание по Q
+	if(shop.ls_type = 2) then  // выравнивание по Eout
+		case(shop.ls_choice_type)of
+		1: // max	
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Eout > shop.chosen_Eout) then shop.chosen_Eout := gpa[i].Eout; end_if;
+		3: // min
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Eout < shop.chosen_Eout  and gpa[i].Eout <> 0.0 or (shop.chosen_Eout = 0.0  and gpa[i].Eout <> 0.0)) then shop.chosen_Eout := gpa[i].Eout; end_if;
+		2: // average
+			if (gpa[i].online and gpa[i].run  and gpa[i].remote  and gpa[i].Eout <> 0.0) then
+				shop.chosen_Eout := shop.chosen_Eout + gpa[i].Eout;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_Eout := shop.chosen_Eout / used_gpa;
+			end_if;	
+		4: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Eout <> 0.0) then
+				shop.chosen_Eout := shop.chosen_Eout + gpa[i].Eout;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_Eout := shop.chosen_Eout / used_gpa;
+			end_if;		
+		end_case;
+	end_if;  // выравнивание по Eout
+	if(shop.ls_type = 3) then  // выравнивание по Nst
+		case(shop.ls_choice_type)of
+		1: // max	
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nst_perc > shop.chosen_Nst) then shop.chosen_Nst := gpa[i].Nst_perc; end_if;
+		3: // min
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nst_perc < shop.chosen_Nst and  gpa[i].Nst_perc <> 0.0 or (shop.chosen_Nst = 0.0  and gpa[i].Nst_perc <> 0.0)) then shop.chosen_Nst := gpa[i].Nst_perc; end_if;
+		2: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nst_perc <> 0.0) then
+				shop.chosen_Nst := shop.chosen_Nst + gpa[i].Nst_perc;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_Nst := shop.chosen_Nst / used_gpa;
+			end_if;	
+		4: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nst_perc <> 0.0) then
+				shop.chosen_Nst := shop.chosen_Nst + gpa[i].Nst_perc;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_Nst := shop.chosen_Nst / used_gpa;
+			end_if;		
+		end_case;
+	end_if;  // выравнивание по Nst
+	if(shop.ls_type = 4) then  // выравнивание по Nvd_r
+		case(shop.ls_choice_type)of
+		1: // max	
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nvd_perc > shop.chosen_Nvd_r) then shop.chosen_Nvd_r := gpa[i].Nvd_perc; end_if;
+		3: // min
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nvd_perc < shop.chosen_Nvd_r  and gpa[i].Nvd_perc <> 0.0 or (shop.chosen_Nvd_r = 0.0  and gpa[i].Nvd_perc <> 0.0)) then shop.chosen_Nvd_r := gpa[i].Nvd_perc; end_if;
+		2: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nvd_perc <> 0.0) then
+				shop.chosen_Nvd_r := shop.chosen_Nvd_r + gpa[i].Nvd_perc;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_Nvd_r := shop.chosen_Nvd_r / used_gpa;
+			end_if;
+		4: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].Nvd_perc <> 0.0) then
+				shop.chosen_Nvd_r := shop.chosen_Nvd_r + gpa[i].Nvd_perc;
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_Nvd_r := shop.chosen_Nvd_r / used_gpa;
+			end_if;		
+		end_case;
+	end_if;  // выравнивание по Nvd_r
+	if(shop.ls_type = 5) then  // выравнивание по S
+		case(shop.ls_choice_type)of
+		1: // max	
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and (gpa[i].S - gpa[i].Line_Reg) > shop.chosen_S) then shop.chosen_S := (gpa[i].S - gpa[i].Line_Reg); end_if;
+		3: // min
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and (gpa[i].S - gpa[i].Line_Reg) < shop.chosen_S  and gpa[i].S <> 0.0 or (shop.chosen_S = 0.0  and gpa[i].S <> 0.0)) then shop.chosen_S := (gpa[i].S - gpa[i].Line_Reg); end_if;
+		2: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].S <> 0.0) then
+				shop.chosen_S := shop.chosen_S + (gpa[i].S - gpa[i].Line_Reg);
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_S := shop.chosen_S / used_gpa;
+			end_if;
+		4: // average
+			if (gpa[i].online  and gpa[i].run  and gpa[i].remote  and gpa[i].S <> 0.0) then
+				shop.chosen_S := shop.chosen_S + (gpa[i].S - gpa[i].Line_Reg);
+				used_gpa := used_gpa + 1.0;
+			end_if;
+			if i = 7 and used_gpa <> 0.0 then
+				shop.chosen_S := shop.chosen_S / used_gpa;
+			end_if;		
+		end_case;
+	end_if;  // выравнивание по S
+	
+	
+END_FOR;   // здесь было вычисление параметра, покоторому будет выравнивание нагрузки.
+
+	
+FOR i := 1 TO 7 DO  //                               
+
+	gpa[i].ls_error := 0.0;
+	if(gpa[i].online  and gpa[i].run  and gpa[i].remote  and shop.ls_type = 1) then  //                 Q
+		if 	gpa[i].ls_Q_gain = 0.0 then gpa[i].ls_Q_gain := 1.0; end_if;
+		gpa[i].ls_error := (shop.chosen_Q - gpa[i].Q_perc)/ gpa[i].ls_Q_gain;
+	end_if;
+	if(gpa[i].online  and gpa[i].run  and gpa[i].remote  and shop.ls_type = 2) then  //                 Eout
+		if 	gpa[i].ls_Eout_gain = 0.0 then gpa[i].ls_Eout_gain := 1.0; end_if;
+		gpa[i].ls_error := (shop.chosen_Eout - gpa[i].Eout)/gpa[i].ls_Eout_gain;
+	end_if;
+	if(gpa[i].online  and gpa[i].run  and gpa[i].remote  and shop.ls_type = 3) then  //                 Nst
+		if 	gpa[i].ls_Nst_gain = 0.0 then gpa[i].ls_Nst_gain := 1.0; end_if;
+		gpa[i].ls_error := (shop.chosen_Nst - gpa[i].Nst_perc)/gpa[i].ls_Nst_gain;
+	end_if;
+	if(gpa[i].online  and gpa[i].run  and gpa[i].remote  and shop.ls_type = 4) then  //                 Nvd_r
+		if 	gpa[i].ls_Nvdr_gain = 0.0 then gpa[i].ls_Nvdr_gain := 1.0; end_if;
+		gpa[i].ls_error := (shop.chosen_Nvd_r - gpa[i].Nvd_perc)/gpa[i].ls_Nvdr_gain;
+	end_if;
+	if(gpa[i].online  and gpa[i].run  and gpa[i].remote  and shop.ls_type = 5) then  //                 S
+		if 	gpa[i].ls_S_gain = 0.0 then gpa[i].ls_S_gain := 1.0; end_if;
+		gpa[i].ls_error := (shop.chosen_S - (gpa[i].S - gpa[i].Line_Reg))/gpa[i].ls_S_gain;
+	end_if;
+	
+	//                                                                                                                      ls_error
+
+	if (gpa[i].ls_error <=  gpa[i].ls_DB AND gpa[i].ls_error >=  -gpa[i].ls_DB) then
+		gpa[i].ls_error := 0.0;
+	ELSIF gpa[i].ls_error > 0.0 THEN
+		 	gpa[i].ls_error := gpa[i].ls_error - gpa[i].ls_DB ;
+			//DB_active := FALSE;
+         ELSE 
+		 	gpa[i].ls_error := gpa[i].ls_error + gpa[i].ls_DB ;
+			//DB_active := FALSE;	
+	end_if;
+	gpa[i].ls_KI := gpa[i].ls_Kr * gpa[i].ls_KP / 60.0;
+	
+	gpa[i].ls_P_part := gpa[i].ls_KP * gpa[i].ls_error;
+	gpa[i].ls_dI_part := gpa[i].ls_KI * gpa[i].ls_error * del_T;
+
+	
+
+	
+	// derivative calculation 
+  	ls_derInit := FALSE;//ls_derInit OR pid.SwitchFlag OR pid.PV_failure;
+  	der := 0.0;
+	deriv1_(init := derInit, input:=gpa[1].ls_error);
+	// пока не работает case с функциями....
+ 	if i = 1 then 
+   		deriv1_(init := derInit, input:=gpa[1].ls_error);//, N_samples := 24);
+  	 	der := deriv1_.derivative;
+ 	end_if;  	 
+	
+  	if i = 2 then 
+		deriv2(init:= derInit,input:=gpa[i].ls_error);
+  		der := deriv2.derivative;
+  	 	//derInit:=deriv2.init;
+	end_if; 
+  	if i = 3 then 
+		deriv3(init:= derInit,input:=gpa[i].ls_error);
+    	der := deriv3.derivative;
+  	 	//derInit:=deriv3.init;  	
+	end_if; 
+	if i = 4 then 
+		deriv4(init:= derInit,input:=gpa[i].ls_error);
+    	 der := deriv4.derivative;
+  	 	//derInit:=deriv4.init;
+	end_if; 
+  	if i = 5 then 
+		deriv5(init:= derInit,input:=gpa[i].ls_error);
+     	der := deriv5.derivative;
+  	 	//derInit:=deriv5.init;
+	end_if; 
+  	if i = 6 then 
+		deriv6(init:= derInit,input:=gpa[i].ls_error);
+     	der := deriv6.derivative;
+  	 	//derInit:=deriv6.init;
+	end_if; 
+  	if i = 7 then 
+		deriv7(init:= derInit,input:=gpa[i].ls_error);
+     	der := deriv7.derivative;
+  	 	//derInit:=deriv6.init;
+ 	end_if; 
+  	 
+	 
+
+
+
+  IF gpa[i].ls_KD > 0.001  THEN 
+       gpa[i].ls_D_part := gpa[i].ls_KD * der ;
+  END_IF;    
+  
+  gpa[i].ls_P_D_part := gpa[i].ls_P_part + gpa[i].ls_D_part;
+  
+  if (shop.ls_type <> shop.ls_type_prev) then
+  	gpa[i].ls_P_D_part_prev := gpa[i].ls_P_D_part;
+  end_if; 
+  
+
+  
+  gpa[i].ls_cv := gpa[i].ls_P_D_part - gpa[i].ls_P_D_part_prev + gpa[i].ls_dI_part;
+  gpa[i].ls_P_D_part_prev := gpa[i].ls_P_D_part;
+  
+
+
+  if(shop.num_rem_gpa <> 0.0) then
+  	gpa[i].cv := gpa[i].cv_prev + gpa[i].ls_cv + (gt_Mstruct.CV - gt_Mstruct_cv_prev) / shop.num_rem_gpa; 
+
+     
+  end_if;
+  
+	//fff1 := gpa[i].cv_prev;
+    
+
+  if Wish_main_loop = 5 AND ((gpa[i].TransmitterHigh - gpa[i].TransmitterLow) <> 0.0) then
+  	
+  
+  	 gpa[i].cv := (local_SP -  gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow);
+  end_if;
+  //fff3 := gpa[5].cv;
+  v1 := TRUE;
+  if (gpa[i].TransmitterHigh - gpa[i].TransmitterLow) <> 0.0 then 
+  	v2 := gpa[i].cv_Ramp_rate / (gpa[i].TransmitterHigh - gpa[i].TransmitterLow);
+  end_if;
+  	ramp1(enable1 := v1,ramp_rate:=v2, y_target := gpa[i].cv, y_current := gpa[i].cv_prev);//, del_T := del_T);
+	//ramp1(enable1 := v1,ramp_rate:=0.1, y_target := fff, y_current := gpa[5].cv_prev);//,
+  gpa[i].cv := ramp1.ramp;
+  
+  // здесь должна быть блокировка роста СиВи, по необходимым условиям--------------
+ // tf1 := gpa[01].cv;
+//  tf2 := (gt_Mstruct.cv - gt_Mstruct_cv_prev);
+  
+//  tf4 := tf1 - tf3;
+  
+ 
+  
+  //-------------------------------------------------------------------------------
+  if ((gpa[i].TransmitterHigh - gpa[i].TransmitterLow) <> 0.0) then
+  	if(gpa[i].cv > (gpa[i].SP_HighLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow)) then
+  		gpa[i].cv := (gpa[i].SP_HighLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow);
+  		clamp[i] := 1;
+  	end_if;
+  	if (gpa[i].cv < (gpa[i].SP_LowLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow)) then
+  		gpa[i].cv := (gpa[i].SP_LowLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow); 
+  		clamp[i] := -1;
+ 	end_if;
+  end_if;  //
+ 
+if( NOT gpa[i].online OR
+	gpa[01].FreezeAll OR gpa[02].FreezeAll OR gpa[03].FreezeAll OR gpa[04].FreezeAll OR gpa[05].FreezeAll OR gpa[06].FreezeAll OR gpa[07].FreezeAll
+) then
+	gpa[i].cv := gpa[i].cv_prev;
+end_if;
+
+ //	fff2 := gpa[5].cv;
+
+//if(W1062 = 1 OR W1162 = 1 OR W1262 = 1 OR W1362 = 1 OR W1462 = 1 OR W1562 = 1 OR W1662 = 1)  then
+//	gpa[i].cv := gpa[i].cv_prev;	
+//end_if;
+
+
+
+
+  //--------------второй раз проверяем на диапазон, так надо----------------
+  if ((gpa[i].TransmitterHigh - gpa[i].TransmitterLow) <> 0.0) then
+  	if(gpa[i].cv > (gpa[i].SP_HighLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow)) then
+  		gpa[i].cv := (gpa[i].SP_HighLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow);
+  		clamp[i] := 1;
+  	end_if;
+  	if (gpa[i].cv < (gpa[i].SP_LowLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow)) then
+  		gpa[i].cv := (gpa[i].SP_LowLimit - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow); 
+  		clamp[i] := -1;
+ 	end_if;
+  end_if;
+ 
+//fff4 := gpa[5].cv;
+  if (clamp[i] = 1  AND gt_Mstruct.CV > gt_Mstruct_cv_prev) OR (clamp[i] = -1 AND gt_Mstruct.CV < gt_Mstruct_cv_prev) then
+  //	gt_Mstruct.CV := gt_Mstruct_cv_prev;
+  	gpa[i].cv := gpa[i].cv_prev;
+//  	ttt := ttt + 1;
+  end_if;
+//fff := gpa[5].cv;
+  
+//  gpa[5].SP_cv := gpa[5].TransmitterLow + (gpa[5].TransmitterHigh - gpa[5].TransmitterLow) * gpa[5].cv;
+	
+ 	 gpa[i].SP_cv := gpa[i].TransmitterLow + (gpa[i].TransmitterHigh - gpa[i].TransmitterLow) * gpa[i].cv;
+  	
+ 
+  
+  if(gpa[i].remote = FALSE) then 
+  	gpa[i].SP_cv := gpa[i].SP_Nst;
+  	if (gpa[i].TransmitterHigh - gpa[i].TransmitterLow <> 0.0) then
+  		gpa[i].cv := (gpa[i].SP_cv - gpa[i].TransmitterLow)/(gpa[i].TransmitterHigh - gpa[i].TransmitterLow);
+  	end_if;
+  end_if;
+
+
+
+gpa[i].cv_prev := gpa[i].cv;
+ 
+
+END_FOR;
+// для серпухова, где чужие агрегаты
+if time_count1_7 > 101 then time_count1_7 := 0; end_if;
+time_count1_7 := time_count1_7 + 1;
+
+
+shop.ls_type_prev := shop.ls_type;
+gt_Mstruct.CV := 0.0;
+gt_Mstruct_cv_prev := gt_Mstruct.CV;
+Wish_main_loop_prev := Wish_main_loop;
+
+//W02001 := gpa[1].cv;
+
+
+
+
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="PKNM7OFXVZKUXLK7L7JUQ3MHPU" Name="perf_init_1">
+            <Variables>
+                <Variable UUID="VDY3WH5L3TUUNHM6JNY5NMNUMU" Name="temp1" Type="INT" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[
+
+if temp1 = 0 then
+//GPA1
+gpa[01].delta_S := 5.0;				// дельта для выравнивания по запасу по помпажу
+gpa[01].ls_DB := 0.0;			// зона нечувтсвительности по выравниванию нагрузки
+gpa[01].ls_Kr := 5.0;				// коэффициент П-части по выравниванию нагрузки
+gpa[01].ls_KP := 5.0;				// коэффициент И-части по выравниванию нагрузки
+gpa[01].ls_KD := 0.0;				// коэффициент Д-части по выравниванию нагрузки
+gpa[01].SP_LowLimit := 6000.0;		// нижняя граница регулирования оборотов
+gpa[01].SP_HighLimit := 8200.0;		// верхняя граница регулирования оборотов
+gpa[01].cv_Ramp_rate := 1.0;		// максимальная скорость изменения уставки от САР в ГПА1
+gpa[01].Q_min := 0.0;				// минимальный расход ГПА1, соответствующий 0% расхода, используется для выравнивания нагрузки в процентах расхода 
+gpa[01].Q_max := 1000.0;			// максимальный расход ГПА1, соответствующий 100% расхода, используется для выравнивания нагрузки в процентах расхода
+gpa[01].Nst_min := 0.0;				// минимальные обороты СТ, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ 
+gpa[01].Nst_max := 8200.0;			// максимальные обороты СТ, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ
+gpa[01].Nvd_min := 0.0;				// минимальные обороты ВД прив, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+gpa[01].Nvd_max := 14420.0;			// максимальные обороты ВД прив, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+
+//GPA2
+gpa[02].delta_S := 5.0;				// дельта для выравнивания по запасу по помпажу
+gpa[02].ls_DB := 0.0;			// зона нечувтсвительности по выравниванию нагрузки
+gpa[02].ls_Kr := 5.0;				// коэффициент П-части по выравниванию нагрузки
+gpa[02].ls_KP := 5.0;				// коэффициент И-части по выравниванию нагрузки
+gpa[02].ls_KD := 0.0;				// коэффициент Д-части по выравниванию нагрузки
+gpa[02].SP_LowLimit := 6000.0;		// нижняя граница регулирования оборотов
+gpa[02].SP_HighLimit := 8200.0;		// верхняя граница регулирования оборотов
+gpa[02].cv_Ramp_rate := 1.0;		// максимальная скорость изменения уставки от САР в ГПА1
+gpa[02].Q_min := 0.0;				// минимальный расход ГПА1, соответствующий 0% расхода, используется для выравнивания нагрузки в процентах расхода 
+gpa[02].Q_max := 1000.0;			// максимальный расход ГПА1, соответствующий 100% расхода, используется для выравнивания нагрузки в процентах расхода
+gpa[02].Nst_min := 0.0;				// минимальные обороты СТ, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ 
+gpa[02].Nst_max := 8200.0;			// максимальные обороты СТ, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ
+gpa[02].Nvd_min := 0.0;				// минимальные обороты ВД прив, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+gpa[02].Nvd_max := 14420.0;			// максимальные обороты ВД прив, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+
+//GPA3
+gpa[03].delta_S := 5.0;				// дельта для выравнивания по запасу по помпажу
+gpa[03].ls_DB := 0.0;			// зона нечувтсвительности по выравниванию нагрузки
+gpa[03].ls_Kr := 5.0;				// коэффициент П-части по выравниванию нагрузки
+gpa[03].ls_KP := 5.0;				// коэффициент И-части по выравниванию нагрузки
+gpa[03].ls_KD := 0.0;				// коэффициент Д-части по выравниванию нагрузки
+gpa[03].SP_LowLimit := 6000.0;		// нижняя граница регулирования оборотов
+gpa[03].SP_HighLimit := 8200.0;		// верхняя граница регулирования оборотов
+gpa[03].cv_Ramp_rate := 1.0;		// максимальная скорость изменения уставки от САР в ГПА1
+gpa[03].Q_min := 0.0;				// минимальный расход ГПА1, соответствующий 0% расхода, используется для выравнивания нагрузки в процентах расхода 
+gpa[03].Q_max := 1000.0;			// максимальный расход ГПА1, соответствующий 100% расхода, используется для выравнивания нагрузки в процентах расхода
+gpa[03].Nst_min := 0.0;				// минимальные обороты СТ, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ 
+gpa[03].Nst_max := 8200.0;			// максимальные обороты СТ, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ
+gpa[03].Nvd_min := 0.0;				// минимальные обороты ВД прив, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+gpa[03].Nvd_max := 14420.0;			// максимальные обороты ВД прив, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+
+//GPA4
+gpa[04].delta_S := 5.0;				// дельта для выравнивания по запасу по помпажу
+gpa[04].ls_DB := 0.0;			// зона нечувтсвительности по выравниванию нагрузки
+gpa[04].ls_Kr := 5.0;				// коэффициент П-части по выравниванию нагрузки
+gpa[04].ls_KP := 5.0;				// коэффициент И-части по выравниванию нагрузки
+gpa[04].ls_KD := 0.0;				// коэффициент Д-части по выравниванию нагрузки
+gpa[04].SP_LowLimit := 6000.0;		// нижняя граница регулирования оборотов
+gpa[04].SP_HighLimit := 8200.0;		// верхняя граница регулирования оборотов
+gpa[04].cv_Ramp_rate := 1.0;		// максимальная скорость изменения уставки от САР в ГПА1
+gpa[04].Q_min := 0.0;				// минимальный расход ГПА1, соответствующий 0% расхода, используется для выравнивания нагрузки в процентах расхода 
+gpa[04].Q_max := 1000.0;			// максимальный расход ГПА1, соответствующий 100% расхода, используется для выравнивания нагрузки в процентах расхода
+gpa[04].Nst_min := 0.0;				// минимальные обороты СТ, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ 
+gpa[04].Nst_max := 8200.0;			// максимальные обороты СТ, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ
+gpa[04].Nvd_min := 0.0;				// минимальные обороты ВД прив, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+gpa[04].Nvd_max := 14420.0;			// максимальные обороты ВД прив, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+
+//= добавлено 05.07.2020 (ОАЕ)
+//GPA5
+gpa[05].delta_S := 5.0;				// дельта для выравнивания по запасу по помпажу
+gpa[05].ls_DB := 0.0;			// зона нечувтсвительности по выравниванию нагрузки
+gpa[05].ls_Kr := 5.0;				// коэффициент П-части по выравниванию нагрузки
+gpa[05].ls_KP := 5.0;				// коэффициент И-части по выравниванию нагрузки
+gpa[05].ls_KD := 0.0;				// коэффициент Д-части по выравниванию нагрузки
+gpa[05].SP_LowLimit := 6000.0;		// нижняя граница регулирования оборотов
+gpa[05].SP_HighLimit := 8200.0;		// верхняя граница регулирования оборотов
+gpa[05].cv_Ramp_rate := 1.0;		// максимальная скорость изменения уставки от САР в ГПА1
+gpa[05].Q_min := 0.0;				// минимальный расход ГПА1, соответствующий 0% расхода, используется для выравнивания нагрузки в процентах расхода 
+gpa[05].Q_max := 1000.0;			// максимальный расход ГПА1, соответствующий 100% расхода, используется для выравнивания нагрузки в процентах расхода
+gpa[05].Nst_min := 0.0;				// минимальные обороты СТ, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ 
+gpa[05].Nst_max := 8200.0;			// максимальные обороты СТ, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ
+gpa[05].Nvd_min := 0.0;				// минимальные обороты ВД прив, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+gpa[05].Nvd_max := 14420.0;			// максимальные обороты ВД прив, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+
+//GPA6
+gpa[06].delta_S := 5.0;				// дельта для выравнивания по запасу по помпажу
+gpa[06].ls_DB := 0.0;			// зона нечувтсвительности по выравниванию нагрузки
+gpa[06].ls_Kr := 5.0;				// коэффициент П-части по выравниванию нагрузки
+gpa[06].ls_KP := 5.0;				// коэффициент И-части по выравниванию нагрузки
+gpa[06].ls_KD := 0.0;				// коэффициент Д-части по выравниванию нагрузки
+gpa[06].SP_LowLimit := 6000.0;		// нижняя граница регулирования оборотов
+gpa[06].SP_HighLimit := 8200.0;		// верхняя граница регулирования оборотов
+gpa[06].cv_Ramp_rate := 1.0;		// максимальная скорость изменения уставки от САР в ГПА1
+gpa[06].Q_min := 0.0;				// минимальный расход ГПА1, соответствующий 0% расхода, используется для выравнивания нагрузки в процентах расхода 
+gpa[06].Q_max := 1000.0;			// максимальный расход ГПА1, соответствующий 100% расхода, используется для выравнивания нагрузки в процентах расхода
+gpa[06].Nst_min := 0.0;				// минимальные обороты СТ, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ 
+gpa[06].Nst_max := 8200.0;			// максимальные обороты СТ, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов СТ
+gpa[06].Nvd_min := 0.0;				// минимальные обороты ВД прив, соответствующий 0% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+gpa[06].Nvd_max := 14420.0;			// максимальные обороты ВД прив, соответствующий 100% оборотов, используется для выравнивания нагрузки в процентах оборотов ВД прив
+
+//-----------------конфигурация контуров регулирования
+
+// регулирование по частоте СТ
+gt_Mstruct.pid_struct[5].SP_LowClamp := 6000.0;		//  минимальное задание при регулировании цехом по оборотам СТ //inv
+gt_Mstruct.pid_struct[5].SP_HighClamp := 8200.0;	//  максимальное задание при регулировании цехом по оборотам СТ
+
+// регулирование по расходу
+Q_conf.KP := 1.0;							// коэффициент П-части
+Q_conf.Kr := 10.0;							// коэффициент И-части
+Q_conf.SP_ramp_rate := 5.0;					// максимальная скорость изменения задания по расходу
+Q_conf.Tf := 0.5;							// постоянная времени фильтрации входа 
+Q_conf.SP_LowClamp := 150.0;				// минимальное задание по расходу
+Q_conf.SP_HighClamp := 1800.0;				// максимальное задание по расходу
+Q_conf.DB := 0.5;							// зона нечувствительности по расходу
+// регулирование по давлению на выходе
+Eout_conf.KP := 1.0;
+Eout_conf.Kr := 10.0;
+Eout_conf.SP_ramp_rate := 0.01;
+Eout_conf.Tf := 0.5;
+Eout_conf.SP_LowClamp := 2.53;
+Eout_conf.SP_HighClamp := 7.39;
+Eout_conf.DB := 0.002;
+// регулирование по степени сжатия
+EoutEin_conf.KP := 1.0;
+EoutEin_conf.Kr := 5.0;
+EoutEin_conf.SP_ramp_rate := 0.1;
+EoutEin_conf.Tf := 0.5;
+EoutEin_conf.SP_LowClamp := 1.01;
+EoutEin_conf.SP_HighClamp := 1.95;
+EoutEin_conf.DB := 0.002;
+
+// параметры ниже не требуют изменений
+
+gpa[01].TransmitterHigh := 10000.0;	
+gpa[01].TransmitterLow := 0.0;
+gpa[01].ls_Nvdr_gain := 10000.0;
+gpa[01].ls_Nst_gain := 10000.0;
+gpa[01].ls_Q_gain := 10000.0;
+gpa[01].ls_Eout_gain := 10000.0;
+gpa[01].ls_S_gain := 1000.0;
+
+gpa[02].TransmitterHigh := 10000.0;	
+gpa[02].TransmitterLow := 0.0;
+gpa[02].ls_Nvdr_gain := 10000.0;
+gpa[02].ls_Nst_gain := 10000.0;
+gpa[02].ls_Q_gain := 10000.0;
+gpa[02].ls_Eout_gain := 10000.0;
+gpa[02].ls_S_gain := 1000.0;
+
+gpa[03].TransmitterHigh := 10000.0;	
+gpa[03].TransmitterLow := 0.0;
+gpa[03].ls_Nvdr_gain := 10000.0;
+gpa[03].ls_Nst_gain := 10000.0;
+gpa[03].ls_Q_gain := 10000.0;
+gpa[03].ls_Eout_gain := 10000.0;
+gpa[03].ls_S_gain := 1000.0;
+
+gpa[04].TransmitterHigh := 10000.0;	
+gpa[04].TransmitterLow := 0.0;
+gpa[04].ls_Nvdr_gain := 10000.0;
+gpa[04].ls_Nst_gain := 10000.0;
+gpa[04].ls_Q_gain := 10000.0;
+gpa[04].ls_Eout_gain := 10000.0;
+gpa[04].ls_S_gain := 1000.0;
+
+gpa[05].TransmitterHigh := 10000.0;	
+gpa[05].TransmitterLow := 0.0;
+gpa[05].ls_Nvdr_gain := 10000.0;
+gpa[05].ls_Nst_gain := 10000.0;
+gpa[05].ls_Q_gain := 10000.0;
+gpa[05].ls_Eout_gain := 10000.0;
+gpa[05].ls_S_gain := 1000.0;
+
+gpa[06].TransmitterHigh := 10000.0;	
+gpa[06].TransmitterLow := 0.0;
+gpa[06].ls_Nvdr_gain := 10000.0;
+gpa[06].ls_Nst_gain := 10000.0;
+gpa[06].ls_Q_gain := 10000.0;
+gpa[06].ls_Eout_gain := 10000.0;
+gpa[06].ls_S_gain := 1000.0;
+
+gpa[07].TransmitterHigh := 10000.0;	
+gpa[07].TransmitterLow := 0.0;
+gpa[07].ls_Nvdr_gain := 10000.0;
+gpa[07].ls_Nst_gain := 10000.0;
+gpa[07].ls_Q_gain := 10000.0;
+gpa[07].ls_Eout_gain := 10000.0;
+gpa[07].ls_S_gain := 1000.0;
+
+gpa[08].TransmitterHigh := 10000.0;	
+gpa[08].TransmitterLow := 0.0;
+gpa[08].ls_Nvdr_gain := 10000.0;
+gpa[08].ls_Nst_gain := 10000.0;
+gpa[08].ls_Q_gain := 10000.0;
+gpa[08].ls_Eout_gain := 10000.0;
+gpa[08].ls_S_gain := 1000.0;
+
+
+Q_conf.loop_num := 1;
+Q_conf.loop_enable := TRUE;
+Q_conf.loop_direct := TRUE;
+Q_conf.loop_type := 1;
+Q_conf.fallback_SP := Q_conf.SP_HighClamp;
+Q_conf.TransmitterHigh := 10000.0;			
+Ein_conf.loop_num := 2;
+Ein_conf.loop_enable := FALSE;
+Eout_conf.loop_num := 3;
+Eout_conf.loop_enable := TRUE;
+Eout_conf.loop_direct := TRUE;
+Eout_conf.loop_type := 1;
+Eout_conf.fallback_SP := Eout_conf.SP_HighClamp;
+Eout_conf.TransmitterHigh := 100.0;
+EoutEin_conf.loop_num := 4;
+EoutEin_conf.loop_enable := TRUE;
+EoutEin_conf.loop_direct := TRUE;
+EoutEin_conf.loop_type := 1;
+EoutEin_conf.fallback_SP := EoutEin_conf.SP_HighClamp;
+EoutEin_conf.TransmitterHigh := 100.0;
+gt_Mstruct.pid_struct[5].PV_gain := 1.0;
+gt_Mstruct.pid_struct[5].loop_enable:=TRUE; 
+gt_Mstruct.pid_struct[5].loop_valid := TRUE; // добавлено
+
+shop.ls_type := 1;
+shop.ls_choice_type := 2;
+Wish_main_loop := 0;
+
+
+Q_gain := 100.0;
+Ein_gain := 10.0;
+Eout_gain := 1.0;
+EoutEin_gain := 1.0;
+gt_Mstruct.N_loops := 4;
+gt_Mstruct.main_loop := 1;
+gt_Mstruct.auto_man := TRUE;
+gt_Mstruct.high_clamp := 10.0 ;
+gt_Mstruct.low_clamp := -10.0;
+gt_Mstruct.vel_high_limit := 0.5;   // подобрать скорость изменения уставки максимальную вверх
+gt_Mstruct.vel_low_limit := -0.5;	// подобрать скорость изменения уставки максимальную вниз
+temp1 := 1;
+glob_conf_change := TRUE;
+
+end_if;]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="VLBUI5IGKJMELCF43O7FQMNAZ4" Name="perf_main">
+            <Variables>
+                <Variable UUID="RPI5DSXKA2UENHG3COJLQIFPMU" Name="perf_init" Type="perf_init_1" TypeUUID="PKNM7OFXVZKUXLK7L7JUQ3MHPU" Usage="internal" />
+                <Variable UUID="JOX7REBBBLVUTDTK36WHUQ2FC4" Name="ReadIO" Type="Read_IO_2" TypeUUID="XMM33P4547QEHNHD5RY4DTOACU" Usage="internal" />
+                <Variable UUID="5F7EFPTY43FE5BKIJQR46U2QKQ" Name="ReadCNF01" Type="Read_CNF_4" TypeUUID="LOAEFZ2XY4CUTOMCP6ILQUFUZQ" Usage="internal" />
+                <Variable UUID="Z5H2PFO6GJQUDEMNRDTAVE6TBQ" Name="ReadCom01" Type="Read_Com_2" TypeUUID="TJKXICXJV6FEFAPAZTW2NW5WCM" Usage="internal" />
+                <Variable UUID="6Y76OJX4DCIETMZJ6E7K46SAUI" Name="SPtreat" Type="SP_treat_3" TypeUUID="46FGAPDWVOKUJENSP3HLN54K7A" Usage="internal" />
+                <Variable UUID="ELICCE24MYJEPOO43Y2MGG5GII" Name="sig_sel01" Type="c_aSigSel_1_exe" TypeUUID="S34SNSVJTCWUXEARCCBPXKRPJY" Usage="internal" />
+                <Variable UUID="CGZMIKLCXHJUDIKOJXHY4VX7CU" Name="ls_and_SP01" Type="ls_and_SP" TypeUUID="5XA3W4DEM2IETNQXIAWCB5PMJI" Usage="internal" />
+                <Variable UUID="ZKTT5TLF5DLEVFGGJ6TJISS2ZI" Name="OutGen04" Type="OUTGT_4" TypeUUID="EERK2SUBVLWE3OAWFFFHBTUABI" Usage="internal" />
+                <Variable UUID="JZUIZ7OESGQEZKR3RQPGFQRSZE" Name="clamp" Type="INT" Usage="internal" />
+                <Variable UUID="TAGJKQD4QOXU3KARB4JJKXCZCE" Name="tmp5" Type="REAL" Usage="internal" />
+                <Variable UUID="P63NMGJLGZHUZBWK3TO63KN3WU" Name="data_from_GPAs" Type="data_from_gpa1" TypeUUID="OO5OSPHDFP2UNGYQML67KGF2VU" Usage="internal" />
+                <Variable UUID="NH7BH6RQMOZE5B2GHJDNIFPHQI" Name="data_to_GPAs" Type="data_to_GPAs_1" TypeUUID="ESTLBV5HO33EDP4WHXWQDE3RHI" Usage="internal" />
+                <Variable UUID="AKSPMOLM4ZMU7ARTIPAGFU4HF4" Name="alarms1" Type="alarms" TypeUUID="STKGR4ZWTBZULIZEMHUOVGEW4Q" Usage="internal" />
+                <Variable UUID="ZLI4FRNNVTEEDN4IWEVOHA7GC4" Name="to_Trend" Type="toTrend" TypeUUID="RBR5IMNOBSAELGPUFBEGJLEVSE" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[
+
+// инициализация регулятора
+perf_init();
+
+
+// получение данных по MODBUS
+
+data_from_GPAs();
+
+// расчет параметров регулирования
+ReadIO();
+
+//конфигурация контуров регулирования
+ReadCNF01(glob_conf_change := glob_conf_change,
+			test_array := test_array);
+  
+// чтение команд оператора по контурам регулирования
+ReadCom01(	(*Wish_main_loop := Wish_main_loop,
+			local_SP := local_SP,
+			del_T := del_T,
+ 			co_no_SP_ramp := co_no_SP_ramp*));
+
+// Расчет уставок для каждого контура регулирования
+SPtreat();
+
+// регулятор
+sig_sel01(gt_Mstruct, test_array);
+
+// формирование выходного воздействия по контурам регулирования
+OutGen04(d_out_max => gt_Mstruct.d_out_max, 
+		   d_out_min => gt_Mstruct.d_out_min, 
+		   clamp => clamp,
+		   d_out => tmp5 );
+
+//расчет воздействий по выравниванию нагрузки 
+ls_and_SP01();
+ 
+// отправка новых уставок в агрегаты:
+data_to_GPAs();
+
+
+alarms1();
+
+to_Trend();]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="2X55INEGQ2VEJBYG3KOWVOO6DE" Name="ramp_1">
+            <Variables>
+                <Variable UUID="HGILRX3GRM4EPJCB4NDB6K7PH4" Name="enable1" Type="BOOL" Usage="input" />
+                <Variable UUID="ZFKANC3S75GUHBVHGJEYE5IE5Q" Name="ramp_rate" Type="REAL" Usage="input" />
+                <Variable UUID="JS6PXJAPKXFE5D7ZKICQ3BKHKA" Name="y_target" Type="REAL" Usage="input" />
+                <Variable UUID="7GH7Q6MYN2YU3FL5TDN3WVJUEI" Name="y_current" Type="REAL" Usage="input" />
+                <Variable UUID="W2JLGGEPRI6EPJ5MWHAJMOAJFQ" Name="ramp" Type="REAL" Usage="output" />
+                <Variable UUID="VNNPHIM4X7NU3CARI4VMZHW6VY" Name="dd" Type="REAL" Usage="internal" />
+                <Variable UUID="MAQTDPCWGUBETIOMWCNY6QTVEE" Name="dy" Type="REAL" Usage="internal" />
+                <Variable UUID="YIZEBTSF7QKEXNXK75LWS3H6KQ" Name="dd_1" Type="REAL" Usage="internal" />
+                <Variable UUID="V7QOWBGTDWHE5CQBVEHF2LBBVQ" Name="ramp_rate_1" Type="REAL" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[IF enable1 THEN
+	
+	
+
+	IF (ramp_rate = 0.0) THEN
+                      ramp := y_target;
+                      RETURN;
+ 	END_IF; 
+
+    dd := y_target - y_current ;
+    ramp_rate_1 := ABS(ramp_rate);
+    dy := ramp_rate_1 * del_T;       
+
+   	dd_1:= ABS(dd);
+      
+    IF  dd_1 <= dy THEN
+        ramp := y_target ;
+    	RETURN; 
+    END_IF;   
+        
+  (*--------------------------------------------------------*)  
+    IF dd > 0.0 THEN  ramp :=  y_current + dy ;		
+                  ELSE  ramp :=  y_current - dy ;
+	END_IF ;  
+  
+    
+ELSE      
+         ramp := y_current ;
+END_IF; 
+
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="NB62DYFM7JMEDJ3275MTXEOBHA" Name="rate_lim_2">
+            <Variables>
+                <Variable UUID="SEVMWTHJWQ5EROIUM3COYKV4C4" Name="s_sel" Type="dSEL" TypeUUID="UYJYHMSBU7MU7DTPCWIELHBL4I" Usage="inout" />
+                <Variable UUID="Z3BGZW35ABYETKGMKGQBKS4LSA" Name="decouple" Type="REAL" Usage="inout" />
+                <Variable UUID="SPXVOKCAQUXUXFQLNRYSHAG3FE" Name="switch" Type="BOOL" Usage="input" />
+                <Variable UUID="NYIW67IGTKGE3L3GWG3GPBL6KM" Name="open_seq" Type="BOOL" Usage="input" />
+                <Variable UUID="CUYXRAHEELLETEGGQV3QOZE4CE" Name="d_out" Type="REAL" Usage="output" />
+                <Variable UUID="QKLOLSE5V2PUNPCXEKIDBLDG2I" Name="d_out_woDecouple" Type="REAL" Usage="output" />
+                <Variable UUID="7QQFGLN7NJOEZKA5KY5APXRT3Q" Name="R_TRIG1" Type="R_TRIG" TypeUUID="S45Q5WLSRRGU3MJDOGDVF24XVA" Usage="internal" />
+                <Variable UUID="ESOEJW6DDPMUFCIDG2NA2YO6FQ" Name="loop_selected" Type="INT" Usage="internal" />
+                <Variable UUID="EMCM4YD5OZSERDZBGCQG4TODA4" Name="dI" Type="REAL" Usage="internal" />
+                <Variable UUID="DHJ2C3ZUO5VEPEVFF4AUZAU7WE" Name="in_lim" Type="REAL" Usage="internal" />
+                <Variable UUID="X5UV2UOAAVWUPLCG2SIJROTKCU" Name="r_rate_lim" Type="REAL" Usage="internal" />
+                <Variable UUID="UREWNVLZSYMEXPSXBZZBNKBWPI" Name="P_current" Type="REAL" Usage="internal" />
+                <Variable UUID="E2OI7CN6QHMEXCVWUHVZ6QKV5I" Name="PplusD_previos" Type="REAL" Usage="internal" />
+                <Variable UUID="TIWVCJIVUMOUVGN4VUW2C7QIPA" Name="d_PplusD" Type="REAL" Usage="internal" />
+                <Variable UUID="SN5ZBCBHT2IU5AP6Y2BZ2MMICY" Name="loop_selected_previous" Type="INT" Usage="internal" />
+                <Variable UUID="VCYBCLDL7MBUDNZQCHTUFB3WCE" Name="tmp1" Type="REAL" Usage="internal" />
+                <Variable UUID="W3H7GXN6KDXUFMEWG4CMVA6CTE" Name="sp_ramp1" Type="sp_ramp_1" TypeUUID="F6QHLYGDY5VE7ECVYIKU5CG564" Usage="internal" />
+                <Variable UUID="GCGYHBEZ3MZELD4O7K4B45ENOE" Name="main_loop_prev" Type="INT" Usage="internal" />
+                <Variable UUID="HIIL2ALGBZUUBJPDNGJKTNS36U" Name="open_seq_previous" Type="BOOL" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[    if open_seq then
+    	PplusD_previos := 0.0;
+    end_if;
+ //   t_open_seq := open_seq;
+
+    dI := s_sel.dI_selected ;
+	 
+	  loop_selected := s_sel.loop_selected;
+	  IF loop_selected=0 THEN 
+	  	loop_selected := 1;
+	  END_IF;
+	R_TRIG1(CLK:=s_sel.LimitCondition);	
+
+		IF R_TRIG1.Q THEN
+			PplusD_previos := 0.0;
+		END_IF;	
+    IF loop_selected_previous=0 THEN loop_selected_previous:=loop_selected; END_IF;
+      IF (switch OR (s_sel.pid_struct[loop_selected_previous].loop_enable=FALSE)
+	  OR (s_sel.pid_struct[loop_selected_previous].limit_goal <> s_sel.pid_struct[loop_selected].limit_goal))
+	  OR (s_sel.pid_struct[loop_selected].SwitchFlag)
+	  OR  (main_loop_prev<>s_sel.main_loop)
+	  OR (open_seq <> open_seq_previous) THEN 
+	
+         PplusD_previos := s_sel.PplusD_selected; 
+  //       t_switch_seq := t_switch_seq + 1;
+      END_IF;  (* Killing proportional when switch from man to auto  OR Limit appears*) 
+	open_seq_previous := open_seq;
+(*------------- Auto or limit mode ----------------------------*)
+   in_lim := (dI + decouple); 
+
+(* Rate limiter - calculation of ramp rates :    *)
+
+//   tmp161 := in_lim;
+   IF (in_lim)> s_sel.vel_high_limit THEN
+      in_lim:=s_sel.vel_high_limit; (* Integral plus decoupling > velocity high lim *)
+      r_rate_lim := 0.000001;
+    ELSIF    (in_lim)< s_sel.vel_low_limit THEN  (* Integral plus decoupling < velocity low lim *)
+      in_lim:=s_sel.vel_low_limit;
+      r_rate_lim := 0.000001;
+      
+    ELSIF (s_sel.PplusD_selected - PplusD_previos > 0.0) THEN (* direction increasing dP-part *)
+   
+      
+      IF (s_sel.PplusD_selected - PplusD_previos) > tmp1 OR in_lim >=0.0 THEN
+          r_rate_lim := (s_sel.vel_high_limit - in_lim);
+       ELSE 
+ //         tmp1 := s_sel.vel_low_limit - in_lim;
+          tmp1 := abs(tmp1);
+          r_rate_lim := tmp1;
+      END_IF;    
+    ELSE                                  (* direction decreasing P-part *)
+ //        tmp160 := in_lim;
+         tmp1 := abs(in_lim);
+         IF (s_sel.PplusD_selected - PplusD_previos) < tmp1 OR in_lim <= 0.0 THEN
+             tmp1 := s_sel.vel_low_limit - in_lim;
+          	 tmp1 := abs(tmp1);
+          	 r_rate_lim := tmp1;
+          	// 'r_rate_lim := ABS(s_sel.vel_low_limit - in_lim);
+          ELSE 
+             r_rate_lim := (s_sel.vel_high_limit - in_lim);
+         END_IF;    
+    END_IF;  
+		
+    	
+          sp_ramp1(enable := TRUE, y_current := PplusD_previos, y_target := s_sel.PplusD_selected, ramp_rate := r_rate_lim);
+          P_current:= sp_ramp1.sp_ramp;
+  		
+  
+         d_PplusD := P_current - PplusD_previos;    
+        
+
+            PplusD_previos := P_current;
+			main_loop_prev := s_sel.main_loop;
+			loop_selected_previous := s_sel.loop_selected;
+         d_out := d_PplusD  + in_lim;    (* delta output signal *) 
+    
+         d_out_woDecouple := d_out - decouple; (* delta output signal without decouple *)
+      IF d_out>=s_sel.vel_high_limit  THEN
+         s_sel.vel_limit_ind := TRUE;
+         d_out := s_sel.vel_high_limit;
+      ELSIF d_out<=s_sel.vel_low_limit THEN
+         s_sel.vel_limit_ind := TRUE;
+         d_out := s_sel.vel_low_limit;
+        ELSE  
+         s_sel.vel_limit_ind := FALSE;
+      END_IF; 
+
+ 
+   
+(*-------------------------- END of Rate limiter calculation---------------------------*)      
+ (*__________________________________________________________________________*)
+ 	]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="F6QHLYGDY5VE7ECVYIKU5CG564" Name="sp_ramp_1">
+            <Variables>
+                <Variable UUID="FP4QDLSSXDTUZCL2ZLW3I72BLM" Name="enable" Type="BOOL" Usage="input" />
+                <Variable UUID="FHT36NIILJOEZKKLGKZ5LS7N6Q" Name="y_current" Type="REAL" Usage="input" />
+                <Variable UUID="XQEHH6OBWKIEVJE45PQJVVOW2Q" Name="y_target" Type="REAL" Usage="input" />
+                <Variable UUID="EASWJ5YMOBQENGZSTSSFFWGNLE" Name="ramp_rate" Type="REAL" Usage="input" />
+                <Variable UUID="JFGC74KVEUYUPBRGO2NPSWQKRQ" Name="sp_ramp" Type="REAL" Usage="output" />
+                <Variable UUID="GZMEZ2MN46EURNKYFZQPOB52ZE" Name="dy" Type="REAL" Usage="internal" />
+                <Variable UUID="2WBZJLLYWQNETG6XHZYXPKIBWQ" Name="dd" Type="REAL" Usage="internal" />
+                <Variable UUID="EZT6ZJM2U33UJEDEHL5JQG7OUU" Name="tmp1" Type="REAL" Usage="internal" />
+            </Variables>
+            <ST><![CDATA[ IF enable THEN
+
+ IF (ramp_rate = 0.0) THEN
+                      sp_ramp := y_target;
+                      RETURN;
+ END_IF; 
+
+      dd := y_target - y_current ;
+ //     'dy := ABS(ramp_rate);   
+      dy := abs(ramp_rate);    
+
+	tmp1 := abs(dd);	
+      IF  tmp1 <= dy THEN
+         sp_ramp := y_target ;
+         RETURN; 
+      END_IF;   
+        
+  (*--------------------------------------------------------*)  
+      IF dd > 0.0 THEN  sp_ramp :=  y_current + dy ;
+                  ELSE  sp_ramp :=  y_current - dy ;
+      END_IF ;          
+    
+ ELSE      
+         sp_ramp := y_current ;
+ END_IF; 
+]]></ST>
+        </FunctionBlock>
+        <FunctionBlock UUID="RBR5IMNOBSAELGPUFBEGJLEVSE" Name="toTrend">
+            <Variables />
+            <ST><![CDATA[(*
+GPA1_run := gpa[1].run;
+GPA1_remote := gpa[1].remote;
+GPA1_Q := gpa[1].Q;
+GPA1_Eout := gpa[1].Eout;
+GPA1_EoutEin := gpa[1].EoutEin;
+GPA1_S := gpa[1].S;
+GPA1_Nst := gpa[1].Nst;
+GPA1_SP_Nst := gpa[1].SP_Nst;
+GPA1_SP_cv := gpa[1].SP_cv;
+GPA1_Q_perc := gpa[1].Q_perc;
+GPA1_Nst_perc := gpa[1].Nst_perc;
+GPA1_Nvd_perc := gpa[1].Nvd_perc;
+
+
+GPA5_run := gpa[5].run;
+GPA5_remote := gpa[5].remote;
+GPA5_Q := gpa[5].Q;
+GPA5_Eout := gpa[5].Eout;
+GPA5_EoutEin := gpa[5].EoutEin;
+GPA5_S := gpa[5].S;
+GPA5_Nst := gpa[5].Nst;
+GPA5_SP_Nst := gpa[5].SP_Nst;
+GPA5_SP_cv := gpa[5].SP_cv;
+GPA5_Q_perc := gpa[5].Q_perc;
+GPA5_Nst_perc := gpa[5].Nst_perc;
+GPA5_Nvd_perc := gpa[5].Nvd_perc;
+
+
+GPA7_run := gpa[7].run;
+GPA7_remote := gpa[7].remote;
+GPA7_Q := gpa[7].Q;
+GPA7_Eout := gpa[7].Eout;
+GPA7_EoutEin := gpa[7].EoutEin;
+GPA7_S := gpa[7].S;
+GPA7_Nst := gpa[7].Nst;
+GPA7_SP_Nst := gpa[7].SP_Nst;
+GPA7_SP_cv := gpa[7].SP_cv;
+GPA7_Q_perc := gpa[7].Q_perc;
+GPA7_Nst_perc := gpa[7].Nst_perc;
+GPA7_Nvd_perc := gpa[7].Nvd_perc;
+
+GPA2_run := gpa[2].run;
+GPA2_remote := gpa[2].remote;
+GPA2_Q := gpa[2].Q;
+GPA2_Eout := gpa[2].Eout;
+GPA2_EoutEin := gpa[2].EoutEin;
+GPA2_S := gpa[2].S;
+GPA2_Nst := gpa[2].Nst;
+GPA2_SP_Nst := gpa[2].SP_Nst;
+GPA2_SP_cv := gpa[2].SP_cv;
+GPA2_Q_perc := gpa[2].Q_perc;
+GPA2_Nst_perc := gpa[2].Nst_perc;
+GPA2_Nvd_perc := gpa[2].Nvd_perc;
+
+GPA3_run := gpa[3].run;
+GPA3_remote := gpa[3].remote;
+GPA3_Q := gpa[3].Q;
+GPA3_Eout := gpa[3].Eout;
+GPA3_EoutEin := gpa[3].EoutEin;
+GPA3_S := gpa[3].S;
+GPA3_Nst := gpa[3].Nst;
+GPA3_SP_Nst := gpa[3].SP_Nst;
+GPA3_SP_cv := gpa[3].SP_cv;
+GPA3_Q_perc := gpa[3].Q_perc;
+GPA3_Nst_perc := gpa[3].Nst_perc;
+GPA3_Nvd_perc := gpa[3].Nvd_perc;
+
+GPA4_run := gpa[4].run;
+GPA4_remote := gpa[4].remote;
+GPA4_Q := gpa[4].Q;
+GPA4_Eout := gpa[4].Eout;
+GPA4_EoutEin := gpa[4].EoutEin;
+GPA4_S := gpa[4].S;
+GPA4_Nst := gpa[4].Nst;
+GPA4_SP_Nst := gpa[4].SP_Nst;
+GPA4_SP_cv := gpa[4].SP_cv;
+GPA4_Q_perc := gpa[4].Q_perc;
+GPA4_Nst_perc := gpa[4].Nst_perc;
+GPA4_Nvd_perc := gpa[4].Nvd_perc;
+
+GPA6_run := gpa[6].run;
+GPA6_remote := gpa[6].remote;
+GPA6_Q := gpa[6].Q;
+GPA6_Eout := gpa[6].Eout;
+GPA6_EoutEin := gpa[6].EoutEin;
+GPA6_S := gpa[6].S;
+GPA6_Nst := gpa[6].Nst;
+GPA6_SP_Nst := gpa[6].SP_Nst;
+GPA6_SP_cv := gpa[6].SP_cv;
+GPA6_Q_perc := gpa[6].Q_perc;
+GPA6_Nst_perc := gpa[6].Nst_perc;
+GPA6_Nvd_perc := gpa[6].Nvd_perc;*)]]></ST>
+        </FunctionBlock>
+    </FBLibrary>
+</Program>

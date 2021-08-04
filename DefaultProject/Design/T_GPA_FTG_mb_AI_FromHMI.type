@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_GPA_FTG_mb_AI_FromHMI" UUID="7F37690BA82C4FF4B9CF2CD43D7C0107">
+<Fields>
+<Field Comment="Мгн. объемный расход топл. газа (ну)" Name="Qtg_n" Type="187F76AE49C59E950138DDA3067101D0" UUID="DBD1CAEF815D474B9909B0862FC1180E"/>
+<Field Comment="Накопленный расход топл. газа за текущие сутки (ну)" Name="Vtg_n_sut" Type="187F76AE49C59E950138DDA3067101D0" UUID="BA08CB42382845D4A10E838518D6B238"/>
+</Fields>
+</Type>

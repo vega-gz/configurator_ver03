@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AlertArchive >
+<Configuration StoragePath="" StorageCapacity="512000" OverflowEvents="TRUE" OverflowEventCount="10" OverflowEventPeriod="3600000000" CreatePacketsInReserve="TRUE">
+	<SignalArchives Enabled="TRUE">
+		<Item Name="V_SRV1.KC_Arch" Enabled="TRUE" />
+	</SignalArchives>
+	<EventArchives Enabled="TRUE">
+		<Item Name="V_SRV1.Events" Enabled="TRUE" />
+	</EventArchives>
+	<Item TriggerId="E931410F488C971E3DF1CB98545CD20D.MBDJNDHLS4PELJLWIIS3RUI2BY" TriggerName="KC_SS.ArchStop" Name="Архив останова" Category="0" TimeBefore="600000000" TimeAfter="600000000" FileNamePattern="YYYY_MM_dd hh_mm_ss_zzz" />
+	<Item TriggerId="E931410F488C971E3DF1CB98545CD20D.QCG3LRRBUM5EDM67V6RODHY5HQ" TriggerName="KC_SS.ArchUser" Name="Пользовательский архив" Category="0" TimeBefore="600000000" TimeAfter="600000000" FileNamePattern="YYYY_MM_dd hh_mm_ss_zzz" />
+</Configuration>

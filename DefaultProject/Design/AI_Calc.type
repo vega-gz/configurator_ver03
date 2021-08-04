@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="AI_Calc" Kind="Struct" Comment="Расчетный ан.пар." UUID="AC59CC004BD30BA0F15733A0F35F01BC">
+    <Fields>
+        <Field Name="PV" Type="REAL" UUID="3D8B4E7C438C9D5C065B598878DA5177" Comment="значение параметра" />
+        <Field Name="ps" Type="BOOL" UUID="B6F047BC46DCB691E62A399A6F0E1000" Comment="для посветки желтым" />
+        <Field Name="as" Type="BOOL" UUID="C609E1554BF554DAABE23C9F02CE88A8" Comment="для посветки красным" />
+        <Field Name="fault" Type="BOOL" UUID="6A6FF2D5424F7DF70E0FA9BBD76E1A62" Comment="неисправность параметра" />
+    </Fields>
+</Type>

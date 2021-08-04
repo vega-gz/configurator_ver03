@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UPG_UPG_mb_AO_DRV" Kind="Struct" UUID="BE9553737C63432192C6F7B61033743B">
+	<Fields>
+		<Field Name="Res_0" Type="REAL" UUID="11E54E48E3BA4D13BC0A8C84555925EB" Comment="Резерв" />
+		<Field Name="Res_1" Type="REAL" UUID="F0E70BD8671843BDAA4FD96EA3F6A4E2" Comment="Резерв" />
+		<Field Name="Res_2" Type="REAL" UUID="0D4F96ECF80E4ECF814EE84BBCD3F46B" Comment="Резерв" />
+		<Field Name="Res_3" Type="REAL" UUID="01F9709B2E4D4F13B8BEE23925FC7ADD" Comment="Резерв" />
+		<Field Name="Res_4" Type="REAL" UUID="YXV4AWD7HFWUJOXV62CUVL3OA4" Comment="Резерв" />
+		<Field Name="Res_5" Type="BOOL" UUID="YJZG5GEK6AGUVMGCL7A6GRHWOQ" Comment="Резерв" />
+		<Field Name="Res_6" Type="REAL" UUID="E4DHAGW7X33URPC5SFJDADDSG4" Comment="Резерв" />
+		<Field Name="Res_7" Type="REAL" UUID="OA26I24KZA3U7BYBE4XTSWOPBE" Comment="Резерв" />
+	</Fields>
+</Type>

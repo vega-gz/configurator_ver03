@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_FromLIStoKC_mb_AI_Settings" Kind="Struct" UUID="76B24AF8887644E6A37E2F11F6A79043">
+	<Fields>
+		<Field Name="Patm_UPOU" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="0F4830CD62BB40C7866ABAAA94704033" Comment="УПОУ: Давление атм. Воздуха" />
+		<Field Name="SF_1_1_AtmPress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="CDEE225EC08441DFA906E5E975724824" Comment="УЗРГ: Атмосферное давление SF11" />
+		<Field Name="SF_1_1_GuagePress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="74E1DEBB1C2541F2BBB8620121718BB8" Comment="УЗРГ: Избыточное давление SF11" />
+		<Field Name="SF_1_1_AbsPress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="C22C6455339049F6BB60A220F39FA20F" Comment="УЗРГ: Абсолютное давление SF11" />
+		<Field Name="SF_1_1_DiffPress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="FDFCB47BEAFD44F78E3EA4037765E888" Comment="УЗРГ: Дифференциальное давление SF11" />
+		<Field Name="SF_1_1_Temperature" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="73D629E9288E41EABE7543A9C33C2B42" Comment="УЗРГ: Температура SF11" />
+		<Field Name="SF_1_1_FlowRate" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="C8DFC6FC7B134E9AA33F0C1DC9F28B15" Comment="УЗРГ: Приведенный  объемный расход SF11" />
+		<Field Name="SF_1_1_Power" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="EB335DCD89764510BFAC0752A4F26B02" Comment="УЗРГ: Расход энергии SF11" />
+		<Field Name="SF_1_1_Volume" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="610896FB85E6474BAD5D647F3D0A33B5" Comment="УЗРГ: Приведенный объем с начала контактного часа SF11" />
+		<Field Name="SF_1_1_Energy" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="86C4A5E1329F46858D37F8BCDA814AC1" Comment="УЗРГ: Энергия с начала контактного часа SF11" />
+		<Field Name="SF_1_1_Density" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="8331E54802104FF49FF5FF93B8E2CE4C" Comment="УЗРГ: Плотность газа при стандартных условиях SF11" />
+		<Field Name="SF_1_1_Caloricity" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="390CE0B1F2734817A76A8E95B4C006E0" Comment="УЗРГ: Объемная теплота сгорания газа SF11" />
+		<Field Name="SF_1_1_Mol_N2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="D5EB5E5B6E364AE8A67DE84967B28F4A" Comment="УЗРГ: Молярная доля N2 SF11" />
+		<Field Name="SF_1_1_Mol_CO2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="A63EAE3BB961447688BF9DA5F0DE441B" Comment="УЗРГ: Молярная доля СО2 SF11  " />
+		<Field Name="SF_1_2_AtmPress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="6E92104104C1452E92F8B14BABE2C714" Comment="УЗРГ: Атмосферное давление SF12" />
+		<Field Name="SF_1_2_GuagePress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="A579C43B57934D03A98CD9E7903C102E" Comment="УЗРГ: Избыточное давление SF12" />
+		<Field Name="SF_1_2_AbsPress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="B8B1F48EFB9A466DB538ECD29C6F9591" Comment="УЗРГ: Абсолютное давление SF12" />
+		<Field Name="SF_1_2_DiffPress" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="E4606A7536C64F63801CA6003C74C013" Comment="УЗРГ: Дифференциальное давление SF12" />
+		<Field Name="SF_1_2_Temperature" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="BCE681E600B04B21A64E38648C8583F7" Comment="УЗРГ: Температура SF12" />
+		<Field Name="SF_1_2_FlowRate" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="41DCD3585D9C47968218A1501D508DBE" Comment="УЗРГ: Приведенный  объемный расход SF12" />
+		<Field Name="SF_1_2_Power" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="8F2525B898A24E6DBA0DB4D3ACABAE88" Comment="УЗРГ: Расход энергии SF12" />
+		<Field Name="SF_1_2_Volume" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="663DBB6D610D45D3B40D8F927BEB9AB2" Comment="УЗРГ: Приведенный объем с начала контактного часа SF12" />
+		<Field Name="SF_1_2_Energy" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="3664FFF0410B4778A480C5B536C5064E" Comment="УЗРГ: Энергия с начала контактного часа SF12" />
+		<Field Name="SF_1_2_Density" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="BB18AC8D589048E5B1C56B97A982D364" Comment="УЗРГ: Плотность газа при стандартных условиях SF12" />
+		<Field Name="SF_1_2_Caloricity" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="17DF0FF9C7FB4DF5883A7CDA6F0E0919" Comment="УЗРГ: Объемная теплота сгорания газа SF12" />
+		<Field Name="SF_1_2_Mol_N2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="A87FA59FA11C405A8CB287C86335D2D8" Comment="УЗРГ: Молярная доля N2 SF12" />
+		<Field Name="SF_1_2_Mol_CO2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="8FECB58FE7884686BCDCB320E8CCE7EC" Comment="УЗРГ: Молярная доля СО2 SF12" />
+	</Fields>
+</Type>

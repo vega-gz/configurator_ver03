@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_KC_GPA1_mb_DI_ToHMI" UUID="628D8B3DAD4A457EB51CDA474FCB7668">
+<Fields>
+<Field Comment="Режим работы ГПА &quot;Магистраль&quot;" Name="mde_M" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="696DC41CA6784845B6047A0D928F45A4"/>
+<Field Comment="Режим работы ГПА &quot;Кольцо&quot;" Name="mde_K" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="B27DAE31A4F54301A0BA8A7E52F8910C"/>
+<Field Comment="Признак включеного цехового регулирования в ГПА" Name="shopReg_ON" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="69CB63C1E2F24433AFE8D56350D803B1"/>
+<Field Comment="Неисправность" Name="fault" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="8FF574D1FB704C99B1165D9291D2D55D"/>
+<Field Comment="Пожар" Name="Fire" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="49B6BA2C75514587AB7CF69EF30D7A9F"/>
+<Field Comment="Загазованность" Name="Zgz" Type="9F0EDD3143DC10ACF03CBA8C4A870F2D" UUID="FBEF2ABAD9C448DAA3A17F456C68F3C7"/>
+</Fields>
+</Type>

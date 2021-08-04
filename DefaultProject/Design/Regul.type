@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Regul" Kind="Struct" UUID="79317837433FE9F97F32CD89D9B92451">
+    <Fields>
+        <Field Name="Q" Type="REAL" UUID="43513B4E49B52152594F1DB81B925618" Comment="регулирование по расходу" />
+        <Field Name="P_v" Type="REAL" UUID="77AF056D4CB563E17809F5ACF01706D2" Comment="регулирование по давлению на выходе" />
+        <Field Name="ST_s" Type="REAL" UUID="4ADED4DB410B06C6AEF758B8AED81CB3" Comment="регулирование по степени сжатия" />
+        <Field Name="N_st" Type="REAL" UUID="25F04F48479916FA415A8D9788C8C930" Comment="регулирование по оборотам СТ" />
+    </Fields>
+</Type>

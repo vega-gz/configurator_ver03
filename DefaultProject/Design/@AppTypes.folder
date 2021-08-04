@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Типы приложений">
+	<Items>
+		<Item Name="AT_4V3JVIAXDSGUBIRTHIIWCIAJGQ.int" />
+		<Item Name="AT_5VQWW2M3YFUEZPV6ZIO6YOZZLQ.int" />
+		<Item Name="AT_FFH7CL6ZKBBE3O62TRWFPBT4XM.int" />
+		<Item Name="AT_GU3GBHCKZRQUJGG6FI6WHSYYIM.int" />
+		<Item Name="AT_ISEBLDWVSG6E3L23WMPXCTGL6U.int" />
+		<Item Name="AT_JCX5EHC7JE4ULPGXPHKRENXKX4.int" />
+		<Item Name="AT_JVGDI4VDDJLEFACAZDGLPQGG3Y.int" />
+		<Item Name="AT_KBVK2CLBS2LURB3LHGZ2R34XVA.int" />
+		<Item Name="AT_PLC_to_ARM.int" />
+		<Item Name="AT_SJRI6Z7XCNCUHCEFACSX3VMLV4.int" />
+		<Item Name="AT_U3ZYAUR2E5TENK6ELHZAIXYKIQ.int" />
+		<Item Name="AT_UploadArch.int" />
+		<Item Name="AT_VYV7GEWLA72ENERVBLYK6MCOHM.int" />
+		<Item Name="AT_WHEIMDAH6CBUXADTPRZZ5D6YVY.int" />
+		<Item Name="AT_X66FTJEPSHIU3LFDFYOVPBRZHM.int" />
+		<Item Name="AT_XPGOBPEZALMUJD4RC2VJDRH4IU.int" />
+		<Item Name="AT_ZNJSCFDZ534UBNNBH3L2GHSUQE.int" />
+		<Item Name="AT_ZSFXTNTVMVHEPMW7L4VYEDIXHI.int" />
+		<Item Name="A_Algorithm.int" />
+		<Item Name="B_HMI.int" />
+		<Item Name="C_HMI2.int" />
+		<Item Name="FLDR_2CHLYVBZRAREZOGJEXQ57IYVTQ.folder" />
+		<Item Name="FLDR_BI5PYXBECUFUHAFHWHHMXLI4SQ.folder" />
+		<Item Name="FLDR_CSYQJQ5XTMEUDJ3LIVWYSBV2UM.folder" />
+		<Item Name="FLDR_CWOJVTUXJSJUHL5FIK2CP5TVXY.folder" />
+		<Item Name="FLDR_D3Q3WVARQIXEVICQ5SILJ744TQ.folder" />
+		<Item Name="FLDR_TLRKMIHQBGXEBNBAQIU5QYQ53M.folder" />
+		<Item Name="FLDR_U5E7CBRSPD7EDH3YPSCNCC274E.folder" />
+		<Item Name="FLDR_V4XNPSW6VBFE3LBVD5NEKCFFAM.folder" />
+		<Item Name="S_SoundAlarms.int" />
+		<Item Name="TJump_HMI.int" />
+	</Items>
+</Folder>

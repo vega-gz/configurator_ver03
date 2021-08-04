@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Аналоговые">
+<Items>
+<Item Name="T_AI_FromHMI.type"/>
+<Item Name="T_AI_Internal.type"/>
+<Item Name="T_AI_Settings.type"/>
+<Item Name="T_AI_ToHMI.type"/>
+<Item Name="T_ANB_Settings.type"/>
+<Item Name="T_AO_FromHMI.type"/>
+<Item Name="T_AO_Settings.type"/>
+<Item Name="T_AO_ToHMI.type"/>
+<Item Name="T_AnPar.type"/>
+<Item Name="T_CalcPar.type"/>
+<Item Name="Type_F7EOKHLHPFTEJPGOWHMPS3FZAI.type"/>
+<Item Name="T_Tag.type"/>
+<Item Name="Type_Y5H3O45DNWCETI5ZRK77FEMIOI.type"/>
+</Items>
+</Folder>

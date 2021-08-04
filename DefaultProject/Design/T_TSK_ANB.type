@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_TSK_ANB" Kind="Struct" UUID="F85244FF4015C9E25EB792ACDACD8FD8">
+    <Fields>
+        <Field Name="Pg_1T_t_Pn" Type="BOOL" UUID="462D3A3A44338C829E6D5BB56E2F8D6A" Comment="Трубное давление в скважине 1Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_2T_t_Pn" Type="BOOL" UUID="BC8E71AC4A9BD580FA7CBBA9C036C41E" Comment="Трубное давление в скважине 2Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_3T_t_Pn" Type="BOOL" UUID="967E39DB494920AD855D00BC2D39DCED" Comment="Трубное давление в скважине 3Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_4T_t_Pn" Type="BOOL" UUID="6B076EF44959F0360D2345AD2EA7B5EA" Comment="Трубное давление в скважине 4Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_5T_t_Pn" Type="BOOL" UUID="1A8F587E47CF59D1A17CBDBA339B1B97" Comment="Трубное давление в скважине 5Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_6T_t_Pn" Type="BOOL" UUID="CB421C7E48F2EA97F286609CE0E5944B" Comment="Трубное давление в скважине 6Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_7T_t_Pn" Type="BOOL" UUID="69FEB2F848B079709D4D2E86CECCC412" Comment="Трубное давление в скважине 7Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_8T_t_Pn" Type="BOOL" UUID="2A65D4344B7B985B94C2D48BF093DE39" Comment="Трубное давление в скважине 8Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_9T_t_Pn" Type="BOOL" UUID="392DE86D4230FAF8ECE080B8CE55B313" Comment="Трубное давление в скважине 9Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_10T_t_Pn" Type="BOOL" UUID="042F6D5D4F44164F66EE1EB8DF0FB2DC" Comment="Трубное давление в скважине 10Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_11T_t_Pn" Type="BOOL" UUID="5DB1E271480C2E08D9E6628A72DE9C7A" Comment="Трубное давление в скважине 11Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_12T_t_Pn" Type="BOOL" UUID="F5A49FCE4E063475E940DF987D8470D0" Comment="Трубное давление в скважине 12Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_13T_t_Pn" Type="BOOL" UUID="6A0B2157464A17796FCBCD96F81CC4DE" Comment="Трубное давление в скважине 13Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_14T_t_Pn" Type="BOOL" UUID="52EC6D2C44427E286ED9E9B9D096A920" Comment="Трубное давление в скважине 14Т (НКТ 114 мм) : предупредительная нижняя" />
+        <Field Name="Pg_1T_t_Pv" Type="BOOL" UUID="19C10BB54278320BC882AEA5E81A6FA7" Comment="Трубное давление в скважине 1Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_2T_t_Pv" Type="BOOL" UUID="2ADB01224AC428499A30B18643139A1E" Comment="Трубное давление в скважине 2Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_3T_t_Pv" Type="BOOL" UUID="0353ABED4AD86D617E5167B419E1538A" Comment="Трубное давление в скважине 3Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_4T_t_Pv" Type="BOOL" UUID="8494BE8D47C67FAFEB3F0AA4F967FD0B" Comment="Трубное давление в скважине 4Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_5T_t_Pv" Type="BOOL" UUID="B94576484119F4B7D055DCBAC0816D9F" Comment="Трубное давление в скважине 5Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_6T_t_Pv" Type="BOOL" UUID="03D4DA0F4472DDA0AC830CB70BB5596F" Comment="Трубное давление в скважине 6Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_7T_t_Pv" Type="BOOL" UUID="268E2AC94EAF4086DFF931887A73D8C1" Comment="Трубное давление в скважине 7Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_8T_t_Pv" Type="BOOL" UUID="E1357CE147D34C0E8DFE46BAB337845C" Comment="Трубное давление в скважине 8Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_9T_t_Pv" Type="BOOL" UUID="9D2CF7474D289BA353F3D3921C76DCC7" Comment="Трубное давление в скважине 9Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_10T_t_Pv" Type="BOOL" UUID="C118AB68487255CB9547B1849ADE2E34" Comment="Трубное давление в скважине 10Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_11T_t_Pv" Type="BOOL" UUID="B70026C440D0B7FD845533A614A08744" Comment="Трубное давление в скважине 11Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_12T_t_Pv" Type="BOOL" UUID="13B3D4654485ADB29CC6A1886889829A" Comment="Трубное давление в скважине 12Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_13T_t_Pv" Type="BOOL" UUID="5EA545CC4390A622C5C05F88F2A7A846" Comment="Трубное давление в скважине 13Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_14T_t_Pv" Type="BOOL" UUID="4FD93AF248A0D0DD19293BB58B98CCD2" Comment="Трубное давление в скважине 14Т (НКТ 114 мм) : предупредительная верхняя" />
+        <Field Name="Pg_1T_mk1_Pn" Type="BOOL" UUID="55388EE44E90A11E43038D8E8CD0A461" Comment="Межколонное давление в скважине 1Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_2T_mk1_Pn" Type="BOOL" UUID="D9E5D070494DAEFB88681A825D92813A" Comment="Межколонное давление в скважине 2Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_3T_mk1_Pn" Type="BOOL" UUID="CD7120CB4A2F92BEF61AE28F433FF228" Comment="Межколонное давление в скважине 3Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_4T_mk1_Pn" Type="BOOL" UUID="FB1B3434447A82D838305A955D3B2E1F" Comment="Межколонное давление в скважине 4Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_5T_mk1_Pn" Type="BOOL" UUID="F017141948B6024EBD454293CE63CC2D" Comment="Межколонное давление в скважине 5Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_6T_mk1_Pn" Type="BOOL" UUID="F925C77541A938C69E7F629F624BEB29" Comment="Межколонное давление в скважине 6Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_7T_mk1_Pn" Type="BOOL" UUID="B1C128BF4EF4BA3B96D67F9CB7DE3B72" Comment="Межколонное давление в скважине 7Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_8T_mk1_Pn" Type="BOOL" UUID="8C3F5B034D31A2DFFEC6F1A56682D84B" Comment="Межколонное давление в скважине 8Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_9T_mk1_Pn" Type="BOOL" UUID="00F5D2B142062D0D4C76D0B39033FAF9" Comment="Межколонное давление в скважине 9Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_10T_mk1_Pn" Type="BOOL" UUID="BB5427224EF60C54070F8784535789F3" Comment="Межколонное давление в скважине 10Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_11T_mk1_Pn" Type="BOOL" UUID="6358944F4CDAB80C044F528F8FF42C46" Comment="Межколонное давление в скважине 11Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_12T_mk1_Pn" Type="BOOL" UUID="942DFB5C42E5F071E26A289DD8639041" Comment="Межколонное давление в скважине 12Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_13T_mk1_Pn" Type="BOOL" UUID="B116EC4E41AA1D17EF4BA7976AF8F093" Comment="Межколонное давление в скважине 13Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_14T_mk1_Pn" Type="BOOL" UUID="2125DD7A4F100A5C384091BB095F7908" Comment="Межколонное давление в скважине 14Т (между колоннами 114-178 мм) : предупредительная нижняя" />
+        <Field Name="Pg_1T_mk1_Pv" Type="BOOL" UUID="E12EA68B4F66D7FE069195ADAC1A78F9" Comment="Межколонное давление в скважине 1Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_2T_mk1_Pv" Type="BOOL" UUID="DC22BD4C49643EA91F1D9DAB4B166597" Comment="Межколонное давление в скважине 2Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_3T_mk1_Pv" Type="BOOL" UUID="06DDFB354052D64D9DA351B2F3D7C8CF" Comment="Межколонное давление в скважине 3Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_4T_mk1_Pv" Type="BOOL" UUID="1E133C1D43D66D9E3A9F14B49BFC3EC6" Comment="Межколонное давление в скважине 4Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_5T_mk1_Pv" Type="BOOL" UUID="5D64D2CB4580DBD8FCFFFD8416DA0890" Comment="Межколонное давление в скважине 5Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_6T_mk1_Pv" Type="BOOL" UUID="4D2F3C4B49B2812ACB28DDAB7BE830E1" Comment="Межколонное давление в скважине 6Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_7T_mk1_Pv" Type="BOOL" UUID="449395474C5B1B547CFDC1BD2CA80484" Comment="Межколонное давление в скважине 7Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_8T_mk1_Pv" Type="BOOL" UUID="02520DB642E2F28C970CC6BDF84B8D22" Comment="Межколонное давление в скважине 8Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_9T_mk1_Pv" Type="BOOL" UUID="406649CF41A39CE4914EDF9EA39590D2" Comment="Межколонное давление в скважине 9Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_10T_mk1_Pv" Type="BOOL" UUID="2737E7274D8D0E5A3A16BDA77D8D1D7F" Comment="Межколонное давление в скважине 10Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_11T_mk1_Pv" Type="BOOL" UUID="B719F130417FD29A4AED509D2FCF240E" Comment="Межколонное давление в скважине 11Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_12T_mk1_Pv" Type="BOOL" UUID="05DB8DC94B70E24E3CC7878406EB8A61" Comment="Межколонное давление в скважине 12Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_13T_mk1_Pv" Type="BOOL" UUID="4D62A1F64810FAC76004EDAD6BA3BC49" Comment="Межколонное давление в скважине 13Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_14T_mk1_Pv" Type="BOOL" UUID="61A2F7A544C1398BF37C11AB7A5C8973" Comment="Межколонное давление в скважине 14Т (между колоннами 114-178 мм) : предупредительная верхняя" />
+        <Field Name="Pg_1T_mk2_Pn" Type="BOOL" UUID="AC806D5149EBF54E4DA8B8AFDB718DC5" Comment="Межколонное давление в скважине 1Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_2T_mk2_Pn" Type="BOOL" UUID="46A7D7C04A3E6F09198573AEEEAE7A16" Comment="Межколонное давление в скважине 2Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_3T_mk2_Pn" Type="BOOL" UUID="8223CA2047E7FEA9242AE4AB90CB9CF4" Comment="Межколонное давление в скважине 3Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_4T_mk2_Pn" Type="BOOL" UUID="5F03AC7B41E688C3F7E276A6197DD421" Comment="Межколонное давление в скважине 4Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_5T_mk2_Pn" Type="BOOL" UUID="01CF91284426C3C82418BA99EA589A17" Comment="Межколонное давление в скважине 5Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_6T_mk2_Pn" Type="BOOL" UUID="5E299B1842A9C561916A718E7FAA82A1" Comment="Межколонное давление в скважине 6Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_7T_mk2_Pn" Type="BOOL" UUID="EA1D088B4001635E29125CB672E5F273" Comment="Межколонное давление в скважине 7Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_8T_mk2_Pn" Type="BOOL" UUID="5FC785964FDCD828A3F26BA1AAB173BD" Comment="Межколонное давление в скважине 8Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_9T_mk2_Pn" Type="BOOL" UUID="39F2184A48FDBE81AEC828A139701212" Comment="Межколонное давление в скважине 9Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_10T_mk2_Pn" Type="BOOL" UUID="F61E5A0C404BD22AB016C29074FD6C8F" Comment="Межколонное давление в скважине 10Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_11T_mk2_Pn" Type="BOOL" UUID="45D942A74CF35D5B763C8CB47DCB3EFB" Comment="Межколонное давление в скважине 11Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_12T_mk2_Pn" Type="BOOL" UUID="40ABDEAB406E2A4829A3989CA835A449" Comment="Межколонное давление в скважине 12Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_13T_mk2_Pn" Type="BOOL" UUID="1A33425B4D657C422D1F98B0A839710D" Comment="Межколонное давление в скважине 13Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_14T_mk2_Pn" Type="BOOL" UUID="09D3794049000CED61B4888EDE4D5BE5" Comment="Межколонное давление в скважине 14Т (между колоннами 178-245 мм) : предупредительная нижняя" />
+        <Field Name="Pg_1T_mk2_Pv" Type="BOOL" UUID="0EA26B5142A87C66502E11A506E6DF92" Comment="Межколонное давление в скважине 1Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_2T_mk2_Pv" Type="BOOL" UUID="B9474B0045031F9821983F893CCD6203" Comment="Межколонное давление в скважине 2Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_3T_mk2_Pv" Type="BOOL" UUID="7263D3FF4A2BFF9E767F58B8A3630450" Comment="Межколонное давление в скважине 3Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_4T_mk2_Pv" Type="BOOL" UUID="76DBD1814EC88C8A667F58A59B10F527" Comment="Межколонное давление в скважине 4Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_5T_mk2_Pv" Type="BOOL" UUID="F55BE1B54B8BE1987BF85B8CA7E82BB4" Comment="Межколонное давление в скважине 5Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_6T_mk2_Pv" Type="BOOL" UUID="8B955B204CD27E71DC32C2B03FECFDA9" Comment="Межколонное давление в скважине 6Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_7T_mk2_Pv" Type="BOOL" UUID="4147CE53401E16732789A9ABAC456584" Comment="Межколонное давление в скважине 7Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_8T_mk2_Pv" Type="BOOL" UUID="DDC0AD33412210159411799656308901" Comment="Межколонное давление в скважине 8Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_9T_mk2_Pv" Type="BOOL" UUID="E3602F2B450448B9C561AF8DE5F6AA98" Comment="Межколонное давление в скважине 9Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_10T_mk2_Pv" Type="BOOL" UUID="ADD8860540C19B2B227DF7ABC209F996" Comment="Межколонное давление в скважине 10Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_11T_mk2_Pv" Type="BOOL" UUID="416134BB436E971C7BF85393354D8814" Comment="Межколонное давление в скважине 11Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_12T_mk2_Pv" Type="BOOL" UUID="69E818024AE6883B3CC94E85C1BB74FD" Comment="Межколонное давление в скважине 12Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_13T_mk2_Pv" Type="BOOL" UUID="5F036FEB4307E51076D5FFA5A9A25510" Comment="Межколонное давление в скважине 13Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_14T_mk2_Pv" Type="BOOL" UUID="2D4421A249E2729E2F81E89D04F8E37F" Comment="Межколонное давление в скважине 14Т (между колоннами 178-245 мм) : предупредительная верхняя" />
+        <Field Name="Pg_1T_mk3_Pn" Type="BOOL" UUID="C2B51B704E2D4421E7320F8368143727" Comment="Межколонное давление в скважине 1Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_2T_mk3_Pn" Type="BOOL" UUID="F10CF34A4742636ACF575ABBF709AD1F" Comment="Межколонное давление в скважине 2Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_3T_mk3_Pn" Type="BOOL" UUID="91F148014F7530B68E11B983C3103484" Comment="Межколонное давление в скважине 3Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_4T_mk3_Pn" Type="BOOL" UUID="323C376A4197E50C942F46AD47E4D2F7" Comment="Межколонное давление в скважине 4Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_5T_mk3_Pn" Type="BOOL" UUID="D407B3EA468B763A8FF5AD94532627D0" Comment="Межколонное давление в скважине 5Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_6T_mk3_Pn" Type="BOOL" UUID="12BB19D94CA275F0DC51BC950232BA0D" Comment="Межколонное давление в скважине 6Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_7T_mk3_Pn" Type="BOOL" UUID="A18A61A44DC22D7E38B2FB9B32CC0E57" Comment="Межколонное давление в скважине 7Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_8T_mk3_Pn" Type="BOOL" UUID="834EDE7846B4268F4AAFF884A50F2A7C" Comment="Межколонное давление в скважине 8Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_9T_mk3_Pn" Type="BOOL" UUID="59106F5A4C072815E8CF5FBBF1C63CD0" Comment="Межколонное давление в скважине 9Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_10T_mk3_Pn" Type="BOOL" UUID="B58E59FE467CB873196EC7B639C94722" Comment="Межколонное давление в скважине 10Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_11T_mk3_Pn" Type="BOOL" UUID="C8AC295F44B705670C7877937C21716F" Comment="Межколонное давление в скважине 11Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_12T_mk3_Pn" Type="BOOL" UUID="A11BEAD54F844F4BAC5F14BC80772A8E" Comment="Межколонное давление в скважине 12Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_13T_mk3_Pn" Type="BOOL" UUID="B05CB54D4062F7A0886A24A1A272EC1A" Comment="Межколонное давление в скважине 13Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_14T_mk3_Pn" Type="BOOL" UUID="4644496943977B85AC9AD688F2040089" Comment="Межколонное давление в скважине 14Т (между колоннами 245-324 мм) : предупредительная нижняя" />
+        <Field Name="Pg_1T_mk3_Pv" Type="BOOL" UUID="9DDCE39444BD3AF145D04789AF05EF3C" Comment="Межколонное давление в скважине 1Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_2T_mk3_Pv" Type="BOOL" UUID="414273504182F3A70E9C489DA38D6E69" Comment="Межколонное давление в скважине 2Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_3T_mk3_Pv" Type="BOOL" UUID="63B16AF146708DDB9207B787BA50423F" Comment="Межколонное давление в скважине 3Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_4T_mk3_Pv" Type="BOOL" UUID="703074AD446386452A9A30A728CD6871" Comment="Межколонное давление в скважине 4Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_5T_mk3_Pv" Type="BOOL" UUID="7840990C4D4930859BF49589BB8A0E04" Comment="Межколонное давление в скважине 5Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_6T_mk3_Pv" Type="BOOL" UUID="F9DE3280491454B295A902BED04619C7" Comment="Межколонное давление в скважине 6Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_7T_mk3_Pv" Type="BOOL" UUID="EFC0ABD745836B2F350510A81034E1DB" Comment="Межколонное давление в скважине 7Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_8T_mk3_Pv" Type="BOOL" UUID="DD446B2042485F5CD9A094858B7F702B" Comment="Межколонное давление в скважине 8Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_9T_mk3_Pv" Type="BOOL" UUID="4C4F879D4D8304BD39CC8785B4A58E21" Comment="Межколонное давление в скважине 9Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_10T_mk3_Pv" Type="BOOL" UUID="862920294396DDB2D78549917EA1B320" Comment="Межколонное давление в скважине 10Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_11T_mk3_Pv" Type="BOOL" UUID="5D78EB1B4B83E0E125C3BD8E96D7820A" Comment="Межколонное давление в скважине 11Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_12T_mk3_Pv" Type="BOOL" UUID="817E555647D088906266F084CDE499F3" Comment="Межколонное давление в скважине 12Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_13T_mk3_Pv" Type="BOOL" UUID="88FA38A040D1E3C4550643A8209AA23C" Comment="Межколонное давление в скважине 13Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Pg_14T_mk3_Pv" Type="BOOL" UUID="1A5ABBD84DFB10D5C6101B9AA4A183EF" Comment="Межколонное давление в скважине 14Т (между колоннами 245-324 мм) : предупредительная верхняя" />
+        <Field Name="Tg_1T_Pn" Type="BOOL" UUID="01AAE1264026220F835BD4B91BE34B6A" Comment="Температура газа на скважине 1Т : предупредительная нижняя" />
+        <Field Name="Tg_2T_Pn" Type="BOOL" UUID="E8BAB9884DC1EF4156B9669DFB094146" Comment="Температура газа на скважине 2Т : предупредительная нижняя" />
+        <Field Name="Tg_3T_Pn" Type="BOOL" UUID="85DA04C944D4A5E0C3464480FA51C5CA" Comment="Температура газа на скважине 3Т : предупредительная нижняя" />
+        <Field Name="Tg_4T_Pn" Type="BOOL" UUID="CDB3F37644B77BFD64B1B3B3CE4F64AA" Comment="Температура газа на скважине 4Т : предупредительная нижняя" />
+        <Field Name="Tg_5T_Pn" Type="BOOL" UUID="28C6FA754C078B5BB775F4B42F0DC7FE" Comment="Температура газа на скважине 5Т : предупредительная нижняя" />
+        <Field Name="Tg_6T_Pn" Type="BOOL" UUID="B2740F034C6A10F59375B68926AD405E" Comment="Температура газа на скважине 6Т : предупредительная нижняя" />
+        <Field Name="Tg_7T_Pn" Type="BOOL" UUID="D343AEC74B699A7864C306A0569F9065" Comment="Температура газа на скважине 7Т : предупредительная нижняя" />
+        <Field Name="Tg_8T_Pn" Type="BOOL" UUID="690A08BF41C7D021A226EAAB32CD29B4" Comment="Температура газа на скважине 8Т : предупредительная нижняя" />
+        <Field Name="Tg_9T_Pn" Type="BOOL" UUID="6826360647B9B1C4B5014B8A8103F969" Comment="Температура газа на скважине 9Т : предупредительная нижняя" />
+        <Field Name="Tg_10T_Pn" Type="BOOL" UUID="C53FD0FD44FEA39C56F52C97BC753327" Comment="Температура газа на скважине 10Т : предупредительная нижняя" />
+        <Field Name="Tg_11T_Pn" Type="BOOL" UUID="D705274B42C60B2B3DA1ADA67EB2EBBC" Comment="Температура газа на скважине 11Т : предупредительная нижняя" />
+        <Field Name="Tg_12T_Pn" Type="BOOL" UUID="B2FEDE22467DD681FC2B5985579958DD" Comment="Температура газа на скважине 12Т : предупредительная нижняя" />
+        <Field Name="Tg_13T_Pn" Type="BOOL" UUID="C23D2BA14A681DB6A4B410AE1790E2D2" Comment="Температура газа на скважине 13Т : предупредительная нижняя" />
+        <Field Name="Tg_14T_Pn" Type="BOOL" UUID="84BC77E741E3B47DB7314B9377F33AFB" Comment="Температура газа на скважине 14Т : предупредительная нижняя" />
+        <Field Name="Tg_1T_Pv" Type="BOOL" UUID="6E64A0A74C1416E71E395C910E0BA17C" Comment="Температура газа на скважине 1Т : предупредительная верхняя" />
+        <Field Name="Tg_2T_Pv" Type="BOOL" UUID="AB89D2C247DA8D480A7C8AB5AB45AA2E" Comment="Температура газа на скважине 2Т : предупредительная верхняя" />
+        <Field Name="Tg_3T_Pv" Type="BOOL" UUID="F09048BB41D3D74AEE14A59CB8B55ED7" Comment="Температура газа на скважине 3Т : предупредительная верхняя" />
+        <Field Name="Tg_4T_Pv" Type="BOOL" UUID="C9D53BC04E161078FC1649902C9FEE7D" Comment="Температура газа на скважине 4Т : предупредительная верхняя" />
+        <Field Name="Tg_5T_Pv" Type="BOOL" UUID="44870D2147ADA93795FE9888390A44D8" Comment="Температура газа на скважине 5Т : предупредительная верхняя" />
+        <Field Name="Tg_6T_Pv" Type="BOOL" UUID="2D61AB6E4253F3F12DA8A98C41F53A7B" Comment="Температура газа на скважине 6Т : предупредительная верхняя" />
+        <Field Name="Tg_7T_Pv" Type="BOOL" UUID="05EB61FA43489DC4BDA071BAC88B30AD" Comment="Температура газа на скважине 7Т : предупредительная верхняя" />
+        <Field Name="Tg_8T_Pv" Type="BOOL" UUID="0EDD917547778957BFF87B88F8A2AF4E" Comment="Температура газа на скважине 8Т : предупредительная верхняя" />
+        <Field Name="Tg_9T_Pv" Type="BOOL" UUID="DF96C8924255066EEB489CB44CAA9E14" Comment="Температура газа на скважине 9Т : предупредительная верхняя" />
+        <Field Name="Tg_10T_Pv" Type="BOOL" UUID="DAABC0D147AA0518ABDE2FA9AF13D057" Comment="Температура газа на скважине 10Т : предупредительная верхняя" />
+        <Field Name="Tg_11T_Pv" Type="BOOL" UUID="B3D05106465BA4481B133EA380EE3CB0" Comment="Температура газа на скважине 11Т : предупредительная верхняя" />
+        <Field Name="Tg_12T_Pv" Type="BOOL" UUID="6187182743A9261C4F364C9FB4D65706" Comment="Температура газа на скважине 12Т : предупредительная верхняя" />
+        <Field Name="Tg_13T_Pv" Type="BOOL" UUID="915EBEED4BBA0AD5E56F43AAFA96E5C0" Comment="Температура газа на скважине 13Т : предупредительная верхняя" />
+        <Field Name="Tg_14T_Pv" Type="BOOL" UUID="C3A0B6494FD7F2E510CE61AAE0BBCCCD" Comment="Температура газа на скважине 14Т : предупредительная верхняя" />
+        <Field Name="Qmg_shl_1T_2T_Pn" Type="BOOL" UUID="A14B5429496ABF78D55AE6B5F0D0E3E2" Comment="Мгновенный расход газа на шлейфе 1Т-2Т: предупредительная нижняя" />
+        <Field Name="Qmg_shl_1T_2T_Pv" Type="BOOL" UUID="3F95EF524F58D5C9F1DFED92AD6BF539" Comment="Мгновенный расход газа на шлейфе 1Т-2Т: предупредительная верхняя" />
+        <Field Name="Qmg_shl_3T_5T_Pn" Type="BOOL" UUID="8DD4C2124B6288ABED02D78180BCAB71" Comment="Мгновенный расход газа на шлейфе 3Т-5Т: предупредительная нижняя" />
+        <Field Name="Qmg_shl_3T_5T_Pv" Type="BOOL" UUID="05F1A19744591537DE5E15883F3622E4" Comment="Мгновенный расход газа на шлейфе 3Т-5Т: предупредительная верхняя" />
+        <Field Name="Qmg_shl_6T_14T_Pn" Type="BOOL" UUID="1278A0324F9142F8ED7B6A92136E9408" Comment="Мгновенный расход газа на шлейфе 6Т-14Т: предупредительная нижняя" />
+        <Field Name="Qmg_shl_6T_14T_Pv" Type="BOOL" UUID="7447B35643F188C82DFB21B83BC70814" Comment="Мгновенный расход газа на шлейфе 6Т-14Т: предупредительная верхняя" />
+        <Field Name="Zg_3T_Pv" Type="BOOL" UUID="04D5602A4CBE5E9162C2659D48D8F42D" Comment="Загазованность на скважине 3Т : предупредительная верхняя" />
+        <Field Name="Zg_4T_Pv" Type="BOOL" UUID="C65B66EC43B9879D9BE3AF8D6C29E670" Comment="Загазованность на скважине 4Т : предупредительная верхняя" />
+        <Field Name="Zg_5T_Pv" Type="BOOL" UUID="73A782BD433873CF900B4799D733CD4A" Comment="Загазованность на скважине 5Т : предупредительная верхняя" />
+        <Field Name="Zg_6T_Pv" Type="BOOL" UUID="4D237F4249F043FD492EA9AF5315DCE7" Comment="Загазованность на скважине 6Т : предупредительная верхняя" />
+        <Field Name="Zg_7T_Pv" Type="BOOL" UUID="EDD22C494323269BE501E4B2A1D440FC" Comment="Загазованность на скважине 7Т : предупредительная верхняя" />
+        <Field Name="Zg_8T_Pv" Type="BOOL" UUID="70AB7A044B2E2D638270F8BD4FC834A1" Comment="Загазованность на скважине 8Т : предупредительная верхняя" />
+        <Field Name="Zg_9T_Pv" Type="BOOL" UUID="4021D30F418EC7014816279C3742BFEC" Comment="Загазованность на скважине 9Т : предупредительная верхняя" />
+        <Field Name="Zg_10T_Pv" Type="BOOL" UUID="7AE6D5C74D165DE9A84B68BF096ED8F4" Comment="Загазованность на скважине 10Т : предупредительная верхняя" />
+        <Field Name="Zg_11T_Pv" Type="BOOL" UUID="C49608F749F5F69207486E8EC2A58EA4" Comment="Загазованность на скважине 11Т : предупредительная верхняя" />
+        <Field Name="Zg_12T_Pv" Type="BOOL" UUID="1C6CBC7F49EFD8DBFFDA8B939E0EFEE3" Comment="Загазованность на скважине 12Т : предупредительная верхняя" />
+        <Field Name="Zg_13T_Pv" Type="BOOL" UUID="66156B80491B3C81088D1497B81C5C7F" Comment="Загазованность на скважине 13Т : предупредительная верхняя" />
+        <Field Name="Zg_14T_Pv" Type="BOOL" UUID="777DAFE54DAC4CB74AF192A5C0F40657" Comment="Загазованность на скважине 14Т : предупредительная верхняя" />
+        <Field Name="Zg_3T_Av" Type="BOOL" UUID="A45C42244DDFB4040A1129AE0F50CFC1" Comment="Загазованность на скважине 3Т : аварийная верхняя" />
+        <Field Name="Zg_4T_Av" Type="BOOL" UUID="2C3FB1FC4D4A9E0C5CA72499E82760A1" Comment="Загазованность на скважине 4Т : аварийная верхняя" />
+        <Field Name="Zg_5T_Av" Type="BOOL" UUID="7D828BDB459E1B69EF09EDAB8EFD6854" Comment="Загазованность на скважине 5Т : аварийная верхняя" />
+        <Field Name="Zg_6T_Av" Type="BOOL" UUID="6F8888CA4DE92B2319319EAA747A790E" Comment="Загазованность на скважине 6Т : аварийная верхняя" />
+        <Field Name="Zg_7T_Av" Type="BOOL" UUID="40EAE7904A34A80A07A026A8733FE48F" Comment="Загазованность на скважине 7Т : аварийная верхняя" />
+        <Field Name="Zg_8T_Av" Type="BOOL" UUID="FA5F49E74DEDB767EE88AAB1A3555E23" Comment="Загазованность на скважине 8Т : аварийная верхняя" />
+        <Field Name="Zg_9T_Av" Type="BOOL" UUID="7F093529463CBE323816C09A68CD9B57" Comment="Загазованность на скважине 9Т : аварийная верхняя" />
+        <Field Name="Zg_10T_Av" Type="BOOL" UUID="372A5D5C442867B4029F148EBDB9584C" Comment="Загазованность на скважине 10Т : аварийная верхняя" />
+        <Field Name="Zg_11T_Av" Type="BOOL" UUID="DA55196B49B3A681404416B685DDA6C4" Comment="Загазованность на скважине 11Т : аварийная верхняя" />
+        <Field Name="Zg_12T_Av" Type="BOOL" UUID="349F4BB3405651430EE4E68639E54C25" Comment="Загазованность на скважине 12Т : аварийная верхняя" />
+        <Field Name="Zg_13T_Av" Type="BOOL" UUID="064D5CDD4F237D643D0B24A1F7E0A09D" Comment="Загазованность на скважине 13Т : аварийная верхняя" />
+        <Field Name="Zg_14T_Av" Type="BOOL" UUID="BD5665DF46239D551E40F0A50292DBA9" Comment="Загазованность на скважине 14Т : аварийная верхняя" />
+        <Field Name="T_BB_TSK_Pn" Type="BOOL" UUID="96388A454B484F39E970F885FA026DA0" Comment="Температура воздуха в ББ САУ ТСк ПХГ : предупредительная нижняя" />
+        <Field Name="T_BB_TSK_Pv" Type="BOOL" UUID="BF39053E4600277D8CCF198A20FAB1F0" Comment="Температура воздуха в ББ САУ ТСк ПХГ : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_6T_Pn" Type="BOOL" UUID="093D4431444F19CE24D075A16CE42B24" Comment="Температура воздуха в ББ ЭХЗ 6Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_7T_Pn" Type="BOOL" UUID="29087BAA4CBB64B7C1733EAFF62B836C" Comment="Температура воздуха в ББ ЭХЗ 7Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_8T_Pn" Type="BOOL" UUID="45A9F276487BEA272AE36088FC60A2CC" Comment="Температура воздуха в ББ ЭХЗ 8Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_9T_Pn" Type="BOOL" UUID="2D36116042EA07B41E5084BCDEDDCD62" Comment="Температура воздуха в ББ ЭХЗ 9Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_10T_Pn" Type="BOOL" UUID="C3C0F14248BAE9D7E720B4ADA46B4B22" Comment="Температура воздуха в ББ ЭХЗ 10Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_11T_Pn" Type="BOOL" UUID="8857EB7241C079370DB187A28CC57AF0" Comment="Температура воздуха в ББ ЭХЗ 11Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_12T_Pn" Type="BOOL" UUID="39024EA7467EA15C962E9E8C84DC62DE" Comment="Температура воздуха в ББ ЭХЗ 12Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_13T_Pn" Type="BOOL" UUID="49BF14A246574BEE556FF88D3653910D" Comment="Температура воздуха в ББ ЭХЗ 13Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_14T_Pn" Type="BOOL" UUID="9798117140DC2A2AA70D63B1D63C887A" Comment="Температура воздуха в ББ ЭХЗ 14Т : предупредительная нижняя" />
+        <Field Name="T_BB_EXZ_6T_Pv" Type="BOOL" UUID="EE06F62E491CD1AB6A99B3BB04CB0175" Comment="Температура воздуха в ББ ЭХЗ 6Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_7T_Pv" Type="BOOL" UUID="54410E6A426A3F02B7CF188A398C56DF" Comment="Температура воздуха в ББ ЭХЗ 7Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_8T_Pv" Type="BOOL" UUID="08C42993426C0F0FFB8B5AB680CA2744" Comment="Температура воздуха в ББ ЭХЗ 8Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_9T_Pv" Type="BOOL" UUID="FA0B9FA24BAB0B0B379A81B82D2EF8E2" Comment="Температура воздуха в ББ ЭХЗ 9Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_10T_Pv" Type="BOOL" UUID="E1DED8564CFC29FC51F47DB5608D40BB" Comment="Температура воздуха в ББ ЭХЗ 10Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_11T_Pv" Type="BOOL" UUID="0F8894B541BA65623D00CB892E0EA3E3" Comment="Температура воздуха в ББ ЭХЗ 11Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_12T_Pv" Type="BOOL" UUID="84E0CC794F9669F9C91E9EB5FE72E4ED" Comment="Температура воздуха в ББ ЭХЗ 12Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_13T_Pv" Type="BOOL" UUID="D180E8DC46A534D5E615F4958B358B18" Comment="Температура воздуха в ББ ЭХЗ 13Т : предупредительная верхняя" />
+        <Field Name="T_BB_EXZ_14T_Pv" Type="BOOL" UUID="04ACAD804CFB53BF538F0883B44EBCD0" Comment="Температура воздуха в ББ ЭХЗ 14Т : предупредительная верхняя" />
+    </Fields>
+</Type>

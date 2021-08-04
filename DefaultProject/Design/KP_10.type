@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="KP_10" Kind="Struct" UUID="891A986A4854A5682A96C5AC173CF3C9">
+    <Fields>
+        <Field Name="Failure" Type="BOOL" UUID="1B023CBC464BE99EBB8AC9B0151301A2" Comment="Сбой анализатора" />
+        <Field Name="Alarm_Water" Type="BOOL" UUID="F7D4D1D2484E3D2CFC88058C18FF73A4" Comment="Измеряемое значение ТТР по воде выше критического значе-&#x0A;ния" />
+        <Field Name="Alarm_CH" Type="BOOL" UUID="A93DD00E4FEB0A8B785F97A293EC4A2D" Comment="Измеряемое значение ТТР по CH выше критического значения" />
+        <Field Name="OutOfDiapason_Water" Type="BOOL" UUID="92CAD6534250C7BC464003A6424C4B1D" Comment="Измеренное значение ТТР по воде вне диапазона" />
+        <Field Name="OutOfDiapason_CH" Type="BOOL" UUID="63DE6D0D41790D6D582772A1DD0080DA" Comment="Измеренное значение ТТР по CH вне диапазона" />
+        <Field Name="MayBeBad_Water" Type="BOOL" UUID="4A2F873E4C5CB760F39C6FAD8FECC606" Comment="Измеренное значение ТТР по воде может быть некорректным" />
+        <Field Name="MayBeBad_CH" Type="BOOL" UUID="4C6BC6D844BDFCAF062FDE803ADBA426" Comment="Измеренное значение ТТР по CH может быть некорректным" />
+        <Field Name="BPD_ERROR_T1" Type="BOOL" UUID="2E75C0B04EABB9387C4A93A1BB3C4DB9" Comment="Ошибка измерения температуры зеркала" />
+        <Field Name="BPD_ERROR_Tk" Type="BOOL" UUID="931F43E74057877D1ADD4D91E1785372" Comment="Ошибка измерения температуры корпуса" />
+        <Field Name="BPD_ERROR_Uf" Type="BOOL" UUID="C25F632343A06F82FE4CE59FEC59E7EB" Comment="Ошибка измерения уровня фотосигнала" />
+        <Field Name="BPD_CLEANING_MODE" Type="BOOL" UUID="1CA1D64A454D691C0C8E1AB60C085435" Comment="Режим очистки" />
+        <Field Name="BPD_DPWATER_OVERLOW" Type="BOOL" UUID="74DDA08244EEA097AA2000BA9DF3B25A" Comment="ТТР по воде ниже индицируемой" />
+        <Field Name="Dew_Point_Temprature_water" Type="REAL" UUID="2BEF0F164CA58782B5F149B377834401" Comment="Температура точки росы  по воде" />
+        <Field Name="Dew_Point_Temprature_CH" Type="REAL" UUID="FF1C924F4235B453FCC7148C2A75F80E" Comment="Температура точки росы по СН " />
+        <Field Name="Pressure" Type="REAL" UUID="E1E6D5FC4440E63021420691DE0F62CF" Comment="Давление " />
+        <Field Name="Temprature" Type="REAL" UUID="E59D9EFA4783AC9D6F4AA3A8948AE989" Comment="Температура" />
+        <Field Name="Time" Type="DWORD" UUID="6C716203406FC6D49694AB8A62D18B16" Comment="Время " />
+    </Fields>
+</Type>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_BTN" Kind="Struct" UUID="4C135E844105CD10348CD1A609EBBBE1">
+	<Fields>
+		<Field Name="AOss" Type="BOOL" UUID="A65DD2AE4EE536A8EF075897E10EA239" Comment="Аварийный останов со стравливанием цеха" />
+		<Field Name="AObs" Type="BOOL" UUID="38CD14C44ABD96ACA5F2AA998E01064F" Comment="Аварийный останов без стравливания цеха" />
+		<Field Name="ShopReg_ON" Type="BOOL" UUID="86E8B1624D89385328BC35BC40407ABC" Comment="Цеховой регулятор включить/ отключить" />
+		<Field Name="ShopReg_Pout" Type="BOOL" UUID="2BF024484B3F4FDCEED297920B09BDFD" Comment="Регулирование по вых. давлению включить" />
+		<Field Name="ShopReg_cr" Type="BOOL" UUID="896F93DC42BCB17E99E00B9BE2AB14E3" Comment="Регулирование по ст. сжатия включить" />
+		<Field Name="ShopReg_Qg" Type="BOOL" UUID="A49967BB4422B831D2392E873793ACCB" Comment="Регулирование по расходу газа включить" />
+		<Field Name="Deblock" Type="BOOL" UUID="30D0B8594B883858866796BBC432DACC" Comment="Деблокировка КЦ" />
+		<Field Name="Sound_Off" Type="BOOL" UUID="F82431ED4D4751CDAF7FB68C21EE937D" Comment="Отключить звук (КЦ)" />
+		<Field Name="Repair" Type="BOOL" UUID="689E38EE497BE4C2A87951A3407C67A7" Comment="Ремонт" />
+		<Field Name="Reserve" Type="BOOL" UUID="6AF5FC81492612115F71808650F776B9" Comment="Резерв" />
+		<Field Name="DU_IM" Type="BOOL" UUID="5Y3A2ARINGRENBOVDT4X6AG4ZU" Comment="ДУ ИМ" />
+		<Field Name="ShopReg_N_ST" Type="BOOL" UUID="57YRHQPI274EFFYFLPYUDOKRDM" Comment="Регулирование по оборотам СТ" />
+		<Field Name="ArchUser" Type="BOOL" UUID="YTNJOREZV2YUBFKM7QW7ARZVHE" Comment="Запись пользовательского архива" />
+	</Fields>
+</Type>

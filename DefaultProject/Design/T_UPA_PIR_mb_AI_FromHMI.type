@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_UPA_PIR_mb_AI_FromHMI" Kind="Struct" UUID="FF16249392284858BB68C99F5E5286BA">
+	<Fields>
+		<Field Name="T_SR" Type="187F76AE49C59E950138DDA3067101D0" UUID="5CD0862107234AE0872AD5B74D2F1F30" Comment="Температура среды (в точке, где измеряется расход)" />
+		<Field Name="P_SR" Type="187F76AE49C59E950138DDA3067101D0" UUID="71C7FEBA88E142BDA985C9D47FCB3D23" Comment="Давление среды (в точке, где измеряется расход)" />
+		<Field Name="T_SR_2" Type="187F76AE49C59E950138DDA3067101D0" UUID="1478A1A548FF481EBDB5CE8304920B4A" Comment="Температура среды (в точке, где измеряется расход), канал 2" />
+		<Field Name="P_SR_2" Type="187F76AE49C59E950138DDA3067101D0" UUID="88F34A75BBEA4CDC88F509CE5947A8CA" Comment="Давление среды (в точке, где измеряется расход), канал 2" />
+		<Field Name="QV" Type="187F76AE49C59E950138DDA3067101D0" UUID="8303141DC2954CE297A9AEEFA06C05C6" Comment="Объемный расход, м3/час" />
+		<Field Name="QV_ST" Type="187F76AE49C59E950138DDA3067101D0" UUID="43B79AF386464FDE9E6EE8DDDA4C9C94" Comment="Объемный расход, приведенный к стандартным условиям, нм3/час" />
+		<Field Name="QM" Type="187F76AE49C59E950138DDA3067101D0" UUID="DBB187FCC37244449B0460319CF04280" Comment="Массовый расход, кг/с" />
+		<Field Name="QQ" Type="187F76AE49C59E950138DDA3067101D0" UUID="5C4758A4E2974EF99E7975CC2BBF9D66" Comment="Тепловой расход, Вт" />
+		<Field Name="KONC" Type="187F76AE49C59E950138DDA3067101D0" UUID="2B3067E6073A444C9ADD43A91313023F" Comment="Концентрация" />
+		<Field Name="K_s" Type="187F76AE49C59E950138DDA3067101D0" UUID="8E1946563DCF48869F60F82416AEA324" Comment="Коэффициент сжимаемости газа" />
+		<Field Name="PLT" Type="187F76AE49C59E950138DDA3067101D0" UUID="2F019C7EC91F4C9DBFDF2A1EAF5CFCFF" Comment="Плотность " />
+	</Fields>
+</Type>

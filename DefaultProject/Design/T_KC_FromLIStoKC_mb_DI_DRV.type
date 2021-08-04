@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_KC_FromLIStoKC_mb_DI_DRV" Kind="Struct" UUID="48ABD74CB5184B4484643FF7C0E555FA">
+	<Fields>
+		<Field Name="AO_UNTS" Type="BOOL" UUID="BA9DA4D713804381962153C3F3586E09" Comment="УНТС: АО по команде оператора" />
+		<Field Name="IN_UZRG" Type="BOOL" UUID="4E92B34A786C427ABBADC9581C3D2BB3" Comment="УЗРГ: Режим &quot;Закачка&quot;" />
+		<Field Name="OUT_UZRG" Type="BOOL" UUID="C6AFC26B07F1472489FB557A2928E445" Comment="УЗРГ: Режим &quot;Отбор&quot;" />
+		<Field Name="AO_UZRG" Type="BOOL" UUID="398C01DA7AE949E6BA953715FAE710EB" Comment="УЗРГ: АО по команде оператора" />
+		<Field Name="temp_UPTIG" Type="BOOL" UUID="D10B7CE06F874A2E9CBE86B6DFDF9770" Comment="УПТИГ: temp" />
+		<Field Name="Zgz_UPTIG" Type="BOOL" UUID="A0CD7E28850E473692E10345F3D92E36" Comment="УПТИГ: Загазованность 20%" />
+		<Field Name="Unlock_GSM" Type="BOOL" UUID="C5286C0646084FAFA1B4B15CDD827980" Comment="ГСМ: Деблокировка" />
+		<Field Name="Unlock_KOS" Type="BOOL" UUID="4A777D9824C74D4F938C031A32CC186E" Comment="КОС: Деблокировка" />
+		<Field Name="Unlock_VOS" Type="BOOL" UUID="EBA7A878BF6B448999E443B0853ABE36" Comment="ВОС: Деблокировка" />
+		<Field Name="Unlock_NM" Type="BOOL" UUID="3435B42E7BA64D64ADD0CEE93417F731" Comment="НМ: Деблокировка" />
+		<Field Name="Patm_brk_UPOU" Type="BOOL" UUID="71FE2CE8779B45CCB15F28C7A1430660" Comment="УПОУ: Неиспр.канала измерения Ратм" />
+		<Field Name="IN" Type="BOOL" UUID="3A5DAE9F81D34F73A1C24092D81A9B7F" Comment="УЗРГ: (0.0) Режим &quot;Закачка&quot;" />
+		<Field Name="OUT" Type="BOOL" UUID="DE9F0C546B3D4D20AC65870E93F97B58" Comment="УЗРГ: (0.1) Режим &quot;Отбор&quot;" />
+		<Field Name="AO_UZRG_2" Type="BOOL" UUID="857AB42BE2C844BDB229E0D595D58977" Comment="УЗРГ: (0.2) АО по команде оператора" />
+		<Field Name="L_PU1_hi" Type="BOOL" UUID="E90FCF83D291454180A8A150A7814D55" Comment="УЗРГ: Верхн.уровень конденсата в пылеуловителе 1.1 п.25=3" />
+		<Field Name="L_PU2_hi" Type="BOOL" UUID="DAEC4B4C3E4E4C0181A31CB0AE4D6942" Comment="УЗРГ: Верхн.уровень конденсата в пылеуловителе 1.2 п.26=4" />
+		<Field Name="L_PU3_hi" Type="BOOL" UUID="617F02896AB84ED081757CB83736C76B" Comment="УЗРГ: Верхн.уровень конденсата в пылеуловителе 1.3 п.27=5" />
+		<Field Name="L_PU4_hi" Type="BOOL" UUID="F06544DBFC314AE2B6ACE95CBDEE2D8B" Comment="УЗРГ: Верхн.уровень конденсата в ёмкоскти сбора конднсата=6" />
+		<Field Name="Lsig_PU4_hi_ok" Type="BOOL" UUID="3CBB721C1491457989573D9AF829F19D" Comment="УЗРГ: Исправность сигнализатора п.28=7" />
+		<Field Name="Kr1_ON" Type="BOOL" UUID="598D03FDBB9545D6A8F510E8119FD542" Comment="УЗРГ: Кран №1 открыт=8" />
+		<Field Name="Kr1_OF" Type="BOOL" UUID="1FEA16300C444C749D299EA5C5F856BE" Comment="УЗРГ: Кран №1 закрыт=9" />
+		<Field Name="Kr2_ON" Type="BOOL" UUID="4EB00FC4D31843ABA69BDB8955827272" Comment="УЗРГ: Кран №2 открыт=10" />
+		<Field Name="Kr2_OF" Type="BOOL" UUID="4A3DBF695B3E49ECAA21F134825EFFA6" Comment="УЗРГ: Кран №2 закрыт=11" />
+		<Field Name="Kr3_ON" Type="BOOL" UUID="F91C77F6DAAC42FFBF972C7DFF9682B2" Comment="УЗРГ: Кран №3 открыт=12" />
+		<Field Name="Kr3_OF" Type="BOOL" UUID="F40DCD9ACF7347F3ABC90338C2181105" Comment="УЗРГ: Кран №3 закрыт13" />
+		<Field Name="Kr4_1_ON" Type="BOOL" UUID="3BFD904C842944529DC8DDA42A07C019" Comment="УЗРГ: Кран №4.1 открыт=14" />
+		<Field Name="Kr4_1_OF" Type="BOOL" UUID="C39AA6C8B5324421BFEF8366693EC9BD" Comment="УЗРГ: Кран №4.1 закрыт=15" />
+		<Field Name="Kr4_2_ON" Type="BOOL" UUID="5DD24513DFC44DEDB48CB1BBB034672D" Comment="УЗРГ: Кран №4.2 открыт=0" />
+		<Field Name="Kr4_2_OF" Type="BOOL" UUID="556401C0A8934377846572148B42A1F1" Comment="УЗРГ: Кран №4.2 закрыт=1" />
+		<Field Name="Kr4_3_ON" Type="BOOL" UUID="164959D087B34C7EAD0A41B66C1381DB" Comment="УЗРГ: Кран №4.3 открыт=2" />
+		<Field Name="Kr4_3_OF" Type="BOOL" UUID="3C1F4B70766746A29E14C8A5D31F0DE1" Comment="УЗРГ: Кран №4.3 закрыт=3" />
+		<Field Name="Kr4_4_ON" Type="BOOL" UUID="5AF3CAB1EB904E6484776DA7D9FA5A38" Comment="УЗРГ: Кран №4.4 открыт=4" />
+		<Field Name="Kr4_4_OF" Type="BOOL" UUID="4D51E4A3EEEF43FE88DFC6ACD65DFDA6" Comment="УЗРГ: Кран №4.4 закрыт=5" />
+		<Field Name="Kr4_5_ON" Type="BOOL" UUID="DDC43EA319EA4F02B219FFB3486B7025" Comment="УЗРГ: Кран №4.5 открыт=6" />
+		<Field Name="Kr4_5_OF" Type="BOOL" UUID="B847BB5C1F8D41779E8429AE83444D6D" Comment="УЗРГ: Кран №4.5 закрыт=7" />
+		<Field Name="Kr4_6_ON" Type="BOOL" UUID="E4BEFF5FA60F4346BFA1C1F79230FBB0" Comment="УЗРГ: Кран №4.6 открыт=8" />
+		<Field Name="Kr4_6_OF" Type="BOOL" UUID="776DBA78418F4160A6C7FC85F5706092" Comment="УЗРГ: Кран №4.6 закрыт=9" />
+		<Field Name="Kr5_1_ON" Type="BOOL" UUID="E2ED76E224394BF78E2380131825EACF" Comment="УЗРГ: Кран №5.1 открыт=10" />
+		<Field Name="Kr5_1_OF" Type="BOOL" UUID="3D42D2909A22445DB5215F37B319AD0A" Comment="УЗРГ: Кран №5.1 закрыт=11" />
+		<Field Name="Kr5_2_ON" Type="BOOL" UUID="F8D7F5922ACD4C58837CD6309B26DB65" Comment="УЗРГ: Кран №5.2 открыт=12" />
+		<Field Name="Kr5_2_OF" Type="BOOL" UUID="C067B39C9DFD4DEC8AEE470AA952EA74" Comment="УЗРГ: Кран №5.2 закрыт=13" />
+		<Field Name="Kr7_1_ON" Type="BOOL" UUID="9CF4186A95624FBDBDECC1EE2027CA92" Comment="УЗРГ: Кран №7.1открыт=14" />
+		<Field Name="Kr7_1_OF" Type="BOOL" UUID="378574639EF4400283BE052168B27F5D" Comment="УЗРГ: Кран №7.1 закрыт=15" />
+		<Field Name="Kr7_2_ON" Type="BOOL" UUID="8F032F7020734060B55B0C75FB7A7541" Comment="УЗРГ: Кран №7.2 открыт=0" />
+		<Field Name="Kr7_2_OF" Type="BOOL" UUID="E9838949F7774E2A9FDDB4D3CC06F8EF" Comment="УЗРГ: Кран №7.2 закрыт=1" />
+		<Field Name="Kr6_1_ON" Type="BOOL" UUID="5EA796A9CE4240C98216C6D3F75B9667" Comment="УЗРГ: Кран №6.1 открыт=2" />
+		<Field Name="Kr6_1_OF" Type="BOOL" UUID="F64D2DA024D04F099ACB780B42B0EC03" Comment="УЗРГ: Кран №6.1 закрыт=3" />
+		<Field Name="Kr6_2_ON" Type="BOOL" UUID="40CBD52C5BD34FDFB2D4C6B9A2D00C64" Comment="УЗРГ: Кран №6.2 открыт=4" />
+		<Field Name="Kr6_2_OF" Type="BOOL" UUID="A2B9D9DC388D40319ADD1FE0E3E19FAF" Comment="УЗРГ: Кран №6.2 закрыт=5" />
+		<Field Name="Kr6_3_ON" Type="BOOL" UUID="EEB873C2C5724D3D9535E9F43E5154EB" Comment="УЗРГ: Кран №6.3 открыт=6" />
+		<Field Name="Kr6_3_OF" Type="BOOL" UUID="DD41FCA8C81546CA9EB4821028EC748B" Comment="УЗРГ: Кран №6.3 закрыт=7" />
+		<Field Name="dP_Kr4_4" Type="BOOL" UUID="031B855995544943903BCA557B372FAD" Comment="УЗРГ: Перепад давлениЯ на кране №4.4=8" />
+		<Field Name="dP_Kr4_5" Type="BOOL" UUID="B2710310E7AA47849ADD8423D35820D3" Comment="УЗРГ: Перепад давлениЯ на кране №4.5=9" />
+		<Field Name="dP_Kr4_6" Type="BOOL" UUID="6F994C2B8B254474989DE6FCE143799F" Comment="УЗРГ: Перепад давлениЯ на кране №4.6=10" />
+		<Field Name="dP_Kr3" Type="BOOL" UUID="4CA48BED016F4D4EA605DD5DBB4B42E0" Comment="УЗРГ: Перепад давлениЯ на кране №3=11" />
+		<Field Name="dP_Kr1" Type="BOOL" UUID="C9153A27CBD745ECB8C80AE0BD96B905" Comment="УЗРГ: Перепад давлениЯ на кране №1=12   " />
+		<Field Name="Reserve1" Type="BOOL" UUID="4A320571FA21451CB412C093F06AB806" Comment="Резерв 1" />
+		<Field Name="Reserve2" Type="BOOL" UUID="3564DD2D064D4B7089D31C830BA65F01" Comment="Резерв 2" />
+		<Field Name="Reserve3" Type="BOOL" UUID="E3F376E59F9848589CAA8322AE5B5BEC" Comment="Резерв 3" />
+	</Fields>
+</Type>

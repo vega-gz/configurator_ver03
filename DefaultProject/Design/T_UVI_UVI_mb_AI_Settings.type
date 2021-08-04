@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Type Kind="Struct" Name="T_UVI_UVI_mb_AI_Settings" UUID="60B666443494413CA278194161636DC6">
+<Fields>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 1" Name="Qi_1" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="0770DB5F2CB140689F43909AF5639126"/>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 2" Name="Qi_2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="E6E05CED03C84481B58F844701B442E0"/>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 3" Name="Qi_3" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="45FB79E7978A4127B643838347F3E9DF"/>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 4" Name="Qi_4" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="CB96B1CBA99742AE81FDEE6BB0BF2EE5"/>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 5" Name="Qi_5" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="ED8F67ACBDAE4FF99B443A9CB603FAF7"/>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 6" Name="Qi_6" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="0A4AF222E7EC429A858389431EB7CE3A"/>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 7" Name="Qi_7" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="FA5741B6ED454C2A998F28B46B1F9D61"/>
+<Field Comment="Измеренный мгновенный расход ингибитора канал 8" Name="Qi_8" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="391AD06283DD4160896BF19C2897C1FD"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 1" Name="Qr_1" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="BA466036B0C3409894EAB1F143C2C6C5"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 2" Name="Qr_2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="1C1A9A101DC747A18A96A6190386530D"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 3" Name="Qr_3" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="223439789BE741AA8A992E9C5D807A3E"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 4" Name="Qr_4" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="4FD4FCEE3B14428885E31250C3D12054"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 5" Name="Qr_5" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="0108689E69CB4CEC8D2F2E01F9A84B26"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 6" Name="Qr_6" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="25152EF998DD4322886FA14D6E14EFAC"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 7" Name="Qr_7" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="FB8C3E4B895F40DD8C527CF836C99662"/>
+<Field Comment="Расчитанный мгновенный расход ингибитора канал 8" Name="Qr_8" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="EC30F526E2A744A8B880A3D67169289D"/>
+<Field Comment="Мгновенный измеренный расход ингибитора суммарно по каналам" Name="Qi_sum" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="FC0CCAAF25254A368A9BFBCED9B346CF"/>
+<Field Comment="Температура внутри корпуса" Name="Tk" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="D066F7A1C7A0481689B0C6BBAB0C5BA7"/>
+<Field Comment="Напряжение питания" Name="U" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="1825E13B5ED8442799EEA70209AB675F"/>
+<Field Comment="Мгновенный расход расходомера" Name="Q" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="15131D7F67604FAE87DD4BE52EA3FE09"/>
+<Field Comment="Текущий перепад давления на фильтре" Name="dPf" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="BC440D54363847249B5A3B061A41E8AE"/>
+<Field Comment="Текущее давление на фильтре" Name="Pf" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="2AC0E1950BC74D06A1E08A24BBA05A64"/>
+<Field Comment="Текущее значение давления" Name="P" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="6A102D0A55B141489084BD20EAD59E1B"/>
+<Field Comment="Текущий максимальный перепад давления на фильтре" Name="dPf_max" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="AA3A7679A49F4AC09EB0E261FDB6A954"/>
+<Field Comment="Коэф-т поправки расхода по каналам" Name="Kq" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="B1D73D1CC4AF495381F4F9A64693B350"/>
+<Field Comment="Текущая плотность ингибитора" Name="Den" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="449A12BFA72547D89431D6D883B14A52"/>
+<Field Comment="Максимальный расход канал 1" Name="Qmax_ch1" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="B68374F910AF43B3B2622FC83DF7AF80"/>
+<Field Comment="Максимальный расход канал 2" Name="Qmax_ch2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="BE27128B614E4939BEA5FB2D4A4988B9"/>
+<Field Comment="Максимальный расход канал 3" Name="Qmax_ch3" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="109023FE3AA24DF5839897CA19E13F0D"/>
+<Field Comment="Максимальный расход канал 4" Name="Qmax_ch4" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="8225D5E473084B458AC1880777098742"/>
+<Field Comment="Максимальный расход канал 5" Name="Qmax_ch5" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="E970149B186042B0B216532B3D8FF1DE"/>
+<Field Comment="Максимальный расход канал 6" Name="Qmax_ch6" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="2057E38A15A541069412F5B12836CB7D"/>
+<Field Comment="Максимальный расход канал 7" Name="Qmax_ch7" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="849B296D39014CC2B3505D41195F4A71"/>
+<Field Comment="Максимальный расход канал 8" Name="Qmax_ch8" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="0FDFED1AEC374B7CA6B60F3A6FA3F8DD"/>
+<Field Comment="Требуемый расход канал 1" Name="Qdem_1" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="6729C8A631C7442A99908F0C489A1DDE"/>
+<Field Comment="Требуемый расход канал 2" Name="Qdem_2" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="1231F31196414B4BB2AF849545BD972C"/>
+<Field Comment="Требуемый расход канал 3" Name="Qdem_3" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="69036E13F74C4AF093C6781A1F27E4BD"/>
+<Field Comment="Требуемый расход канал 4" Name="Qdem_4" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="2C08FF0AF6FF4FD7A1C181C6B05EA634"/>
+<Field Comment="Требуемый расход канал 5" Name="Qdem_5" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="E4BC49B38A6541DA801E6FA65DCD4263"/>
+<Field Comment="Требуемый расход канал 6" Name="Qdem_6" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="95895F41D20442D1942176057C1B107E"/>
+<Field Comment="Требуемый расход канал 7" Name="Qdem_7" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="82110476374E4DA492CA65549D97C6E2"/>
+<Field Comment="Требуемый расход канал 8" Name="Qdem_8" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="C82999962C484A5E966338B4F166CBC5"/>
+<Field Comment="Режим работы каналов" Name="Mode_ch" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="AC1CE7DD85C34BE187A7EA9AF90D6E0A"/>
+<Field Comment="Расходомер включен/выключен" Name="Flow_On" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="4D4DC5E7A0E54D7FB6A8E79CCFA0F85E"/>
+<Field Comment="Максиимальный перепад давление на фильтре" Name="dP_max" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="E3DD764DFD774029A63E79A37FAFC2C2"/>
+<Field Comment="Максимальное значение температуры внутри модуля" Name="T_max" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="13689D5F0A1E4875BB6252CFDF45C48E"/>
+<Field Comment="Минимальное значение напряжения питания" Name="U_min" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="2C3CEB843DF04F38A202751FE502AC21"/>
+<Field Comment="Максимальное значение напряжения питания" Name="U_max" Type="30568F244A6D8B70AC737D98E74DB7EB" UUID="BC8F048A09F84274B4156650C400C1C0"/>
+</Fields>
+</Type>

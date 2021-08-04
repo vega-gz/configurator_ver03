@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Folder Name="Дискретные">
+<Items>
+<Item Name="T_DI_All_Settings.type"/>
+<Item Name="T_DI_FromHMI.type"/>
+<Item Name="T_DI_ToHMI.type"/>
+<Item Name="T_DI_Settings.type"/>
+<Item Name="T_DI_ToHMI.type"/>
+<Item Name="T_DI_FromHMI.type"/>
+<Item Name="T_DI_Internal.type"/>
+<Item Name="T_DO_ToHMI.type"/>
+<Item Name="T_DO_FromHMI.type"/>
+</Items>
+</Folder>

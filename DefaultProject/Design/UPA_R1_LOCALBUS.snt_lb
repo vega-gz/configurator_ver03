@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Driver.Sonet.LOCALBUS v. 1.0 >
+<Configuration>
+    <Device CyclePeriod="50000" ConfigUpdatePeriod="3000000" OperabilityDelay="10000000" CheckStatus="FALSE">
+        <Slot Address="1" ModuleType="68" />
+        <Slot Address="2" ModuleType="68" />
+        <Slot Address="3" ModuleType="68" />
+        <Slot Address="4" ModuleType="68" />
+        <Slot Address="5" ModuleType="68" />
+        <Slot Address="6" ModuleType="68" />
+        <Slot Address="7" ModuleType="33" />
+        <Slot Address="8" ModuleType="33" />
+    </Device>
+    <Crossconnect>
+        <Connection ItemName="UPA_A1_Diag.Slot1" Device="" Slot="1" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.8A0A6D1C41CF457D94442F8831617049" />
+        <Connection ItemName="UPA_A1_Diag.Slot2" Device="" Slot="2" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.559489694EF4757F074EFBAF4ED2BE04" />
+        <Connection ItemName="UPA_A1_Diag.Slot3" Device="" Slot="3" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.257D167249D88B24D42F53B7C893779E" />
+        <Connection ItemName="UPA_A1_Diag.Slot4" Device="" Slot="4" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.26FFA4AE4FE6B82840F52A81A540B7BC" />
+        <Connection ItemName="UPA_A1_Diag.Slot5" Device="" Slot="5" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.A4CC71954594084C3612759E1D786328" />
+        <Connection ItemName="UPA_A1_Diag.Slot6" Device="" Slot="6" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.EFDACBE7493CD384E161BD9F7713F864" />
+        <Connection ItemName="UPA_A1_Diag.Slot7" Device="" Slot="7" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.BE36D8BE4D68EE980579328DFC460CDC" />
+        <Connection ItemName="UPA_A1_Diag.Slot8" Device="" Slot="8" Channel="status" UUID="160DAD814B201592A3B2A2A5BCF6C4E2.532AF0334C06CC4D645F92AEF48908D5" />
+        <Connection ItemName="UPA_AI_DRV.Qg_1T" Device="" Slot="1" Channel="1" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 1Рў" UUID="15EE573441B8947A7307C2942208E0BD.FAA1EFF062534820BEAC9FDFA7466FCE" />
+        <Connection ItemName="UPA_AI_DRV.Qg_2T" Device="" Slot="1" Channel="2" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 2Рў" UUID="15EE573441B8947A7307C2942208E0BD.0104A1B473D04AC39559F99E3973C677" />
+        <Connection ItemName="UPA_AI_DRV.Qg_3T" Device="" Slot="1" Channel="3" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 3Рў" UUID="15EE573441B8947A7307C2942208E0BD.9C5834706FAA463381FA24739308BD9B" />
+        <Connection ItemName="UPA_AI_DRV.Qg_4T" Device="" Slot="1" Channel="4" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 4Рў" UUID="15EE573441B8947A7307C2942208E0BD.3BBB1F9919774BCB8EB17D4F4D6EB199" />
+        <Connection ItemName="UPA_AI_DRV.Qg_5T" Device="" Slot="2" Channel="1" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 5Рў" UUID="15EE573441B8947A7307C2942208E0BD.D2C2260FFA724466A7805FDE7928701C" />
+        <Connection ItemName="UPA_AI_DRV.Qg_6T" Device="" Slot="2" Channel="2" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 6Рў" UUID="15EE573441B8947A7307C2942208E0BD.D445854924D945BF94B381F8646F956A" />
+        <Connection ItemName="UPA_AI_DRV.Qg_7T" Device="" Slot="2" Channel="3" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 7Рў" UUID="15EE573441B8947A7307C2942208E0BD.5B45013AC48A47929852673D77315B91" />
+        <Connection ItemName="UPA_AI_DRV.Qg_8T" Device="" Slot="2" Channel="4" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 8Рў" UUID="15EE573441B8947A7307C2942208E0BD.B4594DA71EFA4DE1AD2AF37CFAFD8F2C" />
+        <Connection ItemName="UPA_AI_DRV.Qg_9T" Device="" Slot="3" Channel="1" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 9Рў" UUID="15EE573441B8947A7307C2942208E0BD.4646B87C8D854712B341A7B3BBF7FD9C" />
+        <Connection ItemName="UPA_AI_DRV.Qg_10T" Device="" Slot="3" Channel="2" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 10Рў" UUID="15EE573441B8947A7307C2942208E0BD.15F092C1C15C403AABC0805F8EB364D6" />
+        <Connection ItemName="UPA_AI_DRV.Qg_11T" Device="" Slot="3" Channel="3" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 11Рў" UUID="15EE573441B8947A7307C2942208E0BD.35ECF4DCD9374852A438E3393D1D6477" />
+        <Connection ItemName="UPA_AI_DRV.Qg_12T" Device="" Slot="3" Channel="4" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 12Рў" UUID="15EE573441B8947A7307C2942208E0BD.BEFDE01212E54E0CA2E45A7F96BAC03B" />
+        <Connection ItemName="UPA_AI_DRV.Qg_13T" Device="" Slot="4" Channel="1" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 13Рў" UUID="15EE573441B8947A7307C2942208E0BD.12FA33E6DD3843E485261C9040B3D48B" />
+        <Connection ItemName="UPA_AI_DRV.Qg_14T" Device="" Slot="4" Channel="2" Comment="Р Р°СЃС…РѕРґ РєРѕР�?РїСЂРёР�?РёСЂСѓРµР�?РѕРіРѕ РіР°Р·Р° РїРѕ СЃРєРІР°Р¶РёРЅРµ 14Рў" UUID="15EE573441B8947A7307C2942208E0BD.49544C1C0396400EAC609A7B8F158A55" />
+        <Connection ItemName="UPA_AI_DRV.Pg_Kol" Device="" Slot="4" Channel="3" Comment="Р”Р°РІР»РµРЅРёРµ РіР°Р·Р° РІ РєРѕР»Р»РµРєС‚РѕСЂРµ РіР°Р·Р°" UUID="15EE573441B8947A7307C2942208E0BD.AA8FD179D4E14C8FAD1F97D1403245B7" />
+        <Connection ItemName="UPA_AI_DRV.T_BB_UPA" Device="" Slot="4" Channel="4" Comment="РўРµР�?РїРµСЂР°С‚СѓСЂР° РІРѕР·РґСѓС…Р° РІ Р�?Р�? РЎРђРЈ РЈРџРђ" UUID="15EE573441B8947A7307C2942208E0BD.DF90B1C9EF3B4F58BBC425FD1EC6BE75" />
+        <Connection ItemName="UPA_AI_DRV.Res_0" Device="" Slot="5" Channel="1" Comment="Р РµР·РµСЂРІ" UUID="15EE573441B8947A7307C2942208E0BD.BD75BC3368C94B0EA61BC1F8A4C2E1F4" />
+        <Connection ItemName="UPA_AI_DRV.Res_1" Device="" Slot="5" Channel="2" Comment="Р РµР·РµСЂРІ" UUID="15EE573441B8947A7307C2942208E0BD.6A0D33656D1E4D79BD3E04FB0A6BD16F" />
+        <Connection ItemName="UPA_AI_DRV.Res_2" Device="" Slot="5" Channel="3" Comment="Р РµР·РµСЂРІ" UUID="15EE573441B8947A7307C2942208E0BD.D2F0EC730A8F40188BAA5A19CE47C1C8" />
+        <Connection ItemName="UPA_AI_DRV.Res_3" Device="" Slot="5" Channel="4" Comment="Р РµР·РµСЂРІ" UUID="15EE573441B8947A7307C2942208E0BD.AB68FB225C374180BC27950BAF770C60" />
+        <Connection ItemName="UPA_AI_DRV.Uosn_SAU" Device="" Slot="6" Channel="1" Comment="Р?Р·Р�?РµСЂРµРЅРёРµ РѕСЃРЅРѕРІРЅРѕРіРѕ РЅР°РїСЂСЏР¶РµРЅРёСЏ" UUID="15EE573441B8947A7307C2942208E0BD.0E3873397B7F49BA8F58B12E2E93BEE7" />
+        <Connection ItemName="UPA_AI_DRV.Urez_SAU" Device="" Slot="6" Channel="2" Comment="Р?Р·Р�?РµСЂРµРЅРёРµ СЂРµР·РµСЂРІРЅРѕРіРѕ РЅР°РїСЂСЏР¶РµРЅРёСЏ" UUID="15EE573441B8947A7307C2942208E0BD.C99672B06F4340F786E8BF1599A7487E" />
+        <Connection ItemName="UPA_AI_DRV.Res_4" Device="" Slot="6" Channel="3" Comment="Р РµР·РµСЂРІ" UUID="15EE573441B8947A7307C2942208E0BD.FCDF77D254B54C76B8EDCD2903A0AF23" />
+        <Connection ItemName="UPA_AI_DRV.Res_5" Device="" Slot="6" Channel="4" Comment="Р РµР·РµСЂРІ" UUID="15EE573441B8947A7307C2942208E0BD.95766B6DBADD45CFA04C6FB83AE5ADA2" />
+        <Connection ItemName="UPA_DI_DRV.Kr_1T2_ON" Device="" Slot="7" Channel="1" Comment="Кран 1Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.3C33E70EE722430D9C97D103AEB2ACF1" />
+        <Connection ItemName="UPA_DI_DRV.Kr_1T2_OF" Device="" Slot="7" Channel="2" Comment="Кран 1Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.06A5D415B54440D09C03ED10357B8523" />
+        <Connection ItemName="UPA_DI_DRV.Kr_2T2_ON" Device="" Slot="7" Channel="3" Comment="Кран 2Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.B471884647BF4D838DE19D9DCE4A4067" />
+        <Connection ItemName="UPA_DI_DRV.Kr_2T2_OF" Device="" Slot="7" Channel="4" Comment="Кран 2Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.2BC1B58FC4FD4B15B1731B33AAF4C7FB" />
+        <Connection ItemName="UPA_DI_DRV.Kr_3T2_ON" Device="" Slot="7" Channel="5" Comment="Кран 3Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.DD49CCF8301941B8A8F10CC2172252AD" />
+        <Connection ItemName="UPA_DI_DRV.Kr_3T2_OF" Device="" Slot="7" Channel="6" Comment="Кран 3Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.988F65A5D22C45E7BABD17D41CBCD8CD" />
+        <Connection ItemName="UPA_DI_DRV.Kr_4T2_ON" Device="" Slot="7" Channel="7" Comment="Кран 4Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.420A9EF53D6649A8A06F56B52D5ED89B" />
+        <Connection ItemName="UPA_DI_DRV.Kr_4T2_OF" Device="" Slot="7" Channel="8" Comment="Кран 4Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.7CAA8970BCF941B3B52E5D146640CD4E" />
+        <Connection ItemName="UPA_DI_DRV.Kr_5T2_ON" Device="" Slot="7" Channel="9" Comment="Кран 5Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.D6227D72087E40DCADFD220AD2FEF55C" />
+        <Connection ItemName="UPA_DI_DRV.Kr_5T2_OF" Device="" Slot="7" Channel="10" Comment="Кран 5Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.F598339466F04E0FB109EE318BE4EFF8" />
+        <Connection ItemName="UPA_DI_DRV.Kr_6T2_ON" Device="" Slot="7" Channel="11" Comment="Кран 6Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.CF84A8A9971D498C9039CD6BEBF0E176" />
+        <Connection ItemName="UPA_DI_DRV.Kr_6T2_OF" Device="" Slot="7" Channel="12" Comment="Кран 6Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.B6FEB24902D34C9FA0F4789E239E47F0" />
+        <Connection ItemName="UPA_DI_DRV.Kr_7T2_ON" Device="" Slot="7" Channel="13" Comment="Кран 7Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.BBAD15F3BD254D3686861985ADB3D67B" />
+        <Connection ItemName="UPA_DI_DRV.Kr_7T2_OF" Device="" Slot="7" Channel="14" Comment="Кран 7Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.3BBF9A024BC644BDB2C7A14DB2F70AB8" />
+        <Connection ItemName="UPA_DI_DRV.Kr_8T2_ON" Device="" Slot="7" Channel="15" Comment="Кран 8Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.08612E663FAB4AD3BDD469F8BDCCC812" />
+        <Connection ItemName="UPA_DI_DRV.Kr_8T2_OF" Device="" Slot="7" Channel="16" Comment="Кран 8Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.F4234E9A430F41F58ED73E76C7AE77B8" />
+        <Connection ItemName="UPA_DI_DRV.Kr_9T2_ON" Device="" Slot="8" Channel="1" Comment="Кран 9Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.D6CF9A6A143244F3BF0F88F868BAC9E5" />
+        <Connection ItemName="UPA_DI_DRV.Kr_9T2_OF" Device="" Slot="8" Channel="2" Comment="Кран 9Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.96BBAC525034466EB0E6BA20B415B095" />
+        <Connection ItemName="UPA_DI_DRV.Kr_10T2_ON" Device="" Slot="8" Channel="3" Comment="Кран 10Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.29AABCBAA37F42D89A5F03F5924693A2" />
+        <Connection ItemName="UPA_DI_DRV.Kr_10T2_OF" Device="" Slot="8" Channel="4" Comment="Кран 10Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.D56AB17BCD444A0EAD91AB8CB1DBC627" />
+        <Connection ItemName="UPA_DI_DRV.Kr_11T2_ON" Device="" Slot="8" Channel="5" Comment="Кран 11Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.F91068868EEF475888245B4C0DADC097" />
+        <Connection ItemName="UPA_DI_DRV.Kr_11T2_OF" Device="" Slot="8" Channel="6" Comment="Кран 11Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.AC711B092A734882906F07944A5C0439" />
+        <Connection ItemName="UPA_DI_DRV.Kr_12T2_ON" Device="" Slot="8" Channel="7" Comment="Кран 12Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.9272A4C093134A3490AA06BD3A5D59DD" />
+        <Connection ItemName="UPA_DI_DRV.Kr_12T2_OF" Device="" Slot="8" Channel="8" Comment="Кран 12Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.601353E6EBDF4981BE4555279C1E67B9" />
+        <Connection ItemName="UPA_DI_DRV.Kr_13T2_ON" Device="" Slot="8" Channel="9" Comment="Кран 13Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.2A659242D9FC435EB76159162DED6ED4" />
+        <Connection ItemName="UPA_DI_DRV.Kr_13T2_OF" Device="" Slot="8" Channel="10" Comment="Кран 13Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.521C82C335864DFDB189C940EED5441D" />
+        <Connection ItemName="UPA_DI_DRV.Kr_14T2_ON" Device="" Slot="8" Channel="11" Comment="Кран 14Т-2  открыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.4729BE9A9719491797FEAF4EBDDAEA85" />
+        <Connection ItemName="UPA_DI_DRV.Kr_14T2_OF" Device="" Slot="8" Channel="12" Comment="Кран 14Т-2  закрыт" UUID="DF2F886E43F8C041BC60A5922BF0A794.65485F954C574808A5ABA6B5F63A6A65" />
+        <Connection ItemName="UPA_DI_DRV.Res_0" Device="" Slot="8" Channel="13" Comment="(Резерв)" UUID="DF2F886E43F8C041BC60A5922BF0A794.8ABBBC4ADE0D474491FA62E2496BF439" />
+        <Connection ItemName="UPA_DI_DRV.Res_1" Device="" Slot="8" Channel="14" Comment="(Резерв)" UUID="DF2F886E43F8C041BC60A5922BF0A794.A9CE0B9094FA44FD861818EC02B4E149" />
+        <Connection ItemName="UPA_DI_DRV.Vlaga_BB_UPA_v" Device="" Slot="8" Channel="15" Comment="Влажность в ББ САУ УПА повышенная" UUID="DF2F886E43F8C041BC60A5922BF0A794.E878B82DA6D7455CA7092FAD6126CCBE" />
+        <Connection ItemName="UPA_DI_DRV.Dver_BB_UPA_open" Device="" Slot="8" Channel="16" Comment="Дверь ББ САУ УПА открыта " UUID="DF2F886E43F8C041BC60A5922BF0A794.9F977FC4B3BE4EFAA96BC3DC76ED1FA9" />
+    </Crossconnect>
+</Configuration>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_GPA_TMR" Kind="Struct" Comment="Текущее время технол. задержки" UUID="YBE4UCZUQH5EDFBG4PTFTO2O5I">
+	<Fields>
+		<Field Name="Zvonok" Type="REAL" UUID="LLU7U3RPBQZURDYESEKIOGSOSY" Comment="Звонок перед стартом" />
+		<Field Name="StartMSR_st1" Type="REAL" UUID="A7TJ2VSXKU2UPJI4PQYBY6M65U" Comment="Контроль Р масла в ред." />
+		<Field Name="StartMSR_st2" Type="REAL" UUID="27QGZC4FC2QUBADQWTEJDDRYCE" Comment="Идет включение НПМР" />
+		<Field Name="StartMSR_st3" Type="REAL" UUID="JQSESAQOSPMU7OLI3OKPK6YSYQ" Comment="Идет заполнение МС ред." />
+		<Field Name="StartMSD_st3" Type="REAL" UUID="JCTSL6MCVVCUBMGZ7E4OI7KQOI" Comment="Идет стаб-ция МС двиг." />
+		<Field Name="ProdK" Type="REAL" UUID="MSLWIGYA4CDUDJATZ5FAJ4MEO4" Comment="Идет продувка компрес." />
+		<Field Name="StabK" Type="REAL" UUID="VBH3YZCJZG5U3FR7JNTFMZTMHA" Comment="Стаб-ция газа в компр." />
+		<Field Name="ProdTG_KPK" Type="REAL" UUID="5G5ARMJAQPDELLYUFJ46RW4PTM" Comment="Идет продувка тг (КПК)" />
+		<Field Name="StartCrank_1" Type="REAL" UUID="HM4KMJ4M275U3BWVOFHRJ4BDPQ" />
+		<Field Name="StartCrank_2" Type="REAL" UUID="2AKUWYYIANHUTBTYVSR5PTM73M" />
+		<Field Name="RunCrank" Type="REAL" UUID="3T5TKCPVY3QEFACFNOGAQB7ZPI" Comment="Идет прокрутка ГТД" />
+		<Field Name="StopCrank" Type="REAL" UUID="4YYCWJRRFMWUZJVYNQHLQAKCCE" Comment="Идет остановка СР" />
+		<Field Name="StopMS_Crank" Type="REAL" UUID="SPZM5VK36VWUDPCMZ6FLCG272A" Comment="До останова МС осталось" />
+		<Field Name="ProdTG" Type="REAL" UUID="2HA26XSXIYXUHKOJHUFC6PQLMY" Comment="Идет продувка тг" />
+		<Field Name="WarmD" Type="REAL" UUID="5KR7CSKG5GUE5LS2ZFCOQMDBLU" Comment="Идет прогрев двигателя" />
+		<Field Name="OxlD" Type="REAL" UUID="YWKIIRZYJ3IUBGFVX2YKFCWXPA" Comment="Идет охлаждение двиг." />
+		<Field Name="StabOxl" Type="REAL" UUID="NDLGYSM6JTYEJEAQI5TNZVIBWE" Comment="Идет стабил. сист. охл." />
+		<Field Name="Control_TmMSK" Type="REAL" UUID="WZSQMCFSO2UU3N4ZICJTLX5MLE" Comment="Контроль Тм компрессора" />
+		<Field Name="Stab_MSK" Type="REAL" UUID="WWGPIFQ266NULIXV6DM26CSNPY" Comment="Стаб-ция МС компрессора" />
+		<Field Name="AO_finish" Type="REAL" UUID="3DW67IG4WWTUBK2KKQE7WB4K6M" Comment="Ожидание завершения АО" />
+		<Field Name="Oxl_PodK" Type="REAL" UUID="PUKBNWXP4YRETOH2V7LWTVCX6I" Comment="Идет охл. подшипников К" />
+		<Field Name="Oil_StopD" Type="REAL" UUID="SAAPDZZHS7HE5LWVH2BZZUPOCI" Comment="Идет прокачка масла дв." />
+		<Field Name="Stop_PNSN_WarmGR" Type="REAL" UUID="N2SPZKAZQAZULGAK5SOLXVI4DY" Comment="Ожидание отключения ПНСК" />
+		<Field Name="WarmMSK3" Type="REAL" UUID="PYYGVBJO46SURGN3GKYSLC3FXM" Comment="Ожидание открытия КППМК" />
+		<Field Name="Trim_PMK" Type="REAL" UUID="JG4YAT774GSUJBBCETVQUN3AEQ" Comment="Ожидание закрытия КПМПК" />
+	</Fields>
+</Type>

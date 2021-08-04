@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="Type_16" Kind="Struct" UUID="C957634C49632C42B1145EA95B42C373">
+    <Fields>
+        <Field Name="calc" Type="REAL" UUID="2730764C4D7778C1AF7975B165C5E4CB" Comment="Вычисленное значение" />
+        <Field Name="arr_word" Type="WORD" UUID="0FB162A841366E05B1C4009F0C2255FF" ArraySize="3" Comment="3 регистра, 0 - старший регистр" />
+    </Fields>
+</Type>

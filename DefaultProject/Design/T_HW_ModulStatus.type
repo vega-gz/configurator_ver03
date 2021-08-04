@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Type v. 1.0 >
+<Type Name="T_HW_ModulStatus" Kind="Struct" UUID="D0390DDA47C45D946349ED8B4CAB09A2">
+    <Fields>
+        <Field Name="Ab1_1" Type="WORD" UUID="9D234FA74BF6EB62206BCA8B407C54E5" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab1_2" Type="WORD" UUID="F97D114F414430220D4EB7968187F6A6" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab1_3" Type="WORD" UUID="553356854B947017FD09C4AD1745CF97" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab1_4" Type="WORD" UUID="88FCE2D74121252EBEE879BE5C69CF72" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab2_1" Type="WORD" UUID="CEB2AD614EDD83FCDCD57BB873489ED1" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab2_2" Type="WORD" UUID="1698185D4F0F306256F4E5A88F3AEE11" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab3_1" Type="WORD" UUID="0FBFEF864FBD923428D4ABBAE3507BEE" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab4_1" Type="WORD" UUID="B00ED92C4B2002FA3A1054AFB51A1BD2" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab4_2" Type="WORD" UUID="A83B0491418C10B1F098299CE67FEF35" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab4_3" Type="WORD" UUID="760BA46D4A7184FBB56B04BB75FC81B2" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab4_4" Type="WORD" UUID="F22946E245E49F71CA2949A6C13991B5" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab4_5" Type="WORD" UUID="0E2201384A7DF5BB6D0ABD8048546D85" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab4_6" Type="WORD" UUID="04E4ECBF4C4A9771064E2A95AA6C78F6" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab5_1" Type="WORD" UUID="FBB5A0F249E392F7942B4CA7A6FE7F08" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab5_2" Type="WORD" UUID="EE13F7FE4BED22BCE525CB9D1935E521" ArraySize="8" Comment="Статусы модулей Сонетов" />
+        <Field Name="Ab5_3" Type="WORD" UUID="DAAE5CE1481DC2A0167220B1C111CB10" ArraySize="8" Comment="Статусы модулей Сонетов" />
+    </Fields>
+</Type>

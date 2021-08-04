@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Folder config v. 1.0 >
+<Folder Name="Classica">
+	<Items>
+		<Item Name="T_AM_Btn.type" />
+		<Item Name="T_AM_FromALG.type" />
+		<Item Name="T_AM_Internal.type" />
+		<Item Name="T_AM_Settings.type" />
+		<Item Name="T_AM_Simulation.type" />
+		<Item Name="T_AM_ToHMI.type" />
+		<Item Name="Type_DZHOBX7CBUSEXMS42NZXOSPDOA.type" />
+	</Items>
+</Folder>
