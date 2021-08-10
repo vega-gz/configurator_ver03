@@ -1303,11 +1303,15 @@ public class Generator {
         String ext = ""; // Для расширения на файле
         if (separNameF.length > 1) {                                         // если есть расширение то такой файл и будет, нет так txt
             ext = separNameF[separNameF.length - 1];                        // последнее разбитое это и будет окончание
-            if (ext.equalsIgnoreCase(etxLUA)) {
-                findLUAext = true;             // определения файла ЛУА    
+            
+            if (ext.equalsIgnoreCase(etxLUA)) { // определения файла ЛУА    
+                findLUAext = true; 
+                disableReserve = false;
             }
-            if (ext.equalsIgnoreCase(etxHTML)) {
-                findHTMLext = true;             // определения файла репорта HTML    
+            
+            if (ext.equalsIgnoreCase(etxHTML)) { // определения файла репорта HTML    
+                findHTMLext = true;             
+                disableReserve = false;
             }
         } else {
             stFileName = stFileName + ".txt";
@@ -1462,7 +1466,7 @@ public class Generator {
             String beforeValueGenString = null;
             System.out.println(tsz);
             for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
-//                if(j == 182){
+//                if(j == 119){
 //                     System.out.println(tsz);
 //                }
                 if (jProgressBar != null && tsz != 0) {
@@ -1494,7 +1498,9 @@ public class Generator {
                                         addStr = addStr.substring(0, indeChar) + addStr.substring(indeChar + 1); // обрубаем строку 
                                         fm.wr(addStr);
                                     }
-                                }else fm.wr(beforeValueGenString);
+                                }else{
+                                    fm.wr(beforeValueGenString);
+                                }
                             } 
                             beforeValueGenString = addStr;
 
@@ -1505,7 +1511,9 @@ public class Generator {
                             beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
                             fm.wr(beforeValueGenString);
                         } else{
-                            if ( !findHTMLext & j >= tsz -1)  fm.wr(beforeValueGenString); // просто запись последней строки
+                            if ( !findHTMLext & j >= tsz-1 & k >= blockCont.size()-1){
+                                fm.wr(beforeValueGenString); // просто запись последней строки таблицы
+                            } 
                         }
 
                     }
@@ -2333,11 +2341,43 @@ public class Generator {
 
     // --- регулярка разбора строки VAL условия IF-ELSE (проверка на окончание)---
     private static boolean compareStrTable(String str, String dataCell) {
+        String splitterString = "*";
         if (str != null & !str.equals("")) {
-            String[] sTmpSplit = str.split("\\."); // режим строку
-            if (sTmpSplit.length > 1) {               // обязательно с точкой
-                str = sTmpSplit[sTmpSplit.length - 1]; // берем только расширение
-                Pattern pattern1 = Pattern.compile("^(.*\\." + str + ")$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+            int currentIndexChar = str.indexOf(splitterString);
+            String[] arrSplitString = null;
+                    
+            if (currentIndexChar  > -1){
+                arrSplitString = new String[]{str.substring(0, currentIndexChar)};
+                while(currentIndexChar > -1){
+                    int beforeIndexChar = currentIndexChar;
+                    currentIndexChar = str.indexOf(splitterString, currentIndexChar + 1);
+                    String[] currentCut = null;
+                    if(currentIndexChar > -1){
+                        currentCut = new String[]{str.substring(beforeIndexChar + 1, currentIndexChar)};
+                    }else{
+                        if(beforeIndexChar >= str.length()){
+                            currentCut = new String[]{str.substring(beforeIndexChar, str.length() )};
+                        }else{
+                            currentCut = new String[]{str.substring(beforeIndexChar + 1, str.length())};
+                        }
+                    }
+                    
+                    arrSplitString = Stream.concat(Arrays.stream(arrSplitString), Arrays.stream(currentCut)).toArray(String[]::new);
+                }
+            }
+            if(arrSplitString != null){
+                String stringToPattern = "^(";
+                for (int i = 0; i < arrSplitString.length; i++) {
+                    String s = arrSplitString[i];
+                    if (i < arrSplitString.length - 1) {
+                        stringToPattern += s + ".*";
+                    } else {
+                        stringToPattern += s;
+                    }
+                }
+                stringToPattern += ")$";
+
+                Pattern pattern1 = Pattern.compile(stringToPattern, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
                 Matcher matcher1 = pattern1.matcher(dataCell);
                 if (matcher1.matches()) {
                     return true;

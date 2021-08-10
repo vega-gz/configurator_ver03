@@ -1,0 +1,34 @@
+         <Variables>
+            <Variable UUID="5TYFC7ABBY4ETG77PCIUSL7Q3M" Name="algCycle" Type="REAL" Usage="input" />
+            <Variable UUID="P4SLO5DEEO4UFBWXSKE3BX4G3Y" Name="unlock" Type="BOOL" Usage="input" />
+            <Variable UUID="ISDWL2BPW4HEJG6A4LGPDUMJYY" Name="imit" Type="BOOL" Usage="input" />
+        </Variables>
+        <ST><![CDATA[
+//----------------------- Вызов обработчиков ИМ -----------------------------------------
+if not init then 
+	IM_type.am1x0	   	:= 2; //ИМ 1 команда, 0 конечников
+	IM_type.am2x2fh	   	:= 3; //ИМ 2 команды, 2 конечника (открытие, удержание)
+	IM_type.am1x1	   	:= 4; //ИМ 1 команда, 1 конечник
+	IM_type.am1x2	   	:= 5; //ИМ 1 команда, 2 конечника
+	IM_type.am2x1	   	:= 6; //ИМ 2 команды, 1 конечник
+	IM_type.am2x2	   	:= 7; //ИМ 2 команды, 2 конечника
+	IM_type.am1ofx1of  	:= 8; //ИМ 1 команда OF, 1 конечник OF
+	IM_type.am1ofx2	   	:= 9; //ИМ 1 команда OF, 2 конечника
+	IM_type.am1x1of		:= 10; //ИМ 1 команда, 1 конечник OF
+	IM_type.amPos		:= 11; //ИМ прочие с положением (АПК, ТРК...)
+	IM_type.am3x2		:= 12; //ИМ 3 команды (on, off, stop), 2 конечника
+	IM_type.am2x2x3ware	:= 13; //ИМ 2 команды, 2 конечника, трёхпроводная схема
+	IM_type.am1x4nku	:= 14; //ИМ 1 команда, 4 сигнала от НКУ
+	IM_type.am2x7upp	:= 15; //ИМ 2 команды (БП и УПП) и 7 сигналов от НКУ
+	IM_type.am2x8nku	:= 16; //ИМ 2 команды и 8 сигналов от НКУ
+	IM_Init(); 
+
+end_if;
+ps_im := false; //звуковое предупреждение по ИМ
+
+//--------------------------------------------------------------------------------------------
+		//Начало кода
+		//Конец кода
+		]]></ST>
+    </Function>
+</Data>

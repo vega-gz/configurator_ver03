@@ -1,0 +1,11 @@
+         <Variables>
+            <Variable UUID="JOR4N6O6RMPU5F666R5RD74NYA" Name="c" Type="BOOL" Usage="input" />
+        </Variables>
+        <ST><![CDATA[//--- Групповое разрешение ДУ ---
+//c := ImitOn;
+//Начало сгенерированного кода
+
+//Конец сгенерированного кода
+]]></ST>
+    </Function>
+</Data>
