@@ -1,6 +1,7 @@
 package Generators;
 
 import FrameCreate.TableDB;
+import Generators.ModBus.StatusModBus;
 import Tools.FileManager;
 import Tools.StrTools;
 import Tools.Tools;
@@ -49,14 +50,15 @@ public class Generator {
         int y = nodeTable.indexOf("_mb_");
         String subAb = "";
         String isMb = "";
-        //String group = "";
-        boolean isModbus = false;
+
+        boolean isModbus = false; // определяет Модбас
         if (y > 0) {
             subAb = "_" + nodeTable.substring(0, y);
             nodeTable = nodeTable.substring(y + 1);
             isMb = "_mb";
             isModbus = true;
         }
+        
         globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
@@ -89,51 +91,63 @@ public class Generator {
         //} else {
         exArr.add(abonent);
         //}
+        
         //------------------ Определение параметров драйвера модбаса -----------------------
-        String tabComm = globVar.DB.getCommentTable(abonent + subAb + "_" + nodeTable);
-        if (tabComm == null) {
-            tabComm = "";
+        String commentTable = globVar.DB.getCommentTable(ft.tableName());
+        if (commentTable == null) {
+            commentTable = "";
         }
         String modbusFile = "";
         String modbusAddr = "";
         String group = "";
-        x = tabComm.indexOf("Modbus:");
+        String identModbus = "Modbus:";
+        x = commentTable.indexOf(identModbus);
         if (x >= 0) {
-            int l = tabComm.length();
-            x += 7;
+            int l = commentTable.length();
+            boolean validDataComment = true;
+            x += identModbus.length();
+            String tmpStr = commentTable.substring(x);
+            String[] tmpStrArr = tmpStr.split(";");
+            
             if (l < x) {
-                FileManager.loggerConstructor("Неправильный формат описания для драйвера в коментарии \"" + tabComm + "\" к таблице \"" + ft.tableName() + "\"");
-                return -1;
+                validDataComment = false;
             }
-            y = tabComm.indexOf(";", x);
-            if (y < 0) {
-                FileManager.loggerConstructor("Неправильный формат описания для драйвера в коментарии \"" + tabComm + "\" к таблице \"" + ft.tableName() + "\"");
-                return -1;
+            
+            y = commentTable.indexOf(";", x);
+            if (y < 0 & validDataComment) {
+                validDataComment = false;
             }
-            modbusFile = tabComm.substring(x, y).trim();
+            
+            modbusFile = commentTable.substring(x, y).trim();
             x = y + 1;
-            if (l < x) {
-                FileManager.loggerConstructor("Неправильный формат описания для драйвера в коментарии \"" + tabComm + "\" к таблице \"" + ft.tableName() + "\"");
-                return -1;
+            if (l < x & validDataComment) {
+                validDataComment = false;
             }
-            y = tabComm.indexOf(";", x);
-            if (y > x) {
-                modbusAddr = tabComm.substring(x, y).trim();
+            
+            y = commentTable.indexOf(";", x);
+            if (y > x & validDataComment) {
+                modbusAddr = commentTable.substring(x, y).trim();
             }
-
+            
             x = y + 1;
-            if (l < x) {
-                FileManager.loggerConstructor("Неправильный формат описания для драйвера в коментарии \"" + tabComm + "\" к таблице \"" + ft.tableName() + "\"");
-                return -1;
+            if (l < x & validDataComment) {
+                validDataComment = false;
             }
-            y = tabComm.indexOf(";", x);
-            if (y > x) {
-                group = tabComm.substring(x, y).trim();
+            
+            y = commentTable.indexOf(";", x);
+            if (y > x & validDataComment) {
+                group = commentTable.substring(x, y).trim();
             } else {
-                FileManager.loggerConstructor("Неправильный формат описания для драйвера в коментарии \"" + tabComm + "\" к таблице \"" + ft.tableName() + "\"");
+                validDataComment = false;
+            }
+            
+            if( !validDataComment){
+                FileManager.loggerConstructor("Неправильный формат описания для драйвера в комментарии \"" + commentTable + "\" к таблице \"" + ft.tableName() + "\"");
                 return -1;
             }
+            
         }
+        
         //--- Определяем файл с описанием
         String drvFileName = "T_" + abonent + subAb + isMb + globVar.sax.getDataAttr(nodeGenHW, "drvFile") + ".type";
 
@@ -339,8 +353,6 @@ public class Generator {
 
             int ret = 0;
             for (String exA : exArrList) {
-                //String stFileName = abonent + subAb + "_" + commonFileST; //Для каждого файла
-                //int ret = genInFile(fm, abonent + subAb + isMb, commonFileST, f, ft, disableReserve, stFileName, abonent, jProgressBar1);
                 String stFileName = exA + subAb + "_" + commonFileST; //Для каждого файла
                 ret = genInFile(fm, exA + subAb + isMb, commonFileST, f, ft, disableReserve, stFileName, abonent, jProgressBar1);
                 System.out.println(ret);
@@ -369,7 +381,7 @@ public class Generator {
         int x = nameTable.indexOf("_");
         String abonent = nameTable.substring(0, x);
         String nodeTable = nameTable.substring(x + 1);
-        //String subGroup = ""; //Для обозначения подгруппы сигнала, например "FR"
+       
         //для определения модбасовских подабонентов 
         int y = nodeTable.indexOf("_mb_");
         String subAb = "";
@@ -378,7 +390,9 @@ public class Generator {
             subAb = nodeTable.substring(0, y + 1);
             nodeTable = nodeTable.substring(y + 1);
             isMb = "mb_";
-        }// Читаем пользовательскую конфигурацию для ЧМИ 
+        }
+
+        // Читаем пользовательскую конфигурацию для ЧМИ 
         XMLSAX HMIcfg = new XMLSAX(); //
         String confHMI = globVar.ConfigHMI;
         Node hmiCfgRoot = HMIcfg.readDocument(confHMI); //AT_HMI.iec_hmi
@@ -1292,6 +1306,11 @@ public class Generator {
         String filePath = globVar.desDir + File.separator + "GenST";
 
         String nameToblock = commonFileST;                                 // оригинальное название ноды сохраняем и его же и ищем потом
+        // проверить modbus ли таблица
+        ModBus modbusChecker = new ModBus(ft.tableName());
+        if(!modbusChecker.equals(StatusModBus.OK)){
+            nameToblock = "Call_" + modbusChecker.getModbusFile() + "_" + modbusChecker.getNodeTable(); // так формируем 
+        }
         // разбор имени если есть точка в имени(нахождение расширения)
         String etxLUA = "lua";
         String etxHTML = "html";
@@ -1316,6 +1335,7 @@ public class Generator {
         } else {
             stFileName = stFileName + ".txt";
         }
+
 
         File d = new File(filePath);
         if (!d.isDirectory()) {
@@ -1379,6 +1399,7 @@ public class Generator {
             }
 
             String[] myFunc = {nameFunction, "Name", funcName};
+            //String[] myFunc = {nameFunction, "Name", "Call_ANB"};
             Node func = algSax.findNodeAtribute(algRoot, myFunc);
             if (func != null) {
                 funcUUID = (String) algSax.getDataNode(func).get("UUID");
