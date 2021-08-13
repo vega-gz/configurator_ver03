@@ -917,13 +917,10 @@ public class TableDB extends javax.swing.JFrame {
         ArrayList<String[]> chgLTable = db.getData(tableName);
         cngList = TableTools.getCngRows(listTable, chgLTable, true);//возвращаем массив строк в которые произошли изменения
         oldList = TableTools.getCngRows(listTable, chgLTable, false);
-        fm.ChangefFileWBase(globVar.desDir, cngList, oldList, tableName, jProgressBar1);//запускаем метод переименования
+        //fm.ChangefFileWBase(globVar.desDir, cngList, oldList, tableName, jProgressBar1);//запускаем метод переименования
         }else{
             JOptionPane.showMessageDialog(null,"В строках с индексами"+error+ " найдены ошибки.");
         }
-        
-       
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
