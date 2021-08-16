@@ -2325,17 +2325,13 @@ public class Generator {
             checkedNode = HMIcfg.getHeirNode(hmiNode);
         }
         
+        
+        
         for (Node ifNode : checkedNode) {
-            if (ifNode.getNodeName().equalsIgnoreCase("IF")) { // ищем нужные ноды с условиями
+            if (ifNode.getNodeName().equalsIgnoreCase("IF")) { 
                 String cond = HMIcfg.getDataAttr(ifNode, "cond");                                               // получим условия в каком столбце таблицы смотреть
                 String val = HMIcfg.getDataAttr(ifNode, "val");                                                 // получим условия какое значение клетки таблицы сравнивать
 
-//                if(val.equalsIgnoreCase("")){
-//                    System.out.println();
-//                }
-//                if(val.equalsIgnoreCase("not")){
-//                    System.out.println(val);
-//                }
                 if (val.equalsIgnoreCase((String) ft.getCell(cond, i)) || // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
                         compareStrTable(val, (String) ft.getCell(cond, i))) {                                   // или есть окончание то с ним
                     for (Node nD : HMIcfg.getHeirNode(ifNode)) {                                                // добавляем ноды которые прошли по условию IF
@@ -2348,19 +2344,21 @@ public class Generator {
                         }
                     }
                     return nodeProcessing;
-                } else { // ищем самый первый else этой ноды
-                    Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
-                    if (ELS != null) {
-                        for (Node nD : HMIcfg.getHeirNode(ELS)) {                                                // добавляем ноды которые прошли по условию IF
-                            //System.out.println(nD.getNodeName());
-                            if (!nD.getNodeName().equalsIgnoreCase("IF")) {
-                                nodeProcessing.add(nD);
-                                // или выполняем над ними действие (проверка на хинты доп аттрибуты и прочее)
-                            } else {
-                                processingIF(HMIcfg, ELS, ft, i, nodeProcessing);
+                } else {
+                    for (Node nodeElse : HMIcfg.getHeirNode(ifNode)) {
+
+                        if (nodeElse.getNodeName().equalsIgnoreCase("ELSE")) {
+                            for (Node nD : HMIcfg.getHeirNode(nodeElse)) {                                                    
+                                if (nD.getNodeName().equalsIgnoreCase("ELSE") || nD.getNodeName().equalsIgnoreCase("IF")) {
+                                    if (nD.getNodeName().equalsIgnoreCase("IF")) {
+                                        processingIF(HMIcfg, nD, ft, i, nodeProcessing);
+                                    }
+                                }else{
+                                    nodeProcessing.add(nD);
+                                }
                             }
+                            break;
                         }
-                        return nodeProcessing;
                     }
                 }
             }

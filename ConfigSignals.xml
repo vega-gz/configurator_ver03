@@ -1552,32 +1552,49 @@
 					<String>  <!--  пишем передачу входных сигналов I_ON,OFF -->
 						<IF cond="Конфигурация" val="*х1НЗ">
 							<IF cond="Структура" val= "">
-								<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>
-							<ELSE> 
-								<text t="I_OFF := "/><abonent/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>		
-							</ELSE>
+									<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>
+								<ELSE> 
+									<text t="I_OFF := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>		
+								</ELSE>
 							</IF>							
-							<ELSE> <IF cond="Конфигурация" val="*х1">
-								<text t="I_ON := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>
-									<ELSE> <IF cond="Конфигурация" val="*х2">
+						<ELSE> 
+							<IF cond="Конфигурация" val="*х1">
+								<IF cond="Структура" val= "">								
+									<text t="I_ON := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>
+								<ELSE> 
+									<text t="I_ON := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
+								</ELSE>
+								</IF>													
+							<ELSE> 
+								<IF cond="Конфигурация" val="*х2">
+									<IF cond="Структура" val= "">							
 										<text t="I_ON := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>
-									 	</IF>
+									<ELSE> 
+										<text t="I_ON := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
 									</ELSE>
-								</IF>	
+									</IF>																
+								</IF>
 							</ELSE>
+							</IF>	
+						</ELSE>
 						</IF>
 					</String>	
 					<String>					
 						<IF cond="Конфигурация" val="*х2">
-							<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>
-						</IF>					
+							<IF cond="Структура" val= "">						
+								<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>
+							<ELSE> 
+								<text t="I_OFF := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>									
+							</ELSE>
+							</IF>									
+						</IF>									
 					</String>					
 					<String>  <!--  пишем передачу КЦУ I_Con,Coff -->
 						<IF cond="Нестанд." val = "">
-							<IF cond="Конфигурация" val="1НЗх">
+							<IF cond="Конфигурация" val="1НЗх*">
 								<text t="I_Coff := true, //"/>
 								<ELSE> 
-									<IF cond="Конфигурация" val="1х*">
+									<IF cond="Конфигурация" val="2х*">
 										<text t="I_Con := true, //"/>
 										<ELSE> 
 											<text t="I_Con := true, //"/> <!--I_Coff := true)"/-->
@@ -1613,25 +1630,48 @@
 						</IF>						
 					</String>					
 					<String>  <!--  пишем передачу выходных сигналов Q_ON,OFF -->
-						<IF cond="Нестанд." val = "">												
-							<IF cond="Конфигурация" val="1х*">
-								<text t="Q_ON => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON)"/>
-							</IF>
-							<IF cond="Конфигурация" val="2х*">
-								<text t="Q_ON => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
-							</IF>								
-						<ELSE>
-							<IF cond="Нестанд." val = "not">	<!-- если в ячейке Нестанд. есть "not", то задается инверсия выхода -->
-								<IF cond="Конфигурация" val="1х*">	
-									<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>							
+						<IF cond="Нестанд." val = "">
+							<IF cond="Структура" val= "">							
+								<IF cond="Конфигурация" val="1х*">
+									<text t="Q_ON => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON)"/>
 								</IF>
 								<IF cond="Конфигурация" val="2х*">
-									<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>
+									<text t="Q_ON => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
 								</IF>
-								<IF cond="Конфигурация" val="1НЗх*">	
-									<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>							
+							<ELSE>
+								<IF cond="Конфигурация" val="1х*">
+									<text t="Q_ON => "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON)"/>
 								</IF>
-							<ELSE>			<!-- если в ячейке Нестанд. любое другое имя, то передаем выход в переменную с этим именем -->		
+								<IF cond="Конфигурация" val="2х*">
+									<text t="Q_ON => "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
+								</IF>
+							</ELSE>	
+							</IF>									
+						<ELSE>
+							<IF cond="Нестанд." val = "not">	<!-- если в ячейке Нестанд. есть "not", то задается инверсия выхода -->
+								<IF cond="Структура" val= "">								
+									<IF cond="Конфигурация" val="1х*">	
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>							
+									</IF>
+									<IF cond="Конфигурация" val="2х*">
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>
+									</IF>
+									<IF cond="Конфигурация" val="1НЗх*">	
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>							
+									</IF>
+								<ELSE>										
+									<IF cond="Конфигурация" val="1х*">	
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>							
+									</IF>
+									<IF cond="Конфигурация" val="2х*">
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>
+									</IF>
+									<IF cond="Конфигурация" val="1НЗх*">	
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>							
+									</IF>									
+								</ELSE>	
+								</IF>								
+							<ELSE>			<!-- если в ячейке Нестанд. любое другое имя, то передаем выход в переменную с этим именем -->							
 								<IF cond="Конфигурация" val="1х*">	
 									<dbd t="Нестанд."/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>							
 								</IF>
@@ -1640,22 +1680,36 @@
 								</IF>
 								<IF cond="Конфигурация" val="1НЗх*">	
 									<dbd t="Нестанд."/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>								
-								</IF>
-							</ELSE>									
+								</IF>									
+							</ELSE>
 							</IF>
 						</ELSE>							
 						</IF>
 					</String>	
 					<String> <!--  дописываем строку передачи выходных сигналов Q_OFF  для 2х-->
-						<IF cond="Нестанд." val = "">												
-							<IF cond="Конфигурация" val="2х*">
-								<text t="Q_OFF => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF)"/>		
+						<IF cond="Нестанд." val = "">	
+							<IF cond="Структура" val= "">							
+								<IF cond="Конфигурация" val="2х*">
+									<text t="Q_OFF => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF)"/>		
+								</IF>
+							<ELSE>
+								<IF cond="Конфигурация" val="2х*">
+									<text t="Q_OFF => "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF)"/>		
+								</IF>
+							</ELSE>
 							</IF>								
 						<ELSE>
 							<IF cond="Нестанд." val = "not">	<!-- если в ячейке Нестанд. есть "not", то задается инверсия выхода -->
-								<IF cond="Конфигурация" val="2х*">
-									<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>
-								</IF>
+								<IF cond="Структура" val= "">							
+									<IF cond="Конфигурация" val="2х*">
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>
+									</IF>
+								<ELSE>
+									<IF cond="Конфигурация" val="2х*">
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>
+									</IF>									
+								</ELSE>
+								</IF>										
 							<ELSE>	
 								<IF cond="Конфигурация" val="2х*">
 									<dbd t="Нестанд."/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>	
