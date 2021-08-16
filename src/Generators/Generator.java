@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -2316,27 +2317,34 @@ public class Generator {
 
     // --- разбор нод IF ELSE в xml  ---
     private static List<Node> processingIF(XMLSAX HMIcfg, Node hmiNode, TableDB ft, int i, List<Node> nodeProcessing) {
-        for (Node ifNode : HMIcfg.getHeirNode(hmiNode)) {
+        List<Node> checkedNode = new LinkedList<>();
+        
+        if (hmiNode.getNodeName().equalsIgnoreCase("IF")) { // сама ли переданная нода условие
+            checkedNode.add(hmiNode);
+        }else{
+            checkedNode = HMIcfg.getHeirNode(hmiNode);
+        }
+        
+        for (Node ifNode : checkedNode) {
             if (ifNode.getNodeName().equalsIgnoreCase("IF")) { // ищем нужные ноды с условиями
                 String cond = HMIcfg.getDataAttr(ifNode, "cond");                                               // получим условия в каком столбце таблицы смотреть
                 String val = HMIcfg.getDataAttr(ifNode, "val");                                                 // получим условия какое значение клетки таблицы сравнивать
-                //System.out.println(ft.getCell(cond, i));
+
+//                if(val.equalsIgnoreCase("")){
+//                    System.out.println();
+//                }
+//                if(val.equalsIgnoreCase("not")){
+//                    System.out.println(val);
+//                }
                 if (val.equalsIgnoreCase((String) ft.getCell(cond, i)) || // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
                         compareStrTable(val, (String) ft.getCell(cond, i))) {                                   // или есть окончание то с ним
                     for (Node nD : HMIcfg.getHeirNode(ifNode)) {                                                // добавляем ноды которые прошли по условию IF
                         if (nD.getNodeName().equalsIgnoreCase("ELSE") || nD.getNodeName().equalsIgnoreCase("IF")) {
-
+                            if (nD.getNodeName().equalsIgnoreCase("IF")) {
+                                processingIF(HMIcfg, nD, ft, i, nodeProcessing);
+                            }
                         } else {
-                            if (!nD.getNodeName().equalsIgnoreCase("ELSE")) {
-                                //System.out.println(nD.getNodeName().equalsIgnoreCase("ELSE"));
-
-                            }
-                            if (!nD.getNodeName().equalsIgnoreCase("IF")) {
-                                //System.out.println(nD.getNodeName().equalsIgnoreCase("IF"));
-
-                            }
                             nodeProcessing.add(nD);
-                            // или выполняем над ними действие (проверка на хинты доп аттрибуты и прочее)
                         }
                     }
                     return nodeProcessing;
@@ -2360,7 +2368,7 @@ public class Generator {
         return nodeProcessing;
     }
 
-    // --- регулярка разбора строки VAL условия IF-ELSE (проверка на окончание)---
+    // --- регулярка разбора строки VAL условия IF-ELSE (простое регулярное)---
     private static boolean compareStrTable(String str, String dataCell) {
         String splitterString = "*";
         if (str != null & !str.equals("")) {
