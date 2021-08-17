@@ -7,8 +7,13 @@ import Tools.StrTools;
 import Tools.Tools;
 import XMLTools.*;
 import globalData.globVar;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -1309,8 +1314,8 @@ public class Generator {
         String nameToblock = commonFileST;                                 // оригинальное название ноды сохраняем и его же и ищем потом
         // проверить modbus ли таблица
         ModBus modbusChecker = new ModBus(ft.tableName());
-        if(!modbusChecker.equals(StatusModBus.OK)){
-            nameToblock = "Call_" + modbusChecker.getModbusFile() + "_" + modbusChecker.getNodeTable(); // так формируем 
+        if(modbusChecker.equals(StatusModBus.OK)){
+            nameToblock = "Call_" + modbusChecker.getModbusFile() + "_" + modbusChecker.getNodeTable();
         }
         // разбор имени если есть точка в имени(нахождение расширения)
         String etxLUA = "lua";
@@ -1321,6 +1326,12 @@ public class Generator {
         boolean findNonFunction = false;
         String[] separNameF = stFileName.split("\\.");
         String ext = ""; // Для расширения на файле
+        String funcName = nameToblock;//abonent + "_"+ commonFileST; // Название ноды для поиска в другом файле
+        String funcUUID = null;
+        String funcResultTypeUUID = null;                                             // возвращаемое значение фуйкции
+        String functBlockUUID = null;
+        List<VariableFunctionBlock> variableFunctionBlock = null;
+        
         if (separNameF.length > 1) {                                         // если есть расширение то такой файл и будет, нет так txt
             ext = separNameF[separNameF.length - 1];                        // последнее разбитое это и будет окончание
             
@@ -1368,17 +1379,17 @@ public class Generator {
             }
         }
 
+        String typeVariableFunctionBlock = (String) globVar.sax.getDataNode(nodeGenCode).get("fbblock"); // Блок который ищем в traget для связки в Variables   
         String nameFunction = (String) globVar.sax.getDataNode(nodeGenCode).get("nonFunc"); //  название для головной ноды
         String algFile = (String) globVar.sax.getDataNode(nodeGenCode).get("target"); // часть названия целевого файла
         if (nameFunction != null) {
             findNonFunction = true;
+            variableFunctionBlock = new LinkedList<>();
         } else {
             nameFunction = "Function";
         }
 
-        String funcName = nameToblock;//abonent + "_"+ commonFileST; // Название ноды для поиска в другом файле
-        String funcUUID = null;
-        String funcResultTypeUUID = null;                                             // возвращаемое значение фуйкции
+        
         if (algFile != null) {
             if ("_".equals(algFile.substring(0, 1))) {
                 algFile = abonent + algFile;
@@ -1400,7 +1411,6 @@ public class Generator {
             }
 
             String[] myFunc = {nameFunction, "Name", funcName};
-            //String[] myFunc = {nameFunction, "Name", "Call_ANB"};
             Node func = algSax.findNodeAtribute(algRoot, myFunc);
             if (func != null) {
                 funcUUID = (String) algSax.getDataNode(func).get("UUID");
@@ -1409,23 +1419,34 @@ public class Generator {
             if (funcUUID == null) {
                 funcUUID = UUID.getUIID();
             }
+            
+            // так же УИДЫ фукционального блока 
+            String[] functBlockArr = {"FunctionBlock", "Name", typeVariableFunctionBlock};
+            Node functBlock = algSax.findNodeAtribute(algRoot, functBlockArr);
+            if (functBlock != null) {
+                functBlockUUID = (String) algSax.getDataNode(functBlock).get("UUID");
+            }
+            if (functBlockUUID == null) {
+                functBlockUUID = UUID.getUIID();
+            }
         } else {
-            funcUUID = UUID.getUIID();
+            functBlockUUID = UUID.getUIID();
         }
 
+        String headDataToFile = "";
         // это костыль для LUA файлов не вносим эту строку
-        if (findLUAext || findHTMLext){
-            //  знаю идиотия но работает
-        }
-        else{
+        if (!findLUAext || !findHTMLext) {
             if (findNonFunction) {
                 fm.wr("<Data>\n<" + nameFunction + " UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ShowVarTypes=\"true\">\n");
+                headDataToFile = "<Data>\n<" + nameFunction + " UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ShowVarTypes=\"true\">\n";
             } else {
                 //не найдена фукции и значения по умолчанию вроде для AI
                 if (funcUUID != null & funcResultTypeUUID != null) {
                     fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"" + funcResultTypeUUID + "\">\n");
+                    headDataToFile = "<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"" + funcResultTypeUUID + "\">\n";
                 } else {
                     fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
+                    headDataToFile = "<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n";
                 }
             }
         }
@@ -1486,11 +1507,8 @@ public class Generator {
             ArrayList<Node> blockCont = globVar.sax.getHeirNode(block);
             int tsz = ft.tableSize();
             String beforeValueGenString = null;
-            System.out.println(tsz);
+            
             for (int j = 0; j < tsz; j++) {                                         //по всем строкам таблицы
-//                if(j == 119){
-//                     System.out.println(tsz);
-//                }
                 if (jProgressBar != null && tsz != 0) {
                     jProgressBar.setValue((int) ((j + 1) * 100.0 / tsz));           //Прогресс генерации
                 }
@@ -1500,6 +1518,10 @@ public class Generator {
                 }
                 if (dt != null && isGenTyps != null && !isGenTyps.contains(dt)) {
                     continue;                                                       //если тип данных есть и есть список ненужных данных и данный тип в этом списке
+                }
+                if(findNonFunction){
+                    String nameSignal = ft.getCell("TAG_NAME_PLC", j); // 
+                    variableFunctionBlock.add(new VariableFunctionBlock(UUID.getUIID(), nameSignal, typeVariableFunctionBlock, functBlockUUID));
                 }
                 for ( int k=0; k < blockCont.size(); k++) { // проход по нодам тем же формированием строк
                     Node cont =  blockCont.get(k);
@@ -1544,7 +1566,7 @@ public class Generator {
 
             //пролистываем в исходном файле строки со старыми вызовами и пустые строки 
             while (!fm.EOF && !s.contains(end)) {
-                s = fm.rd();                                                        // читаем строки из tmp файла
+                s = fm.rd();                                                        
             }
             while (!fm.EOF) {                                                       //дописываем хвост файла
                 fm.wr(s + "\n");
@@ -1553,12 +1575,12 @@ public class Generator {
             fm.closeRdStream();                                                     //закрываем поток чтения
             fm.closeWrStream();                                                     //закрываем поток записи
 
-            File file = new File(srcFile);                                          //создаём ссылку на исходный файл(Зачем это делать еще и с разными ссылками ?) 
+            File file = new File(srcFile);                                          //создаём ссылку на исходный файл
             file.delete();                                                          //удаляем его
             new File(tmpFile).renameTo(file);                                       //создаём ссылку на сгенерированный файл и делаем его исходным
-
-//            fm.openFile4read(filePath, stFileName + ".txt");                      //открываем его на чтенье
-//            fm.createFile2write(filePath, stFileName + ".txt_tmp");               //открываем временный файл для генерации
+            
+            addVariableToGenerateFile(srcFile, variableFunctionBlock);              // занесение данных в Variables
+            
             fm.openFile4read(filePath, stFileName);                                 //открываем его на чтенье
             fm.createFile2write(filePath, stFileName + "_tmp");                     //открываем временный файл для генерации
         }
@@ -1568,6 +1590,46 @@ public class Generator {
         return 0;
     }
 
+    
+    private static void addVariableToGenerateFile(String nameFileAddVariables, List<VariableFunctionBlock> variableFunctionBlock ) {
+        /*
+         добавления сгенерированных переменных в блок Variables файлов
+         st
+         LUA
+         Html
+         */
+        if(variableFunctionBlock != null && variableFunctionBlock.size() > 0) {
+            String nameTmpFile = nameFileAddVariables + "_tmp";
+            File arigFile = new File(nameFileAddVariables);
+            File tmpFile = new File(nameTmpFile);
+            try {
+                FileWriter fooWriter = new FileWriter(tmpFile, true); // true to append
+                InputStreamReader inputsream = new InputStreamReader(new FileInputStream(nameFileAddVariables), "UTF8"); // Правильное отображение русскаого языка 
+                BufferedReader bufferedReader = new BufferedReader(inputsream);
+                String line = bufferedReader.readLine();
+                while (line != null) {
+                    fooWriter.write(line + "\n");
+                    //System.out.println(line);
+                    if (line.indexOf("<Variables>") > -1) {
+                        for (VariableFunctionBlock variable : variableFunctionBlock) {
+                            fooWriter.write(variable.getStringToFile() + "\n");
+                        }
+                    }
+                    line = bufferedReader.readLine();
+                }
+                bufferedReader.close();
+                fooWriter.close();
+
+                arigFile.delete();
+                tmpFile.renameTo(arigFile);
+            } catch (FileNotFoundException e) {
+                System.out.println("not add Variables. File not find " + nameFileAddVariables);
+            } catch (IOException e) {
+                System.out.println("not add Variables. Not Read File " + nameFileAddVariables);
+            }
+        }
+    }
+    
     // --- Создание строки из ноды ---
     static String createString(Node args, TableDB ft, String abonent, boolean disableReserve, int j) throws IOException {
         String tmp = "";

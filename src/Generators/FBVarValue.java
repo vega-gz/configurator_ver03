@@ -19,8 +19,7 @@ class FBVarValue {
     private String TypeUUID = "";
     private String Value = "";
     private String Variable = "";
-    private String Text = ""; // доп параметр для привязки  к значению
-    
+    private String Text = ""; // доп параметр для привязки  к значению    
 
     public FBVarValue(String Type, String TypeUUID, String Value, String Variable) {
         this.Type = Type;
@@ -56,7 +55,7 @@ class FBVarValue {
     public String getVariable() {
         return Variable;
     }
-
+    
     public void editType(String Type) {
         this.Type = Type;
     }
@@ -76,6 +75,8 @@ class FBVarValue {
     public void editText(String Text) {
         this.Text = Text;
     }
+    
+    
     // --- Подготовленные данные для занесения в ноду XML ---
     public String[] getToXML() {
         String[] strXml = {NameNode,

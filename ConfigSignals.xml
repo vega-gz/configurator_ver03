@@ -1528,7 +1528,7 @@
 				</Block>	
 			</File>
 			<!-- ........................................ Файл функции Call_IM ....................................... -->
-			<File src="Call_IM" target="_Algorithm">
+			<File src="Call_IM" target="_Algorithm" nonFunc="FunctionBlock" fbblock="FB_IM">
 				<Block start="Начало кода" end="Конец кода">
 					<String>
 						<text t=" // "/><dbd t="Наименование"/><text t=" ("/><dbd t="Конфигурация"/><text t=") -------------------------------------------------------------------------"/>	 
