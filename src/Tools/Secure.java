@@ -39,7 +39,7 @@ public static void main(String[] args) {
     //byte[] encodedKey = decoder.decodeBuffer(keyString);
     //Key key2 = new SecretKeySpec(encodedKey,0,encodedKey.length, "AES");  
     
-// Encrypt with key
+    // Encrypt with key
     String transformation = "AES/ECB/PKCS5Padding";
     Cipher cipher = Cipher.getInstance(transformation);
     cipher.init(Cipher.ENCRYPT_MODE, key);

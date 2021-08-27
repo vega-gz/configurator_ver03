@@ -67,7 +67,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem16.setEnabled(false);
         jMenuItem17.setEnabled(false);
         jMenu12.setEnabled(false);
-        jMenu13.setEnabled(false);
         listDropT = globVar.DB.getListTable(); // получи список таблиц при включении
         jComboBox1.setModel(getComboBoxModel()); // обновить сразу лист таблиц в выбранной базе
         DataBase.createAbonentTable();//
@@ -146,7 +145,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
@@ -155,6 +153,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem_AnotherBase = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
 
@@ -644,19 +643,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
-        jMenuItem_AnotherBase.setText("Перенос таблиц в другую базу");
-        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jMenuItem_AnotherBaseComponentAdded(evt);
-            }
-        });
-        jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_AnotherBaseActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem_AnotherBase);
-
         jMenu1.add(jMenu5);
 
         jMenuItem4.setText("Абоненты");
@@ -708,6 +694,19 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem9);
+
+        jMenuItem_AnotherBase.setText("Перенос таблиц в другую базу");
+        jMenuItem_AnotherBase.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jMenuItem_AnotherBaseComponentAdded(evt);
+            }
+        });
+        jMenuItem_AnotherBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_AnotherBaseActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem_AnotherBase);
 
         jMenu7.add(jMenu4);
 
@@ -981,7 +980,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
             return;
         }
         
-        SimpleFrame sf = new SimpleFrame("Abonents",jComboBox2);
+        AbonentFrame sf = new AbonentFrame("Abonents",jComboBox2);
         sf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         sf.setVisible(true);
         

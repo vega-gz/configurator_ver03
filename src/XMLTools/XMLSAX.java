@@ -475,8 +475,8 @@ public class XMLSAX {
                     Node node = nodeList.item(i);
                     if (Node.ELEMENT_NODE == node.getNodeType()) {
                         Element element = (org.w3c.dom.Element) node;
-                        pass = element.getElementsByTagName("PASS").item(0).getTextContent();
-                        user = element.getElementsByTagName("USER").item(0).getTextContent();
+                        pass = element.getElementsByTagName("PASSDB").item(0).getTextContent();
+                        user = element.getElementsByTagName("USERDB").item(0).getTextContent();
                         url = element.getElementsByTagName("URL").item(0).getTextContent();
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
@@ -494,10 +494,10 @@ public class XMLSAX {
                 globVar.dbURL = url; // добавить переменную пути проекта
             }
             if (pass != null) {
-                globVar.PASS = pass; // добавить переменную пути проекта
+                globVar.PASSDB = pass; // добавить переменную пути проекта
             }
             if (user != null) {
-                globVar.USER = user; // добавить переменную пути проекта
+                globVar.USERDB = user; // добавить переменную пути проекта
             }
             if (base != null) {
                 globVar.currentBase = base; // добавить переменную пути проекта

@@ -11,13 +11,13 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /*@author lev*/
-public class SimpleFrame extends javax.swing.JFrame {
+public class AbonentFrame extends javax.swing.JFrame {
 
     SimpleTable st;
     JComboBox jComboBox1;
     TableTools tt=new TableTools();
     
-    public SimpleFrame(String tableName,JComboBox jComboBox) {
+    public AbonentFrame(String tableName,JComboBox jComboBox) {
         jComboBox1=jComboBox;
         st = new SimpleTable(tableName, null, null);
         initComponents();
@@ -158,13 +158,13 @@ public class SimpleFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SimpleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbonentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SimpleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbonentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SimpleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbonentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SimpleFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbonentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

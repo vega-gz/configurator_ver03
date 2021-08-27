@@ -53,8 +53,8 @@ public class globVar {
         public static String currentBase = "";
 	public static DataBase DB = null;
         public static String dbURL = "";
-        public static String USER = "";
-        public static String PASS = "";
+        public static String USERDB = "";
+        public static String PASSDB = "";
         public static ArrayList<String> processReg = new ArrayList<>();
         
         // Переменные для отклика всех открытых окон в программе 

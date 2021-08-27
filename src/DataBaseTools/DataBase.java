@@ -43,7 +43,7 @@ public class DataBase {
 //    private static DataBase instance;
 
     public  DataBase() { // для синглтона в однопоточном варианте
-        connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USER, globVar.PASS); // И сразу подключаемся к базе
+        connectionToBase(globVar.dbURL, globVar.currentBase, globVar.USERDB, globVar.PASSDB); // И сразу подключаемся к базе
         
     }
     // подключение к иной базе(для сравнения и слияния)
@@ -94,14 +94,14 @@ public class DataBase {
     public String getCurrentNameBase(){
         return globVar.currentBase;
     }
-    // --- получить имя текущего пользователя ---
+    // --- получить имя текущего пользователя базы данных---
      public String getCurrentUser(){
-        return globVar.USER;
+        return globVar.USERDB;
     }
     
     // не правильно (так данные передавать это боль)
     private String[] getInfoCurrentConnect(){
-        String[] infoConnect = {globVar.dbURL,globVar.USER,globVar.PASS};
+        String[] infoConnect = {globVar.dbURL, globVar.USERDB, globVar.PASSDB};
         return infoConnect;
     }
     
@@ -139,6 +139,7 @@ public class DataBase {
         }
         return rCode;
     }
+    
     //-------------- Проверка наличия в БД таблицы с заданным именем -Lev----
     public boolean isTable(String name){
         ArrayList<String> list = getListTable();
@@ -958,8 +959,7 @@ public class DataBase {
     }
 
     
-    // --- получить уставки сигнала (недоделан)---
-    //public ArrayList<ArrayList<String>> getSetingsSignal(String abonent, String table, String signal ){
+    // --- получить уставки сигнала ( а нужен он вообще? )---
     public ArrayList<ArrayList<String>> getSetingsSignal(String[] rows ){
         /*
          1-й Лист возратит названия столбцов
@@ -978,15 +978,7 @@ public class DataBase {
             //String indexID = Integer.toString(getLastId(table_name) + 1);
             int indexID = getLastId(table_name) + 1;
             String[] data = columnsSeting.toArray(new String[columnsSeting.size()]); // тут с id возращает
-            //String[] rows = 
             insertRow(table_name, rows, data, indexID);
-            
-//            for (String[] arr : getData(table_name)) {
-//                for (int i = 0; i < arr.length; i++) {
-//                    System.out.print(arr[i] + " ");
-//                }
-//                System.out.println();
-//            }
         }
         return null;
     }
