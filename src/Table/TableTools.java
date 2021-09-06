@@ -4,6 +4,8 @@ import DataBaseTools.DataBase;
 import FrameCreate.SinglStrEdit;
 import ReadWriteExcel.ExcelAdapter;
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import Tools.MyTableModel;
 import Tools.RegistrationJFrame;
 import Tools.SaveFrameData;
@@ -1008,12 +1010,12 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     //-----возвращает список строк таблицы ,в которых были изменения
-
     public static ArrayList<String[]> getCngRows(ArrayList<String[]> listTable, ArrayList<String[]> chgLTable, Boolean bolean) {
+        LoggerInterface loggerFile = new LoggerFile();
         ArrayList<String[]> cngLine = new ArrayList<>();
         Boolean result;
         if (listTable.size() != chgLTable.size()) {
-            FileManager.loggerConstructor("Размеры таблиц не совпадают");
+            loggerFile.writeLog("Размеры таблиц не совпадают");
         }
         for (int i = 0; i < listTable.size(); i++) {
             result = Arrays.equals(listTable.get(i), chgLTable.get(i));

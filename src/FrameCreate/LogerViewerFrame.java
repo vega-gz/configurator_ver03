@@ -6,6 +6,8 @@
 package FrameCreate;
 
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import globalData.globVar;
 import static globalData.globVar.*;
 
@@ -32,7 +34,7 @@ import javax.swing.text.StyledDocument;
  * @author nazarov
  */
 public class LogerViewerFrame extends javax.swing.JFrame {
-
+    private final LoggerInterface loggerFile = new LoggerFile();
     /**
      * Creates new form LogerViewerFrame
      */
@@ -110,11 +112,8 @@ public class LogerViewerFrame extends javax.swing.JFrame {
         File logF = new File(nameF);
         if (logF.exists()) {
             logF.delete();
-            FileManager.loggerConstructor("Лог был очищен");
-        } else {
-            FileManager.loggerConstructor("Лог файла не было, был создан");
-        }
-
+        } 
+        loggerFile.writeLog("Лог был очищен");
         openLogFile();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -154,13 +153,12 @@ public class LogerViewerFrame extends javax.swing.JFrame {
     }
 
     // фукция открытия и разкрашивания текста
-    private void openLogFile() {
-
+    private void openLogFile() {         
         InputStreamReader inputsream = null;
         try {
             jTextPane1.setText("");  //
 
-//            // Цвет фона окнас логами(в графике менять надо так как конструктор)
+            // Цвет фона окнас логами(в графике менять надо так как конструктор)
             jTextPane1.setContentType("text/html"); // or any other styled content type
 
             jTextPane1.setForeground(Color.white); // Works as expected
@@ -180,71 +178,32 @@ public class LogerViewerFrame extends javax.swing.JFrame {
             jTextPane1.setBorder(BorderFactory.createLineBorder(backgroundColor, 2));
 
             StyledDocument doc = jTextPane1.getStyledDocument();
-            String fPath = logFile;
-            //проверка на файл
-            File logF = new File(logFile);
-            if (!logF.exists()) {
-                FileManager.loggerConstructor("Лог файла не было, был создан");
-            }
 
-            inputsream = new InputStreamReader(new FileInputStream(fPath), "UTF8");
-            BufferedReader bufReader = new BufferedReader(inputsream);
+            for (String strLog : loggerFile.readLog()) { // это просто понять что там выходит
+                String[] podstroki = strLog.split(" "); // Создаем подстроки уже табом.
+                for (String n : podstroki) {
+                    //тут пробуем добавлять текст цветом
+                    SimpleAttributeSet randomColor = new SimpleAttributeSet();
+                    StyleConstants.setForeground(randomColor, new Color(rnd(255), rnd(255), rnd(255)));
+                    SimpleAttributeSet defaultColor = new SimpleAttributeSet();
+                    StyleConstants.setForeground(defaultColor, Color.LIGHT_GRAY);
 
-            char[] buffer = new char[8096];
-            int numberOfCharsRead = bufReader.read(buffer); // read will be from
-            // memory
-            int tmpColor = 1;
-            while (numberOfCharsRead != -1) {
-                //System.out.println(tmpColor);
-                String strTmp = String.valueOf(buffer, 0, numberOfCharsRead);
-                String[] tmpSplitStr = strTmp.split("\n");
+                    StyleConstants.setBold(randomColor, true);
+                    StyleConstants.setBold(defaultColor, true);
 
-                //System.out.println(tmpSplitStr.length);
-
-                for (int i = 0; i < tmpSplitStr.length; ++i) { // это просто понять что там выходит
-                    //String[] podstroki = tmpSplitStr[i].split("\t"); // Создаем подстроки уже табом.
-                    String[] podstroki = tmpSplitStr[i].split(" "); // Создаем подстроки уже табом.
-                    for (String n : podstroki) {
-                        //System.out.println(n);
-                        //тут пробуем добавлять текст цветом
-                        SimpleAttributeSet randomColor = new SimpleAttributeSet();
-                        StyleConstants.setForeground(randomColor, new Color(rnd(255), rnd(255), rnd(255)));
-                        SimpleAttributeSet defaultColor = new SimpleAttributeSet();
-                        StyleConstants.setForeground(defaultColor, Color.LIGHT_GRAY);
-                        
-                        StyleConstants.setBold(randomColor, true);
-                        StyleConstants.setBold(defaultColor, true);
-
-                        // тут нужно сделать отдельную функцию для переборазначений и цветов под них пока так
-                        if (check(n)) { // передам в функцию для проверки пока одного значения
-                            doc.insertString(doc.getLength(), n + " ", randomColor);
-                        } else {
-                            doc.insertString(doc.getLength(), n + " ", defaultColor); // так вносим с определенным стилем
-                        }
-                        // doc.insertString(doc.getLength(), "\n ", null); // так просто новая строка
+                    // тут нужно сделать отдельную функцию для переборазначений и цветов под них пока так
+                    if (check(n)) { // передам в функцию для проверки пока одного значения
+                        doc.insertString(doc.getLength(), n + " ", randomColor);
+                    } else {
+                        doc.insertString(doc.getLength(), n + " ", defaultColor); // так вносим с определенным стилем
                     }
-                    doc.insertString(doc.getLength(), "\n ", null); // так просто новая строка
+                    // doc.insertString(doc.getLength(), "\n ", null); // так просто новая строка
                 }
-                numberOfCharsRead = inputsream.read(buffer);
-                jTextPane1.setStyledDocument(doc);  // тут мы апрсто засовываем сформированный документ
-                ++tmpColor;
-
+                doc.insertString(doc.getLength(), "\n ", null); // так просто новая строка
             }
-            bufReader.close();
-        } catch (UnsupportedEncodingException ex) {
+            jTextPane1.setStyledDocument(doc);  // тут мы апрсто засовываем сформированный документ
+            } catch (BadLocationException ex) {
             Logger.getLogger(LogerViewerFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(LogerViewerFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(LogerViewerFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BadLocationException ex) {
-            Logger.getLogger(LogerViewerFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                inputsream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(LogerViewerFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 

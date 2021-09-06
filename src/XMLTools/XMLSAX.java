@@ -30,6 +30,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import javax.swing.JOptionPane;
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import globalData.globVar;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -41,7 +43,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 
 public class XMLSAX {
-
+    LoggerInterface loggerFile = new LoggerFile();
     Document document = null; // Глобальный документ с которым работаем
     String pathWF = "";
     ReadBedXML fixXML = null; // объект реализации обхода неверно сформированного файл
@@ -139,7 +141,7 @@ public class XMLSAX {
         if (document != null) {// если документ зарегистрирован или внесен то
             return document.createElement(nameElement);
         } else {
-            FileManager.loggerConstructor(nameElement + "not created but XML document null!");
+            loggerFile.writeLog(nameElement + "not created but XML document null!");
             return null;
         }
     }
@@ -193,7 +195,7 @@ public class XMLSAX {
             root = document.createElement(nameElement);
             document.appendChild(root);
         } catch (ParserConfigurationException ex) {
-            FileManager.loggerConstructor(nameElement + "not created but XML document null!");
+            loggerFile.writeLog(nameElement + "not created but XML document null!");
         }
         return root;
     }
@@ -461,6 +463,8 @@ public class XMLSAX {
         File f = new File(patchFile);
         String pass = null;
         String user = null;
+        String LocalUSER = null;
+        String LocalPASS = null;
         String url = null;
         String base = null;
         String DesignDir = null;
@@ -477,6 +481,8 @@ public class XMLSAX {
                         Element element = (org.w3c.dom.Element) node;
                         pass = element.getElementsByTagName("PASSDB").item(0).getTextContent();
                         user = element.getElementsByTagName("USERDB").item(0).getTextContent();
+                        LocalUSER = element.getElementsByTagName("LocalUSER").item(0).getTextContent();
+                        LocalPASS = element.getElementsByTagName("LocalPASS").item(0).getTextContent();
                         url = element.getElementsByTagName("URL").item(0).getTextContent();
                         base = element.getElementsByTagName("BASE").item(0).getTextContent();
                         DesignDir = element.getElementsByTagName("DesignDir").item(0).getTextContent();
@@ -499,6 +505,14 @@ public class XMLSAX {
             if (user != null) {
                 globVar.USERDB = user; // добавить переменную пути проекта
             }
+            
+             if (LocalUSER != null) {
+                globVar.LocalUSER = LocalUSER; // добавить переменную пути проекта
+            }
+            if (LocalPASS != null) {
+                globVar.LocalPASS = user; // добавить переменную пути проекта
+            }
+            
             if (base != null) {
                 globVar.currentBase = base; // добавить переменную пути проекта
             }

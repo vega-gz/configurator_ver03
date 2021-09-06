@@ -446,8 +446,9 @@ public class addArchive extends javax.swing.JFrame {
                     //---------------------------- Опрределение файла ЧМИ --------------------------------
                     String hmiApp = globVar.DB.getDataCell("Abonents", "Abonent", abonent, "HMI");
                     //------------------------------------------------------------------------------------
+                    Generator generatorFileSonata = new Generator();
                     for(String exemplar: exArr){
-                        ret = Generator.genArchive(archTyps, archList, exemplar, jProgressBar1, hmiApp); // вызываем функцию генерации "Архивов"
+                        ret = generatorFileSonata.genArchive(archTyps, archList, exemplar, jProgressBar1, hmiApp); // вызываем функцию генерации "Архивов"
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(addArchive.class.getName()).log(Level.SEVERE, null, ex);

@@ -335,10 +335,12 @@ public class InspectionTablesFrame extends javax.swing.JFrame {
         setDataToFrame(); // перед этим дергаем базу нужно ли? 
         // обновляем данные в колонку 2
         listModelTwo.clear();
-        for (String s : mapData.get(nameMap)) {
-            listModelTwo.addElement(s);
+        if(mapData != null){
+            for (String s : mapData.get(nameMap)) {
+                listModelTwo.addElement(s);
+            }
+            jList2.setModel(listModelTwo);
         }
-        jList2.setModel(listModelTwo);
     }
 
 

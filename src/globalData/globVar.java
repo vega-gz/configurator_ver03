@@ -55,6 +55,8 @@ public class globVar {
         public static String dbURL = "";
         public static String USERDB = "";
         public static String PASSDB = "";
+        public static String LocalUSER = null;
+        public static String LocalPASS = null;
         public static ArrayList<String> processReg = new ArrayList<>();
         
         // Переменные для отклика всех открытых окон в программе 

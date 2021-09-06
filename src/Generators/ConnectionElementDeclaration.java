@@ -7,6 +7,8 @@
 package Generators;
 
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import XMLTools.UUID;
 import XMLTools.XMLSAX;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import org.w3c.dom.Node;
  * @author nazarov
  */
 public class ConnectionElementDeclaration  implements Connection {
-    
+    private LoggerInterface loggerFile = new LoggerFile();
     private static ConnectionElementDeclaration instance;
     ArrayList<ConnectionData> connectionsSigs = null;
     XMLSAX bigSax = null;
@@ -111,7 +113,7 @@ public class ConnectionElementDeclaration  implements Connection {
                         break;
                     }
                 } catch (NullPointerException e) {
-                    FileManager.loggerConstructor("не верно описан сигнал для добавления в ноде addVarDeclaration " + nAdd.getNodeName()
+                    loggerFile.writeLog("не верно описан сигнал для добавления в ноде addVarDeclaration " + nAdd.getNodeName()
                             + "формат должен быть пример: <VarDeclaration InitialValue=\"''\" Name=\"PrefAb\"/>");
                 }
             }

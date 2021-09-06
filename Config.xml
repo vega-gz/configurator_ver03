@@ -3,11 +3,13 @@
 <Settings>
 <USERDB>mutonar</USERDB>
 <PASSDB>Solovin2</PASSDB>
+<LocalUSER>user1</LocalUSER>
+<LocalPASS>pass1</LocalPASS>
 <URL1>jdbc:postgresql://minoro.ru:5432/</URL1>
 <URL2>jdbc:postgresql://127.0.0.1:5432/</URL2>
 <URL>jdbc:postgresql://172.16.35.50:5432/</URL>
-<BASE>test</BASE>
-<BASE1>test667</BASE1>
+<BASE>test667</BASE>
+<BASE1>test</BASE1>
 <BASE2>kln_aleksey_local</BASE2>
 <BASE3>kln_gpa</BASE3>
 <BASE9>kln_aleksey</BASE9>
@@ -16,9 +18,10 @@
 <BASE6>kln_gpa</BASE6>
 <BASE7>test_aleksey</BASE7>
 <BASE8>kln_kc</BASE8>
-<DesignDir>E:\tmp\Info_script_file_work\Project\Design@2021.05.11-(V199)</DesignDir>
+<DesignDir>E:\tmp\Info_script_file_work\Project\Design@21-09-01-(V234)</DesignDir>
 <nameProject>Калининград_цех</nameProject>
 <BASE10>test</BASE10>
 <BASE11>Gri_test_base</BASE11>
-</Settings>
+<BASE12>kln_kc</BASE12>
+  </Settings>
 </config>

@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 public class FrameTabel extends javax.swing.JPanel {
 
     String nameTable;
+    private Generator generatorFileSonata = new Generator();
     private ArrayList<String[]> dataFromDb; // данные из таблицы бызы на основе которых строим нашу
     ArrayList<ArrayList> listToTable = new ArrayList<>(); // Лист для передачи в таблицу
     String[] columnstoMass = null; // Массив столбцов для передачи в таблицу
@@ -209,7 +210,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         String retHMI = null;
         try {
-            retHMI = Generator.genHMI(null, false, null);
+            retHMI = generatorFileSonata.genHMI(null, false, null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -222,7 +223,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int ret = 1;
         try {
-            ret = Generator.genTypeFile(null,null);
+            ret = generatorFileSonata.genTypeFile(null,null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -259,7 +260,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int retHW = 0;
         try {
-            retHW = Generator.genHW(null,null);
+            retHW = generatorFileSonata.genHW(null,null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,7 +276,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int ret = 0;
         try {
-            ret= Generator.genSTcode(null, jCheckBox1.isSelected(),null);
+            ret = generatorFileSonata.genSTcode(null, jCheckBox1.isSelected(),null);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

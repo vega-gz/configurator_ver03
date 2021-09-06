@@ -1,24 +1,30 @@
 package FrameCreate;
 
-import Settings.CreateFTable;
 import DataBaseTools.DataBase;
 import DataBaseTools.MergeBases;
 import FrameCreate.*;
 import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
+import Settings.CreateFTable;
+import Table.TableTools;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
-import Table.TableTools;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import Tools.Tools;
 import XMLTools.XMLSAX;
 import globalData.globVar;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,14 +38,10 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import org.w3c.dom.Node;
-import java.awt.Desktop;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public final class Main_JPanel extends javax.swing.JFrame {
-
     String url, nameProject, user, pass;
-    
+    LoggerInterface loggerFile = new LoggerFile();
     ArrayList<String> listDropT;
     XMLSAX createXMLSax = new XMLSAX();
     TableTools tt=new TableTools();
@@ -76,7 +78,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         try {
             this.setIconImage(ImageIO.read(new File("icon.png"))); // иконка на панель и в угол
         } catch (IOException ex) {
-            FileManager.loggerConstructor("проблема с иконкой программы");
+            loggerFile.writeLog("проблема с иконкой программы");
         }
     }
 
@@ -463,7 +465,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.10.28");
+        jLabel9.setText("v.11.0");
 
         jLabel3.setText("Текущий абонент");
 
@@ -494,27 +496,27 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 557, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton6))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton7)
+                            .addComponent(jLabel3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -775,7 +777,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
         
         DoIt di = () -> {
             String ret = null;
-            ret = RWExcel.ReadExelFromConfig(pathFileExcell, null, null, pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
+            RWExcel readWriterWxcell = new RWExcel();
+            ret = readWriterWxcell.ReadExelFromConfig(pathFileExcell, null, null, pb.jProgressBar1); // вызов фукции с формированием базы по файлу конфигурации
             
             if (ret != null) {
                 JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
@@ -1205,6 +1208,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
             listarrayTable[l] = res;
             ++l;
         }
+        
+        Arrays.sort(listarrayTable);
+
+                
         return new DefaultComboBoxModel(listarrayTable);
     }
 

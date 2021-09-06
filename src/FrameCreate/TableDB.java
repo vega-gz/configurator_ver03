@@ -15,6 +15,8 @@ import Tools.MyTableModel;
 import Tools.RegistrationJFrame;
 import Tools.SaveFrameData;
 import Table.TableTools;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;
@@ -46,7 +48,8 @@ import javax.swing.table.DefaultTableModel;
 
 /*@author Lev*/
 public class TableDB extends javax.swing.JFrame {
-    
+    private LoggerInterface loggerFile = new LoggerFile();
+    private Generator generatorFileSonata = new Generator();
     TableTools tt = new TableTools();
     Main_JPanel mj = new Main_JPanel();
     FileManager fm = new FileManager();
@@ -705,9 +708,9 @@ public class TableDB extends javax.swing.JFrame {
             }
             int ret = 1;
             try {
-                ret = Generator.genTypeFile(TableDB.this, jProgressBar1);
+                ret = generatorFileSonata.genTypeFile(TableDB.this, jProgressBar1);
             } catch (IOException ex) {
-                FileManager.loggerConstructor(ex.toString());
+                loggerFile.writeLog(ex.toString());
             }
             if (ret == 0) {
                 JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
@@ -732,7 +735,7 @@ public class TableDB extends javax.swing.JFrame {
         DoIt di = () -> {
             int ret = 0;
             try {
-                ret = Generator.genSTcode(this, jCheckBox1.isSelected(), jProgressBar1);
+                ret = generatorFileSonata.genSTcode(this, jCheckBox1.isSelected(), jProgressBar1);
             } catch (IOException ex) {
                 // Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -762,7 +765,7 @@ public class TableDB extends javax.swing.JFrame {
         DoIt di = () -> {
             int retHW = 0;
             try {
-                retHW = Generator.genHW(this, jProgressBar1);
+                retHW = generatorFileSonata.genHW(this, jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -792,7 +795,7 @@ public class TableDB extends javax.swing.JFrame {
             }
             String retHMI = null;
             try {
-                retHMI = Generator.genHMI(this, jCheckBoxNotCreateEvent.isSelected(), jProgressBar1);
+                retHMI = generatorFileSonata.genHMI(this, jCheckBoxNotCreateEvent.isSelected(), jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -943,14 +946,14 @@ public class TableDB extends javax.swing.JFrame {
 
         DoIt di = () -> {
             String ret = null;
-
-            ret = RWExcel.ReadExcelSheet(pathFileExcell, sheetExcel, tableName); // вызов фукции с формированием базы по файлу конфигурации
+            RWExcel readWriterWxcell = new RWExcel();
+            ret = readWriterWxcell.ReadExcelSheet(pathFileExcell, sheetExcel, tableName); // вызов фукции с формированием базы по файлу конфигурации
 
             if (ret != null) {
                 JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
                 jTree1.setModel(getModelTreeNZ());// обновить дерево
             } else {
-                FileManager.loggerConstructor("Таблица в которую загружаем данные не совпадает с таблицей из которой грузим данные.");
+                loggerFile.writeLog("Таблица в которую загружаем данные не совпадает с таблицей из которой грузим данные.");
                 JOptionPane.showMessageDialog(null, "При загрузке были ошибки.Смотри лог-файл");
             }
             pb.setVisible(false);
@@ -1162,7 +1165,8 @@ public class TableDB extends javax.swing.JFrame {
         if (pathExel == null) {
             return null;
         }
-        ArrayList<String> abList = RWExcel.getListSheetName(pathExel);
+        RWExcel readWriterWxcell = new RWExcel();
+        ArrayList<String> abList = readWriterWxcell.getListSheetName(pathExel);
         abList.add(0, "");
         String[] itemList = abList.toArray(new String[abList.size()]); // преобразовали в массив
 

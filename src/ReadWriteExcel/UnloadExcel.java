@@ -8,6 +8,8 @@ package ReadWriteExcel;
 import DataBaseTools.DataBase;
 import Main.ProgressBar;
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import java.io.File;
 import org.apache.poi.ss.usermodel.Row;
 import globalData.globVar;
@@ -29,7 +31,7 @@ import org.w3c.dom.Node;
  * @author cherepanov
  */
 public final class UnloadExcel {
-
+    LoggerInterface loggerFile = new LoggerFile();
     /**
      * Создает объект книги с названием равным имени абонента,выбранного
      * пользователем
@@ -142,7 +144,7 @@ public final class UnloadExcel {
         rowNum++;
         ArrayList<String[]> data = globVar.DB.getData(nameTable, colNames);//вот эту строку нужно окружить try catch
         if (data.isEmpty()) {
-            FileManager.loggerConstructor("В базе отсутствует колонка,из которой мы пытаемся получить данные");
+            loggerFile.writeLog("В базе отсутствует колонка,из которой мы пытаемся получить данные");
         }
         for (String[] sData : data) {
             int j = 0;

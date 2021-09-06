@@ -7,6 +7,8 @@
 package Generators;
 
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import globalData.globVar;
 
 /**
@@ -17,6 +19,7 @@ import globalData.globVar;
  * 
  */
 public class ModBus {
+    private LoggerInterface loggerFile = new LoggerFile();
     private String subAb = null;
     private String isMb = null;
     private String abonent = null;
@@ -51,7 +54,7 @@ public class ModBus {
             if (validDataTable) {
                 statusElement = StatusModBus.OK;
             } else {
-                FileManager.loggerConstructor("Неправильный формат описания для драйвера в комментарии \"" + commentTable + "\" к таблице \"" + nameTable + "\"");
+                loggerFile.writeLog("Неправильный формат описания для драйвера в комментарии \"" + commentTable + "\" к таблице \"" + nameTable + "\"");
                 statusElement = StatusModBus.ERRORCOMMENTTABLE;
             }
         } else {

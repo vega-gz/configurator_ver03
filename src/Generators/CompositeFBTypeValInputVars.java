@@ -6,6 +6,8 @@
 package Generators;
 
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import XMLTools.XMLSAX;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +22,7 @@ import org.w3c.dom.Node;
  */
 // --- объект GraphicsCompositeFBType или CompositeFBType  ---
 public class CompositeFBTypeValInputVars implements FindCompositeFBType {
-
+    private LoggerInterface loggerFile = new LoggerFile();
     String nameNodeGetSignalConnection = null;
     XMLSAX bigSax = null;
     String uuidGCT; // УУИД головного объекта
@@ -129,7 +131,7 @@ public class CompositeFBTypeValInputVars implements FindCompositeFBType {
         if (nodeFBType != null) {
             return nodeFBType;
         } else {
-            FileManager.loggerConstructor("Не найден сигнал GraphicsCompositeFBType или CompositeFBType " + typeGCT + " в файле " + bigSax.getNameFile());
+            loggerFile.writeLog("Не найден сигнал GraphicsCompositeFBType или CompositeFBType " + typeGCT + " в файле " + bigSax.getNameFile());
             return null;
         }
     }

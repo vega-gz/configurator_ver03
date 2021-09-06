@@ -222,12 +222,13 @@ public class FileManager {
      *
      *
      */
-    public static void loggerConstructor(String s) {// throws FileNotFoundException {
+    public static void writeLogToFile(String s) {// throws FileNotFoundException {
         String nameF = globVar.logFile;
         File logF = new File(nameF);
         if (!logF.exists()) { // нет файла то создаем
             try {
                 logF.createNewFile();
+                writeLogToFile("Лог файла не было, был создан");
             } catch (IOException ex) {
                 System.out.println("Error create log file " + nameF);
             }

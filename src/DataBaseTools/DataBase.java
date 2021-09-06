@@ -1,6 +1,8 @@
 package DataBaseTools;
 
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import Tools.Observed;
 import Tools.Observer;
 import Tools.StrTools;
@@ -29,6 +31,7 @@ import javax.swing.DefaultComboBoxModel;
 public class DataBase {
     Statement stmt;
     Connection connection = null;
+    LoggerInterface loggerFile = new LoggerFile();
     
      // данные для таскбара
     int min;
@@ -78,7 +81,7 @@ public class DataBase {
             statusConnectDB = 0;
         } catch (SQLException e) {
             System.out.println("Connection Failed");
-            FileManager.loggerConstructor("Connection Failed base " + URL + DB);
+            loggerFile.writeLog("Connection Failed base " + URL + DB);
             //e.printStackTrace();
             statusConnectDB = -1;
         }
@@ -132,7 +135,7 @@ public class DataBase {
 
         } catch (SQLException e) {
             System.out.println("Failed CREATE BASE");
-            FileManager.loggerConstructor("Failed CREATE BASE sqlRequest- " + sql);
+            loggerFile.writeLog("Failed CREATE BASE sqlRequest- " + sql);
             e.printStackTrace();
             return rCode;
 
@@ -289,7 +292,7 @@ public class DataBase {
         if(name_table.isEmpty() || row.length == 0 || listNameColum.length == 0 || row.length != listNameColum.length){
             String strErr = "Количество данных и столбцов не совпадает " +  row.length + " | " + listNameColum.length;
             System.out.println(strErr);
-            FileManager.loggerConstructor(strErr);
+            loggerFile.writeLog(strErr);
             return;
         }
         String sql = null;
@@ -483,7 +486,7 @@ public class DataBase {
             rs.close();
             stmt.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("Failed select:" + sql);
+            loggerFile.writeLog("Failed select:" + sql);
             e.printStackTrace();
         }
         return selectData;
@@ -580,7 +583,7 @@ public class DataBase {
             stmt.close();
             rs.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
+            loggerFile.writeLog("error PSQL request " + sql);
             //e.printStackTrace();
         }
         return lisrSEQ;
@@ -611,7 +614,7 @@ public class DataBase {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL Update: " + sql);
+            loggerFile.writeLog("error PSQL Update: " + sql);
             e.printStackTrace();
         }
         return requestr;
@@ -737,7 +740,7 @@ public class DataBase {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
+            loggerFile.writeLog("error PSQL request " + sql);
             e.printStackTrace();
         }
     }
@@ -751,7 +754,7 @@ public class DataBase {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
+            loggerFile.writeLog("error PSQL request " + sql);
             e.printStackTrace();
         }
     }
@@ -774,7 +777,7 @@ public class DataBase {
             stmt.close();
             rs.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
+            loggerFile.writeLog("error PSQL request " + sql);
             return null;
         }
         return listComm;
@@ -793,7 +796,7 @@ public class DataBase {
             stmt.close();
             rs.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
+            loggerFile.writeLog("error PSQL request " + sql);
         }
         return comment;
     }
@@ -929,12 +932,12 @@ public class DataBase {
                 //System.out.println(resultT);
             }
             else{
-                FileManager.loggerConstructor("Don't get commit :  Enable #track_commit_timestamp = on	--> postgresql.conf");
+                loggerFile.writeLog("Don't get commit :  Enable #track_commit_timestamp = on	--> postgresql.conf");
             }
             stmt.close();
             rs.close();
         } catch (SQLException e) {
-            FileManager.loggerConstructor("Faled get commit data " + table);
+            loggerFile.writeLog("Faled get commit data " + table);
             //e.printStackTrace();
         }
         return resultT;
@@ -951,7 +954,7 @@ public class DataBase {
             stmt.close();
             status = 1;
         } catch (SQLException e) {
-            FileManager.loggerConstructor("error PSQL request " + sql);
+            loggerFile.writeLog("error PSQL request " + sql);
             status = -1;
         }finally {
             return status;

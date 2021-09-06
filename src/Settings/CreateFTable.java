@@ -10,6 +10,8 @@ import FrameCreate.Main_JPanel;
 import ReadWriteExcel.RWExcel;
 import Tools.FileManager;
 import Table.TableTools;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.File;
@@ -24,7 +26,7 @@ import org.w3c.dom.Node;
  * @author cherepanov
  */
 public class CreateFTable extends javax.swing.JFrame {
-
+    LoggerInterface loggerFile = new LoggerFile();
     TableTools tt = new TableTools();
     XMLSAX xmlsax = new XMLSAX();
     AddGenData agd = new AddGenData();
@@ -195,7 +197,7 @@ public class CreateFTable extends javax.swing.JFrame {
         }
         
         if (tableColumns == null) {
-            FileManager.loggerConstructor("Не нашел таблицу " + typeTable + " в EXCEL ");
+            loggerFile.writeLog("Не нашел таблицу " + typeTable + " в EXCEL ");
         }
         if (typeTable.equals("newTable")) {//если выбрали новую таблицу
             typeTable = jTextField2.getText();

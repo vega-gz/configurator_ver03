@@ -1,6 +1,8 @@
 package ReadWriteExcel;
 
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import XMLTools.XMLSAX;
 import globalData.globVar;
 import java.io.File;
@@ -25,8 +27,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Node;
 
 public class RWExcel {
-
-    int startReadData = 0;
+    private LoggerInterface loggerFile = new LoggerFile();
+    private int startReadData = 0;
     private String path_file;
 
     public RWExcel(String s) { // коструктор сразу с определяющим имя именем
@@ -253,7 +255,7 @@ public class RWExcel {
     }
 
     // --- Получить название листов с файла ---
-    public static ArrayList<String> getListSheetName(String pathExel) {
+    public ArrayList<String> getListSheetName(String pathExel) {
         ArrayList<String> listSheets = new ArrayList<>();
         Workbook wb = readDocument(pathExel);
             
@@ -265,14 +267,14 @@ public class RWExcel {
     }
     
     // --- прочитать файл ---
-    private static Workbook readDocument(String pathExel){
+    private Workbook readDocument(String pathExel){
         FileInputStream inputStream = null;
         ArrayList<String> listSheets = new ArrayList<>();
         Workbook wb = null;
         try {
             inputStream = new FileInputStream(new File(pathExel));
             if (inputStream == null) {
-                FileManager.loggerConstructor("Не удалось открыть файл " + pathExel);
+                loggerFile.writeLog("Не удалось открыть файл " + pathExel);
                 return null;
             }
             String execut = pathExel.substring(pathExel.lastIndexOf(".") + 1); // получить расширение файла
@@ -282,7 +284,7 @@ public class RWExcel {
                 wb = new HSSFWorkbook(inputStream);
             }   
             if (wb == null) {
-                FileManager.loggerConstructor("Файл " + pathExel + " повреждён или это не XLS");
+                loggerFile.writeLog("Файл " + pathExel + " повреждён или это не XLS");
                 return null;
             }
 
@@ -308,10 +310,10 @@ public class RWExcel {
      * @param jpb
      * @return
      */
-    public static String ReadExelFromConfig(String pathExel, String nameSheet, String toTableInsert,  JProgressBar jpb) {  // pathExel Временно так как мозгов не хватило ночью.                
+    public String ReadExelFromConfig(String pathExel, String nameSheet, String toTableInsert,  JProgressBar jpb) {  // pathExel Временно так как мозгов не хватило ночью.                
         Workbook wb = readDocument(pathExel);
         if (wb == null) {
-            FileManager.loggerConstructor("Файл " + pathExel + " повреждён или это не XLS");
+            loggerFile.writeLog("Файл " + pathExel + " повреждён или это не XLS");
             return null;
         }
 
@@ -328,7 +330,7 @@ public class RWExcel {
             qSheets = 1;
         }
 
-        FileManager.loggerConstructor("Заливаем в таблицы абонента " + globVar.abonent + " данные из книги " + pathExel);
+        loggerFile.writeLog("Заливаем в таблицы абонента " + globVar.abonent + " данные из книги " + pathExel);
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
         boolean isError = false;
         String tCnt = "";
@@ -391,7 +393,7 @@ public class RWExcel {
                                 starExcelString = -1;
                             }
                             if (starExcelString < 1 || starExcelString > 19) {
-                                FileManager.loggerConstructor("В настройке \"startStr\" ноды \"EXEL\" типа данных "
+                                loggerFile.writeLog("В настройке \"startStr\" ноды \"EXEL\" типа данных "
                                         + n.getNodeName() + " неправильное значение \"" + startStr + "\". Должно быть целое от 2 до 20.");
                                 isError = true;
                                 starExcelString = 1;
@@ -483,7 +485,7 @@ public class RWExcel {
                                             dataFromExcel[i][colCnt] = "" + (Math.round(x * 10000.0) / 10000.0);
                                         } else {
                                             dataFromExcel[i][colCnt] = "";
-                                            FileManager.loggerConstructor("Для ячейки " + colExName + i + " листа " + exSheetName + " не удалось посчитать значение");
+                                            loggerFile.writeLog("Для ячейки " + colExName + i + " листа " + exSheetName + " не удалось посчитать значение");
                                             isError = true;
                                         }
                                         //calcFormula(def,f1,f,colList, dataFromExcel, i);
@@ -496,7 +498,7 @@ public class RWExcel {
                                     }
                                 }
                                 if (def == null) {
-                                    FileManager.loggerConstructor("В ячейке " + colExName + i + " листа " + exSheetName + " должно быть значение");
+                                    loggerFile.writeLog("В ячейке " + colExName + i + " листа " + exSheetName + " должно быть значение");
                                     isError = true;
                                     dataFromExcel[i][colCnt] = "";
                                 }
@@ -513,7 +515,7 @@ public class RWExcel {
                                 if (unical != null) {
                                     for (int j = 0; j < i; j++) {
                                         if (strCell.equals(dataFromExcel[j][colCnt])) {
-                                            FileManager.loggerConstructor("Одинаковые значения \"" + strCell + "\" в ячейках " + colExName + (j + 1) + " и " + colExName + (i + 1) + " листа " + exSheetName);
+                                            loggerFile.writeLog("Одинаковые значения \"" + strCell + "\" в ячейках " + colExName + (j + 1) + " и " + colExName + (i + 1) + " листа " + exSheetName);
                                             isError = true;
                                         }
                                     }
@@ -528,14 +530,14 @@ public class RWExcel {
                                         try {
                                             strCell = "" + ((int) Double.parseDouble(strCell));
                                         } catch (NumberFormatException e) {
-                                            FileManager.loggerConstructor("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + exSheetName);
+                                            loggerFile.writeLog("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + exSheetName);
                                         }
                                     } else if ("Number".equals(type)) {
                                         try {
                                             Double tmp = Double.parseDouble(strCell);
                                             strCell = "" + (Math.round(tmp * 10000.0) / 10000.0);
                                         } catch (NumberFormatException e) {
-                                            FileManager.loggerConstructor("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + exSheetName);
+                                            loggerFile.writeLog("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + exSheetName);
                                         }
                                     }
                                 }
@@ -559,11 +561,11 @@ public class RWExcel {
         }
         return tCnt;
     }
-    public static String ReadExcelSheet(String pathExel, String nameSheet, String toTableInsert){//totableInsert это полное имя таблицы в которую грузим
+    public String ReadExcelSheet(String pathExel, String nameSheet, String toTableInsert){//totableInsert это полное имя таблицы в которую грузим
         XMLSAX sax=new XMLSAX();
          Workbook wb = readDocument(pathExel);
         if (wb == null) {
-            FileManager.loggerConstructor("Файл " + pathExel + " повреждён или это не XLS");
+            loggerFile.writeLog("Файл " + pathExel + " повреждён или это не XLS");
             return null;
         }
         String []listSheets = new String[]{nameSheet};//массив из выбранных листов(вообще мы выбираем один лист из EXCEL ,так что надо будет поменять,пока по старинке делаю)
@@ -607,7 +609,7 @@ public class RWExcel {
                                 starExcelString = -1;
                             }
                             if (starExcelString < 1 || starExcelString > 19) {
-                                FileManager.loggerConstructor("В настройке \"startStr\" ноды \"EXEL\" типа данных "
+                                loggerFile.writeLog("В настройке \"startStr\" ноды \"EXEL\" типа данных "
                                         + nSheet.getNodeName() + " неправильное значение \"" + startStr + "\". Должно быть целое от 2 до 20.");
                                 isError = true;
                                 starExcelString = 1;
@@ -699,7 +701,7 @@ public class RWExcel {
                                             dataFromExcel[i][colCnt] = "" + (Math.round(x * 10000.0) / 10000.0);
                                         } else {
                                             dataFromExcel[i][colCnt] = "";
-                                            FileManager.loggerConstructor("Для ячейки " + colExName + i + " листа " + nameSheet + " не удалось посчитать значение");
+                                            loggerFile.writeLog("Для ячейки " + colExName + i + " листа " + nameSheet + " не удалось посчитать значение");
                                             isError = true;
                                         }
                                         //calcFormula(def,f1,f,colList, dataFromExcel, i);
@@ -712,7 +714,7 @@ public class RWExcel {
                                     }
                                 }
                                 if (def == null) {
-                                    FileManager.loggerConstructor("В ячейке " + colExName + i + " листа " + nameSheet + " должно быть значение");
+                                    loggerFile.writeLog("В ячейке " + colExName + i + " листа " + nameSheet + " должно быть значение");
                                     isError = true;
                                     dataFromExcel[i][colCnt] = "";
                                 }
@@ -729,7 +731,7 @@ public class RWExcel {
                                 if (unical != null) {
                                     for (int j = 0; j < i; j++) {
                                         if (strCell.equals(dataFromExcel[j][colCnt])) {
-                                            FileManager.loggerConstructor("Одинаковые значения \"" + strCell + "\" в ячейках " + colExName + (j + 1) + " и " + colExName + (i + 1) + " листа " + nameSheet);
+                                            loggerFile.writeLog("Одинаковые значения \"" + strCell + "\" в ячейках " + colExName + (j + 1) + " и " + colExName + (i + 1) + " листа " + nameSheet);
                                             isError = true;
                                         }
                                     }
@@ -744,14 +746,14 @@ public class RWExcel {
                                         try {
                                             strCell = "" + ((int) Double.parseDouble(strCell));
                                         } catch (NumberFormatException e) {
-                                            FileManager.loggerConstructor("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + nameSheet);
+                                            loggerFile.writeLog("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + nameSheet);
                                         }
                                     } else if ("Number".equals(type)) {
                                         try {
                                             Double tmp = Double.parseDouble(strCell);
                                             strCell = "" + (Math.round(tmp * 10000.0) / 10000.0);
                                         } catch (NumberFormatException e) {
-                                            FileManager.loggerConstructor("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + nameSheet);
+                                            loggerFile.writeLog("Неправильное значение \"" + strCell + "\" в ячейке " + colExName + (i + 1) + " листа " + nameSheet);
                                         }
                                     }
                                 }

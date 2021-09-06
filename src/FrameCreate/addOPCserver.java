@@ -384,7 +384,8 @@ public class addOPCserver extends javax.swing.JFrame {
             return;
         }
         DoIt di = () -> {
-            int ret = Generator.genOPC((String)jComboBox4.getSelectedItem(), (String)jComboBox1.getSelectedItem(), 
+            Generator generatorFileSonata = new Generator();
+            int ret = generatorFileSonata.genOPC((String)jComboBox4.getSelectedItem(), (String)jComboBox1.getSelectedItem(), 
                                        (String)jComboBox2.getSelectedItem(), opcList, jProgressBar1);
             if(ret == 0) JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
             else JOptionPane.showMessageDialog(null, "Генерация завершена с ошибками");
