@@ -329,8 +329,7 @@ public class TableDB extends javax.swing.JFrame {
 
         });
 
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText("без резервов (Для ST)");
+        jCheckBox1.setText("без резервов");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
@@ -795,7 +794,7 @@ public class TableDB extends javax.swing.JFrame {
             }
             String retHMI = null;
             try {
-                retHMI = generatorFileSonata.genHMI(this, jCheckBoxNotCreateEvent.isSelected(), jProgressBar1);
+                retHMI = generatorFileSonata.genHMI(this, jCheckBox1.isSelected(), jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
