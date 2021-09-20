@@ -6,6 +6,7 @@
 
 package FrameCreate;
 
+import Tools.LoggerFile;
 import User.Users;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -22,19 +23,29 @@ public class UserFrame extends javax.swing.JFrame {
      */
     public UserFrame() {
         initComponents();
-        jComboBox1.setModel(getComboBoxModelAbonents());
+        ComboBoxModel listUserModel = getComboBoxModelAbonents();
+        if(listUserModel == null)
+        {
+            LoggerFile log = new LoggerFile();
+            log.writeLog("Error view local user. ");
+        }else
+        {
+            jComboBox1.setModel(listUserModel);
+        }
+        
     }
 
     public ComboBoxModel getComboBoxModelAbonents() { 
         Users userLocal = Users.getInstance();
-        
         List<String> userList = userLocal.getUserAccesToBase();
         String[] itemList = null;
+        
         if (userList != null) {
             itemList = userList.toArray(new String[userList.size()]);
         }else{
             return null;
         }
+        
         return new DefaultComboBoxModel(itemList);
     }
     /**

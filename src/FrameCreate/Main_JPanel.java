@@ -156,6 +156,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
 
@@ -712,6 +713,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenu7.add(jMenu4);
 
+        jMenuItem18.setText("Локальные пользователи");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem18);
+
         jMenuBar1.add(jMenu7);
 
         jMenu8.setText("Помощь");
@@ -903,8 +912,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private void jDialog1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDialog1KeyPressed
         System.out.println("Press button");
     }//GEN-LAST:event_jDialog1KeyPressed
+    
     // обработчик для всех текстовых полей окна Jdialog1 и кнопки
-
     private void jTextField_all_ActionPerformed(java.awt.event.ActionEvent evt) {
         String addresSecondDB = jTextField2.getText(); // адрес базы
         String DB = jTextField5.getText(); // имя базы
@@ -1175,6 +1184,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        UserFrame userframe = new UserFrame();
+        TableTools.setFrameListener(userframe, null, null, null); // слушателей фреймов
+        userframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        userframe.setVisible(true);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
     
     public ArrayList<String> getTableNode(){//метод получения нод для построения таблиц AI AO DI DO  и тд
         ArrayList<String> nodeTable=new ArrayList<>();
@@ -1336,6 +1352,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

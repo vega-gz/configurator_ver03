@@ -476,6 +476,7 @@ public class TableTools {//ссылка на таблицу, массив шир
         return 0;
     }
 
+    // надо бы этот функционал в отдельный интерфейс и он не только для таблиц :/
     static public void setFrameListener(JFrame frame, SaveFrameData sfd, isCange ich, closeJFrame cjf) {
         frame.addWindowListener(new WindowListener() {
 
