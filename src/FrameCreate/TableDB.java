@@ -794,7 +794,7 @@ public class TableDB extends javax.swing.JFrame {
             }
             String retHMI = null;
             try {
-                retHMI = generatorFileSonata.genHMI(this, jCheckBox1.isSelected(), jProgressBar1);
+                retHMI = generatorFileSonata.genHMI(this, jCheckBox1.isSelected(), jCheckBoxNotCreateEvent.isSelected(), jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }

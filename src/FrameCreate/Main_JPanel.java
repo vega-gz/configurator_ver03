@@ -111,6 +111,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jList2 = new javax.swing.JList();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
+        jDialog_AskedPassAdmin = new javax.swing.JDialog();
+        jTextFieldLoginAdminPanel = new javax.swing.JTextField();
+        jTextFieldjPassAdminPanel = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -156,6 +163,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem_AnotherBase = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -382,6 +390,74 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
         jMenu10.setText("jMenu10");
 
+        jTextFieldLoginAdminPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLoginAdminPanelActionPerformed(evt);
+            }
+        });
+
+        jTextFieldjPassAdminPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldjPassAdminPanelActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Вход");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Отмена");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("login");
+
+        jLabel11.setText("pass");
+
+        javax.swing.GroupLayout jDialog_AskedPassAdminLayout = new javax.swing.GroupLayout(jDialog_AskedPassAdmin.getContentPane());
+        jDialog_AskedPassAdmin.getContentPane().setLayout(jDialog_AskedPassAdminLayout);
+        jDialog_AskedPassAdminLayout.setHorizontalGroup(
+            jDialog_AskedPassAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_AskedPassAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_AskedPassAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldLoginAdminPanel)
+                    .addComponent(jTextFieldjPassAdminPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .addGroup(jDialog_AskedPassAdminLayout.createSequentialGroup()
+                        .addGroup(jDialog_AskedPassAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addGroup(jDialog_AskedPassAdminLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jDialog_AskedPassAdminLayout.setVerticalGroup(
+            jDialog_AskedPassAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_AskedPassAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldLoginAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldjPassAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialog_AskedPassAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(164, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -466,7 +542,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.11.1");
+        jLabel9.setText("v.11.2");
 
         jLabel3.setText("Текущий абонент");
 
@@ -710,6 +786,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem_AnotherBase);
+
+        jMenuItem19.setText("Администрироване базы данных");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem19);
 
         jMenu7.add(jMenu4);
 
@@ -1191,7 +1275,49 @@ public final class Main_JPanel extends javax.swing.JFrame {
         userframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         userframe.setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        //меню администрирования
+        jDialog_AskedPassAdmin.setSize(500, 200);
+        jDialog_AskedPassAdmin.setLocationRelativeTo(null); // по центру экрана
+        jDialog_AskedPassAdmin.setVisible(true);
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      // кнопка логина админской панели  
+        interAdminPanel();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldLoginAdminPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginAdminPanelActionPerformed
+        interAdminPanel();
+    }//GEN-LAST:event_jTextFieldLoginAdminPanelActionPerformed
+
+    private void jTextFieldjPassAdminPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldjPassAdminPanelActionPerformed
+        interAdminPanel();
+    }//GEN-LAST:event_jTextFieldjPassAdminPanelActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jDialog_AskedPassAdmin.setVisible(false);
+        jTextFieldLoginAdminPanel.setText(null);
+        jTextFieldjPassAdminPanel.setText(null);
+    }//GEN-LAST:event_jButton2ActionPerformed
     
+    private void interAdminPanel(){
+    // Вход в админскую панель
+        String getLoginPanel = jTextFieldLoginAdminPanel.getText();
+        String getPassPanel = jTextFieldjPassAdminPanel.getText();
+        if(getLoginPanel.equals("1") & getPassPanel.equals("1")){
+            jDialog_AskedPassAdmin.setVisible(false);
+            jTextFieldLoginAdminPanel.setText(null);
+            jTextFieldjPassAdminPanel.setText(null);
+            AdminFrame adminFrame = new AdminFrame();
+            adminFrame.setVisible(true);
+            TableTools.setFrameListener(adminFrame, null, null, null); // слушателей фреймов
+        }else{
+            JOptionPane.showMessageDialog(null, "Не верный логин или пароль."); //сообщение
+        }
+    
+    }
     public ArrayList<String> getTableNode(){//метод получения нод для построения таблиц AI AO DI DO  и тд
         ArrayList<String> nodeTable=new ArrayList<>();
         ArrayList<Node> nList = globVar.sax.getHeirNode(globVar.cfgRoot);
@@ -1305,8 +1431,10 @@ public final class Main_JPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10_CanceCreatelDB;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton2_CreateDB;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
@@ -1315,10 +1443,13 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog_AskedPassAdmin;
     private javax.swing.JDialog jDialog_ListBase;
     private javax.swing.JDialog jDialog_createBase;
     private javax.swing.JFrame jFrameTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1353,6 +1484,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1374,6 +1506,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextFieldLoginAdminPanel;
+    private javax.swing.JTextField jTextFieldjPassAdminPanel;
     private javax.swing.JTree jTree1;
     private java.awt.Label label1;
     private javax.swing.JMenuItem menuLoger;

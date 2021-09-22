@@ -986,6 +986,25 @@ public class DataBase {
         return null;
     }
     
+    
+    // --- Удаляем базу данных ---
+    public void dropBase(String base){
+          try {
+            connection.setAutoCommit(true);
+            changeBase("postgres");
+            stmt = connection.createStatement();
+            String sql = "DROP DATABASE " + base + ";";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            loggerFile.writeLog("DROPE Base " + base);
+
+        } catch (SQLException e) {
+             loggerFile.writeLog("Failed DROPE Base");
+            e.printStackTrace();
+        }
+    }
+    
+    
     public static void main(String[] arg){
 //        XMLSAX.getConnectBaseConfig("Config.xml");
 //        DataBase db = new DataBase();

@@ -6,17 +6,30 @@
 
 package FrameCreate;
 
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
+import javax.swing.JOptionPane;
+import globalData.globVar;
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author nazarov
  */
 public class AdminFrame extends javax.swing.JFrame {
 
+    private String currenChecktDB;
+    LoggerInterface loggerFile = new LoggerFile();
     /**
      * Creates new form AdminFrame
      */
     public AdminFrame() {
         initComponents();
+        loggerFile.writeLog("Enter Admin Panel");
+        jComboBox1.setModel(getComboBoxModelListDb()); // обовить список таблиц
     }
 
     /**
@@ -33,14 +46,24 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Админская панель");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Существующие базы");
 
         jButton1.setText("Удалить базу");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,6 +110,39 @@ public class AdminFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int casedial = JOptionPane.showConfirmDialog(null, "Удалить базу " + currenChecktDB + "?"); // сообщение с выбором
+        int confirmDelBase = 0;
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        currenChecktDB = (String)jComboBox1.getSelectedItem();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private ComboBoxModel getComboBoxModelListDb() { 
+        ArrayList<String> listBase = globVar.DB.getListBase();
+        String[] listarrayTable = listBase.toArray(new String[listBase.size()]); 
+        return new DefaultComboBoxModel(listarrayTable);
+    }
+    
+    private void deletingBase(int casedial){
+    switch (casedial) {
+            case 0:
+                globVar.DB.dropBase(currenChecktDB); // удалить базу
+                jComboBox1.setModel(getComboBoxModelListDb()); // обовить список таблиц
+                break;
+            case 1:
+                System.out.println(casedial);
+                break;
+            case 2:
+                System.out.println(casedial);
+                break;
+            default:
+                System.out.println(casedial);
+                break;
+        }
+    }
     /**
      * @param args the command line arguments
      */

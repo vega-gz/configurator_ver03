@@ -375,7 +375,7 @@ public class Generator {
     }
 
     // --- Генерация файлов HMI ---
-    public String genHMI(TableDB ft, boolean ignoreEvent, JProgressBar jProgressBar) throws IOException {
+    public String genHMI(TableDB ft,boolean ignoreReserv, boolean ignoreEvent, JProgressBar jProgressBar) throws IOException {
         /*
         ignoreEvent -- игнорировать события по резервам
         */
@@ -632,8 +632,16 @@ public class Generator {
                     continue;
                 }
                 
-                if(ignoreEvent & ft.getCell(globVar.TAGPLC, i).indexOf("Res_") >= 0){
-                 continue;
+                // Услловие Игнорирования Reserv (резервных каналов)
+                if (ignoreEvent &
+                        whoTypeFBType.equalsIgnoreCase("GraphicsCompositeFBType") == false & 
+                        ft.getCell(globVar.TAGPLC, i).indexOf("Res_") >= 0) {
+                    continue;
+                }
+                if(ignoreReserv &
+                        whoTypeFBType.equalsIgnoreCase("GraphicsCompositeFBType") &
+                        ft.getCell(globVar.TAGPLC, i).indexOf("Res_") >= 0){
+                    continue;
                 }
 
                 ArrayList<String> removedVar = new ArrayList<>();
