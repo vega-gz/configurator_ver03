@@ -1614,7 +1614,7 @@ public class Generator {
             File tmpFile = new File(nameTmpFile);
             try {
                 FileWriter fooWriter = new FileWriter(tmpFile, true); // true to append
-                InputStreamReader inputsream = new InputStreamReader(new FileInputStream(nameFileAddVariables), "UTF8"); // Правильное отображение русскаого языка 
+                InputStreamReader inputsream = new InputStreamReader(new FileInputStream(nameFileAddVariables), "UTF8"); // Правильное отображение русского языка 
                 BufferedReader bufferedReader = new BufferedReader(inputsream);
                 String line = bufferedReader.readLine();
                 while (line != null) {
@@ -1842,6 +1842,7 @@ public class Generator {
         if (opcList == null || opcList.isEmpty()) {
             return 0;
         }
+        
         String appPathName = globVar.desDir + File.separator + "Design" + File.separator + serverName;
         XMLSAX opcSax = new XMLSAX();
         if (opcSax.readDocument(appPathName + ".opcuaServer") == null) { //Функция копирования не нашла исходного файла
@@ -1871,10 +1872,12 @@ public class Generator {
         } catch (IOException ex) {
             Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
         }
+        String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI(); //  ууиды PV T_CalcPar T_AI_ToHMI
         int jpgMax = opcList.size();
         int jpbCnt = 1;
         int ret = 0;
         int cnt = 1;
+        
         for (String[] sig : opcList) {
             if (jProgressBar != null) {
                 jProgressBar.setValue((int) ((jpbCnt++) * 100.0 / jpgMax));
@@ -1924,8 +1927,13 @@ public class Generator {
                                     commSig = comment + "." + commSig;
                                 }
                                 if (!isStdType(typeSig)) {
+                                    if (sig[0].contains("CalcPar")) {
+                                        uuidSig += "." + asdad[0];
+                                    } else {
+                                        uuidSig += "." + asdad[1];
+                                    }
                                     nameSig += ".PV";
-                                    uuidSig += ".19F27C8242D7A36082010591B7CF4F94";
+                                    //uuidSig += ".19F27C8242D7A36082010591B7CF4F94";
                                     typeSig = "REAL";
                                 }
                                 insertInOPC(nameSig, sig[1], id, idType, uuidSig, commSig, opcSax, fm, typeSig, cnt++);
@@ -2073,9 +2081,7 @@ public class Generator {
         int colorMax = colorList.size() - 1;
         for (int iStruct = 0; iStruct < archList.size(); iStruct++) {
 
-            String[] sig = archList.get(iStruct);
-            System.out.println(iStruct); // Для дебага подсчет
-            System.out.println(sig[0]); // Для дебага подсчет
+            String[] sig = archList.get(iStruct);            
 
             if (jProgressBar != null) {
                 jProgressBar.setValue((int) ((jpbCnt++) * 100.0 / jpgMax));
@@ -2100,8 +2106,7 @@ public class Generator {
             } // просто отработка поиска ошибок
             
             //  ууиды PV T_CalcPar T_AI_ToHMI
-            String[] arrayS1 = {"T_CalcPar.type", "T_AI_ToHMI.type"};
-            String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI(arrayS1);
+            String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI();
 
             if (z < 0) {
                 structArr.add("");
@@ -2179,7 +2184,10 @@ public class Generator {
                                     for (Object key : trendAttr.keySet()) {
                                         hmiSax.setDataAttr(newTrend, (String) key, (String) trendAttr.get(key));
                                     }
+                                }else{
+                                   System.out.println("Finding Signal Res= " + nameSig);
                                 }
+                                System.out.println("Final Signal = " + nameSig);
                             }
                             if (ret == 0) {
                                 insertVarInPrj(intSax, interfaceList, sig0, type, "", true, true, uuid, appPathName + ".int", "");
@@ -2250,7 +2258,8 @@ public class Generator {
     }
 
     // --- получить UUID PV из файлов ---
-    private String[] GetUuid_PV_T_CalcPar_T_AI_ToHMI(String[] fileReadPV ){
+    private String[] GetUuid_PV_T_CalcPar_T_AI_ToHMI( ){
+        String[] fileReadPV = {"T_CalcPar.type", "T_AI_ToHMI.type"};
         String[] returnUUID = new String[fileReadPV.length];
         XMLSAX CalcParOrAI_ToHMI = new XMLSAX();
         for (int i = 0; i < fileReadPV.length; i++) {
