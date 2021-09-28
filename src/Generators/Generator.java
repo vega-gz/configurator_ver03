@@ -1657,6 +1657,7 @@ public class Generator {
         for (Node arg : arglist) {                                        //Цикл по всем аргументам функции
             tmp += getPartText(arg, abonent, ft, j);
         }   //Цикл по всем частям аргументов - текстовым и табличным
+        
         String disable = "";
         if (disableReserve && ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
             disable = "//";
@@ -1698,7 +1699,8 @@ public class Generator {
         if (disableReserve && ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
             disable = "//";
         }
-        fm.wr("//" + (String) ft.getCell("Наименование", j) + "\n" + disable + stFunc + "(" + tmp.substring(1) + ");\n");
+        fm.wr("//" + (String) ft.getCell("Наименование", j) + "\tid=" + j + "\n"
+                + disable + stFunc + "(" + tmp.substring(1) + ");\n");
         return 0;
     }
 
