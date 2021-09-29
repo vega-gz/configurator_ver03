@@ -1545,12 +1545,16 @@ public class Generator {
                             if(beforeValueGenString != null){ // записываем предыдущий
                                 if(findHTMLext){
                                     int indeChar = beforeValueGenString.lastIndexOf(';');
-                                    beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
-                                    fm.wr(beforeValueGenString);
-                                    if(k >= blockCont.size() -1 & j >= tsz - 1) { // до присвоения не дойдет так как тут может быть не одно значение для 1 значения из таблица сигнала
-                                        indeChar = addStr.lastIndexOf(';');
-                                        addStr = addStr.substring(0, indeChar) + addStr.substring(indeChar + 1); // обрубаем строку 
-                                        fm.wr(addStr);
+                                    if(indeChar >= 0){
+                                        beforeValueGenString = beforeValueGenString.substring(0, indeChar) + beforeValueGenString.substring(indeChar + 1); // обрубаем строку 
+                                        fm.wr(beforeValueGenString);
+                                        if (k >= blockCont.size() - 1 & j >= tsz - 1) { // до присвоения не дойдет так как тут может быть не одно значение для 1 значения из таблица сигнала
+                                            indeChar = addStr.lastIndexOf(';');
+                                            addStr = addStr.substring(0, indeChar) + addStr.substring(indeChar + 1); // обрубаем строку 
+                                            fm.wr(addStr);
+                                        }
+                                    }else{
+                                        fm.wr(beforeValueGenString);
                                     }
                                 }else{
                                     fm.wr(beforeValueGenString);
@@ -1666,7 +1670,7 @@ public class Generator {
             return null;               // нечего не нашли (нет записи в файл)
         }
 
-        return disable + tmp + ";\n";
+        return disable + tmp + "\n";
     }
 
     // --- обработчик ноды "Function"  ---
@@ -1699,7 +1703,7 @@ public class Generator {
         if (disableReserve && ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
             disable = "//";
         }
-        fm.wr("//" + (String) ft.getCell("Наименование", j) + "\tid=" + j + "\n"
+        fm.wr("//" + (j + 1) + ":" + (String) ft.getCell("Наименование", j) + "\n"
                 + disable + stFunc + "(" + tmp.substring(1) + ");\n");
         return 0;
     }
@@ -2053,6 +2057,9 @@ public class Generator {
         String trendSheetName = abonent + "_Trend";
         //trendNode = hmiSax.findNodeAtribute(new String[]{"WindowFBType","Name",trendSheetName});
         String trendSheetUUID = hmiSax.getDataAttr(hmiSax.findNodeAtribute(new String[]{"WindowFBType", "Name", trendSheetName}), "UUID");
+        if(trendSheetUUID == null){
+            trendSheetUUID = hmiSax.getDataAttr(hmiSax.findNodeAtribute(new String[]{"GraphicsCompositeFBType", "Name", trendSheetName}), "UUID");
+        } 
 
         hmiSax.clear();
 
