@@ -305,6 +305,9 @@ public class SinglStrEdit  extends javax.swing.JFrame{
 //        st.saveTableInDB(); // тут тоже вываливается из таблицы APS
         SaveTable save = (SaveTable) modelBase;
         save.saveTable();
+        modelBase = new ConfigSignalsTableModel(title);
+        jTable1.setModel(modelBase);
+        modelBase.fireTableDataChanged();
     }                                       
  
     public void updateRelatedTable(){

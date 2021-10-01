@@ -962,29 +962,29 @@ public class DataBase {
     }
 
     
-    // --- получить уставки сигнала ( а нужен он вообще? )---
-    public ArrayList<ArrayList<String>> getSetingsSignal(String[] rows ){
-        /*
-         1-й Лист возратит названия столбцов
-         */
-        String table_name = "SignalSetups";
-        ArrayList<String> columnSeting = getListColumns(table_name);
-        String sql = null;
-        String[] columnT = globVar.columnT;
-        String commentT = "setups signals";
-        
-        if(getListTable().indexOf(table_name) < 0){
-            createTableEasy(table_name, columnT, commentT);
-        } else{
-            System.out.println("Table " + table_name + " is present in DB!");
-            ArrayList<String> columnsSeting = getListColumns(table_name);
-            //String indexID = Integer.toString(getLastId(table_name) + 1);
-            int indexID = getLastId(table_name) + 1;
-            String[] data = columnsSeting.toArray(new String[columnsSeting.size()]); // тут с id возращает
-            insertRow(table_name, rows, data, indexID);
-        }
-        return null;
-    }
+//    // --- получить уставки сигнала ( а нужен он вообще? )---
+//    public ArrayList<ArrayList<String>> getSetingsSignal(String[] rows ){
+//        /*
+//         1-й Лист возратит названия столбцов
+//         */
+//        String table_name = "SignalSetups";
+//        ArrayList<String> columnSeting = getListColumns(table_name);
+//        String sql = null;
+//        String[] columnT = globVar.columnT;
+//        String commentT = "setups signals";
+//        
+//        if(getListTable().indexOf(table_name) < 0){
+//            createTableEasy(table_name, columnT, commentT);
+//        } else{
+//            System.out.println("Table " + table_name + " is present in DB!");
+//            ArrayList<String> columnsSeting = getListColumns(table_name);
+//            //String indexID = Integer.toString(getLastId(table_name) + 1);
+//            int indexID = getLastId(table_name) + 1;
+//            String[] data = columnsSeting.toArray(new String[columnsSeting.size()]); // тут с id возращает
+//            insertRow(table_name, rows, data, indexID);
+//        }
+//        return null;
+//    }
     
     
     // --- Удаляем базу данных ---

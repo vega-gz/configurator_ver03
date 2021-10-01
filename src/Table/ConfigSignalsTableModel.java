@@ -50,15 +50,13 @@ public class ConfigSignalsTableModel extends DefaultTableModel implements SaveTa
         for (int i = 0; i < ColumnTM; ++i) { 
             DataRow[i] = (String) rowData.get(i); // Формируем список данных принудительно в String
         }
-        String idColumn = this.getColumnName(0);
-        if(idColumn != null && idColumn.equalsIgnoreCase("ID")){
-            ConfigSig editSeting = dataSetings.getSetingByIdLocal(row + 1);
+        
+        ConfigSig editSeting = getConfigSigFromTable(row);
+        if (editSeting != null) {
             editSeting.setData(DataRow);
             ConfigSig editSetingAfterEdit = dataSetings.getSetingByIdLocal(row + 1);
             System.out.println(editSetingAfterEdit.getData());
         }
-        
-                 
     }
     
     @Override
@@ -77,10 +75,23 @@ public class ConfigSignalsTableModel extends DefaultTableModel implements SaveTa
     public void removeRow(int row) {
         dataVector.removeElementAt(row);
         fireTableRowsDeleted(row, row);
+        ConfigSig editSeting = getConfigSigFromTable(row);
+        if (editSeting != null) {
+            dataSetings.removeRowToData(editSeting);
+        }
     }
 
     @Override
     public void saveTable() {
         dataSetings.SaveData();
+    }
+    
+    private ConfigSig getConfigSigFromTable(int row){
+        ConfigSig editSeting = null;
+        String idColumn = this.getColumnName(0);
+        if (idColumn != null && idColumn.equalsIgnoreCase("ID")) {
+            editSeting = dataSetings.getSetingByIdLocal(row + 1);
+        }
+        return editSeting;
     }
 }

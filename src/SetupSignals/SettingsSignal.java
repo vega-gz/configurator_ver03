@@ -85,11 +85,14 @@ public class SettingsSignal implements SetupsDataToTables{
     public void removeRowToData(Object row) {
         ConfigSig currentRow = (ConfigSig) row;
         switch(currentRow.getStatus()){
-            case NEWSIGNAL: listSettings.remove(row);
-                break;
             case FROMBASE: 
             {
                 currentRow.setStatus(StatusSeting.DELBASE);
+                break;
+            }
+            default:
+            {
+                listSettings.remove(row);
                 break;
             }
         }        

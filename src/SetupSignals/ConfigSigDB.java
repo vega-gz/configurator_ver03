@@ -17,7 +17,9 @@ import java.util.ArrayList;
  */
 public class ConfigSigDB implements ConfigSigStorageInterface {
     private DataBase db = globVar.DB;
-    private String nameTableSetups = globVar.nameTableSetups;
+    private String nameTableSetups = "SignalSetups";
+    private String[] columnTableDefault = {"id", "Abonent", "NameTableFromSignal", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"}; // Набор столбцов для базы таблицы
+    private String commentT = "setups signals";
     private String nameSig = null;
     private String nameColumn1 = "Abonent";
     private String nameColumn2 = "NameSig";
@@ -25,13 +27,16 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     
     public ConfigSigDB(String nameSig){
         this.nameSig = nameSig;
+        if (db.getListTable().indexOf(nameTableSetups) < 0) {
+            db.createTableEasy(nameTableSetups, columnTableDefault, commentT);
+        }
         ArrayList<String> columnSetingList = db.getListColumns(nameTableSetups);
         columnSetingArr = columnSetingList.toArray(new String[columnSetingList.size()]);
     }
 
     @Override
-    public ArrayList<ConfigSig> get() {
-        //db.getListTable().equals(globVar.abonent + "_" + nameTableSetups);
+    public ArrayList<ConfigSig> get() {        
+        
         ArrayList<ConfigSig> savedConfigsSignal = new ArrayList<>();
         ArrayList<String[]> dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}, {nameColumn2, nameSig}}); // поиск данных с выборкой
         for (int i = 0; i < dataSettingDB.size(); i++)
@@ -39,7 +44,7 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
             String[] arr = dataSettingDB.get(i);
             ConfigSig config = new AnalogSetup();
             config.setData(arr);
-            config.setLocalId(i + 1); // с еденицы
+            config.setLocalId(i + 1); // с единицы
             config.setStatus(ConfigSig.StatusSeting.FROMBASE); // установить статус
             savedConfigsSignal.add(config);
         }
@@ -73,6 +78,7 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
         s.setId(newIdSetting);
         db.insertRow(nameTableSetups, s.getData(), columnSetingArr, null);
+        s.setStatus(ConfigSig.StatusSeting.FROMBASE);
     }
 
     @Override

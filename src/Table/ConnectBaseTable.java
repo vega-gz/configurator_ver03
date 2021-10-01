@@ -54,6 +54,7 @@ public class ConnectBaseTable extends DefaultTableModel {
     @Override
     public void insertRow(int row,Object aValue[]){
         super.insertRow(row, aValue);
-        workbase.getSetingsSignal((String[])aValue); // Вызов недоделанного метода? 
+        //workbase.getSetingsSignal((String[])aValue); // Вызов недоделанного метода? 
+        System.out.println("Debug 01102021");
     }
 }

@@ -6,6 +6,8 @@
 
 package Table;
 
+import SetupSignals.ConfigSigDB;
+import SetupSignals.ConfigSigStorageInterface;
 import globalData.globVar;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
     private ArrayList<String[]> list_cell = new ArrayList<>();
     ArrayList<JComponent> listJComponentToPopmenu = new ArrayList<>();
     private JTable jTable;
+    ConfigSigStorageInterface сonfigSig = new ConfigSigDB(null); // Просто что бы достать названия колонок
 
     public PopUpMenuJtableSetupsSignal() {        
         popupMenu = new JPopupMenu();
@@ -101,17 +104,18 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
             for (int i = 0; i < tmpArr.length; i++) {
                 tmpArr[i] = "";
             }
-            for (int i = 0; i < jTable.getColumnCount(); i++) {
-                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[0])){
+            String[] columnT = сonfigSig.getNameColumnSetings();
+            for (int i = 0; i < jTable.getColumnCount(); i++) { // авто заполнение данными при созданиии строки
+                if(jTable.getColumnName(i).equalsIgnoreCase(columnT[0])){
                     
                 }
-                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[1])){
+                if(jTable.getColumnName(i).equalsIgnoreCase(columnT[1])){
                     tmpArr[i] = globVar.abonent;
                 }
-                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[2])){
+                if(jTable.getColumnName(i).equalsIgnoreCase(columnT[2])){
                     tmpArr[i] = globVar.nameTableSignal;
                 }
-                if(jTable.getColumnName(i).equalsIgnoreCase(globVar.columnT[5])){
+                if(jTable.getColumnName(i).equalsIgnoreCase(columnT[5])){
                    tmpArr[i] = globVar.currentSetupsSignal;
                 }
             }
