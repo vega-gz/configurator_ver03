@@ -7,6 +7,10 @@ import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
 import Settings.CreateFTable;
+import SetupSignals.ConfigSig;
+import SetupSignals.ConfigSigDB;
+import SetupSignals.ConfigSigExcell;
+import SetupSignals.ConfigSigStorageInterface;
 import Table.TableTools;
 import Tools.BackgroundThread;
 import Tools.DoIt;
@@ -26,6 +30,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -65,7 +70,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     public void initMyComponent() {
         jTextField1.setText(" " + globVar.desDir);
-        jMenuItem15.setEnabled(false);
         jMenuItem16.setEnabled(false);
         jMenuItem17.setEnabled(false);
         jMenu12.setEnabled(false);
@@ -144,8 +148,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuLoger = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -516,12 +520,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 303, Short.MAX_VALUE))
         );
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "item1", "item2", "item3", "item4" }));
@@ -542,7 +545,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.11.8");
+        jLabel9.setText("v.12.0");
 
         jLabel3.setText("Текущий абонент");
 
@@ -613,7 +616,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     .addComponent(jButton6))
                 .addGap(29, 29, 29)
                 .addComponent(jLabel9)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jMenuBar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -674,19 +677,19 @@ public final class Main_JPanel extends javax.swing.JFrame {
         });
         jMenu3.add(menuLoger);
 
+        jMenuItem20.setText("Загрузка уставок из Excel файла");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem20);
+
         jMenu2.add(jMenu3);
 
         jMenuBar1.add(jMenu2);
 
         jMenu11.setText("Опции");
-
-        jMenuItem15.setText("Изменить комментарий к таблице");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu11.add(jMenuItem15);
 
         jMenuItem16.setText("Замена имен в файлах через базу данных");
         jMenu11.add(jMenuItem16);
@@ -825,18 +828,20 @@ public final class Main_JPanel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1265,10 +1270,6 @@ public final class Main_JPanel extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
-
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         UserFrame userframe = new UserFrame();
         TableTools.setFrameListener(userframe, null, null, null); // слушателей фреймов
@@ -1285,15 +1286,15 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       // кнопка логина админской панели  
-        interAdminPanel();
+        getAdminPanel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextFieldLoginAdminPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginAdminPanelActionPerformed
-        interAdminPanel();
+        getAdminPanel();
     }//GEN-LAST:event_jTextFieldLoginAdminPanelActionPerformed
 
     private void jTextFieldjPassAdminPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldjPassAdminPanelActionPerformed
-        interAdminPanel();
+        getAdminPanel();
     }//GEN-LAST:event_jTextFieldjPassAdminPanelActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1301,12 +1302,40 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jTextFieldLoginAdminPanel.setText(null);
         jTextFieldjPassAdminPanel.setText(null);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        /*пункт меню загрузки данных для уставок из Excel*/
+        File excel = FileManager.getChoiserExcelFile(); //  Отдельный метод выбора Excel файла
+        if (excel == null) return;
+        
+        DoIt di = () -> {
+            
+            ConfigSigStorageInterface configSigStorageExcell = new ConfigSigExcell(excel.getPath());
+            ArrayList<ConfigSig> configsSignal = configSigStorageExcell.getSignals();
+            
+            if (configsSignal != null) {
+                ConfigSigStorageInterface configSigStorageInterface = new ConfigSigDB();
+                for(ConfigSig configSignal: configsSignal){
+                    configSigStorageInterface.addSignal(configSignal);
+                }
+               
+            } else {
+                ConfigSigExcell configSigExcell = (ConfigSigExcell)configSigStorageExcell;
+                JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'\n"
+                        + " проверте именование столбцов загрузки\n"
+                        + configSigExcell.getNameColumnSetings().toString());
+            }
+        };
+        BackgroundThread bt = new BackgroundThread("Execude settings to signals", di);
+        bt.start();
+        
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
     
-    private void interAdminPanel(){
+    private void getAdminPanel(){
     // Вход в админскую панель
         String getLoginPanel = jTextFieldLoginAdminPanel.getText();
         String getPassPanel = jTextFieldjPassAdminPanel.getText();
-        if(getLoginPanel.equals("1") & getPassPanel.equals("1")){
+        if(getLoginPanel.equals("1") & getPassPanel.equals("1")){ // пасс 1 1 
             jDialog_AskedPassAdmin.setVisible(false);
             jTextFieldLoginAdminPanel.setText(null);
             jTextFieldjPassAdminPanel.setText(null);
@@ -1480,12 +1509,12 @@ public final class Main_JPanel extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

@@ -23,19 +23,24 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     private String nameSig = null;
     private String nameColumn1 = "Abonent";
     private String nameColumn2 = "NameSig";
-    private String[] columnSetingArr = null;
+    
+    public ConfigSigDB(){
+       checktableSeting();
+    }
     
     public ConfigSigDB(String nameSig){
         this.nameSig = nameSig;
+        checktableSeting();
+    }
+    
+    private void checktableSeting(){
         if (db.getListTable().indexOf(nameTableSetups) < 0) {
             db.createTableEasy(nameTableSetups, columnTableDefault, commentT);
-        }
-        ArrayList<String> columnSetingList = db.getListColumns(nameTableSetups);
-        columnSetingArr = columnSetingList.toArray(new String[columnSetingList.size()]);
+        }      
     }
 
     @Override
-    public ArrayList<ConfigSig> get() {        
+    public ArrayList<ConfigSig> getSignals() {        
         
         ArrayList<ConfigSig> savedConfigsSignal = new ArrayList<>();
         ArrayList<String[]> dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}, {nameColumn2, nameSig}}); // поиск данных с выборкой
@@ -77,13 +82,13 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         */        
         String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
         s.setId(newIdSetting);
-        db.insertRow(nameTableSetups, s.getData(), columnSetingArr, null);
+        db.insertRow(nameTableSetups, s.getData(), columnTableDefault, null);
         s.setStatus(ConfigSig.StatusSeting.FROMBASE);
     }
 
     @Override
     public String[] getNameColumnSetings() {
-        return columnSetingArr;
+        return columnTableDefault;
     }
     
 }

@@ -38,10 +38,18 @@ public abstract class ConfigSig {
     }
     
     public void setData(String[] newData){
-//        for (int i = 0; i < newData.length; i++) {
-//            if(i > data.length - 1) break;  // на всякий если что то не то попало
-//            data[i] = newData[i];
-//        }
+    /*
+        0 - id
+        1 - abonent
+        2 - nameTableFromSignal
+        3 - NameSeting
+        4 - Type
+        5 - NameSignalSeting
+        6 - Direction
+        7 - Delay
+        8 - LostSignal
+        9 - Value
+    */
         data = newData;
         if(id == null ){
             id = data[0];

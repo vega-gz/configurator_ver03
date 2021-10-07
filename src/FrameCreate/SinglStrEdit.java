@@ -110,12 +110,12 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         save.addActionListener((java.awt.event.ActionEvent evt) -> { saveActionPerformed(evt); });
         
         this.title = title;
-        int x = title.indexOf("_");
+       /* int x = title.indexOf("_");
         String abonent = title.substring(0,x);
         x = title.indexOf("_mb_");
         if(x<0) x = title.lastIndexOf("_");
         String nodeName = title.substring(x+1);
-        
+       */ 
         // Уставки из отдельной таблицы
         modelBase = new ConfigSignalsTableModel(title);
         jTable1 = new JTable(modelBase);
@@ -268,11 +268,17 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         }else curr = j;
         number.setText(""+(curr+1));
         if(title!=null) this.setTitle(title + ": "+(curr+1));
-        for(int i=1; i<qCols; i++){
+        for(int i=1; i < qCols; i++){
             field[i].setText((String) tableModel.getValueAt(curr, i));
         }
-        String namePLC = (String) tableModel.getValueAt(curr, 2);
-        //if(st!=null) st.reSetTableContent(namePLC);//"TAG_NAME_AnPar",
+        int numberColumnPLC  = 0;
+        for(int i = 0; i < tableModel.getColumnCount(); ++i){
+            if(tableModel.getColumnName(i).indexOf(globVar.namecolumnT[1]) > -1){
+                numberColumnPLC = i;
+                break;
+            }
+        }
+        String namePLC = (String) tableModel.getValueAt(curr, numberColumnPLC);
         
         // обновить данные в таблице уставок
         modelBase = new ConfigSignalsTableModel(namePLC);
@@ -311,9 +317,7 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     }                                       
  
     public void updateRelatedTable(){
-        ArrayList<String[]> fromDB;
-        fromDB = globVar.DB.getData(relatedTable);
-        
+        ArrayList<String[]>  fromDB = globVar.DB.getData(relatedTable);        
     }
     
 }

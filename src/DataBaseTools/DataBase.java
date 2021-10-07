@@ -21,10 +21,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
@@ -567,6 +570,24 @@ public class DataBase {
         }
         return listBase;
     }
+    
+    public LinkedList<String> getListTableAbonent(String abonent) {
+        LinkedList<String> listTableAbonent = null;
+        for (String nameTable : getListTable()) {
+            Pattern pattern1 = Pattern.compile("^" + abonent + "(.*)$");
+            Matcher matcher1 = pattern1.matcher(nameTable);
+
+            if (matcher1.matches()) {
+                if (listTableAbonent == null) {
+                    listTableAbonent = new LinkedList<>();
+                }
+                listTableAbonent.add(nameTable);
+            }
+        }
+
+        return listTableAbonent;
+    }
+
     // --- получить список из базы SEQUENCE ---
     private ArrayList<String> getListSequnce(){
         String sql = null;    

@@ -25,7 +25,7 @@ public class SettingsSignal implements SetupsDataToTables{
     {
         this.nameSig = nameSig;
         containSetting = new ConfigSigDB(nameSig);
-        listSettings = containSetting.get(); 
+        listSettings = containSetting.getSignals(); 
     }
 
     private int getNextFreeID(){
@@ -108,6 +108,10 @@ public class SettingsSignal implements SetupsDataToTables{
                         break;
                     case FROMBASE: {
                         containSetting.editSignal(c);
+                        break;
+                    }
+                    case DELBASE: {
+                        containSetting.removeByIDSignal(c);
                         break;
                     }
                 }

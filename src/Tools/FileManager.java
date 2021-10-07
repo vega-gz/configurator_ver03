@@ -914,7 +914,7 @@ public class FileManager {
     JFileChooser fileopen = new JFileChooser(globVar.desDir);
         fileopen.setFileFilter(new FileFilter() { // фильтр файлов
             public String getDescription() {
-                return "Excel (*.xls *.xlsx)";
+                return "Excel (*.xls *.xlsx *.xlsm)";
             }
             //@Override
             public boolean accept(File f) {

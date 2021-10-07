@@ -917,7 +917,7 @@ public class TableDB extends javax.swing.JFrame {
         DoIt di = () -> {
             String ret = null;
             RWExcel readWriterWxcell = new RWExcel();
-            ret = readWriterWxcell.ReadExcelSheet(pathFileExcell, sheetExcel, tableName); // вызов фукции с формированием базы по файлу конфигурации
+            ret = readWriterWxcell.ReadExcelSheetAndInsertTobase(pathFileExcell, sheetExcel, tableName); // вызов фукции с формированием базы по файлу конфигурации
 
             if (ret != null) {
                 JOptionPane.showMessageDialog(null, "В базу загружены следующие таблицы:" + ret);
