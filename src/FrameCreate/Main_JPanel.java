@@ -545,7 +545,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.12.0");
+        jLabel9.setText("v.12.3");
 
         jLabel3.setText("Текущий абонент");
 
@@ -1442,7 +1442,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         return new DefaultTreeModel(root, true);
     }
     // --- метод отображения фрейма таблицы ---
-    public void showTable(String table) {
+    protected void showTable(String table) {
         if (!Tools.isDB()) {//проверка ,есть ли подключение к базе
             return;
         }

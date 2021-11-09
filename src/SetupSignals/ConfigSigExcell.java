@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
  */
 public class ConfigSigExcell implements ConfigSigStorageInterface{
     private String nameFileByData = null;
-    private String[] legacyByTable = {"AI_ToHMI", "CalcPar", "_mb_"};
     private LinkedList<String> ListTableAbonent = null;
     private String[] nameColumnsInFile = {
         "Наименование уставки",
@@ -152,17 +151,18 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
     private  String getCommonPartNameTable(String identificator){
         /*
         Род сигнала:
-        И	AI_ToHMI
+        И	_AI
         Р	CalcPar
         С	_mb_
         */
         String partTable = null;
         switch(identificator){
             case "И":
-                partTable = "AI_ToHMI";
+                //partTable = "AI_ToHMI";
+                partTable = globVar.abonent + "_AI";
                 break;
             case "Р":
-                partTable = "CalcPar";
+                partTable = "_CalcPar";
                 break;
             case "С":
                 partTable = "_mb_";

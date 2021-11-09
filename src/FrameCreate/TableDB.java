@@ -1,22 +1,23 @@
 package FrameCreate;
 
 import DataBaseTools.DataBase;
-import Generators.Generator;
 import static FrameCreate.Main_JPanel.getModelTreeNZ;
+import Generators.Generator;
 import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
 import Settings.AddGenData;
 import Settings.AddSensor;
+import SetupSignals.SettingsSignal;
+import Table.TableTools;
 import Tools.BackgroundThread;
 import Tools.DoIt;
 import Tools.FileManager;
+import Tools.LoggerFile;
+import Tools.LoggerInterface;
 import Tools.MyTableModel;
 import Tools.RegistrationJFrame;
 import Tools.SaveFrameData;
-import Table.TableTools;
-import Tools.LoggerFile;
-import Tools.LoggerInterface;
 import Tools.Tools;
 import Tools.closeJFrame;
 import Tools.isCange;
@@ -40,6 +41,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -50,25 +53,25 @@ import javax.swing.table.DefaultTableModel;
 public class TableDB extends javax.swing.JFrame {
     private LoggerInterface loggerFile = new LoggerFile();
     private Generator generatorFileSonata = new Generator();
-    TableTools tt = new TableTools();
-    Main_JPanel mj = new Main_JPanel();
-    FileManager fm = new FileManager();
-    DataBase db = new DataBase();
-    ArrayList<String[]> newName = new ArrayList<>();
-    public MyTableModel tableModel = new MyTableModel();
-    JPopupMenu popupMenu = new JPopupMenu();
-    public boolean isChang = false;
-    String tableName;
+    private TableTools tt = new TableTools();
+    private Main_JPanel mj = new Main_JPanel();
+    private FileManager fm = new FileManager();
+    private DataBase db = new DataBase();
+    private ArrayList<String[]> newName = new ArrayList<>();
+    private MyTableModel tableModel = new MyTableModel();
+    private JPopupMenu popupMenu = new JPopupMenu();
+    private  boolean isChang = false;
+    private String tableName;
     public int tableSize;
-    String[] cols;
-    String comment;
-    ArrayList<String[]> listTable;
-    ArrayList<String[]> fromDB;
-    ArrayList<String[]> listItemList = new ArrayList<>();
-    ArrayList<String[]> cngList = new ArrayList<>();//массив строк с изменениями
-    ArrayList<String[]> oldList = new ArrayList<>();//массив строк без изменений
-    public int[] colsWidth;
-    int[] align;
+    protected  String[] cols;
+    private String comment;
+    private ArrayList<String[]> listTable;
+    private ArrayList<String[]> fromDB;
+    private ArrayList<String[]> listItemList = new ArrayList<>();
+    private ArrayList<String[]> cngList = new ArrayList<>();//массив строк с изменениями
+    private ArrayList<String[]> oldList = new ArrayList<>();//массив строк без изменений
+    protected int[] colsWidth; // почему это и что ниже одинаковые переменные присваиваются
+    protected int[] align;
     int qCol;
     ArrayList<JFrame> listJF = new ArrayList();
     javax.swing.JTree jTree1;
@@ -79,38 +82,86 @@ public class TableDB extends javax.swing.JFrame {
     String sheetExcel = null;                                  // выбранный лист из Excel
     List<String> listNewColumn = new ArrayList<>();             // новые колонки при добавление в таблицу
 
-    public TableDB(javax.swing.JTree jTree, String table) {
-        jTree1 = jTree;
-        tableName = table;
-        if (!globVar.DB.isConnectOK()) {
-            return;
+    public TableDB() {
+    }
+    public TableDB(String table) {
+       initialUserConfig(table);
+    }
+        public TableDB(JTree jTree, String table) {
+       setJTree(jTree);
+       initialUserConfig(table);
+    }
+    
+    protected void initialUserConfig(String tableName) { // правильный модификатор но все равно будет видится в этом пакете
+        this.tableName = tableName;
+        this.setTitle(tableName + ": " + comment);
+
+        if (setDate(tableName)) {
+
+            TableTools.setWidthCols(cols, tableModel, colsWidth, 7.8);
+            
+
+            initComponents();
+
+            jTable1.setName(tableName); // имя таблицы через него и передаю имена
+            
+            configTable(tableName);
+            
+            hideUIElements(tableName);
         }
-        List<String> listColumn = globVar.DB.getListColumns(table);
+    }
+
+    protected boolean setDate(String nameTable){
+        /*
+        инициализация данных выборкой из базы данных
+        */
+        if (!globVar.DB.isConnectOK()) {
+            return false;
+        }
+        List<String> listColumn = globVar.DB.getListColumns(nameTable);
         listTable = db.getData(tableName);
         if (listColumn == null || listColumn.isEmpty()) {
-            return;
+            return false;
         }
         cols = listColumn.toArray(new String[listColumn.size()]);
         tableModel.setColumnIdentifiers(cols);
-        
-
-        fromDB = globVar.DB.getData(table);
+        fromDB = globVar.DB.getData(nameTable);
         fromDB.forEach((rowData) -> tableModel.addRow(rowData));
-        comment = globVar.DB.getCommentTable(table);
+        comment = globVar.DB.getCommentTable(nameTable);
         tableSize = fromDB.size();
         qCol = listColumn.size();
         align = new int[qCol];
         colsWidth = new int[qCol];
-
-        TableTools.setWidthCols(cols, tableModel, colsWidth, 7.8);
         if (tableSize > 0) {
             TableTools.setAlignCols(fromDB.get(0), align);
         }
+        return true;
+    }
+    
+    private void hideUIElements(String nameTable) {
+        // скрыть галку от названия таблицы
+        if (nameTable.indexOf("AI") > 0 | nameTable.indexOf("AO") > 0
+                | nameTable.indexOf("DI") > 0 | nameTable.indexOf("DO") > 0) {
 
-        initComponents();
-
-        jTable1.setName(table); // имя таблицы через него и передаю имена
-        
+        } else {
+            jCheckBoxNotCreateEvent.hide();
+        }
+        // скрыть Мемню уставок
+        if (nameTable.indexOf("DI") > -1 | nameTable.indexOf("DO") > -1) {
+            jMenuItem15_Setings.hide();
+        }
+        // пункт меня уставок
+        if (nameTable.indexOf("Setting") > -1) {
+            jMenu2.hide();
+            jMenu3.hide();
+            jMenuItem15_Setings.hide();
+            jButton2.hide();
+            jButton3.hide();
+            jButton6.hide();
+        }
+    }
+    
+    protected void configTable(String tableName) { // весь этот блок по сути должен быть для базы(все должно быть как )
         RegistrationJFrame rgf = (JFrame jf) -> {
             listJF.add(jf);
         };
@@ -119,29 +170,47 @@ public class TableDB extends javax.swing.JFrame {
                 jf.setVisible(false);
             }
         };
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, table, rgf, listJF);
-        TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут броблема фокуса
-        TableTools.setColsEditor(table, cols, fromDB, jTable1, listItemList);
-        
-        //Лямбда для операций при закрытии окна архивов
-        SaveFrameData sfd = () -> {
-            TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, tableName, rgf, listJF);
+        TableTools.setTableSetting(jTable1, colsWidth, align, 20); // вот тут проблема фокуса
+        TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
+
+        SaveFrameData sfd = () -> {//сохранение в БД таблицы
+            TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB);
         };
         isCange ich = () -> {
             return compareTable(fromDB, tableModel);
         };
         TableTools.setFrameListener(this, sfd, ich, cjf);
-
-        this.setTitle(table + ": " + comment);
-        
-        // скрыть галку от названия таблицы
-        if(table.indexOf("AI") > 0 | table.indexOf("AO") > 0 
-                | table.indexOf("DI") > 0 | table.indexOf("DO") > 0){
-            
-        }else jCheckBoxNotCreateEvent.hide();
-
     }
 
+    public JTable getTable(){
+        return jTable1;
+    }
+    
+    private void setJTree(JTree jTree){
+        this.jTree1 = jTree;
+    }
+    
+    public MyTableModel getTableModel(){
+        return tableModel; // вообще это не правильно нужно приводить к нормальному DefaulTableModel
+    }
+    
+    public String getTableName(){
+        return tableName;
+    }
+    
+    public String getComment(){
+        return comment;
+    }
+    
+    public void setTableName(String tableName){
+        this.tableName = tableName;
+    }
+    
+    public void setComment(String comment){
+        this.comment = comment;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -184,6 +253,7 @@ public class TableDB extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem15_Setings = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
 
@@ -558,6 +628,14 @@ public class TableDB extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem15_Setings.setText("Уставки");
+        jMenuItem15_Setings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15_SetingsActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem15_Setings);
+
         jMenuBar1.add(jMenu1);
 
         jMenu10.setText("Помощь");
@@ -593,6 +671,8 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // --- этот метод вообще не выполниться если есть редактирование ячеек ---
+        /*
         jTable1.setColumnSelectionAllowed(true);
         if (evt.getClickCount() == 2) {
             int row = jTable1.getSelectedRow();
@@ -606,13 +686,12 @@ public class TableDB extends javax.swing.JFrame {
                     break;
                 }
             }
-
-//            SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName(), listJF);
             SinglStrEdit sse = new SinglStrEdit(tableModel, nameSinglSeting, jTable1.getName());
             sse.setVisible(true);
             listJF.add(sse);
             sse.setFields(row);
         }
+                */
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusLost
@@ -652,8 +731,6 @@ public class TableDB extends javax.swing.JFrame {
         if (findDataRows.size() > 0) {
             selectRowInTable(findDataRows.get(idArrayFindigData));
         }
-
-        //System.out.println(jTable1.getSelectedRows());
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
@@ -824,11 +901,9 @@ public class TableDB extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         jDialog1_add_column.setSize(500, 300);
         jDialog1_add_column.setVisible(true);
-
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         String nameNewColumn = textField1.getText();
         if (nameNewColumn != null | !nameNewColumn.equals("")) {
             for (int i = 0; i < jTable1.getColumnCount(); i++) {
@@ -991,6 +1066,23 @@ public class TableDB extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxNotCreateEventActionPerformed
 
+    private void jMenuItem15_SetingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15_SetingsActionPerformed
+        String[][] dataTable = new String[0][0];
+        String[] columnTable = null;
+        for (int i = 0; i < tableSize(); i++) {
+            String nameSignal = getCell("TAG_NAME_PLC", i); // 
+            SettingsSignal setingSignal = new SettingsSignal(nameSignal);
+            String[][] dataTableOmiSignal = setingSignal.getDataToTable();
+            dataTable = Stream.concat(Arrays.stream(dataTable), Arrays.stream(dataTableOmiSignal)).toArray(String[][]::new);  // контекация массивов колонок
+            columnTable = setingSignal.getNameColumnsToTable();
+            System.out.println();
+        }
+        FrameTableSetings tableSetings = new FrameTableSetings("SettingSignal", columnTable, dataTable);
+        tableSetings.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        tableSetings.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem15_SetingsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1015,6 +1107,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15_Setings;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1039,7 +1132,7 @@ public class TableDB extends javax.swing.JFrame {
         int x = tableModel.getColumnCount();
         int y = tableModel.getRowCount();
 
-        if (fromDB.size() <= 0 || fromDB.size() != y || fromDB.get(0).length != x) {
+        if (fromDB == null || fromDB.size() <= 0 || fromDB.size() != y || fromDB.get(0).length != x) {
             return true; // еще доп проверка от пустых строк от базы
         }
         for (int i = 0; i < y; i++) {

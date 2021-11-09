@@ -18,9 +18,9 @@ public class TextEdit extends javax.swing.JFrame {
         this.setTitle(title);
         ren = rename;
         if (ren) {
-            jTextArea1.append(tdb.tableName);
+            jTextArea1.append(tdb.getTableName());
         } else {
-            jTextArea1.append(tdb.comment);
+            jTextArea1.append(tdb.getComment());
         }
     }
 
@@ -69,16 +69,16 @@ public class TextEdit extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int statusRequestDB;
         if (ren) {
-            statusRequestDB = globVar.DB.renameTable(tdb.tableName, jTextArea1.getText());
-            tdb.tableName = jTextArea1.getText();
+            statusRequestDB = globVar.DB.renameTable(tdb.getTableName(), jTextArea1.getText());
+            tdb.setTableName(jTextArea1.getText());
         } else {
-            tdb.comment = jTextArea1.getText();
+            tdb.setComment(jTextArea1.getText());
             statusRequestDB = -1;
         }
-        tdb.setTitle(tdb.tableName + " :" + tdb.comment);
+        tdb.setTitle(tdb.getTableName() + " :" + tdb.getComment());
         if (statusRequestDB == 0) {
             //getTimer(1000); // Запуск таймера
-            jOptionPane1.showMessageDialog(null, tdb.tableName + " переименнована ."); //сообщение
+            jOptionPane1.showMessageDialog(null, tdb.getTableName() + " переименнована ."); //сообщение
             jOptionPane1.updateUI();
             this.dispose(); // выход
         }else{

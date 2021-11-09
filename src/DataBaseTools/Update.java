@@ -14,7 +14,8 @@ import Tools.MyTableModel;
  */
 public class Update {
 
-    public void ReNameAllData(MyTableModel tableModel, TableDB table, String tmp[], int rusName, int tagName) {
+    public void ReNameAllData(TableDB table, String tmp[], int rusName, int tagName) {
+        MyTableModel tableModel = table.getTableModel();
         int jpgMax = tableModel.getRowCount();
         for (int i = 0; i < tableModel.getRowCount(); i++) {
 
@@ -28,8 +29,8 @@ public class Update {
                 if (tmp[3].equals("")) {
                     tmp[3] = tmp[1];
                 }
-                table.tableModel.setValue(tmp[2], i, rusName);
-                table.tableModel.setValue(tmp[3], i, tagName);
+                tableModel.setValue(tmp[2], i, rusName);
+                tableModel.setValue(tmp[3], i, tagName);
             }
         }
     }

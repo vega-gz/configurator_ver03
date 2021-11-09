@@ -154,6 +154,13 @@
 			</File>	 -->
 		</GenCode>
 		<GenHW hwDriver="KM04" drvFile="_AI_DRV" globData="_AI_DRV"/>
+		<GenSetings>
+			<SP Type="BOOL">
+				<globData name="SP"> <!--disable отключает формирование глобальных/локльных сигналов -->
+					<localData int="_Algorithm.int" />
+				</globData>	
+			</SP>
+		</GenSetings>
 	</AI>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<FR_AI excelSheetName="FR_AI" Comment="Входы ТР. Архив: _ToHMI;">

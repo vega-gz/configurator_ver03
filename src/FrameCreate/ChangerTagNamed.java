@@ -103,7 +103,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
             }
         };
 
-        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, "Замена имён в таблице " + table.tableName, rgf, listJF);
+        TableTools.setPopUpMenu(jTable1, popupMenu, tableModel, "Замена имён в таблице " + table.getTableName(), rgf, listJF);
         // TableTools.setTableSetting(jTable1, colsWidth, align, 25);
 
         jTable1.setRowSelectionAllowed(true);           // Разрешаю выделять по строкам
@@ -191,7 +191,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         DoIt di = () -> {
             newName=tableModel.toArrayList();//получили всю таблицу целиком
             util.DeleteEmptyString(newName);//удалили строки в которых нет редактирования
-            update.ReNameAllData(tableModel, table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
+            update.ReNameAllData(table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
             String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
             
             if(tableName.lastIndexOf("(")!=-1){

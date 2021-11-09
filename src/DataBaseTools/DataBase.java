@@ -982,6 +982,23 @@ public class DataBase {
         }
     }
 
+     // ------
+     public boolean renameColumnTable(String table_name, String nameColumn, String newNameColumn){
+        String sql = null; 
+        boolean status = false;
+        try {
+            stmt = connection.createStatement();
+            sql = "ALTER TABLE \""+ table_name +"\" RENAME COLUMN  \"" + nameColumn + "\" TO " + newNameColumn + ";";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            status = true;
+        } catch (SQLException e) {
+            loggerFile.writeLog("error PSQL request " + sql);
+            status = false;
+        }finally {
+            return status;
+        }
+    }
     
 //    // --- получить уставки сигнала ( а нужен он вообще? )---
 //    public ArrayList<ArrayList<String>> getSetingsSignal(String[] rows ){
