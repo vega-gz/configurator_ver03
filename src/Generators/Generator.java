@@ -1455,8 +1455,10 @@ public class Generator {
                     fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"" + funcResultTypeUUID + "\">\n");
                     headDataToFile = "<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"" + funcResultTypeUUID + "\">\n";
                 } else {
-                    fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
-                    headDataToFile = "<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n";
+                    if(findLUAext == false){
+                        fm.wr("<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n");
+                        headDataToFile = "<Data>\n<Function UUID=\"" + funcUUID + "\" Name=\"" + funcName + "\" ResultTypeUUID=\"EC797BDD4541F500AD80A78F1F991834\">\n";
+                    }
                 }
             }
         }
@@ -1873,11 +1875,7 @@ public class Generator {
             return -1;
         }
         FileManager fm = new FileManager();
-        try {
-            fm.createFile2write(globVar.desDir + File.separator + serverName + ".csv");
-        } catch (IOException ex) {
-            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        fm.createFile2write(globVar.desDir + File.separator + serverName + ".csv");
         String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI(); //  ууиды PV T_CalcPar T_AI_ToHMI
         int jpgMax = opcList.size();
         int jpbCnt = 1;
@@ -2007,6 +2005,7 @@ public class Generator {
     //  --- Генерация архивов ---
     public int genArchive(int[][] archTyps, ArrayList<String[]> archList, String abonent,
             JProgressBar jProgressBar, String hmiApp) throws IOException {
+        LinkedList<String[]> listSignalToLuaFileLongArchive = new LinkedList<>();
         //------- Создаём каталог для файлов ЧМИ
         String hmiPath = globVar.desDir + File.separator + "GenHMI"; //Установили путь для файлов
         File d = new File(hmiPath);
@@ -2088,6 +2087,7 @@ public class Generator {
         int jpbCnt = 1;
         int colorInd = 0;
         int colorMax = colorList.size() - 1;
+        
         for (int iStruct = 0; iStruct < archList.size(); iStruct++) {
 
             String[] sig = archList.get(iStruct);            
@@ -2184,6 +2184,8 @@ public class Generator {
                                     if (!getTrendAttr(tableList, sig0, nameSig, attr)) {
                                         ret = -1;
                                     }
+                                    listSignalToLuaFileLongArchive.add(new String[]{tmpName,  attr[2]});
+                                    
                                     Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd), "Color"),
                                         "ItemName", tmpName, "UUID", tmpUuid, "Min", attr[0], "Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
                                     colorInd++;
@@ -2263,9 +2265,30 @@ public class Generator {
         }
         hmiSax.writeDocument(hmiPath + File.separator + trendSheetName + ".txt");
         archSax.writeDocument();
+        generationLuaToArchive(hmiPath, listSignalToLuaFileLongArchive);
         return ret;
     }
 
+    private void generationLuaToArchive(String pathToHMIData, LinkedList<String[]> listSignals){
+        FileManager fileManager = new FileManager();
+        String nameFileLongArchive = pathToHMIData + File.separator + globVar.abonent + "_Trends.lua";
+        fileManager.createFile2write(nameFileLongArchive); // файл луа по для длинных архивов
+        FileManager.writeStringInFile(nameFileLongArchive, "Trends." + globVar.abonent + "_Arj = { \n" );
+        for (int i = 0; i < listSignals.size(); i++) {
+            String[] arrSig = listSignals.get(i);
+            int y = arrSig[0].indexOf("_");
+            String nameSigwithoutAbonent = arrSig[0].substring(y);
+            String endingString = ",";
+            if(i >= listSignals.size()-1){
+                endingString = "";
+            }
+            FileManager.writeAddStringToFile(nameFileLongArchive, "'" + nameSigwithoutAbonent + "'" + ", " + "'" + arrSig[1] + "'" + endingString );
+        }
+        FileManager.writeAddStringToFile(nameFileLongArchive,"}");
+        
+        
+    }
+    
     // --- получить UUID PV из файлов ---
     private String[] GetUuid_PV_T_CalcPar_T_AI_ToHMI( ){
         String[] fileReadPV = {"T_CalcPar.type", "T_AI_ToHMI.type"};

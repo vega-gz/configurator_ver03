@@ -316,17 +316,22 @@ public class FileManager {
         return 0;
     }
 
-    public int createFile2write(String fileName) throws IOException {
-        wrFile = new File(fileName);
-        if (wrFile.isFile()) {
-            wrFile.delete();
+    public int createFile2write(String fileName) {
+        int eventReturn = 0;
+        try {
+            wrFile = new File(fileName);
+            if (wrFile.isFile()) {
+                wrFile.delete();
+            }
+            if (!wrFile.createNewFile()) {
+                eventReturn = 2; // не удалось создать файл
+            }
+            fos = new FileOutputStream(wrFile, false);
+            wrStream = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (!wrFile.createNewFile()) {
-            return 2; // не удалось создать файл
-        }
-        fos = new FileOutputStream(wrFile, false);
-        wrStream = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
-        return 0;
+        return eventReturn;
     }
 
     public int openFile4read(String dirName, String fileName) throws IOException {
@@ -940,6 +945,25 @@ public class FileManager {
             File myFoo = new File(file);
             fooWriter = new FileWriter(myFoo, false); // true to append
             fooWriter.write(Data);
+            fooWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fooWriter.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+        // --- запись файла строкой (полная перезапись файла данными  )---
+    public static void writeAddStringToFile(String file, String Data) {
+        FileWriter fooWriter = null;
+        try {
+            File myFoo = new File(file);
+            fooWriter = new FileWriter(myFoo, true); // true to append
+            fooWriter.write(Data + "\n");
             fooWriter.close();
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
