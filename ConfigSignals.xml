@@ -1,105 +1,111 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых-->
-<ConfigSignals>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых--><ConfigSignals>
 	<newTable Comment="" excelSheetName="newTable">
 	<!-- Таблица по умолчанию -->
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> 
-			<B nameColumnPos="Наименование" default=""/>
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> 
+			<B default="" nameColumnPos="Наименование"/>
 		</EXEL>
 	</newTable>
-	<AI excelSheetName="AI" Comment="Аналоговые входы. Архив: _ToHMI;" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
+	<AI Comment="Аналоговые входы. Архив: _ToHMI;" excelSheetName="AI" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода Русское нгазванеие-->
-            <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/><!--Обязательный нода-->
-            <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/><!--Обязательный нода-->
-            <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/><!--Обязательный нода-->
-            <J nameColumnPos="Тип_датчика" default="KM04_4_20mA"/>
-            <T nameColumnPos="Точность"  type="Int" default="2"/><!--кол знаков после запятой-->
-            <U nameColumnPos="АЦПmin" swt="Тип_датчика" default="2.0">
-				<case val="KM04_0_20mA" def="-0.02"/>
-				<case val="KM04_4_20mA" def="0.0"/>
-				<case val="Siemens" def="0.0"/>
-				<case val="Sonet" def="11773.0"/>
-				<case val="ТХА" def="-45.0"/>				
-				<case val="100М" def="-60.0"/>				
-				<case val="100П" def="-60.0"/>					
-				<case val="100Pt" def="-50.0"/>					
-				<case val="4-20 мА" def="2.0"/>					
+            <P childTable="SetPoints" cildCol="TAG_NAME_AnPar" nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/><!--Обязательный нода-->
+            <G default="0.0" fRez="" nameColumnPos="Диапазон_мин" type="Number"/><!--Обязательный нода-->
+            <H default="100.0" fRez="" nameColumnPos="Диапазон_макс" type="Number"/><!--Обязательный нода-->
+            <J default="KM04_4_20mA" nameColumnPos="Тип_датчика"/>
+            <T default="2" nameColumnPos="Точность" type="Int"/><!--кол знаков после запятой-->
+            <U default="2.0" nameColumnPos="АЦПmin" swt="Тип_датчика">
+				<case def="-0.02" val="KM04_0_20mA"/>
+				<case def="2.0" val="KM04_4_20mA"/>
+				<case def="0.0" val="Siemens"/>
+				<case def="11773.0" val="Sonet"/>
+				<case def="-45.0" val="ТХА"/>				
+				<case def="-60.0" val="100М"/>				
+				<case def="-60.0" val="100П"/>					
+				<case def="-50.0" val="100Pt"/>					
+				<case def="4.0" val="4-20 мА"/>	
+				<case def="2.0" val="2-10 В"/>	
+				<case def="10.0" val="10-2 В"/>
+				<case def="0.0" val="Частота"/>				
 			</U>
-            <V nameColumnPos="АЦПmax" swt="Тип_датчика" default="10.0">
-				<case val="KM04_0_20mA" def="9.9"/>
-				<case val="KM04_4_20mA" def="10.0"/>
-				<case val="Siemens" def="27648.0"/>
-				<case val="Sonet" def="59714.0"/>
-				<case val="ТХА" def="820.0"/>					
-				<case val="100М" def="150.0"/>					
-				<case val="100П" def="180.0"/>
-				<case val="100Pt" def="150.0"/>	
-				<case val="4-20 мА" def="10.0"/>						
+            <V default="10.0" nameColumnPos="АЦПmax" swt="Тип_датчика">
+				<case def="9.9" val="KM04_0_20mA"/>
+				<case def="10.0" val="KM04_4_20mA"/>
+				<case def="27648.0" val="Siemens"/>
+				<case def="59714.0" val="Sonet"/>
+				<case def="820.0" val="ТХА"/>					
+				<case def="150.0" val="100М"/>					
+				<case def="180.0" val="100П"/>
+				<case def="150.0" val="100Pt"/>	
+				<case def="20.0" val="4-20 мА"/>
+				<case def="10.0" val="2-10 В"/>		
+				<case def="2.0" val="10-2 В"/>
+				<case def="8000.0" val="Частота"/>					
 			</V>
-            <W nameColumnPos="loLim" type="Number" formula="loLimF"/><!-- нижний уровень зашкала -->
-            <X nameColumnPos="hiLim" type="Number" formula="hiLimF"/><!-- верхний уровень зашкала -->
-            <Y nameColumnPos="loBrk" type="Number" formula="loBrkF"/><!-- нижний уровень обрыв -->
-            <Z nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/><!-- верхний уровень обрыв -->
-            <AA nameColumnPos="ROC" type="Number"   default="0.0"/>
-            <AB nameColumnPos="recoveryTime" type="Number" default="1.0"/><!-- время выхода из ремота (ДУ) -->
-            <AC nameColumnPos="tau" type="Number"  default="1.0"/><!-- степень сглаживания при обработке входного сигнала -->
-            <I nameColumnPos="Единица_измерения" default=""/><!-- не используется при генерации -->
-            <K nameColumnPos="Акт_пас" default=""/><!-- не используется при генерации -->
-            <L nameColumnPos="Адрес_1" default=""/><!-- не используется при генерации -->
-            <M nameColumnPos="Адрес_2" default=""/><!-- не используется при генерации -->
-            <N nameColumnPos="Адрес_3" default=""/><!-- не используется при генерации -->
+            <W formula="loLimF" nameColumnPos="loLim" type="Number"/><!-- нижний уровень зашкала -->
+            <X formula="hiLimF" nameColumnPos="hiLim" type="Number"/><!-- верхний уровень зашкала -->
+            <Y formula="loBrkF" nameColumnPos="loBrk" type="Number"/><!-- нижний уровень обрыв -->
+            <Z formula="hiBrkF" nameColumnPos="hiBrk" type="Number"/><!-- верхний уровень обрыв -->
+            <AA default="0.0" nameColumnPos="ROC" type="Number"/>
+            <AB default="1.0" nameColumnPos="recoveryTime" type="Number"/><!-- время выхода из ремота (ДУ) -->
+            <AC default="1.0" nameColumnPos="tau" type="Number"/><!-- степень сглаживания при обработке входного сигнала -->
+            <I default="" nameColumnPos="Единица_измерения"/><!-- не используется при генерации -->
+            <K default="" nameColumnPos="Акт_пас"/><!-- не используется при генерации -->
+            <L default="" nameColumnPos="Адрес_1"/><!-- не используется при генерации -->
+            <M default="" nameColumnPos="Адрес_2"/><!-- не используется при генерации -->
+            <N default="" nameColumnPos="Адрес_3"/><!-- не используется при генерации -->
             <Q nameColumnPos="Устройство" type="Int"/>	<!-- используются в драйвере -->
             <R nameColumnPos="Слот" type="Int"/>		<!-- используются в драйвере -->
             <S nameColumnPos="Канал" type="Int"/>		<!-- используются в драйвере -->
-			<O nameColumnPos="Примечание" default=""/><!-- не используется при генерации -->
-			<AD nameColumnPos="sonetModbus" default=""/><!-- используется для генерации хардваре -->
-			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/><!-- используется при генерации листа мнемосхемы-->
+			<O default="" nameColumnPos="Примечание"/><!-- не используется при генерации -->
+			<AD default="" nameColumnPos="sonetModbus"/><!-- используется для генерации хардваре -->
+			<AE dictionary="SmallName.xml" nameColumnPos="SmallName" sourceCol="TAG_NAME_PLC"/><!-- используется при генерации листа мнемосхемы-->
+			<AF default="" nameColumnPos="Преобразование"/><!-- Функция преобразования (нормализация) -->
+			<AG default="true" nameColumnPos="Использовать_диагн"/> <!-- Используется в обобщ. дагностике  -->
         </EXEL>
 		<Formulas>
-			<max operation="get" column="Диапазон_макс"/>
-			<min operation="get" column="Диапазон_мин"/>
-			<range operation="-" operand1="max" operand2="min"/>
-			<range1proc operation="/" operand1="range" operand2="100"/>
-			<range3proc operation="*" operand1="range1proc" operand2="3"/>
-			<range6proc operation="*" operand1="range1proc" operand2="6"/>
-			<loLimF operation="-" operand1="min" operand2="range3proc"/>
-			<hiLimF operation="+" operand1="max" operand2="range3proc"/>
-			<loBrkF operation="-" operand1="min" operand2="range6proc" />
-			<hiBrkF operation="+" operand1="max" operand2="range6proc"/>
+			<max column="Диапазон_макс" operation="get"/>
+			<min column="Диапазон_мин" operation="get"/>
+			<range operand1="max" operand2="min" operation="-"/>
+			<range1proc operand1="range" operand2="100" operation="/"/>
+			<range3proc operand1="range1proc" operand2="3" operation="*"/>
+			<range6proc operand1="range1proc" operand2="6" operation="*"/>
+			<loLimF operand1="min" operand2="range3proc" operation="-"/>
+			<hiLimF operand1="max" operand2="range3proc" operation="+"/>
+			<loBrkF operand1="min" operand2="range6proc" operation="-"/>
+			<hiBrkF operand1="max" operand2="range6proc" operation="+"/>
 		</Formulas>
 		<GenData>
 			<AI_DRV Type="REAL"><!--AI_DRV - превращается в тип T_GPA_AI_DRV, где каждлое поле типа REAL -->
-				<globData name="AI_DRV" disable=""> <!--disable отключает формирование глобальных/локльных сигналов -->
-					<localData int="_Algorithm.int" />
+				<globData disable="" name="AI_DRV"> <!--disable отключает формирование глобальных/локльных сигналов -->
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</AI_DRV>
 			<AI_FromHMI><!--AI_FromHMI - превращается в тип T_GPA_AI_FromHMI, где каждлое поле типа T_AI_FromHMI -->
 				<globData name="AI_FromHMI">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</AI_FromHMI>
 			<AI_ToHMI>
 				<globData name="AI_ToHMI">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</AI_ToHMI>
 			<AI_Settings>
 				<globData disable="">
-					<localData  name="AI_Settings" int="_Algorithm.int" multyAb="true"/>
+					<localData int="_Algorithm.int" multyAb="true" name="AI_Settings"/>
 				</globData>
 			</AI_Settings>
 			<AI_Internal disable="">
 				<globData>
-					<localData  name="AI_Internal" int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="AI_Internal"/>
 				</globData>
 			</AI_Internal>
 		</GenData>
-		<GenCode >
+		<GenCode>
 			<File src="Call_AI" target="_Algorithm">
-				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода">
-					<Function name="AI_init"><!-- AI_init(-->
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AI_init">
+					<Function name="AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><dbd t="Диапазон_мин"/></arg>
 						<arg><text t=" "/><dbd t="Диапазон_макс"/></arg>
@@ -113,10 +119,23 @@
 						<arg><text t=" "/><dbd t="recoveryTime"/></arg>
 						<arg><text t=" "/><text t="repTime"/></arg>
 						<arg><text t=" "/><dbd t="tau"/></arg>
-						<arg><text t=" "/><npp/></arg><!--номер по порядку-->
+						<!-- arg><text t=" "/><npp/></arg><номер по порядку>
+						<arg>
+							<IF cond="Тип_датчика" val="KM04_4_20mA">
+									<text t=" 1"/>
+								<ELSE>
+									<text t=" 0"/>
+								</ELSE>
+							</IF></arg-->
+						<arg><text t=" "/>
+							<switch default="0" swt="Тип_датчика">
+								<case def="1" val="KM04_4_20mA"/>
+								<case def="2" val="Частота"/>
+							</switch>
+						</arg>			
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода AI_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AI_Processing">	
 					<Function name="AI_Processing">
 						<arg>
 							<IF cond="Преобразование" val="ТСМ">
@@ -135,6 +154,8 @@
 						<arg><text t=" "/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" alg.AI_FLT"/></arg>
+						<arg><text t=" "/><dbd t="Использовать_диагн"/></arg>
+						<arg><text t=" deblock"/></arg>										
 					</Function>
 				</Block>
 			</File>
@@ -153,95 +174,94 @@
 				</Block>
 			</File>	 -->
 		</GenCode>
-		<GenHW hwDriver="KM04" drvFile="_AI_DRV" globData="_AI_DRV"/>
-		<GenSetings>
-			<SP Type="BOOL">
-				<globData name="SP"> <!--disable отключает формирование глобальных/локльных сигналов -->
-					<localData int="_Algorithm.int" />
-				</globData>	
-			</SP>
-		</GenSetings>
+		<GenHW drvFile="_AI_DRV" globData="_AI_DRV" hwDriver="KM04"/>
 	</AI>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<FR_AI excelSheetName="FR_AI" Comment="Входы ТР. Архив: _ToHMI;">
+	<FR_AI Comment="Входы ТР. Архив: _ToHMI;" excelSheetName="FR_AI">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода-->
-            <P nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-            <G nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
-            <H nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
-            <J nameColumnPos="Тип_датчика" default=""/>
-            <T nameColumnPos="Точность"  type="Int" default="0"/>
-           <U nameColumnPos="АЦПmin" swt="Тип_датчика" default="2.0">
-				<case val="KM04_0_20mA" def="-0.02"/>
-				<case val="KM04_4_20mA" def="0.0"/>
-				<case val="Siemens" def="0.0"/>
-				<case val="Sonet" def="11773.0"/>
-				<case val="ТХА" def="-45.0"/>				
-				<case val="100М" def="-60.0"/>				
-				<case val="100П" def="-60.0"/>					
-				<case val="100Pt" def="-50.0"/>					
-				<case val="4-20 мА" def="2.0"/>
+            <P childTable="SetPoints" cildCol="TAG_NAME_AnPar" nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
+            <G default="0.0" fRez="" nameColumnPos="Диапазон_мин" type="Number"/>
+            <H default="100.0" fRez="" nameColumnPos="Диапазон_макс" type="Number"/>
+            <J default="" nameColumnPos="Тип_датчика"/>
+            <T default="0" nameColumnPos="Точность" type="Int"/>
+           <U default="2.0" nameColumnPos="АЦПmin" swt="Тип_датчика">
+				<case def="-0.02" val="KM04_0_20mA"/>
+				<case def="2.0" val="KM04_4_20mA"/>
+				<case def="0.0" val="Siemens"/>
+				<case def="11773.0" val="Sonet"/>
+				<case def="-45.0" val="ТХА"/>				
+				<case def="-60.0" val="100М"/>				
+				<case def="-60.0" val="100П"/>					
+				<case def="-50.0" val="100Pt"/>					
+				<case def="4.0" val="4-20 мА"/>
+				<case def="2.0" val="2-10 В"/>
+				<case def="10.0" val="10-2 В"/>					
 			</U>
-           <V nameColumnPos="АЦПmax" swt="Тип_датчика" default="10.0">
-				<case val="KM04_0_20mA" def="9.9"/>
-				<case val="KM04_4_20mA" def="10.0"/>
-				<case val="Siemens" def="27648.0"/>
-				<case val="Sonet" def="59714.0"/>
-				<case val="ТХА" def="820.0"/>					
-				<case val="100М" def="150.0"/>					
-				<case val="100П" def="180.0"/>
-				<case val="100Pt" def="150.0"/>	
-				<case val="4-20 мА" def="10.0"/>
+           <V default="10.0" nameColumnPos="АЦПmax" swt="Тип_датчика">
+				<case def="9.9" val="KM04_0_20mA"/>
+				<case def="10.0" val="KM04_4_20mA"/>
+				<case def="27648.0" val="Siemens"/>
+				<case def="59714.0" val="Sonet"/>
+				<case def="820.0" val="ТХА"/>					
+				<case def="150.0" val="100М"/>					
+				<case def="180.0" val="100П"/>
+				<case def="150.0" val="100Pt"/>	
+				<case def="20.0" val="4-20 мА"/>
+				<case def="10.0" val="2-10 В"/>	
+				<case def="2.0" val="10-2 В"/>					
 			</V>
-            <W nameColumnPos="loLim" type="Number" formula="loLimF"/>
-            <X nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
-            <Y nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
-            <Z nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
-            <AA nameColumnPos="ROC" type="Number"   default="0.0"/>
-            <AB nameColumnPos="recoveryTime" type="Number" default="1.0"/>
-            <AC nameColumnPos="tau" type="Number"  default="1.0"/>
-            <I nameColumnPos="Единица_измерения" default="об/мин"/>
-            <K nameColumnPos="Акт_пас" default=""/>
-            <L nameColumnPos="Адрес_1" default=""/>
-            <M nameColumnPos="Адрес_2" default=""/>
-            <N nameColumnPos="Адрес_3" default=""/>
+            <W formula="loLimF" nameColumnPos="loLim" type="Number"/>
+            <X formula="hiLimF" nameColumnPos="hiLim" type="Number"/>
+            <Y formula="loBrkF" nameColumnPos="loBrk" type="Number"/>
+            <Z formula="hiBrkF" nameColumnPos="hiBrk" type="Number"/>
+            <AA default="0.0" nameColumnPos="ROC" type="Number"/>
+            <AB default="1.0" nameColumnPos="recoveryTime" type="Number"/>
+            <AC default="1.0" nameColumnPos="tau" type="Number"/>
+            <I default="об/мин" nameColumnPos="Единица_измерения"/>
+            <K default="" nameColumnPos="Акт_пас"/>
+            <L default="" nameColumnPos="Адрес_1"/>
+            <M default="" nameColumnPos="Адрес_2"/>
+            <N default="" nameColumnPos="Адрес_3"/>
             <Q nameColumnPos="Устройство" type="Int"/>
             <R nameColumnPos="Слот" type="Int"/>
             <S nameColumnPos="Канал" type="Int"/>
-			<O nameColumnPos="Примечание" default=""/>
-			<AD nameColumnPos="sonetModbus" default=""/>
-			<AE nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
+			<O default="" nameColumnPos="Примечание"/>
+			<AD default="" nameColumnPos="sonetModbus"/>
+			<AE dictionary="SmallName.xml" nameColumnPos="SmallName" sourceCol="TAG_NAME_PLC"/>
+			<AF default="" nameColumnPos="Преобразование"/><!-- Функция преобразования (нормализация) -->
+			<AG default="true" nameColumnPos="Использовать_диагн"/> <!-- Используется в обобщ. дагностике  -->			
         </EXEL>
 		<GenData>
 			<FR_AI_DRV Type="REAL">
-				<globData name="FR_AI_DRV" disable="">
-					<localData int="_GT_4RM.int" />
+				<globData disable="" name="FR_AI_DRV">
+					<localData int="_GT_4RM.int"/>
 				</globData>	
 			</FR_AI_DRV>
 			<FR_AI_FromHMI typeFile="T_AI_FromHMI.type">
 				<globData name="FR_AI_FromHMI">
-					<localData int="_GT_4RM.int" />
+					<localData int="_GT_4RM.int"/>
 				</globData>	
 			</FR_AI_FromHMI>
 			<FR_AI_ToHMI typeFile="T_AI_ToHMI.type">
 				<globData name="FR_AI_ToHMI">
-					<localData int="_GT_4RM.int" />
+					<localData int="_GT_4RM.int"/>
 				</globData>	
 			</FR_AI_ToHMI>
-			<FR_AI_Settings typeFile="T_AI_Settings.type" >
+			<FR_AI_Settings typeFile="T_AI_Settings.type">
 				<globData disable="">
-					<localData  name="FR_AI_Settings" int="_GT_4RM.int"/>
+					<localData int="_GT_4RM.int" name="FR_AI_Settings"/>
 				</globData>
-			</FR_AI_Settings >
-			<FR_AI_Internal typeFile="T_AI_Internal.type" disable="">
+			</FR_AI_Settings>
+			<FR_AI_Internal disable="" typeFile="T_AI_Internal.type">
 				<globData>
-					<localData  name="FR_AI_Internal" int="_GT_4RM.int"/>
+					<localData int="_GT_4RM.int" name="FR_AI_Internal"/>
 				</globData>
 			</FR_AI_Internal>
 		</GenData>
-		<GenCode >
-			<File src="Call_AI" target="_GT_4RM">
-				<Block start="Начало сгенерированного кода FR_AI_init" end="Конец сгенерированного кода">
+		<GenCode>
+			<File src="Call_FR_AI" target="_GT_4RM">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AI_init">		
 					<Function name="AI_init">
 						<arg><abonent/><text t="_FR_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><dbd t="Диапазон_мин"/></arg>
@@ -256,32 +276,40 @@
 						<arg><text t=" "/><dbd t="recoveryTime"/></arg>
 						<arg><text t=" "/><text t="repTime"/></arg>
 						<arg><text t=" "/><dbd t="tau"/></arg>
-						<arg><text t=" "/><npp/></arg>
+						<!--arg><text t=" "/><npp/></arg-->
+						<arg><text t=" "/>
+							<switch default="0" swt="Тип_датчика">
+								<case def="1" val="KM04_4_20mA"/>
+								<case def="2" val="Частота"/>
+							</switch>
+						</arg>					
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода FR_AI_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AI_Processing">		
 					<Function name="AI_Processing">
 						<arg><abonent/><text t="_FR_AI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_FR_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_FR_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_FR_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_FR_AI_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" alg.AI_FLT"/></arg>
+						<arg><text t=" FRS.AI_FLT"/></arg>
+						<arg><text t=" "/><dbd t="Использовать_диагн"/></arg>
+						<arg><text t=" deblock"/></arg>										
 					</Function>
 				</Block>
 			</File>
 		</GenCode>
-		<GenHW hwDriver="KM04" drvFile="_FR_AI_DRV" globData="_FR_AI_DRV"/>
+		<GenHW drvFile="_FR_AI_DRV" globData="_FR_AI_DRV" hwDriver="KM04"/>
 	</FR_AI>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
+	<!--ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
 		<GenData>
 			<T_ANB Type="BOOL"/>
 			<T_GPA_SP_Settings Type="T_SP_Settings"/>
 		</GenData>
         <EXEL>
             <B nameColumnPos="TAG_NAME_AnPar" type="VarName"/>
-            <C nameColumnPos="direct" registr="down" replace="true"> <!-- true или TRUE или > или БОЛЬШЕ преобразует в "больше" -->
+            <C nameColumnPos="direct" registr="down" replace="true"> 
 				<case from="&gt;" to="больше"/>
 				<case from="true" to="больше"/>
 				<case from="&lt;" to="меньше"/>
@@ -295,77 +323,77 @@
 				<case from="P" to="П"/>
 				<case from="O" to="О"/>
 			</F>
-            <G nameColumnPos="defVal" type="Int" default="0"/> <!-- значение по умолчанию при неисправности аналового 
-																0 - уставка в ложь, 1 - в истина, 2 - остаётся какой была -->
+            <G nameColumnPos="defVal" type="Int" default="0"/> значение по умолчанию при неисправности аналового 
+																0 - уставка в ложь, 1 - в истина, 2 - остаётся какой была 
             <H nameColumnPos="гистерезис" type="Number"  default="0.0"/>
-            <I nameColumnPos="TAG_NAME_PLC"  default=""/><!-- Если имя уставки пустое то TAG_NAME_AnPar_Uv1 -->
-			<!--/I-->
-            <J nameColumnPos="Наименование"  default=""/><!-- concut="true"/-->
+            <I nameColumnPos="TAG_NAME_PLC"  default=""/> Если имя уставки пустое то TAG_NAME_AnPar_Uv1 
+			
+            <J nameColumnPos="Наименование"  default=""/>
        </EXEL>
-	</ANB>
+	</ANB-->
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<AO excelSheetName="AO" Comment="Аналоговые выходы">
+	<AO Comment="Аналоговые выходы" excelSheetName="AO">
 		<GenData>
 			<AO_DRV Type="REAL">
 				<globData name="AO_DRV">
-					<localData int="_Algorithm.int" />
-					<localData int="_GT_4RM.int" />
+					<localData int="_Algorithm.int"/>
+					<localData int="_GT_4RM.int"/>
 				</globData>	
 				<globData name="AO">
 					<localData int="_Algorithm.int"/>
-					<localData int="_GT_4RM.int" />					
+					<localData int="_GT_4RM.int"/>					
 				</globData>
 			</AO_DRV>
 			<AO_FromHMI>
 				<globData name="AO_FromHMI">
 					<localData int="_Algorithm.int"/>
-					<localData int="_GT_4RM.int" />					
+					<localData int="_GT_4RM.int"/>					
 				</globData>
 			</AO_FromHMI>
 			<AO_ToHMI>
 				<globData name="AO_ToHMI">
 					<localData int="_Algorithm.int"/>
-					<localData int="_GT_4RM.int" />					
+					<localData int="_GT_4RM.int"/>					
 				</globData>
 			</AO_ToHMI>
 			<AO_Settings>
 				<globData disable="">
-					<localData  name="AO_Settings" int="_Algorithm.int"/>
-					<localData  name="AO_Settings" int="_GT_4RM.int"/>
+					<localData int="_Algorithm.int" name="AO_Settings"/>
+					<localData int="_GT_4RM.int" name="AO_Settings"/>
 				</globData>
 			</AO_Settings>
 		</GenData>
         <EXEL>
-            <F nameColumnPos="Наименование" />
+            <F nameColumnPos="Наименование"/>
             <Q nameColumnPos="TAG_NAME_PLC" type="VarName"/>
             <G nameColumnPos="Диапазон_мин" type="Number"/>
-            <H nameColumnPos="Диапазон_макс" type="Number" />
-            <I nameColumnPos="Единица_измерения" default=""/>
-            <J nameColumnPos="АЦПмин" />
-            <K nameColumnPos="АЦПмакс" />
-            <M nameColumnPos="Адрес_1" default=""/>
-            <N nameColumnPos="Адрес_2" default=""/>
-            <O nameColumnPos="Адрес_3" default=""/>
+            <H nameColumnPos="Диапазон_макс" type="Number"/>
+            <I default="" nameColumnPos="Единица_измерения"/>
+            <J nameColumnPos="АЦПмин"/>
+            <K nameColumnPos="АЦПмакс"/>
+            <M default="" nameColumnPos="Адрес_1"/>
+            <N default="" nameColumnPos="Адрес_2"/>
+            <O default="" nameColumnPos="Адрес_3"/>
             <R nameColumnPos="Устройство" type="Int"/>
-            <S nameColumnPos="Слот"  type="Int"/>
-            <T nameColumnPos="Канал"  type="Int"/>
-            <U nameColumnPos="Точность" type="Int"  default="2"/>
-			<V nameColumnPos="sonetModbus" default=""/>
-			<W nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
+            <S nameColumnPos="Слот" type="Int"/>
+            <T nameColumnPos="Канал" type="Int"/>
+            <U default="2" nameColumnPos="Точность" type="Int"/>
+			<V default="" nameColumnPos="sonetModbus"/>
+			<W dictionary="SmallName.xml" nameColumnPos="SmallName" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenCode>
 			<File src="Call_AO" target="_Algorithm">
-				<Block start="Начало сгенерированного кода AO_init" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AO_init">
 					<Function name="AO_init">
 						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Диапазон_мин"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Диапазон_макс"/></arg>
 						<arg><text t=" "/><dbd t="АЦПмин"/></arg>
 						<arg><text t=" "/><dbd t="АЦПмакс"/></arg>
 						<arg><text t=" "/><npp/></arg>
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода AO_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AO_Processing">
 					<Function name="AO_Processing">
 						<arg><abonent/><text t="_AO."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -383,21 +411,21 @@
 				</Block>
 			</File> -->
 			<File src="Simulate_AO" target="_Algorithm">
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода">
 					<String>
 						<text t="str."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := c; // "/><dbd t="Наименование"/>
 					</String>
 				</Block>
 			</File>									
 			</GenCode>
-		<GenHW hwDriver="KM04" drvFile="_AO_DRV" globData="_AO_DRV"/>
+		<GenHW drvFile="_AO_DRV" globData="_AO_DRV" hwDriver="KM04"/>
 	</AO>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<DI excelSheetName="DI" Comment="Дискретные входы">
+	<DI Comment="Дискретные входы" excelSheetName="DI">
 		<GenData>
 			<DI_DRV Type="BOOL">
 				<globData name="DI_DRV">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 				<globData name="DI">
 					<localData int="_Algorithm.int"/>
@@ -415,33 +443,33 @@
 			</DI_ToHMI>
 			<DI_Settings disable="">
 				<globData>
-					<localData  name="DI_Settings" int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="DI_Settings"/>
 				</globData>
 			</DI_Settings>
 			<DI_Internal disable="">
 				<globData>
-					<localData  name="DI_Internal" int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="DI_Internal"/>
 				</globData>
 			</DI_Internal>
 		</GenData>
         <EXEL>
-            <F nameColumnPos="Наименование" />
-            <K nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>
-            <G nameColumnPos="Тип_сигнала" default="НО СК"/>
-            <P nameColumnPos="Инверсия" type="bool" default="нет"/>
-            <H nameColumnPos="Адрес_1" default=""/>
-            <I nameColumnPos="Адрес_2" default="" />
+            <F nameColumnPos="Наименование"/>
+            <K nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
+            <G default="НО СК" nameColumnPos="Тип_сигнала"/>
+            <P default="нет" nameColumnPos="Инверсия" type="bool"/>
+            <H default="" nameColumnPos="Адрес_1"/>
+            <I default="" nameColumnPos="Адрес_2"/>
             <L nameColumnPos="Устройство" type="Int"/>
-            <M nameColumnPos="Слот"  type="Int"/>
-            <N nameColumnPos="Канал"  type="Int"/>
-            <O nameColumnPos="Задержка"  type="Number" default="0.0"/>
-			<Q nameColumnPos="КЦД" default="нет"/>
-			<J nameColumnPos="Примечание" default=""/>
-			<R nameColumnPos="sonetModbus" default=""/>
+            <M nameColumnPos="Слот" type="Int"/>
+            <N nameColumnPos="Канал" type="Int"/>
+            <O default="0.0" nameColumnPos="Задержка" type="Number"/>
+			<Q default="нет" nameColumnPos="КЦД"/>
+			<J default="" nameColumnPos="Примечание"/>
+			<R default="" nameColumnPos="sonetModbus"/>
         </EXEL>
 		<GenCode>
 			<File src="Call_DI" target="_Algorithm">
-				<Block start="Начало сгенерированного кода DI_init" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода DI_init">
 					<Function name="DI_init">
 						<arg><abonent/><text t="_DI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><text t="repTime"/></arg>
@@ -457,7 +485,7 @@
 						<arg><text t=" "/><npp/></arg>
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода DI_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода DI_Processing">
 					<Function name="DI_Processing">
 						<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/>
@@ -490,14 +518,14 @@
 				</Block> 
 			</File>	 -->			
 		</GenCode>
-		<GenHW hwDriver="KM04" drvFile="_DI_DRV" globData="_DI_DRV"/>
+		<GenHW drvFile="_DI_DRV" globData="_DI_DRV" hwDriver="KM04"/>
 	</DI>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<DO excelSheetName="DO" Comment="Дискретные выходы">
+	<DO Comment="Дискретные выходы" excelSheetName="DO">
 		<GenData>
 			<DO_DRV Type="BOOL">
 				<globData name="DO_DRV">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 				<globData name="DO">
 					<localData int="_Algorithm.int"/>
@@ -515,21 +543,21 @@
 			</DO_ToHMI>
 		</GenData>	
         <EXEL>
-            <F nameColumnPos="Наименование" />
-            <K nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>
-            <G nameColumnPos="Тип_сигнала"  default=""/>
-            <H nameColumnPos="Адрес_1" default=""/>
-            <I nameColumnPos="Адрес_2"  default=""/>
+            <F nameColumnPos="Наименование"/>
+            <K nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
+            <G default="" nameColumnPos="Тип_сигнала"/>
+            <H default="" nameColumnPos="Адрес_1"/>
+            <I default="" nameColumnPos="Адрес_2"/>
             <L nameColumnPos="Устройство" type="Int"/>
-            <M nameColumnPos="Слот"  type="Int"/>
-            <N nameColumnPos="Канал"  type="Int"/>
-			<P nameColumnPos="КЦУ" default="нет"/>
-			<J nameColumnPos="Примечание" default=""/>
-			<O nameColumnPos="sonetModbus" default=""/>
+            <M nameColumnPos="Слот" type="Int"/>
+            <N nameColumnPos="Канал" type="Int"/>
+			<P default="нет" nameColumnPos="КЦУ"/>
+			<J default="" nameColumnPos="Примечание"/>
+			<O default="" nameColumnPos="sonetModbus"/>
         </EXEL>
 		<GenCode>
 			<File src="Call_DO" target="_Algorithm">
-				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода DO_Processing">
 					<Function name="DO_Processing">
 						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -546,86 +574,149 @@
 				</Block>
 			</File>
 			<File src="Force_DO" target="_Algorithm">
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода">
 					<String>
 						<abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := c; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
 			</File> 
 		</GenCode>
-		<GenHW hwDriver="KM04" drvFile="_DO_DRV" globData="_DO_DRV"/>
+		<GenHW drvFile="_DO_DRV" globData="_DO_DRV" hwDriver="KM04"/>
 	</DO>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<mb_AI excelSheetName="mb_AI" Comment="Аналоговые входы. Архив: _ToHMI; Modbus: ">
+	<FR_DO Comment="Дискретные выходы ТР" excelSheetName="FR_DO">
+		<GenData>
+			<FR_DO_DRV Type="BOOL">
+				<globData name="FR_DO_DRV">
+					<localData int="_GT_4RM.int"/>
+				</globData>	
+				<globData name="FR_DO">
+					<localData int="_GT_4RM.int"/>
+				</globData>
+			</FR_DO_DRV>
+			<FR_DO_FromHMI typeFile="T_DO_FromHMI.type">
+				<globData name="FR_DO_FromHMI">
+					<localData int="_GT_4RM.int"/>
+				</globData>
+			</FR_DO_FromHMI>
+			<FR_DO_ToHMI typeFile="T_DO_ToHMI.type">
+				<globData name="FR_DO_ToHMI">
+					<localData int="_GT_4RM.int"/>
+				</globData>
+			</FR_DO_ToHMI>
+		</GenData>	
+        <EXEL>
+            <F nameColumnPos="Наименование"/>
+            <K nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
+            <G default="" nameColumnPos="Тип_сигнала"/>
+            <H default="" nameColumnPos="Адрес_1"/>
+            <I default="" nameColumnPos="Адрес_2"/>
+            <L nameColumnPos="Устройство" type="Int"/>
+            <M nameColumnPos="Слот" type="Int"/>
+            <N nameColumnPos="Канал" type="Int"/>
+			<P default="нет" nameColumnPos="КЦУ"/>
+			<J default="" nameColumnPos="Примечание"/>
+			<O default="" nameColumnPos="sonetModbus"/>
+        </EXEL>
+		<GenCode>
+			<File src="Call_DO" target="_GT_4RM">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода DO_Processing">
+					<Function name="DO_Processing">
+						<arg><abonent/><text t="_FR_DO."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t=" "/><abonent/><text t="_FR_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t=" "/><abonent/><text t="_FR_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t=" "/><abonent/><text t="_FR_DO_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
+						<!-- arg><text t=" "/>
+							<IF cond="КЦУ" val="Да">
+									<text t="true"/>
+								<ELSE>
+									<text t="false"/>
+								</ELSE>
+							</IF></arg -->	
+					</Function>
+				</Block>
+			</File>
+			<File src="Force_DO" target="_Algorithm">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода">
+					<String>
+						<abonent/><text t="_FR_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := c; //"/><dbd t="Наименование"/>
+					</String>
+				</Block>
+			</File> 
+		</GenCode>
+		<GenHW drvFile="_FR_DO_DRV" globData="_FR_DO_DRV" hwDriver="KM04"/>
+	</FR_DO>	
+<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<mb_AI Comment="Аналоговые входы. Архив: _ToHMI; Modbus: " excelSheetName="mb_AI">
         <EXEL info="R1C2">
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
-            <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-            <D nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
-            <E nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
-            <F nameColumnPos="Единица_измерения" default=""/>
-            <G nameColumnPos="Точность"  type="Int" default="2"/>
-			<H nameColumnPos="Примечание" default=""/>
-			<I nameColumnPos="tau" type="Number" default=""/>
-			<J nameColumnPos="доп_инфо" default=""/>
-            <K nameColumnPos="loLim" type="Number" formula="loLimF"/>
-            <L nameColumnPos="hiLim" type="Number" formula="hiLimF"/>
-            <M nameColumnPos="loBrk" type="Number" formula="loBrkF"/>
-            <N nameColumnPos="hiBrk" type="Number" formula="hiBrkF"/>
-			<O nameColumnPos="dataType" default="ABCD"/>
-			<P nameColumnPos="Set1" type="Number" default=""/>
-			<Q nameColumnPos="Set2" type="Number" default=""/>
-			<R nameColumnPos="mbAddr" type="Int" modbus="dataType"/>
-			<S nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
+            <C childTable="SetPoints" cildCol="TAG_NAME_AnPar" nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>
+            <D default="0.0" fRez="" nameColumnPos="Диапазон_мин" type="Number"/>
+            <E default="100.0" fRez="" nameColumnPos="Диапазон_макс" type="Number"/>
+            <F default="" nameColumnPos="Единица_измерения"/>
+            <G default="2" nameColumnPos="Точность" type="Int"/>
+			<H default="" nameColumnPos="Примечание"/>
+			<I default="" nameColumnPos="tau" type="Number"/>
+			<J default="" nameColumnPos="доп_инфо"/>
+            <K formula="loLimF" nameColumnPos="loLim" type="Number"/>
+            <L formula="hiLimF" nameColumnPos="hiLim" type="Number"/>
+            <M formula="loBrkF" nameColumnPos="loBrk" type="Number"/>
+            <N formula="hiBrkF" nameColumnPos="hiBrk" type="Number"/>
+			<O default="ABCD" nameColumnPos="dataType"/>
+			<P default="" nameColumnPos="Set1" type="Number"/>
+			<Q default="" nameColumnPos="Set2" type="Number"/>
+			<R modbus="dataType" nameColumnPos="mbAddr" type="Int"/>
+			<S dictionary="SmallName.xml" nameColumnPos="SmallName" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<Formulas>
-			<max operation="get" column="Диапазон_макс"/>
-			<min operation="get" column="Диапазон_мин"/>
-			<range operation="-" operand1="max" operand2="min"/>
-			<range1proc operation="/" operand1="range" operand2="100"/>
-			<range3proc operation="*" operand1="range1proc" operand2="3"/>
-			<range6proc operation="*" operand1="range1proc" operand2="6"/>
-			<loLimF operation="-" operand1="min" operand2="range3proc"/>
-			<hiLimF operation="+" operand1="max" operand2="range3proc"/>
-			<loBrkF operation="-" operand1="min" operand2="range6proc" />
-			<hiBrkF operation="+" operand1="max" operand2="range6proc"/>
+			<max column="Диапазон_макс" operation="get"/>
+			<min column="Диапазон_мин" operation="get"/>
+			<range operand1="max" operand2="min" operation="-"/>
+			<range1proc operand1="range" operand2="100" operation="/"/>
+			<range3proc operand1="range1proc" operand2="3" operation="*"/>
+			<range6proc operand1="range1proc" operand2="6" operation="*"/>
+			<loLimF operand1="min" operand2="range3proc" operation="-"/>
+			<hiLimF operand1="max" operand2="range3proc" operation="+"/>
+			<loBrkF operand1="min" operand2="range6proc" operation="-"/>
+			<hiBrkF operand1="max" operand2="range6proc" operation="+"/>
 		</Formulas>
 		<GenData>
-			<AI_DRV dictionary="ModbusFormat.xml" col="dataType" ifEmpty="REAL">
-				<globData name="AI_DRV" disable="">
+			<AI_DRV col="dataType" dictionary="ModbusFormat.xml" ifEmpty="REAL">
+				<globData disable="" name="AI_DRV">
 					<localData int="_Algorithm.int"/>
 				</globData>	
 			</AI_DRV>
-			<AI_FromHMI typeFile="T_AI_FromHMI.type" notGenTyps="WORD, ABCDEFGH">
+			<AI_FromHMI notGenTyps="WORD, ABCDEFGH" typeFile="T_AI_FromHMI.type">
 				<globData name="AI_FromHMI">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</AI_FromHMI>
-			<AI_ToHMI typeFile="T_AI_ToHMI.type" notGenTyps="WORD, ABCDEFGH">
+			<AI_ToHMI notGenTyps="WORD, ABCDEFGH" typeFile="T_AI_ToHMI.type">
 				<globData name="AI_ToHMI">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</AI_ToHMI>
 			<AI_Settings notGenTyps="WORD, ABCDEFGH">
 				<globData disable="">
-					<localData  name="AI_Settings" int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="AI_Settings"/>
 				</globData>
 			</AI_Settings>
 		</GenData>
 		<GenCode>
 			<File src="mb_AI_CallAll" target="_Algorithm">
-				<Block start="Начало сгенерированного кода AI_init" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
+				<Block end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH" start="Начало сгенерированного кода AI_init">
 					<Function name="mb_AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="loLim" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="hiLim" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="loBrk" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="hiBrk" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dict t="dataType" dictionary="ModbusFormat.xml" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Set1" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="Set2" ifEmpty="0.0"/></arg>
-						<arg><text t=" "/><dbd t="tau" ifEmpty="0.0"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Диапазон_мин"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Диапазон_макс"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0.0" t="loLim"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0.0" t="hiLim"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0.0" t="loBrk"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0.0" t="hiBrk"/></arg>
+						<arg><text t=" "/><dict dictionary="ModbusFormat.xml" ifEmpty="0" t="dataType"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0.0" t="Set1"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0.0" t="Set2"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0.0" t="tau"/></arg>
 						<arg><text t=" "/><npp/></arg>
 						<!--arg>
 							<switch swt="dataType" default="0">
@@ -639,39 +730,40 @@
 								<case val="UBAxR" def="2"/>
 								<case val="ABCDEFGH" def="3"/>
 							</switch>
-						</arg-->
+						</arg-->					
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода AI_Processing" end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH">
+				<Block end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH" start="Начало сгенерированного кода AI_Processing">
 					<Function name="mb_AI_Processing">
 						<arg>
-							<switch swt="dataType" default="">
-								<case val="ABxN" def="INT_TO_REAL("/>
-								<case val="BAxN" def="INT_TO_REAL("/>
-								<case val="ABxR" def="INT_TO_REAL("/>
-								<case val="BAxR" def="INT_TO_REAL("/>
-								<case val="UABxN" def="UINT_TO_REAL("/>
-								<case val="UBAxN" def="UINT_TO_REAL("/>
-								<case val="UABxR" def="UINT_TO_REAL("/>
-								<case val="UBAxR" def="UINT_TO_REAL("/>
+							<switch default="" swt="dataType">
+								<case def="INT_TO_REAL(" val="ABxN"/>
+								<case def="INT_TO_REAL(" val="BAxN"/>
+								<case def="INT_TO_REAL(" val="ABxR"/>
+								<case def="INT_TO_REAL(" val="BAxR"/>
+								<case def="UINT_TO_REAL(" val="UABxN"/>
+								<case def="UINT_TO_REAL(" val="UBAxN"/>
+								<case def="UINT_TO_REAL(" val="UABxR"/>
+								<case def="UINT_TO_REAL(" val="UBAxR"/>
 							</switch>
 							<abonent/>
 							<text t="_AI_DRV."/>
 							<dbd t="TAG_NAME_PLC"/>
-							<switch swt="dataType" default="">
-								<case val="ABxN" def=")"/>
-								<case val="BAxN" def=")"/>
-								<case val="ABxR" def=")"/>
-								<case val="BAxR" def=")"/>
-								<case val="UABxN" def=")"/>
-								<case val="UBAxN" def=")"/>
-								<case val="UABxR" def=")"/>
-								<case val="UBAxR" def=")"/>
+							<switch default="" swt="dataType">
+								<case def=")" val="ABxN"/>
+								<case def=")" val="BAxN"/>
+								<case def=")" val="ABxR"/>
+								<case def=")" val="BAxR"/>
+								<case def=")" val="UABxN"/>
+								<case def=")" val="UBAxN"/>
+								<case def=")" val="UABxR"/>
+								<case def=")" val="UBAxR"/>
 							</switch>
 						</arg>
 						<arg><text t=" "/><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_AI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/></arg>
+						<arg><text t=" deblock"/></arg>								
 					</Function>
 				</Block>
 			</File>
@@ -698,61 +790,61 @@
 		<GenHW drvFile="_AI_DRV" globData="_AI_DRV"/>
 	</mb_AI>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<mb_AO excelSheetName="mb_AO" Comment="Аналоговые выходы. Modbus: ">
+	<mb_AO Comment="Аналоговые выходы. Modbus: " excelSheetName="mb_AO">
 		<GenData>
-			<AO_DRV dictionary="ModbusFormat.xml" col="dataType" ifEmpty="REAL">
+			<AO_DRV col="dataType" dictionary="ModbusFormat.xml" ifEmpty="REAL">
 				<globData name="AO_DRV">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 				<globData name="AO">
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_DRV>
-			<AO_FromHMI typeFile="T_AO_FromHMI.type" notGenTyps="WORD, ABCDEFGH">
+			<AO_FromHMI notGenTyps="WORD, ABCDEFGH" typeFile="T_AO_FromHMI.type">
 				<globData name="AO_FromHMI">
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_FromHMI>
-			<AO_ToHMI typeFile="T_AO_ToHMI.type" notGenTyps="WORD, ABCDEFGH">
+			<AO_ToHMI notGenTyps="WORD, ABCDEFGH" typeFile="T_AO_ToHMI.type">
 				<globData name="AO_ToHMI">
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</AO_ToHMI>
-			<AO_Settings typeFile="T_AO_Settings.type" notGenTyps="WORD, ABCDEFGH">
+			<AO_Settings notGenTyps="WORD, ABCDEFGH" typeFile="T_AO_Settings.type">
 				<globData disable="">
-					<localData  name="AO_Settings" int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="AO_Settings"/>
 				</globData>
 			</AO_Settings>
 		</GenData>
         <EXEL info="R1C2">
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
-            <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-            <D nameColumnPos="Диапазон_мин" type="Number" fRez="" default="0.0"/>
-            <E nameColumnPos="Диапазон_макс" type="Number" fRez="" default="100.0"/>
-            <F nameColumnPos="Единица_измерения" default=""/>
-            <G nameColumnPos="Точность"  type="Int" default="2"/>
-			<H nameColumnPos="Примечание" default=""/>
-			<I nameColumnPos="доп_инфо" default=""/>
-			<J nameColumnPos="dataType" default="ABCD"/>
-			<K nameColumnPos="Set1" type="Int" default=""/>
-			<L nameColumnPos="Set2" type="Int" default=""/>
-			<M nameColumnPos="mbAddr" type="Int" modbus="dataType"/>
-			<N nameColumnPos="SmallName" dictionary="SmallName.xml" sourceCol="TAG_NAME_PLC"/>
+            <C nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!--childTable="SetPoints" cildCol="TAG_NAME_AnPar"-->
+            <D default="0.0" fRez="" nameColumnPos="Диапазон_мин" type="Number"/>
+            <E default="100.0" fRez="" nameColumnPos="Диапазон_макс" type="Number"/>
+            <F default="" nameColumnPos="Единица_измерения"/>
+            <G default="2" nameColumnPos="Точность" type="Int"/>
+			<H default="" nameColumnPos="Примечание"/>
+			<I default="" nameColumnPos="доп_инфо"/>
+			<J default="ABCD" nameColumnPos="dataType"/>
+			<K default="" nameColumnPos="Set1" type="Int"/>
+			<L default="" nameColumnPos="Set2" type="Int"/>
+			<M modbus="dataType" nameColumnPos="mbAddr" type="Int"/>
+			<N dictionary="SmallName.xml" nameColumnPos="SmallName" sourceCol="TAG_NAME_PLC"/>
         </EXEL>
 		<GenCode>
 			<File src="mb_AO_CallAll" target="_Algorithm">
-				<Block start="Начало сгенерированного кода AO_init" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AO_init">
 					<Function name="mb_AO_init">
 						<arg><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_мин" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Диапазон_макс" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dict t="dataType" dictionary="ModbusFormat.xml" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Set1" ifEmpty="0"/></arg>
-						<arg><text t=" "/><dbd t="Set2" ifEmpty="0"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Диапазон_мин"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Диапазон_макс"/></arg>
+						<arg><text t=" "/><dict dictionary="ModbusFormat.xml" ifEmpty="0" t="dataType"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Set1"/></arg>
+						<arg><text t=" "/><dbd ifEmpty="0" t="Set2"/></arg>
 						<arg><text t=" "/><npp/></arg>
 					</Function>
 				</Block>
-				<Block start="Начало сгенерированного кода AO_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AO_Processing">
 					<Function name="mb_AO_Processing">
 						<arg><abonent/><text t="_AO."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_AO_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -763,18 +855,18 @@
 					</Function>
 					<String>
 						<abonent/><text t="_AO_DRV."/><dbd t="TAG_NAME_PLC"/><text t=" := "/>
-						<switch swt="dataType" default="tmpReal">
-							<case val="ABxN" def="tmpInt"/>
-							<case val="BAxN" def="tmpInt"/>
-							<case val="ABxR" def="tmpInt"/>
-							<case val="BAxR" def="tmpInt"/>
+						<switch default="tmpReal" swt="dataType">
+							<case def="tmpInt" val="ABxN"/>
+							<case def="tmpInt" val="BAxN"/>
+							<case def="tmpInt" val="ABxR"/>
+							<case def="tmpInt" val="BAxR"/>
 						</switch>
 						<text t="; //"/><dbd t="Наименование"/>
 					</String>
 				</Block>
 			</File>
 			<File src="AO_Permit" target="_Algorithm">
-				<Block start="Начало сгенерированного кода AO_Permit" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AO_Permit">
 					<String>
 						<abonent/><text t="_AO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := tmpPermit; //"/><dbd t="Наименование"/>
 					</String>
@@ -784,11 +876,11 @@
 		<GenHW drvFile="_AO_DRV" globData="_AO_DRV"/>
 	</mb_AO>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<mb_DI excelSheetName="mb_DI" Comment="Дискретные входы. Modbus: ">
+	<mb_DI Comment="Дискретные входы. Modbus: " excelSheetName="mb_DI">
 		<GenData>
 			<DI_DRV Type="BOOL">
 				<globData name="DI_DRV">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 				<globData name="DI">
 					<localData int="_Algorithm.int"/>
@@ -807,15 +899,15 @@
 		</GenData>
         <EXEL info="R1C2">
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
-            <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-			<D nameColumnPos="Примечание" default=""/>
-			<E nameColumnPos="доп_инфо" default=""/>
-			<F nameColumnPos="mbAddr" modbus="bit"/>
-			<G nameColumnPos="Инверсия"  type="bool" default="Нет"/>
+            <C nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!--childTable="SetPoints" cildCol="TAG_NAME_AnPar"-->
+			<D default="" nameColumnPos="Примечание"/>
+			<E default="" nameColumnPos="доп_инфо"/>
+			<F modbus="bit" nameColumnPos="mbAddr"/>
+			<G default="Нет" nameColumnPos="Инверсия" type="bool"/>
         </EXEL>
 		<GenCode>
 			<File src="Call_mb_DI" target="_Algorithm">
-				<Block start="Начало сгенерированного кода DI_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода DI_Processing">
 					<Function name="mb_DI_Processing">
 						<arg><abonent/><text t="_DI_DRV."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_DI_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -849,11 +941,11 @@
 		<GenHW drvFile="_DI_DRV" globData="_DI_DRV"/>
 	</mb_DI>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<mb_DO excelSheetName="mb_DO" Comment="Дискретные выходы. Modbus: ">
+	<mb_DO Comment="Дискретные выходы. Modbus: " excelSheetName="mb_DO">
 		<GenData>
 			<DO_DRV Type="BOOL">
 				<globData name="DO_DRV">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 				<globData name="DO">
 					<localData int="_Algorithm.int"/>
@@ -872,15 +964,15 @@
 		</GenData>
         <EXEL info="R1C2">
             <B nameColumnPos="Наименование"/><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL"-->
-            <C nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" childTable="SetPoints" cildCol="TAG_NAME_AnPar"/>
-			<D nameColumnPos="Примечание" default=""/>
-			<E nameColumnPos="доп_инфо" default=""/>
-			<F nameColumnPos="mbAddr" modbus="bit"/>
+            <C nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!--childTable="SetPoints" cildCol="TAG_NAME_AnPar"-->
+			<D default="" nameColumnPos="Примечание"/>
+			<E default="" nameColumnPos="доп_инфо"/>
+			<F modbus="bit" nameColumnPos="mbAddr"/>
         </EXEL>
 		<GenCode>
 			<!--File src="DO_CallAll" target="_Algorithm"-->
 			<File src="Call_DO" target="_Algorithm">
-				<Block start="Начало сгенерированного кода DO_Processing" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода DO_Processing">
 					<Function name="DO_Processing">
 						<arg><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_DO_FromHMI."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -890,7 +982,7 @@
 				</Block>
 			</File>
 			<File src="Force_DO" target="_Algorithm">
-				<Block start="Начало сгенерированного кода" end="Конец сгенерированного кода">
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода">
 					<String>
 						<abonent/><text t="_DO_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".forsPermit := c; //"/><dbd t="Наименование"/>
 					</String>
@@ -900,33 +992,33 @@
 		<GenHW drvFile="_DO_DRV" globData="_DO_DRV"/> <!--hwFile="_modbus.mb_cfg" intFile="_modbus.int"/-->
 	</mb_DO>
 	<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА АЛАРМОВ ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<APS excelSheetName="APS" Comment="Аварино-предупредительная сигнализация"> <!--Обработка таблицы при совмещенном вварианте АПС (АС и ПС вместе) -->
+	<APS Comment="Аварино-предупредительная сигнализация" excelSheetName="APS"> <!--Обработка таблицы при совмещенном вварианте АПС (АС и ПС вместе) -->
 		<EXEL>
-			<B nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/>  <!--Алгоритмическое имя аларма -->
-			<C nameColumnPos="Наименование" /> 
-			<D nameColumnPos="Условие_срабатывания_АПС" /> 
-			<E nameColumnPos="Время_задержки" type="Number" default="0.0"/>
-			<F nameColumnPos="Status" />
-			<G nameColumnPos="Источник"  default=""/>
-			<H nameColumnPos="Примечание" default=""/>
+			<B nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>  <!--Алгоритмическое имя аларма -->
+			<C nameColumnPos="Наименование"/> 
+			<D nameColumnPos="Условие_срабатывания_АПС"/> 
+			<E default="0.0" nameColumnPos="Время_задержки" type="Number"/>
+			<F nameColumnPos="Status"/>
+			<G default="" nameColumnPos="Источник"/>
+			<H default="" nameColumnPos="Примечание"/>
 		</EXEL>
 		<GenData>	<!--  генерация типов АПС -->
 			<APS Type="BOOL"> 
 				<globData name="APS"> 
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>
 			</APS>
 			<APS_Internal>
 				<globData>
-					<localData  name="APS_Internal" int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="APS_Internal"/>
 				</globData>
 			</APS_Internal>	
 		</GenData>
 		<GenCode>
-			<File src= "Call_APS"  target="_Algorithm"> <!-- генерация блока вызовов обработчиков -->
-				<Block start="Начало сгенерированного кода APS_Processing" end="Конец сгенерированного кода">
+			<File src="Call_APS" target="_Algorithm"> <!-- генерация блока вызовов обработчиков -->
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода APS_Processing">
 					<Function name="APS_Processing">
-						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
+						<arg><dbd t="Условие_срабатывания_АПС"/></arg>
 						<arg><text t=" "/><dbd t="Время_задержки"/></arg>
 						<arg><text t=" "/><text t="unlock"/></arg>
 						<arg><text t=" "/><abonent/><text t="_APS."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -936,25 +1028,25 @@
 					</Function>	
 				</Block>
 			</File>
-			<File src= "APS_Init" target="_Algorithm"> <!--генерация функции инициализации-->
-				<Block start="Начало сгенерированного кода APS_Init" end="Конец сгенерированного кода">
+			<File src="APS_Init" target="_Algorithm"> <!--генерация функции инициализации-->
+				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода APS_Init">
 					<String>
 						<abonent/><text t="_APS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
-							<switch swt="Status" default="">
-								<case val="АС" def="AS"/>
-								<case val="ПС" def="PS"/>
-								<case val="АО сс" def="AOs"/>
-								<case val="АО бс" def="AOb"/>
-								<case val="ВО сс" def="VOs"/>
-								<case val="ВО бс" def="VOb"/>
-								<case val="Пожар" def="Fire"/>
+							<switch default="" swt="Status">
+								<case def="AS" val="АС"/>
+								<case def="PS" val="ПС"/>
+								<case def="AOs" val="АО сс"/>
+								<case def="AOb" val="АО бс"/>
+								<case def="VOs" val="ВО сс"/>
+								<case def="VOb" val="ВО бс"/>
+								<case def="Fire" val="Пожар"/>
 							</switch>
 						 <text t="; //"/><dbd t="Наименование"/> 
 					</String>						
 				</Block>
 			</File>
-			<File src= "FirstOut.lua"> <!-- генерация lua таблицы имен алармов -->	
-				<Block start="Начало таблицы" end="Конец таблицы" >
+			<File src="FirstOut.lua"> <!-- генерация lua таблицы имен алармов -->	
+				<Block end="Конец таблицы" start="Начало таблицы">
 					<String> 
 						<IF cond="Status" val="ПС"> <!--пропускаем или пишем пустую строку если нашли ПС-->
 								<text t=""/>
@@ -978,39 +1070,39 @@
 		</GenCode>		
 	</APS>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<AS excelSheetName="AS" Comment="Аварийная сигнализация">
+	<AS Comment="Аварийная сигнализация" excelSheetName="AS">
 		<EXEL>
-			<B nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/> <!-- Алгоритмическое имя аларма-->
-			<C nameColumnPos="Наименование" /> <!--Русское название АПС-->
-			<D nameColumnPos="Условие_срабатывания_АПС" /> <!--Логическое выражение -->
-			<E nameColumnPos="Время_задержки" type="Number" default="0.0"/> <!--секунды-->
-			<F nameColumnPos="Status" /> <!--строка из набора возм. значений: АО сс, АО бс, ВО сс, ВО бс, Пожар, ПС, АС -->
-			<G nameColumnPos="Источник"  default=""/>
-			<H nameColumnPos="Примечание" default=""/>
+			<B nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя аларма-->
+			<C nameColumnPos="Наименование"/> <!--Русское название АПС-->
+			<D nameColumnPos="Условие_срабатывания_АПС"/> <!--Логическое выражение -->
+			<E default="0.0" nameColumnPos="Время_задержки" type="Number"/> <!--секунды-->
+			<F nameColumnPos="Status"/> <!--строка из набора возм. значений: АО сс, АО бс, ВО сс, ВО бс, Пожар, ПС, АС -->
+			<G default="" nameColumnPos="Источник"/>
+			<H default="" nameColumnPos="Примечание"/>
 		</EXEL>
 		<GenData>	<!-- генерация типов АС -->
 			<AS Type="BOOL"> 
 				<globData name="AS"> 
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 					<!--localData int="_Linker.int" /-->
 				</globData>
 			</AS>
 			<AS_Internal typeFile="T_APS_Internal.type">
 				<globData disable=""> <!-- не создает глобальной структуры -->
-					<localData name="AS_Internal"  int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="AS_Internal"/>
 				</globData>
 			</AS_Internal>
 			<PPZ typeFile="T_PPZ.type">
-				<globData name="PPZ" disable="">
-					<localData int="_Algorithm.int" disable=""/>
+				<globData disable="" name="PPZ">
+					<localData disable="" int="_Algorithm.int"/>
 				</globData>						
 			</PPZ>
 		</GenData>
 		<GenCode>
-			<File src= "Call_AS"  target="_Algorithm"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
-				<Block start="Начало кода" end="Конец кода">
+			<File src="Call_AS" target="_Algorithm"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
+				<Block end="Конец кода" start="Начало кода">
 					<Function name="AS_Processing">
-						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
+						<arg><dbd t="Условие_срабатывания_АПС"/></arg>
 						<arg><text t=" "/><dbd t="Время_задержки"/></arg>
 						<arg><text t=" "/><text t="unlock"/></arg>
 						<arg><text t=" "/><abonent/><text t="_AS."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -1020,61 +1112,59 @@
 					</Function>	
 				</Block>
 			</File>
-			<File src= "AS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации -->
-				<Block start="Начало кода" end="Конец кода">
+			 <!-- target="_Algorithm"> генерация функции инициализации -->
+			<File src="AS_Init" target="_Algorithm">
+				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<abonent/><text t="_AS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
-							<switch swt="Status" default="">
-								<case val="АО сс" def="AOs"/>
-								<case val="АО бс" def="AOb"/>
-								<case val="ВО сс" def="VOs"/>
-								<case val="ВО бс" def="VOb"/>
-								<case val="Пожар" def="Fire"/>
+							<switch default="" swt="Status">
+								<case def="AOs" val="АО сс"/>
+								<case def="AOb" val="АО бс"/>
+								<case def="VOs" val="ВО сс"/>
+								<case def="VOb" val="ВО бс"/>
+								<case def="Fire" val="Пожар"/>
 							</switch>
 						 <text t="; //"/><dbd t="Наименование"/> 
 					</String>						
 				</Block>
 			</File>
-			<File src= "FirstOut.lua"> <!-- генерация lua таблицы имен алармов -->	
-				<Block start="Начало таблицы" end="Конец таблицы" >
-					<String> <!-- отдельной нодой обозначается разборка строки -->
+			<!-- генерация lua таблицы имен алармов -->	
+			<File src="FirstOut.lua"> 
+				<Block end="Конец таблицы" start="Начало таблицы">
+					<String> 
 						<text t="'_AS."/><dbd t="TAG_NAME_PLC"/><text t="',  '"/><dbd t="Status"/><text t="',  -- "/><dbd t="Наименование"/> 
 					</String>	
 				</Block>
 			</File>	
-			<File src= "Report.html"> <!--Создание печатного протокола ПЗ -->
+			<!--Создание печатного протокола ПЗ -->
+			<File src="Report.html"> 
 				<MarkTemplate>
 					<markerEdit edit="CurrentAbonent" val="GPA_ReportCommand.curAb"/>
-					<!--markerEdit edit="RPT SIGNAL2:" val="new_val66"/-->
 				</MarkTemplate>
 				<MarkTemplate>
 					<markerEdit edit="CurrentAbonent">				
-						<abonent/><text t= "_ReportCommand.curAb()"/>
+						<abonent/><text t="_ReportCommand.curAb()"/>
 					</markerEdit>
-					<!--markerEdit edit="Select">
-						<text t= "777"/>
-						<abonent/>
-					</markerEdit-->
 				</MarkTemplate>				
 				
-				<Block start="Начало кода" end="Конец кода">
+				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<text t="&lt;tr&gt; &lt;!-- "/><dbd t="Наименование"/><text t="--&gt;"/>
 					</String>
 					<String>
-						<text t="&lt;td&gt;&lt;p align=&quot;center&quot;style=&quot;margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot;font-family:'Arial'; font-size:8pt;&quot;&gt;"/><npp start="1"/><text t= "&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>
+						<text t="&lt;td&gt;&lt;p align=&quot;center&quot;style=&quot;margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot;font-family:'Arial'; font-size:8pt;&quot;&gt;"/><npp start="1"/><text t="&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>
 					</String>
 					<String>					
-						<text t="&lt;td&gt;&lt;p style=&quot;margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot;font-family:'Arial'; font-size:8pt;&quot;&gt;"/><dbd t="Наименование"/><text t= "&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>					
+						<text t="&lt;td&gt;&lt;p style=&quot;margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot;font-family:'Arial'; font-size:8pt;&quot;&gt;"/><dbd t="Наименование"/><text t="&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>					
 					</String>
 					<String>
 						<text t="&lt;td&gt;&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:8pt;&quot;&gt;"/><dbd t="Status"/><text t="&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>
 					</String>					
 					<String>	
 						<IF cond="Источник" val="*.PV">						
-							<text t= "&lt;td&gt;&lt;p align=&quot;center&quot;style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:8pt;&quot;&gt;"/><text t="А&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>
+							<text t="&lt;td&gt;&lt;p align=&quot;center&quot;style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:8pt;&quot;&gt;"/><text t="А&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>
 							<ELSE>
-								<text t= "&lt;td&gt;&lt;p align=&quot;center&quot;style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:8pt;&quot;&gt;"/><text t="Д&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>							
+								<text t="&lt;td&gt;&lt;p align=&quot;center&quot;style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:8pt;&quot;&gt;"/><text t="Д&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;"/>							
 							</ELSE>
 						</IF>
 					</String>
@@ -1107,47 +1197,58 @@
 		</GenCode>		
 	</AS>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<PS excelSheetName="PS" Comment="Предупредительная сигнализация">
+	<PS Comment="Предупредительная сигнализация" excelSheetName="PS">
 		<EXEL>
-			<B nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/> <!-- Алгоритмическое имя аларма-->
-			<C nameColumnPos="Наименование" /> <!--Русское название АПС-->
-			<D nameColumnPos="Условие_срабатывания_АПС" /> <!--Логическое выражение -->
-			<E nameColumnPos="Время_задержки" type="Number" default="0.0"/> <!--секунды-->
-			<F nameColumnPos="Status" /> <!--строка из набора возм. значений: АО сс, АО бс, ВО сс, ВО бс, Пожар, ПС, АС -->
+			<B nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя аларма-->
+			<C nameColumnPos="Наименование"/> <!--Русское название АПС-->
+			<D nameColumnPos="Условие_срабатывания_АПС"/> <!--Логическое выражение -->
+			<E default="0.0" nameColumnPos="Время_задержки" type="Number"/> <!--секунды-->
+			<F nameColumnPos="Status"/> <!--строка из набора возм. значений: АО сс, АО бс, ВО сс, ВО бс, Пожар, ПС, АС -->
 		</EXEL>
 		<GenData>	<!-- генерация типов АПС -->
 			<PS Type="BOOL"> 
 				<globData name="PS"> 
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 					<!--localData int="_Linker.int" /-->					
 				</globData>
 			</PS>
-			<PS_Internal  typeFile="T_APS_Internal.type">
+			<PS_Internal typeFile="T_APS_Internal.type">
 				<globData disable="">
-					<localData  name="PS_Internal" int="_Algorithm.int"/>
+					<localData int="_Algorithm.int" name="PS_Internal"/>
 				</globData>
 			</PS_Internal>	
 		</GenData>
 		<GenCode>
-			<File src= "Call_PS"  target="_Algorithm"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
-				<Block start="Начало кода" end="Конец кода">
-					<Function name="PS_Processing">
+			<File src="Call_PS" target="_Algorithm"> <!-- target="_Algorithm"> генерация блока вызовов обработчиков -->
+				<Block end="Конец кода" start="Начало кода">
+					<!--Function name="PS_Processing">
 						<arg><dbd t= "Условие_срабатывания_АПС"/></arg>
 						<arg><text t=" "/><dbd t="Время_задержки"/></arg>
 						<arg><text t=" "/><text t="unlock"/></arg>
 						<arg><text t=" "/><abonent/><text t="_PS."/><dbd t="TAG_NAME_PLC"/></arg>
 						<arg><text t=" "/><abonent/><text t="_PS_Internal."/><dbd t="TAG_NAME_PLC"/></arg>
-					</Function>	
+					</Function-->
+					<String>
+						<text t="//"/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="Status"/><text t=")"/>	 
+					</String>					
+					<String>
+						<abonent/><text t="_PS."/><dbd t="TAG_NAME_PLC"/>
+						<text t=" := PS_Processing("/>				
+						<dbd t="Условие_срабатывания_АПС"/><text t=", "/>
+						<dbd t="Время_задержки"/><text t=", "/>
+						<abonent/><text t="_PS_Internal."/><dbd t="TAG_NAME_PLC"/>
+						<text t=");"/>
+					</String>					
 				</Block>
 			</File>
-			<File src= "PS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации -->
-				<Block start="Начало кода" end="Конец кода">
+			<File src="PS_Init" target="_Algorithm"> <!-- target="_Algorithm"> генерация функции инициализации -->
+				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<abonent/><text t="_PS_Internal."/><dbd t="TAG_NAME_PLC"/><text t=".target := Alarms."/>  
-							<switch swt="Status" default="">
-								<case val="АС" def="AS"/>
-								<case val="ПС" def="PS"/>
-								<case val="ОС" def="OS"/>
+							<switch default="" swt="Status">
+								<case def="AS" val="АС"/>
+								<case def="PS" val="ПС"/>
+								<case def="OS" val="ОС"/>
 							</switch>
 						 <text t="; //"/><dbd t="Наименование"/> 
 					</String>						
@@ -1156,25 +1257,22 @@
 		</GenCode>		
 	</PS>	
 <!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА ТС ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<TS excelSheetName="TS" Comment="Технологические сообщения">
+	<TS Comment="Технологические сообщения" excelSheetName="TS">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName"/> <!-- Алгоритмическое имя аларма-->
-			<B nameColumnPos="Наименование" /> <!--Русское название АПС-->
-			<C nameColumnPos="Пейджер" /> <!--Признак вывода сообщения в пейджер -->
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя аларма-->
+			<B nameColumnPos="Наименование"/> <!--Русское название АПС-->
+			<C nameColumnPos="Пейджер"/> <!--Признак вывода сообщения в пейджер -->
 		</EXEL>
 		<GenData>	<!-- генерация типов TС -->
 			<TS Type="BOOL"> 
 				<globData name="TS"> 
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>
 			</TS>
 		</GenData>
 		<GenCode>
-			<File src= "TechMessages.lua"> <!-- генерация lua таблицы имен алармов -->	
-					<!--String start="Начало имени" end="Конец имени" -->
-						<!--text t="Tag."/><abonent/><text t="tch= {"/-->
-					<!--/String-->		
-				<Block start="Начало таблицы" end="Конец таблицы" >
+			<File src="TechMessages.lua"> <!-- генерация lua таблицы имен алармов -->		
+				<Block end="Конец таблицы" start="Начало таблицы">
 					<String> <!-- отдельной нодой обозначается разборка строки -->
 						<IF cond="Пейджер" val="Да"><!-- формируем строку таблицы lua если нашли Да-->					
 								<text t="'_TS."/>
@@ -1191,139 +1289,148 @@
 		</GenCode>
 	</TS>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА ХР ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<HR excelSheetName="HR" Comment="Условия холодного резерва">
+	<HR Comment="Условия холодного резерва" excelSheetName="HR">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя аларма-->
-			<B nameColumnPos="Условие_ХР" />
-			<C nameColumnPos="Наименование" /> <!--Русское название АПС-->
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя аларма-->
+			<B nameColumnPos="Условие_ХР"/>
+			<C nameColumnPos="Наименование"/> <!--Русское название АПС-->
 		</EXEL>
 		<GenData>	<!-- генерация типов ХР -->
 			<PPU_HR Type="BOOL">
 				<globData name="PPU_HR"> 
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>
 			</PPU_HR>
 		</GenData>	
 		<GenCode>
-			<File src= "ReadyHR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
-				<Block start="Начало кода" end="Конец кода">
+			<File src="ReadyHR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
+				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<text t=" // "/><dbd t="Наименование"/> 
 					</String>
 					<String>
 						<abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/><text t=" := check and ("/><dbd t="Условие_ХР"/>
-						<text t="); ReadyHR := ReadyHR and not "/><abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/>
+						<text t="); ReadyHR := ReadyHR and not "/><abonent/><text t="_PPU_HR."/><dbd t="TAG_NAME_PLC"/><text t=";"/> 
 					</String>						
 				</Block>
 			</File>	
 		</GenCode>	
 	</HR>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА ГР ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<GR excelSheetName="GR" Comment="Условия горячего резерва">
+	<GR Comment="Условия горячего резерва" excelSheetName="GR">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя аларма-->
-			<B nameColumnPos="Условие_ГР" />
-			<C nameColumnPos="Наименование" /> <!--Русское название АПС-->
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя аларма-->
+			<B nameColumnPos="Условие_ГР"/>
+			<C nameColumnPos="Наименование"/> <!--Русское название АПС-->
 		</EXEL>
 		<GenData>	<!-- генерация типов ГР -->
 			<PPU_GR Type="BOOL">
 				<globData name="PPU_GR"> 
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>
 			</PPU_GR>
 		</GenData>	
 		<GenCode>
-			<File src= "ReadyGR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
-				<Block start="Начало кода" end="Конец кода">
+			<File src="ReadyGR" target="_Algorithm"> <!-- генерация функции проверки ХР -->
+				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<text t=" // "/><dbd t="Наименование"/> 
 					</String>						
 					<String>
 						<abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/><text t=" := check and ("/><dbd t="Условие_ГР"/>
-						<text t="); ReadyGR := ReadyGR and not "/><abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/>
+						<text t="); ReadyGR := ReadyGR and not "/><abonent/><text t="_PPU_GR."/><dbd t="TAG_NAME_PLC"/><text t=";"/> 
 					</String>						
 				</Block>
 			</File>	
 		</GenCode>	
 	</GR>
 <!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА TUNE_FR ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->	
-	<TuneFR excelSheetName="TuneFR" Comment="Настройки топливного регулятора">
+	<TuneFR Comment="Настройки топливного регулятора" excelSheetName="TuneFR">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя настройки-->	
-			<B nameColumnPos="Значение" type="Number" default="0.0"/><!--Обязательный нода-->	
-			<C nameColumnPos="Нижняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->	
-			<D nameColumnPos="Верхняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->
-			<E nameColumnPos="Наименование" /><!--Обязательный нода-->
-			<F nameColumnPos="Точность" type="Int" default="1"/>
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя настройки-->	
+			<B default="0.0" nameColumnPos="Значение" type="Number"/><!--Обязательный нода-->	
+			<C default="0.0" nameColumnPos="Нижняя_граница" type="Number"/><!--Обязательный нода-->	
+			<D default="0.0" nameColumnPos="Верхняя_граница" type="Number"/><!--Обязательный нода-->
+			<E nameColumnPos="Наименование"/><!--Обязательный нода-->
+			<F default="1" nameColumnPos="Точность" type="Int"/>
 		</EXEL>	
 		<GenData>	<!-- генерация типа TUNE_FR -->		
 			<Tune_FR Type="REAL">
 				<globData name="Tune_FR">
-					<localData int="_GT_4RM.int" />
+					<localData int="_GT_4RM.int"/>
 				</globData>	
 			</Tune_FR>
 		</GenData>	
 		<GenCode>
-			<File src= "TuneInitFR" target="_GT_4RM"> <!-- генерация функции проверки ХР -->
-				<Block start="Начало кода" end="Конец кода">
+			<File src="TuneInitFR" target="_GT_4RM"> <!-- генерация функции проверки ХР -->
+				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<abonent/><text t="_Tune_FR."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Значение"/><text t="; // "/><dbd t="Наименование"/> 
 					</String>						
 				</Block>
 			</File>	
-			<File src="B_TuneInit" target="C_HMI2.iec_hmi" nonFunc="BasicFBType"> <!-- генерация блока инициализации настроек в ЧМИ -->
-				<Block start="Начало кода" end="Конец кода">
+			<File nonFunc="BasicFBType" src="B_TuneInit" target="C_HMI2.iec_hmi"> <!-- генерация блока инициализации настроек в ЧМИ -->
+				<Block end="Конец кода" start="Начало кода">
 					<String>
-						<text t="&#x0A;T[i]:= &apos;"/><dbd t="Наименование"/>
-						<text t="&apos;;&#x0A;N[i]:= &apos;"/><dbd t="TAG_NAME_PLC"/>
-						<text t="&apos;;&#x0A;L[i]:= REAL#"/><dbd t="Нижняя_граница"/>
-						<text t=";&#x0A;H[i]:= REAL#"/><dbd t="Верхняя_граница"/>
-						<text t=";&#x0A;F[i]:= "/><dbd t="Точность"/>
-						<text t=";&#x0A;i:= i+ UINT#1"/>
+						<text t="&#10;(*"/><npp start="1"/><text t="*)"/>
+						<text t="&#10;T[i]:= '"/><dbd t="Наименование"/>
+						<text t="';&#10;N[i]:= '"/><dbd t="TAG_NAME_PLC"/>
+						<text t="';&#10;L[i]:= REAL#"/><dbd t="Нижняя_граница"/>
+						<text t=";&#10;H[i]:= REAL#"/><dbd t="Верхняя_граница"/>
+						<text t=";&#10;F[i]:= "/><dbd t="Точность"/>
+						<text t=";&#10;i:= i+ UINT#1;"/>
 					</String>
 				</Block>
-			</File>					
+			</File>	
+			<File src="Tune_FR.lua"> <!-- генерация lua таблицы имен настроек -->	
+				<Block end="Конец таблицы" start="Начало таблицы">
+					<String>
+						<text t="'"/><dbd t="TAG_NAME_PLC"/><text t="',  -- "/><dbd t="Наименование"/> 
+					</String>	
+				</Block>
+			</File>				
 		</GenCode>
 	</TuneFR>	
 <!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА TUNE ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->	
-	<Tune excelSheetName="Tune" Comment="Настройки топливного регулятора">
+	<Tune Comment="Настройки топливного регулятора" excelSheetName="Tune">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя настройки-->	
-			<B nameColumnPos="Значение" type="Number" default="0.0"/><!--Обязательный нода-->	
-			<C nameColumnPos="Нижняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->	
-			<D nameColumnPos="Верхняя_граница" type="Number" default="0.0"/><!--Обязательный нода-->
-			<E nameColumnPos="Наименование" /><!--Обязательный нода-->
-			<F nameColumnPos="Точность" type="Int" default="1"/>
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя настройки-->	
+			<B default="0.0" nameColumnPos="Значение" type="Number"/><!--Обязательный нода-->	
+			<C default="0.0" nameColumnPos="Нижняя_граница" type="Number"/><!--Обязательный нода-->	
+			<D default="0.0" nameColumnPos="Верхняя_граница" type="Number"/><!--Обязательный нода-->
+			<E nameColumnPos="Наименование"/><!--Обязательный нода-->
+			<F default="1" nameColumnPos="Точность" type="Int"/>
 		</EXEL>	
 		<GenData>	<!-- генерация типа TUNE_FR -->		
 			<Tune Type="REAL">
 				<globData name="Tune">
-					<localData int="_Algorithm.int" />
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</Tune>
 		</GenData>	
 		<GenCode>
-			<File src= "TuneInit" target="_Algorithm">
-				<Block start="Начало кода" end="Конец кода">
+			<File src="TuneInit" target="_Algorithm">
+				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<abonent/><text t="_Tune."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Значение"/><text t="; // "/><dbd t="Наименование"/> 
 					</String>						
 				</Block>
 			</File>	
-			<File src="B_TuneInit" target="C_HMI2.iec_hmi" nonFunc="BasicFBType"> <!-- генерация блока инициализации настроек в ЧМИ -->
-				<Block start="Начало кода" end="Конец кода">
+			<File nonFunc="BasicFBType" src="B_TuneInit" target="C_HMI2.iec_hmi"> <!-- генерация блока инициализации настроек в ЧМИ -->
+				<Block end="Конец кода" start="Начало кода">
 					<String>
-						<text t="&#x0A;T[i]:= &apos;"/><dbd t="Наименование"/>
-						<text t="&apos;;&#x0A;N[i]:= &apos;"/><dbd t="TAG_NAME_PLC"/>
-						<text t="&apos;;&#x0A;L[i]:= REAL#"/><dbd t="Нижняя_граница"/>
-						<text t=";&#x0A;H[i]:= REAL#"/><dbd t="Верхняя_граница"/>
-						<text t=";&#x0A;F[i]:= "/><dbd t="Точность"/>
-						<text t=";&#x0A;i:= i+ UINT#1"/>
+						<text t="&#10;(*"/><npp start="1"/><text t="*)"/>
+						<text t="&#10;T[i]:= '"/><dbd t="Наименование"/>
+						<text t="';&#10;N[i]:= '"/><dbd t="TAG_NAME_PLC"/>
+						<text t="';&#10;L[i]:= REAL#"/><dbd t="Нижняя_граница"/>
+						<text t=";&#10;H[i]:= REAL#"/><dbd t="Верхняя_граница"/>
+						<text t=";&#10;F[i]:= "/><dbd t="Точность"/>
+						<text t=";&#10;i:= i+ UINT#1;"/>
 					</String>
 				</Block>
 			</File>	
-			<File src= "Tune.lua"> <!-- генерация lua таблицы имен настроек -->	
-				<Block start="Начало таблицы" end="Конец таблицы" >
+			<File src="Tune.lua"> <!-- генерация lua таблицы имен настроек -->	
+				<Block end="Конец таблицы" start="Начало таблицы">
 					<String>
 						<text t="'"/><dbd t="TAG_NAME_PLC"/><text t="',  -- "/><dbd t="Наименование"/> 
 					</String>	
@@ -1332,42 +1439,42 @@
 		</GenCode>
 	</Tune>	
 	<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА CURVE_FR ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<CurveFR excelSheetName="CurveFR" Comment="Кривые топливного регулятора">
+	<CurveFR Comment="Кривые топливного регулятора" excelSheetName="CurveFR">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя настройки-->			
-			<B nameColumnPos="Нижняя_граница_X" type="Number" default="0.0"/><!--Обязательный нода-->	
-			<C nameColumnPos="Верхняя_граница_X" type="Number" default="0.0"/><!--Обязательный нода-->
-			<D nameColumnPos="Нижняя_граница_Y" type="Number" default="0.0"/><!--Обязательный нода-->	
-			<E nameColumnPos="Верхняя_граница_Y" type="Number" default="0.0"/><!--Обязательный нода-->
-			<F nameColumnPos="Наименование" /><!--Обязательный нода-->
-			<G nameColumnPos="Точность_X" type="Int" default="1"/>
-			<H nameColumnPos="Точность_Y" type="Int" default="1"/>			
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя настройки-->			
+			<B default="0.0" nameColumnPos="Нижняя_граница_X" type="Number"/><!--Обязательный нода-->	
+			<C default="0.0" nameColumnPos="Верхняя_граница_X" type="Number"/><!--Обязательный нода-->
+			<D default="0.0" nameColumnPos="Нижняя_граница_Y" type="Number"/><!--Обязательный нода-->	
+			<E default="0.0" nameColumnPos="Верхняя_граница_Y" type="Number"/><!--Обязательный нода-->
+			<F nameColumnPos="Наименование"/><!--Обязательный нода-->
+			<G default="1" nameColumnPos="Точность_X" type="Int"/>
+			<H default="1" nameColumnPos="Точность_Y" type="Int"/>			
 		</EXEL>	
 		<GenData>	<!-- генерация типа CURVE_FR -->		
 			<Curve_FR typeFile="T_Curve.type">
 				<globData name="Curve_FR">
-					<localData int="_GT_4RM.int" />
+					<localData int="_GT_4RM.int"/>
 				</globData>	
 			</Curve_FR>
 		</GenData>	
 		<GenCode> <!-- генерация инициализации кривых в ЧМИ -->
-			<File src= "B_CurveInit" target="C_HMI2.iec_hmi"  nonFunc="BasicFBType">			
-				<Block start="Начало кода" end="Конец кода">
+			<File nonFunc="BasicFBType" src="B_CurveInit" target="C_HMI2.iec_hmi">			
+				<Block end="Конец кода" start="Начало кода">
 					<String>
-						<text t="&#x0A;T[i]:= &apos;"/><dbd t="Наименование"/>
-						<text t="&apos;;&#x0A;N[i]:= &apos;"/><dbd t="TAG_NAME_PLC"/>
-						<text t="&apos;;&#x0A;Lx[i]:= REAL#"/><dbd t="Нижняя_граница_X"/>
-						<text t=";&#x0A;Hx[i]:= REAL#"/><dbd t="Верхняя_граница_X"/>
-						<text t=";&#x0A;Ly[i]:= REAL#"/><dbd t="Нижняя_граница_Y"/>
-						<text t=";&#x0A;Hy[i]:= REAL#"/><dbd t="Верхняя_граница_Y"/>
-						<text t=";&#x0A;Fx[i]:= "/><dbd t="Точность_X"/>
-						<text t=";&#x0A;Fy[i]:= "/><dbd t="Точность_Y"/>
-						<text t=";&#x0A;i:= i+ UINT#1"/>
+						<text t="&#10;T[i]:= '"/><dbd t="Наименование"/>
+						<text t="';&#10;N[i]:= '"/><dbd t="TAG_NAME_PLC"/>
+						<text t="';&#10;Lx[i]:= REAL#"/><dbd t="Нижняя_граница_X"/>
+						<text t=";&#10;Hx[i]:= REAL#"/><dbd t="Верхняя_граница_X"/>
+						<text t=";&#10;Ly[i]:= REAL#"/><dbd t="Нижняя_граница_Y"/>
+						<text t=";&#10;Hy[i]:= REAL#"/><dbd t="Верхняя_граница_Y"/>
+						<text t=";&#10;Fx[i]:= "/><dbd t="Точность_X"/>
+						<text t=";&#10;Fy[i]:= "/><dbd t="Точность_Y"/>
+						<text t=";&#10;i:= i+ UINT#1;"/>
 					</String>						
 				</Block>
 			</File>	
-			<File src= "Tune.lua"> <!-- генерация lua таблицы имен настроек -->	
-				<Block start="Начало таблицы" end="Конец таблицы" >
+			<File src="Curve_FR.lua"> <!-- генерация lua таблицы имен настроек -->	
+				<Block end="Конец таблицы" start="Начало таблицы">
 					<String>
 						<text t="'"/><dbd t="TAG_NAME_PLC"/><text t="',  -- "/><dbd t="Наименование"/> 
 					</String>	
@@ -1376,73 +1483,75 @@
 		</GenCode>
 	</CurveFR>	
 		<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА CURVE_FR_INIT ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<CurveFR_Init excelSheetName="CurveFR_Init" Comment="Инициализация кривых топливного регулятора">
+	<CurveFR_Init Comment="Инициализация кривых топливного регулятора" excelSheetName="CurveFR_Init">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" type="VarName" /> <!-- Алгоритмическое имя настройки-->
-			<B nameColumnPos="Смещение" type="Int" default="0"/><!--Обязательный нода, смещение в массиве-->				
-			<C nameColumnPos="X" type="Number" default="0.0"/><!--Обязательный нода, аргумент хар-ки-->	
-			<D nameColumnPos="Y" type="Number" default="0.0"/><!--Обязательный нода, значение хар-ки-->				
-			<E nameColumnPos="Кол-во_точек" type="Int" default=""/>			
-			<F nameColumnPos="Наименование" default=""/><!--Обязательный нода-->
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName"/> <!-- Алгоритмическое имя настройки-->
+			<B default="0" nameColumnPos="Смещение" type="Int"/><!--Обязательный нода, смещение в массиве-->				
+			<C default="0.0" nameColumnPos="X" type="Number"/><!--Обязательный нода, аргумент хар-ки-->	
+			<D default="0.0" nameColumnPos="Y" type="Number"/><!--Обязательный нода, значение хар-ки-->				
+			<E default="" nameColumnPos="Кол-во_точек" type="Int"/>			
+			<F default="" nameColumnPos="Наименование"/><!--Обязательный нода-->
 		</EXEL>	
 		<GenCode>
-			<File src= "CurveInitFR" target="_GT_4RM">
-				<Block start="Начало кода" end="Конец кода">
+			<File src="CurveInitFR" target="_GT_4RM">
+				<Block end="Конец кода" start="Начало кода">
 					<String>							
 						<IF cond="Смещение" val="0"><!-- Если смещение нулевое, то в строку пишем значение кол-ва точек -->	
-							<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".N := "/><dbd t="Кол-во_точек"/>
-							<text t="; // "/><dbd t="Наименование"/>						
+							<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".N := "/><dbd t="Кол-во_точек"/><text t="; // "/><dbd t="Наименование"/>						
 						</IF>	 <!-- в остальных случаях ничего не пишем -->
 					</String>							
 					<String>					
 						<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".s["/><dbd t="Смещение"/><text t="].x := "/><dbd t="X"/><text t="; "/>
-						<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".s["/><dbd t="Смещение"/><text t="].fx := "/><dbd t="Y"/>											
+						<abonent/><text t="_Curve_FR."/><dbd t="TAG_NAME_PLC"/><text t=".s["/><dbd t="Смещение"/><text t="].fx := "/><dbd t="Y"/><text t=";"/> 											
 					</String>						
 				</Block>
 			</File>	
-			<File src= "Tune.lua"> <!-- генерация lua таблицы имен настроек -->	
+		<!--	<File src= "Tune.lua">  генерация lua таблицы имен настроек 
 				<Block start="Начало таблицы" end="Конец таблицы" >
 					<String>
-						<text t="'"/><dbd t="TAG_NAME_PLC"/><text t="',  -- "/><dbd t="Наименование"/> 
+						<text t="'"/><dbd t="TAG_NAME_PLC"/><text t="',  - - "/><dbd t="Наименование"/> 
 					</String>	
 				</Block>
-			</File>	
+			</File>	-->	
 		</GenCode>
 	</CurveFR_Init>
 	<!--  ++++++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА Ресурсных счетчиков ++++++++++++++++++++++++++++++++++++++++++++++++++ steam -->
-	<RSR excelSheetName="RSR" Comment="Ресурсные счетчики">
+	<RSR Comment="Ресурсные счетчики" excelSheetName="RSR">
 		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя ресурса-->			
-			<B nameColumnPos="Наименование" /><!--Обязательный нода-->		
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя ресурса-->			
+			<B nameColumnPos="Наименование"/><!--Обязательный нода-->		
 		</EXEL>	
 		<GenData>
 			<RSR Type="UDINT">
 				<globData name="RSR">
-					<localData int="_ALgorithm.int" />
+					<localData int="_ALgorithm.int"/>
 				</globData>	
 			</RSR>
 		</GenData>			
 		<GenCode>
-			<File src= "RSR.lua"> 
-				<Block start="Начало таблицы" end="Конец таблицы" >
+			<File src="RSR.lua"> 
+				<Block end="Конец таблицы" start="Начало таблицы">
 					<String>
-						<text t="'"/><dbd t= "TAG_NAME_PLC"/><text t="', -- "/><dbd t= "Наименование" />
+						<IF cond="Хранить_значение" val="Да">
+							<text t="'"/><dbd t="TAG_NAME_PLC"/><text t="', -- "/><dbd t="Наименование"/>
+						</IF>
 					</String>
 				</Block>
 			</File>
 		</GenCode>
 	</RSR>	
 	<!-- ++++++++++++++++++++++++++++++++++++++++ ТАБЛИЦА Расчетных параметров +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<CalcPar excelSheetName="CalcPar" Comment="Расчетные параметры">
+	<CalcPar Comment="Расчетные параметры" excelSheetName="CalcPar">
 		<EXEL>	
-			<A nameColumnPos="TAG_NAME_PLC" unical="true" type="VarName" /> <!-- Алгоритмическое имя ресурса-->			
-			<B nameColumnPos="Наименование" /><!--Обязательный нода-->	
-			<C nameColumnPos="Единица_измерения" default=""/>
-            <D nameColumnPos="Точность"  type="Int" default="2"/>
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя ресурса-->			
+			<B nameColumnPos="Наименование"/><!--Обязательный нода-->	
+			<C default="" nameColumnPos="Единица_измерения"/>
+            <D default="2" nameColumnPos="Точность" type="Int"/>
+			<E dictionary="SmallName.xml" nameColumnPos="SmallName" sourceCol="TAG_NAME_PLC"/><!-- используется при генерации листа мнемосхемы-->
 		</EXEL>	
 		<GenData>		
 			<CalcPar>
-				<globData name="T_CalcPar">
+				<globData name="CalcPar">
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</CalcPar>
@@ -1454,130 +1563,178 @@
             <A nameColumnPos="Наименование"/>   <!--Обязательный нода Русское название-->
             <B nameColumnPos="Конфигурация"/>   <!--Обязательный нода конфигурация ИМ-->	 		
             <C nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>      <!--Обязательный нода-->
-            <D default="15.0" nameColumnPos="tp1" type="Number"/>     <!--Обязательный нода .время перестановки, при превышении которого выдается предупреждение-->
+            <D default="15.0" nameColumnPos="dcoa" type="Number"/>     <!--Обязательный нода .время перестановки, при превышении которого выдается предупреждение-->
             <E default="20.0" nameColumnPos="tp2" type="Number"/>      <!--Обязательный нода . время перестановки, при превышении которого снимается выходная команда -->
             <F default="1.0" nameColumnPos="td1" type="Number"/>     <!-- Обязательный нода. время дожима на открытие-->
             <G default="1.0" nameColumnPos="td2" type="Number"/>      <!-- Обязательный нода. время дожима на закрытие-->		
             <H default="5.0" nameColumnPos="tn" type="Number"/>     <!-- Обязательный нода. время реакции на нестрагивание-->	
-            <I default="1.0" nameColumnPos="tk" type="Number"/>      <!-- Обязательный нода. время реакции на пропадание кц-->	
+            <I default="1.0" nameColumnPos="tk" type="Number"/>      <!-- Обязательный нода. время реакции на пропадание кц-->
+			<J default="0.0" nameColumnPos="dsc" type="Number"/> <!-- Обязательный нода. время задержки самопроизвольного перермещения-->
             <J default="" nameColumnPos="Тип_ИМ"/>      <!-- Необязательная нода, -->
-            <K default="" nameColumnPos="Короткое_имя"/> 
-			<L nameColumnPos="Структура" default="" /> <!-- Имя структуры ИМ, если оно отличное от стандарного (например, из Modbus) -->
-			<M nameColumnPos="Нестанд." default="" /> <!-- Нестандартная привязка выхода -->
+            <K default="Наименование" nameColumnPos="Короткое_имя"/> 
+			<L default="" nameColumnPos="Структура"/> <!-- Имя структуры ИМ, если оно отличное от стандарного (например, из Modbus) -->
+			<M default="" nameColumnPos="Нестандартный"/> <!-- Нестандартная привязка выхода -->
+			<N default="" nameColumnPos="КЦУ_Откр"/>
+			<O default="" nameColumnPos="КЦУ_Закр"/>
         </EXEL>	
 		<GenData>
-			<AM typeFile="support_AM.type">
+			<tuneAM disable="" typeFile="T_tuneAM.type">
+				<globData>
+					<localData int="_Algorithm.int" name="TuneAM"/>
+				</globData>
+			</tuneAM>				
+			<!-- Для совмещенной структуры ИМ (Ab_AM) -->
+			<!-- AM typeFile="support_AM.type">
 				<globData name="AM" >
 					<localData int="_Algorithm.int"/>
 				</globData>
-			</AM>
-			<tuneAM disable="" typeFile="T_tuneAM.type">
-				<globData>
-					<localData  name="TuneAM" int="_Algorithm.int"/>
-				</globData>
-			</tuneAM>
+			</AM-->
+			<!-- Для раздельной структуры ИМ (Ab_AM_ToHMI, Ab_AM_FromHMI) -->
+			<AM_ToHMI>
+				<globData name="AI_ToHMI">
+					<localData int="_Algorithm.int"/>				
+				</globData>	 			
+			</AM_ToHMI>						
+			<AM_FromHMI>
+				<globData name="AI_FromHMI">
+					<localData int="_Algorithm.int"/>					
+				</globData>	
+			</AM_FromHMI>
 		</GenData>
 		<GenCode>
 						<!-- ........................................ Файл функции IM_Init ....................................... -->
-			<File src= "IM_Init" target="_Algorithm"> <!-- имя функции/блока, имя приложения -->
-				<Block start="Начало кода" end="Конец кода">
+			<File src="IM_Init" target="_Algorithm"> <!-- имя функции/блока, имя приложения -->
+				<Block end="Конец кода" start="Начало кода">
 					<String>
-						<text t=" // "/><dbd t="Наименование"/> 
+						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/> 
 					</String>						
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayChangeOvertimeAlert := "/><dbd t="tp1"/>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayChangeOvertimeAlert := "/><dbd t="dcoa"/><text t="; // dcoa"/> 
 					</String>
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayQTimeout := "/><dbd t="tp2"/>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayQTimeout := "/><dbd t="dqt"/><text t="; // dqt"/> 
 					</String>	
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOn := "/><dbd t="td1"/>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOn := "/><dbd t="deon"/><text t="; // deon"/> 
 					</String>	
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOff := "/><dbd t="td2"/>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOff := "/><dbd t="deoff"/><text t="; // deoff"/> 
 					</String>	
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayNotMoveAlert := "/><dbd t="tn"/>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayNotMoveAlert := "/><dbd t="dnma"/><text t="; // dnma"/> 
 					</String>
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayCircBrkAlert := "/><dbd t="tk"/>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayCircBrkAlert := "/><dbd t="dcba"/><text t=";// dcba"/> 
+					</String>
+					<String>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delaySelfChng := "/><dbd t="dsc"/><text t=";// dsc"/> 
+					</String>
+					<!--String>
+						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".timePrmCommand := "/><dbd t="tpc"/><text t=";// tpc"/> 
+					</String-->					
+					<String>
+						<IF cond="КЦУ_Откр" val="">
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCon := true;"/>
+						<ELSE> 	
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCon := false;"/>
+						</ELSE>
+						</IF>
+					</String>
+					<String>
+						<IF cond="КЦУ_Закр" val="">
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCoff := true;"/>
+						<ELSE> 	
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCoff := false;"/>
+						</ELSE>
+						</IF>
+					</String>	
+					<String>
+						<text t=" "/>
 					</String>					
 				</Block>
 			</File>
 			<!-- ........................................ Файл функции IM_Alg ....................................... -->			
 			<File src="IM_Alg" target="_Algorithm">
-				<Block start="Начало кода" end="Конец кода">
+				<Block end="Конец кода" start="Начало кода">
 					<String>
-						<text t=" // "/><dbd t="Наименование"/><text t=" ("/><dbd t="Конфигурация"/><text t=") -------------------------------------------------------------------------"/>	 
+						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="Конфигурация"/><text t=") -------------------------------------------------------------------------"/>	 
 					</String>						
 					<String>
-						<abonent/><text t="_AM."/><dbd t="TAG_NAME_PLC"/><text t=".disableManual := true"/>
+						<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableManual := true"/><text t=";"/> 
 					</String>
 					<String>
 						<IF cond="Конфигурация" val="1х*">
-							<abonent/><text t="_AM."/><dbd t="TAG_NAME_PLC"/><text t=".algOn := false"/>
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".algOn := false"/><text t=";"/> 
 						</IF>
 						<IF cond="Конфигурация" val="2х*">
-							<abonent/><text t="_AM."/><dbd t="TAG_NAME_PLC"/><text t=".algOn := false"/>
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".algOn := false"/><text t=";"/> 
 						</IF>
 					</String>		
 					<String>
 						<IF cond="Конфигурация" val="2х*">
-							<abonent/><text t="_AM."/><dbd t="TAG_NAME_PLC"/><text t=".algOff := false"/>
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".algOff := false"/><text t=";"/> 
 						</IF>
 						<IF cond="Конфигурация" val="1НЗх*">
-							<abonent/><text t="_AM."/><dbd t="TAG_NAME_PLC"/><text t=".algOff := false"/>
+							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".algOff := false"/><text t=";"/> 
 						</IF>	
 					</String>
 					<String>
-						<text t="//"/>	 
+						<text t=" "/>	 
 					</String>	
 				</Block>	
 			</File>
 			<!-- ........................................ Файл функции Call_IM ....................................... -->
-			<File src="Call_IM" target="_Algorithm" nonFunc="FunctionBlock" fbblock="FB_IM">
-				<Block start="Начало кода" end="Конец кода">
+			<File fbblock="FB_IM" nonFunc="FunctionBlock" src="FB_Call_IM" target="_Algorithm">
+				<Block end="Конец кода" start="Начало кода">
 					<String>
-						<text t=" // "/><dbd t="Наименование"/><text t=" ("/><dbd t="Конфигурация"/><text t=") -------------------------------------------------------------------------"/>	 
+						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="Конфигурация"/><text t=") -------------------------------------------------------------------------"/>	 
 					</String>
 					<String> <!--  пишем основную строку вызова обработчика ИМ -->
-						<text t="Call_"/><dbd t="TAG_NAME_PLC"/><text t="(AMtupe.am"/>
-							<switch swt="Конфигурация" default="1x1">
-								<case val="1х0" def="1x0"/> <!--  1 команда, 0 конечников -->
-								<case val="1х1" def="1x1"/> <!--  1 команда, 1 конечник -->
-								<case val="1х2" def="1x2"/> <!--  1 команда, 2 конечника -->
-								<case val="1НЗх1НЗ" def="1ofx1of"/>	<!--ИМ 1 команда "закрытие", 1 конечник "закрыт"-->
-								<case val="1НЗх2" def="1ofx2"/>		<!--ИМ 1 команда "закрытие", 2 конечника -->
-								<case val="1х1НЗ" def="1x1of"/>		<!--ИМ 1 команда, 1 конечник "закрыт"-->	
-								<case val="2х2" def="2x2"/> <!--  2 команды, 2 конечника -->
-								<case val="2х1" def="2x1"/> <!--  2 команды, 1 конечник -->
-								<case val="2х2уд" def="2x2fh"/> <!--  2 команды, 2 конечника с удержанием-->							
+						<text t="Call_"/><dbd t="TAG_NAME_PLC"/><text t="(AMtune.am"/>
+							<switch default="1x1" swt="Конфигурация">
+								<case def="1x0" val="1х0"/> <!--  1 команда, 0 конечников -->
+								<case def="1x1" val="1х1"/> <!--  1 команда, 1 конечник -->
+								<case def="1x2" val="1х2"/> <!--  1 команда, 2 конечника -->
+								<case def="1ofx1of" val="1НЗх1НЗ"/>	<!--ИМ 1 команда "закрытие", 1 конечник "закрыт"-->
+								<case def="1ofx2" val="1НЗх2"/>		<!--ИМ 1 команда "закрытие", 2 конечника -->
+								<case def="1x1of" val="1х1НЗ"/>		<!--ИМ 1 команда, 1 конечник "закрыт"-->	
+								<case def="2x2" val="2х2"/> <!--  2 команды, 2 конечника -->
+								<case def="2x1" val="2х1"/> <!--  2 команды, 1 конечник -->
+								<case def="2x2fh" val="2х2уд"/> <!--  2 команды, 2 конечника с удержанием-->							
 							</switch>
-						 <text t=", AM := "/><abonent/><text t="_AM."/><dbd t="TAG_NAME_PLC"/>
-						 <text t=", onImit := imit, cycle := algCycle, unlock := unlock, tuns := "/><abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=", //"/>
+						<!-- Для совмещенной структуры ИМ (Ab_AM)	-->
+						<!--text t=", AM := "/><abonent/><text t="_AM."/><dbd t="TAG_NAME_PLC"/-->
+						<!-- Для раздельной структуры ИМ (Ab_AM_ToHMI, Ab_AM_FromHMI) -->
+						<text t=", AM := "/><abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/>
+						<text t=", KN := "/><abonent/><text t="_AM_FromHMI."/><dbd t="TAG_NAME_PLC"/>
+						<!-- конец кода для раздельной структруры -->
+						<text t=", tuns := "/><abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=","/>
+					</String>
+					<String>  <!--  пишем вторую строку вызова обработчика ИМ -->					
+						 <text t="onImit := imit, cycle := algCycle, unlock := unlock,"/>
 					</String>
 					<String>  <!--  пишем передачу входных сигналов I_ON,OFF -->
 						<IF cond="Конфигурация" val="*х1НЗ">
-							<IF cond="Структура" val= "">
-									<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>
+							<IF cond="Структура" val="">
+									<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF"/>
 								<ELSE> 
-									<text t="I_OFF := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>		
+									<text t="I_OFF := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF"/>		
 								</ELSE>
 							</IF>							
 						<ELSE> 
 							<IF cond="Конфигурация" val="*х1">
-								<IF cond="Структура" val= "">								
-									<text t="I_ON := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>
+								<IF cond="Структура" val="">								
+									<text t="I_ON := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON"/>
 								<ELSE> 
-									<text t="I_ON := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
+									<text t="I_ON := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON"/>		
 								</ELSE>
-								</IF>													
+								</IF>	
 							<ELSE> 
 								<IF cond="Конфигурация" val="*х2">
-									<IF cond="Структура" val= "">							
-										<text t="I_ON := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>
+									<IF cond="Структура" val="">							
+										<text t="I_ON := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON"/>
 									<ELSE> 
-										<text t="I_ON := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
+										<text t="I_ON := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_ON"/>		
 									</ELSE>
 									</IF>																
 								</IF>
@@ -1585,108 +1742,170 @@
 							</IF>	
 						</ELSE>
 						</IF>
+						<!-- СКОБКА: если нестандартый вывод и нет контроля цепи - закрываем скобку -->
+						<IF cond="Конфигурация" val="*х0"><!-- если нет конечников - пропускаем -->
+						<ELSE>
+							<IF cond="Нестандартный" val="">
+								<text t=","/>
+							<ELSE>
+								<IF cond="Конфигурация" val="*х2"> <!-- если есть второй конечник - просто ставим запятую и идем дальше -->
+									<text t=","/>	
+								<ELSE>
+									<IF cond="КЦУ_Откр" val="">
+										<IF cond="КЦУ_Закр" val="">
+											<text t=");"/>
+										<ELSE>
+											<text t=","/>
+										</ELSE>
+										</IF>
+									<ELSE>
+										<text t=","/>
+									</ELSE>
+									</IF>
+								</ELSE>
+								</IF>
+							</ELSE>
+							</IF>	
+						</ELSE>
+						</IF>						
 					</String>	
+					<!-- строка второго конечника --> 
 					<String>					
 						<IF cond="Конфигурация" val="*х2">
-							<IF cond="Структура" val= "">						
-								<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>
+							<IF cond="Структура" val="">						
+								<text t="I_OFF := "/><abonent/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF"/>
 							<ELSE> 
-								<text t="I_OFF := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF, //"/>									
+								<text t="I_OFF := "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DI."/><dbd t="TAG_NAME_PLC"/><text t="_OF"/>									
 							</ELSE>
-							</IF>									
-						</IF>									
-					</String>					
-					<String>  <!--  пишем передачу КЦУ I_Con,Coff -->
-						<IF cond="Нестанд." val = "">
-							<IF cond="Конфигурация" val="1НЗх*">
-								<text t="I_Coff := true, //"/>
-								<ELSE> 
-									<IF cond="Конфигурация" val="2х*">
-										<text t="I_Con := true, //"/>
-										<ELSE> 
-											<text t="I_Con := true, //"/> <!--I_Coff := true)"/-->
-										</ELSE>										
+							</IF>	
+							<!-- СКОБКА: если нестандартый вывод и нет контроля цепи - закрываем скобку -->
+							<IF cond="Нестандартный" val="">
+								<text t=","/>
+							<ELSE>
+								<IF cond="КЦУ_Откр" val="">
+									<IF cond="КЦУ_Закр" val="">
+										<text t=");"/>
+									<ELSE>
+										<text t=","/>
+									</ELSE>
 									</IF>
-								</ELSE>		
+								<ELSE>
+									<text t=","/>
+								</ELSE>
+								</IF>
+							</ELSE>
+							</IF>								
+						</IF>
+					</String>
+					 <!--  пишем передачу КЦУ I_Con,Coff -->
+					 <!-- Строка первого сигнала контроля цепи -->
+					<String> 
+						<IF cond="Нестандартный" val="">
+							<IF cond="Конфигурация" val="1НЗх*">
+								<IF cond="КЦУ_Закр" val="">
+								<ELSE> 	
+									<text t="I_Coff := "/><dbd t="КЦУ_Закр"/><text t=","/>
+								</ELSE>
+								</IF>							
+							<ELSE> 
+								<IF cond="КЦУ_Откр" val="">
+								<ELSE>								
+									<text t="I_Con := "/><dbd t="КЦУ_Откр"/><text t=","/>
+								</ELSE>									
+								</IF>
+							</ELSE>		
 							</IF>						
 						<ELSE>							
-							<IF cond="Конфигурация" val="1НЗх*">
-								<text t="I_Coff := true)"/>
-								<ELSE> 
-									<IF cond="Конфигурация" val="1х*">
-										<text t="I_Con := true)"/>
-										<ELSE> 
-											<text t="I_Con := true, //"/> <!--I_Coff := true)"/-->
-										</ELSE>										
-									</IF>
-								</ELSE>	
+							<IF cond="Конфигурация" val="1НЗх*">						
+								<IF cond="КЦУ_Закр" val="">							
+								<ELSE> 	
+									<text t="I_Coff := "/><dbd t="КЦУ_Закр"/><text t=");"/>
+								</ELSE>						
+								</IF>	
+							<ELSE> 
+								<IF cond="КЦУ_Откр" val="">
+								<ELSE> 	
+									<text t="I_Con := "/><dbd t="КЦУ_Откр"/><text t=");"/>										
+								</ELSE>
+								</IF>																																	
+							</ELSE>	
 							</IF>
 						</ELSE>								
 						</IF>
 					</String>
+					<!-- Строка второго сигнала контроля цепи -->
 					<String>
-						<IF cond="Нестанд." val = "">					
-							<IF cond="Конфигурация" val="2х*">	
-								<text t="I_Coff := true, //"/>
+						<IF cond="Нестандартный" val="">					
+							<IF cond="Конфигурация" val="2х*">
+								<IF cond="КЦУ_Закр" val="">
+								<ELSE> 	
+									<text t="I_Coff := "/><dbd t="КЦУ_Закр"/><text t=","/>
+								</ELSE>
+								</IF>							
 							</IF>								
 						<ELSE>	
 							<IF cond="Конфигурация" val="2х*">	
-								<text t="I_Coff := true)"/>	
+								<IF cond="КЦУ_Закр" val="">
+								<ELSE> 	
+									<text t="I_Coff := "/><dbd t="КЦУ_Закр"/><text t=");"/>
+								</ELSE>
+								</IF>								
 							</IF>									
 						</ELSE>	
 						</IF>						
 					</String>					
-					<String>  <!--  пишем передачу выходных сигналов Q_ON,OFF -->
-						<IF cond="Нестанд." val = "">
-							<IF cond="Структура" val= "">							
+					 <!--  пишем передачу выходных сигналов Q_ON,OFF -->
+					<String> 
+						<IF cond="Нестандартный" val="">
+							<IF cond="Структура" val="">							
 								<IF cond="Конфигурация" val="1х*">
-									<text t="Q_ON => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON)"/>
+									<text t="Q_ON =&gt; "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON);"/>
 								</IF>
 								<IF cond="Конфигурация" val="2х*">
-									<text t="Q_ON => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
+									<text t="Q_ON =&gt; "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON,"/>		
 								</IF>
 							<ELSE>
 								<IF cond="Конфигурация" val="1х*">
-									<text t="Q_ON => "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON)"/>
+									<text t="Q_ON =&gt; "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON);"/>
 								</IF>
 								<IF cond="Конфигурация" val="2х*">
-									<text t="Q_ON => "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON, //"/>		
+									<text t="Q_ON =&gt; "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON,"/>		
 								</IF>
 							</ELSE>	
 							</IF>									
 						<ELSE>
-							<IF cond="Нестанд." val = "not">	<!-- если в ячейке Нестанд. есть "not", то задается инверсия выхода -->
-								<IF cond="Структура" val= "">								
+							<IF cond="Нестандартный" val="not">	<!-- если в ячейке Нестандартный есть "not", то задается инверсия выхода -->
+								<IF cond="Структура" val="">								
 									<IF cond="Конфигурация" val="1х*">	
-										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>							
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON;"/>							
 									</IF>
 									<IF cond="Конфигурация" val="2х*">
-										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON;"/>
 									</IF>
 									<IF cond="Конфигурация" val="1НЗх*">	
-										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>							
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF;"/>							
 									</IF>
 								<ELSE>										
 									<IF cond="Конфигурация" val="1х*">	
-										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>							
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON;"/>							
 									</IF>
 									<IF cond="Конфигурация" val="2х*">
-										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON;"/>
 									</IF>
 									<IF cond="Конфигурация" val="1НЗх*">	
-										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>							
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF;"/>							
 									</IF>									
 								</ELSE>	
 								</IF>								
-							<ELSE>			<!-- если в ячейке Нестанд. любое другое имя, то передаем выход в переменную с этим именем -->							
+							<ELSE>			<!-- если в ячейке Нестандартный любое другое имя, то передаем выход в переменную с этим именем -->							
 								<IF cond="Конфигурация" val="1х*">	
-									<dbd t="Нестанд."/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>							
+									<dbd t="Нестандартный"/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON;"/>							
 								</IF>
 								<IF cond="Конфигурация" val="2х*">
-									<dbd t="Нестанд."/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON"/>	
+									<dbd t="Нестандартный"/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_ON;"/>	
 								</IF>
 								<IF cond="Конфигурация" val="1НЗх*">	
-									<dbd t="Нестанд."/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>								
+									<dbd t="Нестандартный"/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF;"/>								
 								</IF>									
 							</ELSE>
 							</IF>
@@ -1694,46 +1913,107 @@
 						</IF>
 					</String>	
 					<String> <!--  дописываем строку передачи выходных сигналов Q_OFF  для 2х-->
-						<IF cond="Нестанд." val = "">	
-							<IF cond="Структура" val= "">							
+						<IF cond="Нестандартный" val="">	
+							<IF cond="Структура" val="">							
 								<IF cond="Конфигурация" val="2х*">
-									<text t="Q_OFF => "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF)"/>		
+									<text t="Q_OFF =&gt; "/><abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF);"/>		
 								</IF>
 							<ELSE>
 								<IF cond="Конфигурация" val="2х*">
-									<text t="Q_OFF => "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF)"/>		
+									<text t="Q_OFF =&gt; "/><abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_OF);"/>		
 								</IF>
 							</ELSE>
 							</IF>								
 						<ELSE>
-							<IF cond="Нестанд." val = "not">	<!-- если в ячейке Нестанд. есть "not", то задается инверсия выхода -->
-								<IF cond="Структура" val= "">							
+							<IF cond="Нестандартный" val="not">	<!-- если в ячейке Нестандартный есть "not", то задается инверсия выхода -->
+								<IF cond="Структура" val="">							
 									<IF cond="Конфигурация" val="2х*">
-										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>
+										<abonent/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF;"/>
 									</IF>
 								<ELSE>
 									<IF cond="Конфигурация" val="2х*">
-										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>
+										<abonent/><text t="_"/><dbd t="Структура"/><text t="_DO."/><dbd t="TAG_NAME_PLC"/><text t="_ON := not Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF;"/>
 									</IF>									
 								</ELSE>
 								</IF>										
 							<ELSE>	
 								<IF cond="Конфигурация" val="2х*">
-									<dbd t="Нестанд."/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF"/>	
+									<dbd t="Нестандартный"/><text t=" := Call_"/><dbd t="TAG_NAME_PLC"/><text t=".Q_OFF;"/>	
 								</IF>
 							</ELSE>		
 							</IF>
 						</ELSE>							
 						</IF>										
 					</String>
-					<String>  <!--  строка обобщеной сигнализации ИМ-->
-						<text t="ps_im := ps_im or Call_"/><dbd t="TAG_NAME_PLC"/><text t=".ps"/>
-					</String>	
+					<!--  сборка строки обобщеной сигнализации ИМ-->
+					<String> 
+						<text t="ps_im := ps_im or Call_"/><dbd t="TAG_NAME_PLC"/><text t=".ps;"/>
+					</String>
+					<String>  
+						<text t="bad_im := bad_im or Call_"/><dbd t="TAG_NAME_PLC"/><text t=".bad;"/>
+					</String>					
 					<String>
-						<text t="//"/>
+						<text t=" "/>
 					</String>	
 				</Block>
 			</File>	
 		</GenCode>			
 	</AM>
+	
+	<!-- ==================================================== Уставки ============================================================================================================================== -->
+	<SP Comment="Уставки аналоговых параметров" excelSheetName="SP">
+		<GenData>
+			<SP Type="BOOL">
+				<globData name="SP">
+					<localData int="_Algorithm.int"/>
+				</globData>	
+			</SP>
+			<Ust Type="REAL">
+				<globData name="Ust">
+					<localData int="_Algorithm.int"/>
+				</globData>	
+			</Ust>
+			<SP_Settings typeFile="T_SP_Settings.type">
+				<globData disable=""> <!--disable отключает формирование глобальных/локльных сигналов -->
+					<localData int="_Algorithm.int" multyAb="true" name="SP_Settings"/>
+				</globData>	
+			</SP_Settings>
+			<SP_Internal Type="REAL">
+				<globData disable="">
+					<localData int="_Algorithm.int" multyAb="true" name="SP_Internal"/>
+				</globData>			
+			</SP_Internal> 			
+		</GenData>
+	
+	</SP>	
+<!-- ============================================== Сообщения из барабанов ============================================================================================================================ -->	
+	<MSG Comment="Сообщения алгоритма" excelSheetName="MSG">
+		<EXEL>	
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя сообщения-->			
+			<B nameColumnPos="Наименование"/><!--Обязательный нода-->	
+		</EXEL>	
+		<GenData>		
+			<MSG type= "BOOL">
+				<globData name="MSG">
+					<localData int="_Algorithm.int"/>
+				</globData>
+			</MSG>
+		</GenData>
+		<GenCode>
+			<File src="DrumMessages.lua"> 
+				<Block end="Конец таблицы" start="Начало таблицы">
+					<String>
+							<text t="'"/><dbd t="TAG_NAME_PLC"/><text t="', -- "/><dbd t="Наименование"/>
+					</String>
+				</Block>
+			</File>
+			<File src="DrumMessages" target="_Algorithm">
+				<Block end="Конец кода msg" start="Начало кода">
+					<String>
+						<abonent/><text t="_MSG."/><dbd t="TAG_NAME_PLC"/><text t=" := dro."/><dbd t="TAG_NAME_PLC"/><text t=" and ; // "/><dbd t="Наименование"/> 
+					</String>						
+				</Block>
+			</File>
+		</GenCode>
+	</MSG>
 </ConfigSignals>

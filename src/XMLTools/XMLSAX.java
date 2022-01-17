@@ -338,7 +338,7 @@ public class XMLSAX {
      * 
      */
     public void writeDocument() {
-        if (document == null || "".equals(pathWF)) {
+        if (document == null || "".equalsIgnoreCase(pathWF)) {
             return;
         }
         writeDocument(pathWF);
@@ -386,7 +386,7 @@ public class XMLSAX {
     
     // --- простой метод записи удаленны(не верно работал с конфигом из за ручного ввода)  ---
     public void writeDocumentHowConfig() {
-        if (document == null || "".equals(pathWF)) {
+        if (document == null || "".equalsIgnoreCase(pathWF)) {
             return;
         }
         try {
@@ -570,7 +570,7 @@ public class XMLSAX {
         Node finding = null;
         if (n != null) {
             if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
-                if (n.getNodeName().equals(s)) {
+                if (n.getNodeName().equalsIgnoreCase(s)) {
                     finding = n;
                     return finding;
                 }
@@ -594,7 +594,7 @@ public class XMLSAX {
      */
     public ArrayList<Node> getNodesName(Node n, String s) {
         if (n.getNodeType() == n.ELEMENT_NODE) { //  проверка хз чего The node is an Element.
-            if (n.getNodeName().equals(s)) {
+            if (n.getNodeName().equalsIgnoreCase(s)) {
                 AllFindingNode.add(n);
                 System.out.println("Name:Node " + n.getNodeName());
             }
@@ -622,7 +622,7 @@ public class XMLSAX {
         NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
         for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
             Node attr = startAttr.item(i);
-            if (attr.getNodeName().equals(s)) { // Название атрибута 
+            if (attr.getNodeName().equalsIgnoreCase(s)) { // Название атрибута 
                 return attr.getNodeValue();
             }
         }
@@ -643,7 +643,7 @@ public class XMLSAX {
             NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента 
             for (int i = 0; i < startAttr.getLength(); i++) { // Переборка значений ноды 
                 Node attr = startAttr.item(i);
-                if (attr.getNodeName().equals(nameAtr)) { // Название атрибута 
+                if (attr.getNodeName().equalsIgnoreCase(nameAtr)) { // Название атрибута 
                     attr.setNodeValue(value);
                     return request = true;
                 }
@@ -675,7 +675,7 @@ public class XMLSAX {
         //System.out.println("NodeName " + n.getNodeName() + " NameType" + n.getNodeType());
         if (n.getNodeType() == n.ELEMENT_NODE) { //  так имя ноды нашел
             boolean access = true; // разрешение на нужную ноду
-            if (n.getNodeName().equals(nameFindN)) { // нашли нужное имя ноды
+            if (n.getNodeName().equalsIgnoreCase(nameFindN)) { // нашли нужное имя ноды
                 NamedNodeMap startAttr = n.getAttributes(); // Получение имена и атрибутов каждого элемента
                 if (arg.length == 1) {
                     return n;               // если аргумент был один - искали толькор имя ноды и нашли его
@@ -693,7 +693,7 @@ public class XMLSAX {
                         String Attribute = attr.getNodeName(); // Название атрибута
                         String Value = attr.getNodeValue(); // значение атрибута
                         //System.out.println("Attribute:" + Attribute + " Value:" + Value);
-                        if (key.equals(Attribute) && (val == null || val.equals(Value))) {
+                        if (key.equalsIgnoreCase(Attribute) && (val == null || val.equalsIgnoreCase(Value))) {
                             compared = true;
                             break; // элемент нашли и не перебираем дальше значения
                         }
@@ -722,7 +722,7 @@ public class XMLSAX {
      *
      */
     public void writeDocument1() {
-        if (document == null || "".equals(pathWF)) {
+        if (document == null || "".equalsIgnoreCase(pathWF)) {
             return;
         }
         try {

@@ -2282,7 +2282,8 @@ public class Generator {
             if(i >= listSignals.size()-1){
                 endingString = "";
             }
-            FileManager.writeAddStringToFile(nameFileLongArchive, "'" + nameSigwithoutAbonent + "'" + ", " + "'" + arrSig[1] + "'" + endingString );
+            //FileManager.writeAddStringToFile(nameFileLongArchive, "'" + nameSigwithoutAbonent + "'" + ", " + "'" + arrSig[1] + "'" + endingString );
+            FileManager.writeAddStringToFile(nameFileLongArchive, "'" + nameSigwithoutAbonent + "'" + endingString );
         }
         FileManager.writeAddStringToFile(nameFileLongArchive,"}");
         
