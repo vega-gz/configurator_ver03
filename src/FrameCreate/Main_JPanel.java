@@ -545,7 +545,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.12.8");
+        jLabel9.setText("v.12.10");
 
         jLabel3.setText("Текущий абонент");
 

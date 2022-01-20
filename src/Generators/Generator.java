@@ -1876,7 +1876,6 @@ public class Generator {
         }
         FileManager fm = new FileManager();
         fm.createFile2write(globVar.desDir + File.separator + serverName + ".csv");
-        String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI(); //  ууиды PV T_CalcPar T_AI_ToHMI
         int jpgMax = opcList.size();
         int jpbCnt = 1;
         int ret = 0;
@@ -1931,13 +1930,16 @@ public class Generator {
                                     commSig = comment + "." + commSig;
                                 }
                                 if (!isStdType(typeSig)) {
-                                    if (sig[0].contains("CalcPar")) {
-                                        uuidSig += "." + asdad[0];
-                                    } else {
-                                        uuidSig += "." + asdad[1];
-                                    }
+//                                    String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI(); //  ууиды PV T_CalcPar T_AI_ToHMI
+//                                    if (sig[0].contains("CalcPar")) {
+//                                        uuidSig += "." + asdad[0];
+//                                    } else {
+//                                        uuidSig += "." + asdad[1];
+//                                    }
+                                    //  ууиды PV блоков T_CalcPar T_AI_ToHMI
+                                    String uuidPV = GetUuid_PV(new String[]{"T_CalcPar.type", "T_AI_ToHMI.type"}, typeSig);
+                                    uuidSig += "." + uuidPV;
                                     nameSig += ".PV";
-                                    //uuidSig += ".19F27C8242D7A36082010591B7CF4F94";
                                     typeSig = "REAL";
                                 }
                                 insertInOPC(nameSig, sig[1], id, idType, uuidSig, commSig, opcSax, fm, typeSig, cnt++);
@@ -2081,7 +2083,14 @@ public class Generator {
 
         String[] attr = new String[3];
         ArrayList<String> tableList = globVar.DB.getListTable();
-
+        ArrayList<String> tableListTmp = new ArrayList<>();
+        for (String s: tableList ){ // костыль убрать удаленные базы из поиска
+            if (s.indexOf("Del") < 0) {
+                tableListTmp.add(s);
+            }
+        }
+        tableList = tableListTmp;
+        
         int ret = 0;
         int jpgMax = archList.size();
         int jpbCnt = 1;
@@ -2114,8 +2123,6 @@ public class Generator {
                 loggerFile.writeLog("Not find comment Archive Table " + tableName);
             } // просто отработка поиска ошибок
             
-            //  ууиды PV T_CalcPar T_AI_ToHMI
-            String[] asdad = GetUuid_PV_T_CalcPar_T_AI_ToHMI();
 
             if (z < 0) {
                 structArr.add("");
@@ -2165,18 +2172,18 @@ public class Generator {
                                 String nameSig = bigSax.getDataAttr(sigNode, "Name");
                                 String typeSig = bigSax.getDataAttr(sigNode, "Type");
                                 String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
+                                
+                                //  ууиды PV блоков T_CalcPar T_AI_ToHMI
+                                String uuidPV = GetUuid_PV(new String[]{"T_CalcPar.type", "T_AI_ToHMI.type"}, typeSig);
+                                
+            
                                 if (!nameSig.contains("Res_")) {
                                     String tmpName = sig0 + "." + nameSig;
                                     String tmpUuid = uuid + "." + uuidSig;
                                     if (!isStdType(typeSig)) {
                                         tmpName += ".PV";
                                         String fileReadPV = "";
-                                        XMLSAX  CalcParOrAI_ToHMI = new XMLSAX();
-                                        if (sig0.contains("CalcPar")) {
-                                            tmpUuid += "." + asdad[0];
-                                        }else{
-                                            tmpUuid += "." + asdad[1];
-                                        }
+                                        tmpUuid += "." + uuidPV;
                                     }
                                     // <Trend ItemName="AO_D.Set_APK" UUID="D81CC7224B1F7C96DAA237A634367986.4C16C6034A798CBFCD04F398721A6E10" Min="0" Max="10" Log="FALSE" Color="#000000" InvColor="#00000000" Title="Управление АПК (выход на драйвер 0-10 В)" AxisTitle="Управление АПК (выход на драйвер 0-10 В)" LineWidth="2" HideScale="TRUE" HideYAxis="TRUE" Hide="TRUE" CanChange="TRUE" />
 
@@ -2198,7 +2205,7 @@ public class Generator {
                                 }else{
                                    System.out.println("Finding Signal Res= " + nameSig);
                                 }
-                                System.out.println("Final Signal = " + nameSig);
+                                //System.out.println("Final Signal = " + nameSig);
                             }
                             if (ret == 0) {
                                 insertVarInPrj(intSax, interfaceList, sig0, type, "", true, true, uuid, appPathName + ".int", "");
@@ -2290,21 +2297,50 @@ public class Generator {
         
     }
     
-    // --- получить UUID PV из файлов ---
-    private String[] GetUuid_PV_T_CalcPar_T_AI_ToHMI( ){
-        String[] fileReadPV = {"T_CalcPar.type", "T_AI_ToHMI.type"};
-        String[] returnUUID = new String[fileReadPV.length];
+
+//    private String[] GetUuid_PV_T_CalcPar_T_AI_ToHMI(){
+//        /*
+//         --- получить список UUID PV из файлов ---
+//        */
+//        String[] fileReadPV = {"T_CalcPar.type", "T_AI_ToHMI.type"};
+//        String[] returnUUID = new String[fileReadPV.length];
+//        XMLSAX CalcParOrAI_ToHMI = new XMLSAX();
+//        for (int i = 0; i < fileReadPV.length; i++) {
+//            String file = fileReadPV[i];
+//            CalcParOrAI_ToHMI.readDocument(globVar.desDir + File.separator + "Design" + File.separator + file);
+//            Node nFields = CalcParOrAI_ToHMI.returnFirstFinedNode("Fields");
+//            ArrayList<Node> arrayField = CalcParOrAI_ToHMI.getHeirNode(nFields);// берем Field
+//            for (Node nF : arrayField) {
+//                String nameField = CalcParOrAI_ToHMI.getDataAttr(nF, "Name");
+//                if (nameField.equals("PV")) {
+//                    returnUUID[i] = CalcParOrAI_ToHMI.getDataAttr(nF, "UUID");
+//                    break;
+//                }
+//            }
+//        }
+//        return returnUUID;
+//    }
+//    
+    private String GetUuid_PV(String[] listFileFinding, String typeSig){
+        /*
+        --- получить UUID PV по конкретным файлам и UUID типа ---
+        */
+        String returnUUID = null;
         XMLSAX CalcParOrAI_ToHMI = new XMLSAX();
-        for (int i = 0; i < fileReadPV.length; i++) {
-            String file = fileReadPV[i];
+        for (int i = 0; i < listFileFinding.length; i++) {
+            String file = listFileFinding[i];
             CalcParOrAI_ToHMI.readDocument(globVar.desDir + File.separator + "Design" + File.separator + file);
-            Node nFields = CalcParOrAI_ToHMI.returnFirstFinedNode("Fields");
-            ArrayList<Node> arrayField = CalcParOrAI_ToHMI.getHeirNode(nFields);// берем Field
-            for (Node nF : arrayField) {
-                String nameField = CalcParOrAI_ToHMI.getDataAttr(nF, "Name");
-                if (nameField.equals("PV")) {
-                    returnUUID[i] = CalcParOrAI_ToHMI.getDataAttr(nF, "UUID");
-                    break;
+            Node rootN = CalcParOrAI_ToHMI.getRootNode();
+            String uuidMainRoot = CalcParOrAI_ToHMI.getDataAttr(rootN, "UUID");
+            if (uuidMainRoot.equalsIgnoreCase(typeSig)) {
+                Node nFields = CalcParOrAI_ToHMI.returnFirstFinedNode("Fields");
+                ArrayList<Node> arrayField = CalcParOrAI_ToHMI.getHeirNode(nFields);// берем Field
+                for (Node nF : arrayField) {
+                    String nameField = CalcParOrAI_ToHMI.getDataAttr(nF, "Name");
+                    if (nameField.equals("PV")) {
+                        returnUUID = CalcParOrAI_ToHMI.getDataAttr(nF, "UUID");
+                        break;
+                    }
                 }
             }
         }
@@ -2322,12 +2358,19 @@ public class Generator {
             return false;
         }
         String groupAb = Tools.getAbOfSubAb(group.substring(0, x)) + group.substring(x);
-        for (String s : tableList) {
-            if (groupAb.toUpperCase().contains(s.toUpperCase())) {
-                tableName = s;
-                break;
+        
+        int indexFindTableToList = tableList.indexOf(groupAb);
+        if(indexFindTableToList > -1){
+            tableName = tableList.get(indexFindTableToList);
+        }else {
+            for (String s : tableList) { // Поискпримерно найденных таблиц, почему так сделано вопрос
+                if (groupAb.toUpperCase().contains(s.toUpperCase())) {
+                    tableName = s;
+                    break;
+                }
             }
         }
+        
         if (tableName != null) {
             ArrayList<String> listCol = globVar.DB.getListColumns(tableName);
             if (listCol.contains("Диапазон_мин")) {
@@ -2351,8 +2394,11 @@ public class Generator {
         return false;
     }
 
-    // ---  ---
+    
     private void insertInArcive(String sigName, int[] archTyp, String uuid, XMLSAX archSax) {
+        /*
+        Добавления сигнала архива , если был удаляет
+        */
         Node items = archSax.returnFirstFinedNode("Items");
         Node sig = archSax.findNodeAtribute(items, new String[]{"Item", "ItemName", sigName});
         if (sig != null) {
