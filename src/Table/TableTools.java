@@ -444,18 +444,25 @@ public class TableTools {//ссылка на таблицу, массив шир
     }
 
     // ----- функция для загрузки таблицы в базу со стриранием старой таблицы --------------
-    static public int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String[] listNameColum, String tableComment, ArrayList<String[]> fromDB) {
+    static public int saveTableInDB(JTable jTable1, DataBase DB, String tableName, String tableComment, ArrayList<String[]> fromDB) {
         if (DB.isTable(tableName)) {
             if (tableComment == null) {
                 tableComment = DB.getCommentTable(tableName);
             }
             DB.dropTable(tableName);
         }
-        DB.createTableEasy(tableName, listNameColum, tableComment);
+        int countcolumn = jTable1.getColumnCount();
+        String[] listNameColumTmp = new String[countcolumn];
+        String nameSinglSeting = null;
+        for (int i = 0; i < countcolumn; i++) {
+            listNameColumTmp[i] = jTable1.getColumnName(i); 
+        }
+        
+        DB.createTableEasy(tableName, listNameColumTmp, tableComment);
         fromDB.clear();
         int y = jTable1.getRowCount();
         for (int i = 0; i < y; i++) {
-            DB.insertRow(tableName, getRow(jTable1, i), listNameColum, i);
+            DB.insertRow(tableName, getRow(jTable1, i), listNameColumTmp, i);
             fromDB.add(getRow(jTable1, i));
         }
         return 0;

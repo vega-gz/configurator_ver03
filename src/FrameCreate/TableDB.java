@@ -175,7 +175,7 @@ public class TableDB extends javax.swing.JFrame {
         TableTools.setColsEditor(tableName, cols, fromDB, jTable1, listItemList);
 
         SaveFrameData sfd = () -> {//сохранение в БД таблицы
-            TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB);
+            TableTools.saveTableInDB(jTable1, globVar.DB, tableName, comment, fromDB);
         };
         isCange ich = () -> {
             return compareTable(fromDB, tableModel);
@@ -862,7 +862,7 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
+        TableTools.saveTableInDB(jTable1, globVar.DB, tableName, comment, fromDB); //сохранение в БД таблицы
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -962,7 +962,7 @@ public class TableDB extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList<Integer>error=Сheck_Tag_Name_PLC();
         if(error.isEmpty()){
-            TableTools.saveTableInDB(jTable1, globVar.DB, tableName, cols, comment, fromDB); //сохранение в БД таблицы
+            TableTools.saveTableInDB(jTable1, globVar.DB, tableName, comment, fromDB); //сохранение в БД таблицы
         ArrayList<String[]> chgLTable = db.getData(tableName);
         cngList = TableTools.getCngRows(listTable, chgLTable, true);//возвращаем массив строк в которые произошли изменения
         oldList = TableTools.getCngRows(listTable, chgLTable, false);
