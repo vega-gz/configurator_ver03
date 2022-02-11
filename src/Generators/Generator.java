@@ -341,7 +341,7 @@ public class Generator {
         }
         ArrayList<Node> fileList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node f : fileList) { // пробегаемся по всем нодам File
-            String commonFileST = (String) globVar.sax.getDataNode(f).get("src");
+            String commonFileST = (String) globVar.sax.getDataNode(f).get("src"); // <File src="mb_AI_CallAll" target="_Algorithm"> Пример 
 //            String ext = (String) globVar.sax.getDataNode(f).get("ext");
 //            if(ext.equals("")) ext = ".txt";
 
@@ -1315,7 +1315,7 @@ public class Generator {
         return -1;
     }
 
-    // --- Герерация ST и LUA файлов(продолжение что ли тут само внесение данных в файлы) ---
+    // --- Герерация ST и LUA, HTML файлов(продолжение что ли тут само внесение данных в файлы) ---
     // abonent
     int genInFile(FileManager fm, String abSubAb, String commonFileST, Node nodeGenCode, TableDB ft, boolean disableReserve,
             String stFileName, String abonent, JProgressBar jProgressBar) throws IOException {
@@ -1324,7 +1324,7 @@ public class Generator {
         String nameToblock = commonFileST;                                 // оригинальное название ноды сохраняем и его же и ищем потом
         // проверить modbus ли таблица
         ModBus modbusChecker = new ModBus(ft.tableName());
-        if(modbusChecker.equals(StatusModBus.OK)){
+        if(modbusChecker.isModbus() == (StatusModBus.OK)){
             nameToblock = "Call_" + modbusChecker.getModbusFile() + "_" + modbusChecker.getNodeTable();
         }
         // разбор имени если есть точка в имени(нахождение расширения)

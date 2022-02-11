@@ -43,11 +43,13 @@ public class ModBus {
        
         int x = nameTable.indexOf("_");
         abonent = nameTable.substring(0, x);
-        int y = nameTable.indexOf("_mb_");
+        String identModBus = "_mb_";
+        int y = nameTable.indexOf(identModBus);
 
         if (y > 0) {
             subAb = "_" + nameTable.substring(0, y);
-            nodeTable = nameTable.substring(y + 1);
+            //nodeTable = nameTable.substring(y + 1);
+            nodeTable  = nameTable.substring(y + identModBus.length());
             isMb = "_mb";
 
             boolean validDataTable = validateDataInCommentTable(nameTable);
