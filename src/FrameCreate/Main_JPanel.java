@@ -545,7 +545,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.12.12");
+        jLabel9.setText("v.12.13");
 
         jLabel3.setText("Текущий абонент");
 
@@ -1311,14 +1311,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
         DoIt di = () -> {
             
             ConfigSigStorageInterface configSigStorageExcell = new ConfigSigExcell(excel.getPath());
-            ArrayList<ConfigSig> configsSignal = configSigStorageExcell.getSignals();
+            ArrayList<ConfigSig> configsSignal = configSigStorageExcell.getConfigsSignal();
             
             if (configsSignal != null) {
                 ConfigSigStorageInterface configSigStorageInterface = new ConfigSigDB();
                 for(ConfigSig configSignal: configsSignal){
                     configSigStorageInterface.addSignal(configSignal);
                 }
-               
+               JOptionPane.showMessageDialog(null, "Загруженны уставки в количестве " + configsSignal.size());
             } else {
                 ConfigSigExcell configSigExcell = (ConfigSigExcell)configSigStorageExcell;
                 JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'\n"

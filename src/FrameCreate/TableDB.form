@@ -259,14 +259,29 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15_Setings">
+            <Menu class="javax.swing.JMenu" name="jMenu4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x423;&#x441;&#x442;&#x430;&#x432;&#x43a;&#x438;"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15_SetingsActionPerformed"/>
-              </Events>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15_Setings">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x423;&#x441;&#x442;&#x430;&#x432;&#x43a;&#x438; &#x43a;&#x43e;&#x43d;&#x43a;&#x440;&#x435;&#x442;&#x43d;&#x43e;&#x439; &#x442;&#x430;&#x431;&#x43b;&#x438;&#x446;&#x44b;"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15_SetingsActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&#x423;&#x441;&#x442;&#x430;&#x432;&#x43a;&#x438; &#x430;&#x431;&#x43e;&#x43d;&#x435;&#x43d;&#x442;&#x430;"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu10">

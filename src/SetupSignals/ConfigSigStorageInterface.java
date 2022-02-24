@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author nazarov
  */
 public interface ConfigSigStorageInterface {
-    ArrayList<ConfigSig> getSignals();
+    ArrayList<ConfigSig> getConfigsSignal();
     void addSignal(ConfigSig c); 
     void removeByIDSignal(ConfigSig c); 
     void editSignal(ConfigSig c);

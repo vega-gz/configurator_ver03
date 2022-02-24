@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ConfigSigDB implements ConfigSigStorageInterface {
     private DataBase db = globVar.DB;
     private String nameTableSetups = "SignalSetups";
-    private String[] columnTableDefault = {"id", "Abonent", "NameTableFromSignal", "NameSeting", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"}; // Набор столбцов для базы таблицы
+    private String[] columnTableDefault = {"id", "Abonent", "NameTableFromSignal", "Наименование", "TAG_NAME_PLC", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"}; // Набор столбцов для базы таблицы
     private String commentT = "setups signals";
     private String nameSig = null;
     private String nameColumn1 = "Abonent";
@@ -29,21 +29,32 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     }
     
     public ConfigSigDB(String nameSig){
-        this.nameSig = nameSig;
+        setNameSig(nameSig);
         checktableSeting();
     }
     
+    private void setNameSig(String nameSig){
+        this.nameSig = nameSig;
+    }
+    
     private void checktableSeting(){
+        int testfindT = db.getListTable().indexOf(nameTableSetups);
         if (db.getListTable().indexOf(nameTableSetups) < 0) {
             db.createTableEasy(nameTableSetups, columnTableDefault, commentT);
         }      
     }
 
     @Override
-    public ArrayList<ConfigSig> getSignals() {        
+    public ArrayList<ConfigSig> getConfigsSignal() {        
         
         ArrayList<ConfigSig> savedConfigsSignal = new ArrayList<>();
-        ArrayList<String[]> dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}, {nameColumn2, nameSig}}); // поиск данных с выборкой
+        ArrayList<String[]> dataSettingDB = null;
+        if(nameSig != null){ // выбор вссех уставок или конкретного
+            dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}, {nameColumn2, nameSig}}); // поиск данных с выборкой
+        }else{
+            dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}}); // поиск данных с выборкой
+        }
+        
         for (int i = 0; i < dataSettingDB.size(); i++)
         {   
             String[] arr = dataSettingDB.get(i);
@@ -74,12 +85,22 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     }
 
     @Override
-    public void addSignal(ConfigSig s) {
+    public void addSignal(ConfigSig s) { // тут момент нужно ли нам id вычислять для внесения
         /*
          Создаем новый ID 
         вносим его в настройку
         записываем строку
-        */        
+        */ 
+        if(s.getStatus() == ConfigSig.StatusSeting.FROMFILE)
+        {
+            setNameSig(s.getNameSignalSeting());       
+            for (ConfigSig sigBase : getConfigsSignal()) {
+                if(sigBase.equals(s)){
+                    removeByIDSignal(sigBase);
+                    
+                }
+            }
+        }
         String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
         s.setId(newIdSetting);
         db.insertRow(nameTableSetups, s.getData(), columnTableDefault, null);

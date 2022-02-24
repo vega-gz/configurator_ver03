@@ -8,7 +8,6 @@ package FrameCreate;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import javax.swing.JTable;
 
 /**
  *
@@ -42,7 +41,7 @@ public class FrameTableSetings extends TableDB{
     }
     
      private void jTable1MouseClicked(java.awt.event.MouseEvent evt) { 
-         System.out.println();
+        // System.out.println();
      }
     
     @Override
@@ -51,7 +50,7 @@ public class FrameTableSetings extends TableDB{
 
             @Override
             public void windowOpened(WindowEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
@@ -67,22 +66,22 @@ public class FrameTableSetings extends TableDB{
 
             @Override
             public void windowIconified(WindowEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void windowDeiconified(WindowEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void windowActivated(WindowEvent e) {
-                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }

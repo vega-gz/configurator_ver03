@@ -916,7 +916,7 @@ public class FileManager {
     // --- Диалоговое окно с выбором Excel файлов ---
     public static File getChoiserExcelFile(){
     File excel = null;
-    JFileChooser fileopen = new JFileChooser(globVar.desDir);
+    JFileChooser fileopen = new JFileChooser(System.getProperty("user.dir"));
         fileopen.setFileFilter(new FileFilter() { // фильтр файлов
             public String getDescription() {
                 return "Excel (*.xls *.xlsx *.xlsm)";

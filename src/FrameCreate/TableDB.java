@@ -8,6 +8,9 @@ import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
 import Settings.AddGenData;
 import Settings.AddSensor;
+import SetupSignals.AllSetingsSignalFromeDB;
+import SetupSignals.ConfigSigDB;
+import SetupSignals.ConfigSigStorageInterface;
 import SetupSignals.SettingsSignal;
 import Table.TableTools;
 import Tools.BackgroundThread;
@@ -148,13 +151,13 @@ public class TableDB extends javax.swing.JFrame {
         }
         // скрыть Мемню уставок
         if (nameTable.indexOf("DI") > -1 | nameTable.indexOf("DO") > -1) {
-            jMenuItem15_Setings.hide();
+            jMenu4.hide();
         }
         // пункт меня уставок
         if (nameTable.indexOf("Setting") > -1) {
             jMenu2.hide();
             jMenu3.hide();
-            jMenuItem15_Setings.hide();
+            jMenu4.hide();
             jButton2.hide();
             jButton3.hide();
             jButton6.hide();
@@ -253,7 +256,9 @@ public class TableDB extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenuItem15_Setings = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
 
@@ -629,13 +634,25 @@ public class TableDB extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem15_Setings.setText("Уставки");
+        jMenu4.setText("Уставки");
+
+        jMenuItem15_Setings.setText("Уставки конкретной таблицы");
         jMenuItem15_Setings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem15_SetingsActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem15_Setings);
+        jMenu4.add(jMenuItem15_Setings);
+
+        jMenuItem15.setText("Уставки абонента");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem15);
+
+        jMenu1.add(jMenu4);
 
         jMenuBar1.add(jMenu1);
 
@@ -1070,6 +1087,7 @@ public class TableDB extends javax.swing.JFrame {
     private void jMenuItem15_SetingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15_SetingsActionPerformed
         String[][] dataTable = new String[0][0];
         String[] columnTable = null;
+        
         for (int i = 0; i < tableSize(); i++) {
             String nameSignal = getCell("TAG_NAME_PLC", i); // 
             SettingsSignal setingSignal = new SettingsSignal(nameSignal);
@@ -1083,6 +1101,14 @@ public class TableDB extends javax.swing.JFrame {
         tableSetings.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem15_SetingsActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        AllSetingsSignalFromeDB configSigDB = new AllSetingsSignalFromeDB();
+        String[][] dataTableOmiSignal = configSigDB.getDataToTable();
+        FrameTableSetings tableSetings = new FrameTableSetings(globVar.abonent + "_SP", configSigDB.getNameColumnsToTable(), dataTableOmiSignal);
+        tableSetings.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        tableSetings.setVisible(true);
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1101,6 +1127,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -1108,6 +1135,7 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem15_Setings;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -1153,7 +1181,8 @@ public class TableDB extends javax.swing.JFrame {
     }
 
     public int tableSize() {
-        tableSize = fromDB.size();
+        //tableSize = fromDB.size(); // была дичь
+        tableSize = tableModel.getRowCount();
         return tableSize;
     }
 

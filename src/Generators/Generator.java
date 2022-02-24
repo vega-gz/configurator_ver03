@@ -70,7 +70,7 @@ public class Generator {
         globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
-            loggerFile.writeLog("Не найдена нода \"" + nodeTable + "\"");
+            loggerFile.writeLog("Не найдена нода \"" + nodeTable + "\" найти где это исключение 777." );
             return -1;
         }
         Node nodeGenHW = globVar.sax.returnFirstFinedNode(findNode, "GenHW");//Ищем в этой ноде ноду GenData
@@ -992,7 +992,7 @@ public class Generator {
         globVar.cfgRoot = globVar.sax.readDocument(globVar.mainConfSig); //еще раз прочитать файл
         Node findNode = globVar.sax.returnFirstFinedNode(globVar.cfgRoot, nodeTable);//Найти там ноду, совпадающую по названию с именем таблицы
         if (findNode == null) {
-            loggerFile.writeLog("Не найдена нода \"" + nodeTable + "\"");
+            loggerFile.writeLog("Не найдена нода \"" + nodeTable + "\"" + "в файле" + globVar.mainConfSig );
             return -1;
         }
         Node nodeGenData = globVar.sax.returnFirstFinedNode(findNode, "GenData");//Ищем в этой ноде ноду GenData

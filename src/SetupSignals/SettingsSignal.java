@@ -21,11 +21,24 @@ public class SettingsSignal implements SetupsDataToTables{
     private ConfigSigStorageInterface containSetting = null;
     private String nameSig = null;
     
+    public SettingsSignal()
+    {
+        
+    }
+    
     public SettingsSignal(String nameSig)
     {
         this.nameSig = nameSig;
-        containSetting = new ConfigSigDB(nameSig);
-        listSettings = containSetting.getSignals(); 
+        ConfigSigStorageInterface dbSetting = new ConfigSigDB(nameSig);
+        setConfigSigStorage(dbSetting);
+        setListConfigs(dbSetting.getConfigsSignal());
+    }
+    
+    public void setConfigSigStorage(ConfigSigStorageInterface containSetting){
+        this.containSetting = containSetting;
+    }
+    public void setListConfigs(ArrayList<ConfigSig> listSettings){
+        this.listSettings = listSettings; 
     }
 
     private int getNextFreeID(){
