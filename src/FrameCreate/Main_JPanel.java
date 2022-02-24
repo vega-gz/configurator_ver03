@@ -7,6 +7,7 @@ import Main.ProgressBar;
 import ReadWriteExcel.RWExcel;
 import ReadWriteExcel.UnloadExcel;
 import Settings.CreateFTable;
+import SetupSignals.AllSetingsSignalFromeDB;
 import SetupSignals.ConfigSig;
 import SetupSignals.ConfigSigDB;
 import SetupSignals.ConfigSigExcell;
@@ -545,7 +546,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.12.13");
+        jLabel9.setText("v.12.14");
 
         jLabel3.setText("Текущий абонент");
 
@@ -1314,13 +1315,30 @@ public final class Main_JPanel extends javax.swing.JFrame {
             ArrayList<ConfigSig> configsSignal = configSigStorageExcell.getConfigsSignal();
             
             if (configsSignal != null) {
+                int casedial = JOptionPane.showConfirmDialog(null, "Удалить все существующие и сформировать новые?\n"
+                        + "Нет, то будут добавлены или замены существующие."); // сообщение с выбором
                 ConfigSigStorageInterface configSigStorageInterface = new ConfigSigDB();
-                for(ConfigSig configSignal: configsSignal){
+                switch (casedial) {//0 - yes, 1 - no, 2 - cancel
+                    case 0:
+                        ConfigSigDB configSigDB = (ConfigSigDB) configSigStorageInterface;
+                        configSigDB.clearDBSetups();
+
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+                        return;
+                    //break;
+                    default:
+                        break;
+                }
+                for (ConfigSig configSignal : configsSignal) {
                     configSigStorageInterface.addSignal(configSignal);
                 }
-               JOptionPane.showMessageDialog(null, "Загруженны уставки в количестве " + configsSignal.size());
+                JOptionPane.showMessageDialog(null, "Загруженны уставки в количестве " + configsSignal.size());
             } else {
-                ConfigSigExcell configSigExcell = (ConfigSigExcell)configSigStorageExcell;
+                ConfigSigExcell configSigExcell = (ConfigSigExcell) configSigStorageExcell;
                 JOptionPane.showMessageDialog(null, "При загрузке были ошибки. См. файл 'configurer.log'\n"
                         + " проверте именование столбцов загрузки\n"
                         + configSigExcell.getNameColumnSetings().toString());

@@ -43,6 +43,11 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
             db.createTableEasy(nameTableSetups, columnTableDefault, commentT);
         }      
     }
+    
+    public void clearDBSetups() {
+        db.dropTable(nameTableSetups);
+        checktableSeting();
+    }
 
     @Override
     public ArrayList<ConfigSig> getConfigsSignal() {        
