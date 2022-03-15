@@ -105,6 +105,10 @@
 		</GenData>
 		<GenCode>
 			<File src="Call_AI" target="_Algorithm">
+				<addVariables>
+					<Variable Name="repTime" Type="INT" Usage="internal" />
+					<Variable Name="testintFindinType_334" Type="T_GPA_AI_Internal" Usage="internal" fileTypeUUID=""/>
+				</addVariables>
 				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AI_init">
 					<Function name="AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -1161,13 +1165,10 @@
 			<!--Создание печатного протокола ПЗ -->
 			<File src="Report.html"> 
 				<MarkTemplate>
-					<markerEdit edit="CurrentAbonent" val="GPA_ReportCommand.curAb"/>
-				</MarkTemplate>
-				<MarkTemplate>
 					<markerEdit edit="CurrentAbonent">				
 						<abonent/><text t="_ReportCommand.curAb()"/>
 					</markerEdit>
-				</MarkTemplate>				
+				</MarkTemplate>
 				
 				<Block end="Конец кода" start="Начало кода">
 					<String>

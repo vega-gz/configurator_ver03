@@ -342,8 +342,6 @@ public class Generator {
         ArrayList<Node> fileList = globVar.sax.getHeirNode(nodeGenCode);
         for (Node f : fileList) { // пробегаемся по всем нодам File
             String commonFileST = (String) globVar.sax.getDataNode(f).get("src"); // <File src="mb_AI_CallAll" target="_Algorithm"> Пример 
-//            String ext = (String) globVar.sax.getDataNode(f).get("ext");
-//            if(ext.equals("")) ext = ".txt";
 
             //создавать файлы по экземплярам или единично
             ArrayList<String> exArrList = new ArrayList<>();
@@ -363,7 +361,7 @@ public class Generator {
             for (String exA : exArrList) {
                 String stFileName = exA + subAb + "_" + commonFileST; //Для каждого файла
                 ret = genInFile(fm, exA + subAb + isMb, commonFileST, f, ft, disableReserve, stFileName, abonent, jProgressBar1);
-                System.out.println(ret);
+                //System.out.println(ret);
             }
 
             if (ret != 0) { // тут может быть косяк
@@ -1225,6 +1223,8 @@ public class Generator {
         }
         return 0;
     }
+    
+  
 
     // --- Функция для поиска файла с описаниями подключённых к приложению сигналов ---
     public Node setHWdoc(XMLSAX hw, String hwDew, String hwFileSuffix, String[] globSigAttr, XMLSAX prj,
@@ -1463,12 +1463,20 @@ public class Generator {
             }
         }
            
-        ArrayList<Node> markerEdit = new ArrayList<>();             // ноды маркеров которые нужно изменить в шаблоне   
+        ArrayList<Node> markerEdit = new ArrayList<>();             // ноды маркеров которые нужно изменить в шаблоне  
+        LinkedList<String> variablesList = null;
         ArrayList<Node> blockList = globVar.sax.getHeirNode(nodeGenCode);
+        boolean addConfigVariables = true;
+        
         for (Node block : blockList) {
             if(block.getNodeName().equalsIgnoreCase("MarkTemplate")) // поиск НОды с данными которые нужно изменить
             {
                 markerEdit = globVar.sax.getHeirNode(block);
+                continue;
+            }
+            if(block.getNodeName().equalsIgnoreCase("addVariables")) // нода с дополнительнвми переменные в шаблон
+            {
+                variablesList = addOptionalsVariablesST(block, globVar.desDir + File.separator + "Design");
                 continue;
             }
             String start = (String) globVar.sax.getDataNode(block).get("start");
@@ -1483,23 +1491,36 @@ public class Generator {
             }
 
             String s = fm.rd();                                                     //Для копирования всего, что было до этой функции, (оконнчание файла)
-
+            
             while (!fm.EOF && !s.contains(start)) {
                 // изменение строки из шаблона с заданными параметрами
+               
                 for(Node n: markerEdit){
                     String whoEdit = (String) globVar.sax.getDataNode(n).get("edit");
                     String toEdit = "";
+                    
                     for (Node nodemarkerEdit: globVar.sax.getHeirNode(n)) {
                         toEdit += getPartText(nodemarkerEdit, abonent, null, 0); // проход по значениям аргументов
                     }
-            
                     String[] cutStringIndex = s.split(whoEdit);
+                    
                     if(cutStringIndex.length > 1)
                     {
                         s = cutStringIndex[0] + toEdit + cutStringIndex[1];
                     }
-                
                 }
+                
+                 //добавление недостающих из конфигурации переменных
+                if(s.indexOf("<Variables>") > -1 && addConfigVariables){ 
+                    if (variablesList != null) {
+                        s += "\n";
+                        for (String strAddvariables : variablesList) {
+                            s += strAddvariables + "\n";
+                        }
+                    }
+                    addConfigVariables = false;
+                }
+                
                 
                 fm.wr(s + "\n");                                                    // переписываем данные шаблона
                 s = fm.rd();
@@ -1606,6 +1627,44 @@ public class Generator {
         return 0;
     }
 
+    private LinkedList<String> addOptionalsVariablesST(Node block, String pathDirectProject){
+    /*Добавление переменных в шаблон ST*/
+        LinkedList<String> variablesList = null;
+        for (Node nodemarkerEdit: globVar.sax.getHeirNode(block)) {
+            if(variablesList == null){
+                variablesList = new LinkedList<>();
+            }
+            // ключи ноды добавления полей
+            String name = "Name";
+            String type = "Type";
+            String usage = "Usage";
+            String fileTypeUUID = "fileTypeUUID";
+            name = (String) globVar.sax.getDataNode(nodemarkerEdit).get(name);
+            type = (String) globVar.sax.getDataNode(nodemarkerEdit).get(type);
+            usage = (String) globVar.sax.getDataNode(nodemarkerEdit).get(usage);
+            fileTypeUUID = (String) globVar.sax.getDataNode(nodemarkerEdit).get(fileTypeUUID);
+            
+            String variableTMP = "<Variable UUID=\"" + UUID.getUIID() + "\" " +
+                    "Name=\""+name+"\" " + "Type=\""+type+"\" ";
+            
+            if(fileTypeUUID != null){
+                for(String nameF : FileManager.findFile(pathDirectProject, "*.type")){
+                    XMLSAX docTYPE = new XMLSAX();
+                    Node rootN = docTYPE.readDocument(nameF);
+                    Node n = docTYPE.returnFirstFinedNode(rootN, "Type");
+                    String nameRootN = (String) docTYPE.getDataNode(n).get("Name");
+                    if (nameRootN.equals(type)) {
+                        String uuidUootN = (String) docTYPE.getDataNode(n).get("UUID");
+                        uuidUootN = " TypeUUID=\""  + uuidUootN + "\"";
+                    }
+                }
+            }
+            variableTMP += "Usage=\""+usage+"\" />";
+
+            variablesList.add(variableTMP);
+        }
+        return variablesList;
+    }
     
     private void addVariableToGenerateFile(String nameFileAddVariables, List<VariableFunctionBlock> variableFunctionBlock ) {
         /*
@@ -2254,6 +2313,7 @@ public class Generator {
                             if (!getTrendAttr(tableList, groupName, localName, attr)) {
                                 ret = -1;
                             }
+                            listSignalToLuaFileLongArchive.add(new String[]{tmpName,  attr[2]});
                             //Node tmpN = colorList.get(colorInd++);
                             Node newTrend = hmiSax.insertChildNode(trendNode, new String[]{"Trend", "Color", cfgSax.getDataAttr(colorList.get(colorInd), "Color"),
                                 "ItemName", tmpName, "UUID", tmpUuid, "Min", attr[0], "Max", attr[1], "Title", attr[2], "AxisTitle", attr[2]});
