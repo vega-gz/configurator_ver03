@@ -1628,12 +1628,13 @@ public class Generator {
     }
 
     private LinkedList<String> addOptionalsVariablesST(Node block, String pathDirectProject){
-    /*Добавление переменных в шаблон ST*/
+    /*Добавление переменных в шаблон ST*/        
         LinkedList<String> variablesList = null;
         for (Node nodemarkerEdit: globVar.sax.getHeirNode(block)) {
             if(variablesList == null){
                 variablesList = new LinkedList<>();
             }
+            
             // ключи ноды добавления полей
             String name = "Name";
             String type = "Type";
@@ -1644,26 +1645,46 @@ public class Generator {
             usage = (String) globVar.sax.getDataNode(nodemarkerEdit).get(usage);
             fileTypeUUID = (String) globVar.sax.getDataNode(nodemarkerEdit).get(fileTypeUUID);
             
+            type = replacingDataAbonentToString(type); // проверка на обонента только тип (может только пока)
+            
             String variableTMP = "<Variable UUID=\"" + UUID.getUIID() + "\" " +
                     "Name=\""+name+"\" " + "Type=\""+type+"\" ";
-            
+            String uuidUootN = null;
             if(fileTypeUUID != null){
                 for(String nameF : FileManager.findFile(pathDirectProject, "*.type")){
                     XMLSAX docTYPE = new XMLSAX();
                     Node rootN = docTYPE.readDocument(nameF);
                     Node n = docTYPE.returnFirstFinedNode(rootN, "Type");
                     String nameRootN = (String) docTYPE.getDataNode(n).get("Name");
+
                     if (nameRootN.equals(type)) {
-                        String uuidUootN = (String) docTYPE.getDataNode(n).get("UUID");
-                        uuidUootN = " TypeUUID=\""  + uuidUootN + "\"";
+                        uuidUootN = (String) docTYPE.getDataNode(n).get("UUID");
+                        uuidUootN = " TypeUUID=\""  + uuidUootN + "\" ";
+                        break;
                     }
                 }
             }
-            variableTMP += "Usage=\""+usage+"\" />";
+            variableTMP += uuidUootN + "Usage=\""+usage+"\" />";
 
             variablesList.add(variableTMP);
         }
         return variablesList;
+    }
+    
+    private String replacingDataAbonentToString(String strFindAbonent){
+        /*
+         Замена данных в строке на текущего абонента
+         Пример: <Variable Name="tuns" Type="T_<abonent/>_tuneAM" Usage="inout" fileTypeUUID=""/>
+         */
+        String identAbonentInType = "(ABONENT)"; // определяет есть ли замена данных в абоненте
+
+        int findIdent = strFindAbonent.indexOf(identAbonentInType);
+        if (findIdent > -1) { // заменяем на нунного абонента
+            strFindAbonent = strFindAbonent.substring(0, findIdent).trim()
+                    + globVar.abonent
+                    + strFindAbonent.substring(findIdent + identAbonentInType.length(), strFindAbonent.length()).trim();
+        }
+        return strFindAbonent;
     }
     
     private void addVariableToGenerateFile(String nameFileAddVariables, List<VariableFunctionBlock> variableFunctionBlock ) {
@@ -1829,7 +1850,6 @@ public class Generator {
 //                    return globVar.sax.getDataAttr(argPart, "default");
 //                }
                 return getSwitchValConfig(argPart, ft, j); // Передаем на обработку Свитч (Ноду, таблицу, строку)
-
         }
         return "";
     }

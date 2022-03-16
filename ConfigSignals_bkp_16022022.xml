@@ -105,6 +105,10 @@
 		</GenData>
 		<GenCode>
 			<File src="Call_AI" target="_Algorithm">
+				<addVariables>
+					<Variable Name="repTime" Type="INT" Usage="internal" />
+					<Variable Name="testintFindinType_334" Type="T_GPA_AI_Internal" Usage="internal" fileTypeUUID=""/>
+				</addVariables>
 				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AI_init">
 					<Function name="AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -400,7 +404,7 @@
 						<arg><text t=" "/><dbd ifEmpty="0" t="Диапазон_макс"/></arg>
 						<arg><text t=" "/><dbd t="АЦПмин"/></arg>
 						<arg><text t=" "/><dbd t="АЦПмакс"/></arg>
-						<!--arg><text t=" "/><npp/></arg-->
+						<arg><text t=" "/><npp/></arg>
 					</Function>
 				</Block>
 				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AO_Processing">
@@ -492,7 +496,7 @@
 									<text t=" "/><text t="false"/>
 								</ELSE>
 							</IF></arg>
-						<!--arg><text t=" "/><npp/></arg-->
+						<arg><text t=" "/><npp/></arg>
 					</Function>
 				</Block>
 				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода DI_Processing">
@@ -729,7 +733,7 @@
 						<arg><text t=" "/><dbd ifEmpty="0.0" t="Set1"/></arg>
 						<arg><text t=" "/><dbd ifEmpty="0.0" t="Set2"/></arg>
 						<arg><text t=" "/><dbd ifEmpty="0.0" t="tau"/></arg>
-						<!--arg><text t=" "/><npp/></arg-->
+						<arg><text t=" "/><npp/></arg>
 						<arg>
 							<IF cond="Фиксировать_неиспр" val="Да">
 									<text t=" "/><text t="true"/>
@@ -861,7 +865,7 @@
 						<arg><text t=" "/><dict dictionary="ModbusFormat.xml" ifEmpty="0" t="dataType"/></arg>
 						<arg><text t=" "/><dbd ifEmpty="0" t="Set1"/></arg>
 						<arg><text t=" "/><dbd ifEmpty="0" t="Set2"/></arg>
-						<!--arg><text t=" "/><npp/></arg-->
+						<arg><text t=" "/><npp/></arg>
 					</Function>
 				</Block>
 				<Block end="Конец сгенерированного кода" start="Начало сгенерированного кода AO_Processing">
@@ -1160,14 +1164,11 @@
 			</File>	
 			<!--Создание печатного протокола ПЗ -->
 			<File src="Report.html"> 
-				<!--MarkTemplate>
-					<markerEdit edit="CurrentAbonent" val="GPA_ReportCommand.curAb"/>
-				</MarkTemplate-->
 				<MarkTemplate>
 					<markerEdit edit="CurrentAbonent">				
 						<abonent/><text t="_ReportCommand.curAb()"/>
 					</markerEdit>
-				</MarkTemplate>				
+				</MarkTemplate>
 				
 				<Block end="Конец кода" start="Начало кода">
 					<String>
@@ -1627,11 +1628,6 @@
 		<GenCode>
 						<!-- ........................................ Файл функции IM_Init ....................................... -->
 			<File src="IM_Init" target="_Algorithm"> <!-- имя функции/блока, имя приложения -->
-				<addVariables>
-					<Variable Name="tuns" Type="T_(ABONENT)_tuneAM" Usage="inout" fileTypeUUID=""/>
-					<Variable Name="tuns" Type="T_  (ABONENT) _tuneAM" Usage="inout" fileTypeUUID=""/>
-					<Variable Name="tuns" Type="T_GPD_tuneAM" Usage="inout" fileTypeUUID=""/>
-				</addVariables>
 				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/> 
@@ -2053,8 +2049,8 @@
 	<SP Comment="Уставки аналоговых параметров" excelSheetName="SP">
 		<GenData>
 			<SP Type="BOOL">
-				<globData disable="">
-					<localData int="_Algorithm.int" name="SP"/>
+				<globData name="SP">
+					<localData int="_Algorithm.int"/>
 				</globData>	
 			</SP>
 			<Ust Type="REAL">
@@ -2062,7 +2058,7 @@
 					<localData int="_Algorithm.int"/>
 				</globData>	
 			</Ust>
-			<SP_Settings typeFile="T_ANB_Settings.type">
+			<!--SP_Settings typeFile="T_SP_Settings.type">
 				<globData disable=""> 
 					<localData int="_Algorithm.int" multyAb="true" name="SP_Settings"/>
 				</globData>	
@@ -2071,25 +2067,7 @@
 				<globData disable="">
 					<localData int="_Algorithm.int" multyAb="true" name="SP_Internal"/>
 				</globData>			
-			</SP_Internal> 			
+			</SP_Internal--> 			
 		</GenData>
-		<GenCode>
-			<File src="ust"> 
-				<Block start="Начало кода ust" end="Конец кода ust">
-					<String>
-						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="NameTableFromSignal"/><text t="["/><dbd t="NameSig"/><text t="], "/>
-						<dbd t="Type"/><text t=", "/>
-						<switch  default="" swt="Direction">
-							<case def="верхняя" val="Да"/>
-							<case def="нижняя" val="Нет"/>
-						</switch>
-						<text t=")"/>	 
-					</String>						
-					<String>
-						<abonent/><text t="_Ust."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Value"/><text t=";"/> 
-					</String>
-				</Block>
-			</File>
-		</GenCode>			
 	</SP>		
 </ConfigSignals>
