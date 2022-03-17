@@ -35,8 +35,11 @@ import org.w3c.dom.NodeList;
 public class Generator {
     private LoggerInterface loggerFile = new LoggerFile();
     @SuppressWarnings("empty-statement")
-    // --- прописываем сигналы для драйверов ---
-    public int genHW(TableDB ft, JProgressBar jProgressBar) throws IOException {
+    
+    
+    public int genHW(TableDB ft, JProgressBar jProgressBar, boolean disableReserve) throws IOException {
+        // --- прописываем сигналы для драйверов ---
+        
         boolean generetGlobal = false;
         int casedial = JOptionPane.showConfirmDialog(null, "Генерировать привязки сигналов к аппаратным каналам\n на основе глабальных сигналов?"); // сообщение с выбором
         switch (casedial) {//0 - yes, 1 - no, 2 - cancel
@@ -201,6 +204,11 @@ public class Generator {
                 String hwFileSuffix = ".km04_cfg";
                 String slot;
                 String chanell;
+                
+                // Пропуск резервов
+                if (disableReserve & tagName.contains("Res_")) {
+                    continue;
+                }
                 if (isModbus) {
                     //hwDew = exemplar + "_" + modbusFile;  //Смотрим, а не по сонетовскому модбасу подключены модули
                     hwDew = abonent + "_" + modbusFile;  //Смотрим, а не по сонетовскому модбасу подключены модули
@@ -967,8 +975,12 @@ public class Generator {
         return ret;
     }
 
-    // --- Генерация Типов ---
-    public int genTypeFile(TableDB ft, JProgressBar jProgressBar) throws IOException {//0-norm, -1 - not find node
+    
+    public int genTypeFile(TableDB ft, JProgressBar jProgressBar, boolean disableReserve) throws IOException {
+        /* 
+        --- Генерация Типов ---
+        0-norm, -1 - not find node
+        */
         boolean interGlobCase = true; // вносить ли в глобальные сигналы
         boolean interLocalCase = true; // вносить ли в локальные сигналы приложения
         
@@ -1105,6 +1117,12 @@ public class Generator {
                     }
                     String tagName = ft.getCell("TAG_NAME_PLC", j);//ПОЛУЧИЛИ ИЗ ТАБЛИЦЫ
                     String comment = ft.getCell("Наименование", j);//получаем НАИМЕНОВАНИЕ из таблицы
+                    
+                    // Пропуск Резервов
+                    if (disableReserve & tagName.contains("Res_")) {
+                        continue;
+                    }
+                    
                     if (fildUuidRoot != null) {
                         String dataType = ft.getCell(dtCol, j);
                         fildUUID = getFromDict(fildUuidSax, fildUuidRoot, dataType, "dataType");
@@ -1745,7 +1763,7 @@ public class Generator {
         }   //Цикл по всем частям аргументов - текстовым и табличным
         
         String disable = "";
-        if (disableReserve && ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
+        if (disableReserve & ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
             disable = "//";
         }
         if (disable.equals("") & tmp.equals("")) {
@@ -1782,7 +1800,7 @@ public class Generator {
             }
         }   //Цикл по всем частям аргументов - текстовым и табличным
         String disable = "";
-        if (disableReserve && ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
+        if (disableReserve & ((String) ft.getCell("TAG_NAME_PLC", j)).contains("Res_")) {
             disable = "//";
         }
         fm.wr("//" + (j + 1) + ":" + (String) ft.getCell("Наименование", j) + "\n"

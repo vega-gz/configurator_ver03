@@ -367,7 +367,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jTextField1" min="-2" pref="170" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxReserv" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jCheckBoxNotCreateEvent" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -385,7 +385,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxReserv" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCheckBoxNotCreateEvent" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -415,13 +415,13 @@
                 <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jTextField1.getDocument().addDocumentListener(new DocumentListener() {&#xa;            @Override&#xa;            public void insertUpdate(DocumentEvent e) {&#xa;                //System.out.println(&quot;jTextField1_add &quot; + e);&#xa;                compareFielTextToDataCell(jTextField1.getText());&#xa;            }&#xa; &#xa;            @Override&#xa;            public void removeUpdate(DocumentEvent e) {&#xa;                //System.out.println(&quot;jTextField1_del &quot; + e);&#xa;                compareFielTextToDataCell(jTextField1.getText());&#xa;            }&#xa;&#xa;            @Override&#xa;            public void changedUpdate(DocumentEvent e) {&#xa;                //System.out.println(&quot;jTextField1_change &quot; + e);&#xa;                compareFielTextToDataCell(jTextField1.getText());&#xa;            }&#xa;&#xa;        });"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+            <Component class="javax.swing.JCheckBox" name="jCheckBoxReserv">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="&#x431;&#x435;&#x437; &#x440;&#x435;&#x437;&#x435;&#x440;&#x432;&#x43e;&#x432;"/>
+                <Property name="text" type="java.lang.String" value="&#x413;&#x435;&#x43d;&#x435;&#x440;&#x430;&#x446;&#x438;&#x44f; &#x431;&#x435;&#x437; &#x440;&#x435;&#x437;&#x435;&#x440;&#x432;&#x43e;&#x432;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxReservActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBoxNotCreateEvent">

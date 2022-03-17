@@ -223,7 +223,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int ret = 1;
         try {
-            ret = generatorFileSonata.genTypeFile(null,null);
+            ret = generatorFileSonata.genTypeFile(null,null, false);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -260,7 +260,7 @@ public class FrameTabel extends javax.swing.JPanel {
         if(!Tools.isDesDir()) return;
         int retHW = 0;
         try {
-            retHW = generatorFileSonata.genHW(null,null);
+            retHW = generatorFileSonata.genHW(null,null, false);
         } catch (IOException ex) {
             Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

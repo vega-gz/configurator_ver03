@@ -232,7 +232,7 @@ public class TableDB extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBoxReserv = new javax.swing.JCheckBox();
         jCheckBoxNotCreateEvent = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -395,11 +395,11 @@ public class TableDB extends javax.swing.JFrame {
 
         });
 
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText("без резервов");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxReserv.setSelected(true);
+        jCheckBoxReserv.setText("Генерация без резервов");
+        jCheckBoxReserv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxReservActionPerformed(evt);
             }
         });
 
@@ -421,7 +421,7 @@ public class TableDB extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckBoxReserv)
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBoxNotCreateEvent))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -435,7 +435,7 @@ public class TableDB extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBoxReserv)
                     .addComponent(jCheckBoxNotCreateEvent))
                 .addContainerGap())
         );
@@ -773,7 +773,7 @@ public class TableDB extends javax.swing.JFrame {
             }
             int ret = 1;
             try {
-                ret = generatorFileSonata.genTypeFile(TableDB.this, jProgressBar1);
+                ret = generatorFileSonata.genTypeFile(TableDB.this, jProgressBar1, jCheckBoxReserv.isSelected());
             } catch (IOException ex) {
                 loggerFile.writeLog(ex.toString());
             }
@@ -800,9 +800,9 @@ public class TableDB extends javax.swing.JFrame {
         DoIt di = () -> {
             int ret = 0;
             try {
-                ret = generatorFileSonata.genSTcode(this, jCheckBox1.isSelected(), jProgressBar1);
+                ret = generatorFileSonata.genSTcode(this, jCheckBoxReserv.isSelected(), jProgressBar1);
             } catch (IOException ex) {
-                // Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (ret == 0) {
                 JOptionPane.showMessageDialog(null, "Генерация завершена успешно"); // Это сообщение
@@ -830,7 +830,7 @@ public class TableDB extends javax.swing.JFrame {
         DoIt di = () -> {
             int retHW = 0;
             try {
-                retHW = generatorFileSonata.genHW(this, jProgressBar1);
+                retHW = generatorFileSonata.genHW(this, jProgressBar1, jCheckBoxReserv.isSelected());
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -860,7 +860,7 @@ public class TableDB extends javax.swing.JFrame {
             }
             String retHMI = null;
             try {
-                retHMI = generatorFileSonata.genHMI(this, jCheckBox1.isSelected(), jCheckBoxNotCreateEvent.isSelected(), jProgressBar1);
+                retHMI = generatorFileSonata.genHMI(this, jCheckBoxReserv.isSelected(), jCheckBoxNotCreateEvent.isSelected(), jProgressBar1);
             } catch (IOException ex) {
                 //Logger.getLogger(Main_JPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -972,9 +972,9 @@ public class TableDB extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBoxReservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxReservActionPerformed
 
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jCheckBoxReservActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ArrayList<Integer>error=Сheck_Tag_Name_PLC();
@@ -1118,8 +1118,8 @@ public class TableDB extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBoxNotCreateEvent;
+    private javax.swing.JCheckBox jCheckBoxReserv;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDialog jDialog1_DownloadSheetExcel;
     private javax.swing.JDialog jDialog1_add_column;
