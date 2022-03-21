@@ -154,7 +154,7 @@ public class TableDB extends javax.swing.JFrame {
             jMenu4.hide();
         }
         // пункт меня уставок
-        if (nameTable.indexOf("Setting") > -1) {
+        if (nameTable.indexOf("Setting") > -1 | nameTable.indexOf("_SP") > -1) {
             jMenu2.hide();
             jMenu3.hide();
             jMenu4.hide();
@@ -257,8 +257,8 @@ public class TableDB extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem15_Setings = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem15_Setings = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
 
@@ -636,14 +636,6 @@ public class TableDB extends javax.swing.JFrame {
 
         jMenu4.setText("Уставки");
 
-        jMenuItem15_Setings.setText("Уставки конкретной таблицы");
-        jMenuItem15_Setings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15_SetingsActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem15_Setings);
-
         jMenuItem15.setText("Уставки абонента");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -651,6 +643,14 @@ public class TableDB extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem15);
+
+        jMenuItem15_Setings.setText("Уставки конкретной таблицы");
+        jMenuItem15_Setings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15_SetingsActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem15_Setings);
 
         jMenu1.add(jMenu4);
 

@@ -20,6 +20,7 @@ class FBV {
     // --- Добавляем элементы в список ---
     public void addVarValue(FBVarValue fbVar) {
         listVarValue.add(fbVar);
+        checkTypeDataNode(fbVar);
     }
 
     // --- Получить список элементов ---
@@ -36,7 +37,7 @@ class FBV {
                     FBVarValue cutVal = listVarValue.get(i);
                     cutVal.editType(s[1]);
                     cutVal.editValue(s[2]);
-                    cutVal.editText(s[3]);
+                    cutVal.editText(s[3]); // тут вся магия проверки изменения текста(прикручивает данные текста к Value)
                     checkTypeDataNode(value);
                     break;
                 }

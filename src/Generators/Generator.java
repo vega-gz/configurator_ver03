@@ -868,9 +868,9 @@ public class Generator {
                     for (String[] s : addVarsData) { // новый метод поиска additionalVar с выборкой по свитчам
                         fbChildNode[2] = s[0];
                         String apos = "";
-                        if ("STRING".equals(s[2])) {        // Определить строка это или нет
-                            apos = "'";
-                        }
+//                        if ("STRING".equals(s[2])) {        // Определить строка это или нет
+//                            apos = "'";
+//                        }
                         String getCellT = ft.getCell(s[1], i); // запрос данных из таблицы "tableCol"  при case s[1] явно будет null
                         System.out.println();
                         if (getCellT != null) {                 // если явно не указано из какой таблицы брать возьмет из из "def"
@@ -880,7 +880,12 @@ public class Generator {
                         }
                         fbChildNode[6] = s[2];
                         fbChildNode[8] = s[3];
-                        objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
+
+                        FBVarValue addVarsFBVarValue = new FBVarValue(fbChildNode);
+                        if(s.length > 4 & s[5] != null){ // из Свитч может прийти меньшего размера
+                            addVarsFBVarValue.editText(s[5]);
+                        }
+                        objectFB.addVarValue(addVarsFBVarValue); // вносим новое значение в объект FB
 
                     }
 
@@ -2699,12 +2704,14 @@ public class Generator {
                     IfElseNode = processingIF(HMIcfg, addVar, ft, i, IfElseNode);          // Обработка условий IF ELSE(передавать надо именно саму ноду additionalVar так как if в ней )
                     if (IfElseNode != null) {
                         for (Node n : IfElseNode) {
-                            String[] tmp = new String[5];
-                            tmp[0] = n.getNodeName();
-                            tmp[1] = HMIcfg.getDataAttr(n, "tableCol");
-                            tmp[2] = HMIcfg.getDataAttr(n, "Type");
-                            tmp[3] = HMIcfg.getDataAttr(n, "TypeUUID");
-                            tmp[4] = null;      // тут хранится значение из свитча или еще от куда на будущее
+//                            String[] tmp = new String[6];
+//                            tmp[0] = n.getNodeName();
+//                            tmp[1] = HMIcfg.getDataAttr(n, "tableCol");
+//                            tmp[2] = HMIcfg.getDataAttr(n, "Type");
+//                            tmp[3] = HMIcfg.getDataAttr(n, "TypeUUID");
+//                            tmp[4] = null;      // тут хранится значение из свитча или еще от куда на будущее
+//                            tmp[5] = HMIcfg.getDataAttr(n, "text");      // Доп поле для text как в Edit
+                            String[] tmp = getFormingadditionalVarFromconf(HMIcfg, n);
                             ArrayList<String[]> editVars = getListEditVarValue(HMIcfg, n, ft, i);
                             if (editVars.size() <= 0) {
                                 addVarsData.add(tmp);
@@ -2723,12 +2730,14 @@ public class Generator {
                     continue;
                 }
 
-                String[] tmp = new String[5];
-                tmp[0] = av.getNodeName();
-                tmp[1] = HMIcfg.getDataAttr(av, "tableCol");
-                tmp[2] = HMIcfg.getDataAttr(av, "Type");
-                tmp[3] = HMIcfg.getDataAttr(av, "TypeUUID");
-                tmp[4] = null;      // тут хранится значение из свитча или еще от куда на будущее
+//                String[] tmp = new String[6]; // косяк двойное создание массива, код дублируется
+//                tmp[0] = av.getNodeName();
+//                tmp[1] = HMIcfg.getDataAttr(av, "tableCol");
+//                tmp[2] = HMIcfg.getDataAttr(av, "Type");
+//                tmp[3] = HMIcfg.getDataAttr(av, "TypeUUID");
+//                tmp[4] = null;      // тут хранится значение из свитча или еще от куда на будущее
+//                tmp[5] = HMIcfg.getDataAttr(av, "text");      // Доп поле для text как в Edit
+                String[] tmp = getFormingadditionalVarFromconf(HMIcfg, av);
                 // Проверка Ноды есть ли у нее Свитч
                 ArrayList<String[]> switchesSig = checkNodeSwitch(HMIcfg, av, ft, i); // выбираем все свитчи от этого сигнала
                 if (switchesSig == null) {
@@ -2753,16 +2762,29 @@ public class Generator {
             if (nSwitch.getNodeName().equals("switch")) {
                 dataSwitch = new ArrayList<>();
 
-                String[] tmp = new String[5];
-                tmp[0] = hmiNode.getNodeName();
-                tmp[1] = HMIcfg.getDataAttr(hmiNode, "tableCol");
-                tmp[2] = HMIcfg.getDataAttr(hmiNode, "Type");
-                tmp[3] = HMIcfg.getDataAttr(hmiNode, "TypeUUID");
+//                String[] tmp = new String[5];
+//                tmp[0] = hmiNode.getNodeName();
+//                tmp[1] = HMIcfg.getDataAttr(hmiNode, "tableCol");
+//                tmp[2] = HMIcfg.getDataAttr(hmiNode, "Type");
+//                tmp[3] = HMIcfg.getDataAttr(hmiNode, "TypeUUID");
+//                tmp[4] = getSwitchValConfig(nSwitch, ft, i); // запуск выборки Свитча
+                String[] tmp = getFormingadditionalVarFromconf(HMIcfg, hmiNode);
                 tmp[4] = getSwitchValConfig(nSwitch, ft, i); // запуск выборки Свитча
                 dataSwitch.add(tmp);
             }
         }
         return dataSwitch;
+    }
+    
+    private String[] getFormingadditionalVarFromconf(XMLSAX HMIcfg, Node hmiNode){
+        String[] tmp = new String[6];
+        tmp[0] = hmiNode.getNodeName();
+        tmp[1] = HMIcfg.getDataAttr(hmiNode, "tableCol");
+        tmp[2] = HMIcfg.getDataAttr(hmiNode, "Type");
+        tmp[3] = HMIcfg.getDataAttr(hmiNode, "TypeUUID");
+        tmp[4] = null;      // тут хранится значение из свитча или еще от куда на будущее
+        tmp[5] = HMIcfg.getDataAttr(hmiNode, "text");      // Доп поле для text как в Edit
+        return tmp;
     }
 
 // --- Занос данных из ноды Hint ---
@@ -2815,22 +2837,25 @@ public class Generator {
                 nodeAtt[0] = nD.getNodeName(); // вносим имена нод входящий в состав ноды Disable
                 HashMap<String, String> dataNode = HMIcfg.getDataNode(nD); // получим данные с ноды
                 for (Map.Entry<String, String> entry : dataNode.entrySet()) { // должен по идеи получить 2 значения только
-                    String named = entry.getKey();
-                    String index = entry.getValue();
-                    if (named.equalsIgnoreCase("Type")) {
-                        nodeAtt[1] = index; // вторым значение 
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+
+                    if (key.equalsIgnoreCase("Type")) {
+                        nodeAtt[1] = value; // вторым значение 
                     }
-                    if (named.equalsIgnoreCase("value")) {
-                        nodeAtt[2] = index;
+                    if (key.equalsIgnoreCase("value")) {
+                        nodeAtt[2] = value;
                     }
-                    if (named.equalsIgnoreCase("tableCol")) { // если есть такая нода то смотрим в таблице
-                        //условие по базе
-                        String valFromTable = ft.getCell(index, i);
-                        nodeAtt[2] = valFromTable;
+                    if (key.equalsIgnoreCase("tableCol")) {
+                        if(ft != null){
+                            String valFromTable = ft.getCell(value, i);
+                            nodeAtt[2] = valFromTable;
+                        }else{
+                            nodeAtt[2] = "This current request Table null!";
+                        }
                     }
-                    if (named.equalsIgnoreCase("text")) { // если есть такая нода то смотрим в таблице
-                        //условие по базе
-                        nodeAtt[3] = index;
+                    if (key.equalsIgnoreCase("text")) {
+                        nodeAtt[3] = value;
                     }
                 }
                 editVar.add(nodeAtt);
