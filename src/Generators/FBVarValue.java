@@ -20,6 +20,7 @@ class FBVarValue {
     private String Value = "";
     private String Variable = "";
     private String Text = ""; // доп параметр для привязки  к значению    
+    private boolean DirectionInsertText = true;
 
     public FBVarValue(String Type, String TypeUUID, String Value, String Variable) {
         this.Type = Type;
@@ -47,9 +48,15 @@ class FBVarValue {
     }
 
     public String getValue() {
-        if(Text != null)return Text + Value;
-        else return Value;
+        if(Text != null){
+            if(DirectionInsertText){
+                return Value + Text;
+            }else{
+                return Text + Value;
+            }
         
+        }
+        else return Value;
     }
 
     public String getVariable() {
@@ -74,6 +81,10 @@ class FBVarValue {
 
     public void editText(String Text) {
         this.Text = Text;
+    }
+    
+    public void changeDirectionInsertText() {
+        this.DirectionInsertText =  !DirectionInsertText;
     }
     
     

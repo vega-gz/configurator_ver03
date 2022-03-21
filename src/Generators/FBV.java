@@ -38,6 +38,9 @@ class FBV {
                     cutVal.editType(s[1]);
                     cutVal.editValue(s[2]);
                     cutVal.editText(s[3]); // тут вся магия проверки изменения текста(прикручивает данные текста к Value)
+                    if(s[4] != null){
+                        cutVal.changeDirectionInsertText();
+                    }
                     checkTypeDataNode(value);
                     break;
                 }

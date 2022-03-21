@@ -882,8 +882,11 @@ public class Generator {
                         fbChildNode[8] = s[3];
 
                         FBVarValue addVarsFBVarValue = new FBVarValue(fbChildNode);
-                        if(s.length > 4 & s[5] != null){ // из Свитч может прийти меньшего размера
+                        if(s[5] != null){ // из Свитч может прийти меньшего размера
                             addVarsFBVarValue.editText(s[5]);
+                        }
+                        if(s[6] != null){ // из Свитч может прийти меньшего размера
+                            addVarsFBVarValue.changeDirectionInsertText();
                         }
                         objectFB.addVarValue(addVarsFBVarValue); // вносим новое значение в объект FB
 
@@ -2777,13 +2780,16 @@ public class Generator {
     }
     
     private String[] getFormingadditionalVarFromconf(XMLSAX HMIcfg, Node hmiNode){
-        String[] tmp = new String[6];
+        String[] tmp = new String[7];
+        HashMap<String, String> dataNode = HMIcfg.getDataNode(hmiNode);
+        
         tmp[0] = hmiNode.getNodeName();
         tmp[1] = HMIcfg.getDataAttr(hmiNode, "tableCol");
         tmp[2] = HMIcfg.getDataAttr(hmiNode, "Type");
         tmp[3] = HMIcfg.getDataAttr(hmiNode, "TypeUUID");
         tmp[4] = null;      // тут хранится значение из свитча или еще от куда на будущее
         tmp[5] = HMIcfg.getDataAttr(hmiNode, "text");      // Доп поле для text как в Edit
+        tmp[6] = HMIcfg.getDataAttr(hmiNode, "textBeforeVal");   //Направление вставки текста
         return tmp;
     }
 
@@ -2833,13 +2839,14 @@ public class Generator {
         }
         if (disNode != null) {
             for (Node nD : HMIcfg.getHeirNode(disNode)) {
-                String[] nodeAtt = new String[4];
+                String[] nodeAtt = new String[5];
                 nodeAtt[0] = nD.getNodeName(); // вносим имена нод входящий в состав ноды Disable
                 HashMap<String, String> dataNode = HMIcfg.getDataNode(nD); // получим данные с ноды
                 for (Map.Entry<String, String> entry : dataNode.entrySet()) { // должен по идеи получить 2 значения только
                     String key = entry.getKey();
                     String value = entry.getValue();
-
+                    
+                    
                     if (key.equalsIgnoreCase("Type")) {
                         nodeAtt[1] = value; // вторым значение 
                     }
@@ -2856,6 +2863,9 @@ public class Generator {
                     }
                     if (key.equalsIgnoreCase("text")) {
                         nodeAtt[3] = value;
+                    }
+                    if (key.equalsIgnoreCase("textBeforeVal")) { // направление вставки текста
+                        nodeAtt[4] = value;
                     }
                 }
                 editVar.add(nodeAtt);
