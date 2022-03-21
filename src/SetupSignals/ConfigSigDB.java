@@ -18,11 +18,17 @@ import java.util.ArrayList;
 public class ConfigSigDB implements ConfigSigStorageInterface {
     private DataBase db = globVar.DB;
     private String nameTableSetups = "SignalSetups";
-    private String[] columnTableDefault = {"id", "Abonent", "NameTableFromSignal", "Наименование", "TAG_NAME_PLC", "Type", "NameSig", "Direction", "Delay", "LostSignal", "Value"}; // Набор столбцов для базы таблицы
+    private String TAG_NAME_PLC = "TAG_NAME_PLC";
+    private String[] columnTableDefault = {
+        "id", "Abonent", "NameTableFromSignal",
+        "Наименование", TAG_NAME_PLC, "Type", "NameSig",
+        "Direction", "Delay", "LostSignal", "Value", "ExternalInit"
+    }; // Набор столбцов для базы таблицы
     private String commentT = "setups signals";
     private String nameSig = null;
     private String nameColumn1 = "Abonent";
     private String nameColumn2 = "NameSig";
+    private String nameColumnAccuracy = "Точность";
     
     public ConfigSigDB(){
        checktableSeting();
@@ -49,15 +55,19 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         checktableSeting();
     }
 
+    private String getAccuracyFromParrent(String tableName, String nameSig){
+        // достаем данные точности из родителя
+        return db.getDataCell(tableName, TAG_NAME_PLC, nameSig, nameColumnAccuracy); // запрос к методы пиздецки конченный
+    }
     @Override
     public ArrayList<ConfigSig> getConfigsSignal() {        
         
         ArrayList<ConfigSig> savedConfigsSignal = new ArrayList<>();
         ArrayList<String[]> dataSettingDB = null;
         if(nameSig != null){ // выбор вссех уставок или конкретного
-            dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}, {nameColumn2, nameSig}}); // поиск данных с выборкой
+            dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}, {nameColumn2, nameSig}}); 
         }else{
-            dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}}); // поиск данных с выборкой
+            dataSettingDB = db.getDataCondition(nameTableSetups, new String[][]{{nameColumn1, globVar.abonent}});
         }
         
         for (int i = 0; i < dataSettingDB.size(); i++)
@@ -67,6 +77,8 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
             config.setData(arr);
             config.setLocalId(i + 1); // с единицы
             config.setStatus(ConfigSig.StatusSeting.FROMBASE); // установить статус
+            String accuracyParent = getAccuracyFromParrent(arr[2], arr[6]); // таблица и название сигнала
+            config.setAccuracy(accuracyParent);
             savedConfigsSignal.add(config);
         }
         return savedConfigsSignal;

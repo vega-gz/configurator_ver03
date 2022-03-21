@@ -1149,8 +1149,8 @@
 				<Analog_Ph_N/>
 			</Disable>
 			<additionalVar>
-				<!--decimal tableCol="Точность" Type="INT" /-->
-				<Type_Str tableCol="Type"  text=":"  textBeforeVal="" Type="STRING"/>
+				<decimal tableCol="Точность" Type="INT" />
+				<Type_Str tableCol="Type"  text=":" Type="STRING"/>
 				<Type_Color Type="TColor" TypeUUID="EDYJMIBCJR5UJOZWGS3UVJENZA"> 
 					<switch swt="Type" default="##FF00FF00">
 						<case val="А" def="#FFFF0000"/>
@@ -1163,7 +1163,7 @@
 				</Type_Color>
 			</additionalVar>
 			<Edit>
-				<PrefStr value="Ust." text=":" Type="STRING" />				
+				<PrefStr value="Ust."  text="_:"  Type="STRING" />				
 			</Edit>					
 		</GenHMI>
 	</SP>

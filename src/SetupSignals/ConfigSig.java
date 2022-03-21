@@ -21,6 +21,7 @@ public abstract class ConfigSig {
     private String NameSeting;
     private String NameSignalSeting;
     private Integer localId;
+    private String accuracy = "Accuracy!";
     
     public void setStatus(StatusSeting status)
     {
@@ -73,6 +74,14 @@ public abstract class ConfigSig {
     public String getId(){
         return id;
     }
+    
+    public void setAccuracy(String accuracy){
+        this.accuracy = accuracy;
+    }
+    public String getAccuracy(){
+        return accuracy;
+    }
+    
     
     public String getNameSignalSeting(){
         return NameSignalSeting;

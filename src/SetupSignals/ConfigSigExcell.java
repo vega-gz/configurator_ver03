@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.poi.ss.usermodel.Cell;
 
 /**
  *
@@ -32,7 +33,8 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
         "Альтернативное имя",
         "Категория уставки",
         "Родительский сигнал",
-        "Род сигнала"
+        "Род сигнала",
+        "Внешняя инициализация"
     };
     
     public ConfigSigExcell(String nameFileByData){
@@ -57,7 +59,8 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
             for (int i = 0; i < 3; i++) { // три строки проверим только для определение полей установ
                 rowFromFile = dataSheet.get(i);
                 for (int j = 0; j < nameColumnsInFile.length; j++) {
-                    int index = rowFromFile.indexOf(nameColumnsInFile[j]); // нужный 
+                    String currentnameColumn = nameColumnsInFile[j];
+                    int index = rowFromFile.indexOf(currentnameColumn); // нужный 
                     if (index >= 0) {
                         iStartData = i;
                         numberColumnEquels.put(nameColumnsInFile[j], index);
@@ -77,10 +80,11 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
                 int delayColumnDirection = numberColumnEquels.get(nameColumnsInFile[5]);
                 int lostSignalColumnDirection = numberColumnEquels.get(nameColumnsInFile[3]);
                 int valueColumnDirection = numberColumnEquels.get(nameColumnsInFile[2]);
+                int valueExternalInitial = numberColumnEquels.get(nameColumnsInFile[10]);
                 // проход по самими данным
                 int localIDseting = 1;
                 for (int i = iStartData + 1; i < dataSheet.size(); i++) {
-                    rowFromFile = dataSheet.get(i);
+                    rowFromFile = dataSheet.get(i); // могут быть пустые значения сделай проверку по циклам
 
                     String nameSetingRus = rowFromFile.get(numberColumnBynameSetingRus);
                     String nameSeting = rowFromFile.get(numberColumnByNameSeting);
@@ -93,11 +97,15 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
                     String valueByFile = rowFromFile.get(valueColumnDirection);
                     String partNameTable = getCommonPartNameTable(nameLegacyByFile);
                     
+                    String ExternalInitial = "";
+                    if(rowFromFile.size() > valueExternalInitial){
+                        ExternalInitial = rowFromFile.get(valueExternalInitial);
+                    }
+                    
                     LinkedList<String> listTablewithsig = checkDataFileExeptionSetingsSig(nameSigByFile, partNameTable);
                     
                     for (String nameTable : listTablewithsig) {
-
-                        String[] arr = {null, globVar.abonent, nameTable, nameSetingRus, nameSeting, typeByFile, nameSigByFile, directionByFile, delayByFile, lostSignalByFile, valueByFile};
+                        String[] arr = {null, globVar.abonent, nameTable, nameSetingRus, nameSeting, typeByFile, nameSigByFile, directionByFile, delayByFile, lostSignalByFile, valueByFile, ExternalInitial};
                         ConfigSig config = new AnalogSetup();
                         config.setData(arr);
                         config.setLocalId(localIDseting); // с единицы
