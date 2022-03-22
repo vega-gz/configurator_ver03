@@ -1427,9 +1427,10 @@ public class Generator {
 
         
         if (algFile != null) {
-            if ("_".equals(algFile.substring(0, 1))) {
-                algFile = abonent + algFile;
-            }
+//            if ("_".equals(algFile.substring(0, 1))) {
+//                algFile = abonent + algFile;
+//            }
+            algFile = abonent + algFile;
 
             String[] separAbonent = algFile.split("\\.");
             if (separAbonent.length > 1) {

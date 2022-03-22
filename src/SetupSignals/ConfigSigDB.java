@@ -19,16 +19,18 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     private DataBase db = globVar.DB;
     private String nameTableSetups = "SignalSetups";
     private String TAG_NAME_PLC = "TAG_NAME_PLC";
-    private String[] columnTableDefault = {
-        "id", "Abonent", "NameTableFromSignal",
-        "Наименование", TAG_NAME_PLC, "Type", "NameSig",
-        "Direction", "Delay", "LostSignal", "Value", "ExternalInit"
-    }; // Набор столбцов для базы таблицы
+    private String _RusnamingSig = "Наименование";
+    private String _UnitOfMeasure = "Единица_измерения";
     private String commentT = "setups signals";
     private String nameSig = null;
     private String nameColumn1 = "Abonent";
     private String nameColumn2 = "NameSig";
-    private String nameColumnAccuracy = "Точность";
+    private String nameColumnAccuracy = "Точность"; // Колонка из родителя
+    private String[] columnTableDefault = {
+        "id", "Abonent", "NameTableFromSignal",
+        _RusnamingSig, TAG_NAME_PLC, "Type", "NameSig",
+        "Direction", "Delay", "LostSignal", "Value", "ExternalInit"
+    }; // Набор столбцов для базы таблицы
     
     public ConfigSigDB(){
        checktableSeting();
@@ -59,6 +61,15 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         // достаем данные точности из родителя
         return db.getDataCell(tableName, TAG_NAME_PLC, nameSig, nameColumnAccuracy); // запрос к методы пиздецки конченный
     }
+    private String getRusFromParrent(String tableName, String nameSig){
+        // достаем российское название сигнала из родителя
+        return db.getDataCell(tableName, _RusnamingSig, nameSig, nameColumnAccuracy); // запрос к методы пиздецки конченный
+    }
+    private String getMeasureFromParrent(String tableName, String nameSig){
+        // достаем меру измерения сигнала из родителя
+        return db.getDataCell(tableName, _UnitOfMeasure, nameSig, nameColumnAccuracy); // запрос к методы пиздецки конченный
+    }
+    
     @Override
     public ArrayList<ConfigSig> getConfigsSignal() {        
         

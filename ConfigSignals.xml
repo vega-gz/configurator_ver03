@@ -311,36 +311,7 @@
 		</GenCode>
 		<GenHW drvFile="_FR_AI_DRV" globData="_FR_AI_DRV" hwDriver="KM04"/>
 	</FR_AI>
-<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!--ANB excelSheetName="ANB" Comment="Уставки аналоговых параметров" parentTable="AI">
-		<GenData>
-			<T_ANB Type="BOOL"/>
-			<T_GPA_SP_Settings Type="T_SP_Settings"/>
-		</GenData>
-        <EXEL>
-            <B nameColumnPos="TAG_NAME_AnPar" type="VarName"/>
-            <C nameColumnPos="direct" registr="down" replace="true"> 
-				<case from="&gt;" to="больше"/>
-				<case from="true" to="больше"/>
-				<case from="&lt;" to="меньше"/>
-				<case from="false" to="меньше"/>
-			</C>
-            <D nameColumnPos="Уставка" type="Number"/>
-            <E nameColumnPos="delay" type="Number" default="3.0"/>
-            <F nameColumnPos="тип" registr="up" default="У"  replace="true">
-				<case from="U" to="У"/>
-				<case from="A" to="А"/>
-				<case from="P" to="П"/>
-				<case from="O" to="О"/>
-			</F>
-            <G nameColumnPos="defVal" type="Int" default="0"/> значение по умолчанию при неисправности аналового 
-																0 - уставка в ложь, 1 - в истина, 2 - остаётся какой была 
-            <H nameColumnPos="гистерезис" type="Number"  default="0.0"/>
-            <I nameColumnPos="TAG_NAME_PLC"  default=""/> Если имя уставки пустое то TAG_NAME_AnPar_Uv1 
-			
-            <J nameColumnPos="Наименование"  default=""/>
-       </EXEL>
-	</ANB-->
+
 <!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<AO Comment="Аналоговые выходы" excelSheetName="AO">
 		<GenData>
@@ -1587,11 +1558,11 @@
             <B nameColumnPos="Конфигурация"/>   <!--Обязательный нода конфигурация ИМ-->	 		
             <C nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/>      <!--Обязательный нода-->
             <D default="15.0" nameColumnPos="dcoa" type="Number"/>     <!--Обязательный нода .время перестановки, при превышении которого выдается предупреждение-->
-            <E default="20.0" nameColumnPos="tp2" type="Number"/>      <!--Обязательный нода . время перестановки, при превышении которого снимается выходная команда -->
-            <F default="1.0" nameColumnPos="td1" type="Number"/>     <!-- Обязательный нода. время дожима на открытие-->
-            <G default="1.0" nameColumnPos="td2" type="Number"/>      <!-- Обязательный нода. время дожима на закрытие-->		
-            <H default="5.0" nameColumnPos="tn" type="Number"/>     <!-- Обязательный нода. время реакции на нестрагивание-->	
-            <I default="1.0" nameColumnPos="tk" type="Number"/>      <!-- Обязательный нода. время реакции на пропадание кц-->
+            <E default="20.0" nameColumnPos="dqt" type="Number"/>      <!--Обязательный нода . время перестановки, при превышении которого снимается выходная команда -->
+            <F default="1.0" nameColumnPos="deon" type="Number"/>     <!-- Обязательный нода. время дожима на открытие-->
+            <G default="1.0" nameColumnPos="deoff" type="Number"/>      <!-- Обязательный нода. время дожима на закрытие-->		
+            <H default="5.0" nameColumnPos="dnma" type="Number"/>     <!-- Обязательный нода. время реакции на нестрагивание-->	
+            <I default="1.0" nameColumnPos="dcba" type="Number"/>      <!-- Обязательный нода. время реакции на пропадание кц-->
 			<J default="0.0" nameColumnPos="dsc" type="Number"/> <!-- Обязательный нода. время задержки самопроизвольного перермещения-->
             <J default="" nameColumnPos="Тип_ИМ"/>      <!-- Необязательная нода, -->
             <K default="Наименование" nameColumnPos="Короткое_имя"/> 
@@ -1599,6 +1570,7 @@
 			<M default="" nameColumnPos="Нестандартный"/> <!-- Нестандартная привязка выхода -->
 			<N default="" nameColumnPos="КЦУ_Откр"/>
 			<O default="" nameColumnPos="КЦУ_Закр"/>
+			<P default="1.0" nameColumnPos="tpc" type="Number"/> <!-- Обязательный нода. время блокировки кнопки вкл., откл. после выпонения команды откл.\вкл. -->			
         </EXEL>	
 		<GenData>
 			<tuneAM disable="" typeFile="T_tuneAM.type">
@@ -1625,54 +1597,49 @@
 			</AM_FromHMI>
 		</GenData>
 		<GenCode>
-						<!-- ........................................ Файл функции IM_Init ....................................... -->
+			<!-- ........................................ Файл функции IM_Init ....................................... -->
 			<File src="IM_Init" target="_Algorithm"> <!-- имя функции/блока, имя приложения -->
-				<addVariables>
-					<Variable Name="tuns" Type="T_(ABONENT)_tuneAM" Usage="inout" fileTypeUUID=""/>
-					<Variable Name="tuns" Type="T_  (ABONENT) _tuneAM" Usage="inout" fileTypeUUID=""/>
-					<Variable Name="tuns" Type="T_GPD_tuneAM" Usage="inout" fileTypeUUID=""/>
-				</addVariables>
+				<!--addVariables>
+					<Variable Name="tuns" Type="T_GPA_tuneAM" Usage="inout" fileTypeUUID=""/>
+				</addVariables-->
 				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/> 
 					</String>						
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayChangeOvertimeAlert := "/><dbd t="dcoa"/><text t="; // dcoa"/> 
+						<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".delayChangeOvertimeAlert := "/><dbd t="dcoa"/><text t="; // dcoa"/> 
 					</String>
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayQTimeout := "/><dbd t="dqt"/><text t="; // dqt"/> 
+						<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".delayQTimeout := "/><dbd t="dqt"/><text t="; // dqt"/> 
 					</String>	
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOn := "/><dbd t="deon"/><text t="; // deon"/> 
+						<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOn := "/><dbd t="deon"/><text t="; // deon"/> 
 					</String>	
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOff := "/><dbd t="deoff"/><text t="; // deoff"/> 
+						<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".delayExtraOff := "/><dbd t="deoff"/><text t="; // deoff"/> 
 					</String>	
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayNotMoveAlert := "/><dbd t="dnma"/><text t="; // dnma"/> 
+						<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".delayNotMoveAlert := "/><dbd t="dnma"/><text t="; // dnma"/> 
 					</String>
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delayCircBrkAlert := "/><dbd t="dcba"/><text t=";// dcba"/> 
+						<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".delayCircBrkAlert := "/><dbd t="dcba"/><text t=";// dcba"/> 
 					</String>
 					<String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".delaySelfChng := "/><dbd t="dsc"/><text t=";// dsc"/> 
-					</String>
-					<!--String>
-						<abonent/><text t="_TuneAM."/><dbd t="TAG_NAME_PLC"/><text t=".timePrmCommand := "/><dbd t="tpc"/><text t=";// tpc"/> 
-					</String-->					
+						<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".delaySelfChng := "/><dbd t="dsc"/><text t=";// dsc"/> 
+					</String>		
 					<String>
 						<IF cond="КЦУ_Откр" val="">
-							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCon := true;"/>
+							<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".disableCon := true;"/>
 						<ELSE> 	
-							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCon := false;"/>
+							<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".disableCon := false;"/>
 						</ELSE>
 						</IF>
 					</String>
 					<String>
 						<IF cond="КЦУ_Закр" val="">
-							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCoff := true;"/>
+							<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".disableCoff := true;"/>
 						<ELSE> 	
-							<abonent/><text t="_AM_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".disableCoff := false;"/>
+							<text t="IM_Init."/><dbd t="TAG_NAME_PLC"/><text t=".disableCoff := false;"/>
 						</ELSE>
 						</IF>
 					</String>	
@@ -1713,6 +1680,13 @@
 			</File>
 			<!-- ........................................ Файл функции Call_IM ....................................... -->
 			<File fbblock="FB_IM" nonFunc="FunctionBlock" src="FB_Call_IM" target="_Algorithm">
+				<addVariables>
+					<Variable Name="algCycle" Type="REAL" Usage="input" />
+					<Variable Name="unlock" Type="BOOL" Usage="input" />
+					<Variable Name="imit" Type="BOOL" Usage="input" />
+					<Variable Name="IM_type" Type="T_AM_Type" Usage="internal" fileTypeUUID=""/>
+					<Variable Name="TuneAM" Type="T_(ABONENT)_tuneAM" Usage="internal" fileTypeUUID=""/>  
+				</addVariables>				
 				<Block end="Конец кода" start="Начало кода">
 					<String>
 						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="Конфигурация"/><text t=") -------------------------------------------------------------------------"/>	 
@@ -2049,8 +2023,8 @@
 		</GenData>
 	</AFastArch>
 
-<!-- ==================================================== Уставки ============================================================================================================================== -->
-	<SP Comment="Уставки аналоговых параметров" excelSheetName="SP">
+<!-- ============================================================================ Уставки ============================================================================= -->
+	<SP Comment="Уставки аналоговых параметров" excelSheetName="SP">	
 		<GenData>
 			<SP Type="BOOL">
 				<globData disable="">
@@ -2061,35 +2035,115 @@
 				<globData name="Ust">
 					<localData int="_Algorithm.int"/>
 				</globData>	
+				<globData disable="">
+					<localData int="_Algorithm.int" multyAb="true" name="SP_Internal"/>
+				</globData>							
 			</Ust>
 			<SP_Settings typeFile="T_ANB_Settings.type">
 				<globData disable=""> 
 					<localData int="_Algorithm.int" multyAb="true" name="SP_Settings"/>
 				</globData>	
 			</SP_Settings>
-			<SP_Internal Type="REAL">
-				<globData disable="">
-					<localData int="_Algorithm.int" multyAb="true" name="SP_Internal"/>
-				</globData>			
-			</SP_Internal> 			
 		</GenData>
 		<GenCode>
-			<File src="ust"> 
-				<Block start="Начало кода ust" end="Конец кода ust">
+			<!-- Блок инициализации значений уставок -->
+			<File src="Ust" target="4_PrivateTuns"> 
+				<Block start="Начало кода значений" end="Конец кода значений">
 					<String>
-						<text t=" // "/><npp start="1"/>,<text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="NameTableFromSignal"/><text t="["/><dbd t="NameSig"/><text t="], "/>
-						<dbd t="Type"/><text t=", "/>
-						<switch  default="" swt="Direction">
-							<case def="верхняя" val="Да"/>
-							<case def="нижняя" val="Нет"/>
-						</switch>
-						<text t=")"/>	 
+						<IF cond="ExternalInit" val="Да"><BREAK/></IF>
+						<text t=" // "/><dbd t="id"/><text t=": "/><dbd t="Наименование"/><text t=" (["/><dbd t="NameTableFromSignal"/><text t="] "/><dbd t="NameSig"/><text t=", "/>
+						<dbd t="Type"/><text t=", "/><dbd t="Direction"/><text t=")"/>	 
 					</String>						
 					<String>
+						<IF cond="ExternalInit" val="Да"><BREAK/></IF>
 						<abonent/><text t="_Ust."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><dbd t="Value"/><text t=";"/> 
 					</String>
 				</Block>
+				<!-- Блок инициализации настроек уставок -->
+				<Block start="Начало кода настроек" end="Конец кода настроек">
+					<String>
+						<IF cond="Direction" val="Верхняя">							
+						<abonent/><text t="_SP_Settings."/><dbd t="TAG_NAME_PLC"/><text t=" := ust_init("/>
+							<switch default="0" swt="LostSignal">
+								<case def="0" val="Принять 0"/>								
+								<case def="1" val="Принять 1"/>
+								<case def="2" val="Не изменять"/>
+							</switch>
+						<text t=", true, "/><dbd t="Delay"/><text t="); // "/><dbd t="id"/><text t=": "/><dbd t="Наименование"/><text t=", "/><dbd t="Type"/> 
+						<ELSE>
+						<abonent/><text t="_SP_Settings."/><dbd t="TAG_NAME_PLC"/><text t=" := ust_init("/>
+							<switch default="0" swt="LostSignal">
+								<case def="0" val="Принять 0"/>								
+								<case def="1" val="Принять 1"/>
+								<case def="2" val="Не изменять"/>
+							</switch>
+						<text t=", false, "/><dbd t="Delay"/><text t="); // "/><dbd t="id"/><text t=": "/><dbd t="Наименование"/><text t=", "/><dbd t="Type"/> 
+						</ELSE>
+						</IF>																				
+					</String>	
+				</Block> 
 			</File>
+			<!-- Обработчик уставок -->
+			<File src="Call_Ust" target="_ALgorithm">
+				<Block start="Начало кода" end="Конец кода">
+					<String>
+						<text t=" // "/><dbd t="id"/><text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="Direction"/><text t=", "/>
+						<dbd t="Type"/><text t=", значение "/><dbd t="Value"/><text t=", задержка "/><dbd t="Delay"/><text t=")"/>	 
+					</String>
+					<String>
+						<IF cond="NameTableFromSignal" val="*CalcPar">
+							<abonent/><text t="_SP."/><dbd t="TAG_NAME_PLC"/><text t=" := ust_calc("/>
+							<abonent/><text t="_Ust."/><dbd t="TAG_NAME_PLC"/><text t=", "/> 
+							<abonent/><text t="_CalcPar."/><dbd t="NameSig"/><text t=".PV, "/>	
+							<abonent/><text t="_CalcPar."/><dbd t="NameSig"/><text t=".fault, "/>
+							<abonent/><text t="_SP_Settings."/><dbd t="TAG_NAME_PLC"/><text t=", "/>							
+							<abonent/><text t="_SP_Internal."/><dbd t="TAG_NAME_PLC"/><text t=");"/>
+						<ELSE>
+							<abonent/><text t="_SP."/><dbd t="TAG_NAME_PLC"/><text t=" := ust_calc("/>
+							<abonent/><text t="_Ust."/><dbd t="TAG_NAME_PLC"/><text t=", "/>
+							<dbd t="NameTableFromSignal"/><text t="_ToHMI."/><dbd t="NameSig"/><text t=".PV, "/>	
+							<dbd t="NameTableFromSignal"/><text t="_ToHMI."/><dbd t="NameSig"/><text t=".fault_common, "/>
+							<abonent/><text t="_SP_Settings."/><dbd t="TAG_NAME_PLC"/><text t=", "/>							
+							<abonent/><text t="_SP_Internal."/><dbd t="TAG_NAME_PLC"/><text t=");"/>							
+						</ELSE>
+						</IF>						
+					</String>
+				</Block> 
+			</File>	
+			<!-- подсветка уставок -->
+			<File src="ColorUst" target="_ALgorithm"> 
+				<Block start="Начало кода" end="Конец кода">	
+					<String>
+						<IF cond="Type" val="У"><BREAK/></IF>						
+						<text t=" // "/><dbd t="id"/><text t=": "/><dbd t="Наименование"/><text t=" ("/><dbd t="Type"/><text t=", "/><dbd t="Direction"/><text t=")"/>
+					</String>
+					<String>	
+						<IF cond="Type" val="У"><BREAK/></IF>						
+						<IF cond="NameTableFromSignal" val="*CalcPar">	
+							<abonent/><text t="_CalcPar."/><dbd t="NameSig"/><text t="."/>						
+							<switch default="" swt="Type">
+								<case def="as" val="А"/>								
+								<case def="ps" val="П"/>
+								<case def="os" val="О"/>
+								<case def="ps" val="ХР"/>
+								<case def="ps" val="ГР"/>								
+							</switch>						
+							<text t=" := ;"/>
+						<ELSE>						
+							<dbd t="NameTableFromSignal"/><text t="_ToHMI."/><dbd t="NameSig"/><text t="."/>
+							<switch default="" swt="Type">
+								<case def="as" val="А"/>								
+								<case def="ps" val="П"/>
+								<case def="os" val="О"/>
+								<case def="ps" val="ХР"/>
+								<case def="ps" val="ГР"/>								
+							</switch>						
+							<text t=" := ;"/>											
+						</ELSE>
+						</IF>							 
+					</String>	
+				</Block> 
+			</File>						
 		</GenCode>			
 	</SP>		
 </ConfigSignals>
