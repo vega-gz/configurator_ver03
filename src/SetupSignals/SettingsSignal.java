@@ -63,7 +63,7 @@ public class SettingsSignal implements SetupsDataToTables{
         String[][] dataToTable = new String[listSettings.size()][];
         for (int i = 0; i < listSettings.size(); i++) {
             //String[] data = listSettings.get(i).getData();
-            String[] accuracySeting =  new String[]{listSettings.get(i).getAccuracy()};
+            String[] accuracySeting =  listSettings.get(i).getDataParent();
             String[] data = Stream.concat(Arrays.stream(listSettings.get(i).getData()), Arrays.stream(accuracySeting)).toArray(String[]::new);
             data[0] = Integer.toString(listSettings.get(i).getLocalId());
             dataToTable[i] =  data;
@@ -73,12 +73,7 @@ public class SettingsSignal implements SetupsDataToTables{
 
     @Override
     public String[] getNameColumnsToTable() {
-        
-        
-        String[] temp = new String[]{"Точность"}; // столбец с точностью
-        String[] tmp = Stream.concat(Arrays.stream(containSetting.getNameColumnSetings()), Arrays.stream(temp)).toArray(String[]::new);
-        return tmp;
-        //return containSetting.getNameColumnSetings();
+        return containSetting.getNameColumnSetings();
     }
 
     @Override

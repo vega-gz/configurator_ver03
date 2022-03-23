@@ -6,6 +6,9 @@
 
 package SetupSignals;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author nazarov
@@ -21,7 +24,7 @@ public abstract class ConfigSig {
     private String NameSeting;
     private String NameSignalSeting;
     private Integer localId;
-    private String accuracy = "Accuracy!";
+    private String[] dataParentSignal;
     
     public void setStatus(StatusSeting status)
     {
@@ -74,13 +77,14 @@ public abstract class ConfigSig {
     public String getId(){
         return id;
     }
-    
-    public void setAccuracy(String accuracy){
-        this.accuracy = accuracy;
+
+    public void setAddetionDataParent(String[] dataParentSignal){
+       this.dataParentSignal = dataParentSignal;
     }
-    public String getAccuracy(){
-        return accuracy;
+    public String[] getDataParent(){
+        return dataParentSignal;
     }
+
     
     
     public String getNameSignalSeting(){

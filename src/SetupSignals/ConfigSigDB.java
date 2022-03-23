@@ -9,6 +9,8 @@ package SetupSignals;
 import DataBaseTools.DataBase;
 import globalData.globVar;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 
 /**
@@ -19,18 +21,16 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     private DataBase db = globVar.DB;
     private String nameTableSetups = "SignalSetups";
     private String TAG_NAME_PLC = "TAG_NAME_PLC";
-    private String _RusnamingSig = "Наименование";
-    private String _UnitOfMeasure = "Единица_измерения";
     private String commentT = "setups signals";
     private String nameSig = null;
     private String nameColumn1 = "Abonent";
     private String nameColumn2 = "NameSig";
-    private String nameColumnAccuracy = "Точность"; // Колонка из родителя
     private String[] columnTableDefault = {
         "id", "Abonent", "NameTableFromSignal",
-        _RusnamingSig, TAG_NAME_PLC, "Type", "NameSig",
+        "Наименование", TAG_NAME_PLC, "Type", "NameSig",
         "Direction", "Delay", "LostSignal", "Value", "ExternalInit"
     }; // Набор столбцов для базы таблицы
+    private String[] _ParentColumnsSignal = new String[]{"Точность", "Наименование", "Единица_измерения"}; // данные из родителя.
     
     public ConfigSigDB(){
        checktableSeting();
@@ -57,17 +57,13 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         checktableSeting();
     }
 
-    private String getAccuracyFromParrent(String tableName, String nameSig){
-        // достаем данные точности из родителя
-        return db.getDataCell(tableName, TAG_NAME_PLC, nameSig, nameColumnAccuracy); // запрос к методы пиздецки конченный
-    }
-    private String getRusFromParrent(String tableName, String nameSig){
-        // достаем российское название сигнала из родителя
-        return db.getDataCell(tableName, _RusnamingSig, nameSig, nameColumnAccuracy); // запрос к методы пиздецки конченный
-    }
-    private String getMeasureFromParrent(String tableName, String nameSig){
-        // достаем меру измерения сигнала из родителя
-        return db.getDataCell(tableName, _UnitOfMeasure, nameSig, nameColumnAccuracy); // запрос к методы пиздецки конченный
+    private String getAccuracyFromParrent(String tableName, String nameSig, String _ColumnFind){
+        /*
+        достаем данные точности из родителя
+        достаем российское название сигнала из родителя
+        достаем меру измерения сигнала из родителя
+        */
+        return db.getDataCell(tableName, TAG_NAME_PLC, nameSig, _ColumnFind); // запрос к методы пиздецки конченный
     }
     
     @Override
@@ -88,8 +84,13 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
             config.setData(arr);
             config.setLocalId(i + 1); // с единицы
             config.setStatus(ConfigSig.StatusSeting.FROMBASE); // установить статус
-            String accuracyParent = getAccuracyFromParrent(arr[2], arr[6]); // таблица и название сигнала
-            config.setAccuracy(accuracyParent);
+            String[] addDataParent = new String[_ParentColumnsSignal.length];
+            
+            for (int j = 0; j < _ParentColumnsSignal.length; j++) {
+                addDataParent[j] = getAccuracyFromParrent(arr[2], arr[6], _ParentColumnsSignal[j]); // таблица и название сигнала
+            }
+            
+            config.setAddetionDataParent(addDataParent);
             savedConfigsSignal.add(config);
         }
         return savedConfigsSignal;
@@ -137,7 +138,14 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
 
     @Override
     public String[] getNameColumnSetings() {
-        return columnTableDefault;
+        // возращает столбцы для постройки данных таблицы
+        // оригинальные что есть в базе и что выдергиваем из родительского сигнала
+        String[] tmpnameParent = new String[_ParentColumnsSignal.length];
+        for (int i = 0; i < _ParentColumnsSignal.length; i++) {
+            tmpnameParent[i] = _ParentColumnsSignal[i] + "_SIGNAL";
+        }
+        return Stream.concat(Arrays.stream(columnTableDefault), Arrays.stream(tmpnameParent)).toArray(String[]::new);
+        //return columnTableDefault;
     }
     
 }
