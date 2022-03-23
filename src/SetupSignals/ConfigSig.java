@@ -50,7 +50,7 @@ public abstract class ConfigSig {
         0 - id
         1 - abonent
         2 - nameTableFromSignal
-        3 - NameSetingRus
+        3 - Optiondata
         4 - NameSeting
         5 - Type
         6 - NameSignalSeting
@@ -58,6 +58,7 @@ public abstract class ConfigSig {
         8 - Delay
         9 - LostSignal
         10 - Value
+        11 - AddetionInfo
     */
         data = newData;
         if(id == null ){

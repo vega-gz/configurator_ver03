@@ -30,11 +30,11 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
         "Поведение при пропадании сигнала",
         "Верхняя уставка",
         "Задержка срабатывания",
-        "Альтернативное имя",
+        "Дополнительная информация",
         "Категория уставки",
         "Родительский сигнал",
         "Род сигнала",
-        "Внешняя инициализация"
+        "Внешняя инициализация"   
     };
     
     public ConfigSigExcell(String nameFileByData){
@@ -78,6 +78,7 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
                 int numberColumnByType = numberColumnEquels.get(nameColumnsInFile[7]);
                 int numberColumnDirection = numberColumnEquels.get(nameColumnsInFile[4]);
                 int delayColumnDirection = numberColumnEquels.get(nameColumnsInFile[5]);
+                int addetionInfo = numberColumnEquels.get(nameColumnsInFile[6]);
                 int lostSignalColumnDirection = numberColumnEquels.get(nameColumnsInFile[3]);
                 int valueColumnDirection = numberColumnEquels.get(nameColumnsInFile[2]);
                 int valueExternalInitial = numberColumnEquels.get(nameColumnsInFile[10]);
@@ -93,10 +94,10 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
                     String typeByFile = rowFromFile.get(numberColumnByType);
                     String directionByFile = rowFromFile.get(numberColumnDirection);
                     String delayByFile = rowFromFile.get(delayColumnDirection);
+                    String valueaddetionInfo = rowFromFile.get(addetionInfo);
                     String lostSignalByFile = rowFromFile.get(lostSignalColumnDirection);
                     String valueByFile = rowFromFile.get(valueColumnDirection);
                     String partNameTable = getCommonPartNameTable(nameLegacyByFile);
-                    
                     String ExternalInitial = "";
                     if(rowFromFile.size() > valueExternalInitial){
                         ExternalInitial = rowFromFile.get(valueExternalInitial);
@@ -105,7 +106,7 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
                     LinkedList<String> listTablewithsig = checkDataFileExeptionSetingsSig(nameSigByFile, partNameTable);
                     
                     for (String nameTable : listTablewithsig) {
-                        String[] arr = {null, globVar.abonent, nameTable, nameSetingRus, nameSeting, typeByFile, nameSigByFile, directionByFile, delayByFile, lostSignalByFile, valueByFile, ExternalInitial};
+                        String[] arr = {null, globVar.abonent, nameTable, nameSetingRus, nameSeting, typeByFile, nameSigByFile, directionByFile, delayByFile, lostSignalByFile, valueByFile, ExternalInitial, valueaddetionInfo};
                         ConfigSig config = new AnalogSetup();
                         config.setData(arr);
                         config.setLocalId(localIDseting); // с единицы

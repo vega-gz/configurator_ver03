@@ -26,9 +26,19 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     private String nameColumn1 = "Abonent";
     private String nameColumn2 = "NameSig";
     private String[] columnTableDefault = {
-        "id", "Abonent", "NameTableFromSignal",
-        "Наименование", TAG_NAME_PLC, "Type", "NameSig",
-        "Direction", "Delay", "LostSignal", "Value", "ExternalInit"
+        "id",
+        "Abonent",
+        "NameTableFromSignal",
+        "Наименование",
+        TAG_NAME_PLC,
+        "Type",
+        "NameSig",
+        "Direction",
+        "Delay",
+        "LostSignal",
+        "Value",
+        "ExternalInit",
+        "AddationInfo"
     }; // Набор столбцов для базы таблицы
     private String[] _ParentColumnsSignal = new String[]{"Точность", "Наименование", "Единица_измерения"}; // данные из родителя.
     
