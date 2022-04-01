@@ -87,18 +87,31 @@ public class ConfigSigExcell implements ConfigSigStorageInterface{
                 for (int i = iStartData + 1; i < dataSheet.size(); i++) {
                     rowFromFile = dataSheet.get(i); // могут быть пустые значения сделай проверку по циклам
 
-                    String nameSetingRus = rowFromFile.get(numberColumnBynameSetingRus);
-                    String nameSeting = rowFromFile.get(numberColumnByNameSeting);
-                    String nameSigByFile = rowFromFile.get(numberColumnBySignal);
-                    String nameLegacyByFile = rowFromFile.get(numberColumnByLegasySignal);
-                    String typeByFile = rowFromFile.get(numberColumnByType);
-                    String directionByFile = rowFromFile.get(numberColumnDirection);
-                    String delayByFile = rowFromFile.get(delayColumnDirection);
-                    String valueaddetionInfo = rowFromFile.get(addetionInfo);
-                    String lostSignalByFile = rowFromFile.get(lostSignalColumnDirection);
-                    String valueByFile = rowFromFile.get(valueColumnDirection);
-                    String partNameTable = getCommonPartNameTable(nameLegacyByFile);
+                    String nameSetingRus = "";
+                    String nameSeting = "";
+                    String nameSigByFile = "";
+                    String nameLegacyByFile = "";
+                    String typeByFile = "";
+                    String directionByFile = "";
+                    String delayByFile = "";
+                    String valueaddetionInfo = "";
+                    String lostSignalByFile = "";
+                    String valueByFile = "";
+                    String partNameTable = "";
                     String ExternalInitial = "";
+                    
+                    nameSetingRus = rowFromFile.get(numberColumnBynameSetingRus);
+                    nameSeting = rowFromFile.get(numberColumnByNameSeting);
+                    nameSigByFile = rowFromFile.get(numberColumnBySignal);
+                    nameLegacyByFile = rowFromFile.get(numberColumnByLegasySignal);
+                    typeByFile = rowFromFile.get(numberColumnByType);
+                    directionByFile = rowFromFile.get(numberColumnDirection);
+                    delayByFile = rowFromFile.get(delayColumnDirection);
+                    valueaddetionInfo = rowFromFile.get(addetionInfo);
+                    if(valueaddetionInfo == null) valueaddetionInfo = "";
+                    lostSignalByFile = rowFromFile.get(lostSignalColumnDirection);
+                    valueByFile = rowFromFile.get(valueColumnDirection);
+                    partNameTable = getCommonPartNameTable(nameLegacyByFile);
                     if(rowFromFile.size() > valueExternalInitial){
                         ExternalInitial = rowFromFile.get(valueExternalInitial);
                     }

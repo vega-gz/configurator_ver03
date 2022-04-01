@@ -312,11 +312,16 @@ public class DataBase {
             }
             if(start == 0){
                 sql += ") VALUES ("+index;
-                for (String row1 : row) sql += ", '" + row1 + "'";
+                for (String row1 : row)
+                {
+                    sql += ", '" + row1 + "'";
+                }
             }else{
                 sql += ") VALUES ("+row[0];
-                for(int i = 1; i<row.length; i++)
+                for(int i = 1; i < row.length; i++)
+                {
                     sql += ", '" + row[i] + "'";
+                }
             }
             sql += ");";
             stmt = connection.createStatement();

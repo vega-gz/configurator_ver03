@@ -1079,7 +1079,7 @@ public class Generator {
                 XMLSAX uuidSax = new XMLSAX();
                 Node intFile1 = globVar.sax.returnFirstFinedNode(currNodeCfgXML, "localData");
                 String intFile2 = globVar.sax.getDataAttr(intFile1, "int");
-                if ("_".equals(intFile2.substring(0, 1))) {
+                if (intFile2 != null && "_".equals(intFile2.substring(0, 1))) {
                     intFile2 = abonent + intFile2;
                 }
                 Node uuidRoot = uuidSax.readDocument(filePath + File.separator + intFile2);
@@ -1154,6 +1154,7 @@ public class Generator {
                     localSax.removeNode(oldFields);
                 }
                 localSax.writeDocument(filePath + File.separator + trueName);//записали файл
+                
                 for (Node globSig : globSigList) {//--------------------------------------- Занесение сигналов в .prj и .int файлы -------------------------------------
                     String name = globVar.sax.getDataAttr(globSig, "name");
                     

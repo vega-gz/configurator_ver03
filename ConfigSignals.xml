@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Ноды "Наименование" и "TAG_NAME_PLC" должны присутствовать в каждой ноде "EXEL", "Диапазон_мин" и "Диапазон_макс" - во всех аналоговых--><ConfigSignals>
-	<newTable Comment="" excelSheetName="newTable">
-	<!-- Таблица по умолчанию -->
-		<EXEL>
-			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> 
-			<B default="" nameColumnPos="Наименование"/>
-		</EXEL>
-	</newTable>
 	<AI Comment="Аналоговые входы. Архив: _ToHMI;" excelSheetName="AI" linkTable="ANB" srcCol="TAG_NAME_PLC" trgCol="TAG_NAME_AnPar">
         <EXEL>
             <F nameColumnPos="Наименование"/><!--Обязательный нода Русское нгазванеие-->
@@ -174,6 +167,23 @@
 					</String>
 				</Block>
 			</File>	 -->
+			<!-- +++++++++++++++ Шаблон для подсветки параметров +++++++++++++++ -->
+			<File src="ColorAI" target="_ALgorithm"> 
+				<Block start="Начало кода" end="Конец кода">	
+					<String>						
+						<text t=" // "/><npp start="1"/><text t=": "/><dbd t="Наименование"/>
+					</String>
+					<String>
+							<text t=" //"/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".as := ;"/>
+					</String>							
+					<String>							
+							<text t=" //"/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".ps := ;"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".os := ;"/>							 
+					</String>	
+				</Block> 
+			</File>						
 		</GenCode>
 		<GenHW drvFile="_AI_DRV" globData="_AI_DRV" hwDriver="KM04"/>
 	</AI>
@@ -308,6 +318,23 @@
 					</Function>
 				</Block>
 			</File>
+			<!-- +++++++++++++++ Шаблон для подсветки параметров +++++++++++++++ -->
+			<File src="ColorAI" target="_ALgorithm"> 
+				<Block start="Начало кода" end="Конец кода">	
+					<String>						
+						<text t=" // "/><npp start="1"/><text t=": "/><dbd t="Наименование"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_FR_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".as := ;"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_FR_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".ps := ;"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_FR_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".os := ;"/>							 
+					</String>	
+				</Block> 
+			</File>	
 		</GenCode>
 		<GenHW drvFile="_FR_AI_DRV" globData="_FR_AI_DRV" hwDriver="KM04"/>
 	</FR_AI>
@@ -686,7 +713,7 @@
 			</AI_Settings>
 		</GenData>
 		<GenCode>
-			<File src="mb_AI_CallAll" target="_Algorithm">
+			<File src="Call_AI" target="_Algorithm">
 				<Block end="Конец сгенерированного кода" notGenTyps="WORD, ABCDEFGH" start="Начало сгенерированного кода AI_init">
 					<Function name="mb_AI_init">
 						<arg><abonent/><text t="_AI_Settings."/><dbd t="TAG_NAME_PLC"/></arg>
@@ -777,6 +804,23 @@
 					</String>
 				</Block>
 			</File> -->
+			<!-- +++++++++++++++ Шаблон для подсветки параметров +++++++++++++++ -->
+			<File src="ColorAI" target="_ALgorithm"> 
+				<Block start="Начало кода" end="Конец кода">	
+					<String>						
+						<text t=" // "/><npp start="1"/><text t=": "/><dbd t="Наименование"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".as := ;"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".ps := ;"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_AI_ToHMI."/><dbd t="TAG_NAME_PLC"/><text t=".os := ;"/>							 
+					</String>	
+				</Block> 
+			</File>
 		</GenCode>
 		<GenHW drvFile="_AI_DRV" globData="_AI_DRV"/>
 	</mb_AI>
@@ -1549,7 +1593,26 @@
 					<localData int="_Algorithm.int"/>
 				</globData>
 			</CalcPar>
-		</GenData>	
+		</GenData>
+		<GenCode>
+		<!-- +++++++++++++++ Шаблон для подсветки параметров +++++++++++++++ -->
+			<File src="ColorAI" target="_ALgorithm"> 
+				<Block start="Начало кода" end="Конец кода">	
+					<String>						
+						<text t=" // "/><npp start="1"/><text t=": "/><dbd t="Наименование"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_CalcPar."/><dbd t="TAG_NAME_PLC"/><text t=".as := ;"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_CalcPar."/><dbd t="TAG_NAME_PLC"/><text t=".ps := ;"/>
+					</String>
+					<String>							
+							<text t=" //"/><abonent/><text t="_CalcPar."/><dbd t="TAG_NAME_PLC"/><text t=".os := ;"/>							 
+					</String>	
+				</Block> 
+			</File>	
+		</GenCode>			
 	</CalcPar>	
 	<!-- ++++++++++++++++++++++++++++++++++++++ Исполнительные механизмы +++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
 	<AM Comment="Исполнительные механизмы" excelSheetName="IM">
@@ -2047,7 +2110,7 @@
 		</GenData>
 		<GenCode>
 			<!-- Блок инициализации значений уставок -->
-			<File src="Ust" target="4_PrivateTuns"> 
+			<File src="Ust" target="5_PrivateTuns"> 
 				<Block start="Начало кода значений" end="Конец кода значений">
 					<String>
 						<IF cond="ExternalInit" val="Да"><BREAK/></IF>
@@ -2111,7 +2174,7 @@
 				</Block> 
 			</File>	
 			<!-- подсветка уставок -->
-			<File src="ColorUst" target="_ALgorithm"> 
+			<!--File src="ColorUst" target="_ALgorithm"> 
 				<Block start="Начало кода" end="Конец кода">	
 					<String>
 						<IF cond="Type" val="У"><BREAK/></IF>						
@@ -2143,7 +2206,38 @@
 						</IF>							 
 					</String>	
 				</Block> 
-			</File>						
+			</File-->						
 		</GenCode>			
-	</SP>		
+	</SP>	
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Отчеты +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<DOC Comment="Таблица сигналов для отчета (ведомости)" excelSheetName="DOC">
+		<EXEL>	
+			<A nameColumnPos="TAG_NAME_PLC" type="VarName" unical="true"/> <!-- Алгоритмическое имя -->			
+			<B nameColumnPos="Наименование"/><!--Обязательный нода-->	
+			<C default="AI_ToHMI" nameColumnPos="Префикс"/>
+            <D default="" nameColumnPos="Комментарий" />
+		</EXEL>	
+		<GenData>		
+			<DOC Type="REAL"> 
+				<globData name="DOC"/>				
+			</DOC>
+		</GenData>
+		<GenCode>
+			<!-- Передача значений параметров в структуру архива ведомостей -->
+			<File src="DocData" target="5_Linker"> 
+				<Block start="Начало кода" end="Конец кода">
+					<String>
+						<abonent/><text t="(ABONENT)_DOC."/><dbd t="TAG_NAME_PLC"/><text t=" := "/><abonent/><text t="_"/><dbd t="Префикс"/><text t="."/><dbd t="TAG_NAME_PLC"/><text t="; // "/><dbd t="Комментарий"/> 
+					</String>						
+				</Block>
+			</File>	
+			<File src="DOC.lua"> <!-- генерация lua таблицы имен параметров в отчете -->	
+				<Block end="Конец таблицы" start="Начало таблицы">
+					<String> 
+						<text t="'_DOC."/><dbd t="TAG_NAME_PLC"/><text t="',  -- "/><dbd t="Наименование"/> 	
+					</String>	
+				</Block>
+			</File>	
+		</GenCode>	
+</DOC>		
 </ConfigSignals>
