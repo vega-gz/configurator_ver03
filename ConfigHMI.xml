@@ -478,7 +478,7 @@
 						</Edit>	
 						<IF cond="Источник" val="">
 							<Edit>
-								<NameSigD text="APS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+								<NameSigD text="APS." tableCol="TAG_NAME_PLC" textBeforeVal="" Type="STRING" /> 
 							</Edit>	
 								<ELSE>
 									<Edit>									
@@ -540,58 +540,6 @@
 				</TAG>
 			</additionalVar>	
 		</GenHMI> 
-		<!-- +++++++++++ формирование общего протокола ПЗ +++++++++++++ -->
-		<!--GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"  incPosFBX= "350" incPosFBY= "520" >		
-			<addEvent>
-				<Event Name="makeReport"/>
-			</addEvent>
-			<Hint add0="Примечание" add1=", " add2="Время_задержки" add3=" сек"  />			
-			<addVarDeclaration>
-				<VarDeclaration InitialValue="''" Name="PrefAb"/>
-				<VarDeclaration InitialValue="''" Name="modePZ"/>
-				<VarDeclaration InitialValue="''" Name="Reset_PZ"/>
-				<VarDeclaration InitialValue="''" Name="Deblock"/>
-				<VarDeclaration InitialValue="''" Name="ChngAb" />
-				<VarDeclaration InitialValue="''" Name="curAutoCheck" />
-			</addVarDeclaration>
-			<Disable>
-				<visiblePar/>
-				<disableAlarm/>
-				<Analog_Ph_N/>
-				<PrefStr/>
-				<TagID/>
-			</Disable>
-			<additionalVar>
-				<Delay tableCol="Время_задержки" Type="STRING"/> 
-				<StepPZ tableCol="Шаг_ПЗ" Type="INT"/>
-				<NameSigD Type="STRING"/>
-				<NameSigA Type="STRING"/>
-				<NameUst Type="STRING"/>				
-				<IF cond="Источник" val="*.PV">
-					<Edit>
-						<NameSigA tableCol="Источник" Type="STRING"/>
-						<NameSigD value="" Type="STRING" />	
-						<NameUst tableCol="TAG_NAME_PLC" Type="STRING" />	
-					</Edit>	
-					<ELSE> 
-						<Edit>
-							<NameSigA value="" Type="STRING" />
-							<NameUst value="" Type="STRING" />							
-						</Edit>	
-						<IF cond="Источник" val="">
-							<Edit>
-								<NameSigD text="AS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
-							</Edit>	
-							<ELSE>
-								<Edit>									
-									<NameSigD Type="STRING" tableCol="Источник"/>	
-								</Edit>											
-							</ELSE> 
-						</IF>
-					</ELSE>
-				</IF>
-			</additionalVar>
-		</GenHMI-->
 		<!-- +++++++++++ формирование протокола ПЗ для АО сс +++++++++++++ -->
 		<GenHMI name="PPZ_AOSS_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"  incPosFBX= "350" incPosFBY= "520" >
 			<IF cond="Status" val="*бс"><BREAK/></IF>
@@ -620,7 +568,8 @@
 				<StepPZ tableCol="Шаг_ПЗ" Type="INT"/>
 				<NameSigD Type="STRING"/>
 				<NameSigA Type="STRING"/>
-				<NameUst Type="STRING"/>				
+				<NameUst Type="STRING"/>
+				<NumPP Type="STRING"/>
 				<IF cond="Источник" val="*.PV">
 					<Edit>
 						<NameSigA tableCol="Источник" Type="STRING"/>
@@ -634,7 +583,7 @@
 						</Edit>	
 						<IF cond="Источник" val="">
 							<Edit>
-								<NameSigD text="AS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+								<NameSigD text="AS." tableCol="TAG_NAME_PLC" textBeforeVal="" Type="STRING" /> 
 							</Edit>	
 							<ELSE>
 								<Edit>									
@@ -645,6 +594,9 @@
 					</ELSE>
 				</IF>
 			</additionalVar>
+			<Edit>
+				<NumPP npp="" />
+			</Edit>
 		</GenHMI>
 		<!-- +++++++++  формирование протокола ПЗ для АО бс  +++++++++ -->
 		<GenHMI name="PPZ_AOBS_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"  incPosFBX= "350" incPosFBY= "520" >
@@ -689,7 +641,7 @@
 						</Edit>	
 						<IF cond="Источник" val="">
 							<Edit>
-								<NameSigD text="AS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+								<NameSigD text="AS." tableCol="TAG_NAME_PLC" textBeforeVal="" Type="STRING" /> 
 							</Edit>	
 							<ELSE>
 								<Edit>									
@@ -744,7 +696,7 @@
 						</Edit>	
 						<IF cond="Источник" val="">
 							<Edit>
-								<NameSigD text="AS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+								<NameSigD text="AS." tableCol="TAG_NAME_PLC" textBeforeVal="" Type="STRING" /> 
 							</Edit>	
 							<ELSE>
 								<Edit>									
@@ -799,7 +751,7 @@
 						</Edit>	
 						<IF cond="Источник" val="">
 							<Edit>
-								<NameSigD text="AS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+								<NameSigD text="AS." tableCol="TAG_NAME_PLC" textBeforeVal="" Type="STRING" /> 
 							</Edit>	
 							<ELSE>
 								<Edit>									
@@ -945,14 +897,13 @@
 	</GR>	
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<RSR>
-		<GenHMI name="Resource_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="TStatLine_Dint" ruName="Наименование" isAlarm="false">
+		<GenHMI name="Resource_" maxY="26" maxX="1" startPosX="5" startPosY="5" incX="0"  incY="21" type="TStatLine_Dint" ruName="Наименование" isAlarm="false">
+			<Hint add0="Примечание"/>
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 			</addVarDeclaration>
 			<Disable>
 				<Num/>
-				<hint/>
-				<pos/>
 				<visiblePar/>
 				<disableAlarm/>
 				<Analog_Ph_N/>
@@ -960,16 +911,13 @@
 				<TagID/>
 			</Disable>
 			<additionalVar>
-				<Divr Type="UDINT"  />
+				<Divr tableCol="Делитель" Type="UDINT"/>
 			</additionalVar>
-			<Edit>
-				<Divr value="3600" Type="UDINT" />
-			</Edit>
 		</GenHMI>
 	</RSR>
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CalcPar +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<CalcPar> 
-		<GenHMI name="Calc_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_Rool_CalcPar" ruName="Наименование" isAlarm="true">
+		<GenHMI name="Calc_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_Rool_CalcPar" incPosFBX= "350" incPosFBY= "470" ruName="Наименование" isAlarm="true">
 			<Hint add0="Наименование" add1=", " add2="Единица_измерения"/>
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
@@ -1131,28 +1079,26 @@
 			</Edit>								
 		</GenHMI> 		
 	</AM>
-<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ Объект уставки +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<SP>
-		<!-- .................... Объект уставки ...................... -->
 		<GenHMI name="SP_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="21" type="TBaseUst" ruName="Наименование" isAlarm="true" incPosFBX= "350" incPosFBY= "470">
+			<IF cond="ExternalInit" val="Да"><BREAK/></IF>
 			<addVarDeclaration>
 				<VarDeclaration InitialValue="''" Name="PrefAb"/>
 				<VarDeclaration InitialValue="''" Name="NameRU"/>
 				<VarDeclaration InitialValue="''" Name="Log_in"/>				
 			</addVarDeclaration>			
-			<Hint add0="Наименование" add1=", " add2="Direction" add3=", "  add4="Type" add5=", задержка "  add6="Delay"/>
+			<Hint add0="Сигнал &quot;" add1="Наименование_SIGNAL" add2="&quot; [" add3="Единица_измерения_SIGNAL" add4="], " add5="Direction" add6=", задержка "  add7="Delay" add8=", доп.инфо: " add9="AddationInfo"/>
 			<Disable> 
 				<disableAlarm/>	
 				<Num/>
 				<visiblePar/>
 				<disableAlarm/>
-				<Analog_Ph_N/>
 			</Disable>
 			<additionalVar>
-				<decimal tableCol="Точность" Type="INT" />
-				<Type_Str tableCol="Type"  text=":" Type="STRING"/>
+				<Type_Str tableCol="Type" text=":" Type="STRING"/>
 				<Type_Color Type="TColor" TypeUUID="EDYJMIBCJR5UJOZWGS3UVJENZA"> 
-					<switch swt="Type" default="##FF00FF00">
+					<switch swt="Type" default="#FF00FF00">
 						<case val="А" def="#FFFF0000"/>
 						<case val="П" def="#FFFFFF00"/>
 						<case val="ГР" def="#FF0055FF"/>
@@ -1161,9 +1107,10 @@
 						<case val="О" def="#FFFF00FF"/>
 					</switch> 
 				</Type_Color>
+				<Analog_Ph_N tableCol="Точность_SIGNAL" Type="INT"/>				
 			</additionalVar>
 			<Edit>
-				<PrefStr value="Ust."  text="_:"  Type="STRING" npp=""/>				
+				<PrefStr value="Ust." Type="STRING" />	
 			</Edit>					
 		</GenHMI>
 	</SP>

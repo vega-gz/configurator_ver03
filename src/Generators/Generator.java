@@ -395,7 +395,7 @@ public class Generator {
         int x = nameTable.indexOf("_");
         String abonent = nameTable.substring(0, x);
         String nodeTable = nameTable.substring(x + 1);
-       
+        
         //для определения модбасовских подабонентов 
         int y = nodeTable.indexOf("_mb_");
         String subAb = "";
@@ -627,6 +627,7 @@ public class Generator {
             String nameCol = HMIcfg.getDataAttr(hmiNode, "ruName");
             boolean isAlarm = HMIcfg.getDataAttr(hmiNode, "isAlarm") != null; //!!!!!!!!!!!!!!Добавить проверку, что атрибут isAlarm == true
 
+            int counterNpp = 0; //  счетчик npp переменной
             // ### цикл по строкам таблицы ###
             int jpgMax = ft.tableSize();
             for (int i = 0; i < jpgMax; i++) {
@@ -654,7 +655,7 @@ public class Generator {
                 ArrayList<String[]> editVar = new ArrayList<>();
                 
                 for (Node nodeChild : HMIcfg.getHeirNode(hmiNode)) { // прогнать по всем нодам и собрать нужные данные
-                    editVar = getListEditVarValue(HMIcfg, nodeChild, null, i); // получить список переменных которые  нужно поменять в VarValue
+                    editVar = getListEditVarValue(HMIcfg, nodeChild, null, counterNpp); // получить список переменных которые  нужно поменять в VarValue
                     if (editVar.size() > 0) {
                         break;
                     }
@@ -973,6 +974,7 @@ public class Generator {
                         //Здесь должны быть методы добавления листов непосредственно в сонатовский файл
                     }
                 }
+                ++counterNpp;
 //                }
             }
             FBNetwork.appendChild(DataConnections);
