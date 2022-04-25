@@ -654,7 +654,7 @@ public class Generator {
                 ArrayList<String[]> editVar = new ArrayList<>();
                 
                 for (Node nodeChild : HMIcfg.getHeirNode(hmiNode)) { // прогнать по всем нодам и собрать нужные данные
-                    editVar = getListEditVarValue(HMIcfg, nodeChild, null, 0); // получить список переменных которые  нужно поменять в VarValue
+                    editVar = getListEditVarValue(HMIcfg, nodeChild, null, i); // получить список переменных которые  нужно поменять в VarValue
                     if (editVar.size() > 0) {
                         break;
                     }
@@ -2868,6 +2868,9 @@ public class Generator {
                     }
                     if (key.equalsIgnoreCase("textBeforeVal")) { // направление вставки текста
                         nodeAtt[4] = value;
+                    }
+                    if (key.equalsIgnoreCase("npp")) { // Просто передаем номер строки(счетчик)
+                        nodeAtt[2] = Integer.toString(i);
                     }
                 }
                 editVar.add(nodeAtt);

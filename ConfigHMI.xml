@@ -1163,7 +1163,7 @@
 				</Type_Color>
 			</additionalVar>
 			<Edit>
-				<PrefStr value="Ust."  text="_:"  Type="STRING" />				
+				<PrefStr value="Ust."  text="_:"  Type="STRING" npp=""/>				
 			</Edit>					
 		</GenHMI>
 	</SP>
