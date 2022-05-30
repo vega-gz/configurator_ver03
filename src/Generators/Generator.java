@@ -2329,7 +2329,7 @@ public class Generator {
                     sig0Else = abonent + sig0Else.substring(yElse);
                     groupName = sig0Else + sa;
 
-                    String localName = sig0.substring(x); // Был -1
+                    String localName = sig0.substring(sig0.indexOf(".") + 1);
                     Node n = bigSax.findNodeAtribute(bigRoot, new String[]{"Signal", "Name", groupName});
                     if (n == null) {
                         loggerFile.writeLog("В проекте не найден глобальный сигнал " + groupName);
