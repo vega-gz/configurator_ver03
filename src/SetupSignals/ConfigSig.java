@@ -59,6 +59,8 @@ public abstract class ConfigSig {
         9 - LostSignal
         10 - Value
         11 - AddetionInfo
+        
+        // ошибка при редактировании добавляется не нужные данные от родителя
     */
         data = newData;
         if(id == null ){

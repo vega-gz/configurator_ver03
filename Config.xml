@@ -9,7 +9,7 @@
 <URL2>jdbc:postgresql://127.0.0.1:5432/</URL2>
 <URL>jdbc:postgresql://172.16.35.50:5432/</URL>
 <URL3>jdbc:postgresql://172.16.35.109:5432/</URL3>
-<BASE>kln_kc</BASE>
+<BASE>test_base_editSeting</BASE>
 <BASE1>kln_gpa</BASE1>
 <BASE2>test</BASE2>
 <BASE3>kln_aleksey_local</BASE3>
@@ -30,6 +30,8 @@
   <BASE17/>
   <BASE18/>
   <BASE19/>
+  <BASE20>kln_aleksey</BASE20>
+  <BASE21>kln_kc</BASE21>
   </Settings>
 <BASE14/>
 </config>

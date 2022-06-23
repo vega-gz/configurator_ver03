@@ -296,7 +296,10 @@ public class DataBase {
             String strErr = "Количество данных и столбцов не совпадает " +  row.length + " | " + listNameColum.length;
             System.out.println(strErr);
             loggerFile.writeLog(strErr);
-            return;
+            
+            if(listNameColum.length > row.length){ // выход при условии что данных не хватает
+                return;
+            }
         }
         String sql = null;
         try {

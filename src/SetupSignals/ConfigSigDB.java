@@ -40,7 +40,7 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         "ExternalInit",
         "AddationInfo"
     }; // Набор столбцов для базы таблицы
-    private String[] _ParentColumnsSignal = new String[]{"Точность", "Наименование", "Единица_измерения"}; // данные из родителя.
+    private String[] _ParentColumnsSignal = new String[]{"Точность", "Наименование", "Единица_измерения"}; // данные из родителя.(таблицы)
     
     public ConfigSigDB(){
        checktableSeting();
@@ -142,7 +142,14 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         }
         String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
         s.setId(newIdSetting);
-        db.insertRow(nameTableSetups, s.getData(), columnTableDefault, null);
+        
+        // забираем для таблицы только то количество данных которое и взяли
+        String[] datasignals = s.getData();
+        String[] datasignalsToBase = new String[columnTableDefault.length];
+        for (int i = 0; i < columnTableDefault.length; i++) {
+            datasignalsToBase[i] = datasignals[i];
+        }
+        db.insertRow(nameTableSetups, datasignalsToBase, columnTableDefault, null);
         s.setStatus(ConfigSig.StatusSeting.FROMBASE);
     }
 
