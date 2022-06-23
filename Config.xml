@@ -9,13 +9,13 @@
 <URL2>jdbc:postgresql://127.0.0.1:5432/</URL2>
 <URL>jdbc:postgresql://172.16.35.50:5432/</URL>
 <URL3>jdbc:postgresql://172.16.35.109:5432/</URL3>
-<BASE>kln_andrey</BASE>
-<BASE1>test</BASE1>
-<BASE2>kln_aleksey_local</BASE2>
-<BASE3>kln_gpa</BASE3>
+<BASE>kln_kc</BASE>
+<BASE1>kln_gpa</BASE1>
+<BASE2>test</BASE2>
+<BASE3>kln_aleksey_local</BASE3>
 <BASE9>kln_aleksey</BASE9>
 <BASE4>test667</BASE4>
-<BASE5>kln_kc</BASE5>
+<BASE5/>
 <BASE6>kln_gpa</BASE6>
 <BASE7>test_aleksey</BASE7>
 <BASE8>siem</BASE8>
@@ -25,5 +25,11 @@
 <BASE11>Gri_test_base</BASE11>
 <BASE12>kln_kc</BASE12>
   <BASE13>testdelete</BASE13>
+  <BASE15>kln_andrey</BASE15>
+  <BASE16>RETRET</BASE16>
+  <BASE17/>
+  <BASE18/>
+  <BASE19/>
   </Settings>
+<BASE14/>
 </config>

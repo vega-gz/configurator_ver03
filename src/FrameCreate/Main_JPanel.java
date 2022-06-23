@@ -15,6 +15,7 @@ import SetupSignals.ConfigSigStorageInterface;
 import Table.TableTools;
 import Tools.BackgroundThread;
 import Tools.DoIt;
+import Tools.EditorConfigMain;
 import Tools.FileManager;
 import Tools.LoggerFile;
 import Tools.LoggerInterface;
@@ -52,6 +53,8 @@ public final class Main_JPanel extends javax.swing.JFrame {
     XMLSAX createXMLSax = new XMLSAX();
     TableTools tt=new TableTools();
     String filepatch, type;
+    
+    EditorConfigMain _EditorConfigMain = new EditorConfigMain();
     
     ProgressBar pb = null;
     DefaultListModel listModel = new DefaultListModel(); // модель списка баз
@@ -546,7 +549,7 @@ public final class Main_JPanel extends javax.swing.JFrame {
         jLabel1.setText("Неактивные кнопки. Функции в разработке");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setText("v.12.28");
+        jLabel9.setText("v.12.29");
 
         jLabel3.setText("Текущий абонент");
 
@@ -1149,28 +1152,11 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     private void jButton2_CreateDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2_CreateDBActionPerformed
         if (!jTextField1.getText().equals("")) { // если не пустое надо еще
-            String textField6 = jTextField6.getText();//.toLowerCase(); // в нижний регистр
-            int code = globVar.DB.createBase(textField6);
+            String nameDB = jTextField6.getText();//.toLowerCase(); // в нижний регистр
+            int code = globVar.DB.createBase(nameDB);
             if (code == 1) {
-                JOptionPane.showMessageDialog(null, "База " + textField6 + " успешно создана."); //сообщение
-
-                // занести базу в список
-                {
-                    XMLSAX sax = new XMLSAX();
-                    Node root = sax.readDocument(globVar.mainConf);
-                    Node tmp = sax.returnFirstFinedNode(root, globVar.nodeDBid);
-                    int sumBase = 0;
-                    ArrayList<String> aList = new ArrayList<>();
-                    for (int i = 1; tmp != null; i++) {
-                        sumBase = i;
-                        aList.add(tmp.getTextContent());
-                        tmp = sax.returnFirstFinedNode(root, globVar.nodeDBid + i);
-                    }
-                    Node Settings = sax.returnFirstFinedNode(root, "Settings");
-                    Node naodeB = sax.insertChildNode(Settings, globVar.nodeDBid + Integer.toString(sumBase));
-                    naodeB.setTextContent(textField6); // метод самой ноды
-                    sax.writeDocument();
-                }
+                _EditorConfigMain.insertNameBaseInConfig(nameDB);
+                JOptionPane.showMessageDialog(null, "База " + nameDB + " успешно создана."); //сообщение
             } else {
                 System.out.println("Error create DB");
             }
@@ -1191,19 +1177,20 @@ public final class Main_JPanel extends javax.swing.JFrame {
 
     // --- вывод баз подключенного сервера ---
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        listModel.clear();
+        showDialogListBase();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    public void showDialogListBase(){
+    listModel.clear();
         ArrayList<String> listDB = globVar.DB.getListBase();
         for (int i = 0; i < listDB.size(); i++) {
             listModel.add(i, listDB.get(i));
         }
-
         //validate();
         jDialog_ListBase.setSize(500, 200);
         jDialog_ListBase.setLocationRelativeTo(null); // по центру экрана
         jDialog_ListBase.setVisible(true);
-
-
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         if (!Tools.isDesDir()) {
@@ -1433,28 +1420,33 @@ public final class Main_JPanel extends javax.swing.JFrame {
         final String ROOT = "Абоненты";
         // Создание древовидной структуры
         DefaultMutableTreeNode root = new DefaultMutableTreeNode(ROOT);
-        // Ветви первого уровня(добавили абонента)
-        for (String[] s : listAbonent) {
-            String nameBranch = s[1]; //  1 это префикс(в нашем случае это имя абонента в структуре GPA KC  и тд)
-            DefaultMutableTreeNode firstNode = new DefaultMutableTreeNode(nameBranch);
-            // Добавление ветвей к корневой записи
-            root.add(firstNode);
-            // Добавление листьев(добавление таблиц)
-            for (String sheet : listTableBd) {
-                // Патерн добавления того или иного совпадения по имени абонента
-                Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");
-                Matcher matcher1 = pattern1.matcher(sheet);
-                //String sheetPatern = ""; // годы месяцы число
-                   comment=globVar.DB.getCommentTable(sheet);
-                if (matcher1.matches()) {
+        
+        if (listAbonent != null) {
+            // Ветви первого уровня(добавили абонента)
+            for (String[] s : listAbonent) {
+                String nameBranch = s[1]; //  1 это префикс(в нашем случае это имя абонента в структуре GPA KC  и тд)
+                DefaultMutableTreeNode firstNode = new DefaultMutableTreeNode(nameBranch);
+                // Добавление ветвей к корневой записи
+                root.add(firstNode);
+                // Добавление листьев(добавление таблиц)
+                for (String sheet : listTableBd) {
+                    // Патерн добавления того или иного совпадения по имени абонента
+                    Pattern pattern1 = Pattern.compile("^" + nameBranch + "(.*)$");
+                    Matcher matcher1 = pattern1.matcher(sheet);
+                    //String sheetPatern = ""; // годы месяцы число
+                    comment = globVar.DB.getCommentTable(sheet);
+                    if (matcher1.matches()) {
                     //sheetPatern = matcher1.group(1);
-                    
-                     firstNode.add(new DefaultMutableTreeNode(comment+"("+sheet+")", false));//здесь у нас добавление имени в дерево
-                   // firstNode.add(new DefaultMutableTreeNode(sheet, false));//здесь у нас добавление имени в дерево
+
+                        firstNode.add(new DefaultMutableTreeNode(comment + "(" + sheet + ")", false));//здесь у нас добавление имени в дерево
+                        // firstNode.add(new DefaultMutableTreeNode(sheet, false));//здесь у нас добавление имени в дерево
+                    }
+
                 }
 
             }
-
+        }else{
+            JOptionPane.showMessageDialog(null, "Проблема с базой listAbonent = null !!!" ); //сообщение
         }
         // Создание стандартной модели и дерево
         return new DefaultTreeModel(root, true);
@@ -1585,12 +1577,14 @@ public final class Main_JPanel extends javax.swing.JFrame {
                     if (!Tools.isDesDir()) {
                        return;
                     }
-                    XMLSAX cfgSax = new XMLSAX();
-                    Node cfgSaxRoot = cfgSax.readDocument("Config.xml");
-                    Node desDir = cfgSax.returnFirstFinedNode(cfgSaxRoot, "DesignDir");
-                    desDir.setTextContent(newPath);
-                    cfgSax.writeDocument("Config.xml");
                     
+                    _EditorConfigMain.changePathDirProject(newPath);
+//                    XMLSAX cfgSax = new XMLSAX();
+//                    Node cfgSaxRoot = cfgSax.readDocument("Config.xml");
+//                    Node desDir = cfgSax.returnFirstFinedNode(cfgSaxRoot, "DesignDir");
+//                    desDir.setTextContent(newPath);
+//                    cfgSax.writeDocument("Config.xml");
+//                    
                 }
                 jTextField1.setText(" " + globVar.desDir);
                 // TODO add your handling code here:

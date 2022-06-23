@@ -19,10 +19,8 @@ import org.w3c.dom.Node;
  * @author lev
  */
 public class globVar {
-        public static String mainConf = "Config.xml";
         public static String mainConfSig = "ConfigSignals.xml";
         public static String ConfigHMI = "ConfigHMI.xml";
-        public static String nodeDBid = "BASE";
         public static String logFile = "configurer.log";
         public static String PathToProject = "";
 	public static String linSep;

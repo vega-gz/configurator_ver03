@@ -572,6 +572,9 @@ public class DataBase {
         } catch (SQLException e) {
             System.out.println("Failed select data");
             e.printStackTrace();
+        }catch (NullPointerException e){
+            System.out.println("Not cnnection server");
+            e.printStackTrace();
         }
         return listBase;
     }
