@@ -115,7 +115,7 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
                 if(jTable.getColumnName(i).equalsIgnoreCase(columnT[2])){
                     tmpArr[i] = globVar.nameTableSignal;
                 }
-                if(jTable.getColumnName(i).equalsIgnoreCase(columnT[5])){
+                if(jTable.getColumnName(i).equalsIgnoreCase(columnT[6])){
                    tmpArr[i] = globVar.currentSetupsSignal;
                 }
             }
