@@ -623,7 +623,7 @@ public class DataBase {
     
 
     
-    public int editRow(String table, String column, String newData, HashMap< String, String> mapDataRow) {
+    public int editCell(String table, String column, String newData, HashMap< String, String> mapDataRow) {
     // ---  Обновить данные простой запрос(Таблица, столбец, текущие данные, новые данные, массив всех данных/условие)  ---
         int requestr = 0;
         String sql = null;

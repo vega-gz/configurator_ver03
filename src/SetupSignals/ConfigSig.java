@@ -18,7 +18,7 @@ public abstract class ConfigSig {
     public enum StatusSeting { NEWSIGNAL, FROMBASE, COPY , DELBASE, FROMFILE}
     private StatusSeting status;
     private String[] data; 
-    private String id;
+    private String id = null;
     private String abonent;
     private String nameTableFromSignal;
     private String NameSeting;

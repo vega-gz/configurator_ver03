@@ -46,7 +46,7 @@ public class ConnectBaseTable extends DefaultTableModel {
         for (int i = 0; i < ColumnTM; ++i) { // Пробежать по строке где изменяются данные и сформировать список для обновления данных в базе c 1 так как там галки
             mapDataRow.put(this.getColumnName(i), (String) rowData.get(i)); // Формируем список данных принудительно в String
         }
-        workbase.editRow(nz.nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
+        workbase.editCell(nz.nameTable, ColumnName, (String) aValue, mapDataRow); // обновить данные ячейки в таблицы базы
         
         rowData.set(column, aValue); // Вставляем новые данные в нужную ячейку( только после этого вставляем ячейку иначе в базу неправильный запрос пойдет)            
     }

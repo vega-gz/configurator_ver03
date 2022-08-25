@@ -115,8 +115,9 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     public void editSignal(ConfigSig s) {       
         if(s.getStatus() == ConfigSig.StatusSeting.FROMBASE)
         {
-            //removeByIDSignal(s);
-            //addSignal(s);
+            removeByIDSignal(s);
+            addSignal(s);
+            
         }else
         {
             System.out.println("Edit setting " + s.getName() + "not posible, not ID");
@@ -140,8 +141,12 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
                 }
             }
         }
-        String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
-        s.setId(newIdSetting);
+        // изменени ли сигнал или новый
+        Integer idSetInBase = null;
+        if(s.getId() == null || s.getId().equals("") == true){
+            String newIdSetting = Integer.toString(db.getLastId(nameTableSetups) + 1);
+            s.setId(newIdSetting); 
+        }
         
         // забираем для таблицы только то количество данных которое и взяли
         String[] datasignals = s.getData();
@@ -149,6 +154,9 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
         for (int i = 0; i < columnTableDefault.length; i++) {
             datasignalsToBase[i] = datasignals[i];
         }
+        
+        
+        
         db.insertRow(nameTableSetups, datasignalsToBase, columnTableDefault, null);
         s.setStatus(ConfigSig.StatusSeting.FROMBASE);
     }
