@@ -64,7 +64,7 @@ public class globVar {
         public static int sumFrame = 0;                 // сумма окон для правильного реагирования кликов по ним
         public static String[] namecolumnT = {"Наименование", "TAG_NAME_PLC"};  // Название столбцов для поиска по таблице
         public static String TAGPLC = namecolumnT[1];
-        public static String currentSetupsSignal;
+        public static String currentSetupsSignal; // это не правильно
         public static String nameTableSignal;
                 
 	public static void SetStatUUID() {

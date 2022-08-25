@@ -22,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
 public class ConfigSignalsTableModel extends DefaultTableModel implements SaveTable{
     SetupsDataToTables dataSetings = null;
     
-    
     public ConfigSignalsTableModel(String nameSig) // на каком имени сигнала строим таблицу
     {
         dataSetings = new SettingsSignal(nameSig);
@@ -30,6 +29,7 @@ public class ConfigSignalsTableModel extends DefaultTableModel implements SaveTa
         String[][] dataToTable = dataSetings.getDataToTable();
         setDataVector(dataToTable, columnSetings);
     }
+    
     @Override
     public boolean isCellEditable(int row, int column) {
         return column == column;

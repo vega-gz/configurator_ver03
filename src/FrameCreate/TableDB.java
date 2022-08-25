@@ -1085,23 +1085,38 @@ public class TableDB extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxNotCreateEventActionPerformed
 
     private void jMenuItem15_SetingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15_SetingsActionPerformed
+        // вывод таблицы всех уставок таблицы
+        FrameTableSetings tableSetings = new FrameTableSetings("SettingSignal", getColumnAllSetingSignal(), getDataAllSetingSignal());
+        tableSetings.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        tableSetings.setVisible(true);
+    }//GEN-LAST:event_jMenuItem15_SetingsActionPerformed
+    
+    public String[][] getDataAllSetingSignal(){
+    //формирование данных для таблицы всех уставок таблицы        
         String[][] dataTable = new String[0][0];
-        String[] columnTable = null;
         
         for (int i = 0; i < tableSize(); i++) {
             String nameSignal = getCell("TAG_NAME_PLC", i); // 
             SettingsSignal setingSignal = new SettingsSignal(nameSignal);
             String[][] dataTableOmiSignal = setingSignal.getDataToTable();
-            dataTable = Stream.concat(Arrays.stream(dataTable), Arrays.stream(dataTableOmiSignal)).toArray(String[][]::new);  // контекация массивов колонок
-            columnTable = setingSignal.getNameColumnsToTable();
-            System.out.println();
+            dataTable = Stream.concat(Arrays.stream(dataTable), Arrays.stream(dataTableOmiSignal)).toArray(String[][]::new);  // контекация массивов колонок 
         }
-        FrameTableSetings tableSetings = new FrameTableSetings("SettingSignal", columnTable, dataTable);
-        tableSetings.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        tableSetings.setVisible(true);
         
-    }//GEN-LAST:event_jMenuItem15_SetingsActionPerformed
-
+        return dataTable;
+    }
+    
+    public String[] getColumnAllSetingSignal(){
+    //формирование колонок для таблицы всех уставок таблицы        
+        String[] columnTable = null;
+        
+        for (int i = 0; i < tableSize(); i++) {
+            String nameSignal = getCell("TAG_NAME_PLC", i); // 
+            SettingsSignal setingSignal = new SettingsSignal(nameSignal);
+            columnTable = setingSignal.getNameColumnsToTable();
+        }
+        return columnTable;
+    }
+    
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         AllSetingsSignalFromeDB configSigDB = new AllSetingsSignalFromeDB();
         String[][] dataTableOmiSignal = configSigDB.getDataToTable();

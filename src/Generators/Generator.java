@@ -2,6 +2,7 @@ package Generators;
 
 import FrameCreate.TableDB;
 import Generators.ModBus.StatusModBus;
+import SetupSignals.SettingsSignal;
 import Tools.FileManager;
 import Tools.LoggerFile;
 import Tools.LoggerInterface;
@@ -33,7 +34,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Generator {
+    
     private LoggerInterface loggerFile = new LoggerFile();
+    private boolean _enableSetPointInHint = false; // глабальная ибо IF есть проверки с ветвление из фукций
     @SuppressWarnings("empty-statement")
     
     
@@ -381,7 +384,7 @@ public class Generator {
     }
 
     // --- Генерация файлов HMI ---
-    public String genHMI(TableDB ft,boolean ignoreReserv, boolean ignoreEvent, JProgressBar jProgressBar) throws IOException {
+    public String genHMI(TableDB ft, boolean ignoreReserv, boolean ignoreEvent, JProgressBar jProgressBar) throws IOException {
         /*
         ignoreEvent -- игнорировать события по резервам
         */
@@ -525,7 +528,9 @@ public class Generator {
             }
 
             ArrayList<String> hintAL = new ArrayList<>();
+            //_enableSetPointInHint = getCheckHintPartsEnableSetPoint(HMIcfg, hmiNode);
             getHintParts(HMIcfg, hmiNode, hintAL);// Собрать данные по ноде Hint(формируем подсказку)
+            
             modelFile = HMIcfg.getDataAttr(hmiNode, "file");//получили Ноду файла в который запись верхнего уровень,который в последствии читаем _HMI_inc(нигде в файлах нигде не используется)
             String folderNodeName = null;
             String nameGCTcommon = HMIcfg.getDataAttr(hmiNode, "name");
@@ -769,7 +774,7 @@ public class Generator {
                 }
 
                 // конструируем ФБ
-                String nameFB = abonent + subAb + typeGCT + "_" + i; // формируем имя сигнала
+                String nameFB = abonent + subAb + typeGCT + "_" + (i + 1); // формируем имя сигнала
                 FBV objectFB = new FBV();// Объект FB
                 String fbUUID = UUID.getUIID().toUpperCase();
                 String[] fbData = {"FB", "Name", nameFB,
@@ -795,6 +800,7 @@ public class Generator {
                 objectFB.addVarValue(new FBVarValue(fbChildNode)); // вносим новое значение в объект FB
 
                 String tagName = ft.getCell("TAG_NAME_PLC", i);
+                
                 fbChildNode[2] = "NameAlg";
                 fbChildNode[4] = "'" + tagName + "'";
                 //HMIsax.insertChildNode(nodeFB, fbChildNode);//добавили NameAlg в ноду
@@ -831,6 +837,12 @@ public class Generator {
                     }
                     hint += s;
                 }
+                
+                if(_enableSetPointInHint){ // доп поле с HINT для HMI всех уставок сигнала
+                    SettingsSignal setingSignal = new SettingsSignal(tagName);
+                    hint += setingSignal.getDataToHint();
+                }
+                
                 if (!hint.isEmpty()) {
                     fbChildNode[2] = "hint";
                     fbChildNode[4] = "'" + hint + "'";
@@ -2533,32 +2545,6 @@ public class Generator {
         }
         return false;
     }
-
-    // оригинальный метод Льва 19.02.21 закомитил
-    // --- Поле формирования Подсказки (Это больше разбор IF) LEV ---
-    /*private static boolean setTypeHintAdd(XMLSAX HMIcfg, XMLSAX bigSax, TableDB ft, Node hmiNode, ArrayList<String[]> addVarsData,
-     String[] gctData, int i, ArrayList<String> hintAL) {
-     Node ifNode = HMIcfg.returnFirstFinedNode(hmiNode, "IF");               // выдергиваем ноду с условием выбора типа "IF"
-     String cond = HMIcfg.getDataAttr(ifNode, "cond");                       // получим условия в каком столбце таблицы смотреть
-     String val = HMIcfg.getDataAttr(ifNode, "val");                         // получим условия какое значение клетки таблицы сравнивать
-     if (val.equalsIgnoreCase((String) ft.getCell(cond, i))) {               // Сравниваем полученные данные из ИФ с табличной клеткой названия столбца cond
-     gctData[0] = HMIcfg.getDataAttr(ifNode, "type");
-     if (gctData[0] == null) {                                           // Нужно ли это условие с возвратом?
-     return false;
-     }
-     setOtherData(HMIcfg, bigSax, ifNode, gctData, addVarsData, hintAL); // Нашли значение type в ноде(так же собираются ноды наследники) , и завершаем условие
-     } else {
-     Node ELS = HMIcfg.returnFirstFinedNode(ifNode, "ELSE");
-     gctData[0] = HMIcfg.getDataAttr(ELS, "type");                       // берем в ноде тип рекурсия пока его не найдем
-     if (gctData[0] != null) {
-     setOtherData(HMIcfg, bigSax, ELS, gctData, addVarsData, hintAL);
-     } else {
-     return setTypeHintAdd(HMIcfg, bigSax, ft, ELS, addVarsData, gctData, i, hintAL);
-     }
-     }
-     return true;
-     }
-     */
     
     /* формирования Подсказки (С выбором по условиям) NZ
     *  выбор type блока
@@ -2686,7 +2672,7 @@ public class Generator {
 
     // --- Собирает доп поля и подсказку тольк в IF else(это метод применяется только в setTypeHintAdd )---
     private void setOtherData(XMLSAX HMIcfg, XMLSAX bigSax, Node ifNode, String[] gctData,
-            ArrayList<String[]> addVarsData, ArrayList<String> hintAL, TableDB ft, int i) {
+            ArrayList<String[]> addVarsData, ArrayList<String> hintAL, TableDB ft, int i ) {
         gctData[2] = HMIcfg.getDataAttr(ifNode, "isAlarm");                                                         // определеяет есть ли такой аттрибут в ноде
         getAddVars(HMIcfg, ifNode, addVarsData, null, ft, i);                                                           // Доп переменные в условии
         getHintParts(HMIcfg, ifNode, hintAL);                                                                       // подсказку в условии
@@ -2797,17 +2783,31 @@ public class Generator {
         return tmp;
     }
 
-// --- Занос данных из ноды Hint ---
     private void getHintParts(XMLSAX HMIcfg, Node hmiNode, ArrayList<String> hintAL) {
-        //ArrayList<String> hintAL = new ArrayList<>();
+    // --- Формирование данных из ноды Hint ---
+        _enableSetPointInHint = getCheckHintPartsEnableSetPoint(HMIcfg, hmiNode);
+        
         Node hintNode = HMIcfg.returnFirstFinedNode(hmiNode, "Hint");
         if (hintNode != null) {
-            String addCol = HMIcfg.getDataAttr(hintNode, "add0");
-            for (int i = 1; i < 100 && addCol != null; i++) {
-                hintAL.add(addCol);
-                addCol = HMIcfg.getDataAttr(hintNode, "add" + i);
+            for (int i = 0; i < 100; i++) {
+                String addCol = addCol = HMIcfg.getDataAttr(hintNode, "add" + i);
+                if(addCol != null){
+                    hintAL.add(addCol);
+                }
             }
         }
+    }
+    
+    private boolean getCheckHintPartsEnableSetPoint(XMLSAX HMIcfg, Node hmiNode){
+        // поиск аттрибута "getAllSetPointCurrentSig" в ноде HINT 
+        Node hintNode = HMIcfg.returnFirstFinedNode(hmiNode, "Hint");
+        if (hintNode != null) {
+            String _allSetPointCurrentSig = HMIcfg.getDataAttr(hintNode, "getAllSetPointCurrentSig");
+            if(_allSetPointCurrentSig != null){
+                return true;                
+            }
+        }
+        return false;
     }
 
     // --- читаем Ноду Disable ( возращает список полей которые удаляются из объекта  FB )---

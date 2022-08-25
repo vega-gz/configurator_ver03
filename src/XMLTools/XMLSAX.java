@@ -280,7 +280,7 @@ public class XMLSAX {
      * @param n
      * @return 
      */
-    public HashMap getDataNode(Node n) {
+    public HashMap<String, String>  getDataNode(Node n) {
         if (n == null) {
             return null;
         }

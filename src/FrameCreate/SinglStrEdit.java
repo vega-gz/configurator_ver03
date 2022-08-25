@@ -37,7 +37,6 @@ import javax.swing.table.DefaultTableModel;
 /*@author Lev*/
 public class SinglStrEdit  extends javax.swing.JFrame{
     private DefaultTableModel tableModel; // было MyTableModel пробую рефакторить
-//    private MyTableModel tableModel;
     private int[] colsWidth;
     private int curr=0;
     private JTextField number = new JTextField();
@@ -62,7 +61,6 @@ public class SinglStrEdit  extends javax.swing.JFrame{
     private DefaultTableModel modelBase;
     
     // --- Фрейм работа с строкой таблицы (тут же и уставки)---
-//    public SinglStrEdit(MyTableModel tableModel, String title, String nameTableSignal, ArrayList<JFrame> listJF) { // зачем мы передаем лист с фреймами? 
     public SinglStrEdit(MyTableModel tableModel, String title, String nameTableSignal) {
         Container container = this.getContentPane();
         container.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT); 
@@ -178,7 +176,13 @@ public class SinglStrEdit  extends javax.swing.JFrame{
         
         this.setTitle("Редактирование сигнала");//table + ": "+comment);
     }
+//
+//    public void setNameRusCurrentSetupsSignal(String NameRusCurrentSetupsSignal){
+//        // данные для строки уставки
+//        globVar.currentSetupsSignalRus = NameRusCurrentSetupsSignal; // костыль для данных уставок
+//    }
 
+    
     private void setLayout(){    
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

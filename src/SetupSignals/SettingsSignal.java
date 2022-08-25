@@ -9,6 +9,7 @@ package SetupSignals;
 import SetupSignals.ConfigSig.StatusSeting;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -70,6 +71,44 @@ public class SettingsSignal implements SetupsDataToTables{
         }
         return dataToTable;
     }
+    
+    @Override
+    public String getDataToHint() {
+        // выборка данных для подсказки в формировании HMI
+         
+        /*
+        5 - Type
+        7 - Direction
+        10 - Value 
+        */
+        String _dataToHint = "";
+        for (int i = 0; i < listSettings.size(); i++) {
+            String[] tmpDataSet = listSettings.get(i).getData();
+            String directions = tmpDataSet[7];
+            StringBuilder tmpStr = new StringBuilder();
+            
+            if(directions.equalsIgnoreCase("Верхняя")){
+                tmpStr.append((char) (0x3E));
+            }else{
+                if(directions.equalsIgnoreCase("Нижняя")){
+                    tmpStr.append((char) (0x3C));
+                }
+            }
+            directions = tmpStr.toString();
+            
+            String[] data = new String[]{tmpDataSet[5], directions, tmpDataSet[10]};
+            
+            for (String s : data) {
+                _dataToHint += s;
+            }
+            
+            if (i < listSettings.size() - 1) {
+            _dataToHint += ", ";
+            }
+        }
+        return _dataToHint;
+    }
+
 
     @Override
     public String[] getNameColumnsToTable() {
@@ -138,6 +177,7 @@ public class SettingsSignal implements SetupsDataToTables{
         }
         
     }
+
 
     
     

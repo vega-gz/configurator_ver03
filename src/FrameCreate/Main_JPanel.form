@@ -896,7 +896,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="v.12.23"/>
+            <Property name="text" type="java.lang.String" value="v.12.25"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">

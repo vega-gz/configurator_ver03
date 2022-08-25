@@ -6,6 +6,8 @@
 
 package SetupSignals;
 
+import java.util.List;
+
 /**
  *
  * @author nazarov
@@ -13,6 +15,7 @@ package SetupSignals;
 public interface SetupsDataToTables {
     
    String[][] getDataToTable();
+   String getDataToHint();
    String[] getNameColumnsToTable();
    int addSetingSignal(Object[] row);
    ConfigSig getSetingByIdLocal(int i);

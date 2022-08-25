@@ -115,8 +115,8 @@ public class ConfigSigDB implements ConfigSigStorageInterface {
     public void editSignal(ConfigSig s) {       
         if(s.getStatus() == ConfigSig.StatusSeting.FROMBASE)
         {
-            removeByIDSignal(s);
-            addSignal(s);
+            //removeByIDSignal(s);
+            //addSignal(s);
         }else
         {
             System.out.println("Edit setting " + s.getName() + "not posible, not ID");

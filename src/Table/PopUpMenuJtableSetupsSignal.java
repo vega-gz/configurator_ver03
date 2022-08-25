@@ -24,13 +24,14 @@ import javax.swing.table.DefaultTableModel;
  * Реализация меню по правой кнопки мыши для таблицы уставок
  * 
  */
-public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
 
+public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
     private JPopupMenu popupMenu;
     private ArrayList<String[]> list_cell = new ArrayList<>();
     ArrayList<JComponent> listJComponentToPopmenu = new ArrayList<>();
     private JTable jTable;
     ConfigSigStorageInterface сonfigSig = new ConfigSigDB(null); // Просто что бы достать названия колонок
+    
 
     public PopUpMenuJtableSetupsSignal() {        
         popupMenu = new JPopupMenu();
@@ -118,6 +119,10 @@ public class PopUpMenuJtableSetupsSignal implements InterfacePopmenu{
                 if(jTable.getColumnName(i).equalsIgnoreCase(columnT[6])){
                    tmpArr[i] = globVar.currentSetupsSignal;
                 }
+                if(jTable.getColumnName(i).equalsIgnoreCase(columnT[7])){
+                   //tmpArr[i] = globVar.currentSetupsSignalRus;
+                }
+                
             }
             
             tm.insertRow(row, tmpArr);
