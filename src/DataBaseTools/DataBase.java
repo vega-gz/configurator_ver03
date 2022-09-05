@@ -84,7 +84,7 @@ public class DataBase {
             statusConnectDB = 0;
         } catch (SQLException e) {
             System.out.println("Connection Failed");
-            loggerFile.writeLog("Connection Failed base " + URL + DB);
+            loggerFile.writeLog("Connection Failed base " + URL + DB +  " " + e.toString());
             //e.printStackTrace();
             statusConnectDB = -1;
         }
@@ -193,6 +193,7 @@ public class DataBase {
         } catch (SQLException e) {
             System.out.println("Failed CREATE TABLE");
             System.out.println(sql); // смотрим какой запрос на соз
+            loggerFile.writeLog("Failed " + sql + "\n" + e.toString()); 
             e.printStackTrace();
         }
     }
@@ -222,68 +223,65 @@ public class DataBase {
                 dataId = "";
             }
         }
-        
+        String sql = "";
         try {
             connection.setAutoCommit(true);
             String nameTbanalise = new String(name_table);
-            String sql = "";
-            try {
-                //name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_").replace("#", ""); // тут и при создании нужно сделать единый модуль
-                name_table = replacedNt(name_table);
-                //--------------- INSERT ROWS ---------------
-                        if (!listNameColum.isEmpty()) {
-                            sql = "INSERT INTO " + "\"" +name_table + "\"" + " ("+addId + addUUID; // при первом проходе иначе будет отличаться данные и столбцы
-                            for (int i = 0; i < listNameColum.size(); i++) { // формирую данные для этого запроса - 1 так как добавили ID
-                                if (i + 1 >= listNameColum.size()) {
-                                    String bufer_named = listNameColum.get(i).replace("/", "_");
-                                    sql += "\"" + bufer_named + "\"";
-                                } else {
-                                    String bufer_named = listNameColum.get(i).replace("/", "_");
-                                    sql += "\"" + bufer_named + "\"" + " ,";
-                                }
-                            }
-                            sql += ") VALUES ("+ dataId +dataUUID;
-                            // row и listNameColum должны быть одинаковы но косяк
-                            for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
-                                if (i + 1 >= rows.length) {
-                                    sql += "'" + rows[i] + "'";
-                                } // не нравится точка похоже в данных как то надо обходить(похоже)
-                                else {
-                                    sql += "'" + rows[i] + "'" + ", ";
-                                }
-                                //System.out.println(sql);
-                            }
-                            sql += ");";
-                            
-                        } else {
-                            for (int i = 0; i < rows.length; i++) {
-                                sql += ",colum_" + Integer.toString(i + 1);
-                            }// +1 что бы соответствовать нумерации из файла Exel
-                            sql += ") VALUES (";
-                            for (int i = 0; i < rows.length; i++) {
-                                if (i + 1 == rows.length) {
-                                    sql += "'" + rows[i] + "'";
-                                } // не нравится точка похоже в данных как то надо обходить
-                                else {
-                                    sql += "'" + rows[i] + "'" + ", ";
-                                }
-                            }
-                            sql += ");";
-                     
+            //name_table = name_table.replace("-", "_").replace(".", "_").replace(" ", "_").replace("#", ""); // тут и при создании нужно сделать единый модуль
+            name_table = replacedNt(name_table);
+            //--------------- INSERT ROWS ---------------
+            if (!listNameColum.isEmpty()) {
+                sql = "INSERT INTO " + "\"" + name_table + "\"" + " (" + addId + addUUID; // при первом проходе иначе будет отличаться данные и столбцы
+                for (int i = 0; i < listNameColum.size(); i++) { // формирую данные для этого запроса - 1 так как добавили ID
+                    if (i + 1 >= listNameColum.size()) {
+                        String bufer_named = listNameColum.get(i).replace("/", "_");
+                        sql += "\"" + bufer_named + "\"";
+                    } else {
+                        String bufer_named = listNameColum.get(i).replace("/", "_");
+                        sql += "\"" + bufer_named + "\"" + " ,";
+                    }
                 }
-                System.out.println(sql); // Если надо смотрим что за sql запрос
-                stmt = connection.createStatement();
-                stmt.executeUpdate(sql);
-                stmt.close();
-                //connection.commit();
-                //System.out.println("-- Records created successfully");
-            } catch (SQLException e) {
-                System.out.println("Failed ADD data");
-                e.printStackTrace();
-                return;
+                sql += ") VALUES (" + dataId + dataUUID;
+                // row и listNameColum должны быть одинаковы но косяк
+                for (int i = 0; i < rows.length; i++) { // формирую данные для этого запроса
+                    if (i + 1 >= rows.length) {
+                        sql += "'" + rows[i] + "'";
+                    } // не нравится точка похоже в данных как то надо обходить(похоже)
+                    else {
+                        sql += "'" + rows[i] + "'" + ", ";
+                    }
+                    //System.out.println(sql);
+                }
+                sql += ");";
+
+            } else {
+                for (int i = 0; i < rows.length; i++) {
+                    sql += ",colum_" + Integer.toString(i + 1);
+                }// +1 что бы соответствовать нумерации из файла Exel
+                sql += ") VALUES (";
+                for (int i = 0; i < rows.length; i++) {
+                    if (i + 1 == rows.length) {
+                        sql += "'" + rows[i] + "'";
+                    } // не нравится точка похоже в данных как то надо обходить
+                    else {
+                        sql += "'" + rows[i] + "'" + ", ";
+                    }
+                }
+                sql += ");";
+
             }
+            System.out.println(sql); // Если надо смотрим что за sql запрос
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+                //connection.commit();
+            //System.out.println("-- Records created successfully");
+
         } catch (SQLException ex) {
             Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Failed ADD data");
+            loggerFile.writeLog("Failed ADD data" + sql + "\n" + ex.toString()); 
+            ex.printStackTrace();
         }
     }
      
@@ -330,9 +328,10 @@ public class DataBase {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
             System.out.println("Failed ADD data err request \n" + sql );
-            e.printStackTrace();
+            loggerFile.writeLog("Failed ADD data err request \n" + sql + "\n" + ex.toString()); 
+            ex.printStackTrace();
         }
     }
      
@@ -406,6 +405,7 @@ public class DataBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Failed select data");
+            loggerFile.writeLog("Failed select data " + sql + "\n" + e.toString()); 
             e.printStackTrace();
         }
         return selectData;
@@ -426,6 +426,7 @@ public class DataBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Failed select data");
+            loggerFile.writeLog("Failed select data " + sql + "\n" + e.toString()); 
             e.printStackTrace();
         }
         return selectData;
@@ -444,6 +445,7 @@ public class DataBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Ошибка при поиске элемента "+val1+" в таблице "+table);
+            loggerFile.writeLog("Failed find data " + sql + "\n" + e.toString()); 
             //e.printStackTrace();
             return null;
         }
@@ -463,6 +465,7 @@ public class DataBase {
             rs.close();
         } catch (SQLException e) {
             System.out.println("Failed select data");
+            loggerFile.writeLog("Failed select data " + "\n" + e.toString()); 
             e.printStackTrace();
         }
         return listColumn;
@@ -497,7 +500,7 @@ public class DataBase {
             rs.close();
             stmt.close();
         } catch (SQLException e) {
-            loggerFile.writeLog("Failed select:" + sql);
+            loggerFile.writeLog("Failed select:" + sql + "\n" + e.toString()); 
             e.printStackTrace();
         }
         return selectData;
@@ -551,6 +554,7 @@ public class DataBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Failed WIEW TABLE BASE");
+            loggerFile.writeLog("Failed WIEW TABLE BASE " + "\n" + e.toString()); 
             e.printStackTrace();
             return null;
         }
@@ -574,6 +578,7 @@ public class DataBase {
             rs.close();
         } catch (SQLException e) {
             System.out.println("Failed select data");
+            loggerFile.writeLog("Failed select data " + "\n" + e.toString()); 
             e.printStackTrace();
         }catch (NullPointerException e){
             System.out.println("Not cnnection server");
@@ -669,6 +674,7 @@ public class DataBase {
             System.out.println("-- Table DROPE successfully");
         } catch (SQLException e) {
             System.out.println("Failed DROPE TABLE");
+             loggerFile.writeLog("Failed DROPE TABLE " + e.toString());
             e.printStackTrace();
             return;
 
@@ -691,6 +697,7 @@ public class DataBase {
         } catch (SQLException e) {
             System.out.println("Failed RENAME TABLE");
             System.out.println("Error requrst " + sql);
+            loggerFile.writeLog("Failed RENAME TABLE " + "\n" + sql + "\n" + e.toString());
             e.printStackTrace();
             return -1;
         }
@@ -699,10 +706,10 @@ public class DataBase {
     //-------------- Удаление конкретной таблицы  ---------------
     public void dropTable(String nameT) {
         if(!globVar.DB.isTable(nameT)) return;
+        String sql = null;
         //connectionToBase(); // вызов Фукция подключения к базе
         try {
             connection.setAutoCommit(false);
-            String sql;
             stmt = connection.createStatement();
             sql = "DROP TABLE \"" + nameT + "\";";
             stmt.executeUpdate(sql);
@@ -712,6 +719,7 @@ public class DataBase {
 
         } catch (SQLException e) {
             System.out.println("Failed DROPE TABLE");
+            loggerFile.writeLog("Failed DROPE TABLE " + "\n" + sql + "\n" + e.toString());
             e.printStackTrace();
         }
     }
@@ -726,6 +734,7 @@ public class DataBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Failed RENAME TABLE" + nameT+" to " + name2);
+            loggerFile.writeLog("Failed RENAME TABLE" + nameT+" to " + name2 + "\n" + e.toString());
             e.printStackTrace();
             return -1;
         }
@@ -856,6 +865,7 @@ public class DataBase {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
+            loggerFile.writeLog("Error del row " + e.toString());
             e.printStackTrace();
         }
     }
@@ -871,6 +881,7 @@ public class DataBase {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
+            loggerFile.writeLog("Error deleteRowId " + e.toString());
             e.printStackTrace();
         }
     }
@@ -887,6 +898,7 @@ public class DataBase {
             }
         } catch (SQLException e) {
 		System.out.println("Failed get ID Index");
+                loggerFile.writeLog("Failed get ID Index " + e.toString());
 		e.printStackTrace();
         }
         return lastId;
@@ -908,6 +920,7 @@ public class DataBase {
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
+            loggerFile.writeLog("Failed updateID " + e.toString());
             e.printStackTrace();
         }
     }
