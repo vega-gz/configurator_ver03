@@ -186,7 +186,6 @@ public class DataBase {
             for (int i = start; i<listNameColum.length;i++ ) sql += ", \"" + listNameColum[i] + "\" TEXT";
             sql += ");";
             
-            //System.out.println("Easy table " + sql); // смотрим какой запрос на соз
             stmt.executeUpdate(sql);
             stmt.close();
             if(comment!=null && !comment.isEmpty()) createCommentTable(name_table, comment); // вызом метода добавления комментария

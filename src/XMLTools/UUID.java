@@ -16,4 +16,18 @@ public class UUID {
         String uiid_str = uniqueKey.toString().replace("-", "");
         return uiid_str.toUpperCase();
     }
+    
+    public static String getUIID26() {
+        byte[] b = new byte[]{'x','y','z'};
+        java.util.UUID uniqueKey = java.util.UUID.nameUUIDFromBytes(b);
+        String uiid_str = uniqueKey.toString();
+        return uiid_str.toUpperCase();
+    }
+    
+    public static void main(String[] args) {
+        UUID _UUID = new UUID();
+        while(true){
+            System.out.println(_UUID.getUIID26());
+        }
+    }
 }
