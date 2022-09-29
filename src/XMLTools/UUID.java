@@ -10,7 +10,19 @@ package XMLTools;
  * @author nazarov
  */
 public class UUID {
-
+    private static UUID instance;
+    
+    private UUID(){ // закрытый конструктор
+        System.out.println("One constraction");
+    }
+    
+    public static synchronized UUID getInstance(){
+      if(instance == null){
+        instance = new UUID();
+      }
+      return instance;
+    }
+    
     public static String getUIID() {
         java.util.UUID uniqueKey = java.util.UUID.randomUUID();
         String uiid_str = uniqueKey.toString().replace("-", "");

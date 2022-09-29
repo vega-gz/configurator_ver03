@@ -2023,7 +2023,7 @@ public class Generator {
                     comment = comment.trim();
                 }
                 if (isStdType(type)) {
-                    insertInOPC(sig[0], sig[1], id, idType, uuid, comment, opcSax, fm, type, cnt++);
+                    insertInOPC(sig[0], sig[1], id, idType, uuid, comment, null, opcSax, fm, type, cnt++);
                 } else {
                     String sigFileName = FileManager.FindFile(globVar.desDir + File.separator + "Design", type, "UUID=");
                     if (sigFileName == null) {
@@ -2039,6 +2039,7 @@ public class Generator {
                             String typeSig = bigSax.getDataAttr(sigNode, "Type");
                             String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
                             String commSig = bigSax.getDataAttr(n, "Comment");
+                            String commentCurrentSig = bigSax.getDataAttr(sigNode, "Comment"); // вытягивать коомент сигнала
                             if (commSig == null) {
                                 commSig = "";
                             } else {
@@ -2063,7 +2064,7 @@ public class Generator {
                                     nameSig += ".PV";
                                     typeSig = "REAL";
                                 }
-                                insertInOPC(nameSig, sig[1], id, idType, uuidSig, commSig, opcSax, fm, typeSig, cnt++);
+                                insertInOPC(nameSig, sig[1], id, idType, uuidSig, commSig, commentCurrentSig, opcSax, fm, typeSig, cnt++);
                             }
                         }
                         if (ret == 0) {
@@ -2098,6 +2099,7 @@ public class Generator {
                         String typeSig = bigSax.getDataAttr(sigNode, "Type");
                         String uuidSig = bigSax.getDataAttr(sigNode, "UUID");
                         String commSig = bigSax.getDataAttr(n, "Comment");
+                        String commentCurrentSig = bigSax.getDataAttr(sigNode, "Comment"); // вытягивать коомент сигнала
                         if (commSig == null) {
                             commSig = "";
                         } else {
@@ -2113,7 +2115,7 @@ public class Generator {
                             uuidSig += ".19F27C8242D7A36082010591B7CF4F94";
                             typeSig = "REAL";
                         }
-                        insertInOPC(tmpName, sig[1], id, idType, uuidSig, commSig, opcSax, fm, typeSig, cnt++);
+                        insertInOPC(tmpName, sig[1], id, idType, uuidSig, commSig, commentCurrentSig, opcSax, fm, typeSig, cnt++);
                         insertVarInPrj(intSax, interfaceList, groupName, type, "", true, true, uuid, appPathName + ".int", "");
                     }
                 }
@@ -2898,7 +2900,8 @@ public class Generator {
 //        return dataFromFBparent;
 //    }
 
-    private void insertInOPC(String sig, String nameSpace, String id, String idType, String uuid, String comment,
+    private void insertInOPC(String sig, String nameSpace, String id,
+            String idType, String uuid, String comment, String commentCurrentSig,
             XMLSAX opcSax, FileManager fm, String type, int npp) {
         Node items = opcSax.returnFirstFinedNode("Crossconnect");
         String sigId = sig;
@@ -2909,7 +2912,7 @@ public class Generator {
             "Device", "",
             "Channel", idType + "@" + nameSpace + ":" + sigId,
             "UUID", uuid});
-        fm.wr(npp + "\t" + sig + "\t" + comment + "\t" + type + "\n");
+        fm.wr(npp + "\t" + sig + "\t" + type + "\t" + comment + "\t" + commentCurrentSig + "\n");
     }
 
 }
