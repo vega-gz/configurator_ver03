@@ -38,7 +38,7 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     int idArrayFindigData = 0;
     ArrayList<Integer> findDataRows = new ArrayList<>();
     
-    MyTableModel tableModel; // модель таблицы
+    MyTableModel tableModel; // модель таблицы для переименования
     //ArrayList<String[]> fromDB; // Что получим из базы
     int tableSize = 0;
     int qCol = 0;
@@ -55,17 +55,21 @@ public class ChangerTagNamed extends javax.swing.JFrame {
     int rusName;
 
     public ChangerTagNamed(TableDB tbl) {
-        this.table = tbl;
+        this.table = tbl; // родительская таблица что переименовываем
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
         if (!globVar.DB.isConnectOK()) {
             return;
         }
+        
         newName = new ArrayList<>();
         tableModel = new MyTableModel();
         List<String> listColumn = new ArrayList<>(Arrays.asList("Наименование", "TAG_NAME_PLC"));//получили лист 
+        
         if (listColumn == null || listColumn.isEmpty()) {
             return;
         }
+        
         cols = listColumn.toArray(new String[listColumn.size()]);//преобразовали лист в стринговый массив
         tableModel.setColumnIdentifiers(new String[]{"Наименование", "TAG_NAME_PLC", "Новое_Наименование", "New_TAG_NAME_PLC"});
 
@@ -191,15 +195,18 @@ public class ChangerTagNamed extends javax.swing.JFrame {
         DoIt di = () -> {
             newName=tableModel.toArrayList();//получили всю таблицу целиком
             util.DeleteEmptyString(newName);//удалили строки в которых нет редактирования
-            update.ReNameAllData(table, tmp, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
+            update.ReNameAllData(table, jTable1, rusName, tagName); // вызов фукции с формированием базы по файлу конфигурации
             String tableName = table.jTree1.getSelectionPath().getLastPathComponent().toString();//нашли имя таблицы
             
             if(tableName.lastIndexOf("(")!=-1){
-            tableName=tableName.substring(tableName.lastIndexOf("(")+1, tableName.lastIndexOf(")"));
+                tableName=tableName.substring(tableName.lastIndexOf("(")+1, tableName.lastIndexOf(")"));
             }
+            
             fm.ChangeIntTypeFile(globVar.desDir, newName, tableName,jProgressBar1);//запускаем метод переименования
           
             globVar.processReg.remove(processName);
+            JOptionPane.showMessageDialog(null, "Переименовка завершина.");
+            this.dispose();
         };
 
         BackgroundThread bt = new BackgroundThread(processName, di);

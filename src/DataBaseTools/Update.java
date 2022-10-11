@@ -7,6 +7,7 @@ package DataBaseTools;
 
 import FrameCreate.TableDB;
 import Tools.MyTableModel;
+import javax.swing.JTable;
 
 /**
  *
@@ -14,21 +15,28 @@ import Tools.MyTableModel;
  */
 public class Update {
 
-    public void ReNameAllData(TableDB table, String tmp[], int rusName, int tagName) {
+    public void ReNameAllData(TableDB table, JTable tableRanamed, int rusName, int tagName) {
+        /* переименование тегов в таблице сигналов
+            пустые получается переименовывает на то что было
+        */
         MyTableModel tableModel = table.getTableModel();
-        int jpgMax = tableModel.getRowCount();
+        //int jpgMax = tableModel.getRowCount();
         for (int i = 0; i < tableModel.getRowCount(); i++) {
 
-            for (int j = 0; j < tableModel.getColumnCount(); j++) {
-                tmp[j] = tableModel.getValueAt(i, j);
+            int sizeColumnTableRename = tableRanamed.getColumnCount();
+            String tmp[] = new String[sizeColumnTableRename]; // данные по таблице
+            for (int j = 0; j < sizeColumnTableRename; j++) {
+                tmp[j] = (String) tableRanamed.getModel().getValueAt(i, j);
             }
-            if (!tmp[2].equals("") || !tmp[3].equals("")) {//если хоть одна ячейка из двух не пустая,обновляем строку
+            
+            if (!tmp[2].equals("") || !tmp[3].equals("")) {
                 if (tmp[2].equals("")) {
                     tmp[2] = tmp[0];
                 }
                 if (tmp[3].equals("")) {
                     tmp[3] = tmp[1];
                 }
+                
                 tableModel.setValue(tmp[2], i, rusName);
                 tableModel.setValue(tmp[3], i, tagName);
             }

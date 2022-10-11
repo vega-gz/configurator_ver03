@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ConfigHMI >
+	<AI>
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="775"  incY="22" type="T_BaseAnIn_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 					
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>				
+		</GenHMI>
+		
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+			</addVarDeclaration>	
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<!-- Блок событий -steam --><!-- Флажок "Без резервов" в HMI не задействован, при создании блока пропускаются те строки, в которых есть пустые ячейки в столбце, указанном в атрибуте ruName --> 
+		<GenHMI name="AI_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "240" incPosFBY= "150" 
+				type="T_AlarmAI" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> 
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI> 			
+	</AI>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<FR_AI>
+		<GenHMI name="FR_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnIn_200521"  ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/> 
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 			
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallFR_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+			</addVarDeclaration>			
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<!-- Блок событий -steam -->		
+		<GenHMI name="FR_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "240" incPosFBY= "150" 
+				type="T_AlarmAI" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> 
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI> 			
+	</FR_AI>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<AO>
+		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 				
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_AO_200520" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+			</addVarDeclaration>			
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<!-- Блок событий -steam -->		
+		<GenHMI name="AO_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "240" incPosFBY= "150" 
+				type="T_AlarmAO" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> 
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI> 			
+	</AO>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<DI>
+		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
+			<Hint add0="Наименование" add1=", инв=" add2="Инверсия" add3=", задержка="  add4="Задержка" add5=", тип сигнала: " add6="Тип_сигнала" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 				
+		</GenHMI>
+		<!-- Блок событий -steam -->		
+		<GenHMI name="DI_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "240" incPosFBY= "150" 
+				type="T_AlarmDI" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> 
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI> 
+	</DI>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<DO>
+		<GenHMI name="DO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="21" type="T_Base_DO_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="DD87E9C742BB69689219F08BAD99F4B8" -->
+			<Hint add0="Наименование" add1=" тип сигнала: " add2="Тип_сигнала" add3=", КЦУ: "  add4="КЦУ"  add5=", адрес " add6="Адрес_1" add7="," add8="Адрес_2" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 				
+		</GenHMI>
+		<!-- Блок событий -steam -->		
+		<GenHMI name="DO_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="T_AlarmDO" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"
+			incPosFBX= "240" incPosFBY= "150" > 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI> 		
+	</DO>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<mb_AI>
+		<GenHMI name="AI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730" incY="22" ruName="Наименование">
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 		
+			<IF cond="dataType" val="ABCDEFGH" >
+				<type name="T_BaseSen_200513">
+					<Hint/>
+					<additionalVar/>
+					<addVarDeclaration>
+						<VarDeclaration InitialValue="''" Name="PrefAb"/>
+					</addVarDeclaration>
+				</type>
+				<ELSE>
+					<IF  cond="dataType" val="WORD"> <!--  это просто пропуск?-->
+						<ELSE>
+							<type name="T_BaseAnIn_200521" isAlarm="true">
+								<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".." add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+								<addVarDeclaration>
+									<VarDeclaration InitialValue="''" Name="PrefAb"/>
+									<VarDeclaration InitialValue="''" Name="NameRU"/>
+								</addVarDeclaration>
+								<additionalVar>
+									<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+								</additionalVar>
+							</type>
+						</ELSE>
+					</IF>
+				</ELSE>
+			</IF>
+		</GenHMI>
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_200513" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+			</addVarDeclaration>
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<!-- Блок событий -steam -->		
+		<GenHMI name="AI_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0" incY="0" typeFace="CompositeFBType" type="T_AlarmAI" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"
+			incPosFBX= "240" incPosFBY= "150" > 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI> 		
+	</mb_AI>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<mb_AO>
+		<GenHMI name="AO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_BaseAnOut_200521" ruName="Наименование" isAlarm="true"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallAI_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseSen_AO_200520" ruName="SmallName"> <!--typeUUID="C06031C04C13BB17463EB1B889813E68" -->
+			<Hint add0="Наименование" add1=" [" add2="Диапазон_мин" add3=".."  add4="Диапазон_макс" add5= " " add6="Единица_измерения" add7="]" />
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+			</addVarDeclaration>			
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>
+		<!-- Блок событий -steam -->		
+		<GenHMI name="AO_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0" incY="0" typeFace="CompositeFBType" type="T_AlarmAO" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"
+			incPosFBX= "240" incPosFBY= "150" > 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI>			
+	</mb_AO>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<mb_DI>
+		<GenHMI name="DI_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="750"  incY="22" type="T_Base_DI_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="5298F3F94A79E35B818384B694BB561B" 	-->
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable> 			
+			<Hint add0="Наименование" add1=", " add2="доп_инфо" add3=", МВ адр. "  add4="mbAddr"/>
+		</GenHMI>
+		<!-- Блок событий -steam -->		
+		<GenHMI name="DI_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0" incY="0" typeFace="CompositeFBType" type="T_AlarmDI" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"
+			incPosFBX= "240" incPosFBY= "150" > 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI>		
+	</mb_DI>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<mb_DO>
+		<GenHMI name="DO_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="21" type="T_Base_DO_200521" ruName="Наименование" isAlarm="true"> <!-- typeUUID="DD87E9C742BB69689219F08BAD99F4B8" -->
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>			
+			<Hint add0="Наименование" add1=", " add2="доп_инфо" add3=", МВ адр. "  add4="mbAddr"/>
+			<Disable> 
+				<disableAlarm/>	
+				<TagID/>
+			</Disable>			
+		</GenHMI>
+				<!-- Блок событий -steam -->
+		<GenHMI name="DO_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0" incY="0" typeFace="CompositeFBType" type="T_AlarmDO" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"
+				incPosFBX= "240" incPosFBY= "150" > 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 	
+		</GenHMI>			
+	</mb_DO>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<APS> <!-- Обработка таблицы при совмещенном вварианте АПС (АС и ПС вместе) -->
+		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""
+				 incPosFBX= "250" incPosFBY= "200" > 
+			<Edit> 
+				<PrefStr value="APS." Type="STRING"/>   
+			</Edit>
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>			
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 
+			<additionalVar>
+				<Category Type="DINT" > 
+					<switch swt="Status" default="0">
+						<case val="АО сс" def="10000"/>
+						<case val="АО бс" def="10000"/>
+						<case val="АС"    def="10000"/>
+						<case val="ВО сс" def="10700"/>
+						<case val="ВО бс" def="10700"/>
+						<case val="ПС"    def="10100"/>
+						<case val="Пожар" def="10000"/>
+					</switch> 
+				</Category>
+				<Source Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АО сс" def="АС"/>
+						<case val="АО бс" def="АС"/>
+						<case val="АС"    def="АС"/>
+						<case val="ВО сс" def="ВО"/>
+						<case val="ВО бс" def="ВО"/>
+						<case val="ПС"    def="ПС"/> 
+						<case val="Пожар" def="АС"/>
+					</switch>
+				</Source>	
+				<TAG Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АО сс" def="AOs"/>
+						<case val="АО бс" def="AOb"/>
+						<case val="АС"    def="AS"/>
+						<case val="ВО сс" def="VOs"/>
+						<case val="ВО бс" def="VOb"/>
+						<case val="ПС"    def="PS"/>
+						<case val="Пожар" def="Fire"/>
+					</switch>
+				</TAG>
+			</additionalVar>	
+		</GenHMI> 
+		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование"> 
+			<Hint add0="Примечание" add1=", " add2="Время_задержки" add3=" сек"  />			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="modePZ"/>
+				<VarDeclaration InitialValue="''" Name="Reset_PZ"/>
+				<VarDeclaration InitialValue="''" Name="Deblock"/>
+				<VarDeclaration InitialValue="''" Name="ChngAb" />
+			</addVarDeclaration>
+			<addEvent>
+				<Event Name="makeReport"/>
+			</addEvent>
+			<Disable>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+				<PrefStr/>
+				<TagID/>
+			</Disable>
+			<IF cond="Status" val="ПС">
+				<BREAK/>
+			</IF>
+			<IF cond="Status" val="АС">
+				<BREAK/>
+			</IF>			
+			<additionalVar>
+				<Delay tableCol="Время_задержки" Type="STRING"/> 
+				<NameSigD Type="STRING"/>
+				<NameSigA Type="STRING"/>
+				<NameUst Type="STRING"/>				
+				<IF cond="Источник" val="*.PV">
+					<Edit>
+						<NameSigA tableCol="Источник" Type="STRING"/>
+						<NameSigD value="" Type="STRING" />	
+						<NameUst tableCol="TAG_NAME_PLC" Type="STRING" />	
+					</Edit>	
+					<ELSE> 
+						<Edit>
+							<NameSigA value="" Type="STRING" />
+							<NameUst value="" Type="STRING" />							
+						</Edit>	
+						<IF cond="Источник" val="">
+							<Edit>
+								<NameSigD text="APS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+							</Edit>	
+								<ELSE>
+									<Edit>									
+										<NameSigD Type="STRING" tableCol="Источник"/>	
+									</Edit>											
+								</ELSE> 
+						</IF>
+					</ELSE>
+				</IF>
+			</additionalVar>
+		</GenHMI>			
+	</APS>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<AS>
+		<GenHMI name="Crash_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "250" incPosFBY= "200" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> <!-- target указывает приложение (по умолч. HMI), в котором находится блок в type, file имя файла, альтернативного шаблону HMIsheet -->
+			<Edit> 
+				<PrefStr value="AS." Type="STRING"/>    
+			</Edit>
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 
+			<additionalVar>
+				<Category Type="DINT" > 
+					<switch swt="Status" default="0">
+						<case val="АО сс" def="10000"/>
+						<case val="АО бс" def="10000"/>
+						<case val="ВО сс" def="10700"/>
+						<case val="ВО бс" def="10700"/>
+						<case val="Пожар" def="10000"/>
+					</switch> 
+				</Category>
+				<Source Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АО сс" def="АС"/>
+						<case val="АО бс" def="АС"/>
+						<case val="ВО сс" def="ВО"/>
+						<case val="ВО бс" def="ВО"/>
+						<case val="Пожар" def="АС"/>
+					</switch>
+				</Source>	
+				<TAG Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АО сс" def="AOs"/>
+						<case val="АО бс" def="AOb"/>
+						<case val="ВО сс" def="VOs"/>
+						<case val="ВО бс" def="VOb"/>
+						<case val="Пожар" def="Fire"/>
+					</switch>
+				</TAG>
+			</additionalVar>	
+		</GenHMI> 
+		<GenHMI name="PPZ_" maxY="33" maxX="1" startPosX="185" startPosY="60" incX="0"  incY="22" type="TBase_PPZ" ruName="Наименование" > <!-- isAlarm="false" --> 		
+			<addEvent>
+				<Event Name="makeReport"/>
+			</addEvent>
+			<Hint add0="Примечание" add1=", " add2="Время_задержки" add3=" сек"  />			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="modePZ"/>
+				<VarDeclaration InitialValue="''" Name="Reset_PZ"/>
+				<VarDeclaration InitialValue="''" Name="Deblock"/>
+				<VarDeclaration InitialValue="''" Name="ChngAb" />
+			</addVarDeclaration>
+			<Disable>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+				<PrefStr/>
+				<TagID/>
+			</Disable>
+			<additionalVar>
+				<Delay tableCol="Время_задержки" Type="STRING"/> 
+				<NameSigD Type="STRING"/>
+				<NameSigA Type="STRING"/>
+				<NameUst Type="STRING"/>				
+				<IF cond="Источник" val="*.PV">
+					<Edit>
+						<NameSigA tableCol="Источник" Type="STRING"/>
+						<NameSigD value="" Type="STRING" />	
+						<NameUst tableCol="TAG_NAME_PLC" Type="STRING" />	
+					</Edit>	
+					<ELSE> 
+						<Edit>
+							<NameSigA value="" Type="STRING" />
+							<NameUst value="" Type="STRING" />							
+						</Edit>	
+						<IF cond="Источник" val="">
+							<Edit>
+								<NameSigD text="AS." tableCol="TAG_NAME_PLC" Type="STRING" /> 
+							</Edit>	
+							<ELSE>
+								<Edit>									
+									<NameSigD Type="STRING" tableCol="Источник"/>	
+								</Edit>											
+							</ELSE> 
+						</IF>
+					</ELSE>
+				</IF>
+			</additionalVar>
+		</GenHMI>			
+	</AS>	
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<PS>
+		<GenHMI name="Alarm_" maxY="16" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType"  incPosFBX= "250" incPosFBY= "200" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> 
+			<Edit> 
+				<PrefStr value="PS." Type="STRING"/>     <!--только value переменная -->
+			</Edit>
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>			
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable> 			 
+			<additionalVar>
+				<Category Type="DINT" > 
+					<switch swt="Status" default="0">
+						<case val="АС"    def="10000"/>
+						<case val="ОС" 	  def="10700"/>
+						<case val="ПС"    def="10100"/>
+					</switch> 
+				</Category>
+				<Source Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АС"    def="АС"/>
+						<case val="ОС" 	  def="ПС"/>
+						<case val="ПС"    def="ПС"/> 
+					</switch>
+				</Source>	
+				<TAG Type="STRING">
+					<switch swt="Status" default="">
+						<case val="АС"    def="AS"/>
+						<case val="ОС"    def="OS"/>
+						<case val="ПС"    def="PS"/>
+					</switch>
+				</TAG>
+			</additionalVar>	
+		</GenHMI> 
+	</PS>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+	<TS>
+		<GenHMI name="Tch_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "250" incPosFBY= "200"  
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>		
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable>
+			<additionalVar>
+				<Category Type="DINT" />
+				<Source Type="STRING" />
+				<TAG Type="STRING" />
+			</additionalVar>
+			<Edit>
+				<PrefStr value="TS." Type="STRING" />
+				<Category value="10500" Type="DINT" />
+				<Source value="ТС" Type="STRING" />
+				<TAG value="TS" Type="STRING" />
+			</Edit>
+		</GenHMI>
+	</TS>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<HR>
+		<GenHMI name="HR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "250" incPosFBY= "200" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable>
+			<additionalVar>
+				<Category Type="DINT" />
+				<Source Type="STRING" />
+				<TAG Type="STRING" />
+			</additionalVar>
+			<Edit>
+				<PrefStr value="PPU_HR." Type="STRING" />
+				<Category value="10200" Type="DINT" />
+				<Source value="ХР" Type="STRING" />
+				<TAG value="PPU_HR" Type="STRING" />
+			</Edit>
+		</GenHMI>
+	</HR>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<GR>
+		<GenHMI name="GR_" maxY="16" maxX="12" startPosX="0" startPosY="0" incX="0"  incY="0" typeFace="CompositeFBType" incPosFBX= "250" incPosFBY= "200" 
+				type="TBaseAlarm" ruName="Наименование" isAlarm="false" file=""  target="AlarmConsole.iec"> 			
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>			
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+			</Disable>
+			<additionalVar>
+				<Category Type="DINT" />
+				<Source Type="STRING" />
+				<TAG Type="STRING" />
+			</additionalVar>
+			<Edit>
+				<PrefStr value="PPU_GR." Type="STRING" />
+				<Category value="10200" Type="DINT" />
+				<Source value="ГР" Type="STRING" />
+				<TAG value="PPU_GR" Type="STRING" />
+			</Edit>
+		</GenHMI>
+	</GR>	
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<RSR>
+		<GenHMI name="Resource_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="TStatLine_Dint" ruName="Наименование" isAlarm="false">
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+			</addVarDeclaration>
+			<Disable>
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+				<PrefStr/>
+				<TagID/>
+			</Disable>
+			<additionalVar>
+				<Divr Type="UDINT"  />
+			</additionalVar>
+			<Edit>
+				<Divr value="3600" Type="UDINT" />
+			</Edit>
+		</GenHMI>
+	</RSR>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<CalcPar> 
+		<GenHMI name="Calc_" maxY="32" maxX="2" startPosX="20" startPosY="20" incX="730"  incY="22" type="T_Rool_CalcPar" ruName="Наименование" isAlarm="true">
+			<Hint add0="Наименование" add1=", " add2="Единица_измерения"/>
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>
+			<Disable>
+				<PrefStr/>
+			</Disable>			
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+				<Unit tableCol="Единица_измерения" Type="STRING"/>
+			</additionalVar>
+		</GenHMI>
+		<GenHMI name="SmallCalc_" maxY="32" maxX="4" startPosX="20" startPosY="20" incX="300"  incY="40" type="T_BaseCalc" ruName="SmallName"> 
+			<Hint add0="Наименование" add1=", " add2="Единица_измерения"/>
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+			</addVarDeclaration>
+			<Disable>
+				<PrefStr/>
+			</Disable>		
+			<additionalVar>
+				<Analog_Ph_N tableCol="Точность" Type="INT" TypeUUID="47B58C4E4726C8B230965EBE77F1169E" />
+			</additionalVar>
+		</GenHMI>	
+	</CalcPar>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<AM>
+				<!-- Блок событий ИМ -steam -->		
+		<GenHMI name="AM_Ev_" maxY="20" maxX="8" startPosX="0" startPosY="0" incX="0"  incY="0" incPosFBX= "240" incPosFBY= "150" typeFace="CompositeFBType" 
+				type="T_AlarmAM" ruName="Наименование" isAlarm="false" file="" target="AlarmConsole.iec"> <!-- target указывает приложение (по умолч. HMI), в котором находится блок в type, file имя файла, альтернативного шаблону HMIsheet -->
+			<addVarDeclaration>
+				<VarDeclaration InitialValue="''" Name="PrefAb"/>
+				<VarDeclaration InitialValue="''" Name="NameRU"/>
+			</addVarDeclaration>	
+			<Disable> 
+				<Num/>
+				<hint/>
+				<pos/>
+				<visiblePar/>
+				<disableAlarm/>
+				<Analog_Ph_N/>
+				<TagID/>
+				<PrefStr/>
+			</Disable> 
+			<additionalVar>
+				<isValve Type="BOOL" />
+				<IF cond="Тип_ИМ" val="Кран">
+					<Edit>
+						<isValve value="TRUE" Type="BOOL" />	
+					</Edit>	
+					<ELSE> 
+						<Edit>
+							<isValve value="FALSE" Type="BOOL" />
+						</Edit>	
+					</ELSE>
+				</IF>
+			</additionalVar>			
+		</GenHMI> 
+	</AM>
+</ConfigHMI>
